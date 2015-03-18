@@ -1,0 +1,27 @@
+This sample demonstrates common XML API use scenarios for the ***Windows.Data.Xml.Dom*** and ***Windows.Data.Xml.Xsl*** namespaces in the Windows Runtime.
+
+Specifically, this sample covers:
+
+-   Scenario 1: Loading an RSS template XML file asynchronously and adding a CData section. The asynchronous loading is accomplished by using the *XmlDocument.loadFromFileAsync* method from the *Windows.Data.Xml.Dom* namespace. The *XmlDocument.CreateCDataSection* method is used to add the CDATA section to the RSS file.
+
+-   Scenario 2: Traversing a Document Object Model (DOM) tree to update the data and save it to a file. When the user presses the **"Mark Hot Products"** button, an XPath query is used to select products from an XML file, which have an attribute named "Sell10day" that exceeds the attribute named "InStore".  The "Sell10Day" value represents the quantity sold in the last ten days. These products are marked "hot" by setting the "hot" attribute for the product to 1. When the user presses the **"Save"** button, the *XmlDocument.saveToFileAsync* method is used to save the XML file containing the products list.
+
+-   Scenario 3: Using the security settings prohibitDTD and resolveExternals when loading an XML file. prohibitDTD will prevent DTD use in a XML file. A large number of DTD entity references can cause an application to become unresponsive when loading and parsing an XML file. resolveExternals determines whether external references can be resolved during parsing. For this scenario, a user chooses a combination of these two security settings, which are properties on the *XmlLoadSettings* class used with method *XmlDocument.LoadFromFileAsync* and *XmlDocument.LoadXmlFromBuffer*. The user presses the **"Load XML From File"** button to view the resulting XML by *LoadFromFileAsync* or **"Load XML From Buffer"** button to view the resulting XML by *LoadXmlFromBuffer*.
+
+-   Scenario 4: Using an XPath with the XML API for the Windows Runtime to select and filter data in a DOM tree. When a user presses the **"Show Anniversary Gift"** button, the scenario constructs an array of XPath queries used by the *XmlDocument.SelectNodes* method against an XML file to determine an anniversary gift for each employee based on the year the employee started the job. Employees with between 1 and 4 years on the job receive a gift card. Employees with between 5 and 9 years on the job receive an XBOX. Employees with 10 or more years on the job receive a Windows Phone.
+
+-   Scenario 5: Using eXtensible Stylesheet Language Transformations (XSLT) with the XML APIs to transform an XML file into an HTML webpage. The source XML and XSL are loaded during initialization of the scenario. The XSL transform is applied when the user presses the **"TransformToString"** and **"TransformToDocument"** button. The Source XML and Source XSL can both be modified during runtime to see different results when applying an XSL transform. The transform is applied using the *XsltProcessor* class from the *Windows.Data.Xml.Xsl* namespace.
+
+Related topics
+--------------
+
+<!-- Add links to related API -->
+[Windows.Data.Xml.Dom.XmlDocument](https://msdn.microsoft.com/library/windows/apps/br206173)
+
+[Windows.Data.Xml.Xsl.XsltProcessor](https://msdn.microsoft.com/en-us/library/windows/apps/windows.data.xml.xsl.xsltprocessor.aspx)
+
+System requirements
+-----------------------------
+<!-- Need to define section -->
+-    Min OS: win10, w10srv
+-    Supported IDE: VisualStudio2015

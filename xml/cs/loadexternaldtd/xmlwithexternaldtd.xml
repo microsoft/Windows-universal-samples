@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE dtds SYSTEM "dtd.txt">
+<dtds>
+    <dtd>
+        <name>XML DTD sample1</name>
+        <url>http://www.microsoft.com</url>
+    </dtd>
+    <dtd>
+        <name>XML DTD sample2</name>
+        <url>http://www.msdn.com</url>
+    </dtd>
+</dtds>
