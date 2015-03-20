@@ -35,8 +35,6 @@ When you choose the **Enable** button for the **OrientationChange** option, the 
 
 [Windows.Devices.Sensors namespace](http://go.microsoft.com/fwlink/p/?linkid=241981)
 
-[Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
-
 ## System requirements
 
 **Client:** Windows 10 Technical Preview

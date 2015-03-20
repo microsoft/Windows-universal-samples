@@ -68,8 +68,6 @@ For more information on network capabilities, see [How to set network capabiliti
 
 [ControlChannelTrigger TCP socket sample](http://go.microsoft.com/fwlink/p/?linkid=243039)
 
-[Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
-
 ### Other - C\#/VB/C++ and XAML
 
 [Adding support for networking (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452751)
