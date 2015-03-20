@@ -1,56 +1,42 @@
-Relative Inclinometer Sensor Sample
-===================================
+# Relative Inclinometer sensor sample
 
 This sample demonstrates use of the Windows.Devices.Sensors.Inclinometer API for the Relative Inclinometer sensor.
-
-**Note**  This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on both Windows 10 and Windows Phone 10.
 
 This sample allows the user to view the angles of incline about the X-, Y-, and Z-axes for a 3-axis relative inclinometer. (The incline about the X-axis corresponds to the pitch value; the incline about the Y-axis correspond to the roll value; and the incline about the Z-axis corresponds to the yaw value.) You can choose one of three scenarios:
 
 -   Relative inclinometer data events
 -   Polling relative inclinometer readings
 
-**Relative Inclinometer Data Events**
+### Relative Inclinometer Data Events
 
 When you choose the Enable button for the **Data Events** option, the app will begin streaming relative inclinometer readings in real time.
 
-**Polling Relative Inclinometer Readings**
+### Polling Relative Inclinometer Readings
 
 When you choose the Enable button for the **Polling** option, the app will retrieve the current sensor readings.
 
-**Note**  For Windows 8 app samples, download the [Windows 8 app samples pack](http://go.microsoft.com/fwlink/p/?LinkId=301698). The samples in the Windows 8 app samples pack will build and run only on Microsoft Visual Studio 2012.
+## System requirements
 
-Operating system requirements
------------------------------
+**Client:** Windows 10 Technical Preview
 
-Client
+**Server:** Windows 10 Technical Preview
 
-Windows 10
+**Phone:**  Windows 10 Technical Preview
 
-Server
+## Build the sample
 
-None supported
+1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+2. Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file. 
+3. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
 
-Phone
-
-Windows Phone 10
-
-Build the sample
-----------------
-
-1.  Start Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++ or C\#. Double-click the Visual Studio 2015 Solution (.sln) file.
-3.  Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
-
-Run the sample
---------------
+## Run the sample
 
 The next steps depend on whether you just want to deploy the sample or you want to both deploy and run it.
 
-**Deploying the sample**
+### Deploying the sample
 
-1.  Select **Build** \> **Deploy Solution**.
+- Select Build > Deploy Solution. 
 
-**Deploying and running the sample**
+### Deploying and running the sample
 
-1.  To debug the sample and then run it, press F5 or select **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or select**Debug** \> **Start Without Debugging**.
+- To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or selectDebug > Start Without Debugging. 

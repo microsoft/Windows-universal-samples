@@ -1,9 +1,6 @@
-Background Transfer sample
-==========================
+# Background Transfer sample
 
 This sample shows how to use the Background Transfer API to download and upload files in the background in Windows Runtime apps.
-
-**Note**  This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on both Windows 8.1 and Windows Phone 8.1. For more info about how to build apps that target Windows and Windows Phone with Visual Studio, see [Build apps that target Windows and Windows Phone 8.1 by using Visual Studio](http://msdn.microsoft.com/library/windows/apps/dn609832).
 
 Classes in the [**Windows.Networking.BackgroundTransfer**](http://msdn.microsoft.com/library/windows/apps/br207242) namespace provide a power-friendly, cost-aware, and flexible API for transferring files in the background. This sample shows how to download and upload files using the Background Transfer API.
 
@@ -45,30 +42,9 @@ For more information on network capabilities, see [How to set network capabiliti
 
 **Note**  Background Transfer is only enabled on Windows if at least one of the networking capabilities is set: **Internet (Client)**, **Internet (Client & Server)**, or **Private Networks (Client & Server)**.
 
-This sample is currently provided in the JavaScript, C\#, VB, and C++ programming languages.
+## Related topics
 
-To obtain an evaluation copy of Windows 8.1, go to [Windows 8.1](http://go.microsoft.com/fwlink/p/?linkid=301696).
-
-To obtain an evaluation copy of Microsoft Visual Studio 2013 Update 2, go to [Microsoft Visual Studio 2013](http://go.microsoft.com/fwlink/p/?linkid=301697).
-
-**Note**  For Windows 8 app samples, download the [Windows 8 app samples pack](http://go.microsoft.com/fwlink/p/?LinkId=301698). The samples in the Windows 8 app samples pack will build and run only on Microsoft Visual Studio 2012.
-
-Related topics
---------------
-
-**Other resources**
-
-[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)
-
-[How to configure network isolation capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)
-
-[Quickstart: Downloading a file](http://msdn.microsoft.com/library/windows/apps/hh700370)
-
-[Quickstart: Uploading a file](http://msdn.microsoft.com/library/windows/apps/hh700372)
-
-[Transferring a file from a network resource](http://msdn.microsoft.com/library/windows/apps/hh761434)
-
-**Reference**
+### Reference
 
 [**BackgroundDownloader**](http://msdn.microsoft.com/library/windows/apps/br207126)
 
@@ -84,57 +60,33 @@ Related topics
 
 [**XHR**](http://msdn.microsoft.com/library/windows/apps/br229787)
 
-**Samples**
+### Other resources
 
-[Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
+[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)
 
-Operating system requirements
------------------------------
+[How to configure network isolation capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)
 
-Client
+[Quickstart: Downloading a file](http://msdn.microsoft.com/library/windows/apps/hh700370)
 
-Windows 8.1
+[Quickstart: Uploading a file](http://msdn.microsoft.com/library/windows/apps/hh700372)
 
-Server
+[Transferring a file from a network resource](http://msdn.microsoft.com/library/windows/apps/hh761434)
 
-Windows Server 2012 R2
+## System requirements
 
-Phone
+**Client:** Windows 10 Technical Preview
 
-Windows Phone 8.1
+**Server:** Windows 10 Technical Preview
 
-Build the sample
-----------------
+**Phone:**  Windows 10 Technical Preview
 
-1.  Start Visual Studio 2013 Update 2 and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory to which you unzipped the sample. Go to the directory named for the sample, and double-click the Visual Studio 2013 Update 2 Solution (.sln) file.
-3.  Follow the steps for the version of the sample you want:
-    -   To build the Windows version of the sample:
+## Build the sample
 
-        1.  Select **BackgroundTransfer.Windows** in **Solution Explorer**.
-        2.  Press Ctrl+Shift+B, or use **Build** \> **Build Solution**, or use **Build** \> **Build BackgroundTransfer.Windows**.
-    -   To build the Windows Phone version of the sample:
+1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+2. Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file. 
+3. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
 
-        1.  Select **BackgroundTransfer.WindowsPhone** in **Solution Explorer**.
-        2.  Press Ctrl+Shift+B or use **Build** \> **Build Solution** or use **Build** \> **Build BackgroundTransfer.WindowsPhone**.
-
-Run the sample
---------------
-
-The next steps depend on whether you just want to deploy the sample or you want to both deploy and run it.
-
-**Deploying the sample**
-
--   To deploy the built Windows version of the sample:
-
-    1.  Select **BackgroundTransfer.Windows** in **Solution Explorer**.
-    2.  Use **Build** \> **Deploy Solution** or **Build** \> **Deploy BackgroundTransfer.Windows**.
--   To deploy the built Windows Phone version of the sample:
-
-    1.  Select **BackgroundTransfer.WindowsPhone** in **Solution Explorer**.
-    2.  Use **Build** \> **Deploy Solution** or **Build** \> **Deploy BackgroundTransfer.WindowsPhone**.
-
-**Deploying and running the Windows version of the sample**
+### Deploying and running the Windows version of the sample
 
 This sample requires that a web server is available for the app to access for uploading and downloading files. The web server must be started before the app is run. The web server must also have a *BackgroundTransferSample* path available for uploads and downloads. The sample includes a PowerShell script that will install IIS on the local computer, create the *BackgroundTransferSample* folder on the server, copy files to this folder, create firewall rules to allow access, and enable IIS.
 
@@ -188,7 +140,7 @@ The remote server address and local filename fields should be updated. This can 
     1.  Right-click **BackgroundTransfer.Windows** in **Solution Explorer** and select **Set as StartUp Project**.
     2.  To debug the sample and then run it, press F5 or use **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or use **Debug** \> **Start Without Debugging**.
 
-**Deploying and running the Windows Phone version of the sample**
+### Deploying and running the Windows Phone version of the sample
 
 IIS is not available on Windows Phone. For the app to access a web server, there are two options:
 

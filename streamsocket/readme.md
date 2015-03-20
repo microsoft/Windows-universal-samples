@@ -1,9 +1,6 @@
-StreamSocket sample
-===================
+# StreamSocket sample
 
 This sample shows you how to a use stream (TCP) socket to send and receive data using the [**StreamSocket**](http://msdn.microsoft.com/library/windows/apps/br226882) and related classes in the [**Windows.Networking.Sockets**](http://msdn.microsoft.com/library/windows/apps/br226960) namespace in your Windows Runtime app.
-
-**Note**  This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on both Windows 8.1 and Windows Phone 8.1. For more info about how to build apps that target Windows and Windows Phone with Visual Studio, see [Build apps that target Windows and Windows Phone 8.1 by using Visual Studio](http://msdn.microsoft.com/library/windows/apps/dn609832).
 
 The client component of the sample creates a TCP socket to make a network connection, uses the socket to send data, and closes the socket. The server component sets up a TCP listener that provides a connected socket for every incoming network connection, uses the socket to receive data from the client, and closes the socket. This sample is provided in the JavaScript, C\#, VB, and C++ programming languages.
 
@@ -49,16 +46,31 @@ For more information on network capabilities, see [How to set network capabiliti
 
 **Note**  Network communications using an IP loopback address cannot normally be used for interprocess communication between a Windows Runtime app and a different process (a different Windows Runtime app or a desktop app) because this is restricted by network isolation. Network communication using an IP loopback address is allowed within the same process for communication purposes in a Windows Runtime app. For more information, see [How to set network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532).
 
-To obtain an evaluation copy of Windows 8.1, go to [Windows 8.1](http://go.microsoft.com/fwlink/p/?linkid=301696).
+## Related topics
 
-To obtain an evaluation copy of Microsoft Visual Studio 2013 Update 2, go to [Microsoft Visual Studio 2013](http://go.microsoft.com/fwlink/p/?linkid=301697).
+### Reference
 
-**Note**  For Windows 8 app samples, download the [Windows 8 app samples pack](http://go.microsoft.com/fwlink/p/?LinkId=301698). The samples in the Windows 8 app samples pack will build and run only on Microsoft Visual Studio 2012.
+[**StreamSocket**](http://msdn.microsoft.com/library/windows/apps/br226882)
 
-Related topics
---------------
+[**StreamSocketListener**](http://msdn.microsoft.com/library/windows/apps/br226906)
 
-**Other - C\#/VB/C++ and XAML**
+[**Windows.Networking**](http://msdn.microsoft.com/library/windows/apps/br207124)
+
+[**Windows.Networking.Sockets**](http://msdn.microsoft.com/library/windows/apps/br226960)
+
+[**Windows.Storage.Streams.DataReader**](http://msdn.microsoft.com/library/windows/apps/br208119)
+
+[**Windows.Storage.Streams.DataWriter**](http://msdn.microsoft.com/library/windows/apps/br208154)
+
+### Samples
+
+[DatagramSocket sample](http://go.microsoft.com/fwlink/p/?linkid=258328)
+
+[ControlChannelTrigger TCP socket sample](http://go.microsoft.com/fwlink/p/?linkid=243039)
+
+[Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
+
+### Other - C\#/VB/C++ and XAML
 
 [Adding support for networking (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452751)
 
@@ -78,7 +90,7 @@ Related topics
 
 [Troubleshooting and debugging network connections](http://msdn.microsoft.com/library/windows/apps/hh770534)
 
-**Other - JavaScript and HTML**
+### Other - JavaScript and HTML
 
 [Adding support for networking (HTML)](http://msdn.microsoft.com/library/windows/apps/hh452752)
 
@@ -98,75 +110,21 @@ Related topics
 
 [Troubleshooting and debugging network connections](http://msdn.microsoft.com/library/windows/apps/hh770534)
 
-**Reference**
+## System requirements
 
-[**StreamSocket**](http://msdn.microsoft.com/library/windows/apps/br226882)
+**Client:** Windows 10 Technical Preview
 
-[**StreamSocketListener**](http://msdn.microsoft.com/library/windows/apps/br226906)
+**Server:** Windows 10 Technical Preview
 
-[**Windows.Networking**](http://msdn.microsoft.com/library/windows/apps/br207124)
+**Phone:**  Windows 10 Technical Preview
 
-[**Windows.Networking.Sockets**](http://msdn.microsoft.com/library/windows/apps/br226960)
+## Build the sample
 
-[**Windows.Storage.Streams.DataReader**](http://msdn.microsoft.com/library/windows/apps/br208119)
+1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+2. Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file. 
+3. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
 
-[**Windows.Storage.Streams.DataWriter**](http://msdn.microsoft.com/library/windows/apps/br208154)
-
-**Samples**
-
-[DatagramSocket sample](http://go.microsoft.com/fwlink/p/?linkid=258328)
-
-[ControlChannelTrigger TCP socket sample](http://go.microsoft.com/fwlink/p/?linkid=243039)
-
-[Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
-
-Operating system requirements
------------------------------
-
-Client
-
-Windows 8.1
-
-Server
-
-Windows Server 2012 R2
-
-Phone
-
-Windows Phone 8.1
-
-Build the sample
-----------------
-
-1.  Start Visual Studio 2013 Update 2 and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory to which you unzipped the sample. Go to the directory named for the sample, and double-click the Visual Studio 2013 Update 2 Solution (.sln) file.
-3.  Follow the steps for the version of the sample you want:
-    -   To build the Windows version of the sample:
-
-        1.  Select **StreamSocket.Windows** in **Solution Explorer**.
-        2.  Press Ctrl+Shift+B, or use **Build** \> **Build Solution**, or use **Build** \> **Build StreamSocket.Windows**.
-    -   To build the Windows Phone version of the sample:
-
-        1.  Select **StreamSocket.WindowsPhone** in **Solution Explorer**.
-        2.  Press Ctrl+Shift+B or use **Build** \> **Build Solution** or use **Build** \> **Build StreamSocket.WindowsPhone**.
-
-Run the sample
---------------
-
-The next steps depend on whether you just want to deploy the sample or you want to both deploy and run it.
-
-**Deploying the sample**
-
--   To deploy the built Windows version of the sample:
-
-    1.  Select **StreamSocket.Windows** in **Solution Explorer**.
-    2.  Use **Build** \> **Deploy Solution** or **Build** \> **Deploy StreamSocket.Windows**.
--   To deploy the built Windows Phone version of the sample:
-
-    1.  Select **StreamSocket.WindowsPhone** in **Solution Explorer**.
-    2.  Use **Build** \> **Deploy Solution** or **Build** \> **Deploy StreamSocket.WindowsPhone**.
-
-**Deploying and running the Windows version of the sample**
+### Deploying and running the Windows version of the sample
 
 For the app to attempt a socket connection using SSL to a web server at port 443 (HTTPS) and view the server certificate, this sample requires that a web server is available that supports HTTPS. The web server must be started before the app is run. The sample includes a PowerShell script that will install and enable IIS on a local computer, generate a self-signed, untrusted certificate, and enable HTTPS connections. The easiest way to run the sample is to use the provided web server scripts.
 
@@ -221,7 +179,7 @@ To configure the sample for use with a web server different than IIS not using l
     1.  Right-click **StreamSocket.Windows** in **Solution Explorer** and select **Set as StartUp Project**.
     2.  To debug the sample and then run it, press F5 or use **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or use **Debug** \> **Start Without Debugging**.
 
-**Deploying and running the Windows Phone version of the sample**
+### Deploying and running the Windows Phone version of the sample
 
 IIS is not available on Windows Phone. For the app to attempt a socket connection using SSL to a web server, there are two options:
 
