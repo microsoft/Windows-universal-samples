@@ -1,0 +1,133 @@
+﻿<Page
+    x:Class="App1.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App1"
+    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+    xmlns:model="using:App1.Model"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <!--Cette grille est là pour éviter l'effet clipping noir dégueu-->
+    <Grid Background="#EBEBEB" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Min">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="XboxMusicImage.Visibility" Value="Visible" />
+                        <Setter Target="XboxMusicImage.Height" Value="100" />
+                        <Setter Target="XboxMusicImage.Stretch" Value="Uniform" />
+                        <Setter Target="FlipViewImages.Visibility" Value="Collapsed" />
+                        <Setter Target="UAPImage.Visibility" Value="Collapsed" />
+                        <Setter Target="TxtOne.FontSize" Value="14" />
+                        <Setter Target="HLinkOne.FontSize" Value="14" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Moy">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="400" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="XboxMusicImage.Visibility" Value="Visible" />
+                        <Setter Target="FlipViewImages.Visibility" Value="Collapsed" />
+                        <Setter Target="UAPImage.Visibility" Value="Collapsed" />
+                        <Setter Target="TxtOne.FontSize" Value="14" />
+                        <Setter Target="HLinkOne.FontSize" Value="14" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Max">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="XboxMusicImage.Visibility" Value="Collapsed" />
+                        <Setter Target="FlipViewImages.Visibility" Value="Visible" />
+                        <Setter Target="UAPImage.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.Transitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition FromHorizontalOffset="10" IsStaggeringEnabled="True" />
+                </TransitionCollection>
+            </Grid.Transitions>
+
+            <Border Background="#323232" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Image Source="Assets/xboxmusic.JPG" Stretch="None" Name="XboxMusicImage" Visibility="Collapsed" />
+            </Border>
+            <FlipView x:Name="FlipViewImages" Height="300" Visibility="Collapsed">
+                <Image Stretch="UniformToFill" Source="Albums/19-36-15.jpg" />
+                <Image Stretch="UniformToFill" Source="Albums/19-36-13.jpg" />
+                <Image Stretch="UniformToFill" Source="Albums/19-29-43.jpg" />
+                <Image Stretch="UniformToFill" Source="Albums/19-36-07.jpg" />
+                <Image Stretch="UniformToFill" Source="Albums/19-36-09.jpg" />
+                <Image Stretch="UniformToFill" Source="Albums/19-36-11.jpg" />
+            </FlipView>
+
+            <!--Ancienne façon -->
+
+            <!--
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,0">
+                <Image VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="None" Source="Assets/UAPIcon.jpg" />
+                <Grid VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="0.5*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock VerticalAlignment="Center" FontSize="20" Text="Rien que de la musique, toute la musique, sans publicité, à écouter partout" />
+                    <HyperlinkButton VerticalAlignment="Center" FontSize="20" Grid.Row="1" NavigateUri="http://www.bing.com" Content="Commencer un essai gratuit" />
+                </Grid>
+            </StackPanel>
+            -->
+
+            <!--Nouvelle façon de faire avec un RelativePanel-->
+            <RelativePanel Grid.Row="1" Margin="10,10,0,0" HorizontalAlignment="Stretch">
+                <Image VerticalAlignment="Center" Visibility="Collapsed" Name="UAPImage" HorizontalAlignment="Left" Stretch="None" Source="Assets/UAPIcon.jpg" />
+                <TextBlock Name="TxtOne" RelativePanel.RightOf="UAPImage"  Foreground="#222222"  VerticalAlignment="Center" FontSize="20" Text="Rien que de la musique, toute la musique, sans publicité, à écouter partout" />
+                <HyperlinkButton Name="HLinkOne"  RelativePanel.AlignHorizontalCenterWith="TxtOne" RelativePanel.Below="TxtOne" VerticalAlignment="Center" FontSize="20" Grid.Row="1" NavigateUri="http://www.bing.com" Content="Commencer un essai gratuit" />
+            </RelativePanel>
+
+
+            <Rectangle Fill="#646464" Grid.Row="2" Margin="10,10,0,0" HorizontalAlignment="Stretch" Height="2px"  />
+
+            <GridView Grid.Row="3"
+                x:Name="GridAlbums"
+                Padding="10"
+                ItemsSource="{x:Bind Albums, Mode=OneTime}"
+                SelectionMode="None"
+                IsSwipeEnabled="false"
+                IsItemClickEnabled="True">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <RelativePanel>
+                            <Image  Source="{Binding Icon}" Name="Icon" Width="120" Height="120" Margin="10" Stretch="UniformToFill" />
+                            <TextBlock RelativePanel.Below="Icon" RelativePanel.AlignLeftWith="Icon" Name="Name" Text="{Binding Name}" Margin="10,8,0,0"  Foreground="#222222"/>
+                            <TextBlock RelativePanel.Below="Name" RelativePanel.AlignLeftWith="Icon" Text="{Binding Author}"  TextWrapping="NoWrap" Margin="10,8,0,10" Foreground="#646464"/>
+                        </RelativePanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+
+            </GridView>
+
+
+
+        </Grid>
+
+    </Grid>
+</Page>

@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="App1.FriendsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+
+    <!--Cette grille est là pour éviter l'effet clipping noir dégueu-->
+    <Grid Background="#EBEBEB" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid>
+            <Grid.Transitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition FromHorizontalOffset="10" />
+                </TransitionCollection>
+            </Grid.Transitions>
+            <RelativePanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+
+                <TextBlock Name="Text1" 
+                Text="Friends Page" Foreground="Black" FontSize="46" />
+
+                <TextBlock Name="Text2"  RelativePanel.Below="Text1" RelativePanel.AlignLeftWith="Text1" Margin="0,10,0,0"
+                Text="ApiInformation" Foreground="Black" FontSize="46" />
+
+            </RelativePanel>
+
+        </Grid>
+    </Grid>
+</Page>
