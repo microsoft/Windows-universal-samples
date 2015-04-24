@@ -1,0 +1,14 @@
+﻿<Page
+    x:Class="xDeferLoadStrategy.DeferredControlTemplatePart"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:xDeferLoadStrategy"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12">
+        <local:TitledImage Header="Rainier" Source="ms-appx:///Assets/rainier.jpg" /> <!--This one will realize the header content presenter in the control template that was deferred -->
+        <local:TitledImage Source="ms-appx:///Assets/valley.jpg" Margin="0,12,0,0" /> <!--This one will not realize the header content presenter because Header was not specified -->
+    </StackPanel>
+</Page>
