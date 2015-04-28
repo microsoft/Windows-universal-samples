@@ -1,0 +1,103 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="PivotCS.Scenario2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PivotCS"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <DataTemplate x:Key="ItemTemplate" x:DataType="local:SampleDataModel">
+            <StackPanel Orientation="Horizontal" Height="80">
+                <Border Background="#55000000" Margin="10,10,10,10">
+                    <Image Source="{x:Bind ImagePath}" Stretch="UniformToFill" Width="60" Height="60" />
+                </Border>
+                <TextBlock Text="{x:Bind Title}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="MobileLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SearchBox.Visibility" Value="Collapsed" />
+                        <Setter Target="CompactSearchBox.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="850" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SearchBox.Width" Value="200" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Pivot>
+
+            <Pivot.LeftHeader>
+                <AppBarButton Icon="Back" Click="BackButton_Click" />
+            </Pivot.LeftHeader>
+
+            <Pivot.RightHeader >
+                <Grid>
+                    <AppBarButton Icon="Find" x:Name="CompactSearchBox" Visibility="Collapsed"
+                                  VerticalAlignment="Stretch">
+                        <AppBarButton.Flyout>
+                            <Flyout>
+                                <AutoSuggestBox  
+                                VerticalAlignment="Center" Width="250" Margin="4,4,8,4" 
+                                QueryIcon="Find" PlaceholderText="enter a search term"
+                                TextChanged="AutoSuggestBox_TextChanged"
+                                QuerySubmitted="AutoSuggestBox_QuerySubmitted"
+                                SuggestionChosen="AutoSuggestBox_SuggestionChosen"
+                                ItemsSource="{x:Bind Suggestions}"/>
+                            </Flyout>
+                        </AppBarButton.Flyout>
+                    </AppBarButton>
+
+                    <AutoSuggestBox x:Name="SearchBox"  
+                                VerticalAlignment="Center" Width="250" Margin="4,4,8,4" 
+                                QueryIcon="Find" PlaceholderText="enter a search term"
+                                TextChanged="AutoSuggestBox_TextChanged"
+                                QuerySubmitted="AutoSuggestBox_QuerySubmitted"
+                                SuggestionChosen="AutoSuggestBox_SuggestionChosen"
+                                ItemsSource="{x:Bind Suggestions}"/>
+                </Grid>
+            </Pivot.RightHeader>
+
+            <PivotItem Header="New">
+                <ListView ItemsSource="{x:Bind NewItems}" ItemTemplate="{StaticResource ItemTemplate}" 
+                          SelectionChanged="ListView_SelectionChanged" />
+            </PivotItem>
+            <PivotItem Header="Flagged">
+                <ListView ItemsSource="{x:Bind FlaggedItems}" ItemTemplate="{StaticResource ItemTemplate}" 
+                          SelectionChanged="ListView_SelectionChanged" />
+            </PivotItem>
+            <PivotItem Header="All">
+                <ListView ItemsSource="{x:Bind AllItems}" ItemTemplate="{StaticResource ItemTemplate}" 
+                          SelectionChanged="ListView_SelectionChanged" />
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>

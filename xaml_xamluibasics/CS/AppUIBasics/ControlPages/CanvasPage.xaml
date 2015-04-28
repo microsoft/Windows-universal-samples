@@ -1,0 +1,87 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AppUIBasics.ControlPages.CanvasPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:common="using:AppUIBasics.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <RelativePanel>
+        <local:ControlExample x:Name="Example1" HeaderText="A Canvas control." MaxWidth="500">
+            <Canvas x:Name="Control1" Width="120" Height="120" Background="Gray" Margin="0,0,0,10" Grid.Row="1">
+                <Canvas.Resources>
+                    <Style TargetType="Rectangle">
+                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="Width" Value="40"/>
+                    </Style>
+                </Canvas.Resources>
+                <Rectangle Fill="Red" Canvas.Left="{x:Bind LeftSlider.Value, Mode=OneWay}" 
+                               Canvas.Top="{x:Bind TopSlider.Value, Mode=OneWay}"
+                               Canvas.ZIndex="{x:Bind ZSlider.Value, Converter={StaticResource doubleIntConverter}, Mode=OneWay}"/>
+                <Rectangle Fill="Blue" Canvas.Left="20" Canvas.Top="20" Canvas.ZIndex="1"/>
+                <Rectangle Fill="Green" Canvas.Left="40" Canvas.Top="40" Canvas.ZIndex="2"/>
+                <Rectangle Fill="Yellow" Canvas.Left="60" Canvas.Top="60" Canvas.ZIndex="3"/>
+            </Canvas>
+            <local:ControlExample.Xaml>
+                <RichTextBlock>
+                    <Paragraph>&lt;Canvas Width="120" Height="120" Background="Gray"&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Rectangle Fill="Red" Canvas.Left="<Run Text="{x:Bind LeftSlider.Value, Mode=OneWay}"/>" 
+                                Canvas.Top="<Run Text="{x:Bind TopSlider.Value, Mode=OneWay}"/>" 
+                                Canvas.ZIndex="<Run Text="{x:Bind ZSlider.Value, Mode=OneWay}"/>"&gt;
+                    </Paragraph>
+                    <Paragraph TextIndent="12">&lt;Rectangle Fill="Blue" Canvas.Left="20" Canvas.Top="20" Canvas.ZIndex="1"/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Rectangle Fill="Green" Canvas.Left="40" Canvas.Top="40" Canvas.ZIndex="2"/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Rectangle Fill="Yellow" Canvas.Left="60" Canvas.Top="60" Canvas.ZIndex="3"/&gt;</Paragraph>
+                    <Paragraph>&lt;/Canvas&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+
+        <local:ControlExample x:Name="ExampleAccessories" HeaderText="Use the sliders to change the Canvas attached properties of the red rectangle.">
+            <StackPanel x:Name="SliderGroup" Orientation="Horizontal">
+                <Slider x:Name="TopSlider" Header="Canvas.Top" Minimum="-100" Maximum="100" StepFrequency="1" Width="100"
+                                Orientation="Vertical" IsDirectionReversed="True"/>
+                <Slider x:Name="LeftSlider" Header="Canvas.Left" Minimum="-100" Maximum="100" StepFrequency="1" Width="100"
+                                Margin="0,0,30,0"/>
+                <Slider x:Name="ZSlider" Header="Canvas.ZIndex" Minimum="0" Maximum="4" StepFrequency="1" Width="100"/>
+            </StackPanel>
+        </local:ControlExample>
+
+        <VisualStateManager.VisualStateGroups>
+            <!-- Visual states reflect the application's window size -->
+            <VisualStateGroup>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ExampleAccessories.(RelativePanel.RightOf)" Value="Example1" />
+                        <Setter Target="ExampleAccessories.Margin" Value="24,0,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ExampleAccessories.(RelativePanel.Below)" Value="Example1" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </RelativePanel>
+</Page>
