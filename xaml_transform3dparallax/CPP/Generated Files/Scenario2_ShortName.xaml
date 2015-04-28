@@ -1,0 +1,15 @@
+﻿<!-- Copyright (c) Microsoft. All rights reserved. -->
+
+<Page
+    x:Class="Transform3DParallax.Scenario2_ShortName"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Transform3DParallax"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <TextBlock>Hello this is Scenario 2</TextBlock>
+    
+</Page>
+
