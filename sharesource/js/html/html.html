@@ -1,0 +1,42 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/common.css" />
+    <script src="/js/html.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">Share HTML content</div>
+        </div>
+        <div id="scenarioContent">
+            <p>You can share content in HTML markup format and preserve images.</p>
+            <p>Data Package Title:</p>
+            <input class="text-box" id="titleInputBox" value="A web snippet for you" />
+            <p>Data Package Description:</p>
+            <input class="text-box" id="descriptionInputBox" value="HTML content with image" />
+
+            <p>Content: The following is an HTML fragment containing a locally-referenced image.</p>
+            <div id="htmlFragment" style="width:100%-40px;max-width:480px;background-color:#f2f2f2;padding: 1px 15px 20px 15px;margin-bottom:40px; color: black; font-family:'Segoe UI Semilight'">
+                <h2 style="margin-bottom:10px"><img id="htmlFragmentImage" src="/images/dev-center_branding.png" alt="Windows Dev Center" /></h2>
+                <p style="margin-top:0">Go to the <a href="http://msdn.microsoft.com/en-us/windows/home/">Windows Dev Center</a> to get dev tools, samples, forums, docs and other resources to start building Windows Store apps now.</p>
+
+                <a href="http://msdn.microsoft.com/en-us/windows/apps/br229516" style="padding-left:20px;"><span style="font-size:14px">Downloads</span></a>
+                <span style="padding:0 20px;color:#585858;font-size:14px">|</span>
+                <a href="http://msdn.microsoft.com/library/windows/apps/br211386"><span style="font-size:14px">Getting started</span></a>
+                <span style="padding:0 20px;color:#585858;font-size:14px">|</span>
+                <a href="http://code.msdn.microsoft.com/en-us/windowsapps"><span style="font-size:14px">App samples</span></a>
+                <span style="padding:0 20px;color:#585858;font-size:14px">|</span>
+                <a href="http://social.msdn.microsoft.com/Forums/en-us/category/windowsapps"><span style="font-size:14px">Forums</span></a>
+            </div>
+            <p><button id="shareButton">Share</button></p>
+        </div>
+    </div>
+</body>
+</html>

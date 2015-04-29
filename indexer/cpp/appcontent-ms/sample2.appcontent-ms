@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<IndexerSampleInformation>
+  <Properties xmlns="http://schemas.microsoft.com/Search/2013/ApplicationContent">
+    <Name>Sample 2</Name>
+    <Keywords>
+      <Keyword xml:lang="en-US">Sample 2 - keyword 1</Keyword>
+      <Keyword>Sample 2 - keyword 2</Keyword>
+    </Keywords>
+    <Comment>Sample 2 comment</Comment>
+    <AdditionalProperties>
+      <Property Key="System.Title">Sample 2 Title</Property>
+      <Property xml:lang="en-US" Key="System.Contact.EmailAddresses">
+        <Value>bryan@contoso.com</Value>
+        <Value>vincent@contoso.com</Value>
+      </Property>
+    </AdditionalProperties>
+  </Properties>
+  <IndexerSampleSpecificElement sc:IndexableContent="true" xmlns:sc="http://schemas.microsoft.com/Search/2013/ApplicationContent">The text included here will be indexed, enabling full-text search.</IndexerSampleSpecificElement>
+</IndexerSampleInformation>

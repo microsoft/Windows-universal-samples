@@ -1,0 +1,87 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="ScreenCasting.Scenario3"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ScreenCasting"
+    xmlns:controls="using:ScreenCasting.Controls"    
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="How to cast to DIAL, Miracast, Bluetooth, and DLNA devices with the a custom Device Picker."/>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Name="video_panel">
+                        <MediaElement x:Name="player" Height="250px" Width="350px" AreTransportControlsEnabled="True">
+                            <MediaElement.TransportControls>
+                                <controls:MediaTransportControlsWithoutCastButton x:Name="ME4_Controls"
+                                                     IsCompact="True"/>
+                            </MediaElement.TransportControls>
+                        </MediaElement>
+                        <TextBox Header="DIAL Application Name:" IsEnabled="False" Name="dial_appname_textbox" Text="combiningcastingtech"  Margin="0,0,0,20" Width="500px"></TextBox>
+                        <TextBox Header="DIAL Launch Arguments:" IsEnabled="False" Name="dial_launch_args_textbox" Text=""  Width="500px"></TextBox>
+                    </StackPanel>
+
+                    <Grid Margin="0,10,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+
+                        <StackPanel Grid.Row="1" Margin="0,10,0,0">
+                            <StackPanel Orientation="Horizontal" >
+                                <Button x:Name="watcherControlButton" IsEnabled="False" Margin="0, 5, 0, 5" Content="Start Device Watcher" Click="watcherControlButton_Click"/>
+                                <ProgressRing x:Name="progressRing" Margin="5" IsActive="False" Grid.Column="1"/>
+                                <TextBlock x:Name="progressText" Margin="0, 10, 0, 0" Grid.Column="2"/>
+                                <Button Name="disconnectButton" Content="Disconnect" IsEnabled="False" Click="disconnectButton_Click" Grid.Column="3"/>
+
+                            </StackPanel>
+
+                            <ScrollViewer  MaxHeight="400" MaxWidth="300" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left">
+                                <ListBox x:Name="castingDevicesList" MinHeight="300" MaxHeight="300" MaxWidth="300" HorizontalAlignment="Left"  Tapped="castingDevicesList_Tapped" >
+                                    <!--Listbox content is bound to the Name field of our casting devices-->
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=Name}" />
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </ScrollViewer>
+
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,49 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+/* These styles are part of the SDK Sample framework */
+#scenarioControl {
+    width: 100%;
+    height: 100%;
+}
+
+    /* Hide ListView selection checkmark */
+    #scenarioControl .win-selectioncheckmark {
+        display: none;
+    }
+
+    #scenarioControl .win-itembox {
+        background-color: transparent;
+    }
+
+        #scenarioControl .win-itembox:hover {
+            background-color: rgb(29, 29, 29);
+        }
+
+    #scenarioControl .win-container {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: auto;
+    }
+
+        #scenarioControl .win-container:hover {
+            outline: none;
+        }
+
+    #scenarioControl .win-focusedoutline {
+        display: none;
+    }
+
+    #scenarioControl .scenarioItem {
+        font-size: 14pt;
+        padding: 8px 8px 8px 0px;
+        white-space: nowrap;
+    }
+
+        #scenarioControl .scenarioItem .scenarioNumber {
+            display: inline-block;
+            width: 48px;
+            text-align: center;
+        }

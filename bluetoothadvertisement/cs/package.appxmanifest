@@ -12,7 +12,7 @@
     Version="1.0.0.0" />
 
 
-  <mp:PhoneIdentity PhoneProductId="05777116-8530-42a2-914d-9dae4b4da01a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="11a54d62-0d60-4e17-820d-1fa537715b3a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>BluetoothAdvertisement C# Sample</DisplayName>
@@ -21,7 +21,7 @@
   </Properties>
 
   <Dependencies>
-    <TargetPlatform Name="Windows.Universal" MinVersion="10.0.10030.0" MaxVersionTested="10.0.10030.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10069.0" MaxVersionTested="10.0.10069.0" />
   </Dependencies>
 
   <Resources>
@@ -33,16 +33,14 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="BluetoothAdvertisementCS.App">
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="Tasks.AdvertisementWatcherTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTasks.AdvertisementWatcherTask">
           <BackgroundTasks>
-            <!-- Temporary workaround until the appropriate task type is available -->
-            <Task Type="systemEvent"/>
+            <Task Type="bluetooth"/>
           </BackgroundTasks>
         </Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="Tasks.AdvertisementPublisherTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTasks.AdvertisementPublisherTask">
           <BackgroundTasks>
-            <!-- Temporary workaround until the appropriate task type is available -->
-            <Task Type="systemEvent"/>
+            <Task Type="bluetooth"/>
           </BackgroundTasks>
         </Extension>
       </Extensions>
@@ -51,10 +49,9 @@
         Square150x150Logo="Assets\StoreLogo-sdk.png"
         Square44x44Logo="Assets\SmallTile-sdk.png"
         Description="BluetoothAdvertisementCS"
-        ForegroundText="light"
         BackgroundColor="#00b2f0">
         <uap:SplashScreen Image="Assets\Splash-sdk.png" />
-        <uap:DefaultTile DefaultSize="square150x150Logo" >
+        <uap:DefaultTile>
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
           </uap:ShowNameOnTiles>
@@ -62,4 +59,7 @@
       </uap:VisualElements>
     </Application>
   </Applications>
+  <Capabilities>
+    <DeviceCapability Name="bluetooth" />
+  </Capabilities>
 </Package>

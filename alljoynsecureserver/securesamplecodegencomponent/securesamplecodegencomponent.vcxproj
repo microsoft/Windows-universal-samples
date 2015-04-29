@@ -117,7 +117,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalOptions>/bigobj /Zm160 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm171 %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>28204</DisableSpecificWarnings>
       <CallingConvention>StdCall</CallingConvention>
     </ClCompile>
@@ -134,7 +134,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalOptions>/bigobj /Zm160 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm171 %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>28204</DisableSpecificWarnings>
       <CallingConvention>StdCall</CallingConvention>
     </ClCompile>
@@ -151,7 +151,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalOptions>/bigobj /Zm160 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm171 %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>28204</DisableSpecificWarnings>
       <CallingConvention>StdCall</CallingConvention>
     </ClCompile>
@@ -168,7 +168,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalOptions>/bigobj /Zm160 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm171 %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>28204</DisableSpecificWarnings>
       <CallingConvention>StdCall</CallingConvention>
     </ClCompile>
@@ -185,7 +185,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalOptions>/bigobj /Zm160 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm171 %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>28204</DisableSpecificWarnings>
       <CallingConvention>StdCall</CallingConvention>
     </ClCompile>
@@ -202,7 +202,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalOptions>/bigobj /Zm160 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm171 %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>28204</DisableSpecificWarnings>
       <CallingConvention>StdCall</CallingConvention>
     </ClCompile>
@@ -220,6 +220,8 @@
     <ClInclude Include="SecureInterfaceEventArgs.h" />
     <ClInclude Include="SecureInterfaceMethodResults.h" />
     <ClInclude Include="SecureInterfaceProducer.h" />
+    <ClInclude Include="SecureInterfaceServiceEventAdapter.h" />
+    <ClInclude Include="SecureInterfaceServiceEventArgs.h" />
     <ClInclude Include="SecureInterfaceSignals.h" />
     <ClInclude Include="SecureInterfaceStructures.h" />
     <ClInclude Include="SecureInterfaceWatcher.h" />
@@ -237,6 +239,8 @@
     </ClCompile>
     <ClCompile Include="SecureInterfaceConsumer.cpp" />
     <ClCompile Include="SecureInterfaceProducer.cpp" />
+    <ClCompile Include="SecureInterfaceServiceEventAdapter.cpp" />
+    <ClCompile Include="SecureInterfaceServiceEventArgs.cpp" />
     <ClCompile Include="SecureInterfaceSignals.cpp" />
     <ClCompile Include="SecureInterfaceWatcher.cpp" />
     <ClCompile Include="TypeConversionHelpers.cpp" />

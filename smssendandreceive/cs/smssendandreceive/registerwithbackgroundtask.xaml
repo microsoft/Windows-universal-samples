@@ -2,7 +2,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -19,7 +19,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,0,-52">
         <Grid x:Name="RootGrid" Margin="12,20,12,12">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -47,7 +47,7 @@
                     <TextBlock Text="Message Type:" HorizontalAlignment="Left" VerticalAlignment="Center"  Style="{StaticResource BasicTextStyle}" Grid.Row="1" Grid.Column="0"/>
                     <RadioButton x:Name="TextButton" GroupName="Type" Content="Text" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                     <RadioButton x:Name="AppButton" GroupName="Type" Content="App" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                    <RadioButton x:Name="WapButton" GroupName="Type" Content="Text" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <RadioButton x:Name="WapButton" GroupName="Type" Content="Wap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                     <RadioButton x:Name="BroadcastButton" GroupName="Type" Content="Broadcast" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                     <RadioButton x:Name="VoicemailButton" GroupName="Type" Content="Voicemail" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                     <Button x:Name="RegisterButton" Content="Register" Margin="5,5,0,0" Click="Register_Click"/>
@@ -69,8 +69,8 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TextBlock Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Task status:" Margin="17,549,81,-539" Grid.ColumnSpan="2" />
-            <TextBlock x:Name="BackgroundTaskStatus" Style="{StaticResource BasicTextStyle}" Margin="33,580,55,-570" Grid.Row="0" TextWrapping="Wrap" Text="Unregistered" Grid.ColumnSpan="2" />
+            <TextBlock Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Task status:" Margin="14,629,84,-619" Grid.ColumnSpan="2" />
+            <TextBlock x:Name="BackgroundTaskStatus" Style="{StaticResource BasicTextStyle}" Margin="37,642,51,-632" Grid.Row="0" TextWrapping="Wrap" Text="Unregistered" Grid.ColumnSpan="2" />
         </Grid>
     </Grid>
 </Page>

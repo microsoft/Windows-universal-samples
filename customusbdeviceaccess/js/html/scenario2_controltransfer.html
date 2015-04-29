@@ -1,0 +1,67 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario2_controlTransfer.css" />
+    <script src="/js/scenario2_controlTransfer.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Control Transfers</h2>
+        </div>
+        <div id="scenarioContent">
+
+            <div data-win-control="SdkSample.ScenarioInput">
+                <div class="deviceScenarioContainer">
+                    <div class="osrFx2Scenario">
+                        <p>This scenario demonstrates how to use control transfer to set the seven segment on the OSRFX2 device</p>
+
+                        <button id="buttonGetOsrFx2SevenSegment">Get Seven Segment Display</button>
+                        <button id="buttonSetOsrFx2SevenSegment">Set Seven Segment Display</button>
+                        <br />
+                        <select id="osrFx2SevenSegmentSettingInput" size="1">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+                    </div>
+                    <div class="superMuttScenario">
+                        <p>This scenario demonstrates how to use control transfer to set the LED blink pattern of the SuperMUTT device</p>
+                        <button id="buttonGetSuperMuttLedBlinkPattern">Get Led Blink Pattern</button>
+                        <button id="buttonSetSuperMuttLedBlinkPattern">Set Led Blink Pattern</button>
+                        <br />
+                        <select id="ledBlinkPatternInput" size="1">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+
+    </div>
+</body>
+</html>

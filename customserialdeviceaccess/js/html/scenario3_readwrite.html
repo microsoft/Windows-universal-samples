@@ -1,0 +1,105 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/Scenario3_readWrite.css" />
+    <script src="/js/Scenario3_readWrite.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Communicate with Serial Device</h2>
+        </div>
+        <div id="scenarioContent">
+
+            <br />
+            <div>
+                <label contenteditable="false">
+                    Write Timeout =
+                </label>
+                <label id="WriteTimeoutLabel" contenteditable="false">
+                    Not Set
+                </label>
+            </div>
+            <div>
+                <input type="number" id="WriteTimeoutInput" value="Not Set">
+                <button id="WriteTimeoutButton">
+                    SET
+                </button>
+            </div>
+
+            <br />
+            <div>
+                <input type="text" id="WriteBytesInput" value="Enter text to write">
+            </div>
+            <div>
+                <button id="WriteButton">
+                    WRITE BYTES
+                </button>
+                <button id="WriteCancelButton">
+                    CANCEL WRITE
+                </button>
+            </div>
+
+
+            <br />
+            <div>
+                <label contenteditable="false">
+                    Written Bytes are displayed here: 
+                </label>
+                <label id="WriteBytesCountLabel" contenteditable="false">
+                    Not Set
+                </label>
+            </div>
+            <div>
+                <textarea id="WriteBytesTextArea"></textarea>
+            </div>
+
+            <br />
+            <br />
+            <div>
+                <label contenteditable="false">
+                    Read Timeout =
+                </label>
+                <label id="ReadTimeoutLabel" contenteditable="false">
+                    Not Set
+                </label>
+            </div>
+            <div>
+                <input type="number" id="ReadTimeoutInput" value="Not Set">
+                <button id="ReadTimeoutButton">
+                    SET
+                </button>
+            </div>
+
+            <br />
+            <div>
+                <button id="ReadButton">
+                    Read BYTES
+                </button>
+                <button id="ReadCancelButton">
+                    CANCEL Read
+                </button>
+            </div>
+
+            <br />
+            <div>
+                <label contenteditable="false">
+                    Read Bytes are displayed here:
+                </label>
+                <label id="ReadBytesCountLabel" contenteditable="false">
+                    Not Set
+                </label>
+            </div>
+            <div>
+                <textarea id="ReadBytesTextArea"></textarea>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

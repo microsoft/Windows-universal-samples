@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+  <Identity
+    Name="8669b7ce-1fa4-422e-a164-308f983fdc1a"
+    Version="1.0.0.0"
+    Publisher="CN=Microsoft" />
+
+  <mp:PhoneIdentity PhoneProductId="8669b7ce-1fa4-422e-a164-308f983fdc1a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>Custom USB Device Access UAP/JS</DisplayName>
+    <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+    <Logo>images\storelogo-sdk.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10069.0" MaxVersionTested="10.0.10069.0" />
+    <!--<PackageDependency Name="Microsoft.WinJS.4.0" MinVersion="1.0.9927.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />-->
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+
+  <Applications>
+    <Application
+      Id="App"
+      StartPage="default.html">
+
+      <uap:VisualElements
+        DisplayName="Custom USB Device Access UAP/JS"
+        Description="Custom USB Device Access UAP/JS"
+        BackgroundColor="#00b2f0"
+        Square150x150Logo="images\storelogo-sdk.png"
+        Square44x44Logo="images\smalltile-sdk.png">
+
+        <uap:SplashScreen Image="images\splash-sdk.png" />
+        <uap:DefaultTile >
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+      </uap:VisualElements>
+
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" StartPage="js\ioSyncBackgroundTask.js">
+            <BackgroundTasks>
+                <Task Type="deviceUse" />
+            </BackgroundTasks>
+        </Extension>
+      </Extensions>
+
+    </Application>
+  </Applications>
+
+  <Capabilities>
+
+    <!--When the device's classId is FF * *, there is a predefined name for the class. You can use the name instead of the class id. 
+      There are also other predefined names that correspond to a classId.-->
+
+    <DeviceCapability Name="usb">
+
+      <!--MUTT Device-->
+      <Device Id="vidpid:045E 078E">
+        <Function Type="classId:ff * *"/>
+      </Device>
+
+      <!--OSRFX2 Device-->
+      <Device Id="vidpid:0547 1002">
+        <Function Type="classId:ff * *"/>
+      </Device>
+
+      <!--SuperMutt Device-->
+      <Device Id="vidpid:045E 0611">
+        <Function Type="name:vendorSpecific"/>
+      </Device>
+    </DeviceCapability>
+
+  </Capabilities>
+
+</Package>
+

@@ -1,0 +1,120 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="CustomUsbDeviceAccess.Scenario2_ControlTransfer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomUsbDeviceAccess"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Control Transfer" Style="{StaticResource SampleHeaderTextStyle}"/>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <!-- Place scenario content here -->
+                <Grid x:Name="LayoutRoot">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="Input" Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel x:Name="DeviceScenarioContainer" Orientation="Vertical" Margin="0,10,0,0" Grid.Row="0">
+                            <StackPanel x:Name="OsrFx2Scenario" Orientation="Vertical">
+                                <TextBlock x:Name="OsrFx2ScenarioText" Margin="0,10" TextWrapping="Wrap" HorizontalAlignment="Left">
+               This scenario demonstrates how to use control transfer to set the
+              seven segment on the OSRFX2 device
+                                </TextBlock>
+                                <ComboBox x:Name="OsrFx2SevenSegmentSettingInput" SelectedIndex="8">
+                                    <ComboBoxItem Content="0"/>
+                                    <ComboBoxItem Content="1"/>
+                                    <ComboBoxItem Content="2"/>
+                                    <ComboBoxItem Content="3"/>
+                                    <ComboBoxItem Content="4"/>
+                                    <ComboBoxItem Content="5"/>
+                                    <ComboBoxItem Content="6"/>
+                                    <ComboBoxItem Content="7"/>
+                                    <ComboBoxItem Content="8"/>
+                                    <ComboBoxItem Content="9"/>
+                                </ComboBox>
+                                <StackPanel>
+                                    <Button x:Name="ButtonGetOsrFx2SevenSegment" Content="Get Seven Segment Display" Click="GetOsrFx2SevenSegmentSetting_Click"/>
+                                    <Button x:Name="ButtonSetOsrFx2SevenSegment" Content="Set Seven Segment Display" Click="SetOsrFx2SevenSegmentSetting_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel x:Name="SuperMuttScenario" Orientation="Vertical">
+                                <TextBlock x:Name="SuperMuttScenarioText" Margin="0,10" TextWrapping="Wrap" HorizontalAlignment="Left">
+               This scenario demonstrates how to use control transfer to set the
+              LED blink pattern of the SuperMUTT device
+                                </TextBlock>
+                                <ComboBox x:Name="SuperMuttLedBlinkPatternInput" SelectedIndex="0">
+                                    <ComboBoxItem Content="0"/>
+                                    <ComboBoxItem Content="1"/>
+                                    <ComboBoxItem Content="2"/>
+                                    <ComboBoxItem Content="3"/>
+                                    <ComboBoxItem Content="4"/>
+                                    <ComboBoxItem Content="5"/>
+                                    <ComboBoxItem Content="6"/>
+                                    <ComboBoxItem Content="7"/>
+                                </ComboBox>
+                                <StackPanel>
+                                    <Button x:Name="ButtonGetSuperMuttLedBlinkPattern" Content="Get Led Blink Pattern" Click="GetSuperMuttLedBlinkPattern_Click"/>
+                                    <Button x:Name="ButtonSetSuperMuttLedBlinkPattern" Content="Set Led Blink Pattern" Click="SetSuperMuttLedBlinkPattern_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                        <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts for the input section -->
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState x:Name="InputFullScreenLandscape"/>
+                                <VisualState x:Name="InputFilled"/>
+                                <VisualState x:Name="InputFullScreenPortrait"/>
+                                <VisualState x:Name="InputSnapped"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                    <Grid x:Name="Output" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+                        <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts for the output section -->
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState x:Name="OutputFullScreenLandscape"/>
+                                <VisualState x:Name="OutputFilled"/>
+                                <VisualState x:Name="OutputFullScreenPortrait"/>
+                                <VisualState x:Name="OutputSnapped"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </Grid>
+
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

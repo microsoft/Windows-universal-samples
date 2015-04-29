@@ -1,0 +1,58 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario3"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot" Margin="12,20,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="Input" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="InputTextBlock1" Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+                Use StorageFileQueryResult.GetMatchingPropertiesWithRanges() to select matching ranges of properties in a file query result.
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Grid.Row="1">
+                <Button x:Name="FindOption" Content="Find" Margin="0,0,10,0" Click="Find_Click"/>
+                <TextBox x:Name="FindQueryText" TextWrapping="Wrap" Width="400" Height="30"/>
+            </StackPanel>
+            <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts for the input section -->
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup>
+                    <VisualState x:Name="InputDefaultLayout"/>
+                    <VisualState x:Name="InputBelow768Layout"/>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Grid>
+
+        <ScrollViewer x:Name="Output" Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <TextBlock x:Name="ContentTextOutput" Margin="0,10,0,0" TextWrapping="Wrap" Text="Choose 'Find' to see result" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts for the input section -->
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup>
+                    <VisualState x:Name="OutputDefaultLayout"/>
+                    <VisualState x:Name="OutputBelow768Layout"/>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </ScrollViewer>
+    </Grid>
+</Page>

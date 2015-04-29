@@ -1,0 +1,47 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.S4_CheckIndexRevision"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >
+                    To ensure that the index revision number matches the app's expected value, you can keep track of it. In the previous
+                    examples, the expected index revision number was incremented with each add, update, and delete operation. This will
+                    show you how to check that tracked index revision number against the index's reported revision number. In practice,
+                    this should be done when the app is activated, and if there is a discrepancy the app should react appropriately.
+                <LineBreak/>
+                <LineBreak/>
+                    If the reported index revision number is 0, it means the index has been reset. In this case, the app should re-push
+                    all of its data to the indexer.
+                <LineBreak/>
+                <LineBreak/>
+                    If the reported index revision number is not 0, but doesn't match the app's expected index revision number, it means
+                    that not all of the app's indexer operations were properly completed. If the app only has a small number of items to
+                    index, it is acceptable to re-push all of its data to the indexer in this situation. However, if the app has a large
+                    amount of items to index, it is recommended that the app track its updates so that it can backtrack and only retry
+                    the required updates.
+                </TextBlock>
+                <Button AutomationProperties.AutomationId="CheckIndexRevisionButton" Click="CheckIndexRevision_Click">
+                    Check the index revision number
+                </Button>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

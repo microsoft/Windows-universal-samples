@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -39,15 +39,10 @@ namespace ActivitySensorCPP
         SDKTemplate::MainPage^ rootPage;
         Windows::Devices::Sensors::ActivitySensor^ activitySensor;
         Windows::Foundation::EventRegistrationToken readingToken;
-        Windows::Foundation::EventRegistrationToken statusToken;
 
         void ReadingChanged(Windows::Devices::Sensors::ActivitySensor^ sender, Windows::Devices::Sensors::ActivitySensorReadingChangedEventArgs^ e);
         void ScenarioEnableReadingChanged(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void ScenarioDisableReadingChanged(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-
-        void StatusChanged(Windows::Devices::Sensors::ActivitySensor^ sender, Windows::Devices::Sensors::ActivitySensorStatusChangedEventArgs^ e);
-        void ScenarioEnableStatusChanged(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-        void ScenarioDisableStatusChanged(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
         Concurrency::task<Windows::Devices::Sensors::ActivitySensor^> GetActivitySensorAsync();
     };

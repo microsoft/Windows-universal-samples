@@ -1,0 +1,90 @@
+<!-- 
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<Page
+    x:Class="PedometerCPP.Scenario2_History"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PedometerCPP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible">
+      <Grid x:Name="RootGrid" Margin="10,10,14,22">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="0,0,0,20">
+          <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+            Retrieves the Pedometer History for the timespan requested.
+          </TextBlock>
+        </StackPanel>
+
+        <StackPanel x:Name="HistoryParams" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Vertical" Margin="0,0,0,20">
+          <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+            Choose the timespan for which history needs to be retrieved:
+          </TextBlock>
+          <RadioButton x:Name="AllHistory" GroupName="TimespanButtons" IsChecked="True" Checked="AllHistory_Checked">Entire available history</RadioButton>
+          <RadioButton x:Name="SpecificHistory" GroupName="TimespanButtons" Checked="SpecificHistory_Checked">History within a specific range</RadioButton>
+          <StackPanel x:Name="SpanPicker" Orientation="Vertical" Visibility="Collapsed" Margin="25,10,0,0" ScrollViewer.VerticalScrollMode="Enabled">
+            <StackPanel Orientation="Vertical">
+              <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">From:</TextBlock>
+              <DatePicker x:Name="FromDate" DayFormat="" Margin="10,10,0,10"/>
+              <TimePicker x:Name="FromTime" Margin="10,10,0,10"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+              <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">To:</TextBlock>
+              <DatePicker x:Name="ToDate" DayFormat="" Margin="10,10,0,10"/>
+              <TimePicker x:Name="ToTime" Margin="10,10,0,10"/>
+            </StackPanel>
+          </StackPanel>
+          <Button x:Name="GetHistory" Content="Get History"  Click="GetHistory_Click"></Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+          <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" FontWeight="Bold" Width="150"> Time Stamp</TextBlock>
+          <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" FontWeight="Bold" Width="100" Margin="7,0,0,0">Step Kind</TextBlock>
+          <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" FontWeight="Bold" Width="100" Margin="7,0,0,0">Steps Count</TextBlock>
+          <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" FontWeight="Bold" Width="120" Margin="7,0,0,0">Steps Duration</TextBlock>
+        </StackPanel>
+
+        <ListView x:Name="historyRecordsList" Grid.Row="3" Margin="0,20,0,0" SelectionMode="None"
+                  ItemsSource="{Binding}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding TimeStamp}" Width="150"></TextBlock>
+                <TextBlock Text="{Binding StepKind}" Width="100" Margin="7,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding StepsCount}" Width="100" Margin="7,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding StepsDuration}" Width="1000" Margin="7,0,0,0"></TextBlock>
+              </StackPanel>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ListView>
+
+        <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+        <Border x:Name="ErrorBorder" Background="Red" Grid.Row="4"/>
+        <TextBlock x:Name="StatusBlock" Grid.Row="4" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+      </Grid>
+    </ScrollViewer>
+  </Grid>
+
+</Page>

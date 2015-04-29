@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -24,14 +24,14 @@ using Windows.UI.Notifications;
 
 namespace SmsBackgroundTask
 {
-    public sealed class SmsBackgroundTask : IBackgroundTask
+    public sealed class SampleSmsBackgroundTask : IBackgroundTask
     {
         //
         // The Run method is the entry point of a background task.
         //
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-
+            Debug.WriteLine("Background " + taskInstance.Task.Name + " Starting...");
             //
             // Associate a cancellation handler with the background task.
             //
@@ -55,8 +55,7 @@ namespace SmsBackgroundTask
         {
             try
             {
-                SmsMessageReceivedTriggerDetails smsDetails = (SmsMessageReceivedTriggerDetails) taskInstance.TriggerDetails;
-                smsDetails.Accept();
+                SmsMessageReceivedTriggerDetails smsDetails = taskInstance.TriggerDetails as SmsMessageReceivedTriggerDetails;              
 
                 // Just registered for text messages
                 SmsTextMessage2 smsTextMessage;
@@ -78,7 +77,10 @@ namespace SmsBackgroundTask
                 else
                 {
                     Debug.WriteLine("Invalid message type: " + smsDetails.MessageType);
-                }                
+                }
+
+                // Ack the message
+                smsDetails.Accept();
             }
             catch (Exception ex)
             {

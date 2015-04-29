@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -17,8 +17,9 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=402347&clcid=0x409
-namespace Xml
-{ 
+
+namespace SDKTemplate
+{
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>

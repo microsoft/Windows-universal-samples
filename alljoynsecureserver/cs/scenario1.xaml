@@ -2,7 +2,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -20,7 +20,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -38,6 +38,10 @@
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
                     <Button Content="Launch" Command="{Binding LaunchServer}"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBlock Text="Key :"/>
+                        <TextBlock Text="{Binding Path=Key,Mode=OneWay}" Margin="5,0,0,0" IsTextSelectionEnabled="True"/>
+                    </StackPanel>
                 </StackPanel>
             </ScrollViewer>
 

@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/enterPage.js"></script>
+</head>
+<body>
+    <div id="scenarioHeader">
+        <h2 id="sampleHeader">Description:</h2>
+        <div id="scenarioDescription">
+            Show page
+        </div>
+    </div>
+    <div id="input">
+        <p>
+        Use the Enter Page animation to bring the first page of an application on to the screen
+        or when transitioning to a new page (see the Transition between pages scenario).
+        The contents of the new page animate in sections as determined by the developer.
+        </p>
+
+        <label for="pageSectionsControl">Number of page sections that animate separately:</label>
+        <select id="pageSectionsControl">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option selected="selected" value="3">3</option>
+        </select>
+        <button id="runAnimation">Run animation</button>
+    </div>
+    <div id="output">
+        <p id="outputText" />
+    </div>
+</body>
+</html>

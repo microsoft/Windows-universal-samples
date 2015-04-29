@@ -1,0 +1,47 @@
+﻿#samplePageBody
+{
+    display:-ms-grid;
+    -ms-grid-columns: 350px auto;
+    -ms-grid-rows: auto auto;
+    height: 100%;
+    width: 100%;
+    overflow: visible;
+    padding-bottom:20px;
+}
+
+#samplePageSection1
+{
+    -ms-grid-row: 1; 
+    -ms-grid-column: 1; 
+    margin-right: 10px;
+    overflow: auto;   
+}
+
+#samplePageSection2
+{
+    -ms-grid-row: 1; 
+    -ms-grid-column: 2; 
+    margin-right: 10px;
+    max-width: 350px;
+    overflow: auto;    
+}
+
+@media screen and (max-width: 799px) 
+{   
+    #samplePageBody
+    {
+        -ms-grid-columns: 100%; 
+    }
+    
+    #samplePageSection1
+    {
+        -ms-grid-row: 1; 
+        -ms-grid-column: 1;
+    }
+
+    #samplePageSection2
+    {
+        -ms-grid-row: 2; 
+        -ms-grid-column: 1; 
+    }
+}

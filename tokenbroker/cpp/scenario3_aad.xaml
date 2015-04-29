@@ -1,0 +1,41 @@
+﻿<!-- Copyright (c) Microsoft. All rights reserved. -->
+<Page
+    x:Class="SDKTemplate.Scenario3_Aad"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario illustrates the use of WebAccountManager's RequestTokenAsync API to get a token for an AAD Account."/>
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Button x:Name="button_SignIn" Content="Sign In" Click="Button_SignIn_Click" Margin="0,10,0,0"/>
+                    <Button x:Name="button_GetTokenSilently" Content="Get Token Silently" Click="Button_GetTokenSilently_Click" Margin="0,10,0,0" IsEnabled="False"/>
+                    <Button x:Name="button_ManageAccounts" Content="Manage Signed In Accounts" Click="Button_ManageAccounts_Click" Margin="0,10,0,0" IsEnabled="False"/>
+                    <Button Content="Reset" Click="Button_Reset_Click" Margin="0,10,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" >
+                    <TextBlock x:Name="textblock_SignedInStatus" Foreground="Red" Text="Not signed in." FontSize="20"/>
+                    <ListView x:Name="listview_SignedInAccounts" FontSize="20" IsEnabled="False"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

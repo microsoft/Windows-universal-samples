@@ -2,7 +2,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -29,16 +29,22 @@
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                    Speech recognition with a custom SRGS/GRXML grammar.
+                    This sample showcases one-shot speech recognition using a custom SRGS/GRXML grammar.
                 </TextBlock>
             </StackPanel>
 
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel>
-                    <Button x:Name="btnMicrophone" Click="Microphone_Click" IsEnabled="False">
+                    <Button x:Name="btnRecognizeWithUI" Click="RecognizeWithUI_Click" IsEnabled="False">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="Microphone"/>
-                            <TextBlock x:Name="btnMicrophoneLabel" Text="Recognize"/>
+                            <TextBlock Text=" with UI"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnRecognizeWithoutUI" Click="RecognizeWithoutUI_Click" IsEnabled="False" Margin="0,10,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="Microphone"/>
+                            <TextBlock x:Name="listenWithoutUIButtonText" Text=" without UI"/>
                         </StackPanel>
                     </Button>
                     <Canvas Height="200" Width="200" HorizontalAlignment="Left" Margin="0,10,0,10">

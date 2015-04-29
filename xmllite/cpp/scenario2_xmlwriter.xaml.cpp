@@ -1,9 +1,18 @@
+//*********************************************************
+//
 // Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
 
 #include "pch.h"
 #include "Scenario2_XmlWriter.xaml.h"
 
-using namespace XmlLite;
+using namespace SDKTemplate::XmlLite;
 
 using namespace concurrency;
 using namespace Microsoft::WRL;
@@ -27,7 +36,7 @@ Scenario2::Scenario2() : rootPage(MainPage::Current)
     InitializeComponent();
 }
 
-void XmlLite::Scenario2::DoSomething_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario2::DoSomething_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     Button^ b = safe_cast<Button^>(sender);
     StorageFolder^ folder = Windows::Storage::ApplicationData::Current->LocalFolder;
@@ -40,7 +49,7 @@ void XmlLite::Scenario2::DoSomething_Click(Platform::Object^ sender, Windows::UI
             if (FAILED(hr))
             {
                 OutputTextBlock1->Text = L"Exception occured while writing the xml file, and the error code is " + hr.ToString();
-				rootPage->NotifyUser("Exception occured!", NotifyType::ErrorMessage);
+                rootPage->NotifyUser("Exception occured!", NotifyType::ErrorMessage);
             }
             else
             {
@@ -50,7 +59,7 @@ void XmlLite::Scenario2::DoSomething_Click(Platform::Object^ sender, Windows::UI
     });
 }
 
-HRESULT XmlLite::Scenario2::WriteXml(IRandomAccessStream^ randomAccessWriteStream)
+HRESULT Scenario2::WriteXml(IRandomAccessStream^ randomAccessWriteStream)
 {
     HRESULT hr = S_OK;
     ComPtr<IStream> writeStream;
@@ -102,7 +111,6 @@ HRESULT XmlLite::Scenario2::WriteXml(IRandomAccessStream^ randomAccessWriteStrea
     ChkHr(writer->WriteFullEndElement());
     ChkHr(writer->WriteWhitespace(L"\n"));
     ChkHr(writer->WriteEndDocument());
-    ChkHr(writer->Flush());
 
     return hr;
 }

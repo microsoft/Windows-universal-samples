@@ -2,7 +2,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -126,7 +126,7 @@
           <TextBlock Text="In order to improve the accuracy of the information displayed, we need your help to calibrate your device. Expand to see how." x:Name="CalibrationText" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"/>
           <Button x:Name="DismissPopup" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Content="Do not show again" Click="DismissPopup_Click"/>
         </Grid>
-        <Image x:Name="Guidance" Stretch="None" Source="Assets/mobius.png" Grid.Row="1" HorizontalAlignment="Center" Margin="20,20,20,20"/>
+        <Image x:Name="Guidance" Stretch="Uniform" Source="Assets/mobius.png" Grid.Row="1" HorizontalAlignment="Center" Margin="20,20,20,20" Width="400"/>
       </Grid>
     </Border>
   </Popup>

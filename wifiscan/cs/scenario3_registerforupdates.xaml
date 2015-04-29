@@ -1,0 +1,48 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="WiFiScan.Scenario3_RegisterForUpdates"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WiFiScan"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Display scan results from scans performed anywhere on the system. The networks will update automatically when scans are performed. This page displays scan results for the first adapter enumerated by your system only.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Name="Buttons">
+                    <Button Content="Register" Click="Button_Click_Register" Name="RegisterButton" IsEnabled="False"/>
+                    <Button Content="Unregister" Click="Button_Click_Unregister" Name="UnregisterButton" IsEnabled="False"/>
+                </StackPanel>
+            </ScrollViewer>
+            
+            <ScrollViewer MaxHeight="200" Grid.Row="2" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <TextBlock TextWrapping="Wrap" Name="ScenarioOutput"/>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

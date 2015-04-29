@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
+  <Identity Name="Microsoft.SDKSamples.WASAPIAudio.CPP" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.1" />
+  <mp:PhoneIdentity PhoneProductId="10583d1c-791b-4e79-a1db-322f1adba6ab" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Properties>
+    <DisplayName>WASAPI Audio CPP Sample</DisplayName>
+    <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+    <Logo>Assets\storeLogo-sdk.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10069.0" MaxVersionTested= "10.0.10069.0" />
+  </Dependencies>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="WASAPIAudio.App" Executable="$targetnametoken$.exe" EntryPoint="WASAPIAudio.App">
+      <uap:VisualElements DisplayName="WASAPI Audio CPP Sample" Square150x150Logo="Assets\squareTile-sdk.png" Square44x44Logo="Assets\smallTile-sdk.png" Description="WASAPI Audio CPP Sample" BackgroundColor="#00b2f0">
+        <uap:SplashScreen Image="Assets\splash-sdk.png" />
+        <uap:DefaultTile ShortName="WASAPIAudio CPP" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <uap:Capability Name="musicLibrary" />
+    <DeviceCapability Name="microphone" />
+  </Capabilities>
+</Package>

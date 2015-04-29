@@ -1,0 +1,95 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario2_MultipleScanners.css" />
+    <script src="/js/scenario2_MultipleScanners.js"></script>
+    <script src="/js/util.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>Creates two instances for the claimed device to illustrate the use of device Retain/Release functionality.</p>
+            </div>
+        </div>
+
+        <div id="scenarioContent">
+
+            <!-- Top row of table: instance control buttons -->
+            <div class="controlBox">
+                <div class="instanceControl">
+                    <center class="instanceHeader">Instance 1</center>
+                    <button class="scanButton" id="scenarioStartScanningInstance1">Start Scanning</button><br />
+                    <button class="scanButton" id="scenarioEndScanningInstance1">End Scanning</button>
+                </div>
+
+                <div class="instanceControl">
+                    <center class="instanceHeader">Instance 2</center>
+                    <button class="scanButton" id="scenarioStartScanningInstance2">Start Scanning</button><br />
+                    <button class="scanButton" id="scenarioEndScanningInstance2">End Scanning</button>
+                </div>
+            </div>
+
+            <!-- Data labels for instance 1 -->
+            <div class="labelBox">
+                <center class="instanceHeader">Instance 1</center>
+                <table>
+                    <tr>
+                        <td>Scan Data Type (Symbology):</td>
+                        <td id="scanDataType1">No Data</td>
+                    </tr>
+                    <tr>
+                        <td>Scan Data (Unformatted data):</td>
+                        <td id="scanData1">No Data </td>
+                    </tr>
+                    <tr>
+                        <td>Scan Data Label (Formatted data):</td>
+                        <td id="scanDataFormatted1">No Data</td>
+                    </tr>
+                    <tr>
+                        <td style="column-span:all"> <input type="checkbox" id="retain1" name="Retain1" checked="checked" /> Retain</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Data labels for instance 2 -->
+            <div class="labelBox">
+                <center class="instanceHeader">Instance 2</center>
+                <table>
+                    <tr>
+                        <td>Scan Data Type (Symbology):</td>
+                        <td id="scanDataType2">No Data</td>
+                    </tr>
+                    <tr>
+                        <td>Scan Data (Unformatted data):</td>
+                        <td id="scanData2">No Data </td>
+                    </tr>
+                    <tr>
+                        <td>Scan Data Label (Formatted data):</td>
+                        <td id="scanDataFormatted2">No Data</td>
+                    </tr>
+                    <tr>
+                        <td style="column-span:all"> <input type="checkbox" id="retain2" name="Retain2" checked="checked" /> Retain</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

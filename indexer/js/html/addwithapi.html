@@ -1,0 +1,33 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/helperFunctions.js"></script>
+    <script src="/js/addWithAPI.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>The ContentIndexer allows you to add information to the Windows Search Index.  You can use any known Windows Properties.  This example shows how to use the Name, Keywords, and Comment properties, as well as how to add content to be indexed.</p>
+        <p>In addition, a language may be specified by entering a BCP-47 language code.  When entered, this sample will index the properties using that language information.  Specifying the language ensures that things like spaces and punctuation will be properly handled for the content.  If the language is not known, it is recommended to not specify it.  The indexer will attempt to analyze the text in these cases and programmatically specify the language.</p>
+        Item Key:
+        <input type="text" style="width: 400px" id="itemKeyInput" maxlength="256" value="TestKey" /><br />
+        Name:
+        <input type="text" style="width: 400px" id="nameInput" maxlength="256" value="Test Name" /><br />
+        Keywords:
+        <input type="text" style="width: 400px" id="keywordsInput" maxlength="256" value="keyword1; keyword2; keyword3" /><br />
+        Comment:
+        <input type="text" style="width: 400px" id="commentInput" maxlength="256" value="This is a test comment" /><br />
+        Content:
+        <input type="text" style="width: 400px" id="contentInput" maxlength="256" value="This is test content." /><br />
+        Language:
+        <input type="text" style="width: 400px" id="languageInput" maxlength="256" value="en-US" /><br />
+        <button id="addToIndex">Add to index</button><br /><br />
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+    </div>
+</body>
+</html>

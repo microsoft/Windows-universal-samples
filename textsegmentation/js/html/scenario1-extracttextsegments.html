@@ -1,0 +1,39 @@
+﻿<!--
+Copyright (c) Microsoft. All rights reserved.
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario1-ExtractTextSegments.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>For any text, it is possible to find the bounds between segments in that text. The most commonly desired segments are 'word' and 'selection' segments. Word Segments represent language-specific words in the text. Selection segments are similar to word segments, but represent the bounds between active selections (ie, if you were actively selecting this text, the bounds would identify where the selection would snap to).</p>
+
+                <p>Both word and selection segments are language-specific, and employ that language's word breaking logic to identify these segments within the text. A language tag is recommended to specify the language-behavior rules to use; if no language tag is provided, language-neutral word-breaking rules will be used.</p>
+
+                <p>This scenario will allow you to enter in a string of text, and see the word and selection segments printed out. In the case that alternate woreds are available from the system word breaker, alternates will be printed out underneath their corresponding words. (Selection segments do not have alternate forms).</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <div>
+                <label>Input String: </label>
+                <input type="text" id="inputStringBox" value="" tabindex="1" style="width: 70%"/>
+            </div>
+            <div>
+                <label>Language Tag: </label>
+                <input type="text" id="languageTagBox" tabindex="2" style="width: 200px" />
+            </div>
+            <div>
+                <button id="WordSegmentButton">Word Segments</button>
+                <button id="SelectionSegmentButton">Selection Segments</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

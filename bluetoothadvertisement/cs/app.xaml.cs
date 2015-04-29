@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -25,7 +25,6 @@ namespace SDKTemplate
     /// </summary>
     sealed partial class App : Application
     {
-        public LaunchActivatedEventArgs LaunchArgs;
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -43,7 +42,6 @@ namespace SDKTemplate
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            this.LaunchArgs = e;
 
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)

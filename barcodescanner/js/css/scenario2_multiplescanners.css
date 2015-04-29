@@ -1,0 +1,38 @@
+﻿/**********************************************************
+
+ Copyright (c) Microsoft. All rights reserved.
+ This code is licensed under the MIT License (MIT).
+ THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+ ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+ IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+
+**********************************************************/
+
+
+.labelBox {
+    border: 1px solid gray;
+    margin: 5px 5px 5px 0px;
+    float:left;
+    clear:left;
+}
+
+.instanceControl {
+    float:left;
+    border: 1px solid gray;
+    padding: 5px;
+    margin: 5px 5px 5px 0px;
+}
+
+.scanButton {
+    margin: 5px;
+}
+
+.controlBox {
+    float:left;
+    clear:left;
+}
+
+#scenarioContent {
+    overflow:hidden;
+}

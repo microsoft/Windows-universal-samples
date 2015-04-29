@@ -1,0 +1,56 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<local:SharePage
+    x:Class="SDKTemplate.SetErrorMessage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="400">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+            
+        <StackPanel Margin="0,0,0,10" Grid.Row="0">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="Fail with display text" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}">
+                    If the user uses a keyboard shortcut to share when your app is not able to support share,
+                    you can provide a failure message that will be displayed in the share pane.
+                    This message should help the user understand why they cannot share and what they need to do to complete their task.
+                    You do not need to use this message if your app never supports share.
+                    Windows provides a default message for that case.
+                    (This sample has an explicit Share button in order to illustrate the scenario.
+                    A typical app would hide or disable the Share button when it had nothing to share.)
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Text="Choose the failure display text"/>
+                <TextBox x:Name="CustomErrorText" HorizontalAlignment="Stretch" Height="100" TextWrapping="Wrap" AcceptsReturn="True"
+                    Text="You have selected too many images. Select fewer than 50 images and then try again."
+                    Margin="0,0,0,10"
+                    AutomationProperties.AutomationId="FailureDisplayText"/>
+                <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch" Style="{StaticResource BasicTextStyle}" Text="When share is invoked, the above display text will be shown."/>
+                <Button x:Name="ShowUIButton" Content="Share" Click="ShowUIButton_Click"
+                        AutomationProperties.AutomationId="ShareButton"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</local:SharePage>

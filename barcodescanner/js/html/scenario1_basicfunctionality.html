@@ -1,0 +1,56 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1_BasicFunctionality.css" />
+    <script src="/js/scenario1_BasicFunctionality.js"></script>
+    <script src="/js/util.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>Registers an event listener for barcode scanner data and displays the data values as they are reported.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <button id="scenarioStartScanButton">Start Scanning</button>
+            <button id="scenarioEndScanButton">End Scanning</button>
+            <br />
+            <br />
+
+            <div>
+                <table>
+                    <tr>
+                        <td>Scan Data Type (Symbology):</td>
+                        <td id="scenarioOutputScanDataType">No Data</td>
+                    </tr>
+                    <tr>
+                        <td>Scan Data (Unformatted data):</td>
+                        <td id="scenarioOutputScanData">No Data </td>
+                    </tr>
+                    <tr>
+                        <td>Scan Data Label (Formatted data):</td>
+                        <td id="scenarioOutputScanDataFormatted">No Data</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

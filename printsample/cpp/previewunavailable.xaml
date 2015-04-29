@@ -1,0 +1,40 @@
+﻿<!-- Copyright (c) Microsoft. All rights reserved. -->
+
+<Page
+    x:Class="SDKTemplate.PreviewUnavailable"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="BorderStyle" TargetType="Rectangle">
+            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="StrokeThickness" Value="3"/>
+            <Setter Property="StrokeDashArray" Value="3,3"/>
+            <Setter Property="Margin" Value="15,15,15,15"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+        </Style>
+        <Style x:Key="PreviewUnavailableMessageStyle" TargetType="RichTextBlock">
+            <Setter Property="FontSize" Value="48"></Setter>
+            <Setter Property="FontWeight" Value="SemiLight"></Setter>
+            <Setter Property="FontFamily" Value="Segoe UI"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid x:Name="Page" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="PrintablePage" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid x:Name="PageContent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <RichTextBlock Style="{StaticResource PreviewUnavailableMessageStyle}" x:Name="text">
+                    <Paragraph>Preview unavailable</Paragraph>
+                </RichTextBlock>
+            </Grid>
+            <Rectangle x:Name="Border" Style="{StaticResource BorderStyle}"></Rectangle>
+        </Grid>
+    </Grid>
+</Page>

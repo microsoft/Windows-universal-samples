@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -62,7 +62,6 @@ void Scenario4_BackgroundActivity::OnNavigatedTo(NavigationEventArgs^ e)
 /// <param name="e"></param>
 void Scenario4_BackgroundActivity::ScenarioRegisterTask(Object^ sender, RoutedEventArgs^ e)
 {
-#if WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
     create_task(BackgroundExecutionManager::RequestAccessAsync()).then([this](BackgroundAccessStatus status){
 
         if ((BackgroundAccessStatus::AllowedWithAlwaysOnRealTimeConnectivity == status) ||
@@ -75,9 +74,6 @@ void Scenario4_BackgroundActivity::ScenarioRegisterTask(Object^ sender, RoutedEv
             rootPage->NotifyUser("Background tasks may be disabled for this app", NotifyType::ErrorMessage);
         }
     });
-#else
-    RegisterBackgroundTask();
-#endif
 }
 
 /// <summary>
@@ -162,7 +158,7 @@ void Scenario4_BackgroundActivity::UpdateUIAsync(String^ status)
             {
                 ScenarioRegisterTaskButton->IsEnabled = !registered;
                 ScenarioUnregisterTaskButton->IsEnabled = registered;
-                ScenarioOutput_TaskStatus->Text = status;
+                ScenarioOutput_TaskRegistration->Text = status;
 
                 auto settings = ApplicationData::Current->LocalSettings;
 
@@ -172,8 +168,7 @@ void Scenario4_BackgroundActivity::UpdateUIAsync(String^ status)
                 }
                 if (settings->Values->HasKey("TaskStatus"))
                 {
-                    ScenarioOutput_TaskStatus->Text += ", Background status: " +
-                        safe_cast<String^>(settings->Values->Lookup("TaskStatus")); // stored as a string
+                    ScenarioOutput_TaskStatus->Text = safe_cast<String^>(settings->Values->Lookup("TaskStatus")); // stored as a string
                 }
                 if (settings->Values->HasKey("LastActivity"))
                 {

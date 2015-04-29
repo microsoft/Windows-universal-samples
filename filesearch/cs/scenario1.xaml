@@ -1,0 +1,49 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+                    Applications often need to search locations for files that match a certain criteria.
+                    Advanced Query Syntax (AQS) is used to retrieve targeted results based on keywords or other search parameters.
+                    Enter an AQS query below to search the
+                    <Run Text="Music library" FontWeight="Bold"/>
+                    for matching items.
+                    <LineBreak/>
+                    <LineBreak/>
+                    Example Queries:
+                    <LineBreak/>
+                    song
+                    <LineBreak/>
+                    size:&gt;1MB
+                </TextBlock>
+
+                <VariableSizedWrapGrid x:Name="QueryStackPanel" Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBox x:Name="InputTextBox" IsReadOnly="false" Width="230" Margin="0,10,10,0" TextWrapping="Wrap" HorizontalAlignment="Left"/>
+                    <Button x:Name="SearchButton" Content="Search" Margin="0,10,10,0"/>
+                </VariableSizedWrapGrid>
+
+                <TextBlock x:Name="OutputTextBlock" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

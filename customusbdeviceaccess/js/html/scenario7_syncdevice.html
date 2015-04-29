@@ -1,0 +1,45 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario7_syncDevice.css" />
+    <script src="/js/scenario7_syncDevice.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Sync Device</h2>
+        </div>
+        <div id="scenarioContent">
+
+            <div data-win-control="SdkSample.ScenarioInput">
+                <div class="deviceScenarioContainer">
+                    <div class="generalScenario">
+                        <p>
+                            This scenario shows how to sync with the device (the sample only demonstrates writing, for more information on reading a writing
+                            to the device, please go to the "Bulk Pipes" scenario). The device must be closed by the app so that the background task can later open the device
+                            and sync with it. Other scenarios (except for scenario 1) will not work until the sync is complete and the device is reopened.
+                        </p>
+                        <button id="buttonSync">Sync with the device</button>
+                        <br />
+                        <button id="buttonCancelSync">Cancel sync with the device</button>
+                        <br />
+                        <p>
+                            Sync progress:<br />
+                            <progress max="100" style="width: 500px;" value="0" id="syncProgressBar"></progress>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div data-win-control="SdkSample.ScenarioOutput">
+
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

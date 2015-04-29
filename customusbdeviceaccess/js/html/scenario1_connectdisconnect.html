@@ -1,0 +1,55 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1_connectDisconnect.css" />
+
+    <!-- Custom Usb Device Access Sample Framework is loaded here because this page always loads before any other scenarios -->
+    <script src="/js/constants.js"></script>
+    <script src="/js/utilities.js"></script>
+    <script src="/js/deviceListEntry.js"></script>
+    <script src="/js/eventHandlerForDevice.js"></script>
+
+    <script src="/js/scenario1_connectDisconnect.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Device Selection</h2>
+        </div>
+        <div id="scenarioContent">
+
+            <p>
+                This scenario shows how to locate a WinUSB device and open an handle to the device.<br />
+                Note: Sample will automatically attempt to reconnect to your device if the connected device was ever unplugged and replugged into the same USB port.
+                If the device is plugged into a different port, it will be seen as a different device.
+            </p>
+            <span>
+                <button id="buttonConnectToDevice">Connect to device</button>
+                <button id="buttonDisconnectFromDevice">Disconnect from device</button>
+            </span>
+            <p>Select a Usb Device:</p>
+            <div id="deviceListTemplate" data-win-control="WinJS.Binding.Template">
+                <span data-win-bind="textContent: instanceId"></span>
+            </div>
+            <div id="deviceListView" data-win-control="WinJS.UI.ListView" data-win-options="{
+            itemDataSource: deviceList.dataSource,
+            itemTemplate: select('#deviceListTemplate'),
+            selectionMode: 'single',
+            tapBehavior: 'directSelect',
+            layout : {type: WinJS.UI.ListLayout}}">
+            </div>
+            <br /><br />
+
+            <div data-win-control="SdkSample.ScenarioOutput">
+
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

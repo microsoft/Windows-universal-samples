@@ -1,0 +1,99 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the Microsoft Public License.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AudioCreation.Scenario2_DeviceCapture"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AudioCreation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+			<VisualStateGroup>
+				<VisualState>
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowWidth="0"/>
+					</VisualState.StateTriggers>
+					<VisualState.Setters>
+                        <Setter Target="inputDeviceContainer.(RelativePanel.Below)" Value="outputDevicesListBox" />
+                        <Setter Target="audioPipe1.(RelativePanel.RightOf)" Value="inputDeviceContainer" />
+                        <Setter Target="audioPipe2.(RelativePanel.RightOf)" Value="inputDeviceContainer" />
+                        <Setter Target="audioPipe1.(RelativePanel.AlignVerticalCenterWith)" Value="inputDeviceContainer" />
+                        <Setter Target="audioPipe2.(RelativePanel.AlignVerticalCenterWith)" Value="inputDeviceContainer" />
+
+                        <Setter Target="outputDeviceContainer.(RelativePanel.RightOf)" Value="audioPipe1" />
+                        <Setter Target="fileButton.(RelativePanel.RightOf)" Value="audioPipe1" />
+
+                        <Setter Target="fileButton.(RelativePanel.Below)" Value="outputDeviceContainer" />
+                        <Setter Target="fileButton.(RelativePanel.AlignLeftWith)" Value="outputDeviceContainer" />
+                        
+                        <Setter Target="recordStopButton.(RelativePanel.Below)" Value="inputDeviceContainer" />
+                        <Setter Target="recordStopButton.(RelativePanel.AlignHorizontalCenterWith)" Value="audioPipe1" />
+                        <Setter Target="createGraphButton.(RelativePanel.Below)" Value="recordStopButton" />
+                        <Setter Target="createGraphButton.(RelativePanel.AlignHorizontalCenterWith)" Value="recordStopButton" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario shows using AudioGraph for audio capture from a microphone with low latency. The captured signal is also monitored through a user-selected output device." />
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <RelativePanel HorizontalAlignment="Stretch">
+                    <ListBox x:Name="outputDevicesListBox" IsEnabled="True" Margin="0,20,15,20" HorizontalAlignment="Stretch" MaxWidth="600" SelectionChanged="outputDevicesListBox_SelectionChanged"/>
+                    <Border x:Name="inputDeviceContainer" BorderThickness="0" Background="#4A4A4A" Margin="0,67,0,0" MinWidth="120" MinHeight="45">
+                        <TextBlock Text="Input Device" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    </Border>
+                    <Rectangle x:Name="audioPipe1" Margin="0,67,0,0" Height="10" MinWidth="150" Fill="#313131" HorizontalAlignment="Stretch">
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="-18" />
+                                <SkewTransform AngleX="-18" />
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle x:Name="audioPipe2" Margin="0,67,0,0" Height="10" MinWidth="150" Fill="#313131" HorizontalAlignment="Stretch">
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="18" />
+                                <SkewTransform AngleX="18" />
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+
+                    <Border x:Name="outputDeviceContainer" BorderThickness="0" Background="#4A4A4A" Margin="8,150,0,0" MinWidth="120" MinHeight="45">
+                        <TextBlock x:Name="outputDevice" Text="Output Device" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#6E6E6E" />
+                    </Border>
+                    <!--<Button x:Name="deviceButton" Content="Output Device" Margin="8,150,0,0" MinWidth="120" MinHeight="45" IsEnabled="False"/>-->
+                    <Button x:Name="fileButton" Content="Pick Output File" Margin="8,45,0,0" MinWidth="120" MinHeight="45" IsEnabled="False" Click="FileButton_Click" />
+                    <Button x:Name="recordStopButton" Content="Record" Click="RecordStopButton_Click" Margin="0,75,0,0" MinWidth="120" MinHeight="45" IsEnabled="False"/>
+                    <Button x:Name="createGraphButton" Content="Create Graph" Click="CreateGraphButton_Click" Margin="0,30,0,0" MinWidth="120" MinHeight="45" IsEnabled="False"/>
+                </RelativePanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

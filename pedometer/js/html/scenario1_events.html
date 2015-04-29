@@ -1,0 +1,64 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1_Events.css" />
+    <script src="/js/scenario1_Events.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <div id="scenarioDescription">
+                <p>This page illustrates the Pedometer's 'ReadingChanged' event usage on default Pedometer. Use the button below to register and unregister for the Pedometer events.</p>
+                <br />
+                <br />
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <button class="action" id="registerReadingChanged">Register ReadingChanged</button>
+            <br />
+            <br />
+            Timestamp : <a id="readingTimeStamp">No Data</a>
+            <br />
+            Total Step Count : <a id="totalStepsCount">No Data</a>
+            <br />
+            <br />
+            <table border="0" style="width:auto">
+                <tr>
+                    <td width="80px">Step Type</td>
+                    <td width="160px">Cumulative Step Count</td>
+                    <td>Cumulative Step Duration (in ms)</td>
+                </tr>
+                <tr>
+                    <td>Unknown</td>
+                    <td id="unknownCount"> No Data</td>
+                    <td id="unknownDuration"> No Data</td>
+                </tr>
+                <tr>
+                    <td>Walking</td>
+                    <td id="walkingCount"> No Data</td>
+                    <td id="walkingDuration"> No Data</td>
+                </tr>
+                <tr>
+                    <td>Running</td>
+                    <td id="runningCount"> No Data</td>
+                    <td id="runningDuration"> No Data</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

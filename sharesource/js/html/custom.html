@@ -1,0 +1,35 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/common.css" />
+    <script src="/js/custom.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">Share custom data</div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                Data in custom formats can be shared with target applications that support them. In this example, we share data about a book
+                in JSON microdata format. A supported target app, such as the Share Target sample, must be installed in order to have a place to send the data.
+            </p>
+            <p>Data Package Title:</p>
+            <input class="text-box" id="titleInputBox" value="The Catcher in the Rye" />
+            <p>Data Package Description:</p>
+            <input class="text-box" id="descriptionInputBox" value="My favorite book" />
+            <p>Custom Data Format Id:</p>
+            <input class="text-box" id="dataFormatInputBox" value="http://schema.org/Book" />
+            <p>Custom Data Format Value:</p>
+            <textarea class="text-box" id="customData" rows="10"></textarea>
+            <p><button id="shareButton">Share</button></p>
+        </div>
+    </div>
+</body>
+</html>

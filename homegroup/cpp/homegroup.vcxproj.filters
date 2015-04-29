@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>80bfd669-aa83-4537-9611-027cffe0d8af</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{c6978fb6-bc64-498d-97c8-f5b53997e54e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.xaml.cpp" />
+    <ClCompile Include="MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="HomeGroupAdvancedSearch.xaml.cpp" />
+    <ClCompile Include="HomeGroupPickerScenario.xaml.cpp" />
+    <ClCompile Include="HomeGroupVideoStream.xaml.cpp" />
+    <ClCompile Include="SearchHomeGroup.xaml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="App.xaml.h" />
+    <ClInclude Include="MainPage.xaml.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="HomeGroupAdvancedSearch.xaml.h" />
+    <ClInclude Include="HomeGroupPickerScenario.xaml.h" />
+    <ClInclude Include="HomeGroupVideoStream.xaml.h" />
+    <ClInclude Include="SearchHomeGroup.xaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MainPage.xaml" />
+    <Page Include="Styles\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+    <Page Include="HomeGroupAdvancedSearch.xaml" />
+    <Page Include="HomeGroupPickerScenario.xaml" />
+    <Page Include="HomeGroupVideoStream.xaml" />
+    <Page Include="SearchHomeGroup.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\smallTile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\squareTile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\storeLogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
