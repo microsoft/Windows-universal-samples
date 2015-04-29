@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>ee43a968-4d41-4c1d-a67b-c444bf66c635</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{2e2e3d63-8582-4905-ad12-2e62157fc33e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ViewModels">
+      <UniqueIdentifier>{0e67a298-10b9-4e5f-8f5d-605a0013e1a7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Item.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemsDataSource.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemViewModel.cpp">
+      <Filter>ViewModels</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterDetailPage.xaml.cpp" />
+    <ClCompile Include="DetailPage.xaml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="App.xaml.h" />
+    <ClInclude Include="Item.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsDataSource.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemViewModel.h">
+      <Filter>ViewModels</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterDetailPage.xaml.h" />
+    <ClInclude Include="DetailPage.xaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Styles.xaml" />
+    <Page Include="MasterDetailPage.xaml" />
+    <Page Include="DetailPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
