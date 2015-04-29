@@ -1,0 +1,51 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario4"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,10,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="Input" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+                Obtain a thumbnail for a file-system folder that contains pictures (the folder can't be a library).
+                <LineBreak/>
+                Please click the button below to pick a folder and obtain the thumbnail.
+            </TextBlock>
+            <Button x:Name="GetThumbnailButton" Grid.Row="1" Content="Get Thumbnail" Margin="0,0,10,0"/>
+        </Grid>
+
+        <Grid x:Name="Output" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Image x:Name="ThumbnailImage" Grid.Row="0" Stretch="None"  Margin="0,10,0,10" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="OutputTextBlock" Grid.Row="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left"/>
+        </Grid>
+
+    </Grid>
+</Page>

@@ -1,0 +1,37 @@
+﻿<!--
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/other.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>Your application can register for clipboard update notifications to decide whether to enable Paste operation. Updates occur any time user copies something onto clipboard, or when it's emptied. In this scenario, you will see a list of all available formats on clipboard. If check box is checked, the list will appear automatically whenever clipboard update notification is received. Otherwise, use "Show clipboard formats" button.</p>
+        <p>
+            <label> <input type="checkbox" id="scenario4Register"/>Register Clipboard Content Change</label>
+        </p>
+        <button id="scenario4Show" class="action">
+            Show clipboard formats</button>
+        <button id="scenario4Empty" class="action">
+            Empty clipboard</button>
+        <button id="scenario4Clear" class="action">
+            Clear Output</button>
+        <br /><br />
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <div id="scenario4UpdateStatus">
+        </div>
+        <div id="scenario4FormatList">
+        </div>
+    </div>
+</body>
+</html>

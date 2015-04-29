@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -41,7 +41,6 @@ namespace GeolocationCS
                                                     // stored as a JSON string can fit in 8K (max allowed for local settings)
 
         private CancellationTokenSource _cts = null;
-        private Geolocator geolocator = null;
         private IList<Geofence> geofences = new List<Geofence>();
         private ObservableCollection<GeofenceItem> geofenceCollection = null;
         private ObservableCollection<string> eventCollection = null;
@@ -77,9 +76,6 @@ namespace GeolocationCS
                 // using data binding to the root page collection of GeofenceItems associated with events
                 GeofenceEventsListBox.DataContext = eventCollection;
 
-                FillRegisteredGeofenceListBoxWithExistingGeofences();
-                FillEventListBoxWithExistingEvents();
-
                 coreWindow = CoreWindow.GetForCurrentThread(); // this needs to be set before InitializeComponent sets up event registration for app visibility
                 coreWindow.VisibilityChanged += OnVisibilityChanged;
             }
@@ -100,15 +96,14 @@ namespace GeolocationCS
             switch (accessStatus)
             {
                 case GeolocationAccessStatus.Allowed:
-                    geolocator = new Geolocator();
                     geofences = GeofenceMonitor.Current.Geofences;
+
+                    FillRegisteredGeofenceListBoxWithExistingGeofences();
+                    FillEventListBoxWithExistingEvents();
 
                     // register for state change events
                     GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
                     GeofenceMonitor.Current.StatusChanged += OnGeofenceStatusChanged;
-
-                    //register for status change to get notification if location is disabled
-                    geolocator.StatusChanged += OnStatusChanged;
                     break;
 
                 case GeolocationAccessStatus.Denied:
@@ -225,36 +220,7 @@ namespace GeolocationCS
                 }
             });
         }
-
-        /// <summary>
-        /// Event handler for StatusChanged events. It is raised when the 
-        /// location status in the system changes.
-        /// </summary>
-        /// <param name="sender">Geolocator instance</param>
-        /// <param name="e">Statu data</param>
-        async private void OnStatusChanged(Geolocator sender, StatusChangedEventArgs e)
-        {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                switch (e.Status)
-                {
-                    case PositionStatus.Disabled:
-                        // The permission to access location data is denied by the user or other policies.
-                        _rootPage.NotifyUser("Access to location is denied.", NotifyType.ErrorMessage);
-                        break;
-
-                    case PositionStatus.NotAvailable:
-                        // The location platform is not available on this version of the OS.
-                        _rootPage.NotifyUser("Location is not available on this version of the OS.", NotifyType.ErrorMessage);
-                        break;
-
-                    default:
-                        _rootPage.NotifyUser(string.Empty, NotifyType.StatusMessage);
-                        break;
-                }
-            });
-        }
-
+        
         /// <summary>
         /// This method removes the geofence from the client side geofences collection
         /// </summary>

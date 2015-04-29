@@ -1,0 +1,12 @@
+﻿.listItem
+{
+    background: #336699;
+    height: 50px;
+    width: 120px;
+    margin: 0px 20px 20px 20px;
+}
+
+#errorMessage
+{
+    color: #f00;
+}

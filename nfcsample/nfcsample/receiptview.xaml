@@ -1,0 +1,46 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="NfcSample.ReceiptView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NfcSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Margin="10" FontSize="25" x:Name="lblResult" />
+
+            <TextBlock Grid.Row="1" HorizontalAlignment="Center" MinHeight="100" VerticalAlignment="Bottom" x:Name="lblIcon" FontFamily="Segoe UI Symbol" FontSize="70" FontWeight="Bold" />
+
+            <TextBlock Grid.Row="2" Margin="20" FontSize="23" x:Name="lblStatus" TextWrapping="WrapWholeWords" />
+            <TextBox Grid.Row="3" x:Name="txtDebugLog" FontSize="21" Visibility="Collapsed" AcceptsReturn="True" IsReadOnly="True" />
+            <Button Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Debug Log" x:Name="btnDebugLog" Click="btnDebugLog_Click" />
+            <Button Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Main Menu" x:Name="btnMainMenu" Click="btnMainMenu_Click" />
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

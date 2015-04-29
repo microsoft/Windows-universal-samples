@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -171,18 +171,7 @@ namespace BackgroundTransfer
             // downloads in the list for power saving reasons.
             // Use this API with caution since it not only may reduce battery life, but it may show a prompt to
             // the user.
-            UnconstrainedTransferRequestResult result;
-            try
-            {
-                result = await BackgroundDownloader.RequestUnconstrainedDownloadsAsync(requestOperations);
-            }
-            catch (NotImplementedException)
-            {
-                rootPage.NotifyUser(
-                    "BackgroundDownloader.RequestUnconstrainedDownloadsAsync is not supported in Windows Phone.",
-                    NotifyType.ErrorMessage);
-                return;
-            }
+            UnconstrainedTransferRequestResult result = await BackgroundDownloader.RequestUnconstrainedDownloadsAsync(requestOperations);
 
             Log(String.Format(CultureInfo.CurrentCulture, "Request for unconstrained downloads has been {0}",
                 (result.IsUnconstrained ? "granted" : "denied")));

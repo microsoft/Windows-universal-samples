@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>024ba8d4-51a6-4164-82af-cefe0fb656b6</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{20d2445c-4da4-49fb-b9a7-43100712225a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="BasicReaderWriter.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceResources.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleOverlay.cpp" />
+    <ClCompile Include="CustomComputeShaderMain.cpp" />
+    <ClCompile Include="CustomComputeShaderRenderer.cpp" />
+    <ClCompile Include="DftEffect.cpp" />
+    <ClCompile Include="DftTransform.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="App.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="BasicReaderWriter.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceResources.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXHelper.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleOverlay.h" />
+    <ClInclude Include="CustomComputeShaderMain.h" />
+    <ClInclude Include="CustomComputeShaderRenderer.h" />
+    <ClInclude Include="DftEffect.h" />
+    <ClInclude Include="DftTransform.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="DFT_V_CS4.hlsl" />
+    <FxCompile Include="DFT_V_CS5.hlsl" />
+    <FxCompile Include="DFT_H_CS4.hlsl" />
+    <FxCompile Include="DFT_H_CS5.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\mammoth.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\windowstitle-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

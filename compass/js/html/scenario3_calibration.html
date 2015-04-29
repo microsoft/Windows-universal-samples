@@ -1,0 +1,36 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario3_Calibration.css" />
+    <script src="/js/scenario3_Calibration.js"></script>
+    <script src="/js/calibrationBar.js"></script>
+</head>
+<body>
+    <div>
+        <p>Simulates the current sensor accuracy. Setting to 'Unreliable' will invoke the calibration bar until accuracy improves or 30 seconds passes. The calibration bar will not be shown again for at least 5 minutes, even when accuracy returns to 'Unreliable'.</p>
+        <p>Heading accuracy: </p>
+        <input type="radio" id="accuracyHighRadio" name="accuracyRadio" /><label for="accuracyHigh">High</label>
+        <br /> 
+        <input type="radio" id="accuracyApproximateRadio" name="accuracyRadio" /><label for="accuracyApproximate">Approximate</label>
+        <br /> 
+        <input type="radio" id="accuracyUnreliableRadio" name="accuracyRadio" /><label for="accuracyUnreliable">Unreliable</label>
+        <br /> 
+    </div>
+    <div id="calibrationBarControl" data-win-control="CalibrationControls.CalibrationBar">
+    </div>
+</body>
+</html>
+-

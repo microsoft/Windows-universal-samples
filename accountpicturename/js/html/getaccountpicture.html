@@ -1,0 +1,37 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/getAccountPicture.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>Get the Account Picture for the current user. You can get request three different types: small, large, and video. If the size that is requested is not available an empty file is returned.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <button id="getSmallImage" style="margin: 4px">
+                Get Small Image
+            </button>
+            <button id="getLargeImage" style="margin: 4px">
+                Get Large Image
+            </button>
+            <button id="getVideo" style="margin: 4px">
+                Get Video
+            </button>
+            <div>
+                <img class="imageHolder" style="vertical-align" id="smallImageHolder" alt="image holder" width="96" height="96" />
+                <img class="imageHolder" id="largeImageHolder" alt="image holder" width="300" height="300" />
+                <video id="videoHolder" controls width="300" height="300"></video>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

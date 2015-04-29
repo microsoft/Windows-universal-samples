@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario6.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>This example shows how an app can use the File API to get a scaled image of any size for a picture
+           in the fastest way possible. In some cases, this will include contacting cloud services to get
+           thumbnails. Please enter the desired size and click the button below to get an image.</p>
+        <input id="picture-thumb-fastThumbnail" type="checkbox" />
+        <label for="picture-thumb-fastThumbnail">Return fast thumbnail only (could be lower quality)</label>
+        <div class="option">
+            <label for="picture-thumb-requestSize">Size (pixels):</label>
+            <input id="picture-thumb-requestSize" type="number"/>
+        </div>
+        <button class="action" id="picture-thumb-start">Select Image</button>
+        <br /><br />
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <img class="imageHolder" id="picture-thumb-imageHolder" alt="image holder" src="/images/placeholder-sdk.png"/>
+        <p id="picture-thumb-detailedStatus" class="status">
+            <span id="picture-thumb-modeName"></span>
+            <span id="picture-thumb-fileName"></span>
+            <span id="picture-thumb-requestedSize"></span>
+            <span id="picture-thumb-returnedSize"></span>
+        </p>
+    </div>
+</body>
+</html>

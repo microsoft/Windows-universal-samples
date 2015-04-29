@@ -1,0 +1,43 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario7.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>To list all smart cards, click List Smart Cards.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <button id="ListSmartCards">List Smart Cards</button><br />
+            <!-- Simple template for the ListView instantiation  -->
+            <div id="ListItemTemplate" data-win-control="WinJS.Binding.Template">
+                <div class="smallListIconTextItem">
+                    <div class="smallListIconTextItem-Detail">
+                        <h4 data-win-bind="innerText: title"></h4>
+                        <h6 data-win-bind="innerText: text"></h6>
+                    </div>
+                </div>
+            </div>
+            <div id="ItemListView"
+                 class="box win-selectionstylefilled itemListView"
+                 data-win-control="WinJS.UI.ListView"
+                 data-win-options="{
+                itemTemplate: select('#ListItemTemplate'),
+                tapBehavior: 'none',
+                swipeBehavior: 'none',
+                layout: { type: WinJS.UI.ListLayout }
+            }">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

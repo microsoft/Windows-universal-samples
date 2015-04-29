@@ -1,0 +1,17 @@
+﻿#box1
+{
+    width: 200px;
+    height: 100px;
+    background: #808080;
+    position: relative;
+    top: 50px;
+}
+
+#box2
+{
+    width: 200px;
+    height: 100px;
+    background: #808080;
+    position: relative;
+    top: 60px;
+}

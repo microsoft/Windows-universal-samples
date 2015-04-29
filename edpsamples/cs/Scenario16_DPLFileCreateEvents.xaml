@@ -1,0 +1,68 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the Microsoft Public License.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="EdpSample.Scenario16_DPLCreateFileEvents"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EdpSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Name="ScenarioText" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    <LineBreak/>
+                    As part of the Data Protection under Lock (DPL) feature in EDP, encryption keys required to access protected resources are 
+                    temporarily removed from device memory when the device is locked. This prevents data leaks if the device is lost. The feature 
+                    also removes keys associated with protected files when their handles are closed. It is, however, possible to create new protected 
+                    files during the lock window (time between device being locked and unlocked) and access them while keeping the file handle open.
+                    CreateProtectedAndOPenAsync API can be used to create a protected file and write to it under Lock.
+                    <LineBreak/>
+                    An application that is designed to handle enterprise data must make sure that it does not keep any sensitive data in memory. 
+                    To ensure this, it registers for the ProtectedAccessSuspending and ProtectedAccessResumed events to be notified when the device is 
+                    locked or unlocked. ProtectedAccessSuspending will be fired before data protection keys provisioned on the device are temporarily removed. 
+                    These keys are removed when the device is locked in order to prevent unauthorized access to encrypted data while the device is locked. 
+                    ProtectedAccessResumed will be fired once the keys are available again upon device unlock. When the device is locked, the app makes sure that 
+                    it protects any sensitive content in memory with the DataProtectionManager. It also closes open file handles to its protected files to ensure 
+                    that the system does not cache any sensitive data in the memory.
+
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <!-- Place scenario content here -->
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock  TextWrapping="Wrap" Width="600"  HorizontalAlignment="Left" TextAlignment="Left">    
+                       <LineBreak/>Register a back ground task that will kick off when the user is Away and remain running for about a minute.
+                        The task creates a protected file under lock also listens to DPL events. Lock your screen and task will kick off. You can lock and unlock
+                        your device to notice DPL events firing. Files including a log file are written at the application data location. 
+                    </TextBlock>
+                    <Button Margin="10" Name="RegisterBtn" Content="Register Background Task" Click="Register_Click"/>
+                    <Button Margin="10" Name="UnResgisterBtn" Content="UnRegister Background Task" Click="UnRegister_Click"/>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

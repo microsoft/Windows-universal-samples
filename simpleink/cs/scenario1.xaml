@@ -1,0 +1,117 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="simpleInk.Scenario1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    This scenario demonstrates how to use Ink and Rendering with XAML.<LineBreak/>
+                    - To ink, use a pen, or use mouse with the left button pressed.<LineBreak/>
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Auto" ZoomMode="Enabled" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock 
+                        Text="Pen Type:" 
+                        Grid.Row="2" Grid.Column="1"
+                        Style="{StaticResource BasicTextStyle}" 
+                        HorizontalAlignment="Left" VerticalAlignment="Top" 
+                        Margin="0,10"/>
+                    <ComboBox 
+                        x:Name="PenType"
+                        Grid.Row="2" Grid.Column="2"
+                        HorizontalAlignment="Left" VerticalAlignment="Top"
+                        Width="132" Height="Auto" 
+                        Margin="0,8"
+                        SelectedIndex="0"
+                        SelectionChanged="OnPenTypeChanged">
+                        <ComboBoxItem Content="Ballpoint"/>
+                        <ComboBoxItem Content="Highlighter"/>
+                        <ComboBoxItem Content="Calligraphy"/>
+                    </ComboBox>
+                    <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,2" >
+                        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <TextBlock 
+                                Text="Pen Thickness:" 
+                                Grid.Row="2" Grid.Column="2"
+                                Style="{StaticResource BasicTextStyle}" 
+                                HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                Margin="0,10"/>
+                            <ComboBox 
+                                x:Name="PenThickness"
+                                Grid.Row="2" Grid.Column="2"
+                                HorizontalAlignment="Left" VerticalAlignment="Top"
+                                Width="132" Height="Auto" 
+                                Margin="0,8"
+                                SelectedIndex="1"
+                                SelectionChanged="OnPenThicknessChanged">
+                                <ComboBoxItem Content="Smallest"/>
+                                <ComboBoxItem Content="Small"/>
+                                <ComboBoxItem Content="Medium"/>
+                                <ComboBoxItem Content="Large"/>
+                                <ComboBoxItem Content="Largest"/>
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <TextBlock Text="Color:"
+                        Grid.Row="3" Grid.Column="1" 
+                        Style="{StaticResource BasicTextStyle}"
+                        HorizontalAlignment="Left" VerticalAlignment="Top" 
+                        Margin="0,5"/>
+                    <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,2" >
+                        <Button Background="Red"    Foreground="Red"    Click="OnPenColorChanged" Style="{StaticResource ColorButtonStyle}" Margin="0,0,3,0"/>
+                        <Button Background="Green"  Foreground="Green"  Click="OnPenColorChanged" Style="{StaticResource ColorButtonStyle}" Margin="0,0,3,0"/>
+                        <Button Background="Blue"   Foreground="Blue"   Click="OnPenColorChanged" Style="{StaticResource ColorButtonStyle}" Margin="0,0,3,0"/>
+                        <Button Background="Yellow" Foreground="Yellow" Click="OnPenColorChanged" Style="{StaticResource ColorButtonStyle}" Margin="0,0,3,0"/>
+                    </StackPanel>
+
+                    <!-- Button panel -->
+                    <StackPanel x:Name="ButtonPanel" Grid.Row="2" Grid.Column="3" Grid.RowSpan="2" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0" HorizontalAlignment="Left">
+                            <Button Content="Clear" Width="65" Margin="0,0,3,0" Click="OnClear"/>
+                            <Button Content="Load"  Width="65"  Margin="0,0,3,0" Click="OnLoadAsync"/>
+                            <Button Content="Save"  Width="65"  Margin="0,0,3,0" Click="OnSaveAsync"/>
+                            <CheckBox Content="Enable Touch Inking" Width="165" Margin="10,0,3,0" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <Grid x:Name="Output" Background="LightGray">
+                        <!-- Inking area -->
+                        <InkCanvas x:Name="inkCanvas" Grid.Row="0"/>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>
+

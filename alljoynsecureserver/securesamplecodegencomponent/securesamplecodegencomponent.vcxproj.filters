@@ -14,6 +14,8 @@
     <ClCompile Include="SecureInterfaceSignals.cpp" />
     <ClCompile Include="SecureInterfaceWatcher.cpp" />
     <ClCompile Include="TypeConversionHelpers.cpp" />
+    <ClCompile Include="SecureInterfaceServiceEventAdapter.cpp" />
+    <ClCompile Include="SecureInterfaceServiceEventArgs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -27,5 +29,7 @@
     <ClInclude Include="SecureInterfaceStructures.h" />
     <ClInclude Include="SecureInterfaceWatcher.h" />
     <ClInclude Include="TypeConversionHelpers.h" />
+    <ClInclude Include="SecureInterfaceServiceEventAdapter.h" />
+    <ClInclude Include="SecureInterfaceServiceEventArgs.h" />
   </ItemGroup>
 </Project>

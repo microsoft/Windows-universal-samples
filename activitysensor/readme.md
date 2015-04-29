@@ -20,7 +20,7 @@ Gets the activity history from at most 1 day ago. Displays the first entry, last
 
 ### Events
 
-Subscribes to reading and status changed events and displays the updated activity reading and sensor status.
+Subscribes to reading changed events and displays the updated activity reading.
 
 ### Background activity
 
@@ -51,3 +51,4 @@ The next steps depend on whether you just want to deploy the sample or you want 
 ### Deploying and running the sample
 
 - To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or selectDebug > Start Without Debugging. 
+

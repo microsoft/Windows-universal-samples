@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="SDKTemplate.SignIn"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Sign in form elements -->
+            <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="25" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Contoso" FontSize="36" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <TextBlock Grid.Row="1" Text="Username: " HorizontalAlignment="Right" FontSize="20" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox Grid.Row="1" Grid.Column="1"  x:Name="textbox_Username" Margin="0,10,0,0"/>
+                <TextBlock Grid.Row="2" Text="Password: " HorizontalAlignment="Right" FontSize="20" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <PasswordBox Grid.Row="2" Grid.Column="1" x:Name="passwordbox_Password" Margin="0,10,0,0" />
+                <Button Grid.Row="3" Content="Sign In" Click="Button_SignIn_Click" HorizontalAlignment="Right" Grid.Column="1"/>
+                <Button Grid.Row="3" x:Name="button_PassportSignIn" Content="Sign In with Microsoft Passport" Click="Button_Passport_Click" HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2"/>
+                <TextBlock Grid.Row="4" x:Name="textblock_ErrorField" Foreground="Red" VerticalAlignment="Stretch" HorizontalAlignment="Center" Grid.ColumnSpan="2" />
+            </Grid>
+
+            <Grid x:Name="grid_PassportStatus" Grid.Row="2" Background="#22B14C">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="25" />
+                </Grid.ColumnDefinitions>
+                <Image x:Name="image_PassportStatusImage" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Source="Assets/storeLogo-sdk.png" Height="auto" Width="auto"/>
+                <TextBlock x:Name="textblock_PassportStatusText" Grid.Column="3" Text="Microsoft Passport is ready for sign in!" VerticalAlignment="Center" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

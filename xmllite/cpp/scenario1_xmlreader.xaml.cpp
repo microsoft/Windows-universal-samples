@@ -1,9 +1,18 @@
+//*********************************************************
+//
 // Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
 
 #include "pch.h"
 #include "Scenario1_XmlReader.xaml.h"
 
-using namespace XmlLite;
+using namespace SDKTemplate::XmlLite;
 
 using namespace concurrency;
 using namespace Microsoft::WRL;
@@ -27,7 +36,7 @@ Scenario1::Scenario1() : rootPage(MainPage::Current)
     InitializeComponent();
 }
 
-void XmlLite::Scenario1::ReadXmlClick(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario1::ReadXmlClick(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     Button^ b = safe_cast<Button^>(sender);
     StorageFolder^ installFolder = Windows::ApplicationModel::Package::Current->InstalledLocation;
@@ -41,12 +50,12 @@ void XmlLite::Scenario1::ReadXmlClick(Platform::Object^ sender, Windows::UI::Xam
         if (FAILED(hr))
         {
             XmlTextbox->Text = "Exception occured while reading the xml file, and the error code is " + hr.ToString();
-			rootPage->NotifyUser("Exception occured!", NotifyType::ErrorMessage);
+            rootPage->NotifyUser("Exception occured!", NotifyType::ErrorMessage);
         }
     });
 }
 
-HRESULT XmlLite::Scenario1::ReadXml(IRandomAccessStream^ randomAccessReadStream)
+HRESULT Scenario1::ReadXml(IRandomAccessStream^ randomAccessReadStream)
 {
     HRESULT hr;
     ComPtr<IStream> readStream;
@@ -82,14 +91,14 @@ HRESULT XmlLite::Scenario1::ReadXml(IRandomAccessStream^ randomAccessReadStream)
             if (prefixSize > 0)
             {
                 XmlTextbox->Text += L"Element: ";
-                XmlTextbox->Text += ref new String(prefix, prefixSize);
-                XmlTextbox->Text += ref new String(localName, localNameSize);
+                ChkHr(ConcatToOutput(prefix, prefixSize));
+                ChkHr(ConcatToOutput(localName, localNameSize));
                 XmlTextbox->Text += L"\n";
             }
             else
             {
                 XmlTextbox->Text += L"Element: ";
-                XmlTextbox->Text += ref new String(localName, localNameSize);
+                ChkHr(ConcatToOutput(localName, localNameSize));
                 XmlTextbox->Text += L"\n";
             }
             ChkHr(ReadAttributes(reader.Get()));
@@ -106,15 +115,15 @@ HRESULT XmlLite::Scenario1::ReadXml(IRandomAccessStream^ randomAccessReadStream)
             if (prefixSize > 0)
             {
                 XmlTextbox->Text += L"End Element: ";
-                XmlTextbox->Text += ref new String(prefix, prefixSize);
+                ChkHr(ConcatToOutput(prefix, prefixSize));
                 XmlTextbox->Text += L":";
-                XmlTextbox->Text += ref new String(localName, localNameSize);
+                ChkHr(ConcatToOutput(localName, localNameSize));
                 XmlTextbox->Text += L"\n";
             }
             else
             {
                 XmlTextbox->Text += L"End Element: ";
-                XmlTextbox->Text += ref new String(localName, localNameSize);
+                ChkHr(ConcatToOutput(localName, localNameSize));
                 XmlTextbox->Text += L"\n";
             }
             break;
@@ -122,7 +131,7 @@ HRESULT XmlLite::Scenario1::ReadXml(IRandomAccessStream^ randomAccessReadStream)
         case XmlNodeType_Text:
             ChkHr(reader->GetValue(&value, &valueSize));
             XmlTextbox->Text += L"Text: >";
-            XmlTextbox->Text += ref new String(value, valueSize);
+            ChkHr(ConcatToOutput(value, valueSize));
             XmlTextbox->Text += L"<\n";
             break;
 
@@ -137,16 +146,16 @@ HRESULT XmlLite::Scenario1::ReadXml(IRandomAccessStream^ randomAccessReadStream)
             ChkHr(reader->GetLocalName(&localName, &localNameSize));
             ChkHr(reader->GetValue(&value, &valueSize));
             XmlTextbox->Text += L"Processing Instruction name:";
-            XmlTextbox->Text += ref new String(localName, localNameSize);
+            ChkHr(ConcatToOutput(localName, localNameSize));
             XmlTextbox->Text += L"value:";
-            XmlTextbox->Text += ref new String(value, valueSize);
+            ChkHr(ConcatToOutput(value, valueSize));
             XmlTextbox->Text += L"\n";
             break;
 
         case XmlNodeType_Comment:
             ChkHr(reader->GetValue(&value, &valueSize));
             XmlTextbox->Text += L"Comment: ";
-            XmlTextbox->Text += ref new String(value, valueSize);
+            ChkHr(ConcatToOutput(value, valueSize));
             XmlTextbox->Text += L"\n";
             break;
 
@@ -157,7 +166,7 @@ HRESULT XmlLite::Scenario1::ReadXml(IRandomAccessStream^ randomAccessReadStream)
         case XmlNodeType_Whitespace:
             ChkHr(reader->GetValue(&value, &valueSize));
             XmlTextbox->Text += L"WhiteSpace: ";
-            XmlTextbox->Text += ref new String(value, valueSize);
+            ChkHr(ConcatToOutput(value, valueSize));
             XmlTextbox->Text += L"\n";
             break;
 
@@ -168,7 +177,7 @@ HRESULT XmlLite::Scenario1::ReadXml(IRandomAccessStream^ randomAccessReadStream)
     return hr;
 }
 
-HRESULT XmlLite::Scenario1::ReadAttributes(IXmlReader* reader)
+HRESULT Scenario1::ReadAttributes(IXmlReader* reader)
 {
     HRESULT hr = S_OK;
 
@@ -193,19 +202,19 @@ HRESULT XmlLite::Scenario1::ReadAttributes(IXmlReader* reader)
             if (prefixSize > 0)
             {
                 XmlTextbox->Text += L"Attr: ";
-                XmlTextbox->Text += ref new String(prefix, prefixSize);
+                ChkHr(ConcatToOutput(prefix, prefixSize));
                 XmlTextbox->Text += L":";
-                XmlTextbox->Text += ref new String(localName, localNameSize);
+                ChkHr(ConcatToOutput(localName, localNameSize));
                 XmlTextbox->Text += L"=\"";
-                XmlTextbox->Text += ref new String(value, valueSize);
+                ChkHr(ConcatToOutput(value, valueSize));
                 XmlTextbox->Text += L"\"\n";
             }
             else
             {
                 XmlTextbox->Text += L"Attr: ";
-                XmlTextbox->Text += ref new String(localName, localNameSize);
+                ChkHr(ConcatToOutput(localName, localNameSize));
                 XmlTextbox->Text += L"=\"";
-                XmlTextbox->Text += ref new String(value, valueSize);
+                ChkHr(ConcatToOutput(value, valueSize));
                 XmlTextbox->Text += L"\"\n";
             }
         }
@@ -213,5 +222,22 @@ HRESULT XmlLite::Scenario1::ReadAttributes(IXmlReader* reader)
         if (S_OK != (hr = reader->MoveToNextAttribute()))
             break;
     }
+
+    return hr;
+}
+
+HRESULT Scenario1::ConcatToOutput(PCWSTR str, UINT strLen)
+{
+    HRESULT hr = S_OK;
+
+    try
+    {
+        XmlTextbox->Text += ref new String(str, strLen);
+    }
+    catch (Platform::Exception^ e)
+    {
+        hr = e->HResult;
+    }
+
     return hr;
 }

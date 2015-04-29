@@ -1,7 +1,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -14,21 +14,22 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Xml;
 
-namespace Xml
+namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
         public const string FEATURE_NAME = "Xml";
 
         List<Scenario> scenarios = new List<Scenario>
-    {
-        new Scenario() { Title = "Build New RSS", ClassType = typeof(Xml.BuildNewRss) },
-        new Scenario() { Title = "DOM Load/Save", ClassType = typeof(Xml.MarkHotProducts) },
-        new Scenario() { Title = "Set Load Settings", ClassType = typeof(Xml.XmlLoading) },
-        new Scenario() { Title = "XPath Query", ClassType = typeof(Xml.GiftDispatch) },
-        new Scenario() { Title = "XSLT Transformation", ClassType = typeof(Xml.XSLTTransform) }
-    };
+        {
+            new Scenario() { Title = "Build New RSS", ClassType = typeof(Xml.BuildNewRss) },
+            new Scenario() { Title = "DOM Load/Save", ClassType = typeof(Xml.MarkHotProducts) },
+            new Scenario() { Title = "Set Load Settings", ClassType = typeof(Xml.XmlLoading) },
+            new Scenario() { Title = "XPath Query", ClassType = typeof(Xml.GiftDispatch) },
+            new Scenario() { Title = "XSLT Transformation", ClassType = typeof(Xml.XSLTTransform) }
+        };
     }
 
     public class Scenario

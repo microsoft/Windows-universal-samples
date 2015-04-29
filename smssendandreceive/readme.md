@@ -1,23 +1,36 @@
-# SMS send and receive sample
+﻿# SMS Send and Receive Sample
 
-This sample demonstrates:
+This sample shows how to use the SMS API (Windows.Devices.Sms) using following scenarios:
+-   Send text message.
+-   Set filter rules for registering with background infrastructure and then receiving the SMS based on filter rules.
 
-- How to use the Mobile Broadband SMS API (Windows.Devices.Sms). It shows how to send text message.
-- How to set filter rules for registering with background infrastructure and then receiving the SMS based on filter rules.
+## Prerequisites
+
+This sample accesses privileged APIs and used by mobilebroadband operators.
+Hence requires restricted capability to be defined in package manifest.
+
+### Remark
+
+- Since this sample uses restricted capability, this will fail WACK for restricted namespace test.
+- This also requires phone devices to be OEM developer unlocked.
+- This sample is not supported on Phone emulator.
+
+### Reference
+
+[SMS API reference](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.sms.aspx)
 
 ## System requirements
 
-**Client:** Windows 10 Technical Preview
+**Hardware:** Phone device or PC with mobilebroadband modem
 
-**Server:** Windows 10 Technical Preview
+**Client:** Windows 10 Technical Preview 
 
 **Phone:**  Windows 10 Technical Preview
 
 ## Build the sample
 
 1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file. 
-3. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+2. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
 
 ## Run the sample
 
@@ -30,5 +43,7 @@ The next steps depend on whether you just want to deploy the sample or you want 
 ### Deploying and running the sample
 
 - To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or selectDebug > Start Without Debugging. 
+	
+
 
 

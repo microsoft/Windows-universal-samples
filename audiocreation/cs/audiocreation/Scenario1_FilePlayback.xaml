@@ -1,0 +1,79 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the Microsoft Public License.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AudioCreation.Scenario1_FilePlayback"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AudioCreation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+			<VisualStateGroup>
+				<VisualState>
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowWidth="0"/>
+					</VisualState.StateTriggers>
+					<VisualState.Setters>
+                        <Setter Target="audioPipe.(RelativePanel.RightOf)" Value="fileButton" />
+                        <Setter Target="audioPipe.(RelativePanel.AlignVerticalCenterWith)" Value="fileButton" />
+                        <Setter Target="speakerContainer.(RelativePanel.RightOf)" Value="audioPipe" />
+                        <Setter Target="graphButton.(RelativePanel.Below)" Value="audioPipe" />
+                        <Setter Target="graphButton.(RelativePanel.AlignHorizontalCenterWith)" Value="audioPipe" />
+                        <Setter Target="loopToggle.(RelativePanel.Below)" Value="graphButton" />
+                        <Setter Target="playSpeedSlider.(RelativePanel.Below)" Value="graphButton" />
+                        <Setter Target="playSpeedSlider.(RelativePanel.RightOf)" Value="loopToggle" />
+                        <Setter Target="playSpeedSlider.(RelativePanel.AlignVerticalCenterWith)" Value="loopToggle" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Style="{StaticResource SampleHeaderTextStyle}" x:Name="SampleHeader" Text="Description: File Playback" />
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" x:Name="SampleDescription" TextWrapping="Wrap" Text="Using the AudioGraph API to playback from a file input. The loop and trim functionalities are demonstrated. The playback is started 3 seconds from the start of the file." />
+            </StackPanel>
+            
+            <!--Main content is scrollable-->
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <RelativePanel HorizontalAlignment="Stretch" MinWidth="500">
+                    <!--Input-Pipe-Output-->
+                    <Button x:Name="fileButton" Content="Load File" Click="File_Click" MinWidth="120" MinHeight="45" Margin="0,20,0,0"/>
+                    <Rectangle x:Name="audioPipe" Margin="0,20,0,0" Height="10" MinWidth="160" Fill="#313131" HorizontalAlignment="Stretch"/>
+                    <Border x:Name="speakerContainer" BorderThickness="0" Background="#4A4A4A" MinWidth="120" MinHeight="45" Margin="0,20,0,0">
+                        <TextBlock x:Name="speaker" Text="Output Device" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    </Border>
+
+                    <!--Start/Stop Graph-->
+                    <Button x:Name="graphButton" Content="Start Graph" Click="Graph_Click" MinWidth="120" MinHeight="45" IsEnabled="False" Margin="0,50,0,20"/>
+
+                    <!--Playback Controls-->
+                    <ToggleSwitch x:Name="loopToggle" Header="Loop" IsOn="False" Toggled="LoopToggle_Toggled" IsEnabled="False" Margin="0,20,0,0"/>
+                    <Slider x:Name="playSpeedSlider" Header="Playback Speed" ValueChanged="PlaySpeedSlider_ValueChanged" Maximum="3" Minimum="0.5" Value="1" StepFrequency="0.1" Width="150" Margin="0,20,0,0" IsEnabled="False"/>
+                </RelativePanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

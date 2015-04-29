@@ -2,7 +2,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -42,7 +42,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="Splitter.DisplayMode" Value="Overlay"/>
-                        <Setter Target="ScenarioFrame.Margin" Value="12,40,0,0"/>
+                        <Setter Target="ScenarioFrame.Margin" Value="12,12,0,0"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -50,11 +50,11 @@
         <SplitView x:Name="Splitter" IsPaneOpen="True">
             <SplitView.Pane>
                 <RelativePanel VerticalAlignment="Stretch" Background="#FF140044">
-                    <TextBlock x:Name="Header" Text="Windows Platform Sample" Style="{StaticResource TagLineTextStyle}" Margin="10,60,0,0"/>
+                    <TextBlock x:Name="Header" Text="Windows Platform Sample" Style="{StaticResource TagLineTextStyle}" Margin="50,35,0,0"/>
                     <TextBlock x:Name="SampleTitle" Text="Sample Title Here" Style="{StaticResource SampleHeaderTextStyle}" RelativePanel.Below="Header" Margin="10,10,0,0"/>
                     <ListBox x:Name="ScenarioControl" SelectionChanged="ScenarioControl_SelectionChanged"
                  SelectionMode="Single" HorizontalAlignment="Left" Style="{StaticResource ScenarioListBoxStyle}"
-                 VerticalAlignment="Top" RelativePanel.Below="SampleTitle" Margin="0,20,0,0" >
+                 VerticalAlignment="Top" RelativePanel.Below="SampleTitle" Margin="0,20,0,0" RelativePanel.Above="Copyright" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Converter={StaticResource ScenarioConverter}}" Style="{StaticResource ListItemTextStyle}"/>

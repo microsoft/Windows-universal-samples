@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -65,12 +65,8 @@ namespace ActivitySensorCS
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-#if WINDOWS_PHONE_APP
-        async
-#endif
-        private void ScenarioRegisterTask(object sender, RoutedEventArgs e)
+        async private void ScenarioRegisterTask(object sender, RoutedEventArgs e)
         {
-#if WINDOWS_PHONE_APP
             var status = await BackgroundExecutionManager.RequestAccessAsync();
 
             if ((BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity == status) ||
@@ -82,9 +78,6 @@ namespace ActivitySensorCS
             {
                 rootPage.NotifyUser("Background tasks may be disabled for this app", NotifyType.ErrorMessage);
             }
-#else
-            RegisterBackgroundTask();
-#endif
         }
 
         /// <summary>
@@ -166,7 +159,7 @@ namespace ActivitySensorCS
             {
                 ScenarioRegisterTaskButton.IsEnabled = !registered;
                 ScenarioUnregisterTaskButton.IsEnabled = registered;
-                ScenarioOutput_TaskStatus.Text = status;
+                ScenarioOutput_TaskRegistration.Text = status;
 
                 var settings = ApplicationData.Current.LocalSettings;
 
@@ -176,8 +169,7 @@ namespace ActivitySensorCS
                 }
                 if (settings.Values.ContainsKey("TaskStatus"))
                 {
-                    ScenarioOutput_TaskStatus.Text += ", Background status: "
-                        + settings.Values["TaskStatus"].ToString(); // stored as a string
+                    ScenarioOutput_TaskStatus.Text = settings.Values["TaskStatus"].ToString(); // stored as a string
                 }
                 if (settings.Values.ContainsKey("LastActivity"))
                 {

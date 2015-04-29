@@ -1,7 +1,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -20,5 +20,6 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Data Events", "AccelerometerCPP.Scenario1_DataEvents" },
     { "Shake Events", "AccelerometerCPP.Scenario2_ShakeEvents" },
     { "Polling", "AccelerometerCPP.Scenario3_Polling" },
-    { "OrientationChanged", "AccelerometerCPP.Scenario4_OrientationChanged" }
+    { "OrientationChanged", "AccelerometerCPP.Scenario4_OrientationChanged" },
+    { "Data Events Batching", "AccelerometerCPP.Scenario5_DataEventsBatching" }
 };

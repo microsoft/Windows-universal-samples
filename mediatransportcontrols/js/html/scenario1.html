@@ -1,0 +1,43 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario1.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                Media Transport Controls
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                Select some audio or video files to play.
+                While they are playing, you can
+                call up the system media transport controls
+                in a manner appropriate for your system.
+                For example, press the "Play/Pause" key on the keyboard,
+                or use the hardware volume controls.
+            </p>
+            <div>
+                <button id="pickerButton" class="action">Select Files</button>
+            </div>
+            <!--
+                HTML5 specifies that both audio and video content are supported by both <audio> and <video> elements.
+                <audio> elements simply do not render the video stream, so for this sample we will use <video> to
+                play video as well as audio-only content.
+
+                HTML5 audio and video elements share more or less the same properties, methods and events, so the same 
+                sample script code would work basically unmodified with an <audio> element below in place of <video>.
+            -->
+            <video id="player" controls="controls" msAudioCategory="BackgroundCapableMedia" height="315" width="560"/>
+        </div>
+    </div>
+</body>
+</html>

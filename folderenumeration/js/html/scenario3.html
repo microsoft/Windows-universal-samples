@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario3.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                Get properties and thumbnails using prefetch
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>Get all files in the Pictures library, along with properties and thumbnails. This sample uses
+                SetPropertyPrefetch and SetThumbnailPrefetch to access properties for large batches of files
+                efficiently. Use this pattern to populate a database or a ListView (using a custom datasource
+                like VirtualizedDataSource) with file system items.</p>
+            <p>Make sure there are picture files in your Pictures library before running the scenario.</p>
+            <button class="action" id="getFiles">Get files</button>
+        </div>
+        <div id="scenarioOutput">
+            <ul id="itemsList" class="outputList"></ul>
+        </div>
+    </div>
+</body>
+</html>

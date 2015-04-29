@@ -1,7 +1,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -76,8 +76,9 @@ namespace MapControlSample
                 new BasicGeoposition() {Latitude=centerLatitude+0.0005, Longitude=centerLongitude+0.001 },
 
             });
+           
             mapPolygon.ZIndex = 1;
-            mapPolygon.FillColor = Colors.Transparent;
+            mapPolygon.FillColor = Colors.Red;
             mapPolygon.StrokeColor = Colors.Blue;
             mapPolygon.StrokeThickness = 3;
             mapPolygon.StrokeDashed = false;
@@ -93,7 +94,7 @@ namespace MapControlSample
                 new BasicGeoposition() {Latitude=centerLatitude-0.0005, Longitude=centerLongitude-0.001 },                
                 new BasicGeoposition() {Latitude=centerLatitude+0.0005, Longitude=centerLongitude+0.001 },
             });
-                        
+              
             mapPolyline.StrokeColor = Colors.Black;
             mapPolyline.StrokeThickness = 3;
             mapPolyline.StrokeDashed = true;

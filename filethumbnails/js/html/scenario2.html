@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario2.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>Obtain a thumbnail of album art for a music file. <br />
+            Please click the button below to pick a file and obtain the thumbnail.</p>
+        <button class="action" id="music-thumb-start">Get Album Art</button>
+        <br /><br />
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <img class="imageHolder" id="music-thumb-imageHolder" alt="image holder" src="/images/placeholder-sdk.png"/>
+        <p id="music-thumb-detailedStatus" class="status">
+            <span id="music-thumb-modeName"></span>
+            <span id="music-thumb-fileName"></span>
+            <span id="music-thumb-requestedSize"></span>
+            <span id="music-thumb-returnedSize"></span>
+        </p>
+    </div>
+</body>
+</html>

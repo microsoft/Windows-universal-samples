@@ -1,0 +1,53 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/Scenario3_MultipleReceipt.css" />
+    <script src="/js/Scenario3_MultipleReceipt.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                Multiple receipt printer scenario demonstrating release/claim process.
+            </div>
+        </div>
+        <div id="scenarioContent">
+
+            <button id="findClaimEnableButton">Create two printers</button><br />
+
+            <div class="instanceContent">
+                <button id="claim1">Claim instance 1</button> <br />
+                <textarea id="txtPrintLine1">Text to print from instance 1</textarea><br />
+                <button id="printLine1">Print line</button><br />
+                <button id="release1">Release instance 1</button><br />
+                <input type="checkbox" id="chkInstance1"/>Retain instance 1<br />
+            </div>
+
+            <div class="instanceContent">
+                <button id="claim2">Claim instance 2</button><br />
+                <textarea id="txtPrintLine2">Text to print from instance 2</textarea><br />
+                <button id="printLine2">Print line</button><br />
+                <button id="release2">Release instance 2</button><br />
+                <input type="checkbox" id="chkInstance2">Retain instance 2<br />
+            </div>
+
+            <button id="scenarioEndButton">End Scenario</button><br />
+        </div>
+    </div>
+</body>
+</html>

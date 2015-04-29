@@ -2,7 +2,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -19,7 +19,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps">
-
+<!--change -->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -30,6 +30,7 @@
                     <VisualState.Setters>
                         <Setter Target="myMap.Height" Value="500"/>
                         <Setter Target="myMap.Width" Value="500"/>
+                        <Setter Target="description.Margin" Value="0,0,0,0"/>
                         <Setter Target="StyleStackPanel.Orientation" Value="Horizontal"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -38,22 +39,24 @@
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="myMap.Height" Value="280"/>
+                        <Setter Target="myMap.Height" Value="230"/>
                         <Setter Target="myMap.Width" Value="280"/>
+                        <Setter Target="description.Margin" Value="28,0,0,0"/>
                         <Setter Target="StyleStackPanel.Orientation" Value="Vertical"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+        <Grid x:Name="RootGrid" Margin="12,20,12,14">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <StackPanel Margin="0,0,0,10" Grid.Row="0">
-                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock x:Name="description" Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" >
                     MapControl basics and configuring the map
                 </TextBlock>   
@@ -75,22 +78,21 @@
                                 <ComboBoxItem>Terrain</ComboBoxItem>
                             </ComboBox>
                         </StackPanel>
-                        <!--TODO: Bug in template, there should be no need to add height/width. MapControl fills the parent. -->
-                        <maps:MapControl x:Name="myMap"  
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <maps:MapControl x:Name="myMap"  Grid.Row="2"
                                      ZoomLevel="{Binding ElementName=zoomSlider,Path=Value, Mode=TwoWay}"
                                      Heading="{Binding ElementName=headingSlider,Path=Value, Mode=TwoWay}"
                                      DesiredPitch="{Binding ElementName=desiredPitchSlider,Path=Value, Mode=TwoWay}"    
                                      HorizontalAlignment="Left"
                                      />
-                    </StackPanel>
-                </ScrollViewer>
-            </Grid>       
-                    
 
             <!-- Status Block for providing messages to the user.  Use the
              NotifyUser() method to populate the message -->
-            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
-            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="3"/>
+            <TextBlock x:Name="StatusBlock" Grid.Row="3" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
             
         </Grid>
     </Grid>

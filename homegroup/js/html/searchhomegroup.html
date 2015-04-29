@@ -1,0 +1,39 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/SearchHomegroup.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>
+                    HomeGroup is a known location and can be searched like any other folder hierarchy. Type a query to search what is shared with the homegroup. The users and PCs in the homegroup won't be returned for a search query.
+                </p>
+                <p>
+                    Example Queries:"song", "report" or "kind:picture" or "size:>1MB"
+                </p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <b>Query: </b>
+            <input type="text" id="queryString" />
+            <button class="action" id="searchHomegroup">
+                Search HomeGroup
+            </button>
+            <br />
+            <br />
+        </div>
+        <div data-win-control="SdkSample.ScenarioOutput">
+            <label id="searchProgress" class="progressRingText">
+                <progress class="win-ring withText"></progress>Searching
+            </label>
+        </div>
+    </div>
+</body>
+</html>

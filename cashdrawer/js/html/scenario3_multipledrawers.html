@@ -1,0 +1,42 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/Scenario3_MultipleDrawers.css" />
+    <script src="/js/Scenario3_MultipleDrawers.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                Creates two instances of the claimed cash drawer to illustrate the use of device Retain/Release functionality.
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <button id="ClaimButton1">Claim</button>
+            <button id="ClaimButton2">Claim</button>
+            <br />
+            <button id="ReleaseButton1">Release</button>
+            <button id="ReleaseButton2">Release</button>
+            <br />
+            <input type="checkbox" checked="checked" id="retainInstance1Chk">Retain Instance 1
+            <input type="checkbox" checked="checked" id="retainInstance2Chk">Retain Instance 2
+            <br />
+        </div>
+    </div>
+</body>
+</html>

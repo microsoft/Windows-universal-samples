@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -281,6 +281,7 @@ namespace GeolocationCS
 
                 // Carry out the operation
                 // geolocator and location permissions are initialized and checked on page creation.
+                var geolocator = new Geolocator();
 
                 // Request a high accuracy position for better accuracy locating the geofence
                 geolocator.DesiredAccuracy = PositionAccuracy.High;

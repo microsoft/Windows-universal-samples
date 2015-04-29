@@ -1,0 +1,86 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page x:Class="PedometerCS.Scenario1_Events" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:PedometerCS" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+
+
+  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="RootGrid" Margin="10,10,14,22">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+
+      <StackPanel Margin="0,0,0,20">
+        <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+          This page illustrates the Pedometer's 'ReadingChanged' event usage on default Pedometer. Use the button below to register and unregister for the Pedometer events.
+        </TextBlock>
+      </StackPanel>
+
+      <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,20">
+        <Button x:Name="RegisterButton" Content="Register ReadingChanged" Click="RegisterButton_Click"/>
+      </StackPanel>
+
+      <Grid Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,20">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Timestamp : " Width="auto"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Total Step Count :" Width="auto"/>
+        <TextBlock x:Name="ScenarioOutput_Timestamp" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data" Width="auto"/>
+        <TextBlock x:Name="ScenarioOutput_TotalStepCount" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" Width="auto" Margin="10,0,0,0"/>
+      </Grid>
+
+      <Grid Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" MaxWidth="140"/>
+          <ColumnDefinition Width="2*" MaxWidth="140"/>
+          <ColumnDefinition Width="2*" MaxWidth="140"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Step Type" Width="100"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" Text="Cumulative Step Count" Width="100"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="2" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" Text="Cumulative Step Duration (in ms)" Width="100"/>
+
+        <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Unknown"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Walking"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="3" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Running"/>
+
+        <TextBlock x:Name="ScenarioOutput_UnknownCount" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="0"/>
+        <TextBlock x:Name="ScenarioOutput_WalkingCount" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="0"/>
+        <TextBlock x:Name="ScenarioOutput_RunningCount" TextWrapping="Wrap" Grid.Row="3" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="0"/>
+
+        <TextBlock x:Name="ScenarioOutput_UnknownDuration" TextWrapping="Wrap" Grid.Row="1" Grid.Column="2" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="0"/>
+        <TextBlock x:Name="ScenarioOutput_WalkingDuration" TextWrapping="Wrap" Grid.Row="2" Grid.Column="2" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="0"/>
+        <TextBlock x:Name="ScenarioOutput_RunningDuration" TextWrapping="Wrap" Grid.Row="3" Grid.Column="2" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="0"/>
+      </Grid>
+
+      <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+      <Border x:Name="ErrorBorder" Background="Red" Grid.Row="4"/>
+      <TextBlock x:Name="StatusBlock" Grid.Row="4" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+    </Grid>
+  </Grid>
+</Page>

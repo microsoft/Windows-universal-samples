@@ -1,0 +1,126 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+/* styles */
+
+.guidancebutton {
+    display: block;
+    min-width: 0;
+    min-height: 0;
+    background-clip: border-box;
+    background-color: transparent;
+    box-sizing: border-box;
+    border: 1px solid rgb(255,255,255);
+    border-radius: 50%;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+}
+.guidancebutton:hover {
+    border-color: rgb(128, 128, 128);
+}
+.guidancebutton-content {
+    font-family: "Segoe UI Symbol";
+    font-weight: normal;
+    font-size: 14pt;
+    margin: -1px;
+    line-height: 26px;
+    background-position: 0 0;
+    background-origin: border-box;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+
+#calibrationBar
+{
+    position: absolute; 
+    top: 0px; 
+    left: 0px;
+    width: 100%;
+    border-bottom: 2px solid rgb(255,255,255);
+    background-color: rgb(29, 29, 29);
+    opacity: 1;
+    display: -ms-grid;
+    -ms-grid-columns:auto;
+    -ms-grid-rows: auto auto;
+}
+
+#calibrationBarTop
+{
+    margin: 19px 66px 19px 0px;
+    display: -ms-grid;
+    -ms-grid-columns:60px 1fr auto;
+    -ms-grid-rows: auto;
+}
+
+#guidanceButtonGrid
+{
+    -ms-grid-column: 1;
+    -ms-grid-row: 1;
+    -ms-grid-column-align: center;
+    -ms-grid-row-align: center;
+}
+
+#guidanceTextGrid
+{   
+    -ms-grid-column: 2;
+    -ms-grid-row: 1;
+    -ms-grid-row-align: center;
+}
+
+#dismissButtonGrid
+{
+    margin-top: 0px;
+    margin-left: 66px;
+    -ms-grid-column: 3;
+    -ms-grid-row: 1;
+    -ms-grid-row-align: center;
+}
+
+#calibrationImageGrid
+{    
+    margin: 20px 20px 20px 20px;
+    -ms-grid-column: 1;
+    -ms-grid-row: 2;
+}
+
+#calibrationImage
+{    
+    display: block;
+    margin: auto;
+}
+
+@media screen and (max-width: 768px)
+{
+    #calibrationBarTop
+    {
+        margin: 24px 20px 15px 0px;
+        display: -ms-grid;
+        -ms-grid-columns:60px 1fr;
+        -ms-grid-rows: auto auto;
+    }
+
+    #guidanceButtonGrid
+    {
+        -ms-grid-column: 1;
+        -ms-grid-row: 1;
+    }
+
+    #guidanceTextGrid
+    {   
+        -ms-grid-column: 2;
+        -ms-grid-row: 1;
+        -ms-grid-row-align: center;
+    }
+
+    #dismissButtonGrid
+    {
+        margin-top: 15px;
+        -ms-grid-column: 2;
+        -ms-grid-row: 2;
+        -ms-grid-column-align: end;
+        -ms-grid-row-align: center;
+    }
+}

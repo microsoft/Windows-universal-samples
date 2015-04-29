@@ -1,0 +1,43 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/common.css" />
+    <script src="/js/delay-render.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">Share delay rendered files</div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                Sometimes you may want provide content in a different format or size for sharing.
+                However, you may not want to do the work to prepare content for sharing until the target app actually requests it. In such cases, you should use delayed rendering.
+            </p>
+            <p>
+                To demonstrate, please choose an image to be shared. When data is requested by the target app, the image will be resized by the source app. Since image manipulation may take
+                some time, the image processing is deferred until it's requested by the target app.
+            </p>
+            <p>Data Package Title:</p>
+            <input class="text-box" id="titleInputBox" value="My image" />
+            <p>Data Package Description:</p>
+            <input class="text-box" id="descriptionInputBox" value="Selected image from the Share Source sample" />
+            <p>Select the image you would like to share</p>
+            <p><button class="action" id="chooseImageButton">Select image</button></p>
+            <div id="scenarioOutput" class="hidden">
+                <img class="imageHolder" id="imageHolder" alt="image holder" />
+                <p>
+                    The bitmap will not be rendered into the data package until the share target requests it.
+                </p>
+                <p><button id="shareButton">Share</button></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

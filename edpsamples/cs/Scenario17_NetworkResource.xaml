@@ -1,0 +1,65 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the Microsoft Public License.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="EdpSample.Scenario17_NetworkResource"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EdpSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    <LineBreak/> . The application calls CreateCurrentThreadNetworkContext with the user identity to create a protected thread context. 
+                    This tags all network connections made on the current thread with the identity and allows access to enterprise resources that are access 
+                    controlled by the enterprise’s policy. Here the enterprise refers to the enterprise that the user identity belongs to. CreateCurrentThreadNetworkContext 
+                    returns a ThreadNetworkContext irrespective of policy enforcement. Generally, if the application expects to handle mixed resources, it can choose to always call 
+                    CreateCurrentThreadNetworkContext for all identities. After retrieving network resources, the application calls close on the returned context to clear any tag on the 
+                    current thread. If identity is unknown, the application can query the enterprise policy-managed identity from the network address of the resource using the GetPrimaryManagedIdentityForNetworkEndpoint API.
+                   ‘Closing’ the returned thread network context is specific to the language being used and is semantically equivalent to closing streams. In C#, this is done by calling “Dispose”, “close” in 
+                    JavaScript and “delete” in C++.
+
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock  TextWrapping="Wrap" Width="600"  HorizontalAlignment="Left" TextAlignment="Left">    
+                       <LineBreak/>Please input Enterprise Uri in the box provided
+                    </TextBlock>
+                    <TextBox Name="EnterpriseUri" Width="300" Text="http://toolbox" HorizontalAlignment="Left"></TextBox>
+                    <TextBlock>Domain:</TextBlock>
+                    <TextBox Name="DomainBox" Width="200" PlaceholderText="domain" HorizontalAlignment="Left"></TextBox>
+                    <TextBlock>UserName:</TextBlock>
+                    <TextBox Name="UserNameBox" Width="200" PlaceholderText="username" HorizontalAlignment="Left"></TextBox>
+                    <TextBlock>Password:</TextBlock>
+                    <PasswordBox Name="Passwordbox" Width="200" HorizontalAlignment="Left"></PasswordBox>
+                    <Button Content="UriIdentityManaged" Click="CheckUriIdentity_Click"/>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

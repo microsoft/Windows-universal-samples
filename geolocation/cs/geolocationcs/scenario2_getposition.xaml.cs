@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -186,7 +186,6 @@ namespace GeolocationCS
                 ScenarioOutput_Longitude.Text = "No data";
                 ScenarioOutput_Accuracy.Text = "No data";
                 ScenarioOutput_Source.Text = "No data";
-                ScenarioOutput_Venue.Text = "No data";
                 ShowSatalliteData(false);
             }
             else
@@ -195,11 +194,7 @@ namespace GeolocationCS
                 ScenarioOutput_Longitude.Text = position.Coordinate.Point.Position.Longitude.ToString();
                 ScenarioOutput_Accuracy.Text = position.Coordinate.Accuracy.ToString();
                 ScenarioOutput_Source.Text = position.Coordinate.PositionSource.ToString();
-
-                // Venue data can be null when it is not available
-                ScenarioOutput_Venue.Text = (position.VenueData == null) ? "No data" :
-                                             position.VenueData.Id + "/" + position.VenueData.Level;
-
+                
                 if (position.Coordinate.PositionSource == PositionSource.Satellite)
                 {
                     // Show labels and satellite data when available

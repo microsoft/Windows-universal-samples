@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:wincap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/windowscapabilities"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap mp">
+
+    <Identity
+      Name="Microsoft.SDKSamples.EdpSamples.CS"
+      Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+      Version="1.0.0.0" />
+
+
+    <mp:PhoneIdentity PhoneProductId="63b46613-fed6-4a11-b1a3-60a73b6c602b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+    <Properties>
+        <DisplayName>EdpSample</DisplayName>
+        <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+        <Logo>Assets\StoreLogo-sdk.png</Logo>
+    </Properties>
+
+    <Dependencies>
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10069.0" MaxVersionTested="10.0.10069.0" />
+    </Dependencies>
+
+    <Resources>
+        <Resource Language="x-generate"/>
+    </Resources>
+
+    <Applications>
+        <Application Id="App"
+          Executable="$targetnametoken$.exe"
+          EntryPoint="EdpSample.App">    
+          
+                <Extensions>
+        <uap:Extension Category="windows.shareTarget">
+            <uap:ShareTarget>
+                <uap:SupportedFileTypes>
+                  <uap:SupportsAnyFileType/>
+                </uap:SupportedFileTypes>
+              <uap:DataFormat>Text</uap:DataFormat>
+              <uap:DataFormat>Bitmap</uap:DataFormat>
+              <uap:DataFormat>Html</uap:DataFormat>
+              <uap:DataFormat>http://schema.org/Book</uap:DataFormat>
+              <uap:DataFormat>WebLink</uap:DataFormat>
+              <uap:DataFormat>ApplicationLink</uap:DataFormat>
+            </uap:ShareTarget>
+          </uap:Extension>
+          <Extension Category="windows.backgroundTasks" EntryPoint="Tasks.EdpBackgroundTask">
+                  <BackgroundTasks>
+                      <Task Type="systemEvent"/>
+                  </BackgroundTasks>
+             </Extension>
+        </Extensions>
+          
+            <uap:VisualElements
+              DisplayName="EdpSamples CS sample"
+              Square150x150Logo="Assets\StoreLogo-sdk.png"
+              Square44x44Logo="Assets\SmallTile-sdk.png"
+              Description="EdpSamples CS sample"
+              
+              BackgroundColor="#00b2f0">
+                <uap:SplashScreen Image="Assets\Splash-sdk.png" />
+                <uap:DefaultTile>
+                    <uap:ShowNameOnTiles>
+                        <uap:ShowOn Tile="square150x150Logo" />
+                    </uap:ShowNameOnTiles>
+                </uap:DefaultTile>
+             <uap:LockScreen Notification="badge" BadgeLogo="Assets\badgelogo-sdk.png"/>
+            </uap:VisualElements>
+        </Application>
+    
+    </Applications>
+
+    <Capabilities>
+        <Capability Name="internetClient" />
+        <Capability Name="privateNetworkClientServer" />
+       <rescap:Capability Name="enterpriseDataPolicy"/>
+    </Capabilities>
+</Package>
+

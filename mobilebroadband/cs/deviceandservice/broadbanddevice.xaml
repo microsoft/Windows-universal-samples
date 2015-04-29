@@ -1,0 +1,168 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="MobileBroadband.BroadbandDevice"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MobileBroadband"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="Input" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="InputTextBlock1"  TextWrapping="Wrap" Grid.Row="0" Style="{StaticResource ScenarioDescriptionTextStyle}" HorizontalAlignment="Left">
+                This scenario demonstrates the use of the Mobile Broadband APIs used by network operators. Access to the mobile broadband 
+                devices requires the creation and installation of a signed mobile broadband account metadata package that references the 
+                application accessing the device. Mobile broadband devices that have installed a metadata package will be listed as discovered 
+                by this application. The application will display an &quot;Access is Denied&quot; error if the metadata package does not explicitly 
+                grant permission to this application.
+            </TextBlock>
+            <StackPanel Orientation="Vertical" Margin="0,10,0,0" Grid.Row="1">
+                <TextBlock x:Name="NumDevices" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" />
+                <Button x:Name="UpdateData" Content="Get Next Device Information" Margin="0,10,10,10" Click="UpdateData_Click" />
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="Output" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Current Mobile Broadband Device Information" Style="{StaticResource BasicTextStyle}"/>
+                <TextBlock Text="Account Information" Style="{StaticResource BasicTextStyle}"/>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock Text="Account Provider Name:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                    <TextBlock x:Name="ProviderName" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock Text="Account Provider GUID:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                    <TextBlock x:Name="ProviderGuid" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock Text="Network Account ID:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                    <TextBlock x:Name="NetworkAccountId" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Vertical" Margin="0,10,0,10" HorizontalAlignment="Left">
+                        <TextBlock Text="Network Information and Errors" Style="{StaticResource BasicTextStyle}"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Network Is Registered As:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="NetRegister" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Network Registration Error:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="NetRegError" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Packet Attach Error:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="PacketAttachError" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Activation Error:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="ActivateError" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Access Point Name:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="AccessPointName" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Registered Provider Name:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="RegisteredProviderName" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Registered Provider Id:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="RegisteredProviderId" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Registered Data Class:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="RegisteredDataClass" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Network Adapter ID:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="NetworkAdapterId" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Network Interface Type:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="NetworkType" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10,10,0,0" HorizontalAlignment="Right">
+                        <TextBlock Text="Network Device Information" Style="{StaticResource BasicTextStyle}"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Manufacturer:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="DeviceManufacturer" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Model:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="DeviceModel" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Firmware:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="Firmware" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Cellular Classes:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="CellularClasses" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Data Classes:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="DataClasses" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Mobile Number:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="MobileNumber" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="SIM ICCID:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="SimId" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Device Type:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="DeviceType" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Device Id:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="DeviceId" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="Network Device Status:" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="NetworkDeviceStatus" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock x:Name="MobEquipIdLabel" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="MobEquipIdValue" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock x:Name="SubIdLabel" VerticalAlignment="Center" Style="{StaticResource BasicTextStyle}"/>
+                            <TextBlock x:Name="SubIdValue" Margin="10,0,0,0" Style="{StaticResource BasicTextStyle}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        
+        <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts -->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="DefaultLayout"/>
+                <VisualState x:Name="Below768Layout"/>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</Page>

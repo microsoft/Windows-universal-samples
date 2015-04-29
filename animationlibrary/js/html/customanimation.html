@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/customAnimation.css" />
+    <script src="/js/customAnimation.js"></script>
+</head>
+<body>
+    <div id="scenarioHeader">
+        <h2 id="sampleHeader">Description:</h2>
+        <div id="scenarioDescription">
+            Run a custom animation
+        </div>
+    </div>
+    <div id="input">
+        <p>Use the Execute Animation and Execute Transition helper functions to run custom CSS animations
+        or transitions in cases where custom animations are required. Apps are encouraged to use the pre-built
+        animations in the Animation Library whenever possible.</p>
+        <p>Execute Animation and Execute Transition execute a single CSS animation or CSS transition respectively.
+        The CSS animation will animate the CSS property from specified start and end values but will not change the
+        value of the property. The CSS transition will animate from the current value of the CSS property to the
+        specified end value and will change the value of the CSS property to equal the end value.</p>
+        <p>
+            <button id="animation">Show an item (CSS animation)</button>
+            <button id="transition">Show an item (CSS transition)</button>
+            <button id="reset">Reset opacity to 0</button>
+        </p>
+    </div>
+    <div id="output">
+        <div id="target"/>
+    </div>
+</body>
+</html>

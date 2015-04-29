@@ -2,7 +2,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -20,8 +20,8 @@
       </StackPanel>
       <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto" MinWidth="20"/>
-          <ColumnDefinition Width="Auto" MinWidth="60"/>
+          <ColumnDefinition Width="Auto" MinWidth="120"/>
+          <ColumnDefinition Width="180"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto"/>
@@ -29,17 +29,20 @@
           <RowDefinition Height="Auto"/>
           <RowDefinition Height="Auto"/>
           <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Task Status:"/>
-        <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Report Count:"/>
-        <TextBlock TextWrapping="Wrap" Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Last Activity:"/>
-        <TextBlock TextWrapping="Wrap" Grid.Row="3" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Last Confidence:"/>
-        <TextBlock TextWrapping="Wrap" Grid.Row="4" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Last Timestamp:"/>
-        <TextBlock x:Name="ScenarioOutput_TaskStatus" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
-        <TextBlock x:Name="ScenarioOutput_ReportCount" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
-        <TextBlock x:Name="ScenarioOutput_LastActivity" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
-        <TextBlock x:Name="ScenarioOutput_LastConfidence" TextWrapping="Wrap" Grid.Row="3" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
-        <TextBlock x:Name="ScenarioOutput_LastTimestamp" TextWrapping="Wrap" Grid.Row="4" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Task Registration:"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Task Status:"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Report Count:"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="3" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Last Activity:"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="4" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Last Confidence:"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="5" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Last Timestamp:"/>
+        <TextBlock x:Name="ScenarioOutput_TaskRegistration" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock x:Name="ScenarioOutput_TaskStatus" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock x:Name="ScenarioOutput_ReportCount" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock x:Name="ScenarioOutput_LastActivity" TextWrapping="Wrap" Grid.Row="3" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock x:Name="ScenarioOutput_LastConfidence" TextWrapping="Wrap" Grid.Row="4" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock x:Name="ScenarioOutput_LastTimestamp" TextWrapping="Wrap" Grid.Row="5" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
       </Grid>
     </StackPanel>
   </Grid>

@@ -1,0 +1,34 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/helperFunctions.js"></script>
+    <script src="/js/updateAndDeleteWithAPI.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>This example shows how to update and delete items and properties from the index.  To start, first add items to the index using the button below.<br />
+        <button id="addToIndex">Add items to the index</button>
+        </p>
+        <p>You can update properties on an item by using the updateAsync function.<br />
+        New name:
+        <input type="text" style="width: 400px" id="itemNameInput" maxlength="256" value="New Name" /><br />
+        <button id="updateName">Update ItemNameDisplay property</button>
+        </p>
+        <p>To delete a property, assign it a null value.<br />
+        <button id="deleteKeywords">Delete Keywords property</button>
+        </p>
+        <p>You can delete a single item, a set of items, or all items.<br />
+        <button id="deleteSingleItem">Delete a single item</button><br /><br />
+        <button id="deleteMultipleItems">Delete multiple items</button><br /><br />
+        <button id="deleteAllItems">Delete all items</button>
+        </p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+    </div>
+</body>
+</html>

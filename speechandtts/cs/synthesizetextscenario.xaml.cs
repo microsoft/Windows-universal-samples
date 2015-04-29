@@ -1,7 +1,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -9,41 +9,30 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using System;
 using Windows.Media.SpeechSynthesis;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SpeechAndTTS
 {
     public sealed partial class SynthesizeTextScenario : Page
     {
-        private MainPage rootPage;
         private SpeechSynthesizer synthesizer;
 
         public SynthesizeTextScenario()
         {
             InitializeComponent();
             synthesizer = new SpeechSynthesizer();
-            ListboxVoiceChooser_Initialize();
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            rootPage = MainPage.Current;
+            InitializeListboxVoiceChooser();
         }
 
         /// <summary>
         /// This is invoked when the user clicks on the speak/stop button.
         /// </summary>
-        /// <param name="sender">unused object parameter</param>
-        /// <param name="e">unused event parameter</param>
+        /// <param name="sender">Button that triggered this event</param>
+        /// <param name="e">State information about the routed event</param>
         private async void Speak_Click(object sender, RoutedEventArgs e)
         {
             // If the media is playing, the user has pressed the button to stop the playback.
@@ -59,23 +48,22 @@ namespace SpeechAndTTS
                 // Change the button label. You could also just disable the button if you don't want any user control.
                 btnSpeak.Content = "Stop";
 
-                SpeechSynthesisStream synthesisStream;
                 try
                 {
                     // Create a stream from the text. This will be played using a media element.
-                    synthesisStream = await synthesizer.SynthesizeTextToStreamAsync(text);
+                    SpeechSynthesisStream synthesisStream = await synthesizer.SynthesizeTextToStreamAsync(text);
 
-					// Set the source and start playing the synthesized audio stream.
-					media.AutoPlay = true;
-					media.SetSource(synthesisStream, synthesisStream.ContentType);
-					media.Play();
-				}
+                    // Set the source and start playing the synthesized audio stream.
+                    media.AutoPlay = true;
+                    media.SetSource(synthesisStream, synthesisStream.ContentType);
+                    media.Play();
+                }
                 catch (Exception)
                 {
-					// If the SSML stream is not in the correct format, throw an error message to the user.
-					btnSpeak.Content = "Speak";
-                    MessageDialog dialog = new MessageDialog("Unable to synthesize text");
-                    await dialog.ShowAsync();
+                    // If the text is unable to be synthesized, throw an error message to the user.
+                    btnSpeak.Content = "Speak";
+                    var messageDialog = new Windows.UI.Popups.MessageDialog("Unable to synthesize text");
+                    await messageDialog.ShowAsync();
                 }
             }
         }
@@ -97,7 +85,7 @@ namespace SpeechAndTTS
         /// This creates items out of the system installed voices. The voices are then displayed in a listbox.
         /// This allows the user to change the voice of the synthesizer in your app based on their preference.
         /// </summary>
-        private void ListboxVoiceChooser_Initialize()
+        private void InitializeListboxVoiceChooser()
         {
             // Get all of the installed voices.
             var voices = SpeechSynthesizer.AllVoices;

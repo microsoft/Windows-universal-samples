@@ -1,0 +1,68 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="PosPrinterSample.Scenario3_MultipleReceipt"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PosPrinterSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Multiple receipt printer scenario demonstrating release/claim process.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Button Content="Create two printers" Click="FindReceiptPrinter_Click" Margin="3,3,3,30" Width="175"/>
+                    
+                    <!-- Instance 1 controls -->
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+                        <Button Content="Claim instance 1" Click="Claim1_Click" Margin="3" Width="175"/>
+                        <TextBox PlaceholderText="Text to print from instance 1"  Name="txtPrintLine1" Width="400" Margin="3"/>
+                        <Button Content="Print line" Click="PrintLine1_Click" Margin="3" Width="175"/>
+                        <Button Content="Release instance 1" Click="Release1_Click" Margin="3" Width="175"/>
+                        <CheckBox Name="chkInstance1" Content="Retain instance 1" Unchecked="chkInstance1_Unchecked"  Checked="chkInstance1_Checked" />
+                    </StackPanel>
+                    
+                    <!-- Instance 2 controls -->
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+                        <Button Content="Claim instance 2" Click="Claim2_Click" Margin="3" Width="175"/>
+                        <TextBox PlaceholderText="Text to print from instance 2"  Name="txtPrintLine2" Width="400"/>
+                        <Button Content="Print line" Click="PrintLine2_Click" Margin="3" Width="175"/>
+                        <Button Content="Release instance 2" Click="Release2_Click" Margin="3" Width="175"/>
+                        <CheckBox Name="chkInstance2" Content="Retain instance 2" Unchecked="chkInstance2_Unchecked" Checked="chkInstance2_Checked" />
+                    </StackPanel>
+
+                    <Button Content="End scenario" Click="EndScenario_Click" Margin="3" Width="175"/>
+   
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

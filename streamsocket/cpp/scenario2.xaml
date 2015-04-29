@@ -1,0 +1,51 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+--> 
+<Page x:Class="SDKTemplate.StreamSocketSample.Scenario2" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:StreamSocketSample" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+  <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+    <StackPanel>
+      <TextBlock x:Name="InputTextBlock0" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0,0,0,20">
+          Next, you need the 'other side of the connection' -- you need to
+        connect to a listener. The host name and service name (often a port
+        number) to connect to are the 'Host name:' and 'Service name:' entries.
+        The service name should match what you started to listen to! The
+        connection will automatically use IPv6 as needed. It will also resolve
+        internationalized domain names.
+        <LineBreak/>
+        <LineBreak/>
+          Due to the network security system, you cannot connect to other
+        applications running on the same machine. This means that you can only
+        use 'localhost' to connect to the same application (specifically, you
+        can connect to a listener on the same machine running in the same app
+        container).
+        <LineBreak/>
+        <LineBreak/>
+          If an adapter was selected in the previous step, connect will also
+        attempt to limit traffic to the selected adapter.
+      </TextBlock>
+      <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}">Host name:</TextBlock>
+      <!-- To connect to a remote host, first change HostNameForConnect IsEnabled="true" then add the Internet Client and/or 
+                  Internet Client & Server capabilities within the App Manifest. -->
+      <TextBox x:Name="HostNameForConnect" IsEnabled="False" Text="localhost"/>
+      <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}">Service name:</TextBlock>
+      <TextBox x:Name="ServiceNameForConnect" Text="22112"/>
+      <Button x:Name="ConnectSocket" Content="Connect" Click="ConnectSocket_Click"/>
+      <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts -->
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup>
+          <VisualState x:Name="DefaultLayout"/>
+          <VisualState x:Name="Below768Layout"/>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </StackPanel>
+  </ScrollViewer>
+</Page>

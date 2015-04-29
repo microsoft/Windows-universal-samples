@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1_TrackPosition.css" />
+    <script src="/js/scenario1_TrackPosition.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>Geolocation API allows application to continuously track the position of the device either distance-based or periodic-based.</p>
+        <button class="action" id="startTrackingButton">Start Tracking</button>
+        <button class="action" id="stopTrackingButton">Stop Tracking</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        Status: <span id="status">Unknown</span>
+        <br />
+        <br />
+        Latitude: <span id="latitude">No data</span>
+        <br />
+        Longitude: <span id="longitude">No data</span>
+        <br />
+        Accuracy: <span id="accuracy">No data</span>
+        <br />
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario2.css" />
+    <script src="/js/scenario2.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>Connect to Twitter</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <table>
+                <tr>
+                    <td><label for="TwitterClientID">Consumer Key: </label></td>
+                    <td><input type="text" id="TwitterClientID" value="" /></td>
+                </tr>
+                <tr>
+                    <td><label for="TwitterSecret">Consumer Secret: </label></td>
+                    <td><input type="text" id="TwitterSecret" value="" /></td>
+                </tr>
+                <tr>
+                    <td><label for="TwitterCallbackURL">Callback URL: </label></td>
+                    <td><input type="text" id="TwitterCallbackURL" value="" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button class="action" id="oAuthTwitterLaunch" style="width:100%">Launch</button></td>
+                </tr>
+                <tr>
+                    <td class="labelTD"><label for="TwitterReturnedToken">Token: </label></td>
+                    <td><input type="text" size="106" id="TwitterReturnedToken" /></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
