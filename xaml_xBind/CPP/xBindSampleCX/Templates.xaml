@@ -1,0 +1,16 @@
+﻿<ResourceDictionary
+    x:Class="xBindSampleCX.Templates"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:xBindSampleCX"
+    xmlns:model="using:xBindSampleModel">
+
+    <DataTemplate x:Key="FullNameTemplateInRDFile" x:DataType="model:IEmployee">
+        <TextBlock Text="{x:Bind Name}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="TemplateWithUserControl" x:DataType="model:IEmployee">
+        <!-- x:Bind can be used to bind to standard properties on controls in addition to dependency properties -->
+        <local:MyUserControl1 NonDPProperty="{x:Bind Name}"/>
+    </DataTemplate>
+</ResourceDictionary>

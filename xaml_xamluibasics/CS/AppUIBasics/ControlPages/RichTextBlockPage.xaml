@@ -1,0 +1,138 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AppUIBasics.ControlPages.RichTextBlockPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+  <RelativePanel HorizontalAlignment="Left">
+    <local:ControlExample x:Name="Example1" HeaderText="A simple RichTextBlock." MaxWidth="500">
+      <local:ControlExample.Example>
+        <RichTextBlock>
+          <Paragraph>I am a RichTextBlock.</Paragraph>
+        </RichTextBlock>
+      </local:ControlExample.Example>
+      <local:ControlExample.Xaml>
+        <RichTextBlock>
+          <Paragraph>&lt;RichTextBlock&gt;</Paragraph>
+          <Paragraph TextIndent="12">&lt;Paragraph&gt;I am a RichTextBlock.&lt;/Paragraph&gt;</Paragraph>
+          <Paragraph>&lt;/RichTextBlock&gt;</Paragraph>
+        </RichTextBlock>
+      </local:ControlExample.Xaml>
+    </local:ControlExample>
+
+    <local:ControlExample x:Name="Example2" HeaderText="A RichTextBlock with a custom selection highlight color." MaxWidth="500">
+      <local:ControlExample.Example>
+        <RichTextBlock SelectionHighlightColor="Green">
+          <Paragraph>
+            RichTextBlock provides a rich text display container that supports
+            <Run FontStyle="Italic" FontWeight="Bold">formatted text</Run>,
+            <Hyperlink NavigateUri="http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.documents.hyperlink.aspx">hyperlinks</Hyperlink>, inline images, and other rich content.
+          </Paragraph>
+          <Paragraph>RichTextBlock also supports a built-in overflow model.</Paragraph>
+        </RichTextBlock>
+      </local:ControlExample.Example>
+      <local:ControlExample.Xaml>
+        <RichTextBlock HorizontalAlignment="Left">
+          <Paragraph>&lt;RichTextBlock SelectionHighlightColor="Green"&gt;</Paragraph>
+          <Paragraph TextIndent="12">&lt;Paragraph&gt;RichTextBlock provides a rich text display container that supports</Paragraph>
+          <Paragraph TextIndent="24">&lt;Run FontStyle="Italic" FontWeight="Bold"&gt;formatted text&lt;/Run&gt;,</Paragraph>
+          <Paragraph TextIndent="24">&lt;Hyperlink NavigateUri="http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.documents.hyperlink.aspx"&gt;hyperlinks&lt;/Hyperlink&gt;, inline images, and other rich content.&lt;/Paragraph&gt;</Paragraph>
+          <Paragraph TextIndent="12">&lt;Paragraph&gt;RichTextBlock also supports a built-in overflow model.&lt;/Paragraph&gt;</Paragraph>
+          <Paragraph>&lt;/RichTextBlock&gt;</Paragraph>
+        </RichTextBlock>
+      </local:ControlExample.Xaml>
+    </local:ControlExample>
+
+    <local:ControlExample x:Name="Example3" HeaderText="A RichTextBlock with overflow." HorizontalContentAlignment="Stretch">
+      <local:ControlExample.Example>
+        <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Height="300">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+          </Grid.ColumnDefinitions>
+          <RichTextBlock Grid.Column="0" OverflowContentTarget="{x:Bind firstOverflowContainer}" TextAlignment="Justify" Margin="12,0">
+            <Paragraph>
+              Linked text containers allow text which does not fit in one element to overflow into a different element on the page. Creative use of linked text containers enables basic multicolumn support and other advanced page layouts.
+            </Paragraph>
+            <Paragraph>
+              Duis sed nulla metus, id hendrerit velit. Curabitur dolor purus, bibendum eu cursus lacinia, interdum vel augue. Aenean euismod eros et sapien vehicula dictum. Duis ullamcorper, turpis nec feugiat tincidunt, dui erat luctus risus, aliquam accumsan lacus est vel quam. Nunc lacus massa, varius eget accumsan id, congue sed orci. Duis dignissim hendrerit egestas. Proin ut turpis magna, sit amet porta erat. Nunc semper metus nec magna imperdiet nec vestibulum dui fringilla. Sed sed ante libero, nec porttitor mi. Ut luctus, neque vitae placerat egestas, urna leo auctor magna, sit amet ultricies ipsum felis quis sapien. Proin eleifend varius dui, at vestibulum nunc consectetur nec. Mauris nulla elit, ultrices a sodales non, aliquam ac est. Quisque sit amet risus nulla. Quisque vestibulum posuere velit, vitae vestibulum eros scelerisque sit amet. In in risus est, at laoreet dolor. Nullam aliquet pellentesque convallis. Ut vel tincidunt nulla. Mauris auctor tincidunt auctor.
+              Aenean orci ante, vulputate ac sagittis sit amet, consequat at mi. Morbi elementum purus consectetur nisi adipiscing vitae blandit sapien placerat. Aliquam adipiscing tortor non sem lobortis consectetur mattis felis rhoncus. Nunc eu nunc rhoncus arcu sollicitudin ultrices. In vulputate eros in mauris aliquam id dignissim nisl laoreet.
+            </Paragraph>
+          </RichTextBlock>
+          <RichTextBlockOverflow x:Name="firstOverflowContainer" Grid.Column="1" OverflowContentTarget="{x:Bind secondOverflowContainer}" Margin="12,0"/>
+          <RichTextBlockOverflow x:Name="secondOverflowContainer" Grid.Column="2" Margin="12,0"/>
+        </Grid>
+      </local:ControlExample.Example>
+      <local:ControlExample.Xaml>
+        <RichTextBlock>
+          <Paragraph>&lt;Grid&gt;</Paragraph>
+          <Paragraph TextIndent="12">&lt;Grid.ColumnDefinitions&gt;</Paragraph>
+          <Paragraph TextIndent="24">&lt;ColumnDefinition/&gt;</Paragraph>
+          <Paragraph TextIndent="24">&lt;ColumnDefinition/&gt;</Paragraph>
+          <Paragraph TextIndent="24">&lt;ColumnDefinition/&gt;</Paragraph>
+          <Paragraph TextIndent="12">&lt;Grid.ColumnDefinitions&gt;</Paragraph>
+          <Paragraph TextIndent="12">
+            &lt;RichTextBlock  Grid.Column="0"
+            <Bold>OverflowContentTarget="{x:Bind firstOverflowContainer}"</Bold> TextAlignment="Justify" Margin="12,0"&gt;
+          </Paragraph>
+          <Paragraph TextIndent="24">&lt;Paragraph&gt;Linked text containers allow text which does not fit in one element to overflow into a different element on the page. Creative use of linked text containers enables basic multicolumn support and other advanced page layouts.&lt;/Paragraph&gt;</Paragraph>
+          <Paragraph TextIndent="12">&lt;!-- Additional content not shown. --&gt;</Paragraph>
+          <Paragraph TextIndent="12">&lt;/RichTextBlock&gt;</Paragraph>
+          <Paragraph TextIndent="12">
+            &lt;RichTextBlockOverflow
+            <Bold>x:Name="firstOverflowContainer" OverflowContentTarget="{x:Bind secondOverflowContainer}"</Bold> Grid.Column="1" Margin="12,0"/&gt;
+          </Paragraph>
+          <Paragraph TextIndent="12">
+            &lt;RichTextBlockOverflow
+            <Bold>x:Name="secondOverflowContainer"</Bold> Grid.Column="2" Margin="12,0"/&gt;
+          </Paragraph>
+          <Paragraph>&lt;/Grid&gt;</Paragraph>
+        </RichTextBlock>
+      </local:ControlExample.Xaml>
+    </local:ControlExample>
+
+    <VisualStateManager.VisualStateGroups>
+      <!-- Visual states reflect the application's window size -->
+      <VisualStateGroup>
+        <VisualState x:Name="WideLayout">
+          <VisualState.StateTriggers>
+            <AdaptiveTrigger MinWindowWidth="900" />
+          </VisualState.StateTriggers>
+          <VisualState.Setters>
+            <Setter Target="Example2.(RelativePanel.RightOf)" Value="Example1" />
+            <Setter Target="Example2.Margin" Value="24,0,0,0" />
+            <Setter Target="Example3.(RelativePanel.Below)" Value="Example2" />
+            <Setter Target="Example3.(RelativePanel.AlignLeftWith)" Value="Example1" />
+            <Setter Target="Example3.(RelativePanel.AlignRightWith)" Value="Example2" />
+            <Setter Target="Example3.Margin" Value="0,24,0,0" />
+          </VisualState.Setters>
+        </VisualState>
+
+        <VisualState x:Name="NarrowLayout">
+          <VisualState.StateTriggers>
+            <AdaptiveTrigger MinWindowWidth="0" />
+          </VisualState.StateTriggers>
+          <VisualState.Setters>
+            <Setter Target="Example2.(RelativePanel.Below)" Value="Example1" />
+            <Setter Target="Example3.(RelativePanel.Below)" Value="Example2" />
+          </VisualState.Setters>
+        </VisualState>
+      </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+  </RelativePanel>
+</Page>

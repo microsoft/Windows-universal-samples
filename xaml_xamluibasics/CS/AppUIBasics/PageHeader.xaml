@@ -1,0 +1,56 @@
+﻿<UserControl
+    x:Class="AppUIBasics.PageHeader"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <RelativePanel x:Name="headerRoot" Background="{ThemeResource PageHeaderBackgroundBrush}">
+        <Button x:Name="splitViewToggle" Style="{StaticResource SplitViewTogglePaneButtonStyle}" Click="splitViewToggle_Click" />
+        <Button x:Name="backButton" Height="48" Width="48" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                      Command="{x:Bind GoBackCommand}"
+                      Style="{StaticResource BackButtonStyle}"
+                      VerticalAlignment="Top"
+                      AutomationProperties.Name="Back"
+                      AutomationProperties.AutomationId="BackButton"
+                      AutomationProperties.ItemType="Navigation Button"
+                RelativePanel.RightOf="splitViewToggle">
+            <FontIcon x:Name="backButtonIcon" Glyph="&#xE72B;" />
+        </Button>
+        <ContentPresenter x:Name="pageTitle" Content="{x:Bind Title}" FontSize="24" FontWeight="Light"
+                          IsHitTestVisible="false" TextWrapping="NoWrap" Margin="8,0,0,0" Height="48" VerticalContentAlignment="Center"  
+                          RelativePanel.RightOf="backButton" RelativePanel.AlignTopWith="backButton" />
+        <AutoSuggestBox x:Name="controlsSearchBox"
+                        Margin="0,8,12,0"
+                        Width="270"
+                        PlaceholderText="Search for controls"
+                        QueryIcon="Find"
+                        TextChanged="controlsSearchBox_TextChanged"
+                        QuerySubmitted="controlsSearchBox_QuerySubmitted"
+                        RelativePanel.AlignRightWithPanel="True" />
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger x:Name="WideLayoutTrigger" MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="controlsSearchBox.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </RelativePanel>
+</UserControl>

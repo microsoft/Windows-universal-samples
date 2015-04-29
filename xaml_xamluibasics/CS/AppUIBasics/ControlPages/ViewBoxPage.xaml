@@ -1,0 +1,104 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AppUIBasics.ControlPages.ViewBoxPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <RelativePanel>
+        <local:ControlExample x:Name="Example1" HeaderText="Content inside of a Viewbox." MaxWidth="500">
+            <Viewbox x:Name="Control1" Height="{x:Bind SizeSlider.Value, Mode=OneWay}" Width="{x:Bind SizeSlider.Value, Mode=OneWay}"
+                             StretchDirection="Both">
+                <Border BorderBrush="Gray" BorderThickness="15">
+                    <StackPanel Background="DarkGray">
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Fill="Blue" Height="10" Width="40"/>
+                            <Rectangle Fill="Green" Height="10" Width="40"/>
+                            <Rectangle Fill="Red" Height="10" Width="40"/>
+                            <Rectangle Fill="Yellow" Height="10" Width="40"/>
+                        </StackPanel>
+                        <Image Source="ms-appx:///Assets/Slices.png" />
+                        <TextBlock Text="This is text." HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Viewbox>
+            <local:ControlExample.Xaml>
+                <RichTextBlock >
+                    <Paragraph>&lt;Viewbox Height="<Run Text="{x:Bind SizeSlider.Value, Mode=OneWay}"/>" 
+                        Width="<Run Text="{x:Bind SizeSlider.Value, Mode=OneWay}"/>" StretchDirection="Both"&gt;
+                    </Paragraph>
+                    <Paragraph TextIndent="12">&lt;Border BorderBrush="Gray" BorderThickness="15"&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;StackPanel Background="DarkGray"&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;StackPanel Orientation="Horizontal"&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;Rectangle Fill="Blue" Height="10" Width="40"/&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;Rectangle Fill="Green" Height="10" Width="40"/&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;Rectangle Fill="Red" Height="10" Width="40"/&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;Rectangle Fill="Yellow" Height="10" Width="40"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;/StackPanel&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;Image Source="ms-appx:///Assets/Slices.png"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;TextBlock Text="This is text." HorizontalAlignment="Center"/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;/StackPanel&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/Border&gt;</Paragraph>
+                    <Paragraph>&lt;/Viewbox&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+
+        <local:ControlExample x:Name="ExampleAccessories" HeaderText="Use the slider and radio buttons to change the Viewbox properties.">
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="SizeSlider" Header="Width/Height" Maximum="300" Minimum="20" Value="200" Width="100"/>
+                <StackPanel Margin="10,0,0,0">
+                    <TextBlock Text="Stretch" FontSize="16" Margin="12,9,0,10"/>
+                    <RadioButton Content="None" Tag="None" GroupName="Stretch" Checked="StretchButton_Checked"/>
+                    <RadioButton Content="Fill" Tag="Fill" GroupName="Stretch" Checked="StretchButton_Checked"/>
+                    <RadioButton Content="Uniform" Tag="Uniform" GroupName="Stretch" Checked="StretchButton_Checked" IsChecked="True"/>
+                    <RadioButton Content="UniformToFill" Tag="UniformToFill" GroupName="Stretch" Checked="StretchButton_Checked"/>
+                </StackPanel>
+
+                <StackPanel Margin="10,0,0,0">
+                    <TextBlock Text="StretchDirection" FontSize="16" Margin="12,9,0,10"/>
+                    <RadioButton Content="UpOnly" Tag="UpOnly" GroupName="StretchDirection" Checked="StretchDirectionButton_Checked"/>
+                    <RadioButton Content="DownOnly" Tag="DownOnly" GroupName="StretchDirection" Checked="StretchDirectionButton_Checked"/>
+                    <RadioButton Content="Both" Tag="Both" GroupName="StretchDirection" Checked="StretchDirectionButton_Checked" IsChecked="True"/>
+                </StackPanel>
+            </StackPanel>
+        </local:ControlExample>
+
+        <VisualStateManager.VisualStateGroups>
+            <!-- Visual states reflect the application's window size -->
+            <VisualStateGroup>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ExampleAccessories.(RelativePanel.RightOf)" Value="Example1" />
+                        <Setter Target="ExampleAccessories.Margin" Value="24,0,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ExampleAccessories.(RelativePanel.Below)" Value="Example1" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </RelativePanel>
+</Page>

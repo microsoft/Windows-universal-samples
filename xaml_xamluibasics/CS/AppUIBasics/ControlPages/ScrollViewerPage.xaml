@@ -1,0 +1,118 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AppUIBasics.ControlPages.ScrollViewerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:AppUIBasics.Common"
+    mc:Ignorable="d">
+
+    <RelativePanel>
+        <local:ControlExample x:Name="Example1" HeaderText="Content inside of a ScrollViewer.">
+            <ScrollViewer x:Name="Control1" Height="270" ZoomMode="Disabled" IsVerticalScrollChainingEnabled="True" ManipulationCompleted="Control1_ManipulationCompleted" 
+                    VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Image Source="ms-appx:///Assets/cliff.jpg" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </ScrollViewer>
+        </local:ControlExample>
+        <local:ControlExample x:Name="ExampleAccessories" HeaderText="Use the slider and radio buttons to change the ScrollViewer properties." MaxWidth="500">
+            <StackPanel x:Name="Control2" Orientation="Horizontal" Grid.Row="1">
+                <StackPanel>
+                    <ComboBox Header="ZoomMode" SelectionChanged="ZoomModeComboBox_SelectionChanged" Width="120">
+                        <ComboBoxItem>Enabled</ComboBoxItem>
+                        <ComboBoxItem IsSelected="True">Disabled</ComboBoxItem>
+                    </ComboBox>
+                    <Slider x:Name="ZoomSlider" Header="Zoom" IsEnabled="False"
+                                Maximum="{x:Bind Control1.MaxZoomFactor, Mode=OneWay}" Minimum="{x:Bind Control1.MinZoomFactor, Mode=OneWay}" 
+                                Value="1" Width="100" ValueChanged="ZoomSlider_ValueChanged"/>
+                </StackPanel>
+
+                <Grid Margin="20,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="120"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="ScrollMode" FontSize="15" Margin="0,5,0,5"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="ScrollbarVisibility" FontSize="15" Margin="0,5,0,5"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Horizontal" />
+                    <ComboBox Grid.Row="1" Grid.Column="1" x:Name="hsmCombo" SelectedIndex="1" SelectionChanged="hsmCombo_SelectionChanged_1" >
+                        <ComboBoxItem>Auto</ComboBoxItem>
+                        <ComboBoxItem>Enabled</ComboBoxItem>
+                        <ComboBoxItem>Disabled</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox Grid.Row="1" Grid.Column="2" x:Name="hsbvCombo" SelectedIndex="3" SelectionChanged="hsbvCombo_SelectionChanged_1">
+                        <ComboBoxItem>Auto</ComboBoxItem>
+                        <ComboBoxItem>Visible</ComboBoxItem>
+                        <ComboBoxItem>Hidden</ComboBoxItem>
+                        <ComboBoxItem>Disabled</ComboBoxItem>
+                    </ComboBox>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Vertical" />
+                    <ComboBox Grid.Row="2" Grid.Column="1" x:Name="vsmCombo" SelectedIndex="1" SelectionChanged="vsmCombo_SelectionChanged_1" >
+                        <ComboBoxItem>Auto</ComboBoxItem>
+                        <ComboBoxItem>Enabled</ComboBoxItem>
+                        <ComboBoxItem>Disabled</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox Grid.Row="2" Grid.Column="2" x:Name="vsbvCombo" SelectedIndex="1" SelectionChanged="vsbvCombo_SelectionChanged_1" >
+                        <ComboBoxItem>Auto</ComboBoxItem>
+                        <ComboBoxItem>Visible</ComboBoxItem>
+                        <ComboBoxItem>Hidden</ComboBoxItem>
+                        <ComboBoxItem>Disabled</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+            </StackPanel>
+            <local:ControlExample.Xaml>
+                <RichTextBlock>
+                    <Paragraph>&lt;ScrollViewer Height="270" ZoomMode="Disabled"</Paragraph>
+                  <Paragraph TextIndent="36">IsVerticalScrollChainingEnabled="True"</Paragraph>
+                    <Paragraph TextIndent="36">ManipulationCompleted="Control1_ManipulationCompleted"</Paragraph>
+                    <Paragraph TextIndent="36">HorizonalScrollMode="<Run Text="{x:Bind hsmCombo.SelectedItem, Converter={StaticResource comboBoxItemToStringConverter}, Mode=OneWay}"/>" HorizontalScrollBarVisibility="<Run Text="{x:Bind hsbvCombo.SelectedItem, Converter={StaticResource comboBoxItemToStringConverter}, Mode=OneWay}"/>"</Paragraph>
+                    <Paragraph TextIndent="36">VerticalScrollMode="<Run Text="{x:Bind vsmCombo.SelectedItem, Converter={StaticResource comboBoxItemToStringConverter}, Mode=OneWay}"/>" VerticalScrollBarVisibility="<Run Text="{x:Bind vsbvCombo.SelectedItem, Converter={StaticResource comboBoxItemToStringConverter}, Mode=OneWay}"/>" &gt;/></Paragraph>
+                    <Paragraph TextIndent="12">&lt;Image Source="ms-appx:///Assets/cliff.jpg" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top"/&gt;</Paragraph>
+                    <Paragraph>&lt;/ScrollViewer&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+
+        <VisualStateManager.VisualStateGroups>
+            <!-- Visual states reflect the application's window size -->
+            <VisualStateGroup>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Example1.(RelativePanel.RightOf)" Value="ExampleAccessories" />
+                        <Setter Target="Example1.Margin" Value="24,0,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Example1.(RelativePanel.Below)" Value="ExampleAccessories" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </RelativePanel>
+</Page>
