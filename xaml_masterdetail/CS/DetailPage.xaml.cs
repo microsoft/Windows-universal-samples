@@ -86,18 +86,18 @@ namespace MasterDetailApp
             Frame.GoBack(new DrillInNavigationTransitionInfo());
         }
 
-        void NavigateBackForWideState(bool suppressTransition)
+        void NavigateBackForWideState(bool useTransition)
         {
             // Evict this page from the cache as we may not need it again.
             NavigationCacheMode = NavigationCacheMode.Disabled;
 
-            if (suppressTransition)
+            if (useTransition)
             {
-                Frame.GoBack(new SuppressNavigationTransitionInfo());
+                Frame.GoBack(new EntranceNavigationTransitionInfo());
             }
             else
             {
-                Frame.GoBack();
+                Frame.GoBack(new SuppressNavigationTransitionInfo());
             }
         }
 
@@ -112,7 +112,7 @@ namespace MasterDetailApp
             {
                 // We shouldn't see this page since we are in "wide master-detail" mode.
                 // Play a transition as we are navigating from a separate page.
-                NavigateBackForWideState(false);
+                NavigateBackForWideState(useTransition:true);
             }
             else
             {
@@ -136,7 +136,7 @@ namespace MasterDetailApp
                 Window.Current.SizeChanged -= Window_SizeChanged;
 
                 // We shouldn't see this page since we are in "wide master-detail" mode.
-                NavigateBackForWideState(true);
+                NavigateBackForWideState(useTransition:false);
             }
         }
 

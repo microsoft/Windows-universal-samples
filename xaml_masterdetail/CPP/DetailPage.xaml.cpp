@@ -86,8 +86,8 @@ void DetailPage::PageRoot_Loaded(Object^ sender, RoutedEventArgs^ e)
 	if (ShouldGoToWideState())
 	{
 		// We shouldn't see this page since we are in "wide master-detail" mode.
-		// Play a transition as we are navigating from a separate page.
-		NavigateBackForWideState(/* suppressTransitions */ false);
+		// Play a transition as we are likely navigating back from a separate page.
+		NavigateBackForWideState(/* useTransition */ true);
 	}
 	else
 	{
@@ -118,7 +118,7 @@ void DetailPage::Window_SizeChanged(Object ^sender, Windows::UI::Core::WindowSiz
 		Window::Current->SizeChanged -= m_sizeChangedEventRegistrationToken;
 
 		// We shouldn't see this page since we are in "wide master-detail" mode.
-		NavigateBackForWideState(/* suppressTransitions */ true);
+		NavigateBackForWideState(/* useTransition */ false);
 	}
 }
 
@@ -139,18 +139,18 @@ void DetailPage::OnBackRequested()
 	Frame->GoBack(ref new DrillInNavigationTransitionInfo());
 }
 
-void DetailPage::NavigateBackForWideState(bool suppressTransition)
+void DetailPage::NavigateBackForWideState(bool useTransition)
 {
 	// Evict this page from the cache as we may not need it again.
 	NavigationCacheMode = Windows::UI::Xaml::Navigation::NavigationCacheMode::Disabled;
 
-	if (suppressTransition)
+	if (useTransition)
 	{
-		Frame->GoBack(ref new SuppressNavigationTransitionInfo());
+		Frame->GoBack(ref new EntranceNavigationTransitionInfo());
 	}
 	else
 	{
-		Frame->GoBack();
+		Frame->GoBack(ref new SuppressNavigationTransitionInfo());
 	}
 }
 
