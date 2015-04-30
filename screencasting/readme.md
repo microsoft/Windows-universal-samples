@@ -10,6 +10,9 @@ Specifically, this sample covers:
 -   How to use the Windows.UI.ViewManagement APIs, and custom transport controls.
 -   How to discover and launch an application using the Windows.Media.DialProtocol, Windows.Media.Casting, and Windows.UI.ViewManagement APIs.
 
+Notes:
+In AzureMediaProviders.cs there are a few lines commented out that contain a .License property for each video element.  These properties are not valid properties on the object, hence they are commented out.  The copyright attribution, however, is accurate for the various pieces of content.  The attribution will be set up more cleanly in later versions of the sample.
+
 
 
 
