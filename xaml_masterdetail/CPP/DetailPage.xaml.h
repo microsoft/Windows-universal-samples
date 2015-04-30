@@ -43,7 +43,11 @@ namespace MasterDetailApp
 		static Windows::UI::Xaml::DependencyProperty^ s_itemProperty;
 		
 		void OnBackRequested();
+<<<<<<< HEAD
 		void NavigateBackForWideState(bool suppressTransition);
+=======
+		void NavigateBackForWideState(bool useTransition);
+>>>>>>> develop
 		bool ShouldGoToWideState();
 
 		Windows::Foundation::EventRegistrationToken m_sizeChangedEventRegistrationToken;
