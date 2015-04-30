@@ -86,7 +86,7 @@ namespace MasterDetailApp
             Frame.GoBack(new DrillInNavigationTransitionInfo());
         }
 
-        void NavigateBackForWideState(bool useTransition)
+        void NavigateBackForWideState(bool useTransistion)
         {
             // Evict this page from the cache as we may not need it again.
             NavigationCacheMode = NavigationCacheMode.Disabled;
