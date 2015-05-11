@@ -21,45 +21,65 @@
         <Setter Property="UseSystemFocusVisuals" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="ButtonBase">
+                <ControlTemplate TargetType="ToggleButton">
                     <Grid Background="{TemplateBinding Background}" x:Name="LayoutRoot">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
                                 <VisualState x:Name="PointerOver">
-                                    <VisualState.Setters>
-                                        <Setter Target="LayoutRoot.(Grid.Background)" Value="{ThemeResource SystemControlHighlightListLowBrush}" />
-                                        <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}" />
-                                    </VisualState.Setters>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="(Grid.Background)">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListLowBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
-                                    <VisualState.Setters>
-                                        <Setter Target="LayoutRoot.(Grid.Background)" Value="{ThemeResource SystemControlHighlightListMediumBrush}" />
-                                        <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}" />
-                                    </VisualState.Setters>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="(Grid.Background)">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListMediumBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Disabled">
-                                    <VisualState.Setters>
-                                        <Setter Target="ContentPresenter.(TextBlock.Foreground)" Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
-                                    </VisualState.Setters>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="(TextBlock.Foreground)">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseLowBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Checked"/>
                                 <VisualState x:Name="CheckedPointerOver">
-                                    <VisualState.Setters>
-                                        <Setter Target="LayoutRoot.(Grid.Background)" Value="{ThemeResource SystemControlHighlightListLowBrush}" />
-                                        <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}" />
-                                    </VisualState.Setters>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="(Grid.Background)">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListLowBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="CheckedPressed">
-                                    <VisualState.Setters>
-                                        <Setter Target="LayoutRoot.(Grid.Background)" Value="{ThemeResource SystemControlHighlightListMediumBrush}" />
-                                        <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}" />
-                                    </VisualState.Setters>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="(Grid.Background)">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListMediumBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="CheckedDisabled">
-                                    <VisualState.Setters>
-                                        <Setter Target="ContentPresenter.(TextBlock.Foreground)" Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
-                                    </VisualState.Setters>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="(TextBlock.Foreground)">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseLowBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
