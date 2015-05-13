@@ -7,19 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NavigationMenuSample", "Nav
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
-		Release|Any CPU = Release|Any CPU
 		Release|ARM = Release|ARM
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B08D337A-AF9F-4705-B8C1-C7F07FACD8C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B08D337A-AF9F-4705-B8C1-C7F07FACD8C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B08D337A-AF9F-4705-B8C1-C7F07FACD8C5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{B08D337A-AF9F-4705-B8C1-C7F07FACD8C5}.Debug|ARM.ActiveCfg = Debug|ARM
 		{B08D337A-AF9F-4705-B8C1-C7F07FACD8C5}.Debug|ARM.Build.0 = Debug|ARM
 		{B08D337A-AF9F-4705-B8C1-C7F07FACD8C5}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -29,9 +24,6 @@ Global
 		{B08D337A-AF9F-4705-B8C1-C7F07FACD8C5}.Debug|x86.ActiveCfg = Debug|x86
 		{B08D337A-AF9F-4705-B8C1-C7F07FACD8C5}.Debug|x86.Build.0 = Debug|x86
 		{B08D337A-AF9F-4705-B8C1-C7F07FACD8C5}.Debug|x86.Deploy.0 = Debug|x86
-		{B08D337A-AF9F-4705-B8C1-C7F07FACD8C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B08D337A-AF9F-4705-B8C1-C7F07FACD8C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B08D337A-AF9F-4705-B8C1-C7F07FACD8C5}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{B08D337A-AF9F-4705-B8C1-C7F07FACD8C5}.Release|ARM.ActiveCfg = Release|ARM
 		{B08D337A-AF9F-4705-B8C1-C7F07FACD8C5}.Release|ARM.Build.0 = Release|ARM
 		{B08D337A-AF9F-4705-B8C1-C7F07FACD8C5}.Release|ARM.Deploy.0 = Release|ARM
