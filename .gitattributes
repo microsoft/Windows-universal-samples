@@ -3,6 +3,29 @@
 ###############################################################################
 * text=auto
 
+# Declare files that will always have CRLF line endings on checkout.
+*.appxmanifest text eol=crlf
+*.c            text eol=crlf
+*.cpp          text eol=crlf
+*.cs           text eol=crlf
+*.csproj       text eol=crlf
+*.css          text eol=crlf
+*.def          text eol=crlf
+*.filters      text eol=crlf
+*.h            text eol=crlf
+*.htm          text eol=crlf
+*.html         text eol=crlf
+*.idl          text eol=crlf
+*.inf          text eol=crlf
+*.inx          text eol=crlf
+*.js           text eol=crlf
+*.jsproj       text eol=crlf
+*.rc           text eol=crlf
+*.rgs          text eol=crlf
+*.sln          text eol=crlf
+*.vcxproj      text eol=crlf
+*.xaml         text eol=crlf
+
 ###############################################################################
 # Set default behavior for command prompt diff.
 #
@@ -10,55 +33,5 @@
 # default for csharp files.
 # Note: This is only used by command line
 ###############################################################################
-#*.cs     diff=csharp
-
-###############################################################################
-# Set the merge driver for project and solution files
-#
-# Merging from the command prompt will add diff markers to the files if there
-# are conflicts (Merging from VS is not affected by the settings below, in VS
-# the diff markers are never inserted). Diff markers may cause the following 
-# file extensions to fail to load in VS. An alternative would be to treat
-# these files as binary and thus will always conflict and require user
-# intervention with every merge. To do so, just uncomment the entries below
-###############################################################################
-#*.sln       merge=binary
-#*.csproj    merge=binary
-#*.vbproj    merge=binary
-#*.vcxproj   merge=binary
-#*.vcproj    merge=binary
-#*.dbproj    merge=binary
-#*.fsproj    merge=binary
-#*.lsproj    merge=binary
-#*.wixproj   merge=binary
-#*.modelproj merge=binary
-#*.sqlproj   merge=binary
-#*.wwaproj   merge=binary
-
-###############################################################################
-# behavior for image files
-#
-# image files are treated as binary by default.
-###############################################################################
-#*.jpg   binary
-#*.png   binary
-#*.gif   binary
-
-###############################################################################
-# diff behavior for common document formats
-# 
-# Convert binary document formats to text before diffing them. This feature
-# is only available from the command line. Turn it on by uncommenting the 
-# entries below.
-###############################################################################
-#*.doc   diff=astextplain
-#*.DOC   diff=astextplain
-#*.docx  diff=astextplain
-#*.DOCX  diff=astextplain
-#*.dot   diff=astextplain
-#*.DOT   diff=astextplain
-#*.pdf   diff=astextplain
-#*.PDF   diff=astextplain
-#*.rtf   diff=astextplain
-#*.RTF   diff=astextplain
+*.cs     diff=csharp
 
