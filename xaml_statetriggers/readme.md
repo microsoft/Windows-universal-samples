@@ -8,19 +8,6 @@ To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.c
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
-## Related topics
-
-### Samples
-
-[Sample 1](https://github.com/Microsoft/Windows-universal-samples/tree/master/<sample>)
-
-### Reference
-
-<!-- Add links to related API -->
-
-[API 1](http://msdn.microsoft.com/library/windows/apps/)
-
-[API 2](http://msdn.microsoft.com/library/windows/apps/)
 
 ## System requirements
 
