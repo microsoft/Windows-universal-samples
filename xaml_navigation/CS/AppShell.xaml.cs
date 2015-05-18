@@ -67,11 +67,6 @@ namespace NavigationMenuSample
                 this.TogglePaneButton.Focus(FocusState.Programmatic);
             };
 
-            this.RootSplitView.RegisterPropertyChangedCallback(SplitView.DisplayModeProperty, (sender, args) =>
-            {
-                this.CheckTogglePaneButtonSizeChanged();
-            });
-
             SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManager_BackRequested;
 
             // If on a phone device that has hardware buttons then we hide the app's back button.
@@ -92,34 +87,45 @@ namespace NavigationMenuSample
         /// <param name="e"></param>
         private void AppShell_KeyDown(object sender, KeyRoutedEventArgs e)
         {
+            FocusNavigationDirection direction = FocusNavigationDirection.None;
             switch (e.Key)
             {
                 case Windows.System.VirtualKey.Left:
                 case Windows.System.VirtualKey.GamepadDPadLeft:
                 case Windows.System.VirtualKey.GamepadLeftThumbstickLeft:
                 case Windows.System.VirtualKey.NavigationLeft:
-                    FocusManager.TryMoveFocus(FocusNavigationDirection.Left);
+                    direction = FocusNavigationDirection.Left;
                     break;
                 case Windows.System.VirtualKey.Right:
                 case Windows.System.VirtualKey.GamepadDPadRight:
                 case Windows.System.VirtualKey.GamepadLeftThumbstickRight:
                 case Windows.System.VirtualKey.NavigationRight:
-                    FocusManager.TryMoveFocus(FocusNavigationDirection.Right);
+                    direction = FocusNavigationDirection.Right;
                     break;
 
                 case Windows.System.VirtualKey.Up:
                 case Windows.System.VirtualKey.GamepadDPadUp:
                 case Windows.System.VirtualKey.GamepadLeftThumbstickUp:
                 case Windows.System.VirtualKey.NavigationUp:
-                    FocusManager.TryMoveFocus(FocusNavigationDirection.Up);
+                    direction = FocusNavigationDirection.Up;
                     break;
 
                 case Windows.System.VirtualKey.Down:
                 case Windows.System.VirtualKey.GamepadDPadDown:
                 case Windows.System.VirtualKey.GamepadLeftThumbstickDown:
                 case Windows.System.VirtualKey.NavigationDown:
-                    FocusManager.TryMoveFocus(FocusNavigationDirection.Down);
+                    direction = FocusNavigationDirection.Down;
                     break;
+            }
+
+            if (direction != FocusNavigationDirection.None)
+            {
+                var control = FocusManager.FindNextFocusableElement(direction) as Control;
+                if (control != null)
+                {
+                    control.Focus(FocusState.Programmatic);
+                    e.Handled = true;
+                }
             }
         }
 
@@ -178,7 +184,7 @@ namespace NavigationMenuSample
         }
 
         /// <summary>
-        /// Ensures the nav menu reflects reality when navigation is triggered outside of 
+        /// Ensures the nav menu reflects reality when navigation is triggered outside of
         /// the nav menu buttons.
         /// </summary>
         /// <param name="sender"></param>
@@ -203,7 +209,7 @@ namespace NavigationMenuSample
                 var container = (ListViewItem)NavMenuList.ContainerFromItem(item);
 
                 // While updating the selection state of the item prevent it from taking keyboard focus.  If a
-                // user is invoking the back button via the keyboard causing the selected nav menu item to change 
+                // user is invoking the back button via the keyboard causing the selected nav menu item to change
                 // then focus will remain on the back button.
                 if (container != null) container.IsTabStop = false;
                 NavMenuList.SetSelectedItem(container);
@@ -253,7 +259,7 @@ namespace NavigationMenuSample
         }
 
         /// <summary>
-        /// Check for the conditions where the navigation pane does not occupy the space under the floating 
+        /// Check for the conditions where the navigation pane does not occupy the space under the floating
         /// hamburger button and trigger the event.
         /// </summary>
         private void CheckTogglePaneButtonSizeChanged()
@@ -278,7 +284,7 @@ namespace NavigationMenuSample
         }
 
         /// <summary>
-        /// Enable accessibility on each nav menu item by setting the AutomationProperties.Name on each container 
+        /// Enable accessibility on each nav menu item by setting the AutomationProperties.Name on each container
         /// using the associated Label of each item.
         /// </summary>
         /// <param name="sender"></param>

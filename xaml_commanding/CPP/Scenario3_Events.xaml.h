@@ -9,23 +9,25 @@
 //
 //*********************************************************
 
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
+#pragma once
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+#include "Scenario3_Events.g.h"
 
 namespace Commanding
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Scenario1 : Page
+    [Windows::Foundation::Metadata::WebHostHidden]
+    public ref class Scenario3_Events sealed
     {
-        public Scenario1()
-        {
-            this.InitializeComponent();
-        }
-    }
+    public:
+        Scenario3_Events();
+
+	private:
+		void CommandBar_Opening(Platform::Object^ sender, Platform::Object^ e);
+		void CommandBar_Closing(Platform::Object^ sender, Platform::Object^ e);
+		void CommandBar_Opened(Platform::Object^ sender, Platform::Object^ e);
+		void CommandBar_Closed(Platform::Object^ sender, Platform::Object^ e);
+	};
 }

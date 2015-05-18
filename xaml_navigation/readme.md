@@ -17,7 +17,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[Sample 1](https://github.com/Microsoft/Windows-universal-samples/tree/master/<sample>)
+[Master Detail](https://github.com/Microsoft/Windows-universal-samples/tree/master/xaml_masterdetail)
 
 ### Reference
 
