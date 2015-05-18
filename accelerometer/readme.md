@@ -8,6 +8,7 @@ This sample allows the user to view the acceleration forces along the X-, Y-, an
 -   Accelerometer shake events
 -   Poll accelerometer readings
 -   Accelerometer orientation changed
+-   Accelerometer data events batching
 
 ### Acclerometer Data Events
 
@@ -24,6 +25,10 @@ When you choose the **Enable** button for the **Polling** option, the app will r
 ### Accelerometer Orientation Changed
 
 When you choose the **Enable** button for the **OrientationChange** option, the app will display both raw sensor readings, as well as sensor readings that align with the current display orientation.
+
+### Accelerometer data events batching**
+
+When you choose the **Enable** button for the **Data Events** option, the app begins streaming accelerometer readings in batches.
 
 ## Related topics
 
@@ -46,9 +51,8 @@ When you choose the **Enable** button for the **OrientationChange** option, the 
 ## Build the sample
 
 1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the directory to which you 
-3. unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file. 
-3. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++ or C\#. Double-click the Visual Studio 2015 Solution (.sln) file.
+3.  Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 
@@ -61,3 +65,4 @@ The next steps depend on whether you just want to deploy the sample or you want 
 ### Deploying and running the sample
 
 - To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or selectDebug > Start Without Debugging. 
+

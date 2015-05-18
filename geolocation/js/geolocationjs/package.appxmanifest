@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+  <Identity
+    Name="73701b9d-e0be-4399-a55b-237d2369b848"
+    Version="1.0.0.0"
+    Publisher="CN=Microsoft" />
+
+  <mp:PhoneIdentity PhoneProductId="73701b9d-e0be-4399-a55b-237d2369b848" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>GeolocationJS</DisplayName>
+    <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+    <Logo>images\storelogo-sdk.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10069.0" MaxVersionTested="10.0.10069.0" />
+    <!--<PackageDependency Name="Microsoft.WinJS.4.0" MinVersion="1.0.9927.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />-->
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+
+  <Applications>
+    <Application
+      Id="App"
+      StartPage="default.html">
+
+      <uap:VisualElements
+        DisplayName="GeolocationJS"
+        Description="Geolocation JS SDK Sample"
+        
+        BackgroundColor="#00b2f0"
+        Square150x150Logo="images\storelogo-sdk.png"
+        Square44x44Logo="images\smalltile-sdk.png">
+
+        <uap:SplashScreen Image="images\splash-sdk.png" />
+        <uap:DefaultTile DefaultSize="square150x150Logo" >
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+        <uap:LockScreen Notification="badge" BadgeLogo="images\badge-logo.png" />
+      </uap:VisualElements>
+
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" StartPage="js\backgroundtask.js" >
+          <BackgroundTasks>
+            <Task Type="timer" />
+          </BackgroundTasks>
+        </Extension>
+        <Extension Category="windows.backgroundTasks" StartPage="js\geofencebackgroundtask.js">
+          <BackgroundTasks>
+            <Task Type="location" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
+
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <DeviceCapability Name="location"/>
+  </Capabilities>
+
+</Package>
+

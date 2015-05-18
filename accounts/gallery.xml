@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gallery_sample>
+  <title>Accounts</title>
+  <!-- See/use the readme.md file for sample descriptions. -->
+
+  <feature_teams>
+    <feature_team_info lang="CS,CPP,JS" comp_central_path="PTP-PC, Tablet and Phone\Shell\CDE-Connected Device Experiences\Identity\Accounts Control" dev_owner="erjia" pm_owner="erjia" writer_owner="" />
+  </feature_teams>
+</gallery_sample>

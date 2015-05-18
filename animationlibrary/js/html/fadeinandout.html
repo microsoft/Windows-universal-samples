@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/fadeInAndOut.css" />
+    <script src="/js/fadeInAndOut.js"></script>
+</head>
+<body>
+    <div id="scenarioHeader">
+        <h2 id="sampleHeader">Description:</h2>
+        <div id="scenarioDescription">
+            Fade in and out
+        </div>
+    </div>
+    <div id="input" data-win-control="SdkSample.ScenarioInput">
+        <p>
+            Use the Fade In and Fade Out animations to show and hide temporarily visible elements
+            of your page. These animations are best used with elements that appear due to user interaction.
+        </p>
+        <p>
+            Fade In and Fade Out are implemented using CSS transitions. Because of this, the
+            animation dictates the end state of every element and transitions to that state.
+            Fade In will set the opacity value of the given element to 1. Fade Out will set
+            the opacity value of the given element to 0.
+        </p>
+        <p>
+            Fade In and Fade Out animations work best with items that have an opacity value of 1 when visible. In the
+            cases shown below, applying FadeIn and FadeOut to the parent element preserves an
+            element's opacity values, whereas applying it to the individual element does not.
+        </p>
+        <button id="fadeIn">Fade In</button>
+        <button id="fadeOut">Fade Out</button>
+        <button id="resetOpacity">Reset</button>
+    </div>
+    <div id="output" data-win-control="SdkSample.ScenarioOutput">
+        <div class="example">
+            <h3>Applied to the parent element:</h3>
+            <div id="targetParent" class="fadeTarget">
+                <div class="target" style="opacity: 1;">100% Opacity</div>
+                <div class="target" style="opacity: .75;">75% Opacity</div>
+                <div class="target" style="opacity: .5;">50% Opacity</div>
+                <div class="target" style="opacity: .25;">25% Opacity</div>
+            </div>
+        </div>
+        <div class="example">
+            <h3>Applied to individual elements:</h3>
+            <div style="opacity: 1;">
+                <div id="target1" class="target fadeTarget" style="opacity: 1;">100% Opacity</div>
+                <div id="target2" class="target fadeTarget" style="opacity: .75;">75% Opacity</div>
+                <div id="target3" class="target fadeTarget" style="opacity: .5;">50% Opacity</div>
+                <div id="target4" class="target fadeTarget" style="opacity: .25;">25% Opacity</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

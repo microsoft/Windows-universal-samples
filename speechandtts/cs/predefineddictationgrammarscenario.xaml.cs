@@ -1,7 +1,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -11,6 +11,7 @@
 
 using SDKTemplate;
 using System;
+using System.Threading.Tasks;
 using Windows.Media.SpeechRecognition;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -33,42 +34,34 @@ namespace SpeechAndTTS
 
         public PredefinedDictationGrammarScenario()
         {
-            this.InitializeComponent();
-
-            // Save the UI thread dispatcher to allow speech status messages to be shown on the UI.
-            dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
+            InitializeComponent();
         }
 
         /// <summary>
         /// When activating the scenario, ensure we have permission from the user to access their microphone, and
         /// provide an appropriate path for the user to enable access to the microphone if they haven't
         /// given explicit permission for it.
-        /// Construct a speech recognizer using the default dictation grammar.
         /// </summary>
         /// <param name="e">The navigation event details</param>
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            // Save the UI thread dispatcher to allow speech status messages to be shown on the UI.
+            dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
+
             bool permissionGained = await AudioCapturePermissions.RequestMicrophonePermission();
-            if(permissionGained)
+            if (permissionGained)
             {
-                // enable the recognition buttons
+                // Enable the recognition buttons.
                 btnRecognizeWithUI.IsEnabled = true;
                 btnRecognizeWithoutUI.IsEnabled = true;
             }
             else
             {
-                this.resultTextBlock.Visibility = Visibility.Visible;
-                this.resultTextBlock.Text = "Permission to access capture resources was not given by the user, reset the application setting in Settings->Privacy->Microphone.";
+                resultTextBlock.Visibility = Visibility.Visible;
+                resultTextBlock.Text = "Permission to access capture resources was not given by the user; please set the application setting in Settings->Privacy->Microphone.";
             }
 
-            // Create an instance of SpeechRecognizer.
-            this.speechRecognizer = new SpeechRecognizer();
-
-            // Provide feedback to the user about the state of the recognizer.
-            speechRecognizer.StateChanged += SpeechRecognizer_StateChanged;
-
-            // Compile the dictation grammar that is loaded by default.
-            await speechRecognizer.CompileConstraintsAsync();
+            await InitializeRecognizer();
         }
 
         /// <summary>
@@ -78,13 +71,49 @@ namespace SpeechAndTTS
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            speechRecognizer.StateChanged -= SpeechRecognizer_StateChanged;
+
+            if (speechRecognizer != null)
+            {
+                speechRecognizer.StateChanged -= SpeechRecognizer_StateChanged;
+
+                this.speechRecognizer.Dispose();
+                this.speechRecognizer = null;
+            }
+        }
+
+        /// <summary>
+        /// Creates a SpeechRecognizer instance and initializes the grammar.
+        /// </summary>
+        private async Task InitializeRecognizer()
+        {
+            // Create an instance of SpeechRecognizer.
+            speechRecognizer = new SpeechRecognizer();
+
+            // Provide feedback to the user about the state of the recognizer.
+            speechRecognizer.StateChanged += SpeechRecognizer_StateChanged;
+
+            // Compile the dictation topic constraint, which optimizes for dictated speech.
+            var dictationConstraint = new SpeechRecognitionTopicConstraint(SpeechRecognitionScenario.Dictation, "dictation");
+            speechRecognizer.Constraints.Add(dictationConstraint);
+            SpeechRecognitionCompilationResult compilationResult = await speechRecognizer.CompileConstraintsAsync();
+
+            // Check to make sure that the constraints were in a proper format and the recognizer was able to compile it.
+            if (compilationResult.Status != SpeechRecognitionResultStatus.Success)
+            {
+                // Disable the recognition buttons.
+                btnRecognizeWithUI.IsEnabled = false;
+                btnRecognizeWithoutUI.IsEnabled = false;
+
+                // Let the user know that the grammar didn't compile properly.
+                resultTextBlock.Visibility = Visibility.Visible;
+                resultTextBlock.Text = "Unable to compile grammar.";
+            }
         }
 
         /// <summary>
         /// Handle SpeechRecognizer state changed events by updating a UI component.
         /// </summary>
-        /// <param name="sender">Speech recognizer that generated this status event.</param>
+        /// <param name="sender">Speech recognizer that generated this status event</param>
         /// <param name="args">The recognizer's status</param>
         private async void SpeechRecognizer_StateChanged(SpeechRecognizer sender, SpeechRecognizerStateChangedEventArgs args)
         {
@@ -93,16 +122,16 @@ namespace SpeechAndTTS
                 MainPage.Current.NotifyUser("Speech recognizer state: " + args.State.ToString(), NotifyType.StatusMessage);
             });
         }
-        
+
         /// <summary>
         /// Uses the recognizer constructed earlier to listen for speech from the user before displaying 
         /// it back on the screen. Uses the built-in speech recognition UI.
         /// </summary>
-        /// <param name="sender">The page containing the button this handler is attached to</param>
+        /// <param name="sender">Button that triggered this event</param>
         /// <param name="e">State information about the routed event</param>
         private async void RecognizeWithUIDictationGrammar_Click(object sender, RoutedEventArgs e)
         {
-            this.heardYouSayTextBlock.Visibility = this.resultTextBlock.Visibility = Visibility.Collapsed;
+            heardYouSayTextBlock.Visibility = resultTextBlock.Visibility = Visibility.Collapsed;
 
             // Start recognition.
             try
@@ -111,22 +140,25 @@ namespace SpeechAndTTS
                 // If successful, display the recognition result.
                 if (speechRecognitionResult.Status == SpeechRecognitionResultStatus.Success)
                 {
-                    this.heardYouSayTextBlock.Visibility = this.resultTextBlock.Visibility = Visibility.Visible;
-                    this.heardYouSayTextBlock.Text = "Heard you say";
-                    this.resultTextBlock.Text = speechRecognitionResult.Text;
+                    heardYouSayTextBlock.Visibility = resultTextBlock.Visibility = Visibility.Visible;
+                    resultTextBlock.Text = speechRecognitionResult.Text;
                 }
             }
-            catch(NotImplementedException)
+            catch (ObjectDisposedException exception)
             {
-                this.resultTextBlock.Visibility = Visibility.Visible;
-                this.resultTextBlock.Text = "RecognizeWithUIAsync() is currently not implemented on desktop.";
+                // ObjectDisposedException will be thrown if you exit the scenario while the recogizer is actively
+                // processing speech. Since this happens here when we navigate out of the scenario, don't try to 
+                // show a message dialog for this exception.
+                System.Diagnostics.Debug.WriteLine("ObjectDisposedException caught while recognition in progress (can be ignored):");
+                System.Diagnostics.Debug.WriteLine(exception.ToString());
             }
             catch (Exception exception)
             {
+                // Handle the speech privacy policy error.
                 if ((uint)exception.HResult == HResultPrivacyStatementDeclined)
                 {
-                    this.resultTextBlock.Visibility = Visibility.Visible;
-                    this.resultTextBlock.Text = "The privacy statement was declined.";
+                    resultTextBlock.Visibility = Visibility.Visible;
+                    resultTextBlock.Text = "The privacy statement was declined. Go to Settings -> Privacy -> Speech, inking and typing, and ensure you have viewed the privacy policy, and Cortana is set to 'Get To Know You'";
                 }
                 else
                 {
@@ -134,24 +166,22 @@ namespace SpeechAndTTS
                     await messageDialog.ShowAsync();
                 }
             }
-            btnRecognizeWithoutUI.IsEnabled = true;
-            btnRecognizeWithUI.IsEnabled = true;
         }
 
         /// <summary>
         /// Uses the recognizer constructed earlier to listen for speech from the user before displaying 
         /// it back on the screen. Uses developer-provided UI for user feedback.
         /// </summary>
-        /// <param name="sender">The page containing the button this handler is attached to</param>
+        /// <param name="sender">Button that triggered this event</param>
         /// <param name="e">State information about the routed event</param>
         private async void RecognizeWithoutUIDictationGrammar_Click(object sender, RoutedEventArgs e)
         {
-            this.heardYouSayTextBlock.Visibility = this.resultTextBlock.Visibility = Visibility.Collapsed;
+            heardYouSayTextBlock.Visibility = resultTextBlock.Visibility = Visibility.Collapsed;
 
             // Disable the UI while recognition is occurring, and provide feedback to the user about current state.
             btnRecognizeWithUI.IsEnabled = false;
             btnRecognizeWithoutUI.IsEnabled = false;
-            listenWithoutUIButtonText.Text = " Listening for speech...";
+            listenWithoutUIButtonText.Text = " listening for speech...";
 
             // Start recognition.
             try
@@ -160,16 +190,25 @@ namespace SpeechAndTTS
                 // If successful, display the recognition result.
                 if (speechRecognitionResult.Status == SpeechRecognitionResultStatus.Success)
                 {
-                    this.heardYouSayTextBlock.Visibility = this.resultTextBlock.Visibility = Visibility.Visible;
-                    this.resultTextBlock.Text = speechRecognitionResult.Text;
+                    heardYouSayTextBlock.Visibility = resultTextBlock.Visibility = Visibility.Visible;
+                    resultTextBlock.Text = speechRecognitionResult.Text;
                 }
+            }
+            catch (ObjectDisposedException exception)
+            {
+                // ObjectDisposedException will be thrown if you exit the scenario while the recogizer is actively
+                // processing speech. Since this happens here when we navigate out of the scenario, don't try to 
+                // show a message dialog for this exception.
+                System.Diagnostics.Debug.WriteLine("ObjectDisposedException caught while recognition in progress (can be ignored):");
+                System.Diagnostics.Debug.WriteLine(exception.ToString());
             }
             catch (Exception exception)
             {
+                // Handle the speech privacy policy error.
                 if ((uint)exception.HResult == HResultPrivacyStatementDeclined)
                 {
-                    this.resultTextBlock.Visibility = Visibility.Visible;
-                    this.resultTextBlock.Text = "The privacy statement was declined.";
+                    resultTextBlock.Visibility = Visibility.Visible;
+                    resultTextBlock.Text = "The privacy statement was declined. Go to Settings -> Privacy -> Speech, inking and typing, and ensure you have viewed the privacy policy, and Cortana is set to 'Get To Know You'";
                 }
                 else
                 {
@@ -179,9 +218,9 @@ namespace SpeechAndTTS
             }
 
             // Reset UI state.
+            listenWithoutUIButtonText.Text = " without UI";
             btnRecognizeWithUI.IsEnabled = true;
             btnRecognizeWithoutUI.IsEnabled = true;
-            listenWithoutUIButtonText.Text = " without UI";
         }
     }
 }

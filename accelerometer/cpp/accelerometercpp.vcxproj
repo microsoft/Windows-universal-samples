@@ -91,9 +91,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup>
-    <PackageCertificateKeyFile>AccelerometerCPP_TemporaryKey.pfx</PackageCertificateKeyFile>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
@@ -151,6 +148,9 @@
     <ClInclude Include="Scenario4_OrientationChanged.xaml.h">
       <DependentUpon>Scenario4_OrientationChanged.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario5_DataEventsBatching.xaml.h">
+      <DependentUpon>Scenario5_DataEventsBatching.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -163,6 +163,7 @@
     <Page Include="Scenario2_ShakeEvents.xaml" />
     <Page Include="Scenario3_Polling.xaml" />
     <Page Include="Scenario4_OrientationChanged.xaml" />
+    <Page Include="Scenario5_DataEventsBatching.xaml" />
     <Page Include="Styles\Styles.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +198,9 @@
     </ClCompile>
     <ClCompile Include="Scenario4_OrientationChanged.xaml.cpp">
       <DependentUpon>Scenario4_OrientationChanged.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario5_DataEventsBatching.xaml.cpp">
+      <DependentUpon>Scenario5_DataEventsBatching.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@
       Version="1.0.0.0" />
 
 
-    <mp:PhoneIdentity PhoneProductId="05777116-8530-42a2-914d-9dae4b4da01a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="3fb3d2a6-e13b-4ef8-b74a-d4b8745e53bb" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>ActivitySensorCS</DisplayName>
@@ -21,7 +21,7 @@
     </Properties>
 
     <Dependencies>
-        <TargetPlatform Name="Windows.Universal" MinVersion="10.0.10030.0" MaxVersionTested="10.0.10030.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10069.0" MaxVersionTested="10.0.10069.0" />
     </Dependencies>
 
     <Resources>
@@ -44,10 +44,9 @@
               Square150x150Logo="Assets\StoreLogo-sdk.png"
               Square44x44Logo="Assets\SmallTile-sdk.png"
               Description="ActivitySensorCS"
-              ForegroundText="light"
               BackgroundColor="#00b2f0">
                 <uap:SplashScreen Image="Assets\Splash-sdk.png" />
-                <uap:DefaultTile DefaultSize="square150x150Logo" >
+                <uap:DefaultTile>
                     <uap:ShowNameOnTiles>
                         <uap:ShowOn Tile="square150x150Logo" />
                     </uap:ShowNameOnTiles>
@@ -57,7 +56,7 @@
     </Applications>
 
     <Capabilities>
-        <!-- TODO: replace with "activity" when ready, for now use the raw GUID -->
-        <DeviceCapability Name="9D9E0118-1807-4F2E-96E4-2CE57142E196" />
+        <DeviceCapability Name="activity" />
     </Capabilities>
 </Package>
+

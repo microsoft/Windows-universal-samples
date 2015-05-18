@@ -1,0 +1,60 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario7_TrackAFileOrFolderSoThatYouCanAccessItLater.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>
+                    Persist access to a storage item for future use.
+                </p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                Use the most-recently used (MRU) list to track storage items (like files, folders, etc.) that the user accesses frequently.
+                The MRU holds up to 25 items and is maintained by Windows.
+            </p>
+            <p>
+                When you add an item to your app's MRU, you can also add it to the system MRU, so that it appears
+                in a system-wide list of recent items (if available).
+            </p>
+            <p>
+                Use the future access list (FAL) to preserve access to storage items (like files, folders, etc.)
+                in locations that are not specified by the app's capabilities, like items that are accessed through the file picker.
+                The FAL holds up to 1000 items and must be maintained by the app.
+            </p>
+            <p>
+                To add to a list, select the list and then click 'Add to List'. To view the current contents of a list,
+                select the list and then click 'Show List'. To open 'sample.dat' from a list, select the list and then click 'Open from List'.
+            </p>
+            <p>
+                <input type="radio" style="cursor: pointer" id="MRUradio" value="MRU" name="scenario6Radio" checked="checked" />
+                <label for="MRUradio">Most Recently Used</label>
+                <br />
+                <input type="checkbox" style="cursor: pointer; margin-left: 20px" id="systemMRUcheckbox" value="MRU" name="scenario6Radio" checked="checked" />
+                <label for="systemMRUradio">Also add to system Most Recently Used</label>
+                <br />
+                <input type="radio" style="cursor: pointer" id="FALradio" value="FAL" name="scenario6Radio" />
+                <label for="FALradio">Future Access List</label>
+            </p>
+            <br />
+            <button id="addToList">Add to List</button>
+            <br />
+            <br />
+            <button id="showList">Show List</button>
+            <br />
+            <br />
+            <button id="openFromList">Open from List</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -5,11 +5,26 @@ This sample demonstrates the usage of Speech Recognition and Speech Synthesis (T
 Specifically, this sample covers:
 
 -   Unconstrained grammars for dictation and web searches
--   Constrained grammars using List constraints and SRGS constraint files
+-   Constrained grammars using List constraints and GRXML constraint files
 -   Recognition with and without UI
--   Text to Speech/Speech Synthesis
+-   Continuous recognition, for dictation or commanding.
+-   Text to speech/speech Synthesis
 -   Synthesis using SSML files
 -   Synthesis voice configuration
+
+## Security and Privacy
+
+Some speech recognition features require acceptance of the Microsoft Privacy Policy. Information about this privacy policy can be found in the Settings app, under Privacy -> Speech, Inking and Typing. You must view the privacy policy in order to accept it. To view the privacy policy, press the Privacy Policy link on the Speech, Inking and Typing settings page. 
+
+You can disable functionality that requires accepting this policy by turning off "Getting to know you" under Settings -> Privacy -> Speech, Inking and Typing. The samples will indicate to you if the privacy policy has not been accepted where necessary.
+
+In the samples, the scenarios that require acceptance of the privacy policy are the unconstrained Dictation and Web Search scenarios, and the Continuous Dictation scenarios. The other scenarios use local recognition only, and can function without being required to accept the privacy policy.
+
+## Known Issues
+
+On small screen devices, part of the UI may be rendered off the right side of the screen. This is due to a layout issue with the sample app, and will be fixed in upcoming releases, and should not significantly impact functionality. It is not recommended to use the sample in landscape mode.
+
+
 
 ## Related topics
 
@@ -25,11 +40,6 @@ Specifically, this sample covers:
 **Server:** Windows 10 Technical Preview
 
 **Phone:**  Windows 10 Technical Preview
-
-**Known Issues:**
-
-- RecognizeWithUIAsync is currently not available on Windows Desktop, and will be available in later releases of Windows 10.
-- SpeechRecognition fails to initialize in the Windows Phone emulator. It does work on physical Windows Phone devices.
 
 ## Build the sample
 

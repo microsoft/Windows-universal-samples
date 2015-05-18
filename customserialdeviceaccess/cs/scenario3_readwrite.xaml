@@ -1,0 +1,131 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="CustomSerialDeviceAccess.Scenario3_ReadWrite"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomSerialDeviceAccess"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Communicate with Serial Device" Style="{StaticResource SampleHeaderTextStyle}"/>
+            </StackPanel>
+
+            <ScrollViewer x:Name="ReadWriteScollViewer" Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,100">
+                <!-- Place scenario content here -->
+                <StackPanel Orientation="Vertical" Margin="10,0,0,0" Grid.Row="1">
+
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="1">
+                        <TextBlock Text="Write Timeout (ms) =" Margin="10,30,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                        <TextBlock x:Name="WriteTimeoutValue" Text=" Not Set" Margin="10,10,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Grid.Row="1">
+                        <TextBox x:Name="WriteTimeoutInputValue" Text="Enter Write Timeout" Height="30" Margin="10,10,0,0" InputScope="Number"/>
+                        <Button x:Name="WriteTimeoutButton" Height="30" Content="SET" Click="WriteTimeoutButton_Click" Margin="10,10,0,0" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Grid.Row="1">
+                        <TextBox x:Name="WriteBytesInputValue" Text="Enter text to write" 
+                                 Height="30" 
+                                 MinWidth="238"
+                                 MaxWidth="238"
+                                 TextWrapping="Wrap"
+                                 Margin="10,30,0,0"
+                                 TextChanged="WriteBytesInputValue_TextChanged" 
+                                 GotFocus="WriteBytesInputValue_GotFocus" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                                 />
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="1">
+                        <Button x:Name="WriteButton" Margin="10,1,0,0" Height="30" Content="WRITE BYTES" Click="WriteButton_Click" VerticalAlignment="Stretch"/>
+                        <Button x:Name="WriteCancelButton" IsEnabled="False" Margin="10,1,0,0" Height="30" Content="CANCEL WRITE" Click="WriteCancelButton_Click" VerticalAlignment="Stretch"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="1">
+                        <TextBlock Text="Written bytes are displayed here: " Margin="10,30,0,0" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock x:Name="WriteBytesCounterValue" Text="0 bytes" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" ></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="1" Height="100">
+
+                        <Border x:Name="WriteByteBorder" BorderBrush="Gray" Margin="10,0,0,0" MinWidth="30" BorderThickness="0 2" Grid.Row="0" HorizontalAlignment="Stretch">
+                            <ScrollViewer 
+                                x:Name="WriteScroller" 
+                                Grid.Row="1" 
+                                VerticalScrollMode="Enabled" 
+                                VerticalScrollBarVisibility="Auto"
+                                MinWidth="250"
+                                MinHeight="100">
+
+                                <TextBlock x:Name="WriteBytesTextBlock" TextWrapping="Wrap"
+                                       MaxWidth="{Binding ElementName=WriteScroller, Path=ActualWidth}"
+                                />
+                            </ScrollViewer>
+                        </Border>
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="1">
+                        <TextBlock Text="Read Timeout (ms) =" Margin="10,30,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                        <TextBlock x:Name="ReadTimeoutValue" Text=" Not Set" Margin="10,10,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Grid.Row="1">
+                        <TextBox x:Name="ReadTimeoutInputValue" Text="Enter Read Timeout" Height="30" Margin="10,10,0,0" InputScope="Number"/>
+                        <Button x:Name="ReadTimeoutButton" Height="30" Content="SET" Click="ReadTimeoutButton_Click" Margin="10,10,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="1">
+                        <Button x:Name="ReadButton" Margin="10,30,0,0" Height="30" Content="READ BYTES" Click="ReadButton_Click"/>
+                        <Button x:Name="ReadCancelButton" IsEnabled="False" Margin="10,30,0,0" Height="30" Content="CANCEL READ" Click="ReadCancelButton_Click"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="1">
+                        <TextBlock Text="Read bytes are displayed here: " Margin="10,30,0,0" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock x:Name="ReadBytesCounterValue" Text="0 bytes" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" ></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="1" Height="100">
+
+                        <Border x:Name="ReadByteBorder" BorderBrush="Gray" Margin="10,0,0,0" MinWidth="30" BorderThickness="0 2" Grid.Row="0" HorizontalAlignment="Stretch">
+                            <ScrollViewer 
+                                x:Name="ReadScroller" 
+                                Grid.Row="1" 
+                                VerticalScrollMode="Enabled" 
+                                VerticalScrollBarVisibility="Auto"
+                                MinWidth="250"
+                                MinHeight="100">
+
+                                <TextBlock x:Name="ReadBytesTextBlock" TextWrapping="Wrap"
+                                       MaxWidth="{Binding ElementName=ReadScroller, Path=ActualWidth}"
+                                />
+                            </ScrollViewer>
+                        </Border>
+
+                    </StackPanel>
+
+
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,91 @@
+﻿<!--
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Override default scaling of UI elements</title>
+    <link rel="stylesheet" href="/css/scenario2.css" />
+    <script src="/js/scenario2.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            To preserve the physical size of UI, Windows automatically scales UI elements.
+            You might not want this behavior, especially if your app
+            doesn't have a high-res version of an element available. This scenario demonstrates how to
+            counteract the automatic scaling of text and UI elements.
+            The box is kept at 100 pixels, and the text is kept at 27 pixels (20pt on an unscaled device).
+            The result is that both elements
+            get physically smaller as the scale increases.
+        </p>
+        <p>
+            <b>Note:</b>
+            Use the simulator to view this scenario at different scales on the PC.
+            For the 100% scale, use the 10.6" 1366x768 resolution setting. For 140% use 10.6"
+            1920x1080 and for 180% use 10.6" 2560x1440.
+            Other scales are possible on phones and other devices.
+        </p>
+    </div>
+
+    <p id="effectiveResolution">
+        <b>Current effective resolution: </b><span id="effectiveResolutionValue"></span>
+    </p>
+
+    <div style="display: inline-block; margin-right: 40px">
+        <p>
+            <b>Default scaling</b>
+        </p>
+        <table border="1" style="text-align: center">
+            <tr>
+                <th>UI element</th>
+                <th>Text</th>
+            </tr>
+            <tr>
+                <td style="padding: 10px">
+                    <div style="height: 140px; width: 110px">
+                        <div class="box" id="standardBox" style="margin: 0 auto;">
+                            <div id="standardBoxValue" class="boxValue"></div>
+                        </div>
+                        <div id="standardBoxRelativePixels" class="boxDescription"></div>
+                        <div id="standardBoxPhysicalPixels" class="boxDescription"></div>
+                    </div>
+                </td>
+                <td style="padding: 20px; height: 140px; width: 120px">
+                    <div id="standardFont">20pt</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="display: inline-block">
+        <p>
+            <b>Override scaling</b>
+        </p>
+        <table border="1" style="text-align: center">
+            <tr>
+                <th>UI element</th>
+                <th>Text</th>
+            </tr>
+            <tr>
+                <td style="padding: 10px">
+                    <div style="height: 140px; width: 110px">
+                        <div class="box" id="overrideBox" style="margin: 0 auto;">
+                            <div id="overrideBoxValue" class="boxValue"></div>
+                        </div>
+                        <div id="overrideBoxRelativePixels" class="boxDescription"></div>
+                        <div id="overrideBoxPhysicalPixels" class="boxDescription"></div>
+                    </div>
+                </td>
+                <td style="padding: 20px; height: 140px; width: 120px">
+                    <div id="overrideFont"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

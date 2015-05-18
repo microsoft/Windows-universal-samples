@@ -1,0 +1,125 @@
+﻿<!--
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Load images for different scales</title>
+    <link rel="stylesheet" href="/css/scenario1.css" />
+    <script src="/js/scenario1.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            Based on the screen's pixel density (DPI) and resolution, Windows scales images and
+            other UI elements to maintain physical sizing across devices. We recommend that you make your
+            app <b>scaling aware</b> by providing multiple versions of these assets
+            so that they retain quality across different scales. If you don't provide multiple versions,
+            Windows will stretch your assets by default.
+        </p>
+        <p>
+            This scenario demonstrates different methods you can use to ensure
+            that Windows loads the correct asset depending on scaling. It also shows what
+            would have happened if you hadn't provided multiple assets.
+            You can choose a scaling method
+            based on your app's specific scenarios.
+            Use the descriptions below as a guide.
+            In some cases, you might want to use multiple methods.
+        </p>
+        <p>
+            <b>Note:</b>
+            Use the simulator to view this scenario at different scales on the PC.
+            For the 100% scale, use the 10.6" 1366x768 resolution setting. For 140% use 10.6"
+            1920x1080 and for 180% use 10.6" 2560x1440.
+            Other scales are possible on phones and other devices.
+        </p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <div id="scalePercent">
+            <b>Current scale: </b><span id="scalePercentValue"></span>
+        </div>
+        <div id="logicalDPI">
+            <b>Logical DPI for this scale: </b><span id="logicalDPIValue"></span>
+        </div>
+        <br />
+        <table border="0">
+            <tr>
+                <td style="padding: 20px; width: 0px">
+                    <img class="scalingImage" id="stretched" alt="Scaled image" src="/images/projector-stretch.png" />
+                </td>
+                <td>Not scaling aware (not recommended)</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    If only one version of an asset is provided, the app is
+                    not scaling aware.
+                    The asset is distorted at scales other than 100%.
+                    <hr />
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 20px;">
+                    <img class="scalingImage" alt="Image automatically chosen by the framework"
+                        src="/images/projector.png" />
+                </td>
+                <td>Scaled packaged assets</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    The framework can select an asset from your package based on
+                    the current DPI. Include multiple versions of each asset
+                    using the following naming convention: image.scale-100.png, image.scale-140.png 
+                    and image.scale-180.png. When you use "image.png" within your app, Windows will 
+                    select an asset based on the current scale.
+                    <br /><br />
+                    The HTML framework selects the image
+                    when the app is launched and will sometimes change the asset if the scale changes
+                    (for example, if the app is moved to a different monitor).
+                    In particular, when an image resource is
+                    used with a CSS background-image style, it will be reloaded automatically by Windows. An
+                    img element, however, is not automatically reloaded. To ensure that your app retains the
+                    best display when used in multi-monitor configurations, a small amount of code is needed
+                    to make resources in img elements reload. scenario1.js shows how this is done for the
+                    image above.
+                    <br /><br />
+                    Note: Text has been added to the image above in order to make clear which version of the 
+                    image is loaded.
+                    <hr />
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 20px;">
+                    <img class="scalingImage" id="SVG" alt="SVG Image" src="/images/projector.svg" />
+                </td>
+                <td>Scalable Vector Graphics (SVG)</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    Instead of including multiple bitmap resources, vector graphics can also be used
+                    to make the app scaling aware. Include a single .svg asset and it will retain its
+                    quality regardless of scale factor.
+                    <hr />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Scaled external assets</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    If you load images that did not come with your app's package or 
+                    resource pack (e.g. downloaded from a web server), then you must use the
+                    RawPixelsPerViewPixel value to select an appropriate image.
+                    Example: 
+                    <b id="manualLoadURL"></b>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

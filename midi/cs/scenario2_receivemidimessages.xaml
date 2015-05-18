@@ -1,0 +1,70 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the Microsoft Public License.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="MIDI.Scenario2_ReceiveMIDIMessages"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MIDI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="inputDevices.(RelativePanel.AlignLeftWith)" Value="inputDevicesLabel" />
+                        <Setter Target="inputDevices.(RelativePanel.Below)" Value="inputDevicesLabel" />
+                        <Setter Target="inputDeviceMessagesLabel.(RelativePanel.AlignLeftWith)" Value="inputDevices" />
+                        <Setter Target="inputDeviceMessagesLabel.(RelativePanel.Below)" Value="inputDevices" />
+                        <Setter Target="inputDeviceMessages.(RelativePanel.AlignLeftWith)" Value="inputDeviceMessagesLabel" />
+                        <Setter Target="inputDeviceMessages.(RelativePanel.Below)" Value="inputDeviceMessagesLabel" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid x:Name="rootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Style="{StaticResource SampleHeaderTextStyle}" Text="Description" />
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario reads MIDI input from a MIDI device. Device auto-detection is enabled. Messages from the selected device are displayed. Connect a MIDI device to use this scenario." />
+            </StackPanel>
+
+            <!--Main content is scrollable-->
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto"  Margin="0,0,0,40">
+                <RelativePanel HorizontalAlignment="Stretch">
+                    <!--List input MIDI devices-->
+                    <TextBlock x:Name="inputDevicesLabel" Style="{StaticResource ScenarioHeaderTextStyle}" Text="INPUT DEVICES" />
+                    <ListBox x:Name="inputDevices" Style="{StaticResource InputOutputDeviceListStyle}" SelectionChanged="inputDevices_SelectionChanged" />
+
+                    <!--List received input MIDI messages-->
+                    <TextBlock x:Name="inputDeviceMessagesLabel" Style="{StaticResource ScenarioHeaderTextStyle}" Text="RECEIVED MESSAGES" />
+                    <ListBox x:Name="inputDeviceMessages" Style="{StaticResource InputDeviceMessagesStyle}" ItemContainerStyle="{StaticResource ScenarioUnselectableListBoxStyle}" />
+                </RelativePanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <Border x:Name="errorBorder" Background="Red" Grid.Row="2"/>
+            <TextBlock x:Name="statusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed" />
+        </Grid>
+    </Grid>
+</Page>

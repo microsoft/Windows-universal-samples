@@ -1,0 +1,44 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario4_backgroundActivity.css" />
+    <script src="/js/platform.js"></script>
+    <script src="/js/scenario4_backgroundActivity.js"></script>
+</head>
+<body>
+    <div>
+        <p>Registers a background task for activity changes. The background task runs whenever the most likely activity changes to/from any of the subscribed activities.</p>
+        <button class="action" id="scenario4RegisterTask">Register Task</button>
+        <button class="action" id="scenario4UnregisterTask">Unregister Task</button>
+        <br />
+        <br />
+    </div>
+    <div>
+        Task Registration:<a id="taskRegistrationOutput">no data</a>
+        <br />
+        Task Status: <a id="taskStatusOutput">no data</a>
+        <br />
+        Report Count: <a id="reportCountOutput">no data</a>
+        <br />
+        Last Activity: <a id="lastActivityOutput">no data</a>
+        <br />
+        Last Confidence: <a id="lastConfidenceOutput">no data</a>
+        <br />
+        Last Timestamp: <a id="lastTimestampOutput">no data</a>
+        <br />
+    </div>
+</body>
+</html>

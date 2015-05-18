@@ -1,0 +1,21 @@
+﻿#element1, #element2
+{
+    float: left;
+    position: absolute;
+    text-align: center;
+    margin: 5px; 
+}
+
+#element1
+{
+    background-color: #00B6FF;  
+    width: 100px;
+    height: 100px;
+}
+
+#element2
+{
+    background-color: #808080;  
+    width: 150px;
+    height: 100px;
+}

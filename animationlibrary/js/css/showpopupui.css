@@ -1,0 +1,17 @@
+﻿#myPopupUI
+{
+    text-align: left;
+    width: 350px;
+    height: 150px;
+    border: 1px solid black;
+    background-color: #C8C8C8;
+    color: black;
+    opacity: 0;
+    z-index: 1;
+}
+
+#myPopupUI p
+{
+    position: relative;
+    left: 10px;
+}

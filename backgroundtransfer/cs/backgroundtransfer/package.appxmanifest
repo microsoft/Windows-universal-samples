@@ -11,16 +11,16 @@
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" 
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="05777116-8530-42a2-914d-9dae4b4da01a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="d63dfff4-b11f-406d-a938-be6fdaab46bf" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>BackgroundTransfer</DisplayName>
+    <DisplayName>BackgroundTransfer C# Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
 
   <Dependencies>
-    <TargetPlatform Name="Windows.Universal" MinVersion="10.0.10030.0" MaxVersionTested="10.0.10030.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10069.0" MaxVersionTested="10.0.10069.0" />
   </Dependencies>
 
   <Resources>
@@ -32,14 +32,12 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="BackgroundTransfer.App">
       <uap:VisualElements
-        DisplayName="BackgroundTransfer"
+        DisplayName="BackgroundTransfer C#"
         Square150x150Logo="Assets\squaretile-sdk.png"
         Square44x44Logo="Assets\SmallTile-sdk.png"
         Description="BackgroundTransfer"
-        ForegroundText="light"
-        BackgroundColor="#00b2f0"
-        ToastCapable="true">
-        <uap:DefaultTile DefaultSize="square150x150Logo" >
+        BackgroundColor="#00b2f0">
+        <uap:DefaultTile>
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
           </uap:ShowNameOnTiles>
@@ -63,3 +61,4 @@
     <Capability Name="internetClientServer" />
   </Capabilities>
 </Package>
+

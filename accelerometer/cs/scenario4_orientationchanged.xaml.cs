@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -111,10 +111,7 @@ namespace AccelerometerCS
         {
             if (null != accelerometerReadingTransform)
             {
-                // 'ReadingTransform' is currently only supported on Windows 
-#if WINAPI_FAMILY != WINAPI_FAMILY_PHONE_APP
                 accelerometerReadingTransform.ReadingTransform = sender.CurrentOrientation;
-#endif
             }
         }
 
@@ -132,11 +129,7 @@ namespace AccelerometerCS
             // Establish the ReadingTransform to align with the current display orientation, so 
             // that the accelerometer data from 'accelerometerReadingTransform' will align with the 
             // current display orientation
-
-            // 'ReadingTransform' is currently only supported on Windows 
-#if WINAPI_FAMILY != WINAPI_FAMILY_PHONE_APP
             accelerometerReadingTransform.ReadingTransform = displayInformation.CurrentOrientation;
-#endif
 
             Window.Current.VisibilityChanged += Current_VisibilityChanged;
             accelerometerOriginal.ReadingChanged += _accelerometerOriginal_ReadingChanged;

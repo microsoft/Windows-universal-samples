@@ -1,0 +1,95 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="Commanding.Scenario7_CustomContent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Commanding"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                    <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    As a ContentControl the CommandBar supports the Content property, but it must be explicitly
+                    referenced in the XAML.  When there are both PrimaryCommands and Content, the PrimaryCommands take
+                    precedence and may cause the Content to be clipped.
+                    <LineBreak/>
+                    <LineBreak/>
+                    When the ClosedDisplayMode == 'Compact' the Content may be clipped if it is larger than the compact size
+                    of the CommandBar.  The Opening/Closed events may be used to show/hide parts of the UI in the Content area.
+                    <LineBreak/>
+                    <LineBreak/>
+                    When the ClosedDisplayMode == 'Minimal' the Content is automatically hidden b/c the entire bar becomes
+                    one large hit target for the user to open the control.
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1">
+                    <StackPanel Orientation="Horizontal">
+                        <ToggleButton x:Name="isopentoggle" Content="IsOpen" Margin="12,0" VerticalAlignment="Bottom"/>
+                        <ComboBox x:Name="combobox" Header="ClosedDisplayMode" SelectedIndex="0">
+                            <ComboBoxItem>Compact</ComboBoxItem>
+                            <ComboBoxItem>Minimal</ComboBoxItem>
+                            <ComboBoxItem>Hidden</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <CommandBar x:Name="cmdbar"
+                                Margin="0,48,0,0"
+                                HorizontalContentAlignment="Stretch"
+                                Opening="CommandBar_Opening"
+                                Closed="CommandBar_Closed"
+                                IsOpen="{Binding IsChecked, ElementName=isopentoggle, Mode=TwoWay}"
+                                ClosedDisplayMode="{Binding SelectedItem.Content, ElementName=combobox}">
+                        <AppBarButton Icon="Clear" Label="Clear"/>
+                        <CommandBar.Content>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <AppBarButton Icon="Accept" Label="Clipped when Compact"/>
+                                    <TextBox PlaceholderText="This is a TextBox" MinWidth="196" Height="48" Margin="12,0" VerticalAlignment="Top"/>
+                                    <AppBarButton x:Name="appbarbutton" Icon="Add" Label="Only visible when opened" IsCompact="True"/>
+                                </StackPanel>
+                                <Grid Grid.Column="1" VerticalAlignment="Top">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Margin="0,8" HorizontalAlignment="Stretch">OK</Button>
+                                    <Button Margin="4,8" Grid.Column="1" HorizontalAlignment="Stretch">Cancel</Button>
+                                </Grid>
+                            </Grid>
+                        </CommandBar.Content>
+                    </CommandBar>
+                </StackPanel>
+
+                <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+                <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

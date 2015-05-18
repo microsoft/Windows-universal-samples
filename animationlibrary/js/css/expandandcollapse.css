@@ -1,0 +1,14 @@
+﻿.element
+{
+    height: 50px;
+    width: 120px;
+    margin: 0px 20px 20px 20px;
+    text-align: center;
+    color: white !important;
+    background: #808080;
+}
+
+#expandedItem
+{
+    background: #00B6FF;
+}

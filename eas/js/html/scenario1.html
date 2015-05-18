@@ -1,0 +1,62 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1.css" />
+    <script src="/js/scenario1.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This scenario provides an example of mail client retrieving device information. A list of device information will be shown in the output after clicking GetInformation.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <table class="InputTable">
+                <tr>
+                    <td class="labelTD"><label for="Device ID">Device ID:</label></td>
+                    <td><input type="text" size="30" id="DeviceID" /></td>
+                </tr>
+                <tr>
+                    <td class="labelTD"><label for="OperatingSystem">Operating System:</label></td>
+                    <td><input type="text" size="30" id="OperatingSystem" /></td>
+                </tr>
+                <tr>
+                    <td class="labelTD"><label for="FriendlyName">Friendly Name:</label></td>
+                    <td><input type="text" size="30" id="FriendlyName" /></td>
+                </tr>
+                <tr>
+                    <td class="labelTD"><label for="Type">Type:</label></td>
+                    <td><input type="text" size="30" id="Type" /></td>
+                </tr>
+                <tr>
+                    <td class="labelTD"><label for="SystemManufacturer">System Manufacturer:</label></td>
+                    <td><input type="text" size="30" id="SystemManufacturer" /></td>
+                </tr>
+                <tr>
+                    <td class="labelTD"><label for="SystemProductName">System Product Name:</label></td>
+                    <td><input type="text" size="30" id="SystemProductName" /></td>
+                </tr>
+                <tr>
+                    <td class="labelTD"><label for="SystemSku">System SKU:</label></td>
+                    <td><input type="text" size="30" id="SystemSku" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="button"><button class="action" id="DeviceInforLaunch" style="width:100%">Launch</button></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button class="action" id="DeviceInforReset" style="width:100%">Reset</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

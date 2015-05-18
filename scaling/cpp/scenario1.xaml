@@ -1,0 +1,160 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Loading images
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}">
+                        Based on the screen's pixel density (DPI) and resolution, Windows scales images and
+                        other UI elements to maintain physical sizing across devices. We recommend that you make your
+                        app <Run FontWeight="Bold">scaling aware</Run> by providing multiple versions of these assets
+                        so that they retain quality across different scales. If you don't provide multiple versions,
+                        Windows will stretch your assets by default.
+                        <LineBreak/><LineBreak/>
+                        This scenario demonstrates different methods you can use to ensure
+                        that Windows loads the correct asset depending on scaling. It also shows what
+                        would have happened if you hadn't provided multiple assets.
+                        You can choose a scaling method
+                        based on your app's specific scenarios.
+                        Use the descriptions below as a guide.
+                        In some cases, you might want to use multiple methods.
+                        <LineBreak/><LineBreak/>
+                        <Run FontWeight="Bold" Text="Note:"/>
+                        Use the simulator to view this scenario at different scales on the PC.
+                        For the 100% scale, use the 10.6" 1366x768 resolution setting. For 140% use 10.6"
+                        1920x1080 and for 180% use 10.6" 2560x1440.
+                        Other scales are possible on phones and other devices.
+                        <LineBreak/><LineBreak/>
+                        <Run FontWeight="Bold" Text="Current scale: "/>
+                        <Run x:Name="ScalingText"/>
+                        <LineBreak/>
+                        <Run FontWeight="Bold" Text="Logical DPI for this scale: "/>
+                        <Run x:Name="LogicalDPIText"/>
+                    </TextBlock>
+
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Grid.Column="0"
+                              Background="LightCyan" HorizontalAlignment="Center" VerticalAlignment="Center" Height="90" Width="90" Margin="5,5,5,5">
+                            <Border BorderThickness="2" BorderBrush="#00b9f2"/>
+                            <Image Source="Assets/projector-stretch.png" Margin="5,5,5,5"/>
+                        </Grid>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="10,0,0,0">
+                            Not scaling aware (not recommended)
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,0" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
+                            If only one version of an asset is provided, then the app is not scaling aware.
+                            The asset is distorted at scales other than 100%.
+                        </TextBlock>
+                        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Gray" Margin="0,5"/>
+
+                        <Grid Grid.Row="3" Grid.Column="0"
+                              Background="LightCyan" HorizontalAlignment="Center" VerticalAlignment="Center" Height="90" Width="90" Margin="5,5,5,5">
+                            <Border BorderThickness="2" BorderBrush="#00b9f2"/>
+                            <Image Source="Assets/projector.png" Margin="5,5,5,5"/>
+                        </Grid>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="10,0,0,0">
+                            Scaled packaged assets
+                        </TextBlock>
+                        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,0" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
+                            The framework can select an asset from your package based on
+                            the current DPI. Include multiple versions of each asset
+                            using the following naming convention: image.scale-100.png, image.scale-140.png 
+                            and image.scale-180.png. When you use "image.png" within your app, Windows will 
+                            select an asset based on the current scale.
+                            <LineBreak/><LineBreak/>
+                            The XAML framework selects the 
+                            image when the view is first loaded and will also change the asset
+                            if the scale changes (for example, if the app is moved to a different 
+                            monitor). No additional code is required for dynamic reloading.
+                            <LineBreak/><LineBreak/>
+                            Note: Text has been added to the image above in order to make clear which version of the 
+                            image is loaded.
+                        </TextBlock>
+                        <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Gray" Margin="0,5"/>
+
+                        <Grid Grid.Row="6" Grid.Column="0"
+                              Background="LightCyan" HorizontalAlignment="Center" VerticalAlignment="Center" Height="90" Width="90" Margin="5,5,5,5">
+                            <Border BorderThickness="2" BorderBrush="#00b9f2"/>
+                            <!-- XAML Image -->
+                            <Canvas x:Name="XAMLImage"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3,0,0,25" >
+                                <Path x:Name="Path" Width="8.53067" Height="3.19733" Canvas.Left="5.33333" Canvas.Top="34.136" Stretch="Fill" Fill="#FF010101" Data="F1 M 13.864,36.2653L 12.796,37.3333L 6.40133,37.3333L 5.33333,36.2653L 5.33333,34.136L 13.864,34.136"/>
+                                <Path x:Name="Path_0" Width="8.53067" Height="3.19733" Canvas.Left="69.3333" Canvas.Top="34.136" Stretch="Fill" Fill="#FF010101" Data="F1 M 77.864,36.2653L 76.796,37.3333L 70.4013,37.3333L 69.3333,36.2653L 69.3333,34.136L 77.864,34.136"/>
+                                <Path x:Name="Path_1" Width="25.5987" Height="25.5987" Canvas.Left="40.5307" Canvas.Top="6.40131" Stretch="Fill" Fill="#FF010101" Data="F1 M 53.3333,6.40131C 46.26,6.40131 40.5307,12.136 40.5307,19.204C 40.5307,26.2653 46.26,32 53.3333,32C 60.4013,32 66.1293,26.2653 66.1293,19.204C 66.1293,12.136 60.4013,6.40131 53.3333,6.40131 Z M 53.3333,28.8026C 48.0253,28.8026 43.7347,24.5 43.7347,19.204C 43.7347,13.9013 48.0253,9.59863 53.3333,9.59863C 58.6347,9.59863 62.932,13.9013 62.932,19.204C 62.932,24.5 58.6347,28.8026 53.3333,28.8026 Z "/>
+                                <Path x:Name="Path_2" Width="83.1973" Height="32" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" Fill="#FF010101" Data="F1 M 74.5933,0L 8.604,0C 2.86933,0 0,2.91199 0,8.72931L 0,30.5466C 0,31.3493 0.645333,32 1.432,32L 43.7653,32C 39.864,29.084 37.3333,24.4426 37.3333,19.204C 37.3333,10.3707 44.4893,3.20398 53.3333,3.20398C 62.172,3.20398 69.3333,10.3707 69.3333,19.204C 69.3333,24.4426 66.796,29.084 62.9013,32L 81.7653,32C 82.552,32 83.1973,31.3493 83.1973,30.5466L 83.1973,8.72931C 83.1973,2.91199 80.328,0 74.5933,0 Z M 23.4627,27.7346L 5.33333,27.7346L 5.33333,25.5986L 23.4627,25.5986M 23.4627,23.4693L 5.33333,23.4693L 5.33333,21.3333L 23.4627,21.3333M 23.4627,19.204L 5.33333,19.204L 5.33333,17.068L 23.4627,17.068M 23.4627,14.9319L 5.33333,14.9319L 5.33333,12.8026L 23.4627,12.8026"/>
+                            </Canvas>
+                        </Grid>
+                        <TextBlock Grid.Row="6" Grid.Column="1" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="10,0,0,0">
+                            Vector Graphics Using XAML Path
+                        </TextBlock>
+                        <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,0" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
+                            To use vector images, directly encode the graphic in XAML markup.  The resource will 
+                            resize automatically when the scale changes.
+                        </TextBlock>
+                        <Border Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Gray" Margin="0,5"/>
+
+                        <TextBlock Grid.Row="9" Grid.Column="1" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="10,0,0,0">
+                            Scaled external assets
+                        </TextBlock>
+                        <TextBlock Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,0" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
+                            If you load images that did not come with your app's package or 
+                            resource pack (e.g. downloaded from a web server), then you must use the
+                            RawPixelsPerViewPixel value to select an appropriate image. Example:
+                            <Run FontWeight="Bold" x:Name="ManualLoadURL"/>
+                        </TextBlock>
+                    </Grid>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

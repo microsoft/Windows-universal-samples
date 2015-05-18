@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>80bfd669-aa83-4537-9611-027cffe0d8af</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{c6978fb6-bc64-498d-97c8-f5b53997e54e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.xaml.cpp" />
+    <ClCompile Include="MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Scenario1_CreateAFileInThePicturesLibrary.xaml.cpp" />
+    <ClCompile Include="Scenario2_GetTheParentFolderOfAFile.xaml.cpp" />
+    <ClCompile Include="Scenario3_WriteAndReadTextInAFile.xaml.cpp" />
+    <ClCompile Include="Scenario4_WriteAndReadBytesInAFile.xaml.cpp" />
+    <ClCompile Include="Scenario5_WriteAndReadAFileUsingAStream.xaml.cpp" />
+    <ClCompile Include="Scenario6_DisplayFileProperties.xaml.cpp" />
+    <ClCompile Include="Scenario7_TrackAFileOrFolderSoThatYouCanAccessItLater.xaml.cpp" />
+    <ClCompile Include="Scenario8_CopyAFile.xaml.cpp" />
+    <ClCompile Include="Scenario9_CompareTwoFilesToSeeIfTheyAreTheSame.xaml.cpp" />
+    <ClCompile Include="Scenario10_DeleteAFile.xaml.cpp" />
+    <ClCompile Include="Scenario11_TryToGetAFileWithoutGettingAnError.xaml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="App.xaml.h" />
+    <ClInclude Include="MainPage.xaml.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Scenario1_CreateAFileInThePicturesLibrary.xaml.h" />
+    <ClInclude Include="Scenario2_GetTheParentFolderOfAFile.xaml.h" />
+    <ClInclude Include="Scenario3_WriteAndReadTextInAFile.xaml.h" />
+    <ClInclude Include="Scenario4_WriteAndReadBytesInAFile.xaml.h" />
+    <ClInclude Include="Scenario5_WriteAndReadAFileUsingAStream.xaml.h" />
+    <ClInclude Include="Scenario6_DisplayFileProperties.xaml.h" />
+    <ClInclude Include="Scenario7_TrackAFileOrFolderSoThatYouCanAccessItLater.xaml.h" />
+    <ClInclude Include="Scenario8_CopyAFile.xaml.h" />
+    <ClInclude Include="Scenario9_CompareTwoFilesToSeeIfTheyAreTheSame.xaml.h" />
+    <ClInclude Include="Scenario10_DeleteAFile.xaml.h" />
+    <ClInclude Include="Scenario11_TryToGetAFileWithoutGettingAnError.xaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MainPage.xaml" />
+    <Page Include="Styles\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+    <Page Include="Scenario1_ShortName.xaml" />
+    <Page Include="Scenario2_ShortName.xaml" />
+    <Page Include="Scenario3_ShortName.xaml" />
+    <Page Include="Scenario1_CreateAFileInThePicturesLibrary.xaml" />
+    <Page Include="Scenario2_GetTheParentFolderOfAFile.xaml" />
+    <Page Include="Scenario3_WriteAndReadTextInAFile.xaml" />
+    <Page Include="Scenario4_WriteAndReadBytesInAFile.xaml" />
+    <Page Include="Scenario5_WriteAndReadAFileUsingAStream.xaml" />
+    <Page Include="Scenario6_DisplayFileProperties.xaml" />
+    <Page Include="Scenario7_TrackAFileOrFolderSoThatYouCanAccessItLater.xaml" />
+    <Page Include="Scenario8_CopyAFile.xaml" />
+    <Page Include="Scenario9_CompareTwoFilesToSeeIfTheyAreTheSame.xaml" />
+    <Page Include="Scenario10_DeleteAFile.xaml" />
+    <Page Include="Scenario11_TryToGetAFileWithoutGettingAnError.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\smallTile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\squareTile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\storeLogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

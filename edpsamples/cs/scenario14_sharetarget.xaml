@@ -1,0 +1,218 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="EdpSample.Scenario14_ShareTarget"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EdpSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+  
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Name="ScenarioText" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    <LineBreak/>When an enlightened application receives shared content it should either call ProtectionPolicyManager.TryApplyProcessUIPolicy 
+                    if there is no existing content, otherwise call the ProtectionPolicyManager.RequestAccessForShareAsync method.
+
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <!-- Place scenario content here -->
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+
+                    <!-- QuickLink -->
+                    <TextBlock  Foreground="#db7100" Text="Activation through Quicklink" />
+                    <TextBlock AutomationProperties.AutomationId="QuicklinkID">
+                            <Bold>ID:</Bold>
+                            <Run x:Name="SelectedQuickLinkId" Text="This app was not activated through a frequent Quicklink." />
+                            <LineBreak />
+                    </TextBlock>
+
+                    <!-- Data Package Properties -->
+                    <TextBlock  Foreground="#db7100" Text="Data Package Properties"/>
+                    <TextBlock  TextWrapping="Wrap" HorizontalAlignment="Left" MaxWidth="500" AutomationProperties.AutomationId="Title">
+                            <Bold>Title:</Bold>
+                            <Run x:Name="DataPackageTitle" Text="(No title)" />
+                    </TextBlock>
+                    <TextBlock  TextWrapping="Wrap" HorizontalAlignment="Left" MaxWidth="500" AutomationProperties.AutomationId="Description">
+                            <Bold>Description:</Bold>
+                            <Run x:Name="DataPackageDescription" Text="(No description)" />
+                    </TextBlock>
+                    <TextBlock  TextWrapping="Wrap" HorizontalAlignment="Left" MaxWidth="500" AutomationProperties.AutomationId="PackageFamilyName">
+                            <Bold>Package Family Name:</Bold>
+                            <Run x:Name="DataPackagePackageFamilyName" Text="(No package family name)" />
+                    </TextBlock>
+                    <TextBlock  TextWrapping="Wrap" HorizontalAlignment="Left" MaxWidth="500" AutomationProperties.AutomationId="ContentSourceWebLink">
+                            <Bold>Content Source Web Link:</Bold>
+                            <Run x:Name="DataPackageContentSourceWebLink" Text="(No content source web link)" />
+                    </TextBlock>
+                    <TextBlock  TextWrapping="Wrap" HorizontalAlignment="Left" MaxWidth="500" AutomationProperties.AutomationId="ContentSourceApplicationLink">
+                            <Bold>Content Source Application Link:</Bold>
+                            <Run x:Name="DataPackageContentSourceApplicationLink" Text="(No content source application link)" />
+                    </TextBlock>
+                    <StackPanel x:Name="LogoArea" Orientation="Horizontal" Visibility="Visible">
+                        <TextBlock x:Name="LogoLabel"  FontWeight="Bold" Text="Logo:" />
+                        <Border x:Name="LogoBackground" Height="40" Width="40" MaxWidth="40" MaxHeight="40" Margin="10 0 0 0" HorizontalAlignment="Left" AutomationProperties.AutomationId="LogoBackground">
+                            <Image x:Name="LogoHolder" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" AutomationProperties.AutomationId="Logo"/>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel x:Name="ThumbnailArea" Visibility="Collapsed">
+                        <TextBlock x:Name="ThumbnailLabel"  FontWeight="Bold" Text="Thumbnail:" />
+                        <Image x:Name="ThumbnailHolder" HorizontalAlignment="Left" MaxWidth="100" Source="images/storeLogo-sdk.png" AutomationProperties.AutomationId="Thumbnail"/>
+                    </StackPanel>
+                    <TextBlock>
+                            <LineBreak />
+                    </TextBlock>
+
+                    <!-- Data Package Content -->
+                    <TextBlock  Foreground="#db7100" Text="Data Package Content"/>
+                    <TextBlock x:Name="ContentValue"  TextWrapping="Wrap" HorizontalAlignment="Left" MaxWidth="500" />
+                    <WebView x:Name="ShareWebView" Visibility="Collapsed" HorizontalAlignment="Left" Width="500" Height="200" />
+                    <StackPanel x:Name="ResourceMapArea" Visibility="Collapsed">
+                        <TextBlock  TextWrapping="Wrap" AutomationProperties.AutomationId="ResourceMap">
+                                <Bold>Resource Map:</Bold>
+                                <Run x:Name="ResourceMapValue" Text="(No resource map)" />
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel x:Name="ImageArea" Visibility="Collapsed">
+                        <TextBlock x:Name="ImageLabel"  FontWeight="Bold" Text="Bitmap:" />
+                        <Image x:Name="ImageHolder" HorizontalAlignment="Left" MaxWidth="300" Source="images/placeholder-sdk.png" AutomationProperties.AutomationId="Bitmap"/>
+                    </StackPanel>
+                    <TextBlock>
+                            <LineBreak />
+                    </TextBlock>
+
+                    <!-- Share Operation Methods -->
+                    <TextBlock  Foreground="#db7100" Text="ShareOperation Methods"/>
+
+                    <!-- Long Running Share -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Name="LongRunningShareLabel" Grid.Column="0"  TextWrapping="Wrap" TextAlignment="Left" 
+                                VerticalAlignment="Center" HorizontalAlignment="Left" Tapped="LongRunningShareLabel_Tapped">
+                                Long-running Share Support (Optional)
+                        </TextBlock>
+                        <CheckBox x:Name="ExpandLongRunningShareSection" Grid.Column="1" IsEnabled="True" IsChecked="False" IsTabStop="True" Margin="1,0,0,0" 
+                                VerticalAlignment="Center" HorizontalAlignment="Center" Checked="ExpandLongRunningShareSection_Checked" 
+                                Unchecked="ExpandLongRunningShareSection_Unchecked" AutomationProperties.AutomationId="LongRunningShare"/>
+                    </Grid>
+
+                    <StackPanel x:Name="ExtendedSharingArea" HorizontalAlignment="Left" Visibility="Collapsed">
+                        <TextBlock  TextWrapping="Wrap" Width="500" HorizontalAlignment="Left" TextAlignment="Left">
+                                <LineBreak/>This API is required if your app supports uploading a format that may take some time, such as images or videos.
+                                A user should be able to dismiss your app and have the upload continue in the background while they do other things.
+                                In order for the dismiss behavior to work correctly, you need to report to the share platform that you finished getting user input.
+                                After you call this API, a user can go back to the share pane and see your application in the share progress list.<LineBreak/>
+                        </TextBlock>
+                        <Button x:Name="ReportStarted" Content="Report Started" Margin="0,0,10,0" HorizontalAlignment="Right" Click="ReportStarted_Click"
+                                AutomationProperties.AutomationId="ReportStarted"/>
+                        <TextBlock  TextWrapping="Wrap" Width="500" HorizontalAlignment="Left" TextAlignment="Left">
+                                <LineBreak/> This API is optional and helps Windows to optimize resource usage of the system.
+                                You should report this if you have finished extracting data from the Data Package.
+                                Then Windows can suspend or terminate the source app as necessary to reclaim system resources.<LineBreak/>
+                        </TextBlock>
+                        <Button x:Name="ReportDataRetrieved" Content="Report Data Retrieved" Margin="0,0,10,0" HorizontalAlignment="Right" Click="ReportDataRetrieved_Click"
+                                AutomationProperties.AutomationId="ReportDataRetrieved"/>
+                        <TextBlock  TextWrapping="Wrap" Width="500" HorizontalAlignment="Left" TextAlignment="Left">
+                                <LineBreak/>This API is optional and helps Windows to optimize resource usage of the system.
+                                You should report this if you have called the Windows Runtime Background Transfer class to upload your content.
+                                Then Windows can suspend your app as necessary to reclaim system resources.
+                                If you use this API, you should call it after you called ReportStarted.<LineBreak/>
+                        </TextBlock>
+                        <Button x:Name="ReportSubmittedBackgroundTask" Content="Report Submitted To BackgroundTask" Margin="0,0,10,0" HorizontalAlignment="Right" Click="ReportSubmittedBackgroundTask_Click"
+                                    AutomationProperties.AutomationId="ReportSubmittedBackgroundTask"/>
+                        <TextBlock  TextWrapping="Wrap" Width="500" HorizontalAlignment="Left" TextAlignment="Left">
+                                <LineBreak/>If for any reason the long-running share was unsuccessful and failed in the background,
+                                you should report failure and include a message for the user about how they can recover from the error.
+                                When the user goes back to the share pane they can see your message in the progress list.
+                                You should never call ReportError if your app is visible in the foreground.<LineBreak/>
+                        </TextBlock>
+                        <TextBlock  TextWrapping="Wrap" Text="Error Message: "/>
+                        <TextBox x:Name="ReportError" FontSize="12" Width="300" TextWrapping="Wrap" HorizontalAlignment="Left" Text="Could not contact server"/>
+                        <Button x:Name="ReportErrorButton" Content="Report Error" Margin="0,0,10,0"  HorizontalAlignment="Right" Click="ReportErrorButton_Click"
+                                AutomationProperties.AutomationId="ReportError"/>
+                    </StackPanel>
+
+                    <!-- Report Completed -->
+                    <TextBlock  TextWrapping="Wrap" Width="500"  HorizontalAlignment="Left" TextAlignment="Left">
+                            <LineBreak/>Your share target app should ReportCompleted after the share task completes successfully.
+                            When reporting completed, you can optionally add a QuickLink to make it easier for users to repeat the way they share most often.
+                            This API applies to both quick and long-running shares.<LineBreak/>
+                    </TextBlock>
+                    <!-- DismissUI -->
+                    <TextBlock  TextWrapping="Wrap" Width="500"  HorizontalAlignment="Left" TextAlignment="Left">
+                            <LineBreak/>If no user interaction is required, you can dismiss your share target programatically
+                            while continuing to execute a task in the background. (e.g - Uploading a user selected file in the background)<LineBreak/>
+                    </TextBlock>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="QuickLinkSectionLabel" Grid.Column="0"  TextWrapping="Wrap" TextAlignment="Left" 
+                                VerticalAlignment="Center" HorizontalAlignment="Left" Tapped="QuickLinkSectionLabel_Tapped">
+                                Add a quicklink (Optional)
+                        </TextBlock>
+                        <CheckBox x:Name="AddQuickLink" Grid.Column="1" IsEnabled="True" IsChecked="False" IsTabStop="True" Margin="1,0,0,0"
+                                VerticalAlignment="Center" HorizontalAlignment="Center" Checked="AddQuickLink_Checked" Unchecked="AddQuickLink_Unchecked"
+                                AutomationProperties.AutomationId="AddQuickLink"/>
+                    </Grid>
+
+                    <StackPanel x:Name="QuickLinkCustomization" Visibility="Collapsed" Width="500">
+                        <TextBlock  Text="Quicklink Id: "/>
+                        <TextBox x:Name="QuickLinkId" FontSize="12" Width="300" TextWrapping="Wrap" HorizontalAlignment="Left" Text="ABC123"
+                                AutomationProperties.AutomationId="SetQuickLinkId"/>
+                        <TextBlock  >
+                                <LineBreak/>Title:
+                        </TextBlock>
+                        <TextBox x:Name="QuickLinkTitle" FontSize="12" Width="300" TextWrapping="Wrap" HorizontalAlignment="Left" Text="Email John Smith"
+                                AutomationProperties.AutomationId="SetQuickLinkTitle"/>
+                        <TextBlock  >
+                                <LineBreak/>Icon:
+                        </TextBlock>
+                        <Image x:Name="QuickLinkIcon" HorizontalAlignment="Left" MaxHeight="100" MaxWidth="100" Source="assets/user.png"
+                                AutomationProperties.AutomationId="SetQuickLinkIcon"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="ReportCompleted" Content="Report Completed" Margin="0,0,10,0" Click="ReportCompleted_Click"
+                                AutomationProperties.AutomationId="ReportCompleted"/>
+                        <Button x:Name="DismissUI" Content="Dismiss UI" Margin="0,0,55,0" Click="DismissUI_Click"
+                                AutomationProperties.AutomationId="DismissUI" />
+                    </StackPanel>
+
+                </StackPanel>
+
+
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

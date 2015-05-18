@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -110,12 +110,7 @@ void Scenario4_OrientationChanged::ScenarioEnable(Platform::Object^ sender, Wind
     // Establish the ReadingTransform to align with the current display orientation, so 
     // that the accelerometer data from 'accelerometerReadingTransform' will align with the 
     // current display orientation
-
-    // 'ReadingTransform' is currently only supported on Windows 
-#if WINAPI_FAMILY != WINAPI_FAMILY_PHONE_APP
     accelerometerReadingTransform->ReadingTransform = displayInformation->CurrentOrientation;
-#endif
-
 
     visibilityToken = Window::Current->VisibilityChanged += ref new WindowVisibilityChangedEventHandler(this, &Scenario4_OrientationChanged::VisibilityChanged);
 
@@ -247,9 +242,6 @@ void Scenario4_OrientationChanged::OnOrientationChanged(Windows::Graphics::Displ
 {
     if (nullptr != accelerometerReadingTransform)
     {
-        // 'ReadingTransform' is currently only supported on Windows 
-#if WINAPI_FAMILY != WINAPI_FAMILY_PHONE_APP
         accelerometerReadingTransform->ReadingTransform = sender->CurrentOrientation;
-#endif
     }
 }

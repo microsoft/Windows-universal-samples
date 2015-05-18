@@ -12,7 +12,7 @@
       Version="1.0.0.0" />
 
 
-    <mp:PhoneIdentity PhoneProductId="05777116-8530-42a2-914d-9dae4b4da01a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="d5e18bde-6b22-4f4c-a702-10b715e8ea1f" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>StreamSocket C# Sample</DisplayName>
@@ -21,7 +21,7 @@
     </Properties>
 
     <Dependencies>
-        <TargetPlatform Name="Windows.Universal" MinVersion="10.0.10030.0" MaxVersionTested="10.0.10030.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10069.0" MaxVersionTested= "10.0.10069.0" />
     </Dependencies>
 
     <Resources>
@@ -34,13 +34,12 @@
           EntryPoint="StreamSocket.App">
             <uap:VisualElements
               DisplayName="StreamSocket C# Sample"
-              Square150x150Logo="Assets\StoreLogo-sdk.png"
+              Square150x150Logo="Assets\squareTile-sdk.png"
               Square44x44Logo="Assets\SmallTile-sdk.png"
               Description="StreamSocket C# Sample"
-              ForegroundText="light"
               BackgroundColor="#00b2f0">
                 <uap:SplashScreen Image="Assets\Splash-sdk.png" />
-                <uap:DefaultTile DefaultSize="square150x150Logo" >
+                <uap:DefaultTile>
                     <uap:ShowNameOnTiles>
                         <uap:ShowOn Tile="square150x150Logo" />
                     </uap:ShowNameOnTiles>
@@ -54,3 +53,4 @@
       <Capability Name="privateNetworkClientServer" />
     </Capabilities>
 </Package>
+

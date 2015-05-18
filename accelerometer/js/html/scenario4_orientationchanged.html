@@ -1,0 +1,56 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario4_OrientationChanged.css" />
+    <script src="/js/scenario4_OrientationChanged.js"></script>
+</head>
+<body>
+    <div>
+        <p>
+            Registers for OrientationChanged event of the DisplayInformation class to illustrate the usage of the 'ReadingTransform' Property. 
+            Displays accelerometer readings with and without the transformation.
+        </p>
+        <button class="action" id="scenario4Open">Enable</button>
+        <button class="action secondary" id="scenario4Revoke">Disable</button>
+        <br />
+        <br />
+    </div>
+    <div>
+        <table style="width:100%;">
+            <tr>
+                <td>Transform:</td>
+                <td>None</td>
+                <td>DisplayOrientation</td>
+            </tr>
+            <tr>
+                <td>X:</td>
+                <td id="eventOutputXOriginal">no data</td>
+                <td id="eventOutputXDataTransform">no data</td>
+            </tr>
+            <tr>
+                <td>Y:</td>
+                <td id="eventOutputYOriginal">no data</td>
+                <td id="eventOutputYDataTransform">no data</td>
+            </tr>
+            <tr>
+                <td>Z:</td>
+                <td id="eventOutputZOriginal">no data</td>
+                <td id="eventOutputZDataTransform">no data</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

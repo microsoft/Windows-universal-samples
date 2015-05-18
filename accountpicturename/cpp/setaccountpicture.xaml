@@ -1,0 +1,61 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.SetAccountPicture"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                <Run>Set the Account Picture for the current logon user.</Run>
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
+                        <Run>The SetAccountPicture method takes three parameters as input:
+                            small image, large image, and video.
+                            More than one type can be set in the same call,
+                            but a small image must be accompanied by a large image and/or video.
+                            Pass a null for parameters you don't want to set.
+                            A change event can be listened to for Account Picture updates.
+                            The images below change by listening to the update.</Run>
+                    </TextBlock>
+                    <VariableSizedWrapGrid Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button x:Name="SetImageButton" Content="Set image" Margin="0,0,10,0" Click="SetImageButton_Click"/>
+                        <Button x:Name="SetVideoButton"  Content="Set video" Margin="0,0,10,0" Click="SetVideoButton_Click"/>
+                    </VariableSizedWrapGrid>
+                    <VariableSizedWrapGrid Orientation="Horizontal" Margin="0,10,0,0">
+                        <Image x:Name="AccountPictureImage" AutomationProperties.Name="LargeImage placeholder" Width="448" Height="448"  Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                    </VariableSizedWrapGrid>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

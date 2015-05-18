@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -45,9 +45,6 @@ namespace ActivitySensorCS
         {
             ScenarioEnableReadingChangedButton.IsEnabled = true;
             ScenarioDisableReadingChangedButton.IsEnabled = false;
-
-            ScenarioEnableStatusChangedButton.IsEnabled = true;
-            ScenarioDisableStatusChangedButton.IsEnabled = false;
         }
 
         /// <summary>
@@ -63,11 +60,6 @@ namespace ActivitySensorCS
             if (ScenarioDisableReadingChangedButton.IsEnabled)
             {
                 _activitySensor.ReadingChanged -= new TypedEventHandler<ActivitySensor, ActivitySensorReadingChangedEventArgs>(ReadingChanged);
-            }
-
-            if (ScenarioDisableStatusChangedButton.IsEnabled)
-            {
-                _activitySensor.StatusChanged -= new TypedEventHandler<ActivitySensor, ActivitySensorStatusChangedEventArgs>(StatusChanged);
             }
 
             base.OnNavigatingFrom(e);
@@ -90,20 +82,6 @@ namespace ActivitySensorCS
         }
 
         /// <summary>
-        /// This is the event handler for StatusChanged events.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        async private void StatusChanged(object sender, ActivitySensorStatusChangedEventArgs e)
-        {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                ScenarioOutput_Status.Text = e.Status.ToString();
-                ScenarioOutput_StatusTimestamp.Text = e.Timestamp.ToString("u");
-            });
-        }
-
-        /// <summary>
         /// This is the click handler for the 'Reading Changed On' button.
         /// </summary>
         /// <param name="sender"></param>
@@ -119,6 +97,12 @@ namespace ActivitySensorCS
 
                 if (null != _activitySensor)
                 {
+                    _activitySensor.SubscribedActivities.Add(ActivityType.Walking);
+                    _activitySensor.SubscribedActivities.Add(ActivityType.Running);
+                    _activitySensor.SubscribedActivities.Add(ActivityType.InVehicle);
+                    _activitySensor.SubscribedActivities.Add(ActivityType.Biking);
+                    _activitySensor.SubscribedActivities.Add(ActivityType.Fidgeting);
+
                     _activitySensor.ReadingChanged += new TypedEventHandler<ActivitySensor, ActivitySensorReadingChangedEventArgs>(ReadingChanged);
 
                     ScenarioEnableReadingChangedButton.IsEnabled = false;
@@ -146,51 +130,6 @@ namespace ActivitySensorCS
 
             ScenarioEnableReadingChangedButton.IsEnabled = true;
             ScenarioDisableReadingChangedButton.IsEnabled = false;
-        }
-
-        /// <summary>
-        /// This is the click handler for the 'Status Changed On' button.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        async private void ScenarioEnableStatusChanged(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (null == _activitySensor)
-                {
-                    _activitySensor = await ActivitySensor.GetDefaultAsync();
-                }
-
-                if (null != _activitySensor)
-                {
-                    _activitySensor.StatusChanged += new TypedEventHandler<ActivitySensor, ActivitySensorStatusChangedEventArgs>(StatusChanged);
-
-                    ScenarioEnableStatusChangedButton.IsEnabled = false;
-                    ScenarioDisableStatusChangedButton.IsEnabled = true;
-                }
-                else
-                {
-                    rootPage.NotifyUser("No activity sensor found", NotifyType.ErrorMessage);
-                }
-            }
-            catch (UnauthorizedAccessException)
-            {
-                rootPage.NotifyUser("User has denied access to the activity sensor", NotifyType.ErrorMessage);
-            }
-        }
-
-        /// <summary>
-        /// This is the click handler for the 'Status Changed Off' button.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ScenarioDisableStatusChanged(object sender, RoutedEventArgs e)
-        {
-            _activitySensor.StatusChanged -= new TypedEventHandler<ActivitySensor, ActivitySensorStatusChangedEventArgs>(StatusChanged);
-
-            ScenarioEnableStatusChangedButton.IsEnabled = true;
-            ScenarioDisableStatusChangedButton.IsEnabled = false;
         }
     }
 }

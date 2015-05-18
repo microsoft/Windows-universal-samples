@@ -1,6 +1,6 @@
 # XML sample
 
-This sample demonstrates common XML API use scenarios for the **Windows.Data.Xml.Dom** and **Windows.Data.Xml.Xsl** namespaces in the Windows Runtime.
+This sample demonstrates common XML API use scenarios for the Windows.Data.Xml.Dom and Windows.Data.Xml.Xsl namespaces in the Windows Runtime.
 
 Specifically, this sample covers:
 

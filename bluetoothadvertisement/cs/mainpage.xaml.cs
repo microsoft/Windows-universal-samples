@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -26,14 +26,6 @@ namespace SDKTemplate
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public Windows.ApplicationModel.Activation.LaunchActivatedEventArgs LaunchArgs
-        {
-            get
-            {
-                return ((App)App.Current).LaunchArgs;
-            }
-        }
-
         public static MainPage Current;
 
         public MainPage()
@@ -118,7 +110,6 @@ namespace SDKTemplate
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //Splitter.DisplayMode = (Splitter.DisplayMode == SplitViewDisplayMode.Inline) ? SplitViewDisplayMode.CompactInline : SplitViewDisplayMode.Inline;
             Splitter.IsPaneOpen = (Splitter.IsPaneOpen == true) ? false : true;
             StatusBorder.Visibility = Visibility.Collapsed;
         }

@@ -1,0 +1,32 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/common.css" />
+    <script src="/js/files.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">Share files</div>
+        </div>
+        <div id="scenarioContent">
+            <p>Data Package Title:</p>
+            <input class="text-box" id="titleInputBox" value="My files" />
+            <p>Data Package Description:</p>
+            <input class="text-box" id="descriptionInputBox" value="Selected files from the Share Source sample" />
+            <p>Select files you would like to share</p>
+            <button class="action" id="chooseFilesButton">Select files</button>
+            <div id="scenarioOutput" class="hidden">
+                <p id="selectedFiles">No files selected.</p>
+                <button id="shareButton">Share</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

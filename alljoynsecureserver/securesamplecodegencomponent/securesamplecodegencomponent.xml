@@ -6,5 +6,6 @@
       <arg name="inStr2" type="s" direction="in"/>
       <arg name="outStr" type="s" direction="out"/>
     </method>
+    <annotation name="org.alljoyn.Bus.Secure" value="true"/>
   </interface>
 </node>

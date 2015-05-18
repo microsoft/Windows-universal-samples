@@ -1,9 +1,18 @@
+//*********************************************************
+//
 // Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
 
 #include "pch.h"
 #include "Scenario3_XmlWriterLite.xaml.h"
 
-using namespace XmlLite;
+using namespace SDKTemplate::XmlLite;
 
 using namespace Concurrency;
 using namespace Microsoft::WRL;
@@ -27,7 +36,7 @@ Scenario3::Scenario3() : rootPage(MainPage::Current)
     InitializeComponent();
 }
 
-void XmlLite::Scenario3::DoSomething_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario3::DoSomething_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     Button^ b = safe_cast<Button^>(sender);
     StorageFolder^ folder = Windows::Storage::ApplicationData::Current->LocalFolder;
@@ -40,7 +49,7 @@ void XmlLite::Scenario3::DoSomething_Click(Platform::Object^ sender, Windows::UI
             if (FAILED(hr))
             {
                 OutputTextBlock1->Text = L"Exception occured while writing the xml file, and the error code is " + hr.ToString();
-				rootPage->NotifyUser("Exception occured!", NotifyType::ErrorMessage);
+                rootPage->NotifyUser("Exception occured!", NotifyType::ErrorMessage);
             }
             else
             {
@@ -50,7 +59,7 @@ void XmlLite::Scenario3::DoSomething_Click(Platform::Object^ sender, Windows::UI
     });
 }
 
-HRESULT XmlLite::Scenario3::WriteXml(IRandomAccessStream^ randomAccessWriteStream)
+HRESULT Scenario3::WriteXml(IRandomAccessStream^ randomAccessWriteStream)
 {
     StorageFolder^ installFolder = Windows::ApplicationModel::Package::Current->InstalledLocation;
 
@@ -82,7 +91,7 @@ HRESULT XmlLite::Scenario3::WriteXml(IRandomAccessStream^ randomAccessWriteStrea
     return S_FALSE;
 }
 
-HRESULT XmlLite::Scenario3::ReadAndWrite(IXmlReader* reader, IXmlWriterLite* writer)
+HRESULT Scenario3::ReadAndWrite(IXmlReader* reader, IXmlWriterLite* writer)
 {
     HRESULT     hr;
     XmlNodeType nodeType;
@@ -172,6 +181,5 @@ HRESULT XmlLite::Scenario3::ReadAndWrite(IXmlReader* reader, IXmlWriterLite* wri
         }
     }
 
-    ChkHr(writer->Flush());
     return hr;
 }

@@ -2,7 +2,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -20,14 +20,10 @@
     mc:Ignorable="d">
   <Grid x:Name="LayoutRoot" HorizontalAlignment="Left" VerticalAlignment="Top">
     <StackPanel Orientation="Vertical">
-      <TextBlock x:Name="InputTextBlock" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Subscribes to reading and status changed events and displays the updated reading and status."/>
+      <TextBlock x:Name="InputTextBlock" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Subscribes to reading changed events and displays the updated reading."/>
       <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
         <Button x:Name="ScenarioEnableReadingChangedButton" Content="ReadingChanged On" Margin="0,0,10,0" Click="ScenarioEnableReadingChanged"/>
         <Button x:Name="ScenarioDisableReadingChangedButton" Content="ReadingChanged Off" Margin="0,0,10,0" Click="ScenarioDisableReadingChanged"/>
-      </StackPanel>
-      <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-        <Button x:Name="ScenarioEnableStatusChangedButton" Content="StatusChanged On" Margin="0,0,10,0" Click="ScenarioEnableStatusChanged"/>
-        <Button x:Name="ScenarioDisableStatusChangedButton" Content="StatusChanged Off" Margin="0,0,10,0" Click="ScenarioDisableStatusChanged"/>
       </StackPanel>
       <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
         <Grid.ColumnDefinitions>
@@ -44,13 +40,9 @@
         <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Activity:"/>
         <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Confidence:"/>
         <TextBlock TextWrapping="Wrap" Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Reading Timestamp:"/>
-        <TextBlock TextWrapping="Wrap" Grid.Row="3" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Status:"/>
-        <TextBlock TextWrapping="Wrap" Grid.Row="4" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Status Timestamp:"/>
         <TextBlock x:Name="ScenarioOutput_Activity" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
         <TextBlock x:Name="ScenarioOutput_Confidence" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
         <TextBlock x:Name="ScenarioOutput_ReadingTimestamp" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
-        <TextBlock x:Name="ScenarioOutput_Status" TextWrapping="Wrap" Grid.Row="3" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
-        <TextBlock x:Name="ScenarioOutput_StatusTimestamp" TextWrapping="Wrap" Grid.Row="4" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
       </Grid>
     </StackPanel>
   </Grid>

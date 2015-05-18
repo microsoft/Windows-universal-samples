@@ -1,0 +1,41 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/AdvancedSearch.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>
+                    The file broker APIs can be used to filter the scope of HomeGroup searches so that only a specific user's shared files are searched. If your PC is part of a homegroup, then the users on your homegroup are shown below. Select the user to return all files shared by that user.
+                </p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <button class="action" id="searchFilesUser1">
+                User 1
+            </button>
+            <button class="action" id="searchFilesUser2">
+                User 2
+            </button>
+            <button class="action" id="searchFilesUser3">
+                User 3
+            </button>
+            <button class="action" id="searchFilesUser4">
+                User 4
+            </button>
+        </div>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <label id="searchProgress" class="progressRingText">
+            <progress class="win-ring withText"></progress>Searching
+        </label>
+    </div>
+</body>
+</html>

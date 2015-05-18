@@ -1,7 +1,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -216,7 +216,7 @@ namespace BluetoothAdvertisement
         /// </summary>
         /// <param name="sender">Instance that triggered the event.</param>
         /// <param name="e">Event data describing the conditions that led to the event.</param>
-        private void RunButton_Click(object sender, RoutedEventArgs e)
+        private async void RunButton_Click(object sender, RoutedEventArgs e)
         {
             // Registering a background trigger if it is not already registered. It will start background scanning.
             // First get the existing tasks to see if we already registered for it
@@ -227,6 +227,12 @@ namespace BluetoothAdvertisement
             }
             else
             {
+                // Applications registering for background trigger must request for permission.
+                BackgroundAccessStatus backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
+                // Here, we do not fail the registration even if the access is not granted. Instead, we allow 
+                // the trigger to be registered and when the access is granted for the Application at a later time,
+                // the trigger will automatically start working again.
+
                 // At this point we assume we haven't found any existing tasks matching the one we want to register
                 // First, configure the task entry point, trigger and name
                 var builder = new BackgroundTaskBuilder();
@@ -243,7 +249,16 @@ namespace BluetoothAdvertisement
                     // For this scenario, attach an event handler to display the result processed from the background task
                     taskRegistration.Completed += OnBackgroundTaskCompleted;
 
-                    rootPage.NotifyUser("Background watcher registered.", NotifyType.StatusMessage);
+                    // Even though the trigger is registered successfully, it might be blocked. Notify the user if that is the case.
+                    if ((backgroundAccessStatus == BackgroundAccessStatus.Denied) || (backgroundAccessStatus == BackgroundAccessStatus.Unspecified))
+                    {
+                        rootPage.NotifyUser("Not able to run in background. Application must given permission to be added to lock screen.",
+                            NotifyType.ErrorMessage);
+                    }
+                    else
+                    {
+                        rootPage.NotifyUser("Background watcher registered.", NotifyType.StatusMessage);
+                    }
                 }
                 catch (Exception ex)
                 {

@@ -1,0 +1,86 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="Commanding.Scenario8"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Commanding"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                    <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                        The CommandBar does not automatically reflow commands from the PrimaryCommands to the overflow menu
+                        of SecondaryCommands.  This scenario demonstrates how a subclassed CommandBar, DynamicCommandBar, can
+                        achieve this programmatically.  It also demonstrates setting MinWidth on the alignment buttons to create wider
+                        buttons that behave correctly as they reflow between the two areas.
+                        <LineBreak/>
+                        <LineBreak/>
+                        The DynamicCommandBar includes a ContentMinWidth property to set a minimum size for the Content area which
+                        is used to override the default behavior where content is clipped by the PrimaryCommands.
+                    </TextBlock>
+                </StackPanel>
+
+                <local:DynamicCommandBar VerticalAlignment="Bottom" ContentMinWidth="196" Grid.Row="1">
+                    <local:DynamicCommandBar.Content>
+                        <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Top" Margin="12,8" Text="Content Area"/>
+                    </local:DynamicCommandBar.Content>
+                    <AppBarButton Icon="Accept" Label="Accept"/>
+                    <AppBarButton Icon="Account" Label="Account"/>
+                    <AppBarSeparator/>
+                    <AppBarButton Icon="AlignCenter" Label="Align Center" MinWidth="96"/>
+                    <AppBarButton Icon="AlignLeft" Label="Align Left" MinWidth="120"/>
+                    <AppBarButton Icon="AlignRight" Label="Align Right" MinWidth="96"/>
+                    <AppBarSeparator/>
+                    <AppBarButton Icon="Add" Label="Add">
+                        <AppBarButton.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="MenuFlyout Item 1"/>
+                                <MenuFlyoutItem Text="MenuFlyout Item 2"/>
+                                <MenuFlyoutItem Text="MenuFlyout Item 3"/>
+                            </MenuFlyout>
+                        </AppBarButton.Flyout>
+                    </AppBarButton>
+                    <AppBarButton Icon="AddFriend" Label="Add Friend"/>
+                    <AppBarSeparator/>
+                    <AppBarButton Icon="Edit" Label="Edit"/>
+                    <AppBarButton Icon="Save" Label="Save"/>
+                    <AppBarButton Icon="Clear" Label="Clear"/>
+                    <AppBarSeparator/>
+                    <AppBarButton Icon="Phone" Label="Call"/>
+                    <AppBarButton Icon="Video" Label="Video"/>
+                    <CommandBar.SecondaryCommands>
+                        <AppBarButton Label="Menu Item 1"/>
+                        <AppBarButton Label="Menu Item 2"/>
+                        <AppBarButton Label="Menu Item 3"/>
+                        <AppBarButton Label="Menu Item 4"/>
+                    </CommandBar.SecondaryCommands>
+                </local:DynamicCommandBar>
+
+                <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+                <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

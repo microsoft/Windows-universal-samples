@@ -1,0 +1,191 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Name="pageRoot"
+    x:Class="AppUIBasics.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics"
+    xmlns:data="using:AppUIBasics.Data"
+    xmlns:common="using:AppUIBasics.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" NavigationCacheMode="Enabled"
+    SizeChanged="pageRoot_SizeChanged">
+    
+    <Page.BottomAppBar>
+        <CommandBar x:Name="bottomAppBar" Visibility="Collapsed" IsOpen="False" ClosedDisplayMode="Compact" IsSticky="False">
+            <AppBarButton x:Name="searchButton" Label="Search" Icon="Find" Click="SearchButton_Click" />
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Page.Resources>
+
+        <SolidColorBrush x:Key="SectionBackground1" Color="Gray"/>
+
+        <DataTemplate x:Key="ControlCategoryTemplate" x:DataType="data:ControlInfoDataGroup">
+            <Grid Height="175" Width="310" Margin="10,5,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Height="110">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{x:Bind ImagePath}" Stretch="Uniform" AutomationProperties.Name="{x:Bind Title}" HorizontalAlignment="Left"/>
+                        <StackPanel Margin="8" Width="190">
+                            <TextBlock Text="{x:Bind Title}" Style="{StaticResource BaseTextBlockStyle}" TextWrapping="WrapWholeWords" />
+                            <TextBlock Text="{x:Bind Subtitle}" Style="{StaticResource CaptionTextBlockStyle}" Margin="0,8,0,0" TextWrapping="WrapWholeWords" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <TextBlock Text="{x:Bind Description}" Style="{StaticResource BodyTextBlockStyle}" Margin="0,4,0,0" MaxHeight="60" Grid.Row="1" />
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ControlItemTemplate" x:DataType="data:ControlInfoDataItem">
+            <Grid Height="110" Width="420" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="{StaticResource SectionBackground1}" Width="110" Height="110">
+                    <Image Source="{x:Bind ImagePath}" Stretch="Uniform" AutomationProperties.Name="{x:Bind Title}"/>
+                </Border>
+                <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
+                    <TextBlock Text="{x:Bind Title}" Style="{StaticResource BaseTextBlockStyle}" TextWrapping="NoWrap"/>
+                    <TextBlock Text="{x:Bind Subtitle}" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="WrapWholeWords"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <!-- This grid acts as a root panel for the page. -->
+    <Grid Background="{ThemeResource ControlPageBackgroundBrush}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Hub SectionHeaderClick="Hub_SectionHeaderClick" HorizontalContentAlignment="Stretch">
+            <Hub.Header>
+                <!-- Back button and page title -->
+                <local:PageHeader Title="{StaticResource AppName}" WideLayoutThreshold="768" RequestedTheme="Dark" Margin="-12,-12,-12,0" />
+            </Hub.Header>
+            
+            <HubSection Width="380" Padding="20" VerticalAlignment="Top">
+                <DataTemplate>
+                    <Grid Margin="0,10,0,0">
+                        <RichTextBlock FontSize="14">
+                            <Paragraph>This app is a companion to the
+                                <Hyperlink NavigateUri="http://msdn.microsoft.com/library/windows/apps/dn263191.aspx">Windows Store app UI, start to finish</Hyperlink> topic on the
+                                <Bold>Windows Dev Center</Bold> . It demonstrates basic usage of various controls in isolation, but it also demonstrates real use of the controls and layout techniques in the app itself. To get the most out of it, browse the full code in Visual Studio and see how the app works. Each control page has a help pane where we'll point out where you can look in the app to see the feature in use.
+                            </Paragraph>
+                            <Paragraph>
+                                <LineBreak/> Each control has a dark theme and a light theme. On each control page, you can open the bottom app bar to toggle between each theme and see how it looks.
+                            </Paragraph>
+                            <Paragraph>
+                                <LineBreak/> Most control pages show the basic control usage in XAML, but you can view the complete XAML and code for each example in Visual Studio. Each control has its own page in the ControlPages folder.
+                            </Paragraph>
+                        </RichTextBlock>
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection x:Name="GroupsHubSection" Padding="20" Tag="ControlsGallery"
+                        Background="{StaticResource SectionBackground1}">
+                <HubSection.Header>
+                    <TextBlock x:Uid="ByFunctionHeader" TextLineBounds="TrimToBaseline" OpticalMarginAlignment="TrimSideBearings"/>
+                </HubSection.Header>
+                <DataTemplate x:DataType="local:MainPage">
+                    <GridView
+                        Margin="-14,-4,0,0"
+                        AutomationProperties.AutomationId="GroupGridView"
+                        AutomationProperties.Name="Grouped Items"
+                        ItemsSource="{x:Bind Groups, Mode=OneWay}"
+                        ItemTemplate="{StaticResource ControlCategoryTemplate}"
+                        IsSwipeEnabled="False"
+                        IsItemClickEnabled="True"
+                        ScrollViewer.VerticalScrollMode="Disabled"
+                        ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                        SelectionMode="None"
+                        ItemClick="GroupView_ItemClick">
+                        <GridView.Transitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition/>
+                            </TransitionCollection>
+                        </GridView.Transitions>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                </DataTemplate>
+            </HubSection>
+
+
+            <HubSection Padding="20" Background="DarkGray" RequestedTheme="Light">
+                <HubSection.Header>
+                    <TextBlock x:Uid="ByNameHeader" TextLineBounds="TrimToBaseline" OpticalMarginAlignment="TrimSideBearings"/>
+                </HubSection.Header>
+                <DataTemplate x:DataType="local:MainPage">
+                    <GridView
+                        x:Name="itemGridView"
+                        Margin="-13,-4,0,0"
+                        AutomationProperties.AutomationId="ItemGridView"
+                        AutomationProperties.Name="Items In Group"
+                        ItemsSource="{x:Bind Items, Mode=OneWay}"
+                        ItemTemplate="{StaticResource ControlItemTemplate}"
+                        SelectionMode="None"
+                        ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                        ScrollViewer.VerticalScrollMode="Disabled"
+                        IsSwipeEnabled="False"
+                        IsItemClickEnabled="True"
+                        ItemClick="ItemView_ItemClick">
+                        <GridView.Transitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition/>
+                            </TransitionCollection>
+                        </GridView.Transitions>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
+
+        <VisualStateManager.VisualStateGroups>
+            <!-- Visual states reflect the application's window size -->
+            <VisualStateGroup>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="768" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="bottomAppBar.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</Page>

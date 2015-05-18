@@ -1,0 +1,22 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/helperFunctions.js"></script>
+    <script src="/js/checkIndexRevision.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>To ensure that the index revision number matches the app's expected value, you can keep track of it.  In the previous examples, the expected index revision number was incremented with each add, update, and delete operation.  This will show you how to check that tracked index revision number against the index's reported revision number .  In practice, this should be done when the app is activated and, if there is a discrepency, the app should react appropriately.<br /><br />
+            If the reported index revision number is 0, it means the index has been reset.  In this case, the app should re-push all of its data to the indexer.<br /><br />
+            If the reported index revision number is not 0, but doesn't match the app's expected index revision number, it means that not all of the app's indexer operations were properly completed.  If the app only has a small number of items to index, it is acceptable to re-push all of its data to the indexer in this situation.  However, if the app has a large amount of items to index, it is recommended that the app track its updates so that it can backtrack and only retry the required updates.</p>
+        <button id="checkIndexRevision">Check the index revision number</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+    </div>
+</body>
+</html>

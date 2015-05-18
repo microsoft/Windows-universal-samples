@@ -1,0 +1,203 @@
+﻿<Page
+    x:Class="xBindSampleCX.OtherBindings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:xBindSampleCX"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer HorizontalAlignment="Stretch">
+            <StackPanel Orientation="Vertical" Margin="10">
+                <TextBlock Text="OneWay Bindings" Style="{StaticResource Section}"/>
+                <TextBlock Style="{StaticResource Note}"><Run>Even though these are OneWay bindings, they are bound to model properties that don't fire change notifications, therefore won't update </Run></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Int Field: "/>
+                    <Slider Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="10" Value="{x:Bind MyInt, Mode=OneWay}" x:Name="OneTimeSlider3" />
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="This slider will adjust purple box further below" />
+                    <TextBlock Grid.Row="1" Text="Int Property without INPC: "/>
+                    <Slider Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="100" Value="{x:Bind Model.IntPropNoINPC, Mode=OneWay}" />
+                    <TextBlock Grid.Row="2" Grid.ColumnSpan="3" Style="{StaticResource Note}"><Run>These are bound to properties that support notifications so will update with model changes</Run></TextBlock>
+                    <TextBlock Grid.Row="3" Text="Int Property with INPC: "/>
+                    <Slider Grid.Row="3" Grid.Column="1"  Minimum="0" Maximum="10" Value="{x:Bind Model.IntPropWithINPC, Mode=OneWay}" />
+                    <TextBlock Grid.Row="4" Text="Int Dependency Property : "/>
+                    <Slider Grid.Row="4" Grid.Column="1" Minimum="0" Maximum="100" Value="{x:Bind Model.IntPropertyDP, Mode=OneWay}" />
+                </Grid>
+
+                <TextBlock Text="TwoWay Bindings" Style="{StaticResource Section}"/>
+                <TextBlock Style="{StaticResource Note}"><Run>As the following are two way they will update the model when they are adjusted.</Run></TextBlock>
+                <Grid x:Name="Grid1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Int Property with INPC: "/>
+                    <Slider Grid.Row="0" Grid.Column="1"  Minimum="0" Maximum="10" Value="{x:Bind Model.IntPropWithINPC, Mode=TwoWay, Converter={StaticResource IntToDouble}}"  />
+                    <TextBlock Grid.Row="1" Text="Int Dependency Property : "/>
+                    <Slider Grid.Row="1" Grid.Column="1" Value="{x:Bind Model.IntPropertyDP, Mode=TwoWay, Converter={StaticResource IntToDouble}}" Minimum="0" Maximum="100" />
+                    <ToggleSwitch  Grid.Row="2" IsOn="{x:Bind Model.BoolPropWithINPC, Mode=TwoWay}" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Visibility="{x:Bind Model.BoolPropWithINPC, Mode=OneWay, Converter={StaticResource BoolToVisibility}}" x:Name="ToggledVisibility" Text="My visibility is controlled by the same property as the toggleswitch" />
+                </Grid>
+
+                <TextBlock Text="Bindings to the current page" Style="{StaticResource Section}"/>
+                <TextBlock Style="{StaticResource Note}"><Run>Bindings to other elements can use the element name as named elements become fields on the page.</Run></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Bound to Grid1.Children[5].Visibility: "/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind Path=Grid1.Children[5].Visibility, Mode=OneWay}" />
+
+                    <TextBlock Grid.Row="1" Text="LocalTextBox - source of data for other bindings:"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="Hello World" x:Name="LocalTextBox" Width="250" />
+
+                    <TextBlock Grid.Row="2" Text="Text and FontSize are both bound"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind LocalTextBox.Text, Mode=OneWay}" FontSize="{x:Bind Model.IntPropWithINPC, Mode=OneWay}" />
+                </Grid>
+
+                <TextBlock Style="{StaticResource Note}"><Run>The following is a grid panel with rectangles with bindings to the Grid.Column property</Run></TextBlock>
+                <TextBlock Style="{StaticResource Note}"><Run>The Green box should move based on the value updates. The purple box is controlled by a slider above.</Run></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Grid.Row bound to Model.IntPropWithINPC: "/>
+                    <Border  Grid.Column="1" Grid.RowSpan="2" BorderThickness="2" BorderBrush="#ff858585" HorizontalAlignment="Left"  Margin="10,5,0,0" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="20" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                            </Grid.RowDefinitions>
+                            <Rectangle Grid.Column="{x:Bind Model.IntPropWithINPC, Mode=OneWay}" Fill="Green" Width="20" Height="20" />
+                            <Rectangle Grid.Row="1" Grid.Column="{x:Bind OneTimeSlider3.Value, Mode=OneWay, Converter={StaticResource DoubleToInt}}" Fill="Purple" Width="20" Height="20" />
+                        </Grid>
+                    </Border>
+                    <TextBlock Grid.Row="1" Text="Grid.Row bound to OneTimeSlider3.Value"/>
+                </Grid>
+
+
+                <TextBlock Style="{StaticResource Note}"><Run>The following image has a render transform with bindings for rotation and horizontal translation</Run></TextBlock>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Image will rotate and translate:" />
+                    <Border Width="120" Height="120" BorderThickness="2" BorderBrush="#ff858585" HorizontalAlignment="Left" Margin="10,5,0,0">
+                        <Image Source="Assets/microsoft-sdk.png" Width="100" Height="16" RenderTransformOrigin="0.5, 0.5" >
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="{x:Bind Model.IntPropertyDP, Mode=OneWay}" />
+                                    <TranslateTransform X="{x:Bind Model.IntPropWithINPC, Mode=OneWay}" />
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                    </Border>
+                </StackPanel>
+
+
+                <TextBlock Text="FallbackValue &amp; TargetNullValue" Style="{StaticResource Section}"/>
+
+                <TextBlock Style="{StaticResource Note}"><Run>TargetNullValue is used when the binding path results in null</Run></TextBlock>
+                <TextBlock Style="{StaticResource Note}"><Run>FallbackValue is used when intermediary binding bath nodes are null</Run></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Bound to Background.(SolidColorBrush.Color) with a fallback:" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind Background.(SolidColorBrush.Color), FallbackValue='This is my fallback value', Mode=OneWay}" />
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="The background is cast from Brush to SolidColorBrush so the color can be accessed" />
+
+
+                    <TextBlock Grid.Row="1" Text="Bound to NullEmployee.FirstName with a fallback:" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind NullEmployee.FirstName, FallbackValue='Name Not Available'}"/>
+
+                    <TextBlock Grid.Row="2" Text="Bound to NullStringProperty with a TargetNullValue:" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind NullStringProperty, TargetNullValue='This is a null string property'}"/>
+
+
+                    <TextBlock Grid.Row="3" Text="Bound to NullEmployee.NullImageSource with a FallbackValue" />
+                    <Image Grid.Row="3" Grid.Column="1" Width="72" Height="72" Source="{x:Bind NullEmployee.NullImageSource,  FallbackValue='http://static-hp-wus.s-msn.com/sc/homepage/i/65/e8a77758e8644573ba5d41ada16e8c.jpg', TargetNullValue='http://static-hp-wus.s-msn.com/sc/homepage/i/65/e8a77758e8644573ba5d41ada16e8c.jpg'}"/>
+                </Grid>
+
+                <TextBlock Text="Deferred Elements" Style="{StaticResource Section}"/>
+                <TextBlock Style="{StaticResource Note}"><Run>Deferred elements are bound once they are undeferred</Run></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Textblock is deferred:" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="deferedTextBlock" Text="{x:Bind LocalTextBox.Text, Mode=OneWay}" x:DeferLoadStrategy="Lazy" />
+                </Grid>
+
+
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="1">
+            <Button Click="UpdateValuesClick" >Update Values</Button>
+            <Button Click="ResetValuesClick" >Reset Values</Button>
+            <Button Click="UndeferElementClick" Content="Undefer TextBlock" />
+        </StackPanel>
+    </Grid>
+</Page>

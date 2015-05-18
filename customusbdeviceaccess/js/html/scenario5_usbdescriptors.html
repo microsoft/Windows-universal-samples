@@ -1,0 +1,45 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario5_usbDescriptors.css" />
+    <script src="/js/scenario5_usbDescriptors.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">USB Descriptors</h2>
+        </div>
+        <div id="scenarioContent">
+
+            <div data-win-control="SdkSample.ScenarioInput">
+                <div class="deviceScenarioContainer">
+                    <div class="generalScenario">
+                        <p>Please select which descriptor to display:</p>
+
+                        <div id="listOfDescriptorTypesTemplate" data-win-control="WinJS.Binding.Template">
+                            <span data-win-bind="textContent: entryName"></span>
+                        </div>
+                        <div id="listOfDescriptorTypesView" data-win-control="WinJS.UI.ListView" data-win-options="{
+                    itemDataSource: listOfDescriptorTypes.dataSource,
+                    itemTemplate: select('#listOfDescriptorTypesTemplate'),
+                    selectionMode: 'none',
+                    layout : {type: WinJS.UI.ListLayout}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-win-control="SdkSample.ScenarioOutput">
+
+            </div>
+
+
+
+        </div>
+    </div>
+</body>
+</html>

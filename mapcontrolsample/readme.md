@@ -1,18 +1,22 @@
-# MapControl sample
+﻿# Windows map sample for UAP (C#)
 
 This sample demonstrates how to use the universal map control [MapControl]( https://msdn.microsoft.com/en-us/library/windows/apps/xaml/windows.ui.xaml.controls.maps.mapcontrol.aspx) in a universal Windows app (UAP). 
 
 * MapControl Basics: adjusting the ZoomLevel, Heading, DesiredPtich, and map stype
 * Adding points of interest on the map: PushPins, images, and shapes
 * Adding XAML overlays on the map
+* Showing 3D locations in MapControl
+* Showing Streetside experience within MapControl
+* Launching Maps using URI Schemes
+
+This sample is written in XAML and C#.
 
 ## Related topics
 
 [How to display maps in the Map control](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/dn642089.aspx)
-
 [How to display pushpins, shapes, and controls on a map](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/dn792121.aspx) 
-
 [MapControl API reference]( https://msdn.microsoft.com/en-us/library/windows/apps/xaml/windows.ui.xaml.controls.maps.mapcontrol.aspx) 
+[URI scheme for Windows Maps app] ( https://msdn.microsoft.com/en-us/library/windows/apps/xaml/jj635237.aspx)
 
 ## System requirements
 

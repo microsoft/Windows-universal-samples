@@ -1,0 +1,146 @@
+﻿<Page
+    x:Class="AppUIBasics.ControlPages.SplitViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="NavLinkItemTemplate" x:DataType="local:NavLink">
+            <StackPanel Orientation="Horizontal"  Margin="2,0,0,0">
+                <SymbolIcon Symbol="{x:Bind Symbol}"/>
+                <TextBlock Text="{x:Bind Label}" Margin="24,0,0,0" VerticalAlignment="Center"/>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <RelativePanel>
+        <local:ControlExample x:Name="Example1" HeaderText="A basic SplitView." HorizontalAlignment="Left">
+            <Grid MaxWidth="500" Height="300">
+                <SplitView x:Name="splitView" PaneBackground="{x:Bind paneBackgroundCombobox.SelectedValue, Mode=OneWay, Converter={StaticResource stringToBrushConverter}}" IsPaneOpen="{x:Bind togglePaneButton.IsChecked, Mode=TwoWay, Converter={StaticResource nullableBooleanToBooleanConverter}}" OpenPaneLength="{x:Bind openPaneLengthSlider.Value, Mode=OneWay}" CompactPaneLength="{x:Bind compactPaneLengthSlider.Value, Mode=OneWay}" DisplayMode="CompactOverlay">
+                    <SplitView.Pane>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="PANE CONTENT" x:Name="PaneHeader" Margin="60,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
+
+                            <ListView x:Name="NavLinksList" Margin="0,12,0,0" SelectionMode="None" Grid.Row="1" VerticalAlignment="Stretch" 
+                    ItemClick="NavLinksList_ItemClick" IsItemClickEnabled="True" 
+                    ItemsSource="{x:Bind NavLinks}" ItemTemplate="{StaticResource NavLinkItemTemplate}"/>
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="14,24,0,24" >
+                                <SymbolIcon Symbol="Setting" />
+                                <TextBlock Text="Settings" Margin="24,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Grid>
+                    </SplitView.Pane>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="SPLITVIEW CONTENT" Margin="12,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
+                        <TextBlock x:Name="content" Grid.Row="1" Margin="12,12,0,0" Style="{StaticResource BodyTextBlockStyle}" />
+                    </Grid>
+                </SplitView>
+            </Grid>
+            <local:ControlExample.Xaml>
+                <RichTextBlock>
+                    <Paragraph>&lt;SplitView x:Name="splitView" PaneBackground="<Run Text="{x:Bind splitView.PaneBackground, Mode=OneWay, Converter={StaticResource colorStringConverter}}" />" IsPaneOpen="<Run Text="{x:Bind splitView.IsPaneOpen, Mode=OneWay, Converter={StaticResource valueToStringConverter}}" />" OpenPaneLength="<Run Text="{x:Bind openPaneLengthSlider.Value, Mode=OneWay, Converter={StaticResource valueToStringConverter}}"/>" CompactPaneLength="<Run Text="{x:Bind compactPaneLengthSlider.Value, Mode=OneWay, Converter={StaticResource valueToStringConverter}}"/>" DisplayMode="<Run Text="{x:Bind splitView.DisplayMode, Mode=OneWay, Converter={StaticResource valueToStringConverter}}" />"&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;SplitView.Pane&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;Grid&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;Grid.RowDefinitions&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;RowDefinition Height="Auto"/&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;RowDefinition Height="*"/&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;RowDefinition Height="Auto"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;/Grid.RowDefinitions&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;TextBlock Text="PANE CONTENT" x:Name="PaneHeader" Margin="60,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;ListView x:Name="NavLinksList" Margin="0,12,0,0" SelectionMode="None" Grid.Row="1" VerticalAlignment="Stretch"</Paragraph>
+                    <Paragraph TextIndent="60">ItemClick="NavLinksList_ItemClick" IsItemClickEnabled="True"</Paragraph>
+                    <Paragraph TextIndent="60">ItemsSource="{x:Bind NavLinks}" ItemTemplate="{StaticResource NavLinkItemTemplate}"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;StackPanel Orientation="Horizontal" Grid.Row="2" Margin="14,24,0,24" &gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;SymbolIcon Symbol="Setting" /&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;TextBlock Text="Settings" Margin="24,0,0,0" VerticalAlignment="Center"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;/StackPanel&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;/Grid&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/SplitView.Pane&gt;</Paragraph>
+                    <Paragraph TextIndent="3"></Paragraph>
+                    <Paragraph TextIndent="12">&lt;Grid&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;Grid.RowDefinitions&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;RowDefinition Height="Auto"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;RowDefinition Height="*"/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;/Grid.RowDefinitions&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;TextBlock Text="SPLITVIEW CONTENT" Margin="12,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;TextBlock x:Name="content" Grid.Row="1" Margin="12,12,0,0" Style="{StaticResource BodyTextBlockStyle}" /&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/Grid&gt;</Paragraph>
+                    <Paragraph>&lt;/SplitView&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+
+        <local:ControlExample x:Name="ExampleAccessories" HeaderText="Use the options to change the look of the SplitView." MaxWidth="250">
+            <StackPanel>
+                <ToggleButton x:Name="togglePaneButton" IsChecked="True" Content="IsPaneOpen"/>
+                <ToggleSwitch OffContent="Left" OnContent="Right" Header="Placement" Toggled="PanePlacement_Toggled" Margin="0,4" MinWidth="120"/>
+                <ComboBox x:Name="displayModeCombobox" SelectionChanged="displayModeCombobox_SelectionChanged" Width="148" SelectedIndex="0" VerticalAlignment="Center" Header="DisplayMode">
+                    <ComboBoxItem>Inline</ComboBoxItem>
+                    <ComboBoxItem>CompactInline</ComboBoxItem>
+                    <ComboBoxItem>Overlay</ComboBoxItem>
+                    <ComboBoxItem>CompactOverlay</ComboBoxItem>
+                </ComboBox>
+                <ComboBox x:Name="paneBackgroundCombobox" Width="148" SelectedIndex="0" VerticalAlignment="Center" Header="PaneBackground">
+                    <ComboBoxItem>SystemControlBackgroundChromeMediumLowBrush</ComboBoxItem>
+                    <ComboBoxItem>Red</ComboBoxItem>
+                    <ComboBoxItem>Blue</ComboBoxItem>
+                    <ComboBoxItem>Green</ComboBoxItem>
+                </ComboBox>
+                <Slider x:Name="openPaneLengthSlider" 
+                        Header="OpenPaneLength"
+                        Value="256"
+                        Minimum="128" Maximum="500"
+                        Width="196"
+                        SnapsTo="StepValues" StepFrequency="8"
+                        Margin="8,4"/>
+                <Slider x:Name="compactPaneLengthSlider"
+                        Header="CompactPaneLength"
+                        Value="48"
+                        Minimum="24" Maximum="128"
+                        Width="196"
+                        SnapsTo="StepValues" StepFrequency="8"
+                        Margin="8,4"/>
+            </StackPanel>
+        </local:ControlExample>
+
+
+
+        <VisualStateManager.VisualStateGroups>
+            <!-- Visual states reflect the application's window size -->
+            <VisualStateGroup>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Example1.(RelativePanel.RightOf)" Value="ExampleAccessories" />
+                        <Setter Target="Example1.Margin" Value="24,0,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Example1.(RelativePanel.Below)" Value="ExampleAccessories" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </RelativePanel>
+</Page>
