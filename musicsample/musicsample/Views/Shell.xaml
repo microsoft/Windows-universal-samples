@@ -1,0 +1,95 @@
+﻿<Page
+    x:Class="App1.Views.Shell"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App1.Views"
+    xmlns:st="using:WindowsStateTriggers"
+    Background="#EBEBEB"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="HardwareButtonsCollapsed">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="BackRadioButton.Visibility" Value="Collapsed" />
+                        <Setter Target="SplitView.DisplayMode" Value="Overlay" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Moy2">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="400" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="BackRadioButton.Visibility" Value="Visible" />
+                        <Setter Target="SplitView.DisplayMode" Value="CompactInline" />
+                        <!--CompactOverlay-->
+                        <!--CompactInline-->
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+
+
+<SplitView x:Name="SplitView" Background="Black" 
+        OpenPaneLength="240" CompactPaneLength="60" PaneClosed="SplitView_PaneClosed"
+        DisplayMode="CompactOverlay" IsPaneOpen="False" 
+        PaneBackground="#343434" 
+        >
+    <SplitView.Content>
+        <ContentControl Content="{Binding}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  Background="#EBEBEB" />
+    </SplitView.Content>
+    <SplitView.Pane>
+        <StackPanel x:Name="SplitViewPanePanel">
+            <RadioButton x:Name="BackRadioButton" 
+                Background="Green" Visibility="Visible"
+                Tag="" Click="BackRadionButton_Click"
+                Style="{StaticResource NavRadioButtonStyle}" 
+                Content="Back"/>
+
+            <RadioButton x:Name="HamburgerRadioButton" Click="HamburgerRadioButton_Click" 
+                Style="{StaticResource NavRadioButtonStyle}" 
+                Tag="" 
+            Content="Menu" />
+
+            <RadioButton x:Name="HomeRadioButton"
+                Tag="" Click="HomeRadioButton_Click"  
+                Style="{StaticResource NavRadioButtonStyle}" 
+                Content="Home" />
+                    
+                    
+            <RadioButton x:Name="FriendsRadioButton"
+                Tag="" Click="FriendsRadioButton_Click"
+                Style="{StaticResource NavRadioButtonStyle}" 
+                Content="Friends" />
+        </StackPanel>
+    </SplitView.Pane>
+</SplitView>
+
+        <ToggleButton 
+				x:Name="HamburguerButton"
+                Click="HamburguerButton_Click"
+				Style="{StaticResource SymbolButton}"	    
+				VerticalAlignment="Top" 
+				Foreground="Green" 
+               
+				Margin="0,5,0,0">
+            <ToggleButton.Content>
+                <Border Background="Transparent" 
+						Width="40" 
+						Height="40">
+                    <FontIcon Foreground="Green" x:Name="Hamburger" 
+							  FontFamily="Segoe MDL2 Assets" 
+							  Glyph="&#xE700;" />
+                </Border>
+            </ToggleButton.Content>
+        </ToggleButton>
+    </Grid>
+</Page>
