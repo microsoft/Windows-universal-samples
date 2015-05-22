@@ -83,6 +83,7 @@ void Scenario4::ReadBytesButton_Click(Object^ sender, RoutedEventArgs^ e)
                 IBuffer^ buffer = task.get();
                 DataReader^ dataReader = DataReader::FromBuffer(buffer);
                 String^ fileContent = dataReader->ReadString(buffer->Length);
+                delete dataReader; // As a best practice, explicitly close the dataReader resource as soon as it is no longer needed.
                 rootPage->NotifyUser("The following " + buffer->Length.ToString() + " bytes of text were read from '" + file->Name + "':\n" + fileContent, NotifyType::StatusMessage);
             }
             catch (COMException^ ex)
