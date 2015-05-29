@@ -37,13 +37,17 @@ Copyright (c) Microsoft Corporation. All rights reserved
     }
 
     #scenarioControl .scenarioItem {
+        display: flex;
         font-size: 14pt;
         padding: 8px 8px 8px 0px;
-        white-space: nowrap;
     }
 
         #scenarioControl .scenarioItem .scenarioNumber {
+            flex-shrink: 0;
             display: inline-block;
             width: 48px;
             text-align: center;
+        }
+
+        #scenarioControl .scenarioItem .scenarioName {
         }

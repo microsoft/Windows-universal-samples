@@ -8,6 +8,15 @@
 
     WinJS.Navigation.addEventListener("navigating", function (evt) {
         currentScenarioUrl = evt.detail.location;
+        var scenarioControl = document.querySelector("#scenarioControl").winControl;
+
+        for (var i = 0; i < SdkSample.scenarios.length; i++) {
+            if (SdkSample.scenarios.getAt(i).url === currentScenarioUrl) {
+                scenarioControl.currentItem = { index: i };
+                scenarioControl.selection.set(i);
+                break;
+            }
+        }
     });
 
     var lastError, lastStatus;
