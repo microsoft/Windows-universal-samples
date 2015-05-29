@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<gallery_sample> 
-    <title>Full screen mode sample</title>
-    <feature_teams>
-        <feature_team_info comp_central_path="OS\PTP-PC, Tablet and Phone\Shell\DESK-Desktop User Experience\Multitasking\Full Screen" dev_owner="zaherm" pm_owner="mironv" writer_owner="dhale"/>
-   </feature_teams>
-</gallery_sample>

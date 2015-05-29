@@ -46,13 +46,15 @@ void Scenario1_Basic::ToggleFullScreenModeButton_Click(Platform::Object^ sender,
     if (view->IsFullScreenMode)
     {
         view->ExitFullScreenMode();
-        rootPage->NotifyUser("Exited full screen mode", NotifyType::StatusMessage);
+        rootPage->NotifyUser("Exiting full screen mode", NotifyType::StatusMessage);
+        // The SizeChanged event will be raised when the exit from full screen mode is complete.
     }
     else
     {
         if (view->TryEnterFullScreenMode())
         {
             rootPage->NotifyUser("Entering full screen mode", NotifyType::StatusMessage);
+            // The SizeChanged event will be raised when the entry to full screen mode is complete.
         }
         else
         {

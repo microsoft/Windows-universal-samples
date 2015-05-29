@@ -28,10 +28,12 @@
         var view = ApplicationView.getForCurrentView();
         if (view.isFullScreenMode) {
             view.exitFullScreenMode();
-            WinJS.log && WinJS.log("Exited full screen mode", "samples", "status");
+            WinJS.log && WinJS.log("Exiting full screen mode", "samples", "status");
+            // The resize event will be raised when the exit from full screen mode is complete.
         } else {
             if (view.tryEnterFullScreenMode()) {
                 WinJS.log && WinJS.log("Entering full screen mode", "samples", "status");
+                // The resize event will be raised when the entry to full screen mode is complete.
             } else {
                 WinJS.log && WinJS.log("Failed to enter full screen mode", "samples", "error");
             }    
