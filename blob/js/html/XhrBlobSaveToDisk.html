@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/XhrBlobSaveToDisk.css" />
+    <script src="/js/XhrBlobSaveToDisk.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <div id="xhrBlobSaveToDisk">
+            <p>Download an Image file into a blob using XHR, and then save the contents to disk</p>
+            <div>
+                Download URI: <br/>
+                <input id="targetUrl" value="http://www.microsoft.com/windows/Framework/images/win_logo.png" /><br /><br/>
+                File Name: <br/>
+                <input id="fileName" value="win_logo.png" /><br/><br />
+            </div>
+            <button id="save" class="button">Download Image and Save</button>
+        </div>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <div id="output" class="item"><br/></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+﻿/* styles */
+
+.scenario2 #inputDiv
+{
+    border: 1px solid #000; /* black*/
+    height:200px;
+    width:600px;
+    float:left;
+    padding-top: 20px;
+    padding-bottom: 20px;
+   
+    cursor: default;
+    -ms-user-select: none;
+}
+
+.scenario2 #inputField
+{
+    
+    height:50px;
+    width:400px;
+    float:left;
+    margin-left: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: default;
+    
+    
+}
+
+

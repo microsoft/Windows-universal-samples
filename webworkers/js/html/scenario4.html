@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario4.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            Web Workers also support Channel Messaging. Channel Messaging can be used to enable direct communication between workers. In 
+            this example, the UI thread creates two workers and a set of ports through which the Web Workers can directly communicate. 
+            The UI thread then passes the string "Hello World" to the first Web Worker, which passes it on to the second Web Worker via 
+            the specified port, which then passes it back to the UI thread.
+        </p>
+        <button id="doMessageChannel" class="action">Run</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <div class="item" id="scenario4Output">
+            <h3>Message Log:</h3>
+            <button id="clearMessageLog" class="action">
+                Clear Log</button>
+            <div id="messageLog" class="log">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

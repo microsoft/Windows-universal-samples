@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<data>
+  <books>
+    <book id="0" title="Around the World in 80 Days" authorid="0" />
+    <book id="1" title="Twenty Thousand Leagues Under the Sea" authorid="0" />
+    <book id="2" title="Flatland: A Romance of Many Dimensions" authorid="1" />
+    <book id="3" title="Pride and Prejudice" authorid="2" />
+    <book id="4" title="Alice's Adventures in Wonderland" authorid="3" />
+    <book id="5" title="Through the Looking Glass" authorid="3" />
+    <book id="6" title="A Christmas Carol" authorid="4" />
+    <book id="7" title="The Lamplighter" authorid="4" />
+    <book id="8" title="The Pickwick Papers" authorid="4" />
+    <book id="9" title="Sense and Sensibility" authorid="2" />
+    <book id="10" title="The Adventure of the Cardboard Box" authorid="5" />
+    <book id="11" title="The Adventure of the Devil's Foot" authorid="5" />
+    <book id="12" title="Grimm's Fairy Tales" authorid="6" />
+    <book id="13" title="Ulysses" authorid="7" />
+    <book id="14" title="Metamorphosis" authorid="8" />
+    <book id="15" title ="The Jungle Book" authorid="9" />
+    <book id="16" title="The Poetics" authorid="10" />
+    <book id="17" title="Frankenstein" authorid="11" />
+    <book id="18" title="Fables" authorid="12" />
+    <book id="19" title="Strange Case of Dr. Jekyll and Mr. Hyde" authorid="12" />
+    <book id="20" title="Treasure Island" authorid="12" />
+    <book id="21" title="Kidnapped" authorid="12" />
+    <book id="22" title="A Dog's Tale" authorid="13" />
+    <book id="23" title="The Adventures of Tom Sawyer" authorid="13" />
+    <book id="24" title="Adventures of Huckleberry Finn" authorid="13" />
+    <book id="25" title="The War of the Worlds" authorid="14" />
+    <book id="26" title="The Time Machine" authorid="14" />
+    <book id="27" title="The Picture of Dorian Gray" authorid="15" />
+    <book id="28" title="Salome" authorid="15" />
+    <book id="29" title="Mansfield Park" authorid="2" />
+    <book id="30" title="Emma" authorid="2" />
+  </books>
+  <authors>
+    <author id="0" name="Jules Verne" />
+    <author id="1" name="Edwin A. Abbott" />
+    <author id="2" name="Jane Austen" />
+    <author id="3" name="Lewis Carroll" />
+    <author id="4" name="Charles Dickens" />
+    <author id="5" name="Sir Arthur Conan Doyle" />
+    <author id="6" name="Grimm Brothers" />
+    <author id="7" name="James Joyce" />
+    <author id="8" name="Franz Kafka" />
+    <author id="9" name="Rudyard Kipling" />
+    <author id="10" name="Aristotle" />
+    <author id="11" name="Mary Shelley" />
+    <author id="12" name="Robert Louis Stevenson" />
+    <author id="13" name="Mark Twain" />
+    <author id="14" name="H.G. Wells" />
+    <author id="15" name="Oscar Wilde" />
+  </authors>
+</data>
