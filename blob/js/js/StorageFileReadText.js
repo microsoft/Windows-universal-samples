@@ -30,10 +30,10 @@
         picker.pickSingleFileAsync().done(function (file) {
             // Check that the picker returned a file. The picker will return null if the user clicked cancel.
             if (file) {
-                //create the FileReader object to read the file
+                // create the FileReader object to read the file
                 var fileReader = new FileReader();
 
-                //setup the handlers to respond to events from the FileReader
+                // setup the handlers to respond to events from the FileReader
                 fileReader.onload = fileLoaded;
                 fileReader.onerror = fileError;
 

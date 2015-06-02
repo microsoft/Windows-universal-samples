@@ -49,7 +49,6 @@
     }
 
     function writeBlobToFile(blob) {
-
         var filename = document.getElementById("fileName").value;
         // Open the picker to create a file to save the blob
         Windows.Storage.KnownFolders.picturesLibrary.createFileAsync(filename, Windows.Storage.CreationCollisionOption.generateUniqueName).then(function (file) {

@@ -7,8 +7,8 @@
 //// Copyright (c) Microsoft Corporation. All rights reserved
 (function() {
   "use strict";
-  var timers = new Array();
-  var intervals = new Array();
+  var timers = [];
+  var intervals = [];
 
   onmessage = function (e) {
 

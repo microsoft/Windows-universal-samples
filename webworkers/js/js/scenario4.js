@@ -7,18 +7,6 @@
 
 (function () {
     "use strict";
-    var page = WinJS.UI.Pages.define("/html/scenario4.html", {
-        ready: function (element, options) {
-            document.getElementById("doMessageChannel").addEventListener("click", sendChannelMessage, false);
-            document.getElementById("clearMessageLog").addEventListener("click", function () {
-                document.getElementById("messageLog").innerHTML = "";
-            }, false);
-        },
-        unload: function () {
-            stopListenToWorker();
-        }
-    });
-
     var cmWorker1;
     var cmWorker2;
 
@@ -40,15 +28,29 @@
         }
 
         cmWorker1.onmessage = function (e) {
-            document.getElementById("messageLog").innerHTML += "Worker 1 says: \"" + e.data + "\"<br>";
+            document.getElementById("messageLog")
+              .appendChild(document.createElement('p'))
+              .textContent = "Worker 1 says: \"" + e.data + "\"";
         };
 
         cmWorker2.onmessage = function (e) {
-            document.getElementById("messageLog").innerHTML += "Worker 2 says: \"" + e.data + "\"<br>";
+            document.getElementById("messageLog")
+              .appendChild(document.createElement('p'))
+              .textContent = "Worker 2 says: \"" + e.data + "\"";
         };
 
         var channel = new MessageChannel();
         cmWorker2.postMessage(null, [channel.port2]);
         cmWorker1.postMessage({ message: "Hello World!" }, [channel.port1]);
     }
+
+    var page = WinJS.UI.Pages.define("/html/scenario4.html", {
+        ready: function () {
+            document.getElementById("doMessageChannel").addEventListener("click", sendChannelMessage);
+            document.getElementById("clearMessageLog").addEventListener("click", function () {
+                document.getElementById("messageLog").innerHTML = "";
+            });
+        },
+        unload: stopListenToWorker
+    });
 })();

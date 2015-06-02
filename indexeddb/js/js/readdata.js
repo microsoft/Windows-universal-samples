@@ -26,7 +26,6 @@
     }
 
     function dbSuccess(evt) {
-
         // If the database was previously loaded, close it. Closing the database keeps it from becoming blocked for later deletes operations.
         if (SdkSample.db) {
             SdkSample.db.close();
@@ -43,7 +42,6 @@
     }
 
     function readData(evt) {
-
         // Declare arrays to hold the data to be read.
         var books = [];
         var authors = [];
@@ -83,7 +81,7 @@
             // Construct an output table with one row per book.
             outputContent = "<table><tr><th>Book</th><th>Author</th><th>Checked Out?</th></tr>";
             for (i = 0; i < len; i++) {
-                outputContent += "<tr><td>" + books[i].title + "</td><td>" + authors[books[i].authorid] + "</td><td><input type='checkbox' " + (books[i].checkout === 1 ? "disabled='disabled' checked='checked'" : "disabled='disabled'") + "/></tr>";
+                outputContent += "<tr><td>" + books[i].title + "</td><td>" + authors[books[i].authorId] + "</td><td><input type='checkbox' " + (books[i].checkout === 1 ? "disabled='disabled' checked='checked'" : "disabled='disabled'") + "/></tr>";
             }
 
             // Display the content.
@@ -106,8 +104,8 @@
         };
 
         // The authors object store cursor is handled slightly differently. Here we load the entire authors table into an array because we know there
-        // is only a small amount of data. With larger or filtered datasets, we could have parsed the authorid in the book cursor onsuccess handler 
-        // above and initiated a nested cursor request that created a keyRange for the one authorid desired and passed that keyRange to the openCursor
+        // is only a small amount of data. With larger or filtered datasets, we could have parsed the authorId in the book cursor onsuccess handler 
+        // above and initiated a nested cursor request that created a keyRange for the one authorId desired and passed that keyRange to the openCursor
         // call below. For clarity of this sample, we follow the simpler model.
         var authorCursorRequest = txn.objectStore("authors").openCursor();
 

@@ -16,8 +16,6 @@
             for (var i = 0; i < inputs.length; i++) {
                 inputs[i].addEventListener("focus", formReset, false);
             }
-
-
         }
     });
 

@@ -5,7 +5,7 @@
 
     var sampleTitle = "User Selection sample for Windows Store apps";
 
-    var scenarios = [ //change the scenario names later when done with sample
+    var scenarios = [ // change the scenario names later when done with sample
         { url: "/html/scenario1.html", title: "All the attribute values - Parent unselectable" },
         { url: "/html/scenario4.html", title: "All attribute values - Parent selectable" },
         { url: "/html/scenario2.html", title: "Text Box default behavior  selectable" },

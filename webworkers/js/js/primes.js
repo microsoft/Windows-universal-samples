@@ -9,11 +9,11 @@
 (function () {
     "use strict";
 
-    var primes = new Array();
+    var primes = [];
     var i;
 
     self.onmessage = function (e) {
-        i = parseInt(e.data);
+        i = parseInt(e.data, 10);
 
         //2 is a prime
         if (i === 2) {
@@ -38,6 +38,6 @@
     function calculatePrimes() {
         isPrime(i);
         i += 2; //Each thread handles every other possible number.
-        setTimeout(calculatePrimes, 0);
+        setImmediate(calculatePrimes);
     }
 })();

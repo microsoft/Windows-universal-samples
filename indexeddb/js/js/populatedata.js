@@ -73,7 +73,7 @@
                             var book = {
                                 id: nodes[i].attributes[0].nodeValue,
                                 title: nodes[i].attributes[1].nodeValue,
-                                authorid: nodes[i].attributes[2].nodeValue
+                                authorId: nodes[i].attributes[2].nodeValue
                             };
                             books.push(book);
                         }

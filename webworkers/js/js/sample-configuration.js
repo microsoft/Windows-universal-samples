@@ -7,7 +7,6 @@
 
     var scenarios = [
         { url: "/html/scenario1.html", title: "Basic Multithreaded JavaScript" },
-        //{ url: "/html/scenario2.html", title: "WinJS XHR in Workers" },
         { url: "/html/scenario3.html", title: "Timers in Workers" },
         { url: "/html/scenario4.html", title: "Channel Messaging" }
     ];

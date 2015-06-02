@@ -29,10 +29,10 @@
 
         // Check that the picker returned a file. The input tag will return null if no file was selected
         if (file) {
-            //create the FileReader object to read the file
+            // create the FileReader object to read the file
             var fileReader = new FileReader();
 
-            //setup the handlers to respond to events from the FileReader
+            // setup the handlers to respond to events from the FileReader
             fileReader.onload = fileLoaded;
             fileReader.onerror = fileError;
 

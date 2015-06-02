@@ -7,15 +7,6 @@
 
 (function () {
     "use strict";
-    var page = WinJS.UI.Pages.define("/html/scenario1.html", {
-        ready: function (element, options) {
-            document.getElementById("startPrimes").addEventListener("click", calculatePrimes, false);
-        },
-        unload: function() {
-            resetPrimes();
-        }
-    });
-
     //Scenario 1
     var primesCount = 0;
     var primesRunning = false;
@@ -23,8 +14,7 @@
     var primes2;
 
     function resetPrimes() {
-        var count = document.getElementById("primesCount");
-        count.innerText = "0";
+        document.getElementById("primesCount").textContent= "0";
         primesCount = 0;
         if (primes1) {
             primes1.terminate();
@@ -33,7 +23,7 @@
             primes2.terminate();
         }
         primesRunning = false;
-        document.getElementById("startPrimes").innerHTML = "Calculate Primes";
+        document.getElementById("startPrimes").textContent = "Calculate Primes";
     }
 
     function displayPrime(e) {
@@ -41,8 +31,7 @@
         if (primesCount >= 100000) {
             resetPrimes();
         }
-        var count = document.getElementById("primesCount");
-        count.innerText = primesCount;
+        document.getElementById("primesCount").textContent = primesCount;
     }
 
     function calculatePrimes() {
@@ -59,4 +48,11 @@
             primesRunning = true;
         }
     }
+
+    var page = WinJS.UI.Pages.define("/html/scenario1.html", {
+        ready: function () {
+            document.getElementById("startPrimes").addEventListener("click", calculatePrimes);
+        },
+        unload: resetPrimes
+    });
 })();

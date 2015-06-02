@@ -18,7 +18,6 @@
     var pendingWrites = [];
 
     function startReadData() {
-
         // Create the request to open the database, named BookDB, and if it doesn't exist, create it and immediately
         // upgrade to version 1.
         var dbRequest = window.indexedDB.open("BookDB", 1);
@@ -31,7 +30,6 @@
     }
 
     function startWriteData() {
-
         // If the database has not been opened, log an error.
         if (SdkSample.db === null) {
             WinJS.log && WinJS.log("Data has not been read yet.", "sample", "error");
@@ -130,7 +128,7 @@
             // Construct an output table with one row per book.
             outputContent = "<table><tr><th>Book</th><th>Author</th><th>Checked Out?</th></tr>";
             for (i = 0; i < len; i++) {
-                outputContent += "<tr><td>" + books[i].title + "</td><td>" + authors[books[i].authorid] +
+                outputContent += "<tr><td>" + books[i].title + "</td><td>" + authors[books[i].authorId] +
                     "</td><td><input class='bookCheckout' id='" + books[i].id + "' type='checkbox' " +
                     (books[i].checkout === 1 ? "checked='checked'" : "") + "/></tr>";
             }
@@ -162,8 +160,8 @@
         };
 
         // The authors object store cursor is handled slightly differently. Here we load the entire authors table into an array because we know there
-        // is only a small amount of data. With larger or filtered datasets, we could have parsed the authorid in the book cursor onsuccess handler 
-        // above and initiated a nested cursor request that created a keyRange for the one authorid desired and passed that keyRange to the openCursor
+        // is only a small amount of data. With larger or filtered datasets, we could have parsed the authorId in the book cursor onsuccess handler 
+        // above and initiated a nested cursor request that created a keyRange for the one authorId desired and passed that keyRange to the openCursor
         // call below. For clarity of this sample, we follow the simpler model.
         var authorCursorRequest = txn.objectStore("authors").openCursor();
 

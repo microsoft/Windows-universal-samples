@@ -7,24 +7,12 @@
 
 (function () {
     "use strict";
-    var page = WinJS.UI.Pages.define("/html/scenario3.html", {
-        ready: function (element, options) {
-            document.getElementById("addTimeout2000").addEventListener("click", scheduleTimeout2000, false);
-            document.getElementById("addInterval3000").addEventListener("click", scheduleInterval3000, false);
-            document.getElementById("clearTimers").addEventListener("click", clearAllTimers, false);
-            document.getElementById("clearTimerLog").addEventListener("click", function () {
-                document.getElementById("timerLog").innerHTML = "";
-            }, false);
-        },
-        unload: function() {
-            clearAllTimers();
-        }
-    });
-
     var timersWorker = new Worker('js/timers.js');
 
     timersWorker.onmessage = function (e) {
-        document.getElementById("timerLog").innerHTML += e.data + "<br>";
+        document.getElementById("timerLog")
+          .appendChild(document.createElement('p'))
+          .textContent = e.data;
     };
 
     function scheduleTimeout2000() {
@@ -45,4 +33,16 @@
             delay: null
         });
     }
+
+    var page = WinJS.UI.Pages.define("/html/scenario3.html", {
+        ready: function () {
+            document.getElementById("addTimeout2000").addEventListener("click", scheduleTimeout2000);
+            document.getElementById("addInterval3000").addEventListener("click", scheduleInterval3000);
+            document.getElementById("clearTimers").addEventListener("click", clearAllTimers);
+            document.getElementById("clearTimerLog").addEventListener("click", function () {
+                document.getElementById("timerLog").innerHTML = "";
+            });
+        },
+        unload: clearAllTimers
+    });
 })();

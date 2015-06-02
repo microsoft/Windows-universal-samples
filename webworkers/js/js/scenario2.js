@@ -7,19 +7,6 @@
 
 (function () {
     "use strict";
-    var page = WinJS.UI.Pages.define("/html/scenario2.html", {
-        ready: function (element, options) {
-            document.getElementById("sendXHR").addEventListener("click", sendXMLHttpRequest, false);
-            document.getElementById("clearXHRLog").addEventListener("click", function () {
-                document.getElementById("xhrLog").innerHTML = "";
-            }, false);
-
-        },
-        unload: function () {
-            stopListenToWorker();
-        }
-    });
-
     var xhrWorker;
     
     function stopListenToWorker() {
@@ -33,11 +20,23 @@
             xhrWorker = new Worker('js/xhr.js');
         }
         xhrWorker.onmessage = function (e) {
-            document.getElementById("xhrLog").innerHTML += e.data + "<br>";
+            document.getElementById("xhrLog")
+              .appendChild(document.createElement('p'))
+              .textContent = e.data;
         };
         xhrWorker.postMessage({
             url: "http://www.microsoft.com/",
         });
     }
 
+    var page = WinJS.UI.Pages.define("/html/scenario2.html", {
+        ready: function () {
+            document.getElementById("sendXHR").addEventListener("click", sendXMLHttpRequest);
+            document.getElementById("clearXHRLog").addEventListener("click", function () {
+                document.getElementById("xhrLog").innerHTML = "";
+            });
+
+        },
+        unload: stopListenToWorker
+    });
 })();

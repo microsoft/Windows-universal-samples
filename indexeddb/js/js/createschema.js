@@ -33,7 +33,6 @@
     }
 
     function deleteDB() {
-
         // Close and clear the handle to the database, held in the parent SdkSample namespace.
         if (SdkSample.db) {
             SdkSample.db.close();
@@ -49,7 +48,6 @@
 
     // Whenever an IndexedDB is created, the version is set to "", but can be immediately upgraded by calling createDB. 
     function dbVersionUpgrade(evt) {
-
         // If the database was previously loaded, close it. 
         // Closing the database keeps it from becoming blocked for later delete operations.
         if (SdkSample.db) {
@@ -78,7 +76,6 @@
     }
 
     function dbSuccess(evt) {
-
         // Log whether the app tried to create the database when it already existed. 
         if (!newCreate) {
             // Close this additional database request

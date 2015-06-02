@@ -28,11 +28,8 @@ importScripts('/Microsoft.WinJS.4.0/js/WinJS.js');
     };
 
     function onProgress(e) {
-        console.log(e.readyState);
-        switch (e.readyState) {
-            case 2:
-                postMessage("Sending XMLHttpRequest to " + url);
-                break;
-        }
+      if (e.readyState === 2) {
+        postMessage("Sending XMLHttpRequest to " + url);
+      }
     };
 })();

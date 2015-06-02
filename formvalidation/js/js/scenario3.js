@@ -55,7 +55,6 @@
     }
 
     function checkForError(e) {
-
         if (!this.validity.valid) {
             this.previousElementSibling.style.display = "block";
         } else {
