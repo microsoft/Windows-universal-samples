@@ -1,0 +1,65 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AllJoynServerExperiences.Scenario1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AllJoynServerExperiences"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Will create a service that will join the AllJoyn bus and request the name 'org.alljoyn.Bus.Samples.Secure.SecureInterface'.
+                    It will create a single method called 'Cat' that will concatenate two strings together and
+                    return the resulting string to the client.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Button Content="Launch" Command="{Binding LaunchServer}"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Visibility="{Binding ServerOptionsVisibility}">
+                        <TextBlock Text="Key:"/>
+                        <StackPanel Margin="5,0,0,0">
+                            <TextBlock Text="{Binding Path=Key,Mode=OneWay}" IsTextSelectionEnabled="True" TextWrapping="Wrap"/>
+                            <CheckBox Content="Hyphen separated" IsChecked="{Binding Path=HyphenSeparatedIsChecked, Mode=TwoWay}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Visibility="{Binding ServerOptionsVisibility}">
+                        <TextBlock Text="UpperCase:" VerticalAlignment="Center"/>
+                        <ToggleSwitch IsOn="{Binding Path=IsUpperCaseEnabled, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Visibility="{Binding ServerOptionsVisibility}">
+                        <Button Content="Send Signal" Command="{Binding SendSignal}"/>
+                        <TextBox PlaceholderText="Enter Text..." Text="{Binding Path=SignalText, Mode=TwoWay}" Width="150" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user. Use the
+             NotifyUser() method to populate the message. -->
+            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>
