@@ -20,7 +20,7 @@ using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 
-Scenario2_oAuthFacebook::Scenario2_oAuthFacebook()
+Scenario2_oAuthFacebook::Scenario2_oAuthFacebook
 {
     InitializeComponent();
 }

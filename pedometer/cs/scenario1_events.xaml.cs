@@ -60,20 +60,25 @@ namespace PedometerCS
                 try
                 {
                     pedometer = await Pedometer.GetDefaultAsync();
-                    if(pedometer == null)
+                    if (null == pedometer)
                     {
                         rootPage.NotifyUser("No pedometer available", NotifyType.ErrorMessage);
                     }
-                    RegisterButton.Content = "UnRegister ReadingChanged";
-                    RegisterButton.IsEnabled = true;
-                    rootPage.NotifyUser("Registered for step count changes", NotifyType.StatusMessage);
+                    else
+                    {
+                        RegisterButton.Content = "UnRegister ReadingChanged";
+                        RegisterButton.IsEnabled = true;
+                        rootPage.NotifyUser("Registered for step count changes", NotifyType.StatusMessage);
+                        pedometer.ReportInterval = pedometer.MinimumReportInterval;
+                        pedometer.ReadingChanged += Pedometer_ReadingChanged;
+                        registeredForEvents = true;                       
+                    }
                 }
                 catch (System.UnauthorizedAccessException)
                 {
                     rootPage.NotifyUser("Access to the default pedometer is denied", NotifyType.ErrorMessage);
                 }
-                pedometer.ReadingChanged += Pedometer_ReadingChanged;
-                registeredForEvents = true;
+                RegisterButton.IsEnabled = true;
             }
             else
             {
@@ -108,6 +113,7 @@ namespace PedometerCS
                         newCount = reading.CumulativeSteps - unknownStepCount;
                         unknownStepCount = reading.CumulativeSteps;
                         ScenarioOutput_UnknownCount.Text = unknownStepCount.ToString();
+                        ScenarioOutput_UnknownDuration.Text = reading.CumulativeStepsDuration.TotalMilliseconds.ToString();
                         break;
                     case PedometerStepKind.Walking:
                         if (reading.CumulativeSteps < walkingStepCount)
@@ -117,6 +123,7 @@ namespace PedometerCS
                         newCount = reading.CumulativeSteps - walkingStepCount;
                         walkingStepCount = reading.CumulativeSteps;
                         ScenarioOutput_WalkingCount.Text = walkingStepCount.ToString();
+                        ScenarioOutput_WalkingDuration.Text = reading.CumulativeStepsDuration.TotalMilliseconds.ToString();
                         break;
                     case PedometerStepKind.Running:
                         if (reading.CumulativeSteps < runningStepCount)
@@ -126,6 +133,7 @@ namespace PedometerCS
                         newCount = reading.CumulativeSteps - runningStepCount;
                         runningStepCount = reading.CumulativeSteps;
                         ScenarioOutput_RunningCount.Text = runningStepCount.ToString();
+                        ScenarioOutput_RunningDuration.Text = reading.CumulativeStepsDuration.TotalMilliseconds.ToString();
                         break;
                     default:
                         break;

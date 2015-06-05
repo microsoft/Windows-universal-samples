@@ -13,6 +13,12 @@
 }, {
     url: "/html/scenario4_SaveFile.html",
     title: "Save a file"
+}, {
+    url: "/html/scenario5_OpenCachedFile.html",
+    title: "Open a cached file"
+}, {
+    url: "/html/scenario6_SaveCachedFile.html",
+    title: "Update a cached file"
 }];
   WinJS.Namespace.define("SdkSample", {
     sampleTitle: sampleTitle,

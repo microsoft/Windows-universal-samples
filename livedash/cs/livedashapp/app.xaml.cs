@@ -15,8 +15,6 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using LiveDash.Util;
-using Windows.Storage;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=402347&clcid=0x409
 
@@ -35,18 +33,7 @@ namespace SDKTemplate
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-#if DEBUG
-            this.UnhandledException += App_UnhandledException;
-#endif
         }
-
-#if DEBUG
-        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            Logger.Log("Unhandled Exception: " + e.Exception + " Message: " + e.Message);
-        }
-#endif
-
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points

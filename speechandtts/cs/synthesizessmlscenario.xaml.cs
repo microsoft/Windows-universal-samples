@@ -10,6 +10,8 @@
 //*********************************************************
 
 using System;
+using System.Linq;
+using Windows.ApplicationModel.Resources.Core;
 using Windows.Data.Xml.Dom;
 using Windows.Media.SpeechSynthesis;
 using Windows.UI.Xaml;
@@ -21,11 +23,19 @@ namespace SpeechAndTTS
     public sealed partial class SynthesizeSSMLScenario : Page
     {
         private SpeechSynthesizer synthesizer;
+        private ResourceContext speechContext;
+        private ResourceMap speechResourceMap;
 
         public SynthesizeSSMLScenario()
         {
             InitializeComponent();
             synthesizer = new SpeechSynthesizer();
+
+            speechContext = ResourceContext.GetForCurrentView();
+            speechContext.Languages = new string[] { SpeechSynthesizer.DefaultVoice.Language };
+
+            speechResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("LocalizationSpeechResources");
+
             InitializeListboxVoiceChooser();
             UpdateSSMLText();
         }
@@ -46,26 +56,28 @@ namespace SpeechAndTTS
             else
             {
                 string text = textToSynthesize.Text;
-
-                // Change the button label. You could also just disable the button if you don't want any user control.
-                btnSpeak.Content = "Stop";
-
-                try
+                if (!string.IsNullOrEmpty(text))
                 {
-                    // Create a stream from the text. This will be played using a media element.
-                    SpeechSynthesisStream synthesisStream = await synthesizer.SynthesizeSsmlToStreamAsync(text);
+                    // Change the button label. You could also just disable the button if you don't want any user control.
+                    btnSpeak.Content = "Stop";
 
-                    // Set the source and start playing the synthesized audio stream.
-                    media.AutoPlay = true;
-                    media.SetSource(synthesisStream, synthesisStream.ContentType);
-                    media.Play();
-                }
-                catch (Exception)
-                {
-                    // If the SSML stream is not in the correct format, throw an error message to the user.
-                    btnSpeak.Content = "Speak";
-                    var messageDialog = new Windows.UI.Popups.MessageDialog("Unable to synthesize text");
-                    await messageDialog.ShowAsync();
+                    try
+                    {
+                        // Create a stream from the text. This will be played using a media element.
+                        SpeechSynthesisStream synthesisStream = await synthesizer.SynthesizeSsmlToStreamAsync(text);
+
+                        // Set the source and start playing the synthesized audio stream.
+                        media.AutoPlay = true;
+                        media.SetSource(synthesisStream, synthesisStream.ContentType);
+                        media.Play();
+                    }
+                    catch (Exception)
+                    {
+                        // If the SSML stream is not in the correct format, throw an error message to the user.
+                        btnSpeak.Content = "Speak";
+                        var messageDialog = new Windows.UI.Popups.MessageDialog("Unable to synthesize text");
+                        await messageDialog.ShowAsync();
+                    }
                 }
             }
         }
@@ -91,16 +103,16 @@ namespace SpeechAndTTS
         {
             // Get all of the installed voices.
             var voices = SpeechSynthesizer.AllVoices;
-
+            
             // Get the currently selected voice.
             VoiceInformation currentVoice = synthesizer.Voice;
 
-            foreach (VoiceInformation voice in voices)
+            foreach (VoiceInformation voice in voices.OrderBy(p => p.Language))
             {
                 ComboBoxItem item = new ComboBoxItem();
                 item.Name = voice.DisplayName;
                 item.Tag = voice;
-                item.Content = voice.DisplayName;
+                item.Content = voice.DisplayName + " (Language: " + voice.Language + ")";
                 listboxVoiceChooser.Items.Add(item);
 
                 // Check to see if we're looking at the current voice and set it as selected in the listbox.
@@ -122,6 +134,11 @@ namespace SpeechAndTTS
             ComboBoxItem item = (ComboBoxItem)(listboxVoiceChooser.SelectedItem);
             VoiceInformation voice = (VoiceInformation)(item.Tag);
             synthesizer.Voice = voice;
+
+            // update UI text to be an appropriate default translation.
+            speechContext.Languages = new string[] { voice.Language };
+            textToSynthesize.Text = speechResourceMap.GetValue("SynthesizeSSMLDefaultText", speechContext).ValueAsString;
+            
             UpdateSSMLText();
         }
 

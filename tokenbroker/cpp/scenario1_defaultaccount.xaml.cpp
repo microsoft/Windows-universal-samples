@@ -128,8 +128,8 @@ void SDKTemplate::Scenario1_DefaultAccount::GetDefaultProvidersAndAccounts()
     });
 }
 
-// Create a new WebAccountManager WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
-// that request asynchronously to WebAccountManager's RequestTokenAsync API.
+// Create a new TokenBroker WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
+// that request asynchronously to TokenBroker's RequestTokenAsync API.
 //
 // We've gotten the default provider which will
 // 
@@ -162,15 +162,15 @@ void SDKTemplate::Scenario1_DefaultAccount::AuthenticateWithRequestToken(WebAcco
     });
 }
 
-// Create a new WebAccountManager WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
-// that request and the account to get the token for asynchronously to WebAccountManager's GetTokenSilentlyAsync API
+// Create a new TokenBroker WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
+// that request and the account to get the token for asynchronously to TokenBroker's GetTokenSilentlyAsync API
 //
-// WebAccountManager's GetTokenSilentlyAsync will then try :
+// TokenBroker's GetTokenSilentlyAsync will then try :
 //        (1): Check it's local cache to see if it has a valid token
 //        (2): Try to silently request a new token from the MSA service
 //        (3): Return a status of UserInteractionRequired if we need the user credentials
 //
-// Because of WebAccountManager's ability to cache tokens, you should only need to call WebAccountManager when making token
+// Because of TokenBroker's ability to cache tokens, you should only need to call TokenBroker when making token
 // based requests and not require the ability to store a cached token within your app.
 void SDKTemplate::Scenario1_DefaultAccount::AuthenticateWithRequestTokenSilent(WebAccountProvider^ provider, String^ scope, String^ clientID, WebAccount^ account)
 {
@@ -249,7 +249,7 @@ void SDKTemplate::Scenario1_DefaultAccount::SaveAccount(WebAccount^ account)
 	listview_SignedInAccounts->Items->Append(account->Id);
 }
 
-// Signs out the account using the SignOutAsync WebAccountManager API
+// Signs out the account using the SignOutAsync Token Broker API
 // and removes our saved AccountId as it won't be valid when SignOutAsync finishes.
 void SDKTemplate::Scenario1_DefaultAccount::LogoffAndRemoveAccount()
 {

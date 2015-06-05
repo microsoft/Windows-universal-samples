@@ -35,6 +35,10 @@
 
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Language: " Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cbLanguageSelection" SelectionChanged="cbLanguageSelection_SelectionChanged" Margin="10" Width="200"/>
+                    </StackPanel>
                     <Button x:Name="btnContinuousRecognize" Click="ContinuousRecognize_Click" IsEnabled="False" Margin="0,10,0,0">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="Microphone"/>
@@ -48,7 +52,7 @@
                                  Fill="Black" Canvas.Top="20" Canvas.Left="20"/>
                     </Canvas>
                     <TextBlock Name="resultTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"
-                               Text="Tap the microphone and speak to choose colors for the circle, background, and border. Try saying 'blue background, red border, green circle'."/>
+                               Text=""/>
                 </StackPanel>
             </ScrollViewer>
 

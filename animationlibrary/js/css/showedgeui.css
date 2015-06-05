@@ -7,7 +7,7 @@
     height: 70px;
     color: white;
     background-color: #323232;
-    visibility: hidden;
+    opacity: 0;
     z-index: 1;
 }
 
@@ -15,6 +15,7 @@
 {
     position: absolute;
     top: 40%;
-    text-align: right;
+    left: 50%;
+    text-align: center;
     color: white !important;
 }

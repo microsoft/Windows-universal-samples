@@ -36,7 +36,7 @@ namespace StreamSocketListenerServer
             SendButton.IsEnabled = false;
         }
 
-        private async void OnConnected(
+        private void OnConnected(
            StreamSocketListener sender,
            StreamSocketListenerConnectionReceivedEventArgs args)
         {
@@ -46,12 +46,8 @@ namespace StreamSocketListenerServer
                 connectedSocket = null;
             }
             connectedSocket = args.Socket;
-            await SendMessageTextBox.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-            {
-                rootPage.NotifyUser("Client has connected, go ahead and send a message...", NotifyType.StatusMessage);
-                SendMessageTextBox.IsEnabled = true;
-                SendButton.IsEnabled = true;
-            });
+            SendMessageTextBox.IsEnabled = true;
+            SendButton.IsEnabled = true;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -69,7 +65,6 @@ namespace StreamSocketListenerServer
             {
                 DataWriter writer = new DataWriter(connectedSocket.OutputStream);
                 writer.WriteBytes(Encoding.UTF8.GetBytes(SendMessageTextBox.Text));
-                SendMessageTextBox.Text = "";
                 await writer.StoreAsync();
                 writer.DetachStream();
                 writer.Dispose();

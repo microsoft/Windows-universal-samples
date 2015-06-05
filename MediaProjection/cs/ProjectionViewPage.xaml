@@ -1,0 +1,30 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="MediaProjection.ProjectionViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MediaProjection"
+    xmlns:common="using:SDKTemplate.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" >
+            <Button FontFamily="Segoe UI Symbol" Click="SwapViews_Click">&#xe13c;</Button>
+            <Button Margin="10,0,0,0" FontFamily="Segoe UI Symbol" Click="StopProjecting_Click">&#xe2b3;</Button>
+        </StackPanel>
+        <MediaElement x:Name="MediaPlayer" Source="http://amssamples.streaming.mediaservices.windows.net/49b57c87-f5f3-48b3-ba22-c55cfdffa9cb/Sintel.ism/manifest(format=m3u8-aapl)" Grid.Row="1" Stretch="Fill"/>
+    </Grid>
+</Page>

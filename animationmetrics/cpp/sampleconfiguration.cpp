@@ -8,5 +8,5 @@ using namespace SDKTemplate;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
-    { "Retrieving Animation Metrics", "SDKTemplate.Scenario1_Metrics" },
+    { "Retrieving Animation Metrics", "AnimationMetrics.Scenario1_Metrics" },
 };

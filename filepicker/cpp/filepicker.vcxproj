@@ -2,7 +2,7 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{f710b9fd-4e6b-42d7-a99a-6d48888d48b0}</ProjectGuid>
-    <RootNamespace>SDKTemplate</RootNamespace>
+    <RootNamespace>FilePicker</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
@@ -91,6 +91,8 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
@@ -148,6 +150,12 @@
     <ClInclude Include="Scenario4_SaveFile.xaml.h">
       <DependentUpon>Scenario4_SaveFile.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario5_OpenCachedFile.xaml.h">
+      <DependentUpon>Scenario5_OpenCachedFile.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario6_SaveCachedFile.xaml.h">
+      <DependentUpon>Scenario6_SaveCachedFile.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -160,6 +168,8 @@
     <Page Include="Scenario2_MultiFile.xaml" />
     <Page Include="Scenario3_SingleFolder.xaml" />
     <Page Include="Scenario4_SaveFile.xaml" />
+    <Page Include="Scenario5_OpenCachedFile.xaml" />
+    <Page Include="Scenario6_SaveCachedFile.xaml" />
     <Page Include="Styles\Styles.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +204,12 @@
     </ClCompile>
     <ClCompile Include="Scenario4_SaveFile.xaml.cpp">
       <DependentUpon>Scenario4_SaveFile.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario5_OpenCachedFile.xaml.cpp">
+      <DependentUpon>Scenario5_OpenCachedFile.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario6_SaveCachedFile.xaml.cpp">
+      <DependentUpon>Scenario6_SaveCachedFile.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

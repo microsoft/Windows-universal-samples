@@ -16,6 +16,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using SDKTemplate;
+using System.Collections.ObjectModel;
 
 namespace WiFiScan
 {
@@ -23,7 +24,12 @@ namespace WiFiScan
     {
         private WiFiAdapter firstAdapter;
 
-        private MainPage rootPage;
+        MainPage rootPage;
+        public ObservableCollection<WiFiNetworkDisplay> ResultCollection
+        {
+            get;
+            private set;
+        }
 
         public Scenario3_RegisterForUpdates()
         {
@@ -32,6 +38,7 @@ namespace WiFiScan
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            ResultCollection = new ObservableCollection<WiFiNetworkDisplay>();
             rootPage = MainPage.Current;
 
             // RequestAccessAsync must have been called at least once by the app before using the API
@@ -40,10 +47,12 @@ namespace WiFiScan
             var access = await WiFiAdapter.RequestAccessAsync();
             if (access != WiFiAccessStatus.Allowed)
             {
-                ScenarioOutput.Text = "Access denied";
+                rootPage.NotifyUser("Access denied", NotifyType.ErrorMessage);
             }
             else
             {
+                DataContext = this;
+
                 var result = await Windows.Devices.Enumeration.DeviceInformation.FindAllAsync(WiFiAdapter.GetDeviceSelector());
                 if (result.Count >= 1)
                 {
@@ -52,31 +61,29 @@ namespace WiFiScan
                 }
                 else
                 {
-                    ScenarioOutput.Text = "No WiFi Adapters detected on this machine";
+                    rootPage.NotifyUser("No WiFi Adapters detected on this machine", NotifyType.ErrorMessage);
                 }
             }
         }
 
         private void FirstAdapter_AvailableNetworksChanged(WiFiAdapter sender, object args)
         {
-            DisplayNetworkReport(firstAdapter.NetworkReport);
+            DisplayNetworkReport(sender.NetworkReport, sender);
         }
 
-        private void DisplayNetworkReport(WiFiNetworkReport report)
+        private async void DisplayNetworkReport(WiFiNetworkReport report, WiFiAdapter adapter)
         {
-            var message = string.Format("Network Report Timestamp: {0}", report.Timestamp);
-            foreach (var network in report.AvailableNetworks)
+            await rootPage.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                message += string.Format("\nNetworkName: {0}, BSSID: {1}, RSSI: {2}dBm, Channel Frequency: {3}kHz",
-                    network.Ssid, network.Bssid, network.NetworkRssiInDecibelMilliwatts, network.ChannelCenterFrequencyInKilohertz);
-            }
+                rootPage.NotifyUser(string.Format("Network Report Timestamp: {0}", report.Timestamp), NotifyType.StatusMessage);
 
-            // there is no guarantee of what thread the AvailableNetworksChanged callback is run on
-            rootPage.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                () =>
+                ResultCollection.Clear();
+
+                foreach (var network in report.AvailableNetworks)
                 {
-                    ScenarioOutput.Text = message;
-                });
+                    ResultCollection.Add(new WiFiNetworkDisplay(network, adapter));
+                }
+            });
         }
 
         private void Button_Click_Register(object sender, RoutedEventArgs e)

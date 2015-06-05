@@ -24,9 +24,10 @@ Scenario1_Conversion::Scenario1_Conversion() : rootPage(MainPage::Current)
 
 /// <summary>
 /// This is the click handler for the 'Create Generator' button.
-/// When this button is activated, the text suggestion generator will try
-/// to resolve the language tag provided by the user, and create a 
-/// Conversion Generator.
+/// When this button is activated, this method will create a text conversion
+/// generator with the language tag provided by the user. The generator will 
+/// try to resolve the language tag and check if the language is supported
+/// and installed.
 /// </summary>
 /// <param name="sender">The object that raised the event.</param>
 /// <param name="e">Event data that describes the click action on the button.</param>
@@ -50,6 +51,7 @@ void Scenario1_Conversion::CreateGeneratorButton_Click(Platform::Object^ sender,
     }
     else if (generator->ResolvedLanguage == "und")
     {
+        if (generatorOperationArea != nullptr)
         {
             generatorOperationArea->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
         }
@@ -80,7 +82,7 @@ void Scenario1_Conversion::CreateGeneratorButton_Click(Platform::Object^ sender,
 }
 
 /// <summary>
-/// Selecting the API interface to use.
+/// Selecting the generator method to use.
 /// User can either specify the max candidate number to get, or use the default value.
 /// </summary>
 /// <param name="sender">The object that raised the event.</param>
@@ -106,8 +108,8 @@ void Scenario1_Conversion::Methods_SelectionChanged(Platform::Object^ sender, Se
 
 /// <summary>
 /// This is the click handler for the 'Execute' button.
-/// When this button is activated, the Text Suggestion API will get
-/// the conversion result for given input string and language tag, then 
+/// When this button is activated, the text conversion generator will get
+/// the conversion candidates for given input string and language tag, then 
 /// print them in result column.
 /// Using 'concurrency::create_task' to create an asynchronous task and
 /// handle the result when it completes.
@@ -137,20 +139,9 @@ void Scenario1_Conversion::Execute_Click(Platform::Object^ sender, RoutedEventAr
             if (maxCandidateCount > 0)
             {
                 // Call the API with max candidate number we expect, and list the result when there are any candidates.
-                concurrency::create_task(generator->GetCandidatesAsync(input, static_cast<UINT>(maxCandidateCount))).then([this](IVectorView<Platform::String^>^ result)
+                concurrency::create_task(generator->GetCandidatesAsync(input, static_cast<UINT>(maxCandidateCount))).then([this](IVectorView<String^>^ candidates)
                 {
-                    itemsSource = ref new Vector<Platform::String^>();
-                    for (unsigned int i = 0; i < result->Size; i++)
-                    {
-                        itemsSource->Append(result->GetAt(i));
-                    }
-
-                    resultView->ItemsSource = itemsSource;
-
-                    if (resultView->Items->Size == 0)
-                    {
-                        MainPage::Current->NotifyUser("No candidates.", NotifyType::StatusMessage);
-                    }
+                    displayMultipleCandidates(candidates);
                 });
             }
             else
@@ -161,21 +152,31 @@ void Scenario1_Conversion::Execute_Click(Platform::Object^ sender, RoutedEventAr
         else
         {
             // Call the API with default candidate number, and list the result when there are any candidates. 
-            concurrency::create_task(generator->GetCandidatesAsync(input)).then([this](IVectorView<Platform::String^>^ result)
+            concurrency::create_task(generator->GetCandidatesAsync(input)).then([this](IVectorView<String^>^ candidates)
             {
-                itemsSource = ref new Vector<Platform::String^>();
-                for (unsigned int i = 0; i < result->Size; i++)
-                {
-                    itemsSource->Append(result->GetAt(i));
-                }
-
-                resultView->ItemsSource = itemsSource;
-
-                if (resultView->Items->Size == 0)
-                {
-                    MainPage::Current->NotifyUser("No candidates.", NotifyType::StatusMessage);
-                }
+                displayMultipleCandidates(candidates);
             });
         }
     }
 }
+
+/// <summary>
+/// Helper method for displaying conversion candidates.
+/// </summary>
+/// <param name="result">The converison candidates we got from text conversion generator.</param>
+void Scenario1_Conversion::displayMultipleCandidates(IVectorView<String^>^ candidates)
+{
+    Vector<String^>^ itemsSource = ref new Vector<String^>();
+    for (unsigned int i = 0; i < candidates->Size; i++)
+    {
+        itemsSource->Append(candidates->GetAt(i));
+    }
+
+    resultView->ItemsSource = itemsSource;
+
+    if (resultView->Items->Size == 0)
+    {
+        MainPage::Current->NotifyUser("No candidates.", NotifyType::StatusMessage);
+    }
+}
+

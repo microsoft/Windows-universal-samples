@@ -1,0 +1,38 @@
+﻿<!--
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario6_SaveCachedFile.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            Demonstrates how you can notify an app that integrates with the Cached File Updater
+            contract that you have changed a file. This scenario requires that you have the
+            File Picker Contracts Sample app.
+            <br />
+            <br />
+            Steps:<br />
+            1) Launch the file save picker with the "Get save file" button<br />
+            2) Select "File picker contracts sample" app from the list of locations<br />
+            3) Select scenario "3) Save to a cached file"<br />
+            4) Click Save button in the picker<br />
+            5) Select "Write to file" button<br />
+        </p>
+        <button class="saveFileButton">Get save file</button>
+        <button class="writeFileButton" disabled>Write to file</button>
+        <br /><br />
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+    </div>
+</body>
+</html>

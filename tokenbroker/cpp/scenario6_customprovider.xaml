@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario illustrates the use of a custom provider with WebAccountManager APIs." />
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario illustrates the use of a custom provider with Token Broker APIs." />
             </StackPanel>
             <Grid Grid.Row="1">
                 <StackPanel Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top">

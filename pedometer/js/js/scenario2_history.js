@@ -1,13 +1,4 @@
-﻿//*********************************************************
-//
-// Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the MIT License (MIT).
-// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
-// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
-// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
-//
-//*********************************************************
+﻿//// Copyright (c) Microsoft Corporation. All rights reserved
 
 (function () {
     "use strict";
@@ -23,7 +14,6 @@
             fromTime = document.getElementById("fromTime").winControl;
             toDate = document.getElementById("toDate").winControl;
             toTime = document.getElementById("toTime").winControl;
-
         }
     });
 
@@ -107,6 +97,9 @@
             Windows.Devices.Sensors.Pedometer.getSystemHistoryAsync(allHistory).then(function (records) {
                 WinJS.log && WinJS.log("History retrieval completed", "sample", "status");
                 displayRecords(records);
+            },
+            function error(e) {
+                WinJS.log && WinJS.log("Error when opening default pedometer. " + e.message, "sample", "error");
             });
         }
         else {
@@ -114,7 +107,7 @@
             var endTime = new Date(toDate.current.getFullYear(), toDate.current.getMonth(), toDate.current.getDate(), toTime.current.getHours(), toTime.current.getMinutes(), toTime.current.getSeconds(), toTime.current.getMilliseconds());
 
             var spanMs = endTime.getTime() - startTime.getTime();
-            if(spanMs < 0) {
+            if (spanMs < 0) {
                 WinJS.log && WinJS.log("Invalid history span. 'To' time should be greater than 'From' time", "sample", "status");
             }
             else {
@@ -122,20 +115,23 @@
                 Windows.Devices.Sensors.Pedometer.getSystemHistoryAsync(startTime, spanMs).then(function (records) {
                     WinJS.log && WinJS.log("History retrieval completed", "sample", "status");
                     displayRecords(records);
+                },
+                function error(e) {
+                    WinJS.log && WinJS.log("Error when opening default pedometer. " + e.message, "sample", "error");
                 });
             }
         }
+
         // enable the button for subsequent retrievals
         document.getElementById("getHistoryButton").disabled = false;
     }
-
 
 
     /// <summary>
     /// Helper function that bidns the retrieved history records to the List.
     /// </summary>
     function displayRecords(records) {
-        for (var index = 0; index < records.length; index++) {
+        for(var index = 0; index < records.length; index++) {
             WinJS.log && WinJS.log(records.length.toString() + " index = " + index.toString(), "sample", "status");
             var reading = records[index];
             var singleRecord = new HistoryRecord(reading.timestamp, reading.stepKind, reading.cumulativeSteps, 0);

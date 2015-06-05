@@ -1,0 +1,50 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario3.css" />
+    <script src="/js/scenario6_customfilteraddedprops.js"></script>
+    <script src="/js/displayhelpers.js"></script>
+</head>
+<body>
+    <div id="resultsViewTemplate" data-win-control="WinJS.Binding.Template">
+        <div style="padding:2px; border:1px solid gray; white-space:nowrap">
+            <div>Name: <span data-win-bind="innerText: name" style="font-weight:bold"></span></div>
+            <div>Id: <span data-win-bind="innerText: id"></span></div>
+            <div>System.Devices.InterfaceClassGuid: <span data-win-bind="innerText: interfaceClass"></span></div>
+            <div>System.ItemNameDisplay: <span data-win-bind="innerText: itemNameDisplay"></span></div>
+        </div>
+    </div>
+
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                This scenario demonstrates using custom filters and/or requesting additional properties with the DeviceWatcher. A custom filter and/or requested additional properties can also be done with the DevicePicker, FindAllAsync, and DeviceWatcherTrigger.
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                Enter an Advanced Query Syntax (AQS) filter:<br />
+                <input type="text" 
+                       id="aqsFilterTextBox" 
+                       style="width:100%"
+                       value="System.Devices.InterfaceClassGuid:=&quot;{e6327cad-dcec-4949-ae8a-991e976a79d2}&quot; AND System.Devices.InterfaceEnabled:=System.StructuredQueryType.Boolean#True" />
+            </p>
+            <button id="startWatcherButton">Start Watcher</button>
+            <button id="stopWatcherButton" disabled="true">Stop Watcher</button>
+        </div>
+        <div id="resultsListView"
+             style="border:2px solid white;"
+             data-win-control="WinJS.UI.ListView"
+             data-win-options="{
+                itemTemplate: select('#resultsViewTemplate'),
+                layout: {type: WinJS.UI.ListLayout}}">
+        </div>
+    </div>
+</body>
+</html>

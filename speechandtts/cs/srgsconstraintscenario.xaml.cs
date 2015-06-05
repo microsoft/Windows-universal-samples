@@ -14,6 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
+using Windows.ApplicationModel.Resources.Core;
+using Windows.Globalization;
 using Windows.Media.SpeechRecognition;
 using Windows.Storage;
 using Windows.UI;
@@ -22,6 +24,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Foundation;
 
 namespace SpeechAndTTS
 {
@@ -35,15 +38,19 @@ namespace SpeechAndTTS
         private static uint HResultPrivacyStatementDeclined = 0x80045509;
 
         private SpeechRecognizer speechRecognizer;
+        private IAsyncOperation<SpeechRecognitionResult> recognitionOperation;
         private CoreDispatcher dispatcher;
+        private ResourceContext speechContext;
+        private ResourceMap speechResourceMap;
 
         private Dictionary<string, Color> colorLookup = new Dictionary<string, Color>
         {
-            { "red", Colors.Red }, {"blue", Colors.Blue }, {"black",Colors.Black},
-            { "brown",Colors.Brown}, {"purple",Colors.Purple}, {"green",Colors.Green},
-            { "yellow",Colors.Yellow}, {"cyan",Colors.Cyan}, {"magenta",Colors.Magenta},
-            { "orange",Colors.Orange}, {"gray",Colors.Gray}, {"white",Colors.White}
+            { "red",   Colors.Red },   {"blue",  Colors.Blue },  {"black",  Colors.Black},
+            { "brown", Colors.Brown},  {"purple",Colors.Purple}, {"green",  Colors.Green},
+            { "yellow",Colors.Yellow}, {"cyan",  Colors.Cyan},   {"magenta",Colors.Magenta},
+            { "orange",Colors.Orange}, {"gray",  Colors.Gray},   {"white",  Colors.White}
         };
+        
 
         public SRGSConstraintScenario()
         {
@@ -74,9 +81,69 @@ namespace SpeechAndTTS
                 resultTextBlock.Text = "Permission to access capture resources was not given by the user; please set the application setting in Settings->Privacy->Microphone.";
             }
 
-            await InitializeRecognizer();
+            Language speechLanguage = SpeechRecognizer.SystemSpeechLanguage;
+            string langTag = speechLanguage.LanguageTag;
+            speechContext = ResourceContext.GetForCurrentView();
+            speechContext.Languages = new string[] { langTag };
+
+            speechResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("LocalizationSpeechResources");
+
+            PopulateLanguageDropdown();
+            await InitializeRecognizer(SpeechRecognizer.SystemSpeechLanguage);
         }
 
+        /// <summary>
+        /// Look up the supported languages for this speech recognition scenario, 
+        /// that are installed on this machine, and populate a dropdown with a list.
+        /// </summary>
+        private void PopulateLanguageDropdown()
+        {
+            Language defaultLanguage = SpeechRecognizer.SystemSpeechLanguage;
+            IEnumerable<Language> supportedLanguages = SpeechRecognizer.SupportedGrammarLanguages;
+            foreach (Language lang in supportedLanguages)
+            {
+                ComboBoxItem item = new ComboBoxItem();
+                item.Tag = lang;
+                item.Content = lang.DisplayName;
+
+                cbLanguageSelection.Items.Add(item);
+                if (lang.LanguageTag == defaultLanguage.LanguageTag)
+                {
+                    item.IsSelected = true;
+                    cbLanguageSelection.SelectedItem = item;
+                }
+            }
+        }
+
+        /// <summary>
+        /// When a user changes the speech recognition language, trigger re-initialization of the 
+        /// speech engine with that language, and change any speech-specific UI assets.
+        /// </summary>
+        /// <param name="sender">Ignored</param>
+        /// <param name="e">Ignored</param>
+        private async void cbLanguageSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (speechRecognizer != null)
+            {
+                ComboBoxItem item = (ComboBoxItem)(cbLanguageSelection.SelectedItem);
+                Language newLanguage = (Language)item.Tag;
+                if (speechRecognizer.CurrentLanguage != newLanguage)
+                {
+                    // trigger cleanup and re-initialization of speech.
+                    try
+                    {
+                        speechContext.Languages = new string[] { newLanguage.LanguageTag };
+
+                        await InitializeRecognizer(newLanguage);
+                    }
+                    catch (Exception exception)
+                    {
+                        var messageDialog = new Windows.UI.Popups.MessageDialog(exception.Message, "Exception");
+                        await messageDialog.ShowAsync();
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// Ensure that we clean up any state tracking event handlers created in OnNavigatedTo to prevent leaks.
@@ -87,6 +154,15 @@ namespace SpeechAndTTS
             base.OnNavigatedFrom(e);
             if (speechRecognizer != null)
             {
+                if (speechRecognizer.State != SpeechRecognizerState.Idle)
+                {
+                    if (recognitionOperation != null)
+                    {
+                        recognitionOperation.Cancel();
+                        recognitionOperation = null;
+                    }
+                }
+
                 speechRecognizer.StateChanged -= SpeechRecognizer_StateChanged;
 
                 this.speechRecognizer.Dispose();
@@ -95,25 +171,40 @@ namespace SpeechAndTTS
         }
 
         /// <summary>
-        /// Creates a SpeechRecognizer instance and initializes the grammar.
+        /// Initialize Speech Recognizer and compile constraints.
         /// </summary>
-        private async Task InitializeRecognizer()
+        /// <param name="recognizerLanguage">Language to use for the speech recognizer</param>
+        /// <returns>Awaitable task.</returns>
+        private async Task InitializeRecognizer(Language recognizerLanguage)
         {
+            if (speechRecognizer != null)
+            {
+                // cleanup prior to re-initializing this scenario.
+                speechRecognizer.StateChanged -= SpeechRecognizer_StateChanged;
+
+                this.speechRecognizer.Dispose();
+                this.speechRecognizer = null;
+            }
+
+
             // Initialize the SRGS-compliant XML file.
             // For more information about grammars for Windows apps and how to
             // define and use SRGS-compliant grammars in your app, see
             // https://msdn.microsoft.com/en-us/library/dn596121.aspx
 
-            StorageFile grammarContentFile = await Package.Current.InstalledLocation.GetFileAsync(@"SRGSColors.xml");
+            // determine the language code being used.
+            string languageTag = recognizerLanguage.LanguageTag;
+            string fileName = String.Format("SRGS\\{0}\\SRGSColors.xml", languageTag);
+            StorageFile grammarContentFile = await Package.Current.InstalledLocation.GetFileAsync(fileName);
 
             // Initialize the SpeechRecognizer and add the grammar.
-            speechRecognizer = new SpeechRecognizer();
+            speechRecognizer = new SpeechRecognizer(recognizerLanguage);
 
             // Provide feedback to the user about the state of the recognizer.
             speechRecognizer.StateChanged += SpeechRecognizer_StateChanged;
 
             // RecognizeWithUIAsync allows developers to customize the prompts.
-            speechRecognizer.UIOptions.ExampleText = @"Try ""blue background, red border, green circle"".";
+            speechRecognizer.UIOptions.ExampleText = speechResourceMap.GetValue("SRGSUIOptionsExampleText", speechContext).ValueAsString;
 
             SpeechRecognitionGrammarFileConstraint grammarConstraint = new SpeechRecognitionGrammarFileConstraint(grammarContentFile);
             speechRecognizer.Constraints.Add(grammarConstraint);
@@ -157,20 +248,21 @@ namespace SpeechAndTTS
         private async void RecognizeWithUI_Click(object sender, RoutedEventArgs e)
         {
             // Reset the text to prompt the user.
-            resultTextBlock.Text = "Speak to choose colors for the circle, background, and border. Try saying 'blue background, red border, green circle'.";
+            resultTextBlock.Text = speechResourceMap.GetValue("SRGSListeningPromptText", speechContext).ValueAsString;
 
             // Start recognition.
             try
             {
-                SpeechRecognitionResult speechRecognitionResult = await speechRecognizer.RecognizeWithUIAsync();
+                recognitionOperation = speechRecognizer.RecognizeWithUIAsync();
+                SpeechRecognitionResult speechRecognitionResult = await recognitionOperation;
                 HandleRecognitionResult(speechRecognitionResult);
             }
-            catch (ObjectDisposedException exception)
+            catch (TaskCanceledException exception)
             {
-                // ObjectDisposedException will be thrown if you exit the scenario while the recogizer is actively
+                // TaskCanceledException will be thrown if you exit the scenario while the recognizer is actively
                 // processing speech. Since this happens here when we navigate out of the scenario, don't try to 
                 // show a message dialog for this exception.
-                System.Diagnostics.Debug.WriteLine("ObjectDisposedException caught while recognition in progress (can be ignored):");
+                System.Diagnostics.Debug.WriteLine("TaskCanceledException caught while recognition in progress (can be ignored):");
                 System.Diagnostics.Debug.WriteLine(exception.ToString());
             }
             catch (Exception exception)
@@ -198,25 +290,28 @@ namespace SpeechAndTTS
         private async void RecognizeWithoutUI_Click(object sender, RoutedEventArgs e)
         {
             // Reset the text to prompt the user.
-            resultTextBlock.Text = "Speak to choose colors for the circle, background, and border. Try saying 'blue background, red border, green circle'.";
+            resultTextBlock.Text = speechResourceMap.GetValue("SRGSListeningPromptText", speechContext).ValueAsString;
 
             // Disable the UI while recognition is occurring, and provide feedback to the user about current state.
             btnRecognizeWithUI.IsEnabled = false;
             btnRecognizeWithoutUI.IsEnabled = false;
+            cbLanguageSelection.IsEnabled = false;
             listenWithoutUIButtonText.Text = " listening for speech...";
 
             // Start recognition.
             try
             {
-                SpeechRecognitionResult speechRecognitionResult = await speechRecognizer.RecognizeAsync();
+                recognitionOperation = speechRecognizer.RecognizeAsync();
+                SpeechRecognitionResult speechRecognitionResult = await recognitionOperation;
+
                 HandleRecognitionResult(speechRecognitionResult);
             }
-            catch (ObjectDisposedException exception)
+            catch (TaskCanceledException exception)
             {
-                // ObjectDisposedException will be thrown if you exit the scenario while the recogizer is actively
+                // TaskCanceledException will be thrown if you exit the scenario while the recognizer is actively
                 // processing speech. Since this happens here when we navigate out of the scenario, don't try to 
                 // show a message dialog for this exception.
-                System.Diagnostics.Debug.WriteLine("ObjectDisposedException caught while recognition in progress (can be ignored):");
+                System.Diagnostics.Debug.WriteLine("TaskCanceledException caught while recognition in progress (can be ignored):");
                 System.Diagnostics.Debug.WriteLine(exception.ToString());
             }
             catch (Exception exception)
@@ -236,6 +331,7 @@ namespace SpeechAndTTS
 
             // Reset UI state.
             listenWithoutUIButtonText.Text = " without UI";
+            cbLanguageSelection.IsEnabled = true;
             btnRecognizeWithUI.IsEnabled = true;
             btnRecognizeWithoutUI.IsEnabled = true;
         }
@@ -250,7 +346,6 @@ namespace SpeechAndTTS
             if (recoResult.Confidence == SpeechRecognitionConfidence.High ||
             recoResult.Confidence == SpeechRecognitionConfidence.Medium)
             {
-
                 // Declare a string that will contain messages when the color rule matches GARBAGE.
                 string garbagePrompt = "";
 
@@ -265,7 +360,8 @@ namespace SpeechAndTTS
                 // If "background" was matched, but the color rule matched GARBAGE, prompt the user.
                 else if (recoResult.SemanticInterpretation.Properties.ContainsKey("background") && recoResult.SemanticInterpretation.Properties["background"][0].ToString() == "...")
                 {
-                    garbagePrompt += "Didn't get the background color \n\nTry saying blue background\n";
+                    
+                    garbagePrompt += speechResourceMap.GetValue("SRGSBackgroundGarbagePromptText", speechContext).ValueAsString;
                     resultTextBlock.Text = garbagePrompt;
                 }
 
@@ -280,7 +376,7 @@ namespace SpeechAndTTS
                 // If "border" was matched, but the color rule matched GARBAGE, prompt the user.
                 else if (recoResult.SemanticInterpretation.Properties.ContainsKey("border") && recoResult.SemanticInterpretation.Properties["border"][0].ToString() == "...")
                 {
-                    garbagePrompt += "Didn't get the border color\n\n Try saying red border\n";
+                    garbagePrompt += speechResourceMap.GetValue("SRGSBorderGarbagePromptText", speechContext).ValueAsString;
                     resultTextBlock.Text = garbagePrompt;
                 }
 
@@ -295,12 +391,12 @@ namespace SpeechAndTTS
                 // If "circle" was matched, but the color rule matched GARBAGE, prompt the user.
                 else if (recoResult.SemanticInterpretation.Properties.ContainsKey("circle") && recoResult.SemanticInterpretation.Properties["circle"][0].ToString() == "...")
                 {
-                    garbagePrompt += "Didn't get the circle color\n\n Try saying green circle\n";
+                    garbagePrompt += speechResourceMap.GetValue("SRGSCircleGarbagePromptText", speechContext).ValueAsString;
                     resultTextBlock.Text = garbagePrompt;
                 }
 
                 // Initialize a string that will describe the user's color choices.
-                string textBoxColors = "You selected -> \n";
+                string textBoxColors = "You selected (Semantic Interpretation)-> \n";
 
                 // Write the color choices contained in the semantics of the recognition result to the text box.
                 foreach (KeyValuePair<String, IReadOnlyList<string>> child in recoResult.SemanticInterpretation.Properties)
@@ -329,7 +425,7 @@ namespace SpeechAndTTS
             else if (recoResult.Confidence == SpeechRecognitionConfidence.Rejected ||
             recoResult.Confidence == SpeechRecognitionConfidence.Low)
             {
-                resultTextBlock.Text = "Sorry, didn't get that \n\nTry saying ->\nblue background\nred border\ngreen circle";
+                resultTextBlock.Text = speechResourceMap.GetValue("SRGSGarbagePromptText", speechContext).ValueAsString;
             }
         }
 

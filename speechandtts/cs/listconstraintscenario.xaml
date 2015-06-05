@@ -35,19 +35,25 @@
 
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel>
-                    <Button x:Name="btnRecognizeWithUI" Click="RecognizeWithUIListConstraint_Click" IsEnabled="False">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="Microphone"/>
-                            <TextBlock Text=" with UI"/>
-                        </StackPanel>
-                    </Button>
-                    <Button x:Name="btnRecognizeWithoutUI" Click="RecognizeWithoutUIListConstraint_Click" IsEnabled="False" Margin="0,10,0,0">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="Microphone"/>
-                            <TextBlock x:Name="listenWithoutUIButtonText" Text=" without UI"/>
-                        </StackPanel>
-                    </Button>
-                    <TextBlock Margin="0,14.5,0,0" Text="Tap the microphone and speak. This example uses a list constraint, and the list of strings to listen for contains &quot;Yes&quot; and &quot;No&quot;. A privacy statement prompt may be shown." TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Language: " Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cbLanguageSelection" SelectionChanged="cbLanguageSelection_SelectionChanged" Margin="10" Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" >
+                        <Button x:Name="btnRecognizeWithUI" Click="RecognizeWithUIListConstraint_Click" IsEnabled="False" Margin="10">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Microphone"/>
+                                <TextBlock Text=" with UI"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="btnRecognizeWithoutUI" Click="RecognizeWithoutUIListConstraint_Click" IsEnabled="False" Margin="10">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Microphone"/>
+                                <TextBlock x:Name="listenWithoutUIButtonText" Text=" without UI"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <TextBlock x:Name="helpTextBlock" Margin="0,14.5,0,0" Text="Tap the microphone, and speak. This scenario uses continuous recognition to provide a global-command type scenario. Try saying 'Go Home', 'Call Nita', 'Go to Contoso Studio', 'Send Email'." TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"/>
                     <TextBlock x:Name="heardYouSayTextBlock" Margin="0,14.5,0,0" Text="Heard you say" Visibility="Collapsed" TextWrapping="Wrap" Style="{StaticResource SubheaderTextBlockStyle}"/>
                     <TextBlock x:Name="resultTextBlock" Margin="0,14.5,0,0" Visibility="Collapsed" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"/>
                 </StackPanel>

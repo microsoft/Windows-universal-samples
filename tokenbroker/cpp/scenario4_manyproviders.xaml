@@ -18,7 +18,7 @@
             </Grid.RowDefinitions>
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario illustrates the use of WebAccountManager APIs to manage a single active ID while supporting MSA, AAD, and Custom types of accounts." />
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario illustrates the use of Token Broker APIs to manage a single active ID while supporting MSA, AAD, and Custom types of accounts." />
             </StackPanel>
             <Grid Grid.Row="1">
                 <StackPanel Grid.Column="0" VerticalAlignment="Top">

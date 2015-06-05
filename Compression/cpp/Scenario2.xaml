@@ -1,0 +1,82 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<Page
+  x:Class="SDKTemplate.Compression.Scenario2"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="using:SDKTemplate.Compression"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d">
+
+  <Grid x:Name="LayoutRoot">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Grid x:Name="Input" Grid.Row="0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <TextBlock x:Name="InputTextBlock1" Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+        Demonstrates how do interoperation between Windows::Storage::Compression::Compressor WinRT class and "classic" Decompress function.
+      </TextBlock>
+      <TextBlock x:Name="DefaultTextBlock" TextWrapping="Wrap" Grid.Row="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+        DEFAULT: No compression performed.
+      </TextBlock>
+      <TextBlock x:Name="XpressTextBlock" TextWrapping="Wrap" Grid.Row="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Visibility="Collapsed">
+        XPRESS: Compression ratio is medium. High compression and
+        decompression speeds. Low memory requirement.
+      </TextBlock>
+      <TextBlock x:Name="XpressHuffTextBlock" TextWrapping="Wrap" Grid.Row="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Visibility="Collapsed">
+        XPRESSHUFF: Compression ratio is medium. Medium to high compression and
+        decompression speeds. Low memory requirement.
+      </TextBlock>
+      <TextBlock x:Name="MszipTextBlock" TextWrapping="Wrap" Grid.Row="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Visibility="Collapsed">
+        MSZIP: Compression ratio is medium to high. Medium compression speed and high
+        decompression speed. Medium memory requirement.
+      </TextBlock>
+      <TextBlock x:Name="LzmsTextBlock" TextWrapping="Wrap" Grid.Row="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Visibility="Collapsed">
+        LZMS: Compression ratio is high. Low compression speed and high
+        decompression speed. Medium to high memory requirement.
+      </TextBlock>
+      <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Grid.Row="2">
+        <ComboBox x:Name="CompressAlgorithmComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionChanged="CompressAlgorithmComboBox_SelectionChanged" SelectedIndex="0" Height="Auto" Width="110">
+          <ComboBoxItem x:Name="DefaultComboBoxItem" Content="Default"/>
+          <ComboBoxItem x:Name="XpressComboBoxItem" Content="Xpress"/>
+          <ComboBoxItem x:Name="XpressHuffComboBoxItem" Content="XpressHuff"/>
+          <ComboBoxItem x:Name="MszipComboBoxItem" Content="Mszip"/>
+          <ComboBoxItem x:Name="LzmsComboBoxItem" Content="Lzms"/>
+        </ComboBox>
+        <Button x:Name="CompressFileButton" Content="Compress File..." Margin="0,0,10,0" Click="CompressFileButton_Click"/>
+      </StackPanel>
+    </Grid>
+
+    <Grid x:Name="Output" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+      <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <TextBlock x:Name="Progress" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}"/>
+      </ScrollViewer>
+    </Grid>
+
+    <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts -->
+    <VisualStateManager.VisualStateGroups>
+      <VisualStateGroup>
+        <VisualState x:Name="DefaultLayout"/>
+        <VisualState x:Name="Below768Layout"/>
+      </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+
+  </Grid>
+</Page>

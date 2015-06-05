@@ -8,16 +8,11 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Contoso Main Content Page" FontSize="40" Grid.ColumnSpan="2"/>
-        <Button Grid.Row="1" Grid.Column="0" Content="Back to User Select" Click="Button_Restart_Click" Margin="0,20,0,0" HorizontalAlignment="Center"/>
-        <Button x:Name="button_Forget" Grid.Row="1" Grid.Column="1" Content="Forget Me" Click="Button_Forget_Click" Margin="0,20,0,0" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="0" Text="Contoso Main Content Page" FontSize="40" />
+        <Button Grid.Row="1" Content="Back to User Select" Click="Button_Restart_Click" Margin="0,20,0,0" HorizontalAlignment="Center"/>
     </Grid>
 </Page>

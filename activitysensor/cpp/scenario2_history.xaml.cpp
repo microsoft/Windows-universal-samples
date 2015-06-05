@@ -54,22 +54,31 @@ void Scenario2_History::ScenarioGetActivityHistory(Object^ sender, RoutedEventAr
     auto yesterday = calendar->GetDateTime();
 
     // Get history from yesterday onwards
-    create_task(ActivitySensor::GetSystemHistoryAsync(yesterday)).then([this](IVectorView<ActivitySensorReading^>^ history)
+    task<IVectorView<ActivitySensorReading^>^> getHistoryAsync(ActivitySensor::GetSystemHistoryAsync(yesterday));
+    getHistoryAsync.then([this](task<IVectorView<ActivitySensorReading^>^> task)
     {
-        ScenarioOutput_Count->Text = history->Size.ToString();
-        if (history->Size > 0)
+        try 
         {
-            auto reading1 = history->GetAt(0);
-            ScenarioOutput_Activity1->Text = reading1->Activity.ToString();
-            ScenarioOutput_Confidence1->Text = reading1->Confidence.ToString();
+            auto history = task.get();
+            ScenarioOutput_Count->Text = history->Size.ToString();
+            if (history->Size > 0)
+            {
+                auto reading1 = history->GetAt(0);
+                ScenarioOutput_Activity1->Text = reading1->Activity.ToString();
+                ScenarioOutput_Confidence1->Text = reading1->Confidence.ToString();
 
-            auto timestampFormatter = ref new DateTimeFormatter("day month year hour minute second");
-            ScenarioOutput_Timestamp1->Text = timestampFormatter->Format(reading1->Timestamp);
+                auto timestampFormatter = ref new DateTimeFormatter("day month year hour minute second");
+                ScenarioOutput_Timestamp1->Text = timestampFormatter->Format(reading1->Timestamp);
 
-            auto readingN = history->GetAt(history->Size - 1);
-            ScenarioOutput_ActivityN->Text = readingN->Activity.ToString();
-            ScenarioOutput_ConfidenceN->Text = readingN->Confidence.ToString();
-            ScenarioOutput_TimestampN->Text = timestampFormatter->Format(readingN->Timestamp);
+                auto readingN = history->GetAt(history->Size - 1);
+                ScenarioOutput_ActivityN->Text = readingN->Activity.ToString();
+                ScenarioOutput_ConfidenceN->Text = readingN->Confidence.ToString();
+                ScenarioOutput_TimestampN->Text = timestampFormatter->Format(readingN->Timestamp);
+            }
+        }
+        catch (AccessDeniedException^)
+        {
+            rootPage->NotifyUser("User has denied access to activity history", NotifyType::ErrorMessage);
         }
     });
 }

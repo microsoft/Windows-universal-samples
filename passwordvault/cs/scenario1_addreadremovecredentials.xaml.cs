@@ -144,7 +144,7 @@ namespace PasswordVaultSample
             {
                 if (Error.HResult == -2147023728)
                 {
-                    rootPage.NotifyUser("Credential not found.", NotifyType.StatusMessage);
+                    rootPage.NotifyUser("Creential not found.", NotifyType.StatusMessage);
                 }
                 else
                 {
@@ -163,7 +163,7 @@ namespace PasswordVaultSample
             {
                 try
                 {
-                    // This is the code to remove a credential from PasswordVault by supplying resource or username
+                    // This is the code to remove a credentialt from PasswordVault by supplying resource or username
                     PasswordVault vault = new PasswordVault();
                     PasswordCredential cred = vault.Retrieve(InputResourceValue.Text, InputUserNameValue.Text);
                     vault.Remove(cred);

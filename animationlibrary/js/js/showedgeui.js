@@ -19,8 +19,8 @@
             // If element is already animating, wait until current animation is complete before starting the show animation.
             animating = animating
                 .then(function () {
-                    // Make the element visible.
-                    myEdgeUI.style.visibility = "visible";
+                    // Set desired final opacity on the UI element.
+                    myEdgeUI.style.opacity = "1";
 
                     // Run show edge UI animation.
                     // Element animates from the specified offset to its actual position.
@@ -35,8 +35,8 @@
             animating = animating
                 .then(function () { return WinJS.UI.Animation.hideEdgeUI(myEdgeUI); })
                 .then(
-                    // On animation completion, hide the UI element.
-                    function () { myEdgeUI.style.visibility = "hidden"; });
+                    // On animation completion, set final opacity to 0 to hide UI element.
+                    function () { myEdgeUI.style.opacity = "0"; });
         }
     }
 })();

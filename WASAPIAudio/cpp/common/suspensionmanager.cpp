@@ -447,7 +447,7 @@ namespace
         case BooleanType:
             return reader->ReadBoolean();
         case Char16Type:
-            return (char16_t)reader->ReadUInt16();
+            return reader->ReadUInt16();
         case GuidType:
             return reader->ReadGuid();
         case StringType:

@@ -34,10 +34,14 @@
             </StackPanel>
 
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-                <StackPanel Orientation="Vertical">
-                    <TextBox x:Name="TargetServerTextBox" Margin="5" TextWrapping="Wrap" />
-                    <Button x:Name="ConnectButton" Content="Connect" Click="ConnectButton_Click" Margin="5" />
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" x:Name="TargetServerTextBox" Margin="5"/>
+                    <Button Grid.Column="1" x:Name="ConnectButton" Content="Connect" Click="ConnectButton_Click" Margin="5"/>
+                </Grid>
             </ScrollViewer>
 
             <!-- Status Block for providing messages to the user.  Use the

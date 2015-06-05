@@ -98,6 +98,9 @@
     <Compile Include="BroadbandDevice.xaml.cs">
       <DependentUpon>BroadbandDevice.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GetConnectionProfiles.xaml.cs">
+      <DependentUpon>GetConnectionProfiles.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -109,6 +112,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleConfiguration.cs" />
+    <Compile Include="ShowConnection.xaml.cs">
+      <DependentUpon>ShowConnection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SimCard.xaml.cs">
       <DependentUpon>SimCard.xaml</DependentUpon>
     </Compile>
@@ -131,6 +137,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GetConnectionProfiles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -140,6 +150,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ModemInformation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ShowConnection.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

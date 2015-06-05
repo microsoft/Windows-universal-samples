@@ -294,7 +294,7 @@ namespace SDKTemplate
             UserSelect.accountList.Add(account);
 
             CleanUpUserList();
-            this.Frame.Navigate(typeof(Content), account);
+            this.Frame.Navigate(typeof(Content));
         }
 
         /// <summary>

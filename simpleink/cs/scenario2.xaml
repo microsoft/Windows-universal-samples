@@ -53,10 +53,10 @@
                                              Margin="5,0"/>
                         </StackPanel>
                     </StackPanel>
-                    <Grid x:Name="Output" Background="LightGray" Height="Auto">
-                        <!-- Inking area -->
-                        <InkCanvas x:Name="inkCanvas" Height="Auto"/>
-                    </Grid>
+                  <Grid x:Name="Output" Background="LightGray" Height="Auto">
+                    <!-- Inking area -->
+                    <InkCanvas x:Name="inkCanvas" Height="Auto"/>
+                  </Grid>
                 </StackPanel>
             </ScrollViewer>
             <!-- Status Block for providing messages to the user.  Use the

@@ -36,7 +36,7 @@ void EAS::Scenario1_GetDeviceInformation::Launch_Click(Platform::Object^ sender,
 
 		EasClientDeviceInformation^ CurrentDeviceInfor = ref new EasClientDeviceInformation();
 
-		DeviceID->Text = CurrentDeviceInfor->Id.ToString();;
+		auto id = CurrentDeviceInfor->Id;
 		OperatingSystem->Text = CurrentDeviceInfor->OperatingSystem;
 		FriendlyName->Text = CurrentDeviceInfor->FriendlyName;
 		SystemManufacturer->Text = CurrentDeviceInfor->SystemManufacturer;

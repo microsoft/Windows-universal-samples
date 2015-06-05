@@ -16,6 +16,7 @@ using namespace SDKTemplate;
 using namespace SDKTemplate::WiFiScan;
 
 using namespace Platform;
+using namespace Platform::Collections;
 using namespace Windows::Devices::Enumeration;
 using namespace Windows::Devices::WiFi;
 using namespace Windows::Foundation;
@@ -55,6 +56,9 @@ void Scenario3_RegisterForUpdates::Button_Click_Unregister(Platform::Object^ sen
 
 void Scenario3_RegisterForUpdates::OnNavigatedTo(NavigationEventArgs^ e)
 {
+    ResultCollection = ref new Vector<WiFiNetworkDisplay^>();
+    DataContext = this;
+
     // RequestAccessAsync must have been called at least once by the app before using the API
     // Calling it multiple times is fine but not necessary
     // RequestAccessAsync must be called from the UI thread
@@ -65,7 +69,7 @@ void Scenario3_RegisterForUpdates::OnNavigatedTo(NavigationEventArgs^ e)
     {
         if (access != WiFiAccessStatus::Allowed)
         {
-            ScenarioOutput->Text = "Access denied";
+            _rootPage->NotifyUser(L"Access denied", SDKTemplate::NotifyType::ErrorMessage);
         }
         else
         {
@@ -87,34 +91,32 @@ void Scenario3_RegisterForUpdates::OnNavigatedTo(NavigationEventArgs^ e)
                 }
                 else
                 {
-                    ScenarioOutput->Text = L"No WiFi Adapters detected on this machine";
+                    _rootPage->NotifyUser(L"No WiFi Adapters detected on this machine", SDKTemplate::NotifyType::ErrorMessage);
                 }
             });
         }
     });
 }
 
-void Scenario3_RegisterForUpdates::DisplayNetworkReport(WiFiNetworkReport^ report)
+void Scenario3_RegisterForUpdates::DisplayNetworkReport(WiFiNetworkReport^ report, WiFiAdapter^ adapter)
 {
     auto timestampString = DateTimeFormatter::LongDate->Format(report->Timestamp);
     auto message = L"Network Report Timestamp: " + timestampString;
-    for (auto network : report->AvailableNetworks)
-    {
-        message += L"\nNetworkName: " + network->Ssid + L", BSSID: " + network->Bssid
-            + L", RSSI: " + network->NetworkRssiInDecibelMilliwatts
-            + L"dBm, Channel Frequency: " + network->ChannelCenterFrequencyInKilohertz
-            + L"kHz";
-    }
-
     // there is no guarantee of what thread the AvailableNetworksChanged callback is run on
     _rootPage->Dispatcher->RunAsync(CoreDispatcherPriority::Normal,
-        ref new DispatchedHandler([this, message]
+        ref new DispatchedHandler([this, message, report, adapter]
+    {
+        _rootPage->NotifyUser(message, SDKTemplate::NotifyType::StatusMessage);
+        ResultCollection->Clear();
+        for (auto network : report->AvailableNetworks)
         {
-            ScenarioOutput->Text = message;
-        }));
+            ResultCollection->Append(ref new WiFiNetworkDisplay(network, adapter));
+        }
+    }));
+
 }
 
 void Scenario3_RegisterForUpdates::OnAvailableNetworksChanged(Windows::Devices::WiFi::WiFiAdapter ^sender, Platform::Object ^args)
 {
-    DisplayNetworkReport(_firstAdapter->NetworkReport);
+    DisplayNetworkReport(sender->NetworkReport, sender);
 }

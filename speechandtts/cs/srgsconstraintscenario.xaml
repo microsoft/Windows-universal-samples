@@ -35,18 +35,24 @@
 
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel>
-                    <Button x:Name="btnRecognizeWithUI" Click="RecognizeWithUI_Click" IsEnabled="False">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="Microphone"/>
-                            <TextBlock Text=" with UI"/>
-                        </StackPanel>
-                    </Button>
-                    <Button x:Name="btnRecognizeWithoutUI" Click="RecognizeWithoutUI_Click" IsEnabled="False" Margin="0,10,0,0">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="Microphone"/>
-                            <TextBlock x:Name="listenWithoutUIButtonText" Text=" without UI"/>
-                        </StackPanel>
-                    </Button>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Language: " Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cbLanguageSelection" SelectionChanged="cbLanguageSelection_SelectionChanged" Margin="10" Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" >
+                        <Button x:Name="btnRecognizeWithUI" Click="RecognizeWithUI_Click" IsEnabled="False" Margin="10,10,0,10">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Microphone"/>
+                                <TextBlock Text=" with UI"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="btnRecognizeWithoutUI" Click="RecognizeWithoutUI_Click" IsEnabled="False" Margin="10,10,0,10">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Microphone"/>
+                                <TextBlock x:Name="listenWithoutUIButtonText" Text=" without UI"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
                     <Canvas Height="200" Width="200" HorizontalAlignment="Left" Margin="0,10,0,10">
                         <Rectangle Name="colorRectangle" Width="200" Height="200"
                                    Fill="Gray" Stroke="White" StrokeThickness="20" />

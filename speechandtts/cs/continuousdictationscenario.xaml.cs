@@ -19,6 +19,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Windows.UI.Xaml.Media;
+using Windows.Globalization;
+using Windows.UI.Xaml.Documents;
+using System.Threading.Tasks;
 
 namespace SpeechAndTTS
 {
@@ -82,7 +85,81 @@ namespace SpeechAndTTS
                 this.dictationTextBox.Text = "Permission to access capture resources was not given by the user, reset the application setting in Settings->Privacy->Microphone.";
             }
 
-            this.speechRecognizer = new SpeechRecognizer();
+            PopulateLanguageDropdown();
+            await InitializeRecognizer(SpeechRecognizer.SystemSpeechLanguage);
+        }
+
+        /// <summary>
+        /// Look up the supported languages for this speech recognition scenario, 
+        /// that are installed on this machine, and populate a dropdown with a list.
+        /// </summary>
+        private void PopulateLanguageDropdown()
+        {
+            Language defaultLanguage = SpeechRecognizer.SystemSpeechLanguage;
+            IEnumerable<Language> supportedLanguages = SpeechRecognizer.SupportedTopicLanguages;
+            foreach (Language lang in supportedLanguages)
+            {
+                ComboBoxItem item = new ComboBoxItem();
+                item.Tag = lang;
+                item.Content = lang.DisplayName;
+
+                cbLanguageSelection.Items.Add(item);
+                if (lang.LanguageTag == defaultLanguage.LanguageTag)
+                {
+                    item.IsSelected = true;
+                    cbLanguageSelection.SelectedItem = item;
+                }
+            }
+        }
+
+        /// <summary>
+        /// When a user changes the speech recognition language, trigger re-initialization of the 
+        /// speech engine with that language, and change any speech-specific UI assets.
+        /// </summary>
+        /// <param name="sender">Ignored</param>
+        /// <param name="e">Ignored</param>
+        private async void cbLanguageSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (speechRecognizer != null)
+            {
+                ComboBoxItem item = (ComboBoxItem)(cbLanguageSelection.SelectedItem);
+                Language newLanguage = (Language)item.Tag;
+                if (speechRecognizer.CurrentLanguage != newLanguage)
+                {
+                    // trigger cleanup and re-initialization of speech.
+                    try
+                    {
+                        await InitializeRecognizer(newLanguage);
+                    }
+                    catch (Exception exception)
+                    {
+                        var messageDialog = new Windows.UI.Popups.MessageDialog(exception.Message, "Exception");
+                        await messageDialog.ShowAsync();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Initialize Speech Recognizer and compile constraints.
+        /// </summary>
+        /// <param name="recognizerLanguage">Language to use for the speech recognizer</param>
+        /// <returns>Awaitable task.</returns>
+        private async Task InitializeRecognizer(Language recognizerLanguage)
+        {
+            if (speechRecognizer != null)
+            {
+                // cleanup prior to re-initializing this scenario.
+                speechRecognizer.StateChanged -= SpeechRecognizer_StateChanged;
+                speechRecognizer.ContinuousRecognitionSession.Completed -= ContinuousRecognitionSession_Completed;
+                speechRecognizer.ContinuousRecognitionSession.ResultGenerated -= ContinuousRecognitionSession_ResultGenerated;
+                speechRecognizer.HypothesisGenerated -= SpeechRecognizer_HypothesisGenerated;
+
+                this.speechRecognizer.Dispose();
+                this.speechRecognizer = null;
+            }
+
+            this.speechRecognizer = new SpeechRecognizer(recognizerLanguage);
 
             // Provide feedback to the user about the state of the recognizer. This can be used to provide visual feedback in the form
             // of an audio indicator to help the user understand whether they're being heard.
@@ -105,7 +182,7 @@ namespace SpeechAndTTS
             speechRecognizer.ContinuousRecognitionSession.ResultGenerated += ContinuousRecognitionSession_ResultGenerated;
             speechRecognizer.HypothesisGenerated += SpeechRecognizer_HypothesisGenerated;
         }
-
+        
         /// <summary>
         /// Upon leaving, clean up the speech recognizer. Ensure we aren't still listening, and disable the event 
         /// handlers to prevent leaks.
@@ -120,6 +197,7 @@ namespace SpeechAndTTS
                     await this.speechRecognizer.ContinuousRecognitionSession.CancelAsync();
                     isListening = false;
                     DictationButtonText.Text = " Dictate";
+                    cbLanguageSelection.IsEnabled = true;
                 }
 
                 dictationTextBox.Text = "";
@@ -154,6 +232,7 @@ namespace SpeechAndTTS
                     {
                         rootPage.NotifyUser("Automatic Time Out of Dictation", NotifyType.StatusMessage);
                         DictationButtonText.Text = " Dictate";
+                        cbLanguageSelection.IsEnabled = true;
                         dictationTextBox.Text = dictatedTextBuilder.ToString();
                         isListening = false;
                     });
@@ -164,6 +243,7 @@ namespace SpeechAndTTS
                     {
                         rootPage.NotifyUser("Continuous Recognition Completed: " + args.Status.ToString(), NotifyType.StatusMessage);
                         DictationButtonText.Text = " Dictate";
+                        cbLanguageSelection.IsEnabled = true;
                         isListening = false;
                     });
                 }
@@ -248,6 +328,8 @@ namespace SpeechAndTTS
                 if (speechRecognizer.State == SpeechRecognizerState.Idle)
                 {
                     DictationButtonText.Text = " Stop Dictation";
+                    cbLanguageSelection.IsEnabled = false;
+                    hlOpenPrivacySettings.Visibility = Visibility.Collapsed;
 
                     try
                     {
@@ -258,7 +340,8 @@ namespace SpeechAndTTS
                     {
                         if ((uint)ex.HResult == HResultPrivacyStatementDeclined)
                         {
-                            dictationTextBox.Text = "The privacy statement was declined. Go to Settings -> Privacy -> Speech, inking and typing, and ensure you have viewed the privacy policy, and Cortana is set to 'Get To Know You'";
+                            // Show a UI link to the privacy settings.
+                            hlOpenPrivacySettings.Visibility = Visibility.Visible;
                         }
                         else
                         {
@@ -268,6 +351,8 @@ namespace SpeechAndTTS
 
                         isListening = false;
                         DictationButtonText.Text = " Dictate";
+                        cbLanguageSelection.IsEnabled = true;
+                        
                     }
                 }
             }
@@ -275,6 +360,7 @@ namespace SpeechAndTTS
             {
                 isListening = false;
                 DictationButtonText.Text = " Dictate";
+                cbLanguageSelection.IsEnabled = true;
 
                 if (speechRecognizer.State != SpeechRecognizerState.Idle)
                 {
@@ -289,6 +375,11 @@ namespace SpeechAndTTS
             }
         }
 
+        /// <summary>
+        /// Clear the dictation textbox.
+        /// </summary>
+        /// <param name="sender">Ignored</param>
+        /// <param name="e">Ignored</param>
         private void btnClearText_Click(object sender, RoutedEventArgs e)
         {
             btnClearText.IsEnabled = false;
@@ -318,6 +409,17 @@ namespace SpeechAndTTS
                 ((ScrollViewer)obj).ChangeView(0.0f, ((ScrollViewer)obj).ExtentHeight, 1.0f);
                 break;
             }
+        }
+
+        /// <summary>
+        /// Open the Speech, Inking and Typing page under Settings -> Privacy, enabling a user to accept the 
+        /// Microsoft Privacy Policy, and enable personalization.
+        /// </summary>
+        /// <param name="sender">Ignored</param>
+        /// <param name="args">Ignored</param>
+        private async void openPrivacySettings_Click(Hyperlink sender, HyperlinkClickEventArgs args)
+        {
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-speechtyping"));
         }
     }
 }

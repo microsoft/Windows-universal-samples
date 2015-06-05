@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
@@ -18,24 +18,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" x:Name="InputTextBlock1"  TextWrapping="Wrap"  Style="{StaticResource ScenarioDescriptionTextStyle}" HorizontalAlignment="Left">
-            <TextBlock.Text>
-                This scenario demonstrates the use of the Mobile Broadband APIs used by network operators. This interface allows you to access the modem deviceinformation and information about the current registration state on the network.
-            </TextBlock.Text>
-        </TextBlock>
-        <Button Content="Refresh Modem Information" Name="btnRefresh" Click="btnRefresh_Click" Grid.Row="1" Grid.Column="0"/>
-        <TextBlock Name="txtModemInformation" TextWrapping="WrapWholeWords" Style="{StaticResource BasicTextStyle}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
-    </Grid>
+    
+    <ScrollViewer VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" x:Name="InputTextBlock1"  TextWrapping="Wrap"  Style="{StaticResource ScenarioDescriptionTextStyle}" HorizontalAlignment="Left">
+                <TextBlock.Text>
+                    This scenario demonstrates the use of the Mobile Broadband APIs used by network operators. This interface allows you to access the modem deviceinformation and information about the current registration state on the network.
+                </TextBlock.Text>
+            </TextBlock>
+            <Button Content="Refresh Modem Information" Name="btnRefresh" Click="btnRefresh_Click" Grid.Row="1" Grid.Column="0"/>
+            <TextBlock Name="txtModemInformation" TextWrapping="WrapWholeWords" Style="{StaticResource BasicTextStyle}"/>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

@@ -19,5 +19,5 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
 {
     { "Data Events", "ProximityCPP.Scenario1_DataEvents" },
     { "Polling", "ProximityCPP.Scenario2_Polling" },
-	{ "Display On/Off", "ProximityCPP.Scenario3_DisplayOnOff" }
+    { "Display On/Off", "ProximityCPP.Scenario3_DisplayOnOff" }
 };

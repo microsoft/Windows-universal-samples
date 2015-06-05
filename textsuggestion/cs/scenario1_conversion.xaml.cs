@@ -5,8 +5,9 @@ using Windows.Data.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using SDKTemplate;
 
-namespace SDKTemplate
+namespace TextSuggestion
 {
     public sealed partial class Scenario1_Conversion : Page
     {

@@ -1,4 +1,4 @@
-﻿//*********************************************************
+//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
 // This code is licensed under the MIT License (MIT).
@@ -38,6 +38,8 @@ namespace MobileBroadband
     public sealed partial class SimCard : Page
     {
         MainPage rootPage = MainPage.Current;
+        MobileBroadbandUiccApp currentUiccApp = null;
+
         public SimCard()
         {
             this.InitializeComponent();
@@ -54,20 +56,86 @@ namespace MobileBroadband
                 {
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine("SIM Card ICCID:" + uicc.SimIccId);
-
-                    sb.AppendLine("Application on SIM Card");
+                    
+                    
                     MobileBroadbandUiccAppsResult appsResult = await uicc.GetUiccAppsAsync();
+                    System.Collections.ObjectModel.ObservableCollection<object> AppList = new System.Collections.ObjectModel.ObservableCollection<object>();
                     foreach (var uiccApp in appsResult.UiccApps)
                     {
-                        sb.AppendLine("Kind: " + uiccApp.Kind);
+                        ListBoxItem item = new ListBoxItem();
+                        item.Name = uiccApp.Kind.ToString();
+                        item.Content = uiccApp;
+                        AppList.Add(item);
                     }
-                    txtSIMInformation.Text = sb.ToString();
+
+                    listUiccApps.ItemsSource = AppList;
+                    if (AppList.Count > 0)
+                    {
+                        listUiccApps.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        sb.AppendLine("No UICC app found.");
+                    }
+
+                    txtUICCInformation.Text = sb.ToString();
                 }
             }
             catch (Exception ex)
             {
                 rootPage.NotifyUser("Error:" + ex.Message, NotifyType.ErrorMessage);
             }
+        }
+
+        private void listUiccApps_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (null != listUiccApps.SelectedItem)
+            {
+                ListBoxItem item = listUiccApps.SelectedItem as ListBoxItem;
+                currentUiccApp = (MobileBroadbandUiccApp)item.Content;
+                btnGetRecord.IsEnabled = true;
+                byte[] appIdByteBuffer = currentUiccApp.Id.ToArray();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("AppId:");
+                foreach(var v in appIdByteBuffer)
+                {
+                    sb.Append(v.ToString("X") + ", ");
+                }
+                txtUICCAppId.Text = sb.ToString();
+                
+            }
+            else
+            {
+                btnGetRecord.IsEnabled = false;
+            }
+
+            labelRecordInformation.Text = "";
+        }
+
+        private async void btnGetRecord_Click(object sender, RoutedEventArgs e)
+        {
+            List<uint> iccidFilePath = new List<uint>{ 0x3F00, 0x2FE2}; // The wellknown file path for IccId
+            MobileBroadbandUiccAppRecordDetailsResult recordDetails = await currentUiccApp.GetRecordDetailsAsync(iccidFilePath);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Record Details");
+            sb.AppendLine("Record Type:" + recordDetails.Kind.ToString());
+            sb.AppendLine("Record Size:" + recordDetails.RecordSize.ToString());
+            sb.AppendLine("Read result:");
+
+            MobileBroadbandUiccAppReadRecordResult readRecord = await currentUiccApp.ReadRecordAsync(iccidFilePath, 1);
+            sb.AppendLine(readRecord.Status.ToString());
+
+            if (readRecord.Status == MobileBroadbandUiccAppOperationStatus.Success)
+            {
+                sb.AppendLine("IccId record content:");
+                byte[] iccidByteArray = readRecord.Data.ToArray();
+                foreach (var v in iccidByteArray)
+                {
+                    sb.Append(v.ToString("X") + ", ");
+                }
+            }
+
+            labelRecordInformation.Text = sb.ToString();
         }
     }
 }

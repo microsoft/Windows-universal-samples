@@ -8,7 +8,7 @@
 namespace SDKTemplate
 {
     /// <summary>
-    /// The sixth scenario. This scenario illustrates adding a custom provider to use with WebAccountManager APIs.
+    /// The sixth scenario. This scenario illustrates adding a custom provider to use with Token Broker APIs.
     /// </summary>
     [Windows::Foundation::Metadata::WebHostHidden]
     public ref class Scenario6_CustomProvider sealed

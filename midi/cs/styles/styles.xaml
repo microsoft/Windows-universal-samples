@@ -2,7 +2,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -15,7 +15,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SDKTemplate">
 
-   <Style x:Key="SymbolButton" TargetType="ToggleButton">
+    <Style x:Key="SymbolButton" TargetType="ToggleButton">
         <Setter Property="Background" Value="{ThemeResource ToggleButtonBackgroundThemeBrush}"/>
         <Setter Property="Foreground" Value="{ThemeResource ToggleButtonForegroundThemeBrush}"/>
         <Setter Property="BorderBrush" Value="{ThemeResource ToggleButtonBorderThemeBrush}"/>
@@ -40,7 +40,7 @@
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Green"/>
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonCheckedPressedBackgroundThemeBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -54,21 +54,21 @@
                                 <VisualState x:Name="Checked">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Green"/>
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonCheckedBackgroundThemeBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="CheckedPointerOver">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Green"/>
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonCheckedPointerOverBackgroundThemeBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="CheckedPressed">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Green"/>
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonCheckedPressedBackgroundThemeBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -117,66 +117,26 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DeviceListStyle" TargetType="ListBox">
-        <Setter Property="Height" Value="230"/>
-        <Setter Property="MaxHeight" Value="230"/>
-        <Setter Property="Width" Value="300"/>
-        <Setter Property="Margin" Value="0,0,20,0"/>
-    </Style>
-   
-    <Style x:Key="DevicePropertiesStyle" TargetType="ListBox">
-        <Setter Property="Height" Value="230"/>
-        <Setter Property="MaxHeight" Value="230"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="MaxWidth" Value="900"/>
-        <Setter Property="Margin" Value="0,0,20,0"/>
-    </Style>
-
-    <Style x:Key="InputOutputDeviceListStyle" TargetType="ListBox">
-        <Setter Property="Height" Value="230"/>
-        <Setter Property="MaxHeight" Value="230"/>
-        <Setter Property="Width" Value="300"/>
-        <Setter Property="Margin" Value="0,20,20,0"/>
-    </Style>
-    
-    <Style x:Key="InputDeviceMessagesStyle" TargetType="ListBox">
-        <Setter Property="Height" Value="230"/>
-        <Setter Property="MaxHeight" Value="230"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="MaxWidth" Value="900"/>
-        <Setter Property="Margin" Value="0,20,20,0"/>
-    </Style>
-    
-    <Style x:Key="MessageTypeStyle" TargetType="ComboBox">
-        <Setter Property="Width" Value="300"/>
-        <Setter Property="MinWidth" Value="200"/>
-        <Setter Property="Margin" Value="0,20,0,0"/>
-        <Setter Property="Header" Value="Message Type"/>
-    </Style>
-    
-    <Style x:Key="MessageActionStyle" TargetType="Button">
-        <Setter Property="Width" Value="100"/>
-        <Setter Property="MinWidth" Value="100"/>
-        <Setter Property="Margin" Value="10"/>
-    </Style>
-    
     <Style x:Key="BasicTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="Margin" Value="0,0,0,10"/>
     </Style>
 
     <Style x:Key="TagLineTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe UI Light"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+	<Setter Property="FontWeight" Value="Light"/>
         <Setter Property="FontSize" Value="16"/>
     </Style>
 
     <Style x:Key="SampleHeaderTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe UI Light"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+	<Setter Property="FontWeight" Value="Light"/>
         <Setter Property="FontSize" Value="26.667"/>
     </Style>
 
     <Style x:Key="ListItemTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+	<Setter Property="FontWeight" Value="SemiLight"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Margin" Value="10,0,0,0"/>
         <Setter Property="Foreground" Value="White"/>
@@ -188,32 +148,20 @@
     </Style>
 
     <Style x:Key="ScenarioHeaderTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe UI Light"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+	<Setter Property="FontWeight" Value="Light"/>
         <Setter Property="FontSize" Value="26.667"/>
-        <Setter Property="Margin" Value="0,30,0,0" />
     </Style>
 
     <Style x:Key="ScenarioDescriptionTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe UI Light"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+	<Setter Property="FontWeight" Value="Light"/>
         <Setter Property="FontSize" Value="16"/>
-        <Setter Property="Margin" Value="0,10,0,0" />
-    </Style>
-
-    <Style x:Key="ScenarioTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe UI Light"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Margin" Value="10" />
-        <Setter Property="TextWrapping" Value="Wrap"/>
-    </Style>
-
-    <Style x:Key="ScenarioButtonStyle" TargetType="Button">
-        <Setter Property="FontFamily" Value="Segoe UI Light"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Margin" Value="0,10,0,20" />
     </Style>
 
     <Style x:Key="BaseMessageStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+	<Setter Property="FontWeight" Value="SemiLight"/>
         <Setter Property="FontSize" Value="14.667"/>
         <Setter Property="Margin" Value="0,0,0,5"/>
     </Style>
@@ -393,49 +341,6 @@
         </Setter>
     </Style>
 
-    <!--Style for displaying a ListBox whose items cannot be selected individually, used to display MIDI device properties-->
-    <Style x:Key="ScenarioUnselectableListBoxStyle" TargetType="ListBoxItem">
-        <Setter Property="IsEnabled" Value="True" />
-        <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Border x:Name="LayoutRoot" 
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                Background="{TemplateBinding Background}"
-                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal"/>
-                                    <VisualState x:Name="MouseOver"/>
-                                    <VisualState x:Name="Disabled">
-                                        <Storyboard>
-                                            <DoubleAnimation Duration="0" 
-                                                             To=".5"
-                                                             Storyboard.TargetProperty="Opacity" 
-                                                             Storyboard.TargetName="ContentContainer"/>
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="SelectionStates">
-                                    <VisualState x:Name="Unselected"/>
-                                    <VisualState x:Name="Selected"/>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <ContentControl x:Name="ContentContainer"
-                                            ContentTemplate="{TemplateBinding ContentTemplate}"
-                                            Content="{TemplateBinding Content}"
-                                            Padding="10,00,00,00"
-                                            Foreground="#FFFFFFFF"
-                                            FontFamily="Consolas"
-                                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Background="Black"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-       </Style>
 
     <Style x:Key="ScenarioListBoxStyle" TargetType="ListBox">
         <Setter Property="Foreground" Value="{ThemeResource ListBoxForegroundThemeBrush}"/>

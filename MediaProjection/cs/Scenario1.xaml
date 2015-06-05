@@ -1,0 +1,51 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="MediaProjection.Scenario1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MediaProjection"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="Input" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="InputTextBlock1"  TextWrapping="Wrap" Grid.Row="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >
+                An application may choose to present content on a secondary display in addition to the primary display. A typical scenario for this
+                is showing a presentation on a secondary monitor, while the user's notes and controls remain on the primary monitor. Or, displaying a viewport
+                for a game on second screen while controls remain on the primary display.
+                
+                The projection API makes use of the API set provided for multiple views. For more information, please see the Multiple Views sample.
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Grid.Row="1">
+                    <TextBlock x:Name="ProjectionStatusText"></TextBlock>
+                    <Button Margin="0,0,10,0" FontFamily="Segoe UI Symbol" Click="StartProjecting_Click">&#xe2b4; Start/resume projection</Button>
+                    <Button Margin="0,0,10,0" FontFamily="Segoe UI Symbol" Click="StopProjecting_Click">&#xe2b3; Stop projecting</Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="Output" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

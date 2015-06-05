@@ -59,6 +59,8 @@
     <Content Include="html\scenario2_MultiFile.html" />
     <Content Include="html\scenario3_SingleFolder.html" />
     <Content Include="html\scenario4_SaveFile.html" />
+    <Content Include="html\scenario5_OpenCachedFile.html" />
+    <Content Include="html\scenario6_SaveCachedFile.html" />
     <Content Include="images\microsoft-sdk.png" />
     <Content Include="images\smallTile-sdk.png" />
     <Content Include="images\splash-sdk.png" />
@@ -72,6 +74,8 @@
     <Content Include="js\scenario2_MultiFile.js" />
     <Content Include="js\scenario3_SingleFolder.js" />
     <Content Include="js\scenario4_SaveFile.js" />
+    <Content Include="js\scenario5_OpenCachedFile.js" />
+    <Content Include="js\scenario6_SaveCachedFile.js" />
     <Content Include="Microsoft.WinJS.4.0\css\ui-dark.css" />
     <Content Include="Microsoft.WinJS.4.0\css\ui-light.css" />
     <Content Include="Microsoft.WinJS.4.0\js\en-US\ui.strings.js" />

@@ -274,6 +274,37 @@ internal:
         return ER_OK;
     }
 
+    template<class T>
+    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Out_ Windows::Foundation::Collections::IMap<T, Platform::Object^>^* value)
+    {
+        std::vector<char> keyType;
+        std::vector<char> valueType;
+        RETURN_IF_QSTATUS_ERROR(GetDictionaryTypeSignatures(signature, &keyType, &valueType));
+
+        *value = ref new Platform::Collections::Map<T, Platform::Object^>();
+
+        size_t elementCount = 0;
+        alljoyn_msgarg dictionaryContents = nullptr;
+        RETURN_IF_QSTATUS_ERROR(alljoyn_msgarg_get(argument, signature, &elementCount, &dictionaryContents));
+
+        if (dictionaryContents != nullptr)
+        {
+            for (size_t i = 0; i < elementCount; i++)
+            {
+                alljoyn_msgarg keyArg, valueArg;
+                RETURN_IF_QSTATUS_ERROR(alljoyn_msgarg_get(alljoyn_msgarg_array_element(dictionaryContents, i), "{*v}", &keyArg, &valueArg));
+                T dictionaryKey;
+                RETURN_IF_QSTATUS_ERROR(GetAllJoynMessageArg(keyArg, keyType.data(), &dictionaryKey));
+                Platform::Object^ dictionaryValue;
+                RETURN_IF_QSTATUS_ERROR(GetValueFromVariant(valueArg, &dictionaryValue));
+
+                (*value)->Insert(dictionaryKey, dictionaryValue);
+            }
+        }
+
+        return ER_OK;
+    }
+
     template<class T, class U>
     static _Check_return_ int32 SetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, Windows::Foundation::Collections::IMapView<T, U>^ value)
     {
@@ -316,6 +347,40 @@ internal:
         return SetAllJoynMessageArg(argument, signature, value->GetView());
     }
 
+    static _Check_return_ int32 SetVariantStructureArg(_In_ alljoyn_msgarg argument, _In_ PROJECT_NAMESPACE::AllJoynMessageArgStructure^ value)
+    {
+        alljoyn_msgarg variantArg = alljoyn_msgarg_create();
+        alljoyn_msgarg fields = alljoyn_msgarg_array_create(value->Size);
+        for (unsigned int i = 0; i < value->Size; i++)
+        {
+            RETURN_IF_QSTATUS_ERROR(SetAllJoynMessageArg(alljoyn_msgarg_array_element(fields, i), "v", value->GetAt(i)));
+        }
+
+        RETURN_IF_QSTATUS_ERROR(alljoyn_msgarg_setstruct(variantArg, fields, value->Size));
+        alljoyn_msgarg_destroy(fields);
+
+        QStatus status = alljoyn_msgarg_set_and_stabilize(argument, "v", variantArg);
+        alljoyn_msgarg_destroy(variantArg);
+
+        return static_cast<int32>(status);
+    }
+
+    static _Check_return_ int32 GetVariantStructureArg(_In_ alljoyn_msgarg argument, _Out_ Platform::Object^* value)
+    {
+        size_t memberCount = alljoyn_msgarg_getnummembers(argument);
+        auto result = ref new PROJECT_NAMESPACE::AllJoynMessageArgStructure();
+
+        for (size_t i = 0; i < memberCount; i++)
+        {
+            Platform::Object^ variantValue;
+            RETURN_IF_QSTATUS_ERROR(GetAllJoynMessageArg(alljoyn_msgarg_getmember(argument, i), "v", &variantValue));
+            result->Append(variantValue);
+        }
+
+        *value = result;
+        return ER_OK;
+    }
+
     template<class T>
     static _Check_return_ int32 SetVariantArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _In_ T value)
     {
@@ -333,6 +398,124 @@ internal:
         RETURN_IF_QSTATUS_ERROR(GetAllJoynMessageArg(argument, signature, &innerValue));
         *value = innerValue;
         return ER_OK;
+    }
+
+    static _Check_return_ int32 SetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _In_ Platform::Object^ value)
+    {
+        UNREFERENCED_PARAMETER(signature);
+
+        auto byteValue = dynamic_cast<Platform::IBox<byte>^>(value);
+        if (byteValue != nullptr)
+        {
+            return SetVariantArg(argument, "y", byteValue->Value);
+        }
+        auto boolValue = dynamic_cast<Platform::IBox<bool>^>(value);
+        if (boolValue != nullptr)
+        {
+            return SetVariantArg(argument, "b", boolValue->Value);
+        }
+        auto int16Value = dynamic_cast<Platform::IBox<int16>^>(value);
+        if (int16Value != nullptr)
+        {
+            return SetVariantArg(argument, "n", int16Value->Value);
+        }
+        auto uint16Value = dynamic_cast<Platform::IBox<uint16>^>(value);
+        if (uint16Value != nullptr)
+        {
+            return SetVariantArg(argument, "q", uint16Value->Value);
+        }
+        auto int32Value = dynamic_cast<Platform::IBox<int32>^>(value);
+        if (int32Value != nullptr)
+        {
+            return SetVariantArg(argument, "i", int32Value->Value);
+        }
+        auto uint32Value = dynamic_cast<Platform::IBox<uint32>^>(value);
+        if (uint32Value != nullptr)
+        {
+            return SetVariantArg(argument, "u", uint32Value->Value);
+        }
+        auto int64Value = dynamic_cast<Platform::IBox<int64>^>(value);
+        if (int64Value != nullptr)
+        {
+            return SetVariantArg(argument, "x", int64Value->Value);
+        }
+        auto uint64Value = dynamic_cast<Platform::IBox<uint64>^>(value);
+        if (uint64Value != nullptr)
+        {
+            return SetVariantArg(argument, "t", uint64Value->Value);
+        }
+        auto doubleValue = dynamic_cast<Platform::IBox<double>^>(value);
+        if (doubleValue != nullptr)
+        {
+            return SetVariantArg(argument, "d", doubleValue->Value);
+        }
+        auto stringValue = dynamic_cast<Platform::String^>(value);
+        if (stringValue != nullptr)
+        {
+            return SetVariantArg(argument, "s", stringValue);
+        }
+        auto structValue = dynamic_cast<PROJECT_NAMESPACE::AllJoynMessageArgStructure^>(value);
+        if (structValue != nullptr)
+        {
+            return SetVariantStructureArg(argument, structValue);
+        }
+        auto vectorValue = dynamic_cast<Windows::Foundation::Collections::IVector<Platform::Object^>^>(value);
+        if (vectorValue != nullptr)
+        {
+            return SetVariantArg(argument, "av", vectorValue);
+        }
+        auto byteMapValue = dynamic_cast<Windows::Foundation::Collections::IMap<byte, Platform::Object^>^>(value);
+        if (byteMapValue != nullptr)
+        {
+            return SetVariantArg(argument, "a{yv}", byteMapValue);
+        }
+        auto boolMapValue = dynamic_cast<Windows::Foundation::Collections::IMap<bool, Platform::Object^>^>(value);
+        if (boolMapValue != nullptr)
+        {
+            return SetVariantArg(argument, "a{bv}", boolMapValue);
+        }
+        auto int16MapValue = dynamic_cast<Windows::Foundation::Collections::IMap<int16, Platform::Object^>^>(value);
+        if (int16MapValue != nullptr)
+        {
+            return SetVariantArg(argument, "a{nv}", int16MapValue);
+        }
+        auto uint16MapValue = dynamic_cast<Windows::Foundation::Collections::IMap<uint16, Platform::Object^>^>(value);
+        if (uint16MapValue != nullptr)
+        {
+            return SetVariantArg(argument, "a{qv}", int16MapValue);
+        }
+        auto int32MapValue = dynamic_cast<Windows::Foundation::Collections::IMap<int32, Platform::Object^>^>(value);
+        if (int32MapValue != nullptr)
+        {
+            return SetVariantArg(argument, "a{iv}", int32MapValue);
+        }
+        auto uint32MapValue = dynamic_cast<Windows::Foundation::Collections::IMap<uint32, Platform::Object^>^>(value);
+        if (uint32MapValue != nullptr)
+        {
+            return SetVariantArg(argument, "a{uv}", uint32MapValue);
+        }
+        auto int64MapValue = dynamic_cast<Windows::Foundation::Collections::IMap<int64, Platform::Object^>^>(value);
+        if (int64MapValue != nullptr)
+        {
+            return SetVariantArg(argument, "a{xv}", int64MapValue);
+        }
+        auto uint64MapValue = dynamic_cast<Windows::Foundation::Collections::IMap<uint64, Platform::Object^>^>(value);
+        if (uint64MapValue != nullptr)
+        {
+            return SetVariantArg(argument, "a{tv}", uint64MapValue);
+        }
+        auto doubleMapValue = dynamic_cast<Windows::Foundation::Collections::IMap<double, Platform::Object^>^>(value);
+        if (doubleMapValue != nullptr)
+        {
+            return SetVariantArg(argument, "a{dv}", doubleMapValue);
+        }
+        auto stringMapValue = dynamic_cast<Windows::Foundation::Collections::IMap<Platform::String^, Platform::Object^>^>(value);
+        if (stringMapValue != nullptr)
+        {
+            return SetVariantArg(argument, "a{sv}", stringMapValue);
+        }
+
+        return ER_BUS_BAD_VALUE_TYPE;
     }
 
     static _Check_return_ int32 GetMapFromVariant(_In_ alljoyn_msgarg argument, _In_ char mapSignature, _Out_ Platform::Object^* value)
@@ -382,5 +565,66 @@ internal:
         default:
             return ER_BUS_BAD_SIGNATURE;
         }
+    }
+
+    static _Check_return_ int32 GetValueFromVariant(_In_ alljoyn_msgarg argument, _Out_ Platform::Object^* value)
+    {
+        char variantSignature[c_MaximumSignatureLength];
+        alljoyn_msgarg_signature(argument, variantSignature, c_MaximumSignatureLength);
+
+        switch (variantSignature[0])
+        {
+        case 'y':
+            return GetVariantArg<byte>(argument, "y", value);
+        case 'b':
+            return GetVariantArg<bool>(argument, "b", value);
+        case 'n':
+            return GetVariantArg<int16>(argument, "n", value);
+        case 'q':
+            return GetVariantArg<uint16>(argument, "q", value);
+        case 'i':
+            return GetVariantArg<int32>(argument, "i", value);
+        case 'u':
+            return GetVariantArg<uint32>(argument, "u", value);
+        case 'x':
+            return GetVariantArg<int64>(argument, "x", value);
+        case 't':
+            return GetVariantArg<uint64>(argument, "t", value);
+        case 'd':
+            return GetVariantArg<double>(argument, "d", value);
+        case 's':
+            return GetVariantArg<Platform::String^>(argument, "s", value);
+        case '(':
+            return GetVariantStructureArg(argument, value);
+        case 'a':
+            if (strlen(variantSignature) < 2)
+            {
+                return ER_BUS_BAD_SIGNATURE;
+            }
+            if (variantSignature[1] == '{')
+            {
+                if (strlen(variantSignature) < 3)
+                {
+                    return ER_BUS_BAD_SIGNATURE;
+                }
+
+                return GetMapFromVariant(argument, variantSignature[2], value);
+            }
+            else
+            {
+                return GetVariantArg<Windows::Foundation::Collections::IVector<Platform::Object^>^>(argument, "av", value);
+            }
+        }
+
+        return ER_BUS_BAD_SIGNATURE;
+    }
+
+    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Out_ Platform::Object^* value)
+    {
+        UNREFERENCED_PARAMETER(signature);
+
+        alljoyn_msgarg variantArg;
+        RETURN_IF_QSTATUS_ERROR(alljoyn_msgarg_get(argument, "v", &variantArg));
+        return GetValueFromVariant(variantArg, value);
     }
 };

@@ -12,6 +12,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Windows.Devices.Enumeration;
 using Windows.Devices.PointOfService;
 using System;
 using System.Text;
@@ -50,14 +51,24 @@ namespace BarcodeScannerSample
             if (scanner == null)
             {
                 rootPage.NotifyUser("Creating barcode scanner object.", NotifyType.StatusMessage);
-                scanner = await BarcodeScanner.GetDefaultAsync();
+                DeviceInformationCollection deviceCollection = await DeviceInformation.FindAllAsync(BarcodeScanner.GetDeviceSelector());
+                if (deviceCollection != null && deviceCollection.Count > 0)
+                {
+                    scanner = await BarcodeScanner.FromIdAsync(deviceCollection[0].Id);
 
-                if (scanner == null)
+                    if (scanner == null)
+                    {
+                        rootPage.NotifyUser("Failed to create barcode scanner object.", NotifyType.ErrorMessage);
+                        return false;
+                    }
+                }
+                else
                 {
                     rootPage.NotifyUser("Barcode scanner not found. Please connect a barcode scanner.", NotifyType.ErrorMessage);
                     return false;
                 }
             }
+
             return true;
         }
 

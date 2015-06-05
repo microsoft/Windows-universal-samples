@@ -108,11 +108,17 @@ namespace BasicMediaCasting
 
         private async void Watcher_Removed(DeviceWatcher sender, DeviceInformationUpdate args)
         {
-            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 //Remove any removed devices from our listbox
-                CastingDevice addedDevice = await CastingDevice.FromIdAsync(args.Id);
-                castingDevicesList.Items.Remove(addedDevice);
+                foreach (CastingDevice currentDevice in castingDevicesList.Items)
+                {
+                    if (currentDevice.Id == args.Id)
+                    {
+                        castingDevicesList.Items.Remove(currentDevice);
+                        break;
+                    }
+                }
             });
         }
 

@@ -43,6 +43,7 @@ namespace CredentialPicker
             Username.Text = res.CredentialUserName;
             Password.Text = res.CredentialPassword;
             CredentialSaved.Text = (res.CredentialSaved ? "true" : "false");
+            CheckboxState = rootPage.FindName("CheckboxState") as TextBox;
             switch (res.CredentialSaveOption)
             {
                 case CredentialSaveOption.Hidden:

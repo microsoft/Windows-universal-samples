@@ -100,7 +100,6 @@
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundlePlatforms>arm</AppxBundlePlatforms>
     <PackageCertificateThumbprint>C469175B7B5B7E6A1CA401046C94FA2BA4BCD1B6</PackageCertificateThumbprint>
-    <PackageCertificateKeyFile>WASAPIAudio_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

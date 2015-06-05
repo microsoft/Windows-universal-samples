@@ -9,6 +9,7 @@
 //
 //*********************************************************
 
+
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
@@ -25,6 +26,8 @@ namespace SDKTemplate
         {
 			new Scenario() { Title = "Mobile Broadband Device", ClassType = typeof(MobileBroadband.BroadbandDevice) },
 			new Scenario() { Title = "Network Account Watcher", ClassType = typeof(MobileBroadband.AccountWatcher) },
+			new Scenario() { Title = "Connection UI", ClassType = typeof(MobileBroadband.ShowConnection) },
+			new Scenario() { Title = "Get Connection Profiles", ClassType = typeof(MobileBroadband.GetConnectionProfiles) },
             new Scenario() { Title = "Modem information (New)", ClassType = typeof(MobileBroadband.ModemInformation) },
             new Scenario() { Title = "Device Services (New)", ClassType = typeof(MobileBroadband.ModemDeviceServices) },
             new Scenario() { Title = "SIM Card (New)", ClassType = typeof(MobileBroadband.SimCard) },

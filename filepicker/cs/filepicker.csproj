@@ -7,7 +7,7 @@
     <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SDKTemplate</RootNamespace>
+    <RootNamespace>FilePicker</RootNamespace>
     <AssemblyName>FilePicker</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
@@ -108,6 +108,12 @@
     <Compile Include="Scenario4_SaveFile.xaml.cs">
       <DependentUpon>Scenario4_SaveFile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario5_OpenCachedFile.xaml.cs">
+      <DependentUpon>Scenario5_OpenCachedFile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario6_SaveCachedFile.xaml.cs">
+      <DependentUpon>Scenario6_SaveCachedFile.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -136,6 +142,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Scenario4_SaveFile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario5_OpenCachedFile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario6_SaveCachedFile.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

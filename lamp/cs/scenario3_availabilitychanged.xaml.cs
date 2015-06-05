@@ -68,17 +68,17 @@ namespace Lamp
 
                 if (lamp == null)
                 {
-                    await LogStatusAync("Error: No lamp device was found", NotifyType.ErrorMessage);
+                    await LogStatusAsync("Error: No lamp device was found", NotifyType.ErrorMessage);
                     lampToggle.IsEnabled = false;
                     return;
                 }
 
-                await LogStatusAync(string.Format(CultureInfo.InvariantCulture, "Default lamp instance acquired, Device Id: {0}", lamp.DeviceId) , NotifyType.StatusMessage);
+                await LogStatusAsync(string.Format(CultureInfo.InvariantCulture, "Default lamp instance acquired, Device Id: {0}", lamp.DeviceId) , NotifyType.StatusMessage);
                 lampToggle.IsEnabled = true;
             }
             catch (Exception eX)
             {
-                await LogStatusAync(eX.Message, NotifyType.ErrorMessage);
+                await LogStatusAsync(eX.Message, NotifyType.ErrorMessage);
             }
         }
 
@@ -120,12 +120,12 @@ namespace Lamp
         {
             if (lamp == null)
             {
-                await LogStatusAync("Error: No lamp device was found", NotifyType.ErrorMessage);
+                await LogStatusAsync("Error: No lamp device was found", NotifyType.ErrorMessage);
                 return;
             }
 
             lamp.AvailabilityChanged += Lamp_AvailabilityChanged;
-            await LogStatusAync("Registered for Lamp Availability Changed Notification", NotifyType.StatusMessage);
+            await LogStatusAsync("Registered for Lamp Availability Changed Notification", NotifyType.StatusMessage);
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace Lamp
                 lampToggle.IsEnabled = args.IsAvailable;
             });
 
-            await LogStatusAync(string.Format(CultureInfo.InvariantCulture,"Lamp Availability Changed Notification has fired, IsAvailable= {0}", args.IsAvailable), NotifyType.StatusMessage);
+            await LogStatusAsync(string.Format(CultureInfo.InvariantCulture,"Lamp Availability Changed Notification has fired, IsAvailable= {0}", args.IsAvailable), NotifyType.StatusMessage);
         }
 
         /// <summary>
@@ -159,12 +159,12 @@ namespace Lamp
         {
             if (lamp == null)
             {
-                await LogStatusAync("Error: No lamp device was found", NotifyType.ErrorMessage);
+                await LogStatusAsync("Error: No lamp device was found", NotifyType.ErrorMessage);
                 return;
             }
 
             lamp.AvailabilityChanged -= Lamp_AvailabilityChanged;
-            await LogStatusAync("Unregistered for Lamp Availability Changed Notification", NotifyType.StatusMessage);
+            await LogStatusAsync("Unregistered for Lamp Availability Changed Notification", NotifyType.StatusMessage);
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace Lamp
         {
             if (lamp == null)
             {
-                await LogStatusAync("Error: No lamp device was found", NotifyType.ErrorMessage);
+                await LogStatusAsync("Error: No lamp device was found", NotifyType.ErrorMessage);
                 return;
             }
 
@@ -187,12 +187,12 @@ namespace Lamp
                 if (toggleSwitch.IsOn)
                 {
                     lamp.IsEnabled = true;
-                    await LogStatusAync("Lamp is Enabled", NotifyType.StatusMessage);
+                    await LogStatusAsync("Lamp is Enabled", NotifyType.StatusMessage);
                 }
                 else
                 {
                     lamp.IsEnabled = false;
-                    await LogStatusAync("Lamp is Disabled", NotifyType.StatusMessage);
+                    await LogStatusAsync("Lamp is Disabled", NotifyType.StatusMessage);
                 }
             }
         }
@@ -217,7 +217,7 @@ namespace Lamp
         /// </summary>
         /// <param name="message">Message to log</param>
         /// <param name="type">Status notification type</param>
-        private async Task LogStatusAync(string message, NotifyType type)
+        private async Task LogStatusAsync(string message, NotifyType type)
         {
             await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {

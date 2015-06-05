@@ -36,6 +36,10 @@
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Language: " Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cbLanguageSelection" SelectionChanged="cbLanguageSelection_SelectionChanged" Margin="10" Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
                         <Button x:Name="btnContinuousRecognize" Click="ContinuousRecognize_Click" IsEnabled="False" Margin="0,10,0,0">
                             <StackPanel Orientation="Horizontal">
                                 <SymbolIcon Symbol="Microphone"/>
@@ -47,6 +51,7 @@
                     <TextBlock Margin="0,14.5,0,0" Text="Tap the microphone, and speak. This scenario provides continuous, multi-sentence dictation with progressing hypothesis." TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"/>
                     <TextBlock Margin="0,14.5,0,0" Text="Message Dictation" TextWrapping="Wrap" Style="{StaticResource SubheaderTextBlockStyle}" />
                     <TextBox x:Name="dictationTextBox" Margin="0,14.5,0,0" IsReadOnly="True" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="120" TextChanged="dictationTextBox_TextChanged"/>
+                    <TextBlock x:Name="hlOpenPrivacySettings" Visibility="Collapsed" TextWrapping="WrapWholeWords">The speech recognition privacy settings have not been accepted. <Hyperlink Click="openPrivacySettings_Click">Open Privacy Settings</Hyperlink> to review the privacy policy and enable personalization.</TextBlock>
                 </StackPanel>
             </ScrollViewer>
 

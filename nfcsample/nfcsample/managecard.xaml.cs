@@ -79,6 +79,9 @@ namespace NfcSample
 
             // Register the background task which gets launched when our registration state changes (for example the user changes which card is the payment default in the control panel, or another app causes us to be disabled due to an AID conflict)
             await NfcUtils.GetOrRegisterHceBackgroundTask("NFC HCE Sample - Registration Changed", "NfcHceBackgroundTask.BgTask", SmartCardTriggerType.EmulatorAppletIdGroupRegistrationChanged);
+
+            // TODO: Remove
+            await NfcUtils.GetOrRegisterHceBackgroundTask("NFC HCE Sample - Registration Changed", "NfcHceBackgroundTask.BgTask", SmartCardTriggerType.EmulatorTransaction);
         }
 
         private async void btnRegisterSamplePaymentCard_Click(object sender, RoutedEventArgs e)

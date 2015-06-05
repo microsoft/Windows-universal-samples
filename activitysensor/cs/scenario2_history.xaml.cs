@@ -56,20 +56,27 @@ namespace ActivitySensorCS
             var yesterday = calendar.GetDateTime();
 
             // Get history from yesterday onwards
-            var history = await ActivitySensor.GetSystemHistoryAsync(yesterday);
-
-            ScenarioOutput_Count.Text = history.Count.ToString();
-            if (history.Count > 0)
+            try
             {
-                var reading1 = history[0];
-                ScenarioOutput_Activity1.Text = reading1.Activity.ToString();
-                ScenarioOutput_Confidence1.Text = reading1.Confidence.ToString();
-                ScenarioOutput_Timestamp1.Text = reading1.Timestamp.ToString("u");
+                var history = await ActivitySensor.GetSystemHistoryAsync(yesterday);
 
-                var readingN = history[history.Count - 1];
-                ScenarioOutput_ActivityN.Text = readingN.Activity.ToString();
-                ScenarioOutput_ConfidenceN.Text = readingN.Confidence.ToString();
-                ScenarioOutput_TimestampN.Text = readingN.Timestamp.ToString("u");
+                ScenarioOutput_Count.Text = history.Count.ToString();
+                if (history.Count > 0)
+                {
+                    var reading1 = history[0];
+                    ScenarioOutput_Activity1.Text = reading1.Activity.ToString();
+                    ScenarioOutput_Confidence1.Text = reading1.Confidence.ToString();
+                    ScenarioOutput_Timestamp1.Text = reading1.Timestamp.ToString("u");
+
+                    var readingN = history[history.Count - 1];
+                    ScenarioOutput_ActivityN.Text = readingN.Activity.ToString();
+                    ScenarioOutput_ConfidenceN.Text = readingN.Confidence.ToString();
+                    ScenarioOutput_TimestampN.Text = readingN.Timestamp.ToString("u");
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                rootPage.NotifyUser("User has denied access to activity history", NotifyType.ErrorMessage);
             }
         }
     }

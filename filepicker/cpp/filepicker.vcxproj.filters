@@ -21,6 +21,8 @@
     <ClCompile Include="Scenario2_MultiFile.xaml.cpp" />
     <ClCompile Include="Scenario3_SingleFolder.xaml.cpp" />
     <ClCompile Include="Scenario4_SaveFile.xaml.cpp" />
+    <ClCompile Include="Scenario5_OpenCachedFile.xaml.cpp" />
+    <ClCompile Include="Scenario6_SaveCachedFile.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -31,6 +33,8 @@
     <ClInclude Include="Scenario2_MultiFile.xaml.h" />
     <ClInclude Include="Scenario3_SingleFolder.xaml.h" />
     <ClInclude Include="Scenario4_SaveFile.xaml.h" />
+    <ClInclude Include="Scenario5_OpenCachedFile.xaml.h" />
+    <ClInclude Include="Scenario6_SaveCachedFile.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -44,6 +48,8 @@
     <Page Include="Scenario2_MultiFile.xaml" />
     <Page Include="Scenario3_SingleFolder.xaml" />
     <Page Include="Scenario4_SaveFile.xaml" />
+    <Page Include="Scenario5_OpenCachedFile.xaml" />
+    <Page Include="Scenario6_SaveCachedFile.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\smallTile-sdk.png">

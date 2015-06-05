@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Data Read/Write from stream scenario</title>
+    <script src="/js/scenario1_WriteReadStream.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            The sample code creates a memory-backed stream and then uses it to store the following strings via a DataWriter
+            object. Once this operation completes a DataReader object is used to extract the stored strings from the stream
+            and display them.
+        </p>
+        <!-- Scenario 1 Input -->
+        <div class="item" id="scenario1Input">
+            <p id="ElementsToSend"></p>
+            <button id="SendButton" class="action">Copy strings</button>
+        </div>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <div id="output" role="region" aria-labelledby="outputLabel" aria-live="assertive">
+            <div id="statusMessage"></div>
+            <!-- Scenario 1 Output -->
+            <div class="item" id="scenario1Output"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -77,76 +77,83 @@ namespace PedometerCS
             // Disable subsequent history retrieval while the async operation is in progress
             GetHistory.IsEnabled = false;
 
-            // clear previous records
+            // clear previous content being displayed
             historyRecords.Clear();
 
-            if (getAllHistory)
+            try
             {
-                DateTime dt = DateTime.FromFileTimeUtc(0);
-                DateTimeOffset fromBeginning = new DateTimeOffset(dt);
-                rootPage.NotifyUser("Retrieving all available History", NotifyType.StatusMessage);
-                historyReadings = await Pedometer.GetSystemHistoryAsync(fromBeginning);
-            }
-            else
-            {
-                String notificationString = "Retrieving history from: ";
-                Calendar calendar = new Calendar();
-                calendar.ChangeClock("24HourClock");
-
-                // DateTime picker will also include hour, minute and seconds from the the system time.
-                // Decrement the same to be able to correctly add TimePicker values.
-
-                calendar.SetDateTime(FromDate.Date);
-                calendar.AddNanoseconds(-calendar.Nanosecond);
-                calendar.AddSeconds(-calendar.Second);
-                calendar.AddMinutes(-calendar.Minute);
-                calendar.AddHours(-calendar.Hour);
-                calendar.AddSeconds(Convert.ToInt32(FromTime.Time.TotalSeconds));
-
-                DateTimeOffset fromTime = calendar.GetDateTime();
-
-
-                calendar.SetDateTime(ToDate.Date);
-                calendar.AddNanoseconds(-calendar.Nanosecond);
-                calendar.AddSeconds(-calendar.Second);
-                calendar.AddMinutes(-calendar.Minute);
-                calendar.AddHours(-calendar.Hour);
-                calendar.AddSeconds(Convert.ToInt32(ToTime.Time.TotalSeconds));
-
-                DateTimeOffset toTime = calendar.GetDateTime();
-
-                notificationString += timestampFormatter.Format(fromTime);
-                notificationString += " To ";
-                notificationString += timestampFormatter.Format(toTime);
-
-                if (toTime.ToFileTime() < fromTime.ToFileTime())
+                if (getAllHistory)
                 {
-                    rootPage.NotifyUser("Invalid time span. 'To Time' must be equal or more than 'From Time'", NotifyType.ErrorMessage);
-
-                    // Enable subsequent history retrieval while the async operation is in progress
-                    GetHistory.IsEnabled = true;
+                    DateTime dt = DateTime.FromFileTimeUtc(0);
+                    DateTimeOffset fromBeginning = new DateTimeOffset(dt);
+                    rootPage.NotifyUser("Retrieving all available History", NotifyType.StatusMessage);
+                    historyReadings = await Pedometer.GetSystemHistoryAsync(fromBeginning);
                 }
                 else
                 {
-                    TimeSpan span;
-                    span = TimeSpan.FromTicks(toTime.Ticks - fromTime.Ticks);
-                    rootPage.NotifyUser(notificationString, NotifyType.StatusMessage);
-                    historyReadings = await Pedometer.GetSystemHistoryAsync(fromTime, span);
-                }
-            }
+                    String notificationString = "Retrieving history from: ";
+                    Calendar calendar = new Calendar();
+                    calendar.ChangeClock("24HourClock");
 
-            if (historyReadings != null)
-            {
-                foreach(PedometerReading reading in historyReadings)
+                    // DateTime picker will also include hour, minute and seconds from the the system time.
+                    // Decrement the same to be able to correctly add TimePicker values.
+
+                    calendar.SetDateTime(FromDate.Date);
+                    calendar.AddNanoseconds(-calendar.Nanosecond);
+                    calendar.AddSeconds(-calendar.Second);
+                    calendar.AddMinutes(-calendar.Minute);
+                    calendar.AddHours(-calendar.Hour);
+                    calendar.AddSeconds(Convert.ToInt32(FromTime.Time.TotalSeconds));
+
+                    DateTimeOffset fromTime = calendar.GetDateTime();
+
+                    calendar.SetDateTime(ToDate.Date);
+                    calendar.AddNanoseconds(-calendar.Nanosecond);
+                    calendar.AddSeconds(-calendar.Second);
+                    calendar.AddMinutes(-calendar.Minute);
+                    calendar.AddHours(-calendar.Hour);
+                    calendar.AddSeconds(Convert.ToInt32(ToTime.Time.TotalSeconds));
+
+                    DateTimeOffset toTime = calendar.GetDateTime();
+
+                    notificationString += timestampFormatter.Format(fromTime);
+                    notificationString += " To ";
+                    notificationString += timestampFormatter.Format(toTime);
+
+                    if (toTime.ToFileTime() < fromTime.ToFileTime())
+                    {
+                        rootPage.NotifyUser("Invalid time span. 'To Time' must be equal or more than 'From Time'", NotifyType.ErrorMessage);
+
+                        // Enable subsequent history retrieval while the async operation is in progress
+                        GetHistory.IsEnabled = true;
+                    }
+                    else
+                    {
+                        TimeSpan span;
+                        span = TimeSpan.FromTicks(toTime.Ticks - fromTime.Ticks);
+                        rootPage.NotifyUser(notificationString, NotifyType.StatusMessage);
+                        historyReadings = await Pedometer.GetSystemHistoryAsync(fromTime, span);
+                    }
+                }
+
+                if (historyReadings != null)
                 {
-                    HistoryRecord record = new HistoryRecord(reading);
-                    historyRecords.Add(record);
-                }
+                    foreach(PedometerReading reading in historyReadings)
+                    {
+                        HistoryRecord record = new HistoryRecord(reading);
+                        historyRecords.Add(record);
+                    }
 
-                // Finally Enable the 
-                GetHistory.IsEnabled = true;
-                rootPage.NotifyUser("History retrieval completed", NotifyType.StatusMessage);
+                    rootPage.NotifyUser("History retrieval completed", NotifyType.StatusMessage);
+                }
             }
+            catch (UnauthorizedAccessException)
+            {
+                rootPage.NotifyUser("User has denied access to activity history", NotifyType.ErrorMessage);
+            }
+
+            // Finally, re-enable history retrieval
+            GetHistory.IsEnabled = true;
         }
 
         private ObservableCollection<HistoryRecord> historyRecords;
@@ -185,7 +192,7 @@ namespace PedometerCS
                         stepString = "Running";
                         break;
                     default:
-                        stepString = "Invalid Stepy Kind";
+                        stepString = "Invalid Step Kind";
                         break;
                 }
                 return stepString;

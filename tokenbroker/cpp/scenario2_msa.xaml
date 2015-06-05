@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario illustrates the use of WebAccountManager's RequestTokenAsync API to get a token for an MSA Account."/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario illustrates the use of Token Broker's RequestTokenAsync API to get a token for an MSA Account."/>
             </StackPanel>
             <Grid Grid.Row="1">
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">

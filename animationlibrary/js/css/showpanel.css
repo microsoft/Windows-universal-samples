@@ -7,15 +7,8 @@
     height: 100%;
     color: white;
     background-color: #323232;
-    visibility: hidden;
+    opacity: 0;
     z-index: 1;
-}
-
-@media screen and (max-device-width: 768px) {
-    #myPanel
-    {
-        width: 100px;
-    }
 }
 
 #myPanel p

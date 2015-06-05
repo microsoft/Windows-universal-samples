@@ -33,10 +33,14 @@
                 </TextBlock>
             </StackPanel>
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-                <StackPanel Orientation="Vertical">
-                    <TextBox x:Name="SendMessageTextBox" Margin="5" TextWrapping="Wrap" />
-                    <Button x:Name="SendButton" Content="Send" Click="SendButton_Click" Margin="5"/>
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" x:Name="SendMessageTextBox" Margin="5"/>
+                    <Button Grid.Column="1" x:Name="SendButton" Content="Send" Click="SendButton_Click" Margin="5"/>
+                </Grid>
             </ScrollViewer>
 
             <!-- Status Block for providing messages to the user.  Use the

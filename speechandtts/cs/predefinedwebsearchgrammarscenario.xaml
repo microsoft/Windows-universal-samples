@@ -35,21 +35,28 @@
 
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel>
-                    <Button x:Name="btnRecognizeWithUI" Click="RecognizeWithUIWebSearchGrammar_Click" IsEnabled="False">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="Microphone"/>
-                            <TextBlock Text=" with UI"/>
-                        </StackPanel>
-                    </Button>
-                    <Button x:Name="btnRecognizeWithoutUI" Click="RecognizeWithoutUIWebSearchGrammar_Click" IsEnabled="False" Margin="0,10,0,0">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="Microphone"/>
-                            <TextBlock x:Name="listenWithoutUIButtonText" Text=" without UI" />
-                        </StackPanel>
-                    </Button>
-                    <TextBlock Margin="0,14.5,0,0" Text="Tap the microphone and speak. This example uses a predefined web search grammar constraint, so you can speak web search keywords. A privacy statement prompt may be shown." TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Language: " Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cbLanguageSelection" SelectionChanged="cbLanguageSelection_SelectionChanged"  Margin="10" Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btnRecognizeWithUI" Click="RecognizeWithUIWebSearchGrammar_Click" IsEnabled="False" Margin="10,10,0,10">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Microphone"/>
+                                <TextBlock Text=" with UI"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="btnRecognizeWithoutUI" Click="RecognizeWithoutUIWebSearchGrammar_Click" IsEnabled="False" Margin="10,10,0,10">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Microphone"/>
+                                <TextBlock x:Name="listenWithoutUIButtonText" Text=" without UI" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <TextBlock Margin="0,14.5,0,0" Text="Tap the microphone and speak. This example uses a predefined web search grammar constraint, so you can speak web search keywords." TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"/>
                     <TextBlock x:Name="heardYouSayTextBlock" Margin="0,14.5,0,0" Text="Heard you say" Visibility="Collapsed" TextWrapping="Wrap" Style="{StaticResource SubheaderTextBlockStyle}"/>
                     <TextBlock x:Name="resultTextBlock" Margin="0,14.5,0,0" Visibility="Collapsed" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"/>
+                    <TextBlock x:Name="hlOpenPrivacySettings" Visibility="Collapsed" TextWrapping="WrapWholeWords" Margin="0,10,0,0">The speech recognition privacy settings have not been accepted. <Hyperlink Click="openPrivacySettings_Click">Open Privacy Settings</Hyperlink> to review the privacy policy and enable personalization.</TextBlock>
                 </StackPanel>
             </ScrollViewer>
 

@@ -5,6 +5,7 @@
 #include <sstream>
 
 using namespace SDKTemplate;
+using namespace AnimationMetrics;
 
 using namespace Platform;
 using namespace Windows::Foundation;
@@ -17,6 +18,8 @@ using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::UI::Core::AnimationMetrics;
+
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 Scenario1_Metrics::Scenario1_Metrics() : rootPage(MainPage::Current)
 {

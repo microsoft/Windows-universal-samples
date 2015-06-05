@@ -3,7 +3,7 @@
 (function () {
     "use strict";
 
-    importScripts("//Microsoft.WinJS.2.0/js/base.js");
+    importScripts("//Microsoft.WinJS.4.0/js/base.js");
     importScripts("//microsoft.sdksamples.customusbdeviceaccess.js/js/constants.js");
 
     // This var is used to get information about the current instance of the background task.

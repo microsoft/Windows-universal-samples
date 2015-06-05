@@ -23,6 +23,20 @@
             larger distances. This is because all reposition animations have the same duration.
         </p>
 
+        <h3>Reposition elements:</h3>
+        <input id="repositionControl" class="action" type="range" min="0" max="500" value="0"
+                step="any" list="ticks" aria-labelledby="rangeLabel" />
+
+        <datalist id="ticks">
+            <option value="0" />
+            <option value="100" />
+            <option value="200" />
+            <option value="300" />
+            <option value="400" />
+            <option value="500" />
+        </datalist>
+    </div>
+    <div id="output">
         <p>
             Reposition animates only the elements that change position in a layout. Depending
             on the layout, there may be times when a non-animated element is adjacent to an
@@ -32,20 +46,6 @@
             how other animations in your layout can affect your application's experience.
         </p>
 
-        <h3>Reposition elements:</h3>
-        <input id="repositionControl" class="action" type="range" min="0" max="500" value="0"
-                step="any" list="ticks" aria-labelledby="rangeLabel" />
-
-        <datalist id="ticks">
-            <option value="0" />
-            <option value="50" />
-            <option value="100" />
-            <option value="150" />
-            <option value="200" />
-            <option value="250" />
-        </datalist>
-    </div>
-    <div id="output">
         <div id="spacingDiv"></div>
         <div id="target1" class="target"></div>
         <div id="target2" class="target"></div>

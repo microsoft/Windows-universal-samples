@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/stream.css" />
+    <script src="/js/stream.js"></script>
+    <script src="/js/compression.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>This sample demonstrates how to:</p> 
+        <p>Choose a sample file using the file picker (This file will be used to demonstrate compression/decompression).</p>
+        <p>Read the data from the chosen file, compress it using a compression algorithm of your choice, and write this compressed data to a new file in the temporary app data store.</p>
+        <p>Read the compressed data from a file and decompress it to yet another new file.</p>
+        <br />
+        <p>Compression Algorithms:</p>
+        <p>DEFAULT: No compression algorithms explicitly specified. Xpress is used by default.</p>
+        <p>XPRESS: Compression ratio is fair. Fastest compression and decompression speeds. Low memory requirement.</p>
+        <p>MSZIP: Compression ratio is high. Normal compression speed and fast decompression speed. Low memory requirement.</p>
+        <button id="DefaultButton">DEFAULT (XPRESS)</button>
+        <button id="XpressButton">XPRESS</button>
+        <button id="XpressHuffButton">XPRESSHUFF</button>
+        <button id="MszipButton">MSZIP</button>
+        <button id="LzmsButton">LZMS</button>
+        <br /><br />
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <div id="scenarioProgress" />
+    </div>
+</body>
+</html>
