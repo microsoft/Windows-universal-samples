@@ -4,6 +4,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="using:NavigationMenuSample"
       xmlns:controls="using:NavigationMenuSample.Controls"
+      xmlns:cnv="using:NavigationMenuSample.Converters"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -77,8 +78,7 @@
                         <Button x:Name="BackButton"
                                 TabIndex="2"
                                 Style="{StaticResource NavigationBackButtonStyle}"
-                                IsEnabled="{Binding AppFrame.CanGoBack, ElementName=Root}"
-                                Width="{Binding ItemsPanelRoot.Width, ElementName=NavMenuList}"
+                                IsEnabled="{x:Bind AppFrame.CanGoBack, Mode=OneWay}"
                                 HorizontalAlignment="{Binding ItemsPanelRoot.HorizontalAlignment, ElementName=NavMenuList}"
                                 Click="BackButton_Click"/>
                     </controls:NavMenuListView.Header>

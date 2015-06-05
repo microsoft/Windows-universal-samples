@@ -9,23 +9,20 @@
 //
 //*********************************************************
 
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
+#pragma once
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+#include "Scenario1_AppBarButtons.g.h"
+#include "MainPage.xaml.h"
 
 namespace Commanding
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Scenario1 : Page
+    [Windows::Foundation::Metadata::WebHostHidden]
+    public ref class Scenario1_AppBarButtons sealed
     {
-        public Scenario1()
-        {
-            this.InitializeComponent();
-        }
-    }
+    public:
+        Scenario1_AppBarButtons();
+    };
 }
