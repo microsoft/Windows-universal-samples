@@ -12,7 +12,6 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using FilePicker;
 
 namespace SDKTemplate
 {
@@ -22,12 +21,10 @@ namespace SDKTemplate
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title = "Pick a single photo",   ClassType = typeof(FilePicker.Scenario1) },
-            new Scenario() { Title = "Pick multiple files",   ClassType = typeof(FilePicker.Scenario2) },
-            new Scenario() { Title = "Pick a folder",         ClassType = typeof(FilePicker.Scenario3) },
-            new Scenario() { Title = "Save a file",           ClassType = typeof(FilePicker.Scenario4) },
-            new Scenario() { Title = "Open a cached file",    ClassType = typeof(FilePicker.Scenario5) },
-            new Scenario() { Title = "Update a cached file",  ClassType = typeof(FilePicker.Scenario6) },
+            new Scenario() { Title = "Pick a single photo",   ClassType = typeof(Scenario1) },
+            new Scenario() { Title = "Pick multiple files",   ClassType = typeof(Scenario2) },
+            new Scenario() { Title = "Pick a folder",         ClassType = typeof(Scenario3) },
+            new Scenario() { Title = "Save a file",           ClassType = typeof(Scenario4) },
         };
     }
 

@@ -5,7 +5,7 @@
 #include "Scenario1_Metrics.g.h"
 #include "MainPage.xaml.h"
 
-namespace AnimationMetrics
+namespace SDKTemplate
 {
     /// <summary>
     /// Display animation metrics.
@@ -16,7 +16,7 @@ namespace AnimationMetrics
     public:
         Scenario1_Metrics();
     private:
-        SDKTemplate::MainPage^ rootPage;
+        MainPage^ rootPage;
         void DisplayMetrics(Windows::UI::Core::AnimationMetrics::AnimationEffect effect, Windows::UI::Core::AnimationMetrics::AnimationEffectTarget target);
         void Animations_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
     };
