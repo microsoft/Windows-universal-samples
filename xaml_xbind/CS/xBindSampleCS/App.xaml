@@ -1,0 +1,70 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the Microsoft Public License.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Application
+    x:Class="SDKTemplate.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:model="using:xBindSampleModel"
+    RequestedTheme="Dark">
+
+    <Application.Resources>
+        <!-- Application-specific resources -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <!-- 
+                    Styles that define common aspects of the platform look and feel
+                    Required by Visual Studio project and item templates
+                 -->
+                <ResourceDictionary Source="/Styles/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <model:DoubleToIntConverter x:Key="DoubleToInt"/>
+            <model:IntToDoubleConverter x:Key="IntToDouble"/>
+            <model:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
+            <model:ColorToStringConverter x:Key="ColorToStringConverter"/>
+
+            <Style TargetType="TextBlock" x:Key="Section">
+                <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="Margin" Value="0,10,0,0" />
+            </Style>
+
+            <Style TargetType="TextBlock" x:Key="Note" BasedOn="{StaticResource BodyTextBlockStyle}">
+                <Setter Property="FontStyle" Value="Italic" />
+                <Setter Property="Foreground" Value="LightGray" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="Margin" Value="0,5,0,5" />
+            </Style>
+
+            <Style TargetType="TextBlock" >
+                <Setter Property="Margin" Value="10,0,0,0" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+
+            <Style TargetType="Slider">
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="Width" Value="250" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="0,0,5,0" />
+            </Style>
+        </ResourceDictionary>
+
+
+    </Application.Resources>
+
+</Application>
