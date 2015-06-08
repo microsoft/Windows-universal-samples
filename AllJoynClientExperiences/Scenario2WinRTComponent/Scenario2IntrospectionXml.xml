@@ -1,0 +1,27 @@
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.allseenalliance.org/schemas/introspect.xsd"> 
+   <interface name="org.alljoyn.Onboarding">
+      <annotation name="org.alljoyn.Bus.Secure" value="true"/>
+      <property name="Version" type="q" access="read"/> 
+      <property name="State" type="n" access="read"/> 
+      <property name="LastError" type="(ns)" access="read"/> 
+      <method name="ConfigureWifi"> 
+         <arg name="SSID" type="s" direction="in"/> 
+         <arg name="passphrase" type="s" direction="in"/> 
+         <arg name="authType" type="n" direction="in"/> 
+         <arg name="status" type="n" direction="out"/> 
+      </method> 
+      <method name="Connect"> 
+         <annotation name="org.freedesktop.DBus.Method.NoReply" value="true" /> 
+      </method> 
+      <method name="Offboard"> 
+         <annotation name="org.freedesktop.DBus.Method.NoReply" value="true" /> 
+      </method> 
+      <method name="GetScanInfo"> 
+         <arg name="age" type="q" direction="out"/> 
+         <arg name="scanList" type="a(sn)" direction="out"/> 
+      </method> 
+      <signal name="ConnectionResult"> 
+         <arg type="(ns)" /> 
+      </signal> 
+   </interface> 
+</node> 

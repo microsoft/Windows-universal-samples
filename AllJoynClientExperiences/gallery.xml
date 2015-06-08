@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gallery_sample>
+  <title>AllJoyn Client Experiences</title>
+  <!-- See/use the readme.md file for sample descriptions. -->
+
+  <!-- List the component compcentral path-->
+  <!--    For example:  CORE-OS Core\DEP-Developer Ecosystem Platform\DART-Developer Tools and Runtimes\Tools\SDK -->
+  <!-- Allowed lang values are: JS, CS, VB, CPP -->
+  <!--    If you own all languages, you may leave the lang attribute blank -->
+  <!--    If you own a subset of languages, you may enter a comma delimited list: eg CS,CPP -->
+  <feature_teams>
+    <feature_team_info lang="CS" comp_central_path="CORE-OS Core\SNaP-Storage, Networking and Peripherals\Peripherals\SCP\AllJoyn" dev_owner="rajatras" pm_owner="brock" writer_owner="ivorb" />
+  </feature_teams>
+</gallery_sample>
