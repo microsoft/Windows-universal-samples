@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>33137152-423e-4a4f-8f69-a3e88d60ed64</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="AllJoynBusObjectManager.cpp" />
+    <ClCompile Include="AllJoynHelpers.cpp" />
+    <ClCompile Include="OnboardingConsumer.cpp" />
+    <ClCompile Include="OnboardingProducer.cpp" />
+    <ClCompile Include="OnboardingServiceEventAdapter.cpp" />
+    <ClCompile Include="OnboardingServiceEventArgs.cpp" />
+    <ClCompile Include="OnboardingSignals.cpp" />
+    <ClCompile Include="OnboardingWatcher.cpp" />
+    <ClCompile Include="TypeConversionHelpers.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="AllJoynBusObjectManager.h" />
+    <ClInclude Include="AllJoynHelpers.h" />
+    <ClInclude Include="IOnboardingService.h" />
+    <ClInclude Include="OnboardingConsumer.h" />
+    <ClInclude Include="OnboardingEventArgs.h" />
+    <ClInclude Include="OnboardingMethodResults.h" />
+    <ClInclude Include="OnboardingProducer.h" />
+    <ClInclude Include="OnboardingServiceEventAdapter.h" />
+    <ClInclude Include="OnboardingServiceEventArgs.h" />
+    <ClInclude Include="OnboardingSignals.h" />
+    <ClInclude Include="OnboardingStructures.h" />
+    <ClInclude Include="OnboardingWatcher.h" />
+    <ClInclude Include="TypeConversionHelpers.h" />
+  </ItemGroup>
+</Project>
