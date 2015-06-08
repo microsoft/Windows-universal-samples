@@ -35,6 +35,12 @@ namespace SpeechAndTTS
         // The speech recognizer used throughout this sample.
         private SpeechRecognizer speechRecognizer;
 
+        /// <summary>
+        /// the HResult 0x8004503a typically represents the case where a recognizer for a particular language cannot
+        /// be found. This may occur if the language is installed, but the speech pack for that language is not.
+        /// See Settings -> Time & Language -> Region & Language -> *Language* -> Options -> Speech Language Options.
+        /// </summary>
+        private static uint HResultRecognizerNotFound = 0x8004503a;
 
         private ResourceContext speechContext;
         private ResourceMap speechResourceMap;
@@ -94,6 +100,9 @@ namespace SpeechAndTTS
         /// </summary>
         private void PopulateLanguageDropdown()
         {
+            // disable the callback so we don't accidentally trigger initialization of the recognizer
+            // while initialization is already in progress.
+            cbLanguageSelection.SelectionChanged -= cbLanguageSelection_SelectionChanged;
             Language defaultLanguage = SpeechRecognizer.SystemSpeechLanguage;
             IEnumerable<Language> supportedLanguages = SpeechRecognizer.SupportedGrammarLanguages;
             foreach (Language lang in supportedLanguages)
@@ -109,6 +118,8 @@ namespace SpeechAndTTS
                     cbLanguageSelection.SelectedItem = item;
                 }
             }
+            
+            cbLanguageSelection.SelectionChanged += cbLanguageSelection_SelectionChanged;
         }
 
         /// <summary>
@@ -119,27 +130,30 @@ namespace SpeechAndTTS
         /// <param name="e">Ignored</param>
         private async void cbLanguageSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ComboBoxItem item = (ComboBoxItem)(cbLanguageSelection.SelectedItem);
+            Language newLanguage = (Language)item.Tag;
             if (speechRecognizer != null)
             {
-                ComboBoxItem item = (ComboBoxItem)(cbLanguageSelection.SelectedItem);
-                Language newLanguage = (Language)item.Tag;
-                if (speechRecognizer.CurrentLanguage != newLanguage)
+                if (speechRecognizer.CurrentLanguage == newLanguage)
                 {
-                    // trigger cleanup and re-initialization of speech.
-                    try
-                    {
-                        // update the context for resource lookup
-                        speechContext.Languages = new string[] { newLanguage.LanguageTag };
-
-                        await InitializeRecognizer(newLanguage);
-                    }
-                    catch (Exception exception)
-                    {
-                        var messageDialog = new Windows.UI.Popups.MessageDialog(exception.Message, "Exception");
-                        await messageDialog.ShowAsync();
-                    }
+                    return;
                 }
             }
+
+            // trigger cleanup and re-initialization of speech.
+            try
+            {
+                // update the context for resource lookup
+                speechContext.Languages = new string[] { newLanguage.LanguageTag };
+
+                await InitializeRecognizer(newLanguage);
+            }
+            catch (Exception exception)
+            {
+                var messageDialog = new Windows.UI.Popups.MessageDialog(exception.Message, "Exception");
+                await messageDialog.ShowAsync();
+            }
+
         }
 
         /// <summary>
@@ -159,76 +173,101 @@ namespace SpeechAndTTS
                 this.speechRecognizer.Dispose();
                 this.speechRecognizer = null;
             }
-            
-            this.speechRecognizer = new SpeechRecognizer(recognizerLanguage);
 
-            // Provide feedback to the user about the state of the recognizer. This can be used to provide visual feedback in the form
-            // of an audio indicator to help the user understand whether they're being heard.
-            speechRecognizer.StateChanged += SpeechRecognizer_StateChanged;
+            try {
+                this.speechRecognizer = new SpeechRecognizer(recognizerLanguage);
 
-            // Build a command-list grammar. Commands should ideally be drawn from a resource file for localization, and 
-            // be grouped into tags for alternate forms of the same command.
-            speechRecognizer.Constraints.Add(
-                new SpeechRecognitionListConstraint(
-                    new List<string>()
-                    {
+                // Provide feedback to the user about the state of the recognizer. This can be used to provide visual feedback in the form
+                // of an audio indicator to help the user understand whether they're being heard.
+                speechRecognizer.StateChanged += SpeechRecognizer_StateChanged;
+
+                // Build a command-list grammar. Commands should ideally be drawn from a resource file for localization, and 
+                // be grouped into tags for alternate forms of the same command.
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
                         speechResourceMap.GetValue("ListGrammarGoHome", speechContext).ValueAsString
-                    }, "Home"));
-            speechRecognizer.Constraints.Add(
-                new SpeechRecognitionListConstraint(
-                    new List<string>()
-                    {
+                        }, "Home"));
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
                         speechResourceMap.GetValue("ListGrammarGoToContosoStudio", speechContext).ValueAsString
-                    }, "GoToContosoStudio"));
-            speechRecognizer.Constraints.Add(
-                new SpeechRecognitionListConstraint(
-                    new List<string>()
-                    {
+                        }, "GoToContosoStudio"));
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
                         speechResourceMap.GetValue("ListGrammarShowMessage", speechContext).ValueAsString,
                         speechResourceMap.GetValue("ListGrammarOpenMessage", speechContext).ValueAsString
-                    }, "Message"));
-            speechRecognizer.Constraints.Add(
-                new SpeechRecognitionListConstraint(
-                    new List<string>()
-                    {
+                        }, "Message"));
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
                         speechResourceMap.GetValue("ListGrammarSendEmail", speechContext).ValueAsString,
                         speechResourceMap.GetValue("ListGrammarCreateEmail", speechContext).ValueAsString
-                    }, "Email"));
-            speechRecognizer.Constraints.Add(
-                new SpeechRecognitionListConstraint(
-                    new List<string>()
-                    {
+                        }, "Email"));
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
                         speechResourceMap.GetValue("ListGrammarCallNitaFarley", speechContext).ValueAsString,
                         speechResourceMap.GetValue("ListGrammarCallNita", speechContext).ValueAsString
-                    }, "CallNita"));
-            speechRecognizer.Constraints.Add(
-                new SpeechRecognitionListConstraint(
-                    new List<string>()
-                    {
+                        }, "CallNita"));
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
                         speechResourceMap.GetValue("ListGrammarCallWayneSigmon", speechContext).ValueAsString,
                         speechResourceMap.GetValue("ListGrammarCallWayne", speechContext).ValueAsString
-                    }, "CallWayne"));
+                        }, "CallWayne"));
 
-            // Update the help text in the UI to show localized examples
-            listGrammarHelpText.Text = speechResourceMap.GetValue("ListGrammarHelpText", speechContext).ValueAsString;
+                // Update the help text in the UI to show localized examples
+                listGrammarHelpText.Text = speechResourceMap.GetValue("ListGrammarHelpText", speechContext).ValueAsString;
 
-            SpeechRecognitionCompilationResult result = await speechRecognizer.CompileConstraintsAsync();
-            if (result.Status != SpeechRecognitionResultStatus.Success)
+                SpeechRecognitionCompilationResult result = await speechRecognizer.CompileConstraintsAsync();
+                if (result.Status != SpeechRecognitionResultStatus.Success)
+                {
+                    // Disable the recognition buttons.
+                    btnContinuousRecognize.IsEnabled = false;
+
+                    // Let the user know that the grammar didn't compile properly.
+                    resultTextBlock.Visibility = Visibility.Visible;
+                    resultTextBlock.Text = "Unable to compile grammar.";
+                }
+                else
+                {
+                    btnContinuousRecognize.IsEnabled = true;
+
+                    resultTextBlock.Visibility = Visibility.Collapsed;
+
+
+                    // Handle continuous recognition events. Completed fires when various error states occur. ResultGenerated fires when
+                    // some recognized phrases occur, or the garbage rule is hit.
+                    speechRecognizer.ContinuousRecognitionSession.Completed += ContinuousRecognitionSession_Completed;
+                    speechRecognizer.ContinuousRecognitionSession.ResultGenerated += ContinuousRecognitionSession_ResultGenerated;
+                }
+            }
+            catch (Exception ex)
             {
-                // Disable the recognition buttons.
-                btnContinuousRecognize.IsEnabled = false;
+                if ((uint)ex.HResult == HResultRecognizerNotFound)
+                {
+                    btnContinuousRecognize.IsEnabled = false;
 
-                // Let the user know that the grammar didn't compile properly.
-                resultTextBlock.Visibility = Visibility.Visible;
-                resultTextBlock.Text = "Unable to compile grammar.";
+                    resultTextBlock.Visibility = Visibility.Visible;
+                    resultTextBlock.Text = "Speech Language pack for selected language not installed.";
+                }
+                else
+                {
+                    var messageDialog = new Windows.UI.Popups.MessageDialog(ex.Message, "Exception");
+                    await messageDialog.ShowAsync();
+                }
             }
 
-            // Handle continuous recognition events. Completed fires when various error states occur. ResultGenerated fires when
-            // some recognized phrases occur, or the garbage rule is hit.
-            speechRecognizer.ContinuousRecognitionSession.Completed += ContinuousRecognitionSession_Completed;
-            speechRecognizer.ContinuousRecognitionSession.ResultGenerated += ContinuousRecognitionSession_ResultGenerated;
         }
-        
+
         /// <summary>
         /// Upon leaving, clean up the speech recognizer. Ensure we aren't still listening, and disable the event 
         /// handlers to prevent leaks.

@@ -189,8 +189,13 @@
     <Content Include="Assets\squareTile-sdk.png" />
     <Content Include="Assets\storeLogo-sdk.png" />
     <Content Include="Assets\tile-sdk.png" />
+    <Content Include="SRGS\de-DE\SRGSColors.xml" />
+    <Content Include="SRGS\en-GB\SRGSColors.xml" />
     <Content Include="SRGS\en-US\SRGSColors.xml" />
+    <Content Include="SRGS\es-ES\SRGSColors.xml" />
     <Content Include="SRGS\fr-FR\SRGSColors.xml" />
+    <Content Include="SRGS\it-IT\SRGSColors.xml" />
+    <Content Include="SRGS\zh-CN\SRGSColors.xml" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="Strings\en-US\LocalizationSpeechResources.resw" />
@@ -198,7 +203,42 @@
   <ItemGroup>
     <PRIResource Include="Strings\fr-FR\LocalizationSpeechResources.resw" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <PRIResource Include="Strings\en-US\LocalizationTTSResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\fr-FR\LocalizationTTSResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\de-DE\LocalizationSpeechResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\de-DE\LocalizationTTSResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\es-ES\LocalizationSpeechResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\es-ES\LocalizationTTSResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\it-IT\LocalizationSpeechResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\it-IT\LocalizationTTSResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\zh-CN\LocalizationSpeechResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\zh-CN\LocalizationTTSResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\en-GB\LocalizationSpeechResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\en-GB\LocalizationTTSResources.resw" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

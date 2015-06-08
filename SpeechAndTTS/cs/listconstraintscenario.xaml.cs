@@ -36,6 +36,13 @@ namespace SpeechAndTTS
         /// </summary>
         private static uint HResultPrivacyStatementDeclined = 0x80045509;
 
+        /// <summary>
+        /// the HResult 0x8004503a typically represents the case where a recognizer for a particular language cannot
+        /// be found. This may occur if the language is installed, but the speech pack for that language is not.
+        /// See Settings -> Time & Language -> Region & Language -> *Language* -> Options -> Speech Language Options.
+        /// </summary>
+        private static uint HResultRecognizerNotFound = 0x8004503a;
+
         private SpeechRecognizer speechRecognizer;
         private CoreDispatcher dispatcher;
         private ResourceContext speechContext;
@@ -89,6 +96,9 @@ namespace SpeechAndTTS
         /// </summary>
         private void PopulateLanguageDropdown()
         {
+            // disable the callback so we don't accidentally trigger initialization of the recognizer
+            // while initialization is already in progress.
+            cbLanguageSelection.SelectionChanged -= cbLanguageSelection_SelectionChanged;
             Language defaultLanguage = SpeechRecognizer.SystemSpeechLanguage;
             IEnumerable<Language> supportedLanguages = SpeechRecognizer.SupportedGrammarLanguages;
             foreach(Language lang in supportedLanguages)
@@ -104,6 +114,7 @@ namespace SpeechAndTTS
                     cbLanguageSelection.SelectedItem = item;
                 }
             }
+            cbLanguageSelection.SelectionChanged += cbLanguageSelection_SelectionChanged;
         }
 
         /// <summary>
@@ -114,26 +125,28 @@ namespace SpeechAndTTS
         /// <param name="e">Ignored</param>
         private async void cbLanguageSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ComboBoxItem item = (ComboBoxItem)(cbLanguageSelection.SelectedItem);
+            Language newLanguage = (Language)item.Tag;
             if (speechRecognizer != null)
             {
-                ComboBoxItem item = (ComboBoxItem)(cbLanguageSelection.SelectedItem);
-                Language newLanguage = (Language)item.Tag;
-                if (speechRecognizer.CurrentLanguage != newLanguage)
+                if (speechRecognizer.CurrentLanguage == newLanguage)
                 {
-                    // trigger cleanup and re-initialization of speech.
-                    try
-                    {
-                        // update the context for resource lookup
-                        speechContext.Languages = new string[] { newLanguage.LanguageTag };
-
-                        await InitializeRecognizer(newLanguage);
-                    }
-                    catch (Exception exception)
-                    {
-                        var messageDialog = new Windows.UI.Popups.MessageDialog(exception.Message, "Exception");
-                        await messageDialog.ShowAsync();
-                    }
+                    return;
                 }
+            }
+
+            // trigger cleanup and re-initialization of speech.
+            try
+            {
+                // update the context for resource lookup
+                speechContext.Languages = new string[] { newLanguage.LanguageTag };
+
+                await InitializeRecognizer(newLanguage);
+            }
+            catch (Exception exception)
+            {
+                var messageDialog = new Windows.UI.Popups.MessageDialog(exception.Message, "Exception");
+                await messageDialog.ShowAsync();
             }
         }
 
@@ -179,72 +192,97 @@ namespace SpeechAndTTS
                 this.speechRecognizer.Dispose();
                 this.speechRecognizer = null;
             }
+            try
+            {
+                // Create an instance of SpeechRecognizer.
+                speechRecognizer = new SpeechRecognizer(recognizerLanguage);
 
-            // Create an instance of SpeechRecognizer.
-            speechRecognizer = new SpeechRecognizer(recognizerLanguage);
+                // Provide feedback to the user about the state of the recognizer.
+                speechRecognizer.StateChanged += SpeechRecognizer_StateChanged;
 
-            // Provide feedback to the user about the state of the recognizer.
-            speechRecognizer.StateChanged += SpeechRecognizer_StateChanged;
-            
-            // Add a list constraint to the recognizer.
-            speechRecognizer.Constraints.Add(
-                new SpeechRecognitionListConstraint(
-                    new List<string>()
-                    {
+                // Add a list constraint to the recognizer.
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
                         speechResourceMap.GetValue("ListGrammarGoHome", speechContext).ValueAsString
-                    }, "Home"));
-            speechRecognizer.Constraints.Add(
-                new SpeechRecognitionListConstraint(
-                    new List<string>()
-                    {
+                        }, "Home"));
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
                         speechResourceMap.GetValue("ListGrammarGoToContosoStudio", speechContext).ValueAsString
-                    }, "GoToContosoStudio"));
-            speechRecognizer.Constraints.Add(
-                new SpeechRecognitionListConstraint(
-                    new List<string>()
-                    {
+                        }, "GoToContosoStudio"));
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
                         speechResourceMap.GetValue("ListGrammarShowMessage", speechContext).ValueAsString,
                         speechResourceMap.GetValue("ListGrammarOpenMessage", speechContext).ValueAsString
-                    }, "Message"));
-            speechRecognizer.Constraints.Add(
-                new SpeechRecognitionListConstraint(
-                    new List<string>()
-                    {
+                        }, "Message"));
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
                         speechResourceMap.GetValue("ListGrammarSendEmail", speechContext).ValueAsString,
                         speechResourceMap.GetValue("ListGrammarCreateEmail", speechContext).ValueAsString
-                    }, "Email"));
-            speechRecognizer.Constraints.Add(
-                new SpeechRecognitionListConstraint(
-                    new List<string>()
-                    {
+                        }, "Email"));
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
                         speechResourceMap.GetValue("ListGrammarCallNitaFarley", speechContext).ValueAsString,
                         speechResourceMap.GetValue("ListGrammarCallNita", speechContext).ValueAsString
-                    }, "CallNita"));
-            speechRecognizer.Constraints.Add(
-                new SpeechRecognitionListConstraint(
-                    new List<string>()
-                    {
+                        }, "CallNita"));
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
                         speechResourceMap.GetValue("ListGrammarCallWayneSigmon", speechContext).ValueAsString,
                         speechResourceMap.GetValue("ListGrammarCallWayne", speechContext).ValueAsString
-                    }, "CallWayne"));
+                        }, "CallWayne"));
 
-            // RecognizeWithUIAsync allows developers to customize the prompts.
-            speechRecognizer.UIOptions.ExampleText = speechResourceMap.GetValue("ListGrammarUIOptionsText", speechContext).ValueAsString;
-            helpTextBlock.Text = speechResourceMap.GetValue("ListGrammarHelpText", speechContext).ValueAsString; 
+                // RecognizeWithUIAsync allows developers to customize the prompts.
+                speechRecognizer.UIOptions.ExampleText = speechResourceMap.GetValue("ListGrammarUIOptionsText", speechContext).ValueAsString;
+                helpTextBlock.Text = speechResourceMap.GetValue("ListGrammarHelpText", speechContext).ValueAsString;
 
-            // Compile the constraint.
-            SpeechRecognitionCompilationResult compilationResult = await speechRecognizer.CompileConstraintsAsync();
+                // Compile the constraint.
+                SpeechRecognitionCompilationResult compilationResult = await speechRecognizer.CompileConstraintsAsync();
 
-            // Check to make sure that the constraints were in a proper format and the recognizer was able to compile it.
-            if (compilationResult.Status != SpeechRecognitionResultStatus.Success)
+                // Check to make sure that the constraints were in a proper format and the recognizer was able to compile it.
+                if (compilationResult.Status != SpeechRecognitionResultStatus.Success)
+                {
+                    // Disable the recognition buttons.
+                    btnRecognizeWithUI.IsEnabled = false;
+                    btnRecognizeWithoutUI.IsEnabled = false;
+
+                    // Let the user know that the grammar didn't compile properly.
+                    resultTextBlock.Visibility = Visibility.Visible;
+                    resultTextBlock.Text = "Unable to compile grammar.";
+                }
+                else
+                {
+                    btnRecognizeWithUI.IsEnabled = true;
+                    btnRecognizeWithoutUI.IsEnabled = true;
+
+                    resultTextBlock.Visibility = Visibility.Collapsed;
+                }
+            }
+            catch(Exception ex)
             {
-                // Disable the recognition buttons.
-                btnRecognizeWithUI.IsEnabled = false;
-                btnRecognizeWithoutUI.IsEnabled = false;
+                if((uint)ex.HResult == HResultRecognizerNotFound)
+                {
+                    btnRecognizeWithUI.IsEnabled = false;
+                    btnRecognizeWithoutUI.IsEnabled = false;
 
-                // Let the user know that the grammar didn't compile properly.
-                resultTextBlock.Visibility = Visibility.Visible;
-                resultTextBlock.Text = "Unable to compile grammar.";
+                    resultTextBlock.Visibility = Visibility.Visible;
+                    resultTextBlock.Text = "Speech Language pack for selected language not installed.";
+                }
+                else
+                {
+                    var messageDialog = new Windows.UI.Popups.MessageDialog(ex.Message, "Exception");
+                    await messageDialog.ShowAsync();
+                }
             }
         }
 
