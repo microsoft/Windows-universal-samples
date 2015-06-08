@@ -243,8 +243,14 @@ namespace SpeechAndTTS
                         }, "CallWayne"));
 
                 // RecognizeWithUIAsync allows developers to customize the prompts.
-                speechRecognizer.UIOptions.ExampleText = speechResourceMap.GetValue("ListGrammarUIOptionsText", speechContext).ValueAsString;
-                helpTextBlock.Text = speechResourceMap.GetValue("ListGrammarHelpText", speechContext).ValueAsString;
+                string uiOptionsText = string.Format("Try saying '{0}', '{1}' or '{2}'",
+                    speechResourceMap.GetValue("ListGrammarGoHome", speechContext).ValueAsString,
+                    speechResourceMap.GetValue("ListGrammarGoToContosoStudio", speechContext).ValueAsString,
+                    speechResourceMap.GetValue("ListGrammarShowMessage", speechContext).ValueAsString);
+                speechRecognizer.UIOptions.ExampleText = uiOptionsText;
+                helpTextBlock.Text = string.Format("{0}\n{1}", 
+                    speechResourceMap.GetValue("ListGrammarHelpText", speechContext).ValueAsString,
+                    uiOptionsText);
 
                 // Compile the constraint.
                 SpeechRecognitionCompilationResult compilationResult = await speechRecognizer.CompileConstraintsAsync();

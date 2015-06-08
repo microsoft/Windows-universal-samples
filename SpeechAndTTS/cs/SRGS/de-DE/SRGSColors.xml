@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<grammar xml:lang="en-US" root="colorChooser"
+<grammar xml:lang="de-DE" root="colorChooser"
 tag-format="semantics/1.0" version="1.0"
 xmlns="http://www.w3.org/2001/06/grammar">
 

@@ -225,7 +225,13 @@ namespace SpeechAndTTS
                         }, "CallWayne"));
 
                 // Update the help text in the UI to show localized examples
-                listGrammarHelpText.Text = speechResourceMap.GetValue("ListGrammarHelpText", speechContext).ValueAsString;
+                string uiOptionsText = string.Format("Try saying '{0}', '{1}' or '{2}'",
+                    speechResourceMap.GetValue("ListGrammarGoHome", speechContext).ValueAsString,
+                    speechResourceMap.GetValue("ListGrammarGoToContosoStudio", speechContext).ValueAsString,
+                    speechResourceMap.GetValue("ListGrammarShowMessage", speechContext).ValueAsString);
+                listGrammarHelpText.Text = string.Format("{0}\n{1}",
+                    speechResourceMap.GetValue("ListGrammarHelpText", speechContext).ValueAsString,
+                    uiOptionsText);
 
                 SpeechRecognitionCompilationResult result = await speechRecognizer.CompileConstraintsAsync();
                 if (result.Status != SpeechRecognitionResultStatus.Success)

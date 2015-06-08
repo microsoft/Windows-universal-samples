@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DictationUIOptionsExampleText" xml:space="preserve">
-    <value>Ex. "The Quick Brown Fox Jumped Over the Lazy Brown Dog"</value>
+    <value>For example, "The quick red fox jumped over the lazy dog."</value>
   </data>
   <data name="ListGrammarCallNita" xml:space="preserve">
     <value>Call Nita</value>
@@ -133,7 +133,10 @@
     <value>Call Wayne Sigmon</value>
   </data>
   <data name="ListGrammarCreateEmail" xml:space="preserve">
-    <value>Create Email</value>
+    <value>Write email</value>
+  </data>
+  <data name="ListGrammarExamplesPrefix" xml:space="preserve">
+    <value>Examples:</value>
   </data>
   <data name="ListGrammarGoHome" xml:space="preserve">
     <value>Go Home</value>
@@ -147,17 +150,13 @@ Try saying 'Go Home', 'Call Nita', 'Go to Contoso Studio', 'Send Email'.</value>
     <comment>result textblock help text for non-recoui variants.</comment>
   </data>
   <data name="ListGrammarOpenMessage" xml:space="preserve">
-    <value>Open Message</value>
+    <value>Open email</value>
   </data>
   <data name="ListGrammarSendEmail" xml:space="preserve">
-    <value>Send Email</value>
+    <value>Send email</value>
   </data>
   <data name="ListGrammarShowMessage" xml:space="preserve">
-    <value>Show Message</value>
-  </data>
-  <data name="ListGrammarUIOptionsText" xml:space="preserve">
-    <value>Try saying 'Go Home', 'Call Nita', 'Go to Contoso Studio', 'Send Email'.</value>
-    <comment>RecognizeWithUI Options</comment>
+    <value>Show message</value>
   </data>
   <data name="SRGSBackgroundGarbagePromptText" xml:space="preserve">
     <value>Didn't get the background color 
@@ -197,6 +196,6 @@ green circle</value>
     <comment>UIOptions for SRGS one-shot sample</comment>
   </data>
   <data name="WebSearchUIOptionsExampleText" xml:space="preserve">
-    <value>Ex. "weather for London"</value>
+    <value>For example, "weather in London"</value>
   </data>
 </root>

@@ -147,7 +147,13 @@ void Scenario_ContinuousRecognitionListGrammar::InitializeRecognizer(Windows::Gl
         }), "CallWayne"));
 
         // Update the help text in the UI to show localized examples
-        listGrammarHelpText->Text = speechResourceMap->GetValue("ListGrammarHelpText", speechContext)->ValueAsString;
+		String^ uiOptionsText = ref new String(L"Try saying ") +
+			speechResourceMap->GetValue("ListGrammarGoHome", speechContext)->ValueAsString + L"', '" +
+			speechResourceMap->GetValue("ListGrammarGoToContosoStudio", speechContext)->ValueAsString + L"' or '" +
+			speechResourceMap->GetValue("ListGrammarShowMessage", speechContext)->ValueAsString + L"'";
+		listGrammarHelpText->Text = 
+			speechResourceMap->GetValue("ListGrammarHelpText", speechContext)->ValueAsString + L"\n" +
+			uiOptionsText;
 
         create_task(speechRecognizer->CompileConstraintsAsync(), task_continuation_context::use_current())
             .then([this](task<SpeechRecognitionCompilationResult^> previousTask)

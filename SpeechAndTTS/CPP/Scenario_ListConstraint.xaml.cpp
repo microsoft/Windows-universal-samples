@@ -143,8 +143,14 @@ void Scenario_ListConstraint::InitializeRecognizer(Windows::Globalization::Langu
         }), "CallWayne"));
 
         // RecognizeWithUIAsync allows developers to customize the prompts.
-        speechRecognizer->UIOptions->ExampleText = speechResourceMap->GetValue("ListGrammarUIOptionsText", speechContext)->ValueAsString;
-        helpTextBlock->Text = speechResourceMap->GetValue("ListGrammarHelpText", speechContext)->ValueAsString;
+		String^ uiOptionsText = ref new String(L"Try saying ") +
+			speechResourceMap->GetValue("ListGrammarGoHome", speechContext)->ValueAsString + L"', '" +
+			speechResourceMap->GetValue("ListGrammarGoToContosoStudio", speechContext)->ValueAsString + L"' or '" +
+			speechResourceMap->GetValue("ListGrammarShowMessage", speechContext)->ValueAsString + L"'";
+			
+        speechRecognizer->UIOptions->ExampleText = uiOptionsText;
+        helpTextBlock->Text = speechResourceMap->GetValue("ListGrammarHelpText", speechContext)->ValueAsString + L"\n" +
+			uiOptionsText;
 
         // Compile the constraint.
         create_task(speechRecognizer->CompileConstraintsAsync(), task_continuation_context::use_current())

@@ -118,46 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DictationUIOptionsExampleText" xml:space="preserve">
-    <value>Ex. "The Quick Brown Fox Jumped Over the Lazy Brown Dog"</value>
+    <value>Ad esempio, "volpe veloce saltato sopra il cane pigro."</value>
   </data>
   <data name="ListGrammarCallNita" xml:space="preserve">
-    <value>Call Nita</value>
+    <value>Chiamare Nita</value>
   </data>
   <data name="ListGrammarCallNitaFarley" xml:space="preserve">
-    <value>Call Nita Farley</value>
+    <value>Chiamare Nita Farley</value>
   </data>
   <data name="ListGrammarCallWayne" xml:space="preserve">
-    <value>Call Wayne</value>
+    <value>Chiamare Wayne</value>
   </data>
   <data name="ListGrammarCallWayneSigmon" xml:space="preserve">
-    <value>Call Wayne Sigmon</value>
+    <value>Chiamare Wayne Sigmon</value>
   </data>
   <data name="ListGrammarCreateEmail" xml:space="preserve">
-    <value>Create Email</value>
+    <value>Scrivere e-mail</value>
+  </data>
+  <data name="ListGrammarExamplesPrefix" xml:space="preserve">
+    <value>Esempi:</value>
+    <comment>RecognizeWithUI Options</comment>
   </data>
   <data name="ListGrammarGoHome" xml:space="preserve">
-    <value>Go Home</value>
+    <value>pagina iniziale</value>
   </data>
   <data name="ListGrammarGoToContosoStudio" xml:space="preserve">
     <value>Go to Contoso Studio</value>
   </data>
   <data name="ListGrammarHelpText" xml:space="preserve">
-    <value>Tap the microphone, and speak. This scenario uses continuous recognition to provide a global-command type scenario. 
-Try saying 'Go Home', 'Call Nita', 'Go to Contoso Studio', 'Send Email'.</value>
+    <value>Tap the microphone, and speak. This scenario uses continuous recognition to provide a global-command type scenario.</value>
     <comment>result textblock help text for non-recoui variants.</comment>
   </data>
   <data name="ListGrammarOpenMessage" xml:space="preserve">
-    <value>Open Message</value>
+    <value>Vai a Contoso Studio</value>
   </data>
   <data name="ListGrammarSendEmail" xml:space="preserve">
-    <value>Send Email</value>
+    <value>invia una email</value>
   </data>
   <data name="ListGrammarShowMessage" xml:space="preserve">
-    <value>Show Message</value>
-  </data>
-  <data name="ListGrammarUIOptionsText" xml:space="preserve">
-    <value>Try saying 'Go Home', 'Call Nita', 'Go to Contoso Studio', 'Send Email'.</value>
-    <comment>RecognizeWithUI Options</comment>
+    <value>Visualizza messaggio</value>
   </data>
   <data name="SRGSBackgroundGarbagePromptText" xml:space="preserve">
     <value>Didn't get the background color 
@@ -197,6 +196,6 @@ green circle</value>
     <comment>UIOptions for SRGS one-shot sample</comment>
   </data>
   <data name="WebSearchUIOptionsExampleText" xml:space="preserve">
-    <value>Ex. "weather for London"</value>
+    <value>Ad esempio, "tempo di Londra"</value>
   </data>
 </root>

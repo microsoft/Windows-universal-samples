@@ -239,6 +239,30 @@
   <ItemGroup>
     <PRIResource Include="Strings\en-GB\LocalizationTTSResources.resw" />
   </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\en-IN\LocalizationTTSResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\es-MX\LocalizationTTSResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\ja-JP\LocalizationTTSResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\ko-KR\LocalizationTTSResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\pl-PL\LocalizationTTSResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\pt-BR\LocalizationTTSResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\ru-RU\LocalizationTTSResources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\zh-TW\LocalizationTTSResources.resw" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

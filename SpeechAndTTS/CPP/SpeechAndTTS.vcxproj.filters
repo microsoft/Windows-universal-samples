@@ -56,6 +56,30 @@
     <Filter Include="Strings\zh-CN">
       <UniqueIdentifier>{990ae8aa-91f3-40b6-a3c9-8259632ff977}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Strings\en-IN">
+      <UniqueIdentifier>{d8bab42e-0dee-4c03-bf36-36a765cad12b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\es-MX">
+      <UniqueIdentifier>{140e9f04-ee9c-47c5-9c1e-485c19364d0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ja-JP">
+      <UniqueIdentifier>{3e884ac3-46bb-4b3d-9c3a-24fe7a6091eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ko-KR">
+      <UniqueIdentifier>{d500ce72-2513-4e95-b038-744bca036073}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\pl-PL">
+      <UniqueIdentifier>{213a2722-963e-4a9e-aeff-c6a8d2ff1dcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\pt-BR">
+      <UniqueIdentifier>{2e67f086-e9ba-487f-80a2-3f75cbf2deea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ru-RU">
+      <UniqueIdentifier>{a5d53c91-d55d-42c0-b7a9-a72f3919aed4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\zh-TW">
+      <UniqueIdentifier>{124f9795-6e8a-44cc-ac27-902fe186df35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />
@@ -198,6 +222,30 @@
     </PRIResource>
     <PRIResource Include="Strings\fr-FR\LocalizationTTSResources.resw">
       <Filter>Strings\fr-FR</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\en-IN\LocalizationTTSResources.resw">
+      <Filter>Strings\en-IN</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\es-MX\LocalizationTTSResources.resw">
+      <Filter>Strings\es-MX</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ja-JP\LocalizationTTSResources.resw">
+      <Filter>Strings\ja-JP</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ko-KR\LocalizationTTSResources.resw">
+      <Filter>Strings\ko-KR</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ru-RU\LocalizationTTSResources.resw">
+      <Filter>Strings\ru-RU</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pt-BR\LocalizationTTSResources.resw">
+      <Filter>Strings\pt-BR</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pl-PL\LocalizationTTSResources.resw">
+      <Filter>Strings\pl-PL</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\zh-TW\LocalizationTTSResources.resw">
+      <Filter>Strings\zh-TW</Filter>
     </PRIResource>
   </ItemGroup>
 </Project>

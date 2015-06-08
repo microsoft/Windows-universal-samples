@@ -121,11 +121,17 @@
     <value>&lt;speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' 
                              xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' 
                              xsi:schemaLocation='http://www.w3.org/2001/10/synthesis  http://www.w3.org/TR/speech-synthesis/synthesis.xsd' 
-                             xml:lang='en-US'&gt;
-This sentence has a mark &lt;mark name='mark1'/&gt; here and another mark here &lt;mark name='mark2'/&gt;.
-This is an example of how to speak the word &lt;phoneme alphabet='x-microsoft-ups' ph='S1 W AA T . CH AX . M AX . S2 K AA L . IH T'&gt; whatchamacallit &lt;/phoneme&gt;.
-This is an example of how to use the say-as tag to say a date: &lt;say-as interpret-as='date:mdy'&gt; 04/30/2013 &lt;/say-as&gt;.
-This &lt;say-as interpret-as='ordinal'&gt; 4th &lt;/say-as&gt; example is how to use the ordinal data type.
+                             xml:lang='en-GB'&gt;
+
+This is an example of a phonetic pronunciation:
+&lt;phoneme alphabet='x-microsoft-ups' ph='S1 W AA T . CH AX . M AX . S2 K AA L . IH T'&gt; whatchamacallit &lt;/phoneme&gt;.
+
+This is an example of a date:
+&lt;say-as interpret-as='date' format='mdy'&gt; 04/30/2013 &lt;/say-as&gt;.
+
+This is an example of an ordinal number:
+&lt;say-as interpret-as='ordinal'&gt; 4th &lt;/say-as&gt;.
+
 &lt;/speak&gt;</value>
   </data>
   <data name="SynthesizeTextDefaultText" xml:space="preserve">
