@@ -57,6 +57,7 @@ SecureInterfaceConsumer::~SecureInterfaceConsumer()
     AllJoynBusObjectManager::ReleaseBusObject(m_nativeBusAttachment, AllJoynHelpers::PlatformToMultibyteString(ServiceObjectPath).data());
     if (SessionListener != nullptr)
     {
+        alljoyn_busattachment_setsessionlistener(m_nativeBusAttachment, m_sessionId, nullptr);
         alljoyn_sessionlistener_destroy(SessionListener);
     }
     if (nullptr != ProxyBusObject)
@@ -177,9 +178,9 @@ IAsyncOperation<SecureInterfaceCatResult^>^ SecureInterfaceConsumer::CatAsync(_I
     });
 }
 
-IAsyncOperation<int>^ SecureInterfaceConsumer::SetIsUpperCaseEnabledAsync(_In_ bool value)
+IAsyncOperation<SecureInterfaceSetIsUpperCaseEnabledResult^>^ SecureInterfaceConsumer::SetIsUpperCaseEnabledAsync(_In_ bool value)
 {
-    return create_async([this, value]() -> int
+    return create_async([this, value]() -> SecureInterfaceSetIsUpperCaseEnabledResult^
     {
         PropertySetContext setContext;
 
@@ -204,13 +205,16 @@ IAsyncOperation<int>^ SecureInterfaceConsumer::SetIsUpperCaseEnabledAsync(_In_ b
         alljoyn_msgarg_destroy(inputArgument);
 
         setContext.Wait();
-        return setContext.GetStatus();
+
+        auto result = ref new SecureInterfaceSetIsUpperCaseEnabledResult();
+        result->Status = setContext.GetStatus();
+        return result;
     });
 }
 
 IAsyncOperation<SecureInterfaceGetIsUpperCaseEnabledResult^>^ SecureInterfaceConsumer::GetIsUpperCaseEnabledAsync()
 {
-    return create_async([this]()->SecureInterfaceGetIsUpperCaseEnabledResult^
+    return create_async([this]() -> SecureInterfaceGetIsUpperCaseEnabledResult^
     {
         PropertyGetContext<bool> getContext;
         
@@ -381,10 +385,10 @@ int32 SecureInterfaceConsumer::JoinSession(_In_ AllJoynServiceInfo^ serviceInfo)
     RETURN_IF_QSTATUS_ERROR(AllJoynBusObjectManager::GetBusObject(m_nativeBusAttachment, AllJoynHelpers::PlatformToMultibyteString(ServiceObjectPath).data(), &m_busObject));
     RETURN_IF_QSTATUS_ERROR(alljoyn_proxybusobject_addinterface(ProxyBusObject, description));
 
-	if (!AllJoynBusObjectManager::BusObjectIsRegistered(m_nativeBusAttachment, m_busObject))
+    if (!AllJoynBusObjectManager::BusObjectIsRegistered(m_nativeBusAttachment, m_busObject))
     {
-		RETURN_IF_QSTATUS_ERROR(alljoyn_busobject_addinterface(BusObject, description));
-	}
+        RETURN_IF_QSTATUS_ERROR(alljoyn_busobject_addinterface(BusObject, description));
+    }
 
     QStatus result = AddSignalHandler(
         m_nativeBusAttachment,

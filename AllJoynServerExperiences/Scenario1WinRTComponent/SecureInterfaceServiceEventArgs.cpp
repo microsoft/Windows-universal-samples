@@ -51,6 +51,7 @@ SecureInterfaceCatCalledEventArgs::SecureInterfaceCatCalledEventArgs(
     m_interfaceMemberInStr1(interfaceMemberInStr1),
     m_interfaceMemberInStr2(interfaceMemberInStr2)
 {
+	m_result = SecureInterfaceCatResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ SecureInterfaceCatCalledEventArgs::GetDeferral()
@@ -109,7 +110,14 @@ void SecureInterfaceCatCalledEventArgs::Complete()
 
 void SecureInterfaceCatCalledEventArgs::InvokeCompleteHandler()
 {
-    m_tce.set(m_result);
+    if (m_result->Status == ER_NOT_IMPLEMENTED)
+    {
+        throw Exception::CreateException(E_NOTIMPL, "No handlers are registered for CatCalled.");
+    }
+    else
+    {
+        m_tce.set(m_result);
+    }
 }
 
 // Readable Properties
@@ -119,6 +127,7 @@ SecureInterfaceGetIsUpperCaseEnabledRequestedEventArgs::SecureInterfaceGetIsUppe
     m_completionsRequired(0),
     m_messageInfo(info)
 {
+	m_result = SecureInterfaceGetIsUpperCaseEnabledResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ SecureInterfaceGetIsUpperCaseEnabledRequestedEventArgs::GetDeferral()
@@ -177,7 +186,14 @@ void SecureInterfaceGetIsUpperCaseEnabledRequestedEventArgs::Complete()
 
 void SecureInterfaceGetIsUpperCaseEnabledRequestedEventArgs::InvokeCompleteHandler()
 {
-    m_tce.set(m_result);
+    if (m_result->Status == ER_NOT_IMPLEMENTED)
+    {
+        throw Exception::CreateException(E_NOTIMPL, "No handlers are registered for GetIsUpperCaseEnabledRequested.");
+    }
+    else
+    {
+        m_tce.set(m_result);
+    }
 }
 
 // Writable Properties
@@ -189,10 +205,7 @@ SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs::SecureInterfaceSetIsUppe
     m_messageInfo(info),
     m_value(value)
 {
-    // If no event listener is registered by the app, the handler is not implemented.
-    // This will result in InvokeCompleteHandler throwing an exception unless some
-    // event listener actually runs and sets the result status.
-    m_resultStatus = ER_NOT_IMPLEMENTED;
+	m_result = SecureInterfaceSetIsUpperCaseEnabledResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs::GetDeferral()
@@ -251,13 +264,13 @@ void SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs::Complete()
 
 void SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs::InvokeCompleteHandler()
 {
-    if (m_resultStatus == ER_NOT_IMPLEMENTED)
+    if (m_result->Status == ER_NOT_IMPLEMENTED)
     {
-        m_tce.set_exception(std::make_exception_ptr(std::runtime_error("no listeners registered for SetNameRequested")));
+        throw Exception::CreateException(E_NOTIMPL, "No handlers are registered for SetIsUpperCaseEnabledRequested.");
     }
     else
     {
-        m_tce.set(m_resultStatus);
+        m_tce.set(m_result);
     }
 }
 

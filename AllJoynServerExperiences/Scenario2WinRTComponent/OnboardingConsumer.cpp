@@ -57,6 +57,7 @@ OnboardingConsumer::~OnboardingConsumer()
     AllJoynBusObjectManager::ReleaseBusObject(m_nativeBusAttachment, AllJoynHelpers::PlatformToMultibyteString(ServiceObjectPath).data());
     if (SessionListener != nullptr)
     {
+        alljoyn_busattachment_setsessionlistener(m_nativeBusAttachment, m_sessionId, nullptr);
         alljoyn_sessionlistener_destroy(SessionListener);
     }
     if (nullptr != ProxyBusObject)
@@ -298,7 +299,7 @@ IAsyncOperation<OnboardingGetScanInfoResult^>^ OnboardingConsumer::GetScanInfoAs
 
 IAsyncOperation<OnboardingGetVersionResult^>^ OnboardingConsumer::GetVersionAsync()
 {
-    return create_async([this]()->OnboardingGetVersionResult^
+    return create_async([this]() -> OnboardingGetVersionResult^
     {
         PropertyGetContext<uint16> getContext;
         
@@ -335,7 +336,7 @@ IAsyncOperation<OnboardingGetVersionResult^>^ OnboardingConsumer::GetVersionAsyn
 
 IAsyncOperation<OnboardingGetStateResult^>^ OnboardingConsumer::GetStateAsync()
 {
-    return create_async([this]()->OnboardingGetStateResult^
+    return create_async([this]() -> OnboardingGetStateResult^
     {
         PropertyGetContext<int16> getContext;
         
@@ -372,7 +373,7 @@ IAsyncOperation<OnboardingGetStateResult^>^ OnboardingConsumer::GetStateAsync()
 
 IAsyncOperation<OnboardingGetLastErrorResult^>^ OnboardingConsumer::GetLastErrorAsync()
 {
-    return create_async([this]()->OnboardingGetLastErrorResult^
+    return create_async([this]() -> OnboardingGetLastErrorResult^
     {
         PropertyGetContext<OnboardingLastError^> getContext;
         
@@ -512,10 +513,10 @@ int32 OnboardingConsumer::JoinSession(_In_ AllJoynServiceInfo^ serviceInfo)
     RETURN_IF_QSTATUS_ERROR(AllJoynBusObjectManager::GetBusObject(m_nativeBusAttachment, AllJoynHelpers::PlatformToMultibyteString(ServiceObjectPath).data(), &m_busObject));
     RETURN_IF_QSTATUS_ERROR(alljoyn_proxybusobject_addinterface(ProxyBusObject, description));
 
-	if (!AllJoynBusObjectManager::BusObjectIsRegistered(m_nativeBusAttachment, m_busObject))
+    if (!AllJoynBusObjectManager::BusObjectIsRegistered(m_nativeBusAttachment, m_busObject))
     {
-		RETURN_IF_QSTATUS_ERROR(alljoyn_busobject_addinterface(BusObject, description));
-	}
+        RETURN_IF_QSTATUS_ERROR(alljoyn_busobject_addinterface(BusObject, description));
+    }
 
     QStatus result = AddSignalHandler(
         m_nativeBusAttachment,

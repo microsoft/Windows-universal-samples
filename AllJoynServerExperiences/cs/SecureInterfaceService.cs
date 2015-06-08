@@ -58,12 +58,12 @@ namespace AllJoynServerExperiences
         }
 
         // Method to handle requests to set the IsUpperCaseEnabled property.
-        public IAsyncOperation<int> SetIsUpperCaseEnabledAsync(AllJoynMessageInfo info, bool value)
+        public IAsyncOperation<SecureInterfaceSetIsUpperCaseEnabledResult> SetIsUpperCaseEnabledAsync(AllJoynMessageInfo info, bool value)
         {
-            Task<int> task = new Task<int>(() =>
+            Task<SecureInterfaceSetIsUpperCaseEnabledResult> task = new Task<SecureInterfaceSetIsUpperCaseEnabledResult>(() =>
             {
                 AppData.IsUpperCaseEnabled = value;
-                return AllJoynStatus.Ok;
+                return SecureInterfaceSetIsUpperCaseEnabledResult.CreateSuccessResult();
             });
 
             task.Start();

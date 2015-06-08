@@ -47,7 +47,7 @@ public:
     // Implement this function to handle requests to set the IsUpperCaseEnabled property.
     //
     // Currently, info will always be null, because no information is available about the requestor.
-    Windows::Foundation::IAsyncOperation<int>^ SetIsUpperCaseEnabledAsync(Windows::Devices::AllJoyn::AllJoynMessageInfo^ info, bool value);
+    Windows::Foundation::IAsyncOperation<SecureInterfaceSetIsUpperCaseEnabledResult^>^ SetIsUpperCaseEnabledAsync(Windows::Devices::AllJoyn::AllJoynMessageInfo^ info, bool value);
 
 };
 

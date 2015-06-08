@@ -62,7 +62,7 @@ public:
     Windows::Foundation::IAsyncOperation<SecureInterfaceGetIsUpperCaseEnabledResult^>^ GetIsUpperCaseEnabledAsync();
 
     // Set the value of the IsUpperCaseEnabled property.
-    Windows::Foundation::IAsyncOperation<int>^ SetIsUpperCaseEnabledAsync(_In_ bool value);
+    Windows::Foundation::IAsyncOperation<SecureInterfaceSetIsUpperCaseEnabledResult^>^ SetIsUpperCaseEnabledAsync(_In_ bool value);
 
     // Used to send signals or register functions to handle received signals.
     property SecureInterfaceSignals^ Signals
@@ -145,7 +145,7 @@ private:
     alljoyn_busobject m_busObject;
     alljoyn_sessionlistener m_sessionListener;
     alljoyn_sessionid m_sessionId;
-	alljoyn_busattachment m_nativeBusAttachment;
+    alljoyn_busattachment m_nativeBusAttachment;
 
     // Used to pass a pointer to this class to callbacks
     Platform::WeakReference* m_weak;

@@ -22,8 +22,8 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[AllJoyn Server Experiences](https://github.com/Microsoft/Windows-universal-samples/tree/master/allJoynserverexperiences)
-[AllJoyn Client Experiences](https://github.com/Microsoft/Windows-universal-samples/tree/master/allJoynclientexperiences)
+[AllJoyn Server Experiences](https://github.com/Microsoft/Windows-universal-samples/tree/master/AllJoynServerExperiences)
+[AllJoyn Client Experiences](https://github.com/Microsoft/Windows-universal-samples/tree/master/AllJoynClientExperiences)
 
 The AllSeen Alliance has samples in their [Windows SDK](https://allseenalliance.org/developers/download)
 
