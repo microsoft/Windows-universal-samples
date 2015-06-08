@@ -68,7 +68,6 @@ button.splitViewButton {
 
     .win-splitview-pane #scenarioPane {
         flex-grow: 1;
-        height: 0px;
     }
 
 .win-splitview-pane-closed #header,

@@ -101,6 +101,16 @@ namespace SDKTemplate
 
             // Collapse the StatusBlock if it has no text to conserve real estate.
             StatusBorder.Visibility = (StatusBlock.Text != String.Empty) ? Visibility.Visible : Visibility.Collapsed;
+            if (StatusBlock.Text != String.Empty)
+            {
+                StatusBorder.Visibility = Visibility.Visible;
+                StatusPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                StatusBorder.Visibility = Visibility.Collapsed;
+                StatusPanel.Visibility = Visibility.Collapsed;
+            }
         }
 
         async void Footer_Click(object sender, RoutedEventArgs e)
@@ -110,7 +120,7 @@ namespace SDKTemplate
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Splitter.IsPaneOpen = (Splitter.IsPaneOpen == true) ? false : true;
+            Splitter.IsPaneOpen = !Splitter.IsPaneOpen;
             StatusBorder.Visibility = Visibility.Collapsed;
         }
     }
