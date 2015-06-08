@@ -40,7 +40,7 @@ Scenario_SynthesizeSSML::Scenario_SynthesizeSSML() : rootPage(MainPage::Current)
     speechContext = ResourceContext::GetForCurrentView();
     speechContext->Languages = ref new VectorView<String^>(1, SpeechSynthesizer::DefaultVoice->Language);
 
-    speechResourceMap = ResourceManager::Current->MainResourceMap->GetSubtree(L"LocalizationSpeechResources");
+    speechResourceMap = ResourceManager::Current->MainResourceMap->GetSubtree(L"LocalizationTTSResources");
 
     InitializeListboxVoiceChooser();
     UpdateSSMLText();

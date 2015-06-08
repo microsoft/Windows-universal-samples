@@ -36,25 +36,28 @@ namespace SpeechAndTTS
         /// not per-app.
         /// </summary>
         static const unsigned int HResultPrivacyStatementDeclined = 0x80045509;
+        static const unsigned int HResultRecognizerNotFound = 0x8004503a;
 
         SDKTemplate::MainPage^ rootPage;
         Windows::UI::Core::CoreDispatcher^ dispatcher;
         Windows::Media::SpeechRecognition::SpeechRecognizer^ speechRecognizer;
         Windows::Foundation::Collections::IMap<Platform::String^, Windows::UI::Color>^ colorLookup;
-		Windows::ApplicationModel::Resources::Core::ResourceContext^ speechContext;
-		Windows::ApplicationModel::Resources::Core::ResourceMap^ speechResourceMap;
+        Windows::ApplicationModel::Resources::Core::ResourceContext^ speechContext;
+        Windows::ApplicationModel::Resources::Core::ResourceMap^ speechResourceMap;
 
         void RecognizeWithUI_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void RecognizeWithoutUI_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
-		void PopulateLanguageDropdown();
-		void InitializeRecognizer(Windows::Globalization::Language^ recognizerLanguage);
+        void PopulateLanguageDropdown();
+        void InitializeRecognizer(Windows::Globalization::Language^ recognizerLanguage);
 
         void HandleRecognitionResult(Windows::Media::SpeechRecognition::SpeechRecognitionResult^ recoResult);
         Windows::UI::Color getColor(Platform::String^ colorString);
 
         Windows::Foundation::EventRegistrationToken stateChangedToken;
+        Windows::Foundation::EventRegistrationToken cbLanguageSelectionSelectionChangedToken;
+
         void SpeechRecognizer_StateChanged(Windows::Media::SpeechRecognition::SpeechRecognizer ^sender, Windows::Media::SpeechRecognition::SpeechRecognizerStateChangedEventArgs ^args);
-		void cbLanguageSelection_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
+        void cbLanguageSelection_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
     };
 }

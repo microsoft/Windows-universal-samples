@@ -38,7 +38,7 @@
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Language: " Margin="10,0,0,0" VerticalAlignment="Center"/>
-                        <ComboBox x:Name="cbLanguageSelection" SelectionChanged="cbLanguageSelection_SelectionChanged"  Margin="10" Width="200"/>
+                        <ComboBox x:Name="cbLanguageSelection" Margin="10" Width="200"/>
                     </StackPanel>
                     <Button x:Name="btnContinuousRecognize" Click="ContinuousRecognize_Click" IsEnabled="False" Margin="0,10,0,0">
                         <StackPanel Orientation="Horizontal">

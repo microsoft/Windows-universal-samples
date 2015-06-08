@@ -37,8 +37,8 @@ using namespace Windows::UI::Xaml::Navigation;
 
 Scenario_ContinuousRecognitionSRGSGrammar::Scenario_ContinuousRecognitionSRGSGrammar() : rootPage(MainPage::Current)
 {
-    InitializeComponent(); 
-    
+    InitializeComponent();
+
     colorLookup = ref new Map<String^, Color>(
     {
         { "red",   Colors::Red },    { "blue",  Colors::Blue },   { "black",  Colors::Black },
@@ -64,7 +64,7 @@ void Scenario_ContinuousRecognitionSRGSGrammar::OnNavigatedTo(NavigationEventArg
     dispatcher = CoreWindow::GetForCurrentThread()->Dispatcher;
 
     create_task(AudioCapturePermissions::RequestMicrophonePermissionAsync(), task_continuation_context::use_current())
-        .then([this](bool permissionGained) 
+        .then([this](bool permissionGained)
     {
         if (permissionGained)
         {
@@ -76,16 +76,16 @@ void Scenario_ContinuousRecognitionSRGSGrammar::OnNavigatedTo(NavigationEventArg
             this->resultTextBlock->Visibility = Windows::UI::Xaml::Visibility::Visible;
             this->resultTextBlock->Text = L"Permission to access capture resources was not given by the user; please set the application setting in Settings->Privacy->Microphone.";
         }
-    }).then([this]() 
+    }).then([this]()
     {
-		Windows::Globalization::Language^ speechLanguage = SpeechRecognizer::SystemSpeechLanguage;
-		speechContext = ResourceContext::GetForCurrentView();
-		speechContext->Languages = ref new VectorView<String^>(1, speechLanguage->LanguageTag);
+        Windows::Globalization::Language^ speechLanguage = SpeechRecognizer::SystemSpeechLanguage;
+        speechContext = ResourceContext::GetForCurrentView();
+        speechContext->Languages = ref new VectorView<String^>(1, speechLanguage->LanguageTag);
 
-		speechResourceMap = ResourceManager::Current->MainResourceMap->GetSubtree(L"LocalizationSpeechResources");
+        speechResourceMap = ResourceManager::Current->MainResourceMap->GetSubtree(L"LocalizationSpeechResources");
 
-		PopulateLanguageDropdown();
-		InitializeRecognizer(SpeechRecognizer::SystemSpeechLanguage);
+        PopulateLanguageDropdown();
+        InitializeRecognizer(SpeechRecognizer::SystemSpeechLanguage);
     }, task_continuation_context::use_current());
 }
 
@@ -94,81 +94,107 @@ void Scenario_ContinuousRecognitionSRGSGrammar::OnNavigatedTo(NavigationEventArg
 /// </summary>
 void Scenario_ContinuousRecognitionSRGSGrammar::InitializeRecognizer(Windows::Globalization::Language^ recognizerLanguage)
 {
-	// If reinitializing the recognizer (ie, changing the speech language), clean up the old recognizer first.
-	// Avoid doing this while the recognizer is active by disabling the ability to change languages while listening.
-	if (this->speechRecognizer != nullptr)
-	{
-		speechRecognizer->StateChanged -= stateChangedToken;
-		speechRecognizer->ContinuousRecognitionSession->Completed -= continuousRecognitionCompletedToken;
-		speechRecognizer->ContinuousRecognitionSession->ResultGenerated -= continuousRecognitionResultGeneratedToken;
+    // If reinitializing the recognizer (ie, changing the speech language), clean up the old recognizer first.
+    // Avoid doing this while the recognizer is active by disabling the ability to change languages while listening.
+    if (this->speechRecognizer != nullptr)
+    {
+        speechRecognizer->StateChanged -= stateChangedToken;
+        speechRecognizer->ContinuousRecognitionSession->Completed -= continuousRecognitionCompletedToken;
+        speechRecognizer->ContinuousRecognitionSession->ResultGenerated -= continuousRecognitionResultGeneratedToken;
 
-		delete this->speechRecognizer;
-		this->speechRecognizer = nullptr;
-	}
+        delete this->speechRecognizer;
+        this->speechRecognizer = nullptr;
+    }
 
-    // Initialize the SpeechRecognizer and add the grammar.
-    this->speechRecognizer = ref new SpeechRecognizer(recognizerLanguage);
+    try
+    {
+        // Initialize the SpeechRecognizer and add the grammar.
+        this->speechRecognizer = ref new SpeechRecognizer(recognizerLanguage);
 
-    // Provide feedback to the user about the state of the recognizer. This can be used to provide
-    // visual feedback to help the user understand whether they're being heard.
-    stateChangedToken = speechRecognizer->StateChanged +=
-        ref new TypedEventHandler<
+        // Provide feedback to the user about the state of the recognizer. This can be used to provide
+        // visual feedback to help the user understand whether they're being heard.
+        stateChangedToken = speechRecognizer->StateChanged +=
+            ref new TypedEventHandler<
             SpeechRecognizer ^,
             SpeechRecognizerStateChangedEventArgs ^>(
                 this,
                 &Scenario_ContinuousRecognitionSRGSGrammar::SpeechRecognizer_StateChanged);
 
-    // Initialize the SRGS-compliant XML file.
-    // For more information about grammars for Windows apps and how to
-    // define and use SRGS-compliant grammars in your app, see
-    // https://msdn.microsoft.com/en-us/library/dn596121.aspx
-	String^ fileName = L"SRGS\\" + recognizerLanguage->LanguageTag + L"\\SRGSColors.xml";
-	resultTextBlock->Text = speechResourceMap->GetValue("SRGSHelpText", speechContext)->ValueAsString;
+        // Initialize the SRGS-compliant XML file.
+        // For more information about grammars for Windows apps and how to
+        // define and use SRGS-compliant grammars in your app, see
+        // https://msdn.microsoft.com/en-us/library/dn596121.aspx
+        String^ fileName = L"SRGS\\" + recognizerLanguage->LanguageTag + L"\\SRGSColors.xml";
+        resultTextBlock->Text = speechResourceMap->GetValue("SRGSHelpText", speechContext)->ValueAsString;
 
-    create_task(Package::Current->InstalledLocation->GetFileAsync(fileName), task_continuation_context::use_current())
-        .then([this](task<StorageFile^> getFileTask) 
-    {
-        StorageFile^ grammarContentFile = getFileTask.get();
-        SpeechRecognitionGrammarFileConstraint^ grammarConstraint = ref new SpeechRecognitionGrammarFileConstraint(grammarContentFile);
-        speechRecognizer->Constraints->Append(grammarConstraint);
-
-        return create_task(speechRecognizer->CompileConstraintsAsync(), task_continuation_context::use_current());
-
-    }).then([this](task<SpeechRecognitionCompilationResult^> previousTask) 
-    {
-        SpeechRecognitionCompilationResult^ compilationResult = previousTask.get();
-
-        // Check to make sure that the constraints were in a proper format and the recognizer was able to compile them.
-        if (compilationResult->Status != SpeechRecognitionResultStatus::Success)
+        create_task(Package::Current->InstalledLocation->GetFileAsync(fileName), task_continuation_context::use_current())
+            .then([this](task<StorageFile^> getFileTask)
         {
-            // Disable the recognition button.
+            StorageFile^ grammarContentFile = getFileTask.get();
+            SpeechRecognitionGrammarFileConstraint^ grammarConstraint = ref new SpeechRecognitionGrammarFileConstraint(grammarContentFile);
+            speechRecognizer->Constraints->Append(grammarConstraint);
+
+            return create_task(speechRecognizer->CompileConstraintsAsync(), task_continuation_context::use_current());
+
+        }).then([this](task<SpeechRecognitionCompilationResult^> previousTask)
+        {
+            SpeechRecognitionCompilationResult^ compilationResult = previousTask.get();
+
+            // Check to make sure that the constraints were in a proper format and the recognizer was able to compile them.
+            if (compilationResult->Status != SpeechRecognitionResultStatus::Success)
+            {
+                // Disable the recognition button.
+                btnContinuousRecognize->IsEnabled = false;
+
+                // Let the user know that the grammar didn't compile properly.
+                rootPage->NotifyUser("Grammar Compilation Failed: " + compilationResult->Status.ToString(), NotifyType::ErrorMessage);
+            }
+            else
+            {
+                btnContinuousRecognize->IsEnabled = true;
+
+                resultTextBlock->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+
+                // Set EndSilenceTimeout to give users more time to complete speaking a phrase.
+                TimeSpan endSilenceTime;
+                endSilenceTime.Duration = 12000000L;
+                speechRecognizer->Timeouts->EndSilenceTimeout = endSilenceTime; // (1.2 seconds in nanoseconds)
+
+
+                                                                                // Handle continuous recognition events. Completed fires when various error states occur. ResultGenerated fires when
+                                                                                // some recognized phrases occur, or the garbage rule is hit.
+                continuousRecognitionCompletedToken = speechRecognizer->ContinuousRecognitionSession->Completed +=
+                    ref new TypedEventHandler<
+                    SpeechContinuousRecognitionSession ^,
+                    SpeechContinuousRecognitionCompletedEventArgs ^>(
+                        this,
+                        &Scenario_ContinuousRecognitionSRGSGrammar::ContinuousRecognitionSession_Completed);
+                continuousRecognitionResultGeneratedToken = speechRecognizer->ContinuousRecognitionSession->ResultGenerated +=
+                    ref new TypedEventHandler<
+                    SpeechContinuousRecognitionSession ^,
+                    SpeechContinuousRecognitionResultGeneratedEventArgs ^>(
+                        this,
+                        &Scenario_ContinuousRecognitionSRGSGrammar::ContinuousRecognitionSession_ResultGenerated);
+            }
+        }, task_continuation_context::use_current());
+
+        
+    }
+    catch (Platform::Exception^ ex)
+    {
+        if ((unsigned int)ex->HResult == HResultRecognizerNotFound)
+        {
             btnContinuousRecognize->IsEnabled = false;
 
-            // Let the user know that the grammar didn't compile properly.
-            rootPage->NotifyUser("Grammar Compilation Failed: " + compilationResult->Status.ToString(), NotifyType::ErrorMessage);
+            resultTextBlock->Visibility = Windows::UI::Xaml::Visibility::Visible;
+            resultTextBlock->Text = L"Speech Language pack for selected language not installed.";
         }
-
-        // Set EndSilenceTimeout to give users more time to complete speaking a phrase.
-        TimeSpan endSilenceTime;
-        endSilenceTime.Duration= 12000000L;
-        speechRecognizer->Timeouts->EndSilenceTimeout = endSilenceTime; // (1.2 seconds in nanoseconds)
-
-
-        // Handle continuous recognition events. Completed fires when various error states occur. ResultGenerated fires when
-        // some recognized phrases occur, or the garbage rule is hit.
-        continuousRecognitionCompletedToken = speechRecognizer->ContinuousRecognitionSession->Completed +=
-            ref new TypedEventHandler<
-                SpeechContinuousRecognitionSession ^, 
-                SpeechContinuousRecognitionCompletedEventArgs ^>(
-                    this, 
-                    &Scenario_ContinuousRecognitionSRGSGrammar::ContinuousRecognitionSession_Completed);
-        continuousRecognitionResultGeneratedToken = speechRecognizer->ContinuousRecognitionSession->ResultGenerated += 
-            ref new TypedEventHandler<
-                SpeechContinuousRecognitionSession ^, 
-                SpeechContinuousRecognitionResultGeneratedEventArgs ^>(
-                    this, 
-                    &Scenario_ContinuousRecognitionSRGSGrammar::ContinuousRecognitionSession_ResultGenerated);
-    }, task_continuation_context::use_current());
+        else
+        {
+            auto messageDialog = ref new Windows::UI::Popups::MessageDialog(ex->Message, "Exception");
+            create_task(messageDialog->ShowAsync());
+        }
+    }
 }
 
 /// <summary>
@@ -194,7 +220,7 @@ void Scenario_ContinuousRecognitionSRGSGrammar::OnNavigatedFrom(NavigationEventA
             cleanupTask = create_task([]() {}, task_continuation_context::use_current());
         }
 
-        cleanupTask.then([this]() 
+        cleanupTask.then([this]()
         {
             ContinuousRecoButtonText->Text = L" Continuous Recognition";
 
@@ -222,10 +248,10 @@ void Scenario_ContinuousRecognitionSRGSGrammar::ContinuousRecognize_Click(Object
         // Reset the text to prompt the user.
         ContinuousRecoButtonText->Text = L" Stop Continuous Recognition";
         resultTextBlock->Text = speechResourceMap->GetValue("SRGSHelpText", speechContext)->ValueAsString;
-		cbLanguageSelection->IsEnabled = false;
+        cbLanguageSelection->IsEnabled = false;
 
         create_task(speechRecognizer->ContinuousRecognitionSession->StartAsync(), task_continuation_context::use_current())
-            .then([this](task<void> startAsyncTask) 
+            .then([this](task<void> startAsyncTask)
         {
             try
             {
@@ -235,9 +261,9 @@ void Scenario_ContinuousRecognitionSRGSGrammar::ContinuousRecognize_Click(Object
             catch (Exception^ exception)
             {
                 ContinuousRecoButtonText->Text = L" Continuous Recognition";
-				cbLanguageSelection->IsEnabled = true;
-				resultTextBlock->Text = speechResourceMap->GetValue("SRGSHelpText", speechContext)->ValueAsString;
-                
+                cbLanguageSelection->IsEnabled = true;
+                resultTextBlock->Text = speechResourceMap->GetValue("SRGSHelpText", speechContext)->ValueAsString;
+
                 auto messageDialog = ref new Windows::UI::Popups::MessageDialog(exception->Message, "Exception");
                 create_task(messageDialog->ShowAsync());
             }
@@ -247,8 +273,8 @@ void Scenario_ContinuousRecognitionSRGSGrammar::ContinuousRecognize_Click(Object
     {
         // Reset the text to prompt the user.
         ContinuousRecoButtonText->Text = L" Continuous Recognition";
-		resultTextBlock->Text = speechResourceMap->GetValue("SRGSHelpText", speechContext)->ValueAsString;
-		cbLanguageSelection->IsEnabled = true;
+        resultTextBlock->Text = speechResourceMap->GetValue("SRGSHelpText", speechContext)->ValueAsString;
+        cbLanguageSelection->IsEnabled = true;
 
         // Cancelling recognition prevents any currently recognized speech from
         // generating a ResultGenerated event. StopAsync() will allow the final session to 
@@ -268,7 +294,7 @@ void Scenario_ContinuousRecognitionSRGSGrammar::SpeechRecognizer_StateChanged(Sp
     {
         rootPage->NotifyUser("Speech recognizer state: " + args->State.ToString(), NotifyType::StatusMessage);
     }));
-    
+
 }
 
 /// <summary>
@@ -299,7 +325,7 @@ void Scenario_ContinuousRecognitionSRGSGrammar::ContinuousRecognitionSession_Com
 /// <param name="args">Details about the recognized speech</param>
 void Scenario_ContinuousRecognitionSRGSGrammar::ContinuousRecognitionSession_ResultGenerated(SpeechContinuousRecognitionSession ^sender, SpeechContinuousRecognitionResultGeneratedEventArgs ^args)
 {
-    dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]() 
+    dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
     {
         HandleRecognitionResult(args->Result);
     }));
@@ -329,7 +355,7 @@ void Scenario_ContinuousRecognitionSRGSGrammar::HandleRecognitionResult(SpeechRe
         // If "background" was matched, but the color rule matched GARBAGE, prompt the user.
         else if (recoResult->SemanticInterpretation->Properties->HasKey("background") && recoResult->SemanticInterpretation->Properties->Lookup("background")->GetAt(0) == "...")
         {
-			garbagePrompt += speechResourceMap->GetValue("SRGSBackgroundGarbagePromptText", speechContext)->ValueAsString;
+            garbagePrompt += speechResourceMap->GetValue("SRGSBackgroundGarbagePromptText", speechContext)->ValueAsString;
             resultTextBlock->Text = garbagePrompt;
         }
 
@@ -344,7 +370,7 @@ void Scenario_ContinuousRecognitionSRGSGrammar::HandleRecognitionResult(SpeechRe
         // If "border" was matched, but the color rule matched GARBAGE, prompt the user.
         else if (recoResult->SemanticInterpretation->Properties->HasKey("border") && recoResult->SemanticInterpretation->Properties->Lookup("border")->GetAt(0) == "...")
         {
-			garbagePrompt += speechResourceMap->GetValue("SRGSBorderGarbagePromptText", speechContext)->ValueAsString;
+            garbagePrompt += speechResourceMap->GetValue("SRGSBorderGarbagePromptText", speechContext)->ValueAsString;
             resultTextBlock->Text = garbagePrompt;
         }
 
@@ -359,7 +385,7 @@ void Scenario_ContinuousRecognitionSRGSGrammar::HandleRecognitionResult(SpeechRe
         // If "circle" was matched, but the color rule matched GARBAGE, prompt the user.
         else if (recoResult->SemanticInterpretation->Properties->HasKey("circle") && recoResult->SemanticInterpretation->Properties->Lookup("circle")->GetAt(0) == "...")
         {
-			garbagePrompt += speechResourceMap->GetValue("SRGSCircleGarbagePromptText", speechContext)->ValueAsString;
+            garbagePrompt += speechResourceMap->GetValue("SRGSCircleGarbagePromptText", speechContext)->ValueAsString;
             resultTextBlock->Text = garbagePrompt;
         }
 
@@ -396,7 +422,7 @@ void Scenario_ContinuousRecognitionSRGSGrammar::HandleRecognitionResult(SpeechRe
     }
     else
     {
-		resultTextBlock->Text = speechResourceMap->GetValue("SRGSGarbagePromptText", speechContext)->ValueAsString;
+        resultTextBlock->Text = speechResourceMap->GetValue("SRGSGarbagePromptText", speechContext)->ValueAsString;
     }
 }
 
@@ -422,22 +448,28 @@ Windows::UI::Color Scenario_ContinuousRecognitionSRGSGrammar::getColor(Platform:
 /// Populate language dropdown with supported Dictation languages.
 /// </summary>
 void Scenario_ContinuousRecognitionSRGSGrammar::PopulateLanguageDropdown()
-{
-	Windows::Globalization::Language^ defaultLanguage = SpeechRecognizer::SystemSpeechLanguage;
-	auto supportedLanguages = SpeechRecognizer::SupportedGrammarLanguages;
-	std::for_each(begin(supportedLanguages), end(supportedLanguages), [&](Windows::Globalization::Language^ lang)
-	{
-		ComboBoxItem^ item = ref new ComboBoxItem();
-		item->Tag = lang;
-		item->Content = lang->DisplayName;
+{    
+    // disable callback temporarily.
+    cbLanguageSelection->SelectionChanged -= cbLanguageSelectionSelectionChangedToken;
 
-		cbLanguageSelection->Items->Append(item);
-		if (lang->LanguageTag == defaultLanguage->LanguageTag)
-		{
-			item->IsSelected = true;
-			cbLanguageSelection->SelectedItem = item;
-		}
-	});
+    Windows::Globalization::Language^ defaultLanguage = SpeechRecognizer::SystemSpeechLanguage;
+    auto supportedLanguages = SpeechRecognizer::SupportedGrammarLanguages;
+    std::for_each(begin(supportedLanguages), end(supportedLanguages), [&](Windows::Globalization::Language^ lang)
+    {
+        ComboBoxItem^ item = ref new ComboBoxItem();
+        item->Tag = lang;
+        item->Content = lang->DisplayName;
+
+        cbLanguageSelection->Items->Append(item);
+        if (lang->LanguageTag == defaultLanguage->LanguageTag)
+        {
+            item->IsSelected = true;
+            cbLanguageSelection->SelectedItem = item;
+        }
+    });    
+    
+    cbLanguageSelectionSelectionChangedToken = cbLanguageSelection->SelectionChanged +=
+        ref new SelectionChangedEventHandler(this, &Scenario_ContinuousRecognitionSRGSGrammar::cbLanguageSelection_SelectionChanged);
 }
 
 /// <summary>
@@ -445,23 +477,27 @@ void Scenario_ContinuousRecognitionSRGSGrammar::PopulateLanguageDropdown()
 /// </summary>
 void Scenario_ContinuousRecognitionSRGSGrammar::cbLanguageSelection_SelectionChanged(Object^ sender, SelectionChangedEventArgs^ e)
 {
-	if (this->speechRecognizer != nullptr)
-	{
-		ComboBoxItem^ item = (ComboBoxItem^)(cbLanguageSelection->SelectedItem);
-		Windows::Globalization::Language^ newLanguage = (Windows::Globalization::Language^)item->Tag;
-		if (speechRecognizer->CurrentLanguage != newLanguage)
-		{
-			try
-			{
-				speechContext->Languages = ref new VectorView<String^>(1, newLanguage->LanguageTag);
+    ComboBoxItem^ item = (ComboBoxItem^)(cbLanguageSelection->SelectedItem);
+    Windows::Globalization::Language^ newLanguage = (Windows::Globalization::Language^)item->Tag;
 
-				InitializeRecognizer(newLanguage);
-			}
-			catch (Exception^ exception)
-			{
-				auto messageDialog = ref new Windows::UI::Popups::MessageDialog(exception->Message, "Exception");
-				create_task(messageDialog->ShowAsync());
-			}
-		}
-	}
+    if (this->speechRecognizer != nullptr)
+    {
+        if (speechRecognizer->CurrentLanguage == newLanguage)
+        {
+            return;
+        }
+    }
+
+    try
+    {
+        speechContext->Languages = ref new VectorView<String^>(1, newLanguage->LanguageTag);
+
+        InitializeRecognizer(newLanguage);
+    }
+    catch (Exception^ exception)
+    {
+        auto messageDialog = ref new Windows::UI::Popups::MessageDialog(exception->Message, "Exception");
+        create_task(messageDialog->ShowAsync());
+    }
+
 }

@@ -10,7 +10,7 @@ xmlns="http://www.w3.org/2001/06/grammar">
     <rule id="background_Color">
         <item>
             <item>
-                <ruleref uri="#COLOR_GROUP"/>
+                <ruleref uri="#color"/>
             </item>
             background
         </item>
@@ -19,7 +19,7 @@ xmlns="http://www.w3.org/2001/06/grammar">
     <rule id="border_Color">
         <item>
             <item>
-                <ruleref uri="#COLOR_GROUP"/>
+                <ruleref uri="#color"/>
             </item>
             border
         </item>
@@ -28,7 +28,7 @@ xmlns="http://www.w3.org/2001/06/grammar">
     <rule id="circle_Color">
         <item>
             <item>
-                <ruleref uri="#COLOR_GROUP"/>
+                <ruleref uri="#color"/>
             </item>
             circle
         </item>
@@ -47,7 +47,7 @@ xmlns="http://www.w3.org/2001/06/grammar">
             <item>
                 <item>
                     <ruleref uri="#background_Color"/>
-                    <tag> out.BACKGROUND_KEY=rules.latest(); </tag>
+                    <tag> out.background=rules.latest(); </tag>
                 </item>
                 <one-of>
 
@@ -56,22 +56,22 @@ xmlns="http://www.w3.org/2001/06/grammar">
                     <item>
                         <item>
                             <ruleref uri="#border_Color"/>
-                            <tag> out.BORDER_KEY=rules.latest(); </tag>
+                            <tag> out.border=rules.latest(); </tag>
                         </item>
                         <item repeat="0-1">
                             <ruleref uri="#circle_Color"/>
-                            <tag> out.CIRCLE_KEY=rules.latest(); </tag>
+                            <tag> out.circle=rules.latest(); </tag>
                         </item>
                     </item>
 
                     <item>
                         <item>
                             <ruleref uri="#circle_Color"/>
-                            <tag> out.CIRCLE_KEY=rules.latest(); </tag>
+                            <tag> out.circle=rules.latest(); </tag>
                         </item>
                         <item repeat="0-1">
                             <ruleref uri="#border_Color"/>
-                            <tag> out.BORDER_KEY=rules.latest(); </tag>
+                            <tag> out.border=rules.latest(); </tag>
                         </item>
                     </item>
 
@@ -81,7 +81,7 @@ xmlns="http://www.w3.org/2001/06/grammar">
             <item>
                 <item>
                     <ruleref uri="#border_Color"/>
-                    <tag> out.BORDER_KEY=rules.latest(); </tag>
+                    <tag> out.border=rules.latest(); </tag>
                 </item>
                 <one-of>
 
@@ -90,22 +90,22 @@ xmlns="http://www.w3.org/2001/06/grammar">
                     <item>
                         <item>
                             <ruleref uri="#background_Color"/>
-                            <tag> out.BACKGROUND_KEY=rules.latest(); </tag>
+                            <tag> out.background=rules.latest(); </tag>
                         </item>
                         <item repeat="0-1">
                             <ruleref uri="#circle_Color"/>
-                            <tag> out.CIRCLE_KEY=rules.latest(); </tag>
+                            <tag> out.circle=rules.latest(); </tag>
                         </item>
                     </item>
 
                     <item>
                         <item>
                             <ruleref uri="#circle_Color"/>
-                            <tag> out.CIRCLE_KEY=rules.latest(); </tag>
+                            <tag> out.circle=rules.latest(); </tag>
                         </item>
                         <item repeat="0-1">
                             <ruleref uri="#background_Color"/>
-                            <tag> out.BACKGROUND_KEY=rules.latest(); </tag>
+                            <tag> out.background=rules.latest(); </tag>
                         </item>
                     </item>
 
@@ -115,7 +115,7 @@ xmlns="http://www.w3.org/2001/06/grammar">
             <item>
                 <item>
                     <ruleref uri="#circle_Color"/>
-                    <tag> out.CIRCLE_KEY=rules.latest(); </tag>
+                    <tag> out.circle=rules.latest(); </tag>
                 </item>
                 <one-of>
 
@@ -124,22 +124,22 @@ xmlns="http://www.w3.org/2001/06/grammar">
                     <item>
                         <item>
                             <ruleref uri="#background_Color"/>
-                            <tag> out.BACKGROUND_KEY=rules.latest(); </tag>
+                            <tag> out.background=rules.latest(); </tag>
                         </item>
                         <item repeat="0-1">
                             <ruleref uri="#border_Color"/>
-                            <tag> out.BORDER_KEY=rules.latest(); </tag>
+                            <tag> out.border=rules.latest(); </tag>
                         </item>
                     </item>
 
                     <item>
                         <item>
                             <ruleref uri="#border_Color"/>
-                            <tag> out.BORDER_KEY=rules.latest(); </tag>
+                            <tag> out.border=rules.latest(); </tag>
                         </item>
                         <item repeat="0-1">
                             <ruleref uri="#background_Color"/>
-                            <tag> out.BACKGROUND_KEY=rules.latest(); </tag>
+                            <tag> out.background=rules.latest(); </tag>
                         </item>
                     </item>
 
@@ -151,43 +151,43 @@ xmlns="http://www.w3.org/2001/06/grammar">
     <!-- The list of colors that are recognized. Assigns a semantic value to each -->
     <!-- color to give the app a standardized value in the recognition result -->
 
-    <rule id="COLOR_GROUP">
+    <rule id="color">
         <one-of>
             <item>
-                red <tag> out="COLOR_RED"; </tag>
+                red <tag> out="red"; </tag>
             </item>
             <item>
-                orange <tag> out="COLOR_ORANGE"; </tag>
+                orange <tag> out="orange"; </tag>
             </item>
             <item>
-                yellow <tag> out="COLOR_YELLOW"; </tag>
+                yellow <tag> out="yellow"; </tag>
             </item>
             <item>
-                brown <tag> out="COLOR_BROWN"; </tag>
+                brown <tag> out="brown"; </tag>
             </item>
             <item>
-                green <tag> out="COLOR_GREEN"; </tag>
+                green <tag> out="green"; </tag>
             </item>
             <item>
-                cyan <tag> out="COLOR_CYAN"; </tag>
+                cyan <tag> out="cyan"; </tag>
             </item>
             <item>
-                purple <tag> out="COLOR_PURPLE"; </tag>
+                purple <tag> out="purple"; </tag>
             </item>
             <item>
-                magenta <tag> out="COLOR_MAGENTA"; </tag>
+                magenta <tag> out="magenta"; </tag>
             </item>
             <item>
-                gray <tag> out="COLOR_GRAY"; </tag>
+                gray <tag> out="gray"; </tag>
             </item>
             <item>
-                white <tag> out="COLOR_WHITE"; </tag>
+                white <tag> out="white"; </tag>
             </item>
             <item>
-                blue <tag> out="COLOR_BLUE"; </tag>
+                blue <tag> out="blue"; </tag>
             </item>
             <item>
-                black <tag> out="COLOR_BLACK"; </tag>
+                black <tag> out="black"; </tag>
             </item>
         </one-of>
     </rule>

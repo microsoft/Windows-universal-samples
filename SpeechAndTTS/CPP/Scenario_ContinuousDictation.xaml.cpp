@@ -55,7 +55,7 @@ void Scenario_ContinuousDictation::OnNavigatedTo(NavigationEventArgs^ e)
     // Prompt the user for permission to access the microphone. This request will only happen
     // once, it will not re-prompt if the user rejects the permission.
     create_task(AudioCapturePermissions::RequestMicrophonePermissionAsync(), task_continuation_context::use_current())
-        .then([this](bool permissionGained) 
+        .then([this](bool permissionGained)
     {
         if (permissionGained)
         {
@@ -65,9 +65,9 @@ void Scenario_ContinuousDictation::OnNavigatedTo(NavigationEventArgs^ e)
         {
             this->dictationTextBox->Text = "Permission to access capture resources was not given by the user; please set the application setting in Settings->Privacy->Microphone.";
         }
-    }).then([this]() 
+    }).then([this]()
     {
-		PopulateLanguageDropdown();
+        PopulateLanguageDropdown();
         InitializeRecognizer(SpeechRecognizer::SystemSpeechLanguage);
     }, task_continuation_context::use_current());
 }
@@ -77,18 +77,18 @@ void Scenario_ContinuousDictation::OnNavigatedTo(NavigationEventArgs^ e)
 /// </summary>
 void Scenario_ContinuousDictation::InitializeRecognizer(Windows::Globalization::Language^ recognizerLanguage)
 {
-	// If reinitializing the recognizer (ie, changing the speech language), clean up the old recognizer first.
-	// Avoid doing this while the recognizer is active by disabling the ability to change languages while listening.
-	if (this->speechRecognizer != nullptr)
-	{
-		speechRecognizer->StateChanged -= stateChangedToken;
-		speechRecognizer->ContinuousRecognitionSession->Completed -= continuousRecognitionCompletedToken;
-		speechRecognizer->ContinuousRecognitionSession->ResultGenerated -= continuousRecognitionResultGeneratedToken;
-		speechRecognizer->HypothesisGenerated -= hypothesisGeneratedToken;
+    // If reinitializing the recognizer (ie, changing the speech language), clean up the old recognizer first.
+    // Avoid doing this while the recognizer is active by disabling the ability to change languages while listening.
+    if (this->speechRecognizer != nullptr)
+    {
+        speechRecognizer->StateChanged -= stateChangedToken;
+        speechRecognizer->ContinuousRecognitionSession->Completed -= continuousRecognitionCompletedToken;
+        speechRecognizer->ContinuousRecognitionSession->ResultGenerated -= continuousRecognitionResultGeneratedToken;
+        speechRecognizer->HypothesisGenerated -= hypothesisGeneratedToken;
 
-		delete this->speechRecognizer;
-		this->speechRecognizer = nullptr;
-	}
+        delete this->speechRecognizer;
+        this->speechRecognizer = nullptr;
+    }
 
     this->speechRecognizer = ref new SpeechRecognizer(recognizerLanguage);
 
@@ -96,17 +96,17 @@ void Scenario_ContinuousDictation::InitializeRecognizer(Windows::Globalization::
     // of an audio indicator to help the user understand whether they're being heard.
     stateChangedToken = speechRecognizer->StateChanged +=
         ref new TypedEventHandler<
-            SpeechRecognizer ^,
-            SpeechRecognizerStateChangedEventArgs ^>(
-                this,
-                &Scenario_ContinuousDictation::SpeechRecognizer_StateChanged);
+        SpeechRecognizer ^,
+        SpeechRecognizerStateChangedEventArgs ^>(
+            this,
+            &Scenario_ContinuousDictation::SpeechRecognizer_StateChanged);
 
     // Apply the dictation topic constraint to optimize for dictated freeform speech.
     auto dictationConstraint = ref new SpeechRecognitionTopicConstraint(SpeechRecognitionScenario::Dictation, "dictation");
     speechRecognizer->Constraints->Append(dictationConstraint);
 
     create_task(speechRecognizer->CompileConstraintsAsync(), task_continuation_context::use_current())
-        .then([this](task<SpeechRecognitionCompilationResult^> previousTask) 
+        .then([this](task<SpeechRecognitionCompilationResult^> previousTask)
     {
         SpeechRecognitionCompilationResult^ compilationResult = previousTask.get();
 
@@ -123,22 +123,22 @@ void Scenario_ContinuousDictation::InitializeRecognizer(Windows::Globalization::
         // allows us to provide incremental feedback based on what the user's currently saying.
         continuousRecognitionCompletedToken = speechRecognizer->ContinuousRecognitionSession->Completed +=
             ref new TypedEventHandler<
-                SpeechContinuousRecognitionSession ^, 
-                SpeechContinuousRecognitionCompletedEventArgs ^>(
-                    this, 
-                    &Scenario_ContinuousDictation::ContinuousRecognitionSession_Completed);
-        continuousRecognitionResultGeneratedToken = speechRecognizer->ContinuousRecognitionSession->ResultGenerated += 
+            SpeechContinuousRecognitionSession ^,
+            SpeechContinuousRecognitionCompletedEventArgs ^>(
+                this,
+                &Scenario_ContinuousDictation::ContinuousRecognitionSession_Completed);
+        continuousRecognitionResultGeneratedToken = speechRecognizer->ContinuousRecognitionSession->ResultGenerated +=
             ref new TypedEventHandler<
-                SpeechContinuousRecognitionSession ^, 
-                SpeechContinuousRecognitionResultGeneratedEventArgs ^>(
-                    this, 
-                    &Scenario_ContinuousDictation::ContinuousRecognitionSession_ResultGenerated);
-        hypothesisGeneratedToken = speechRecognizer->HypothesisGenerated += 
+            SpeechContinuousRecognitionSession ^,
+            SpeechContinuousRecognitionResultGeneratedEventArgs ^>(
+                this,
+                &Scenario_ContinuousDictation::ContinuousRecognitionSession_ResultGenerated);
+        hypothesisGeneratedToken = speechRecognizer->HypothesisGenerated +=
             ref new TypedEventHandler<
-                SpeechRecognizer ^, 
-                SpeechRecognitionHypothesisGeneratedEventArgs ^>(
-                    this, 
-                    &Scenario_ContinuousDictation::SpeechRecognizer_HypothesisGenerated);
+            SpeechRecognizer ^,
+            SpeechRecognitionHypothesisGeneratedEventArgs ^>(
+                this,
+                &Scenario_ContinuousDictation::SpeechRecognizer_HypothesisGenerated);
 
 
     }, task_continuation_context::use_current());
@@ -166,7 +166,7 @@ void Scenario_ContinuousDictation::OnNavigatedFrom(NavigationEventArgs^ e)
         {
             cleanupTask = create_task([]() {}, task_continuation_context::use_current());
         }
-    
+
         cleanupTask.then([this]() {
             DictationButtonText->Text = " Dictate";
             dictationTextBox->Text = "";
@@ -194,55 +194,56 @@ void Scenario_ContinuousDictation::ContinuousRecognize_Click(Object^ sender, Rou
     if (speechRecognizer->State == SpeechRecognizerState::Idle)
     {
         DictationButtonText->Text = " Stop Dictation";
-		cbLanguageSelection->IsEnabled = false;
-		hlOpenPrivacySettings->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+        cbLanguageSelection->IsEnabled = false;
+        hlOpenPrivacySettings->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+        discardedTextBlock->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
 
-		try
-		{
-			create_task(speechRecognizer->ContinuousRecognitionSession->StartAsync(), task_continuation_context::use_current())
-				.then([this](task<void> startAsyncTask)
-			{
-				try
-				{
-					// Retreive any exceptions that may have been generated by StartAsync.
-					startAsyncTask.get();
-				}
-				catch (Exception^ exception)
-				{
-					DictationButtonText->Text = " Dictate";
-					cbLanguageSelection->IsEnabled = true;
+        try
+        {
+            create_task(speechRecognizer->ContinuousRecognitionSession->StartAsync(), task_continuation_context::use_current())
+                .then([this](task<void> startAsyncTask)
+            {
+                try
+                {
+                    // Retreive any exceptions that may have been generated by StartAsync.
+                    startAsyncTask.get();
+                }
+                catch (Exception^ exception)
+                {
+                    DictationButtonText->Text = " Dictate";
+                    cbLanguageSelection->IsEnabled = true;
 
-					auto messageDialog = ref new Windows::UI::Popups::MessageDialog(exception->Message, "Exception");
-					create_task(messageDialog->ShowAsync());
-				}
-			});
-		}
-		catch (COMException^ exception)
-		{
-			if ((unsigned int)exception->HResult == HResultPrivacyStatementDeclined)
-			{
-				// If the privacy policy hasn't been accepted, attempting to create a task out of RecognizeAsync fails immediately with a
-				// COMException and this specific HResult.
-				hlOpenPrivacySettings->Visibility = Windows::UI::Xaml::Visibility::Visible;
-			}
-			else
-			{
-				auto messageDialog = ref new Windows::UI::Popups::MessageDialog(exception->Message, "Exception");
-				create_task(messageDialog->ShowAsync());
-			}
-		}
+                    auto messageDialog = ref new Windows::UI::Popups::MessageDialog(exception->Message, "Exception");
+                    create_task(messageDialog->ShowAsync());
+                }
+            });
+        }
+        catch (COMException^ exception)
+        {
+            if ((unsigned int)exception->HResult == HResultPrivacyStatementDeclined)
+            {
+                // If the privacy policy hasn't been accepted, attempting to create a task out of RecognizeAsync fails immediately with a
+                // COMException and this specific HResult.
+                hlOpenPrivacySettings->Visibility = Windows::UI::Xaml::Visibility::Visible;
+            }
+            else
+            {
+                auto messageDialog = ref new Windows::UI::Popups::MessageDialog(exception->Message, "Exception");
+                create_task(messageDialog->ShowAsync());
+            }
+        }
     }
     else
     {
         DictationButtonText->Text = " Dictate";
-		cbLanguageSelection->IsEnabled = true;
+        cbLanguageSelection->IsEnabled = true;
 
 
         // Cancelling recognition prevents any currently recognized speech from
         // generating a ResultGenerated event. StopAsync() will allow the final session to 
         // complete.
         create_task(speechRecognizer->ContinuousRecognitionSession->StopAsync(), task_continuation_context::use_current())
-            .then([this]() 
+            .then([this]()
         {
 
             // Ensure we don't leave any hypothesis text behind
@@ -260,6 +261,7 @@ void Scenario_ContinuousDictation::btnClearText_Click(Object^ sender, RoutedEven
     this->dictatedTextBuilder.str(L"");
     this->dictatedTextBuilder.clear();
     dictationTextBox->Text = "";
+    discardedTextBlock->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
 
     btnContinuousRecognize->Focus(Windows::UI::Xaml::FocusState::Programmatic);
 }
@@ -295,7 +297,7 @@ void Scenario_ContinuousDictation::SpeechRecognizer_StateChanged(SpeechRecognize
     {
         rootPage->NotifyUser("Speech recognizer state: " + args->State.ToString(), NotifyType::StatusMessage);
     }));
-    
+
 }
 
 /// <summary>
@@ -318,7 +320,7 @@ void Scenario_ContinuousDictation::ContinuousRecognitionSession_Completed(Speech
             {
                 rootPage->NotifyUser("Automatic Time Out of Dictation", NotifyType::StatusMessage);
                 DictationButtonText->Text = " Dictate";
-				cbLanguageSelection->IsEnabled = true;
+                cbLanguageSelection->IsEnabled = true;
                 dictationTextBox->Text = ref new Platform::String(this->dictatedTextBuilder.str().c_str());
             }));
         }
@@ -328,7 +330,7 @@ void Scenario_ContinuousDictation::ContinuousRecognitionSession_Completed(Speech
             {
                 rootPage->NotifyUser("Continuous Recognition Completed: " + args->Status.ToString(), NotifyType::ErrorMessage);
                 DictationButtonText->Text = " Dictate";
-				cbLanguageSelection->IsEnabled = true;
+                cbLanguageSelection->IsEnabled = true;
             }));
         }
     }
@@ -349,21 +351,34 @@ void Scenario_ContinuousDictation::ContinuousRecognitionSession_ResultGenerated(
         args->Result->Confidence == SpeechRecognitionConfidence::High)
     {
         this->dictatedTextBuilder << args->Result->Text->Data() << " ";
-        
-        dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this]() 
+
+        dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this]()
         {
+            this->discardedTextBlock->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+
             this->dictationTextBox->Text = ref new String(this->dictatedTextBuilder.str().c_str());
             this->btnClearText->IsEnabled = true;
         }));
     }
     else
     {
-        dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this]() 
+        dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
         {
             // In some scenarios, a developer may choose to ignore giving the user feedback in this case, if speech
             // is not the primary input mechanism for the application.
             // Here, just remove any hypothesis text by resetting it to the last known good.
             this->dictationTextBox->Text = ref new String(this->dictatedTextBuilder.str().c_str());
+
+            if (!args->Result->Text->IsEmpty())
+            {
+                std::wstring discardedText = args->Result->Text->Data();
+
+                discardedText = discardedText.size() <= 25 ? discardedText : (discardedText.substr(0, 25) + L"...");
+
+                discardedTextBlock->Text = L"Discarded due to low/rejected Confidence: " + ref new String(discardedText.c_str());
+                discardedTextBlock->Visibility = Windows::UI::Xaml::Visibility::Visible;
+            }
+
         }));
     }
 }
@@ -391,21 +406,21 @@ void Scenario_ContinuousDictation::SpeechRecognizer_HypothesisGenerated(SpeechRe
 /// </summary>
 void Scenario_ContinuousDictation::PopulateLanguageDropdown()
 {
-	Windows::Globalization::Language^ defaultLanguage = SpeechRecognizer::SystemSpeechLanguage;
-	auto supportedLanguages = SpeechRecognizer::SupportedTopicLanguages;
-	std::for_each(begin(supportedLanguages), end(supportedLanguages), [&](Windows::Globalization::Language^ lang) 
-	{
-		ComboBoxItem^ item = ref new ComboBoxItem();
-		item->Tag = lang;
-		item->Content = lang->DisplayName;
-		
-		cbLanguageSelection->Items->Append(item);
-		if (lang->LanguageTag == defaultLanguage->LanguageTag)
-		{
-			item->IsSelected = true;
-			cbLanguageSelection->SelectedItem = item;
-		}
-	});
+    Windows::Globalization::Language^ defaultLanguage = SpeechRecognizer::SystemSpeechLanguage;
+    auto supportedLanguages = SpeechRecognizer::SupportedTopicLanguages;
+    std::for_each(begin(supportedLanguages), end(supportedLanguages), [&](Windows::Globalization::Language^ lang)
+    {
+        ComboBoxItem^ item = ref new ComboBoxItem();
+        item->Tag = lang;
+        item->Content = lang->DisplayName;
+
+        cbLanguageSelection->Items->Append(item);
+        if (lang->LanguageTag == defaultLanguage->LanguageTag)
+        {
+            item->IsSelected = true;
+            cbLanguageSelection->SelectedItem = item;
+        }
+    });
 }
 
 /// <summary>
@@ -413,23 +428,23 @@ void Scenario_ContinuousDictation::PopulateLanguageDropdown()
 /// </summary>
 void Scenario_ContinuousDictation::cbLanguageSelection_SelectionChanged(Object^ sender, SelectionChangedEventArgs^ e)
 {
-	if (this->speechRecognizer != nullptr)
-	{
-		ComboBoxItem^ item = (ComboBoxItem^)(cbLanguageSelection->SelectedItem);
-		Windows::Globalization::Language^ newLanguage = (Windows::Globalization::Language^)item->Tag;
-		if (speechRecognizer->CurrentLanguage != newLanguage)
-		{
-			try
-			{
-				InitializeRecognizer(newLanguage);
-			}
-			catch (Exception^ exception)
-			{
-				auto messageDialog = ref new Windows::UI::Popups::MessageDialog(exception->Message, "Exception");
-				create_task(messageDialog->ShowAsync());
-			}
-		}
-	}
+    if (this->speechRecognizer != nullptr)
+    {
+        ComboBoxItem^ item = (ComboBoxItem^)(cbLanguageSelection->SelectedItem);
+        Windows::Globalization::Language^ newLanguage = (Windows::Globalization::Language^)item->Tag;
+        if (speechRecognizer->CurrentLanguage != newLanguage)
+        {
+            try
+            {
+                InitializeRecognizer(newLanguage);
+            }
+            catch (Exception^ exception)
+            {
+                auto messageDialog = ref new Windows::UI::Popups::MessageDialog(exception->Message, "Exception");
+                create_task(messageDialog->ShowAsync());
+            }
+        }
+    }
 }
 
 /// <summary>
@@ -440,5 +455,5 @@ void Scenario_ContinuousDictation::cbLanguageSelection_SelectionChanged(Object^ 
 /// <param name="args">Ignored</param>
 void Scenario_ContinuousDictation::openPrivacySettings_Click(Hyperlink^ sender, HyperlinkClickEventArgs^ args)
 {
-	create_task(Windows::System::Launcher::LaunchUriAsync(ref new Uri(L"ms-settings:privacy-speechtyping")));
+    create_task(Windows::System::Launcher::LaunchUriAsync(ref new Uri(L"ms-settings:privacy-speechtyping")));
 }

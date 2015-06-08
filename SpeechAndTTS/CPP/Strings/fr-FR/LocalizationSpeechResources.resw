@@ -157,10 +157,6 @@
     <value>Try saying 'Go Home', 'Call Nita', 'Go to Contoso Studio', 'Send Email'.</value>
     <comment>RecognizeWithUI Options</comment>
   </data>
-  <data name="No" xml:space="preserve">
-    <value>Non</value>
-    <comment>List Constraint Scenario - grammar entry for No</comment>
-  </data>
   <data name="SRGSBackgroundGarbagePromptText" xml:space="preserve">
     <value>FR-FR Didn't get the background color \n\nTry saying blue background\n</value>
   </data>
@@ -184,25 +180,7 @@
     <value>FR-FR Try "blue background, red border, green circle".</value>
     <comment>UIOptions for SRGS one-shot sample</comment>
   </data>
-  <data name="SynthesizeSSMLDefaultText" xml:space="preserve">
-    <value>&lt;speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' 
-                             xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' 
-                             xsi:schemaLocation='http://www.w3.org/2001/10/synthesis  http://www.w3.org/TR/speech-synthesis/synthesis.xsd' 
-                             xml:lang='fr-FR'&gt;
-This FR-FR sentence has a mark &lt;mark name='mark1'/&gt; here and another mark here &lt;mark name='mark2'/&gt;.
-This is an example of how to speak the word &lt;phoneme alphabet='x-microsoft-ups' ph='S1 W AA T . CH AX . M AX . S2 K AA L . IH T'&gt; whatchamacallit &lt;/phoneme&gt;.
-This is an example of how to use the say-as tag to say a date: &lt;say-as interpret-as='date:mdy'&gt; 04/30/2013 &lt;/say-as&gt;.
-This &lt;say-as interpret-as='ordinal'&gt; 4th &lt;/say-as&gt; example is how to use the ordinal data type.
-&lt;/speak&gt;</value>
-  </data>
-  <data name="SynthesizeTextDefaultText" xml:space="preserve">
-    <value>Le rapide renard roux a sauté sur le chien paresseux brun</value>
-  </data>
   <data name="WebSearchUIOptionsExampleText" xml:space="preserve">
     <value>Ex "fr-FR Weather for France"</value>
-  </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Oui</value>
-    <comment>List Constraint Scenario - grammar entry for Yes</comment>
   </data>
 </root>
