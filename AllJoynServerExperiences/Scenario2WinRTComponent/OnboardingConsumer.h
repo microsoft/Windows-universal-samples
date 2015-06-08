@@ -151,7 +151,7 @@ private:
     alljoyn_busobject m_busObject;
     alljoyn_sessionlistener m_sessionListener;
     alljoyn_sessionid m_sessionId;
-	alljoyn_busattachment m_nativeBusAttachment;
+    alljoyn_busattachment m_nativeBusAttachment;
 
     // Used to pass a pointer to this class to callbacks
     Platform::WeakReference* m_weak;

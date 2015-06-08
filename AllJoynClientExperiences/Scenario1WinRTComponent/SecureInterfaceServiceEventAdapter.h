@@ -53,7 +53,7 @@ public:
 
     virtual Windows::Foundation::IAsyncOperation<SecureInterfaceGetIsUpperCaseEnabledResult^>^ GetIsUpperCaseEnabledAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info);
 
-    virtual Windows::Foundation::IAsyncOperation<int>^ SetIsUpperCaseEnabledAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info, _In_ bool value);
+    virtual Windows::Foundation::IAsyncOperation<SecureInterfaceSetIsUpperCaseEnabledResult^>^ SetIsUpperCaseEnabledAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info, _In_ bool value);
 };
 
 } } } } } } 
