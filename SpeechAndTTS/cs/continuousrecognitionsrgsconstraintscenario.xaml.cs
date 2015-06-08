@@ -382,14 +382,14 @@ namespace SpeechAndTTS
 
                 // BACKGROUND: Check to see if the recognition result contains the semantic key for the background color,
                 // and not a match for the GARBAGE rule, and change the color.
-                if (recoResult.SemanticInterpretation.Properties.ContainsKey("BACKGROUND_KEY") && recoResult.SemanticInterpretation.Properties["BACKGROUND_KEY"][0].ToString() != "...")
+                if (recoResult.SemanticInterpretation.Properties.ContainsKey("KEY_BACKGROUND") && recoResult.SemanticInterpretation.Properties["KEY_BACKGROUND"][0].ToString() != "...")
                 {
-                    string backgroundColor = recoResult.SemanticInterpretation.Properties["BACKGROUND_KEY"][0].ToString();
+                    string backgroundColor = recoResult.SemanticInterpretation.Properties["KEY_BACKGROUND"][0].ToString();
                     colorRectangle.Fill = new SolidColorBrush(getColor(backgroundColor));
                 }
 
                 // If "background" was matched, but the color rule matched GARBAGE, prompt the user.
-                else if (recoResult.SemanticInterpretation.Properties.ContainsKey("BACKGROUND_KEY") && recoResult.SemanticInterpretation.Properties["BACKGROUND_KEY"][0].ToString() == "...")
+                else if (recoResult.SemanticInterpretation.Properties.ContainsKey("KEY_BACKGROUND") && recoResult.SemanticInterpretation.Properties["KEY_BACKGROUND"][0].ToString() == "...")
                 {
 
                     garbagePrompt += speechResourceMap.GetValue("SRGSBackgroundGarbagePromptText", speechContext).ValueAsString;
@@ -398,14 +398,14 @@ namespace SpeechAndTTS
 
                 // BORDER: Check to see if the recognition result contains the semantic key for the border color,
                 // and not a match for the GARBAGE rule, and change the color.
-                if (recoResult.SemanticInterpretation.Properties.ContainsKey("BORDER_KEY") && recoResult.SemanticInterpretation.Properties["BORDER_KEY"][0].ToString() != "...")
+                if (recoResult.SemanticInterpretation.Properties.ContainsKey("KEY_BORDER") && recoResult.SemanticInterpretation.Properties["KEY_BORDER"][0].ToString() != "...")
                 {
-                    string borderColor = recoResult.SemanticInterpretation.Properties["BORDER_KEY"][0].ToString();
+                    string borderColor = recoResult.SemanticInterpretation.Properties["KEY_BORDER"][0].ToString();
                     colorRectangle.Stroke = new SolidColorBrush(getColor(borderColor));
                 }
 
                 // If "border" was matched, but the color rule matched GARBAGE, prompt the user.
-                else if (recoResult.SemanticInterpretation.Properties.ContainsKey("BORDER_KEY") && recoResult.SemanticInterpretation.Properties["BORDER_KEY"][0].ToString() == "...")
+                else if (recoResult.SemanticInterpretation.Properties.ContainsKey("KEY_BORDER") && recoResult.SemanticInterpretation.Properties["KEY_BORDER"][0].ToString() == "...")
                 {
                     garbagePrompt += speechResourceMap.GetValue("SRGSBorderGarbagePromptText", speechContext).ValueAsString;
                     resultTextBlock.Text = garbagePrompt;
@@ -413,14 +413,14 @@ namespace SpeechAndTTS
 
                 // CIRCLE: Check to see if the recognition result contains the semantic key for the circle color,
                 // and not a match for the GARBAGE rule, and change the color.
-                if (recoResult.SemanticInterpretation.Properties.ContainsKey("CIRCLE_KEY") && recoResult.SemanticInterpretation.Properties["CIRCLE_KEY"][0].ToString() != "...")
+                if (recoResult.SemanticInterpretation.Properties.ContainsKey("KEY_CIRCLE") && recoResult.SemanticInterpretation.Properties["KEY_CIRCLE"][0].ToString() != "...")
                 {
-                    string circleColor = recoResult.SemanticInterpretation.Properties["CIRCLE_KEY"][0].ToString();
+                    string circleColor = recoResult.SemanticInterpretation.Properties["KEY_CIRCLE"][0].ToString();
                     colorCircle.Fill = new SolidColorBrush(getColor(circleColor));
                 }
 
                 // If "circle" was matched, but the color rule matched GARBAGE, prompt the user.
-                else if (recoResult.SemanticInterpretation.Properties.ContainsKey("CIRCLE_KEY") && recoResult.SemanticInterpretation.Properties["CIRCLE_KEY"][0].ToString() == "...")
+                else if (recoResult.SemanticInterpretation.Properties.ContainsKey("KEY_CIRCLE") && recoResult.SemanticInterpretation.Properties["KEY_CIRCLE"][0].ToString() == "...")
                 {
                     garbagePrompt += speechResourceMap.GetValue("SRGSCircleGarbagePromptText", speechContext).ValueAsString;
                     resultTextBlock.Text = garbagePrompt;

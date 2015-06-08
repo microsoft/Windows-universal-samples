@@ -41,10 +41,10 @@ Scenario_SRGSConstraint::Scenario_SRGSConstraint() : rootPage(MainPage::Current)
 
     colorLookup = ref new Map<String^, Color>(
     {
-        { "red",   Colors::Red },    { "blue",  Colors::Blue },   { "black",  Colors::Black },
-        { "brown", Colors::Brown },  { "purple",Colors::Purple }, { "green",  Colors::Green },
-        { "yellow",Colors::Yellow }, { "cyan",  Colors::Cyan },   { "magenta",Colors::Magenta },
-        { "orange",Colors::Orange }, { "gray",  Colors::Gray },   { "white",  Colors::White }
+        { "COLOR_RED",   Colors::Red },    { "COLOR_BLUE",  Colors::Blue },   { "COLOR_BLACK",  Colors::Black },
+        { "COLOR_BROWN", Colors::Brown },  { "COLOR_PURPLE",Colors::Purple }, { "COLOR_GREEN",  Colors::Green },
+        { "COLOR_YELLOW",Colors::Yellow }, { "COLOR_CYAN",  Colors::Cyan },   { "COLOR_MAGENTA",Colors::Magenta },
+        { "COLOR_ORANGE",Colors::Orange }, { "COLOR_GRAY",  Colors::Gray },   { "COLOR_WHITE",  Colors::White }
     });
 }
 
@@ -160,7 +160,8 @@ void Scenario_SRGSConstraint::InitializeRecognizer(Windows::Globalization::Langu
                 btnRecognizeWithoutUI->IsEnabled = true;
 
                 // Let the user know that the grammar didn't compile properly.
-                resultTextBlock->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+				resultTextBlock->Text = speechResourceMap->GetValue("SRGSHelpText", speechContext)->ValueAsString;
+                resultTextBlock->Visibility = Windows::UI::Xaml::Visibility::Visible;
             }
         }, task_continuation_context::use_current());
     }
@@ -327,14 +328,14 @@ void Scenario_SRGSConstraint::HandleRecognitionResult(SpeechRecognitionResult^ r
 
         // BACKGROUND: Check to see if the recognition result contains the semantic key for the background color,
         // and not a match for the GARBAGE rule, and change the color.
-        if (recoResult->SemanticInterpretation->Properties->HasKey("background") && recoResult->SemanticInterpretation->Properties->Lookup("background")->GetAt(0) != "...")
+        if (recoResult->SemanticInterpretation->Properties->HasKey("KEY_BACKGROUND") && recoResult->SemanticInterpretation->Properties->Lookup("KEY_BACKGROUND")->GetAt(0) != "...")
         {
-            String^ backgroundColor = recoResult->SemanticInterpretation->Properties->Lookup("background")->GetAt(0);
+            String^ backgroundColor = recoResult->SemanticInterpretation->Properties->Lookup("KEY_BACKGROUND")->GetAt(0);
             colorRectangle->Fill = ref new SolidColorBrush(getColor(backgroundColor));
         }
 
         // If "background" was matched, but the color rule matched GARBAGE, prompt the user.
-        else if (recoResult->SemanticInterpretation->Properties->HasKey("background") && recoResult->SemanticInterpretation->Properties->Lookup("background")->GetAt(0) == "...")
+        else if (recoResult->SemanticInterpretation->Properties->HasKey("KEY_BACKGROUND") && recoResult->SemanticInterpretation->Properties->Lookup("KEY_BACKGROUND")->GetAt(0) == "...")
         {
             garbagePrompt += speechResourceMap->GetValue("SRGSBackgroundGarbagePromptText", speechContext)->ValueAsString;
             resultTextBlock->Text = garbagePrompt;
@@ -342,14 +343,14 @@ void Scenario_SRGSConstraint::HandleRecognitionResult(SpeechRecognitionResult^ r
 
         // BORDER: Check to see if the recognition result contains the semantic key for the border color,
         // and not a match for the GARBAGE rule, and change the color.
-        if (recoResult->SemanticInterpretation->Properties->HasKey("border") && recoResult->SemanticInterpretation->Properties->Lookup("border")->GetAt(0) != "...")
+        if (recoResult->SemanticInterpretation->Properties->HasKey("KEY_BORDER") && recoResult->SemanticInterpretation->Properties->Lookup("KEY_BORDER")->GetAt(0) != "...")
         {
-            String^ borderColor = recoResult->SemanticInterpretation->Properties->Lookup("border")->GetAt(0);
+            String^ borderColor = recoResult->SemanticInterpretation->Properties->Lookup("KEY_BORDER")->GetAt(0);
             colorRectangle->Stroke = ref new SolidColorBrush(getColor(borderColor));
         }
 
         // If "border" was matched, but the color rule matched GARBAGE, prompt the user.
-        else if (recoResult->SemanticInterpretation->Properties->HasKey("border") && recoResult->SemanticInterpretation->Properties->Lookup("border")->GetAt(0) == "...")
+        else if (recoResult->SemanticInterpretation->Properties->HasKey("KEY_BORDER") && recoResult->SemanticInterpretation->Properties->Lookup("KEY_BORDER")->GetAt(0) == "...")
         {
             garbagePrompt += speechResourceMap->GetValue("SRGSBorderGarbagePromptText", speechContext)->ValueAsString;
             resultTextBlock->Text = garbagePrompt;
@@ -357,14 +358,14 @@ void Scenario_SRGSConstraint::HandleRecognitionResult(SpeechRecognitionResult^ r
 
         // CIRCLE: Check to see if the recognition result contains the semantic key for the circle color,
         // and not a match for the GARBAGE rule, and change the color.
-        if (recoResult->SemanticInterpretation->Properties->HasKey("circle") && recoResult->SemanticInterpretation->Properties->Lookup("circle")->GetAt(0) != "...")
+        if (recoResult->SemanticInterpretation->Properties->HasKey("KEY_CIRCLE") && recoResult->SemanticInterpretation->Properties->Lookup("KEY_CIRCLE")->GetAt(0) != "...")
         {
-            String^ circleColor = recoResult->SemanticInterpretation->Properties->Lookup("circle")->GetAt(0);
+            String^ circleColor = recoResult->SemanticInterpretation->Properties->Lookup("KEY_CIRCLE")->GetAt(0);
             colorCircle->Fill = ref new SolidColorBrush(getColor(circleColor));
         }
 
         // If "circle" was matched, but the color rule matched GARBAGE, prompt the user.
-        else if (recoResult->SemanticInterpretation->Properties->HasKey("circle") && recoResult->SemanticInterpretation->Properties->Lookup("circle")->GetAt(0) == "...")
+        else if (recoResult->SemanticInterpretation->Properties->HasKey("KEY_CIRCLE") && recoResult->SemanticInterpretation->Properties->Lookup("KEY_CIRCLE")->GetAt(0) == "...")
         {
             garbagePrompt += speechResourceMap->GetValue("SRGSCircleGarbagePromptText", speechContext)->ValueAsString;
             resultTextBlock->Text = garbagePrompt;

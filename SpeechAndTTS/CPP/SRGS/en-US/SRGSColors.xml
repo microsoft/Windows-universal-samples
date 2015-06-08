@@ -47,7 +47,7 @@ xmlns="http://www.w3.org/2001/06/grammar">
             <item>
                 <item>
                     <ruleref uri="#background_Color"/>
-                    <tag> out.BACKGROUND_KEY=rules.latest(); </tag>
+                    <tag> out.KEY_BACKGROUND=rules.latest(); </tag>
                 </item>
                 <one-of>
 
@@ -56,22 +56,22 @@ xmlns="http://www.w3.org/2001/06/grammar">
                     <item>
                         <item>
                             <ruleref uri="#border_Color"/>
-                            <tag> out.BORDER_KEY=rules.latest(); </tag>
+                            <tag> out.KEY_BORDER=rules.latest(); </tag>
                         </item>
                         <item repeat="0-1">
                             <ruleref uri="#circle_Color"/>
-                            <tag> out.CIRCLE_KEY=rules.latest(); </tag>
+                            <tag> out.KEY_CIRCLE=rules.latest(); </tag>
                         </item>
                     </item>
 
                     <item>
                         <item>
                             <ruleref uri="#circle_Color"/>
-                            <tag> out.CIRCLE_KEY=rules.latest(); </tag>
+                            <tag> out.KEY_CIRCLE=rules.latest(); </tag>
                         </item>
                         <item repeat="0-1">
                             <ruleref uri="#border_Color"/>
-                            <tag> out.BORDER_KEY=rules.latest(); </tag>
+                            <tag> out.KEY_BORDER=rules.latest(); </tag>
                         </item>
                     </item>
 
@@ -81,7 +81,7 @@ xmlns="http://www.w3.org/2001/06/grammar">
             <item>
                 <item>
                     <ruleref uri="#border_Color"/>
-                    <tag> out.BORDER_KEY=rules.latest(); </tag>
+                    <tag> out.KEY_BORDER=rules.latest(); </tag>
                 </item>
                 <one-of>
 
@@ -90,22 +90,22 @@ xmlns="http://www.w3.org/2001/06/grammar">
                     <item>
                         <item>
                             <ruleref uri="#background_Color"/>
-                            <tag> out.BACKGROUND_KEY=rules.latest(); </tag>
+                            <tag> out.KEY_BACKGROUND=rules.latest(); </tag>
                         </item>
                         <item repeat="0-1">
                             <ruleref uri="#circle_Color"/>
-                            <tag> out.CIRCLE_KEY=rules.latest(); </tag>
+                            <tag> out.KEY_CIRCLE=rules.latest(); </tag>
                         </item>
                     </item>
 
                     <item>
                         <item>
                             <ruleref uri="#circle_Color"/>
-                            <tag> out.CIRCLE_KEY=rules.latest(); </tag>
+                            <tag> out.KEY_CIRCLE=rules.latest(); </tag>
                         </item>
                         <item repeat="0-1">
                             <ruleref uri="#background_Color"/>
-                            <tag> out.BACKGROUND_KEY=rules.latest(); </tag>
+                            <tag> out.KEY_BACKGROUND=rules.latest(); </tag>
                         </item>
                     </item>
 
@@ -115,7 +115,7 @@ xmlns="http://www.w3.org/2001/06/grammar">
             <item>
                 <item>
                     <ruleref uri="#circle_Color"/>
-                    <tag> out.CIRCLE_KEY=rules.latest(); </tag>
+                    <tag> out.KEY_CIRCLE=rules.latest(); </tag>
                 </item>
                 <one-of>
 
@@ -124,22 +124,22 @@ xmlns="http://www.w3.org/2001/06/grammar">
                     <item>
                         <item>
                             <ruleref uri="#background_Color"/>
-                            <tag> out.BACKGROUND_KEY=rules.latest(); </tag>
+                            <tag> out.KEY_BACKGROUND=rules.latest(); </tag>
                         </item>
                         <item repeat="0-1">
                             <ruleref uri="#border_Color"/>
-                            <tag> out.BORDER_KEY=rules.latest(); </tag>
+                            <tag> out.KEY_BORDER=rules.latest(); </tag>
                         </item>
                     </item>
 
                     <item>
                         <item>
                             <ruleref uri="#border_Color"/>
-                            <tag> out.BORDER_KEY=rules.latest(); </tag>
+                            <tag> out.KEY_BORDER=rules.latest(); </tag>
                         </item>
                         <item repeat="0-1">
                             <ruleref uri="#background_Color"/>
-                            <tag> out.BACKGROUND_KEY=rules.latest(); </tag>
+                            <tag> out.KEY_BACKGROUND=rules.latest(); </tag>
                         </item>
                     </item>
 
