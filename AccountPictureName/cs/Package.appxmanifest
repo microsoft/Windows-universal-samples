@@ -45,6 +45,9 @@
                     </uap:ShowNameOnTiles>
                 </uap:DefaultTile>
             </uap:VisualElements>
+          <Extensions>
+            <uap:Extension Category="windows.accountPictureProvider" />
+          </Extensions>
         </Application>      
     </Applications>
 

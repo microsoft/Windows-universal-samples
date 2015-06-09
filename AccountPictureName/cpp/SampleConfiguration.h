@@ -47,4 +47,10 @@ namespace SDKTemplate
         Platform::String^ Title;
         Platform::String^ ClassName;
     };
+
+    partial ref class App sealed
+    {
+    protected:
+        virtual void OnActivated(Windows::ApplicationModel::Activation::IActivatedEventArgs^ args) override;
+    };
 }
