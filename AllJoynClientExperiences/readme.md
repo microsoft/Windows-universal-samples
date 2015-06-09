@@ -12,6 +12,13 @@ Specifically, this sample covers:
 -   Discovering and connecting to an Onboardee's SoftAP.
 -   Implementing method calls to get an Onboardee's network scan, configuring an Onboardee with WiFi credentials etc.
 
+**Note** 
+Scenario 2 - For onboarding physical devices, there is a known issue with the WiFi scan/connect APIs which prevent joining networks as private. This will be fixed for RTM. In the meanwhile developers can
+-   Either manually change the network type to private after joining the Onboarding access point, by going to Settings->Network and Internet->Wi-Fi->Advanced options->Change the “Find devices and content” switch to On position.
+-   Or use the Onboarding producer on the same subnet to emulate the Onboarding experience.
+
+For more info on how to change network to private or how to make sure the machines are on the same subnet, please refer to [Troubleshooting AllJoyn blog](http://channel9.msdn.com/Blogs/Internet-of-Things-Blog/Troubleshooting-AllJoyn-with-Windows-10-Insider-Preview-Builds)
+
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
 To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
