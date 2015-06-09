@@ -11,12 +11,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.AppService;
 using Windows.ApplicationModel.Background;
+using Windows.ApplicationModel.Resources.Core;
 using Windows.ApplicationModel.VoiceCommands;
 using Windows.Storage;
 
@@ -45,6 +47,21 @@ namespace AdventureWorks.VoiceCommands
         /// Background tasks can run for a maximum of 30 seconds.
         /// </summary>
         BackgroundTaskDeferral serviceDeferral;
+
+        /// <summary>
+        /// ResourceMap containing localized strings for display in Cortana.
+        /// </summary>
+        ResourceMap cortanaResourceMap;
+
+        /// <summary>
+        /// The context for localized strings.
+        /// </summary>
+        ResourceContext cortanaContext;
+
+        /// <summary>
+        /// Get globalization-aware date formats.
+        /// </summary>
+        DateTimeFormatInfo dateFormatInfo;
 
         /// <summary>
         /// Background task entrypoint. Voice Commands using the <VoiceCommandService Target="...">
@@ -76,6 +93,15 @@ namespace AdventureWorks.VoiceCommands
             taskInstance.Canceled += OnTaskCanceled;
 
             var triggerDetails = taskInstance.TriggerDetails as AppServiceTriggerDetails;
+
+            // Load localized resources for strings sent to Cortana to be displayed to the user.
+            cortanaResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
+
+            // Select the system language, which is what Cortana should be running as.
+            cortanaContext = ResourceContext.GetForViewIndependentUse();
+
+            // Get the currently used system date format
+            dateFormatInfo = CultureInfo.CurrentCulture.DateTimeFormat;
 
             // This should match the uap:AppService and VoiceCommandService references from the 
             // package manifest and VCD files, respectively. Make sure we've been launched by
@@ -131,7 +157,10 @@ namespace AdventureWorks.VoiceCommands
             // Begin loading data to search for the target store. If this operation is going to take a long time,
             // for instance, requiring a response from a remote web service, consider inserting a progress screen 
             // here, in order to prevent Cortana from timing out. 
-            await ShowProgressScreen("Looking for a trip to " + destination);
+            string progressScreenString = string.Format(
+                cortanaResourceMap.GetValue("ProgressLookingForTripToDest", cortanaContext).ValueAsString,
+                destination);
+            await ShowProgressScreen(progressScreenString);
 
             Model.TripStore store = new Model.TripStore();
             await store.LoadTrips();
@@ -144,10 +173,11 @@ namespace AdventureWorks.VoiceCommands
                 // If there is more than one trip, provide a disambiguation screen rather than just picking one
                 // however, more advanced logic here might be ideal (ie, if there's a significant number of items,
                 // you may want to just fall back to a link to your app where you can provide a deeper search experience.
-                trip = await DisambiguateTrips(
-                    trips,
-                    "Which trip to " + destination + " did you want to cancel?",
-                    "Which one do you want to cancel?");
+                string disambiguationDestinationString = string.Format(
+                    cortanaResourceMap.GetValue("DisambiguationWhichTripToDest", cortanaContext).ValueAsString,
+                    destination);
+                string disambiguationRepeatString = cortanaResourceMap.GetValue("DisambiguationRepeat", cortanaContext).ValueAsString;
+                trip = await DisambiguateTrips(trips, disambiguationDestinationString, disambiguationRepeatString);
             }
             else
             {
@@ -165,7 +195,10 @@ namespace AdventureWorks.VoiceCommands
                 // apps control. If you're accessing a remote service, having a background task that
                 // periodically refreshes the phrase list so it's likely to be in sync is ideal.
                 // This is unlikely to occur for this sample app, however.
-                userMessage.DisplayMessage = userMessage.SpokenMessage = "Sorry, you don't have any trips to " + destination;
+                string noSuchTripToDestination = string.Format(
+                    cortanaResourceMap.GetValue("NoSuchTripToDestination", cortanaContext).ValueAsString,
+                    destination);
+                userMessage.DisplayMessage = userMessage.SpokenMessage = noSuchTripToDestination;
 
                 response = VoiceCommandResponse.CreateResponse(userMessage);
                 await voiceServiceConnection.ReportSuccessAsync(response);
@@ -173,9 +206,15 @@ namespace AdventureWorks.VoiceCommands
             else
             {
                 // Prompt the user for confirmation that we've selected the correct trip to cancel.
-                userPrompt.DisplayMessage = userPrompt.SpokenMessage = "Cancel this trip to " + destination + "?";
+                string cancelTripToDestination = string.Format(
+                    cortanaResourceMap.GetValue("CancelTripToDestination", cortanaContext).ValueAsString,
+                    destination);
+                userPrompt.DisplayMessage = userPrompt.SpokenMessage = cancelTripToDestination;
                 var userReprompt = new VoiceCommandUserMessage();
-                userReprompt.DisplayMessage = userReprompt.SpokenMessage = "Did you want to cancel this trip to " + destination + "?";
+                string confirmCancelTripToDestination = string.Format(
+                    cortanaResourceMap.GetValue("ConfirmCancelTripToDestination", cortanaContext).ValueAsString,
+                    destination);
+                userReprompt.DisplayMessage = userReprompt.SpokenMessage = confirmCancelTripToDestination;
                 
                 response = VoiceCommandResponse.CreateResponseForPrompt(userPrompt, userReprompt);
 
@@ -186,7 +225,10 @@ namespace AdventureWorks.VoiceCommands
                 {
                     if (voiceCommandConfirmation.Confirmed == true)
                     {
-                        await ShowProgressScreen("Cancelling the trip to " + destination);
+                        string cancellingTripToDestination = string.Format(
+                       cortanaResourceMap.GetValue("CancellingTripToDestination", cortanaContext).ValueAsString,
+                       destination);
+                        await ShowProgressScreen(cancellingTripToDestination);
 
                         // Perform the operation to remote the trip from the app's data. 
                         // Since the background task runs within the app package of the installed app,
@@ -194,8 +236,11 @@ namespace AdventureWorks.VoiceCommands
                         await store.DeleteTrip(trip);
 
                         // Provide a completion message to the user.
-                        var userMessage = new VoiceCommandUserMessage(); 
-                        userMessage.DisplayMessage = userMessage.SpokenMessage = "Cancelled the trip to " + destination;
+                        var userMessage = new VoiceCommandUserMessage();
+                        string cancelledTripToDestination = string.Format(
+                            cortanaResourceMap.GetValue("CancelledTripToDestination", cortanaContext).ValueAsString,
+                            destination);
+                        userMessage.DisplayMessage = userMessage.SpokenMessage = cancelledTripToDestination;
                         response = VoiceCommandResponse.CreateResponse(userMessage);
                         await voiceServiceConnection.ReportSuccessAsync(response);
                     }
@@ -203,7 +248,10 @@ namespace AdventureWorks.VoiceCommands
                     {
                         // Confirm no action for the user.
                         var userMessage = new VoiceCommandUserMessage();
-                        userMessage.DisplayMessage = userMessage.SpokenMessage = "Okay, Keeping the trip to " + destination;
+                        string keepingTripToDestination = string.Format(
+                            cortanaResourceMap.GetValue("KeepingTripToDestination", cortanaContext).ValueAsString,
+                            destination);
+                        userMessage.DisplayMessage = userMessage.SpokenMessage = keepingTripToDestination;
 
                         response = VoiceCommandResponse.CreateResponse(userMessage);
                         await voiceServiceConnection.ReportSuccessAsync(response);
@@ -256,20 +304,18 @@ namespace AdventureWorks.VoiceCommands
             {
                 var destinationTile = new VoiceCommandContentTile();
 
-                // Use a generic background image. This can be fetched from a service call, potentially, but
-                // be aware of network latencies and ensure Cortana does not time out.
+                // To handle UI scaling, Cortana automatically looks up files with FileName.scale-<n>.ext formats based on the requested filename.
+                // See the VoiceCommandService\Images folder for an example.
                 destinationTile.ContentTileType = VoiceCommandContentTileType.TitleWith68x68IconAndText;
-                destinationTile.Image = await Package.Current.InstalledLocation.GetFileAsync("AdventureWorks.VoiceCommands\\Images\\GreyTile.png");
-
+                destinationTile.Image = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///AdventureWorks.VoiceCommands/Images/GreyTile.png"));
+                
                 // The AppContext can be any arbitrary object, and will be maintained for the
                 // response.
                 destinationTile.AppContext = trip;
                 string dateFormat = "";
                 if (trip.StartDate != null)
                 {
-                    dateFormat = string.Format("{0:dddd MMMM dd yyyy}",
-                        trip.StartDate
-                        );
+                    dateFormat = trip.StartDate.Value.ToString(dateFormatInfo.LongDatePattern);
                 }
                 else
                 {
@@ -310,7 +356,10 @@ namespace AdventureWorks.VoiceCommands
             // If this operation is expected to take longer than 0.5 seconds, the task must
             // provide a progress response to Cortana prior to starting the operation, and
             // provide updates at most every 5 seconds.
-            await ShowProgressScreen("Adventure Works is loading details about trip to " + destination);
+            string loadingTripToDestination = string.Format(
+                       cortanaResourceMap.GetValue("LoadingTripToDestination", cortanaContext).ValueAsString,
+                       destination);
+            await ShowProgressScreen(loadingTripToDestination);
             Model.TripStore store = new Model.TripStore();
             await store.LoadTrips();
 
@@ -327,8 +376,11 @@ namespace AdventureWorks.VoiceCommands
                 // control. If you're accessing a remote service, having a background task that
                 // periodically refreshes the phrase list so it's likely to be in sync is ideal.
                 // This is unlikely to occur for this sample app, however.
-                userMessage.DisplayMessage = "Sorry, you don't have any trips to " + destination;
-                userMessage.SpokenMessage = "Sorry, you don't have any trips to " + destination;
+                string foundNoTripToDestination = string.Format(
+                       cortanaResourceMap.GetValue("FoundNoTripToDestination", cortanaContext).ValueAsString,
+                       destination);
+                userMessage.DisplayMessage = foundNoTripToDestination;
+                userMessage.SpokenMessage = foundNoTripToDestination;
             }
             else
             {
@@ -336,11 +388,11 @@ namespace AdventureWorks.VoiceCommands
                 string message = "";
                 if (trips.Count() > 1)
                 {
-                    message = "Here are your upcoming trips.";
+                    message = cortanaResourceMap.GetValue("PluralUpcomingTrips", cortanaContext).ValueAsString;
                 }
                 else
                 {
-                    message = "Here's your upcoming trip.";
+                    message = cortanaResourceMap.GetValue("SingularUpcomingTrip", cortanaContext).ValueAsString;
                 }
                 userMessage.DisplayMessage = message;
                 userMessage.SpokenMessage = message;
@@ -353,17 +405,16 @@ namespace AdventureWorks.VoiceCommands
                     
                     var destinationTile = new VoiceCommandContentTile();
 
+                    // To handle UI scaling, Cortana automatically looks up files with FileName.scale-<n>.ext formats based on the requested filename.
+                    // See the VoiceCommandService\Images folder for an example.
                     destinationTile.ContentTileType = VoiceCommandContentTileType.TitleWith68x68IconAndText;
-                    destinationTile.Image = await Package.Current.InstalledLocation.GetFileAsync("AdventureWorks.VoiceCommands\\Images\\GreyTile.png");
+                    destinationTile.Image = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///AdventureWorks.VoiceCommands/Images/GreyTile.png"));
 
                     destinationTile.AppLaunchArgument = string.Format("destination={0}", trip.Destination);
                     destinationTile.Title = trip.Destination;
                     if (trip.StartDate != null)
                     {
-                        destinationTile.TextLine1 = 
-                            string.Format("{0:dddd MMMM dd yyyy}",
-                                trip.StartDate
-                            );
+                        destinationTile.TextLine1 = trip.StartDate.Value.ToString(dateFormatInfo.LongDatePattern);
                     }
                     else
                     {
@@ -392,7 +443,7 @@ namespace AdventureWorks.VoiceCommands
         private async void LaunchAppInForeground()
         {
             var userMessage = new VoiceCommandUserMessage();
-            userMessage.SpokenMessage = "Launching Adventure Works";
+            userMessage.SpokenMessage = cortanaResourceMap.GetValue("LaunchingAdventureWorks", cortanaContext).ValueAsString;
 
             var response = VoiceCommandResponse.CreateResponse(userMessage);
 

@@ -15,7 +15,7 @@
 #include "MainPage.xaml.h"
 #include <sstream>
 
-namespace SpeechAndTTS
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -32,26 +32,28 @@ namespace SpeechAndTTS
 
     private:
         static const unsigned int HResultPrivacyStatementDeclined = 0x80045509;
+        static const unsigned int HResultRecognizerNotFound = 0x8004503a;
 
         SDKTemplate::MainPage^ rootPage;
         Windows::UI::Core::CoreDispatcher^ dispatcher;
         Windows::Media::SpeechRecognition::SpeechRecognizer^ speechRecognizer;
-		Windows::ApplicationModel::Resources::Core::ResourceContext^ speechContext;
-		Windows::ApplicationModel::Resources::Core::ResourceMap^ speechResourceMap;
+        Windows::ApplicationModel::Resources::Core::ResourceContext^ speechContext;
+        Windows::ApplicationModel::Resources::Core::ResourceMap^ speechResourceMap;
 
         void ContinuousRecognize_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
         void InitializeRecognizer(Windows::Globalization::Language^ recognizerLanguage);
-		void PopulateLanguageDropdown();
+        void PopulateLanguageDropdown();
 
 
         Windows::Foundation::EventRegistrationToken stateChangedToken;
         Windows::Foundation::EventRegistrationToken continuousRecognitionCompletedToken;
         Windows::Foundation::EventRegistrationToken continuousRecognitionResultGeneratedToken;
+        Windows::Foundation::EventRegistrationToken cbLanguageSelectionSelectionChangedToken;
 
         void SpeechRecognizer_StateChanged(Windows::Media::SpeechRecognition::SpeechRecognizer ^sender, Windows::Media::SpeechRecognition::SpeechRecognizerStateChangedEventArgs ^args);
         void ContinuousRecognitionSession_Completed(Windows::Media::SpeechRecognition::SpeechContinuousRecognitionSession ^sender, Windows::Media::SpeechRecognition::SpeechContinuousRecognitionCompletedEventArgs ^args);
         void ContinuousRecognitionSession_ResultGenerated(Windows::Media::SpeechRecognition::SpeechContinuousRecognitionSession ^sender, Windows::Media::SpeechRecognition::SpeechContinuousRecognitionResultGeneratedEventArgs ^args);
-		void cbLanguageSelection_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
-	};
+        void cbLanguageSelection_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
+    };
 }
