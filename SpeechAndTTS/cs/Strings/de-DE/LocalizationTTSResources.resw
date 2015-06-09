@@ -117,69 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DictationUIOptionsExampleText" xml:space="preserve">
-    <value>Par exemple, « le rapide renard jumped over the lazy dog ».</value>
+  <data name="SynthesizeSSMLDefaultText" xml:space="preserve">
+    <value>&lt;speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' 
+                             xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' 
+                             xsi:schemaLocation='http://www.w3.org/2001/10/synthesis  http://www.w3.org/TR/speech-synthesis/synthesis.xsd' 
+                             xml:lang='de-DE'&gt;
+
+Dies ist ein Beispiel für eine phonetische Aussprache:
+&lt;phoneme alphabet='x-microsoft-ups' ph='S1 W AA T . CH AX . M AX . S2 K AA L . IH T'&gt; whatchamacallit &lt;/phoneme&gt;.
+
+Dies ist ein Beispiel eines Datums:
+&lt;say-as interpret-as='date' format='mdy'&gt; 04/30/2013 &lt;/say-as&gt;.
+
+Dies ist ein Beispiel für eine Zahl zu sagen:
+&lt;say-as interpret-as='ordinal'&gt; 4 &lt;/say-as&gt;.
+
+&lt;/speak&gt;</value>
   </data>
-  <data name="ListGrammarCallNita" xml:space="preserve">
-    <value>Appel Nita</value>
-  </data>
-  <data name="ListGrammarCallNitaFarley" xml:space="preserve">
-    <value>Appel Nita Farley</value>
-  </data>
-  <data name="ListGrammarCallWayne" xml:space="preserve">
-    <value>Appel Wayne</value>
-  </data>
-  <data name="ListGrammarCallWayneSigmon" xml:space="preserve">
-    <value>Appel Wayne Sigmon</value>
-  </data>
-  <data name="ListGrammarCreateEmail" xml:space="preserve">
-    <value>Écrire e-mail</value>
-  </data>
-  <data name="ListGrammarExamplesPrefix" xml:space="preserve">
-    <value>Exemples:</value>
-  </data>
-  <data name="ListGrammarGoHome" xml:space="preserve">
-    <value>page d'accueil</value>
-  </data>
-  <data name="ListGrammarGoToContosoStudio" xml:space="preserve">
-    <value>Aller à Contoso studio</value>
-  </data>
-  <data name="ListGrammarHelpText" xml:space="preserve">
-    <value>Tap the microphone, and speak. This scenario uses continuous recognition to provide a global-command type scenario.</value>
-  </data>
-  <data name="ListGrammarOpenMessage" xml:space="preserve">
-    <value>Courriel ouvert</value>
-  </data>
-  <data name="ListGrammarSendEmail" xml:space="preserve">
-    <value>Envoyer un email</value>
-  </data>
-  <data name="ListGrammarShowMessage" xml:space="preserve">
-    <value>Afficher message</value>
-  </data>
-  <data name="SRGSBackgroundGarbagePromptText" xml:space="preserve">
-    <value>FR-FR Didn't get the background color \n\nTry saying blue background\n</value>
-  </data>
-  <data name="SRGSBorderGarbagePromptText" xml:space="preserve">
-    <value>FR-FR Didn't get the border color\n\n Try saying red border\n</value>
-  </data>
-  <data name="SRGSCircleGarbagePromptText" xml:space="preserve">
-    <value>FR-FR Didn't get the circle color\n\n Try saying green circle\n</value>
-  </data>
-  <data name="SRGSGarbagePromptText" xml:space="preserve">
-    <value>FR-FR Sorry, didn't get that \n\nTry saying -&gt;\nblue background\nred border\ngreen circle</value>
-  </data>
-  <data name="SRGSHelpText" xml:space="preserve">
-    <value>FR-FR Tap the microphone and speak to choose colors for the circle, background, and border. Try saying 'blue background, red border, green circle'.</value>
-  </data>
-  <data name="SRGSListeningPromptText" xml:space="preserve">
-    <value>FR-FR Speak to choose colors for the circle, background, and border. Try saying 'blue background, red border, green circle'.</value>
-    <comment>SRGS ResultTextBlock content when listening</comment>
-  </data>
-  <data name="SRGSUIOptionsExampleText" xml:space="preserve">
-    <value>FR-FR Try "blue background, red border, green circle".</value>
-    <comment>UIOptions for SRGS one-shot sample</comment>
-  </data>
-  <data name="WebSearchUIOptionsExampleText" xml:space="preserve">
-    <value>Par exemple, « météo à Londres »</value>
+  <data name="SynthesizeTextDefaultText" xml:space="preserve">
+    <value>Der schnelle rot-Fuchs sprang über den faulen Hund der braun</value>
   </data>
 </root>
