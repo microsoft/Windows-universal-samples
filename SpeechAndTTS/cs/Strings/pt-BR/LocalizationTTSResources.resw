@@ -130,7 +130,7 @@ Este é um exemplo de uma data:
 &lt;say-as interpret-as='date' format='mdy'&gt; 04/30/2013 &lt;/say-as&gt;.
 
 Este é um exemplo de um número de dizer:
-&lt;say-as interpret-as='ordinal'&gt; 4th &lt;/say-as&gt;.
+&lt;say-as interpret-as='ordinal'&gt; 4 &lt;/say-as&gt;.
 
 &lt;/speak&gt;</value>
   </data>
