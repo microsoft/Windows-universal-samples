@@ -131,4 +131,32 @@ private:
     bool m_value;
 };
 
+public ref class SecureInterfaceSetIsUpperCaseEnabledResult sealed
+{
+public:
+    property int32 Status
+    {
+        int32 get() { return m_status; }
+    internal:
+        void set(_In_ int32 value) { m_status = value; }
+    }
+
+    static SecureInterfaceSetIsUpperCaseEnabledResult^ CreateSuccessResult()
+    {
+        auto result = ref new SecureInterfaceSetIsUpperCaseEnabledResult();
+        result->Status = Windows::Devices::AllJoyn::AllJoynStatus::Ok;
+        return result;
+    }
+
+    static SecureInterfaceSetIsUpperCaseEnabledResult^ CreateFailureResult(_In_ int32 status)
+    {
+        auto result = ref new SecureInterfaceSetIsUpperCaseEnabledResult();
+        result->Status = status;
+        return result;
+    }
+
+private:
+    int32 m_status;
+};
+
 } } } } } } 

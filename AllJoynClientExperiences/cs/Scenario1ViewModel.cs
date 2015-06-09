@@ -396,14 +396,14 @@ namespace AllJoynClientExperiences
 
         private async void SetIsUpperCaseEnabledAsync(bool value)
         {
-            int result = await m_consumer.SetIsUpperCaseEnabledAsync(value);
-            if (result == AllJoynStatus.Ok)
+            SecureInterfaceSetIsUpperCaseEnabledResult setIsUpperCaseEnabledResult = await m_consumer.SetIsUpperCaseEnabledAsync(value);
+            if (setIsUpperCaseEnabledResult.Status == AllJoynStatus.Ok)
             {
                 UpdateStatusAsync("\"IsUpperCaseEnabled\" property successfully set.", NotifyType.StatusMessage);
             }
             else
             {
-                UpdateStatusAsync(string.Format("Set property failed with AllJoyn error: 0x{0:X}.", result), NotifyType.ErrorMessage);
+                UpdateStatusAsync(string.Format("Set property failed with AllJoyn error: 0x{0:X}.", setIsUpperCaseEnabledResult.Status), NotifyType.ErrorMessage);
                 m_callSetProperty = false;
                 IsUpperCaseEnabled = !value;
             }

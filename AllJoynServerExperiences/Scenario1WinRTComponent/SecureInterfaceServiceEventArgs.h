@@ -145,17 +145,17 @@ public:
         bool get() { return m_value; }
     }
 
-    property int ResultStatus
+    property SecureInterfaceSetIsUpperCaseEnabledResult^ Result
     {
-        int get() { return m_resultStatus; }
-        void set(_In_ int value) { m_resultStatus = value; }
+        SecureInterfaceSetIsUpperCaseEnabledResult^ get() { return m_result; }
+        void set(_In_ SecureInterfaceSetIsUpperCaseEnabledResult^ value) { m_result = value; }
     }
 
-    static Windows::Foundation::IAsyncOperation<int>^ GetResultAsync(SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs^ args)
+    static Windows::Foundation::IAsyncOperation<SecureInterfaceSetIsUpperCaseEnabledResult^>^ GetResultAsync(SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs^ args)
     {
         args->InvokeAllFinished();
         auto t = concurrency::create_task(args->m_tce);
-        return concurrency::create_async([t]() -> concurrency::task<int>
+        return concurrency::create_async([t]() -> concurrency::task<SecureInterfaceSetIsUpperCaseEnabledResult^>
         {
             return t;
         });
@@ -170,11 +170,11 @@ private:
 
     bool m_raised;
     int m_completionsRequired;
-    concurrency::task_completion_event<int> m_tce;
+    concurrency::task_completion_event<SecureInterfaceSetIsUpperCaseEnabledResult^> m_tce;
     std::mutex m_lock;
     Windows::Devices::AllJoyn::AllJoynMessageInfo^ m_messageInfo;
     bool m_value;
-    int m_resultStatus;
+    SecureInterfaceSetIsUpperCaseEnabledResult^ m_result;
 };
 
 } } } } } } 

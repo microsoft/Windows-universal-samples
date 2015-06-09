@@ -53,6 +53,7 @@ OnboardingConfigureWifiCalledEventArgs::OnboardingConfigureWifiCalledEventArgs(
     m_interfaceMemberPassphrase(interfaceMemberPassphrase),
     m_interfaceMemberAuthType(interfaceMemberAuthType)
 {
+	m_result = OnboardingConfigureWifiResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ OnboardingConfigureWifiCalledEventArgs::GetDeferral()
@@ -111,7 +112,14 @@ void OnboardingConfigureWifiCalledEventArgs::Complete()
 
 void OnboardingConfigureWifiCalledEventArgs::InvokeCompleteHandler()
 {
-    m_tce.set(m_result);
+    if (m_result->Status == ER_NOT_IMPLEMENTED)
+    {
+        throw Exception::CreateException(E_NOTIMPL, "No handlers are registered for ConfigureWifiCalled.");
+    }
+    else
+    {
+        m_tce.set(m_result);
+    }
 }
 
 OnboardingConnectCalledEventArgs::OnboardingConnectCalledEventArgs(
@@ -120,6 +128,7 @@ OnboardingConnectCalledEventArgs::OnboardingConnectCalledEventArgs(
     m_completionsRequired(0),
     m_messageInfo(info)
 {
+	m_result = OnboardingConnectResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ OnboardingConnectCalledEventArgs::GetDeferral()
@@ -178,7 +187,14 @@ void OnboardingConnectCalledEventArgs::Complete()
 
 void OnboardingConnectCalledEventArgs::InvokeCompleteHandler()
 {
-    m_tce.set(m_result);
+    if (m_result->Status == ER_NOT_IMPLEMENTED)
+    {
+        throw Exception::CreateException(E_NOTIMPL, "No handlers are registered for ConnectCalled.");
+    }
+    else
+    {
+        m_tce.set(m_result);
+    }
 }
 
 OnboardingOffboardCalledEventArgs::OnboardingOffboardCalledEventArgs(
@@ -187,6 +203,7 @@ OnboardingOffboardCalledEventArgs::OnboardingOffboardCalledEventArgs(
     m_completionsRequired(0),
     m_messageInfo(info)
 {
+	m_result = OnboardingOffboardResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ OnboardingOffboardCalledEventArgs::GetDeferral()
@@ -245,7 +262,14 @@ void OnboardingOffboardCalledEventArgs::Complete()
 
 void OnboardingOffboardCalledEventArgs::InvokeCompleteHandler()
 {
-    m_tce.set(m_result);
+    if (m_result->Status == ER_NOT_IMPLEMENTED)
+    {
+        throw Exception::CreateException(E_NOTIMPL, "No handlers are registered for OffboardCalled.");
+    }
+    else
+    {
+        m_tce.set(m_result);
+    }
 }
 
 OnboardingGetScanInfoCalledEventArgs::OnboardingGetScanInfoCalledEventArgs(
@@ -254,6 +278,7 @@ OnboardingGetScanInfoCalledEventArgs::OnboardingGetScanInfoCalledEventArgs(
     m_completionsRequired(0),
     m_messageInfo(info)
 {
+	m_result = OnboardingGetScanInfoResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ OnboardingGetScanInfoCalledEventArgs::GetDeferral()
@@ -312,7 +337,14 @@ void OnboardingGetScanInfoCalledEventArgs::Complete()
 
 void OnboardingGetScanInfoCalledEventArgs::InvokeCompleteHandler()
 {
-    m_tce.set(m_result);
+    if (m_result->Status == ER_NOT_IMPLEMENTED)
+    {
+        throw Exception::CreateException(E_NOTIMPL, "No handlers are registered for GetScanInfoCalled.");
+    }
+    else
+    {
+        m_tce.set(m_result);
+    }
 }
 
 // Readable Properties
@@ -322,6 +354,7 @@ OnboardingGetVersionRequestedEventArgs::OnboardingGetVersionRequestedEventArgs(
     m_completionsRequired(0),
     m_messageInfo(info)
 {
+	m_result = OnboardingGetVersionResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ OnboardingGetVersionRequestedEventArgs::GetDeferral()
@@ -380,7 +413,14 @@ void OnboardingGetVersionRequestedEventArgs::Complete()
 
 void OnboardingGetVersionRequestedEventArgs::InvokeCompleteHandler()
 {
-    m_tce.set(m_result);
+    if (m_result->Status == ER_NOT_IMPLEMENTED)
+    {
+        throw Exception::CreateException(E_NOTIMPL, "No handlers are registered for GetVersionRequested.");
+    }
+    else
+    {
+        m_tce.set(m_result);
+    }
 }
 
 OnboardingGetStateRequestedEventArgs::OnboardingGetStateRequestedEventArgs(
@@ -389,6 +429,7 @@ OnboardingGetStateRequestedEventArgs::OnboardingGetStateRequestedEventArgs(
     m_completionsRequired(0),
     m_messageInfo(info)
 {
+	m_result = OnboardingGetStateResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ OnboardingGetStateRequestedEventArgs::GetDeferral()
@@ -447,7 +488,14 @@ void OnboardingGetStateRequestedEventArgs::Complete()
 
 void OnboardingGetStateRequestedEventArgs::InvokeCompleteHandler()
 {
-    m_tce.set(m_result);
+    if (m_result->Status == ER_NOT_IMPLEMENTED)
+    {
+        throw Exception::CreateException(E_NOTIMPL, "No handlers are registered for GetStateRequested.");
+    }
+    else
+    {
+        m_tce.set(m_result);
+    }
 }
 
 OnboardingGetLastErrorRequestedEventArgs::OnboardingGetLastErrorRequestedEventArgs(
@@ -456,6 +504,7 @@ OnboardingGetLastErrorRequestedEventArgs::OnboardingGetLastErrorRequestedEventAr
     m_completionsRequired(0),
     m_messageInfo(info)
 {
+	m_result = OnboardingGetLastErrorResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ OnboardingGetLastErrorRequestedEventArgs::GetDeferral()
@@ -514,7 +563,14 @@ void OnboardingGetLastErrorRequestedEventArgs::Complete()
 
 void OnboardingGetLastErrorRequestedEventArgs::InvokeCompleteHandler()
 {
-    m_tce.set(m_result);
+    if (m_result->Status == ER_NOT_IMPLEMENTED)
+    {
+        throw Exception::CreateException(E_NOTIMPL, "No handlers are registered for GetLastErrorRequested.");
+    }
+    else
+    {
+        m_tce.set(m_result);
+    }
 }
 
 // Writable Properties

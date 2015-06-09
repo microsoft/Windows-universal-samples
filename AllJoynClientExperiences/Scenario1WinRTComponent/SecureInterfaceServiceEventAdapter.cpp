@@ -64,7 +64,7 @@ IAsyncOperation<SecureInterfaceGetIsUpperCaseEnabledResult^>^ SecureInterfaceSer
 }
 
 // Property Writes
-IAsyncOperation<int>^ SecureInterfaceServiceEventAdapter::SetIsUpperCaseEnabledAsync(_In_ AllJoynMessageInfo^ info, _In_ bool value)
+IAsyncOperation<SecureInterfaceSetIsUpperCaseEnabledResult^>^ SecureInterfaceServiceEventAdapter::SetIsUpperCaseEnabledAsync(_In_ AllJoynMessageInfo^ info, _In_ bool value)
 {
     auto args = ref new SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs(info, value);
     AllJoynHelpers::DispatchEvent([=]() {

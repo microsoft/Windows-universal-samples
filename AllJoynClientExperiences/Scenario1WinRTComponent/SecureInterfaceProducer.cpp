@@ -295,24 +295,29 @@ QStatus SecureInterfaceProducer::OnPropertySet(_In_ PCSTR interfaceName, _In_ PC
         TypeConversionHelpers::GetAllJoynMessageArg(value, "b", &argument);
 
         auto task = create_task(Service->SetIsUpperCaseEnabledAsync(nullptr, argument));
-        return static_cast<QStatus>(task.get());
+        auto result = task.get();
+
+        return static_cast<QStatus>(result->Status);
     }
     return ER_BUS_NO_SUCH_PROPERTY;
 }
 
 void SecureInterfaceProducer::EmitIsUpperCaseEnabledChanged()
 {
-    alljoyn_msgarg value = alljoyn_msgarg_create();
-    OnPropertyGet("org.alljoyn.example.Samples.Secure.SecureInterface", "IsUpperCaseEnabled", value);
+    create_task([&]
+	{
+        alljoyn_msgarg value = alljoyn_msgarg_create();
+        OnPropertyGet("org.alljoyn.example.Samples.Secure.SecureInterface", "IsUpperCaseEnabled", value);
 
-    alljoyn_busobject_emitpropertychanged(
-        m_busObject,
-        "org.alljoyn.example.Samples.Secure.SecureInterface",
-        "IsUpperCaseEnabled",
-        value,
-        m_sessionId);
+        alljoyn_busobject_emitpropertychanged(
+            m_busObject,
+            "org.alljoyn.example.Samples.Secure.SecureInterface",
+            "IsUpperCaseEnabled",
+            value,
+            m_sessionId);
 
-    alljoyn_msgarg_destroy(value);
+        alljoyn_msgarg_destroy(value);
+    });
 }
 
 void SecureInterfaceProducer::Start()
