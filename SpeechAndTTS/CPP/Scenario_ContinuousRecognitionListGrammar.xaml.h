@@ -15,7 +15,7 @@
 #include "MainPage.xaml.h"
 #include <sstream>
 
-namespace SpeechAndTTS
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

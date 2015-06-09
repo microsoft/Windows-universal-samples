@@ -17,13 +17,13 @@ using namespace  SDKTemplate;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
-    { "Synthesize Text", "SpeechAndTTS.Scenario_SynthesizeText" },
-    { "Synthesize SSML", "SpeechAndTTS.Scenario_SynthesizeSSML" },
-    { "Predefined Dictation Grammar", "SpeechAndTTS.Scenario_PredefinedDictationGrammar" },
-    { "Predefined WebSearch Grammar", "SpeechAndTTS.Scenario_PredefinedWebSearchGrammar" },
-    { "Custom List Constraint", "SpeechAndTTS.Scenario_ListConstraint" },
-    { "Custom SRGS Constraint", "SpeechAndTTS.Scenario_SRGSConstraint" },
-    { "Continuous Dictation", "SpeechAndTTS.Scenario_ContinuousDictation" },
-    { "Continuous List Constraint", "SpeechAndTTS.Scenario_ContinuousRecognitionListGrammar" },
-    { "Continuous SRGS Constraint", "SpeechAndTTS.Scenario_ContinuousRecognitionSRGSGrammar" },
+    { "Synthesize Text", "SDKTemplate.Scenario_SynthesizeText" },
+    { "Synthesize SSML", "SDKTemplate.Scenario_SynthesizeSSML" },
+    { "Predefined Dictation Grammar", "SDKTemplate.Scenario_PredefinedDictationGrammar" },
+    { "Predefined WebSearch Grammar", "SDKTemplate.Scenario_PredefinedWebSearchGrammar" },
+    { "Custom List Constraint", "SDKTemplate.Scenario_ListConstraint" },
+    { "Custom SRGS Constraint", "SDKTemplate.Scenario_SRGSConstraint" },
+    { "Continuous Dictation", "SDKTemplate.Scenario_ContinuousDictation" },
+    { "Continuous List Constraint", "SDKTemplate.Scenario_ContinuousRecognitionListGrammar" },
+    { "Continuous SRGS Constraint", "SDKTemplate.Scenario_ContinuousRecognitionSRGSGrammar" },
 };

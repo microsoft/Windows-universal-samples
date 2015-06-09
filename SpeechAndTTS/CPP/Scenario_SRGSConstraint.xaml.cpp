@@ -13,8 +13,6 @@
 #include "Scenario_SRGSConstraint.xaml.h"
 #include "AudioCapturePermissions.h"
 
-using namespace SpeechAndTTS;
-
 using namespace SDKTemplate;
 using namespace Concurrency;
 using namespace Platform;

@@ -12,8 +12,6 @@
 #include "pch.h"
 #include "Scenario_SynthesizeSSML.xaml.h"
 
-using namespace SpeechAndTTS;
-
 using namespace SDKTemplate;
 using namespace Concurrency;
 using namespace Platform;
