@@ -198,3 +198,6 @@ FakesAssemblies/
 
 # Custom ignores
 gallery.xml
+
+# Xaml generated files
+Generated Files/
