@@ -21,6 +21,61 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.Resources>
+                <Style x:Key="ColorButtonStyle"  TargetType="Button">
+                    <Setter Property="MinWidth" Value="28"/>
+                    <Setter Property="MinHeight" Value="28"/>
+                    <Setter Property="Width" Value="28"/>
+                    <Setter Property="Height" Value="28"/>
+                    <Setter Property="Margin" Value="0,0,0,0"/>
+                    <Setter Property="FontSize" Value="0"/>
+                    <Setter Property="Padding" Value="0,0,0,0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Grid Background="Transparent">
+                                    <Grid Background="Transparent">
+                                        <Border x:Name="ColorButtonOuterBorder"
+                                        BorderThickness="1"
+                                        BorderBrush="Orange"
+                                        Background="Transparent">
+                                            <Border
+                                            BorderBrush="LightGray"
+                                            BorderThickness="1"
+                                            Background="{TemplateBinding Background}"/>
+                                        </Border>
+                                    </Grid>
+
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal"/>
+                                            <VisualState x:Name="PointerOver">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ColorButtonOuterBorder" Storyboard.TargetProperty="BorderThickness">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="2"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Pressed"/>
+                                            <VisualState x:Name="Disabled"/>
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="FocusStates">
+                                            <VisualState x:Name="Focused">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ColorButtonOuterBorder" Storyboard.TargetProperty="BorderThickness">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="2"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Unfocused"/>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -100,7 +155,7 @@
                             <CheckBox Content="Enable Touch Inking" Width="165" Margin="10,0,3,0" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                         </StackPanel>
                     </StackPanel>
-                    <Grid x:Name="Output" Background="LightGray">
+                    <Grid x:Name="Output" Background="{ThemeResource SystemControlBackgroundChromeWhiteBrush}">
                         <!-- Inking area -->
                         <InkCanvas x:Name="inkCanvas" Grid.Row="0"/>
                     </Grid>
