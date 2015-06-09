@@ -286,6 +286,8 @@ namespace SpeechAndTTS
 
                 await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
+                    discardedTextBlock.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+
                     dictationTextBox.Text = dictatedTextBuilder.ToString();
                     btnClearText.IsEnabled = true;
                 });
@@ -298,6 +300,14 @@ namespace SpeechAndTTS
                 await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     dictationTextBox.Text = dictatedTextBuilder.ToString();
+                    string discardedText = args.Result.Text;
+                    if (!string.IsNullOrEmpty(discardedText))
+                    {
+                        discardedText = discardedText.Length <= 25 ? discardedText : (discardedText.Substring(0, 25) + "...");
+
+                        discardedTextBlock.Text = "Discarded due to low/rejected Confidence: " + discardedText;
+                        discardedTextBlock.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    }
                 });
             }
         }
@@ -330,6 +340,8 @@ namespace SpeechAndTTS
                     DictationButtonText.Text = " Stop Dictation";
                     cbLanguageSelection.IsEnabled = false;
                     hlOpenPrivacySettings.Visibility = Visibility.Collapsed;
+                    discardedTextBlock.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+
 
                     try
                     {
@@ -385,6 +397,8 @@ namespace SpeechAndTTS
             btnClearText.IsEnabled = false;
             dictatedTextBuilder.Clear();
             dictationTextBox.Text = "";
+            discardedTextBlock.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+
 
             // Avoid setting focus on the text box, since it's a non-editable control.
             btnContinuousRecognize.Focus(FocusState.Programmatic);

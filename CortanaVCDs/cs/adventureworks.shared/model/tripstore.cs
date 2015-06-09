@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,16 +84,16 @@ namespace AdventureWorks.Model
                     {
                         Destination = "London",
                         Description = "Trip to London!",
-                        StartDate = DateTime.Parse("05/05/2015"),
-                        EndDate = DateTime.Parse("05/15/2015")
+                        StartDate = new DateTime(2015, 5, 5),
+                        EndDate = new DateTime(2015, 5, 15)
                     });
                 trips.Add(
                     new Trip()
                     {
                         Destination = "Melbourne",
                         Description = "Trip to Australia",
-                        StartDate = DateTime.Parse("02/02/2016"),
-                        EndDate = DateTime.Parse("05/17/2016"),
+                        StartDate = new DateTime(2016, 2, 2),
+                        EndDate = new DateTime(2016, 5, 17),
                         Notes = "Bring Sunscreen!"
                     });
                 trips.Add(
@@ -100,8 +101,8 @@ namespace AdventureWorks.Model
                     {
                         Destination = "Yosemite National Park",
                         Description = "Trip to Yosemite",
-                        StartDate = DateTime.Parse("07/11/2015"),
-                        EndDate = DateTime.Parse("07/19/2015"),
+                        StartDate = new DateTime(2015, 7, 11),
+                        EndDate = new DateTime(2015, 7, 19),
                         Notes = "Buy some new hiking boots"
                     });
                 await WriteTrips();
@@ -142,7 +143,7 @@ namespace AdventureWorks.Model
                         if (startElement != null)
                         {
                             DateTime startDate;
-                            if (DateTime.TryParse(startElement.Value, out startDate))
+                            if (DateTime.TryParse(startElement.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out startDate))
                             {
                                 trip.StartDate = startDate;
                             }
@@ -156,7 +157,7 @@ namespace AdventureWorks.Model
                         if (endElement != null)
                         {
                             DateTime endDate;
-                            if (DateTime.TryParse(startElement.Value, out endDate))
+                            if (DateTime.TryParse(startElement.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out endDate))
                             {
                                 trip.EndDate = endDate;
                             }
@@ -233,12 +234,24 @@ namespace AdventureWorks.Model
 
             foreach (var trip in Trips)
             {
+                string startDateField = null; 
+                if (trip.StartDate.HasValue)
+                {
+                    startDateField = trip.StartDate.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+                }
+
+                string endDateField = null;
+                if(trip.EndDate.HasValue)
+                {
+                    endDateField = trip.EndDate.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+                }
+
                 xmldoc.Add(
                     new XElement("Trip",
                     new XElement("Destination", trip.Destination),
                     new XElement("Description", trip.Description),
-                    new XElement("StartDate", trip.StartDate),
-                    new XElement("EndDate", trip.EndDate),
+                    new XElement("StartDate", endDateField),
+                    new XElement("EndDate", endDateField),
                     new XElement("Notes", trip.Notes)));
             }
 

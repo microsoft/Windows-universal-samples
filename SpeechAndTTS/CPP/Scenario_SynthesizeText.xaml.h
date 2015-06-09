@@ -14,7 +14,7 @@
 #include "Scenario_SynthesizeText.g.h"
 #include "MainPage.xaml.h"
 
-namespace SpeechAndTTS
+namespace SDKTemplate
 {
     [Windows::Foundation::Metadata::WebHostHidden]
     public ref class Scenario_SynthesizeText sealed

@@ -12,10 +12,10 @@
 -->
 
 <Page
-    x:Class="SpeechAndTTS.Scenario_ListConstraint"
+    x:Class="SDKTemplate.Scenario_ListConstraint"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SpeechAndTTS"
+    xmlns:local="using:SDKTemplate"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -38,7 +38,7 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Language: " Margin="10,0,0,0" VerticalAlignment="Center"/>
-                        <ComboBox x:Name="cbLanguageSelection" SelectionChanged="cbLanguageSelection_SelectionChanged" Margin="10" Width="200"/>
+                        <ComboBox x:Name="cbLanguageSelection" Margin="10" Width="200"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" >
                         <Button x:Name="btnRecognizeWithUI" Click="RecognizeWithUIListConstraint_Click" IsEnabled="False" Margin="10">

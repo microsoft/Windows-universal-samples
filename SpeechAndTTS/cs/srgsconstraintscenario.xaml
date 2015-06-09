@@ -59,8 +59,7 @@
                         <Ellipse Name="colorCircle" Width="160" Height="160"
                                  Fill="Black" Canvas.Top="20" Canvas.Left="20"/>
                     </Canvas>
-                    <TextBlock Name="resultTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"
-                               Text="Tap the microphone and speak to choose colors for the circle, background, and border. Try saying 'blue background, red border, green circle'."/>
+                    <TextBlock Name="resultTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" />
                 </StackPanel>
             </ScrollViewer>
 
