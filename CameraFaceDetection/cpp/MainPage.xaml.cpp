@@ -1009,8 +1009,8 @@ Windows::Foundation::Rect MainPage::GetPreviewStreamRectInControl(MediaPropertie
     return RectHelper::FromCoordinatesAndDimensions(
         static_cast<float>(x),
         static_cast<float>(y),
-        static_cast<float>(x + width),
-        static_cast<float>(y + height));
+        static_cast<float>(width),
+        static_cast<float>(height));
 }
 
 void MainPage::Application_Suspending(Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e)
