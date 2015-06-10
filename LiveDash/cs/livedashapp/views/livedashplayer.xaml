@@ -19,70 +19,66 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid x:Name="RootGrid" Margin="12,20,12,12">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <StackPanel Margin="0,0,0,10">
-                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-          Live Streaming using DASH and MSE
-                </TextBlock>
-            </StackPanel>
+  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="RootGrid" Margin="12,20,12,12">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <StackPanel Margin="0,0,0,10">
+        <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+        <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"
+                   Text="Live Streaming using DASH and MSE">
+        </TextBlock>
+      </StackPanel>
 
-            <ScrollViewer x:Name="scrollView" Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-                <StackPanel Margin="0,0,0,10">
-                    
-                    <!-- Source URL Input Panel-->
-                    <StackPanel x:Name="sourcePanel" HorizontalAlignment="Left" Height="88" VerticalAlignment="Top" Width="1332" Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource SampleHeaderTextStyle}" Margin="50,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="54" Width="142">
-                		      <Run Text="Source URL:"/>
-                        </TextBlock>
-                        <TextBox x:Name="sourceUrl" Width="574" Margin="20,20,0,36"/>
 
-                        <Button x:Name="playButton" Click="playButton_Click" HorizontalAlignment="Right" Height="32" Margin="0,20,20,0" Width="152" VerticalAlignment="Top">
-                            <StackPanel Orientation="Horizontal">
-                                <SymbolIcon Symbol="Play"/>
-                                <TextBlock VerticalAlignment="Center">
-                        			<Run Text="Set Source"/>
-                                </TextBlock>
-                            </StackPanel>
-                        </Button>
-                      
-                    </StackPanel>
-                  <!-- Extra Buttons Panel-->
-                  <StackPanel x:Name="extraButtonsPanel" HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Width="1332" Orientation="Horizontal">
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Height="54" Width="142" Margin="60,20,0,0">Live Offset Value:</TextBlock>
-                    <TextBox x:Name="liveOffsetValue" InputScope="Number" Width="143" Height="30" Margin="10,0,0,0" FontSize="18" Text="30"/>
+      <ScrollViewer x:Name="scrollView" Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+          </Grid.RowDefinitions>
 
-                  
-                  <Button x:Name="setLiveOffsetButton" Click="setLiveOffsetButton_Click" HorizontalAlignment="Right" Height="32" Margin="0,15,20,0" Width="95" VerticalAlignment="Top" Content="Set Value"/>
-                  <Button x:Name="goToLiveButton" Click="gotToLiveButton_Click" HorizontalAlignment="Right" Height="32" Margin="0,15,20,0" Width="95" VerticalAlignment="Top" Content="Go To Live"/>
-                  
-                  </StackPanel>
-                  
-                    <!-- Video/Loading Panel -->
-                    <StackPanel x:Name="videoPanel" Height="605" Width="962" HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <TextBlock x:Name="mediaTitle" Width="800" FontSize="24" HorizontalAlignment="Left" Margin="79,45,0,0"></TextBlock>
-                        <MediaElement x:Name="mediaElement" Width="800" AreTransportControlsEnabled="True" Height="451" Margin="79,0" Volume="2" HorizontalAlignment="Left" />
-                    </StackPanel>
-                    <StackPanel x:Name="loadingPanel" Height="605" Width="962" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
-                        <TextBlock FontSize="36" Margin="180,10,0,10" HorizontalAlignment="Left" VerticalAlignment="Center">Loading ...</TextBlock>
-                        <ProgressRing Width="100" Height="100" Margin="130,10,80,10" IsActive="True" HorizontalAlignment="Left" />
-                    </StackPanel>
-                  
-                </StackPanel>
-              
-              
-            </ScrollViewer>
+          <!-- Source URL Input Panel-->
+          <StackPanel x:Name="sourcePanel" Grid.Row="0" Orientation="Horizontal">
+            <TextBox x:Name="sourceUrl" Width="350"></TextBox>
+            <Button Name="playButton" Click="playButton_Click">Play</Button>
+          </StackPanel>
 
-            <!-- Status Block for providing messages to the user.  Use the
-             NotifyUser() method to populate the message -->
-            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
-            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+          <!-- List of Videos Panel-->
+          <StackPanel x:Name="dropDownPanel" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Top" Orientation="Horizontal">
+            <ComboBox x:Name="comboBox1" ItemsSource="{Binding}" SelectionChanged="ComboBox_SelectionChanged" HorizontalAlignment="Right" Height="32" Width="350" VerticalAlignment="Top" PlaceholderText="Select a Url">
+              <ComboBox.ItemTemplate>
+                <DataTemplate>
+                  <TextBlock Text="{Binding Title}" />
+                </DataTemplate>
+              </ComboBox.ItemTemplate>
+            </ComboBox>
+          </StackPanel>
+
+          <!-- Extra Buttons Panel-->
+          <StackPanel x:Name="extraButtonsPanel" Grid.Row="2" HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Orientation="Horizontal">
+            <TextBlock Height="54" Width="142" Margin="0,20,0,0">Live Offset Value:</TextBlock>
+            <TextBox x:Name="liveOffsetValue" InputScope="Number" Width="143" Height="30" FontSize="18" Text="30"/>
+
+            <Button x:Name="setLiveOffsetButton" Click="setLiveOffsetButton_Click" Height="32" Width="95" Content="Set Value"/>
+            <Button x:Name="goToLiveButton" Click="gotToLiveButton_Click" Height="32" Width="95" Content="Go To Live"/>
+          </StackPanel>
+
+          <!-- Video/Loading Panel -->
+          <MediaElement Grid.Row="3" Name="mediaElement" AudioCategory="Movie" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        AreTransportControlsEnabled="True"></MediaElement>
         </Grid>
+      </ScrollViewer>
+
+      <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+      <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
+      <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
     </Grid>
+  </Grid>
 </Page>
