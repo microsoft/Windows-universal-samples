@@ -51,7 +51,7 @@
             WinJS.log && WinJS.log("Error: Invalid host name.", "sample", "error");
             return;
         }
-        
+
         socketsSample.closing = false;
         socketsSample.clientSocket = new Windows.Networking.Sockets.DatagramSocket();
         socketsSample.clientSocket.addEventListener("messagereceived", onMessageReceived);
