@@ -173,7 +173,7 @@
             }
         }
 
-        return null;
+        return String(null);
     }
 
 })();

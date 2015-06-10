@@ -32,13 +32,13 @@ var socketsSample = {};
         var hostNameConnectInput = document.getElementById("hostNameConnect");
         var serviceNameConnectInput = document.getElementById("serviceNameConnect");
 
-        if (serviceNameAcceptInput) {
+        if (serviceNameAcceptInput !== null) {
             serviceNameAcceptInput.value = socketsSample.serviceNameAccept;
         }
-        if (hostNameConnectInput) {
+        if (hostNameConnectInput !== null) {
             hostNameConnectInput.value = socketsSample.hostNameConnect;
         }
-        if (serviceNameConnectInput) {
+        if (serviceNameConnectInput !== null) {
             serviceNameConnectInput.value = socketsSample.serviceNameConnect;
         }
     };

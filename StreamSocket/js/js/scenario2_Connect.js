@@ -24,7 +24,7 @@
     });
 
     function openClient(eventObject) {
-        if (socketsSample.clientSocket) {
+        if (socketsSample.clientSocket !== null) {
             WinJS.log && WinJS.log("Already have a client; call close to close the listener and the client.", "", "error");
             return;
         }
@@ -52,14 +52,14 @@
         socketsSample.clientSocket = new Windows.Networking.Sockets.StreamSocket();
 
         if (socketsSample.adapter === null) {
-            WinJS.log && WinJS.log("Connecting to: " + hostNameConnect.textContent, "", "status");
+            WinJS.log && WinJS.log("Connecting to: " + hostName, "", "status");
             socketsSample.clientSocket.connectAsync(hostName, serviceName).done(function () {
                 WinJS.log && WinJS.log("Connected", "", "status");
                 socketsSample.connected = true;
             }, onError);
         } else {
             WinJS.log && WinJS.log(
-                "Connecting to: " + hostNameConnect.textContent + " using network adapter " + socketsSample.adapter.networkAdapterId,
+                "Connecting to: " + hostName + " using network adapter " + socketsSample.adapter.networkAdapterId,
                 "",
                 "status");
 

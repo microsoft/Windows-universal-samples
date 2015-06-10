@@ -37,7 +37,7 @@
     }
 
     function startListener(eventObject) {
-        if (socketsSample.listener) {
+        if (socketsSample.listener !== null) {
             WinJS.log && WinJS.log("Already have a listener; call close to close the listener.", "", "error");
             return;
         }
