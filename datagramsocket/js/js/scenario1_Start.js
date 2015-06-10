@@ -32,7 +32,7 @@
     function bindToAnyChanged(eventObject) {
         var bindToAny = document.getElementById("bindToAny");
         var adapterList = document.getElementById("adapterList");
-        
+
         adapterList.disabled = bindToAny.checked;
     }
 
@@ -117,7 +117,7 @@
             echoMessage(socketsSample.listenerOutputStream, eventArguments);
             return;
         }
-            
+
         socketsSample.listener.getOutputStreamAsync(
             eventArguments.remoteAddress,
             eventArguments.remotePort).done(function (outputStream) {
@@ -155,7 +155,7 @@
             socketsSample.listener = null;
             socketsSample.bindingToService = false;
         }
-        
+
         // When we close a socket, outstanding async operations will be canceled and the
         // error callbacks called.  There's no point in displaying those errors.
         if (!socketsSample.closing) {

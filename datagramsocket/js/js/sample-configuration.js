@@ -12,7 +12,7 @@
 (function () {
     "use strict";
 
-    var sampleTitle = "Sample Title here";
+    var sampleTitle = "DatagramSocket";
 
     var scenarios = [
         { url: "/html/scenario1_Start.html", title: "Start DatagramSocket Listener" },
