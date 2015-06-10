@@ -1,13 +1,9 @@
-﻿//*********************************************************
-//
-// Copyright (c) Microsoft. All rights reserved.
+﻿// Copyright (c) Microsoft. All rights reserved.
 // This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
 // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
-//
-//*********************************************************
 
 (function () {
     "use strict";
@@ -29,14 +25,14 @@
         }
     });
 
-    function bindToAnyChanged() {
+    function bindToAnyChanged(eventObject) {
         var bindToAny = document.getElementById("bindToAny");
         var adapterList = document.getElementById("adapterList");
         
         adapterList.disabled = bindToAny.checked;
     }
 
-    function startListener() {
+    function startListener(eventObject) {
         var serviceName = document.getElementById("serviceNameAccept").value;
         var bindToAny = document.getElementById("bindToAny").checked;
         var bindToAddress = document.getElementById("bindToAddress").checked;
@@ -49,7 +45,7 @@
             return;
         }
             
-        if (socketsSample.listener) {
+        if (socketsSample.listener !== null) {
             WinJS.log && WinJS.log("Already have a listener; call close to close the listener.", "sample", "error");
             return;
         }
@@ -99,7 +95,7 @@
             socketsSample.hostNameConnect = selectedLocalHost.canonicalName;
 
             // Try to limit traffic to the selected adapter. 
-            // This option will be overriden by interfaces with weak-host or forwarding modes enabled.
+            // This option will be overridden by interfaces with weak-host or forwarding modes enabled.
             socketsSample.listener.bindServiceNameAsync(
                 serviceName,
                 selectedLocalHost.ipInformation.networkAdapter).done(function () {
@@ -112,39 +108,39 @@
         }
     }
 
-    function onServerMessageReceived(eventArgument) {
-        if (socketsSample.listenerOutputStream) {
-            echoMessage(socketsSample.listenerOutputStream, eventArgument);
+    function onServerMessageReceived(eventArguments) {
+        if (socketsSample.listenerOutputStream !== null) {
+            echoMessage(socketsSample.listenerOutputStream, eventArguments);
             return;
         }
             
         socketsSample.listener.getOutputStreamAsync(
-            eventArgument.remoteAddress,
-            eventArgument.remotePort).done(function (outputStream) {
+            eventArguments.remoteAddress,
+            eventArguments.remotePort).done(function (outputStream) {
 
-            if (!socketsSample.listenerOutputStream) {
+            if (socketsSample.listenerOutputStream === null) {
                 socketsSample.listenerOutputStream = outputStream;
-                socketsSample.listenerPeerAddress = eventArgument.remoteAddress;
-                socketsSample.listenerPeerPort = eventArgument.remotePort;
+                socketsSample.listenerPeerAddress = eventArguments.remoteAddress;
+                socketsSample.listenerPeerPort = eventArguments.remotePort;
             }
 
-            echoMessage(socketsSample.listenerOutputStream, eventArgument);
+            echoMessage(socketsSample.listenerOutputStream, eventArguments);
         });
     }
 
-    function echoMessage(outputStream, eventArgument) {
-        if (socketsSample.listenerPeerAddress !== eventArgument.remoteAddress ||
-            socketsSample.listenerPeerPort !== eventArgument.remotePort) {
+    function echoMessage(outputStream, eventArguments) {
+        if (socketsSample.listenerPeerAddress !== eventArguments.remoteAddress ||
+            socketsSample.listenerPeerPort !== eventArguments.remotePort) {
             WinJS.log && WinJS.log(
-                "Got datagram from " + eventArgument.remoteAddress + ":" + eventArgument.remotePort +
-                ", but already 'connected' to " + socketsSample.listenerPeerAddress + ":" +
-                socketsSample.listenerPeerPort,
+                "Got datagram from " + eventArguments.remoteAddress + ":" + eventArguments.remotePort +
+                ", but already 'connected' to " + socketsSample.listenerPeerAddress.toString() + ":" +
+                socketsSample.listenerPeerPort.toString(),
                 "sample",
                 "status");
             return;
         }
 
-        outputStream.writeAsync(eventArgument.getDataReader().detachBuffer()).done(function () {
+        outputStream.writeAsync(eventArguments.getDataReader().detachBuffer()).done(function () {
             // Do nothing - client will print out a message when data is received.
         });
     }

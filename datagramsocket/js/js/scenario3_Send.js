@@ -1,13 +1,9 @@
-﻿//*********************************************************
-//
-// Copyright (c) Microsoft. All rights reserved.
+﻿// Copyright (c) Microsoft. All rights reserved.
 // This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
 // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
-//
-//*********************************************************
 
 (function () {
     "use strict";
@@ -18,13 +14,13 @@
         }
     });
 
-    function sendHello() {
+    function sendHello(eventObject) {
         if (!socketsSample.connected) {
             WinJS.log && WinJS.log("Client: you must connect the client before using it.", "sample", "error");
             return;
         }
 
-        if (!socketsSample.clientDataWriter) {
+        if (socketsSample.clientDataWriter === null) {
             socketsSample.clientDataWriter =
                 new Windows.Storage.Streams.DataWriter(socketsSample.clientSocket.outputStream);
         }

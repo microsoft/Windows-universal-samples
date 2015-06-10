@@ -1,13 +1,9 @@
-﻿//*********************************************************
-//
-// Copyright (c) Microsoft. All rights reserved.
+﻿// Copyright (c) Microsoft. All rights reserved.
 // This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
 // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
-//
-//*********************************************************
 
 var socketsSample = {};
 
@@ -32,19 +28,19 @@ var socketsSample = {};
 
         socketsSample.closing = true;
 
-        if (socketsSample.listener) {
+        if (socketsSample.listener !== null) {
             socketsSample.listener.close();
         }
 
-        if (socketsSample.clientSocket) {
+        if (socketsSample.clientSocket !== null) {
             socketsSample.clientSocket.close();
         }
 
-        if (socketsSample.clientDataWriter) {
+        if (socketsSample.clientDataWriter !== null) {
             socketsSample.clientDataWriter.close();
         }
 
-        if (socketsSample.listenerOutputStream) {
+        if (socketsSample.listenerOutputStream !== null) {
             socketsSample.listenerOutputStream.close();
         }
 
@@ -62,27 +58,27 @@ var socketsSample = {};
         var hostNameConnectInput = document.getElementById("hostNameConnect");
         var serviceNameConnectInput = document.getElementById("serviceNameConnect");
 
-        if (serviceNameAcceptInput) {
+        if (serviceNameAcceptInput !== null) {
             serviceNameAcceptInput.value = socketsSample.serviceNameAccept;
         }
-        if (hostNameConnectInput) {
+        if (hostNameConnectInput !== null) {
             hostNameConnectInput.value = socketsSample.hostNameConnect;
         }
-        if (serviceNameConnectInput) {
+        if (serviceNameConnectInput !== null) {
             serviceNameConnectInput.value = socketsSample.serviceNameConnect;
         }
     };
 
-    socketsSample.getValues = function (evt) {
-        switch (evt.target.id) {
+    socketsSample.getValues = function (eventObject) {
+        switch (eventObject.target.id) {
             case "serviceNameAccept":
-                socketsSample.serviceNameAccept = evt.target.value;
+                socketsSample.serviceNameAccept = eventObject.target.value;
                 break;
             case "hostNameConnect":
-                socketsSample.hostNameConnect = evt.target.value;
+                socketsSample.hostNameConnect = eventObject.target.value;
                 break;
             case "serviceNameConnect":
-                socketsSample.serviceNameConnect = evt.target.value;
+                socketsSample.serviceNameConnect = eventObject.target.value;
                 break;
         }
     };

@@ -1,13 +1,9 @@
-﻿//*********************************************************
-//
-// Copyright (c) Microsoft. All rights reserved.
+﻿// Copyright (c) Microsoft. All rights reserved.
 // This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
 // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
-//
-//*********************************************************
 
 (function () {
     "use strict";
@@ -22,8 +18,8 @@
         }
     });
 
-    function openClient() {
-        if (socketsSample.clientSocket) {
+    function openClient(eventObject) {
+        if (socketsSample.clientSocket !== null) {
             WinJS.log && WinJS.log(
                 "Already have a client; call close to close the listener and the client.",
                 "sample",
@@ -42,7 +38,7 @@
         // By default 'hostNameConnect' is disabled and host name validation is not required. When enabling the text
         // box validating the host name is required since it was received from an untrusted source (user input).
         // The host name is validated by catching exceptions thrown by the HostName constructor.
-        // Note that when enabling the text box users may provide names for hosts on the intErnet that require the
+        // Note that when enabling the text box users may provide names for hosts on the internet that require the
         // "Internet (Client)" capability.
         var hostName;
         try {
