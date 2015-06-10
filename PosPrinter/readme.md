@@ -26,7 +26,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[POS Printer sample](https://github.com/Microsoft/Windows-universal-samples/tree/master/pos-printer)
+[POS Printer sample](https://github.com/Microsoft/Windows-universal-samples/tree/master/PosPrinter)
 
 ### Reference
 
