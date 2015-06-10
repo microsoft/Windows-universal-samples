@@ -1,4 +1,4 @@
-﻿//*********************************************************
+//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
@@ -49,13 +49,23 @@ Scenario1_DataEvents::Scenario1_DataEvents() : m_RootPage(MainPage::Current), m_
 
     InitializeComponent();
 
+    m_DeviceAccessInfo = DeviceAccessInformation::CreateFromDeviceClassId(customSensorGuid);
+    m_DeviceAccessInfo->AccessChanged += ref new TypedEventHandler<DeviceAccessInformation ^, DeviceAccessChangedEventArgs ^>(this, &Scenario1_DataEvents::OnAccessChanged);
+
+    StartWatcher();
+
+}
+
+/// <summary>
+/// Invoked each time the custom sensor is created
+/// </summary>
+void Scenario1_DataEvents::StartWatcher()
+{
+    Guid customSensorGuid(GUID_CustomSensorDevice_VendorDefinedSubTypeID);
     String^ customSensorSelector = CustomSensor::GetDeviceSelector(customSensorGuid);
     m_Watcher = DeviceInformation::CreateWatcher(customSensorSelector);
-
     m_Watcher->Added += ref new TypedEventHandler<DeviceWatcher^, DeviceInformation^>(this, &Scenario1_DataEvents::OnCustomSensorAdded);
-
     m_Watcher->Start();
-
 }
 
 /// <summary>
@@ -65,59 +75,42 @@ Scenario1_DataEvents::Scenario1_DataEvents() : m_RootPage(MainPage::Current), m_
 /// <param name="customSensorDevice">device information for the custom sensor that was found</param>
 void Scenario1_DataEvents::OnCustomSensorAdded(DeviceWatcher^ watcher, DeviceInformation^ customSensorDevice)
 {
-    try
-    {
-        auto getCustomSensorTask = create_task(CustomSensor::FromIdAsync(customSensorDevice->Id));
+    auto getCustomSensorTask = create_task(CustomSensor::FromIdAsync(customSensorDevice->Id));
 
-        getCustomSensorTask.then([this](CustomSensor^ customSensor)
+    getCustomSensorTask.then([this](CustomSensor^ customSensor)
+    {
+        if (customSensor != nullptr)
         {
-            if (customSensor != nullptr)
-            {
-                // When multiple custom sensors exist on the system, OnCustomSensorAdded 
-                // may be called concurrently using multiple threadpool threads
-                // Lock the section to protect this->customSensor from concurrent accesses
-                auto lock = m_CritsecCustomSensor.Lock();
+            // When multiple custom sensors exist on the system, OnCustomSensorAdded 
+            // may be called concurrently using multiple threadpool threads
+            // Lock the section to protect this->customSensor from concurrent accesses
+            auto lock = m_CritsecCustomSensor.Lock();
 
-                // Just pick the first matching custom sensor, ignore the others
-                if (nullptr == this->m_CustomSensor)
-                {
-                    this->m_CustomSensor = customSensor;
-                    // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
-                    // This value will be used later to activate the sensor.
-                    // In the case below, we defined a 200ms report interval as being suitable for the purpose of this app.
-                    uint32 minReportInterval = customSensor->MinimumReportInterval;
-                    m_DesiredReportInterval = minReportInterval > 200 ? minReportInterval : 200;
-                }
-            }
-            else
+            // Just pick the first matching custom sensor, ignore the others
+            if (nullptr == this->m_CustomSensor)
             {
-                Dispatcher->RunAsync(
-                    CoreDispatcherPriority::Normal,
-                    ref new DispatchedHandler(
-                        [this]()
-                        {
-                            m_RootPage->NotifyUser("No custom sensor found", NotifyType::ErrorMessage);
-                        },
-                        CallbackContext::Any
-                    )
-                );
+                this->m_CustomSensor = customSensor;
+                // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
+                // This value will be used later to activate the sensor.
+                // In the case below, we defined a 200ms report interval as being suitable for the purpose of this app.
+                uint32 minReportInterval = customSensor->MinimumReportInterval;
+                m_DesiredReportInterval = minReportInterval > 200 ? minReportInterval : 200;
             }
-        });
-    }
-    catch (Platform::Exception^ e)
-    {
-        Dispatcher->RunAsync(
-            CoreDispatcherPriority::Normal,
-            ref new DispatchedHandler(
-                [this, e]()
-                {
-                    // May happen when the user denies access to the sensor
-                    m_RootPage->NotifyUser(e->ToString(), NotifyType::ErrorMessage);
-                },
-                CallbackContext::Any
-            )
-        );
-    }
+        }
+        else
+        {
+            Dispatcher->RunAsync(
+                CoreDispatcherPriority::Normal,
+                ref new DispatchedHandler(
+                    [this]()
+                    {
+                        m_RootPage->NotifyUser("Custom sensor not found or access denied", NotifyType::ErrorMessage);
+                    },
+                    CallbackContext::Any
+                )
+            );
+        }
+    });
 }
 
 /// <summary>
@@ -213,7 +206,7 @@ void Scenario1_DataEvents::ScenarioEnable(Platform::Object^ sender, Windows::UI:
     }
     else
     {
-        m_RootPage->NotifyUser("No custom sensor found", NotifyType::ErrorMessage);
+        m_RootPage->NotifyUser("Custom sensor not found or access denied", NotifyType::ErrorMessage);
     }
 }
 
@@ -227,4 +220,48 @@ void Scenario1_DataEvents::ScenarioDisable(Platform::Object^ sender, Windows::UI
 
     ScenarioEnableButton->IsEnabled = true;
     ScenarioDisableButton->IsEnabled = false;
+}
+
+/// <summary>
+/// Invoked when the privacy settings for this custom sensor have changed
+/// </summary>
+/// <param name="sender"></param>
+/// <param name="e"></param>
+void Scenario1_DataEvents::OnAccessChanged(DeviceAccessInformation ^sender, DeviceAccessChangedEventArgs ^args)
+{
+    if (args->Status == DeviceAccessStatus::Allowed)
+    {
+        StartWatcher();
+
+        Dispatcher->RunAsync(
+            CoreDispatcherPriority::Normal,
+            ref new DispatchedHandler(
+                [this]()
+                {
+                    m_RootPage->NotifyUser("", NotifyType::StatusMessage);
+                },
+                CallbackContext::Any
+            )
+        );
+    }
+    else
+    {
+        m_CustomSensor = nullptr;
+
+        Dispatcher->RunAsync(
+            CoreDispatcherPriority::Normal,
+            ref new DispatchedHandler(
+                [this]()
+                {
+                    Window::Current->VisibilityChanged -= m_VisibilityToken;
+
+                    ScenarioEnableButton->IsEnabled = true;
+                    ScenarioDisableButton->IsEnabled = false;
+
+                    m_RootPage->NotifyUser("Custom sensor access denied", NotifyType::ErrorMessage);
+                },
+                CallbackContext::Any
+            )
+        );
+    }
 }
