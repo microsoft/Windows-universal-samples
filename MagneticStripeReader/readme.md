@@ -42,7 +42,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[Magnetic Stripe Reader sample](https://github.com/Microsoft/Windows-universal-samples/tree/master/magneticstripereader)
+[Magnetic Stripe Reader sample](https://github.com/Microsoft/Windows-universal-samples/tree/master/MagneticStripeReader)
 
 ### Reference
 
