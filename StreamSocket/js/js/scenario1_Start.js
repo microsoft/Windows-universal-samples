@@ -1,9 +1,13 @@
-﻿//// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-//// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-//// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-//// PARTICULAR PURPOSE.
-////
-//// Copyright (c) Microsoft Corporation. All rights reserved
+﻿//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
 
 (function () {
     "use strict";
@@ -13,7 +17,7 @@
 
     var page = WinJS.UI.Pages.define("/html/scenario1_Start.html", {
         ready: function (element, options) {
-            document.getElementById("StartListener").addEventListener("click", startListener, false);
+            document.getElementById("buttonStartListener").addEventListener("click", startListener, false);
             document.getElementById("serviceNameAccept").addEventListener("change", socketsSample.getValues, false);
             document.getElementById("bindToAny").addEventListener("change", bindToAnyChanged, false);
             document.getElementById("bindToAddress").addEventListener("change", bindToAnyChanged, false);
@@ -25,22 +29,22 @@
         }
     });
 
-    function bindToAnyChanged() {
+    function bindToAnyChanged(eventObject) {
         var bindToAny = document.getElementById("bindToAny");
         var adapterList = document.getElementById("adapterList");
 
         adapterList.disabled = bindToAny.checked;
     }
 
-    function startListener() {
+    function startListener(eventObject) {
         if (socketsSample.listener) {
-            WinJS.log("Already have a listener; call close to close the listener.", "", "error");
+            WinJS.log && WinJS.log("Already have a listener; call close to close the listener.", "", "error");
             return;
         }
 
         var serviceName = document.getElementById("serviceNameAccept").value;
         if (serviceName === "") {
-            WinJS.log("Please provide a service name.", "", "error");
+            WinJS.log && WinJS.log("Please provide a service name.", "", "error");
             return;
         }
 
@@ -60,7 +64,7 @@
         if (bindToAny) {
             // Don't limit traffic to an address or an adapter.
             socketsSample.listener.bindServiceNameAsync(serviceName).done(function () {
-                WinJS.log("Listening", "", "status");
+                WinJS.log && WinJS.log("Listening", "", "status");
                 socketsSample.bindingToService = false;
             }, onError);
         } else if (bindToAddress) {
@@ -69,7 +73,7 @@
 
             // Try to bind to a specific address.
             socketsSample.listener.bindEndpointAsync(selectedLocalHost, serviceName).done(function () {
-                WinJS.log("Listening on address " + selectedLocalHost.canonicalName, "", "status");
+                WinJS.log && WinJS.log("Listening on address " + selectedLocalHost.canonicalName, "", "status");
                 socketsSample.bindingToService = false;
             }, onError);
         } else if (bindToAdapter) {
@@ -85,14 +89,12 @@
                 serviceName,
                 Windows.Networking.Sockets.SocketProtectionLevel.plainSocket,
                 socketsSample.adapter).done(function () {
-                    WinJS.log("Listening on adapter " + socketsSample.adapter.networkAdapterId, "", "status");
+                    WinJS.log && WinJS.log("Listening on adapter " + socketsSample.adapter.networkAdapterId, "", "status");
                     socketsSample.bindingToService = false;
                 }, onError);
         }
     }
 
-    // This must be a real function; it will loop back on itself with the
-    // call to acceptAsync at the very end.
     function onServerAccept(eventArgument) {
         socketsSample.serverSocket = eventArgument.socket;
         socketsSample.serverReader = new Windows.Storage.Streams.DataReader(socketsSample.serverSocket.inputStream);
@@ -107,7 +109,7 @@
         socketsSample.serverReader.loadAsync(4).done(function (sizeBytesRead) {
             // Make sure 4 bytes were read.
             if (sizeBytesRead !== 4) {
-                WinJS.log("Server: connection lost.", "", "error");
+                // The underlying socket was closed before we were able to read the whole data.
                 return;
             }
 
@@ -116,12 +118,12 @@
             return socketsSample.serverReader.loadAsync(count).then(function (stringBytesRead) {
                 // Make sure the whole string was read.
                 if (stringBytesRead !== count) {
-                    WinJS.log("Server: connection lost.", "", "error");
+                    // The underlying socket was closed before we were able to read the whole data.
                     return;
                 }
                 // Read in the string.
                 var string = socketsSample.serverReader.readString(count);
-                socketsSample.displayOutput("Received data: \"" + string + "\"");
+                WinJS.log && WinJS.log("Received data: \"" + string + "\"", "", "status");
 
                 // Restart the read for more bytes. We could just call startServerRead() but in
                 // the case subsequent read operations complete synchronously we start building
@@ -143,7 +145,7 @@
         // When we close a socket, outstanding async operations will be canceled and the
         // error callbacks called.  There's no point in displaying those errors.
         if (!socketsSample.closing) {
-            WinJS.log(reason, "", "error");
+            WinJS.log && WinJS.log(reason, "", "error");
         }
     }
 

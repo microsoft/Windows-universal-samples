@@ -1,22 +1,26 @@
-﻿//// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-//// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-//// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-//// PARTICULAR PURPOSE.
-////
-//// Copyright (c) Microsoft Corporation. All rights reserved
+﻿//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
 
 (function () {
     "use strict";
 
     var page = WinJS.UI.Pages.define("/html/scenario3_Send.html", {
         ready: function (element, options) {
-            document.getElementById("SendHello").addEventListener("click", sendHello, false);
+            document.getElementById("buttonSendHello").addEventListener("click", sendHello, false);
         }
     });
 
-    function sendHello() {
+    function sendHello(eventObject) {
         if (!socketsSample.connected) {
-            WinJS.log("Client: you must connect the client before using it.", "", "error");
+            WinJS.log && WinJS.log("Client: you must connect the client before using it.", "", "error");
             return;
         }
         var writer = new Windows.Storage.Streams.DataWriter(socketsSample.clientSocket.outputStream);
@@ -33,7 +37,7 @@
         // When we close a socket, outstanding async operations will be canceled and the
         // error callbacks called.  There's no point in displaying those errors.
         if (!socketsSample.closing) {
-            WinJS.log(reason, "", "error");
+            WinJS.log && WinJS.log(reason, "", "error");
         }
     }
 })();

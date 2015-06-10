@@ -1,23 +1,27 @@
-﻿//// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-//// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-//// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-//// PARTICULAR PURPOSE.
-////
-//// Copyright (c) Microsoft Corporation. All rights reserved
+﻿//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
 
 (function () {
     "use strict";
 
     var page = WinJS.UI.Pages.define("/html/scenario5_Certificates.html", {
         ready: function (element, options) {
-            document.getElementById("ConnectSocket").addEventListener("click", openClient, false);
+            document.getElementById("buttonConnectSocket").addEventListener("click", openClient, false);
         }
     });
 
-    function openClient() {
+    function openClient(eventObject) {
         var serviceName = document.getElementById("serviceNameConnect").value;
         if (serviceName === "") {
-            WinJS.log("Please provide a service name.", "", "error");
+            WinJS.log && WinJS.log("Please provide a service name.", "", "error");
             return;
         }
 
@@ -29,7 +33,7 @@
         try {
             hostName = new Windows.Networking.HostName(document.getElementById("hostNameConnect").value);
         } catch (error) {
-            WinJS.log("Error: Invalid host name.", "", "error");
+            WinJS.log && WinJS.log("Error: Invalid host name.", "", "error");
             return;
         }
 
@@ -39,7 +43,7 @@
     function connectSocketWithRetry(hostName, serviceName) {
         var closing = false;
         var clientSocket = new Windows.Networking.Sockets.StreamSocket();
-        WinJS.log("Connecting to: " + hostName.displayName, "", "status");
+        WinJS.log && WinJS.log("Connecting to: " + hostName.displayName, "", "status");
 
         var abortedByUser = false;
 
@@ -76,7 +80,7 @@
                 clientSocket.information.serverCertificate,
                 clientSocket.information.serverIntermediateCertificates);
 
-            WinJS.log("Connected to server. Certificate information:\r\n" + certInformation, "", "status");
+            WinJS.log && WinJS.log("Connected to server. Certificate information:\r\n" + certInformation, "", "status");
 
             clientSocket.close();
             clientSocket = null;
@@ -88,7 +92,7 @@
                 throw reason;
             }
 
-            WinJS.log(reason, "", "error");
+            WinJS.log && WinJS.log(reason, "", "error");
             clientSocket.close();
             clientSocket = null;
         });
@@ -107,7 +111,7 @@
                 clientSocket.information.serverCertificateErrors[i]);
         }
 
-        WinJS.log("Retrying connection", "", "status");
+        WinJS.log && WinJS.log("Retrying connection", "", "status");
         return clientSocket.connectAsync(
             hostName,
             serviceName,
@@ -140,25 +144,25 @@
     }
 
     function getCertificateInformation(serverCert, intermediateCertificates) {
-        var sb = "";
-        sb += "Friendly Name: " + serverCert.friendlyName + "\r\n";
-        sb += "Subject: " + serverCert.subject + "\r\n";
-        sb += "Issuer: " + serverCert.issuer + "\r\n";
-        sb += "Validity: " + serverCert.validFrom + " - " + serverCert.validTo + "\r\n";
+        var certificateInfoString = "";
+        certificateInfoString += "Friendly Name: " + serverCert.friendlyName + "\r\n";
+        certificateInfoString += "Subject: " + serverCert.subject + "\r\n";
+        certificateInfoString += "Issuer: " + serverCert.issuer + "\r\n";
+        certificateInfoString += "Validity: " + serverCert.validFrom + " - " + serverCert.validTo + "\r\n";
 
         // Enumerate the entire certificate chain
         if (intermediateCertificates.length > 0) {
-            sb += "Certificate chain:\r\n";
+            certificateInfoString += "Certificate chain:\r\n";
 
             for (var i = 0; i < intermediateCertificates.length; i++) {
                 var cert = intermediateCertificates[i];
-                sb += "Intermediate Certificate Subject: " + cert.subject + "\r\n";
+                certificateInfoString += "Intermediate Certificate Subject: " + cert.subject + "\r\n";
             }
         } else {
-            sb += "No certificates within the intermediate chain.\r\n";
+            certificateInfoString += "No certificates within the intermediate chain.\r\n";
         }
 
-        return sb;
+        return certificateInfoString;
     }
 
     function getCertificateErrorDescription(errorNum)

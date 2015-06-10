@@ -1,20 +1,24 @@
-﻿//// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-//// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-//// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-//// PARTICULAR PURPOSE.
-////
-//// Copyright (c) Microsoft Corporation. All rights reserved
+﻿//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
 
 (function () {
     "use strict";
 
     var page = WinJS.UI.Pages.define("/html/scenario4_Close.html", {
         ready: function (element, options) {
-            document.getElementById("CloseSockets").addEventListener("click", closeListenerAndSockets, false);
+            document.getElementById("buttonCloseSockets").addEventListener("click", closeListenerAndSockets, false);
         }
     });
 
-    function closeListenerAndSockets() {
+    function closeListenerAndSockets(eventObject) {
         socketsSample.closing = true;
         if (socketsSample.listener) {
             socketsSample.listener.close();
@@ -37,6 +41,6 @@
         socketsSample.adapter = null;
         socketsSample.hostNameConnect = null;
 
-        WinJS.log("Socket and listener closed", "", "status");
+        WinJS.log && WinJS.log("Socket and listener closed", "", "status");
     }
 })();
