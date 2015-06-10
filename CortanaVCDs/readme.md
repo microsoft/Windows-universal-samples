@@ -31,7 +31,7 @@ Usage
 
 When Cortana is listening, any of the following voice commands are supported. By default, "London", "Melbourne", and "Yosemite National Park" are provided as sample destinations. New destinations can be added in the app.
 
-- "Adventure Works, show trip to London"
+- "Adventure Works, show trip to London" [Note: Currently this has a known issue, see below]
 - "Adventure Works, when is my trip to London"
 - "Adventure Works, cancel trip to London"
 
@@ -50,7 +50,14 @@ for an example of handling duplicate/disambiguation.
 Known Issues
 ------------
 
-On the windows phone emulator, Cortana is currently unavailable, and will become available in future updates of the SDK. Physical phone hardware should work fine.
+* On the windows phone emulator, Cortana is currently unavailable, and will become available in future updates of the SDK. Physical phone hardware should work fine.
+
+* In recent flights of windows, the mechanism that Cortana uses to activate apps has changed to use protocol activation. This results in some commands and links not being able to launch the app. 
+	* The SDK release 10069 that is included in VS does not currently support the protocol activation changes needed for the manifest, but an update to the sample will be available soon that demonstrates the changes required when a new release of the SDK has become available.
+
+	* Expect links in Cortana to change to invoking the application via the OnActivated() entrypoint, instead of OnLaunched() in the future. 
+
+* Due to a change in date handling, older versions of AdventureWorks may have some odd dates when restarting. An uninstall of old AdventureWorks sample packages is recommended. 
 
 Related topics
 --------------

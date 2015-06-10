@@ -2,7 +2,7 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{f710b9fd-4e6b-42d7-a99a-6d48888d48b0}</ProjectGuid>
-    <RootNamespace>SpeechAndTTS</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
@@ -243,12 +243,37 @@
     <Image Include="Assets\windows-sdk.png" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="SRGS\de-DE\SRGSColors.xml" />
+    <Xml Include="SRGS\en-GB\SRGSColors.xml" />
     <Xml Include="SRGS\en-US\SRGSColors.xml" />
+    <Xml Include="SRGS\es-ES\SRGSColors.xml" />
     <Xml Include="SRGS\fr-FR\SRGSColors.xml" />
+    <Xml Include="SRGS\it-IT\SRGSColors.xml" />
+    <Xml Include="SRGS\zh-CN\SRGSColors.xml" />
   </ItemGroup>
   <ItemGroup>
+    <PRIResource Include="Strings\de-DE\LocalizationSpeechResources.resw" />
+    <PRIResource Include="Strings\de-DE\LocalizationTTSResources.resw" />
+    <PRIResource Include="Strings\en-GB\LocalizationSpeechResources.resw" />
+    <PRIResource Include="Strings\en-GB\LocalizationTTSResources.resw" />
+    <PRIResource Include="Strings\en-IN\LocalizationTTSResources.resw" />
     <PRIResource Include="Strings\en-US\LocalizationSpeechResources.resw" />
+    <PRIResource Include="Strings\en-US\LocalizationTTSResources.resw" />
+    <PRIResource Include="Strings\es-ES\LocalizationSpeechResources.resw" />
+    <PRIResource Include="Strings\es-ES\LocalizationTTSResources.resw" />
+    <PRIResource Include="Strings\es-MX\LocalizationTTSResources.resw" />
     <PRIResource Include="Strings\fr-FR\LocalizationSpeechResources.resw" />
+    <PRIResource Include="Strings\fr-FR\LocalizationTTSResources.resw" />
+    <PRIResource Include="Strings\it-IT\LocalizationSpeechResources.resw" />
+    <PRIResource Include="Strings\it-IT\LocalizationTTSResources.resw" />
+    <PRIResource Include="Strings\ja-JP\LocalizationTTSResources.resw" />
+    <PRIResource Include="Strings\ko-KR\LocalizationTTSResources.resw" />
+    <PRIResource Include="Strings\pl-PL\LocalizationTTSResources.resw" />
+    <PRIResource Include="Strings\pt-BR\LocalizationTTSResources.resw" />
+    <PRIResource Include="Strings\ru-RU\LocalizationTTSResources.resw" />
+    <PRIResource Include="Strings\zh-CN\LocalizationSpeechResources.resw" />
+    <PRIResource Include="Strings\zh-CN\LocalizationTTSResources.resw" />
+    <PRIResource Include="Strings\zh-TW\LocalizationTTSResources.resw" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
