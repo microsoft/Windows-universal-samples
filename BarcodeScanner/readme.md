@@ -38,7 +38,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[Barcode Scanner sample](https://github.com/Microsoft/Windows-universal-samples/tree/master/barcode-scanner)
+[Barcode Scanner sample](https://github.com/Microsoft/Windows-universal-samples/tree/master/barcodescanner)
 
 ### Reference
 
