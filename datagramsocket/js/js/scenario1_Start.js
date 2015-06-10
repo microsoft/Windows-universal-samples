@@ -11,10 +11,10 @@
 
 (function () {
     "use strict";
-    
+
     // Array containing all available local HostName endpoints
     var localHostItems = [];
-    
+
     var page = WinJS.UI.Pages.define("/html/scenario1_Start.html", {
         ready: function (element, options) {
             document.getElementById("buttonStartListener").addEventListener("click", startListener, false);
@@ -48,7 +48,7 @@
             WinJS.log && WinJS.log("Please provide a service name.", "sample", "error");
             return;
         }
-            
+
         if (socketsSample.listener !== null) {
             WinJS.log && WinJS.log("Already have a listener; call close to close the listener.", "sample", "error");
             return;
