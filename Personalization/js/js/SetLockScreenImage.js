@@ -9,7 +9,7 @@
     "use strict";
     var page = WinJS.UI.Pages.define("/html/SetLockScreenImage.html", {
         ready: function (element, options) {
-        document.getElementById("button1").addEventListener("click", OpenPickerAndSetLockScreenImage, false);
+            document.getElementById("button1").addEventListener("click", OpenPickerAndSetLockScreenImage, false);
         }
     });
 
@@ -29,7 +29,7 @@
                 },
                 function (imageSet) {
                     // Set Image promise failed.  Display failure message.
-                    WinJS.log && WinJS.log("Setting the lock screen image failed.  Make sure your copy of Windows is activated.", "sample", "error");
+                    WinJS.log && WinJS.log("Setting the lock screen image failed.", "sample", "error");
                 });
             }
             else {
