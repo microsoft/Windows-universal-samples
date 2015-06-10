@@ -1,25 +1,26 @@
-FaceDetection Sample
+CameraFaceDetection Sample
 --------------------
 
-This sample applies an end-to-end approach to demonstrate how to write a camera application using the Windows.Media.Capture API in conjunction with orientation sensors to cover the functions that most camera apps will require. In addition, it will show a simple way to use the Face Detection effect included in Windows.
+This sample applies an end-to-end approach to demonstrate how to write a camera application using the Windows.Media.Capture API in conjunction with orientation sensors to cover the functions that most camera apps will require. In addition, it will show a simple way to use the Face Detection effect included in Windows. This sample is based on the CameraStarterKit.
 
 Specifically, this sample will cover how to:
 
 1. **Manage the MediaCapture object** throughout the lifecycle of the app and through navigation events.
-2. **Acquire a camera located on a specific side of the device**. In this case, the sample attempts to get the rear camera.
+2. **Acquire a camera located on a specific side of the device**. In this case, the sample attempts to get the front camera.
 3. **Start and stop the preview** to a UI element, including mirroring for front-facing cameras.
-4. **Take a picture** to a file, and disable the video capture button if the app is running on a device that doesn't support concurrent capturing of photos and video.
-5. **Record a video** to a file, and disable the photo capture button if the app is running on a device that doesn't support concurrent capturing of photos and video.
-6. **Handle rotation events** for both, the device moving in space and the page orientation changing on the screen. Also apply any necessary corrections to the preview stream rotation and to captured photos and videos.
-7. **Handle MediaCapture RecordLimitationExceeded and Failed events** to be notified that video recording needs to be stopped due to a video being too long, or clean up the MediaCapture instance when an error occurs.
-8. **Manage the Face Detection effect**, including creation, configuration, activation/deactivation, registering for events, and cleanup.
-9. **Render face bounding boxes** as an overlay on the camera preview, taking mirroring and rotation into account.
+4. **Take a regular picture** to a file, taking into account the orientation of the device.
+5. **Handle rotation events** for both, the device moving in space and the page orientation changing on the screen. Also apply any necessary corrections to the preview stream rotation.
+6. **Handle MediaCapture Failed event** to clean up the MediaCapture instance when an error occurs.
+7. **Manage the Face Detection effect**, including creation, configuration, activation/deactivation, registering for events, and cleanup.
+8. **Render face bounding boxes** as an overlay on the camera preview, taking mirroring and rotation into account.
 
 This sample also implements a custom UI to better simulate the experience that a camera application would provide, so any messages intended for the developer are printed to the debug console.
 
 ## Related topics
 
 **Samples**
+
+[CameraStarterKit](https://github.com/Microsoft/Windows-universal-samples/tree/master/camerastarterkit)
 
 [How to rotate captured video](https://msdn.microsoft.com/en-us/library/windows/apps/hh868174.aspx)
 

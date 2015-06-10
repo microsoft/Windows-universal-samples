@@ -41,7 +41,7 @@ button.cameraButton {
     width: 70px;
     height: 70px;
     border: 3px solid;
-    border-color: black;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 /*  Make the button square and give it a thick border 
@@ -55,6 +55,6 @@ button.faceDetectButton {
     left: calc(1.5 * 35px);
     z-index: 3;
     transform: scale(1.5);
-    border-color: black;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 

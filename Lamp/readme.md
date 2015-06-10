@@ -24,7 +24,8 @@ the default lamp device when page loads and provide a toggle to turn the lamp on
     1) When you choose "Register for AvailablityChanged Event" button, the app registers for the AvailablityChanged event
     2) When you choose "Unregister for AvailablityChanged Event", the app unregisters for the AvailablityChanged event.
 
-## Related topics
+Related topics
+--------------
 
 [Windows.Media.Devices namespace] (https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.devices.aspx)
 
@@ -32,26 +33,27 @@ Windows 8 and 8.1 method for turning on flash (requires starting a video recordi
 [Windows.Media.Devices.VideoDeviceController.TorchControl] (https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.devices.videodevicecontroller.torchcontrol.aspx)
 
 
-## System requirements
+System requirements
+-----------------------------
+Independent Flash Device
+Client
+Windows 10
+Windows Phone 10
 
-**Hardware:** Independent Flash Device
+Build the sample
+----------------
 
-**Client:** Windows 10 Technical Preview
-
-**Phone:**  Windows 10 Technical Preview
-
-## Build the sample
-
-1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+1.  Start Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
 2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C\#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file.
 3.  Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
-## Run the sample
+Run the sample
+--------------
 
 The next steps depend on whether you just want to deploy the sample or you want to both deploy and run it.
 
-### Deploying the sample
-- Select Build > Deploy Solution. 
+**Deploying the sample**
+1.  Select **Build** \> **Deploy Solution**.
 
-### Deploying and running the sample
-- To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or selectDebug > Start Without Debugging. 
+**Deploying and running the sample**
+1.  To debug the sample and then run it, press F5 or select **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or select**Debug** \> **Start Without Debugging**.

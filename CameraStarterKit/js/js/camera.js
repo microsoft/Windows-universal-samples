@@ -130,7 +130,6 @@
             .then(function () {
                 isInitialized = true;
                 startPreview();
-                updateCaptureControls();
             });
         }, function (error) {
             console.log(error.message);
@@ -183,15 +182,20 @@
         oDisplayRequest.requestActive();
 
         // Set the preview source in the UI and mirror it if necessary
-        var previewVidTag = document.getElementById('cameraPreview');
+        var previewVidTag = document.getElementById("cameraPreview");
         if (mirroringPreview) {
-            previewVidTag.setAttribute("class", "mirror");
+            cameraPreview.style.transform = "scale(-1, 1)";
         }
 
         var previewUrl = URL.createObjectURL(oMediaCapture);
         previewVidTag.src = previewUrl;
         previewVidTag.play();
-        isPreviewing = true;
+
+        previewVidTag.addEventListener("playing", function () {
+            isPreviewing = true;
+            updateCaptureControls();
+            setPreviewRotationAsync();
+        });
     }
 
     /// <summary>
@@ -210,7 +214,7 @@
         }
 
         // Add rotation metadata to the preview stream to make sure the aspect ratio / dimensions match when rendering and getting preview frames
-        var props = oMediaCapture.VideoDeviceController.GetMediaStreamProperties(Capture.MediaStreamType.videoPreview);
+        var props = oMediaCapture.videoDeviceController.getMediaStreamProperties(Capture.MediaStreamType.videoPreview);
         props.properties.insert(RotationKey, rotationDegrees);
         return oMediaCapture.setEncodingPropertiesAsync(Capture.MediaStreamType.videoPreview, props, null);
     }
@@ -223,7 +227,7 @@
         isPreviewing = false;
 
         // Cleanup the UI
-        var previewVidTag = document.getElementById('cameraPreview');
+        var previewVidTag = document.getElementById("cameraPreview");
         previewVidTag.pause();
         previewVidTag.src = null;
 
@@ -363,10 +367,10 @@
         // Update recording button to show "Stop" icon instead of red "Record" icon
         var vidButton = document.getElementById("videoButton").winControl;
         if (isRecording) {
-            vidButton.icon = 'stop';
+            vidButton.icon = "stop";
         }
         else {
-            vidButton.icon = 'video';
+            vidButton.icon = "video";
         }
 
         // If the camera doesn't support simultaneously taking pictures and recording video, disable the photo button on record
@@ -546,7 +550,7 @@
     /// </summary>
     /// <param name="orientation">The orientation of the app on the screen</param>
     /// <returns>An orientation in degrees</returns>
-    function convertDisplayOrientationToDegrees() {
+    function convertDisplayOrientationToDegrees(orientation) {
         switch (orientation) {
             case DisplayOrientations.portrait:
                 return 90;
@@ -576,8 +580,8 @@
         var angle = (360 + currDisplayOrientation + currDeviceOrientation) % 360;
 
         // Rotate the buttons in the UI to match the rotation of the device
-        videoButton.style.transform = 'rotate(' + angle + 'deg)';
-        photoButton.style.transform = 'rotate(' + angle + 'deg)';
+        videoButton.style.transform = "rotate(" + angle + "deg)";
+        photoButton.style.transform = "rotate(" + angle + "deg)";
     }
 
     /// <summary>
