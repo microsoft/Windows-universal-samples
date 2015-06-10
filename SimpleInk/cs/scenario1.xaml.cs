@@ -49,7 +49,7 @@ namespace simpleInk
 
             inkCanvas.InkPresenter.UpdateDefaultDrawingAttributes(drawingAttributes);
             inkCanvas.InkPresenter.InputDeviceTypes = Windows.UI.Core.CoreInputDeviceTypes.Mouse | Windows.UI.Core.CoreInputDeviceTypes.Pen;
-            inkCanvas.InkPresenter.StrokesCollected += DirectInk_StrokesCollected;
+            inkCanvas.InkPresenter.StrokesCollected += InkPresenter_StrokesCollected;
             inkCanvas.InkPresenter.StrokesErased += InkPresenter_StrokesErased;
         }
 
@@ -67,7 +67,7 @@ namespace simpleInk
             rootPage.NotifyUser(args.Strokes.Count + " strokes erased!", SDKTemplate.NotifyType.StatusMessage);
         }
 
-        private void DirectInk_StrokesCollected(Windows.UI.Input.Inking.InkPresenter sender, Windows.UI.Input.Inking.InkStrokesCollectedEventArgs args)
+        private void InkPresenter_StrokesCollected(Windows.UI.Input.Inking.InkPresenter sender, Windows.UI.Input.Inking.InkStrokesCollectedEventArgs args)
         {
             rootPage.NotifyUser(args.Strokes.Count + " strokes collected!", SDKTemplate.NotifyType.StatusMessage);
         }
