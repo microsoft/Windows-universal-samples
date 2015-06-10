@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="/js/socketsSample.js"></script>
+    <script src="/js/scenario1_Start.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            StreamSocketListener will create the "server" side of a connection. It listens on
+            a "service name" (often a port number) and calls a callback when it accepts a connection;
+            this happens when some other application tries to connect. Once a connection is
+            accepted, the acceptAsync() method needs to be called again.
+        </p>
+        <p>
+            <label for="serviceNameAccept">Service Name:</label>
+            <input id="serviceNameAccept" type="text" />
+        </p>
+        <p>
+            Optional settings:
+        </p>
+        <p>
+            <input name="BindOption" id="bindToAny" type="radio" checked/>
+            <label for="bindToAny">Bind to any address</label>
+        </p>
+        <p>
+            <input name="BindOption" id="bindToAddress" type="radio"/>
+            <label for="bindToAddress">Bind to specific address (select from below list of IPv4 or IPv6)</label>
+        </p>
+        <p>
+            <input name="BindOption" id="bindToAdapter" type="radio"/>
+            <label for="bindToAdapter">Bind to adapter (select an adapter based on the GUIDs below)</label>
+         </p>
+        <p>
+            <select id="adapterList" disabled></select>
+        </p>
+        <p>
+            <button id="StartListener">Listen</button>
+        </p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <p id="statusBox"></p>
+        <p id="outputBox"></p>
+    </div>
+</body>
+</html>

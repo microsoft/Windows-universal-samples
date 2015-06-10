@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="/js/socketsSample.js"></script>
+    <script src="/js/scenario2_Connect.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            Next, you need the "other side of the connection" -- you need to connect to a listener.
+            The host name and service name (often a port number) to connect to are the "Host
+            Name:" and "Service Name:" entries. The service name should match what you started
+            to listen to!
+        </p>
+        <p>
+            The connection will automatically use IPv6 as needed. It will also resolve internationalized
+            domain names.
+        </p>
+        <p>
+            Due to the network security system, you cannot connect to other applications running
+            on the same machine. This means that you can only use "localhost" to connect to
+            the same application (specifically, you can connect to a listener on the same machine
+            running in the same app container)
+        </p>
+        <p> 
+            If an adapter was selected in the previous step, connect will also attempt to limit traffic to the selected adapter.
+        </p>
+        <p>
+            <label for="hostNameConnect">Host Name:</label>
+            <input id="hostNameConnect" type="text" disabled="disabled" />
+        </p>
+        <p>
+            <label for="serviceNameConnect">Service Name:</label>
+            <input id="serviceNameConnect" type="text" />
+        </p>
+        <p>
+            <button id="ConnectSocket">Connect</button>
+        </p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <p id="statusBox"></p>
+        <p id="outputBox"></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="/js/scenario5_Certificates.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            Prior to executing this scenario, execute .\Server\SetupServer.ps1 in an elevated PowerShell commandline to install and configure IIS.
+            The script will generate a self-signed, <i>untrusted</i> certificate with SN=www.fabrikam.com.<br />
+        </p>
+        <p>
+            The sample will attempt to connect to https://localhost, evaluate the certificate validity and display its properties.
+            A certificate error is expected since the self-signed certificate is not trusted and issued to a different name. 
+            <b>We strongly advise against ignoring SSL errors in your applications.</b><br />
+        </p>
+        <p>
+            <label for="hostNameConnect">Host Name:</label>
+            <input id="hostNameConnect" type="text" value="localhost" />
+        </p>
+        <p>
+            <label for="serviceNameConnect">Service Name:</label>
+            <input id="serviceNameConnect" type="text" value="443" disabled />
+        </p>
+        <p>
+            <button id="ConnectSocket">Connect</button>
+        </p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <p id="statusBox"></p>
+        <p id="outputBox"></p>
+    </div>
+</body>
+</html>
