@@ -1,4 +1,4 @@
-﻿//*********************************************************
+//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
@@ -42,11 +42,14 @@ namespace CustomSensors
         Windows::Foundation::EventRegistrationToken m_ReadingToken;
         uint32 m_DesiredReportInterval;
         Microsoft::WRL::Wrappers::CriticalSection m_CritsecCustomSensor;
+        Windows::Devices::Enumeration::DeviceAccessInformation^ m_DeviceAccessInfo;
 
         void VisibilityChanged(Platform::Object^ sender, Windows::UI::Core::VisibilityChangedEventArgs^ e);
         void ReadingChanged(Windows::Devices::Sensors::Custom::CustomSensor^ sender, Windows::Devices::Sensors::Custom::CustomSensorReadingChangedEventArgs^ e);
         void ScenarioEnable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void ScenarioDisable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void OnCustomSensorAdded(Windows::Devices::Enumeration::DeviceWatcher^ watcher, Windows::Devices::Enumeration::DeviceInformation^ firstDevice);
+        void OnAccessChanged(Windows::Devices::Enumeration::DeviceAccessInformation ^sender, Windows::Devices::Enumeration::DeviceAccessChangedEventArgs ^args);
+        void StartWatcher();
     };
 }
