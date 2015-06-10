@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/MultiVsSingleUseBlobUrl.css" />
+    <script src="/js/MultiVsSingleUseBlobUrl.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <div id="multiVsSingleInput">
+            <p>Use the picker APIs to choose a file from disk, and then display that file in a video tag by using the URL.createObjectURL method. Single use blob urls will use the optional 'false' parameter which revokes the url once used. Multi use blob urls will need to call URL.revokeObjectURL.</p>
+                <button id="openSingle" class="action">Open w/Single Use Blob Url</button>
+                <button id="openMulti" class="action">Open w/Multi Use Blob Url</button>
+                <button id="revoke" class="action secondary">Revoke Blob URL</button>
+                <button id="displayInNewVideoTag" class="action secondary">Play in new Video tag</button>
+                <button id="reset" class="action secondary">Reset</button>
+        </div>
+        <br /><br />
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <div id="multiVsSingleOutput">
+            <div class="leftItem">
+                <label for="video1">Video 1:</label><br/>
+                <video id="video1" autoplay="autoplay" controls="controls"></video>
+            </div>
+            <div>
+                <label for="additionalVideos">Additional Videos:</label><br/>
+                <div id="additionalVideos"></div><br/>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Scenario 2: Navigate to a string</title>
+    <link rel="stylesheet" href="/css/2_NavToString.css" />
+    <script src="/js/2_NavToString.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>The WebView control can load an arbitrary string of HTML in addition to navigating to web pages. Click the "Load HTML" button to load the HTML in the text area into the WebView control with the navigateToString method. You can edit the text area to try loading different contents.</p>
+        <button id="loadButton">Load HTML</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput" id="outputContainer">
+        <div id="scenario2_left">
+            <textarea id="htmlString"></textarea>
+        </div>
+        <div id="scenario2_right">
+            <x-ms-webview id="webview"></x-ms-webview>
+        </div>
+    </div>
+</body>
+</html>

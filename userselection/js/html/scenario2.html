@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario2.css" />
+    <script src="/js/scenario2.js"></script>
+</head>
+<body>
+    
+    
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p> You will find a div and a text box. The Div is set to "none" making the static text unselectable. However the text box within it is selectable .</p>
+ 
+    </div>
+
+    <div class="scenario2" data-win-control="SdkSample.ScenarioOutput">
+        <p> A text Box by default is selectable, even if the CSS atribute of the parent div is set to "none".</p>
+
+        <div id="inputDiv"> 
+        The -ms-user-select attribute for this Div is set to none. 
+        <input type="text" id="inputField" value="Type something here...you can select it"/>
+        </div>
+
+    </div>                     
+</body>
+</html>

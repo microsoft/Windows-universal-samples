@@ -1,0 +1,54 @@
+﻿/* styles */
+
+.scenario1 #parentDiv
+{
+    border: 1px solid #000; /*black*/
+    height:300px;
+    width:1012px;
+    padding-left:  20px;
+    padding-right: 20px;
+    float:left;
+    cursor:text;
+    -ms-user-select: none;
+}
+
+.scenario1 #parentDiv div {
+    height:200px;
+    width:186px;
+    padding-left:  5px;
+    padding-right: 5px;
+    margin-left: 2px;
+    margin-right:  2px;
+    float:left;
+    cursor:text;
+}
+
+.scenario1 #DivA
+{
+    border: 1px solid #b00808; /*red*/ 
+    -ms-user-select: inherit; 
+}
+
+.scenario1 #DivB
+{
+    border: 1px solid #897bff; /*magenta*/
+    -ms-user-select: element;
+}
+
+.scenario1 #DivC
+{
+    border: 1px solid #4cff00; /*green*/
+    -ms-user-select: text;
+}
+
+.scenario1 #DivD
+{
+    border: 1px solid #11b3d0; /*blue*/
+    -ms-user-select: auto;
+}
+
+.scenario1 #DivE
+{
+    border: 1px solid #ff6a00; /*orange*/
+    -ms-user-select: none;
+}
