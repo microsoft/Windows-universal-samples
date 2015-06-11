@@ -26,7 +26,8 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="23.881"/>
+            <ColumnDefinition Width="20.119"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <VisualStateManager.VisualStateGroups>
@@ -49,7 +50,7 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <SplitView x:Name="Splitter" IsPaneOpen="True" Grid.Column="1">
+        <SplitView x:Name="Splitter" IsPaneOpen="True" Grid.Column="2">
             <SplitView.Pane>
                 <RelativePanel Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
                     <StackPanel x:Name="HeaderPanel" Orientation="Horizontal">
@@ -90,10 +91,10 @@
                 </StackPanel>
             </RelativePanel>
         </SplitView>
-        <Border Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+        <Border Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" Grid.ColumnSpan="2">
             <ToggleButton Style="{StaticResource SymbolButton}" Click="Button_Click" VerticalAlignment="Top" Foreground="{ThemeResource ApplicationForegroundThemeBrush}">
                 <ToggleButton.Content>
-                        <FontIcon x:Name="Hamburger" FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" Margin="0,10,0,0"/>
+                    <FontIcon x:Name="Hamburger" FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" Margin="0,10,0,0"/>
                 </ToggleButton.Content>
             </ToggleButton>
         </Border>
