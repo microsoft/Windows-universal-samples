@@ -18,7 +18,7 @@ namespace SDKTemplate
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    partial ref class App sealed
+    ref class App sealed
     {
     protected:
         virtual void OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEventArgs^ e) override;
@@ -27,7 +27,7 @@ namespace SDKTemplate
         App();
 
     private:
-        partial void Construct();
+        void OnSuspending(Platform::Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e);
         void OnNavigationFailed(Platform::Object ^sender, Windows::UI::Xaml::Navigation::NavigationFailedEventArgs ^e);
     };
 }
