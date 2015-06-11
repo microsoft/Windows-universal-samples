@@ -35,13 +35,12 @@
       <uap:VisualElements
         DisplayName="Text Suggestion Sample"
         Description="Text Suggestion Sample"
-        ForegroundText="light"
         BackgroundColor="#00b2f0"
         Square150x150Logo="images\storelogo-sdk.png"
         Square44x44Logo="images\smalltile-sdk.png">
 
         <uap:SplashScreen Image="images\splash-sdk.png" />
-        <uap:DefaultTile DefaultSize="square150x150Logo" >
+        <uap:DefaultTile>
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
           </uap:ShowNameOnTiles>
