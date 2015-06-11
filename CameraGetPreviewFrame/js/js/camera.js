@@ -16,9 +16,6 @@
     var DeviceInformation = Windows.Devices.Enumeration.DeviceInformation;
     var DeviceClass = Windows.Devices.Enumeration.DeviceClass;
     var DisplayOrientations = Windows.Graphics.Display.DisplayOrientations;
-    var FileProperties = Windows.Storage.FileProperties;
-    var SimpleOrientation = Windows.Devices.Sensors.SimpleOrientation;
-    var SimpleOrientationSensor = Windows.Devices.Sensors.SimpleOrientationSensor;
     var Imaging = Windows.Graphics.Imaging;
 
     // Receive notifications about rotation of the device and UI and apply any necessary rotation to the preview stream and UI controls
@@ -36,10 +33,10 @@
     // Information about the camera device
     var externalCamera = false,
         mirroringPreview = false;
-    
+
     // Rotation metadata to apply to the preview stream and recorded videos (MF_MT_VIDEO_ROTATION)
     // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
-    var RotationKey = "{0xC380465D, 0x2271, 0x428C, {0x9B, 0x83, 0xEC, 0xEA, 0x3B, 0x4A, 0x85, 0xC1}}";
+    var RotationKey = "C380465D-2271-428C-9B83-ECEA3B4A85C1";
 
     // Initialization
     var app = WinJS.Application;
@@ -51,7 +48,7 @@
                 oDisplayInformation.addEventListener("orientationchanged", displayInformation_orientationChanged);
                 previewFrameImage.src = null;
                 initializeCameraAsync();
-            // Reactivated from an OS suspension
+                // Reactivated from an OS suspension
             } else {
                 oDisplayInformation.addEventListener("orientationchanged", displayInformation_orientationChanged);
                 initializeCameraAsync();
@@ -77,7 +74,7 @@
 
     // Resuming from a user suspension
     Windows.UI.WebUI.WebUIApplication.addEventListener("resuming", function () {
-        oDisplayOrientation.addEventListener("orientationchanged", displayInformation_orientationChanged);
+        oDisplayInformation.addEventListener("orientationchanged", displayInformation_orientationChanged);
         initializeCameraAsync();
     }, false);
 
@@ -117,7 +114,7 @@
             settings.videoDeviceId = camera.id;
 
             // Initialize media capture and start the preview
-            return oMediaCapture.initializeAsync(settings);            
+            return oMediaCapture.initializeAsync(settings);
         }).then(function () {
             isInitialized = true;
             return startPreviewAsync();
@@ -160,22 +157,21 @@
     /// <summary>
     /// Starts the preview and adjusts it for for rotation and mirroring after making a request to keep the screen on
     /// </summary>
-    function startPreviewAsync()
-    {
+    function startPreviewAsync() {
         // Prevent the device from sleeping while the preview is running
         oDisplayRequest.requestActive();
 
         // Set the preview source in the UI and mirror it if necessary
-        var previewVidTag = document.getElementById('cameraPreview');
+        var previewVidTag = document.getElementById("cameraPreview");
         if (mirroringPreview) {
-            cameraPreview.style.transform = 'scale(-1, 1)';
+            cameraPreview.style.transform = "scale(-1, 1)";
         }
 
         var previewUrl = URL.createObjectURL(oMediaCapture);
         previewVidTag.src = previewUrl;
         previewVidTag.play();
-        
-        previewVidTag.addEventListener("play", function () {
+
+        previewVidTag.addEventListener("playing", function () {
             isPreviewing = true;
             setPreviewRotationAsync();
         });
@@ -185,8 +181,7 @@
     /// Gets the current orientation of the UI in relation to the device (when AutoRotationPreferences cannot be honored) and applies a corrective rotation to the preview
     /// </summary>
     /// <returns></returns>
-    function setPreviewRotationAsync()
-    {
+    function setPreviewRotationAsync() {
         // Only need to update the orientation if the camera is mounted on the device
         if (externalCamera) {
             return WinJS.Promise.as();
@@ -196,8 +191,7 @@
         var rotationDegrees = convertDisplayOrientationToDegrees(oDisplayOrientation);
 
         // The rotation direction needs to be inverted if the preview is being mirrored
-        if (mirroringPreview)
-        {
+        if (mirroringPreview) {
             rotationDegrees = (360 - rotationDegrees) % 360;
         }
 
@@ -215,7 +209,7 @@
         isPreviewing = false;
 
         // Cleanup the UI
-        var previewVidTag = document.getElementById('cameraPreview');
+        var previewVidTag = document.getElementById("cameraPreview");
         previewVidTag.pause();
         previewVidTag.src = null;
 
@@ -244,7 +238,8 @@
             var frameBitmap = currentFrame.softwareBitmap;
 
             // Show the frame information
-            frameInfoTextBlock.textContent = frameBitmap.pixelWidth + "x" + frameBitmap.pixelHeight + " " + frameBitmap.bitmapPixelFormat;
+            frameInfoTextBlock.textContent = frameBitmap.pixelWidth + "x" + frameBitmap.pixelHeight + " " +
+                stringOfEnumeration(Windows.Graphics.DirectX.DirectXPixelFormat, frameBitmap.bitmapPixelFormat);
 
             // Save and show the frame (as is, no rotation is being applied)
             if (saveShowFrameCheckBox.checked === true) {
@@ -270,7 +265,8 @@
             var surface = currentFrame.direct3DSurface;
 
             // Show the frame information
-            frameInfoTextBlock.textContent = surface.description.width + "x" + surface.description.height + " " + surface.description.format;
+            frameInfoTextBlock.textContent = surface.description.width + "x" + surface.description.height + " " +
+                stringOfEnumeration(Windows.Graphics.DirectX.DirectXPixelFormat, surface.description.format);
 
             // Clear the image
             previewFrameImage.src = null;
@@ -284,8 +280,7 @@
     /// </summary>
     /// <param name="bitmap"></param>
     /// <returns></returns>
-    function saveAndShowSoftwareBitmapAsync(bitmap)
-    {
+    function saveAndShowSoftwareBitmapAsync(bitmap) {
         var oFile = null;
         return Windows.Storage.ApplicationData.current.localFolder.createFileAsync("PreviewFrame.jpg", Windows.Storage.CreationCollisionOption.generateUniqueName)
         .then(function (file) {
@@ -300,7 +295,7 @@
         }).done(function () {
             // Finally display the image at the correct orientation
             previewFrameImage.src = oFile.path;
-            previewFrameImage.style.transform = 'rotate(' + convertDisplayOrientationToDegrees(oDisplayOrientation) + 'deg)';
+            previewFrameImage.style.transform = "rotate(" + convertDisplayOrientationToDegrees(oDisplayOrientation) + "deg)";
         });
     }
 
@@ -376,11 +371,24 @@
         }
     }
 
-    function mediaCapture_failed(errorEventArgs)
-    {
+    function mediaCapture_failed(errorEventArgs) {
         console.log("MediaCapture_Failed: 0x" + errorEventArgs.code + ": " + errorEventArgs.message);
 
         cleanupCameraAsync().done();
+    }
+
+    /// <summary>
+    /// Converts an enum to a readable string
+    /// </summary>
+    /// <param name="enumeration">The actual enumeration</param>
+    /// <param name="enumeration">The value of the given enumeration</param>
+    /// <returns>String of the enumeration value</returns>
+    function stringOfEnumeration(enumeration, value) {
+        for (var k in enumeration) if (enumeration[k] == value) {
+            return k;
+        }
+
+        return null;
     }
 
     app.start();

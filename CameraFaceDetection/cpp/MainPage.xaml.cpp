@@ -593,7 +593,7 @@ task<void> MainPage::SetupUiAsync()
     }
     else
     {
-        return DoNothing();
+        return EmptyTask();
     }
 }
 
@@ -615,7 +615,7 @@ task<void> MainPage::CleanupUiAsync()
     }
     else
     {
-        return DoNothing();
+        return EmptyTask();
     }
 }
 
@@ -685,11 +685,11 @@ void MainPage::WriteException(Exception^ ex)
 }
 
 /// <summary>
-/// Due to the nature of programing, sometimes we need to conditionally create a task. The other case
-/// results in no task, so we need to "do nothing". So that's all we want to do here, nothing.
+/// Sometimes we need to conditionally return a task. If certain parameters are not met we cannot 
+/// return null, but we can return a task that does nothing.
 /// </summary>
 /// <returns></returns>
-task<void> MainPage::DoNothing()
+task<void> MainPage::EmptyTask()
 {
     return create_task([] {});
 }
@@ -1009,8 +1009,8 @@ Windows::Foundation::Rect MainPage::GetPreviewStreamRectInControl(MediaPropertie
     return RectHelper::FromCoordinatesAndDimensions(
         static_cast<float>(x),
         static_cast<float>(y),
-        static_cast<float>(x + width),
-        static_cast<float>(y + height));
+        static_cast<float>(width),
+        static_cast<float>(height));
 }
 
 void MainPage::Application_Suspending(Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e)

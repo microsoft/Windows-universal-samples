@@ -1,5 +1,5 @@
-GetPreviewFrame Sample
-----------------------
+CameraGetPreviewFrame Sample
+----------------------------
 
 This sample applies an end-to-end approach to demonstrate how to write a camera application using the Windows.Media.Capture API in conjunction with the DisplayInformation API to acquire preview frames from the camera stream for further processing.
 

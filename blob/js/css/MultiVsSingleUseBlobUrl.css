@@ -1,0 +1,12 @@
+﻿#multiVsSingleOutput video
+{
+    max-height:300px;
+    margin-bottom:30px;
+    margin-right: 10px;
+}
+
+#multiVsSingleOutput .leftItem
+{
+    float:left;
+    margin-right:40px;
+}

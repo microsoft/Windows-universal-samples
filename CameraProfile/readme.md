@@ -1,4 +1,4 @@
-﻿CameraProfile Sample
+CameraProfile Sample
 --------------------
 
 This sample demonstrates a new extension to Windows.Media.Capture.MediaCaptureInitializationSettings API. This new API allows for application
@@ -64,6 +64,6 @@ The next steps depend on whether you just want to deploy the sample or you want 
 1.  Select **Build** \> **Deploy Solution**.
 
 **Deploying and running the sample**
-1.  To debug the sample and then run it, press F5 or select **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or select**Debug** \> **Start Without Debugging**.
+1.  To debug the sample and then run it, press F5 or select **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or select **Debug** \> **Start Without Debugging**.
 
 

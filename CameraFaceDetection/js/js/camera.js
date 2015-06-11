@@ -16,7 +16,6 @@
     var DeviceInformation = Windows.Devices.Enumeration.DeviceInformation;
     var DeviceClass = Windows.Devices.Enumeration.DeviceClass;
     var DisplayOrientations = Windows.Graphics.Display.DisplayOrientations;
-    var FaceAnalysis = Windows.Media.FaceAnalysis;
     var FileProperties = Windows.Storage.FileProperties;
     var SimpleOrientation = Windows.Devices.Sensors.SimpleOrientation;
     var SimpleOrientationSensor = Windows.Devices.Sensors.SimpleOrientationSensor;
@@ -44,7 +43,7 @@
     
     // Rotation metadata to apply to the preview stream and recorded videos (MF_MT_VIDEO_ROTATION)
     // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
-    var RotationKey = "{0xC380465D, 0x2271, 0x428C, {0x9B, 0x83, 0xEC, 0xEA, 0x3B, 0x4A, 0x85, 0xC1}}";
+    var RotationKey = "C380465D-2271-428C-9B83-ECEA3B4A85C1";
 
     // Initialization
     var app = WinJS.Application;
@@ -194,16 +193,16 @@
         oDisplayRequest.requestActive();
 
         // Set the preview source in the UI and mirror it if necessary
-        var previewVidTag = document.getElementById('cameraPreview');
+        var previewVidTag = document.getElementById("cameraPreview");
         if (mirroringPreview) {
-            cameraPreview.style.transform = 'scale(-1, 1)';
+            cameraPreview.style.transform = "scale(-1, 1)";
         }
 
         var previewUrl = URL.createObjectURL(oMediaCapture);
         previewVidTag.src = previewUrl;
         previewVidTag.play();
 
-        previewVidTag.addEventListener("play", function () {
+        previewVidTag.addEventListener("playing", function () {
             oPreviewProperties = oMediaCapture.videoDeviceController.getMediaStreamProperties(Capture.MediaStreamType.videoPreview);
             setPreviewRotationAsync();
         });
@@ -238,7 +237,7 @@
         oPreviewProperties = null;
 
         // Cleanup the UI
-        var previewVidTag = document.getElementById('cameraPreview');
+        var previewVidTag = document.getElementById("cameraPreview");
         previewVidTag.pause();
         previewVidTag.src = null;
 
@@ -275,7 +274,6 @@
             oFaceDetectionEffect.enabled = true;
         });
     }
-
 
     /// <summary>
     ///  Disables and removes the face detection effect, and unregisters the event handler for face detection
@@ -429,19 +427,19 @@
         // Update recording button to show "Stop" icon instead of red "Record" icon
         var vidButton = document.getElementById("videoButton").winControl;
         if (isRecording) {
-            vidButton.icon = 'stop';
+            vidButton.icon = "stop";
         }
         else {
-            vidButton.icon = 'video';
+            vidButton.icon = "video";
         }
 
         // Update the face detection icon depending on whether the effect exists or not
         var faceDectectButton = document.getElementById("faceDetectionButton").winControl;
         if (oFaceDetectionEffect === null) {
-            faceDectectButton.icon = 'contact';
+            faceDectectButton.icon = "contact";
         }
         else {
-            faceDectectButton.icon = 'contact2';
+            faceDectectButton.icon = "contact2";
         }
 
         // If the camera doesn't support simultaneously taking pictures and recording video, disable the photo button on record
@@ -651,10 +649,10 @@
         var angle = (360 + display + device) % 360;
 
         // Rotate the buttons in the UI to match the rotation of the device
-        videoButton.style.transform = 'rotate(' + angle + 'deg)';
-        photoButton.style.transform = 'rotate(' + angle + 'deg)';
+        videoButton.style.transform = "rotate(" + angle + "deg)";
+        photoButton.style.transform = "rotate(" + angle + "deg)";
         // There is a scale on this button as well, we need to make sure it still gets applied
-        faceDetectionButton.style.transform = 'scale(1.5)' + 'rotate(' + angle + 'deg)';
+        faceDetectionButton.style.transform = "scale(1.5)" + "rotate(" + angle + "deg)";
     }
 
     /// <summary>
@@ -683,7 +681,7 @@
 
         // Move the canvas to fit inside the preview, not the preview + letterbox
         var previewInUI = getPreviewStreamRectInControl(oPreviewProperties, cameraPreview);
-        var context = facesCanvas.getContext('2d');
+        var context = facesCanvas.getContext("2d");
         context.translate(previewInUI.x, previewInUI.y);
 
         // Remove any existing rectangles from previous events
@@ -720,7 +718,7 @@
 
         // Also mirror the canvas if the preview is being mirrored
         if (mirroringPreview) {
-            facesCanvas.style.transform = 'scale(-1, 1)';
+            facesCanvas.style.transform = "scale(-1, 1)";
         }
     }
 
@@ -731,7 +729,7 @@
     /// <param name="faceBoxInPreviewCoordinates">Face coordinates as retried from the FaceBox property of a DetectedFace, in preview coordinates.</param>
     /// <returns>Rectangle in UI (CaptureElement) coordinates, to be used in a Canvas control.</returns>
     function convertPreviewToUiRectangle(faceBoxInPreviewCoordinates) {
-        var context = facesCanvas.getContext('2d');
+        var context = facesCanvas.getContext("2d");
         var result = { x: 0, y: 0, width: 0, height: 0 };
         var previewStream = oPreviewProperties;
 
@@ -850,7 +848,7 @@
         }
         else {
             // Clear any rectangles that may have been left over
-            facesCanvas.getContext('2d').clearRect(0, 0, facesCanvas.width, facesCanvas.height);
+            facesCanvas.getContext("2d").clearRect(0, 0, facesCanvas.width, facesCanvas.height);
 
             promiseToExecute = cleanUpFaceDetectionEffectAsync();
         }

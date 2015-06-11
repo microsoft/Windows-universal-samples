@@ -1,0 +1,22 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Scenario 3: Navigate to app state</title>
+    <link rel="stylesheet" href="/css/3_NavToState.css" />
+    <script src="/js/3_NavToState.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>The WebView control can also navigate to HTML stored in the local and temporary app state directories. To insulate the HTML from other data in the app state directories, a given web page can only access data within the first state sub-directory or deeper sub-directories. For example, the web page shown below is stored in ms-appdata:///local/NavigateToState/simple_example.html, and is separated from content within /local/data/ and /temp/html/. For more details on application state, see the <a href="http://go.microsoft.com/fwlink/?LinkId=294571">Application data sample</a>.</p>
+        <p>Click the "Load HTML" button to load an HTML file from the local app state directory in the webview control.</p>
+        <button id="loadButton">Load HTML</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput" id="outputContainer">
+        <x-ms-webview id="webview"></x-ms-webview>
+    </div>
+</body>
+</html>

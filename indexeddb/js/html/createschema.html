@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/createschema.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>The sample demonstrates how you might use a database to manage your personal book lending library.  The database consists of three object stores, also known as tables. One object store contains book titles, the second contains author names, and the
+            third is an (initially empty) object store containing records for each book that has been lent out.
+        </p>
+        <p>
+            The first step in setting up an IndexedDB is to define the database and create it. This example (the first of 4) creates a new database, defines tables, and applies indexes. This example does not populate
+            the tables with any data.
+        </p>
+        <p>
+            To delete the database (and any data it contains), press the <b>Delete database</b> button.
+        </p>
+        <button id="createDatabase">Create database</button>
+        <button id="deleteDatabase">Delete database</button>
+        <br /><br />
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <p>Database schema:</p>
+        <ul>
+            <li>Table: <span class="schemaKeyword">books</span>
+            <ul>
+                <li>Key on property: <span class="schemaKeyword">id</span></li>
+                <li>Index on property: <span class="schemaKeyword">title</span></li>
+            </ul>
+            </li>
+            <li>Table: <span class="schemaKeyword">authors</span>
+            <ul>
+                <li>Key on property: <span class="schemaKeyword">id</span></li>
+            </ul>
+            </li>
+            <li>Table: <span class="schemaKeyword">checkout</span>
+            <ul>
+                <li>Key on property: <span class="schemaKeyword">id</span></li>
+            </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

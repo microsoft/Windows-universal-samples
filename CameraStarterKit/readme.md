@@ -1,5 +1,5 @@
-UniversalCameraSample
----------------------
+CameraStarterKit Sample
+-----------------------
 
 This sample applies an end-to-end approach to demonstrate how to write a camera application using the Windows.Media.Capture API in conjunction with orientation sensors to cover the functions that most camera apps will require.
 

@@ -71,7 +71,7 @@ namespace SDKTemplate
                     else
                     {
                         LockScreenImage.Visibility = Visibility.Collapsed;
-                        rootPage.NotifyUser("Setting the lock screen image failed.  Make sure your copy of Windows is activated.", NotifyType.StatusMessage);
+                        rootPage.NotifyUser("Setting the lock screen image failed.", NotifyType.StatusMessage);
                     }
                 }
                 catch (Exception)

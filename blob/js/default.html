@@ -1,0 +1,41 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>SDK Sample</title>
+
+    <!-- WinJS references -->
+    <link href="/Microsoft.WinJS.4.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="/Microsoft.WinJS.4.0/js/WinJS.js"></script>
+
+    <!-- SDK sample framework references -->
+    <link rel="stylesheet" href="/css/default.css" />
+    <!--<link rel="stylesheet" href="/css/windows-app.css" />-->
+    <script src="/js/sample-configuration.js"></script>
+    <script src="/sample-utils/sample-utils.js"></script>
+    <script src="/js/default.js"></script>
+</head>
+<body role="application">
+    <div id="root" data-win-control="WinJS.UI.SplitView" data-win-options="{ paneHidden: SdkSample.paneHiddenInitially }">
+        <div>
+            <button type="button" class="splitViewButton"></button>
+            <div id="header" role="contentinfo" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: '/sample-utils/header.html'}"></div>
+            <div id="scenarioPane" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: '/sample-utils/scenario-select.html'}"></div>
+            <div id="footer" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: '/sample-utils/footer.html'}"></div>
+        </div>
+
+        <button type="button" class="splitViewButton"></button>
+        <div id="contentWrapper">
+            <div id="contentHost"></div>
+            <div id="statusBox">
+                Status:
+                <div id="statusMessage"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

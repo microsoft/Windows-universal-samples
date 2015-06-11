@@ -39,7 +39,7 @@
         Square44x44Logo="images\smalltile-sdk.png">
 
         <uap:SplashScreen Image="images\splash-sdk.png" />
-        <uap:DefaultTile DefaultSize="square150x150Logo" >
+        <uap:DefaultTile>
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
           </uap:ShowNameOnTiles>

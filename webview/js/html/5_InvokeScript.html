@@ -1,0 +1,28 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Scenario 5: Interact with script</title>
+    <link rel="stylesheet" href="/css/5_InvokeScript.css" />
+    <script src="/js/5_InvokeScript.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>An app may need to interact with the WebView control, such as to call a JavaScript function for the web page currently loaded in the WebView. An app can run script within the WebView control by using the invokeScript method.</p>
+        <p>Under the Output heading below, the displayed HTML has been loaded into the WebView control. Type some text into the text field and click the "Invoke Script" button to call the changeText JavaScript function.</p>
+        <input id="textInput" value="Hello!" />
+        <button id="invokeScriptButton">Invoke Script</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput" id="outputContainer">
+        <div id="scenario5_left">
+            <textarea id="htmlString" readonly="readonly"></textarea>
+        </div>
+        <div id="scenario5_right">
+            <x-ms-webview id="webview"></x-ms-webview>
+        </div>
+    </div>
+</body>
+</html>

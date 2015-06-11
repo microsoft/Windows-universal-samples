@@ -78,7 +78,7 @@ namespace CameraStarterKit
 		void UnregisterEventHandlers();
 		void WriteLine(Platform::String^ str);
 		void WriteException(Platform::Exception^ ex);
-		Concurrency::task<void> DoNothing();
+		Concurrency::task<void> EmptyTask();
 
 		// Rotation helpers
 		Windows::Devices::Sensors::SimpleOrientation GetCameraOrientation();

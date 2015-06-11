@@ -1,0 +1,24 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Permission Request Example</title>
+    <script type="text/javascript">
+        function OpenUriInNewWindow() {
+            var src = document.getElementById("urltoopen").value;
+            if (src !== "") {
+                if (window.open) {
+                    window.open(src, "_blank");
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="urltoopen" value="http://yash-devmc/htmlfiles/geolocation.html" />
+    <button onclick="OpenUriInNewWindow()">Open in new window</button>
+</body>
+</html>
