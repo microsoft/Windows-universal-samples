@@ -1,7 +1,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -134,3 +134,4 @@ void MainPage::Button_Click(Object^ sender, RoutedEventArgs^ e)
     Splitter->IsPaneOpen = !Splitter->IsPaneOpen;
     StatusBorder->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
 }
+
