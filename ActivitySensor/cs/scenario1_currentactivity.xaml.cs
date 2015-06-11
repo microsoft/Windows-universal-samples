@@ -46,27 +46,19 @@ namespace ActivitySensorCS
             ScenarioOutput_Timestamp.Text = "No data";
             rootPage.NotifyUser("", NotifyType.StatusMessage);
 
-            try
+            // Get the default sensor
+            var activitySensor = await ActivitySensor.GetDefaultAsync();
+            if (activitySensor)
             {
-                // Get the default sensor
-                var activitySensor = await ActivitySensor.GetDefaultAsync();
-
-                if (null != activitySensor)
-                {
-                    // Get the current activity reading
-                    var reading = await activitySensor.GetCurrentReadingAsync();
-                    ScenarioOutput_Activity.Text = reading.Activity.ToString();
-                    ScenarioOutput_Confidence.Text = reading.Confidence.ToString();
-                    ScenarioOutput_Timestamp.Text = reading.Timestamp.ToString("u");
-                }
-                else
-                {
-                    rootPage.NotifyUser("No activity sensor found", NotifyType.ErrorMessage);
-                }
+                // Get the current activity reading
+                var reading = await activitySensor.GetCurrentReadingAsync();
+                ScenarioOutput_Activity.Text = reading.Activity.ToString();
+                ScenarioOutput_Confidence.Text = reading.Confidence.ToString();
+                ScenarioOutput_Timestamp.Text = reading.Timestamp.ToString("u");
             }
-            catch (UnauthorizedAccessException)
+            else
             {
-                rootPage.NotifyUser("User has denied access to the activity sensor", NotifyType.ErrorMessage);
+                rootPage.NotifyUser("No activity sensor found", NotifyType.ErrorMessage);
             }
         }
     }

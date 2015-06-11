@@ -43,8 +43,6 @@
                 document.getElementById("confidenceNOutput").innerText = ActivitySensorSdkSample.readingConfidenceToString(readingN.confidence);
                 document.getElementById("timestampNOutput").innerText = readingN.timestamp;
             }
-        }, function (e) {
-            WinJS.log && WinJS.log(e.message, "sample", "error");
         });
     }
 
