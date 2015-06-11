@@ -24,7 +24,7 @@
             document.getElementById("startButton").addEventListener("click", start, false);
             document.getElementById("closeButton").addEventListener("click", closeSocket, false);
         },
-        unload: function (eventArgument) {
+        unload: function (eventObject) {
             closeSocket(eventObject);
         }
     });
@@ -39,13 +39,16 @@
         webSocket.onclosed = onClosed;
 
         // Validating the URI is required since it was received from an untrusted source (user
-        // input). The URI is validated by calling validateAndCreateUri() that will return 'null' for
+        // input). The URI is validated by calling validateAndCreateUri() that will throw an exception for
         // strings that are not valid WebSocket URIs.
-        // Note that when enabling the text box users may provide URIs to machines on the intrAnet
-        // or intErnet. In these cases the app requires the "Home or Work Networking" or
+        // Note that when enabling the text box users may provide URIs to machines in the LAN
+        // or internet. In these cases the app requires the "Home or Work Networking" or
         // "Internet (Client)" capability respectively.
-        var uri = validateAndCreateUri(document.getElementById("serverAddress").value);
-        if (!uri) {
+        var uri;
+        try {
+            uri = validateAndCreateUri(document.getElementById("serverAddress").value);
+        } catch (error) {
+            WinJS.log && WinJS.log(error, "sample", "error");
             return;
         }
 
@@ -85,7 +88,7 @@
         try {
             var size = dataWriter.measureString(data);
             countOfDataSent += size;
-            if (!document.getElementById("dataSent")) {
+            if (document.getElementById("dataSent") === null) {
                 return; // We switched scenarios
             }
             document.getElementById("dataSent").value = countOfDataSent;
@@ -105,11 +108,11 @@
         log("Write error: " + getError(error));
     }
 
-    function readIncoming(args) {
+    function readIncoming() {
         // Buffer as much data as you require for your protocol.
         dataReader.loadAsync(100).done(function (sizeBytesRead) {
             countOfDataReceived += sizeBytesRead;
-            if (!document.getElementById("dataReceived")) {
+            if (document.getElementById("dataReceived") === null) {
                 return; // We switched scenarios
             }
             document.getElementById("dataReceived").value = countOfDataReceived;
@@ -130,13 +133,13 @@
         log("Read Error: " + getError(error));
     }
 
-    function onClosed(args) {
-        log("Closed; Code: " + args.code + " Reason: " + args.reason);
+    function onClosed(closedEventInfo) {
+        log("Closed; Code: " + closedEventInfo.code + " Reason: " + closedEventInfo.reason);
         if (!streamWebSocket) {
             return;
         }
 
-        closeSocketCore();
+        closeSocketCore(Number(null), String(null));
     }
 
     function closeSocket(eventObject) {

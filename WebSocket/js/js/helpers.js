@@ -12,6 +12,8 @@
 // Common helper methods
 
 function getError(e) {
+    "use strict";
+
     var webSocketError = Windows.Networking.Sockets.WebSocketError.getStatus(e.number);
     switch (webSocketError) {
         case Windows.Web.WebErrorStatus.unknown: return e;
@@ -72,27 +74,24 @@ function getError(e) {
 };
 
 function validateAndCreateUri(uriString) {
-    // Create a Uri instance and catch exceptions related to invalid input. This method returns 'true'
-    // if the Uri instance was successfully created and 'false' otherwise.
+    "use strict";
+
     var webSocketUri;
     try {
         webSocketUri = new Windows.Foundation.Uri(uriString);
     } catch (error) {
-        WinJS.log && WinJS.log("Error: Invalid URI", "sample", "error");
-        return null;
+        throw "Error: Invalid URI";
     }
 
     if (webSocketUri.fragment !== "") {
-        WinJS.log && WinJS.log("Error: URI fragments not supported in WebSocket URIs.", "sample", "error");
-        return null;
+        throw "Error: URI fragments not supported in WebSocket URIs.";
     }
 
     // Uri.schemeName returns the canonicalized scheme name so we can use case-sensitive, ordinal string
     // comparison.
     var scheme = webSocketUri.schemeName;
     if ((scheme !== "ws") && (scheme !== "wss")) {
-        WinJS.log && WinJS.log("Error: WebSockets only support ws:// and wss:// schemes.", "sample", "error");
-        return null;
+        throw "Error: WebSockets only support ws:// and wss:// schemes.";
     }
 
     return webSocketUri;

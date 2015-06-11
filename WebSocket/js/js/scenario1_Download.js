@@ -41,13 +41,16 @@
             webSocket.onclosed = onClosed;
 
             // Validating the URI is required since it was received from an untrusted source (user
-            // input). The URI is validated by calling validateAndCreateUri() that will return 'null' for
+            // input). The URI is validated by calling validateAndCreateUri() that will throw an exception for
             // strings that are not valid WebSocket URIs.
-            // Note that when enabling the text box users may provide URIs to machines on the intrAnet
-            // or intErnet. In these cases the app requires the "Home or Work Networking" or
+            // Note that when enabling the text box users may provide URIs to machines in the LAN
+            // or internet. In these cases the app requires the "Home or Work Networking" or
             // "Internet (Client)" capability respectively.
-            var uri = validateAndCreateUri(document.getElementById("serverAddress").value);
-            if (!uri) {
+            var uri;
+            try {
+                uri = validateAndCreateUri(document.getElementById("serverAddress").value);
+            } catch (error) {
+                WinJS.log && WinJS.log(error, "sample", "error");
                 return;
             }
 
@@ -108,13 +111,13 @@
         log("Send error: " + getError(error));
     }
 
-    function onClosed(args) {
-        log("Closed; Code: " + args.code + " Reason: " + args.reason);
+    function onClosed(closedEventInfo) {
+        log("Closed; Code: " + closedEventInfo.code + " Reason: " + closedEventInfo.reason);
         if (!messageWebSocket) {
             return;
         }
 
-        closeSocketCore();
+        closeSocketCore(Number(null), String(null));
     }
 
     function closeSocket(eventObject) {
