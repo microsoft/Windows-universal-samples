@@ -37,7 +37,7 @@ using namespace Windows::UI::Xaml::Navigation;
 App::App()
 {
     InitializeComponent();
-    Construct();
+    Suspending += ref new SuspendingEventHandler(this, &App::OnSuspending);
 }
 
 /// <summary>
@@ -101,6 +101,18 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
         // Ensure the current window is active
         Window::Current->Activate();
     }
+}
+
+/// <summary>
+/// Invoked when application execution is being suspended.	Application state is saved
+/// without knowing whether the application will be terminated or resumed with the contents
+/// of memory still intact.
+/// </summary>
+/// <param name="sender">The source of the suspend request.</param>
+/// <param name="e">Details about the suspend request.</param>
+void App::OnSuspending(Object^ /* sender */, SuspendingEventArgs^ /* e */)
+{
+    //TODO: Save application state and stop any background activity
 }
 
 /// <summary>
