@@ -59,9 +59,6 @@
             } else {
                 WinJS.log && WinJS.log("No activity sensor found", "sample", "error");
             }
-        },
-        function (e) {
-            WinJS.log && WinJS.log(e.message, "sample", "error");
         });
     }
 

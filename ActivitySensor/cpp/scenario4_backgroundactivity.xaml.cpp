@@ -42,7 +42,7 @@ Scenario4_BackgroundActivity::Scenario4_BackgroundActivity() : rootPage(MainPage
 /// property is typically used to configure the page.</param>
 void Scenario4_BackgroundActivity::OnNavigatedTo(NavigationEventArgs^ e)
 {
-    for each (auto cur in BackgroundTaskRegistration::AllTasks)
+    for (const auto& cur : BackgroundTaskRegistration::AllTasks)
     {
         auto registration = dynamic_cast<BackgroundTaskRegistration^>(cur->Value);
         if (SampleBackgroundTaskName == registration->Name)
@@ -62,8 +62,8 @@ void Scenario4_BackgroundActivity::OnNavigatedTo(NavigationEventArgs^ e)
 /// <param name="e"></param>
 void Scenario4_BackgroundActivity::ScenarioRegisterTask(Object^ sender, RoutedEventArgs^ e)
 {
-    create_task(BackgroundExecutionManager::RequestAccessAsync()).then([this](BackgroundAccessStatus status){
-
+    create_task(BackgroundExecutionManager::RequestAccessAsync()).then([this](BackgroundAccessStatus status)
+    {
         if ((BackgroundAccessStatus::AllowedWithAlwaysOnRealTimeConnectivity == status) ||
             (BackgroundAccessStatus::AllowedMayUseActiveRealTimeConnectivity == status))
         {
@@ -84,7 +84,7 @@ void Scenario4_BackgroundActivity::ScenarioRegisterTask(Object^ sender, RoutedEv
 void Scenario4_BackgroundActivity::ScenarioUnregisterTask(Object^ sender, RoutedEventArgs^ e)
 {
     // Loop through all background tasks and unregister any with SampleBackgroundTaskName
-    for each (auto cur in BackgroundTaskRegistration::AllTasks)
+    for (const auto& cur : BackgroundTaskRegistration::AllTasks)
     {
         auto registration = dynamic_cast<BackgroundTaskRegistration^>(cur->Value);
         if (SampleBackgroundTaskName == registration->Name)
@@ -151,39 +151,33 @@ void Scenario4_BackgroundActivity::RegisterBackgroundTask()
 void Scenario4_BackgroundActivity::UpdateUIAsync(String^ status)
 {
     // Update the buttons in the UI thread
-    Dispatcher->RunAsync(
-        CoreDispatcherPriority::Normal,
-        ref new DispatchedHandler(
-            [this, status]()
-            {
-                ScenarioRegisterTaskButton->IsEnabled = !registered;
-                ScenarioUnregisterTaskButton->IsEnabled = registered;
-                ScenarioOutput_TaskRegistration->Text = status;
+    Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, status]()
+    {
+        ScenarioRegisterTaskButton->IsEnabled = !registered;
+        ScenarioUnregisterTaskButton->IsEnabled = registered;
+        ScenarioOutput_TaskRegistration->Text = status;
 
-                auto settings = ApplicationData::Current->LocalSettings;
+        auto settings = ApplicationData::Current->LocalSettings;
 
-                if (settings->Values->HasKey("ReportCount"))
-                {
-                    ScenarioOutput_ReportCount->Text = safe_cast<String^>(settings->Values->Lookup("ReportCount")); // stored as a string
-                }
-                if (settings->Values->HasKey("TaskStatus"))
-                {
-                    ScenarioOutput_TaskStatus->Text = safe_cast<String^>(settings->Values->Lookup("TaskStatus")); // stored as a string
-                }
-                if (settings->Values->HasKey("LastActivity"))
-                {
-                    ScenarioOutput_LastActivity->Text = safe_cast<String^>(settings->Values->Lookup("LastActivity")); // stored as a string
-                }
-                if (settings->Values->HasKey("LastConfidence"))
-                {
-                    ScenarioOutput_LastConfidence->Text = safe_cast<String^>(settings->Values->Lookup("LastConfidence")); // stored as a string
-                }
-                if (settings->Values->HasKey("LastTimestamp"))
-                {
-                    ScenarioOutput_LastTimestamp->Text = safe_cast<String^>(settings->Values->Lookup("LastTimestamp")); // stored as a string
-                }
-            },
-            CallbackContext::Any
-            )
-        );
+        if (settings->Values->HasKey("ReportCount"))
+        {
+            ScenarioOutput_ReportCount->Text = safe_cast<String^>(settings->Values->Lookup("ReportCount")); // stored as a string
+        }
+        if (settings->Values->HasKey("TaskStatus"))
+        {
+            ScenarioOutput_TaskStatus->Text = safe_cast<String^>(settings->Values->Lookup("TaskStatus")); // stored as a string
+        }
+        if (settings->Values->HasKey("LastActivity"))
+        {
+            ScenarioOutput_LastActivity->Text = safe_cast<String^>(settings->Values->Lookup("LastActivity")); // stored as a string
+        }
+        if (settings->Values->HasKey("LastConfidence"))
+        {
+            ScenarioOutput_LastConfidence->Text = safe_cast<String^>(settings->Values->Lookup("LastConfidence")); // stored as a string
+        }
+        if (settings->Values->HasKey("LastTimestamp"))
+        {
+            ScenarioOutput_LastTimestamp->Text = safe_cast<String^>(settings->Values->Lookup("LastTimestamp")); // stored as a string
+        }
+    }));
 }

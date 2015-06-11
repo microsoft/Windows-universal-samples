@@ -37,8 +37,8 @@ namespace ActivitySensorCPP
 
     private:
         SDKTemplate::MainPage^ rootPage;
-        Windows::Devices::Sensors::ActivitySensor^ activitySensor;
-        Windows::Foundation::EventRegistrationToken readingToken;
+        Windows::Devices::Sensors::ActivitySensor^ m_activitySensor;
+        Windows::Foundation::EventRegistrationToken m_readingToken;
 
         void ReadingChanged(Windows::Devices::Sensors::ActivitySensor^ sender, Windows::Devices::Sensors::ActivitySensorReadingChangedEventArgs^ e);
         void ScenarioEnableReadingChanged(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
