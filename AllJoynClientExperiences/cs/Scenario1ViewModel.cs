@@ -33,7 +33,6 @@ namespace AllJoynClientExperiences
         private TaskCompletionSource<bool> m_authenticateClicked = null;
         private Visibility m_authVisibility = Visibility.Collapsed;
         private Visibility m_clientOptionsVisibility = Visibility.Collapsed;
-        private bool m_isConnected = false;
         private bool m_isAuthenticated = false;
         private bool m_isCredentialsRequested = false;
         private bool m_isUpperCaseEnabled = false;
@@ -148,20 +147,8 @@ namespace AllJoynClientExperiences
 
         public void ScenarioCleanup()
         {
-            if (m_consumer != null)
-            {
-                m_consumer.IsUpperCaseEnabledChanged -= Consumer_IsUpperCaseEnabledChanged;
-                m_consumer.Signals.TextSentReceived -= Signals_TextSentReceived;
-                m_consumer.SessionLost -= Consumer_SessionLost;
-                m_consumer.Dispose();
-            }
-
-            if (m_watcher != null)
-            {
-                m_watcher.Added -= Watcher_Added;
-                m_watcher.Stop();
-                m_watcher.Dispose();
-            }
+            DisposeConsumer();
+            DisposeWatcher();
 
             if (m_busAttachment != null)
             {
@@ -223,7 +210,7 @@ namespace AllJoynClientExperiences
 
         private async void ConcatenateAsync()
         {
-            if (m_isConnected && m_consumer != null)
+            if (m_consumer != null)
             {
                 if (String.IsNullOrWhiteSpace(InputString1) || String.IsNullOrWhiteSpace(InputString2))
                 {
@@ -315,8 +302,8 @@ namespace AllJoynClientExperiences
 
             if (joinSessionResult.Status == AllJoynStatus.Ok)
             {
+                DisposeConsumer();
                 m_consumer = joinSessionResult.Consumer;
-                m_isConnected = true;
                 m_consumer.IsUpperCaseEnabledChanged += Consumer_IsUpperCaseEnabledChanged;
                 m_consumer.Signals.TextSentReceived += Signals_TextSentReceived;
                 m_consumer.SessionLost += Consumer_SessionLost;
@@ -352,10 +339,7 @@ namespace AllJoynClientExperiences
         {
             UpdateStatusAsync(string.Format("AllJoyn session with the server lost due to {0}.", args.Reason.ToString()), NotifyType.StatusMessage);
             ClientOptionsVisibility = Visibility.Collapsed;
-            m_consumer.SessionLost -= Consumer_SessionLost;
-            m_consumer.Signals.TextSentReceived -= Signals_TextSentReceived;
-            m_consumer.IsUpperCaseEnabledChanged -= Consumer_IsUpperCaseEnabledChanged;
-            m_consumer.Dispose();
+            DisposeConsumer();
         }
 
         private void Signals_TextSentReceived(SecureInterfaceSignals sender, SecureInterfaceTextSentReceivedEventArgs args)
@@ -406,6 +390,29 @@ namespace AllJoynClientExperiences
                 UpdateStatusAsync(string.Format("Set property failed with AllJoyn error: 0x{0:X}.", setIsUpperCaseEnabledResult.Status), NotifyType.ErrorMessage);
                 m_callSetProperty = false;
                 IsUpperCaseEnabled = !value;
+            }
+        }
+
+        private void DisposeConsumer()
+        {
+            if (m_consumer != null)
+            {
+                m_consumer.SessionLost -= Consumer_SessionLost;
+                m_consumer.Signals.TextSentReceived -= Signals_TextSentReceived;
+                m_consumer.IsUpperCaseEnabledChanged -= Consumer_IsUpperCaseEnabledChanged;
+                m_consumer.Dispose();
+                m_consumer = null; 
+            }
+        }
+
+        private void DisposeWatcher()
+        {
+            if (m_watcher != null)
+            {
+                m_watcher.Added -= Watcher_Added;
+                m_watcher.Stop();
+                m_watcher.Dispose();
+                m_watcher = null; 
             }
         }
 

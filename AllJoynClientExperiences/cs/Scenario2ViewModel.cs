@@ -510,18 +510,8 @@ namespace AllJoynClientExperiences
 
         public void ScenarioCleanup()
         {
-            if (m_consumer != null)
-            {
-                m_consumer.SessionLost -= Consumer_SessionLost;
-                m_consumer.Dispose();
-            }
-
-            if (m_watcher != null)
-            {
-                m_watcher.Added -= Watcher_Added;
-                m_watcher.Stop();
-                m_watcher.Dispose();
-            }
+            DisposeConsumer();
+            DisposeWatcher();
 
             if (m_busAttachment != null)
             {
@@ -761,6 +751,7 @@ namespace AllJoynClientExperiences
             OnboardingJoinSessionResult joinSessionResult = await OnboardingConsumer.JoinSessionAsync(args, sender);
             if (joinSessionResult.Status == AllJoynStatus.Ok)
             {
+                DisposeConsumer();
                 m_consumer = joinSessionResult.Consumer;
                 m_consumer.SessionLost += Consumer_SessionLost;
 
@@ -785,7 +776,7 @@ namespace AllJoynClientExperiences
         private void Consumer_SessionLost(OnboardingConsumer sender, AllJoynSessionLostEventArgs args)
         {
             UpdateStatusAsync(string.Format("AllJoyn session with the onboardee lost due to {0}.", args.Reason.ToString()), NotifyType.StatusMessage);
-            m_consumer.SessionLost -= Consumer_SessionLost;
+            DisposeConsumer();
             ResetControls();
         }
 
@@ -960,6 +951,27 @@ namespace AllJoynClientExperiences
             ConnectPanelVisibility = Visibility.Collapsed;
             AuthenticationVisibility = Visibility.Collapsed;
             OnboardingConfigurationVisibility = Visibility.Collapsed;
+        }
+
+        private void DisposeConsumer()
+        {
+            if (m_consumer != null)
+            {
+                m_consumer.SessionLost -= Consumer_SessionLost;
+                m_consumer.Dispose();
+                m_consumer = null; 
+            }
+        }
+
+        private void DisposeWatcher()
+        {
+            if (m_watcher != null)
+            {
+                m_watcher.Added -= Watcher_Added;
+                m_watcher.Stop();
+                m_watcher.Dispose();
+                m_watcher = null;
+            }
         }
 
         private async void UpdateStatusAsync(string status, NotifyType statusType)
