@@ -20,12 +20,12 @@
             document.getElementById("startButton").addEventListener("click", startSend, false);
             document.getElementById("closeButton").addEventListener("click", closeSocket, false);
         },
-        unload: function (eventArgument) {
-            closeSocket();
+        unload: function (eventObject) {
+            closeSocket(eventObject);
         }
     });
 
-    function startSend() {
+    function startSend(eventObject) {
         if (document.getElementById("inputField").value === "") {
             WinJS.log && WinJS.log("Please specify text to send", "sample", "error");
             return;
@@ -79,10 +79,10 @@
         }
     }
 
-    function onMessageReceived(args) {
+    function onMessageReceived(eventArguments) {
         // The incoming message is already buffered.
-        var dataReader = args.getDataReader();
-        log("Message Received; Type: " + getMessageTypeName(args.messageType)
+        var dataReader = eventArguments.getDataReader();
+        log("Message Received; Type: " + getMessageTypeName(eventArguments.messageType)
             + ", Bytes: " + dataReader.unconsumedBufferLength + ", Text: ");
         log(dataReader.readString(dataReader.unconsumedBufferLength));
     }
@@ -117,7 +117,7 @@
         closeSocketCore();
     }
 
-    function closeSocket() {
+    function closeSocket(eventObject) {
         if (!messageWebSocket) {
             WinJS.log && WinJS.log("Not connected", "sample", "status");
             return;

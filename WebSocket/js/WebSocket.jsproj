@@ -54,6 +54,8 @@
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="css\scenario1_Download.css" />
+    <Content Include="css\scenario2_Upload.css" />
     <Content Include="default.html" />
     <Content Include="html\scenario1_Download.html" />
     <Content Include="html\scenario2_Upload.html" />

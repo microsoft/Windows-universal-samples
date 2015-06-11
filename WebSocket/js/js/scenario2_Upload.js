@@ -25,11 +25,11 @@
             document.getElementById("closeButton").addEventListener("click", closeSocket, false);
         },
         unload: function (eventArgument) {
-            closeSocket();
+            closeSocket(eventObject);
         }
     });
 
-    function start() {
+    function start(eventObject) {
         if (streamWebSocket) {
             WinJS.log && WinJS.log("Already started", "sample", "status");
             return;
@@ -139,7 +139,7 @@
         closeSocketCore();
     }
 
-    function closeSocket() {
+    function closeSocket(eventObject) {
         if (!streamWebSocket) {
             WinJS.log && WinJS.log("Not connected", "sample", "status");
             return;
