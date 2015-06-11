@@ -20,7 +20,6 @@
     <AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>F746E621AE133A33BD3E4CF72F81EA79680BB1FE</PackageCertificateThumbprint>
     <!--
     -->
   </PropertyGroup>
