@@ -100,7 +100,7 @@ namespace WiFiScan
             // Update the connectivity level displayed for each
             foreach (var network in ResultCollection)
             {
-                network.UpdateConnectivityLevel();
+                await network.UpdateConnectivityLevel();
             }
         }
 

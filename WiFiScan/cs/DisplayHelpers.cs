@@ -12,6 +12,7 @@
 using SDKTemplate;
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Windows.Devices.WiFi;
 using Windows.Networking.Connectivity;
 using Windows.UI.Core;
@@ -46,7 +47,7 @@ namespace WiFiScan
 
         }
 
-        public async void UpdateConnectivityLevel()
+        public async Task UpdateConnectivityLevel()
         {
             string connectivityLevel = "Not Connected";
             string connectedSsid = null;
