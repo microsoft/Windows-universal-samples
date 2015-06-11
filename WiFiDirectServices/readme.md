@@ -19,10 +19,6 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## Related topics
 
-### Samples
-
-[Sample 1](https://github.com/Microsoft/Windows-universal-samples/tree/master/<sample>)
-
 ### Reference
 
 <!-- Add links to related API -->
