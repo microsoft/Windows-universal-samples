@@ -17,7 +17,7 @@
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="TokenBrokerCpp.App">
       <uap:VisualElements DisplayName="TokenBrokerCpp" Square150x150Logo="Assets\squareTile-sdk.png" Square44x44Logo="Assets\smallTile-sdk.png" Description="TokenBrokerCpp"  BackgroundColor="#00B2F0">
         <uap:SplashScreen Image="Assets\splash-sdk.png" />
-        <uap:DefaultTile >
+        <uap:DefaultTile DefaultSize="square150x150Logo">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
           </uap:ShowNameOnTiles>

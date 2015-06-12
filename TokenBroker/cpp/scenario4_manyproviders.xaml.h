@@ -44,7 +44,7 @@ namespace SDKTemplate
         const Platform::String^ MICROSOFT_PROVIDER_ID = "https://login.microsoft.com";
         const Platform::String^ CONSUMER_AUTHORITY = "consumers";
         const Platform::String^ ORGANIZATION_AUTHORITY = "organizations";
-        const Platform::String^ MSA_SCOPE_REQUESTED = "service::wl.basic::DELEGATION";
+        const Platform::String^ MSA_SCOPE_REQUESTED = "wl.basic::DELEGATION";
         const Platform::String^ MSA_CLIENT_ID = "none";
         const Platform::String^ AAD_SCOPE_REQUESTED = "";
         const Platform::String^ AAD_CLIENT_ID = "c8542080-6873-47b5-bf71-d56378567ceb";

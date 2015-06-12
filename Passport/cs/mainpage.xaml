@@ -57,7 +57,7 @@
                 </RelativePanel>
             </SplitView.Pane>
             <RelativePanel>
-                <Frame x:Name="ScenarioFrame" Margin="0,5,0,0" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"/>
+                <Frame x:Name="ScenarioFrame" Margin="0,5,0,0" RelativePanel.AlignTopWithPanel="True" RelativePanel.Above="StatusPanel" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True"/>
                 <StackPanel x:Name="StatusPanel" Orientation="Vertical" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
                     <TextBlock x:Name="StatusLabel" Margin="10,0,0,10" TextWrapping="Wrap" Text="Status:" />
                     <Border x:Name="StatusBorder" Margin="0,0,0,0">

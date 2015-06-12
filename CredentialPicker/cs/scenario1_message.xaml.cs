@@ -42,6 +42,7 @@ namespace CredentialPicker
             Username.Text = res.CredentialUserName;
             Password.Text = res.CredentialPassword;
             CredentialSaved.Text = (res.CredentialSaved ? "true" : "false");
+            CheckboxState = rootPage.FindName("CheckboxState") as TextBox;
             switch (res.CredentialSaveOption)
             {
                 case CredentialSaveOption.Hidden:
@@ -60,7 +61,7 @@ namespace CredentialPicker
         #region Sample Click Handlers - modify if you need them, delete them otherwise
         private async void Launch_Click(object sender, RoutedEventArgs e)
         {
-            if ((Target.Text.Length != 0) && (Message.Text.Length != 0))
+            if ((Target.Length != 0) && (Message.Length != 0))
             {
                 try
                 {

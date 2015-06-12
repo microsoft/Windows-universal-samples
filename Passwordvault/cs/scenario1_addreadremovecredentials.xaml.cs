@@ -144,7 +144,7 @@ namespace PasswordVaultSample
             {
                 if (Error.HResult == -2147023728)
                 {
-                    rootPage.NotifyUser("Credential not found.", NotifyType.StatusMessage);
+                    rootPage.NotifyUser("Creential not found.", NotifyType.StatusMessage);
                 }
                 else
                 {

@@ -84,7 +84,7 @@ void Scenario3_CredentialPickerOptions::Launch_Click(Platform::Object^ sender, W
 	}
 	else
 	{
-		String^ protocolName = ((ComboBoxItem^)ProtocolSelection->SelectedItem)->Content->ToString();
+		String^ protocolName = ProtocolSelection->SelectedItem->ToString();
 		if (protocolName->Equals("Negotiate"))
 		{
 			credPickerOptions->AuthenticationProtocol = Windows::Security::Credentials::UI::AuthenticationProtocol::Negotiate;
@@ -121,7 +121,7 @@ void Scenario3_CredentialPickerOptions::Launch_Click(Platform::Object^ sender, W
 	}
 	if (SaveCheckboxSelection->SelectedItem != nullptr)
 	{
-		String^ checkboxState = ((ComboBoxItem^)SaveCheckboxSelection->SelectedItem)->Content->ToString();
+		String^ checkboxState = SaveCheckboxSelection->SelectedItem->ToString();
 		if (checkboxState->Equals("Hidden"))
 		{
 			credPickerOptions->CredentialSaveOption = Windows::Security::Credentials::UI::CredentialSaveOption::Hidden;

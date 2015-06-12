@@ -244,15 +244,15 @@ void SDKTemplate::Scenario5_ManyProvidersManyAccounts::OtherLinkInvoked(IUIComma
     rootPage->NotifyUser("Other link pressed by user", NotifyType::StatusMessage);
 }
 
-// Create a new WebAccountManager WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
-// that request asynchronously to WebAccountManager's RequestTokenAsync
+// Create a new TokenBroker WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
+// that request asynchronously to TokenBroker's RequestTokenAsync
 //
-// WebAccountManager will then try three steps, in order:
+// TokenBroker will then try three steps, in order:
 //        (1): Check it's local cache to see if it has a valid token
 //        (2): Try to silently request a new token from the MSA service
 //        (3): Show the MSA UI for user interaction required (user credentials) before it may return a token.
 //
-// Because of WebAccountManager's ability to cache tokens, you should only need to call WebAccountManager when making token
+// Because of TokenBroker's ability to cache tokens, you should only need to call TokenBroker when making token
 // based requests and not require the ability to store a cached token within your app.
 void SDKTemplate::Scenario5_ManyProvidersManyAccounts::AuthenticateWithRequestToken(WebAccountProvider^ provider, String^ scope, String^ clientID)
 {

@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario handles multiple signed in IDs at one time, utilizing WebAccountManager to both request tokens and sign out users."/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario handles multiple signed in IDs at one time, utilizing TokenBroker to both request tokens and sign out users."/>
             </StackPanel>
             <Grid Grid.Row="1">
                 <StackPanel Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top">

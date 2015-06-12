@@ -15,7 +15,5 @@ namespace EAS
     private:
 		void Launch_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void Reset_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-
-		SDKTemplate::MainPage^ rootPage;
 	};
 }
