@@ -27,11 +27,11 @@ namespace EdpSample
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Scenario15_QueryCpPaste : Page
+    public sealed partial class Scenario14_QueryCpPaste : Page
     {
         private MainPage rootPage;
  
-        public Scenario15_QueryCpPaste()
+        public Scenario14_QueryCpPaste()
         {
             this.InitializeComponent();
         }
@@ -42,37 +42,25 @@ namespace EdpSample
         }
 
         bool IsClipboardPeekAllowedAsync()
-
         {
-            ProtectionPolicyEvaluationResult result = ProtectionPolicyEvaluationResult.Blocked;
+            var result = ProtectionPolicyEvaluationResult.Blocked;
             var dataPackageView = Clipboard.GetContent();
             if (dataPackageView.Contains("text"))
             {
                 var protectionPolicyManager = ProtectionPolicyManager.GetForCurrentView();
-                result = ProtectionPolicyManager.CheckAccess(
-                            dataPackageView.Properties.EnterpriseId,
-                            protectionPolicyManager.Identity);
+                result = ProtectionPolicyManager.CheckAccess(dataPackageView.Properties.EnterpriseId,
+                    protectionPolicyManager.Identity);
             }
 
             // Since this is a convenience feature to allow a peek of clipboard content, 
             // if state is Blocked or ConsentRequired, do not show peek. 
 
-            return (result == ProtectionPolicyEvaluationResult.Allowed);
-
+            return result == ProtectionPolicyEvaluationResult.Allowed;
         }
-
 
         private void QueryCp_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                rootPage.NotifyUser("Check Access for Paste returned: " + IsClipboardPeekAllowedAsync(), NotifyType.StatusMessage);
-            }catch(Exception ex)
-            {
-                rootPage.NotifyUser(ex.ToString(), NotifyType.ErrorMessage);
-            }
+            rootPage.NotifyUser("Check Access for Paste returned: " + IsClipboardPeekAllowedAsync(), NotifyType.StatusMessage);
         }
-
     }
-
 }

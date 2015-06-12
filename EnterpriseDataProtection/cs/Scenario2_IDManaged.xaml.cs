@@ -33,12 +33,10 @@ namespace EdpSample
                                       "identity when necessary.This scenario example shows how the app can check if an identity is managed " +
                                       "by an enterprise policy.";
 
-
         public Scenario2()
         {
             this.InitializeComponent();
         }
-
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -48,15 +46,8 @@ namespace EdpSample
 
         private void IsIdentityManaged_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                bool isIdentityManaged = ProtectionPolicyManager.IsIdentityManaged(Scenario1.m_EnterpriseIdentity);
-                rootPage.NotifyUser("IsIdentityManaged: " + isIdentityManaged, NotifyType.StatusMessage);
-            }
-            catch (Exception ex)
-            {
-                rootPage.NotifyUser("Exception thrown:" + ex.ToString(), NotifyType.ErrorMessage);
-            }
+            bool isIdentityManaged = ProtectionPolicyManager.IsIdentityManaged(Scenario1.m_enterpriseId);
+            rootPage.NotifyUser("IsIdentityManaged: " + isIdentityManaged, NotifyType.StatusMessage);
         }
     }
 }

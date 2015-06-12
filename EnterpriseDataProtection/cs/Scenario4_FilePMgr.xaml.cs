@@ -24,12 +24,6 @@ using SDKTemplate;
 
 namespace EdpSample
 {
-    public class StatusData
-    {
-        public bool result;
-        public string outputStr;
-    }
-
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -47,9 +41,7 @@ namespace EdpSample
         private string m_copyProtectionScenarioDesc = "\n\nAn app wants to create multiple copies of a protected file in which enterprise data is stored.It can use the CopyProtectionAsync" +
                                                       "API to replicate protection from one file to another.";
 
-
-
-        private StorageFile m_FileHandle = null;
+        private StorageFile m_file = null;
         private string m_FileCopyName =  "Edpcopy.txt";
 
         public Scenario4()
@@ -72,11 +64,11 @@ namespace EdpSample
             openPicker.ViewMode = PickerViewMode.Thumbnail;
             openPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
             openPicker.FileTypeFilter.Add("*");
-            m_FileHandle = await openPicker.PickSingleFileAsync();
-            if (m_FileHandle != null)
+            m_file = await openPicker.PickSingleFileAsync();
+            if (m_file != null)
             {
                 // Application now has read/write access to the picked file
-                outputStr += "\nPicked file: " + m_FileHandle.Path;
+                outputStr += "\nPicked file: " + m_file.Path;
                 rootPage.NotifyUser(outputStr, NotifyType.StatusMessage);
             }
             else
@@ -84,161 +76,105 @@ namespace EdpSample
                 outputStr += "\nPlease pick a file";
                 rootPage.NotifyUser(outputStr, NotifyType.ErrorMessage);
             }
-
         }
 
         private async void CreateFileAndProtect()
         {
             string outputStr = "";
 
-            try
+            FileProtectionInfo procInfo =  await FileProtectionManager.GetProtectionInfoAsync(m_file);
+            if (procInfo.Status != FileProtectionStatus.Protected)
             {
-                FileProtectionInfo procInfo =  await FileProtectionManager.GetProtectionInfoAsync(m_FileHandle);
-
-                if (procInfo.Status != FileProtectionStatus.Protected)
-                {
-                    outputStr += "\nProtecting File: ";
-                    await FileProtectionManager.ProtectAsync(m_FileHandle, Scenario1.m_EnterpriseIdentity);
-                    procInfo =  await FileProtectionManager.GetProtectionInfoAsync(m_FileHandle);
-                    outputStr += "\nProtected File: " + m_FileHandle.Path + "Status:" + procInfo.Status;
-                }
-                else
-                {
-                    outputStr += "\nFile protection status is: " + procInfo.Status;
-                }
-
-                rootPage.NotifyUser(outputStr, NotifyType.StatusMessage);
+                outputStr += "\nProtecting File: ";
+                await FileProtectionManager.ProtectAsync(m_file, Scenario1.m_enterpriseId);
+                procInfo =  await FileProtectionManager.GetProtectionInfoAsync(m_file);
+                outputStr += "\nProtected File: " + m_file.Path + "Status:" + procInfo.Status;
             }
-            catch (Exception ex)
+            else
             {
-
-                rootPage.NotifyUser(outputStr +"\n" + "Exception thrown:" + ex.ToString(), NotifyType.ErrorMessage);
+                outputStr += "\nFile protection status is: " + procInfo.Status;
             }
+
+            rootPage.NotifyUser(outputStr, NotifyType.StatusMessage);
         }
 
         public async void CopyProtectionAsync()
         {
-            bool result = false;
-            string outputStr = "";
-
-            try
+            if (m_file != null)
             {
-                if (m_FileHandle != null)
+                StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                StorageFile destFile = await localFolder.CreateFileAsync(m_FileCopyName, CreationCollisionOption.OpenIfExists);
+
+                if (destFile != null)
                 {
-                    StorageFolder localFolder =
-                    Windows.Storage.ApplicationData.Current.LocalFolder;
+                    await destFile.DeleteAsync();
+                }
 
-                    StorageFile destFile =
-                        await localFolder.CreateFileAsync(m_FileCopyName,
-                            CreationCollisionOption.OpenIfExists);
+                // Recreate file
+                destFile = await localFolder.CreateFileAsync(m_FileCopyName, CreationCollisionOption.ReplaceExisting);
 
-                    if (destFile != null)
+                string outputStr = "Copying protection from source: " + m_file.Path + "\nTo destination: " + destFile.Path;
+                bool result = await FileProtectionManager.CopyProtectionAsync(m_file, destFile);
+                if (!result)
+                {
+                    rootPage.NotifyUser(outputStr + " Copy protection Failed", NotifyType.ErrorMessage);
+                }
+                else
+                {
+                    FileProtectionInfo sourceInfo = await FileProtectionManager.GetProtectionInfoAsync(m_file);
+                    FileProtectionInfo destInfo = await FileProtectionManager.GetProtectionInfoAsync(destFile);
+                    if (sourceInfo.Status != destInfo.Status)
                     {
-                        await destFile.DeleteAsync();
-                    }
-
-                    //Recreate file
-
-                    destFile =
-                        await localFolder.CreateFileAsync(m_FileCopyName,
-                            CreationCollisionOption.ReplaceExisting);
-
-                    outputStr += "Copying protection from source: " + m_FileHandle.Path + "\nTo destination: " + destFile.Path;
-                    result = await FileProtectionManager.CopyProtectionAsync(m_FileHandle, destFile);
-                    if (!result)
-                    {
-                        rootPage.NotifyUser(outputStr + " Copy protection Failed", NotifyType.ErrorMessage);
+                        outputStr += "\nsource and destination don't have same protection source status:" +
+                                            sourceInfo.Status + " Destination status:" + destInfo.Status;
+                        rootPage.NotifyUser(outputStr, NotifyType.ErrorMessage);
                     }
                     else
                     {
-                        FileProtectionInfo sourceInfo = await FileProtectionManager.GetProtectionInfoAsync(m_FileHandle);
-                        FileProtectionInfo destInfo = await FileProtectionManager.GetProtectionInfoAsync(destFile);
-                        if (sourceInfo.Status != destInfo.Status)
-                        {
-                            outputStr += "\nsource and destination don't have same protection source status:" +
-                                               sourceInfo.Status + " Destination status:" + destInfo.Status;
-                            rootPage.NotifyUser(outputStr, NotifyType.ErrorMessage);
-                        }
-                        else
-                        {
-                            outputStr += "\nCopying protection succeeded";
-                            rootPage.NotifyUser(outputStr, NotifyType.StatusMessage);
-                        }
-
+                        outputStr += "\nCopying protection succeeded";
+                        rootPage.NotifyUser(outputStr, NotifyType.StatusMessage);
                     }
-
-                }
-                else
-                {
-                    rootPage.NotifyUser("Please pick a source file", NotifyType.ErrorMessage);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                rootPage.NotifyUser("Exception thrown:" + ex.ToString(), NotifyType.StatusMessage);
+                rootPage.NotifyUser("Please pick a source file", NotifyType.ErrorMessage);
             }
-
-        
         }
 
-        public async Task<StatusData> CheckFileStatus()
+        public async Task<string> GetFileStatusStringAsync()
         {
-            bool result = false;
             string outputStr = "";
 
-            StatusData resultData = new StatusData();
-
-            try
+            FileProtectionInfo protectionInfo = await FileProtectionManager.GetProtectionInfoAsync(m_file);
+            if (protectionInfo.Status == FileProtectionStatus.Revoked)
             {
-
-                FileProtectionInfo protectionInfo =
-                    await FileProtectionManager.GetProtectionInfoAsync(m_FileHandle);
-
-                if (protectionInfo.Status == FileProtectionStatus.Revoked)
-                {
-                    outputStr += "\nFile " + m_FileHandle.Path + " is revoked";
-                }
-                else
-                {
-                    outputStr += "\nFile protection status of: " + m_FileHandle.Path + " is " + protectionInfo.Status;
-                }
-
-                if (protectionInfo.IsRoamable)
-                {
-                    outputStr += "\nFile " + m_FileHandle.Path + " is roamable";
-                }else
-                {
-                    outputStr += "\nFile " + m_FileHandle.Path + " is not roamable";
-                }
-
-                result = true;
+                outputStr += "\nFile " + m_file.Path + " is revoked";
             }
-            catch (Exception ex)
+            else
             {
-                outputStr += "\n" + "Exception thrown:" + ex.ToString();
+                outputStr += "\nFile protection status of: " + m_file.Path + " is " + protectionInfo.Status;
             }
 
-            resultData.result = result;
-            resultData.outputStr = outputStr;
+            if (protectionInfo.IsRoamable)
+            {
+                outputStr += "\nFile " + m_file.Path + " is roamable";
+            }
+            else
+            {
+                outputStr += "\nFile " + m_file.Path + " is not roamable";
+            }
 
-
-            return resultData;
+            return outputStr;
         }
 
         private async void ProtectAsyncFileStatus_Click(object sender, RoutedEventArgs e)
         {
-            if (m_FileHandle != null)
+            if (m_file != null)
             {
-                StatusData stData = await CheckFileStatus();
-                if (stData.result)
-                {
-                    rootPage.NotifyUser(stData.outputStr, NotifyType.StatusMessage);
-                }
-                else
-                {
-                    rootPage.NotifyUser(stData.outputStr, NotifyType.ErrorMessage);
-                }
-            }else
+                rootPage.NotifyUser(await GetFileStatusStringAsync(), NotifyType.StatusMessage);
+            }
+            else
             {
                 rootPage.NotifyUser("Please pick a file", NotifyType.ErrorMessage);
             }
@@ -246,10 +182,11 @@ namespace EdpSample
 
         private void ProtectAsyncFile_Click(object sender, RoutedEventArgs e)
         {
-            if (m_FileHandle != null)
+            if (m_file != null)
             {
                 CreateFileAndProtect();
-            }else
+            }
+            else
             {
                 rootPage.NotifyUser("Please pick a file", NotifyType.ErrorMessage);
             }
@@ -259,7 +196,5 @@ namespace EdpSample
         {
             CopyProtectionAsync();
         }
-
-
     }
 }

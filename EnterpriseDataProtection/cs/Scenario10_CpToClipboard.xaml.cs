@@ -17,16 +17,13 @@ using System.Threading.Tasks;
 using SDKTemplate;
 using Windows.Security.EnterpriseData;
 
-
-
 namespace EdpSample
 {
-
-    public sealed partial class Scenario11_CpToClipboard : Page
+    public sealed partial class Scenario10_CpToClipboard : Page
     {
         private MainPage rootPage;
 
-        public Scenario11_CpToClipboard()
+        public Scenario10_CpToClipboard()
         {
             this.InitializeComponent();
         }
@@ -39,21 +36,18 @@ namespace EdpSample
 
         private void CopyToClipboard_Click(object sender, RoutedEventArgs e)
         {
-            try
+            var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
+            dataPackage.SetText(InputTxtBox.Text);
+            dataPackage.Properties.EnterpriseId = Scenario1.m_enterpriseId;
+            Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
+            if (dataPackage.Properties.EnterpriseId != Scenario1.m_enterpriseId)
             {
-                var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
-                dataPackage.SetText(InputTxtBox.Text);
-                dataPackage.Properties.EnterpriseId = Scenario1.m_EnterpriseIdentity;
-                Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
-                rootPage.NotifyUser("Successfully SetContent to clipboard", NotifyType.StatusMessage);
+                rootPage.NotifyUser("Failed to mark data package to EnterpiseId=" + Scenario1.m_enterpriseId, NotifyType.ErrorMessage);
             }
-            catch(Exception ex)
+            else
             {
-                rootPage.NotifyUser("Exception: " + ex.ToString(), NotifyType.ErrorMessage);
+                rootPage.NotifyUser("Successfully SetContent to clipboard using EnterpriseId=" + Scenario1.m_enterpriseId, NotifyType.StatusMessage);
             }
-               
         }
-
-
     }
 }

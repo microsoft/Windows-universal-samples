@@ -96,28 +96,28 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleConfiguration.cs" />
-    <Compile Include="Scenario10_ClipboardTarget.xaml.cs" />
-    <Compile Include="Scenario11_CpToClipboard.xaml.cs">
-      <DependentUpon>Scenario11_CpToClipboard.xaml</DependentUpon>
+    <Compile Include="Scenario9_ClipboardTarget.xaml.cs" />
+    <Compile Include="Scenario10_CpToClipboard.xaml.cs">
+      <DependentUpon>Scenario10_CpToClipboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario12_CPDNoUI.xaml.cs" />
-    <Compile Include="Scenario13_ShareData.xaml.cs" />
-    <Compile Include="Scenario14_ShareTarget.xaml.cs">
-      <DependentUpon>Scenario14_ShareTarget.xaml</DependentUpon>
+    <Compile Include="Scenario11_CPDNoUI.xaml.cs" />
+    <Compile Include="Scenario12_ShareData.xaml.cs" />
+    <Compile Include="Scenario13_ShareTarget.xaml.cs">
+      <DependentUpon>Scenario13_ShareTarget.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario15_QueryCpPaste.xaml.cs">
-      <DependentUpon>Scenario15_QueryCpPaste.xaml</DependentUpon>
+    <Compile Include="Scenario14_QueryCpPaste.xaml.cs">
+      <DependentUpon>Scenario14_QueryCpPaste.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario16_DPLFileCreateEvents.xaml.cs" />
-    <Compile Include="Scenario17_NetworkResource.xaml.cs" />
+    <Compile Include="Scenario15_DPLFileCreateEvents.xaml.cs" />
+    <Compile Include="Scenario16_NetworkResource.xaml.cs" />
     <Compile Include="Scenario1_Setup.xaml.cs" />
     <Compile Include="Scenario2_IdManaged.xaml.cs" />
     <Compile Include="Scenario3_UIPolicy.xaml.cs" />
     <Compile Include="Scenario4_FilePMgr.xaml.cs" />
-    <Compile Include="Scenario6_Revoke.xaml.cs" />
-    <Compile Include="Scenario7_ProtectBuffer.xaml.cs" />
-    <Compile Include="Scenario8_ProtectStream.xaml.cs" />
-    <Compile Include="Scenario9_ClipboardSource.xaml.cs" />
+    <Compile Include="Scenario5_Revoke.xaml.cs" />
+    <Compile Include="Scenario6_ProtectBuffer.xaml.cs" />
+    <Compile Include="Scenario7_ProtectStream.xaml.cs" />
+    <Compile Include="Scenario8_ClipboardSource.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -133,35 +133,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario10_ClipboardTarget.xaml">
+    <Page Include="Scenario9_ClipboardTarget.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario11_CpToClipboard.xaml">
+    <Page Include="Scenario10_CpToClipboard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario12_CPDNoUI.xaml">
+    <Page Include="Scenario11_CPDNoUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario13_ShareData.xaml">
+    <Page Include="Scenario12_ShareData.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario14_ShareTarget.xaml">
+    <Page Include="Scenario13_ShareTarget.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario15_QueryCpPaste.xaml">
+    <Page Include="Scenario14_QueryCpPaste.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Scenario16_DPLFileCreateEvents.xaml">
+    <Page Include="Scenario15_DPLFileCreateEvents.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario17_NetworkResource.xaml">
+    <Page Include="Scenario16_NetworkResource.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -181,19 +181,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario6_Revoke.xaml">
+    <Page Include="Scenario5_Revoke.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Scenario7_ProtectBuffer.xaml">
+    <Page Include="Scenario6_ProtectBuffer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario8_ProtectStream.xaml">
+    <Page Include="Scenario7_ProtectStream.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario9_ClipboardSource.xaml">
+    <Page Include="Scenario8_ClipboardSource.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

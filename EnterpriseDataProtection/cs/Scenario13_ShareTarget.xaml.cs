@@ -28,11 +28,12 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.Security.EnterpriseData;
 using SDKTemplate;
 
 namespace EdpSample
 {
-    public sealed partial class Scenario14_ShareTarget : Page
+    public sealed partial class Scenario13_ShareTarget : Page
     {
         private MainPage rootPage;
         ShareOperation m_shareOperation;
@@ -55,7 +56,7 @@ namespace EdpSample
         private IRandomAccessStreamReference m_sharedThumbnailStreamRef;
         private const string dataFormatName = "http://schema.org/Book";
 
-        public Scenario14_ShareTarget()
+        public Scenario13_ShareTarget()
         {
             this.InitializeComponent();
         }
@@ -68,6 +69,13 @@ namespace EdpSample
             // quickly as possible, and retrieve all data from the share target asynchronously.
 
             m_shareOperation = (ShareOperation)e.Parameter;
+
+            var result = await ProtectionPolicyManager.RequestAccessAsync(Scenario1.m_enterpriseId,
+                                                                             m_shareOperation.Data.Properties.EnterpriseId);
+            if (result == ProtectionPolicyEvaluationResult.Blocked)
+            {
+                rootPage.NotifyUser("\nSharing is blocked by policy from your Enterprise", NotifyType.ErrorMessage);
+            }
 
             await Task.Factory.StartNew(async () =>
             {
@@ -177,16 +185,16 @@ namespace EdpSample
                 // Get back to the UI thread using the dispatcher.
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
-                   DataPackageTitle.Text = m_sharedDataTitle;
-                   DataPackageDescription.Text = m_sharedDataDescription;
-                   DataPackagePackageFamilyName.Text = m_sharedDataPackageFamilyName;
+                    DataPackageTitle.Text = m_sharedDataTitle;
+                    DataPackageDescription.Text = m_sharedDataDescription;
+                    DataPackagePackageFamilyName.Text = m_sharedDataPackageFamilyName;
                     if (m_sharedDataContentSourceWebLink != null)
                     {
-                       DataPackageContentSourceWebLink.Text = m_sharedDataContentSourceWebLink.AbsoluteUri;
+                        DataPackageContentSourceWebLink.Text = m_sharedDataContentSourceWebLink.AbsoluteUri;
                     }
                     if (m_sharedDataContentSourceApplicationLink != null)
                     {
-                       DataPackageContentSourceApplicationLink.Text = m_sharedDataContentSourceApplicationLink.AbsoluteUri;
+                        DataPackageContentSourceApplicationLink.Text = m_sharedDataContentSourceApplicationLink.AbsoluteUri;
                     }
 
                     if (m_sharedDataSquare30x30Logo != null)
@@ -303,9 +311,9 @@ namespace EdpSample
                             //ResourceMapValue.Text = "";
                             foreach (KeyValuePair<string, RandomAccessStreamReference> item in m_sharedResourceMap)
                             {
-                                 ResourceMapValue.Text += "\nKey: " + item.Key;
+                                ResourceMapValue.Text += "\nKey: " + item.Key;
                             }
-                              ResourceMapArea.Visibility = Visibility.Visible;
+                            ResourceMapArea.Visibility = Visibility.Visible;
                         }
                     }
                     if (m_sharedBitmapStreamRef != null)
@@ -338,7 +346,7 @@ namespace EdpSample
 
         async void ReportCompleted_Click(object sender, RoutedEventArgs e)
         {
-           if (AddQuickLink.IsChecked.Equals(true))
+            if (AddQuickLink.IsChecked.Equals(true))
             {
                 QuickLink quickLinkInfo = new QuickLink
                 {
@@ -421,10 +429,7 @@ namespace EdpSample
         private void ReportErrorButton_Click(object sender, RoutedEventArgs e)
         {
             m_shareOperation.ReportError(ReportError.Text);
-            
         }
-
-   
 
         async private void NotifyUserBackgroundThread(string message, NotifyType type)
         {
@@ -449,6 +454,4 @@ namespace EdpSample
             }
         }
     }
-
-   
 }
