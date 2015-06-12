@@ -35,13 +35,13 @@ S2_UpdateAndDeleteWithAPI::S2_UpdateAndDeleteWithAPI()
     InitializeRevisionNumber();
 }
 
-void Indexer::S2_UpdateAndDeleteWithAPI::AddToIndex_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void S2_UpdateAndDeleteWithAPI::S2_UpdateAndDeleteWithAPI::AddToIndex_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     auto indexer = Windows::Storage::Search::ContentIndexer::GetIndexer();
     AddItemsToIndex(indexer);
 }
 
-void Indexer::S2_UpdateAndDeleteWithAPI::UpdatePropertyHelper(String^ itemKey, String^ propertyKey, String^ propertyName, Object^ newValue)
+void S2_UpdateAndDeleteWithAPI::S2_UpdateAndDeleteWithAPI::UpdatePropertyHelper(String^ itemKey, String^ propertyKey, String^ propertyName, Object^ newValue)
 {
     auto indexer = Windows::Storage::Search::ContentIndexer::GetIndexer();
     auto propertyKeys = ref new Vector<String^>();
@@ -93,18 +93,18 @@ void Indexer::S2_UpdateAndDeleteWithAPI::UpdatePropertyHelper(String^ itemKey, S
 
 // This function updates the ItemNameDisplay property for the indexed item with the key "Sample 0." The
 // updated ItemNameDisplay property comes from the itemNameInput text box.
-void Indexer::S2_UpdateAndDeleteWithAPI::UpdateName_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void S2_UpdateAndDeleteWithAPI::S2_UpdateAndDeleteWithAPI::UpdateName_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     UpdatePropertyHelper(L"SampleKey0", Windows::Storage::SystemProperties::ItemNameDisplay, L"item name", ItemNameInput->Text);
 }
 
 // This function deletes the Keywords property for the indexed item with the key "Sample0."
-void Indexer::S2_UpdateAndDeleteWithAPI::DeleteKeywords_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void S2_UpdateAndDeleteWithAPI::S2_UpdateAndDeleteWithAPI::DeleteKeywords_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     UpdatePropertyHelper(L"SampleKey0", Windows::Storage::SystemProperties::Keywords, L"keywords", nullptr);
 }
 
-void Indexer::S2_UpdateAndDeleteWithAPI::DeleteItemsHelper(std::function<IAsyncAction^(Windows::Storage::Search::ContentIndexer^)> deleteFunction)
+void S2_UpdateAndDeleteWithAPI::S2_UpdateAndDeleteWithAPI::DeleteItemsHelper(std::function<IAsyncAction^(Windows::Storage::Search::ContentIndexer^)> deleteFunction)
 {
     auto indexer = Windows::Storage::Search::ContentIndexer::GetIndexer();
     auto propertiesToRetrieve = ref new Vector<String^>();
@@ -134,7 +134,7 @@ void Indexer::S2_UpdateAndDeleteWithAPI::DeleteItemsHelper(std::function<IAsyncA
 }
 
 // This function deletes the indexed item with the key "SampleKey0" added to the index by this app via the ContentIndexer
-void Indexer::S2_UpdateAndDeleteWithAPI::DeleteSingleItem_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void S2_UpdateAndDeleteWithAPI::S2_UpdateAndDeleteWithAPI::DeleteSingleItem_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     return DeleteItemsHelper(std::function<IAsyncAction^(Windows::Storage::Search::ContentIndexer^)>(
         [](Windows::Storage::Search::ContentIndexer^ indexer) -> IAsyncAction^
@@ -144,7 +144,7 @@ void Indexer::S2_UpdateAndDeleteWithAPI::DeleteSingleItem_Click(Platform::Object
 }
 
 // This function deletes the indexed items with the keys "SampleKey1" and "SampleKey2" added to the index by this app via the ContentIndexer
-void Indexer::S2_UpdateAndDeleteWithAPI::DeleteMultipleItems_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void S2_UpdateAndDeleteWithAPI::S2_UpdateAndDeleteWithAPI::DeleteMultipleItems_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     return DeleteItemsHelper(std::function<IAsyncAction^(Windows::Storage::Search::ContentIndexer^)>(
         [](Windows::Storage::Search::ContentIndexer^ indexer) -> IAsyncAction^
@@ -157,7 +157,7 @@ void Indexer::S2_UpdateAndDeleteWithAPI::DeleteMultipleItems_Click(Platform::Obj
 }
 
 // This function deletes all items added to the index by this app via the ContentIndexer
-void Indexer::S2_UpdateAndDeleteWithAPI::DeleteAllItems_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void S2_UpdateAndDeleteWithAPI::S2_UpdateAndDeleteWithAPI::DeleteAllItems_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     return DeleteItemsHelper(std::function<IAsyncAction^(Windows::Storage::Search::ContentIndexer^)>(
         [](Windows::Storage::Search::ContentIndexer^ indexer) -> IAsyncAction^
