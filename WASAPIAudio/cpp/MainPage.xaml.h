@@ -1,10 +1,18 @@
+//*********************************************************
+//
 // Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
 #pragma once
 
-#include "pch.h"
 #include "MainPage.g.h"
-#include "Common\LayoutAwarePage.h" // Required by generated header
-#include "Constants.h"
+#include "SampleConfiguration.h"
 
 namespace SDKSample
 {
@@ -14,54 +22,24 @@ namespace SDKSample
         ErrorMessage
     };
 
-    public ref class MainPageSizeChangedEventArgs sealed
-    {
-    public:
-        property double Width
-        {
-            double get()
-            {
-                return width;
-            }
-
-            void set(double value)
-            {
-                width = value;
-            }
-        }
-
-    private:
-        double width;
-    };
-
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
     public ref class MainPage sealed
     {
     public:
         MainPage();
 
     protected:
-        virtual void LoadState(Platform::Object^ navigationParameter,
-            Windows::Foundation::Collections::IMap<Platform::String^, Platform::Object^>^ pageState) override;
-        virtual void SaveState(Windows::Foundation::Collections::IMap<Platform::String^, Platform::Object^>^ pageState) override;
-
-    internal:
-
-        void NotifyUser(Platform::String^ strMessage, NotifyType type);
-        void LoadScenario(Platform::String^ scenarioName);
-        event Windows::Foundation::EventHandler<Platform::Object^>^ ScenarioLoaded;
-        event Windows::Foundation::EventHandler<MainPageSizeChangedEventArgs^>^ MainPageResized;
+        virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 
     private:
-        void PopulateScenarios();
-
-        Platform::Collections::Vector<Object^>^ ScenarioList;
-        Windows::UI::Xaml::Controls::Frame^ HiddenFrame;
-        void Footer_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-
-        void Scenarios_SelectionChanged(Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
+        void ScenarioControl_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
+        void Footer_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
     internal:
         static MainPage^ Current;
-
+        void NotifyUser(Platform::String^ strMessage, NotifyType type);
     };
 }
