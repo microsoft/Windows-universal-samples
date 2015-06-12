@@ -3,7 +3,7 @@
   <Identity Name="7869EricJia.AccountsSample" Publisher="CN=3B3B1E5A-CE36-4D75-AEDA-6809021F7AA1" Version="1.1.0.8" />
   <mp:PhoneIdentity PhoneProductId="35ba7848-dfec-48e3-9197-ac01fd9d3e74" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>TokenBrokerCpp</DisplayName>
+    <DisplayName>WebAccountManager</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
@@ -14,10 +14,10 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="TokenBrokerCpp.App">
-      <uap:VisualElements DisplayName="TokenBrokerCpp" Square150x150Logo="Assets\squareTile-sdk.png" Square44x44Logo="Assets\smallTile-sdk.png" Description="TokenBrokerCpp"  BackgroundColor="#00B2F0">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="WebAccountManager.App">
+      <uap:VisualElements DisplayName="WebAccountManager" Square150x150Logo="Assets\squareTile-sdk.png" Square44x44Logo="Assets\smallTile-sdk.png" Description="WebAccountManager"  BackgroundColor="#00B2F0">
         <uap:SplashScreen Image="Assets\splash-sdk.png" />
-        <uap:DefaultTile DefaultSize="square150x150Logo">
+        <uap:DefaultTile >
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
           </uap:ShowNameOnTiles>

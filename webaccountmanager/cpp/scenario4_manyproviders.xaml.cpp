@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft. All rights reserved.
 
 #include "pch.h"
-#include "Scenario6_CustomProvider.xaml.h"
+#include "Scenario4_ManyProviders.xaml.h"
 
 using namespace SDKTemplate;
 
@@ -22,70 +22,67 @@ using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::UI::ApplicationSettings;
 
-Scenario6_CustomProvider::Scenario6_CustomProvider() : rootPage(MainPage::Current)
+Scenario4_ManyProviders::Scenario4_ManyProviders() : rootPage(MainPage::Current)
 {
     InitializeComponent();
     InitalizeAccountsControlDialog();
 }
 
-void Scenario6_CustomProvider::OnNavigatedFrom(NavigationEventArgs^ e)
+void Scenario4_ManyProviders::OnNavigatedFrom(NavigationEventArgs^ e)
 {
     CleanupAccountsControlDialog();
+    LogoffAndRemoveAccount();
 }
 
-void SDKTemplate::Scenario6_CustomProvider::Button_SignIn_Click(Object^ sender, RoutedEventArgs^ e)
+void SDKTemplate::Scenario4_ManyProviders::Button_SignIn_Click(Object^ sender, RoutedEventArgs^ e)
 {
+    // Inside OnAccountCommandsRequested we will determine that we need to show accounts
+    // and providers eligible for sign in because there is no signed in account
     AccountsSettingsPane::Show();
 }
 
-void SDKTemplate::Scenario6_CustomProvider::Button_GetTokenSilently_Click(Object^ sender, RoutedEventArgs^ e)
+void SDKTemplate::Scenario4_ManyProviders::Button_GetTokenSilently_Click(Object^ sender, RoutedEventArgs^ e)
 {
     AuthenticateWithRequestTokenSilent(m_account->WebAccountProvider, (String^)MSA_SCOPE_REQUESTED, (String^)MSA_CLIENT_ID, m_account);
 }
 
-void SDKTemplate::Scenario6_CustomProvider::Button_ManageAccount_Click(Object^ sender, RoutedEventArgs^ e)
+void SDKTemplate::Scenario4_ManyProviders::Button_ManageAccounts_Click(Object^ sender, RoutedEventArgs^ e)
 {
+    // Inside OnAccountCommandsRequested we will determine that we need to show the
+    // active account since are signed into an account right now
     AccountsSettingsPane::Show();
 }
 
-void SDKTemplate::Scenario6_CustomProvider::Button_Reset_Click(Object^ sender, RoutedEventArgs^ e)
+void SDKTemplate::Scenario4_ManyProviders::Button_Reset_Click(Object^ sender, RoutedEventArgs^ e)
 {
     rootPage->NotifyUser("Resetting", NotifyType::StatusMessage);
 
-    RemoveCustomProviders();
     LogoffAndRemoveAccount();
 
     rootPage->NotifyUser("Done Resetting", NotifyType::StatusMessage);
 }
 
-void SDKTemplate::Scenario6_CustomProvider::Button_AddProvider_Click(Object^ sender, RoutedEventArgs^ e)
-{
-    AddCustomProvider(textBox_ProviderId->Text, textBox_Authority->Text);
-}
-
-void SDKTemplate::Scenario6_CustomProvider::InitalizeAccountsControlDialog()
+void SDKTemplate::Scenario4_ManyProviders::InitalizeAccountsControlDialog()
 {
     // Add to the event AccountCommandsRequested to load our list of providers into the AccountSettingsPane
     m_accountCommandsRequestedRegistrationToken = AccountsSettingsPane::GetForCurrentView()->AccountCommandsRequested::add(
         ref new TypedEventHandler<AccountsSettingsPane^, AccountsSettingsPaneCommandsRequestedEventArgs^>(
-        this,
-        &SDKTemplate::Scenario6_CustomProvider::OnAccountCommandsRequested)
+            this, 
+            &SDKTemplate::Scenario4_ManyProviders::OnAccountCommandsRequested)
         );
 
-    // Populate our list of providers with the MSA provider, and attempt to find any accounts saved.
+    // Populate our Map of providers (MSA, AAD, and 3rd Party)
+    // and load our account if we have one saved.
     GetProvidersAndAccounts();
 }
 
-void SDKTemplate::Scenario6_CustomProvider::CleanupAccountsControlDialog()
+void SDKTemplate::Scenario4_ManyProviders::CleanupAccountsControlDialog()
 {
     // Remove the event handler from the AccountCommandsRequested
     AccountsSettingsPane::GetForCurrentView()->AccountCommandsRequested::remove(m_accountCommandsRequestedRegistrationToken);
-
-	// Clean up any account that may still be logged in
-	LogoffAndRemoveAccount();
 }
 
-void SDKTemplate::Scenario6_CustomProvider::OnAccountCommandsRequested(
+void SDKTemplate::Scenario4_ManyProviders::OnAccountCommandsRequested(
     AccountsSettingsPane^ sender,
     AccountsSettingsPaneCommandsRequestedEventArgs^ e)
 {
@@ -105,10 +102,36 @@ void SDKTemplate::Scenario6_CustomProvider::OnAccountCommandsRequested(
 }
 
 // Function to create our Map of providers and load an account if an account id is saved
-void SDKTemplate::Scenario6_CustomProvider::GetProvidersAndAccounts()
+void SDKTemplate::Scenario4_ManyProviders::GetProvidersAndAccounts()
 {
     //Instantiate the provider list
     m_providers = ref new Map<String^, WebAccountProvider^>();
+
+    // Make tasks to get the MSA and AAD providers by their IDs
+    auto getMsaProvider = concurrency::create_task(WebAuthenticationCoreManager::FindAccountProviderAsync((String^)MICROSOFT_PROVIDER_ID, (String^)CONSUMER_AUTHORITY));
+    auto getAadProvider = concurrency::create_task(WebAuthenticationCoreManager::FindAccountProviderAsync((String^)MICROSOFT_PROVIDER_ID, (String^)ORGANIZATION_AUTHORITY));
+    WebAccountProvider^ appSpecificProvider = ref new WebAccountProvider((String^)APP_SPECIFIC_PROVIDER_ID, (String^)APP_SPECIFIC_PROVIDER_NAME, ref new Uri(this->BaseUri->ToString(), "Assets/smallTile-sdk.png"));
+
+    // When that task completes, save the respective providers found to the provider list
+    getMsaProvider.
+        then([this](WebAccountProvider^ foundMsaProvider) 
+        {
+            if (foundMsaProvider != nullptr)
+            {
+                m_providers->Insert(foundMsaProvider->Id + foundMsaProvider->Authority, foundMsaProvider);
+            }
+        });
+    
+    getAadProvider.
+        then([this](WebAccountProvider^ foundAadProvider)
+        {
+            if (foundAadProvider != nullptr)
+            {
+                m_providers->Insert(foundAadProvider->Id + foundAadProvider->Authority, foundAadProvider);
+            }
+        });
+
+    m_providers->Insert(appSpecificProvider->Id, appSpecificProvider);
 
     if (ApplicationData::Current->LocalSettings->Values->HasKey((String^) STORED_ACCOUNT_ID_KEY))
     {
@@ -118,7 +141,7 @@ void SDKTemplate::Scenario6_CustomProvider::GetProvidersAndAccounts()
 
 // We've found that we have some key information saved about a previous
 // account, so we will call FindAccountAsync to grab the WebAccount and save it
-void SDKTemplate::Scenario6_CustomProvider::LoadAccount()
+void SDKTemplate::Scenario4_ManyProviders::LoadAccount() 
 {
     String^ accountID = (String^)ApplicationData::Current->LocalSettings->Values->Lookup((String^) STORED_ACCOUNT_ID_KEY);
     String^ providerID = (String^)ApplicationData::Current->LocalSettings->Values->Lookup((String^) STORED_PROVIDER_ID_KEY);
@@ -129,92 +152,69 @@ void SDKTemplate::Scenario6_CustomProvider::LoadAccount()
         return;
     }
 
-    concurrency::create_task(WebAuthenticationCoreManager::FindAccountProviderAsync(providerID))
-        .then([this, providerID, accountID, authority](WebAccountProvider^ provider)
+    if (providerID == APP_SPECIFIC_PROVIDER_ID)
     {
-        concurrency::create_task(WebAuthenticationCoreManager::FindAccountAsync(provider, accountID))
-            .then([this](WebAccount^ foundAccount)
-        {
-            if (foundAccount != nullptr)
-            {
-                SaveAccount(foundAccount);
-            }
-        });
-    });
-}
-
-// This function takes the passed in strings from the textboxes for adding a custom provider.
-// It will check to make sure the provider is found, then add the provider to our list of providers and
-// clear the textboxes.
-void SDKTemplate::Scenario6_CustomProvider::AddCustomProvider(String^ providerId, String^ authority)
-{
-    try
-    {
-        auto getCustomProvider = concurrency::create_task(WebAuthenticationCoreManager::FindAccountProviderAsync(providerId, authority));
-
-        getCustomProvider.then([this, providerId](WebAccountProvider^ provider)
-        {
-            if (provider != nullptr)
-            {
-                m_providers->Insert(provider->Id, provider);
-                textBox_ProviderId->Text = "";
-                textBox_Authority->Text = "";
-                rootPage->NotifyUser("Provider was found and added for id: " + providerId + ".", NotifyType::StatusMessage);
-            }
-            else
-            {
-                rootPage->NotifyUser("Provider was not found for that provider id: " + providerId + ".", NotifyType::ErrorMessage);
-            }
-        });
+        WebAccountProvider^ appSpecificProvider = ref new WebAccountProvider((String^)APP_SPECIFIC_PROVIDER_ID, (String^)APP_SPECIFIC_PROVIDER_NAME, ref new Uri(this->BaseUri->ToString(), "Assets/smallTile-sdk.png"));
+        WebAccount^ account = ref new WebAccount(appSpecificProvider, accountID, WebAccountState::None);
+        SaveAccount(account->WebAccountProvider, account);
     }
-    catch (InvalidArgumentException^ e)
+    else
     {
-        rootPage->NotifyUser("An invalid provider id or authority was used.", NotifyType::ErrorMessage);
-    }
+        concurrency::create_task(WebAuthenticationCoreManager::FindAccountProviderAsync(providerID))
+            .then([this, providerID, accountID, authority](WebAccountProvider^ provider)
+            {
+                concurrency::create_task(WebAuthenticationCoreManager::FindAccountAsync(provider, accountID))
+                    .then([this](WebAccount^ foundAccount)
+                    {
+                        SaveAccount(foundAccount->WebAccountProvider, foundAccount);
+                    });
+            });
+    }        
 }
 
 // Similar to Scenario 1, but with a loop for the different providers we now support and declared earlier
-void SDKTemplate::Scenario6_CustomProvider::AddWebAccountProviders(AccountsSettingsPaneCommandsRequestedEventArgs^ e)
+void SDKTemplate::Scenario4_ManyProviders::AddWebAccountProviders(AccountsSettingsPaneCommandsRequestedEventArgs^ e)
 {
-    for (auto pair : m_providers)
+    e->WebAccountProviderCommands->Clear();
+
+    for(auto pair : m_providers)
     {
         // Create a new WebAccountProviderCommandInvokedHandler for the event fired when a user clicks on a provider in the AccountSettingsPane
-        WebAccountProviderCommandInvokedHandler^ handler = ref new WebAccountProviderCommandInvokedHandler(this, &SDKTemplate::Scenario6_CustomProvider::WebAccountProviderCommandInvoked);
+        WebAccountProviderCommandInvokedHandler^ handler = ref new WebAccountProviderCommandInvokedHandler(this, &SDKTemplate::Scenario4_ManyProviders::WebAccountProviderCommandInvoked);
 
         // Make a new command based on the provider and the click handler we just created
-        WebAccountProviderCommand^ ProviderCommand = ref new WebAccountProviderCommand(pair->Value, handler);
+        WebAccountProviderCommand^ providerCommand = ref new WebAccountProviderCommand(pair->Value, handler);
 
         // Append that command to the WebAccountProviderCommands list for the AccountSettingsPane
-        e->WebAccountProviderCommands->Append(ProviderCommand);
+        e->WebAccountProviderCommands->Append(providerCommand);
     }
 }
 
 //Creates a web account command object for our account, if we have one saved, and adds it to the AccountsControl list of web account commands
-void SDKTemplate::Scenario6_CustomProvider::AddWebAccount(AccountsSettingsPaneCommandsRequestedEventArgs^ e)
+void SDKTemplate::Scenario4_ManyProviders::AddWebAccount(AccountsSettingsPaneCommandsRequestedEventArgs^ e)
 {
     // Create a new WebAccountCommandInvokedHandler for the event fired when a user clicks on an account in the AccountSettingsPane
-    WebAccountCommandInvokedHandler^ handler = ref new WebAccountCommandInvokedHandler(this, &SDKTemplate::Scenario6_CustomProvider::WebAccountCommandInvoked);
+    WebAccountCommandInvokedHandler^ handler = ref new WebAccountCommandInvokedHandler(this, &SDKTemplate::Scenario4_ManyProviders::WebAccountCommandInvoked);
 
     // Make a new command based on the account and the click handler we just created
-    WebAccountCommand^ AccountCommand = ref new WebAccountCommand(SDKTemplate::Scenario6_CustomProvider::m_account, handler, SupportedWebAccountActions::Remove);
+    WebAccountCommand^ accountCommand = ref new WebAccountCommand(SDKTemplate::Scenario4_ManyProviders::m_account, handler, SupportedWebAccountActions::Remove);
 
     // Append that command to the WebAccountProviderCommands list for the AccountSettingsPane
-    e->WebAccountCommands->Append(AccountCommand);
+    e->WebAccountCommands->Append(accountCommand);
 }
 
 // You can add links and descriptive text such as privacy policy, help, general account settings
-void SDKTemplate::Scenario6_CustomProvider::AddLinksAndDescription(AccountsSettingsPaneCommandsRequestedEventArgs^ e)
+void SDKTemplate::Scenario4_ManyProviders::AddLinksAndDescription(AccountsSettingsPaneCommandsRequestedEventArgs^ e)
 {
     e->HeaderText = "Describe what adding an account to your application will do for the user.";
 
-    e->Commands->Append(ref new SettingsCommand("privacypolicy", "Privacy Policy", ref new UICommandInvokedHandler(this, &SDKTemplate::Scenario6_CustomProvider::PrivacyPolicyInvoked)));
-    e->Commands->Append(ref new SettingsCommand("otherlink", "Other Link", ref new UICommandInvokedHandler(this, &SDKTemplate::Scenario6_CustomProvider::OtherLinkInvoked)));
+    e->Commands->Append(ref new SettingsCommand("privacypolicy", "Privacy Policy", ref new UICommandInvokedHandler(this, &SDKTemplate::Scenario4_ManyProviders::PrivacyPolicyInvoked)));
+    e->Commands->Append(ref new SettingsCommand("otherlink", "Other Link", ref new UICommandInvokedHandler(this, &SDKTemplate::Scenario4_ManyProviders::OtherLinkInvoked)));
 }
 
-// The function that will be called from AccountSettingsPane with the WebAccountProvider
-// that was clicked by the user
-void SDKTemplate::Scenario6_CustomProvider::WebAccountProviderCommandInvoked(WebAccountProviderCommand^ command)
+void SDKTemplate::Scenario4_ManyProviders::WebAccountProviderCommandInvoked(WebAccountProviderCommand^ command)
 {
+    // The function that will be called with the WebAccountProviderCommand passed from AccountSettingsPane
     if (command->WebAccountProvider->Authority == "organizations")
     {
         AuthenticateWithRequestToken(command->WebAccountProvider, (String^)AAD_SCOPE_REQUESTED, (String^)AAD_CLIENT_ID);
@@ -225,8 +225,9 @@ void SDKTemplate::Scenario6_CustomProvider::WebAccountProviderCommandInvoked(Web
     }
 }
 
-// Handler function for when users select different commands for accounts in the AccountControl
-void SDKTemplate::Scenario6_CustomProvider::WebAccountCommandInvoked(WebAccountCommand^ command, WebAccountInvokedArgs^ args)
+// The function that will be called from AccountSettingsPane with the WebAccount
+// that was selected by the user.
+void SDKTemplate::Scenario4_ManyProviders::WebAccountCommandInvoked(WebAccountCommand^ command, WebAccountInvokedArgs^ args)
 {
     if (args->Action == WebAccountAction::Remove)
     {
@@ -235,32 +236,34 @@ void SDKTemplate::Scenario6_CustomProvider::WebAccountCommandInvoked(WebAccountC
 }
 
 // Displays privacy policy message on clicking it in the AccountsControl
-void SDKTemplate::Scenario6_CustomProvider::PrivacyPolicyInvoked(IUICommand^ command)
+void SDKTemplate::Scenario4_ManyProviders::PrivacyPolicyInvoked(IUICommand^ command)
 {
     rootPage->NotifyUser("Privacy policy clicked by user", NotifyType::StatusMessage);
 }
 
 // Displays other link message on clicking it in the AccountsControl
-void SDKTemplate::Scenario6_CustomProvider::OtherLinkInvoked(IUICommand^ command)
+void SDKTemplate::Scenario4_ManyProviders::OtherLinkInvoked(IUICommand^ command)
 {
     rootPage->NotifyUser("Other link pressed by user", NotifyType::StatusMessage);
 }
 
-// Create a new TokenBroker WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
-// that request asynchronously to TokenBroker's RequestTokenAsync API
+// Create a new WebAccountManager WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
+// that request asynchronously to WebAccountManager's RequestTokenAsync
 //
-// TokenBroker will then try three steps, in order:
+// WebAccountManager will then try three steps, in order:
 //        (1): Check it's local cache to see if it has a valid token
 //        (2): Try to silently request a new token from the MSA service
 //        (3): Show the MSA UI for user interaction required (user credentials) before it may return a token.
 //
-// Because of TokenBroker's ability to cache tokens, you should only need to call TokenBroker when making token
+// Because of WebAccountManager's ability to cache tokens, you should only need to call WebAccountManager when making token
 // based requests and not require the ability to store a cached token within your app.
-void SDKTemplate::Scenario6_CustomProvider::AuthenticateWithRequestToken(WebAccountProvider^ provider, String^ scope, String^ clientID)
+void SDKTemplate::Scenario4_ManyProviders::AuthenticateWithRequestToken(WebAccountProvider^ provider, String^ scope, String^ clientID)
 {
     rootPage->NotifyUser("Requested " + provider->DisplayName + " from AccountsManager dialog.", NotifyType::StatusMessage);
 
     WebTokenRequest^ wtr = ref new WebTokenRequest(provider, scope, clientID);
+    wtr->Properties->Insert("authority", "https://login.windows.net/common");
+    wtr->Properties->Insert("resource", "https://sharepoint.com");
     auto getWebTokenRequestResult = concurrency::create_task(WebAuthenticationCoreManager::RequestTokenAsync(wtr));
 
     // When our task finishes it will return result of the operation, and if successful it will contain a token
@@ -277,7 +280,7 @@ void SDKTemplate::Scenario6_CustomProvider::AuthenticateWithRequestToken(WebAcco
                 }
 
                 WebAccount^ account = webTokenRequestResult->ResponseData->GetAt(0)->WebAccount;
-                SaveAccount(account);
+                SaveAccount(provider, account);
             }
         }
 
@@ -285,17 +288,17 @@ void SDKTemplate::Scenario6_CustomProvider::AuthenticateWithRequestToken(WebAcco
     });
 }
 
-// Create a new TokenBroker WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
-// that request and the account to get the token for asynchronously to TokenBroker's GetTokenSilentlyAsync API
+// Create a new WebAccountManager WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
+// that request and the account to get the token for asynchronously to WebAccountManager's GetTokenSilentlyAsync API
 //
-// TokenBroker's GetTokenSilentlyAsync will then try :
+// WebAccountManager's GetTokenSilentlyAsync will then try :
 //        (1): Check it's local cache to see if it has a valid token
 //        (2): Try to silently request a new token from the MSA service
 //        (3): Return a status of UserInteractionRequired if we need the user credentials
 //
-// Because of TokenBroker's ability to cache tokens, you should only need to call TokenBroker when making token
+// Because of WebAccountManager's ability to cache tokens, you should only need to call WebAccountManager when making token
 // based requests and not require the ability to store a cached token within your app.
-void SDKTemplate::Scenario6_CustomProvider::AuthenticateWithRequestTokenSilent(WebAccountProvider^ provider, String^ scope, String^ clientID, WebAccount^ account)
+void SDKTemplate::Scenario4_ManyProviders::AuthenticateWithRequestTokenSilent(WebAccountProvider^ provider, String^ scope, String^ clientID, WebAccount^ account)
 {
     rootPage->NotifyUser("Requested " + provider->DisplayName + " from AccountsManager dialog.", NotifyType::StatusMessage);
 
@@ -316,7 +319,7 @@ void SDKTemplate::Scenario6_CustomProvider::AuthenticateWithRequestTokenSilent(W
 }
 
 // Displays the result of requesting a token asynchronously to the main page
-void SDKTemplate::Scenario6_CustomProvider::OutputTokenResult(WebTokenRequestResult^ result)
+void SDKTemplate::Scenario4_ManyProviders::OutputTokenResult(WebTokenRequestResult^ result)
 {
 	if (result->ResponseStatus == WebTokenRequestStatus::Success)
 	{
@@ -351,25 +354,26 @@ void SDKTemplate::Scenario6_CustomProvider::OutputTokenResult(WebTokenRequestRes
 	}
 }
 
-// Saves the AccountId in LocalSettings and keeps an instance
-// of the WebAccount saved
-void SDKTemplate::Scenario6_CustomProvider::SaveAccount(WebAccount^ account)
+// Saves the ProviderId, Authority, and AccountId in LocalSettings as we can handle
+// different types of account providers in Scenario 2.
+void SDKTemplate::Scenario4_ManyProviders::SaveAccount(WebAccountProvider^ provider, WebAccount^ account)
 {
-    ApplicationData::Current->LocalSettings->Values->Insert((String^)STORED_ACCOUNT_ID_KEY, account->Id);
     m_account = account;
+    ApplicationData::Current->LocalSettings->Values->Insert((String^) STORED_PROVIDER_ID_KEY, m_account->WebAccountProvider->Id);
+    ApplicationData::Current->LocalSettings->Values->Insert((String^) STORED_AUTHORITY_ID_KEY, m_account->WebAccountProvider->Authority);
+    ApplicationData::Current->LocalSettings->Values->Insert((String^) STORED_ACCOUNT_ID_KEY, m_account->Id);
 
     //Update the UI
     button_SignIn->IsEnabled = false;
     button_GetTokenSilently->IsEnabled = true;
-    button_ManageAccount->IsEnabled = true;
+    button_ManageAccounts->IsEnabled = true;
     textblock_SignedInStatus->Text = "Signed in with:";
     textblock_SignedInStatus->Foreground = ref new SolidColorBrush(Windows::UI::Colors::Green);
     listview_SignedInAccounts->Items->Append(account->Id);
 }
 
-// Signs out the account using the SignOutAsync Token Broker API
-// and removes our saved AccountId as it won't be valid when SignOutAsync finishes.
-void SDKTemplate::Scenario6_CustomProvider::LogoffAndRemoveAccount()
+// When we sign out, then remove all our saved keys as well.
+void SDKTemplate::Scenario4_ManyProviders::LogoffAndRemoveAccount()
 {
     if (m_account != nullptr)
     {
@@ -381,17 +385,21 @@ void SDKTemplate::Scenario6_CustomProvider::LogoffAndRemoveAccount()
         ApplicationData::Current->LocalSettings->Values->Remove((String^) STORED_ACCOUNT_ID_KEY);
     }
 
+    if (ApplicationData::Current->LocalSettings->Values->HasKey((String^) STORED_PROVIDER_ID_KEY))
+    {
+        ApplicationData::Current->LocalSettings->Values->Remove((String^) STORED_PROVIDER_ID_KEY);
+    }
+
+    if (ApplicationData::Current->LocalSettings->Values->HasKey((String^) STORED_AUTHORITY_ID_KEY))
+    {
+        ApplicationData::Current->LocalSettings->Values->Remove((String^) STORED_AUTHORITY_ID_KEY);
+    }
+
     //Update UI
     button_SignIn->IsEnabled = true;
     button_GetTokenSilently->IsEnabled = false;
-    button_ManageAccount->IsEnabled = false;
+    button_ManageAccounts->IsEnabled = false;
     textblock_SignedInStatus->Text = "Not signed in.";
     textblock_SignedInStatus->Foreground = ref new SolidColorBrush(Windows::UI::Colors::Red);
     listview_SignedInAccounts->Items->Clear();
-}
-
-void SDKTemplate::Scenario6_CustomProvider::RemoveCustomProviders()
-{
-    m_providers->Clear();
-    GetProvidersAndAccounts();
 }
