@@ -6,14 +6,14 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="Microsoft.SDKSamples.CameraProfile.JS"
+    Name="Microsoft.SDKSamples.DatagramSocket.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
 
-  <mp:PhoneIdentity PhoneProductId="2a15042f-e258-4b7e-9260-62ceea6b5305" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="07ff6fde-e9b4-46cd-9b3b-d5493b236225" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>CameraProfile</DisplayName>
+    <DisplayName>DatagramSocket JS Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>images\storelogo-sdk.png</Logo>
   </Properties>
@@ -28,11 +28,11 @@
 
   <Applications>
     <Application
-      Id="CameraProfilee.App"
+      Id="App"
       StartPage="default.html">
       <uap:VisualElements
-        DisplayName="CameraProfile"
-        Description="CameraProfile"
+        DisplayName="DatagramSocket JS Sample"
+        Description="DatagramSocket JS Sample"
         BackgroundColor="#00b2f0"
         Square150x150Logo="images\storelogo-sdk.png"
         Square44x44Logo="images\smalltile-sdk.png">
@@ -47,8 +47,8 @@
   </Applications>
 
   <Capabilities>
-    <DeviceCapability Name="webcam" />
-    <DeviceCapability Name="microphone" />
+    <Capability Name="internetClientServer" />
+    <Capability Name="privateNetworkClientServer" />
   </Capabilities>
 
 </Package>

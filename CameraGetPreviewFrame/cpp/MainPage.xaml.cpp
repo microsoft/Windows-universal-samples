@@ -490,10 +490,10 @@ void MainPage::Application_Suspending(Object^, Windows::ApplicationModel::Suspen
     // Handle global application events only if this page is active
     if (Frame->CurrentSourcePageType.Name == Interop::TypeName(MainPage::typeid).Name)
     {
+        auto deferral = e->SuspendingOperation->GetDeferral();
         CleanupCameraAsync()
-            .then([this, e]()
+            .then([this, deferral]()
         {
-            auto deferral = e->SuspendingOperation->GetDeferral();
             _displayInformation->OrientationChanged -= _displayInformationEventToken;
             deferral->Complete();   
         });
