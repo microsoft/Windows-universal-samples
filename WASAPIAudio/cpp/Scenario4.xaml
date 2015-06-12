@@ -10,7 +10,7 @@
 //*********************************************************
 -->
 
-<common:LayoutAwarePage
+<Page
     x:Class="SDKSample.WASAPIAudio.Scenario4"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -20,7 +20,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot" Background="White">
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -42,7 +42,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Text="Additional Options:" Style="{StaticResource BasicTextStyle}" Margin="2,2,0,0"/>
-                        <TextBlock Grid.Row="1" Text="Minimum latency:" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource CaptionTextStyle}" Margin="5,10,0,0"/>
+                        <TextBlock Grid.Row="1" Text="Minimum latency:" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource BasicTextStyle}" Margin="5,10,0,0"/>
                         <ToggleSwitch x:Name="toggleMinimumLatency" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" OffContent="" OnContent="" Margin="120,0,0,0"/>
                     </Grid>
                 </Border>
@@ -79,4 +79,4 @@
         </VisualStateManager.VisualStateGroups>
 
     </Grid>
-</common:LayoutAwarePage>
+</Page>

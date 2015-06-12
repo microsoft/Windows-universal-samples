@@ -59,8 +59,6 @@ namespace SDKTemplate
 
             property Windows::Devices::WiFi::WiFiAvailableNetwork^ AvailableNetwork;
 
-            property Platform::String^ ConnectivityLevel;
-
             property Windows::UI::Xaml::Media::Imaging::BitmapImage^ WiFiImage;
 
             virtual event Windows::UI::Xaml::Data::PropertyChangedEventHandler^ PropertyChanged;
@@ -70,9 +68,7 @@ namespace SDKTemplate
             void OnPropertyChanged(Platform::String^ name);
 
         internal:
-            void UpdateConnectivityLevel();
             static Platform::String^ GetConnectionStatusAsString(Windows::Devices::WiFi::WiFiConnectionStatus connectionStatus);
-            static Platform::String^ GetConnectivityLevelAsString(Windows::Networking::Connectivity::NetworkConnectivityLevel conectivityLevel);
 
         private:
             void UpdateWiFiImage();

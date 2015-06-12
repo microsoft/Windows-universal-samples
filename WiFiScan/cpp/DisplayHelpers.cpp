@@ -37,7 +37,6 @@ namespace SDKTemplate {
             AvailableNetwork = availableNetwork;
             this->adapter = adapter;
             UpdateWiFiImage();
-            UpdateConnectivityLevel();
         }
 
         void WiFiNetworkDisplay::UpdateWiFiImage()
@@ -57,38 +56,6 @@ namespace SDKTemplate {
             WiFiImage = ref new BitmapImage(ref new Uri(imageFileName));
 
             OnPropertyChanged("WiFiImage");
-        }
-
-        void WiFiNetworkDisplay::UpdateConnectivityLevel()
-        {
-            auto connectionProfileOperation = adapter->NetworkAdapter->GetConnectedProfileAsync();
-            auto connectionProfileTask = create_task(connectionProfileOperation);
-
-            connectionProfileTask.then([this](ConnectionProfile^ connectedProfile)
-            {
-                Platform::String^ connectedSsid = nullptr;
-
-                if (connectedProfile != nullptr &&
-                    connectedProfile->IsWlanConnectionProfile &&
-                    connectedProfile->WlanConnectionProfileDetails != nullptr)
-                {
-                    connectedSsid = connectedProfile->WlanConnectionProfileDetails->GetConnectedSsid();
-                }
-
-                if (connectedSsid != nullptr &&
-                    AvailableNetwork->Ssid != nullptr &&
-                    connectedSsid->Equals(AvailableNetwork->Ssid))
-                {
-                    ConnectivityLevel = WiFiNetworkDisplay::GetConnectivityLevelAsString(connectedProfile->GetNetworkConnectivityLevel());
-                }
-                else
-                {
-                    ConnectivityLevel = L"Not Connected";
-                }
-
-                OnPropertyChanged("ConnectivityLevel");
-            });
-
         }
 
         Platform::String^ WiFiNetworkDisplay::GetNetworkAuthenticationTypeAsString(NetworkAuthenticationType authenticationType)
@@ -165,23 +132,6 @@ namespace SDKTemplate {
                 return L"UnsupportedAuthenticationProtocol";
             default:
                 return L"Error getting Connection Status";
-            }
-        }
-
-        Platform::String^ WiFiNetworkDisplay::GetConnectivityLevelAsString(NetworkConnectivityLevel conectivityLevel)
-        {
-            switch (conectivityLevel)
-            {
-            case NetworkConnectivityLevel::ConstrainedInternetAccess:
-                return L"ConstrainedInternetAccess";
-            case NetworkConnectivityLevel::InternetAccess:
-                return L"InternetAccess";
-            case NetworkConnectivityLevel::LocalAccess:
-                return  L"LocalAccess";
-            case NetworkConnectivityLevel::None:
-                return  L"Not Connected";
-            default:
-                return L"Not Connected";
             }
         }
 
