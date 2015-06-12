@@ -6,14 +6,14 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="Microsoft.SDKSamples.CameraProfilee.JS"
+    Name="Microsoft.SDKSamples.CameraProfile.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
 
   <mp:PhoneIdentity PhoneProductId="2a15042f-e258-4b7e-9260-62ceea6b5305" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>CameraProfilee JS Sample</DisplayName>
+    <DisplayName>CameraProfile</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>images\storelogo-sdk.png</Logo>
   </Properties>
@@ -31,8 +31,8 @@
       Id="CameraProfilee.App"
       StartPage="default.html">
       <uap:VisualElements
-        DisplayName="CameraProfilee JS Sample"
-        Description="CameraProfilee JS Sample"
+        DisplayName="CameraProfile"
+        Description="CameraProfile"
         BackgroundColor="#00b2f0"
         Square150x150Logo="images\storelogo-sdk.png"
         Square44x44Logo="images\smalltile-sdk.png">

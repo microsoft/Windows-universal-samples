@@ -40,7 +40,7 @@
               
               BackgroundColor="#00b2f0">
                 <uap:SplashScreen Image="Assets\Splash-sdk.png" />
-                <uap:DefaultTile DefaultSize="square150x150Logo" >
+                <uap:DefaultTile>
                     <uap:ShowNameOnTiles>
                         <uap:ShowOn Tile="square150x150Logo" />
                     </uap:ShowNameOnTiles>
