@@ -12,7 +12,7 @@
 #include "pch.h"
 #include "MainPage.xaml.h"
 
-using namespace WiFiDirectApi;
+using namespace SDKTemplate;
 using namespace Platform;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;

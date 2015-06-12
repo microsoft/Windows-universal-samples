@@ -11,7 +11,7 @@
 #include "pch.h"
 #include "Scenario1_Advertiser.xaml.h"
 
-using namespace WiFiDirectApi;
+using namespace SDKTemplate;
 using namespace Platform;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
@@ -39,7 +39,7 @@ Scenario1_Advertiser::Scenario1_Advertiser() : rootPage(MainPage::Current)
     lvConnectedDevices->SelectionMode = ListViewSelectionMode::Single;
 }
 
-void WiFiDirectApi::Scenario1_Advertiser::btnStartAdvertisement_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void SDKTemplate::Scenario1_Advertiser::btnStartAdvertisement_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     try
     {
@@ -87,7 +87,7 @@ void WiFiDirectApi::Scenario1_Advertiser::btnStartAdvertisement_Click(Platform::
     }
 }
 
-void WiFiDirectApi::Scenario1_Advertiser::btnAddIe_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void SDKTemplate::Scenario1_Advertiser::btnAddIe_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     if (!_publisher)
     {
@@ -124,7 +124,7 @@ void WiFiDirectApi::Scenario1_Advertiser::btnAddIe_Click(Platform::Object^ sende
     rootPage->NotifyUser("IE added successfully", NotifyType::StatusMessage);
 }
 
-void WiFiDirectApi::Scenario1_Advertiser::btnStopAdvertisement_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void SDKTemplate::Scenario1_Advertiser::btnStopAdvertisement_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     try
     {
@@ -146,7 +146,7 @@ void WiFiDirectApi::Scenario1_Advertiser::btnStopAdvertisement_Click(Platform::O
     }
 }
 
-void WiFiDirectApi::Scenario1_Advertiser::OnConnectionRequested(WiFiDirectConnectionListener^ sender, WiFiDirectConnectionRequestedEventArgs^ connectionEventArgs)
+void SDKTemplate::Scenario1_Advertiser::OnConnectionRequested(WiFiDirectConnectionListener^ sender, WiFiDirectConnectionRequestedEventArgs^ connectionEventArgs)
 {
     try
     {
@@ -229,13 +229,13 @@ void WiFiDirectApi::Scenario1_Advertiser::OnConnectionRequested(WiFiDirectConnec
     }
 }
 
-void WiFiDirectApi::Scenario1_Advertiser::OnStatusChanged(WiFiDirectAdvertisementPublisher^ sender, WiFiDirectAdvertisementPublisherStatusChangedEventArgs^ statusEventArgs)
+void SDKTemplate::Scenario1_Advertiser::OnStatusChanged(WiFiDirectAdvertisementPublisher^ sender, WiFiDirectAdvertisementPublisherStatusChangedEventArgs^ statusEventArgs)
 {
     rootPage->NotifyUserFromBackground("Advertisement: Status: " + statusEventArgs->Status.ToString() + " Error: " + statusEventArgs->Error.ToString(), NotifyType::StatusMessage);
     return;
 }
 
-void WiFiDirectApi::Scenario1_Advertiser::OnSocketConnectionReceived(StreamSocketListener^ sender, StreamSocketListenerConnectionReceivedEventArgs^ connectionReceivedEventArgs)
+void SDKTemplate::Scenario1_Advertiser::OnSocketConnectionReceived(StreamSocketListener^ sender, StreamSocketListenerConnectionReceivedEventArgs^ connectionReceivedEventArgs)
 {
     rootPage->NotifyUserFromBackground("Connecting to remote side on L4 layer...", NotifyType::StatusMessage);
     StreamSocket^ serverSocket = connectionReceivedEventArgs->Socket;
@@ -277,12 +277,12 @@ void WiFiDirectApi::Scenario1_Advertiser::OnSocketConnectionReceived(StreamSocke
 }
 
 
-void WiFiDirectApi::Scenario1_Advertiser::OnConnectionStatusChanged(WiFiDirectDevice^ sender, Object^ arg)
+void SDKTemplate::Scenario1_Advertiser::OnConnectionStatusChanged(WiFiDirectDevice^ sender, Object^ arg)
 {
     rootPage->NotifyUserFromBackground("Connection status changed: " + sender->ConnectionStatus.ToString(), NotifyType::StatusMessage);
 }
 
-void WiFiDirectApi::Scenario1_Advertiser::btnSendMessage_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void SDKTemplate::Scenario1_Advertiser::btnSendMessage_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     if (lvConnectedDevices->SelectedItems->Size == 0)
     {
@@ -312,7 +312,7 @@ void WiFiDirectApi::Scenario1_Advertiser::btnSendMessage_Click(Platform::Object^
 
 }
 
-void WiFiDirectApi::Scenario1_Advertiser::btnClose_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void SDKTemplate::Scenario1_Advertiser::btnClose_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     if (lvConnectedDevices->SelectedItems->Size == 0)
     {

@@ -13,7 +13,7 @@
 
 #include "App.g.h"
 
-namespace WiFiDirectApi
+namespace SDKTemplate
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

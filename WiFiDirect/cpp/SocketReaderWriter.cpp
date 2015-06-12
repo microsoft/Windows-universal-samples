@@ -15,15 +15,15 @@
 using namespace Platform;
 using namespace Windows::Networking::Sockets;
 using namespace Windows::Storage::Streams;
-using namespace WiFiDirectApi;
+using namespace SDKTemplate;
 using namespace Windows::Devices::WiFiDirect;
 using namespace Windows::Devices::Enumeration;
 
-Platform::Array<byte>^ WiFiDirectApi::CustomOui = ref new Platform::Array<byte>{ 0xAA, 0xBB, 0xCC };
-byte WiFiDirectApi::CustomOuiType = 0xDD;
-Platform::Array<byte>^ WiFiDirectApi::WfaOui = ref new Platform::Array<byte>{ 0x50, 0x6F, 0x9A };
-Platform::Array<byte>^ WiFiDirectApi::MsftOui = ref new Platform::Array<byte>{ 0x00, 0x50, 0xF2 };
-Platform::String^ WiFiDirectApi::strServerPort = "50001";
+Platform::Array<byte>^ SDKTemplate::CustomOui = ref new Platform::Array<byte>{ 0xAA, 0xBB, 0xCC };
+byte SDKTemplate::CustomOuiType = 0xDD;
+Platform::Array<byte>^ SDKTemplate::WfaOui = ref new Platform::Array<byte>{ 0x50, 0x6F, 0x9A };
+Platform::Array<byte>^ SDKTemplate::MsftOui = ref new Platform::Array<byte>{ 0x00, 0x50, 0xF2 };
+Platform::String^ SDKTemplate::strServerPort = "50001";
 
 void SocketReaderWriter::Close()
 {

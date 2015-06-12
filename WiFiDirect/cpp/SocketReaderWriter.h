@@ -12,7 +12,7 @@
 #pragma once
 #include "MainPage.xaml.h"
 
-namespace WiFiDirectApi
+namespace SDKTemplate
 {
     extern Platform::Array<byte>^ CustomOui;
     extern byte CustomOuiType;
@@ -23,7 +23,7 @@ namespace WiFiDirectApi
     public ref class SocketReaderWriter sealed
     {
     public:
-        SocketReaderWriter(Windows::Networking::Sockets::StreamSocket^ socket, WiFiDirectApi::MainPage^ mainPage) :
+        SocketReaderWriter(Windows::Networking::Sockets::StreamSocket^ socket, SDKTemplate::MainPage^ mainPage) :
             _streamSocket(socket),
             _rootPage(mainPage)
         {
@@ -47,7 +47,7 @@ namespace WiFiDirectApi
         Windows::Storage::Streams::DataReader^ _socketReader;
         Windows::Storage::Streams::DataWriter^ _socketWriter;
         Windows::Networking::Sockets::StreamSocket^ _streamSocket;
-        WiFiDirectApi::MainPage^ _rootPage;
+        SDKTemplate::MainPage^ _rootPage;
         Platform::String^ _currentMessage;
     };
 

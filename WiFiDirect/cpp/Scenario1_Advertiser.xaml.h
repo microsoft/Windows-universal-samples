@@ -15,7 +15,7 @@
 #include "MainPage.xaml.h"
 #include "SocketReaderWriter.h"
 
-namespace WiFiDirectApi
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -42,7 +42,7 @@ namespace WiFiDirectApi
         void OnConnectionRequested(Windows::Devices::WiFiDirect::WiFiDirectConnectionListener^ sender, Windows::Devices::WiFiDirect::WiFiDirectConnectionRequestedEventArgs^ connectionEventArgs);
         void OnStatusChanged(Windows::Devices::WiFiDirect::WiFiDirectAdvertisementPublisher^ sender, Windows::Devices::WiFiDirect::WiFiDirectAdvertisementPublisherStatusChangedEventArgs^ statusEventArgs);
         void OnSocketConnectionReceived(Windows::Networking::Sockets::StreamSocketListener^ sender, Windows::Networking::Sockets::StreamSocketListenerConnectionReceivedEventArgs^ connectionReceivedEventArgs);
-        void WiFiDirectApi::Scenario1_Advertiser::OnConnectionStatusChanged(Windows::Devices::WiFiDirect::WiFiDirectDevice^ sender, Platform::Object^ arg);
+        void SDKTemplate::Scenario1_Advertiser::OnConnectionStatusChanged(Windows::Devices::WiFiDirect::WiFiDirectDevice^ sender, Platform::Object^ arg);
 
         MainPage^ rootPage;
 

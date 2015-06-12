@@ -14,7 +14,7 @@
 #include "MainPage.g.h"
 #include "SampleConfiguration.h"
 
-namespace WiFiDirectApi
+namespace SDKTemplate
 {
     public enum class NotifyType
     {

@@ -12,7 +12,7 @@
 #pragma once 
 #include "pch.h"
 
-namespace WiFiDirectApi
+namespace SDKTemplate
 {
     value struct Scenario;
 
@@ -35,7 +35,7 @@ namespace WiFiDirectApi
             }
         }
 
-        void NotifyUserFromBackground(Platform::String^ strMessage, WiFiDirectApi::NotifyType type);
+        void NotifyUserFromBackground(Platform::String^ strMessage, SDKTemplate::NotifyType type);
 
     private:
         static Platform::Array<Scenario>^ scenariosInner;

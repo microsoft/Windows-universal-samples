@@ -12,7 +12,7 @@
 #include "pch.h"
 #include "Scenario2_Connector.xaml.h"
 
-using namespace WiFiDirectApi;
+using namespace SDKTemplate;
 using namespace Platform;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
@@ -48,7 +48,7 @@ Scenario2_Connector::Scenario2_Connector() : rootPage(MainPage::Current)
     lvConnectedDevices->SelectionMode = ListViewSelectionMode::Single;
 }
 
-void WiFiDirectApi::Scenario2_Connector::btnWatcher_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void SDKTemplate::Scenario2_Connector::btnWatcher_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     if (_fWatcherStarted == false)
     {
@@ -99,7 +99,7 @@ void WiFiDirectApi::Scenario2_Connector::btnWatcher_Click(Platform::Object^ send
     }
 }
 
-void WiFiDirectApi::Scenario2_Connector::OnDeviceAdded(DeviceWatcher^ deviceWatcher, DeviceInformation^ deviceInfo)
+void SDKTemplate::Scenario2_Connector::OnDeviceAdded(DeviceWatcher^ deviceWatcher, DeviceInformation^ deviceInfo)
 {
     Dispatcher->RunAsync(CoreDispatcherPriority::Normal,
         ref new DispatchedHandler([this, deviceInfo]()
@@ -110,7 +110,7 @@ void WiFiDirectApi::Scenario2_Connector::OnDeviceAdded(DeviceWatcher^ deviceWatc
     }));
 }
 
-void WiFiDirectApi::Scenario2_Connector::OnDeviceRemoved(DeviceWatcher^ deviceWatcher, DeviceInformationUpdate^ deviceInfoUpdate)
+void SDKTemplate::Scenario2_Connector::OnDeviceRemoved(DeviceWatcher^ deviceWatcher, DeviceInformationUpdate^ deviceInfoUpdate)
 {
     Dispatcher->RunAsync(CoreDispatcherPriority::Normal,
         ref new DispatchedHandler([this, deviceInfoUpdate]()
@@ -130,7 +130,7 @@ void WiFiDirectApi::Scenario2_Connector::OnDeviceRemoved(DeviceWatcher^ deviceWa
     }));
 }
 
-void WiFiDirectApi::Scenario2_Connector::OnDeviceUpdated(DeviceWatcher^ deviceWatcher, DeviceInformationUpdate^ deviceInfoUpdate)
+void SDKTemplate::Scenario2_Connector::OnDeviceUpdated(DeviceWatcher^ deviceWatcher, DeviceInformationUpdate^ deviceInfoUpdate)
 {
     Dispatcher->RunAsync(CoreDispatcherPriority::Normal,
         ref new DispatchedHandler([this, deviceInfoUpdate]()
@@ -151,17 +151,17 @@ void WiFiDirectApi::Scenario2_Connector::OnDeviceUpdated(DeviceWatcher^ deviceWa
     }));
 }
 
-void WiFiDirectApi::Scenario2_Connector::OnEnumerationCompleted(DeviceWatcher^ deviceWatcher, Object^ o)
+void SDKTemplate::Scenario2_Connector::OnEnumerationCompleted(DeviceWatcher^ deviceWatcher, Object^ o)
 {
     rootPage->NotifyUserFromBackground("DeviceWatcher enumeration completed", NotifyType::StatusMessage);
 }
 
-void WiFiDirectApi::Scenario2_Connector::OnStopped(DeviceWatcher^ deviceWatcher, Object^ o)
+void SDKTemplate::Scenario2_Connector::OnStopped(DeviceWatcher^ deviceWatcher, Object^ o)
 {
     rootPage->NotifyUserFromBackground("DeviceWatcher stopped", NotifyType::StatusMessage);
 }
 
-void WiFiDirectApi::Scenario2_Connector::btnIe_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void SDKTemplate::Scenario2_Connector::btnIe_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     if (lvDiscoveredDevices->SelectedItems->Size == 0)
     {
@@ -227,7 +227,7 @@ void WiFiDirectApi::Scenario2_Connector::btnIe_Click(Platform::Object^ sender, W
 }
 
 
-void WiFiDirectApi::Scenario2_Connector::btnFromId_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void SDKTemplate::Scenario2_Connector::btnFromId_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     if (lvDiscoveredDevices->SelectedItems->Size == 0)
     {
@@ -297,12 +297,12 @@ void WiFiDirectApi::Scenario2_Connector::btnFromId_Click(Platform::Object^ sende
     }
 }
 
-void WiFiDirectApi::Scenario2_Connector::OnConnectionStatusChanged(WiFiDirectDevice^ sender, Object^ arg)
+void SDKTemplate::Scenario2_Connector::OnConnectionStatusChanged(WiFiDirectDevice^ sender, Object^ arg)
 {
     rootPage->NotifyUserFromBackground("Connection status changed: " + sender->ConnectionStatus.ToString(), NotifyType::StatusMessage);
 }
 
-void WiFiDirectApi::Scenario2_Connector::btnSendMessage_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void SDKTemplate::Scenario2_Connector::btnSendMessage_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     if (lvConnectedDevices->SelectedItems->Size == 0)
     {
@@ -331,7 +331,7 @@ void WiFiDirectApi::Scenario2_Connector::btnSendMessage_Click(Platform::Object^ 
     }
 }
 
-void WiFiDirectApi::Scenario2_Connector::btnClose_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void SDKTemplate::Scenario2_Connector::btnClose_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     if (lvConnectedDevices->SelectedItems->Size == 0)
     {
