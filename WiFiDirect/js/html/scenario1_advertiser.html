@@ -1,0 +1,72 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1.css" />
+    <script src="/js/scenario1_advertiser.js"></script>
+    <script src="/js/socketreaderwriter.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This scenario illustrates how to make the local device discoverable, and how to listen for and accept an incoming connection request.</p>
+            </div>
+        </div>
+        <div>
+            <label>Listen State: </label>
+            <select class="action" id="cmbListenState" style="WIDTH: 250px">
+                <option value="Normal" selected="selected">Normal</option>
+                <option value="Intesive">Intensive</option>
+                <option value="None">None</option>
+            </select>
+            <button class="action" id="btnStartAdvertisement">Start Adv</button>
+            <button class="action" id="btnStopAdvertisement">Stop Adv</button>
+        </div>
+
+        <div>
+            <input id="chkListener" type="checkbox" checked>Enable Listener</>
+            <input id="chkPreferGroupOwnerMode" type="checkbox">Group Owner</>
+        </div>
+
+        <div>
+            <label>GO Intent: </label>
+            <input id="txtGOIntent" type="text" maxlength="2" style="WIDTH: 80px" />
+        </div>
+        <div>
+            <label>IE: </label>
+            <input id="txtInformationElement" type="text" />
+            <button class="action" id="btnAddIe">Add</button>
+        </div>
+        <div>
+            <label>Connected Devices: </label>
+        </div>
+
+        <div>
+            <div id="conenctedListTemplate" data-win-control="WinJS.Binding.Template">
+                <div class="connectedTemplate">
+                    <h3 class="displayName" data-win-bind="innerText: displayName"></h3>
+                </div>
+            </div>
+            <div id="lvConnectedDevices"
+                 data-win-control="WinJS.UI.ListView"
+                 data-win-options="{ itemTemplate: conenctedListTemplate, selectionMode: 'single', tapBehavior: 'directSelect', layout : {type: WinJS.UI.ListLayout} }">
+            </div>
+        </div>
+
+        <div>
+            <button class="action" id="btnSendMessage">Send</button>
+            <input id="txtSendMessage" type="text" />
+        </div>
+
+        <div>
+            <button class="action" id="btnCloseDevice">Close Device</button>
+        </div>
+    </div>
+</body>
+</html>
