@@ -16,16 +16,13 @@ using Windows.UI.Xaml.Navigation;
 using SDKTemplate;
 using Windows.Security.EnterpriseData;
 
-
-
 namespace EdpSample
 {
-   
-    public sealed partial class Scenario9_ClipboardSource : Page
+    public sealed partial class Scenario8_ClipboardSource : Page
     {
         private MainPage rootPage;
      
-        public Scenario9_ClipboardSource()
+        public Scenario8_ClipboardSource()
         {
             this.InitializeComponent();
         }
@@ -33,22 +30,16 @@ namespace EdpSample
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             rootPage = MainPage.Current;
+            var protectionPolicyManager = ProtectionPolicyManager.GetForCurrentView();
+            protectionPolicyManager.Identity = ""; // personal context
             InputTxtBox.Text = "Copy and paste this text to a non-enterprise app such as notepad";
         }
 
         private void Set_ClipboardSource(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                ProtectionPolicyManager ppManager = ProtectionPolicyManager.GetForCurrentView();
-                ppManager.Identity = Scenario1.m_EnterpriseIdentity;
-                rootPage.NotifyUser("Set ProtectionPolicyManager.Identity to: " + Scenario1.m_EnterpriseIdentity, NotifyType.StatusMessage);
-            }
-            catch (Exception ex)
-            {
-                rootPage.NotifyUser(ex.ToString(), NotifyType.ErrorMessage);
-            }
+            var protectionPolicyManager = ProtectionPolicyManager.GetForCurrentView();
+            protectionPolicyManager.Identity = Scenario1.m_enterpriseId;
+            rootPage.NotifyUser("Set ProtectionPolicyManager.Identity to: " + Scenario1.m_enterpriseId, NotifyType.StatusMessage);
         }
-
     }
 }

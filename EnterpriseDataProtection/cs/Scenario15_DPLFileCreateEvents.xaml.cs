@@ -28,16 +28,15 @@ namespace EdpSample
     /// <summary>
     /// Registering a background task and notification channel for raw notifications
     /// </summary>
-    public sealed partial class Scenario16_DPLCreateFileEvents : Page
+    public sealed partial class Scenario15_DPLCreateFileEvents : Page
     {
         private MainPage rootPage = null;
         private const string SAMPLE_TASK_NAME = "DPLTask";
         private const string SAMPLE_TASK_ENTRY_POINT = "Tasks.EdpBackgroundTask";
-    
 
-        public Scenario16_DPLCreateFileEvents()
+        public Scenario15_DPLCreateFileEvents()
         {
-             this.InitializeComponent();
+            this.InitializeComponent();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -53,43 +52,33 @@ namespace EdpSample
         {
             bool found = false;
 
-
-            try
+            foreach (var iter in BackgroundTaskRegistration.AllTasks)
             {
-                foreach (var iter in BackgroundTaskRegistration.AllTasks)
+                IBackgroundTaskRegistration task = iter.Value;
+                if (task.Name == SAMPLE_TASK_NAME)
                 {
-                    IBackgroundTaskRegistration task = iter.Value;
-                    if (task.Name == SAMPLE_TASK_NAME)
-                    {
-                        found = true;
-                        AttachProgressAndCompletedHandlers(task);
-                    }
+                    found = true;
+                    AttachProgressAndCompletedHandlers(task);
                 }
-
-                if (!found)
-                {
-                    BackgroundTaskRegistration task = RegisterBackgroundTask();
-                    if (task != null)
-                    {
-                        AttachProgressAndCompletedHandlers(task);
-                    }
-                }
-
-
-                // Remove previous completion status from local settings.
-                // Pass Enterprise ID to background task
-
-                var settings = ApplicationData.Current.LocalSettings;
-                settings.Values.Remove(SAMPLE_TASK_NAME);
-                settings.Values.Add(SAMPLE_TASK_NAME, Scenario1.m_EnterpriseIdentity);
-
-                rootPage.NotifyUser("Task registered", NotifyType.StatusMessage);
             }
-            catch (Exception ex)
+
+            if (!found)
             {
-                rootPage.NotifyUser("Registration error: " + ex.Message, NotifyType.ErrorMessage);
+                BackgroundTaskRegistration task = RegisterBackgroundTask();
+                if (task != null)
+                {
+                    AttachProgressAndCompletedHandlers(task);
+                }
             }
-       
+
+            // Remove previous completion status from local settings.
+            // Pass Enterprise ID to background task
+
+            var settings = ApplicationData.Current.LocalSettings;
+            settings.Values.Remove(SAMPLE_TASK_NAME);
+            settings.Values.Add(SAMPLE_TASK_NAME, Scenario1.m_enterpriseId);
+
+            rootPage.NotifyUser("Task registered", NotifyType.StatusMessage);
         }
 
         private void UnRegister_Click(object sender, RoutedEventArgs e)
@@ -104,34 +93,18 @@ namespace EdpSample
             }
         }
 
-
         private BackgroundTaskRegistration RegisterBackgroundTask()
         {
-            BackgroundTaskRegistration task=null;
-
-            try
-            {
-
-                task =  RegisterBackgroundTask(SAMPLE_TASK_ENTRY_POINT,
-                                       SAMPLE_TASK_NAME,
-                                       new SystemTrigger(SystemTriggerType.UserAway, false),
-                                       null);
-            }
-            catch (Exception ex)
-            {
-                rootPage.NotifyUser("Registration error: " + ex.Message, NotifyType.ErrorMessage);
-            }
-
-            return task;
+            return RegisterBackgroundTask(SAMPLE_TASK_ENTRY_POINT, SAMPLE_TASK_NAME,
+                new SystemTrigger(SystemTriggerType.UserAway, false), null);
         }
 
 
-        public static BackgroundTaskRegistration RegisterBackgroundTask(String taskEntryPoint, 
-                                                                        String name, 
-                                                                        IBackgroundTrigger trigger, 
+        public static BackgroundTaskRegistration RegisterBackgroundTask(String taskEntryPoint,
+                                                                        String name,
+                                                                        IBackgroundTrigger trigger,
                                                                         IBackgroundCondition condition)
         {
-       
             var builder = new BackgroundTaskBuilder();
 
             builder.Name = name;
@@ -142,16 +115,12 @@ namespace EdpSample
             {
                 builder.AddCondition(condition);
 
-                //
                 // If the condition changes while the background task is executing then it will
                 // be canceled.
-                //
                 builder.CancelOnConditionLoss = true;
             }
 
-            BackgroundTaskRegistration task = builder.Register();
-
-            return task;
+            return builder.Register();
         }
 
         private bool UnregisterBackgroundTask()
@@ -170,7 +139,7 @@ namespace EdpSample
             return result;
         }
 
-         private void AttachProgressAndCompletedHandlers(IBackgroundTaskRegistration task)
+        private void AttachProgressAndCompletedHandlers(IBackgroundTaskRegistration task)
         {
             task.Progress += new BackgroundTaskProgressEventHandler(OnProgress);
             task.Completed += new BackgroundTaskCompletedEventHandler(OnCompleted);
@@ -178,7 +147,6 @@ namespace EdpSample
 
         private void OnProgress(IBackgroundTaskRegistration task, BackgroundTaskProgressEventArgs args)
         {
-            
         }
 
         private void OnCompleted(IBackgroundTaskRegistration task, BackgroundTaskCompletedEventArgs args)
@@ -188,12 +156,11 @@ namespace EdpSample
 
         private async void UpdateStatus()
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-           () =>
-           {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
                var settings = ApplicationData.Current.LocalSettings;
                rootPage.NotifyUser("CreateProtectedAndOpenAsync status: " + settings.Values[SAMPLE_TASK_NAME], NotifyType.StatusMessage);
-           });
+            });
         }
     }
 }

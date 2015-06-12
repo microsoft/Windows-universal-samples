@@ -19,19 +19,16 @@ using Windows.Security.EnterpriseData;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 
-
-
 namespace EdpSample
 {
-    
-    public sealed partial class Scenario13_ShareData : Page
+   
+    public sealed partial class Scenario12_ShareData : Page
     {
         private MainPage rootPage;
         private DataTransferManager m_dTransferMgr;
         private string m_ShareContent = "Content to share from EdpSamples";
 
-
-        public Scenario13_ShareData()
+        public Scenario12_ShareData()
         {
             this.InitializeComponent();
         }
@@ -40,42 +37,25 @@ namespace EdpSample
         {
             rootPage = MainPage.Current;
 
-            try
-            {
-                // Register the current page as a share source. 
-                m_dTransferMgr = DataTransferManager.GetForCurrentView();
-                m_dTransferMgr.DataRequested += new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.OnDataRequested);
-                InputTxtBox.Text = m_ShareContent;
-            }
-            catch(Exception ex)
-            {
-                rootPage.NotifyUser(ex.ToString(), NotifyType.ErrorMessage);
-            }
+            // Register the current page as a share source. 
+            m_dTransferMgr = DataTransferManager.GetForCurrentView();
+            m_dTransferMgr.DataRequested += new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.OnDataRequested);
+            InputTxtBox.Text = m_ShareContent;
         }
 
         private void OnDataRequested(DataTransferManager sender, DataRequestedEventArgs e)
-
         {
-            try
-            {
-                DataRequest request = e.Request;
-                request.Data.Properties.Title = "EdpSample share";
-                request.Data.Properties.Description = "An example of how to share text from an enterprise app";
-                request.Data.Properties.EnterpriseId = Scenario1.m_EnterpriseIdentity;
-                request.Data.SetText(InputTxtBox.Text);
-                rootPage.NotifyUser("Set data to share", NotifyType.StatusMessage);
-            }
-            catch(Exception ex)
-            {
-                rootPage.NotifyUser(ex.ToString(), NotifyType.ErrorMessage);
-            }
+            DataRequest request = e.Request;
+            request.Data.Properties.Title = "EdpSample share";
+            request.Data.Properties.Description = "An example of how to share text from an enterprise app";
+            request.Data.Properties.EnterpriseId = Scenario1.m_enterpriseId;
+            request.Data.SetText(InputTxtBox.Text);
+            rootPage.NotifyUser("Set data to share", NotifyType.StatusMessage);
         }
 
         private void Share_Click(object sender, RoutedEventArgs e)
         {
             DataTransferManager.ShowShareUI();
         }
-
     }
-
 }

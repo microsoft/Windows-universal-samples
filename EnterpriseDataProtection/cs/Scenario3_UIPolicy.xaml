@@ -26,12 +26,15 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <StackPanel Margin="0,0,0,10">
-                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock Name="CopyPasteScenarioText" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                </TextBlock>
-            </StackPanel>
 
+            <ScrollViewer Grid.Row="0" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                    <TextBlock Name="CopyPasteScenarioText" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    </TextBlock>
+                </StackPanel>
+            </ScrollViewer>
+            
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <!-- Place scenario content here -->
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">

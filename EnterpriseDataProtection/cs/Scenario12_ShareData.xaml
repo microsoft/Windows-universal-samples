@@ -11,7 +11,7 @@
 //*********************************************************
 -->
 <Page
-    x:Class="EdpSample.Scenario6"
+    x:Class="EdpSample.Scenario12_ShareData"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:EdpSample"
@@ -26,18 +26,25 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <StackPanel Margin="0,0,0,10">
+
+            <ScrollViewer Grid.Row="0" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock Name="RevokeScenarioText" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                </TextBlock>
+                <TextBlock Name="ScenarioText" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    <LineBreak/> An application should set the enterprise context in the DataPackage prepared for sharing content.
+              </TextBlock>
             </StackPanel>
+            </ScrollViewer>
 
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <!-- Place scenario content here -->
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <Button Margin="10" Name="RevokeBtn" Content="RevokeContent" Click="Revoke_Click"/>
-                    <TextBlock Margin="10" Name="RevokeEventHdlr" TextWrapping="Wrap"/>
-                 </StackPanel>
+                    <TextBlock  TextWrapping="Wrap" Width="600"  HorizontalAlignment="Left" TextAlignment="Left">    
+                       <LineBreak/>Press share button to share the text content in the Textbox
+                    </TextBlock>
+                    <TextBox Margin="10" CanDrag="True" Height="50" Name="InputTxtBox"  Width="350" HorizontalAlignment="Left"/>
+                    <Button Content="Share Content" Click="Share_Click"/>
+                </StackPanel>
             </ScrollViewer>
 
             <!-- Status Block for providing messages to the user.  Use the

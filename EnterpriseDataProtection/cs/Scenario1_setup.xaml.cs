@@ -26,7 +26,7 @@ namespace EdpSample
     {
         private MainPage rootPage;
         private static string m_EnterpriseId = "microsoft.com";
-        public static string m_EnterpriseIdentity
+        public static string m_enterpriseId
         {
             get
             {
@@ -47,8 +47,7 @@ namespace EdpSample
         private void Setup_Click(object sender, RoutedEventArgs e)
         {
             m_EnterpriseId = EnterpriseIdentity.Text;
-            rootPage.NotifyUser("Enterprise Identity is set to: " + m_EnterpriseIdentity, NotifyType.StatusMessage);
+            rootPage.NotifyUser("Enterprise Identity is set to: " + m_enterpriseId, NotifyType.StatusMessage);
         }
-
     }
 }
