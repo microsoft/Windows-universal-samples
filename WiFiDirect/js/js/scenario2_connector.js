@@ -52,7 +52,7 @@
         var targetWfdProperties = ["System.Devices.WiFiDirect.InformationElements"];
         Windows.Devices.Enumeration.DeviceInformation.findAllAsync(deviceSelector, targetWfdProperties).done(
             function (deviceInfoCollection) {
-                if (deviceInfoCollection.size == 0) {
+                if (deviceInfoCollection.size === 0) {
                     WinJS.log && WinJS.log("No devices found", "sample", "error");
                     return;
                 }
@@ -68,7 +68,7 @@
     function btnIe_Click() {
         var discoveredDevicesList = document.getElementById("lvDiscoveredDevices").winControl;
 
-        if (discoveredDevicesList.selection.count() == 0) {
+        if (discoveredDevicesList.selection.count() === 0) {
             WinJS.log && WinJS.log("No device selected, please select one", "sample", "error");
             return;
         }
@@ -77,7 +77,7 @@
             var deviceInfo = items[0].data.deviceInfo;
             var iECollection = Windows.Devices.WiFiDirect.WiFiDirectInformationElement.createFromDeviceInformation(deviceInfo);
 
-            if (iECollection.size == 0) {
+            if (iECollection.size === 0) {
                 WinJS.log && WinJS.log("No Information Elements found", "sample", "error");
                 return;
             }
@@ -121,7 +121,7 @@
     function btnFromId_Click() {
         var discoveredDevicesList = document.getElementById("lvDiscoveredDevices").winControl;
 
-        if (discoveredDevicesList.selection.count() == 0) {
+        if (discoveredDevicesList.selection.count() === 0) {
             WinJS.log && WinJS.log("No device selected, please select one", "sample", "error");
             return;
         }
@@ -199,14 +199,12 @@
             return;
         }
 
-        try {
-            connectedDevicesList.selection.getItems().done(function (items) {
+        connectedDevicesList.selection.getItems().done(function (items) {
                 items[0].data.socketRW.WriteMessage(messsage.value);
-            });
-        }
-        catch (err) {
-            WinJS.log && WinJS.log("Send threw an exception: " + err.toString(), "sample", "error");
-        }
+            },
+        function (err) {
+            WinJS.log && WinJS.log("Send failed: " + +err.toString(), "sample", "error");
+        });
     }
 
     function btnCloseDevice_Click() {
@@ -223,6 +221,7 @@
             connectedDevicesListBinding.splice(items[0].index, 1);
         },
         function (err) {
+            WinJS.log && WinJS.log("Close failed: " + +err.toString(), "sample", "error");
         });
     }
 })();

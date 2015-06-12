@@ -27,19 +27,19 @@
     var connectedDevicesListBinding;
 
     function btnStartAdvertisement_Click() {
-        if (_publisher == null) {
+        if (_publisher === null) {
             _publisher = new Windows.Devices.WiFiDirect.WiFiDirectAdvertisementPublisher();
         }
 
-        if (chkListener.checked == true) {
-            if (_listener == null) {
+        if (chkListener.checked === true) {
+            if (_listener === null) {
                 _listener = new Windows.Devices.WiFiDirect.WiFiDirectConnectionListener();
             }
 
             _listener.onconnectionrequested = OnConnectionRequested;
         }
 
-        _publisher.advertisement.isAutonomousGroupOwnerEnabled = (chkPreferGroupOwnerMode.IsChecked == true);
+        _publisher.advertisement.isAutonomousGroupOwnerEnabled = (chkPreferGroupOwnerMode.IsChecked === true);
 
         switch (cmbListenState.value) {
             case "None":
@@ -69,7 +69,7 @@
                 WinJS.log && WinJS.log("Advertisement stopped successfully", "sample", "status");
             }
 
-            if (_listener != null) {
+            if (_listener !== null) {
                 _listener.onconnectionRequested = null;
             }
         }
@@ -79,7 +79,7 @@
     }
 
     function btnAddIe_Click() {
-        if (_publisher == null) {
+        if (_publisher === null) {
             _publisher = new Windows.Devices.WiFiDirect.WiFiDirectAdvertisementPublisher();
         }
 
