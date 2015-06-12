@@ -150,7 +150,15 @@ void SDKTemplate::Scenario6_CustomProvider::AddCustomProvider(String^ providerId
 {
     try
     {
-        auto getCustomProvider = concurrency::create_task(WebAuthenticationCoreManager::FindAccountProviderAsync(providerId, authority));
+		Concurrency::task<WebAccountProvider^> getCustomProvider;
+		if (authority->IsEmpty() == true)
+		{
+			getCustomProvider = concurrency::create_task(WebAuthenticationCoreManager::FindAccountProviderAsync(providerId));
+		}
+		else
+		{
+			getCustomProvider = concurrency::create_task(WebAuthenticationCoreManager::FindAccountProviderAsync(providerId, authority));
+		}
 
         getCustomProvider.then([this, providerId](WebAccountProvider^ provider)
         {
@@ -246,15 +254,15 @@ void SDKTemplate::Scenario6_CustomProvider::OtherLinkInvoked(IUICommand^ command
     rootPage->NotifyUser("Other link pressed by user", NotifyType::StatusMessage);
 }
 
-// Create a new TokenBroker WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
-// that request asynchronously to TokenBroker's RequestTokenAsync API
+// Create a new WebAccountManager WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
+// that request asynchronously to WebAccountManager's RequestTokenAsync API
 //
-// TokenBroker will then try three steps, in order:
+// WebAccountManager will then try three steps, in order:
 //        (1): Check it's local cache to see if it has a valid token
 //        (2): Try to silently request a new token from the MSA service
 //        (3): Show the MSA UI for user interaction required (user credentials) before it may return a token.
 //
-// Because of TokenBroker's ability to cache tokens, you should only need to call TokenBroker when making token
+// Because of WebAccountManager's ability to cache tokens, you should only need to call WebAccountManager when making token
 // based requests and not require the ability to store a cached token within your app.
 void SDKTemplate::Scenario6_CustomProvider::AuthenticateWithRequestToken(WebAccountProvider^ provider, String^ scope, String^ clientID)
 {
@@ -285,15 +293,15 @@ void SDKTemplate::Scenario6_CustomProvider::AuthenticateWithRequestToken(WebAcco
     });
 }
 
-// Create a new TokenBroker WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
-// that request and the account to get the token for asynchronously to TokenBroker's GetTokenSilentlyAsync API
+// Create a new WebAccountManager WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
+// that request and the account to get the token for asynchronously to WebAccountManager's GetTokenSilentlyAsync API
 //
-// TokenBroker's GetTokenSilentlyAsync will then try :
+// WebAccountManager's GetTokenSilentlyAsync will then try :
 //        (1): Check it's local cache to see if it has a valid token
 //        (2): Try to silently request a new token from the MSA service
 //        (3): Return a status of UserInteractionRequired if we need the user credentials
 //
-// Because of TokenBroker's ability to cache tokens, you should only need to call TokenBroker when making token
+// Because of WebAccountManager's ability to cache tokens, you should only need to call WebAccountManager when making token
 // based requests and not require the ability to store a cached token within your app.
 void SDKTemplate::Scenario6_CustomProvider::AuthenticateWithRequestTokenSilent(WebAccountProvider^ provider, String^ scope, String^ clientID, WebAccount^ account)
 {

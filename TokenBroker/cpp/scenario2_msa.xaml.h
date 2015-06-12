@@ -42,7 +42,7 @@ namespace SDKTemplate
 
         const Platform::String^ MICROSOFT_PROVIDER_ID = "https://login.microsoft.com";
         const Platform::String^ CONSUMER_AUTHORITY = "consumers";
-        const Platform::String^ MSA_SCOPE_REQUESTED = "wl.basic::DELEGATION";
+        const Platform::String^ MSA_SCOPE_REQUESTED = "service::wl.basic::DELEGATION";
         const Platform::String^ MSA_CLIENT_ID = "none";
         const Platform::String^ STORED_ACCOUNT_ID_KEY = "accountid";
         Windows::Security::Credentials::WebAccountProvider^ m_provider;

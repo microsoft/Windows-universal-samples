@@ -65,7 +65,7 @@ void SDKTemplate::Scenario1_DefaultAccount::Button_DefaultSignIn_Click(Platform:
 
 	// Since we only asked for the default provider, we need to make sure we pass the right
 	// scope and client ids based on whether this is AAD or MSA
-	if (m_provider->Authority == CONSUMER_AUTHORITY)
+	if (m_provider->Authority == (String^) CONSUMER_AUTHORITY)
 		AuthenticateWithRequestToken(m_provider, (String^)MSA_SCOPE_REQUESTED, (String^)MSA_CLIENT_ID);
 	else
 		AuthenticateWithRequestToken(m_provider, (String^)AAD_SCOPE_REQUESTED, (String^)AAD_CLIENT_ID);
@@ -75,7 +75,7 @@ void SDKTemplate::Scenario1_DefaultAccount::Button_GetTokenSilently_Click(Object
 {
 	// Since we only asked for the default provider, we need to make sure we pass the right
 	// scope and client ids based on whether this is AAD or MSA
-	if(m_provider->Authority == CONSUMER_AUTHORITY)
+	if(m_provider->Authority == (String^) CONSUMER_AUTHORITY)
 		AuthenticateWithRequestTokenSilent(m_account->WebAccountProvider, (String^)MSA_SCOPE_REQUESTED, (String^)MSA_CLIENT_ID, m_account);
 	else
 		AuthenticateWithRequestTokenSilent(m_account->WebAccountProvider, (String^)AAD_SCOPE_REQUESTED, (String^)AAD_CLIENT_ID, m_account);
@@ -128,8 +128,8 @@ void SDKTemplate::Scenario1_DefaultAccount::GetDefaultProvidersAndAccounts()
     });
 }
 
-// Create a new TokenBroker WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
-// that request asynchronously to TokenBroker's RequestTokenAsync API.
+// Create a new WebAccountManager WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
+// that request asynchronously to WebAccountManager's RequestTokenAsync API.
 //
 // We've gotten the default provider which will
 // 
@@ -162,15 +162,15 @@ void SDKTemplate::Scenario1_DefaultAccount::AuthenticateWithRequestToken(WebAcco
     });
 }
 
-// Create a new TokenBroker WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
-// that request and the account to get the token for asynchronously to TokenBroker's GetTokenSilentlyAsync API
+// Create a new WebAccountManager WebTokenRequest based on the Provider, Scope, ClientID and then create a task to send 
+// that request and the account to get the token for asynchronously to WebAccountManager's GetTokenSilentlyAsync API
 //
-// TokenBroker's GetTokenSilentlyAsync will then try :
+// WebAccountManager's GetTokenSilentlyAsync will then try :
 //        (1): Check it's local cache to see if it has a valid token
 //        (2): Try to silently request a new token from the MSA service
 //        (3): Return a status of UserInteractionRequired if we need the user credentials
 //
-// Because of TokenBroker's ability to cache tokens, you should only need to call TokenBroker when making token
+// Because of WebAccountManager's ability to cache tokens, you should only need to call WebAccountManager when making token
 // based requests and not require the ability to store a cached token within your app.
 void SDKTemplate::Scenario1_DefaultAccount::AuthenticateWithRequestTokenSilent(WebAccountProvider^ provider, String^ scope, String^ clientID, WebAccount^ account)
 {
@@ -215,7 +215,7 @@ void SDKTemplate::Scenario1_DefaultAccount::OutputTokenResult(WebTokenRequestRes
 		// with RequestTokenAsync.
 		rootPage->NotifyUser(result->ResponseStatus.ToString(), NotifyType::StatusMessage);
 
-		if (m_provider->Authority == CONSUMER_AUTHORITY)
+		if (m_provider->Authority == (String^) CONSUMER_AUTHORITY)
 			AuthenticateWithRequestToken(m_account->WebAccountProvider, (String^)MSA_SCOPE_REQUESTED, (String^)MSA_CLIENT_ID);
 		else
 			AuthenticateWithRequestToken(m_account->WebAccountProvider, (String^)AAD_SCOPE_REQUESTED, (String^)AAD_CLIENT_ID);
@@ -237,7 +237,7 @@ void SDKTemplate::Scenario1_DefaultAccount::OutputTokenResult(WebTokenRequestRes
 // of the WebAccount saved
 void SDKTemplate::Scenario1_DefaultAccount::SaveAccount(WebAccount^ account)
 {
-    ApplicationData::Current->LocalSettings->Values->Insert((String^) STORED_ACCOUNT_ID_KEY, account);
+    ApplicationData::Current->LocalSettings->Values->Insert((String^) STORED_ACCOUNT_ID_KEY, account->Id);
 
     m_account = account;
 

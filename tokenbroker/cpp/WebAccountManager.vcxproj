@@ -2,13 +2,13 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{f710b9fd-4e6b-42d7-a99a-6d48888d48b0}</ProjectGuid>
-    <RootNamespace>Smartcard</RootNamespace>
+    <RootNamespace>TokenBrokerCPP</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>8.2</ApplicationTypeRevision>
-    <ProjectName>Smartcard</ProjectName>
+    <ProjectName>WebAccountManager</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <ItemGroup Label="ProjectConfigurations">
@@ -75,30 +75,26 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$([MSBuild]::GetRegistryValue(`HKEY_LOCAL_MACHINE\Software\Microsoft\Microsoft SDKs\$(TargetPlatformIdentifier)\v$(TargetPlatformVersion)\ExtensionSDKS\WindowsDesktop\10.0.10046.0`, ``))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([MSBuild]::GetRegistryValue(`HKEY_LOCAL_MACHINE\Software\Microsoft\Microsoft SDKs\$(TargetPlatformIdentifier)\v$(TargetPlatformVersion)\ExtensionSDKS\WindowsDesktop\10.0.10046.0`, ``))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$([MSBuild]::GetRegistryValue(`HKEY_LOCAL_MACHINE\Software\Microsoft\Microsoft SDKs\$(TargetPlatformIdentifier)\v$(TargetPlatformVersion)\ExtensionSDKS\WindowsDesktop\10.0.10046.0`, ``))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([MSBuild]::GetRegistryValue(`HKEY_LOCAL_MACHINE\Software\Microsoft\Microsoft SDKs\$(TargetPlatformIdentifier)\v$(TargetPlatformVersion)\ExtensionSDKS\WindowsDesktop\10.0.10046.0`, ``))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$([MSBuild]::GetRegistryValue(`HKEY_LOCAL_MACHINE\Software\Microsoft\Microsoft SDKs\$(TargetPlatformIdentifier)\v$(TargetPlatformVersion)\ExtensionSDKS\WindowsDesktop\10.0.10046.0`, ``))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([MSBuild]::GetRegistryValue(`HKEY_LOCAL_MACHINE\Software\Microsoft\Microsoft SDKs\$(TargetPlatformIdentifier)\v$(TargetPlatformVersion)\ExtensionSDKS\WindowsDesktop\10.0.10046.0`, ``))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$([MSBuild]::GetRegistryValue(`HKEY_LOCAL_MACHINE\Software\Microsoft\Microsoft SDKs\$(TargetPlatformIdentifier)\v$(TargetPlatformVersion)\ExtensionSDKS\WindowsDesktop\10.0.10046.0`, ``))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([MSBuild]::GetRegistryValue(`HKEY_LOCAL_MACHINE\Software\Microsoft\Microsoft SDKs\$(TargetPlatformIdentifier)\v$(TargetPlatformVersion)\ExtensionSDKS\WindowsDesktop\10.0.10046.0`, ``))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$([MSBuild]::GetRegistryValue(`HKEY_LOCAL_MACHINE\Software\Microsoft\Microsoft SDKs\$(TargetPlatformIdentifier)\v$(TargetPlatformVersion)\ExtensionSDKS\WindowsDesktop\10.0.10046.0`, ``))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([MSBuild]::GetRegistryValue(`HKEY_LOCAL_MACHINE\Software\Microsoft\Microsoft SDKs\$(TargetPlatformIdentifier)\v$(TargetPlatformVersion)\ExtensionSDKS\WindowsDesktop\10.0.10046.0`, ``))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$([MSBuild]::GetRegistryValue(`HKEY_LOCAL_MACHINE\Software\Microsoft\Microsoft SDKs\$(TargetPlatformIdentifier)\v$(TargetPlatformVersion)\ExtensionSDKS\WindowsDesktop\10.0.10046.0`, ``))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([MSBuild]::GetRegistryValue(`HKEY_LOCAL_MACHINE\Software\Microsoft\Microsoft SDKs\$(TargetPlatformIdentifier)\v$(TargetPlatformVersion)\ExtensionSDKS\WindowsDesktop\10.0.10046.0`, ``))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
@@ -137,7 +133,6 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ChallengeResponseAlgorithm.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
       <DependentUpon>App.xaml</DependentUpon>
@@ -146,29 +141,23 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
-    <ClInclude Include="Scenario1_CreateTPMVSC.xaml.h">
-      <DependentUpon>Scenario1_CreateTPMVSC.xaml</DependentUpon>
+    <ClInclude Include="Scenario2_MSA.xaml.h">
+      <DependentUpon>Scenario2_MSA.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scenario2_ChangePin.xaml.h">
-      <DependentUpon>Scenario2_ChangePin.xaml</DependentUpon>
+    <ClInclude Include="Scenario3_AAD.xaml.h">
+      <DependentUpon>Scenario3_AAD.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scenario3_ResetPin.xaml.h">
-      <DependentUpon>Scenario3_ResetPin.xaml</DependentUpon>
+    <ClInclude Include="Scenario4_ManyProviders.xaml.h">
+      <DependentUpon>Scenario4_ManyProviders.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scenario4_ChangeAdminKey.xaml.h">
-      <DependentUpon>Scenario4_ChangeAdminKey.xaml</DependentUpon>
+    <ClInclude Include="Scenario5_ManyProvidersManyAccounts.xaml.h">
+      <DependentUpon>Scenario5_ManyProvidersManyAccounts.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scenario5_VerifyResponse.xaml.h">
-      <DependentUpon>Scenario5_VerifyResponse.xaml</DependentUpon>
+    <ClInclude Include="Scenario6_CustomProvider.xaml.h">
+      <DependentUpon>Scenario6_CustomProvider.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scenario6_DeleteTPMVSC.xaml.h">
-      <DependentUpon>Scenario6_DeleteTPMVSC.xaml</DependentUpon>
-    </ClInclude>
-    <ClInclude Include="Scenario7_ListSmartCards.xaml.h">
-      <DependentUpon>Scenario7_ListSmartCards.xaml</DependentUpon>
-    </ClInclude>
-    <ClInclude Include="Scenario8_Transmit.xaml.h">
-      <DependentUpon>Scenario8_Transmit.xaml</DependentUpon>
+    <ClInclude Include="Scenario1_DefaultAccount.xaml.h">
+      <DependentUpon>Scenario1_DefaultAccount.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -178,14 +167,18 @@
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_CreateTPMVSC.xaml" />
-    <Page Include="Scenario2_ChangePin.xaml" />
-    <Page Include="Scenario3_ResetPin.xaml" />
-    <Page Include="Scenario4_ChangeAdminKey.xaml" />
-    <Page Include="Scenario5_VerifyResponse.xaml" />
-    <Page Include="Scenario6_DeleteTPMVSC.xaml" />
-    <Page Include="Scenario7_ListSmartCards.xaml" />
-    <Page Include="Scenario8_Transmit.xaml" />
+    <Page Include="Scenario2_MSA.xaml" />
+    <Page Include="Scenario3_AAD.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario4_ManyProviders.xaml" />
+    <Page Include="Scenario5_ManyProvidersManyAccounts.xaml" />
+    <Page Include="Scenario6_CustomProvider.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario1_DefaultAccount.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Styles\Styles.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -197,7 +190,6 @@
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>App.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="ChallengeResponseAlgorithm.cpp" />
     <ClCompile Include="MainPage.xaml.cpp">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClCompile>
@@ -210,29 +202,23 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
-    <ClCompile Include="Scenario1_CreateTPMVSC.xaml.cpp">
-      <DependentUpon>Scenario1_CreateTPMVSC.xaml</DependentUpon>
+    <ClCompile Include="Scenario2_MSA.xaml.cpp">
+      <DependentUpon>Scenario2_MSA.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario2_ChangePin.xaml.cpp">
-      <DependentUpon>Scenario2_ChangePin.xaml</DependentUpon>
+    <ClCompile Include="Scenario3_AAD.xaml.cpp">
+      <DependentUpon>Scenario3_AAD.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario3_ResetPin.xaml.cpp">
-      <DependentUpon>Scenario3_ResetPin.xaml</DependentUpon>
+    <ClCompile Include="Scenario4_ManyProviders.xaml.cpp">
+      <DependentUpon>Scenario4_ManyProviders.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario4_ChangeAdminKey.xaml.cpp">
-      <DependentUpon>Scenario4_ChangeAdminKey.xaml</DependentUpon>
+    <ClCompile Include="Scenario5_ManyProvidersManyAccounts.xaml.cpp">
+      <DependentUpon>Scenario5_ManyProvidersManyAccounts.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario5_VerifyResponse.xaml.cpp">
-      <DependentUpon>Scenario5_VerifyResponse.xaml</DependentUpon>
+    <ClCompile Include="Scenario6_CustomProvider.xaml.cpp">
+      <DependentUpon>Scenario6_CustomProvider.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario6_DeleteTPMVSC.xaml.cpp">
-      <DependentUpon>Scenario6_DeleteTPMVSC.xaml</DependentUpon>
-    </ClCompile>
-    <ClCompile Include="Scenario7_ListSmartCards.xaml.cpp">
-      <DependentUpon>Scenario7_ListSmartCards.xaml</DependentUpon>
-    </ClCompile>
-    <ClCompile Include="Scenario8_Transmit.xaml.cpp">
-      <DependentUpon>Scenario8_Transmit.xaml</DependentUpon>
+    <ClCompile Include="Scenario1_DefaultAccount.xaml.cpp">
+      <DependentUpon>Scenario1_DefaultAccount.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,7 @@ namespace SDKTemplate
         {
             Platform::String^ get()
             {
-                return "TokenBroker Samples";
+                return "WebAccountManager Samples";
             }
         }
 
