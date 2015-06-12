@@ -1,105 +1,108 @@
-﻿//// Copyright (c) Microsoft Corporation. All rights reserved
+﻿//// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+//// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+//// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+//// PARTICULAR PURPOSE.
+////
+//// Copyright (c) Microsoft Corporation. All rights reserved
 
 (function () {
     "use strict";
 
+    // Helper variables.
     var app = WinJS.Application;
+    var activation = Windows.ApplicationModel.Activation;
     var nav = WinJS.Navigation;
-    var activationKinds = Windows.ApplicationModel.Activation.ActivationKind;
-    var splitView;
+    var networkInfo = Windows.Networking.Connectivity.NetworkInformation;
+    WinJS.strictProcessing();
 
-    WinJS.Namespace.define("SdkSample", {
-        paneHiddenInitially: false
+    app.onactivated = function (args) {
+        if (args.detail.kind === activation.ActivationKind.launch) {
+            if (app.sessionState.history) {
+                nav.history = app.sessionState.history;
+            }
+
+            args.setPromise(WinJS.UI.processAll().then(function () {
+                return IO.loadStateAsync();
+            }).done(function () {
+                // Initialize network related event handlers and variables.
+                networkInfo.addEventListener("networkstatuschanged", function () {
+                    _updateConnectionInfo();
+                }, false);
+                _updateConnectionInfo();
+
+                if (nav.location) {
+                    nav.history.current.initialPlaceholder = true;
+                    return nav.navigate(nav.location, nav.state);
+                } else {
+                    return nav.navigate(Application.navigator.home);
+                }
+            }, function () {
+                // Error loading state.
+                Status.error = true;
+                Status.message = "Unable to load the list of available feeds.";
+
+                // Disable the appbar and navbar since the app is not usable at this point.
+                var appbar = document.getElementById("appbar").winControl;
+                appbar.disabled = true;
+
+                var navbar = document.getElementById("navbar").winControl;
+                navbar.disabled = true;
+
+                return nav.navigate(Application.navigator.home);
+            }));
+        }
+    };
+
+    app.oncheckpoint = function (args) {
+        // This application is about to be suspended. Save any state
+        // that needs to persist across suspensions here. If you need to 
+        // complete an asynchronous operation before your application is 
+        // suspended, call args.setPromise().
+        app.sessionState.history = nav.history;
+        args.setPromise(IO.saveStateAsync());
+    };
+
+    function _updateConnectionInfo() {
+        /// <summary>
+        /// Determine the network status and the user's connection cost.  The connection cost
+        /// will decide whether or not we bypass the cache when retrieving feeds.
+        /// For more information on managing metered network cost constraints, see:
+        /// http://go.microsoft.com/fwlink/?LinkId=296673
+        /// </summary>
+        var connectionProfile = networkInfo.getInternetConnectionProfile();
+
+        if (connectionProfile) {
+            Status.error = false;
+            Status.message = "";
+
+            // Determine whether to bypass the cache based on the data transfer limitations
+            // set by the carrier.  Using the cache helps protect the user from accumulating
+            // monetary charges if they're on a metered network.
+            Status.bypassCache = true;
+            var connectionCost = connectionProfile.getConnectionCost();
+            if (connectionCost) {
+                if (connectionCost.overDataLimit || connectionCost.roaming) {
+                    Status.bypassCache = false;
+                }
+            }
+        } else {
+            Status.error = true;
+            Status.message = "Not connected to the Internet.";
+        }
+    };
+
+    app.start();
+
+    // Constants defining limits of the ListView.
+    WinJS.Namespace.define("ListViewLimits", {
+        subLimit: 10,
+        maxItems: 15
     });
 
-    function activated(eventObject) {
-        var activationKind = eventObject.detail.kind;
-        var activatedEventArgs = eventObject.detail.detail;
-
-        SdkSample.paneHiddenInitially = window.innerWidth <= 768;
-        var p = WinJS.UI.processAll().
-            then(function () {
-                splitView = document.querySelector("#root").winControl;
-                splitView.onbeforeclose = function () { WinJS.Utilities.addClass(splitView.element, "hiding"); };
-                splitView.onafterclose = function () { WinJS.Utilities.removeClass(splitView.element, "hiding"); };
-                window.addEventListener("resize", handleResize);
-                handleResize();
-
-                var buttons = document.querySelectorAll(".splitViewButton");
-                for (var i = 0, len = buttons.length; i < len; i++) {
-                    buttons[i].addEventListener("click", handleSplitViewButton);
-                }
-
-                // Navigate to either the first scenario or to the last running scenario
-                // before suspension or termination.
-                var url = SdkSample.scenarios.getAt(0).url;
-                var initialState = {};
-                var navHistory = app.sessionState.navigationHistory;
-                if (navHistory) {
-                    nav.history = navHistory;
-                    url = navHistory.current.location;
-                    initialState = navHistory.current.state || initialState;
-                }
-                initialState.activationKind = activationKind;
-                initialState.activatedEventArgs = activatedEventArgs;
-                nav.history.current.initialPlaceholder = true;
-                return nav.navigate(url, initialState);
-            });
-
-        // Calling done on a promise chain allows unhandled exceptions to propagate.
-        p.done();
-
-        // Use setPromise to indicate to the system that the splash screen must not be torn down
-        // until after processAll and navigate complete asynchronously.
-        eventObject.setPromise(p);
-    }
-
-    function navigating(eventObject) {
-        var url = eventObject.detail.location;
-        var host = document.getElementById("contentHost");
-        // Call unload and dispose methods on current scenario, if any exist
-        if (host.winControl) {
-            host.winControl.unload && host.winControl.unload();
-            host.winControl.dispose && host.winControl.dispose();
-        }
-        WinJS.Utilities.disposeSubTree(host);
-        WinJS.Utilities.empty(host);
-        WinJS.log && WinJS.log("", "", "status");
-
-        var p = WinJS.UI.Pages.render(url, host, eventObject.detail.state).
-            then(function () {
-                var navHistory = nav.history;
-                app.sessionState.navigationHistory = {
-                    backStack: navHistory.backStack.slice(0),
-                    forwardStack: navHistory.forwardStack.slice(0),
-                    current: navHistory.current
-                };
-                app.sessionState.lastUrl = url;
-            });
-        p.done();
-        eventObject.detail.setPromise(p);
-    }
-
-    function handleSplitViewButton() {
-        splitView.paneOpened = !splitView.paneOpened;
-    }
-
-    function handleResize() {
-        if (window.innerWidth > 768) {
-            splitView.closedDisplayMode = WinJS.UI.SplitView.ClosedDisplayMode.none;
-            splitView.openedDisplayMode = WinJS.UI.SplitView.OpenedDisplayMode.inline;
-        } else {
-            splitView.closedDisplayMode = WinJS.UI.SplitView.ClosedDisplayMode.none;
-            splitView.openedDisplayMode = WinJS.UI.SplitView.OpenedDisplayMode.overlay;
-            splitView.closePane();
-        }
-    }
-
-    nav.addEventListener("navigating", navigating);
-    app.addEventListener("activated", activated, false);
-    app.start();
+    // Status of the app.
+    WinJS.Namespace.define("Status", {
+        error: false,
+        message: "",
+        bypassCache: true
+    });
 })();
-
-window.onerror = function (E) {
-    debugger;
-}
