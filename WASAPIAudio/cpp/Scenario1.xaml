@@ -10,7 +10,7 @@
 //*********************************************************
 -->
 
-<common:LayoutAwarePage
+<Page
     x:Class="SDKSample.WASAPIAudio.Scenario1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -20,7 +20,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Left" VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -42,13 +42,6 @@
             <ListBox x:Name="DevicesList" HorizontalAlignment="Left" Height="470" VerticalAlignment="Top" Width="630"/>
         </Grid>
 
-        <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts -->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="DefaultLayout"/>
-                <VisualState x:Name="Below768Layout"/>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
     </Grid>
 
-</common:LayoutAwarePage>
+</Page>

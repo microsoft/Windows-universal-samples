@@ -1,0 +1,24 @@
+﻿/* Copyright (c) Microsoft Corporation. All rights reserved */
+
+/* Styles to apply during print preview and printing */
+#scenarioHeader, #printButton, #statusBox
+{
+    display: none;
+}
+
+.win-splitview .win-splitview-pane
+{
+    display: none;
+}
+
+.splitViewButton
+{
+    display: none;
+}
+
+.article
+{
+    display: block;
+    border: none;
+    overflow: hidden;
+}

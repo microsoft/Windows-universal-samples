@@ -1,0 +1,50 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the Microsoft Public License.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_GetLamp"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+          Enumerate Lamp devices and select an instance to operate. Two possible methods for acquiring the Lamp instance. First is to query DeviceInformation by class selection string for lamp. Second option is to grab the default instance using GetDefaultAsync() call.
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1"  HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button Content="Get Lamp Instance from DeviceInformation" Click="InitLampBtn_Click"/>
+                <Button Content="Get Default Lamp Instance" Click="GetDefaultAsyncBtn_Click"/>
+            </StackPanel>
+            
+            <ScrollViewer Grid.Row="2" Name="outputScrollViewer" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                    <TextBox x:Name="outputBox" AcceptsReturn="True" HorizontalAlignment="Stretch"/>
+            </ScrollViewer>
+            
+            <!-- Status Block for providing messages to the user.  Use the
+                NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

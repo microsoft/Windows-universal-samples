@@ -16,11 +16,13 @@ using namespace SDKTemplate;
 using namespace SDKTemplate::WiFiScan;
 
 using namespace Platform;
+using namespace Platform::Collections;
 using namespace Windows::Devices::Enumeration;
 using namespace Windows::Devices::WiFi;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 using namespace Windows::Globalization::DateTimeFormatting;
+using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Controls::Primitives;
@@ -30,7 +32,7 @@ using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace concurrency;
 
-Scenario2_Scan::Scenario2_Scan()
+Scenario2_Scan::Scenario2_Scan() : _rootPage(MainPage::Current)
 {
     InitializeComponent();
 }
@@ -48,6 +50,9 @@ void Scenario2_Scan::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::R
 
 void Scenario2_Scan::OnNavigatedTo(NavigationEventArgs^ e)
 {
+    ResultCollection = ref new Vector<WiFiNetworkDisplay^>();
+    DataContext = this;
+
     // RequestAccessAsync must have been called at least once by the app before using the API
     // Calling it multiple times is fine but not necessary
     // RequestAccessAsync must be called from the UI thread
@@ -58,7 +63,7 @@ void Scenario2_Scan::OnNavigatedTo(NavigationEventArgs^ e)
     {
         if (access != WiFiAccessStatus::Allowed)
         {
-            ScenarioOutput->Text = "Access denied";
+            _rootPage->NotifyUser(L"Access denied", SDKTemplate::NotifyType::ErrorMessage);
         }
         else
         {
@@ -76,15 +81,12 @@ void Scenario2_Scan::OnNavigatedTo(NavigationEventArgs^ e)
                     {
                         _firstAdapter = adapter;
 
-                        auto button = ref new Button();
-                        button->Content = L"Scan";
-                        button->Click += ref new RoutedEventHandler(this, &Scenario2_Scan::Button_Click);
-                        Buttons->Children->Append(button);
+                        ScanButton->IsEnabled = true;
                     });
                 }
                 else
                 {
-                    ScenarioOutput->Text = L"No WiFi Adapters detected on this machine";
+                    _rootPage->NotifyUser(L"No WiFi Adapters detected on this machine", SDKTemplate::NotifyType::ErrorMessage);
                 }
             });
         }
@@ -95,12 +97,16 @@ void Scenario2_Scan::DisplayNetworkReport(WiFiNetworkReport^ report)
 {
     auto timestampString = DateTimeFormatter::LongDate->Format(report->Timestamp);
     auto message = L"Network Report Timestamp: " + timestampString;
+    // there is no guarantee of what thread the AvailableNetworksChanged callback is run on
+    _rootPage->Dispatcher->RunAsync(CoreDispatcherPriority::Normal,
+        ref new DispatchedHandler([this, message]
+    {
+        _rootPage->NotifyUser(message, SDKTemplate::NotifyType::StatusMessage);
+    }));
+
+    ResultCollection->Clear();
     for (auto network : report->AvailableNetworks)
     {
-        message += L"\nNetworkName: " + network->Ssid + L", BSSID: " + network->Bssid
-            + L", RSSI: " + network->NetworkRssiInDecibelMilliwatts
-            + L"dBm, Channel Frequency: " + network->ChannelCenterFrequencyInKilohertz
-            + L"kHz";
+        ResultCollection->Append(ref new WiFiNetworkDisplay(network, _firstAdapter));
     }
-    ScenarioOutput->Text = message;
 }

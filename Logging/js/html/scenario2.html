@@ -1,0 +1,29 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>LoggingSession</title>
+    <script src="/js/loggingSessionScenario.js"></script>
+    <script src="/js/scenario2.js"></script>
+</head>
+<body>
+    <h2 id="sampleHeader">LoggingSession</h2>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p id="inputText">abc</p>
+        <button id="doScenarioButton">LogMessages</button>
+        <button id="enableDisableLoggingButton">Disable Logging</button>
+        <br /><br />
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <label>App log folder:</label><br />
+        <textarea rows="2" id="appLogFolder" readonly="readonly"></textarea><br />
+        <label>Status:</label><br />
+        <textarea rows="7" id="statusMessageList" readonly="readonly"></textarea><br />
+        <label>To view the ETL files:</label><br />
+        <textarea rows="4" id="viewLogInfo" readonly="readonly"></textarea>
+    </div>
+</body>
+</html>

@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>80bfd669-aa83-4537-9611-027cffe0d8af</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{c6978fb6-bc64-498d-97c8-f5b53997e54e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings">
+      <UniqueIdentifier>{422084c1-5669-4ca5-ab81-6c878cf91216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\en-US">
+      <UniqueIdentifier>{39d16ea3-1c0e-4ea7-b3c7-887b892a44ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\fr-FR">
+      <UniqueIdentifier>{f324b011-8fce-4a5e-bc2f-205247031845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRGS">
+      <UniqueIdentifier>{a16d202b-1f51-4ed6-834d-3d420ebccb95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRGS\en-US">
+      <UniqueIdentifier>{fe6fcdbd-2b01-4fa0-970e-8034aa308b2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRGS\fr-FR">
+      <UniqueIdentifier>{8f9ca6df-a75e-4ed1-a5b6-fb82943c888f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRGS\de-DE">
+      <UniqueIdentifier>{f32fa24b-d8aa-40fd-866d-e94c02ef98f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRGS\es-ES">
+      <UniqueIdentifier>{a3e975bd-888d-4e6f-b09d-317c2cf337d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRGS\en-GB">
+      <UniqueIdentifier>{ff7b6016-ded0-4988-a6f0-40dccfe27145}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRGS\it-IT">
+      <UniqueIdentifier>{119925a3-1924-4991-861c-b178ab0d4dbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRGS\zh-CN">
+      <UniqueIdentifier>{d5f09861-a3c7-4356-bead-4ccdf9f005e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\en-GB">
+      <UniqueIdentifier>{f2ef0b15-d71a-4146-bc62-b67ca1fd00d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\es-ES">
+      <UniqueIdentifier>{c3a168d9-6fe2-42bb-b717-d56851612dfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\de-DE">
+      <UniqueIdentifier>{1d1948aa-5fa6-4ead-8521-7235b378119c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\it-IT">
+      <UniqueIdentifier>{5f632d44-1e74-4200-8c8e-d6cb0ce37c79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\zh-CN">
+      <UniqueIdentifier>{990ae8aa-91f3-40b6-a3c9-8259632ff977}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\en-IN">
+      <UniqueIdentifier>{d8bab42e-0dee-4c03-bf36-36a765cad12b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\es-MX">
+      <UniqueIdentifier>{140e9f04-ee9c-47c5-9c1e-485c19364d0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ja-JP">
+      <UniqueIdentifier>{3e884ac3-46bb-4b3d-9c3a-24fe7a6091eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ko-KR">
+      <UniqueIdentifier>{d500ce72-2513-4e95-b038-744bca036073}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\pl-PL">
+      <UniqueIdentifier>{213a2722-963e-4a9e-aeff-c6a8d2ff1dcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\pt-BR">
+      <UniqueIdentifier>{2e67f086-e9ba-487f-80a2-3f75cbf2deea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\ru-RU">
+      <UniqueIdentifier>{a5d53c91-d55d-42c0-b7a9-a72f3919aed4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\zh-TW">
+      <UniqueIdentifier>{124f9795-6e8a-44cc-ac27-902fe186df35}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.xaml.cpp" />
+    <ClCompile Include="MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Scenario_SynthesizeText.xaml.cpp" />
+    <ClCompile Include="AudioCapturePermissions.cpp" />
+    <ClCompile Include="Scenario_ContinuousDictation.xaml.cpp" />
+    <ClCompile Include="Scenario_ListConstraint.xaml.cpp" />
+    <ClCompile Include="Scenario_PredefinedDictationGrammar.xaml.cpp" />
+    <ClCompile Include="Scenario_PredefinedWebSearchGrammar.xaml.cpp" />
+    <ClCompile Include="Scenario_SRGSConstraint.xaml.cpp" />
+    <ClCompile Include="Scenario_SynthesizeSSML.xaml.cpp" />
+    <ClCompile Include="Scenario_ContinuousRecognitionListGrammar.xaml.cpp" />
+    <ClCompile Include="Scenario_ContinuousRecognitionSRGSGrammar.xaml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="App.xaml.h" />
+    <ClInclude Include="MainPage.xaml.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Scenario_SynthesizeText.xaml.h" />
+    <ClInclude Include="AudioCapturePermissions.h" />
+    <ClInclude Include="Scenario_ContinuousDictation.xaml.h" />
+    <ClInclude Include="Scenario_ListConstraint.xaml.h" />
+    <ClInclude Include="Scenario_PredefinedDictationGrammar.xaml.h" />
+    <ClInclude Include="Scenario_PredefinedWebSearchGrammar.xaml.h" />
+    <ClInclude Include="Scenario_SRGSConstraint.xaml.h" />
+    <ClInclude Include="Scenario_SynthesizeSSML.xaml.h" />
+    <ClInclude Include="Scenario_ContinuousRecognitionListGrammar.xaml.h" />
+    <ClInclude Include="Scenario_ContinuousRecognitionSRGSGrammar.xaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MainPage.xaml" />
+    <Page Include="Styles\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+    <Page Include="Scenario_SynthesizeText.xaml" />
+    <Page Include="Scenario_SynthesizeSSML.xaml" />
+    <Page Include="Scenario_PredefinedDictationGrammar.xaml" />
+    <Page Include="Scenario_PredefinedWebSearchGrammar.xaml" />
+    <Page Include="Scenario_ListConstraint.xaml" />
+    <Page Include="Scenario_SRGSConstraint.xaml" />
+    <Page Include="Scenario_ContinuousDictation.xaml" />
+    <Page Include="Scenario_ContinuousRecognitionListGrammar.xaml" />
+    <Page Include="Scenario_ContinuousRecognitionSRGSGrammar.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\smallTile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\squareTile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\storeLogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="SRGS\en-US\SRGSColors.xml">
+      <Filter>SRGS\en-US</Filter>
+    </Xml>
+    <Xml Include="SRGS\fr-FR\SRGSColors.xml">
+      <Filter>SRGS\fr-FR</Filter>
+    </Xml>
+    <Xml Include="SRGS\en-GB\SRGSColors.xml">
+      <Filter>SRGS\en-GB</Filter>
+    </Xml>
+    <Xml Include="SRGS\es-ES\SRGSColors.xml">
+      <Filter>SRGS\es-ES</Filter>
+    </Xml>
+    <Xml Include="SRGS\it-IT\SRGSColors.xml">
+      <Filter>SRGS\it-IT</Filter>
+    </Xml>
+    <Xml Include="SRGS\de-DE\SRGSColors.xml">
+      <Filter>SRGS\de-DE</Filter>
+    </Xml>
+    <Xml Include="SRGS\zh-CN\SRGSColors.xml">
+      <Filter>SRGS\zh-CN</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\en-US\LocalizationSpeechResources.resw">
+      <Filter>Strings\en-US</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\fr-FR\LocalizationSpeechResources.resw">
+      <Filter>Strings\fr-FR</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\de-DE\LocalizationSpeechResources.resw">
+      <Filter>Strings\de-DE</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\de-DE\LocalizationTTSResources.resw">
+      <Filter>Strings\de-DE</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\en-GB\LocalizationSpeechResources.resw">
+      <Filter>Strings\en-GB</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\en-GB\LocalizationTTSResources.resw">
+      <Filter>Strings\en-GB</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\en-US\LocalizationTTSResources.resw">
+      <Filter>Strings\en-US</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\es-ES\LocalizationTTSResources.resw">
+      <Filter>Strings\es-ES</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\es-ES\LocalizationSpeechResources.resw">
+      <Filter>Strings\es-ES</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\it-IT\LocalizationSpeechResources.resw">
+      <Filter>Strings\it-IT</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\it-IT\LocalizationTTSResources.resw">
+      <Filter>Strings\it-IT</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\zh-CN\LocalizationSpeechResources.resw">
+      <Filter>Strings\zh-CN</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\zh-CN\LocalizationTTSResources.resw">
+      <Filter>Strings\zh-CN</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\fr-FR\LocalizationTTSResources.resw">
+      <Filter>Strings\fr-FR</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\en-IN\LocalizationTTSResources.resw">
+      <Filter>Strings\en-IN</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\es-MX\LocalizationTTSResources.resw">
+      <Filter>Strings\es-MX</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ja-JP\LocalizationTTSResources.resw">
+      <Filter>Strings\ja-JP</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ko-KR\LocalizationTTSResources.resw">
+      <Filter>Strings\ko-KR</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\ru-RU\LocalizationTTSResources.resw">
+      <Filter>Strings\ru-RU</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pt-BR\LocalizationTTSResources.resw">
+      <Filter>Strings\pt-BR</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\pl-PL\LocalizationTTSResources.resw">
+      <Filter>Strings\pl-PL</Filter>
+    </PRIResource>
+    <PRIResource Include="Strings\zh-TW\LocalizationTTSResources.resw">
+      <Filter>Strings\zh-TW</Filter>
+    </PRIResource>
+  </ItemGroup>
+</Project>

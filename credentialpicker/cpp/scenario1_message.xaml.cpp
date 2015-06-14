@@ -56,7 +56,7 @@ void Scenario1_Message::Launch_Click(Platform::Object^ sender, Windows::UI::Xaml
 {
     if ((Message->Text != nullptr) && (Target->Text != nullptr))
     {
-        create_task(Windows::Security::Credentials::UI::CredentialPicker::PickAsync(Message->Text, Target->Text))
+        create_task(Windows::Security::Credentials::UI::CredentialPicker::PickAsync(Target->Text, Message->Text))
             .then([this](CredentialPickerResults^ credPickerResult)
         {
             auto domainName = credPickerResult->CredentialDomainName;

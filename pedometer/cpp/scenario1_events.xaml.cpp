@@ -1,13 +1,4 @@
-//*********************************************************
-//
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the MIT License (MIT).
-// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
-// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
-// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
-//
-//*********************************************************
 
 #include "pch.h"
 #include "Scenario1_Events.xaml.h"
@@ -43,9 +34,9 @@ Scenario1_Events::Scenario1_Events() : rootPage(MainPage::Current)
 
     // get the default pedometer asynchronously
     task<Pedometer^> pedometerTask = create_task(Pedometer::GetDefaultAsync);
-    try
+    pedometerTask.then([this](task<Pedometer^> task)
     {
-        pedometerTask.then([this](task<Pedometer^> task)
+        try
         {
             pedometer = task.get();
             if (nullptr != pedometer)
@@ -58,12 +49,12 @@ Scenario1_Events::Scenario1_Events() : rootPage(MainPage::Current)
                 rootPage->NotifyUser("No pedometer available", NotifyType::ErrorMessage);
                 RegisterButton->IsEnabled = false;
             }
-        });
-    }
-    catch (AccessDeniedException^)
-    {
-        rootPage->NotifyUser("Access to the default pedometer is denied", NotifyType::ErrorMessage);
-    }
+        }
+        catch (AccessDeniedException^)
+        {
+            rootPage->NotifyUser("Access to the default pedometer is denied", NotifyType::ErrorMessage);
+        }
+    });
     registeredForEvents = false;
 }
 
@@ -169,7 +160,7 @@ void Scenario1_Events::UpdateEventRegistration(bool regsiterForEvents)
 {
     if (regsiterForEvents)
     {
-        pedometer->ReportInterval = 20000;
+        pedometer->ReportInterval = pedometer->MinimumReportInterval;
         readingToken = (pedometer->ReadingChanged += ref new Windows::Foundation::TypedEventHandler<Windows::Devices::Sensors::Pedometer ^, Windows::Devices::Sensors::PedometerReadingChangedEventArgs ^>(this, &Scenario1_Events::OnReadingChanged));
         rootPage->NotifyUser("Registered for step count changes", NotifyType::StatusMessage);
         registeredForEvents = true;

@@ -89,7 +89,7 @@ void SetLockscreenImage::PickAndSetButton_Click(Platform::Object^ sender, Window
                     else
                     {
                         SetLockscreenImageOutputImage->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
-                        rootPage->NotifyUser("Setting the lock screen image failed.  Make sure your copy of Windows is activated.", NotifyType::ErrorMessage);
+                        rootPage->NotifyUser("Setting the lock screen image failed.", NotifyType::ErrorMessage);
                     }
                 }
                 catch (Exception ^ex)
@@ -101,18 +101,8 @@ void SetLockscreenImage::PickAndSetButton_Click(Platform::Object^ sender, Window
         }
         else
         {
+            SetLockscreenImageOutputImage->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
             rootPage->NotifyUser("No image was selected", NotifyType::StatusMessage);
-            create_task(Package::Current->InstalledLocation->CreateFileAsync("Assets\\placeholder-sdk.png",
-                CreationCollisionOption::OpenIfExists))
-                .then([this](StorageFile^ imageFile) -> IAsyncOperation<IRandomAccessStreamWithContentType^>^
-            {
-                return imageFile->OpenReadAsync();
-            }).then([this](IRandomAccessStreamWithContentType^ imageStream)
-            {
-                auto bitmapImage = ref new BitmapImage();
-                bitmapImage->SetSource(imageStream);
-                SetLockscreenImageOutputImage->Source = bitmapImage;
-            });
         }
     });
 }

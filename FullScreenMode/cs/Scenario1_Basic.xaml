@@ -1,0 +1,64 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Basic"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+          Entering and exiting full screen mode
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock TextWrapping="Wrap">
+                        Click the button to enter and exit full screen mode.
+                        We recommend that apps also exit full screen mode when the user presses the Escape key.
+                    </TextBlock>
+                    <TextBlock Margin="0,10,0,0">
+                        The view <Run x:Name="ReportFullScreenMode"/> full screen mode.
+                    </TextBlock>
+                    <Button x:Name="ToggleFullScreenModeButton" Margin="0,10,0,0" Click="ToggleFullScreenModeButton_Click">
+                        <SymbolIcon x:Name="ToggleFullScreenModeSymbol" Symbol="FullScreen" />
+                    </Button>
+                    <StackPanel x:Name="FullScreenOptionsPanel">
+                        <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                            When in full screen mode, you can request that the standard system overlays be shown.
+                        </TextBlock>
+                        <Button x:Name="ShowStandardSystemOverlaysButton" Margin="0,10,0,0"
+                                Content="Show standard system overlays"
+                                Click="ShowStandardSystemOverlaysButton_Click"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                            When the user manually invokes the standard system overlays,
+                            you can request that they have a minimal initial footprint (if possible).
+                        </TextBlock>
+                        <CheckBox x:Name="UseMinimalOverlaysCheckBox" Margin="0,10,0,0" Content="Use minimal overlays"
+                                  Click="UseMinimalOverlaysCheckBox_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

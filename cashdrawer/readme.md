@@ -27,7 +27,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[Cash Drawer sample](https://github.com/Microsoft/Windows-universal-samples/tree/master/cash-drawer)
+[Cash Drawer sample](https://github.com/Microsoft/Windows-universal-samples/tree/master/CashDrawer)
 
 ### Reference
 

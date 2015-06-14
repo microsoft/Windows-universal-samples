@@ -1,0 +1,11 @@
+<library xmlns='http://www.microsoft.com'>
+    <book>
+        <chapter></chapter>
+        <chapter>
+            <section>
+                <paragraph a="b">1</paragraph>
+                <paragraph a="b">2</paragraph>
+            </section>
+        </chapter>
+    </book>
+</library>

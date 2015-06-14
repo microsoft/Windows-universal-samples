@@ -1,4 +1,4 @@
-﻿//*********************************************************
+//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
@@ -45,18 +45,26 @@ const GUID GUID_CustomSensorDevice_VendorDefinedTypeID = { 0x4025a865, 0x638c, 0
 
 Scenario2_Polling::Scenario2_Polling() : m_RootPage(MainPage::Current)
 {
-    String^ customSensorSelector;
     Guid customSensorGuid(GUID_CustomSensorDevice_VendorDefinedTypeID);
 
     InitializeComponent();
 
-    customSensorSelector = CustomSensor::GetDeviceSelector(customSensorGuid);
+    m_DeviceAccessInfo = DeviceAccessInformation::CreateFromDeviceClassId(customSensorGuid);
+    m_DeviceAccessInfo->AccessChanged += ref new TypedEventHandler<DeviceAccessInformation ^, DeviceAccessChangedEventArgs ^>(this, &Scenario2_Polling::OnAccessChanged);
+
+    StartWatcher();
+}
+
+/// <summary>
+/// Invoked each time the custom sensor is created
+/// </summary>
+void Scenario2_Polling::StartWatcher()
+{
+    Guid customSensorGuid(GUID_CustomSensorDevice_VendorDefinedTypeID);
+    String^ customSensorSelector = CustomSensor::GetDeviceSelector(customSensorGuid);
     m_Watcher = DeviceInformation::CreateWatcher(customSensorSelector);
-
     m_Watcher->Added += ref new TypedEventHandler<DeviceWatcher^, DeviceInformation^>(this, &Scenario2_Polling::OnCustomSensorAdded);
-
     m_Watcher->Start();
-
 }
 
 /// <summary>
@@ -66,56 +74,39 @@ Scenario2_Polling::Scenario2_Polling() : m_RootPage(MainPage::Current)
 /// <param name="customSensorDevice">device information for the custom sensor that was found</param>
 void Scenario2_Polling::OnCustomSensorAdded(DeviceWatcher^ watcher, DeviceInformation^ customSensorDevice)
 {
-    try
+    IAsyncOperation<CustomSensor^>^ getCustomSensorRequest = CustomSensor::FromIdAsync(customSensorDevice->Id);
+
+    auto getCustomSensorTask = create_task(getCustomSensorRequest);
+
+    getCustomSensorTask.then([this](CustomSensor^ customSensor)
     {
-        IAsyncOperation<CustomSensor^>^ getCustomSensorRequest = CustomSensor::FromIdAsync(customSensorDevice->Id);
-
-        auto getCustomSensorTask = create_task(getCustomSensorRequest);
-
-        getCustomSensorTask.then([this](CustomSensor^ customSensor)
+        if (customSensor != nullptr)
         {
-            if (customSensor != nullptr)
-            {
-                // When multiple custom sensors exist on the system, OnCustomSensorAdded 
-                // may be called concurrently using multiple threadpool threads
-                // Lock the section to protect this->customSensor from concurrent accesses
-                auto lock = m_CritsecCustomSensor.Lock();
+            // When multiple custom sensors exist on the system, OnCustomSensorAdded 
+            // may be called concurrently using multiple threadpool threads
+            // Lock the section to protect this->customSensor from concurrent accesses
+            auto lock = m_CritsecCustomSensor.Lock();
 
-                // Just pick the first matching custom sensor, ignore the others
-                if (nullptr == this->m_CustomSensor)
-                {
-                    this->m_CustomSensor = customSensor;
-                }
-            }
-            else
+            // Just pick the first matching custom sensor, ignore the others
+            if (nullptr == this->m_CustomSensor)
             {
-                Dispatcher->RunAsync(
-                    CoreDispatcherPriority::Normal,
-                    ref new DispatchedHandler(
-                        [this]()
-                        {
-                            m_RootPage->NotifyUser("No custom sensor found", NotifyType::ErrorMessage);
-                        },
-                        CallbackContext::Any
-                    )
-                );
+                this->m_CustomSensor = customSensor;
             }
-        });
-    }
-    catch (Platform::Exception^ e)
-    {
-        Dispatcher->RunAsync(
-            CoreDispatcherPriority::Normal,
-            ref new DispatchedHandler(
-                [this, e]()
-                {
-                    // May happen when the user denies access to the sensor
-                    m_RootPage->NotifyUser(e->ToString(), NotifyType::ErrorMessage);
-                },
-                CallbackContext::Any
-            )
-        );
-    }
+        }
+        else
+        {
+            Dispatcher->RunAsync(
+                CoreDispatcherPriority::Normal,
+                ref new DispatchedHandler(
+                    [this]()
+                    {
+                        m_RootPage->NotifyUser("Custom sensor not found or access denied", NotifyType::ErrorMessage);
+                    },
+                    CallbackContext::Any
+                )
+            );
+        }
+    });
 }
 
 /// <summary>
@@ -156,6 +147,45 @@ void Scenario2_Polling::GetCO2Level(Platform::Object^ sender, Windows::UI::Xaml:
     }
     else
     {
-        m_RootPage->NotifyUser("No custom sensor found", NotifyType::ErrorMessage);
+        m_RootPage->NotifyUser("Custom sensor not found or access denied", NotifyType::ErrorMessage);
+    }
+}
+
+
+/// <summary>
+/// Invoked when the privacy settings for this custom sensor have changed
+/// </summary>
+/// <param name="sender"></param>
+/// <param name="e"></param>
+void Scenario2_Polling::OnAccessChanged(DeviceAccessInformation ^sender, DeviceAccessChangedEventArgs ^args)
+{
+    if (args->Status == DeviceAccessStatus::Allowed)
+    {
+        StartWatcher();
+
+        Dispatcher->RunAsync(
+            CoreDispatcherPriority::Normal,
+            ref new DispatchedHandler(
+                [this]()
+                {
+                    m_RootPage->NotifyUser("", NotifyType::StatusMessage);
+                },
+                CallbackContext::Any
+            )
+        );
+    }
+    else
+    {
+        m_CustomSensor = nullptr;
+        Dispatcher->RunAsync(
+            CoreDispatcherPriority::Normal,
+            ref new DispatchedHandler(
+                [this]()
+                {
+                    m_RootPage->NotifyUser("Custom sensor access denied", NotifyType::ErrorMessage);
+                },
+                CallbackContext::Any
+            )
+        );
     }
 }

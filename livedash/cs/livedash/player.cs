@@ -235,7 +235,12 @@ namespace LiveDash
 
         private async void SearchSegmentIfOutsideBuffer()
         {
-            MediaSegment segment = ((LiveSourceBufferManager)GetVideoBuffer()).GetNextSegment();
+            LiveSourceBufferManager vidBuffer = (LiveSourceBufferManager)GetVideoBuffer();
+            if (vidBuffer == null)
+            {
+                return;
+            }
+            MediaSegment segment = vidBuffer.GetNextSegment();
             HttpResponseMessage response = await Downloader.SendHeadRequestAsync(new Uri(segment.SegmentUrl));
 
             if (response.StatusCode == HttpStatusCode.NotFound)

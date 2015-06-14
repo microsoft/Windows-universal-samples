@@ -15,7 +15,6 @@
         document.getElementById("DeviceID").value = currentDeviceInfor.id;
         document.getElementById("OperatingSystem").value = currentDeviceInfor.operatingSystem;
         document.getElementById("FriendlyName").value = currentDeviceInfor.friendlyName;
-        document.getElementById("Type").value = currentDeviceInfor.type;
         document.getElementById("SystemManufacturer").value = currentDeviceInfor.systemManufacturer;
         document.getElementById("SystemProductName").value = currentDeviceInfor.systemProductName;
         document.getElementById("SystemSku").value = currentDeviceInfor.systemSku;
@@ -25,7 +24,6 @@
         document.getElementById("DeviceID").value = "";
         document.getElementById("OperatingSystem").value = "";
         document.getElementById("FriendlyName").value = "";
-        document.getElementById("Type").value = "";
         document.getElementById("SystemManufacturer").value = "";
         document.getElementById("SystemProductName").value = "";
         document.getElementById("SystemSku").value = "";

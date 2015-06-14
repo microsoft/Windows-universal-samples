@@ -137,7 +137,7 @@ namespace simpleInk
                         rootPage.NotifyUser("No text recognized", SDKTemplate.NotifyType.StatusMessage);
                     }
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     rootPage.NotifyUser("Recognize operation failed: " + ex.Message, NotifyType.ErrorMessage);
                 }

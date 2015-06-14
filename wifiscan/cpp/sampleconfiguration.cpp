@@ -19,5 +19,6 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
 {
     { "Cached Networks", "SDKTemplate.WiFiScan.Scenario1_CachedNetworks" },
     { "Scan", "SDKTemplate.WiFiScan.Scenario2_Scan" },
-    { "Register for Updates", "SDKTemplate.WiFiScan.Scenario3_RegisterForUpdates" }
+    { "Register for Scan Updates", "SDKTemplate.WiFiScan.Scenario3_RegisterForUpdates" },
+    { "Connect", "SDKTemplate.WiFiScan.Scenario4_Connect" }
 };

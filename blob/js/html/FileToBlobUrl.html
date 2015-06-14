@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/FileToBlobUrl.css" />
+    <script src="/js/FileToBlobUrl.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <div id="fileToBlobUrlInput">
+            <p>Use picker APIs to pick a video, image, or audio file on disk, then configure the tag using URL.createObjectURL. It uses the optional 'false' parameter to URL.createObjectURL to make these single use. See senario 2 for differences between single and multi use blob urls.</p>
+                <button id="openImage">Open image</button>
+                <button id="openVideo">Open video</button>
+                <button id="openAudio">Open audio</button>
+                <button id="reset" class="action secondary">Reset</button>
+            <br /><br />
+        </div>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <div id="fileToBlobUrlOutput">
+            <div class="leftItem">
+                <label for="image">Image:</label><br />
+                <img id="image" class="imageHolder" alt="image holder" src="../images/placeholder-sdk.png"/>
+            </div>
+            <div class="leftItem">
+                <label for="video">Video:</label><br/>
+                <video id="video" autoplay="autoplay" controls="controls"></video>
+            </div>
+            <div class="leftItem">
+                <label for="audio">Audio:</label><br/>
+                <audio id="audio" autoplay="autoplay" controls="controls"></audio>
+            </div>
+       </div>
+    </div>
+</body>
+</html>

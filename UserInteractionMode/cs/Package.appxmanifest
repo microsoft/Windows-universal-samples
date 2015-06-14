@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+    <Identity
+      Name="Microsoft.SDKSamples.UserInteractionMode.CS"
+      Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+      Version="1.0.0.0" />
+
+
+    <mp:PhoneIdentity PhoneProductId="9c31b238-34b3-4de1-bc48-1095dff9bc55" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+    <Properties>
+        <DisplayName>User Interaction Mode C# Sample</DisplayName>
+        <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+        <Logo>Assets\StoreLogo-sdk.png</Logo>
+    </Properties>
+
+    <Dependencies>
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10069.0" MaxVersionTested="10.0.10069.0" />
+    </Dependencies>
+
+    <Resources>
+        <Resource Language="x-generate"/>
+    </Resources>
+
+    <Applications>
+        <Application Id="UserInteractionMode.App"
+          Executable="$targetnametoken$.exe"
+          EntryPoint="UserInteractionMode.App">
+            <uap:VisualElements
+              DisplayName="User Interaction Mode C# sample"
+              Square150x150Logo="Assets\squareTile-sdk.png"
+              Square44x44Logo="Assets\SmallTile-sdk.png"
+              Description="User Interaction Mode C# sample"
+              BackgroundColor="#00b2f0">
+                <uap:SplashScreen Image="Assets\Splash-sdk.png" />
+                <uap:DefaultTile>
+                    <uap:ShowNameOnTiles>
+                        <uap:ShowOn Tile="square150x150Logo" />
+                    </uap:ShowNameOnTiles>
+                </uap:DefaultTile>
+            </uap:VisualElements>
+ <Extensions>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="ms-cortana">
+            <uap:Logo>images\smallTile-sdk.png</uap:Logo>
+            <uap:DisplayName>Your sample name</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
+      </Extensions>
+        </Application>
+    </Applications>
+</Package>

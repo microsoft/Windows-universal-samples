@@ -60,45 +60,53 @@ namespace PedometerCS
 
             DateTimeOffset fromBeginning = new DateTimeOffset(dt);
 
-            IReadOnlyList<PedometerReading> historyReadings = await Pedometer.GetSystemHistoryAsync(fromBeginning);
-
-
-            // History always returns chronological list of step counts for all PedometerStepKinds
-            // And each record represents cumulative step counts for that step kind.
-            // So we will use the last set of records - that gives us the cumulative step count for 
-            // each kind and ignore rest of the records
-            PedometerStepKind stepKind = PedometerStepKind.Unknown;
-            DateTimeOffset lastReadingTimestamp;
-            bool resetTotal = false;
-            foreach (PedometerReading reading in historyReadings)
+            try
             {
-                if(stepKind == PedometerStepKind.Running)
+                IReadOnlyList<PedometerReading> historyReadings = await Pedometer.GetSystemHistoryAsync(fromBeginning);
+
+                // History always returns chronological list of step counts for all PedometerStepKinds
+                // And each record represents cumulative step counts for that step kind.
+                // So we will use the last set of records - that gives us the cumulative step count for 
+                // each kind and ignore rest of the records
+                PedometerStepKind stepKind = PedometerStepKind.Unknown;
+                DateTimeOffset lastReadingTimestamp;
+                bool resetTotal = false;
+                foreach (PedometerReading reading in historyReadings)
                 {
-                    // reset the total after reading the 'PedometerStepKind.Running' count
-                    resetTotal = true;
+                    if(stepKind == PedometerStepKind.Running)
+                    {
+                        // reset the total after reading the 'PedometerStepKind.Running' count
+                        resetTotal = true;
+                    }
+
+                    totalStepCount += reading.CumulativeSteps;
+                    if (resetTotal)
+                    {
+                        lastReadingTimestamp = reading.Timestamp;
+                        lastTotalCount = totalStepCount;
+                        stepKind = PedometerStepKind.Unknown;
+                        totalStepCount = 0;
+                        resetTotal = false;
+                    }
+                    else
+                    {
+                        stepKind++;
+                    }
                 }
 
-                totalStepCount += reading.CumulativeSteps;
-                if (resetTotal)
-                {
-                    lastReadingTimestamp = reading.Timestamp;
-                    lastTotalCount = totalStepCount;
-                    stepKind = PedometerStepKind.Unknown;
-                    totalStepCount = 0;
-                    resetTotal = false;
-                }
-                else
-                {
-                    stepKind++;
-                }
+                ScenarioOutput_TotalStepCount.Text = lastTotalCount.ToString();
+
+                DateTimeFormatter timestampFormatter = new DateTimeFormatter("shortdate longtime");
+                ScenarioOutput_Timestamp.Text = timestampFormatter.Format(lastReadingTimestamp);
+
+                rootPage.NotifyUser("Hit the 'Get steps count' Button", NotifyType.StatusMessage);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                rootPage.NotifyUser("User has denied access to activity history", NotifyType.ErrorMessage);
             }
 
-            ScenarioOutput_TotalStepCount.Text = lastTotalCount.ToString();
-
-            DateTimeFormatter timestampFormatter = new DateTimeFormatter("shortdate longtime");
-            ScenarioOutput_Timestamp.Text = timestampFormatter.Format(lastReadingTimestamp);
-
-            rootPage.NotifyUser("Hit the 'Get steps count' Button", NotifyType.StatusMessage);
+            // Re-enable button
             GetCurrentButton.IsEnabled = true;
         }
     }

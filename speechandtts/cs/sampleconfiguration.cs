@@ -18,7 +18,7 @@ namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        public const string FEATURE_NAME = "Speech and TTS";
+        public const string FEATURE_NAME = "Speech Recognition\nand TTS";
 
         List<Scenario> scenarios = new List<Scenario>
         {

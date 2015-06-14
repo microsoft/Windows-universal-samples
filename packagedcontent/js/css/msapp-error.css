@@ -1,0 +1,21 @@
+﻿body
+{
+    margin:10px;
+}
+
+.tip
+{
+    font-size:90%;
+    padding-left:20px;
+}
+
+.paramName
+{
+    font-size:105%;
+    color:black;
+}
+
+.paramValue
+{
+    color:black;
+}

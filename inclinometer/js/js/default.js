@@ -1,13 +1,5 @@
-﻿//*********************************************************
-//
-// Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the MIT License (MIT).
-// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
-// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
-// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
-//
-//*********************************************************
+﻿//// Copyright (c) Microsoft Corporation. All rights reserved
+
 (function () {
     "use strict";
 
@@ -24,54 +16,42 @@
         var activationKind = eventObject.detail.kind;
         var activatedEventArgs = eventObject.detail.detail;
 
-        // Handle launch and continuation activation kinds
-        switch (activationKind) {
-            case activationKinds.launch:
-            case activationKinds.pickFileContinuation:
-            case activationKinds.pickSaveFileContinuation:
-            case activationKinds.pickFolderContinuation:
-            case activationKinds.webAuthenticationBrokerContinuation:
-                SdkSample.paneHiddenInitially = window.innerWidth <= 768;
-                var p = WinJS.UI.processAll().
-                    then(function () {
-                        splitView = document.querySelector("#root").winControl;
-                        splitView.onbeforeclose = function () { WinJS.Utilities.addClass(splitView.element, "hiding"); };
-                        splitView.onafterclose = function () { WinJS.Utilities.removeClass(splitView.element, "hiding"); };
-                        window.addEventListener("resize", handleResize);
-                        handleResize();
+        SdkSample.paneHiddenInitially = window.innerWidth <= 768;
+        var p = WinJS.UI.processAll().
+            then(function () {
+                splitView = document.querySelector("#root").winControl;
+                splitView.onbeforeclose = function () { WinJS.Utilities.addClass(splitView.element, "hiding"); };
+                splitView.onafterclose = function () { WinJS.Utilities.removeClass(splitView.element, "hiding"); };
+                window.addEventListener("resize", handleResize);
+                handleResize();
 
-                        var buttons = document.querySelectorAll(".splitViewButton");
-                        for (var i = 0, len = buttons.length; i < len; i++) {
-                            buttons[i].addEventListener("click", handleSplitViewButton);
-                        }
+                var buttons = document.querySelectorAll(".splitViewButton");
+                for (var i = 0, len = buttons.length; i < len; i++) {
+                    buttons[i].addEventListener("click", handleSplitViewButton);
+                }
 
-                        // Navigate to either the first scenario or to the last running scenario
-                        // before suspension or termination.
-                        var url = SdkSample.scenarios.getAt(0).url;
-                        var initialState = {};
-                        var navHistory = app.sessionState.navigationHistory;
-                        if (navHistory) {
-                            nav.history = navHistory;
-                            url = navHistory.current.location;
-                            initialState = navHistory.current.state || initialState;
-                        }
-                        initialState.activationKind = activationKind;
-                        initialState.activatedEventArgs = activatedEventArgs;
-                        nav.history.current.initialPlaceholder = true;
-                        return nav.navigate(url, initialState);
-                    });
+                // Navigate to either the first scenario or to the last running scenario
+                // before suspension or termination.
+                var url = SdkSample.scenarios.getAt(0).url;
+                var initialState = {};
+                var navHistory = app.sessionState.navigationHistory;
+                if (navHistory) {
+                    nav.history = navHistory;
+                    url = navHistory.current.location;
+                    initialState = navHistory.current.state || initialState;
+                }
+                initialState.activationKind = activationKind;
+                initialState.activatedEventArgs = activatedEventArgs;
+                nav.history.current.initialPlaceholder = true;
+                return nav.navigate(url, initialState);
+            });
 
-                // Calling done on a promise chain allows unhandled exceptions to propagate.
-                p.done();
+        // Calling done on a promise chain allows unhandled exceptions to propagate.
+        p.done();
 
-                // Use setPromise to indicate to the system that the splash screen must not be torn down
-                // until after processAll and navigate complete asynchronously.
-                eventObject.setPromise(p);
-                break;
-
-            default:
-                break;
-        }
+        // Use setPromise to indicate to the system that the splash screen must not be torn down
+        // until after processAll and navigate complete asynchronously.
+        eventObject.setPromise(p);
     }
 
     function navigating(eventObject) {

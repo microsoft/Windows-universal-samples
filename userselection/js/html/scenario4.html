@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>3 different attribute values</title>
+    <link rel="stylesheet" href="/css/scenario4.css" />
+    <script src="/js/scenario4.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>In this scenario the parent div's -ms-user-select attribute is set "element", thus enabling selection for the parent div. 
+           You will find 5 child divs that have their -ms-user-select attribute set to "inherit", "element", "text", "initial" and "none" respectively.</p>
+        <p> The user has the ability to select everything within the div with attribute set to "element". However if you begin selection from the div marked "text" can select anything on the page. 
+           The "inherit" div just like the parent div is selectable. However the "auto" div takes on the "text" behavior from the parent that is marked "element".
+        </p>
+      
+        <br /><br />
+    </div>
+
+    <div class ="scenario4" data-win-control = "SdkSample.ScenarioOutput">
+       
+        <div id ="parentDiv">
+            <p>The -ms-user-select attribute for the Parent Div is set to "element". Hence selection is enabled.</p>
+            <div id ="DivA">
+                <p> The -ms-user-select attribute for this div is set to "inherit"</p>
+            </div>
+             <div id ="DivB">
+                 <p> The -ms-user-select attribute for this div is set to "element" </p>
+            </div>
+             <div id ="DivC">
+                 <p>The -ms-user-select attribute for this div is set to "text" </p>
+                 <!--<p>If you have coprighted content it is advisable to not use this value for for the -ms-user-select attribute for any of the divs on the page </p>-->
+            </div>
+            <div id ="DivD">
+                 <p> Either you don't use the -ms-user-select attribute or set it to "auto"</p> 
+            </div>
+            <div id ="DivE">
+                 <p>The -ms-user-select attribute for this div is set to "none"</p>
+            </div>
+        </div>
+        
+            
+
+    </div>
+</body>
+</html>

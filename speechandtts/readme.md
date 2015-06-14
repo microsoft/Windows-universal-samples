@@ -11,6 +11,7 @@ Specifically, this sample covers:
 -   Text to speech/speech Synthesis
 -   Synthesis using SSML files
 -   Synthesis voice configuration
+-   Translations for Speech Recognition and Text To Speech for supported languages. Translations provided may not be using ideal phrasing, and are provided for demonstration purposes only.
 
 ## Security and Privacy
 
@@ -23,6 +24,10 @@ In the samples, the scenarios that require acceptance of the privacy policy are 
 ## Known Issues
 
 On small screen devices, part of the UI may be rendered off the right side of the screen. This is due to a layout issue with the sample app, and will be fixed in upcoming releases, and should not significantly impact functionality. It is not recommended to use the sample in landscape mode.
+
+Currently, RecognizeWithUIAsync will fail if the system language does not match the speech language in use in the sample. This will be addressed in a future windows update.
+
+The Privacy link into settings was changed and only functions correctly on Windows Build 10130 or newer. 
 
 
 

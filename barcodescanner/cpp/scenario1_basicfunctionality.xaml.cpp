@@ -16,6 +16,7 @@ using namespace SDKTemplate;
 using namespace Concurrency;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
+using namespace Windows::Devices::Enumeration;
 using namespace Windows::Devices::PointOfService;
 using namespace Windows::Foundation;
 using namespace Windows::Storage::Streams;
@@ -34,15 +35,24 @@ Scenario1_BasicFunctionality::Scenario1_BasicFunctionality() : rootPage(MainPage
 /// </summary>
 task<void> Scenario1_BasicFunctionality::CreateDefaultScannerObject()
 {
-    return create_task(BarcodeScanner::GetDefaultAsync()).then([this](BarcodeScanner^ _scanner)
+    return create_task(DeviceInformation::FindAllAsync(BarcodeScanner::GetDeviceSelector())).then([this](DeviceInformationCollection^ deviceCollection)
     {
-        this->scanner = _scanner;
-        if (this->scanner == nullptr)
+        if (deviceCollection == nullptr || deviceCollection->Size == 0)
         {
             rootPage->NotifyUser("Barcode scanner not found. Please connect a barcode scanner.", NotifyType::ErrorMessage);
+            return task_from_result();
         }
-    });
 
+        DeviceInformation^ scannerInfo = deviceCollection->GetAt(0);
+        return create_task(BarcodeScanner::FromIdAsync(scannerInfo->Id)).then([this](BarcodeScanner^ _scanner)
+        {
+            this->scanner = _scanner;
+            if (this->scanner == nullptr)
+            {
+                rootPage->NotifyUser("Failed to create barcode scanner object.", NotifyType::ErrorMessage);
+            }
+        });
+    });
 }
 
 /// <summary>

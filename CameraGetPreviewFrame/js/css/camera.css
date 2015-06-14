@@ -1,0 +1,19 @@
+﻿/**********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//********************************************************/
+
+/*  The previews will take 50% of the width of the screen. */
+.preview {
+    position: relative;
+    width: 50%;
+    height: auto;
+    max-width: 50%;
+    max-height: 100%;
+}

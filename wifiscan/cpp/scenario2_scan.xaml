@@ -19,28 +19,84 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid x:Name="RootGrid" Margin="12,20,12,12">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <StackPanel Margin="0,0,0,10">
-                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-          Initiate scans and view results on the first WiFi Adapter enumerated by your system.
-                </TextBlock>
+  <Page.Resources>
+    <DataTemplate x:Key="ResultsListViewTemplate">
+      <Grid Margin="2">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*" MinWidth="100"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Column="0" Grid.Row="0" Height="32" Width="32" Margin="0,5" VerticalAlignment="Top" HorizontalAlignment="Left">
+          <Image Source="{Binding Path=WiFiImage}"
+                 Stretch="UniformToFill"/>
+        </Border>
+
+        <Border Grid.Column="1" Grid.Row="0"  Margin="5">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Ssid:" Margin="0,0,5,0"/>
+            <TextBlock Text="{Binding Path=Ssid}" FontWeight="Bold" TextWrapping="Wrap"/>
+          </StackPanel>
+        </Border>
+        <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="5">
+          <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="Bssid:" Margin="0,0,5,0"/>
+              <TextBlock Text="{Binding Path=Bssid}" TextWrapping="Wrap" />
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="Rssi:" Margin="0,0,5,0"/>
+              <TextBlock Text="{Binding Path=Rssi}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="Ch. Frequency:" Margin="0,0,5,0"/>
+              <TextBlock Text="{Binding Path=ChannelCenterFrequency}" TextWrapping="Wrap"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="{Binding Path=SecuritySettings}" TextWrapping="Wrap" Margin="0,0,5,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock FontWeight="Bold" Text="{Binding Path=ConnectivityLevel}" TextWrapping="Wrap" Margin="0,0,5,0"/>
+            </StackPanel>
+          </StackPanel>
+        </Border>
+      </Grid>
+    </DataTemplate>
+  </Page.Resources>
 
-            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Name="Buttons">
-                </StackPanel>
-            </ScrollViewer>
+  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <StackPanel Margin="0,0,0,10">
+        <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+        <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"
+                   Text="Initiate scans and view results on the first WiFi Adapter enumerated by your system." />
+      </StackPanel>
 
-            <ScrollViewer MaxHeight="200" Grid.Row="2" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-                <TextBlock TextWrapping="Wrap" Name="ScenarioOutput"/>
-            </ScrollViewer>
-        </Grid>
+      <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10">
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Name="Buttons">
+          <Button x:Name="ScanButton" Click="Button_Click" IsEnabled="False">Scan</Button>
+        </StackPanel>
+      </ScrollViewer>
+
+      <ScrollViewer Grid.Row="2" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,30">
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+          <Border BorderBrush="AntiqueWhite" BorderThickness="1">
+            <ListView x:Name="ResultsListView"
+                      ItemTemplate="{StaticResource ResultsListViewTemplate}"
+                      ItemsSource="{Binding Path=ResultCollection}">
+            </ListView>
+          </Border>
+        </StackPanel>
+      </ScrollViewer>
+
     </Grid>
+  </Grid>
 </Page>

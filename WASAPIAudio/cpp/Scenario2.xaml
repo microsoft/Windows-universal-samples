@@ -10,7 +10,7 @@
 //*********************************************************
 -->
 
-<common:LayoutAwarePage
+<Page
     x:Class="SDKSample.WASAPIAudio.Scenario2"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -20,7 +20,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot" Background="White">
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -64,17 +64,17 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Text="Additional Options:" Style="{StaticResource BasicTextStyle}" Margin="2,2,0,0"/>
-                        <TextBlock Grid.Row="1" Text="Hardware Offload:" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource CaptionTextStyle}" Margin="5,10,0,0"/>
+                        <TextBlock Grid.Row="1" Text="Hardware Offload:" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource BasicTextStyle}" Margin="5,10,0,0"/>
                         <ToggleSwitch x:Name="toggleHWOffload" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" OffContent="" OnContent="" Margin="120,5,0,0" Grid.RowSpan="2"/>
-                        <TextBlock Grid.Row="2" Text="Background Audio:" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource CaptionTextStyle}" Margin="5,10,0,0"/>
+                        <TextBlock Grid.Row="2" Text="Background Audio:" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource BasicTextStyle}" Margin="5,10,0,0"/>
                         <ToggleSwitch x:Name="toggleBackgroundAudio" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" OffContent="" OnContent="" Margin="120,0,0,0"/>
-                        <TextBlock Grid.Row="3" Text="Raw Mode:" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource CaptionTextStyle}" Margin="5,10,0,0"/>
+                        <TextBlock Grid.Row="3" Text="Raw Mode:" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource BasicTextStyle}" Margin="5,10,0,0"/>
                         <ToggleSwitch x:Name="toggleRawAudio" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" OffContent="" OnContent="" Margin="120,34,0,0" Grid.RowSpan="2"/>
-                        <TextBlock Grid.Row="4" Text="Volume:" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource CaptionTextStyle}" Margin="5,8,0,0"/>
+                        <TextBlock Grid.Row="4" Text="Volume:" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource BasicTextStyle}" Margin="5,8,0,0"/>
                         <Slider x:Name="sliderVolume" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="260" Margin="120,0,0,0" Value="100" ValueChanged="sliderVolume_ValueChanged"/>
-                        <TextBlock Grid.Row="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Hardware Buffer:" Style="{StaticResource CaptionTextStyle}" VerticalAlignment="Top" Margin="5,0,0,0"/>
+                        <TextBlock Grid.Row="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Hardware Buffer:" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Top" Margin="5,0,0,0"/>
                         <TextBox x:Name="txtHWBuffer" Grid.Row="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="120,0,0,0" MinWidth="100"/>
-                        <TextBlock Grid.Row="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="(100ns)" Style="{StaticResource CaptionTextStyle}" VerticalAlignment="Top" Margin="224,4,0,0"/>
+                        <TextBlock Grid.Row="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="(100ns)" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Top" Margin="224,4,0,0"/>
                     </Grid>
                 </Border>
             </StackPanel>
@@ -100,13 +100,5 @@
         <Grid x:Name="Output" Grid.Row="1">
         </Grid>
 
-        <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts -->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="DefaultLayout"/>
-                <VisualState x:Name="Below768Layout"/>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
     </Grid>
-</common:LayoutAwarePage>
+</Page>

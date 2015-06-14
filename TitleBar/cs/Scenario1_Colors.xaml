@@ -1,0 +1,62 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Colors"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Custom colors
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1">
+                <StackPanel VerticalAlignment="Top">
+                    <TextBlock Margin="0,10,0,0" TextWrapping="Wrap">
+                        An app can customize the color of the title bar and the title bar buttons.
+                    </TextBlock>
+                    <RadioButton x:Name="UseStandardColors" Margin="0,10,0,0" GroupName="Colors" Click="UseCustomColors_Click">Use standard colors</RadioButton>
+                    <RadioButton x:Name="UseCustomColors" GroupName="Colors" Click="UseCustomColors_Click">Use custom colors</RadioButton>
+                    <RadioButton x:Name="TransparentWhenExtended" GroupName="Colors" Click="UseCustomColors_Click">Use custom colors with transparent buttons when view is extended (See Scenario 2)</RadioButton>
+                    <TextBlock Margin="0,10,0,0" TextWrapping="Wrap">
+                        Custom BackgroundColor: <Run Text="{x:Bind TitleBar.BackgroundColor, Mode=OneWay}"/>
+                        <LineBreak/>Custom ForegroundColor: <Run Text="{x:Bind TitleBar.ForegroundColor, Mode=OneWay}"/>
+                        <LineBreak/>Custom InactiveBackgroundColor: <Run Text="{x:Bind TitleBar.InactiveBackgroundColor, Mode=OneWay}"/>
+                        <LineBreak/>Custom InactiveForegroundColor: <Run Text="{x:Bind TitleBar.InactiveForegroundColor, Mode=OneWay}"/>
+                        <LineBreak/>
+                        <LineBreak/>Custom ButtonBackgroundColor: <Run Text="{x:Bind TitleBar.ButtonBackgroundColor, Mode=OneWay}"/>
+                        <LineBreak/>Custom ButtonHoverBackgroundColor: <Run Text="{x:Bind TitleBar.ButtonHoverBackgroundColor, Mode=OneWay}"/>
+                        <LineBreak/>Custom ButtonPressedBackgroundColor: <Run Text="{x:Bind TitleBar.ButtonPressedBackgroundColor, Mode=OneWay}"/>
+                        <LineBreak/>Custom ButtonInactiveBackgroundColor: <Run Text="{x:Bind TitleBar.ButtonInactiveBackgroundColor, Mode=OneWay}"/>
+                        <LineBreak/>
+                        <LineBreak/>Custom ButtonForegroundColor: <Run Text="{x:Bind TitleBar.ButtonForegroundColor, Mode=OneWay}"/>
+                        <LineBreak/>Custom ButtonHoverForegroundColor: <Run Text="{x:Bind TitleBar.ButtonHoverForegroundColor, Mode=OneWay}"/>
+                        <LineBreak/>Custom ButtonPressedForegroundColor: <Run Text="{x:Bind TitleBar.ButtonPressedForegroundColor, Mode=OneWay}"/>
+                        <LineBreak/>Custom ButtonInactiveForegroundColor: <Run Text="{x:Bind TitleBar.ButtonInactiveForegroundColor, Mode=OneWay}"/>
+                    </TextBlock>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

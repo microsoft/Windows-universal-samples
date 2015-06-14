@@ -56,7 +56,7 @@ void Scenario2_MessageCaption::Launch_Click(Platform::Object^ sender, Windows::U
 {
 	if ((Message->Text != nullptr) && (Caption->Text != nullptr) && (Target->Text != nullptr))
 	{
-		create_task(Windows::Security::Credentials::UI::CredentialPicker::PickAsync(Message->Text, Caption->Text, Target->Text))
+		create_task(Windows::Security::Credentials::UI::CredentialPicker::PickAsync(Target->Text, Message->Text, Caption->Text))
 			.then([this](CredentialPickerResults^ credPickerResult)
 		{
 			SetResult(credPickerResult);

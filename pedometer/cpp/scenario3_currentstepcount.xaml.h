@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Scenario3_CurrentStepCount.g.h"
+#include "MainPage.xaml.h"
 
 namespace PedometerCPP
 {
@@ -15,6 +16,7 @@ namespace PedometerCPP
     public:
         Scenario3_CurrentStepCount();
     private:
+        SDKTemplate::MainPage^ rootPage;
         void GetCurrentButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
     };
 }

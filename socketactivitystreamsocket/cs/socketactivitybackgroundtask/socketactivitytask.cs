@@ -57,10 +57,6 @@ namespace SocketActivityBackgroundTask
                     case SocketActivityTriggerReason.SocketClosed:
                         socket = new StreamSocket();
                         socket.EnableTransferOwnership(taskInstance.Task.TaskId, SocketActivityConnectedStandbyAction.Wake);
-                        if (ApplicationData.Current.LocalSettings.Values["hostname"] == null)
-                        {
-                            break;
-                        }
                         var hostname = (String)ApplicationData.Current.LocalSettings.Values["hostname"];
                         var port = (String)ApplicationData.Current.LocalSettings.Values["port"];
                         await socket.ConnectAsync(new HostName(hostname), port);

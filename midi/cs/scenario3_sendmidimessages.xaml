@@ -2,7 +2,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -78,7 +78,7 @@
                         </StackPanel>
                     </StackPanel>
                     
-                    <!--Message content-->
+                    <!--Message Send & Reset buttons-->
                     <StackPanel x:Name="sysExMessageContainer" Orientation="Horizontal" Margin="0,20,0,0">
                         <TextBlock x:Name="rawBufferHeader" Text="Enter SysEx Message: " Style="{StaticResource BasicTextStyle}" VerticalAlignment="Bottom" Visibility="Collapsed"/>
                         <TextBox x:Name="sysExMessageContent" Visibility="Collapsed" VerticalAlignment="Center" Margin="5,0,0,0" />

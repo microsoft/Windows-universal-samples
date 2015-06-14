@@ -39,7 +39,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -58,14 +58,14 @@
                         <Button x:Name="loadButton" Content="Load Video" Click="loadButton_Click"/>
                         <Button Name="disconnectButton" Content="Disconnect" Click="disconnectButton_Click"  Grid.Column="2" Visibility="Collapsed"/>
                     </Grid>
-                    
+
                     <StackPanel Orientation="Horizontal" Grid.Row="2">
                         <Button x:Name="watcherControlButton" Margin="0, 5, 0, 5" Content="Start Device Watcher" Click="watcherControlButton_Click"/>
                         <ProgressRing x:Name="progressRing" Margin="5" IsActive="False" Grid.Column="1"/>
                         <TextBlock x:Name="progressText" Margin="0, 10, 0, 0" Grid.Column="2"/>
                     </StackPanel>
 
-                    <ScrollViewer Grid.Row="3" MaxHeight="400" MaxWidth="300" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left">
+                    <ScrollViewer Grid.Row="3" MaxHeight="400" MaxWidth="300" VerticalScrollMode="Auto" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left">
                       <ListBox x:Name="castingDevicesList" MaxWidth="300" HorizontalAlignment="Left" SelectionChanged="castingDevicesList_SelectionChanged">
                         <!--Listbox content is bound to the FriendlyName field of our casting devices-->
                         <ListBox.ItemTemplate>

@@ -88,34 +88,27 @@ namespace ActivitySensorCS
         /// <param name="e"></param>
         async private void ScenarioEnableReadingChanged(object sender, RoutedEventArgs e)
         {
-            try
+            if (null == _activitySensor)
             {
-                if (null == _activitySensor)
-                {
-                    _activitySensor = await ActivitySensor.GetDefaultAsync();
-                }
-
-                if (null != _activitySensor)
-                {
-                    _activitySensor.SubscribedActivities.Add(ActivityType.Walking);
-                    _activitySensor.SubscribedActivities.Add(ActivityType.Running);
-                    _activitySensor.SubscribedActivities.Add(ActivityType.InVehicle);
-                    _activitySensor.SubscribedActivities.Add(ActivityType.Biking);
-                    _activitySensor.SubscribedActivities.Add(ActivityType.Fidgeting);
-
-                    _activitySensor.ReadingChanged += new TypedEventHandler<ActivitySensor, ActivitySensorReadingChangedEventArgs>(ReadingChanged);
-
-                    ScenarioEnableReadingChangedButton.IsEnabled = false;
-                    ScenarioDisableReadingChangedButton.IsEnabled = true;
-                }
-                else
-                {
-                    rootPage.NotifyUser("No activity sensor found", NotifyType.ErrorMessage);
-                }
+                _activitySensor = await ActivitySensor.GetDefaultAsync();
             }
-            catch (UnauthorizedAccessException)
+
+            if (_activitySensor)
             {
-                rootPage.NotifyUser("User has denied access to the activity sensor", NotifyType.ErrorMessage);
+                _activitySensor.SubscribedActivities.Add(ActivityType.Walking);
+                _activitySensor.SubscribedActivities.Add(ActivityType.Running);
+                _activitySensor.SubscribedActivities.Add(ActivityType.InVehicle);
+                _activitySensor.SubscribedActivities.Add(ActivityType.Biking);
+                _activitySensor.SubscribedActivities.Add(ActivityType.Fidgeting);
+
+                _activitySensor.ReadingChanged += new TypedEventHandler<ActivitySensor, ActivitySensorReadingChangedEventArgs>(ReadingChanged);
+
+                ScenarioEnableReadingChangedButton.IsEnabled = false;
+                ScenarioDisableReadingChangedButton.IsEnabled = true;
+            }
+            else
+            {
+                rootPage.NotifyUser("No activity sensor found", NotifyType.ErrorMessage);
             }
         }
 

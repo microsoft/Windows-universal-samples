@@ -1,13 +1,4 @@
-﻿//*********************************************************
-//
-// Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the MIT License (MIT).
-// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
-// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
-// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
-//
-//*********************************************************
+﻿//// Copyright (c) Microsoft Corporation. All rights reserved
 
 (function () {
     "use strict";
@@ -15,6 +6,7 @@
     var page = WinJS.UI.Pages.define("/html/scenario1_Events.html", {
         ready: function (element, options) {
             document.getElementById("registerReadingChanged").addEventListener("click", registerUnregisterReadingChanged, false);
+            document.getElementById("registerReadingChanged").disabled = true;
             Windows.Devices.Sensors.Pedometer.getDefaultAsync().then(function (pedometer) {
                 if (!pedometer) {
                     WinJS.log && WinJS.log("No Pedomter found", "sample", "error");
@@ -24,20 +16,24 @@
                     pedometer.reportInterval = 1000;
                 }
                 defaultPedometer = pedometer;
+                // enable button if pedometer is successfully opened
+                document.getElementById("registerReadingChanged").disabled = false;
             },
             function error(e) {
-                WinJS.log && WinJS.log("Error when opening default pedometer" + e.message + " " + e.description, "sample", "error");
+                WinJS.log && WinJS.log("Error when opening default pedometer. " + e.message, "sample", "error");
             }
             )
         },
         unload: function () {
             document.removeEventListener("visibilitychange", visibilityChangeHandler, false);
-            defaultPedometer.removeEventListener("readingchanged", onReadingChanged);
             document.getElementById("registerReadingChanged").innerText = "Register ReadingChanged";
-            registeredForEvent = false;
 
             // Return the report interval to its default to release resources while the sensor is not in use
-            defaultPedometer.reportInterval = 0;
+            if (defaultPedometer) {
+                defaultPedometer.reportInterval = 0;
+                defaultPedometer.removeEventListener("readingchanged", onReadingChanged);
+                registeredForEvent = false;
+            }
         }
     });
 

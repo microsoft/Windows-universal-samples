@@ -1,4 +1,4 @@
-﻿//*********************************************************
+//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
@@ -40,8 +40,11 @@ namespace CustomSensors
         Windows::Devices::Enumeration::DeviceWatcher^ m_Watcher;
         Windows::Devices::Sensors::Custom::CustomSensor^ m_CustomSensor;
         Microsoft::WRL::Wrappers::CriticalSection m_CritsecCustomSensor;
+        Windows::Devices::Enumeration::DeviceAccessInformation^ m_DeviceAccessInfo;
 
         void GetCO2Level(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void OnCustomSensorAdded(Windows::Devices::Enumeration::DeviceWatcher^ watcher, Windows::Devices::Enumeration::DeviceInformation^ firstDevice);
+        void OnAccessChanged(Windows::Devices::Enumeration::DeviceAccessInformation ^sender, Windows::Devices::Enumeration::DeviceAccessChangedEventArgs ^args);
+        void StartWatcher();
     };
 }

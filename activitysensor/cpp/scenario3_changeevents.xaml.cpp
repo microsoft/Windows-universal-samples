@@ -33,7 +33,6 @@ using namespace Windows::UI::Xaml::Navigation;
 Scenario3_ChangeEvents::Scenario3_ChangeEvents() : rootPage(MainPage::Current)
 {
     InitializeComponent();
-    activitySensor = nullptr;
 }
 
 /// <summary>
@@ -62,7 +61,8 @@ void Scenario3_ChangeEvents::OnNavigatedFrom(NavigationEventArgs^ e)
 
     if (ScenarioDisableReadingChangedButton->IsEnabled)
     {
-        activitySensor->ReadingChanged::remove(readingToken);
+        m_activitySensor->ReadingChanged::remove(m_readingToken);
+        m_readingToken = {};
     }
 }
 
@@ -74,22 +74,16 @@ void Scenario3_ChangeEvents::OnNavigatedFrom(NavigationEventArgs^ e)
 void Scenario3_ChangeEvents::ReadingChanged(ActivitySensor^ sender, ActivitySensorReadingChangedEventArgs^ e)
 {
     // We need to dispatch to the UI thread to display the output
-    Dispatcher->RunAsync(
-        CoreDispatcherPriority::Normal,
-        ref new DispatchedHandler(
-            [this, e]()
-            {
-                ActivitySensorReading^ reading = e->Reading;
+    Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, e]()
+    {
+        ActivitySensorReading^ reading = e->Reading;
 
-                ScenarioOutput_Activity->Text = reading->Activity.ToString();
-                ScenarioOutput_Confidence->Text = reading->Confidence.ToString();
+        ScenarioOutput_Activity->Text = reading->Activity.ToString();
+        ScenarioOutput_Confidence->Text = reading->Confidence.ToString();
 
-                auto timestampFormatter = ref new DateTimeFormatter("day month year hour minute second");
-                ScenarioOutput_ReadingTimestamp->Text = timestampFormatter->Format(reading->Timestamp);
-            },
-            CallbackContext::Any
-            )
-        );
+        auto timestampFormatter = ref new DateTimeFormatter("day month year hour minute second");
+        ScenarioOutput_ReadingTimestamp->Text = timestampFormatter->Format(reading->Timestamp);
+    }));
 }
 
 /// <summary>
@@ -99,43 +93,31 @@ void Scenario3_ChangeEvents::ReadingChanged(ActivitySensor^ sender, ActivitySens
 /// <param name="e"></param>
 void Scenario3_ChangeEvents::ScenarioEnableReadingChanged(Object^ sender, RoutedEventArgs^ e)
 {
-    auto getSensorAsyncTask = GetActivitySensorAsync();
-    getSensorAsyncTask.then([this](task<ActivitySensor^> task)
+    create_task(GetActivitySensorAsync()).then([this](ActivitySensor^ activitySensorResult)
     {
-        try
+        m_activitySensor = activitySensorResult;
+        if (m_activitySensor)
         {
-            activitySensor = task.get();
-            if (nullptr != activitySensor)
-            {
-                activitySensor->SubscribedActivities->Append(ActivityType::Walking);
-                activitySensor->SubscribedActivities->Append(ActivityType::Running);
-                activitySensor->SubscribedActivities->Append(ActivityType::InVehicle);
-                activitySensor->SubscribedActivities->Append(ActivityType::Biking);
-                activitySensor->SubscribedActivities->Append(ActivityType::Fidgeting);
+            m_activitySensor->SubscribedActivities->Append(ActivityType::Walking);
+            m_activitySensor->SubscribedActivities->Append(ActivityType::Running);
+            m_activitySensor->SubscribedActivities->Append(ActivityType::InVehicle);
+            m_activitySensor->SubscribedActivities->Append(ActivityType::Biking);
+            m_activitySensor->SubscribedActivities->Append(ActivityType::Fidgeting);
 
-                readingToken = activitySensor->ReadingChanged::add(ref new TypedEventHandler<ActivitySensor^, ActivitySensorReadingChangedEventArgs^>(this, &Scenario3_ChangeEvents::ReadingChanged));
+            m_readingToken = m_activitySensor->ReadingChanged::add(
+                ref new TypedEventHandler<ActivitySensor^, ActivitySensorReadingChangedEventArgs^>(this, 
+                    &Scenario3_ChangeEvents::ReadingChanged));
 
-                // Update the buttons in the UI thread
-                Dispatcher->RunAsync(
-                    CoreDispatcherPriority::Normal,
-                    ref new DispatchedHandler(
-                        [this]()
-                        {
-                            ScenarioEnableReadingChangedButton->IsEnabled = false;
-                            ScenarioDisableReadingChangedButton->IsEnabled = true;
-                        },
-                        CallbackContext::Any
-                        )
-                    );
-            }
-            else
+            // Update the buttons in the UI thread
+            Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this]()
             {
-                rootPage->NotifyUser("No activity sensor found", NotifyType::ErrorMessage);
-            }
+                ScenarioEnableReadingChangedButton->IsEnabled = false;
+                ScenarioDisableReadingChangedButton->IsEnabled = true;
+            }));
         }
-        catch (AccessDeniedException^)
+        else
         {
-            rootPage->NotifyUser("User has denied access to the activity sensor", NotifyType::ErrorMessage);
+            rootPage->NotifyUser("No activity sensor found", NotifyType::ErrorMessage);
         }
     });
 }
@@ -147,7 +129,8 @@ void Scenario3_ChangeEvents::ScenarioEnableReadingChanged(Object^ sender, Routed
 /// <param name="e"></param>
 void Scenario3_ChangeEvents::ScenarioDisableReadingChanged(Object^ sender, RoutedEventArgs^ e)
 {
-    activitySensor->ReadingChanged::remove(readingToken);
+    m_activitySensor->ReadingChanged::remove(m_readingToken);
+    m_readingToken = {};
 
     ScenarioEnableReadingChangedButton->IsEnabled = true;
     ScenarioDisableReadingChangedButton->IsEnabled = false;
@@ -158,7 +141,7 @@ void Scenario3_ChangeEvents::ScenarioDisableReadingChanged(Object^ sender, Route
 /// </summary>
 task<ActivitySensor^> Scenario3_ChangeEvents::GetActivitySensorAsync()
 {
-    if (nullptr == activitySensor)
+    if (nullptr == m_activitySensor)
     {
         return create_task(ActivitySensor::GetDefaultAsync());
     }
@@ -166,7 +149,7 @@ task<ActivitySensor^> Scenario3_ChangeEvents::GetActivitySensorAsync()
     {
         return create_task([this]() -> ActivitySensor^
         {
-            return activitySensor;
+            return m_activitySensor;
         });
     }
 }

@@ -147,9 +147,9 @@ namespace LiveDash
                 if (buffering.Count > 0)
                 {
                     // Keep 5 seconds
-                    if (now - TimeSpan.FromSeconds(5) > buffering[0].Start)
+                    if (now - TimeSpan.FromSeconds(10) > buffering[0].Start)
                     {
-                        sb.Remove(buffering[0].Start, now - TimeSpan.FromSeconds(5));
+                        sb.Remove(buffering[0].Start, now - TimeSpan.FromSeconds(10));
                     }
                 }
             }
@@ -259,7 +259,7 @@ namespace LiveDash
             {
                 if (activeDownload.Status == TaskStatus.RanToCompletion)
                 {
-                    ((IAsyncOperationWithProgress<IBuffer, HttpProgress>)activeDownload).Cancel();
+                    activeDownload.AsAsyncAction().Cancel();
                 }
             }
         }

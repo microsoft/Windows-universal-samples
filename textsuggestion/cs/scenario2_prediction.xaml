@@ -2,15 +2,16 @@
 Copyright (c) Microsoft Corporation. All rights reserved
 -->
 <Page
-    x:Class="SDKTemplate.Scenario2_Prediction"
+    x:Class="TextSuggestion.Scenario2_Prediction"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TextSuggestion"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
   <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid x:Name="RootGrid" Margin="12,10,12,12">
+    <Grid x:Name="RootGrid" Margin="12,20,12,12">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="*"/>

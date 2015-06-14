@@ -13,9 +13,9 @@ namespace EAS
 	public:
 		Scenario2_CheckCompliance();
 	private:
-		SDKTemplate::MainPage^ rootPage;
-
 		void Launch_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void Reset_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+
+		SDKTemplate::MainPage^ rootPage;
 	};
 }

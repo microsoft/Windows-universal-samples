@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>3 different attribute values</title>
+    <link rel="stylesheet" href="/css/scenario1.css" />
+    <script src="/js/scenario1.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>In this scenario the parent div's -ms-user-select attribute is set "none", thus disabling selection for the parent div. 
+           You will find 5 child divs that have their -ms-user-select attribute set to "inherit", "element", "text", "initial" and "none" respectively.</p>
+        <p> The user has the ability to select everything within the div with attribute set to "element". However if you begin selection from the div marked "text" can select anything on the page. 
+           The "inherit" div and the "auto" div are unselectable just like the parent div.
+        </p>
+    
+        <br /><br />
+    </div>
+
+    <div class="scenario1" data-win-control="SdkSample.ScenarioOutput">
+       
+        <div id ="parentDiv">
+            <p>The -ms-user-select attribute for the Parent Div is set to "none". Hence selection is disabled. </p>
+            <div id ="DivA">
+                <p> The -ms-user-select attribute for this div is set to "inherit"</p>
+            </div>
+             <div id ="DivB">
+                 <p> The -ms-user-select attribute for this div is set to "element" </p>
+            </div>
+             <div id ="DivC">
+                 <p>The -ms-user-select attribute for this div is set to "text" </p>
+                 <!--If you have copyrighted content it is advisable to not use this value for the -ms-user-select attribute for any of the divs on the page-->
+            </div>
+            <div id ="DivD">
+                 <p> Either you don't use the -ms-user-select attribute or set it to "auto"</p> <!-- "initial" in VS intellisense -->
+            </div>
+            <div id ="DivE">
+                 <p>The -ms-user-select attribute for this div is set to "none"</p>
+            </div>
+        </div>
+        
+            
+
+    </div>
+</body>
+</html>

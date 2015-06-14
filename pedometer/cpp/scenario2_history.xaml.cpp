@@ -84,7 +84,7 @@ void PedometerCPP::Scenario2_History::GetHistory_Click(Platform::Object^ /*sende
     // Disable subsequent history retrieval while the async operation is in progress
     GetHistory->IsEnabled = false;
 
-    // clear previous records
+    // clear previous content being displayed
     historyRecords->Clear();
 
     if (getAllHistory)
@@ -144,20 +144,28 @@ void PedometerCPP::Scenario2_History::GetHistory_Click(Platform::Object^ /*sende
 
     if (waitforHistory)
     {
-        auto historyTask = create_task(getHistoryAsync);
-        // rootPage->NotifyUser("Waiting for Async History Retrieval", NotifyType::StatusMessage);
         rootPage->NotifyUser(notificationString, NotifyType::StatusMessage);
-        historyTask.then([this](IVectorView<PedometerReading^>^ historyReadings)
+        auto historyTask = create_task(getHistoryAsync);
+        historyTask.then([this](task<IVectorView<PedometerReading^>^> task)
         {
-            for (unsigned int index = 0; index < historyReadings->Size; index++)
+            try
             {
-                HistoryRecord^ record = ref new HistoryRecord(historyReadings->GetAt(index));
-                historyRecords->Append(record);
-            }
+                auto historyReadings = task.get();
+                for (unsigned int index = 0; index < historyReadings->Size; index++)
+                {
+                    HistoryRecord^ record = ref new HistoryRecord(historyReadings->GetAt(index));
+                    historyRecords->Append(record);
+                }
 
-            // Finally Enable the 
-            GetHistory->IsEnabled = true;
-            rootPage->NotifyUser("History retrieval completed", NotifyType::StatusMessage);
+                rootPage->NotifyUser("History retrieval completed", NotifyType::StatusMessage);
+            }
+            catch (AccessDeniedException^)
+            {
+                rootPage->NotifyUser("Access to the default pedometer is denied", NotifyType::ErrorMessage);
+            }
         });
     }
+
+    // Finally, re-enable history retrieval
+    GetHistory->IsEnabled = true;
 }

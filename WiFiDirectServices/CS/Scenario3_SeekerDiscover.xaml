@@ -1,0 +1,187 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.WiFiDirectServices.Scenario3"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:helpers="using:SDKTemplate.Helpers"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="SmallTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BasicTextStyle}">
+            <Setter Property="FontSize" Value="10"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Discover advertised services as a service seeker and connect to them.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" Orientation="Vertical" MaxWidth="600">
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,10,10">
+                            Note: Append '*' to match a service name prefix
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10">
+                            Service Name:
+                        </TextBlock>
+                        <TextBox x:Name="ServiceName" Grid.Row="1" Grid.Column="1" MaxLength="255" Margin="0,0,0,10"></TextBox>
+                        
+                        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,10,10">
+                            Requested service Info will match substring of advertiser service info
+                        </TextBlock>
+                        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10">
+                            Service Info:
+                        </TextBlock>
+                        <TextBox x:Name="RequestedServiceInfo" Grid.Row="3" Grid.Column="1" MaxLength="255" Margin="0,0,0,10" PlaceholderText="Optional"></TextBox>
+                        
+                        <Button x:Name="Discover" Click="Discover_Click" Grid.Row="4" Grid.Column="0" Margin="0,0,0,10">
+                            Seek
+                        </Button>
+                    </Grid>
+                    
+                    <TextBlock>
+                        Discovered Services:
+                    </TextBlock>
+                    <ListView x:Name="DiscoveredServices" MinHeight="50" SelectionMode="Single">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,20,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Path=ServiceName}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                        <TextBlock Margin="0,0,10,0">ID:</TextBlock>
+                                        <TextBlock Text="{Binding Path=AdvertisementId}" Margin="0,0,10,0"/>
+                                        <TextBlock Text="{Binding Path=ServiceAddress}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                        <TextBlock Margin="0,0,10,0">Config Methods:</TextBlock>
+                                        <TextBlock Text="{Binding Path=ConfigMethods}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="3" Orientation="Horizontal">
+                                        <TextBlock Margin="0,0,10,0">Service Info:</TextBlock>
+                                        <TextBlock Text="{Binding Path=ServiceInfo}" Style="{StaticResource SmallTextStyle}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    
+                    <TextBlock Margin="0,0,0,0">
+                        Connection Options:
+                    </TextBlock>
+                    <TextBlock Margin="0,0,0,10" TextWrapping="Wrap" Style="{StaticResource SmallTextStyle}">
+                        Either click "Connect" to use default WFDS config method, or select a config method that the other device supports and click
+                        "Begin Provisioning". After getting provisioning info, enter the PIN (any PIN if using PIN display, PIN from remote side if using PIN keypad),
+                        and click "Connect".
+                    </TextBlock>
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" VerticalAlignment="Center" Margin="0,0,10,10" Style="{StaticResource CaptionTextBlockStyle}">
+                            Prefer GO:
+                        </TextBlock>
+                        <CheckBox x:Name="PreferGO" Grid.Row="0" Grid.Column="1" Margin="0,0,0,10" />
+                        
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" Style="{StaticResource CaptionTextBlockStyle}">
+                            Session Info:
+                        </TextBlock>
+                        <TextBox x:Name="SessionInfo" Grid.Row="1" Grid.Column="1" MaxLength="144" Margin="0,0,0,10" PlaceholderText="Max 144 bytes"></TextBox>
+                        
+                        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" Style="{StaticResource CaptionTextBlockStyle}">
+                            Selected Config Method:
+                        </TextBlock>
+                        <ComboBox x:Name="SelectedConfigMethod" Grid.Row="2"  Grid.Column="1" Margin="0,0,0,10"
+                                  SelectedIndex="0">
+                            <ComboBoxItem>WFDS Default</ComboBoxItem>
+                            <ComboBoxItem>PIN Keypad</ComboBoxItem>
+                            <ComboBoxItem>PIN Display</ComboBoxItem>
+                        </ComboBox>
+                        
+                        <Button x:Name="GetProvisioningInfo" Click="GetProvisioningInfo_Click" Grid.Row="3" Grid.Column="0" Margin="0,0,0,10">
+                            Begin Provisioning
+                        </Button>
+                        <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,10,0" Style="{StaticResource CaptionTextBlockStyle}">
+                            (Optional if using default config method)
+                        </TextBlock>
+                        
+                        <TextBlock x:Name="ProvisioningOutput" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="0,0,10,0">
+                        </TextBlock>
+                        
+                        <Button x:Name="DoConnect" Click="DoConnect_Click" Grid.Row="5" Grid.Column="0" Margin="0,0,0,10">
+                            Connect
+                        </Button>
+                        <Grid Grid.Row="5" Grid.Column="1" Margin="0,0,0,10" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0" Style="{StaticResource CaptionTextBlockStyle}">
+                                PIN:
+                            </TextBlock>
+                            <TextBox x:Name="ConnectPin" Grid.Column="1" HorizontalAlignment="Stretch" Width="Auto" PlaceholderText="if required"></TextBox>
+                        </Grid>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

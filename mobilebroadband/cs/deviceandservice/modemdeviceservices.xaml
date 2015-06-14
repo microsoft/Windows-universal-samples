@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
@@ -19,7 +19,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition/>
@@ -35,8 +35,8 @@
                 This scenario demonstrates the use of the Mobile Broadband APIs used by network operators. This interface allows you to access the modem device services.
             </TextBlock.Text>
         </TextBlock>
-        <Button Content="Get DeviceService" Name="btnDeviceService" Click="btnDeviceService_Click" Grid.Column="0" Margin="0,128,0,0" />
+        <Button Content="Get DeviceService" Name="btnDeviceService" Click="btnDeviceService_Click" Grid.Row="1" Grid.Column="0" />
         <TextBlock Name="txtModemInformation" TextWrapping="WrapWholeWords" Style="{StaticResource BasicTextStyle}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
-
+        
     </Grid>
 </Page>

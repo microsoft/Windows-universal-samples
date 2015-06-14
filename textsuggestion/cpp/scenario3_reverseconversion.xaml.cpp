@@ -23,9 +23,10 @@ Scenario3_ReverseConversion::Scenario3_ReverseConversion()
 
 /// <summary>
 /// This is the click handler for the 'Create Generator' button.
-/// When this button is activated, the Text Suggestion API will try
-/// to resolve the language tag provided by the user, and create a 
-/// Reverse Conversion Generator.
+/// When this button is activated, this method will create a reverse conversion
+/// generator with the language tag provided by the user. The generator will 
+/// try to resolve the language tag and check if the language is supported
+/// and installed.
 /// </summary>
 /// <param name="sender">The object that raised the event.</param>
 /// <param name="e">Event data that describes the click action on the button.</param>
@@ -49,6 +50,7 @@ void Scenario3_ReverseConversion::CreateGeneratorButton_Click(Platform::Object^ 
     }
     else if (generator->ResolvedLanguage == "und")
     {
+        if (generatorOperationArea != nullptr)
         {
             generatorOperationArea->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
         }
@@ -80,9 +82,9 @@ void Scenario3_ReverseConversion::CreateGeneratorButton_Click(Platform::Object^ 
 
 /// <summary>
 /// This is the click handler for the 'Execute' button.
-/// When this button is activated, the text suggestion generator will get
-/// the conversion result for given input string and language tag, then 
-/// print them in result column.
+/// When this button is activated, the reverse conversion generator will get
+/// the reverse conversion result for given input string and language tag,  
+/// then print it in result column.
 /// Using 'concurrency::create_task' to create an asynchronous task and
 /// handle the result when it completes.
 /// </summary>

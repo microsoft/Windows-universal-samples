@@ -6,6 +6,7 @@
     <ClCompile Include="D2DGradientMeshMain.cpp" />
     <ClCompile Include="D2DGradientMeshRenderer.cpp" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="CustomTextRenderer.cpp" />
     <ClCompile Include="DeviceResources.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -15,6 +16,7 @@
     <ClInclude Include="D2DGradientMeshMain.h" />
     <ClInclude Include="D2DGradientMeshRenderer.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="CustomTextRenderer.h" />
     <ClInclude Include="DeviceResources.h" />
   </ItemGroup>
   <ItemGroup>

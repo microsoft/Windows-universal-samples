@@ -24,9 +24,10 @@ Scenario2_Prediction::Scenario2_Prediction()
 
 /// <summary>
 /// This is the click handler for the 'Create Generator' button.
-/// When this button is activated, the Text Suggestion API will try
-/// to resolve the language tag provided by the user, and create a 
-/// Prediction Generator.
+/// When this button is activated, this method will create a text prediction
+/// generator with the language tag provided by the user. The generator will 
+/// try to resolve the language tag and check if the language is supported
+/// and installed.
 /// </summary>
 /// <param name="sender">The object that raised the event.</param>
 /// <param name="e">Event data that describes the click action on the button.</param>
@@ -50,6 +51,7 @@ void Scenario2_Prediction::CreateGeneratorButton_Click(Platform::Object^ sender,
     }
     else if (generator->ResolvedLanguage == "und")
     {
+        if (generatorOperationArea != nullptr)
         {
             generatorOperationArea->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
         }
@@ -80,7 +82,7 @@ void Scenario2_Prediction::CreateGeneratorButton_Click(Platform::Object^ sender,
 }
 
 /// <summary>
-/// Selecting the API interface to use.
+/// Selecting the generator method to use.
 /// User can either specify the max candidate number to get, or use the default value.
 /// </summary>
 /// <param name="sender">The object that raised the event.</param>
@@ -106,8 +108,8 @@ void Scenario2_Prediction::Methods_SelectionChanged(Platform::Object^ sender, Se
 
 /// <summary>
 /// This is the click handler for the 'Execute' button.
-/// When this button is activated, the text suggestion generator will get
-/// the Prediction result for given input string and language tag, then 
+/// When this button is activated, the text prediction generator will get
+/// the prediction candidates for given input string and language tag, then 
 /// print them in result column.
 /// Using 'concurrency::create_task' to create an asynchronous task and
 /// handle the result when it completes.
@@ -137,20 +139,9 @@ void Scenario2_Prediction::Execute_Click(Platform::Object^ sender, RoutedEventAr
             if (maxCandidateCount > 0)
             {
                 // Call the API with max candidate number we expect, and list the result when there are any candidates.
-                concurrency::create_task(generator->GetCandidatesAsync(input, static_cast<UINT>(maxCandidateCount))).then([this](IVectorView<Platform::String^>^ result)
+                concurrency::create_task(generator->GetCandidatesAsync(input, static_cast<UINT>(maxCandidateCount))).then([this](IVectorView<String^>^ candidates)
                 {
-                    itemsSource = ref new Vector<Platform::String^>();
-                    for (unsigned int i = 0; i < result->Size; i++)
-                    {
-                        itemsSource->Append(result->GetAt(i));
-                    }
-
-                    resultView->ItemsSource = itemsSource;
-
-                    if (resultView->Items->Size == 0)
-                    {
-                        MainPage::Current->NotifyUser("No candidates.", NotifyType::StatusMessage);
-                    }
+                    displayMultipleCandidates(candidates);
                 });
             }
             else
@@ -161,21 +152,31 @@ void Scenario2_Prediction::Execute_Click(Platform::Object^ sender, RoutedEventAr
         else
         {
             // Call the API with default candidate number, and list the result when there are any candidates. 
-            concurrency::create_task(generator->GetCandidatesAsync(input)).then([this](IVectorView<Platform::String^>^ result)
+            concurrency::create_task(generator->GetCandidatesAsync(input)).then([this](IVectorView<String^>^ candidates)
             {
-                itemsSource = ref new Vector<Platform::String^>();
-                for (unsigned int i = 0; i < result->Size; i++)
-                {
-                    itemsSource->Append(result->GetAt(i));
-                }
-
-                resultView->ItemsSource = itemsSource;
-
-                if (resultView->Items->Size == 0)
-                {
-                    MainPage::Current->NotifyUser("No candidates.", NotifyType::StatusMessage);
-                }
+                displayMultipleCandidates(candidates);
             });
         }
     }
 }
+
+/// <summary>
+/// Helper method for displaying prediction candidates.
+/// </summary>
+/// <param name="result">The prediction candidates we got from text prediction generator.</param>
+void Scenario2_Prediction::displayMultipleCandidates(IVectorView<String^>^ candidates)
+{
+    Vector<String^>^ itemsSource = ref new Vector<String^>();
+    for (unsigned int i = 0; i < candidates->Size; i++)
+    {
+        itemsSource->Append(candidates->GetAt(i));
+    }
+
+    resultView->ItemsSource = itemsSource;
+
+    if (resultView->Items->Size == 0)
+    {
+        MainPage::Current->NotifyUser("No candidates.", NotifyType::StatusMessage);
+    }
+}
+

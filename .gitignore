@@ -15,6 +15,7 @@
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
+[Gg]enerated Files/
 x64/
 x86/
 build/
@@ -194,3 +195,6 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+
+# Custom ignores
+gallery.xml

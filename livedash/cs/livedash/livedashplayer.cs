@@ -67,7 +67,9 @@ namespace LiveDash
 
                     if (!manifest.IsSupportedProfile)
                     {
-                        throw new NotSupportedException("Only support Live profile for DASH \"urn:mpeg:dash:profile:isoff-live:2011\"");
+#if DEBUG
+                        Logger.Log("The profiles attribute does not contain the \"urn:mpeg:dash:profile:isoff-live:2011\" profile, so it may not work as expected.");
+#endif
                     }
                     if (manifest.IsLive)
                     {

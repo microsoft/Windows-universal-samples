@@ -53,7 +53,7 @@
                                              Margin="5,0"/>
                         </StackPanel>
                     </StackPanel>
-                    <Grid x:Name="Output" Background="LightGray" Height="Auto">
+                    <Grid x:Name="Output" Background="{ThemeResource SystemControlBackgroundChromeWhiteBrush}" Height="Auto">
                         <!-- Inking area -->
                         <InkCanvas x:Name="inkCanvas" Height="Auto"/>
                     </Grid>

@@ -129,6 +129,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DisplayHelpers.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
       <DependentUpon>App.xaml</DependentUpon>
@@ -146,6 +147,9 @@
     <ClInclude Include="Scenario3_RegisterForUpdates.xaml.h">
       <DependentUpon>Scenario3_RegisterForUpdates.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario4_Connect.xaml.h">
+      <DependentUpon>Scenario4_Connect.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -157,6 +161,7 @@
     <Page Include="Scenario1_CachedNetworks.xaml" />
     <Page Include="Scenario2_Scan.xaml" />
     <Page Include="Scenario3_RegisterForUpdates.xaml" />
+    <Page Include="Scenario4_Connect.xaml" />
     <Page Include="Styles\Styles.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +173,7 @@
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>App.xaml</DependentUpon>
     </ClCompile>
+    <ClCompile Include="DisplayHelpers.cpp" />
     <ClCompile Include="MainPage.xaml.cpp">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClCompile>
@@ -189,8 +195,21 @@
     <ClCompile Include="Scenario3_RegisterForUpdates.xaml.cpp">
       <DependentUpon>Scenario3_RegisterForUpdates.xaml</DependentUpon>
     </ClCompile>
+    <ClCompile Include="Scenario4_Connect.xaml.cpp">
+      <DependentUpon>Scenario4_Connect.xaml</DependentUpon>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\open_1bar.png" />
+    <Image Include="Assets\open_2bar.png" />
+    <Image Include="Assets\open_3bar.png" />
+    <Image Include="Assets\open_4bar.png" />
+    <Image Include="Assets\open_5bar.png" />
+    <Image Include="Assets\secure_1bar.png" />
+    <Image Include="Assets\secure_2bar.png" />
+    <Image Include="Assets\secure_3bar.png" />
+    <Image Include="Assets\secure_4bar.png" />
+    <Image Include="Assets\secure_5bar.png" />
     <Image Include="Assets\smallTile-sdk.png" />
     <Image Include="Assets\splash-sdk.png" />
     <Image Include="Assets\squareTile-sdk.png" />

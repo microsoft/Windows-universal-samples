@@ -1,0 +1,45 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario2.css" />
+    <script src="/js/scenario2_devicewatcher.js"></script>
+    <script src="/js/displayhelpers.js"></script>
+</head>
+<body>
+    <div id="resultsViewTemplate" data-win-control="WinJS.Binding.Template">
+        <div style="padding:2px; border:1px solid gray; white-space:nowrap">
+            <div>Name: <span data-win-bind="innerText: name" style="font-weight:bold"></span></div>
+            <div>Id: <span data-win-bind="innerText: id"></span></div>
+        </div>
+    </div>
+
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                This scenario demonstrates the use of the Windows.Devices.Enumeration DeviceWatcher. Device Watcher allows you to find and recieve updates for devices that you care about
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>Choose a device selector:<br />
+            <select id="selectorComboBox">
+            </select>
+            </p>
+            <button id="startWatcherButton">Start Watcher</button>
+            <button id="stopWatcherButton" disabled="true">Stop Watcher</button>
+        </div>
+        <div id="resultsListView"
+             style="border:2px solid white;"
+             data-win-control="WinJS.UI.ListView"
+             data-win-options="{
+                itemTemplate: select('#resultsViewTemplate'),
+                layout: {type: WinJS.UI.ListLayout}}">
+        </div>
+    </div>
+</body>
+</html>

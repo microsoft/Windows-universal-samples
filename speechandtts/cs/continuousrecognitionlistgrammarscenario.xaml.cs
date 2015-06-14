@@ -9,14 +9,17 @@
 //
 //*********************************************************
 
+using SDKTemplate;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources.Core;
+using Windows.Globalization;
+using Windows.Media.SpeechRecognition;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
-using Windows.UI.Core;
-using Windows.Media.SpeechRecognition;
-using System;
-using System.Collections.Generic;
 
 namespace SpeechAndTTS
 {
@@ -31,6 +34,16 @@ namespace SpeechAndTTS
 
         // The speech recognizer used throughout this sample.
         private SpeechRecognizer speechRecognizer;
+
+        /// <summary>
+        /// the HResult 0x8004503a typically represents the case where a recognizer for a particular language cannot
+        /// be found. This may occur if the language is installed, but the speech pack for that language is not.
+        /// See Settings -> Time & Language -> Region & Language -> *Language* -> Options -> Speech Language Options.
+        /// </summary>
+        private static uint HResultRecognizerNotFound = 0x8004503a;
+
+        private ResourceContext speechContext;
+        private ResourceMap speechResourceMap;
 
         // Keep track of whether the continuous recognizer is currently running, so it can be cleaned up appropriately.
         private bool isListening;
@@ -69,39 +82,196 @@ namespace SpeechAndTTS
                 this.resultTextBlock.Text = "Permission to access capture resources was not given by the user, reset the application setting in Settings->Privacy->Microphone.";
             }
 
-            if (this.speechRecognizer == null)
+            // Initialize resource map to retrieve localized speech strings.
+            Language speechLanguage = SpeechRecognizer.SystemSpeechLanguage;
+            string langTag = speechLanguage.LanguageTag;
+            speechContext = ResourceContext.GetForCurrentView();
+            speechContext.Languages = new string[] { langTag };
+
+            speechResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("LocalizationSpeechResources");
+
+            PopulateLanguageDropdown();
+            await InitializeRecognizer(SpeechRecognizer.SystemSpeechLanguage);
+        }
+
+        /// <summary>
+        /// Look up the supported languages for this speech recognition scenario, 
+        /// that are installed on this machine, and populate a dropdown with a list.
+        /// </summary>
+        private void PopulateLanguageDropdown()
+        {
+            // disable the callback so we don't accidentally trigger initialization of the recognizer
+            // while initialization is already in progress.
+            cbLanguageSelection.SelectionChanged -= cbLanguageSelection_SelectionChanged;
+            Language defaultLanguage = SpeechRecognizer.SystemSpeechLanguage;
+            IEnumerable<Language> supportedLanguages = SpeechRecognizer.SupportedGrammarLanguages;
+            foreach (Language lang in supportedLanguages)
             {
-                this.speechRecognizer = new SpeechRecognizer();
+                ComboBoxItem item = new ComboBoxItem();
+                item.Tag = lang;
+                item.Content = lang.DisplayName;
+
+                cbLanguageSelection.Items.Add(item);
+                if (lang.LanguageTag == defaultLanguage.LanguageTag)
+                {
+                    item.IsSelected = true;
+                    cbLanguageSelection.SelectedItem = item;
+                }
+            }
+            
+            cbLanguageSelection.SelectionChanged += cbLanguageSelection_SelectionChanged;
+        }
+
+        /// <summary>
+        /// When a user changes the speech recognition language, trigger re-initialization of the 
+        /// speech engine with that language, and change any speech-specific UI assets.
+        /// </summary>
+        /// <param name="sender">Ignored</param>
+        /// <param name="e">Ignored</param>
+        private async void cbLanguageSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem item = (ComboBoxItem)(cbLanguageSelection.SelectedItem);
+            Language newLanguage = (Language)item.Tag;
+            if (speechRecognizer != null)
+            {
+                if (speechRecognizer.CurrentLanguage == newLanguage)
+                {
+                    return;
+                }
             }
 
-            // Provide feedback to the user about the state of the recognizer. This can be used to provide visual feedback in the form
-            // of an audio indicator to help the user understand whether they're being heard.
-            speechRecognizer.StateChanged += SpeechRecognizer_StateChanged;
-
-            // Build a command-list grammar. Commands should ideally be drawn from a resource file for localization, and 
-            // be grouped into tags for alternate forms of the same command.
-            speechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(new List<string>() { "Go Home" }, "Home"));
-            speechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(new List<string>() { "Go to Contoso Studio" }, "GoToContosoStudio"));
-            speechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(new List<string>() { "Show Message", "Open Message" }, "Message"));
-            speechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(new List<string>() { "Send Email", "Create Email" }, "Email"));
-            speechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(new List<string>() { "Call Nita Farley", "Call Nita" }, "CallNita"));
-            speechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(new List<string>() { "Call Wayne Sigmon ", "Call Wayne" }, "CallWayne"));
-
-            SpeechRecognitionCompilationResult result = await speechRecognizer.CompileConstraintsAsync();
-            if (result.Status != SpeechRecognitionResultStatus.Success)
+            // trigger cleanup and re-initialization of speech.
+            try
             {
-                // Disable the recognition buttons.
-                btnContinuousRecognize.IsEnabled = false;
+                // update the context for resource lookup
+                speechContext.Languages = new string[] { newLanguage.LanguageTag };
 
-                // Let the user know that the grammar didn't compile properly.
-                resultTextBlock.Visibility = Visibility.Visible;
-                resultTextBlock.Text = "Unable to compile grammar.";
+                await InitializeRecognizer(newLanguage);
+            }
+            catch (Exception exception)
+            {
+                var messageDialog = new Windows.UI.Popups.MessageDialog(exception.Message, "Exception");
+                await messageDialog.ShowAsync();
             }
 
-            // Handle continuous recognition events. Completed fires when various error states occur. ResultGenerated fires when
-            // some recognized phrases occur, or the garbage rule is hit.
-            speechRecognizer.ContinuousRecognitionSession.Completed += ContinuousRecognitionSession_Completed;
-            speechRecognizer.ContinuousRecognitionSession.ResultGenerated += ContinuousRecognitionSession_ResultGenerated;
+        }
+
+        /// <summary>
+        /// Initialize Speech Recognizer and compile constraints.
+        /// </summary>
+        /// <param name="recognizerLanguage">Language to use for the speech recognizer</param>
+        /// <returns>Awaitable task.</returns>
+        private async Task InitializeRecognizer(Language recognizerLanguage)
+        {
+            if (speechRecognizer != null)
+            {
+                // cleanup prior to re-initializing this scenario.
+                speechRecognizer.StateChanged -= SpeechRecognizer_StateChanged;
+                speechRecognizer.ContinuousRecognitionSession.Completed -= ContinuousRecognitionSession_Completed;
+                speechRecognizer.ContinuousRecognitionSession.ResultGenerated -= ContinuousRecognitionSession_ResultGenerated;
+
+                this.speechRecognizer.Dispose();
+                this.speechRecognizer = null;
+            }
+
+            try {
+                this.speechRecognizer = new SpeechRecognizer(recognizerLanguage);
+
+                // Provide feedback to the user about the state of the recognizer. This can be used to provide visual feedback in the form
+                // of an audio indicator to help the user understand whether they're being heard.
+                speechRecognizer.StateChanged += SpeechRecognizer_StateChanged;
+
+                // Build a command-list grammar. Commands should ideally be drawn from a resource file for localization, and 
+                // be grouped into tags for alternate forms of the same command.
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
+                        speechResourceMap.GetValue("ListGrammarGoHome", speechContext).ValueAsString
+                        }, "Home"));
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
+                        speechResourceMap.GetValue("ListGrammarGoToContosoStudio", speechContext).ValueAsString
+                        }, "GoToContosoStudio"));
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
+                        speechResourceMap.GetValue("ListGrammarShowMessage", speechContext).ValueAsString,
+                        speechResourceMap.GetValue("ListGrammarOpenMessage", speechContext).ValueAsString
+                        }, "Message"));
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
+                        speechResourceMap.GetValue("ListGrammarSendEmail", speechContext).ValueAsString,
+                        speechResourceMap.GetValue("ListGrammarCreateEmail", speechContext).ValueAsString
+                        }, "Email"));
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
+                        speechResourceMap.GetValue("ListGrammarCallNitaFarley", speechContext).ValueAsString,
+                        speechResourceMap.GetValue("ListGrammarCallNita", speechContext).ValueAsString
+                        }, "CallNita"));
+                speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
+                        speechResourceMap.GetValue("ListGrammarCallWayneSigmon", speechContext).ValueAsString,
+                        speechResourceMap.GetValue("ListGrammarCallWayne", speechContext).ValueAsString
+                        }, "CallWayne"));
+
+                // Update the help text in the UI to show localized examples
+                string uiOptionsText = string.Format("Try saying '{0}', '{1}' or '{2}'",
+                    speechResourceMap.GetValue("ListGrammarGoHome", speechContext).ValueAsString,
+                    speechResourceMap.GetValue("ListGrammarGoToContosoStudio", speechContext).ValueAsString,
+                    speechResourceMap.GetValue("ListGrammarShowMessage", speechContext).ValueAsString);
+                listGrammarHelpText.Text = string.Format("{0}\n{1}",
+                    speechResourceMap.GetValue("ListGrammarHelpText", speechContext).ValueAsString,
+                    uiOptionsText);
+
+                SpeechRecognitionCompilationResult result = await speechRecognizer.CompileConstraintsAsync();
+                if (result.Status != SpeechRecognitionResultStatus.Success)
+                {
+                    // Disable the recognition buttons.
+                    btnContinuousRecognize.IsEnabled = false;
+
+                    // Let the user know that the grammar didn't compile properly.
+                    resultTextBlock.Visibility = Visibility.Visible;
+                    resultTextBlock.Text = "Unable to compile grammar.";
+                }
+                else
+                {
+                    btnContinuousRecognize.IsEnabled = true;
+
+                    resultTextBlock.Visibility = Visibility.Collapsed;
+
+
+                    // Handle continuous recognition events. Completed fires when various error states occur. ResultGenerated fires when
+                    // some recognized phrases occur, or the garbage rule is hit.
+                    speechRecognizer.ContinuousRecognitionSession.Completed += ContinuousRecognitionSession_Completed;
+                    speechRecognizer.ContinuousRecognitionSession.ResultGenerated += ContinuousRecognitionSession_ResultGenerated;
+                }
+            }
+            catch (Exception ex)
+            {
+                if ((uint)ex.HResult == HResultRecognizerNotFound)
+                {
+                    btnContinuousRecognize.IsEnabled = false;
+
+                    resultTextBlock.Visibility = Visibility.Visible;
+                    resultTextBlock.Text = "Speech Language pack for selected language not installed.";
+                }
+                else
+                {
+                    var messageDialog = new Windows.UI.Popups.MessageDialog(ex.Message, "Exception");
+                    await messageDialog.ShowAsync();
+                }
+            }
+
         }
 
         /// <summary>
@@ -143,6 +313,7 @@ namespace SpeechAndTTS
                 {
                     rootPage.NotifyUser("Continuous Recognition Completed: " + args.Status.ToString(), NotifyType.StatusMessage);
                     ContinuousRecoButtonText.Text = " Continuous Recognition";
+                    cbLanguageSelection.IsEnabled = true;
                     isListening = false;
                 });
             }
@@ -174,7 +345,7 @@ namespace SpeechAndTTS
                 {
                     heardYouSayTextBlock.Visibility = Visibility.Visible;
                     resultTextBlock.Visibility = Visibility.Visible;
-                    resultTextBlock.Text = string.Format("Heard: {0}, (Tag: '{1}', Confidence: {2})", args.Result.Text, tag, args.Result.Confidence.ToString());
+                    resultTextBlock.Text = string.Format("Heard: '{0}', (Tag: '{1}', Confidence: {2})", args.Result.Text, tag, args.Result.Confidence.ToString());
                 });
             }
             else
@@ -216,6 +387,7 @@ namespace SpeechAndTTS
                 if (speechRecognizer.State == SpeechRecognizerState.Idle)
                 {
                     ContinuousRecoButtonText.Text = " Stop Continuous Recognition";
+                    cbLanguageSelection.IsEnabled = false;
                     isListening = true;
                     await speechRecognizer.ContinuousRecognitionSession.StartAsync();
                 }
@@ -224,6 +396,7 @@ namespace SpeechAndTTS
             {
                 isListening = false;
                 ContinuousRecoButtonText.Text = " Continuous Recognition";
+                cbLanguageSelection.IsEnabled = true;
 
                 heardYouSayTextBlock.Visibility = Visibility.Collapsed;
                 resultTextBlock.Visibility = Visibility.Collapsed;

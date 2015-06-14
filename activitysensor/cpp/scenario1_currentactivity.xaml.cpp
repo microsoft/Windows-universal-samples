@@ -42,31 +42,22 @@ void Scenario1_CurrentActivity::ScenarioGetCurrentActivity(Object^ sender, Route
     ScenarioOutput_Timestamp->Text = "No data";
     rootPage->NotifyUser("", NotifyType::StatusMessage);
 
-    task<ActivitySensor^> getDefaultTask(ActivitySensor::GetDefaultAsync());
-    getDefaultTask.then([this](task<ActivitySensor^> task)
+    create_task(ActivitySensor::GetDefaultAsync()).then([this](ActivitySensor^ activitySensor)
     {
-        try
+        if (activitySensor)
         {
-            ActivitySensor^ activitySensor = task.get();
-            if (nullptr != activitySensor)
+            create_task(activitySensor->GetCurrentReadingAsync()).then([this](ActivitySensorReading^ reading)
             {
-                create_task(activitySensor->GetCurrentReadingAsync()).then([this](ActivitySensorReading^ reading)
-                {
-                    ScenarioOutput_Activity->Text = reading->Activity.ToString();
-                    ScenarioOutput_Confidence->Text = reading->Confidence.ToString();
+                ScenarioOutput_Activity->Text = reading->Activity.ToString();
+                ScenarioOutput_Confidence->Text = reading->Confidence.ToString();
 
-                    auto timestampFormatter = ref new DateTimeFormatter("day month year hour minute second");
-                    ScenarioOutput_Timestamp->Text = timestampFormatter->Format(reading->Timestamp);
-                });
-            }
-            else
-            {
-                rootPage->NotifyUser("No activity sensor found", NotifyType::ErrorMessage);
-            }
+                auto timestampFormatter = ref new DateTimeFormatter("day month year hour minute second");
+                ScenarioOutput_Timestamp->Text = timestampFormatter->Format(reading->Timestamp);
+            });
         }
-        catch (AccessDeniedException^)
+        else
         {
-            rootPage->NotifyUser("User has denied access to the activity sensor", NotifyType::ErrorMessage);
+            rootPage->NotifyUser("No activity sensor found", NotifyType::ErrorMessage);
         }
     });
 }

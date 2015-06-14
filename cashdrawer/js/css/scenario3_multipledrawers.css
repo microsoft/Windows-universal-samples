@@ -15,3 +15,10 @@ button {
     margin: 5px 5px 2px 0px;
     width: 150px;
 }
+
+.instanceBox {
+    border: 1px solid gray;
+    padding: 5px;
+    margin: 5px 5px 5px 0px;
+    float:left;
+}

@@ -136,7 +136,7 @@ HRESULT WaveEffect::Initialize(
         pEffectContext->FindVertexBuffer(&GUID_WaveTransformVertexBuffer, &m_vertexBuffer);
         if (m_vertexBuffer == nullptr)
         {
-            Vertex *mesh = nullptr;
+            Vertex* mesh;
             hr = GenerateMesh(&mesh);
 
             if (SUCCEEDED(hr))

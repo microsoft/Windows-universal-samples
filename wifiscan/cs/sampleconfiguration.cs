@@ -24,7 +24,8 @@ namespace SDKTemplate
         {
             new Scenario() { Title="Cached Networks", ClassType=typeof(Scenario1_CachedNetworks)},
             new Scenario() { Title="Scan", ClassType=typeof(Scenario2_Scan)},
-            new Scenario() { Title="Register for Updates", ClassType=typeof(Scenario3_RegisterForUpdates)}
+            new Scenario() { Title="Register for Scan Updates", ClassType=typeof(Scenario3_RegisterForUpdates)},
+            new Scenario() { Title="Connect", ClassType=typeof(Scenario4_Connect)}
         };
     }
 
