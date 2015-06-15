@@ -69,12 +69,6 @@ namespace NavigationMenuSample
 
             SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManager_BackRequested;
 
-            // If on a phone device that has hardware buttons then we hide the app's back button.
-            if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-            {
-                this.BackButton.Visibility = Visibility.Collapsed;
-            }
-
             NavMenuList.ItemsSource = navlist;
         }
 
@@ -224,6 +218,12 @@ namespace NavigationMenuSample
             {
                 var control = (Page)e.Content;
                 control.Loaded += Page_Loaded;
+            }
+
+            //Set visibility of back button on SystemNaviagtion
+            if (!ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            {
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
             }
         }
 

@@ -72,16 +72,6 @@
                                           ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
                                           ItemTemplate="{StaticResource NavMenuItemTemplate}"
                                           ItemInvoked="NavMenuList_ItemInvoked">
-                    <controls:NavMenuListView.Header>
-                        <!-- Using this custom back navigation button until the system-provided back button is enabled. -->
-                        <Button x:Name="BackButton"
-                                TabIndex="2"
-                                Style="{StaticResource NavigationBackButtonStyle}"
-                                IsEnabled="{Binding AppFrame.CanGoBack, ElementName=Root}"
-                                Width="{Binding ItemsPanelRoot.Width, ElementName=NavMenuList}"
-                                HorizontalAlignment="{Binding ItemsPanelRoot.HorizontalAlignment, ElementName=NavMenuList}"
-                                Click="BackButton_Click"/>
-                    </controls:NavMenuListView.Header>
                 </controls:NavMenuListView>
             </SplitView.Pane>
 
