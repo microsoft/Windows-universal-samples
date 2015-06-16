@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario3.css" />
+    <script src="/js/scenario3.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>You will find a div and a text box. The Div is set to "element" making the static text selectable. However the text box within it is unselectable.</p>
+        <!--When entering important financial information like bank account numbers it would be nice if the user didn't have the ability to select the text and then accidently copy it. 
+        The text box is made unselectable with the use of the "none" attribute. -->
+       
+    </div>
+
+    <div class="scenario3" data-win-control="SdkSample.ScenarioOutput">
+      
+        <p> The Div is set to "element" making the text selectable. A text Box is selectable by default, in this example we deliberately make the text box unselectable.</p>
+
+        <div id="inputDiv"> 
+            The -ms-user-select attribute for this Div is set to element. 
+        <input type="text" id="inputField" value="Type something here...but you cannot select it"/>
+        </div>
+
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Overriding scaling
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}">
+                        To preserve the physical size of UI, Windows automatically scales UI elements.
+                        You might not want this behavior, especially if your app
+                        doesn't have a high-res version of an element available. This scenario demonstrates how to
+                        counteract the automatic scaling of text and UI elements.
+                        The box is kept at 100 pixels, and the text is kept at 27 pixels (20pt on an unscaled device).
+                        The result is that both elements
+                        get physically smaller as the scale increases.
+                        <LineBreak/><LineBreak/>
+                        <Run FontWeight="Bold" Text="Note:"/>
+                        Use the simulator to view this scenario at different scales on the PC.
+                        For the 100% scale, use the 10.6" 1366x768 resolution setting. For 140% use 10.6"
+                        1920x1080 and for 180% use 10.6" 2560x1440.
+                        Other scales are possible on phones and other devices.
+                        <LineBreak/><LineBreak/>
+                        <Run FontWeight="Bold" Text="Effective Resolution: "/>
+                        <Run x:Name="ResolutionTextBlock"/>
+                    </TextBlock>
+
+                    <VariableSizedWrapGrid Orientation="Horizontal">
+                        <!-- default scaling -->
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Style="{StaticResource BasicTextStyle}" Text="Default scaling" FontWeight="Bold" Margin="0,20,20,0"/>
+                            <VariableSizedWrapGrid Orientation="Horizontal">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="140"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Header -->
+                                    <Border Grid.Row="0" Grid.Column="0" BorderThickness="2" BorderBrush="Black" Margin="6,6,2,2">
+                                        <TextBlock Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" FontWeight="Bold" Margin="5,5,5,5">UI element</TextBlock>
+                                    </Border>
+
+                                    <Border Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" BorderThickness="2" BorderBrush="Black" Margin="6,2,2,6"/>
+
+                                    <Rectangle x:Name="DefaultLayoutRect" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="LightCyan" Margin="5,5,5,5" Height="100" Width="100"/>
+                                    <TextBlock x:Name="DefaultRelativePx" Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0,6,0" FontWeight="Bold"/>
+                                    <TextBlock x:Name="DefaultPhysicalPx" Grid.Row="3" Grid.Column="0" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0,6,8" FontWeight="Bold"/>
+
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="140"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Row="0" BorderThickness="2" BorderBrush="Black" Margin="2,6,6,2">
+                                        <TextBlock Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" FontWeight="Bold" Margin="5,5,5,5">Text</TextBlock>
+                                    </Border>
+                                    <Border Grid.Row="1" Grid.RowSpan="3" BorderThickness="2" BorderBrush="Black" Margin="2,2,6,6"/>
+                                    <TextBlock x:Name="DefaultLayoutText" Grid.Row="1" Grid.RowSpan="3" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#00b9f2"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0,6,0" FontWeight="Bold"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0,6,8" FontWeight="Bold"/>
+
+                                </Grid>
+                            </VariableSizedWrapGrid>
+                        </StackPanel>
+
+                        <!-- override scaling -->
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Style="{StaticResource BasicTextStyle}" Text="Override scaling" FontWeight="Bold" Margin="0,20,20,0"/>
+
+                            <VariableSizedWrapGrid Orientation="Horizontal">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="140"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Header -->
+                                    <Border Grid.Row="0" Grid.Column="0" BorderThickness="2" BorderBrush="Black" Margin="6,6,2,2">
+                                        <TextBlock Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" FontWeight="Bold" Margin="5,5,5,5">UI element</TextBlock>
+                                    </Border>
+
+                                    <Border Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" BorderThickness="2" BorderBrush="Black" Margin="6,2,2,6"/>
+
+                                    <Rectangle x:Name="OverrideLayoutRect" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="LightCyan" Margin="5,5,5,5" Height="100" Width="100"/>
+                                    <TextBlock x:Name="OverrideRelativePx" Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0,6,0" FontWeight="Bold"/>
+                                    <TextBlock x:Name="OverridePhysicalPx" Grid.Row="3" Grid.Column="0" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0,6,8" FontWeight="Bold"/>
+
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="140"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Row="0" BorderThickness="2" BorderBrush="Black" Margin="2,6,6,2">
+                                        <TextBlock Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" FontWeight="Bold" Margin="5,5,5,5">Text</TextBlock>
+                                    </Border>
+                                    <Border Grid.Row="1" Grid.RowSpan="3" BorderThickness="2" BorderBrush="Black" Margin="2,2,6,6"/>
+                                    <TextBlock x:Name="OverrideLayoutText" Grid.Row="1" Grid.RowSpan="3" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#00b9f2"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0,6,0" FontWeight="Bold"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0,6,8" FontWeight="Bold"/>
+
+                                </Grid>
+                            </VariableSizedWrapGrid>
+                        </StackPanel>
+                    </VariableSizedWrapGrid>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

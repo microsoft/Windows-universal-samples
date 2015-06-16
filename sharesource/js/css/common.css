@@ -1,0 +1,7 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+.hidden { visibility: hidden; }
+.unhidden { visibility: visible; }
+
+input.text-box { width: 100%; max-width: 650px; }

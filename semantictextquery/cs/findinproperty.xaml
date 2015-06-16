@@ -1,0 +1,52 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot" Margin="12,10,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="Input" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="InputTextBlock1" Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+                Use SemanticTextQuery.FindInProperty() to select matching ranges of text in properties.
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Grid.Row="1">
+                <Button x:Name="FindOption" Content="Find" Margin="0,0,10,0" Click="Find_Click"/>
+                <TextBox x:Name="FindQueryText" Width="400" Height="30"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Grid.Row="2">
+                <TextBlock Margin="0,5,0,0" Height="30" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" > Content:</TextBlock>
+                <TextBox x:Name="ContentText" TextWrapping="Wrap" Height="55" Width="350" Margin="10,10,0,10"/>
+                <TextBlock Margin="10,5,0,0" Height="30" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" > Title:</TextBlock>
+                <TextBox x:Name="TitleText" TextWrapping="Wrap" Height="55" Width="350" Margin="10,10,0,10"/>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Orientation="Vertical" x:Name="Output" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+            <TextBlock x:Name="ContentTextOutput" Margin="0,10,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBlock x:Name="TitleTextOutput" Margin="0,10,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </StackPanel>
+    </Grid>
+</Page>

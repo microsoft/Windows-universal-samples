@@ -1,0 +1,34 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/common.css" />
+    <script src="/js/fail.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">Fail with display text</div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                If the user uses a keyboard shortcut to share when your app is not able to support share,
+                you can provide a failure message that
+                will be displayed in the share pane.  This message should help the user understand why they cannot share and
+                what they need to do to complete their task.  You do not need to use this message if your app never supports share.
+                Windows provides a default message for that case.
+                (This sample has an explicit Share button in order to be illustrate the scenario.
+                A typical app would hide or disable the Share button when it had nothing to share.)
+            </p>
+            <p>Choose the failure display text</p>
+            <input class="text-box" id="displayTextInputBox" value="You have selected too many images.  Select less than 50 images and then try again." />
+            <p><button id="shareButton">Share</button></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="Commanding.Scenario2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Commanding"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid Margin="12,10,12,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                    <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    In Windows 10 apps the SymbolIcon and FontIcon default to using the glyphs from the new "Segoe MDL2 Assets" font instead of "Segoe UI Symbol".
+                    The MDL2 font contains a 1:1 mapping for the glyphs in the 
+                    <Hyperlink NavigateUri="https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.symbol.aspx">Symbol enumeration</Hyperlink>, 
+                    but is otherwise not equivalent to Segoe UI Symbol.
+                    <LineBreak/>
+                    <LineBreak/>
+                    The glyphs in the new default font have been designed to fit on the <Hyperlink NavigateUri="http://en.wikipedia.org/wiki/Em_(typography)">Em square</Hyperlink> enabling
+                    them to be used as resizeable assets.</TextBlock>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1">
+                    <StackPanel.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+                            <Setter Property="VerticalAlignment" Value="Bottom"/>
+                        </Style>
+                        <Style TargetType="FontIcon">
+                            <Setter Property="VerticalAlignment" Value="Bottom"/>
+                        </Style>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}"/>
+                    </StackPanel.Resources>
+
+                    <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="SymbolIcon" Margin="0,24,0,8"/>
+                    <TextBlock Text="Is always 20x20"/>
+                    <Border Height="20" Width="20" HorizontalAlignment="Left">
+                        <SymbolIcon Symbol="Clear"/>
+                    </Border>
+
+                    <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="FontIcon" Margin="0,24,0,8"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="56"/>
+                                <ColumnDefinition Width="56"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="110"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="12x12" Grid.Column="0"/>
+                            <Border Height="12" Width="12" Grid.Row="1" Grid.Column="0">
+                                <FontIcon Glyph="&#xE106;" FontSize="12"/>
+                            </Border>
+
+                            <TextBlock Text="20x20" Grid.Column="1"/>
+                            <Border Height="20" Width="20" Grid.Row="1" Grid.Column="1">
+                                <FontIcon Glyph="&#xE106;" FontSize="20"/>
+                            </Border>
+
+                            <TextBlock Text="32x32" Grid.Column="2"/>
+                            <Border Height="32" Width="32" Grid.Row="1" Grid.Column="2">
+                                <FontIcon Glyph="&#xE106;" FontSize="32"/>
+                            </Border>
+
+                            <TextBlock Text="48x48" Grid.Column="3"/>
+                            <Border Height="48" Width="48" Grid.Row="1" Grid.Column="3">
+                                <FontIcon Glyph="&#xE106;" FontSize="48"/>
+                            </Border>
+
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+                <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
+                <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

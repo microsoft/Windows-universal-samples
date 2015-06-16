@@ -1,0 +1,33 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/common.css" />
+    <script src="/js/image.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">Share an image</div>
+        </div>
+        <div id="scenarioContent">
+            <p>Data Package Title:</p>
+            <input class="text-box" id="titleInputBox" value="My image" />
+            <p>Data Package Description:</p>
+            <input class="text-box" id="descriptionInputBox" value="Selected image from the Share Source sample" />
+            <p>Select the image you would like to share</p>
+            <p><button class="action" id="chooseImageButton">Select image</button></p>
+            <div id="scenarioOutput" class="hidden">
+                <img class="imageHolder" id="imageHolder" alt="image holder" />
+                <p>Click Share to share the image.</p>
+                <p><button id="shareButton">Share</button></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

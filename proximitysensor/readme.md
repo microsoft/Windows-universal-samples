@@ -1,4 +1,4 @@
-# Proximity Sensor Sample
+﻿# Proximity Sensor Sample
 
 This sample demonstrates the use of the Windows.Devices.Sensors.ProximitySensor API.
 
@@ -14,6 +14,10 @@ When you choose the Enable button for the **Data Events** option, the app will b
 ### Polling Proximity Sensor Readings
 
 When you choose the Get Data button for the **Polling** option, the app will retrieve the current sensor readings.
+
+**Proximity Monitoring to Turn the Display On or Off**
+
+When you choose the Enable button for the **Display On/Off** option, the app will request the system to monitor the proximity sensor detection state to automatically turn the display on or off.
 
 ## System requirements
 

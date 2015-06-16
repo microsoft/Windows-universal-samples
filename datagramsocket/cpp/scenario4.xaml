@@ -1,0 +1,31 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+--> 
+<Page x:Class="SDKTemplate.DatagramSocketSample.Scenario4" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:SDKTemplate.DatagramSocketSample" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+  <StackPanel>
+    <TextBlock x:Name="InputTextBlock1" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0,0,0,20">
+        Lastly, you can close all sockets.
+      <LineBreak/>
+      <LineBreak/>
+        If you don't close your socket, it will be closed for you when the
+      application exits.
+    </TextBlock>
+    <Button x:Name="CloseSockets" Content="Close" Click="CloseSockets_Click"/>
+    <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts -->
+    <VisualStateManager.VisualStateGroups>
+      <VisualStateGroup>
+        <VisualState x:Name="DefaultLayout"/>
+        <VisualState x:Name="Below768Layout"/>
+      </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+  </StackPanel>
+</Page>

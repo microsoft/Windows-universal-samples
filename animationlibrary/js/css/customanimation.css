@@ -1,0 +1,10 @@
+﻿#target
+{
+    background: #00B6FF;
+    height: 100px;
+    width: 240px;
+    margin: 0px 20px 20px 20px;
+    opacity: 0;
+}
+
+@keyframes custom-opacity-in               { from { opacity: 0; } to { opacity: 1; } }

@@ -1,0 +1,36 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/propertyMatches.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>Use SemanticTextQuery.FindInProperty() to select matching ranges of text in properties.</p>
+        <input type="text" id="queryBox" value="Title:Good OR Comment:Tree"/>
+        <button id="find">Find</button><br /><br />
+        <table border="1">
+             <tr>
+             <th>PropertyName</th>
+             <th>PropertyValue</th>
+             </tr>
+             <tr>
+             <td>System.Title</td>
+             <td id="System.Title">These are good times</td>
+             </tr>
+             <tr>
+             <td>System.Author</td>
+             <td id="System.Author">Walker</td>
+             </tr>
+             <tr>
+             <td>System.Comment</td>
+             <td id="System.Comment">There are many good times to be had. Go for a walk among the trees.</td>
+             </tr>
+         </table>   
+    </div>
+</body>
+</html>

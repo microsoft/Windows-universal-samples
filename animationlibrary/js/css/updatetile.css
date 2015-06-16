@@ -1,0 +1,26 @@
+﻿#croppingDiv 
+{
+    width: 310px; 
+    height: 150px; 
+    overflow: hidden;
+}
+
+#tile1
+{
+    background: #00B6FF;
+    width: 310px;
+    height: 150px;
+    text-align: center;
+    color: white !important;
+    position: relative;
+}
+
+#tile2 
+{
+    background: #808080;
+    width: 310px;
+    height: 150px;
+    text-align: center;
+    color: white !important;
+    position: relative;
+}

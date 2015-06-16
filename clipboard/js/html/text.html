@@ -1,0 +1,47 @@
+﻿<!--
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/text.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p id="scenario1TextToCopy">
+            Use Clipboard to copy and paste text in different formats, including plain text, and formatted text (HTML).
+            <br />
+            To <b>copy</b>, add text formats to a <i>DataPackage</i>, and then place <i>DataPackage</i> to Clipboard.
+            To <b>paste</b>, get <i>DataPackageView</i> from Clipboard, and retrieve the content of the desired text format from it.
+            <br />
+            To handle local image files in the formatted text (such as the one below), use resourceMap collection.
+            <br />
+            <img id="scenario1LocalImage" src="/images/windows-sdk.png" />
+            <br />
+            <i>DataPackage</i> class is also used to share content between applications. See the Share SDK sample for more information.
+        </p>
+        <button class="action" id="scenario1Copy">
+            Copy text above</button>
+        <button class="action" id="scenario1Paste">
+            Paste text from Clipboard</button>
+        <br /><br />
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <br />
+        Text:
+        <div id="scenario1TextOutput">
+        </div>
+        <br />
+        HTML:
+        <div id="scenario1HtmlOutput">
+        </div>
+    </div>
+</body>
+</html>

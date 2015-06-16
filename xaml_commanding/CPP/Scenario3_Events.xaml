@@ -1,0 +1,76 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="Commanding.Scenario3_Events"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Commanding"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                    <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    This scenario demonstrates the new Opening/Closing events on the AppBar and CommandBar by altering the background transparency as the user opens and closes the control.
+                    The Opening/Closing events fire before the transition begins and the Opened/Closed events fire after the transition completes.  Click/tap on the [...] of the control to
+                    see it in action.
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Bold>Note:</Bold> The control no longer responds to "edgy" gestures such as a right-click or the WINKEY + Z keyboard shortcut.
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1">
+
+                    <Grid Background="#FF888888" Height="120">
+                        <Grid.Resources>
+                            <SolidColorBrush x:Name="translucentBackgroundBrush" Opacity="0.5" Color="{ThemeResource SystemChromeMediumColor}"/>
+                        </Grid.Resources>
+
+                        <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Height="120" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBlock Text="A semi-transparent CommandBar" Margin="12,4" HorizontalAlignment="Left"/>
+                        <CommandBar Opening="CommandBar_Opening"
+                                    Closing="CommandBar_Closing"
+                                    Opened="CommandBar_Opened"
+                                    Closed="CommandBar_Closed"
+                                    Background="{StaticResource translucentBackgroundBrush}"
+                                    VerticalAlignment="Bottom">
+                            <AppBarButton Icon="Accept" Label="Accept"/>
+                            <AppBarButton Icon="Edit" Label="Edit"/>
+                            <AppBarButton Icon="Save" Label="Save"/>
+                            <AppBarButton Icon="Cancel" Label="Cancel"/>
+                            <CommandBar.SecondaryCommands>
+                                <AppBarButton Label="Menu Item 1"/>
+                                <AppBarButton Label="Menu Item 2"/>
+                                <AppBarButton Label="Menu Item 3"/>
+                                <AppBarButton Label="Menu Item 4"/>
+                            </CommandBar.SecondaryCommands>
+                        </CommandBar>
+                    </Grid>
+                </StackPanel>
+
+
+                <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

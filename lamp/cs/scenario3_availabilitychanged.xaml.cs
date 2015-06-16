@@ -26,7 +26,7 @@ namespace Lamp
     public sealed partial class Scenario3_AvailabilityChanged : Page
     {
         /// <summary>
-        /// Private Mainpage object for status updates
+        /// Private MainPage object for status updates
         /// </summary>
         private MainPage rootPage;
 
@@ -57,7 +57,7 @@ namespace Lamp
         }
 
         /// <summary>
-        /// Intialize the lamp acquiring the default instance
+        /// Initialize the lamp acquiring the default instance
         /// </summary>
         /// <returns>async Task</returns>
         private async Task InitializeLampAsync()
@@ -68,15 +68,17 @@ namespace Lamp
 
                 if (lamp == null)
                 {
-                    throw new InvalidOperationException("Error: No lamp device was found");
+                    await LogStatusAsync("Error: No lamp device was found", NotifyType.ErrorMessage);
+                    lampToggle.IsEnabled = false;
+                    return;
                 }
 
-                LogStatus(string.Format(CultureInfo.InvariantCulture, "Default lamp instance acquired, Device Id: {0}", lamp.DeviceId) , NotifyType.StatusMessage);
+                await LogStatusAsync(string.Format(CultureInfo.InvariantCulture, "Default lamp instance acquired, Device Id: {0}", lamp.DeviceId) , NotifyType.StatusMessage);
                 lampToggle.IsEnabled = true;
             }
             catch (Exception eX)
             {
-                LogStatus(eX.Message, NotifyType.ErrorMessage);
+                await LogStatusAsync(eX.Message, NotifyType.ErrorMessage);
             }
         }
 
@@ -97,6 +99,11 @@ namespace Lamp
         /// </summary>
         private void DisposeLamp()
         {
+            if (lamp == null)
+            {
+                return;
+            }
+
             lampToggle.IsEnabled = false;
             lamp.AvailabilityChanged -= Lamp_AvailabilityChanged;
             lamp.IsEnabled = false;
@@ -109,33 +116,55 @@ namespace Lamp
         /// </summary>
         /// <param name="sender">Contains information regarding button that fired event</param>
         /// <param name="e">Contains state information and event data associated with the event</param>
-        private void RegisterBtn_Click(object sender, RoutedEventArgs e)
+        private async void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (lamp == null)
+            {
+                await LogStatusAsync("Error: No lamp device was found", NotifyType.ErrorMessage);
+                return;
+            }
+
             lamp.AvailabilityChanged += Lamp_AvailabilityChanged;
-            LogStatus("Registered for Lamp Availability Changed Notification", NotifyType.StatusMessage);
+            await LogStatusAsync("Registered for Lamp Availability Changed Notification", NotifyType.StatusMessage);
         }
 
         /// <summary>
-        /// 
+        /// Event Handler for Lamp Availability Changed. When it fires, we want to update to
+        /// Lamp toggle UI to show that lamp is available or not
         /// </summary>
         /// <param name="sender">Contains information regarding  Lamp object that fired event</param>
         /// <param name="e">Contains state information and event data associated with the event</param>
-        private void Lamp_AvailabilityChanged(Lamp sender, LampAvailabilityChangedEventArgs args)
+        private async void Lamp_AvailabilityChanged(Lamp sender, LampAvailabilityChangedEventArgs args)
         {
-            // Update the Lamp Toggle UI to indicate lamp has been consumed by another app
-            lampToggle.IsEnabled = args.IsAvailable;
-            LogStatus(string.Format(CultureInfo.InvariantCulture,"Lamp Availability Changed Notification has fired, IsAvailable= {0}", args.IsAvailable), NotifyType.StatusMessage);
+            // Update the Lamp Toggle UI to indicate lamp has been consumed by another application
+            await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                if (lampToggle.IsOn)
+                {
+                    lampToggle.IsOn = args.IsAvailable;
+                }
+
+                lampToggle.IsEnabled = args.IsAvailable;
+            });
+
+            await LogStatusAsync(string.Format(CultureInfo.InvariantCulture,"Lamp Availability Changed Notification has fired, IsAvailable= {0}", args.IsAvailable), NotifyType.StatusMessage);
         }
 
         /// <summary>
-        /// Event handler for the Unregister Availablity Event
+        /// Event handler for the Unregister Availability Event
         /// </summary>
         /// <param name="sender">Contains information regarding button that fired event</param>
         /// <param name="e">Contains state information and event data associated with the event</param>
-        private void UnRegisterBtn_Click(object sender, RoutedEventArgs e)
+        private async void UnRegisterBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (lamp == null)
+            {
+                await LogStatusAsync("Error: No lamp device was found", NotifyType.ErrorMessage);
+                return;
+            }
+
             lamp.AvailabilityChanged -= Lamp_AvailabilityChanged;
-            LogStatus("Unregistered for Lamp Availability Changed Notification", NotifyType.StatusMessage);
+            await LogStatusAsync("Unregistered for Lamp Availability Changed Notification", NotifyType.StatusMessage);
         }
 
         /// <summary>
@@ -144,20 +173,26 @@ namespace Lamp
         /// </summary>
         /// <param name="sender">Contains information regarding toggle switch that fired event</param>
         /// <param name="e">Contains state information and event data associated with the event</param>
-        private void lampToggle_Toggled(object sender, RoutedEventArgs e)
+        private async void lampToggle_Toggled(object sender, RoutedEventArgs e)
         {
+            if (lamp == null)
+            {
+                await LogStatusAsync("Error: No lamp device was found", NotifyType.ErrorMessage);
+                return;
+            }
+
             ToggleSwitch toggleSwitch = sender as ToggleSwitch;
             if (toggleSwitch != null)
             {
                 if (toggleSwitch.IsOn)
                 {
                     lamp.IsEnabled = true;
-                    LogStatus("Lamp is Enabled", NotifyType.StatusMessage);
+                    await LogStatusAsync("Lamp is Enabled", NotifyType.StatusMessage);
                 }
                 else
                 {
                     lamp.IsEnabled = false;
-                    LogStatus("Lamp is Disabled", NotifyType.StatusMessage);
+                    await LogStatusAsync("Lamp is Disabled", NotifyType.StatusMessage);
                 }
             }
         }
@@ -167,7 +202,7 @@ namespace Lamp
         /// and update outputBox, this method is for more general messages
         /// </summary>
         /// <param name="message">Message to log</param>
-        private async void LogStatusToOutputBox(string message)
+        private async Task LogStatusToOutputBoxAsync(string message)
         {
             await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
@@ -182,13 +217,13 @@ namespace Lamp
         /// </summary>
         /// <param name="message">Message to log</param>
         /// <param name="type">Status notification type</param>
-        private async void LogStatus(string message, NotifyType type)
+        private async Task LogStatusAsync(string message, NotifyType type)
         {
             await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 rootPage.NotifyUser(message, type);
             });
-            LogStatusToOutputBox(message);
+            await LogStatusToOutputBoxAsync(message);
         }
     }
 }

@@ -1,0 +1,100 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="CustomUsbDeviceAccess.Scenario3_InterruptPipes"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomUsbDeviceAccess"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Interrupt Pipes" Style="{StaticResource SampleHeaderTextStyle}"/>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <!-- Place scenario content here -->
+
+
+                <Grid x:Name="LayoutRoot">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="Input" Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel x:Name="DeviceScenarioContainer" Orientation="Vertical" Margin="0,10,0,0" Grid.Row="0">
+                            <StackPanel x:Name="OsrFx2Scenario" Orientation="Vertical">
+                                <TextBlock x:Name="OsrFx2ScenarioText" Margin="0,10" TextWrapping="Wrap" HorizontalAlignment="Left">
+               This scenario shows how to read the switch state and register for
+              a switch state change event from the device. If the device is
+              disconnected and reconnected, you must reregister for the event
+              because it is not automatically done.
+                                </TextBlock>
+                                <Button x:Name="ButtonRegisterOsrFx2InterruptEvent" Content="Register For Interrupt Event" Click="RegisterOsrFx2InterruptEvent_Click"/>
+                            </StackPanel>
+                            <StackPanel x:Name="SuperMuttScenario" Orientation="Vertical">
+                                <TextBlock x:Name="SuperMuttScenarioText" Margin="0,10" TextWrapping="Wrap" HorizontalAlignment="Left">
+               This scenario shows how to register for an event from a device's
+              interrupt in pipe and how to write to an interrupt out pipe. If
+              the device is disconnected and reconnected, you must reregister
+              for the event because it is not automatically done.
+                                </TextBlock>
+                                <Button x:Name="ButtonWriteSuperMuttInterruptOut" Content="Write To Interrupt Out" Click="WriteSuperMuttInterruptOut_Click"/>
+                                <Button x:Name="ButtonRegisterSuperMuttInterruptEvent" Content="Register For Interrupt Event" Click="RegisterSuperMuttInterruptEvent_Click"/>
+                            </StackPanel>
+                            <Button x:Name="ButtonUnregisterInterruptEvent" Content="Unregister From Interrupt Event" Click="UnregisterInterruptEvent_Click"/>
+                        </StackPanel>
+                        <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts for the input section -->
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState x:Name="InputFullScreenLandscape"/>
+                                <VisualState x:Name="InputFilled"/>
+                                <VisualState x:Name="InputFullScreenPortrait"/>
+                                <VisualState x:Name="InputSnapped"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                    <Grid x:Name="Output" Grid.Row="1">
+                        <TextBlock x:Name="SwitchStates" FontFamily="Consolas"/>
+                        <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts for the output section -->
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState x:Name="OutputFullScreenLandscape"/>
+                                <VisualState x:Name="OutputFilled"/>
+                                <VisualState x:Name="OutputFullScreenPortrait"/>
+                                <VisualState x:Name="OutputSnapped"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </Grid>
+
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

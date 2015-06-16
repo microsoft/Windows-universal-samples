@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/disableAnimations.css" />
+    <script src="/js/disableAnimations.js"></script>
+</head>
+<body>
+    <div id="scenarioHeader">
+        <h2 id="sampleHeader">Description:</h2>
+        <div id="scenarioDescription">
+            Disable animations
+        </div>
+    </div>
+    <div id="input">
+        <p>Use the Enable Animations, Disable Animations, and Is Animation Enabled functions to determine
+        whether Animation Library animations and animations within WinJS controls are performed.</p>
+        <p>The determination of whether or not the animations will run is based on a combination of:</p>
+        <ol>
+            <li>The internally maintained 'enable count',</li>
+            <li>Whether the system's 'Turn off all unnecessary animations' accessibility setting is checked,</li>
+            <li>Whether the app is currently executing from within the Web compartment where the WinRT API to check
+            the accessibility setting is unavailable.</li>
+        </ol>
+        <p>See the MSDN API documentation for more details.</p>
+        <p>Change whether animations are enabled in the system from
+        Settings\Ease of Access\Other options, then click the Refresh
+        button to see the updated value.</p>
+        <p>
+            <button id="incrementCount">Increase enable count</button>
+            <button id="decrementCount">Decrease enable count</button>
+            <button id="runAnimation">Run animation</button>
+            <button id="refresh">Refresh</button>
+        </p>
+    </div>
+    <div id="output">
+        <p id="enableCount" />
+        <p id="systemAnimationSetting" />
+        <p id="isAnimationEnabled" />
+        <div id="animationTarget" />
+    </div>
+</body>
+</html>

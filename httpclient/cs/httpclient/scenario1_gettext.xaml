@@ -1,0 +1,99 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page x:Class="SDKSample.HttpClientSample.Scenario1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:SDKSample.HttpClientSample" xmlns:common="using:SDKTemplate.Common" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+  <Page.Resources>
+    <Style x:Key="LeftFriendly" TargetType="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="FontSize" Value="14.66"/>
+      <Setter Property="Margin" Value="0,0,10,0"/>
+    </Style>
+    <Style x:Key="HorizontalFriendly" TargetType="FrameworkElement">
+      <Setter Property="Margin" Value="0,5,0,5"/>
+    </Style>
+    <Style x:Key="RadioFriendly" TargetType="TextBlock">
+      <Setter Property="FontSize" Value="14.66"/>
+      <Setter Property="TextWrapping" Value="Wrap"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+  </Page.Resources>
+  <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+    <Grid x:Name="Input">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <TextBlock Grid.Row="0" Grid.ColumnSpan="2" x:Name="InputTextBlock1" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+         Download the contents of a page and display it. One way to test Cancel
+        functionality is to change the hostname in the Address from localhost to
+        a name that does not exist. To test cache control, change the cache read
+        behavior or the cache write behavior. Use the Max HTTP Version toggle to
+        control the highest HTTP version the client will offer - note that the 
+        version that is actually used will also depend on the server and intermediate
+        proxies.
+      </TextBlock>
+      <TextBlock Grid.Row="1" Grid.Column="0" Text="Address" Style="{StaticResource LeftFriendly}"/>
+      <TextBox Grid.Row="1" Grid.Column="1" x:Name="AddressField" Text="https://localhost/HttpClientSample/default.aspx?cacheable=1" Style="{StaticResource HorizontalFriendly}"/>
+      <TextBlock Grid.Row="2" Grid.Column="0" Text="Max HTTP Version" Style="{StaticResource LeftFriendly}"/>
+      <ToggleSwitch Grid.Row="2" Grid.Column="1" x:Name="MaxHttpVersionToggle" OffContent="HTTP 1.1" OnContent="HTTP 2.0" Style="{StaticResource HorizontalFriendly}" Toggled="MaxHttpVersionToggle_Toggled"/>
+      <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="15">
+        <Grid.RowDefinitions>
+          <RowDefinition/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Read Behavior" VerticalAlignment="Center" Style="{StaticResource LeftFriendly}"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Write Behavior" VerticalAlignment="Center" Style="{StaticResource LeftFriendly}"/>
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
+          <RadioButton GroupName="ReadGroup" x:Name="ReadDefaultRadio" IsChecked="True">
+            <TextBlock Style="{StaticResource RadioFriendly}"> Default (if it is already in the cache, does not hit the network) </TextBlock>
+          </RadioButton>
+          <RadioButton GroupName="ReadGroup" x:Name="ReadMostRecentRadio">
+            <TextBlock Style="{StaticResource RadioFriendly}">
+               Most Recent (always hits the network, but if it is already in the
+              cache, If-Modified-Since header is added automatically and if
+              server does not have a newer version, the server will reply with
+              304 and network bandwidth will be saved) 
+            </TextBlock>
+          </RadioButton>
+          <RadioButton GroupName="ReadGroup" x:Name="ReadOnlyFromCacheRadio">
+            <TextBlock Style="{StaticResource RadioFriendly}"> Only From Cache (never hits the network) </TextBlock>
+          </RadioButton>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
+          <RadioButton GroupName="WriteGroup" x:Name="WriteDefaultRadio" IsChecked="True">
+            <TextBlock Style="{StaticResource RadioFriendly}"> Default (if cacheable, stored in the cache) </TextBlock>
+          </RadioButton>
+          <RadioButton GroupName="WriteGroup" x:Name="WriteNoCacheRadio">
+            <TextBlock Style="{StaticResource RadioFriendly}"> No Cache (never stored in the cache) </TextBlock>
+          </RadioButton>
+        </StackPanel>
+      </Grid>
+      <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+        <Button Content="Start" x:Name="StartButton" Margin="0,0,10,0" Click="Start_Click"/>
+        <Button Content="Cancel" x:Name="CancelButton" IsEnabled="False" Click="Cancel_Click"/>
+      </StackPanel>
+      <TextBox Grid.Row="5" Grid.ColumnSpan="2" x:Name="OutputField" Margin="0" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
+    </Grid>
+  </ScrollViewer>
+</Page>

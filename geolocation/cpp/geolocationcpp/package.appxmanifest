@@ -11,7 +11,7 @@
 	Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
 	Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="f8ffce2e-44a6-4b54-94a6-5c491a7b7cf5" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="6a4011e8-a8d4-4312-9668-2a665f802291" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>GeolocationCPP</DisplayName>
@@ -20,7 +20,7 @@
   </Properties>
 
   <Dependencies>
-    <TargetPlatform Name="Windows.Universal" MinVersion="10.0.10030.0" MaxVersionTested="10.0.10030.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10069.0" MaxVersionTested="10.0.10069.0" />
   </Dependencies>
 
   <Resources>
@@ -36,7 +36,7 @@
       Square150x150Logo="Assets\squareTile-sdk.png"
       Square44x44Logo="Assets\smallTile-sdk.png"
       Description="GeolocationCPP"
-      ForegroundText="light"
+      
       BackgroundColor="#00B2F0">
         <uap:SplashScreen Image="Assets\Splash-sdk.png" />
         <uap:LockScreen Notification="badge" BadgeLogo="Assets\badge-logo.png" />
@@ -61,3 +61,4 @@
     <DeviceCapability Name="location"/>
   </Capabilities>
 </Package>
+

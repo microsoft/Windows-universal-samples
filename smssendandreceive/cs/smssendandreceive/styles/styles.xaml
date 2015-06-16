@@ -2,7 +2,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -40,7 +40,7 @@
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Green"/>
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonCheckedPressedBackgroundThemeBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -54,21 +54,21 @@
                                 <VisualState x:Name="Checked">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Green"/>
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonCheckedBackgroundThemeBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="CheckedPointerOver">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Green"/>
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonCheckedPointerOverBackgroundThemeBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="CheckedPressed">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Green"/>
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonCheckedPressedBackgroundThemeBrush}"/>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -123,17 +123,20 @@
     </Style>
 
     <Style x:Key="TagLineTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe UI Light"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+	<Setter Property="FontWeight" Value="Light"/>
         <Setter Property="FontSize" Value="16"/>
     </Style>
 
     <Style x:Key="SampleHeaderTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe UI Light"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+	<Setter Property="FontWeight" Value="Light"/>
         <Setter Property="FontSize" Value="26.667"/>
     </Style>
 
     <Style x:Key="ListItemTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+	<Setter Property="FontWeight" Value="SemiLight"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Margin" Value="10,0,0,0"/>
         <Setter Property="Foreground" Value="White"/>
@@ -145,17 +148,20 @@
     </Style>
 
     <Style x:Key="ScenarioHeaderTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe UI Light"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+	<Setter Property="FontWeight" Value="Light"/>
         <Setter Property="FontSize" Value="26.667"/>
     </Style>
 
     <Style x:Key="ScenarioDescriptionTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe UI Light"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+	<Setter Property="FontWeight" Value="Light"/>
         <Setter Property="FontSize" Value="16"/>
     </Style>
 
     <Style x:Key="BaseMessageStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+	<Setter Property="FontWeight" Value="SemiLight"/>
         <Setter Property="FontSize" Value="14.667"/>
         <Setter Property="Margin" Value="0,0,0,5"/>
     </Style>

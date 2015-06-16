@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -152,7 +152,6 @@ void Scenario2::UpdateLocationData(Windows::Devices::Geolocation::Geoposition^ p
 		ScenarioOutput_Latitude->Text = "No data";
 		ScenarioOutput_Longitude->Text = "No data";
 		ScenarioOutput_Accuracy->Text = "No data";
-		ScenarioOutput_Venue->Text = "No data";
 	}
 	else
 	{
@@ -160,8 +159,6 @@ void Scenario2::UpdateLocationData(Windows::Devices::Geolocation::Geoposition^ p
 		ScenarioOutput_Longitude->Text = position->Coordinate->Point->Position.Longitude.ToString();
 		ScenarioOutput_Accuracy->Text = position->Coordinate->Accuracy.ToString();
 		ScenarioOutput_Source->Text = position->Coordinate->PositionSource.ToString();
-		ScenarioOutput_Venue->Text = position->VenueData == nullptr ? "No data"
-			: position->VenueData->Id + "/" + position->VenueData->Level;
 		
 		if (position->Coordinate->PositionSource == PositionSource::Satellite)
 		{

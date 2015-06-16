@@ -1,0 +1,136 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="Commanding.Scenario1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Commanding"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid x:Name="RootGrid" Margin="12,10,12,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                    <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                        This scenario demonstrates the AppBarButton, AppBarToggleButton, and AppBarSeparator used stand-alone, hosting custom content, and appearing in a CommandBar. 
+                        A soft-hyphen character (0xAD) in the Label can be used to hint at where the text break should occur when wrapping.
+                    <LineBreak/>
+                    <LineBreak/>
+                        The AppBarButton and AppBarToggleButton derive from ButtonBase and can be used as you might use a Button with custom Content or by attaching a Flyout using the
+                        inherited ButtonBase.Flyout property.  These types are, however, optimized for use in a CommandBar where the visual appearance changes whether the item is a 
+                        PrimaryCommand or a SecondaryCommand.
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1">
+
+                    <!-- Used stand-alone -->
+                    <Grid Margin="0,12,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Stand-Alone" HorizontalAlignment="Left" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1">
+                            <AppBarButton Label="Custom" HorizontalContentAlignment="Center">
+                                <Grid Width="48" Height="48" Margin="0,-8,0,-4">
+                                    <SymbolIcon Symbol="Memo"/>
+                                    <TextBlock Text="2" Margin="0,2,0,0" Style="{StaticResource CaptionTextBlockStyle}" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </AppBarButton>
+                            <AppBarButton Icon="OpenWith" Label="Show Flyout">
+                                <AppBarButton.Flyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Text="OneDrive"/>
+                                        <MenuFlyoutItem Text="Contacts"/>
+                                        <MenuFlyoutItem Text="Photos"/>
+                                        <MenuFlyoutItem Text="Videos"/>
+                                    </MenuFlyout>
+                                </AppBarButton.Flyout>
+                            </AppBarButton>
+                            <AppBarButton Icon="Accept" Label="LongString&#x00AD;UsingSoft&#x00AD;Hyphens"/>
+                            <AppBarSeparator/>
+                            <AppBarToggleButton Icon="Contact" Label="LongStringWithoutUsingSoftHyphens" IsChecked="True"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Used in the CommandBar -->
+                    <Grid Margin="0,12,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="On the CommandBar" HorizontalAlignment="Left" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                        <CommandBar Grid.Row="1">
+                            <AppBarButton Label="Custom" HorizontalContentAlignment="Center">
+                                <Grid Width="48" Height="48" Margin="0,-8,0,-4">
+                                    <SymbolIcon Symbol="Memo"/>
+                                    <TextBlock Text="2" Margin="0,2,0,0" Style="{StaticResource CaptionTextBlockStyle}" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </AppBarButton>
+                            <AppBarButton Icon="OpenWith" Label="Show Flyout">
+                                <AppBarButton.Flyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Text="OneDrive"/>
+                                        <MenuFlyoutItem Text="Contacts"/>
+                                        <MenuFlyoutItem Text="Photos"/>
+                                        <MenuFlyoutItem Text="Videos"/>
+                                    </MenuFlyout>
+                                </AppBarButton.Flyout>
+                            </AppBarButton>
+                            <AppBarButton Icon="Accept" Label="LongString&#x00AD;UsingSoft&#x00AD;Hyphens"/>
+                            <AppBarSeparator/>
+                            <AppBarToggleButton Icon="Contact" Label="LongStringWithoutUsingSoftHyphens" IsChecked="True"/>
+                            <CommandBar.SecondaryCommands>
+                                <!-- The custom content and the Icon is unnecessary here since they won't appear in the default visual. -->
+                                <AppBarButton Label="Custom" HorizontalContentAlignment="Center">
+                                    <Grid Width="48" Height="48" Margin="-12">
+                                        <SymbolIcon Symbol="Memo"/>
+                                        <TextBlock Text="2" Margin="0,2,0,0" Style="{StaticResource CaptionTextBlockStyle}" HorizontalAlignment="Center"/>
+                                    </Grid>
+                                </AppBarButton>
+                                <AppBarButton Icon="OpenWith" Label="Show Flyout">
+                                    <AppBarButton.Flyout>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem Text="OneDrive"/>
+                                            <MenuFlyoutItem Text="Contacts"/>
+                                            <MenuFlyoutItem Text="Photos"/>
+                                            <MenuFlyoutItem Text="Videos"/>
+                                        </MenuFlyout>
+                                    </AppBarButton.Flyout>
+                                </AppBarButton>
+                                <AppBarButton Icon="Accept" Label="LongString&#x00AD;UsingSoft&#x00AD;Hyphens"/>
+                                <AppBarSeparator/>
+                                <AppBarToggleButton Icon="Contact" Label="LongStringWithoutUsingSoftHyphens" IsChecked="True"/>
+                            </CommandBar.SecondaryCommands>
+                        </CommandBar>
+                    </Grid>
+
+                </StackPanel>
+
+                <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+                <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
+                <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

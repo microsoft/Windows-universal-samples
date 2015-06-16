@@ -2,7 +2,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -40,7 +40,7 @@
             </Grid>
             <TextBlock TextWrapping="Wrap" x:Name="LocationDisabledMessage" Margin="0,10,0,0" FontStyle="Italic" Visibility="Collapsed">
                 <Run Text="Application is not able to get location data. Go to " />
-                <Hyperlink NavigateUri="ms-settings://privacy/location">
+                <Hyperlink NavigateUri="ms-settings:privacy-location">
                     <Run Text="Settings" />
                 </Hyperlink>
                 <Run Text=" to check the location permissions."/>

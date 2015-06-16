@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -109,7 +109,6 @@ namespace Microsoft.Samples.Devices.Sensors.Calibration
         {
             CalibrationGrid.Width = Window.Current.Bounds.Width;
 
-#if WINDOWS_APP
             if (CalibrationGrid.Width < LAYOUT_WIDTH_768)
             {
                 Grid.SetRow(DismissPopup, 1);
@@ -126,32 +125,6 @@ namespace Microsoft.Samples.Devices.Sensors.Calibration
                 CalibrationGridTop.Margin = new Thickness(0, 19, 66, 19);
                 DismissPopup.Margin = new Thickness(66, 0, 0, 0);
             }
-#else
-            if (CalibrationGrid.Width < LAYOUT_WIDTH_540)
-            {
-                Guidance.Source = new BitmapImage(new Uri("ms-appx:///Assets/mobius480.png"));
-            }
-            else if (CalibrationGrid.Width < LAYOUT_WIDTH_720)
-            {
-                Guidance.Source = new BitmapImage(new Uri("ms-appx:///Assets/mobius540.png"));
-            }
-            else if (CalibrationGrid.Width < LAYOUT_WIDTH_768)
-            {
-                Guidance.Source = new BitmapImage(new Uri("ms-appx:///Assets/mobius720.png"));
-            }
-            else if (CalibrationGrid.Width < LAYOUT_WIDTH_1080)
-            {
-                Guidance.Source = new BitmapImage(new Uri("ms-appx:///Assets/mobius768.png"));
-            }
-            else if (CalibrationGrid.Width < LAYOUT_WIDTH_1440)
-            {
-                Guidance.Source = new BitmapImage(new Uri("ms-appx:///Assets/mobius1080.png"));
-            }
-            else
-            {
-                Guidance.Source = new BitmapImage(new Uri("ms-appx:///Assets/mobius1440.png"));
-            }
-#endif
         }
 
         /// <summary>

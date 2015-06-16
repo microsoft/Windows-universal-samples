@@ -1,0 +1,81 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="CustomHidDeviceAccess.InputOutputReports"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomHidDeviceAccess"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel x:Name="DeviceScenarioContainer" Orientation="Vertical" Margin="0,10,0,0" Grid.Row="0">
+                <StackPanel x:Name="SuperMuttScenario" Orientation="Vertical">
+                    <TextBlock x:Name="SuperMuttScenarioText"  TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >
+                  This scenario shows how to read and write to the device using input and output reports.
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" HorizontalAlignment="Left">
+                  <LineBreak />Numeric Values:
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="ButtonSendNumericOutputReport"  Content="Send Output Report" Margin="0,0,10,0" Click="SendNumericOutputReport_Click"/>
+                        <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" HorizontalAlignment="Left">Value To Write:</TextBlock>
+                        <ComboBox x:Name="NumericValueToWrite" SelectedIndex="0">
+                            <ComboBoxItem Content="0"></ComboBoxItem>
+                            <ComboBoxItem Content="1"></ComboBoxItem>
+                            <ComboBoxItem Content="2"></ComboBoxItem>
+                            <ComboBoxItem Content="3"></ComboBoxItem>
+                            <ComboBoxItem Content="4"></ComboBoxItem>
+                            <ComboBoxItem Content="5"></ComboBoxItem>
+                            <ComboBoxItem Content="6"></ComboBoxItem>
+                            <ComboBoxItem Content="7"></ComboBoxItem>
+                            <ComboBoxItem Content="8"></ComboBoxItem>
+                            <ComboBoxItem Content="9"></ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <Button x:Name="ButtonGetNumericInputReport" Content="Get Input Report" Margin="0,0,10,0" Click="GetNumericInputReport_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" HorizontalAlignment="Left">
+                  <LineBreak />Boolean Value for Button 1:
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="ButtonSendBooleanOutputReport"  Content="Send Output Report" Margin="0,0,10,0" Click="SendBooleanOutputReport_Click"/>
+                        <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" HorizontalAlignment="Left">Bit Value:</TextBlock>
+                        <ComboBox x:Name="BooleanValueToWrite" SelectedIndex="0">
+                            <ComboBoxItem Content="0"></ComboBoxItem>
+                            <ComboBoxItem Content="1"></ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <Button x:Name="ButtonGetBooleanInputReport" Content="Get Input Report" Margin="0,0,10,0" Click="GetBooleanInputReport_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <!-- Place scenario content here -->
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

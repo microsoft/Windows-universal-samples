@@ -1,0 +1,144 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AppUIBasics.ControlPages.MenuFlyoutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <RelativePanel>
+        <StackPanel x:Name="LeftColumn" MaxWidth="500">
+            <local:ControlExample x:Name="Example1" HeaderText="An AppBarButton with a MenuFlyout.">
+                <StackPanel x:Name="Control1" Orientation="Horizontal">
+                    <AppBarButton Icon="Sort" IsCompact="True">
+                        <Button.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="By rating" Click="MenuFlyoutItem_Click" Tag="rating"/>
+                                <MenuFlyoutItem Text="By match" Click="MenuFlyoutItem_Click" Tag="match"/>
+                                <MenuFlyoutItem Text="By distance" Click="MenuFlyoutItem_Click" Tag="distance"/>
+                            </MenuFlyout>
+                        </Button.Flyout>
+                    </AppBarButton>
+                    <TextBlock x:Name="Control1Output" Style="{StaticResource OutputTextBlockStyle}"/>
+                </StackPanel>
+                <local:ControlExample.Xaml>
+                    <RichTextBlock>
+                        <Paragraph>&lt;AppBarButton Icon="Sort" IsCompact="True"&gt;</Paragraph>
+                        <Paragraph TextIndent="12">&lt;AppBarButton.Flyout&gt;</Paragraph>
+                        <Paragraph TextIndent="24">&lt;MenuFlyout&gt;</Paragraph>
+                        <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="By rating" Click="MenuFlyoutItem_Click" Tag="rating"&gt;</Paragraph>
+                        <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="By match" Click="MenuFlyoutItem_Click" Tag="match"&gt;</Paragraph>
+                        <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="By distance" Click="MenuFlyoutItem_Click" Tag="distance&gt;</Paragraph>
+                        <Paragraph TextIndent="24">&lt;/MenuFlyout&gt;</Paragraph>
+                        <Paragraph TextIndent="12">&lt;/AppBarButton.Flyout&gt;</Paragraph>
+                        <Paragraph >&lt;/AppBarButton&gt;</Paragraph>
+                    </RichTextBlock>
+                </local:ControlExample.Xaml>
+            </local:ControlExample>
+
+            <local:ControlExample x:Name="Example2" HeaderText="A MenuFlyout with ToggleMenuFlyoutItems and MenuFlyoutSeparator.">
+                <Button x:Name="Control2" Content="Options">
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="Reset"/>
+                            <MenuFlyoutSeparator/>
+                            <ToggleMenuFlyoutItem Text="Repeat"/>
+                            <ToggleMenuFlyoutItem Text="Shuffle"/>
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+                <local:ControlExample.Xaml>
+                    <RichTextBlock>
+                        <Paragraph>&lt;Button Content="Options"&gt;</Paragraph>
+                        <Paragraph TextIndent="12">&lt;Button.Flyout&gt;</Paragraph>
+                        <Paragraph TextIndent="24">&lt;MenuFlyout&gt;</Paragraph>
+                        <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="Reset"/&gt;</Paragraph>
+                        <Paragraph TextIndent="36">&lt;MenuFlyoutSeparator/&gt;</Paragraph>
+                        <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="Repeat"/&gt;</Paragraph>
+                        <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="Shuffle"/&gt;</Paragraph>
+                        <Paragraph TextIndent="24">&lt;/MenuFlyout&gt;</Paragraph>
+                        <Paragraph TextIndent="12">&lt;/Button.Flyout&gt;</Paragraph>
+                        <Paragraph >&lt;/Button&gt;</Paragraph>
+                    </RichTextBlock>
+                </local:ControlExample.Xaml>
+            </local:ControlExample>
+        </StackPanel>
+
+        <local:ControlExample x:Name="Example3" HeaderText="A MenuFlyout with cascading menus.">
+            <Button x:Name="Control3" Content="File Options">
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Open"/>
+                        <MenuFlyoutSubItem Text="Send to">
+                            <MenuFlyoutItem Text="Bluetooth" />
+                            <MenuFlyoutItem Text="Desktop (shortcut)" />
+                            <MenuFlyoutSubItem Text="Compressed file">
+                                <MenuFlyoutItem Text="Compress and email" />
+                                <MenuFlyoutItem Text="Compress to .7z" />
+                                <MenuFlyoutItem Text="Compress to .zip" />
+                            </MenuFlyoutSubItem>
+                        </MenuFlyoutSubItem>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+            <local:ControlExample.Xaml>
+                <RichTextBlock>
+                    <Paragraph>&lt;Button Content="File Options"&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Button.Flyout&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;MenuFlyout&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="Open"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;MenuFlyoutSubItem Text="Send to"&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;MenuFlyoutItem Text="Bluetooth" /&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;MenuFlyoutItem Text="Desktop (shortcut)" /&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;MenuFlyoutSubItem Text="Compressed file"&gt;</Paragraph>
+                    <Paragraph TextIndent="60">&lt;MenuFlyoutItem Text="Compress and email" /&gt;</Paragraph>
+                    <Paragraph TextIndent="60">&lt;MenuFlyoutItem Text="Compress to .7z" /&gt;</Paragraph>
+                    <Paragraph TextIndent="60">&lt;MenuFlyoutItem Text="Compress to .zip" /&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;/MenuFlyoutSubItem&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;/MenuFlyoutSubItem&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;/MenuFlyout&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/Button.Flyout&gt;</Paragraph>
+                    <Paragraph>&lt;/Button&gt;</Paragraph>
+
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+
+        <VisualStateManager.VisualStateGroups>
+            <!-- Visual states reflect the application's window size -->
+            <VisualStateGroup>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Example3.(RelativePanel.RightOf)" Value="LeftColumn" />
+                        <Setter Target="Example3.Margin" Value="24,0,0,0" />
+                        <Setter Target="Example2.Margin" Value="0,30,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Example3.(RelativePanel.Below)" Value="LeftColumn" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </RelativePanel>
+</Page>

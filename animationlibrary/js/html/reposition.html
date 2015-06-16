@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/reposition.css" />
+    <script src="/js/reposition.js"></script>
+</head>
+<body>
+    <div id="scenarioHeader">
+        <h2 id="sampleHeader">Description:</h2>
+        <div id="scenarioDescription">
+            Reposition
+        </div>
+    </div>
+    <div id="input">
+        <p>
+            Use the Reposition animation to move an element to a new location. This animation is
+            best used when an element needs to move due to a user interaction or a change in layout.
+        </p>
+        <p>
+            Depending on the distance the affected element needs to be moved, it may appear
+            to animate differently. Typically, smaller distances have a slower velocity than
+            larger distances. This is because all reposition animations have the same duration.
+        </p>
+
+        <p>
+            Reposition animates only the elements that change position in a layout. Depending
+            on the layout, there may be times when a non-animated element is adjacent to an
+            animated element. The non-animated element may jump to its final state faster than
+            the animated element can reach its own. In this example, the resized element sometimes
+            overlaps with the repositioned element. Because of this, you should be mindful of
+            how other animations in your layout can affect your application's experience.
+        </p>
+
+        <h3>Reposition elements:</h3>
+        <input id="repositionControl" class="action" type="range" min="0" max="500" value="0"
+                step="any" list="ticks" aria-labelledby="rangeLabel" />
+
+        <datalist id="ticks">
+            <option value="0" />
+            <option value="50" />
+            <option value="100" />
+            <option value="150" />
+            <option value="200" />
+            <option value="250" />
+        </datalist>
+    </div>
+    <div id="output">
+        <div id="spacingDiv"></div>
+        <div id="target1" class="target"></div>
+        <div id="target2" class="target"></div>
+        <div id="target3" class="target"></div>
+    </div>
+</body>
+</html>

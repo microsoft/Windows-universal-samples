@@ -1,0 +1,18 @@
+﻿#tile
+{
+    width: 200px;
+    height: 200px;
+    background-color: #C8C8C8;
+}
+
+#badge
+{
+    z-index: 1;
+    position: relative;
+    left: 160px;
+    top: 160px; 
+    width: 20px;
+    color: #000000; 
+    text-align: right; 
+    font-family: 'Segoe UI Symbol';
+}

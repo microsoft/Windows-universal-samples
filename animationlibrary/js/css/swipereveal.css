@@ -1,0 +1,18 @@
+﻿#revealed
+{    
+    width: 200px;
+    height: 200px;
+    background-color: transparent;
+    color: #000000;  
+    text-align: right;
+    font-family: 'Segoe UI Symbol';
+}
+
+#revealTarget
+{
+    position: relative;
+    top: -200px;   
+    width: 200px;
+    height: 200px;
+    background-color: #C8C8C8;  
+}

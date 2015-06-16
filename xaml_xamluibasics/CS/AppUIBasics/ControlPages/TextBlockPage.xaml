@@ -1,0 +1,116 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AppUIBasics.ControlPages.TextBlockPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <RelativePanel HorizontalAlignment="Left">
+        <StackPanel x:Name="LeftColumn" MaxWidth="500">
+            <local:ControlExample x:Name="Example1" HeaderText="A simple TextBlock.">
+                <local:ControlExample.Example>
+                    <TextBlock Text="I am a TextBlock."/>
+                </local:ControlExample.Example>
+                <local:ControlExample.Xaml>
+                    <RichTextBlock>
+                        <Paragraph>&lt;TextBlock Text="I am a TextBlock"/&gt;</Paragraph>
+                    </RichTextBlock>
+                </local:ControlExample.Xaml>
+            </local:ControlExample>
+
+            <local:ControlExample x:Name="Example2" HeaderText="A TextBlock with a style applied.">
+                <local:ControlExample.Example>
+                    <TextBlock Text="I am a styled TextBlock." Style="{StaticResource OutputTextBlockStyle}"/>
+                </local:ControlExample.Example>
+                <local:ControlExample.Xaml>
+                    <RichTextBlock>
+                        <Paragraph>&lt;TextBlock Text="I am a styled TextBlock"
+                            <Bold>Style="{StaticResource OutputTextBlockStyle}"</Bold> /&gt;
+                        </Paragraph>
+                    </RichTextBlock>
+                </local:ControlExample.Xaml>
+            </local:ControlExample>
+        </StackPanel>
+
+        <StackPanel x:Name="RightColumn" MaxWidth="500">
+            <local:ControlExample x:Name="Example3" HeaderText="A TextBlock with various properties set.">
+                <local:ControlExample.Example>
+                    <TextBlock Text="I am super excited to be here!" FontFamily="Arial" FontSize="24" FontStyle="Italic" 
+                           TextWrapping="WrapWholeWords" CharacterSpacing="200" Foreground="CornflowerBlue"/>
+                </local:ControlExample.Example>
+                <local:ControlExample.Xaml>
+                    <RichTextBlock>
+                        <Paragraph>&lt;TextBlock Text="I am super excited to be here!"
+                            <Bold>FontFamily="Arial"</Bold>
+                        </Paragraph>
+                        <Paragraph TextIndent="12">
+                            <Bold>FontSize="24" FontStyle="Italic" TextWrapping="WrapWholeWords"</Bold>
+                        </Paragraph>
+                        <Paragraph TextIndent="12">
+                            <Bold>CharacterSpacing="200" Foreground="CornflowerBlue"</Bold> /&gt;
+                        </Paragraph>
+                    </RichTextBlock>
+                </local:ControlExample.Xaml>
+            </local:ControlExample>
+
+            <local:ControlExample x:Name="Example4" HeaderText="A TextBlock with inline text elements.">
+                <local:ControlExample.Example>
+                    <TextBlock>
+                            <Run FontFamily="Times New Roman" Foreground="DarkGray">Text in a TextBlock doesn't have to be a simple string.</Run>
+                            <LineBreak/>
+                            <Span>Text can be <Bold>bold</Bold>, <Italic>italic</Italic>, or <Underline>underlined</Underline>.</Span>
+                    </TextBlock>
+                </local:ControlExample.Example>
+                <local:ControlExample.Xaml>
+                    <RichTextBlock>
+                        <Paragraph>&lt;TextBlock&gt;</Paragraph>
+                        <Paragraph TextIndent="12">&lt;Run FontFamily="Times New Roman" Foreground="DarkGray"&gt;</Paragraph>
+                        <Paragraph TextIndent="24">Text in a TextBlock doesn't have to be a simple string.&lt;/Run&gt;</Paragraph>
+                        <Paragraph TextIndent="12">&lt;LineBreak/&gt;</Paragraph>
+                        <Paragraph TextIndent="12">&lt;Span&gt;Text can be &lt;Bold&gt;bold&lt;/Bold&gt;,</Paragraph>
+                        <Paragraph TextIndent="24">&lt;Italic&gt;italic&lt;/Italic&gt;, or &lt;Underline&gt;underlined&lt;/Underline&gt;. &lt;/Span&gt;</Paragraph>
+                        <Paragraph>&lt;/TextBlock&gt;</Paragraph>
+                    </RichTextBlock>
+                </local:ControlExample.Xaml>
+            </local:ControlExample>
+        </StackPanel>
+
+        <VisualStateManager.VisualStateGroups>
+            <!-- Visual states reflect the application's window size -->
+            <VisualStateGroup>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="768" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RightColumn.(RelativePanel.RightOf)" Value="LeftColumn" />
+                        <Setter Target="RightColumn.Margin" Value="24,0,0,0" />
+                        <Setter Target="Example2.Margin" Value="0,34,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RightColumn.(RelativePanel.Below)" Value="LeftColumn" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </RelativePanel>
+</Page>

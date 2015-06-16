@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/xmlHttpRequest.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>A page in the local context (ms-appx://) can do XmlHttpRequest (XHR) to any remote site (e.g http://rss.msnbc.msn.com/id/3032127/device/rss/rss.xml) and to local content in the package (feed.xml)</p>
+        <p>Note: The target Uri on a XHR request is not restricted by the ApplicationContentUriRules listed in the manifest.</p>
+        <button id="xhrRemote" class="action">Make remote XHR call</button>
+        <button id="xhrLocal" class="action">Make local XHR call</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        Please select an action.
+        <div id="response"></div>
+    </div>
+</body>
+</html>

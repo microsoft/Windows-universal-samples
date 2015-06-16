@@ -1,0 +1,28 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario3_CurrencyFormatting.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This example demonstrates how to format a number as a currency.  An application using this approach to format a number as a currency will be returned a string that is formatted to match the user’s preferences.  An application can also choose to override the user’s language preferences and will be returned a string properly formatted for that override.</p>
+                <p>The various options available for this formatting option are illustrated below including specifying the number of integer or fractional digits and with or without grouping separators.  Unlike other number formatting, there is no default currency assumed and it must be explicitly specified. This is because currency associated with the number provides essential context to the value.</p>
+            </div>
+        </div>
+        <div id=scenarioContent">
+            <button id="displayButton">Display</button>
+        </div>
+        <div id=scenarioOutput">
+            <p id="output" />
+        </div>
+    </div>
+</body>
+</html>

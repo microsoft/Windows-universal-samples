@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+    <Identity
+      Name="Microsoft.SDKSamples.ProxyStubsForCPP.CPP"
+      Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+      Version="1.0.0.0" />
+
+    <mp:PhoneIdentity PhoneProductId="f8ffce2e-44a6-4b54-94a6-5c491a7b7cf5" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+    <Properties>
+      <DisplayName>Proxy and stub generation for Windows Runtime components client C++ sample</DisplayName>
+      <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+        <Logo>Assets\StoreLogo-sdk.png</Logo>
+    </Properties>
+
+    <Dependencies>
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10058.0" MaxVersionTested="10.0.10058.0" />
+    </Dependencies>
+
+    <Resources>
+        <Resource Language="x-generate"/>
+    </Resources>
+
+    <Applications>
+        <Application Id="Microsoft.SDKSamples.ProxyStubsForWinRTComponents.CPP"
+          Executable="$targetnametoken$.exe"
+          EntryPoint="CppClient">
+            <uap:VisualElements
+              DisplayName="Proxy and stub generation for Windows Runtime components client C++ sample"
+              Square150x150Logo="Assets\squareTile-sdk.png"
+              Square44x44Logo="Assets\smallTile-sdk.png"
+              Description="Proxy and stub generation for Windows Runtime components client C++ sample"
+              BackgroundColor="#00B2F0">
+                <uap:SplashScreen Image="Assets\splash-sdk.png" />
+                <uap:DefaultTile>
+                    <uap:ShowNameOnTiles>
+                        <uap:ShowOn Tile="square150x150Logo" />
+                    </uap:ShowNameOnTiles>
+                </uap:DefaultTile>
+            </uap:VisualElements>
+        </Application>
+    </Applications>
+
+  <Extensions>
+    <Extension Category="windows.activatableClass.proxyStub">
+      <ProxyStub ClassId="332fd2f1-1c69-4c91-949e-4bb67a85bdc5">
+        <Path>Microsoft.SDKSamples.Kitchen.Proxies.dll</Path>
+        <Interface Name="IOven" InterfaceId="6a112353-4f87-4460-a908-2944e92686f3" />
+        <Interface Name="IBread" InterfaceId="699b1394-3ceb-4a14-ae23-efec518b088b" />
+        <Interface Name="IAppliance" InterfaceId="332fd2f1-1c69-4c91-949e-4bb67a85bdc5" />
+        <Interface Name="__FITypedEventHandler_2_Microsoft__CSDKSamples__CKitchen__COven_Microsoft__CSDKSamples__CKitchen__CBread" InterfaceId="528cc6e3-86fd-581c-a266-77a00a07e668" />
+      </ProxyStub>
+    </Extension>
+  </Extensions>
+</Package>
+

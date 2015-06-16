@@ -1,0 +1,132 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.WiFiDirectServices.Scenario5"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Send and receive data with selected session. You can add new socket connections on different TCP/UDP ports.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer x:Name="PlaceholderUI" Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                <TextBlock HorizontalAlignment="Center">Select a connected session to send data</TextBlock>
+            </ScrollViewer>
+            <ScrollViewer x:Name="MainUI" Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,0,10">
+                            Advertisement ID:
+                        </TextBlock>
+                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                            <TextBlock x:Name="AdvertisementId" Margin="0,0,10,10">##</TextBlock>
+                            <TextBlock x:Name="ServiceAddress" Margin="0,0,0,10">xx:xx:xx:xx:xx:xx</TextBlock>
+                        </StackPanel>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,0,10">
+                            Session ID:
+                        </TextBlock>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                            <TextBlock x:Name="SessionId" Margin="0,0,10,10">##</TextBlock>
+                            <TextBlock x:Name="SessionAddress" Margin="0,0,0,10">xx:xx:xx:xx:xx:xx</TextBlock>
+                        </StackPanel>
+                        
+                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,0,0,10">
+                            Session Status:
+                        </TextBlock>
+                        <TextBlock x:Name="SessionStatus" Grid.Row="2" Grid.Column="1"  Margin="0,0,0,10">
+                            [Status]
+                        </TextBlock>
+                    </Grid>
+                    
+                    <TextBlock>
+                        Add Socket:
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox x:Name="Protocol" SelectedIndex="0" Margin="0,0,10,10">
+                            <ComboBoxItem>TCP</ComboBoxItem>
+                            <ComboBoxItem>UDP</ComboBoxItem>
+                        </ComboBox>
+                        <TextBlock VerticalAlignment="Center" Margin="0,0,10,10">
+                            Port:
+                        </TextBlock>
+                        <TextBox x:Name="Port" Margin="0,0,10,10"/>
+                        <Button x:Name="AddPort" Click="AddPort_Click" Margin="0,0,10,10">
+                            Add
+                        </Button>
+                    </StackPanel>
+                    
+                    <TextBlock>
+                        Connected Sockets:
+                    </TextBlock>
+                    <ListView x:Name="ConnectedSockets" MinHeight="50" SelectionMode="Single">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <TextBlock Grid.Column="0" Text="{Binding Path=Protocol}" Margin="0,0,10,0"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Path=Port}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBox x:Name="SendData" Margin="0,0,10,10"/>
+                        <Button x:Name="DoSend" Click="DoSend_Click" Grid.Column="1" Margin="0,0,0,10">
+                            Send
+                        </Button>
+                    </Grid>
+                    
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,241 @@
+﻿/*
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+#news {
+    background: #3d3d3d url('../../../images/LargeRSSLogo-background-white.png') bottom left no-repeat !important;
+    background-size: cover;
+}
+
+/* This selector is used to prevent ui-dark/light.css from overwriting changes
+   to .win-surface. */
+#news #articlesListViewArea #articlesListView-in .win-horizontal.win-viewport .win-surface,
+#news #articlesListViewArea #articlesListView-out .win-horizontal.win-viewport .win-surface {
+    margin-left: 0px;
+}
+
+/* Semantic Zoom Control */
+#articlesListViewArea {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+/* List View */
+#articlesListView-in {
+    height: 100%;
+    width: 100%;
+}
+
+    #articlesListView-in .win-container:hover {
+         outline: none !important;
+    }
+
+    #articlesListView-in .win-groupleader {
+        margin-left: 120px;
+    }
+            
+    /* Use grid and top level layout for truncation */
+    #articlesListView-in .win-groupheader button.group-header {
+        display: -ms-inline-grid;
+        -ms-grid-columns: minmax(0, max-content);
+        -ms-grid-rows: max-content;
+    }
+
+        /* Override default button styles */
+        button.group-header, button.group-header:hover, button.group-header:hover:active {
+            background: transparent;
+            border: 0;
+        }
+
+        .group-chevron {
+            -ms-grid-column: 2;
+        }
+
+            .group-chevron::before {
+                font-family: 'Segoe UI Symbol';
+                content: "\E26B";
+            }
+
+            /* Use mirrored glyph for RTL languages */
+            .group-chevron:-ms-lang(ar, dv, fa, he, ku-Arab, pa-Arab, prs, ps, sd-Arab, syr, ug, ur, qps-plocm)::before {
+                font-family: 'Segoe UI Symbol';
+                content: "\E26C";
+            }
+
+    /* Tiles */
+    
+    /* Text tile */
+    #articlesListView-in .large-text-tile {
+        height: 510px;
+        width: 510px;
+        display: -ms-grid;
+        background-color: #d85137;
+        display: block;
+        overflow: hidden;
+    }
+        
+        #articlesListView-in .large-text-tile .title {
+            margin: 5px;
+            height: 100%;
+            font: 34pt/38pt "Segoe UI Semilight";
+        }
+
+    #articlesListView-in .normal-text-tile {
+        height: 250px;
+        width: 250px;
+        display: -ms-grid;
+        background-color: #d85137;
+        display: block;
+        overflow: hidden;
+    }
+        
+        #articlesListView-in .normal-text-tile .title {
+            margin: 5px;
+            height: 100%;
+            font: 16pt/18pt "Segoe UI Semilight";
+        }
+    
+    /* Image tile */
+    #articlesListView-in .large-image-tile {
+        height: 510px;
+        width: 510px;
+        -ms-grid-columns: 1fr;
+        -ms-grid-rows: 1fr 180px;
+         display: -ms-grid;
+        background-color: white !important;
+    }
+    
+        #articlesListView-in .large-image-tile .image {
+            -ms-grid-row-span: 2;
+            overflow: hidden;
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+        }
+
+        #articlesListView-in .large-image-tile .overlay {
+            -ms-grid-row: 2;
+            background-color: #d85137;
+            opacity: 0.9;
+            height: 180px;
+            display: block;
+            overflow: hidden;
+        }
+
+        #articlesListView-in .large-image-tile .overlay .title {
+            margin: 5px;
+            font: 24pt/26pt "Segoe UI Semilight";
+            -ms-hyphens: auto;
+        }
+         
+    #articlesListView-in .normal-image-tile {
+        height: 250px;
+        width: 250px;
+        -ms-grid-columns: 1fr;
+        -ms-grid-rows: 1fr 100px;
+         display: -ms-grid;
+    }
+    
+        #articlesListView-in .normal-image-tile .image {
+            -ms-grid-row-span: 2;
+            overflow: hidden;
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+        }
+
+        #articlesListView-in .normal-image-tile .overlay {
+            -ms-grid-row: 2;
+            background-color: #d85137;
+            opacity: 0.9;
+            height: 100px;
+            display: block;
+            overflow: hidden;
+        }
+
+        #articlesListView-in .normal-image-tile .overlay .title {
+            margin: 5px;
+            font: 12pt/14pt "Segoe UI Semilight";
+            -ms-hyphens: auto;
+        }
+
+    /* Error Tile */
+    #articlesListView-in .error-tile {
+        height: 120px;
+        width: 250px;
+        display: -ms-grid;
+        background-color: #3d3d3d;
+    }
+
+        #articlesListView-in .error-tile .error {
+            margin: 0;
+            height: 100%;
+            font: 12pt/14pt "Segoe UI Semilight";
+        }
+
+/* Zoomed-out list view */
+#articlesListView-out {
+    height: 100%;
+    width: 100%;
+    margin-left: 120px;
+}
+
+#articlesListView-out .win-container {
+    height: 100px;
+    width: 250px;
+}
+
+#articlesListView-out .win-item {
+    height: 100%;
+    width: 100%;
+    background-color: #d85137;
+}
+
+#articlesListView-out .title {
+    margin: 5px;
+    height: 100%;
+    color: white;
+    text-align: left;
+    font: 20pt/26pt "Segoe UI Light";
+}
+
+#errorDiv {
+    margin-left: 124px;
+    font: 12pt/14pt "Segoe UI Semilight";
+}
+
+@media screen and (-ms-high-contrast) {
+    #news #articlesListView-in .image {
+        -ms-high-contrast-adjust: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #news header[role=banner] .titlearea {
+        margin-left: 5px;
+    }
+
+    #news #articlesListView-in .win-container {
+        margin-left: 10px;
+        height: 60px;
+    }
+
+    #news #articlesListView-in .win-item {
+        height: 100%;
+        background-color: #d85137;
+    }
+
+    #news #articlesListView-in .win-item .title {
+        margin: 5px;
+        font: 11pt/15pt "Segoe UI Semilight";
+        -ms-hyphens: none;
+    }
+
+    #news #errorDiv {
+        margin-left: 10px;
+    }
+}

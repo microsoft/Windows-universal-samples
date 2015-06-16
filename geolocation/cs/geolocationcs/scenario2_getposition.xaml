@@ -2,7 +2,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -51,7 +51,6 @@
                 <TextBlock TextWrapping="Wrap" Margin="0,0,10,0" Grid.Row="1" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Longitude: " />
                 <TextBlock TextWrapping="Wrap" Margin="0,0,10,0" Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Accuracy: " />
                 <TextBlock TextWrapping="Wrap" Margin="0,0,10,0" Grid.Row="3" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Source: " />
-                <TextBlock TextWrapping="Wrap" Margin="0,0,10,0" Grid.Row="4" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Venue: " />
                 <TextBlock x:Name="Label_DilutionOfPrecision" Margin="0,0,10,0" Visibility="{Binding Visibility, ElementName=ScenarioOutput_PosPrecision}"  TextWrapping="Wrap" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Dilution Of Precision (DOP): " />
                 <TextBlock x:Name="Label_PosPrecision" Margin="20,0,10,0" Visibility="{Binding Visibility, ElementName=ScenarioOutput_PosPrecision}"  TextWrapping="Wrap" Grid.Row="6" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Position DOP: " />
                 <TextBlock x:Name="Label_HorzPrecision" Margin="20,0,10,0" Visibility="{Binding Visibility, ElementName=ScenarioOutput_HorzPrecision}" TextWrapping="Wrap" Grid.Row="7" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Horizontal DOP: " />
@@ -60,14 +59,13 @@
                 <TextBlock x:Name="ScenarioOutput_Longitude" Margin="0,0,10,0" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
                 <TextBlock x:Name="ScenarioOutput_Accuracy" Margin="0,0,10,0" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
                 <TextBlock x:Name="ScenarioOutput_Source" Margin="0,0,10,0" TextWrapping="Wrap" Grid.Row="3" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
-                <TextBlock x:Name="ScenarioOutput_Venue" Margin="0,0,10,0" TextWrapping="Wrap" Grid.Row="4" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
                 <TextBlock x:Name="ScenarioOutput_PosPrecision" Margin="0,0,10,0" Visibility="Collapsed" TextWrapping="Wrap" Grid.Row="6" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
                 <TextBlock x:Name="ScenarioOutput_HorzPrecision" Margin="0,0,10,0" Visibility="Collapsed" TextWrapping="Wrap" Grid.Row="7" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
                 <TextBlock x:Name="ScenarioOutput_VertPrecision" Margin="0,0,10,0" Visibility="Collapsed" TextWrapping="Wrap" Grid.Row="8" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
             </Grid>
             <TextBlock TextWrapping="Wrap" x:Name="LocationDisabledMessage" Margin="0,10,0,0" FontStyle="Italic" Visibility="Collapsed">
                 <Run Text="Application is not able to get location data. Go to " />
-                <Hyperlink NavigateUri="ms-settings://privacy/location">
+                <Hyperlink NavigateUri="ms-settings:privacy-location">
                     <Run Text="Settings" />
                 </Hyperlink>
                 <Run Text=" to check the location permissions."/>

@@ -1,0 +1,49 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AppUIBasics.ControlPages.AppBarSeparatorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <local:ControlExample HeaderText="AppBarButtons separted by AppBarSeparators." HorizontalAlignment="Left" VerticalAlignment="Top">
+        <local:ControlExample.Example>
+            <StackPanel x:Name="Control1" Orientation="Horizontal">
+                <AppBarButton Icon="AttachCamera" Label="Attach Camera"/>
+                <AppBarSeparator />
+                <AppBarButton Icon="Like" Label="Like"/>
+                <AppBarButton Icon="Dislike" Label="Dislike"/>
+                <AppBarSeparator />
+                <AppBarButton Icon="Orientation" Label="Orientation"/>
+            </StackPanel>
+        </local:ControlExample.Example>
+        <local:ControlExample.Xaml>
+            <RichTextBlock Style="{StaticResource RichTextBlockCodeStyle}" >
+                <Paragraph>&lt;StackPanel Orientation="Horizontal"&gt;</Paragraph>
+                <Paragraph TextIndent="12">&lt;AppBarButton Icon="AttachCamera" Label="Attach Camera"/&gt;</Paragraph>
+                <Paragraph TextIndent="12">
+                    <Bold>&lt;AppBarSeparator /&gt;</Bold>
+                </Paragraph>
+                <Paragraph TextIndent="12">&lt;AppBarButton Icon="Like" Label="Like"/&gt;</Paragraph>
+                <Paragraph TextIndent="12">&lt;AppBarButton Icon="Dislike" Label="Dislike"/&gt;</Paragraph>
+                <Paragraph TextIndent="12">
+                    <Bold>&lt;AppBarSeparator /&gt;</Bold>
+                </Paragraph>
+                <Paragraph TextIndent="12">&lt;AppBarButton Icon="Orientation" Label="Orientation"/&gt;</Paragraph>
+                <Paragraph>&lt;/StackPanel&gt;</Paragraph>
+            </RichTextBlock>
+        </local:ControlExample.Xaml>
+    </local:ControlExample>
+</Page>

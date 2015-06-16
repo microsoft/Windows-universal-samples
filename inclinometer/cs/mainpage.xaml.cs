@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -101,6 +101,16 @@ namespace SDKTemplate
 
             // Collapse the StatusBlock if it has no text to conserve real estate.
             StatusBorder.Visibility = (StatusBlock.Text != String.Empty) ? Visibility.Visible : Visibility.Collapsed;
+            if (StatusBlock.Text != String.Empty)
+            {
+                StatusBorder.Visibility = Visibility.Visible;
+                StatusPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                StatusBorder.Visibility = Visibility.Collapsed;
+                StatusPanel.Visibility = Visibility.Collapsed;
+            }
         }
 
         async void Footer_Click(object sender, RoutedEventArgs e)
@@ -110,8 +120,7 @@ namespace SDKTemplate
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //Splitter.DisplayMode = (Splitter.DisplayMode == SplitViewDisplayMode.Inline) ? SplitViewDisplayMode.CompactInline : SplitViewDisplayMode.Inline;
-            Splitter.IsPaneOpen = (Splitter.IsPaneOpen == true) ? false : true;
+            Splitter.IsPaneOpen = !Splitter.IsPaneOpen;
             StatusBorder.Visibility = Visibility.Collapsed;
         }
     }

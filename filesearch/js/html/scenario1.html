@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario1.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>Applications often need to search locations for files that match a certain criteria.
+           Advanced Query Syntax (AQS) is used to retrieve targeted results based on keywords or other search parameters.
+           Enter an AQS query below to search the <b>Music library</b> for matching items.</p>
+        <p>Example Queries:<br />song<br />size:&gt;1MB</p>
+
+        <input type="text" id="queryBox" />
+        <button class="action" id="search">Search</button>
+        <br /><br />
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <div id="output"></div>
+    </div>
+</body>
+</html>

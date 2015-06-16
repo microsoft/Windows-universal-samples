@@ -1,0 +1,149 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="CustomSerialDeviceAccess.Scenario2_ConfigureDevice"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomSerialDeviceAccess"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Configure Serial Device" Style="{StaticResource SampleHeaderTextStyle}"/>
+            </StackPanel>
+
+            <ScrollViewer x:Name="ConfigureDeviceScrollViewer" Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,100">
+                <StackPanel Orientation="Vertical" Margin="0,10,0,0" Grid.Row="1">
+
+                    <StackPanel Orientation="Horizontal" Margin="10,30,0,0" Grid.Row="1">
+                        <TextBlock Text="Carrier Detect State = "/>
+                        <TextBlock x:Name="CarrierDetectStateValue" Text=" Not Set"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,30,0,0" Grid.Row="1">
+                        <TextBlock Text="Data Set Ready = "/>
+                        <TextBlock x:Name="DataSetReadyStateValue" Text=" Not Set"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,30,0,0" Grid.Row="1">
+                        <TextBlock Text="Break State Signal : "/>
+                        <TextBlock x:Name="BreakStateSignalValue" Text=" Not Set"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Grid.Row="1">
+                        <ToggleSwitch x:Name="BreakStateSignalToggleSwitch" OnContent="On" OffContent="Off" Toggled="BreakStateSignalToggleSwitch_Toggled">
+                        </ToggleSwitch>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,30,0,0" Grid.Row="1">
+                        <TextBlock Text="Data Terminal Ready Enabled = "/>
+                        <TextBlock x:Name="DataTerminalReadyEnabledValue" Text=" Not Set"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Grid.Row="1">
+                        <ToggleSwitch x:Name="DataTerminalReadyEnabledToggleSwitch" OnContent="On" OffContent="Off" Toggled="DataTerminalReadyEnabledToggleSwitch_Toggled">
+                        </ToggleSwitch>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,30,0,0" Grid.Row="1">
+                        <TextBlock Text="Request To Send Enabled = "/>
+                        <TextBlock x:Name="RequestToSendEnabledValue" Text=" Not Set"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Grid.Row="1">
+                        <ToggleSwitch x:Name="RequestToSendEnabledToggleSwitch" OnContent="On" OffContent="Off" Toggled="RequestToSendEnabledToggleSwitch_Toggled">
+                        </ToggleSwitch>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,30,0,0" Grid.Row="1">
+                        <TextBlock Text="Baud Rate = "/>
+                        <TextBlock x:Name="BaudRateValue" Text=" Not Set"/>
+                     </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Grid.Row="1">
+                        <TextBox x:Name="BaudRateInputValue" Text="Enter Baud Rate" Height="30" InputScope="Number"/>
+                        <Button x:Name="BaudRateSetButton" Height="30" Content="SET" Click="BaudRateSetButton_Click"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" Margin="10,30,0,0" Grid.Row="1">
+                        <TextBlock Text="Parity = "/>
+                        <TextBlock x:Name="ParityValue" Text=" Not Set"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Grid.Row="1">
+                        <ComboBox x:Name="ParityComboBox" SelectionChanged="ParityComboBox_SelectionChanged" >
+                            <x:String>None</x:String>
+                            <x:String>Even</x:String>
+                            <x:String>Odd</x:String>
+                            <x:String>Mark</x:String>
+                            <x:String>Space</x:String>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,30,0,0" Grid.Row="1">
+                        <TextBlock Text="Stop Bit Count = "/>
+                        <TextBlock x:Name="StopBitCountValue" Text=" Not Set"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Grid.Row="1">
+                        <ComboBox x:Name="StopBitCountComboBox" SelectionChanged="StopBitCountComboBox_SelectionChanged" >
+                            <x:String>One</x:String>
+                            <x:String>OnePointFive</x:String>
+                            <x:String>Two</x:String>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,30,0,0" Grid.Row="1">
+                        <TextBlock Text="Hand Shake = "/>
+                        <TextBlock x:Name="HandShakeValue" Text=" Not Set"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Grid.Row="1">
+                        <ComboBox x:Name="HandShakeComboBox" SelectionChanged="HandShakeComboBox_SelectionChanged">
+                            <x:String>None</x:String>
+                            <x:String>RequestToSend</x:String>
+                            <x:String>XOnXOff</x:String>
+                            <x:String>RequestToSendXOnXOff</x:String>
+                        </ComboBox>
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal" Margin="10,30,0,0" Grid.Row="1">
+                        <TextBlock Text="Data Bits = "/>
+                        <TextBlock x:Name="DataBitsValue" Text=" Not Set"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Grid.Row="1">
+                        <ComboBox x:Name="DataBitsComboBox" SelectionChanged="DataBitsComboBox_SelectionChanged" >
+                            <x:Int32>0</x:Int32>
+                            <x:Int32>1</x:Int32>
+                            <x:Int32>2</x:Int32>
+                            <x:Int32>3</x:Int32>
+                            <x:Int32>4</x:Int32>
+                            <x:Int32>5</x:Int32>
+                            <x:Int32>6</x:Int32>
+                            <x:Int32>7</x:Int32>
+                            <x:Int32>8</x:Int32>
+                        </ComboBox>
+                    </StackPanel>
+
+
+                </StackPanel>
+
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

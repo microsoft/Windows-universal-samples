@@ -1,0 +1,46 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1.css" />
+    <script src="/js/scenario1_devicepicker.js"></script>
+    <script src="/js/displayhelpers.js"></script>
+</head>
+<body>
+    <div id="resultsViewTemplate" data-win-control="WinJS.Binding.Template">
+        <div style="padding:2px; border:1px solid gray; white-space:nowrap">
+            <div>Name: <span data-win-bind="innerText: name" style="font-weight:bold"></span></div>
+            <div>Id: <span data-win-bind="innerText: id"></span></div>
+        </div>
+    </div>
+
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                This scenario demonstrates the use of the Windows.Devices.Enumeration.DevicePicker. DevicePicker is a UI control that allows users of your app to pick a device
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                Choose a device selector:<br />
+                <select id="selectorComboBox"></select>
+            </p>
+            <button id="pickSingleDeviceButton">Pick Single Device</button>
+            <button id="showDevicePickerButton">Show Device Picker</button>
+            <button id="hideDevicePickerButton" disabled="true">Hide Device Picker</button>
+        </div>
+        <div id="resultsListView"
+             style="border:2px solid white;"
+             data-win-control="WinJS.UI.ListView"
+             data-win-options="{
+                itemTemplate: select('#resultsViewTemplate'),
+                layout: {type: WinJS.UI.ListLayout}}">
+        </div>
+    </div>
+</body>
+</html>

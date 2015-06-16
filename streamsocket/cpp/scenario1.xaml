@@ -1,0 +1,40 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+--> 
+<Page x:Class="SDKTemplate.StreamSocketSample.Scenario1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:StreamSocketSample" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+  <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+    <StackPanel>
+      <TextBlock x:Name="InputTextBlock1" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0,0,0,20">
+        StreamSocketListener will create the 'server' side of a connection. It
+      listens on a 'service name' (often a port number) and calls a callback
+      when it accepts a connection; this happens when some other application
+      tries to connect. Once a connection is accepted, the acceptAsync()
+      method needs to be called again.
+      </TextBlock>
+      <TextBlock Style="{StaticResource BasicTextStyle}" VerticalAlignment="Bottom">Service name:</TextBlock>
+      <TextBox x:Name="ServiceNameForListener" Text="22112"/>
+      <TextBlock Style="{StaticResource BasicTextStyle}">Optional settings:</TextBlock>
+      <RadioButton x:Name="BindToAny" Checked="BindToAny_Checked" Unchecked="BindToAny_Unchecked">Bind to any address</RadioButton>
+      <RadioButton x:Name="BindToAddress">Bind to specific address (select from below list of IPv4 or IPv6)</RadioButton>
+      <RadioButton x:Name="BindToAdapter">Bind to adapter (select an adapter based on the GUIDs below)</RadioButton>
+      <ComboBox x:Name="AdapterList" AllowDrop="True" IsEnabled="False"/>
+      <Button x:Name="StartListener" Content="Listen" Click="StartListener_Click"/>
+      <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts -->
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup>
+          <VisualState x:Name="DefaultLayout"/>
+          <VisualState x:Name="Below768Layout"/>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </StackPanel>
+  </ScrollViewer>
+</Page>

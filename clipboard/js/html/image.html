@@ -1,0 +1,30 @@
+﻿<!--
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/image.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>The DataPackage can also hold a bitmap. Select image using item picker, copy it to the clipboard, and then paste it back into the application. Image can also be provided via delayed rendering, when source app doesn't want to supply data until target app requests it.</p>
+        <button id="scenario2Copy" class="action">
+            Select an image and copy</button>
+        <button id="scenario2CopyDelayedRendering" class="action">
+            Select an image and copy using delayed rendering</button>
+        <button id="scenario2Paste" class="action">
+            Paste</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <img class="imageHolder" id="scenario2ImageHolder" alt="image holder" src="/images/placeholder-sdk.png" style="visibility: hidden" />
+    </div>
+</body>
+</html>

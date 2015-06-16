@@ -1,0 +1,68 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.S1_AddWithAPI"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >
+                    <Run>
+                        The ContentIndexer API allows you to add information to the Windows Search Index.  You can use any known Windows Properties.
+                        This example shows how to use the Name, Keywords, and Comment properties, as well as how to add content to be indexed.
+                    </Run>
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run>
+                        In addition, a language may be specified by entering a BCP-47 language code.  When entered, this sample will send the properties
+                        to the indexer using that language information.  Specifying the language ensures that things like spaces and punctuation will be
+                        properly handled for the content.  If the language is not known, it is recommended to not specify it.  The indexer will attempt
+                        to analyze the text in these cases and programmatically identify the language.
+                    </Run>
+                </TextBlock>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Margin="0,10,0,0">Item Key:</TextBlock>
+                    <TextBox   Grid.Row="0" Grid.Column="1" x:Name="ItemKeyInput" Margin="10,10,0,0" MinWidth="200" PlaceholderText="TestKey"></TextBox>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Margin="0,10,0,0">Name:</TextBlock>
+                    <TextBox   Grid.Row="1" Grid.Column="1" x:Name="NameInput" Margin="10,10,0,0" PlaceholderText="Test Name"></TextBox>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Margin="0,10,0,0">Keywords:</TextBlock>
+                    <TextBox   Grid.Row="2" Grid.Column="1" x:Name="KeywordsInput" Margin="10,10,0,0" PlaceholderText="keyword1; keyword2; keyword3"></TextBox>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Margin="0,10,0,0">Comment:</TextBlock>
+                    <TextBox   Grid.Row="3" Grid.Column="1" x:Name="CommentInput" Margin="10,10,0,0" PlaceholderText="This is a test comment"></TextBox>
+                    <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Margin="0,10,0,0">Content:</TextBlock>
+                    <TextBox   Grid.Row="4" Grid.Column="1" x:Name="ContentInput" Margin="10,10,0,0" PlaceholderText="This is test content."></TextBox>
+                    <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Margin="0,10,0,0">Language:</TextBlock>
+                    <TextBox   Grid.Row="5" Grid.Column="1" x:Name="LanguageInput" Margin="10,10,0,0" PlaceholderText="en-US"></TextBox>
+                </Grid>
+                <Button x:Name="AddToIndexButton" Margin="0,10,0,0" Click="AddToIndex_Click">Add to index</Button>
+                </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

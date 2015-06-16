@@ -1,0 +1,38 @@
+﻿.small
+{
+    width: 50px;
+    height: 50px;
+    float: left;
+    position: inherit;
+    background-color: #00B6FF;
+    text-align: center;
+    margin: 5px;
+}
+
+.medium
+{
+    width: 100px;
+    height: 100px;
+    background-color: #00B6FF;
+    text-align: center;
+    float: left;
+    position: inherit;
+     margin: 5px; 
+}
+
+.large
+{
+    width: 200px;
+    height: 200px;
+    background-color: #00B6FF;
+    text-align: center;
+    float: left;
+    position: inherit;
+    margin: 5px; 
+}
+
+.example
+{
+    float: left;
+    padding: 10px;
+}

@@ -1,7 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -35,7 +35,6 @@ void ActivitySensorBackgroundTask::Run(IBackgroundTaskInstance^ taskInstance)
     // Even though this task isn't performing much work, it can still be cancelled.
     taskInstance->Canceled += ref new BackgroundTaskCanceledEventHandler(this, &ActivitySensorBackgroundTask::OnCanceled);
 
-    /*
     // Read the activity reports
     ActivitySensorTriggerDetails^ triggerDetails = safe_cast<ActivitySensorTriggerDetails^>(taskInstance->TriggerDetails);
     auto reports = triggerDetails->ReadReports();
@@ -61,7 +60,6 @@ void ActivitySensorBackgroundTask::Run(IBackgroundTaskInstance^ taskInstance)
     auto calendar = ref new Calendar();
     calendar->SetToNow();
     settings->Values->Insert("TaskStatus", "Completed at " + timestampFormatter->Format(calendar->GetDateTime()));
-    */
     // No deferral is held on taskInstance because we are returning immediately.
 }
 

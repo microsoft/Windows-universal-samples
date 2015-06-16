@@ -1,0 +1,38 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>CameraStarterKit</title>
+
+    <!-- WinJS references -->
+    <!-- To get the latest version of WinJS, go to: http://go.microsoft.com/fwlink/?LinkId=533245 -->
+    <link href="WinJS/css/ui-dark.css" rel="stylesheet" />
+    <script src="WinJS/js/WinJS.js"></script>
+
+    <!-- CameraStarterKit references -->
+    <link href="/css/camera.css" rel="stylesheet" />
+    <script src="/js/camera.js"></script>
+</head>
+<body>
+    <video id="cameraPreview" class="cameraPreview"></video>
+    <div class="stackPanel">
+        <button id="photoButton" 
+                class="cameraButton" data-win-control="WinJS.UI.AppBarCommand" data-win-options="{icon:'camera'}"/>
+        <button id="videoButton" 
+                class="cameraButton" data-win-control="WinJS.UI.AppBarCommand" data-win-options="{icon:'video'}"/>
+    </div>
+</body>
+</html>

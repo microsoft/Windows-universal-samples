@@ -1,0 +1,204 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.WiFiDirectServices.Scenario2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:helpers="using:SDKTemplate.Helpers"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="SmallTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BasicTextStyle}">
+            <Setter Property="FontSize" Value="10"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    While the advertiser is running, you can accept connections, send data, disconnect, or stop advertising.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer x:Name="PlaceholderUI" Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                <TextBlock HorizontalAlignment="Center">Please create an advertiser first</TextBlock>
+            </ScrollViewer>
+            <ScrollViewer x:Name="MainUI" Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
+                    <TextBlock>
+                        Advertisements:
+                    </TextBlock>
+                    <ListView x:Name="Advertisements" MinHeight="50" SelectionMode="Single">
+                        <ListView.Resources>
+                            <helpers:BufferConverter x:Key="bufferConverter"/>
+                        </ListView.Resources>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,20,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Path=Name}"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
+                                        Status:
+                                    </TextBlock>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Status}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    
+                    <Button x:Name="StopAdvertisement" Click="StopAdvertisement_Click" Margin="0,0,0,10">
+                        Stop
+                    </Button>
+                    
+                    <TextBlock>
+                        Session Requests:
+                    </TextBlock>
+                    <ListView x:Name="SessionRequests" MinHeight="50" SelectionMode="Single">
+                        <ListView.Resources>
+                            <helpers:BufferConverter x:Key="bufferConverter"/>
+                        </ListView.Resources>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,20,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Path=Id}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Path=ProvisioningInfo}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Path=Pin}"/>
+                                    </StackPanel>
+                                    <TextBlock Grid.Row="3" Text="{Binding Path=SessionInfo, Converter={StaticResource bufferConverter}}" Style="{StaticResource SmallTextStyle}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <TextBlock Margin="0,0,0,0">
+                        Accept Session:
+                    </TextBlock>
+                    <TextBlock Margin="0,0,0,10" TextWrapping="Wrap" Style="{StaticResource SmallTextStyle}">
+                        Select incoming session and click "Accept" or "Decline". If the config method is
+                        PIN display, enter any PIN. If the config method is PIN keypad, enter PIN from remote side.
+                    </TextBlock>
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        
+                        <Button x:Name="Accept" Click="Accept_Click" Grid.Row="0" Grid.Column="0" Margin="0,0,0,10">
+                            Accept
+                        </Button>
+                        <Grid Grid.Row="0" Grid.Column="1" Margin="0,0,0,10" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0" Style="{StaticResource CaptionTextBlockStyle}">
+                                PIN:
+                            </TextBlock>
+                            <TextBox x:Name="AcceptPin" Grid.Column="1" HorizontalAlignment="Stretch" Width="Auto" PlaceholderText="if required"></TextBox>
+                        </Grid>
+                        
+                        <Button x:Name="Decline" Click="Decline_Click" Grid.Row="1" Grid.Column="0">
+                            Decline
+                        </Button>
+                    </Grid>
+                    
+                    <TextBlock>
+                        Connected Sessions:
+                    </TextBlock>
+                    <ListView x:Name="ConnectedSessions" MinHeight="50" SelectionMode="Single">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,20,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <TextBlock Grid.Row="0" Grid.Column="0">
+                                        Advertisement ID:
+                                    </TextBlock>
+                                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Path=AdvertisementId}"/>
+                                        <TextBlock Text="{Binding Path=ServiceAddress}"/>
+                                    </StackPanel>
+                                    
+                                    <TextBlock Grid.Row="1" Grid.Column="0">
+                                        Session ID:
+                                    </TextBlock>
+                                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Path=SessionId}"/>
+                                        <TextBlock Text="{Binding Path=SessionAddress}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Button x:Name="SelectSession" Click="SelectSession_Click" Grid.Column="0" Margin="0,0,10,0">
+                            Send Data
+                        </Button>
+                        <Button x:Name="CloseSession" Click="CloseSession_Click" Grid.Column="1" Margin="0,0,10,0">
+                            Close Session
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

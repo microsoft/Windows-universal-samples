@@ -1,0 +1,93 @@
+[
+    {
+        "Category":"Development",
+        "Name":"Channel 9",
+        "Description":"Videos about the people building Microsoft Products & Services",
+        "uri":"http://channel9.msdn.com/Feeds/RSS",
+        "imgUri":"http://channel9.msdn.com/styles/images/favicon.ico"
+    },
+    {
+        "Category":"Development",
+        "Name":"Microsoft OpenTech",
+        "Description":"Building bridges between Microsoft and non-Microsoft technologies",
+        "uri":"http://msopentech.com/feed/",
+        "imgUri":"http://msopentech.com/wp-content/themes/msopentech/images/Favicon.ico"
+    },
+    {
+        "Category":"Development",
+        "Name":"MSDN Blogs",
+        "Description":"MSDN Blogs",
+        "uri":"http://blogs.msdn.com/b/mainfeed.aspx?Type=BlogsOnly",
+        "imgUri":"http://blogs.msdn.com/themes/msdn2/favicon.ico"
+    },
+    {
+        "Category":"Development",
+        "Name":"ScottGu's Blog",
+        "Description":"ScottGu's Blog",
+        "uri":"http://weblogs.asp.net/scottgu/rss.aspx",
+        "imgUri":"http://i1.asp.net/common/www-css/i/favicon.ico?v=1"
+    },
+    {
+        "Category":"Development",
+        "Name":"Windows App Builder Blog",
+        "Description":"Windows App Builder Blog",
+        "uri":"http://blogs.windows.com/windows/b/appbuilder/rss.aspx",
+        "imgUri":"http://blogs.msdn.com/themes/msdn2/favicon.ico"
+    },
+    {
+        "Category":"News",
+        "Name":"Bing News",
+        "Description":"Top Stories - Bing News",
+        "uri":"http://www.bing.com/news?q=top+stories&FORM=Z9LH3&format=RSS",
+        "imgUri":"http://www.bing.com/favicon.ico"
+    },
+    {
+        "Category":"News",
+        "Name":"MSNBC",
+        "Description":"Top NBCNews headlines",
+        "uri":"http://rss.msnbc.msn.com/id/3032091/device/rss/rss.xml",
+        "imgUri":"http://feeds.nbcnews.com/favicon.ico"
+    },
+    {
+        "Category":"Technology",
+        "Name":"AllThingsD",
+        "Description":"AllThingsD.com is a Web site devoted to news, analysis and opinion on technology, the Internet, and media",
+        "uri":"http://allthingsd.com/feed/",
+        "imgUri":"http://allthingsd.com/favicon.ico"
+    },
+    {
+        "Category":"Technology",
+        "Name":"Ars Technica",
+        "Description":"Serving the Technologist for more than a decade. IT news, reviews, and analysis",
+        "uri":"http://feeds.arstechnica.com/arstechnica/index/",
+        "imgUri":"http://arstechnica.com/favicon.ico"
+    },
+    {
+        "Category":"Technology",
+        "Name":"Engadget",
+        "Description":"Engadget is a web magazine with obsessive daily coverage of everything new in gadgets and consumer electronics",
+        "uri":"http://www.engadget.com/rss.xml",
+        "imgUri":"http://www.engadget.com/favicon.ico"
+    },
+    {
+        "Category":"Technology",
+        "Name":"Gizmodo",
+        "Description":"The Gadget Guide",
+        "uri":"http://feeds.gawker.com/gizmodo/full",
+        "imgUri":"http://gizmodo.com/favicon.ico"
+    },
+    {
+        "Category":"Technology",
+        "Name":"Microsoft News Center",
+        "Description":"News and Announcements from Microsoft",
+        "uri":"http://www.microsoft.com/en-us/news/rss/rssfeed.aspx",
+        "imgUri":"http://www.microsoft.com/favicon.ico"
+    },
+    {
+        "Category":"Technology",
+        "Name":"The Official Microsoft Blog",
+        "Description":"News and perspectives covering the top stories, events and activities from Microsoft",
+        "uri":"http://blogs.technet.com/b/microsoft_blog/rss.aspx",
+        "imgUri":"http://blogs.technet.com/themes/technetmetro/favicon.ico"
+    }
+]

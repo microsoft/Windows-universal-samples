@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario1.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>Obtain a thumbnail and optimize it for the type of view that you want to create. <br />
+            Please click the button below to pick a file and obtain the thumbnail.</p>
+        <input id="picture-thumb-fastThumbnail" type="checkbox" />
+        <span>Return fast thumbnail only (could be lower quality)</span>
+        <select id="picture-thumb-mode" class="option" aria-labelledby="listLabel">
+            <option selected="selected" value="picturesGrid">Thumbnail for a grid layout</option>
+            <option value="picturesList">Thumbnail for a list layout</option>
+            <option value="singlePicture">Thumbnail for a single picture</option>
+        </select>
+        <button class="action" id="picture-thumb-start">Get Thumbnail</button>
+        <br /><br />
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <img class="imageHolder" id="picture-thumb-imageHolder" alt="image holder" src="/images/placeholder-sdk.png"/>
+        <p id="picture-thumb-detailedStatus" class="status">
+            <span id="picture-thumb-modeName"></span>
+            <span id="picture-thumb-fileName"></span>
+            <span id="picture-thumb-requestedSize"></span>
+            <span id="picture-thumb-returnedSize"></span>
+        </p>
+    </div>
+</body>
+</html>

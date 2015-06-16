@@ -1,7 +1,7 @@
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
-// This code is licensed under the Microsoft Public License.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -11,11 +11,17 @@
 
 using SDKTemplate;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Windows.Globalization;
 using Windows.Media.SpeechRecognition;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Navigation;
+using Windows.Foundation;
+using Windows.ApplicationModel.Resources.Core;
 
 namespace SpeechAndTTS
 {
@@ -30,13 +36,13 @@ namespace SpeechAndTTS
 
         private SpeechRecognizer speechRecognizer;
         private CoreDispatcher dispatcher;
+        private IAsyncOperation<SpeechRecognitionResult> recognitionOperation;
+        private ResourceContext speechContext;
+        private ResourceMap speechResourceMap;
 
         public PredefinedWebSearchGrammarScenario()
         {
-            this.InitializeComponent();
-
-            // Save the UI thread dispatcher to allow speech status messages to be shown on the UI.
-            dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
+            InitializeComponent();
         }
 
         /// <summary>
@@ -47,33 +53,55 @@ namespace SpeechAndTTS
         /// <param name="e">The navigation event details</param>
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            // Save the UI thread dispatcher to allow speech status messages to be shown on the UI.
+            dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
+
             bool permissionGained = await AudioCapturePermissions.RequestMicrophonePermission();
             if (permissionGained)
             {
-                // enable the recognition buttons
+                // Enable the recognition buttons.
                 btnRecognizeWithUI.IsEnabled = true;
                 btnRecognizeWithoutUI.IsEnabled = true;
             }
             else
             {
-                this.resultTextBlock.Visibility = Visibility.Visible;
-                this.resultTextBlock.Text = "Permission to access capture resources was not given by the user, reset the application setting in Settings->Privacy->Microphone.";
+                resultTextBlock.Visibility = Visibility.Visible;
+                resultTextBlock.Text = "Permission to access capture resources was not given by the user; please set the application setting in Settings->Privacy->Microphone.";
             }
 
-            // Create an instance of SpeechRecognizer.
-            speechRecognizer = new SpeechRecognizer();
+            Language speechLanguage = SpeechRecognizer.SystemSpeechLanguage;
+            speechContext = ResourceContext.GetForCurrentView();
+            speechContext.Languages = new string[] { speechLanguage.LanguageTag};
 
-            // Provide feedback to the user about the state of the recognizer.
-            speechRecognizer.StateChanged += SpeechRecognizer_StateChanged;
+            speechResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("LocalizationSpeechResources");
 
-            // Add a web search grammar to the recognizer.
-            var webSearchGrammar = new SpeechRecognitionTopicConstraint(SpeechRecognitionScenario.WebSearch, "webSearch");
-            
-            speechRecognizer.Constraints.Add(webSearchGrammar);
-
-            // Compile the constraint.
-            await speechRecognizer.CompileConstraintsAsync();
+            PopulateLanguageDropDown();
+            await InitializeRecognizer(SpeechRecognizer.SystemSpeechLanguage);
         }
+
+        /// <summary>
+        /// Look up the supported languages for this speech recognition scenario, 
+        /// that are installed on this machine, and populate a dropdown with a list.
+        /// </summary>
+        private void PopulateLanguageDropDown()
+        {
+            Language defaultLanguage = SpeechRecognizer.SystemSpeechLanguage;
+            IEnumerable<Language> supportedLanguages = SpeechRecognizer.SupportedTopicLanguages;
+            foreach (Language lang in supportedLanguages)
+            {
+                ComboBoxItem item = new ComboBoxItem();
+                item.Tag = lang;
+                item.Content = lang.DisplayName;
+
+                cbLanguageSelection.Items.Add(item);
+                if (lang.LanguageTag == defaultLanguage.LanguageTag)
+                {
+                    item.IsSelected = true;
+                    cbLanguageSelection.SelectedItem = item;
+                }
+            }
+        }
+
 
         /// <summary>
         /// Ensure that we clean up any state tracking event handlers created in OnNavigatedTo to prevent leaks.
@@ -82,13 +110,74 @@ namespace SpeechAndTTS
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            speechRecognizer.StateChanged -= SpeechRecognizer_StateChanged;
+            if (speechRecognizer != null)
+            {
+                if (speechRecognizer.State != SpeechRecognizerState.Idle)
+                {
+                    if (recognitionOperation != null)
+                    {
+                        recognitionOperation.Cancel();
+                        recognitionOperation = null;
+                    }
+                }
+
+                speechRecognizer.StateChanged -= SpeechRecognizer_StateChanged;
+
+                this.speechRecognizer.Dispose();
+                this.speechRecognizer = null;
+            }
+        }
+
+        /// <summary>
+        /// Initialize Speech Recognizer and compile constraints.
+        /// </summary>
+        /// <param name="recognizerLanguage">Language to use for the speech recognizer</param>
+        /// <returns>Awaitable task.</returns>
+        private async Task InitializeRecognizer(Language recognizerLanguage)
+        {
+            if (speechRecognizer != null)
+            {
+                // cleanup prior to re-initializing this scenario.
+                speechRecognizer.StateChanged -= SpeechRecognizer_StateChanged;
+
+                this.speechRecognizer.Dispose();
+                this.speechRecognizer = null;
+            }
+
+            // Create an instance of SpeechRecognizer.
+            speechRecognizer = new SpeechRecognizer(recognizerLanguage);
+
+            // Provide feedback to the user about the state of the recognizer.
+            speechRecognizer.StateChanged += SpeechRecognizer_StateChanged;
+
+            // Add a web search topic constraint to the recognizer.
+            var webSearchGrammar = new SpeechRecognitionTopicConstraint(SpeechRecognitionScenario.WebSearch, "webSearch");
+            speechRecognizer.Constraints.Add(webSearchGrammar);
+
+            // RecognizeWithUIAsync allows developers to customize the prompts.    
+            speechRecognizer.UIOptions.AudiblePrompt = "Say what you want to search for...";
+            speechRecognizer.UIOptions.ExampleText = speechResourceMap.GetValue("WebSearchUIOptionsExampleText", speechContext).ValueAsString;
+            
+            // Compile the constraint.
+            SpeechRecognitionCompilationResult compilationResult = await speechRecognizer.CompileConstraintsAsync();
+
+            // Check to make sure that the constraints were in a proper format and the recognizer was able to compile it.
+            if (compilationResult.Status != SpeechRecognitionResultStatus.Success)
+            {
+                // Disable the recognition buttons.
+                btnRecognizeWithUI.IsEnabled = false;
+                btnRecognizeWithoutUI.IsEnabled = false;
+
+                // Let the user know that the grammar didn't compile properly.
+                resultTextBlock.Visibility = Visibility.Visible;
+                resultTextBlock.Text = "Unable to compile grammar.";
+            }
         }
 
         /// <summary>
         /// Handle SpeechRecognizer state changed events by updating a UI component.
         /// </summary>
-        /// <param name="sender">Speech recognizer that generated this status event.</param>
+        /// <param name="sender">Speech recognizer that generated this status event</param>
         /// <param name="args">The recognizer's status</param>
         private async void SpeechRecognizer_StateChanged(SpeechRecognizer sender, SpeechRecognizerStateChangedEventArgs args)
         {
@@ -102,38 +191,39 @@ namespace SpeechAndTTS
         /// Uses the recognizer constructed earlier to listen for speech from the user before displaying 
         /// it back on the screen. Uses the built-in speech recognition UI.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Button that triggered this event</param>
+        /// <param name="e">State information about the routed event</param>
         private async void RecognizeWithUIWebSearchGrammar_Click(object sender, RoutedEventArgs e)
         {
-            // RecognizeWithUIAsync allows developers to customize the prompts.
-            speechRecognizer.UIOptions.AudiblePrompt = "Say what you want to search for...";
-            speechRecognizer.UIOptions.ExampleText = @"Ex. ""weather for London""";
-
-            this.heardYouSayTextBlock.Visibility = this.resultTextBlock.Visibility = Visibility.Collapsed;
+            heardYouSayTextBlock.Visibility = resultTextBlock.Visibility = Visibility.Collapsed;
+            hlOpenPrivacySettings.Visibility = Visibility.Collapsed;
 
             // Start recognition.
             try
             {
-                SpeechRecognitionResult speechRecognitionResult = await speechRecognizer.RecognizeWithUIAsync();
+                recognitionOperation = speechRecognizer.RecognizeWithUIAsync();
+                SpeechRecognitionResult speechRecognitionResult = await recognitionOperation;
                 // If successful, display the recognition result.
                 if (speechRecognitionResult.Status == SpeechRecognitionResultStatus.Success)
                 {
-                    this.heardYouSayTextBlock.Visibility = this.resultTextBlock.Visibility = Visibility.Visible;
-                    this.resultTextBlock.Text = speechRecognitionResult.Text;
+                    heardYouSayTextBlock.Visibility = resultTextBlock.Visibility = Visibility.Visible;
+                    resultTextBlock.Text = speechRecognitionResult.Text;
                 }
             }
-            catch (NotImplementedException)
+            catch (TaskCanceledException exception)
             {
-                this.resultTextBlock.Visibility = Visibility.Visible;
-                this.resultTextBlock.Text = "RecognizeWithUIAsync() is not currently available on desktop.";
+                // TaskCanceledException will be thrown if you exit the scenario while the recognizer is actively
+                // processing speech. Since this happens here when we navigate out of the scenario, don't try to 
+                // show a message dialog for this exception.
+                System.Diagnostics.Debug.WriteLine("TaskCanceledException caught while recognition in progress (can be ignored):");
+                System.Diagnostics.Debug.WriteLine(exception.ToString());
             }
             catch (Exception exception)
             {
+                // Handle the speech privacy policy error.
                 if ((uint)exception.HResult == HResultPrivacyStatementDeclined)
                 {
-                    this.resultTextBlock.Visibility = Visibility.Visible;
-                    this.resultTextBlock.Text = "The privacy statement was declined.";
+                    hlOpenPrivacySettings.Visibility = Visibility.Visible;
                 }
                 else
                 {
@@ -147,34 +237,45 @@ namespace SpeechAndTTS
         /// Uses the recognizer constructed earlier to listen for speech from the user before displaying 
         /// it back on the screen. Uses developer-provided UI for user feedback.
         /// </summary>
-        /// <param name="sender">The page containing the button this handler is attached to</param>
+        /// <param name="sender">Button that triggered this event</param>
         /// <param name="e">State information about the routed event</param>
         private async void RecognizeWithoutUIWebSearchGrammar_Click(object sender, RoutedEventArgs e)
         {
-            this.heardYouSayTextBlock.Visibility = this.resultTextBlock.Visibility = Visibility.Collapsed;
+            heardYouSayTextBlock.Visibility = resultTextBlock.Visibility = Visibility.Collapsed;
 
             // Disable the UI while recognition is occurring, and provide feedback to the user about current state.
             btnRecognizeWithUI.IsEnabled = false;
             btnRecognizeWithoutUI.IsEnabled = false;
-            listenWithoutUIButtonText.Text = " Listening for speech...";
+            cbLanguageSelection.IsEnabled = false;
+            hlOpenPrivacySettings.Visibility = Visibility.Collapsed;
+            listenWithoutUIButtonText.Text = " listening for speech...";
 
             // Start recognition.
             try
             {
-                SpeechRecognitionResult speechRecognitionResult = await speechRecognizer.RecognizeAsync();
+                recognitionOperation = speechRecognizer.RecognizeAsync();
+                SpeechRecognitionResult speechRecognitionResult = await recognitionOperation;
                 // If successful, display the recognition result.
                 if (speechRecognitionResult.Status == SpeechRecognitionResultStatus.Success)
                 {
-                    this.heardYouSayTextBlock.Visibility = this.resultTextBlock.Visibility = Visibility.Visible;
-                    this.resultTextBlock.Text = speechRecognitionResult.Text;
+                    heardYouSayTextBlock.Visibility = resultTextBlock.Visibility = Visibility.Visible;
+                    resultTextBlock.Text = speechRecognitionResult.Text;
                 }
+            }
+            catch (TaskCanceledException exception)
+            {
+                // TaskCanceledException will be thrown if you exit the scenario while the recognizer is actively
+                // processing speech. Since this happens here when we navigate out of the scenario, don't try to 
+                // show a message dialog for this exception.
+                System.Diagnostics.Debug.WriteLine("TaskCanceledException caught while recognition in progress (can be ignored):");
+                System.Diagnostics.Debug.WriteLine(exception.ToString());
             }
             catch (Exception exception)
             {
+                // Handle the speech privacy policy error.
                 if ((uint)exception.HResult == HResultPrivacyStatementDeclined)
                 {
-                    this.resultTextBlock.Visibility = Visibility.Visible;
-                    this.resultTextBlock.Text = "The privacy statement was declined.";
+                    hlOpenPrivacySettings.Visibility = Visibility.Visible;
                 }
                 else
                 {
@@ -184,9 +285,51 @@ namespace SpeechAndTTS
             }
 
             // Reset UI state.
-            btnRecognizeWithUI.IsEnabled = true;
-            btnRecognizeWithoutUI.IsEnabled = true;
             listenWithoutUIButtonText.Text = " without UI";
+            btnRecognizeWithUI.IsEnabled = true;
+            cbLanguageSelection.IsEnabled = true;
+            btnRecognizeWithoutUI.IsEnabled = true;
+        }
+
+        /// <summary>
+        /// When a user changes the speech recognition language, trigger re-initialization of the 
+        /// speech engine with that language, and change any speech-specific UI assets.
+        /// </summary>
+        /// <param name="sender">Ignored</param>
+        /// <param name="e">Ignored</param>
+        private async void cbLanguageSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (speechRecognizer != null)
+            {
+                ComboBoxItem item = (ComboBoxItem)(cbLanguageSelection.SelectedItem);
+                Language newLanguage = (Language)item.Tag;
+                if (speechRecognizer.CurrentLanguage != newLanguage)
+                {
+                    // trigger cleanup and re-initialization of speech.
+                    try
+                    {
+                        speechContext.Languages = new string[] { newLanguage.LanguageTag };
+                        
+                        await InitializeRecognizer(newLanguage);
+                    }
+                    catch (Exception exception)
+                    {
+                        var messageDialog = new Windows.UI.Popups.MessageDialog(exception.Message, "Exception");
+                        await messageDialog.ShowAsync();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Open the Speech, Inking and Typing page under Settings -> Privacy, enabling a user to accept the 
+        /// Microsoft Privacy Policy, and enable personalization.
+        /// </summary>
+        /// <param name="sender">Ignored</param>
+        /// <param name="args">Ignored</param>
+        private async void openPrivacySettings_Click(Hyperlink sender, HyperlinkClickEventArgs args)
+        {
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-speechtyping"));
         }
     }
 }

@@ -1,0 +1,44 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario3.css" />
+    <script src="/js/scenario5_getsingledevice.js"></script>
+    <script src="/js/displayhelpers.js"></script>
+</head>
+<body>
+    <div id="resultsViewTemplate" data-win-control="WinJS.Binding.Template">
+        <div style="padding:2px; border:1px solid gray; white-space:nowrap">
+            <div>Name: <span data-win-bind="innerText: name" style="font-weight:bold"></span></div>
+            <div>Id: <span data-win-bind="innerText: id"></span></div>
+        </div>
+    </div>
+
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This scenario demonstrates the use of the Windows.Devices.Enumeration DeviceInformation.CreateFromIdAsync. This would typically be used when you have a device id saved, and want to retrieve information about that device again.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                Enter a device interface id:<br />
+                <input type="text" id="interfaceIdTextBox" style="width:100%"/>
+            </p>
+            <button id="getButton">Get</button>
+        </div>
+        <div id="resultsListView"
+             style="border:2px solid white;"
+             data-win-control="WinJS.UI.ListView"
+             data-win-options="{
+                itemTemplate: select('#resultsViewTemplate'),
+                layout: {type: WinJS.UI.ListLayout}}">
+        </div>
+    </div>
+</body>
+</html>

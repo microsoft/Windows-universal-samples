@@ -1,0 +1,59 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<local:SharePage
+    x:Class="SDKTemplate.ShareCustomData"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="400">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="0,0,0,10" Grid.Row="0">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="Share custom data" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch" Style="{StaticResource BasicTextStyle}">
+                    Data in custom formats can be shared with target applications that support them. In this example, we share data about a book in JSON microdata format. 
+                    A supported target app, such as the Share Target sample, must be installed in order to have a place to send the data.
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Text="Data Package Title:"/>
+                <TextBox x:Name="TitleInputBox" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="The Catcher in the Rye"
+                        Margin="0,0,0,10" AutomationProperties.AutomationId="DataPackageTitle"/>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Text="Data Package Description:"/>
+                <TextBox x:Name="DescriptionInputBox" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="My favorite book"
+                        Margin="0,0,0,10" AutomationProperties.AutomationId="DataPackageDescription" />
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Text="Custom Data Format Id:"/>
+                <TextBox x:Name="DataFormatInputBox" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="http://schema.org/Book"
+                        Margin="0,0,0,10" AutomationProperties.AutomationId="CustomDataFormatId"/>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Text="Custom Data Format Value:"/>
+                <TextBox x:Name="CustomDataTextBox" HorizontalAlignment="Stretch" MinHeight="100" TextWrapping="Wrap"
+                        Margin="0,0,0,10" AutomationProperties.AutomationId="CustomDataFormatValue"/>
+                <StackPanel x:Name="ShareStep" Visibility="Visible" HorizontalAlignment="Left">
+                    <Button x:Name="ShowUIButton" Content="Share" Click="ShowUIButton_Click"
+                            AutomationProperties.AutomationId="ShareButton"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</local:SharePage>

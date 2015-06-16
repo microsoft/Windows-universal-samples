@@ -91,9 +91,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup>
-    <PackageCertificateKeyFile>ProximityCPP_TemporaryKey.pfx</PackageCertificateKeyFile>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
@@ -145,6 +142,9 @@
     <ClInclude Include="Scenario2_Polling.xaml.h">
       <DependentUpon>Scenario2_Polling.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario3_DisplayOnOff.xaml.h">
+      <DependentUpon>Scenario3_DisplayOnOff.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -155,6 +155,9 @@
     </Page>
     <Page Include="Scenario1_DataEvents.xaml" />
     <Page Include="Scenario2_Polling.xaml" />
+    <Page Include="Scenario3_DisplayOnOff.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Styles\Styles.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +186,9 @@
     </ClCompile>
     <ClCompile Include="Scenario2_Polling.xaml.cpp">
       <DependentUpon>Scenario2_Polling.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario3_DisplayOnOff.xaml.cpp">
+      <DependentUpon>Scenario3_DisplayOnOff.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

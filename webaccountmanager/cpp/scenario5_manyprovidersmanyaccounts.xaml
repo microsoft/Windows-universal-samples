@@ -1,0 +1,40 @@
+<!-- Copyright (c) Microsoft. All rights reserved. -->
+<Page
+    x:Class="SDKTemplate.Scenario5_ManyProvidersManyAccounts"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario handles multiple signed in IDs at one time, utilizing WebAccountManager to both request tokens and sign out users."/>
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <StackPanel Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Button x:Name="button_AddAccount" Content="Sign Into A New Account" Click="Button_AddNewAccount_Click" Margin="0,10,0,0" />
+                    <Button x:Name="button_ManageSignedInAccounts" Content="Manage Signed In Accounts" Click="Button_ManageSignedInAccounts_Click" Margin="0,10,0,0" IsEnabled="False"/>
+                    <Button x:Name="button_Reset" Content="Reset" Click="Button_Reset_Click" Margin="0,10,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" >
+                    <TextBlock x:Name="textblock_SignedInStatus" Foreground="Red" Text="Not signed in." FontSize="20"/>
+                    <ListView x:Name="listview_SignedInAccounts" FontSize="20"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+    
+</Page>

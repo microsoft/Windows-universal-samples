@@ -14,13 +14,13 @@
     <mp:PhoneIdentity PhoneProductId="f8ffce2e-44a6-4b54-94a6-5c491a7b7cf5" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>CustomSensors</DisplayName>
+        <DisplayName>CustomSensorsCPP</DisplayName>
         <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
         <Logo>Assets\StoreLogo-sdk.png</Logo>
     </Properties>
 
     <Dependencies>
-        <TargetPlatform Name="Windows.Universal" MinVersion="10.0.10030.0" MaxVersionTested="10.0.10030.0" />
+      <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10069.0" MaxVersionTested="10.0.10069.0" />
     </Dependencies>
 
     <Resources>
@@ -32,14 +32,13 @@
           Executable="$targetnametoken$.exe"
           EntryPoint="CustomSensors.App">
             <uap:VisualElements
-              DisplayName="CustomSensors"
+              DisplayName="CustomSensorsCPP"
               Square150x150Logo="Assets\squareTile-sdk.png"
               Square44x44Logo="Assets\smallTile-sdk.png"
-              Description="CustomSensors"
-              ForegroundText="light"
+              Description="CustomSensorsCPP"
               BackgroundColor="#00B2F0">
                 <uap:SplashScreen Image="Assets\splash-sdk.png" />
-                <uap:DefaultTile DefaultSize="square150x150Logo" >
+                <uap:DefaultTile>
                     <uap:ShowNameOnTiles>
                         <uap:ShowOn Tile="square150x150Logo" />
                     </uap:ShowNameOnTiles>
@@ -56,3 +55,4 @@
         </DeviceCapability>
     </Capabilities>
 </Package>
+

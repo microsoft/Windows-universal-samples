@@ -1,0 +1,54 @@
+﻿<!-- 
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Feed Reader</title>
+
+    <!-- WinJS references -->
+    <link href="/Microsoft.WinJS.4.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="/Microsoft.WinJS.4.0/js/WinJS.js"></script>
+
+    <!-- Feed Reader references -->
+    <link href="/css/default.css" rel="stylesheet" />
+    <script src="/js/data.js"></script>
+    <script src="/js/render.js"></script>
+    <script src="/js/io.js"></script>
+    <script src="/js/navigator.js"></script>
+    <script src="/js/main.js"></script>
+</head>
+<body>
+    <div id="contenthost" data-win-control="Application.PageControlNavigator" data-win-options="{home: '/pages/news/news.html'}"></div>
+    <div id="navbar" data-win-control="WinJS.UI.NavBar">
+        <div id="globalnav" data-win-control="WinJS.UI.NavBarContainer">
+                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{
+                    label: 'Home',
+                    icon: '\uE10F',
+                    location: '/pages/news/news.html',
+                    tooltip:'Home'}"></div>
+                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{
+                    label: 'Subscriptions',
+                    icon: '\uE113',
+                    location: '/pages/subscriptions/subscriptions.html',
+                    tooltip:'Manage feeds'}"></div>
+        </div>
+    </div>
+    <div id="appbar" data-win-control="WinJS.UI.AppBar">
+        <button data-win-control="WinJS.UI.AppBarCommand" 
+                data-win-options="{
+                id: 'refreshContentCmd',
+                label: 'Refresh',
+                icon: '\uE149',
+                section: 'global',
+                tooltip: 'Refresh content'}"></button>
+    </div>
+</body>
+</html>

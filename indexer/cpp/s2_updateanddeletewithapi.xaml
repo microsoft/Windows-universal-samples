@@ -1,0 +1,61 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.S2_UpdateAndDeleteWithAPI"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >
+                    This example shows how to update and delete items and properties from the index.  To start, first add items to the index using the button below.
+                </TextBlock>
+                <Button AutomationProperties.AutomationId="AddToIndexButton" Click="AddToIndex_Click">
+                    Add items to the index
+                </Button>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >
+                    You can update properties on an item by using the UpdateAsync function.
+                </TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center">New name:</TextBlock>
+                    <TextBox x:Name="ItemNameInput" MinWidth="200" PlaceholderText="Test Name" Margin="10,0,0,0"></TextBox>
+                </StackPanel>
+                <Button AutomationProperties.AutomationId="UpdateNameButton" Click="UpdateName_Click">
+                    Update ItemNameDisplay property
+                </Button>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >
+                    To delete a property, assign it a null value.
+                </TextBlock>
+                <Button AutomationProperties.AutomationId="DeleteKeywordsButton" Click="DeleteKeywords_Click">
+                    Delete Keywords property
+                </Button>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >
+                    You can delete a single item, a set of items, or all items.
+                </TextBlock>
+                <Button AutomationProperties.AutomationId="DeleteSingleItemButton" Click="DeleteSingleItem_Click">
+                    Delete a single item
+                </Button>
+                <Button AutomationProperties.AutomationId="DeleteMultipleItemsButton" Click="DeleteMultipleItems_Click">
+                    Delete multiple items
+                </Button>
+                <Button AutomationProperties.AutomationId="DeleteAllItemsButton" Click="DeleteAllItems_Click">
+                    Delete all items
+                </Button>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -15,6 +15,7 @@ namespace Lamp
     using System;
     using System.Globalization;
     using System.Linq;
+    using System.Threading.Tasks;
     using Windows.Devices.Lights;
     using Windows.Devices.Enumeration;
     using Windows.UI.Xaml;
@@ -27,7 +28,7 @@ namespace Lamp
     public sealed partial class Scenario1_GetLamp : Page
     {
         /// <summary>
-        /// Private Mainpage object for status updates
+        /// Private MainPage object for status updates
         /// </summary>
         private MainPage rootPage;
 
@@ -61,20 +62,20 @@ namespace Lamp
         {
             try
             {
-                LogStatusToOutputBox("Getting class selection string for lamp devices..");
+                await LogStatusToOutputBoxAsync("Getting class selection string for lamp devices...");
 
                 // Returns class selection string for Lamp devices
                 string selectorStr = Lamp.GetDeviceSelector();
-                LogStatusToOutputBox(string.Format(CultureInfo.InvariantCulture, "Lamp class selection string:\n {0}", selectorStr));
+                await LogStatusToOutputBoxAsync(string.Format(CultureInfo.InvariantCulture, "Lamp class selection string:\n {0}", selectorStr));
 
-                LogStatusToOutputBox("Finding all lamp devices...");
+                await LogStatusToOutputBoxAsync("Finding all lamp devices...");
 
                 // Finds all devices based on lamp class selector string
                 DeviceInformationCollection devices = await DeviceInformation.FindAllAsync(selectorStr);
-                LogStatusToOutputBox(string.Format(CultureInfo.InvariantCulture, "Number of lamp devices found: {0}", devices.Count.ToString()));
+                await LogStatusToOutputBoxAsync(string.Format(CultureInfo.InvariantCulture, "Number of lamp devices found: {0}", devices.Count.ToString()));
 
                 // Select the first lamp device found on the back of the device
-                LogStatusToOutputBox("Selecting first lamp device found on back of the device");
+                await LogStatusToOutputBoxAsync("Selecting first lamp device found on back of the device");
                 DeviceInformation deviceInfo = devices.FirstOrDefault(di => di.EnclosureLocation != null && di.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Back);
 
                 if (deviceInfo == null)
@@ -82,20 +83,20 @@ namespace Lamp
                     throw new InvalidOperationException("Error: No lamp device was found");
                 }
 
-                LogStatusToOutputBox(string.Format(CultureInfo.InvariantCulture, "Acquiring Lamp instance from Id:\n {0}", deviceInfo.Id));
+                await LogStatusToOutputBoxAsync(string.Format(CultureInfo.InvariantCulture, "Acquiring Lamp instance from Id:\n {0}", deviceInfo.Id));
                 Lamp lamp = await Lamp.FromIdAsync(deviceInfo.Id);
-                LogStatus(string.Format(CultureInfo.InvariantCulture, "Lamp instance acquired, Device Id:\n {0}", lamp.DeviceId), NotifyType.StatusMessage);
+                await LogStatusAsync(string.Format(CultureInfo.InvariantCulture, "Lamp instance acquired, Device Id:\n {0}", lamp.DeviceId), NotifyType.StatusMessage);
 
                 // Here we must Dispose of the lamp object once we are no longer 
                 // using it to release any native resources
-                LogStatusToOutputBox("Disposing of lamp instance");
+                await LogStatusToOutputBoxAsync("Disposing of lamp instance");
                 lamp.Dispose();
                 lamp = null;
-                LogStatusToOutputBox("Disposed");
+                await LogStatusToOutputBoxAsync("Disposed");
             }
             catch(Exception eX)
             {
-                LogStatus(eX.Message, NotifyType.ErrorMessage);
+                await LogStatusAsync(eX.Message, NotifyType.ErrorMessage);
             }
         }
 
@@ -107,30 +108,31 @@ namespace Lamp
         /// <param name="e">Contains state information and event data associated with the event</param>
         private async void GetDefaultAsyncBtn_Click(object sender, RoutedEventArgs e)
         {
-                try
+            try
+            {
+                await LogStatusToOutputBoxAsync("Initializing lamp");
+
+                // acquiring lamp instance via using statement allows for the 
+                // object to be automatically disposed once the lamp object
+                // goes out of scope releasing native resources
+                using (var lamp = await Lamp.GetDefaultAsync())
                 {
-                    LogStatusToOutputBox("Initializing lamp");
-
-                    // acquiring lamp instance via using statement allows for the 
-                    // object to be automatically disposed once the lamp object
-                    // goes out of scope releasing native resources
-                    using (var lamp = await Lamp.GetDefaultAsync())
+                    if (lamp == null)
                     {
-                        if (lamp == null)
-                        {
-                            throw new InvalidOperationException("Error: Lamp could not be acquired");
-                        }
-
-                        LogStatus(string.Format(CultureInfo.InvariantCulture, "Default lamp instance acquired, Device Id: {0}", lamp.DeviceId), NotifyType.StatusMessage);
+                        await LogStatusAsync("Error: No Lamp device found", NotifyType.ErrorMessage);
+                        return;
                     }
 
-                    // Lamp object is automatically Disposed now that it's out of scope
-                    LogStatusToOutputBox("Lamp Disposed");
+                    await LogStatusAsync(string.Format(CultureInfo.InvariantCulture, "Default lamp instance acquired, Device Id: {0}", lamp.DeviceId), NotifyType.StatusMessage);
                 }
-                catch (Exception ex)
-                {
-                    LogStatus(ex.ToString(), NotifyType.ErrorMessage);
-                }
+
+                // Lamp object is automatically Disposed now that it's out of scope
+                await LogStatusToOutputBoxAsync("Lamp Disposed");
+            }
+            catch (Exception ex)
+            {
+                await LogStatusAsync(ex.ToString(), NotifyType.ErrorMessage);
+            }
         }
 
         /// <summary>
@@ -138,7 +140,7 @@ namespace Lamp
         /// and update outputBox, this method is for more general messages
         /// </summary>
         /// <param name="message">Message to log to the outputBox</param>
-        private async void LogStatusToOutputBox(string message)
+        private async Task LogStatusToOutputBoxAsync(string message)
         {
             await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
@@ -154,13 +156,13 @@ namespace Lamp
         /// </summary>
         /// <param name="message">Message to log to the output box</param>
         /// <param name="type">Notification Type for status message</param>
-        private async void LogStatus(string message, NotifyType type)
+        private async Task LogStatusAsync(string message, NotifyType type)
         {
             await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 rootPage.NotifyUser(message, type);
             });
-            LogStatusToOutputBox(message);
+            await LogStatusToOutputBoxAsync(message);
         }
     }
 }

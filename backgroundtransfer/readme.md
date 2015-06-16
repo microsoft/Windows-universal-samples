@@ -1,5 +1,7 @@
 # Background Transfer sample
 
+**Note** There is a bug in //Build2015 emulator that will prevent the sample from working correctly in Windows Phone emulator, sample will fail with 0x80070002 error.
+
 This sample shows how to use the Background Transfer API to download and upload files in the background in Windows Runtime apps.
 
 Classes in the [**Windows.Networking.BackgroundTransfer**](http://msdn.microsoft.com/library/windows/apps/br207242) namespace provide a power-friendly, cost-aware, and flexible API for transferring files in the background. This sample shows how to download and upload files using the Background Transfer API.
@@ -10,7 +12,7 @@ For the upload scenario, the sample first uses methods on [**BackgroundUploader*
 
 The sample also shows how to configure and use toast and tile notifications to inform the user when all transfers succeed or when at least one transfer fails.
 
-**Note**  Background transfer is primarily designed for long-term transfer operations for resources like video, music, and large images. For short-term operations involving transfers of smaller resources (i.e. a few KB), the HTTP APIs are recommended. [**HttpClient**](http://msdn.microsoft.com/library/windows/apps/dn298639) is preferred and can be used in all languages supported by Windows Runtime apps. [**XHR**](http://msdn.microsoft.com/library/windows/apps/br229787) can be used in JavaScript. [IXHR2](http://msdn.microsoft.com/library/windows/apps/hh770550) can be used in C++.
+**Note**  Background transfer is primarily designed for long-term transfer operations for resources like video, music, and large images. For short-term operations involving transfers of smaller resources (i.e. a few KB), the HTTP APIs are recommended. [**HttpClient**](http://msdn.microsoft.com/library/windows/apps/dn298639) is preferred and can be used in all languages supported by Windows Runtime apps. [**XHR**](http://msdn.microsoft.com/library/windows/apps/br229787) can be used in JavaScript. [IXHR2](http://msdn.microsoft.com/library/windows/apps/hh770550) can be used in C++.
 
 This sample requires the following capabilities:
 
@@ -18,31 +20,25 @@ This sample requires the following capabilities:
 -   **Private Networks (Client & Server)** - Needed to send requests to download or upload files to HTTP or FTP servers on a home or work intranet.
 -   **Pictures Library** - Needed to downloads files to the Pictures library.
 
-**Note**  The Windows version of this sample by default requires network access using the loopback interface.
-
-**Network capabilities**
-
-This sample requires that network capabilities be set in the *Package.appxmanifest* file to allow the app to access the network at runtime. These capabilities can be set in the app manifest using Microsoft Visual Studio.
-
-To build the Windows version of the sample, set the following network capabilities:
-
--   **Internet (Client)**: The sample has outbound-initiated network access to the Internet. This allows the app to send requests to download or upload files to HTTP or FTP servers on the Internet. This is represented by the **Capability name = "internetClient"** tag in the app manifest.
-
-    **Private Networks (Client & Server)**: The sample has inbound and outbound network access on a home or work network (a local intranet). This allows the app to send requests to download or upload files to HTTP or FTP servers on a local home or work Intranet. The **Private Networks (Client & Server)** capability is represented by the **Capability name = "privateNetworkClientServer"** tag in the app manifest.
-
-To build the Windows Phone version of the sample, set the following network capabilities:
-
--   **Internet (Client & Server):** This sample has complete access to the network for both client operations (outbound-initiated access) and server operations (inbound-initiated access). This allows the app to send requests to download or upload files to HTTP or FTP servers on the Internet or on a local intranet. This is represented by the **Capability name = "internetClientServer"** tag in the app manifest.
-
-    **Note**  On Windows Phone, there is only one network capability which enables all network access for the app.
-
 For more information on network capabilities, see [How to set network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532).
 
-**Note**  Network communications using an IP loopback address cannot normally be used for interprocess communication between a Windows Runtime app and a different process (a different Windows Runtime app or a desktop app) because this is restricted by network isolation. Network communication using an IP loopback address is allowed within the same process for communication purposes in a Windows Runtime app. For more information, see [How to set network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532).
+**Note**  Network communications using an IP loopback address cannot normally be used for interprocess communication between a Windows Runtime app and a different process (a different Windows Runtime app or a desktop app) because this is restricted by network isolation. Network communication using an IP loopback address is allowed within the same process for communication purposes in a Windows Runtime app.
 
-**Note**  Background Transfer is only enabled on Windows if at least one of the networking capabilities is set: **Internet (Client)**, **Internet (Client & Server)**, or **Private Networks (Client & Server)**.
+**Note**  Background Transfer is only enabled on Windows if at least one of the networking capabilities is set: **Internet (Client)**, **Internet (Client & Server)**, or **Private Networks (Client & Server)**.
 
 ## Related topics
+
+### Other resources
+
+[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)
+
+[How to configure network isolation capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)
+
+[Quickstart: Downloading a file](http://msdn.microsoft.com/library/windows/apps/hh700370)
+
+[Quickstart: Uploading a file](http://msdn.microsoft.com/library/windows/apps/hh700372)
+
+[Transferring a file from a network resource](http://msdn.microsoft.com/library/windows/apps/hh761434)
 
 ### Reference
 
@@ -59,18 +55,6 @@ For more information on network capabilities, see [How to set network capabiliti
 [**Windows.Storage**](http://msdn.microsoft.com/library/windows/apps/br227346)
 
 [**XHR**](http://msdn.microsoft.com/library/windows/apps/br229787)
-
-### Other resources
-
-[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)
-
-[How to configure network isolation capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)
-
-[Quickstart: Downloading a file](http://msdn.microsoft.com/library/windows/apps/hh700370)
-
-[Quickstart: Uploading a file](http://msdn.microsoft.com/library/windows/apps/hh700372)
-
-[Transferring a file from a network resource](http://msdn.microsoft.com/library/windows/apps/hh761434)
 
 ## System requirements
 
@@ -123,9 +107,9 @@ The sample must also be updated when run against a non-localhost web server. To 
 
 -   The hostname of the server to connect to needs to be updated. This can be handled in two ways. The **AddressField** element in the HTML or XAML files can be edited so that "localhost" is replaced by the hostname or IP address of the web server. Alternately when the app is run, enter the hostname or IP address of the web server instead of the "localhost" value in the **Remote address** textbox.
 
-**Note**  IIS is not available on ARM builds nor on Windows Phone. Instead, set up the web server on a separate 64-bit or 32-bit computer and follow the steps for using the sample against a non-localhost web server.
+**Note**  IIS is not available on ARM builds nor on Windows Phone. Instead, set up the web server on a separate 64-bit or 32-bit computer and follow the steps for using the sample against a non-localhost web server.
 
-**Note**  When used with the supplied scripts, this Windows Runtime app sample communicates with another process (IIS server which is a desktop app) on the same machine over loopback for demonstration purposes only. A Windows Runtime app that communicates over loopback to another process that represents a Windows Runtime app or a desktop app is not allowed and such apps will not pass Store validation. For more information, see [How to enable loopback and troubleshoot network isolation](http://msdn.microsoft.com/library/windows/apps/hh780593).
+**Note**  When used with the supplied scripts, this Windows Runtime app sample communicates with another process (IIS server which is a desktop app) on the same machine over loopback for demonstration purposes only. A Windows Runtime app that communicates over loopback to another process that represents a Windows Runtime app or a desktop app is not allowed and such apps will not pass Store validation. For more information, see [How to enable loopback and troubleshoot network isolation](http://msdn.microsoft.com/library/windows/apps/hh780593).
 
 However if a server different than IIS is used, then this requires some special configuration of the server to create the *BackgroundTransferSample* folder.
 

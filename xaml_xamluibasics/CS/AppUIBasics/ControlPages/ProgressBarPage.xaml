@@ -1,0 +1,57 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AppUIBasics.ControlPages.ProgressBarPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <RelativePanel>
+        <local:ControlExample x:Name="Example1" HeaderText="An indeterminate progress bar." MaxWidth="500">
+            <StackPanel Orientation="Horizontal">
+                <ProgressBar Width="130" IsIndeterminate="True"
+                         ShowPaused="{x:Bind PausedRB.IsChecked.Value, Mode=OneWay}"
+                         ShowError="{x:Bind ErrorRB.IsChecked.Value, Mode=OneWay}"/>
+                <StackPanel Orientation="Horizontal" Margin="30,0,0,0">
+                    <RadioButton x:Name="RunningRB" GroupName="ProgressState" Content="Running" IsChecked="True"/>
+                    <RadioButton x:Name="PausedRB" GroupName="ProgressState" Content="Paused"/>
+                    <RadioButton x:Name="ErrorRB" GroupName="ProgressState" Content="Error"/>
+                </StackPanel>
+            </StackPanel>
+            <local:ControlExample.Xaml>
+                <RichTextBlock>
+                    <Paragraph>&lt;ProgressBar Width="130" IsIndeterminate="True" ShowPaused="<Run Text="{x:Bind PausedRB.IsChecked.Value, Converter={StaticResource valueToStringConverter}, Mode=OneWay}" />" 
+                                ShowError="<Run Text="{x:Bind ErrorRB.IsChecked.Value, Converter={StaticResource valueToStringConverter}, Mode=OneWay}" />" /&gt;
+                    </Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+
+        <local:ControlExample HeaderText="A determinate progress bar." RelativePanel.Below="Example1" MaxWidth="500">
+            <StackPanel x:Name="Control2" Orientation="Horizontal" Grid.Row="4">
+                <ProgressBar Width="130" x:Name="ProgressBar2"/>
+                <TextBlock x:Name="Control2Output" Style="{ThemeResource OutputTextBlockStyle}" 
+                               Width="60" TextAlignment="Center"/>
+                <RepeatButton Content="Click and hold" Click="RepeatButton_Click"/>
+            </StackPanel>
+            <local:ControlExample.Xaml>
+                <RichTextBlock>
+                    <Paragraph>&lt;ProgressBar Width="130" Value="<Run x:Name="DeterminateProgressValue">0</Run>" /&gt;
+                    </Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+    </RelativePanel>
+</Page>

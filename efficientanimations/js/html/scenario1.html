@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Draw Animations</title>
+    
+    <script src="/js/scenario1.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>The requestAnimationFrame API is the best way to do non-declarative animations in a power-efficient and smooth way. 
+                    This API is similar to the setTimeout and setInterval APIs that developers use today, except 
+                    that it notifies the application when it needs to update the screen, and only 
+                    when it needs to update the screen. It keeps Web applications perfectly aligned with the painting of the window, and uses only the necessary amount of resources. This API will take page visibility and 
+                    the display refresh rate into account to determine how many frames per second to allocate to the animation.
+                </p>
+                <p>
+                    In this example, the clock is being animated using the requestAnimationFrame API.
+
+                </p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+                  <canvas id="scenario1Canvas" width="317" height="317"></canvas>
+                <img id="img1" src="/images/fancyclock.png" style="display:none;" />
+                <img id="img2" src="/images/hour.png" style="display:none;" />
+                <img id="img3" src="/images/minute.png" style="display:none;" />
+                <img id="img4" src="/images/second.png" style="display:none;" />
+
+    </div>
+</body>
+</html>
