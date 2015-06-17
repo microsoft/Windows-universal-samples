@@ -17,7 +17,7 @@ using namespace SDKTemplate;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
-    { "LoggingChannel", "LoggingCPP.Scenario1" },
-    { "LoggingSession", "LoggingCPP.Scenario2" },
-    { "FileLoggingSession", "LoggingCPP.Scenario3" }
+    { "LoggingChannel", "SDKTemplate.Scenario1" },
+    { "LoggingSession", "SDKTemplate.Scenario2" },
+    { "FileLoggingSession", "SDKTemplate.Scenario3" }
 };

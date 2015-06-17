@@ -6,7 +6,7 @@
 
 #pragma once
 
-namespace LoggingCPP
+namespace SDKTemplate
 {
     ref class LoggingChannelScenario sealed
     {

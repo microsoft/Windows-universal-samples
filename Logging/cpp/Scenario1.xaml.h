@@ -14,7 +14,7 @@
 #include "Scenario1.g.h"
 #include "MainPage.xaml.h"
 
-namespace LoggingCPP
+namespace SDKTemplate
 {
     [Windows::Foundation::Metadata::WebHostHidden]
     public ref class Scenario1 sealed

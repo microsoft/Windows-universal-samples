@@ -13,7 +13,6 @@
 #include "Scenario3.xaml.h"
 #include "MainPage.xaml.h"
 
-using namespace LoggingCPP;
 using namespace SDKTemplate;
 
 using namespace Windows::UI::Xaml;

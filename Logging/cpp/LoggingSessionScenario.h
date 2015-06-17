@@ -7,7 +7,7 @@
 #pragma once
 #include "LoggingScenarioEventArgs.h"
 
-namespace LoggingCPP
+namespace SDKTemplate
 {
 	ref class LoggingSessionScenario sealed
 	{

@@ -9,7 +9,7 @@
 #include <string>
 #include <agents.h>
 
-namespace LoggingCPP
+namespace SDKTemplate
 {
     // Create a time stamp to append to log file names so 
     // each file has a unique name. The format is:

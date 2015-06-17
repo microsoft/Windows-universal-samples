@@ -1,6 +1,7 @@
 ﻿//// Copyright (c) Microsoft Corporation. All rights reserved
 
 (function () {
+    "use strict";
 
     function getTimeStamp() {
         var d = new Date();
@@ -64,15 +65,13 @@
                                         "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur elementum scelerisque accumsan. In hac habitasse platea dictumst.";
                                     channel.logMessage(messageToLog, Windows.Foundation.Diagnostics.LoggingLevel.information);
 
-                                    var value = 1000000; // one million, 7 digits, 4-bytes as an int, 14 bytes as a wide character string.
-                                    channel.logMessage("Value #" + (++data.messageIndex).toString() + "  " + value, Windows.Foundation.Diagnostics.LoggingLevel.critical); // value is logged as 14 byte wide character string.
-                                    channel.logValuePair("Value #" + (++data.messageIndex).toString(), value, Windows.Foundation.Diagnostics.LoggingLevel.critical); // value is logged as a 4-byte integer.
+                                    var value = 1000000; // 1 million, 7 digits, 4-bytes as an integer, 14 bytes as a wide character string.
+                                    channel.logMessage("Value #" + (++data.messageIndex).toString() + "  " + value, Windows.Foundation.Diagnostics.LoggingLevel.critical); // 'value' is logged as 14 byte wide character string.
+                                    channel.logValuePair("Value #" + (++data.messageIndex).toString(), value, Windows.Foundation.Diagnostics.LoggingLevel.critical); // 'value' is logged as a 4-byte integer.
 
-                                    //
                                     // Every once in a while, simulate an application error
                                     // which causes the app to save the current snapshot
                                     // of logging events in memory to a disk ETL file.
-                                    //
 
                                     data.countDownToError--;
                                     if (data.countDownToError <= 0) {
@@ -100,7 +99,7 @@
                                     // Log the exception string.
                                     channel.logMessage("Exception occurrred: " + e.toString(), Windows.Foundation.Diagnostics.LoggingLevel.error);
                                     return data.scenario._saveLogInMemoryToFileAsync(data.scenario._session).then(function (logFile) {
-                                        // The log containinng the error has been saved.
+                                        // The log containing the error has been saved.
                                         // Update the UI of the sample.
                                         data.scenario._logFileGeneratedCount++;
                                         data.scenario._dispatchStatusChanged({ type: "LogFileGenerated", logFilePath: logFile.path });
@@ -182,14 +181,13 @@
                 // suspend, so release the deferral.
                 deferral.complete();
             },
-            _onAppResume: function (resmingEventArgs) {
+            _onAppResume: function (resumingEventArgs) {
                 var scenario = LoggingSessionScenario.instance;
                 scenario.resumeLoggingIfApplicable();
             },
             _startLogging: function () {
 
-                if (this._session === null)
-                {
+                if (this._session === null) {
                     this._session = new Windows.Foundation.Diagnostics.LoggingSession("LoggingSession_Session");
                 }
 
@@ -260,7 +258,7 @@
             instance: {
                 get: function () {
                     if (!this._instance) {
-                        this._instance = new LoggingSessionScenario()
+                        this._instance = new LoggingSessionScenario();
                     }
                     return this._instance;
                 }

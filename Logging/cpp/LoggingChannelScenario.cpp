@@ -9,7 +9,6 @@
 
 using namespace Platform;
 using namespace SDKTemplate;
-using namespace LoggingCPP;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Diagnostics;
 

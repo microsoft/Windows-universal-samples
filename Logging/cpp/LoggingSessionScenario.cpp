@@ -18,7 +18,6 @@ using namespace concurrency;
 using namespace Windows::Foundation::Diagnostics;
 using namespace Windows::Storage;
 using namespace SDKTemplate;
-using namespace LoggingCPP;
 
 LoggingSessionScenario^ LoggingSessionScenario::_instance;
 

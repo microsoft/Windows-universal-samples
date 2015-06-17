@@ -12,7 +12,6 @@
 #include "pch.h"
 #include "Scenario2.xaml.h"
 
-using namespace LoggingCPP;
 using namespace SDKTemplate;
 
 using namespace Windows::UI::Xaml;
