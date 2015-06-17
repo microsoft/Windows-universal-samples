@@ -8,7 +8,7 @@
 #include "pch.h"
 #include <string>
 
-namespace LoggingCPP
+namespace SDKTemplate
 {
     // LoggingScenario tells the UI what's happening by 
     // using the following enums. 

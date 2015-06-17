@@ -14,7 +14,7 @@
 #include "Scenario3.g.h"
 #include "FileLoggingSessionScenario.h"
 
-namespace LoggingCPP
+namespace SDKTemplate
 {
     [Windows::Foundation::Metadata::WebHostHidden]
     public ref class Scenario3 sealed

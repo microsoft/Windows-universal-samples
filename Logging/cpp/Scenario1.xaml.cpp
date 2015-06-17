@@ -12,7 +12,6 @@
 #include "Scenario1.xaml.h"
 #include "LoggingChannelScenario.h"
 
-using namespace LoggingCPP;
 using namespace SDKTemplate;
 
 using namespace Platform;

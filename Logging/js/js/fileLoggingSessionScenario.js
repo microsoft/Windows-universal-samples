@@ -1,6 +1,7 @@
 ﻿//// Copyright (c) Microsoft Corporation. All rights reserved
 
 (function () {
+    "use strict";
 
     function getTimeStamp() {
         var d = new Date();
@@ -47,7 +48,7 @@
 
                                 // Since the channel is added to the session at level Warning,
                                 // the following is logged because it is logged at level LoggingLevel.Critical.
-                                messageToLog =
+                                var messageToLog =
                                     "Message=" +
                                     (++data.messageIndex) +
                                     ": Lorem ipsum dolor sit amet, consectetur adipiscing elit.In ligula nisi, vehicula nec eleifend vel, rutrum non dolor.Vestibulum ante ipsum " +
@@ -63,9 +64,9 @@
                                     "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur elementum scelerisque accumsan. In hac habitasse platea dictumst.";
                                 channel.logMessage(messageToLog, Windows.Foundation.Diagnostics.LoggingLevel.information);
 
-                                var value = 1000000; // one million, 7 digits, 4-bytes as an int, 14 bytes as a wide character string.
-                                channel.logMessage("Value #" + (++data.messageIndex).toString() + "  " + value, Windows.Foundation.Diagnostics.LoggingLevel.critical); // value is logged as 14 byte wide character string.
-                                channel.logValuePair("Value #" + (++data.messageIndex).toString(), value, Windows.Foundation.Diagnostics.LoggingLevel.critical); // value is logged as a 4-byte integer.
+                                var value = 1000000; // 1 million, 7 digits, 4-bytes as an integer, 14 bytes as a wide character string.
+                                channel.logMessage("Value #" + (++data.messageIndex).toString() + "  " + value, Windows.Foundation.Diagnostics.LoggingLevel.critical); // 'value' is logged as 14 byte wide character string.
+                                channel.logValuePair("Value #" + (++data.messageIndex).toString(), value, Windows.Foundation.Diagnostics.LoggingLevel.critical); // 'value' is logged as a 4-byte integer.
                             }
 
                             // Pause every once in a while to simulate application
@@ -151,14 +152,13 @@
                     deferral.complete();
                 });
             },
-            _onAppResume: function (resmingEventArgs) {
+            _onAppResume: function (resumingEventArgs) {
                 var scenario = FileLoggingSessionScenario.instance;
                 scenario.resumeLoggingIfApplicable();
             },
             _startLogging: function () {
 
-                if (this._session === null)
-                {
+                if (this._session === null) {
                     this._session = new Windows.Foundation.Diagnostics.FileLoggingSession("FileLoggingSession_Session");
                     this._session.addEventListener("logfilegenerated", this._onLogFileGenerated);
                 }
@@ -198,7 +198,7 @@
                 })
                 .then(function () {
                     var fullPath = data.ourAppLogFolder.path + "\\" + data.newLogFileName;
-                    if (data.scenario._isPreparingForSuspending === false) {
+                    if (!data.scenario._isPreparingForSuspending) {
                         data.scenario._dispatchStatusChanged({ type: "LogFileGenerated", logFilePath: fullPath });
                     }
                 });
@@ -295,7 +295,7 @@
             instance: {
                 get: function () {
                     if (!this._loggingScenarioSingleton) {
-                        this._loggingScenarioSingleton = new FileLoggingSessionScenario()
+                        this._loggingScenarioSingleton = new FileLoggingSessionScenario();
                     }
                     return this._loggingScenarioSingleton;
                 }
