@@ -1,0 +1,90 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario2.css" />
+    <script src="/js/scenario2_connector.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This scenario illustrates how to discover nearby Wi-Fi Direct devices, select a device, connect to it (pairing as necessary), and retrieve the available IP endpoint pairs that can be used to initiate socket connections.</p>
+            </div>
+        </div>
+        <div>
+            <label>Device Selector: </label>
+            <select class="action" id="cmbDeviceSelector" style="WIDTH: 250px">
+                <option value="AssociationEndpoint" selected="selected">Association Endpoint</option>
+                <option value="DeviceInterface">Device Interface</option>
+            </select>
+            <button class="action" id="btnGetDevices">Get Devices</button>
+        </div>
+
+        <div>
+            <label>GO Intent: </label>
+            <input id="txtGOIntent" type="text" maxlength="2" style="WIDTH: 80px" />
+        </div>
+
+        <div>
+            <button class="action" id="btnIe">Show IEs</button>
+            <button class="action" id="btnFromId">Connect</button>
+        </div>
+
+        <div>
+            <label>Discovered Devices: </label>
+        </div>
+
+        <div>
+            <div id="discoveredListTemplate" data-win-control="WinJS.Binding.Template">
+                <div class="discoveredTemplate">
+                    <h3 class="displayName" data-win-bind="innerText: displayName"></h3>
+                </div>
+            </div>
+            <div id="lvDiscoveredDevices"
+                 data-win-control="WinJS.UI.ListView"
+                 data-win-options="{ itemTemplate: discoveredListTemplate, selectionMode: 'single', tapBehavior: 'directSelect', layout : {type: WinJS.UI.ListLayout} }">
+            </div>
+        </div>
+
+        <div>
+            <label>Connected Devices: </label>
+        </div>
+
+        <div>
+            <div id="conenctedListTemplate" data-win-control="WinJS.Binding.Template">
+                <div class="connectedTemplate">
+                    <h3 class="displayName" data-win-bind="innerText: displayName"></h3>
+                </div>
+            </div>
+            <div id="lvConnectedDevices"
+                 data-win-control="WinJS.UI.ListView"
+                 data-win-options="{ itemTemplate: conenctedListTemplate, selectionMode: 'single', tapBehavior: 'directSelect', layout : {type: WinJS.UI.ListLayout} }">
+            </div>
+        </div>
+
+        <div>
+            <button class="action" id="btnSendMessage">Send</button>
+            <input id="txtSendMessage" type="text" />
+        </div>
+
+        <div>
+            <button class="action" id="btnCloseDevice">Close Device</button>
+        </div>
+    </div>
+</body>
+</html>
