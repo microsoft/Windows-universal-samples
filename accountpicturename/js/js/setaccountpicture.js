@@ -31,7 +31,7 @@
                         WinJS.log && WinJS.log("Successfully updated account picture.", "sample", "status");
                     } else {
                         // A user might turn off access to the account
-                        WinJS.log && WinJS.log("Setting account picture failed.", "sample", "status");
+                        WinJS.log && WinJS.log("Setting account picture failed.", "sample", "error");
                     }
                 });
             } else {
