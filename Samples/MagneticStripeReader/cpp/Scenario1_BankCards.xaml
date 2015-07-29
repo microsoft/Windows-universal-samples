@@ -1,0 +1,99 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_BankCards"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Registers an event listener for reading bank card data and displays the data values as they are reported.
+                </TextBlock>
+            </StackPanel>
+            
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Margin="0,5,0,-5" Grid.RowSpan="2">
+                <Grid x:Name="LayoutRoot" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                                               
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,10" Grid.Row="0">
+                        <Button x:Name="ScenarioStartReadButton" Content="Start Receiving Data" Margin="0,0,10,0" Click="ScenarioStartReadButton_Click"/>
+                        <Button x:Name="ScenarioEndReadButton"  Content="End Receiving Data" Margin="0,0,10,0" Click="ScenarioEndReadButton_Click"/>
+                    </StackPanel>
+    
+                    <Grid x:Name="Output" VerticalAlignment="Top" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Account Number:" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Padding="10,0,10,0"/>
+                            <TextBlock Text="Expiration Date:" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Padding="10,0,10,0"/>
+                            <TextBlock Text="First Name:" TextWrapping="Wrap" Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Padding="10,0,10,0"/>
+                            <TextBlock Text="Middle Initial:" TextWrapping="Wrap" Grid.Row="3" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Padding="10,0,10,0"/>
+                            <TextBlock Text="Service Code:" TextWrapping="Wrap" Grid.Row="4" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Padding="10,0,10,0"/>
+                            <TextBlock Text="Suffix:" TextWrapping="Wrap" Grid.Row="5" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Padding="10,0,10,0"/>
+                            <TextBlock Text="Surname:" TextWrapping="Wrap" Grid.Row="6" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Padding="10,0,10,0"/>
+                            <TextBlock Text="Title:" TextWrapping="Wrap" Grid.Row="7" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Padding="10,0,10,0"/>
+                            <TextBlock x:Name="ScenarioOutputAccountNumber" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
+                            <TextBlock x:Name="ScenarioOutputExpirationDate" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
+                            <TextBlock x:Name="ScenarioOutputFirstName" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
+                            <TextBlock x:Name="ScenarioOutputMiddleInitial" TextWrapping="Wrap" Grid.Row="3" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
+                            <TextBlock x:Name="ScenarioOutputServiceCode" TextWrapping="Wrap" Grid.Row="4" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
+                            <TextBlock x:Name="ScenarioOutputSuffix" TextWrapping="Wrap" Grid.Row="5" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
+                            <TextBlock x:Name="ScenarioOutputSurname" TextWrapping="Wrap" Grid.Row="6" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
+                            <TextBlock x:Name="ScenarioOutputTitle" TextWrapping="Wrap" Grid.Row="7" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
+                        </Grid>
+
+                    </Grid>
+                    
+                </Grid>
+            </ScrollViewer>
+                
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

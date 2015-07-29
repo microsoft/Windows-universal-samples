@@ -1,0 +1,64 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <script src="/js/scenario5_MulticastAndBroadcast.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            The DatagramSocket class can also be used to send and receive multicast and broadcast packets. To showcase this functionality, we will start a listener and then send multicast/broadcast packets out on the network. We will direct these packets to the same
+            &apos;Service Name&apos; as the one that the listener is bound to, so they will get routed back to the listener and to any other elegible UDP sockets listening in the Local Area Network.
+        </p>
+        <p>
+            If the sample app fails to receive multicast or broadcast datagrams, please double-check that your Local Area Network equipment is configured to allow that type of traffic. A possible workaround is to run the sample app inside a Virtual Machine connected
+            to an internal-only virtual network switch. Phone Emulator images are configured that way by default.
+        </p>
+        <p>
+            <input name="ScenarioOption" id="radioMulticast" type="radio" checked class="win-radio">
+            <label for="radioMulticast">Multicast</label>
+            <input name="ScenarioOption" id="radioBroadcast" type="radio" class="win-radio">
+            <label for="radioBroadcast">Broadcast</label>
+        </p>
+        <p>
+            <label for="inputServiceName">Service Name:</label>
+            <input id="inputServiceName" type="text" class="win-textbox">
+        </p>
+        <p>
+            <label id="labelRemoteAddress" for="inputRemoteAddress"></label>
+            <input id="inputRemoteAddress" type="text" class="win-textbox">
+        </p>
+        <p>
+            <button id="buttonStartListener" class="win-button"></button>
+        </p>
+        <p>
+            <button id="buttonSendMessage" class="win-button">Send &apos;hello&apos;</button>
+        </p>
+        <p>
+            <button id="buttonCloseListener" class="win-button">Close Listener</button>
+        </p>
+        <p>
+            <label id="labelSendOutput"></label>
+        </p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <p id="statusBox"></p>
+        <p id="outputBox"></p>
+    </div>
+</body>
+
+</html>

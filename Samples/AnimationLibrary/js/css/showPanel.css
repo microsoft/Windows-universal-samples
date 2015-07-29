@@ -1,0 +1,28 @@
+﻿#myPanel
+{
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    width: 364px;
+    height: 100%;
+    color: white;
+    background-color: #323232;
+    visibility: hidden;
+    z-index: 1;
+}
+
+@media screen and (max-device-width: 768px) {
+    #myPanel
+    {
+        width: 100px;
+    }
+}
+
+#myPanel p
+{
+    position: absolute;
+    top: 40%;
+    left: 40px;
+    text-align: center;
+    color: white !important;
+}

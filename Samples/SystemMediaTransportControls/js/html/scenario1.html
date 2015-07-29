@@ -1,0 +1,39 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1.css">
+    <script src="/js/scenario1.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <p>
+                Select some audio or video files to play. Then use media keys such as &quot;Play/Pause&quot;, &quot;Previous&quot; or &quot;Next&quot; on the keyboard to control playback. Observe the system flyout displayed on the screen&apos;s upper right. Try bringing
+                up the flyout with keyboard keys (or hardware buttons on a tablet device) for volume up and volume down. Use (with mouse or touch) the flyout&apos;s software buttons to control playback.
+            </p>
+            <button id="pickerButton" class="action win-button">Select Files</button>
+        </div>
+        <div data-win-control="ScenarioContent">
+            <!--
+            HTML5 specifies that both audio and video content are supported by both <audio> and <video> elements.
+            <audio> elements simply do not render the video stream, so for this sample we will use <video> to
+            play video as well as audio-only content.
+
+            HTML5 audio and video elements share more or less the same properties, methods and events, so the same
+            sample script code would work basically unmodified with an <audio> element below in place of <video>.
+        -->
+            <video id="player" controls="controls" msaudiocategory="Media" height="315" width="560">
+            </video>
+        </div>
+    </div>
+</body>
+
+</html>

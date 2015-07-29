@@ -1,0 +1,52 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page x:Class="DatagramSocketSample.Scenario5" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:SDKTemplate" xmlns:common="using:SDKTemplate.Common" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+<ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+  <StackPanel>
+    <TextBlock x:Name="InputTextBlock1" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0,0,0,20">
+      The DatagramSocket class can also be used to send and receive multicast
+    and broadcast packets. To showcase this functionality, we will start
+    a listener and then send multicast/broadcast packets out on the network.
+    We will direct these packets to the same 'Service Name' as the one that
+    the listener is bound to, so they will get routed back to the listener
+    and to any other elegible UDP sockets listening in the Local Area Network.
+    <LineBreak/>
+    <LineBreak/>
+      If the sample app fails to receive multicast or broadcast datagrams,
+    please double-check that your Local Area Network equipment is configured to
+    allow that type of traffic. A possible workaround is to run the sample app
+    inside a Virtual Machine connected to an internal-only virtual network
+    switch. Phone Emulator images are configured that way by default.
+    </TextBlock>
+    <StackPanel Orientation="Horizontal">
+      <RadioButton x:Name="MulticastRadioButton" Checked="MulticastRadioButton_Checked" Unchecked="MulticastRadioButton_Unchecked">Multicast</RadioButton>
+      <RadioButton>Broadcast</RadioButton>
+    </StackPanel>
+    <TextBlock Style="{StaticResource BasicTextStyle}">Service name:</TextBlock>
+    <TextBox x:Name="ServiceName" Text="22113"/>
+    <TextBlock x:Name="RemoteAddressLabel" Style="{StaticResource BasicTextStyle}"/>
+    <TextBox x:Name="RemoteAddress"/>
+    <Button x:Name="StartListener" Click="StartListener_Click" Margin="0,10,0,0"/>
+    <Button x:Name="SendMessageButton" Content="Send 'hello'" Click="SendMessage_Click" Margin="0,10,0,0"/>
+    <Button x:Name="CloseListenerButton" Content="Close Listener" Click="CloseListener_Click" Margin="0,10,0,0"/>
+    <TextBlock x:Name="SendOutput" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0,10,0,0"/>
+    <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts -->
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup>
+            <VisualState x:Name="DefaultLayout"/>
+            <VisualState x:Name="Below768Layout"/>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+  </StackPanel>
+</ScrollViewer>
+</Page>

@@ -1,0 +1,49 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>LoggingChannel</title>
+    <script src="/js/loggingChannelScenario.js"></script>
+    <script src="/js/scenario1.js"></script>
+</head>
+
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">LoggingChannel</h2>
+    <div id="scenarioView">
+        <div>
+            <div id="scenarioDescription">
+                <p>
+                    Demonstrates writing events with LoggingChannel and LoggingActivity.
+                </p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                LoggingChannel can work in a Windows 8.1 compatibility mode or in a new Windows 10 enhanced mode. Each of the buttons below will run the same scenario using a different LoggingChannel mode. You can then compare the ETW output to see the differences in
+                the two modes.
+            </p>
+            <p>
+                Before clicking each button, you should start an ETW session to capture the events from the scenario. Use a tool such as xperf to start a session capturing the correct provider GUID, then click the button to log events, then stop the session, and finally
+                examine the ETL file (using xperf, tracerpt, or another ETL decoding tool). For example, you might do the following (replacing GUID with the correct GUID for each button):
+            </p>
+            <p>
+                xperf -start MySession -f MyFile.etl -on GUID
+                <br>
+                <i>(click button)</i>
+                <br> xperf -stop MySession
+                <br> tracerpt MyFile.etl
+            </p>
+            <button id="doWin81Mode" class="win-button">Windows 8.1 mode</button>
+            <p>Use GUID: 4bd2826e-54a1-4ba9-bf63-92b73ea1ac4a</p>
+
+            <button id="doWin10Mode" class="win-button">Windows 10 mode</button>
+            <p>Use GUID: eff1e128-4903-5093-096a-bdc29b38456f</p>
+        </div>
+    </div>
+</body>
+
+</html>

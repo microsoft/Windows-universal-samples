@@ -1,0 +1,423 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<Page
+    x:Class="Simple3DGameXaml.DirectXPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Simple3DGameXaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <SwapChainPanel x:Name="DXSwapChainPanel">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="GameInfoOverlayStates">
+                <VisualState x:Name="NormalState">
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="GameInfoOverlay" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="00:00:00.25" To="0">
+                            <DoubleAnimation.EasingFunction>
+                                <CubicEase EasingMode="EaseIn" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="GameInfoOverlay">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="Collapsed" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <VisualState x:Name="GameInfoOverlayState">
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="GameInfoOverlay" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="00:00:00.25" To="1">
+                            <DoubleAnimation.EasingFunction>
+                                <CubicEase EasingMode="EaseIn" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="GameInfoOverlay">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <VisualState x:Name="TooSmallState">
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="GameInfoOverlay" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="00:00:00.25" To="0">
+                            <DoubleAnimation.EasingFunction>
+                                <CubicEase EasingMode="EaseIn" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                        <DoubleAnimation Storyboard.TargetName="TooSmallView" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="00:00:00.25" To="1">
+                            <DoubleAnimation.EasingFunction>
+                                <CubicEase EasingMode="EaseIn" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="GameInfoOverlay">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="Collapsed" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="TooSmallView">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <VisualState x:Name="NotTooSmallState">
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="GameInfoOverlay" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="00:00:00.25" To="1">
+                            <DoubleAnimation.EasingFunction>
+                                <CubicEase EasingMode="EaseIn" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                        <DoubleAnimation Storyboard.TargetName="TooSmallView" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="00:00:00.25" To="0">
+                            <DoubleAnimation.EasingFunction>
+                                <CubicEase EasingMode="EaseIn" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="GameInfoOverlay">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="TooSmallView">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="Collapsed" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="3" x:Name="TooSmallView" Background="{StaticResource PageBackgroundBrush}" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Title of the Game Info Overlay -->
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock
+          Text="Game Paused"
+          Style="{StaticResource TitleStyle}"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Center of the outer Grid.  This is the Center 50% of the screen -->
+        <Grid x:Name="GameInfoOverlay" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="{StaticResource PageBackgroundBrush}" Visibility="Collapsed"
+          Tapped="OnGameInfoOverlayTapped">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Title of the Game Info Overlay -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock x:Name="GameInfoOverlayTitle"
+          Text="Title"
+          Style="{StaticResource TitleStyle}"/>
+            </StackPanel>
+
+            <!-- Body:0 Loading Resource -->
+            <Grid x:Name="Loading" Grid.Row="1" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ProgressRing x:Name="LoadingProgress" Grid.Row="0" Grid.Column="0"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Foreground="{StaticResource ActionBrush}"/>
+            </Grid>
+
+            <!-- Body1: Game Statistics -->
+            <Grid x:Name="Stats" Grid.Row="1" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock
+            Text="Levels Completed"
+            Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock
+            Text="Total Points"
+            Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+                    <TextBlock
+            Text="Total Shots"
+            Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel x:Name="HighScoreTitle" Grid.Column="0" Grid.Row="3" Orientation="Horizontal" Visibility="Visible">
+                    <TextBlock
+            Text="High Score"
+            Style="{StaticResource H1StyleSpace}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock x:Name="LevelsCompleted"
+            Text="1"
+            Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock x:Name="TotalPoints"
+            Text="9"
+            Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+                    <TextBlock x:Name="TotalShots"
+            Text="25"
+            Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel x:Name="HighScoreData" Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
+                    <TextBlock x:Name="HighScore"
+            Text="120"
+            Style="{StaticResource H1StyleSpace}"/>
+                </StackPanel>
+                <Grid x:Name="PurchaseUpgrade"
+              Visibility="Collapsed"
+                    Grid.Column="0"
+                    Grid.Row="4"
+                    Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <AppBarButton x:Name="BuyFull"
+                    Grid.Column="1"
+                    Label="Buy" Icon="Shop"
+                    Tapped="OnBuyAppButtonTapped"
+                    HorizontalAlignment="Left"
+                    CommandParameter="MainApp"
+                    VerticalAlignment="Top"/>
+                    <TextBlock x:Name="PurchaseMessage"
+                    Grid.Column="0"
+                    Text="You are running a trial version. Purchase the full version."
+                    Style="{StaticResource H1Style}"
+                    TextWrapping="Wrap"
+                    Margin="26,20,0,0" />
+                </Grid>
+            </Grid>
+
+            <!-- Body2: Level Start -->
+            <Grid x:Name="LevelStart" Grid.Row="1" Visibility="Visible">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock
+            Text="Objective"
+            Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock
+            Text="Time Limit"
+            Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel x:Name="BonusTimeTitle" Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+                    <TextBlock
+            Text="Bonus Time"
+            Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <TextBlock x:Name="Objective"
+            Text="Objective Text - replaced before it is displayed"
+            TextWrapping="Wrap"
+            Style="{StaticResource H1Style}"/>
+                </Grid>
+                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock x:Name="TimeLimit"
+            Text="30 sec"
+            Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel x:Name="BonusTimeData" Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+                    <TextBlock x:Name="BonusTime"
+            Text="20 sec"
+            Style="{StaticResource H1Style}"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Body3: Pause -->
+            <Grid x:Name="PauseData" Grid.Row="1" Visibility="Visible">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock
+                        Text="Level"
+                        Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock
+                        Text="Hits"
+                        Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+                    <TextBlock
+                        Text="Shots"
+                        Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
+                    <TextBlock
+                        Text="Time"
+                        Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock x:Name="PauseLevel"
+                        Text="1"
+                        TextWrapping="Wrap"
+                        Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock x:Name="PauseHits"
+                        Text="0"
+                        Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+                    <TextBlock x:Name="PauseShots"
+                        Text="0"
+                        Style="{StaticResource H1Style}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
+                    <TextBlock x:Name="PauseTimeRemaining"
+                        Text="20.0 sec"
+                        Style="{StaticResource H1Style}"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Footer of Game Info Overlay.  There are several options -->
+            <StackPanel x:Name="TapToContinue" Grid.Row="2" Orientation="Horizontal" Visibility="Collapsed">
+                <TextBlock
+                    Text="Tap to continue ..."
+                    Style="{StaticResource H3Style}"
+                    TextWrapping="Wrap"/>
+            </StackPanel>
+            <StackPanel x:Name="PleaseWait" Grid.Row="2" Orientation="Horizontal" Visibility="Collapsed">
+                <TextBlock
+                  Text="Level loading, please wait ..."
+                  Style="{StaticResource H3Style}"
+                  TextWrapping="Wrap"/>
+            </StackPanel>
+            <StackPanel x:Name="PlayAgain" Grid.Row="2" Orientation="Horizontal" Visibility="Collapsed">
+                <TextBlock
+                    Text="Tap to play again ..."
+                    Style="{StaticResource H3Style}"
+                    TextWrapping="Wrap"/>
+            </StackPanel>
+        </Grid>
+
+        <Popup x:Name="StoreFlyout" IsLightDismissEnabled="true" Grid.ColumnSpan="3" Grid.RowSpan="3">
+            <Grid x:Name="StoreGrid"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Width="350"
+            Background="{StaticResource PageBackgroundBrush}"
+            >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="40,40,0,0">
+                    <AppBarButton x:Name="Return" Icon="Back" Click="OnStoreReturnClicked" VerticalAlignment="Center" />
+                    <TextBlock Text="Store" Style="{StaticResource SettingsTitleStyle}" Margin="10,0,0,0" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel x:Name="StoreUnavailable" Grid.Row="1" Orientation="Horizontal" Margin="40,40,0,0">
+                    <TextBlock
+                     Style="{StaticResource H3Style}"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     TextWrapping="Wrap"
+                     Width="310"
+                     Text="The store is currently unavailable or not responding.  Please check back later."
+                     />
+                </StackPanel>
+
+                <ListView x:Name="ProductListView" Grid.Row="3" SelectionMode="None" IsItemClickEnabled="true">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="350" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" >
+                                    <TextBlock FontSize="20" Text="{Binding Path=Title}" TextWrapping="Wrap" Margin="20,10,0,0" Foreground="{Binding Path=Foreground}" />
+                                    <TextBlock FontSize="20" Text="{Binding Path=Price}" Margin="40,0,0,0" Foreground="{Binding Path=Foreground}" />
+                                    <TextBlock FontSize="20" Text="{Binding Path=Status}" Margin="40,0,20,10" Foreground="{Binding Path=Foreground}" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <AppBarButton Visibility="{Binding Path=BuyVisibility}" CommandParameter="{Binding Path=ProductId}" Icon="Shop" Click="OnBuySelectorClicked" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Popup>
+    </SwapChainPanel>
+
+    <Page.BottomAppBar>
+        <AppBar x:Name="GameAppBar" Opened="OnAppBarOpened">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <AppBarButton x:Name="Reset" Label="Reset" Icon="Undo" Click="OnResetButtonClicked" HorizontalAlignment="Left" Visibility="Collapsed"/>
+                <AppBarButton x:Name="ResetLicense" Label="Reset License" Icon="Undo" Click="OnResetLicenseButtonClicked" Visibility="Collapsed" HorizontalAlignment="Left"/>
+                <AppBarButton x:Name="Store" Label="Store" Icon="Shop" Click="OnLoadStoreClicked" HorizontalAlignment="Left"/>
+                <AppBarButton x:Name="ChangeBackground" Label="Change Background" Icon="Switch" Click="OnChangeBackgroundButtonClicked" HorizontalAlignment="Right"/>
+                <AppBarButton x:Name="Play"  Label="Play"  Icon="Play"  Click="OnPlayButtonClicked" HorizontalAlignment="Right"/>
+          </StackPanel>
+        </AppBar>
+    </Page.BottomAppBar>
+</Page>

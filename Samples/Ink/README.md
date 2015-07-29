@@ -1,0 +1,81 @@
+﻿<!---
+  category: CustomUserInteractions
+---!>
+Ink sample
+=================
+
+This sample demonstrates how to use ink functionality (such as, capturing, manipulating, and interpreting ink strokes) in Universal Windows apps using JavaScript.
+
+Specifically, this sample covers using the [**Windows.UI.Input.Inking**](http://msdn.microsoft.com/library/windows/apps/br208524) APIs to:
+
+-   Render ink strokes
+-   Save and load ink strokes
+-   Copy and paste ink strokes
+-   Select ink strokes
+-   Delete ink strokes
+-   Recognize handwriting from ink strokes
+-   Search for a string within recognition results
+
+**Note**  Read the following instructions before using the app.
+
+-   Draw ink strokes with a tablet pen.
+-   The toolbar contains color pickers, line selectors, and other functions.
+-   In **Erase** mode, a stroke deletes all strokes that it touches. If the pen has an eraser, it erases strokes (switching back to the pen tip exits erase mode).
+-   In **Select** mode, a stroke selects all strokes that it encompasses. Exit **Select** mode by choosing another function on the toolbar.
+
+    **Note**   Ink color or width is applied to all selected strokes and highlight color or width is applied to all selected highlights.
+
+-   In **Recognition** mode, all (or only selected) strokes are processed through handwriting recognition. After recognition has completed:
+    -   View the primary text candidate(s) at the bottom of the app.
+    -   Tap on a word to show all text candidates for that word.
+    -   Use **Find** to search for a string within the recognition results.
+-   Delete all strokes (or only selected strokes) by pressing the **Erase** button.
+-   Additional commands include:
+    -   Use **Copy** to copy selected strokes onto the clipboard.
+    -   Use **Paste** to paste strokes from the clipboard.
+    -   Use **Save** and **Load** to read and write Ink Serialized Format (ISF) files to the Libraries or Pictures folder or both.
+-   All buttons and menu choices can be activated with mouse, pen, or touch.
+
+To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+
+To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
+
+Related topics
+--------------
+
+[Getting started with apps](https://dev.windows.com/getstarted)
+
+[Responding to pen and stylus interactions](http://msdn.microsoft.com/library/windows/apps/hh700425)
+
+[Responding to user interaction](http://msdn.microsoft.com/library/windows/apps/hh700412)
+
+**Samples**
+
+[SimpleInk](/Samples/SimpleInk)
+
+[ComplexInk](/Samples/ComplexInk)
+
+**Reference**
+
+[**Windows.UI.Input.Inking**](http://msdn.microsoft.com/library/windows/apps/br208524)
+
+Operating system requirements
+-----------------------------
+
+**Client:** Windows 10
+
+**Server:** Windows Server 2016 Technical Preview
+
+**Phone:** Windows 10
+
+Build the sample
+----------------
+
+1.  Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+2.  Go to the directory containing the sample. Double-click the Microsoft Visual Studio Solution (.sln) file.
+3.  Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+
+Run the sample
+--------------
+
+To debug the app and then run it, press F5 or use **Debug** \> **Start Debugging**. To run the app without debugging, press Ctrl+F5 or use **Debug** \> **Start Without Debugging**.

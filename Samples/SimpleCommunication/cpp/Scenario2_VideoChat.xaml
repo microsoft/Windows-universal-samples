@@ -1,0 +1,76 @@
+<!-- 
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<Page
+    x:Class="SDKTemplate.Scenario2_VideoChat"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+         This scenario demonstrates a simple, end-to-end video call client that
+        demonstrates the low latency mode of WinRT's capture engine and the
+        video tag. The sample uses a custom network source and a custom sink
+        extensions to send and recieve captured audio and video data between 2
+        computers.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Grid.ColumnSpan="3" Grid.Row="0" Style="{StaticResource BaseMessageStyle}" VerticalAlignment="Center">Enter IP address or hostname of remote PC:</TextBlock>
+                    <StackPanel Margin="0,10,0,0" Grid.Row="0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Grid.Row="1" x:Name="IpAddressTextbox"/>
+                            <Button Grid.Column="1" Grid.Row="1" x:Name="CallButton" Content="Call" Margin="0,0,0,0" Click="CallButton_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                            <Button Grid.Column="2" Grid.Row="1" x:Name="EndCallButton" Content="End Call" Margin="0,0,0,0" Click="EndCallButton_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock x:Name="StatusMessage"/>
+                        <Grid>
+                            <Grid>
+                                <Border x:Name="RemoteVideoShadow" BorderBrush="Gray" Background="Gray" BorderThickness="1" RenderTransformOrigin="0.5,0.5">
+                                    <Border.RenderTransform>
+                                        <CompositeTransform TranslateX="4" TranslateY="4"/>
+                                    </Border.RenderTransform>
+                                </Border>
+                                <Border x:Name="RemoteVideoBorder" BorderBrush="Gray" BorderThickness="1">
+                                    <MediaElement x:Name="RemoteVideo" AudioCategory="Communications" PosterSource="video-call-poster.png"/>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+
+</Page>

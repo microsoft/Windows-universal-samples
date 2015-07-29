@@ -1,0 +1,34 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Scenario 8: Manage permission requests for accessing user information</title>
+    <link rel="stylesheet" href="/css/8_PermissionRequest.css">
+    <script src="/js/8_PermissionRequest.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>There could be cases when the web page loaded inside webview tries to access user information that could be sensitive and requires user&apos;s approval. An app can handle such a case by listening to the PermissionRequest event of the WebView control
+            and either approve the request on behalf of the user or raise a prompt for user to respond.</p>
+        <p>Under the Output heading below, the displayed HTML has been loaded into the WebView control. The page tries to get the user location on loading and being part of the package the permission to access user location is approved by the app. You can
+            enter a remote page which tries to access user location. Enter a valid URL into the text field and then press the &quot;Enter&quot; key or tap the &quot;Go&quot; button. The request for the remote page is not approved by the app and will raise
+            a prompt for the user to respond.</p>
+        <input type="url" id="urlField" class="win-textbox">
+        <button id="goButton" class="win-button">Go</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput" id="outputContainer">
+        <div id="scenario8_left">
+            <textarea id="htmlString" readonly="readonly" class="win-textarea"></textarea>
+        </div>
+        <div id="scenario8_right">
+            <x-ms-webview id="webview"></x-ms-webview>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,292 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<Page
+    x:Class="ImportSample.Scenario1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ImportSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Width="949.333">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,0.333,-208">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+          This scenario demonstrates the enumeration of devices, files, importing and deleting of content from a PTP / MTP device. Plug any PTP / MTP device to begin.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="673" Width="949">
+                        <Button x:Name="findSourceButton" 
+                                Content="Find Sources" 
+                                HorizontalAlignment="Left" 
+                                Margin="10,42,0,0" 
+                                VerticalAlignment="Top" 
+                                Click="OnFindSourcesClicked" 
+                                Width="145"/>
+                        <ListBox x:Name="sourceListBox" 
+                                 HorizontalAlignment="Left" 
+                                 Height="151" 
+                                 Margin="182,42,0,0" 
+                                 VerticalAlignment="Top" 
+                                 Width="335" 
+                                 SelectionChanged="SourceList_SelectionChanged"
+                                 BorderThickness="1" 
+                                 Background="{x:Null}" 
+                                 FontSize="13.333" 
+                                 BorderBrush="#FF858585">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding DisplayName}" Grid.Column="0" Grid.Row="0" />
+                                        <TextBlock Text="{Binding Description}" Grid.Column="1" Grid.Row="0" Margin="10,0,0,0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <TextBox x:Name="propertiesTxtBox" 
+                            HorizontalAlignment="Left" 
+                            Margin="536,42,0,0" 
+                            TextWrapping="Wrap" 
+                            Text="" 
+                            VerticalAlignment="Top" 
+                            Height="151" 
+                            Width="361" 
+                            BorderThickness="1" 
+                            ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="13.333"/>
+                        <StackPanel Orientation="Vertical" Margin="10,215,0,-23">
+                            <Button x:Name="findNewItemsButton" 
+                                Content="Find (Select New)" 
+                                Margin="0,0,0,8" 
+                                Width="145"
+                                Click="OnFindNewItemsClicked"
+                                IsEnabled="False"/>
+                            <Button x:Name="findAllItemsButton" 
+                                Content="Find (Select All)" 
+                                Margin="0,0,0,8" 
+                                Width="145"
+                                Click="OnFindAllItemsClicked"
+                                IsEnabled="False"/>
+                            <Button x:Name="selectNewButton" 
+                                Content="Select New"
+                                Margin="45,0,0,6" 
+                                Width="100"
+                                Height="25"
+                                FontSize="12"
+                                IsEnabled="false"
+                                Click="OnSelectNewButtonClicked" RenderTransformOrigin="0.5,0.5"/>
+                            <Button x:Name="selectAllButton" 
+                                Content="Select All"
+                                Margin="45,0,0,6" 
+                                Width="100"
+                                Height="25"
+                                FontSize="12"
+                                IsEnabled="false"
+                                Click="OnSelectAllButtonClicked"/>
+                            <Button x:Name="selectNoneButton" 
+                                Content="Select None"
+                                Margin="45,0,0,8" 
+                                Width="100"
+                                Height="25"
+                                FontSize="12"
+                                IsEnabled="false"
+                                Click="OnSelectNoneButtonClicked"/>
+                            <CheckBox x:Name="AddSessionDateFolder"
+                                      Content="Add Session Date Folder" 
+                                      IsChecked="{Binding AppendSessionDateToDestinationFolder, Mode=TwoWay}" 
+                                      FontSize="12"
+                                      IsEnabled="False"/>
+                            <RadioButton x:Name="NoSubFolder" 
+                                         Content="No Subfolder"  
+                                         GroupName="SubFolderMode" 
+                                         HorizontalAlignment="Left"  
+                                         VerticalAlignment="Top" 
+                                         Width="145" 
+                                         Checked="NoSubFolder_checked" 
+                                         FontSize="12"
+                                         IsEnabled="False"/>
+                            <RadioButton x:Name="FileDateSubfolder" 
+                                         Content="File Date Subfolder" 
+                                         GroupName="SubFolderMode" 
+                                         HorizontalAlignment="Left"
+                                         VerticalAlignment="Top" 
+                                         Width="145" 
+                                         Checked="FileDateSubfolder_checked" 
+                                         FontSize="12"
+                                         IsEnabled="False"/>
+                            <RadioButton x:Name="ExifDateSubfolder" 
+                                         Content="ExifDate Subfolder" 
+                                         GroupName="SubFolderMode"
+                                         HorizontalAlignment="Left"  
+                                         VerticalAlignment="Top" 
+                                         Width="167" 
+                                         Checked="ExifDateSubfolder_checked" 
+                                         FontSize="12"
+                                         IsEnabled="False"/>
+                            <RadioButton x:Name="KeepOriginalFolder" 
+                                         Content="Keep Original Folder" 
+                                         GroupName="SubFolderMode" 
+                                         HorizontalAlignment="Left"  
+                                         VerticalAlignment="Top" 
+                                         Width="167" 
+                                         Checked="KeepOriginalFolder_checked" 
+                                         FontSize="12"
+                                         IsEnabled="False"/>
+                            <Button x:Name="importButton" 
+                                Content="Import Selected"
+                                Margin="0,0,0,8" 
+                                Width="145"
+                                IsEnabled="false"
+                                Click="OnImportButtonClicked"/>
+                            <Button x:Name="CancelButton"
+                                Content="Cancel" 
+                                Margin="0,0,0,8" 
+                                Width="145"
+                                Click="OnCancelButtonClicked"/>
+                            <Button x:Name="deleteButton"
+                                Content="Delete Imported"
+                                Margin="0,0,794,0" 
+                                Width="145" 
+                                Click="OnDeleteButtonClicked" 
+                                IsEnabled="False" HorizontalAlignment="Right"/>
+                        </StackPanel>
+                        <ProgressBar x:Name="progressBar" 
+                            HorizontalAlignment="Left" 
+                            Height="52.2" 
+                            Margin="183,524,0,0" 
+                            VerticalAlignment="Top"
+                            Width="715" SmallChange="0.01" LargeChange="0.1" Maximum="1"/>
+                        <ProgressRing x:Name="progressRing" 
+                            HorizontalAlignment="Left" 
+                            Margin="188,584,0,0" 
+                            VerticalAlignment="Top" 
+                            Height="48"
+                            Width="60" RenderTransformOrigin="0.456,0.349"/>
+                        <ListView x:Name="fileListView" 
+                            HorizontalAlignment="Left" Margin="182,260,0,171" 
+                            Width="715" 
+                            SelectionMode="None" 
+                            BorderBrush="#FF858585"   
+                            BorderThickness="1" 
+                            ScrollViewer.VerticalScrollBarVisibility="Visible">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.05*"/>
+                                            <ColumnDefinition Width="0.20*"/>
+                                            <ColumnDefinition Width="0.75*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Grid.Column="0" IsChecked="{Binding ImportableItem.IsSelected, Mode=TwoWay}" Click="CheckBox_Click"/>
+                                        <Image Grid.Column="1" Source="{Binding Thumbnail}" Width="120" Height="120" Stretch="Uniform"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding ImportableItem.Name}" VerticalAlignment="Center" Margin="10,0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <TextBox x:Name="Sources" 
+                            HorizontalAlignment="Left"
+                            Margin="171,10,0,0" 
+                            TextWrapping="Wrap" 
+                            Text="Sources"
+                            VerticalAlignment="Top" 
+                            BorderBrush="White" 
+                            Width="80" 
+                            HorizontalContentAlignment="Left" 
+                            Background="{x:Null}" 
+                            BorderThickness="0"/>
+                        <TextBox x:Name="Source" 
+                            HorizontalAlignment="Left" 
+                            Margin="525,10,0,0"                              
+                            Text="Source Information" 
+                            VerticalAlignment="Top" 
+                            BorderBrush="{x:Null}" 
+                            Width="148" 
+                            HorizontalContentAlignment="Left"
+                            BorderThickness="0" 
+                            Background="{x:Null}"/>
+                        <TextBox x:Name="Importable_Files" 
+                            HorizontalAlignment="Left" 
+                            Margin="171,224,0,0"
+                            TextWrapping="Wrap"
+                            Text="Importable Items" 
+                            VerticalAlignment="Top" 
+                            BorderBrush="{x:Null}" 
+                            Width="212" 
+                            HorizontalContentAlignment="Left" 
+                            BorderThickness="0" 
+                            Background="{x:Null}"/>
+                        <TextBlock x:Name="textBlock" 
+                            HorizontalAlignment="Left" 
+                            Margin="362,-58,0,0" 
+                            TextWrapping="Wrap" 
+                            Text="TextBlock" 
+                            VerticalAlignment="Top"/>
+                        <RadioButton x:Name="OnlyImages" 
+                                     Content="Find Images"  
+                                     GroupName="ImportMode" 
+                                     HorizontalAlignment="Left" 
+                                     Margin="10,108,0,0" 
+                                     VerticalAlignment="Top" 
+                                     Width="145" 
+                                     Checked="OnlyImages_Checked" 
+                                     FontSize="12"
+                                     IsEnabled="False"/>
+                        <RadioButton x:Name="OnlyVideo" 
+                                     Content="Find Videos" 
+                                     GroupName="ImportMode" 
+                                     HorizontalAlignment="Left" 
+                                     Margin="10,139,0,0" 
+                                     VerticalAlignment="Top" 
+                                     Width="145" 
+                                     Checked="OnlyVideo_Checked" 
+                                     FontSize="12"
+                                     IsEnabled="False"/>
+                        <RadioButton x:Name="ImagesAndVideo" 
+                                     Content="Find Images &amp; Videos" 
+                                     GroupName="ImportMode" 
+                                     HorizontalAlignment="Left" 
+                                     Margin="10,171,0,0" 
+                                     VerticalAlignment="Top" 
+                                     Width="167" 
+                                     Checked="ImagesAndVideo_Checked"
+                                     FontSize="12"
+                                     IsEnabled="False"/>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

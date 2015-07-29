@@ -1,0 +1,23 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>App and Webview Communication Example</title>
+</head>
+
+<body class="win-type-body">
+    <div id="myDiv"></div>
+    <script>
+        if (window.winRTSharedObject !== undefined) {
+            winRTSharedObject.checkPrimesInRange();
+        } else {
+            document.getElementById("myDiv").innerText = "\'winRTSharedObject\' object doesnt exists";
+        }
+    </script>
+</body>
+
+</html>

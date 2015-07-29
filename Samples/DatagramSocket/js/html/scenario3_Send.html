@@ -1,0 +1,40 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <script src="/js/socketsSample.js"></script>
+    <script src="/js/scenario3_Send.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            Now you can send data to the &apos;server&apos;. Data is often sent using a DataWriter instance, which writes to the socket&apos;s output stream.
+        </p>
+        <p>
+            <button id="buttonSend" class="win-button">Send &apos;hello&apos; now</button>
+        </p>
+        <p>
+            <label id="labelSendOutput"></label>
+        </p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <p id="statusBox"></p>
+        <p id="outputBox"></p>
+    </div>
+</body>
+
+</html>

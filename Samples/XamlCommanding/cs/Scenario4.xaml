@@ -1,0 +1,84 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="Commanding.Scenario4"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Commanding"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                    <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    This scenario demonstrates the states of the CommandBar and the effect on layout.  The CommandBar below
+                    is in the default 'Compact' state inside a StackPanel where content appears above and below it.
+                    <LineBreak/>                    
+                    The size of the control in its closed state is determined by the ClosedDisplayMode.  Changing it affects layout
+                    whereas layout is not affected when the control is opened.  
+                    <LineBreak/>
+                    By default the control has a light-dismiss interaction enabled.  
+                    This can be disabled by setting the IsSticky property.
+                    </TextBlock>
+                </StackPanel>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                        <ToggleButton x:Name="isopentoggle" Content="IsOpen" Margin="12,0" VerticalAlignment="Bottom"/>
+                        <ToggleButton x:Name="isstickytoggle" Content="IsSticky" Margin="12,0" VerticalAlignment="Bottom"/>
+                        <ComboBox x:Name="combobox" Header="ClosedDisplayMode" SelectedIndex="0">
+                            <ComboBoxItem>Compact</ComboBoxItem>
+                            <ComboBoxItem>Minimal</ComboBoxItem>
+                            <ComboBoxItem>Hidden</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel VerticalAlignment="Top" Margin="0,24,0,0" Grid.Row="1" Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+                        <Image HorizontalAlignment="Left" Source="Assets/storeLogo-sdk.png" Stretch="None"/>
+                        <CommandBar x:Name="cmdbar" 
+                                    IsOpen="{Binding IsChecked, ElementName=isopentoggle, Mode=TwoWay}"
+                                    IsSticky="{Binding IsChecked, ElementName=isstickytoggle, Mode=TwoWay}"
+                                    ClosedDisplayMode="{Binding SelectedItem.Content, ElementName=combobox}">
+                            <AppBarButton Icon="Accept" Label="Accept"/>
+                            <AppBarToggleButton Icon="Contact" Label="Contact"/>
+                            <CommandBar.SecondaryCommands>
+                                <AppBarButton Label="Menu Item 1"/>
+                                <AppBarButton Label="Menu Item 2"/>
+                                <AppBarButton Label="Menu Item 3"/>
+                                <AppBarButton Label="Menu Item 4"/>
+                            </CommandBar.SecondaryCommands>
+                        </CommandBar>
+                        <Image HorizontalAlignment="Left" Source="Assets/storeLogo-sdk.png" Stretch="None"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+                <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

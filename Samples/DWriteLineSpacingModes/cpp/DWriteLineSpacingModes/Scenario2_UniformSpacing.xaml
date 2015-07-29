@@ -1,0 +1,219 @@
+<!-- 
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2_UniformSpacing"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource ScenarioDescriptionTextStyle}">
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Margin" Value="0,0,0,20"/>
+            </Style>
+        </Grid.Resources>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <!-- Panels and image -->
+                <VisualState x:Name="PanelsAndImage_Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="321"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RootGrid.MinWidth" Value="320"/>
+                        <Setter Target="TextLayoutImage.Width" Value="300" />
+                        <Setter Target="LineSpacingParameterControls.Padding" Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PanelsAndImage_Narrow">
+                    <!-- For 320px phones -->
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RootGrid.MinWidth" Value="296"/>
+                        <Setter Target="TextLayoutImage.Width" Value="280" />
+                        <Setter Target="LineSpacingParameterControls.Padding" Value="0,0,12,0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup>
+                <!-- Color key -->
+                <VisualState x:Name="ColorKey_Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="730"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="DescenderKey.(RelativePanel.AlignLeftWithPanel)" Value="false" />
+                        <Setter Target="DescenderKey.(RelativePanel.Below)" Value="{x:Null}" />
+                        <Setter Target="DescenderKey.(RelativePanel.RightOf)" Value="AscenderKey" />
+                        <Setter Target="DescenderKey.(RelativePanel.AlignVerticalCenterWith)" Value="AscenderKey" />
+                        <Setter Target="AdditionalLeadingKey.(RelativePanel.AlignLeftWithPanel)" Value="false" />
+                        <Setter Target="AdditionalLeadingKey.(RelativePanel.Below)" Value="{x:Null}" />
+                        <Setter Target="AdditionalLeadingKey.(RelativePanel.RightOf)" Value="DescenderKey" />
+                        <Setter Target="AdditionalLeadingKey.(RelativePanel.AlignVerticalCenterWith)" Value="DescenderKey" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="ColorKey_Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="DescenderKey.(RelativePanel.RightOf)" Value="{x:Null}" />
+                        <Setter Target="DescenderKey.(RelativePanel.AlignVerticalCenterWith)" Value="{x:Null}" />
+                        <Setter Target="DescenderKey.(RelativePanel.AlignLeftWithPanel)" Value="True" />
+                        <Setter Target="DescenderKey.(RelativePanel.Below)" Value="AscenderKey" />
+                        <Setter Target="AdditionalLeadingKey.(RelativePanel.RightOf)" Value="{x:Null}" />
+                        <Setter Target="AdditionalLeadingKey.(RelativePanel.AlignVerticalCenterWith)" Value="{x:Null}" />
+                        <Setter Target="AdditionalLeadingKey.(RelativePanel.AlignLeftWithPanel)" Value="True" />
+                        <Setter Target="AdditionalLeadingKey.(RelativePanel.Below)" Value="DescenderKey" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup>
+                <!-- Input parameter and output image controls -->
+                <VisualState x:Name="ParameterAndImage_Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="880"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LineSpacingParameterControls.(RelativePanel.AlignLeftWithPanel)" Value="False" />
+                        <Setter Target="LineSpacingParameterControls.(RelativePanel.RightOf)" Value="TextLayoutImage" />
+                        <Setter Target="TextLayoutImage.(RelativePanel.Below)" Value="{x:Null}" />
+                        <Setter Target="TextLayoutImage.(RelativePanel.AlignTopWithPanel)" Value="True" />
+                        <Setter Target="TextLayoutImage.Margin" Value="0,0,20,0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="ParameterAndImage_Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!-- Input parameter and output image controls -->
+                        <Setter Target="LineSpacingParameterControls.(RelativePanel.RightOf)" Value="{x:Null}" />
+                        <Setter Target="LineSpacingParameterControls.(RelativePanel.AlignLeftWithPanel)" Value="True" />
+                        <Setter Target="TextLayoutImage.(RelativePanel.AlignTopWithPanel)" Value="False" />
+                        <Setter Target="TextLayoutImage.(RelativePanel.Below)" Value="LineSpacingParameterControls" />
+                        <Setter Target="TextLayoutImage.Margin" Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid x:Name="RootGrid" Margin="12,0,12,12" MinWidth="296" MaxWidth="800" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Scenario heading -->
+            <StackPanel Margin="0,0,0,12">
+                <TextBlock Text="Uniform spacing:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"
+                           Text="Line height and baseline distances set by the app are applied to all lines." />
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Padding="8,8,16,8" Background="#FF303030" HorizontalAlignment="Stretch">
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <TextBlock Text="When the uniform line spacing method is used, the height, baseline and members
+of the DWRITE_LINE_SPACING structure are used, but the leadingBefore and fontLineGapUsage members are ignored. The
+height and baseline values are distances in DIPs." />
+                    <TextBlock Text="Uniform line spacing can be used to ensure consistent spacing in cases in which
+the computed line spacing may vary from one line to another. In the default spacing scenario, the emoji character
+causes that line to have larger height because that character is drawn using a different font that has taller metrics.
+But with uniform spacing, the height and baseline values you specify are applied to all lines of the layout, and so
+the line with the emoji has the same spacing as all the other lines." />
+
+                    <!-- Color key -->
+                    <TextBlock Text="Color key" Margin="0,12,0,4" FontWeight="SemiBold"/>
+                    <RelativePanel Margin="0,0,0,20" >
+                        <StackPanel x:Name="AscenderKey" Orientation="Horizontal" Margin="0,0,12,4" 
+                                  RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True">
+                            <Border Height="20" Width="20" VerticalAlignment="Top" Background="LightBlue" Margin="0,0,4,0" />
+                            <TextBlock VerticalAlignment="Center" Text="Ascender" Margin="0" />
+                        </StackPanel>
+                        <StackPanel x:Name="DescenderKey" Orientation="Horizontal" Margin="0,0,12,4"
+                                  RelativePanel.RightOf="AscenderKey" RelativePanel.AlignVerticalCenterWith="AscenderKey">
+                            <Border Height="20" Width="20" VerticalAlignment="Center" Background="LightPink" Margin="0,0,4,0" />
+                            <TextBlock VerticalAlignment="Center" Text="Descender" Margin="0" />
+                        </StackPanel>
+                        <StackPanel x:Name="AdditionalLeadingKey" Orientation="Horizontal" Margin="0,0,0,4"
+                                  RelativePanel.RightOf="DescenderKey" RelativePanel.AlignVerticalCenterWith="DescenderKey">
+                            <Border Height="20" Width="20" VerticalAlignment="Center" Background="LightYellow" Margin="0,0,4,0" />
+                            <TextBlock VerticalAlignment="Center" Text="Additional leading" Margin="0" />
+                        </StackPanel>
+                    </RelativePanel>
+
+                    <!-- Input parameters and visual results: relative arrangment will depend on width -->
+                    <RelativePanel Margin="0,12,0,20">
+                        <!-- Line spacing parameter controls -->
+                        <StackPanel Name="LineSpacingParameterControls" Orientation="Vertical"
+                                    RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True" >
+                            <TextBlock Text="Line spacing parameters" Margin="0,0,0,4" FontWeight="SemiBold" TextWrapping="NoWrap"/>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Height:" FontSize="{ThemeResource ControlContentThemeFontSize}" Margin="0,0,4,0"/>
+                                    <TextBlock Text="{x:Bind Path=LineSpacingHeight, Mode=OneWay}" FontSize="{ThemeResource ControlContentThemeFontSize}" Margin="0" />
+                                </StackPanel>
+                                <Slider Minimum="0" Maximum="100" StepFrequency="0.1" Width="Auto"
+                                        Value="{x:Bind Path=LineSpacingHeight, Mode=TwoWay}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Baseline:" FontSize="{ThemeResource ControlContentThemeFontSize}" Margin="0,0,4,0"/>
+                                    <TextBlock Text="{x:Bind Path=LineSpacingBaseline, Mode=OneWay}" FontSize="{ThemeResource ControlContentThemeFontSize}" Margin="0" />
+                                </StackPanel>
+                                <Slider Minimum="0" Maximum="100" StepFrequency="0.1"
+                                        Value="{x:Bind Path=LineSpacingBaseline, Mode=TwoWay}" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- Text layout results: The image source will be created programmatically using a SurfaceImageSource to present a DirectWrite text layout. -->
+                        <Image Name="TextLayoutImage" Width="300" Height="260" HorizontalAlignment="Left" Margin="0"
+                             RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="LineSpacingParameterControls"/>
+                    </RelativePanel>
+
+
+
+                    <!-- First line metrics results -->
+                    <StackPanel Name="LineMetricsResultsControls" Orientation="Vertical" Margin="0">
+                        <TextBlock Margin="0,0,0,4" Text="Metrics of first line (DWRITE_LINE_METRICS1 members):" TextWrapping="WrapWholeWords" />
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                            <TextBlock Margin="0,0,4,0" Text="height:" />
+                            <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutHeight, Mode=OneWay}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                            <TextBlock Margin="0,0,4,0" Text="baseline:" />
+                            <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutBaseline, Mode=OneWay}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                            <TextBlock Margin="0,0,4,0" Text="leadingBefore:" />
+                            <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutLeadingBefore, Mode=OneWay}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                            <TextBlock Margin="0,0,4,0" Text="leadingAfter:" />
+                            <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutLeadingAfter, Mode=OneWay}" />
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

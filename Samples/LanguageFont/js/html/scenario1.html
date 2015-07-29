@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/langfont.js"></script>
+    <script src="/js/scenario1.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            This shows the use of the LanguageFontGroup API to get fonts for a particular language (Japanese used here) for UI body text and heading elements. Note that the API returns specific values for font sub-family attributes (weight, stretch and style) in
+            addition to the font family.</p>
+        <button id="scenario1Apply" class="win-button">
+            Apply Recommended Font Properties</button>
+        <br>
+        <br>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput" class="output">
+        <!-- If no font is set in inline styling, a font will be selected from ui-light.css, and it may  
+            happen to be the correct font, meaning that no evident change will be seen by applying the 
+            recommended font. So, setting a non-recommended font as a default in the markup so that the 
+            change is more evident. -->
+        <h2 lang="ja-JP" style="font-family:SimSun" class="win-type-subheader">
+            &#x4DA7;&#x49DF;&#x307F;&#x3085;&#x308D;&#x732A;</h2>
+        <p lang="ja-JP" style="font-family:SimSun">
+            &#x8A27;&#x7128;&#x3092;&#x992F;&#x30C0; &#x62E3;&#x9975;&#x5EE6;&#x3048;&#x5C24; &#x6827;&#x7A43;&#x699E;&#x3057;&#x3083;&#x3074;&#x3083; &#x992F;&#x30C0; &#x3089;&#x6A2A;&#x8969; &#x30DA;&#x89A7;&#x3078; &#x4A23;&#x799A;&#x8A43;&#x30A6;&#x30A9;&#x69AF;
+            &#x7A23;&#x3058;&#x97E9;&#x3080;&#x306B;&#x3087; &#x306C;&#x6AA7; &#x307F;&#x3088;&#x6823; &#x30B0;&#x30A7;&#x6765;&#x3052;&#x6BDA;&#x5EE4; &#x3057;&#x3085;&#x62E9;&#x308C;&#x82E9;&#x3AE3; &#x30B9;&#x30A3;&#x6829;, &#x5A67;&#x30B9;&#x3074;&#x3085;
+            &#x3057;&#xC9E6;&#x3055;&#x30B7;&#x30E3;&#x305A; &#x495A;&#x306B;&#x3083;&#x69DA;&#x3058;&#x3085;&#x8C26; &#x995F;&#x8967;&#x30C3;&#x30E9;&#x309C;&#x3051; &#x992F;&#x30C0; &#x995F;&#x8967;&#x30C3; &#x4A5A;&#x57E8; &#x5AE3;&#x5A67;&#x30B9;&#x3074;&#x3085;&#x6929;
+            &#x7DA9;&#x89DA;&#x5964;&#x73E3;&#x3046;,
+        </p>
+    </div>
+</body>
+
+</html>

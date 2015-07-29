@@ -1,0 +1,69 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="Xml.XSLTTransform"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Xml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="Input" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel x:Name="Scenario5Input">
+                    <TextBlock TextWrapping="Wrap" Text="This sample demonstrates how to use Extensible Stylesheet Language (XSL) Transformation with XML APIs in the Windows Runtime to transform an XML file into a HTML web page." Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left"/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+                    <Run Text="To run the sample, click the"/>
+                    <Run Text="Transform" FontWeight="Bold"/>
+                    <Run Text="button. You may also edit the source XML and XSL file to receive different result."/>
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+                    <Run Text="TransformToString" FontWeight="Bold"/>
+                    <Run Text="will produce the transformation result as string. And" />
+                    <Run Text="TransfromToDocument" FontWeight="Bold"></Run>
+                    <Run Text="will product the transformation result as DomDocument."></Run>
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button x:Name="Scenario5BtnTransformToString" Content="TransformToString" Margin="0,0,10,0" Click="Scenario5BtnTransformToString_Click"/>
+                        <Button x:Name="Scenario5BtnTransformToDocument" Content="TransformToDocument" Margin="0,0,10,0" Click="Scenario5BtnTransformToDocument_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <StackPanel x:Name="Scenario5Output" Grid.Row="1">
+                <StackPanel Margin="0,10,0,0">
+                    <TextBlock Text="XML Content" Style="{StaticResource BasicTextStyle}"/>
+                    <RichEditBox x:Name="scenario5Xml" BorderBrush="White" MinHeight="100" MinWidth="100"/>
+                </StackPanel>
+                <StackPanel Margin="0,10,0,0">
+                    <TextBlock Text="XSL" Style="{StaticResource BasicTextStyle}"/>
+                    <RichEditBox x:Name="scenario5Xslt" BorderBrush="White" MinHeight="100" MinWidth="100"/>
+                </StackPanel>
+                <StackPanel Margin="0,10,0,0">
+                    <TextBlock Text="Result" Style="{StaticResource BasicTextStyle}"/>
+                    <RichEditBox x:Name="scenario5Result" BorderBrush="White" IsReadOnly="True" MinHeight="100" MinWidth="100" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

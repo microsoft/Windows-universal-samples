@@ -1,0 +1,42 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/AudioCapturePermissions.js"></script>
+    <script src="/js/scenario5_ListConstraint.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This sample showcases one-shot speech recognition using a custom list-based grammar.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <button id="btnListenUI" disabled class="win-button">&#xE1D6; with UI</button>
+            <button id="btnListen" disabled class="win-button">&#xE1D6; without UI</button>
+
+            <p>Tap the microphone button and speak. This example uses a list constraint, and the list of strings to listen for contains &quot;Yes&quot; and &quot;No&quot;. A privacy statement prompt may be shown.</p>
+            <p id="resultTextArea"></p>
+            <p id="errorTextArea"></p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario3.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>Obtain a thumbnail icon for a document.
+            <br> Please click the button below to pick a file and obtain the icon.</p>
+        <button class="action win-button" id="document-thumb-start">Get Icon</button>
+        <br>
+        <br>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <img class="imageHolder" id="document-thumb-imageHolder">
+        <p id="document-thumb-detailedStatus" class="status">
+            <div id="document-thumb-modeName"></div>
+            <div id="document-thumb-fileName"></div>
+            <div id="document-thumb-requestedSize"></div>
+            <div id="document-thumb-returnedSize"></div>
+        </p>
+    </div>
+</body>
+
+</html>

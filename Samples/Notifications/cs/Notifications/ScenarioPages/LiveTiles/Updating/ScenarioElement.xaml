@@ -1,0 +1,68 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.LiveTiles.Updating.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls">
+
+    <controls:StepsControl x:Name="stepsControl" StepChanged="stepsControl_StepChanged">
+        
+        <!--Step 1-->
+        <RichTextBlock>
+            <Paragraph>
+                Properties of secondary tiles, like their display name, logos, arguments, and more, can be updated after a secondary tile has been pinned. This scenario provides an example of updating a secondary tile's name and logos.
+            </Paragraph>
+            <Paragraph/>
+            <Paragraph>
+                Click the continue button at the bottom to start the scenario.
+            </Paragraph>
+        </RichTextBlock>
+        
+        <!--Step 2-->
+        <StackPanel>
+            
+            <controls:InstructionControl Instruction="1">
+                <Button
+                    x:Name="ButtonPinSecondaryTile"
+                    Content="Click to pin secondary tile"
+                    HorizontalAlignment="Stretch"
+                    Click="ButtonPinSecondaryTile_Click"/>    
+            </controls:InstructionControl>
+            
+        </StackPanel>
+        
+        <!--Step 3-->
+        <StackPanel>
+            <controls:InstructionControl Instruction="1">
+                Open Start and notice the tile pinned as "Original" with the "X" logo. Then click the continue button at the bottom.
+            </controls:InstructionControl>
+        </StackPanel>
+        
+        
+        <!--Step 4-->
+        <StackPanel>
+            
+            <controls:InstructionControl Instruction="1">
+                <Button
+                    x:Name="ButtonUpdateTile"
+                    Content="Update tile"
+                    HorizontalAlignment="Stretch"
+                    Click="ButtonUpdateTile_Click"/>
+            </controls:InstructionControl>
+            
+        </StackPanel>
+        
+        
+        <!--Step 5-->
+        <StackPanel>
+            <controls:InstructionControl Instruction="1">
+                Now open Start again and notice that the secondary tile's name changed to "Updated", and the logos on the tile are now check marks.
+            </controls:InstructionControl>
+        </StackPanel>
+        
+    </controls:StepsControl>
+    
+</UserControl>

@@ -1,0 +1,41 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <script src="/js/socketsSample.js"></script>
+    <script src="/js/scenario4_Close.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            When an active (bound or connected) DatagramSocket object goes out of scope, it can take several seconds for the local UDP port being used by it to be freed/reclaimed by the lower networking layers. During that time, other UDP sockets on the machine will
+            not be able to use the port.
+        </p>
+        <p>
+            It is strongly recommended that DatagramSocket instances be explicitly closed before they go out of scope (e.g., before application exit).
+        </p>
+        <p>
+            <button id="buttonClose" class="win-button">Close all sockets</button>
+        </p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <p id="statusBox"></p>
+        <p id="outputBox"></p>
+    </div>
+</body>
+
+</html>

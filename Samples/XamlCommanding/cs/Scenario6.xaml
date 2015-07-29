@@ -1,0 +1,102 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="Commanding.Scenario6"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Commanding"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="customOverflowStyle" TargetType="CommandBarOverflowPresenter">
+            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.ZoomMode" Value="Disabled" />
+            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+            <Setter Property="BorderThickness" Value="8"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="MaxHeight" Value="154"/>
+            <Setter Property="MaxWidth" Value="NaN" />
+            <Setter Property="Width" Value="320"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CommandBarOverflowPresenter">
+                        <Border Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                                                              HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                                              VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                                              VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                                              ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"
+                                                              AutomationProperties.AccessibilityView="Raw">
+                                <ItemsPresenter x:Name="ItemsPresenter" Margin="0,0,0,24" />
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                    <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    This scenario demonstrates how to style the CommandBar.  There are two primary visuals: 1) the bar on which the PrimaryCommands are presented and 2) the overflow menu in which the SecondaryCommands appear.
+                    The properties on CommandBar such as Background only affect the bar that shows the PrimaryCommands.  The style of the overflow menu is determined by the CommandBarOverflowPresenterStyle.
+                    </TextBlock>
+                </StackPanel>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <CommandBar Background="#FF00B2F0"
+                                CommandBarOverflowPresenterStyle="{StaticResource customOverflowStyle}"
+                                Grid.Row="1"
+                                VerticalAlignment="Top"
+                                Margin="0,24,0,0">
+                        <AppBarButton Icon="Edit" Label="Edit"/>
+                        <AppBarButton Icon="Save" Label="Save"/>
+                        <CommandBar.SecondaryCommands>
+                            <AppBarButton Label="Menu item 1"/>
+                            <AppBarButton Label="Menu item 2"/>
+                            <AppBarButton Label="Menu item 3"/>
+                            <AppBarButton Label="Menu item 4"/>
+                            <AppBarButton Label="Menu item 5"/>
+                            <AppBarButton Label="Menu item 6"/>
+                            <AppBarButton Label="Menu item 7"/>
+                        </CommandBar.SecondaryCommands>
+                    </CommandBar>
+                </Grid>
+
+                <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+                <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

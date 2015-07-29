@@ -1,0 +1,102 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<local:SharePage
+    x:Class="SDKTemplate.ShareApplicationLink"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="400">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="0,0,0,10" Grid.Row="0">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="Share application link" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Text="Data Package Title:" />
+                <TextBox x:Name="TitleInputBox" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Share Source Scenario"
+                            Margin="0,0,0,10" AutomationProperties.AutomationId="DataPackageTitle"/>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Text="Data Package Description:" />
+                <TextBox x:Name="DescriptionInputBox" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="A deep link to a scenario in this app"
+                        Margin="0,0,0,10" AutomationProperties.AutomationId="DataPackageDescription"/>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Text="Choose the application link you would like to share"/>
+                <ComboBox x:Name="ApplicationLinkComboBox"
+                            AutomationProperties.AutomationId="ApplicationLink"/>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Text="Logo:" />
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="DefaultLogo" AutomationProperties.AutomationId="DefaultLogo">Default</RadioButton>
+                            <RadioButton x:Name="MicrosoftLogo" IsChecked="True" AutomationProperties.AutomationId="MicrosoftLogo">
+                                <Image Source="assets/microsoftLogo.png"/>
+                            </RadioButton>
+                            <RadioButton x:Name="VisualStudioLogo" AutomationProperties.AutomationId="VisualStudioLogo">
+                                <Image Source="assets/visualStudioLogo.png"/>
+                            </RadioButton>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Margin="20 0 0 0">
+                        <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Text="Logo Background:" />
+                        <StackPanel>
+                            <StackPanel.Resources>
+                                <local:NegatingBoolConverter x:Key="NegatingBoolConverter" />
+                            </StackPanel.Resources>                            
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="r" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Width="10" Margin="0 0 10 15"/>
+                                <Slider x:Name="RedSlider" Minimum="0" Maximum="255" Value="255" Width="225"
+                                    IsEnabled="{Binding ElementName=DefaultLogo, Path=IsChecked, Converter={StaticResource NegatingBoolConverter}}"
+                                    AutomationProperties.AutomationId="RedSlider"/>
+                                <TextBlock Text="{Binding ElementName=RedSlider, Path=Value}" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Margin="10 0 0 15"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="g" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Width="10" Margin="0 0 10 15"/>
+                                <Slider x:Name="GreenSlider" Minimum="0" Maximum="255" Value="255" Width="225"
+                                        IsEnabled="{Binding ElementName=DefaultLogo, Path=IsChecked, Converter={StaticResource NegatingBoolConverter}}"
+                                        AutomationProperties.AutomationId="GreenSlider"/>
+                                <TextBlock Text="{Binding ElementName=GreenSlider, Path=Value}" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Margin="10 0 0 15"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="b" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Width="10" Margin="0 0 10 15"/>
+                                <Slider x:Name="BlueSlider" Minimum="0" Maximum="255" Value="255" Width="225"
+                                        IsEnabled="{Binding ElementName=DefaultLogo, Path=IsChecked, Converter={StaticResource NegatingBoolConverter}}"
+                                        AutomationProperties.AutomationId="BlueSlider"/>
+                                <TextBlock Text="{Binding ElementName=BlueSlider, Path=Value}" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Margin="10 0 0 15"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="a" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Width="10" Margin="0 0 10 15"/>
+                                <Slider x:Name="AlphaSlider" Minimum="0" Maximum="255" Value="255" Width="225"
+                                        IsEnabled="{Binding ElementName=DefaultLogo, Path=IsChecked, Converter={StaticResource NegatingBoolConverter}}"
+                                        AutomationProperties.AutomationId="AlphaSlider"/>
+                                <TextBlock Text="{Binding ElementName=AlphaSlider, Path=Value}" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Margin="10 0 0 15"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="ShareStep" Visibility="Visible" HorizontalAlignment="Left">
+                    <Button x:Name="ShowUIButton" Content="Share" Click="ShowUIButton_Click"
+                            AutomationProperties.AutomationId="ShareButton"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</local:SharePage>

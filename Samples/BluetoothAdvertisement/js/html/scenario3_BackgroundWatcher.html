@@ -1,0 +1,29 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario3_BackgroundWatcher.css">
+    <script src="/js/scenario3_BackgroundWatcher.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>Scanning for a particular LE advertisement containing a matching manufacturer data section and above a certain RSSI threshold using a background trigger and task. This scenario requires Scenario 2 or 4 to run on another Windows platform in close
+            proximity of this one. Press Run button to begin scanning. Received advertisements are parsed in the background task and shown below.</p>
+        <button id="runButton" class="win-button">Run</button>
+        <button id="stopButton" class="win-button">Stop</button>
+        <br>
+        <br>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <select id="receivedAdvertisementListBox" size="8" class="win-dropdown">
+        </select>
+    </div>
+</body>
+
+</html>

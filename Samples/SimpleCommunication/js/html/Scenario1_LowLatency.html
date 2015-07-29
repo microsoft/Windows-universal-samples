@@ -1,0 +1,51 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1_LowLatency.css">
+    <script src="/js/CaptureManager.js"></script>
+    <script src="/js/scenario1_LowLatency.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <p>
+            This scenario demonstrates the end-to-end latency of video captured using the Media Capture API and displayed using the video tag with low latency mode enabled. Two output windows are displayed: 1) a camera preview window shows the raw output from your
+            camera 2) a localhost client window. The localhost client window shows the video from the camera when compressed, streamed, and recieved over machine&apos;s loopback network interface. This window demonstrates the end-to-end latency of video
+            captured, streamed to, and displayed by a remote client minus network latency.
+        </p>
+        <p>Tap or click the &apos;Start Preview&apos; button to get started.</p>
+        <div class="controls">
+            <div class="previewButton">
+                <button class="action win-button" id="previewButton" disabled="disabled">Start Preview</button>
+            </div>
+            <div class="clientButton">
+                <button class="action win-button" id="clientButton" disabled="disabled">Start Loopback Client</button>
+            </div>
+            <div class="latencyModeToggle">
+                <div id="latencyModeToggle" data-win-control="WinJS.UI.ToggleSwitch" data-win-options="{title: &apos;Low Latency mode&apos;, disabled: true}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div id="scenario1Grid">
+            <div class="contentHolder">
+                <h2 class="win-type-subheader">Camera Preview</h2>
+                <video id="previewVideo" msrealtime="true" poster="/images/webcam_preview_poster.png"></video>
+            </div>
+            <div class="contentHolder">
+                <h2 class="win-type-subheader">Network Client</h2>
+                <video id="playbackVideo" poster="/images/localhost_preview_poster.png"></video>
+                <video id="realTimePlaybackVideo" class="item" msrealtime="true" poster="/images/localhost_preview_poster.png"></video>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

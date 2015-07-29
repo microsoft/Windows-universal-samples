@@ -1,0 +1,141 @@
+﻿<Page
+    x:Class="Transform3DAnimations.ArticlePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Transform3DAnimations"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <DrillInNavigationTransitionInfo />
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+
+    <Grid x:Name="LayoutRoot">
+               <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ContentStates">
+                <VisualState x:Name="ContentNotLoadedState" />
+                <VisualState x:Name="ContentLoadedState">
+                    <VisualState.Setters>
+                        <Setter Target="ProgressRing.IsActive" Value="False" />
+                        <Setter Target="TextBlock0.Opacity" Value="1.0" />
+                        <Setter Target="ArticleImage.Opacity" Value="1.0" />
+                        <Setter Target="TextBlock1.Opacity" Value="1.0" />
+                    </VisualState.Setters>
+                </VisualState>
+                
+                <VisualStateGroup.Transitions>
+                    <VisualTransition From="ContentNotLoadedState" To="ContentLoadedState">
+                        <Storyboard>
+                            <!-- Disable ProgressRing -->
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ProgressRing"
+                                                           Storyboard.TargetProperty="IsActive">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="False" />
+                            </ObjectAnimationUsingKeyFrames>
+                            
+                            <!-- Zoom & fade in the first block of text... -->
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="TextBlock0"
+                                                           Storyboard.TargetProperty="Opacity">
+                                <SplineDoubleKeyFrame KeySpline="0.2, 0.6, 0.3, 0.9" KeyTime="0:0:0.5"
+                                                      Value="1.0" />
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="TextBlock0Transform"
+                                                           Storyboard.TargetProperty="TranslateZ">
+                                <DiscreteDoubleKeyFrame KeyTime="0" Value="-300.0" />
+                                <SplineDoubleKeyFrame KeySpline="0.1, 0.9, 0.2, 1" KeyTime="0:0:0.5"
+                                                      Value="0.0" />
+                            </DoubleAnimationUsingKeyFrames>
+
+                            <!-- Then, zoom & fade in the image... -->
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ArticleImage"
+                                                           Storyboard.TargetProperty="Opacity"
+                                                           BeginTime="0:0:0.1">
+                                <SplineDoubleKeyFrame KeySpline="0.2, 0.6, 0.3, 0.9" KeyTime="0:0:0.6"
+                                                      Value="1.0" />
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ArticleImageTransform"
+                                                       Storyboard.TargetProperty="TranslateZ"
+                                                       BeginTime="0:0:0.1">
+                                <DiscreteDoubleKeyFrame KeyTime="0" Value="-300.0" />
+                                <SplineDoubleKeyFrame KeySpline="0.1, 0.9, 0.2, 1" KeyTime="0:0:0.5"
+                                                      Value="0.0" />
+                            </DoubleAnimationUsingKeyFrames>
+
+                            <!-- Then, zoom & fade in the remaining text. -->
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="TextBlock1"
+                                                           Storyboard.TargetProperty="Opacity" 
+                                                           BeginTime="0:0:0.2">
+                                <SplineDoubleKeyFrame KeySpline="0.2, 0.6, 0.3, 0.9" KeyTime="0:0:0.5"
+                                                      Value="1.0" />
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="TextBlock1Transform"
+                                                           Storyboard.TargetProperty="TranslateZ"
+                                                           BeginTime="0:0:0.2">
+                                <DiscreteDoubleKeyFrame KeyTime="0" Value="-300.0" />
+                                <SplineDoubleKeyFrame KeySpline="0.1, 0.9, 0.2, 1" KeyTime="0:0:0.5"
+                                                      Value="0.0" />
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                </VisualStateGroup.Transitions>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        <Grid.Transform3D>
+            <PerspectiveTransform3D />
+        </Grid.Transform3D>
+        
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <StackPanel HorizontalAlignment="Center" Margin="20">
+                <TextBlock x:Name="TitleTextBlock" Text="{x:Bind Article.Headline}"
+                           Style="{ThemeResource SubheaderTextBlockStyle}" HorizontalAlignment="Left" />
+
+                <Grid x:Name="ContentRoot">
+                    <StackPanel HorizontalAlignment="Center">
+                        <Grid MaxWidth="560" Margin="0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <RichTextBlock x:Name="TextBlock0" Height="175" Opacity="0.0"
+                                           OverflowContentTarget="{x:Bind TextBlock1}">
+                                <RichTextBlock.Transform3D>
+                                    <CompositeTransform3D x:Name="TextBlock0Transform" />
+                                </RichTextBlock.Transform3D>
+                            
+                                <Paragraph>
+                                    <Run Text="{x:Bind Article.FullText}" />
+                                </Paragraph>
+                            </RichTextBlock>
+
+                            <Image Width="165" Height="165" Margin="10" Source="{x:Bind Article.ImageSource}"
+                                   x:Name="ArticleImage" Grid.Column="1" Opacity="0.0" Stretch="UniformToFill">
+                                <Image.Transform3D>
+                                    <CompositeTransform3D x:Name="ArticleImageTransform" />
+                                </Image.Transform3D>
+                            </Image>
+                        </Grid>
+
+                        <RichTextBlockOverflow x:Name="TextBlock1" MaxWidth="560" Opacity="0.0">
+                            <RichTextBlockOverflow.Transform3D>
+                                <CompositeTransform3D x:Name="TextBlock1Transform" />
+                            </RichTextBlockOverflow.Transform3D>
+                        </RichTextBlockOverflow>
+                    </StackPanel>
+                    
+                    <ProgressRing x:Name="ProgressRing" VerticalAlignment="Top" HorizontalAlignment="Center"
+                                  Margin="0,180,0,0" IsHitTestVisible="False" Width="75" Height="75" IsActive="True" />
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <Button VerticalAlignment="Top" Margin="5" Style="{StaticResource NavigationBackButtonSmallStyle}"
+                Click="BackButton_Click" />
+    </Grid>
+</Page>

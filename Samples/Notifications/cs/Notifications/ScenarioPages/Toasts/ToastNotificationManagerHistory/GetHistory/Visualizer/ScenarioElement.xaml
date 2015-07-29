@@ -1,0 +1,86 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.Toasts.ToastNotificationManagerHistory.GetHistory.Visualizer.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:converters="using:Notifications.Converters">
+    
+    <UserControl.Resources>
+
+        <converters:XmlDocumentToStringConverter x:Key="XmlDocumentToStringConverter"/>
+        
+    </UserControl.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Margin="24">
+
+
+            <TextBlock
+                Text="Toast GetHistory() Visualizer"
+                Style="{StaticResource TitleTextBlockStyle}"/>
+            
+            <RichTextBlock Margin="0,12,0,0">
+                <Paragraph>Use this to visually see the results of calling GetHistory(). This doesn't test anything specific.</Paragraph>
+            </RichTextBlock>
+
+            <Button
+                x:Name="ButtonUpdate"
+                Content="Update"
+                HorizontalAlignment="Stretch"
+                Click="ButtonUpdate_Click"
+                Margin="0,12,0,0"/>
+        </StackPanel>
+        
+        
+        <ListView
+            x:Name="ListViewHistory"
+            Grid.Row="1">
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Blue" BorderThickness="4,0,0,0" Margin="6,12,12,12">
+                        <StackPanel Margin="2,0,0,0">
+                        
+                            <RichTextBlock>
+                                <Paragraph>
+                                    <Run>Group:</Run>
+                                    <Run Text="{Binding Group}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>Tag: </Run>
+                                    <Run Text="{Binding Tag}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>ExpirationTime: </Run>
+                                    <Run Text="{Binding ExpirationTime}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>Content...</Run>
+                                </Paragraph>
+                            </RichTextBlock>
+                        
+                            <TextBlock
+                                Text="{Binding Content, Converter={StaticResource XmlDocumentToStringConverter}}"
+                                TextWrapping="Wrap"
+                                FontSize="10"/>
+                        
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+            
+        </ListView>
+        
+    </Grid>
+    
+</UserControl>

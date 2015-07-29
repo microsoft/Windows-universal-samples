@@ -1,0 +1,20 @@
+﻿/* styles */
+/* Template for items in the ListView */
+.GeofenceBackgroundEventsListViewItemStyle
+{
+    height: 24px;
+    width: 400px;
+    padding: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis; 
+}
+
+/* CSS applied to the ListView */
+#GeofenceBackgroundEventsListView
+{
+    height: 240px;
+    width: 480px;
+    padding: 4px;
+    border: solid 2px rgba(0, 0, 0, 0.13);
+}

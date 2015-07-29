@@ -1,0 +1,52 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.LiveTiles.AdaptiveTemplates.Images.Source.FromAppData.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="24">
+
+            <Button
+                x:Name="ButtonPickImage"
+                Content="Pick image to use on tile notification"
+                HorizontalAlignment="Stretch"
+                Click="ButtonPickImage_Click"/>
+
+            <RichTextBlock Margin="0,12,0,0">
+                <Paragraph>The above button opens an image picker. When you select a picture, the app will copy the image to the app's local data, and then that image can be used on the live tile notification.</Paragraph>
+            </RichTextBlock>
+
+            <Border
+                Background="{StaticResource ApplicationAccentBrush}"
+                Width="70"
+                Height="70"
+                Margin="12"
+                Padding="8">
+                <Image
+                    x:Name="ImageLogoPreview"
+                    Stretch="UniformToFill"/>
+            </Border>
+
+            <Button
+                x:Name="ButtonPinTile"
+                Content="Pin tile with this logo"
+                HorizontalAlignment="Stretch"
+                IsEnabled="False"
+                Click="ButtonPinTile_Click"/>
+
+            <RichTextBlock
+                Margin="0,12,0,0">
+                <Paragraph>
+                    The above button creates a new SecondaryTile that references the previously selected and saved image via "ms-appdata:///" since the image is stored locally in the app's data.
+                </Paragraph>
+            </RichTextBlock>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>

@@ -1,0 +1,49 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario1_BuildNewRss.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This sample demonstrates how to use the XML APIs in the Windows Runtime to read text content into RSS template.</p>
+                <p>To run the sample, type some text in <b>RSS Content</b> text box, then click the <b>Build RSS Feed</b> button.</p>
+                RSS Content
+                <input id="scenario1RssInput" type="text" class="win-textbox">
+                <br>
+                <button id="scenario1BtnDefault" class="action win-button" disabled="disabled">Build Rss Feed</button>
+                <br>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <div>
+                <h3 class="win-type-title">RSS Template</h3>
+                <textarea id="scenario1OriginalData" name="rssTemplate" readonly="readonly" cols="60" rows="9" style="height:auto; width:auto" class="win-textarea"></textarea>
+            </div>
+            <div>
+                <h3 class="win-type-title">Output</h3>
+                <textarea id="scenario1Result" name="result" readonly="readonly" cols="60" rows="9" style="height:auto; width:auto" class="win-textarea"></textarea>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

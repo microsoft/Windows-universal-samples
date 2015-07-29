@@ -1,0 +1,130 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Define"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Create an Appointment object and initialize its properties.
+                    Note that the appointment is not saved, so it will not show up in
+                    an appointment calendar.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <VariableSizedWrapGrid Orientation="Horizontal">
+                        <StackPanel Margin="0,0,10,0">
+                            <TextBlock Style="{StaticResource BasicTextStyle}" FontWeight="SemiBold" Margin="0,10,0,10">Start Time:</TextBlock>
+                            <DatePicker x:Name="StartTimeDatePicker" Margin="0,10,0,10"/>
+                            <TimePicker x:Name="StartTimeTimePicker" Margin="0,10,0,10"/>
+                            <TextBlock Style="{StaticResource BasicTextStyle}" FontWeight="SemiBold" Margin="0,10,0,10">Subject:</TextBlock>
+                            <TextBox x:Name="SubjectTextBox" Width="320" HorizontalAlignment="Left"/>
+                            <TextBlock Style="{StaticResource BasicTextStyle}" FontWeight="SemiBold" Margin="0,10,0,10">Location:</TextBlock>
+                            <TextBox x:Name="LocationTextBox" Width="320" HorizontalAlignment="Left"/>
+                            <TextBlock Style="{StaticResource BasicTextStyle}" FontWeight="SemiBold" Margin="0,10,0,10">Details:</TextBlock>
+                            <TextBox x:Name="DetailsTextBox" Width="320" HorizontalAlignment="Left"/>
+                            <TextBlock Style="{StaticResource BasicTextStyle}" FontWeight="SemiBold" Margin="0,10,0,10">Duration:</TextBlock>
+                            <ComboBox x:Name="DurationComboBox" SelectedIndex="0">
+                                <ComboBoxItem x:Name="duration30">30 Minutes</ComboBoxItem>
+                                <ComboBoxItem x:Name="duration60">1 Hour</ComboBoxItem>
+                            </ComboBox>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource BasicTextStyle}" FontWeight="SemiBold" Margin="0,10,0,10">All Day:</TextBlock>
+                                <CheckBox x:Name="AllDayCheckBox" Margin="10,0,0,0"></CheckBox>
+                            </StackPanel>
+                            <TextBlock Style="{StaticResource BasicTextStyle}" FontWeight="SemiBold" Margin="0,10,0,10">Reminder:</TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox x:Name="ReminderCheckBox" Checked="ReminderCheckBox_Checked" Unchecked="ReminderCheckBox_UnChecked">Has Reminder?</CheckBox>
+                                <ComboBox x:Name="ReminderComboBox" Visibility="Collapsed" SelectedIndex="0" Margin="10,0,0,0">
+                                    <ComboBoxItem x:Name="reminder15">15 Minutes</ComboBoxItem>
+                                    <ComboBoxItem x:Name="reminder60">1 Hour</ComboBoxItem>
+                                    <ComboBoxItem x:Name="reminder1day">1 Day</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource BasicTextStyle}" FontWeight="SemiBold" Margin="0,10,0,10">Busy Status:</TextBlock>
+                            <ComboBox x:Name="BusyStatusComboBox" SelectedIndex="0">
+                                <ComboBoxItem x:Name="bsBusy">Busy</ComboBoxItem>
+                                <ComboBoxItem x:Name="bsTentative">Tentative</ComboBoxItem>
+                                <ComboBoxItem x:Name="bsFree">Free</ComboBoxItem>
+                                <ComboBoxItem x:Name="bsOutofOffice">Out of Office</ComboBoxItem>
+                                <ComboBoxItem x:Name="bsWorkingElsewhere">Working Elsewhere</ComboBoxItem>
+                            </ComboBox>
+                            <TextBlock Style="{StaticResource BasicTextStyle}" FontWeight="SemiBold" Margin="0,10,0,10">Sensitivity:</TextBlock>
+                            <ComboBox x:Name="SensitivityComboBox" SelectedIndex="0">
+                                <ComboBoxItem x:Name="sPublic">Public</ComboBoxItem>
+                                <ComboBoxItem x:Name="sPrivate">Private</ComboBoxItem>
+                            </ComboBox>
+                            <TextBlock Style="{StaticResource BasicTextStyle}" FontWeight="SemiBold" Margin="0,10,0,10">Uri:</TextBlock>
+                            <TextBox x:Name="UriTextBox" Width="320" HorizontalAlignment="Left"></TextBox>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" FontWeight="SemiBold" Margin="0,10,0,10">Organizer:</TextBlock>
+                                <RadioButton x:Name="OrganizerRadioButton" GroupName="InviteeOrganizer" Margin="10,0,0,0" Checked="OrganizerRadioButton_Checked">Has an Organizer?</RadioButton>
+                            </StackPanel>
+                            <StackPanel x:Name="OrganizerStackPanel" Visibility="Collapsed">
+                                <TextBlock Style="{StaticResource BasicTextStyle}" Margin="20,0,0,10">Organizer Display Name:</TextBlock>
+                                <TextBox x:Name="OrganizerDisplayNameTextBox" Width="320" Margin="20,0,0,10" HorizontalAlignment="Left"></TextBox>
+                                <TextBlock Style="{StaticResource BasicTextStyle}" Margin="20,0,0,10">Organizer Address:</TextBlock>
+                                <TextBox x:Name="OrganizerAddressTextBox" Width="320" Margin="20,0,0,10" HorizontalAlignment="Left"></TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" FontWeight="SemiBold" Margin="0,10,0,10">Invite:</TextBlock>
+                                <RadioButton x:Name="InviteeRadioButton" GroupName="InviteeOrganizer" Margin="10,0,0,0" Checked="InviteeRadioButton_Checked">Has an Invitee?</RadioButton>
+                            </StackPanel>
+                            <StackPanel x:Name="InviteeStackPanel" Visibility="Collapsed">
+                                <TextBlock Style="{StaticResource BasicTextStyle}" Margin="20,0,0,10">Invitee Display Name:</TextBlock>
+                                <TextBox x:Name="InviteeDisplayNameTextBox" Width="320" Margin="20,0,0,10" HorizontalAlignment="Left"></TextBox>
+                                <TextBlock Style="{StaticResource BasicTextStyle}" Margin="20,0,0,10">Invitee Address:</TextBlock>
+                                <TextBox x:Name="InviteeAddressTextBox" Width="320" Margin="20,0,0,10" HorizontalAlignment="Left"></TextBox>
+                                <TextBlock Style="{StaticResource BasicTextStyle}" Margin="20,0,0,10">Invitee Role:</TextBlock>
+                                <ComboBox x:Name="RoleComboBox" SelectedIndex="0" Margin="20,0,0,10">
+                                    <ComboBoxItem x:Name="roleRequired">Required Attendee</ComboBoxItem>
+                                    <ComboBoxItem x:Name="roleOptional">Optional Attendee</ComboBoxItem>
+                                    <ComboBoxItem x:Name="roleResource">Resource</ComboBoxItem>
+                                </ComboBox>
+                                <TextBlock Style="{StaticResource BasicTextStyle}" Margin="20,10,0,10">Invitee Response:</TextBlock>
+                                <ComboBox x:Name="ResponseComboBox" SelectedIndex="0" Margin="20,10,0,10">
+                                    <ComboBoxItem x:Name="respNone">None</ComboBoxItem>
+                                    <ComboBoxItem x:Name="respTentative">Tentative</ComboBoxItem>
+                                    <ComboBoxItem x:Name="respAccepted">Accepted</ComboBoxItem>
+                                    <ComboBoxItem x:Name="respDeclined">Declined</ComboBoxItem>
+                                    <ComboBoxItem x:Name="respUnknown">Unknown</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+                        </StackPanel>
+                    </VariableSizedWrapGrid>
+                    <TextBlock Style="{StaticResource BasicTextStyle}" Margin="0,10,0,10">
+                        Note: Recurrence is demonstrated in a separate scenario in this sample.
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal" x:Name="ButtonsStackPanel" Margin="0,10,0,10">
+                        <Button x:Name="CreateAppointmentButton" Content="Create Appointment" Margin="0,0,10,0" Click="Create_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

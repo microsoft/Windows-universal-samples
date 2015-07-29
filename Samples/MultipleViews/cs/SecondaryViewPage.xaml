@@ -1,0 +1,50 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!--
+This page is shown in secondary views created by this app.
+See Scenario 1 for details on how to create a secondary view
+-->
+
+<Page
+    x:Class="SDKTemplate.SecondaryViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+        <StackPanel Background="{StaticResource ApplicationPageBackgroundThemeBrush}" x:Name="LayoutRoot">
+            <TextBlock Style="{StaticResource SampleHeaderTextStyle}">This is a secondary view</TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{StaticResource BasicTextStyle}">Title (appears in system switchers):</TextBlock>
+                <TextBox x:Name="TitleBox" Grid.Column="1"></TextBox>
+                <Button Grid.Column="2" Click="SetTitle_Click">Set title</Button>
+                <Button Grid.Column="3" Click="ClearTitle_Click">Clear title</Button>
+            </Grid>
+            <Button Click="ProtocolLaunch_Click">Activate this app for a protocol</Button>
+            <Button Click="GoToMain_Click">Switch to main view</Button>
+            <Button Click="HideView_Click">Switch to main and hide this view</Button>
+            <TextBlock x:Name="ProtocolText" Visibility="Collapsed" Style="{StaticResource BasicTextStyle}">
+                <Run>This window was launched with protocol: </Run><Run x:Name="ProtocolContent"/>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Page>

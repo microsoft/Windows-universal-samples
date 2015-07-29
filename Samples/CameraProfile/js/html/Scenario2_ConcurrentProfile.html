@@ -1,0 +1,39 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the Microsoft Public License.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/Scenario2_ConcurrentProfile.css">
+    <script src="/js/Scenario2_ConcurrentProfile.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Utilize camera profiles to verify if a device supports concurrent camera usage. In this example we query a device for concurrency by checking if both front and rear cameras have a matching concurrent profile. If so we initialize media capture settings
+                of both devices to the concurrent profile.
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <button id="checkConcurrentProfileBtn" class="win-button">Query for Concurrent Profile</button>
+        </div>
+    </div>
+    <div id="outputBox" style="height:100%;width:100%;font-size:x-small;overflow:auto;white-space:pre;"></div>
+</body>
+
+</html>

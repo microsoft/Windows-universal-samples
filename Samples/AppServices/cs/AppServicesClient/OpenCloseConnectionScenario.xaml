@@ -1,0 +1,62 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AppServicesClient.OpenCloseConnectionScenario"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppServicesClient"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Open a connection to an app service that can generate a random 
+                    number between a minimum value and maximum value. Generates the 
+                    random number and then closes the connection by disposing the
+                    AppServiceConnection.
+                </TextBlock>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" Margin="0,5,0,0" TextWrapping="Wrap">
+                    Tap or click Generate Random Number to 
+                    generate a random number.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Minimum Value:" VerticalAlignment="Center"/>
+                        <TextBox x:Name="MinValue" Text="0" VerticalAlignment="Center" Margin="5,0,0,0" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBlock Text="Minimum Value:" VerticalAlignment="Center"/>
+                        <TextBox x:Name="MaxValue" Text="10" VerticalAlignment="Center" Margin="5,0,0,0" />
+                    </StackPanel>
+                    <Button x:Name="GenerateRandomNumber" Content="Generate Random Number" Margin="0, 10, 0, 0" Click="GenerateRandomNumber_Click" />
+                    <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                        <TextBlock Text="Result:" VerticalAlignment="Center" />
+                        <TextBlock x:Name="Result" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

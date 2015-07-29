@@ -1,0 +1,35 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario1-metrics.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>Demonstrates how to use the Animation Metrics API to access the raw parameters that define the animations in the Windows Animation Library.</p>
+                <p>This enables developers of applications and application frameworks to create animations consistent with Windows and other apps that use the Windows Animation Library.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <select id="animationType" size="3" class="win-dropdown">
+                <option class="win-dropdown" value="added">AddToList animation (Added target)</option>
+                <option class="win-dropdown" value="affected">AddToList animation (Affected target)</option>
+                <option class="win-dropdown" value="enterPage">EnterPage animation</option>
+            </select>
+        </div>
+        <div id="scenarioOutput">
+            <p id="outputText"></p>
+        </div>
+    </div>
+</body>
+
+</html>

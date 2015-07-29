@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SpeechAndTTS</RootNamespace>
+    <AssemblyName>SpeechAndTTS</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\SharedContent\cs\App.xaml.cs">
+      <Link>App.xaml.cs</Link>
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AudioCapturePermissions.cs" />
+    <Compile Include="ContinuousDictationScenario.xaml.cs">
+      <DependentUpon>ContinuousDictationScenario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ContinuousRecognitionListGrammarScenario.xaml.cs">
+      <DependentUpon>ContinuousRecognitionListGrammarScenario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ContinuousRecognitionSRGSConstraintScenario.xaml.cs">
+      <DependentUpon>ContinuousRecognitionSRGSConstraintScenario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\MainPage.xaml.cs">
+      <Link>MainPage.xaml.cs</Link>
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PredefinedDictationGrammarScenario.xaml.cs">
+      <DependentUpon>PredefinedDictationGrammarScenario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PredefinedWebSearchGrammarScenario.xaml.cs">
+      <DependentUpon>PredefinedWebSearchGrammarScenario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListConstraintScenario.xaml.cs">
+      <DependentUpon>ListConstraintScenario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleConfiguration.cs" />
+    <Compile Include="SRGSConstraintScenario.xaml.cs">
+      <DependentUpon>SRGSConstraintScenario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PauseAsyncScenario.xaml.cs">
+      <DependentUpon>PauseAsyncScenario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SynthesizeSSMLScenario.xaml.cs">
+      <DependentUpon>SynthesizeSSMLScenario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SynthesizeTextScenario.xaml.cs">
+      <DependentUpon>SynthesizeTextScenario.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
+      <Link>App.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="ContinuousDictationScenario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ContinuousRecognitionListGrammarScenario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ContinuousRecognitionSRGSConstraintScenario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\..\SharedContent\cs\MainPage.xaml">
+      <Link>MainPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PredefinedDictationGrammarScenario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PredefinedWebSearchGrammarScenario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ListConstraintScenario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SRGSConstraintScenario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Link>Styles\Styles.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PauseAsyncScenario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SynthesizeSSMLScenario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SynthesizeTextScenario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
+      <Link>Properties\Default.rd.xml</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Link>Assets\microsoft-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Link>Assets\smallTile-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Link>Assets\splash-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>Assets\squareTile-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Link>Assets\storeLogo-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Link>Assets\tile-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Link>Assets\windows-sdk.png</Link>
+    </Content>
+    <Content Include="..\shared\SRGS\de-DE\SRGSColors.xml">
+      <Link>SRGS\de-DE\SRGSColors.xml</Link>
+    </Content>
+    <Content Include="..\shared\SRGS\en-GB\SRGSColors.xml">
+      <Link>SRGS\en-GB\SRGSColors.xml</Link>
+    </Content>
+    <Content Include="..\shared\SRGS\en-US\SRGSColors.xml">
+      <Link>SRGS\en-US\SRGSColors.xml</Link>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="..\shared\SRGS\es-ES\SRGSColors.xml">
+      <Link>SRGS\es-ES\SRGSColors.xml</Link>
+    </Content>
+    <Content Include="..\shared\SRGS\fr-FR\SRGSColors.xml">
+      <Link>SRGS\fr-FR\SRGSColors.xml</Link>
+    </Content>
+    <Content Include="..\shared\SRGS\it-IT\SRGSColors.xml">
+      <Link>SRGS\it-IT\SRGSColors.xml</Link>
+    </Content>
+    <Content Include="..\shared\SRGS\zh-CN\SRGSColors.xml">
+      <Link>SRGS\zh-CN\SRGSColors.xml</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-US\LocalizationSpeechResources.resw">
+      <Link>Strings\en-US\LocalizationSpeechResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\fr-FR\LocalizationSpeechResources.resw">
+      <Link>Strings\fr-FR\LocalizationSpeechResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-US\LocalizationTTSResources.resw">
+      <Link>Strings\en-US\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\fr-FR\LocalizationTTSResources.resw">
+      <Link>Strings\fr-FR\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\de-DE\LocalizationSpeechResources.resw">
+      <Link>Strings\de-DE\LocalizationSpeechResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\de-DE\LocalizationTTSResources.resw">
+      <Link>Strings\de-DE\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\es-ES\LocalizationSpeechResources.resw">
+      <Link>Strings\es-ES\LocalizationSpeechResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\es-ES\LocalizationTTSResources.resw">
+      <Link>Strings\es-ES\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\it-IT\LocalizationSpeechResources.resw">
+      <Link>Strings\it-IT\LocalizationSpeechResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\it-IT\LocalizationTTSResources.resw">
+      <Link>Strings\it-IT\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\zh-CN\LocalizationSpeechResources.resw">
+      <Link>Strings\zh-CN\LocalizationSpeechResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\zh-CN\LocalizationTTSResources.resw">
+      <Link>Strings\zh-CN\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-GB\LocalizationSpeechResources.resw">
+      <Link>Strings\en-GB\LocalizationSpeechResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-GB\LocalizationTTSResources.resw">
+      <Link>Strings\en-GB\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-IN\LocalizationTTSResources.resw">
+      <Link>Strings\en-IN\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\es-MX\LocalizationTTSResources.resw">
+      <Link>Strings\es-MX\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\ja-JP\LocalizationTTSResources.resw">
+      <Link>Strings\ja-JP\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\ko-KR\LocalizationTTSResources.resw">
+      <Link>Strings\ko-KR\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\pl-PL\LocalizationTTSResources.resw">
+      <Link>Strings\pl-PL\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\pt-BR\LocalizationTTSResources.resw">
+      <Link>Strings\pt-BR\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\ru-RU\LocalizationTTSResources.resw">
+      <Link>Strings\ru-RU\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\zh-TW\LocalizationTTSResources.resw">
+      <Link>Strings\zh-TW\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,35 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.Toasts.Actions.InputText.RetrievingArgs.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls">
+
+    <controls:StepsControl x:Name="stepsControl" IsNextEnabled="False" Step="1">
+
+        <StackPanel>
+
+            <controls:PopToastControl
+                    x:Name="popToastControlStep1"/>
+
+            <RichTextBlock>
+                <Paragraph>Click "Pop Toast" above to pop the toast</Paragraph>
+                <Paragraph/>
+                <Paragraph>IMPORTANT: Leave this app running, in the foreground.</Paragraph>
+                <Paragraph/>
+                <Paragraph>ACTION: Type "Windows 10" in the first text box, click submit</Paragraph>
+
+                <Paragraph/>
+                <Paragraph>Once this app is activated and data is validated, this will automatically continue to the next step...</Paragraph>
+            </RichTextBlock>
+
+        </StackPanel>
+        
+
+    </controls:StepsControl>
+
+    
+</UserControl>

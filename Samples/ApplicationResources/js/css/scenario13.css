@@ -1,0 +1,78 @@
+﻿.resource-id
+{
+    padding: 10px 10px 10px 0;
+}
+
+.resource-id-label
+{
+    font-size: small;
+}
+
+.resource-candidates
+{
+    display:-ms-box;
+    -ms-box-orient: horizontal;
+}
+
+.candidate
+{
+    position:relative;
+    width: 300px;
+    height: 150px;
+    display: -ms-grid;
+    -ms-grid-columns:2;
+    -ms-grid-rows:2;
+    background-color:#222;
+    color:#FFF;
+    margin:10px 10px 10px 0;
+}
+
+.candidate-index
+{
+    position:absolute;
+    top:0;
+    left:0;
+    width:20px;
+    height:20px;
+    text-align:center;
+    background-color: #DDD;
+    color: #222;
+}
+
+.candidate-qualifiers
+{
+    -ms-grid-column:1;
+    -ms-grid-row:1;
+    padding:20px 10px 10px 10px;
+}
+
+.candidate-metadata
+{
+    -ms-grid-column:2;
+    -ms-grid-row:1;
+    padding:10px;
+}
+
+    .candidate-metadata label
+    {
+        display: block;
+        color:#FFF;
+    }
+
+.candidate-value
+{
+    -ms-grid-column-span:2;
+    -ms-grid-row:2;
+    padding:10px;
+    color:#DDD;
+}
+
+.qualifier-name
+{
+    font-size:small;
+}
+
+.qualifier-value
+{
+    font-size:large;
+}

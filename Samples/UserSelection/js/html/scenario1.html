@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>3 different attribute values</title>
+    <link rel="stylesheet" href="/css/scenario1.css">
+    <script src="/js/scenario1.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>In this scenario the parent div&apos;s -ms-user-select attribute is set &quot;none&quot;, thus disabling selection for the parent div. You will find 5 child divs that have their -ms-user-select attribute set to &quot;inherit&quot;, &quot;element&quot;,
+            &quot;text&quot;, &quot;initial&quot; and &quot;none&quot; respectively.</p>
+        <p> The user has the ability to select everything within the div with attribute set to &quot;element&quot;. However if you begin selection from the div marked &quot;text&quot; can select anything on the page. The &quot;inherit&quot; div and the &quot;auto&quot;
+            div are unselectable just like the parent div.
+        </p>
+
+        <br>
+        <br>
+    </div>
+
+    <div class="scenario1" data-win-control="SdkSample.ScenarioOutput">
+
+        <div id="parentDiv">
+            <p>The -ms-user-select attribute for the Parent Div is set to &quot;none&quot;. Hence selection is disabled. </p>
+            <div id="DivA">
+                <p> The -ms-user-select attribute for this div is set to &quot;inherit&quot;</p>
+            </div>
+            <div id="DivB">
+                <p> The -ms-user-select attribute for this div is set to &quot;element&quot; </p>
+            </div>
+            <div id="DivC">
+                <p>The -ms-user-select attribute for this div is set to &quot;text&quot; </p>
+                <!--If you have copyrighted content it is advisable to not use this value for the -ms-user-select attribute for any of the divs on the page-->
+            </div>
+            <div id="DivD">
+                <p> Either you don&apos;t use the -ms-user-select attribute or set it to &quot;auto&quot;</p>
+                <!-- "initial" in VS intellisense -->
+            </div>
+            <div id="DivE">
+                <p>The -ms-user-select attribute for this div is set to &quot;none&quot;</p>
+            </div>
+        </div>
+
+
+
+    </div>
+</body>
+
+</html>

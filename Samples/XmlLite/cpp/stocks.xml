@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<portfolio xmlns:dt="urn:schemas-microsoft-com:datatypes">
+    <stock exchange="nasdaq">
+        <name>new</name>
+        <symbol>zzzz</symbol>
+        <price>20.313</price>
+    </stock>
+    <stock exchange="nyse">
+        <name>zacx corp</name>
+        <symbol>ZCXM</symbol>
+        <price>28.875</price>
+    </stock>
+    <stock exchange="nasdaq">
+        <name>zaffymat inc</name>
+        <symbol>ZFFX</symbol>
+        <price>92.250</price>
+    </stock>
+    <stock exchange="nasdaq">
+        <name>zysmergy inc</name>
+        <symbol>ZYSZ</symbol>
+        <price>20.313</price>
+    </stock>
+</portfolio>

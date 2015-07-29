@@ -1,0 +1,88 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario2.css">
+    <script src="/js/helpers.js"></script>
+    <script src="/js/scenario2.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>Use the imaging APIs (Windows.Graphics.Imaging) to read and edit bitmap properties and apply transformations such as scale, crop and rotate.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <button id="buttonOpen" class="win-button">Open</button>
+            <button id="buttonRotateLeft" class="win-button">Rotate left</button>
+            <button id="buttonRotateRight" class="win-button">Rotate right</button>
+            <button id="buttonSave" class="win-button">Save</button>
+            <button id="buttonSaveAs" class="win-button">Save as</button>
+            <button id="buttonClose" class="win-button">Close</button>
+
+            <div class="centeredImageFrame">
+                <div class="centeredImageFrameCell">
+                    <img class="imageHolder withText inCenteredFrame" id="outputImage" alt="image holder" src="">
+                </div>
+            </div>
+
+            <table>
+                <tr>
+                    <td>
+                        <input id="propertiesScaleFactorEdit" type="range" max="100" min="10" step="5" class="win-slider">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Scale:</p>
+                    </td>
+                    <td>
+                        <p id="propertiesScaleFactor"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Scaled width:</p>
+                    </td>
+                    <td>
+                        <p id="propertiesWidth"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Scaled height:</p>
+                    </td>
+                    <td>
+                        <p id="propertiesHeight"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>User rotation:</p>
+                    </td>
+                    <td>
+                        <p id="propertiesUserRotation"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>EXIF orientation:</p>
+                    </td>
+                    <td>
+                        <p id="propertiesExifOrientation"></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

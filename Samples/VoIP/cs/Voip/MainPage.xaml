@@ -1,0 +1,88 @@
+﻿<Page
+    x:Class="SDKTemplate.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+          Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0">
+            <TextBlock FontSize="12" Text="Who to call?" Margin="5"/>
+            <TextBox x:Name="txt_CallerName"  Text="Larry Zhang" Margin="5"/>
+            <TextBox x:Name="txt_CallerNumber" Text="(555) 555-0100" Margin="5"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1">
+            <Grid HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="165"/>
+                    <ColumnDefinition Width="165"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="btn_NewOutgoingCall" 
+                        Grid.Column="0" Grid.Row="0" 
+                        Content="Outgoing Call" 
+                        HorizontalAlignment="Left"  VerticalAlignment="Top" 
+                        Width="150" Height="40" 
+                        Margin="5"
+                        Click="btn_NewOutgoingCall_Click"/>
+                <Button x:Name="btn_NewIncomingCall" Grid.Column="1" Grid.Row="0"  Content="Incoming Call" 
+                        HorizontalAlignment="Left"  VerticalAlignment="Top" 
+                        Width="150" Height="40" 
+                        Margin="5" Click="btn_NewIncomingCall_Click"/>
+                <Button x:Name="btn_EndCall" Grid.Column="0"  Grid.Row="1" Content="End Call" 
+                        HorizontalAlignment="Left"  VerticalAlignment="Top" 
+                        Width="150" Height="40" 
+                        Margin="5" Click="btn_EndCall_Click"/>
+                <Button x:Name="btn_GetCallDuration" Grid.Column="1"  Grid.Row="1" Content="Get Call Duration" 
+                        HorizontalAlignment="Left"  VerticalAlignment="Top" 
+                        Width="150" Height="40" 
+                        Margin="5" Click="btn_GetCallDuration_Click"/>
+
+                <ScrollViewer MaxHeight="250"
+                              Margin="5,0,5,0"
+                              Grid.Column="1" Grid.Row="3" 
+                              BorderBrush="AliceBlue"
+                              BorderThickness="2"
+                              Visibility="Visible">
+                    <TextBlock x:Name="txtBx_ActionLog" 
+                           HorizontalAlignment="Left" VerticalAlignment="Top" 
+                           TextWrapping="WrapWholeWords" Text="Action Log" 
+                           Height="Auto"
+                           MaxWidth="160" 
+                           Margin="5"/>
+                </ScrollViewer>
+
+                <StackPanel Grid.Row="3" Grid.Column="0">
+                    <CheckBox x:Name="CallRequested" Content="Action Requested" IsEnabled="False" IsChecked="False" Margin="5"/>
+                    <CheckBox x:Name="RequestSuccess" Content="Request Success" IsEnabled="False" IsChecked="False" Margin="5"/>
+                    <CheckBox x:Name="InProgress" Content="Outgoing Call In Progress" IsEnabled="False" IsChecked="False" Margin="5, 20, 5, 5"/>
+                    <MediaElement x:Name="playbackElement1" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+        <TextBlock Grid.Row="2"
+                    Text="Click Call Duration button to learn the length of active call." 
+                    Margin="15,20,5,15" 
+                    VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Left" 
+                    TextWrapping="WrapWholeWords"/>
+    </Grid>
+</Page>

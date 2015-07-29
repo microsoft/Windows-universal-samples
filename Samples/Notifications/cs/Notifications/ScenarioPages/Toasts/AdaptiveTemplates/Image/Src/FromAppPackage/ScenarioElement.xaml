@@ -1,0 +1,39 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.Toasts.AdaptiveTemplates.Image.Src.FromAppPackage.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls"
+    Loaded="UserControl_Loaded">
+
+    <controls:StepsControl x:Name="stepsControl" IsNextEnabled="True" Step="1">
+
+        <StackPanel>
+
+            <controls:InstructionControl Instruction="1">
+
+                <controls:PopToastControl
+                    x:Name="popToastControl"/>
+
+            </controls:InstructionControl>
+            
+            <controls:InstructionControl Instruction="2">
+                <RichTextBlock>
+                    <Paragraph>Make sure it has the following image displayed in it (which is pulled from app package).</Paragraph>
+                    <Paragraph>
+                        <InlineUIContainer>
+                            <Image Source="Image.jpg"/>
+                        </InlineUIContainer>
+                    </Paragraph>
+                </RichTextBlock></controls:InstructionControl>
+
+        </StackPanel>
+        
+
+    </controls:StepsControl>
+
+    
+</UserControl>

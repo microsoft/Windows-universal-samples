@@ -1,0 +1,44 @@
+﻿
+{
+    "scenario2Paragraph"                : "これは英語で書かれた短い文章です。リソース ファイル (例えば strings/ja-JP/resources.resjson) 内に書かれ、そのストリングは HTML マークアップを置き換えるためにランタイム時に読まれます。リソース ファイルは次のことをします :",
+    "_scenario2Paragraph.comment"       : "Replace 'English' and 'en' with the native name of the language this text is in and the BCP-47 tag of the language. Do not replace the filename, just the folder.",
+
+    "scenario2ListItem1"                : "BCP-47 言語タグでマークされたフォルダーに保存してください。",
+    "_scenario2ListItem1.comment"       : "Do not replace the text 'BCP-47' ",
+
+    "scenario2ListItem2"                : "簡単にアクセスするために、通常は resources.resjson と名付けます。",
+    "_scenario2ListItem2.comment"       : "Do not replace the filename",
+
+    "scenario3Message"                  : "これは翻訳されるサンプル メッセージです。",
+
+    "scenario7Param"                    : "ja",
+
+    "scenario8MessageCount"             : "<span data-win-bind=\"innerText:count\"></span>メッセージがあります。",
+    "_scenario8MessageCount.comment"    : "Do not change the HTML markup.",
+
+    "scenario9AriaLabel"                : "これは翻訳された ARIA ラベルです",
+    "_scenario9AriaLabel.source"        : "This is a localized ARIA label",
+    "_scenario9AriaLabel.comment"       : "Don't change the word ARIA",
+
+    "displayName"                       : "アプリケーション リソース JS SDK サンプル",
+    "_displayName.source"               : "Application Resources JS SDK Sample",
+    "_displayName.comment"              : "Don't change 'SDK'",
+
+    "description"                       : "アプリケーション リソース JS SDK サンプル",
+    "_description.source"               : "Application Resources JS SDK Sample",
+    "_description.comment"              : "Don't change 'SDK'",
+
+    "appDisplayName"                    : "アプリケーション リソース JS SDK サンプル",
+    "_appDisplayName.source"            : "Application Resources JS SDK Sample",
+    "_appDisplayName.comment"           : "Don't change 'SDK'",
+
+    "appDescription"                    : "アプリケーション リソース JS SDK サンプル",
+    "_appDescription.source"            : "Application Resources JS SDK Sample",
+    "_appDescription.comment"           : "Don't change 'SDK'",
+
+    "shortName"                         : "JS リソース",
+    "_shortName.source"                 : "JS Resources",
+    "_shortName.comment"                : "Must be less than 13 characters and should be an abbreviation for the displayName"
+
+
+}

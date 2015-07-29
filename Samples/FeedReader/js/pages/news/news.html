@@ -1,0 +1,87 @@
+﻿<!--
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>News</title>
+
+    <!-- WinJS references -->
+    <link href="/Microsoft.WinJS.4.0/css/ui-dark.css" rel="stylesheet">
+    <script src="/Microsoft.WinJS.4.0/js/WinJS.js"></script>
+
+    <link href="/css/default.css" rel="stylesheet">
+    <link href="/pages/news/news.css" rel="stylesheet">
+    <script src="/pages/news/news.js"></script>
+</head>
+
+<body class="win-type-body">
+    <!-- Template for the feed header -->
+    <div id="feedHeaderTemplate" data-win-control="WinJS.Binding.Template" data-win-options="{extractChild: true}">
+        <button class="group-header win-type-x-large win-type-interactive win-button" data-win-bind="groupKey: key" role="link">
+            <span class="group-title win-type-x-large win-type-ellipsis" data-win-bind="innerText: title;"></span>
+            <span class="group-chevron"></span>
+        </button>
+    </div>
+
+    <!-- Template for the image article item -->
+    <div id="imageArticleTemplate" data-win-control="WinJS.Binding.Template" data-win-options="{extractChild: true}">
+        <div data-win-bind="className: tileType">
+            <div class="image" data-win-bind="style.background: imageBackground"></div>
+            <div class="overlay">
+                <h4 class="title win-type-subtitle" data-win-bind="innerText: title"></h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template for the text article item -->
+    <div id="textArticleTemplate" data-win-control="WinJS.Binding.Template" data-win-options="{extractChild: true}">
+        <div data-win-bind="className: tileType">
+            <h2 class="title win-type-subheader" data-win-bind="innerText: title"></h2>
+        </div>
+    </div>
+
+    <!-- Template for feed error -->
+    <div id="errorTemplate" data-win-control="WinJS.Binding.Template">
+        <div data-win-bind="className: tileType">
+            <h2 class="error win-type-subheader" data-win-bind="innerText: error"></h2>
+        </div>
+    </div>
+
+    <!-- Template for the feed item -->
+    <div id="feedTileTemplate" data-win-control="WinJS.Binding.Template" data-win-options="{extractChild: true}">
+        <div class="feedTile">
+            <h2 class="title win-type-subheader" data-win-bind="innerText: title"></h2>
+        </div>
+    </div>
+
+    <!-- The content that will be loaded and displayed. -->
+    <div id="news" class="fragment">
+        <header aria-label="Header content" role="banner">
+            <h1 class="titlearea win-type-ellipsis win-type-header">
+                <span class="pagetitle">News</span>
+            </h1>
+        </header>
+        <section aria-label="Main content" role="main">
+            <div id="errorDiv"></div>
+            <div id="articlesListViewArea" data-win-control="WinJS.UI.SemanticZoom">
+                <!-- The control that provides the zoomed-in view. -->
+                <div id="articlesListView-in" aria-label="List of articles" data-win-control="WinJS.UI.ListView" data-win-options="{ selectionMode: &apos;none&apos; }"></div>
+
+                <!-- The control that provides the zoomed-out view. -->
+                <div id="articlesListView-out" aria-label="List of feeds" data-win-control="WinJS.UI.ListView" data-win-options="{ selectionMode: &apos;none&apos;, tapBehavior: &apos;invokeOnly&apos; }">
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

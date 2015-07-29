@@ -1,0 +1,38 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario2-camera-image.css">
+    <script src="/js/scenario2-camera-image.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div id="scenarioHeader">
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>Extracting text from image captured from camera.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <div style="position: relative; overflow:hidden">
+                <video id="previewControl" style="width:100%;"></video>
+                <img id="imagePreview" class="imagePreview" hidden style="display:block; margin:auto">
+                <div id="textOverlay" class="textOverlay" hidden style="display:block; margin:auto;"></div>
+            </div>
+        </div>
+        <div id="scenarioFooter">
+            <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{icon: &apos;characters&apos;}" title="Extract text." id="buttonExtract" disabled class="win-button">
+            </button>
+            <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{icon: &apos;camera&apos;}" title="Start camera." id="buttonCamera" class="win-button">
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

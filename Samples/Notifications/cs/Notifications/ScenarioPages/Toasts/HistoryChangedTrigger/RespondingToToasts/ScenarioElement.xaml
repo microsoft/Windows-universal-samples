@@ -1,0 +1,96 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.Toasts.HistoryChangedTrigger.RespondingToToasts.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer x:Name="scrollViewer" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="24">
+
+            
+            <TextBlock
+                x:Name="TextBlockCurrentStep"
+                TextWrapping="Wrap"/>
+            
+            <StackPanel x:Name="StackPanelStep1" Visibility="Collapsed">
+                
+                <RichTextBlock>
+                    <Paragraph FontSize="20">Step 1</Paragraph>
+                    <Paragraph/>
+                    <Paragraph>Three toasts should have appeared.</Paragraph>
+                    <Paragraph/>
+                    <Paragraph>ACTION: Open Action Center and swipe away the one that says "SWIPE ME".</Paragraph>
+                    <Paragraph/>
+                    <Paragraph>Once Removed event from background task is received, this will continue to the next step...</Paragraph>
+                </RichTextBlock>
+
+            </StackPanel>
+
+            <StackPanel x:Name="StackPanelStep2" Visibility="Collapsed">
+
+                <RichTextBlock>
+                    <Paragraph FontSize="20">Step 2</Paragraph>
+                    <Paragraph/>
+                    <Paragraph>Great! Step 1 worked. Now...</Paragraph>
+                    <Paragraph/>
+                    <Paragraph>ACTION: Open Action Center and swipe away the entire Notifications group all at once.</Paragraph>
+                    <Paragraph/>
+                    <Paragraph>Hopefully only one Removed event will be triggered. Once the background task receives a Removed event, this will continue to the next step...</Paragraph>
+                </RichTextBlock>
+
+            </StackPanel>
+
+            <StackPanel x:Name="StackPanelStep3" Visibility="Collapsed">
+
+                <RichTextBlock>
+                    <Paragraph FontSize="20">Step 3</Paragraph>
+                    <Paragraph/>
+                    <Paragraph>Awesome! Now just to make sure there weren't any extra events...</Paragraph>
+                    <Paragraph/>
+                    <Paragraph>ACTION: Stay on this screen for 10 seconds.</Paragraph>
+
+                    <Paragraph/>
+                    <Paragraph>No more events should be received by the background task. We're waiting here to make sure that we don't get any more. After 10 seconds, we'll navigate you to the next step...</Paragraph>
+                </RichTextBlock>
+
+            </StackPanel>
+            
+            <StackPanel x:Name="StackPanelStep4" Visibility="Collapsed">
+                <RichTextBlock>
+                    <Paragraph FontSize="20">SUCCESS!!</Paragraph>
+                    <Paragraph/>
+                    <Paragraph>Everything worked.</Paragraph>
+                    <Paragraph/>
+                    <Paragraph>ACTION: Please mark this scenario as Passed. You're done!</Paragraph>
+                </RichTextBlock>
+            </StackPanel>
+
+            <Border Background="LightGray" Margin="0,12,0,0">
+                <StackPanel Margin="6">
+                    <TextBlock
+                        Text="Change events (via background task)..."/>
+                    <ItemsControl x:Name="ItemsControlChangeEvents">
+
+
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            
+            <RichTextBlock
+                Margin="0,12,0,0">
+                
+                <Paragraph>
+                    Explanation: This registers a background task to listen to toast changed events, and then when the background task is triggered, it calls back to this UI thread.
+                </Paragraph>
+                
+            </RichTextBlock>
+            
+
+        </StackPanel>
+    </ScrollViewer>
+    
+</UserControl>

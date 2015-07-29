@@ -1,0 +1,67 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario_SampleOverview"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource ScenarioDescriptionTextStyle}">
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Margin" Value="0,0,0,20"/>
+                <Setter Property="FontWeight" Value="SemiLight"/>
+            </Style>
+        </Grid.Resources>
+        <Grid x:Name="RootGrid" Margin="12,10,12,12" MaxWidth="600">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Margin="0,0,0,10" Text="Using this sample app:" Style="{StaticResource SampleHeaderTextStyle}"/>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Padding="0,0,15,0">
+                <StackPanel Orientation="Vertical" >
+                    <TextBlock FontWeight="SemiBold" FontSize="20" Margin="0" Text="Basic use" />
+                    <TextBlock Text="This sample demonstrates the integration in XAML of the DirectWrite downloadable font mechanism." />
+                    <TextBlock Text="This sample has scenarios simulating loading of three different documents using Windows fonts that
+may not be installed on all devices. Select one of the document choices to simulate loading a document that uses such a font. The document
+will be displayed intially using fallback fonts. Then after a short delay, XAML will automatically refresh the view using the requested font." />
+                    <TextBlock Text="Note: On a Desktop system, some of the fonts used for this sample app may already be present. If that
+is the case, XAML will immediately display the document using that font; no font download will be needed." />
+                    <TextBlock FontWeight="SemiBold" FontSize="20" Margin="0,10,0,0" Text="Resetting the downloadable font mechanism" />
+                    <TextBlock Text="Once a document has been displayed, the font it uses will be cached locally on the device. To repeat
+the scenario of loading the document when the font is not already cached, it will be necessary to clear the font data from the cache. This
+can be done on a Windows Desktop system using these steps:" />
+                    <TextBlock Margin="0,0,0,10" Text="1. Close this sample app." />
+                    <TextBlock Margin="0,0,0,10" Text="2. Open a Console window (cmd.exe), running as Administrator, and change the directory
+to the directory containing the project files for this sample app." />
+                    <TextBlock Margin="0,0,0,5" Text="3. Run the ClearCloudFontCache PowerShell script included in the sample project folder.
+The following commandline can be used:" />
+                    <TextBlock Margin="20,0,0,10" FontFamily="Consolas" Text="powershell -ExecutionPolicy Bypass -File ClearDownloadableFontCache.ps1" />
+                    <TextBlock Text="4. Restart the sample app." />
+                    <TextBlock Text="You can use these steps as well when debugging your own apps." />
+                    <TextBlock FontWeight="SemiBold" FontSize="20" Margin="0,10,0,0" Text="Observing platform behavior behind the scenes" />
+                    <TextBlock Text="You can observe effects of the platform downloading cloud fonts while the sample app is running by
+opening Task Manager and going to the Performance tab to observe network activity. As each document is opened, you should see a brief
+spike in network activity as the font is downloaded." />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

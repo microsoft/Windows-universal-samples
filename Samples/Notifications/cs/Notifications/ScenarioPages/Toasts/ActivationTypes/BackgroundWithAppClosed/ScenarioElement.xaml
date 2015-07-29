@@ -1,0 +1,43 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.Toasts.ActivationTypes.BackgroundWithAppClosed.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls">
+
+    <controls:StepsControl x:Name="stepsControl" IsNextEnabled="False" Step="1">
+
+        <StackPanel>
+
+            <controls:InstructionControl Instruction="1">
+
+                <controls:PopToastControl
+                    x:Name="popToastControl"/>
+
+            </controls:InstructionControl>
+
+            <controls:InstructionControl Instruction="2">Close this app (but read all these instructions first)</controls:InstructionControl>
+
+            <controls:InstructionControl Instruction="3">
+                <RichTextBlock>
+                    <Paragraph>After app is closed, follow instructions on the toast</Paragraph>
+                </RichTextBlock>
+            </controls:InstructionControl>
+
+            <controls:InstructionControl Instruction="4">
+                <RichTextBlock>
+                    <Paragraph>Once background task is triggered and data is validated, a new toast should appear indicating success. At that point, the scenario is successful, and you can re-open the app and mark it passed.</Paragraph>
+                </RichTextBlock>
+            </controls:InstructionControl>
+
+        </StackPanel>
+
+        
+
+    </controls:StepsControl>
+
+    
+</UserControl>

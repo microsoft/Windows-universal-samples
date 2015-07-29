@@ -1,0 +1,150 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario3.css">
+    <script src="/js/scenario3.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>Pick with Options</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <table id="InputTable">
+                <tr>
+                    <td>
+                        <label for="InputMessage">Message: </label>
+                    </td>
+                    <td>
+                        <input type="text" size="40" id="InputMessage" class="win-textbox" value="Enter your credentials">
+                    </td>
+                    <td width="20px"></td>
+                    <td>
+                        <label for="InputProtocol">Authentication Protocol: </label>
+                    </td>
+                    <td>
+                        <select id="InputProtocol" class="win-dropdown">
+                            <option value="Negotiate" class="win-dropdown">Negotiate</option>
+                            <option value="Basic" class="win-dropdown">Basic</option>
+                            <option value="Kerberos" class="win-dropdown">Kerberos</option>
+                            <option value="NTLM" class="win-dropdown">NTLM</option>
+                            <option value="Digest" class="win-dropdown">Digest</option>
+                            <option value="CredSsp" class="win-dropdown">CredSsp</option>
+                            <option value="Custom" class="win-dropdown">Custom</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="InputCaption">Caption: </label>
+                    </td>
+                    <td>
+                        <input type="text" size="40" id="InputCaption" class="win-textbox" value="WindowCaption">
+                    </td>
+                    <td width="20px"></td>
+                    <td>
+                        <label for="InputCustomProtocol">Custom Protocol:</label>
+                    </td>
+                    <td>
+                        <input type="text" id="InputCustomProtocol" class="win-textbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="InputTarget">Target: </label>
+                    </td>
+                    <td>
+                        <input type="text" size="40" id="InputTarget" class="win-textbox" value="contoso.com">
+                    </td>
+                    <td width="20px"></td>
+                    <td>
+                        <label for="InputCheckboxState">Save Checkbox: </label>
+                    </td>
+                    <td>
+                        <select id="InputCheckboxState" class="win-dropdown">
+                            <option value="Unselected" class="win-dropdown">Unselected</option>
+                            <option value="Selected" class="win-dropdown">Selected</option>
+                            <option value="Hidden" class="win-dropdown">Hidden</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="InputAlwaysShowUI">Always Display: </label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="InputAlwaysShowUI" class="win-checkbox">
+                    </td>
+                    <td width="20px"></td>
+                    <td>
+                        <label for="InputCallerSaves">Caller Saves Cred: </label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="InputCallerSaves" class="win-checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button id="LaunchButton" style="width:100%" class="win-button">Launch</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="OutputDomainName">Domain Name:</label>
+                    </td>
+                    <td>
+                        <input type="text" size="40" id="OutputDomainName" class="win-textbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="OutputUserName">User Name:</label>
+                    </td>
+                    <td>
+                        <input type="text" size="40" id="OutputUserName" class="win-textbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="OutputPassword">Password:</label>
+                    </td>
+                    <td>
+                        <input type="text" size="40" id="OutputPassword" class="win-textbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="OutputCredentialSaved">Saved by API?</label>
+                    </td>
+                    <td>
+                        <input type="text" size="40" id="OutputCredentialSaved" class="win-textbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="OutputCredentialSaveState">Checkbox State</label>
+                    </td>
+                    <td>
+                        <input type="text" size="40" id="OutputCredentialSaveState" class="win-textbox">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

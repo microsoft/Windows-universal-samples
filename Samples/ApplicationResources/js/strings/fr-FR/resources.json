@@ -1,0 +1,6 @@
+﻿
+{
+
+    "scenario3Message"                  : "Ceci est un exemple d'un message qui peut être traduit",
+    "_scenario3Message.source"          : "This is a sample message that is localized "
+}

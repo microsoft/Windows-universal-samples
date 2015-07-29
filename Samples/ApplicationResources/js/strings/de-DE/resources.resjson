@@ -1,0 +1,47 @@
+﻿{
+    "scenario2Paragraph"                : "Dieser kurze Abschnitt wurde auf Deutsch geschrieben. Er ist in einer Resource-Datei (z.B. strings/de-DE/resources.resjson) enthalten, und wird von der Runtime verwendet, um HTML Markup zu modifizieren.  Resource-Dateien sollten:",
+    "_scenario2Paragraph.source"        : "This is a short paragraph written in English. It is authored in a resource file (e.g. strings/de-DE/resources.resjson) and its strings are read at runtime to replace HTML markup. Resource files should:",
+    "_scenario2Paragraph.comment"       : "Replace 'English' and 'en' with the native name of the language this text is in and the BCP-47 tag of the language. Do not replace the filename, just the folder.",
+
+    "scenario2ListItem1"                : "in Verzeichnisse gestellt werden, die nach BCP-47 Sprach-Tags benannt wurde.",
+    "_scenario2ListItem1.source"        : "Be stored in folders marked with their BCP-47 language tag.",
+    "_scenario2ListItem1.comment"       : "Do not replace the text 'BCP-47' ",
+
+    "scenario2ListItem2"                : "'resources.resjson' heissen",
+    "_scenario2ListItem2.source"        : "Do not replace the filename",
+
+    "scenario3Message"                  : "Dieser ist ein Beispielsatz, der übersetzt wurde.",
+    "_scenario3Message.source"          : "This is a sample message that is localized",
+
+    "scenario7Param"                    : "de-DE",
+
+    "scenario8MessageCount"             : "Zahl der Nachrichten: <span data-win-bind=\"innerText:count\" ></span>",
+    "_scenario8MessageCount.source"     : "You have <span data-win-bind=\"innerText:count\"></span> message(s)",
+    "_scenario8MessageCount.comment"    : "Do not change the HTML markup.",
+
+    "scenario9AriaLabel"                : "Diese Bezeichnung wurde in ARIA übersetzt.",
+    "_scenario9AriaLabel.source"        : "This is a localized ARIA label",
+    "_scenario9AriaLabel.comment"       : "Don't change the word ARIA",
+
+    "displayName"                       : "Applikationsresourcen JS SDK Beispiel",
+    "_displayName.source"               : "Application Resources JS SDK Sample",
+    "_displayName.comment"              : "Don't change 'SDK'",
+
+    "description"                       : "Applikationsresourcen JS SDK Beispiel",
+    "_description.source"               : "Application Resources JS SDK Sample",
+    "_description.comment"              : "Don't change 'SDK'",
+
+    "appDisplayName"                    : "Applikationsresourcen JS SDK Beispiel",
+    "_appDisplayName.source"            : "Application Resources JS SDK Sample",
+    "_appDisplayName.comment"           : "Don't change 'SDK'",
+
+    "appDescription"                    : "Applikationsresourcen JS SDK Beispiel",
+    "_appDescription.source"            : "Application Resources JS SDK Sample",
+    "_appDescription.comment"           : "Don't change 'SDK'",
+
+    "shortName"                         : "JS Resourcen",
+    "_shortName.source"                 : "JS Resources",
+    "_shortName.comment"                : "Must be less than 13 characters and should be an abbreviation for the displayName"
+
+
+}

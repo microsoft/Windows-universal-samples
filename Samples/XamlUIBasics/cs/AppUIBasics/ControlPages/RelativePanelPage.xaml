@@ -1,0 +1,40 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AppUIBasics.ControlPages.RelativePanelPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <local:ControlExample HeaderText="A RelativePanel control." ExampleHeight="Auto" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <RelativePanel Width="300">
+            <Rectangle x:Name="Rectangle1" Fill="Red" Height="50" Width="50"/>
+            <Rectangle x:Name="Rectangle2" Fill="Blue" Height="50" Width="50" RelativePanel.RightOf="Rectangle1" Margin="8,0,0,0"/>
+            <Rectangle x:Name="Rectangle3" Fill="Green" Height="50" Width="50" RelativePanel.AlignRightWithPanel="True"/>
+            <Rectangle x:Name="Rectangle4" Fill="Yellow" Height="50" Width="50" RelativePanel.Below="Rectangle3" RelativePanel.AlignHorizontalCenterWith="Rectangle3" Margin="0,8,0,0"/>
+        </RelativePanel>
+        <local:ControlExample.Xaml>
+            <RichTextBlock>
+                <Paragraph>&lt;RelativePanel  Width="300"&gt;</Paragraph>
+                <Paragraph TextIndent="12">&lt;Rectangle x:Name="Rectangle1" Fill="Red" Height="50" Width="50"/&gt;</Paragraph>
+                <Paragraph TextIndent="12">&lt;Rectangle x:Name="Rectangle2" Fill="Blue" Height="50" Width="50" RelativePanel.RightOf="Rectangle1" Margin="8,0,0,0"/&gt;</Paragraph>
+                <Paragraph TextIndent="12">&lt;Rectangle x:Name="Rectangle3" Fill="Green" Height="50" Width="50" RelativePanel.AlignRightWithPanel="True"/&gt;</Paragraph>
+                <Paragraph TextIndent="12">&lt;Rectangle x:Name="Rectangle4" Fill="Yellow" Height="50" Width="50" RelativePanel.Below="Rectangle3" RelativePanel.AlignHorizontalCenterWith="Rectangle3" Margin="0,8,0,0"/&gt;</Paragraph>
+                <Paragraph>&lt;/RelativePanel&gt;</Paragraph>
+            </RichTextBlock>
+        </local:ControlExample.Xaml>
+    </local:ControlExample>
+
+</Page>

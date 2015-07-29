@@ -1,0 +1,30 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.LiveTiles.BasicState.Logos.Source.AppPackage.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="24">
+            
+            <Button
+                x:Name="ButtonPinTile"
+                Content="Pin secondary tile"
+                HorizontalAlignment="Stretch"
+                Click="ButtonPinTile_Click"/>
+            
+            <RichTextBlock
+                Margin="0,12,0,0">
+                <Paragraph>
+                    The above button creates a new SecondaryTile that references an image that is in the app's project files, using "ms-appx:///"
+                </Paragraph>
+            </RichTextBlock>
+
+        </StackPanel>
+    </ScrollViewer>
+    
+</UserControl>

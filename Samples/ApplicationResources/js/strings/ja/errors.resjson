@@ -1,0 +1,6 @@
+﻿// Messages in this file are for the developer and might not be localized into all languages. 
+// This is why they are in a separate file.
+
+{
+    "scenario5error"                : "これは翻訳されたエラー メッセージです。"
+}

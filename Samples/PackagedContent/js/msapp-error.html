@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Navigation Sample - Custom error page</title>
+    <link href="//Microsoft.WinJS.2.0/css/ui-light.css" rel="stylesheet" type="text/css">
+    <link href="css/msapp-error.css" rel="stylesheet" type="text/css">
+    <script src="js/msapp-error.js" type="text/javascript"></script>
+</head>
+
+<body class="win-type-body">
+    <h2 class="win-type-subheader">Oops, an error has occurred</h2>
+    <p>This page (msapp-error.html) allows applications to provide a branded experience when an error occurs. The following parameters are passed in the query string:</p>
+    <div id="failureUrl" class="param">
+        <span>-</span><span class="paramName">failureUrl</span><span>=</span>
+        <span id="failureUrlValue" class="paramValue"></span>
+        <span class="tip">(indicates the url where the error occurred)</span>
+        <br>
+    </div>
+    <br>
+    <div id="httpStatus" class="param">
+        <span>-</span><span class="paramName">httpStatus</span><span>=</span>
+        <span id="httpStatusValue" class="paramValue"></span>
+        <span class="tip">(available when the error has an http status code)</span>
+        <br>
+    </div>
+    <br>
+    <div id="failureName">
+        <span>-</span><span class="paramName">failureName</span><span>=</span>
+        <span id="failureNameValue" class="paramValue"></span>
+        <span class="tip">(available only when the error does not have a http status code)</span>
+        <br>
+    </div>
+</body>
+
+</html>

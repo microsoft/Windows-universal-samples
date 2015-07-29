@@ -1,0 +1,62 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario_Document1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Margin" Value="0,0,0,20"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontWeight" Value="Normal"/>
+            </Style>
+        </Grid.Resources>
+        <Grid Margin="12,10,12,12" MaxWidth="600">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Document 1:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" 
+                           Text="Lorem ipsum (Latin script)" />
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="Font used: Neue Haas Grotesk Text Pro" />
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Padding="10,10,15,10" Background="#FF303030">
+                <!-- In order to better simulate runtime behavior in this sample, font formatting will be set in code 
+                when the page is loaded. Otherwise, if it were set here, the font data would have already been downloaded 
+                just by viewing this file in Visual Studio with the Xaml designer. -->
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Lorem ipsum dolor sit amet, pri ea voluptua consetetur. Vel eu altera omittam. Voluptaria reprehendunt vel eu, eum te graeco omnium blandit, mel nullam persius verterem eu. An euismod salutandi vis, vero exerci oblique ex mea. Cu quo audiam verear, esse facilis omittantur usu ei. Eam id dolor corpora oportere, vix dolor tincidunt id, viris dolorem vix ne. Minim gubergren id cum, vim ei quas denique prodesset." />
+                    <TextBlock Text="Duo quem justo assentior ei. Cu simul quidam mei, ut stet incorrupte definitionem duo. Ne mei utinam graece intellegam, no causae mediocritatem vix, vim mundi aperiri detracto ei. Dictas definiebas ei his, vix in stet appellantur instructior, tation detraxit sensibus sea id." />
+                    <TextBlock Text="Cum elit tollit id. Ei delectus indoctum pro, ad nam fabulas tractatos, essent nostrud interesset an usu. Et veri laoreet suscipit qui, exerci oportere no eum, ei libris postea his. Mel ad ferri salutandi erroribus, omittam expetendis te sit. Eam alterum alienum consequuntur no." />
+                    <TextBlock Text="Ea eam delectus consulatu signiferumque. Ex vim eros commodo euripidis, his in quod antiopam oportere, odio vocent qui ex. Ut partem docendi sed. Vix in elit euripidis. Cu solet apeirian iudicabit duo, an eros prima summo vim. Possit equidem iudicabit quo eu, oporteat torquatos abhorreant mea ut." />
+                    <TextBlock Text="Velit labores copiosae vix te, erat novum ne est. Ad quo oblique malorum propriae, id nusquam rationibus per. Dolor homero legimus et usu, ex cum hinc falli ridens. Vis ut detracto legendos neglegentur, et duo omnes iuvaret ancillae." />
+                    <TextBlock Text="Ea qui primis suscipit, has te legere gubergren. At duo oportere democritum, ne omnis noluisse pro, euismod facilisi ut mei. Mundi vidisse ea est, has melius euismod assueverit ut. At aliquid saperet his, ex eos sapientem instructior, vide quas ipsum ex vis. Causae corpora consulatu at nec, pri ei elitr disputationi, an ius modus intellegam. Per albucius reformidans ut, no utroque inciderint sed." />
+                    <TextBlock Text="Cu mazim paulo scaevola mel, vim in modus simul consequat. Idque partiendo maiestatis ea qui, iriure molestie partiendo eu pri. Mel an detracto sensibus. Cu justo noluisse duo. Nusquam volumus sit te, mei novum volutpat aliquando an. Ea delectus iracundia qui." />
+                    <TextBlock Text="Has id fugit aperiam conceptam, nec no legendos laboramus reprehendunt. Pro justo aliquid in, no per blandit pericula evertitur, ex ius altera vituperata. Cu nec nonumy singulis, impetus voluptaria qui id, mea an sonet ludus. Ubique evertitur eu eam. Hinc definiebas vis ea, utamur accusam epicuri at duo." />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

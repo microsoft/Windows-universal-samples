@@ -1,0 +1,82 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1.css">
+    <script src="/js/scenario1_advertiser.js"></script>
+    <script src="/js/socketreaderwriter.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This scenario illustrates how to make the local device discoverable, and how to listen for and accept an incoming connection request.</p>
+            </div>
+        </div>
+        <div>
+            <label>Listen State: </label>
+            <select class="action win-dropdown" id="cmbListenState" style="WIDTH: 250px">
+                <option value="Normal" selected="selected" class="win-dropdown">Normal</option>
+                <option value="Intesive" class="win-dropdown">Intensive</option>
+                <option value="None" class="win-dropdown">None</option>
+            </select>
+            <button class="action win-button" id="btnStartAdvertisement">Start Adv</button>
+            <button class="action win-button" id="btnStopAdvertisement">Stop Adv</button>
+        </div>
+
+        <div>
+            <input id="chkListener" type="checkbox" checked class="win-checkbox">Enable Listener&lt;/&gt;
+            <input id="chkPreferGroupOwnerMode" type="checkbox" class="win-checkbox">Group Owner&lt;/&gt;
+        </div>
+
+        <div>
+            <label>GO Intent: </label>
+            <input id="txtGOIntent" type="text" maxlength="2" style="WIDTH: 80px" class="win-textbox">
+        </div>
+        <div>
+            <label>IE: </label>
+            <input id="txtInformationElement" type="text" class="win-textbox">
+            <button class="action win-button" id="btnAddIe">Add</button>
+        </div>
+        <div>
+            <label>Connected Devices: </label>
+        </div>
+
+        <div>
+            <div id="conenctedListTemplate" data-win-control="WinJS.Binding.Template">
+                <div class="connectedTemplate">
+                    <h3 class="displayName win-type-title" data-win-bind="innerText: displayName"></h3>
+                </div>
+            </div>
+            <div id="lvConnectedDevices" data-win-control="WinJS.UI.ListView" data-win-options="{ itemTemplate: conenctedListTemplate, selectionMode: &apos;single&apos;, tapBehavior: &apos;directSelect&apos;, layout : {type: WinJS.UI.ListLayout} }">
+            </div>
+        </div>
+
+        <div>
+            <button class="action win-button" id="btnSendMessage">Send</button>
+            <input id="txtSendMessage" type="text" class="win-textbox">
+        </div>
+
+        <div>
+            <button class="action win-button" id="btnCloseDevice">Close Device</button>
+        </div>
+    </div>
+</body>
+
+</html>

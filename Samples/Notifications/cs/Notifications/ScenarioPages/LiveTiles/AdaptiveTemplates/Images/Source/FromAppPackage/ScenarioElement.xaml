@@ -1,0 +1,29 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.LiveTiles.AdaptiveTemplates.Images.Source.FromAppPackage.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="24">
+            
+            <controls:InstructionControl Instruction="1">
+                <Button
+                    x:Name="ButtonPinSecondaryTile"
+                    Content="Click to pin secondary tile"
+                    HorizontalAlignment="Stretch"
+                    Click="ButtonPinSecondaryTile_Click"/>    
+            </controls:InstructionControl>
+            
+            <controls:InstructionControl Instruction="2">
+                Confirm the tile is now showing a "check" image, which was included in the project's files and referenced by ms-appx:///.
+            </controls:InstructionControl>
+            
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>

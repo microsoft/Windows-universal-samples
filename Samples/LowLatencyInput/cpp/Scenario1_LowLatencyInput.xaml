@@ -1,0 +1,70 @@
+<!-- 
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_LowLatencyInput"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="wideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="narrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="manipulateMe.Height" Value="125"/>
+                        <Setter Target="manipulateMe.Width" Value="125"/>
+                        <Setter Target="mainCanvas.Margin" Value="145,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid x:Name="RootGrid" Margin="0,10,0,12"  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Margin="10,0,10,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    This scenario showcases handling input off-thread and handling input and output with lowest latency. The left rect has a dedicated input thread.
+                </TextBlock>
+
+                <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                    <Button x:Name="resetButton" Content="Reset" Click="ResetButton_Pressed" Margin="0,0,50,0"/>
+                    <ToggleSwitch x:Name="BlockUIThreadToggle" Header="Block UI thread" Toggled="BlockUIThread_Toggled" Width="113"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- SwapChainPanel which hosts the DirectX rendered rectangle and enables off-thread input handling-->
+            <SwapChainPanel Grid.Row="1" x:Name="swapChainPanel" Margin="10,0,10,0"/>
+
+            <!-- XAML rect which handles input and rendering on the UI thread-->
+            <Canvas Grid.Row="1" x:Name="mainCanvas" ManipulationMode="None" Margin="220,0,0,0" MinHeight="200">
+                <Border x:Name="manipulateMe" Background="LightGray" Height="200" Width="200"  ManipulationMode="All" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+        </Grid>
+    </ScrollViewer>
+</Page>

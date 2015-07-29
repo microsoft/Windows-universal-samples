@@ -1,0 +1,90 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/Scenario2_Prediction.css">
+    <script src="/js/Scenario2_Prediction.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Demonstrates the usage of Text Prediction API.
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <br>
+
+            <div>
+                <div>
+                    <label>Select a language tag: </label>
+                    <input type="text" id="langTagBox" name="langTagBox" value="" class="win-textbox">
+                </div>
+
+                <div>
+                    <button id="createGeneratorButton" class="win-button">Create Generator</button>
+                </div>
+            </div>
+
+            <br>
+
+            <div id="generatorOperationArea" style="visibility:hidden">
+                <div>
+                    <div>
+                        <label>Choose a method: </label>
+                    </div>
+
+                    <div>
+                        <select id="generationMethodSelector" name="generationMethodSelector" size="2" class="win-dropdown">
+                            <option selected class="win-dropdown">GetCandidatesAsync</option>
+                            <option class="win-dropdown">GetCandidatesAsync(WithMaxCandidate)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <br>
+
+                <div>
+                    <div>
+                        <label>Parameters: </label>
+                    </div>
+
+                    <div>
+                        <label>Input: </label>
+                        <input type="text" id="InputStringBox" name="inputStringBox" value="" class="win-textbox">
+                    </div>
+
+                    <div id="maxCandidatesArea" style="display:none">
+                        <label>maxCandidates: </label>
+                        <input type="number" min="1" id="maxCandidatesBox" name="maxCandidatesBox" value="" class="win-textbox">
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <button id="executeButton" class="win-button">Execute</button>
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <label>Result: </label>
+                    </div>
+
+                    <div>
+                        <ul id="resultList"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

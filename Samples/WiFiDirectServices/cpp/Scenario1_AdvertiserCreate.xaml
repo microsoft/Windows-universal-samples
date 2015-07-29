@@ -1,0 +1,166 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.WiFiDirectServices.Scenario1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:helpers="using:SDKTemplate.Helpers"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <helpers:ServiceStatusConverter x:Key="ServiceStatusConverter"/>
+    </Page.Resources>
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Create a service advertiser that can be discovered by other devices acting as service seekers.
+                    Specify parameters below and click create to continue.
+                    Service name is required, other fields are optional.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <Grid HorizontalAlignment="Stretch" Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" MaxWidth="400" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10">
+                        Service Name:
+                    </TextBlock>
+                    <TextBox x:Name="ServiceName" Grid.Row="0" Grid.Column="1" MaxLength="255" Margin="0,0,0,10"></TextBox>
+
+                    <TextBlock Grid.Row="1" VerticalAlignment="Center" Margin="0,0,10,10" Style="{StaticResource CaptionTextBlockStyle}">
+                        Auto Accept:
+                    </TextBlock>
+                    <CheckBox x:Name="AutoAccept" Grid.Row="1" Grid.Column="1" Margin="0,0,0,10" IsChecked="True" />
+                    
+                    <TextBlock Grid.Row="2" VerticalAlignment="Center" Margin="0,0,10,10" Style="{StaticResource CaptionTextBlockStyle}">
+                        Prefer GO:
+                    </TextBlock>
+                    <CheckBox x:Name="PreferGO" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10" IsChecked="True" />
+
+                    <TextBlock Grid.Row="3" VerticalAlignment="Center" Margin="0,0,10,10" Style="{StaticResource CaptionTextBlockStyle}">
+                        Status:
+                    </TextBlock>
+                    <ComboBox x:Name="Status" Grid.Row="3" Grid.Column="1" Margin="0,0,0,10"
+                              SelectedItem="{Binding Source={x:Null}, Converter={StaticResource ServiceStatusConverter}, Mode=TwoWay}"
+                              SelectedIndex="0">
+                        <ComboBoxItem>Available</ComboBoxItem>
+                        <ComboBoxItem>Busy</ComboBoxItem>
+                        <ComboBoxItem>Custom</ComboBoxItem>
+                    </ComboBox>
+                    
+                    <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" Style="{StaticResource CaptionTextBlockStyle}">
+                        Custom Status:
+                    </TextBlock>
+                    <TextBox x:Name="CustomStatus" Grid.Row="4" Grid.Column="1" MaxLength="3" Margin="0,0,0,10" PlaceholderText="Integer 2-255"></TextBox>
+                    
+                    <TextBlock Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="0,0,10,10" Style="{StaticResource CaptionTextBlockStyle}">
+                        Config Methods Supported:
+                    </TextBlock>
+                    
+                    <TextBlock Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" Style="{StaticResource CaptionTextBlockStyle}">
+                        WFDS Default:
+                    </TextBlock>
+                    <CheckBox x:Name="ConfigMethodDefault" Grid.Row="6" Grid.Column="1" Margin="0,0,0,10" IsChecked="True"  />
+                    
+                    <TextBlock Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" Style="{StaticResource CaptionTextBlockStyle}">
+                        PIN Display:
+                    </TextBlock>
+                    <Grid Grid.Row="7" Grid.Column="1" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox x:Name="ConfigMethodDispaly" Width="32" Margin="0,0,10,0" IsChecked="True" />
+                        <TextBox x:Name="ConfigMethodDisplayPin"  Grid.Column="1" HorizontalAlignment="Stretch" PlaceholderText="PIN for display" />
+                    </Grid>
+                    
+                    <TextBlock Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" Style="{StaticResource CaptionTextBlockStyle}">
+                        PIN Keypad:
+                    </TextBlock>
+                    <CheckBox x:Name="ConfigMethodKeypad" Grid.Row="8" Grid.Column="1" Margin="0,0,0,10" />
+
+                    <TextBlock Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" Style="{StaticResource CaptionTextBlockStyle}">
+                        Deferred Session Info:
+                    </TextBlock>
+                    <TextBox x:Name="DeferredSessionInfo" Grid.Row="9" Grid.Column="1" MaxLength="144" Margin="0,0,0,10" PlaceholderText="Max 144 bytes"></TextBox>
+                    
+                    <TextBlock Grid.Row="10" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="0,0,10,10" Style="{StaticResource CaptionTextBlockStyle}">
+                        Service Information:
+                    </TextBlock>
+                    
+                    <TextBox x:Name="ServiceInformation" Grid.Row="11" Grid.ColumnSpan="2" Margin="0,0,0,10" PlaceholderText="Max 65000 bytes"></TextBox>
+                    
+                    <TextBlock Grid.Row="12" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,10" Style="{StaticResource CaptionTextBlockStyle}">
+                        Publish Prefix:
+                    </TextBlock>
+                    <Grid Grid.Row="12" Grid.Column="1" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="NewPrefix" Margin="0,0,10,0" Grid.Column="0" HorizontalAlignment="Stretch" PlaceholderText="Prefix of service name" />
+                        <Button x:Name="AddPrefix" Click="AddPrefix_Click" Grid.Column="1">Add</Button>
+                    </Grid>
+                    
+                    <ListView x:Name="ServicePrefixList" Grid.Row="13" Grid.ColumnSpan="2">
+                    </ListView>
+                    
+                    <Button x:Name="RemovePrefix" Click="RemovePrefix_Click"  Grid.Row="14" Grid.Column="1" Margin="0,0,0,10">
+                        Remove Selected Prefix(es)
+                    </Button>
+                    
+                    <Button x:Name="CreateAdvertiser" Click="CreateAdvertiser_Click" Grid.Row="15" Grid.Column="0" Margin="0,0,0,10">
+                        Publish
+                    </Button>
+                </Grid>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,123 @@
+﻿/*
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+/* General styling */
+#article {
+    background-color: rgb(255,255,255);
+    color: rgb(33,33,33);
+}
+
+#article abbr, acronym, address, blockquote, cite, dl, dt, li, ol, p, q, strong, td {
+    font-family: "Calibri";
+}
+
+#article a {
+    color: rgb(0, 112, 159);
+    text-decoration: none;
+}
+
+#article a:visited {
+    color: rgb(3, 105, 122);
+}
+
+#article a:hover, a:active {
+    color: rgb(51, 144, 177);
+    cursor: pointer;
+}
+
+#article a:hover:active {
+    color: rgb(255,255,255);
+    background-color: rgb(33, 33, 33);
+}
+
+#article a:disabled {
+    color: rgb(112, 112, 112);
+}
+
+#article p {
+    margin: 11pt 0px;
+}
+
+#article blockquote {
+    color: #888;
+    margin: 0px 11pt 0px 11pt;
+}
+
+#article video {
+    border: 0px;
+    max-width: 400px;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+}
+
+#article img {
+    max-width: 480px;
+    width: auto;
+    height: auto;
+}
+
+#article .win-backbutton {
+    border-color: rgb(33,33,33);
+    color: rgb(33,33,33);
+}
+
+/* Article Area */
+
+#articleArea {
+    -ms-grid-row: 2;
+    display: block;
+    height: 100%;
+    overflow-x: auto;
+    position: relative;
+    width: 100%;
+    z-index: 0;
+}
+
+    #articleArea article {
+        /* Define a multi-column, horizontally scrolling article by default. */
+        column-gap: 80px;
+        column-width: 480px;
+        height: calc(100% - 50px);
+        margin-left: 120px;
+        margin-top: 5px;
+        width: 480px;
+    }
+            
+        #articleArea article #content p {
+            margin-bottom: 20px;
+            margin-right: 20px;
+            vertical-align: baseline;
+        }
+        
+        #articleArea article #content .full-article-link {
+            margin-top: 5px;
+        }
+
+@media screen and (max-width: 480px) {
+    #article #articleArea {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+        #article #articleArea img,
+        #article #articleArea video {
+            max-width: 100%;
+        }
+
+    #article article {
+        margin-left: 10px;
+        width: calc(100% - 40px);
+        height: auto;
+    }
+
+        #article article #content {
+            padding-bottom: 50px;
+        }
+}

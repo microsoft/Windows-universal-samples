@@ -1,0 +1,30 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Scenario 11: Use WinRT APIs inside Webview</title>
+    <link rel="stylesheet" href="/css/11_UseWinrt.css">
+    <script src="/js/11_UseWinrt.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>Sometime the web page loaded inside webview needs to use Winrt APIs. To do this, you can implement a winrt object that wraps around the WinRT APIs that the webpage needs to use send it to the webview using AddWebAllowedObject method. A new metadata
+            attribute AllowForWeb should be specified above the class which object will be projected. This provides a security option to filter context which can be exposed to the webpage loaded inside webview.</p>
+        <p>Under the Output heading below, the displayed HTML has been loaded into the WebView control. Click the &quot;Send Toast Notification&quot; button to send a toast notification for the app</p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput" id="outputContainer">
+        <div id="scenario11_left">
+            <textarea id="htmlString" readonly="readonly" class="win-textarea"></textarea>
+        </div>
+        <div id="scenario11_right">
+            <x-ms-webview id="webview"></x-ms-webview>
+        </div>
+    </div>
+</body>
+
+</html>

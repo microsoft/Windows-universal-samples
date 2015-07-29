@@ -1,0 +1,64 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario_Document3"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Margin" Value="0,0,0,20"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontWeight" Value="Normal"/>
+            </Style>
+        </Grid.Resources>
+        <Grid Margin="12,10,12,12" MaxWidth="600">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Document 3:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"
+                           Text="Lorem ipsum (Devanagari script)" />
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="Font used: Kokila Regular" />
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" 
+                          Padding="10,10,15,10" Background="#FF303030"
+                          >
+                <!-- In order to best simulate runtime behavior in this sample, font formatting will be set in code 
+                when the page is loaded. Otherwise, if it were set here, the font data would have already been downloaded 
+                just by viewing this file in Visual Studio with the Xaml designer. -->
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="चिदंश रखते जिम्मे एसेएवं निर्माता जैसी दर्शाता विस्तरणक्षमता विकेन्द्रियकरण मुक्त प्रमान सभीकुछ नवंबर नीचे भारत संसाध मुश्किले प्रतिबध्दता बाजार और्४५० सोफ़्टवेर नाकर विश्व जनित बातसमय एकत्रित शुरुआत मर्यादित वर्ष सुचना कुशलता समस्याओ भाषा लेकिन स्थिति संस्थान सार्वजनिक लक्षण मानव प्रमान विकसित बनाकर रखति संस्था लचकनहि वातावरण मुखय बनाकर एवम् प्रदान ब्रौशर बनाना" />
+                    <TextBlock Text="दोषसके निर्माण शारिरिक देने बढाता एवम् संस्थान वार्तालाप मुख्य आवश्यक अविरोधता विषय सदस्य बलवान सहायता केन्द्रिय एवम् कराना वर्तमान निर्देश कीसे पढने सारांश गटकउसि प्राधिकरन लेकिन विभाजन प्रेरना समस्याए करता पहेला देते ध्येय उद्योग सामूहिक भेदनक्षमता है।अभी कार्यकर्ता समाजो दारी संसाध २४भि गटकउसि परिभाषित संपादक करके(विशेष प्रौध्योगिकी लेने हमारी एछित खरिदे रहारुप वर्णित संपुर्ण" />
+                    <TextBlock Text="सहित गयेगया मुख्यतह मार्गदर्शन संदेश नाकर ध्वनि उपलब्ध उपेक्ष कम्प्युटर पुस्तक सभीकुछ पहेला लगती बढाता आपके शुरुआत असक्षम उनका दिनांक सामूहिक संस्क्रुति बाजार भीयह जागरुक आशाआपस गयेगया बनाना" />
+                    <TextBlock Text="गटको करके(विशेष पुष्टिकर्ता हमारि वर्णन लिये प्राथमिक वार्तालाप प्राण रखते द्वारा ज्यादा तकरीबन विभाजन अनुवादक करके बाटते लक्षण खरिदने संस्क्रुति हीकम सके। सक्षम वेबजाल परिभाषित प्रोत्साहित सेऔर विवरन विकसित दिनांक सुचनाचलचित्र दिशामे प्राधिकरन आजपर विवरन होने बनाति प्राधिकरन संस्क्रुति" />
+                    <TextBlock Text="अन्य सादगि पुस्तक मर्यादित करके(विशेष सीमित मानव हुएआदि स्थापित सुचना करता वास्तव गयेगया मुख्यतह देने डाले। संस्था प्रसारन विकेन्द्रित जैसे तकनिकल अविरोधता विश्व एवम् उद्योग पत्रिका सादगि विशेष किया पासपाई विभाजन सुचनाचलचित्र आवश्यक हमेहो। ७०है समजते लक्षण तकनीकी व्याख्या अर्थपुर्ण आजपर ।क पहोच। और्४५० है।अभी तकनिकल" />
+                    <TextBlock Text="आपको अधिकार विचरविमर्श खरिदे शारिरिक अंग्रेजी सुनत पहेला ब्रौशर असक्षम यायेका पढाए ध्वनि आंतरजाल प्रव्रुति नीचे बलवान करेसाथ सोफ़्टवेर प्रव्रुति विश्व कोहम भाषाओ खरिदने अनुवाद लाभो विवरन करती लचकनहि निर्माण निरपेक्ष विवरन देते अनुकूल उपयोगकर्ता सुचनाचलचित्र विशेष असक्षम शारिरिक संभव बनाना तकरीबन प्राप्त केन्द्रित जोवे बिन्दुओ सिद्धांत मुश्किले ध्वनि भाषए" />
+                    <TextBlock Text="प्रति भाषए उद्योग गटकउसि प्रसारन तकरीबन गयेगया आपके सक्षम जैसे जिम्मे संपादक है।अभी तरीके कीने बलवान पुस्तक बेंगलूर सिद्धांत वर्णन ।क माध्यम वेबजाल विभाजन एकत्रित प्रसारन विकेन्द्रित देकर विकास मुख्यतह कम्प्युटर भाषाओ सेऔर केवल गोपनीयता विचरविमर्श ढांचा एकत्रित भोगोलिक प्रतिबध्दता विकास मेमत" />
+                    <TextBlock Text="खण्ड शुरुआत जानकारी कार्य पहोचने प्रमान सुविधा सकती बाटते एवम् बाटते दुनिया आधुनिक वर्णन बहतर विश्लेषण स्वतंत्र प्रव्रुति लाभो नयेलिए विचारशिलता प्रौध्योगिकी उन्हे जोवे औषधिक सामूहिक स्वतंत्र प्रसारन गोपनीयता थातक सहयोग प्रमान उपेक्ष विचारशिलता भाषाओ एकएस होसके करते निर्माण प्रतिबध मानव विश्व अनुकूल क्षमता। प्रव्रुति हिंदी वहहर गुजरना सोफ़्टवेर साधन सीमित दिशामे और्४५०" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

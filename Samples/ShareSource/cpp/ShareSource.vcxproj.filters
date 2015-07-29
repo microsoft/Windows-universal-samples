@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\shared\assets\microsoftLogo.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\shared\assets\microsoftLogo.scale-140.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\shared\assets\microsoftLogo.scale-180.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\shared\assets\visualStudioLogo.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\shared\assets\visualStudioLogo.scale-140.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\shared\assets\visualStudioLogo.scale-180.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+    <Page Include="..\shared\xaml\SetErrorMessage.xaml" />
+    <Page Include="..\shared\xaml\ShareCustomData.xaml" />
+    <Page Include="..\shared\xaml\ShareDelayRenderedFiles.xaml" />
+    <Page Include="..\shared\xaml\ShareFiles.xaml" />
+    <Page Include="..\shared\xaml\ShareHtml.xaml" />
+    <Page Include="..\shared\xaml\ShareImage.xaml" />
+    <Page Include="..\shared\xaml\ShareText.xaml" />
+    <Page Include="..\shared\xaml\ShareWebLink.xaml" />
+    <Page Include="..\shared\xaml\ShareApplicationLink.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="SetErrorMessage.xaml.h" />
+    <ClInclude Include="ShareCustomData.xaml.h" />
+    <ClInclude Include="ShareDelayRenderedFiles.xaml.h" />
+    <ClInclude Include="ShareFiles.xaml.h" />
+    <ClInclude Include="ShareHtml.xaml.h" />
+    <ClInclude Include="ShareImage.xaml.h" />
+    <ClInclude Include="ShareText.xaml.h" />
+    <ClInclude Include="SharePage.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="SetErrorMessage.xaml.cpp" />
+    <ClCompile Include="ShareCustomData.xaml.cpp" />
+    <ClCompile Include="ShareDelayRenderedFiles.xaml.cpp" />
+    <ClCompile Include="ShareFiles.xaml.cpp" />
+    <ClCompile Include="ShareHtml.xaml.cpp" />
+    <ClCompile Include="ShareImage.xaml.cpp" />
+    <ClCompile Include="ShareText.xaml.cpp" />
+    <ClCompile Include="SharePage.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>80bfd669-aa83-4537-9611-027cffe0d8af</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{c6978fb6-bc64-498d-97c8-f5b53997e54e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

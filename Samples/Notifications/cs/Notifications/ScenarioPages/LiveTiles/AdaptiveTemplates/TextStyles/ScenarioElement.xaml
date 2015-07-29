@@ -1,0 +1,45 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.LiveTiles.AdaptiveTemplates.TextStyles.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="24">
+
+            
+            <controls:InstructionControl Instruction="1">
+                <Button
+                    x:Name="ButtonPin"
+                    Content="Click to pin tiles"
+                    HorizontalAlignment="Stretch"
+                    Click="ButtonPin_Click"/>
+            </controls:InstructionControl>
+            
+            <controls:InstructionControl Instruction="2">
+                Message dialog says SUCCESS
+            </controls:InstructionControl>
+            
+            <controls:InstructionControl Instruction="3">
+                On Start, tile for each style is pinned
+            </controls:InstructionControl>
+            
+            <controls:InstructionControl Instruction="4">
+                <StackPanel>
+                    <TextBlock
+                        Text="Text styles on each tile is correct"
+                        TextWrapping="Wrap"/>
+                </StackPanel>
+            </controls:InstructionControl>
+
+
+            
+
+        </StackPanel>
+    </ScrollViewer>
+    
+</UserControl>

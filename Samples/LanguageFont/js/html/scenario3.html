@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/langfont.js"></script>
+    <script src="/js/scenario3.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            This shows the use of the LanguageFontGroup API to get fonts for multiple languages (Chinese, English and Japanese are used here) and then apply the font scale factor when setting the size of text so that the apparent sizes that the user sees are comparable.</p>
+        <p>
+            In this particular example, the first language in each line is used as the base text. The rest of the line is scaled appropriately. When the scaling is applied, the characters in the alternate script will be adjusted so that their size more closely aligns
+            with the base text. When reset, all text will be rendered at the nominal size (no scaling). </p>
+        <select name="fontsize" id="scenario3Select" class="win-dropdown">
+            <option value="12" class="win-dropdown">12 pt</option>
+            <option value="16" class="win-dropdown">16 pt</option>
+            <option value="20" class="win-dropdown">20 pt</option>
+            <option value="24" class="win-dropdown">24 pt</option>
+        </select>
+        <button id="scenario3Show" class="win-button">
+            Apply Recommended Font and Size</button>
+        <button id="scenario3Reset" class="win-button">
+            Reset</button>
+        <br>
+        <br>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput" class="output">
+        <p><span lang="zh-hans">&#x7CBB;&#x7DC0; &#x58FF;&#x5AF7;&#x5B03; &#x6594;&#x6AC5;&#x6AB7; &#x8100;&#x8685;&#x86A1; &#x6E94;, &#x7B30;&#x7B31; &#x6785;&#x677A;&#x6799; &#x8383;&#x8376;&#x8852; &#x6A27;&#x69E7;&#x6A08; </span><span lang="en-us">Lorem ipsum dolor sit amet, ne iisque interpretaris sit. </span></p>
+        <p><span lang="zh-hans">&#x7CBB;&#x7DC0; &#x58FF;&#x5AF7;&#x5B03; &#x6594;&#x6AC5;&#x6AB7; &#x8100;&#x8685;&#x86A1; &#x6E94;, &#x7B30;&#x7B31; &#x6785;&#x677A;&#x6799; &#x8383;&#x8376;&#x8852; &#x6A27;&#x69E7;&#x6A08; </span><span lang="ja-JP">&#x8A27;&#x7128;&#x3092;&#x992F;&#x30C0; &#x62E3;&#x9975;&#x5EE6;&#x3048;&#x5C24; &#x6827;&#x7A43;&#x699E;&#x3057;&#x3083;&#x3074;&#x3083; &#x992F;&#x30C0; &#x3089;&#x6A2A;&#x8969; &#x30DA;&#x89A7;&#x3078;</span></p>
+        <p><span lang="en-us">Lorem ipsum dolor sit amet, ne iisque interpretaris sit. </span><span lang="zh-hans">&#x7CBB;&#x7DC0; &#x58FF;&#x5AF7;&#x5B03; &#x6594;&#x6AC5;&#x6AB7; &#x8100;&#x8685;&#x86A1; &#x6E94;, &#x7B30;&#x7B31; &#x6785;&#x677A;&#x6799; &#x8383;&#x8376;&#x8852; &#x6A27;&#x69E7;&#x6A08;</span></p>
+        <p><span lang="en-us">Ex sea maluisset urbanitas adolescens mucius ridens liberavisse has at. </span><span lang="ja-JP">&#x8A27;&#x7128;&#x3092;&#x992F;&#x30C0; &#x62E3;&#x9975;&#x5EE6;&#x3048;&#x5C24;
+                &#x6827;&#x7A43;&#x699E;&#x3057;&#x3083;&#x3074;&#x3083; &#x992F;&#x30C0; &#x3089;&#x6A2A;&#x8969; &#x30DA;&#x89A7;&#x3078;</span></p>
+        <p><span lang="ja-JP">&#x8A27;&#x7128;&#x3092;&#x992F;&#x30C0; &#x62E3;&#x9975;&#x5EE6;&#x3048;&#x5C24; &#x6827;&#x7A43;&#x699E;&#x3057;&#x3083;&#x3074;&#x3083; &#x992F;&#x30C0; &#x3089;&#x6A2A;&#x8969; &#x30DA;&#x89A7;&#x3078; </span><span lang="en-us">Lorem ipsum dolor sit amet, ne iisque interpretaris sit.</span></p>
+        <p><span lang="ja-JP">&#x8A27;&#x7128;&#x3092;&#x992F;&#x30C0; &#x62E3;&#x9975;&#x5EE6;&#x3048;&#x5C24;
+                &#x6827;&#x7A43;&#x699E;&#x3057;&#x3083;&#x3074;&#x3083; &#x992F;&#x30C0; &#x3089;&#x6A2A;&#x8969; &#x30DA;&#x89A7;&#x3078; </span><span lang="zh-hans">&#x7CBB;&#x7DC0; &#x58FF;&#x5AF7;&#x5B03;
+                &#x6594;&#x6AC5;&#x6AB7; &#x8100;&#x8685;&#x86A1; &#x6E94;, &#x7B30;&#x7B31; &#x6785;&#x677A;&#x6799; &#x8383;&#x8376;&#x8852; &#x6A27;&#x69E7;&#x6A08;</span></p>
+    </div>
+</body>
+
+</html>

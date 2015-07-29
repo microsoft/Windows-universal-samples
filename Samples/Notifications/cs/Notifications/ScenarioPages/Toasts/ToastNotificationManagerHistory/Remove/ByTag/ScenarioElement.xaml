@@ -1,0 +1,33 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.Toasts.ToastNotificationManagerHistory.Remove.ByTag.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls"
+    Loaded="UserControl_Loaded">
+
+    <controls:StepsControl x:Name="stepsControl" IsNextEnabled="True" Step="1">
+
+        <StackPanel>
+
+            <controls:InstructionControl Instruction="1">Three toasts should have appeared.</controls:InstructionControl>
+
+            <controls:InstructionControl Instruction="2">
+                <Button
+                    x:Name="ButtonRemoveToast2"
+                    Content="click to remove Toast 2"
+                    Click="ButtonRemoveToast2_Click"
+                    HorizontalAlignment="Stretch"/>
+            </controls:InstructionControl>
+            
+            <controls:InstructionControl Instruction="3">Ensure that only Toast 1 and Toast 3 are left in Action Center.</controls:InstructionControl>
+
+        </StackPanel>
+
+
+    </controls:StepsControl>
+
+</UserControl>

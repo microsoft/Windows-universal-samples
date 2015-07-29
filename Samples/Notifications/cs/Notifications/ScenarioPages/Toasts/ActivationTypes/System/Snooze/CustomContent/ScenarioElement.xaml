@@ -1,0 +1,43 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.Toasts.ActivationTypes.System.Snooze.CustomContent.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls"
+    Loaded="UserControl_Loaded">
+
+    <controls:StepsControl x:Name="stepsControl" IsNextEnabled="True" Step="1">
+
+        <StackPanel>
+
+            <controls:InstructionControl Instruction="1">
+
+                <controls:PopToastControl
+                    x:Name="popToastControl"/>
+
+            </controls:InstructionControl>
+
+            <controls:InstructionControl Instruction="2">Confirm that the snooze button says "my snooze"</controls:InstructionControl>
+            
+            <controls:InstructionControl Instruction="3">
+                <RichTextBlock>
+                    <Paragraph>That's it!</Paragraph>
+                    <Paragraph/>
+                    <Paragraph>This scenario tests the following...</Paragraph>
+                    <Paragraph/>
+                    <Paragraph>&lt;action activationType="system" arguments="snooze" hint-inputId="snoozeTime" content="my snooze"/></Paragraph>
+                    <Paragraph/>
+                    <Paragraph>The developer manually specified the content, so the system shouldn't override the developer's content.</Paragraph>
+                </RichTextBlock>
+            </controls:InstructionControl>
+
+        </StackPanel>
+
+
+    </controls:StepsControl>
+
+    
+</UserControl>

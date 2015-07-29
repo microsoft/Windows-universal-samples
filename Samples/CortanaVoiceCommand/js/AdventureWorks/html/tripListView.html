@@ -1,0 +1,56 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>tripListView</title>
+
+    <link href="/Microsoft.WinJS.4.0/css/ui-dark.css" rel="stylesheet">
+    <script src="/Microsoft.WinJS.4.0/js/base.js"></script>
+    <script src="/Microsoft.WinJS.4.0/js/ui.js"></script>
+    <link href="/css/tripListView.css" rel="stylesheet">
+    <script src="/js/tripListView.js"></script>
+    <style type="text/css">
+
+    </style>
+
+</head>
+
+<body class="win-type-body">
+    <div class="tripListView fragment">
+        <header class="page-header" aria-label="Header content" role="banner">
+            <h1 class="titlearea win-type-ellipsis win-type-header">
+                <span class="pagetitle">AdventureWorks</span>
+            </h1>
+        </header>
+        <section class="page-section" aria-label="Main content" role="main">
+            <p>
+                <div class="tripListGrid">
+                    <div id="tripTemplate" data-win-control="WinJS.Binding.Template">
+                        <div class="trip">
+                            <div class="list-tripDestination" data-win-bind="innerText:destination"></div>
+                            <div class="list-tripDescription" data-win-bind="innerText:description"></div>
+                        </div>
+                    </div>
+
+                    <div class="tripList" id="tripListBox" data-win-control="WinJS.UI.ListView" data-win-options="{
+                     itemTemplate:select(&apos;#tripTemplate&apos;),
+                     selectionMode: WinJS.UI.SelectionMode.single,
+                     tapBehavior: WinJS.UI.TapBehavior.directSelect,
+                     layout : {type: WinJS.UI.ListLayout}
+                     }">
+
+                    </div>
+                    <button class="addTripButton win-button" id="addTripButton">Add Trip</button>
+                </div>
+
+            </p>
+        </section>
+    </div>
+</body>
+
+</html>

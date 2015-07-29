@@ -1,0 +1,57 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <script src="/js/socketsSample.js"></script>
+    <script src="/js/scenario2_Connect.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            Next, you need the &apos;client&apos; side of the connection, which connects to to the listener. The host name and service name (often a port number) to connect to are the &apos;Host name:&apos; and &apos;Service name:&apos; entries. The service name
+            should match what you started to listen to!
+        </p>
+        <p>
+            The connection will automatically use IPv6 as needed. It will also resolve internationalized domain names.
+        </p>
+        <p>
+            Due to the network security system, you cannot connect to other applications running on the same machine. This means that you can only use &quot;localhost&quot; to connect to the same application (specifically, you can connect to a listener on the same
+            machine running in the same app container)
+        </p>
+        <p>
+            If an adapter was selected in the previous step, connect will also attempt to limit traffic to the selected adapter.
+        </p>
+        <p>
+            <!-- To connect to a remote host, remove the 'disabled' attribute below -->
+            <label for="hostNameConnect">Host Name:</label>
+            <input id="hostNameConnect" type="text" disabled="disabled" class="win-textbox">
+        </p>
+        <p>
+            <label for="serviceNameConnect">Service Name:</label>
+            <input id="serviceNameConnect" type="text" class="win-textbox">
+        </p>
+        <p>
+            <button id="buttonConnectSocket" class="win-button">Connect</button>
+        </p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <p id="statusBox"></p>
+        <p id="outputBox"></p>
+    </div>
+</body>
+
+</html>

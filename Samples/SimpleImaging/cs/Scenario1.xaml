@@ -1,0 +1,112 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SimpleImaging.Scenario1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SimpleImaging"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+          Use the property system APIs (Windows.Storage.FileProperties) to read and edit bitmap properties from an image.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="OpenButton" Content="Open" MinWidth="90" Click="Open_Click"/>
+                        <Button x:Name="ApplyButton" Content="Save" MinWidth="90" Click="Apply_Click"/>
+                        <Button x:Name="CloseButton" Content="Close" MinWidth="90" Click="Close_Click"/>
+                    </StackPanel>
+
+                    <Image x:Name="PreviewImage" Margin="0,0,10,10" AutomationProperties.Name="Preview of the image" Source="" Stretch="Uniform" Width="300" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                    <!-- This StackPanel contains all of the image properties output. -->
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,0,20,0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >Title</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="0" x:Name="TitleTextbox" HorizontalAlignment="Left" Text="" Width="250" Margin="0,0,0,10" />
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="0,0,20,0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">Keywords</TextBlock>
+                        <TextBox Grid.Column="1" Grid.Row="1" x:Name="KeywordsTextbox" AcceptsReturn="true" HorizontalAlignment="Left" Text="" Width="250" Height="100" Margin="0,0,0,10"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="0,0,10,0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">Latitude</TextBlock>
+                        <StackPanel Grid.Column="1" Grid.Row="2" Margin="0,0,10,10" Orientation="Horizontal">
+                            <TextBox Margin="0,0,5,0" x:Name="LatDegTextbox" HorizontalAlignment="Left" MaxLength="2" Text=""/>
+                            <TextBlock Margin="0,0,5,0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" >°</TextBlock>
+                            <TextBox Margin="0,0,5,0" x:Name="LatMinTextbox" HorizontalAlignment="Left" MaxLength="2" Text=""/>
+                            <TextBlock Margin="0,0,5,0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" >"</TextBlock>
+                            <TextBox Margin="0,0,5,0" x:Name="LatSecTextbox" HorizontalAlignment="Left" MaxLength="7" Text=""/>
+                            <TextBlock Margin="0,0,5,0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" >'</TextBlock>
+                            <TextBox Margin="0,0,5,0" x:Name="LatRefTextbox" HorizontalAlignment="Left" MaxLength="1" Text=""/>
+                        </StackPanel>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="0,0,20,0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">Longitude</TextBlock>
+                        <StackPanel Grid.Column="1" Grid.Row="3" Margin="0,0,10,10" Orientation="Horizontal">
+                            <TextBox Margin="0,0,5,0" x:Name="LongDegTextbox" HorizontalAlignment="Left" MaxLength="2" Text=""/>
+                            <TextBlock Margin="0,0,5,0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" >°</TextBlock>
+                            <TextBox Margin="0,0,5,0" x:Name="LongMinTextbox" HorizontalAlignment="Left" MaxLength="2" Text=""/>
+                            <TextBlock Margin="0,0,5,0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" >"</TextBlock>
+                            <TextBox Margin="0,0,5,0" x:Name="LongSecTextbox" HorizontalAlignment="Left" MaxLength="7" Text=""/>
+                            <TextBlock Margin="0,0,5,0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" >'</TextBlock>
+                            <TextBox Margin="0,0,5,0" x:Name="LongRefTextbox" HorizontalAlignment="Left" MaxLength="1" Text=""/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,0,10,10" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >Date Taken:</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="0" x:Name="DateTakenTextblock" Margin="0,0,10,10" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" />
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="0,0,10,10" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >Camera make:</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="1" x:Name="MakeTextblock" Margin="0,0,10,10" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" />
+                        <TextBlock Grid.Column="0" Grid.Row="2" Margin="0,0,10,10" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >Camera model:</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="2" x:Name="ModelTextblock" Margin="0,0,10,10" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" />
+                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="0,0,10,10" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >EXIF orientation:</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="3" x:Name="OrientationTextblock" Margin="0,0,10,10" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" />
+                        <TextBlock Grid.Column="0" Grid.Row="4" Margin="0,0,10,10" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >Exposure:</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="4" x:Name="ExposureTextblock" Margin="0,0,10,10" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" />
+                        <TextBlock Grid.Column="0" Grid.Row="5" Margin="0,0,10,10" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >F Number:</TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="5" x:Name="FNumberTextblock" Margin="0,0,10,10" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" />
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

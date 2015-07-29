@@ -1,0 +1,174 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/Scenario2_configureDevice.css">
+    <script src="/js/Scenario2_configureDevice.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="Configure Device" class="win-type-subheader">Configure Serial Device</h2>
+        </div>
+        <div id="scenarioContent">
+
+            <br>
+            <div>
+                <label contenteditable="false">
+                    Carrier Detect State =
+                </label>
+                <label id="CarrierDetectStateValue" contenteditable="false">
+                    Not Set
+                </label>
+            </div>
+
+            <br>
+            <div>
+                <label contenteditable="false">
+                    Data Set Ready =
+                </label>
+                <label id="DataSetReadyValue" contenteditable="false">
+                    Not Set
+                </label>
+            </div>
+
+            <br>
+            <div>
+                <label contenteditable="false">
+                    Break State Signal =
+                </label>
+                <label id="BreakStateSignalValue" contenteditable="false">
+                    Not Set
+                </label>
+                <div data-win-control="WinJS.UI.ToggleSwitch" id="BreakStateSignalToggleSwitch">
+                </div>
+            </div>
+
+            <br>
+            <div>
+                <label contenteditable="false">
+                    Data Terminal Ready Enabled =
+                </label>
+                <label id="DataTerminalReadyEnabledValue" contenteditable="false">
+                    Not Set
+                </label>
+                <div data-win-control="WinJS.UI.ToggleSwitch" id="DataTerminalReadyEnabledToggleSwitch">
+                </div>
+            </div>
+
+            <br>
+            <div>
+                <label contenteditable="false">
+                    Ready To Send Enabled =
+                </label>
+                <label id="ReadyToSendEnabledValue" contenteditable="false">
+                    Not Set
+                </label>
+                <div data-win-control="WinJS.UI.ToggleSwitch" id="ReadyToSendEnabledToggleSwitch">
+                </div>
+            </div>
+
+            <br>
+            <div>
+                <label contenteditable="false">
+                    Baud Rate =
+                </label>
+                <label id="BaudRateLabel" contenteditable="false">
+                    Not Set
+                </label>
+            </div>
+            <div>
+                <input type="number" id="BaudRateInput" value="Enter Baud Rate to set" class="win-textbox">
+                <button id="BaudRateButton" class="win-button">
+                    SET
+                </button>
+            </div>
+
+            <br>
+            <div>
+                <label contenteditable="false">
+                    Parity =
+                </label>
+                <label id="ParityLabel" contenteditable="false">
+                    Not Set
+                </label>
+            </div>
+            <div>
+                <select id="ParityInput" size="1" class="win-dropdown">
+                    <option value="0" class="win-dropdown">None</option>
+                    <option value="1" class="win-dropdown">Odd</option>
+                    <option value="2" class="win-dropdown">Even</option>
+                    <option value="3" class="win-dropdown">Mark</option>
+                    <option value="4" class="win-dropdown">Space</option>
+                </select>
+            </div>
+
+            <br>
+            <div>
+                <label contenteditable="false">
+                    Stop Bit Count =
+                </label>
+                <label id="StopBitCountLabel" contenteditable="false">
+                    Not Set
+                </label>
+            </div>
+            <div>
+                <select id="StopBitCountInput" size="1" class="win-dropdown">
+                    <option value="0" class="win-dropdown">One</option>
+                    <option value="1" class="win-dropdown">OnePointFive</option>
+                    <option value="2" class="win-dropdown">Two</option>
+                </select>
+            </div>
+
+            <br>
+            <div>
+                <label contenteditable="false">
+                    Hand Shake =
+                </label>
+                <label id="HandShakeLabel" contenteditable="false">
+                    Not Set
+                </label>
+            </div>
+            <div>
+                <select id="HandShakeInput" size="1" class="win-dropdown">
+                    <option value="0" class="win-dropdown">None</option>
+                    <option value="1" class="win-dropdown">RequestToSend</option>
+                    <option value="2" class="win-dropdown">XOnXOff</option>
+                    <option value="3" class="win-dropdown">RequestToSendXOnXOff</option>
+                </select>
+            </div>
+
+            <br>
+            <div>
+                <label contenteditable="false">
+                    Data Bits =
+                </label>
+                <label id="DataBitsLabel" contenteditable="false">
+                    Not Set
+                </label>
+            </div>
+            <div>
+                <select id="DataBitsInput" size="1" class="win-dropdown">
+                    <option value="0" class="win-dropdown">0</option>
+                    <option value="1" class="win-dropdown">1</option>
+                    <option value="2" class="win-dropdown">2</option>
+                    <option value="3" class="win-dropdown">3</option>
+                    <option value="4" class="win-dropdown">4</option>
+                    <option value="5" class="win-dropdown">5</option>
+                    <option value="6" class="win-dropdown">6</option>
+                    <option value="7" class="win-dropdown">7</option>
+                    <option value="8" class="win-dropdown">8</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

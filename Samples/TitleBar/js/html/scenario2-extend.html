@@ -1,0 +1,43 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario2-extend.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Extend view into title bar
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                When the view is extended into the title bar, the app can render into the space normally occupied by the title bar. The alpha channel of the title bar button background is respected when the view is extended into the title bar.
+            </p>
+            <p>
+                The app can use the properties of the CoreApplicationViewTitleBar object to make the app&apos;s custom title bar match the size and position of the system title bar.
+            </p>
+            <div>
+                <label for="extendView">
+                    <input id="extendView" type="checkbox" class="win-checkbox">Extend view into title bar
+                </label>
+            </div>
+            <p>
+                The view <span id="reportFullScreenMode"></span> full screen mode.
+            </p>
+            <p>
+                <button id="toggleFullScreenMode" class="win-button" style="min-width: 32px"></button>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

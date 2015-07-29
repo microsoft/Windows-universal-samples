@@ -1,0 +1,14 @@
+﻿<Application
+    x:Class="Notifications.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Notifications"
+    RequestedTheme="Light">
+    
+    <Application.Resources>
+
+        <SolidColorBrush x:Key="ApplicationAccentBrush" Color="#00B2F0"/>
+        
+    </Application.Resources>
+
+</Application>

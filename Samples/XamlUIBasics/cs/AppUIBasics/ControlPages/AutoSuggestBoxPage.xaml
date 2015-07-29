@@ -1,0 +1,85 @@
+﻿<Page
+    x:Name="pageRoot"
+    x:Class="AppUIBasics.ControlPages.AutoSuggestBoxPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <RelativePanel>
+        <local:ControlExample x:Name="Example1" HeaderText="A basic autosuggest box.">
+            <StackPanel Orientation="Horizontal">
+                <AutoSuggestBox x:Name="Control1" TextChanged="AutoSuggestBox_TextChanged" 
+                                            SuggestionChosen="AutoSuggestBox_SuggestionChosen" 
+                                            Width="300" />
+                <TextBlock x:Name="SuggestionOutput" Style="{StaticResource OutputTextBlockStyle}" FontFamily="Global User Interface" />
+            </StackPanel>
+            <local:ControlExample.Xaml>
+                <RichTextBlock>
+                    <Paragraph>&lt;AutoSuggestBox TextChanged="AutoSuggestBox_TextChanged"</Paragraph>
+                    <Paragraph TextIndent="48">SuggestionChosen="AutoSuggestBox_SuggestionChosen"</Paragraph>
+                    <Paragraph TextIndent="48">Width="300" /&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+
+        <local:ControlExample x:Name="Example2" HeaderText="An AutoSuggestBox that provides a SearchBox experience" MaxWidth="500">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <AutoSuggestBox x:Name="Control2" 
+                        PlaceholderText="Type a control name"
+                        TextChanged="Control2_TextChanged" 
+                        QueryIcon="Find" 
+                        QuerySubmitted="Control2_QuerySubmitted"
+                        SuggestionChosen="Control2_SuggestionChosen"
+                        Width="300"
+                        HorizontalAlignment="Left"/>
+                
+                <RelativePanel x:Name="ControlDetails" Grid.Row="1" HorizontalAlignment="Left" Visibility="Collapsed" Margin="0,8,0,0">
+                    <Image x:Name="ControlImage" Height="110" />
+                    <TextBlock x:Name="ControlTitle" Style="{StaticResource BaseTextBlockStyle}" RelativePanel.RightOf="ControlImage" Margin="8,0,0,0" />
+                    <TextBlock x:Name="ControlSubtitle" TextWrapping="WrapWholeWords" RelativePanel.Below="ControlTitle" RelativePanel.AlignLeftWith="ControlTitle" Margin="8,0,0,0" />
+                </RelativePanel>
+            </Grid>
+            <local:ControlExample.Xaml>
+                <RichTextBlock>
+                    <Paragraph>&lt;AutoSuggestBox PlaceholderText="Type a control name"</Paragraph>
+                    <Paragraph TextIndent="24">TextChanged="Control2_TextChanged"</Paragraph>
+                    <Paragraph TextIndent="24">QueryIcon="Find"</Paragraph>
+                    <Paragraph TextIndent="24">QuerySubmitted="Control2_QuerySubmitted"</Paragraph>
+                    <Paragraph TextIndent="24">SuggestionChosen="Control2_SuggestionChosen"/&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+
+        <VisualStateManager.VisualStateGroups>
+            <!-- Visual states reflect the application's window size -->
+            <VisualStateGroup>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Example2.(RelativePanel.RightOf)" Value="Example1" />
+                        <Setter Target="Example2.Margin" Value="24,0,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Example2.(RelativePanel.Below)" Value="Example1" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </RelativePanel>
+</Page>

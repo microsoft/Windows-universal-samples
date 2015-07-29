@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/referencingPackagedContent.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>The following images demonstrate the different ways to reference package content.</p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <ul>
+            <li>
+                <span>Using a relative path: &quot;/images/msnLogo.png&quot; </span>
+                <br>
+                <img alt="MSN" src="/images/msnLogo.png">
+            </li>
+            <li>
+                <span>Using a fully qualified URI: &quot;</span><span id="fullyQualifiedImageReference"></span>&quot;
+                <br>
+                <img id="fullyQualifiedImage" alt="Office">
+            </li>
+            <li>
+                <span>Using the empty alias as the host name (which refers to the current package): &quot;ms-appx:///images/bingLogo.png&quot; </span>
+                <br>
+                <img alt="Bing" src="ms-appx:///images/bingLogo.png">
+            </li>
+            <li>
+                <span>Using the package name alias as the host name: &quot;ms-appx://Microsoft.SDKSamples.PackagedContent.JS/images/xboxLogo.png&quot; (you can also reference content from a dependency framework package this way)</span>
+                <br>
+                <img alt="Xbox" src="ms-appx://Microsoft.SDKSamples.PackagedContent.JS/images/xboxLogo.png">
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

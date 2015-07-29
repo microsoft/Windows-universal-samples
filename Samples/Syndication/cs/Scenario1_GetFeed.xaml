@@ -1,0 +1,116 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page x:Class="Syndication.S1_GetAFeed" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:Syndication" xmlns:common="using:SDKTemplate.Common" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+  <Page.Resources>
+    <Style x:Key="LabelTextStyle" TargetType="TextBlock">
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="Margin" Value="0,5,10,0"/>
+    </Style>
+    <Style x:Key="OutputTextBoxStyle" TargetType="TextBox">
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="TextWrapping" Value="Wrap"/>
+      <Setter Property="MaxHeight" Value="50"/>
+      <Setter Property="Margin" Value="0,5,0,0"/>
+      <Setter Property="IsReadOnly" Value="True"/>
+    </Style>
+  </Page.Resources>
+  <Grid x:Name="LayoutRoot">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Grid x:Name="Input" Grid.Row="0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition/>
+        <RowDefinition/>
+        <RowDefinition/>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+      <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="Download and display a syndication feed from a specific address." Style="{StaticResource LabelTextStyle}"/>
+      <TextBlock Grid.Row="1" Grid.Column="0" Text="Feed Address: " Style="{StaticResource LabelTextStyle}"/>
+      <TextBox Grid.Row="1" Grid.Column="1" Name="FeedUri" IsReadOnly="True" Text="http://blogs.msdn.com/b/b8/rss.aspx"/>
+      <Button x:Name="GetFeedButton" Grid.Row="2" Grid.Column="0" Content="Get Feed" Click="GetFeed_Click"/>
+      <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center">
+        <Button x:Name="PreviousItemButton" Content="Previous Item" Click="PreviousItem_Click"/>
+        <TextBlock x:Name="IndexField" Text="0 of 0" Style="{StaticResource LabelTextStyle}" Margin="5,0,5,0"/>
+        <Button x:Name="NextItemButton" Content="Next Item" Click="NextItem_Click"/>
+      </StackPanel>
+    </Grid>
+    <Grid Grid.Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <TextBlock Grid.Row="0" Grid.Column="0" Text="Feed Title:" Style="{StaticResource LabelTextStyle}"/>
+      <TextBlock Grid.Row="0" Grid.Column="1" x:Name="FeedTitleField" Style="{StaticResource LabelTextStyle}"/>
+      <TextBlock Grid.Row="1" Grid.Column="0" Text="Item Title:" Style="{StaticResource LabelTextStyle}"/>
+      <TextBlock Grid.Row="1" Grid.Column="1" x:Name="ItemTitleField" Style="{StaticResource LabelTextStyle}"/>
+      <TextBlock Grid.Row="2" Grid.Column="0" Text="Link:" Style="{StaticResource LabelTextStyle}"/>
+      <HyperlinkButton Grid.Row="2" Grid.Column="1" x:Name="LinkField" Click="LinkField_Click" FontSize="16" VerticalAlignment="Stretch" HorizontalContentAlignment="Left" MaxWidth="500"/>
+      <Border Grid.Row="3" Grid.ColumnSpan="2">
+        <WebView x:Name="ContentWebView"/>
+      </Border>
+      <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Text="Item Extensions (Node Name, Node Namespace, Node Value):" TextWrapping="Wrap" Style="{StaticResource LabelTextStyle}"/>
+      <ListBox Grid.Row="5" Grid.ColumnSpan="2" x:Name="ExtensionsField" Height="100">
+        <ListBox.ItemsPanel>
+          <ItemsPanelTemplate>
+            <StackPanel Orientation="Vertical"/>
+          </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+        <ListBox.ItemContainerStyle>
+          <Style TargetType="ListBoxItem">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Padding" Value="5"/>
+          </Style>
+        </ListBox.ItemContainerStyle>
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+              <TextBlock Grid.Column="0" Text="{Binding NodeName}" HorizontalAlignment="Left" TextTrimming="WordEllipsis" Margin="0,0,10,0"/>
+              <TextBlock Grid.Column="1" Text="{Binding NodeNamespace}" HorizontalAlignment="Left" TextTrimming="WordEllipsis" Margin="0,0,10,0"/>
+              <TextBlock Grid.Column="2" Text="{Binding NodeValue}" HorizontalAlignment="Left" TextTrimming="WordEllipsis"/>
+            </Grid>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+      <TextBox Name="OutputField" Grid.Row="6" Grid.ColumnSpan="2" Style="{StaticResource OutputTextBoxStyle}"/>
+    </Grid>
+    <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts -->
+    <VisualStateManager.VisualStateGroups>
+      <VisualStateGroup>
+        <VisualState x:Name="DefaultLayout"/>
+        <VisualState x:Name="Below768Layout"/>
+      </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+  </Grid>
+</Page>

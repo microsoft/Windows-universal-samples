@@ -1,0 +1,44 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario1-analyze.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Analyze Japanese text phonetically
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                Enter Japanese text and choose whether to break each phrase into words or units of pronunciation. Then click &quot;Analyze&quot; to perform phonetic analysis. Each phrase is shown on its own line, and phonetic information is shown in parentheses.
+            </p>
+            <input id="inputText" type="text" value="&#x4ECA;&#x65E5;&#x306F;&#x3044;&#x3044;&#x5929;&#x6C17;&#x3067;&#x3059;" class="win-textbox">
+            <br>
+            <label for="wordRadioButton">
+                <input id="wordRadioButton" type="radio" name="method" checked="checked" class="win-radio">Break into words
+            </label>
+            <br>
+            <label for="monoRubyRadioButton">
+                <input id="monoRubyRadioButton" type="radio" name="method" class="win-radio">Break into units of pronunciation
+            </label>
+            <br>
+            <p>
+                <button id="getPhrasesButton" class="win-button">Analyze</button>
+            </p>
+            <div id="outputText">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

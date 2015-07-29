@@ -1,0 +1,47 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario1-basic.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Entering and exiting full screen mode
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                Click the button to enter and exit full screen mode. We recommend that apps also exit full screen mode when the user presses the Escape key.
+            </p>
+            <p>
+                The view <span id="reportFullScreenMode"></span> full screen mode.
+            </p>
+            <p>
+                <button id="toggleFullScreenMode" class="win-button" style="min-width: 32px"></button>
+            </p>
+            <div id="fullScreenOptions">
+                <p>
+                    When in full screen mode, you can request that the standard system overlays be shown.
+                </p>
+                <button id="showStandardSystemOverlays" class="win-button">Show standard system overlays</button>
+                <p>
+                    When the user manually invokes the standard system overlays, you can request that they have a minimal initial footprint (if possible).
+                </p>
+                <label for="useMinimalOverlays">
+                    <input id="useMinimalOverlays" type="checkbox" class="win-checkbox">Use minimal overlays
+                </label>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

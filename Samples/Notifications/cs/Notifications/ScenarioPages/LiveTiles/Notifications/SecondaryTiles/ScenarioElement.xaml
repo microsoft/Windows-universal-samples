@@ -1,0 +1,57 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.LiveTiles.Notifications.SecondaryTiles.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls">
+
+    <controls:StepsControl x:Name="stepsControl" NextButtonVisibility="Collapsed">
+        
+        <StackPanel>
+            
+            <RichTextBlock>
+                <Paragraph>
+                    First we need a secondary tile. Use the button below to pin a new secondary tile.
+                </Paragraph>
+            </RichTextBlock>
+            
+            <Button
+                x:Name="ButtonPinTile"
+                Content="pin new secondary tile"
+                HorizontalAlignment="Stretch"
+                Click="ButtonPinTile_Click"
+                Margin="0,12,0,0"/>
+
+        </StackPanel>
+        
+        <StackPanel>
+            
+            <RichTextBlock>
+                <Paragraph>
+                    Notice the new secondary tile pinned on your start. Then use the button below to send a notification to the tile.
+                </Paragraph>
+            </RichTextBlock>
+            
+            <Button
+                x:Name="ButtonSendNotification"
+                Content="send notification to secondary tile"
+                HorizontalAlignment="Stretch"
+                Click="ButtonSendNotification_Click"
+                Margin="0,12,0,0"/>
+            
+            <RichTextBlock
+                Margin="0,12,0,0">
+                <Paragraph>
+                    The above button sends a tile notification to the secondary tile you just pinned.
+                </Paragraph>
+                <Paragraph/>
+                <Paragraph>After clicking the button, notice the notification displayed on the secondary tile.</Paragraph>
+            </RichTextBlock>
+
+        </StackPanel>
+    </controls:StepsControl>
+    
+</UserControl>

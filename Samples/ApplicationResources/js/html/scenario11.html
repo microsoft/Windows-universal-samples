@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario11.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            Applications, at times, may want to show some portion of UI in a different language other than the rest of the application. Applications can be more explicit when loading resources by making a call to the current Windows.ApplicationModel.Resources.Core.ResourceManager
+            with an overridden context. The overridden context then lets the application be more specific about the configuration and type of resource to load. Advanced functionality such as this is typically found in the Windows.ApplicationModel.Resources.Core
+            namespace within the ResourceManager class.
+        </p>
+        <p>
+            To view a resource that has been loaded inline in a different language, choose the language below and click Show.</p>
+        <select id="scenario11Select" class="win-dropdown">
+            <option value="en-US" class="win-dropdown">English</option>
+            <option value="de-DE" class="win-dropdown">German</option>
+            <option value="fr-FR" class="win-dropdown">French</option>
+            <option value="ja" class="win-dropdown">Japanese</option>
+        </select>
+        <button id="scenario11Show" class="win-button">
+            Show text</button>
+    </div>
+    <div id="output" data-win-control="SdkSample.ScenarioOutput">
+    </div>
+</body>
+
+</html>

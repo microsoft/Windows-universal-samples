@@ -1,0 +1,44 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CameraFaceDetection</title>
+
+    <!-- WinJS references -->
+    <link href="/WinJS/css/ui-dark.css" rel="stylesheet">
+    <script src="/WinJS/js/base.js"></script>
+    <script src="/WinJS/js/ui.js"></script>
+
+    <!-- CameraFaceDetection references -->
+    <link href="/css/camera.css" rel="stylesheet">
+    <script src="/js/camera.js"></script>
+</head>
+
+<body class="win-type-body">
+    <video id="cameraPreview" class="cameraPreview"></video>
+    <canvas id="facesCanvas" class="faceDectectionCanvas"></canvas>
+    <div class="stackPanel">
+        <button id="photoButton" class="cameraButton win-button" data-win-control="WinJS.UI.AppBarCommand" data-win-options="{icon:&apos;camera&apos;}">
+        </button>
+        <button id="videoButton" class="cameraButton win-button" data-win-control="WinJS.UI.AppBarCommand" data-win-options="{icon:&apos;video&apos;}">
+        </button>
+    </div>
+    <button id="faceDetectionButton" class="faceDetectButton win-button" data-win-control="WinJS.UI.AppBarCommand" data-win-options="{icon:&apos;contact&apos;}">
+    </button>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1-basic.css">
+    <script src="/js/scenario1-basic.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                User interaction mode
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                The user interaction mode indicates whether the system is designed for touch interaction or mouse interaction. Apps can use this information to guide their choice of layout. To change the mode on a PC, click the Tablet mode button in Action Center.
+            </p>
+            <p>
+                The current user interaction mode is <span id="currentInteractionMode"></span>. The spacing between the items below will change depending on the mode. (To make the difference easier to see, we also change the color of the items.)
+            </p>
+            <label for="checkbox1">
+                <input id="checkbox1" type="checkbox" class="win-checkbox">One</label>
+            <label for="checkbox2">
+                <input id="checkbox2" type="checkbox" class="win-checkbox">Two</label>
+            <label for="checkbox3">
+                <input id="checkbox3" type="checkbox" class="win-checkbox">Three</label>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.LiveTiles.UnpinEverything.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="24">
+
+
+
+            <Button
+                x:Name="ButtonUnpinEverything"
+                Content="Unpin all secondary tiles"
+                HorizontalAlignment="Stretch"
+                Click="ButtonUnpinEverything_Click"/>
+
+            <RichTextBlock Margin="0,24,0,0">
+                <Paragraph>You can programmatically unpin secondary tiles.</Paragraph>
+                <Paragraph/>
+                <Paragraph>The above button loops through all secondary tiles using FindAllAsync() and calls RequestDeleteAsync() on each tile to unpin all secondary tiles.</Paragraph>
+            </RichTextBlock>
+
+        </StackPanel>
+    </ScrollViewer>
+    
+</UserControl>

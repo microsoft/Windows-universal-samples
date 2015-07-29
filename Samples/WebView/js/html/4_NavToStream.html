@@ -1,0 +1,28 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Scenario 4: Navigate to a stream</title>
+    <link rel="stylesheet" href="/css/4_NavToStream.css">
+    <script src="/js/4_NavToStream.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>For HTML-based file formats, it can sometimes be useful to stream relative references as they are needed, such as for encrypted HTML content that cannot be natively rendered by the WebView control. Relative references are links to any content,
+            such as script or images, which are relative to the current URL, and do not include a scheme name or domain name. The ms-local-stream:// URI scheme is used for stream navigation to distinguish it from other types of navigation.</p>
+        <p>A custom WinRT object is necessary for providing streams to the WebView, and sample implementations using C++ and C# are included with this sample. For the WebView below, the WinRT object is resolving &quot;ms-local-stream://microsoft.sdksamples.controlswebview.js_4e61766967617465546f53747265616d/simple_example.html&quot;
+            into an ms-appdata URL, and providing a stream from the copy of simple_example.html saved in the local app state folder.</p>
+        <button id="loadButtonCS" class="win-button">Load stream with C# resolver</button>
+        <button id="loadButtonCPP" class="win-button">Load stream with C++ resolver</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput" id="outputContainer">
+        <x-ms-webview id="webview"></x-ms-webview>
+    </div>
+</body>
+
+</html>

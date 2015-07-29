@@ -1,0 +1,55 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario3_XmlLoading.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This sample code uses 2 security settings &#x2013; <b>prohibitDTD</b> and <b>resolveExternal</b> -- to demonstrate how different security settings take effect on XML parser behavior. For detailed information, refer to <a href="http://go.microsoft.com/fwlink/?LinkId=224512"
+                    class="win-link">XmlLoadSettings</a> in the Windows Runtime documentation.</p>
+                <p>To run the sample, choose the setting option and click the following buttons.</p>
+                <p><b>Load Xml From File</b> will internally call loadXmlFormFileAsync. While, <b>Load Xml From Buffer</b> will internally call loadXmlFromBuffer.</p>
+                <input id="scenario3Option1" checked="checked" name="xmltab" type="radio" value="xmltabd" class="win-radio">prohibitDTD = true, resolveExternals = false
+                <br>
+                <input id="scenario3Option2" name="xmltab" type="radio" value="xmltab1" class="win-radio">prohibitDTD = false, resolveExternals = false
+                <br>
+                <input id="scenario3Option3" name="xmltab" type="radio" value="xmltab2" class="win-radio">prohibitDTD = false, resolveExternals = true
+                <br>
+                <button id="scenario3BtnFile" class="win-button">Load Xml From File</button>
+                <button id="scenario3BtnBuffer" class="win-button">Load Xml From Buffer</button>
+                <br>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <div>
+                <h3 class="win-type-title">Original XML Data</h3>
+                <textarea id="scenario3OriginalData" cols="60" name="xml_data" readonly="readonly" rows="12" style="height:auto; width:auto" class="win-textarea"></textarea>
+            </div>
+            <div>
+                <h3 class="win-type-title">Output</h3>
+                <textarea id="scenario3Result" cols="60" name="output" readonly="readonly" rows="12" style="height:auto; width:auto" class="win-textarea"></textarea>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

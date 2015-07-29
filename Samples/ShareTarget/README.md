@@ -1,0 +1,75 @@
+﻿<!---
+  category: DeepLinksAndAppToAppCommunication 
+--->
+
+# Sharing content target app sample
+
+This sample demonstrates how an app receives content shared from another app. This sample uses classes from the [**Windows.ApplicationModel.DataTransfer**](http://msdn.microsoft.com/library/windows/apps/br205967) and [**Windows.ApplicationModel.DataTransfer.Share**](http://msdn.microsoft.com/library/windows/apps/br205989) namespaces. Some of the classes you might want to review in more detail are the [**ShareOperation**](http://msdn.microsoft.com/library/windows/apps/br205977) class, which you use to manage a share operation, and the [**DataPackageView**](http://msdn.microsoft.com/library/windows/apps/hh738408) class, which you use to get the content being shared. Because each share scenario usually involves two apps—the source app that provides the content and a target app that receives the content—we recommend you install and deploy the  [**Sharing content source app sample**](http://go.microsoft.com/fwlink/p/?linkid=231511) when you install and run this one. That way, you can see how sharing works from end to end. 
+
+This sample covers how to receive shared content in a variety of formats, including:
+
+- Text 
+- Web link 
+- Application link 
+- Images 
+- Files 
+- Delay-rendered files 
+- HTML content 
+- Custom data 
+
+Also, this sample shows how to display the source app's 30x30 logo and the source app's package family name.
+
+We also recommend you take a look at the  [Sharing and exchanging data](http://msdn.microsoft.com/library/windows/apps/hh464923) section of our documentation, which describes how sharing works and contains several how-to topics that cover how to share [text](http://msdn.microsoft.com/library/windows/apps/hh758313), an  [image](http://msdn.microsoft.com/library/windows/apps/hh758305), files, and other formats. Our  [Guidelines and checklist for sharing content](http://msdn.microsoft.com/library/windows/apps/hh465251) can also help you create a great user experience with the share feature. 
+
+For more info about the concepts and APIs demonstrated in this sample, see these topics:
+
+- [Sharing content source app sample](http://go.microsoft.com/fwlink/p/?linkid=231511)
+- [Sharing and exchanging data](http://msdn.microsoft.com/library/windows/apps/hh464923)
+- [How to receive files (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758302)
+- [How to receive HTML (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758303)
+- [How to receive HTML (XAML)](http://msdn.microsoft.com/library/windows/apps/hh973053)
+- [How to receive text (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758304)
+- [How to receive text (XAML)](http://msdn.microsoft.com/library/windows/apps/hh973054)
+- [Quickstart: Receiving shared content (HTML)](http://msdn.microsoft.com/library/windows/apps/hh465255)
+- [Quickstart: Receiving shared content (XAML)](http://msdn.microsoft.com/library/windows/apps/hh871367)
+- [**DataPackageView**](http://msdn.microsoft.com/library/windows/apps/hh738408)
+- [**ShareOperation**](http://msdn.microsoft.com/library/windows/apps/br205977)
+- [**Windows.ApplicationModel.DataTransfer**](http://msdn.microsoft.com/library/windows/apps/br205967)
+- [**Windows.ApplicationModel.DataTransfer.Share**](http://msdn.microsoft.com/library/windows/apps/br205989)
+
+
+
+To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windows.com). 
+
+**Note**  For Windows 10 app samples, go to  [Windows 10 Samples](https://github.com/Microsoft/Windows-universal-samples). The samples for Windows 10 can be built and run using Windows developer [tools](https://developer.windows.com).
+
+
+## Related topics
+
+- [Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
+
+## System requirements
+
+**Client:** Windows 10
+
+**Server:** Windows Server 2016 Technical Preview
+
+**Phone:** Windows 10
+
+## Build the sample
+
+1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+2. Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file. 
+3. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+
+## Run the sample
+
+The next steps depend on whether you just want to deploy the sample or you want to both deploy and run it.
+
+### Deploying the sample
+
+- Select Build > Deploy Solution. 
+
+### Deploying and running the sample
+
+- To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or select Debug > Start Without Debugging. 

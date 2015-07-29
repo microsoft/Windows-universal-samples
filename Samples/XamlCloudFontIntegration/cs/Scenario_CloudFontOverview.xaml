@@ -1,0 +1,70 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario_CloudFontOverview"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource ScenarioDescriptionTextStyle}">
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Margin" Value="0,0,0,20"/>
+            </Style>
+        </Grid.Resources>
+        <Grid x:Name="RootGrid" Margin="12,10,12,12" MaxWidth="600">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Downloadable fonts overview:" Style="{StaticResource SampleHeaderTextStyle}" TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Padding="0,0,15,0">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="DirectWrite is part of the DirectX graphics platform that XAML uses for display of text and
+graphics. A new capability in DirectWrite for Windows 10 allows an app to format text content using fonts that may not be
+installed on a device, and for the font to be downloaded automatically from a Microsoft service when the text is displayed." />
+                    <TextBlock Text="This capability is integrated directly into XAML. You as a XAML developer don't need
+to add any special code or markup. Simply by formatting a XAML element using any Windows font, XAML will automatically interact
+with DirectWrite to download the font when text content is displayed if that font is not already locally available on the device." />
+                    <TextBlock Text="When the content is loaded, XAML will initially display the text using fallback fonts. After
+a short delay, XAML will automatically refresh the view, displaying the content using the requested fonts. The font data is locally
+cached, so if it is used again in the near future, it will be immediately available, and initial display using fallback fonts may 
+not be necessary. Font data is cached for use across the system, not just in the current app. So, even when the font is used by an
+app for the first time, it may already be cached, and font fallback may not be needed for the initial display. Over time, if the
+font is not used, it may get cleared from the cache. In that case, if the font gets used again, the system will download it again." />
+                    <TextBlock Text="Some fonts are very large, especially fonts for Chinese, Japanese and Korean. If a font is
+large, then DirectWrite will download only some portions of the font &#x2014; enough to display the content. If other content is
+displayed using the same font and that content includes additional characters not found in the previous content, then additional
+portions of the font will be downloaded." />
+                    <TextBlock Text="Of course, the ability to download font data depends on network connectivity. If no connection
+is available, then the content will be displayed using fallback fonts or portions of the requested font that may have been downloaded
+earlier. When used on metered connections, this mechanism can result in network data usage. Therefore, you should be careful in how
+you use it so as not to burden a user's data plan." />
+                    <TextBlock Margin="0,0,0,10" Text="In particular, your app's static UI should use only certain recommended fonts
+that are guaranteed to be locally available on all Windows 10 devices. These are described at this page:" />
+                    <HyperlinkButton 
+                        Content="http://msdn.microsoft.com/library/windows/apps/hh700394.aspx" 
+                        NavigateUri="http://msdn.microsoft.com/library/windows/apps/hh700394.aspx" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

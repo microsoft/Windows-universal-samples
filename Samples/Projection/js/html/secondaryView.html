@@ -1,0 +1,29 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+
+    <!-- WinJS references -->
+    <link href="/Microsoft.WinJS.4.0/css/ui-dark.css" rel="stylesheet">
+    <script src="/Microsoft.WinJS.4.0/js/WinJS.js" type="text/javascript"></script>
+    <script src="/js/secondaryView.js"></script>
+</head>
+
+<body class="win-type-body">
+    <p>
+        This is a projection view. This view might arrive on the wrong display, so you should allow users to swap the display where this view appears.
+    </p>
+    <div>
+        <button class="wide win-button" id="swapDisplayButton">&#xE13C; Swap main and projection views</button>
+        <button class="wide win-button" id="stopProjectionButton">&#xE2B3; Stop projection</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+    </div>
+</body>
+
+</html>

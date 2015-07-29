@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/langfont.js"></script>
+    <script src="/js/scenario4.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            The LanguageFontGroup API should not be confused with a font fallback mechanism. It provides a single font recommendation for a given language, and the assumption is that the text formatted with that font is all in that language. If the content does happen
+            to contain text in another language that that font does not support, then application frameworks provided by Windows will automatically apply a fallback font to those portions of the text when it is rendered. The typographic quality may be
+            less than optimal, however. This shows a comparison of a single font for English being applied to mixed English/Japanese text versus separate recommended fonts being applied to English text and Japanese text.</p>
+        <button id="scenario4Show" class="win-button">
+            Apply Recommended Font and Size</button>
+        <br>
+        <br>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput" class="output">
+        <h2 class="win-type-subheader">
+            Font Fallback (recommended font not applied)</h2>
+        <p>
+            <span lang="en-us">Lorem ipsum dolor sit amet, ne </span><span lang="ja-JP">&#x8A27;&#x7128;&#x3092;&#x992F;&#x30C0; &#x62E3;&#x9975;&#x5EE6;&#x3048;&#x5C24;
+                &#x6827;&#x7A43;&#x699E;&#x3057;&#x3083;&#x3074;&#x3083; &#x992F;&#x30C0; &#x3089;&#x6A2A;&#x8969; &#x30DA;&#x89A7;&#x3078;</span><span lang="en-us"> iisque interpretaris sit. Ex sea maluisset
+                    urbanitas adolescens, id porro constituto percipitur vis, mucius ridens liberavisse
+                    has at.</span>
+        </p>
+        <h2 class="win-type-subheader">
+            Using Font Mapping (recommended font applied)</h2>
+        <p id="scenario4Paragraph">
+            <span lang="en-us">Lorem ipsum dolor sit amet, ne </span><span lang="ja-JP">&#x8A27;&#x7128;&#x3092;&#x992F;&#x30C0; &#x62E3;&#x9975;&#x5EE6;&#x3048;&#x5C24;
+                &#x6827;&#x7A43;&#x699E;&#x3057;&#x3083;&#x3074;&#x3083; &#x992F;&#x30C0; &#x3089;&#x6A2A;&#x8969; &#x30DA;&#x89A7;&#x3078;</span><span lang="en-us"> iisque interpretaris sit. Ex sea maluisset
+                    urbanitas adolescens, id porro constituto percipitur vis, mucius ridens liberavisse
+                    has at.</span>
+        </p>
+    </div>
+</body>
+
+</html>

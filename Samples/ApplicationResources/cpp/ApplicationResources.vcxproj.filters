@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>80bfd669-aa83-4537-9611-027cffe0d8af</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{c6978fb6-bc64-498d-97c8-f5b53997e54e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="appdata">
+      <UniqueIdentifier>{8a1fd90f-51d1-4679-a41a-e8c2a0662e48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Images">
+      <UniqueIdentifier>{715e3741-cd01-4b3e-9f11-85b09d1f5945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Images\en">
+      <UniqueIdentifier>{d9945c0c-409a-4ca8-bb71-7152b0d99aa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Images\ja">
+      <UniqueIdentifier>{622a9cd6-dc46-49b1-914b-bddf1693b612}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="strings">
+      <UniqueIdentifier>{a0afeeb7-6f08-4c37-bef2-91c5fb309e52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="strings\en">
+      <UniqueIdentifier>{cf97283f-4ed2-40cf-b060-89bd7503fc66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="strings\fr">
+      <UniqueIdentifier>{4efecff5-e474-4148-b14b-69f05df2d699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="strings\ja">
+      <UniqueIdentifier>{092c0f30-3f46-4203-b439-37562469cb68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="strings\dimensions">
+      <UniqueIdentifier>{ffd560c9-7542-40ea-b41a-feb7483e446f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.xaml.cpp" />
+    <ClCompile Include="MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="scenario10.xaml.cpp" />
+    <ClCompile Include="scenario11.xaml.cpp" />
+    <ClCompile Include="scenario12.xaml.cpp" />
+    <ClCompile Include="scenario13.xaml.cpp" />
+    <ClCompile Include="scenario2.xaml.cpp" />
+    <ClCompile Include="scenario3.xaml.cpp" />
+    <ClCompile Include="scenario4.xaml.cpp" />
+    <ClCompile Include="scenario5.xaml.cpp" />
+    <ClCompile Include="scenario7.xaml.cpp" />
+    <ClCompile Include="scenario8.xaml.cpp" />
+    <ClCompile Include="scenario1.xaml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="App.xaml.h" />
+    <ClInclude Include="MainPage.xaml.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="scenario10.xaml.h" />
+    <ClInclude Include="scenario11.xaml.h" />
+    <ClInclude Include="scenario12.xaml.h" />
+    <ClInclude Include="scenario13.xaml.h" />
+    <ClInclude Include="scenario2.xaml.h" />
+    <ClInclude Include="scenario3.xaml.h" />
+    <ClInclude Include="scenario4.xaml.h" />
+    <ClInclude Include="scenario5.xaml.h" />
+    <ClInclude Include="scenario7.xaml.h" />
+    <ClInclude Include="scenario8.xaml.h" />
+    <ClInclude Include="scenario1.xaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MainPage.xaml" />
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+    <Page Include="scenario2.xaml" />
+    <Page Include="scenario3.xaml" />
+    <Page Include="scenario4.xaml" />
+    <Page Include="scenario5.xaml" />
+    <Page Include="scenario7.xaml" />
+    <Page Include="scenario8.xaml" />
+    <Page Include="scenario10.xaml" />
+    <Page Include="scenario11.xaml" />
+    <Page Include="scenario12.xaml" />
+    <Page Include="scenario13.xaml" />
+    <Page Include="scenario1.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\placeholder-sdk.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="..\shared\images\projectorwithscalecaption.scale-100.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="..\shared\images\projectorwithscalecaption.scale-140.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="..\shared\images\projectorwithscalecaption.scale-180.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="..\shared\images\en-US\projector.scale-100_contrast-black.png">
+      <Filter>Images\en</Filter>
+    </Image>
+    <Image Include="..\shared\images\en-US\projector.scale-100_contrast-standard.png">
+      <Filter>Images\en</Filter>
+    </Image>
+    <Image Include="..\shared\images\en-US\projector.scale-100_contrast-white.png">
+      <Filter>Images\en</Filter>
+    </Image>
+    <Image Include="..\shared\images\en-US\projector.scale-140_contrast-black.png">
+      <Filter>Images\en</Filter>
+    </Image>
+    <Image Include="..\shared\images\en-US\projector.scale-140_contrast-standard.png">
+      <Filter>Images\en</Filter>
+    </Image>
+    <Image Include="..\shared\images\en-US\projector.scale-140_contrast-white.png">
+      <Filter>Images\en</Filter>
+    </Image>
+    <Image Include="..\shared\images\en-US\projector.scale-180_contrast-black.png">
+      <Filter>Images\en</Filter>
+    </Image>
+    <Image Include="..\shared\images\en-US\projector.scale-180_contrast-standard.png">
+      <Filter>Images\en</Filter>
+    </Image>
+    <Image Include="..\shared\images\en-US\projector.scale-180_contrast-white.png">
+      <Filter>Images\en</Filter>
+    </Image>
+    <Image Include="..\shared\images\ja\projector.scale-100_contrast-black.png">
+      <Filter>Images\ja</Filter>
+    </Image>
+    <Image Include="..\shared\images\ja\projector.scale-100_contrast-standard.png">
+      <Filter>Images\ja</Filter>
+    </Image>
+    <Image Include="..\shared\images\ja\projector.scale-100_contrast-white.png">
+      <Filter>Images\ja</Filter>
+    </Image>
+    <Image Include="..\shared\images\ja\projector.scale-140_contrast-black.png">
+      <Filter>Images\ja</Filter>
+    </Image>
+    <Image Include="..\shared\images\ja\projector.scale-140_contrast-standard.png">
+      <Filter>Images\ja</Filter>
+    </Image>
+    <Image Include="..\shared\images\ja\projector.scale-140_contrast-white.png">
+      <Filter>Images\ja</Filter>
+    </Image>
+    <Image Include="..\shared\images\ja\projector.scale-180_contrast-black.png">
+      <Filter>Images\ja</Filter>
+    </Image>
+    <Image Include="..\shared\images\ja\projector.scale-180_contrast-standard.png">
+      <Filter>Images\ja</Filter>
+    </Image>
+    <Image Include="..\shared\images\ja\projector.scale-180_contrast-white.png">
+      <Filter>Images\ja</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\shared\appdata\appdata.dxfl-dx9.dat">
+      <Filter>appdata</Filter>
+    </None>
+    <None Include="..\shared\appdata\appdata.dxfl-dx10.dat">
+      <Filter>appdata</Filter>
+    </None>
+    <None Include="..\shared\appdata\appdata.dxfl-dx11.dat">
+      <Filter>appdata</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.contrast-black.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.contrast-black_scale-100.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.contrast-black_scale-140.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.contrast-black_scale-180.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.contrast-high.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.contrast-standard.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.contrast-white.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.contrast-white_scale-100.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.contrast-white_scale-140.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.contrast-white_scale-180.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.homeregion-001.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.homeregion-021.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.homeregion-us.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.lang-en.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.lang-en-gb.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.lang-fr.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.lang-fr-fr.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.scale-100.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.scale-140.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\dimensions\dimensions.scale-180.resw">
+      <Filter>strings\dimensions</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\en\errors.resw">
+      <Filter>strings\en</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\en\resources.resw">
+      <Filter>strings\en</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\fr\errors.resw">
+      <Filter>strings\fr</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\fr\resources.resw">
+      <Filter>strings\fr</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\ja\errors.resw">
+      <Filter>strings\ja</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\strings\ja\resources.resw">
+      <Filter>strings\ja</Filter>
+    </PRIResource>
+  </ItemGroup>
+</Project>

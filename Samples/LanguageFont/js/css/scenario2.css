@@ -1,0 +1,15 @@
+﻿/* styles */
+#scenario2ItalicHeading
+{
+    font-family: "Times New Roman";
+    font-style:italic;
+}
+
+#scenario2Document
+{
+    border:1px solid #EFEFEF;
+    box-shadow:0 0 5px 5px #808080;
+    padding:20px;
+    margin-top:20px;
+    margin-left:20px;
+}

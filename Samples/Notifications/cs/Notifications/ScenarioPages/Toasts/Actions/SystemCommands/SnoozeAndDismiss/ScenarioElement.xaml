@@ -1,0 +1,36 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.Toasts.Actions.SystemCommands.SnoozeAndDismiss.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls"
+    Loaded="UserControl_Loaded">
+
+    <controls:StepsControl x:Name="stepsControl" IsNextEnabled="True" Step="1">
+
+        <StackPanel>
+
+            <controls:InstructionControl Instruction="1">
+
+                <controls:PopToastControl
+                    x:Name="popToastControl"/>
+
+            </controls:InstructionControl>
+            
+            <controls:InstructionControl Instruction="2">
+                <RichTextBlock>
+                    <Paragraph>The toast should have a dropbox for selecting snooze interval, a snooze action, and a dismiss action. The snooze and dismiss will all be handled by system (the app will not be activated when the user takes these actions).</Paragraph>
+                    <Paragraph/>
+                    <Paragraph>The string displayed for the input and the 2 actions will be properly localized.</Paragraph>
+                </RichTextBlock></controls:InstructionControl>
+
+        </StackPanel>
+        
+
+    </controls:StepsControl>
+
+    
+</UserControl>

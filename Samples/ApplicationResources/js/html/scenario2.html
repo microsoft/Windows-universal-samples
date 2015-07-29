@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario2.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            HTML markup can declaratively refer to string resources. It is good practice to extract localizable strings from HTML so that they can be maintained and translated separately. To do this, strings should be placed into a separate string table (resources.resjson)
+            and referred to from the HTML, with a data-win-res attribute. The HTML elements can then be processed (typically on DOMContentLoaded) to replace the elements with their strings.</p>
+        <p>
+            Click the button below to localize the HTML. HTML will load in one of the application&apos;s languages (en-US, de-DE, ja or fr-FR) according to the <a href="http://go.microsoft.com/fwlink/?LinkId=227365" class="win-link">
+                user&apos;s preference</a>.</p>
+        <button id="scenario2Localize" class="win-button">
+            Localize HTML</button>
+        <br>
+        <br>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <p id="paragraph" data-win-res="{textContent: &apos;scenario2Paragraph&apos;}">
+            This is placeholder text that will get replaced when the button is clicked above</p>
+        <ul>
+            <li id="item1" data-win-res="{textContent: &apos;scenario2ListItem1&apos;}">This is placeholder text that will get replaced when the button is clicked above</li>
+            <li id="item2" data-win-res="{textContent: &apos;scenario2ListItem2&apos;}">This is placeholder text that will get replaced when the button is clicked above</li>
+        </ul>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/navigationErrors.css">
+    <script src="/js/navigationErrors.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>When there&#x2019;s an error navigating the top-level document or packaged content in an iframe, the app terminates. When there&#x2019;s an error navigating non-packaged content in an iframe, the app navigates that iframe to the about:blank page
+            unless you provide a custom error page. To create a custom error page, create a file named ms-app-error.html. When a navigation error occurs in an iframe, the app navigates that iframe to the msapp-error.html page and passes the error details
+            as query string parameters. Press the following button to go to &quot;https://www.microsoft.com/nonexistent&quot; in the iframe below and trigger a navigation error.</p>
+        <button id="navigate" class="action win-button">Cause Navigation Error</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <iframe id="iframe" sandbox="allow-scripts" src="https://www.microsoft.com/presspass/press/NewsArchive.mspx?cmbContentType=PressRelease"></iframe>
+    </div>
+</body>
+
+</html>

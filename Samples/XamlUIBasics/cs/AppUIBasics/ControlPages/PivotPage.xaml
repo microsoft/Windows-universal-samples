@@ -1,0 +1,44 @@
+﻿<Page
+    x:Class="AppUIBasics.ControlPages.PivotPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <local:ControlExample x:Name="Example1" HeaderText="A basic pivot." Margin="0,0,24,0">
+        <Pivot Title="EMAIL">
+            <PivotItem Header="All">
+                <TextBlock Text="all emails go here." />
+            </PivotItem>
+            <PivotItem Header="Unread">
+                <TextBlock Text="unread emails go here." />
+            </PivotItem>
+            <PivotItem Header="Flagged">
+                <TextBlock Text="flagged emails go here." />
+            </PivotItem>
+            <PivotItem Header="Urgent">
+                <TextBlock Text="urgent emails go here." />
+            </PivotItem>
+        </Pivot>
+        <local:ControlExample.Xaml>
+            <RichTextBlock>
+                <Paragraph>&lt;Pivot Title="EMAIL"&gt;</Paragraph>
+                <Paragraph TextIndent="12">&lt;PivotItem Header="All"&gt;</Paragraph>
+                <Paragraph TextIndent="24">&lt;TextBlock Text="all emails go here." /&gt;</Paragraph>
+                <Paragraph TextIndent="12">&lt;/PivotItem&gt;</Paragraph>
+                <Paragraph TextIndent="12">&lt;PivotItem Header="Unread"&gt;</Paragraph>
+                <Paragraph TextIndent="24">&lt;TextBlock Text="unread emails go here." /&gt;</Paragraph>
+                <Paragraph TextIndent="12">&lt;/PivotItem&gt;</Paragraph>
+                <Paragraph TextIndent="12">&lt;PivotItem Header="Flagged"&gt;</Paragraph>
+                <Paragraph TextIndent="24">&lt;TextBlock Text="flagged emails go here." /&gt;</Paragraph>
+                <Paragraph TextIndent="12">&lt;/PivotItem&gt;</Paragraph>
+                <Paragraph TextIndent="12">&lt;PivotItem Header="Urgent"&gt;</Paragraph>
+                <Paragraph TextIndent="24">&lt;TextBlock Text="urgent emails go here." /&gt;</Paragraph>
+                <Paragraph TextIndent="12">&lt;/PivotItem&gt;</Paragraph>
+                <Paragraph>&lt;/Pivot&gt;</Paragraph>
+            </RichTextBlock>
+        </local:ControlExample.Xaml>
+    </local:ControlExample>
+</Page>

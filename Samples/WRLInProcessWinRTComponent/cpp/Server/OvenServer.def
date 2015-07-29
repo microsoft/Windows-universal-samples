@@ -1,0 +1,5 @@
+LIBRARY Microsoft.SDKSamples.Kitchen.dll
+
+EXPORTS
+    DllCanUnloadNow         PRIVATE
+    DllGetActivationFactory PRIVATE

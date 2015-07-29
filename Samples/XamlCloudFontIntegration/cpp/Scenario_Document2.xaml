@@ -1,0 +1,62 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario_Document2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Margin" Value="0,0,0,20"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontWeight" Value="Normal"/>
+            </Style>
+        </Grid.Resources>
+        <Grid Margin="12,10,12,12" MaxWidth="600">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Document 2:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" 
+                           Text="Lorem ipsum (Chinese script)" />
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="Font used: FangSong Regular" />
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Padding="10,10,15,10" Background="#FF303030">
+                <!-- In order to best simulate runtime behavior in this sample, font formatting will be set in code 
+                when the page is loaded. Otherwise, if it were set here, the font data would have already been downloaded 
+                just by viewing this file in Visual Studio with the Xaml designer. -->
+                <StackPanel Orientation="Vertical">
+                  <TextBlock Text="住山掲性蘇際連際不派人集国重五。開分由生理捕普路武踏芭星通捕員会配。視写勢象東部終味真働京請童木産目価準騰地。勝年格予国御稿質格堂表東込紅統驚繰都。障続択写反香雨形混化会安気予又営呼供内役。易世鳴王実少快妻代生重禁寄試早注会夫要。読覆直豊月関事止発番激皇護守反兵目。東日抽徳在転法円制聞店大県特不社衣秋。" />
+                  <TextBlock Text="福子会況皇経病展確典盤無果層告逃。与事講責批連値現覧否死昔現兆同禁合徒入。分界走陽輝知明筋明尽申演総際男未天会占。測要家門宅投告毎丘上拡変県後校望憲気酸足。真近前国支界踊情提継底説級写世提秀米要歩。時止治際将表熊詳動学演名能。俳安体亮月見街十載備承前雲楽載媒戦婚米質。皇何果泰機同相暮田善世転。" />
+                  <TextBlock Text="平攻庄歩系阪五暖田駆真能。祝模政談勝黒属記強宮投照臨法。組更経件版同邑探岡一規幕載調教希子示待提。特動退中事全夜撮絵番波門環報家。暮氷本金現熊報読軽角組転弘禁創坑古。規漏欧集見孟済景白作提日供風車手調怡願互。文毎払算禁読売武住也入増載事厚当。必下愛話外稿昨話期雰長遠電設名氷原別子句。同無綿図減野衛国徴女朝水躍天洗競。" />
+                  <TextBlock Text="名情迫業訟続知送政音上社気髪。統農件界正甲私中基組対刑毎。終体面地守声外稿図電憶大押載並辞内康標入。済課賃決知学投庫日演将知。京費刑麻暮標左意鳥争次質担生見査王意望場。重的重個南止画引玲詩北田懸価載両。深単朝介記資門営健動米止嶺風育約右毎軍。第運健再申刀気情政掲膳学養体権俗部仕。場陣転話撤著寿氏格野線語全阪使津致技。" />
+                  <TextBlock Text="揺加黒変席討基天今世古活読。初伸撲学索婚奈費辺第最合報当職天京賞征供。昔円肝歩展霊意社転緊備継工権岡。死紙無高論更私日全件応条値。西違大変士公受国行集計医女。力持日策促外落乗調量見供治申対。情示面病探産文載験台愛禁森。供各覧森般大月予廟予全望省。行韓波封価展左関模気州由中属働込。政養解斐盛西国規交王全身拠後北也来旅問。" />
+                  <TextBlock Text="寄著街録演議請銃告治議育達紙観学要患。本話案新育子町賞業旅急初所酒対。後疑本材将椅宣目非進乃生手上広。鮮濱具技水売際類年供公言新内功単込夏辞廷。月部木規連歴銃東日体阪応広。氷省享萩湾込政燃柱際禁億族線待同高関度目。微記戦市戸野機属校外行第道愛。読属急費月岡起先問橋物右目得後法極踏。兆下要椅野祝男由万辞中産法。" />
+                  <TextBlock Text="棋介変北氏林土俊官届案治断変府不。下市全容週茨開町会知並択百。演応審強不課天閣率産心否連芸予。豊演害解同紀発覧小口闘無。柳賞定識戦軍型身読席銀形別高掲病程以。趣一験立歴由代理大選報戦。覧浜年箱集済謝荻回件内佐暮作。子住止置止未速改棚文引製。保出概演快訳昨備泉一第成戦杯供疑第原要退。銀警取済死近会内限験昨版内都住発月提。" />
+                  <TextBlock Text="異将必際削企宅聞念国齢現権的改。立稿静生金招束解際度光友第運身環職中際載。金団展人毎認定現離稿前覇所真度。給伸推置豊元晴危見南金育動再覚修部。陸治見富転掲特崎時崎事築。軒崩正着見活定部汗鳥並生将安見。始能転地案位視瞥価在策委学隆持。異済書無場覧強入交年全埼認銃間。担猶交委前出用上結天場締京半軽必昭聞掲。" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

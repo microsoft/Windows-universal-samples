@@ -1,0 +1,43 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.Toasts.ActivationTypes.System.Snooze.AutoContent.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls"
+    Loaded="UserControl_Loaded">
+
+    <controls:StepsControl x:Name="stepsControl" IsNextEnabled="True" Step="1">
+
+        <StackPanel>
+
+            <controls:InstructionControl Instruction="1">
+
+                <controls:PopToastControl
+                    x:Name="popToastControl"/>
+
+            </controls:InstructionControl>
+
+            <controls:InstructionControl Instruction="2">Confirm that the snooze button is localized to your system language settings (ignore the dismiss button).</controls:InstructionControl>
+            
+            <controls:InstructionControl Instruction="3">
+                <RichTextBlock>
+                    <Paragraph>That's it!</Paragraph>
+                    <Paragraph/>
+                    <Paragraph>This scenario tests the following...</Paragraph>
+                    <Paragraph/>
+                    <Paragraph>&lt;action activationType="system" arguments="snooze" hint-inputId="snoozeTime" content=""/></Paragraph>
+                    <Paragraph/>
+                    <Paragraph>The content isn't specified. The system is supposed to auto-fill in a localized version of "snooze" when displaying the toast.</Paragraph>
+                </RichTextBlock>
+            </controls:InstructionControl>
+
+        </StackPanel>
+
+
+    </controls:StepsControl>
+
+    
+</UserControl>

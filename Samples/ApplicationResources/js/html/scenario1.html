@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1.css">
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            Images and other file resources can be loaded based on <a href="http://go.microsoft.com/fwlink/?LinkId=227364" class="win-link">
+                scale factor</a>, high contrast mode, user language and other dimensions. All file references in HTML, CSS or code can be virtualized to pick up the most appropriate image based on the current context of the application.</p>
+        <p>
+            The images below are loaded using <code>img</code> tags or the CSS <code>background</code> property. In each case, a logical image reference is used that excludes any scale or other qualifications (e.g. images/projector.png), but a physical
+            image in the package with specific scale or other qualifications (e.g. images/ja/projector.scale-100_contrast-black.png) is loaded. The physical files can be qualified using folder names (e.g. en-US/) and/or filenames (e.g. name.contrast-black.png).</p>
+        <p>
+            To see a different image, follow the instructions below, and re-start the app.</p>
+        <ul>
+            <li>To change the user language preference, go to PC Settings &gt; Time &amp; language &gt; Region &amp; language, and add a language that is supported by the app (de-DE, en-US, fr-FR, or ja); then move the new language to the top of the list
+                (Set as primary).</li>
+            <li>To change the scale factor, run the app on different systems (or a multi-monitor system) using low-DPI and high-DPI displays, or use the <a href="http://go.microsoft.com/fwlink/?LinkId=234142" class="win-link">
+              Visual Studio simulator</a>.</li>
+            <li>To change contrast, go to PC settings &gt; Ease of access &gt; High contrast and select a theme.</li>
+        </ul>
+        <br>
+        <br>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <!-- Note the <img> tags below refer to a file in the images/ folder that does not exist. 
+            However, language, scale and high contrast variants do exist with scale qualifiers.
+            For example, 
+
+            images/simpleprojector.png refers to 
+
+                images/ProjectorWithScaleCaption.scale-100.png
+                images/ProjectorWithScaleCaption.scale-140.png
+                images/ProjectorWithScaleCaption.scale-180.png
+
+            images/projector.png refers to 
+
+                de-DE/projector.scale-100_contrast-black.png
+                de-DE/projector.scale-100_contrast-standard.png
+                de-DE/projector.scale-100_contrast-white.png
+                de-DE/projector.scale-140_contrast-black.png
+                de-DE/projector.scale-140_contrast-standard.png
+                de-DE/projector.scale-140_contrast-white.png
+                ...
+
+            Also, note that it is important to set the width and height properties to maintain 
+            consistent layout between scales. In particular, width and height should always be
+            set when images with scale variations are managed by the Windows resource 
+            technology. Otherwise, a variant image approprate for the current scale will be 
+            loaded, but then the HTML layout engine will apply additional scaling to that.
+
+            -->
+        <h3 class="win-type-title">
+            Foreground image (<code>img</code> tag) with scale variants</h3>
+        <img class="imageContainer" alt="projector with scale caption" width="80" height="80" src="/images/ProjectorWithScaleCaption.png">
+
+        <h3 class="win-type-title">
+            Background image (CSS <code>background</code> property) with scale variants</h3>
+        <div class="backgroundImageResource imageContainer"></div>
+        <!-- See scenario1.css for styling applied to this div. -->
+
+        <h3 class="win-type-title">
+            Foreground image (<code>img</code> tag) with scale and language variants</h3>
+        <img class="imageContainer" alt="projector" width="80" height="80" src="/images/projector.png">
+    </div>
+</body>
+
+</html>

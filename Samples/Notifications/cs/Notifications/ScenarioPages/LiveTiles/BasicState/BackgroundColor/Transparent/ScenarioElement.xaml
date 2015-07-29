@@ -1,0 +1,29 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.LiveTiles.BasicState.BackgroundColor.Transparent.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="24">
+
+            <Button
+                x:Name="ButtonPinSecondaryTile"
+                Content="Click to pin transparent tile"
+                HorizontalAlignment="Stretch"
+                Click="ButtonPinSecondaryTile_Click"/>
+
+            <RichTextBlock Margin="0,24,0,0">
+                <Paragraph>A transparent tile will use the user's accent color, or will allow the user to see their tile picture if they chose a background tile picture in their Start options.</Paragraph>
+                <Paragraph/>
+                <Paragraph>The above button pins a new secondary tile with VisualElements.BackgroundColor set to Colors.Transparent.</Paragraph>
+            </RichTextBlock>
+
+        </StackPanel>
+    </ScrollViewer>
+    
+</UserControl>

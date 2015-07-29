@@ -1,0 +1,16 @@
+﻿#fileToBlobUrlOutput #video
+{
+    max-height:300px;
+    margin-bottom:30px;
+}
+
+#fileToBlobUrlOutput #audio
+{
+    max-width:200px;
+}
+
+#fileToBlobUrlOutput .leftItem
+{
+    float:left;
+    margin-right:40px;
+}

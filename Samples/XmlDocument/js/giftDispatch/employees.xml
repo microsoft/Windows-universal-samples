@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<employees>
+    <employee>
+        <name>Micheal Jackson</name>
+        <department>Customer Support</department>
+        <startyear>2004</startyear>
+    </employee>
+    <employee>
+        <name>Anni Wang</name>
+        <department>Business Partner</department>
+        <startyear>2009</startyear>
+    </employee>
+    <employee>
+        <name>Sail Young</name>
+        <department>Consulting</department>
+        <startyear>2000</startyear>
+    </employee>
+</employees>

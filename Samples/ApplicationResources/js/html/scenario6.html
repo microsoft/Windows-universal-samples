@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario6.css">
+    <script src="/js/scenario6.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            It is possible that, while an application is running, the language, scale, contrast or other settings may change. In order to handle these events, event listeners should be registered to listen for and react to the change.</p>
+        <p>
+            To see new resources load in reaction to a context change event, do one of the following:</p>
+        <ul>
+            <li>Change the the language by going to PC Settings &gt; Time &amp; language &gt; Region &amp; language and add a language that is supported by the app (de-DE, en-US, fr-FR, or ja); then move the new language to the top of the list (Set as primary).</li>
+            <li>To observe a scale change, use a multi-monitor system configured with a low-DPI monitor and a high-DPI monitor and, while the app is running, move the app from one monitor to the other.
+            </li>
+        </ul>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <p id="paragraph" data-win-res="{textContent: &apos;scenario2Paragraph&apos;}">
+            This is placeholder text that will get replaced when the button is clicked above</p>
+        <ul>
+            <li id="item1" data-win-res="{textContent: &apos;scenario2ListItem1&apos;}">This is placeholder text that will get replaced when the button is clicked above</li>
+            <li id="item2" data-win-res="{textContent: &apos;scenario2ListItem2&apos;}">This is placeholder text that will get replaced when the button is clicked above</li>
+        </ul>
+        <br>
+        <p>
+            Image with scale variants:</p>
+        <img class="imageContainer" alt="projector with scale caption" width="80" height="80" src="/images/ProjectorWithScaleCaption.png">
+        <p>
+            Image with scale and language variants:</p>
+        <img class="imageContainer" alt="projector" width="80" height="80" src="/images/projector.png">
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="CustomUsbDeviceAccess.Scenario1_ConnectDisconnect"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomUsbDeviceAccess"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="DeviceListSource"/>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Device Selection" Style="{StaticResource SampleHeaderTextStyle}"/>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <!-- Place scenario content here -->
+
+                <Grid x:Name="LayoutRoot" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="Input" Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="InputTextBlock1" TextWrapping="Wrap" Grid.Row="0" HorizontalAlignment="Left">
+           This scenario shows how to locate a WinUSB device and open an handle
+          to the device. 
+          <LineBreak/>
+           Note: Sample will automatically attempt to reconnect to your device
+          if the connected device was ever unplugged and replugged into the same
+          USB port. If the device is plugged into a different port, it will be
+          seen as a different device.
+                        </TextBlock>
+                        <StackPanel Orientation="Vertical" Margin="0,10" Grid.Row="1">
+                            <StackPanel x:Name="StackDeviceButtons" Orientation="Horizontal">
+                                <Button x:Name="ButtonConnectToDevice" Content="Connect to device" Click="ConnectToDevice_Click"/>
+                                <Button x:Name="ButtonDisconnectFromDevice" Content="Disconnect from device" Click="DisconnectFromDevice_Click"/>
+                            </StackPanel>
+                            <TextBlock Text="Select a Usb Device:" Margin="0,10"/>
+                            <ListBox x:Name="ConnectDevices" ItemsSource="{Binding Source={StaticResource DeviceListSource}}" Height="250">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding InstanceId}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                        <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts for the input section -->
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState x:Name="InputFullScreenLandscape"/>
+                                <VisualState x:Name="InputFilled"/>
+                                <VisualState x:Name="InputFullScreenPortrait"/>
+                                <VisualState x:Name="InputSnapped"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                    <Grid x:Name="Output" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+                        <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts for the output section -->
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState x:Name="OutputFullScreenLandscape"/>
+                                <VisualState x:Name="OutputFilled"/>
+                                <VisualState x:Name="OutputFullScreenPortrait"/>
+                                <VisualState x:Name="OutputSnapped"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </Grid>
+
+
+            </ScrollViewer>
+
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

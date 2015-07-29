@@ -1,0 +1,93 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>SDK Sample</title>
+
+    <!-- WinJS references -->
+    <link href="/Microsoft.WinJS.4.0/css/ui-light.css" rel="stylesheet">
+    <script src="/Microsoft.WinJS.4.0/js/base.js"></script>
+    <script src="/Microsoft.WinJS.4.0/js/ui.js"></script>
+
+    <!-- SDK sample framework references -->
+    <link rel="stylesheet" href="/css/default.css">
+    <!--<link rel="stylesheet" href="/css/windows-app.css" />-->
+    <script src="/js/sample-configuration.js"></script>
+    <script src="/sample-utils/sample-utils.js"></script>
+    <script src="/js/default.js"></script>
+</head>
+
+<body role="application" class="win-type-body">
+    <div id="root" data-win-control="WinJS.UI.SplitView" data-win-options="{ paneHidden: SdkSample.paneHiddenInitially }">
+        <div>
+            <button type="button" class="splitViewButton win-button"></button>
+            <div id="header" role="contentinfo" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: &apos;/sample-utils/header.html&apos;}"></div>
+            <div id="scenarioPane" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: &apos;/sample-utils/scenario-select.html&apos;}"></div>
+            <div id="footer" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: &apos;/sample-utils/footer.html&apos;}"></div>
+        </div>
+
+        <button type="button" class="splitViewButton win-button"></button>
+        <div id="contentWrapper">
+            <div id="contentHost"></div>
+            <div id="statusBox">
+                Status:
+                <div id="statusMessage"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Define flyouts here so they are in the body's stacking context -->
+
+    <!-- The RecoFlyout contains 5 commands laid out vertically.
+        At the time the menu is displayed, we set the labels of the commands to the recognition alternates
+        for a specific word.  All 5 buttons execute the same function, recoClipboard(), which
+        copies that label into the clipboard.    -->
+    <div id="RecoFlyout" aria-label="Reco options" data-win-control="WinJS.UI.Menu" data-win-options="{commands:[{id:&apos;Title&apos;,label:&apos;Copy to clipboard:&apos;},
+                                        {type:&apos;separator&apos;,id:&apos;sep&apos;},
+                                        {id:&apos;Reco0&apos;},
+                                        {id:&apos;Reco1&apos;},
+                                        {id:&apos;Reco2&apos;},
+                                        {id:&apos;Reco3&apos;},
+                                        {id:&apos;Reco4&apos;}]}">
+    </div>
+
+    <div id="FindFlyout" data-win-control="WinJS.UI.Flyout">
+        <h3 class="win-type-title">Find:</h3>
+        <input id="FindString" aria-label="Search string" maxlength="100" size="40" type="text" value="" class="win-textbox">
+        <button id="FindButton" class="win-button">Find</button>
+    </div>
+
+    <div id="InkColorFlyout" data-win-control="WinJS.UI.Menu">
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{label:&apos;Black&apos;,type:&apos;button&apos;,id:&apos;Black&apos;}" class="win-button"></button>
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{label:&apos;Blue&apos;,type:&apos;button&apos;,id:&apos;Blue&apos;}" class="win-button"></button>
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{label:&apos;Red&apos;,type:&apos;button&apos;,id:&apos;Red&apos;}" class="win-button"></button>
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{label:&apos;Green&apos;,type:&apos;button&apos;,id:&apos;Green&apos;}" class="win-button"></button>
+    </div>
+
+    <div id="InkWidthFlyout" data-win-control="WinJS.UI.Menu">
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:&apos;IW2&apos;, label:&apos;Smallest&apos;}" class="win-button"></button>
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:&apos;IW4&apos;, label:&apos;Small&apos;}" class="win-button"></button>
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:&apos;IW6&apos;, label:&apos;Medium&apos;}" class="win-button"></button>
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:&apos;IW8&apos;, label:&apos;Large&apos;}" class="win-button"></button>
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:&apos;IW10&apos;,label:&apos;Largest&apos;}" class="win-button"></button>
+    </div>
+
+    <div id="HighlightColorFlyout" data-win-control="WinJS.UI.Menu">
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:&apos;HLYellow&apos;,label:&apos;Yellow&apos;}" class="win-button"></button>
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:&apos;HLAqua&apos;,  label:&apos;Aqua&apos;}" class="win-button"></button>
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:&apos;HLLime&apos;,  label:&apos;Lime&apos;}" class="win-button"></button>
+    </div>
+
+    <div id="HighlightWidthFlyout" data-win-control="WinJS.UI.Menu">
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:&apos;HW10&apos;,label:&apos;Small&apos;}" class="win-button"></button>
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:&apos;HW20&apos;,label:&apos;Medium&apos;}" class="win-button"></button>
+        <button data-win-control="WinJS.UI.MenuCommand" data-win-options="{id:&apos;HW30&apos;,label:&apos;Large&apos;}" class="win-button"></button>
+    </div>
+</body>
+
+</html>

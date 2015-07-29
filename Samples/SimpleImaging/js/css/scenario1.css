@@ -1,0 +1,16 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+/* styles */
+
+/* Override the default text input width for GPS input fields. */
+input.gpsText {
+    width: 70px;
+}
+
+/* Set upper bounds for the image preview size. */
+.imageHolder
+{
+    max-width:382px;
+}

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp" />
+    <ClCompile Include="ChallengeResponseAlgorithm.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Scenario1_CreateTPMVSC.xaml.cpp" />
+    <ClCompile Include="Scenario2_ChangePin.xaml.cpp" />
+    <ClCompile Include="Scenario3_ResetPin.xaml.cpp" />
+    <ClCompile Include="Scenario4_ChangeAdminKey.xaml.cpp" />
+    <ClCompile Include="Scenario5_VerifyResponse.xaml.cpp" />
+    <ClCompile Include="Scenario6_DeleteTPMVSC.xaml.cpp" />
+    <ClCompile Include="Scenario7_ListSmartCards.xaml.cpp" />
+    <ClCompile Include="Scenario8_Transmit.xaml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ChallengeResponseAlgorithm.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Scenario1_CreateTPMVSC.xaml.h" />
+    <ClInclude Include="Scenario2_ChangePin.xaml.h" />
+    <ClInclude Include="Scenario3_ResetPin.xaml.h" />
+    <ClInclude Include="Scenario4_ChangeAdminKey.xaml.h" />
+    <ClInclude Include="Scenario5_VerifyResponse.xaml.h" />
+    <ClInclude Include="Scenario6_DeleteTPMVSC.xaml.h" />
+    <ClInclude Include="Scenario7_ListSmartCards.xaml.h" />
+    <ClInclude Include="Scenario8_Transmit.xaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
+    <Page Include="Scenario1_CreateTPMVSC.xaml" />
+    <Page Include="Scenario2_ChangePin.xaml" />
+    <Page Include="Scenario3_ResetPin.xaml" />
+    <Page Include="Scenario4_ChangeAdminKey.xaml" />
+    <Page Include="Scenario5_VerifyResponse.xaml" />
+    <Page Include="Scenario6_DeleteTPMVSC.xaml" />
+    <Page Include="Scenario7_ListSmartCards.xaml" />
+    <Page Include="Scenario8_Transmit.xaml" />
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{bbdc2990-2905-432f-9502-d1e7c17f7ea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{271b5eec-0f8f-472d-add6-9840d72beb34}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,35 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/communications.css">
+    <script src="/js/communications.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                This scenario will play an audio stream tagged with the Communications category. This category is used by VOIP apps, such as Skype and Lync. If a separate communications device is connected (Blutooth HFP) audio will play via that endpoint instead of stereo
+                speakers.&#xA0; Note the interactions between Media/Movie audio and Communications streams.&#xA0; Play one using the Audio Category SDK sample, and then the other with Audio Category Copy SDK sample to see how they interact.&#xA0; Communications
+                will attenuate the Music and Movie streams (so that users use VOIP apps to chat while there is audio in the background).
+                <br>
+                <br> To observe how each stream category interacts with the others, run both the Audio Category Sample and the Audio Category Companion sample side by side.
+            </div>
+
+        </div>
+        <div id="scenarioContent">
+            <button id="button1" class="win-button">Select Audio File</button>
+            <div id="MediaElement"></div>
+            <div id="StatusOutput"></div>
+        </div>
+    </div>
+</body>
+
+</html>

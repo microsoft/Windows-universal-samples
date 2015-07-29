@@ -1,0 +1,37 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Scenario 6: Using ScriptNotify</title>
+    <link rel="stylesheet" href="/css/6_ScriptNotify.css">
+    <script src="/js/6_ScriptNotify.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>Sometimes you need to provide data back to the application from the WebView. A good example of this is when you call a script that needs to send back a return value. To do this, you handle the ScriptNotify event in the app, and then in the script,
+            you use window.external.notify(&quot;return value&quot;), where &quot;return value&quot; is the data that you want to pass back.</p>
+        <p>Scripts loaded into the WebView via the NavigateToString method are allowed to send results back via the ScriptNotify event. Scripts loaded via the Navigate method are only allowed to notify the host if it&apos;s an ms-appx-web URL, an ms-local-stream
+            URL, or a URL that&apos;s included in the ApplicationContentUris section of the package manifest.</p>
+        <p>In the output below, the HTML shown on the left side is loaded into a WebView control. When the ScriptNotify event is processed, a message will appear on the right side. Click the &quot;Reload&quot; button to reload the HTML and trigger another
+            ScriptNotify event.</p>
+        <button id="reloadButton" class="win-button">Reload</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput" id="outputContainer">
+        <div id="scenario6_left">
+            <textarea id="htmlString" readonly="readonly" class="win-textarea"></textarea>
+        </div>
+        <div id="scenario6_right">
+            <textarea id="outputArea" readonly="readonly" class="win-textarea"></textarea>
+        </div>
+        <div id="scenario6_hidden">
+            <x-ms-webview id="webview"></x-ms-webview>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.Badges.Local.PrimaryTile.SetBadgeNumber.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    
+    <UserControl.Resources>
+        
+        
+        <Style x:Key="BorderTileStyle" TargetType="Border">
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+            <Setter Property="Background" Value="#893AFF"/>
+        </Style>
+        
+        <Style x:Key="BorderTileWideStyle" TargetType="Border" BasedOn="{StaticResource BorderTileStyle}">
+            <Setter Property="Width" Value="124"/>
+        </Style>
+        
+        <Style x:Key="ImageTileStyle" TargetType="Image">
+            <Setter Property="Stretch" Value="UniformToFill"/>
+        </Style>
+        
+        <Style TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+        
+    </UserControl.Resources>
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="24">
+
+            <TextBox
+                x:Name="TextBoxNumber"
+                Header="Badge number"
+                PlaceholderText="ex: 3"
+                Text="2"/>
+
+            <Button
+                x:Name="ButtonUpdateBadgeNumber"
+                Content="Update badge number on primary tile"
+                Click="ButtonUpdateBadgeNumber_Click"
+                Margin="0,24,0,0"/>
+
+
+            <RichTextBlock Margin="0,24,0,0">
+                <Paragraph>The button above will send a badge update to the application, which will appear on the primary tile.</Paragraph>
+                <Paragraph/>
+                <Paragraph>Pin your primary tile and notice the badge displayed.</Paragraph>
+            </RichTextBlock>
+
+
+        </StackPanel>
+    </ScrollViewer>
+    
+</UserControl>

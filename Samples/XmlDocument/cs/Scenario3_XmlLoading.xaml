@@ -1,0 +1,72 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="Xml.XmlLoading"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Xml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="Input" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel x:Name="Scenario3Input" >
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+                    <Run Text="This sample code uses 2 security settings ? prohibitDTD and resolveExternal -- to demonstrate how different security settings take effect on XML parser behavior. For detailed information, refer to:"/>
+                    </TextBlock>
+                    <HyperlinkButton Click="LaunchUri" VerticalAlignment="Center" Tag="http://go.microsoft.com/fwlink/?LinkId=224512" Content="http://go.microsoft.com/fwlink/?LinkId=224512">
+                    </HyperlinkButton>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+                    <Run Text="To run the sample, choose the setting option and click the following buttons."/>
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+                    <Run Text="Load Xml From File" FontWeight="Bold"/>
+                    <Run Text="will internally call LoadFromFileAsync. While"/>
+                    <Run Text="Load Xml From Buffer" FontWeight="Bold"/>
+                    <Run Text="will internally call LoadXmlFromBuffer."/>
+                    </TextBlock>
+                    <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                        <RadioButton x:Name="scenario3RB1" IsChecked="True" Content="prohibitDTD = true, resolveExternals = false" />
+                        <RadioButton x:Name="scenario3RB2" Content="prohibitDTD = false, resolveExternals = false" />
+                        <RadioButton x:Name="scenario3RB3" Content="prohibitDTD = false, resolveExternals = true" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button x:Name="scenario3BtnFile" Content="Load Xml From File" Margin="0,0,10,0" Click="Scenario3BtnFile_Click"/>
+                        <Button x:Name="scenario3BtnBuffer" Content="Load Xml From Buffer" Margin="0,0,10,0" Click="Scenario3BtnBuffer_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <StackPanel x:Name="Scenario3Output" Grid.Row="1">
+                <StackPanel Margin="0,10,0,0">
+                    <TextBlock Text="Original XML Data" Style="{StaticResource BasicTextStyle}"/>
+                    <RichEditBox x:Name="scenario3OriginalData" BorderBrush="White" IsReadOnly="True" MinHeight="100" MinWidth="100"/>
+                </StackPanel>
+                <StackPanel Margin="0,10,0,0">
+                    <TextBlock Text="Output" Style="{StaticResource BasicTextStyle}"/>
+                    <RichEditBox x:Name="scenario3Result" BorderBrush="White" IsReadOnly="True" MinHeight="100" MinWidth="100"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,104 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1.css">
+    <script src="/js/scenario1.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <h3 class="win-type-title">Select source: </h3></td>
+                <td>
+                    <button class="action win-button" id="pickFileButton">
+                        Pick Video File
+                    </button>
+                </td>
+                <td>
+                    <h3 class="win-type-title">
+                        Target format:
+                    </h3>
+                </td>
+                <td>
+                    <h3 class="win-type-title">
+                        <select id="targetFormat" aria-labelledby="listLabel" class="win-dropdown">
+                            <option selected="selected" value="1" class="win-dropdown">H.264/MP4</option>
+                            <option value="2" class="win-dropdown">VC-1/WMV</option>
+                            <option value="3" class="win-dropdown">Uncompressed/AVI</option>
+                        </select>
+                    </h3>
+                </td>
+            </tr>
+        </table>
+        <p>
+            This scenario demonstrates how the transcode API can be used to convert a video file to MP4 at a given resolution, utilizing the API&apos;s default presets.
+        </p>
+        <p>
+            For this scenario video files can be converted to H.264/MP4 at 1080p, 720p, WVGA, NTSC, PAL, VGA, or QVGA resolutions.
+        </p>
+        <table>
+            <tr></tr>
+            <tr>
+                <td>
+                    Transcode Profile
+                </td>
+                <td>
+                    <select id="profileSelect" aria-labelledby="listLabel" style="width: 200px" class="win-dropdown">
+                        <option value="1" class="win-dropdown">1080p (1920x1080)</option>
+                        <option value="2" class="win-dropdown">720p (1280x720)</option>
+                        <option selected="selected" value="3" class="win-dropdown">WVGA (800x480)</option>
+                        <option value="4" class="win-dropdown">NTSC (720x480)</option>
+                        <option value="5" class="win-dropdown">PAL (720x576)</option>
+                        <option value="6" class="win-dropdown">VGA (640x480)</option>
+                        <option value="7" class="win-dropdown">QVGA (320x240)</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <button class="action win-button" disabled="disabled" id="transcode">
+            Transcode
+        </button>
+        <button class="action win-button" disabled="disabled" id="cancel">
+            Cancel
+        </button>
+        <table>
+            <tr>
+                <td>
+                    <input id="enableMrfCrf444" style="cursor: default" type="checkbox" disabled="disabled" class="win-checkbox">
+                </td>
+                <td>Enable MRFCRF444 video processing algorithm (disables hardware acceleration)</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <table style="vertical-align: top">
+            <tr>
+                <td>
+                    Source
+                </td>
+                <td>
+                    <div id="outputPath">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <video id="inputVideo" style="border: 1px solid black;" width="320" height="240" controls="controls"></video>
+                </td>
+                <td>
+                    <video id="outputVideo" style="border: 1px solid black;" width="320" height="240" controls="controls"></video>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

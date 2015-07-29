@@ -1,0 +1,26 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WinRT APIs Usage Example</title>
+</head>
+
+<body class="win-type-body">
+    <button onclick="SendToastNotification()" class="win-button">Send Toast Notification</button>
+    <div id="myDiv"></div>
+    <script>
+        function SendToastNotification() {
+            if (window.winRTToastNotification !== undefined) {
+                winRTToastNotification.toastMessage("This is a toast notification");
+            } else {
+                document.getElementById("myDiv").innerText = "\'winRTToastNotification\' object doesnt exists";
+            }
+        }
+    </script>
+</body>
+
+</html>

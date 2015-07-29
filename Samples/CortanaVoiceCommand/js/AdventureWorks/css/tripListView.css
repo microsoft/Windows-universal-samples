@@ -1,0 +1,78 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+.tripListView section {
+    margin: auto 10px;
+}
+
+.phone .tripListView .page-section {
+    margin: auto 24px;
+}
+
+.phone .tripListView .page-header .titlearea {
+    -ms-grid-column: 1;
+    margin-top: 37px;
+    margin-left: 24px;
+    font-size: 28pt;
+    width: calc(100vw - 20px);
+}
+
+.phone .tripListView .back-button {
+    display: none;
+}
+
+.fragment {
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: 55px 1fr;
+    display: -ms-grid;
+    height: 100%;
+    width: 100%;
+}
+
+.fragment section[role=main] {
+    -ms-grid-row: 2;
+    height: 100%;
+}
+
+.tripListGrid {
+    display: -ms-grid;
+    -ms-grid-rows: auto auto;
+}
+
+.trip {
+        width:  215px;
+        height: 65px;
+        border: white solid 1px;
+        -ms-grid-row:1;
+        -ms-grid-column-align: start;
+        -ms-grid-row-align: start;
+}
+
+.tripList {
+    height: 250px;
+    width: 250px;
+    border: 2px solid white;
+
+}
+
+.list-tripDestination {
+    font-size: larger;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.list-tripDescription {
+    font-size: small;
+    text-align: right;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.addTripButton {
+    margin: 10px;
+    -ms-grid-row:2;
+    -ms-grid-column-align: start;
+    -ms-grid-row-align: start;
+}

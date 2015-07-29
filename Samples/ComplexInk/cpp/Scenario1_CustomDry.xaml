@@ -1,0 +1,88 @@
+<!-- 
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_CustomDry"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    
+  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="RootGrid" Margin="12,10,12,12">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <StackPanel Margin="0,0,0,10">
+        <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+        <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+          This scenario demonstrates custom dry.<LineBreak />
+        </TextBlock>
+      </StackPanel>
+
+      <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <StackPanel x:Name="ButtonPanel" Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,0" HorizontalAlignment="Left">
+                <Button Content="Clear" Width="65" Margin="0,0,3,0" Click="OnClear"/>
+                <Button Content="Insert Shape" Margin="0,0,3,0" Click="OnInsertShape"/>
+                <ComboBox x:Name="InputMode" SelectedIndex="0" Width="150" Margin="10">
+                    <x:String>Inking Mode</x:String>
+                    <x:String>Erase Mode</x:String>
+                    <x:String>Selection Mode</x:String>
+                </ComboBox>
+                <CheckBox Content="Enable Touch Inking" Checked="TouchInking_Checked" Unchecked="TouchInking_Unchecked" Margin="10"/>
+            </StackPanel>
+        </StackPanel>
+      </StackPanel>
+      
+      <ScrollViewer x:Name="inkScrollViewer" Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ZoomMode="Enabled" HorizontalScrollMode="Enabled" VerticalScrollMode="Enabled" Background="CornflowerBlue">
+        <Grid x:Name="Output">
+            <InkCanvas x:Name="inkCanvas"/>
+        </Grid>
+      </ScrollViewer>
+      
+      <StackPanel x:Name="LogPanel" Grid.Row="3" Orientation="Vertical">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <ToggleSwitch x:Name="LogToggleSwitch" Header="Message Log" OnContent="On" OffContent="Off" Toggled="LogToggleSwitch_Toggled"/>
+            <Button x:Name="MessageFilter" Content="Message Filter" Visibility="Collapsed">
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <ToggleMenuFlyoutItem x:Name="InkingEvent" Text="Inking Events" Click="InkingEvent_Click"
+                            IsChecked="True"/>
+                        <ToggleMenuFlyoutItem x:Name="IndependentEvent" Text="Independent Input" Click="IndependentEvent_Click"
+                            IsChecked="True"/>
+                        <ToggleMenuFlyoutItem x:Name="UnprocessedEvent" Text="Unprocessed Input" Click="UnprocessedEvent_Click"
+                            IsChecked="True"/>
+                        <ToggleMenuFlyoutItem x:Name="StrokeEvent" Text="Stroke Events" Click="StrokeEvent_Click"
+                            IsChecked="True"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+        </StackPanel>
+        <Border x:Name="LogBorder" Visibility="Collapsed" BorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}" BorderThickness="2">
+            <ScrollViewer Height="100"
+                HorizontalScrollBarVisibility="Auto"
+                VerticalScrollBarVisibility="Auto"
+                VerticalScrollMode="Enabled">
+                <TextBlock x:Name="MessageLog" TextWrapping="NoWrap" TextTrimming="None"/>
+            </ScrollViewer>
+        </Border>
+      </StackPanel>
+
+    </Grid>
+  </Grid>
+</Page>

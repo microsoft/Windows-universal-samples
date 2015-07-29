@@ -1,0 +1,54 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>tripDetails</title>
+
+    <link href="/css/tripDetails.css" rel="stylesheet">
+    <script src="/js/tripDetails.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div class="tripDetails fragment">
+        <header class="page-header" aria-label="Header content" role="banner">
+            <button class="back-button win-button" data-win-control="WinJS.UI.BackButton"></button>
+            <h1 class="titlearea win-type-ellipsis win-type-header">
+                <span class="pagetitle">AdventureWorks</span>
+            </h1>
+        </header>
+        <section class="page-section" aria-label="Main content" role="main">
+            <div class="tripDetailsSection">
+                <div class="tripDetail-destination">Destination:</div>
+                <div class="tripDetail-input-destination">
+                    <input type="text" id="destination" data-win-bind="innerText:destination" class="win-textbox"> <span id="requireDestinationValidation" style="visibility:collapse"></span></div>
+                <div class="tripDetail-description">Description:</div>
+                <div class="tripDetail-input-description">
+                    <input type="text" id="description" data-win-bind="innerText:description" class="win-textbox">
+                </div>
+                <div class="tripDetail-startDate">Start Date:</div>
+                <div class="tripDetail-input-startDate">
+                    <input type="text" id="startDate" data-win-bind="innerText:startDate SdkSample.DateConverter.dateConverter" class="win-textbox">
+                </div>
+                <div class="tripDetail-endDate">End Date:</div>
+                <div class="tripDetail-input-endDate">
+                    <input type="text" id="endDate" data-win-bind="innerText:endDate SdkSample.DateConverter.dateConverter" class="win-textbox">
+                </div>
+                <div class="tripDetail-notes">Notes:</div>
+                <div class="tripDetail-input-notes">
+                    <textarea id="notes" data-win-bind="innerText:notes" class="win-textarea"></textarea>
+                </div>
+            </div>
+            <div class="tripButtonsSection">
+                <button id="saveButton" class="win-button">Save</button>
+                <button id="deleteButton" style="visibility:collapse" class="win-button">Delete</button>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

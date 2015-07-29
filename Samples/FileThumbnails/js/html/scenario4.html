@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario4.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>Obtain a thumbnail for a file-system folder that contains pictures (the folder can&apos;t be a library).
+            <br> Please click the button below to pick a folder and obtain the thumbnail.</p>
+        <button class="action win-button" id="folder-thumb-start">Get Thumbnail</button>
+        <br>
+        <br>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <img class="imageHolder" id="folder-thumb-imageHolder">
+        <p id="folder-thumb-detailedStatus" class="status">
+            <div id="folder-thumb-modeName"></div>
+            <div id="folder-thumb-folderName"></div>
+            <div id="folder-thumb-requestedSize"></div>
+            <div id="folder-thumb-returnedSize"></div>
+        </p>
+    </div>
+</body>
+
+</html>

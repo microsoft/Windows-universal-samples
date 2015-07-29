@@ -1,0 +1,99 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Notifications"
+    xmlns:controls="using:Notifications.Controls">
+
+    <Style TargetType="controls:InstructionControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:InstructionControl">
+                    <Grid Margin="0,0,0,24">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid VerticalAlignment="Top">
+                            <Ellipse
+                                Fill="Red"
+                                Width="50"
+                                Height="50"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                            <TextBlock
+                                Text="{TemplateBinding Instruction}"
+                                Foreground="White"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Grid>
+
+                        <ContentPresenter
+                            Margin="12,0,0,0"
+                            Content="{TemplateBinding Content}"
+                            Grid.Column="1"
+                            VerticalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            TextWrapping="WrapWholeWords"/>
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+    <Style TargetType="controls:StepsControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:StepsControl">
+                    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+                        
+                        <Grid x:Name="Normal">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                                <ItemsPresenter Margin="24"/>
+
+                            </ScrollViewer>
+
+                            <Button x:Name="ButtonNext" Background="Red" Height="50" HorizontalAlignment="Stretch" Grid.Row="1" IsEnabled="{TemplateBinding IsNextEnabled}" Visibility="{TemplateBinding NextButtonVisibility}">
+                                <Grid>
+                                    <SymbolIcon Symbol="Forward" Foreground="White"/>
+                                </Grid>
+                            </Button>
+                        </Grid>
+                        
+                        <Grid x:Name="Completed" Visibility="Collapsed" Background="Transparent">
+                            
+                            <Ellipse
+                                Width="150"
+                                Height="150"
+                                Fill="LightGreen"/>
+                            
+                            <SymbolIcon Symbol="Accept" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            
+                        </Grid>
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <controls:StepsHelperControl x:Name="stepsHelperControl"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+    
+    
+    
+</ResourceDictionary>

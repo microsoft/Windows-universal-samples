@@ -1,0 +1,31 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Scenario 9: Manage new window creation</title>
+    <link rel="stylesheet" href="/css/9_NewWindow.css">
+    <script src="/js/9_NewWindow.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>There could be cases when the page loaded inside webview tries to open a new window using window.open. An app can handle such a case by listening to the NewWindow event of the WebView control and prevent default action from being taken.</p>
+        <p>Under the Output heading below, the displayed HTML has been loaded into the WebView control. Type some url into the text field and click the &quot;Open in new window&quot; button to open the url in a new window.</p>
+        <input type="url" id="urlField" class="win-textbox">
+        <button id="goButton" class="win-button">Go</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput" id="outputContainer">
+        <div id="scenario9_left">
+            <textarea id="htmlString" readonly="readonly" class="win-textarea"></textarea>
+        </div>
+        <div id="scenario9_right">
+            <x-ms-webview id="webviewmain"></x-ms-webview>
+        </div>
+    </div>
+</body>
+
+</html>

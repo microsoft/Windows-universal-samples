@@ -1,0 +1,31 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+/* styles */
+
+/* Create a square div around the image to allow it to rotate without having
+   to reflow content. */
+div.centeredImageFrame
+{
+    width: 400px;
+    height: 400px;
+    float:left;
+    display:table;
+}
+
+/* The following two styles center the image horizontally and vertically
+   within the imageFrame div. */
+div.centeredImageFrameCell
+{
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center;
+}
+
+img.imageHolder.withText.inCenteredFrame
+{
+    float: none;
+    max-width: 382px;
+    max-height: 382px;
+}

@@ -1,0 +1,37 @@
+###############################################################################
+# Set default behavior to automatically normalize line endings.
+###############################################################################
+* text=auto
+
+# Declare files that will always have CRLF line endings on checkout.
+*.appxmanifest text eol=crlf
+*.c            text eol=crlf
+*.cpp          text eol=crlf
+*.cs           text eol=crlf
+*.csproj       text eol=crlf
+*.css          text eol=crlf
+*.def          text eol=crlf
+*.filters      text eol=crlf
+*.h            text eol=crlf
+*.htm          text eol=crlf
+*.html         text eol=crlf
+*.idl          text eol=crlf
+*.inf          text eol=crlf
+*.inx          text eol=crlf
+*.js           text eol=crlf
+*.jsproj       text eol=crlf
+*.rc           text eol=crlf
+*.rgs          text eol=crlf
+*.sln          text eol=crlf
+*.vcxproj      text eol=crlf
+*.xaml         text eol=crlf
+
+###############################################################################
+# Set default behavior for command prompt diff.
+#
+# This is need for earlier builds of msysgit that does not have it on by
+# default for csharp files.
+# Note: This is only used by command line
+###############################################################################
+*.cs     diff=csharp
+

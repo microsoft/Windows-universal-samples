@@ -1,0 +1,51 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Analyze"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Analyze Japanese text phonetically
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel VerticalAlignment="Top">
+                    <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" HorizontalAlignment="Left">
+                        Enter Japanese text and
+                        choose whether to break each phrase into words or units of pronunciation.
+                        Then click "Analyze" to perform phonetic analysis.
+                        Each phrase is shown on its own line, and phonetic information is shown in parentheses.
+                    </TextBlock>
+                    <TextBox x:Name="InputTextBox" Text="今日はいい天気です" Margin="0,10,0,0"/>
+                    <RadioButton x:Name="WordRadioButton" Margin="0,10,0,0" GroupName="Method" Content="Break into words" IsChecked="True"/>
+                    <RadioButton x:Name="MonoRubyRadioButton" GroupName="Method" Content="Break into units of pronunciation"/>
+                    <Button x:Name="GetPhrasesButton" Content="Analyze" Click="AnalyzeButton_Click" Margin="0,10,0,0"/>
+                    <TextBlock x:Name="OutputTextBlock" Margin="0,10,0,0"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

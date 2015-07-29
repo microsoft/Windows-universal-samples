@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario5.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            At times, having the ability to maintain separate resource files can be useful. While the default resource file is resources.resjson, to load resources from additional files, string identifiers should use path-absolute URI references that start with &apos;/&apos;
+            and the filename (e.g., /errors/scenario8error loads from the errors.resjson file).
+        </p>
+        <p>
+            Resource ids are URIs which are typically relative to ms-resource:///resources/, which represents the resources.resjson file in the main package. Other packages can be referenced in the URI hostname (e.g. ms-resource://packagename/).</p>
+        <button id="scenario5Show" class="win-button">
+            Show text</button>
+    </div>
+    <div id="output" data-win-control="SdkSample.ScenarioOutput">
+    </div>
+</body>
+
+</html>

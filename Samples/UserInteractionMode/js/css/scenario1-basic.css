@@ -1,0 +1,17 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+/* styles */
+
+label {
+    display: block;
+    color: gold;
+    min-height: 10px;
+}
+
+.touch label {
+    /* The changes are exaggerated to make it easier to see which style is in effect. */
+    color: cyan;
+    min-height: 80px;
+}

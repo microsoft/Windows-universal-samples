@@ -1,0 +1,29 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Scenario 7: Share with other apps</title>
+    <link rel="stylesheet" href="/css/7_SupportShare.css">
+    <script src="/js/7_SupportShare.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>Apps with a WebView control can share the current web page in the WebView control via the Share contract. For this sample, the app is configured to share the current title and URL for the web page below, along with a screen capture of the WebView
+            control. To share this information with another app, click the &quot;Share&quot; button.</p>
+        <p>Apps can also send the current web page in a WebView control to be opened in the default browser. To open the current page in a browser, click the &quot;Launch in browser&quot; button.</p>
+        <p>Finally, the same information can be placed on the clipboard to be used in other applications. To copy the current page&apos;s URL to clipboard, click the &quot;Copy URL to clipboard&quot; button.</p>
+        <button id="shareButton" class="win-button">Share</button>
+        <button id="launchInBrowserButton" class="win-button">Launch in browser</button>
+        <button id="copyToClipboardButton" class="win-button">Copy URL to clipboard</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput" id="outputContainer">
+        <x-ms-webview id="webview"></x-ms-webview>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario3_Porting.css">
+    <script src="/js/scenario3_Porting.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div>
+        <p>
+            Illustrates the role of &apos;ReadingTransform&apos; property when porting sensor logic developed for Windows Phone devices (Portrait-First) over to Windows (Landscape-First) devices. Reads the current reading from the sensor and displays the raw sample
+            and the transformed sample that represents the sensor readings if the sensor was oriented on a Windows Phone device , as your code would expect.
+        </p>
+        <button class="action win-button" id="scenario3GetSample">Get Sample</button>
+        <br>
+        <br>
+    </div>
+    <div>
+        <table style="width:100%;">
+            <tr>
+                <td>Platform:</td>
+                <td>Windows (raw sample)</td>
+                <td>WP (transformed)</td>
+            </tr>
+            <tr>
+                <td>X:</td>
+                <td id="eventOutputXWindows">no data</td>
+                <td id="eventOutputXWP">no data</td>
+            </tr>
+            <tr>
+                <td>Y:</td>
+                <td id="eventOutputYWindows">no data</td>
+                <td id="eventOutputYWP">no data</td>
+            </tr>
+            <tr>
+                <td>Z:</td>
+                <td id="eventOutputZWindows">no data</td>
+                <td id="eventOutputZWP">no data</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

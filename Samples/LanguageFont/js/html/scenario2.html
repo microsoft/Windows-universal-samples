@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario2.css">
+    <script src="/js/langfont.js"></script>
+    <script src="/js/scenario2.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            This shows the use of the LanguageFontGroup API to get fonts for a particular language (Hindi is used here) for document body text and heading elements. Note that the document is marked as contenteditable, making it a user editable document as opposed
+            to UI content, as shown in the previous sample.
+        </p>
+        <p>
+            Also, note that the API does <strong>not</strong> return specific values for font sub-family attributes (weight, stretch, style). Instead, the application adds its own additional styling, applying italics to the headings.</p>
+        <button id="scenario2Show" class="win-button">
+            Apply Recommended Font</button>
+        <br>
+        <br>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput" class="output">
+        <button id="scenario2ItalicHeading" class="win-button" style="min-width: 20px">
+            I</button>
+        (Click to italicize heading)
+        <div id="scenario2Document">
+            <h2 lang="hi" id="scenario2Heading" contenteditable="true" class="win-type-subheader">
+                &#x939;&#x948;&#x964;&#x905;&#x92D;&#x940; &#x92A;&#x924;&#x94D;&#x930;&#x93F;&#x915;&#x93E; &#x932;&#x93E;&#x92D;&#x93E;&#x928;&#x94D;&#x935;&#x93F;&#x924;</h2>
+            <p lang="hi" contenteditable="true">
+                &#x939;&#x948;&#x964;&#x905;&#x92D;&#x940; &#x92A;&#x924;&#x94D;&#x930;&#x93F;&#x915;&#x93E; &#x932;&#x93E;&#x92D;&#x93E;&#x928;&#x94D;&#x935;&#x93F;&#x924; &#x938;&#x941;&#x928;&#x93E; &#x938;&#x92E;&#x91C;&#x924;&#x947; &#x938;&#x902;&#x92D;&#x935;
+                &#x927;&#x94D;&#x935;&#x928;&#x93F; &#x935;&#x93F;&#x92D;&#x93E;&#x91C;&#x928; &#x935;&#x948;&#x936;&#x94D;&#x935;&#x93F;&#x915; &#x92C;&#x928;&#x93E;&#x924;&#x93F; &#x938;&#x902;&#x92D;&#x935; &#x935;&#x93F;&#x915;&#x938;&#x93F;&#x924;
+                &#x935;&#x93F;&#x91A;&#x930;&#x935;&#x93F;&#x92E;&#x930;&#x94D;&#x936; &#x92A;&#x94D;&#x930;&#x94B;&#x924;&#x94D;&#x938;&#x93E;&#x939;&#x93F;&#x924; &#x91C;&#x93F;&#x92E;&#x94D;&#x92E;&#x947; &#x935;&#x930;&#x94D;&#x923;&#x93F;&#x924;
+                &#x92A;&#x94D;&#x930;&#x947;&#x930;&#x928;&#x93E; &#x938;&#x941;&#x91A;&#x928;&#x93E; &#x91C;&#x93E;&#x924;&#x93E; &#x92D;&#x93E;&#x937;&#x93E;&#x913; &#x932;&#x93F;&#x92F;&#x947; &#x926;&#x93F;&#x928;&#x93E;&#x902;&#x915; &#x92D;&#x947;&#x926;&#x928;&#x915;&#x94D;&#x937;&#x92E;&#x924;&#x93E;
+                &#x938;&#x941;&#x91A;&#x928;&#x93E;&#x91A;&#x932;&#x91A;&#x93F;&#x924;&#x94D;&#x930; &#x921;&#x93E;&#x932;&#x947;&#x964; &#x932;&#x93F;&#x90F;&#x964; &#x92E;&#x941;&#x936;&#x94D;&#x915;&#x93F;&#x932; &#x935;&#x93F;&#x92D;&#x93E;&#x91C;&#x928;&#x915;&#x94D;&#x937;&#x92E;&#x924;&#x93E;
+                &#x92E;&#x941;&#x915;&#x94D;&#x924; &#x926;&#x938;&#x94D;&#x924;&#x93E;&#x935;&#x947;&#x91C; &#x935;&#x93F;&#x91A;&#x93E;&#x930;&#x936;&#x93F;&#x932;&#x924;&#x93E; &#x935;&#x93F;&#x91A;&#x930;&#x935;&#x93F;&#x92E;&#x930;&#x94D;&#x936;
+                &#x909;&#x938;&#x915;&#x947; &#x928;&#x935;&#x902;&#x92C;&#x930; &#x930;&#x91A;&#x928;&#x93E; &#x909;&#x926;&#x94D;&#x92F;&#x94B;&#x917; &#x935;&#x93E;&#x924;&#x93E;&#x935;&#x930;&#x923; &#x92A;&#x939;&#x94B;&#x91A;&#x93E;&#x928;&#x93E;
+                &#x938;&#x92E;&#x91C;&#x924;&#x947; &#x924;&#x915;&#x928;&#x93F;&#x915;&#x932; &#x905;&#x902;&#x917;&#x94D;&#x930;&#x947;&#x91C;&#x940; &#x92C;&#x928;&#x93E;&#x90F; &#x938;&#x92D;&#x93F;&#x938;&#x92E;&#x91C; &#x91C;&#x93E;&#x928;&#x915;&#x93E;&#x930;&#x940;
+                &#x938;&#x902;&#x926;&#x947;&#x936; &#x905;&#x927;&#x93F;&#x915; &#x926;&#x941;&#x928;&#x93F;&#x92F;&#x93E; &#x905;&#x928;&#x941;&#x935;&#x93E;&#x926; &#x938;&#x915;&#x924;&#x940; &#x92E;&#x941;&#x916;&#x94D;&#x92F; &#x930;&#x91A;&#x928;&#x93E;
+                &#x938;&#x92E;&#x91C;&#x924;&#x947; &#x909;&#x92A;&#x932;&#x92C;&#x94D;&#x927; &#x938;&#x92D;&#x940;&#x915;&#x941;&#x91B; &#x926;&#x947;&#x916;&#x928;&#x947;</p>
+        </div>
+    </div>
+</body>
+
+</html>

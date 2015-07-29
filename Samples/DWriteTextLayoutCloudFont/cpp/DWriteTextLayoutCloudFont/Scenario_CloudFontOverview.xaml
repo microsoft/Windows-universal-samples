@@ -1,0 +1,89 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario_CloudFontOverview"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource ScenarioDescriptionTextStyle}">
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Margin" Value="0,0,0,20"/>
+            </Style>
+        </Grid.Resources>
+        <Grid x:Name="RootGrid" Margin="12,10,12,12" MaxWidth="600" HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Downloadable fonts overview:" Style="{StaticResource SampleHeaderTextStyle}" TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Padding="0,0,15,0">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="A new capability in DirectWrite for Windows 10 allows an app to format text content using
+fonts that may not be installed on a device, and for the font to be downloaded on demand from a Microsoft service." />
+                    <TextBlock Text="DirectWrite now includes low-level APIs for using downloadable fonts. An easy way to use the
+downloadable font mechanism is to use DirectWrite's text layout (IDWriteTextLayout3), which integrates the lower-level APIs and
+does part of the work for you. When a text layout is created with a Windows font that is not locally installed, the text layout
+will automatically add requests for the font data to a font download queue. You need to add code that initiates the download and
+that responds when the download is completed." />
+                    <TextBlock Text="To use downloadable fonts, you will need to begin by using IDWriteFactory3, which has a new
+GetSystemFontCollection overload that enables use of downloadable fonts. To provide compatibility with existing apps, the
+collection returned by the existing GetSystemFontCollection overload contains only locally-installed fonts. For the same reason,
+text layout defaults to using the local system font collection. To enable downloadable fonts with text layout, you need to specify
+a font collection that includes downloadable fonts, either when you create the IDWriteTextFormat object or by calling
+IDWriteTextLayout::SetFontCollection." />
+                    <TextBlock Text="When the text layout is first used, fallback fonts will be selected. While the layout is being
+performed, DirectWrite will determine which portions of the font that was requested are required to display the content. It then
+adds requests for this data to the font download queue. You can access this queue using IDWriteFactory3::GetFontDownloadQueue.
+Once you have the queue, you initiate the download using IDWriteFontDownloadQueue::BeginDownload. You can also check whether any
+requests are queued up using IsEmpty." />
+                    <TextBlock Text="Before you begin the download, though, you need to create an instance of an
+IDWriteFontDownloadListener class that you must implement. You can either pass your listener object when calling BeginDownload,
+or you can register the listener using IDWriteFontDownloadQueue::AddListener. When the font download is completed, DirectWrite will
+call DownloadCompleted on your listener object. At that point, you can call IDWriteTextLayout3::InvalidateLayout, which will cause
+the layout to be refreshed using the downloaded font data." />
+                    <TextBlock Text="With this implementation in your app, the user will see content displayed initially using
+fallback fonts. Then, after a brief delay, they will see the display updated using the specified fonts." />
+                    <TextBlock Text="When font data is downloaded, it is locally cached. So, if it is used again in the near future,
+it will be immediately available, and initial display using fallback may not be necessary. In this case, when a text layout is
+created, no new requests would be added to the font download queue. Font data is cached for use across the system, not just in the
+current app. So, even when the font is used by an app for the first time, it may already be cached. Over time, if the font is not
+used, it may get cleared from the cache. In that case, if the font gets used again, DirectWrite text layout will add download
+requests into the queue." />
+                    <TextBlock Text="Some fonts are very large, especially fonts for Chinese, Japanese and Korean. If a font is
+large, then DirectWrite will enqueue download requests for only some portions of the font &#x2014; enough to display the content.
+If other content is displayed using the same font and that content includes additional characters not found in the previous content,
+then requests for additional portions of the font will be added to the queue." />
+                    <TextBlock Text="Of course, the ability to download font data depends on network connectivity. If no connection
+is available, then the text layout will use fallback fonts or portions of the requested font that may have been downloaded earlier.
+When used on metered connections, this mechanism can result in network data usage. Therefore, you should be careful in how you use
+it so as not to burden a user's data plan." />
+                    <TextBlock Margin="0,0,0,10" Text="In particular, your app's static UI should use only certain recommended fonts
+that are guaranteed to be locally available on all Windows 10 devices. These are described at this page:" />
+                    <HyperlinkButton 
+                        Content="http://msdn.microsoft.com/library/windows/apps/hh700394.aspx" 
+                        NavigateUri="http://msdn.microsoft.com/library/windows/apps/hh700394.aspx" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

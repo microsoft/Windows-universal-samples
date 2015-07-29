@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            WinRT APIs are not available inside the web compartment. Therefore, in order to retrieve resources, the application can override the WinJS.Resources.getString() function or use its default web compartment behavior to retrieve strings from a global object.</p>
+        <p>
+            The output section below has an <code>iframe</code> which displays its own resources.</p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <iframe src="ms-appx-web:///html/webcompartment.html"></iframe>
+    </div>
+</body>
+
+</html>

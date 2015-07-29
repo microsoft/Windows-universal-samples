@@ -1,0 +1,53 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page x:Class="SplashScreenSample.Scenario2" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:SplashScreenSample" xmlns:common="using:SDKTemplate.Common" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+  <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Grid x:Name="Input" Grid.Row="0" Margin="0,0,0,4.667">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Margin="0,0,0,38.667" Grid.RowSpan="2" Width="312">
+         Retrieve the coordinates of the splash screen image. You can use this
+        location to show an extended splash screen while your app performs
+        additional loading tasks. This may make it seem like your app takes more
+        time to load, but it provides a better user experience if your app has
+        to complete time-intensive tasks before being ready for user
+        interactions. 
+      </TextBlock>
+    </Grid>
+    <Grid x:Name="Output" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+      <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="0,0,41,10">
+         The splash screen was positioned at <LineBreak/>
+        <Run FontWeight="Bold" Text="x:"/>
+        <Run x:Name="XValue"/>
+        <Run FontWeight="Bold" Text="y:"/>
+        <Run x:Name="YValue"/>
+        <Run FontWeight="Bold" Text="width:"/>
+        <Run x:Name="WidthValue"/>
+        <Run FontWeight="Bold" Text="height:"/>
+        <Run x:Name="HeightValue"/>
+      </TextBlock>
+    </Grid>
+    <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts -->
+    <VisualStateManager.VisualStateGroups>
+      <VisualStateGroup>
+        <VisualState x:Name="DefaultLayout"/>
+        <VisualState x:Name="Below768Layout"/>
+      </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+  </Grid>
+</Page>

@@ -1,0 +1,59 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="NfcSample.ManageCardScenario"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NfcSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="HCE Tap+Pay" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Button Content="Register Background Task" x:Name="btnRegisterBgTask" Click="btnRegisterBgTask_Click"/>
+                    <CheckBox Content="Deny if phone is locked" x:Name="chkDenyIfPhoneLocked" Checked="chkDenyIfPhoneLocked_Checked" Unchecked="chkDenyIfPhoneLocked_Unchecked" />
+                    <CheckBox Content="Launch above lockscreen" x:Name="chkLaunchAboveLock" Checked="chkLaunchAboveLock_Checked"  Unchecked="chkLaunchAboveLock_Unchecked" />
+
+                    <Button Margin="0 10" Content="Add Card" x:Name="btnAddCard" Click="btnRegisterSamplePaymentCard_Click"/>
+                    <ListBox x:Name="lstCards" DisplayMemberPath="AppletIdGroup.DisplayName" Height="110" SelectionChanged="lstCards_SelectionChanged" />
+                    <Button Content="Delete Selected" x:Name="btnUnregisterCard" Click="btnUnregisterCard_Click"/>
+                    <Button Content="Enable Selected" x:Name="btnEnableCard" Click="btnEnableCard_Click"/>
+                    <Button Content="Disable Selected" x:Name="btnDisableCard" Click="btnDisableCard_Click"/>
+                    <Button Content="ForegroundOverride Selected" x:Name="btnForegroundOverrideCard" Click="btnForegroundOverrideCard_Click"/>
+
+                    <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Debug Log" x:Name="btnDebugLog" Click="btnDebugLog_Click" />
+                    <TextBox x:Name="txtDebugLog" FontSize="21" Visibility="Collapsed" AcceptsReturn="True" IsReadOnly="True" />
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

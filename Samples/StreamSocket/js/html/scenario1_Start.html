@@ -1,0 +1,59 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <script src="/js/socketsSample.js"></script>
+    <script src="/js/scenario1_Start.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            StreamSocketListener will create the &apos;server&apos; side of a connection. It listens on a local &apos;service name&apos; (often a port number) and triggers a ConnectionReceived event every time that a new incoming connection is accepted.
+        </p>
+        <p>
+            <label for="serviceNameAccept">Service Name:</label>
+            <input id="serviceNameAccept" type="text" class="win-textbox">
+        </p>
+        <p>
+            Optional settings:
+        </p>
+        <p>
+            <input name="BindOption" id="bindToAny" type="radio" checked class="win-radio">
+            <label for="bindToAny">Bind to any address</label>
+        </p>
+        <p>
+            <input name="BindOption" id="bindToAddress" type="radio" class="win-radio">
+            <label for="bindToAddress">Bind to specific address (select from below list of IPv4 or IPv6)</label>
+        </p>
+        <p>
+            <input name="BindOption" id="bindToAdapter" type="radio" class="win-radio">
+            <label for="bindToAdapter">Bind to adapter (select an adapter based on the GUIDs below)</label>
+        </p>
+        <p>
+            <select id="adapterList" disabled class="win-dropdown"></select>
+        </p>
+        <p>
+            <button id="buttonStartListener" class="win-button">Listen</button>
+        </p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <p id="statusBox"></p>
+        <p id="outputBox"></p>
+    </div>
+</body>
+
+</html>

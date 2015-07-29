@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario5.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>Obtain a thumbnail for a group of pictures arranged by month.
+            <br> Please click the button below to pick a folder and obtain the thumbnail. File groups only work for libraries, so make sure you pick a library location.</p>
+        <button class="action win-button" id="group-thumb-start">Get Thumbnail</button>
+        <br>
+        <br>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <img class="imageHolder" id="group-thumb-imageHolder">
+        <p id="group-thumb-DetailedStatus" class="status">
+            <div id="group-thumb-modeName"></div>
+            <div id="group-thumb-groupName"></div>
+            <div id="group-thumb-requestedSize"></div>
+            <div id="group-thumb-returnedSize"></div>
+        </p>
+        <div id="group-thumb-outputDetails" class="details"></div>
+    </div>
+</body>
+
+</html>

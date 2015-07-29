@@ -1,0 +1,41 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario3.css">
+    <script src="/js/scenario3.js"></script>
+    <script src="/Microsoft.WinJS.4.0/js/WinJS.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>
+                    This scenario shows you how to create your own display enumeration and selection experience (custom control or not) to start projecting multiple views.
+                </p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                <button class="win-button" id="FindAllDisplaysButton">Find and select a display</button>
+            </p>
+            <div id="deviceTileTemplate" data-win-control="WinJS.Binding.Template">
+                <div class="deviceTile">
+                    <p class="deviceName" data-win-bind="innerText: displayName;">
+                    </p>
+                </div>
+            </div>
+            <div id="devicesListView" data-win-control="WinJS.UI.ListView">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

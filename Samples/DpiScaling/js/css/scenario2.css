@@ -1,0 +1,31 @@
+﻿/*
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+/* styles */
+
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: LightCyan;
+}
+
+.boxDescription {
+    font-size: 11pt;
+    font-weight: 700;
+    width: 100%;
+}
+
+#standardFont {
+    font-size: 20pt;
+    color: #00b9f2;
+}
+
+#overrideFont {
+    color: #00b9f2;
+}

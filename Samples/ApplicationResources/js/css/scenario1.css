@@ -1,0 +1,30 @@
+﻿/*
+A background image can be referenced in a logical way that
+excludes scale or other qualifications, but a physical image 
+in the package with specific scale or other qualifications 
+is loaded.
+
+Note: when images with scale variations are managed using 
+the Windows resource technology, width and height should 
+always be set, as is done here using background-size. If 
+no dimensions are set, then the HTML layout engine will 
+scale whatever image is loaded using the scale plateau 
+for the current display. For example, on a 1.4x display, 
+an image with physical size of 112 x 112 might be loaded, 
+but if background-size were not specified, that would be 
+stretched to 157 x 157.
+*/
+
+ 
+.backgroundImageResource { 
+    width: 80px;
+    height: 80px;
+    background-size: 80px 80px;
+    background-repeat: no-repeat;
+    background-image: url('/images/ProjectorWithScaleCaption.png');
+}
+
+/* All of our images are designed to be drawn against a white background */
+.imageContainer {
+    background-color: white;
+}

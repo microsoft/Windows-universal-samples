@@ -1,0 +1,39 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Scenario 1: Navigate to a URL</title>
+    <link rel="stylesheet" href="/css/1_NavToUrl.css">
+    <script src="/js/1_NavToUrl.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>An app can include an existing web page by loading the web page in a WebView control. You can navigate the WebView control under the Output heading below to a specific URL. Enter a valid URL into the text field and then press the &quot;Enter&quot;
+            key or tap the &quot;Go&quot; button. The &quot;Back&quot; and &quot;Forward&quot; buttons navigate to previously visited sites within the same WebView. If there are no sites in the WebView history, the controls are disabled by observing the
+            canGoBack and canGoForward properties of the WebView.</p>
+        <input type="url" id="urlField" class="win-textbox">
+        <!-- This button is initially a Go button, but changes to a Stop button while the WebView control is navigating. -->
+        <button id="goOrStopButton" class="win-button">Go</button>
+        <!-- This progress indicator is initially hidden. It will be shown while the WebView control is navigating. -->
+        <progress id="progressRing" class="win-ring win-medium" style="visibility: hidden"></progress>
+        <br>
+        <!-- These navigation buttons are initially disabled since this sample does not start with any navigation history. They will be enabled when navigation occurs, according to the WebView control's state. -->
+        <button id="backButton" disabled="disabled" class="win-button">Back</button>
+        <button id="forwardButton" disabled="disabled" class="win-button">Forward</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput" id="outputContainer">
+        <div id="scenario1_left">
+            <x-ms-webview id="webview"></x-ms-webview>
+        </div>
+        <div id="scenario1_right">
+            <textarea id="logArea" readonly="readonly" class="win-textarea"></textarea>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario1.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>Create a TPM virtual smart card to exercise the scenarios in this sample. Use the fields below to specify a friendly name and PIN policy, and then click Create.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <table>
+                <tr>
+                    <td><span class="input-label">Friendly Name</span></td>
+                    <td>
+                        <input id="FriendlyNameText" type="text" value="My Virtual Smart Card" class="win-textbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="input-label">Minimum PIN Length</span></td>
+                    <td>
+                        <input id="PinMinLength" type="text" value="8" style="width: 4em;" class="win-textbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="input-label">Maximum PIN Length</span></td>
+                    <td>
+                        <input id="PinMaxLength" type="text" value="127" style="width: 4em;" class="win-textbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="input-label">Uppercase Letters</span></td>
+                    <td>
+                        <select id="PinUppercase" class="win-dropdown">
+                            <option value="Disallowed" class="win-dropdown">Disallowed</option>
+                            <option value="Allowed" selected="selected" class="win-dropdown">Allowed</option>
+                            <option value="Require At Least One" class="win-dropdown">Require At Least One</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="input-label">Lowercase Letters</span></td>
+                    <td>
+                        <select id="PinLowercase" class="win-dropdown">
+                            <option value="Disallowed" class="win-dropdown">Disallowed</option>
+                            <option value="Allowed" selected="selected" class="win-dropdown">Allowed</option>
+                            <option value="Require At Least One" class="win-dropdown">Require At Least One</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="input-label">Digits</span></td>
+                    <td>
+                        <select id="PinDigits" class="win-dropdown">
+                            <option value="Disallowed" class="win-dropdown">Disallowed</option>
+                            <option value="Allowed" selected="selected" class="win-dropdown">Allowed</option>
+                            <option value="Require At Least One" class="win-dropdown">Require At Least One</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="input-label">Special Characters</span></td>
+                    <td>
+                        <select id="PinSpecial" class="win-dropdown">
+                            <option value="Disallowed" class="win-dropdown">Disallowed</option>
+                            <option value="Allowed" selected="selected" class="win-dropdown">Allowed</option>
+                            <option value="Require At Least One" class="win-dropdown">Require At Least One</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button id="Create" style="width:100%" class="win-button">Create</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

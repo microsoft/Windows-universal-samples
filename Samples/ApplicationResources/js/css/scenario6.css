@@ -1,0 +1,4 @@
+/* All of our images are designed to be drawn against a white background */
+.imageContainer {
+    background-color: white;
+}

@@ -1,0 +1,139 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1.css">
+    <script src="/js/helpers.js"></script>
+    <script src="/js/scenario1.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Use the property system APIs (Windows.Storage.FileProperties) to read and edit bitmap properties on an image file.
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <button id="buttonOpen" class="win-button">Open</button>
+            <button id="buttonApply" class="win-button">Save</button>
+            <button id="buttonClose" class="win-button">Close</button>
+            <br>
+            <br>
+
+            <img class="imageHolder withText" id="outputImage" alt="image holder" src="">
+
+            <table>
+                <tr>
+                    <td>
+                        <p>Title</p>
+                    </td>
+                    <td>
+                        <input id="propertiesTitle" type="text" class="win-textbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Keywords</p>
+                    </td>
+                    <td>
+                        <textarea id="propertiesKeywords" class="win-textarea"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Rating</p>
+                    </td>
+                    <td>
+                        <select id="propertiesRating" class="win-dropdown">
+                            <option value="0" class="win-dropdown">No rating</option>
+                            <option value="1" class="win-dropdown">1 stars</option>
+                            <option value="2" class="win-dropdown">2 stars</option>
+                            <option value="3" class="win-dropdown">3 stars</option>
+                            <option value="4" class="win-dropdown">4 stars</option>
+                            <option value="5" class="win-dropdown">5 stars</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Date taken:</p>
+                    </td>
+                    <td>
+                        <p id="propertiesDateTaken"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Camera make:</p>
+                    </td>
+                    <td>
+                        <p id="propertiesMake"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Camera model:</p>
+                    </td>
+                    <td>
+                        <p id="propertiesModel"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>EXIF orientation:</p>
+                    </td>
+                    <td>
+                        <p id="propertiesOrientation"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Latitude</p>
+                    </td>
+                    <td>
+                        <input type="text" id="propertiesLatDeg" class="gpsText win-textbox" maxlength="2"> &#xB0;
+                        <input type="text" id="propertiesLatMin" class="gpsText win-textbox" maxlength="2"> &apos;
+                        <input type="text" id="propertiesLatSec" class="gpsText win-textbox" maxlength="7"> &quot;
+                        <input type="text" id="propertiesLatRef" class="gpsText win-textbox" maxlength="1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Longitude</p>
+                    </td>
+                    <td>
+                        <input type="text" id="propertiesLongDeg" class="gpsText win-textbox" maxlength="3"> &#xB0;
+                        <input type="text" id="propertiesLongMin" class="gpsText win-textbox" maxlength="2"> &apos;
+                        <input type="text" id="propertiesLongSec" class="gpsText win-textbox" maxlength="7"> &quot;
+                        <input type="text" id="propertiesLongRef" class="gpsText win-textbox" maxlength="1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Exposure:</p>
+                    </td>
+                    <td>
+                        <p id="propertiesExposure"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>F Number:</p>
+                    </td>
+                    <td>
+                        <p id="propertiesFNumber"></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

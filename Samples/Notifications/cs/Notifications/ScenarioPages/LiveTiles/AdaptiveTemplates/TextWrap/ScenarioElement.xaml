@@ -1,0 +1,36 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.LiveTiles.AdaptiveTemplates.TextWrap.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="24">
+
+
+            <TextBlock
+                Text="Step 1"
+                Style="{StaticResource TitleTextBlockStyle}"/>
+
+            <Button
+                x:Name="ButtonPin"
+                Content="Click to pin tiles"
+                HorizontalAlignment="Stretch"
+                Click="ButtonPin_Click"
+                Margin="0,12,0,0"/>
+
+            <RichTextBlock Margin="0,12,0,0">
+                <Paragraph>Expected:</Paragraph>
+                <Paragraph>1. Message dialog says SUCCESS</Paragraph>
+                <Paragraph>2. On Start, new tile pinned</Paragraph>
+                <Paragraph>3. Text wrapping on each tile size works</Paragraph>
+            </RichTextBlock>
+
+
+        </StackPanel>
+    </ScrollViewer>
+    
+</UserControl>

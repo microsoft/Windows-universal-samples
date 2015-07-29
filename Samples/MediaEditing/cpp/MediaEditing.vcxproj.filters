@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{b4447f02-6989-4123-836b-0970378d1952}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{40885c29-bea1-46e9-8602-455711a7a3b4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.xaml.cpp" />
+    <ClCompile Include="MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Scenario1_TrimAndSaveClip.xaml.cpp" />
+    <ClCompile Include="Scenario2_AppendClips.xaml.cpp" />
+    <ClCompile Include="Scenario3_AddAudioTracks.xaml.cpp" />
+    <ClCompile Include="Scenario4_AddOverlays.xaml.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="App.xaml.h" />
+    <ClInclude Include="MainPage.xaml.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Scenario1_TrimAndSaveClip.xaml.h" />
+    <ClInclude Include="Scenario2_AppendClips.xaml.h" />
+    <ClInclude Include="Scenario3_AddAudioTracks.xaml.h" />
+    <ClInclude Include="Scenario4_AddOverlays.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Scenario1_TrimAndSaveClip.xaml" />
+    <Page Include="Scenario2_AppendClips.xaml" />
+    <Page Include="Scenario3_AddAudioTracks.xaml" />
+    <Page Include="Scenario4_AddOverlays.xaml" />
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

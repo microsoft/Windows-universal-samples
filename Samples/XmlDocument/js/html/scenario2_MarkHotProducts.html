@@ -1,0 +1,48 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario2_MarkHotProducts.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This sample demonstrates how to use the XML APIs in the Windows Runtime to traverse a Document Object Model (DOM) tree to update the data and save it to a file.</p>
+                <p>To run the sample, click the <b>Mark Hot Products</b> button. The &#x2018;hot&#x2019; attribute will be updated to &#x2018;1&#x2019; if the value of the &#x2018;<b>sell10days</b>&#x2019; attribute is greater than the value of the &#x2018;<b>InStore</b>&#x2019;
+                    attribute. Click the <b>Save</b> button to save the XML contents.</p>
+                <button id="scenario2BtnDefault" disabled="disabled" class="win-button">Mark Hot Products</button>
+                <button id="scenario2BtnSave" disabled="disabled" class="win-button">Save</button>
+                <br>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <div>
+                <h3 class="win-type-title">Market Data</h3>
+                <textarea id="scenario2OriginalData" cols="60" name="market_data" readonly="readonly" rows="12" style="height:auto; width:auto" class="win-textarea"></textarea>
+            </div>
+            <div>
+                <h3 class="win-type-title">Output</h3>
+                <textarea id="scenario2Result" cols="60" name="result" readonly="readonly" rows="12" style="height:auto; width:auto" class="win-textarea"></textarea>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

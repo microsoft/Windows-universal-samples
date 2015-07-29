@@ -1,0 +1,60 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+/* styles */
+
+
+#scenario2OutputWindow {
+    margin: 0 auto;
+}
+
+.inputsContainer {
+}
+
+.inputsContainer * {
+    margin: 4px 4px 4px 0;
+}
+
+.pcName {
+    font: 11pt/15pt "Segoe UI";
+}
+
+.pcNameTextbox {
+    float: left;
+}
+
+.pcNameTextbox input {
+    min-width: 250px; 
+    margin: 0;    
+}
+
+.buttonContainer{
+    width: 175px;
+    float: left;
+}
+.callButton {
+    float: left;
+}
+
+.callButton button {
+    width: 75px;
+    margin: 0;
+}
+
+.endCallButton {
+    float: left;
+}
+
+.endCallButton button {
+    width: 75px;
+    margin: 0;
+}
+
+.contentHolder {
+    max-width: 100%;
+}
+
+video {
+    width: 100%;
+}

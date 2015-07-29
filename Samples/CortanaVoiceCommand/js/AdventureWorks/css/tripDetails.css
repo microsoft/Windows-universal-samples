@@ -1,0 +1,123 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+.tripDetails section {
+    margin: 10px;
+}
+
+.phone .tripDetails .page-section {
+    margin: auto 24px;
+}
+
+.phone .tripDetails .page-header .titlearea {
+    -ms-grid-column: 1;
+    margin-top: 37px;
+    margin-left: 24px;
+    font-size: 28pt;
+    width: calc(100vw - 20px);
+}
+
+.phone .tripDetails .back-button {
+    display: none;
+}
+
+.fragment {
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: 55px 1fr;
+    display: -ms-grid;
+    height: 100%;
+    width: 100%;
+}
+
+.fragment section[role=main] {
+    -ms-grid-row: 2;
+    height: 100%;
+}
+
+
+.tripDetails .page-header {
+    display: -ms-grid;
+    -ms-grid-columns: 41px 1fr;
+    -ms-grid-rows: auto;
+}
+
+.tripDetails .page-header .back-button {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    -ms-grid-row-align: center;
+}
+
+.tripDetails .page-header .titlearea {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+}
+
+.tripDetails .page-section .tripDetailsSection {
+    display: -ms-grid;
+    -ms-grid-columns: 100px 120px;
+    -ms-grid-rows: auto auto auto auto auto auto;
+}
+
+/* left column, labels. */
+.tripDetails .page-section .tripDetailsSection .tripDetail-destination {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    -ms-grid-row-align: center;
+}
+
+.tripDetails .page-section .tripDetailsSection .tripDetail-description {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    -ms-grid-row-align: center;
+}
+
+.tripDetails .page-section .tripDetailsSection .tripDetail-startDate {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+    -ms-grid-row-align: center;
+}
+
+.tripDetails .page-section .tripDetailsSection .tripDetail-endDate {
+    -ms-grid-row: 4;
+    -ms-grid-column: 1;
+    -ms-grid-row-align: center;
+}
+
+.tripDetails .page-section .tripDetailsSection .tripDetail-notes {
+    -ms-grid-row: 5;
+    -ms-grid-column: 1;
+    -ms-grid-row-align: center;
+}
+
+/* right column, input boxes. */
+.tripDetails .page-section .tripDetailsSection .tripDetail-input-destination {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+}
+
+.tripDetails .page-section .tripDetailsSection .tripDetail-input-description {
+    -ms-grid-row: 2;
+    -ms-grid-column: 2;
+}
+
+.tripDetails .page-section .tripDetailsSection .tripDetail-input-startDate {
+    -ms-grid-row: 3;
+    -ms-grid-column: 2;
+}
+
+.tripDetails .page-section .tripDetailsSection .tripDetail-input-endDate {
+    -ms-grid-row: 4;
+    -ms-grid-column: 2;
+}
+
+.tripDetails .page-section .tripDetailsSection .tripDetail-input-notes {
+    -ms-grid-row: 5;
+    -ms-grid-column: 2;
+}
+
+.tripDetails .page-section .tripDetailsSection .tripButtonsSection {
+    -ms-grid-row: 6;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+}

@@ -1,0 +1,85 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="NfcSample.SetCardDataScenario"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NfcSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer Margin="3" Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Set Card Data" Style="{StaticResource SampleHeaderTextStyle}"/>
+                    <TextBlock Margin="5" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                This application is for testing purposes only, DO NOT enter live payment information.
+                    </TextBlock>
+
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Content="V" MinWidth="30" x:Name="optV" IsChecked="True" Checked="optCardTypeGroup_CheckedUnchecked" Unchecked="optCardTypeGroup_CheckedUnchecked" Width="42" />
+                        <RadioButton Content="MC" MinWidth="30" Margin="5 0 5 0" x:Name="optMC" Checked="optCardTypeGroup_CheckedUnchecked" Unchecked="optCardTypeGroup_CheckedUnchecked" />
+                        <RadioButton Content="Non-Payment" MinWidth="130" x:Name="optNonPayment" Checked="optCardTypeGroup_CheckedUnchecked" Unchecked="optCardTypeGroup_CheckedUnchecked" Width="47" />
+                        <RadioButton Content="UICC" MinWidth="30" x:Name="optUICC" Checked="optCardTypeGroup_CheckedUnchecked" Unchecked="optCardTypeGroup_CheckedUnchecked" />
+                    </StackPanel>
+
+                    <TextBlock Margin="0 10" Text="Display Name" />
+                    <TextBox x:Name="txtDisplayName" Text="Sample Payment Card" />
+
+                    <StackPanel Orientation="Vertical" x:Name="stackPayment">
+                        <TextBlock Margin="0 10" Text="Card Number" />
+                    <TextBox x:Name="txtPAN" InputScope="Number" Text="422222222222222" />
+
+                        <TextBlock Margin="0 10" Text="Expiry Month/Year" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox x:Name="txtExpiryMonth"  InputScope="Number" MaxLength="2" Text="04" />
+                            <TextBlock Text="/" />
+                            <TextBox x:Name="txtExpiryYear" InputScope="Number" MaxLength="2" Text="17" />
+                        </StackPanel>
+
+                        <TextBlock Margin="0 10" Text="Cardholder Name" />
+                        <TextBox x:Name="txtCardholderName" Text="LASTNAME/FIRSTNAME" />
+
+                        <TextBlock Margin="0 10" Text="Service Code" />
+                        <TextBox x:Name="txtServiceCode"  InputScope="Number" MaxLength="3" Text="121" />
+
+                        <TextBlock Margin="0 10" Text="Track 1 Discretionary" />
+                        <TextBox x:Name="txtTrack1Discretionary" InputScope="Number" Text="1234" />
+
+                        <TextBlock Margin="0 10" Text="Track 2 Discretionary" />
+                        <TextBox x:Name="txtTrack2Discretionary" InputScope="Number" Text="1234" />
+
+                        <CheckBox x:Name="chkAutomaticEnablement" IsChecked="True" Content="Automatic Enablement" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button Margin="10" x:Name="btnAddCard" Content="Add" Click="btnAddCard_Click" />
+                        <Button Margin="10" x:Name="btnCancel" Content="Cancel" Click="btnCancel_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario8.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            As a general localization guideline, it is important to localize entire sentences as a single string since sentence order may need to change when localized. Therefore, in some cases, when displaying UI that contains resources and data binding values,
+            the localizable string may need to include data binding markup.</p>
+        <p>
+            Note that it is important to process the resources before the data binding to ensure bound values aren&apos;t overwritten.</p>
+        <button id="scenario8Show" class="win-button">
+            Show text</button>
+        <input type="text" id="scenario8Binding" placeholder="Then enter a number" class="win-textbox">
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <p id="messageCount" data-win-res="{innerHTML: &apos;scenario8MessageCount&apos;}">
+        </p>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario3"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,10,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="Input" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="InputTextBlock" Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+                Select a folder and click 'Remove folder' to remove that folder from the Pictures library.
+            </TextBlock>
+
+            <!-- One of the following elements will be displayed, depending on whether the Pictures library has any folders -->
+            <ComboBox x:Name="FoldersComboBox" Grid.Row="1" Margin="0,0,10,0" Width="Auto" HorizontalAlignment="Left" DisplayMemberPath="DisplayName"/>
+            <TextBlock x:Name="LibraryEmptyTextBlock" Grid.Row="1" Margin="0,0,10,0" Text="The Pictures library is empty." Style="{StaticResource SampleHeaderTextStyle}" Visibility="Collapsed"/>
+
+            <Button x:Name="RemoveFolderButton" Grid.Row="2" Content="Remove folder" Margin="0,0,10,0" Click="RemoveFolderButton_Click" IsEnabled="False"/>
+        </Grid>
+
+        <Grid x:Name="Output" Grid.Row="1"  HorizontalAlignment="Left" VerticalAlignment="Top" >
+            <TextBlock x:Name="OutputTextBlock" Grid.Column="1" TextWrapping="Wrap" MaxWidth="500" Style="{StaticResource BasicTextStyle}"/>
+        </Grid>
+    </Grid>
+</Page>

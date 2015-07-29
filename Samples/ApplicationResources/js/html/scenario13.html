@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario13.css">
+    <script src="/js/scenario13.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            Resources can depend on many different dimensions, including scale, language and contrast. The resource technology does appropriate fallback behavior to retrieve the most appropriate resource for the current context. The resource qualifiers are evaluated
+            in a priority based system (e.g., language is more important than scale). Application developers are encouraged to mark resources as appropriately as possible. Only resources that are appropriate for all contexts should be left without any
+            qualifiers. Default resources are qualified resources that are chosen if no resource matches the context. The default language can be set within VS within the Project Properties.
+        </p>
+        <p>
+            This sample shows a list of string resources and the ordered set of resource candidates for different languages, scales, etc. Various contexts can be simulated with the drop-down below to see which resources are matched in various situations. Each candidate
+            has <a href="http://go.microsoft.com/fwlink/?LinkId=227366" class="win-link">additional metadata</a> that can used to determine why it was chosen.</p>
+        <select id="scenario13SelectLanguage" class="win-dropdown">
+            <option value="en-US" class="win-dropdown">English (United States)</option>
+            <option value="en-GB" class="win-dropdown">English (United Kingdom)</option>
+            <option value="fr-CA" class="win-dropdown">French (Canada)</option>
+            <option value="fr-FR" class="win-dropdown">French (France)</option>
+            <option value="de-DE" class="win-dropdown">German (Germany)</option>
+            <option value="ja" class="win-dropdown">Japanese</option>
+        </select>
+        <select id="scenario13SelectContrast" class="win-dropdown">
+            <option value="standard" class="win-dropdown">Standard</option>
+            <option value="black" class="win-dropdown">High Contrast Black</option>
+            <option value="white" class="win-dropdown">High Contrast White</option>
+            <option value="black" class="win-dropdown">High Contrast #1</option>
+            <option value="black" class="win-dropdown">High Contrast #2</option>
+        </select>
+        <select id="scenario13SelectScale" class="win-dropdown">
+            <option value="100" class="win-dropdown">100</option>
+            <option value="140" class="win-dropdown">140</option>
+            <option value="180" class="win-dropdown">180</option>
+        </select>
+        <select id="scenario13SelectHomeRegion" class="win-dropdown">
+            <option value="001" class="win-dropdown">World</option>
+            <option value="019" class="win-dropdown">Americas</option>
+            <option value="142" class="win-dropdown">Asia</option>
+            <option value="021" class="win-dropdown">Northern America</option>
+            <option value="419" class="win-dropdown">Latin America and the Caribbean</option>
+            <option value="840" class="win-dropdown">United States of America</option>
+            <option value="124" class="win-dropdown">Canada</option>
+        </select>
+        <button id="scenario13Show" class="win-button">
+            Show Resources</button>
+    </div>
+    <div id="output" data-win-control="SdkSample.ScenarioOutput">
+    </div>
+    <!-- Templates -->
+    <div id="scenario13templates">
+        <div id="named-resource-template" data-win-control="WinJS.Binding.Template">
+            <h2 class="resource-id win-type-subheader">
+                <span class="resource-id-label">Resource Id</span> <span data-win-bind="textContent: resourceId">
+                </span>
+            </h2>
+            <div class="resource-candidates">
+            </div>
+        </div>
+        <div id="candidate-template" data-win-control="WinJS.Binding.Template">
+            <div class="candidate">
+                <div class="candidate-index" data-win-bind="textContent: index">
+                </div>
+                <div class="candidate-qualifiers">
+                </div>
+                <div class="candidate-metadata">
+                    <label>
+                        <input type="checkbox" disabled="disabled" data-win-bind="checked: isMatch" class="win-checkbox">isMatch</label>
+                    <label>
+                        <input type="checkbox" disabled="disabled" data-win-bind="checked: isDefault" class="win-checkbox">isDefault</label>
+                </div>
+                <div class="candidate-value" data-win-bind="textContent: value">
+                </div>
+            </div>
+        </div>
+        <div id="qualifier-template" data-win-control="WinJS.Binding.Template">
+            <div class="qualifier">
+                <span class="qualifier-name" data-win-bind="textContent: qualifierName"></span><span class="qualifier-value" data-win-bind="textContent: qualifierValue"></span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

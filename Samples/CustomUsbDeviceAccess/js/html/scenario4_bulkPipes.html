@@ -1,0 +1,42 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario4_bulkPipes.css">
+    <script src="/js/scenario4_bulkPipes.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Bulk Pipes</h2>
+        </div>
+        <div id="scenarioContent">
+
+            <div data-win-control="SdkSample.ScenarioInput">
+                <div class="deviceScenarioContainer">
+                    <div class="generalScenario">
+                        <p>This scenario shows how to read and write to bulk pipe.</p>
+                        <button id="buttonBulkRead" class="win-button">Read 512 bytes</button>
+                        <button id="buttonBulkWrite" class="win-button">Write 512 bytes</button>
+                        <br>
+                        <button id="buttonBulkReadWrite" class="win-button">Continuously Read and Write 512 bytes</button>
+                        <br>
+                        <button id="buttonCancelAllIoTasks" class="win-button">Cancel all Read/Write tasks</button>
+                    </div>
+                </div>
+            </div>
+            <div data-win-control="SdkSample.ScenarioOutput">
+
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

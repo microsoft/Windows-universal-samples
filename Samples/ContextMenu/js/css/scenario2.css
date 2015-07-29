@@ -1,0 +1,9 @@
+﻿/* styles */
+.sampleText {
+    width: auto;
+    height: auto;
+    border: 1px solid;
+    font-family: "Segoe UI";
+    padding: 10px;
+    -ms-user-select: element;
+}

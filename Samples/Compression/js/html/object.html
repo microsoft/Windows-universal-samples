@@ -1,0 +1,36 @@
+﻿<doctype html="">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="/css/object.css">
+        <script src="/js/compression.js"></script>
+        <script src="/js/object.js"></script>
+    </head>
+
+    <body class="win-type-body">
+        <div data-win-control="SdkSample.ScenarioInput">
+            <p>This sample demonstrates how to:</p>
+            <p>Serialize and compress JavaScript object to the in-memory stream.</p>
+            <p>Decompress and deserialize JavaScript object from the in-memory stream.</p>
+            <br>
+            <p>Compression Algorithms:</p>
+            <p>DEFAULT: No compression algorithms explicitly specified. Xpress is used by default.</p>
+            <p>XPRESS: Compression ratio is fair. Fastest compression and decompression speeds. Low memory requirement.</p>
+            <p>MSZIP: Compression ratio is high. Normal compression speed and fast decompression speed. Low memory requirement.</p>
+            <button id="DefaultButton" class="win-button">DEFAULT (XPRESS)</button>
+            <button id="XpressButton" class="win-button">XPRESS</button>
+            <button id="XpressHuffButton" class="win-button">XPRESSHUFF</button>
+            <button id="MszipButton" class="win-button">MSZIP</button>
+            <button id="LzmsButton" class="win-button">LZMS</button>
+            <br>
+            <br>
+        </div>
+        <div data-win-control="SdkSample.ScenarioOutput">
+            <div id="scenarioProgress">
+            </div>
+        </div>
+    </body>
+
+    </html>
+</doctype>

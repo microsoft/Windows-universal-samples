@@ -1,0 +1,30 @@
+﻿<!-- THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF   -->
+<!-- ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO -->
+<!-- THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A      -->
+<!-- PARTICULAR PURPOSE.                                                 -->
+<!--                                                                     -->
+<!-- Copyright (c) Microsoft Corporation. All rights reserved            -->
+<Grid Background="#00b2f0" 
+      x:Class="SplashScreenSample.ExtendedSplash" 
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      mc:Ignorable="d" 
+      d:DesignWidth="1366" d:DesignHeight="768">
+
+    <Grid.RowDefinitions>
+        <RowDefinition/>
+        <RowDefinition Height="180"/>
+    </Grid.RowDefinitions>
+
+    <Viewbox Grid.Row="0" Grid.RowSpan="2" Stretch="Uniform">
+        <Image x:Name="extendedSplashImage" Source="Assets/splash-Phone-sdk.png"/>
+    </Viewbox>
+    <StackPanel Grid.Row="1" HorizontalAlignment="Center">
+        <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" TextAlignment="Center" Padding="5" HorizontalAlignment="Center">
+       The splash screen was dismissed and the image above was positioned using the splash screen API.
+        </TextBlock>
+        <Button x:Name="LearnMoreButton" Content="Learn More" HorizontalAlignment="Center"/>
+    </StackPanel>
+</Grid>

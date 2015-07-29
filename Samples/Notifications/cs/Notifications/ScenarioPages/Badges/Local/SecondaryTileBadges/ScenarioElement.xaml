@@ -1,0 +1,119 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.Badges.Local.SecondaryTileBadges.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls">
+    
+    <UserControl.Resources>
+        
+        
+        <Style x:Key="BorderTileStyle" TargetType="Border">
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+            <Setter Property="Background" Value="#893AFF"/>
+        </Style>
+        
+        <Style x:Key="BorderTileWideStyle" TargetType="Border" BasedOn="{StaticResource BorderTileStyle}">
+            <Setter Property="Width" Value="124"/>
+        </Style>
+        
+        <Style x:Key="ImageTileStyle" TargetType="Image">
+            <Setter Property="Stretch" Value="UniformToFill"/>
+        </Style>
+        
+        <Style TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+        
+    </UserControl.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <ScrollViewer x:Name="ScrollViewerSecondaryTile" Visibility="Collapsed">
+        <StackPanel Margin="24">
+
+            <controls:InstructionControl Instruction="?">First we need to have a secondary tile for our badge to appear on. Click the button below to pin a blue secondary tile, and then this will automatically continue to the next step.</controls:InstructionControl>
+
+            <controls:InstructionControl Instruction="1">
+                <Button
+                    x:Name="ButtonPinSecondaryTile"
+                    Content="Pin secondary tile"
+                    Click="ButtonPinSecondaryTile_Click"/>
+            </controls:InstructionControl>
+
+        </StackPanel>
+    </ScrollViewer>
+
+    <ScrollViewer x:Name="ScrollViewerBadge" Visibility="Collapsed">
+    <StackPanel Margin="24">
+            
+            <Button
+                x:Name="ButtonClearBadge"
+                Content="Clear badge"
+                Click="ButtonClearBadge_Click"/>
+            
+            <Grid Margin="0,24,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBox
+                    x:Name="TextBoxBadgeNumber"
+                    PlaceholderText="ex: 3"
+                    Text="2"
+                    InputScope="Number"/>
+                
+                <Button
+                    x:Name="ButtonUpdateBadgeNumber"
+                    Content="Update badge as number"
+                    Grid.Column="1"
+                    Margin="12,0,0,0"
+                    Click="ButtonUpdateBadgeNumber_Click"/>
+            </Grid>
+
+            <Grid Margin="0,24,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ComboBox
+                    x:Name="ComboBoxBadgeGlyph"
+                    SelectedIndex="1">
+                    
+                    <x:String>none</x:String>
+                    <x:String>activity</x:String>
+                    <x:String>alert</x:String>
+                    <x:String>alarm</x:String>
+                    <x:String>available</x:String>
+                    <x:String>away</x:String>
+                    <x:String>busy</x:String>
+                    <x:String>newMessage</x:String>
+                    <x:String>paused</x:String>
+                    <x:String>playing</x:String>
+                    <x:String>unavailable</x:String>
+                    <x:String>error</x:String>
+                    <x:String>attention</x:String>
+                    
+                </ComboBox>
+
+                <Button
+                    x:Name="ButtonUpdateBadgeGlyph"
+                    Content="Update badge as glyph"
+                    Grid.Column="1"
+                    Margin="12,0,0,0"
+                    Click="ButtonUpdateBadgeGlyph_Click"/>
+            </Grid>
+
+        </StackPanel>
+        
+    </ScrollViewer>
+    </Grid>
+
+</UserControl>

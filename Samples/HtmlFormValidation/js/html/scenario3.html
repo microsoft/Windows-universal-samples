@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Creating a custom error experience</title>
+    <link rel="stylesheet" href="/css/scenario3.css">
+    <script src="/js/scenario3.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>In the previous example, the browser provides default validation error messaging in a dialog balloon. However, you can customize that experience if you prefer. </p>
+        <p>One way you can customize is to provide your own error message text. In the form here, a custom error message on the birth year field is shown if the value entered is greater than 1997. The birth year field now has an <code><strong>onchange</strong></code>            event handler which checks if the value is greater than the max value. If it is greater, then a custom validity message &quot;You must be at least 14 years old to use this site&quot; is set, otherwise the custom validity message is cleared.
+            The custom message, if any, will be shown to the user when they try to submit the form. </p>
+        <p>Another way to customize the error experience is to modify how you notify users of errors. By preventing the default action on the <code><strong>oninvalid</strong></code> event for each element, you can cancel the default dialog balloon. You can
+            then provide your own display method and message.</p>
+        <p>For the user name, password and email fields in the form below, the balloon notification is blocked, and the error text is written directly to the page. </p>
+
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <form id="form3">
+            <fieldset class="formSection">
+                <legend class="formSectionHeading">Registration</legend>
+                <div class="twoColumnFormContainer">
+                    <div class="name">
+                        <label>User Name
+                            <br><span class="error">Please enter a username.</span>
+                            <input type="text" name="userName" id="username3" required class="win-textbox">
+                        </label>
+                    </div>
+                    <div class="pass">
+                        <label>Password
+                            <br><span class="error">Passwords must be at least 8 characters long.</span>
+                            <input type="password" name="password" id="password3" required pattern="[^\s]{8}[^\s]*" title="Passwords must be at least 8 characters long." class="win-textbox">
+                        </label>
+                    </div>
+                    <div class="email">
+                        <label>Email
+                            <br><span class="error">Please enter a valid email address.</span>
+                            <input type="email" id="email3" name="email" required class="win-textbox">
+                        </label>
+                    </div>
+                    <div class="tel">
+                        <label>Telephone number
+                            <br><span class="error">Please use the format (xxx) xxx-xxxx</span>
+                            <input id="tel3" type="tel" name="telephone" pattern="\(\d\d\d\) ?\d\d\d-\d\d\d\d" title="(xxx) xxx-xxxx" class="win-textbox">
+                        </label>
+                    </div>
+                    <div class="city">
+                        <label>City
+                            <br>
+                            <input type="text" name="city" class="win-textbox">
+                        </label>
+                    </div>
+                    <div class="state">
+                        <label>State
+                            <br>
+                            <select name="state" required class="win-dropdown">
+                                <option selected value="" class="win-dropdown"></option>
+                                <option value="AL" class="win-dropdown">Alabama</option>
+                                <option value="AK" class="win-dropdown">Alaska</option>
+                                <option value="AZ" class="win-dropdown">Arizona</option>
+                                <option value="AR" class="win-dropdown">Arkansas</option>
+                                <option value="CA" class="win-dropdown">California</option>
+                                <option value="CO" class="win-dropdown">Colorado</option>
+                                <option value="CT" class="win-dropdown">Connecticut</option>
+                                <option value="DC" class="win-dropdown">District of Columbia</option>
+                                <option value="DE" class="win-dropdown">Delaware</option>
+                                <option value="FL" class="win-dropdown">Florida</option>
+                                <option value="GA" class="win-dropdown">Georgia</option>
+                                <option value="HI" class="win-dropdown">Hawaii</option>
+                                <option value="ID" class="win-dropdown">Idaho</option>
+                                <option value="IL" class="win-dropdown">Illinois</option>
+                                <option value="IN" class="win-dropdown">Indiana</option>
+                                <option value="IA" class="win-dropdown">Iowa</option>
+                                <option value="KS" class="win-dropdown">Kansas</option>
+                                <option value="KY" class="win-dropdown">Kentucky</option>
+                                <option value="LA" class="win-dropdown">Louisiana</option>
+                                <option value="ME" class="win-dropdown">Maine</option>
+                                <option value="MD" class="win-dropdown">Maryland</option>
+                                <option value="MA" class="win-dropdown">Massachusetts</option>
+                                <option value="MI" class="win-dropdown">Michigan</option>
+                                <option value="MN" class="win-dropdown">Minnesota</option>
+                                <option value="MS" class="win-dropdown">Mississippi</option>
+                                <option value="MO" class="win-dropdown">Missouri</option>
+                                <option value="MT" class="win-dropdown">Montana</option>
+                                <option value="NE" class="win-dropdown">Nebraska</option>
+                                <option value="NV" class="win-dropdown">Nevada</option>
+                                <option value="NH" class="win-dropdown">New Hampshire</option>
+                                <option value="NJ" class="win-dropdown">New Jersey</option>
+                                <option value="NM" class="win-dropdown">New Mexico</option>
+                                <option value="NY" class="win-dropdown">New York</option>
+                                <option value="NC" class="win-dropdown">North Carolina</option>
+                                <option value="ND" class="win-dropdown">North Dakota</option>
+                                <option value="OH" class="win-dropdown">Ohio</option>
+                                <option value="OK" class="win-dropdown">Oklahoma</option>
+                                <option value="OR" class="win-dropdown">Oregon</option>
+                                <option value="PA" class="win-dropdown">Pennsylvania</option>
+                                <option value="PR" class="win-dropdown">Puerto Rico</option>
+                                <option value="RI" class="win-dropdown">Rhode Island</option>
+                                <option value="SC" class="win-dropdown">South Carolina</option>
+                                <option value="SD" class="win-dropdown">South Dakota</option>
+                                <option value="TN" class="win-dropdown">Tennessee</option>
+                                <option value="TX" class="win-dropdown">Texas</option>
+                                <option value="UT" class="win-dropdown">Utah</option>
+                                <option value="VT" class="win-dropdown">Vermont</option>
+                                <option value="VA" class="win-dropdown">Virginia</option>
+                                <option value="WA" class="win-dropdown">Washington</option>
+                                <option value="WV" class="win-dropdown">West Virginia</option>
+                                <option value="WI" class="win-dropdown">Wisconsin</option>
+                                <option value="WY" class="win-dropdown">Wyoming</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="birth">
+                        <label>Birth year
+                            <br>
+                            <input id="bYear3" type="number" name="birthYear" min="1910" max="1997" required class="win-textbox">
+                        </label>
+                    </div>
+                    <div class="learn">
+                        <fieldset class="controlGroup">
+                            <legend class="controlGroupName">How did you learn about our site?</legend>
+                            <label class="radioLabel">
+                                <input type="radio" name="learn" value="friend" class="win-radio">Through a friend
+                            </label>
+                            <br>
+                            <label class="radioLabel">
+                                <input type="radio" name="learn" value="web" class="win-radio">Read about it on a website
+                            </label>
+                            <br>
+                            <label class="radioLabel">
+                                <input type="radio" name="learn" value="radio" class="win-radio">Heard a radio advertisement
+                            </label>
+                            <br>
+                            <label class="radioLabel">
+                                <input type="radio" name="learn" value="other" class="win-radio">Other source
+                            </label>
+                        </fieldset>
+                    </div>
+                    <div class="empty">
+                    </div>
+                    <div class="agree">
+                        <label class="checkboxLabel wrapContainer">
+                            <input type="checkbox" name="agreement" required class="win-checkbox">
+                            <div class="wrapText">
+                                I agree to the terms of service for this site.</div>
+                        </label>
+                    </div>
+                    <div class="buttons">
+                        <fieldset class="controlGroup buttonGroup">
+                            <button type="submit" class="horizontalButtonLayout win-button">
+                                Submit</button>
+                            <button type="button" class="horizontalButtonLayout win-button">
+                                Cancel</button>
+                        </fieldset>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <span class="hide">Form submitted.</span>
+
+    </div>
+</body>
+
+</html>

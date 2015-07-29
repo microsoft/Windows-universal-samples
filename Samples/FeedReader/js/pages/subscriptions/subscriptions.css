@@ -1,0 +1,100 @@
+﻿/*
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+#subscriptions {
+    background: #3d3d3d url('../../../images/LargeRSSLogo-background-white.png') bottom left no-repeat !important;
+    background-size: cover;
+}
+
+/* This selector is used to prevent ui-dark/light.css from overwriting changes
+   to .win-surface. */
+#subscriptions #feedsListView-in .win-horizontal.win-viewport .win-surface,
+#subscriptions #feedsListView-out .win-horizontal.win-viewport .win-surface {
+    margin-left: 45px;
+}
+
+/* Semantic zoom control */
+#feedsListViewArea {
+    position: relative;
+    height: calc(100% - 70px);
+    width: 100%;
+}
+
+/* List View area */    
+#feedsListView-in {
+    height: 100%;
+    width: 100%;
+}
+
+    #feedsListView-in .win-groupleader {
+        margin-left: 70px;
+    }
+        
+    #feedsListView-in .feedTile {
+        height: 85px;
+        width: 300px;
+        -ms-grid-columns: 40px 1fr;
+        -ms-grid-rows: 40px 1fr;
+        display: -ms-grid;
+    }
+
+    #feedsListView-in .feedTile .image {
+        -ms-grid-column: 1;
+        -ms-grid-row: 1;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        line-height: 40px;
+    }
+        
+    #feedsListView-in .feedTile .image img {
+        max-width: 40px;
+        max-height: 40px;
+        vertical-align: middle;
+        margin-top: -5px;
+    }
+
+    #feedsListView-in .feedTile .info {
+        -ms-grid-column: 2;
+        -ms-grid-row-span: 2;
+        margin-left: 10px;
+    }
+        
+    #feedsListView-in .feedTile .info .title {
+        font: 15pt "Segoe UI Semilight";
+        margin: 0;
+    }
+            
+    #feedsListView-in .feedTile .info .description {
+        font: 10pt "Segoe UI Semilight";
+        margin: 0;
+        -ms-hyphens: auto;
+    }
+           
+/* Zoomed-out list view */
+#feedsListView-out {
+    height: 100%;
+    width: 100%;
+    margin-left: 70px;
+}
+
+#feedsListView-out .categoryTile {
+    height: 150px;
+    width: 250px;
+    background-color: #d85137;
+}
+
+#feedsListView-out .categoryTile .title {
+    margin: 0;
+    padding: 5px;
+    height: 100%;
+    color: white;
+    text-align: left;
+    font: 20pt/26pt "Segoe UI Light";
+}

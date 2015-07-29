@@ -1,0 +1,32 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.LiveTiles.Notifications.PrimaryTile.Sending.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="24">
+            
+            <Button
+                x:Name="ButtonSendNotification"
+                Content="Send notification to primary tile"
+                HorizontalAlignment="Stretch"
+                Click="ButtonSendNotification_Click"/>
+            
+            <RichTextBlock
+                Margin="0,12,0,0">
+                <Paragraph>
+                    The above button sends a tile notification to your primary tile.
+                </Paragraph>
+                <Paragraph/>
+                <Paragraph>Pin this app's primary tile to your Start screen (if it's not already) and notice the notification displayed on it.</Paragraph>
+            </RichTextBlock>
+
+        </StackPanel>
+    </ScrollViewer>
+    
+</UserControl>

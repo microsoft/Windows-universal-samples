@@ -1,0 +1,52 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario5_XSLTTransformation.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This sample demonstrates how to use Extensible Stylesheet Language (XSL) Transformation with XML APIs in the Windows Runtime to transform an XML file into a HTML web page.</p>
+                <p>To run the sample, click the <b>Transform</b> button. You may also edit the source XML and XSL file to receive different result.</p>
+                <p><b>TransformToString</b> will produce the transformation result as a string. And <b>TransformToDocument</b> will produce the transformation result as a DomDocument.</p>
+                <button id="scenario5XsltTransformToString" class="win-button">TransformToString</button>
+                <button id="scenario5XsltTransformToDocument" class="win-button">TransformToDocument</button>
+                <br>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <div>
+                <h3 class="win-type-title">XML Content</h3>
+                <textarea id="xml" cols="60" name="xml_data" rows="11" style="height:auto; width:auto" class="win-textarea"></textarea>
+            </div>
+            <div>
+                <h3 class="win-type-title">XSL</h3>
+                <textarea id="xslt" cols="60" name="x_data" rows="20" style="height:auto; width:auto" class="win-textarea"></textarea>
+            </div>
+            <div>
+                <h3 class="win-type-title">Result</h3>
+                <textarea id="result" cols="60" name="result_data" readonly="readonly" rows="14" style="height:auto; width:auto" class="win-textarea"></textarea>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

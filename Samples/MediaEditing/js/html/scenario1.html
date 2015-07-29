@@ -1,0 +1,33 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1.css">
+    <script src="/js/scenario1.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>Using Windows.Media.Editing API to trim a clip.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <button id="chooseClip" class="win-button">1. Choose Video</button>
+            <button id="trimClip" disabled class="win-button">2. Trim Video</button>
+            <button id="save" disabled class="win-button">3. Save Result</button>
+            <p>
+                <video id="mediaElement" controls="controls" style="width:640px;height:480px"></video>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

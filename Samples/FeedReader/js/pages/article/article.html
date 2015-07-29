@@ -1,0 +1,43 @@
+﻿<!--
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Article</title>
+
+    <!-- WinJS references -->
+    <link href="/Microsoft.WinJS.4.0/css/ui-dark.css" rel="stylesheet">
+    <script src="/Microsoft.WinJS.4.0/js/WinJS.js"></script>
+
+    <link href="/css/default.css" rel="stylesheet">
+    <link href="/pages/article/article.css" rel="stylesheet">
+    <script src="/pages/article/article.js"></script>
+</head>
+
+<body class="win-type-body">
+    <!-- The content that will be loaded and displayed. -->
+    <div id="article" class="fragment">
+        <header aria-label="Header content" role="banner">
+            <button class="win-backbutton win-button" aria-label="Back" disabled></button>
+            <h1 class="titlearea win-type-ellipsis win-type-header">
+                <span class="pagetitle"></span>
+            </h1>
+        </header>
+        <div id="articleArea" aria-label="Main content" role="main">
+            <article>
+                <div id="content"></div>
+            </article>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CameraGetPreviewFrame</title>
+
+    <!-- WinJS references -->
+    <link href="/WinJS/css/ui-dark.css" rel="stylesheet">
+    <script src="/WinJS/js/base.js"></script>
+    <script src="/WinJS/js/ui.js"></script>
+
+    <!-- CameraGetPreviewFrame references -->
+    <link href="/css/camera.css" rel="stylesheet">
+    <script src="/js/camera.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div style="height:60%; width:100%">
+        <video id="cameraPreview" class="preview" style="float:left" onplay="setPreviewRotation"></video>
+        <img id="previewFrameImage" class="preview" style="float:right">
+    </div>
+    <div>
+        <button id="getPreviewFrameButton" class="win-button">getPreviewFrame</button>
+        <label id="frameInfoTextBlock"></label>
+        <div>
+            <input type="checkbox" id="saveShowFrameCheckBox" class="win-checkbox">Save and show frame
+        </div>
+    </div>
+</body>
+
+</html>

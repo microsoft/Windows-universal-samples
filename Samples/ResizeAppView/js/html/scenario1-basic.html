@@ -1,0 +1,42 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario1-basic.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Resizing the view
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                Click the button to change the size of the view. For this to succeed, the current windowing model of the system must allow views to be resized freely, and the requested size must be within the range of view sizes permitted by the system.
+            </p>
+            <p>
+                The view size is currently <span id="reportViewWidth"></span> &#xD7; <span id="reportViewHeight"></span>.
+            </p>
+            <p>
+                <button id="resizeView" class="win-button">Resize to 600 &#xD7; 500</button>
+            </p>
+            <p>
+                An app can request that the system not allow the user to resize the view below a certain size. For this to succeed, the windowing model of the operating system must allow views to be resized freely. If the requested size is outside the range permitted
+                by the operating system, the nearest permissible values are used.
+            </p>
+            <label for="setMinimumSize">
+                <input id="setMinimumSize" type="checkbox" class="win-checkbox">Allow the user to shrink the view to 300 &#xD7; 200
+            </label>
+        </div>
+    </div>
+</body>
+
+</html>

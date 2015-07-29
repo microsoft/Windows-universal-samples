@@ -1,0 +1,43 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario2_VideoChat.css">
+    <script src="/js/CaptureManager.js"></script>
+    <script src="/js/scenario2_VideoChat.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <p>
+            This scenario demonstrates a simple, end-to-end video call client that demonstrates the low latency mode of WinRT&apos;s capture engine and the video tag. The sample uses a custom network source and a custom sink extensions to send and recieve captured
+            audio and video data between 2 computers.</p>
+        <div class="inputsContainer">
+            <h2 class="pcName win-type-subheader">IP address or hostname of remote PC:</h2>
+            <div class="pcNameTextbox">
+                <input type="text" id="ipAddressText" class="win-textbox">
+            </div>
+            <div class="callButton">
+                <button id="callBtn" disabled="disabled" class="win-button">Call</button>
+            </div>
+            <div class="endCallButton">
+                <button id="endCallBtn" disabled="disabled" class="win-button">End Call</button>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
+    <div>
+        <div id="scenario2OutputWindow" class="contentHolder">
+            <video id="remoteVideo" poster="/images/video-call-poster.png" autoplay="autoplay" msaudiocategory="communications">
+            </video>
+        </div>
+    </div>
+</body>
+
+</html>

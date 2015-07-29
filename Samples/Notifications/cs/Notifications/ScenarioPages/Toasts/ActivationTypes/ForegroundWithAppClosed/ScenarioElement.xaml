@@ -1,0 +1,38 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.Toasts.ActivationTypes.ForegroundWithAppClosed.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls">
+
+    <controls:StepsControl x:Name="stepsControl" IsNextEnabled="False" Step="1">
+
+        <StackPanel>
+
+            <controls:InstructionControl Instruction="1">
+
+                <controls:PopToastControl
+                    x:Name="popToastControl"/>
+
+            </controls:InstructionControl>
+
+            <controls:InstructionControl Instruction="2">Close this app (but read all these instructions first)</controls:InstructionControl>
+
+            <controls:InstructionControl Instruction="3">
+                <RichTextBlock>
+                    <Paragraph>After app is closed, follow instructions on the toast</Paragraph>
+                </RichTextBlock>
+            </controls:InstructionControl>
+
+            <controls:InstructionControl Instruction="4">When you submit the toast, the app should be launched and will verify whether everything succeeded.
+            </controls:InstructionControl>
+        </StackPanel>
+
+
+    </controls:StepsControl>
+
+    
+</UserControl>

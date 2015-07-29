@@ -1,0 +1,62 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.LiveTiles.AdaptiveTemplates.Custom.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="24">
+
+
+            <TextBlock
+                Text="Step 1"
+                Style="{StaticResource TitleTextBlockStyle}"/>
+
+            <Button
+                x:Name="ButtonPin"
+                Content="Click to pin tiles"
+                HorizontalAlignment="Stretch"
+                Click="ButtonPin_Click"
+                Margin="0,12,0,0"/>
+
+            <RichTextBlock Margin="0,12,0,0">
+                <Paragraph>Expected: Silently pins 4 tiles, which you can resize to small, medium, wide, and large, so you can see all all once.</Paragraph>
+            </RichTextBlock>
+
+
+            <TextBlock
+                Text="Step 2"
+                Style="{StaticResource TitleTextBlockStyle}"
+                Margin="0,24,0,0"/>
+            
+            <RichTextBlock>
+                <Paragraph>Provide the XML to update the tiles</Paragraph>
+            </RichTextBlock>
+            
+            <TextBox
+                x:Name="TextBoxTilePayload"
+                Header="Tile payload"
+                Margin="0,12,0,0"
+                AcceptsReturn="True"
+                TextWrapping="Wrap"
+                MinHeight="200"/>
+            
+            <Button
+                x:Name="ButtonUpdate"
+                Content="Update tiles"
+                Margin="0,12,0,0"
+                HorizontalAlignment="Stretch"
+                Click="ButtonUpdate_Click"/>
+            
+            <RichTextBlock Margin="0,12,0,0">
+                <Paragraph>Expected: Tiles update with the content</Paragraph>
+            </RichTextBlock>
+
+
+        </StackPanel>
+    </ScrollViewer>
+    
+</UserControl>

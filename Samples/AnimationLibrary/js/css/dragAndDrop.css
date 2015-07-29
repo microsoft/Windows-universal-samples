@@ -1,0 +1,24 @@
+﻿#dragTarget
+{
+    background: #00B6FF;
+}
+
+#affected1
+{
+    top: 6px;
+}
+
+#affected2
+{
+    top: 12px;
+}
+
+.box
+{
+    background: #808080;
+    width: 200px;
+    height: 100px;
+    position: relative;
+    text-align: center;
+    color: white !important;
+}

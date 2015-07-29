@@ -1,0 +1,107 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AppUIBasics.ControlPages.GridPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:common="using:AppUIBasics.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <common:ColorStringConverter x:Key="colorStringConverter"/>
+    </Page.Resources>
+
+    <RelativePanel>
+        <local:ControlExample x:Name="Example1" HeaderText="A 3x3 Grid control." MaxWidth="500">
+            <Grid x:Name="Control1" Width="240" Height="120" Background="Gray" Margin="0,0,0,10">
+                <Grid.Resources>
+                    <Style TargetType="Rectangle">
+                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="Width" Value="40"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Rectangle x:Name="Rectangle1" Fill="Red" Grid.Column="{x:Bind ColumnSlider.Value, Converter={StaticResource doubleIntConverter}, Mode=OneWay}" 
+                               Grid.Row="{x:Bind RowSlider.Value, Converter={StaticResource doubleIntConverter}, Mode=OneWay}" Height="50" Width="50"/>
+                <Rectangle Fill="Blue" Grid.Row="1"/>
+                <Rectangle Fill="Green" Grid.Column="1"/>
+                <Rectangle Fill="Yellow" Grid.Row="1" Grid.Column="1"/>
+            </Grid>
+            <local:ControlExample.Xaml>
+                <RichTextBlock>
+                    <Paragraph>&lt;Grid Width="240" Height="120" Background="Gray"&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Grid.ColumnDefinitions&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;ColumnDefinition Width="50"/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;ColumnDefinition Width="Auto"/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;ColumnDefinition/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/Grid.ColumnDefinitions&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Grid.RowDefinitions&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;RowDefinition Height="50"/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;RowDefinition Height="Auto"/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;RowDefinition/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/Grid.RowDefinitions&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Rectangle Fill="Red" Grid.Column="<Run FontSize="16" FontWeight="Bold" Text="{x:Bind ColumnSlider.Value, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"/>" Grid.Row="<Run FontSize="16" FontWeight="Bold" Text="{x:Bind RowSlider.Value, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"/>"&gt;
+                    </Paragraph>
+                    <Paragraph TextIndent="12">&lt;Rectangle Fill="Blue" Grid.Row="1"/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Rectangle Fill="Green" Grid.Column="1"/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Rectangle Fill="Yellow" Grid.Row="1" Grid.Column="1"/&gt;</Paragraph>
+                    <Paragraph>&lt;/Grid&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+
+        <local:ControlExample x:Name="ExampleAccessories" HeaderText="Use the sliders to change the Grid attached properties of the red rectangle.">
+            <StackPanel x:Name="SliderGroup" Orientation="Horizontal" Grid.Row="1" Grid.Column="2">
+                <Slider x:Name="RowSlider" Header="Grid.Row" Minimum="0" Maximum="2" StepFrequency="1" Width="100"
+                            Orientation="Vertical" IsDirectionReversed="True" TickFrequency="1" SnapsTo="Ticks"/>
+                <Slider x:Name="ColumnSlider" Header="Grid.Column" Minimum="0" Maximum="2" StepFrequency="1" Width="100"
+                            Margin="0,0,30,0" TickFrequency="1" SnapsTo="Ticks"/>
+            </StackPanel>
+        </local:ControlExample>
+
+        <VisualStateManager.VisualStateGroups>
+            <!-- Visual states reflect the application's window size -->
+            <VisualStateGroup>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ExampleAccessories.(RelativePanel.RightOf)" Value="Example1" />
+                        <Setter Target="ExampleAccessories.Margin" Value="24,0,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ExampleAccessories.(RelativePanel.Below)" Value="Example1" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </RelativePanel>
+</Page>

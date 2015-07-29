@@ -1,0 +1,42 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page x:Class="ActivitySensorCS.Scenario3_ChangeEvents" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:ActivitySensorCS" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+  <Grid x:Name="LayoutRoot" HorizontalAlignment="Left" VerticalAlignment="Top">
+    <StackPanel Orientation="Vertical">
+      <TextBlock x:Name="InputTextBlock" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Subscribes to reading changed events and displays the updated reading."/>
+      <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+        <Button x:Name="ScenarioEnableReadingChangedButton" Content="ReadingChanged On" Margin="0,0,10,0" Click="ScenarioEnableReadingChanged"/>
+        <Button x:Name="ScenarioDisableReadingChangedButton" Content="ReadingChanged Off" Margin="0,0,10,0" Click="ScenarioDisableReadingChanged"/>
+      </StackPanel>
+      <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" MinWidth="20"/>
+          <ColumnDefinition Width="Auto" MinWidth="60"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Activity:"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Confidence:"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Reading Timestamp:"/>
+        <TextBlock x:Name="ScenarioOutput_Activity" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock x:Name="ScenarioOutput_Confidence" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock x:Name="ScenarioOutput_ReadingTimestamp" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+      </Grid>
+    </StackPanel>
+  </Grid>
+</Page>

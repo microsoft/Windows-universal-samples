@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario3.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            Code running in a Web Worker has access to the <b>setTimeout</b> and <b>setInterval</b> methods. These methods can be used to throttle long running scripts or for other general timing purposes. Click the buttons to instruct the Worker to set
+            a timeout or interval timer. At each callback of the timer, the Web Worker posts messages which are then displayed by the example.
+        </p>
+        <button id="addTimeout2000" class="action win-button">
+            Schedule 2 Second Timeout</button>
+        <button id="addInterval3000" class="action win-button">
+            Schedule 3 Second Interval</button>
+        <button id="clearTimers" class="action win-button">
+            Clear All Timers</button>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <div class="item" id="scenario3Output">
+            <h3 class="win-type-title">Timer log:</h3>
+            <button id="clearTimerLog" class="action win-button">
+                Clear Log</button>
+            <div id="timerLog" class="log">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

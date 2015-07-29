@@ -1,0 +1,86 @@
+﻿<Page
+    x:Class="XamlPullToRefresh.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:XamlPullToRefresh"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="PullToRefreshStates">
+                <VisualState x:Name="PullToRefresh">
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="refreshIndicator2"
+                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                         To="0"
+                                         Duration="0:0:0.200"/>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="ReleaseToRefresh">
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="refreshIndicator2"
+                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                         To="180"
+                                         Duration="0:0:0.200"/>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Refreshing">
+                    <Storyboard RepeatBehavior="Forever">
+                        <DoubleAnimation Storyboard.TargetName="refreshIndicator2"
+                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                         From="0"
+                                         To="360"
+                                         Duration="0:0:0.400"/>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <local:MyBorder Width="500" Height="500">
+            <ScrollViewer x:Name="SV1" 
+                          ViewChanged="ScrollViewer_ViewChanged" VerticalSnapPointsType="Mandatory" VerticalSnapPointsAlignment="Near"
+                          VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden">
+                <local:MyPanel>
+                    <Border Background="LightGray" Height="100" Width="{Binding ElementName=lv, Path=ActualWidth}" >
+                        <Grid>
+                            <Image x:Name="refreshIndicator"
+                                                Width="25"
+                                                Height="25"
+                                                Margin="5"
+                                                VerticalAlignment="Bottom"
+                                                RenderTransformOrigin="0.5,0.5"
+                                                Source="ms-appx:///Assets/OuterCircle.png"/>
+                            <Image x:Name="refreshIndicator2"
+                                                Width="25"
+                                                Height="25"
+                                                Margin="5"
+                                                VerticalAlignment="Bottom"
+                                                RenderTransformOrigin="0.5,0.5"
+                                                Source="ms-appx:///Assets/InnerCircle.png">
+                                <Image.RenderTransform>
+                                    <RotateTransform/>
+                                </Image.RenderTransform>
+                            </Image>
+                        </Grid>
+                    </Border>
+                    <ListView x:Name="lv" BorderBrush="Black" BorderThickness="1">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel CacheLength="0" />
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </local:MyPanel>
+            </ScrollViewer>
+        </local:MyBorder>
+        <TextBlock VerticalAlignment="Center" Margin="20,0,0,0" Width="300" HorizontalAlignment="Left" TextWrapping="Wrap">
+            Pull down on the list to cause the data in the list to refresh
+        </TextBlock>
+    </Grid>
+</Page>

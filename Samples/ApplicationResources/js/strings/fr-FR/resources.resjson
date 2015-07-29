@@ -1,0 +1,47 @@
+﻿
+{
+    "scenario2Paragraph"                : "Ici est un court paragraphe écrit en français. Le text est mis dans un fichier ressource (par exemple, strings/fr-FR/resources.resjson). Les chaînes de charactères dans le fichier seront lues pendant l'exécution du programme et replaceront les textes dans le fichier HTML. Les fichers ressource doivent :",
+    "_scenario2Paragraph.source"        : "This is a short paragraph written in English. It is authored in a resource file (e.g. strings/en-US/resources.resjson) and its strings are read at runtime to replace HTML markup. Resource files should:",
+    "_scenario2Paragraph.comment"       : "Replace 'English' and 'en' with the native name of the language this text is in and the BCP-47 tag of the language. Do not replace the filename, just the folder.",
+
+    "scenario2ListItem1"                : "Etre mis dans un répertoire nommé selon la convention BCP-47",
+    "_scenario2ListItem1.source"        : "Be stored in folders marked with their BCP-47 language tag.",
+    "_scenario2ListItem1.comment"       : "Do not replace the text 'BCP-47' ",
+
+    "scenario2ListItem2"                : "Etre nommés avec une extension .resjson; par exemple resources.resjson",
+    "_scenario2ListItem2.source"        : "Typically be named resources.resjson, for easy access.",
+    "_scenario2ListItem2.comment"       : "Do not replace the filename",
+
+    "scenario3Message"                  : "Ceci est un exemple d'un message qui peut être traduit",
+    "_scenario3Message.source"          : "This is a sample message that is localized ",
+
+    "scenario7Param"                    : "fr-FR",
+
+    "scenario8MessageCount"             : "Vous avez <span data-win-bind=\"innerText:count\"></span> message(s)",
+    "_scenario8MessageCount.source"     : "You have <span data-win-bind=\"innerText:count\"></span> message(s)",
+    "_scenario8MessageCount.comment"    : "Do not change the HTML markup.",
+    
+    "scenario9AriaLabel"                : "Ceci est un libellé d'accessibilité 'ARIA'",
+    "_scenario9AriaLabel.source"        : "This is a localized ARIA label",
+    "_scenario9AriaLabel.comment"       : "Don't change the word ARIA",
+
+    "displayName"                       : "Exemple de ressources d'application du JS SDK",
+    "_displayName.source"               : "Application Resources JS SDK Sample",
+    "_displayName.comment"              : "Don't change 'SDK'",
+
+    "description"                       : "Exemple de ressources d'application du JS SDK",
+    "_description.source"               : "Application Resources JS SDK Sample",
+    "_description.comment"              : "Don't change 'SDK'",
+
+    "appDisplayName"                    : "Exemple de ressources d'application du JS SDK",
+    "_appDisplayName.source"            : "Application Resources JS SDK Sample",
+    "_appDisplayName.comment"           : "Don't change 'SDK'",
+
+    "appDescription"                    : "Exemple de ressources d'application du JS SDK",
+    "_appDescription.source"            : "Application Resources JS SDK Sample",
+    "_appDescription.comment"           : "Don't change 'SDK'",
+
+    "shortName"                         : "JS Ressources",
+    "_shortName.source"                 : "JS Resources",
+    "_shortName.comment"                : "Must be less than 13 characters and should be an abbreviation for the displayName"
+}

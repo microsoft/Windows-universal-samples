@@ -1,0 +1,50 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1-file-image.css">
+    <script src="/js/scenario1-file-image.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>Extracting text from an image file.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <div>
+                <div style="float: left; width:120px">User Language</div>
+                <div id="userLanguageToggle" style="float: none;" data-win-control="WinJS.UI.ToggleSwitch"></div>
+                <br>
+                <select id="languageList" style="min-width:200px" disabled class="win-dropdown"></select>
+                <br>
+                <div style="position: relative; max-width:600px;">
+                    <img id="imagePreview" class="imagePreview" hidden="hidden">
+                    <div id="textOverlay" class="textOverlay"></div>
+                </div>
+                <br>
+                <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{icon: &apos;preview&apos;}" title="Load sample image." id="buttonSample" class="win-button">
+                </button>
+                <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{icon: &apos;openfile&apos;}" title="Load custom image." id="buttonLoad" class="win-button">
+                </button>
+                <button data-win-control="WinJS.UI.AppBarCommand" data-win-options="{icon: &apos;characters&apos;}" title="Extract text." id="buttonExtract" disabled class="win-button">
+                    <br>
+                </button>
+            </div>
+            <div>
+                <div id="imageText"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

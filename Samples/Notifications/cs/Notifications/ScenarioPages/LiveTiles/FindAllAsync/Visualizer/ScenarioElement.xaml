@@ -1,0 +1,126 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.LiveTiles.FindAllAsync.Visualizer.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:converters="using:Notifications.Converters">
+    
+    <UserControl.Resources>
+
+        <converters:XmlDocumentToStringConverter x:Key="XmlDocumentToStringConverter"/>
+        
+    </UserControl.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Margin="24">
+
+
+            <TextBlock
+                Text="SecondaryTile.FindAllAsync() Visualizer"
+                Style="{StaticResource TitleTextBlockStyle}"/>
+            
+            <RichTextBlock Margin="0,12,0,0">
+                <Paragraph>Use this to visually see the results of calling FindAllAsync().</Paragraph>
+            </RichTextBlock>
+
+            <Button
+                x:Name="ButtonUpdate"
+                Content="Update"
+                HorizontalAlignment="Stretch"
+                Click="ButtonUpdate_Click"
+                Margin="0,12,0,0"/>
+        </StackPanel>
+        
+        
+        <ListView
+            x:Name="ListViewTiles"
+            Grid.Row="1">
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Blue" BorderThickness="4,0,0,0" Margin="6,12,12,12">
+                        <StackPanel Margin="2,0,0,0">
+
+                            <RichTextBlock>
+                                <Paragraph>
+                                    <Run>DisplayName:</Run>
+                                    <Run Text="{Binding DisplayName}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>TileId:</Run>
+                                    <Run Text="{Binding TileId}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>Arguments:</Run>
+                                    <Run Text="{Binding Arguments}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>VisualElements.BackgroundColor:</Run>
+                                    <Run Text="{Binding VisualElements.BackgroundColor}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>VisualElements.ForegroundText:</Run>
+                                    <Run Text="{Binding VisualElements.ForegroundText}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>VisualElements.ShowNameOnSquare150x150Logo:</Run>
+                                    <Run Text="{Binding VisualElements.ShowNameOnSquare150x150Logo}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>VisualElements.ShowNameOnSquare310x310Logo:</Run>
+                                    <Run Text="{Binding VisualElements.ShowNameOnSquare310x310Logo}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>VisualElements.ShowNameOnWide310x150Logo:</Run>
+                                    <Run Text="{Binding VisualElements.ShowNameOnWide310x150Logo}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>VisualElements.Square30x30Logo:</Run>
+                                    <Run Text="{Binding VisualElements.Square30x30Logo}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>VisualElements.Square44x44Logo:</Run>
+                                    <Run Text="{Binding VisualElements.Square44x44Logo}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>VisualElements.Square70x70Logo:</Run>
+                                    <Run Text="{Binding VisualElements.Square70x70Logo}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>VisualElements.Square71x71Logo:</Run>
+                                    <Run Text="{Binding VisualElements.Square71x71Logo}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>VisualElements.Square150x150Logo:</Run>
+                                    <Run Text="{Binding VisualElements.Square150x150Logo}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>VisualElements.Square310x310Logo:</Run>
+                                    <Run Text="{Binding VisualElements.Square310x310Logo}"/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>VisualElements.Wide310x150Logo:</Run>
+                                    <Run Text="{Binding VisualElements.Wide310x150Logo}"/>
+                                </Paragraph>
+                            </RichTextBlock>
+
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+            
+        </ListView>
+        
+    </Grid>
+    
+</UserControl>

@@ -1,0 +1,71 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1.css">
+    <script src="/js/scenario1.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div id="scenarioHeader">
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Demonstrates use of Ink and Reco APIs.
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <!-- These 3 canvases are displayed directly on top of each other.
+                    The exact height will be computed during inkInitialize().           -->
+
+            <div id="canvasGroup" aria-label="Ink canvas" role="img">
+                <canvas id="HighlightCanvas" class="surface"></canvas>
+                <canvas id="InkCanvas" class="surface"></canvas>
+                <canvas id="SelectCanvas" class="surface"></canvas>
+                <div id="SelectionBox" class="rectangle"></div>
+            </div>
+
+            <!-- The Word item is a dummy, invisible <div> that we position on the selected word.
+                    We use it as a marker for the position of the ink in the selected word, since the RecoFlyout must be positioned relative to an HTML element.    -->
+
+            <div id="Word" aria-label="Word" aria-live="polite" role="region"></div>
+
+            <!-- This toolbar is displayed across the bottom of the screen.
+                    The color buttons have IDs which are the names of colors; the ID of each one is fed directly into the strokeStyle of the corresponding canvas.-->
+
+            <div id="ToolBar" data-win-control="WinJS.UI.ToolBar">
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;Reco&apos;,label:&apos;Recognition&apos;,icon:&apos;characters&apos;,section:&apos;primary&apos;,onclick:Ink.recognize,tooltip:&apos;Recognize handwriting&apos;,priority:1}" class="win-button"></button>
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;Find&apos;,label:&apos;Find&apos;,       icon:&apos;find&apos;,      section:&apos;primary&apos;,type:&apos;flyout&apos;,flyout:&apos;FindFlyout&apos;,tooltip:&apos;Find handwritten text&apos;,priority:1}"
+                class="win-button"></button>
+                <hr data-win-control="WinJS.UI.Command" data-win-options="{type:&apos;separator&apos;}">
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;ModeErase&apos;, label:&apos;Erase&apos;, icon:&apos;clear&apos;,    onclick:Ink.eraseMode, section:&apos;primary&apos;,tooltip:&apos;Switch pen tip to eraser mode&apos;,priority:2}"
+                class="win-button"></button>
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;ModeSelect&apos;,label:&apos;Select&apos;,icon:&apos;selectall&apos;,onclick:Ink.selectMode,section:&apos;primary&apos;,tooltip:&apos;Switch pen tip to lasso mode&apos;,priority:2}"
+                class="win-button"></button>
+                <hr data-win-control="WinJS.UI.Command" data-win-options="{type:&apos;separator&apos;}">
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;InkColors&apos;,label:&apos;Color&apos;,icon:&apos;fontcolor&apos;,section:&apos;primary&apos;,type:&apos;flyout&apos;,flyout:&apos;InkColorFlyout&apos;,tooltip:&apos;Choose ink color&apos;,priority:2}"
+                class="win-button"></button>
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;InkWidth&apos;, label:&apos;Width&apos;,icon:&apos;edit&apos;,     section:&apos;primary&apos;,type:&apos;flyout&apos;,flyout:&apos;InkWidthFlyout&apos;,tooltip:&apos;Choose ink width&apos;,priority:2}"
+                class="win-button"></button>
+                <hr data-win-control="WinJS.UI.Command" data-win-options="{type:&apos;separator&apos;}">
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;HighlightColors&apos;,label:&apos;Highlight Color&apos;,icon:&apos;fontcolor&apos;,section:&apos;primary&apos;,type:&apos;flyout&apos;,flyout:&apos;HighlightColorFlyout&apos;,tooltip:&apos;Choose highlighting color&apos;,priority:3}"
+                class="win-button"></button>
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;HighlightWidth&apos;, label:&apos;Highlight Width&apos;,icon:&apos;edit&apos;,     section:&apos;primary&apos;,type:&apos;flyout&apos;,flyout:&apos;HighlightWidthFlyout&apos;,tooltip:&apos;Choose highlighting width&apos;,priority:3}"
+                class="win-button"></button>
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;CopySelected&apos;,label:&apos;Copy&apos;,onclick:Ink.copySelected,section:&apos;secondary&apos;}" class="win-button"></button>
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;Paste&apos;,label:&apos;Paste&apos;,onclick:Ink.paste,section:&apos;secondary&apos;}" class="win-button"></button>
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;Load&apos;,label:&apos;Load&apos;,onclick:Ink.load,section:&apos;secondary&apos;}" class="win-button"></button>
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;Save&apos;,label:&apos;Save&apos;,onclick:Ink.save,section:&apos;secondary&apos;}" class="win-button"></button>
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;Clear&apos;,label:&apos;Clear&apos;,onclick:Ink.clear,section:&apos;secondary&apos;}" class="win-button"></button>
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;Refresh&apos;,label:&apos;Refresh&apos;,onclick:Ink.refresh,section:&apos;secondary&apos;}" class="win-button"></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

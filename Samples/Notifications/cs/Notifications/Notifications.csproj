@@ -1,0 +1,763 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{90969BAA-F4EB-49A3-ADB6-F2B64AF9877A}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Notifications</RootNamespace>
+    <AssemblyName>Notifications</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InstructionControl.cs" />
+    <Compile Include="Controls\InstructionsControl.cs" />
+    <Compile Include="Controls\PopToastControl.xaml.cs">
+      <DependentUpon>PopToastControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StepsControl.cs" />
+    <Compile Include="Controls\StepsHelperControl.cs" />
+    <Compile Include="Converters\TypeToUIElementConverter.cs" />
+    <Compile Include="Converters\XmlDocumentToStringConverter.cs" />
+    <Compile Include="Helpers\BackButtonPage.cs" />
+    <Compile Include="Helpers\BindableBase.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Helpers\TilesHelper.cs" />
+    <Compile Include="Controls\UpdateFourTilesControl.xaml.cs">
+      <DependentUpon>UpdateFourTilesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\IScenario.cs" />
+    <Compile Include="Model\Scenario.cs" />
+    <Compile Include="Model\ScenarioGroup.cs" />
+    <Compile Include="Model\Scenarios.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScenarioPages\Badges\Local\PrimaryTile\ClearBadge\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Badges\Local\PrimaryTile\SetBadgeGlyph\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Badges\Local\PrimaryTile\SetBadgeNumber\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Badges\Local\SecondaryTileBadges\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Branding\Default\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Branding\Logo\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Branding\NameAndLogo\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Branding\Name\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Branding\None\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Custom\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\AdaptiveTemplates\HintPresentation\Contact\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\AdaptiveTemplates\HintPresentation\People\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\AdaptiveTemplates\HintPresentation\Photos\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Images\Source\FromAppData\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Images\Source\FromAppPackage\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\AdaptiveTemplates\TextStyles\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\AdaptiveTemplates\TextWrap\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\BasicState\BackgroundColor\Custom\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\BasicState\BackgroundColor\InheritFromPrimary\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\BasicState\BackgroundColor\Transparent\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\BasicState\Logos\Source\AppData\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\BasicState\Logos\Source\AppPackage\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\Notifications\ExpiringNotification\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Images\Source\FromInternet\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\FindAllAsync\Visualizer\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\Notifications\PrimaryTile\Clearing\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\Notifications\PrimaryTile\Sending\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\Notifications\SecondaryTiles\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\Pinning\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\UnpinEverything\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\LiveTiles\Updating\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Actions\Action\TextAndImage\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Actions\Action\QuickReply\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Actions\Action\Text\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Actions\InputText\DefaultInput\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Actions\InputText\Title\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Actions\InputText\PlaceholderContent\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Actions\InputText\RetrievingArgs\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Actions\SystemCommands\SnoozeAndDismiss\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ActivationTypes\BackgroundWithAppClosed\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ActivationTypes\BackgroundWithAppOpen\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ActivationTypes\ForegroundWithAppClosed\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ActivationTypes\ForegroundWithAppOpen\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ActivationTypes\Protocol\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ActivationTypes\System\Dismiss\AutoContent\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ActivationTypes\System\Dismiss\CustomContent\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ActivationTypes\System\Dismiss\Dismissing\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ActivationTypes\System\Snooze\AutoContent\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ActivationTypes\System\Snooze\CustomContent\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ActivationTypes\System\Snooze\Snoozing\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\AdaptiveTemplates\Image\Src\FromAppData\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\AdaptiveTemplates\Image\Src\FromAppPackage\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\AdaptiveTemplates\Image\Src\FromInternet\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Audio\Default\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Audio\EmailSound\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Audio\Looping\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Audio\Silent\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ExpiringToast\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\GhostToast\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\HistoryChangedTrigger\BadgeControl\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\HistoryChangedTrigger\RespondingToToasts\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Scenarios\Alarm\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Scenarios\Default\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Scenarios\IncomingCall\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\Scenarios\Reminder\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ToastNotificationManagerHistory\ClearAll\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ToastNotificationManagerHistory\GetHistory\Visualizer\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ToastNotificationManagerHistory\RemoveGroup\ByGroup\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ToastNotificationManagerHistory\Remove\ByTagAndGroup\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\ToastNotificationManagerHistory\Remove\ByTag\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPage.xaml.cs">
+      <DependentUpon>ScenarioPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScenarioPages\Toasts\UpdateToast\ScenarioElement.xaml.cs">
+      <DependentUpon>ScenarioElement.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <!--Linked image assets-->
+    <Content Include="..\..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Link>Assets\microsoft-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>Assets\Small.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>Assets\Logo.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Link>Assets\SmallLogo.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>Assets\LargeLogo.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\splash-sdk.png">
+      <Link>Assets\SplashScreen.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Link>Assets\StoreLogo.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\tile-sdk.png">
+      <Link>Assets\WideLogo.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\windows-sdk.png">
+      <Link>Assets\windows-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>Assets\DefaultSecondaryTileAssests\Small.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>Assets\DefaultSecondaryTileAssests\Medium.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\tile-sdk.png">
+      <Link>Assets\DefaultSecondaryTileAssests\Wide.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>Assets\DefaultSecondaryTileAssests\Large.png</Link>
+    </Content>
+    <Content Include="Assets\cancel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\check.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Link>Assets\microsoft-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage1.jpg">
+      <Link>Assets\Photos\1.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage2.jpg">
+      <Link>Assets\Photos\2.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage3.jpg">
+      <Link>Assets\Photos\3.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage4.jpg">
+      <Link>Assets\Photos\4.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage5.jpg">
+      <Link>Assets\Photos\5.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage6.jpg">
+      <Link>Assets\Photos\6.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage7.jpg">
+      <Link>Assets\Photos\7.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage8.jpg">
+      <Link>Assets\Photos\8.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage9.jpg">
+      <Link>Assets\Photos\9.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage10.jpg">
+      <Link>Assets\Photos\10.jpg</Link>
+    </Content>
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage1.jpg">
+      <Link>ScenarioPages\Toasts\AdaptiveTemplates\Image\Src\FromAppData\Image.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage2.jpg">
+      <Link>ScenarioPages\Toasts\AdaptiveTemplates\Image\Src\FromAppPackage\Image.jpg</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Controls\PopToastControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UpdateFourTilesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Badges\Local\PrimaryTile\ClearBadge\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Badges\Local\PrimaryTile\SetBadgeGlyph\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Badges\Local\PrimaryTile\SetBadgeNumber\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Badges\Local\SecondaryTileBadges\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Branding\Default\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Branding\Logo\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Branding\NameAndLogo\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Branding\Name\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Branding\None\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Custom\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\AdaptiveTemplates\HintPresentation\Contact\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\AdaptiveTemplates\HintPresentation\People\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\AdaptiveTemplates\HintPresentation\Photos\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Images\Source\FromAppData\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Images\Source\FromAppPackage\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\AdaptiveTemplates\TextStyles\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\AdaptiveTemplates\TextWrap\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\BasicState\BackgroundColor\Custom\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\BasicState\BackgroundColor\InheritFromPrimary\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\BasicState\BackgroundColor\Transparent\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\BasicState\Logos\Source\AppData\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\BasicState\Logos\Source\AppPackage\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\Notifications\ExpiringNotification\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\AdaptiveTemplates\Images\Source\FromInternet\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\FindAllAsync\Visualizer\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\Notifications\PrimaryTile\Clearing\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\Notifications\PrimaryTile\Sending\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\Notifications\SecondaryTiles\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\Pinning\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\UnpinEverything\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\LiveTiles\Updating\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Actions\Action\TextAndImage\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Actions\Action\QuickReply\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Actions\Action\Text\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Actions\InputText\DefaultInput\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Actions\InputText\Title\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Actions\InputText\PlaceholderContent\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Actions\InputText\RetrievingArgs\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Actions\SystemCommands\SnoozeAndDismiss\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ActivationTypes\BackgroundWithAppClosed\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ActivationTypes\BackgroundWithAppOpen\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ActivationTypes\ForegroundWithAppClosed\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ActivationTypes\ForegroundWithAppOpen\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ActivationTypes\Protocol\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ActivationTypes\System\Dismiss\AutoContent\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ActivationTypes\System\Dismiss\CustomContent\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ActivationTypes\System\Dismiss\Dismissing\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ActivationTypes\System\Snooze\AutoContent\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ActivationTypes\System\Snooze\CustomContent\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ActivationTypes\System\Snooze\Snoozing\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\AdaptiveTemplates\Image\Src\FromAppData\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\AdaptiveTemplates\Image\Src\FromAppPackage\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\AdaptiveTemplates\Image\Src\FromInternet\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Audio\Default\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Audio\EmailSound\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Audio\Looping\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Audio\Silent\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ExpiringToast\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\GhostToast\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\HistoryChangedTrigger\BadgeControl\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\HistoryChangedTrigger\RespondingToToasts\ScenarioElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Scenarios\Alarm\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Scenarios\Default\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Scenarios\IncomingCall\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\Scenarios\Reminder\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ToastNotificationManagerHistory\ClearAll\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ToastNotificationManagerHistory\GetHistory\Visualizer\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ToastNotificationManagerHistory\RemoveGroup\ByGroup\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ToastNotificationManagerHistory\Remove\ByTagAndGroup\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\ToastNotificationManagerHistory\Remove\ByTag\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScenarioPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScenarioPages\Toasts\UpdateToast\ScenarioElement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\DefaultSecondaryTileAssests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BackgroundTasks\BackgroundTasks.csproj">
+      <Project>{ecfbceb0-54f2-41ed-8365-13d29f3653d8}</Project>
+      <Name>BackgroundTasks</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

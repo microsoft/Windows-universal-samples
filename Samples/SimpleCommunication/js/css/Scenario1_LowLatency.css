@@ -1,0 +1,57 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+/* styles */
+
+.controls > div {
+    margin: 5px 10px 5px 0;
+}
+
+.controls button {
+    -ms-flex: 1 auto;
+    font-size: 12pt;
+}
+
+.previewButton {
+    float: left;
+}
+
+.clientButton {
+    float: left;
+}
+
+.latencyModeToggle {
+    float: left;
+}
+
+#scenario1Grid {
+    clear: both;
+}
+
+#scenario1Grid h2 {
+    font: 20pt/24pt "Segoe UI Semilight";
+    margin: 0;
+    padding: 5px 0 10px 0;
+    font-weight: normal;
+}
+
+.contentHolder {
+    border: 1px solid #707070;
+    box-shadow: 4px 4px 8px #707070;
+    float: left;
+    margin: 5px;
+    max-width: 100%;
+}
+
+.contentHolder > img, .contentHolder > video {
+    width: 100%;
+}
+
+img.item, video.item {
+    display: none;
+}
+
+img.item.shown, video.item.shown {
+    display: block;
+}

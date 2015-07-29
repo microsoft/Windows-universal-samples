@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Scenario2_MSA.xaml.cpp" />
+    <ClCompile Include="Scenario3_AAD.xaml.cpp" />
+    <ClCompile Include="Scenario4_ManyProviders.xaml.cpp" />
+    <ClCompile Include="Scenario5_ManyProvidersManyAccounts.xaml.cpp" />
+    <ClCompile Include="Scenario6_CustomProvider.xaml.cpp" />
+    <ClCompile Include="Scenario1_DefaultAccount.xaml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Scenario2_MSA.xaml.h" />
+    <ClInclude Include="Scenario3_AAD.xaml.h" />
+    <ClInclude Include="Scenario4_ManyProviders.xaml.h" />
+    <ClInclude Include="Scenario5_ManyProvidersManyAccounts.xaml.h" />
+    <ClInclude Include="Scenario6_CustomProvider.xaml.h" />
+    <ClInclude Include="Scenario1_DefaultAccount.xaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
+    <Page Include="Scenario2_MSA.xaml" />
+    <Page Include="Scenario3_AAD.xaml" />
+    <Page Include="Scenario4_ManyProviders.xaml" />
+    <Page Include="Scenario5_ManyProvidersManyAccounts.xaml" />
+    <Page Include="Scenario6_CustomProvider.xaml" />
+    <Page Include="Scenario1_DefaultAccount.xaml" />
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{ea54c8c2-8ed5-464c-8d05-2c6e2f6b6215}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{733dac15-bef9-413c-893e-20735aa58a14}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

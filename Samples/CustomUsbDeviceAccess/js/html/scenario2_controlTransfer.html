@@ -1,0 +1,70 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario2_controlTransfer.css">
+    <script src="/js/scenario2_controlTransfer.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Control Transfers</h2>
+        </div>
+        <div id="scenarioContent">
+
+            <div data-win-control="SdkSample.ScenarioInput">
+                <div class="deviceScenarioContainer">
+                    <div class="osrFx2Scenario">
+                        <p>This scenario demonstrates how to use control transfer to set the seven segment on the OSRFX2 device</p>
+
+                        <button id="buttonGetOsrFx2SevenSegment" class="win-button">Get Seven Segment Display</button>
+                        <button id="buttonSetOsrFx2SevenSegment" class="win-button">Set Seven Segment Display</button>
+                        <br>
+                        <select id="osrFx2SevenSegmentSettingInput" size="1" class="win-dropdown">
+                            <option value="0" class="win-dropdown">0</option>
+                            <option value="1" class="win-dropdown">1</option>
+                            <option value="2" class="win-dropdown">2</option>
+                            <option value="3" class="win-dropdown">3</option>
+                            <option value="4" class="win-dropdown">4</option>
+                            <option value="5" class="win-dropdown">5</option>
+                            <option value="6" class="win-dropdown">6</option>
+                            <option value="7" class="win-dropdown">7</option>
+                            <option value="8" class="win-dropdown">8</option>
+                            <option value="9" class="win-dropdown">9</option>
+                        </select>
+                    </div>
+                    <div class="superMuttScenario">
+                        <p>This scenario demonstrates how to use control transfer to set the LED blink pattern of the SuperMUTT device</p>
+                        <button id="buttonGetSuperMuttLedBlinkPattern" class="win-button">Get Led Blink Pattern</button>
+                        <button id="buttonSetSuperMuttLedBlinkPattern" class="win-button">Set Led Blink Pattern</button>
+                        <br>
+                        <select id="ledBlinkPatternInput" size="1" class="win-dropdown">
+                            <option value="0" class="win-dropdown">0</option>
+                            <option value="1" class="win-dropdown">1</option>
+                            <option value="2" class="win-dropdown">2</option>
+                            <option value="3" class="win-dropdown">3</option>
+                            <option value="4" class="win-dropdown">4</option>
+                            <option value="5" class="win-dropdown">5</option>
+                            <option value="6" class="win-dropdown">6</option>
+                            <option value="7" class="win-dropdown">7</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+
+    </div>
+</body>
+
+</html>

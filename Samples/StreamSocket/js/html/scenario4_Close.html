@@ -1,0 +1,38 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <script src="/js/socketsSample.js"></script>
+    <script src="/js/scenario4_Close.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>
+            When an active (still connected) StreamSocket object goes out of scope, an abortive (non-graceful) disconnect may result, which can lead to previously-sent data being discarded before it is read by the remote peer. It is strongly recommended that StreamSocket
+            instances be explicitly closed before they go out of scope (e.g., before application exit).
+        </p>
+        <p>
+            <button id="buttonCloseSockets" class="win-button">Close</button>
+        </p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <p id="statusBox"></p>
+        <p id="outputBox"></p>
+    </div>
+</body>
+
+</html>

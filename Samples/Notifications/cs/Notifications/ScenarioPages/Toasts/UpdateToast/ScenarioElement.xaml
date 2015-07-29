@@ -1,0 +1,19 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.Toasts.UpdateToast.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls"
+    Loaded="UserControl_Loaded">
+    
+    <controls:StepsControl>
+        <StackPanel Margin="24" HorizontalAlignment="Center">
+            <TextBlock TextWrapping="Wrap" Text="A toast should have appeared. Click below to update it with a value inside the textbox."/>
+            <TextBox x:Name="ToastUpdateText"  Width="200" Margin="5" MaxLength="20" Text="Hello!" HorizontalAlignment="Center"/>
+            <Button x:Name="Replace" Width="200" Margin="5" Content="Update Toast" HorizontalAlignment="Center" Click="Replace_Click"/>
+        </StackPanel>
+    </controls:StepsControl>
+</UserControl>

@@ -1,0 +1,57 @@
+﻿<UserControl
+    xmlns:helpers="using:Notifications.Helpers"
+    x:Class="Notifications.ScenarioPages.Toasts.ToastNotificationManagerHistory.RemoveGroup.ByGroup.ScenarioElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Notifications.Controls"
+    Loaded="UserControl_Loaded">
+
+    <controls:StepsControl x:Name="stepsControl" IsNextEnabled="True" Step="1">
+
+        <StackPanel>
+            
+            <RichTextBlock Margin="0,0,0,24">
+                <Paragraph>This scenario creates 5 toasts, each with a tag and group assigned. And then it removes a toast by specifying both tag and group.</Paragraph>
+                <Paragraph/>
+                <Paragraph>There are two identical tags for Toast 2, so their group uniquely identifies them.</Paragraph>
+            </RichTextBlock>
+
+            <controls:InstructionControl Instruction="1">
+                <RichTextBlock>
+                    <Paragraph>Five toasts should have appeared.</Paragraph>
+                    <Paragraph/>
+                    <Paragraph TextIndent="12">Group 1, Toast 1 - TO BE REMOVED</Paragraph>
+                    <Paragraph TextIndent="12">Group 1, Toast 2 - TO BE REMOVED</Paragraph>
+                    <Paragraph TextIndent="12">Group 1, Toast 3 - TO BE REMOVED</Paragraph>
+                    <Paragraph TextIndent="12">Group 2, Toast 1</Paragraph>
+                    <Paragraph TextIndent="12">Group 2, Toast 2</Paragraph>
+                </RichTextBlock>
+            </controls:InstructionControl>
+
+            <controls:InstructionControl Instruction="2">
+                <Button
+                    x:Name="ButtonRemoveGroup1"
+                    Click="ButtonRemoveGroup1_Click"
+                    HorizontalAlignment="Stretch">
+                    <TextBlock Text="click to remove Group 1" TextWrapping="Wrap"/>
+                </Button>
+            </controls:InstructionControl>
+            
+            <controls:InstructionControl Instruction="3">
+                <RichTextBlock>
+                    <Paragraph>Ensure that there are only the following 2 remaining toasts in Action Center...</Paragraph>
+                    <Paragraph/>
+                    <Paragraph TextIndent="12">Group 2, Toast 1</Paragraph>
+                    <Paragraph TextIndent="12">Group 2, Toast 2</Paragraph>
+                </RichTextBlock>
+            </controls:InstructionControl>
+
+        </StackPanel>
+
+
+    </controls:StepsControl>
+
+</UserControl>
