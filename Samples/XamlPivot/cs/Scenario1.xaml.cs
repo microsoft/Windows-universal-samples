@@ -61,7 +61,7 @@ namespace PivotCS
             }
 
         }
-        private void ShowItem(SampleDataModel model)
+        async private void ShowItem(SampleDataModel model)
         {
             var MyDialog = new ContentDialog();
 
@@ -82,8 +82,7 @@ namespace PivotCS
             }
 
             MyDialog.PrimaryButtonText = "OK";
-
-            Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => MyDialog.ShowAsync());
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () => await MyDialog.ShowAsync());
         }
         private void Scenario2_Click(Windows.UI.Xaml.Documents.Hyperlink sender, Windows.UI.Xaml.Documents.HyperlinkClickEventArgs args)
         {

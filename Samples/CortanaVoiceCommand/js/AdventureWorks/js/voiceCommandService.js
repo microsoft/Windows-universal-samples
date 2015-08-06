@@ -246,7 +246,7 @@ var appService = Windows.ApplicationModel.AppService;
                     completedMessage.spokenMessage = "Okay, Keeping the trip to " + destination;
 
                     var response = voiceCommands.VoiceCommandResponse.createResponse(completedMessage);
-                    return voiceServiceConnection.reportSuccessAsync(completedMessage);
+                    return voiceServiceConnection.reportSuccessAsync(response);
                 }
             }
         }).done();

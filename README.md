@@ -1,7 +1,9 @@
 # Universal Windows app samples
+
 This repo contains the samples that demonstrate the API usage patterns for the Universal Windows Platform (UWP) in the Windows Software Development Kit (SDK) for Windows 10. These code samples were created with the Universal Windows templates available in Visual Studio, and are designed to run on desktop, mobile, and future devices that support the Universal Windows Platform.  
 
 ## Universal Windows Platform development
+
 These samples require Visual Studio 2015 and the Windows Software Development Kit (SDK) for Windows 10 to build, test, and deploy your Universal Windows apps. 
 
    [Get a free copy of Visual Studio 2015 Community Edition with support for building Universal Windows apps](http://go.microsoft.com/fwlink/?LinkID=280676)
@@ -11,16 +13,29 @@ Additionally, to stay on top of the latest updates to Windows and the developmen
    [Become a Windows Insider](https://insider.windows.com/)
 
 ## Using the samples
-The easiest way to use these samples without using Git is to download the zip file containing the current version (using the link below or by clicking the "Download ZIP" button on the repo page). You can then unzip the samples and use them in Visual Studio 2015.
+
+The easiest way to use these samples without using Git is to download the zip file containing the current version (using the link below or by clicking the "Download ZIP" button on the repo page). You can then unzip the entire archive and use the samples in Visual Studio 2015.
 
    [Download the samples ZIP](../../archive/master.zip)
 
+   **Notes:** 
+   * Before you unzip the archive, right-click it, select Properties, and then select Unblock.
+   * Be sure to unzip the entire archive, and not just individual samples. The samples all depend on the SharedContent folder in the archive.   
+   * In Visual Studio 2015, the platform target defaults to ARM, so be sure to change that to x64 or x86 if you want to test on a non-ARM device. 
+   
 The samples use Linked files in Visual Studio to reduce duplication of common files, including sample template files and image assets.  These common files are stored in the SharedContent folder at the root of the repository and referred to in the project files using links.  
+
+**Reminder:** If you unzip individual samples, they will not build due to references to other portions of the ZIP file that were not unzipped. You must unzip the entire archive if you intend to build the samples.
 
 For more info about the programming models, platforms, languages, and APIs demonstrated in these samples, please refer to the guidance, tutorials, and reference topics provided in the Windows 10 documentation available in the [Windows Developer Center](https://dev.windows.com). These samples are provided as-is in order to indicate or demonstrate the functionality of the programming models and feature APIs for Windows.
 
 ## Contributions
+
 These samples are direct from the feature teams and we welcome your input on issues and suggestions for new samples.  At this time we are not accepting new samples from the public, but check back here as we evolve our contribution model.
+
+## See also
+
+For additional Windows samples, see [Windows on GitHub](http://microsoft.github.io/windows/). 
 
 ## Samples by category
 
@@ -116,44 +131,45 @@ These samples are direct from the feature teams and we welcome your input on iss
  <tr>
   <td><a href="Samples/XamlContextMenu">Context menu (XAML)</a></td>
   <td><a href="Samples/DWriteTextLayoutCloudFont">Downloadable fonts (DirectWrite)</a></td>
-  <td><a href="Samples/DWriteLineSpacingModes">Line spacing (DirectWrite)</a></td>
+  <td><a href="Samples/XamlDragAndDrop">Drag and drop</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/DWriteLineSpacingModes">Line spacing (DirectWrite)</a></td>
   <td><a href="Samples/XamlFocusVisuals">Focus visuals</a></td>
   <td><a href="Samples/FullScreenMode">Full screen mode</a></td>
-  <td><a href="Samples/WebView">HTML WebView control</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/WebView">HTML WebView control</a></td>
   <td><a href="Samples/XamlListView">ListView and GridView</a></td>
   <td><a href="Samples/LockScreenApps">Lock screen apps</a></td>
-  <td><a href="Samples/MessageDialog">Message dialog</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/MessageDialog">Message dialog</a></td>
   <td><a href="Samples/MultipleViews">Multiple views</a></td>
   <td><a href="Samples/OCR">OCR</a></td>
-  <td><a href="Samples/Printing">Printing</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/Printing">Printing</a></td>
   <td><a href="Samples/XamlPullToRefresh">Pull to refresh</a></td>
   <td><a href="Samples/ResizeAppView">Window resizing</a></td>
-  <td><a href="Samples/DpiScaling">Scaling according to DPI</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/DpiScaling">Scaling according to DPI</a></td>
   <td><a href="Samples/SplashScreen">Splash screen</a></td>
   <td><a href="Samples/XamlStateTriggers">State triggers</a></td>
-  <td><a href="Samples/TitleBar">Title bar</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/TitleBar">Title bar</a></td>
   <td><a href="Samples/UserSelection">Disabling selection</a></td>
   <td><a href="Samples/UserInteractionMode">User interaction mode</a></td>
-  <td><a href="Samples/XamlCommanding">Commanding</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/XamlCommanding">Commanding</a></td>
   <td><a href="Samples/XamlCloudFontIntegration">Downloadable fonts (XAML)</a></td>
   <td><a href="Samples/XamlResponsiveTechniques">Responsiveness techniques</a></td>
-  <td><a href="Samples/XamlTailoredMultipleViews">Tailored multiple views</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/XamlTailoredMultipleViews">Tailored multiple views</a></td>
   <td><a href="Samples/XamlUIBasics">XAML UI basics</a></td>
  </tr>
 </table>
@@ -212,10 +228,10 @@ These samples are direct from the feature teams and we welcome your input on iss
  <tr>
   <td><a href="Samples/Accelerometer">Accelerometer</a></td>
   <td><a href="Samples/ActivitySensor">Activity detection sensor</a></td>
-  <td><a href="Samples/ConsumerExperiences">AllJoyn consumer experiences</a></td>
+  <td><a href="Samples/AllJoyn/ConsumerExperiences">AllJoyn Consumer experiences</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/ProducerExperiences">AllJoyn producer experiences</a></td>
+  <td><a href="Samples/AllJoyn/ProducerExperiences">AllJoyn Producer experiences</a></td>
   <td><a href="Samples/Altimeter">Altimeter</a></td>
   <td><a href="Samples/BackgroundSensors">Background sensors</a></td>
  </tr>
@@ -334,7 +350,7 @@ These samples are direct from the feature teams and we welcome your input on iss
   <th colspan="3" align="left">Identity, security, and encryption</th>
  </tr>
  <tr>
-  <td><a href="Samples/AccountPictureName">Account picture name</a></td>
+  <td><a href="Samples/UserInfo">User information</a></td>
   <td><a href="Samples/PasswordVault">Credential locker</a></td>
   <td><a href="Samples/CredentialPicker">Credential picker</a></td>
  </tr>
@@ -376,11 +392,12 @@ These samples are direct from the feature teams and we welcome your input on iss
   <th colspan="3" align="left">Navigation</th>
  </tr>
  <tr>
+  <td><a href="Samples/BackButton">Back Button</a></td>
   <td><a href="Samples/XamlMasterDetail">Master/detail</a></td>
   <td><a href="Samples/XamlPivot">Pivot</a></td>
-  <td><a href="Samples/Projection">Projection</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/Projection">Projection</a></td>
   <td><a href="Samples/XamlNavigation">XAML navigation menu</a></td>
   <td><a href="Samples/PackagedContent">XHR, handling navigation errors, and URL schemes</a></td>
  </tr>
@@ -451,7 +468,7 @@ These samples are direct from the feature teams and we welcome your input on iss
   <th colspan="3" align="left">Tiles, toasts, and notifications</th>
  </tr>
  <tr>
-  <td><a href="Samples/Notifications">Badge</a></td>
+  <td><a href="Samples/Notifications">Notifications</a></td>
   <td><a href="Samples/SecondaryTiles">Secondary tiles</a></td>
  </tr>
 </table>

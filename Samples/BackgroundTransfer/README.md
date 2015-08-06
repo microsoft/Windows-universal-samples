@@ -1,7 +1,8 @@
 <!---
   category: NetworkingAndWebServices 
 --->
-# Background Transfer sample
+
+# Background transfer sample
 
 This sample shows how to use the Background Transfer API to download and upload files in the background in Universal Windows Platform (UWP) apps.
 
@@ -67,10 +68,10 @@ For more information on network capabilities, see [How to set network capabiliti
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the subdirectory for the desired language.
-3. Double-click the Visual Studio 2015 Solution (.sln) file. 
-4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ### Deploying and running the Windows version of the sample
 
@@ -123,8 +124,7 @@ The remote server address and local filename fields should be updated. This can 
 
 To deploy and run the Windows version of the sample:
 
-1.  Right-click **BackgroundTransfer.Windows** in **Solution Explorer** and select **Set as StartUp Project**.
-2.  To debug the sample and then run it, press F5 or use **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or use **Debug** \> **Start Without Debugging**.
+- To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or select Debug > Start Without Debugging.
 
 ### Deploying and running the Windows Phone version of the sample
 
@@ -135,6 +135,4 @@ IIS is not available on Windows Phone. For the app to access a web server, there
 
 To deploy and run the Windows Phone version of the sample:
 
-1.  Right-click **BackgroundTransfer.WindowsPhone** in **Solution Explorer** and select **Set as StartUp Project**.
-2.  To debug the sample and then run it, press F5 or use **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or use **Debug** \> **Start Without Debugging**.
-
+- To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or select Debug > Start Without Debugging.

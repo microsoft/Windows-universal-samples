@@ -2,8 +2,7 @@
   category: AudioVideoAndCamera 
 --->
 
-Transcoding media sample  
-========================  
+# Transcoding media sample
   
 This sample demonstrates how to use the [**Windows.Media.Transcoding**](http://msdn.microsoft.com/library/windows/apps/br207105) API to transcode a video file in a Windows Store app.. Transcoding is the conversion of a digital media file, such as a video or audio file, from one format to another. For example, you might convert a Windows Media file to MP4 so that it can be played on a portable device that supports MP4 format. Or, you might convert a high-definition video file to a lower resolution. In that case, the re-encoded file might use the same codec as the original file, but it would have a different encoding profile.  
   
@@ -26,9 +25,7 @@ Some of the transcode API covered in this sample are:
   
 For more info about transcoding video files in Windows Store apps, see [Quickstart: transcoding](http://msdn.microsoft.com/library/windows/apps/hh452795) and [How to trim a video file](http://msdn.microsoft.com/library/windows/apps/hh452776).  
 
-
-Related topics  
---------------  
+## Related topics  
   
 [Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
   
@@ -68,23 +65,20 @@ Related topics
   
 [**TrimStop**](http://msdn.microsoft.com/library/windows/apps/br207104)  
   
-
-System requirements
------------------------------
+## System requirements
 
 Client:
 Windows 10  
 Windows Phone 10  
 
-Build the sample
-----------------
+## Build the sample
 
-1.  Start Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C\#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file.
-3.  Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
-Run the sample
---------------
+## Run the sample
 
 The next steps depend on whether you just want to deploy the sample or you want to both deploy and run it.
 

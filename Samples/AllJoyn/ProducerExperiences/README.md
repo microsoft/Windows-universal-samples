@@ -2,7 +2,7 @@
   category: DevicesSensorsAndPower
 --->
 
-# AllJoyn Producer Experiences Sample
+# AllJoyn producer experiences sample
 
 This sample demonstrates how to create an AllJoyn Windows Universal app using Code Generation with Introspection XML and Windows.Devices.AllJoyn.
 

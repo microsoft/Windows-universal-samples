@@ -1,6 +1,7 @@
 ﻿<!---
   category: NetworkingAndWebServices 
 --->
+
 # DatagramSocket sample
 
 This sample shows you how to a use datagram (UDP) socket to send and receive data using the [**DatagramSocket**](http://msdn.microsoft.com/library/windows/apps/br241319) and related classes in the [**Windows.Networking.Sockets**](http://msdn.microsoft.com/library/windows/apps/br226960) namespace in your Universal Windows Platform (UWP) app.
@@ -100,10 +101,10 @@ This sample requires that network capabilities be set in the *Package.appxmanife
 
 ## Build the sample
 
-1. Start Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the subdirectory for the desired language.
-3. Double-click the Visual Studio 2015 Solution (.sln) file. 
-4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 
@@ -111,9 +112,9 @@ The next steps depend on whether you just want to deploy the sample or you want 
 
 ### Deploying the sample
 
-- Select **Build** \> **Deploy Solution**.
+- Select Build > Deploy Solution. 
 
 ### Deploying and running the sample
 
-- Press F5 or use **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or use **Debug** \> **Start Without Debugging**.
+- To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or selectDebug > Start Without Debugging. 
 

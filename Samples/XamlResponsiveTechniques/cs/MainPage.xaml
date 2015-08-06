@@ -18,17 +18,17 @@
             <SplitView.Pane>
                 <RelativePanel>
                     <!-- Static Relativepanel, substitutes nested stackpanel or grid with rows/columns for this simple scenario -->
-                    <AppBarButton x:Name="BackgroundButton" Icon="Pictures"/>
+                    <AppBarButton x:Name="BackgroundButton" Icon="Pictures" IsCompact="True" Click="Button_Click"/>
                     <TextBlock Text="Background"  
-                               RelativePanel.RightOf="BackgroundButton" />
+                               RelativePanel.RightOf="BackgroundButton" RelativePanel.AlignVerticalCenterWith="BackgroundButton"/>
                     <AppBarButton x:Name="LockButton" Icon="SetLockScreen" 
-                                  RelativePanel.Below="BackgroundButton"/>
+                                  RelativePanel.Below="BackgroundButton" IsCompact="True" Click="Button_Click"/>
                     <TextBlock Text="Lock screen"  
-                               RelativePanel.RightOf="LockButton" RelativePanel.Below="BackgroundButton"  />
+                               RelativePanel.RightOf="LockButton" RelativePanel.Below="BackgroundButton"  RelativePanel.AlignVerticalCenterWith="LockButton"/>
                     <AppBarButton x:Name="CameraButton" Icon="Camera" 
-                                  RelativePanel.Below="LockButton" />
+                                  RelativePanel.Below="LockButton" IsCompact="True" Click="Button_Click"/>
                     <TextBlock Text="Camera"  
-                               RelativePanel.RightOf="CameraButton" RelativePanel.Below="LockButton" />
+                               RelativePanel.RightOf="CameraButton" RelativePanel.Below="LockButton" RelativePanel.AlignVerticalCenterWith="CameraButton"/>
                 </RelativePanel>
             </SplitView.Pane>
             <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled">
@@ -51,7 +51,7 @@
                         <Image Margin="5" Height="93" Width="93" Source="Assets/Background3.png" Stretch="UniformToFill" />
                         <Image Margin="5" Height="93" Width="93" Source="Assets/Background4.png" Stretch="UniformToFill" />
                     </StackPanel>
-                    <Button Margin="5" x:Name="BrowseButton" Content="Browse" RelativePanel.Below="PicturesPanel" />
+                    <Button Margin="5" x:Name="BrowseButton" Content="Browse" RelativePanel.Below="PicturesPanel"  Click="Button_Click"/>
                     <ComboBox Margin="5" x:Name="FitCombo" Header="Choose a fit" SelectedIndex="0">
                         <ComboBoxItem>Fill</ComboBoxItem>
                         <ComboBoxItem>Fit</ComboBoxItem>
@@ -60,6 +60,11 @@
                         <ComboBoxItem>Center</ComboBoxItem>
                         <ComboBoxItem>Span</ComboBoxItem>
                     </ComboBox>
+                    <TextBlock x:Name="Instructions" Margin="5" TextWrapping="Wrap" RelativePanel.Below="BrowseButton">
+                        The controls on this page don't perform any actions and are not intended to be interacted with, they are for illustrative purposes only.
+                        <LineBreak/><LineBreak/>
+                        To use this sample, simply resize the main window and observe how the controls on the page adapt to the change in size.
+                    </TextBlock>
                 </RelativePanel>
             </ScrollViewer>
         </SplitView>
@@ -97,6 +102,7 @@
                         <Setter Target="BackgroundCombo.(RelativePanel.Below)" Value="BackgroundImage" />
                         <Setter Target="PictureLabel.(RelativePanel.Below)" Value="BackgroundCombo" />
                         <Setter Target="FitCombo.(RelativePanel.Below)" Value="BrowseButton" />
+                        <Setter Target="Instructions.(RelativePanel.Below)" Value="FitCombo"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -112,6 +118,7 @@
                         <Setter Target="BackgroundCombo.(RelativePanel.Below)" Value="BackgroundImage" />
                         <Setter Target="PictureLabel.(RelativePanel.Below)" Value="BackgroundCombo" />
                         <Setter Target="FitCombo.(RelativePanel.Below)" Value="BrowseButton" />
+                        <Setter Target="Instructions.(RelativePanel.Below)" Value="FitCombo"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

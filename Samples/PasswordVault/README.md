@@ -1,4 +1,10 @@
-﻿The Credential Locker provides a way for you to store user credentials (username, password) in a secure fashion for your app. Usernames and passwords stored using the credential locker are encrypted and saved locally. Once you have the credentials stored, then you can automatically sign users in for a more convenient user experience. Additionally, user credentials stored in the Credential Locker roam with the user's Microsoft Account for added convenience. For more information, see Storing user credentials.
+﻿<!---
+  category: IdentitySecurityAndEncryption
+--->
+
+# Credential locker sample
+
+The Credential Locker provides a way for you to store user credentials (username, password) in a secure fashion for your app. Usernames and passwords stored using the credential locker are encrypted and saved locally. Once you have the credentials stored, then you can automatically sign users in for a more convenient user experience. Additionally, user credentials stored in the Credential Locker roam with the user's Microsoft Account for added convenience. For more information, see Storing user credentials.
 
 This sample demonstrates how to use the Credential Locker and typical login sequences to store web credentials. Specific scenarios include a single user with a single resource, multiple users with a single resource, multiple users with multiple resources, and deleting stored credentials.
 
@@ -22,9 +28,10 @@ Windows 10
 Build the sample
 ----------------
 
-1.  Start Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++ or C\#. Double-click the Visual Studio 2015 Solution (.sln) file.
-3.  Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 Run the sample
 --------------

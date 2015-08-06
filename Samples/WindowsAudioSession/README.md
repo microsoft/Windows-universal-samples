@@ -1,9 +1,8 @@
-<!---
+﻿<!---
   category: AudioVideoAndCamera
 --->
 
-Windows Audio Session (WASAPI) sample
-=====================================
+# Windows audio session (WASAPI) sample
 
 Demonstrates how to do various audio related tasks using the [Windows Audio Session API (WASAPI)](http://msdn.microsoft.com/library/windows/apps/dd371455).
 
@@ -18,8 +17,7 @@ Specifically, this sample covers:
 
 For more information on adding audio to your Windows Store app, see [Quickstart: adding audio to an app](http://msdn.microsoft.com/library/windows/apps/hh452730).
 
-Related topics
---------------
+## Related topics
 
 **Roadmaps**
 
@@ -41,18 +39,18 @@ Related topics
 
 [Media Foundation](http://msdn.microsoft.com/library/windows/apps/ms694197)
 
-Operating system requirements
------------------------------
+## Operating system requirements
 
 Client: Windows 10
 Windows Phone 10
 
-Build the sample
-----------------
+## Build the sample
 
-To build this sample, open the solution (.sln) file in any version of Visual Studio, and then press **F7** or select **Build** \> **Build Solution** from the main menu.
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
-Run the sample
---------------
+## Run the sample
 
 To run this sample after building it, press F5 (run with debugging enabled) or Ctrl-F5 (run without debugging enabled) from Visual Studio 2013 for Windows 8.1 (any SKU). (Or select the corresponding options from the Debug menu.)

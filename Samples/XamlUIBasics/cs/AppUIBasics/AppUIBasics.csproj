@@ -310,9 +310,15 @@
     <Content Include="..\..\..\..\SharedContent\media\splash-sdk.png">
       <Link>Assets\SplashScreen.png</Link>
     </Content>
+    <Content Include="..\..\..\..\SharedContent\media\smalltile-sdk.png">
+        <Link>Assets\smalltile-sdk.png</Link>
+    </Content>
     <Content Include="Assets\SplitView.png" />
     <Content Include="..\..\..\..\SharedContent\media\Samples\treetops.jpg">
       <Link>Assets\treetops.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\storelogo-sdk.png">
+        <Link>Assets\storelogo-sdk.png</Link>
     </Content>
     <Content Include="DataModel\ControlInfoData.json" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
@@ -334,16 +340,6 @@
     </Content>
     <Content Include="Assets\ComboBox.png" />
     <Content Include="Assets\CommandBar.png" />
-    <Content Include="Assets\contrast-black\Logo.scale-100.png" />
-    <Content Include="Assets\contrast-black\SmallLogo.scale-100.png" />
-    <Content Include="Assets\contrast-black\SplashScreen.scale-100.png" />
-    <Content Include="Assets\contrast-black\storelogo.scale-100.png" />
-    <Content Include="Assets\contrast-black\widelogo.scale-100.png" />
-    <Content Include="Assets\contrast-white\Logo.scale-100.png" />
-    <Content Include="Assets\contrast-white\SmallLogo.scale-100.png" />
-    <Content Include="Assets\contrast-white\SplashScreen.scale-100.png" />
-    <Content Include="Assets\contrast-white\storelogo.scale-100.png" />
-    <Content Include="Assets\contrast-white\widelogo.scale-100.png" />
     <Content Include="Assets\DarkGray.png" />
     <Content Include="Assets\DatePicker.png" />
     <Content Include="Assets\FlipView.png" />

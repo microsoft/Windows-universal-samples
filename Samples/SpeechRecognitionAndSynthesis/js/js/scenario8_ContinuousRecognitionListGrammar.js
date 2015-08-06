@@ -119,10 +119,10 @@
         if (eventArgs.result.confidence == Windows.Media.SpeechRecognition.SpeechRecognitionConfidence.high ||
             eventArgs.result.confidence == Windows.Media.SpeechRecognition.SpeechRecognitionConfidence.medium) {
 
-            resultTextArea.innerText = "Heard: " + eventArgs.result.text + ", (Tag: '" + tag + "', Confidence: " + eventArgs.result.confidence + ")";
+            resultTextArea.innerText = "Heard: " + eventArgs.result.text + ", (Tag: '" + tag + "', Confidence: " + convertConfidenceToString(eventArgs.result.confidence) + ")";
         }
         else {
-            resultTextArea.innerText = "Sorry, I didn't catch that. (Heard: " + eventArgs.result.text + ", Tag: '" + tag + "', Confidence: " + eventArgs.result.confidence + ")";
+            resultTextArea.innerText = "Sorry, I didn't catch that. (Heard: " + eventArgs.result.text + ", Tag: '" + tag + "', Confidence: " + convertConfidenceToString(eventArgs.result.confidence) + ")";
         }
     }
 
@@ -240,6 +240,29 @@
             default: {
                 break;
             }
+        }
+    }
+
+    function convertConfidenceToString(confidence) {
+        /// <summary> Converts numeric confidence value into text representation of
+        /// Windows.Media.SpeechRecognition.SpeechRecognitionConfidence for visualization.
+        /// <param name="confidence">The numeric confidence returned by SpeechRecognitionResult.Confidence</param>
+        /// </summary>
+        switch (confidence) {
+            case Windows.Media.SpeechRecognition.SpeechRecognitionConfidence.high: {
+                return "high";
+            }
+            case Windows.Media.SpeechRecognition.SpeechRecognitionConfidence.medium: {
+                return "medium";
+            }
+            case Windows.Media.SpeechRecognition.SpeechRecognitionConfidence.low: {
+                return "low";
+            }
+            case Windows.Media.SpeechRecognition.SpeechRecognitionConfidence.rejected: {
+                return "rejected";
+            }
+            default:
+                return "unknown";
         }
     }
 })();

@@ -1,4 +1,8 @@
-﻿# ContentIndexer sample
+﻿<!---
+  category: Data
+--->
+
+# Content indexer sample
 
 This sample shows how to add, update, and retrieve items and properties from the indexer. Two methods of doing so are demonstrated. The first is using the ContentIndexer APIs to directly interface with the indexer. The second is writing .appcontent-ms files, which contain information to be indexed that the indexer will pick up once the file has been written.
 
@@ -60,9 +64,10 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file. 
-3. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 
