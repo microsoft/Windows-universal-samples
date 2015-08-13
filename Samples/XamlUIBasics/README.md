@@ -1,5 +1,6 @@
 <!---
   category: ControlsLayoutAndText
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619992&clcid=0x409
 --->
 
 # XAML UI basics sample
@@ -33,7 +34,7 @@ Each control page in the application has links to the relevant MSDN documentatio
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Insider Preview
+**Server:** Windows Server 2016 Technical Preview
 
 **Phone:**  Windows 10
 

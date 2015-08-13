@@ -1,5 +1,6 @@
 ﻿<!---
   category: MapsAndLocation 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619977&clcid=0x409
 --->
 
 # MapControl sample
@@ -27,7 +28,7 @@ This sample is written in XAML and C#.
 
 ## Operating system requirements
 
-Client: Windows 10 Insider Preview
+**Client:** Windows 10
 
 ## Build the sample
 

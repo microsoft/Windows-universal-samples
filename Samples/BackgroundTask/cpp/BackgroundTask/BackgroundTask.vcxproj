@@ -2,7 +2,7 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <ProjectGuid>{f710b9fd-4e6b-42d7-a99a-6d48888d48b0}</ProjectGuid>
-    <RootNamespace>BackgroundTask</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
@@ -148,19 +148,19 @@
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_SampleBackgroundTask.xaml.h">
-      <DependentUpon>Scenario1_SampleBackgroundTask.xaml</DependentUpon>
+      <DependentUpon>..\..\shared\Scenario1_SampleBackgroundTask.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario2_SampleBackgroundTaskWithCondition.xaml.h">
-      <DependentUpon>Scenario2_SampleBackgroundTaskWithCondition.xaml</DependentUpon>
+      <DependentUpon>..\..\shared\Scenario2_SampleBackgroundTaskWithCondition.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario3_ServicingCompleteTask.xaml.h">
-      <DependentUpon>Scenario3_ServicingCompleteTask.xaml</DependentUpon>
+      <DependentUpon>..\..\shared\Scenario3_ServicingCompleteTask.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario4_TimeTriggeredTask.xaml.h">
-      <DependentUpon>Scenario4_TimeTriggeredTask.xaml</DependentUpon>
+      <DependentUpon>..\..\shared\Scenario4_TimeTriggeredTask.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario5_ApplicationTriggerTask.xaml.h">
-      <DependentUpon>Scenario5_ApplicationTriggerTask.xaml</DependentUpon>
+      <DependentUpon>..\..\shared\Scenario5_ApplicationTriggerTask.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -170,11 +170,11 @@
     <Page Include="..\..\..\..\SharedContent\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_SampleBackgroundTask.xaml" />
-    <Page Include="Scenario2_SampleBackgroundTaskWithCondition.xaml" />
-    <Page Include="Scenario3_ServicingCompleteTask.xaml" />
-    <Page Include="Scenario4_TimeTriggeredTask.xaml" />
-    <Page Include="Scenario5_ApplicationTriggerTask.xaml" />
+    <Page Include="..\..\shared\Scenario1_SampleBackgroundTask.xaml" />
+    <Page Include="..\..\shared\Scenario2_SampleBackgroundTaskWithCondition.xaml" />
+    <Page Include="..\..\shared\Scenario3_ServicingCompleteTask.xaml" />
+    <Page Include="..\..\shared\Scenario4_TimeTriggeredTask.xaml" />
+    <Page Include="..\..\shared\Scenario5_ApplicationTriggerTask.xaml" />
     <Page Include="..\..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -201,19 +201,19 @@
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="Scenario1_SampleBackgroundTask.xaml.cpp">
-      <DependentUpon>Scenario1_SampleBackgroundTask.xaml</DependentUpon>
+      <DependentUpon>..\..\shared\Scenario1_SampleBackgroundTask.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario2_SampleBackgroundTaskWithCondition.xaml.cpp">
-      <DependentUpon>Scenario2_SampleBackgroundTaskWithCondition.xaml</DependentUpon>
+      <DependentUpon>..\..\shared\Scenario2_SampleBackgroundTaskWithCondition.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario3_ServicingCompleteTask.xaml.cpp">
-      <DependentUpon>Scenario3_ServicingCompleteTask.xaml</DependentUpon>
+      <DependentUpon>..\..\shared\Scenario3_ServicingCompleteTask.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario4_TimeTriggeredTask.xaml.cpp">
-      <DependentUpon>Scenario4_TimeTriggeredTask.xaml</DependentUpon>
+      <DependentUpon>..\..\shared\Scenario4_TimeTriggeredTask.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario5_ApplicationTriggerTask.xaml.cpp">
-      <DependentUpon>Scenario5_ApplicationTriggerTask.xaml</DependentUpon>
+      <DependentUpon>..\..\shared\Scenario5_ApplicationTriggerTask.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

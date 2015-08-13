@@ -1,5 +1,6 @@
 ﻿<!---
  category: Communications
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620586&clcid=0x409
 --->
 
 # Phone call sample
@@ -36,6 +37,8 @@ This focuses on accessing voice mail information and placing calls to the user's
 ## System requirements
 
 **Client:** Not supported
+
+**Server:** Not supported
 
 **Phone:**  Windows 10
 

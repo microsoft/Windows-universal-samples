@@ -7,7 +7,7 @@
   IgnorableNamespaces="uap mp">
 
     <Identity
-      Name="Microsoft.SDKSamples.BackgroundSensorsCS.CS"
+      Name="Microsoft.SDKSamples.BackgroundSensors.CS"
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
@@ -15,7 +15,7 @@
     <mp:PhoneIdentity PhoneProductId="293c76c2-4a5d-40a4-8596-12ee847596a4" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>BackgroundSensorsCS</DisplayName>
+        <DisplayName>Background Sensors C# Sample</DisplayName>
         <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
         <Logo>Assets\StoreLogo-sdk.png</Logo>
     </Properties>
@@ -31,12 +31,12 @@
     <Applications>
         <Application Id="App"
           Executable="$targetnametoken$.exe"
-          EntryPoint="BackgroundSensorsCS.App">
+          EntryPoint="BackgroundSensors.App">
             <uap:VisualElements
-              DisplayName="BackgroundSensorsCS"
+              DisplayName="Background Sensors C# Sample"
               Square150x150Logo="Assets\squareTile-sdk.png"
               Square44x44Logo="Assets\SmallTile-sdk.png"
-              Description="BackgroundSensorsCS"
+              Description="Background Sensors C# Sample"
               BackgroundColor="#00b2f0">
                 <uap:SplashScreen Image="Assets\Splash-sdk.png" />
                 <uap:DefaultTile>

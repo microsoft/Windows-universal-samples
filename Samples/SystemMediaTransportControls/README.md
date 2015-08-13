@@ -1,5 +1,6 @@
 <!---
   category: AudioVideoAndCamera
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619488&clcid=0x409
 --->
 
 # System media transport controls sample
@@ -29,10 +30,9 @@ https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.systemmediat
 System requirements
 ----------------------------
 
-Client: 
-Windows 10
-Windows Phone 10 
+**Client:** Windows 10
 
+**Phone:** Windows 10
 
 Build the sample
 ----------------------------

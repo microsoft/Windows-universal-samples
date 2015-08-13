@@ -1,5 +1,6 @@
 <!---
   category: DevicesSensorsAndPower
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620528&clcid=0x409
 --->
 
 # Custom sensors sample

@@ -1,5 +1,6 @@
 <!---
   category: GlobalizationAndLocalization
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620562&clcid=0x409
 --->
 
 # Linguistic services sample
@@ -33,6 +34,8 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 **Client:** Windows 10
 
 **Server:** Windows Server 2016 Technical Preview
+
+**Phone:** Not supported
 
 ## Build the sample
 

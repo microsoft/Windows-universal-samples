@@ -1,5 +1,6 @@
 ﻿<!---
   category: AudioVideoAndCamera
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620571&clcid=0x409
 --->
 
 # MIDI sample
@@ -20,8 +21,9 @@ AudioGraph, Video editing
 
 ## Operating system requirements
 
-Client: Windows 10
-Server: Windows Server 2012 R2
+**Client:** Windows 10
+
+**Server:** Windows Server 2016 Technical Preview
 
 ## Build the sample
 

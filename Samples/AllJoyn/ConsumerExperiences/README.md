@@ -1,5 +1,6 @@
 <!---
   category: DevicesSensorsAndPower
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=534021&clcid=0x409
 --->
 
 # AllJoyn consumer experiences sample

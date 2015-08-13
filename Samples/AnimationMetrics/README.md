@@ -1,5 +1,6 @@
 ﻿<!---
   category: GraphicsAndAnimation
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620484&clcid=0x409
 --->
 
 # Animation metrics sample

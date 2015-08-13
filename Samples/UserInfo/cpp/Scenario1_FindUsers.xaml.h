@@ -28,7 +28,5 @@ namespace SDKTemplate
         MainPage^ rootPage = MainPage::Current;
         Platform::Collections::Vector<UserViewModel^>^ models = ref new Platform::Collections::Vector<UserViewModel^>();
         int nextUserNumber = 1;
-
-        concurrency::task<void> AddNextUserAsync(Platform::Collections::VectorViewIterator<Windows::System::User^> current, Windows::Foundation::Collections::IVectorView<Windows::System::User^>^ users);
     };
 }

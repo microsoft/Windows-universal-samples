@@ -235,6 +235,7 @@ namespace NavigationMenuSample
     void AppShell::Page_Loaded(Object^ sender, RoutedEventArgs^ e)
     {
         ((Page^)sender)->Focus(Windows::UI::Xaml::FocusState::Programmatic);
+        CheckTogglePaneButtonSizeChanged();
     }
 
     /// <summary>

@@ -1,5 +1,6 @@
 <!---
   category: AudioVideoAndCamera
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620491&clcid=0x409
 --->
 
 # Audio categories sample
@@ -9,9 +10,9 @@ This sample demonstrates how to create apps that use various audio categories.
 System requirements
 -----------------------------
 
-Client:
-Windows 10  
-Windows Phone 10  
+**Client:** Windows 10
+
+**Phone:** Windows 10
 
 Build the sample
 ----------------

@@ -1,5 +1,6 @@
 <!---
   category: NetworkingAndWebServices 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620619&clcid=0x409
 --->
 
 # USSD protocol sample

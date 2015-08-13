@@ -1,5 +1,6 @@
 <!---
   category: FilesFoldersAndLibraries
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620560&clcid=0x409
 --->
 
 # Library management sample

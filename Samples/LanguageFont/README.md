@@ -1,5 +1,6 @@
 ﻿<!---
   category: GlobalizationAndLocalization
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620559&clcid=0x409
 --->
 
 # Language font mapping sample
@@ -23,11 +24,11 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## System requirements
 
-**Client:** Windows 10 Technical Preview
+**Client:** Windows 10
 
-**Server:** Windows 10 Technical Preview
+**Server:** Windows Server 2016 Technical Preview
 
-**Phone:** Windows 10 Technical Preview
+**Phone:** Windows 10
 
 ## Build the sample
 

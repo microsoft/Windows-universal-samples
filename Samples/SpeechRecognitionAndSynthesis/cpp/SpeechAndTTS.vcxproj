@@ -286,8 +286,8 @@
     <Xml Include="..\shared\SRGS\it-IT\SRGSColors.xml">
       <Link>SRGS\it-IT\SRGSColors.xml</Link>
     </Xml>
-    <Xml Include="..\shared\SRGS\zh-CN\SRGSColors.xml">
-      <Link>SRGS\zh-CN\SRGSColors.xml</Link>
+    <Xml Include="..\shared\SRGS\zh-Hans-CN\SRGSColors.xml">
+      <Link>SRGS\zh-Hans-CN\SRGSColors.xml</Link>
     </Xml>
   </ItemGroup>
   <ItemGroup>

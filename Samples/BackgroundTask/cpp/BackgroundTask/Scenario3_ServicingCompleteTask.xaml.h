@@ -19,7 +19,7 @@
 #include "Scenario3_ServicingCompleteTask.g.h"
 #include "MainPage.xaml.h"
 
-namespace BackgroundTask
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

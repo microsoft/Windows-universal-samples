@@ -1,5 +1,6 @@
 <!---
   category: AudioVideoAndCamera 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620512&clcid=0x409
 --->
 
 # Basic face detection sample

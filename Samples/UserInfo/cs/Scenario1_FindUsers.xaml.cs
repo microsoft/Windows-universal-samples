@@ -58,7 +58,7 @@ namespace SDKTemplate
             }
         }
 
-        private async void Show_Click(object sender, RoutedEventArgs e)
+        private async void ShowProperties()
         {
             var selectedUser = (UserViewModel)UserList.SelectedValue;
             if (selectedUser != null)

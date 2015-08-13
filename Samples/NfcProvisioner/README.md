@@ -1,5 +1,6 @@
 <!---
   category: DevicesSensorsAndPower
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620576&clcid=0x409
 --->
 
 # NFC enterprise provisioner sample

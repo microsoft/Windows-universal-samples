@@ -1,5 +1,6 @@
 ﻿<!---
   category: AudioVideoAndCamera
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620515&clcid=0x409
 --->
 
 # Basic media casting sample
@@ -30,9 +31,10 @@ Related topics
 System requirements
 -----------------------------
 
-Client:
-Windows 10  
-Windows Phone 10  
+**Client:** Windows 10
+
+**Phone:** Windows 10
+
 
 Build the sample
 ----------------

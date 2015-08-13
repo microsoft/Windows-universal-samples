@@ -231,6 +231,7 @@ namespace NavigationMenuSample
         {
             ((Page)sender).Focus(FocusState.Programmatic);
             ((Page)sender).Loaded -= Page_Loaded;
+            this.CheckTogglePaneButtonSizeChanged();
         }
 
         #endregion

@@ -268,7 +268,7 @@ namespace SpeechAndTTS
         {
             // Update UI, disabling buttons so the user can't interrupt.
             updateUI(false);
-            var newButtonText = "";
+            string newButtonText = "";
 
             long start = DateTime.Now.Ticks;
 
@@ -295,7 +295,7 @@ namespace SpeechAndTTS
                 }
                 
                 // Recompile with the new constraints and resume the session again.
-                var result = await speechRecognizer.CompileConstraintsAsync();
+                SpeechRecognitionCompilationResult result = await speechRecognizer.CompileConstraintsAsync();
                 if (result.Status != SpeechRecognitionResultStatus.Success)
                 {
                     // Disable the recognition buttons.
@@ -334,7 +334,7 @@ namespace SpeechAndTTS
         {
             // Update UI, disabling buttons so the user can't interrupt.
             updateUI(false);
-            var newButtonText = "";
+            string newButtonText = "";
 
             long start = DateTime.Now.Ticks;
 
@@ -361,7 +361,7 @@ namespace SpeechAndTTS
                 }
 
                 // Recompile with the new constraints and resume the session again.
-                var result = await speechRecognizer.CompileConstraintsAsync();
+                SpeechRecognitionCompilationResult result = await speechRecognizer.CompileConstraintsAsync();
                 if (result.Status != SpeechRecognitionResultStatus.Success)
                 {
                     // Disable the recognition buttons.

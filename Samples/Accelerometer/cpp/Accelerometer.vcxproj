@@ -146,19 +146,19 @@
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_DataEvents.xaml.h">
-      <DependentUpon>Scenario1_DataEvents.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_DataEvents.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario2_ShakeEvents.xaml.h">
-      <DependentUpon>Scenario2_ShakeEvents.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_ShakeEvents.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario3_Polling.xaml.h">
-      <DependentUpon>Scenario3_Polling.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_Polling.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario4_OrientationChanged.xaml.h">
-      <DependentUpon>Scenario4_OrientationChanged.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario4_OrientationChanged.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario5_DataEventsBatching.xaml.h">
-      <DependentUpon>Scenario5_DataEventsBatching.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario5_DataEventsBatching.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -168,11 +168,11 @@
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_DataEvents.xaml" />
-    <Page Include="Scenario2_ShakeEvents.xaml" />
-    <Page Include="Scenario3_Polling.xaml" />
-    <Page Include="Scenario4_OrientationChanged.xaml" />
-    <Page Include="Scenario5_DataEventsBatching.xaml" />
+    <Page Include="..\shared\Scenario1_DataEvents.xaml" />
+    <Page Include="..\shared\Scenario2_ShakeEvents.xaml" />
+    <Page Include="..\shared\Scenario3_Polling.xaml" />
+    <Page Include="..\shared\Scenario4_OrientationChanged.xaml" />
+    <Page Include="..\shared\Scenario5_DataEventsBatching.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -199,19 +199,19 @@
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="Scenario1_DataEvents.xaml.cpp">
-      <DependentUpon>Scenario1_DataEvents.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_DataEvents.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario2_ShakeEvents.xaml.cpp">
-      <DependentUpon>Scenario2_ShakeEvents.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_ShakeEvents.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario3_Polling.xaml.cpp">
-      <DependentUpon>Scenario3_Polling.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_Polling.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario4_OrientationChanged.xaml.cpp">
-      <DependentUpon>Scenario4_OrientationChanged.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario4_OrientationChanged.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario5_DataEventsBatching.xaml.cpp">
-      <DependentUpon>Scenario5_DataEventsBatching.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario5_DataEventsBatching.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

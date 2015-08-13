@@ -1,5 +1,6 @@
 ﻿<!---
   category: CustomUserInteractions
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620554&clcid=0x409
 ---!>
 
 # Inking sample

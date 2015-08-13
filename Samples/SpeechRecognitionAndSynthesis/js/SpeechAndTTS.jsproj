@@ -57,6 +57,7 @@
     <Content Include="html\scenario7_ContinuousDictation.html" />
     <Content Include="html\scenario2_SynthesizeSSML.html" />
     <Content Include="html\scenario8_ContinuousRecognitionListGrammar.html" />
+    <Content Include="html\scenario10_PauseAsync.html" />
     <Content Include="html\scenario9_ContinuousRecognitionSRGSGrammar.html" />
     <Content Include="html\scenario3_PredefinedDictationGrammar.html" />
     <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
@@ -91,6 +92,7 @@
     <Content Include="js\scenario7_ContinuousDictation.js" />
     <Content Include="js\scenario2_SynthesizeSSML.js" />
     <Content Include="js\scenario8_ContinuousRecognitionListGrammar.js" />
+    <Content Include="js\scenario10_PauseAsync.js" />
     <Content Include="js\scenario9_ContinuousRecognitionSRGSGrammar.js" />
     <Content Include="js\scenario3_PredefinedDictationGrammar.js" />
     <Content Include="js\scenario6_SRGSConstraint.js" />

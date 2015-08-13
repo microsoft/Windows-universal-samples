@@ -1,5 +1,6 @@
 ﻿<!---
   category: Data
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620524&clcid=0x409
 --->
 
 # Content indexer sample

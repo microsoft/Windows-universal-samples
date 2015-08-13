@@ -1,5 +1,6 @@
 ﻿<!---
   category: FilesFoldersAndLibraries
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620544&clcid=0x409
 --->
 
 # File search sample

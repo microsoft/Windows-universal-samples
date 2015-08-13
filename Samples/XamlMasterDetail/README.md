@@ -1,5 +1,6 @@
 <!---
   category: Navigation
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619901&clcid=0x409
 --->
 
 # Master/detail sample
@@ -39,7 +40,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Insider Preview
+**Server:** Windows Server 2016 Technical Preview
 
 **Phone:**  Windows 10
 

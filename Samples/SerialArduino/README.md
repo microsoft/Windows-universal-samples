@@ -1,5 +1,6 @@
 ﻿<!---
   category: DevicesSensorsAndPower
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620595&clcid=0x409
 --->
 
 # Serial Arduino sample
@@ -29,7 +30,7 @@ The wiring diagram is also provided as SerialCommand.fzz can be opened with Frit
 
 **Client:** Windows 10
 
-**Server:** Windows 10
+**Server:** Windows Server 2016 Technical Preview
 
 **Phone:** Windows 10
 

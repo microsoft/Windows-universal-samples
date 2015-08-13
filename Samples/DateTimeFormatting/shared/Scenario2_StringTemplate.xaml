@@ -1,0 +1,41 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2_StringTemplate"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer Margin="12,10,12,12">
+            <StackPanel>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Formats the current date and time using
+                    custom formats that are specified using a template string.
+                    This can be used when the requirements for the
+                    date presentation do not match the “short” or “long” form.
+                </TextBlock>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                    For example, if the app requires only a month and a day
+                    or a month and a year,
+                    or needs to combine date and times with time zone information,
+                    this method allows the app to present only those date elements
+                    in a format that respects the user's preferences.
+                </TextBlock>
+                <Button Content="Display" Click="{x:Bind Display}" Margin="0,10,0,0"/>
+                <TextBlock x:Name="OutputTextBlock" TextWrapping="Wrap" Style="{StaticResource BaseMessageStyle}" Margin="0,10,0,0"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

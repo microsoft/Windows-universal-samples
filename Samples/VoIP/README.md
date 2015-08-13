@@ -1,5 +1,6 @@
 <!-- 
   category: Communications
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620620&clcid=0x409
 -->
 
 # Voice over IP (VoIP) sample
@@ -14,11 +15,11 @@ This Sample utilizes Windows Mobile Extensions for UWP and will only work on mob
 
 ## System requirements
 
-**Client:** Windows 10 Technical Preview
+**Client:** Windows 10
 
-**Server:** Windows 10 Technical Preview
+**Server:** Windows Server 2016 Technical Preview
 
-**Phone:**  Windows 10 Technical Preview
+**Phone:**  Windows 10
 
 ## Build the sample
 

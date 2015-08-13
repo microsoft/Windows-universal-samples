@@ -1,3 +1,7 @@
+<!---
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619979&clcid=0x409
+--->
+
 # Universal Windows app samples
 
 This repo contains the samples that demonstrate the API usage patterns for the Universal Windows Platform (UWP) in the Windows Software Development Kit (SDK) for Windows 10. These code samples were created with the Universal Windows templates available in Visual Studio, and are designed to run on desktop, mobile, and future devices that support the Universal Windows Platform.  
@@ -84,15 +88,16 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/BasicFaceTracking">Basic face tracking</a></td>
+  <td><a href="Samples/Playlists">Playlists</a></td>
   <td><a href="Samples/SimpleImaging">Simple imaging</a></td>
-  <td><a href="Samples/SpatialSound">Spatial audio</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/SpatialSound">Spatial audio</a></td>
   <td><a href="Samples/SystemMediaTransportControls">System media transport controls</a></td>
   <td><a href="Samples/MediaTranscoding">Transcoding media</a></td>
-  <td><a href="Samples/VideoPlayback">Video playback</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/VideoPlayback">Video playback</a></td>
   <td><a href="Samples/WindowsAudioSession">Windows audio session (WASAPI)</a></td>
   <td><a href="Samples/MediaImport">Windows media import</a></td>
  </tr>
@@ -314,15 +319,16 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/ApplicationResources">Application resources and localization</a></td>
+  <td><a href="Samples/DateTimeFormatting">Date and time formatting</a></td>
   <td><a href="Samples/JapanesePhoneticAnalysis">Japanese phonetic analysis</a></td>
-  <td><a href="Samples/LanguageFont">Language font mapping</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/LanguageFont">Language font mapping</a></td>
   <td><a href="Samples/LinguisticServices">Linguistic services</a></td>
   <td><a href="Samples/NumberFormatting">Number formatting and parsing</a></td>
-  <td><a href="Samples/TextSegmentation">Text segmentation</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/TextSegmentation">Text segmentation</a></td>
   <td><a href="Samples/TextSuggestion">Text suggestions</a></td>
   <td><a href="Samples/Unicode">Unicode string processing</a></td>
  </tr>
@@ -332,17 +338,18 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <th colspan="3" align="left">Graphics and animation</th>
  </tr>
  <tr>
+  <td><a href="Samples/XamlAnimatedGif">Animated GIF (XAML)</a></td>
+  <td><a href="Samples/AnimationLibrary">Animation library (HTML)</a></td>
   <td><a href="Samples/AnimationMetrics">Animation metrics</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/D2DCustomEffects">Direct2D custom image effects</a></td>
   <td><a href="Samples/D2DGradientMesh">Direct2D gradient mesh</a></td>
+  <td><a href="Samples/EfficientAnimations">Efficient animations (HTML)</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/AnimationLibrary">HTML animation library</a></td>
   <td><a href="Samples/XamlTransform3DAnimations">Transform3D animations</a></td>
   <td><a href="Samples/XamlTransform3DParallax">Transform3D parallax</a></td>
- </tr>
- <tr>
-  <td><a href="Samples/EfficientAnimations">Efficient HTML animations</a></td>
  </tr>
 </table>
 <table>

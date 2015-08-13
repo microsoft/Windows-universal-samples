@@ -116,9 +116,11 @@
             ).done(
                 function (result) {
                     // Reset UI state.
-                    btnListen.disabled = false;
-                    btnListenUI.disabled = false;
-                    btnListen.innerText = "\uE1d6 without UI";
+                    if (typeof btnListen !== "undefined") {
+                        btnListen.disabled = false;
+                        btnListenUI.disabled = false;
+                        btnListen.innerText = "\uE1d6 without UI";
+                    }
                 }
             );
         }
@@ -182,7 +184,9 @@
         /// <summary>
         /// Sets the specified text area with the error message details.
         /// </summary>
-        errorTextArea.innerText = text;
+        if (typeof errorTextArea !== "undefined") {
+            errorTextArea.innerText = text;
+        }
     }
 
     function onSpeechRecognizerStateChanged(eventArgs) {

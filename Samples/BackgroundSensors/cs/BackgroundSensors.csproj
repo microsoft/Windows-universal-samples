@@ -7,8 +7,8 @@
     <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BackgroundSensorsCS</RootNamespace>
-    <AssemblyName>BackgroundSensorsCS</AssemblyName>
+    <RootNamespace>SDKTemplate</RootNamespace>
+    <AssemblyName>BackgroundSensors</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
@@ -121,7 +121,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_DeviceUse.xaml">
+    <Page Include="..\shared\Scenario1_DeviceUse.xaml">
+      <Link>Scenario1_DeviceUse.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

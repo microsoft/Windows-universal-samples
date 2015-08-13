@@ -1,5 +1,6 @@
 <!---
   category: TilesToastAndNotifications
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620577&clcid=0x409
 --->
 
 # Notifications sample

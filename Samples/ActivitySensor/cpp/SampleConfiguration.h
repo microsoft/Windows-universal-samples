@@ -23,7 +23,7 @@ namespace SDKTemplate
         {
             Platform::String^ get()
             {
-                return "ActivitySensor";
+                return "Activity sensor";
             }
         }
 

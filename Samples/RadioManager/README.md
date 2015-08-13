@@ -1,5 +1,6 @@
 <!---
   category: NetworkingAndWebServices 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620590&clcid=0x409
 --->
 
 # Radios sample
@@ -14,7 +15,7 @@ This sample demonstrates:
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Insider Preview
+**Server:** Windows Server 2016 Technical Preview
 
 **Phone:** Windows 10
 

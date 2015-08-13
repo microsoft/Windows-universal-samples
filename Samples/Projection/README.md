@@ -1,5 +1,6 @@
 <!---
   category: Navigation
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620587&clcid=0x409
 --->
 
 # Projection sample
@@ -21,11 +22,11 @@ The sample demonstrates:
 
 ## System requirements
 
-**Client:** Windows 10 Technical Preview
+**Client:** Windows 10
 
-**Server:** Windows 10 Technical Preview
+**Server:** Windows Server 2016 Technical Preview
 
-**Phone:**  Windows 10 Technical Preview
+**Phone:**  Windows 10
 
 ## Build the sample
 

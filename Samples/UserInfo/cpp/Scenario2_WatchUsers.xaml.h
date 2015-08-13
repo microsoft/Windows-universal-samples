@@ -22,6 +22,13 @@ namespace SDKTemplate
     public:
         Scenario2_WatchUsers();
 
+        property Windows::Foundation::Collections::IVector<UserViewModel^>^ Users
+        {
+            Windows::Foundation::Collections::IVector<UserViewModel^>^ get()
+            {
+                return models;
+            }
+        }
     protected:
         virtual void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
         void StartWatching();

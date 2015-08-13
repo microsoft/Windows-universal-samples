@@ -1,5 +1,6 @@
 ﻿<!---
   category: GlobalizationAndLocalization
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620612&clcid=0x409
 --->
 
 # Text suggestions sample

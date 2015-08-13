@@ -38,7 +38,7 @@
     <Filter Include="SRGS\it-IT">
       <UniqueIdentifier>{119925a3-1924-4991-861c-b178ab0d4dbd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SRGS\zh-CN">
+    <Filter Include="SRGS\zh-Hans-CN">
       <UniqueIdentifier>{d5f09861-a3c7-4356-bead-4ccdf9f005e6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Strings\en-GB">
@@ -176,8 +176,8 @@
     <Xml Include="..\shared\SRGS\de-DE\SRGSColors.xml">
       <Filter>SRGS\de-DE</Filter>
     </Xml>
-    <Xml Include="..\shared\SRGS\zh-CN\SRGSColors.xml">
-      <Filter>SRGS\zh-CN</Filter>
+    <Xml Include="..\shared\SRGS\zh-Hans-CN\SRGSColors.xml">
+      <Filter>SRGS\zh-Hans-CN</Filter>
     </Xml>
   </ItemGroup>
   <ItemGroup>

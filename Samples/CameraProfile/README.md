@@ -1,5 +1,6 @@
 ﻿<!---
   category: AudioVideoAndCamera 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620518&clcid=0x409
 --->
 
 # Camera profiles sample

@@ -115,7 +115,7 @@
     <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\js\WinJS.intellisense.js">
       <Link>Microsoft.WinJS.4.0\js\WinJS.intellisense.js</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\js\Microsoft.WinJS\fonts\Symbols.ttf">
+    <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\fonts\Symbols.ttf">
       <Link>Microsoft.WinJS.4.0\fonts\Symbols.ttf</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\js\base.js">

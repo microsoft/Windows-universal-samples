@@ -14,13 +14,12 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
 using System;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.UI.Core;
 
-namespace AccelerometerCS
+namespace SDKTemplate
 {
     public sealed partial class Scenario2_ShakeEvents : Page
     {

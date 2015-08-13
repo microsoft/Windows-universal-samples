@@ -1,5 +1,6 @@
 ﻿<!---
   category: FilesFoldersAndLibraries
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619995&clcid=0x409
 --->
 
 # File access sample

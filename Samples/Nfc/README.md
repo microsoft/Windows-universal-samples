@@ -1,5 +1,6 @@
 <!---
   category: DevicesSensorsAndPower
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620575&clcid=0x409
 --->
 
 # Near field communication (NFC) sample

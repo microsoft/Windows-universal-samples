@@ -1,5 +1,6 @@
 <!---
   category: NetworkingAndWebServices 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620626&clcid=0x409
 --->
 
 # Wi-Fi Direct sample
@@ -31,7 +32,7 @@ Specifically, this sample shows how to:
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Insider Preview
+**Server:** Windows Server 2016 Technical Preview
 
 **Phone:**  Windows 10
 

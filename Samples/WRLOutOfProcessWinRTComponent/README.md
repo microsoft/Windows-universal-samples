@@ -1,5 +1,6 @@
 <!---
    category: PlatformArchitecture
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620631&clcid=0x409
 --->
 
 # Out-of-process component authoring

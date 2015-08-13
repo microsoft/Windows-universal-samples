@@ -1,5 +1,6 @@
 <!---
   category: AudioVideoAndCamera
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620601&clcid=0x409
 --->
 
 # Simple imaging sample

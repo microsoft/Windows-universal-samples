@@ -1,5 +1,6 @@
 ﻿<!---
   category: ControlsLayoutAndText
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620026&clcid=0x409
 --->
 
 # Window resizing sample

@@ -1,5 +1,6 @@
 ﻿<!---
   category: AudioVideoAndCamera 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620517&clcid=0x409
 --->
 
 # High dynamic range sample
@@ -58,11 +59,11 @@ This sample also implements a custom UI to better simulate the experience that a
 
 **Hardware:** Camera
 
-**Client:** Windows 10 - Known Issue with HDR requires build greater than 10142
+**Client:** Windows 10
 
-**Server:** Windows Server 2016 Technical Preview - Known Issue with HDR requires build greater than 10142
+**Server:** Windows Server 2016 Technical Preview
 
-**Phone:** Windows 10 - Known Issue with HDR requires build greater than 10142
+**Phone:** Windows 10
 
 ## Build the sample
 

@@ -1,5 +1,6 @@
 <!---
   category: DevicesSensorsAndPower
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620529&clcid=0x409
 --->
 
 # Custom serial device sample
@@ -33,7 +34,7 @@ This scenario demonstrates the use of event notification APIs provided by Window
 
 **Client:** Windows 10
 
-**Server:** Windows 10
+**Server:** Windows Server 2016 Technical Preview
 
 ## Build the sample
 

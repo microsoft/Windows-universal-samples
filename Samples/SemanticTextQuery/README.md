@@ -1,5 +1,6 @@
 ﻿<!---
   category: FilesFoldersAndLibraries
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620594&clcid=0x409
 --->
 
 # Semantic text query sample

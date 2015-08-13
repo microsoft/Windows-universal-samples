@@ -1,5 +1,6 @@
 <!---
   category: SpeechAndCortana 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619897&clcid=0x409
 --->
 
 # Speech recognition and synthesis sample

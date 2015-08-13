@@ -1,5 +1,6 @@
 ﻿<!---
   category: NetworkingAndWebServices 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620609&clcid=0x409
 --->
 
 # StreamSocket sample
@@ -100,7 +101,7 @@ This sample requires that network capabilities be set in the *Package.appxmanife
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Insider Preview
+**Server:** Windows Server 2016 Technical Preview
 
 **Phone:**  Windows 10
 

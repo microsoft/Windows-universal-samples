@@ -1,5 +1,6 @@
 ﻿<!---
   category: NetworkingAndWebServices 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620556&clcid=0x409
 --->
 
 # JSON sample
@@ -52,7 +53,7 @@ The following features can be used to retrieve text that contains JSON from an H
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Insider Preview
+**Server:** Windows Server 2016 Technical Preview
 
 **Phone:** Windows 10
 

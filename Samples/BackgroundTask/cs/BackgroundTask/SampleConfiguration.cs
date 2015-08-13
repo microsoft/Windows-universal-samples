@@ -21,7 +21,7 @@ namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        public const string FEATURE_NAME = "BackgroundTask";
+        public const string FEATURE_NAME = "Background tasks";
 
         List<Scenario> scenarios = new List<Scenario>
         {

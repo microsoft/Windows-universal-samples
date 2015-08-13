@@ -1,5 +1,6 @@
 <!---
   category: AudioVideoAndCamera
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620533&clcid=0x409
 --->
 
 # Direct2D photo adjustment sample
@@ -46,16 +47,6 @@ Direct2D APIs:
 Related APIs:
 
 - [SwapChainPanel](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.swapchainpanel)
-
-## System requirements
-
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
-
-## Build the sample
 
 ## System requirements
 

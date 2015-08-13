@@ -1,5 +1,6 @@
 ﻿<!---
   category: AudioVideoAndCamera
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620480&clcid=0x409
 --->
 
 # Advanced casting sample
@@ -41,9 +42,9 @@ Related topics
 System requirements
 -----------------------------
 
-Client:
-Windows 10  
-Windows Phone 10  
+**Client:** Windows 10
+
+**Phone:** Windows 10
 
 Build the sample
 ----------------

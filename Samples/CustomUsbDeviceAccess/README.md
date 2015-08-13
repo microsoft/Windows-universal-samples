@@ -1,5 +1,6 @@
 <!---
   category: DevicesSensorsAndPower
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620530&clcid=0x409
 --->
 
 # Custom USB device sample
@@ -136,9 +137,9 @@ The sample adds the [**DeviceCapability**](http://msdn.microsoft.com/library/win
 
 ## Operating system requirements
 
-* **Client:** Windows 10
+**Client:** Windows 10
 
-* **Server:** Windows Server 2016 Technical Preview
+**Server:** Windows Server 2016 Technical Preview
 
 ## Driver requirements
 

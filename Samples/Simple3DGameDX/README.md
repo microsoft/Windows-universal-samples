@@ -1,5 +1,6 @@
 <!---
   category: Gaming
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620598&clcid=0x409
 --->
 
 # Direct3D game sample

@@ -12,18 +12,17 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using AltimeterCS;
 
 namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        public const string FEATURE_NAME = "AltimeterCS";
+        public const string FEATURE_NAME = "Altimeter";
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title = "Data Events", ClassType = typeof(AltimeterCS.Scenario1_DataEvents) },
-            new Scenario() { Title = "Polling", ClassType = typeof(AltimeterCS.Scenario2_Polling) }
+            new Scenario() { Title = "Data Events", ClassType = typeof(Scenario1_DataEvents) },
+            new Scenario() { Title = "Polling", ClassType = typeof(Scenario2_Polling) }
         };
     }
 

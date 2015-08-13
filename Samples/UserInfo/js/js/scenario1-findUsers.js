@@ -31,28 +31,24 @@
     function fillUsersAsync() {
         nextUserNumber = 1;
         User.findAllAsync().then(function (users) {
-            return addNextUserAsync(0);
+            WinJS.Promise.join(users.map(function (user) {
+                return user.getPropertyAsync(KnownUserProperties.displayName);
+            })).then(function (results) {
+                for (var i = 0; i < users.length; i++) {
+                    // Choose a generic name if we do not have access to the actual name.
+                    var displayName = results[i];
+                    if (displayName == "") {
+                        displayName = "User #" + nextUserNumber;
+                        ++nextUserNumber;
+                    }
 
-            function addNextUserAsync(i) {
-                if (i < users.length) {
-                    var user = users[i];
-                    return user.getPropertyAsync(KnownUserProperties.displayName).then(function (displayName) {
-                        // Choose a generic name if we do not have access to the actual name.
-                        if (displayName == "") {
-                            displayName = "User #" + nextUserNumber;
-                            ++nextUserNumber;
-                        }
-
-                        var newOption = document.createElement("option");
-                        newOption.text = displayName;
-                        newOption.value = user.nonRoamableId;
-                        newOption.selected = false;
-                        userList.add(newOption);
-
-                        return addNextUser(i + 1);
-                    });
+                    var newOption = document.createElement("option");
+                    newOption.text = displayName;
+                    newOption.value = users[i].nonRoamableId;
+                    newOption.selected = false;
+                    userList.add(newOption);
                 }
-            }
+            });
         });
     }
 
@@ -113,19 +109,10 @@
     // issuing a series of single-property queries.
     function simulateGetPropertiesAsync(user, desiredProperties) {
         var values = {};
-        return addNextPropertyAsync(0);
-
-        function addNextPropertyAsync(i) {
-            if (i < desiredProperties.length) {
-                var propertyName = desiredProperties[i];
-                return user.getPropertyAsync(propertyName).then(function (result) {
-                    values[propertyName] = result;
-                    return addNextPropertyAsync(i + 1);
-                });
-            } else {
-                return values;
-            }
-        }
+        return WinJS.Promise.join(desiredProperties.map(function (propertyName) {
+            return user.getPropertyAsync(propertyName).then(function (result) {
+                values[propertyName] = result;
+            });
+        })).then(function () { return values; });
     }
-
 })();

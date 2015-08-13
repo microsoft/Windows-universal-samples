@@ -35,43 +35,34 @@ void Scenario1_FindUsers::OnNavigatedTo(NavigationEventArgs^ e)
     // Populate the list of users.
     create_task(User::FindAllAsync()).then([this](IVectorView<User^>^ users)
     {
-        if (users != nullptr)
+        // Get the display name of each user.
+        std::vector<task<Object^>> tasks(users->Size);
+        std::transform(begin(users), end(users), begin(tasks), [](User^ user)
         {
-            auto current = begin(users);
-            AddNextUserAsync(current, users).then([this, users]()
-            {
-                if (users->Size > 0)
-                {
-                    UserList->SelectedIndex = 0;
-                }
-            });
-        }
-    });
-}
-
-task<void> Scenario1_FindUsers::AddNextUserAsync(VectorViewIterator<User^> current, IVectorView<User^>^ users)
-{
-    if (current != end(users))
-    {
-        auto task = create_task((*current)->GetPropertyAsync(KnownUserProperties::DisplayName));
-        return task.then([this, current, users](Platform::Object^ result)
-        {
-            auto displayName = safe_cast<String^>(result);
-            // Choose a generic name if we do not have access to the actual name.
-            if (displayName->IsEmpty())
-            {
-                displayName = "User #" + nextUserNumber.ToString();
-                nextUserNumber++;
-            }
-            models->Append(ref new UserViewModel((*current)->NonRoamableId, displayName));
-
-            return AddNextUserAsync(current + 1, users);
+            return create_task(user->GetPropertyAsync(KnownUserProperties::DisplayName));
         });
-    }
-    else
-    {
-        return create_task([] {});
-    }
+        return when_all(begin(tasks), end(tasks)).then([this, users](std::vector<Object^> results)
+        {
+            // For each user and display name...
+            for (size_t index = 0; index < users->Size; index++)
+            {
+                auto displayName = safe_cast<String^>(results[index]);
+                // Choose a generic name if we do not have access to the actual name.
+                if (displayName->IsEmpty())
+                {
+                    displayName = "User #" + nextUserNumber.ToString();
+                    nextUserNumber++;
+                }
+
+                // Add it to our collection.
+                models->Append(ref new UserViewModel(users->GetAt(index)->NonRoamableId, displayName));
+            }
+            if (users->Size > 0)
+            {
+                UserList->SelectedIndex = 0;
+            }
+        });
+    });
 }
 
 void Scenario1_FindUsers::ShowProperties()

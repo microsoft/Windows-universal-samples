@@ -1,5 +1,6 @@
 <!---
   category: AudioVideoAndCamera
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620563&clcid=0x409
 --->
 
 # DASH streaming sample
@@ -27,8 +28,7 @@ MediaStreamSource Sample (https://code.msdn.microsoft.com/windowsapps/MediaStrea
 System requirements
 -----------------------------
 
-Client:
-Windows 8.1 or greater  
+**Client:** Windows 10
 
 Build the sample
 ----------------
