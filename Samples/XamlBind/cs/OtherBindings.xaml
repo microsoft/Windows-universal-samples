@@ -88,7 +88,7 @@
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind LocalTextBox.Text.Length, Mode=OneWay}"/>
 
                     <TextBlock Grid.Row="3" Text="Text and FontSize are both bound"/>
-                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{x:Bind LocalTextBox.Text, Mode=OneWay}" FontSize="{x:Bind Model.IntPropWithINPC, Mode=OneWay}" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{x:Bind LocalTextBox.Text, Mode=OneWay}" FontSize="{x:Bind LocalTextBox.Text.Length, Mode=OneWay}" />
                 </Grid>
 
                 <TextBlock Style="{StaticResource Note}"><Run>The following is a grid panel with rectangles with bindings to the Grid.Column property</Run></TextBlock>
