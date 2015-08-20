@@ -5,7 +5,7 @@
 
 # Accelerometer sample
 
-This sample shows how to use the [**Accelerometer**](http://msdn.microsoft.com/library/windows/apps/br225687) API.
+This sample shows how to use the [**Accelerometer**](http://msdn.microsoft.com/library/windows/apps/br225687) class.
 
 This sample allows the user to view the acceleration forces along the X-, Y-, and Z-axes for a 3-axis accelerometer. You can choose one of four scenarios:
 
@@ -15,7 +15,7 @@ This sample allows the user to view the acceleration forces along the X-, Y-, an
 -   Accelerometer orientation changed
 -   Accelerometer data events batching
 
-### Acclerometer Data Events
+### Accelerometer Data Events
 
 When you choose the **Enable** button for the **Data Events** option, the app begins streaming accelerometer readings in real time.
 
@@ -31,19 +31,25 @@ When you choose the **Enable** button for the **Polling** option, the app will r
 
 When you choose the **Enable** button for the **OrientationChange** option, the app will display both raw sensor readings, as well as sensor readings that align with the current display orientation.
 
-### Accelerometer data events batching**
+### Accelerometer data events batching
 
 When you choose the **Enable** button for the **Data Events** option, the app begins streaming accelerometer readings. The readings may be delivered in batches if the device supports data batching.
 
 ## Related topics
 
-[**Accelerometer.GetCurrentReading method**](http://msdn.microsoft.com/library/windows/apps/br225699)
+### Samples
 
-[**Accelerometer.ReadingChanged event handler**](http://msdn.microsoft.com/library/windows/apps/br225702)
+[**Display orientation** sample](../DisplayOrientation)
+
+### Reference
+
+[**Accelerometer.GetCurrentReading** method](http://msdn.microsoft.com/library/windows/apps/br225699)
+
+[**Accelerometer.ReadingChanged** event handler](http://msdn.microsoft.com/library/windows/apps/br225702)
 
 [Quickstart: Responding to user movement with the accelerometer](http://msdn.microsoft.com/library/windows/apps/hh465265)
 
-[Windows.Devices.Sensors namespace](http://go.microsoft.com/fwlink/p/?linkid=241981)
+[**Windows.Devices.Sensors** namespace](http://go.microsoft.com/fwlink/p/?linkid=241981)
 
 ## System requirements
 

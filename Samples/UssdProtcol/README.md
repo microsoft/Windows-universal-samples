@@ -11,13 +11,14 @@ USSD messages are specific to the mobile broadband operator and must be choosen 
 
 ## Prerequisites
 
-This sample accesses privileged APIs and used by mobilebroadband operators.
-Hence requires restricted capability to be defined in package manifest.
+This sample accesses privileged APIs used by mobile broadband operators.
+Hence it requires a [special-use capability](https://msdn.microsoft.com/en-us/library/windows/apps/hh464936.aspx#special_capabilities)
+to be declared in package manifest.
 
-### Remark
+### Remarks
 
-- Since this sample uses restricted capability, this will fail WACK for restricted namespace test.
-- USSD API is not supported on Phone device.
+- This sample will not pass WACK because it uses a special-use capability.
+- The USSD API is present but nonfunctional on Phone devices.
 
 ### Reference
 
@@ -25,11 +26,11 @@ Hence requires restricted capability to be defined in package manifest.
 
 ## System requirements
 
-**Hardware:** PC with mobilebroadband modem
+**Hardware:** PC with mobile broadband modem
 
 **Client:** Windows 10 
 
-**Phone:** Windows 10
+**Phone:** Not supported
 
 ## Build the sample
 

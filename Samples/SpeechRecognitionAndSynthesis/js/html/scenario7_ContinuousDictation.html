@@ -30,13 +30,18 @@
             </div>
         </div>
         <div id="scenarioContent">
-            <button id="btnDictate" disabled class="win-button">&#xE1D6; Dictate</button>
-            <button id="btnClearText" disabled class="win-button">Clear Text</button>
+            <div>
+                <select id="languageSelect" class="win-dropdown"></select>
+            </div>
+            <div>
+                <button id="btnDictate" disabled class="win-button">&#xE1D6; Dictate</button>
+                <button id="btnClearText" disabled class="win-button">Clear Text</button>
 
-            <p>Tap the microphone button and speak. This scenario provides continuous, multi-sentence dictation with progressing hypothesis.</p>
-            <p>Message Dictation</p>
-            <p id="dictationTextArea"></p>
-            <p id="errorTextArea"></p>
+                <p>Tap the microphone button and speak. This scenario provides continuous, multi-sentence dictation with progressing hypothesis.</p>
+                <p>Message Dictation</p>
+                <p id="dictationTextArea"></p>
+                <p id="errorTextArea"></p>
+            </div>
         </div>
     </div>
 </body>

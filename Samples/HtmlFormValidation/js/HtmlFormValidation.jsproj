@@ -54,8 +54,6 @@
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Content Include="css\scenario1.css" />
-    <Content Include="css\scenario2.css" />
     <Content Include="css\scenario3.css" />
     <Content Include="css\scenario4.css" />
     <Content Include="..\..\..\SharedContent\js\default.html">

@@ -9,7 +9,6 @@
   </Properties>
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
-    <PackageDependency Name="Microsoft.NET.Native.RunTime.1.0" MinVersion="1.0.0.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
   </Dependencies>
   <Resources>
     <Resource Language="x-generate" />
@@ -17,7 +16,7 @@
   <Applications>
     <Application Id="SplashScreen.App" Executable="$targetnametoken$.exe" EntryPoint="SplashScreen.App">
       <uap:VisualElements DisplayName="SplashScreen C# sample" Square150x150Logo="Assets\squareTile-sdk.png" Square44x44Logo="Assets\SmallTile-sdk.png" Description="SplashScreen C# sample" BackgroundColor="#00b2f0">
-        <uap:SplashScreen Image="Assets\Splash-sdk.png" />
+        <uap:SplashScreen Image="Assets\Splash-sdk.png" BackgroundColor="#00B2F0" />
         <uap:DefaultTile>
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
