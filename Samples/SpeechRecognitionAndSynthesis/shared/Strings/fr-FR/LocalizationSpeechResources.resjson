@@ -1,0 +1,23 @@
+{
+	"DictationUIOptionsExampleText": "Par exemple, « le rapide renard jumped over the lazy dog ».",
+	"ListGrammarCallNita": "Appel Nita",
+	"ListGrammarCallNitaFarley": "Appel Nita Farley",
+	"ListGrammarCallWayne": "Appel Wayne",
+	"ListGrammarCallWayneSigmon": "Appel Wayne Sigmon",
+	"ListGrammarCreateEmail": "Écrire e-mail",
+	"ListGrammarExamplesPrefix": "Exemples:",
+	"ListGrammarGoHome": "page d\u0027accueil",
+	"ListGrammarGoToContosoStudio": "Aller à Contoso studio",
+	"ListGrammarHelpText": "Tap the microphone, and speak. This scenario uses continuous recognition to provide a global-command type scenario.",
+	"ListGrammarOpenMessage": "Courriel ouvert",
+	"ListGrammarSendEmail": "Envoyer un email",
+	"ListGrammarShowMessage": "Afficher message",
+	"SRGSBackgroundGarbagePromptText": "FR-FR Didn\u0027t get the background color \\n\\nTry saying blue background\\n",
+	"SRGSBorderGarbagePromptText": "FR-FR Didn\u0027t get the border color\\n\\n Try saying red border\\n",
+	"SRGSCircleGarbagePromptText": "FR-FR Didn\u0027t get the circle color\\n\\n Try saying green circle\\n",
+	"SRGSGarbagePromptText": "FR-FR Sorry, didn\u0027t get that \\n\\nTry saying -\u003e\\nblue background\\nred border\\ngreen circle",
+	"SRGSHelpText": "FR-FR Tap the microphone and speak to choose colors for the circle, background, and border. Try saying \u0027blue background, red border, green circle\u0027.",
+	"SRGSListeningPromptText": "FR-FR Speak to choose colors for the circle, background, and border. Try saying \u0027blue background, red border, green circle\u0027.",
+	"SRGSUIOptionsExampleText": "FR-FR Try \"blue background, red border, green circle\".",
+	"WebSearchUIOptionsExampleText": "Par exemple, « météo à Londres »"
+}

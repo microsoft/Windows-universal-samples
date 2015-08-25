@@ -1,0 +1,36 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2_DelayMini"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer Margin="12,10,12,12">
+            <StackPanel>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Show a mini contact card with information that is obtained asynchronously.
+                </TextBlock>
+                <TextBlock x:Name="NotSupportedWarning" Style="{StaticResource ScenarioDescriptionTextStyle}"
+                    Visibility="Collapsed" TextWrapping="Wrap" Margin="0,10,0,0">
+                    ShowDelayLoadedContactCard is not supported by this device.
+                </TextBlock>
+                <CheckBox x:Name="DownloadSucceeded" IsChecked="True" Margin="0,10,0,0" Content="Simulate successful download" />
+                <Button Content="Show contact card" Margin="0,10,0,0" Click="ShowContactCard_Click"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -7,28 +7,29 @@
 
 This sample shows how to use the Mobile Broadband Networking API (Windows.Networking.NetworkOperators) using following scenarios:
 - Displays device information by account
-- Listening for changes on mobilebroadband devices by account
+- Listening for changes on mobile broadband devices by account
 - Displays device information by modem
 - Enumerates device services
 - Display SIM card information
 
 ## Prerequisites
 
-This sample accesses privileged APIs and used by mobilebroadband operators.
-Hence requires restricted capability to be defined in package manifest.
+This sample accesses privileged APIs used by mobile broadband operators.
+Hence it requires a [special-use capability](https://msdn.microsoft.com/en-us/library/windows/apps/hh464936.aspx#special_capabilities)
+to be declared in package manifest.
 
-### Remark
+### Remarks
 
-- Since this sample uses restricted capability, this will fail WACK for restricted namespace test.
-- This also requires phone devices to be OEM developer unlocked.
+- This sample will not pass WACK because it uses a special-use capability.
+- This samples requires phone devices to be OEM developer unlocked.
 
 ### Reference
 
-[Mobilebroadband API reference](https://msdn.microsoft.com/en-us/library/windows/apps/windows.networking.networkoperators.aspx)
+[Mobile broadband API reference](https://msdn.microsoft.com/en-us/library/windows/apps/windows.networking.networkoperators.aspx)
 
 ## System requirements
 
-**Hardware:** Phone device or PC with mobilebroadband modem
+**Hardware:** Phone device or PC with mobile broadband modem
 
 **Client:** Windows 10 
 

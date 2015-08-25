@@ -69,6 +69,10 @@ namespace EdpSample
             // quickly as possible, and retrieve all data from the share target asynchronously.
 
             m_shareOperation = (ShareOperation)e.Parameter;
+            if (m_shareOperation == null)
+            {
+                return;
+            }
 
             var result = await ProtectionPolicyManager.RequestAccessAsync(Scenario1.m_enterpriseId,
                                                                              m_shareOperation.Data.Properties.EnterpriseId);

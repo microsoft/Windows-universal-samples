@@ -11,7 +11,11 @@ This sample requires the following capabilities:
 
 - appointments
 - contacts
-- email (restricted capability)
+- email ([special-use capability](https://msdn.microsoft.com/en-us/library/windows/apps/hh464936.aspx#special_capabilities))
+
+### Remarks
+
+- This sample will not pass WACK because it uses a special-use capability.
 
 ## System requirements
 

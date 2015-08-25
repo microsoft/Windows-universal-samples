@@ -1,0 +1,36 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario2-delayMini.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Show a mini contact card with information that is obtained asynchronously.
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p id="notSupportedWarning" style="display: none">
+                showDelayLoadedContactCard is not supported by this device.
+                All calls will silently fail.
+            </p>
+            <p>
+                <label for="downloadSucceeded">
+                    <input type="checkbox" id="downloadSucceeded" checked class="win-checkbox" />
+                    Simulate successful download
+                </label>
+            </p>
+            <p><button id="showContactCard" class="win-button">Show contact card</button></p>
+        </div>    </div>
+</body>
+
+</html>
