@@ -59,6 +59,7 @@
         audio.onended = function () { // Fires when the audio finishes playing
             statusMessage.innerText = "Completed";
             btnSpeak.innerText = "Speak";
+            voicesSelect.disabled = false;
         };
     }
 

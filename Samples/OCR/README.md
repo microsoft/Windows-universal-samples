@@ -10,18 +10,20 @@ This sample demonstrates how to use Windows.Media.Ocr API. Optical character rec
 This sample covers:
 
 Scenario 1: Load image from a file and extract text in user specified language.
-    1) Determine whether any language is OCR supported on device.
-    2) Get list of all available OCR languages on device.
-    3) Create OCR recognizer for specific language.
-    4) Create OCR recognizer for the first OCR supported language from GlobalizationPreferences.Languages list.
-    3) Load image from a file and extract text.
-    4) Overlay word bounding boxes over displayed image.
-    5) Differentiate vertical and horizontal text lines.
+
+1. Determine whether any language is OCR supported on device.
+2. Get list of all available OCR languages on device.
+3. Create OCR recognizer for specific language.
+4. Create OCR recognizer for the first OCR supported language from GlobalizationPreferences.Languages list.
+5. Load image from a file and extract text.
+6. Overlay word bounding boxes over displayed image.
+7. Differentiate vertical and horizontal text lines.
 
 Scenario 2: Capture image from camera and extract text.
-    1) Check if specific language is available on device.
-    2) Capture image from camera and extract text.
-    3) Overlay word bounding boxes and recognized text over displayed image.
+
+1. Check if specific language is available on device.
+2. Capture image from camera and extract text.
+3. Overlay word bounding boxes and recognized text over displayed image.
 
 ## Related topics
 

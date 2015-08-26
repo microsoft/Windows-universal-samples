@@ -71,7 +71,7 @@ Duplicates can also be handled. For an example of handling disambiguation, add a
 ## Related topics
 
 -  [Cortana design guidelines](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/dn974233.aspx)
--  [Cortana interactions (XAML)](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/dn974230.aspx)
+-  [Cortana interactions (XAML)](https://msdn.microsoft.com/library/windows/apps/mt185598)
 -  [Cortana interactions (HTML)](https://msdn.microsoft.com/en-us/library/windows/apps/dn974231.aspx)
 
 ## System requirements
@@ -90,7 +90,7 @@ Cortana requires an appropriate recording device, and the system must be associa
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

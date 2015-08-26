@@ -12,14 +12,15 @@
 #include "pch.h"
 #include "BgTask.h"
 #include "Utilities.h"
-#include <ppltasks.h>
 
 using namespace NfcHceBackgroundTask;
 
+using namespace Concurrency;
 using namespace Platform;
 using namespace Windows::ApplicationModel::Background;
+using namespace Windows::Devices::SmartCards;
 using namespace Windows::Foundation;
-using namespace concurrency;
+using namespace Windows::Storage::Streams;
 using namespace Windows::UI::Notifications;
 
 #define CLAINS_SELECT 0x00A4
@@ -36,18 +37,18 @@ static Array<byte>^ R_APDU_PPSE_SELECT = nullptr;
 
 static Array<byte>^ R_APDU_PPSE_SELECT_V =
 {
-	0x6F, 0x23, // File control information (FCI) issuer discretionary data, length
-	0x84, 0x0E, // Dedicated file (DF) name, length
-	'2', 'P', 'A', 'Y', '.', 'S', 'Y', 'S', '.', 'D', 'D', 'F', '0', '1', // file name "2PAY.SYS.DDF01"
-	0xA5, 0x11, // File control information (FCI) proprietary data, length
-	0xBF, 0x0C, 0x0E, // File control information issuer discretionary data, length
-	0x61, 0x0C, // Directory entry, length
-	0x4F, 0x07, // Application definition file (ADF) name, length
-	0xA0, 0x00, 0x00, 0x00, 0x03, 0x10, 0x10, // V credit/debit applet "A0000000031010"   
-	0x87, 0x01, // Application priority indicator, length
-	0x01,
-	0x90, // Status byte one (SW1)
-	0x00  // Status byte two (SW2)
+    0x6F, 0x23, // File control information (FCI) issuer discretionary data, length
+    0x84, 0x0E, // Dedicated file (DF) name, length
+    '2', 'P', 'A', 'Y', '.', 'S', 'Y', 'S', '.', 'D', 'D', 'F', '0', '1', // file name "2PAY.SYS.DDF01"
+    0xA5, 0x11, // File control information (FCI) proprietary data, length
+    0xBF, 0x0C, 0x0E, // File control information issuer discretionary data, length
+    0x61, 0x0C, // Directory entry, length
+    0x4F, 0x07, // Application definition file (ADF) name, length
+    0xA0, 0x00, 0x00, 0x00, 0x03, 0x10, 0x10, // V credit/debit applet "A0000000031010"   
+    0x87, 0x01, // Application priority indicator, length
+    0x01,
+    0x90, // Status byte one (SW1)
+    0x00  // Status byte two (SW2)
 };
 
 static Array<byte>^ R_APDU_PPSE_SELECT_MC =
@@ -69,19 +70,19 @@ static Array<byte>^ R_APDU_PPSE_SELECT_MC =
 // EMV_v4.3_Book1_ICC_to_Terminal_Interface, Table 43, 44, 45
 static Array<byte>^ R_APDU_CARD_SELECT_V =
 {
-	0x6F, 0x1E, // File control information (FCI) issuer discretionary data, length
-	0x84, 0x07, // Dedicated file (DF) name, length
-							// File name "A0000000031010"
-							0xA0, 0x00, 0x00, 0x00, 0x03, 0x10, 0x10,
-							0xA5, 0x13, // File control information (FCI) proprietary data, length
-							0x50, 0x0B, // Application label, length
-													// Credit/debit application label "CREDIT CARD"
-													'C', 'R', 'E', 'D', 'I', 'T', ' ',
-													'C', 'A', 'R', 'D',
-													0x9F, 0x38, 0x03, // Processing options data object list (PDOL), length
-													0x9F, 0x66, 0x02,
-	0x90, // Status byte one (SW1)
-	0x00  // Status byte two (SW2)
+    0x6F, 0x1E, // File control information (FCI) issuer discretionary data, length
+    0x84, 0x07, // Dedicated file (DF) name, length
+                            // File name "A0000000031010"
+                            0xA0, 0x00, 0x00, 0x00, 0x03, 0x10, 0x10,
+                            0xA5, 0x13, // File control information (FCI) proprietary data, length
+                            0x50, 0x0B, // Application label, length
+                                                    // Credit/debit application label "CREDIT CARD"
+                                                    'C', 'R', 'E', 'D', 'I', 'T', ' ',
+                                                    'C', 'A', 'R', 'D',
+                                                    0x9F, 0x38, 0x03, // Processing options data object list (PDOL), length
+                                                    0x9F, 0x66, 0x02,
+    0x90, // Status byte one (SW1)
+    0x00  // Status byte two (SW2)
 };
 
 // EMV_v4.3_Book1_ICC_to_Terminal_Interface, Table 43, 44, 45
@@ -103,12 +104,12 @@ static Array<byte>^ R_APDU_CARD_SELECT_MC =
 // EMV_v4.3_Book3_Application_Specification, Section 6.5.8 and Figure 4
 static Array<byte>^ R_APDU_GPO_V =
 {
-	0x80,
-	0x06, // Length of Processing options data object list (PDOL)
-				// Application interchange profile (AIP), application file locator (AFL)
-				0x00, 0x80, 0x08, 0x01, 0x01, 0x00,
-				0x90, // Status byte one (SW1)
-				0x00  // Status byte two (SW2)
+    0x80,
+    0x06, // Length of Processing options data object list (PDOL)
+                // Application interchange profile (AIP), application file locator (AFL)
+                0x00, 0x80, 0x08, 0x01, 0x01, 0x00,
+                0x90, // Status byte one (SW1)
+                0x00  // Status byte two (SW2)
 };
 
 static Array<byte>^ R_APDU_GPO_MC =
@@ -193,14 +194,14 @@ static Array<byte>^ R_APDU_COMPUTE_CRYPTO_CSUM_MC =
 
 static Array<byte>^ R_APDU_FAIL =
 {
-	0x6F, // Status byte one (SW1)
-	0x00  // Status byte two (SW2)
+    0x6F, // Status byte one (SW1)
+    0x00  // Status byte two (SW2)
 };
 
 static Array<byte>^ R_APDU_INVALID_PARAMETER_FILE_NOT_FOUND =
 {
-	0x6A, // Status byte one (SW1)
-	0x82  // Status byte two (SW2)
+    0x6A, // Status byte one (SW1)
+    0x82  // Status byte two (SW2)
 };
 
 static Array<byte>^ R_APDU_SUCCESS =
@@ -210,24 +211,19 @@ static Array<byte>^ R_APDU_SUCCESS =
 };
 
 BgTask::BgTask() :
-	m_taskInstance(nullptr),
-	m_deferral(nullptr),
-	m_emulator(nullptr)
+    m_taskInstance(nullptr),
+    m_deferral(nullptr),
+    m_emulator(nullptr)
 {
 }
 
 void BgTask::Run(
     IBackgroundTaskInstance^ taskInstance)
 {
-    m_triggerDetails = static_cast<SmartCardTriggerDetails^>(taskInstance->TriggerDetails);
-    if (m_triggerDetails == nullptr)
-    {
-        // May be not a smart card event that triggered us
-        return;
-    }
-
-    m_emulator = m_triggerDetails->Emulator;
     m_taskInstance = taskInstance;
+
+    m_triggerDetails = static_cast<SmartCardTriggerDetails^>(taskInstance->TriggerDetails);
+    m_emulator = m_triggerDetails->Emulator;
 
     switch (m_triggerDetails->TriggerType)
     {
@@ -238,21 +234,26 @@ void BgTask::Run(
     default:
         DebugLog(m_triggerDetails->TriggerType.ToString()->Data());
         FlushDebugLog();
+
+        // Show toast displaying the type of the background task trigger
         auto toastXml = ToastNotificationManager::GetTemplateContent(ToastTemplateType::ToastImageAndText01);
         toastXml->GetElementsByTagName("text")->Item(0)->InnerText = m_triggerDetails->TriggerType.ToString();
         auto toast = ref new ToastNotification(toastXml);
         ToastNotificationManager::CreateToastNotifier()->Show(toast);
+
         break;
     }
 }
 
 void BgTask::HandleHceActivation()
 {
-	try
-	{
-        auto lock = m_srwLock.LockShared();
-        // Take a deferral to keep this background task alive even after this "Run" method returns
-        // You must complete this deferal immediately after you have done processing the current transaction
+    try
+    {
+        auto lock = m_csEventLock.Lock();
+
+        // Take a deferral to keep this background task alive even after this "Run" method returns.
+        // You must complete this deferal immediately after you have done processing the current
+        // transaction
         m_deferral = m_taskInstance->GetDeferral();
 
         DebugLog(L"*** HCE Activation Background Task Started ***");
@@ -319,14 +320,14 @@ void BgTask::HandleHceActivation()
             [this](
                 IBackgroundTaskInstance^ sender,
                 BackgroundTaskCancellationReason reason)
-        {
-            DebugLog(L"Cancelled");
-            DebugLog(reason.ToString()->Data());
-            EndTask();
-        });
+            {
+                DebugLog(L"Canceled");
+                DebugLog(reason.ToString()->Data());
+                EndTask();
+            });
 
         m_emulator->ConnectionDeactivated += ref new TypedEventHandler<SmartCardEmulator^, SmartCardEmulatorConnectionDeactivatedEventArgs^>(
-                [this](
+            [this](
                 SmartCardEmulator^ emulator,
                 SmartCardEmulatorConnectionDeactivatedEventArgs^ eventArgs)
             {
@@ -334,14 +335,26 @@ void BgTask::HandleHceActivation()
                 EndTask();
             });
 
-		m_emulator->Start();
-        DebugLog(L"Emulator started");
-	}
-	catch (Exception^ e)
-	{
+        // SmartCardEmulator::Start() can trigger the ConnectionDeactivated and ApduReceived
+        // callbacks on this thread. If you are using a lock here and in one of those callbacks,
+        // then make sure the lock is reentrant/recursive
+        DebugLog(L"Emulator is starting...");
+        m_emulator->Start();
+
+        if (m_fTaskEnded)
+        {
+            DebugLog(L"Connection was deactivated before emulator could start");
+        }
+        else
+        {
+            DebugLog(L"Emulator started");
+        }
+    }
+    catch (Exception^ e)
+    {
         DebugLog(("Exception in Run: " + e->ToString())->Data());
         EndTask();
-	}
+    }
 }
 
 void BgTask::DoLaunch(DoLaunchType type, LPWSTR wszMessage)
@@ -374,19 +387,24 @@ void BgTask::DoLaunch(DoLaunchType type, LPWSTR wszMessage)
 
 void BgTask::EndTask()
 {
-    // Lock exclusive to ensure that all other threads have finished, and no others start doing any work
-    DebugLog(L"Waiting for exclusive");
-    auto lock = m_srwLock.LockExclusive();
-    DebugLog(L"Got exclusive");
+    auto lock = m_csEventLock.Lock();
+
+    if (m_fTaskEnded)
+    {
+        DebugLog(L"Background task has already ended. Leaving EndTask");
+        return;
+    }
 
     if (!m_fDenyTransactions && !m_fTransactionCompleted)
     {
-        // We have haven't already launched the app because of denial/completion, then something went wrong
-
-        DoLaunch(Failed, L"Try tapping again, and hold your phone longer");
+        // We haven't already launched the app because of denial/completion, and then something
+        // went wrong
+        DoLaunch(Failed, L"Try tapping again, and hold your phone on the reader longer");
     }
 
     FlushDebugLog();
+
+    m_fTaskEnded = true;
 
     if (m_deferral.Get() != nullptr)
     {
@@ -396,19 +414,25 @@ void BgTask::EndTask()
 
 void BgTask::ApduReceived(SmartCardEmulator^ emulator, SmartCardEmulatorApduReceivedEventArgs^ eventArgs)
 {
-	try
-	{
-        auto lock = m_srwLock.LockShared();
+    try
+    {
+        auto lock = m_csEventLock.Lock();
 
-		auto connectionId = eventArgs->ConnectionProperties->Id;
-		if (connectionId != m_currentConnectionId)
-		{
-			// This is a new connection, so clear out any state from the previous one
-			m_currentConnectionId = connectionId;
-			m_pbCurrentAppletId = nullptr;
+        if (m_fTaskEnded)
+        {
+            DebugLog(L"Background task has been canceled. Leaving ApduReceived");
+            return;
+        }
+
+        auto connectionId = eventArgs->ConnectionProperties->Id;
+        if (connectionId != m_currentConnectionId)
+        {
+            // This is a new connection, so clear out any state from the previous one
+            m_currentConnectionId = connectionId;
+            m_pbCurrentAppletId = nullptr;
             m_fTransactionCompleted = false;
             DebugLog(L"New connection");
-		}
+        }
 
         bool fTransactionComplete = false;
         IBuffer^ response;
@@ -444,17 +468,17 @@ void BgTask::ApduReceived(SmartCardEmulator^ emulator, SmartCardEmulatorApduRece
                 m_fTransactionCompleted = true;
             }
         }
-	}
-	catch (Exception^ e)
-	{
+    }
+    catch (Exception^ e)
+    {
         DebugLog(("Exception in ApduReceived: " + e->ToString() + "\r\n")->Data());
         DoLaunch(Failed, L"Exception Occured");
         EndTask();
-	}
+    }
 }
 
 _Use_decl_annotations_
-IBuffer^ BgTask::ProcessCommandApdu(IBuffer^ commandApdu, bool *pfComplete)
+IBuffer^ BgTask::ProcessCommandApdu(IBuffer^ commandApdu, bool* pfComplete)
 {
     DWORD cbCommandApdu = 0;
     LPBYTE pbCommandApdu = PointerFromIBuffer(commandApdu, &cbCommandApdu);
@@ -573,15 +597,15 @@ IBuffer^ BgTask::ProcessCommandApdu(IBuffer^ commandApdu, bool *pfComplete)
         {
             return IBufferFromArray(R_APDU_FAIL);
         }
-		break;
+        break;
 
-	case CLAINS_READ_RECORD:
+    case CLAINS_READ_RECORD:
         DebugLog(L"-READ RECORD APDU received");
-		if (bP1 != 0x01 || bP2 != 0x0c)
-		{
+        if (bP1 != 0x01 || bP2 != 0x0c)
+        {
             DebugLog(L"READ RECORD failed with unsupported options");
-			return IBufferFromArray(R_APDU_FAIL);
-		}
+            return IBufferFromArray(R_APDU_FAIL);
+        }
 
         {
             auto filename = ref new Platform::String(L"ReadRecordResponse-");
@@ -630,7 +654,7 @@ IBuffer^ BgTask::ProcessCommandApdu(IBuffer^ commandApdu, bool *pfComplete)
                 return IBufferFromArray(R_APDU_FAIL);
             }
         }
-		break;
+        break;
 
     case CLAINS_COMPUTE_CRYPTO_CSUM:
         DebugLog(L"-CCC APDU received");
@@ -652,17 +676,20 @@ IBuffer^ BgTask::ProcessCommandApdu(IBuffer^ commandApdu, bool *pfComplete)
         }
         break;
 
-	default:
+    default:
         DebugLog(L"-Unknown APDU received");
-		return IBufferFromArray(R_APDU_FAIL);
-	}
+        return IBufferFromArray(R_APDU_FAIL);
+    }
 
     DebugLog(L"Fallthrough failure in ProcessCommandApdu");
-	return IBufferFromArray(R_APDU_FAIL);
+    return IBufferFromArray(R_APDU_FAIL);
 }
 
 void BgTask::DebugLog(const wchar_t* pwstrMessage)
 {
+    OutputDebugStringW(pwstrMessage);
+    OutputDebugStringW(L"\r\n");
+
     auto lock = m_csDebugLog.Lock();
     m_wsDebugLog += pwstrMessage;
     m_wsDebugLog += L"\r\n";
@@ -674,5 +701,3 @@ void BgTask::FlushDebugLog()
     AppendFile(L"DebugLog.txt", ref new Platform::String(m_wsDebugLog.data()));
     debugLogLock.Unlock();
 }
-
-

@@ -34,9 +34,13 @@ This sample contains scenarios that demonstrate:
 
 ## Related topics
 
-[**NumberFormatting** sample](http://go.microsoft.com/fwlink/p/?LinkId=620578&clcid=0x409)
+### Samples
 
-### **Reference**
+* [**Calendar** sample](../Calendar)
+* [**GlobalizationPreferences** sample](../GlobalizationPreferences)
+* [**NumberFormatting** sample](http://go.microsoft.com/fwlink/p/?LinkId=620578&clcid=0x409)
+
+### Reference
 
 [**Windows.Globalization.CalendarIdentifiers**](http://msdn.microsoft.com/library/windows/apps/br229460)
 

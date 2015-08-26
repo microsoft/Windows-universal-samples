@@ -31,9 +31,9 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 [ApplicationView class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.applicationview.aspx)
 
-[Managing user contacts (XAML)](http://msdn.microsoft.com/library/windows/apps/hh464950)
+### Conceptual
 
-[Managing user contacts (HTML)](http://msdn.microsoft.com/library/windows/apps/hh464939)
+[Contacts and calendar](https://msdn.microsoft.com/library/windows/apps/mt269388)
 
 ## System requirements
 

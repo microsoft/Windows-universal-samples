@@ -324,16 +324,20 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/ApplicationResources">Application resources and localization</a></td>
+  <td><a href="Samples/Calendar">Calendar</a></td>
   <td><a href="Samples/DateTimeFormatting">Date and time formatting</a></td>
-  <td><a href="Samples/JapanesePhoneticAnalysis">Japanese phonetic analysis</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/GlobalizationPreferences">Globalization preferences</a></td>
+  <td><a href="Samples/JapanesePhoneticAnalysis">Japanese phonetic analysis</a></td>
   <td><a href="Samples/LanguageFont">Language font mapping</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/LinguisticServices">Linguistic services</a></td>
   <td><a href="Samples/NumberFormatting">Number formatting and parsing</a></td>
+  <td><a href="Samples/TextSegmentation">Text segmentation</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/TextSegmentation">Text segmentation</a></td>
   <td><a href="Samples/TextSuggestion">Text suggestions</a></td>
   <td><a href="Samples/Unicode">Unicode string processing</a></td>
  </tr>
@@ -362,9 +366,9 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <th colspan="3" align="left">Identity, security, and encryption</th>
  </tr>
  <tr>
-  <td><a href="Samples/UserInfo">User information</a></td>
   <td><a href="Samples/PasswordVault">Credential locker</a></td>
   <td><a href="Samples/CredentialPicker">Credential picker</a></td>
+  <td><a href="Samples/DisablingScreenCapture">Disabling screen capture</a></td>
  </tr>
  <tr>
   <td><a href="Samples/EnterpriseDataProtection">Enterprise data protection</a></td>
@@ -373,10 +377,11 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/SmartCard">Smart cards</a></td>
+  <td><a href="Samples/UserInfo">User information</a></td>
   <td><a href="Samples/UserConsentVerifier">UserConsentVerifier</a></td>
-  <td><a href="Samples/WebAccountManagement">Web account management</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/WebAccountManagement">Web account management</a></td>
   <td><a href="Samples/WebAuthenticationBroker">WebAuthenticationBroker</a></td>
  </tr>
 </table>

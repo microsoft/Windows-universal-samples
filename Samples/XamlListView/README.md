@@ -13,6 +13,7 @@ Specifically, this sample shows how to:
 - **Simple GridView Sample:** Demonstrate how to implement a grouped GridView using the new x:Bind and x:Phase features.
 - **Master/Details plus Selection Sample:** How to implement a responsive master/details experience with a successful multiple selection experience.
 - **Tap on the left edge of ListView:** Implement the behavior Tap on the left edge of ListView to going into multiple selection mode. 
+- **Restore Scroll Position Sample:** Demonstrates how to restore a list's scrollviewer position when a user navigates away and back from a page. Implements the ListViewPersistenceHelper API
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  

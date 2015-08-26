@@ -21,11 +21,9 @@ This sample also implements a custom UI to better simulate the experience that a
 
 ## Related topics
 
-**Samples**
+**Conceptual**
 
-[How to rotate captured video](https://msdn.microsoft.com/en-us/library/windows/apps/hh868174.aspx)
-
-[How to preview video from a webcam](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868171.aspx)
+[Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
 
 [Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
 

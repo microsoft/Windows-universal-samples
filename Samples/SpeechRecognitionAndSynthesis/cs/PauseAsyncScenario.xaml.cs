@@ -232,13 +232,22 @@ namespace SpeechAndTTS
                 // This prevents an exception from occurring.
                 if (speechRecognizer.State == SpeechRecognizerState.Idle)
                 {
-                    recognizeButtonText.Text = " Stop Continuous Recognition";
-                    btnEmailGrammar.IsEnabled = true;
-                    btnPhoneGrammar.IsEnabled = true;
-                    infoBoxes.Visibility = Visibility.Visible;
-                    isListening = true;
+                    // Reset the text to prompt the user.
+                    try
+                    {
+                        await speechRecognizer.ContinuousRecognitionSession.StartAsync();
 
-                    await speechRecognizer.ContinuousRecognitionSession.StartAsync();
+                        recognizeButtonText.Text = " Stop Continuous Recognition";
+                        btnEmailGrammar.IsEnabled = true;
+                        btnPhoneGrammar.IsEnabled = true;
+                        infoBoxes.Visibility = Visibility.Visible;
+                        isListening = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        var messageDialog = new Windows.UI.Popups.MessageDialog(ex.Message, "Exception");
+                        await messageDialog.ShowAsync();
+                    }
                 }
             }
             else

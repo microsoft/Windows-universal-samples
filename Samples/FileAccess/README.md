@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: FilesFoldersAndLibraries
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619995&clcid=0x409
 --->
@@ -19,11 +19,11 @@ The sample demonstrates these tasks:
 
 3.  **Write and read text in a file**
 
-    Uses the [**FileIO**](http://msdn.microsoft.com/library/windows/apps/hh701440).[**WriteTextAsync**](http://msdn.microsoft.com/library/windows/apps/hh701505) and [**FileIO**](http://msdn.microsoft.com/library/windows/apps/hh701440).[**ReadTextAsync**](http://msdn.microsoft.com/library/windows/apps/hh701482) methods to write and read the file. For a walkthrough of this task, see Quickstart: reading and writing a file ([HTML](http://msdn.microsoft.com/library/windows/apps/hh464978) or [XAML](http://msdn.microsoft.com/library/windows/apps/hh758325)).
+    Uses the [**FileIO**](http://msdn.microsoft.com/library/windows/apps/hh701440).[**WriteTextAsync**](http://msdn.microsoft.com/library/windows/apps/hh701505) and [**FileIO**](http://msdn.microsoft.com/library/windows/apps/hh701440).[**ReadTextAsync**](http://msdn.microsoft.com/library/windows/apps/hh701482) methods to write and read the file. For more info, see [Create, write, and read a file](https://msdn.microsoft.com/library/windows/apps/mt185401).
 
 4.  **Write and read bytes in a file**
 
-    Uses the [**FileIO**](http://msdn.microsoft.com/library/windows/apps/hh701440).[**WriteBufferAsync**](http://msdn.microsoft.com/library/windows/apps/hh701490) and [**FileIO**](http://msdn.microsoft.com/library/windows/apps/hh701440).[**ReadBufferAsync**](http://msdn.microsoft.com/library/windows/apps/hh701468) methods to write and read the file. For a walkthrough of this task, see Quickstart: reading and writing a file ([HTML](http://msdn.microsoft.com/library/windows/apps/hh464978) or [XAML](http://msdn.microsoft.com/library/windows/apps/hh758325)).
+    Uses the [**FileIO**](http://msdn.microsoft.com/library/windows/apps/hh701440).[**WriteBufferAsync**](http://msdn.microsoft.com/library/windows/apps/hh701490) and [**FileIO**](http://msdn.microsoft.com/library/windows/apps/hh701440).[**ReadBufferAsync**](http://msdn.microsoft.com/library/windows/apps/hh701468) methods to write and read the file. For more info, see [Create, write, and read a file](https://msdn.microsoft.com/library/windows/apps/mt185401).
 
 5.  **Write and read a file using a stream**
 
@@ -33,7 +33,7 @@ The sample demonstrates these tasks:
     -   [**DataWriter**](http://msdn.microsoft.com/library/windows/apps/br208154) class
     -   [**DataReader**](http://msdn.microsoft.com/library/windows/apps/br208119) class
 
-    For a walkthrough of this task, see Quickstart: reading and writing a file ([HTML](http://msdn.microsoft.com/library/windows/apps/hh464978) or [XAML](http://msdn.microsoft.com/library/windows/apps/hh758325)).
+    For more info, see [Create, write, and read a file](https://msdn.microsoft.com/library/windows/apps/mt185401).
 
 6.  **Display file properties**
 
@@ -43,7 +43,7 @@ The sample demonstrates these tasks:
 
     Uses the [**StorageApplicationPermissions**](http://msdn.microsoft.com/library/windows/apps/br207456).[**FutureAccessList**](http://msdn.microsoft.com/library/windows/apps/br207457) and [**StorageApplicationPermissions**](http://msdn.microsoft.com/library/windows/apps/br207456).[**MostRecentlyUsedList**](http://msdn.microsoft.com/library/windows/apps/br207458) properties to remember a file or folder so that it can be accessed later.
 
-    For a walkthrough of this task, see [How to track recently used files and folders](http://msdn.microsoft.com/library/windows/apps/hh972603) (HTML or [XAML](http://msdn.microsoft.com/library/windows/apps/hh972344)).
+    For more info, see [Track recently used files and folders](https://msdn.microsoft.com/library/windows/apps/mt186452).
 
     Note that the "Add to system MRU" feature crashes on Phone. We apologize for the inconvenience.
 
@@ -71,7 +71,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## Related topics
 
-*Note**  If you want to learn about accessing files using a file picker, see Quickstart: Accessing files with file pickers ([HTML](http://msdn.microsoft.com/library/windows/apps/hh465199) or [XAML](http://msdn.microsoft.com/library/windows/apps/hh771180)).
+*Note**  If you want to learn about accessing files using a file picker, see [Open files and folders with a picker](https://msdn.microsoft.com/library/windows/apps/mt186456).
 
 ### Samples
 

@@ -124,11 +124,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_DetectInPhoto.xaml">
+    <Page Include="..\shared\Scenario1_DetectInPhoto.xaml">
+      <Link>Scenario1_DetectInPhoto.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_DetectInWebcam.xaml">
+    <Page Include="..\shared\Scenario2_DetectInWebcam.xaml">
+      <Link>Scenario2_DetectInWebcam.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

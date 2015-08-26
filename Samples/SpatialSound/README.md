@@ -25,16 +25,25 @@ Specifically, this sample covers hosting the HRTF xAPO in an XAudio2 graph for r
 
 "Play" button starts playback from an omnidiretional source. The sliders allow control the location of the source.
 
-
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
 To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
-System requirements
------------------------------
+### Remark
+HRTF xAPO API is present but nonfunctional on Phone devices.
+
+## Reference
+
+* [XAudio2 API](https://msdn.microsoft.com/en-us/library/windows/desktop/hh405049(v=vs.85).aspx)
+* [IXAPOHrtfParameters] (https://msdn.microsoft.com/en-us/library/windows/desktop/mt186608(v=vs.85).aspx)
+
+## System requirements
+
 **Client:** Windows 10 
+
+**Phone:** Not supported
 
 ## Build the sample
 

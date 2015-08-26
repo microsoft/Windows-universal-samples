@@ -287,10 +287,18 @@ namespace SpeechAndTTS
             if (speechRecognizer.State == SpeechRecognizerState.Idle)
             {
                 // Reset the text to prompt the user.
-                resultTextBlock.Text = speechResourceMap.GetValue("SRGSHelpText", speechContext).ValueAsString;
-                ContinuousRecoButtonText.Text = " Stop Continuous Recognition";
-                cbLanguageSelection.IsEnabled = false;
-                await speechRecognizer.ContinuousRecognitionSession.StartAsync();
+                try
+                {
+                    await speechRecognizer.ContinuousRecognitionSession.StartAsync();
+                    resultTextBlock.Text = speechResourceMap.GetValue("SRGSHelpText", speechContext).ValueAsString;
+                    ContinuousRecoButtonText.Text = " Stop Continuous Recognition";
+                    cbLanguageSelection.IsEnabled = false;
+                }
+                catch (Exception ex)
+                {
+                    var messageDialog = new Windows.UI.Popups.MessageDialog(ex.Message, "Exception");
+                    await messageDialog.ShowAsync();
+                }
             }
             else
             {

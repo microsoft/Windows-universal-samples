@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: Communications
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620605&clcid=0x409
 --->
@@ -12,7 +12,7 @@ This sample shows how to use the SMS API (Windows.Devices.Sms) using following s
 ## Prerequisites
 
 This sample accesses privileged APIs used by mobile broadband operators.
-Hence it requires a [special-use capability](https://msdn.microsoft.com/en-us/library/windows/apps/hh464936.aspx#special_capabilities)
+Hence it requires a [special-use capability](https://msdn.microsoft.com/library/windows/apps/mt270968#special_and_restricted_capabilities)
 to be declared in package manifest.
 
 ### Remark

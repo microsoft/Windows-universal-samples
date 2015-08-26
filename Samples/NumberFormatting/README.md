@@ -23,6 +23,12 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## Related topics
 
+### Samples
+
+* [**Calendar** sample](../Calendar)
+* [**DateTimeFormatting** sample](../DatetimeFormatting)
+* [**GlobalizationPreferences** sample](../GlobalizationPreferences)
+
 ### Reference
 
 [**Windows.Globalization.NumberFormatting.CurrencyFormatter**](http://msdn.microsoft.com/library/windows/apps/br206883)

@@ -10,16 +10,12 @@
 //*********************************************************
 
 #include <pch.h>
-#include <wrl.h>
-#include <robuffer.h>
-#include <ppltasks.h>
 #include "Utilities.h"
-#include <winsock2.h>
 
-using namespace Windows::Storage;
 using namespace Concurrency;
-using namespace Windows::Storage::Streams;
 using namespace Microsoft::WRL;
+using namespace Windows::Storage;
+using namespace Windows::Storage::Streams;
 
 // Retrieves the raw buffer data from the provided IBuffer object.
 // Warning: The lifetime of the returned buffer is controlled by
@@ -29,47 +25,47 @@ using namespace Microsoft::WRL;
 _Use_decl_annotations_
 LPBYTE PointerFromIBuffer(IBuffer^ buffer, DWORD* pcbLength)
 {
-	if (pcbLength != nullptr)
-	{
-		*pcbLength = buffer->Length;
-	}
-	// Query the IBufferByteAccess interface.
-	ComPtr<IBufferByteAccess> bufferByteAccess;
-	ChkHR(reinterpret_cast<IInspectable*>(buffer)->QueryInterface(IID_PPV_ARGS(&bufferByteAccess)));
+    if (pcbLength != nullptr)
+    {
+        *pcbLength = buffer->Length;
+    }
+    // Query the IBufferByteAccess interface.
+    ComPtr<IBufferByteAccess> bufferByteAccess;
+    ChkHR(reinterpret_cast<IInspectable*>(buffer)->QueryInterface(IID_PPV_ARGS(&bufferByteAccess)));
 
-	// Retrieve the buffer data.
-	LPBYTE pbData = nullptr;
-	ChkHR(bufferByteAccess->Buffer(&pbData));
-	return pbData;
+    // Retrieve the buffer data.
+    LPBYTE pbData = nullptr;
+    ChkHR(bufferByteAccess->Buffer(&pbData));
+    return pbData;
 }
 
 
 IBuffer^ IBufferFromPointer(_In_ LPBYTE pbData, _In_ DWORD cbData)
 {
-	auto byteArray = new Platform::ArrayReference<unsigned char>(pbData, cbData);
-	return IBufferFromArray(reinterpret_cast<Platform::Array<unsigned char>^>(byteArray));
+    auto byteArray = new Platform::ArrayReference<unsigned char>(pbData, cbData);
+    return IBufferFromArray(reinterpret_cast<Platform::Array<unsigned char>^>(byteArray));
 }
 
 IBuffer^ IBufferFromArray(_In_ Platform::Array<unsigned char>^ data)
 {
-	DataWriter^ dataWriter = ref new DataWriter();
-	dataWriter->WriteBytes(data);
-	return dataWriter->DetachBuffer();
+    DataWriter^ dataWriter = ref new DataWriter();
+    dataWriter->WriteBytes(data);
+    return dataWriter->DetachBuffer();
 }
 
 void ChkHR(HRESULT hr)
 {
-	if (FAILED(hr))
-	{
-		throw ref new Platform::COMException(hr);
-	}
+    if (FAILED(hr))
+    {
+        throw ref new Platform::COMException(hr);
+    }
 }
 
 Concurrency::task<Platform::Array<byte>^> ReadAndUnprotectFileAsync(Platform::String^ filename)
 {
-	return create_task(Windows::Storage::ApplicationData::Current->LocalFolder->TryGetItemAsync(filename)).then(
+    return create_task(Windows::Storage::ApplicationData::Current->LocalFolder->TryGetItemAsync(filename)).then(
         [](IStorageItem^ item)
-		{
+        {
             if (item != nullptr 
              && item->IsOfType(StorageItemTypes::File))
             {
@@ -246,4 +242,3 @@ HRESULT ParseApdu(_In_ BYTE* pbCommandApdu, _In_ DWORD cbCommandApdu, _Out_ USHO
 
     return S_OK;
 }
-

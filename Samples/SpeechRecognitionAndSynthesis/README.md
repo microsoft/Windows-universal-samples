@@ -33,7 +33,7 @@ You can disable functionality that requires accepting this policy by turning off
 -  [Speech recognition](https://msdn.microsoft.com/en-us/library/windows.media.speechrecognition.aspx)
 -  [Speech synthesis](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.speechsynthesis.aspx)
 -  [Speech design guidelines](https://msdn.microsoft.com/en-us/library/windows/apps/dn596121.aspx)
--  [Responding to speech interactions (XAML)](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/dn630426.aspx)
+-  [Speech interactions](https://msdn.microsoft.com/library/windows/apps/mt185614)
 -  [Responding to speech interactions (HTML)](https://msdn.microsoft.com/en-us/library/windows/apps/dn720491.aspx)
 
 ## System requirements
@@ -50,7 +50,7 @@ You can disable functionality that requires accepting this policy by turning off
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
