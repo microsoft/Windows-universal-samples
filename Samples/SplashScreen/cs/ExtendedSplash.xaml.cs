@@ -30,7 +30,7 @@ namespace SplashScreenSample
         internal Frame rootFrame;
 
         private SplashScreen splash; // Variable to hold the splash screen object.
-        private double scaleFactor = 1; //Variable to hold the device scale factor (use to determine phone screen resolution)
+        private double scaleFactor = 1; //Variable to hold the device scale factor (used to determine phone screen resolution)
 
         public ExtendedSplash(SplashScreen splashscreen, bool loadState)
         {
@@ -43,14 +43,14 @@ namespace SplashScreenSample
 
             splash = splashscreen;
 
+            // Is this a phone? Then set the scaling factor
+            if (String.Equals(AnalyticsInfo.VersionInfo.DeviceFamily, "Windows.Mobile"))
+            {
+                scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+            }
+
             if (splash != null)
             {
-                // Is this a phone? Then set the scaling factor
-                if (String.Equals(AnalyticsInfo.VersionInfo.DeviceFamily, "Windows.Mobile"))
-                {
-                    scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
-                }
-
                 // Register an event handler to be executed when the splash screen has been dismissed.
                 splash.Dismissed += new TypedEventHandler<SplashScreen, Object>(DismissedEventHandler);
 
