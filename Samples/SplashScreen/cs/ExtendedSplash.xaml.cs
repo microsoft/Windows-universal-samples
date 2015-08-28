@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Graphics.Display;
+using Windows.System.Profile;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -29,7 +30,7 @@ namespace SplashScreenSample
         internal Frame rootFrame;
 
         private SplashScreen splash; // Variable to hold the splash screen object.
-        private double ScaleFactor; //Variable to hold the device scale factor (use to determine phone screen resolution)
+        private double scaleFactor; //Variable to hold the device scale factor (use to determine phone screen resolution)
 
         public ExtendedSplash(SplashScreen splashscreen, bool loadState)
         {
@@ -40,12 +41,16 @@ namespace SplashScreenSample
             // This is important to ensure that the extended splash screen is formatted properly in response to snapping, unsnapping, rotation, etc...
             Window.Current.SizeChanged += new WindowSizeChangedEventHandler(ExtendedSplash_OnResize);
 
-            ScaleFactor = (double)DisplayInformation.GetForCurrentView().ResolutionScale / 100;
-
             splash = splashscreen;
 
             if (splash != null)
             {
+                // Is this a phone? Then set the scaling factor
+                if (String.Equals(AnalyticsInfo.VersionInfo.DeviceFamily, "Windows.Mobile"))
+                {
+                    scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+                }
+
                 // Register an event handler to be executed when the splash screen has been dismissed.
                 splash.Dismissed += new TypedEventHandler<SplashScreen, Object>(DismissedEventHandler);
 
@@ -76,8 +81,8 @@ namespace SplashScreenSample
         {
             extendedSplashImage.SetValue(Canvas.LeftProperty, splashImageRect.Left);
             extendedSplashImage.SetValue(Canvas.TopProperty, splashImageRect.Top);
-            extendedSplashImage.Height = splashImageRect.Height / ScaleFactor;
-            extendedSplashImage.Width = splashImageRect.Width / ScaleFactor;
+            extendedSplashImage.Height = splashImageRect.Height / scaleFactor;
+            extendedSplashImage.Width = splashImageRect.Width / scaleFactor;
         }
 
         void ExtendedSplash_OnResize(Object sender, WindowSizeChangedEventArgs e)
