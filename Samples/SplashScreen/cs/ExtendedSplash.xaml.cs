@@ -30,7 +30,7 @@ namespace SplashScreenSample
         internal Frame rootFrame;
 
         private SplashScreen splash; // Variable to hold the splash screen object.
-        private double scaleFactor; //Variable to hold the device scale factor (use to determine phone screen resolution)
+        private double scaleFactor = 1; //Variable to hold the device scale factor (use to determine phone screen resolution)
 
         public ExtendedSplash(SplashScreen splashscreen, bool loadState)
         {
