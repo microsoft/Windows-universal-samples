@@ -66,6 +66,7 @@ namespace NavigationMenuSample
         void Page_Loaded(Object^ sender, RoutedEventArgs^ e);
         void TogglePaneButton_Checked(Object^ sender, RoutedEventArgs^ e);
         void CheckTogglePaneButtonSizeChanged();
+		void RootSplitViewDisplayModeChangedCallback(DependencyObject^ sender, DependencyProperty^ dp);
         void NavMenuItemContainerContentChanging(ListViewBase^ sender, ContainerContentChangingEventArgs^ args);
 
         Vector<NavMenuItem^>^ navlist;

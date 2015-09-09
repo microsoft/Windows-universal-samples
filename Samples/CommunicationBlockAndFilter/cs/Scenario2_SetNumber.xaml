@@ -1,0 +1,49 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2_SetNumbers"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer Margin="12,10,12,12">
+            <StackPanel>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Set blocked numbers
+                </TextBlock>
+                <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="0,10,0,10">
+                    An app can update the list of blocked numbers both from a foreground app
+                    as well as from a background task.
+                </TextBlock>
+
+                <TextBlock x:Name="ActiveAppWarning" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
+                    Warning: The list of blocked numbers below will not take effect
+                    until you set this app as the active communication blocking and filtering app.
+                </TextBlock>
+
+                <TextBox x:Name="BlockNumberText" Margin="0,0,0,0" TextWrapping="Wrap" InputScope="TelephoneNumber"/>
+                <Button Content="Add blocked number" Click="{x:Bind AddBlockedNumber}" Margin="0,10,0,0"/>
+
+                <TextBlock Margin="0,10,0,0" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
+                    Blocked numbers list:
+                </TextBlock>
+                <ListBox x:Name="BlockedNumbersList" ItemsSource="{x:Bind BlockedNumbers}"
+                             Margin="0,10,0,0" Width="300" HorizontalAlignment="Left"/>
+
+                <Button Content="Unblock selected number" Click="{x:Bind RemoveBlockedNumber}" Margin="0,10,0,0"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

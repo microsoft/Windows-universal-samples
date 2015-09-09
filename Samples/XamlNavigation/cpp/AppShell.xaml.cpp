@@ -41,6 +41,10 @@ namespace NavigationMenuSample
 
         Loaded += ref new Windows::UI::Xaml::RoutedEventHandler(this, &AppShell::OnLoaded);
 
+		RootSplitView->RegisterPropertyChangedCallback(
+			SplitView::DisplayModeProperty,
+			ref new DependencyPropertyChangedCallback(this, &AppShell::RootSplitViewDisplayModeChangedCallback));
+
         SystemNavigationManager::GetForCurrentView()->BackRequested +=
             ref new EventHandler<Windows::UI::Core::BackRequestedEventArgs^>(this, &AppShell::SystemNavigationManager_BackRequested);
 
@@ -249,6 +253,14 @@ namespace NavigationMenuSample
         CheckTogglePaneButtonSizeChanged();
     }
 
+	/// <summary>
+	/// Ensure that we update the reported size of the TogglePaneButton when the SplitView's 
+	/// DisplayMode changes.
+	/// </summary>
+	void AppShell::RootSplitViewDisplayModeChangedCallback(DependencyObject^ sender, DependencyProperty^ dp)
+	{
+		CheckTogglePaneButtonSizeChanged();
+	}
 
     /// <summary>
     /// Check for the conditions where the navigation pane does not occupy the space under the floating

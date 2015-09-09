@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: CustomUserInteractions
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620554&clcid=0x409
 ---!>
@@ -37,7 +37,7 @@ Specifically, this sample covers using the [**Windows.UI.Input.Inking**](http://
     -   Use **Save** and **Load** to read and write Ink Serialized Format (ISF) files to the Libraries or Pictures folder or both.
 -   All buttons and menu choices can be activated with mouse, pen, or touch.
 
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 

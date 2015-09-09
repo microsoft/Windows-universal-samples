@@ -34,6 +34,19 @@ Specifically, this sample covers:
   - Disambiguation of multiple items with automatic reprompting.
   - Resolution scaling images
   - Progress dialogs for lengthy operations.
+  
+**C++/CX**
+
+-  Installing a VCD file. (adventureworkscommands.xml, App.xaml.cpp:OnLaunched() )
+-  Updating a phrase list within a VCD file at runtime. (TripViewModel.cpp:UpdateDestinationPhraseList())
+-  Handling App::OnActivation() being called with details of a voice command (App.xaml.cs:OnActivation())
+-  Handling registration of a background task and hooking it up to a voice command. (Package.appxmanifest, AdventureWorksCommands.xml)
+-  Implementing the headless invocation APIs for Cortana to acknowledge the invocation, handle cancellation, and completion of the headless invocation to maintain the contract with Cortana, and avoid being terminated. (AdventureworksVoiceCommandService.cpp:Run())
+-  Providing various responses to Cortana, which Cortana will display within its own UI, including text, images, app activation URIs, etc. (AdventureworksVoiceCommandService.cpp:SendCompletionMessageForDestination())
+-   Implements disambiguation, providing a user with multiple choices, which can either be chosen via voice, or other input mechanisms. (AdventureworksVoiceCommandService.cpp:DisambiguateTrips())
+-   Implements a confirmation dialog in Cortana, ensuring a user can review a destructive action that will be taken (AdventureworksVoiceCommandService.cpp:SendCompletionMessageForCancellation())
+-   Implements progress screens, ensuring that Cortana does not time out during lengthy I/O operations (AdventureworksVoiceCommandService.cpp:ShowProgressScreen())
+-   Infix/Suffix Voice Command support, allowing for more natural phrases to be used. 
 
 The sample also includes a basic application in order to demonstrate how to integrate this functionality with applications. 
 

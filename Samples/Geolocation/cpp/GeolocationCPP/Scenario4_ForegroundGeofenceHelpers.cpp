@@ -579,7 +579,7 @@ void Scenario4::GetGeopositionAsync()
 
 void Scenario4::FillRegisteredGeofenceListBoxWithExistingGeofences()
 {
-    for each (auto geofence in geofences)
+    for (auto geofence : geofences)
     {
         AddGeofenceToRegisteredGeofenceListBox(geofence);
     }
@@ -615,7 +615,7 @@ void Scenario4::SaveExistingEvents()
 {
     auto jsonArray = ref new JsonArray();
 
-    for each (auto eventDescriptor in eventCollection)
+    for (auto eventDescriptor : eventCollection)
     {
         jsonArray->Append(JsonValue::CreateStringValue(eventDescriptor->ToString()));
     }

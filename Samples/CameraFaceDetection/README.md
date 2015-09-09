@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: AudioVideoAndCamera 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619486&clcid=0x409
 --->

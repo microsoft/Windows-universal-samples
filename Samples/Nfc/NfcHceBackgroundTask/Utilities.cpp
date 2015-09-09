@@ -39,18 +39,33 @@ LPBYTE PointerFromIBuffer(IBuffer^ buffer, DWORD* pcbLength)
     return pbData;
 }
 
-
-IBuffer^ IBufferFromPointer(_In_ LPBYTE pbData, _In_ DWORD cbData)
+_Use_decl_annotations_
+IBuffer^ IBufferFromPointer(LPBYTE pbData, DWORD cbData)
 {
     auto byteArray = new Platform::ArrayReference<unsigned char>(pbData, cbData);
     return IBufferFromArray(reinterpret_cast<Platform::Array<unsigned char>^>(byteArray));
 }
 
-IBuffer^ IBufferFromArray(_In_ Platform::Array<unsigned char>^ data)
+_Use_decl_annotations_
+IBuffer^ IBufferFromArray(Platform::Array<unsigned char>^ data)
 {
     DataWriter^ dataWriter = ref new DataWriter();
     dataWriter->WriteBytes(data);
     return dataWriter->DetachBuffer();
+}
+
+_Use_decl_annotations_
+std::wstring ByteArrayToString(Platform::Array<byte>^ byteArray)
+{
+    std::wstring str = L"";
+    for (auto b : byteArray)
+    {
+        wchar_t strByte[3];
+        swprintf_s(strByte, L"%02X", b);
+        str += strByte;
+    }
+
+    return str;
 }
 
 void ChkHR(HRESULT hr)

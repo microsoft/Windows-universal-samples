@@ -182,7 +182,39 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="Strings\en-US\Resources.resw" />
+    <PRIResource Include="..\..\shared\Strings\de-DE\Resources.resw">
+      <Link>Strings\de-DE\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\en-GB\Resources.resw">
+      <Link>Strings\en-GB\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\en-US\Resources.resw">
+      <Link>Strings\en-US\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\es-ES\Resources.resw">
+      <Link>Strings\es-ES\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\fr-FR\Resources.resw">
+      <Link>Strings\fr-FR\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\it-IT\Resources.resw">
+      <Link>Strings\it-IT\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\zh-CN\Resources.resw">
+      <Link>Strings\zh-CN\Resources.resw</Link>
+    </PRIResource>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

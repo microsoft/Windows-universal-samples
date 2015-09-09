@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>597a9081-402d-4e7a-b8ec-0a36db52a0e6</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Model">
+      <UniqueIdentifier>{c91ec6d5-f8f7-4df4-9dc6-dea0f66b6f1f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Trip.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="TripStore.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Trip.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="TripStore.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

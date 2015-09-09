@@ -233,7 +233,7 @@ void DetectFacesInWebcam::SetupVisualization(
         double widthScale = displaySource->PixelWidth / actualWidth;
         double heightScale = displaySource->PixelHeight / actualHeight;
 
-        for each(DetectedFace^ face in foundFaces)
+        for (DetectedFace^ face : foundFaces)
         {
             // Create a rectangle element for displaying the face box but since we're using a Canvas
             // we must scale the rectangles according to the image's actual size.
@@ -384,7 +384,7 @@ void DetectFacesInWebcam::SnapshotCanvas_SizeChanged(Platform::Object^ sender, R
             double widthScale = displaySource->PixelWidth / actualWidth;
             double heightScale = displaySource->PixelHeight / actualHeight;
 
-            for each(UIElement^ item in this->SnapshotCanvas->Children)
+            for (UIElement^ item : this->SnapshotCanvas->Children)
             {
                 Rectangle^ box = dynamic_cast<Rectangle^>(item);
                 if (box == nullptr)

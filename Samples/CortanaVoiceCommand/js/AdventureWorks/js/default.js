@@ -49,8 +49,11 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
                 }).then(function (file) {
                     return voiceCommandManager.installCommandDefinitionsFromStorageFileAsync(file);
                 }).then(function () {
-                    if (voiceCommandManager.installedCommandDefinitions.hasKey("AdventureWorksCommandSet_en-us")) {
-                        var vcd = voiceCommandManager.installedCommandDefinitions.lookup("AdventureWorksCommandSet_en-us");
+                    var language = window.navigator.userLanguage || window.navigator.language;
+                    
+                    var commandSetName = "AdventureWorksCommandSet_" + language.toLowerCase();
+                    if (voiceCommandManager.installedCommandDefinitions.hasKey(commandSetName)) {
+                        var vcd = voiceCommandManager.installedCommandDefinitions.lookup(commandSetName);
                         var phraseList = [];
                         SdkSample.DataStore.TripStore.Trips.forEach(function (trip) {
                             phraseList.push(trip.destination);

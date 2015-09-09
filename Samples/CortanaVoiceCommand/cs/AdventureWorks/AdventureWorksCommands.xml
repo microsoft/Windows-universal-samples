@@ -9,7 +9,7 @@
       <ListenFor RequireAppName="BeforeOrAfterPhrase"> show [my] trip to {destination} </ListenFor>
       <ListenFor RequireAppName="ExplicitlySpecified"> show [my] {builtin:AppName} trip to {destination} </ListenFor>
       <Feedback> Showing trip to {destination} </Feedback>
-      <Navigate Target="foo"/>
+      <Navigate />
     </Command>
 
     <Command Name="whenIsTripToDestination">

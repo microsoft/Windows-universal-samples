@@ -16,7 +16,7 @@ Scenario 1: Demonstrates using GetGeotagAsync API to retrieve location info from
 
 Related topics
 --------------
-[Known Folders] https://msdn.microsoft.com/library/windows/apps/windows.storage.knownfolders.aspx
+[Known Folders](https://msdn.microsoft.com/library/windows/apps/windows.storage.knownfolders.aspx)
 
 
 System requirements

@@ -12,7 +12,7 @@ For more info about the concepts and APIs demonstrated in this sample, see these
 -   [How to reference content](http://msdn.microsoft.com/library/windows/apps/hh781215)
 -   [How to link to external web pages](http://msdn.microsoft.com/library/windows/apps/hh780594)
 -   [Quickstart: Using single-page navigation](http://msdn.microsoft.com/library/windows/apps/hh452768)
--   [How to create a mashup](http://msdn.microsoft.com/library/windows/apps/)
+-   [How to create a mashup](http://msdn.microsoft.com/library/windows/apps/hh452745)
 
 This sample is written in HTML, CSS, and JavaScript.
 

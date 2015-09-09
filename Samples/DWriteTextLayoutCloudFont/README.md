@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: ControlsLayoutAndText
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620539&clcid=0x409
 --->

@@ -128,30 +128,17 @@ task<void> MainPage::InitializeCameraAsync()
             {
                 UpdateCaptureControls();
             });
-        // Different return types, must do the error checking here since we cannot return and send
-        // execeptions back up the chain.
         }).then([this](task<void> previousTask)
         {
             try
             {
                 previousTask.get();
             }
-            catch (Exception^ ex)
+            catch (AccessDeniedException^)
             {
-                WriteException(ex);
+                WriteLine("The app was denied access to the camera");
             }
         });
-    // Catch any exceptions that may have been thrown along the way
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -230,16 +217,6 @@ task<void> MainPage::StartPreviewAsync()
 
         // Not external, just return the previous task
         return previousTask;
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -283,16 +260,6 @@ task<void> MainPage::StopPreviewAsync()
             // Allow the device screen to sleep now that the preview is stopped
             _displayRequest->RequestRelease();
         }));
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -347,16 +314,6 @@ task<void> MainPage::CreateVideoStabilizationEffectAsync()
         // then cropped by the VS effect as part of the stabilization process, and then scaled back up to the
         // original capture resolution
 #endif
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -392,17 +349,9 @@ task<void> MainPage::SetUpVideoStabilizationRecommendationAsync()
 
         // Set the recommendation from the effect (a resolution higher than the current one to allow for cropping) on the input
         return create_task(_mediaCapture->VideoDeviceController->SetMediaStreamPropertiesAsync(Capture::MediaStreamType::VideoRecord, recommendation->InputProperties))
-            .then([this](task<void> previousTask)
+            .then([this]()
         {
-            try
-            {
-                WriteLine("VS recommendation for the MediaStreamProperties (input) has been applied");
-                previousTask.get();
-            }
-            catch (Exception^ ex)
-            {
-                WriteException(ex);
-            }
+            WriteLine("VS recommendation for the MediaStreamProperties (input) has been applied");
         });
     }
     else
@@ -453,18 +402,10 @@ task<void> MainPage::CleanUpVideoStabilizationEffectAsync()
         }
 
         return taskToExecute;
-    }).then([this](task<void> previousTask)
+    }).then([this]()
     {
-        try
-        {
-            // Clear the member variable that held the effect instance
-            _videoStabilizationEffect = nullptr;
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
+        // Clear the member variable that held the effect instance
+        _videoStabilizationEffect = nullptr;
     });
 }
 
@@ -499,6 +440,7 @@ task<void> MainPage::StartRecordingAsync()
         }
         catch (Exception^ ex)
         {
+            // File I/O errors are reported as exceptions
             WriteException(ex);
         }
     });
@@ -531,16 +473,6 @@ task<void> MainPage::StopRecordingAsync()
         {
             return EmptyTask();
         }
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -557,7 +489,7 @@ task<DeviceInformation^> MainPage::FindCameraDeviceByPanelAsync(Windows::Devices
     auto deviceEnumTask = create_task(allVideoDevices);
     return deviceEnumTask.then([panel](DeviceInformationCollection^ devices)
     {
-        for each(auto cameraDeviceInfo in devices)
+        for (auto cameraDeviceInfo : devices)
         {
             if (cameraDeviceInfo->EnclosureLocation != nullptr && cameraDeviceInfo->EnclosureLocation->Panel == panel)
             {
@@ -913,7 +845,6 @@ void MainPage::DisplayInformation_OrientationChanged(DisplayInformation^ sender,
     }));
 }
 
-// todo, try to break
 void MainPage::VsToggleButton_Tapped(Object^, Windows::UI::Xaml::RoutedEventArgs^)
 {
     // Note that for the most part, this button is disabled during recording, except when VS is turned off automatically

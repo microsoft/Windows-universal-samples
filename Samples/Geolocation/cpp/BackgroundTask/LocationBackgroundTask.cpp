@@ -349,7 +349,7 @@ void GeofenceBackgroundTask::SaveExistingEvents()
 {
     auto jsonArray = ref new JsonArray();
 
-    for each (auto eventDescriptor in geofenceBackgroundEvents)
+    for (auto eventDescriptor : geofenceBackgroundEvents)
     {
         jsonArray->Append(JsonValue::CreateStringValue(eventDescriptor->ToString()));
     }

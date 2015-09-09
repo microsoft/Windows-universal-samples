@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: DevicesSensorsAndPower
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620595&clcid=0x409
 --->

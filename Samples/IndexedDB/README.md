@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: Data
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620553&clcid=0x409
 --->

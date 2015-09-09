@@ -71,16 +71,16 @@ static Array<byte>^ R_APDU_PPSE_SELECT_MC =
 static Array<byte>^ R_APDU_CARD_SELECT_V =
 {
     0x6F, 0x1E, // File control information (FCI) issuer discretionary data, length
-    0x84, 0x07, // Dedicated file (DF) name, length
-                            // File name "A0000000031010"
-                            0xA0, 0x00, 0x00, 0x00, 0x03, 0x10, 0x10,
-                            0xA5, 0x13, // File control information (FCI) proprietary data, length
-                            0x50, 0x0B, // Application label, length
-                                                    // Credit/debit application label "CREDIT CARD"
-                                                    'C', 'R', 'E', 'D', 'I', 'T', ' ',
-                                                    'C', 'A', 'R', 'D',
-                                                    0x9F, 0x38, 0x03, // Processing options data object list (PDOL), length
-                                                    0x9F, 0x66, 0x02,
+        0x84, 0x07, // Dedicated file (DF) name, length
+            // File name "A0000000031010"
+            0xA0, 0x00, 0x00, 0x00, 0x03, 0x10, 0x10,
+        0xA5, 0x13, // File control information (FCI) proprietary data, length
+            0x50, 0x0B, // Application label, length
+                // Credit/debit application label "CREDIT CARD"
+                'C', 'R', 'E', 'D', 'I', 'T', ' ',
+                'C', 'A', 'R', 'D',
+            0x9F, 0x38, 0x03, // Processing options data object list (PDOL), length
+                0x9F, 0x66, 0x02,
     0x90, // Status byte one (SW1)
     0x00  // Status byte two (SW2)
 };
@@ -90,11 +90,11 @@ static Array<byte>^ R_APDU_CARD_SELECT_MC =
 {
     0x6F, 0x18, // File control information (FCI) issuer discretionary data, length
         0x84, 0x07, // Dedicated file (DF) name, length
-                    // File name "A0000000041010"
+            // File name "A0000000041010"
             0xA0, 0x00, 0x00, 0x00, 0x04, 0x10, 0x10,
         0xA5, 0x0D, // File control information (FCI) proprietary data, length
             0x50, 0x0B, // Application label, length
-                        // Credit/debit application label "CREDIT CARD"
+                // Credit/debit application label "CREDIT CARD"
                 'C', 'R', 'E', 'D', 'I', 'T', ' ',
                 'C', 'A', 'R', 'D',
     0x90, // Status byte one (SW1)
@@ -175,7 +175,6 @@ static Array<byte>^ R_APDU_READ_RECORD_DEFAULT_MC =
 
     0x90, 00,
 };
-
 
 static Array<byte>^ R_APDU_COMPUTE_CRYPTO_CSUM_MC =
 {
@@ -424,6 +423,14 @@ void BgTask::ApduReceived(SmartCardEmulator^ emulator, SmartCardEmulatorApduRece
             return;
         }
 
+        auto apduBuffer = eventArgs->CommandApdu;
+        auto apduBytes = ref new Array<byte>(apduBuffer->Length);
+        auto dataReader = DataReader::FromBuffer(apduBuffer);
+        dataReader->ReadBytes(apduBytes);
+
+        auto strApdu = L"Apdu received: " + ByteArrayToString(apduBytes);
+        DebugLog(strApdu.c_str());
+
         auto connectionId = eventArgs->ConnectionProperties->Id;
         if (connectionId != m_currentConnectionId)
         {
@@ -443,7 +450,7 @@ void BgTask::ApduReceived(SmartCardEmulator^ emulator, SmartCardEmulatorApduRece
         }
         else
         {
-            response = ProcessCommandApdu(eventArgs->CommandApdu, &fTransactionComplete);
+            response = ProcessCommandApdu(apduBuffer, &fTransactionComplete);
         }
 
         if (eventArgs->AutomaticResponseStatus != SmartCardAutomaticResponseStatus::Success)
