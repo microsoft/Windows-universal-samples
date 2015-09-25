@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: AudioVideoAndCamera 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620516&clcid=0x409
 --->
@@ -22,11 +22,9 @@ Due to the custom UI that this sample implements, any messages intended for the 
 
 ## Related topics
 
-**Samples**
+**Conceptual**
 
-[How to rotate captured video](https://msdn.microsoft.com/en-us/library/windows/apps/hh868174.aspx)
-
-[How to preview video from a webcam](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868171.aspx)
+[Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
 
 **Reference**
 

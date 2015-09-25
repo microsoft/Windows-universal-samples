@@ -1,9 +1,9 @@
-﻿<!---
+<!---
   category: GraphicsAndAnimation
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620541&clcid=0x409
 --->
 
-# Efficient HTML animations
+# Efficient animations (HTML) sample
 
 This sample demonstrates how to use the [requestAnimationFrame](http://msdn.microsoft.com/library/windows/apps/hh920765) method in an HTML5 Canvas to build smooth and power efficient animations in your Windows Store app using JavaScript.
 

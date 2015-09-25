@@ -1,0 +1,16 @@
+{
+	"CancelledTripToDestination": "Il viaggio a {0} e\u0027 stato cancellato",
+	"CancellingTripToDestination": "Annullamento del viaggio a {0} in corso",
+	"CancelTripToDestination": "Cancellare il viaggio a {0}?",
+	"ConfirmCancelTripToDestination": "Sei sicuro di voler cancellare il viaggio a {0}?",
+	"DisambiguationRepeat": "Quale vuoi cancellare?",
+	"DisambiguationWhichTripToDest": "Quale viaggio a {0} volevi cancellare?",
+	"FoundNoTripToDestination": "Purtroppo, viaggi a {0} non sono disponibili",
+	"KeepingTripToDestination": "Il viaggio a {0} non e\u0027 stato cancellato",
+	"LaunchingAdventureWorks": "Avvio di Adventure Works",
+	"LoadingTripToDestination": "Avvio ricerca del viaggio a {0}",
+	"NoSuchTripToDestination": "Purtroppo, viaggi a {0} non sono disponibili",
+	"PluralUpcomingTrips": "Ecco i prossimi viaggi disponibili",
+	"ProgressLookingForTripToDest": "Ricerca viaggio a {0} in corso",
+	"SingularUpcomingTrip": "Ecco il prossimo viaggio disponibile"
+}

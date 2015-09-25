@@ -19,47 +19,85 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"  Margin="12">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel Margin="0,0,0,12">
-            <TextBlock Text="Migrating from SearchBox to AutoSuggestBox" Style="{StaticResource SampleHeaderTextStyle}"/>
-            <RichTextBlock Style="{StaticResource BodyRichTextBlockStyle}">
-                <Paragraph>In Windows 10, SearchBox is no longer being supported, in favor of AutoSuggestBox.  As such, this example is meant to showcase using AutoSuggestBox to get a SearchBox-style experience.</Paragraph>
-                <Paragraph>The key events in AutoSuggestBox that you will need to utilize are TextChanged, SuggestionChosen, and QuerySubmitted. Using these events in conjunction with QueryIcon will allow you to have the same experience as SearchBox using AutoSuggestBox.</Paragraph>
-                <Paragraph TextIndent="15">• TextChanged - This event is where you will filter your result set based on the text that the user has input.</Paragraph>
-                <Paragraph TextIndent="15">• SuggestionChosen - This event will allow you to fill in the TextBox with the text of the highlighted item.  This is fired as a user keys down the list and when an item is tapped.</Paragraph>
-                <Paragraph TextIndent="15">• QuerySubmitted - This event is where you should take action.  There are 2 key properties in the args for this event:</Paragraph>
-                <Paragraph TextIndent="30">◦ QueryText - This is the text in the TextBox.  Use this if ChosenSuggestion is null, as it means that the user either pressed Enter in the TextBox, or clicked on the QueryIcon button.</Paragraph>
-                <Paragraph TextIndent="30">◦ ChosenSuggestion - If a user tapped on an item in the list, or pressed Enter while it was highlighted, this will contain the data item corresponding to the item in the list that was selected.</Paragraph>
-            </RichTextBlock>
-        </StackPanel>
-
         <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="1">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+            <StackPanel Margin="24,0,24,84">
+                <TextBlock
+                    Text="Migrating from SearchBox to AutoSuggestBox"
+                    Style="{StaticResource TitleTextBlockStyle}"
+                    Margin="0,6,0,12"
+                    MaxLines="2" />
+                <RichTextBlock Style="{StaticResource BodyRichTextBlockStyle}">
+                    <Paragraph>In Windows 10, SearchBox is no longer being supported, in favor of AutoSuggestBox.  As such, this example is meant to showcase using AutoSuggestBox to get a SearchBox-style experience.</Paragraph>
+                    <Paragraph>The key events in AutoSuggestBox that you will need to utilize are TextChanged, SuggestionChosen, and QuerySubmitted. Using these events in conjunction with QueryIcon will allow you to have the same experience as SearchBox using AutoSuggestBox.</Paragraph>
+                    <Paragraph TextIndent="15">• TextChanged - This event is where you will filter your result set based on the text that the user has input.</Paragraph>
+                    <Paragraph TextIndent="15">• SuggestionChosen - This event will allow you to fill in the TextBox with the text of the highlighted item.  This is fired as a user keys down the list and when an item is tapped.</Paragraph>
+                    <Paragraph TextIndent="15">• QuerySubmitted - This event is where you should take action.  There are 2 key properties in the args for this event:</Paragraph>
+                    <Paragraph TextIndent="30">◦ QueryText - This is the text in the TextBox.  Use this if ChosenSuggestion is null, as it means that the user either pressed Enter in the TextBox, or clicked on the QueryIcon button.</Paragraph>
+                    <Paragraph TextIndent="30">◦ ChosenSuggestion - If a user tapped on an item in the list, or pressed Enter while it was highlighted, this will contain the data item corresponding to the item in the list that was selected.</Paragraph>
+                </RichTextBlock>
 
-                <AutoSuggestBox x:Name="asb" 
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <AutoSuggestBox
+                        x:Name="asb"
                         PlaceholderText="Type a name (e.g. John)"
-                        TextChanged="asb_TextChanged" 
-                        QueryIcon="Find" 
+                        TextChanged="asb_TextChanged"
+                        QueryIcon="Find"
                         QuerySubmitted="asb_QuerySubmitted"
                         SuggestionChosen="asb_SuggestionChosen"
-                        Margin="24,0,0,24" Width="250" 
-                        HorizontalAlignment="Left"/>
-                <RelativePanel x:Name="ContactDetails" Grid.Row="1" HorizontalAlignment="Left" Visibility="Collapsed" Margin="24,0,0,0">
-                    <Ellipse x:Name="ContactBackground" Fill="Gray" Height="100" Width="100" />
-                    <FontIcon Glyph="&#xE77B;" FontSize="70" Margin="15,19,0,0" />
-                    <TextBlock x:Name="ContactName" Style="{StaticResource TitleTextBlockStyle}" RelativePanel.RightOf="ContactBackground" Margin="12,0,0,0" />
-                    <TextBlock x:Name="ContactCompany" Style="{StaticResource BodyTextBlockStyle}" RelativePanel.Below="ContactName" RelativePanel.AlignLeftWith="ContactName" Margin="12,0,0,0" />
-                </RelativePanel>
-                <TextBlock x:Name="NoResults" Text="No results found" Style="{StaticResource BodyTextBlockStyle}" Grid.Row="2" Visibility="Collapsed" Margin="24,0,0,0" />
-            </Grid>
+                        Margin="0,24,0,24"
+                        MinWidth="296"
+                        HorizontalAlignment="Left" />
+
+                    <RelativePanel
+                        x:Name="ContactDetails"
+                        Grid.Row="1"
+                        HorizontalAlignment="Left"
+                        Visibility="Collapsed">
+                        <Ellipse
+                            x:Name="ContactBackground"
+                            Fill="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                            Height="48"
+                            Width="48"
+                            Margin="0,8,0,8"/>
+                        <FontIcon
+                            Glyph="&#xE77B;"
+                            FontSize="20"
+                            Margin="0,8,0,8"
+                            RelativePanel.AlignHorizontalCenterWith="ContactBackground"
+                            RelativePanel.AlignVerticalCenterWith="ContactBackground" />
+                        <TextBlock
+                            x:Name="ContactName"
+                            Style="{StaticResource BaseTextBlockStyle}"
+                            Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                            RelativePanel.RightOf="ContactBackground"
+                            Margin="12,11,12,0" />
+                        <TextBlock
+                            x:Name="ContactCompany"
+                            Style="{StaticResource BodyTextBlockStyle}"
+                            Foreground="{StaticResource SystemControlForegroundBaseMediumBrush}"
+                            RelativePanel.Below="ContactName"
+                            RelativePanel.AlignLeftWith="ContactName"
+                            Margin="12,0" />
+                    </RelativePanel>
+
+                    <TextBlock
+                        x:Name="NoResults"
+                        Text="No results found"
+                        Style="{StaticResource BodyTextBlockStyle}"
+                        Grid.Row="2"
+                        Visibility="Collapsed" />
+                </Grid>
+            </StackPanel>
         </ScrollViewer>
 
     </Grid>

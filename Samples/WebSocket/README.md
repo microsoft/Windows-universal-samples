@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: NetworkingAndWebServices 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620623&clcid=0x409
 --->

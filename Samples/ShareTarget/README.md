@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: DeepLinksAndAppToAppCommunication 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620597&clcid=0x409
 --->

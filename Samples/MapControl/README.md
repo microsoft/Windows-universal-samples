@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: MapsAndLocation 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619977&clcid=0x409
 --->
@@ -18,9 +18,9 @@ This sample is written in XAML and C#.
 
 ## For more info
 
-[How to display maps in the Map control](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/dn642089.aspx)
+[Display maps with 2D, 3D, and Streetside views](https://msdn.microsoft.com/library/windows/apps/mt219695)
 
-[How to display pushpins, shapes, and controls on a map](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/dn792121.aspx) 
+[Display points of interest (POI) on a map](https://msdn.microsoft.com/library/windows/apps/mt219696)
 
 [MapControl API reference]( https://msdn.microsoft.com/en-us/library/windows/apps/xaml/windows.ui.xaml.controls.maps.mapcontrol.aspx) 
 

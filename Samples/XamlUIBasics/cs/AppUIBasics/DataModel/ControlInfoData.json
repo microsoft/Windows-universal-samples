@@ -478,7 +478,7 @@
                     "Content": "<p>Look at the <i>SplitViewPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
                     "Docs": [
                         { "Title": "SplitView", "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.splitview.aspx" },
-                        { "Title": "Hamburger pattern", "Uri": "https://github.com/Microsoft/Windows-universal-samples" }
+                        { "Title": "Hamburger pattern", "Uri": "http://go.microsoft.com/fwlink/p/?LinkId=619902&clcid=0x409" }
                     ],
                     "RelatedControls": [
                         "StackPanel",

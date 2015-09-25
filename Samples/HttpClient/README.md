@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: NetworkingAndWebServices 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620551&clcid=0x409
 --->
@@ -59,13 +59,11 @@ For more information on network capabilities, see [How to set network capabiliti
 
 [Connecting to network services (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452976)
 
-[\>Connecting with WebSockets (XAML)](http://msdn.microsoft.com/library/windows/apps/hh994396)
+[Connecting with WebSockets (XAML)](http://msdn.microsoft.com/library/windows/apps/hh994396)
 
-[How to connect to an HTTP server using Windows.Web.Http Windows.Web.Http.HttpClient (XAML)](http://msdn.microsoft.com/library/windows/apps/dn440594)
+[HttpClient](https://msdn.microsoft.com/library/windows/apps/mt187345)
 
-[How to set network capabilities (XAML)](http://msdn.microsoft.com/library/windows/apps/jj835817)
-
-[Staying connected in the background (XAML)](http://msdn.microsoft.com/library/windows/apps/jj662741)
+[Networking basics](https://msdn.microsoft.com/library/windows/apps/mt280233)
 
 [Troubleshooting and debugging network connections](http://msdn.microsoft.com/library/windows/apps/hh770534)
 

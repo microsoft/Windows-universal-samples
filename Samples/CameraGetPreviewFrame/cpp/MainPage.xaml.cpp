@@ -121,26 +121,11 @@ task<void> MainPage::InitializeCameraAsync()
             {
                 previousTask.get();
             }
-            catch (Platform::AccessDeniedException^)
+            catch (AccessDeniedException^)
             {
                 WriteLine("The app was denied access to the camera");
             }
-            catch (Exception^ ex)
-            {
-                WriteException(ex);
-            }
         });
-        // Catch any exceptions that may have been thrown along the way
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -167,19 +152,12 @@ task<void> MainPage::CleanupCameraAsync()
 
     // When all our tasks complete, clean up MediaCapture
     return when_all(taskList.begin(), taskList.end())
-        .then([this](task<void> previousTask)
+        .then([this]()
     {
-        try
+        if (_mediaCapture != nullptr)
         {
-            if (_mediaCapture != nullptr)
-            {
-                _mediaCapture->Failed -= _mediaCaptureFailedEventToken;
-                _mediaCapture = nullptr;
-            }
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
+            _mediaCapture->Failed -= _mediaCaptureFailedEventToken;
+            _mediaCapture = nullptr;
         }
     });
 }
@@ -218,16 +196,6 @@ task<void> MainPage::StartPreviewAsync()
 
         // Not external, just return the previous task
         return previousTask;
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -271,16 +239,6 @@ task<void> MainPage::StopPreviewAsync()
 
             GetPreviewFrameButton->IsEnabled = _isPreviewing;
         }));
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -333,16 +291,6 @@ task<void> MainPage::GetPreviewFrameAsSoftwareBitmapAsync()
         }
 
         return when_all(taskList.begin(), taskList.end());
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -381,16 +329,6 @@ task<void> MainPage::GetPreviewFrameAsD3DSurfaceAsync()
 
         // Clear the image
         PreviewFrameImage->Source = nullptr;
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -421,6 +359,7 @@ task<void> MainPage::SaveSoftwareBitmapAsync(SoftwareBitmap^ bitmap)
         }
         catch (Exception^ ex)
         {
+            // File I/O errors are reported as exceptions
             WriteException(ex);
         }
     });
@@ -440,7 +379,7 @@ task<DeviceInformation^> MainPage::FindCameraDeviceByPanelAsync(Windows::Devices
     auto deviceEnumTask = create_task(allVideoDevices);
     return deviceEnumTask.then([panel](DeviceInformationCollection^ devices)
     {
-        for each(auto cameraDeviceInfo in devices)
+        for (auto cameraDeviceInfo : devices)
         {
             if (cameraDeviceInfo->EnclosureLocation != nullptr && cameraDeviceInfo->EnclosureLocation->Panel == panel)
             {

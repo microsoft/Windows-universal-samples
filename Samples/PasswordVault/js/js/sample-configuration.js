@@ -6,8 +6,12 @@
     var sampleTitle = "Password Vault";
 
     var scenarios = [
-        { url: "/html/scenario1.html", title: "Add, Read, and Remove Credentials" }
+        { url: "/html/scenario1-save.html", title: "Save credentials" },
+        { url: "/html/scenario2-manage.html", title: "Manage credentials" }
     ];
+
+    // Preload the password vault in the background.
+    new Worker("js/backgroundInit.js");
 
     WinJS.Namespace.define("SdkSample", {
         sampleTitle: sampleTitle,

@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: LaunchingAndBackgroundTasks 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=618666&clcid=0x409
 --->
@@ -38,7 +38,7 @@ To obtain an evaluation copy of Microsoft Visual Studio 2013, go to [Visual Stu
 
 [Managing background tasks](http://msdn.microsoft.com/library/windows/apps/hh977053)
 
-[Supporting your app with background tasks](http://msdn.microsoft.com/library/windows/apps/hh977056)
+[Support your app with background tasks](https://msdn.microsoft.com/library/windows/apps/mt299103)
 
 [Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
 
@@ -112,14 +112,14 @@ Add the BackgroundTaskSample app to the lock screen manually:
 
 See the following topics for step-by-step information about using background tasks:
 
--   [Quickstart: Create and register a background task](http://msdn.microsoft.com/library/windows/apps/hh977055)
--   [How to respond to system events with background tasks](http://msdn.microsoft.com/library/windows/apps/hh977058)
--   [How to set conditions for running a background task](http://msdn.microsoft.com/library/windows/apps/hh977057)
--   [How to handle a cancelled background task](http://msdn.microsoft.com/library/windows/apps/hh977052)
--   [How to monitor background task progress and completion](http://msdn.microsoft.com/library/windows/apps/hh977054)
--   [How to run a background task on a timer](http://msdn.microsoft.com/library/windows/apps/hh977059)
--   [How to use maintenance triggers](http://msdn.microsoft.com/library/windows/apps/jj883699)
--   [How to declare background tasks in the application manifest](http://msdn.microsoft.com/library/windows/apps/hh977049)
--   [Guidelines and checklists for background tasks](http://msdn.microsoft.com/library/windows/apps/hh977051)
--   [**How to debug a background task**](http://msdn.microsoft.com/library/windows/apps/jj542416)
+-   [Create and register a background task](https://msdn.microsoft.com/library/windows/apps/mt299100)
+-   [Respond to system events with background tasks](https://msdn.microsoft.com/library/windows/apps/mt185414)
+-   [Set conditions for running a background task](https://msdn.microsoft.com/library/windows/apps/mt185620)
+-   [Handle a cancelled background task](https://msdn.microsoft.com/library/windows/apps/mt187312)
+-   [Monitor background task progress and completion](https://msdn.microsoft.com/library/windows/apps/mt186457)
+-   [Run a background task on a timer ](https://msdn.microsoft.com/library/windows/apps/mt186458)
+-   [Use a maintenance trigger](https://msdn.microsoft.com/library/windows/apps/mt185632)
+-   [Declare background tasks in the application manifest](https://msdn.microsoft.com/library/windows/apps/mt185412)
+-   [Guidelines for background tasks](https://msdn.microsoft.com/library/windows/apps/mt187310)
+-   [Debug a background task](https://msdn.microsoft.com/library/windows/apps/mt299101)
 

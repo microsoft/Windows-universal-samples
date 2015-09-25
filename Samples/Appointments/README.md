@@ -9,7 +9,7 @@ Demonstrates the functionality of the API of the [**Windows.ApplicationModel.App
 
 An appointment ID is a **String** object that represents the appointment. Use the [**ShowAddAppointmentAsync**](http://msdn.microsoft.com/library/windows/apps/dn297256) API to obtain an appointment ID of the appointment to add. Use this appointment ID with the [**ShowReplaceAppointmentAsync**](http://msdn.microsoft.com/library/windows/apps/dn297283) or [**ShowRemoveAppointmentAsync**](http://msdn.microsoft.com/library/windows/apps/dn297269) API to update or remove the appointment. 
 
-For more info about how to manage appointments, see  [Quickstart: Managing appointments (Windows Store apps using C#/VB/C++ and XAML)](http://msdn.microsoft.com/library/windows/apps/dn495339) and [Quickstart: Managing appointments (Windows Store apps using JavaScript and HTML)](http://msdn.microsoft.com/library/windows/apps/dn495338).
+For more info about how to manage appointments, see [Managing appointments](https://msdn.microsoft.com/library/windows/apps/mt269389).
 
 To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windows.com). 
 
@@ -38,7 +38,7 @@ For more info about the concepts and APIs demonstrated in this sample, see these
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

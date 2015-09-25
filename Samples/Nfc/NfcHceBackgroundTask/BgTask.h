@@ -11,55 +11,62 @@
 
 #pragma once
 
-#include "Utilities.h"
-
-using namespace Windows::Storage::Streams;
-using namespace Windows::Devices::SmartCards;
-
 namespace NfcHceBackgroundTask
 {
-	[Windows::Foundation::Metadata::WebHostHidden]
+    [Windows::Foundation::Metadata::WebHostHidden]
     public ref class BgTask sealed :
-		public Windows::ApplicationModel::Background::IBackgroundTask
+        public Windows::ApplicationModel::Background::IBackgroundTask
     {
     public:
         BgTask();
 
-		virtual void Run(
-			Windows::ApplicationModel::Background::IBackgroundTaskInstance^ taskInstance);
+        virtual void Run(
+            Windows::ApplicationModel::Background::IBackgroundTaskInstance^ taskInstance);
 
-	private:
-        typedef enum _DoLaunchType
+    private:
+        typedef enum _LaunchType
         {
             Complete,
             Failed,
             Denied
-        } DoLaunchType;
+        } LaunchType;
+
+    private:
         void HandleHceActivation();
-        void DoLaunch(DoLaunchType type, LPWSTR wszMessage);
+
+        void LaunchForegroundApp(LaunchType type, LPWSTR wszMessage);
+
         void EndTask();
-		void ApduReceived(
-			SmartCardEmulator^ emulator,
-			SmartCardEmulatorApduReceivedEventArgs^ eventArgs);
 
-		IBuffer^ ProcessCommandApdu(_In_ IBuffer^ commandApdu, _Out_ bool *pfComplete);
+        void ApduReceived(
+            Windows::Devices::SmartCards::SmartCardEmulator^ emulator,
+            Windows::Devices::SmartCards::SmartCardEmulatorApduReceivedEventArgs^ eventArgs);
 
-		Platform::Guid m_currentConnectionId;
-		LPBYTE m_pbCurrentAppletId = nullptr;
-        bool m_fTransactionCompleted = false;
-        bool m_fDenyTransactions = false;
+        Windows::Storage::Streams::IBuffer^ ProcessCommandApdu(
+            _In_ Windows::Storage::Streams::IBuffer^ commandApdu,
+            _Out_ bool* pfComplete);
+
+        void DebugLogString(Platform::String^ message);
 
         void DebugLog(const wchar_t* pwstrMessage);
-        void FlushDebugLog();
-        Microsoft::WRL::Wrappers::CriticalSection m_csDebugLog;
-        std::wstring m_wsDebugLog;
 
-        Microsoft::WRL::Wrappers::SRWLock m_srwLock;
-		Windows::ApplicationModel::Background::IBackgroundTaskInstance^ m_taskInstance;
-		Platform::Agile<Windows::ApplicationModel::Background::BackgroundTaskDeferral> m_deferral;
-		Windows::Devices::SmartCards::SmartCardEmulator^ m_emulator;
+        void FlushDebugLog();
+
+    private:
+        Microsoft::WRL::Wrappers::CriticalSection m_csLock;
+        Windows::ApplicationModel::Background::IBackgroundTaskInstance^ m_taskInstance;
+        Platform::Agile<Windows::ApplicationModel::Background::BackgroundTaskDeferral> m_deferral;
+        Windows::Devices::SmartCards::SmartCardEmulator^ m_emulator;
         Windows::Devices::SmartCards::SmartCardTriggerDetails^ m_triggerDetails;
         Windows::Devices::SmartCards::SmartCardAppletIdGroupRegistration^ m_paymentAidRegistration;
-        void OnCanceled(Windows::ApplicationModel::Background::IBackgroundTaskInstance ^sender, Windows::ApplicationModel::Background::BackgroundTaskCancellationReason reason);
+
+        Platform::Guid m_currentConnectionId;
+        LPBYTE m_pbCurrentAppletId = nullptr;
+        bool m_fTransactionCompleted = false;
+        bool m_fDenyTransactions = false;
+        bool m_fTaskEnded = false;
+
+        Microsoft::WRL::Wrappers::CriticalSection m_csDebugLog;
+        std::wstring m_wsDebugLog;
     };
 }

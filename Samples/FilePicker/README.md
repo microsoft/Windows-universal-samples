@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: FilesFoldersAndLibraries
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619994&clcid=0x409
 --->
@@ -11,19 +11,19 @@ The sample demonstrates these tasks:
 
 1.  **Let the user pick one file to access**
 
-    Uses the [**FileOpenPicker**](http://msdn.microsoft.com/library/windows/apps/br207847).[**PickSingleFileAsync**](http://msdn.microsoft.com/library/windows/apps/br207852) method (or [**PickSingleFileAndContinue**](http://msdn.microsoft.com/library/windows/apps/dn652521)) to call a file picker window and let the user pick a single file. For a walkthrough of this task, see Quickstart: Accessing files with file pickers ([HTML](http://msdn.microsoft.com/library/windows/apps/hh465199) or [XAML](http://msdn.microsoft.com/library/windows/apps/hh771180)).
+    Uses the [**FileOpenPicker**](http://msdn.microsoft.com/library/windows/apps/br207847).[**PickSingleFileAsync**](http://msdn.microsoft.com/library/windows/apps/br207852) method (or [**PickSingleFileAndContinue**](http://msdn.microsoft.com/library/windows/apps/dn652521)) to call a file picker window and let the user pick a single file. For more info, see [Open files and folders with a picker](https://msdn.microsoft.com/library/windows/apps/mt186456).
 
 2.  **Let the user pick multiple files to access**
 
-    Uses the [**FileOpenPicker**](http://msdn.microsoft.com/library/windows/apps/br207847).[**PickMultipleFilesAsync**](http://msdn.microsoft.com/library/windows/apps/br207851) method (or [**PickMultipleFilesAndContinue**](http://msdn.microsoft.com/library/windows/apps/dn652520)) to call a file picker window and let the user pick multiple files. For a walkthrough of this task, see Quickstart: Accessing files with file pickers ([HTML](http://msdn.microsoft.com/library/windows/apps/hh465199) or [XAML](http://msdn.microsoft.com/library/windows/apps/hh771180)).
+    Uses the [**FileOpenPicker**](http://msdn.microsoft.com/library/windows/apps/br207847).[**PickMultipleFilesAsync**](http://msdn.microsoft.com/library/windows/apps/br207851) method (or [**PickMultipleFilesAndContinue**](http://msdn.microsoft.com/library/windows/apps/dn652520)) to call a file picker window and let the user pick multiple files. For more info, see [Open files and folders with a picker](https://msdn.microsoft.com/library/windows/apps/mt186456).
 
 3.  **Let the user pick one folder to access**
 
-    Uses the [**FolderPicker**](http://msdn.microsoft.com/library/windows/apps/br207881).[**PickSingleFolderAsync**](http://msdn.microsoft.com/library/windows/apps/br207885) method (or [**PickFolderAndContinue**](http://msdn.microsoft.com/library/windows/apps/dn652525)) to call a file picker window and let the user pick multiple files. For a walkthrough of this task, see Quickstart: Accessing files with file pickers ([HTML](http://msdn.microsoft.com/library/windows/apps/hh465199) or [XAML](http://msdn.microsoft.com/library/windows/apps/hh771180)).
+    Uses the [**FolderPicker**](http://msdn.microsoft.com/library/windows/apps/br207881).[**PickSingleFolderAsync**](http://msdn.microsoft.com/library/windows/apps/br207885) method (or [**PickFolderAndContinue**](http://msdn.microsoft.com/library/windows/apps/dn652525)) to call a file picker window and let the user pick multiple files. For more info, see [Open files and folders with a picker](https://msdn.microsoft.com/library/windows/apps/mt186456).
 
 4.  **Let the user save a file and specify the name, file type, and/or save location**
 
-    Uses the [**FileSavePicker**](http://msdn.microsoft.com/library/windows/apps/br207871).[**PickSaveFileAsync**](http://msdn.microsoft.com/library/windows/apps/br207876) method (or [**PickSaveFileAndContinue**](http://msdn.microsoft.com/library/windows/apps/dn652523)) to call a file picker window and let the user pick multiple files. For a walkthrough of this task, see How to save files through file pickers ([HTML](http://msdn.microsoft.com/library/windows/apps/jj150595) or [XAML](http://msdn.microsoft.com/library/windows/apps/jj150592)).
+    Uses the [**FileSavePicker**](http://msdn.microsoft.com/library/windows/apps/br207871).[**PickSaveFileAsync**](http://msdn.microsoft.com/library/windows/apps/br207876) method (or [**PickSaveFileAndContinue**](http://msdn.microsoft.com/library/windows/apps/dn652523)) to call a file picker window and let the user pick multiple files. For more info, see [Save a file with a picker](https://msdn.microsoft.com/library/windows/apps/mt186455).
 
 5.  **Let the user pick a locally cached file to access**
 
@@ -41,7 +41,7 @@ To learn more about accessing and saving files and folders through file pickers,
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 

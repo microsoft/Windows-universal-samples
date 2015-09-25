@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: AudioVideoAndCamera 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619486&clcid=0x409
 --->
@@ -26,9 +26,9 @@ This sample also implements a custom UI to better simulate the experience that a
 
 [CameraStarterKit](/Samples/CameraStarterKit)
 
-[How to rotate captured video](https://msdn.microsoft.com/en-us/library/windows/apps/hh868174.aspx)
+**Conceptual**
 
-[How to preview video from a webcam](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868171.aspx)
+[Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
 
 [Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
 

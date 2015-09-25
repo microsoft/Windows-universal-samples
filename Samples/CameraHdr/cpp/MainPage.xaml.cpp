@@ -140,22 +140,11 @@ task<void> MainPage::InitializeCameraAsync()
             {
                 previousTask.get();
             }
-            catch (Exception^ ex)
+            catch (AccessDeniedException^)
             {
-                WriteException(ex);
+                WriteLine("The app was denied access to the camera");
             }
         });
-    // Catch any exceptions that may have been thrown along the way
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -231,16 +220,6 @@ task<void> MainPage::StartPreviewAsync()
 
         // Not external, just return the previous task
         return previousTask;
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -284,16 +263,6 @@ task<void> MainPage::StopPreviewAsync()
             // Allow the device screen to sleep now that the preview is stopped
             _displayRequest->RequestRelease();
         }));
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -320,16 +289,6 @@ task<void> MainPage::CreateSceneAnalysisEffectAsync()
 
         // Enable HDR analysis
         _sceneAnalysisEffect->HighDynamicRangeAnalyzer->Enabled = true;
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -431,19 +390,10 @@ task<void> MainPage::TakePhotoInCurrentModeAsync()
         taskToExecute = TakeHdrPhotoAsync();
     }
 
-    return taskToExecute.then([this](task<void> previousTask)
+    return taskToExecute.then([this]()
     {
-        try
-        {
-            previousTask.get();
-
-            // Re-enable the buttons that should be enabled (checks for HDR support) in the current state of the app
-            UpdateUi();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }  
+        // Re-enable the buttons that should be enabled (checks for HDR support) in the current state of the app
+        UpdateUi();
     });
 }
 
@@ -475,6 +425,7 @@ task<void> MainPage::TakeNormalPhotoAsync()
         }
         catch (Exception^ ex)
         {
+            // File I/O errors are reported as exceptions
             WriteException(ex);
         }
     });
@@ -509,6 +460,7 @@ task<void> MainPage::TakeHdrPhotoAsync()
         }
         catch (Exception^ ex)
         {
+            // File I/O errors are reported as exceptions
             WriteException(ex);
         }
     });
@@ -527,7 +479,7 @@ task<DeviceInformation^> MainPage::FindCameraDeviceByPanelAsync(Windows::Devices
     auto deviceEnumTask = create_task(allVideoDevices);
     return deviceEnumTask.then([panel](DeviceInformationCollection^ devices)
     {
-        for each(auto cameraDeviceInfo in devices)
+        for (auto cameraDeviceInfo : devices)
         {
             if (cameraDeviceInfo->EnclosureLocation != nullptr && cameraDeviceInfo->EnclosureLocation->Panel == panel)
             {

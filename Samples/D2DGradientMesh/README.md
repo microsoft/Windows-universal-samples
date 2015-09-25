@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: GraphicsAndAnimation
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620532&clcid=0x409
 --->

@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: IdentitySecurityAndEncryption
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620557&clcid=0x409
 --->

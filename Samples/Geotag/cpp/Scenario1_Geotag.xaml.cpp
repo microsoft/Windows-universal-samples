@@ -3,10 +3,10 @@
 #include "pch.h"
 #include "Scenario1_Geotag.xaml.h"
 
-using namespace SDKTemplate;
+using namespace Concurrency;
 using namespace GeotagCPPSample;
-
 using namespace Platform;
+using namespace SDKTemplate;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 using namespace Windows::UI::Xaml;
@@ -19,7 +19,6 @@ using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::Storage;
 using namespace Windows::Storage::FileProperties;
 using namespace Windows::Devices::Geolocation;
-using namespace concurrency;
 
 Scenario1_Geotag::Scenario1_Geotag() : rootPage(MainPage::Current)
 {
@@ -45,17 +44,10 @@ void Scenario1_Geotag::RequestLocationAccess()
     create_task(Geolocator::RequestAccessAsync())
         .then([this](task<GeolocationAccessStatus> task)
     {
-        try
+        GeolocationAccessStatus status = task.get();
+        if (status != GeolocationAccessStatus::Allowed)
         {
-            GeolocationAccessStatus status = task.get();
-            if (status != GeolocationAccessStatus::Allowed)
-            {
-                LogError("Location access is NOT allowed");
-            }
-        }
-        catch (Exception^ e)
-        {
-            LogError("Exception: " + e->ToString());
+            LogError("Location access is NOT allowed");
         }
     });
 }
@@ -89,6 +81,7 @@ void Scenario1_Geotag::SetGeotag(StorageFile^ file, Geopoint^ geopoint)
         }
         catch (Exception^ e)
         {
+            // File I/O errors are reported as exceptions
             LogError("Exception: " + e->ToString());
         }
     });
@@ -106,6 +99,7 @@ void Scenario1_Geotag::SetGeotagFromGeolocator(StorageFile^ file, Geolocator^ ge
         }
         catch (Exception^ e)
         {
+            // File I/O errors are reported as exceptions
             LogError("Exception: " + e->ToString());
         }
     });
@@ -123,6 +117,7 @@ void Scenario1_Geotag::Button_Click_GetGeotag(Platform::Object^ sender, Windows:
         }
         catch (Exception^ e)
         {
+            // File I/O errors are reported as exceptions
             LogError("Exception: " + e->ToString());
         }
     });
@@ -141,6 +136,7 @@ void Scenario1_Geotag::Button_Click_SetGeotag(Platform::Object^ sender, Windows:
         }
         catch (Exception^ e)
         {
+            // File I/O errors are reported as exceptions
             LogError("Exception: " + e->ToString());
         }
     });
@@ -160,6 +156,7 @@ void Scenario1_Geotag::Button_Click_SetGeotagFromGeolocator(Platform::Object^ se
         }
         catch (Exception^ e)
         {
+            // File I/O errors are reported as exceptions
             LogError("Exception: " + e->ToString());
         }
     });

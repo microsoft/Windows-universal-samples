@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: Communications
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620600&clcid=0x409
 --->
@@ -46,7 +46,7 @@ Related topics
 
 [Designing UX for apps](http://msdn.microsoft.com/library/windows/apps/hh767284)
 
-[Adding multimedia](http://msdn.microsoft.com/library/windows/apps/hh465134)
+[Audio, video, and camera](https://msdn.microsoft.com/library/windows/apps/mt203788)
 
 **Tasks**
 

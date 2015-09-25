@@ -79,7 +79,7 @@ void Scenario5::GetThumbnailButton_Click(Object^ sender, RoutedEventArgs^ e)
                                 create_task(firstMonth->GetFilesAsync()).then([this](IVectorView<StorageFile^>^ files)
                                 {
                                     String^ output = "\nList of files in the group:\n\n";
-                                    for each (StorageFile^ file in files)
+                                    for (StorageFile^ file : files)
                                     {
                                         output += file->Name + "\n";
                                     }

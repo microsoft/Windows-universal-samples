@@ -23,6 +23,8 @@ When you choose the **Enable** button for the **Data Events** option, the app be
 
 When you choose the **Enable** button for the **Shake Events** option, the app displays the cumulative number of shake events each time an event occurs. (The app first increments the event count and then renders the most recent value.)
 
+Note that shake events are not supported in Windows 10 build 10240, so the Shaken event will never be raised, but the sample demonstrates how to handle the event when support for shake is added.
+
 ### Poll Accelerometer Readings
 
 When you choose the **Enable** button for the **Polling** option, the app will retrieve the sensor readings at a fixed interval.

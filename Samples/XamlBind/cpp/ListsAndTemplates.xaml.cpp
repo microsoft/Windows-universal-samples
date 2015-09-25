@@ -34,7 +34,7 @@ void ListsAndTemplates::InitializeValues()
 {
     this->Model->InitializeValues();
     this->Employees->Clear();
-    for each (IEmployee^ e in Model->ManagerProp->ReportsList)
+    for (IEmployee^ e : Model->ManagerProp->ReportsList)
     {   
         this->Employees->Append(e);
     }

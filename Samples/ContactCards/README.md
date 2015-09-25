@@ -1,5 +1,6 @@
-﻿<!---
+<!---
   category: ContactsAndCalendar
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624040&clcid=0x409
 --->
 
 # Contact cards sample
@@ -37,11 +38,15 @@ The samples also demonstrate how to detect support for mini contact cards.
 
 **Note** The Universal Windows app samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
+
+### Samples
+
+[**ContactPicker**](../ContactPicker)
 
 ### Reference
 
@@ -50,8 +55,6 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 [**ContactCardDelayedDataLoader**](http://msdn.microsoft.com/library/windows/apps/dn297400)
 
 [**Windows.ApplicationModel.Contacts**](http://msdn.microsoft.com/library/windows/apps/br225002)
-
-[**Windows.ApplicationModel.Contacts.Provider**](http://msdn.microsoft.com/library/windows/apps/br225014)
 
 ## System requirements
 
