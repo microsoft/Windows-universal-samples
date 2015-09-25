@@ -51,6 +51,7 @@
                     </StackPanel>
                     <StackPanel Name="infoBoxes" Visibility="Collapsed">
                         <TextBlock Name="grammarTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" Text="Listening for:"/>
+                        <TextBlock TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" Text="Go Home"/>
                         <TextBlock Name="emailInfoTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" Text="Send email"/>
                         <TextBlock Name="phoneInfoTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" Visibility="Collapsed" Text="Call phone"/>
                     </StackPanel>

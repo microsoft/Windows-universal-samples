@@ -15,7 +15,7 @@ var appService = Windows.ApplicationModel.AppService;
 
 (function () {
     "use strict";
-    
+
     // Get the background task details
     var backgroundTaskInstance = Windows.UI.WebUI.WebUIBackgroundTaskInstance.current;
     var voiceServiceConnection = null;
@@ -80,11 +80,29 @@ var appService = Windows.ApplicationModel.AppService;
                         break;
 
                     default:
-                        // launch app.
+                        launchAppInForeground();
+                        break;
                 }
             });
         }
     }
+
+    function launchAppInForeground() {
+        /// <summary> Fall back on launching the app if we can't satisify the request 
+        /// (eg, invalid voice command from old VCD) </summary>
+        var userMessage = new voiceCommands.VoiceCommandUserMessage();
+
+        var launchingAdventureWorksMessage = resourceMap.getValue("LaunchingAdventureWorks", context).valueAsString;
+        userMessage.spokenMessage = launchingAdventureWorksMessage;
+        userMessage.displayMessage = launchingAdventureWorksMessage;
+
+        var response = voiceCommands.VoiceCommandResponse.createResponse(userMessage);
+
+        response.appLaunchArgument = "";
+
+        voiceServiceConnection.requestAppLaunchAsync(response).done();
+    }
+
 
     function disambiguateTrips(trips, disambiguationMessage, repeatDisambiguationMessage) {
         /// <summary> Display a disambiguation flow to users. Loops through the set of trips,
@@ -111,8 +129,7 @@ var appService = Windows.ApplicationModel.AppService;
                 userReprompt.spokenMessage = repeatDisambiguationMessage;
 
                 var destinationContentTiles = [];
-                for(var i = 0; i < trips.length; i++)
-                {
+                for (var i = 0; i < trips.length; i++) {
                     var trip = trips[i];
 
                     var destinationTile = new voiceCommands.VoiceCommandContentTile();
@@ -127,8 +144,7 @@ var appService = Windows.ApplicationModel.AppService;
                     destinationTile.title = trip.destination;
                     if (new Date(trip.startDate) === "Invalid Date" || isNaN(new Date(trip.startDate))) {
                         destinationTile.textLine1 = trip.destination + " " + (i + 1);
-                    }
-                    else {
+                    } else {
                         var dateObj = new Date(trip.startDate);
                         destinationTile.textLine1 = dateFormatter.format(dateObj);
                     }
@@ -145,7 +161,7 @@ var appService = Windows.ApplicationModel.AppService;
 
                 return voiceServiceConnection.requestDisambiguationAsync(response);
             }).then(function (voiceCommandDisambiguationResult) {
-                if(voiceCommandDisambiguationResult != null) {
+                if (voiceCommandDisambiguationResult != null) {
                     var selectedTile = voiceCommandDisambiguationResult.selectedItem;
 
                     return trips[selectedTile.appContext];
@@ -187,16 +203,13 @@ var appService = Windows.ApplicationModel.AppService;
                     foundTrips.push(trip);
                 }
             });
-            
+
             // Three situations. No trips exist, One trip exists, or multiple trips exist.
-            if(foundTrips.length == 0)
-            {
+            if (foundTrips.length == 0) {
                 return null;
-            }
-            else if (foundTrips.length == 1) {
+            } else if (foundTrips.length == 1) {
                 return foundTrips[0];
-            }
-            else {
+            } else {
                 var disambiguationString = resourceMap.getValue("DisambiguationWhichTripToDest", context).valueAsString;
                 var repeatDisambiguationString = resourceMap.getValue("DisambiguationRepeat", context).valueAsString;
 
@@ -207,19 +220,16 @@ var appService = Windows.ApplicationModel.AppService;
             }
         }).then(function (trip) {
             tripToDelete = trip;
-            
+
             var response = null;
-            if (tripToDelete == null)
-            {
+            if (tripToDelete == null) {
                 var userMessage = new voiceCommands.VoiceCommandUserMessage();
                 var foundNoTrips = resourceMap.getValue("FoundNoTripToDestination", context).valueAsString;
                 userMessage.displayMessage = foundNoTrips.format(destination);
                 userMessage.spokenMessage = foundNoTrips.format(destination);
                 response = voiceCommands.VoiceCommandResponse.createResponse(userMessage);
                 return voiceServiceConnection.reportSuccessAsync(response);
-            }
-            else 
-            {
+            } else {
                 var userPrompt = new voiceCommands.VoiceCommandUserMessage();
                 // confirmation prompt.
                 var cancelTrip = resourceMap.getValue("CancelTripToDestination", context).valueAsString;
@@ -245,10 +255,8 @@ var appService = Windows.ApplicationModel.AppService;
         }).then(function (voiceCommandConfirmation) {
             // if we displayed a "no such trip", this should be null. This could also happen
             // if Cortana is dismissed instead of answering the question.
-            if(voiceCommandConfirmation != null)
-            {
-                if(voiceCommandConfirmation.confirmed == true)
-                {
+            if (voiceCommandConfirmation != null) {
+                if (voiceCommandConfirmation.confirmed == true) {
                     var cancelProgress = resourceMap.getValue("CancellingTripToDestination", context).valueAsString;
 
                     return showProgressScreen(cancelProgress.format(destination)).
@@ -268,9 +276,7 @@ var appService = Windows.ApplicationModel.AppService;
                             var response = voiceCommands.VoiceCommandResponse.createResponse(completedMessage);
                             return voiceServiceConnection.reportSuccessAsync(response);
                         });
-                }
-                else
-                {
+                } else {
                     // User declined, keep the trip and send a completion message affirming this
                     // choice
                     var completedMessage = new voiceCommands.VoiceCommandUserMessage();
@@ -293,9 +299,9 @@ var appService = Windows.ApplicationModel.AppService;
         /// <param type="string" name="progressMessage">The message to display.</param>
 
         var userProgressMessage = new voiceCommands.VoiceCommandUserMessage();
-        
-        userProgressMessage.DisplayMessage = progressMessage;
-        userProgressMessage.SpokenMessage = progressMessage;
+
+        userProgressMessage.displayMessage = progressMessage;
+        userProgressMessage.spokenMessage = progressMessage;
 
         var response = voiceCommands.VoiceCommandResponse.createResponse(userProgressMessage);
         return voiceServiceConnection.reportProgressAsync(response);
@@ -305,11 +311,8 @@ var appService = Windows.ApplicationModel.AppService;
         /// <summary>Load the trip set from disk, look for destinations matching, and send a
         /// response set that shows several trips. Ideally, this should limit to 2-3 responses
         /// <param type="string" name="destination">The destination to search for.</param>
-
-        
         var installFolder = Windows.ApplicationModel.Package.current.installedLocation;
         var image = null;
-        
 
         //// display a progress screen while we load files from disk. This gives us around
         //// 5 seconds to respond, in case disk access is slow, or if we're waiting for a 
@@ -320,7 +323,7 @@ var appService = Windows.ApplicationModel.AppService;
             return Windows.Storage.StorageFile.getFileFromApplicationUriAsync(imageUri);
         }).then(function (imageFile) {
             image = imageFile;
-        
+
             return loadTripData();
         }).then(function (trips) {
             var foundTrips = [];
@@ -336,15 +339,13 @@ var appService = Windows.ApplicationModel.AppService;
 
                 userMessage.displayMessage = noTripFound.format(destination);
                 userMessage.spokenMessage = noTripFound.format(destination);
-            }
-            else {
+            } else {
                 if (foundTrips.length == 1) {
                     // singular message
                     var foundTripSingular = resourceMap.getValue("SingularUpcomingTrip", context).valueAsString;
                     userMessage.displayMessage = foundTripSingular;
                     userMessage.spokenMessage = foundTripSingular;
-                }
-                else {
+                } else {
                     // plural message
                     var foundTripsPlural = resourceMap.getValue("PluralUpcomingTrips", context).valueAsString;
 
@@ -363,11 +364,9 @@ var appService = Windows.ApplicationModel.AppService;
                     // for the sake of brevity, this sample does not.
                     destinationTile.appLaunchArgument = destination;
                     destinationTile.title = trip.destination;
-                    if (new Date(trip.startDate) === "Invalid Date" || isNaN(new Date(trip.startDate)))
-                    {
-                        destinationTile.textLine1 = trip.destination + " " + (i+1);
-                    }
-                    else {
+                    if (new Date(trip.startDate) === "Invalid Date" || isNaN(new Date(trip.startDate))) {
+                        destinationTile.textLine1 = trip.destination + " " + (i + 1);
+                    } else {
                         var dateObj = new Date(trip.startDate);
                         destinationTile.textLine1 = dateFormatter.format(dateObj);
                     }
@@ -377,8 +376,7 @@ var appService = Windows.ApplicationModel.AppService;
 
                 var response = voiceCommands.VoiceCommandResponse.createResponse(userMessage, destinationContentTiles);
 
-                if(foundTrips.length > 0)
-                {
+                if (foundTrips.length > 0) {
                     response.appLaunchArgument = destination;
                 }
 
@@ -394,8 +392,7 @@ var appService = Windows.ApplicationModel.AppService;
                 if (file == null) {
                     /// no trips available, return an empty set.
                     return {};
-                }
-                else {
+                } else {
                     return Windows.Storage.FileIO.readTextAsync(file).then(function (text) {
                         var trips = JSON.parse(text);
                         return trips;
@@ -404,8 +401,7 @@ var appService = Windows.ApplicationModel.AppService;
             });
     }
 
-    function saveTripsToFile(trips)
-    {
+    function saveTripsToFile(trips) {
         return appData.current.localFolder.createFileAsync("trips.json", Windows.Storage.CreationCollisionOption.replaceExisting)
             .then(function (outputFile) {
                 var outText = JSON.stringify(trips.slice(0));

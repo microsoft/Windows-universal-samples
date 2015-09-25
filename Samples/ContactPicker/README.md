@@ -26,15 +26,12 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[FullScreenMode](/Samples/FullScreenMode)
+* [ContactCards](/Samples/ContactCards)
 
 ### Reference
 
-[ApplicationView class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.applicationview.aspx)
-
-### Conceptual
-
-[Contacts and calendar](https://msdn.microsoft.com/library/windows/apps/mt269388)
+* [**ContactPicker** class](http://msdn.microsoft.com/library/windows/apps/br224913)
+* [Contacts and calendar](https://msdn.microsoft.com/library/windows/apps/mt269388)
 
 ## System requirements
 

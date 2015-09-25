@@ -33,21 +33,17 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
         ready: function (element, options) {
             /// <summary> Displays a trip's details. If no trip is provided, allows creation of a new trip.
             /// </summary>
-            if(options != null)
-            {
+            if (options != null) {
 
                 update = true;
                 if (options.trip) {
                     trip = options.trip;
-                }
-                else {
+                } else {
                     trip = options;
                 }
                 // show the delete button only for existing trips.
                 deleteButton.style.visibility = "visible";
-            }
-            else
-            {
+            } else {
                 update = false;
                 trip = {
                     destination: "",
@@ -91,7 +87,7 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
 
             saveButton.addEventListener("click", this.saveButtonHandler.bind(this), false);
             deleteButton.addEventListener("click", this.deleteButtonHandler.bind(this), false);
-            
+
         },
 
         bindTextBox: function (selector, initialValue, setterCallback) {
@@ -101,11 +97,10 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
             }, false);
             textBox.value = initialValue;
         },
-        
+
         saveButtonHandler: function (evt) {
             /// <summary> Handle saving a trip, or adding a new one. </summary>
-            if (trip.destination == "")
-            {
+            if (trip.destination == "") {
                 requireDestinationValidation.innerText = "Destination is required";
                 requireDestinationValidation.style.visibility = "visible";
                 return;
@@ -113,8 +108,7 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
 
             if (SdkSample.DataStore.TripStore.Trips.indexOf(trip) != -1) {
                 SdkSample.DataStore.TripStore.saveTrip(trip);
-            }
-            else {
+            } else {
                 SdkSample.DataStore.TripStore.addTrip(trip);
             }
 
@@ -128,8 +122,7 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
         deleteButtonHandler: function () {
             /// <summary> delete an existing trip. Otherwise, do nothing (although this button should be hidden
             /// if creating a new trip</summary>
-            if(update)
-            {
+            if (update) {
                 SdkSample.DataStore.TripStore.deleteTrip(trip);
 
                 this.updatePhraseList();

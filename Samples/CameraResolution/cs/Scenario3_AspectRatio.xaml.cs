@@ -208,7 +208,7 @@ namespace SDKTemplate
             // Query the current preview settings
             StreamResolution previewProperties = new StreamResolution(_previewer.MediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview));
 
-            // Get all formats that have the same-ish aspect ratio as the preview, and find the highest resolution one
+            // Get all formats that have the same-ish aspect ratio as the preview
             // Allow for some tolerance in the aspect ratio comparison
             const double ASPECT_RATIO_TOLERANCE = 0.015;
             var matchingFormats = allVideoProperties.Where(x => Math.Abs(x.AspectRatio - previewProperties.AspectRatio) < ASPECT_RATIO_TOLERANCE);

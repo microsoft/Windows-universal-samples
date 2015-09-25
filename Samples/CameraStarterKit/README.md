@@ -19,11 +19,15 @@ Specifically, this sample will cover how to:
 
 This sample also implements a custom UI to better simulate the experience that a camera application would provide, so any messages intended for the developer are printed to the debug console.
 
+For apps that are interested in capturing a photo or video without requiring access to all camera controls, CameraCaptureUI abstracts and simplifies the access to the MediaCapture APIs through the built-in Camera application. See the related topics section below for more information on how to use it instead.
+
 ## Related topics
 
 **Conceptual**
 
 [Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
+
+[Capture photos and video with CameraCaptureUI](https://msdn.microsoft.com/en-us/library/windows/apps/mt282142)
 
 [Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
 

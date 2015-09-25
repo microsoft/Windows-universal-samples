@@ -25,7 +25,7 @@ namespace SDKTemplate
         {
             new Scenario() { Title="Change camera preview settings", ClassType=typeof(Scenario1_PreviewSettings)},
             new Scenario() { Title="Change preview and photo settings", ClassType=typeof(Scenario2_PhotoSettings)},
-            new Scenario() { Title="Change preview and video settings", ClassType=typeof(Scenario3_AspectRatio)}
+            new Scenario() { Title="Match aspect ratios", ClassType=typeof(Scenario3_AspectRatio)}
         };
     }
 

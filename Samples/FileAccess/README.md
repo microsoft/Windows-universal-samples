@@ -45,8 +45,6 @@ The sample demonstrates these tasks:
 
     For more info, see [Track recently used files and folders](https://msdn.microsoft.com/library/windows/apps/mt186452).
 
-    Note that the "Add to system MRU" feature crashes on Phone. We apologize for the inconvenience.
-
 8.  **Copy a file**
 
     Uses one of the [**StorageFile**](http://msdn.microsoft.com/library/windows/apps/br227171).[**CopyAsync**](http://msdn.microsoft.com/library/windows/apps/br227190) methods to copy the file.

@@ -111,7 +111,7 @@ namespace SDKTemplate
             }
             else if (_properties is VideoEncodingProperties)
             {
-                return Width + "x" + Height + " [" + AspectRatio + "] " + FrameRate + "FPS" + " " + _properties.Subtype;
+                return Width + "x" + Height + " [" + AspectRatio + "] " + FrameRate + "FPS " + _properties.Subtype;
             }
 
             return String.Empty;

@@ -186,7 +186,7 @@ namespace NotificationsExtensions.ToastContent
                 builder.Append("<audio");
                 if (Audio.Content == ToastAudioContent.Silent)
                 {
-                    builder.Append(" silent='true'/>");
+                    builder.Append(" silent='true'");
                 }
                 else
                 {

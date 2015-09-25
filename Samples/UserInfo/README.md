@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: IdentitySecurityAndEncryption
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620617&clcid=0x409
 --->
@@ -11,7 +11,7 @@ Specifically, this sample demonstrates the following scenarios:
 
 - How to find all users with [the `FindAllAsync` method](https://msdn.microsoft.com/library/windows/apps/windows.system.user.findallasync.aspx).
 - How to retrieve a specific user property with [the `GetPropertyAsync` method](https://msdn.microsoft.com/library/windows/apps/windows.system.user.getpropertyasync.aspx).
-- How to retrieve multiple user properties with [the `GetPropertiesAsync` method](https://msdn.microsoft.com/library/windows/apps/windows.system.user.getpropertiesasync.aspx).
+- How to retrieve multiple user properties with [the `GetPropertiesAsync` method](https://msdn.microsoft.com/library/windows/apps/dn996552.aspx).
 - How to obtain the profile picture for a user with [the `GetPictureAsync` method](https://msdn.microsoft.com/library/windows/apps/windows.system.user.getpictureasync.aspx).
 - How to monitor users dynamically with [the `CreateWatcher` method](https://msdn.microsoft.com/library/windows/apps/windows.system.user.createwatcher.aspx).
 

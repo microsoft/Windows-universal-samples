@@ -100,12 +100,17 @@ void Scenario_PauseAsync::InitializeRecognizer()
                 this,
                 &Scenario_PauseAsync::SpeechRecognizer_StateChanged);
 
+		// It's not valid to pause a list grammar recognizer and recompile the constraints without at least one
+		// constraint in place, so create a permanent constraint.
+		auto goHomeConstraint = ref new SpeechRecognitionListConstraint(ref new Vector<String^>( { L"Go Home" }), L"gohome");
+
         // These speech recognition constraints will be added and removed from the recognizer.
         emailConstraint = ref new SpeechRecognitionListConstraint(ref new Vector<String^>({ L"Send email" }), L"email");
         phoneConstraint = ref new SpeechRecognitionListConstraint(ref new Vector<String^>({ L"Call phone" }), L"phone");
 
         // Build a command-list grammar. Commands should ideally be drawn from a resource file for localization, and 
         // be grouped into tags for alternate forms of the same command.
+		speechRecognizer->Constraints->Append(goHomeConstraint);
         speechRecognizer->Constraints->Append(emailConstraint);
 
         create_task(speechRecognizer->CompileConstraintsAsync(), task_continuation_context::use_current())

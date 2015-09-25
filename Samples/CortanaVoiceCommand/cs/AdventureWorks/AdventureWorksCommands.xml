@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.2">
   <CommandSet xml:lang="en-us" Name="AdventureWorksCommandSet_en-us">
-    <CommandPrefix> Adventure Works, </CommandPrefix>
+    <AppName> Adventure Works </AppName>
     <Example> Show trip to London </Example>
 
     <Command Name="showTripToDestination">
@@ -37,7 +37,7 @@
   </CommandSet>
 
   <CommandSet xml:lang="en-gb" Name="AdventureWorksCommandSet_en-gb">
-    <CommandPrefix> Adventure Works, </CommandPrefix>
+    <AppName> Adventure Works </AppName>
     <Example> Show trip to London </Example>
 
     <Command Name="showTripToDestination">
@@ -73,7 +73,7 @@
   </CommandSet>
 
   <CommandSet xml:lang="fr-fr" Name="AdventureWorksCommandSet_fr-fr">
-    <CommandPrefix> Adventure Works, </CommandPrefix>
+    <AppName> Adventure Works </AppName>
     <Example>Montrer mon voyage à Londres </Example>
 
     <Command Name="showTripToDestination">
@@ -108,7 +108,7 @@
   </CommandSet>
 
   <CommandSet xml:lang="it-it" Name="AdventureWorksCommandSet_it-it">
-    <CommandPrefix> Adventure Works, </CommandPrefix>
+    <AppName> Adventure Works </AppName>
     <Example> Mostra il viaggio a Londra </Example>
 
     <Command Name="showTripToDestination">
@@ -144,7 +144,7 @@
 
 
   <CommandSet xml:lang="de-de" Name="AdventureWorksCommandSet_de-de">
-    <CommandPrefix> Adventure Works, </CommandPrefix>
+    <AppName> Adventure Works </AppName>
     <Example>Zeige Reise nach London</Example>
 
     <Command Name="showTripToDestination">
@@ -180,7 +180,7 @@
   </CommandSet>
 
   <CommandSet xml:lang="es-es" Name="AdventureWorksCommandSet_es-es">
-    <CommandPrefix> Adventure Works, </CommandPrefix>
+    <AppName> Adventure Works </AppName>
     <Example>Mostrar viaje a Londres</Example>
 
     <Command Name="showTripToDestination">
@@ -216,7 +216,7 @@
   </CommandSet>
 
   <CommandSet xml:lang="zh-cn" Name="AdventureWorksCommandSet_zh-cn">
-    <CommandPrefix> Adventure Works, </CommandPrefix>
+    <AppName> Adventure Works </AppName>
     <Example>显示伦敦之行</Example>
 
     <Command Name="showTripToDestination">

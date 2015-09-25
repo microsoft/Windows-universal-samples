@@ -11,6 +11,8 @@
 
 #pragma once
 
+Platform::String^ GetCurrentTimeString();
+
 LPBYTE PointerFromIBuffer(_In_ Windows::Storage::Streams::IBuffer^ buffer, _Out_opt_ DWORD* pcbLength);
 Windows::Storage::Streams::IBuffer^ IBufferFromPointer(_In_ LPBYTE pbData, _In_ DWORD cbData);
 Windows::Storage::Streams::IBuffer^ IBufferFromArray(_In_ Platform::Array<unsigned char>^ data);

@@ -130,15 +130,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_PreviewSettings.xaml">
+    <Page Include="..\shared\Scenario1_PreviewSettings.xaml">
+      <Link>Scenario1_PreviewSettings.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_PhotoSettings.xaml">
+    <Page Include="..\shared\Scenario2_PhotoSettings.xaml">
+      <Link>Scenario2_PhotoSettings.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3_AspectRatio.xaml">
+    <Page Include="..\shared\Scenario3_AspectRatio.xaml">
+      <Link>Scenario3_AspectRatio.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

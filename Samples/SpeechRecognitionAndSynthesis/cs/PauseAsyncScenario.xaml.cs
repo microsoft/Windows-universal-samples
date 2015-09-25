@@ -100,11 +100,16 @@ namespace SpeechAndTTS
             // of an audio indicator to help the user understand whether they're being heard.
             speechRecognizer.StateChanged += SpeechRecognizer_StateChanged;
 
+            // It's not valid to pause a list grammar recognizer and recompile the constraints without at least one
+            // constraint in place, so create a permanent constraint.
+            var goHomeConstraint = new SpeechRecognitionListConstraint(new List<string>() { "Go Home" }, "gohome");
+
             // These speech recognition constraints will be added and removed from the recognizer.
             emailConstraint = new SpeechRecognitionListConstraint(new List<string>() { "Send email" }, "email");
             phoneConstraint = new SpeechRecognitionListConstraint(new List<string>() { "Call phone" }, "phone");
 
-            // Add one of the constraints initially, so we don't start with an empty list of constraints.
+            // Add some of the constraints initially, so we don't start with an empty list of constraints.
+            speechRecognizer.Constraints.Add(goHomeConstraint);
             speechRecognizer.Constraints.Add(emailConstraint);
 
             SpeechRecognitionCompilationResult result = await speechRecognizer.CompileConstraintsAsync();

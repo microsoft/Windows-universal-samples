@@ -14,8 +14,36 @@
 
 using namespace Concurrency;
 using namespace Microsoft::WRL;
+using namespace Platform;
+using namespace Windows::Globalization;
+using namespace Windows::Security::Cryptography::DataProtection;
 using namespace Windows::Storage;
 using namespace Windows::Storage::Streams;
+
+String^ GetCurrentTimeString()
+{
+    auto calendar = ref new Calendar();
+    calendar->SetToNow();
+
+    int milliseconds = calendar->Nanosecond / 1000000;
+    String^ strMilliseconds = milliseconds.ToString();
+
+    // Pad zeros
+    if (strMilliseconds->Length() == 1)
+    {
+        strMilliseconds = "00" + strMilliseconds;
+    }
+    else if (strMilliseconds->Length() == 2)
+    {
+        strMilliseconds = "0" + strMilliseconds;
+    }
+
+    return
+        calendar->HourAsPaddedString(2) + ":" +
+        calendar->MinuteAsPaddedString(2) + ":" +
+        calendar->SecondAsPaddedString(2) + "." +
+        strMilliseconds;
+}
 
 // Retrieves the raw buffer data from the provided IBuffer object.
 // Warning: The lifetime of the returned buffer is controlled by
@@ -29,6 +57,7 @@ LPBYTE PointerFromIBuffer(IBuffer^ buffer, DWORD* pcbLength)
     {
         *pcbLength = buffer->Length;
     }
+
     // Query the IBufferByteAccess interface.
     ComPtr<IBufferByteAccess> bufferByteAccess;
     ChkHR(reinterpret_cast<IInspectable*>(buffer)->QueryInterface(IID_PPV_ARGS(&bufferByteAccess)));
@@ -42,12 +71,12 @@ LPBYTE PointerFromIBuffer(IBuffer^ buffer, DWORD* pcbLength)
 _Use_decl_annotations_
 IBuffer^ IBufferFromPointer(LPBYTE pbData, DWORD cbData)
 {
-    auto byteArray = new Platform::ArrayReference<unsigned char>(pbData, cbData);
-    return IBufferFromArray(reinterpret_cast<Platform::Array<unsigned char>^>(byteArray));
+    auto byteArray = new ArrayReference<unsigned char>(pbData, cbData);
+    return IBufferFromArray(reinterpret_cast<Array<unsigned char>^>(byteArray));
 }
 
 _Use_decl_annotations_
-IBuffer^ IBufferFromArray(Platform::Array<unsigned char>^ data)
+IBuffer^ IBufferFromArray(Array<unsigned char>^ data)
 {
     DataWriter^ dataWriter = ref new DataWriter();
     dataWriter->WriteBytes(data);
@@ -55,7 +84,7 @@ IBuffer^ IBufferFromArray(Platform::Array<unsigned char>^ data)
 }
 
 _Use_decl_annotations_
-std::wstring ByteArrayToString(Platform::Array<byte>^ byteArray)
+std::wstring ByteArrayToString(Array<byte>^ byteArray)
 {
     std::wstring str = L"";
     for (auto b : byteArray)
@@ -72,36 +101,37 @@ void ChkHR(HRESULT hr)
 {
     if (FAILED(hr))
     {
-        throw ref new Platform::COMException(hr);
+        throw ref new COMException(hr);
     }
 }
 
-Concurrency::task<Platform::Array<byte>^> ReadAndUnprotectFileAsync(Platform::String^ filename)
+task<Array<byte>^> ReadAndUnprotectFileAsync(String^ filename)
 {
-    return create_task(Windows::Storage::ApplicationData::Current->LocalFolder->TryGetItemAsync(filename)).then(
+    return create_task(ApplicationData::Current->LocalFolder->TryGetItemAsync(filename)).then(
         [](IStorageItem^ item)
         {
-            if (item != nullptr 
-             && item->IsOfType(StorageItemTypes::File))
+            if (item != nullptr
+                && item->IsOfType(StorageItemTypes::File))
             {
                 // File exists, read it
                 return create_task(dynamic_cast<StorageFile^>(item)->OpenReadAsync()).then([](IRandomAccessStreamWithContentType^ stream)
                 {
                     if (stream->Size > MAXDWORD32)
                     {
-                        throw ref new Platform::Exception(E_FAIL);
+                        throw ref new Exception(E_FAIL);
                     }
+
                     auto size = static_cast<unsigned int>(stream->Size);
                     auto buffer = ref new Buffer(size);
-                    return stream->ReadAsync(buffer, size, Streams::InputStreamOptions::None);
+                    return stream->ReadAsync(buffer, size, InputStreamOptions::None);
                 }).then([](IBuffer^ buffer)
                 {
                     // Now unprotect/decrypt it
-                    auto provider = ref new Windows::Security::Cryptography::DataProtection::DataProtectionProvider();
+                    auto provider = ref new DataProtectionProvider();
                     return provider->UnprotectAsync(buffer);
-                }).then([](IBuffer^ buffer) -> Platform::Array<byte>^
+                }).then([](IBuffer^ buffer) -> Array<byte>^
                 {
-                    auto data = ref new Platform::Array<byte>(buffer->Length);
+                    auto data = ref new Array<byte>(buffer->Length);
                     DataReader::FromBuffer(buffer)->ReadBytes(data);
                     return data;
                 });
@@ -109,14 +139,14 @@ Concurrency::task<Platform::Array<byte>^> ReadAndUnprotectFileAsync(Platform::St
             else
             {
                 // File doesn't exist, return nullptr
-                return concurrency::task_from_result<Platform::Array<byte>^>(nullptr);
+                return task_from_result<Array<byte>^>(nullptr);
             }
     });
 }
 
-Concurrency::task<IBuffer^> ReadFileToBufferAsync(Platform::String^ filename)
+task<IBuffer^> ReadFileToBufferAsync(String^ filename)
 {
-    return create_task(Windows::Storage::ApplicationData::Current->LocalFolder->TryGetItemAsync(filename)).then(
+    return create_task(ApplicationData::Current->LocalFolder->TryGetItemAsync(filename)).then(
         [](IStorageItem^ item)
     {
         if (item != nullptr
@@ -127,31 +157,41 @@ Concurrency::task<IBuffer^> ReadFileToBufferAsync(Platform::String^ filename)
             {
                 if (stream->Size > MAXDWORD32)
                 {
-                    throw ref new Platform::Exception(E_FAIL);
+                    throw ref new Exception(E_FAIL);
                 }
+
                 auto size = static_cast<unsigned int>(stream->Size);
                 auto buffer = ref new Buffer(size);
-                return stream->ReadAsync(buffer, size, Streams::InputStreamOptions::None);
+                return stream->ReadAsync(buffer, size, InputStreamOptions::None);
             });
         }
         else
         {
             // File doesn't exist, return nullptr
-            return concurrency::task_from_result<IBuffer^>(nullptr);
+            return task_from_result<IBuffer^>(nullptr);
         }
     });
 }
 
-void AppendFile(Platform::String^ filename, Platform::String^ data)
+void AppendFile(String^ filename, String^ data)
 {
-    auto file = create_task(Windows::Storage::ApplicationData::Current->LocalFolder->CreateFileAsync(
+    auto file = create_task(ApplicationData::Current->LocalFolder->CreateFileAsync(
         filename,
         CreationCollisionOption::OpenIfExists)).get();
 
     create_task(FileIO::AppendTextAsync(file, data)).wait();
 }
 
-HRESULT ParseApdu(_In_ BYTE* pbCommandApdu, _In_ DWORD cbCommandApdu, _Out_ USHORT* pusClaIns, _Out_ BYTE* pbP1, _Out_ BYTE* pbP2, _Out_ BYTE** ppbPayload, _Out_ DWORD* pcbPayload, _Out_ DWORD* pcbLE)
+_Use_decl_annotations_
+HRESULT ParseApdu(
+    BYTE* pbCommandApdu,
+    DWORD cbCommandApdu,
+    USHORT* pusClaIns,
+    BYTE* pbP1,
+    BYTE* pbP2,
+    BYTE** ppbPayload,
+    DWORD* pcbPayload,
+    DWORD* pcbLE)
 {
     if (cbCommandApdu < 4)
     {
@@ -160,7 +200,7 @@ HRESULT ParseApdu(_In_ BYTE* pbCommandApdu, _In_ DWORD cbCommandApdu, _Out_ USHO
     }
 
     // APDU Format is:
-    // 0   1   2  3  4    
+    // 0   1   2  3  4
     // CLA INS P1 P2 <NC> <cmd> <LE>
 
     // Grab the CLA, INS, P1 and P2

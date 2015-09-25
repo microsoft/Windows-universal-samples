@@ -24,33 +24,38 @@ namespace XamlPullToRefresh
     public sealed partial class MainPage : Page
     {
         private ObservableCollection<int> feed = new ObservableCollection<int>();
-        private DispatcherTimer timer = new DispatcherTimer();
+        private int lastValue = 0;
         public MainPage()
         {
             this.InitializeComponent();
             Loaded += MainPage_Loaded;
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += Timer_Tick;
             PopulateFeed();
-        }
-
-        private void Timer_Tick(object sender, object e)
-        {
-            timer.Stop();
-            VisualStateManager.GoToState(this, "PullToRefresh", false);
-            for (int i = 20; i < 40; i++)
-            {
-                feed.Insert(0, i);
-            }
         }
 
         private void PopulateFeed()
         {
-            for (int i = 0; i < 10; i++)
+            feed.Clear();
+            for (int i = 90; i <= 100; i++)
             {
                 feed.Add(i);
             }
             lv.ItemsSource = feed;
+            lastValue = 89;
+        }
+
+        private void UpdateFeed()
+        {
+            for (int i = lastValue; i > lastValue - 10; i--)
+            {
+                feed.Insert(0, i);
+            }
+            lastValue = lastValue - 10;
+            if(lastValue == 0)
+            {
+                PopulateFeed();
+            }
+            SV1.ChangeView(null, 0, null);
+            VisualStateManager.GoToState(this, "PullToRefresh", false);
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
@@ -64,12 +69,16 @@ namespace XamlPullToRefresh
             ScrollViewer sv = sender as ScrollViewer;
             if (sv.VerticalOffset == 0)
             {
-                timer.Start();
+                SV1.DirectManipulationCompleted += SV1_DirectManipulationCompleted;
                 VisualStateManager.GoToState(this, "Refreshing", false);
             }
-
         }
 
+        private void SV1_DirectManipulationCompleted(object sender, object e)
+        {
+            SV1.DirectManipulationCompleted -= SV1_DirectManipulationCompleted;
+            UpdateFeed();
+        }
     }
 
     public class MyBorder : Panel
