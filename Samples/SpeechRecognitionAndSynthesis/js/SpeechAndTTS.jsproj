@@ -57,6 +57,7 @@
     <Content Include="html\scenario7_ContinuousDictation.html" />
     <Content Include="html\scenario2_SynthesizeSSML.html" />
     <Content Include="html\scenario8_ContinuousRecognitionListGrammar.html" />
+    <Content Include="html\scenario10_PauseAsync.html" />
     <Content Include="html\scenario9_ContinuousRecognitionSRGSGrammar.html" />
     <Content Include="html\scenario3_PredefinedDictationGrammar.html" />
     <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
@@ -91,6 +92,7 @@
     <Content Include="js\scenario7_ContinuousDictation.js" />
     <Content Include="js\scenario2_SynthesizeSSML.js" />
     <Content Include="js\scenario8_ContinuousRecognitionListGrammar.js" />
+    <Content Include="js\scenario10_PauseAsync.js" />
     <Content Include="js\scenario9_ContinuousRecognitionSRGSGrammar.js" />
     <Content Include="js\scenario3_PredefinedDictationGrammar.js" />
     <Content Include="js\scenario6_SRGSConstraint.js" />
@@ -130,9 +132,147 @@
     <Content Include="..\..\..\SharedContent\js\sample-utils\scenario-select.html">
       <Link>sample-utils\scenario-select.html</Link>
     </Content>
-    <Content Include="SRGSColors.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\shared\SRGS\de-DE\SRGSColors.xml">
+      <Link>SRGS\de-DE\SRGSColors.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\shared\SRGS\en-GB\SRGSColors.xml">
+      <Link>SRGS\en-GB\SRGSColors.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\shared\SRGS\en-US\SRGSColors.xml">
+      <Link>SRGS\en-US\SRGSColors.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\shared\SRGS\es-ES\SRGSColors.xml">
+      <Link>SRGS\es-ES\SRGSColors.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\shared\SRGS\fr-FR\SRGSColors.xml">
+      <Link>SRGS\fr-FR\SRGSColors.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\shared\SRGS\it-IT\SRGSColors.xml">
+      <Link>SRGS\it-IT\SRGSColors.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\shared\SRGS\zh-Hans-CN\SRGSColors.xml">
+      <Link>SRGS\zh-Hans-CN\SRGSColors.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-US\LocalizationSpeechResources.resjson">
+      <Link>Strings\en-US\LocalizationSpeechResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\fr-FR\LocalizationSpeechResources.resjson">
+      <Link>Strings\fr-FR\LocalizationSpeechResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-US\LocalizationTTSResources.resjson">
+      <Link>Strings\en-US\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\fr-FR\LocalizationTTSResources.resjson">
+      <Link>Strings\fr-FR\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\de-DE\LocalizationSpeechResources.resjson">
+      <Link>Strings\de-DE\LocalizationSpeechResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\de-DE\LocalizationTTSResources.resjson">
+      <Link>Strings\de-DE\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\es-ES\LocalizationSpeechResources.resjson">
+      <Link>Strings\es-ES\LocalizationSpeechResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\es-ES\LocalizationTTSResources.resjson">
+      <Link>Strings\es-ES\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\it-IT\LocalizationSpeechResources.resjson">
+      <Link>Strings\it-IT\LocalizationSpeechResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\it-IT\LocalizationTTSResources.resjson">
+      <Link>Strings\it-IT\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\zh-CN\LocalizationSpeechResources.resjson">
+      <Link>Strings\zh-CN\LocalizationSpeechResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\zh-CN\LocalizationTTSResources.resjson">
+      <Link>Strings\zh-CN\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-GB\LocalizationSpeechResources.resjson">
+      <Link>Strings\en-GB\LocalizationSpeechResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-GB\LocalizationTTSResources.resjson">
+      <Link>Strings\en-GB\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-IN\LocalizationTTSResources.resjson">
+      <Link>Strings\en-IN\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\es-MX\LocalizationTTSResources.resjson">
+      <Link>Strings\es-MX\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\ja-JP\LocalizationTTSResources.resjson">
+      <Link>Strings\ja-JP\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\ko-KR\LocalizationTTSResources.resjson">
+      <Link>Strings\ko-KR\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\pl-PL\LocalizationTTSResources.resjson">
+      <Link>Strings\pl-PL\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\pt-BR\LocalizationTTSResources.resjson">
+      <Link>Strings\pt-BR\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\ru-RU\LocalizationTTSResources.resjson">
+      <Link>Strings\ru-RU\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\zh-TW\LocalizationTTSResources.resjson">
+      <Link>Strings\zh-TW\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Strings\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <!-- To modify your build process, add your task inside one of the targets below then uncomment

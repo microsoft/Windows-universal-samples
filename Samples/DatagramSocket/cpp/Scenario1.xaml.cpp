@@ -212,7 +212,7 @@ void Scenario1::PopulateAdapterList()
     AdapterList->ItemsSource = localHostItems;
     AdapterList->DisplayMemberPath = "DisplayString";
 
-    for each (HostName^ localHostInfo in NetworkInformation::GetHostNames())
+    for (HostName^ localHostInfo : NetworkInformation::GetHostNames())
     {
         if (localHostInfo->IPInformation != nullptr)
         {

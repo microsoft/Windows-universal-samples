@@ -40,10 +40,10 @@
     <Page Include="..\..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>
-    <Page Include="Scenario1_SampleBackgroundTask.xaml" />
-    <Page Include="Scenario2_SampleBackgroundTaskWithCondition.xaml" />
-    <Page Include="Scenario3_ServicingCompleteTask.xaml" />
-    <Page Include="Scenario4_TimeTriggeredTask.xaml" />
+    <Page Include="..\..\shared\Scenario1_SampleBackgroundTask.xaml" />
+    <Page Include="..\..\shared\Scenario2_SampleBackgroundTaskWithCondition.xaml" />
+    <Page Include="..\..\shared\Scenario3_ServicingCompleteTask.xaml" />
+    <Page Include="..\..\shared\Scenario4_TimeTriggeredTask.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\SharedContent\media\smalltile-sdk.png">

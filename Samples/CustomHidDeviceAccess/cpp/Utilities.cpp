@@ -26,7 +26,7 @@ void Utilities::SetUpDeviceScenarios(IMap<SDKTemplate::DeviceType, UIElement^>^ 
 
     if (EventHandlerForDevice::Current->IsDeviceConnected)
     {
-        for each (IKeyValuePair<DeviceType, UIElement^>^ deviceScenario in scenarios)
+        for (IKeyValuePair<DeviceType, UIElement^>^ deviceScenario : scenarios)
         {
             // Enable the scenario if it's generic or the device type matches
             if ((deviceScenario->Key == DeviceType::All)

@@ -1,0 +1,46 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_ReadData"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer Margin="12,10,12,12">
+            <StackPanel>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Read data from SPI device
+                </TextBlock>
+                <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                    An app can read data from an SPI device.
+                    To enable this sample, follow this wiring schematic using a SparkFun DXL345 sensor.
+                    Wiring for both MinnowBoard Max and Raspberry Pi 2 are diagrammed.
+                </TextBlock>
+                <ScrollViewer HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto">
+                    <Image Source="Assets/spi_sample_bb.jpg" Stretch="None" Margin="2,10,2,0" />
+                </ScrollViewer>
+                <Button x:Name="StartStopButton" Content="Start" Margin="0,10,0,0" Click="{x:Bind StartStopScenario}"/>
+                <TextBlock x:Name="ScenarioControls" Visibility="Collapsed">
+                    Current Acceleration in X axis: <Run x:Name="X"/>
+                    <LineBreak/>
+                    Current Acceleration in Y axis: <Run x:Name="Y"/>
+                    <LineBreak/>
+                    Current Acceleration in Z axis: <Run x:Name="Z"/>
+                </TextBlock>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

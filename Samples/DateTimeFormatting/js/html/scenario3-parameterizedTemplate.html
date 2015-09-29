@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario3-parameterizedTemplate.js"></script>
+</head>
+<body>
+    <div>
+        <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+        <div id="scenarioDescription">
+            <p>
+                Formats the current date and time using
+                custom formats that are specified using a parameterized template.
+                This
+                method for formatting dates or times can be used when the requirements
+                for the date presentation do not match the "short" or "long" form. For
+                example, if the app requires only a month and a day or a
+                month and a year, this method allows the app to present only
+                those date elements in a format that respects the user's
+                preferences.
+            </p>
+            <p>
+                By default the dates and times are formatted
+                according to the conventions of the current application language.
+                (In the case of this sample, only a single default language is supported.)
+                For a localized application,
+                the current language is determined by the user's language preferences.
+            </p>
+        </div>
+        <p>
+            <button id="displayButton" class="win-button">Display</button>
+        </p>
+        <p id="output" />
+    </div>
+</body>
+</html>

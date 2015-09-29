@@ -1,0 +1,51 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario2-manage.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+        <div id="scenarioDescription">
+            Manage credentials
+        </div>
+        <p>
+            You can retrieve all saved credentials, or filter the query by resource, user name, or both.
+            A retrieved credential does not initially include the password.
+            You must call the retrievePassword method to get the password.
+            A retrieved credential can also be deleted from the PasswordVault.
+        </p>
+        <p>
+            <label for="InputResourceName">Resource: (Leave blank to match any resource.)</label>
+            <br />
+            <input type="text" size="30" id="InputResourceValue" placeholder="https://example.com" class="win-textbox">
+        </p>
+        <p>
+            <label for="InputUserName">User Name: (Leave blank to match any user name.)</label>
+            <br />
+            <input type="text" size="30" id="InputUserNameValue" placeholder="abby" class="win-textbox">
+        </p>
+        <p>
+            <button class="win-button" id="RetrieveCredButton">Retrieve credentials</button>
+        </p>
+        <p>
+            <label for="retrievedCredentials">Results:</label>
+            <br />
+            <select id="retrievedCredentials" multiple class="win-dropdown">
+            </select>
+        </p>
+        <p>
+            <button class="win-button" id="RevealPasswordsButton">Reveal selected passwords</button>
+            <button class="win-button" id="RemoveCredButton">Remove selected credentials</button>
+        </p>
+    </div>
+</body>
+
+</html>

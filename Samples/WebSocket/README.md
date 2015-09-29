@@ -1,6 +1,8 @@
 <!---
   category: NetworkingAndWebServices 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620623&clcid=0x409
 --->
+
 # WebSocket sample
 
 This sample shows you how to send and receive date using the WebSocket classes in the [**Windows.Networking.Sockets**](http://msdn.microsoft.com/library/windows/apps/br226960) namespace in your Universal Windows Platform (UWP) app. The sample covers basic features that include making a WebSocket connection, sending and receiving data, and closing the connection. The sample also shows recommended ways of handling both trusted (hard coded) URI inputs and unvalidated (user-entered) URI inputs.
@@ -57,16 +59,16 @@ This sample requires that network capabilities be set in the *Package.appxmanife
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Insider Preview
+**Server:** Windows Server 2016 Technical Preview
 
 **Phone:**  Windows 10
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the subdirectory for the desired language.
-3. Double-click the Visual Studio 2015 Solution (.sln) file. 
-4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 

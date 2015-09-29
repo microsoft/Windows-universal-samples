@@ -16,9 +16,7 @@ using Windows.Globalization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-using SDKTemplate;
-
-namespace ActivitySensorCS
+namespace SDKTemplate
 {
     public sealed partial class Scenario2_History : Page
     {

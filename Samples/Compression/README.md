@@ -1,5 +1,9 @@
-Compression sample
-==================
+<!---
+  category: Data
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620523&clcid=0x409
+--->
+
+# Compression sample
 
 This sample demonstrates how to read structured data from a file and write compressed data to a new file and how to read compressed data and write decompressed data to a new file.
 
@@ -18,8 +22,7 @@ Specifically, this sample shows the following:
 
 To obtain the Windows 10 developer tools preview, go to [Windows 10 developer tools](https://dev.windows.com/en-us/downloads/windows-10-developer-tools).
 
-Operating system requirements
------------------------------
+## Operating system requirements
 
 Client
 
@@ -33,19 +36,14 @@ Phone
 
 Windows 10 Mobile
 
-Build the sample
-----------------
+## Build the sample
 
-1.  Start Visual Studio 2015 RC and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory named for the sample and double-click the Visual Studio 2015 RC Solution (.sln) file.
-3.  Follow the steps for the version of the sample you want:
-    -   To build the sample:
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
-        1.  Select **Compression** in **Solution Explorer**.
-        2.  Press Ctrl+Shift+B, or use **Build** \> **Build Solution**, or use **Build** \> **Build Compression**.
-
-Run the sample
---------------
+## Run the sample
 
 The next steps depend on whether you just want to deploy the sample or you want to both deploy and run it.
 

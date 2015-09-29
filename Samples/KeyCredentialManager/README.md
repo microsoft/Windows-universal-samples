@@ -1,4 +1,11 @@
-﻿This sample demonstrates use of the Windows.Security.Authentication.Credentials.KeyCredentialManager API for utlizing Windows Passport as a user authentication method.
+<!---
+  category: IdentitySecurityAndEncryption
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620557&clcid=0x409
+--->
+
+# KeyCredentialManager sample
+
+This sample demonstrates use of the Windows.Security.Authentication.Credentials.KeyCredentialManager API for utlizing Windows Passport as a user authentication method.
 
 The currently existing system of using passwords as authentication is prevalent and as such this sample stands as an example of how Windows Passport can easily be upsold to and integrated into existing authentication applications.
 
@@ -22,9 +29,10 @@ Windows 10
 Build the sample
 ----------------
 
-1.  Start Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++ or C\#. Double-click the Visual Studio 2015 Solution (.sln) file.
-3.  Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 Run the sample
 --------------

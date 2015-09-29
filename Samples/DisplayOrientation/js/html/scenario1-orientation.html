@@ -1,0 +1,49 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario1-orientation.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Reports the native display orientation, current display orientation,
+                and sets auto-rotation preferences.
+            </div>
+        </div>
+        <p>
+            Native orientation: <span id="nativeOrientationSpan"></span><br/>
+            Current orientation: <span id="currentOrientationSpan"></span><br/>
+            Auto-rotation preferences: <span id="autoRotationPreferencesSpan"></span>
+        </p>
+        <p>
+            <label for="preferLandscape">
+                <input id="preferLandscape" type="checkbox" class="win-checkbox"/>Prefer landscape
+            </label>
+            <br/>
+            <label for="preferPortrait">
+                <input id="preferPortrait" type="checkbox" class="win-checkbox"/>Prefer portrait
+            </label>
+            <br/>
+            <label for="preferLandscapeFlipped">
+                <input id="preferLandscapeFlipped" type="checkbox" class="win-checkbox"/>Prefer landscape flipped
+            </label>
+            <br/>
+            <label for="preferPortraitFlipped">
+                <input id="preferPortraitFlipped" type="checkbox" class="win-checkbox"/>Prefer portrait flipped
+            </label>
+            <br/>
+            <button id="applyRotationLock" class="win-button">Apply preferences</button>
+        </p>
+    </div>
+</body>
+
+</html>

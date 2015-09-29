@@ -25,7 +25,7 @@ void ::SDKTemplate::HighlightRanges(TextBlock^ tb,  String^ TextContent, IVector
 {
     int currentPosition = 0;
     const wchar_t* StringData = TextContent->Data();
-    for each (const auto& range in ranges)
+    for (const auto& range : ranges)
     {
         // Add the next chunk of non-range text
         if ((int)range.StartPosition > currentPosition)

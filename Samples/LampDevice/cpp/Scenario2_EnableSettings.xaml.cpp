@@ -97,16 +97,6 @@ void Scenario2_EnableSettings::BrightnessBtn_Click(Platform::Object^ sender, Win
         ss.str(std::wstring());
         ss << "Lamp Enabled: " << lamp->IsEnabled;
         LogStatusToOutputBoxAsync(ref new String(ss.str().c_str()));
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-        }
     });
 }
 
@@ -162,16 +152,6 @@ void Scenario2_EnableSettings::ColorLampBtn_Click(Platform::Object^ sender, Wind
         ss.str(std::wstring());
         ss << "Lamp Enabled: " << lamp->IsEnabled;
         LogStatusToOutputBoxAsync(ref new String(ss.str().c_str()));
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-        }
     });
 }
 
@@ -187,17 +167,7 @@ task<void> Scenario2_EnableSettings::LogStatusToOutputBoxAsync(String^ message)
     {
         outputBox->Text += message + "\r\n";
         outputScrollViewer->ChangeView(0.0, outputBox->ActualHeight, 1.0f);
-    }))).then([this, message](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-        }
-    });
+    })));
 }
 
 /// <summary>
@@ -216,15 +186,5 @@ task<void> Scenario2_EnableSettings::LogStatusAsync(String^ message, NotifyType 
     }))).then([this, message]()
     {
         return LogStatusToOutputBoxAsync(message);
-    }).then([this, message](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-        }
     });
 }

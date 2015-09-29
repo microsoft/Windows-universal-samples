@@ -12,7 +12,6 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
 using System;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
@@ -20,7 +19,7 @@ using System.Threading.Tasks;
 using Windows.UI.Core;
 using Windows.Graphics.Display;
 
-namespace AccelerometerCS
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

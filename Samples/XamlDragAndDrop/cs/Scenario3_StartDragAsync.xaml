@@ -1,0 +1,93 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="DragAndDropSampleManaged.Scenario3_StartDragAsync"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DragAndDropSampleManaged"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="EmojiTextBlock" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI Emoji"/>
+            <Setter Property="FontSize" Value="64"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="0,0,0,10" Grid.ColumnSpan="2">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario illustrates the use of StartDragAsync and the controls it gives on the DragOperation to the Application"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="Start dragging the shape on the left and drop it on the right target before time runs out"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Difficulty"/>
+            <RadioButton x:Name="EasyRB"
+                         Content="Easy"
+                         IsChecked="True"/>
+            <RadioButton Content="Hard"
+                         />
+        </StackPanel>
+
+        <Button x:Name="StartButton"
+                Grid.Row="2"
+                VerticalAlignment="Center" HorizontalAlignment="Center"
+                Content="Start"
+                Margin="0,16,0,0"
+                Click="StartButton_Click"
+                />
+        <TextBlock x:Name="SourceTextBlock"
+                   Style="{StaticResource EmojiTextBlock}"
+                   Grid.Row="2"
+                   Visibility="Collapsed"
+                   PointerMoved="SourceTextBlock_PointerMoved"
+                   DragStarting="SourceTextBlock_DragStarting"
+                   />
+        <GridView x:Name="DropGridView"
+                  Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"
+                  SelectionMode="None"
+                  >
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Border x:Name="DropBorder"
+                            Width="96" Height="96"
+                            Background="Navy"
+                            AllowDrop="True"
+                            DragEnter="DropBorder_DragEnter"
+                            Drop="DropBorder_Drop"
+                        >
+                        <TextBlock Text="{Binding}" Style="{StaticResource EmojiTextBlock}"/>
+                    </Border>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+
+        <TextBlock x:Name="ResultTextBlock"
+                   Grid.Row="3" Grid.ColumnSpan="2"
+                   FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+
+</Page>

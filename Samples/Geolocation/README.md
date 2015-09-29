@@ -1,4 +1,10 @@
+<!---
+  category: MapsAndLocation 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=533278&clcid=0x409
+--->
+
 # Geolocation sample
+
 The Geolocation sample shows how to use the Windows.Devices.Geolocation namespace to get the geographic location of the user's device. An app can use the Geolocation namespace to request access to user location, get the location one time, continuously track the location by getting location update events, or get alerts when the device has entered or exited locations of interest.
 
 ### This sample also shows how to:
@@ -10,7 +16,7 @@ The Geolocation sample shows how to use the Windows.Devices.Geolocation namespac
 - **Obtain satellite data:** When available, use the [GeocoordinateSatelliteData](http://msdn.microsoft.com/library/windows/apps/jj635260) class to obtain additional information on the quality of the satellite based location data. 
 - **Display a toast:** Notify the user when a geofencing event has occurred in the background. 
 - **Refresh geofence binding:** Refresh the binding on resume and after removal of a geofence. Note that removal requires subscribing to removal events if a geofence is set as single use or a duration is set. 
-- **Request access to the user's location:** Request access to the user's location using the RequestAccessAsync method. Important: call the RequestAccessAsync before accessing the user’s location. At that time, your app must be in the foreground and RequestAccessAsync must be called from the UI thread. Until the user grants your app permission to their location, your app can't access location data.  
+- **Request access to the user's location:** Request access to the user's location using the RequestAccessAsync method. Important: call the RequestAccessAsync before accessing the user's location. At that time, your app must be in the foreground and RequestAccessAsync must be called from the UI thread. Until the user grants your app permission to their location, your app can't access location data.  
 - **Help the user change location settings:** Link to location privacy settings from your app if the user revokes access to location while your app is in the foreground. Call the LaunchUriAsync method with the URI "ms-settings://privacy/location".
 
 Geofences need to be created in the Foreground Geofencing scenario (Scenario 4) and then you can go to Background Geofencing scenario (Scenario 5) to register for background geofencing events.
@@ -24,9 +30,7 @@ This sample requires that location capability be set in the *Package.appxmanifes
 
 ## Related topics
 
-[Detect a user's location](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh465135.aspx)
-
-[Respond to location updates](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh465142.aspx)
+[Get current location](https://msdn.microsoft.com/library/windows/apps/mt219698)
 
 [Windows.Devices.Geolocation](http://msdn.microsoft.com/library/windows/apps/br225603)
 
@@ -44,9 +48,10 @@ This sample requires that location capability be set in the *Package.appxmanifes
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file. 
-3. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 

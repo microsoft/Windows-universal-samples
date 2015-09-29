@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+    <Identity
+      Name="Microsoft.SDKSamples.DisplayOrientation.CS"
+      Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+      Version="1.0.0.0" />
+
+
+    <mp:PhoneIdentity PhoneProductId="79528497-88e3-4be5-b92a-97a3a858d4c7" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+    <Properties>
+        <DisplayName>Display Orientation C# Sample</DisplayName>
+        <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+        <Logo>Assets\StoreLogo-sdk.png</Logo>
+    </Properties>
+
+    <Dependencies>
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+    </Dependencies>
+
+    <Resources>
+        <Resource Language="x-generate"/>
+    </Resources>
+
+    <Applications>
+        <Application Id="DisplayOrientation.App"
+          Executable="$targetnametoken$.exe"
+          EntryPoint="DisplayOrientation.App">
+            <uap:VisualElements
+              DisplayName="Display Orientation C# sample"
+              Square150x150Logo="Assets\squareTile-sdk.png"
+              Square44x44Logo="Assets\SmallTile-sdk.png"
+              Description="Display Orientation C# sample"
+              BackgroundColor="#00b2f0">
+                <uap:SplashScreen Image="Assets\Splash-sdk.png" />
+                <uap:DefaultTile>
+                    <uap:ShowNameOnTiles>
+                        <uap:ShowOn Tile="square150x150Logo" />
+                    </uap:ShowNameOnTiles>
+                </uap:DefaultTile>
+            </uap:VisualElements>
+        </Application>
+    </Applications>
+</Package>

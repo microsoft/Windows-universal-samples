@@ -1,7 +1,9 @@
 <!---
   category: NetworkingAndWebServices 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620627&clcid=0x409
 --->
-# Wi-Fi Direct Services sample
+
+# Wi-Fi Direct services sample
 
 This sample shows how to use the Wi-Fi Direct services API to publish and discover services over Wi-Fi Direct.
 
@@ -16,7 +18,7 @@ Specifically, this sample shows how to:
 
 **Note** This sample requires two or more devices with Wi-Fi chipsets and drivers that support Wi-Fi Direct services.
  
-**Note** This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on Windows 10. For more info about how to build apps that target Windows and Windows Phone with Visual Studio, see [Build apps that target Windows 10 by using Visual Studio](http://msdn.microsoft.com/library/windows/apps/dn609832).
+**Note**ï¿½This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on Windows 10. For more info about how to build apps that target Windows and Windows Phone with Visual Studio, see [Build apps that target Windows 10 by using Visual Studio](http://msdn.microsoft.com/library/windows/apps/dn609832).
 
 ## Related topics
 
@@ -32,16 +34,16 @@ Specifically, this sample shows how to:
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Insider Preview
+**Server:** Windows Server 2016 Technical Preview
 
 **Phone:**  Windows 10
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the subdirectory for the desired language.
-3. Double-click the Visual Studio 2015 Solution (.sln) file. 
-4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 

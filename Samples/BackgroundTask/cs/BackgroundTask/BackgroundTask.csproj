@@ -7,7 +7,7 @@
     <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BackgroundTask</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>BackgroundTask</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
@@ -99,7 +99,9 @@
       <Link>MainPage.xaml.cs</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\..\SharedContent\cs\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="SampleConfiguration.cs" />
     <Compile Include="Scenario1_SampleBackgroundTask.xaml.cs">
       <DependentUpon>Scenario1_SampleBackgroundTask.xaml</DependentUpon>
@@ -133,26 +135,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_SampleBackgroundTask.xaml">
+    <Page Include="..\..\shared\Scenario1_SampleBackgroundTask.xaml">
+      <Link>Scenario1_SampleBackgroundTask.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>
       </SubType>
     </Page>
-    <Page Include="Scenario2_SampleBackgroundTaskWithCondition.xaml">
+    <Page Include="..\..\shared\Scenario2_SampleBackgroundTaskWithCondition.xaml">
+      <Link>Scenario2_SampleBackgroundTaskWithCondition.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>
       </SubType>
     </Page>
-    <Page Include="Scenario5_ApplicationTriggerTask.xaml">
+    <Page Include="..\..\shared\Scenario5_ApplicationTriggerTask.xaml">
+      <Link>Scenario5_ApplicationTriggerTask.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario4_TimeTriggeredTask.xaml">
+    <Page Include="..\..\shared\Scenario4_TimeTriggeredTask.xaml">
+      <Link>Scenario4_TimeTriggeredTask.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>
       </SubType>
     </Page>
-    <Page Include="Scenario3_ServicingCompleteTask.xaml">
+    <Page Include="..\..\shared\Scenario3_ServicingCompleteTask.xaml">
+      <Link>Scenario3_ServicingCompleteTask.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>
       </SubType>

@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="SDKTemplate.SecondaryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Secondary Page" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+          The only way to navigate back to the main page is through the use of one of the system back affordances listed below.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock Text="1. Hardware back (if you are on a phone)" />
+                    <TextBlock Text="2. Global Navigation Bar back (if you are in tablet mode)" TextWrapping="Wrap" />
+                    <TextBlock Text="3. Windows key + backspace (if you have a keyboard attached)" TextWrapping="Wrap" />
+                    <TextBlock Text="4. Title bar back (if you have opted in to it and are in desktop mode)" TextWrapping="Wrap" />
+                    <TextBlock Text="5. Say 'Cortana Go Back' (if you are on a Hololens)" TextWrapping="Wrap" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+    </Grid>
+</Page>

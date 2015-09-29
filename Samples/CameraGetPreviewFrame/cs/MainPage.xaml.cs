@@ -239,10 +239,6 @@ namespace CameraGetPreviewFrame
                 {
                     Debug.WriteLine("The app was denied access to the camera");
                 }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Exception when initializing MediaCapture with {0}: {1}", cameraDevice.Id, ex.ToString());
-                }
 
                 // If initialization succeeded, start the preview
                 if (_isInitialized)
@@ -286,15 +282,8 @@ namespace CameraGetPreviewFrame
             PreviewControl.FlowDirection = _mirroringPreview ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
             // Start the preview
-            try
-            {
-                await _mediaCapture.StartPreviewAsync();
-                _isPreviewing = true;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Exception when starting the preview: {0}", ex.ToString());
-            }
+            await _mediaCapture.StartPreviewAsync();
+            _isPreviewing = true;
 
             // Initialize the preview to the current orientation
             if (_isPreviewing)
@@ -335,15 +324,8 @@ namespace CameraGetPreviewFrame
         /// <returns></returns>
         private async Task StopPreviewAsync()
         {
-            try
-            {
-                _isPreviewing = false;
-                await _mediaCapture.StopPreviewAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Exception when stopping the preview: {0}", ex.ToString());
-            }
+            _isPreviewing = false;
+            await _mediaCapture.StopPreviewAsync();
 
             // Use the dispatcher because this method is sometimes called from non-UI threads
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>

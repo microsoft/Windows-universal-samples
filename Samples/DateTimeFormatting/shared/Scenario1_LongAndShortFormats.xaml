@@ -1,0 +1,42 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_LongAndShortFormats"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer Margin="12,10,12,12">
+            <StackPanel>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Formats the current date and time using
+                    the Long and Short formats. These formats represent conventional
+                    presentation forms for date and time and are useful when presenting
+                    standard date and times. The available formats are shown in Settings
+                    under Time &amp; Language.
+                </TextBlock>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                    By default the dates and times are formatted according to the conventions
+                    of the current application language.
+                    (In the case of this sample, only a single default language is supported.)
+                    For a localized application, the current language is determined by
+                    the user's language preferences.
+                </TextBlock>
+                <Button Content="Display" Click="{x:Bind Display}" Margin="0,10,0,0"/>
+                <TextBlock x:Name="OutputTextBlock" TextWrapping="Wrap" Style="{StaticResource BaseMessageStyle}" Margin="0,10,0,0"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

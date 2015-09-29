@@ -1,5 +1,9 @@
-Using a Blob to save and load content sample
-============================================
+<!---
+  category: Data
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620573&clcid=0x409
+--->
+
+# Blobs sample
 
 This sample shows how to use a [**Blob**](http://msdn.microsoft.com/library/windows/apps/hh453178) and the [**Window.Storage.Pickers.FileOpenPicker**](http://msdn.microsoft.com/library/windows/apps/br207847) to load and display images and video. It also shows how to create single- and multi-use **Blob** objects, how to save a [**canvas**](http://msdn.microsoft.com/library/windows/apps/hh465734) to a **Blob** and then load it as an image, how to download content through XHR and save it locally, how to use [MSBlobBuilder](http://msdn.microsoft.com/library/windows/apps/hh779016) to create a **Blob**, post a **Blob** to the web, and how to retrieve a thumbnail and use a **Blob** to display it in an image tag.
 
@@ -25,9 +29,10 @@ Windows 10
 Build the sample
 ----------------
 
-1.  Start Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory in which you unzipped the sample. Go to the directory named for the sample, and double-click the Visual Studio 2015 Solution (.sln) file.
-3.  Press F7 or use **Build** \> **Build Solution** to build the sample.
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 Run the sample
 --------------

@@ -1,0 +1,85 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="DragAndDropSampleManaged.Scenario2_DragUICustomization"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DragAndDropSampleManaged"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="DragDropGroup">
+                <VisualState x:Name="Outside"/>
+                <VisualState x:Name="Inside">
+                    <VisualState.Setters>
+                        <Setter Target="TargetTextBox.(Control.Background).(SolidColorBrush.Color)" Value="LightGreen"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="0,0,0,10" Grid.ColumnSpan="2">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario illustrates how to customize the DragUI on the source and on the target side"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Margin="16">
+            <Grid x:Name="SourceGrid"
+                  CanDrag="True"
+                  DragStarting="SourceGrid_DragStarting">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Background="Gray">
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                               RenderTransformOrigin=".5,.5"
+                               Text="Drag me">
+                        <TextBlock.RenderTransform>
+                            <RotateTransform Angle="-90"/>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </Border>
+                <TextBox x:Name="SourceTextBox"
+                         Text="Lorem Ipsum"
+                         Grid.Column="1"
+                          MinHeight="120"/>
+            </Grid>
+            <RadioButton x:Name="SourceDefaultRB" GroupName="SourceGroup" Content="Default Visual" IsChecked="True"/>
+            <RadioButton x:Name="DataPackageRB" GroupName="SourceGroup" Content="Use DataPackage"/>
+            <RadioButton x:Name="CustomContentRB" GroupName="SourceGroup" Content="Custom Content"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="16">
+            <TextBox x:Name="TargetTextBox"
+                     AllowDrop="True"
+                     Drop="TargetTextBox_Drop"
+                     DragEnter="TargetTextBox_DragEnter"
+                     DragLeave="TargetTextBox_DragLeave"
+                     AcceptsReturn="True"
+                     MinHeight="120"
+                     />
+            <RadioButton x:Name="TargetDefaultRB" GroupName="TargetGroup" Content="Default" IsChecked="True"/>
+            <RadioButton x:Name="HideRB" GroupName="TargetGroup" Content="Hide"/>
+            <RadioButton x:Name="CustomRB" GroupName="TargetGroup" Content="Custom"/>
+        </StackPanel>
+    </Grid>
+</Page>

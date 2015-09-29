@@ -94,7 +94,7 @@ namespace PivotCS
             ShowItem(args.SelectedItem as SampleDataModel);
         }
 
-        private void ShowItem(SampleDataModel model)
+        async private void ShowItem(SampleDataModel model)
         {
             var MyDialog = new ContentDialog();
 
@@ -115,8 +115,7 @@ namespace PivotCS
             }
 
             MyDialog.PrimaryButtonText = "OK";
-
-            Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => MyDialog.ShowAsync());
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () => await MyDialog.ShowAsync());
 
         }
 

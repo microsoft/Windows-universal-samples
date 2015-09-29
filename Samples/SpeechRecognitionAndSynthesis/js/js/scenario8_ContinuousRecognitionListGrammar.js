@@ -15,8 +15,18 @@
         ready: function (element, options) {
             AudioCapturePermissions.requestMicrophonePermission().then(function (available) {
                 if (available) {
-                    initializeRecognizer();
+                    var defaultLang = Windows.Media.SpeechRecognition.SpeechRecognizer.systemSpeechLanguage;
+
+                    var rcns = Windows.ApplicationModel.Resources.Core;
+                    context = new rcns.ResourceContext();
+                    context.languages = new Array(defaultLang.languageTag);
+                    resourceMap = rcns.ResourceManager.current.mainResourceMap.getSubtree('LocalizationSpeechResources');
+
+                    initializeRecognizer(defaultLang);
+                    initializeLanguageDropdown();
+
                     btnContinuousReco.addEventListener("click", continuousRecoFn, false);
+                    languageSelect.addEventListener("change", setLanguageFunction, false);
                 }
                 else {
                     btnContinuousReco.disabled = true;
@@ -42,11 +52,18 @@
 
     var recognizer;
 
-    function initializeRecognizer() {
+    // localization resources
+    var context;
+    var resourceMap;
+
+    function initializeRecognizer(language) {
         /// <summary>
         /// Initialize speech recognizer and compile constraints.
         /// </summary>
-        recognizer = Windows.Media.SpeechRecognition.SpeechRecognizer();
+        if (typeof recognizer !== 'undefined') {
+            recognizer = null;
+        }
+        recognizer = Windows.Media.SpeechRecognition.SpeechRecognizer(language);
 
         // Provide feedback to the user about the state of the recognizer.
         recognizer.addEventListener('statechanged', onSpeechRecognizerStateChanged, false);
@@ -56,12 +73,44 @@
         recognizer.continuousRecognitionSession.addEventListener('completed', onSpeechRecognizerSessionCompleted, false);
 
         // Build a command-list grammar. Multiple commands can be given the same tag, allowing for variations on the same command to be handled easily.
-        recognizer.constraints.append(Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint(["Go Home"], "Home"));
-        recognizer.constraints.append(Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint(["Go to Contoso Studio"], "GoToContosoStudio"));
-        recognizer.constraints.append(Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint(["Show Message", "Open Message"], "Message"));
-        recognizer.constraints.append(Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint(["Send Email", "Create Email"], "Email"));
-        recognizer.constraints.append(Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint(["Call Nita Farley", "Call Nita"], "CallNita"));
-        recognizer.constraints.append(Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint(["Call Wayne Sigmon ", "Call Wayne"], "CallWayne"));
+        recognizer.constraints.append(
+            Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint([
+                resourceMap.getValue('ListGrammarGoHome', context).valueAsString
+            ], "Home"));
+        recognizer.constraints.append(
+            Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint([
+                resourceMap.getValue('ListGrammarGoToContosoStudio', context).valueAsString
+            ], "GoToContosoStudio"));
+        recognizer.constraints.append(
+            Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint([
+                resourceMap.getValue('ListGrammarShowMessage', context).valueAsString,
+                resourceMap.getValue('ListGrammarOpenMessage', context).valueAsString
+            ], "Message"));
+        recognizer.constraints.append(
+            Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint([
+                resourceMap.getValue('ListGrammarSendEmail', context).valueAsString,
+                resourceMap.getValue('ListGrammarCreateEmail', context).valueAsString
+            ], "Email"));
+        recognizer.constraints.append(
+            Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint([
+                resourceMap.getValue('ListGrammarCallNitaFarley', context).valueAsString,
+                resourceMap.getValue('ListGrammarCallNita', context).valueAsString
+            ], "CallNita"));
+        recognizer.constraints.append(
+            Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint([
+                resourceMap.getValue('ListGrammarCallWayneSigmon', context).valueAsString,
+                resourceMap.getValue('ListGrammarCallWayne', context).valueAsString
+            ], "CallWayne"));
+
+
+        // RecognizeWithUIAsync allows developers to customize the prompts.
+        var helpString = "Try saying '" +
+            resourceMap.getValue('ListGrammarGoHome', context).valueAsString + "', '" +
+            resourceMap.getValue('ListGrammarGoToContosoStudio', context).valueAsString + "' or '" +
+            resourceMap.getValue('ListGrammarShowMessage', context).valueAsString + "'";
+        
+        helpText.innerHTML = resourceMap.getValue('ListGrammarHelpText', context).valueAsString + "<br/>" + helpString;
+
 
         recognizer.compileConstraintsAsync().done(
             function (result) {
@@ -78,6 +127,39 @@
         );
     }
 
+    function initializeLanguageDropdown() {
+        /// <summary>
+        /// Checks the set of supported languages installed in the system for speech, and adds them
+        /// to a dropdown of languages that can be selected from.
+        /// </summary>
+        var supportedLanguages = Windows.Media.SpeechRecognition.SpeechRecognizer.supportedTopicLanguages;
+        for (var langIndex = 0; langIndex < supportedLanguages.size; langIndex++) {
+            var lang = supportedLanguages[langIndex];
+            var option = document.createElement("option");
+            option.text = lang.displayName;
+            option.tag = lang;
+            languageSelect.add(option, null);
+            if (lang.languageTag == recognizer.currentLanguage.languageTag) {
+                languageSelect.selectedIndex = langIndex;
+            }
+        }
+    }
+
+    function setLanguageFunction() {
+        /// <summary>
+        /// When a language is chosen from the dropdown, triggers reinitialization of 
+        /// the speech engine, and re-sets the resource map context.
+        /// </summary>
+        if (languageSelect.selectedIndex !== -1) {
+            var option = languageSelect.options[languageSelect.selectedIndex];
+            var language = option.tag;
+
+            context.languages = new Array(language.languageTag);
+            initializeRecognizer(language);
+
+        }
+    }
+
     function continuousRecoFn() {
         /// <summary>
         /// Begin recognition or finish the recognition session.
@@ -85,12 +167,14 @@
         if (recognizer.state != Windows.Media.SpeechRecognition.SpeechRecognizerState.idle) { // Check if the recognizer is listening or going into a state to listen.
             btnContinuousReco.disabled = true;
             btnContinuousReco.innerText = "Stopping recognition...";
+            languageSelect.disabled = false;
 
             recognizer.continuousRecognitionSession.stopAsync();
             return;
         }
 
         btnContinuousReco.innerText = "Stop recognition";
+        languageSelect.disabled = true;
         errorMessage("");
 
         // Start the continuous recognition session. Results are handled in the event handlers below.
@@ -119,10 +203,10 @@
         if (eventArgs.result.confidence == Windows.Media.SpeechRecognition.SpeechRecognitionConfidence.high ||
             eventArgs.result.confidence == Windows.Media.SpeechRecognition.SpeechRecognitionConfidence.medium) {
 
-            resultTextArea.innerText = "Heard: " + eventArgs.result.text + ", (Tag: '" + tag + "', Confidence: " + eventArgs.result.confidence + ")";
+            resultTextArea.innerText = "Heard: " + eventArgs.result.text + ", (Tag: '" + tag + "', Confidence: " + convertConfidenceToString(eventArgs.result.confidence) + ")";
         }
         else {
-            resultTextArea.innerText = "Sorry, I didn't catch that. (Heard: " + eventArgs.result.text + ", Tag: '" + tag + "', Confidence: " + eventArgs.result.confidence + ")";
+            resultTextArea.innerText = "Sorry, I didn't catch that. (Heard: " + eventArgs.result.text + ", Tag: '" + tag + "', Confidence: " + convertConfidenceToString(eventArgs.result.confidence) + ")";
         }
     }
 
@@ -136,6 +220,7 @@
         }
         btnContinuousReco.innerText = "\uE1d6 Continuous Recognition";
         btnContinuousReco.disabled = false;
+        languageSelect.disabled = false;
     }
 
     function displayMessage(text) {
@@ -150,7 +235,9 @@
         /// <summary>
         /// Sets the specified text area with the error message details.
         /// </summary>
-        errorTextArea.innerText = text;
+        if (typeof errorTextArea !== "undefined") {
+            errorTextArea.innerText = text;
+        }
     }
 
     function onSpeechRecognizerStateChanged(eventArgs) {
@@ -240,6 +327,29 @@
             default: {
                 break;
             }
+        }
+    }
+
+    function convertConfidenceToString(confidence) {
+        /// <summary> Converts numeric confidence value into text representation of
+        /// Windows.Media.SpeechRecognition.SpeechRecognitionConfidence for visualization.
+        /// <param name="confidence">The numeric confidence returned by SpeechRecognitionResult.Confidence</param>
+        /// </summary>
+        switch (confidence) {
+            case Windows.Media.SpeechRecognition.SpeechRecognitionConfidence.high: {
+                return "high";
+            }
+            case Windows.Media.SpeechRecognition.SpeechRecognitionConfidence.medium: {
+                return "medium";
+            }
+            case Windows.Media.SpeechRecognition.SpeechRecognitionConfidence.low: {
+                return "low";
+            }
+            case Windows.Media.SpeechRecognition.SpeechRecognitionConfidence.rejected: {
+                return "rejected";
+            }
+            default:
+                return "unknown";
         }
     }
 })();

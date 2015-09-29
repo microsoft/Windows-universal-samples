@@ -18,9 +18,9 @@
         <RowDefinition Height="180"/>
     </Grid.RowDefinitions>
 
-    <Viewbox Grid.Row="0" Grid.RowSpan="2" Stretch="Uniform">
-        <Image x:Name="extendedSplashImage" Source="Assets/splash-Phone-sdk.png"/>
-    </Viewbox>
+    <Canvas Grid.Row="0" Grid.RowSpan="2">
+        <Image x:Name="extendedSplashImage" Source="Assets/splash-sdk.png"/>
+    </Canvas>
     <StackPanel Grid.Row="1" HorizontalAlignment="Center">
         <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" TextAlignment="Center" Padding="5" HorizontalAlignment="Center">
        The splash screen was dismissed and the image above was positioned using the splash screen API.

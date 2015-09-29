@@ -1,5 +1,6 @@
-﻿<!---
+<!---
   category: AppSettings
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620486&clcid=0x409
 --->
 
 # Application data sample
@@ -23,28 +24,13 @@ The sample covers these key tasks:
 - Reading and writing files to an app data store 
 - Responding to roaming events 
 
-
-## Tasks 
-
-[**Quickstart: Local application data (JavaScript)**](http://msdn.microsoft.com/library/windows/apps/hh465118)
-
-[**Quickstart: Local application data (C#/VB/C++)**](http://msdn.microsoft.com/library/windows/apps/hh700361)
-
-[**Quickstart: Roaming application data (JavaScript)**](http://msdn.microsoft.com/library/windows/apps/hh465123)
-
-[**Quickstart: Roaming application data (C#/VB/C++)**](http://msdn.microsoft.com/library/windows/apps/hh700362)
-
-[**Quickstart: Temporary application data (JavaScript)**](http://msdn.microsoft.com/library/windows/apps/hh465130)
-
-[**Quickstart: Temporary application data (C#/VB/C++)**](http://msdn.microsoft.com/library/windows/apps/hh700363)
-
 ## Guidelines 
 
 [**Guidelines for roaming application data**](http://msdn.microsoft.com/library/windows/apps/hh465094)
 
 ## Concepts 
 
-[**Application data**](http://msdn.microsoft.com/library/windows/apps/hh464917)
+[Store and retrieve settings and other app data](https://msdn.microsoft.com/library/windows/apps/mt299098)
 
 ## Reference 
 
@@ -69,9 +55,10 @@ The sample covers these key tasks:
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++ or C\#. Double-click the Visual Studio 2015 Solution (.sln) file.
-3.  Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 

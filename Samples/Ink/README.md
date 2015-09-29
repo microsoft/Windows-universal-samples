@@ -1,8 +1,9 @@
 ﻿<!---
   category: CustomUserInteractions
----!>
-Ink sample
-=================
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620554&clcid=0x409
+--->
+
+# Inking sample
 
 This sample demonstrates how to use ink functionality (such as, capturing, manipulating, and interpreting ink strokes) in Universal Windows apps using JavaScript.
 
@@ -36,12 +37,11 @@ Specifically, this sample covers using the [**Windows.UI.Input.Inking**](http://
     -   Use **Save** and **Load** to read and write Ink Serialized Format (ISF) files to the Libraries or Pictures folder or both.
 -   All buttons and menu choices can be activated with mouse, pen, or touch.
 
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
-Related topics
---------------
+## Related topics
 
 [Getting started with apps](https://dev.windows.com/getstarted)
 
@@ -59,8 +59,7 @@ Related topics
 
 [**Windows.UI.Input.Inking**](http://msdn.microsoft.com/library/windows/apps/br208524)
 
-Operating system requirements
------------------------------
+## Operating system requirements
 
 **Client:** Windows 10
 
@@ -68,14 +67,13 @@ Operating system requirements
 
 **Phone:** Windows 10
 
-Build the sample
-----------------
+## Build the sample
 
-1.  Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory containing the sample. Double-click the Microsoft Visual Studio Solution (.sln) file.
-3.  Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
-Run the sample
---------------
+## Run the sample
 
 To debug the app and then run it, press F5 or use **Debug** \> **Start Debugging**. To run the app without debugging, press Ctrl+F5 or use **Debug** \> **Start Without Debugging**.

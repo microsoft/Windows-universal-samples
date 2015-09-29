@@ -43,20 +43,15 @@
                             </StackPanel>
                         </Button>
                         <Button x:Name="btnEmailGrammar" Click="EmailButton_Click" IsEnabled="False" Margin="10,10,0,10">
-                            <StackPanel Orientation="Horizontal">
-                                <SymbolIcon Symbol="Microphone"/>
-                                <TextBlock x:Name="emailButtonText" Text="Remove 'email' grammar"/>
-                            </StackPanel>
+                            <TextBlock x:Name="emailButtonText" Text="Remove 'email' grammar"/>
                         </Button>
                         <Button x:Name="btnPhoneGrammar" Click="PhoneButton_Click" IsEnabled="False" Margin="10,10,0,10">
-                            <StackPanel Orientation="Horizontal">
-                                <SymbolIcon Symbol="Microphone"/>
-                                <TextBlock x:Name="phoneButtonText" Text="Add 'phone' grammar"/>
-                            </StackPanel>
+                            <TextBlock x:Name="phoneButtonText" Text="Add 'phone' grammar"/>
                         </Button>
                     </StackPanel>
                     <StackPanel Name="infoBoxes" Visibility="Collapsed">
                         <TextBlock Name="grammarTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" Text="Listening for:"/>
+                        <TextBlock TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" Text="Go Home"/>
                         <TextBlock Name="emailInfoTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" Text="Send email"/>
                         <TextBlock Name="phoneInfoTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" Visibility="Collapsed" Text="Call phone"/>
                     </StackPanel>

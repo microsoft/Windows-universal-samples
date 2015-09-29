@@ -7,14 +7,14 @@
   IgnorableNamespaces="uap mp">
 
     <Identity
-      Name="Microsoft.SDKSamples.AltimeterCPP.CPP"
+      Name="Microsoft.SDKSamples.Altimeter.CPP"
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
     <mp:PhoneIdentity PhoneProductId="4560e9df-dd96-465d-be85-b3b3b6f4b354" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>AltimeterCPP</DisplayName>
+        <DisplayName>Altimeter C++ Sample</DisplayName>
         <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
         <Logo>Assets\StoreLogo-sdk.png</Logo>
     </Properties>
@@ -30,12 +30,12 @@
     <Applications>
         <Application Id="App"
           Executable="$targetnametoken$.exe"
-          EntryPoint="AltimeterCPP.App">
+          EntryPoint="Altimeter.App">
             <uap:VisualElements
-              DisplayName="AltimeterCPP"
+              DisplayName="Altimeter C++ Sample"
               Square150x150Logo="Assets\squareTile-sdk.png"
               Square44x44Logo="Assets\smallTile-sdk.png"
-              Description="AltimeterCPP"
+              Description="Altimeter C++ Sample"
               BackgroundColor="#00B2F0">
                 <uap:SplashScreen Image="Assets\splash-sdk.png" />
                 <uap:DefaultTile>

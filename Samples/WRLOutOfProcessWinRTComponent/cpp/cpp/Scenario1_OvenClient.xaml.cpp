@@ -9,11 +9,10 @@
 #include "MainPage.xaml.h"
 #include "..\Server\Microsoft.SDKSamples.Kitchen.h"
 
-using namespace SDKTemplate::WRLOutOfProcessWinRTComponent;
-
 using namespace Microsoft::SDKSamples::Kitchen;
+using namespace SDKTemplate::WRLOutOfProcessWinRTComponent;
 using namespace Windows::Foundation;
-
+using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 
@@ -30,84 +29,58 @@ void OvenClient::Start_Click(Platform::Object^ sender, Windows::UI::Xaml::Routed
     dimensions.Depth = 2;
 
     // Component Creation
-    Oven^ myOven = ref new Oven(dimensions);
+    if (!_myOven)
+    {
+        _myOven = ref new Oven(dimensions);
+    }
 
     // Getters and setters are accessed using property syntax
-    OvenClientOutput->Text += "Oven volume is: " + (myOven->Volume).ToString() + "\n";
+    OvenClientOutput->Text += "Oven volume is: " + _myOven->Volume.ToString() + "\n";
 
     // Registering event listeners
-    myOven->BreadBaked += ref new TypedEventHandler<Oven^, Bread^>(this, &OvenClient::BreadCompletedHandler1);
-    myOven->BreadBaked += ref new TypedEventHandler<Oven^, Bread^>(this, &OvenClient::BreadCompletedHandler2);
+    _myOven->BreadBaked += ref new TypedEventHandler<Oven^, BreadBakedEventArgs^>(this, &OvenClient::BreadCompletedHandler1);
+    _myOven->BreadBaked += ref new TypedEventHandler<Oven^, BreadBakedEventArgs^>(this, &OvenClient::BreadCompletedHandler2);
 
     // C++ projections expose the tokens used to register and remove event handlers
-    auto eventRegistrationToken = (myOven->BreadBaked += ref new TypedEventHandler<Oven^, Bread^>(this, &OvenClient::BreadCompletedHandler3));
-    myOven->BreadBaked -= eventRegistrationToken;
+    auto eventRegistrationToken = (_myOven->BreadBaked += ref new TypedEventHandler<Oven^, BreadBakedEventArgs^>(this, &OvenClient::BreadCompletedHandler3));
+    _myOven->BreadBaked -= eventRegistrationToken;
 
     // Bake a loaf of bread. This will trigger the BreadBaked event.
-    myOven->BakeBread("Sourdough");
+    _myOven->BakeBread("Sourdough");
 
     // Trigger the event again with a different preheat time
-    myOven->ConfigurePreheatTemperature(OvenTemperature::High);
-    myOven->BakeBread("Wheat");
+    _myOven->ConfigurePreheatTemperature(OvenTemperature::High);
+    _myOven->BakeBread("Wheat");
 }
 
-void OvenClient::BreadCompletedHandler1(Oven^ oven, Bread^ bread)
+void OvenClient::BreadCompletedHandler1(Oven^ oven, BreadBakedEventArgs^ args)
 {
-    auto updateOutputText = [this, oven, bread]() -> void
+    // Event comes in on a background thread, need to use dispatcher to get to the UI thread.
+    OvenClientOutput->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, 
+        ref new DispatchedHandler([this, oven, args]() -> void
     {
         OvenClientOutput->Text += "Event Handler 1: Invoked\n";
         OvenClientOutput->Text += "Event Handler 1: Oven volume is: " + oven->Volume.ToString() + "\n";
-        OvenClientOutput->Text += "Event Handler 1: Bread flavor is: " + bread->Flavor + "\n";
-    };
-
-    if (OvenClientOutput->Dispatcher->HasThreadAccess)
-    {
-        // If the current thread is the UI thread then execute the lambda.
-        updateOutputText();
-    }
-    else
-    {
-        // If the current thread is not the UI thread use the dispatcher to execute the lambda on the UI thread.
-        OvenClientOutput->Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler(updateOutputText));
-    }
+        OvenClientOutput->Text += "Event Handler 1: Bread flavor is: " + args->Bread->Flavor + "\n";
+    }));
 }
 
-void OvenClient::BreadCompletedHandler2(Oven^ oven, Bread^ bread)
+void OvenClient::BreadCompletedHandler2(Oven^ oven, BreadBakedEventArgs^ args)
 {
-    auto updateOutputText = [this, oven, bread]() -> void
+    OvenClientOutput->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, 
+        ref new DispatchedHandler([this, oven, args]() -> void
     {
         OvenClientOutput->Text += "Event Handler 2: Invoked\n";
-    };
-
-    if (OvenClientOutput->Dispatcher->HasThreadAccess)
-    {
-        // If we are running on the UI thread then just execute the lambda.
-        updateOutputText();
-    }
-    else
-    {
-        // If the current thread is not the UI thread use the dispatcher to execute the lambda on the UI thread.
-        OvenClientOutput->Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler(updateOutputText));
-    }
+    }));
 }
 
-void OvenClient::BreadCompletedHandler3(Oven^ oven, Bread^ bread)
+void OvenClient::BreadCompletedHandler3(Oven^ oven, BreadBakedEventArgs^ args)
 {
     // Event handler 3 was removed and will not be invoked
-    auto updateOutputText = [this, oven, bread]() -> void
+    OvenClientOutput->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, 
+        ref new DispatchedHandler([this, oven, args]() -> void
     {
         OvenClientOutput->Text += "Event Handler 3: Invoked\n";
-    };
-
-    if (OvenClientOutput->Dispatcher->HasThreadAccess)
-    {
-        // If running on the UI thread then just execute the lambda.
-        updateOutputText();
-    }
-    else
-    {
-        // If the current thread is not the UI thread use the dispatcher to execute the lambda on the UI thread.
-        OvenClientOutput->Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler(updateOutputText));
-    }
+    }));
 }
 

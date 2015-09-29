@@ -108,6 +108,41 @@
       <Link>Microsoft.WinJS.4.0\js\ui.js</Link>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\de-DE\Resources.resjson">
+      <Link>Strings\de-DE\Resources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\en-GB\Resources.resjson">
+      <Link>Strings\en-GB\Resources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\en-US\Resources.resjson">
+      <Link>Strings\en-US\Resources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\es-ES\Resources.resjson">
+      <Link>Strings\es-ES\Resources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\fr-FR\Resources.resjson">
+      <Link>Strings\fr-FR\Resources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\it-IT\Resources.resjson">
+      <Link>Strings\it-IT\Resources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\zh-CN\Resources.resjson">
+      <Link>Strings\zh-CN\Resources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <!-- To modify your build process, add your task inside one of the targets below then uncomment
        that target and the DisableFastUpToDateCheck PropertyGroup. 

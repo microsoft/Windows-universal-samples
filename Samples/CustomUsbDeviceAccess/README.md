@@ -1,9 +1,9 @@
 <!---
   category: DevicesSensorsAndPower
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620530&clcid=0x409
 --->
 
-Custom USB device access sample
-===============================
+# Custom USB device sample
 
 This sample shows how to communicate with a USB device by using the [**Windows.Devices.Usb**](http://msdn.microsoft.com/library/windows/apps/dn278466) namespace. The sample can communicate with these devices:
 
@@ -22,8 +22,7 @@ The sample demonstrates these key scenarios:
 
 For step-by-step instructions about implementing USB features in a Windows Store app, see [Talking to USB devices, start to finish](http://msdn.microsoft.com/library/windows/apps/dn312121) and [Writing a Windows store app for a USB device](http://msdn.microsoft.com/library/windows/apps/dn303355).
 
-Code Structure
---------------
+## Code Structure
 
 * **App**
 
@@ -87,8 +86,7 @@ Code Structure
 
   For more information, see [this topic](http://go.microsoft.com/fwlink/p/?linkid=306314) about sync-ing with a device.
 
-**App manifest package**
-------------------------
+## App manifest package
 
 The sample adds the [**DeviceCapability**](http://msdn.microsoft.com/library/windows/apps/br211430) element in the Package.appxmanifest file. Device information includes the device's vendor/product Ids and device class information. For OSRFX2 and SuperMUTT devices, the device class is specified by indicating the device class code and a string for the code.
 
@@ -111,8 +109,7 @@ The sample adds the [**DeviceCapability**](http://msdn.microsoft.com/library/win
   </Capabilities>
 ```
 
-Related technologies
---------------------
+## Related technologies
 
 * [**Windows.Devices.Usb**](http://msdn.microsoft.com/library/windows/apps/dn278466)
 
@@ -138,15 +135,13 @@ Related technologies
 
   Writes data to an output stream. Used for writing data to a USB pipe.
 
-Operating system requirements
------------------------------
+## Operating system requirements
 
-* **Client:** Windows 10
+**Client:** Windows 10
 
-* **Server:** Windows Server 2016 Technical Preview
+**Server:** Windows Server 2016 Technical Preview
 
-Driver requirements
--------------------
+## Driver requirements
 
 The sample app communicates with the device through the Microsoft-provided kernel-mode driver, Winusb.sys. You must install it as the device driver.
 
@@ -164,8 +159,7 @@ When you connect your device, you might notice that Windows loads Winusb.sys aut
 5.  From the list of device classes, select **Universal Serial Bus devices**.
 6.  The wizard displays **WinUsb Device**. Select it to load the driver.
 
-If you are using the OSRFX2 device...
--------------------------------------
+## If you are using the OSRFX2 device...
 
 The preceding procedure does not add a device interface GUID for the app to access the device. You must add the GUID manually by following this procedure.
 
@@ -180,8 +174,7 @@ The preceding procedure does not add a device interface GUID for the app to acce
 
     **Note**  If you change the physical port then you must repeat steps 1 through 4.
 
-If you are using the SuperMUTT device...
-----------------------------------------
+## If you are using the SuperMUTT device...
 
 Windows automatically loads Winusb.sys as the device driver. Otherwise, manually install the driver by using the preceding instructions.
 
@@ -196,9 +189,7 @@ Windows automatically loads Winusb.sys as the device driver. Otherwise, manually
 
     The SuperMUTT device when configured in WinRTUsbPersonality mode, exposes configuration, interfaces, and endpoints, that work with the sample.
 
-
-Customizing the sample for your device
---------------------------------------
+## Customizing the sample for your device
 
 You can extend this sample for your device by performing these tasks.
 
@@ -207,12 +198,13 @@ You can extend this sample for your device by performing these tasks.
 
     If you specify the device class code, make sure that it is supported. For a list of supported device classes see [How to add USB device capabilities to the app manifest](https://msdn.microsoft.com/en-us/library/windows/apps/dn303351).
 
-Build the sample
-----------------
+## Build the sample
 
-To build this sample, open the solution (.sln) file from Visual Studio. Press Ctrl+Shift+B, or select Build \> Build Solution.
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
-Run the sample
---------------
+## Run the sample
 
 To run this sample after building it, press F5 (run with debugging enabled) or Ctrl+F5 (run without debugging enabled) from Visual Studio. (Or select the corresponding options from the Debug menu.)

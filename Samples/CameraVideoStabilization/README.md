@@ -1,9 +1,9 @@
-﻿<!---
+<!---
   category: AudioVideoAndCamera 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620519&clcid=0x409
 --->
 
-CameraVideoStabilization Sample
--------------------------------
+# Video stabilization sample
 
 This sample applies an end-to-end approach to demonstrate how to write a video recording camera application using the Windows.Media.Capture API in conjunction with orientation sensors to cover the functions that most camera apps will require. In addition, it will show a simple way to use the Video Stabilization effect included in Windows. This sample is based on the CameraStarterKit.
 
@@ -26,9 +26,9 @@ This sample also implements a custom UI to better simulate the experience that a
 
 [CameraStarterKit](/Samples/CameraStarterKit)
 
-[How to rotate captured video](https://msdn.microsoft.com/en-us/library/windows/apps/hh868174.aspx)
+**Conceptual**
 
-[How to preview video from a webcam](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868171.aspx)
+[Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
 
 [Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
 
@@ -66,9 +66,10 @@ This sample also implements a custom UI to better simulate the experience that a
 
 ## Build the sample
 
-1.  Start Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C\#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file.
-3.  Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 

@@ -1,23 +1,29 @@
-OCR Sample
---------------------
+<!---
+  category: ControlsLayoutAndText
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620579&clcid=0x409
+--->
+
+# OCR sample
 
 This sample demonstrates how to use Windows.Media.Ocr API. Optical character recognition (OCR) API allows for application developer to extract text in the specific language from an image.
 
 This sample covers:
 
 Scenario 1: Load image from a file and extract text in user specified language.
-    1) Determine whether any language is OCR supported on device.
-    2) Get list of all available OCR languages on device.
-    3) Create OCR recognizer for specific language.
-    4) Create OCR recognizer for the first OCR supported language from GlobalizationPreferences.Languages list.
-    3) Load image from a file and extract text.
-    4) Overlay word bounding boxes over displayed image.
-    5) Differentiate vertical and horizontal text lines.
+
+1. Determine whether any language is OCR supported on device.
+2. Get list of all available OCR languages on device.
+3. Create OCR recognizer for specific language.
+4. Create OCR recognizer for the first OCR supported language from GlobalizationPreferences.Languages list.
+5. Load image from a file and extract text.
+6. Overlay word bounding boxes over displayed image.
+7. Differentiate vertical and horizontal text lines.
 
 Scenario 2: Capture image from camera and extract text.
-    1) Check if specific language is available on device.
-    2) Capture image from camera and extract text.
-    3) Overlay word bounding boxes and recognized text over displayed image.
+
+1. Check if specific language is available on device.
+2. Capture image from camera and extract text.
+3. Overlay word bounding boxes and recognized text over displayed image.
 
 ## Related topics
 
@@ -47,9 +53,10 @@ Scenario 2: Capture image from camera and extract text.
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file. 
-3. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 

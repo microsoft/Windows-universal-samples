@@ -43,21 +43,23 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
 
         var p = WinJS.UI.processAll().
             then(function () {
-                
+
                 SdkSample.DataStore.TripStore.loadTrips().then(function () {
                     return wap.current.installedLocation.getFileAsync("AdventureworksCommands.xml");
                 }).then(function (file) {
                     return voiceCommandManager.installCommandDefinitionsFromStorageFileAsync(file);
                 }).then(function () {
-                    if (voiceCommandManager.installedCommandDefinitions.hasKey("AdventureWorksCommandSet_en-us")) {
-                        var vcd = voiceCommandManager.installedCommandDefinitions.lookup("AdventureWorksCommandSet_en-us");
+                    var language = window.navigator.userLanguage || window.navigator.language;
+
+                    var commandSetName = "AdventureWorksCommandSet_" + language.toLowerCase();
+                    if (voiceCommandManager.installedCommandDefinitions.hasKey(commandSetName)) {
+                        var vcd = voiceCommandManager.installedCommandDefinitions.lookup(commandSetName);
                         var phraseList = [];
                         SdkSample.DataStore.TripStore.Trips.forEach(function (trip) {
                             phraseList.push(trip.destination);
                         });
                         vcd.setPhraseListAsync("destination", phraseList).done();
-                    }
-                    else {
+                    } else {
                         WinJS.log && WinJS.log("VCD not installed yet?", "", "warning");
                     }
                 }).done(function () {
@@ -72,20 +74,18 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
                         var destination = decoder.getFirstValueByName("LaunchContext");
 
                         var destinationTrip = null;
-                        for(var i = 0; i < SdkSample.DataStore.TripStore.Trips.length; i++) {
+                        for (var i = 0; i < SdkSample.DataStore.TripStore.Trips.length; i++) {
                             var trip = SdkSample.DataStore.TripStore.Trips.getAt(i)
-                            if(trip.destination == destination)
-                            {
+                            if (trip.destination == destination) {
                                 destinationTrip = trip;
                                 break;
                             }
                         }
 
-                        if (destinationTrip != null)
-                        {
+                        if (destinationTrip != null) {
                             initialState.trip = destinationTrip;
                             url = "/html/tripDetails.html";
-                            nav.history.backStack.push({location: "/html/tripListView.html"})
+                            nav.history.backStack.push({ location: "/html/tripListView.html" })
                         }
 
                     } else if (activationKind == Windows.ApplicationModel.Activation.ActivationKind.voiceCommand) {
@@ -94,32 +94,28 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
                         var speechRecognitionResult = activatedEventArgs[0].result;
                         var voiceCommandName = speechRecognitionResult.rulePath[0];
                         var destination = "";
-                        switch(voiceCommandName)
-                        {
+                        switch (voiceCommandName) {
                             case "showTripToDestination":
                                 var destination = speechRecognitionResult.semanticInterpretation.properties["destination"][0];
                                 var destinationTrip = null;
-                                for(var i = 0; i < SdkSample.DataStore.TripStore.Trips.length; i++) {
+                                for (var i = 0; i < SdkSample.DataStore.TripStore.Trips.length; i++) {
                                     var trip = SdkSample.DataStore.TripStore.Trips.getAt(i)
-                                    if(trip.destination == destination)
-                                    {
+                                    if (trip.destination == destination) {
                                         destinationTrip = trip;
                                         break;
                                     }
                                 }
 
-                                if (destinationTrip != null)
-                                {
+                                if (destinationTrip != null) {
                                     initialState.trip = destinationTrip;
                                     url = "/html/tripDetails.html";
-                                    nav.history.backStack.push({location: "/html/tripListView.html"})
+                                    nav.history.backStack.push({ location: "/html/tripListView.html" })
                                 }
                                 break;
                             default:
                                 break;
                         }
-                    }
-                    else {
+                    } else {
                         var navHistory = app.sessionState.navigationHistory;
                         if (navHistory) {
                             nav.history = navHistory;
@@ -128,12 +124,12 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
                         }
                     }
 
-                    
+
                     initialState.activationKind = activationKind;
                     initialState.activatedEventArgs = activatedEventArgs;
                     nav.history.current.initialPlaceholder = true;
                     return nav.navigate(url, initialState);
-                    
+
 
 
                 }, function (e) {
@@ -150,7 +146,7 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
         eventObject.setPromise(p);
     }
 
-    
+
 
 
     function navigating(eventObject) {
@@ -188,5 +184,6 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
 })();
 
 window.onerror = function (E) {
+    "use strict";
     debugger;
 }

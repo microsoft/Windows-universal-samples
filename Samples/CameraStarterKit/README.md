@@ -1,9 +1,9 @@
 <!---
   category: AudioVideoAndCamera 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619479&clcid=0x409
 --->
 
-CameraStarterKit Sample
------------------------
+# Basic camera app sample
 
 This sample applies an end-to-end approach to demonstrate how to write a camera application using the Windows.Media.Capture API in conjunction with orientation sensors to cover the functions that most camera apps will require.
 
@@ -19,13 +19,15 @@ Specifically, this sample will cover how to:
 
 This sample also implements a custom UI to better simulate the experience that a camera application would provide, so any messages intended for the developer are printed to the debug console.
 
+For apps that are interested in capturing a photo or video without requiring access to all camera controls, CameraCaptureUI abstracts and simplifies the access to the MediaCapture APIs through the built-in Camera application. See the related topics section below for more information on how to use it instead.
+
 ## Related topics
 
-**Samples**
+**Conceptual**
 
-[How to rotate captured video](https://msdn.microsoft.com/en-us/library/windows/apps/hh868174.aspx)
+[Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
 
-[How to preview video from a webcam](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868171.aspx)
+[Capture photos and video with CameraCaptureUI](https://msdn.microsoft.com/en-us/library/windows/apps/mt282142)
 
 [Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
 
@@ -63,9 +65,10 @@ This sample also implements a custom UI to better simulate the experience that a
 
 ## Build the sample
 
-1.  Start Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C\#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file.
-3.  Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 

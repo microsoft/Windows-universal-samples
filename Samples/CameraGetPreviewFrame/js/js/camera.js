@@ -117,11 +117,11 @@
 
             // Initialize media capture and start the preview
             return oMediaCapture.initializeAsync(settings);
+        }, function (error) {
+            console.log(error.message);
         }).then(function () {
             isInitialized = true;
             return startPreviewAsync();
-        }, function (error) {
-            console.log(error.message);
         }).done();
     }
 
@@ -253,8 +253,6 @@
             else {
                 return WinJS.Promise.as();
             }
-        }, function (error) {
-            console.log(error.message);
         });
     }
 
@@ -287,8 +285,6 @@
 
             // Clear the image
             previewFrameImage.src = null;
-        }, function (error) {
-            console.log(error.message)
         });
     }
 

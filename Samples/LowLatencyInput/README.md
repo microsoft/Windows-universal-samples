@@ -1,8 +1,9 @@
 <!---
   category: CustomUserInteractions
----!>
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620566&clcid=0x409
+--->
 
-# Low Latency Input Sample
+# Low latency input sample
 
 This sample shows how to handle input on a dedicated input thread to achieve lowest input latency. 
 
@@ -16,7 +17,7 @@ Specifically, this sample shows:
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
@@ -24,7 +25,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[Waitable Back Buffers](https://msdn.microsoft.com/en-us/library/windows/apps/dn448914.aspx)
+[Reduce latency with DXGI 1.3 swap chains](https://msdn.microsoft.com/library/windows/apps/mt210781)
 
 [DirectX and XAML](https://msdn.microsoft.com/en-us/library/windows/apps/hh825871.aspx)
 
@@ -35,15 +36,16 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Insider Preview
+**Server:** Windows Server 2016 Technical Preview
 
 **Phone:**  Windows 10
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file. 
-3. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 

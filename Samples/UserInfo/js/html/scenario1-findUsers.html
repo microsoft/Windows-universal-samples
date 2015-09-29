@@ -1,0 +1,41 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario1-findUsers.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Find users and display user properties.
+                In order to retrieve user properties, you must declare the userAccountInformation
+                capability in your application manifest.
+                In order to find multiple users, you must set &lt;uap:SupportedUsers&gt;multiple&lt;/uap:SupportedUsers&gt;
+                in your application manifest.
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <div>
+                <select id="userList" class="win-dropdown">
+                </select>
+            </div>
+            <div>
+                <button id="showPropertiesButton" class="win-button">Show properties</button>
+            </div>
+            <div>
+                <div id="resultsText"></div>
+                <img id="profileImage">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

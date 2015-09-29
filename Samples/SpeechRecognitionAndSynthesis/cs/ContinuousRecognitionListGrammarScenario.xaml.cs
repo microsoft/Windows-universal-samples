@@ -386,10 +386,18 @@ namespace SpeechAndTTS
                 // This prevents an exception from occurring.
                 if (speechRecognizer.State == SpeechRecognizerState.Idle)
                 {
-                    ContinuousRecoButtonText.Text = " Stop Continuous Recognition";
-                    cbLanguageSelection.IsEnabled = false;
-                    isListening = true;
-                    await speechRecognizer.ContinuousRecognitionSession.StartAsync();
+                    try
+                    {
+                        await speechRecognizer.ContinuousRecognitionSession.StartAsync();
+                        ContinuousRecoButtonText.Text = " Stop Continuous Recognition";
+                        cbLanguageSelection.IsEnabled = false;
+                        isListening = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        var messageDialog = new Windows.UI.Popups.MessageDialog(ex.Message, "Exception");
+                        await messageDialog.ShowAsync();
+                    }
                 }
             }
             else

@@ -125,7 +125,7 @@ void Scenario8::PopulateComboBox()
 
     // In a production app, this list should be sorted, but that's beyond the
     // focus of this sample.
-    for each (auto lang in ApplicationLanguages::ManifestLanguages)
+    for (auto lang : ApplicationLanguages::ManifestLanguages)
     {
         Windows::Globalization::Language^ langObject = ref new Windows::Globalization::Language(lang);
         auto comboBoxValue = ref new ComboBoxValue(langObject->NativeName, langObject->LanguageTag);

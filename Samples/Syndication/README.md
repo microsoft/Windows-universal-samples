@@ -1,6 +1,8 @@
 <!---
   category: NetworkingAndWebServices 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620610&clcid=0x409
 --->
+
 # Syndication sample
 
 This sample shows you how to retrieve feeds from a web service using classes in the [**Windows.Web.Syndication**](http://msdn.microsoft.com/library/windows/apps/br243632) namespace in your Universal Windows Platform (UWP) app. This sample is provided in the JavaScript, C\#, and C++ programming languages.
@@ -30,23 +32,11 @@ For more information on network capabilities, see [How to set network capabiliti
 
 ### Other - C\#/VB/C++ and XAML
 
-[Accessing and managing syndicated content (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452981)
+[RSS/Atom feeds](https://msdn.microsoft.com/library/windows/apps/mt429379)
 
 [Adding support for networking (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452751)
 
-[How to set network capabilities (XAML)](http://msdn.microsoft.com/library/windows/apps/jj835817)
-
-[How to access a web feed (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452994)
-
-### Other - JavaScript and HTML
-
-[Accessing and managing syndicated content (HTML)](http://msdn.microsoft.com/library/windows/apps/hh452973)
-
-[Adding support for networking (HTML)](http://msdn.microsoft.com/library/windows/apps/hh452752)
-
-[How to set network capabilities (HTML)](http://msdn.microsoft.com/library/windows/apps/hh770532)
-
-[How to access a web feed (HTML)](http://msdn.microsoft.com/library/windows/apps/hh700374)
+[Networking basics](https://msdn.microsoft.com/library/windows/apps/mt280233)
 
 ### Reference
 
@@ -60,22 +50,24 @@ For more information on network capabilities, see [How to set network capabiliti
 
 ### Samples
 
+[RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)
+
 [AtomPub sample](http://go.microsoft.com/fwlink/p/?linkid=245061)
 
 ## System requirements
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Insider Preview
+**Server:** Windows Server 2016 Technical Preview
 
 **Phone:**  Windows 10
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the subdirectory for the desired language.
-3. Double-click the Visual Studio 2015 Solution (.sln) file. 
-4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 

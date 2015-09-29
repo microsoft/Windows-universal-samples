@@ -15,9 +15,7 @@ using Windows.Devices.Sensors;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-using SDKTemplate;
-
-namespace ActivitySensorCS
+namespace SDKTemplate
 {
     public sealed partial class Scenario1_CurrentActivity : Page
     {

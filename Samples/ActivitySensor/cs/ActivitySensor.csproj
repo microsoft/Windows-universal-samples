@@ -7,8 +7,8 @@
     <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ActivitySensorCS</RootNamespace>
-    <AssemblyName>ActivitySensorCS</AssemblyName>
+    <RootNamespace>SDKTemplate</RootNamespace>
+    <AssemblyName>ActivitySensor</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
@@ -124,19 +124,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_CurrentActivity.xaml">
+    <Page Include="..\shared\Scenario1_CurrentActivity.xaml">
+      <Link>Scenario1_CurrentActivity.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_History.xaml">
+    <Page Include="..\shared\Scenario2_History.xaml">
+      <Link>Scenario2_History.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3_ChangeEvents.xaml">
+    <Page Include="..\shared\Scenario3_ChangeEvents.xaml">
+      <Link>Scenario3_ChangeEvents.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario4_BackgroundActivity.xaml">
+    <Page Include="..\shared\Scenario4_BackgroundActivity.xaml">
+      <Link>Scenario4_BackgroundActivity.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

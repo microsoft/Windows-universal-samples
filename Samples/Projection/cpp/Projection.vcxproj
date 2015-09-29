@@ -97,6 +97,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);..\..\..\SharedContent\cpp</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
@@ -207,13 +210,27 @@
     <ClCompile Include="ViewLifetimeControl.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\microsoft-sdk.png" />
-    <Image Include="Assets\smallTile-sdk.png" />
-    <Image Include="Assets\splash-sdk.png" />
-    <Image Include="Assets\squareTile-sdk.png" />
-    <Image Include="Assets\storeLogo-sdk.png" />
-    <Image Include="Assets\tile-sdk.png" />
-    <Image Include="Assets\windows-sdk.png" />
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Link>Assets\microsoft-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Link>Assets\smallTile-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Link>Assets\splash-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>Assets\squareTile-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Link>Assets\storeLogo-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Link>Assets\tile-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Link>Assets\windows-sdk.png</Link>
+    </Image>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

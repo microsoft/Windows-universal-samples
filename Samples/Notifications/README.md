@@ -1,9 +1,9 @@
 <!---
   category: TilesToastAndNotifications
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620577&clcid=0x409
 --->
-Notifications Sample
-=========================
 
+# Notifications sample
 
 This sample demonstrates the use of the various Toast and LiveTile related API, such as Windows.UI including Notifications, Popups, and StartScreen namespaces.
 
@@ -12,7 +12,6 @@ There are many scenarios in this sample broken down to three major sections:
 - Badge
 - LiveTile
 - Toast
-
 
 ### Badge
 
@@ -112,9 +111,10 @@ There are two kinds of **LiveTiles**, Primary and Secondary tiles. Primary tiles
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the directory to which you unzipped the sample. Double-click the Visual Studio 2015 Solution (.sln) file. 
-3. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 

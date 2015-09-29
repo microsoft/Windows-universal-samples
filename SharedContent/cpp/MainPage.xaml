@@ -44,7 +44,7 @@
                                    RelativePanel.Above="LinksPanel" Margin="10,10,0,0"
                                    TextWrapping="Wrap"/>
                         <StackPanel x:Name="LinksPanel" Orientation="Horizontal" Margin="10,10,0,10">
-                            <HyperlinkButton Content="Trademarks" Tag="http://www.microsoft.com/About/Legal/EN/US/IntellectualProperty/Trademarks/EN-US.aspx"
+                            <HyperlinkButton Content="Trademarks" Tag="http://go.microsoft.com/fwlink/?LinkID=623755"
                         Click="Footer_Click" FontSize="12" Style="{StaticResource HyperlinkStyle}" />
                             <TextBlock Text="|"  Style="{StaticResource SeparatorStyle}" VerticalAlignment="Center" />
                             <HyperlinkButton x:Name="PrivacyLink" Content="Privacy" Tag="http://privacy.microsoft.com" Click="Footer_Click" FontSize="12" Style="{StaticResource HyperlinkStyle}"/>

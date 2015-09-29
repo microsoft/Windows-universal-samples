@@ -1,0 +1,47 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/AudioCapturePermissions.js"></script>
+    <script src="/js/scenario10_PauseAsync.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This sample showcases how to switch grammars during a continuous recognition session.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <button id="btnRecognize" disabled class="win-button">&#xE1D6; Continuous Recognition</button><p />
+            <button id="btnEmailGrammar" disabled class="win-button">Remove 'email' grammar</button><p />
+            <button id="btnPhoneGrammar" disabled class="win-button">Add 'phone' grammar</button><p />
+
+            <span id="grammarTextBlock">Listening for:</span><br />
+            <span>Go home</span><br />
+            <span id="emailInfoTextBlock">Send email</span><br />
+            <span id="phoneInfoTextBlock" style="visibility:hidden">Call phone</span>
+            <p id="resultTextBlock"></p>
+            <p id="msTextBlock"></p>
+            <p id="errorTextBlock"></p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -19,6 +19,13 @@
             btnSpeak.addEventListener("click", speakFn, false);
             voicesSelect.addEventListener("click", setVoiceFunction, false);
 
+            var rcns = Windows.ApplicationModel.Resources.Core;
+            context = new rcns.ResourceContext();
+            context.languages = new Array(synthesizer.voice.language);
+            resourceMap = rcns.ResourceManager.current.mainResourceMap.getSubtree('LocalizationTTSResources');
+
+            textToSynthesize.innerText = resourceMap.getValue('SynthesizeTextDefaultText', context).valueAsString;
+
             listbox_GetVoices();
             audio_SetUp();
         },
@@ -31,6 +38,10 @@
 
     var synthesizer;
     var audio;
+
+    // localization resources
+    var context;
+    var resourceMap;
 
     function audio_SetUp() {
         /// <summary>
@@ -48,6 +59,7 @@
         audio.onended = function () { // Fires when the audio finishes playing
             statusMessage.innerText = "Completed";
             btnSpeak.innerText = "Speak";
+            voicesSelect.disabled = false;
         };
     }
 
@@ -57,11 +69,13 @@
         /// textbox content into a stream, then plays the stream through the audio element.
         /// </summary>
         if (btnSpeak.innerText == "Stop") {
+            voicesSelect.disabled = false;
             audio.pause();
             return;
         }
 
         // Changes the button label. You could also just disable the button if you don't want any user control.
+        voicesSelect.disabled = true;
         btnSpeak.innerText = "Stop";
         statusBox.style.backgroundColor = "green";
 
@@ -94,7 +108,7 @@
         for (var voiceIndex = 0; voiceIndex < allVoices.size; voiceIndex++) {
             var currVoice = allVoices[voiceIndex];
             var option = document.createElement("option");
-            option.text = currVoice.displayName;
+            option.text = currVoice.displayName + " (" + currVoice.language + ")";
             voicesSelect.add(option, null);
 
             // Check to see if we're looking at the current voice and set it as selected in the listbox.
@@ -115,6 +129,10 @@
             var selectedVoice = allVoices[voicesSelect.selectedIndex];
 
             synthesizer.voice = selectedVoice;
+
+            // change the language of the sample text.
+            context.languages = new Array(synthesizer.voice.language);
+            textToSynthesize.innerText = resourceMap.getValue('SynthesizeTextDefaultText', context).valueAsString;
         }
     }
 

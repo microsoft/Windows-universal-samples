@@ -39,7 +39,7 @@ namespace SDKTemplate
         {
             String^ get()
             {
-                return ref new String(L"Background Task");
+                return L"Background tasks";
             }
         }
 
@@ -53,10 +53,7 @@ namespace SDKTemplate
     private:
         static Array<Scenario>^ scenariosInner;
     };
-}
 
-namespace BackgroundTask
-{
     class BackgroundTaskSample
     {
     public:
