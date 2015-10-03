@@ -35,7 +35,7 @@ namespace ApplicationDataSample
 
         public DataChangedEvent()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             applicationData = ApplicationData.Current;
             roamingSettings = applicationData.RoamingSettings;
@@ -43,7 +43,7 @@ namespace ApplicationDataSample
             DisplayOutput();
         }
 
-        void SimulateRoaming_Click(Object sender, RoutedEventArgs e)
+        void SimulateRoaming_Click(object sender, RoutedEventArgs e)
         {
             roamingSettings.Values[settingName] = UserName.Text;
 
@@ -51,10 +51,10 @@ namespace ApplicationDataSample
             applicationData.SignalDataChanged();
         }
 
-        async void DataChangedHandler(Windows.Storage.ApplicationData appData, object o)
+        async void DataChangedHandler(ApplicationData appData, object o)
         {
             // DataChangeHandler may be invoked on a background thread, so use the Dispatcher to invoke the UI-related code on the UI thread.
-            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 DisplayOutput();
             });
@@ -62,8 +62,9 @@ namespace ApplicationDataSample
 
         void DisplayOutput()
         {
-            Object value = roamingSettings.Values[settingName];
-            OutputTextBlock.Text = "Name: " + (value == null ? "<empty>" : ("\"" + value + "\"")); ;
+            object value = roamingSettings.Values[settingName];
+            OutputTextBlock.Text = "Name: " + (value == null ? "<empty>" : ("\"" + value + "\""));
+            ;
         }
 
         /// <summary>

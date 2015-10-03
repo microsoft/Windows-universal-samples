@@ -33,14 +33,14 @@ namespace ApplicationDataSample
 
         public CompositeSettings()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             roamingSettings = ApplicationData.Current.RoamingSettings;
 
             DisplayOutput();
         }
 
-        void WriteCompositeSetting_Click(Object sender, RoutedEventArgs e)
+        void WriteCompositeSetting_Click(object sender, RoutedEventArgs e)
         {
             ApplicationDataCompositeValue composite = new ApplicationDataCompositeValue();
             composite[settingName1] = 1; // example value
@@ -51,7 +51,7 @@ namespace ApplicationDataSample
             DisplayOutput();
         }
 
-        void DeleteCompositeSetting_Click(Object sender, RoutedEventArgs e)
+        void DeleteCompositeSetting_Click(object sender, RoutedEventArgs e)
         {
             roamingSettings.Values.Remove(settingName);
 

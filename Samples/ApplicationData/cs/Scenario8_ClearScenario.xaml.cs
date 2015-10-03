@@ -28,17 +28,17 @@ namespace ApplicationDataSample
 
         public ClearScenario()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
-        async void Clear_Click(Object sender, RoutedEventArgs e)
+        async void Clear_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                await Windows.Storage.ApplicationData.Current.ClearAsync();
+                await ApplicationData.Current.ClearAsync();
                 OutputTextBlock.Text = "ApplicationData has been cleared.  Visit the other scenarios to see that their data has been cleared.";
             }
-            catch (Exception)
+            catch
             {
                 OutputTextBlock.Text = "Unable to clear settings. This can happen when files are in use.";
             }

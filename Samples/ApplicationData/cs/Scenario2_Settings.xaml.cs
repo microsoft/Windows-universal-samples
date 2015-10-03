@@ -31,7 +31,7 @@ namespace ApplicationDataSample
 
         public Settings()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             roamingSettings = ApplicationData.Current.RoamingSettings;
 
@@ -67,14 +67,14 @@ namespace ApplicationDataSample
         // This sample illustrates reading and writing from a roaming setting, though a
         // local setting could be used just as easily.
 
-        void WriteSetting_Click(Object sender, RoutedEventArgs e)
+        void WriteSetting_Click(object sender, RoutedEventArgs e)
         {
             roamingSettings.Values[SettingName] = "Hello World"; // example value
 
             DisplayOutput();
         }
 
-        void DeleteSetting_Click(Object sender, RoutedEventArgs e)
+        void DeleteSetting_Click(object sender, RoutedEventArgs e)
         {
             roamingSettings.Values.Remove(SettingName);
 
@@ -83,7 +83,7 @@ namespace ApplicationDataSample
 
         void DisplayOutput()
         {
-            Object value = roamingSettings.Values[SettingName];
+            object value = roamingSettings.Values[SettingName];
 
             OutputTextBlock.Text = String.Format("Setting: {0}", (value == null ? "<empty>" : ("\"" + value + "\"")));
         }

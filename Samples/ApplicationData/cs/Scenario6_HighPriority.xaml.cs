@@ -33,11 +33,11 @@ namespace ApplicationDataSample
 
         public HighPriority()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             applicationData = ApplicationData.Current;
             roamingSettings = applicationData.RoamingSettings;
-            
+
             DisplayOutput(false);
         }
 
@@ -58,7 +58,7 @@ namespace ApplicationDataSample
         // a significant change to the data it represents.  Examples could include changing
         // music tracks, turning the page in a book, or finishing a level in a game.
 
-        void IncrementHighPriority_Click(Object sender, RoutedEventArgs e)
+        void IncrementHighPriority_Click(object sender, RoutedEventArgs e)
         {
             int counter = Convert.ToInt32(roamingSettings.Values["HighPriority"]);
 
@@ -67,10 +67,10 @@ namespace ApplicationDataSample
             DisplayOutput(false);
         }
 
-        async void DataChangedHandler(Windows.Storage.ApplicationData appData, object o)
+        async void DataChangedHandler(ApplicationData appData, object o)
         {
             // DataChangeHandler may be invoked on a background thread, so use the Dispatcher to invoke the UI-related code on the UI thread.
-            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 DisplayOutput(true);
             });

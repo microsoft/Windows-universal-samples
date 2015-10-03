@@ -38,7 +38,7 @@ namespace ApplicationDataSample
 
         public Files()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             localFolder = ApplicationData.Current.LocalFolder;
             localCacheFolder = ApplicationData.Current.LocalCacheFolder;
@@ -75,7 +75,7 @@ namespace ApplicationDataSample
         // LocalCache files are for larger files that can be recreated by the app, and for
         // machine specific or private files that should not be restored to a new device.
 
-        async void Increment_Local_Click(Object sender, RoutedEventArgs e)
+        async void Increment_Local_Click(object sender, RoutedEventArgs e)
         {
             localCounter++;
 
@@ -94,15 +94,15 @@ namespace ApplicationDataSample
 
                 LocalOutputTextBlock.Text = "Local Counter: " + text;
 
-                localCounter = int.Parse(text);
+                localCounter = Int32.Parse(text);
             }
-            catch (Exception)
+            catch
             {
                 LocalOutputTextBlock.Text = "Local Counter: <not found>";
             }
         }
 
-        async void Increment_LocalCache_Click(Object sender, RoutedEventArgs e)
+        async void Increment_LocalCache_Click(object sender, RoutedEventArgs e)
         {
             localCacheCounter++;
 
@@ -113,7 +113,7 @@ namespace ApplicationDataSample
         }
 
         async void Read_LocalCache_Counter()
-        {          
+        {
             try
             {
                 StorageFile file = await localCacheFolder.GetFileAsync(filename);
@@ -121,15 +121,15 @@ namespace ApplicationDataSample
 
                 LocalCacheOutputTextBlock.Text = "LocalCache Counter: " + text;
 
-                localCacheCounter = int.Parse(text);
+                localCacheCounter = Int32.Parse(text);
             }
-            catch (Exception)
+            catch
             {
                 LocalCacheOutputTextBlock.Text = "LocalCache Counter: <not found>";
             }
         }
 
-        async void Increment_Roaming_Click(Object sender, RoutedEventArgs e)
+        async void Increment_Roaming_Click(object sender, RoutedEventArgs e)
         {
             roamingCounter++;
 
@@ -148,15 +148,15 @@ namespace ApplicationDataSample
 
                 RoamingOutputTextBlock.Text = "Roaming Counter: " + text;
 
-                roamingCounter = int.Parse(text);
+                roamingCounter = Int32.Parse(text);
             }
-            catch (Exception)
+            catch
             {
                 RoamingOutputTextBlock.Text = "Roaming Counter: <not found>";
             }
         }
 
-        async void Increment_Temporary_Click(Object sender, RoutedEventArgs e)
+        async void Increment_Temporary_Click(object sender, RoutedEventArgs e)
         {
             temporaryCounter++;
 
@@ -175,9 +175,9 @@ namespace ApplicationDataSample
 
                 TemporaryOutputTextBlock.Text = "Temporary Counter: " + text;
 
-                temporaryCounter = int.Parse(text);
+                temporaryCounter = Int32.Parse(text);
             }
-            catch (Exception)
+            catch
             {
                 TemporaryOutputTextBlock.Text = "Temporary Counter: <not found>";
             }

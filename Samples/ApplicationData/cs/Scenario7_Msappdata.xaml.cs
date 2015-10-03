@@ -28,7 +28,7 @@ namespace ApplicationDataSample
 
         public Msappdata()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace ApplicationDataSample
                 StorageFile sourceFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///assets/appDataLocal.png"));
                 await sourceFile.CopyAsync(appData.LocalFolder);
             }
-            catch (Exception)
+            catch
             {
                 // If the image has already been copied the CopyAsync() method above will fail.
                 // Ignore this error.
@@ -56,7 +56,7 @@ namespace ApplicationDataSample
                 StorageFile sourceFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///assets/appDataRoaming.png"));
                 await sourceFile.CopyAsync(appData.RoamingFolder);
             }
-            catch (Exception)
+            catch
             {
                 // If the image has already been copied the CopyAsync() method above will fail.
                 // Ignore this error.
@@ -67,7 +67,7 @@ namespace ApplicationDataSample
                 StorageFile sourceFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///assets/appDataTemp.png"));
                 await sourceFile.CopyAsync(appData.TemporaryFolder);
             }
-            catch (Exception)
+            catch
             {
                 // If the image has already been copied the CopyAsync() method above will fail.
                 // Ignore this error.

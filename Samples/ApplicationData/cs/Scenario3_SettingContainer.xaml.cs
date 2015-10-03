@@ -32,28 +32,28 @@ namespace ApplicationDataSample
 
         public SettingContainer()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             localSettings = ApplicationData.Current.LocalSettings;
 
             DisplayOutput();
         }
 
-        void CreateContainer_Click(Object sender, RoutedEventArgs e)
+        void CreateContainer_Click(object sender, RoutedEventArgs e)
         {
             ApplicationDataContainer container = localSettings.CreateContainer(containerName, ApplicationDataCreateDisposition.Always);
 
             DisplayOutput();
         }
 
-        void DeleteContainer_Click(Object sender, RoutedEventArgs e)
+        void DeleteContainer_Click(object sender, RoutedEventArgs e)
         {
             localSettings.DeleteContainer(containerName);
 
             DisplayOutput();
         }
 
-        void WriteSetting_Click(Object sender, RoutedEventArgs e)
+        void WriteSetting_Click(object sender, RoutedEventArgs e)
         {
             if (localSettings.Containers.ContainsKey(containerName))
             {
@@ -63,7 +63,7 @@ namespace ApplicationDataSample
             DisplayOutput();
         }
 
-        void DeleteSetting_Click(Object sender, RoutedEventArgs e)
+        void DeleteSetting_Click(object sender, RoutedEventArgs e)
         {
             if (localSettings.Containers.ContainsKey(containerName))
             {
@@ -78,10 +78,10 @@ namespace ApplicationDataSample
             bool hasContainer = localSettings.Containers.ContainsKey(containerName);
             bool hasSetting = hasContainer ? localSettings.Containers[containerName].Values.ContainsKey(settingName) : false;
 
-            String output = String.Format("Container Exists: {0}\n" +
+            string output = String.Format("Container Exists: {0}\n" +
                                           "Setting Exists: {1}",
-                                          hasContainer ? "true" : "false",
-                                          hasSetting ? "true" : "false");
+                                          hasContainer,
+                                          hasSetting);
 
             OutputTextBlock.Text = output;
         }

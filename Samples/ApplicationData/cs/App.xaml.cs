@@ -31,8 +31,8 @@ namespace SDKTemplate
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            InitializeComponent();
+            Suspending += OnSuspending;
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace SDKTemplate
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                this.DebugSettings.EnableFrameRateCounter = false;
+                DebugSettings.EnableFrameRateCounter = false;
             }
 #endif
 

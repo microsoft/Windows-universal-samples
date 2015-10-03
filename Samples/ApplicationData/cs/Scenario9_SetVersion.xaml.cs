@@ -34,7 +34,7 @@ namespace ApplicationDataSample
 
         public SetVersion()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             appData = ApplicationData.Current;
 
@@ -95,15 +95,15 @@ namespace ApplicationDataSample
             deferral.Complete();
         }
 
-        async void SetVersion0_Click(Object sender, RoutedEventArgs e)
+        async void SetVersion0_Click(object sender, RoutedEventArgs e)
         {
-            await appData.SetVersionAsync(0, new ApplicationDataSetVersionHandler(SetVersionHandler0));
+            await appData.SetVersionAsync(0, SetVersionHandler0);
             DisplayOutput();
         }
 
-        async void SetVersion1_Click(Object sender, RoutedEventArgs e)
+        async void SetVersion1_Click(object sender, RoutedEventArgs e)
         {
-            await appData.SetVersionAsync(1, new ApplicationDataSetVersionHandler(SetVersionHandler1));
+            await appData.SetVersionAsync(1, SetVersionHandler1);
             DisplayOutput();
         }
 
