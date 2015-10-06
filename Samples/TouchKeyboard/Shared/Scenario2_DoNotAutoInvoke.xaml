@@ -1,0 +1,42 @@
+<!-- 
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<Page
+    x:Class="SDKTemplate.Scenario2_DoNotAutoInvoke"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer Margin="12,20,12,12">
+            <StackPanel>
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock TextWrapping="Wrap">
+                	<Run Text="Set the PreventKeyboardDisplayOnProgrammaticFocus property to to prevent the touck keyboard from displaying in response to an app programmatically setting focus to an editable control. This is typically done to prevent the touch keyboard from occluding relevant content (e.g. privacy statement links, content-rich landing page, or other input fields of interest in a pre-populated form) while still allowing physical keyboard users to start typing immediately. The user can still invoke the touch keyboard by tapping with touch or pen."/>
+                </TextBlock>
+                <CheckBox Checked="OnAutoInvokedChecked" Unchecked="OnAutoInvokedUnchecked">Prevent touch keyboard display on programmatic focus</CheckBox>
+                <Button Click="OnFocusClick" Margin="0,10,0,0">Set focus on text box</Button>
+                <TextBox Name="textBox" Margin="0,10,0,0"/>
+                <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                    In Windows 10 on the PC,
+                    the touch keyboard does not display automatically if a hardware keyboard is connected or if the PC is in Desktop mode and
+                    &quot;Automatically show the touch keyboard in windowed apps when there is no keyboard attached to your device&quot;
+                    in Settings -&gt; Devices -&gt; Typing is disabled.
+                </TextBlock>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -32,6 +32,8 @@ This sample also implements a custom UI to better simulate the experience that a
 
 [Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
 
+[Using the Face Detection effect](http://go.microsoft.com/fwlink/?LinkId=627228)
+
 **Reference**
 
 [Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.devices.aspx)

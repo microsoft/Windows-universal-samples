@@ -33,11 +33,11 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <local:MyBorder x:Name="BorderElement">
-            <ScrollViewer x:Name="SV1" 
-                          ViewChanged="ScrollViewer_ViewChanged" VerticalSnapPointsType="Mandatory" VerticalSnapPointsAlignment="Near"
-                          VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Auto">
-                <local:MyPanel>
+        <local:MyBorder x:Name="OuterCustomPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ScrollViewer x:Name="SV1"
+                          ViewChanged="ScrollViewer_ViewChanged" VerticalSnapPointsType="MandatorySingle"  VerticalSnapPointsAlignment="Near"
+                          VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch">
+                <local:MyPanel x:Name="InnerCustomPanel" VerticalAlignment="Stretch">
                     <Border Background="LightGray" Height="100" Width="{Binding ElementName=lv, Path=ActualWidth}" >
                         <Grid>
                             <Image x:Name="refreshIndicator"
@@ -60,7 +60,7 @@
                             </Image>
                         </Grid>
                     </Border>
-                    <ListView x:Name="lv">
+                    <ListView x:Name="lv" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Stretch">
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <ItemsStackPanel/>

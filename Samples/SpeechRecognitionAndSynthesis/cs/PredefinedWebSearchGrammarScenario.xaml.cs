@@ -62,21 +62,24 @@ namespace SpeechAndTTS
                 // Enable the recognition buttons.
                 btnRecognizeWithUI.IsEnabled = true;
                 btnRecognizeWithoutUI.IsEnabled = true;
+
+                Language speechLanguage = SpeechRecognizer.SystemSpeechLanguage;
+                speechContext = ResourceContext.GetForCurrentView();
+                speechContext.Languages = new string[] { speechLanguage.LanguageTag };
+
+                speechResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("LocalizationSpeechResources");
+
+                PopulateLanguageDropDown();
+                await InitializeRecognizer(SpeechRecognizer.SystemSpeechLanguage);
             }
             else
             {
                 resultTextBlock.Visibility = Visibility.Visible;
                 resultTextBlock.Text = "Permission to access capture resources was not given by the user; please set the application setting in Settings->Privacy->Microphone.";
+                btnRecognizeWithUI.IsEnabled = false;
+                btnRecognizeWithoutUI.IsEnabled = false;
+                cbLanguageSelection.IsEnabled = false;
             }
-
-            Language speechLanguage = SpeechRecognizer.SystemSpeechLanguage;
-            speechContext = ResourceContext.GetForCurrentView();
-            speechContext.Languages = new string[] { speechLanguage.LanguageTag};
-
-            speechResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("LocalizationSpeechResources");
-
-            PopulateLanguageDropDown();
-            await InitializeRecognizer(SpeechRecognizer.SystemSpeechLanguage);
         }
 
         /// <summary>
@@ -101,8 +104,7 @@ namespace SpeechAndTTS
                 }
             }
         }
-
-
+        
         /// <summary>
         /// Ensure that we clean up any state tracking event handlers created in OnNavigatedTo to prevent leaks.
         /// </summary>

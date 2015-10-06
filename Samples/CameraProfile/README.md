@@ -38,6 +38,9 @@ Related topics
 [Windows.Media.Capture.MediaCapture namespace] (https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.devices.aspx)
 [Windows.Devices.Enumeration namespace] (https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.enumeration.aspx)
 
+**Conceptual**
+[How to use Camera Profiles](http://go.microsoft.com/fwlink/?LinkId=627233)
+
 **Reference**
 
 [Windows.Media.Capture.MediaCaptureInitializationSettings] (https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.capture.mediacaptureinitializationsettings.mediacaptureinitializationsettings.aspx) 

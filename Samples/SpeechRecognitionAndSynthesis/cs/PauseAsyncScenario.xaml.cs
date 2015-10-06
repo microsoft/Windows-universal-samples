@@ -67,13 +67,14 @@ namespace SpeechAndTTS
             if (permissionGained)
             {
                 btnRecognize.IsEnabled = true;
+                
+                await InitializeRecognizer();
             }
             else
             {
                 resultTextBlock.Text = "Permission to access capture resources was not given by the user, reset the application setting in Settings->Privacy->Microphone.";
+                btnRecognize.IsEnabled = false;
             }
-
-            await InitializeRecognizer();
         }
 
         /// <summary>
@@ -231,6 +232,7 @@ namespace SpeechAndTTS
         /// <param name="e">Unused event details</param>
         public async void Recognize_Click(object sender, RoutedEventArgs e)
         {
+            UpdateUI(false);
             if (isListening == false)
             {
                 // The recognizer can only start listening in a continuous fashion if the recognizer is currently idle.
@@ -243,8 +245,7 @@ namespace SpeechAndTTS
                         await speechRecognizer.ContinuousRecognitionSession.StartAsync();
 
                         recognizeButtonText.Text = " Stop Continuous Recognition";
-                        btnEmailGrammar.IsEnabled = true;
-                        btnPhoneGrammar.IsEnabled = true;
+                        UpdateUI(true);
                         infoBoxes.Visibility = Visibility.Visible;
                         isListening = true;
                     }
@@ -258,8 +259,6 @@ namespace SpeechAndTTS
             else
             {
                 recognizeButtonText.Text = " Continuous Recognition";
-                btnEmailGrammar.IsEnabled = false;
-                btnPhoneGrammar.IsEnabled = false;
                 infoBoxes.Visibility = Visibility.Collapsed;
                 isListening = false;
 
@@ -270,7 +269,23 @@ namespace SpeechAndTTS
                     // complete.
                     await speechRecognizer.ContinuousRecognitionSession.CancelAsync();
                 }
+
+                btnEmailGrammar.IsEnabled = false;
+                btnPhoneGrammar.IsEnabled = false;
+                btnRecognize.IsEnabled = true;
             }
+            
+        }
+
+        /// <summary>
+        /// Toggle button state while operations are in progress.
+        /// </summary>
+        /// <param name="state">State to set the buttons to</param>
+        private void ToggleButtons(bool state)
+        {
+            btnRecognize.IsEnabled = state;
+            btnEmailGrammar.IsEnabled = state;
+            btnPhoneGrammar.IsEnabled = state;
         }
 
         /// <summary>
@@ -281,7 +296,7 @@ namespace SpeechAndTTS
         public async void EmailButton_Click(object sender, RoutedEventArgs e)
         {
             // Update UI, disabling buttons so the user can't interrupt.
-            updateUI(false);
+            UpdateUI(false);
             string newButtonText = "";
 
             long start = DateTime.Now.Ticks;
@@ -313,7 +328,7 @@ namespace SpeechAndTTS
                 if (result.Status != SpeechRecognitionResultStatus.Success)
                 {
                     // Disable the recognition buttons.
-                    updateUI(false);
+                    UpdateUI(false);
 
                     // Let the user know that the grammar didn't compile properly.
                     resultTextBlock.Text = "Unable to compile grammar.";
@@ -335,7 +350,7 @@ namespace SpeechAndTTS
             }
 
             // Restore the original UI state.
-            updateUI(true);
+            UpdateUI(true);
             emailButtonText.Text = newButtonText;
         }
 
@@ -347,7 +362,7 @@ namespace SpeechAndTTS
         public async void PhoneButton_Click(object sender, RoutedEventArgs e)
         {
             // Update UI, disabling buttons so the user can't interrupt.
-            updateUI(false);
+            UpdateUI(false);
             string newButtonText = "";
 
             long start = DateTime.Now.Ticks;
@@ -379,7 +394,7 @@ namespace SpeechAndTTS
                 if (result.Status != SpeechRecognitionResultStatus.Success)
                 {
                     // Disable the recognition buttons.
-                    updateUI(false);
+                    UpdateUI(false);
 
                     // Let the user know that the grammar didn't compile properly.
                     resultTextBlock.Text = "Unable to compile grammar.";
@@ -401,11 +416,11 @@ namespace SpeechAndTTS
             }
 
             // Restore the original UI state.
-            updateUI(true);
+            UpdateUI(true);
             phoneButtonText.Text = newButtonText;
         }
 
-        private void updateUI(bool newState)
+        private void UpdateUI(bool newState)
         {
             btnRecognize.IsEnabled = newState;
             btnEmailGrammar.IsEnabled = newState;

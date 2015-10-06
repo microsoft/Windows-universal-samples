@@ -58,16 +58,15 @@ void Scenario_PauseAsync::OnNavigatedTo(NavigationEventArgs^ e)
         if (permissionGained)
         {
             this->btnRecognize->IsEnabled = true;
+			
+			InitializeRecognizer();
         }
         else
         {
             this->resultTextBlock->Visibility = Windows::UI::Xaml::Visibility::Visible;
             this->resultTextBlock->Text = L"Permission to access capture resources was not given by the user; please set the application setting in Settings->Privacy->Microphone.";
         }
-    }).then([this]()
-    {
-        InitializeRecognizer();
-    }, task_continuation_context::use_current());
+    });
 }
 
 /// <summary>
@@ -204,6 +203,7 @@ void Scenario_PauseAsync::OnNavigatedFrom(NavigationEventArgs^ e)
 /// <param name="e">Unused event details</param>
 void Scenario_PauseAsync::Recognize_Click(Object^ sender, RoutedEventArgs^ e)
 {
+	EnableUI(false);
     // The recognizer can only start listening in a continuous fashion if the recognizer is currently idle.
     // This prevents an exception from occurring.
     if (speechRecognizer->State == SpeechRecognizerState::Idle)
@@ -217,8 +217,6 @@ void Scenario_PauseAsync::Recognize_Click(Object^ sender, RoutedEventArgs^ e)
                 startAsyncTask.get();
 
                 recognizeButtonText->Text = L" Stop Continuous Recognition";
-                btnEmailGrammar->IsEnabled = true;
-                btnPhoneGrammar->IsEnabled = true;
                 infoBoxes->Visibility = Windows::UI::Xaml::Visibility::Visible;
             }
             catch (Exception^ exception)
@@ -226,7 +224,9 @@ void Scenario_PauseAsync::Recognize_Click(Object^ sender, RoutedEventArgs^ e)
                 auto messageDialog = ref new Windows::UI::Popups::MessageDialog(exception->Message, L"Exception");
                 create_task(messageDialog->ShowAsync());
             }
-        });
+		}).then([this]() {
+			EnableUI(true);
+		});
     }
     else
     {
@@ -234,12 +234,15 @@ void Scenario_PauseAsync::Recognize_Click(Object^ sender, RoutedEventArgs^ e)
         // generating a ResultGenerated event. StopAsync() will allow the final session to 
         // complete.
         recognizeButtonText->Text = L" Continuous Recognition";
-        btnEmailGrammar->IsEnabled = false;
-        btnPhoneGrammar->IsEnabled = false;
         infoBoxes->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
 
-        create_task(speechRecognizer->ContinuousRecognitionSession->CancelAsync());
+		create_task(speechRecognizer->ContinuousRecognitionSession->CancelAsync()).then([this]() {
+			btnRecognize->IsEnabled = true;
+			btnEmailGrammar->IsEnabled = false;
+			btnPhoneGrammar->IsEnabled = false;
+		});
     }
+	
 }
 
 /// <summary>

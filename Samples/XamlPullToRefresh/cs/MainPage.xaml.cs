@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -13,8 +14,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace XamlPullToRefresh
 {
@@ -29,7 +28,19 @@ namespace XamlPullToRefresh
         {
             this.InitializeComponent();
             Loaded += MainPage_Loaded;
+            Window.Current.SizeChanged += Current_SizeChanged;
             PopulateFeed();
+            InnerCustomPanel.SizeChanged += InnerCustomPanel_SizeChanged;
+        }
+
+        private void InnerCustomPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            SV1.ChangeView(null, 100.0, null, true);
+        }
+
+        private void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+        {
+            InnerCustomPanel.InvalidateMeasure();
         }
 
         private void PopulateFeed()
@@ -50,17 +61,17 @@ namespace XamlPullToRefresh
                 feed.Insert(0, i);
             }
             lastValue = lastValue - 10;
-            if(lastValue == 0)
+            if(lastValue < 0)
             {
                 PopulateFeed();
             }
-            SV1.ChangeView(null, 0, null);
+            SV1.ChangeView(null, 0, null, true);
             VisualStateManager.GoToState(this, "PullToRefresh", false);
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            // Hide the refresh indicator
+            // Hide the refresh indicator (SV1 is the outer ScrollViewer)
             SV1.ChangeView(null, 100, null);
         }
 
@@ -79,6 +90,7 @@ namespace XamlPullToRefresh
             SV1.DirectManipulationCompleted -= SV1_DirectManipulationCompleted;
             UpdateFeed();
         }
+
     }
 
     public class MyBorder : Panel
@@ -90,15 +102,15 @@ namespace XamlPullToRefresh
         protected override Size MeasureOverride(Size availableSize)
         {
             this.myAvailableSize = availableSize;
+            // Children[0] is the outer ScrollViewer
             this.Children[0].Measure(availableSize);
-
             return this.Children[0].DesiredSize;
         }
 
         protected override Size ArrangeOverride(Size finalSize)
         {
             this.myFinalSize = finalSize;
-
+            // Children[0] is the outer ScrollViewer
             this.Children[0].Arrange(new Rect(0, 0, finalSize.Width, finalSize.Height));
             return finalSize;
         }
@@ -120,9 +132,10 @@ namespace XamlPullToRefresh
 
             var myBorder = parent as MyBorder;
 
+            // Children[0] is the Border that comprises the refresh UI
             this.Children[0].Measure(myBorder.myAvailableSize);
+            // Children[1] is the ListView
             this.Children[1].Measure(new Size(myBorder.myAvailableSize.Width, myBorder.myAvailableSize.Height));
-
             return new Size(this.Children[1].DesiredSize.Width, this.Children[0].DesiredSize.Height + myBorder.myAvailableSize.Height);
         }
 
@@ -137,7 +150,9 @@ namespace XamlPullToRefresh
 
             var myBorder = parent as MyBorder;
 
+            // Children[0] is the Border that comprises the refresh UI
             this.Children[0].Arrange(new Rect(0, 0, this.Children[0].DesiredSize.Width, this.Children[0].DesiredSize.Height));
+            // Children[1] is the ListView
             this.Children[1].Arrange(new Rect(0, this.Children[0].DesiredSize.Height, myBorder.myFinalSize.Width, myBorder.myFinalSize.Height));
             return finalSize;
         }

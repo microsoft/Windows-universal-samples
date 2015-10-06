@@ -1,5 +1,6 @@
 <!---
   category: AudioVideoAndCamera
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=627611&clcid=0x409
 --->
 
 # Manual camera controls sample
@@ -42,6 +43,8 @@ To keep code complexity low, but offer easier navigation between the different c
 [Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
 
 [Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
+
+[Using Smooth Zoom](http://go.microsoft.com/fwlink/?LinkId=627232)
 
 **Reference**
 

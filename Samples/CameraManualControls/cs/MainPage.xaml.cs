@@ -460,7 +460,7 @@ namespace CameraManualControls
             try
             {
                 // Create storage file in Pictures Library
-                var videoFile = await KnownFolders.PicturesLibrary.CreateFileAsync("SimpleVideo.wav", CreationCollisionOption.GenerateUniqueName);
+                var videoFile = await KnownFolders.PicturesLibrary.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
 
                 var encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
 

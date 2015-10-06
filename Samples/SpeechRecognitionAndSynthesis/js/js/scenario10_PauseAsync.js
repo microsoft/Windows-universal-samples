@@ -109,11 +109,11 @@
             btnRecognize.innerText = "\uE1d6 Stop recognition";
             errorMessage("");
 
-            disableUI(false);
-
             // Start the continuous recognition session. Results are handled in the event handlers below.
             try {
-                recognizer.continuousRecognitionSession.startAsync();
+                recognizer.continuousRecognitionSession.startAsync().then(function completed() {
+                    disableUI(false);
+                });
             }
             catch (e) {
                 disableUI(true);

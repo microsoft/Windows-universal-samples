@@ -65,3 +65,8 @@ The next steps depend on whether you just want to deploy the sample or you want 
 
 - To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or selectDebug > Start Without Debugging. 
 
+### Known Issues
+
+ - The sample requires Media Player components to be available. If media player has been uninstalled, or when using an 'N' SKU of windows without media player components, the sample will not function. Note, however, that Speech Synthesis and Speech Recognition do not require media player directly, but other components of the samples do (Such as playback of synthesized text, or checking to see if a microphone is present and the app has permission to use it.) Developers should make sure their app is aware of it and handles this gracefully.
+ 
+ 

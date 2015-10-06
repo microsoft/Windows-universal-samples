@@ -26,6 +26,8 @@ Due to the custom UI that this sample implements, any messages intended for the 
 
 [Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
 
+[Get a preview frame](http://go.microsoft.com/fwlink/?LinkId=627229)
+
 **Reference**
 
 [Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.devices.aspx)

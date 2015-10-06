@@ -50,6 +50,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/Package">App package information</a></td>
   <td><a href="Samples/ApplicationData">Application data</a></td>
+  <td><a href="Samples/Store">Store</a></td>
  </tr>
 </table>
 <table>
@@ -200,6 +201,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/LowLatencyInput">Low latency input</a></td>
   <td><a href="Samples/SimpleInk">Simple inking</a></td>
+  <td><a href="Samples/TouchKeyboard">Touch keyboard</a></td>
  </tr>
 </table>
 <table>

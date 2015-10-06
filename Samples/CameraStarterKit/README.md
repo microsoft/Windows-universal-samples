@@ -25,7 +25,7 @@ For apps that are interested in capturing a photo or video without requiring acc
 
 **Conceptual**
 
-[Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
+[Capture photos and video with MediaCapture](http://go.microsoft.com/fwlink/?LinkId=627234)
 
 [Capture photos and video with CameraCaptureUI](https://msdn.microsoft.com/en-us/library/windows/apps/mt282142)
 
