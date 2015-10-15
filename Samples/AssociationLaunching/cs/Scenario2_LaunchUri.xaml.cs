@@ -24,6 +24,8 @@ namespace AssociationLaunching
         public LaunchUri()
         {
             this.InitializeComponent();
+            SizePreference.ItemsSource = MainPage.ViewSizePreferences;
+            SizePreference.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -129,30 +131,7 @@ namespace AssociationLaunching
 
             if (!(Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons")))
             {
-                if (Default.IsSelected == true)
-                {
-                    options.DesiredRemainingView = Windows.UI.ViewManagement.ViewSizePreference.Default;
-                }
-                else if (UseLess.IsSelected == true)
-                {
-                    options.DesiredRemainingView = Windows.UI.ViewManagement.ViewSizePreference.UseLess;
-                }
-                else if (UseHalf.IsSelected == true)
-                {
-                    options.DesiredRemainingView = Windows.UI.ViewManagement.ViewSizePreference.UseHalf;
-                }
-                else if (UseMore.IsSelected == true)
-                {
-                    options.DesiredRemainingView = Windows.UI.ViewManagement.ViewSizePreference.UseMore;
-                }
-                else if (UseMinimum.IsSelected == true)
-                {
-                    options.DesiredRemainingView = Windows.UI.ViewManagement.ViewSizePreference.UseMinimum;
-                }
-                else if (UseNone.IsSelected == true)
-                {
-                    options.DesiredRemainingView = Windows.UI.ViewManagement.ViewSizePreference.UseNone;
-                }
+                options.DesiredRemainingView = (Windows.UI.ViewManagement.ViewSizePreference)SizePreference.SelectedValue;
             }
 
             // Launch the URI.

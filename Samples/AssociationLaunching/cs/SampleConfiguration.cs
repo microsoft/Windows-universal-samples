@@ -5,6 +5,7 @@
 //*********************************************************
 
 using System.Collections.Generic;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 using System;
 using AssociationLaunching;
@@ -28,6 +29,16 @@ namespace SDKTemplate
             new Scenario() { Title = "Launching a URI", ClassType = typeof(LaunchUri) },
             new Scenario() { Title = "Receiving a file", ClassType = typeof(ReceiveFile) },
             new Scenario() { Title = "Receiving a URI", ClassType = typeof(ReceiveUri) }
+        };
+
+        static public List<ViewSizePreference> ViewSizePreferences = new List<ViewSizePreference>
+        {
+            ViewSizePreference.Default,
+            ViewSizePreference.UseLess,
+            ViewSizePreference.UseHalf,
+            ViewSizePreference.UseMore,
+            ViewSizePreference.UseMinimum,
+            ViewSizePreference.UseNone,
         };
     }
 

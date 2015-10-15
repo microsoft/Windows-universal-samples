@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: AudioVideoAndCamera
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624252&clcid=0x409
 --->
@@ -69,7 +69,7 @@ the changes will be reflected in any videos taken with the video button.
 
 * [**Windows.Graphics.Imaging.BitmapEncoder** class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.bitmapencoder.aspx)
 
-* [How to preview video from a webcam](https://msdn.microsoft.com/library/windows/apps/xaml/hh868171.aspx)
+* [Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
 
 * [Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
 

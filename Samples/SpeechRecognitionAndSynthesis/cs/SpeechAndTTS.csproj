@@ -119,7 +119,9 @@
     <Compile Include="ListConstraintScenario.xaml.cs">
       <DependentUpon>ListConstraintScenario.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="SampleConfiguration.cs" />
     <Compile Include="SRGSConstraintScenario.xaml.cs">
       <DependentUpon>SRGSConstraintScenario.xaml</DependentUpon>

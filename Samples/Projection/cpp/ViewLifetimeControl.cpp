@@ -35,7 +35,9 @@ using namespace Windows::UI::Xaml::Data;
 // keeps track of when the secondary view thinks it's in use and when the main view is interacting with the secondary view (about to show
 // it to the user, etc.) When the reference count drops to zero, the secondary view is closed.
 // Instantiate views using "CreateForCurrentView".
-ViewLifetimeControl::ViewLifetimeControl(CoreWindow^ newWindow) : consolidated(true)
+ViewLifetimeControl::ViewLifetimeControl(CoreWindow^ newWindow) :
+    consolidated(true),
+    madeVisible(false)
 {
     dispatcher = newWindow->Dispatcher;
     window = newWindow;
@@ -172,6 +174,7 @@ void ViewLifetimeControl::Consolidated::set(bool value)
         {
             // The view has become visible, so do not close it until it's consolidated
             StartViewInUse();
+            madeVisible = true;
         }
     }
 }
@@ -212,7 +215,7 @@ int ViewLifetimeControl::StopViewInUse()
     if (!released && refCount > 0)
     {
         refCountCopy = --refCount;
-        if (refCountCopy == 0)
+        if ((refCountCopy == 0) && madeVisible)
         {
             // If no other view is interacting with this view, and
             // the view isn't accessible to the user, it's appropriate

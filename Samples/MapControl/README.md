@@ -24,7 +24,7 @@ This sample is written in XAML and C#.
 
 [MapControl API reference]( https://msdn.microsoft.com/en-us/library/windows/apps/xaml/windows.ui.xaml.controls.maps.mapcontrol.aspx) 
 
-[URI scheme for Windows Maps app]( https://msdn.microsoft.com/en-us/library/windows/apps/xaml/jj635237.aspx)
+[Launch the Windows Maps app](https://msdn.microsoft.com/library/windows/apps/mt228341)
 
 ## Operating system requirements
 

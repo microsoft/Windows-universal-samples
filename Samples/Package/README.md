@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: AppSettings 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620581&clcid=0x409
 --->
@@ -33,7 +33,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 **Conceptual**
 
-[App packages and deployment](http://msdn.microsoft.com/library/windows/apps/hh464929)
+[Packaging apps](https://msdn.microsoft.com/library/windows/apps/mt270969)
 
 **Reference**
 
@@ -56,7 +56,7 @@ For more info about the concepts and APIs demonstrated in this sample, see these
 -   [How to share text (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758313)
 -   [How to share text (XAML)](http://msdn.microsoft.com/library/windows/apps/hh871372)
 -   [Quickstart: Sharing content (HTML)](http://msdn.microsoft.com/library/windows/apps/hh465261)
--   [Quickstart: Sharing content (XAML)](http://msdn.microsoft.com/library/windows/apps/hh871368)
+-   [Share data](https://msdn.microsoft.com/library/windows/apps/mt243293)
 -   [**DataPackageView**](http://msdn.microsoft.com/library/windows/apps/hh738408)
 -   [**ShareOperation**](http://msdn.microsoft.com/library/windows/apps/br205977)
 -   [**Windows.ApplicationModel.DataTransfer**](http://msdn.microsoft.com/library/windows/apps/br205967)

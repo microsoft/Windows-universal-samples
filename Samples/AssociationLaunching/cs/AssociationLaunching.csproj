@@ -130,19 +130,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_LaunchFile.xaml">
+    <Page Include="..\shared\Scenario1_LaunchFile.xaml">
+      <Link>Scenario1_LaunchFile.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_LaunchUri.xaml">
+    <Page Include="..\shared\Scenario2_LaunchUri.xaml">
+      <Link>Scenario2_LaunchUri.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3_ReceiveFile.xaml">
+    <Page Include="..\shared\Scenario3_ReceiveFile.xaml">
+      <Link>Scenario3_ReceiveFile.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario4_ReceiveUri.xaml">
+    <Page Include="..\shared\Scenario4_ReceiveUri.xaml">
+      <Link>Scenario4_ReceiveUri.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

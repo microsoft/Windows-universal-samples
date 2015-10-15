@@ -203,6 +203,9 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/SimpleInk">Simple inking</a></td>
   <td><a href="Samples/TouchKeyboard">Touch keyboard</a></td>
  </tr>
+ <tr>
+  <td><a href="Samples/TouchKeyboardTextInput">Touch keyboard text input</a></td>
+ </tr>
 </table>
 <table>
  <tr>

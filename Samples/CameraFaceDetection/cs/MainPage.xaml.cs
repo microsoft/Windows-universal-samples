@@ -40,7 +40,7 @@ using Windows.Media.FaceAnalysis;
 using Windows.UI;
 using System.Collections.Generic;
 
-namespace CameraFaceDetection
+namespace FaceDetection
 {
 
     public sealed partial class MainPage : Page

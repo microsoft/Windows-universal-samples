@@ -31,6 +31,8 @@ namespace AssociationLaunching
         public LaunchFile()
         {
             this.InitializeComponent();
+            SizePreference.ItemsSource = MainPage.ViewSizePreferences;
+            SizePreference.SelectedIndex = 0;
         }
 
         private async Task<StorageFile> GetFileToLaunch()
@@ -152,30 +154,7 @@ namespace AssociationLaunching
                 {
                     // Configure the request for split screen launch.
                     var options = new Windows.System.LauncherOptions();
-                    if (Default.IsSelected == true)
-                    {
-                        options.DesiredRemainingView = Windows.UI.ViewManagement.ViewSizePreference.Default;
-                    }
-                    else if (UseLess.IsSelected == true)
-                    {
-                        options.DesiredRemainingView = Windows.UI.ViewManagement.ViewSizePreference.UseLess;
-                    }
-                    else if (UseHalf.IsSelected == true)
-                    {
-                        options.DesiredRemainingView = Windows.UI.ViewManagement.ViewSizePreference.UseHalf;
-                    }
-                    else if (UseMore.IsSelected == true)
-                    {
-                        options.DesiredRemainingView = Windows.UI.ViewManagement.ViewSizePreference.UseMore;
-                    }
-                    else if (UseMinimum.IsSelected == true)
-                    {
-                        options.DesiredRemainingView = Windows.UI.ViewManagement.ViewSizePreference.UseMinimum;
-                    }
-                    else if (UseNone.IsSelected == true)
-                    {
-                        options.DesiredRemainingView = Windows.UI.ViewManagement.ViewSizePreference.UseNone;
-                    }
+                    options.DesiredRemainingView = (Windows.UI.ViewManagement.ViewSizePreference)SizePreference.SelectedValue;
 
                     // Next, launch the file.
                     bool success = await Windows.System.Launcher.LaunchFileAsync(file, options);

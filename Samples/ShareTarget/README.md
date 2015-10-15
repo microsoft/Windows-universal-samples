@@ -32,7 +32,7 @@ For more info about the concepts and APIs demonstrated in this sample, see these
 - [How to receive text (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758304)
 - [How to receive text (XAML)](http://msdn.microsoft.com/library/windows/apps/hh973054)
 - [Quickstart: Receiving shared content (HTML)](http://msdn.microsoft.com/library/windows/apps/hh465255)
-- [Quickstart: Receiving shared content (XAML)](http://msdn.microsoft.com/library/windows/apps/hh871367)
+- [Receive data](https://msdn.microsoft.com/library/windows/apps/mt243292)
 - [**DataPackageView**](http://msdn.microsoft.com/library/windows/apps/hh738408)
 - [**ShareOperation**](http://msdn.microsoft.com/library/windows/apps/br205977)
 - [**Windows.ApplicationModel.DataTransfer**](http://msdn.microsoft.com/library/windows/apps/br205967)
