@@ -12,7 +12,7 @@
       Version="1.0.0.0" />
 
 
-    <mp:PhoneIdentity PhoneProductId="3df6c60c-2c0b-4061-9e7b-3108ff8067e6" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="fc09ed7d-5ae7-47a5-81ff-471b9a7d48f8" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>Accelerometer VB Sample</DisplayName>

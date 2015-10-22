@@ -178,6 +178,8 @@ namespace AllJoynProducerExperiences
                 // Optional - Populate About data for the producer.
                 m_busAttachment.AboutData.DefaultManufacturer = "Contoso";
                 m_busAttachment.AboutData.SupportUrl = new Uri("http://www.contoso.com/support");
+                m_busAttachment.AboutData.ModelNumber = "ContosoTestModel";
+                m_busAttachment.AboutData.DefaultDescription = "A secure AllJoyn sample";
 
                 // Generate the one-time pre-shared key.
                 Key = CryptographicHelpers.GenerateHighEntropyKey(DesiredKeyLength);
@@ -200,7 +202,7 @@ namespace AllJoynProducerExperiences
                 if (!string.IsNullOrWhiteSpace(SignalText))
                 {
                     m_producer.Signals.TextSent(SignalText);
-                    UpdateStatusAsync("Signal Sent.", NotifyType.StatusMessage);
+                    UpdateStatusAsync("Signal sent.", NotifyType.StatusMessage);
                 }
                 else
                 {

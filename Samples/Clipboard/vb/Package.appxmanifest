@@ -12,7 +12,7 @@
       Version="1.0.0.0" />
 
 
-    <mp:PhoneIdentity PhoneProductId="022e15da-e3cb-4635-8cc7-0fbe33af9b7b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="99cc2922-ef68-49d5-bab7-1d335bf6f41e" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>Clipboard VB Sample</DisplayName>

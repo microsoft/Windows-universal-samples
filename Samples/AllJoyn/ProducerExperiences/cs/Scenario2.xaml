@@ -29,8 +29,8 @@
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                   The Onboarding Producer accepts a connection form the Onboarding Consumer. Once connected, 
-                   the Producer will pass back a list of available networks, then accept an SSID and password 
+                   The Onboarding producer accepts a connection form the Onboarding consumer. Once connected, 
+                   the producer will pass back a list of available networks, then accept an SSID and password 
                    for connection purposes as described in the Onboarding Service Framework XML.
                 </TextBlock>
             </StackPanel>

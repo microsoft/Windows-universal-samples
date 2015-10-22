@@ -11,7 +11,7 @@
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="955ca3aa-f603-4811-a14a-edb211eb26e0" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="0093ac08-6ec0-4c5a-8aeb-dfa3ff0d6862" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Camera Video Stabilization VB Sample</DisplayName>

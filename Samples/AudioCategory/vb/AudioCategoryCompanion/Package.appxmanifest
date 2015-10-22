@@ -12,7 +12,7 @@
       Version="1.0.0.0" />
 
 
-    <mp:PhoneIdentity PhoneProductId="19833516-a526-43ec-8416-3322f96cc5eb" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="31e45913-4e78-436b-9216-1cabcae831ef" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>AudioCategoryCompanion VB Sample</DisplayName>

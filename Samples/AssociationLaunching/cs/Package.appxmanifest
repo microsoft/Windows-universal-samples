@@ -17,10 +17,10 @@
     <Application Id="AssociationLaunching.App" Executable="$targetnametoken$.exe" EntryPoint="AssociationLaunching.App">
       <Extensions>
         <uap:Extension Category="windows.protocol">
-          <uap:Protocol Name="alsdkcs" />
+          <uap:Protocol Name="alsdkcs" DesiredView="useLess" />
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name=".alsdkcs">
+          <uap:FileTypeAssociation Name=".alsdkcs" DesiredView="useLess">
             <uap:SupportedFileTypes>
               <uap:FileType>.alsdkcs</uap:FileType>
             </uap:SupportedFileTypes>
@@ -38,6 +38,6 @@
     </Application>
   </Applications>
   <Capabilities>
-    <Capability Name="internetClient" />
+    <uap:Capability Name="picturesLibrary" />
   </Capabilities>
 </Package>

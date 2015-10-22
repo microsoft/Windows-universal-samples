@@ -1,23 +1,30 @@
 '*********************************************************
 '
 ' Copyright (c) Microsoft. All rights reserved.
+' This code is licensed under the MIT License (MIT).
+' THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+' ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+' IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+' PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 '
 '*********************************************************
+Imports System
+Imports Windows.ApplicationModel.Activation
 Imports Windows.UI.Xaml
 Imports Windows.UI.Xaml.Controls
 Imports Windows.UI.Xaml.Navigation
-Imports SDKTemplate
-Imports System
 
-Namespace Global.AssociationLaunching
+Namespace Global.SDKTemplate
 
     ''' <summary>
     ''' An empty page that can be used on its own or navigated to within a Frame.
     ''' </summary>
-    Public NotInheritable Partial Class ReceiveUri
+    Partial Public NotInheritable Class Scenario4_ReceiveUri
         Inherits Page
 
         Dim rootPage As MainPage = MainPage.Current
+
+        Dim Protocol As String = "alsdkvb"
 
         Public Sub New()
             Me.InitializeComponent()
@@ -29,14 +36,9 @@ Namespace Global.AssociationLaunching
         ''' <param name="e">Event data that describes how this page was reached. The Parameter
         ''' property is typically used to configure the page.</param>
         Protected Overrides Sub OnNavigatedTo(e As NavigationEventArgs)
-            If Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons") Then
-                Me.WindowsScenarioDescription.Visibility = Visibility.Collapsed
-            Else
-                Me.PhoneScenarioDescription.Visibility = Visibility.Collapsed
-            End If
-
-            If rootPage.ProtocolEvent IsNot Nothing Then
-                rootPage.NotifyUser("Protocol activation received. The received URI is " & rootPage.ProtocolEvent.Uri.AbsoluteUri & ".", NotifyType.StatusMessage)
+            Dim args = TryCast(e.Parameter, ProtocolActivatedEventArgs)
+            If args IsNot Nothing Then
+                rootPage.NotifyUser("Protocol activation received. The received URI is " & args.Uri.AbsoluteUri & ".", NotifyType.StatusMessage)
             End If
         End Sub
     End Class

@@ -1,6 +1,7 @@
 ﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
 // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
@@ -8,15 +9,13 @@
 //
 //*********************************************************
 
+using System;
+using System.Text;
+using Windows.ApplicationModel.Resources.Core;
+using Windows.Globalization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
-using System;
-using Windows.ApplicationModel.Resources.Core;
-using System.Collections.Generic;
-using System.Text;
-using Windows.Globalization;
 
 namespace SDKTemplate
 {
@@ -25,49 +24,103 @@ namespace SDKTemplate
     /// </summary>
     public sealed partial class Scenario8 : Page
     {
-        // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
-        // as NotifyUser()
-        MainPage rootPage = MainPage.Current;
+        int lastSelectedIndex;
 
         public Scenario8()
         {
             this.InitializeComponent();
-            UpdateCurrentAppLanguageMessage();
-            LanguageOverrideCombo.LanguageOverrideChanged += LanguageOverrideCombo_LanguageOrverrideChanged;
-        }
-
-        void LanguageOverrideCombo_LanguageOrverrideChanged(object sender, EventArgs e)
-        {
+            PopulateComboBox();
             UpdateCurrentAppLanguageMessage();
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void ShowText()
         {
-
+            ResourceContext defaultContextForCurrentView = ResourceContext.GetForCurrentView();
+            ResourceMap stringResourcesResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
+            Scenario8MessageTextBlock.Text = stringResourcesResourceMap.GetValue("string1", defaultContextForCurrentView).ValueAsString;
         }
 
-        /// <summary>
-        /// This is the click handler for the 'Scenario8Button_Show' button.  You would replace this with your own handler
-        /// if you have a button or buttons on this page.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Scenario8Button_Show_Click(object sender, RoutedEventArgs e)
+        private void LanguageOverrideCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Button b = sender as Button;
-            if (b != null)
+            var combo = sender as ComboBox;
+            var item = combo.SelectedValue as ComboBoxItem;
+            var languageTag = item.Tag as string;
+
+            // Ignore the divider (tag = "-")
+            if (languageTag == "-")
             {
-                ResourceContext defaultContextForCurrentView = ResourceContext.GetForCurrentView();
-                ResourceMap stringResourcesResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
-                Scenario8MessageTextBlock.Text = stringResourcesResourceMap.GetValue("string1", defaultContextForCurrentView).ValueAsString;
+                combo.SelectedIndex = lastSelectedIndex;
+            }
+            else
+            {
+                lastSelectedIndex = combo.SelectedIndex;
+
+                // Set the persistent language override
+                ApplicationLanguages.PrimaryLanguageOverride = languageTag;
+
+                // update current app languages message
+                UpdateCurrentAppLanguageMessage();
             }
         }
 
+        void AddItemForLanguageTag(string languageTag)
+        {
+            var language = new Language(languageTag);
+            var item = new ComboBoxItem { Content = language.DisplayName, Tag = languageTag };
+            LanguageOverrideCombo.Items.Add(item);
+
+            // Select this item if it is the primary language override.
+            if (languageTag == ApplicationLanguages.PrimaryLanguageOverride)
+            {
+                LanguageOverrideCombo.SelectedItem = item;
+            }
+        }
+
+        void PopulateComboBox()
+        {
+            // First show the default setting
+            LanguageOverrideCombo.Items.Add(new ComboBoxItem { Content = "Use language preferences (recommended)", Tag = "" });
+            LanguageOverrideCombo.SelectedIndex = 0;
+
+            // If there are app languages that the user speaks, show them next
+
+            // Note: the first (non-override) language, if set as the primary language override
+            // would give the same result as not having any primary language override. There's
+            // still a difference, though: If the user changes their language preferences, the 
+            // default setting (no override) would mean that the actual primary app language
+            // could change. But if it's set as an override, then it will remain the primary
+            // app language after the user changes their language preferences.
+
+            foreach (var languageTag in ApplicationLanguages.Languages)
+            {
+                AddItemForLanguageTag(languageTag);
+            }
+
+            // Now add a divider followed by all the app manifest languages (in case the user
+            // wants to pick a language not currently in their profile)
+
+            // NOTE: If an app is deployed using a bundle with resource packages, the following
+            // addition to the list may not be useful: The set of languages returned by 
+            // ApplicationLanguages.ManifestLanguages will consist of only those manifest 
+            // languages in the main app package or in the resource packages that are installed 
+            // and registered for the current user. Language resource packages get deployed for 
+            // the user if the language is in the user's profile. Therefore, the only difference 
+            // from the set returned by ApplicationLanguages.Languages above would depend on 
+            // which languages are included in the main app package.
+
+            LanguageOverrideCombo.Items.Add(new ComboBoxItem { Content = "——————", Tag = "-" });
+
+            // In a production app, this list should be sorted, but that's beyond the
+            // focus of this sample.
+            foreach (var languageTag in ApplicationLanguages.ManifestLanguages)
+            {
+                AddItemForLanguageTag(languageTag);
+            }
+
+            LanguageOverrideCombo.SelectionChanged += LanguageOverrideCombo_SelectionChanged;
+
+            lastSelectedIndex = LanguageOverrideCombo.SelectedIndex;
+        }
 
         private void UpdateCurrentAppLanguageMessage()
         {
@@ -76,15 +129,7 @@ namespace SDKTemplate
 
         private string GetAppLanguagesAsFormattedString()
         {
-            var countLanguages = ApplicationLanguages.Languages.Count;
-            StringBuilder sb = new StringBuilder();
-            for (var i = 0; i < countLanguages - 1; i++)
-            {
-                sb.Append(ApplicationLanguages.Languages[i]);
-                sb.Append(", ");
-            }
-            sb.Append(ApplicationLanguages.Languages[countLanguages - 1]);
-            return sb.ToString();
+            return String.Join(", ", ApplicationLanguages.Languages);
         }
     }
 }

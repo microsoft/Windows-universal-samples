@@ -12,7 +12,7 @@
       Version="1.0.0.0" />
 
 
-    <mp:PhoneIdentity PhoneProductId="9a5a58cc-8a79-4ca2-ae09-222eadd7e2cd" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="b1b83e6b-9484-4e31-8539-957c277e9d6f" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>Calendar VB Sample</DisplayName>

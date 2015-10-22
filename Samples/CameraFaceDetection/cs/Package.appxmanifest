@@ -11,7 +11,7 @@
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="b34fdb3c-60c8-476e-8225-a5d3a141370d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="d84d43cf-9193-4c11-a761-fe484a055751" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Face Detection C# Sample</DisplayName>

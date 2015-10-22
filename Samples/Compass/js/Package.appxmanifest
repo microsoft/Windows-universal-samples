@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="1f370d64-9077-4397-a487-094ed6031fb9"
+    Name="Microsoft.SDKSamples.Compass.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

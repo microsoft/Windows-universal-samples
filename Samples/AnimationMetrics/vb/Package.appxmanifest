@@ -12,7 +12,7 @@
       Version="1.0.0.0" />
 
 
-    <mp:PhoneIdentity PhoneProductId="5a39557d-07f4-472d-913e-31884bb92504" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="0a1c05a6-b0d6-44db-8a21-fe0821f4a355" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>Animation Metrics VB Sample</DisplayName>

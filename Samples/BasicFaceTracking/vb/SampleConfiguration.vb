@@ -17,7 +17,7 @@ Namespace Global.SDKTemplate
     Public Partial Class MainPage
         Inherits Page
 
-        Public Const FEATURE_NAME As String = "Face tracking sample"
+        Public Const FEATURE_NAME As String = "Basic face tracking VB Sample"
 
         Public ReadOnly Property Scenarios As New List(Of Scenario) From {New Scenario() With {.Title = "Track Faces in Webcam", .ClassType = GetType(TrackFacesInWebcam)}}
     End Class

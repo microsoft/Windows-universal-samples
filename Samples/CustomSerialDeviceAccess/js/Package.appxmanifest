@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="c2adb9af-edb3-4e57-8056-9d0531d4a6b4"
+    Name="Microsoft.SDKSamples.CustomSerialDeviceAccess.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

@@ -43,6 +43,8 @@ Namespace Global.BackgroundAudio
 
         Private albumArtCache As Dictionary(Of String, BitmapImage) = New Dictionary(Of String, BitmapImage)()
 
+        Private Const RPC_S_SERVER_UNAVAILABLE As Integer = -2147023174 ' &H800706BA
+
         Private ReadOnly Property IsMyBackgroundTaskRunning As Boolean
             Get
                 If _isMyBackgroundTaskRunning Then
@@ -63,8 +65,59 @@ Namespace Global.BackgroundAudio
                 End If
             End Get
         End Property
-
 #End Region
+
+        ''' <summary>
+        ''' You should never cache the MediaPlayer And always call Current. It Is possible
+        ''' for the background task to go away for several different reasons. When it does
+        ''' an RPC_S_SERVER_UNAVAILABLE error Is thrown. We need to reset the foreground state
+        ''' And restart the background task.
+        ''' </summary>
+        Private ReadOnly Property CurrentPlayer As MediaPlayer
+            Get
+                Dim mp As MediaPlayer = Nothing
+
+                Try
+                    mp = BackgroundMediaPlayer.Current
+                Catch ex As Exception
+                    If ex.HResult = RPC_S_SERVER_UNAVAILABLE Then
+                        ' The Foreground app uses RPC to communicate with the background process.
+                        ' If the background process crashes Or Is killed for any reason RPC_S_SERVER_UNAVAILABLE
+                        ' Is returned when calling Current.
+                        ResetAfterLostBackground()
+                        StartBackgroundAudioTask()
+                    End If
+                End Try
+
+                If mp Is Nothing Then
+                    Throw New Exception("Failed to get a MediaPlayer instance.")
+                End If
+
+                Return mp
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' The background task did exist, but it has disappeared. Put the foreground back into an initial state.
+        ''' </summary>
+        Private Sub ResetAfterLostBackground()
+            BackgroundMediaPlayer.Shutdown()
+            _isMyBackgroundTaskRunning = False
+            backgroundAudioTaskStarted.Reset()
+            prevButton.IsEnabled = True
+            nextButton.IsEnabled = True
+            ApplicationSettingsHelper.SaveSettingsValue(ApplicationSettingsConstants.BackgroundTaskState, BackgroundTaskState.Unknown.ToString())
+            playButton.Content = "| |"
+
+            Try
+                AddHandler BackgroundMediaPlayer.MessageReceivedFromBackground, AddressOf BackgroundMediaPlayer_MessageReceivedFromBackground
+            Catch ex As Exception
+                If ex.HResult = RPC_S_SERVER_UNAVAILABLE Then
+                    Throw New Exception("Failed to get a MediaPlayer instance.")
+                End If
+            End Try
+        End Sub
+
         Public Sub New()
             Me.InitializeComponent()
             Me.NavigationCacheMode = NavigationCacheMode.Required
@@ -152,10 +205,10 @@ Namespace Global.BackgroundAudio
             If IsMyBackgroundTaskRunning Then
                 AddMediaPlayerEventHandlers()
                 MessageService.SendMessageToBackground(New AppResumedMessage())
-                UpdateTransportControls(BackgroundMediaPlayer.Current.CurrentState)
+                UpdateTransportControls(CurrentPlayer.CurrentState)
                 Dim trackId = GetCurrentTrackIdAfterAppResume()
                 txtCurrentTrack.Text = If(trackId Is Nothing, String.Empty, playlistView.GetSongById(trackId).Title)
-                txtCurrentState.Text = BackgroundMediaPlayer.Current.CurrentState.ToString()
+                txtCurrentState.Text = CurrentPlayer.CurrentState.ToString()
             Else
                 playButton.Content = ">"
                 txtCurrentTrack.Text = String.Empty
@@ -238,7 +291,7 @@ Namespace Global.BackgroundAudio
         Private Sub PlaylistView_ItemClick(sender As Object, e As ItemClickEventArgs)
             Dim song = TryCast(e.ClickedItem, SongModel)
             Debug.WriteLine("Clicked item from App: " & song.MediaUri.ToString())
-            If Not IsMyBackgroundTaskRunning OrElse MediaPlayerState.Closed = BackgroundMediaPlayer.Current.CurrentState Then
+            If Not IsMyBackgroundTaskRunning OrElse MediaPlayerState.Closed = CurrentPlayer.CurrentState Then
                 ApplicationSettingsHelper.SaveSettingsValue(ApplicationSettingsConstants.TrackId, song.MediaUri.ToString())
                 ApplicationSettingsHelper.SaveSettingsValue(ApplicationSettingsConstants.Position, New TimeSpan().ToString())
                 StartBackgroundAudioTask()
@@ -246,8 +299,8 @@ Namespace Global.BackgroundAudio
                 MessageService.SendMessageToBackground(New TrackChangedMessage(song.MediaUri))
             End If
 
-            If MediaPlayerState.Paused = BackgroundMediaPlayer.Current.CurrentState Then
-                BackgroundMediaPlayer.Current.Play()
+            If MediaPlayerState.Paused = CurrentPlayer.CurrentState Then
+                CurrentPlayer.Play()
             End If
         End Sub
 
@@ -267,11 +320,11 @@ Namespace Global.BackgroundAudio
         Private Sub playButton_Click(sender As Object, e As RoutedEventArgs)
             Debug.WriteLine("Play button pressed from App")
             If IsMyBackgroundTaskRunning Then
-                If MediaPlayerState.Playing = BackgroundMediaPlayer.Current.CurrentState Then
-                    BackgroundMediaPlayer.Current.Pause()
-                ElseIf MediaPlayerState.Paused = BackgroundMediaPlayer.Current.CurrentState Then
-                    BackgroundMediaPlayer.Current.Play()
-                ElseIf MediaPlayerState.Closed = BackgroundMediaPlayer.Current.CurrentState Then
+                If MediaPlayerState.Playing = CurrentPlayer.CurrentState Then
+                    CurrentPlayer.Pause()
+                ElseIf MediaPlayerState.Paused = CurrentPlayer.CurrentState Then
+                    CurrentPlayer.Play()
+                ElseIf MediaPlayerState.Closed = CurrentPlayer.CurrentState Then
                     StartBackgroundAudioTask()
                 End If
             Else
@@ -292,11 +345,11 @@ Namespace Global.BackgroundAudio
         Private Sub speedButton_Click(sender As Object, e As RoutedEventArgs)
             ' Create menu and add commands
             Dim popupMenu = New PopupMenu()
-            popupMenu.Commands.Add(New UICommand("4.0x", Sub(command) BackgroundMediaPlayer.Current.PlaybackRate = 4.0))
-            popupMenu.Commands.Add(New UICommand("2.0x", Sub(command) BackgroundMediaPlayer.Current.PlaybackRate = 2.0))
-            popupMenu.Commands.Add(New UICommand("1.5x", Sub(command) BackgroundMediaPlayer.Current.PlaybackRate = 1.5))
-            popupMenu.Commands.Add(New UICommand("1.0x", Sub(command) BackgroundMediaPlayer.Current.PlaybackRate = 1.0))
-            popupMenu.Commands.Add(New UICommand("0.5x", Sub(command) BackgroundMediaPlayer.Current.PlaybackRate = 0.5))
+            popupMenu.Commands.Add(New UICommand("4.0x", Sub(command) CurrentPlayer.PlaybackRate = 4.0))
+            popupMenu.Commands.Add(New UICommand("2.0x", Sub(command) CurrentPlayer.PlaybackRate = 2.0))
+            popupMenu.Commands.Add(New UICommand("1.5x", Sub(command) CurrentPlayer.PlaybackRate = 1.5))
+            popupMenu.Commands.Add(New UICommand("1.0x", Sub(command) CurrentPlayer.PlaybackRate = 1.0))
+            popupMenu.Commands.Add(New UICommand("0.5x", Sub(command) CurrentPlayer.PlaybackRate = 0.5))
             ' Get button transform and then offset it by half the button
             ' width to center. This will show the popup just above the button.
             Dim button = CType(sender, Button)
@@ -321,16 +374,31 @@ Namespace Global.BackgroundAudio
         ''' Unsubscribes to MediaPlayer events. Should run only on suspend
         ''' </summary>
         Private Sub RemoveMediaPlayerEventHandlers()
-            RemoveHandler BackgroundMediaPlayer.Current.CurrentStateChanged, AddressOf Me.MediaPlayer_CurrentStateChanged
-            RemoveHandler BackgroundMediaPlayer.MessageReceivedFromBackground, AddressOf Me.BackgroundMediaPlayer_MessageReceivedFromBackground
+            RemoveHandler CurrentPlayer.CurrentStateChanged, AddressOf Me.MediaPlayer_CurrentStateChanged
+            Try
+                RemoveHandler BackgroundMediaPlayer.MessageReceivedFromBackground, AddressOf Me.BackgroundMediaPlayer_MessageReceivedFromBackground
+            Catch ex As Exception
+                If ex.HResult = RPC_S_SERVER_UNAVAILABLE Then
+                    ' Do nothing
+                Else
+                    Throw
+                End If
+            End Try
         End Sub
 
         ''' <summary>
         ''' Subscribes to MediaPlayer events
         ''' </summary>
         Private Sub AddMediaPlayerEventHandlers()
-            AddHandler BackgroundMediaPlayer.Current.CurrentStateChanged, AddressOf Me.MediaPlayer_CurrentStateChanged
-            AddHandler BackgroundMediaPlayer.MessageReceivedFromBackground, AddressOf Me.BackgroundMediaPlayer_MessageReceivedFromBackground
+            AddHandler CurrentPlayer.CurrentStateChanged, AddressOf Me.MediaPlayer_CurrentStateChanged
+            Try
+                AddHandler BackgroundMediaPlayer.MessageReceivedFromBackground, AddressOf Me.BackgroundMediaPlayer_MessageReceivedFromBackground
+            Catch ex As Exception
+                If ex.HResult = RPC_S_SERVER_UNAVAILABLE Then
+                    ' Internally MessageReceivedFromBackground calls Current which can throw RPC_S_SERVER_UNAVAILABLE
+                    ResetAfterLostBackground()
+                End If
+            End Try
         End Sub
 
         ''' <summary>

@@ -247,7 +247,7 @@ Namespace Global.SDKTemplate
         ''' <param name="sender">The source of the event, i.e. our MediaCapture object</param>
         ''' <param name="args">Event data</param>
         Private Sub MediaCapture_CameraStreamStateChanged(sender As MediaCapture, args As Object)
-            ' MediaCapture is not Agile and so we cannot invoke it's methods on this caller's thread
+            ' MediaCapture is not Agile and so we cannot invoke its methods on this caller's thread
             ' and instead need to schedule the state change on the UI thread.
             Dim ignored = Me.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, Sub()
                 ChangeScenarioState(ScenarioState.Idle)

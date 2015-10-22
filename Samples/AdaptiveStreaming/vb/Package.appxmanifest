@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
   <Identity Name="Microsoft.SDKSamples.AdaptiveStreaming.VB" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.2" />
-  <mp:PhoneIdentity PhoneProductId="f14b66c8-a6f2-4870-87c7-5208b2679716" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <mp:PhoneIdentity PhoneProductId="e0f0107d-a13b-4b7c-9273-7e639f45aa9e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>AdaptiveStreaming</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>

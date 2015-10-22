@@ -11,7 +11,7 @@
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
-    <mp:PhoneIdentity PhoneProductId="0840d61f-acb9-47b8-be10-90be343fbe4e" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="43876b43-cefb-47f0-8afe-5c7b994b843f" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>Activity Sensor VB Sample</DisplayName>

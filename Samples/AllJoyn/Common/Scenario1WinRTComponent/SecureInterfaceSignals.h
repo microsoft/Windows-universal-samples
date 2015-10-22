@@ -47,7 +47,26 @@ public:
     void TextSent(_In_ Platform::String^ interfaceMemberMessage);
 
     // This event fires whenever the TextSent signal is sent by another member of the session.
-    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceSignals^, SecureInterfaceTextSentReceivedEventArgs^>^ TextSentReceived;
+    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceSignals^, SecureInterfaceTextSentReceivedEventArgs^>^ TextSentReceived 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<SecureInterfaceSignals^, SecureInterfaceTextSentReceivedEventArgs^>^ handler) 
+        { 
+            return _TextSentReceived += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<SecureInterfaceSignals^>(sender), safe_cast<SecureInterfaceTextSentReceivedEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _TextSentReceived -= token; 
+        } 
+    internal: 
+        void raise(SecureInterfaceSignals^ sender, SecureInterfaceTextSentReceivedEventArgs^ args) 
+        { 
+            _TextSentReceived(sender, args);
+        } 
+    }
 
 internal:
     void Initialize(_In_ alljoyn_busobject busObject, _In_ alljoyn_sessionid sessionId);
@@ -56,6 +75,8 @@ internal:
 private:
     alljoyn_busobject m_busObject;
     alljoyn_sessionid m_sessionId;
+
+    virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _TextSentReceived;
 
     alljoyn_interfacedescription_member m_memberTextSent;
 };

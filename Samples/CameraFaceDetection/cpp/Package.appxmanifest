@@ -7,7 +7,7 @@
   IgnorableNamespaces="uap mp">
 
     <Identity
-      Name="Microsoft.SDKSamples.FaceDetection.CPP"
+      Name="Microsoft.SDKSamples.CameraFaceDetection.CPP"
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 

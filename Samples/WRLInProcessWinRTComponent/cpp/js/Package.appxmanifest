@@ -10,7 +10,7 @@
     Version="1.0.0.0"
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
 
-  <mp:PhoneIdentity PhoneProductId="c2adb9af-edb3-4e57-8056-9d0531d4a6b2" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="37809973-0b49-4745-8fe9-da9cec781b1e" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>WRL In-process Runtime Component client JS sample</DisplayName>

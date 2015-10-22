@@ -10,7 +10,7 @@
     Version="1.0.0.0"
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
 
-  <mp:PhoneIdentity PhoneProductId="75996425-acc5-4882-a7be-f9963a85a8b2" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="7ae46121-bb6a-49e6-bcdf-eb9c2a5490bf" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>I2C JS Sample</DisplayName>

@@ -11,7 +11,7 @@
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="cf0d4fc1-5a0c-4d10-9276-975411de3f0d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="66a6aeb3-fb04-4d34-b6cc-e5cc8820d193" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>CameraHdr</DisplayName>

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:mobile="http://schemas.microsoft.com/appx/manifest/mobile/windows10" IgnorableNamespaces="uap mp mobile">
   <Identity Name="Microsoft.SDKSamples.BlockAndFilter.CS" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="3df6c60c-2c0b-4061-9e7b-3108ff8067e6" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <mp:PhoneIdentity PhoneProductId="08d9c6c2-7d55-4bc1-b366-1ca51db16987" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Block And Filter C# Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>

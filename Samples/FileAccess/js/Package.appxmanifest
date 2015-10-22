@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="05769b3c-3013-4423-af7f-9972f9e47d75"
+    Name="Microsoft.SDKSamples.FileAccess.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

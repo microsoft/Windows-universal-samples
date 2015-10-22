@@ -11,7 +11,7 @@
       Version="1.0.0.0" />
 
 
-    <mp:PhoneIdentity PhoneProductId="432afed2-f796-4370-85bd-bfef6693d71a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="17f04dae-7c0a-4553-9ebd-6a9d153a3d93" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>Barcode Scanner VB Sample</DisplayName>

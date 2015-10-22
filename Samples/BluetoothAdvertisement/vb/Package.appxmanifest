@@ -12,7 +12,7 @@
     Version="1.0.0.0" />
 
 
-  <mp:PhoneIdentity PhoneProductId="11a54d62-0d60-4e17-820d-1fa537715b3a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="be4d15bd-62d3-453f-a584-281491dc5e1b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Bluetooth Advertisement VB Sample</DisplayName>

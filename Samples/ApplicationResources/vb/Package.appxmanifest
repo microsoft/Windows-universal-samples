@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
   <Identity Name="Microsoft.SDKSamples.ApplicationResources.VB" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.1.0" />
-  <mp:PhoneIdentity PhoneProductId="446bcf29-3489-4b91-9f2f-c748c0c3d5d7" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <mp:PhoneIdentity PhoneProductId="31dca1cb-614f-4c70-a299-e44e1100ef4a" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>ms-resource:displayNameVB</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>

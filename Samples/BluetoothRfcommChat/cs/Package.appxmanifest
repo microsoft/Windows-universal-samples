@@ -12,7 +12,7 @@
     Version="1.0.0.0" />
 
 
-  <mp:PhoneIdentity PhoneProductId="11a54d62-0d60-4e17-820d-1fa537715b3a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="33cda3e9-6f5f-4245-9243-a1ba50df1d79" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Bluetooth Rfcomm Chat C# Sample</DisplayName>

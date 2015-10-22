@@ -11,7 +11,7 @@
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="7339e59f-84fd-4429-9297-55bc657b0d09" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="af8e7aad-a628-4fc1-89cf-34ea09f5f3d2" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>SPI C# Sample</DisplayName>

@@ -11,7 +11,7 @@
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="eec5d43f-497f-40c7-be6f-adc7e7038d9d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="b8f641b3-828c-436b-b2a2-2b444bb5fe6c" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Camera Starter Kit VB Sample</DisplayName>

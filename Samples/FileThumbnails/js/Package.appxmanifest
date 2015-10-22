@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="7df6cc75-dc1c-4107-941e-4d1e97673d21"
+    Name="Microsoft.SDKSamples.FileThumbnails.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
   <Identity Name="Microsoft.SDKSamples.Appointments.VB" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.2.0" />
-  <mp:PhoneIdentity PhoneProductId="59880ddd-28e0-4d29-ab9f-150101a2f323" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <mp:PhoneIdentity PhoneProductId="2fede6b4-63a5-4be4-993d-5ebb57d0319a" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Appointments VB Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>

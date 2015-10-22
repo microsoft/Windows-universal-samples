@@ -12,7 +12,7 @@
       Version="1.0.0.0" />
 
 
-    <mp:PhoneIdentity PhoneProductId="97007e34-eea1-400a-8a16-052ce42d6b90" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="52aad6e7-eaf4-4a2b-9455-0a18fbc4894a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>Altimeter VB Sample</DisplayName>

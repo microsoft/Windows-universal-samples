@@ -12,7 +12,7 @@
       Version="1.0.0.0" />
 
 
-    <mp:PhoneIdentity PhoneProductId="da0b9378-eaf1-47f0-b5d0-0e819bb17f41" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="4c025ccf-495b-44c9-ac30-67cc9d04a8c1" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>SystemBack VB Sample</DisplayName>

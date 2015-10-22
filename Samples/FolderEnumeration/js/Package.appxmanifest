@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="92f79ddc-cf50-435c-8cf0-c235e3cbc9a1"
+    Name="Microsoft.SDKSamples.FolderEnumeration.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

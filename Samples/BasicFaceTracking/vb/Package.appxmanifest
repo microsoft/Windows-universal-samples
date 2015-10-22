@@ -11,10 +11,10 @@
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
-    <mp:PhoneIdentity PhoneProductId="527be1f2-951a-43f0-ac9a-0d2858fe7fcf" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="a64aad2c-a1ba-4c71-b9ea-298e76436667" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>Basic FaceTracking VB Sample</DisplayName>
+        <DisplayName>Basic Face Tracking VB Sample</DisplayName>
         <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
         <Logo>Assets\StoreLogo-sdk.png</Logo>
     </Properties>
@@ -32,8 +32,8 @@
           Executable="$targetnametoken$.exe"
           EntryPoint="FaceTracking.App">
             <uap:VisualElements
-              DisplayName="Basic FaceTracking VB Sample"
-              Description="Basic FaceTracking VB Sample"
+              DisplayName="Basic Face Tracking VB Sample"
+              Description="Basic Face Tracking VB Sample"
               Square150x150Logo="Assets\squareTile-sdk.png"
               Square44x44Logo="Assets\SmallTile-sdk.png"
               BackgroundColor="#00b2f0">

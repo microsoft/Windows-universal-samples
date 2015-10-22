@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="1c2b9317-5a0b-4fc9-9f61-76c9ef6c870c"
+    Name="Microsoft.SDKSamples.Indexer.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

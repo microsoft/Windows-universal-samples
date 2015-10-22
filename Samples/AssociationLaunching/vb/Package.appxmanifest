@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
   <Identity Name="Microsoft.SDKSamples.AssociationLaunching.VB" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.1.0" />
-  <mp:PhoneIdentity PhoneProductId="a1f1b723-481a-4702-a2af-ba16482f17eb" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <mp:PhoneIdentity PhoneProductId="4b4a5960-161a-4aa8-b8cf-eadcbc68a208" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>AssociationLaunching VB Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
@@ -17,12 +17,12 @@
     <Application Id="AssociationLaunching.App" Executable="$targetnametoken$.exe" EntryPoint="AssociationLaunching.App">
       <Extensions>
         <uap:Extension Category="windows.protocol">
-          <uap:Protocol Name="alsdkcs" />
+          <uap:Protocol Name="alsdkvb" DesiredView="useLess"/>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name=".alsdkcs">
+          <uap:FileTypeAssociation Name=".alsdkvb" DesiredView="useLess">
             <uap:SupportedFileTypes>
-              <uap:FileType>.alsdkcs</uap:FileType>
+              <uap:FileType>.alsdkvb</uap:FileType>
             </uap:SupportedFileTypes>
           </uap:FileTypeAssociation>
         </uap:Extension>
@@ -38,6 +38,6 @@
     </Application>
   </Applications>
   <Capabilities>
-    <Capability Name="internetClient" />
+    <uap:Capability Name="picturesLibrary" />
   </Capabilities>
 </Package>

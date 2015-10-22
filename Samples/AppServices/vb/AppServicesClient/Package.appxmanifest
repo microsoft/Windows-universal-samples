@@ -12,7 +12,7 @@
       Version="1.0.0.0" />
 
 
-    <mp:PhoneIdentity PhoneProductId="e9f562b7-16f9-4c17-9bc4-657f61f087de" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="2135c8e3-ea95-4693-9c41-5005669f88b4" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>AppServicesClient VB Sample</DisplayName>

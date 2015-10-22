@@ -11,7 +11,7 @@
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" 
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="d63dfff4-b11f-406d-a938-be6fdaab46bf" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="fce43eb0-d293-42a5-938d-42487563c8a9" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>BackgroundTransfer VB Sample</DisplayName>

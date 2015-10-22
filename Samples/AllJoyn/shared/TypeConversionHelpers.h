@@ -37,8 +37,9 @@ internal:
     // Get the array of primitive values stored in the given alljoyn_msgarg.  The values in the array will be returned as
     // a Windows::Foundation::Collections::IVector.
     template<class T>
-    static _Check_return_ int32 GetPrimitiveArrayMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Out_ Windows::Foundation::Collections::IVector<T>^* value)
+    static _Check_return_ int32 GetPrimitiveArrayMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Outptr_result_maybenull_ Windows::Foundation::Collections::IVector<T>^* value)
     {
+        *value = nullptr;
         size_t elementCount = 0;
         T* arrayContents = nullptr;
         RETURN_IF_QSTATUS_ERROR(alljoyn_msgarg_get(argument, signature, &elementCount, &arrayContents));
@@ -58,7 +59,7 @@ internal:
     // Get the array of primitive values stored in the given alljoyn_msgarg.  The values in the array will be returned as
     // a Windows::Foundation::Collections::IVectorView.
     template<class T>
-    static _Check_return_ int32 GetPrimitiveArrayMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Out_ Windows::Foundation::Collections::IVectorView<T>^* value)
+    static _Check_return_ int32 GetPrimitiveArrayMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Outptr_result_maybenull_ Windows::Foundation::Collections::IVectorView<T>^* value)
     {
         Windows::Foundation::Collections::IVector<T>^ result;
         int32 status = GetPrimitiveArrayMessageArg(argument, signature, &result);
@@ -78,10 +79,10 @@ internal:
     // Examples:
     //   If signature is "ii", it will append "i", because that string describes the integer type
     //   If signature is "a(is)si" it will append "a(is)", because that string fully describes an array of structures.
-    static _Check_return_ int32 AppendNextCompleteType(_In_ PCSTR signature, _Out_ std::vector<char>* typeSignature);
+    static _Check_return_ int32 AppendNextCompleteType(_In_ PCSTR signature, _Inout_ std::vector<char>* typeSignature);
 
     // Get the key and value types from the type AllJoyn type signature for a dictionary.
-    static _Check_return_ int32 GetDictionaryTypeSignatures(_In_ PCSTR signature, _Out_ std::vector<char>* keySignature, _Out_ std::vector<char>* valueSignature);
+    static _Check_return_ int32 GetDictionaryTypeSignatures(_In_ PCSTR signature, _Inout_ std::vector<char>* keySignature, _Inout_ std::vector<char>* valueSignature);
 
     // Get the value of an alljoyn_msgarg whose value matches WinRT type T.
     //
@@ -107,11 +108,15 @@ internal:
         return alljoyn_msgarg_set(argument, signature, value);
     }
 
-    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Out_ Platform::String^* value)
+    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Outptr_result_maybenull_ Platform::String^* value)
     {
-        PSTR allJoynValue;
+        *value = nullptr;
+        PSTR allJoynValue = nullptr;
         QStatus status = alljoyn_msgarg_get(argument, signature, &allJoynValue);
-        *value = AllJoynHelpers::MultibyteToPlatformString(allJoynValue);
+        if ((ER_OK == status) && (nullptr != allJoynValue))
+        {
+            *value = AllJoynHelpers::MultibyteToPlatformString(allJoynValue);
+        }
         return static_cast<int32>(status);
     }
 
@@ -122,7 +127,7 @@ internal:
     }
 
     template<class T>
-    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Out_ Windows::Foundation::Collections::IVector<T>^* value)
+    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Outptr_result_maybenull_ Windows::Foundation::Collections::IVector<T>^* value)
     {
         *value = ref new Platform::Collections::Vector<T>();
         if (signature[0] != 'a')
@@ -177,7 +182,7 @@ internal:
     }
 
     template<class T>
-    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Out_ Windows::Foundation::Collections::IVectorView<T>^* value)
+    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Outptr_result_maybenull_ Windows::Foundation::Collections::IVectorView<T>^* value)
     {
         Windows::Foundation::Collections::IVector<T>^ result;
         int32 status = GetAllJoynMessageArg(argument, signature, &result);
@@ -209,7 +214,7 @@ internal:
         return alljoyn_msgarg_set_and_stabilize(argument, signature, value->Size, allJoynArgument.data());
     }
 
-    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Out_ Windows::Foundation::Collections::IVector<Platform::String^>^* value)
+    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Outptr_result_maybenull_ Windows::Foundation::Collections::IVector<Platform::String^>^* value)
     {
         *value = ref new Platform::Collections::Vector<Platform::String^>();
         size_t elementCount = 0;
@@ -229,7 +234,7 @@ internal:
         return S_OK;
     }
 
-    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Out_ Windows::Foundation::Collections::IVectorView<Platform::String^>^* value)
+    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Outptr_result_maybenull_ Windows::Foundation::Collections::IVectorView<Platform::String^>^* value)
     {
         Windows::Foundation::Collections::IVector<Platform::String^>^ result;
         int32 status = GetAllJoynMessageArg(argument, signature, &result);
@@ -243,13 +248,13 @@ internal:
     }
 
     template<class T, class U>
-    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Out_ Windows::Foundation::Collections::IMap<T, U>^* value)
+    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Outptr_result_maybenull_ Windows::Foundation::Collections::IMap<T, U>^* value)
     {
+        *value = ref new Platform::Collections::Map<T, U>();
+
         std::vector<char> keyType;
         std::vector<char> valueType;
         RETURN_IF_QSTATUS_ERROR(GetDictionaryTypeSignatures(signature, &keyType, &valueType));
-
-        *value = ref new Platform::Collections::Map<T, U>();
 
         size_t elementCount = 0;
         alljoyn_msgarg dictionaryContents = nullptr;
@@ -274,13 +279,13 @@ internal:
     }
 
     template<class T>
-    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Out_ Windows::Foundation::Collections::IMap<T, Platform::Object^>^* value)
+    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Outptr_result_maybenull_ Windows::Foundation::Collections::IMap<T, Platform::Object^>^* value)
     {
+        *value = ref new Platform::Collections::Map<T, Platform::Object^>();
+        
         std::vector<char> keyType;
         std::vector<char> valueType;
         RETURN_IF_QSTATUS_ERROR(GetDictionaryTypeSignatures(signature, &keyType, &valueType));
-
-        *value = ref new Platform::Collections::Map<T, Platform::Object^>();
 
         size_t elementCount = 0;
         alljoyn_msgarg dictionaryContents = nullptr;
@@ -332,7 +337,7 @@ internal:
     }
 
     template<class T, class U>
-    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Out_ Windows::Foundation::Collections::IMapView<T, U>^* value)
+    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Outptr_result_maybenull_ Windows::Foundation::Collections::IMapView<T, U>^* value)
     {
         Windows::Foundation::Collections::IMap<T, U>^ result;
         int32 status = GetAllJoynMessageArg(argument, signature, &result);
@@ -364,8 +369,9 @@ internal:
         return static_cast<int32>(status);
     }
 
-    static _Check_return_ int32 GetVariantStructureArg(_In_ alljoyn_msgarg argument, _Out_ Platform::Object^* value)
+    static _Check_return_ int32 GetVariantStructureArg(_In_ alljoyn_msgarg argument, _Outptr_result_maybenull_ Platform::Object^* value)
     {
+        *value = nullptr;
         size_t memberCount = alljoyn_msgarg_getnummembers(argument);
         auto result = ref new PROJECT_NAMESPACE::AllJoynMessageArgStructure();
 
@@ -391,8 +397,10 @@ internal:
     }
 
     template<class T>
-    static _Check_return_ int32 GetVariantArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _In_ Platform::Object^* value)
+    static _Check_return_ int32 GetVariantArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Outptr_result_maybenull_ Platform::Object^* value)
     {
+        *value = nullptr;
+
         T innerValue;
         RETURN_IF_QSTATUS_ERROR(GetAllJoynMessageArg(argument, signature, &innerValue));
         *value = innerValue;
@@ -517,8 +525,10 @@ internal:
         return ER_BUS_BAD_VALUE_TYPE;
     }
 
-    static _Check_return_ int32 GetMapFromVariant(_In_ alljoyn_msgarg argument, _In_ char mapSignature, _Out_ Platform::Object^* value)
+    static _Check_return_ int32 GetMapFromVariant(_In_ alljoyn_msgarg argument, _In_ char mapSignature, _Outptr_result_maybenull_ Platform::Object^* value)
     {
+        *value = nullptr;
+
         switch (mapSignature)
         {
         case 'y':
@@ -566,8 +576,9 @@ internal:
         }
     }
 
-    static _Check_return_ int32 GetValueFromVariant(_In_ alljoyn_msgarg argument, _Out_ Platform::Object^* value)
+    static _Check_return_ int32 GetValueFromVariant(_In_ alljoyn_msgarg argument, _Outptr_result_maybenull_ Platform::Object^* value)
     {
+        *value = nullptr;
         char variantSignature[c_MaximumSignatureLength];
         alljoyn_msgarg_signature(argument, variantSignature, c_MaximumSignatureLength);
 
@@ -618,10 +629,11 @@ internal:
         return ER_BUS_BAD_SIGNATURE;
     }
 
-    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Out_ Platform::Object^* value)
+    static _Check_return_ int32 GetAllJoynMessageArg(_In_ alljoyn_msgarg argument, _In_ PCSTR signature, _Outptr_result_maybenull_ Platform::Object^* value)
     {
         UNREFERENCED_PARAMETER(signature);
 
+        *value = nullptr;
         alljoyn_msgarg variantArg;
         RETURN_IF_QSTATUS_ERROR(alljoyn_msgarg_get(argument, "v", &variantArg));
         return GetValueFromVariant(variantArg, value);

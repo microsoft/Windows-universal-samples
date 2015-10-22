@@ -12,7 +12,7 @@
       Version="1.0.0.0" />
 
 
-    <mp:PhoneIdentity PhoneProductId="51b2b23d-cdd8-4ffa-a0e4-eea1c6263c8c" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="3045cc4c-7944-41a2-9cc0-bae631af3268" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>Cash Drawer VB Sample</DisplayName>

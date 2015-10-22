@@ -7,7 +7,7 @@
     <ProjectGuid>{1399F59A-6590-4E35-ACCF-5200C175D88B}</ProjectGuid>
     <!--<OutputType>AppContainerExe</OutputType>-->
     <OutputType>AppContainerExe</OutputType>
-    <RootNamespace>AssociationLaunching</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>AssociationLaunching</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
@@ -95,10 +95,12 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.xaml.vb">
+    <Compile Include="..\..\..\SharedContent\vb\App.xaml.vb">
+      <Link>App.xaml.vb</Link>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.vb">
+    <Compile Include="..\..\..\SharedContent\vb\MainPage.xaml.vb">
+      <Link>MainPage.xaml.vb</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\..\..\SharedContent\vb\AssemblyInfo.vb">

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
   <Identity Name="Microsoft.SDKSamples.BackgroundAudio.VB" Publisher="CN=lindeliu" Version="1.0.0.1" />
-  <mp:PhoneIdentity PhoneProductId="5b3c1768-3f6b-4d53-a422-d4b0a7498e7b" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <mp:PhoneIdentity PhoneProductId="2132d251-53ff-4ac1-b129-02a518f894e7" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>BackgroundAudio</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>

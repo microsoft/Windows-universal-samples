@@ -47,9 +47,7 @@ using namespace com::microsoft::Samples::SecureInterface;
 IAsyncOperation<SecureInterfaceConcatenateResult^>^ SecureInterfaceServiceEventAdapter::ConcatenateAsync(_In_ AllJoynMessageInfo^ info, _In_ Platform::String^ interfaceMemberInStr1, _In_ Platform::String^ interfaceMemberInStr2)
 {
     auto args = ref new SecureInterfaceConcatenateCalledEventArgs(info, interfaceMemberInStr1, interfaceMemberInStr2);
-    AllJoynHelpers::DispatchEvent([=]() {
-        ConcatenateCalled(this, args);
-    });
+    ConcatenateCalled(this, args);
     return SecureInterfaceConcatenateCalledEventArgs::GetResultAsync(args);
 }
 
@@ -57,9 +55,7 @@ IAsyncOperation<SecureInterfaceConcatenateResult^>^ SecureInterfaceServiceEventA
 IAsyncOperation<SecureInterfaceGetIsUpperCaseEnabledResult^>^ SecureInterfaceServiceEventAdapter::GetIsUpperCaseEnabledAsync(_In_ AllJoynMessageInfo^ info)
 {
     auto args = ref new SecureInterfaceGetIsUpperCaseEnabledRequestedEventArgs(info);
-    AllJoynHelpers::DispatchEvent([=]() {
-        GetIsUpperCaseEnabledRequested(this, args);
-    });
+    GetIsUpperCaseEnabledRequested(this, args);
     return SecureInterfaceGetIsUpperCaseEnabledRequestedEventArgs::GetResultAsync(args);
 }
 
@@ -67,9 +63,7 @@ IAsyncOperation<SecureInterfaceGetIsUpperCaseEnabledResult^>^ SecureInterfaceSer
 IAsyncOperation<SecureInterfaceSetIsUpperCaseEnabledResult^>^ SecureInterfaceServiceEventAdapter::SetIsUpperCaseEnabledAsync(_In_ AllJoynMessageInfo^ info, _In_ bool value)
 {
     auto args = ref new SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs(info, value);
-    AllJoynHelpers::DispatchEvent([=]() {
-        SetIsUpperCaseEnabledRequested(this, args);
-    });
+    SetIsUpperCaseEnabledRequested(this, args);
     return SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs::GetResultAsync(args);
 }
 

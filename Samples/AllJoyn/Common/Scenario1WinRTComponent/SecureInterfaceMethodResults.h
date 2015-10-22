@@ -31,6 +31,8 @@
 //-----------------------------------------------------------------------------
 #pragma once
 
+using namespace concurrency;
+
 namespace com { namespace microsoft { namespace Samples { namespace SecureInterface {
 
 ref class SecureInterfaceConsumer;
@@ -57,6 +59,7 @@ public:
         auto result = ref new SecureInterfaceConcatenateResult();
         result->Status = Windows::Devices::AllJoyn::AllJoynStatus::Ok;
         result->OutStr = interfaceMemberOutStr;
+        result->m_creationContext = Concurrency::task_continuation_context::use_current();
         return result;
     }
     
@@ -66,6 +69,8 @@ public:
         result->Status = status;
         return result;
     }
+internal:
+    Concurrency::task_continuation_context m_creationContext = Concurrency::task_continuation_context::use_default();
 
 private:
     int32 m_status;
@@ -116,6 +121,7 @@ public:
         auto result = ref new SecureInterfaceGetIsUpperCaseEnabledResult();
         result->Status = Windows::Devices::AllJoyn::AllJoynStatus::Ok;
         result->IsUpperCaseEnabled = value;
+        result->m_creationContext = Concurrency::task_continuation_context::use_current();
         return result;
     }
 
@@ -125,6 +131,8 @@ public:
         result->Status = status;
         return result;
     }
+internal:
+    Concurrency::task_continuation_context m_creationContext = Concurrency::task_continuation_context::use_default();
 
 private:
     int32 m_status;
@@ -145,6 +153,7 @@ public:
     {
         auto result = ref new SecureInterfaceSetIsUpperCaseEnabledResult();
         result->Status = Windows::Devices::AllJoyn::AllJoynStatus::Ok;
+        result->m_creationContext = Concurrency::task_continuation_context::use_current();
         return result;
     }
 
@@ -154,6 +163,8 @@ public:
         result->Status = status;
         return result;
     }
+internal:
+    Concurrency::task_continuation_context m_creationContext = Concurrency::task_continuation_context::use_default();
 
 private:
     int32 m_status;

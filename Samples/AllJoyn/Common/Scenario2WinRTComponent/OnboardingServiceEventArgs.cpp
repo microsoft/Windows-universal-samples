@@ -53,7 +53,7 @@ OnboardingConfigureWiFiCalledEventArgs::OnboardingConfigureWiFiCalledEventArgs(
     m_interfaceMemberPassphrase(interfaceMemberPassphrase),
     m_interfaceMemberAuthType(interfaceMemberAuthType)
 {
-    m_result = OnboardingConfigureWiFiResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
+	m_result = OnboardingConfigureWiFiResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ OnboardingConfigureWiFiCalledEventArgs::GetDeferral()
@@ -128,7 +128,7 @@ OnboardingConnectCalledEventArgs::OnboardingConnectCalledEventArgs(
     m_completionsRequired(0),
     m_messageInfo(info)
 {
-    m_result = OnboardingConnectResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
+	m_result = OnboardingConnectResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ OnboardingConnectCalledEventArgs::GetDeferral()
@@ -203,7 +203,7 @@ OnboardingOffboardCalledEventArgs::OnboardingOffboardCalledEventArgs(
     m_completionsRequired(0),
     m_messageInfo(info)
 {
-    m_result = OnboardingOffboardResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
+	m_result = OnboardingOffboardResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ OnboardingOffboardCalledEventArgs::GetDeferral()
@@ -278,7 +278,7 @@ OnboardingGetScanInfoCalledEventArgs::OnboardingGetScanInfoCalledEventArgs(
     m_completionsRequired(0),
     m_messageInfo(info)
 {
-    m_result = OnboardingGetScanInfoResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
+	m_result = OnboardingGetScanInfoResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ OnboardingGetScanInfoCalledEventArgs::GetDeferral()
@@ -354,7 +354,7 @@ OnboardingGetVersionRequestedEventArgs::OnboardingGetVersionRequestedEventArgs(
     m_completionsRequired(0),
     m_messageInfo(info)
 {
-    m_result = OnboardingGetVersionResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
+	m_result = OnboardingGetVersionResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ OnboardingGetVersionRequestedEventArgs::GetDeferral()
@@ -429,7 +429,7 @@ OnboardingGetStateRequestedEventArgs::OnboardingGetStateRequestedEventArgs(
     m_completionsRequired(0),
     m_messageInfo(info)
 {
-    m_result = OnboardingGetStateResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
+	m_result = OnboardingGetStateResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ OnboardingGetStateRequestedEventArgs::GetDeferral()
@@ -504,7 +504,7 @@ OnboardingGetLastErrorRequestedEventArgs::OnboardingGetLastErrorRequestedEventAr
     m_completionsRequired(0),
     m_messageInfo(info)
 {
-    m_result = OnboardingGetLastErrorResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
+	m_result = OnboardingGetLastErrorResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ OnboardingGetLastErrorRequestedEventArgs::GetDeferral()

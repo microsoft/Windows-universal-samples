@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="30ca2cc5-81b1-49d4-a0c7-e334b7ad8a7d"
+    Name="Microsoft.SDKSamples.ContextMenu.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

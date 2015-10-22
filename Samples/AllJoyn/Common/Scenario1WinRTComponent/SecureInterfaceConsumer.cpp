@@ -111,12 +111,8 @@ IAsyncOperation<SecureInterfaceJoinSessionResult^>^ SecureInterfaceConsumer::Joi
     return create_async([serviceInfo, watcher]() -> SecureInterfaceJoinSessionResult^
     {
         auto result = ref new SecureInterfaceJoinSessionResult();
-        result->Status = AllJoynStatus::Ok;
-        result->Consumer = nullptr;
-
         result->Consumer = ref new SecureInterfaceConsumer(watcher->BusAttachment);
         result->Status = result->Consumer->JoinSession(serviceInfo);
-
         return result;
     });
 }
@@ -131,18 +127,26 @@ IAsyncOperation<SecureInterfaceConcatenateResult^>^ SecureInterfaceConsumer::Con
         size_t argCount = 2;
         alljoyn_msgarg inputs = alljoyn_msgarg_array_create(argCount);
 
-        TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(inputs, 0), "s", interfaceMemberInStr1);
-        TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(inputs, 1), "s", interfaceMemberInStr2);
-        
-        QStatus status = alljoyn_proxybusobject_methodcall(
-            ProxyBusObject,
-            "com.microsoft.Samples.SecureInterface",
-            "Concatenate",
-            inputs,
-            argCount,
-            message,
-            c_MessageTimeoutInMilliseconds,
-            0);
+        QStatus status = ER_OK;
+        status = static_cast<QStatus>(TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(inputs, 0), "s", interfaceMemberInStr1));
+	
+        if (ER_OK == status)
+        {
+            status = static_cast<QStatus>(TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(inputs, 1), "s", interfaceMemberInStr2));
+        }
+	
+        if (ER_OK == status)
+        {
+            status = alljoyn_proxybusobject_methodcall(
+                ProxyBusObject,
+                "com.microsoft.Samples.SecureInterface",
+                "Concatenate",
+                inputs,
+                argCount,
+                message,
+                c_MessageTimeoutInMilliseconds,
+                0);
+        }
         result->Status = static_cast<int>(status);
         if (ER_OK == status) 
         {
@@ -151,7 +155,7 @@ IAsyncOperation<SecureInterfaceConcatenateResult^>^ SecureInterfaceConsumer::Con
             status = static_cast<QStatus>(TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 0), "s", &argument0));
             result->OutStr = argument0;
 
-            if (status != ER_OK)
+            if (ER_OK != status)
             {
                 result->Status = static_cast<int>(status);
             }
@@ -185,30 +189,33 @@ IAsyncOperation<SecureInterfaceSetIsUpperCaseEnabledResult^>^ SecureInterfaceCon
         PropertySetContext setContext;
 
         alljoyn_msgarg inputArgument = alljoyn_msgarg_create();
-        TypeConversionHelpers::SetAllJoynMessageArg(inputArgument, "b", value);
+        QStatus status = static_cast<QStatus>(TypeConversionHelpers::SetAllJoynMessageArg(inputArgument, "b", value));
+        if (ER_OK == status)
+        {
+            status = alljoyn_proxybusobject_setpropertyasync(
+                ProxyBusObject,
+                "com.microsoft.Samples.SecureInterface",
+                "IsUpperCaseEnabled",
+                inputArgument,
+                [](QStatus status, alljoyn_proxybusobject obj, void* context)
+                {
+                    UNREFERENCED_PARAMETER(obj);
+                    auto propertyContext = static_cast<PropertySetContext*>(context);
+                    propertyContext->SetStatus(status);
+                    propertyContext->SetEvent();
+                },
+                c_MessageTimeoutInMilliseconds,
+                &setContext);
 
-        alljoyn_proxybusobject_setpropertyasync(
-            ProxyBusObject,
-            "com.microsoft.Samples.SecureInterface",
-            "IsUpperCaseEnabled",
-            inputArgument,
-            [](QStatus status, alljoyn_proxybusobject obj, void* context)
-            {
-                UNREFERENCED_PARAMETER(obj);
-                auto propertyContext = static_cast<PropertySetContext*>(context);
-                propertyContext->SetStatus(status);
-                propertyContext->SetEvent();
-            },
-            c_MessageTimeoutInMilliseconds,
-            &setContext);
+            alljoyn_msgarg_destroy(inputArgument);
 
-        alljoyn_msgarg_destroy(inputArgument);
-
-        setContext.Wait();
-
-        auto result = ref new SecureInterfaceSetIsUpperCaseEnabledResult();
-        result->Status = setContext.GetStatus();
-        return result;
+            setContext.Wait();
+        }
+        if (ER_OK == status)
+        {
+            return SecureInterfaceSetIsUpperCaseEnabledResult::CreateSuccessResult();
+        }
+        return SecureInterfaceSetIsUpperCaseEnabledResult::CreateFailureResult(static_cast<int>(status));
     });
 }
 
@@ -230,7 +237,7 @@ IAsyncOperation<SecureInterfaceGetIsUpperCaseEnabledResult^>^ SecureInterfaceCon
                 if (ER_OK == status)
                 {
                     bool argument;
-                    TypeConversionHelpers::GetAllJoynMessageArg(value, "b", &argument);
+                    status = static_cast<QStatus>(TypeConversionHelpers::GetAllJoynMessageArg(value, "b", &argument));
 
                     propertyContext->SetValue(argument);
                 }
@@ -271,9 +278,12 @@ void SecureInterfaceConsumer::OnPropertyChanged(_In_ alljoyn_proxybusobject obj,
             return;
         }
 
+
         if (strcmp("IsUpperCaseEnabled", propertyName) == 0)
         {
-            IsUpperCaseEnabledChanged(this, nullptr);
+            bool argument;
+            (void)TypeConversionHelpers::GetAllJoynMessageArg(propertyValue, "b", &argument);
+            IsUpperCaseEnabledChanged(this, (Platform::Object^)argument);
         }
     }
 }
@@ -294,7 +304,7 @@ void SecureInterfaceConsumer::CallTextSentSignalHandler(_In_ const alljoyn_inter
         eventArgs->MessageInfo = callInfo;
 
         Platform::String^ argument0;
-        TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 0), "s", &argument0);
+        (void)TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 0), "s", &argument0);
 
         eventArgs->Message = argument0;
 
@@ -357,6 +367,25 @@ int32 SecureInterfaceConsumer::JoinSession(_In_ AllJoynServiceInfo^ serviceInfo)
         return AllJoynStatus::Fail;
     }
 
+    RETURN_IF_QSTATUS_ERROR(AllJoynBusObjectManager::GetBusObject(m_nativeBusAttachment, AllJoynHelpers::PlatformToMultibyteString(ServiceObjectPath).data(), &m_busObject));
+   
+    if (!AllJoynBusObjectManager::BusObjectIsRegistered(m_nativeBusAttachment, m_busObject))
+    {
+        RETURN_IF_QSTATUS_ERROR(alljoyn_busobject_addinterface(BusObject, description));
+    }
+
+    QStatus result = AddSignalHandler(
+        m_nativeBusAttachment,
+        description,
+        "TextSent",
+        [](const alljoyn_interfacedescription_member* member, PCSTR srcPath, alljoyn_message message) { UNREFERENCED_PARAMETER(srcPath); CallTextSentSignalHandler(member, message); });
+    if (ER_OK != result)
+    {
+        return static_cast<int32>(result);
+    }
+
+    SourceInterfaces[description] = m_weak;
+
     unsigned int noneMechanismIndex = 0;
     bool authenticationMechanismsContainsNone = m_busAttachment->AuthenticationMechanisms->IndexOf(AllJoynAuthenticationMechanism::None, &noneMechanismIndex);
     QCC_BOOL interfaceIsSecure = alljoyn_interfacedescription_issecure(description);
@@ -369,7 +398,12 @@ int32 SecureInterfaceConsumer::JoinSession(_In_ AllJoynServiceInfo^ serviceInfo)
         // is specified, or if None is not present in AuthenticationMechanisms.
         if (!authenticationMechanismsContainsNone || interfaceIsSecure)
         {
-            alljoyn_proxybusobject_secureconnection(ProxyBusObject, QCC_FALSE);
+            RETURN_IF_QSTATUS_ERROR(alljoyn_proxybusobject_secureconnection(ProxyBusObject, QCC_FALSE));
+            RETURN_IF_QSTATUS_ERROR(AllJoynBusObjectManager::TryRegisterBusObject(m_nativeBusAttachment, BusObject, true));
+        }
+        else
+        {
+            RETURN_IF_QSTATUS_ERROR(AllJoynBusObjectManager::TryRegisterBusObject(m_nativeBusAttachment, BusObject, false));
         }
     }
     else
@@ -380,28 +414,14 @@ int32 SecureInterfaceConsumer::JoinSession(_In_ AllJoynServiceInfo^ serviceInfo)
         {
             return static_cast<int32>(ER_BUS_NO_AUTHENTICATION_MECHANISM);
         }
+        else
+        {
+            RETURN_IF_QSTATUS_ERROR(AllJoynBusObjectManager::TryRegisterBusObject(m_nativeBusAttachment, BusObject, false));
+        }
     }
 
-    RETURN_IF_QSTATUS_ERROR(AllJoynBusObjectManager::GetBusObject(m_nativeBusAttachment, AllJoynHelpers::PlatformToMultibyteString(ServiceObjectPath).data(), &m_busObject));
     RETURN_IF_QSTATUS_ERROR(alljoyn_proxybusobject_addinterface(ProxyBusObject, description));
-
-    if (!AllJoynBusObjectManager::BusObjectIsRegistered(m_nativeBusAttachment, m_busObject))
-    {
-        RETURN_IF_QSTATUS_ERROR(alljoyn_busobject_addinterface(BusObject, description));
-    }
-
-    QStatus result = AddSignalHandler(
-        m_nativeBusAttachment,
-        description,
-        "TextSent",
-        [](const alljoyn_interfacedescription_member* member, PCSTR srcPath, alljoyn_message message) { UNREFERENCED_PARAMETER(srcPath); CallTextSentSignalHandler(member, message); });
-    if (result != ER_OK)
-    {
-        return static_cast<int32>(result);
-    }
-
-    SourceInterfaces[description] = m_weak;
-    RETURN_IF_QSTATUS_ERROR(AllJoynBusObjectManager::TryRegisterBusObject(m_nativeBusAttachment, BusObject, true));
+    
     m_signals->Initialize(BusObject, m_sessionId);
 
     return AllJoynStatus::Ok;
