@@ -14,7 +14,7 @@ namespace SDKTemplate
         {
             Platform::String^ get()
             {
-                return "Background Sensors CPP sample";
+                return "Background sensors";
             }
         }
 

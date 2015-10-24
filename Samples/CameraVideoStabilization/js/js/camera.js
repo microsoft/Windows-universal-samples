@@ -301,8 +301,6 @@
                 // original capture resolution
                 return WinJS.Promise.as();
             }
-        }, function (error) {
-            console.log(error.message);
         });
     }
 
@@ -789,8 +787,6 @@
 
         promiseToExecute.then(function() {
             updateCaptureControls();
-        },function(error) {
-            console.log(error.message);
         }).done();
     }
 

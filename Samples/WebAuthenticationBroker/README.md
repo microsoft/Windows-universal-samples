@@ -1,4 +1,11 @@
-﻿This sample shows how you can use the WebAuthenticationBroker class to connect to OAuth providers such as Facebook, Flickr, Google, and Twitter.
+﻿<!---
+  category: IdentitySecurityAndEncryption
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620622&clcid=0x409
+--->
+
+# WebAuthenticationBroker sample
+
+This sample shows how you can use the WebAuthenticationBroker class to connect to OAuth providers such as Facebook, Flickr, Google, and Twitter.
 
 **Note** This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on both Windows 10 and Windows Phone 10.
 
@@ -8,9 +15,8 @@ Shows using the OAuth protocol for authentication and authorization. You can cho
 - Flickr [C#, JS]
 - Google [C++, C#, JS]
 
-Related Topics
---------------
-[Web Authentication Broker](http://msdn.microsoft.com/library/windows/apps/)
+## Related Topics
+
 [Quickstart: Connecting using XML HTTP Request](http://msdn.microsoft.com/library/windows/apps/hh770550)
 [Setting up single sign-on using the web authentication broker](http://msdn.microsoft.com/library/windows/apps/hh465283)
 
@@ -20,8 +26,8 @@ Related Topics
 [WebAuthenticationBroker](http://msdn.microsoft.com/library/windows/apps/br227025)
 [Windows.Security.Authentication.Web](http://msdn.microsoft.com/library/windows/apps/br227044)
 
-Obtaining Client Ids For Use with OAuth APIs
---------------------------------------------
+## Obtaining Client Ids For Use with OAuth APIs
+
 To configure Google OAuth connections (Google Apps and Google) you will need to register Auth0 with Google on the API Console.
 - Log in to [API Console](https://console.developers.google.com/)
 - Complete information about your instance of Auth0. 
@@ -39,27 +45,25 @@ To configure Twitter OAuth connections you will have to register an application 
 To configure Flickr OAuth connections you will have to register an application with Flickr
 - [Flickr API Keys Documentation](https://www.flickr.com/services/api/misc.api_keys.html)
 
-Operating system requirements
------------------------------
+## Operating system requirements
 
 Windows 10
 
-Build the sample
-----------------
+## Build the sample
 
-1.  Start Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++ or C\#. Double-click the Visual Studio 2015 Solution (.sln) file.
-3.  Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
-Run the sample
---------------
+## Run the sample
 
 The next steps depend on whether you just want to deploy the sample or you want to both deploy and run it.
 
-**Deploying the sample**
+## Deploying the sample
 
 1.  Select **Build** \> **Deploy Solution**.
 
-**Deploying and running the sample**
+## Deploying and running the sample
 
 1.  To debug the sample and then run it, press F5 or select **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or select**Debug** \> **Start Without Debugging**.

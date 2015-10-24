@@ -7,14 +7,14 @@
   IgnorableNamespaces="uap mp">
 
     <Identity
-      Name="Microsoft.SDKSamples.ActivitySensorCS.CS"
+      Name="Microsoft.SDKSamples.ActivitySensor.CS"
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
     <mp:PhoneIdentity PhoneProductId="0840d61f-acb9-47b8-be10-90be343fbe4e" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>ActivitySensorCS</DisplayName>
+        <DisplayName>Activity Sensor C# Sample</DisplayName>
         <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
         <Logo>Assets\StoreLogo-sdk.png</Logo>
     </Properties>
@@ -30,7 +30,7 @@
     <Applications>
         <Application Id="App"
           Executable="$targetnametoken$.exe"
-          EntryPoint="ActivitySensorCS.App">
+          EntryPoint="ActivitySensor.App">
           <Extensions>
             <Extension Category="windows.backgroundTasks" EntryPoint="Tasks.ActivitySensorBackgroundTask">
               <BackgroundTasks>
@@ -39,10 +39,10 @@
             </Extension>
           </Extensions>
           <uap:VisualElements
-              DisplayName="ActivitySensorCS"
+              DisplayName="Activity Sensor C# Sample"
               Square150x150Logo="Assets\SquareTile-sdk.png"
               Square44x44Logo="Assets\SmallTile-sdk.png"
-              Description="ActivitySensorCS"
+              Description="Activity Sensor C# Sample"
               BackgroundColor="#00b2f0">
                 <uap:SplashScreen Image="Assets\Splash-sdk.png" />
                 <uap:DefaultTile>

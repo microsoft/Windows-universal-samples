@@ -1,8 +1,9 @@
 <!---
   category: DevicesSensorsAndPower
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=534025&clcid=0x409
 --->
 
-# AllJoyn Producer Experiences Sample
+# AllJoyn producer experiences sample
 
 This sample demonstrates how to create an AllJoyn Windows Universal app using Code Generation with Introspection XML and Windows.Devices.AllJoyn.
 
@@ -18,7 +19,7 @@ Specifically, this sample covers:
 
 **Note** The Universal Windows samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 

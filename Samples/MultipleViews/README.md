@@ -1,9 +1,9 @@
 <!---
   category: ControlsLayoutAndText 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620574&clcid=0x409
 --->
 
-
-# Multiple Views Sample
+# Multiple views sample
 
 This sample demonstrates showing multiple windows for a single app. 
 
@@ -23,7 +23,7 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 - [**ApplicationViewSwitcher**](http://msdn.microsoft.com/library/windows/apps/dn281094)
 - [**ApplicationView**](http://msdn.microsoft.com/library/windows/apps/hh701658)
 - [**CoreApplication.CreateNewView**](http://msdn.microsoft.com/library/windows/apps/dn297278)
-- [**MSApp.CreateNewView**](http://msdn.microsoft.com/library/windows/apps/)
+- [**MSApp.CreateNewView**](http://msdn.microsoft.com/library/windows/apps/dn252339)
 - [Windows app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
 
 
@@ -37,9 +37,10 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file. 
-3. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 

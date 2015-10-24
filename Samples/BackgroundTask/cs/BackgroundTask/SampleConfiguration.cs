@@ -15,21 +15,20 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.ApplicationModel.Background;
 using Windows.Storage;
-using BackgroundTask;
 
 namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        public const string FEATURE_NAME = "BackgroundTask";
+        public const string FEATURE_NAME = "Background tasks";
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title="Background Task", ClassType=typeof(BackgroundTask.SampleBackgroundTask)},
-            new Scenario() { Title="Background Task with Condition", ClassType=typeof(BackgroundTask.SampleBackgroundTaskWithCondition)},
-            new Scenario() { Title="Servicing Complete Task", ClassType=typeof(BackgroundTask.ServicingCompleteTask)},
-            new Scenario() { Title="Background Task with Time Trigger", ClassType=typeof(BackgroundTask.TimeTriggeredTask) },
-            new Scenario() { Title="Background Task with Application Trigger", ClassType=typeof(BackgroundTask.ApplicationTriggerTask) }
+            new Scenario() { Title="Background Task", ClassType=typeof(SampleBackgroundTask)},
+            new Scenario() { Title="Background Task with Condition", ClassType=typeof(SampleBackgroundTaskWithCondition)},
+            new Scenario() { Title="Servicing Complete Task", ClassType=typeof(ServicingCompleteTask)},
+            new Scenario() { Title="Background Task with Time Trigger", ClassType=typeof(TimeTriggeredTask) },
+            new Scenario() { Title="Background Task with Application Trigger", ClassType=typeof(ApplicationTriggerTask) }
         };
     }
 
@@ -40,7 +39,7 @@ namespace SDKTemplate
     }
 }
 
-namespace BackgroundTask
+namespace SDKTemplate
 {
     class BackgroundTaskSample
     {

@@ -1,7 +1,9 @@
-﻿<!---
+<!---
   category: NetworkingAndWebServices 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620556&clcid=0x409
 --->
-# Json Sample
+
+# JSON sample
 
 This sample shows you how to encode and decode JavaScript Object Notation (JSON) objects, arrays, strings, numbers and booleans using classes in the [**Windows.Data.Json**](http://msdn.microsoft.com/library/windows/apps/br240639) namespace. This namespace is intended for C\# and C++ programming languages. JavaScript developers should use the [JSON.Parse](http://go.microsoft.com/fwlink/p/?linkid=398621) method to parse JSON. For more information, see the [JSON Object (JavaScript)](http://go.microsoft.com/fwlink/p/?linkid=398620), an intrinsic object that provides functions to convert JavaScript values to and from the JSON format.
 
@@ -51,16 +53,16 @@ The following features can be used to retrieve text that contains JSON from an H
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Insider Preview
+**Server:** Windows Server 2016 Technical Preview
 
 **Phone:** Windows 10
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the subdirectory for the desired language.
-3. Double-click the Visual Studio 2015 Solution (.sln) file. 
-4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 

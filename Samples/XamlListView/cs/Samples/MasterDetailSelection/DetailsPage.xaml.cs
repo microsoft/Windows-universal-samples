@@ -55,7 +55,7 @@ namespace ListViewSample
         {
             // Page above us will be our master view.
             // Make sure we are using the "drill out" animation in this transition.
-            Frame.GoBack(new DrillInNavigationTransitionInfo());
+            Frame.Navigate(typeof(MasterDetailSelection), "Back", new EntranceNavigationTransitionInfo());
         }
         void NavigateBackForWideState(bool useTransition)
         {

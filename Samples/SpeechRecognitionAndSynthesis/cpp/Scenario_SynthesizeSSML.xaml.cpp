@@ -79,10 +79,21 @@ void Scenario_SynthesizeSSML::Speak_Click(Platform::Object^ sender, Windows::UI:
                 }
                 catch (Exception^ ex)
                 {
-                    // Typically occurs if the XML provided isn't valid.
-                    btnSpeak->Content = "Speak";
-                    Windows::UI::Popups::MessageDialog^ dialog = ref new Windows::UI::Popups::MessageDialog(ex->Message, "Unable to synthesize text (check for invalid xml)");
-                    create_task(dialog->ShowAsync());
+					if (ex->HResult == HRESULT_FROM_WIN32(ERROR_MOD_NOT_FOUND))
+					{
+						btnSpeak->Content = L"Speak";
+						btnSpeak->IsEnabled = false;
+						listboxVoiceChooser->IsEnabled = false;
+						Windows::UI::Popups::MessageDialog^ dialog = ref new Windows::UI::Popups::MessageDialog(ex->Message, "Media playback components unavailable.");
+						create_task(dialog->ShowAsync());
+					}
+					else
+					{
+						// Typically occurs if the XML provided isn't valid.
+						btnSpeak->Content = "Speak";
+						Windows::UI::Popups::MessageDialog^ dialog = ref new Windows::UI::Popups::MessageDialog(ex->Message, "Unable to synthesize text (check for invalid xml)");
+						create_task(dialog->ShowAsync());
+					}
                 }
             });
         }

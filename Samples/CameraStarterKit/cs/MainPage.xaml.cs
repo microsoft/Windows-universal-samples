@@ -277,10 +277,6 @@ namespace CameraStarterKit
                 {
                     Debug.WriteLine("The app was denied access to the camera");
                 }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Exception when initializing MediaCapture with {0}: {1}", cameraDevice.Id, ex.ToString());
-                }
 
                 // If initialization succeeded, start the preview
                 if (_isInitialized)
@@ -321,15 +317,8 @@ namespace CameraStarterKit
             PreviewControl.FlowDirection = _mirroringPreview ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
             // Start the preview
-            try
-            {
-                await _mediaCapture.StartPreviewAsync();
-                _isPreviewing = true;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Exception when starting the preview: {0}", ex.ToString());
-            }
+            await _mediaCapture.StartPreviewAsync();
+            _isPreviewing = true;
 
             // Initialize the preview to the current orientation
             if (_isPreviewing)
@@ -368,15 +357,8 @@ namespace CameraStarterKit
         private async Task StopPreviewAsync()
         {
             // Stop the preview
-            try
-            {
-                _isPreviewing = false;
-                await _mediaCapture.StopPreviewAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Exception when stopping the preview: {0}", ex.ToString());
-            }
+            _isPreviewing = false;
+            await _mediaCapture.StopPreviewAsync();
 
             // Use the dispatcher because this method is sometimes called from non-UI threads
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -415,6 +397,7 @@ namespace CameraStarterKit
             }
             catch (Exception ex)
             {
+                // File I/O errors are reported as exceptions
                 Debug.WriteLine("Exception when taking a photo: {0}", ex.ToString());
             }
 
@@ -449,6 +432,7 @@ namespace CameraStarterKit
             }
             catch (Exception ex)
             {
+                // File I/O errors are reported as exceptions
                 Debug.WriteLine("Exception when starting video recording: {0}", ex.ToString());
             }
         }
@@ -459,19 +443,12 @@ namespace CameraStarterKit
         /// <returns></returns>
         private async Task StopRecordingAsync()
         {
-            try
-            {
-                Debug.WriteLine("Stopping recording...");
+            Debug.WriteLine("Stopping recording...");
 
-                _isRecording = false;
-                await _mediaCapture.StopRecordAsync();
+            _isRecording = false;
+            await _mediaCapture.StopRecordAsync();
 
-                Debug.WriteLine("Stopped recording!");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Exception when stopping video recording: {0}", ex.ToString());
-            }
+            Debug.WriteLine("Stopped recording!");
         }
 
         /// <summary>

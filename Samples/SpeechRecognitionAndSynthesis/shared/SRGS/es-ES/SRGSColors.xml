@@ -9,28 +9,28 @@ xmlns="http://www.w3.org/2001/06/grammar">
 
     <rule id="background_Color">
         <item>
+            fondo
             <item>
                 <ruleref uri="#color"/>
             </item>
-            fondo
         </item>
     </rule>
 
     <rule id="border_Color">
         <item>
+            borde
             <item>
                 <ruleref uri="#color"/>
             </item>
-            borde
         </item>
     </rule>
 
     <rule id="circle_Color">
         <item>
+            círculo
             <item>
                 <ruleref uri="#color"/>
             </item>
-            círculo
         </item>
     </rule>
 

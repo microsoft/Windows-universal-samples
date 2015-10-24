@@ -58,16 +58,16 @@ void Scenario_ContinuousDictation::OnNavigatedTo(NavigationEventArgs^ e)
         if (permissionGained)
         {
             this->btnContinuousRecognize->IsEnabled = true;
+
+			PopulateLanguageDropdown();
+			InitializeRecognizer(SpeechRecognizer::SystemSpeechLanguage);
         }
         else
         {
             this->dictationTextBox->Text = "Permission to access capture resources was not given by the user; please set the application setting in Settings->Privacy->Microphone.";
+			this->cbLanguageSelection->IsEnabled = false;
         }
-    }).then([this]()
-    {
-        PopulateLanguageDropdown();
-        InitializeRecognizer(SpeechRecognizer::SystemSpeechLanguage);
-    }, task_continuation_context::use_current());
+	});
 }
 
 /// <summary>
@@ -187,6 +187,7 @@ void Scenario_ContinuousDictation::OnNavigatedFrom(NavigationEventArgs^ e)
 /// <param name="e">Unused event details</param>
 void Scenario_ContinuousDictation::ContinuousRecognize_Click(Object^ sender, RoutedEventArgs^ e)
 {
+	btnContinuousRecognize->IsEnabled = false;
     // The recognizer can only start listening in a continuous fashion if the recognizer is currently idle.
     // This prevents an exception from occurring.
     if (speechRecognizer->State == SpeechRecognizerState::Idle)
@@ -214,7 +215,9 @@ void Scenario_ContinuousDictation::ContinuousRecognize_Click(Object^ sender, Rou
                     auto messageDialog = ref new Windows::UI::Popups::MessageDialog(exception->Message, "Exception");
                     create_task(messageDialog->ShowAsync());
                 }
-            });
+            }).then([this]() {
+				btnContinuousRecognize->IsEnabled = true;
+			});
         }
         catch (COMException^ exception)
         {
@@ -246,7 +249,9 @@ void Scenario_ContinuousDictation::ContinuousRecognize_Click(Object^ sender, Rou
 
             // Ensure we don't leave any hypothesis text behind
             dictationTextBox->Text = ref new Platform::String(this->dictatedTextBuilder.str().c_str());
-        });
+        }).then([this]() {
+			btnContinuousRecognize->IsEnabled = true;
+		});
     }
 }
 

@@ -26,17 +26,17 @@ namespace ScreenCasting
         {
             this.InitializeComponent();
 
-            ProjectedMediaTransportControls pmtcs = this.player.TransportControls as ProjectedMediaTransportControls;
+            ProjectedMediaTransportControls pmtcs = this._player.TransportControls as ProjectedMediaTransportControls;
             if (pmtcs != null)
                 pmtcs.StopProjectingButtonClick += ProjectionViewPage_StopProjectingButtonClick;
 
-            this.player.MediaOpened += Player_MediaOpened;
+            this._player.MediaOpened += Player_MediaOpened;
         }
 
         private void Player_MediaOpened(object sender, RoutedEventArgs e)
         {
-            this.player.IsFullWindow = true;
-            this.player.AreTransportControlsEnabled = true;
+            this._player.IsFullWindow = true;
+            this._player.AreTransportControlsEnabled = true;
         }
 
         private void ProjectionViewPage_StopProjectingButtonClick(object sender, EventArgs e)
@@ -48,18 +48,18 @@ namespace ScreenCasting
 
         public async Task<bool> SetMediaSource (Uri source, TimeSpan position)
         {            
-            await this.player.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            await this._player.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {                
-                this.player.Source = source;
-                this.player.Position = position;
-                this.player.Play();
+                this._player.Source = source;
+                this._player.Position = position;
+                this._player.Play();
             });
             return true;
         }
 
         public MediaElement Player
         {
-            get { return this.player; }
+            get { return this._player; }
         }
 
         ProjectionViewBroker broker = null;
@@ -84,8 +84,8 @@ namespace ScreenCasting
                     MainPage.Current.ProjectionViewPageControl = null;
                 });
 
-            this.player.Stop();
-            this.player.Source = null;
+            this._player.Stop();
+            this._player.Source = null;
 
             Window.Current.Close();
         }
@@ -113,10 +113,10 @@ namespace ScreenCasting
             // There may be cases to end the projection from the projected view
             // (e.g. the presentation hosted in that view concludes)
             // broker.ProjectionViewPageControl.StartViewInUse();
-            await this.player.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+            await this._player.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
             {
-                this.player.Stop();
-                this.player.Source = null;
+                this._player.Stop();
+                this._player.Source = null;
 
                 broker.ProjectionViewPageControl.StartViewInUse();
 

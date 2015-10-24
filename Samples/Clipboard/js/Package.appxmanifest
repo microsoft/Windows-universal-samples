@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="15ce6fd8-24c4-4a6e-b26b-ab0d4de3462a"
+    Name="Microsoft.SDKSamples.Clipboard.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

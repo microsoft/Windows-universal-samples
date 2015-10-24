@@ -23,7 +23,8 @@
         { url: "/html/scenario6_SRGSConstraint.html", title: "Custom SRGS Constraint" },
         { url: "/html/scenario7_ContinuousDictation.html", title: "Continuous Dictation" },
         { url: "/html/scenario8_ContinuousRecognitionListGrammar.html", title: "Continuous List Commands" },
-        { url: "/html/scenario9_ContinuousRecognitionSRGSGrammar.html", title: "Continuous SRGS Commands" }
+        { url: "/html/scenario9_ContinuousRecognitionSRGSGrammar.html", title: "Continuous SRGS Commands" },
+        { url: "/html/scenario10_PauseAsync.html", title: "PauseAsync to Change Grammar" }
     ];
 
     WinJS.Namespace.define("SdkSample", {

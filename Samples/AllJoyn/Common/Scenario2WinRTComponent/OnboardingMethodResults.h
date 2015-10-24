@@ -31,6 +31,8 @@
 //-----------------------------------------------------------------------------
 #pragma once
 
+using namespace concurrency;
+
 namespace org { namespace alljoyn { namespace Onboarding {
 
 ref class OnboardingConsumer;
@@ -57,6 +59,7 @@ public:
         auto result = ref new OnboardingConfigureWiFiResult();
         result->Status = Windows::Devices::AllJoyn::AllJoynStatus::Ok;
         result->Status2 = interfaceMemberStatus2;
+        result->m_creationContext = Concurrency::task_continuation_context::use_current();
         return result;
     }
     
@@ -66,6 +69,8 @@ public:
         result->Status = status;
         return result;
     }
+internal:
+    Concurrency::task_continuation_context m_creationContext = Concurrency::task_continuation_context::use_default();
 
 private:
     int32 m_status;
@@ -87,6 +92,7 @@ public:
     {
         auto result = ref new OnboardingConnectResult();
         result->Status = Windows::Devices::AllJoyn::AllJoynStatus::Ok;
+        result->m_creationContext = Concurrency::task_continuation_context::use_current();
         return result;
     }
     
@@ -96,6 +102,8 @@ public:
         result->Status = status;
         return result;
     }
+internal:
+    Concurrency::task_continuation_context m_creationContext = Concurrency::task_continuation_context::use_default();
 
 private:
     int32 m_status;
@@ -116,6 +124,7 @@ public:
     {
         auto result = ref new OnboardingOffboardResult();
         result->Status = Windows::Devices::AllJoyn::AllJoynStatus::Ok;
+        result->m_creationContext = Concurrency::task_continuation_context::use_current();
         return result;
     }
     
@@ -125,6 +134,8 @@ public:
         result->Status = status;
         return result;
     }
+internal:
+    Concurrency::task_continuation_context m_creationContext = Concurrency::task_continuation_context::use_default();
 
 private:
     int32 m_status;
@@ -159,6 +170,7 @@ public:
         result->Status = Windows::Devices::AllJoyn::AllJoynStatus::Ok;
         result->Age = interfaceMemberAge;
         result->ScanList = interfaceMemberScanList;
+        result->m_creationContext = Concurrency::task_continuation_context::use_current();
         return result;
     }
     
@@ -168,6 +180,8 @@ public:
         result->Status = status;
         return result;
     }
+internal:
+    Concurrency::task_continuation_context m_creationContext = Concurrency::task_continuation_context::use_default();
 
 private:
     int32 m_status;
@@ -219,6 +233,7 @@ public:
         auto result = ref new OnboardingGetVersionResult();
         result->Status = Windows::Devices::AllJoyn::AllJoynStatus::Ok;
         result->Version = value;
+        result->m_creationContext = Concurrency::task_continuation_context::use_current();
         return result;
     }
 
@@ -228,6 +243,8 @@ public:
         result->Status = status;
         return result;
     }
+internal:
+    Concurrency::task_continuation_context m_creationContext = Concurrency::task_continuation_context::use_default();
 
 private:
     int32 m_status;
@@ -256,6 +273,7 @@ public:
         auto result = ref new OnboardingGetStateResult();
         result->Status = Windows::Devices::AllJoyn::AllJoynStatus::Ok;
         result->State = value;
+        result->m_creationContext = Concurrency::task_continuation_context::use_current();
         return result;
     }
 
@@ -265,6 +283,8 @@ public:
         result->Status = status;
         return result;
     }
+internal:
+    Concurrency::task_continuation_context m_creationContext = Concurrency::task_continuation_context::use_default();
 
 private:
     int32 m_status;
@@ -293,6 +313,7 @@ public:
         auto result = ref new OnboardingGetLastErrorResult();
         result->Status = Windows::Devices::AllJoyn::AllJoynStatus::Ok;
         result->LastError = value;
+        result->m_creationContext = Concurrency::task_continuation_context::use_current();
         return result;
     }
 
@@ -302,6 +323,8 @@ public:
         result->Status = status;
         return result;
     }
+internal:
+    Concurrency::task_continuation_context m_creationContext = Concurrency::task_continuation_context::use_default();
 
 private:
     int32 m_status;

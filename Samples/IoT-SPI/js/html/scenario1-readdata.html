@@ -1,0 +1,36 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario1-readdata.js"></script>
+</head>
+
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">
+        Read data from SPI device
+    </div>
+    <p>
+        An app can read data from an SPI device.
+        To enable this sample, follow this wiring schematic using a SparkFun DXL345 sensor.
+        Wiring for both MinnowBoard Max and Raspberry Pi 2 are diagrammed.
+    </p>
+    <div>
+        <img src="ms-appx:///images/spi_sample_bb.jpg" />
+    </div>
+    <p>
+        <button id="startStopButton" class="win-button">Start</button>
+    </p>
+    <div id="scenarioControls" style="display: none">
+        Current Acceleration for X axis: <span id="X"></span><br />
+        Current Acceleration for Y axis: <span id="Y"></span><br />
+        Current Acceleration for Z axis: <span id="Z"></span>
+    </div>
+</body>
+
+</html>

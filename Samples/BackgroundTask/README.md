@@ -1,8 +1,9 @@
-﻿<!---
+<!---
   category: LaunchingAndBackgroundTasks 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=618666&clcid=0x409
 --->
-Background task sample
-======================
+
+# Background task sample
 
 This sample shows you how to create and register background tasks using the Windows Runtime background task API.
 
@@ -29,10 +30,7 @@ To obtain an evaluation copy of Microsoft Visual Studio 2013, go to [Visual Stu
 
 **Note**  For Windows 8 app samples, download the [Windows 8 app samples pack](http://go.microsoft.com/fwlink/p/?LinkId=301698). The samples in the Windows 8 app samples pack will build and run only on Microsoft Visual Studio 2012.
 
-Related topics
---------------
-
-****
+## Related topics
 
 [Displaying tiles on the lock screen](http://msdn.microsoft.com/library/windows/apps/hh868260)
 
@@ -40,7 +38,7 @@ Related topics
 
 [Managing background tasks](http://msdn.microsoft.com/library/windows/apps/hh977053)
 
-[Supporting your app with background tasks](http://msdn.microsoft.com/library/windows/apps/hh977056)
+[Support your app with background tasks](https://msdn.microsoft.com/library/windows/apps/mt299103)
 
 [Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
 
@@ -50,13 +48,11 @@ Related topics
 
 [**Windows.UI.WebUI.WebUIBackgroundTaskInstance (HTML)**](http://msdn.microsoft.com/library/windows/apps/hh701740)
 
-Related technologies
---------------------
+## Related technologies
 
 [**Windows.ApplicationModel.Background**](http://msdn.microsoft.com/library/windows/apps/br224847)
 
-Operating system requirements
------------------------------
+## Operating system requirements
 
 Client
 
@@ -70,15 +66,14 @@ Phone
 
 Windows Phone 10
 
-Build the sample
-----------------
+## Build the sample
 
-1.  Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory named for the sample and double-click the Visual Studio 2015 Solution (.sln) file.
-3.  Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
-Run the sample
---------------
+## Run the sample
 
 **Deploying the sample**
 
@@ -113,19 +108,18 @@ Add the BackgroundTaskSample app to the lock screen manually:
 
 **Note**  The minimum delay for creating TimeTrigger events is 15 minutes. The first timer event, however, might not occur until 15 minutes after it is expected to expire (30 minutes after the app registers the event).
 
-Read more
----------
+## Read more
 
 See the following topics for step-by-step information about using background tasks:
 
--   [Quickstart: Create and register a background task](http://msdn.microsoft.com/library/windows/apps/hh977055)
--   [How to respond to system events with background tasks](http://msdn.microsoft.com/library/windows/apps/hh977058)
--   [How to set conditions for running a background task](http://msdn.microsoft.com/library/windows/apps/hh977057)
--   [How to handle a cancelled background task](http://msdn.microsoft.com/library/windows/apps/hh977052)
--   [How to monitor background task progress and completion](http://msdn.microsoft.com/library/windows/apps/hh977054)
--   [How to run a background task on a timer](http://msdn.microsoft.com/library/windows/apps/hh977059)
--   [How to use maintenance triggers](http://msdn.microsoft.com/library/windows/apps/jj883699)
--   [How to declare background tasks in the application manifest](http://msdn.microsoft.com/library/windows/apps/hh977049)
--   [Guidelines and checklists for background tasks](http://msdn.microsoft.com/library/windows/apps/hh977051)
--   [**How to debug a background task**](http://msdn.microsoft.com/library/windows/apps/jj542416)
+-   [Create and register a background task](https://msdn.microsoft.com/library/windows/apps/mt299100)
+-   [Respond to system events with background tasks](https://msdn.microsoft.com/library/windows/apps/mt185414)
+-   [Set conditions for running a background task](https://msdn.microsoft.com/library/windows/apps/mt185620)
+-   [Handle a cancelled background task](https://msdn.microsoft.com/library/windows/apps/mt187312)
+-   [Monitor background task progress and completion](https://msdn.microsoft.com/library/windows/apps/mt186457)
+-   [Run a background task on a timer ](https://msdn.microsoft.com/library/windows/apps/mt186458)
+-   [Use a maintenance trigger](https://msdn.microsoft.com/library/windows/apps/mt185632)
+-   [Declare background tasks in the application manifest](https://msdn.microsoft.com/library/windows/apps/mt185412)
+-   [Guidelines for background tasks](https://msdn.microsoft.com/library/windows/apps/mt187310)
+-   [Debug a background task](https://msdn.microsoft.com/library/windows/apps/mt299101)
 

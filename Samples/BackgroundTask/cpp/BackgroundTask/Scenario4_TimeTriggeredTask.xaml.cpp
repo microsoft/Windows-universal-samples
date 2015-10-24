@@ -18,7 +18,6 @@
 #include "SampleConfiguration.h"
 
 using namespace SDKTemplate;
-using namespace BackgroundTask;
 
 using namespace Windows::ApplicationModel::Background;
 using namespace Windows::UI::Core;

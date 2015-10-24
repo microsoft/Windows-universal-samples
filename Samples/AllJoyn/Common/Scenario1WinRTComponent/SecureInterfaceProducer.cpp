@@ -67,13 +67,13 @@ void SecureInterfaceProducer::UnregisterFromBus()
         m_busAttachment->StateChanged -= m_busAttachmentStateChangedToken;
         m_busAttachmentStateChangedToken.Value = 0;
     }
-    if (nullptr != SessionPortListener)
+    if ((nullptr != m_busAttachment) && (nullptr != SessionPortListener))
     {
         alljoyn_busattachment_unbindsessionport(AllJoynHelpers::GetInternalBusAttachment(m_busAttachment), m_sessionPort);
         alljoyn_sessionportlistener_destroy(SessionPortListener);
         SessionPortListener = nullptr;
     }
-    if (nullptr != BusObject)
+    if ((nullptr != m_busAttachment) && (nullptr != BusObject))
     {
         alljoyn_busattachment_unregisterbusobject(AllJoynHelpers::GetInternalBusAttachment(m_busAttachment), BusObject);
         alljoyn_busobject_destroy(BusObject);
@@ -119,9 +119,7 @@ void SecureInterfaceProducer::OnSessionLost(_In_ alljoyn_sessionid sessionId, _I
     if (sessionId == m_sessionId)
     {
         AllJoynSessionLostEventArgs^ args = ref new AllJoynSessionLostEventArgs(static_cast<AllJoynSessionLostReason>(reason));
-        AllJoynHelpers::DispatchEvent([=]() {
-            SessionLost(this, args);
-        });
+        SessionLost(this, args);
     }
 }
 
@@ -130,9 +128,7 @@ void SecureInterfaceProducer::OnSessionMemberAdded(_In_ alljoyn_sessionid sessio
     if (sessionId == m_sessionId)
     {
         auto args = ref new AllJoynSessionMemberAddedEventArgs(AllJoynHelpers::MultibyteToPlatformString(uniqueName));
-        AllJoynHelpers::DispatchEvent([=]() {
-            SessionMemberAdded(this, args);
-        });
+        SessionMemberAdded(this, args);
     }
 }
 
@@ -141,9 +137,7 @@ void SecureInterfaceProducer::OnSessionMemberRemoved(_In_ alljoyn_sessionid sess
     if (sessionId == m_sessionId)
     {
         auto args = ref new AllJoynSessionMemberRemovedEventArgs(AllJoynHelpers::MultibyteToPlatformString(uniqueName));
-        AllJoynHelpers::DispatchEvent([=]() {
-            SessionMemberRemoved(this, args);
-        });
+        SessionMemberRemoved(this, args);
     }
 }
 
@@ -178,11 +172,12 @@ void SecureInterfaceProducer::CallConcatenateHandler(_Inout_ alljoyn_busobject b
         AllJoynMessageInfo^ callInfo = ref new AllJoynMessageInfo(AllJoynHelpers::MultibyteToPlatformString(alljoyn_message_getsender(message)));
 
         Platform::String^ inputArg0;
-        TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 0), "s", &inputArg0);
+        (void)TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 0), "s", &inputArg0);
         Platform::String^ inputArg1;
-        TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 1), "s", &inputArg1);
+        (void)TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 1), "s", &inputArg1);
 
-        create_task(producer->Service->ConcatenateAsync(callInfo, inputArg0, inputArg1)).then([busObject, message](SecureInterfaceConcatenateResult^ result)
+        SecureInterfaceConcatenateResult^ result = create_task(producer->Service->ConcatenateAsync(callInfo, inputArg0, inputArg1)).get();
+        create_task([](){}).then([=]
         {
             int32 status;
 
@@ -212,7 +207,7 @@ void SecureInterfaceProducer::CallConcatenateHandler(_Inout_ alljoyn_busobject b
 
             alljoyn_busobject_methodreply_args(busObject, message, outputs, argCount);
             alljoyn_msgarg_destroy(outputs);
-        }).wait();
+        }, result->m_creationContext).wait();
     }
 }
 
@@ -232,7 +227,7 @@ void SecureInterfaceProducer::CallTextSentSignalHandler(_In_ const alljoyn_inter
         eventArgs->MessageInfo = callInfo;
 
         Platform::String^ argument0;
-        TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 0), "s", &argument0);
+        (void)TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 0), "s", &argument0);
         eventArgs->Message = argument0;
 
         producer->Signals->CallTextSentReceived(producer->Signals, eventArgs);
@@ -273,13 +268,15 @@ QStatus SecureInterfaceProducer::OnPropertyGet(_In_ PCSTR interfaceName, _In_ PC
     {
         auto task = create_task(Service->GetIsUpperCaseEnabledAsync(nullptr));
         auto result = task.get();
-        
-        if (AllJoynStatus::Ok != result->Status)
-        {
-            return static_cast<QStatus>(result->Status);
-        }
 
-        return static_cast<QStatus>(TypeConversionHelpers::SetAllJoynMessageArg(value, "b", result->IsUpperCaseEnabled));
+        return create_task([](){}).then([=]() -> QStatus
+        {
+            if (AllJoynStatus::Ok != result->Status)
+            {
+                return static_cast<QStatus>(result->Status);
+            }
+            return static_cast<QStatus>(TypeConversionHelpers::SetAllJoynMessageArg(value, "b", result->IsUpperCaseEnabled));
+        }, result->m_creationContext).get();
     }
 
     return ER_BUS_NO_SUCH_PROPERTY;
@@ -292,12 +289,14 @@ QStatus SecureInterfaceProducer::OnPropertySet(_In_ PCSTR interfaceName, _In_ PC
     if (0 == strcmp(propertyName, "IsUpperCaseEnabled"))
     {
         bool argument;
-        TypeConversionHelpers::GetAllJoynMessageArg(value, "b", &argument);
-
-        auto task = create_task(Service->SetIsUpperCaseEnabledAsync(nullptr, argument));
-        auto result = task.get();
-
-        return static_cast<QStatus>(result->Status);
+        QStatus status = static_cast<QStatus>(TypeConversionHelpers::GetAllJoynMessageArg(value, "b", &argument));
+        if (ER_OK == status)
+        {
+            auto task = create_task(Service->SetIsUpperCaseEnabledAsync(nullptr, argument));
+            auto result = task.get();
+            status = static_cast<QStatus>(result->Status);
+        }
+        return status;
     }
     return ER_BUS_NO_SUCH_PROPERTY;
 }
@@ -440,17 +439,17 @@ PCSTR com::microsoft::Samples::SecureInterface::c_SecureInterfaceIntrospectionXm
 "  <description>A secure AllJoyn sample</description>"
 "  <annotation name=\"org.alljoyn.Bus.Secure\" value=\"true\" />"
 "  <method name=\"Concatenate\">"
-"    <description>Method that concatenates two input strings and returns the concatenated string as output</description>"
+"    <description>Concatenate two input strings and returns the concatenated string as output</description>"
 "    <arg name=\"inStr1\" type=\"s\" direction=\"in\" />"
 "    <arg name=\"inStr2\" type=\"s\" direction=\"in\" />"
 "    <arg name=\"outStr\" type=\"s\" direction=\"out\" />"
 "  </method>"
 "  <property name=\"IsUpperCaseEnabled\" type=\"b\" access=\"readwrite\">"
-"    <description>Property to determine if the output of the Concatenate method is returned as upper case string or not</description>"
+"    <description>Determine if the output of the Concatenate method is returned as upper case string or not</description>"
 "    <annotation name=\"org.freedesktop.DBus.Property.EmitsChangedSignal\" value=\"true\" />"
 "  </property>"
 "  <signal name=\"TextSent\">"
-"    <description>Signal to send a text message</description>"
+"    <description>This signal is emitted when producer sends a text message to consumer</description>"
 "    <arg name=\"message\" type=\"s\" />"
 "  </signal>"
 "</interface>"

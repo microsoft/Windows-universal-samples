@@ -122,7 +122,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ShowPackageFamilyName.xaml">
+    <Page Include="..\..\shared\ShowPackageFamilyName.xaml">
+      <Link>ShowPackageFamilyName.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

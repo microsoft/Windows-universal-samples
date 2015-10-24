@@ -5,7 +5,7 @@
   <Properties>
     <DisplayName>App UI Basics C# Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
+    <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
@@ -15,7 +15,12 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="AppUIBasics.App">
-      <uap:VisualElements DisplayName="App UI Basics CS Sample" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="App UI Basics CS Sample"  BackgroundColor="#00b2f0">
+      <uap:VisualElements DisplayName="App UI Basics CS Sample" Square150x150Logo="Assets\squaretile-sdk.png" Square44x44Logo="Assets\SmallTile-sdk.png" Description="App UI Basics CS Sample" BackgroundColor="#00b2f0">
+        <uap:DefaultTile>
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>

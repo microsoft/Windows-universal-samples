@@ -285,11 +285,11 @@ namespace SDKTemplate
             if (ApplicationData.Current.LocalSettings.Values.ContainsKey("SampleCount"))
             {
                 ulong sampleCount = (ulong)ApplicationData.Current.LocalSettings.Values["SampleCount"];
-                ScenarioOutputSampleCount.Text = sampleCount.ToString(System.Globalization.CultureInfo.CurrentCulture);
+                ScenarioOutput_SampleCount.Text = sampleCount.ToString(System.Globalization.CultureInfo.CurrentCulture);
             }
             else
             {
-                ScenarioOutputSampleCount.Text = "No data";
+                ScenarioOutput_SampleCount.Text = "No data";
             }
         }
 

@@ -1,0 +1,23 @@
+{
+	"DictationUIOptionsExampleText": "例如，\"快速红狐狸跳过一只懒惰的狗。\"",
+	"ListGrammarCallNita": "艾丽斯打电话",
+	"ListGrammarCallNitaFarley": "呼叫爱丽丝·史密斯",
+	"ListGrammarCallWayne": "约翰打电话",
+	"ListGrammarCallWayneSigmon": "呼叫约翰·史密斯",
+	"ListGrammarCreateEmail": "写电子邮件",
+	"ListGrammarExamplesPrefix": "例如：",
+	"ListGrammarGoHome": "主页",
+	"ListGrammarGoToContosoStudio": "去到Contoso Studio",
+	"ListGrammarHelpText": "Tap the microphone, and speak. This scenario uses continuous recognition to provide a global-command type scenario.",
+	"ListGrammarOpenMessage": "打开的电子邮件",
+	"ListGrammarSendEmail": "发送电子邮件",
+	"ListGrammarShowMessage": "显示消息",
+	"SRGSBackgroundGarbagePromptText": "Didn\u0027t get the background color \r\n\r\nTry saying blue background",
+	"SRGSBorderGarbagePromptText": "Didn\u0027t get the border color \r\n\r\nTry saying red border",
+	"SRGSCircleGarbagePromptText": "Didn\u0027t get the circle color \r\n\r\nTry saying green circle",
+	"SRGSGarbagePromptText": "Sorry, didn\u0027t get that\r\n\r\nTry saying -\u003e\r\nblue background\r\nred border\r\ngreen circle",
+	"SRGSHelpText": "Tap the microphone and speak to choose colors for the circle, background, and border. Try saying \u0027blue background, red border, green circle\u0027.",
+	"SRGSListeningPromptText": "Speak to choose colors for the circle, background, and border. Try saying \u0027blue background, red border, green circle\u0027.",
+	"SRGSUIOptionsExampleText": "Try \"blue background, red border, green circle\".",
+	"WebSearchUIOptionsExampleText": "伦敦的天气"
+}

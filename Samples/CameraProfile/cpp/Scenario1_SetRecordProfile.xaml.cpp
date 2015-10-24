@@ -14,22 +14,21 @@
 #include <math.h>
 #include <sstream>
 
-using namespace SDKTemplate;
-
+using namespace Concurrency;
 using namespace Platform;
+using namespace SDKTemplate;
+using namespace Windows::Devices::Enumeration;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
+using namespace Windows::Media::Capture;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Controls::Primitives;
+using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
-using namespace Concurrency;
-using namespace Windows::Devices::Enumeration;
-using namespace Windows::Media::Capture;
-using namespace Windows::UI::Core;
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Scenario1_SetRecordProfile"/> class.
@@ -86,10 +85,10 @@ void Scenario1_SetRecordProfile::InitRecordProfileBtn_Click(Object^, RoutedEvent
         // Also looking for WVGA 30FPS profile
         MediaCaptureInitializationSettings^ mediaInitSettings = ref new MediaCaptureInitializationSettings();
         bool profileFound = false;
-        for each(auto profile in profiles)
+        for (auto profile : profiles)
         {
             auto description = profile->SupportedRecordMediaDescription;
-            for each(auto desc in description)
+            for (auto desc : description)
             {
                 PrintProfileInformation(profile, desc);
 
@@ -120,30 +119,10 @@ void Scenario1_SetRecordProfile::InitRecordProfileBtn_Click(Object^, RoutedEvent
         }
         
         create_task(mediaCapture->InitializeAsync(mediaInitSettings))
-            .then([this](task<void> previousTask)
+            .then([this]()
         {
-            // We have to error check here instead of returning up the task chain due to
-            // different return types
-            try
-            {
-                LogStatusToOutputBoxAsync("Media Capture settings initialized to selected profile");
-                previousTask.get();
-            }
-            catch (Exception^ ex)
-            {
-                LogStatusAsync(ex->Message, NotifyType::ErrorMessage);
-            }
+            LogStatusToOutputBoxAsync("Media Capture settings initialized to selected profile");
         });
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            LogStatusAsync(ex->Message, NotifyType::ErrorMessage);
-        }
     });
 }
 
@@ -180,7 +159,7 @@ void Scenario1_SetRecordProfile::InitCustomProfileBtn_Click(Platform::Object^ se
         LogStatusToOutputBoxAsync("Querying device for custom profile support");
         mediaInitSettings->VideoProfile = nullptr;
         auto allVideoProfiles = mediaCapture->FindAllVideoProfiles(videoDeviceId);
-        for each (auto profile in allVideoProfiles)
+        for (auto profile : allVideoProfiles)
         {
             if (profile->Id == customProfileId)
             {
@@ -224,7 +203,7 @@ task<String^> Scenario1_SetRecordProfile::GetVideoProfileSupportedDeviceIdAsync(
         LogStatusToOutputBoxAsync(ref new String(ss.str().c_str()));
 
         // Loop through devices looking for device that supports Video Profile
-        for each(auto cameraDeviceInfo in devices)
+        for (auto cameraDeviceInfo : devices)
         {
             if (MediaCapture::IsVideoProfileSupported(cameraDeviceInfo->Id) && cameraDeviceInfo->EnclosureLocation->Panel == panel)
             {
@@ -250,17 +229,7 @@ task<void> Scenario1_SetRecordProfile::LogStatusToOutputBoxAsync(String^ message
     {
         outputBox->Text += message + "\r\n";
         outputScrollViewer->ChangeView(0.0, outputBox->ActualHeight, 1.0f);
-    }))).then([this, message](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-        }
-    });
+    })));
 }
 
 /// <summary>
@@ -280,16 +249,6 @@ task<void> Scenario1_SetRecordProfile::LogStatusAsync(String^ message, NotifyTyp
     }))).then([this, message]()
     {
         return LogStatusToOutputBoxAsync(message);
-    }).then([this, message](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-        }
     });
 }
 

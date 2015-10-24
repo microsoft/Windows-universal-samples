@@ -64,14 +64,11 @@
                 lamp.close();
                 logStatus("Disposed");
             });
-        }, function (error) {
-            logError(error.message);
         }).done();
     }
 
     /// <summary>
-    /// Gets the Default Lamp instance, if no instance is found it throws
-    /// InvalidOperation Exception
+    /// Gets the Default Lamp instance
     /// </summary>
     function getDefaultAsyncBtn_click() {
         logStatus("Initializing lamp");
@@ -85,8 +82,6 @@
 
             logStatus("Default lamp instance acquired, Device Id: " + lamp.deviceId);
             lamp.close();
-        }, function (error) {
-            logError(error.message);
         }).done();
     }
 

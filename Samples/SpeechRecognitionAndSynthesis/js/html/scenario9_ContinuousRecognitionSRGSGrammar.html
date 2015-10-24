@@ -29,13 +29,17 @@
             </div>
         </div>
         <div id="scenarioContent">
-            <button id="btnContinuousReco" disabled class="win-button">&#xE1D6; Continuous Recognition</button>
-            <p>
-                <canvas id="shapes" height="200" width="200"></canvas>
-            </p>
-            <p>Tap the microphone button and speak to choose colors for the circle, background, and border. Try saying &apos;blue background, red border, green circle&apos;.</p>
-            <p id="resultTextArea"></p>
-            <p id="errorTextArea"></p>
+            <div>
+                <select id="languageSelect" class="win-dropdown"></select>
+            </div>
+            <div>
+                <button id="btnContinuousReco" disabled class="win-button">&#xE1D6; Continuous Recognition</button>
+                <p>
+                    <canvas id="shapes" height="200" width="200"></canvas>
+                </p>
+                <p id="resultTextArea"></p>
+                <p id="errorTextArea"></p>
+            </div>
         </div>
     </div>
 </body>

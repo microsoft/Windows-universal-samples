@@ -9,38 +9,42 @@
 //
 //*********************************************************
 
+using Iso7816;
 using SDKTemplate;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.Devices.SmartCards;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.DataProtection;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
 using static NfcSample.NfcUtils;
-using Windows.Devices.SmartCards;
-using System.Runtime.InteropServices.WindowsRuntime;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace NfcSample
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class SetCardDataScenario : Page
     {
-        private readonly static byte[] AID_V =
+        private static readonly byte[] AID_PPSE =
+        {
+            // File name "2PAY.SYS.DDF01" (14 bytes)
+            (byte)'2', (byte)'P', (byte)'A', (byte)'Y', (byte)'.',
+            (byte)'S', (byte)'Y', (byte)'S', (byte)'.',
+            (byte)'D', (byte)'D', (byte)'F', (byte)'0', (byte)'1'
+        };
+
+        private static readonly byte[] AID_V =
         {
             0xA0, 0x00, 0x00, 0x00, 0x03, 0x10, 0x10
         };
 
-        private readonly static byte[] AID_MC =
+        private static readonly byte[] AID_MC =
         {
             0xA0, 0x00, 0x00, 0x00, 0x04, 0x10, 0x10
         };
 
-        private readonly static byte[] AID_NONPAYMENT =
+        private static readonly byte[] AID_NONPAYMENT =
         {
             0x12, 0x34, 0x56, 0x78, 0x90
         };
@@ -147,17 +151,18 @@ namespace NfcSample
                     SmartCardEmulationCategory.Other,
                     SmartCardEmulationType.Host,
                     (chkAutomaticEnablement.IsChecked ?? false));
-                
+
                 var rule1 = new SmartCardAutomaticResponseApdu(NfcUtils.HexStringToBytes("0012AABB").AsBuffer(), NfcUtils.HexStringToBytes("AABBCCDDEE9000").AsBuffer());
                 rule1.AppletId = AID_NONPAYMENT.AsBuffer();
                 await reg.SetAutomaticResponseApdusAsync(new List<SmartCardAutomaticResponseApdu>() { rule1 });
             }
             else
             {
-                var aid = (optV.IsChecked ?? false) ? AID_V.AsBuffer() : AID_MC.AsBuffer();
+                var aid = (optV.IsChecked ?? false) ? AID_V : AID_MC;
+                var aidBuffer = aid.AsBuffer();
                 reg = await NfcUtils.RegisterAidGroup(
                     txtDisplayName.Text,
-                    new[] { AID_PPSE.AsBuffer(), aid },
+                    new[] { AID_PPSE.AsBuffer(), aidBuffer },
                     SmartCardEmulationCategory.Payment,
                     SmartCardEmulationType.Host,
                     (chkAutomaticEnablement.IsChecked ?? false));
@@ -166,40 +171,64 @@ namespace NfcSample
 
                 // Construct SELECT PPSE response and set as auto responder
                 rules.Add(new SmartCardAutomaticResponseApdu(
-                    NfcUtils.HexStringToBytes("00A404000E325041592E5359532E444446303100").AsBuffer(), 
-                    new TlvEntry(0x6F, new TlvEntry[] {
+                    new SelectCommand(AID_PPSE, 0x00).GetBuffer(),
+                    new TlvEntry(0x6F, new TlvEntry[]
+                    {
                         new TlvEntry(0x84, "2PAY.SYS.DDF01"),
-                        new TlvEntry(0xA5, new TlvEntry[] {
+                        new TlvEntry(0xA5, new TlvEntry[]
+                        {
                             new TlvEntry(0xBF0C,
-                                new TlvEntry(0x61, new TlvEntry[] {
-                                    new TlvEntry(0x4F, aid),
-                                    new TlvEntry(0x87, new byte[] { 0x01 })} ) )})}).GetData(0x9000).AsBuffer()));
+                                new TlvEntry(0x61, new TlvEntry[]
+                                {
+                                    new TlvEntry(0x4F, aidBuffer),
+                                    new TlvEntry(0x87, new byte[] { 0x01 })
+                                }))
+                        })
+                    }).GetData(0x9000).AsBuffer()));
 
-                if (optMC.IsChecked ?? false)
+                if (optV.IsChecked ?? false)
                 {
                     rules.Add(new SmartCardAutomaticResponseApdu(
-                        NfcUtils.HexStringToBytes("00A4040007A000000004101000").AsBuffer(),
-                        new TlvEntry(0x6F, new TlvEntry[] {
-                                        new TlvEntry(0x84, aid),
-                                        new TlvEntry(0xA5, new TlvEntry[] {
-                                            new TlvEntry(0x50, "CREDIT CARD")})}).GetData(0x9000).AsBuffer()));
+                        new SelectCommand(aid, 0x00).GetBuffer(),
+                        new TlvEntry(0x6F, new TlvEntry[]
+                        {
+                            new TlvEntry(0x84, aidBuffer),
+                            new TlvEntry(0xA5, new TlvEntry[]
+                            {
+                                new TlvEntry(0x50, "CREDIT CARD"),
+                                new TlvEntry(0x9F38, new byte[] { 0x9F, 0x66, 0x02 })
+                            })
+                        }).GetData(0x9000).AsBuffer()));
 
                     var ruleGpo = new SmartCardAutomaticResponseApdu(
                         NfcUtils.HexStringToBytes("80A80000").AsBuffer(),
-                        new TlvEntry(0x77, new TlvEntry[] {
-                                        new TlvEntry(0x82, new byte[] { 0x00, 0x00 }),
-                                        new TlvEntry(0x94, new byte[] { 0x08, 0x01, 0x01, 0x00 }),
-                                        new TlvEntry(0xD7, new byte[] { 0x00, 0x00, 0x80 }) }).GetData(0x9000).AsBuffer());
-                    ruleGpo.AppletId = aid;
+                        new TlvEntry(0x80, new byte[] { 0x00, 0x80, 0x08, 0x01, 0x01, 0x00 }).GetData(0x9000).AsBuffer());
+                    ruleGpo.AppletId = aidBuffer;
                     ruleGpo.ShouldMatchLength = false;
                     rules.Add(ruleGpo);
                 }
-                else if (optV.IsChecked ?? false)
+                else
                 {
+                    rules.Add(new SmartCardAutomaticResponseApdu(
+                        new SelectCommand(aid, 0x00).GetBuffer(),
+                        new TlvEntry(0x6F, new TlvEntry[]
+                        {
+                            new TlvEntry(0x84, aidBuffer),
+                            new TlvEntry(0xA5, new TlvEntry[]
+                            {
+                                new TlvEntry(0x50, "CREDIT CARD")
+                            })
+                        }).GetData(0x9000).AsBuffer()));
+
                     var ruleGpo = new SmartCardAutomaticResponseApdu(
                         NfcUtils.HexStringToBytes("80A80000").AsBuffer(),
-                        new TlvEntry(0x80,  new byte[] { 0x00, 0x80, 0x08, 0x01, 0x01, 0x00 }).GetData(0x9000).AsBuffer());
-                    ruleGpo.AppletId = aid;
+                        new TlvEntry(0x77, new TlvEntry[]
+                        {
+                            new TlvEntry(0x82, new byte[] { 0x00, 0x00 }),
+                            new TlvEntry(0x94, new byte[] { 0x08, 0x01, 0x01, 0x00 }),
+                            new TlvEntry(0xD7, new byte[] { 0x00, 0x00, 0x80 })
+                        }).GetData(0x9000).AsBuffer());
+                    ruleGpo.AppletId = aidBuffer;
                     ruleGpo.ShouldMatchLength = false;
                     rules.Add(ruleGpo);
                 }
@@ -214,12 +243,6 @@ namespace NfcSample
                 {
                     record = BuildReadRecordResponseMC(txtPAN.Text, txtExpiryYear.Text + txtExpiryMonth.Text, txtServiceCode.Text, txtCardholderName.Text, txtTrack1Discretionary.Text, txtTrack2Discretionary.Text);
                 }
-                var ruleReadRec = new SmartCardAutomaticResponseApdu(
-                        NfcUtils.HexStringToBytes("00B2").AsBuffer(),
-                        record.AsBuffer());
-                ruleReadRec.AppletId = aid;
-                ruleReadRec.ShouldMatchLength = false;
-                rules.Add(ruleReadRec);
 
                 var encryptedRecord = await ProtectDataAsync(record, "LOCAL=user");
 

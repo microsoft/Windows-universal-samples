@@ -520,6 +520,7 @@ namespace AllJoynConsumerExperiences
                 m_busAttachment.AuthenticationComplete -= BusAttachment_AuthenticationComplete;
                 m_busAttachment.StateChanged -= BusAttachment_StateChanged;
                 m_busAttachment.Disconnect();
+                m_busAttachment = null;
             }
         }
 
@@ -571,7 +572,7 @@ namespace AllJoynConsumerExperiences
                     }
                     else
                     {
-                        UpdateStatusAsync("No WiFi Adapters detected on this machine.", NotifyType.ErrorMessage);
+                        UpdateStatusAsync("No WiFi adapters detected on this machine.", NotifyType.ErrorMessage);
                     }
                 }
             }
@@ -678,6 +679,8 @@ namespace AllJoynConsumerExperiences
 
         private void ScanForOnboardingInterfaces()
         {
+            ScenarioCleanup();
+
             m_busAttachment = new AllJoynBusAttachment();
             m_busAttachment.StateChanged += BusAttachment_StateChanged;
             m_busAttachment.AuthenticationMechanisms.Clear();
@@ -756,16 +759,9 @@ namespace AllJoynConsumerExperiences
                 m_consumer = joinSessionResult.Consumer;
                 m_consumer.SessionLost += Consumer_SessionLost;
 
-                if (!m_isCredentialsRequested)
+                if (!m_isCredentialsRequested || m_isAuthenticated)
                 {
                     GetOnboardeeNetworkListAsync();
-                }
-                else
-                {
-                    if (m_isAuthenticated)
-                    {
-                        GetOnboardeeNetworkListAsync();
-                    }
                 }
             }
             else
@@ -880,8 +876,12 @@ namespace AllJoynConsumerExperiences
                     UpdateStatusAsync("Onboardee sucessfully configured.", NotifyType.StatusMessage);
                     if (configureWifiResult.Status2 == (short)ConfigureWiFiResultStatus.Concurrent)
                     {
-                        // Concurrent step used to validate the personal AP connection. In this case, the Onboarder application must 
-                        // wait for the ConnectionResult signal to arrive over the AllJoyn session established over the SoftAP link.
+                        // The Onboardee has indicated that it will attempt to connect to the desired AP concurrently, while the SoftAP is enabled. In this case, 
+                        // the Onboarder application must wait for the ConnectionResult signal to arrive over the AllJoyn session established over the SoftAP link.
+                        // If the Onboardee does not connect to the desired AP concurrently, then there is no guaranteed way for the Onboarder application to find
+                        // out if the connection attempt was successful or not. In the NotConcurrent connection attempt, if the Onboardee fails to connect to
+                        // the desired AP, the Onboarder application will have to again start over with scanning and connecting to the Onboardee SoftAP.
+                        // For more information please visit https://allseenalliance.org/developers/learn/base-services/onboarding/interface
                         m_consumer.Signals.ConnectionResultReceived += Signals_ConnectionResultReceived;
                     }
                     AttemptConnectionAsync();

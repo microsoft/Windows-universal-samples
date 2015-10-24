@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="5d25d6ef-e7bd-4a96-9afe-48707ceddfc3"
+    Name="Microsoft.SDKSamples.Barometer.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

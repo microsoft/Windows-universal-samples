@@ -146,7 +146,7 @@
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_DeviceUse.xaml.h">
-      <DependentUpon>Scenario1_DeviceUse.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_DeviceUse.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -156,7 +156,7 @@
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_DeviceUse.xaml" />
+    <Page Include="..\shared\Scenario1_DeviceUse.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -183,7 +183,7 @@
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="Scenario1_DeviceUse.xaml.cpp">
-      <DependentUpon>Scenario1_DeviceUse.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_DeviceUse.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

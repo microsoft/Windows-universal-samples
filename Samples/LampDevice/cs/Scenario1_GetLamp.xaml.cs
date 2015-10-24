@@ -94,7 +94,7 @@ namespace Lamp
                 lamp = null;
                 await LogStatusToOutputBoxAsync("Disposed");
             }
-            catch(Exception eX)
+            catch(InvalidOperationException eX)
             {
                 await LogStatusAsync(eX.Message, NotifyType.ErrorMessage);
             }
@@ -129,7 +129,7 @@ namespace Lamp
                 // Lamp object is automatically Disposed now that it's out of scope
                 await LogStatusToOutputBoxAsync("Lamp Disposed");
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex)
             {
                 await LogStatusAsync(ex.ToString(), NotifyType.ErrorMessage);
             }

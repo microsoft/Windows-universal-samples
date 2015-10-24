@@ -158,6 +158,9 @@
     <ClInclude Include="Scenario_ListConstraint.xaml.h">
       <DependentUpon>Scenario_ListConstraint.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario_PauseAsync.xaml.h">
+      <DependentUpon>Scenario_PauseAsync.xaml</DependentUpon>
+    </ClInclude>
     <ClInclude Include="Scenario_PredefinedDictationGrammar.xaml.h">
       <DependentUpon>Scenario_PredefinedDictationGrammar.xaml</DependentUpon>
     </ClInclude>
@@ -185,6 +188,7 @@
     <Page Include="Scenario_ContinuousRecognitionListGrammar.xaml" />
     <Page Include="Scenario_ContinuousRecognitionSRGSGrammar.xaml" />
     <Page Include="Scenario_ListConstraint.xaml" />
+    <Page Include="Scenario_PauseAsync.xaml" />
     <Page Include="Scenario_PredefinedDictationGrammar.xaml" />
     <Page Include="Scenario_PredefinedWebSearchGrammar.xaml" />
     <Page Include="Scenario_SRGSConstraint.xaml" />
@@ -227,6 +231,9 @@
     </ClCompile>
     <ClCompile Include="Scenario_ListConstraint.xaml.cpp">
       <DependentUpon>Scenario_ListConstraint.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario_PauseAsync.xaml.cpp">
+      <DependentUpon>Scenario_PauseAsync.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario_PredefinedDictationGrammar.xaml.cpp">
       <DependentUpon>Scenario_PredefinedDictationGrammar.xaml</DependentUpon>
@@ -286,8 +293,8 @@
     <Xml Include="..\shared\SRGS\it-IT\SRGSColors.xml">
       <Link>SRGS\it-IT\SRGSColors.xml</Link>
     </Xml>
-    <Xml Include="..\shared\SRGS\zh-CN\SRGSColors.xml">
-      <Link>SRGS\zh-CN\SRGSColors.xml</Link>
+    <Xml Include="..\shared\SRGS\zh-Hans-CN\SRGSColors.xml">
+      <Link>SRGS\zh-Hans-CN\SRGSColors.xml</Link>
     </Xml>
   </ItemGroup>
   <ItemGroup>

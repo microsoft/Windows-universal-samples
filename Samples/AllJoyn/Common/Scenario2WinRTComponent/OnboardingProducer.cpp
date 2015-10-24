@@ -67,13 +67,13 @@ void OnboardingProducer::UnregisterFromBus()
         m_busAttachment->StateChanged -= m_busAttachmentStateChangedToken;
         m_busAttachmentStateChangedToken.Value = 0;
     }
-    if (nullptr != SessionPortListener)
+    if ((nullptr != m_busAttachment) && (nullptr != SessionPortListener))
     {
         alljoyn_busattachment_unbindsessionport(AllJoynHelpers::GetInternalBusAttachment(m_busAttachment), m_sessionPort);
         alljoyn_sessionportlistener_destroy(SessionPortListener);
         SessionPortListener = nullptr;
     }
-    if (nullptr != BusObject)
+    if ((nullptr != m_busAttachment) && (nullptr != BusObject))
     {
         alljoyn_busattachment_unregisterbusobject(AllJoynHelpers::GetInternalBusAttachment(m_busAttachment), BusObject);
         alljoyn_busobject_destroy(BusObject);
@@ -119,9 +119,7 @@ void OnboardingProducer::OnSessionLost(_In_ alljoyn_sessionid sessionId, _In_ al
     if (sessionId == m_sessionId)
     {
         AllJoynSessionLostEventArgs^ args = ref new AllJoynSessionLostEventArgs(static_cast<AllJoynSessionLostReason>(reason));
-        AllJoynHelpers::DispatchEvent([=]() {
-            SessionLost(this, args);
-        });
+        SessionLost(this, args);
     }
 }
 
@@ -130,9 +128,7 @@ void OnboardingProducer::OnSessionMemberAdded(_In_ alljoyn_sessionid sessionId, 
     if (sessionId == m_sessionId)
     {
         auto args = ref new AllJoynSessionMemberAddedEventArgs(AllJoynHelpers::MultibyteToPlatformString(uniqueName));
-        AllJoynHelpers::DispatchEvent([=]() {
-            SessionMemberAdded(this, args);
-        });
+        SessionMemberAdded(this, args);
     }
 }
 
@@ -141,9 +137,7 @@ void OnboardingProducer::OnSessionMemberRemoved(_In_ alljoyn_sessionid sessionId
     if (sessionId == m_sessionId)
     {
         auto args = ref new AllJoynSessionMemberRemovedEventArgs(AllJoynHelpers::MultibyteToPlatformString(uniqueName));
-        AllJoynHelpers::DispatchEvent([=]() {
-            SessionMemberRemoved(this, args);
-        });
+        SessionMemberRemoved(this, args);
     }
 }
 
@@ -178,13 +172,14 @@ void OnboardingProducer::CallConfigureWiFiHandler(_Inout_ alljoyn_busobject busO
         AllJoynMessageInfo^ callInfo = ref new AllJoynMessageInfo(AllJoynHelpers::MultibyteToPlatformString(alljoyn_message_getsender(message)));
 
         Platform::String^ inputArg0;
-        TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 0), "s", &inputArg0);
+        (void)TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 0), "s", &inputArg0);
         Platform::String^ inputArg1;
-        TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 1), "s", &inputArg1);
+        (void)TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 1), "s", &inputArg1);
         int16 inputArg2;
-        TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 2), "n", &inputArg2);
+        (void)TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 2), "n", &inputArg2);
 
-        create_task(producer->Service->ConfigureWiFiAsync(callInfo, inputArg0, inputArg1, inputArg2)).then([busObject, message](OnboardingConfigureWiFiResult^ result)
+        OnboardingConfigureWiFiResult^ result = create_task(producer->Service->ConfigureWiFiAsync(callInfo, inputArg0, inputArg1, inputArg2)).get();
+        create_task([](){}).then([=]
         {
             int32 status;
 
@@ -214,7 +209,7 @@ void OnboardingProducer::CallConfigureWiFiHandler(_Inout_ alljoyn_busobject busO
 
             alljoyn_busobject_methodreply_args(busObject, message, outputs, argCount);
             alljoyn_msgarg_destroy(outputs);
-        }).wait();
+        }, result->m_creationContext).wait();
     }
 }
 
@@ -232,7 +227,8 @@ void OnboardingProducer::CallConnectHandler(_Inout_ alljoyn_busobject busObject,
         AllJoynMessageInfo^ callInfo = ref new AllJoynMessageInfo(AllJoynHelpers::MultibyteToPlatformString(alljoyn_message_getsender(message)));
 
 
-        create_task(producer->Service->ConnectAsync(callInfo)).then([busObject, message](OnboardingConnectResult^ result)
+        OnboardingConnectResult^ result = create_task(producer->Service->ConnectAsync(callInfo)).get();
+        create_task([](){}).then([=]
         {
             int32 status;
 
@@ -254,7 +250,7 @@ void OnboardingProducer::CallConnectHandler(_Inout_ alljoyn_busobject busObject,
 
             alljoyn_busobject_methodreply_args(busObject, message, outputs, argCount);
             alljoyn_msgarg_destroy(outputs);
-        }).wait();
+        }, result->m_creationContext).wait();
     }
 }
 
@@ -272,7 +268,8 @@ void OnboardingProducer::CallOffboardHandler(_Inout_ alljoyn_busobject busObject
         AllJoynMessageInfo^ callInfo = ref new AllJoynMessageInfo(AllJoynHelpers::MultibyteToPlatformString(alljoyn_message_getsender(message)));
 
 
-        create_task(producer->Service->OffboardAsync(callInfo)).then([busObject, message](OnboardingOffboardResult^ result)
+        OnboardingOffboardResult^ result = create_task(producer->Service->OffboardAsync(callInfo)).get();
+        create_task([](){}).then([=]
         {
             int32 status;
 
@@ -294,7 +291,7 @@ void OnboardingProducer::CallOffboardHandler(_Inout_ alljoyn_busobject busObject
 
             alljoyn_busobject_methodreply_args(busObject, message, outputs, argCount);
             alljoyn_msgarg_destroy(outputs);
-        }).wait();
+        }, result->m_creationContext).wait();
     }
 }
 
@@ -312,7 +309,8 @@ void OnboardingProducer::CallGetScanInfoHandler(_Inout_ alljoyn_busobject busObj
         AllJoynMessageInfo^ callInfo = ref new AllJoynMessageInfo(AllJoynHelpers::MultibyteToPlatformString(alljoyn_message_getsender(message)));
 
 
-        create_task(producer->Service->GetScanInfoAsync(callInfo)).then([busObject, message](OnboardingGetScanInfoResult^ result)
+        OnboardingGetScanInfoResult^ result = create_task(producer->Service->GetScanInfoAsync(callInfo)).get();
+        create_task([](){}).then([=]
         {
             int32 status;
 
@@ -350,7 +348,7 @@ void OnboardingProducer::CallGetScanInfoHandler(_Inout_ alljoyn_busobject busObj
 
             alljoyn_busobject_methodreply_args(busObject, message, outputs, argCount);
             alljoyn_msgarg_destroy(outputs);
-        }).wait();
+        }, result->m_creationContext).wait();
     }
 }
 
@@ -370,7 +368,7 @@ void OnboardingProducer::CallConnectionResultSignalHandler(_In_ const alljoyn_in
         eventArgs->MessageInfo = callInfo;
 
         Onboarding^ argument0;
-        TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 0), "(ns)", &argument0);
+        (void)TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 0), "(ns)", &argument0);
         eventArgs->Arg = argument0;
 
         producer->Signals->CallConnectionResultReceived(producer->Signals, eventArgs);
@@ -411,37 +409,43 @@ QStatus OnboardingProducer::OnPropertyGet(_In_ PCSTR interfaceName, _In_ PCSTR p
     {
         auto task = create_task(Service->GetVersionAsync(nullptr));
         auto result = task.get();
-        
-        if (AllJoynStatus::Ok != result->Status)
-        {
-            return static_cast<QStatus>(result->Status);
-        }
 
-        return static_cast<QStatus>(TypeConversionHelpers::SetAllJoynMessageArg(value, "q", result->Version));
+        return create_task([](){}).then([=]() -> QStatus
+        {
+            if (AllJoynStatus::Ok != result->Status)
+            {
+                return static_cast<QStatus>(result->Status);
+            }
+            return static_cast<QStatus>(TypeConversionHelpers::SetAllJoynMessageArg(value, "q", result->Version));
+        }, result->m_creationContext).get();
     }
     if (0 == strcmp(propertyName, "State"))
     {
         auto task = create_task(Service->GetStateAsync(nullptr));
         auto result = task.get();
-        
-        if (AllJoynStatus::Ok != result->Status)
-        {
-            return static_cast<QStatus>(result->Status);
-        }
 
-        return static_cast<QStatus>(TypeConversionHelpers::SetAllJoynMessageArg(value, "n", result->State));
+        return create_task([](){}).then([=]() -> QStatus
+        {
+            if (AllJoynStatus::Ok != result->Status)
+            {
+                return static_cast<QStatus>(result->Status);
+            }
+            return static_cast<QStatus>(TypeConversionHelpers::SetAllJoynMessageArg(value, "n", result->State));
+        }, result->m_creationContext).get();
     }
     if (0 == strcmp(propertyName, "LastError"))
     {
         auto task = create_task(Service->GetLastErrorAsync(nullptr));
         auto result = task.get();
-        
-        if (AllJoynStatus::Ok != result->Status)
-        {
-            return static_cast<QStatus>(result->Status);
-        }
 
-        return static_cast<QStatus>(TypeConversionHelpers::SetAllJoynMessageArg(value, "(ns)", result->LastError));
+        return create_task([](){}).then([=]() -> QStatus
+        {
+            if (AllJoynStatus::Ok != result->Status)
+            {
+                return static_cast<QStatus>(result->Status);
+            }
+            return static_cast<QStatus>(TypeConversionHelpers::SetAllJoynMessageArg(value, "(ns)", result->LastError));
+        }, result->m_creationContext).get();
     }
 
     return ER_BUS_NO_SUCH_PROPERTY;

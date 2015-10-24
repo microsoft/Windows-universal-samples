@@ -37,9 +37,7 @@
               Square150x150Logo="Assets\SquareTile-sdk.png"
               Square44x44Logo="Assets\SmallTile-sdk.png"
               Description="SocketActivityStreamSocket"
-              
-              BackgroundColor="#00b2f0"
-              ToastCapable="true">
+              BackgroundColor="#00b2f0" >
                 <uap:SplashScreen Image="Assets\Splash-sdk.png" />
                 <uap:DefaultTile>
                     <uap:ShowNameOnTiles>

@@ -5,10 +5,10 @@
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   IgnorableNamespaces="uap mp">
   <Identity
-    Name="c2adb9af-edb3-4e57-8056-9d0531d4a6b2"
+    Name="Microsoft.SDKSamples.UserSelection.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
-  <mp:PhoneIdentity PhoneProductId="c2adb9af-edb3-4e57-8056-9d0531d4a6b2" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="f5893065-84c9-407e-ac84-28b0691e8a46" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
   <Properties>
     <DisplayName>User Selection JS Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>

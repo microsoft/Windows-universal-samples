@@ -184,14 +184,14 @@ red border
 green circle</value>
   </data>
   <data name="SRGSHelpText" xml:space="preserve">
-    <value>Tap the microphone and speak to choose colors for the circle, background, and border. Try saying 'blue background, red border, green circle'.</value>
+    <value>Tap the microphone and speak to choose colors for the circle, background, and border. Try saying 'fondo azul, borde rojo, círculo verde'.</value>
   </data>
   <data name="SRGSListeningPromptText" xml:space="preserve">
-    <value>Speak to choose colors for the circle, background, and border. Try saying 'blue background, red border, green circle'.</value>
+    <value>Speak to choose colors for the circle, background, and border. Try saying 'fondo azul, borde rojo, círculo verde'.</value>
     <comment>SRGS ResultTextBlock content when listening</comment>
   </data>
   <data name="SRGSUIOptionsExampleText" xml:space="preserve">
-    <value>Try "blue background, red border, green circle".</value>
+    <value>Try "fondo azul, borde rojo, círculo verde".</value>
     <comment>UIOptions for SRGS one-shot sample</comment>
   </data>
   <data name="WebSearchUIOptionsExampleText" xml:space="preserve">

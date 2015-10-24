@@ -13,6 +13,7 @@ using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
+using Windows.Graphics.Display;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -28,6 +29,7 @@ namespace SplashScreenSample
         internal Frame rootFrame;
 
         private SplashScreen splash; // Variable to hold the splash screen object.
+        private double ScaleFactor; //Variable to hold the device scale factor (use to determine phone screen resolution)
 
         public ExtendedSplash(SplashScreen splashscreen, bool loadState)
         {
@@ -37,6 +39,8 @@ namespace SplashScreenSample
             // Listen for window resize events to reposition the extended splash screen image accordingly.
             // This is important to ensure that the extended splash screen is formatted properly in response to snapping, unsnapping, rotation, etc...
             Window.Current.SizeChanged += new WindowSizeChangedEventHandler(ExtendedSplash_OnResize);
+
+            ScaleFactor = (double)DisplayInformation.GetForCurrentView().ResolutionScale / 100;
 
             splash = splashscreen;
 
@@ -70,22 +74,10 @@ namespace SplashScreenSample
         // Position the extended splash screen image in the same location as the system splash screen image.
         void PositionImage()
         {
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-            {
-                extendedSplashImage.SetValue(Viewbox.HeightProperty, splashImageRect.Height);
-                extendedSplashImage.SetValue(Viewbox.WidthProperty, splashImageRect.Width);
-                // Since we are on Phone we use a "portrait-layout" image to load into.
-                extendedSplashImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(extendedSplashImage.BaseUri, "Images/extended-splash-Phone-sdk.png"));
-            }
-            else
-            {
-                extendedSplashImage.SetValue(Viewbox.HeightProperty, splashImageRect.X);
-                extendedSplashImage.SetValue(Viewbox.HeightProperty, splashImageRect.Y);
-                extendedSplashImage.Height = splashImageRect.Height;
-                extendedSplashImage.Width = splashImageRect.Width;
-                // Since we are not on Phone we use a standard "wide-layout" image to load into.
-                extendedSplashImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(extendedSplashImage.BaseUri, "Images/extended-splash-Windows-sdk.png"));
-            }
+            extendedSplashImage.SetValue(Canvas.LeftProperty, splashImageRect.Left);
+            extendedSplashImage.SetValue(Canvas.TopProperty, splashImageRect.Top);
+            extendedSplashImage.Height = splashImageRect.Height / ScaleFactor;
+            extendedSplashImage.Width = splashImageRect.Width / ScaleFactor;
         }
 
         void ExtendedSplash_OnResize(Object sender, WindowSizeChangedEventArgs e)

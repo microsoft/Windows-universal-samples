@@ -29,12 +29,17 @@
             </div>
         </div>
         <div id="scenarioContent">
-            <button id="btnListenUI" disabled class="win-button">&#xE1D6; with UI</button>
-            <button id="btnListen" disabled class="win-button">&#xE1D6; without UI</button>
+            <div>
+                <select id="languageSelect" class="win-dropdown"></select>
+            </div>
+            <div>
+                <button id="btnListenUI" disabled class="win-button">&#xE1D6; with UI</button>
+                <button id="btnListen" disabled class="win-button">&#xE1D6; without UI</button>
 
-            <p>Tap the microphone button and speak. This example uses a list constraint, and the list of strings to listen for contains &quot;Yes&quot; and &quot;No&quot;. A privacy statement prompt may be shown.</p>
-            <p id="resultTextArea"></p>
-            <p id="errorTextArea"></p>
+                <p id="helpText"></p>
+                <p id="resultTextArea"></p>
+                <p id="errorTextArea"></p>
+            </div>
         </div>
     </div>
 </body>

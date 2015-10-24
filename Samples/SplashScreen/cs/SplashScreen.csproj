@@ -159,15 +159,8 @@
     <Content Include="..\..\..\SharedContent\media\smalltile-sdk.png">
       <Link>Assets\smallTile-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\smalltile-sdk.png">
-      <Link>Assets\smalltile-Windows-sdk.png</Link>
-    </Content>
-    <Content Include="Assets\splash-Phone-sdk.png" />
     <Content Include="..\..\..\SharedContent\media\splash-sdk.png">
       <Link>Assets\splash-sdk.png</Link>
-    </Content>
-    <Content Include="..\..\..\SharedContent\media\splash-sdk.png">
-      <Link>Assets\splash-Windows-sdk.png</Link>
     </Content>
     <Content Include="..\..\..\SharedContent\media\squaretile-sdk.png">
       <Link>Assets\squareTile-sdk.png</Link>
@@ -181,8 +174,6 @@
     <Content Include="..\..\..\SharedContent\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Content>
-    <Content Include="Images\extended-splash-Phone-sdk.png" />
-    <Content Include="Images\extended-splash-Windows-sdk.png" />
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="WindowsDesktop, Version=10.0.10240.0">

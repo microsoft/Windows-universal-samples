@@ -24,7 +24,7 @@ CustomException::CustomException()
 void CustomException::Start_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     // Component Creation
-    Oven^ myOven = ref new Oven();
+    auto myOven = ref new Oven();
 
     try 
     {

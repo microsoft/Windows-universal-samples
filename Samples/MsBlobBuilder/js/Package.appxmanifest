@@ -5,10 +5,10 @@
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   IgnorableNamespaces="uap mp">
   <Identity
-    Name="c2adb9af-edb3-4e57-8056-9d0531d4a6b2"
+    Name="Microsoft.SDKSamples.MsBlobBuilder.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
-  <mp:PhoneIdentity PhoneProductId="c2adb9af-edb3-4e57-8056-9d0531d4a6b2" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="aa4ee6bc-074d-421c-b084-8bfd90fb391b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
   <Properties>
     <DisplayName>Blob Builder JS Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>

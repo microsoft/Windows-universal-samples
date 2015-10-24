@@ -40,9 +40,9 @@ namespace SDKTemplate
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title = "Save a file to app's storage", ClassType = typeof(FilePickerContracts.FileSavePicker_SaveToAppStorage) },
-            new Scenario() { Title = "Fail to save a file",     ClassType = typeof(FilePickerContracts.FileSavePicker_FailToSave) },
-            new Scenario() { Title = "Save to cached file",     ClassType = typeof(FilePickerContracts.FileSavePicker_SaveToCachedFile) },
+            new Scenario() { Title = "1) Save a file to app's storage", ClassType = typeof(FilePickerContracts.FileSavePicker_SaveToAppStorage) },
+            new Scenario() { Title = "2) Fail to save a file",     ClassType = typeof(FilePickerContracts.FileSavePicker_FailToSave) },
+            new Scenario() { Title = "3) Save to cached file",     ClassType = typeof(FilePickerContracts.FileSavePicker_SaveToCachedFile) },
         };
 
         internal void Activate(FileSavePickerActivatedEventArgs args)
@@ -164,21 +164,8 @@ namespace SDKTemplate
 
         private void PopulateScenarios()
         {
-            System.Collections.ObjectModel.ObservableCollection<object> ScenarioList = new System.Collections.ObjectModel.ObservableCollection<object>();
-            int i = 0;
-
-            // Populate the ListBox with the list of scenarios as defined in Constants.cs.
-            foreach (Scenario s in scenarios)
-            {
-                ListBoxItem item = new ListBoxItem();
-                s.Title = (++i).ToString() + ") " + s.Title;
-                item.Content = s;
-                item.Name = s.ClassType.FullName;
-                ScenarioList.Add(item);
-            }
-
             // Bind the ListBox to the scenario list.
-            Scenarios.ItemsSource = ScenarioList;
+            Scenarios.ItemsSource = scenarios;
             Scenarios.SelectedIndex = 0;
         }
 
@@ -254,8 +241,7 @@ namespace SDKTemplate
             {
                 NotifyUser("", NotifyType.StatusMessage);
 
-                ListBoxItem selectedListBoxItem = Scenarios.SelectedItem as ListBoxItem;
-                Scenario scenario = selectedListBoxItem.Content as Scenario;
+                Scenario scenario = Scenarios.SelectedItem as Scenario;
                 LoadScenario(scenario.ClassType);
                 InvalidateSize();
             }

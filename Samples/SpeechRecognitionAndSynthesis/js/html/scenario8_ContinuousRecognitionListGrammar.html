@@ -29,11 +29,16 @@
             </div>
         </div>
         <div id="scenarioContent">
-            <button id="btnContinuousReco" disabled class="win-button">&#xE1D6; Continuous Recognition</button>
+            <div>
+                <select id="languageSelect" class="win-dropdown"></select>
+            </div>
+            <div>
+                <button id="btnContinuousReco" disabled class="win-button">&#xE1D6; Continuous Recognition</button>
 
-            <p>Tap the microphone and speak. This scenario uses continuous recognition to provide a global-command type scenario. Try saying &apos;Go Home&apos;, &apos;Call Nita&apos;, &apos;Go to Contoso Studio&apos;, &apos;Send Email&apos;.</p>
-            <p id="resultTextArea"></p>
-            <p id="errorTextArea"></p>
+                <p id="helpText"></p>
+                <p id="resultTextArea"></p>
+                <p id="errorTextArea"></p>
+            </div>
         </div>
     </div>
 </body>

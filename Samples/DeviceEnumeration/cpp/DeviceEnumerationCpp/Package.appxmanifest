@@ -11,7 +11,7 @@
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
-    <mp:PhoneIdentity PhoneProductId="f8ffce2e-44a6-4b54-94a6-5c491a7b7cf5" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="35f039d6-82d6-453c-89ea-b24283b313c8" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>DeviceEnumeration C++ sample</DisplayName>

@@ -44,6 +44,10 @@ namespace StateTriggersSample.CustomTriggers
             }
             set
             {
+                if (_targetElement != null)
+                {
+                    _targetElement.SizeChanged -= _targetElement_SizeChanged;
+                }
                 _targetElement = value;
                 _targetElement.SizeChanged += _targetElement_SizeChanged;
             }

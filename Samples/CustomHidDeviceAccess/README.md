@@ -1,9 +1,9 @@
 <!---
   category: DevicesSensorsAndPower
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620527&clcid=0x409
 --->
 
-Custom HID Device Access Sample
-===============================
+# Custom HID device sample
 
 This sample shows how to use the [**Windows.Devices.HumanInterfaceDevices**](http://msdn.microsoft.com/library/windows/apps/dn264174) API. It was designed to work with a programmable, USB-based, HID device called the SuperMUTT.
 
@@ -65,8 +65,7 @@ When you press the **Stop Device Watcher** button, the app executes code that di
 
 Also, whenever the app is suspended, it executes code that disconnects from the SuperMUTT device.
 
-Operating system requirements
------------------------------
+## Operating system requirements
 
 **Client:** Windows 10
 
@@ -74,25 +73,24 @@ Operating system requirements
 
 **Phone:** Windows 10
 
-Build the sample
-----------------
+## Build the sample
 
-To build this sample, open the solution (.sln) file from Visual Studio. Press Ctrl+Shift+B, or select Build \> Build Solution.
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
-Run the sample
---------------
+## Run the sample
 
 To run this sample after building it, press F5 (run with debugging enabled) or Ctrl+F5 (run without debugging enabled) from Visual Studio. (Or select the corresponding options from the Debug menu.)
 
-Device Driver Requirements
---------------------------
+## Device Driver Requirements
 
 The sample runs over the inbox USB and HID device-drivers that ship in Windows. These device drivers are installed when you first attach the SuperMUTT device.
 
 Note that the **Windows.Devices.HumanInterfaceDevice** API does not support custom, or filter, drivers.
 
-Understanding the app manifest
-------------------------------
+## Understanding the app manifest
 
 The app manifest is an XML document that contains the info the system needs to deploy, display, or update a Windows Store app. This info includes package identity, package dependencies, required capabilities, visual elements, and extensibility points. Every app package must include one package manifest.
 
@@ -118,8 +116,7 @@ In the following vendor-defined usage data, the device is identified by the **Ve
   </Capabilities>
 ```
 
-Configuring the SuperMUTT firmware
-----------------------------------
+## Configuring the SuperMUTT firmware
 
 The following steps allow you to configure the SuperMUTT device to run with your sample.
 
@@ -144,8 +141,7 @@ If needed, the you can revert the SuperMUTT from HID device-mode back to its def
 MuttUtil.exe -hidtodefault
 ```
 
-Limitations
------------
+## Limitations
 
 **Designed for Peripherals**
 

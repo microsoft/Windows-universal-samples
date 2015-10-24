@@ -146,16 +146,16 @@
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_CurrentActivity.xaml.h">
-      <DependentUpon>Scenario1_CurrentActivity.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_CurrentActivity.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario2_History.xaml.h">
-      <DependentUpon>Scenario2_History.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_History.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario3_ChangeEvents.xaml.h">
-      <DependentUpon>Scenario3_ChangeEvents.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_ChangeEvents.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario4_BackgroundActivity.xaml.h">
-      <DependentUpon>Scenario4_BackgroundActivity.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario4_BackgroundActivity.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -165,10 +165,10 @@
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_CurrentActivity.xaml" />
-    <Page Include="Scenario2_History.xaml" />
-    <Page Include="Scenario3_ChangeEvents.xaml" />
-    <Page Include="Scenario4_BackgroundActivity.xaml" />
+    <Page Include="..\shared\Scenario1_CurrentActivity.xaml" />
+    <Page Include="..\shared\Scenario2_History.xaml" />
+    <Page Include="..\shared\Scenario3_ChangeEvents.xaml" />
+    <Page Include="..\shared\Scenario4_BackgroundActivity.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -195,16 +195,16 @@
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="Scenario1_CurrentActivity.xaml.cpp">
-      <DependentUpon>Scenario1_CurrentActivity.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_CurrentActivity.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario2_History.xaml.cpp">
-      <DependentUpon>Scenario2_History.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_History.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario3_ChangeEvents.xaml.cpp">
-      <DependentUpon>Scenario3_ChangeEvents.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_ChangeEvents.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario4_BackgroundActivity.xaml.cpp">
-      <DependentUpon>Scenario4_BackgroundActivity.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario4_BackgroundActivity.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

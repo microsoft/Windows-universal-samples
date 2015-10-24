@@ -1,0 +1,38 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario3-enum.js"></script>
+</head>
+
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">
+        Calendar enumeration and math
+    </div>
+    <p>
+        Enumerates through a calendar and performs calendar math.
+    </p>
+    <p>
+        Calendars use local time zone information, which includes periodic adjustments for things
+        like Daylight Saving Time and leap years.
+        Enumerating where necessary helps avoid making assumptions about the duration of various calendar periods.
+    </p>
+    <p>
+        Calendar math may produce different results depending on the local time of the system.
+        Code which uses the Calendar class should therefore be tested across different time zones
+        and date spans over which it might be used.
+    </p>
+    <p>
+        <button id="showResults" class="win-button">Show results</button>
+    </p>
+    <p id="outputText">
+    </p>
+</body>
+
+</html>

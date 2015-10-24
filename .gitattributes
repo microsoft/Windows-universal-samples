@@ -19,8 +19,10 @@
 *.inf          text eol=crlf
 *.inx          text eol=crlf
 *.js           text eol=crlf
+*.json         text eol=crlf
 *.jsproj       text eol=crlf
 *.rc           text eol=crlf
+*.resjson      text eol=crlf
 *.rgs          text eol=crlf
 *.sln          text eol=crlf
 *.vcxproj      text eol=crlf

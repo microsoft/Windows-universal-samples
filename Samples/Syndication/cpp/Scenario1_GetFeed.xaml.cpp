@@ -153,7 +153,7 @@ void SDKTemplate::Syndication::Scenario1::DisplayCurrentItem()
     // Display element extensions. The ElementExtensions collection contains all the additional child elements within
     // the current element that do not belong to the Atom or RSS standards (e.g., Dublin Core extension elements).
     auto items = ref new Vector<Platform::Object^>();
-    for each (ISyndicationNode^ elementExtension in item->ElementExtensions)
+    for (ISyndicationNode^ elementExtension : item->ElementExtensions)
     {
         auto bindableNode = ref new BindableNode(
             elementExtension->NodeName,

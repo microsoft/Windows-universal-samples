@@ -15,10 +15,18 @@
         ready: function (element, options) {
             AudioCapturePermissions.requestMicrophonePermission().then(function (available) {
                 if (available) {
-                    initializeRecognizer();
+                    var defaultLang = Windows.Media.SpeechRecognition.SpeechRecognizer.systemSpeechLanguage;
+                    initializeRecognizer(defaultLang);
+                    initializeLanguageDropdown();
 
                     btnListen.addEventListener("click", listenFn, false);
                     btnListenUI.addEventListener("click", listenUIFn, false);
+                    languageSelect.addEventListener("change", setLanguageFunction, false);
+
+                    var rcns = Windows.ApplicationModel.Resources.Core;
+                    context = new rcns.ResourceContext();
+                    context.languages = new Array(defaultLang.languageTag);
+                    resourceMap = rcns.ResourceManager.current.mainResourceMap.getSubtree('LocalizationSpeechResources');
                 }
                 else {
                     btnListen.disabled = true;
@@ -43,14 +51,24 @@
 
     var recognizer;
 
-    function initializeRecognizer() {
+    // localization resources
+    var context;
+    var resourceMap;
+
+    function initializeRecognizer(language) {
         /// <summary>
         /// Initialize speech recognizer and compile constraints.
         /// </summary>
-        recognizer = Windows.Media.SpeechRecognition.SpeechRecognizer();
+        if (typeof recognizer !== 'undefined')
+        {
+            recognizer = null;
+        }
+
+        recognizer = Windows.Media.SpeechRecognition.SpeechRecognizer(language);
 
         // Provide feedback to the user about the state of the recognizer.
         recognizer.addEventListener('statechanged', onSpeechRecognizerStateChanged, false);
+        
 
         // Compile the dictation topic constraint, which optimizes for dictated speech.
         var dictationConstraint = new Windows.Media.SpeechRecognition.SpeechRecognitionTopicConstraint(Windows.Media.SpeechRecognition.SpeechRecognitionScenario.dictation, "dictation");
@@ -73,6 +91,41 @@
         );
     }
 
+    function initializeLanguageDropdown() {
+        /// <summary>
+        /// Checks the set of supported languages installed in the system for speech, and adds them
+        /// to a dropdown of languages that can be selected from.
+        /// </summary>
+        var supportedLanguages = Windows.Media.SpeechRecognition.SpeechRecognizer.supportedTopicLanguages;
+        for (var langIndex = 0; langIndex < supportedLanguages.size; langIndex++)
+        {
+            var lang = supportedLanguages[langIndex];
+            var option = document.createElement("option");
+            option.text = lang.displayName;
+            option.tag = lang;
+            languageSelect.add(option, null);
+            if(lang.languageTag == recognizer.currentLanguage.languageTag)
+            {
+                languageSelect.selectedIndex = langIndex;
+            }
+        }
+    }
+
+    function setLanguageFunction() {
+        /// <summary>
+        /// When a language is chosen from the dropdown, triggers reinitialization of 
+        /// the speech engine, and re-sets the resource map context.
+        /// </summary>
+        if(languageSelect.selectedIndex !== -1)
+        {
+            var option = languageSelect.options[languageSelect.selectedIndex];
+            var language = option.tag;
+            context.languages = new Array(language.languageTag);
+
+            initializeRecognizer(language);
+        }
+    }
+
     function listenFn() {
         /// <summary>
         /// Uses the recognizer constructed earlier to listen for speech from the user before displaying 
@@ -82,6 +135,7 @@
             btnListenUI.disabled == true) { // Check if the recognizer is listening or going into a state to listen.
 
             btnListen.disabled = true;
+            languageSelect.disabled = false;
             btnListen.innerText = "Stopping recognizer...";
 
             recognizer.stopRecognitionAsync();
@@ -90,6 +144,7 @@
 
         // Disable the UI while recognition is occurring and provide feedback to the user about current state.
         btnListenUI.disabled = true;
+        languageSelect.disabled = true;
         btnListen.innerText = "Listening for speech. Click to stop.";
         errorMessage("");
 
@@ -111,9 +166,12 @@
             ).done(
                 function (result) {
                     // Reset UI state.
-                    btnListen.disabled = false;
-                    btnListenUI.disabled = false;
-                    btnListen.innerText = "\uE1d6 without UI";
+                    if (typeof btnListen !== "undefined") {
+                        btnListen.disabled = false;
+                        btnListenUI.disabled = false;
+                        languageSelect.disabled = false;
+                        btnListen.innerText = "\uE1d6 without UI";
+                    }
                 }
             );
         }
@@ -121,6 +179,7 @@
             errorMessage(exception.message);
             btnListen.disabled = false;
             btnListenUI.disabled = false;
+            languageSelect.disabled = false;
             btnListen.innerText = "\uE1d6 without UI";
         }
     }
@@ -176,7 +235,9 @@
         /// <summary>
         /// Sets the specified text area with the error message details.
         /// </summary>
-        errorTextArea.innerText = text;
+        if (typeof errorTextArea !== "undefined") {
+            errorTextArea.innerText = text;
+        }
     }
 
     function onSpeechRecognizerStateChanged(eventArgs) {

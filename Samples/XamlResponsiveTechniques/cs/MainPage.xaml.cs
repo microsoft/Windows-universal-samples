@@ -31,5 +31,14 @@ namespace XAMLResponsiveTechniques
         {
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
         }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog d = new ContentDialog();
+            d.Title = "Not implemented";
+            d.Content = "The buttons are for illustrative purposes only and do not perform any action";
+            d.PrimaryButtonText = "OK";
+            await d.ShowAsync();
+        }
     }
 }

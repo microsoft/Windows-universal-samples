@@ -18,10 +18,19 @@
                     var c = document.getElementById("shapes");
                     shapeCanvas = c.getContext("2d");
 
-                    initializeRecognizer();
+                    var defaultLang = Windows.Media.SpeechRecognition.SpeechRecognizer.systemSpeechLanguage;
+
+                    var rcns = Windows.ApplicationModel.Resources.Core;
+                    context = new rcns.ResourceContext();
+                    context.languages = new Array(defaultLang.languageTag);
+                    resourceMap = rcns.ResourceManager.current.mainResourceMap.getSubtree('LocalizationSpeechResources');
+
+                    initializeRecognizer(defaultLang);
+                    initializeLanguageDropdown();
                     drawCanvas();
 
                     btnContinuousReco.addEventListener("click", continuousRecoFn, false); //speak button hit
+                    languageSelect.addEventListener("change", setLanguageFunction, false);
                 }
                 else {
                     btnContinuousReco.disabled = true;
@@ -52,20 +61,24 @@
     var backgroundColor = "#808080";
     var circleColor = "#000000";
     var colorLookup = {};
-    colorLookup["red"] = "#FF0000";
-    colorLookup["blue"] = "#0000FF";
-    colorLookup["black"] = "#000000";
-    colorLookup["brown"] = "#A52A2A";
-    colorLookup["purple"] = "#800080";
-    colorLookup["green"] = "#008000";
-    colorLookup["yellow"] = "#FFFF00";
-    colorLookup["cyan"] = "#00FFFF";
-    colorLookup["magenta"] = "#FF00FF";
-    colorLookup["orange"] = "#FFA500";
-    colorLookup["gray"] = "#808080";
-    colorLookup["white"] = "#FFFFFF";
+    colorLookup["COLOR_RED"] = "#FF0000";
+    colorLookup["COLOR_BLUE"] = "#0000FF";
+    colorLookup["COLOR_BLACK"] = "#000000";
+    colorLookup["COLOR_BROWN"] = "#A52A2A";
+    colorLookup["COLOR_PURPLE"] = "#800080";
+    colorLookup["COLOR_GREEN"] = "#008000";
+    colorLookup["COLOR_YELLOW"] = "#FFFF00";
+    colorLookup["COLOR_CYAN"] = "#00FFFF";
+    colorLookup["COLOR_MAGENTA"] = "#FF00FF";
+    colorLookup["COLOR_ORANGE"] = "#FFA500";
+    colorLookup["COLOR_GRAY"] = "#808080";
+    colorLookup["COLOR_WHITE"] = "#FFFFFF";
 
-    function initializeRecognizer() {
+    // localization resources
+    var context;
+    var resourceMap;
+
+    function initializeRecognizer(language) {
         /// <summary>
         /// Initialize speech recognizer and compile constraints.
         /// </summary>
@@ -74,7 +87,10 @@
         /// define and use SRGS-compliant grammars in your app, see
         /// https://msdn.microsoft.com/en-us/library/dn596121.aspx
         /// </remarks>
-        recognizer = Windows.Media.SpeechRecognition.SpeechRecognizer();
+        if (typeof recognizer !== 'undefined') {
+            recognizer = null;
+        }
+        recognizer = Windows.Media.SpeechRecognition.SpeechRecognizer(language);
 
         // Provide feedback to the user about the state of the recognizer.
         recognizer.addEventListener('statechanged', onSpeechRecognizerStateChanged, false);
@@ -83,10 +99,13 @@
         recognizer.continuousRecognitionSession.addEventListener('resultgenerated', onSpeechRecognizerResultGenerated, false);
         recognizer.continuousRecognitionSession.addEventListener('completed', onSpeechRecognizerSessionCompleted, false);
 
-        // Specify the location of your grammar file, then retrieve it as a StorageFile.
-        var grammarFilePath = "ms-appx:///SRGSColors.xml";
+        // Update help text.
+        resultTextArea.innerText = resourceMap.getValue("SRGSListeningPromptText", context).valueAsString;
 
-        Windows.Storage.StorageFile.getFileFromApplicationUriAsync(new Windows.Foundation.Uri(grammarFilePath)).done(
+        // Specify the location of your grammar file, then retrieve it as a StorageFile.
+        var grammarFilePath = "SRGS\\" + language.languageTag + "\\SRGSColors.xml";
+
+        Windows.ApplicationModel.Package.current.installedLocation.getFileAsync(grammarFilePath).done(
             function (result) {
                 var fileConstraint = new Windows.Media.SpeechRecognition.SpeechRecognitionGrammarFileConstraint(result, "colors");
                 recognizer.constraints.append(fileConstraint);
@@ -108,14 +127,48 @@
         );
     }
 
+    function initializeLanguageDropdown() {
+        /// <summary>
+        /// Checks the set of supported languages installed in the system for speech, and adds them
+        /// to a dropdown of languages that can be selected from.
+        /// </summary>
+        var supportedLanguages = Windows.Media.SpeechRecognition.SpeechRecognizer.supportedTopicLanguages;
+        for (var langIndex = 0; langIndex < supportedLanguages.size; langIndex++) {
+            var lang = supportedLanguages[langIndex];
+            var option = document.createElement("option");
+            option.text = lang.displayName;
+            option.tag = lang;
+            languageSelect.add(option, null);
+            if (lang.languageTag == recognizer.currentLanguage.languageTag) {
+                languageSelect.selectedIndex = langIndex;
+            }
+        }
+    }
+
+    function setLanguageFunction() {
+        /// <summary>
+        /// When a language is chosen from the dropdown, triggers reinitialization of 
+        /// the speech engine, and re-sets the resource map context.
+        /// </summary>
+        if (languageSelect.selectedIndex !== -1) {
+            var option = languageSelect.options[languageSelect.selectedIndex];
+            var language = option.tag;
+
+            context.languages = new Array(language.languageTag);
+            initializeRecognizer(language);
+
+        }
+    }
+
     function continuousRecoFn() {
         /// <summary>
         /// Begin recognition or finish the recognition session.
         /// </summary>
 
+        btnContinuousReco.disabled = true;
         // Check if the recognizer is listening or going into a state to listen.
         if (recognizer.state != Windows.Media.SpeechRecognition.SpeechRecognizerState.idle) {
-            btnContinuousReco.disabled = true;
+            languageSelect.disabled = false;
             btnContinuousReco.innerText = "Stopping recognition...";
 
             recognizer.continuousRecognitionSession.stopAsync();
@@ -123,11 +176,17 @@
         }
 
         btnContinuousReco.innerText = "Stop recognition";
+        languageSelect.disabled = true;
         errorMessage("");
+
+        // Update help text.
+        resultTextArea.innerText = resourceMap.getValue("SRGSListeningPromptText", context).valueAsString;
 
         // Start the continuous recognition session. Results are handled in the event handlers below.
         try {
-            recognizer.continuousRecognitionSession.startAsync();
+            recognizer.continuousRecognitionSession.startAsync().then(function completed() {
+                btnContinuousReco.disabled = false;
+            });
         }
         catch (e) { }
     }
@@ -149,6 +208,7 @@
         }
         btnContinuousReco.innerText = "\uE1d6 Continuous Recognition";
         btnContinuousReco.disabled = false;
+        languageSelect.disabled = false;
     }
 
     function handleRecognitionResult(result) {
@@ -168,13 +228,13 @@
 
             // BACKGROUND: Check to see if the recognition result contains the semantic key for the background color,
             // and not a match for the GARBAGE rule, and change the color.
-            if ("background" in semanticsObj.properties && semanticsObj.properties["background"].toString() != "...") {
-                var newBackgroundColor = semanticsObj.properties["background"].toString();
-                backgroundColor = getColor(newBackgroundColor.toLowerCase());
+            if ("KEY_BACKGROUND" in semanticsObj.properties && semanticsObj.properties["KEY_BACKGROUND"].toString() != "...") {
+                var newBackgroundColor = semanticsObj.properties["KEY_BACKGROUND"].toString();
+                backgroundColor = getColor(newBackgroundColor);
             }
 
             // If "background" was matched, but the color rule matched GARBAGE, prompt the user.
-            else if ("background" in semanticsObj.properties && semanticsObj.properties["background"].toString() == "...") {
+            else if ("KEY_BACKGROUND" in semanticsObj.properties && semanticsObj.properties["KEY_BACKGROUND"].toString() == "...") {
 
                 garbagePrompt += "Didn't get the background color \n\nTry saying blue background\n";
                 resultTextArea.innerText = garbagePrompt;
@@ -182,26 +242,26 @@
 
             // BORDER: Check to see if the recognition result contains the semantic key for the border color,
             // and not a match for the GARBAGE rule, and change the color.
-            if ("border" in semanticsObj.properties && semanticsObj.properties["border"].toString() != "...") {
-                var newBorderColor = semanticsObj.properties["border"].toString();
-                borderColor = getColor(newBorderColor.toLowerCase());
+            if ("KEY_BORDER" in semanticsObj.properties && semanticsObj.properties["KEY_BORDER"].toString() != "...") {
+                var newBorderColor = semanticsObj.properties["KEY_BORDER"].toString();
+                borderColor = getColor(newBorderColor);
             }
 
             // If "border" was matched, but the color rule matched GARBAGE, prompt the user.
-            else if ("border" in semanticsObj.properties && semanticsObj.properties["border"].toString() == "...") {
+            else if ("KEY_BORDER" in semanticsObj.properties && semanticsObj.properties["KEY_BORDER"].toString() == "...") {
                 garbagePrompt += "Didn't get the border color\n\n Try saying red border\n";
                 resultTextArea.innerText = garbagePrompt;
             }
 
             // CIRCLE: Check to see if the recognition result contains the semantic key for the circle color,
             // and not a match for the GARBAGE rule, and change the color.
-            if ("circle" in semanticsObj.properties && semanticsObj.properties["circle"].toString() != "...") {
-                var newCircleColor = semanticsObj.properties["circle"].toString();
-                circleColor = getColor(newCircleColor.toLowerCase());
+            if ("KEY_CIRCLE" in semanticsObj.properties && semanticsObj.properties["KEY_CIRCLE"].toString() != "...") {
+                var newCircleColor = semanticsObj.properties["KEY_CIRCLE"].toString();
+                circleColor = getColor(newCircleColor);
             }
 
             // If "circle" was matched, but the color rule matched GARBAGE, prompt the user.
-            else if ("circle" in semanticsObj.properties && semanticsObj.properties["circle"].toString() == "...") {
+            else if ("KEY_CIRCLE" in semanticsObj.properties && semanticsObj.properties["KEY_CIRCLE"].toString() == "...") {
                 garbagePrompt += "Didn't get the circle color\n\n Try saying green circle\n";
                 resultTextArea.innerText = garbagePrompt;
             }
@@ -264,8 +324,8 @@
         /// <returns>The hex value of the color.</returns>
         var newColor = "#FFFFFF";
 
-        if (colorString.toLowerCase() in colorLookup) {
-            newColor = colorLookup[colorString.toLowerCase()];
+        if (colorString in colorLookup) {
+            newColor = colorLookup[colorString];
         }
 
         return newColor;
@@ -283,7 +343,9 @@
         /// <summary>
         /// Sets the specified text area with the error message details.
         /// </summary>
-        errorTextArea.innerText = text;
+        if (typeof errorTextArea !== "undefined") {
+            errorTextArea.innerText = text;
+        }
     }
 
     function onSpeechRecognizerStateChanged(eventArgs) {

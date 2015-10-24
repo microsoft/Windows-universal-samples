@@ -65,16 +65,92 @@ public:
     }
     
     // This event will fire whenever this producer is stopped.
-    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceProducer^, Windows::Devices::AllJoyn::AllJoynProducerStoppedEventArgs^>^ Stopped;
+    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceProducer^, Windows::Devices::AllJoyn::AllJoynProducerStoppedEventArgs^>^ Stopped 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<SecureInterfaceProducer^, Windows::Devices::AllJoyn::AllJoynProducerStoppedEventArgs^>^ handler) 
+        { 
+            return _Stopped += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<SecureInterfaceProducer^>(sender), safe_cast<Windows::Devices::AllJoyn::AllJoynProducerStoppedEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _Stopped -= token; 
+        } 
+    internal: 
+        void raise(SecureInterfaceProducer^ sender, Windows::Devices::AllJoyn::AllJoynProducerStoppedEventArgs^ args) 
+        { 
+            _Stopped(sender, args);
+        } 
+    }
     
     // This event will fire whenever the producer loses the session that it created.
-    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceProducer^, Windows::Devices::AllJoyn::AllJoynSessionLostEventArgs^>^ SessionLost;
+    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceProducer^, Windows::Devices::AllJoyn::AllJoynSessionLostEventArgs^>^ SessionLost 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<SecureInterfaceProducer^, Windows::Devices::AllJoyn::AllJoynSessionLostEventArgs^>^ handler) 
+        { 
+            return _SessionLost += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<SecureInterfaceProducer^>(sender), safe_cast<Windows::Devices::AllJoyn::AllJoynSessionLostEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _SessionLost -= token; 
+        } 
+    internal: 
+        void raise(SecureInterfaceProducer^ sender, Windows::Devices::AllJoyn::AllJoynSessionLostEventArgs^ args) 
+        { 
+            _SessionLost(sender, args);
+        } 
+    }
     
     // This event will fire whenever a member joins the session.
-    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceProducer^, Windows::Devices::AllJoyn::AllJoynSessionMemberAddedEventArgs^>^ SessionMemberAdded;
+    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceProducer^, Windows::Devices::AllJoyn::AllJoynSessionMemberAddedEventArgs^>^ SessionMemberAdded 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<SecureInterfaceProducer^, Windows::Devices::AllJoyn::AllJoynSessionMemberAddedEventArgs^>^ handler) 
+        { 
+            return _SessionMemberAdded += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<SecureInterfaceProducer^>(sender), safe_cast<Windows::Devices::AllJoyn::AllJoynSessionMemberAddedEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _SessionMemberAdded -= token; 
+        } 
+    internal: 
+        void raise(SecureInterfaceProducer^ sender, Windows::Devices::AllJoyn::AllJoynSessionMemberAddedEventArgs^ args) 
+        { 
+            _SessionMemberAdded(sender, args);
+        } 
+    }
 
     // This event will fire whenever a member leaves the session.
-    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceProducer^, Windows::Devices::AllJoyn::AllJoynSessionMemberRemovedEventArgs^>^ SessionMemberRemoved;
+    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceProducer^, Windows::Devices::AllJoyn::AllJoynSessionMemberRemovedEventArgs^>^ SessionMemberRemoved 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<SecureInterfaceProducer^, Windows::Devices::AllJoyn::AllJoynSessionMemberRemovedEventArgs^>^ handler) 
+        { 
+            return _SessionMemberRemoved += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<SecureInterfaceProducer^>(sender), safe_cast<Windows::Devices::AllJoyn::AllJoynSessionMemberRemovedEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _SessionMemberRemoved -= token; 
+        } 
+    internal: 
+        void raise(SecureInterfaceProducer^ sender, Windows::Devices::AllJoyn::AllJoynSessionMemberRemovedEventArgs^ args) 
+        { 
+            _SessionMemberRemoved(sender, args);
+        } 
+    }
 
     // Send a signal to all members of the session to notify them that the value of IsUpperCaseEnabled has changed.
     void EmitIsUpperCaseEnabledChanged();
@@ -139,6 +215,11 @@ internal:
     void BusAttachmentStateChanged(_In_ Windows::Devices::AllJoyn::AllJoynBusAttachment^ sender, _In_ Windows::Devices::AllJoyn::AllJoynBusAttachmentStateChangedEventArgs^ args);
 
 private:
+    virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _Stopped;
+    virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _SessionLost;
+    virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _SessionMemberAdded;
+    virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _SessionMemberRemoved;
+
     static void CallConcatenateHandler(_Inout_ alljoyn_busobject busObject, _In_ alljoyn_message message);
     static void CallTextSentSignalHandler(_In_ const alljoyn_interfacedescription_member* member, _In_ alljoyn_message message);
       

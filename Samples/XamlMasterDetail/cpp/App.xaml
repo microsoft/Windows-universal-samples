@@ -5,4 +5,43 @@
     xmlns:local="using:MasterDetailApp"
     RequestedTheme="Light">
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Dark">
+                    <Style x:Key="ListCaptionAltTextblockStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+                        <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                    </Style>
+
+                    <Style x:Key="ListBodyTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
+                        <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                    </Style>
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="Light">
+                    <Style x:Key="ListCaptionAltTextblockStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+                        <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                    </Style>
+
+                    <Style x:Key="ListBodyTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
+                        <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                    </Style>
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="HighContrast">
+                    <!-- Don't set the Foreground in high contrast theme -->
+                    <Style x:Key="ListCaptionAltTextblockStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+                        <Setter Property="FontSize" Value="13"/>
+                    </Style>
+
+                    <!-- Don't set the Foreground in high contrast theme -->
+                    <Style x:Key="ListBodyTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+
+        </ResourceDictionary>
+    </Application.Resources>
+
 </Application>

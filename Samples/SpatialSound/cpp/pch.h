@@ -31,6 +31,7 @@
 
 using namespace Microsoft::WRL;
 using namespace Windows::UI::Xaml;
+using namespace Windows::Foundation;
 
 #include "AudioFileReader.h"
 #include "XAudio2Helpers.h"

@@ -1,0 +1,49 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Mini"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer Margin="12,10,12,12">
+            <StackPanel>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Show a mini contact card.
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" Grid.Row="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >
+                Enter a contact's email address and/or phone number and press the "Show contact card" button. 
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" Grid.Row="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Margin="0,10,0,0" >
+                If a matching contact is found, the system will show the contact card with detailed information of the contact. 
+                Otherwise, the system will show the contact card with the information you entered.
+                </TextBlock>
+                <TextBlock Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Margin="0,20,0,0">Email Address</TextBlock>
+                <TextBox x:Name="EmailAddress" MaxLength="320" Width="400" HorizontalAlignment="Left" InputScope="EmailSmtpAddress"/>
+                <TextBlock Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Margin="0,20,0,0">Phone Number</TextBlock>
+                <TextBox x:Name="PhoneNumber" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="TelephoneNumber" />
+                <TextBlock x:Name="NotSupportedWarning" Style="{StaticResource ScenarioDescriptionTextStyle}"
+                    Visibility="Collapsed" TextWrapping="Wrap" Margin="0,10,0,0">
+                    ShowContactCard is not supported by this device.
+                    All calls will silently fail.
+                </TextBlock>
+                <Button Content="Show contact card" Margin="0,10,0,0" Click="ShowContactCard_Click"/>
+                <Button Content="Show contact card to the right" Margin="0,10,0,0" Click="ShowContactCardWithPlacement_Click"/>
+                <Button Content="Show contact card on Phone tab" Margin="0,10,0,0" Click="ShowContactCardWithOptions_Click"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

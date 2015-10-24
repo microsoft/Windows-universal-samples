@@ -122,30 +122,17 @@ task<void> MainPage::InitializeCameraAsync()
             {
                 UpdateCaptureControls();
             });
-        // Different return types, must do the error checking here since we cannot return and send
-        // execeptions back up the chain.
         }).then([this](task<void> previousTask)
         {
             try
             {
                 previousTask.get();
             }
-            catch (Exception^ ex)
+            catch (AccessDeniedException^)
             {
-                WriteException(ex);
+                WriteLine("The app was denied access to the camera");
             }
         });
-    // Catch any exceptions that may have been thrown along the way
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -217,16 +204,6 @@ task<void> MainPage::StartPreviewAsync()
 
         // Not external, just return the previous task
         return previousTask;
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -270,16 +247,6 @@ task<void> MainPage::StopPreviewAsync()
             // Allow the device screen to sleep now that the preview is stopped
             _displayRequest->RequestRelease();
         }));
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -317,6 +284,7 @@ task<void> MainPage::TakePhotoAsync()
         }
         catch (Exception^ ex)
         {
+            // File I/O errors are reported as exceptions
             WriteException(ex);
         }
     });
@@ -351,6 +319,7 @@ task<void> MainPage::StartRecordingAsync()
         }
         catch (Exception^ ex)
         {
+            // File I/O errors are reported as exceptions
             WriteException(ex);
         }
     });
@@ -369,16 +338,6 @@ task<void> MainPage::StopRecordingAsync()
         .then([this]()
     {
         WriteLine("Stopped recording!");
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -395,7 +354,7 @@ task<DeviceInformation^> MainPage::FindCameraDeviceByPanelAsync(Windows::Devices
     auto deviceEnumTask = create_task(allVideoDevices);
     return deviceEnumTask.then([panel](DeviceInformationCollection^ devices)
     {
-        for each(auto cameraDeviceInfo in devices)
+        for (auto cameraDeviceInfo : devices)
         {
             if (cameraDeviceInfo->EnclosureLocation != nullptr && cameraDeviceInfo->EnclosureLocation->Panel == panel)
             {

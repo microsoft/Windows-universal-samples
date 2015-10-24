@@ -18,9 +18,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-using SDKTemplate;
-
-namespace ActivitySensorCS
+namespace SDKTemplate
 {
     public sealed partial class Scenario3_ChangeEvents : Page
     {

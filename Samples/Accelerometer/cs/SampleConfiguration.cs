@@ -12,21 +12,20 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using AccelerometerCS;
 
 namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        public const string FEATURE_NAME = "AccelerometerCS";
+        public const string FEATURE_NAME = "Accelerometer";
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title = "Data events", ClassType = typeof(AccelerometerCS.Scenario1_DataEvents) },
-            new Scenario() { Title = "Shake events", ClassType = typeof(AccelerometerCS.Scenario2_ShakeEvents) },
-            new Scenario() { Title = "Polling", ClassType = typeof(AccelerometerCS.Scenario3_Polling) },
-            new Scenario() { Title = "OrientationChange", ClassType = typeof(AccelerometerCS.Scenario4_OrientationChanged) },
-            new Scenario() { Title = "Data events batching", ClassType = typeof(AccelerometerCS.Scenario5_DataEventsBatching)}
+            new Scenario() { Title = "Data events", ClassType = typeof(Scenario1_DataEvents) },
+            new Scenario() { Title = "Shake events", ClassType = typeof(Scenario2_ShakeEvents) },
+            new Scenario() { Title = "Polling", ClassType = typeof(Scenario3_Polling) },
+            new Scenario() { Title = "OrientationChange", ClassType = typeof(Scenario4_OrientationChanged) },
+            new Scenario() { Title = "Data events batching", ClassType = typeof(Scenario5_DataEventsBatching)}
         };
     }
 

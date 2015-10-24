@@ -120,7 +120,7 @@ namespace AppUIBasics
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             ShowHelp();
-            this.BottomAppBar.IsOpen = false;
+            bottomCommandBar.IsOpen = false;
         }
 
         protected void RelatedControl_Click(object sender, RoutedEventArgs e)

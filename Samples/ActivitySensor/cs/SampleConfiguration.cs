@@ -12,13 +12,12 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using ActivitySensorCS;
 
 namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        public const string FEATURE_NAME = "ActivitySensorCS";
+        public const string FEATURE_NAME = "Activity sensor";
 
         List<Scenario> scenarios = new List<Scenario>
         {

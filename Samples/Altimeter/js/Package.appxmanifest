@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="16aef0c7-7d66-4ce5-8b4e-f714e8b4ad2b"
+    Name="Microsoft.SDKSamples.Altimeter.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

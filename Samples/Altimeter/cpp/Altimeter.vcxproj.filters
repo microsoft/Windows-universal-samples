@@ -47,8 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
-    <Page Include="Scenario1_DataEvents.xaml" />
-    <Page Include="Scenario2_Polling.xaml" />
+    <Page Include="..\shared\Scenario1_DataEvents.xaml" />
+    <Page Include="..\shared\Scenario2_Polling.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>

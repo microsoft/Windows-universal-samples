@@ -1,0 +1,70 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="DragAndDropSampleManaged.Scenario1_ListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DragAndDropSampleManaged"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="0,0,0,10" Grid.ColumnSpan="3">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario illustrates how to use ListView's Drag and Drop and reordering features"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" Margin="8,4"
+                    VerticalAlignment="Bottom"
+                    Text="All Items"/>
+        <ListView x:Name="SourceListView"
+                    Grid.Row="2" Margin="8,4"
+                    SelectionMode="Extended"
+                    CanDragItems="True"
+                    DragItemsStarting="SourceListView_DragItemsStarting"
+                    />
+        <TextBlock Grid.Row="1" Grid.Column="1" Margin="8,4"
+                    VerticalAlignment="Bottom"
+                    Text="Selection"/>
+        <ListView x:Name="TargetListView"
+                    Grid.Row="2" Grid.Column="1" Margin="8,4"
+                    AllowDrop="True" CanReorderItems="True" CanDragItems="True"
+                    DragOver="TargetListView_DragOver"
+                    Drop="TargetListView_Drop"
+                    DragItemsStarting="TargetListView_DragItemsStarting"
+                    DragItemsCompleted="TargetListView_DragItemsCompleted"
+                    />
+        <TextBlock Grid.Row="1" Grid.Column="2" Margin="4,8"
+                    VerticalAlignment="Bottom"
+                    Text="Drop items here to remove them from Selection"
+                    TextWrapping="Wrap"/>
+        <TextBlock x:Name="TargetTextBlock"
+                    Grid.Row="2" Grid.Column="2" Margin="8,4"
+                    AllowDrop="True"
+                    DragEnter="TargetTextBlock_DragEnter"
+                    Drop="TargetTextBlock_Drop"
+                    FontFamily="Segoe MDL2 Assets" Text="&#xE74D;" FontSize="50" />
+    </Grid>
+</Page>

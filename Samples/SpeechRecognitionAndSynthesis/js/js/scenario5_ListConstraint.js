@@ -15,10 +15,19 @@
         ready: function (element, options) {
             AudioCapturePermissions.requestMicrophonePermission().then(function (available) {
                 if (available) {
-                    initializeRecognizer();
+                    var defaultLang = Windows.Media.SpeechRecognition.SpeechRecognizer.systemSpeechLanguage;
+
+                    var rcns = Windows.ApplicationModel.Resources.Core;
+                    context = new rcns.ResourceContext();
+                    context.languages = new Array(defaultLang.languageTag);
+                    resourceMap = rcns.ResourceManager.current.mainResourceMap.getSubtree('LocalizationSpeechResources');
+
+                    initializeRecognizer(defaultLang);
+                    initializeLanguageDropdown();
 
                     btnListen.addEventListener("click", listenFn, false);
                     btnListenUI.addEventListener("click", listenUIFn, false);
+                    languageSelect.addEventListener("change", setLanguageFunction, false);
                 }
                 else {
                     btnListen.disabled = true;
@@ -43,22 +52,62 @@
 
     var recognizer;
 
-    function initializeRecognizer() {
+    // localization resources
+    var context;
+    var resourceMap;
+
+    function initializeRecognizer(language) {
         /// <summary>
         /// Initialize speech recognizer and compile constraints.
         /// </summary>
-        recognizer = Windows.Media.SpeechRecognition.SpeechRecognizer();
+        if (typeof recognizer !== 'undefined') {
+            recognizer = null;
+        }
+
+        recognizer = Windows.Media.SpeechRecognition.SpeechRecognizer(language);
 
         // Provide feedback to the user about the state of the recognizer.
         recognizer.addEventListener('statechanged', onSpeechRecognizerStateChanged, false);
 
-        // Add a simple list constraint to the recognizer.
-        var responses = ["Yes", "No"];
-        var listConstraint = new Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint(responses, "yesOrNo");
-        recognizer.constraints.append(listConstraint);
+        // Build a command-list grammar. Multiple commands can be given the same tag, allowing for variations on the same command to be handled easily.
+        
+        recognizer.constraints.append(
+            Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint([
+                resourceMap.getValue('ListGrammarGoHome', context).valueAsString
+            ], "Home"));
+        recognizer.constraints.append(
+            Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint([
+                resourceMap.getValue('ListGrammarGoToContosoStudio', context).valueAsString
+            ], "GoToContosoStudio"));
+        recognizer.constraints.append(
+            Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint([
+                resourceMap.getValue('ListGrammarShowMessage', context).valueAsString,
+                resourceMap.getValue('ListGrammarOpenMessage', context).valueAsString
+            ], "Message"));
+        recognizer.constraints.append(
+            Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint([
+                resourceMap.getValue('ListGrammarSendEmail', context).valueAsString,
+                resourceMap.getValue('ListGrammarCreateEmail', context).valueAsString
+            ], "Email"));
+        recognizer.constraints.append(
+            Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint([
+                resourceMap.getValue('ListGrammarCallNitaFarley', context).valueAsString,
+                resourceMap.getValue('ListGrammarCallNita', context).valueAsString
+            ], "CallNita"));
+        recognizer.constraints.append(
+            Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint([
+                resourceMap.getValue('ListGrammarCallWayneSigmon', context).valueAsString,
+                resourceMap.getValue('ListGrammarCallWayne', context).valueAsString
+            ], "CallWayne"));
+
 
         // RecognizeWithUIAsync allows developers to customize the prompts.
-        recognizer.uiOptions.exampleText = "Ex. \"Yes\", \"No\"";
+        var uiOptionsText = "Try saying '" +
+            resourceMap.getValue('ListGrammarGoHome', context).valueAsString + "', '" +
+            resourceMap.getValue('ListGrammarGoToContosoStudio', context).valueAsString + "' or '" +
+            resourceMap.getValue('ListGrammarShowMessage', context).valueAsString + "'";
+        recognizer.uiOptions.exampleText = uiOptionsText;
+        helpText.innerHTML = resourceMap.getValue('ListGrammarHelpText', context).valueAsString + "<br/>" + uiOptionsText;
 
         recognizer.compileConstraintsAsync().done(
             function (result) {
@@ -77,6 +126,39 @@
         );
     }
 
+    function initializeLanguageDropdown() {
+        /// <summary>
+        /// Checks the set of supported languages installed in the system for speech, and adds them
+        /// to a dropdown of languages that can be selected from.
+        /// </summary>
+        var supportedLanguages = Windows.Media.SpeechRecognition.SpeechRecognizer.supportedTopicLanguages;
+        for (var langIndex = 0; langIndex < supportedLanguages.size; langIndex++) {
+            var lang = supportedLanguages[langIndex];
+            var option = document.createElement("option");
+            option.text = lang.displayName;
+            option.tag = lang;
+            languageSelect.add(option, null);
+            if (lang.languageTag == recognizer.currentLanguage.languageTag) {
+                languageSelect.selectedIndex = langIndex;
+            }
+        }
+    }
+
+    function setLanguageFunction() {
+        /// <summary>
+        /// When a language is chosen from the dropdown, triggers reinitialization of 
+        /// the speech engine, and re-sets the resource map context.
+        /// </summary>
+        if (languageSelect.selectedIndex !== -1) {
+            var option = languageSelect.options[languageSelect.selectedIndex];
+            var language = option.tag;
+
+            context.languages = new Array(language.languageTag);
+            initializeRecognizer(language);
+
+        }
+    }
+
     function listenFn() {
         /// <summary>
         /// Uses the recognizer constructed earlier to listen for speech from the user before displaying 
@@ -86,6 +168,7 @@
             btnListenUI.disabled == true) { // Check if the recognizer is listening or going into a state to listen.
 
             btnListen.disabled = true;
+            languageSelect.disabled = false;
             btnListen.innerText = "Stopping recognizer...";
 
             recognizer.stopRecognitionAsync();
@@ -94,6 +177,7 @@
 
         // Disable the UI while recognition is occurring and provide feedback to the user about current state.
         btnListenUI.disabled = true;
+        languageSelect.disabled = true;
         btnListen.innerText = "Listening for speech. Click to stop.";
         errorMessage("");
 
@@ -115,9 +199,12 @@
             ).done(
                 function (result) {
                     // Reset UI state.
-                    btnListen.disabled = false;
-                    btnListenUI.disabled = false;
-                    btnListen.innerText = "\uE1d6 without UI";
+                    if (typeof btnListen !== "undefined") {
+                        btnListen.disabled = false;
+                        btnListenUI.disabled = false;
+                        languageSelect.disabled = false;
+                        btnListen.innerText = "\uE1d6 without UI";
+                    }
                 }
             );
         }
@@ -126,6 +213,7 @@
 
             btnListen.disabled = false;
             btnListenUI.disabled = false;
+            languageSelect.disabled = false;
             btnListen.innerText = "\uE1d6 without UI";
         }
     }
@@ -181,7 +269,9 @@
         /// <summary>
         /// Sets the specified text area with the error message details.
         /// </summary>
-        errorTextArea.innerText = text;
+        if (typeof errorTextArea !== "undefined") {
+            errorTextArea.innerText = text;
+        }
     }
 
     function onSpeechRecognizerStateChanged(eventArgs) {

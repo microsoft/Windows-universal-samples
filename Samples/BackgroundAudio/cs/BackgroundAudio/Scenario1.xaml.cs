@@ -41,6 +41,8 @@ namespace BackgroundAudio
         private AutoResetEvent backgroundAudioTaskStarted;
         private bool isMyBackgroundTaskRunning = false;
         private Dictionary<string, BitmapImage> albumArtCache = new Dictionary<string, BitmapImage>();
+        const int RPC_S_SERVER_UNAVAILABLE = -2147023174; // 0x800706BA
+
 
         /// <summary>
         /// Gets the information about background task is running or not by reading the setting saved by background task.
@@ -73,6 +75,70 @@ namespace BackgroundAudio
             }
         }
         #endregion
+
+        /// <summary>
+        /// You should never cache the MediaPlayer and always call Current. It is possible
+        /// for the background task to go away for several different reasons. When it does
+        /// an RPC_S_SERVER_UNAVAILABLE error is thrown. We need to reset the foreground state
+        /// and restart the background task.
+        /// </summary>
+        private MediaPlayer CurrentPlayer
+        {
+            get
+            {
+                MediaPlayer mp = null;
+
+                try
+                {
+                    mp = BackgroundMediaPlayer.Current;
+                }
+                catch (Exception ex)
+                {
+                    if (ex.HResult == RPC_S_SERVER_UNAVAILABLE)
+                    {
+                        // The foreground app uses RPC to communicate with the background process.
+                        // If the background process crashes or is killed for any reason RPC_S_SERVER_UNAVAILABLE
+                        // is returned when calling Current.
+                        ResetAfterLostBackground();
+                        StartBackgroundAudioTask();
+                    }
+                }
+
+                if (mp == null)
+                {
+                    throw new Exception("Failed to get a MediaPlayer instance.");
+                }
+
+                return mp;
+            }
+        }
+
+        /// <summary>
+        /// The background task did exist, but it has disappeared. Put the foreground back into an initial state.
+        /// </summary>
+        private void ResetAfterLostBackground()
+        {
+            BackgroundMediaPlayer.Shutdown();
+            isMyBackgroundTaskRunning = false;
+            backgroundAudioTaskStarted.Reset();
+            prevButton.IsEnabled = true;
+            nextButton.IsEnabled = true;
+            ApplicationSettingsHelper.SaveSettingsValue(ApplicationSettingsConstants.BackgroundTaskState, BackgroundTaskState.Unknown.ToString());
+            playButton.Content = "| |";
+
+            try
+            {
+                BackgroundMediaPlayer.MessageReceivedFromBackground += BackgroundMediaPlayer_MessageReceivedFromBackground;
+            }
+            catch (Exception ex)
+            {
+                if (ex.HResult == RPC_S_SERVER_UNAVAILABLE)
+                {
+                    throw new Exception("Failed to get a MediaPlayer instance.");
+                }
+            }
+        }
+
 
         public Scenario1()
         {
@@ -193,11 +259,11 @@ namespace BackgroundAudio
                 // Send message to background task that app is resumed so it can start sending notifications again
                 MessageService.SendMessageToBackground(new AppResumedMessage());
 
-                UpdateTransportControls(BackgroundMediaPlayer.Current.CurrentState);
+                UpdateTransportControls(CurrentPlayer.CurrentState);
 
                 var trackId = GetCurrentTrackIdAfterAppResume();
                 txtCurrentTrack.Text = trackId == null ? string.Empty : playlistView.GetSongById(trackId).Title;
-                txtCurrentState.Text = BackgroundMediaPlayer.Current.CurrentState.ToString();
+                txtCurrentState.Text = CurrentPlayer.CurrentState.ToString();
             }
             else
             {
@@ -315,7 +381,7 @@ namespace BackgroundAudio
             Debug.WriteLine("Clicked item from App: " + song.MediaUri.ToString());
 
             // Start the background task if it wasn't running
-            if (!IsMyBackgroundTaskRunning || MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
+            if (!IsMyBackgroundTaskRunning || MediaPlayerState.Closed == CurrentPlayer.CurrentState)
             {
                 // First update the persisted start track
                 ApplicationSettingsHelper.SaveSettingsValue(ApplicationSettingsConstants.TrackId, song.MediaUri.ToString());
@@ -330,9 +396,9 @@ namespace BackgroundAudio
                 MessageService.SendMessageToBackground(new TrackChangedMessage(song.MediaUri));
             }
 
-            if (MediaPlayerState.Paused == BackgroundMediaPlayer.Current.CurrentState)
+            if (MediaPlayerState.Paused == CurrentPlayer.CurrentState)
             {
-                BackgroundMediaPlayer.Current.Play();
+                CurrentPlayer.Play();
             }
         }
 
@@ -359,15 +425,15 @@ namespace BackgroundAudio
             Debug.WriteLine("Play button pressed from App");
             if (IsMyBackgroundTaskRunning)
             {
-                if (MediaPlayerState.Playing == BackgroundMediaPlayer.Current.CurrentState)
+                if (MediaPlayerState.Playing == CurrentPlayer.CurrentState)
                 {
-                    BackgroundMediaPlayer.Current.Pause();
+                    CurrentPlayer.Pause();
                 }
-                else if (MediaPlayerState.Paused == BackgroundMediaPlayer.Current.CurrentState)
+                else if (MediaPlayerState.Paused == CurrentPlayer.CurrentState)
                 {
-                    BackgroundMediaPlayer.Current.Play();
+                    CurrentPlayer.Play();
                 }
-                else if (MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
+                else if (MediaPlayerState.Closed == CurrentPlayer.CurrentState)
                 {
                     StartBackgroundAudioTask();
                 }
@@ -398,11 +464,11 @@ namespace BackgroundAudio
             // Create menu and add commands
             var popupMenu = new PopupMenu();
 
-            popupMenu.Commands.Add(new UICommand("4.0x", command => BackgroundMediaPlayer.Current.PlaybackRate = 4.0));
-            popupMenu.Commands.Add(new UICommand("2.0x", command => BackgroundMediaPlayer.Current.PlaybackRate = 2.0));
-            popupMenu.Commands.Add(new UICommand("1.5x", command => BackgroundMediaPlayer.Current.PlaybackRate = 1.5));
-            popupMenu.Commands.Add(new UICommand("1.0x", command => BackgroundMediaPlayer.Current.PlaybackRate = 1.0));
-            popupMenu.Commands.Add(new UICommand("0.5x", command => BackgroundMediaPlayer.Current.PlaybackRate = 0.5));
+            popupMenu.Commands.Add(new UICommand("4.0x", command => CurrentPlayer.PlaybackRate = 4.0));
+            popupMenu.Commands.Add(new UICommand("2.0x", command => CurrentPlayer.PlaybackRate = 2.0));
+            popupMenu.Commands.Add(new UICommand("1.5x", command => CurrentPlayer.PlaybackRate = 1.5));
+            popupMenu.Commands.Add(new UICommand("1.0x", command => CurrentPlayer.PlaybackRate = 1.0));
+            popupMenu.Commands.Add(new UICommand("0.5x", command => CurrentPlayer.PlaybackRate = 0.5));
 
             // Get button transform and then offset it by half the button
             // width to center. This will show the popup just above the button.
@@ -434,8 +500,22 @@ namespace BackgroundAudio
         /// </summary>
         private void RemoveMediaPlayerEventHandlers()
         {
-            BackgroundMediaPlayer.Current.CurrentStateChanged -= this.MediaPlayer_CurrentStateChanged;
-            BackgroundMediaPlayer.MessageReceivedFromBackground -= this.BackgroundMediaPlayer_MessageReceivedFromBackground;
+            CurrentPlayer.CurrentStateChanged -= this.MediaPlayer_CurrentStateChanged;
+            try
+            {
+                BackgroundMediaPlayer.MessageReceivedFromBackground -= BackgroundMediaPlayer_MessageReceivedFromBackground;
+            }
+            catch (Exception ex)
+            {
+                if (ex.HResult == RPC_S_SERVER_UNAVAILABLE)
+                {
+                    // do nothing
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
         /// <summary>
@@ -443,8 +523,20 @@ namespace BackgroundAudio
         /// </summary>
         private void AddMediaPlayerEventHandlers()
         {
-            BackgroundMediaPlayer.Current.CurrentStateChanged += this.MediaPlayer_CurrentStateChanged;
-            BackgroundMediaPlayer.MessageReceivedFromBackground += this.BackgroundMediaPlayer_MessageReceivedFromBackground;
+            CurrentPlayer.CurrentStateChanged += this.MediaPlayer_CurrentStateChanged;
+
+            try
+            {
+                BackgroundMediaPlayer.MessageReceivedFromBackground += BackgroundMediaPlayer_MessageReceivedFromBackground;
+            }
+            catch (Exception ex)
+            {
+                if (ex.HResult == RPC_S_SERVER_UNAVAILABLE)
+                {
+                    // Internally MessageReceivedFromBackground calls Current which can throw RPC_S_SERVER_UNAVAILABLE
+                    ResetAfterLostBackground();
+                }
+            }
         }
 
         /// <summary>

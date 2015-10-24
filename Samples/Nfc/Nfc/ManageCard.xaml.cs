@@ -9,14 +9,16 @@
 //
 //*********************************************************
 
+using SDKTemplate;
 using System;
+using System.Threading.Tasks;
+using Windows.Devices.SmartCards;
+using Windows.Storage;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
-using Windows.Devices.SmartCards;
 using static NfcSample.NfcUtils;
-using Windows.Storage;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -28,6 +30,7 @@ namespace NfcSample
     public sealed partial class ManageCardScenario : Page
     {
         private MainPage rootPage;
+        private bool isHceSupported;
 
         public ManageCardScenario()
         {
@@ -53,9 +56,9 @@ namespace NfcSample
             chkDenyIfPhoneLocked.IsChecked = (bool)ApplicationData.Current.RoamingSettings.Values["DenyIfPhoneLocked"];
             chkLaunchAboveLock.IsChecked = (bool)ApplicationData.Current.RoamingSettings.Values["LaunchAboveLock"];
 
-            if (!(await CheckHceSupport()))
+            isHceSupported = await CheckHceSupport();
+            if (!isHceSupported)
             {
-                // No HCE support on this device
                 btnRegisterBgTask.IsEnabled = false;
                 btnAddCard.IsEnabled = false;
             }
@@ -63,9 +66,24 @@ namespace NfcSample
             {
                 lstCards.ItemsSource = await SmartCardEmulator.GetAppletIdGroupRegistrationsAsync();
             }
+
+            Window.Current.VisibilityChanged += Window_VisibilityChanged;
         }
 
-        private async void ShowDialog(string msg)
+        private async void Window_VisibilityChanged(object sender, VisibilityChangedEventArgs e)
+        {
+            // Since a registration can change from ForegroundOverride to Disabled when the device
+            // is locked, update the registrations when the app window becomes visible
+            if (e.Visible && isHceSupported)
+            {
+                // Clear the messages
+                rootPage.NotifyUser(String.Empty, NotifyType.StatusMessage, true);
+
+                lstCards.ItemsSource = await SmartCardEmulator.GetAppletIdGroupRegistrationsAsync();
+            }
+        }
+
+        private async Task ShowDialog(string msg)
         {
             var msgbox = new Windows.UI.Popups.MessageDialog(msg);
             msgbox.Commands.Add(new Windows.UI.Popups.UICommand("OK"));
@@ -109,7 +127,7 @@ namespace NfcSample
             // Next check if NFC card emualtion is turned on in the settings control panel
             if ((await SmartCardEmulator.GetDefaultAsync()).EnablementPolicy == SmartCardEmulatorEnablementPolicy.Never)
             {
-                ShowDialog("Your NFC tap+pay setting is turned off, you will be taken to the NFC control panel to turn it on");
+                await ShowDialog("Your NFC tap+pay setting is turned off, you will be taken to the NFC control panel to turn it on");
 
                 // This URI will navigate the user to the NFC tap+pay control panel
                 NfcUtils.LaunchNfcPaymentsSettingsPage();
@@ -131,9 +149,7 @@ namespace NfcSample
                 return;
             }
 
-            await NfcUtils.SetCardActivationPolicy(
-                reg, 
-                SmartCardAppletIdGroupActivationPolicy.Enabled);
+            await SetCardActivationPolicy(reg, SmartCardAppletIdGroupActivationPolicy.Enabled);
 
             // Refresh the listbox
             lstCards.ItemsSource = await SmartCardEmulator.GetAppletIdGroupRegistrationsAsync();
@@ -151,7 +167,7 @@ namespace NfcSample
                 return;
             }
 
-            await NfcUtils.SetCardActivationPolicy(reg, SmartCardAppletIdGroupActivationPolicy.Disabled);
+            await SetCardActivationPolicy(reg, SmartCardAppletIdGroupActivationPolicy.Disabled);
 
             // Refresh the listbox
             lstCards.ItemsSource = await SmartCardEmulator.GetAppletIdGroupRegistrationsAsync();
@@ -169,7 +185,7 @@ namespace NfcSample
                 return;
             }
 
-            await NfcUtils.SetCardActivationPolicy(reg, SmartCardAppletIdGroupActivationPolicy.ForegroundOverride);
+            await SetCardActivationPolicy(reg, SmartCardAppletIdGroupActivationPolicy.ForegroundOverride);
 
             // Refresh the listbox
             lstCards.ItemsSource = await SmartCardEmulator.GetAppletIdGroupRegistrationsAsync();
@@ -191,11 +207,12 @@ namespace NfcSample
             await SmartCardEmulator.UnregisterAppletIdGroupAsync(reg);
 
             if (reg.AppletIdGroup.SmartCardEmulationCategory == SmartCardEmulationCategory.Payment
-             && reg.AppletIdGroup.SmartCardEmulationType == SmartCardEmulationType.Host)
+                && reg.AppletIdGroup.SmartCardEmulationType == SmartCardEmulationType.Host)
             {
                 // Delete the data file for the card
                 await (await Windows.Storage.ApplicationData.Current.LocalFolder.GetFileAsync("ReadRecordResponse-" + reg.Id.ToString("B") + ".dat")).DeleteAsync();
             }
+
             // Refresh the listbox
             lstCards.ItemsSource = await SmartCardEmulator.GetAppletIdGroupRegistrationsAsync();
 
@@ -230,6 +247,10 @@ namespace NfcSample
                 // Clear the messages
                 rootPage.NotifyUser(String.Empty, NotifyType.StatusMessage, true);
                 LogMessage("Selected card is: " + reg.ActivationPolicy.ToString());
+
+                // Setting registration's activation policy from Enabled to ForegroundOverride is
+                // not allowed, so disable the button to prevent the user from attempting to do this
+                btnForegroundOverrideCard.IsEnabled = (reg.ActivationPolicy != SmartCardAppletIdGroupActivationPolicy.Enabled);
             }
         }
 

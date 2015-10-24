@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="399b8b13-1b4e-4f1c-9f88-11546e739757"
+    Name="Microsoft.SDKSamples.CashDrawer.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

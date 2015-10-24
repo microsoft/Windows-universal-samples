@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+  <Identity
+    Name="c3f0b083-313f-4d5e-b6e7-513e89d55157"
+    Version="1.0.0.0"
+    Publisher="CN=Microsoft" />
+
+  <mp:PhoneIdentity PhoneProductId="c3f0b083-313f-4d5e-b6e7-513e89d55157" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>Playlists JS Sample</DisplayName>
+    <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+    <Logo>images\storeLogo-sdk.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+    <!--<PackageDependency Name="Microsoft.WinJS.4.0" MinVersion="1.0.9927.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />-->
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+
+  <Applications>
+    <Application
+      Id="App"
+      StartPage="default.html">
+
+      <uap:VisualElements
+        DisplayName="Playlists JS Sample"
+        Description="Playlists JS Sample"
+        BackgroundColor="#00b2f0"
+        Square150x150Logo="images\smallTile-sdk.png"
+        Square44x44Logo="images\smallTile-sdk.png">
+
+        <uap:SplashScreen Image="images\splash-sdk.png" />
+        <uap:DefaultTile>
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <uap:Capability Name="musicLibrary" />
+  </Capabilities>
+</Package>

@@ -1,6 +1,8 @@
-﻿<!---
+<!---
   category: NetworkingAndWebServices 
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620609&clcid=0x409
 --->
+
 # StreamSocket sample
 
 This sample shows you how to a use stream (TCP) socket to send and receive data using the [**StreamSocket**](http://msdn.microsoft.com/library/windows/apps/br226882) and related classes in the [**Windows.Networking.Sockets**](http://msdn.microsoft.com/library/windows/apps/br226960) namespace in your Universal Windows Platform (UWP) app.
@@ -69,7 +71,7 @@ This sample requires that network capabilities be set in the *Package.appxmanife
 
 [How to send and receive network data with a stream socket (XAML)](http://msdn.microsoft.com/library/windows/apps/jj150599)
 
-[How to set network capabilities (XAML)](http://msdn.microsoft.com/library/windows/apps/jj835817)
+[Networking basics](https://msdn.microsoft.com/library/windows/apps/mt280233)
 
 [How to use advanced socket controls (XAML)](http://msdn.microsoft.com/library/windows/apps/jj150598)
 
@@ -99,16 +101,16 @@ This sample requires that network capabilities be set in the *Package.appxmanife
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Insider Preview
+**Server:** Windows Server 2016 Technical Preview
 
 **Phone:**  Windows 10
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the subdirectory for the desired language.
-3. Double-click the Visual Studio 2015 Solution (.sln) file. 
-4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 

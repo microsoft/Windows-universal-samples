@@ -1,5 +1,9 @@
-Real-time communication sample
-==============================
+<!---
+  category: Communications
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620600&clcid=0x409
+--->
+
+# Real-time communication sample
 
 This sample demonstrates how to use the low latency feature to enable real-time communication applications.
 
@@ -42,7 +46,7 @@ Related topics
 
 [Designing UX for apps](http://msdn.microsoft.com/library/windows/apps/hh767284)
 
-[Adding multimedia](http://msdn.microsoft.com/library/windows/apps/hh465134)
+[Audio, video, and camera](https://msdn.microsoft.com/library/windows/apps/mt203788)
 
 **Tasks**
 
@@ -65,32 +69,19 @@ Related topics
 Operating system requirements
 -----------------------------
 
-Client
+**Client:** Windows 10
 
-Windows 8.1
+**Server:** Windows Server 2016 Technical Preview
 
-Server
-
-Windows Server 2012 R2
-
-Phone
-
-Windows Phone 8.1
+**Phone:** Windows 10
 
 Build the sample
 ----------------
 
-1.  Start Microsoft Visual Studio 2013 Update 2 and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory named for the sample and double-click the Visual Studio 2013 Update 2 Solution (.sln) file.
-3.  Follow the steps for the version of the sample you want:
-    -   To build the Windows version of the sample:
-
-        1.  Select **SimpleCommunication.Windows** in **Solution Explorer**.
-        2.  Press Ctrl+Shift+B, or use **Build** \> **Build Solution**, or use **Build** \> **Build SimpleCommunication.Windows**.
-    -   To build the Windows Phone version of the sample:
-
-        1.  Select **SimpleCommunication.WindowsPhone** in **Solution Explorer**.
-        2.  Press Ctrl+Shift+B or use **Build** \> **Build Solution** or use **Build** \> **Build SimpleCommunication.WindowsPhone**.
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 Run the sample
 --------------
@@ -99,23 +90,8 @@ The next steps depend on whether you just want to deploy the sample or you want 
 
 **Deploying the sample**
 
--   To deploy the built Windows version of the sample:
-
-    1.  Select **SimpleCommunication.Windows** in **Solution Explorer**.
-    2.  Use **Build** \> **Deploy Solution** or **Build** \> **Deploy SimpleCommunication.Windows**.
--   To deploy the built Windows Phone version of the sample:
-
-    1.  Select **SimpleCommunication.WindowsPhone** in **Solution Explorer**.
-    2.  Use **Build** \> **Deploy Solution** or **Build** \> **Deploy SimpleCommunication.WindowsPhone**.
+- Select Build > Deploy Solution. 
 
 **Deploying and running the sample**
 
--   To deploy and run the Windows version of the sample:
-
-    1.  Right-click **SimpleCommunication.Windows** in **Solution Explorer** and select **Set as StartUp Project**.
-    2.  To debug the sample and then run it, press F5 or use **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or use **Debug** \> **Start Without Debugging**.
--   To deploy and run the Windows Phone version of the sample:
-
-    1.  Right-click **SimpleCommunication.WindowsPhone** in **Solution Explorer** and select **Set as StartUp Project**.
-    2.  To debug the sample and then run it, press F5 or use **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or use **Debug** \> **Start Without Debugging**.
-
+- To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or select Debug > Start Without Debugging.

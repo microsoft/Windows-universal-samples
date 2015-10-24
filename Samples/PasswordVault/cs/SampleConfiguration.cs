@@ -11,19 +11,36 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Windows.Security.Credentials;
 using Windows.UI.Xaml.Controls;
-using PasswordVaultSample;
 
 namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        public const string FEATURE_NAME = "PasswordVault";
+        public const string FEATURE_NAME = "Password vault C# sample";
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title="Add, Read and Remove Credentials", ClassType=typeof(Scenario1_AddReadRemoveCredentials)}
+            new Scenario() { Title="Save credentials", ClassType=typeof(Scenario1_Save) },
+            new Scenario() { Title="Manage credentials", ClassType=typeof(Scenario2_Manage) },
         };
+
+        // Value is not important. This is just a trick to run code at construction.
+        private bool initialize = InitializePasswordVaultInTheBackground();
+
+        static bool InitializePasswordVaultInTheBackground()
+        {
+            // Explicitly place this task on a background thread.
+            Task.Factory.StartNew(() =>
+            {
+                // any call to the password vault will load the vault.
+                var vault = new PasswordVault();
+                vault.RetrieveAll();
+            });
+            return true;
+        }
     }
 
     public class Scenario
