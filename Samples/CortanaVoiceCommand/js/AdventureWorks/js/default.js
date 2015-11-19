@@ -18,6 +18,8 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
     var app = WinJS.Application;
     var nav = WinJS.Navigation;
     var activationKinds = Windows.ApplicationModel.Activation.ActivationKind;
+    var AppViewBackButtonVisibility = Windows.UI.Core.AppViewBackButtonVisibility;
+    var systemNavigationManager = Windows.UI.Core.SystemNavigationManager.getForCurrentView();
     var splitView;
 
     WinJS.Namespace.define("SdkSample", {
@@ -124,14 +126,10 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
                         }
                     }
 
-
                     initialState.activationKind = activationKind;
                     initialState.activatedEventArgs = activatedEventArgs;
                     nav.history.current.initialPlaceholder = true;
                     return nav.navigate(url, initialState);
-
-
-
                 }, function (e) {
                     WinJS.log && WinJS.log("Failed to load VCD", e.message, "error");
                 });
@@ -145,9 +143,6 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
         // until after processAll and navigate complete asynchronously.
         eventObject.setPromise(p);
     }
-
-
-
 
     function navigating(eventObject) {
         /// <summary> Handle swapping out the content block for the new page, and setting up
@@ -177,6 +172,30 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
         p.done();
         eventObject.detail.setPromise(p);
     }
+
+    function navigated(eventObject) {
+        // If we returned to the root page, then empty the backstack.
+        if (nav.history.backStack.length > 0 && eventObject.detail.location == nav.history.backStack[0].location) {
+            nav.history.backStack.length = 0;
+        }
+
+        // Set the Back button state appropriately.
+        systemNavigationManager.appViewBackButtonVisibility = nav.canGoBack ? 
+            AppViewBackButtonVisibility.visible : AppViewBackButtonVisibility.collapsed;
+    }
+
+    function backRequested(eventObject) {
+        if (!eventObject.handled && nav.canGoBack) {
+            eventObject.handled = true;
+            nav.back();
+        }
+    }
+
+    // Register for Back button events.
+    systemNavigationManager.addEventListener("backrequested", backRequested);
+
+    // Register for the navigated event so we can update the Back button.
+    nav.addEventListener("navigated", navigated);
 
     nav.addEventListener("navigating", navigating);
     app.addEventListener("activated", activated, false);

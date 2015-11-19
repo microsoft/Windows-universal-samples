@@ -84,7 +84,10 @@ unsigned int StreamResolutionHelper::FrameRate()
     if (_type == VIDEO_ENCODING_STRING)
     {
         VideoEncodingProperties^ videoEncodingProperties = static_cast<VideoEncodingProperties^>(_encodingProperties);
-        return videoEncodingProperties->FrameRate->Numerator / videoEncodingProperties->FrameRate->Denominator;
+        if (videoEncodingProperties->FrameRate->Denominator != 0)
+        {
+            return videoEncodingProperties->FrameRate->Numerator / videoEncodingProperties->FrameRate->Denominator;
+        }
     }
 
     return 0;

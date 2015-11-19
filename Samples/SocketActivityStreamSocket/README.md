@@ -1,6 +1,6 @@
 <!---
   category: NetworkingAndWebServices 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620606&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620606
 --->
 
 # Socket activity trigger stream socket sample
@@ -15,7 +15,7 @@ This sample requires the following capabilities:
 
 For more information on network capabilities, see [How to set network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532).
 
-**Note**  This sample uses IP loopback. Network communications using an IP loopback address cannot normally be used for inter process communication between a Universal Windows Platform (UWP) app and a different process (a different UWP app or a desktop app) because this is restricted by network isolation. Network communication using an IP loopback address is allowed within the same process for communication purposes in a UWP app.
+**Note**  This sample is comprised of two apps: SocketActivityStreamSocket (client-side) and StreamSocketListenerServer (server-side). Due to loopback restrictions enforced by network isolation policy, these apps must run on separate machines for them to be able to communicate with each other. The sample scenario will not work if both apps are running on the same machine.
 
 
 ## Related topics

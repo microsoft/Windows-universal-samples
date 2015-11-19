@@ -1,5 +1,6 @@
 <!---
   category: ControlsLayoutAndText
+  samplefwlink: http://go.microsoft.com/fwlink/?LinkID=703784
 --->
 
 # Data virtualization sample

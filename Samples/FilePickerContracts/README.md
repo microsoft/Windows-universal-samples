@@ -1,6 +1,6 @@
 <!---
   category: FilesFoldersAndLibraries
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620543&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620543
 --->
 
 # File picker provider sample

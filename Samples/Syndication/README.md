@@ -1,6 +1,6 @@
 <!---
   category: NetworkingAndWebServices 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620610&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620610
 --->
 
 # Syndication sample

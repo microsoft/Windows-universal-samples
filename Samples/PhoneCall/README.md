@@ -1,6 +1,6 @@
 <!---
  category: Communications
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620586&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620586
 --->
 
 # Phone call sample

@@ -1,6 +1,6 @@
 <!---
   category: GraphicsAndAnimation
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620637&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620637
 --->
 
 # Transform3D animations sample

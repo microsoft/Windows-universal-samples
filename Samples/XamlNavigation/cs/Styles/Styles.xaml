@@ -104,27 +104,6 @@
         <Setter Property="Margin" Value="12, 14, 12, 4"/>
     </Style>
 
-    <Style x:Key="NavigationBackButtonStyle" TargetType="Button" BasedOn="{StaticResource NavigationBackButtonNormalStyle}">
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="Height" Value="48"/>
-        <Setter Property="Width" Value="NaN"/>
-        <Setter Property="MinWidth" Value="48"/>
-        <Setter Property="AutomationProperties.Name" Value="Back"/>
-        <Setter Property="Content">
-            <Setter.Value>
-                <Grid x:Name="RootGrid">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="48" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <FontIcon x:Name="Glyph" Grid.Column="0" FontSize="16" Glyph="&#xE0D5;" MirroredWhenRightToLeft="True" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="Text" Grid.Column="1" Style="{ThemeResource BodyTextBlockStyle}" Text="Back" VerticalAlignment="Center" />
-                </Grid>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style x:Key="NavMenuItemContainerStyle" TargetType="ListViewItem">
         <Setter Property="MinWidth" Value="{StaticResource SplitViewCompactPaneThemeLength}"/>
         <Setter Property="Height" Value="48"/>

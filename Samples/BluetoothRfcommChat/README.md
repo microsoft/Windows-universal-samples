@@ -1,6 +1,6 @@
 <!---
   category: Communications
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=626688&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=626688
 --->
 
 # Bluetooth RFCOMM chat sample

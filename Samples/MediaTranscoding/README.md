@@ -1,6 +1,6 @@
 <!---
   category: AudioVideoAndCamera 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620569&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620569
 --->
 
 # Transcoding media sample

@@ -1,6 +1,6 @@
 <!---
   category: CustomUserInteractions
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=627612&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=627612
 --->
 
 # Touch keyboard sample

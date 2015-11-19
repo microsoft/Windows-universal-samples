@@ -39,7 +39,7 @@ namespace BackgroundAudio
         #region Private Fields and Properties
         private MainPage rootPage;
         private AutoResetEvent backgroundAudioTaskStarted;
-        private bool isMyBackgroundTaskRunning = false;
+        private bool _isMyBackgroundTaskRunning = false;
         private Dictionary<string, BitmapImage> albumArtCache = new Dictionary<string, BitmapImage>();
         const int RPC_S_SERVER_UNAVAILABLE = -2147023174; // 0x800706BA
 
@@ -52,7 +52,7 @@ namespace BackgroundAudio
         {
             get
             {
-                if (isMyBackgroundTaskRunning)
+                if (_isMyBackgroundTaskRunning)
                     return true;
                 
                 string value = ApplicationSettingsHelper.ReadResetSettingsValue(ApplicationSettingsConstants.BackgroundTaskState) as string;
@@ -64,13 +64,13 @@ namespace BackgroundAudio
                 {
                     try
                     {
-                        isMyBackgroundTaskRunning = EnumHelper.Parse<BackgroundTaskState>(value) == BackgroundTaskState.Running;
+                        _isMyBackgroundTaskRunning = EnumHelper.Parse<BackgroundTaskState>(value) == BackgroundTaskState.Running;
                     }
                     catch(ArgumentException)
                     {
-                        isMyBackgroundTaskRunning = false;
+                        _isMyBackgroundTaskRunning = false;
                     }
-                    return isMyBackgroundTaskRunning;
+                    return _isMyBackgroundTaskRunning;
                 }
             }
         }
@@ -87,20 +87,28 @@ namespace BackgroundAudio
             get
             {
                 MediaPlayer mp = null;
+                int retryCount = 2;
 
-                try
+                while (mp == null && --retryCount >= 0)
                 {
-                    mp = BackgroundMediaPlayer.Current;
-                }
-                catch (Exception ex)
-                {
-                    if (ex.HResult == RPC_S_SERVER_UNAVAILABLE)
+                    try
                     {
-                        // The foreground app uses RPC to communicate with the background process.
-                        // If the background process crashes or is killed for any reason RPC_S_SERVER_UNAVAILABLE
-                        // is returned when calling Current.
-                        ResetAfterLostBackground();
-                        StartBackgroundAudioTask();
+                        mp = BackgroundMediaPlayer.Current;
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.HResult == RPC_S_SERVER_UNAVAILABLE)
+                        {
+                            // The foreground app uses RPC to communicate with the background process.
+                            // If the background process crashes or is killed for any reason RPC_S_SERVER_UNAVAILABLE
+                            // is returned when calling Current. We must restart the task, the while loop will retry to set mp.
+                            ResetAfterLostBackground();
+                            StartBackgroundAudioTask();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
                 }
 
@@ -114,12 +122,13 @@ namespace BackgroundAudio
         }
 
         /// <summary>
-        /// The background task did exist, but it has disappeared. Put the foreground back into an initial state.
+        /// The background task did exist, but it has disappeared. Put the foreground back into an initial state. Unfortunately,
+        /// any attempts to unregister things on BackgroundMediaPlayer.Current will fail with the RPC error once the background task has been lost.
         /// </summary>
         private void ResetAfterLostBackground()
         {
             BackgroundMediaPlayer.Shutdown();
-            isMyBackgroundTaskRunning = false;
+            _isMyBackgroundTaskRunning = false;
             backgroundAudioTaskStarted.Reset();
             prevButton.IsEnabled = true;
             nextButton.IsEnabled = true;
@@ -135,6 +144,10 @@ namespace BackgroundAudio
                 if (ex.HResult == RPC_S_SERVER_UNAVAILABLE)
                 {
                     throw new Exception("Failed to get a MediaPlayer instance.");
+                }
+                else
+                {
+                    throw;
                 }
             }
         }
@@ -220,7 +233,7 @@ namespace BackgroundAudio
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            if(isMyBackgroundTaskRunning)
+            if(_isMyBackgroundTaskRunning)
             {
                 RemoveMediaPlayerEventHandlers();
                 ApplicationSettingsHelper.SaveSettingsValue(ApplicationSettingsConstants.BackgroundTaskState, BackgroundTaskState.Running.ToString());
@@ -500,9 +513,9 @@ namespace BackgroundAudio
         /// </summary>
         private void RemoveMediaPlayerEventHandlers()
         {
-            CurrentPlayer.CurrentStateChanged -= this.MediaPlayer_CurrentStateChanged;
             try
             {
+                BackgroundMediaPlayer.Current.CurrentStateChanged -= this.MediaPlayer_CurrentStateChanged;
                 BackgroundMediaPlayer.MessageReceivedFromBackground -= BackgroundMediaPlayer_MessageReceivedFromBackground;
             }
             catch (Exception ex)
@@ -535,6 +548,10 @@ namespace BackgroundAudio
                 {
                     // Internally MessageReceivedFromBackground calls Current which can throw RPC_S_SERVER_UNAVAILABLE
                     ResetAfterLostBackground();
+                }
+                else
+                {
+                    throw;
                 }
             }
         }

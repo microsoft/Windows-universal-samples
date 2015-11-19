@@ -1,6 +1,6 @@
 <!---
   category: ControlsLayoutAndText
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624042&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624042
 --->
 
 # Display orientation sample

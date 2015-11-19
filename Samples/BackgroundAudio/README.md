@@ -1,6 +1,6 @@
 <!---
   category: AudioVideoAndCamera
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619997&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619997
 --->
 
 # Background audio sample

@@ -1,6 +1,6 @@
 <!---
   category: GlobalizationAndLocalization
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620562&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620562
 --->
 
 # Linguistic services sample

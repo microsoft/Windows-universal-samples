@@ -32,21 +32,27 @@ namespace ListViewSample
 
             // We set the state of the commands on the appbar
             SetCommandsVisibility(MyListView);
-
+        }
+        protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        {
             // This is how devs can handle the back button
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
         }
+        protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
+        }
         private void OnEdgeTapped(ListView sender, ListViewEdgeTappedEventArgs e)
         {
-            // When user releases the pointer after pessing on the left edge of the item,
-            // the ListView will switch to Multiple Selection 
+            // When user releases the pointer after pressing on the left edge of the item,
+            // the ListView will switch to Multiple Selection
             MyListView.SelectionMode = ListViewSelectionMode.Multiple;
             // Also, we want the Left Edge Tap funcionality will be no longer enable. 
             MyListView.IsItemLeftEdgeTapEnabled = false;
             // It's desirable that the Appbar shows the actions available for multiselect
             SetCommandsVisibility(MyListView);
         }
-        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void UpdateSelectionUI()
         {
             // When there are no selected items, the list returns to None selection mode.
             if (MyListView.SelectedItems.Count == 0)
@@ -56,12 +62,17 @@ namespace ListViewSample
                 SetCommandsVisibility(MyListView);
             }
         }
+        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateSelectionUI();
+        }
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
             // We want to exit from the multiselect mode when pressing back button
-            if (MyListView.SelectionMode == ListViewSelectionMode.Multiple)
+            if (!e.Handled && MyListView.SelectionMode == ListViewSelectionMode.Multiple)
             {
                 MyListView.SelectedItems.Clear();
+                UpdateSelectionUI();
                 e.Handled = true;
             }
         }
@@ -73,6 +84,7 @@ namespace ListViewSample
                 CancelSelectionAppBarBtn.Visibility = Visibility.Visible;
                 AddItemAppBarBtn.Visibility = Visibility.Collapsed;
                 RemoveItemAppBarBtn.Visibility = Visibility.Visible;
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             }
             else
             {
@@ -80,6 +92,7 @@ namespace ListViewSample
                 CancelSelectionAppBarBtn.Visibility = Visibility.Collapsed;
                 AddItemAppBarBtn.Visibility = Visibility.Visible;
                 RemoveItemAppBarBtn.Visibility = Visibility.Collapsed;
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
             }
         }
         private void SelectItems(object sender, Windows.UI.Xaml.RoutedEventArgs e)

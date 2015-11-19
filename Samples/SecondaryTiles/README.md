@@ -1,6 +1,6 @@
 <!---
   category: TilesToastAndNotifications
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620593&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620593
 --->
 
 # Secondary tiles sample

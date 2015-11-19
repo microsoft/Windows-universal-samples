@@ -1,6 +1,6 @@
 <!---
   category: IdentitySecurityAndEncryption
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620031&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620031
 --->
 
 # Enterprise data protection sample

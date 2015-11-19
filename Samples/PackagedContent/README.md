@@ -1,6 +1,6 @@
 ﻿<!---
   category: Navigation
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620582&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620582
 --->
 
 # XHR, handling navigation errors, and URL schemes sample

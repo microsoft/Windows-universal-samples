@@ -120,10 +120,22 @@ namespace SDKTemplate
                     // If the view is already shown to the user, then the app
                     // shouldn't run any extra animations
                     var currentId = ApplicationView.GetForCurrentView().Id;
-                    bool isViewVisible = await ApplicationViewSwitcher.PrepareForCustomAnimatedSwitchAsync(
-                        selectedItem.Id,
-                        currentId,
-                        ApplicationViewSwitchingOptions.SkipAnimation);
+
+                    bool isViewVisible;
+                    try
+                    {
+                        isViewVisible = await ApplicationViewSwitcher.PrepareForCustomAnimatedSwitchAsync(
+                            selectedItem.Id,
+                            currentId,
+                            ApplicationViewSwitchingOptions.SkipAnimation);
+                    }
+                    catch (NotImplementedException)
+                    {
+                        // The device family does not support PrepareForCustomAnimatedSwitchAsync.
+                        // Fall back to switching with standard animation.
+                        isViewVisible = true;
+                        await ApplicationViewSwitcher.SwitchAsync(selectedItem.Id, currentId);
+                    }
 
                     // The view may already be on screen, in which case there's no need to animate its
                     // contents (or animate out the contents of the current window)

@@ -1,6 +1,6 @@
 <!---
   category: Data
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620639&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620639
 --->
 
 # XML DOM sample

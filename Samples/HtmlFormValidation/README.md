@@ -1,6 +1,6 @@
 <!---
   category: Data
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620550&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620550
 --->
 
 # Form validation (HTML) sample

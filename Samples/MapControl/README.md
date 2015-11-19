@@ -1,6 +1,6 @@
 <!---
   category: MapsAndLocation 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619977&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619977
 --->
 
 # MapControl sample

@@ -148,19 +148,12 @@ void SDKTemplate::Scenario6_CustomProvider::LoadAccount()
 // clear the textboxes.
 void SDKTemplate::Scenario6_CustomProvider::AddCustomProvider(String^ providerId, String^ authority)
 {
-    try
+    if (providerId)
     {
-        Concurrency::task<WebAccountProvider^> getCustomProvider;
-        if (authority->IsEmpty() == true)
-        {
-            getCustomProvider = concurrency::create_task(WebAuthenticationCoreManager::FindAccountProviderAsync(providerId));
-        }
-        else
-        {
-            getCustomProvider = concurrency::create_task(WebAuthenticationCoreManager::FindAccountProviderAsync(providerId, authority));
-        }
-
-        getCustomProvider.then([this, providerId](WebAccountProvider^ provider)
+        (authority ? 
+            concurrency::create_task(WebAuthenticationCoreManager::FindAccountProviderAsync(providerId, authority)) :
+            concurrency::create_task(WebAuthenticationCoreManager::FindAccountProviderAsync(providerId)))
+            .then([this, providerId](WebAccountProvider^ provider)
         {
             if (provider)
             {
@@ -175,9 +168,9 @@ void SDKTemplate::Scenario6_CustomProvider::AddCustomProvider(String^ providerId
             }
         });
     }
-    catch (InvalidArgumentException^ e)
+    else
     {
-        rootPage->NotifyUser("An invalid provider id or authority was used.", NotifyType::ErrorMessage);
+        rootPage->NotifyUser("A provided must be specified.", NotifyType::StatusMessage);
     }
 }
 

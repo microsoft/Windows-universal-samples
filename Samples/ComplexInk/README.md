@@ -1,6 +1,6 @@
 <!---
   category: CustomUserInteractions
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620522&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620522
 --->
 
 # Complex inking sample

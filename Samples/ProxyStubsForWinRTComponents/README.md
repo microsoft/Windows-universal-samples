@@ -1,6 +1,6 @@
 <!---
    category: PlatformArchitecture
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620589&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620589
 --->
 
 # In-process component authoring sample

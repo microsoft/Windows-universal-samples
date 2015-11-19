@@ -1,6 +1,6 @@
 <!---
   category: DevicesSensorsAndPower
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624150&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624150
 --->
 
 # Inter-Integrated Circuit (I2C) sample

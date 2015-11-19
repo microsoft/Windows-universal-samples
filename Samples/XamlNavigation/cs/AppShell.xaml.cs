@@ -78,12 +78,6 @@ namespace NavigationMenuSample
 
             SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManager_BackRequested;
 
-            // If on a phone device that has hardware buttons then we hide the app's back button.
-            if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-            {
-                this.BackButton.Visibility = Visibility.Collapsed;
-            }
-
             NavMenuList.ItemsSource = navlist;
         }
 
@@ -142,29 +136,9 @@ namespace NavigationMenuSample
 
         private void SystemNavigationManager_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            bool handled = e.Handled;
-            this.BackRequested(ref handled);
-            e.Handled = handled;
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            bool ignored = false;
-            this.BackRequested(ref ignored);
-        }
-
-        private void BackRequested(ref bool handled)
-        {
-            // Get a hold of the current frame so that we can inspect the app back stack.
-
-            if (this.AppFrame == null)
-                return;
-
-            // Check to see if this is the top-most page on the app back stack.
-            if (this.AppFrame.CanGoBack && !handled)
+            if (!e.Handled && this.AppFrame.CanGoBack)
             {
-                // If not, set the event to handled and go back to the previous page in the app.
-                handled = true;
+                e.Handled = true;
                 this.AppFrame.GoBack();
             }
         }
@@ -234,6 +208,12 @@ namespace NavigationMenuSample
                 var control = (Page)e.Content;
                 control.Loaded += Page_Loaded;
             }
+
+            // Update the Back button depending on whether we can go Back.
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                AppFrame.CanGoBack ?
+                AppViewBackButtonVisibility.Visible :
+                AppViewBackButtonVisibility.Collapsed;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

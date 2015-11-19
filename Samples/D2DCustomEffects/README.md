@@ -1,6 +1,6 @@
 <!---
   category: GraphicsAndAnimation
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620531&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620531
 --->
 
 # Direct2D custom image effects sample

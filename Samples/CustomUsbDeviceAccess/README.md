@@ -1,6 +1,6 @@
 <!---
   category: DevicesSensorsAndPower
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620530&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620530
 --->
 
 # Custom USB device sample

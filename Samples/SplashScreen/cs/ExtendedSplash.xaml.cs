@@ -76,8 +76,16 @@ namespace SplashScreenSample
         {
             extendedSplashImage.SetValue(Canvas.LeftProperty, splashImageRect.Left);
             extendedSplashImage.SetValue(Canvas.TopProperty, splashImageRect.Top);
-            extendedSplashImage.Height = splashImageRect.Height / ScaleFactor;
-            extendedSplashImage.Width = splashImageRect.Width / ScaleFactor;
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            {
+                extendedSplashImage.Height = splashImageRect.Height / ScaleFactor;
+                extendedSplashImage.Width = splashImageRect.Width / ScaleFactor;
+            }
+            else
+            {
+                extendedSplashImage.Height = splashImageRect.Height;
+                extendedSplashImage.Width = splashImageRect.Width;
+            }
         }
 
         void ExtendedSplash_OnResize(Object sender, WindowSizeChangedEventArgs e)

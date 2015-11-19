@@ -1,6 +1,6 @@
 <!---
   category: NetworkingAndWebServices 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620626&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620626
 --->
 
 # Wi-Fi Direct sample

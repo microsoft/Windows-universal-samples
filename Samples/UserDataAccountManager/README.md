@@ -1,6 +1,6 @@
 <!---
    category: ContactsAndCalendar 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620616&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620616
 --->
 
 # UserDataAccountManager sample

@@ -1,6 +1,6 @@
 <!--
   category: GlobalizationAndLocalization
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620555&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620555
 -->
 
 # Japanese phonetic analysis sample

@@ -1,6 +1,6 @@
 ﻿<!---
   category: IdentitySecurityAndEncryption
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620617&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620617
 --->
 
 # User information sample

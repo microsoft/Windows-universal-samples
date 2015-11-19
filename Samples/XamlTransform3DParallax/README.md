@@ -1,6 +1,6 @@
 <!---
   category: GraphicsAndAnimation
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620638&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620638
 --->
 
 # Transform3D parallax sample

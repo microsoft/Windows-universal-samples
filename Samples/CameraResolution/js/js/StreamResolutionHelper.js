@@ -50,7 +50,9 @@ streamResolutionHelper.prototype.height = function () {
 
 streamResolutionHelper.prototype.frameRate = function () {
     if (this.encodingProperties.type === "Video") {
-        return Math.round(this.encodingProperties.frameRate.numerator / this.encodingProperties.frameRate.denominator);
+        if (this.encodingProperties.frameRate.denominator != 0) {
+            return Math.round(this.encodingProperties.frameRate.numerator / this.encodingProperties.frameRate.denominator);
+        }
     }
 
     return 0;

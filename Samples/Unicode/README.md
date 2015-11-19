@@ -1,6 +1,6 @@
 <!--
   category: GlobalizationAndLocalization
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620614&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620614
 -->
 
 # Unicode string processing sample

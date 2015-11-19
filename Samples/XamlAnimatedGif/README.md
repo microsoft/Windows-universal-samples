@@ -1,6 +1,6 @@
 <!---
   category: GraphicsAndAnimation
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624046&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624046
 --->
 # Animated GIF playback (XAML) sample
 

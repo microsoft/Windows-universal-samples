@@ -1,6 +1,6 @@
 <!---
   category: AudioVideoAndCamera
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619488&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619488
 --->
 
 # System media transport controls sample

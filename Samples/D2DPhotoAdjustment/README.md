@@ -1,6 +1,6 @@
 <!---
   category: AudioVideoAndCamera
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620533&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620533
 --->
 
 # Direct2D photo adjustment sample

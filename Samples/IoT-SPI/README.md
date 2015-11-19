@@ -1,6 +1,6 @@
 <!---
   category: DevicesSensorsAndPower
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624151&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624151
 --->
 
 # Serial Peripheral Interface (SPI) sample

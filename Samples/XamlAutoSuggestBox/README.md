@@ -1,6 +1,6 @@
 <!---
   category: ControlsLayoutAndText
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619996&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619996
 --->
 
 # AutoSuggestBox migration sample

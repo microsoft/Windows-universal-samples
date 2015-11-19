@@ -1,6 +1,6 @@
 <!---
   category: DevicesSensorsAndPower
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620511&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620511
 --->
 
 # Barometer sample

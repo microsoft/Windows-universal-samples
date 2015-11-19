@@ -37,12 +37,6 @@ TripViewModel::TripViewModel(TripStore^ store)
         [this](Object^ parameter) {return true; },
         [this](Object^ parameter) {this->DeleteTrip(); });
 
-    goBackCommand = ref new RelayCommand(
-        [this](Object^ parameter) {return true; },
-        [this](Object^ parameter) {
-        auto rootFrame = dynamic_cast<Frame^>(Window::Current->Content);
-        rootFrame->Navigate(TripListView::typeid);
-    });
 }
 
 AdventureWorks_Shared::Trip^ TripViewModel::Trip::get()
@@ -97,11 +91,6 @@ ICommand^ TripViewModel::SaveTripCommand::get()
 ICommand^ TripViewModel::DeleteTripCommand::get()
 {
     return this->deleteTripCommand;
-}
-
-ICommand^ TripViewModel::GoBackCommand::get()
-{
-    return this->goBackCommand;
 }
 
 /// <summary> 

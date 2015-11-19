@@ -1,6 +1,6 @@
 <!---
   category: ControlsLayoutAndText
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620021&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620021
 --->
 
 # Context menu (XAML) sample

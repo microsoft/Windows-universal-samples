@@ -1,6 +1,6 @@
 <!---
   category: Gaming
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620599&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620599
 --->
 
 # DirectX and XAML game sample

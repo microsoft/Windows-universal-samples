@@ -1,6 +1,6 @@
 <!---
   category: Navigation
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619903&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619903
 --->
 
 # Pivot sample

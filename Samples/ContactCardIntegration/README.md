@@ -1,5 +1,6 @@
 <!---
   category: ContactsAndCalendar
+  samplefwlink: http://go.microsoft.com/fwlink/?LinkID=703783
 -->
 
 # Contact Card integration sample

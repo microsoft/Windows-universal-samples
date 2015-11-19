@@ -1,6 +1,6 @@
 ﻿<!---
   category: AppSettings
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=627610&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=627610
 --->
 
 # Store sample

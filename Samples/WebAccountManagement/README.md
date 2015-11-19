@@ -1,6 +1,6 @@
 <!---
   category: IdentitySecurityAndEncryption
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620621&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620621
 --->
 
 # Web account management sample

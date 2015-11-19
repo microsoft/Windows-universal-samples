@@ -38,5 +38,6 @@ namespace AdventureWorks
 
     private:
         TripListViewModel^ defaultViewModel;
+        bool tripsLoaded = false;
     };
 }

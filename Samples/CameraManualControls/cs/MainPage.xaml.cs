@@ -60,6 +60,9 @@ namespace CameraManualControls
         // For listening to media property changes
         private readonly SystemMediaTransportControls _systemMediaControls = SystemMediaTransportControls.GetForCurrentView();
 
+        // Access to the Back button
+        private readonly SystemNavigationManager _systemNavigationManager = SystemNavigationManager.GetForCurrentView();
+
         // MediaCapture and its state variables
         private MediaCapture _mediaCapture;
         private bool _isInitialized;
@@ -608,7 +611,6 @@ namespace CameraManualControls
             if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
             {
                 HardwareButtons.CameraPressed += HardwareButtons_CameraPressed;
-                HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             }
 
             // If there is an orientation sensor present on the device, register for notifications
@@ -622,31 +624,20 @@ namespace CameraManualControls
 
             _displayInformation.OrientationChanged += DisplayInformation_OrientationChanged;
             _systemMediaControls.PropertyChanged += SystemMediaControls_PropertyChanged;
+            _systemNavigationManager.BackRequested += SystemNavigationManager_BackRequested;
         }
 
-        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        private void SystemNavigationManager_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            // Back button exits single control mode
             if (_singleControlMode)
             {
                 // Exit single control mode
-                _singleControlMode = false;
-
-                // If in single control mode, hide all child buttons (except for the sender). Otherwise show all buttons.
-                foreach (var button in ScenarioControlStackPanel.Children)
-                {
-                    if (button is Button && button != sender)
-                    {
-                        button.Visibility = Visibility.Visible;
-                    }
-                }
-
-                // Hide the container control for manual input
-                ManualControlsGrid.Visibility = Visibility.Collapsed;
+                SetSingleControl(null);
 
                 e.Handled = true;
             }
         }
+
 
         /// <summary>
         /// Unregisters event handlers for hardware buttons and orientation sensors
@@ -656,7 +647,6 @@ namespace CameraManualControls
             if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
             {
                 HardwareButtons.CameraPressed -= HardwareButtons_CameraPressed;
-                HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
             }
 
             if (_orientationSensor != null)
@@ -666,6 +656,7 @@ namespace CameraManualControls
 
             _displayInformation.OrientationChanged -= DisplayInformation_OrientationChanged;
             _systemMediaControls.PropertyChanged -= SystemMediaControls_PropertyChanged;
+            _systemNavigationManager.BackRequested -= SystemNavigationManager_BackRequested;
         }
 
         /// <summary>
@@ -912,24 +903,35 @@ namespace CameraManualControls
 
         #region Manual controls setup
 
-        private void ManualControlButton_Tapped(object sender, TappedRoutedEventArgs e)
+        // If activeButton = null, then exit single control mode.
+        private void SetSingleControl(object activeButton)
         {
-            // Toggle single control mode
-            _singleControlMode = !_singleControlMode;
+            _singleControlMode = (activeButton != null);
 
-            // If in single control mode, hide all manual control buttons (except for the sender, which was tapped), otherwise show all buttons
-            foreach (var button in ScenarioControlStackPanel.Children)
+            // If in single control mode, hide all manual control buttons (except for the active button).
+            // if not in single control mode, then show all the buttons which are supported.
+            foreach (var button in ScenarioControlStackPanel.Children.OfType<Button>())
             {
-                if (button is Button && button != sender)
+                if (button != activeButton)
                 {
-                    // The Tag property of each button stores whether that button should be displayed or not, which depends on whether the control is supported or not
-                    // The value is set in the Update___ControlCapabilities method of each control
-                    button.Visibility = _singleControlMode ? Visibility.Collapsed : (Visibility)(button as Button).Tag;
+                    // The Tag property of each button stores whether that button is supported.
+                    // The value is set in the Update___ControlCapabilities method of each control.
+                    button.Visibility = _singleControlMode ? Visibility.Collapsed : (Visibility)button.Tag;
                 }
             }
 
             // Show the container control for manual configuration only when in single control mode
             ManualControlsGrid.Visibility = _singleControlMode ? Visibility.Visible : Visibility.Collapsed;
+
+            // Show the Back button only when in single control mode
+            _systemNavigationManager.AppViewBackButtonVisibility = _singleControlMode ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+
+        }
+
+        private void ManualControlButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            // Toggle single control mode
+            SetSingleControl(_singleControlMode ? null : sender);
         }
 
         /// <summary>

@@ -1,6 +1,6 @@
 <!---
   category: DevicesSensorsAndPower
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620561&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620561
 --->
 
 # Light sensor sample

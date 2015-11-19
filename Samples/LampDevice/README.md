@@ -1,6 +1,6 @@
 <!---
   category: DevicesSensorsAndPower 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620558&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620558
 --->
 
 # Lamp device sample

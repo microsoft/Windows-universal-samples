@@ -1,6 +1,6 @@
 <!---
   category: CustomUserInteractions
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620514&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620514
 --->
 
 # Basic input sample

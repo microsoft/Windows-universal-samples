@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.Foundation.Metadata;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -82,44 +81,37 @@ namespace AppUIBasics.Common
                 if (this.Page.ActualHeight == Window.Current.Bounds.Height &&
                     this.Page.ActualWidth == Window.Current.Bounds.Width)
                 {
-                    if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-                    {
-                        Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-                    }
-                    else
-                    {
-                        // Listen to the window directly so focus isn't required
-                        Window.Current.CoreWindow.Dispatcher.AcceleratorKeyActivated +=
-                            CoreDispatcher_AcceleratorKeyActivated;
-                        Window.Current.CoreWindow.PointerPressed +=
-                            this.CoreWindow_PointerPressed;
+                    SystemNavigationManager systemNavigationManager = SystemNavigationManager.GetForCurrentView();
+                    systemNavigationManager.AppViewBackButtonVisibility =
+                        this.Frame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+                    systemNavigationManager.BackRequested += SystemNavigationManager_BackRequested;
 
-                    }
+                    // Listen to the window directly so focus isn't required
+                    Window.Current.CoreWindow.Dispatcher.AcceleratorKeyActivated +=
+                        CoreDispatcher_AcceleratorKeyActivated;
+                    Window.Current.CoreWindow.PointerPressed +=
+                        this.CoreWindow_PointerPressed;
                 }
             };
 
             // Undo the same changes when the page is no longer visible
             this.Page.Unloaded += (sender, e) =>
             {
-                if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-                {
-                    Windows.Phone.UI.Input.HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
-                }
-                else
-                {
-                    Window.Current.CoreWindow.Dispatcher.AcceleratorKeyActivated -=
-                        CoreDispatcher_AcceleratorKeyActivated;
-                    Window.Current.CoreWindow.PointerPressed -=
-                        this.CoreWindow_PointerPressed;
-                }
+                SystemNavigationManager.GetForCurrentView().BackRequested -= SystemNavigationManager_BackRequested;
+
+                Window.Current.CoreWindow.Dispatcher.AcceleratorKeyActivated -=
+                    CoreDispatcher_AcceleratorKeyActivated;
+                Window.Current.CoreWindow.PointerPressed -=
+                    this.CoreWindow_PointerPressed;
             };
         }
 
-        private void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
+        private void SystemNavigationManager_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            if (this.Frame.CanGoBack)
+            if (!e.Handled && this.CanGoBack())
             {
-                this.Frame.GoBack();
+                e.Handled = true;
+                this.GoBack();
             }
         }
 

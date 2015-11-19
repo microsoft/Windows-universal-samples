@@ -1,6 +1,6 @@
 <!--
   category: GlobalizationAndLocalization
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624043&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624043
 -->
 
 # Calendar sample

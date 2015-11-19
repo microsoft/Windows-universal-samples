@@ -1,6 +1,6 @@
 <!---
   category: IdentitySecurityAndEncryption
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620583&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620583
 --->
 
 # Credential locker sample

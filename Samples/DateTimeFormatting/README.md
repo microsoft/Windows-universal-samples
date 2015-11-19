@@ -1,6 +1,6 @@
 <!--
   category: GlobalizationAndLocalization
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624044&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624044
 -->
 
 # Date and time formatting sample
@@ -39,7 +39,7 @@ This sample contains scenarios that demonstrate:
 
 * [**Calendar** sample](../Calendar)
 * [**GlobalizationPreferences** sample](../GlobalizationPreferences)
-* [**NumberFormatting** sample](http://go.microsoft.com/fwlink/p/?LinkId=620578&clcid=0x409)
+* [**NumberFormatting** sample](../NumberFormatting)
 
 ### Reference
 

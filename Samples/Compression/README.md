@@ -1,6 +1,6 @@
 <!---
   category: Data
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620523&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620523
 --->
 
 # Compression sample

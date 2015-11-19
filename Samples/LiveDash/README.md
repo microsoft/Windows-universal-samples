@@ -1,6 +1,6 @@
 <!---
   category: AudioVideoAndCamera
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620563&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620563
 --->
 
 # DASH streaming sample

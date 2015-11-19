@@ -1,6 +1,6 @@
 <!---
   category: Threading
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620625&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620625
 --->
 
 # JavaScript Web Workers app multithreading sample

@@ -1,6 +1,6 @@
 <!--
   category: GlobalizationAndLocalization
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624045&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624045
 -->
 
 # Globalization preferences sample

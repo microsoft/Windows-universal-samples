@@ -1,6 +1,6 @@
 <!---
   category: DevicesSensorsAndPower
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620588&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620588
 --->
 
 # Proximity sensor sample

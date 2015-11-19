@@ -1,6 +1,6 @@
 <!---
   category: AudioVideoAndCamera
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620479&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620479
 --->
 
 # Adaptive streaming sample

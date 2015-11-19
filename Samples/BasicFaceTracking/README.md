@@ -1,6 +1,6 @@
 <!---
   category: AudioVideoAndCamera 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620513&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620513
 --->
 
 # Basic face tracking sample

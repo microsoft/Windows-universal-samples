@@ -1,6 +1,6 @@
 <!---
   category: Communications
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620605&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620605
 --->
 
 # SMS send and receive sample

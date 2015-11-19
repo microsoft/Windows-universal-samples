@@ -1,6 +1,6 @@
 <!---
   category: ControlsLayoutAndText
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620632&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620632
 --->
 
 # Downloadable fonts (XAML) sample

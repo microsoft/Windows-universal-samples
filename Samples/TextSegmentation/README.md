@@ -1,6 +1,6 @@
 <!---
   category: GlobalizationAndLocalization
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620611&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620611
 --->
 
 # Text segmentation sample

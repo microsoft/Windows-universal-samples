@@ -1,6 +1,6 @@
 <!---
   category: Navigation
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619901&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619901
 --->
 
 # Master/detail sample

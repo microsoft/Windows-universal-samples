@@ -1,6 +1,6 @@
 <!---
   category: DevicesSensorsAndPower
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624149&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624149
 --->
 
 # General Purpose Input/Output (GPIO) sample

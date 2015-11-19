@@ -1,6 +1,6 @@
 <!---
   category: SpeechAndCortana 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619899&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619899
 --->
 
 # Cortana voice command sample

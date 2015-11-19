@@ -1,6 +1,6 @@
 <!---
   category: NetworkingAndWebServices 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620542&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620542
 --->
 
 # RSS reader end-to-end (JavaScript) sample 
