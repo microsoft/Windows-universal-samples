@@ -17,6 +17,8 @@ using Windows.Storage.FileProperties;
 using Windows.Storage.Search;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 namespace SDKTemplate
@@ -48,6 +50,12 @@ namespace SDKTemplate
 
         private async void GetFilesButton_Click(object sender, RoutedEventArgs e)
         {
+            int max_files = 100000000;
+            if ( MaxFilesText.Text.Length > 0 )
+            {
+                var good = int.TryParse(MaxFilesText.Text, out max_files);
+            }
+
             // Reset output.
             OutputPanel.Children.Clear();
 
@@ -68,17 +76,35 @@ namespace SDKTemplate
             propertyNames.Add(ColorSpaceProperty);
             queryOptions.SetPropertyPrefetch(PropertyPrefetchOptions.ImageProperties, propertyNames);
 
+#if true // set to false to disable thumbnails
             // Set up thumbnail prefetch if needed, e.g. when creating a picture gallery view.
-            /*
             const uint requestedSize = 190;
             const ThumbnailMode thumbnailMode = ThumbnailMode.PicturesView;
             const ThumbnailOptions thumbnailOptions = ThumbnailOptions.UseCurrentScale;
             queryOptions.SetThumbnailPrefetch(thumbnailMode, requestedSize, thumbnailOptions);
-            */
+#endif
 
             // Set up the query and retrieve files.
             var query = KnownFolders.PicturesLibrary.CreateFileQueryWithOptions(queryOptions);
-            IReadOnlyList<StorageFile> fileList = await query.GetFilesAsync();
+
+            // Do the scan a bit at a time to help us discern where we fail if we do.
+            List<StorageFile> fileList = new List<StorageFile>();
+
+            uint start_index = 0;
+            int list_count = 0;
+            do
+            {
+                var tmp_list = await query.GetFilesAsync(start_index, 100);
+                list_count = tmp_list.Count;
+                if ( list_count > 0 )
+                {
+                    // quick copy the tmp_list into the master list
+                    fileList.AddRange(tmp_list);
+                    start_index += (uint)list_count;
+                }
+            } while (( list_count > 0) && ( fileList.Count < max_files )) ;
+                                            // this check can be changed to shorten the test case
+
             foreach (StorageFile file in fileList)
             {
                 OutputPanel.Children.Add(CreateHeaderTextBlock(file.Name));
@@ -96,9 +122,29 @@ namespace SDKTemplate
                 propValue = extraProperties[ColorSpaceProperty];
                 OutputPanel.Children.Add(CreateLineItemTextBlock("Color space: " + GetPropertyDisplayValue(propValue)));
 
+#if true
                 // Thumbnails can also be retrieved and used.
-                // var thumbnail = await file.GetThumbnailAsync(thumbnailMode, requestedSize, thumbnailOptions);
+                var thumbnail = await file.GetThumbnailAsync(thumbnailMode, requestedSize, thumbnailOptions);
+                var img = CreateThumbnailImage(thumbnail);
+                OutputPanel.Children.Add(img);
+#endif
             }
+
+            foreach( StorageFile file in fileList)
+            {
+                // should be no problem
+                var thumbnail = await file.GetThumbnailAsync(thumbnailMode, requestedSize, thumbnailOptions);
+            }
+        }
+
+        Image CreateThumbnailImage(StorageItemThumbnail thumbnail)
+        {
+            var image = new Image();
+            var bm = new BitmapImage();
+            bm.SetSource(thumbnail);
+            image.Source = bm;
+            image.Width = 190;
+            return image;
         }
 
         TextBlock CreateHeaderTextBlock(string contents)
