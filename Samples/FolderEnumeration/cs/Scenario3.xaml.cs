@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Windows.Storage;
 using Windows.Storage.BulkAccess;
@@ -68,6 +69,7 @@ namespace SDKTemplate
 
             // Create query options.
             var queryOptions = new QueryOptions(CommonFileQuery.OrderByName, fileTypeFilter);
+            queryOptions.FolderDepth = FolderDepth.Deep;
 
             // Set up property prefetch - use the PropertyPrefetchOptions for top-level properties
             // and a list for additional properties.
@@ -76,64 +78,154 @@ namespace SDKTemplate
             propertyNames.Add(ColorSpaceProperty);
             queryOptions.SetPropertyPrefetch(PropertyPrefetchOptions.ImageProperties, propertyNames);
 
-#if true // set to false to disable thumbnails
             // Set up thumbnail prefetch if needed, e.g. when creating a picture gallery view.
             const uint requestedSize = 190;
             const ThumbnailMode thumbnailMode = ThumbnailMode.PicturesView;
             const ThumbnailOptions thumbnailOptions = ThumbnailOptions.UseCurrentScale;
-            queryOptions.SetThumbnailPrefetch(thumbnailMode, requestedSize, thumbnailOptions);
-#endif
+
+            if (PrefetchCheck.IsChecked == true)
+            {
+                queryOptions.SetThumbnailPrefetch(thumbnailMode, requestedSize, thumbnailOptions);
+            }
 
             // Set up the query and retrieve files.
-            var query = KnownFolders.PicturesLibrary.CreateFileQueryWithOptions(queryOptions);
+            StorageFolder testFolder     = KnownFolders.PicturesLibrary;
+            testFolder = await testFolder.GetFolderAsync("EnumTest");
+
+            var query = testFolder.CreateItemQueryWithOptions(queryOptions);
+
+            ScanProgressText.Text = "scanning...";
 
             // Do the scan a bit at a time to help us discern where we fail if we do.
-            List<StorageFile> fileList = new List<StorageFile>();
+            List<IStorageItem> fileList = new List<IStorageItem>();
 
             uint start_index = 0;
             int list_count = 0;
             do
             {
-                var tmp_list = await query.GetFilesAsync(start_index, 100);
+                var tmp_list = await query.GetItemsAsync(start_index, 100);
                 list_count = tmp_list.Count;
                 if ( list_count > 0 )
                 {
                     // quick copy the tmp_list into the master list
                     fileList.AddRange(tmp_list);
                     start_index += (uint)list_count;
+
+                    ScanProgressText.Text = String.Format("found {0} files", fileList.Count);
                 }
             } while (( list_count > 0) && ( fileList.Count < max_files )) ;
-                                            // this check can be changed to shorten the test case
+            // this check can be changed to shorten the test case
 
-            foreach (StorageFile file in fileList)
+            List<IStorageItem> badItems = new List<IStorageItem>();
+            List<IStorageItem> goodItems = new List<IStorageItem>();
+
+            StorageItemThumbnail tmp_thumb;
+
+            foreach (IStorageItem file in fileList)
             {
                 OutputPanel.Children.Add(CreateHeaderTextBlock(file.Name));
 
                 // GetImagePropertiesAsync will return synchronously when prefetching has been able to
                 // retrieve the properties in advance.
-                var properties = await file.Properties.GetImagePropertiesAsync();
-                OutputPanel.Children.Add(CreateLineItemTextBlock("Dimensions: " + properties.Width + "x" + properties.Height));
+                var onlyFile = file as StorageFile;
+                var onlyFold = file as StorageFolder;
+                if (onlyFile != null)
+                {
+                    var properties = await onlyFile.Properties.GetImagePropertiesAsync();
+                    OutputPanel.Children.Add(CreateLineItemTextBlock("Dimensions: " + properties.Width + "x" + properties.Height));
 
-                // Similarly, extra properties are retrieved asynchronously but may
-                // return immediately when prefetching has fulfilled its task.
-                IDictionary<string, object> extraProperties = await file.Properties.RetrievePropertiesAsync(propertyNames);
-                var propValue = extraProperties[CopyrightProperty];
-                OutputPanel.Children.Add(CreateLineItemTextBlock("Copyright: " + GetPropertyDisplayValue(propValue)));
-                propValue = extraProperties[ColorSpaceProperty];
-                OutputPanel.Children.Add(CreateLineItemTextBlock("Color space: " + GetPropertyDisplayValue(propValue)));
+                    // Similarly, extra properties are retrieved asynchronously but may
+                    // return immediately when prefetching has fulfilled its task.
+                    IDictionary<string, object> extraProperties = await onlyFile.Properties.RetrievePropertiesAsync(propertyNames);
+                    var propValue = extraProperties[CopyrightProperty];
+                    OutputPanel.Children.Add(CreateLineItemTextBlock("Copyright: " + GetPropertyDisplayValue(propValue)));
+                    propValue = extraProperties[ColorSpaceProperty];
+                    OutputPanel.Children.Add(CreateLineItemTextBlock("Color space: " + GetPropertyDisplayValue(propValue)));
 
 #if true
-                // Thumbnails can also be retrieved and used.
-                var thumbnail = await file.GetThumbnailAsync(thumbnailMode, requestedSize, thumbnailOptions);
-                var img = CreateThumbnailImage(thumbnail);
-                OutputPanel.Children.Add(img);
+                    // Thumbnails can also be retrieved and used.
+                    using (tmp_thumb = await onlyFile.GetThumbnailAsync(thumbnailMode, requestedSize, thumbnailOptions))
+                    {
+                        if (tmp_thumb != null)
+                        {
+                            var img = CreateThumbnailImage(tmp_thumb);
+                            OutputPanel.Children.Add(img);
+
+                            goodItems.Add(file);
+                        }
+                        else
+                        {
+                            badItems.Add(file);
+                        }
+                    }
 #endif
+                }
+                else if ( onlyFold != null )
+                {
+                    // Thumbnails can also be retrieved and used.
+                    using (tmp_thumb = await onlyFold.GetThumbnailAsync(thumbnailMode, requestedSize, thumbnailOptions))
+                    {
+                        if (tmp_thumb != null)
+                        {
+                            var img = CreateThumbnailImage(tmp_thumb);
+                            OutputPanel.Children.Add(img);
+                            goodItems.Add(file);
+                        }
+                        else
+                        {
+                            badItems.Add(file);
+                            Debug.WriteLine(String.Format("thumb for {0} is null", onlyFold.Name));
+                        }
+                    }
+                }
             }
 
-            foreach( StorageFile file in fileList)
+            Debug.WriteLine(String.Format("we found {0} good items, {1} bad ones"
+                           , goodItems.Count
+                           , badItems.Count));
+
+            // rescan folders.  This wouldn't happen this way, but would be similar in the case of a 
+            // virtual data source.
+            foreach ( IStorageItem file in goodItems)
             {
-                // should be no problem
-                var thumbnail = await file.GetThumbnailAsync(thumbnailMode, requestedSize, thumbnailOptions);
+                var tmpFold = file as StorageFolder;
+                var tmpFile = file as StorageFile;
+                if (tmpFold != null)
+                {
+                    // should be no problem
+                    try
+                    {
+                        using (var thumbnail = await tmpFold.GetThumbnailAsync(thumbnailMode, requestedSize, thumbnailOptions))
+                        {
+                            if (thumbnail == null)
+                            {
+                                Debug.WriteLine(String.Format("folder {0} failed on subsequent scan", file.Name));
+                            }
+                        }
+                    }
+                    catch( Exception except )
+                    {
+                        Debug.WriteLine(String.Format("folder {0} exception \"{1}\"", file.Name, except.Message));
+                    }
+                }
+                else if ( tmpFile != null )
+                {
+                    // should be no problem
+                    try
+                    {
+                        using (var thumbnail = await tmpFile.GetThumbnailAsync(thumbnailMode, requestedSize, thumbnailOptions))
+                        {
+                            if (thumbnail == null)
+                            {
+                                Debug.WriteLine(String.Format("file {0} failed on subsequent scan", file.Name));
+                            }
+                        }
+                    }
+                    catch ( Exception except )
+                    {
+                        Debug.WriteLine(String.Format("file {0} exception \"{1}\"", file.Name, except.Message));
+                    }
+                }
             }
         }
 

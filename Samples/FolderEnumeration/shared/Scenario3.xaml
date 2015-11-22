@@ -42,9 +42,11 @@
                         Make sure there are picture files in your Pictures library before running the scenario.
                     </TextBlock>
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="GetFilesButton" Content="Get files" Click="GetFilesButton_Click" Margin="0,10,0,0"/>
                         <TextBlock Text="Max files" VerticalAlignment="Center" Margin="10,10,10,0" />
                         <TextBox x:Name="MaxFilesText" Width="100" Margin="0,10,0,0"/>
+                        <CheckBox x:Name="PrefetchCheck" Content="Use Prefetch" Margin="10,10,0,0" />
+                        <Button x:Name="GetFilesButton" Content="Get files" Click="GetFilesButton_Click" Margin="0,10,0,0"/>
+                        <TextBlock x:Name="ScanProgressText" VerticalAlignment="Center" Width="Auto" Margin="10,10,10,0" />
                     </StackPanel>
                     <StackPanel x:Name="OutputPanel" Margin="0,10,0,0"/>
                 </StackPanel>
