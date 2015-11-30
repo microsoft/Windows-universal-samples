@@ -5,7 +5,10 @@
 
 # Touch keyboard text input sample
 
-This sample shows how to enable optimized views on the touch keyboard by using input scopes and input types with controls with the [**TextBox**](http://msdn.microsoft.com/library/windows/apps/br209683) and [**RichEdit**](http://msdn.microsoft.com/library/windows/apps/br227548) Extensible Application Markup Language (XAML) controls. Also, this sample demonstrates spell checking by using the [**IsSpellCheckEnabled**](http://msdn.microsoft.com/library/windows/apps/br209688) property, and it shows text prediction by using the [**IsTextPredictionEnabled**](http://msdn.microsoft.com/library/windows/apps/br209690) property.
+This sample shows how to enable optimized views on the touch keyboard by using input scopes and input types with controls in the [WinJS.UI](http://msdn.microsoft.com/library/windows/apps/br229782) namespace, 
+and with the [**TextBox**](http://msdn.microsoft.com/library/windows/apps/br209683) and [**RichEdit**](http://msdn.microsoft.com/library/windows/apps/br227548) Extensible Application Markup Language (XAML) controls. 
+Also, this sample demonstrates spell checking by using the [**spellcheck**](http://msdn.microsoft.com/library/windows/apps/hh441107) and [**IsSpellCheckEnabled**](http://msdn.microsoft.com/library/windows/apps/br209688) properties, 
+and it shows text prediction by using the [**IsTextPredictionEnabled**](http://msdn.microsoft.com/library/windows/apps/br209690) property.
 
 The input types shown in this sample are:
 
@@ -15,6 +18,8 @@ The input types shown in this sample are:
 -   Number
 -   Search
 -   Telephone
+
+**Note** Because of a known issue, the first Scenario in the JS sample does not work properly in Phone - the text controls in the JS sample do not obey the "spellcheck" attribute.
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
@@ -40,6 +45,8 @@ Related topics
 [**IsSpellCheckEnabled**](http://msdn.microsoft.com/library/windows/apps/br209688)
 
 [**IsTextPredictionEnabled**](http://msdn.microsoft.com/library/windows/apps/br209690)
+
+[**spellcheck**](http://msdn.microsoft.com/library/windows/apps/hh441107)
 
 [**RichEdit**](http://msdn.microsoft.com/library/windows/apps/br227548)
 

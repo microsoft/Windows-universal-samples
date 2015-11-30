@@ -1,0 +1,72 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>WWA UAP SDK Sample</Name>
+    <Description>
+    </Description>
+    <ProjectType>JavaScript</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1</SortOrder>
+    <CreateNewFolder>false</CreateNewFolder>
+	<CreateInPlace>true</CreateInPlace>
+    <DefaultName>App</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.png</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="App.jsproj" File="App.jsproj" ReplaceParameters="true">
+      <Folder Name="css" TargetFolderName="css">
+        <ProjectItem ReplaceParameters="true" TargetFileName="default.css">default.css</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="scenario1.css">scenario1.css</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="scenario2.css">scenario2.css</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="scenario3.css">scenario3.css</ProjectItem>
+      </Folder>
+      <Folder Name="html" TargetFolderName="html">
+        <ProjectItem ReplaceParameters="true" TargetFileName="scenario1.html">scenario1.html</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="scenario2.html">scenario2.html</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="scenario3.html">scenario3.html</ProjectItem>
+      </Folder>
+      <Folder Name="images" TargetFolderName="images">
+        <ProjectItem ReplaceParameters="false" TargetFileName="microsoft-sdk.png">microsoft-sdk.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="smallTile-sdk.png">smallTile-sdk.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="splash-sdk.png">splash-sdk.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="storeLogo-sdk.png">storeLogo-sdk.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="tile-sdk.png">tile-sdk.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="windows-sdk.png">windows-sdk.png</ProjectItem>
+      </Folder>
+      <Folder Name="js" TargetFolderName="js">
+        <ProjectItem ReplaceParameters="true" TargetFileName="default.js">default.js</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="sample-configuration.js">sample-configuration.js</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="scenario1.js">scenario1.js</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="scenario2.js">scenario2.js</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="scenario3.js">scenario3.js</ProjectItem>
+      </Folder>
+      <Folder Name="Microsoft.WinJS.4.0" TargetFolderName="Microsoft.WinJS.4.0">
+        <Folder Name="css" TargetFolderName="css">
+          <ProjectItem ReplaceParameters="true" TargetFileName="ui-dark.css">ui-dark.css</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="ui-light.css">ui-light.css</ProjectItem>
+        </Folder>
+        <Folder Name="js" TargetFolderName="js">
+          <Folder Name="en-US" TargetFolderName="en-US">
+            <ProjectItem ReplaceParameters="true" TargetFileName="ui.strings.js">ui.strings.js</ProjectItem>
+          </Folder>
+          <ProjectItem ReplaceParameters="true" TargetFileName="WinJS.intellisense.js">WinJS.intellisense.js</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="WinJS.intellisense-setup.js">WinJS.intellisense-setup.js</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="ui.js">ui.js</ProjectItem>
+		  <ProjectItem ReplaceParameters="true" TargetFileName="base.js">base.js</ProjectItem>
+        </Folder>
+      </Folder>
+      <Folder Name="sample-utils" TargetFolderName="sample-utils">
+        <ProjectItem ReplaceParameters="true" TargetFileName="footer.html">footer.html</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="header.html">header.html</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="sample-utils.js">sample-utils.js</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="scenario-select.css">scenario-select.css</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="scenario-select.html">scenario-select.html</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="default.html">default.html</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="package.appxmanifest">package.appxmanifest</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

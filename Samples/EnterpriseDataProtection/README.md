@@ -21,7 +21,7 @@ This sample will not pass WACK because it uses a special-use capability.
 
 ## System requirements
 
-Windows 10
+Windows 10 build 10500 or higher
 
 ## Build the sample
 

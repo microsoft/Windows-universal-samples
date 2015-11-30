@@ -8,8 +8,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>8.2</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.10586.0</WindowsTargetPlatformMinVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <ItemGroup Label="ProjectConfigurations">
@@ -237,6 +237,21 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\en-CA\Resources.resw">
+      <Link>Strings\en-CA\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\en-IN\Resources.resw">
+      <Link>Strings\en-IN\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\en-AU\Resources.resw">
+      <Link>Strings\en-AU\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
     <PRIResource Include="..\..\shared\Strings\en-US\Resources.resw">
       <Link>Strings\en-US\Resources.resw</Link>
     </PRIResource>
@@ -262,7 +277,9 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="adventureworkscommands.xml" />
+    <Xml Include="..\..\shared\AdventureWorksCommands.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.2">
+  <CommandSet xml:lang="en-us" Name="AdventureWorksCommandSet_en-us">
+    <AppName> Adventure Works </AppName>
+    <Example> Show trip to London </Example>
+
+    <Command Name="showTripToDestination">
+      <Example> Show trip to London </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> show [my] trip to {destination} </ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> show [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Showing trip to {destination} </Feedback>
+      <Navigate />
+    </Command>
+
+    <Command Name="whenIsTripToDestination">
+      <Example> When is my trip to Las Vegas?</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> when is [my] trip to {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> when is [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Looking for trip to {destination}</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+    
+    <Command Name="cancelTripToDestination">
+      <Example> Cancel my trip to Las Vegas </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> cancel [my] trip to {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> cancel [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Cancelling trip to {destination}</Feedback>
+    <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <PhraseList Label="destination">
+      <Item>London</Item>
+      <Item>Las Vegas</Item>
+      <Item>Melbourne</Item>
+      <Item>Yosemite National Park</Item>
+    </PhraseList>
+  </CommandSet>
+
+  <CommandSet xml:lang="en-gb" Name="AdventureWorksCommandSet_en-gb">
+    <AppName> Adventure Works </AppName>
+    <Example> Show trip to London </Example>
+
+    <Command Name="showTripToDestination">
+      <Example> Show trip to London </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> show [my] trip to {destination} </ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> show [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Showing trip to {destination} </Feedback>
+      <Navigate Target="foo"/>
+    </Command>
+
+    <Command Name="whenIsTripToDestination">
+      <Example> When is my trip to Las Vegas?</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> when is [my] trip to {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> when is [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Looking for trip to {destination}</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <Command Name="cancelTripToDestination">
+      <Example> Cancel my trip to Las Vegas </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> cancel [my] trip to {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> cancel [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Cancelling trip to {destination}</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <PhraseList Label="destination">
+      <Item>London</Item>
+      <Item>Las Vegas</Item>
+      <Item>Melbourne</Item>
+      <Item>Yosemite National Park</Item>
+    </PhraseList>
+  </CommandSet>
+
+  <CommandSet xml:lang="en-au" Name="AdventureWorksCommandSet_en-au">
+    <AppName> Adventure Works </AppName>
+    <Example> Show trip to London </Example>
+
+    <Command Name="showTripToDestination">
+      <Example> Show trip to London </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> show [my] trip to {destination} </ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> show [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Showing trip to {destination} </Feedback>
+      <Navigate Target="foo"/>
+    </Command>
+
+    <Command Name="whenIsTripToDestination">
+      <Example> When is my trip to Las Vegas?</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> when is [my] trip to {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> when is [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Looking for trip to {destination}</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <Command Name="cancelTripToDestination">
+      <Example> Cancel my trip to Las Vegas </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> cancel [my] trip to {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> cancel [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Cancelling trip to {destination}</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <PhraseList Label="destination">
+      <Item>London</Item>
+      <Item>Las Vegas</Item>
+      <Item>Melbourne</Item>
+      <Item>Yosemite National Park</Item>
+    </PhraseList>
+  </CommandSet>
+
+  <CommandSet xml:lang="en-in" Name="AdventureWorksCommandSet_en-in">
+    <AppName> Adventure Works </AppName>
+    <Example> Show trip to London </Example>
+
+    <Command Name="showTripToDestination">
+      <Example> Show trip to London </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> show [my] trip to {destination} </ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> show [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Showing trip to {destination} </Feedback>
+      <Navigate Target="foo"/>
+    </Command>
+
+    <Command Name="whenIsTripToDestination">
+      <Example> When is my trip to Las Vegas?</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> when is [my] trip to {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> when is [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Looking for trip to {destination}</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <Command Name="cancelTripToDestination">
+      <Example> Cancel my trip to Las Vegas </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> cancel [my] trip to {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> cancel [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Cancelling trip to {destination}</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <PhraseList Label="destination">
+      <Item>London</Item>
+      <Item>Las Vegas</Item>
+      <Item>Melbourne</Item>
+      <Item>Yosemite National Park</Item>
+    </PhraseList>
+  </CommandSet>
+
+  <CommandSet xml:lang="en-ca" Name="AdventureWorksCommandSet_en-ca">
+    <AppName> Adventure Works </AppName>
+    <Example> Show trip to London </Example>
+
+    <Command Name="showTripToDestination">
+      <Example> Show trip to London </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> show [my] trip to {destination} </ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> show [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Showing trip to {destination} </Feedback>
+      <Navigate Target="foo"/>
+    </Command>
+
+    <Command Name="whenIsTripToDestination">
+      <Example> When is my trip to Las Vegas?</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> when is [my] trip to {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> when is [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Looking for trip to {destination}</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <Command Name="cancelTripToDestination">
+      <Example> Cancel my trip to Las Vegas </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> cancel [my] trip to {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> cancel [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <Feedback> Cancelling trip to {destination}</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <PhraseList Label="destination">
+      <Item>London</Item>
+      <Item>Las Vegas</Item>
+      <Item>Melbourne</Item>
+      <Item>Yosemite National Park</Item>
+    </PhraseList>
+  </CommandSet>
+
+  <CommandSet xml:lang="fr-fr" Name="AdventureWorksCommandSet_fr-fr">
+    <AppName> Adventure Works </AppName>
+    <Example>Montrer mon voyage à Londres </Example>
+
+    <Command Name="showTripToDestination">
+      <Example>Montrer mon voyage à Londres</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> montrer [mon] voyage à {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> montrer [mon] {builtin:AppName} voyage à {destination} </ListenFor>
+      <Feedback>Voici les détails du votre voyage à {destination}</Feedback>
+      <Navigate Target="foo"/>
+    </Command>
+
+    <Command Name="whenIsTripToDestination">
+      <Example>Quand a lieu mon voyage à Las Vegas?</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase">quand a lieu [mon] voyage à {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified">quand a lieu [mon] {builtin:AppName} voyage à {destination}</ListenFor>
+      <Feedback>Le chercher pour votre voyage à {destination} est en cours</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <Command Name="cancelTripToDestination">
+      <Example>Annuler mon voyage à Las Vegas</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> annuler [mon] voyage à {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> annuler [mon] {builtin:AppName} voyage à {destination} </ListenFor>
+      <Feedback>L'annulation du votre voyage à {destination} est en cours</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <PhraseList Label="destination">
+      <Item>London</Item>
+      <Item>Melbourne</Item>
+      <Item>Yosemite National Park</Item>
+    </PhraseList>
+  </CommandSet>
+
+  <CommandSet xml:lang="it-it" Name="AdventureWorksCommandSet_it-it">
+    <AppName> Adventure Works </AppName>
+    <Example> Mostra il viaggio a Londra </Example>
+
+    <Command Name="showTripToDestination">
+      <Example> Mostra viaggio Londra </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> mostra il [mio] viaggio a {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> mostra il [mio] viaggio di {builtin:AppName} a {destination}</ListenFor>
+      <Feedback> Mostro il viaggio a {destination}</Feedback>
+      <Navigate Target="foo"/>
+    </Command>
+
+    <Command Name="whenIsTripToDestination">
+      <Example>Quando è il mio viaggio a Las Vegas?</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> quando è il [mio] viaggio a {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> quando è il [mio] viaggio di {builtin:AppName} a {destination}</ListenFor>
+      <Feedback> Ricerca del viaggio a {destination} in corso </Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <Command Name="cancelTripToDestination">
+      <Example> Annulla il mio viaggio a Las Vegas </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> annulla il [mio] viaggio a {destination} </ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> annulla il [mio] viaggio di {builtin:AppName} a {destination}</ListenFor>
+      <Feedback> Sto annullando il viaggio a {destination} </Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <PhraseList Label="destination">
+      <Item>London</Item>
+      <Item>Melbourne</Item>
+      <Item>Yosemite National Park</Item>
+    </PhraseList>
+  </CommandSet>
+
+
+  <CommandSet xml:lang="de-de" Name="AdventureWorksCommandSet_de-de">
+    <AppName> Adventure Works </AppName>
+    <Example>Zeige Reise nach London</Example>
+
+    <Command Name="showTripToDestination">
+      <Example> Meine Reise nach London zeigen</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase">[Meine] Reise nach {destination} zeigen.</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified">[Meine] {builtin:AppName} Reise nach {destination} zeigen.</ListenFor>
+      <Feedback> Zeige Reise nach {destination}</Feedback>
+      <Navigate Target="foo"/>
+    </Command>
+
+    <Command Name="whenIsTripToDestination">
+      <Example>Wann ist meine Reise nach Las Vegas?</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> wann ist [meine] Reise nach {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> wann ist [meine] {builtin:AppName} Reise nach {destination}</ListenFor>
+      <Feedback> Auf der Suche nach Reise nach {destination}</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <Command Name="cancelTripToDestination">
+      <Example>Meine Reise nach Las Vegas abbrechen</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> [Meine] Reise nach {destination} abbrechen</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> [Meine] {builtin:AppName} Reise nach {destination} abbrechen</ListenFor>
+      <Feedback> Reise nach {destination} abbrechen</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <PhraseList Label="destination">
+      <Item>London</Item>
+      <Item>Las Vegas</Item>
+      <Item>Melbourne</Item>
+      <Item>Yosemite National Park</Item>
+    </PhraseList>
+  </CommandSet>
+
+  <CommandSet xml:lang="es-es" Name="AdventureWorksCommandSet_es-es">
+    <AppName> Adventure Works </AppName>
+    <Example>Mostrar viaje a Londres</Example>
+
+    <Command Name="showTripToDestination">
+      <Example> Mostrar viaje a Londres </Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> mostrar [mi] viaje a {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> mostrar [mi] {builtin:AppName} viaje a {destination}</ListenFor>
+      <Feedback> Mostrando viaje a {destination}</Feedback>
+      <Navigate Target="foo"/>
+    </Command>
+
+    <Command Name="whenIsTripToDestination">
+      <Example>¿Cuándo es mi viaje a Las Vegas?</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> cuando es [mi] viaje a {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> cuando es [mi] {builtin:AppName} viaje a {destination}</ListenFor>
+      <Feedback>Buscando viaje a {destination}</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <Command Name="cancelTripToDestination">
+      <Example>Cancelar mi viaje a Las Vegas</Example>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> cancelar [mi] viaje a {destination}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> cancelar [mi] {builtin:AppName} viaje a {destination}</ListenFor>
+      <Feedback> Viaje a {destination} cancelado </Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <PhraseList Label="destination">
+      <Item>London</Item>
+      <Item>Las Vegas</Item>
+      <Item>Melbourne</Item>
+      <Item>Yosemite National Park</Item>
+    </PhraseList>
+  </CommandSet>
+
+  <CommandSet xml:lang="zh-cn" Name="AdventureWorksCommandSet_zh-cn">
+    <AppName> Adventure Works </AppName>
+    <Example>显示伦敦之行</Example>
+
+    <Command Name="showTripToDestination">
+      <Example>显示伦敦之行</Example>
+      <ListenFor>显示[我]去{destination}的旅行</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified">显示[我]{builtin:AppName}去{destination}的旅行</ListenFor>
+      <Feedback>显示{destination}之行</Feedback>
+      <Navigate Target="foo"/>
+    </Command>
+
+    <Command Name="whenIsTripToDestination">
+      <Example>我的拉斯维加斯之旅的时间？</Example>
+      <ListenFor>[我]前往{destination}的旅行是什么时候</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified">显示[我]{builtin:AppName}前往{destination}的旅行是什么时候</ListenFor>
+      <Feedback>查询{destination}之行</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <Command Name="cancelTripToDestination">
+      <Example>取消我的拉斯维加斯之旅</Example>
+      <ListenFor>取消[我的]{destination}之旅</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified">取消[我的]{builtin:AppName}{destination}之旅</ListenFor>
+      <Feedback>取消{destination}之行</Feedback>
+      <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
+    </Command>
+
+    <PhraseList Label="destination">
+      <Item>London</Item>
+      <Item>Las Vegas</Item>
+      <Item>Melbourne</Item>
+      <Item>Yosemite National Park</Item>
+    </PhraseList>
+  </CommandSet>
+</VoiceCommands>

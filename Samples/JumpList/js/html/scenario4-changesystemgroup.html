@@ -1,0 +1,52 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario4-changesystemgroup.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Change the system group
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                Select whether the system shows items based on whether they have been recently accessed,
+                are frequently accessed, or if the system should not suggest any items.
+            </p>
+            <div style="margin-top: 10px;">
+                <label for="SystemGroup_Recent">
+                    <input type="radio" id="SystemGroup_Recent" name="SystemGroup" class="win-radio" />Recent (default)
+                </label>
+            </div>
+            <div>
+                <label for="SystemGroup_Frequent">
+                    <input type="radio" id="SystemGroup_Frequent" name="SystemGroup" class="win-radio" />Frequent
+                </label>
+            </div>
+            <div>
+                <label for="SystemGroup_None">
+                    <input type="radio" id="SystemGroup_None" name="SystemGroup" class="win-radio" />None
+                </label>
+            </div>
+
+            <p>
+                Note: Until an app has accessed files it is associated with, there will be no contents in
+                the system group. The button below will create some files and access them for the sake of
+                the sample.
+            </p>
+            <button id="PrepareSampleFiles" class="win-button">Prepare Sample Files</button>
+        </div>
+    </div>
+</body>
+
+</html>
