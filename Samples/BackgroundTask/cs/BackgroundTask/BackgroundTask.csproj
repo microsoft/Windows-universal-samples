@@ -103,9 +103,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="SampleConfiguration.cs" />
-    <Compile Include="Scenario1_SampleBackgroundTask.xaml.cs">
-      <DependentUpon>Scenario1_SampleBackgroundTask.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Scenario1_SampleBackgroundTask.xaml.cs" />
     <Compile Include="Scenario2_SampleBackgroundTaskWithCondition.xaml.cs">
       <DependentUpon>Scenario2_SampleBackgroundTaskWithCondition.xaml</DependentUpon>
     </Compile>
@@ -117,6 +115,9 @@
     </Compile>
     <Compile Include="Scenario3_ServicingCompleteTask.xaml.cs">
       <DependentUpon>Scenario3_ServicingCompleteTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario6_StorageChangeTriggerTask.xaml.cs">
+      <DependentUpon>Scenario6_StorageChangeTriggerTask.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -134,12 +135,6 @@
       <Link>MainPage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\..\shared\Scenario1_SampleBackgroundTask.xaml">
-      <Link>Scenario1_SampleBackgroundTask.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>
-      </SubType>
     </Page>
     <Page Include="..\..\shared\Scenario2_SampleBackgroundTaskWithCondition.xaml">
       <Link>Scenario2_SampleBackgroundTaskWithCondition.xaml</Link>
@@ -168,6 +163,15 @@
       <Link>Styles\Styles.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario1_SampleBackgroundTask.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\shared\Scenario6_StorageChangeTriggerTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Link>Scenario6_StorageChangeTriggerTask.xaml</Link>
     </Page>
   </ItemGroup>
   <ItemGroup>

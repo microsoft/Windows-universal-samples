@@ -90,7 +90,7 @@ namespace SDKTemplate
 
             // Set up the query and retrieve files.
             StorageFolder testFolder     = KnownFolders.PicturesLibrary;
-            testFolder = await testFolder.GetFolderAsync("EnumTest");
+//            testFolder = await testFolder.GetFolderAsync("EnumTest");
 
             var query = testFolder.CreateItemQueryWithOptions(queryOptions);
 

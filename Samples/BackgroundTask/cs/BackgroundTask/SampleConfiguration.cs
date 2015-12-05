@@ -28,7 +28,8 @@ namespace SDKTemplate
             new Scenario() { Title="Background Task with Condition", ClassType=typeof(SampleBackgroundTaskWithCondition)},
             new Scenario() { Title="Servicing Complete Task", ClassType=typeof(ServicingCompleteTask)},
             new Scenario() { Title="Background Task with Time Trigger", ClassType=typeof(TimeTriggeredTask) },
-            new Scenario() { Title="Background Task with Application Trigger", ClassType=typeof(ApplicationTriggerTask) }
+            new Scenario() { Title="Background Task with Application Trigger", ClassType=typeof(ApplicationTriggerTask) },
+            new Scenario() { Title="Storage Changed Trigger Task", ClassType=typeof(StorageChangeTriggerTask) }
         };
     }
 
@@ -65,6 +66,12 @@ namespace SDKTemplate
         public static string ApplicationTriggerTaskProgress = "";
         public static string ApplicationTriggerTaskResult = "";
         public static bool ApplicationTriggerTaskRegistered = false;
+
+        public const string StorageChangeTriggerTaskName = "StorageChangeTriggerTask";
+        public const string StorageChangeTriggerTaskEntryPoint = "Tasks.StorageChangeBackgroundTask";
+        public static string StorageChangeTriggerTaskProgress = "";
+        public static string StorageChangeTriggerTaskResult = "";
+        public static bool StorageChangeTriggerTaskRegistered = false;
 
         /// <summary>
         /// Register a background task with the specified taskEntryPoint, name, trigger,
