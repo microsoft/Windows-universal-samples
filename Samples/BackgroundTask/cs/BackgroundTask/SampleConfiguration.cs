@@ -83,9 +83,10 @@ namespace SDKTemplate
         /// <param name="condition">An optional conditional event that must be true for the task to fire.</param>
         public static async Task<BackgroundTaskRegistration> RegisterBackgroundTask(String taskEntryPoint, String name, IBackgroundTrigger trigger, IBackgroundCondition condition)
         {
+            BackgroundAccessStatus bg_status;
             if (TaskRequiresBackgroundAccess(name))
             {
-                await BackgroundExecutionManager.RequestAccessAsync();
+                bg_status = await BackgroundExecutionManager.RequestAccessAsync();
             }
 
             var builder = new BackgroundTaskBuilder();
@@ -105,6 +106,10 @@ namespace SDKTemplate
                 builder.CancelOnConditionLoss = true;
             }
 
+            // Exceptions for Windows 10 UWP
+            // Trigger was not set: Value does not fall within the expected range.
+            // Trigger is set to a StorageLibraryContentChangedTrigger on Windows: Element not found
+            // Task was not properly registered in the manifest: Not Registered
             BackgroundTaskRegistration task = builder.Register();
 
             UpdateBackgroundTaskStatus(name, true);
