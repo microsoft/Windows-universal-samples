@@ -39,7 +39,7 @@ namespace Tasks
         //
         // The Run method is the entry point of a background task.
         //
-        public void Run(IBackgroundTaskInstance taskInstance)
+        public async void Run(IBackgroundTaskInstance taskInstance)
         {
             Debug.WriteLine("Background " + taskInstance.Task.Name + " Starting...");
 
@@ -65,7 +65,7 @@ namespace Tasks
 
             _periodicTimer = ThreadPoolTimer.CreatePeriodicTimer(new TimerElapsedHandler(PeriodicTimerCallback), TimeSpan.FromSeconds(1));
 
-//            await ScanLibraryFilesAsync();
+            await ScanLibraryFilesAsync();
         }
 
         //
@@ -115,12 +115,17 @@ namespace Tasks
         private async Task ScanLibraryFilesAsync()
         {
             var appSettings = ApplicationData.Current.LocalSettings;
+#if false
             if (!appSettings.Values.ContainsKey("LastSearchTime"))
             {
                 //We haven't done a first run crawl, so lets just bail out
                 return;
             }
+
             DateTimeOffset lastSearchTime = (DateTimeOffset)appSettings.Values["LastSearchTime"];
+#else
+            DateTimeOffset lastSearchTime = DateTimeOffset.MinValue;
+#endif
 
             var supportedExtensions = new List<String>()
             {
@@ -136,19 +141,25 @@ namespace Tasks
             //This is important because we are going to use indexer only properties for the query
             //later
             option.IndexerOption = IndexerOption.OnlyUseIndexer;
-            option.FolderDepth = FolderDepth.Shallow;
+            option.FolderDepth = FolderDepth.Deep;  // must have this to get the camera roll, which is below the pictures lib
             //Set the filter to things that have changed since the lastSearchTime. Note that the 
             //time must be formatted as Zulu time as shown here.
             string timeFilter = "System.Search.GatherTime:>=" +
                               lastSearchTime.ToString("yyyy\\-MM\\-dd\\THH\\:mm\\:ss\\Z");
             option.ApplicationSearchFilter += timeFilter;
 
+            Debug.WriteLine("filter is " + option.ApplicationSearchFilter + " ... " );
 
             StorageFileQueryResult resultSet = photos.CreateFileQueryWithOptions(option);
             lastSearchTime = DateTimeOffset.UtcNow;
 
             uint currentIndex = 0;
             const uint stepSize = 10;
+
+            uint totalFiles = await resultSet.GetItemCountAsync();
+
+            Debug.WriteLine(String.Format("found {0} files", totalFiles));
+
             IReadOnlyList<StorageFile> files = await resultSet.GetFilesAsync(currentIndex,
                 stepSize);
             currentIndex += stepSize;

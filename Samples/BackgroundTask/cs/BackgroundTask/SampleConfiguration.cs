@@ -125,8 +125,7 @@ namespace SDKTemplate
         public static void UnregisterBackgroundTasks(String name)
         {
             //
-            // Loop through all background tasks and unregister any with SampleBackgroundTaskName or
-            // SampleBackgroundTaskWithConditionName.
+            // Loop through all background tasks and unregister any with the name the caller passes
             //
             foreach (var cur in BackgroundTaskRegistration.AllTasks)
             {
@@ -162,6 +161,9 @@ namespace SDKTemplate
                     break;
                 case ApplicationTriggerTaskName:
                     ApplicationTriggerTaskRegistered = registered;
+                    break;
+                case StorageChangeTriggerTaskName:
+                    StorageChangeTriggerTaskRegistered = registered;
                     break;
             }
         }
@@ -211,7 +213,8 @@ namespace SDKTemplate
         public static bool TaskRequiresBackgroundAccess(String name)
         {
             if ((name == TimeTriggeredTaskName) ||
-                (name == ApplicationTriggerTaskName))
+                (name == ApplicationTriggerTaskName) ||
+                (name == StorageChangeTriggerTaskName))
             {
                 return true;
             }
