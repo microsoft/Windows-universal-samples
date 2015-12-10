@@ -47,7 +47,7 @@ Scenario3_CurrentStepCount::Scenario3_CurrentStepCount() : rootPage(MainPage::Cu
         // This can also be done using Windows::Devices::Enumeration::DeviceInformation::FindAllAsync
         create_task(Pedometer::GetDefaultAsync).then([this](task<Pedometer^> task)
         {
-            auto pedometer = task.get();
+            pedometer = task.get();
             if (nullptr == pedometer)
             {
                 rootPage->NotifyUser("No pedometers available", NotifyType::ErrorMessage);
@@ -71,50 +71,30 @@ Scenario3_CurrentStepCount::Scenario3_CurrentStepCount() : rootPage(MainPage::Cu
 /// <param name="e">unused</param>
 void Scenario3_CurrentStepCount::GetCurrentButton_Click(Platform::Object^ /*sender*/, Windows::UI::Xaml::RoutedEventArgs^ /*e*/)
 {
-    DateTime fromBeginning = {};
-
     // Disable the button while we get the history
     GetCurrentButton->IsEnabled = false;
 
-    rootPage->NotifyUser("Retrieving history to get current step counts", NotifyType::StatusMessage);
+    auto currentReadings = pedometer->GetCurrentReadings();
 
-    // Use history as an alternative to get the last known step counts.
-    create_task(Pedometer::GetSystemHistoryAsync(fromBeginning)).then([this](task<IVectorView<PedometerReading^>^> task)
+    // To define the step goal, figure out the current step count
+    auto totalStepCount = 0;
+    bool updateTimestamp = true;
+    for (auto kind = PedometerStepKind::Unknown; kind <= PedometerStepKind::Running; kind++)
     {
-        try
+        if (currentReadings->HasKey(kind))
         {
-            auto historyReadings = task.get();
-            unsigned int totalStepCount = 0;
-            unsigned int historySize = historyReadings->Size;
+            auto reading = currentReadings->Lookup(kind);
+            totalStepCount += reading->CumulativeSteps;
 
-            if (historySize > 0)
+            if (updateTimestamp)
             {
-                unsigned int lastIndex = historySize - 1;
-
                 auto timestampFormatter = ref new DateTimeFormatter("day month year hour minute second");
-                ScenarioOutput_Timestamp->Text = timestampFormatter->Format(historyReadings->GetAt(lastIndex)->Timestamp);
-
-                // History always returns chronological list of step counts for all PedometerStepKinds
-                // And each record represents cumulative step counts for that step kind.
-                // So we will use the last set of records - that gives us the cumulative step count for each kind
-                for (PedometerStepKind kind = PedometerStepKind::Running; kind >= PedometerStepKind::Unknown; kind--)
-                {
-                    PedometerReading^ lastReading = historyReadings->GetAt(lastIndex);
-                    // decrement index to get to record corresponding to a different stepkind
-                    lastIndex--;
-                    totalStepCount += lastReading->CumulativeSteps;
-                }
+                ScenarioOutput_Timestamp->Text = timestampFormatter->Format(reading->Timestamp);
+                updateTimestamp = false;
             }
-
-            ScenarioOutput_TotalStepCount->Text = totalStepCount.ToString();
-
-            rootPage->NotifyUser("Hit the 'Get steps count' Button", NotifyType::StatusMessage);
         }
-        catch (AccessDeniedException^)
-        {
-            rootPage->NotifyUser("Access to the default pedometer is denied", NotifyType::ErrorMessage);
-        }
-    });
+    }
+    ScenarioOutput_TotalStepCount->Text = totalStepCount.ToString();
 
     // Re-enable the button
     GetCurrentButton->IsEnabled = true;

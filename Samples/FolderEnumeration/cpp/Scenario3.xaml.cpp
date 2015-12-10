@@ -86,8 +86,11 @@ void Scenario3::GetFilesButton_Click(Object^ sender, RoutedEventArgs^ e)
     */
 
     // Set up the query and retrieve files.
-    auto query = KnownFolders::PicturesLibrary->CreateFileQueryWithOptions(queryOptions);
-    create_task(query->GetFilesAsync()).then([=](IVectorView<StorageFile^>^ files)
+    create_task(KnownFolders::GetFolderForUserAsync(nullptr /* current user */, KnownFolderId::PicturesLibrary)).then([this, queryOptions](StorageFolder^ picturesFolder)
+    {
+        auto query = picturesFolder->CreateFileQueryWithOptions(queryOptions);
+        return query->GetFilesAsync();
+    }).then([=](IVectorView<StorageFile^>^ files)
     {
         std::for_each(begin(files), end(files), [=](StorageFile^ file)
         {

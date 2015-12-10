@@ -18,33 +18,35 @@
     // Get the Pictures library and enumerate all its files using the prefetch APIs
     function getFiles() {
         clearOutput();
-
-        var search = Windows.Storage.Search;
-        var fileProperties = Windows.Storage.FileProperties;
-
-        // Create query options with common query sort order and file type filter.
-        var fileTypeFilter = [".jpg", ".png", ".bmp", ".gif"];
-        var queryOptions = new search.QueryOptions(search.CommonFileQuery.orderByName, fileTypeFilter);
-
-        // Set up property prefetch - use the PropertyPrefetchOptions for top-level properties
-        // and an array for additional properties.
-        var imageProperties = fileProperties.PropertyPrefetchOptions.imageProperties;
         var copyrightProperty = "System.Copyright";
         var colorSpaceProperty = "System.Image.ColorSpace";
         var additionalProperties = [copyrightProperty, colorSpaceProperty];
-        queryOptions.setPropertyPrefetch(imageProperties, additionalProperties);
+        Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.picturesLibrary).then(function (picturesLibrary) {
+            var search = Windows.Storage.Search;
+            var fileProperties = Windows.Storage.FileProperties;
 
-        // Set up thumbnail prefetch if needed, e.g. when creating a picture gallery view.
-        /*
-        var thumbnailMode = fileProperties.ThumbnailMode.picturesView;
-        var requestedSize = 190;
-        var thumbnailOptions = fileProperties.ThumbnailOptions.useCurrentScale;
-        queryOptions.setThumbnailPrefetch(thumbnailMode, requestedSize, thumbnailOptions);
-        */
+            // Create query options with common query sort order and file type filter.
+            var fileTypeFilter = [".jpg", ".png", ".bmp", ".gif"];
+            var queryOptions = new search.QueryOptions(search.CommonFileQuery.orderByName, fileTypeFilter);
 
-        // Query the Pictures library.
-        var query = Windows.Storage.KnownFolders.picturesLibrary.createFileQueryWithOptions(queryOptions);
-        query.getFilesAsync().done(function (items) {
+            // Set up property prefetch - use the PropertyPrefetchOptions for top-level properties
+            // and an array for additional properties.
+            var imageProperties = fileProperties.PropertyPrefetchOptions.imageProperties;
+
+            queryOptions.setPropertyPrefetch(imageProperties, additionalProperties);
+
+            // Set up thumbnail prefetch if needed, e.g. when creating a picture gallery view.
+            /*
+            var thumbnailMode = fileProperties.ThumbnailMode.picturesView;
+            var requestedSize = 190;
+            var thumbnailOptions = fileProperties.ThumbnailOptions.useCurrentScale;
+            queryOptions.setThumbnailPrefetch(thumbnailMode, requestedSize, thumbnailOptions);
+            */
+
+            // Query the Pictures library.
+            var query = picturesLibrary.createFileQueryWithOptions(queryOptions);
+            return query.getFilesAsync();
+        }).done(function (items) {
             // Output the query results
             items.forEach(function (item) {
                 // Create an entry in the list for the item

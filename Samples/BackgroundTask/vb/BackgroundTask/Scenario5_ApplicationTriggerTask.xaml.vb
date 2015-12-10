@@ -47,6 +47,7 @@ Namespace Global.SDKTemplate
                 End If
             Next
 
+            trigger = New ApplicationTrigger()
             UpdateUI()
         End Sub
 
@@ -56,7 +57,6 @@ Namespace Global.SDKTemplate
         ''' <param name="sender"></param>
         ''' <param name="e"></param>
         Private Async Sub RegisterBackgroundTask(sender As Object, e As RoutedEventArgs)
-            trigger = New ApplicationTrigger()
             Dim task = BackgroundTaskSample.RegisterBackgroundTask(BackgroundTaskSample.SampleBackgroundTaskEntryPoint, BackgroundTaskSample.ApplicationTriggerTaskName, trigger, Nothing)
             Await task
             AttachProgressAndCompletedHandlers(task.Result)

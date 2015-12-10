@@ -144,7 +144,7 @@ namespace CompositionVisual
                     //
                     foreach (var child in _currentVisual.Children)
                     {
-                        child.RotationAngle = 45.0f;
+                        child.RotationAngleInDegrees = 45.0f;
                         child.CenterPoint = new Vector3(_currentVisual.Size.X / 2, _currentVisual.Size.Y / 2, 0);
                         break;
                     }
@@ -311,15 +311,15 @@ namespace CompositionVisual
             //
             // The outer rectangle is always white
             //
-            var visual = _compositor.CreateSolidColorVisual();
+            var visual = _compositor.CreateSpriteVisual();
             element.Children.InsertAtTop(visual);
-            visual.Color = Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF);
+            visual.Brush = _compositor.CreateColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF));
             visual.Size = new Vector2(100.0f, 100.0f);
 
             //
             // The inner rectangle is inset from the outer by three pixels all around
             //
-            var child = _compositor.CreateSolidColorVisual();
+            var child = _compositor.CreateSpriteVisual();
             visual.Children.InsertAtTop(child);
             child.Offset = new Vector3(3.0f, 3.0f, 0.0f);
             child.Size = new Vector2(94.0f, 94.0f);
@@ -330,7 +330,7 @@ namespace CompositionVisual
             byte red = (byte)(0xFF * (0.2f + (_random.NextDouble() / 0.8f)));
             byte green = (byte)(0xFF * (0.2f + (_random.NextDouble() / 0.8f)));
             byte blue = (byte)(0xFF * (0.2f + (_random.NextDouble() / 0.8f)));
-            child.Color = Color.FromArgb(0xFF, red, green, blue);
+            child.Brush = _compositor.CreateColorBrush(Color.FromArgb(0xFF, red, green, blue));
 
             //
             // Make the subtree root visual partially transparent. This will cause each visual in the subtree

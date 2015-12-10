@@ -241,7 +241,10 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/AppServices">App services</a></td>
+  <td><a href="Samples/JumpList">Jump list customization</a></td>
   <td><a href="Samples/ShareSource">Sharing content source app</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/ShareTarget">Sharing content target app</a></td>
  </tr>
 </table>
@@ -275,7 +278,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/CustomUsbDeviceAccess">Custom USB device</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/DeviceEnumeration">Device enumeration</a></td>
+  <td><a href="Samples/DeviceEnumerationAndPairing">Device enumeration and pairing</a></td>
   <td><a href="Samples/IoT-GPIO">General Purpose Input/Output (GPIO)</a></td>
   <td><a href="Samples/Gyrometer">Gyrometer</a></td>
  </tr>

@@ -25,6 +25,8 @@ namespace SDKTemplate
     public:
         Scenario3_CurrentStepCount();
     private:
+        Windows::Devices::Sensors::Pedometer^ pedometer;
+
         SDKTemplate::MainPage^ rootPage;
         void GetCurrentButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
     };

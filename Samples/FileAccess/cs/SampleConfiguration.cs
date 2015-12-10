@@ -48,7 +48,8 @@ namespace SDKTemplate
         {
             try
             {
-                sampleFile = await KnownFolders.PicturesLibrary.GetFileAsync(filename);
+                StorageFolder picturesLibrary = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
+                sampleFile = await picturesLibrary.GetFileAsync(filename);
             }
             catch (FileNotFoundException)
             {
