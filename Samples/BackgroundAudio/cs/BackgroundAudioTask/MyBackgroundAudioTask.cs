@@ -218,7 +218,7 @@ namespace BackgroundAudioTask
         /// <param name="args"></param>
         void smtc_PropertyChanged(SystemMediaTransportControls sender, SystemMediaTransportControlsPropertyChangedEventArgs args)
         {
-            // TODO: If soundlevel turns to muted, app can choose to pause the music
+            // If soundlevel turns to muted, app can choose to pause the music
         }
 
         /// <summary>
@@ -382,9 +382,6 @@ namespace BackgroundAudioTask
         {
             smtc.PlaybackStatus = MediaPlaybackStatus.Changing;
             playbackList.MovePrevious();
-
-            // TODO: Work around playlist bug that doesn't continue playing after a switch; remove later
-            BackgroundMediaPlayer.Current.Play();
         }
 
         /// <summary>
@@ -394,10 +391,6 @@ namespace BackgroundAudioTask
         {
             smtc.PlaybackStatus = MediaPlaybackStatus.Changing;
             playbackList.MoveNext();
-
-            // TODO: Work around playlist bug that doesn't continue playing after a switch; remove later
-            BackgroundMediaPlayer.Current.Play();
-
         }
         #endregion
 
@@ -477,9 +470,6 @@ namespace BackgroundAudioTask
                 Debug.WriteLine("Skipping to track " + index);
                 smtc.PlaybackStatus = MediaPlaybackStatus.Changing;
                 playbackList.MoveTo((uint)index);
-
-                // TODO: Work around playlist bug that doesn't continue playing after a switch; remove later
-                BackgroundMediaPlayer.Current.Play();
                 return;
             }
 

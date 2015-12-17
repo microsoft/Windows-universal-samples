@@ -8,8 +8,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.10586.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -169,6 +169,9 @@
     <ClInclude Include="Scenario8_Receipt.xaml.h">
       <DependentUpon>..\shared\Scenario8_Receipt.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario9_B2B.xaml.h">
+      <DependentUpon>..\shared\Scenario9_B2B.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
@@ -188,6 +191,7 @@
     <Page Include="..\shared\Scenario6_LargeCatalogProduct.xaml" />
     <Page Include="..\shared\Scenario7_AppListingURI.xaml" />
     <Page Include="..\shared\Scenario8_Receipt.xaml" />
+    <Page Include="..\shared\Scenario9_B2B.xaml" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -233,6 +237,9 @@
     </ClCompile>
     <ClCompile Include="Scenario8_Receipt.xaml.cpp">
       <DependentUpon>..\shared\Scenario8_Receipt.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario9_B2B.xaml.cpp">
+      <DependentUpon>..\shared\Scenario9_B2B.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

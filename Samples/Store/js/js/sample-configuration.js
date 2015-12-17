@@ -14,6 +14,7 @@
         { url: "/html/scenario6-largeAppCatalog.html", title: "Large catalog product" },
         { url: "/html/scenario7-appListingURI.html", title: "App listing URI" },
         { url: "/html/scenario8-receipt.html", title: "Receipt" },
+        { url: "/html/scenario9-b2b.html", title: "Business to Business" },
     ];
 
     function configureSimulatorAsync(filename) {

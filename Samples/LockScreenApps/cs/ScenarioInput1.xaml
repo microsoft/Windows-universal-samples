@@ -16,40 +16,26 @@
 
   <StackPanel>
     <TextBlock Style="{StaticResource DescriptionTextStyle}" TextWrapping="Wrap">
-      In this scenario, the app will request to be added to the lock screen, remove itself from the lock screen, and 
-      query its current lock screen status.
+      In this scenario, the app will request that the user add it to the lock screen.
       <LineBreak/>
       <LineBreak/>
-      Lock screen apps are apps that can notify users when the users are not using their device. Lock screen apps are 
-      special in that they have permission to run in the background. For example, lock screen apps can run code 
-      periodically on a timer every 15 minutes, maintain a TCP socket in the background, or receive push notifications 
-      from the Windows Push Notification Service (WNS). Lock screen apps have the ability to show updates to the user 
+      Lock screen apps are apps that can notify users when the users are not using their device.
+      Lock screen apps have the ability to show updates to the user 
       on the lock screen by updating badge counts and glyphs, showing toast notifications, or by allowing a text-only 
-      version of their Start tile to appear on the lock screen. An app must be granted permission by the user to be a 
-      lock screen app. 
+      version of their Start tile to appear on the lock screen.
       <LineBreak/>
       <LineBreak/>
-      There are only 7 lock screen slots and an app may request to fill a single one of these. Of these seven apps, one 
-      may also take the detailed status slot on the lock screen. If the user declines to give your app permission, you 
-      may not prompt again. Apps can query the current state of the setting and may prompt the user a single time to see 
-      if they want to allow the app to appear on their lock screen.  Subsequent attempts to prompt the user will result 
-      in returning the app's current status, without showing any UI to the user.
-      <LineBreak/>
-      <LineBreak/>
-      An app must set the appropriate information in the manifest in order to be background capable. In the Visual Studio 
+      An app must set the appropriate information in the manifest in order to appear on the lock screen. In the Visual Studio 
       manifest editor, under the Lock screen notifications option in the Application UI tab, set the value to either 
       "Badge" or "Badge and Tile Text". Additionally, apps must specify a background task of type "Control channel", 
       "Timer", or "Push notification" in the Declarations tab. For more information, see the "Background Tasks" sample.
       <LineBreak/>
       <LineBreak/>
-      Users can manually add the app to the lock screen (or remove it) through the Personalize page in PC Settings, or 
-      in the Permissions tab in the app's Settings page. When declared in the manifest as described above, the app will 
-      appear in the list of allowable lock screen apps on the Lock screen tab of the Personalize page. 
+      To appear on the lock screen, the user must add it manually
+      through the Notifications page in Settings.
+      When declared in the manifest as described above, the app will 
+      appear in the list of allowable lock screen apps.
     </TextBlock>
-    <StackPanel Orientation="Horizontal" >
-      <Button x:Name="RequestLockScreenAccess" Content="Request lock screen access"/>
-      <Button x:Name="RemoveLockScreenAccess" Content="Remove lock screen access"/>
-      <Button x:Name="QueryLockScreenAccess" Content="Query lock screen access"/>
-    </StackPanel>
+    <Button Content="Go to Notification Settings" Click="{x:Bind OpenNotificationSettings}" Margin="0,10,0,0"/>
   </StackPanel>
 </Page>

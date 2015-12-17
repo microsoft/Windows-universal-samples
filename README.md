@@ -1,5 +1,5 @@
 <!---
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619979&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619979
 --->
 
 # Universal Windows app samples
@@ -43,20 +43,19 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 
 ## Samples by category
 
+### App settings
+
 <table>
- <tr>
-  <th colspan="3" align="left">App settings</th>
- </tr>
  <tr>
   <td><a href="Samples/Package">App package information</a></td>
   <td><a href="Samples/ApplicationData">Application data</a></td>
   <td><a href="Samples/Store">Store</a></td>
  </tr>
 </table>
+
+### Audio, video, and camera
+
 <table>
- <tr>
-  <th colspan="3" align="left">Audio, video, and camera</th>
- </tr>
  <tr>
   <td><a href="Samples/AdaptiveStreaming">Adaptive streaming</a></td>
   <td><a href="Samples/AdvancedCasting">Advanced casting</a></td>
@@ -106,25 +105,28 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/MediaImport">Windows media import</a></td>
  </tr>
 </table>
+
+### Communications
+
 <table>
  <tr>
-  <th colspan="3" align="left">Communications</th>
- </tr>
- <tr>
   <td><a href="Samples/BluetoothRfcommChat">Bluetooth RFCOMM chat</a></td>
+  <td><a href="Samples/CallerID">Caller ID</a></td>
   <td><a href="Samples/CommunicationBlockAndFilter">Communication blocking and filtering</a></td>
-  <td><a href="Samples/PhoneCall">Phone call</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/PhoneCall">Phone call</a></td>
   <td><a href="Samples/SimpleCommunication">Real-time communication</a></td>
   <td><a href="Samples/SmsSendAndReceive">SMS send and receive</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/VoIP">Voice over IP (VoIP)</a></td>
  </tr>
 </table>
+
+### Contacts and calendar
+
 <table>
- <tr>
-  <th colspan="3" align="left">Contacts and calendar</th>
- </tr>
  <tr>
   <td><a href="Samples/Appointments">Appointment calendar</a></td>
   <td><a href="Samples/ContactCards">Contact cards</a></td>
@@ -134,10 +136,10 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/UserDataAccountManager">UserDataAccountManager</a></td>
  </tr>
 </table>
+
+### Controls, layout, and text
+
 <table>
- <tr>
-  <th colspan="3" align="left">Controls, layout, and text</th>
- </tr>
  <tr>
   <td><a href="Samples/XamlAutoSuggestBox">AutoSuggestBox migration</a></td>
   <td><a href="Samples/Clipboard">Clipboard</a></td>
@@ -192,10 +194,10 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/ResizeAppView">Window resizing</a></td>
  </tr>
 </table>
+
+### Custom user interactions
+
 <table>
- <tr>
-  <th colspan="3" align="left">Custom user interactions</th>
- </tr>
  <tr>
   <td><a href="Samples/BasicInput">Basic input</a></td>
   <td><a href="Samples/ComplexInk">Complex inking</a></td>
@@ -210,10 +212,10 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/TouchKeyboardTextInput">Touch keyboard text input</a></td>
  </tr>
 </table>
+
+### Data
+
 <table>
- <tr>
-  <th colspan="3" align="left">Data</th>
- </tr>
  <tr>
   <td><a href="Samples/MsBlobBuilder">Blobs</a></td>
   <td><a href="Samples/Compression">Compression</a></td>
@@ -235,10 +237,10 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/XmlLite">XmlLite</a></td>
  </tr>
 </table>
+
+### Deep links and app-to-app communication
+
 <table>
- <tr>
-  <th colspan="3" align="left">Deep links and app-to-app communication</th>
- </tr>
  <tr>
   <td><a href="Samples/AppServices">App services</a></td>
   <td><a href="Samples/JumpList">Jump list customization</a></td>
@@ -248,10 +250,10 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/ShareTarget">Sharing content target app</a></td>
  </tr>
 </table>
+
+### Devices and sensors
+
 <table>
- <tr>
-  <th colspan="3" align="left">Devices and sensors</th>
- </tr>
  <tr>
   <td><a href="Samples/Accelerometer">Accelerometer</a></td>
   <td><a href="Samples/ActivitySensor">Activity detection sensor</a></td>
@@ -311,10 +313,10 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/SimpleOrientationSensor">Simple orientation sensor</a></td>
  </tr>
 </table>
+
+### Files, folders, and libraries
+
 <table>
- <tr>
-  <th colspan="3" align="left">Files, folders, and libraries</th>
- </tr>
  <tr>
   <td><a href="Samples/FileAccess">File access</a></td>
   <td><a href="Samples/FileThumbnails">File and folder thumbnail</a></td>
@@ -331,19 +333,19 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/SemanticTextQuery">Semantic text query</a></td>
  </tr>
 </table>
+
+### Gaming
+
 <table>
- <tr>
-  <th colspan="3" align="left">Gaming</th>
- </tr>
  <tr>
   <td><a href="Samples/Simple3DGameDX">Direct3D game</a></td>
   <td><a href="Samples/Simple3DGameXaml">DirectX and XAML game</a></td>
  </tr>
 </table>
+
+### Globalization and localization
+
 <table>
- <tr>
-  <th colspan="3" align="left">Globalization and localization</th>
- </tr>
  <tr>
   <td><a href="Samples/ApplicationResources">Application resources and localization</a></td>
   <td><a href="Samples/Calendar">Calendar</a></td>
@@ -364,10 +366,10 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/Unicode">Unicode string processing</a></td>
  </tr>
 </table>
+
+### Graphics and animation
+
 <table>
- <tr>
-  <th colspan="3" align="left">Graphics and animation</th>
- </tr>
  <tr>
   <td><a href="Samples/XamlAnimatedGif">Animated GIF playback (XAML)</a></td>
   <td><a href="Samples/AnimationLibrary">Animation library (HTML)</a></td>
@@ -384,10 +386,10 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/XamlTransform3DParallax">Transform3D parallax</a></td>
  </tr>
 </table>
+
+### Identity, security, and encryption
+
 <table>
- <tr>
-  <th colspan="3" align="left">Identity, security, and encryption</th>
- </tr>
  <tr>
   <td><a href="Samples/PasswordVault">Credential locker</a></td>
   <td><a href="Samples/CredentialPicker">Credential picker</a></td>
@@ -400,38 +402,41 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/Personalization">Lock screen personalization</a></td>
+  <td><a href="Samples/MicrosoftPassport">Microsoft Passport and Windows Hello</a></td>
   <td><a href="Samples/SmartCard">Smart cards</a></td>
-  <td><a href="Samples/UserInfo">User information</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/UserInfo">User information</a></td>
   <td><a href="Samples/UserConsentVerifier">UserConsentVerifier</a></td>
   <td><a href="Samples/WebAccountManagement">Web account management</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/WebAuthenticationBroker">WebAuthenticationBroker</a></td>
  </tr>
 </table>
+
+### Launching and background tasks
+
 <table>
- <tr>
-  <th colspan="3" align="left">Launching and background tasks</th>
- </tr>
  <tr>
   <td><a href="Samples/AssociationLaunching">Association launching</a></td>
   <td><a href="Samples/BackgroundTask">Background task</a></td>
  </tr>
 </table>
+
+### Maps and location
+
 <table>
- <tr>
-  <th colspan="3" align="left">Maps and location</th>
- </tr>
  <tr>
   <td><a href="Samples/Geolocation">Geolocation</a></td>
   <td><a href="Samples/Geotag">Geotag</a></td>
   <td><a href="Samples/MapControl">MapControl</a></td>
  </tr>
 </table>
+
+### Navigation
+
 <table>
- <tr>
-  <th colspan="3" align="left">Navigation</th>
- </tr>
  <tr>
   <td><a href="Samples/BackButton">Back Button</a></td>
   <td><a href="Samples/XamlMasterDetail">Master/detail</a></td>
@@ -443,10 +448,10 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/PackagedContent">XHR, handling navigation errors, and URL schemes</a></td>
  </tr>
 </table>
+
+### Networking and web services
+
 <table>
- <tr>
-  <th colspan="3" align="left">Networking and web services</th>
- </tr>
  <tr>
   <td><a href="Samples/BackgroundTransfer">Background transfer</a></td>
   <td><a href="Samples/DatagramSocket">DatagramSocket</a></td>
@@ -476,37 +481,37 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/WiFiScan">Wi-Fi scanning</a></td>
  </tr>
 </table>
+
+### Platform architecture
+
 <table>
- <tr>
-  <th colspan="3" align="left">Platform architecture</th>
- </tr>
  <tr>
   <td><a href="Samples/ProxyStubsForWinRTComponents">In-process component authoring</a></td>
   <td><a href="Samples/WRLInProcessWinRTComponent">In-process component authoring</a></td>
   <td><a href="Samples/WRLOutOfProcessWinRTComponent">Out-of-process component authoring</a></td>
  </tr>
 </table>
+
+### Speech and Cortana
+
 <table>
- <tr>
-  <th colspan="3" align="left">Speech and Cortana</th>
- </tr>
  <tr>
   <td><a href="Samples/CortanaVoiceCommand">Cortana voice command</a></td>
   <td><a href="Samples/SpeechRecognitionAndSynthesis">Speech recognition and synthesis</a></td>
  </tr>
 </table>
+
+### Threading
+
 <table>
- <tr>
-  <th colspan="3" align="left">Threading</th>
- </tr>
  <tr>
   <td><a href="Samples/WebWorkers">JavaScript Web Workers app multithreading</a></td>
  </tr>
 </table>
+
+### Tiles, toasts, and notifications
+
 <table>
- <tr>
-  <th colspan="3" align="left">Tiles, toasts, and notifications</th>
- </tr>
  <tr>
   <td><a href="Samples/Notifications">Notifications</a></td>
   <td><a href="Samples/SecondaryTiles">Secondary tiles</a></td>

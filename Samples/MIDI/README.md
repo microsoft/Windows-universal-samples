@@ -36,6 +36,6 @@ AudioGraph, Video editing
 
 To debug the app and then run it, press F5 or use **Debug** \> **Start Debugging**. To run the app without debugging, press Ctrl+F5 or use **Debug** \> **Start Without Debugging**.
 
-## Known Issues
+## Sounds for the MIDI synth
 
-There is currently a problem with deploying the Microsoft.Midi.GmDls framework package within the SDK. Because of this, the GS Synth is not currently usable. The code required for the reference framework is in MIDI.csproj, but has been commented out until the issue with deploying the framework package is resolved.
+The sounds for the inbox MIDI GS synth are available when the Microsoft.Midi.GmDls framework package is added to the package. This SDK sample has the reference added to the project already. Note that this requires Visual Studio 2015 Update 1 [https://www.visualstudio.com/news/vs2015-update1-vs] to be installed for the appx to deploy successfully.

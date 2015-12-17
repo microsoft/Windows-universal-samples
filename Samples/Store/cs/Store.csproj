@@ -11,8 +11,8 @@
     <AssemblyName>Store</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -127,6 +127,9 @@
     <Compile Include="Scenario6_LargeCatalogProduct.xaml.cs">
       <DependentUpon>Scenario6_LargeCatalogProduct.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario9_B2B.xaml.cs">
+      <DependentUpon>Scenario9_B2B.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -181,6 +184,11 @@
     </Page>
     <Page Include="..\shared\Scenario6_LargeCatalogProduct.xaml">
       <Link>Scenario6_LargeCatalogProduct.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario9_B2B.xaml">
+      <Link>Scenario9_B2B.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
