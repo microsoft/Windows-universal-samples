@@ -35,7 +35,7 @@ For more info about the programming models, platforms, languages, and APIs demon
 
 ## Contributions
 
-These samples are direct from the feature teams and we welcome your input on issues and suggestions for new samples.  At this time we are not accepting new samples from the public, but check back here as we evolve our contribution model.
+These samples are direct from the feature teams and we welcome your input on issues and suggestions for new samples.  At this time, we are not accepting new samples from the public, but check back here as we evolve our contribution model.
 
 ## See also
 
