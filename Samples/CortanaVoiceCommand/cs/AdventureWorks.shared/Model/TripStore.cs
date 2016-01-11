@@ -41,6 +41,8 @@ namespace AdventureWorks.Model
     /// </summary>
     public class TripStore
     {
+        private bool loaded;
+
         /// <summary>
         /// Persist the loaded trips in memory for use in other parts of the application.
         /// </summary>
@@ -48,6 +50,7 @@ namespace AdventureWorks.Model
 
         public TripStore()
         {
+            loaded = false;
             Trips = new ObservableCollection<Trip>();
         }
 
@@ -72,6 +75,13 @@ namespace AdventureWorks.Model
         /// </summary>
         public async Task LoadTrips()
         {
+            // Ensure that we don't load trip data more than once.
+            if (loaded)
+            {
+                return;
+            }
+            loaded = true;
+
             StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
             this.trips.Clear();
 

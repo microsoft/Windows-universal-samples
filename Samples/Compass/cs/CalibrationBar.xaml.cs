@@ -25,7 +25,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.Devices.Sensors;
 
-namespace Microsoft.Samples.Devices.Sensors.Calibration
+namespace SDKTemplate
 {
     public sealed partial class CalibrationBar : Page
     {

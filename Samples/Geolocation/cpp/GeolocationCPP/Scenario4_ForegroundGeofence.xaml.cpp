@@ -206,7 +206,7 @@ void Scenario4::OnGeofenceStateChanged(GeofenceMonitor^ sender, Platform::Object
         ref new DispatchedHandler(
         [this, reports]()
     {
-        for each (auto report in reports)
+        for (auto report : reports)
         {
             GeofenceState state = report->NewState;
 

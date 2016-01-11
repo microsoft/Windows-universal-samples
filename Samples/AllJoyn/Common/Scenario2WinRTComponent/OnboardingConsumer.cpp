@@ -111,12 +111,8 @@ IAsyncOperation<OnboardingJoinSessionResult^>^ OnboardingConsumer::JoinSessionAs
     return create_async([serviceInfo, watcher]() -> OnboardingJoinSessionResult^
     {
         auto result = ref new OnboardingJoinSessionResult();
-        result->Status = AllJoynStatus::Ok;
-        result->Consumer = nullptr;
-
         result->Consumer = ref new OnboardingConsumer(watcher->BusAttachment);
         result->Status = result->Consumer->JoinSession(serviceInfo);
-
         return result;
     });
 }
@@ -131,19 +127,31 @@ IAsyncOperation<OnboardingConfigureWiFiResult^>^ OnboardingConsumer::ConfigureWi
         size_t argCount = 3;
         alljoyn_msgarg inputs = alljoyn_msgarg_array_create(argCount);
 
-        TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(inputs, 0), "s", interfaceMemberSSID);
-        TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(inputs, 1), "s", interfaceMemberPassphrase);
-        TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(inputs, 2), "n", interfaceMemberAuthType);
-        
-        QStatus status = alljoyn_proxybusobject_methodcall(
-            ProxyBusObject,
-            "org.alljoyn.Onboarding",
-            "ConfigureWiFi",
-            inputs,
-            argCount,
-            message,
-            c_MessageTimeoutInMilliseconds,
-            0);
+        QStatus status = ER_OK;
+        status = static_cast<QStatus>(TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(inputs, 0), "s", interfaceMemberSSID));
+	
+        if (ER_OK == status)
+        {
+            status = static_cast<QStatus>(TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(inputs, 1), "s", interfaceMemberPassphrase));
+        }
+	
+        if (ER_OK == status)
+        {
+            status = static_cast<QStatus>(TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(inputs, 2), "n", interfaceMemberAuthType));
+        }
+	
+        if (ER_OK == status)
+        {
+            status = alljoyn_proxybusobject_methodcall(
+                ProxyBusObject,
+                "org.alljoyn.Onboarding",
+                "ConfigureWiFi",
+                inputs,
+                argCount,
+                message,
+                c_MessageTimeoutInMilliseconds,
+                0);
+        }
         result->Status = static_cast<int>(status);
         if (ER_OK == status) 
         {
@@ -152,7 +160,7 @@ IAsyncOperation<OnboardingConfigureWiFiResult^>^ OnboardingConsumer::ConfigureWi
             status = static_cast<QStatus>(TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 0), "n", &argument0));
             result->Status2 = argument0;
 
-            if (status != ER_OK)
+            if (ER_OK != status)
             {
                 result->Status = static_cast<int>(status);
             }
@@ -188,16 +196,19 @@ IAsyncOperation<OnboardingConnectResult^>^ OnboardingConsumer::ConnectAsync()
         size_t argCount = 0;
         alljoyn_msgarg inputs = alljoyn_msgarg_array_create(argCount);
 
-        
-        QStatus status = alljoyn_proxybusobject_methodcall(
-            ProxyBusObject,
-            "org.alljoyn.Onboarding",
-            "Connect",
-            inputs,
-            argCount,
-            message,
-            c_MessageTimeoutInMilliseconds,
-            0);
+        QStatus status = ER_OK;
+        if (ER_OK == status)
+        {
+            status = alljoyn_proxybusobject_methodcall(
+                ProxyBusObject,
+                "org.alljoyn.Onboarding",
+                "Connect",
+                inputs,
+                argCount,
+                message,
+                c_MessageTimeoutInMilliseconds,
+                0);
+        }
         result->Status = static_cast<int>(status);
         
         alljoyn_message_destroy(message);
@@ -216,16 +227,19 @@ IAsyncOperation<OnboardingOffboardResult^>^ OnboardingConsumer::OffboardAsync()
         size_t argCount = 0;
         alljoyn_msgarg inputs = alljoyn_msgarg_array_create(argCount);
 
-        
-        QStatus status = alljoyn_proxybusobject_methodcall(
-            ProxyBusObject,
-            "org.alljoyn.Onboarding",
-            "Offboard",
-            inputs,
-            argCount,
-            message,
-            c_MessageTimeoutInMilliseconds,
-            0);
+        QStatus status = ER_OK;
+        if (ER_OK == status)
+        {
+            status = alljoyn_proxybusobject_methodcall(
+                ProxyBusObject,
+                "org.alljoyn.Onboarding",
+                "Offboard",
+                inputs,
+                argCount,
+                message,
+                c_MessageTimeoutInMilliseconds,
+                0);
+        }
         result->Status = static_cast<int>(status);
         
         alljoyn_message_destroy(message);
@@ -244,16 +258,19 @@ IAsyncOperation<OnboardingGetScanInfoResult^>^ OnboardingConsumer::GetScanInfoAs
         size_t argCount = 0;
         alljoyn_msgarg inputs = alljoyn_msgarg_array_create(argCount);
 
-        
-        QStatus status = alljoyn_proxybusobject_methodcall(
-            ProxyBusObject,
-            "org.alljoyn.Onboarding",
-            "GetScanInfo",
-            inputs,
-            argCount,
-            message,
-            c_MessageTimeoutInMilliseconds,
-            0);
+        QStatus status = ER_OK;
+        if (ER_OK == status)
+        {
+            status = alljoyn_proxybusobject_methodcall(
+                ProxyBusObject,
+                "org.alljoyn.Onboarding",
+                "GetScanInfo",
+                inputs,
+                argCount,
+                message,
+                c_MessageTimeoutInMilliseconds,
+                0);
+        }
         result->Status = static_cast<int>(status);
         if (ER_OK == status) 
         {
@@ -262,7 +279,7 @@ IAsyncOperation<OnboardingGetScanInfoResult^>^ OnboardingConsumer::GetScanInfoAs
             status = static_cast<QStatus>(TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 0), "q", &argument0));
             result->Age = argument0;
 
-            if (status != ER_OK)
+            if (ER_OK != status)
             {
                 result->Status = static_cast<int>(status);
             }
@@ -270,7 +287,7 @@ IAsyncOperation<OnboardingGetScanInfoResult^>^ OnboardingConsumer::GetScanInfoAs
             status = static_cast<QStatus>(TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 1), "a(sn)", &argument1));
             result->ScanList = argument1;
 
-            if (status != ER_OK)
+            if (ER_OK != status)
             {
                 result->Status = static_cast<int>(status);
             }
@@ -315,7 +332,7 @@ IAsyncOperation<OnboardingGetVersionResult^>^ OnboardingConsumer::GetVersionAsyn
                 if (ER_OK == status)
                 {
                     uint16 argument;
-                    TypeConversionHelpers::GetAllJoynMessageArg(value, "q", &argument);
+                    status = static_cast<QStatus>(TypeConversionHelpers::GetAllJoynMessageArg(value, "q", &argument));
 
                     propertyContext->SetValue(argument);
                 }
@@ -352,7 +369,7 @@ IAsyncOperation<OnboardingGetStateResult^>^ OnboardingConsumer::GetStateAsync()
                 if (ER_OK == status)
                 {
                     int16 argument;
-                    TypeConversionHelpers::GetAllJoynMessageArg(value, "n", &argument);
+                    status = static_cast<QStatus>(TypeConversionHelpers::GetAllJoynMessageArg(value, "n", &argument));
 
                     propertyContext->SetValue(argument);
                 }
@@ -389,7 +406,7 @@ IAsyncOperation<OnboardingGetLastErrorResult^>^ OnboardingConsumer::GetLastError
                 if (ER_OK == status)
                 {
                     OnboardingLastError^ argument;
-                    TypeConversionHelpers::GetAllJoynMessageArg(value, "(ns)", &argument);
+                    status = static_cast<QStatus>(TypeConversionHelpers::GetAllJoynMessageArg(value, "(ns)", &argument));
 
                     propertyContext->SetValue(argument);
                 }
@@ -432,7 +449,7 @@ void OnboardingConsumer::CallConnectionResultSignalHandler(_In_ const alljoyn_in
         eventArgs->MessageInfo = callInfo;
 
         Onboarding^ argument0;
-        TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 0), "(ns)", &argument0);
+        (void)TypeConversionHelpers::GetAllJoynMessageArg(alljoyn_message_getarg(message, 0), "(ns)", &argument0);
 
         eventArgs->Arg = argument0;
 
@@ -485,6 +502,25 @@ int32 OnboardingConsumer::JoinSession(_In_ AllJoynServiceInfo^ serviceInfo)
         return AllJoynStatus::Fail;
     }
 
+    RETURN_IF_QSTATUS_ERROR(AllJoynBusObjectManager::GetBusObject(m_nativeBusAttachment, AllJoynHelpers::PlatformToMultibyteString(ServiceObjectPath).data(), &m_busObject));
+   
+    if (!AllJoynBusObjectManager::BusObjectIsRegistered(m_nativeBusAttachment, m_busObject))
+    {
+        RETURN_IF_QSTATUS_ERROR(alljoyn_busobject_addinterface(BusObject, description));
+    }
+
+    QStatus result = AddSignalHandler(
+        m_nativeBusAttachment,
+        description,
+        "ConnectionResult",
+        [](const alljoyn_interfacedescription_member* member, PCSTR srcPath, alljoyn_message message) { UNREFERENCED_PARAMETER(srcPath); CallConnectionResultSignalHandler(member, message); });
+    if (ER_OK != result)
+    {
+        return static_cast<int32>(result);
+    }
+
+    SourceInterfaces[description] = m_weak;
+
     unsigned int noneMechanismIndex = 0;
     bool authenticationMechanismsContainsNone = m_busAttachment->AuthenticationMechanisms->IndexOf(AllJoynAuthenticationMechanism::None, &noneMechanismIndex);
     QCC_BOOL interfaceIsSecure = alljoyn_interfacedescription_issecure(description);
@@ -497,7 +533,12 @@ int32 OnboardingConsumer::JoinSession(_In_ AllJoynServiceInfo^ serviceInfo)
         // is specified, or if None is not present in AuthenticationMechanisms.
         if (!authenticationMechanismsContainsNone || interfaceIsSecure)
         {
-            alljoyn_proxybusobject_secureconnection(ProxyBusObject, QCC_FALSE);
+            RETURN_IF_QSTATUS_ERROR(alljoyn_proxybusobject_secureconnection(ProxyBusObject, QCC_FALSE));
+            RETURN_IF_QSTATUS_ERROR(AllJoynBusObjectManager::TryRegisterBusObject(m_nativeBusAttachment, BusObject, true));
+        }
+        else
+        {
+            RETURN_IF_QSTATUS_ERROR(AllJoynBusObjectManager::TryRegisterBusObject(m_nativeBusAttachment, BusObject, false));
         }
     }
     else
@@ -508,28 +549,14 @@ int32 OnboardingConsumer::JoinSession(_In_ AllJoynServiceInfo^ serviceInfo)
         {
             return static_cast<int32>(ER_BUS_NO_AUTHENTICATION_MECHANISM);
         }
+        else
+        {
+            RETURN_IF_QSTATUS_ERROR(AllJoynBusObjectManager::TryRegisterBusObject(m_nativeBusAttachment, BusObject, false));
+        }
     }
 
-    RETURN_IF_QSTATUS_ERROR(AllJoynBusObjectManager::GetBusObject(m_nativeBusAttachment, AllJoynHelpers::PlatformToMultibyteString(ServiceObjectPath).data(), &m_busObject));
     RETURN_IF_QSTATUS_ERROR(alljoyn_proxybusobject_addinterface(ProxyBusObject, description));
-
-    if (!AllJoynBusObjectManager::BusObjectIsRegistered(m_nativeBusAttachment, m_busObject))
-    {
-        RETURN_IF_QSTATUS_ERROR(alljoyn_busobject_addinterface(BusObject, description));
-    }
-
-    QStatus result = AddSignalHandler(
-        m_nativeBusAttachment,
-        description,
-        "ConnectionResult",
-        [](const alljoyn_interfacedescription_member* member, PCSTR srcPath, alljoyn_message message) { UNREFERENCED_PARAMETER(srcPath); CallConnectionResultSignalHandler(member, message); });
-    if (result != ER_OK)
-    {
-        return static_cast<int32>(result);
-    }
-
-    SourceInterfaces[description] = m_weak;
-    RETURN_IF_QSTATUS_ERROR(AllJoynBusObjectManager::TryRegisterBusObject(m_nativeBusAttachment, BusObject, true));
+    
     m_signals->Initialize(BusObject, m_sessionId);
 
     return AllJoynStatus::Ok;

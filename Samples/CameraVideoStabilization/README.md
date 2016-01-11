@@ -1,6 +1,6 @@
-﻿<!---
+<!---
   category: AudioVideoAndCamera 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620519&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620519
 --->
 
 # Video stabilization sample
@@ -31,6 +31,8 @@ This sample also implements a custom UI to better simulate the experience that a
 [Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
 
 [Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
+
+[Using the Video Stabilization effect](http://go.microsoft.com/fwlink/?LinkId=627235)
 
 **Reference**
 

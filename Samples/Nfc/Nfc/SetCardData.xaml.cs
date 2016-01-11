@@ -172,39 +172,62 @@ namespace NfcSample
                 // Construct SELECT PPSE response and set as auto responder
                 rules.Add(new SmartCardAutomaticResponseApdu(
                     new SelectCommand(AID_PPSE, 0x00).GetBuffer(),
-                    new TlvEntry(0x6F, new TlvEntry[] {
+                    new TlvEntry(0x6F, new TlvEntry[]
+                    {
                         new TlvEntry(0x84, "2PAY.SYS.DDF01"),
-                        new TlvEntry(0xA5, new TlvEntry[] {
+                        new TlvEntry(0xA5, new TlvEntry[]
+                        {
                             new TlvEntry(0xBF0C,
-                                new TlvEntry(0x61, new TlvEntry[] {
+                                new TlvEntry(0x61, new TlvEntry[]
+                                {
                                     new TlvEntry(0x4F, aidBuffer),
-                                    new TlvEntry(0x87, new byte[] { 0x01 })} ) )})}).GetData(0x9000).AsBuffer()));
+                                    new TlvEntry(0x87, new byte[] { 0x01 })
+                                }))
+                        })
+                    }).GetData(0x9000).AsBuffer()));
 
-                // Construct SELECT AID response and set as auto responder
-                rules.Add(new SmartCardAutomaticResponseApdu(
-                    new SelectCommand(aid, 0x00).GetBuffer(),
-                    new TlvEntry(0x6F, new TlvEntry[] {
-                        new TlvEntry(0x84, aidBuffer),
-                        new TlvEntry(0xA5, new TlvEntry[] {
-                            new TlvEntry(0x50, "CREDIT CARD")})}).GetData(0x9000).AsBuffer()));
-
-                if (optMC.IsChecked ?? false)
+                if (optV.IsChecked ?? false)
                 {
+                    rules.Add(new SmartCardAutomaticResponseApdu(
+                        new SelectCommand(aid, 0x00).GetBuffer(),
+                        new TlvEntry(0x6F, new TlvEntry[]
+                        {
+                            new TlvEntry(0x84, aidBuffer),
+                            new TlvEntry(0xA5, new TlvEntry[]
+                            {
+                                new TlvEntry(0x50, "CREDIT CARD"),
+                                new TlvEntry(0x9F38, new byte[] { 0x9F, 0x66, 0x02 })
+                            })
+                        }).GetData(0x9000).AsBuffer()));
+
                     var ruleGpo = new SmartCardAutomaticResponseApdu(
                         NfcUtils.HexStringToBytes("80A80000").AsBuffer(),
-                        new TlvEntry(0x77, new TlvEntry[] {
-                            new TlvEntry(0x82, new byte[] { 0x00, 0x00 }),
-                            new TlvEntry(0x94, new byte[] { 0x08, 0x01, 0x01, 0x00 }),
-                            new TlvEntry(0xD7, new byte[] { 0x00, 0x00, 0x80 }) }).GetData(0x9000).AsBuffer());
+                        new TlvEntry(0x80, new byte[] { 0x00, 0x80, 0x08, 0x01, 0x01, 0x00 }).GetData(0x9000).AsBuffer());
                     ruleGpo.AppletId = aidBuffer;
                     ruleGpo.ShouldMatchLength = false;
                     rules.Add(ruleGpo);
                 }
-                else if (optV.IsChecked ?? false)
+                else
                 {
+                    rules.Add(new SmartCardAutomaticResponseApdu(
+                        new SelectCommand(aid, 0x00).GetBuffer(),
+                        new TlvEntry(0x6F, new TlvEntry[]
+                        {
+                            new TlvEntry(0x84, aidBuffer),
+                            new TlvEntry(0xA5, new TlvEntry[]
+                            {
+                                new TlvEntry(0x50, "CREDIT CARD")
+                            })
+                        }).GetData(0x9000).AsBuffer()));
+
                     var ruleGpo = new SmartCardAutomaticResponseApdu(
                         NfcUtils.HexStringToBytes("80A80000").AsBuffer(),
-                        new TlvEntry(0x80, new byte[] { 0x00, 0x80, 0x08, 0x01, 0x01, 0x00 }).GetData(0x9000).AsBuffer());
+                        new TlvEntry(0x77, new TlvEntry[]
+                        {
+                            new TlvEntry(0x82, new byte[] { 0x00, 0x00 }),
+                            new TlvEntry(0x94, new byte[] { 0x08, 0x01, 0x01, 0x00 }),
+                            new TlvEntry(0xD7, new byte[] { 0x00, 0x00, 0x80 })
+                        }).GetData(0x9000).AsBuffer());
                     ruleGpo.AppletId = aidBuffer;
                     ruleGpo.ShouldMatchLength = false;
                     rules.Add(ruleGpo);

@@ -1,6 +1,6 @@
 <!---
   category: MapsAndLocation 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=533278&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=533278
 --->
 
 # Geolocation sample

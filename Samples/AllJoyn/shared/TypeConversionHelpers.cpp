@@ -31,7 +31,7 @@
 //-----------------------------------------------------------------------------
 #include "pch.h"
 
-_Check_return_ int32 TypeConversionHelpers::AppendNextCompleteType(_In_ PCSTR signature, _Out_ std::vector<char>* typeSignature)
+_Check_return_ int32 TypeConversionHelpers::AppendNextCompleteType(_In_ PCSTR signature, _Inout_ std::vector<char>* typeSignature)
 {
     if (signature[0] == '\0')
     {
@@ -76,7 +76,7 @@ _Check_return_ int32 TypeConversionHelpers::AppendNextCompleteType(_In_ PCSTR si
     }
 }
 
-_Check_return_ int32 TypeConversionHelpers::GetDictionaryTypeSignatures(_In_ PCSTR signature, _Out_ std::vector<char>* keySignature, _Out_ std::vector<char>* valueSignature)
+_Check_return_ int32 TypeConversionHelpers::GetDictionaryTypeSignatures(_In_ PCSTR signature, _Inout_ std::vector<char>* keySignature, _Inout_ std::vector<char>* valueSignature)
 {
     if ((strlen(signature) < 3) || (signature[0] != 'a') || (signature[1] != '{'))
     {

@@ -1,6 +1,6 @@
 <!---
   category: IdentitySecurityAndEncryption
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620031&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620031
 --->
 
 # Enterprise data protection sample
@@ -21,7 +21,7 @@ This sample will not pass WACK because it uses a special-use capability.
 
 ## System requirements
 
-Windows 10
+Windows 10 build 10500 or higher
 
 ## Build the sample
 

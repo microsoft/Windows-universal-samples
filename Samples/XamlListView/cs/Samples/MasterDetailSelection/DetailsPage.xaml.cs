@@ -38,24 +38,25 @@ namespace ListViewSample
 
             SelectedContact = e.Parameter as Contact;
             // Register for hardware and software back request from the system
-            SystemNavigationManager.GetForCurrentView().BackRequested += OnHardwareBackRequested;
+            SystemNavigationManager systemNavigationManager = SystemNavigationManager.GetForCurrentView();
+            systemNavigationManager.BackRequested += OnBackRequested;
+            systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            SystemNavigationManager.GetForCurrentView().BackRequested -= OnHardwareBackRequested;
+
+            SystemNavigationManager systemNavigationManager = SystemNavigationManager.GetForCurrentView();
+            systemNavigationManager.BackRequested -= OnBackRequested;
+            systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
-        private void OnHardwareBackRequested(object sender, BackRequestedEventArgs e)
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
             // Mark event as handled so we don't get bounced out of the app.
             e.Handled = true;
-            OnBackRequested();
-        }
-        private void OnBackRequested()
-        {
             // Page above us will be our master view.
             // Make sure we are using the "drill out" animation in this transition.
-            Frame.GoBack(new DrillInNavigationTransitionInfo());
+            Frame.Navigate(typeof(MasterDetailSelection), "Back", new EntranceNavigationTransitionInfo());
         }
         void NavigateBackForWideState(bool useTransition)
         {
@@ -89,10 +90,6 @@ namespace ListViewSample
                 // We shouldn't see this page since we are in "wide master-detail" mode.
                 NavigateBackForWideState(useTransition: false);
             }
-        }
-        private void BackMasterView(object sender, RoutedEventArgs e)
-        {
-            OnBackRequested();
         }
         private void DeleteItem(object sender, RoutedEventArgs e)
         {

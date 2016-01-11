@@ -38,6 +38,12 @@
                 addRemovableEventListener(nav, "navigating", this._navigating.bind(this), false);
                 addRemovableEventListener(nav, "navigated", this._navigated.bind(this), false);
 
+                Windows.UI.Core.SystemNavigationManager.getForCurrentView().addEventListener("backrequested", function () {
+                    if (nav.canGoBack) {
+                        nav.back();
+                    }
+                });
+
                 window.onresize = this._resized.bind(this);
 
                 // Event listener for resource context changes: If app resources get
@@ -125,9 +131,14 @@
 
                 _navigated: function () {
                     /// <summary>
-                    /// Animate to show the new page.
+                    /// Animate to show the new page and update Back button.
                     /// </summary>
                     WinJS.UI.Animation.enterPage(this._getAnimationElements()).done();
+
+                    Windows.UI.Core.SystemNavigationManager.getForCurrentView().appViewBackButtonVisibility =
+                        nav.canGoBack ?
+                        Windows.UI.Core.AppViewBackButtonVisibility.visible :
+                        Windows.UI.Core.AppViewBackButtonVisibility.collapsed;
                 },
 
                 _navigating: function (args) {
@@ -152,17 +163,6 @@
                         this._element.appendChild(newElement);
                         this._element.removeChild(oldElement);
                         oldElement.innerText = "";
-
-                        var backButton = this._element.querySelector("header[role=banner] .win-backbutton");
-                        if (backButton) {
-                            backButton.onclick = function () { nav.back(); };
-
-                            if (nav.canGoBack) {
-                                backButton.removeAttribute("disabled");
-                            } else {
-                                backButton.disabled = true;
-                            }
-                        }
 
                         parentedComplete();
                     }.bind(this));

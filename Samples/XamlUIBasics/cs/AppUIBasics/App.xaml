@@ -67,46 +67,6 @@
                 <Setter Property="ZoomMode" Value="Disabled"/>
             </Style>
 
-            <ControlTemplate x:Key="BackButtonTemplate" TargetType="Button">
-                <Grid x:Name="RootGrid">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroup x:Name="CommonStates">
-                            <VisualState x:Name="Normal" />
-                            <VisualState x:Name="PointerOver">
-                                <VisualState.Setters>
-                                    <Setter Target="RootGrid.Background" Value="{ThemeResource SystemControlHighlightBaseLowBrush}" />
-                                </VisualState.Setters>
-                            </VisualState>
-                            <VisualState x:Name="Pressed">
-                                <VisualState.Setters>
-                                    <Setter Target="RootGrid.Background" Value="{ThemeResource SystemControlHighlightBaseMediumLowBrush}" />
-                                </VisualState.Setters>
-                                <Storyboard>
-                                    <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
-                                </Storyboard>
-                            </VisualState>
-                            <VisualState x:Name="Disabled">
-                                <VisualState.Setters>
-                                    <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
-                                </VisualState.Setters>
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateManager.VisualStateGroups>
-                    <ContentPresenter x:Name="ContentPresenter"
-                                              Content="{TemplateBinding Content}"
-                                              ContentTransitions="{TemplateBinding ContentTransitions}"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              Margin="{TemplateBinding Padding}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-                                              AutomationProperties.AccessibilityView="Raw"/>
-                </Grid>
-            </ControlTemplate>
-
-            <Style x:Key="BackButtonStyle" TargetType="Button">
-                <Setter Property="Template" Value="{StaticResource BackButtonTemplate}" />
-            </Style>
-
             <ControlTemplate x:Key="SplitViewTogglePaneButtonTemplate" TargetType="Button">
                 <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
                     <VisualStateManager.VisualStateGroups>
@@ -169,7 +129,6 @@
 
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
-                    <SolidColorBrush x:Key="BackButtonForegroundBrush" Color="White" />
                     <SolidColorBrush x:Key="ControlPageBackgroundBrush" Color="Black" />
                     <SolidColorBrush x:Key="ChromeHighBrush" Color="#FF1F1F1F" />
                     <SolidColorBrush x:Key="BackgroundBrush" Color="#FF000000" />
@@ -177,7 +136,6 @@
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="Light">
-                    <SolidColorBrush x:Key="BackButtonForegroundBrush" Color="Black" />
                     <SolidColorBrush x:Key="ControlPageBackgroundBrush" Color="White" />
                     <SolidColorBrush x:Key="ChromeHighBrush" Color="#FFF9F9F9" />
                     <SolidColorBrush x:Key="BackgroundBrush" Color="#FFFFFFFF" />
@@ -185,7 +143,6 @@
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="HighContrast">
-                    <SolidColorBrush x:Key="BackButtonForegroundBrush" Color="Black" />
                     <SolidColorBrush x:Key="ControlPageBackgroundBrush" Color="{ThemeResource SystemColorWindowColor}" />
                     <SolidColorBrush x:Key="ChromeHighBrush" Color="{ThemeResource SystemColorWindowColor}" />
                     <SolidColorBrush x:Key="BackgroundBrush" Color="{ThemeResource SystemColorWindowColor}" />

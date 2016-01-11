@@ -37,7 +37,7 @@ namespace SDKTemplate
 
         private async void GetFileButton_Click(object sender, RoutedEventArgs e)
         {
-            StorageFolder storageFolder = KnownFolders.PicturesLibrary;
+            StorageFolder storageFolder = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
             StorageFile file = await storageFolder.TryGetItemAsync("sample.dat") as StorageFile;
             if (file != null)
             {

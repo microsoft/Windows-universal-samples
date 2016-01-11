@@ -1,6 +1,6 @@
-﻿<!---
+<!---
   category: AudioVideoAndCamera 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620516&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620516
 --->
 
 # Camera preview frame sample
@@ -25,6 +25,8 @@ Due to the custom UI that this sample implements, any messages intended for the 
 **Conceptual**
 
 [Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
+
+[Get a preview frame](http://go.microsoft.com/fwlink/?LinkId=627229)
 
 **Reference**
 

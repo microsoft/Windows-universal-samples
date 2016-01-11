@@ -1,0 +1,76 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario2.js"></script>
+    <script src="/js/onboardingenumtypes.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>
+                    The Onboarding consumer discovers and connects to an Onboarding producer. 
+                    Once connected, the consumer can pass an SSID and password to the producer to onboard it
+                    by using the "Configure" and "Connect" methods described in the Onboarding Service Framework XML.
+                    You can validate with an AllJoyn device which implements the onboarding interface.
+                    For more information: https://allseenalliance.org/developers/learn/base-services/onboarding/interface
+                </p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <div>Select the type of onboardee:</div>
+            <div>
+                <input id="Radio1" type="radio" name="onboardeeChoices" value="P" /><label for="Radio1">Onboarding Producer</label>
+                <input id="Radio2" type="radio" name="onboardeeChoices" value="D" /><label for="Radio2">Physical Device</label>
+            </div>
+            <div id="scanOptions">
+                <button id="scanButton">Scan</button>
+                <select id="adapterSelect">
+                    <option disabled="disabled" selected="selected">Select Adapter</option>
+                </select>
+            </div>
+            <div id="connectOptions">
+                <button id="connectButton">Connect</button>
+                <select id="softAPNetworkSelect">
+                    <option disabled="disabled" selected="selected">Select Network</option>
+                </select>
+                <input id="softAPPasswordInput" type="password" placeholder="Enter Password..." />
+            </div>
+            <div id="authenticateOptions">
+                <button id="authenticateButton">Authenticate</button>
+                <input id="keyInputText" type="text" placeholder="Enter one-time key..." />
+            </div>
+            <div id="configurationOptions">
+                <div>
+                    SSID
+                    <select id="onboardeeNetworkSelect">
+                        <option disabled="disabled" selected="selected">Select Network</option>
+                    </select>
+                    <select id="onboarderNetworkSelect">
+                        <option disabled="disabled" selected="selected">Select Network</option>
+                    </select>
+                    <input id="ssidInput" type="text" placeholder="Enter SSID..." />
+                    <input id="manualSsidCheckbox" type="checkbox" /><label for="manualSsidCheckbox">Enter Manually</label>
+                </div>
+                <div>
+                    Password
+                    <input id="configurationPasswordInput" type="password" />
+                </div>
+                <div>
+                    Auth Type
+                    <select id="authenticationSelect">
+                        <option disabled="disabled" selected="selected">Select Type</option>
+                    </select>
+                </div>
+                <div><button id="onboardButton">Onboard</button></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

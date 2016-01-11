@@ -202,7 +202,6 @@ namespace AnimatedGif
 
             private int _currentFrameIndex;
             private int _completedLoops;
-            private bool _disposeRequested;
 
             private BitmapDecoder _bitmapDecoder;
             private ImageProperties _imageProperties;
@@ -243,7 +242,6 @@ namespace AnimatedGif
                 {
                     _currentFrameIndex = 0;
                     _completedLoops = 0;
-                    _disposeRequested = false;
 
                     _animationTimer?.Stop();
 
@@ -276,7 +274,6 @@ namespace AnimatedGif
 
                 var frameIndex = _currentFrameIndex;
                 var frameProperties = _frameProperties[frameIndex];
-                var disposeRequested = _disposeRequested;
 
                 // Increment frame index and loop count
                 _currentFrameIndex++;
@@ -285,9 +282,6 @@ namespace AnimatedGif
                     _completedLoops++;
                     _currentFrameIndex = 0;
                 }
-
-                // Set flag to clear before next frame if necessary
-                _disposeRequested = frameProperties.ShouldDispose;
 
                 // Set up the timer to display the next frame
                 if (_imageProperties.IsAnimated &&
@@ -311,12 +305,22 @@ namespace AnimatedGif
                     );
                 var pixels = pixelData.DetachPixelData();
                 var frameRectangle = frameProperties.Rect;
-                var shouldClear = disposeRequested || frameIndex == 0;
+                var disposeRectangle = Rect.Empty;
+
+                if (frameIndex > 0)
+                {
+                    var previousFrameProperties = _frameProperties[frameIndex - 1];
+                    if (previousFrameProperties.ShouldDispose)
+                    {
+                        // Clear the pixels from the last frame
+                        disposeRectangle = previousFrameProperties.Rect;
+                    }
+                }
 
                 // Compose and display the frame
                 try
                 {
-                    PrepareFrame(pixels, frameRectangle, shouldClear);
+                    PrepareFrame(pixels, frameRectangle, disposeRectangle);
                     UpdateImageSource(frameRectangle);
                 }
                 catch (Exception e) when (_canvasImageSource.Device.IsDeviceLost(e.HResult))
@@ -388,7 +392,7 @@ namespace AnimatedGif
                 }
             }
 
-            private void PrepareFrame(byte[] pixels, Rect frameRectangle, bool clearAccumulation)
+            private void PrepareFrame(byte[] pixels, Rect frameRectangle, Rect disposeRectangle)
             {
                 var sharedDevice = GetSharedDevice();
 
@@ -405,10 +409,14 @@ namespace AnimatedGif
                 using (var drawingSession = _accumulationRenderTarget.CreateDrawingSession())
                 using (frameBitmap)
                 {
-                    if (clearAccumulation)
+                    if (!disposeRectangle.IsEmpty)
                     {
-                        drawingSession.Clear(Colors.Transparent);
+                        using (drawingSession.CreateLayer(1.0f, disposeRectangle))
+                        {
+                            drawingSession.Clear(Colors.Transparent);
+                        }
                     }
+
                     drawingSession.DrawImage(frameBitmap, frameRectangle);
                 }
             }

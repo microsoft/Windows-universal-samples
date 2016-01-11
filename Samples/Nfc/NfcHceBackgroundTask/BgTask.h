@@ -24,17 +24,17 @@ namespace NfcHceBackgroundTask
             Windows::ApplicationModel::Background::IBackgroundTaskInstance^ taskInstance);
 
     private:
-        typedef enum _DoLaunchType
+        typedef enum _LaunchType
         {
             Complete,
             Failed,
             Denied
-        } DoLaunchType;
+        } LaunchType;
 
     private:
         void HandleHceActivation();
 
-        void DoLaunch(DoLaunchType type, LPWSTR wszMessage);
+        void LaunchForegroundApp(LaunchType type, LPWSTR wszMessage);
 
         void EndTask();
 
@@ -46,12 +46,14 @@ namespace NfcHceBackgroundTask
             _In_ Windows::Storage::Streams::IBuffer^ commandApdu,
             _Out_ bool* pfComplete);
 
+        void DebugLogString(Platform::String^ message);
+
         void DebugLog(const wchar_t* pwstrMessage);
 
         void FlushDebugLog();
 
     private:
-        Microsoft::WRL::Wrappers::CriticalSection m_csEventLock;
+        Microsoft::WRL::Wrappers::CriticalSection m_csLock;
         Windows::ApplicationModel::Background::IBackgroundTaskInstance^ m_taskInstance;
         Platform::Agile<Windows::ApplicationModel::Background::BackgroundTaskDeferral> m_deferral;
         Windows::Devices::SmartCards::SmartCardEmulator^ m_emulator;

@@ -297,16 +297,10 @@
     <Content Include="..\..\..\..\SharedContent\media\Samples\ladybug.wmv">
       <Link>Assets\ladybug.wmv</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
-      <Link>Assets\Logo.png</Link>
-    </Content>
     <Content Include="Assets\MediaElement.png" />
     <Content Include="Assets\ninegrid.gif" />
     <Content Include="Assets\Pivot.png" />
     <Content Include="Assets\RelativePanel.png" />
-    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
-      <Link>Assets\SmallLogo.png</Link>
-    </Content>
     <Content Include="..\..\..\..\SharedContent\media\splash-sdk.png">
       <Link>Assets\SplashScreen.png</Link>
     </Content>

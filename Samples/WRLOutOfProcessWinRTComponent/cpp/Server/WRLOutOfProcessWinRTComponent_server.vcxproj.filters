@@ -7,17 +7,8 @@
     <ClCompile Include="OvenServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BreadServer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="OvenServer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BreadServer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Microsoft.SDKSamples.Kitchen.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -25,9 +16,6 @@
   <ItemGroup>
     <Filter Include="Source Files">
       <UniqueIdentifier>{67fc069e-5727-421d-9022-5c4b688053c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{51d16962-1a1a-4893-ad94-fa4eed3fc884}</UniqueIdentifier>
     </Filter>
     <Filter Include="Generated Files">
       <UniqueIdentifier>{f4c209e2-ca17-4c6b-b8e8-e55a42245610}</UniqueIdentifier>

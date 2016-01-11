@@ -1,0 +1,40 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="ScreenCasting.ProjectionViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ScreenCasting"
+    xmlns:controls="using:ScreenCasting.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" >
+            <Button FontFamily="Segoe UI Symbol" Click="SwapViews_Click">&#xe13c;</Button>
+            <Button Margin="10,0,0,0" FontFamily="Segoe UI Symbol" Click="StopProjecting_Click">&#xe2b3;</Button>
+        </StackPanel>
+        <MediaElement x:Name="_player" Margin="10" AreTransportControlsEnabled="False" Grid.Row="1">
+            <MediaElement.TransportControls>
+                <controls:ProjectedMediaTransportControls  x:Name="ME4_Controls"
+                                                     IsCompact="False"/>
+            </MediaElement.TransportControls>
+        </MediaElement>
+    </Grid>
+</Page>

@@ -28,11 +28,6 @@ Copyright (c) Microsoft Corporation. All rights reserved
         display: -ms-grid;
     }
 
-        .fragment header[role=banner] .win-backbutton {
-            margin-left: 39px;
-            margin-top: 59px;
-        }
-
         .fragment header[role=banner] .titlearea {
             -ms-grid-column: 2;
             -ms-grid-column-span: 1;

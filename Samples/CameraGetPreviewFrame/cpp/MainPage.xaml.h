@@ -63,6 +63,7 @@ namespace CameraGetPreviewFrame
         void WriteLine(Platform::String^ str);
         void WriteException(Platform::Exception^ ex);
         int ConvertDisplayOrientationToDegrees(Windows::Graphics::Display::DisplayOrientations orientation);
+        void ApplyGreenFilter(Windows::Graphics::Imaging::SoftwareBitmap^ bitmap);
 
         // Event handlers
         void Application_Suspending(Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e);

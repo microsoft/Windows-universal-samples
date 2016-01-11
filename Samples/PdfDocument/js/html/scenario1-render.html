@@ -1,0 +1,47 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario1-render.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Loading and rendering a PDF document
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                <button id="loadButton" class="win-button">Load document</button>
+                <input id="passwordBox" type="password" placeholder="Optional password" style="width: 10em" class="win-textbox" />
+            </p>
+        </div>
+        <div id="renderingPanel" style="display: none">
+            <p>
+                View page <input id="pageNumberBox" type="number" class="win-textbox" style="width: 3em; text-align: right"/> of <span id="pageCountText"></span>.
+            </p>
+            <p>
+                <select id="options" class="win-dropdown">
+                    <option>Actual size</option>
+                    <option>Half size on beige background</option>
+                    <option>Crop to center of page</option>
+                </select>
+                <button id="viewPageButton" class="win-button">View</button>
+            </p>
+            <p>
+                <img id="output" />
+            </p>
+        </div>
+        <progress id="progressControl" style="display: none"></progress>
+    </div>
+</body>
+
+</html>

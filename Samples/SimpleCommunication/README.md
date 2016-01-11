@@ -1,6 +1,6 @@
 <!---
   category: Communications
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620600&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620600
 --->
 
 # Real-time communication sample

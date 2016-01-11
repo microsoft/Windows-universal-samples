@@ -37,16 +37,16 @@ public interface class IOnboardingService
 {
 public:
     // Implement this function to handle calls to the ConfigureWiFi method.
-    Windows::Foundation::IAsyncOperation<OnboardingConfigureWiFiResult^>^ ConfigureWiFiAsync(Windows::Devices::AllJoyn::AllJoynMessageInfo^ info , _In_ Platform::String^ interfaceMemberSSID, _In_ Platform::String^ interfaceMemberPassphrase, _In_ int16 interfaceMemberAuthType);
+    Windows::Foundation::IAsyncOperation<OnboardingConfigureWiFiResult^>^ ConfigureWiFiAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info , _In_ Platform::String^ interfaceMemberSSID, _In_ Platform::String^ interfaceMemberPassphrase, _In_ int16 interfaceMemberAuthType);
 
     // Implement this function to handle calls to the Connect method.
-    Windows::Foundation::IAsyncOperation<OnboardingConnectResult^>^ ConnectAsync(Windows::Devices::AllJoyn::AllJoynMessageInfo^ info );
+    Windows::Foundation::IAsyncOperation<OnboardingConnectResult^>^ ConnectAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info );
 
     // Implement this function to handle calls to the Offboard method.
-    Windows::Foundation::IAsyncOperation<OnboardingOffboardResult^>^ OffboardAsync(Windows::Devices::AllJoyn::AllJoynMessageInfo^ info );
+    Windows::Foundation::IAsyncOperation<OnboardingOffboardResult^>^ OffboardAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info );
 
     // Implement this function to handle calls to the GetScanInfo method.
-    Windows::Foundation::IAsyncOperation<OnboardingGetScanInfoResult^>^ GetScanInfoAsync(Windows::Devices::AllJoyn::AllJoynMessageInfo^ info );
+    Windows::Foundation::IAsyncOperation<OnboardingGetScanInfoResult^>^ GetScanInfoAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info );
 
     // Implement this function to handle requests for the value of the Version property.
     //

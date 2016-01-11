@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="9fb3030e-ce27-41c1-8b80-1db95c81bc59"
+    Name="Microsoft.SDKSamples.DpiScaling.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

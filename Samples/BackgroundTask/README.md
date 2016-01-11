@@ -1,6 +1,6 @@
 <!---
   category: LaunchingAndBackgroundTasks 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=618666&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=618666
 --->
 
 # Background task sample

@@ -8,6 +8,10 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="PullToRefreshStates">
                 <VisualState x:Name="PullToRefresh">
@@ -18,30 +22,22 @@
                                          Duration="0:0:0.200"/>
                     </Storyboard>
                 </VisualState>
-                <VisualState x:Name="ReleaseToRefresh">
-                    <Storyboard>
-                        <DoubleAnimation Storyboard.TargetName="refreshIndicator2"
-                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
-                                         To="180"
-                                         Duration="0:0:0.200"/>
-                    </Storyboard>
-                </VisualState>
                 <VisualState x:Name="Refreshing">
-                    <Storyboard RepeatBehavior="Forever">
+                    <Storyboard>
                         <DoubleAnimation Storyboard.TargetName="refreshIndicator2"
                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
                                          From="0"
                                          To="360"
-                                         Duration="0:0:0.400"/>
+                                         Duration="0:0:0.400" RepeatBehavior="Forever"/>
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <local:MyBorder Width="500" Height="500">
-            <ScrollViewer x:Name="SV1" 
-                          ViewChanged="ScrollViewer_ViewChanged" VerticalSnapPointsType="Mandatory" VerticalSnapPointsAlignment="Near"
-                          VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden">
-                <local:MyPanel>
+        <local:MyBorder x:Name="OuterCustomPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ScrollViewer x:Name="SV1"
+                          ViewChanged="ScrollViewer_ViewChanged" VerticalSnapPointsType="MandatorySingle"  VerticalSnapPointsAlignment="Near"
+                          VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch">
+                <local:MyPanel x:Name="InnerCustomPanel" VerticalAlignment="Stretch">
                     <Border Background="LightGray" Height="100" Width="{Binding ElementName=lv, Path=ActualWidth}" >
                         <Grid>
                             <Image x:Name="refreshIndicator"
@@ -64,10 +60,10 @@
                             </Image>
                         </Grid>
                     </Border>
-                    <ListView x:Name="lv" BorderBrush="Black" BorderThickness="1">
+                    <ListView x:Name="lv" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Stretch">
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <ItemsStackPanel CacheLength="0" />
+                                <ItemsStackPanel/>
                             </ItemsPanelTemplate>
                         </ListView.ItemsPanel>
                         <ListView.ItemTemplate>
@@ -79,8 +75,8 @@
                 </local:MyPanel>
             </ScrollViewer>
         </local:MyBorder>
-        <TextBlock VerticalAlignment="Center" Margin="20,0,0,0" Width="300" HorizontalAlignment="Left" TextWrapping="Wrap">
-            Pull down on the list to cause the data in the list to refresh
+        <TextBlock VerticalAlignment="Center" Margin="20,0,0,0" Width="300" HorizontalAlignment="Left" TextWrapping="Wrap" Grid.Row="1">
+            Pull down on the list using touch to cause the data in the list to refresh
         </TextBlock>
     </Grid>
 </Page>

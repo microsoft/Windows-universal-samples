@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="Microsoft.SDKSamples.AdaptiveStreaing.JS"
+    Name="Microsoft.SDKSamples.AdaptiveStreaming.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
 

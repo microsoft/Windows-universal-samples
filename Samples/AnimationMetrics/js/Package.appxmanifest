@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="6188fe33-d120-461b-a439-890c16f561fe"
+    Name="Microsoft.SDKSamples.AnimationMetrics.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

@@ -24,6 +24,9 @@ namespace WRLOutOfProcessWinRTComponent
         // as NotifyUser()
         MainPage rootPage = MainPage.Current;
 
+        // Keep a ref to the oven since it is an event source.
+        Oven _myOven = null;
+
         public OvenClient()
         {
             this.InitializeComponent();
@@ -39,80 +42,64 @@ namespace WRLOutOfProcessWinRTComponent
         }
 
         /// <summary>
-        /// Use the custom Oven and Bread Windows Runtime components. 
+        /// Use the custom Oven and BreadBakedEventArgs Windows Runtime components. 
         /// </summary>
         /// <param name="sender">Contains information about the button that fired the event.</param>
         /// <param name="e">Contains state information and event data associated with a routed event.</param>
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            Dimensions dimensions;
-            dimensions.Width = 2;
-            dimensions.Height = 2;
-            dimensions.Depth = 2;
-
             // Component Creation
-            Oven myOven = new Oven(dimensions);
+            if (_myOven == null)
+            {
+                Dimensions dimensions;
+                dimensions.Width = 2;
+                dimensions.Height = 2;
+                dimensions.Depth = 2;
+
+                _myOven = new Oven(dimensions);
+            }
 
             // Getters and setters are accessed using property syntax
-            OvenClientOutput.Text += "Oven volume is: " + myOven.Volume.ToString() + "\n";
+            OvenClientOutput.Text += "Oven volume is: " + _myOven.Volume.ToString() + "\n";
 
             // Register even listeners
-            myOven.BreadBaked += new TypedEventHandler<Oven, Bread>(BreadCompletedHandler1);
-            myOven.BreadBaked += new TypedEventHandler<Oven, Bread>(BreadCompletedHandler2);
-            myOven.BreadBaked += new TypedEventHandler<Oven, Bread>(BreadCompletedHandler3);
+            _myOven.BreadBaked += new TypedEventHandler<Oven, BreadBakedEventArgs>(BreadCompletedHandler1);
+            _myOven.BreadBaked += new TypedEventHandler<Oven, BreadBakedEventArgs>(BreadCompletedHandler2);
+            _myOven.BreadBaked += new TypedEventHandler<Oven, BreadBakedEventArgs>(BreadCompletedHandler3);
 
             // Unregister from an event using the -= syntax and a delegate instance
-            myOven.BreadBaked -= new TypedEventHandler<Oven, Bread>(BreadCompletedHandler3);
+            _myOven.BreadBaked -= new TypedEventHandler<Oven, BreadBakedEventArgs>(BreadCompletedHandler3);
 
             // Bake a loaf of bread. This will trigger the BreadBaked event.
-            myOven.BakeBread("Sourdough");
+            _myOven.BakeBread("Sourdough");
 
             // Trigger the event again with a different preheat time
-            myOven.ConfigurePreheatTemperature(OvenTemperature.High);
-            myOven.BakeBread("Wheat");
+            _myOven.ConfigurePreheatTemperature(OvenTemperature.High);
+            _myOven.BakeBread("Wheat");
         }
 
-        async private void BreadCompletedHandler1(Oven oven, Bread bread)
+        async private void BreadCompletedHandler1(Oven oven, BreadBakedEventArgs args)
         {
             Action updateOutputText = () =>
                 {
                     OvenClientOutput.Text += "Event Handler 1: Invoked\n";
                     OvenClientOutput.Text += "Event Handler 1: Oven volume is: " + oven.Volume.ToString() + "\n";
-                    OvenClientOutput.Text += "Event Handler 1: Bread flavor is: " + bread.Flavor + "\n";
+                    OvenClientOutput.Text += "Event Handler 1: Bread flavor is: " + args.Bread.Flavor + "\n";
                 };
 
-            if (OvenClientOutput.Dispatcher.HasThreadAccess)
-            {
-                // If the current thread is the UI thread then execute the lambda.
-                updateOutputText();
-            }
-            else
-            {
-                // If the current thread is not the UI thread use the dispatcher to execute the lambda on the UI thread.
-                await OvenClientOutput.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, new Windows.UI.Core.DispatchedHandler(updateOutputText));
-            }
+            await OvenClientOutput.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, new Windows.UI.Core.DispatchedHandler(updateOutputText));
         }
 
-        async private void BreadCompletedHandler2(Oven oven, Bread bread)
+        async private void BreadCompletedHandler2(Oven oven, BreadBakedEventArgs bread)
         {
             Action updateOutputText = () =>
                 {
                     OvenClientOutput.Text += "Event Handler 2: Invoked\n";
                 };
-
-            if (OvenClientOutput.Dispatcher.HasThreadAccess)
-            {
-                // If the current thread is the UI thread then execute the lambda.
-                updateOutputText();
-            }
-            else
-            {
-                // If the current thread is not the UI thread use the dispatcher to execute the lambda on the UI thread.
-                await OvenClientOutput.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, new Windows.UI.Core.DispatchedHandler(updateOutputText));
-            }
+            await OvenClientOutput.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, new Windows.UI.Core.DispatchedHandler(updateOutputText));
         }
 
-        async private void BreadCompletedHandler3(Oven oven, Bread bread)
+        async private void BreadCompletedHandler3(Oven oven, BreadBakedEventArgs bread)
         {
             // Event handler 3 was removed and will not be invoked
             Action updateOutputText = () =>
@@ -120,16 +107,7 @@ namespace WRLOutOfProcessWinRTComponent
                     OvenClientOutput.Text += "Event Handler 3: Invoked\n";
                 };
 
-            if (OvenClientOutput.Dispatcher.HasThreadAccess)
-            {
-                // If the current thread is the UI thread then execute the lambda.
-                updateOutputText();
-            }
-            else
-            {
-                // If the current thread is not the UI thread use the dispatcher to execute the lambda on the UI thread.
-                await OvenClientOutput.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, new Windows.UI.Core.DispatchedHandler(updateOutputText));
-            }
+            await OvenClientOutput.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, new Windows.UI.Core.DispatchedHandler(updateOutputText));
         }
     }
 }

@@ -60,6 +60,7 @@ void ApplicationTriggerTask::OnNavigatedTo(NavigationEventArgs^ e)
         hascur = iter->MoveNext();
     }
 
+    trigger = ref new ApplicationTrigger();
     UpdateUI();
 }
 
@@ -91,8 +92,6 @@ void ApplicationTriggerTask::AttachProgressAndCompletedHandlers(IBackgroundTaskR
 /// <param name="e"></param>
 void ApplicationTriggerTask::RegisterBackgroundTask(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-    trigger = ref new ApplicationTrigger();
-
     auto task = BackgroundTaskSample::RegisterBackgroundTask(SampleBackgroundTaskEntryPoint,
                                                              ApplicationTriggerTaskName,
                                                              trigger,

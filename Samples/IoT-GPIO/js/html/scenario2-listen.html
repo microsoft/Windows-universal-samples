@@ -1,0 +1,35 @@
+<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario2-listen.js"></script>
+</head>
+
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">
+        Listen for changes in GPIO pin value
+    </div>
+    <p>
+        An app can listen for changes to the state of a GPIO pin.
+        To enable this sample, follow this wiring schematic using a simple LED (wiring for both MinnowBoard Max and Raspberry Pi 2 are diagrammed):
+    </p>
+    <div>
+        <img src="ms-appx:///assets/gpio_sample_bb.jpg"  />
+    </div>
+    <p>
+        <button id="startStopButton" class="win-button">Start</button>
+    </p>
+    <div id="scenarioControls" style="display: none">
+        <p>
+            Pin value: <span id="currentPinValue"></span>
+        </p>
+    </div>
+</body>
+
+</html>

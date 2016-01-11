@@ -1,5 +1,6 @@
-﻿<!--
+<!--
   category: GlobalizationAndLocalization
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624045
 -->
 
 # Globalization preferences sample
@@ -34,7 +35,7 @@ class also enables the caller to obtain details about a given geographic region 
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
 
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 

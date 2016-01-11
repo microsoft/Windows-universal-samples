@@ -1,0 +1,40 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Windows SDK UWP Sample (XAML)</Name>
+    <Description>Template for creating a Windows SDK Sample</Description>
+    <Icon>windows-sdk.png</Icon>
+    <ProjectType>VC</ProjectType>
+    <TemplateGroupID>Windows Tailored</TemplateGroupID>
+    <TemplateID>Microsoft.UWP.SDKSample.CPP</TemplateID>
+    <SortOrder>1</SortOrder>
+    <CreateNewFolder>false</CreateNewFolder>
+    <DefaultName>Application</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <NumberOfParentCategoriesToRollUp>2</NumberOfParentCategoriesToRollUp>
+    <TargetPlatformName>Windows</TargetPlatformName>
+    <RequiredPlatformVersion>6.3.0</RequiredPlatformVersion>
+    <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="UWPSDKSampleCPP.vcxproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="pch.cpp">pch.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="pch.h">pch.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true" TargetFileName="SampleConfiguration.h">SampleConfiguration.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="SampleConfiguration.cpp">SampleConfiguration.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario1_ShortName.xaml">Scenario1_ShortName.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario1_ShortName.xaml.cpp">Scenario1_ShortName.xaml.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario1_ShortName.xaml.h">Scenario1_ShortName.xaml.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario2_ShortName.xaml">Scenario2_ShortName.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario2_ShortName.xaml.cpp">Scenario2_ShortName.xaml.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario2_ShortName.xaml.h">Scenario2_ShortName.xaml.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario3_ShortName.xaml">Scenario3_ShortName.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario3_ShortName.xaml.cpp">Scenario3_ShortName.xaml.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario3_ShortName.xaml.h">Scenario3_ShortName.xaml.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Package.appxmanifest">Package.appxmanifest</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.vcxproj.filters">UWPSDKSampleCPP.vcxproj.filters</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="README.md">README.md</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

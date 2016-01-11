@@ -148,12 +148,11 @@ QStatus AllJoynBusObjectManager::CreateBusObject(_In_ const PCSTR objectPath, _O
         nullptr,
         nullptr
     };
-    alljoyn_busobject newBusObject = alljoyn_busobject_create(objectPath, false, &callbacks, nullptr);
-    if (newBusObject == nullptr)
+    *busObject = alljoyn_busobject_create(objectPath, false, &callbacks, nullptr);
+    if (*busObject == nullptr)
     {
-        return ER_FAIL;
+        return ER_OUT_OF_MEMORY;
     }
-    *busObject = newBusObject;
     return ER_OK;
 }
 

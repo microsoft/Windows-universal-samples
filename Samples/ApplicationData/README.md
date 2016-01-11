@@ -1,6 +1,6 @@
 <!---
   category: AppSettings
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620486&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620486
 --->
 
 # Application data sample

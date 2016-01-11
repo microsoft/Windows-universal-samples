@@ -68,9 +68,14 @@
         recognizer.continuousRecognitionSession.addEventListener('resultgenerated', onSpeechRecognizerResultGenerated, false);
         recognizer.continuousRecognitionSession.addEventListener('completed', onSpeechRecognizerSessionCompleted, false);
 
+        // It's not valid to pause a list grammar recognizer and recompile the constraints without at least one
+        // constraint in place, so create a permanent constraint.
+        var goHomeConstraint = new Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint(["Go home"], "goHome");
+
         emailConstraint = new Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint(["Send email"], "email");
         phoneConstraint = new Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint(["Call phone"], "phone");
 
+        recognizer.constraints.append(goHomeConstraint);
         recognizer.constraints.append(emailConstraint);
 
         recognizer.compileConstraintsAsync().done(
@@ -104,11 +109,11 @@
             btnRecognize.innerText = "\uE1d6 Stop recognition";
             errorMessage("");
 
-            disableUI(false);
-
             // Start the continuous recognition session. Results are handled in the event handlers below.
             try {
-                recognizer.continuousRecognitionSession.startAsync();
+                recognizer.continuousRecognitionSession.startAsync().then(function completed() {
+                    disableUI(false);
+                });
             }
             catch (e) {
                 disableUI(true);

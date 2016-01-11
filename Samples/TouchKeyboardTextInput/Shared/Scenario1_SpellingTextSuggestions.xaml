@@ -1,0 +1,82 @@
+<!-- 
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_SpellingTextSuggestions"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    
+  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="RootGrid" Margin="12,10,12,12">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <StackPanel Margin="0,0,0,10">
+        <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+        <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+            The TextBox and RichEdit controls expose properties to enable spell checking and text suggestions, namely 'IsSpellCheckEnabled' and
+            'IsTextPredictionEnabled'. By default RichEdit controls have spell checking and text suggestions enabled, while TextBox controls have to be explicited
+            enabled.
+        </TextBlock>
+      </StackPanel>
+
+      <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Grid x:Name="Input" Height="Auto">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="IsSpellCheckEnabled and IsTextPredictionEnabled = false" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" />
+
+                        <TextBlock Text="TextBox" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
+                        <TextBox x:Name="TextBoxOff" IsTextPredictionEnabled="False" IsSpellCheckEnabled="False" AutomationProperties.Name="TextBox Settings Off" HorizontalAlignment="Stretch" Height="46" Grid.Row="2" Grid.Column="1"/>
+
+                        <TextBlock Text="RichEdit" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
+                        <RichEditBox x:Name="RichEditOff" IsTextPredictionEnabled="False" IsSpellCheckEnabled="False" AutomationProperties.Name="RichEdit Settings Off" HorizontalAlignment="Stretch" Height="46" Grid.Row="3" Grid.Column="1"/>
+
+                        <TextBlock Text="IsSpellCheckEnabled and IsTextPredictionEnabled = true" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="2" />
+
+                        <TextBlock Text="TextBox" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0"/>
+                        <TextBox x:Name="TextBoxOn" IsTextPredictionEnabled="True" IsSpellCheckEnabled="True" AutomationProperties.Name="TextBox Settings On" HorizontalAlignment="Stretch" Height="46" Grid.Row="5" Grid.Column="1"/>
+
+                        <TextBlock Text=" RichEdit" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0"/>
+                        <RichEditBox x:Name="RichEditOn" IsTextPredictionEnabled="True" IsSpellCheckEnabled="True" AutomationProperties.Name="RichEdit Settings On" HorizontalAlignment="Stretch" Height="46" Grid.Row="6" Grid.Column="1"/>
+                    </Grid>
+                    <Grid x:Name="Output" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+                        <TextBlock x:Name="OutputTextBlock1" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0">
+        When typing in an enabled edit control, spellchecking and text suggestion services will be
+        automatically provided when using the Touch and Hardware keyboards.
+                        </TextBlock>
+                    </Grid>
+                </StackPanel>
+      </ScrollViewer>
+
+    </Grid>
+  </Grid>
+</Page>

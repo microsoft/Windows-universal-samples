@@ -20,16 +20,9 @@
     </Page.BottomAppBar>
     
     <StackPanel Padding="24,0" Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel Orientation="Horizontal">
-            <Button Style="{StaticResource NavigationBackButtonSmallStyle}"
-                        TabIndex="1"
-                        Margin="0,0,8,0"
-                        Click="BackMasterView"
-                        AutomationProperties.Name="Back"/>
-            <TextBlock Style="{ThemeResource TitleTextBlockStyle}"
-                                   Margin="0,8"       
-                                   Text="{x:Bind SelectedContact.Name}"/>
-        </StackPanel>
+        <TextBlock Style="{ThemeResource TitleTextBlockStyle}"
+                               Margin="0,8"       
+                               Text="{x:Bind SelectedContact.Name}"/>
         <TextBlock Style="{ThemeResource BodyTextBlockStyle}"
                                    Margin="0,9" 
                                    Text="{x:Bind SelectedContact.Position}" />

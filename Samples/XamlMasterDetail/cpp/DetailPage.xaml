@@ -19,22 +19,18 @@
 
     <!-- Don't realize our content by default. See PageRoot_Loaded. -->
     <StackPanel x:Name="RootPanel" x:DeferLoadStrategy="Lazy">
-        <StackPanel Orientation="Horizontal">
-            <Button x:Name="BackButton"
-                    Style="{StaticResource NavigationBackButtonSmallStyle}"
-                    TabIndex="1"
-                    Margin="8,0,0,0"
-                    Click="BackButton_Click"
-                    AutomationProperties.Name="Back"
-                    ToolTipService.ToolTip="Back" />
+        <TextBlock
+            Margin="8,0"
+            Style="{ThemeResource TitleTextBlockStyle}"
+            HorizontalAlignment="Left"
+            Text="{x:Bind Item.Title, Mode=OneWay}" />
 
-            <TextBlock Margin="8" Style="{ThemeResource TitleTextBlockStyle}"
-                       HorizontalAlignment="Left" Text="{x:Bind Item.Title, Mode=OneWay}" />
-        </StackPanel>
-
-        <TextBlock Margin="12,9" HorizontalAlignment="Left" MaxWidth="560"
-                   Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind Item.Text, Mode=OneWay}" 
-                   EntranceNavigationTransitionInfo.IsTargetElement="True" />
-
+        <TextBlock
+            Margin="12,8"
+            HorizontalAlignment="Left"
+            MaxWidth="560"
+            Style="{ThemeResource BodyTextBlockStyle}"
+            Text="{x:Bind Item.Text, Mode=OneWay}"
+            EntranceNavigationTransitionInfo.IsTargetElement="True" />
     </StackPanel>
 </Page>

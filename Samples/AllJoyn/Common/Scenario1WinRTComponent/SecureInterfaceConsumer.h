@@ -55,8 +55,28 @@ public:
 
     // Call the Concatenate method
     Windows::Foundation::IAsyncOperation<SecureInterfaceConcatenateResult^>^ ConcatenateAsync(_In_ Platform::String^ interfaceMemberInStr1, _In_ Platform::String^ interfaceMemberInStr2);
+
     // This event fires whenever the value of IsUpperCaseEnabled changes.
-    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceConsumer^, Platform::Object^>^ IsUpperCaseEnabledChanged;
+    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceConsumer^, Platform::Object^>^ IsUpperCaseEnabledChanged 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<SecureInterfaceConsumer^, Platform::Object^>^ handler) 
+        { 
+            return _IsUpperCaseEnabledChanged += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<SecureInterfaceConsumer^>(sender), safe_cast<Platform::Object^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _IsUpperCaseEnabledChanged -= token; 
+        } 
+    internal: 
+        void raise(SecureInterfaceConsumer^ sender, Platform::Object^ args) 
+        { 
+            _IsUpperCaseEnabledChanged(sender, args);
+        } 
+    }
     
     // Get the value of the IsUpperCaseEnabled property.
     Windows::Foundation::IAsyncOperation<SecureInterfaceGetIsUpperCaseEnabledResult^>^ GetIsUpperCaseEnabledAsync();
@@ -71,13 +91,70 @@ public:
     }
 
     // This event will fire whenever the consumer loses the session that it is a member of.
-    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceConsumer^, Windows::Devices::AllJoyn::AllJoynSessionLostEventArgs^>^ SessionLost;
+    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceConsumer^, Windows::Devices::AllJoyn::AllJoynSessionLostEventArgs^>^ SessionLost 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<SecureInterfaceConsumer^, Windows::Devices::AllJoyn::AllJoynSessionLostEventArgs^>^ handler) 
+        { 
+            return _SessionLost += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<SecureInterfaceConsumer^>(sender), safe_cast<Windows::Devices::AllJoyn::AllJoynSessionLostEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _SessionLost -= token; 
+        } 
+    internal: 
+        void raise(SecureInterfaceConsumer^ sender, Windows::Devices::AllJoyn::AllJoynSessionLostEventArgs^ args) 
+        { 
+            _SessionLost(sender, args);
+        } 
+    }
 
     // This event will fire whenever a member joins the session.
-    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceConsumer^, Windows::Devices::AllJoyn::AllJoynSessionMemberAddedEventArgs^>^ SessionMemberAdded;
+    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceConsumer^, Windows::Devices::AllJoyn::AllJoynSessionMemberAddedEventArgs^>^ SessionMemberAdded 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<SecureInterfaceConsumer^, Windows::Devices::AllJoyn::AllJoynSessionMemberAddedEventArgs^>^ handler) 
+        { 
+            return _SessionMemberAdded += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<SecureInterfaceConsumer^>(sender), safe_cast<Windows::Devices::AllJoyn::AllJoynSessionMemberAddedEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _SessionMemberAdded -= token; 
+        } 
+    internal: 
+        void raise(SecureInterfaceConsumer^ sender, Windows::Devices::AllJoyn::AllJoynSessionMemberAddedEventArgs^ args) 
+        { 
+            _SessionMemberAdded(sender, args);
+        } 
+    }
 
     // This event will fire whenever a member leaves the session.
-    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceConsumer^, Windows::Devices::AllJoyn::AllJoynSessionMemberRemovedEventArgs^>^ SessionMemberRemoved;
+    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceConsumer^, Windows::Devices::AllJoyn::AllJoynSessionMemberRemovedEventArgs^>^ SessionMemberRemoved 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<SecureInterfaceConsumer^, Windows::Devices::AllJoyn::AllJoynSessionMemberRemovedEventArgs^>^ handler) 
+        { 
+            return _SessionMemberRemoved += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<SecureInterfaceConsumer^>(sender), safe_cast<Windows::Devices::AllJoyn::AllJoynSessionMemberRemovedEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _SessionMemberRemoved -= token; 
+        } 
+    internal: 
+        void raise(SecureInterfaceConsumer^ sender, Windows::Devices::AllJoyn::AllJoynSessionMemberRemovedEventArgs^ args) 
+        { 
+            _SessionMemberRemoved(sender, args);
+        } 
+    }
 
 internal:
     // Consumers do not support property get.
@@ -130,6 +207,11 @@ internal:
     }
     
 private:
+    virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _SessionLost;
+    virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _SessionMemberAdded;
+    virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _SessionMemberRemoved;
+    virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _IsUpperCaseEnabledChanged;
+
     int32 JoinSession(_In_ Windows::Devices::AllJoyn::AllJoynServiceInfo^ serviceInfo);
 
     // Register a callback function to handle incoming signals.

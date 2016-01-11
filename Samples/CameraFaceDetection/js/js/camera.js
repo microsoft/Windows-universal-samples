@@ -135,9 +135,9 @@
                 isInitialized = true;
                 startPreview();
                 updateCaptureControls();
+            }, function (error) {
+                console.log(error.message);
             });
-        }, function (error) {
-            console.log(error.message);
         }).done();
     }
 

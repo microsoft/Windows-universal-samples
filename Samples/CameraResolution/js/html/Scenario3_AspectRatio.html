@@ -1,0 +1,47 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the Microsoft Public License.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/Scenario3_AspectRatio.css">
+    <script src="/js/Scenario3_AspectRatio.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Match the aspect ratio of the video stream with the preview stream
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <select id="previewSettings" class="win-dropdown">
+                <option selected="selected" value="">Preview Settings</option>
+            </select>
+            <select id="videoSettings" class="win-dropdown">
+                <option selected="selected" value="">Video Settings</option>
+            </select>
+            <button id="videoButton" class="win-button" disabled>Record Video</button>
+        </div>
+    </div>
+    <div>
+        <video id="cameraPreview" style="width:100%; height:100%"></video>
+        <button id="initCameraBtn" class="win-button" style="position:absolute; top:50%; left:50%">Initialize Camera</button>
+    </div>
+</body>
+
+</html>

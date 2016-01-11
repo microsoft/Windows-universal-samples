@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="10fec429-fbc2-4e15-a042-da8debb674af"
+    Name="Microsoft.SDKSamples.EAS.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

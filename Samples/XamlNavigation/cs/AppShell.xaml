@@ -71,22 +71,11 @@
                                           ContainerContentChanging="NavMenuItemContainerContentChanging"
                                           ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
                                           ItemTemplate="{StaticResource NavMenuItemTemplate}"
-                                          ItemInvoked="NavMenuList_ItemInvoked">
-                    <controls:NavMenuListView.Header>
-                        <!-- Using this custom back navigation button until the system-provided back button is enabled. -->
-                        <Button x:Name="BackButton"
-                                TabIndex="2"
-                                Style="{StaticResource NavigationBackButtonStyle}"
-                                IsEnabled="{Binding AppFrame.CanGoBack, ElementName=Root}"
-                                Width="{Binding ItemsPanelRoot.Width, ElementName=NavMenuList}"
-                                HorizontalAlignment="{Binding ItemsPanelRoot.HorizontalAlignment, ElementName=NavMenuList}"
-                                Click="BackButton_Click"/>
-                    </controls:NavMenuListView.Header>
-                </controls:NavMenuListView>
+                                          ItemInvoked="NavMenuList_ItemInvoked" />
             </SplitView.Pane>
 
             <!-- OnNavigatingToPage we synchronize the selected item in the nav menu with the current page.
-                 OnNavigatedToPage we move keyboard focus to the first item on the page after it's loaded. -->
+                 OnNavigatedToPage we move keyboard focus to the first item on the page after it's loaded and update the Back button. -->
             <Frame x:Name="frame"
                    Navigating="OnNavigatingToPage"
                    Navigated="OnNavigatedToPage">

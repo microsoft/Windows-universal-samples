@@ -58,14 +58,13 @@ namespace NavigationMenuSample
         void OnLoaded(Object ^sender, RoutedEventArgs ^e);
         void AppShell_KeyDown(Object^ sender, KeyRoutedEventArgs^ e);
         void SystemNavigationManager_BackRequested(Object^, Windows::UI::Core::BackRequestedEventArgs^ e);
-        void BackButton_Click(Object^ sender, RoutedEventArgs^ e);
-        void BackRequested(bool* handled);
         void NavMenuList_ItemInvoked(Object^ sender, ListViewItem^ e);
         void OnNavigatingToPage(Object^ sender, NavigatingCancelEventArgs^ e);
         void OnNavigatedToPage(Object^ sender, NavigationEventArgs^ e);
         void Page_Loaded(Object^ sender, RoutedEventArgs^ e);
         void TogglePaneButton_Checked(Object^ sender, RoutedEventArgs^ e);
         void CheckTogglePaneButtonSizeChanged();
+		void RootSplitViewDisplayModeChangedCallback(DependencyObject^ sender, DependencyProperty^ dp);
         void NavMenuItemContainerContentChanging(ListViewBase^ sender, ContainerContentChangingEventArgs^ args);
 
         Vector<NavMenuItem^>^ navlist;

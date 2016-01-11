@@ -1,6 +1,6 @@
-﻿<!---
+<!---
   category: DeepLinksAndAppToAppCommunication
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620596&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620596
 --->
 
 # Sharing content source app sample
@@ -24,7 +24,7 @@ Also, this sample shows how to display text when your app can't support a share 
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
@@ -45,7 +45,7 @@ For more info about the concepts and APIs demonstrated in this sample, see these
 -   [How to share text (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758313)
 -   [How to share text (XAML)](http://msdn.microsoft.com/library/windows/apps/hh871372)
 -   [Quickstart: Sharing content (HTML)](http://msdn.microsoft.com/library/windows/apps/hh465261)
--   [Quickstart: Sharing content (XAML)](http://msdn.microsoft.com/library/windows/apps/hh871368)
+-   [Share data](https://msdn.microsoft.com/library/windows/apps/mt243293)
 -   [**DataPackageView**](http://msdn.microsoft.com/library/windows/apps/hh738408)
 -   [**ShareOperation**](http://msdn.microsoft.com/library/windows/apps/br205977)
 -   [**Windows.ApplicationModel.DataTransfer**](http://msdn.microsoft.com/library/windows/apps/br205967)

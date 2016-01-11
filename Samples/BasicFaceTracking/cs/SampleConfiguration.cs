@@ -12,13 +12,12 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using FaceTrackingSample;
 
 namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        public const string FEATURE_NAME = "Face tracking sample";
+        public const string FEATURE_NAME = "Basic face tracking C# sample";
 
         List<Scenario> scenarios = new List<Scenario>
         {

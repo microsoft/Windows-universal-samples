@@ -12,18 +12,17 @@
 var appData = Windows.Storage.ApplicationData;
 
 var Store = WinJS.Class.define(
-    function () { }, 
-    
+    function () { "use strict"; },
     {
         Trips: null,
-    
+
         loadTrips: function () {
             /// <summary>Looks for, and loads a json blob from local state storage if it exists. If it does not exist, 
             /// pre-initialize some sample data instead. Stores the data in the store's Trips list, as well as returning them. </summary>
             /// <returns>The trips loaded/pre-initialized.</returns>
+            "use strict";
             var that = this;
-            if (that.Trips != null)
-            {
+            if (that.Trips != null) {
                 return new WinJS.Promise(function (completed, error) {
                     completed(that.Trips);
                 });
@@ -31,8 +30,7 @@ var Store = WinJS.Class.define(
 
             return appData.current.localFolder.tryGetItemAsync("trips.json").then(
                 function (file) {
-                    if(file == null)
-                    {
+                    if (file == null) {
                         // pre-initialized data, matching the initial VCD configuration
                         that.Trips = new WinJS.Binding.List([
                           { destination: "London", description: "Bring an umbrella", startDate: (new Date(2015, 5, 10)).toJSON(), endDate: (new Date(2015, 5, 20)).toJSON(), notes: "" },
@@ -46,22 +44,21 @@ var Store = WinJS.Class.define(
                                 var outText = JSON.stringify(that.Trips.slice(0));
                                 Windows.Storage.FileIO.writeTextAsync(outputFile, outText).done();
                             }).done();
-                        
+
                         return that.Trips;
-                    }
-                    else
-                    {
+                    } else {
                         return Windows.Storage.FileIO.readTextAsync(file).then(function (text) {
                             var jsonBlob = JSON.parse(text);
                             that.Trips = new WinJS.Binding.List(jsonBlob);
                             return that.Trips;
                         });
                     }
-            });
+                });
         },
         addTrip: function (trip) {
             /// <summary>Add a trip to the store, and save the json blob out to local state.</summary>
             /// <param name="trip">The trip object to add</param>
+            "use strict";
             var that = this;
             if (that.Trips.indexOf(trip) == -1) {
                 that.Trips.push(trip);
@@ -76,6 +73,7 @@ var Store = WinJS.Class.define(
         saveTrip: function (trip) {
             /// <summary>Update an existing trip in the store, and save the json blob out to local state.</summary>
             /// <param name="trip">The trip object to save</param>
+            "use strict";
             var that = this;
             appData.current.localFolder.createFileAsync("trips.json", Windows.Storage.CreationCollisionOption.replaceExisting)
                 .then(function (outputFile) {
@@ -86,6 +84,7 @@ var Store = WinJS.Class.define(
         deleteTrip: function (trip) {
             /// <summary>Remove a trip from the store, and save the json blob out to local state.</summary>
             /// <param name="trip">The trip object to remove</param>
+            "use strict";
             var that = this;
 
             var i = that.Trips.indexOf(trip);

@@ -156,6 +156,7 @@ namespace AllJoynConsumerExperiences
                 m_busAttachment.AuthenticationComplete -= BusAttachment_AuthenticationComplete;
                 m_busAttachment.StateChanged -= BusAttachment_StateChanged;
                 m_busAttachment.Disconnect();
+                m_busAttachment = null;
             }
         }
 
@@ -173,6 +174,8 @@ namespace AllJoynConsumerExperiences
 
         private void Start()
         {
+            ScenarioCleanup();
+
             m_busAttachment = new AllJoynBusAttachment();
             m_busAttachment.StateChanged += BusAttachment_StateChanged;
             m_busAttachment.AuthenticationMechanisms.Clear();
@@ -295,9 +298,18 @@ namespace AllJoynConsumerExperiences
 
         private async void Watcher_Added(SecureInterfaceWatcher sender, AllJoynServiceInfo args)
         {
-            // Optional - Get the about data of the producer. 
+            // Optional - Get the About data of the producer. 
             AllJoynAboutDataView aboutData = await AllJoynAboutDataView.GetDataBySessionPortAsync(args.UniqueName, m_busAttachment, args.SessionPort);
-            UpdateStatusAsync(string.Format("Found {0} on {1} from manufacturer: {2}. Connecting...", aboutData.AppName, aboutData.DeviceName, aboutData.Manufacturer), NotifyType.StatusMessage);
+
+            // Check to see if device name is populated in the about data, since device name is not a mandatory field.
+            if (string.IsNullOrEmpty(aboutData.DeviceName))
+            {
+                UpdateStatusAsync(string.Format("Found {0} from manufacturer: {1}. Connecting...", aboutData.AppName, aboutData.Manufacturer), NotifyType.StatusMessage);
+            }
+            else
+            {
+                UpdateStatusAsync(string.Format("Found {0} on {1} from manufacturer: {2}. Connecting...", aboutData.AppName, aboutData.DeviceName, aboutData.Manufacturer), NotifyType.StatusMessage);
+            }
 
             // Attempt to join the session when a producer is discovered.
             SecureInterfaceJoinSessionResult joinSessionResult = await SecureInterfaceConsumer.JoinSessionAsync(args, sender);
@@ -346,15 +358,15 @@ namespace AllJoynConsumerExperiences
 
         private void Signals_TextSentReceived(SecureInterfaceSignals sender, SecureInterfaceTextSentReceivedEventArgs args)
         {
-            //Show UI Toast
+            // Show UI Toast.
             ToastTemplateType toastTemplate = ToastTemplateType.ToastText02;
             XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
 
-            //Populate UI Toast
+            // Populate UI Toast.
             XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
             toastTextElements[0].AppendChild(toastXml.CreateTextNode("Signal Received - " + args.Message));
 
-            //Create and Send UI Toast
+            // Create and Send UI Toast.
             ToastNotification toast = new ToastNotification(toastXml);
             ToastNotificationManager.CreateToastNotifier().Show(toast);
 

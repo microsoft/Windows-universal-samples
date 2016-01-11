@@ -45,6 +45,14 @@ namespace SpeechAndTTS
 
                 await capture.InitializeAsync(settings);
             }
+            catch (TypeLoadException)
+            {
+                // On SKUs without media player (eg, the N SKUs), we may not have access to the Windows.Media.Capture
+                // namespace unless the media player pack is installed. Handle this gracefully.
+                var messageDialog = new Windows.UI.Popups.MessageDialog("Media player components are unavailable.");
+                await messageDialog.ShowAsync();
+                return false;
+            }
             catch (UnauthorizedAccessException)
             {
                 // The user has turned off access to the microphone. If this occurs, we should show an error, or disable

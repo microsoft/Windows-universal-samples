@@ -58,23 +58,23 @@ void Scenario_ContinuousRecognitionListGrammar::OnNavigatedTo(NavigationEventArg
         if (permissionGained)
         {
             this->btnContinuousRecognize->IsEnabled = true;
+
+			Windows::Globalization::Language^ speechLanguage = SpeechRecognizer::SystemSpeechLanguage;
+			speechContext = ResourceContext::GetForCurrentView();
+			speechContext->Languages = ref new VectorView<String^>(1, speechLanguage->LanguageTag);
+
+			speechResourceMap = ResourceManager::Current->MainResourceMap->GetSubtree(L"LocalizationSpeechResources");
+
+			PopulateLanguageDropdown();
+			InitializeRecognizer(SpeechRecognizer::SystemSpeechLanguage);
         }
         else
         {
             this->resultTextBlock->Visibility = Windows::UI::Xaml::Visibility::Visible;
             this->resultTextBlock->Text = L"Permission to access capture resources was not given by the user; please set the application setting in Settings->Privacy->Microphone.";
+			this->cbLanguageSelection->IsEnabled = false;
         }
-    }).then([this]()
-    {
-        Windows::Globalization::Language^ speechLanguage = SpeechRecognizer::SystemSpeechLanguage;
-        speechContext = ResourceContext::GetForCurrentView();
-        speechContext->Languages = ref new VectorView<String^>(1, speechLanguage->LanguageTag);
-
-        speechResourceMap = ResourceManager::Current->MainResourceMap->GetSubtree(L"LocalizationSpeechResources");
-
-        PopulateLanguageDropdown();
-        InitializeRecognizer(SpeechRecognizer::SystemSpeechLanguage);
-    }, task_continuation_context::use_current());
+    });
 }
 
 /// <summary>
@@ -255,6 +255,8 @@ void Scenario_ContinuousRecognitionListGrammar::OnNavigatedFrom(NavigationEventA
 /// <param name="e">Unused event details</param>
 void Scenario_ContinuousRecognitionListGrammar::ContinuousRecognize_Click(Object^ sender, RoutedEventArgs^ e)
 {
+	btnContinuousRecognize->IsEnabled = false;
+
     // The recognizer can only start listening in a continuous fashion if the recognizer is currently idle.
     // This prevents an exception from occurring.
     if (speechRecognizer->State == SpeechRecognizerState::Idle)
@@ -278,7 +280,9 @@ void Scenario_ContinuousRecognitionListGrammar::ContinuousRecognize_Click(Object
                 auto messageDialog = ref new Windows::UI::Popups::MessageDialog(exception->Message, "Exception");
                 create_task(messageDialog->ShowAsync());
             }
-        });
+        }).then([this]() {
+			btnContinuousRecognize->IsEnabled = true;
+		});
     }
     else
     {
@@ -288,7 +292,9 @@ void Scenario_ContinuousRecognitionListGrammar::ContinuousRecognize_Click(Object
         ContinuousRecoButtonText->Text = " Continuous Recognition";
         cbLanguageSelection->IsEnabled = true;
 
-        create_task(speechRecognizer->ContinuousRecognitionSession->CancelAsync());
+        create_task(speechRecognizer->ContinuousRecognitionSession->CancelAsync()).then([this]() {
+			btnContinuousRecognize->IsEnabled = true;
+		});
     }
 }
 
