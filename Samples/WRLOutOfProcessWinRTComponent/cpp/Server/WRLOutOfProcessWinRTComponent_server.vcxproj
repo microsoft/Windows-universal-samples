@@ -114,7 +114,7 @@
       <CompileAsWinRT>false</CompileAsWinRT>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>kernel32.lib;runtimeobject.lib;mincore.lib</AdditionalDependencies>
+      <AdditionalDependencies>runtimeobject.lib;mincore.lib</AdditionalDependencies>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
     <Midl>

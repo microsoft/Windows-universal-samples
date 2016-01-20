@@ -1,0 +1,42 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario9_ContainsFullScreenElement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Full-screen mode
+            </TextBlock>
+            <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
+                The app can respond to requests from the WebView to offer a full-screen experience.
+                For example, it may resize the WebView to occupy the entirety of the app view, or, as this
+                scenario illustrates, put a windowed app in full screen mode.
+            </TextBlock>
+        </StackPanel>
+
+        <Grid Grid.Row="1" BorderBrush="#FF707070" BorderThickness="1" Margin="0,10,0,0">
+            <WebView x:Name="WebViewControl" ContainsFullScreenElementChanged="WebViewControl_ContainsFullScreenElementChanged"/>
+        </Grid>
+    </Grid>
+</Page>

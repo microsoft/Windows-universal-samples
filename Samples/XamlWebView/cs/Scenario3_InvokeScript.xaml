@@ -1,0 +1,58 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario3_InvokeScript"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Invoke script
+            </TextBlock>
+            <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
+                Click "Load HTML" to load the HTML into the WebView control, then
+                click "Invoke script" to call the JavaScript function "doSomething"
+                and display the string result.
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Content="Load HTML" Click="{x:Bind LoadHtml}" Margin="0,0,10,0"/>
+                <Button Content="Invoke Script" Click="{x:Bind InvokeScript}"/>
+            </StackPanel>
+        </StackPanel>
+        <Grid Grid.Row="1" Margin="0,10,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="HTML:" Style="{StaticResource BasicTextStyle}"/>
+            <TextBlock Text="WebView:" Grid.Column="1" Style="{StaticResource BasicTextStyle}"/>
+            <TextBox x:Name="HtmlBox" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True"/>
+            <Grid Grid.Row="1" Grid.Column="1" BorderBrush="#FF707070" BorderThickness="1">
+                <WebView x:Name="WebViewControl"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

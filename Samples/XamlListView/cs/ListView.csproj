@@ -115,6 +115,9 @@
     <Compile Include="Samples\RestoreScrollPositionSample\RestoreScrollPositionSample.xaml.cs">
       <DependentUpon>RestoreScrollPositionSample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Samples\ScrollIntoViewSample\ScrollIntoViewSample.xaml.cs">
+      <DependentUpon>ScrollIntoViewSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\SimpleGridViewSample\SimpleGridViewSample.xaml.cs">
       <DependentUpon>SimpleGridViewSample.xaml</DependentUpon>
     </Compile>
@@ -218,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\RestoreScrollPositionSample\RestoreScrollPositionSample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\ScrollIntoViewSample\ScrollIntoViewSample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
