@@ -54,6 +54,10 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## Related topics
 
+### Samples
+
+[Advertising](/Samples/Advertising)
+
 ### Reference
 
 [**Windows.ApplicationModel.Store**](http://msdn.microsoft.com/library/windows/apps/br225197)

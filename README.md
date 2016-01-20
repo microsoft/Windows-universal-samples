@@ -191,6 +191,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/WebView">WebView control (HTML)</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/XamlWebView">WebView control (XAML)</a></td>
   <td><a href="Samples/ResizeAppView">Window resizing</a></td>
  </tr>
 </table>
@@ -453,31 +454,32 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 
 <table>
  <tr>
+  <td><a href="Samples/Advertising">Advertising</a></td>
   <td><a href="Samples/BackgroundTransfer">Background transfer</a></td>
   <td><a href="Samples/DatagramSocket">DatagramSocket</a></td>
-  <td><a href="Samples/EasProtocol">Exchange Active Sync (EAS)</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/EasProtocol">Exchange Active Sync (EAS)</a></td>
   <td><a href="Samples/HttpClient">HttpClient</a></td>
   <td><a href="Samples/Json">JSON</a></td>
-  <td><a href="Samples/MobileBroadband">Mobile broadband</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/MobileBroadband">Mobile broadband</a></td>
   <td><a href="Samples/RadioManager">Radios</a></td>
   <td><a href="Samples/FeedReader">RSS reader end-to-end (JavaScript)</a></td>
-  <td><a href="Samples/SocketActivityStreamSocket">Socket activity trigger stream socket</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/SocketActivityStreamSocket">Socket activity trigger stream socket</a></td>
   <td><a href="Samples/StreamSocket">StreamSocket</a></td>
   <td><a href="Samples/Syndication">Syndication</a></td>
-  <td><a href="Samples/UssdProtcol">USSD protocol</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/UssdProtcol">USSD protocol</a></td>
   <td><a href="Samples/WebSocket">WebSocket</a></td>
   <td><a href="Samples/WiFiDirect">Wi-Fi Direct</a></td>
-  <td><a href="Samples/WiFiDirectServices">Wi-Fi Direct services</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/WiFiDirectServices">Wi-Fi Direct services</a></td>
   <td><a href="Samples/WiFiScan">Wi-Fi scanning</a></td>
  </tr>
 </table>

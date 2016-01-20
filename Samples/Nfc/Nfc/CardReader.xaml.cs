@@ -110,108 +110,107 @@ namespace NfcSample
                 MainPage.Current.NotifyUser(String.Empty, NotifyType.StatusMessage, true);
 
                 // Connect to the card
-                var connection = await card.ConnectAsync();
-
-                // Try to identify what type of card it was
-                IccDetection cardIdentification = new IccDetection(card, connection);
-                await cardIdentification.DetectCardTypeAync();
-                LogMessage("Connected to card\r\nPC/SC device class: " + cardIdentification.PcscDeviceClass.ToString());
-                LogMessage("Card name: " + cardIdentification.PcscCardName.ToString());
-                LogMessage("ATR: " + BitConverter.ToString(cardIdentification.Atr));
-
-                if ((cardIdentification.PcscDeviceClass == Pcsc.Common.DeviceClass.StorageClass) &&
-                    (cardIdentification.PcscCardName == Pcsc.CardName.MifareUltralightC
-                    || cardIdentification.PcscCardName == Pcsc.CardName.MifareUltralight
-                    || cardIdentification.PcscCardName == Pcsc.CardName.MifareUltralightEV1))
+                using (SmartCardConnection connection = await card.ConnectAsync())
                 {
-                    // Handle MIFARE Ultralight
-                    MifareUltralight.AccessHandler mifareULAccess = new MifareUltralight.AccessHandler(connection);
+                    // Try to identify what type of card it was
+                    IccDetection cardIdentification = new IccDetection(card, connection);
+                    await cardIdentification.DetectCardTypeAync();
+                    LogMessage("Connected to card\r\nPC/SC device class: " + cardIdentification.PcscDeviceClass.ToString());
+                    LogMessage("Card name: " + cardIdentification.PcscCardName.ToString());
+                    LogMessage("ATR: " + BitConverter.ToString(cardIdentification.Atr));
 
-                    // Each read should get us 16 bytes/4 blocks, so doing
-                    // 4 reads will get us all 64 bytes/16 blocks on the card
-                    for (byte i = 0; i < 4; i++)
+                    if ((cardIdentification.PcscDeviceClass == Pcsc.Common.DeviceClass.StorageClass) &&
+                        (cardIdentification.PcscCardName == Pcsc.CardName.MifareUltralightC
+                        || cardIdentification.PcscCardName == Pcsc.CardName.MifareUltralight
+                        || cardIdentification.PcscCardName == Pcsc.CardName.MifareUltralightEV1))
                     {
-                        byte[] response = await mifareULAccess.ReadAsync((byte)(4 * i));
-                        LogMessage("Block " + (4 * i).ToString() + " to Block " + (4 * i + 3).ToString() + " " + BitConverter.ToString(response));
+                        // Handle MIFARE Ultralight
+                        MifareUltralight.AccessHandler mifareULAccess = new MifareUltralight.AccessHandler(connection);
+
+                        // Each read should get us 16 bytes/4 blocks, so doing
+                        // 4 reads will get us all 64 bytes/16 blocks on the card
+                        for (byte i = 0; i < 4; i++)
+                        {
+                            byte[] response = await mifareULAccess.ReadAsync((byte)(4 * i));
+                            LogMessage("Block " + (4 * i).ToString() + " to Block " + (4 * i + 3).ToString() + " " + BitConverter.ToString(response));
+                        }
+
+                        byte[] responseUid = await mifareULAccess.GetUidAsync();
+                        LogMessage("UID:  " + BitConverter.ToString(responseUid));
                     }
-
-                    byte[] responseUid = await mifareULAccess.GetUidAsync();
-                    LogMessage("UID:  " + BitConverter.ToString(responseUid));
-                }
-                else if (cardIdentification.PcscDeviceClass == Pcsc.Common.DeviceClass.MifareDesfire)
-                {
-                    // Handle MIFARE DESfire
-                    Desfire.AccessHandler desfireAccess = new Desfire.AccessHandler(connection);
-                    Desfire.CardDetails desfire = await desfireAccess.ReadCardDetailsAsync();
-
-                    LogMessage("DesFire Card Details:  " + Environment.NewLine + desfire.ToString());
-                }
-                else if (cardIdentification.PcscDeviceClass == Pcsc.Common.DeviceClass.StorageClass
-                    && cardIdentification.PcscCardName == Pcsc.CardName.FeliCa)
-                {
-                    // Handle Felica
-                    LogMessage("Felica card detected");
-                    var felicaAccess = new Felica.AccessHandler(connection);
-                    var uid = await felicaAccess.GetUidAsync();
-                    LogMessage("UID:  " + BitConverter.ToString(uid));
-                }
-                else if (cardIdentification.PcscDeviceClass == Pcsc.Common.DeviceClass.StorageClass
-                    && (cardIdentification.PcscCardName == Pcsc.CardName.MifareStandard1K || cardIdentification.PcscCardName == Pcsc.CardName.MifareStandard4K))
-                {
-                    // Handle MIFARE Standard/Classic
-                    LogMessage("MIFARE Standard/Classic card detected");
-                    var mfStdAccess = new MifareStandard.AccessHandler(connection);
-                    var uid = await mfStdAccess.GetUidAsync();
-                    LogMessage("UID:  " + BitConverter.ToString(uid));
-
-                    ushort maxAddress = 0;
-                    switch (cardIdentification.PcscCardName)
+                    else if (cardIdentification.PcscDeviceClass == Pcsc.Common.DeviceClass.MifareDesfire)
                     {
-                        case Pcsc.CardName.MifareStandard1K:
-                            maxAddress = 0x3f;
-                            break;
-                        case Pcsc.CardName.MifareStandard4K:
-                            maxAddress = 0xff;
-                            break;
+                        // Handle MIFARE DESfire
+                        Desfire.AccessHandler desfireAccess = new Desfire.AccessHandler(connection);
+                        Desfire.CardDetails desfire = await desfireAccess.ReadCardDetailsAsync();
+
+                        LogMessage("DesFire Card Details:  " + Environment.NewLine + desfire.ToString());
                     }
-                    await mfStdAccess.LoadKeyAsync(MifareStandard.DefaultKeys.FactoryDefault);
-
-                    for (ushort address = 0; address <= maxAddress; address++)
+                    else if (cardIdentification.PcscDeviceClass == Pcsc.Common.DeviceClass.StorageClass
+                        && cardIdentification.PcscCardName == Pcsc.CardName.FeliCa)
                     {
-                        var response = await mfStdAccess.ReadAsync(address, Pcsc.GeneralAuthenticate.GeneralAuthenticateKeyType.MifareKeyA);
-                        LogMessage("Block " + address.ToString() + " " + BitConverter.ToString(response));
+                        // Handle Felica
+                        LogMessage("Felica card detected");
+                        var felicaAccess = new Felica.AccessHandler(connection);
+                        var uid = await felicaAccess.GetUidAsync();
+                        LogMessage("UID:  " + BitConverter.ToString(uid));
                     }
-                }
-                else if (cardIdentification.PcscDeviceClass == Pcsc.Common.DeviceClass.StorageClass
-                    && (cardIdentification.PcscCardName == Pcsc.CardName.ICODE1 ||
-                        cardIdentification.PcscCardName == Pcsc.CardName.ICODESLI ||
-                        cardIdentification.PcscCardName == Pcsc.CardName.iCodeSL2))
-                {
-                    // Handle ISO15693
-                    LogMessage("ISO15693 card detected");
-                    var iso15693Access = new Iso15693.AccessHandler(connection);
-                    var uid = await iso15693Access.GetUidAsync();
-                    LogMessage("UID:  " + BitConverter.ToString(uid));
-                }
-                else
-                {
-                    // Unknown card type
-                    // Note that when using the XDE emulator the card's ATR and type is not passed through, so we'll
-                    // end up here even for known card types if using the XDE emulator
-
-                    // Some cards might still let us query their UID with the PC/SC command, so let's try:
-                    var apduRes = await connection.TransceiveAsync(new Pcsc.GetUid());
-                    if (!apduRes.Succeeded)
+                    else if (cardIdentification.PcscDeviceClass == Pcsc.Common.DeviceClass.StorageClass
+                        && (cardIdentification.PcscCardName == Pcsc.CardName.MifareStandard1K || cardIdentification.PcscCardName == Pcsc.CardName.MifareStandard4K))
                     {
-                        LogMessage("Failure getting UID of card, " + apduRes.ToString());
+                        // Handle MIFARE Standard/Classic
+                        LogMessage("MIFARE Standard/Classic card detected");
+                        var mfStdAccess = new MifareStandard.AccessHandler(connection);
+                        var uid = await mfStdAccess.GetUidAsync();
+                        LogMessage("UID:  " + BitConverter.ToString(uid));
+
+                        ushort maxAddress = 0;
+                        switch (cardIdentification.PcscCardName)
+                        {
+                            case Pcsc.CardName.MifareStandard1K:
+                                maxAddress = 0x3f;
+                                break;
+                            case Pcsc.CardName.MifareStandard4K:
+                                maxAddress = 0xff;
+                                break;
+                        }
+                        await mfStdAccess.LoadKeyAsync(MifareStandard.DefaultKeys.FactoryDefault);
+
+                        for (ushort address = 0; address <= maxAddress; address++)
+                        {
+                            var response = await mfStdAccess.ReadAsync(address, Pcsc.GeneralAuthenticate.GeneralAuthenticateKeyType.MifareKeyA);
+                            LogMessage("Block " + address.ToString() + " " + BitConverter.ToString(response));
+                        }
+                    }
+                    else if (cardIdentification.PcscDeviceClass == Pcsc.Common.DeviceClass.StorageClass
+                        && (cardIdentification.PcscCardName == Pcsc.CardName.ICODE1 ||
+                            cardIdentification.PcscCardName == Pcsc.CardName.ICODESLI ||
+                            cardIdentification.PcscCardName == Pcsc.CardName.iCodeSL2))
+                    {
+                        // Handle ISO15693
+                        LogMessage("ISO15693 card detected");
+                        var iso15693Access = new Iso15693.AccessHandler(connection);
+                        var uid = await iso15693Access.GetUidAsync();
+                        LogMessage("UID:  " + BitConverter.ToString(uid));
                     }
                     else
                     {
-                        LogMessage("UID:  " + BitConverter.ToString(apduRes.ResponseData));
+                        // Unknown card type
+                        // Note that when using the XDE emulator the card's ATR and type is not passed through, so we'll
+                        // end up here even for known card types if using the XDE emulator
+
+                        // Some cards might still let us query their UID with the PC/SC command, so let's try:
+                        var apduRes = await connection.TransceiveAsync(new Pcsc.GetUid());
+                        if (!apduRes.Succeeded)
+                        {
+                            LogMessage("Failure getting UID of card, " + apduRes.ToString());
+                        }
+                        else
+                        {
+                            LogMessage("UID:  " + BitConverter.ToString(apduRes.ResponseData));
+                        }
                     }
                 }
-
-                connection.Dispose();
             }
             catch(Exception ex)
             {
