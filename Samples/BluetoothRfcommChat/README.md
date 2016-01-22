@@ -32,7 +32,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 [DataReaderWriter sample](../DataReaderWriter)
 
-[DeviceEnumeration sample](../DeviceEnumeration)
+[DeviceEnumeration sample](../DeviceEnumerationAndPairing)
 
 [StreamSocket sample](../StreamSocket)
 
