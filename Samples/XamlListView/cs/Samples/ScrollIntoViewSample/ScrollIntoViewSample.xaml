@@ -1,0 +1,85 @@
+﻿<Page
+    x:Class="ListViewSample.ScrollIntoViewSample"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ListViewSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:ListViewSample.Model"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Style="{StaticResource SplitViewTogglePaneButtonStyle}"
+                VerticalAlignment="Center"
+                Click="ShowSplitView"/>
+            <TextBlock Text="Scroll into View"
+                VerticalAlignment="Top"
+                Style="{ThemeResource TitleTextBlockStyle}"
+                Margin="12" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="0,0,0,12" >
+            <TextBlock Grid.Row="1"
+                Style="{ThemeResource BodyTextBlockStyle}"
+                Text="By default, ScrollIntoView scrolls the minimum necessary to bring the item into view. Specifying an alignment of Leading aligns the item with the leading edge."
+                Margin="12,0,0,20"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <Button x:Name="Scroll"                         
+                           Content="Scroll to position:"
+                           Margin="12,0,10,0"
+                           Click="Scroll_Click"/>
+                <TextBox x:Name="scrollId" 
+                         Text="6"
+                         InputScope="Number"
+                         Margin="0,0,10,0" />
+                
+                <TextBlock Text="Alignment:" Margin="0,0,10,0" />
+                <ComboBox x:Name="ScrollAlignment" SelectedIndex="0" Width="100">
+                    <ComboBoxItem Content="Default">
+                        <ComboBoxItem.Tag>
+                            <ScrollIntoViewAlignment>Default</ScrollIntoViewAlignment>
+                        </ComboBoxItem.Tag>
+                    </ComboBoxItem>
+                    <ComboBoxItem Content="Leading">
+                        <ComboBoxItem.Tag>
+                            <ScrollIntoViewAlignment>Leading</ScrollIntoViewAlignment>
+                        </ComboBoxItem.Tag>
+                    </ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+
+        <ListView x:Name="ItemsListView" 
+                  Grid.Row="2" 
+                  ItemsSource="{x:Bind _items}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="data:Item">
+                    <RelativePanel>
+                        <TextBlock x:Name="IdLabel"
+                                   Margin="0,12,5,12" 
+                                   Style="{ThemeResource BaseTextBlockStyle}"
+                                   Text="Id :"/>
+                        <TextBlock RelativePanel.RightOf="IdLabel"
+                                   Style="{ThemeResource BaseTextBlockStyle}"
+                                   Margin="0,12,0,12" 
+                                   Text="{x:Bind Id}"/>
+                        <Image RelativePanel.Below="IdLabel"
+                               Source="{x:Bind ImageSource}" 
+                               MaxWidth="500"
+                               Stretch="Uniform"
+                               Margin="0,0,0,24" />
+                    </RelativePanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <local:SamplesPane x:Name="MySamplesPane" Grid.RowSpan="3"/>
+    </Grid>
+</Page>

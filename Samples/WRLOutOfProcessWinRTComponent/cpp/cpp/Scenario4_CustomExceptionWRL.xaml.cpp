@@ -15,7 +15,7 @@ using namespace Microsoft::SDKSamples::Kitchen;
 using namespace Windows::Foundation;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
-using namespace SDKTemplate::WRLInProcessWinRTComponent;
+using namespace SDKTemplate::WRLOutOfProcessWinRTComponent;
 
 CustomExceptionWRL::CustomExceptionWRL()
 {
