@@ -25,9 +25,14 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## Related topics
 
-Registration of application to use a Microsoft account [Preparing your account to use Windows Live Services in your Windows Store apps](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh770854.aspx)
+Registration of application to use a Microsoft account:
+[Preparing your account to use Windows Live Services in your Windows Store apps](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh770854.aspx)
 
-Configuring an application to authorize with Azure Active Directory (https://auth0.com/docs/connections/enterprise/azure-active-directory)
+Develop Windows Universal Apps with Azure AD and the Windows 10 Identity API:
+[Using WebAccountManager to Integrate with Azure AD](http://blogs.technet.com/b/ad/archive/2015/08/03/develop-windows-universal-apps-with-azure-ad-and-the-windows-10-identity-api.aspx)
+
+Azure sample:
+[Universal Windows Platform app calling the directory Graph API](https://github.com/Azure-Samples/active-directory-dotnet-native-uwp-wam/tree/master/NativeClient-UWP-WAM/)
 
 ### Reference
 

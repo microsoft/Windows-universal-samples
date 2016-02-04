@@ -414,6 +414,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/AssociationLaunching">Association launching</a></td>
   <td><a href="Samples/BackgroundTask">Background task</a></td>
+  <td><a href="Samples/ExtendedExecution">Extended execution</a></td>
  </tr>
 </table>
 <table>
