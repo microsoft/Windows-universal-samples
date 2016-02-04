@@ -22,7 +22,7 @@ There are some scenarios that are not available in the JS version but they will 
 Related topics
 --------------
 
-[Windows.Media.Playback namespace] https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.playback.aspx
+[Windows.Media.Playback namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.playback.aspx)
 
 System requirements
 -----------------------------

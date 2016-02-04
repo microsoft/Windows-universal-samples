@@ -141,56 +141,57 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 
 <table>
  <tr>
+  <td><a href="Samples/3DPrintingFromUnity">3D Printing from Unity</a></td>
   <td><a href="Samples/XamlAutoSuggestBox">AutoSuggestBox migration</a></td>
   <td><a href="Samples/Clipboard">Clipboard</a></td>
-  <td><a href="Samples/XamlCommanding">Commanding</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/XamlCommanding">Commanding</a></td>
   <td><a href="Samples/ContextMenu">Context menu</a></td>
   <td><a href="Samples/XamlContextMenu">Context menu (XAML)</a></td>
-  <td><a href="Samples/XamlDataVirtualization">Data virtualization</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/XamlDataVirtualization">Data virtualization</a></td>
   <td><a href="Samples/UserSelection">Disabling selection</a></td>
   <td><a href="Samples/DisplayOrientation">Display orientation</a></td>
-  <td><a href="Samples/DWriteTextLayoutCloudFont">Downloadable fonts (DirectWrite)</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/DWriteTextLayoutCloudFont">Downloadable fonts (DirectWrite)</a></td>
   <td><a href="Samples/XamlCloudFontIntegration">Downloadable fonts (XAML)</a></td>
   <td><a href="Samples/XamlDragAndDrop">Drag and drop</a></td>
-  <td><a href="Samples/XamlFocusVisuals">Focus visuals</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/XamlFocusVisuals">Focus visuals</a></td>
   <td><a href="Samples/FullScreenMode">Full screen mode</a></td>
   <td><a href="Samples/DWriteLineSpacingModes">Line spacing (DirectWrite)</a></td>
-  <td><a href="Samples/XamlListView">ListView and GridView</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/XamlListView">ListView and GridView</a></td>
   <td><a href="Samples/LockScreenApps">Lock screen apps</a></td>
   <td><a href="Samples/MessageDialog">Message dialog</a></td>
-  <td><a href="Samples/MultipleViews">Multiple views</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/MultipleViews">Multiple views</a></td>
   <td><a href="Samples/OCR">OCR</a></td>
   <td><a href="Samples/Printing">Printing</a></td>
-  <td><a href="Samples/XamlPullToRefresh">Pull-to-refresh</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/XamlPullToRefresh">Pull-to-refresh</a></td>
   <td><a href="Samples/XamlResponsiveTechniques">Responsiveness techniques</a></td>
   <td><a href="Samples/DpiScaling">Scaling according to DPI</a></td>
-  <td><a href="Samples/SplashScreen">Splash screen</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/SplashScreen">Splash screen</a></td>
   <td><a href="Samples/XamlStateTriggers">State triggers</a></td>
   <td><a href="Samples/XamlTailoredMultipleViews">Tailored multiple views</a></td>
-  <td><a href="Samples/TitleBar">Title bar</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/TitleBar">Title bar</a></td>
   <td><a href="Samples/XamlUIBasics">UI basics (XAML)</a></td>
   <td><a href="Samples/UserInteractionMode">User interaction mode</a></td>
-  <td><a href="Samples/WebView">WebView control (HTML)</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/WebView">WebView control (HTML)</a></td>
   <td><a href="Samples/XamlWebView">WebView control (XAML)</a></td>
   <td><a href="Samples/ResizeAppView">Window resizing</a></td>
  </tr>
@@ -422,6 +423,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/AssociationLaunching">Association launching</a></td>
   <td><a href="Samples/BackgroundTask">Background task</a></td>
+  <td><a href="Samples/ExtendedExecution">Extended execution</a></td>
  </tr>
 </table>
 
