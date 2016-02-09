@@ -319,10 +319,6 @@ namespace CameraVideoStabilization
                 {
                     Debug.WriteLine("The app was denied access to the camera");
                 }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Exception when initializing MediaCapture with {0}: {1}", cameraDevice.Id, ex.ToString());
-                }
 
                 // Set up the encoding profile for video recording
                 _encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
@@ -366,15 +362,8 @@ namespace CameraVideoStabilization
             PreviewControl.FlowDirection = _mirroringPreview ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
             // Start the preview
-            try
-            {
-                await _mediaCapture.StartPreviewAsync();
-                _isPreviewing = true;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Exception when starting the preview: {0}", ex.ToString());
-            }
+            await _mediaCapture.StartPreviewAsync();
+            _isPreviewing = true;
 
             // Initialize the preview to the current orientation
             if (_isPreviewing)
@@ -413,15 +402,8 @@ namespace CameraVideoStabilization
         private async Task StopPreviewAsync()
         {
             // Stop the preview
-            try
-            {
-                _isPreviewing = false;
-                await _mediaCapture.StopPreviewAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Exception when stopping the preview: {0}", ex.ToString());
-            }
+            _isPreviewing = false;
+            await _mediaCapture.StopPreviewAsync();
 
             // Use the dispatcher because this method is sometimes called from non-UI threads
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -579,6 +561,7 @@ namespace CameraVideoStabilization
             }
             catch (Exception ex)
             {
+                // File I/O errors are reported as exceptions
                 Debug.WriteLine("Exception when starting video recording: {0}", ex.ToString());
             }
         }
@@ -610,6 +593,7 @@ namespace CameraVideoStabilization
             }
             catch (Exception ex)
             {
+                // File I/O errors are reported as exceptions
                 Debug.WriteLine("Exception when stopping video recording: {0}", ex.ToString());
             }
         }

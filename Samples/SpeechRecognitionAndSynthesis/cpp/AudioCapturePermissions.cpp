@@ -33,42 +33,54 @@ IAsyncOperation<bool>^  AudioCapturePermissions::RequestMicrophonePermissionAsyn
 {
     return create_async([]() 
     {   
-        // Request access to the microphone only, to limit the number of capabilities we need
-        // to request in the package manifest.
-        MediaCaptureInitializationSettings^ settings = ref new MediaCaptureInitializationSettings();
-        settings->StreamingCaptureMode = StreamingCaptureMode::Audio;
-        settings->MediaCategory = MediaCategory::Speech;
-        MediaCapture^ capture = ref new MediaCapture();
+		try
+		{
+			// Request access to the microphone only, to limit the number of capabilities we need
+			// to request in the package manifest.
+			MediaCaptureInitializationSettings^ settings = ref new MediaCaptureInitializationSettings();
+			settings->StreamingCaptureMode = StreamingCaptureMode::Audio;
+			settings->MediaCategory = MediaCategory::Speech;
+			MediaCapture^ capture = ref new MediaCapture();
 
-        return create_task(capture->InitializeAsync(settings))
-            .then([](task<void> previousTask) -> bool
-        {
-            try
-            {
-                previousTask.get();
-            }
-            catch (AccessDeniedException^)
-            {
-                // The user has turned off access to the microphone. If this occurs, we should show an error, or disable
-                // functionality within the app to ensure that further exceptions aren't generated when 
-                // recognition is attempted.
-                return false;
-            }
-            catch (Exception^ exception)
-            {
-                // This can be replicated by using remote desktop to a system, but not redirecting the microphone input.
-                // Can also occur if using the virtual machine console tool to access a VM instead of using remote desktop.
-                if (exception->HResult == AudioCapturePermissions::NoCaptureDevicesHResult)
-                {
-                    auto messageDialog = ref new Windows::UI::Popups::MessageDialog("No Audio Capture devices are present on this system.");
-                    create_task(messageDialog->ShowAsync());
-                    return false;
-                }
+			return create_task(capture->InitializeAsync(settings))
+				.then([](task<void> previousTask) -> bool
+			{
+				try
+				{
+					previousTask.get();
+				}
+				catch (AccessDeniedException^)
+				{
+					// The user has turned off access to the microphone. If this occurs, we should show an error, or disable
+					// functionality within the app to ensure that further exceptions aren't generated when 
+					// recognition is attempted.
+					return false;
+				}
+				catch (Exception^ exception)
+				{
+					// This can be replicated by using remote desktop to a system, but not redirecting the microphone input.
+					// Can also occur if using the virtual machine console tool to access a VM instead of using remote desktop.
+					if (exception->HResult == AudioCapturePermissions::NoCaptureDevicesHResult)
+					{
+						auto messageDialog = ref new Windows::UI::Popups::MessageDialog("No Audio Capture devices are present on this system.");
+						create_task(messageDialog->ShowAsync());
+						return false;
+					}
 
-                throw;
-            }
-            return true;
-        });
+					throw;
+				}
+				return true;
+			});
+		}
+		catch (Platform::ClassNotRegisteredException^ ex)
+		{
+			// If media player components are unavailable (eg, on an N SKU of windows), we may
+			// get ClassNotRegisteredException when trying to check if we have permission to use
+			// the microphone. 
+			auto messageDialog = ref new Windows::UI::Popups::MessageDialog("Media Player Components unavailable.");
+			create_task(messageDialog->ShowAsync());
+			return create_task([] {return false; });
+		}
     });
     
 }

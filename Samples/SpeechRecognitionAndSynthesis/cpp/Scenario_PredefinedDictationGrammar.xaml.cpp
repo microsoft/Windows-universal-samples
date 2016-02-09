@@ -57,23 +57,23 @@ void Scenario_PredefinedDictationGrammar::OnNavigatedTo(NavigationEventArgs^ e)
             // Enable the recognition buttons.
             this->btnRecognizeWithUI->IsEnabled = true;
             this->btnRecognizeWithoutUI->IsEnabled = true;
+
+			Windows::Globalization::Language^ speechLanguage = SpeechRecognizer::SystemSpeechLanguage;
+			speechContext = ResourceContext::GetForCurrentView();
+			speechContext->Languages = ref new VectorView<String^>(1, speechLanguage->LanguageTag);
+
+			speechResourceMap = ResourceManager::Current->MainResourceMap->GetSubtree(L"LocalizationSpeechResources");
+
+			PopulateLanguageDropdown();
+			InitializeRecognizer(SpeechRecognizer::SystemSpeechLanguage);
         }
         else
         {
             this->resultTextBlock->Visibility = Windows::UI::Xaml::Visibility::Visible;
             this->resultTextBlock->Text = "Permission to access capture resources was not given by the user; please set the application setting in Settings->Privacy->Microphone.";
+			this->cbLanguageSelection->IsEnabled = false;
         }
-    }).then([this]() 
-    {
-        Windows::Globalization::Language^ speechLanguage = SpeechRecognizer::SystemSpeechLanguage;
-        speechContext = ResourceContext::GetForCurrentView();
-        speechContext->Languages = ref new VectorView<String^>(1, speechLanguage->LanguageTag);
-
-        speechResourceMap = ResourceManager::Current->MainResourceMap->GetSubtree(L"LocalizationSpeechResources");
-
-        PopulateLanguageDropdown();
-        InitializeRecognizer(SpeechRecognizer::SystemSpeechLanguage);
-    }, task_continuation_context::use_current());
+	});
 }
 
 /// <summary>

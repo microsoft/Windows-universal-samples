@@ -227,13 +227,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Microsoft.SDKSamples.Kitchen.h" />
-    <ClInclude Include="OvenServer.h" />
-    <ClInclude Include="BreadServer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="module.cpp" />
     <ClCompile Include="OvenServer.cpp" />
-    <ClCompile Include="BreadServer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OvenServer.def" />

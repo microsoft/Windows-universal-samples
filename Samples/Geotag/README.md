@@ -1,6 +1,6 @@
 ﻿<!---
   category: MapsAndLocation 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620547&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620547
 --->
 
 # Geotag sample
@@ -16,7 +16,7 @@ Scenario 1: Demonstrates using GetGeotagAsync API to retrieve location info from
 
 Related topics
 --------------
-[Known Folders] https://msdn.microsoft.com/library/windows/apps/windows.storage.knownfolders.aspx
+[Known Folders](https://msdn.microsoft.com/library/windows/apps/windows.storage.knownfolders.aspx)
 
 
 System requirements

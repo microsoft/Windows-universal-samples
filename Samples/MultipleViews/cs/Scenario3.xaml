@@ -35,10 +35,11 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
-                    The system normally provides a subtle animation when views are switched in place, as can be seen in SecondaryPage.xaml. You may provide, though, custom animations when switching between views.
+                    The system provides a default animation when views are switched in place, as can be seen in SecondaryPage.xaml.
+                    Some device families allow you to provide a custom animation when switching between views.
                     You should run this scenario by launching the app from Start instead of from Visual Studio since Visual Studio disables system animations while debugging.
                     <LineBreak/><LineBreak/>
-                    Create a window in Scenario 1, then switch to it here to see a custom animation.
+                    Create a window in Scenario 1, then switch to it here to see a custom animation, if supported.
                 </TextBlock>
                 <Button VerticalAlignment="Top" Content="Switch to selected view" Margin="0,10,0,0" Click="AnimatedSwitch_Click"/>
                 <TextBlock Style="{StaticResource BasicTextStyle}">Currently open views:</TextBlock>

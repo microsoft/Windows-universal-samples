@@ -79,9 +79,7 @@
             ];
 
             // Issue a bulk query for all of the properties above.
-            // NOTE: Bulk queries do not work from JS right now.
-            // user.getPropertiesAsync(desiredProperties).then(function (values) {
-            simulateGetPropertiesAsync(user, desiredProperties).then(function (values) {
+            user.getPropertiesAsync(desiredProperties).then(function (values) {
                 // Generate the results.
                 var result = "NonRoamableId: " + user.nonRoamableId + "\n";
                 result += "Type: " + userTypeNames[user.type] + "\n";
@@ -103,16 +101,5 @@
                 }
             });
         }
-    }
-
-    // Bulk queries do not work from JS right now, so we simulate it by
-    // issuing a series of single-property queries.
-    function simulateGetPropertiesAsync(user, desiredProperties) {
-        var values = {};
-        return WinJS.Promise.join(desiredProperties.map(function (propertyName) {
-            return user.getPropertyAsync(propertyName).then(function (result) {
-                values[propertyName] = result;
-            });
-        })).then(function () { return values; });
     }
 })();

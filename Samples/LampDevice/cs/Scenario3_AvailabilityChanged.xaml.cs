@@ -62,24 +62,17 @@ namespace Lamp
         /// <returns>async Task</returns>
         private async Task InitializeLampAsync()
         {
-            try
-            {
-                lamp = await Lamp.GetDefaultAsync();
+            lamp = await Lamp.GetDefaultAsync();
 
-                if (lamp == null)
-                {
-                    await LogStatusAsync("Error: No lamp device was found", NotifyType.ErrorMessage);
-                    lampToggle.IsEnabled = false;
-                    return;
-                }
-
-                await LogStatusAsync(string.Format(CultureInfo.InvariantCulture, "Default lamp instance acquired, Device Id: {0}", lamp.DeviceId) , NotifyType.StatusMessage);
-                lampToggle.IsEnabled = true;
-            }
-            catch (Exception eX)
+            if (lamp == null)
             {
-                await LogStatusAsync(eX.Message, NotifyType.ErrorMessage);
+                await LogStatusAsync("Error: No lamp device was found", NotifyType.ErrorMessage);
+                lampToggle.IsEnabled = false;
+                return;
             }
+
+            await LogStatusAsync(string.Format(CultureInfo.InvariantCulture, "Default lamp instance acquired, Device Id: {0}", lamp.DeviceId), NotifyType.StatusMessage);
+            lampToggle.IsEnabled = true;
         }
 
         /// <summary>

@@ -1,6 +1,6 @@
-﻿<!---
+<!---
   category: NetworkingAndWebServices 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620610&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620610
 --->
 
 # Syndication sample
@@ -32,23 +32,11 @@ For more information on network capabilities, see [How to set network capabiliti
 
 ### Other - C\#/VB/C++ and XAML
 
-[Accessing and managing syndicated content (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452981)
+[RSS/Atom feeds](https://msdn.microsoft.com/library/windows/apps/mt429379)
 
 [Adding support for networking (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452751)
 
-[How to set network capabilities (XAML)](http://msdn.microsoft.com/library/windows/apps/jj835817)
-
-[How to access a web feed (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452994)
-
-### Other - JavaScript and HTML
-
-[Accessing and managing syndicated content (HTML)](http://msdn.microsoft.com/library/windows/apps/hh452973)
-
-[Adding support for networking (HTML)](http://msdn.microsoft.com/library/windows/apps/hh452752)
-
-[How to set network capabilities (HTML)](http://msdn.microsoft.com/library/windows/apps/hh770532)
-
-[How to access a web feed (HTML)](http://msdn.microsoft.com/library/windows/apps/hh700374)
+[Networking basics](https://msdn.microsoft.com/library/windows/apps/mt280233)
 
 ### Reference
 
@@ -61,6 +49,8 @@ For more information on network capabilities, see [How to set network capabiliti
 [**Windows.Web.Syndication**](http://msdn.microsoft.com/library/windows/apps/br243632)
 
 ### Samples
+
+[RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)
 
 [AtomPub sample](http://go.microsoft.com/fwlink/p/?linkid=245061)
 

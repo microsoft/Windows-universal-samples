@@ -37,7 +37,7 @@ public interface class ISecureInterfaceService
 {
 public:
     // Implement this function to handle calls to the Concatenate method.
-    Windows::Foundation::IAsyncOperation<SecureInterfaceConcatenateResult^>^ ConcatenateAsync(Windows::Devices::AllJoyn::AllJoynMessageInfo^ info , _In_ Platform::String^ interfaceMemberInStr1, _In_ Platform::String^ interfaceMemberInStr2);
+    Windows::Foundation::IAsyncOperation<SecureInterfaceConcatenateResult^>^ ConcatenateAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info , _In_ Platform::String^ interfaceMemberInStr1, _In_ Platform::String^ interfaceMemberInStr2);
 
     // Implement this function to handle requests for the value of the IsUpperCaseEnabled property.
     //

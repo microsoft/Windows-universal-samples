@@ -73,14 +73,18 @@ namespace Transform3DAnimations
 
             _loadTimer.Start();
 
-            SystemNavigationManager.GetForCurrentView().BackRequested += ArticlePage_BackRequested;
+            SystemNavigationManager systemNavigationManager = SystemNavigationManager.GetForCurrentView();
+            systemNavigationManager.BackRequested += ArticlePage_BackRequested;
+            systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
 
-            SystemNavigationManager.GetForCurrentView().BackRequested -= ArticlePage_BackRequested;
+            SystemNavigationManager systemNavigationManager = SystemNavigationManager.GetForCurrentView();
+            systemNavigationManager.BackRequested -= ArticlePage_BackRequested;
+            systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
         private void ArticlePage_BackRequested(object sender, BackRequestedEventArgs e)

@@ -79,16 +79,6 @@ task<void> Scenario3_AvailabilityChanged::InitializeLampAsync()
         ss << "Default lamp instance acquired, Device Id: " << lamp->DeviceId->Data();
         LogStatusAsync(ref new String(ss.str().c_str()), NotifyType::StatusMessage);
         lampToggle->IsEnabled = true;
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            LogStatusAsync(ex->Message, NotifyType::ErrorMessage);
-        }
     });
 }
 
@@ -137,19 +127,11 @@ void Scenario3_AvailabilityChanged::Lamp_AvailabilityChanged(Lights::Lamp^ sende
         }
 
         lampToggle->IsEnabled = args->IsAvailable;
-    }))).then([this, args](task<void> previousTask)
+    }))).then([this, args]()
     {
-        try
-        {
-            std::wstringstream ss;
-            ss << "Lamp Availability Changed Notification has fired, IsAvailable= " << args->IsAvailable;
-            LogStatusAsync(ref new String(ss.str().c_str()), NotifyType::StatusMessage);
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            LogStatusAsync(ex->Message, NotifyType::ErrorMessage);
-        }
+        std::wstringstream ss;
+        ss << "Lamp Availability Changed Notification has fired, IsAvailable= " << args->IsAvailable;
+        LogStatusAsync(ref new String(ss.str().c_str()), NotifyType::StatusMessage);
     });
 }
 
@@ -230,17 +212,7 @@ task<void> Scenario3_AvailabilityChanged::LogStatusToOutputBoxAsync(String^ mess
     {
         outputBox->Text += message + "\r\n";
         outputScrollViewer->ChangeView(0.0, outputBox->ActualHeight, 1.0f);
-    }))).then([this, message](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            LogStatusAsync(ex->Message, NotifyType::ErrorMessage);
-        }
-    });
+    })));
 }
 
 /// <summary>
@@ -259,15 +231,5 @@ task<void> Scenario3_AvailabilityChanged::LogStatusAsync(String^ message, Notify
     }))).then([this, message]()
     {
         return LogStatusToOutputBoxAsync(message);
-    }).then([this, message](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-        }
     });
 }

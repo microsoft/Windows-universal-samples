@@ -107,7 +107,9 @@
   <ItemGroup>
     <Content Include="Assets\InnerCircle.png" />
     <Content Include="Assets\OuterCircle.png" />
-    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
+      <Link>Properties\Default.rd.xml</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\..\SharedContent\media\smalltile-sdk.png">

@@ -32,7 +32,7 @@ namespace Accounts
         // Then, you must associate the app with the store.
         const string MicrosoftAccountProviderId = "https://login.microsoft.com";
         const string ConsumerAuthority = "consumers";
-        const string AccountScopeRequested = "service::wl.basic::DELEGATION";
+        const string AccountScopeRequested = "wl.basic";
         const string AccountClientId = "none";
         const string StoredAccountKey = "accountid";
 

@@ -47,7 +47,26 @@ public:
     void ConnectionResult(_In_ Onboarding^ interfaceMemberArg);
 
     // This event fires whenever the ConnectionResult signal is sent by another member of the session.
-    virtual event Windows::Foundation::TypedEventHandler<OnboardingSignals^, OnboardingConnectionResultReceivedEventArgs^>^ ConnectionResultReceived;
+    virtual event Windows::Foundation::TypedEventHandler<OnboardingSignals^, OnboardingConnectionResultReceivedEventArgs^>^ ConnectionResultReceived 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<OnboardingSignals^, OnboardingConnectionResultReceivedEventArgs^>^ handler) 
+        { 
+            return _ConnectionResultReceived += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<OnboardingSignals^>(sender), safe_cast<OnboardingConnectionResultReceivedEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _ConnectionResultReceived -= token; 
+        } 
+    internal: 
+        void raise(OnboardingSignals^ sender, OnboardingConnectionResultReceivedEventArgs^ args) 
+        { 
+            _ConnectionResultReceived(sender, args);
+        } 
+    }
 
 internal:
     void Initialize(_In_ alljoyn_busobject busObject, _In_ alljoyn_sessionid sessionId);
@@ -56,6 +75,8 @@ internal:
 private:
     alljoyn_busobject m_busObject;
     alljoyn_sessionid m_sessionId;
+
+    virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _ConnectionResultReceived;
 
     alljoyn_interfacedescription_member m_memberConnectionResult;
 };

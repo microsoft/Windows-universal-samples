@@ -60,6 +60,7 @@ public:
     Windows::Foundation::IAsyncOperation<OnboardingOffboardResult^>^ OffboardAsync();
     // Call the GetScanInfo method
     Windows::Foundation::IAsyncOperation<OnboardingGetScanInfoResult^>^ GetScanInfoAsync();
+
     // Get the value of the Version property.
     Windows::Foundation::IAsyncOperation<OnboardingGetVersionResult^>^ GetVersionAsync();
 
@@ -77,13 +78,70 @@ public:
     }
 
     // This event will fire whenever the consumer loses the session that it is a member of.
-    virtual event Windows::Foundation::TypedEventHandler<OnboardingConsumer^, Windows::Devices::AllJoyn::AllJoynSessionLostEventArgs^>^ SessionLost;
+    virtual event Windows::Foundation::TypedEventHandler<OnboardingConsumer^, Windows::Devices::AllJoyn::AllJoynSessionLostEventArgs^>^ SessionLost 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<OnboardingConsumer^, Windows::Devices::AllJoyn::AllJoynSessionLostEventArgs^>^ handler) 
+        { 
+            return _SessionLost += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<OnboardingConsumer^>(sender), safe_cast<Windows::Devices::AllJoyn::AllJoynSessionLostEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _SessionLost -= token; 
+        } 
+    internal: 
+        void raise(OnboardingConsumer^ sender, Windows::Devices::AllJoyn::AllJoynSessionLostEventArgs^ args) 
+        { 
+            _SessionLost(sender, args);
+        } 
+    }
 
     // This event will fire whenever a member joins the session.
-    virtual event Windows::Foundation::TypedEventHandler<OnboardingConsumer^, Windows::Devices::AllJoyn::AllJoynSessionMemberAddedEventArgs^>^ SessionMemberAdded;
+    virtual event Windows::Foundation::TypedEventHandler<OnboardingConsumer^, Windows::Devices::AllJoyn::AllJoynSessionMemberAddedEventArgs^>^ SessionMemberAdded 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<OnboardingConsumer^, Windows::Devices::AllJoyn::AllJoynSessionMemberAddedEventArgs^>^ handler) 
+        { 
+            return _SessionMemberAdded += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<OnboardingConsumer^>(sender), safe_cast<Windows::Devices::AllJoyn::AllJoynSessionMemberAddedEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _SessionMemberAdded -= token; 
+        } 
+    internal: 
+        void raise(OnboardingConsumer^ sender, Windows::Devices::AllJoyn::AllJoynSessionMemberAddedEventArgs^ args) 
+        { 
+            _SessionMemberAdded(sender, args);
+        } 
+    }
 
     // This event will fire whenever a member leaves the session.
-    virtual event Windows::Foundation::TypedEventHandler<OnboardingConsumer^, Windows::Devices::AllJoyn::AllJoynSessionMemberRemovedEventArgs^>^ SessionMemberRemoved;
+    virtual event Windows::Foundation::TypedEventHandler<OnboardingConsumer^, Windows::Devices::AllJoyn::AllJoynSessionMemberRemovedEventArgs^>^ SessionMemberRemoved 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<OnboardingConsumer^, Windows::Devices::AllJoyn::AllJoynSessionMemberRemovedEventArgs^>^ handler) 
+        { 
+            return _SessionMemberRemoved += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<OnboardingConsumer^>(sender), safe_cast<Windows::Devices::AllJoyn::AllJoynSessionMemberRemovedEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _SessionMemberRemoved -= token; 
+        } 
+    internal: 
+        void raise(OnboardingConsumer^ sender, Windows::Devices::AllJoyn::AllJoynSessionMemberRemovedEventArgs^ args) 
+        { 
+            _SessionMemberRemoved(sender, args);
+        } 
+    }
 
 internal:
     // Consumers do not support property get.
@@ -136,6 +194,10 @@ internal:
     }
     
 private:
+    virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _SessionLost;
+    virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _SessionMemberAdded;
+    virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _SessionMemberRemoved;
+
     int32 JoinSession(_In_ Windows::Devices::AllJoyn::AllJoynServiceInfo^ serviceInfo);
 
     // Register a callback function to handle incoming signals.

@@ -50,8 +50,6 @@
             logStatus("Turning Lamp off");
             lamp.isEnabled = false;
             lamp.close();
-        }, function (error) {
-            logError(error.message);
         }).done();
     }
 
@@ -93,8 +91,6 @@
             logStatus("Turning Lamp off");
             lamp.isEnabled = false;
             lamp.close();
-        }, function (error) {
-            logError(error.message);
         }).done();
     }
 

@@ -1,0 +1,57 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2_Manage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Manage credentials
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0,10,0,0">
+                        You can retrieve all saved credentials, or filter the query by resource, user name, or both.
+                        A retrieved credential does not initially include the password.
+                        You must call the retrievePassword method to get the password.
+                        A retrieved credential can also be deleted from the PasswordVault.
+                    </TextBlock>
+
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Text="Resource:" Margin="0,10,0,0"/>
+                    <TextBox x:Name="InputResourceValue" PlaceholderText="https://example.com" Width="200" HorizontalAlignment="Left" AutomationProperties.AutomationId="InputResourceValue"/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}"  Text="User Name:"  Margin="0,10,0,0"/>
+                    <TextBox x:Name="InputUserNameValue" PlaceholderText="abby" Width="200" HorizontalAlignment="Left" AutomationProperties.AutomationId="InputUserNameValue"/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}"  Text="Results:"  Margin="0,10,0,0"/>
+                    <Button x:Name="RetrieveCredButton" AutomationProperties.AutomationId="RetrieveCredButton" Content="Retrieve credentials" Click="{x:Bind RetrieveCredentials}" Margin="0,10,0,0"/>
+                    <ListBox x:Name="RetrievedCredentials" Height="150" SelectionMode="Multiple" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+                    <Button x:Name="RevealPasswordsButton" AutomationProperties.AutomationId="RevealPasswordsButton" Content="Reveal selected passwords" Click="{x:Bind RevealPasswords}" Margin="0,10,0,0"/>
+                    <Button x:Name="RemoveCredButton" AutomationProperties.AutomationId="RemoveCredButton" Content="Remove selected credentials" Click="{x:Bind RemoveCredentials}" Margin="0,10,0,0"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

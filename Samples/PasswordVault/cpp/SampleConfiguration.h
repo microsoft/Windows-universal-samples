@@ -14,7 +14,7 @@ namespace SDKTemplate
         {
             Platform::String^ get()
             {
-                return "Password Vault";
+                return "Password vault C++ sample";
             }
         }
 
@@ -28,6 +28,11 @@ namespace SDKTemplate
 
     private:
         static Platform::Array<Scenario>^ scenariosInner;
+
+        // Value is not important. This is just a trick to run code at construction.
+        bool initialize = InitializePasswordVaultInTheBackground();
+
+        static bool InitializePasswordVaultInTheBackground();
     };
 
     public value struct Scenario

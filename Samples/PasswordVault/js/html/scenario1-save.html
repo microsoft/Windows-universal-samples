@@ -1,0 +1,61 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario1-save.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+        <div id="scenarioDescription">
+            Save credentials
+        </div>
+        <p>
+            Each app can access only the credentials which it saved. It cannot access any credentials created by other apps or processes.
+        </p>
+        <p>
+            Save credentials to this app's PasswordVault for later retrieval.
+            Saving a credential replaces any existing credential for the same resource and user name.
+        </p>
+        <ul>
+            <li>
+                The resource identifies the entity that requires a user name and password. It may not be blank.
+            </li>
+            <li>
+                The user name identifies the account at the resource. It can be any non-blank string.
+            </li>
+            <li>
+                The password is the password for the user name at the resource. It can be any non-blank string.
+            </li>
+        </ul>
+        <p>
+            <b>Note</b>: This app will display passwords on the screen for demonstration purposes, so don't enter your real password.
+        </p>
+        <p>
+            <label for="InputResourceName">Resource:</label>
+            <br />
+            <input type="text" size="30" id="InputResourceValue" placeholder="https://example.com" class="win-textbox"/>
+        </p>
+        <p>
+            <label for="InputUserName">User Name:</label>
+            <br />
+            <input type="text" size="30" id="InputUserNameValue" placeholder="abby" class="win-textbox"/>
+        </p>
+        <p>
+            <label for="InputPassword">Password:</label>
+            <br />
+            <input type="password" size="30" id="InputPasswordValue" style="height:100%;" class="win-textbox"/>
+        </p>
+        <p>
+            <button class="win-button" id="SaveCredButton">Save credential</button>
+        </p>
+    </div>
+</body>
+
+</html>

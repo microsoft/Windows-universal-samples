@@ -1,6 +1,6 @@
-﻿<!---
+<!---
   category: NetworkingAndWebServices 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620534&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620534
 --->
 
 # DatagramSocket sample
@@ -72,7 +72,7 @@ This sample requires that network capabilities be set in the *Package.appxmanife
 
 [How to send and receive network data with a datagram socket (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452986)
 
-[How to set network capabilities (XAML)](http://msdn.microsoft.com/library/windows/apps/jj835817)
+[Networking basics](https://msdn.microsoft.com/library/windows/apps/mt280233)
 
 [How to use advanced socket controls (XAML)](http://msdn.microsoft.com/library/windows/apps/jj150598)
 

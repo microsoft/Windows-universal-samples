@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="ListViewSample.RestoreScrollPositionSample"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ListViewSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:ListViewSample.Model"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Style="{StaticResource SplitViewTogglePaneButtonStyle}"
+                VerticalAlignment="Center"
+                Click="ShowSliptView"/>
+            <TextBlock Text="Restore Scroll Position Sample"
+                VerticalAlignment="Top"
+                Style="{ThemeResource TitleTextBlockStyle}"
+                Margin="12" />
+        </StackPanel>
+
+        <TextBlock Grid.Row="1"
+                Style="{ThemeResource BodyTextBlockStyle}"
+                Text="Click any list item to navigate to a new page."
+                Margin="12,0,0,12"/>
+
+        <ListView x:Name="ItemsListView" 
+                  Grid.Row="2" 
+                  ItemsSource="{x:Bind _items}" 
+                  IsItemClickEnabled="True"
+                  ContainerContentChanging="ItemsListView_ContainerContentChanging"
+                  ItemClick="ItemsListView_ItemClick">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="data:Item">
+                    <RelativePanel>
+                        <TextBlock x:Name="IdLabel"
+                                   Margin="0,12,5,12" 
+                                   Style="{ThemeResource BaseTextBlockStyle}"
+                                   Text="Id :"/>
+                        <TextBlock RelativePanel.RightOf="IdLabel"
+                                   Style="{ThemeResource BaseTextBlockStyle}"
+                                   Margin="0,12,0,12" 
+                                   Text="{x:Bind Id}"/>
+                        <Image RelativePanel.Below="IdLabel"
+                               Source="{x:Bind ImageSource}" 
+                               MaxWidth="500"
+                               Stretch="Uniform"
+                               Margin="0,0,0,24" />
+                    </RelativePanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <local:SamplesPane x:Name="MySamplesPane" Grid.RowSpan="3"/>
+    </Grid>
+</Page>

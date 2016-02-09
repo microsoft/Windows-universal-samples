@@ -27,6 +27,7 @@ namespace SDKTemplate
     {
     public:
         Scenario2_CardioidSound();
+        virtual ~Scenario2_CardioidSound();
     private:
         void EnvironmentComboBox_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
         void PlayButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
@@ -52,6 +53,7 @@ namespace SDKTemplate
         bool                    _initialized = false;
         CardioidSound           _cardioidSound;
         DispatcherTimer^        _timer;
+        EventRegistrationToken  _timerEventToken;
         float                   _x = 0;            // Source is centered
         float                   _y = 0;            // Source is at eye level with the listener
         float                   _z = -2;           // Source is 2 meters in front of the listener

@@ -113,6 +113,7 @@ namespace ImportSample
                 if (this.session != null)
                 {
                     this.session.Dispose();
+                    this.session = null;
                 }
 
                 // Check to ensure API is supported
@@ -145,19 +146,19 @@ namespace ImportSample
             this.itemsToImport = null;
             this.fileListView.ItemsSource = null;
 
-            // enable find options
-            this.OnlyImages.IsEnabled = true;
-            this.OnlyVideo.IsEnabled = true;
-            this.ImagesAndVideo.IsEnabled = true;
-
-            // set the default to find Images and Video
-            this.ImagesAndVideo.IsChecked = true;
-
             // clear any values in the source properties
             this.propertiesTxtBox.Text = "";
 
             if (e.AddedItems.Count != 0)
             {
+                // enable find options
+                this.OnlyImages.IsEnabled = true;
+                this.OnlyVideo.IsEnabled = true;
+                this.ImagesAndVideo.IsEnabled = true;
+
+                // set the default to find Images and Video
+                this.ImagesAndVideo.IsChecked = true;
+
                 this.importSource = e.AddedItems.First() as PhotoImportSource;
                 DisplaySourceProperties();
                     
@@ -217,6 +218,7 @@ namespace ImportSample
                 if (this.session != null)
                 {
                     this.session.Dispose();
+                    this.session = null;
                 }
 
                 // Create the import session from the source selected

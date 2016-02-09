@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="Microsoft.SDKSamples.AudioCategoryApp.JS"
+    Name="Microsoft.SDKSamples.AudioCategory.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
 

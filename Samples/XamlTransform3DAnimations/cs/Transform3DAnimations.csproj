@@ -133,7 +133,9 @@
     <Content Include="Images\circle_image1.jpg" />
     <Content Include="Images\circle_image2.jpg" />
     <Content Include="Images\circle_image3.jpg" />
-    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
+      <Link>Properties\Default.rd.xml</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

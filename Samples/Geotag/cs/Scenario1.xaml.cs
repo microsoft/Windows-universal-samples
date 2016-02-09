@@ -45,17 +45,10 @@ namespace GeotagCSSample
         // to be called from a UI thread.
         private async Task RequestLocationAccessAsync()
         {
-            try
+            GeolocationAccessStatus status = await Geolocator.RequestAccessAsync();
+            if (status != GeolocationAccessStatus.Allowed)
             {
-                GeolocationAccessStatus status = await Geolocator.RequestAccessAsync();
-                if (status != GeolocationAccessStatus.Allowed)
-                {
-                    LogError("Location access is NOT allowed");
-                }
-            }
-            catch (Exception e)
-            {
-                LogError("Exception: " + e.Message);
+                LogError("Location access is NOT allowed");
             }
         }
 
@@ -77,6 +70,7 @@ namespace GeotagCSSample
             }
             catch (Exception e)
             {
+                // File I/O errors are reported as exceptions
                 LogError("Exception: " + e.Message);
             }
         }
@@ -96,6 +90,7 @@ namespace GeotagCSSample
             }
             catch (Exception e)
             {
+                // File I/O errors are reported as exceptions
                 LogError("Exception: " + e.Message);
             }
         }
@@ -117,6 +112,7 @@ namespace GeotagCSSample
             }
             catch (Exception e)
             {
+                // File I/O errors are reported as exceptions
                 LogError("Exception: " + e.Message);
             }
         }

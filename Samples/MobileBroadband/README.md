@@ -1,6 +1,6 @@
-﻿<!---
+<!---
   category: NetworkingAndWebServices 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620572&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620572
 --->
 
 # Mobile broadband sample
@@ -15,7 +15,7 @@ This sample shows how to use the Mobile Broadband Networking API (Windows.Networ
 ## Prerequisites
 
 This sample accesses privileged APIs used by mobile broadband operators.
-Hence it requires a [special-use capability](https://msdn.microsoft.com/en-us/library/windows/apps/hh464936.aspx#special_capabilities)
+Hence it requires a [special-use capability](https://msdn.microsoft.com/library/windows/apps/mt270968#special_and_restricted_capabilities)
 to be declared in package manifest.
 
 ### Remarks

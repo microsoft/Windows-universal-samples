@@ -55,7 +55,7 @@ void OnboardingSignals::ConnectionResult(_In_ Onboarding^ interfaceMemberArg)
 
     size_t argCount = 1;
     alljoyn_msgarg arguments = alljoyn_msgarg_array_create(argCount);
-    TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(arguments, 0), "(ns)", interfaceMemberArg);
+    (void)TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(arguments, 0), "(ns)", interfaceMemberArg);
     
     alljoyn_busobject_signal(
         m_busObject, 
@@ -73,8 +73,6 @@ void OnboardingSignals::ConnectionResult(_In_ Onboarding^ interfaceMemberArg)
 
 void OnboardingSignals::CallConnectionResultReceived(_In_ OnboardingSignals^ sender, _In_ OnboardingConnectionResultReceivedEventArgs^ args)
 {
-    AllJoynHelpers::DispatchEvent([=]() {
-        ConnectionResultReceived(sender, args);
-    });
+    ConnectionResultReceived(sender, args);
 }
 

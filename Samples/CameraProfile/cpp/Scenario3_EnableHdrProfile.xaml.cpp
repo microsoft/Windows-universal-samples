@@ -13,22 +13,21 @@
 #include "Scenario3_EnableHdrProfile.xaml.h"
 #include <sstream>
 
-using namespace SDKTemplate;
-
+using namespace Concurrency;
 using namespace Platform;
+using namespace SDKTemplate;
+using namespace Windows::Devices::Enumeration;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
+using namespace Windows::Media::Capture;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Controls::Primitives;
+using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
-using namespace Concurrency;
-using namespace Windows::Devices::Enumeration;
-using namespace Windows::Media::Capture;
-using namespace Windows::UI::Core;
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Scenario3_EnableHdrProfile"/> class.
@@ -78,10 +77,10 @@ void Scenario3_EnableHdrProfile::CheckHdrSupportBtn_Click(Platform::Object^ send
 
         // Walk through available profiles, look for first profile with HDR supported Video Profile
         bool HdrVideoSupported = false;
-        for each(auto profile in profiles)
+        for (auto profile : profiles)
         {
             auto recordMediaDescription = profile->SupportedRecordMediaDescription;
-            for each (auto videoProfileMediaDescription in recordMediaDescription)
+            for (auto videoProfileMediaDescription : recordMediaDescription)
             {
                 if (videoProfileMediaDescription->IsHdrVideoSupported)
                 {
@@ -102,34 +101,14 @@ void Scenario3_EnableHdrProfile::CheckHdrSupportBtn_Click(Platform::Object^ send
 
         LogStatusToOutputBoxAsync("Initializing Media settings to HDR Supported video profile");
         create_task(mediaCapture->InitializeAsync(mediaCaptureInitSetttings))
-            .then([this, mediaCapture, HdrVideoSupported](task<void> previousTask)
+            .then([this, mediaCapture, HdrVideoSupported]()
         {
-            // We have to error check here instead of returning up the task chain due to
-            // different return types
-            try
+            if (HdrVideoSupported)
             {
-                if (HdrVideoSupported)
-                {
-                    LogStatusToOutputBoxAsync("Initializing HDR Video Mode to Auto");
-                    mediaCapture->VideoDeviceController->HdrVideoControl->Mode = Windows::Media::Devices::HdrVideoMode::Auto;
-                    previousTask.get();
-                }
-            }
-            catch (Exception^ ex)
-            {
-                LogStatusAsync(ex->Message, NotifyType::ErrorMessage);
+                LogStatusToOutputBoxAsync("Initializing HDR Video Mode to Auto");
+                mediaCapture->VideoDeviceController->HdrVideoControl->Mode = Windows::Media::Devices::HdrVideoMode::Auto;
             }
         });
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            LogStatusAsync(ex->Message, NotifyType::ErrorMessage);
-        }
     });
 }
 /// <summary>
@@ -153,7 +132,7 @@ task<String^> Scenario3_EnableHdrProfile::GetVideoProfileSupportedDeviceIdAsync(
         LogStatusToOutputBoxAsync(ref new String(ss.str().c_str()));
 
         // Loop through devices looking for device that supports Video Profile
-        for each(auto cameraDeviceInfo in devices)
+        for (auto cameraDeviceInfo : devices)
         {
             if (MediaCapture::IsVideoProfileSupported(cameraDeviceInfo->Id) && cameraDeviceInfo->EnclosureLocation->Panel == panel)
             {
@@ -179,17 +158,7 @@ task<void> Scenario3_EnableHdrProfile::LogStatusToOutputBoxAsync(String^ message
     {
         outputBox->Text += message + "\r\n";
         outputScrollViewer->ChangeView(0.0, outputBox->ActualHeight, 1.0f);
-    }))).then([this, message](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-        }
-    });
+    })));
 }
 
 /// <summary>
@@ -209,15 +178,5 @@ task<void> Scenario3_EnableHdrProfile::LogStatusAsync(String^ message, NotifyTyp
     }))).then([this, message]()
     {
         return LogStatusToOutputBoxAsync(message);
-    }).then([this, message](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-        }
     });
 }

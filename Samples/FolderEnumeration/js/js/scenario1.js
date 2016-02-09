@@ -17,10 +17,12 @@
     // Get the Pictures library and enumerate all its files and folders
     function getFilesAndFolders() {
         clearOutput();
-        var picturesLibrary = Windows.Storage.KnownFolders.picturesLibrary;
-        // Create a group for the Pictures library
-        var group = outputResultGroup(picturesLibrary.name);
-        picturesLibrary.getItemsAsync().done(function (items) {
+        var group;
+        Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.picturesLibrary).then(function (picturesLibrary) {
+            // Create a group for the Pictures library
+            group = outputResultGroup(picturesLibrary.name);
+            return picturesLibrary.getItemsAsync();
+        }).done(function (items) {
             // Output all contents under the library group
             outputItems(group, items);
         });

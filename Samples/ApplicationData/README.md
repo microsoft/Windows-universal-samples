@@ -1,6 +1,6 @@
-﻿<!---
+<!---
   category: AppSettings
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620486&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620486
 --->
 
 # Application data sample
@@ -24,28 +24,13 @@ The sample covers these key tasks:
 - Reading and writing files to an app data store 
 - Responding to roaming events 
 
-
-## Tasks 
-
-[**Quickstart: Local application data (JavaScript)**](http://msdn.microsoft.com/library/windows/apps/hh465118)
-
-[**Quickstart: Local application data (C#/VB/C++)**](http://msdn.microsoft.com/library/windows/apps/hh700361)
-
-[**Quickstart: Roaming application data (JavaScript)**](http://msdn.microsoft.com/library/windows/apps/hh465123)
-
-[**Quickstart: Roaming application data (C#/VB/C++)**](http://msdn.microsoft.com/library/windows/apps/hh700362)
-
-[**Quickstart: Temporary application data (JavaScript)**](http://msdn.microsoft.com/library/windows/apps/hh465130)
-
-[**Quickstart: Temporary application data (C#/VB/C++)**](http://msdn.microsoft.com/library/windows/apps/hh700363)
-
 ## Guidelines 
 
 [**Guidelines for roaming application data**](http://msdn.microsoft.com/library/windows/apps/hh465094)
 
 ## Concepts 
 
-[**Application data**](http://msdn.microsoft.com/library/windows/apps/hh464917)
+[Store and retrieve settings and other app data](https://msdn.microsoft.com/library/windows/apps/mt299098)
 
 ## Reference 
 

@@ -8,18 +8,16 @@
 // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 //
 //*********************************************************
+using System;
+using System.Threading.Tasks;
+using Windows.Devices.Sensors;
+using Windows.Foundation;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
-using System;
-using Windows.Devices.Sensors;
-using Windows.Foundation;
-using System.Threading.Tasks;
-using Windows.UI.Core;
-using Microsoft.Samples.Devices.Sensors.Calibration;
 
-namespace CompassCS
+namespace SDKTemplate
 {
     public sealed partial class Scenario3_Calibration : Page
     {

@@ -165,9 +165,9 @@
         /// Begin recognition or finish the recognition session.
         /// </summary>
 
+        btnContinuousReco.disabled = true;
         // Check if the recognizer is listening or going into a state to listen.
         if (recognizer.state != Windows.Media.SpeechRecognition.SpeechRecognizerState.idle) {
-            btnContinuousReco.disabled = true;
             languageSelect.disabled = false;
             btnContinuousReco.innerText = "Stopping recognition...";
 
@@ -184,7 +184,9 @@
 
         // Start the continuous recognition session. Results are handled in the event handlers below.
         try {
-            recognizer.continuousRecognitionSession.startAsync();
+            recognizer.continuousRecognitionSession.startAsync().then(function completed() {
+                btnContinuousReco.disabled = false;
+            });
         }
         catch (e) { }
     }

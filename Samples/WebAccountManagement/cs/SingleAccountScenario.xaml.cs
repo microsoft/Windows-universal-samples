@@ -42,7 +42,7 @@ namespace Accounts
         const string StoredAuthorityKey = "authority";
 
         const string MicrosoftAccountClientId = "none";
-        const string MicrosoftAccountScopeRequested = "service::wl.basic::DELEGATION";
+        const string MicrosoftAccountScopeRequested = "wl.basic";
 
         // To obtain azureAD tokens, you must register this app on the AzureAD portal, and obtain the client ID
         const string AzureActiveDirectoryClientId = "";

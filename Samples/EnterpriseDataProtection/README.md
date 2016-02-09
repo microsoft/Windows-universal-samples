@@ -1,6 +1,6 @@
 <!---
   category: IdentitySecurityAndEncryption
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620031&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620031
 --->
 
 # Enterprise data protection sample
@@ -11,7 +11,7 @@ All APIs except File and Buffer protection APIs require Enterprise data policy t
 
 If you have EDP policy set for a specific identity, you should expect the IsIdentityManaged API to return true. If the API returns false, all APIs except the File and Buffer APIs will not work as expected. Each API has a detailed scenario description that describes the purpose and behavior of the API.
 
-You need to add a [special-use capability](https://msdn.microsoft.com/en-us/library/windows/apps/hh464936.aspx#special_capabilities)
+You need to add a [special-use capability](https://msdn.microsoft.com/library/windows/apps/mt270968#special_and_restricted_capabilities)
 capability called EnterpriseDataPolicy into your application manifest file to mark your app enlightened.
 This sample will not pass WACK because it uses a special-use capability.
 
@@ -21,13 +21,13 @@ This sample will not pass WACK because it uses a special-use capability.
 
 ## System requirements
 
-Windows 10
+Windows 10 build 10500 or higher
 
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

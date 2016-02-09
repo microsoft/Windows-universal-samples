@@ -12,7 +12,6 @@
 using System;
 using System.Collections.Generic;
 
-using SDKTemplate;
 using Windows.Graphics.Imaging;
 using Windows.Media.FaceAnalysis;
 using Windows.Storage;
@@ -25,7 +24,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 
-namespace FaceDetectionSample
+namespace SDKTemplate
 {
     /// <summary>
     /// Page for demonstrating FaceDetection on an image file.

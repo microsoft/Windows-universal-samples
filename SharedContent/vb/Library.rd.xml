@@ -1,0 +1,10 @@
+﻿<!--
+
+    Runtime Directives are documented at http://go.microsoft.com/fwlink/?LinkID=391919
+-->
+
+<Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
+  <Library>
+    <!-- Add your application specific runtime directives here. -->
+  </Library>
+</Directives>

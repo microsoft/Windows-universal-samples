@@ -49,10 +49,10 @@
                        <LineBreak/>Please input Enterprise Uri in the box provided
                     </TextBlock>
                     <TextBox Name="EnterpriseUri" Width="300" Text="http://toolbox" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock>Domain:</TextBlock>
-                    <TextBox Name="DomainBox" Width="200" PlaceholderText="domain" HorizontalAlignment="Left"></TextBox>
+                    <TextBlock>Identity:</TextBlock>
+                    <TextBox Name="IdentityBox" Width="200" PlaceholderText="identity" HorizontalAlignment="Left" IsReadOnly="true"></TextBox>
                     <TextBlock>UserName:</TextBlock>
-                    <TextBox Name="UserNameBox" Width="200" PlaceholderText="username" HorizontalAlignment="Left"></TextBox>
+                    <TextBox Name="UserNameBox" Width="200" PlaceholderText="username" HorizontalAlignment="Left" IsSpellCheckEnabled="False"></TextBox>
                     <TextBlock>Password:</TextBlock>
                     <PasswordBox Name="Passwordbox" Width="200" HorizontalAlignment="Left"></PasswordBox>
                     <Button Content="GetPrimaryManagedIdentity" Click="CheckUriIdentity_Click"/>

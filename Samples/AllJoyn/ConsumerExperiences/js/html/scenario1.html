@@ -1,0 +1,38 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario1.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>
+                    The SecureInterface consumer will use About to find a SecureInterface producer and then make a call to the "Concatenate" method.
+                </p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <div><button id="connectButton">Connect</button></div>
+            <div id="authenticationOptions">
+                <button id="authenticateButton">Authenticate</button>
+                <input id="keyInputText" type="text" placeholder="Enter one-time key..." />
+            </div>
+            <div id="consumerOptions">
+                <div>
+                    <button id="concatenateButton">Concatenate</button>
+                    <input id="inputText1" type="text" placeholder="Enter first string..." />
+                    <input id="inputText2" type="text" placeholder="Enter second string..." />
+                </div>
+                <div id="upperCaseSwitch" data-win-control="WinJS.UI.ToggleSwitch" data-win-options="{title: 'UpperCase'}"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

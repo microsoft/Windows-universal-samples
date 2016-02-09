@@ -1,6 +1,6 @@
-﻿<!---
+<!---
   category: AudioVideoAndCamera 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619479&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619479
 --->
 
 # Basic camera app sample
@@ -19,13 +19,15 @@ Specifically, this sample will cover how to:
 
 This sample also implements a custom UI to better simulate the experience that a camera application would provide, so any messages intended for the developer are printed to the debug console.
 
+For apps that are interested in capturing a photo or video without requiring access to all camera controls, CameraCaptureUI abstracts and simplifies the access to the MediaCapture APIs through the built-in Camera application. See the related topics section below for more information on how to use it instead.
+
 ## Related topics
 
-**Samples**
+**Conceptual**
 
-[How to rotate captured video](https://msdn.microsoft.com/en-us/library/windows/apps/hh868174.aspx)
+[Capture photos and video with MediaCapture](http://go.microsoft.com/fwlink/?LinkId=627234)
 
-[How to preview video from a webcam](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868171.aspx)
+[Capture photos and video with CameraCaptureUI](https://msdn.microsoft.com/en-us/library/windows/apps/mt282142)
 
 [Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
 

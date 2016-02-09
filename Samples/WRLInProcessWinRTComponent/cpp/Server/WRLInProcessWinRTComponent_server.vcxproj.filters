@@ -7,17 +7,8 @@
     <ClCompile Include="OvenServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BreadServer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="OvenServer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BreadServer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Microsoft.SDKSamples.Kitchen.h">
       <Filter>Generated Files</Filter>
     </ClInclude>

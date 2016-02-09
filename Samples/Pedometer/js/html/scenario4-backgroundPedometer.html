@@ -1,0 +1,40 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario4-backgroundPedometer.js"></script>
+</head>
+
+<body class="win-type-body">
+    <p>Demonstrates usage of pedometer in a background task to monitor the changes in the step activity</p>
+    <p>
+        <button class="win-button" id="registerBackgroundTaskButton">Enable</button>
+        <button class="win-button" id="unregisterBackgroundTaskButton">Disable</button>
+    </p>
+    <table id="scenarioOutput">
+        <tr><td>Task Registration:</td><td id="registrationStatus">Unregistered</td></tr>
+        <tr><td>Task Status:</td><td id="taskStatus">no data</td></tr>
+        <tr><td>Current Step Count:</td><td id="currentStepCount">0</td></tr>
+        <tr><td>Step Goal:</td><td id="stepGoal">0</td></tr>
+        <tr><td>Report Count:</td><td id="reportCount">0</td></tr>
+        <tr><td>Last Report Timestamp:</td><td id="lastReadingTimestamp">no data</td></tr>
+        <tr><td>Unknown Steps Count:</td><td id="unknownStepsCount">0</td></tr>
+        <tr><td>Walking Steps Count:</td><td id="walkingStepsCount">0</td></tr>
+        <tr><td>Running Steps Count:</td><td id="runningStepsCount">0</td></tr>
+    </table>
+</body>
+
+</html>

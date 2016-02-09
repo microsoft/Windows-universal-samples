@@ -51,8 +51,6 @@
             oLamp = lamp;
 
             logStatus("Default lamp instance acquired, Device Id: " + oLamp.deviceId);
-        }, function (error) {
-            logError(error.message);
         });
     }
 

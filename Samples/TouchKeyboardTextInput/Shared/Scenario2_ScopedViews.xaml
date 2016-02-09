@@ -1,0 +1,146 @@
+<!-- 
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<Page
+    x:Class="SDKTemplate.Scenario2_ScopedViews"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    The TextBox and RichEdit controls expose properties to enable
+                    Scoped views on the Touch Keyboard, namely InputScopes. You can change
+                    the input scope to one of many built-in options.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Grid x:Name="Input" Height="Auto">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="80"/>
+                            <RowDefinition Height="80"/>
+                            <RowDefinition Height="80"/>
+                            <RowDefinition Height="80"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text=" Number" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+                        <TextBox x:Name="NumberControl" AutomationProperties.Name="Number" HorizontalAlignment="Stretch" Height="46"  Grid.Row="1" Grid.Column="1">
+                            <TextBox.InputScope>
+                                <InputScope>
+                                    <InputScope.Names>
+                                        <InputScopeName NameValue="Number"/>
+                                    </InputScope.Names>
+                                </InputScope>
+                            </TextBox.InputScope>
+                        </TextBox>
+                        <TextBlock Text=" Search" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+                        <TextBox x:Name="SearchControl" AutomationProperties.Name="Search" HorizontalAlignment="Stretch" Height="46" Grid.Row="1" Grid.Column="3">
+                            <TextBox.InputScope>
+                                <InputScope>
+                                    <InputScope.Names>
+                                        <InputScopeName NameValue="Search"/>
+                                    </InputScope.Names>
+                                </InputScope>
+                            </TextBox.InputScope>
+                        </TextBox>
+
+                        <TextBlock Text=" Url" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
+                        <TextBox x:Name="UrlControl" AutomationProperties.Name="URL" HorizontalAlignment="Stretch" Height="46" Grid.Row="2" Grid.Column="1">
+                            <TextBox.InputScope>
+                                <InputScope>
+                                    <InputScope.Names>
+                                        <InputScopeName NameValue="Url"/>
+                                    </InputScope.Names>
+                                </InputScope>
+                            </TextBox.InputScope>
+                        </TextBox>
+
+                        <TextBlock Text=" Email" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2"/>
+                        <TextBox x:Name="EmailControl" AutomationProperties.Name="Email" HorizontalAlignment="Stretch" Height="46" Grid.Row="2" Grid.Column="3">
+                            <TextBox.InputScope>
+                                <InputScope>
+                                    <InputScope.Names>
+                                        <InputScopeName NameValue="EmailSmtpAddress"/>
+                                    </InputScope.Names>
+                                </InputScope>
+                            </TextBox.InputScope>
+                        </TextBox>
+
+                        <TextBlock Text=" Default" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
+                        <TextBox x:Name="DefaultControl" AutomationProperties.Name="Default" HorizontalAlignment="Stretch" Height="46" Grid.Row="3" Grid.Column="1">
+                            <TextBox.InputScope>
+                                <InputScope>
+                                    <InputScope.Names>
+                                        <InputScopeName NameValue="Default"/>
+                                    </InputScope.Names>
+                                </InputScope>
+                            </TextBox.InputScope>
+                        </TextBox>
+                        <TextBlock Text=" Telephone" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2"/>
+                        <TextBox x:Name="TelephoneControl" AutomationProperties.Name="Telephone" HorizontalAlignment="Stretch" Height="46" Grid.Row="3" Grid.Column="3">
+                            <TextBox.InputScope>
+                                <InputScope>
+                                    <InputScope.Names>
+                                        <InputScopeName NameValue="TelephoneNumber"/>
+                                    </InputScope.Names>
+                                </InputScope>
+                            </TextBox.InputScope>
+                        </TextBox>
+                        <TextBlock Text=" Formula" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0"/>
+                        <TextBox x:Name="FormulaControl" AutomationProperties.Name="Formula" HorizontalAlignment="Stretch" Height="46" Grid.Row="4" Grid.Column="1">
+                            <TextBox.InputScope>
+                                <InputScope>
+                                    <InputScope.Names>
+                                        <InputScopeName NameValue="Formula"/>
+                                    </InputScope.Names>
+                                </InputScope>
+                            </TextBox.InputScope>
+                        </TextBox>
+                    </Grid>
+
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}">
+                            Touching into an edit control launches the Touch Keyboard with the
+                            appropriate optimized keyboard layout enabled.
+                    </TextBlock>
+
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}">
+                            In Windows 10 on the PC,
+                            the touch keyboard does not display automatically if a hardware keyboard is connected or if the PC is in Desktop mode and
+                            &quot;Automatically show the touch keyboard in windowed apps when there is no keyboard attached to your device&quot;
+                            in Settings -&gt; Devices -&gt; Typing is disabled.
+                    </TextBlock>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

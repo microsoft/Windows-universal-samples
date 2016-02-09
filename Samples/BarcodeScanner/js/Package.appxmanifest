@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap">
 
   <Identity
-    Name="49a359fa-14f3-4353-9be0-4614b8409cb2"
+    Name="Microsoft.SDKSamples.BarcodeScanner.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

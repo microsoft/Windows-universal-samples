@@ -63,11 +63,6 @@ Copyright (c) Microsoft Corporation. All rights reserved
     height: auto;
 }
 
-#article .win-backbutton {
-    border-color: rgb(33,33,33);
-    color: rgb(33,33,33);
-}
-
 /* Article Area */
 
 #articleArea {

@@ -51,7 +51,7 @@ SecureInterfaceConcatenateCalledEventArgs::SecureInterfaceConcatenateCalledEvent
     m_interfaceMemberInStr1(interfaceMemberInStr1),
     m_interfaceMemberInStr2(interfaceMemberInStr2)
 {
-    m_result = SecureInterfaceConcatenateResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
+	m_result = SecureInterfaceConcatenateResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ SecureInterfaceConcatenateCalledEventArgs::GetDeferral()
@@ -127,7 +127,7 @@ SecureInterfaceGetIsUpperCaseEnabledRequestedEventArgs::SecureInterfaceGetIsUppe
     m_completionsRequired(0),
     m_messageInfo(info)
 {
-    m_result = SecureInterfaceGetIsUpperCaseEnabledResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
+	m_result = SecureInterfaceGetIsUpperCaseEnabledResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ SecureInterfaceGetIsUpperCaseEnabledRequestedEventArgs::GetDeferral()
@@ -205,7 +205,7 @@ SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs::SecureInterfaceSetIsUppe
     m_messageInfo(info),
     m_value(value)
 {
-    m_result = SecureInterfaceSetIsUpperCaseEnabledResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
+	m_result = SecureInterfaceSetIsUpperCaseEnabledResult::CreateFailureResult(ER_NOT_IMPLEMENTED);
 }
 
 Deferral^ SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs::GetDeferral()

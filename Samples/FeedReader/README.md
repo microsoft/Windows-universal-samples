@@ -1,9 +1,9 @@
-﻿<!---
+<!---
   category: NetworkingAndWebServices 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620542&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620542
 --->
 
-# RSS reader (JavaScript) end-to-end sample 
+# RSS reader end-to-end (JavaScript) sample 
 
 This Windows Store app sample demonstrates a basic end-to-end implementation of a news feed reader.It uses a [**ListView**](http://msdn.microsoft.com/library/windows/apps/br242878) to organize and display articles from various subscriptions specified in a JSON-formatted data file. The data is obtained over a network connection or from a local cache.
 
@@ -67,7 +67,7 @@ Here are some general Windows Store app features demonstrated by this app.
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 

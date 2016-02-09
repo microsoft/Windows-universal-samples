@@ -41,14 +41,12 @@ namespace NavigationMenuSample
 
         Loaded += ref new Windows::UI::Xaml::RoutedEventHandler(this, &AppShell::OnLoaded);
 
+		RootSplitView->RegisterPropertyChangedCallback(
+			SplitView::DisplayModeProperty,
+			ref new DependencyPropertyChangedCallback(this, &AppShell::RootSplitViewDisplayModeChangedCallback));
+
         SystemNavigationManager::GetForCurrentView()->BackRequested +=
             ref new EventHandler<Windows::UI::Core::BackRequestedEventArgs^>(this, &AppShell::SystemNavigationManager_BackRequested);
-
-        // If on a phone device that has hardware buttons then we hide the app's back button.
-        if (Windows::Foundation::Metadata::ApiInformation::IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-        {
-            BackButton->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
-        }
 
         // Declare the top level nav items
         navlist = ref new Vector<NavMenuItem^>();
@@ -133,29 +131,9 @@ namespace NavigationMenuSample
 
     void AppShell::SystemNavigationManager_BackRequested(Object^ sender, Windows::UI::Core::BackRequestedEventArgs^ e)
     {
-        bool handled = e->Handled;
-        BackRequested(&handled);
-        e->Handled = handled;
-    }
-
-    void AppShell::BackButton_Click(Object^ sender, RoutedEventArgs^ e)
-    {
-        bool ignored = false;
-        BackRequested(&ignored);
-    }
-
-    void AppShell::BackRequested(bool* handled)
-    {
-        // Get a hold of the current frame so that we can inspect the app back stack.
-
-        if (AppFrame == nullptr)
-            return;
-
-        // Check to see if this is the top-most page on the app back stack.
-        if (AppFrame->CanGoBack && !(*handled))
+        if (!e->Handled && AppFrame->CanGoBack)
         {
-            // If not, set the event to handled and go back to the previous page in the app.
-            *handled = true;
+            e->Handled = true;
             AppFrame->GoBack();
         }
     }
@@ -230,6 +208,12 @@ namespace NavigationMenuSample
             auto control = (Page^)e->Content;
             control->Loaded += ref new RoutedEventHandler(this, &AppShell::Page_Loaded);
         }
+
+        // Update the Back button depending on whether we can go Back.
+        SystemNavigationManager::GetForCurrentView()->AppViewBackButtonVisibility =
+            AppFrame->CanGoBack ?
+            Windows::UI::Core::AppViewBackButtonVisibility::Visible :
+            Windows::UI::Core::AppViewBackButtonVisibility::Collapsed;
     }
 
     void AppShell::Page_Loaded(Object^ sender, RoutedEventArgs^ e)
@@ -249,6 +233,14 @@ namespace NavigationMenuSample
         CheckTogglePaneButtonSizeChanged();
     }
 
+	/// <summary>
+	/// Ensure that we update the reported size of the TogglePaneButton when the SplitView's 
+	/// DisplayMode changes.
+	/// </summary>
+	void AppShell::RootSplitViewDisplayModeChangedCallback(DependencyObject^ sender, DependencyProperty^ dp)
+	{
+		CheckTogglePaneButtonSizeChanged();
+	}
 
     /// <summary>
     /// Check for the conditions where the navigation pane does not occupy the space under the floating

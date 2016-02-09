@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="8669b7ce-1fa4-422e-a164-308f983fdc1a"
+    Name="Microsoft.SDKSamples.CustomUsbDeviceAccess.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

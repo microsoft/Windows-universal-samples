@@ -1,9 +1,9 @@
-﻿<!---
+<!---
   category: ControlsLayoutAndText
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620624&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620624
 --->
 
-# HTML WebView control sample
+# WebView control (HTML) sample
 
 This sample demonstrates how to use [**WebView**](http://msdn.microsoft.com/library/windows/apps/br227702).
 

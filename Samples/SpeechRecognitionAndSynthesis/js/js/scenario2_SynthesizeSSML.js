@@ -13,26 +13,40 @@
     "use strict";
     var page = WinJS.UI.Pages.define("/html/scenario2_SynthesizeSSML.html", {
         ready: function (element, options) {
-            synthesizer = new Windows.Media.SpeechSynthesis.SpeechSynthesizer();
-            audio = new Audio();
+            try {
+                synthesizer = new Windows.Media.SpeechSynthesis.SpeechSynthesizer();
+                audio = new Audio();
 
-            btnSpeak.addEventListener("click", speakFn, false);
-            voicesSelect.addEventListener("click", setVoiceFunction, false);
+                btnSpeak.addEventListener("click", speakFn, false);
+                voicesSelect.addEventListener("click", setVoiceFunction, false);
 
-            var rcns = Windows.ApplicationModel.Resources.Core;
-            context = new rcns.ResourceContext();
-            context.languages = new Array(synthesizer.voice.language);
-            resourceMap = rcns.ResourceManager.current.mainResourceMap.getSubtree('LocalizationTTSResources');
+                var rcns = Windows.ApplicationModel.Resources.Core;
+                context = new rcns.ResourceContext();
+                context.languages = new Array(synthesizer.voice.language);
+                resourceMap = rcns.ResourceManager.current.mainResourceMap.getSubtree('LocalizationTTSResources');
 
-            textToSynthesize.innerText = resourceMap.getValue('SynthesizeSSMLDefaultText', context).valueAsString;
+                textToSynthesize.innerText = resourceMap.getValue('SynthesizeSSMLDefaultText', context).valueAsString;
 
-            listbox_GetVoices();
-            audio_SetUp();
+                listbox_GetVoices();
+                audio_SetUp();
+            } catch (exception) {
+                if (exception.number == -2147467263) // E_NOTIMPL
+                {
+                    // If media player components aren't installed (for example, when using an N SKU of windows)
+                    // this error may occur when instantiating the Audio object.
+                    statusMessage.innerText = "Media Player components are not available.";
+                    statusBox.style.backgroundColor = "red";
+                    btnSpeak.disabled = true;
+                    textToSynthesize.disabled = true;
+                }
+            }
         },
 
         unload: function (element, options) {
-            audio.onpause = null;
-            audio.pause();
+            if (audio != null) {
+                audio.onpause = null;
+                audio.pause();
+            }
         }
     });
 
@@ -59,6 +73,7 @@
         audio.onended = function () { // Fires when the audio finishes playing
             statusMessage.innerText = "Completed";
             btnSpeak.innerText = "Speak";
+            voicesSelect.disabled = false;
         };
     }
 

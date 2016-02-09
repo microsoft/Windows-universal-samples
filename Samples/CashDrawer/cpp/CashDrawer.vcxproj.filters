@@ -38,9 +38,9 @@
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>
-    <Page Include="Scenario1_OpenDrawer.xaml" />
-    <Page Include="Scenario2_CloseDrawer.xaml" />
-    <Page Include="Scenario3_MultipleDrawers.xaml" />
+    <Page Include="..\shared\Scenario1_OpenDrawer.xaml" />
+    <Page Include="..\shared\Scenario2_CloseDrawer.xaml" />
+    <Page Include="..\shared\Scenario3_MultipleDrawers.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">

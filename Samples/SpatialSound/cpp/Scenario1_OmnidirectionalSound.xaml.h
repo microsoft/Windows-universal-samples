@@ -25,6 +25,7 @@ namespace SDKTemplate
     {
     public:
         Scenario1_OmnidirectionalSound();
+        virtual ~Scenario1_OmnidirectionalSound();
     private:
         void StartButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void StopButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
@@ -41,6 +42,7 @@ namespace SDKTemplate
         bool                            _initialized = false;
         OmnidirectionalSound            _omnidirectionalSound;
         DispatcherTimer^                _timer;
+        EventRegistrationToken          _timerEventToken;
         float                           _radius = 2.0f;            // Radius of the orbit
         float                           _height = 0;               // Height at which the sound is orbiting (0 for centered around listener's head, +ve for above and -ve for below)
         float                           _angularVelocity = 0;      // Speed of orbit, default is stationary

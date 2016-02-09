@@ -1,0 +1,69 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<Page
+    x:Class="SDKTemplate.Scenario_PauseAsync"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    This sample showcases how to switch grammars during a continuous recognition session.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <StackPanel Orientation="Vertical" >
+                        <Button x:Name="btnRecognize" Click="Recognize_Click" IsEnabled="False" Margin="10,10,0,10">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Microphone"/>
+                                <TextBlock x:Name="recognizeButtonText" Text=" Continuous Recognition"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="btnEmailGrammar" Click="EmailButton_Click" IsEnabled="False" Margin="10,10,0,10">
+                            <TextBlock x:Name="emailButtonText" Text="Remove 'email' grammar"/>
+                        </Button>
+                        <Button x:Name="btnPhoneGrammar" Click="PhoneButton_Click" IsEnabled="False" Margin="10,10,0,10">
+                            <TextBlock x:Name="phoneButtonText" Text="Add 'phone' grammar"/>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Name="infoBoxes" Visibility="Collapsed">
+                        <TextBlock Name="grammarTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" Text="Listening for:"/>
+                        <TextBlock TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" Text="Go home"/>
+                        <TextBlock Name="emailInfoTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" Text="Send email"/>
+                        <TextBlock Name="phoneInfoTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}" Visibility="Collapsed" Text="Call phone"/>
+                    </StackPanel>
+                    <TextBlock Name="resultTextBlock" TextWrapping="Wrap" Margin="0,5,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
+                    <TextBlock Name="msTextBlock" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"/>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

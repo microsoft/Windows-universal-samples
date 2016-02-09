@@ -27,6 +27,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Core;
 
 namespace SDKTemplate
 {
@@ -47,10 +48,6 @@ namespace SDKTemplate
             // This is a static public property that allows downstream pages to get a handle to the MainPage instance
             // in order to call methods that are in this class.
             Current = this;
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-            {
-                Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -90,20 +87,6 @@ namespace SDKTemplate
             {
                 SuspensionManager.SessionState["SelectedScenarioIndex"] = scenarioListBox.SelectedIndex;
                 ScenarioFrame.Navigate(s.ClassType);
-            }
-        }
-
-        void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
-        {
-            if (ScenarioFrame.CanGoBack)
-            {
-                // Clear the status block when navigating
-                NotifyUser(String.Empty, NotifyType.StatusMessage);
-
-                ScenarioFrame.GoBack();
-
-                //Indicate the back button press is handled so the app does not exit
-                e.Handled = true;
             }
         }
 

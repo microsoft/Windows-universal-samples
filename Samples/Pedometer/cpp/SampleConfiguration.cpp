@@ -19,5 +19,6 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
 {
     { "Events", "SDKTemplate.Scenario1_Events" },
     { "History", "SDKTemplate.Scenario2_History" },
-    { "Current step count", "SDKTemplate.Scenario3_CurrentStepCount" }
+    { "Current step count", "SDKTemplate.Scenario3_CurrentStepCount" },
+    { "Background Pedometer", "SDKTemplate.Scenario4_BackgroundTask" }
 };

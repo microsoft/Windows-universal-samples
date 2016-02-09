@@ -33,7 +33,7 @@ namespace AllJoynConsumerExperiences
 
     enum ConfigureWiFiResultStatus
     {
-        NonConcurrent = 1,
+        NotConcurrent = 1,
         Concurrent = 2,
     }
 

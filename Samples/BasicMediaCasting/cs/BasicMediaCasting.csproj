@@ -131,15 +131,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_BuiltInCasting.xaml">
+    <Page Include="..\shared\Scenario1_BuiltInCasting.xaml">
+      <Link>Scenario1_BuiltInCasting.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_CastingDevicePicker.xaml">
+    <Page Include="..\shared\Scenario2_CastingDevicePicker.xaml">
+      <Link>Scenario2_CastingDevicePicker.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3_CustomPicker.xaml">
+    <Page Include="..\shared\Scenario3_CustomPicker.xaml">
+      <Link>Scenario3_CustomPicker.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

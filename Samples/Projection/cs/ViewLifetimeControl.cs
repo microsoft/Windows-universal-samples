@@ -68,6 +68,12 @@ namespace SecondaryViewsHelpers
         // the user can interact with it, move it on or off screen, etc. 
         bool consolidated = true;
 
+        // Tracks whether the projected view has been made visible for the first time yet. If it has not yet been shown for the
+        // first time yet, we should not signal for it to be released yet. This protects against the fact that visibilityChanged
+        // is not guaranteed to fire until after the StartProjectingAsync task has completed, so refCount of the ViewLifeTimeControl
+        // may temporarily drop to 0 until the visibilityChanged event fires for the projected view first becoming visible.
+        bool madeVisible = false;
+
         // Used to store pubicly registered events under the protection of a lock
         event ViewReleasedHandler InternalReleased;
 
@@ -219,6 +225,7 @@ namespace SecondaryViewsHelpers
                     {
                         // The view has become visible, so do not close it until it's consolidated
                         StartViewInUse();
+                        madeVisible = true;
                     }
                 }
             }
@@ -264,7 +271,7 @@ namespace SecondaryViewsHelpers
                 if (!released)
                 {
                     refCountCopy = --refCount;
-                    if (refCountCopy == 0)
+                    if ((refCountCopy == 0) && madeVisible)
                     {
                         dispatcher.RunAsync(CoreDispatcherPriority.Low, FinalizeRelease);
                     }

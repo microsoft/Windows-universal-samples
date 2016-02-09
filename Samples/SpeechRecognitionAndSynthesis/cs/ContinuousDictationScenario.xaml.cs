@@ -79,14 +79,17 @@ namespace SpeechAndTTS
             if (permissionGained)
             {
                 btnContinuousRecognize.IsEnabled = true;
+
+                PopulateLanguageDropdown();
+                await InitializeRecognizer(SpeechRecognizer.SystemSpeechLanguage);
             }
             else
             {
                 this.dictationTextBox.Text = "Permission to access capture resources was not given by the user, reset the application setting in Settings->Privacy->Microphone.";
+                btnContinuousRecognize.IsEnabled = false;
+                cbLanguageSelection.IsEnabled = false;
             }
 
-            PopulateLanguageDropdown();
-            await InitializeRecognizer(SpeechRecognizer.SystemSpeechLanguage);
         }
 
         /// <summary>
@@ -331,6 +334,7 @@ namespace SpeechAndTTS
         /// <param name="e">Unused event details</param>
         public async void ContinuousRecognize_Click(object sender, RoutedEventArgs e)
         {
+            btnContinuousRecognize.IsEnabled = false;
             if (isListening == false)
             {
                 // The recognizer can only start listening in a continuous fashion if the recognizer is currently idle.
@@ -341,8 +345,7 @@ namespace SpeechAndTTS
                     cbLanguageSelection.IsEnabled = false;
                     hlOpenPrivacySettings.Visibility = Visibility.Collapsed;
                     discardedTextBlock.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-
-
+                    
                     try
                     {
                         isListening = true;
@@ -379,12 +382,21 @@ namespace SpeechAndTTS
                     // Cancelling recognition prevents any currently recognized speech from
                     // generating a ResultGenerated event. StopAsync() will allow the final session to 
                     // complete.
-                    await speechRecognizer.ContinuousRecognitionSession.StopAsync();
+                    try
+                    {
+                        await speechRecognizer.ContinuousRecognitionSession.StopAsync();
 
-                    // Ensure we don't leave any hypothesis text behind
-                    dictationTextBox.Text = dictatedTextBuilder.ToString();
+                        // Ensure we don't leave any hypothesis text behind
+                        dictationTextBox.Text = dictatedTextBuilder.ToString();
+                    }
+                    catch (Exception exception)
+                    {
+                        var messageDialog = new Windows.UI.Popups.MessageDialog(exception.Message, "Exception");
+                        await messageDialog.ShowAsync();
+                    }
                 }
             }
+            btnContinuousRecognize.IsEnabled = true;
         }
 
         /// <summary>

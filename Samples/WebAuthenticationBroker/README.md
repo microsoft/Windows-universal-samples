@@ -1,6 +1,6 @@
 ﻿<!---
   category: IdentitySecurityAndEncryption
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620622&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620622
 --->
 
 # WebAuthenticationBroker sample
@@ -17,7 +17,6 @@ Shows using the OAuth protocol for authentication and authorization. You can cho
 
 ## Related Topics
 
-[Web Authentication Broker](http://msdn.microsoft.com/library/windows/apps/)
 [Quickstart: Connecting using XML HTTP Request](http://msdn.microsoft.com/library/windows/apps/hh770550)
 [Setting up single sign-on using the web authentication broker](http://msdn.microsoft.com/library/windows/apps/hh465283)
 

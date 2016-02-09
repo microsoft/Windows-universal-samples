@@ -1,0 +1,78 @@
+<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario2-history.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div id="scenarioDescription">
+            <p>Retrieves the Pedometer History for the timespan requested.</p>
+        </div>
+        Choose the timespan from which to retrieve history:
+        <br>
+        <input id="allHistoryRadio" type="radio" name="historySpan" checked class="win-radio">
+        <label for="all">All available history</label>
+        <br>
+        <input id="spanHistoryRadio" type="radio" name="historySpan" class="win-radio">
+        <label for="span">History within a specific range</label>
+        <br>
+        <div id="historyTimeSpan" style="display:none">
+            From:
+            <br />
+            <div id="fromDate" data-win-control="WinJS.UI.DatePicker"></div>
+            <br />
+            <div id="fromTime" data-win-control="WinJS.UI.TimePicker"></div>
+            <br />
+            To:
+            <br />
+            <div id="toDate" data-win-control="WinJS.UI.DatePicker"></div>
+            <br />
+            <div id="toTime" data-win-control="WinJS.UI.TimePicker"></div>
+        </div>
+        <p>
+            <button id="getHistoryButton" class="win-button">Get History</button>
+        </p>
+        <div id="historyRecordsHeaderDisplay">
+            <table>
+                <tr>
+                    <th width="150">Time Stamp</th>
+                    <th width="100">Step Kind</th>
+                    <th width="100">Steps Count</th>
+                    <th width="100">Steps Duration</th>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <div id="recordTemplate" data-win-control="WinJS.Binding.Template">
+                <div>
+                    <table>
+                        <tr>
+                            <td width="150" data-win-bind="innerText: timestamp">Time Stamp</td>
+                            <td width="100" data-win-bind="innerText: stepKindString">
+                            </td>
+                            <td width="100" data-win-bind="innerText: stepsCount" style="text-align: right">
+                            </td>
+                            <td width="100" data-win-bind="innerText: stepsDuration" style="text-align: right">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div id="historyBinding" data-win-control="WinJS.UI.ListView" data-win-options="{ layout: {type: WinJS.UI.ListLayout},
+                                    itemDataSource: HistoryRecordCollection.itemList.dataSource,
+                                    itemTemplate: select(&apos;#recordTemplate&apos;) }">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

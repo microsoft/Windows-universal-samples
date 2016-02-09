@@ -26,7 +26,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock x:Name="OvenClientWRLInput"  TextWrapping="Wrap" Grid.Row="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >
-                Use the custom Oven and Bread Windows Runtime components.
+                Use the custom Oven and BreadBakedEventArgs Windows Runtime components.
             </TextBlock>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Grid.Row="1">
                 <Button x:Name="Start" Content="Start" Margin="0,0,10,0" Click="Start_Click"/>

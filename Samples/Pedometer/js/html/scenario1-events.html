@@ -1,0 +1,53 @@
+<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario1-events.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <p id="scenarioDescription">
+            This page illustrates the Pedometer&apos;s &apos;ReadingChanged&apos; event usage on default Pedometer.
+            Use the button below to register and unregister for the Pedometer events.
+        </p>
+        <p>
+            <button class="win-button" id="registerReadingChanged" disabled>Register ReadingChanged</button>
+        </p>
+        <div id="scenarioOutput">
+            <table>
+                <tr><td>Timestamp:</td><td id="readingTimeStamp">no data</td></tr>
+                <tr><td>Total Step Count:</td><td id="totalStepsCount">no data</td></tr>
+            </table>
+            <table cellpadding="3">
+                <tr>
+                    <th>Step Type</th>
+                    <th>Cumulative<br />Step Count</th>
+                    <th>Cumulative<br />Step Duration (in ms)</th>
+                </tr>
+                <tr>
+                    <td>Unknown</td>
+                    <td id="unknownCount" style="text-align: right">no data</td>
+                    <td id="unknownDuration" style="text-align: right">no data</td>
+                </tr>
+                <tr>
+                    <td>Walking</td>
+                    <td id="walkingCount" style="text-align: right">no data</td>
+                    <td id="walkingDuration" style="text-align: right">no data</td>
+                </tr>
+                <tr>
+                    <td>Running</td>
+                    <td id="runningCount" style="text-align: right">no data</td>
+                    <td id="runningDuration" style="text-align: right">no data</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

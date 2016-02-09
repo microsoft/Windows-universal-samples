@@ -120,21 +120,28 @@ namespace Tasks
 
             StorageFile logFile = await localFolder.CreateFileAsync(logFileName, CreationCollisionOption.OpenIfExists);
 
-            // Create a protected file
-            ProtectedFileCreateResult result = await FileProtectionManager.CreateProtectedAndOpenAsync(localFolder,
-                fileName, m_EnterpriseID, CreationCollisionOption.ReplaceExisting);
+            // Create a protected file allows the creation of new files even after keys are dropped so that application
+            // can create and continue writing to files under lock
 
-            m_fileProtStatus = result.ProtectionInfo.Status.ToString();
-
-            // Write to File
-
-            using (IOutputStream outputStream = result.Stream.GetOutputStreamAt(0))
+            var result = await FileProtectionManager.CreateProtectedAndOpenAsync(localFolder,
+                                                                                 fileName,
+                                                                                 m_EnterpriseID,
+                                                                                 CreationCollisionOption.ReplaceExisting
+                                                                                 );
+            using (var stream = result.Stream)
             {
-                DataWriter writer = new DataWriter(outputStream);
-                for (int i = 0; i < 100; i++)
+                m_fileProtStatus = result.ProtectionInfo.Status.ToString();
+
+                // Write to File
+
+                using (IOutputStream outputStream = result.Stream.GetOutputStreamAt(0))
                 {
-                    writer.WriteString(textBody);
-                    await writer.StoreAsync();
+                    DataWriter writer = new DataWriter(outputStream);
+                    for (int i = 0; i < 100; i++)
+                    {
+                        writer.WriteString(textBody);
+                        await writer.StoreAsync();
+                    }
                 }
             }
 

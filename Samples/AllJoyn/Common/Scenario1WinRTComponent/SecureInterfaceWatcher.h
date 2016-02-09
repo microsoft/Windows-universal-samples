@@ -48,10 +48,48 @@ public:
     virtual ~SecureInterfaceWatcher();
 
     // This event will fire whenever a producer for this service is found.
-    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceWatcher^, Windows::Devices::AllJoyn::AllJoynServiceInfo^>^ Added;
+    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceWatcher^, Windows::Devices::AllJoyn::AllJoynServiceInfo^>^ Added 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<SecureInterfaceWatcher^, Windows::Devices::AllJoyn::AllJoynServiceInfo^>^ handler) 
+        { 
+            return _Added += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<SecureInterfaceWatcher^>(sender), safe_cast<Windows::Devices::AllJoyn::AllJoynServiceInfo^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _Added -= token; 
+        } 
+    internal: 
+        void raise(SecureInterfaceWatcher^ sender, Windows::Devices::AllJoyn::AllJoynServiceInfo^ args) 
+        { 
+            _Added(sender, args);
+        } 
+    }
 
     // This event will fire whenever the watcher is stopped.
-    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceWatcher^, Windows::Devices::AllJoyn::AllJoynProducerStoppedEventArgs^>^ Stopped;
+    virtual event Windows::Foundation::TypedEventHandler<SecureInterfaceWatcher^, Windows::Devices::AllJoyn::AllJoynProducerStoppedEventArgs^>^ Stopped 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<SecureInterfaceWatcher^, Windows::Devices::AllJoyn::AllJoynProducerStoppedEventArgs^>^ handler) 
+        { 
+            return _Stopped += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<SecureInterfaceWatcher^>(sender), safe_cast<Windows::Devices::AllJoyn::AllJoynProducerStoppedEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _Stopped -= token; 
+        } 
+    internal: 
+        void raise(SecureInterfaceWatcher^ sender, Windows::Devices::AllJoyn::AllJoynProducerStoppedEventArgs^ args) 
+        { 
+            _Stopped(sender, args);
+        } 
+    }
 
     // Start watching for producers advertising this service.
     void Start();
@@ -83,6 +121,9 @@ internal:
     void BusAttachmentStateChanged(_In_ Windows::Devices::AllJoyn::AllJoynBusAttachment^ sender, _In_ Windows::Devices::AllJoyn::AllJoynBusAttachmentStateChangedEventArgs^ args);
 
 private:
+    virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _Added;
+    virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _Stopped;
+
     void UnregisterFromBus();
 
     Windows::Devices::AllJoyn::AllJoynBusAttachment^ m_busAttachment;

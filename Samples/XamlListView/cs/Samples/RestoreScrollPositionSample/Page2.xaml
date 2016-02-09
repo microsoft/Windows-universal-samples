@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="ListViewSample.Page2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ListViewSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Restore Scroll Position Sample"
+               VerticalAlignment="Top"
+               Style="{ThemeResource TitleTextBlockStyle}"
+               Margin="10" />
+
+            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,0,0,0">
+                Use the back button above to navigate back to the main Restore Scroll Position Page. Once you navigate back, you should see that your scroll position has been maintained.
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Page>

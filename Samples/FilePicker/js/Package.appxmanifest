@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="6b51fde7-6d8e-4102-ac8a-37d05981c05b"
+    Name="Microsoft.SDKSamples.FilePicker.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

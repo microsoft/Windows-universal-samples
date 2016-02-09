@@ -19,5 +19,6 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
 {
     { "Data Events", "SDKTemplate.Scenario1_DataEvents" },
     { "Polling", "SDKTemplate.Scenario2_Polling" },
-    { "Display On/Off", "SDKTemplate.Scenario3_DisplayOnOff" }
+    { "Display On/Off", "SDKTemplate.Scenario3_DisplayOnOff" },
+    { "Background Proximity Sensor", "SDKTemplate.Scenario4_BackgroundProximitySensor" }
 };

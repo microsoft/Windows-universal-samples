@@ -47,36 +47,28 @@ using namespace org::alljoyn::Onboarding;
 IAsyncOperation<OnboardingConfigureWiFiResult^>^ OnboardingServiceEventAdapter::ConfigureWiFiAsync(_In_ AllJoynMessageInfo^ info, _In_ Platform::String^ interfaceMemberSSID, _In_ Platform::String^ interfaceMemberPassphrase, _In_ int16 interfaceMemberAuthType)
 {
     auto args = ref new OnboardingConfigureWiFiCalledEventArgs(info, interfaceMemberSSID, interfaceMemberPassphrase, interfaceMemberAuthType);
-    AllJoynHelpers::DispatchEvent([=]() {
-        ConfigureWiFiCalled(this, args);
-    });
+    ConfigureWiFiCalled(this, args);
     return OnboardingConfigureWiFiCalledEventArgs::GetResultAsync(args);
 }
 
 IAsyncOperation<OnboardingConnectResult^>^ OnboardingServiceEventAdapter::ConnectAsync(_In_ AllJoynMessageInfo^ info)
 {
     auto args = ref new OnboardingConnectCalledEventArgs(info);
-    AllJoynHelpers::DispatchEvent([=]() {
-        ConnectCalled(this, args);
-    });
+    ConnectCalled(this, args);
     return OnboardingConnectCalledEventArgs::GetResultAsync(args);
 }
 
 IAsyncOperation<OnboardingOffboardResult^>^ OnboardingServiceEventAdapter::OffboardAsync(_In_ AllJoynMessageInfo^ info)
 {
     auto args = ref new OnboardingOffboardCalledEventArgs(info);
-    AllJoynHelpers::DispatchEvent([=]() {
-        OffboardCalled(this, args);
-    });
+    OffboardCalled(this, args);
     return OnboardingOffboardCalledEventArgs::GetResultAsync(args);
 }
 
 IAsyncOperation<OnboardingGetScanInfoResult^>^ OnboardingServiceEventAdapter::GetScanInfoAsync(_In_ AllJoynMessageInfo^ info)
 {
     auto args = ref new OnboardingGetScanInfoCalledEventArgs(info);
-    AllJoynHelpers::DispatchEvent([=]() {
-        GetScanInfoCalled(this, args);
-    });
+    GetScanInfoCalled(this, args);
     return OnboardingGetScanInfoCalledEventArgs::GetResultAsync(args);
 }
 
@@ -84,27 +76,21 @@ IAsyncOperation<OnboardingGetScanInfoResult^>^ OnboardingServiceEventAdapter::Ge
 IAsyncOperation<OnboardingGetVersionResult^>^ OnboardingServiceEventAdapter::GetVersionAsync(_In_ AllJoynMessageInfo^ info)
 {
     auto args = ref new OnboardingGetVersionRequestedEventArgs(info);
-    AllJoynHelpers::DispatchEvent([=]() {
-        GetVersionRequested(this, args);
-    });
+    GetVersionRequested(this, args);
     return OnboardingGetVersionRequestedEventArgs::GetResultAsync(args);
 }
 
 IAsyncOperation<OnboardingGetStateResult^>^ OnboardingServiceEventAdapter::GetStateAsync(_In_ AllJoynMessageInfo^ info)
 {
     auto args = ref new OnboardingGetStateRequestedEventArgs(info);
-    AllJoynHelpers::DispatchEvent([=]() {
-        GetStateRequested(this, args);
-    });
+    GetStateRequested(this, args);
     return OnboardingGetStateRequestedEventArgs::GetResultAsync(args);
 }
 
 IAsyncOperation<OnboardingGetLastErrorResult^>^ OnboardingServiceEventAdapter::GetLastErrorAsync(_In_ AllJoynMessageInfo^ info)
 {
     auto args = ref new OnboardingGetLastErrorRequestedEventArgs(info);
-    AllJoynHelpers::DispatchEvent([=]() {
-        GetLastErrorRequested(this, args);
-    });
+    GetLastErrorRequested(this, args);
     return OnboardingGetLastErrorRequestedEventArgs::GetResultAsync(args);
 }
 

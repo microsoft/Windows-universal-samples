@@ -1,9 +1,9 @@
-﻿<!---
+<!---
   category: Data
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620550&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620550
 --->
 
-# HTML5 form validation sample
+# Form validation (HTML) sample
 
 Demonstrates HTML5 input form and validation attributes that enable you to help your users enter the correct data in the right format into your page's forms.
 

@@ -75,23 +75,25 @@ namespace SpeechAndTTS
             if (permissionGained)
             {
                 btnContinuousRecognize.IsEnabled = true;
+                
+                // Initialize resource map to retrieve localized speech strings.
+                Language speechLanguage = SpeechRecognizer.SystemSpeechLanguage;
+                string langTag = speechLanguage.LanguageTag;
+                speechContext = ResourceContext.GetForCurrentView();
+                speechContext.Languages = new string[] { langTag };
+
+                speechResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("LocalizationSpeechResources");
+
+                PopulateLanguageDropdown();
+                await InitializeRecognizer(SpeechRecognizer.SystemSpeechLanguage);
             }
             else
             {
                 this.resultTextBlock.Visibility = Visibility.Visible;
                 this.resultTextBlock.Text = "Permission to access capture resources was not given by the user, reset the application setting in Settings->Privacy->Microphone.";
+                btnContinuousRecognize.IsEnabled = false;
+                cbLanguageSelection.IsEnabled = false;
             }
-
-            // Initialize resource map to retrieve localized speech strings.
-            Language speechLanguage = SpeechRecognizer.SystemSpeechLanguage;
-            string langTag = speechLanguage.LanguageTag;
-            speechContext = ResourceContext.GetForCurrentView();
-            speechContext.Languages = new string[] { langTag };
-
-            speechResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("LocalizationSpeechResources");
-
-            PopulateLanguageDropdown();
-            await InitializeRecognizer(SpeechRecognizer.SystemSpeechLanguage);
         }
 
         /// <summary>
@@ -153,7 +155,6 @@ namespace SpeechAndTTS
                 var messageDialog = new Windows.UI.Popups.MessageDialog(exception.Message, "Exception");
                 await messageDialog.ShowAsync();
             }
-
         }
 
         /// <summary>
@@ -380,16 +381,25 @@ namespace SpeechAndTTS
         /// <param name="e">Unused event details</param>
         public async void ContinuousRecognize_Click(object sender, RoutedEventArgs e)
         {
+            btnContinuousRecognize.IsEnabled = false;
             if (isListening == false)
             {
                 // The recognizer can only start listening in a continuous fashion if the recognizer is currently idle.
                 // This prevents an exception from occurring.
                 if (speechRecognizer.State == SpeechRecognizerState.Idle)
                 {
-                    ContinuousRecoButtonText.Text = " Stop Continuous Recognition";
-                    cbLanguageSelection.IsEnabled = false;
-                    isListening = true;
-                    await speechRecognizer.ContinuousRecognitionSession.StartAsync();
+                    try
+                    {
+                        await speechRecognizer.ContinuousRecognitionSession.StartAsync();
+                        ContinuousRecoButtonText.Text = " Stop Continuous Recognition";
+                        cbLanguageSelection.IsEnabled = false;
+                        isListening = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        var messageDialog = new Windows.UI.Popups.MessageDialog(ex.Message, "Exception");
+                        await messageDialog.ShowAsync();
+                    }
                 }
             }
             else
@@ -402,12 +412,22 @@ namespace SpeechAndTTS
                 resultTextBlock.Visibility = Visibility.Collapsed;
                 if (speechRecognizer.State != SpeechRecognizerState.Idle)
                 {
-                    // Cancelling recognition prevents any currently recognized speech from
-                    // generating a ResultGenerated event. StopAsync() will allow the final session to 
-                    // complete.
-                    await speechRecognizer.ContinuousRecognitionSession.CancelAsync();
+                    try
+                    {
+                        // Cancelling recognition prevents any currently recognized speech from
+                        // generating a ResultGenerated event. StopAsync() will allow the final session to 
+                        // complete.
+                        await speechRecognizer.ContinuousRecognitionSession.CancelAsync();
+                    }
+                    catch (Exception ex)
+                    {    
+                        var messageDialog = new Windows.UI.Popups.MessageDialog(ex.Message, "Exception");
+                        await messageDialog.ShowAsync();
+                    }
                 }
             }
+
+            btnContinuousRecognize.IsEnabled = true;
         }
     }
 }

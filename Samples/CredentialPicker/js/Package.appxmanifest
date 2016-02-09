@@ -6,7 +6,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="81804455-4d73-453f-b541-ccc728ac5b37"
+    Name="Microsoft.SDKSamples.CredentialPicker.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 

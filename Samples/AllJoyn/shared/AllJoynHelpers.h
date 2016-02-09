@@ -69,10 +69,6 @@ public:
     // Determine whether the supplied set of AuthenticationMechanisms is sufficient for securing an AllJoyn connection.
     static bool CanSecure(_In_ Windows::Foundation::Collections::IVector<Windows::Devices::AllJoyn::AllJoynAuthenticationMechanism>^ authenticationMechanisms);
 
-    // Execute the specified callback on the application's UI thread. The main purpose of this helper is to 
-    // safely marshal typed event arguments to JavaScript applications.
-    static void DispatchEvent(std::function<void()> callback);
-
     // Callback for alljoyn_about_announced_ptr.
     // This callback expects the context to be of type T, which must implement the OnAnnounce function.
     template<class T>
