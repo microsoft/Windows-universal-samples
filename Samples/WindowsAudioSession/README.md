@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: AudioVideoAndCamera
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620629
 --->
@@ -18,9 +18,20 @@ Specifically, this sample covers:
 
 For more information on adding audio to your Windows Store app, see [Quickstart: adding audio to an app](http://msdn.microsoft.com/library/windows/apps/hh452730).
 
+Playing audio in the background is supported by the Windows Audio Session API
+only in communication scenarios as demonstrated by the [VoIP](/Samples/VoIP) sample.
+Instead, for general background audio playback of media,
+use the BackgroundMediaPlayer class demonstrated in the [Background Audio](/Samples/BackgroundAudio) sample.
+
 ## Related topics
 
-**Roadmaps**
+### Samples
+
+[Background Audio](/Samples/BackgroundAudio)
+
+[VoIP](/Samples/VoIP)
+
+### Roadmaps
 
 [Audio, video, and camera](https://msdn.microsoft.com/library/windows/apps/mt203788)
 
@@ -32,7 +43,7 @@ For more information on adding audio to your Windows Store app, see [Quickstart:
 
 [Roadmap for apps using JavaScript](http://msdn.microsoft.com/library/windows/apps/hh465037)
 
-**Reference**
+### Reference
 
 [Windows Audio Session API (WASAPI)](http://msdn.microsoft.com/library/windows/apps/dd371455)
 
