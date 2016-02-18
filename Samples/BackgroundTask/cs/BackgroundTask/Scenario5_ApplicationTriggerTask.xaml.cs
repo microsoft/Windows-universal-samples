@@ -56,6 +56,7 @@ namespace SDKTemplate
                 }
             }
 
+            trigger = new ApplicationTrigger();
             UpdateUI();
         }
 
@@ -66,8 +67,6 @@ namespace SDKTemplate
         /// <param name="e"></param>
         private async void RegisterBackgroundTask(object sender, RoutedEventArgs e)
         {
-            trigger = new ApplicationTrigger();
-
             var task = BackgroundTaskSample.RegisterBackgroundTask(BackgroundTaskSample.SampleBackgroundTaskEntryPoint,
                                                                    BackgroundTaskSample.ApplicationTriggerTaskName,
                                                                    trigger,

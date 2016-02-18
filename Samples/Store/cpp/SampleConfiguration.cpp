@@ -26,7 +26,8 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Advanced consumable product", "SDKTemplate.Scenario5_AdvancedConsumableProduct" },
     { "Large catalog product", "SDKTemplate.Scenario6_LargeCatalogProduct" },
     { "App listing URI", "SDKTemplate.Scenario7_AppListingURI" },
-    { "Receipt", "SDKTemplate.Scenario8_Receipt" }
+    { "Receipt", "SDKTemplate.Scenario8_Receipt" },
+    { "Business to Business", "SDKTemplate.Scenario9_B2B" }
 }; 
 
 Concurrency::task<void> SDKTemplate::ConfigureSimulatorAsync(Platform::String^ filename)

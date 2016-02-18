@@ -18,6 +18,7 @@
         { url: "/html/scenario1_DataEvents.html", title: "Data Events" },
         { url: "/html/scenario2_Polling.html", title: "Polling" },
         { url: "/html/scenario3_DisplayOnOff.html", title: "Display On/Off" },
+        { url: "/html/scenario4_BackgroundProximitySensor.html", title: "Background Proximity Sensor" },
     ];
 
     WinJS.Namespace.define("SdkSample", {

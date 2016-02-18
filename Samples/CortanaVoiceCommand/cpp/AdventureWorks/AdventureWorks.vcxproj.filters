@@ -41,6 +41,15 @@
     <Filter Include="Strings\zh-CN">
       <UniqueIdentifier>{d96499de-5568-402a-b7e7-b82f61c7bc06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Strings\en-CA">
+      <UniqueIdentifier>{5d522ece-8345-43d9-a598-73fa960c0697}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\en-AU">
+      <UniqueIdentifier>{108fefa4-0454-423e-b055-4acfb792e332}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\en-IN">
+      <UniqueIdentifier>{576b2b47-ecc9-4220-890b-df20c7f2e7be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />
@@ -139,7 +148,7 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="adventureworkscommands.xml" />
+    <Xml Include="..\..\shared\AdventureWorksCommands.xml" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="..\..\shared\Strings\fr-FR\Resources.resw">
@@ -153,6 +162,15 @@
     </PRIResource>
     <PRIResource Include="..\..\shared\Strings\en-GB\Resources.resw">
       <Filter>Strings\en-GB</Filter>
+    </PRIResource>
+    <PRIResource Include="..\..\shared\Strings\en-CA\Resources.resw">
+      <Filter>Strings\en-CA</Filter>
+    </PRIResource>
+    <PRIResource Include="..\..\shared\Strings\en-AU\Resources.resw">
+      <Filter>Strings\en-AU</Filter>
+    </PRIResource>
+    <PRIResource Include="..\..\shared\Strings\en-IN\Resources.resw">
+      <Filter>Strings\en-IN</Filter>
     </PRIResource>
     <PRIResource Include="..\..\shared\Strings\es-ES\Resources.resw">
       <Filter>Strings\es-ES</Filter>

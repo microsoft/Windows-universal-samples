@@ -33,7 +33,8 @@ namespace SDKTemplate
             new Scenario() { Title = "Advanced consumable product", ClassType = typeof(Scenario5_AdvancedConsumableProduct) },
             new Scenario() { Title = "Large catalog product", ClassType = typeof(Scenario6_LargeCatalogProduct) },
             new Scenario() { Title = "App listing URI", ClassType = typeof(Scenario7_AppListingURI) },
-            new Scenario() { Title = "Receipt", ClassType = typeof(Scenario8_Receipt) }
+            new Scenario() { Title = "Receipt", ClassType = typeof(Scenario8_Receipt) },
+            new Scenario() { Title = "Business to Business", ClassType = typeof(Scenario9_B2B) }
         };
 
         public static async Task ConfigureSimulatorAsync(string filename)

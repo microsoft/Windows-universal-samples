@@ -11,8 +11,8 @@
     <AssemblyName>HttpClient</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -112,11 +112,14 @@
     <Compile Include="Scenario11_DeleteCookie.xaml.cs">
       <DependentUpon>Scenario11_DeleteCookie.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario12_MeteredConnectionFilter.xaml.cs">
-      <DependentUpon>Scenario12_MeteredConnectionFilter.xaml</DependentUpon>
+    <Compile Include="Scenario12_DisableCookies.xaml.cs">
+      <DependentUpon>Scenario12_DisableCookies.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scenario13_RetryFilter.xaml.cs">
       <DependentUpon>Scenario13_RetryFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario14_MeteredConnectionFilter.xaml.cs">
+      <DependentUpon>Scenario14_MeteredConnectionFilter.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scenario1_GetText.xaml.cs">
       <DependentUpon>Scenario1_GetText.xaml</DependentUpon>
@@ -171,13 +174,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario12_MeteredConnectionFilter.xaml">
+    <Page Include="Scenario14_MeteredConnectionFilter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Scenario13_RetryFilter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario12_DisableCookies.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Scenario1_GetText.xaml">
       <Generator>MSBuild:Compile</Generator>

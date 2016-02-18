@@ -45,7 +45,7 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -65,6 +65,7 @@
     <Content Include="html\scenario6-largeAppCatalog.html" />
     <Content Include="html\scenario7-appListingURI.html" />
     <Content Include="html\scenario8-receipt.html" />
+    <Content Include="html\scenario9-b2b.html" />
     <Content Include="..\shared\data\app-listing-uri.xml">
       <Link>data\app-listing-uri.xml</Link>
     </Content>
@@ -122,6 +123,7 @@
     <Content Include="js\scenario6-largeAppCatalog.js" />
     <Content Include="js\scenario7-appListingURI.js" />
     <Content Include="js\scenario8-receipt.js" />
+    <Content Include="js\scenario9-b2b.js" />
     <Content Include="..\..\..\SharedContent\js\Microsoft.WinJS\css\ui-dark.css">
       <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>
     </Content>

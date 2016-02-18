@@ -36,18 +36,18 @@ Scenario1::Scenario1()
 
 void Scenario1::SearchButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
-    auto musicFolder = KnownFolders::MusicLibrary;
-
     auto fileTypeFilter = ref new Platform::Collections::Vector<Platform::String^>();
     fileTypeFilter->Append("*");
-
     auto queryOptions = ref new QueryOptions(CommonFileQuery::OrderBySearchRank, fileTypeFilter);
     //use the user's input to make a query
     queryOptions->UserSearchFilter = InputTextBox->Text;
-    auto queryResult = musicFolder->CreateFileQueryWithOptions(queryOptions);
 
-    //find all files that match the query
-    create_task(queryResult->GetFilesAsync()).then([this, queryOptions](IVectorView<StorageFile^>^ files)
+    create_task(KnownFolders::GetFolderForUserAsync(nullptr /* current user */, KnownFolderId::MusicLibrary)).then([this, queryOptions](StorageFolder^ musicFolder)
+    {
+        auto queryResult = musicFolder->CreateFileQueryWithOptions(queryOptions);
+        //find all files that match the query
+        return queryResult->GetFilesAsync();
+    }).then([this, queryOptions](IVectorView<StorageFile^>^ files)
     {
         String^ outputText = "";
 

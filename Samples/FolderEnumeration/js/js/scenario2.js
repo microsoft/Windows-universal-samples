@@ -19,28 +19,31 @@
     function getByMonth() {
         clearOutput();
         // Get the Pictures library, then rearrange it by month
-        var picturesLibrary = Windows.Storage.KnownFolders.picturesLibrary;
-        var query = picturesLibrary.createFolderQuery(Windows.Storage.Search.CommonFolderQuery.groupByMonth);
-        // Retrieve the month groups and display them
-        query.getFoldersAsync().done(outputFoldersAndFiles);
+        Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.picturesLibrary).then(function (picturesLibrary) {
+            var query = picturesLibrary.createFolderQuery(Windows.Storage.Search.CommonFolderQuery.groupByMonth);
+            // Retrieve the month groups and display them
+            return query.getFoldersAsync();
+        }).done(outputFoldersAndFiles);
     }
 
     function getByRating() {
         clearOutput();
         // Get the Pictures library, then rearrange it by rating
-        var picturesLibrary = Windows.Storage.KnownFolders.picturesLibrary;
-        // Retrieve the rating groups and display them
-        var query = picturesLibrary.createFolderQuery(Windows.Storage.Search.CommonFolderQuery.groupByRating);
-        query.getFoldersAsync().done(outputFoldersAndFiles);
+        Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.picturesLibrary).then(function (picturesLibrary) {
+            // Retrieve the rating groups and display them
+            var query = picturesLibrary.createFolderQuery(Windows.Storage.Search.CommonFolderQuery.groupByRating);
+            return query.getFoldersAsync();
+        }).done(outputFoldersAndFiles);
     }
 
     function getByTag() {
         clearOutput();
         // Get the Pictures library, then rearrange it by tag
-        var picturesLibrary = Windows.Storage.KnownFolders.picturesLibrary;
-        // Retrieve the tag groups and display them
-        var query = picturesLibrary.createFolderQuery(Windows.Storage.Search.CommonFolderQuery.groupByTag);
-        query.getFoldersAsync().done(outputFoldersAndFiles);
+        Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.picturesLibrary).then(function (picturesLibrary) {
+            // Retrieve the tag groups and display them
+            var query = picturesLibrary.createFolderQuery(Windows.Storage.Search.CommonFolderQuery.groupByTag);
+            return query.getFoldersAsync();
+        }).done(outputFoldersAndFiles);
     }
 
     function outputFoldersAndFiles(folders) {

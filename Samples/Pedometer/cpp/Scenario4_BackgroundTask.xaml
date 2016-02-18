@@ -1,0 +1,70 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page 
+    x:Class="SDKTemplate.Scenario4_BackgroundTask" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:local="using:SDKTemplate" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d">
+  <Grid x:Name="LayoutRoot" HorizontalAlignment="Left" VerticalAlignment="Top">
+    <StackPanel Orientation="Vertical">
+      <TextBlock x:Name="InputTextBlock" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Registers a background task for pedometer changes. The background task runs when the step count crosses the requested step goal."/>
+      <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+        <Button x:Name="ScenarioRegisterTaskButton" Content="Register Task" Margin="0,0,10,0" Click="ScenarioRegisterTask"/>
+        <Button x:Name="ScenarioUnregisterTaskButton" Content="Unregister Task" Margin="0,0,10,0" Click="ScenarioUnregisterTask"/>
+      </StackPanel>
+      <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" MinWidth="120"/>
+          <ColumnDefinition Width="180"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Task Registration:"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Task Status:"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Current Step Count:"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="3" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Step Goal:"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="4" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Report Count:"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="5" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Last Report Timestamp:"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="6" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Unknown Step Count:"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="7" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Walking Step Count:"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="8" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Running Step Count:"/>
+
+        <TextBlock x:Name="ScenarioOutput_TaskRegistration" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock x:Name="ScenarioOutput_TaskStatus" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock x:Name="ScenarioOutput_CurrentCount" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock x:Name="ScenarioOutput_StepGoal" TextWrapping="Wrap" Grid.Row="3" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock x:Name="ScenarioOutput_ReportCount" TextWrapping="Wrap" Grid.Row="4" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock x:Name="ScenarioOutput_LastTimestamp" TextWrapping="Wrap" Grid.Row="5" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock x:Name="ScenarioOutput_UnknownCount" TextWrapping="Wrap" Grid.Row="6" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock x:Name="ScenarioOutput_WalkingCount" TextWrapping="Wrap" Grid.Row="7" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+        <TextBlock x:Name="ScenarioOutput_RunningCount" TextWrapping="Wrap" Grid.Row="8" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Text="No data"/>
+
+      </Grid>
+    </StackPanel>
+  </Grid>
+</Page>
