@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="Printing3DSample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Printing3DSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,0,-278,0" >
+
+        <StackPanel HorizontalAlignment="Left" Width="596">
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="3D Print Samples" Margin="30" />
+            
+            <RadioButton Tag="Using In-Memory 3D Model" Content="Launch 3D PrintDialog Using In-Memory Printing3DModel" Click="On3DPrint" Margin="20" />
+            
+            <RadioButton Tag="Using Xml Data" Content="Launch 3D PrintDialog Using Xml Data" Click="On3DPrint2"  Margin="20"/>
+            
+            <RadioButton Tag="Using File Activation" Content="Launch 3D Builder Using File Activation" Click="On3DPrint3" Margin="20" />
+            
+            <RadioButton Tag="Load File, Repair and Print" Content="Launch 3D PrintDialog after Loading a File and Repairing it" Click="On3DPrint4" Margin="20"/>
+            
+            <RadioButton Tag="Save File" Content="Use In-Memory Printing3DModel to save a 3MF file" Click="On3DPrint5" Margin="20"/>
+            
+            <RadioButton Tag="Using In-Memory 3D Model Use FileActivate" Content="File Activate 3D Builder with an In-Memory 3D Model" Click="On3DPrint6"  Margin="20"/>
+            
+            <RadioButton Tag="Load File and Print" Content="Load File and 3D Print" Click="On3DPrint7" Margin="20"/>
+            
+            <RadioButton Tag="Learn More" Content="Learn More about Windows 3D Print APIs" Click="On3DPrint8" Margin="20"/>
+            
+            <TextBlock x:Name="OutputTextBlock"  Height="200" TextWrapping="Wrap"/>
+        </StackPanel>
+    </Grid>
+</Page>
