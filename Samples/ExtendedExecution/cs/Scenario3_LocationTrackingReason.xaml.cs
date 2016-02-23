@@ -110,7 +110,7 @@ namespace SDKTemplate
             ClearExtendedExecution();
 
             var newSession = new ExtendedExecutionSession();
-            newSession.Reason = ExtendedExecutionReason.Unspecified;
+            newSession.Reason = ExtendedExecutionReason.LocationTracking;
             newSession.Description = "Tracking your location";
             newSession.Revoked += SessionRevoked;
             ExtendedExecutionResult result = await newSession.RequestExtensionAsync();
