@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="InputTextBlock1.Text" xml:space="preserve">
-    <value>当应用程序正在运行时，有可能系统语言、显示尺寸、对比度灯设置发生了变化，为了处理这些事件，应该为这些事件注册相应的监听器做相应的变化。</value>
+    <value>当应用程序正在运行时，有可能系统语言、显示尺寸、对比度等设置发生了变化，为了处理这些事件，应该为这些事件注册相应的监听器做相应的变化。</value>
     <comment>It is possible that, while an application is running, the language, scale, contrast or other settings may change. In order to handle these events, event listeners should be registered to listen for and react to the change.</comment>
   </data>
   <data name="InputTextBlock2.Text" xml:space="preserve">
