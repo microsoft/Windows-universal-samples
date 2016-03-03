@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Navigation;
 using SDKTemplate;
 using System;
 using Windows.ApplicationModel.Resources.Core;
+using Windows.ApplicationModel.Resources;
 
 namespace SDKTemplate
 {
@@ -57,14 +58,20 @@ namespace SDKTemplate
             Button b = sender as Button;
             if (b != null)
             {
-
+#if true
                 this.Scenario7TextBlock.Text = ResourceManager.Current.MainResourceMap.GetValue("Resources/string1", defaultContextForCurrentView).ValueAsString;
-
+#else
+                this.Scenario7TextBlock.Text = ResourceLoader.GetForCurrentView().GetString("/Resources/string1");
+#endif
                 defaultContextForCurrentView.QualifierValues.MapChanged += async (s, m) =>
                 {
                     await this.Scenario7TextBlock.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                     {
+#if true
                         this.Scenario7TextBlock.Text = ResourceManager.Current.MainResourceMap.GetValue("Resources/string1", defaultContextForCurrentView).ValueAsString;
+#else
+                        this.Scenario7TextBlock.Text = ResourceLoader.GetForCurrentView().GetString("string1");
+#endif
                     });
                 };
             }

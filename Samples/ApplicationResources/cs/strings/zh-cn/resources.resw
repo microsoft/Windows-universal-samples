@@ -130,7 +130,7 @@
     <comment>Note: the Application Languages scenario demonstrates use of the PrimaryLanguageOverride property to override the language used for the app. If a specific language was set in that scenario, then changing the language in Settings will not have any visible effect in this scenario. To see an effect in this scenario, make sure that the "Use language preferences (recommended)" option is selected in the Application Languages scenario.</comment>
   </data>
   <data name="InputTextBlock4.Text" xml:space="preserve">
-    <value>点击下面的按钮来显示当前资源的内容（对应语言所显示的内容），然后今日电脑系统设置 &gt; 时间和语言 &gt; 区域和语言，并添加一个应用程序支持的语言（如：简体中文）。然后把添加的语言移动到最上面（作为首选语言）。</value>
+    <value>点击下面的按钮来显示当前资源的内容（对应语言所显示的内容），然后进入电脑设置 &gt; 时间和语言 &gt; 区域和语言，并添加一个应用程序支持的语言（如：中文(中华人民共和国)）。然后把添加的语言移动到最上面（设置为默认语言）。</value>
     <comment>Click the button below to show resources for the current context. Next, change the language by going to PC Settings &amp;gt; Time &amp;amp; language &amp;gt; Region &amp;amp; language and add a language that is supported by the app (e.g., Japanese); then move the new language to the top of the list (Set as primary).</comment>
   </data>
   <data name="string1" xml:space="preserve">
