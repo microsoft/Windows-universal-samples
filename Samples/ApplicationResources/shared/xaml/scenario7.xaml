@@ -30,11 +30,11 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="InputTextBlock1" Grid.Row="0" Margin="0,0,0,10" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+            <TextBlock x:Name="InputTextBlock1" x:Uid="InputTextBlock1" Grid.Row="0" Margin="0,0,0,10" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
                 It is possible that, while an application is running, the language, scale, contrast or other settings may change. In 
                 order to handle these events, event listeners should be registered to listen for and react to the change.
-                </TextBlock>
-            <TextBlock x:Name="InputTextBlock2" Grid.Row="1" Margin="0,0,0,10" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+            </TextBlock>
+            <TextBlock x:Name="InputTextBlock2" x:Uid="InputTextBlock2" Grid.Row="1" Margin="0,0,0,10" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
                 Note: If an image with variants for different scales is used, as shown in the File Resources in XAML scenario,
                 it is not necessary to use an 
                 event listener to reload images when scale has changed. The XAML runtime will automatically reload images as needed. 
@@ -43,7 +43,7 @@
                 when running on a multi-monitor system configured with a low-DPI monitor and a high-DPI 
                 monitor by dragging the app from one monitor to the other.
             </TextBlock>
-            <TextBlock x:Name="InputTextBlock3" Grid.Row="2" Margin="0,0,0,10" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+            <TextBlock x:Name="InputTextBlock3" x:Uid="InputTextBlock3" Grid.Row="2" Margin="0,0,0,10" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
                 Note: the Application Languages scenario
                 demonstrates use of the PrimaryLanguageOverride property to override the language used for 
                 the app. If a specific language was set in that scenario, then changing the language in Settings will not 
@@ -51,7 +51,7 @@
                 "Use language preferences (recommended)" option is selected in
                 the Application Languages scenario.
             </TextBlock>
-            <TextBlock x:Name="InputTextBlock4" Grid.Row="3" Margin="0,0,0,10" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+            <TextBlock x:Name="InputTextBlock4" x:Uid="InputTextBlock4" Grid.Row="3" Margin="0,0,0,10" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
                 Click the button below to show resources for the current context. Next, change the language by going to PC Settings &gt;
                 Time &amp; language &gt; Region &amp; language and add a language that is supported by the app (e.g., Japanese); then 
                 move the new language to the top of the list (Set as primary).
