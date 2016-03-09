@@ -35,7 +35,7 @@ namespace BasicInput
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append("Mouse present = " + mouseCapabilities.MousePresent.ToString() + "\n");
             sb.Append("Number of buttons = " + mouseCapabilities.NumberOfButtons.ToString() + "\n");
-            sb.Append("Vertical wheel present present = " + mouseCapabilities.VerticalWheelPresent.ToString() + "\n");
+            sb.Append("Vertical wheel present = " + mouseCapabilities.VerticalWheelPresent.ToString() + "\n");
             sb.Append("Horizontal wheel present = " + mouseCapabilities.HorizontalWheelPresent.ToString() + "\n");
             sb.Append("Buttons swapped = " + mouseCapabilities.SwapButtons.ToString());
             mouseText.Text = sb.ToString();
