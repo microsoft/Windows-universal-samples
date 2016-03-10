@@ -157,12 +157,6 @@
     <ClInclude Include="Scenario1_GetDeviceInformation.xaml.h">
       <DependentUpon>Scenario1_GetDeviceInformation.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scenario2_CheckCompliance.xaml.h">
-      <DependentUpon>Scenario2_CheckCompliance.xaml</DependentUpon>
-    </ClInclude>
-    <ClInclude Include="Scenario3_ApplyEASPolicy.xaml.h">
-      <DependentUpon>Scenario3_ApplyEASPolicy.xaml</DependentUpon>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
@@ -172,8 +166,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Scenario1_GetDeviceInformation.xaml" />
-    <Page Include="Scenario2_CheckCompliance.xaml" />
-    <Page Include="Scenario3_ApplyEASPolicy.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -202,12 +194,6 @@
     <ClCompile Include="Scenario1_GetDeviceInformation.xaml.cpp">
       <DependentUpon>Scenario1_GetDeviceInformation.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario2_CheckCompliance.xaml.cpp">
-      <DependentUpon>Scenario2_CheckCompliance.xaml</DependentUpon>
-    </ClCompile>
-    <ClCompile Include="Scenario3_ApplyEASPolicy.xaml.cpp">
-      <DependentUpon>Scenario3_ApplyEASPolicy.xaml</DependentUpon>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
@@ -231,9 +217,6 @@
     <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <SDKReference Include="WindowsDesktop, Version=10.0.10240.0" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

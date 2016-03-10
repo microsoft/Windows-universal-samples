@@ -107,12 +107,6 @@
     <Compile Include="Scenario1_GetDeviceInformation.xaml.cs">
       <DependentUpon>Scenario1_GetDeviceInformation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario2_CheckCompliance.xaml.cs">
-      <DependentUpon>Scenario2_CheckCompliance.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Scenario3_ApplyEASPolicy.xaml.cs">
-      <DependentUpon>Scenario3_ApplyEASPolicy.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -131,14 +125,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Scenario1_GetDeviceInformation.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Scenario2_CheckCompliance.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Scenario3_ApplyEASPolicy.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -173,11 +159,6 @@
     <Content Include="..\..\..\SharedContent\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <SDKReference Include="WindowsDesktop, Version=10.0.10240.0">
-      <Name>Microsoft Desktop Extension SDK for Universal App Platform</Name>
-    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

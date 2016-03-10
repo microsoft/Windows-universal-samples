@@ -7,7 +7,7 @@
   IgnorableNamespaces="uap mp">
 
     <Identity
-      Name="Microsoft.SDKSamples.EAS.CS"
+      Name="Microsoft.SDKSamples.ClientDeviceInformation.CS"
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
@@ -15,7 +15,7 @@
     <mp:PhoneIdentity PhoneProductId="806cd623-e526-4b54-be9a-8eebc63b3e4b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>EAS Protocol C# Sample</DisplayName>
+        <DisplayName>Client Device Information C# Sample</DisplayName>
         <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
         <Logo>Assets\StoreLogo-sdk.png</Logo>
     </Properties>
@@ -31,12 +31,12 @@
     <Applications>
         <Application Id="App"
           Executable="$targetnametoken$.exe"
-          EntryPoint="EAS.App">
+          EntryPoint="ClientDeviceInformation.App">
             <uap:VisualElements
-              DisplayName="EAS Protocol C# Sample"
+              DisplayName="Client Device Information C# Sample"
               Square150x150Logo="Assets\squareTile-sdk.png"
               Square44x44Logo="Assets\SmallTile-sdk.png"
-              Description="EAS Protocol C# Sample"
+              Description="Client Device Information C# Sample"
               
               BackgroundColor="#00b2f0">
                 <uap:SplashScreen Image="Assets\Splash-sdk.png" />

@@ -12,7 +12,6 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using EAS;
 
 namespace SDKTemplate
 {
@@ -23,8 +22,6 @@ namespace SDKTemplate
         List<Scenario> scenarios = new List<Scenario>
         {
             new Scenario() { Title="Get Device Information", ClassType=typeof(Scenario1_GetDeviceInformation)},
-            new Scenario() { Title="Check Compliance", ClassType=typeof(Scenario2_CheckCompliance)},
-            new Scenario() { Title="Apply EAS Policy", ClassType=typeof(Scenario3_ApplyEASPolicy)}
         };
     }
 

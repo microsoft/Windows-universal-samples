@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22609.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasProtocol", "EasProtocol.csproj", "{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientDeviceInformation", "ClientDeviceInformation.csproj", "{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -6,14 +6,14 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="Microsoft.SDKSamples.EAS.JS"
+    Name="Microsoft.SDKSamples.ClientDeviceInformation.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 
   <mp:PhoneIdentity PhoneProductId="10fec429-fbc2-4e15-a042-da8debb674af" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>EAS Protocol JS Sample</DisplayName>
+    <DisplayName>Client Device Information JS Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>images\storelogo-sdk.png</Logo>
   </Properties>
@@ -33,8 +33,8 @@
       StartPage="default.html">
 
       <uap:VisualElements
-        DisplayName="EAS Protocol JS Sample"
-        Description="EAS Protocol JS Sample"
+        DisplayName="Client Device Information JS Sample"
+        Description="Client Device Information JS Sample"
         
         BackgroundColor="#00b2f0"
         Square150x150Logo="images\storelogo-sdk.png"

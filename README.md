@@ -388,22 +388,25 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/PasswordVault">Credential locker</a></td>
+  <td><a href="Samples/ClientDeviceInformation">Client Device Information</a></td>
   <td><a href="Samples/CredentialPicker">Credential picker</a></td>
-  <td><a href="Samples/DeviceLockdownAzureLogin">Device lockdown with Azure login</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/DeviceLockdownAzureLogin">Device lockdown with Azure login</a></td>
   <td><a href="Samples/DisablingScreenCapture">Disabling screen capture</a></td>
   <td><a href="Samples/EnterpriseDataProtection">Enterprise data protection</a></td>
-  <td><a href="Samples/KeyCredentialManager">KeyCredentialManager</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/KeyCredentialManager">KeyCredentialManager</a></td>
   <td><a href="Samples/Personalization">Lock screen personalization</a></td>
   <td><a href="Samples/SmartCard">Smart cards</a></td>
-  <td><a href="Samples/UserInfo">User information</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/UserInfo">User information</a></td>
   <td><a href="Samples/UserConsentVerifier">UserConsentVerifier</a></td>
   <td><a href="Samples/WebAccountManagement">Web account management</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/WebAuthenticationBroker">WebAuthenticationBroker</a></td>
  </tr>
 </table>
@@ -452,27 +455,26 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/DatagramSocket">DatagramSocket</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/EasProtocol">Exchange Active Sync (EAS)</a></td>
   <td><a href="Samples/HttpClient">HttpClient</a></td>
   <td><a href="Samples/Json">JSON</a></td>
+  <td><a href="Samples/MobileBroadband">Mobile broadband</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/MobileBroadband">Mobile broadband</a></td>
   <td><a href="Samples/RadioManager">Radios</a></td>
   <td><a href="Samples/FeedReader">RSS reader end-to-end (JavaScript)</a></td>
+  <td><a href="Samples/SocketActivityStreamSocket">Socket activity trigger stream socket</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/SocketActivityStreamSocket">Socket activity trigger stream socket</a></td>
   <td><a href="Samples/StreamSocket">StreamSocket</a></td>
   <td><a href="Samples/Syndication">Syndication</a></td>
+  <td><a href="Samples/UssdProtcol">USSD protocol</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/UssdProtcol">USSD protocol</a></td>
   <td><a href="Samples/WebSocket">WebSocket</a></td>
   <td><a href="Samples/WiFiDirect">Wi-Fi Direct</a></td>
+  <td><a href="Samples/WiFiDirectServices">Wi-Fi Direct services</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/WiFiDirectServices">Wi-Fi Direct services</a></td>
   <td><a href="Samples/WiFiScan">Wi-Fi scanning</a></td>
  </tr>
 </table>

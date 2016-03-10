@@ -9,13 +9,12 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using System;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace EAS
+namespace SDKTemplate
 {
     public sealed partial class Scenario1_GetDeviceInformation : Page
     {

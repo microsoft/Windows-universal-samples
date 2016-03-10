@@ -316,6 +316,11 @@ namespace AnimatedGif
                         disposeRectangle = previousFrameProperties.Rect;
                     }
                 }
+                else
+                {
+                    disposeRectangle = new Rect(0, 0, _imageProperties.PixelWidth, _imageProperties.PixelHeight);
+                }
+
 
                 // Compose and display the frame
                 try
@@ -428,7 +433,7 @@ namespace AnimatedGif
                     var imageRectangle = new Rect(new Point(), _canvasImageSource.Size);
                     updateRectangle.Intersect(imageRectangle);
 
-                    using (var drawingSession = _canvasImageSource.CreateDrawingSession(Colors.Transparent, updateRectangle))
+                    using (var drawingSession = _canvasImageSource.CreateDrawingSession(Colors.Transparent))
                     {
                         drawingSession.DrawImage(_accumulationRenderTarget); // Render target has the composed frame
                     }

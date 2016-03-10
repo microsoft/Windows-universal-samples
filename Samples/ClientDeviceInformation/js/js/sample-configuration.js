@@ -6,9 +6,7 @@
     var sampleTitle = "EAS protocol";
 
     var scenarios = [
-        { url: "/html/scenario1.html", title: "Get Device Information" },
-        { url: "/html/scenario2.html", title: "Check Compliance" },
-        { url: "/html/scenario3.html", title: "Apply EAS Policy" }
+        { url: "/html/scenario1.html", title: "Get Device Information" }
     ];
 
     WinJS.Namespace.define("SdkSample", {

@@ -1,30 +1,26 @@
-<!---
-  category: NetworkingAndWebServices 
+﻿<!---
+  category: IdentitySecurityAndEncryption
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620540
 --->
 
-# Exchange Active Sync (EAS) sample
+# Client Device Information sample
 
-This sample shows how mail clients can retrieve device information and work with supplied Exchange Active Sync (EAS) policies.
+This sample shows how apps can retrieve device information such as operating system and manufacturer.
 
-Windows Store apps can configure their mail clients to stay compliant with the given EAS policies. To bring the local computer compliant, you must request the user's consent before you proceed through the use of a consent UI. Then you can configure the exchange account.
-
-This sample requires some experience with WMI programming.
-
-**Note**  This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on both Windows 10 and Windows Phone 10.
-
-You can choose one of three scenarios: 
+This sample demonstrates the following:
 - Retrieving device information
-- Checking if device policies are compliant with supplied EAS policies
-- Applying supplied EAS policies.
 
 ## Related Topics
 
-[Windows.Security.ExchangeActiveSyncProvisioning](http://msdn.microsoft.com/library/windows/apps/hh701506)
+[EasClientDeviceInformation class](https://msdn.microsoft.com/library/windows/apps/windows.security.exchangeactivesyncprovisioning.easclientdeviceinformation)
 
 ## Operating system requirements
 
-Windows 10
+*Client*: Windows 10
+
+**Server:** Windows Server 2016 Technical Preview
+
+**Phone:** Windows 10
 
 ## Build the sample
 
