@@ -147,7 +147,7 @@ namespace AppUIBasics
         
         private async void ShowDisclaimer()
         {
-            ResourceLoader resourceLoader = new ResourceLoader();
+            ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView();
             var roamingSettings = ApplicationData.Current.RoamingSettings;
 
             // Show disclaimer regardless of how the app has been activated

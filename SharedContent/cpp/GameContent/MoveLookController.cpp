@@ -23,7 +23,6 @@ using namespace Windows::UI;
 using namespace Windows::Foundation;
 using namespace Windows::Devices::Input;
 using namespace Windows::Gaming::Input;
-using namespace Windows::Phone::UI::Input;
 using namespace Windows::System;
 
 // Analog control deadzone definitions. Tune these values to adjust the size of the deadzone.
@@ -92,12 +91,8 @@ void MoveLookController::InitWindow(_In_ CoreWindow^ window)
     MouseDevice::GetForCurrentView()->MouseMoved +=
         ref new TypedEventHandler<MouseDevice^, MouseEventArgs^>(this, &MoveLookController::OnMouseMoved);
 
-    // Hardware back button is only available on some device families such as Phone.
-    if (Windows::Foundation::Metadata::ApiInformation::IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-    {
-        HardwareButtons::BackPressed +=
-            ref new EventHandler<BackPressedEventArgs^>(this, &MoveLookController::OnHardwareBackButtonPressed);
-    }
+    SystemNavigationManager::GetForCurrentView()->BackRequested +=
+            ref new EventHandler<BackRequestedEventArgs^>(this, &MoveLookController::OnBackRequested);
 
     // Detect gamepad connection and disconnection events.
     Gamepad::GamepadAdded +=
@@ -1077,9 +1072,9 @@ void MoveLookController::Update()
 
 //----------------------------------------------------------------------
 
-void MoveLookController::OnHardwareBackButtonPressed(
+void MoveLookController::OnBackRequested(
     _In_ Platform::Object^ sender,
-    _In_ BackPressedEventArgs^ args
+    _In_ BackRequestedEventArgs^ args
     )
 {
     if (m_state == MoveLookControllerState::Active)
