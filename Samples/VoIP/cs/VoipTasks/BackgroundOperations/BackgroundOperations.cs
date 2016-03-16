@@ -41,20 +41,11 @@ namespace VoipTasks.BackgroundOperations
 
     public static class BackgroundOperation
     {
-        public static String AppServiceName
-        {
-            get { return _appServiceName; }
-        }
+        public static String AppServiceName => _appServiceName;
 
-        public static String NewBackgroundRequest
-        {
-            get { return _newBackgroundRequest; }
-        }
+        public static String NewBackgroundRequest => _newBackgroundRequest;
 
-        public static String Result
-        {
-            get { return _result; }
-        }
+        public static String Result => return _result;
 
         const String _appServiceName = "VoipTasks.AppService";
         const String _newBackgroundRequest = "NewBackgroundRequest";
