@@ -28,11 +28,7 @@ namespace VoipTasks
 
         private void TaskInstance_Canceled(IBackgroundTaskInstance sender, BackgroundTaskCancellationReason reason)
         {
-            if (_deferral != null)
-            {
-                _deferral.Complete();
-            }
-
+            _deferral?.Complete();
             Current.RTCTaskDeferral = null;
         }
     }
