@@ -19,7 +19,7 @@ namespace RandomNumberService
             taskInstance.Canceled += OnTaskCanceled;
 
             //Initialize the random number generator
-            randomNumberGenerator = new Random((int)DateTime.Now.Ticks);
+            randomNumberGenerator = new Random();
 
             var details = taskInstance.TriggerDetails as AppServiceTriggerDetails;
             connection = details.AppServiceConnection;
@@ -30,12 +30,8 @@ namespace RandomNumberService
 
         private void OnTaskCanceled(IBackgroundTaskInstance sender, BackgroundTaskCancellationReason reason)
         {
-            if (serviceDeferral != null)
-            {
-                //Complete the service deferral
-                serviceDeferral.Complete();
-                serviceDeferral = null;
-            }
+            serviceDeferral?.Complete();
+            serviceDeferral = null;
         }
 
         async void OnRequestReceived(AppServiceConnection sender, AppServiceRequestReceivedEventArgs args)
