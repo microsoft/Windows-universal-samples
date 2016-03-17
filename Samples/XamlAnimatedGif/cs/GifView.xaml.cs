@@ -64,6 +64,14 @@ namespace AnimatedGif
             CompositionTarget.SurfaceContentsLost += CompositionTarget_SurfaceContentsLost;
         }
 
+        public void RestartAnimation()
+        {
+            if (_isLoaded)
+            {
+                _gifPresenter.StartAnimation();
+            }
+        }
+
         private async static void OnSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var that = d as GifView;
