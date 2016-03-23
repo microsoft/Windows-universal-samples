@@ -2,6 +2,8 @@
 using System.Collections;
 using System;
 using System.IO;
+using System.Threading;
+using System.ComponentModel;
 #if UNITY_WSA && !UNITY_EDITOR
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +24,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 #endif
 
-public class Print : MonoBehaviour
+public class Print3D : MonoBehaviour
 {
     private static string Step1 = "Get mesh/texture from Game Object";
     private static string Step2 = "Store into Printing3d API";
@@ -39,84 +41,156 @@ public class Print : MonoBehaviour
     private static double[] uvPrint;
 
     private static byte[] pngBytes;
+    private static byte a, r, g, b;
 
     private static uint indicesCount;
     private static uint verticesCount;
     private static uint verticesMaterialCount;
 
+
+    public GameObject ObjectToPrint;
+
     // Use this for adding GUI
     void OnGUI()
     {
-        GUI.Label(new UnityEngine.Rect(20, 60, 300, 40), labelText);
-        if (GUI.Button(new UnityEngine.Rect(20, 20, 70, 25), "3D Print"))
+        GUI.Label(new UnityEngine.Rect(20, 100, 400, 60), labelText, new GUIStyle { fontSize = 36 });
+
+        if (GUI.Button(new UnityEngine.Rect(20, 20, 80, 80), "3D Print"))
         {
-            // ignore button click until launch print dialog
-            if (enableButton)
+            StartPrinting();
+        }
+    }
+    
+    private void StartPrinting()
+    {
+        // ignore button click until launch print dialog
+        if (enableButton)
+        {
+            enableButton = false;
+        }
+        else
+        {
+            return;
+        }
+
+        labelText = Step1;
+
+        Mesh mesh = null;
+
+        // assign one obj to ObjectToPrint or 
+        // put this Print3D.cs under model
+        if (ObjectToPrint != null)
+        {
+            var meshFilter = ObjectToPrint.GetComponentInChildren<MeshFilter>();
+
+            var meshRenderer = ObjectToPrint.GetComponentInChildren<MeshRenderer>();
+
+            if (meshRenderer.sharedMaterial.GetTexture("_MainTex") != null)
             {
-                enableButton = false;
+                // get texture bytes from Unity
+                var texture = meshRenderer.sharedMaterial.GetTexture("_MainTex") as Texture2D;
+                pngBytes = texture.EncodeToPNG();
             }
             else
             {
-                return;
+                // get color from Unity, convert to byte
+                Color color = meshRenderer.sharedMaterial.color;
+                a = (byte)(color.a * 255);
+                r = (byte)(color.r * 255);
+                g = (byte)(color.g * 255);
+                b = (byte)(color.b * 255);
             }
-
-            labelText = Step1;
+            // get mesh information from Unity
+            mesh = meshFilter.sharedMesh;
+        }
+        else
+        {
             // get texture bytes from Unity
             var texture = transform.GetComponent<SkinnedMeshRenderer>().material.GetTexture("_MainTex") as Texture2D;
             pngBytes = texture.EncodeToPNG();
-
             // get mesh information from Unity
-            var mesh = transform.GetComponent<SkinnedMeshRenderer>().sharedMesh;
-            indicesCount = (uint)mesh.triangles.Length / 3;
-            verticesCount = (uint)mesh.vertices.Length;
-            verticesMaterialCount = (uint)mesh.triangles.Length / 3;
+            mesh = transform.GetComponent<SkinnedMeshRenderer>().sharedMesh;
+        }
 
-            indicesPrint = new UInt32[mesh.triangles.Length];
-            verticesPrint = new double[mesh.vertices.Length * 3];
-            indicesMaterialPrint = new UInt32[mesh.triangles.Length / 3 * 4];
+        indicesCount = (uint)mesh.triangles.Length / 3;
+        verticesCount = (uint)mesh.vertices.Length;
+        verticesMaterialCount = (uint)mesh.triangles.Length / 3;
+
+        indicesPrint = new UInt32[mesh.triangles.Length];
+        verticesPrint = new double[mesh.vertices.Length * 3];
+        indicesMaterialPrint = new UInt32[mesh.triangles.Length / 3 * 4];
+
+        if (pngBytes != null)
+        {
+			// need UV mapping
             uvPrint = new double[mesh.uv.Length * 2];
+        }
 
-            groupId = 1;
+        groupId = 1;
 
-            int j = 0;
+        int j = 0;
 
-            // get indices and indices for material
-            for (int i = 0; i < mesh.triangles.Length; i++)
+        labelText = "Getting indices";
+        System.Diagnostics.Debug.WriteLine("Getting indices");
+        // get indices and indices for material
+        for (int i = 0; i < mesh.triangles.Length; i++)
+        {
+            indicesPrint[i] = (UInt32)mesh.triangles[i];
+
+            // vertex corresponding to uv
+            if (i % 3 == 0)
             {
-                indicesPrint[i] = (UInt32)mesh.triangles[i];
-
-                // vertex corresponding to uv
-                if (i % 3 == 0)
-                {
-                    indicesMaterialPrint[j] = groupId;
-                    j++;
-                }
-
-                indicesMaterialPrint[j] = (UInt32)mesh.triangles[i];
+                indicesMaterialPrint[j] = groupId;
                 j++;
             }
 
-            // get vertices
-            for (int i = 0; i < mesh.vertices.Length; i++)
+            if (pngBytes != null)
             {
-                verticesPrint[i * 3] = (double)mesh.vertices[i].x;
-                verticesPrint[i * 3 + 1] = (double)mesh.vertices[i].y;
-                verticesPrint[i * 3 + 2] = (double)mesh.vertices[i].z;
+				// UV mapping indices
+                indicesMaterialPrint[j] = (UInt32)mesh.triangles[i];
             }
+            else
+            {
+				// only color color material, index is 0
+                indicesMaterialPrint[j] = 0;
+            }
+            j++;
+        }
 
+        labelText = "Getting vertices";
+        System.Diagnostics.Debug.WriteLine("Getting vertices");
+
+        // get vertices
+        for (int i = 0; i < mesh.vertices.Length; i++)
+        {
+            verticesPrint[i * 3] = (double)mesh.vertices[i].x;
+            verticesPrint[i * 3 + 1] = (double)mesh.vertices[i].y;
+            verticesPrint[i * 3 + 2] = (double)mesh.vertices[i].z;
+        }
+
+        if (pngBytes != null)
+        {
+            labelText = "Getting texture coordinates";
+            System.Diagnostics.Debug.WriteLine("Getting texture coordinates");
             // get UVs
             for (int i = 0; i < mesh.uv.Length; i++)
             {
                 uvPrint[i * 2] = (double)mesh.uv[i].x;
                 uvPrint[i * 2 + 1] = (double)mesh.uv[i].y;
             }
+        }
+
+        labelText = "Launching 3D Print UI";
+
+        System.Diagnostics.Debug.WriteLine("Launching 3D Print UI.");
 
 #if UNITY_WSA && !UNITY_EDITOR
-            // start to pass the mesh/texture into Printing3D API
-            // launch the print dialog
-            UIThread();
+        // start to pass the mesh/texture into Printing3D API
+        // launch the print dialog
+        UIThread();
+#else
+        enableButton = true;
 #endif
-        }
     }
 
     // Use this for initialization
@@ -137,7 +211,7 @@ public class Print : MonoBehaviour
         // convert to UI thread and then launch the printing dialog
         // print dialog only works in UI thread
         await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => {
-            var print = new Print();
+            var print = new Print3D();
             print.LaunchPrintDialog();
         });
     }
@@ -199,36 +273,50 @@ public class Print : MonoBehaviour
             
         // save material indices
         await GetMaterialIndicesAsync(mesh);
-
-        // texture2Coord Group
-        var tex2CoordGroup = new Printing3DTexture2CoordMaterialGroup(groupId);
-            
-        // save texture coords
-        for (int i = 0; i < uvPrint.Length / 2; i++)
-        {
-            var tex2CoordMaterial = new Printing3DTexture2CoordMaterial();
-            tex2CoordMaterial.U = uvPrint[i * 2];
-            tex2CoordMaterial.V = uvPrint[i * 2 + 1];
-            tex2CoordGroup.Texture2Coords.Add(tex2CoordMaterial);
-        }
     
         // to make sure we don't use the same byte array from Unity
-        var copyPngBytes = new byte[pngBytes.Length];
-        pngBytes.CopyTo(copyPngBytes, 0);
+        if (pngBytes != null)
+        {
+            // texture2Coord Group
+            var tex2CoordGroup = new Printing3DTexture2CoordMaterialGroup(groupId);
+            
+            // save texture coords
+            for (int i = 0; i < uvPrint.Length / 2; i++)
+            {
+                var tex2CoordMaterial = new Printing3DTexture2CoordMaterial();
+                tex2CoordMaterial.U = uvPrint[i * 2];
+                tex2CoordMaterial.V = uvPrint[i * 2 + 1];
+                tex2CoordGroup.Texture2Coords.Add(tex2CoordMaterial);
+            }
+
+            var copyPngBytes = new byte[pngBytes.Length];
+            pngBytes.CopyTo(copyPngBytes, 0);
  
-        var randomAccessStream = new InMemoryRandomAccessStream();
-        await randomAccessStream.WriteAsync(copyPngBytes.AsBuffer());
-        randomAccessStream.Seek(0); 
+            var randomAccessStream = new InMemoryRandomAccessStream();
+            await randomAccessStream.WriteAsync(copyPngBytes.AsBuffer());
+            randomAccessStream.Seek(0); 
 
-        var texture = new Printing3DModelTexture();
-        Printing3DTextureResource texResource = new Printing3DTextureResource();
-        texResource.Name = "/3D/Texture/skeleton.png";
-        texResource.TextureData = new MyRandomAccessStream(randomAccessStream);
-        package.Textures.Add(texResource);
+            var texture = new Printing3DModelTexture();
+            Printing3DTextureResource texResource = new Printing3DTextureResource();
+            texResource.Name = "/3D/Texture/skeleton.png";
+            texResource.TextureData = new MyRandomAccessStream(randomAccessStream);
+            package.Textures.Add(texResource);
 
-        // add metadata about the texture
-        model.Metadata.Add("tex" + groupId, "/3D/Texture/skeleton.png");
-        model.Material.Texture2CoordGroups.Add(tex2CoordGroup);
+            // add metadata about the texture
+            model.Metadata.Add("tex" + groupId, "/3D/Texture/skeleton.png");
+            model.Material.Texture2CoordGroups.Add(tex2CoordGroup);
+        }
+        else
+        {
+			// put color material into material group
+            var newColor = Windows.UI.Color.FromArgb(a, r, g, b);
+            var colrMat = new Printing3DColorMaterial();
+            colrMat.Color = newColor;
+
+            var colorGroup = new Printing3DColorMaterialGroup(groupId);
+            colorGroup.Colors.Add(colrMat);
+            model.Material.ColorGroups.Add(colorGroup);
+        }
 
         model.Meshes.Add(mesh);
 
@@ -463,3 +551,5 @@ public class Print : MonoBehaviour
     }
 #endif
 }
+
+

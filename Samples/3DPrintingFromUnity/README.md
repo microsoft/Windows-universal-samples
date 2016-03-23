@@ -41,7 +41,7 @@ Learn how to get started with Unity
 
 # Create the sample
 
-We provide only the scripts `Print.cs` and `Turn.cs`.
+We provide only the scripts `Print3D.cs` and `Turn.cs`.
 You will create the scene and the model (fbx model, material, and texture)
 yourself.
 
@@ -66,8 +66,8 @@ yourself.
 
 7. Go to the All Scripts folder, right-click an empty space,
    and select **Import New Asset**.
-   Select the `Print.js` and (optionally) `Turn.js` files from this sample.
-   The `Turn.js` script lets the user rotate the object and inspect
+   Select the `Print3D.cs` and (optionally) `Turn.cs` files from this sample.
+   The `Turn.cs` script lets the user rotate the object and inspect
    it within the Unity editor.
 
 8. Expand the GameObject you created in step 3
@@ -75,7 +75,7 @@ yourself.
    Expand the **cruscarp** node to reveal a second
    **cruscarp** node. This is the rendering mesh.
 
-9. Drag the `Print.js` file (and optionally `Turn.js` file)
+9. Drag the `Print3D.cs` file (and optionally `Turn.cs` file)
    from the All Scripts folder onto the rendering mesh node
    you revealed in step 8.
 
@@ -120,7 +120,7 @@ Find the symbol from your solution folder and load it.
 Within your script, set your breakpoints. 
 
 Additionally, you can inspect the [3MF file](http://3mf.io/ "3MF")
-that has been generated using the commented function in Print.cs.
+that has been generated using the commented function in Print3D.cs.
 
 
 ## Related topics

@@ -409,14 +409,14 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/KeyCredentialManager">KeyCredentialManager</a></td>
   <td><a href="Samples/Personalization">Lock screen personalization</a></td>
   <td><a href="Samples/MicrosoftPassport">Microsoft Passport and Windows Hello</a></td>
-  <td><a href="Samples/SmartCard">Smart cards</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/SmartCard">Smart cards</a></td>
   <td><a href="Samples/UserInfo">User information</a></td>
   <td><a href="Samples/UserConsentVerifier">UserConsentVerifier</a></td>
-  <td><a href="Samples/WebAccountManagement">Web account management</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/WebAccountManagement">Web account management</a></td>
   <td><a href="Samples/WebAuthenticationBroker">WebAuthenticationBroker</a></td>
  </tr>
 </table>
@@ -428,6 +428,9 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/AssociationLaunching">Association launching</a></td>
   <td><a href="Samples/BackgroundTask">Background task</a></td>
   <td><a href="Samples/ExtendedExecution">Extended execution</a></td>
+ </tr>
+ <tr>
+  <td><a href="Samples/BasicSuspension">Suspend and resume</a></td>
  </tr>
 </table>
 
