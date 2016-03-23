@@ -54,7 +54,7 @@
                         <TextBox x:Name="MinValue" Text="0" VerticalAlignment="Center" Margin="5,0,0,0" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Minimum Value:" VerticalAlignment="Center"/>
+                        <TextBlock Text="Maximum Value:" VerticalAlignment="Center"/>
                         <TextBox x:Name="MaxValue" Text="10" VerticalAlignment="Center" Margin="5,0,0,0" />
                     </StackPanel>
                     <Button x:Name="GenerateRandomNumber" Content="Generate Random Number" Margin="0, 10, 0, 0" Click="GenerateRandomNumber_Click" />

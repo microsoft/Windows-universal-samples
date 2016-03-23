@@ -419,6 +419,9 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/BackgroundTask">Background task</a></td>
   <td><a href="Samples/ExtendedExecution">Extended execution</a></td>
  </tr>
+ <tr>
+  <td><a href="Samples/BasicSuspension">Suspend and resume</a></td>
+ </tr>
 </table>
 <table>
  <tr>
