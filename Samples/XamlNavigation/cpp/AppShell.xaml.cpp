@@ -191,7 +191,7 @@ namespace NavigationMenuSample
             auto container = (ListViewItem^)NavMenuList->ContainerFromItem(item);
 
             // While updating the selection state of the item prevent it from taking keyboard focus.  If a
-            // user is invoking the back button via the keyboard causing the selected nav menu item to change 
+            // user is invoking the back button via the keyboard causing the selected nav menu item to change
             // then focus will remain on the back button.
             if (container != nullptr) container->IsTabStop = false;
             NavMenuList->SetSelectedItem(container);
@@ -209,11 +209,9 @@ namespace NavigationMenuSample
             control->Loaded += ref new RoutedEventHandler(this, &AppShell::Page_Loaded);
         }
 
-        // Update the Back button depending on whether we can go Back.
+        // Show the Back button
         SystemNavigationManager::GetForCurrentView()->AppViewBackButtonVisibility =
-            AppFrame->CanGoBack ?
-            Windows::UI::Core::AppViewBackButtonVisibility::Visible :
-            Windows::UI::Core::AppViewBackButtonVisibility::Collapsed;
+            Windows::UI::Core::AppViewBackButtonVisibility::Visible;
     }
 
     void AppShell::Page_Loaded(Object^ sender, RoutedEventArgs^ e)
@@ -223,24 +221,56 @@ namespace NavigationMenuSample
     }
 
     /// <summary>
-    /// Callback when the SplitView's Pane is toggled open or close.  When the Pane is not visible
-    /// then the floating hamburger may be occluding other content in the app unless it is aware.
+    /// Public method to allow pages to open SplitView's pane.
+    /// Used for custom app shortcuts like navigating left from page's left-most item
+    /// </summary>
+    void AppShell::OpenNavePane()
+    {
+        TogglePaneButton->IsChecked = true;
+        NavPaneDivider->Visibility = Windows::UI::Xaml::Visibility::Visible;
+    }
+
+    // <summary>
+    /// Hide divider when nav pane is closed.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    void AppShell::RootSplitView_PaneClosed(SplitView^ sender, Object^ args)
+    {
+        NavPaneDivider->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+    }
+
+    /// <summary>
+    /// Callback when the SplitView's Pane is toggled opened.
+    /// Restores divider's visibility and ensures that margins around the floating hamburger are correctly set.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     void AppShell::TogglePaneButton_Checked(Object^ sender, RoutedEventArgs^ e)
     {
+        NavPaneDivider->Visibility = Windows::UI::Xaml::Visibility::Visible;
         CheckTogglePaneButtonSizeChanged();
     }
 
-	/// <summary>
-	/// Ensure that we update the reported size of the TogglePaneButton when the SplitView's 
-	/// DisplayMode changes.
-	/// </summary>
-	void AppShell::RootSplitViewDisplayModeChangedCallback(DependencyObject^ sender, DependencyProperty^ dp)
-	{
-		CheckTogglePaneButtonSizeChanged();
-	}
+    /// <summary>
+    /// Callback when the SplitView's Pane is toggled closed.  When the Pane is not visible
+    /// then the floating hamburger may be occluding other content in the app unless it is aware.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    void AppShell::TogglePaneButton_Unchecked(Object^ sender, RoutedEventArgs^ e)
+    {
+        CheckTogglePaneButtonSizeChanged();
+    }
+
+    /// <summary>
+    /// Ensure that we update the reported size of the TogglePaneButton when the SplitView's
+    /// DisplayMode changes.
+    /// </summary>
+    void AppShell::RootSplitViewDisplayModeChangedCallback(DependencyObject^ sender, DependencyProperty^ dp)
+    {
+        CheckTogglePaneButtonSizeChanged();
+    }
 
     /// <summary>
     /// Check for the conditions where the navigation pane does not occupy the space under the floating

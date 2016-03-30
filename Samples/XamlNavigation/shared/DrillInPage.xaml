@@ -2,13 +2,35 @@
     x:Class="NavigationMenuSample.Views.DrillInPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:NavigationMenuSample"
     xmlns:ctl="using:NavigationMenuSample.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MediumWindowSnapPoint}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ContentList.Margin" Value="12,0,0,0"/>
+                        <Setter Target="title.Style" Value="{StaticResource PageTitleTextBlockStyle}"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MinWindowSnapPoint}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ContentList.Margin" Value="0"/>
+                        <Setter Target="title.Style" Value="{StaticResource NarrowPageTitleTextBlockStyle}"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -16,17 +38,20 @@
 
         <ctl:PageHeader>
             <ctl:PageHeader.HeaderContent>
-                <TextBlock x:Name="title" Style="{ThemeResource PageTitleTextBlockStyle}" Text="DRILL-IN PAGE"/>
+                <TextBlock x:Name="title" Style="{StaticResource PageTitleTextBlockStyle}" Text="Drill-in Page"/>
             </ctl:PageHeader.HeaderContent>
         </ctl:PageHeader>
 
-        <ListView Grid.Row="1" Header="Click An Item To Drill In"
+        <ListView x:Name="ContentList"
+                  Grid.Row="1"
+                  Header="Click An Item To Drill In"
                   EntranceNavigationTransitionInfo.IsTargetElement="True"
                   IsItemClickEnabled="True"
-                  ItemClick="ListView_ItemClick">
+                  ItemClick="ListView_ItemClick"
+                  Margin="24,0,0,0">
             <ListView.HeaderTemplate>
                 <DataTemplate>
-                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,4" Text="{Binding}"/>
+                    <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="12,4" Text="{Binding}"/>
                 </DataTemplate>
             </ListView.HeaderTemplate>
             <ListViewItem>Item 1</ListViewItem>
@@ -57,5 +82,4 @@
         </ListView>
 
     </Grid>
-
 </Page>
