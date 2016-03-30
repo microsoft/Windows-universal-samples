@@ -46,11 +46,7 @@ namespace SDKTemplate
         /// </summary>
         internal async void ValidateFile()
         {
-            try
-            {
-                sampleFile = await KnownFolders.PicturesLibrary.GetFileAsync(filename);
-            }
-            catch (FileNotFoundException)
+            if (await KnownFolders.PicturesLibrary.TryGetItemAsync(filename) == null)
             {
                 // If file doesn't exist, indicate users to use scenario 1
                 NotifyUserFileNotExist();
