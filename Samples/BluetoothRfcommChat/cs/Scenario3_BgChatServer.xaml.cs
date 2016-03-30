@@ -70,9 +70,11 @@ namespace SDKTemplate
         {
             this.InitializeComponent();
             trigger = new RfcommConnectionTrigger();
+
+            // Local service Id is the only mandatory field that should be used to filter a known service UUID.  
             trigger.InboundConnection.LocalServiceId = RfcommServiceId.FromUuid(Constants.RfcommChatServiceUuid);
 
-            // TODO:  helper function to create sdpRecordBlob
+            // The SDP record is nice in order to populate optional name and description fields
             trigger.InboundConnection.SdpRecord = sdpRecordBlob.AsBuffer();
         }
 
@@ -255,15 +257,17 @@ namespace SDKTemplate
         /// <param name="args"></param>
         private async void OnProgress(IBackgroundTaskRegistration task, BackgroundTaskProgressEventArgs args)
         {
+
             if (ApplicationData.Current.LocalSettings.Values.Keys.Contains("ReceivedMessage"))
             {
                 string backgroundMessage = (string)ApplicationData.Current.LocalSettings.Values["ReceivedMessage"];
+                string remoteDeviceName = (string)ApplicationData.Current.LocalSettings.Values["RemoteDeviceName"];
                 await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                 {
-                    rootPage.NotifyUser("Client Connected", NotifyType.StatusMessage);
+                    rootPage.NotifyUser("Client Connected: " + remoteDeviceName, NotifyType.StatusMessage);
                     ConversationListBox.Items.Add("Received: " + backgroundMessage);
                 });
-            }        
+            }
         }
 
         private void AttachProgressAndCompletedHandlers(IBackgroundTaskRegistration task)

@@ -79,6 +79,9 @@
           <RadioButton GroupName="ReadGroup" x:Name="ReadOnlyFromCacheRadio">
             <TextBlock Style="{StaticResource RadioFriendly}"> Only From Cache (never hits the network) </TextBlock>
           </RadioButton>
+          <RadioButton GroupName="ReadGroup" x:Name="ReadNoCacheRadio">
+            <TextBlock x:Name="ReadNoCacheText" Style="{StaticResource RadioFriendly}"> No Cache (always hits the network)</TextBlock>
+          </RadioButton>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
           <RadioButton GroupName="WriteGroup" x:Name="WriteDefaultRadio" IsChecked="True">

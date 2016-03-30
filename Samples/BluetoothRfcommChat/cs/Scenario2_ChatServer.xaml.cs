@@ -10,12 +10,14 @@
 //*********************************************************
 
 using System;
+using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.Rfcomm;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Navigation;
 
 namespace SDKTemplate
 {
@@ -27,11 +29,21 @@ namespace SDKTemplate
         private StreamSocketListener socketListener;
 
         // A pointer back to the main page is required to display status messages.
-        MainPage rootPage = MainPage.Current;
+        MainPage rootPage;
 
         public Scenario2_ChatServer()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            rootPage = MainPage.Current;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            Disconnect();
         }
 
         private void ListenButton_Click(object sender, RoutedEventArgs e)
@@ -48,20 +60,45 @@ namespace SDKTemplate
             ListenButton.IsEnabled = false;
             DisconnectButton.IsEnabled = true;
 
-            rfcommProvider = await RfcommServiceProvider.CreateAsync(
-                RfcommServiceId.FromUuid(Constants.RfcommChatServiceUuid));
+            try
+            {
+                rfcommProvider = await RfcommServiceProvider.CreateAsync(RfcommServiceId.FromUuid(Constants.RfcommChatServiceUuid));
+            }
+            // Catch exception HRESULT_FROM_WIN32(ERROR_DEVICE_NOT_AVAILABLE).
+            catch (Exception ex) when ((uint)ex.HResult == 0x800710DF)
+            {
+                // The Bluetooth radio may be off.
+                rootPage.NotifyUser("Make sure your Bluetooth Radio is on: " + ex.Message, NotifyType.ErrorMessage);
+                ListenButton.IsEnabled = true;
+                DisconnectButton.IsEnabled = false;
+                return;
+            }
+            
 
             // Create a listener for this service and start listening
             socketListener = new StreamSocketListener();
             socketListener.ConnectionReceived += OnConnectionReceived;
+            var rfcomm = rfcommProvider.ServiceId.AsString(); 
 
             await socketListener.BindServiceNameAsync(rfcommProvider.ServiceId.AsString(),
                 SocketProtectionLevel.BluetoothEncryptionAllowNullAuthentication);
 
             // Set the SDP attributes and start Bluetooth advertising
             InitializeServiceSdpAttributes(rfcommProvider);
-            rfcommProvider.StartAdvertising(socketListener);
 
+            try
+            {
+                rfcommProvider.StartAdvertising(socketListener, true);
+            }
+            catch (Exception e)
+            {
+                // If you aren't able to get a reference to an RfcommServiceProvider, tell the user why.  Usually throws an exception if user changed their privacy settings to prevent Sync w/ Devices.  
+                rootPage.NotifyUser(e.Message, NotifyType.ErrorMessage);
+                ListenButton.IsEnabled = true;
+                DisconnectButton.IsEnabled = false;
+                return;
+            }
+            
             rootPage.NotifyUser("Listening for incoming connections", NotifyType.StatusMessage);
         }
 
@@ -178,16 +215,30 @@ namespace SDKTemplate
             socketListener.Dispose();
             socketListener = null;
 
-            socket = args.Socket;
+            try
+            {
+                socket = args.Socket;
+            }
+            catch (Exception e)
+            {
+                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                {
+                    rootPage.NotifyUser(e.Message, NotifyType.ErrorMessage);
+                });
+                Disconnect();
+                return;
+            }
+
+            // Note - this is the supported way to get a Bluetooth device from a given socket
+            var remoteDevice = await BluetoothDevice.FromHostNameAsync(socket.Information.RemoteHostName);
 
             writer = new DataWriter(socket.OutputStream);
-
             var reader = new DataReader(socket.InputStream);
             bool remoteDisconnection = false;
 
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
-                rootPage.NotifyUser("Client Connected", NotifyType.StatusMessage);
+                rootPage.NotifyUser("Connected to Client: " + remoteDevice.Name, NotifyType.StatusMessage);
             });            
 
             // Infinite read buffer loop
@@ -222,21 +273,14 @@ namespace SDKTemplate
                         ConversationListBox.Items.Add("Received: " + message);
                     });
                 }
-                catch(Exception ex)
+                // Catch exception HRESULT_FROM_WIN32(ERROR_OPERATION_ABORTED).
+                catch (Exception ex) when ((uint)ex.HResult == 0x800703E3)
                 {
-                    switch ((uint)ex.HResult)
+                    await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                     {
-                        case (0x800703E3):
-                            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-                            {
-                                rootPage.NotifyUser("Client Disconnected Successfully", NotifyType.StatusMessage);
-                            });
-                            break;
-                        default:
-                            throw;
-                    }
+                        rootPage.NotifyUser("Client Disconnected Successfully", NotifyType.StatusMessage);
+                    });
                     break;
-
                 }
             }
 
@@ -246,7 +290,7 @@ namespace SDKTemplate
                 Disconnect();
                 await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                 {
-                    rootPage.NotifyUser("Client disconnected.",NotifyType.StatusMessage);
+                    rootPage.NotifyUser("Client disconnected",NotifyType.StatusMessage);
                 });
             }
         }
