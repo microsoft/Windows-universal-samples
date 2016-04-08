@@ -112,6 +112,7 @@ namespace SDKTemplate
                     if (SpinnerStoryboard.GetCurrentState() == Windows.UI.Xaml.Media.Animation.ClockState.Stopped)
                     {
                         SpinnerStoryboard.Begin();
+                         Text260Result.Text = "release to reflesh";
                     }
                 }
                 else if (SpinnerStoryboard.GetCurrentState() != Windows.UI.Xaml.Media.Animation.ClockState.Stopped)
@@ -122,6 +123,7 @@ namespace SDKTemplate
                 {
                     // Turn the indicator by an amount proportional to the pull progress.
                     SpinnerTransform.Angle = e.PullProgress * 360;
+                    Text260Result.Text = "pull down to refresh..";
                 }
             }
         }
