@@ -86,7 +86,14 @@ namespace MasterDetailApp
         {
             // Page above us will be our master view.
             // Make sure we are using the "drill out" animation in this transition.
-            
+            var back = Frame.BackStack;
+            if (back.Count > 0)
+            {
+                var entry = back[back.Count - 1];
+                back.RemoveAt(back.Count - 1);
+                var newentry = new PageStackEntry(entry.SourcePageType, null, entry.NavigationTransitionInfo);
+                back.Add(newentry);
+            }
             Frame.GoBack(new DrillInNavigationTransitionInfo());
         }
 
