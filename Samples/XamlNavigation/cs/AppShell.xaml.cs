@@ -105,8 +105,8 @@ namespace NavigationMenuSample
 
                 Thickness margin = NavMenuList.Margin;
                 NavMenuList.Margin = new Thickness(margin.Left, margin.Top + extraPadding, margin.Right, margin.Bottom);
-                margin = frame.Margin;
-                frame.Margin = new Thickness(margin.Left, margin.Top + extraPadding, margin.Right, margin.Bottom);
+                margin = AppFrame.Margin;
+                AppFrame.Margin = new Thickness(margin.Left, margin.Top + extraPadding, margin.Right, margin.Bottom);
                 margin = TogglePaneButton.Margin;
                 TogglePaneButton.Margin = new Thickness(margin.Left, margin.Top + extraPadding, margin.Right, margin.Bottom);
             }
