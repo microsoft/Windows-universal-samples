@@ -12,11 +12,6 @@ Copyright (c) Microsoft Corporation. All rights reserved
     font-weight: 600;
 }
 
-#output {
-    white-space: pre;
-    word-wrap: break-word;
-}
-
 #footer {
     padding: 25px 10px;
 }

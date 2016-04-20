@@ -18,7 +18,6 @@ using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.System.Threading;
 using Windows.Networking.Sockets;
-using Windows.Devices.Bluetooth;
 
 namespace BackgroundTasks
 {
@@ -29,7 +28,6 @@ namespace BackgroundTasks
         private StreamSocket socket = null;
         private DataReader reader = null;
         private DataWriter writer = null;
-        private BluetoothDevice remoteDevice = null;
 
         private BackgroundTaskDeferral deferral = null;
         private IBackgroundTaskInstance taskInstance = null;
@@ -62,9 +60,6 @@ namespace BackgroundTasks
                 if (details != null)
                 {
                     socket = details.Socket;
-                    remoteDevice = details.RemoteDevice;
-                    ApplicationData.Current.LocalSettings.Values["RemoteDeviceName"] = remoteDevice.Name;
-
                     writer = new DataWriter(socket.OutputStream);
                     reader = new DataReader(socket.InputStream);
                 }
@@ -94,7 +89,7 @@ namespace BackgroundTasks
 
             ApplicationData.Current.LocalSettings.Values["TaskCancelationReason"] = cancelReason.ToString();
             ApplicationData.Current.LocalSettings.Values["IsBackgroundTaskActive"] = false;
-            ApplicationData.Current.LocalSettings.Values["ReceivedMessage"] = "";
+            
             // Complete the background task (this raises the OnCompleted event on the corresponding BackgroundTaskRegistration). 
             deferral.Complete();
         }
@@ -136,7 +131,7 @@ namespace BackgroundTasks
             if (!cancelRequested)
             {
                 string message = (string)ApplicationData.Current.LocalSettings.Values["SendMessage"];
-                if (!string.IsNullOrEmpty(message))
+                if (string.IsNullOrEmpty(message))
                 {
                     try
                     {
@@ -158,7 +153,6 @@ namespace BackgroundTasks
                     catch (Exception ex)
                     {
                         ApplicationData.Current.LocalSettings.Values["TaskCancelationReason"] = ex.Message;
-                        ApplicationData.Current.LocalSettings.Values["SendMessage"] = null;
                         deferral.Complete();
                     }
                 }

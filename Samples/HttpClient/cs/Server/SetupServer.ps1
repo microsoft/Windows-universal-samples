@@ -48,9 +48,6 @@ if ($featuresToEnable.Count -gt 0)
     Enable-WindowsOptionalFeature -Online -FeatureName $featuresToEnable > $null
 }
 
-# Import necessary modules
-Import-Module WebAdministration
-
 # Copy the webpage files
 if (-not (Test-Path $iisAppPath))
 {

@@ -35,6 +35,8 @@ namespace SDKTemplate
             }
         }
 
+        static void SetReadingText(Windows::UI::Xaml::Controls::TextBlock^ textBlock, Windows::Devices::Sensors::AccelerometerReading^ reading);
+
     private:
         static Platform::Array<Scenario>^ scenariosInner;
     };
