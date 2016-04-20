@@ -54,11 +54,6 @@
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Content Include="css\scenario1_DataEvents.css" />
-    <Content Include="css\scenario2_ShakeEvents.css" />
-    <Content Include="css\scenario3_Polling.css" />
-    <Content Include="css\scenario4_OrientationChanged.css" />
-    <Content Include="css\scenario5_DataEventsBatching.css" />
     <Content Include="..\..\..\SharedContent\js\default.html">
       <Link>default.html</Link>
     </Content>

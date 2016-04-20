@@ -55,9 +55,6 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="css\CalibrationBar.css" />
-    <Content Include="css\scenario1_DataEvents.css" />
-    <Content Include="css\scenario2_Polling.css" />
-    <Content Include="css\scenario3_Calibration.css" />
     <Content Include="..\..\..\SharedContent\js\default.html">
       <Link>default.html</Link>
     </Content>

@@ -35,17 +35,18 @@ namespace SDKTemplate
         virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
         virtual void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 
+        void ScenarioEnable();
+        void ScenarioDisable();
+
     private:
-        SDKTemplate::MainPage^ rootPage;
+        SDKTemplate::MainPage^ rootPage = MainPage::Current;
         Windows::Devices::Sensors::Accelerometer^ accelerometer;
         Windows::Foundation::EventRegistrationToken visibilityToken;
         Windows::Foundation::EventRegistrationToken readingToken;
-        uint32 desiredReportInterval;
-        uint32 desiredReportLatency;
+        uint32 desiredReportInterval = 0;
+        uint32 desiredReportLatency = 0;
 
         void VisibilityChanged(Platform::Object^ sender, Windows::UI::Core::VisibilityChangedEventArgs^ e);
         void ReadingChanged(Windows::Devices::Sensors::Accelerometer^ sender, Windows::Devices::Sensors::AccelerometerReadingChangedEventArgs^ e);
-        void ScenarioEnable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-        void ScenarioDisable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
     };
 }

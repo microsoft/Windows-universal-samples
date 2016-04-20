@@ -13,8 +13,15 @@
         { url: "/html/scenario5_DataEventsBatching.html", title: "Data Events Batching" }
     ];
 
+    function setReadingText(e, reading) {
+        e.innerText = "X: " + reading.accelerationX.toFixed(2) +
+            ", Y: " + reading.accelerationY.toFixed(2) +
+            ", Z: " + reading.accelerationZ.toFixed(2);
+    }
+
     WinJS.Namespace.define("SdkSample", {
         sampleTitle: sampleTitle,
-        scenarios: new WinJS.Binding.List(scenarios)
+        scenarios: new WinJS.Binding.List(scenarios),
+        setReadingText: setReadingText
     });
 })();
