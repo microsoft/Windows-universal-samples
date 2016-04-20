@@ -20,11 +20,13 @@
             scenarioEnable.addEventListener("click", enableGetReadingScenario, false);
             scenarioDisable.addEventListener("click", disableGetReadingScenario, false);
 
-            accelerometer = Windows.Devices.Sensors.Accelerometer.getDefault();
+            var readingType = SdkSample.accelerometerReadingType;
+            accelerometer = Windows.Devices.Sensors.Accelerometer.getDefault(Windows.Devices.Sensors.AccelerometerReadingType[readingType]);
             if (accelerometer) {
+                WinJS.log && WinJS.log(readingType + " accelerometer ready", "sample", "status");
                 scenarioEnable.disabled = false;
             } else {
-                WinJS.log && WinJS.log("No accelerometer found", "sample", "error");
+                WinJS.log && WinJS.log(readingType + " accelerometer not found", "sample", "error");
             }
         },
         unload: function () {

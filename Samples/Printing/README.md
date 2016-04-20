@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: ControlsLayoutAndText
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619984
 --->
@@ -13,12 +13,7 @@ The scenarios demonstrated in this sample include:
 - Customizing the print experience by changing how the printer settings are shown to the user
 - Using a custom print template to print a range of pages
 - Printing alternate content that is not part of the current document
-
-Changes from previous versions of the sample:
-- Removed charms-based printing scenario
-- Refactored BasePrintPage out of solution for increased clarity. Sample now uses PageToPrint class and PrintHelper class instead. 
-- Added exception handling to ShowPrintUIAsync calls
-- Updated app to Universal Windows Platform (UWP)
+- Disabling print preview
 
 System requirements
 -------------------

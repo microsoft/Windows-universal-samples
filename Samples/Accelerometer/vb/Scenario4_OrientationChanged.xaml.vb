@@ -32,11 +32,12 @@ Namespace Global.SDKTemplate
         End Sub
 
         Protected Overrides Sub OnNavigatedTo(e As NavigationEventArgs)
-            accelerometerOriginal = Accelerometer.GetDefault()
-            accelerometerReadingTransform = Accelerometer.GetDefault()
+            accelerometerOriginal = Accelerometer.GetDefault(rootPage.AccelerometerReadingType)
+            accelerometerReadingTransform = Accelerometer.GetDefault(rootPage.AccelerometerReadingType)
             If accelerometerOriginal Is Nothing OrElse accelerometerReadingTransform Is Nothing Then
-                rootPage.NotifyUser("No accelerometer found", NotifyType.ErrorMessage)
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType.ToString & " accelerometer not found", NotifyType.ErrorMessage)
             Else
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType.ToString & " accelerometer ready", NotifyType.StatusMessage)
                 ScenarioEnableButton.IsEnabled = True
             End If
 

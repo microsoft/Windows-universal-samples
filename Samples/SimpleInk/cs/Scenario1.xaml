@@ -79,12 +79,11 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                    This scenario demonstrates how to use Ink and Rendering with XAML.<LineBreak/>
+                    This scenario demonstrates how to use ink with XAML.<LineBreak/>
                     - To ink, use a pen, or use mouse with the left button pressed.<LineBreak/>
                 </TextBlock>
             </StackPanel>
@@ -117,6 +116,7 @@
                             <ComboBoxItem Content="Ballpoint"/>
                             <ComboBoxItem Content="Highlighter"/>
                             <ComboBoxItem Content="Calligraphy"/>
+                            <ComboBoxItem Content="Pencil"/>
                         </ComboBox>
 
                         <TextBlock

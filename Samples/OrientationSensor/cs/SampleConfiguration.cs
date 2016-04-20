@@ -18,10 +18,11 @@ namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        public const string FEATURE_NAME = "Orientation Sensor";
+        public const string FEATURE_NAME = "Orientation Sensor C# Sample";
 
         List<Scenario> scenarios = new List<Scenario>
         {
+            new Scenario() { Title = "Choose orientation sensor", ClassType = typeof(Scenario0_Choose) },
             new Scenario() { Title = "Data Events", ClassType = typeof(Scenario1_DataEvents) },
             new Scenario() { Title = "Polling", ClassType = typeof(Scenario2_Polling) },
             new Scenario() { Title = "Calibration", ClassType = typeof(Scenario3_Calibration) }
@@ -65,6 +66,18 @@ namespace SDKTemplate
             textBlock.Text = "Quaternion:\n" + quaternionReport + "\n\n" +
                 "Rotation Matrix:\n" + rotationMatrixReport + "\n\n" +
                 "Yaw Accuracy:\n" + yawAccuracyReport;
+        }
+
+        public SensorReadingType SensorReadingType { get; set; } = SensorReadingType.Absolute;
+
+        public SensorOptimizationGoal SensorOptimizationGoal { get; set; } = SensorOptimizationGoal.Precision;
+
+        public string SensorDescription
+        {
+            get
+            {
+                return SensorReadingType + " orientation sensor with " + SensorOptimizationGoal + " optimization goal";
+            }
         }
     }
 
