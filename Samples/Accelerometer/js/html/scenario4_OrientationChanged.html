@@ -6,44 +6,24 @@ Copyright (c) Microsoft Corporation. All rights reserved
 
 <head>
     <title></title>
-    <link rel="stylesheet" href="/css/scenario4_OrientationChanged.css">
     <script src="/js/scenario4_OrientationChanged.js"></script>
 </head>
 
 <body class="win-type-body">
-    <div>
-        <p>
-            Registers for OrientationChanged event of the DisplayInformation class to illustrate the usage of the &apos;ReadingTransform&apos; Property. Displays accelerometer readings with and without the transformation.
-        </p>
-        <button class="action win-button" id="scenario4Open">Enable</button>
-        <button class="action secondary win-button" id="scenario4Revoke">Disable</button>
-        <br>
-        <br>
-    </div>
-    <div>
-        <table style="width:100%;">
-            <tr>
-                <td>Transform:</td>
-                <td>None</td>
-                <td>DisplayOrientation</td>
-            </tr>
-            <tr>
-                <td>X:</td>
-                <td id="eventOutputXOriginal">no data</td>
-                <td id="eventOutputXDataTransform">no data</td>
-            </tr>
-            <tr>
-                <td>Y:</td>
-                <td id="eventOutputYOriginal">no data</td>
-                <td id="eventOutputYDataTransform">no data</td>
-            </tr>
-            <tr>
-                <td>Z:</td>
-                <td id="eventOutputZOriginal">no data</td>
-                <td id="eventOutputZDataTransform">no data</td>
-            </tr>
-        </table>
-    </div>
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">Orientation changed</div>
+
+    <p>
+        Registers for OrientationChanged event of the DisplayInformation class to illustrate the usage of the ReadingTransform pProperty. Displays accelerometer readings with and without the transformation.
+    </p>
+    <p>
+        <button class="win-button" id="scenarioEnable" disabled>Enable</button>
+        <button class="win-button" id="scenarioDisable" disabled>Disable</button>
+    </p>
+    <p>Untransformed:</p>
+    <p id="eventOutputOriginal">no data</p>
+    <p>Transformed to DisplayOrientation:</p>
+    <p id="eventOutputDataTransform">no data</p>
 </body>
 
 </html>

@@ -23,7 +23,7 @@ namespace NavigationMenuSample
             void OnLoaded(Platform::Object ^sender, Windows::UI::Xaml::RoutedEventArgs ^e);
             void OnUnloaded(Platform::Object ^sender, Windows::UI::Xaml::RoutedEventArgs ^e);
 
-            static property DependencyProperty^ HeaderContentProperty 
+            static property DependencyProperty^ HeaderContentProperty
             {
                 DependencyProperty^ get() { return _headerContentProperty; }
             }

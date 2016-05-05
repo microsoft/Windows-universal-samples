@@ -25,6 +25,7 @@ namespace NavigationMenuSample
     /// </summary>
     public sealed partial class AppShell : Page
     {
+        private bool isPaddingAdded = false;
         // Declare the top level nav items
         private List<NavMenuItem> navlist = new List<NavMenuItem>(
             new[]
@@ -64,7 +65,10 @@ namespace NavigationMenuSample
             {
                 Current = this;
 
-                this.TogglePaneButton.Focus(FocusState.Programmatic);
+                this.CheckTogglePaneButtonSizeChanged();
+
+                var titleBar = Windows.ApplicationModel.Core.CoreApplication.GetCurrentView().TitleBar;
+                titleBar.IsVisibleChanged += TitleBar_IsVisibleChanged;
             };
 
             this.RootSplitView.RegisterPropertyChangedCallback(
@@ -77,11 +81,36 @@ namespace NavigationMenuSample
                 });
 
             SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManager_BackRequested;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+
 
             NavMenuList.ItemsSource = navlist;
         }
 
         public Frame AppFrame { get { return this.frame; } }
+
+        /// <summary>
+        /// Invoked when window title bar visibility changes, such as after loading or in tablet mode
+        /// Ensures correct padding at window top, between title bar and app content
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void TitleBar_IsVisibleChanged(Windows.ApplicationModel.Core.CoreApplicationViewTitleBar sender, object args)
+        {
+            if (!this.isPaddingAdded && sender.IsVisible)
+            {
+                //add extra padding between window title bar and app content
+                double extraPadding = (Double)App.Current.Resources["DesktopWindowTopPadding"];
+                this.isPaddingAdded = true;
+
+                Thickness margin = NavMenuList.Margin;
+                NavMenuList.Margin = new Thickness(margin.Left, margin.Top + extraPadding, margin.Right, margin.Bottom);
+                margin = frame.Margin;
+                frame.Margin = new Thickness(margin.Left, margin.Top + extraPadding, margin.Right, margin.Bottom);
+                margin = TogglePaneButton.Margin;
+                TogglePaneButton.Margin = new Thickness(margin.Left, margin.Top + extraPadding, margin.Right, margin.Bottom);
+            }
+        }
 
         /// <summary>
         /// Default keyboard focus movement for any unhandled keyboarding
@@ -136,9 +165,23 @@ namespace NavigationMenuSample
 
         private void SystemNavigationManager_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            if (!e.Handled && this.AppFrame.CanGoBack)
+            bool handled = e.Handled;
+            this.BackRequested(ref handled);
+            e.Handled = handled;
+        }
+
+        private void BackRequested(ref bool handled)
+        {
+            // Get a hold of the current frame so that we can inspect the app back stack.
+
+            if (this.AppFrame == null)
+                return;
+
+            // Check to see if this is the top-most page on the app back stack.
+            if (this.AppFrame.CanGoBack && !handled)
             {
-                e.Handled = true;
+                // If not, set the event to handled and go back to the previous page in the app.
+                handled = true;
                 this.AppFrame.GoBack();
             }
         }
@@ -208,19 +251,12 @@ namespace NavigationMenuSample
                 var control = (Page)e.Content;
                 control.Loaded += Page_Loaded;
             }
-
-            // Update the Back button depending on whether we can go Back.
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                AppFrame.CanGoBack ?
-                AppViewBackButtonVisibility.Visible :
-                AppViewBackButtonVisibility.Collapsed;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             ((Page)sender).Focus(FocusState.Programmatic);
             ((Page)sender).Loaded -= Page_Loaded;
-            this.CheckTogglePaneButtonSizeChanged();
         }
 
         #endregion
@@ -238,13 +274,45 @@ namespace NavigationMenuSample
         public event TypedEventHandler<AppShell, Rect> TogglePaneButtonRectChanged;
 
         /// <summary>
-        /// Callback when the SplitView's Pane is toggled open or close.  When the Pane is not visible
+        /// Public method to allow pages to open SplitView's pane.
+        /// Used for custom app shortcuts like navigating left from page's left-most item
+        /// </summary>
+        public void OpenNavePane()
+        {
+            TogglePaneButton.IsChecked = true;
+            NavPaneDivider.Visibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// Hides divider when nav pane is closed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void RootSplitView_PaneClosed(SplitView sender, object args)
+        {
+            NavPaneDivider.Visibility = Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// Callback when the SplitView's Pane is toggled closed.  When the Pane is not visible
         /// then the floating hamburger may be occluding other content in the app unless it is aware.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TogglePaneButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            this.CheckTogglePaneButtonSizeChanged();
+        }
+
+        /// <summary>
+        /// Callback when the SplitView's Pane is toggled opened.
+        /// Restores divider's visibility and ensures that margins around the floating hamburger are correctly set.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void TogglePaneButton_Checked(object sender, RoutedEventArgs e)
         {
+            NavPaneDivider.Visibility = Visibility.Visible;
             this.CheckTogglePaneButtonSizeChanged();
         }
 

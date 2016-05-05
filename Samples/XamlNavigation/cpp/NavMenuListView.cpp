@@ -97,8 +97,8 @@ namespace NavigationMenuSample
         }
 
         /// <summary>
-        /// Custom keyboarding logic to enable movement via the arrow keys without triggering selection 
-        /// until a 'Space' or 'Enter' key is pressed. 
+        /// Custom keyboarding logic to enable movement via the arrow keys without triggering selection
+        /// until a 'Space' or 'Enter' key is pressed.
         /// </summary>
         /// <param name="e"></param>
         void NavMenuListView::OnKeyDown(KeyRoutedEventArgs^ e)
