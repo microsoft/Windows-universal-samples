@@ -54,6 +54,9 @@ Namespace Global.CameraHdr
         ' Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
         Private Shared ReadOnly RotationKey As Guid = New Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1")
 
+        ' Folder in which the captures will be stored (initialized in SetupUiAsync)
+        Private _captureFolder As StorageFolder = Nothing
+
         ' Prevent the screen from sleeping while the camera is running
         Private ReadOnly _displayRequest As DisplayRequest = New DisplayRequest()
 
@@ -208,11 +211,12 @@ Namespace Global.CameraHdr
         Private Async Sub AdvancedCapture_OptionalReferencePhotoCaptured(sender As AdvancedPhotoCapture, args As OptionalReferencePhotoCapturedEventArgs)
             ' Retrieve the context (i.e. what capture does this belong to?)
             Dim context = TryCast(args.Context, AdvancedCaptureContext)
-            Debug.WriteLine("AdvancedCapture_OptionalReferencePhotoCaptured for {0}", context.CaptureFileName)
             ' Remove "_HDR" from the name of the capture to create the name of the reference
             Dim referenceName = context.CaptureFileName.Replace("_HDR", "")
+            Dim file = Await _captureFolder.CreateFileAsync(referenceName, CreationCollisionOption.GenerateUniqueName)
+            Debug.WriteLine("AdvancedCapture_OptionalReferencePhotoCaptured for " & context.CaptureFileName & ". Saving to " & file.Path)
             Using frame = args.Frame
-                Await ReencodeAndSavePhotoAsync(frame, referenceName, context.CaptureOrientation)
+                Await ReencodeAndSavePhotoAsync(frame, file, context.CaptureOrientation)
             End Using
         End Sub
 
@@ -226,7 +230,7 @@ Namespace Global.CameraHdr
             Debug.WriteLine("AdvancedCapture_AllPhotosCaptured")
         End Sub
 
-        Private Async Sub PhotoButton_Tapped(sender As Object, e As TappedRoutedEventArgs)
+        Private Async Sub PhotoButton_Click(sender As Object, e As RoutedEventArgs)
             Await TakePhotoInCurrentModeAsync()
         End Sub
 
@@ -416,15 +420,15 @@ Namespace Global.CameraHdr
             Dim stream = New InMemoryRandomAccessStream()
             Try
                 Debug.WriteLine("Taking photo...")
-                ' Generate a filename based on the current time
-                Dim fileName = String.Format("SimplePhoto_{0}.jpg", DateTime.Now.ToString("HHmmss"))
-                ' Get the orientation of the camera at the time of capture
+                ' Read the current orientation of the camera and the capture time
                 Dim photoOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation())
+                Dim fileName = String.Format("SimplePhoto_{0}_HDR.jpg", DateTime.Now.ToString("HHmmss"))
                 Await _mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream)
-                Debug.WriteLine("Photo taken!")
-                Await ReencodeAndSavePhotoAsync(stream, fileName, photoOrientation)
+                Dim file = Await _captureFolder.CreateFileAsync(fileName, CreationCollisionOption.GenerateUniqueName)
+                Debug.WriteLine("Photo taken! Saving to " & file.Path)
+                Await ReencodeAndSavePhotoAsync(stream, file, photoOrientation)
             Catch ex As Exception
-                Debug.WriteLine("Exception when taking a photo: {0}", ex.ToString())
+                Debug.WriteLine("Exception when taking a photo: " & ex.ToString())
             End Try
         End Function
 
@@ -442,12 +446,13 @@ Namespace Global.CameraHdr
                 Dim context = New AdvancedCaptureContext() With {.CaptureFileName = fileName, .CaptureOrientation = photoOrientation}
                 ' Start capture, and pass the context object
                 Dim capture = Await _advancedCapture.CaptureAsync(context)
-                Debug.WriteLine("HDR photo taken! {0}", fileName)
                 Using frame = capture.Frame
-                    Await ReencodeAndSavePhotoAsync(frame, fileName, photoOrientation)
+                    Dim file = Await _captureFolder.CreateFileAsync(fileName, CreationCollisionOption.GenerateUniqueName)
+                    Debug.WriteLine("HDR photo taken! Saving to " & file.Path)
+                    Await ReencodeAndSavePhotoAsync(frame, file, photoOrientation)
                 End Using
             Catch ex As Exception
-                Debug.WriteLine("Exception when taking an HDR photo: {0}", ex.ToString())
+                Debug.WriteLine("Exception when taking an HDR photo: " & ex.ToString())
             End Try
         End Function
 
@@ -500,6 +505,10 @@ Namespace Global.CameraHdr
             End If
 
             RegisterEventHandlers()
+
+            Dim picturesLibrary = Await StorageLibrary.GetLibraryAsync(KnownLibraryId.Pictures)
+            ' Fall back to the local app storage if the Pictures Library is not available
+            _captureFolder = If(picturesLibrary.SaveFolder, ApplicationData.Current.LocalFolder)
         End Function
 
         ''' <summary>
@@ -575,15 +584,14 @@ Namespace Global.CameraHdr
         ''' Applies the given orientation to a photo stream and saves it as a StorageFile
         ''' </summary>
         ''' <param name="stream">The photo stream</param>
+        ''' <param name="file">The StorageFile in which the photo stream will be saved</param>
         ''' <param name="photoOrientation">The orientation metadata to apply to the photo</param>
         ''' <returns></returns>
-        Private Shared Async Function ReencodeAndSavePhotoAsync(stream As IRandomAccessStream, fileName As String, Optional photoOrientation As PhotoOrientation = PhotoOrientation.Normal) As Task
+        Private Shared Async Function ReencodeAndSavePhotoAsync(stream As IRandomAccessStream, file As StorageFile, photoOrientation As PhotoOrientation) As Task
             Using inputStream = stream
                 Dim decoder = Await BitmapDecoder.CreateAsync(inputStream)
-                Dim file = Await KnownFolders.PicturesLibrary.CreateFileAsync(fileName, CreationCollisionOption.GenerateUniqueName)
                 Using outputStream = Await file.OpenAsync(FileAccessMode.ReadWrite)
                     Dim encoder = Await BitmapEncoder.CreateForTranscodingAsync(outputStream, decoder)
-                    ' Set the orientation of the capture
                     Dim properties = New BitmapPropertySet From {{"System.Photo.Orientation", New BitmapTypedValue(photoOrientation, PropertyType.UInt16)}}
                     Await encoder.BitmapProperties.SetPropertiesAsync(properties)
                     Await encoder.FlushAsync()

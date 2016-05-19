@@ -40,6 +40,7 @@ Scenario2_PhotoSettings::Scenario2_PhotoSettings()
     : _rootPage(MainPage::Current)
     , _mediaCapture(nullptr)
     , _isPreviewing(false)
+    , _captureFolder(nullptr)
 {
     InitializeComponent();
 }
@@ -68,6 +69,17 @@ task<void> Scenario2_PhotoSettings::InitializeCameraAsync()
     {
         PreviewControl->Source = _mediaCapture.Get();
         return create_task(_mediaCapture->StartPreviewAsync());
+    }).then([this]()
+    {
+        return create_task(StorageLibrary::GetLibraryAsync(KnownLibraryId::Pictures));
+    }).then([this](StorageLibrary^ picturesLibrary)
+    {
+        _captureFolder = picturesLibrary->SaveFolder;
+        if (_captureFolder == nullptr)
+        {
+            // In this case fall back to the local app storage since the Pictures Library is not available
+            _captureFolder = ApplicationData::Current->LocalFolder;
+        }
     }).then([this](task<void> previousTask)
     {
         try
@@ -114,7 +126,7 @@ task<void> Scenario2_PhotoSettings::CleanupCameraAsync()
 /// Initializes the camera and populates the UI
 /// </summary>
 /// <param name="sender"></param>
-void Scenario2_PhotoSettings::InitializeCameraButton_Tapped(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^)
+void Scenario2_PhotoSettings::InitializeCameraButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^)
 {
     Button^ button = static_cast<Button^>(sender);
     button->IsEnabled = false;
@@ -137,14 +149,14 @@ void Scenario2_PhotoSettings::InitializeCameraButton_Tapped(Platform::Object^ se
 /// <summary>
 /// Takes a photo to and saves to a StorageFile
 /// </summary>
-void Scenario2_PhotoSettings::PhotoButton_Tapped(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^)
+void Scenario2_PhotoSettings::PhotoButton_Click(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^)
 {
     if (_isPreviewing)
     {
         // Disable the photo button while taking a photo
         PhotoButton->IsEnabled = false;
 
-        create_task(KnownFolders::PicturesLibrary->CreateFileAsync("SimplePhoto.jpg", CreationCollisionOption::GenerateUniqueName))
+        create_task(_captureFolder->CreateFileAsync("SimplePhoto.jpg", CreationCollisionOption::GenerateUniqueName))
             .then([this](StorageFile^ file)
         {
             return create_task(_mediaCapture->CapturePhotoToStorageFileAsync(ImageEncodingProperties::CreateJpeg(), file))

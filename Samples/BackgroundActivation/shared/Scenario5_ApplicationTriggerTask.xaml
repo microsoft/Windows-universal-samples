@@ -1,0 +1,44 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.ApplicationTriggerTask"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                    <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                        Registers a background task for an application trigger event, requests background
+                        access and then signals the event.
+                    </TextBlock>
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Margin="0,10,0,10">
+                        <Button x:Name="RegisterButton" Content="Register" Click="RegisterBackgroundTask"/>
+                        <Button x:Name="UnregisterButton" Content="Unregister" Click="UnregisterBackgroundTask" Margin="10,0,10,0"/>
+                        <Button x:Name="SignalButton" Content="Signal" Click="SignalBackgroundTask"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock x:Name="Status" Style="{StaticResource BasicTextStyle}" Text="Unregistered"/>
+                        <TextBlock x:Name="Progress" Style="{StaticResource BasicTextStyle}" Text=""/>
+                        <TextBlock x:Name="Result" Style="{StaticResource BasicTextStyle}" Text=""/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

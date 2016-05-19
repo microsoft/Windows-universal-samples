@@ -13,7 +13,7 @@
   <mp:PhoneIdentity PhoneProductId="dede2df4-b097-4464-bb96-66a644f32d55" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>CameraHDR</DisplayName>
+    <DisplayName>CameraHDR JS Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>images\storelogo-sdk.png</Logo>
   </Properties>

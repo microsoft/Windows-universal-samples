@@ -24,7 +24,9 @@ namespace SDKTemplate
         {
             new Scenario() { Title="Scenario 1", ClassType=typeof(Scenario1)},
             new Scenario() { Title="Scenario 2", ClassType=typeof(Scenario2)},
-            new Scenario() { Title="Scenario 3", ClassType=typeof(Scenario3)}
+            new Scenario() { Title="Scenario 3", ClassType=typeof(Scenario3)},
+            new Scenario() { Title="Scenario 4", ClassType=typeof(Scenario4)},
+            new Scenario() { Title="Scenario 5", ClassType=typeof(Scenario5)}
         };
     }
 

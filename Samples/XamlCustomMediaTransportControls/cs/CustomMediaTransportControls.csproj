@@ -108,6 +108,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\..\SharedContent\media\Samples\fishes.wmv">
+      <Link>Assets\fishes.wmv</Link>
+    </Content>
     <Content Include="..\..\..\SharedContent\media\smalltile-sdk.png">
       <Link>Assets\smalltile-sdk.png</Link>
     </Content>

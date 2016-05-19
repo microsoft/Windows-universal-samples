@@ -13,12 +13,18 @@
     "use strict";
 
     var Capture = Windows.Media.Capture;
+    var StorageLibrary = Windows.Storage.StorageLibrary;
+    var KnownLibraryId = Windows.Storage.KnownLibraryId;
+    var ApplicationData = Windows.Storage.ApplicationData;
 
     var mediaCapture = null,
         previewProperties = [],
         photoProperties = [];
 
     var isPreviewing = false;
+
+    // Folder in which the captures will be stored (initialized in SetupUiAsync)
+    var captureFolder;
 
     var page = WinJS.UI.Pages.define("/html/Scenario2_PhotoSettings.html", {
         ready: function (element, options) {
@@ -71,7 +77,12 @@
     /// Initializes the camera and populates the UI
     /// </summary>
     function initCameraBtn_click() {
-        initializeCameraAsync()
+        return StorageLibrary.getLibraryAsync(KnownLibraryId.pictures)
+        .then(function (picturesLibrary) {
+            // Fall back to the local app storage if the Pictures Library is not available
+            captureFolder = picturesLibrary.saveFolder || ApplicationData.current.localFolder;
+            return initializeCameraAsync();
+        })
         .then(function () {
             initCameraBtn.style.visibility = "hidden";
             checkIfStreamsAreIdentical();
@@ -117,7 +128,7 @@
 
             var Storage = Windows.Storage;
 
-            Storage.KnownFolders.picturesLibrary.createFileAsync("SimplePhoto.jpg", Storage.CreationCollisionOption.generateUniqueName)
+            captureFolder.createFileAsync("SimplePhoto.jpg", Storage.CreationCollisionOption.generateUniqueName)
             .then(function (file) {
                 return mediaCapture.capturePhotoToStorageFileAsync(Windows.Media.MediaProperties.ImageEncodingProperties.createJpeg(), file)
                 .then(function () {

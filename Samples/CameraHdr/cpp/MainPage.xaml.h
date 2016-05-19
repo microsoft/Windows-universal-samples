@@ -20,6 +20,7 @@ namespace CameraHdr
     internal:
         Windows::Graphics::Imaging::BitmapDecoder^ _decoder;
         Windows::Graphics::Imaging::BitmapEncoder^ _encoder;
+        Windows::Storage::StorageFile^ _file;
         Windows::Storage::FileProperties::PhotoOrientation _orientation;
     };
 
@@ -31,6 +32,7 @@ namespace CameraHdr
     internal:
         Platform::String^ _captureFileName;
         Windows::Storage::FileProperties::PhotoOrientation _captureOrientation;
+        Windows::Media::Capture::AdvancedCapturedPhoto^ _photo;
     };
 
     public ref class MainPage sealed
@@ -45,6 +47,9 @@ namespace CameraHdr
         // Rotation metadata to apply to the preview stream and recorded videos (MF_MT_VIDEO_ROTATION)
         // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
         const GUID RotationKey;
+
+        // Folder in which the captures will be stored (availability check performed in SetupUiAsync)
+        Windows::Storage::StorageFolder^ _captureFolder;
 
         // Prevent the screen from sleeping while the camera is running
         Windows::System::Display::DisplayRequest^ _displayRequest;
@@ -97,7 +102,7 @@ namespace CameraHdr
 
         // Helpers
         Concurrency::task<Windows::Devices::Enumeration::DeviceInformation^> FindCameraDeviceByPanelAsync(Windows::Devices::Enumeration::Panel panel);
-        Concurrency::task<void> ReencodeAndSavePhotoAsync(Windows::Storage::Streams::IRandomAccessStream^ stream, Platform::String^ fileName, Windows::Storage::FileProperties::PhotoOrientation photoOrientation);
+        Concurrency::task<void> ReencodeAndSavePhotoAsync(Windows::Storage::Streams::IRandomAccessStream^ stream, Windows::Storage::StorageFile^ file, Windows::Storage::FileProperties::PhotoOrientation photoOrientation);
         void UpdateUi();
         Concurrency::task<void> SetupUiAsync();
         Concurrency::task<void> CleanupUiAsync();
@@ -121,7 +126,7 @@ namespace CameraHdr
         void Application_Resuming(Object^ sender, Object^ args);
         void DisplayInformation_OrientationChanged(Windows::Graphics::Display::DisplayInformation^ sender, Object^ args);
         void SceneAnalysisEffect_SceneAnalyzed(Windows::Media::Core::SceneAnalysisEffect^ sender, Windows::Media::Core::SceneAnalyzedEventArgs^ args);
-        void PhotoButton_Tapped(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void PhotoButton_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void SystemMediaControls_PropertyChanged(Windows::Media::SystemMediaTransportControls^ sender, Windows::Media::SystemMediaTransportControlsPropertyChangedEventArgs^ args);
         void HdrToggleButton_Checked(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void OrientationSensor_OrientationChanged(Windows::Devices::Sensors::SimpleOrientationSensor^, Windows::Devices::Sensors::SimpleOrientationSensorOrientationChangedEventArgs^);

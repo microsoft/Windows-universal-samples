@@ -45,6 +45,7 @@ namespace SDKTemplate
         private StreamSocket chatSocket = null;
         private DataWriter chatWriter = null;
         private RfcommDeviceService chatService = null;
+        private BluetoothDevice bluetoothDevice;
 
         public Scenario1_ChatClient()
         {
@@ -87,21 +88,30 @@ namespace SDKTemplate
         /// <param name="e">Event data describing the conditions that led to the event.</param>
         private void RunButton_Click(object sender, RoutedEventArgs e)
         {
+            SetDeviceWatcherUI();
+            StartUnpairedDeviceWatcher();
+        }
+
+        private void SetDeviceWatcherUI()
+        {
             // Disable the button while we do async operations so the user can't Run twice.
-           RunButton.IsEnabled = false;
-            resultsListView.Visibility = Visibility.Visible;
+            RunButton.IsEnabled = false;
 
             // Clear any previous messages
             rootPage.NotifyUser("", NotifyType.StatusMessage);
 
-            StartUnpairedDeviceWatcher();
-
+            resultsListView.Visibility = Visibility.Visible;
             resultsListView.IsEnabled = true;
         }
 
         private void StartUnpairedDeviceWatcher()
         {
-            deviceWatcher = DeviceInformation.CreateWatcher(BluetoothDevice.GetDeviceSelectorFromPairingState(false), null);
+            // Request additional properties
+            string[] requestedProperties = new string[] { "System.Devices.Aep.DeviceAddress", "System.Devices.Aep.IsConnected" };
+
+            deviceWatcher = DeviceInformation.CreateWatcher("(System.Devices.Aep.ProtocolId:=\"{e0cbf06c-cd8b-4647-bb8a-263b43f0f974}\")",
+                                                            requestedProperties,
+                                                            DeviceInformationKind.AssociationEndpoint);
 
             // Hook up handlers for the watcher events before starting the watcher
             deviceWatcher.Added += new TypedEventHandler<DeviceWatcher, DeviceInformation>(async (watcher, deviceInfo) =>
@@ -207,36 +217,35 @@ namespace SDKTemplate
 
             RfcommChatDeviceDisplay deviceInfoDisp = resultsListView.SelectedItem as RfcommChatDeviceDisplay;
 
-            // Perform device access checks before trying to get the device
+            // Perform device access checks before trying to get the device.
+            // First, we check if consent has been explicitly denied by the user.
             DeviceAccessStatus accessStatus = DeviceAccessInformation.CreateFromId(deviceInfoDisp.Id).CurrentStatus;
-            if (accessStatus != DeviceAccessStatus.Allowed)
+            if (accessStatus == DeviceAccessStatus.DeniedByUser)
             {
                 rootPage.NotifyUser("This app does not have access to connect to the remote device (please grant access in Settings > Privacy > Other Devices", NotifyType.ErrorMessage);
                 return;
             }
 
-            BluetoothDevice bluetoothDevice;
+            // If not, try to get the Bluetooth device
             try
             {
-                 bluetoothDevice = await BluetoothDevice.FromIdAsync(deviceInfoDisp.Id);
+                bluetoothDevice = await BluetoothDevice.FromIdAsync(deviceInfoDisp.Id);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 rootPage.NotifyUser(ex.Message, NotifyType.ErrorMessage);
                 return;
             }
 
-            // Make sure user has given consent to access device
-            accessStatus = await bluetoothDevice.RequestAccessAsync();
-
-            if (accessStatus != DeviceAccessStatus.Allowed)
+            // If we were unable to get a valid Bluetooth device object,
+            // it's most likely because the user has specified that all unpaired devices
+            // should not be interacted with.
+            if (bluetoothDevice == null)
             {
-                rootPage.NotifyUser(
-                    "Access to the device is denied because the application was not granted access",
-                    NotifyType.StatusMessage);
-                return;
+                rootPage.NotifyUser("Bluetooth Device returned null. Access Status = " + accessStatus.ToString(), NotifyType.ErrorMessage);
             }
 
+            // This should return a list of uncached Bluetooth services (so if the server was not active when paired, it will still be detected by this call
             var rfcommServices = await bluetoothDevice.GetRfcommServicesForIdAsync(
                 RfcommServiceId.FromUuid(Constants.RfcommChatServiceUuid), BluetoothCacheMode.Uncached);
 
@@ -249,21 +258,6 @@ namespace SDKTemplate
                 rootPage.NotifyUser(
                    "Could not discover the chat service on the remote device",
                    NotifyType.StatusMessage);
-                return;
-            }
-
-            // Make sure user has given consent to access rfcomm service
-            accessStatus = chatService.DeviceAccessInformation.CurrentStatus;
-            if (accessStatus != DeviceAccessStatus.Allowed)
-            {
-                accessStatus = await chatService.RequestAccessAsync();
-            }
-
-            if (accessStatus != DeviceAccessStatus.Allowed)
-            {
-                rootPage.NotifyUser(
-                    "Access to the device is denied because the application was not granted access",
-                    NotifyType.StatusMessage);
                 return;
             }
 
@@ -295,13 +289,8 @@ namespace SDKTemplate
 
             // The Service Name attribute requires UTF-8 encoding.
             attributeReader.UnicodeEncoding = UnicodeEncoding.Utf8;
-            ServiceName.Text = "Service Name: " + attributeReader.ReadString(serviceNameLength);
-            DeviceName.Text = "Connected to: " + bluetoothDevice.Name;
+
             deviceWatcher.Stop();
-            RunButton.IsEnabled = false;
-            ConnectButton.Visibility = Visibility.Collapsed;
-            resultsListView.IsEnabled = false;
-            resultsListView.Visibility = Visibility.Collapsed;
 
             lock (this)
             {
@@ -311,8 +300,8 @@ namespace SDKTemplate
             {
                 await chatSocket.ConnectAsync(chatService.ConnectionHostName, chatService.ConnectionServiceName);
 
+                SetChatUI(attributeReader.ReadString(serviceNameLength), bluetoothDevice.Name);
                 chatWriter = new DataWriter(chatSocket.OutputStream);
-                ChatBox.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
                 DataReader chatReader = new DataReader(chatSocket.InputStream);
                 ReceiveStringLoop(chatReader);
@@ -330,6 +319,34 @@ namespace SDKTemplate
                 }
             }
 
+        }
+
+        /// <summary>
+        ///  If you believe the Bluetooth device will eventually be paired with Windows,
+        ///  you might want to pre-emptively get consent to access the device.
+        ///  An explicit call to RequestAccessAsync() prompts the user for consent.
+        ///  If this is not done, a device that's working before being paired,
+        ///  will no longer work after being paired.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void RequestAccessButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Make sure user has given consent to access device
+            DeviceAccessStatus accessStatus = await bluetoothDevice.RequestAccessAsync();
+
+            if (accessStatus != DeviceAccessStatus.Allowed)
+            {
+                rootPage.NotifyUser(
+                    "Access to the device is denied because the application was not granted access",
+                    NotifyType.StatusMessage);
+            }
+            else
+            {
+                rootPage.NotifyUser(
+                                    "Access granted, you are free to pair devices",
+                                    NotifyType.StatusMessage);
+            }
         }
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
@@ -444,10 +461,28 @@ namespace SDKTemplate
             }
 
             rootPage.NotifyUser(disconnectReason, NotifyType.StatusMessage);
+            ResetUI();
+        }
+
+        private void ResetUI()
+        {
             RunButton.IsEnabled = true;
             ConnectButton.Visibility = Visibility.Visible;
-            ChatBox.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            ChatBox.Visibility = Visibility.Collapsed;
+            RequestAccessButton.Visibility = Visibility.Collapsed;
             ConversationList.Items.Clear();
+        }
+
+        private void SetChatUI(string serviceName, string deviceName)
+        {
+            ServiceName.Text = "Service Name: " + serviceName;
+            DeviceName.Text = "Connected to: " + deviceName;
+            RunButton.IsEnabled = false;
+            ConnectButton.Visibility = Visibility.Collapsed;
+            RequestAccessButton.Visibility = Visibility.Visible;
+            resultsListView.IsEnabled = false;
+            resultsListView.Visibility = Visibility.Collapsed;
+            ChatBox.Visibility = Visibility.Visible;
         }
 
         private void ResultsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -539,6 +574,5 @@ namespace SDKTemplate
                 handler(this, new PropertyChangedEventArgs(name));
             }
         }
-
     }
 }

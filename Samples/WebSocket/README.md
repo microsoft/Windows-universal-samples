@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: NetworkingAndWebServices 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620623
 --->
@@ -6,6 +6,7 @@
 # WebSocket sample
 
 This sample shows you how to send and receive date using the WebSocket classes in the [**Windows.Networking.Sockets**](http://msdn.microsoft.com/library/windows/apps/br226960) namespace in your Universal Windows Platform (UWP) app. The sample covers basic features that include making a WebSocket connection, sending and receiving data, and closing the connection. The sample also shows recommended ways of handling both trusted (hard coded) URI inputs and unvalidated (user-entered) URI inputs.
+This sample also shows how to access the server certificate information and perform custom validation (if needed) when using a secure Websocket (wss://) endpoint.
 
 **Note**  This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on Windows 10. For more info about how to build apps that target Windows and Windows Phone with Visual Studio, see [Build apps that target Windows 10 by using Visual Studio](http://msdn.microsoft.com/library/windows/apps/dn609832).
 

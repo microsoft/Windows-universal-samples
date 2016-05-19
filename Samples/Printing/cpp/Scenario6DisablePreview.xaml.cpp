@@ -162,25 +162,29 @@ void Scenario6DisablePreview::OnPrintButtonClick(Object^ sender, RoutedEventArgs
 
 void Scenario6DisablePreview::OnNavigatedTo(NavigationEventArgs^ e)
 {
-    // Initalize common helper class and register for printing
-    printHelper = ref new PreviewOptionsPrintHelper(this);
-    printHelper->RegisterForPrinting();
-
-    // Initialize print content for this scenario
-    printHelper->PreparePrintContent(ref new PageToPrint());
-
-    // Check whether current platform supports Scenario 6 Disable Preview
-    if (ApiInformation::IsPropertyPresent("Windows.Graphics.Printing.PrintTask", "IsPreviewEnabled"))
+    if (PrintManager::IsSupported())
     {
         // Tell the user how to print
         MainPage::Current->NotifyUser("Print contract registered with customization, use the Print button to print.", NotifyType::StatusMessage);
     }
     else
     {
-        // Grey out the print button and notify the user
-        InvokePrintingButton->IsEnabled = false;
-        MainPage::Current->NotifyUser("This feature is not supported on your current platform.", NotifyType::StatusMessage);
+        // Remove the print button
+        InvokePrintingButton->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+
+        // Inform user that Printing is not supported
+        MainPage::Current->NotifyUser("Printing is not supported.", NotifyType::ErrorMessage);
+
+        // Printing-related event handlers will never be called if printing
+        // is not supported, but it's okay to register for them anyway.
     }
+
+    // Initalize common helper class and register for printing
+    printHelper = ref new PreviewOptionsPrintHelper(this);
+    printHelper->RegisterForPrinting();
+
+    // Initialize print content for this scenario
+    printHelper->PreparePrintContent(ref new PageToPrint());
 }
 
 void Scenario6DisablePreview::OnNavigatedFrom(NavigationEventArgs^ e)

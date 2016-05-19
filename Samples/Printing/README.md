@@ -14,14 +14,16 @@ The scenarios demonstrated in this sample include:
 - Using a custom print template to print a range of pages
 - Printing alternate content that is not part of the current document
 - Disabling print preview
+- Removing the Print button if the device does not support printing
 
 System requirements
 -------------------
 
-Client
+**Client:** Windows 10 build 14295
 
-Windows 10
+**Server:** Windows Server 2016 Technical Preview
 
+**Phone:** Windows 10 build 14295
 
 Build the sample
 ----------------

@@ -11,9 +11,15 @@ Specifically, this sample covers using the Windows.UI.Input.Inking APIs to do th
 -   Capture user input and render as ink strokes
 -   Save and load ink strokes
 -   Erase ink strokes
--   Change which input types (Mouse/Touch/Pen) are used for inking 
--   Recognize handwriting from ink strokes 
--   Select ink strokes 
+-   Select different types of pens
+-   Change which input types (Mouse/Touch/Pen) are used for inking
+-   Recognize handwriting from ink strokes
+-   Select ink strokes
+-   add a custom button to the ink toolbar
+-   show and position the ruler
+-   manipulate wet ink strokes
+    - make strokes follow a shape
+    - complete a stroke prematurely if conditions are met
 
 ## Related topics
 
@@ -27,11 +33,11 @@ Specifically, this sample covers using the Windows.UI.Input.Inking APIs to do th
 
 ## Operating system requirements
 
-**Client:** Windows 10
+**Client:** Windows 10 build 14295
 
 **Server:** Windows Server 2016 Technical Preview
 
-**Phone:** Windows 10
+**Phone:** Windows 10 build 14295
 
 ## Build the sample
 

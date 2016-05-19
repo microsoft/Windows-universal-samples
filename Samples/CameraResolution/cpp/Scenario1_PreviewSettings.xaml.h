@@ -36,7 +36,7 @@ namespace SDKTemplate
         Concurrency::task<void> InitializeCameraAsync();
         Concurrency::task<void> CleanupCameraAsync();
 
-        void InitializeCameraButton_Tapped(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void InitializeCameraButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void ComboBoxSettings_Changed(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
         void PopulateSettingsComboBox();

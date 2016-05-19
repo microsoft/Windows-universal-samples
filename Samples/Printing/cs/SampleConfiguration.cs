@@ -18,7 +18,7 @@ namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        public const string FEATURE_NAME = "PrintSample";
+        public const string FEATURE_NAME = "Printing C# Sample";
 
         List<Scenario> scenarios = new List<Scenario>
         {

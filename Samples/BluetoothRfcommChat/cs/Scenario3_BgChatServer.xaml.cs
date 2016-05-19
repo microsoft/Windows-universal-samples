@@ -262,11 +262,15 @@ namespace SDKTemplate
             {
                 string backgroundMessage = (string)ApplicationData.Current.LocalSettings.Values["ReceivedMessage"];
                 string remoteDeviceName = (string)ApplicationData.Current.LocalSettings.Values["RemoteDeviceName"];
-                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+
+                if(!backgroundMessage.Equals(""))
                 {
-                    rootPage.NotifyUser("Client Connected: " + remoteDeviceName, NotifyType.StatusMessage);
-                    ConversationListBox.Items.Add("Received: " + backgroundMessage);
-                });
+                    await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                    {
+                        rootPage.NotifyUser("Client Connected: " + remoteDeviceName, NotifyType.StatusMessage);
+                        ConversationListBox.Items.Add("Received: " + backgroundMessage);
+                    });
+                }
             }
         }
 
@@ -275,6 +279,5 @@ namespace SDKTemplate
             task.Progress += new BackgroundTaskProgressEventHandler(OnProgress);
             task.Completed += new BackgroundTaskCompletedEventHandler(OnCompleted);
         }
-
     }
 }

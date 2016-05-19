@@ -1,0 +1,42 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Directions"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" Text="Directional navigation"/>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                Use the XYFocus properties to customize focus navigation
+                with a remote control or gamepad.
+                Here,
+                we specify that navigating down from Button 1 leads to Button 2.
+                By default, navigating down would have led to Button 3.
+                Similarly, we specify that navigating up from Button 3 leads to Button 2.
+                Finally, we specify that navigating left and right from Button 2
+                lead back to Button 2, effectively disabling horizontal navigation.
+            </TextBlock>
+            <Button x:Name="Button1" Margin="0,10,0,0" Width="100" Content="Button 1" XYFocusDown="{x:Bind Button2}"/>
+            <Button x:Name="Button2" Margin="100,10,0,0" Width="100" Content="Button 2"
+                    XYFocusDown="{x:Bind Button3}" XYFocusUp="{x:Bind Button1}"
+                    XYFocusLeft="{x:Bind Button2}" XYFocusRight="{x:Bind Button2}"/>
+            <Button x:Name="Button3" Margin="0,10,0,0" Width="100" Content="Button 3" XYFocusUp="{x:Bind Button2}"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

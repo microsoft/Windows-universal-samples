@@ -66,7 +66,7 @@
                 </Viewbox>
             </ToggleButton>
 
-            <Button Name="PhotoButton" Tapped="PhotoButton_Tapped" IsEnabled="False">
+            <Button Name="PhotoButton" Click="PhotoButton_Click" IsEnabled="False">
                 <Viewbox MaxWidth="40" MaxHeight="40">
                     <SymbolIcon Symbol="Camera"/>
                 </Viewbox>

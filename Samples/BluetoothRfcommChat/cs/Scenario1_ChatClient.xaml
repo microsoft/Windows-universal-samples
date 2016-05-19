@@ -71,6 +71,14 @@
                                         Margin="1"
                                         VariableSizedWrapGrid.ColumnSpan="5"
                                         Click="ConnectButton_Click"/>
+                                <Button x:Name="RequestAccessButton"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        Content="Request Access to Trusted Device"
+                                        Margin="1"
+                                        VariableSizedWrapGrid.ColumnSpan="5"
+                                        Visibility="Collapsed"
+                                        Click="RequestAccessButton_Click"/>
                             </VariableSizedWrapGrid>
 
                             <Border BorderBrush="AntiqueWhite" BorderThickness="1">
