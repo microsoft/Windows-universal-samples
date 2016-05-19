@@ -49,7 +49,7 @@ namespace SDKTemplate
                 if (task.Value.Name == BackgroundTaskSample.SampleBackgroundTaskWithConditionName)
                 {
                     AttachProgressAndCompletedHandlers(task.Value);
-                    BackgroundTaskSample.UpdateBackgroundTaskStatus(BackgroundTaskSample.SampleBackgroundTaskWithConditionName, true);
+                    BackgroundTaskSample.UpdateBackgroundTaskRegistrationStatus(BackgroundTaskSample.SampleBackgroundTaskWithConditionName, true);
                     break;
                 }
             }
@@ -62,14 +62,13 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void RegisterBackgroundTask(object sender, RoutedEventArgs e)
+        private void RegisterBackgroundTask(object sender, RoutedEventArgs e)
         {
             var task = BackgroundTaskSample.RegisterBackgroundTask(BackgroundTaskSample.SampleBackgroundTaskEntryPoint,
                                                                    BackgroundTaskSample.SampleBackgroundTaskWithConditionName,
                                                                    new SystemTrigger(SystemTriggerType.TimeZoneChange, false),
                                                                    new SystemCondition(SystemConditionType.InternetAvailable));
-            await task;
-            AttachProgressAndCompletedHandlers(task.Result);
+            AttachProgressAndCompletedHandlers(task);
             UpdateUI();
         }
 
@@ -101,9 +100,12 @@ namespace SDKTemplate
         /// <param name="e">Arguments of the progress report.</param>
         private void OnProgress(IBackgroundTaskRegistration task, BackgroundTaskProgressEventArgs args)
         {
-            var progress = "Progress: " + args.Progress + "%";
-            BackgroundTaskSample.SampleBackgroundTaskWithConditionProgress = progress;
-            UpdateUI();
+            var ignored = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                var progress = "Progress: " + args.Progress + "%";
+                BackgroundTaskSample.SampleBackgroundTaskWithConditionProgress = progress;
+                UpdateUI();
+            });
         }
 
         /// <summary>

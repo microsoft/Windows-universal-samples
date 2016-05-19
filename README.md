@@ -392,6 +392,14 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
 </table>
 
+### Holographic
+
+<table>
+ <tr>
+  <td><a href="Samples/HolographicSpatialMapping">Holographic spatial mapping</a></td>
+ </tr>
+</table>
+
 ### Identity, security, and encryption
 
 <table>

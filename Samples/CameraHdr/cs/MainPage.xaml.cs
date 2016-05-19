@@ -52,6 +52,9 @@ namespace CameraHdr
         // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
         private static readonly Guid RotationKey = new Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1");
 
+        // Folder in which the captures will be stored (initialized in SetupUiAsync)
+        private StorageFolder _captureFolder = null;
+
         // Prevent the screen from sleeping while the camera is running
         private readonly DisplayRequest _displayRequest = new DisplayRequest();
 
@@ -256,14 +259,15 @@ namespace CameraHdr
             // Retrieve the context (i.e. what capture does this belong to?)
             var context = args.Context as AdvancedCaptureContext;
 
-            Debug.WriteLine("AdvancedCapture_OptionalReferencePhotoCaptured for {0}", context.CaptureFileName);
-
-            // Remove "_HDR" from the name of the capture to create the name of the reference
+            // Remove "_HDR" from the name of the capture to create the name of the reference photo (this is the non-HDR capture)
             var referenceName = context.CaptureFileName.Replace("_HDR", "");
+
+            var file = await _captureFolder.CreateFileAsync(referenceName, CreationCollisionOption.GenerateUniqueName);
+            Debug.WriteLine("AdvancedCapture_OptionalReferencePhotoCaptured for " + context.CaptureFileName + ". Saving to " + file.Path);
 
             using (var frame = args.Frame)
             {
-                await ReencodeAndSavePhotoAsync(frame, referenceName, context.CaptureOrientation);
+                await ReencodeAndSavePhotoAsync(frame, file, context.CaptureOrientation);
             }
         }
 
@@ -278,7 +282,7 @@ namespace CameraHdr
             Debug.WriteLine("AdvancedCapture_AllPhotosCaptured");
         }
 
-        private async void PhotoButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void PhotoButton_Click(object sender, RoutedEventArgs e)
         {
             await TakePhotoInCurrentModeAsync();
         }
@@ -555,21 +559,21 @@ namespace CameraHdr
             {
                 Debug.WriteLine("Taking photo...");
 
-                // Generate a filename based on the current time
+                // Read the current orientation of the camera and the capture time
+                var photoOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
                 var fileName = String.Format("SimplePhoto_{0}.jpg", DateTime.Now.ToString("HHmmss"));
 
-                // Get the orientation of the camera at the time of capture
-                var photoOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
-
                 await _mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream);
-                Debug.WriteLine("Photo taken!");
 
-                await ReencodeAndSavePhotoAsync(stream, fileName, photoOrientation);
+                var file = await _captureFolder.CreateFileAsync(fileName, CreationCollisionOption.GenerateUniqueName);
+                Debug.WriteLine("Photo taken! Saving to " + file.Path);
+
+                await ReencodeAndSavePhotoAsync(stream, file, photoOrientation);
             }
             catch (Exception ex)
             {
                 // File I/O errors are reported as exceptions
-                Debug.WriteLine("Exception when taking a photo: {0}", ex.ToString());
+                Debug.WriteLine("Exception when taking a photo: " + ex.ToString());
             }
         }
 
@@ -591,17 +595,19 @@ namespace CameraHdr
 
                 // Start capture, and pass the context object
                 var capture = await _advancedCapture.CaptureAsync(context);
-                Debug.WriteLine("HDR photo taken! {0}", fileName);
 
                 using (var frame = capture.Frame)
                 {
-                    await ReencodeAndSavePhotoAsync(frame, fileName, photoOrientation);
+                    var file = await _captureFolder.CreateFileAsync(fileName, CreationCollisionOption.GenerateUniqueName);
+                    Debug.WriteLine("HDR photo taken! Saving to " + file.Path);
+
+                    await ReencodeAndSavePhotoAsync(frame, file, photoOrientation);
                 }
             }
             catch (Exception ex)
             {
                 // File I/O errors are reported as exceptions
-                Debug.WriteLine("Exception when taking an HDR photo: {0}", ex.ToString());
+                Debug.WriteLine("Exception when taking an HDR photo: " + ex.ToString());
             }
         }
 
@@ -672,6 +678,10 @@ namespace CameraHdr
             }
             
             RegisterEventHandlers();
+
+            var picturesLibrary = await StorageLibrary.GetLibraryAsync(KnownLibraryId.Pictures);
+            // Fall back to the local app storage if the Pictures Library is not available
+            _captureFolder = picturesLibrary.SaveFolder ?? ApplicationData.Current.LocalFolder;
         }
 
         /// <summary>
@@ -771,24 +781,22 @@ namespace CameraHdr
         /// Applies the given orientation to a photo stream and saves it as a StorageFile
         /// </summary>
         /// <param name="stream">The photo stream</param>
+        /// <param name="file">The StorageFile in which the photo stream will be saved</param>
         /// <param name="photoOrientation">The orientation metadata to apply to the photo</param>
         /// <returns></returns>
-        private static async Task ReencodeAndSavePhotoAsync(IRandomAccessStream stream, string fileName, PhotoOrientation photoOrientation = PhotoOrientation.Normal)
+        private static async Task ReencodeAndSavePhotoAsync(IRandomAccessStream stream, StorageFile file, PhotoOrientation photoOrientation)
         {
             using (var inputStream = stream)
             {
                 var decoder = await BitmapDecoder.CreateAsync(inputStream);
 
-                var file = await KnownFolders.PicturesLibrary.CreateFileAsync(fileName, CreationCollisionOption.GenerateUniqueName);
-
                 using (var outputStream = await file.OpenAsync(FileAccessMode.ReadWrite))
                 {
                     var encoder = await BitmapEncoder.CreateForTranscodingAsync(outputStream, decoder);
-                    
-                    // Set the orientation of the capture
-                    var properties = new BitmapPropertySet { { "System.Photo.Orientation", new BitmapTypedValue(photoOrientation, PropertyType.UInt16) } };
-                    await encoder.BitmapProperties.SetPropertiesAsync(properties);
 
+                    var properties = new BitmapPropertySet { { "System.Photo.Orientation", new BitmapTypedValue(photoOrientation, PropertyType.UInt16) } };
+
+                    await encoder.BitmapProperties.SetPropertiesAsync(properties);
                     await encoder.FlushAsync();
                 }
             }

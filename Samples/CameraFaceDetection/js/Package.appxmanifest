@@ -13,7 +13,7 @@
   <mp:PhoneIdentity PhoneProductId="d73539b4-c2ee-4d29-bc00-4bfd38e96567" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>CameraFaceDetection</DisplayName>
+    <DisplayName>CameraFaceDetection JS Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>images\storelogo-sdk.png</Logo>
   </Properties>

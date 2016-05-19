@@ -13,7 +13,7 @@
   <mp:PhoneIdentity PhoneProductId="5fbda83f-d3b6-4577-a1fe-768211883cd4" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>CameraVideoStabilization</DisplayName>
+    <DisplayName>CameraVideoStabilization JS Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>images\storelogo-sdk.png</Logo>
   </Properties>

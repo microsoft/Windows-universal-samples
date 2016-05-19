@@ -20,6 +20,9 @@
     var Media = Windows.Media;
     var SimpleOrientation = Windows.Devices.Sensors.SimpleOrientation;
     var SimpleOrientationSensor = Windows.Devices.Sensors.SimpleOrientationSensor;
+    var StorageLibrary = Windows.Storage.StorageLibrary;
+    var KnownLibraryId = Windows.Storage.KnownLibraryId;
+    var ApplicationData = Windows.Storage.ApplicationData;
 
     // Receive notifications about rotation of the device and UI and apply any necessary rotation to the preview stream and UI controls
     var oOrientationSensor = SimpleOrientationSensor.getDefault(),
@@ -56,6 +59,9 @@
     // Rotation metadata to apply to the preview stream and recorded videos (MF_MT_VIDEO_ROTATION)
     // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
     var RotationKey = "C380465D-2271-428C-9B83-ECEA3B4A85C1";
+
+    // Folder in which the captures will be stored (initialized in SetupUiAsync)
+    var oCaptureFolder;
 
     // Initialization
     var app = WinJS.Application;
@@ -391,16 +397,18 @@
         console.log("Taking photo...");
 
         return oMediaCapture.capturePhotoToStreamAsync(Windows.Media.MediaProperties.ImageEncodingProperties.createJpeg(), inputStream)
-        .then(function() {
-            console.log("Photo taken!");
-
+        .then(function () {
             var fileName = "SimplePhoto_" + getTimeStr() + ".jpg";
+            return oCaptureFolder.createFileAsync(fileName, Windows.Storage.CreationCollisionOption.GenerateUniqueName)
+        }).then(function(file){
+            console.log("Photo taken! Saving to " + file.path);
             var photoOrientation = convertOrientationToPhotoOrientation(getCameraOrientation());
-            return reencodeAndSavePhotoAsync(inputStream, fileName, photoOrientation);
+            return reencodeAndSavePhotoAsync(inputStream, file, photoOrientation);
         });
     }
 
     function takeHdrPhotoAsync() {
+        var captureFile = null;
         // Take the picture
         console.log("Taking photo...");
 
@@ -409,10 +417,14 @@
         context.insert("fileName", "SimplePhoto_" + getTimeStr() + "_HDR.jpg");
         context.insert("orientation", convertOrientationToPhotoOrientation(getCameraOrientation()));
 
-        return oAdvancedCapture.captureAsync(context)
+        return oCaptureFolder.createFileAsync(fileName, Windows.Storage.CreationCollisionOption.GenerateUniqueName)
+        .then(function (file) {
+            captureFile = file;
+            return oAdvancedCapture.captureAsync(context)
+        })
         .then(function(advancedCapturedPhoto) {
-            console.log("HDR photo taken!");
-            return reencodeAndSavePhotoAsync(advancedCapturedPhoto.frame, context.fileName, context.orientation);
+            console.log("HDR photo taken! Saving to " + captureFile.path);
+            return reencodeAndSavePhotoAsync(advancedCapturedPhoto.frame, captureFile, context.orientation);
         });
     }
 
@@ -448,7 +460,7 @@
     /// <param name="stream">The photo stream</param>
     /// <param name="photoOrientation">The orientation metadata to apply to the photo</param>
     /// <returns></returns>
-    function reencodeAndSavePhotoAsync(inputStream, fileName, orientation) {
+    function reencodeAndSavePhotoAsync(inputStream, file, orientation) {
         var Imaging = Windows.Graphics.Imaging;
         var bitmapDecoder = null,
             bitmapEncoder = null,
@@ -457,8 +469,6 @@
         return Imaging.BitmapDecoder.createAsync(inputStream)
         .then(function (decoder) {
             bitmapDecoder = decoder;
-            return Windows.Storage.KnownFolders.picturesLibrary.createFileAsync(fileName, Windows.Storage.CreationCollisionOption.generateUniqueName);
-        }).then(function (file) {
             return file.openAsync(Windows.Storage.FileAccessMode.readWrite);
         }).then(function (outStream) {
             outputStream = outStream;
@@ -508,14 +518,19 @@
         if (oOrientationSensor != null) {
             oDeviceOrientation = oOrientationSensor.getCurrentOrientation();
         }
+        return StorageLibrary.getLibraryAsync(KnownLibraryId.pictures)
+        .then(function (picturesLibrary) {
+            // Fall back to the local app storage if the Pictures Library is not available
+            oCaptureFolder = picturesLibrary.saveFolder || ApplicationData.current.localFolder;
 
-        // Hide the status bar
-        if (Windows.Foundation.Metadata.ApiInformation.isTypePresent("Windows.UI.ViewManagement.StatusBar")) {
-            return Windows.UI.ViewManagement.StatusBar.getForCurrentView().hideAsync();
-        }
-        else {
-            return WinJS.Promise.as();
-        }
+            // Hide the status bar
+            if (Windows.Foundation.Metadata.ApiInformation.isTypePresent("Windows.UI.ViewManagement.StatusBar")) {
+                return Windows.UI.ViewManagement.StatusBar.getForCurrentView().hideAsync();
+            }
+            else {
+                return WinJS.Promise.as();
+            }
+        })
     }
 
     /// <summary>
@@ -755,12 +770,14 @@
         // Retrieve the context (i.e. what capture does this belong to?)
         var context = args.context;
 
-        console.log("AdvancedCapture_OptionalReferencePhotoCaptured for " + context.fileName);
+        // Remove "_HDR" from the name of the capture to create the name of the reference (this is the non-HDR capture)
+        var fileName = context.fileName.replace("_HDR", "");
 
-        // Remove "_HDR" from the name of the capture to create the name of the reference
-        context.fileName = context.fileName.replace("_HDR", "");
-
-        reencodeAndSavePhotoAsync(args.frame, context.fileName, context.orientation);
+        return oCaptureFolder.createFileAsync(fileName, Windows.Storage.CreationCollisionOption.GenerateUniqueName)
+        .then(function (file) {
+            console.log("AdvancedCapture_OptionalReferencePhotoCaptured for " + context.fileName + ". Saving to " + file.path);
+            return reencodeAndSavePhotoAsync(args.frame, file, context.orientation);
+        })
     }
 
     /// <summary>
