@@ -44,7 +44,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 ### Samples
 
 * [**Calendar** sample](../Calendar)
-* [**DateTimeFormatting** sample](../DatetimeFormatting)
+* [**DateTimeFormatting** sample](../DateTimeFormatting)
 * [**NumberFormatting** sample](../NumberFormatting)
 
 ### Reference

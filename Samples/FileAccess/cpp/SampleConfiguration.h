@@ -74,7 +74,7 @@ namespace SDKTemplate
         void Initialize();
         void ValidateFile();
         void NotifyUserFileNotExist();
-        void HandleFileNotFoundException(Platform::COMException^ e);
+        void HandleIoException(Platform::COMException^ e, Platform::String^ description);
 
     private:
         static Platform::Array<Scenario>^ scenariosInner;

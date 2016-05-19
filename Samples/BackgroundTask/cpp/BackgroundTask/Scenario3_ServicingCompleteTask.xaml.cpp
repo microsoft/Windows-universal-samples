@@ -44,20 +44,15 @@ void ServicingCompleteTask::OnNavigatedTo(NavigationEventArgs^ e)
     //
     // Attach progress and completed handlers to any existing tasks.
     //
-    auto iter = BackgroundTaskRegistration::AllTasks->First();
-    auto hascur = iter->HasCurrent;
-    while (hascur)
+    for (auto pair : BackgroundTaskRegistration::AllTasks)
     {
-        auto cur = iter->Current->Value;
-
-        if (cur->Name == ServicingCompleteTaskName)
+        auto task = pair->Value;
+        if (task->Name == ServicingCompleteTaskName)
         {
-            BackgroundTaskSample::UpdateBackgroundTaskStatus(cur->Name, true);
-            AttachProgressAndCompletedHandlers(cur);
+            BackgroundTaskSample::UpdateBackgroundTaskRegistrationStatus(task->Name, true);
+            AttachProgressAndCompletedHandlers(task);
             break;
         }
-
-        hascur = iter->MoveNext();
     }
 
     UpdateUI();
@@ -69,19 +64,8 @@ void ServicingCompleteTask::OnNavigatedTo(NavigationEventArgs^ e)
 /// <param name="task">The task to attach progress and completed handlers to.</param>
 void ServicingCompleteTask::AttachProgressAndCompletedHandlers(IBackgroundTaskRegistration^ task)
 {
-    auto progress = [this](BackgroundTaskRegistration^ task, BackgroundTaskProgressEventArgs^ args)
-    {
-        auto progress = "Progress: " + args->Progress + "%";
-        BackgroundTaskSample::ServicingCompleteTaskProgress = progress;
-        UpdateUI();
-    };
-    task->Progress += ref new BackgroundTaskProgressEventHandler(progress);
-
-    auto completed = [this](BackgroundTaskRegistration^ task, BackgroundTaskCompletedEventArgs^ args)
-    {
-        UpdateUI();
-    };
-    task->Completed += ref new BackgroundTaskCompletedEventHandler(completed);
+    task->Progress += ref new BackgroundTaskProgressEventHandler(this, &ServicingCompleteTask::OnProgress);
+    task->Completed += ref new BackgroundTaskCompletedEventHandler(this, &ServicingCompleteTask::OnCompleted);
 }
 
 /// <summary>
@@ -108,6 +92,31 @@ void ServicingCompleteTask::RegisterBackgroundTask(Platform::Object^ sender, Win
 void ServicingCompleteTask::UnregisterBackgroundTask(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     BackgroundTaskSample::UnregisterBackgroundTasks(ServicingCompleteTaskName);
+    UpdateUI();
+}
+
+/// <summary>
+/// Handle background task progress.
+/// </summary>
+/// <param name="task">The task that is reporting progress.</param>
+/// <param name="args">Arguments of the progress report.</param>
+void ServicingCompleteTask::OnProgress(BackgroundTaskRegistration^ task, BackgroundTaskProgressEventArgs^ args)
+{
+    Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
+    {
+        auto progress = "Progress: " + args->Progress + "%";
+        BackgroundTaskSample::ServicingCompleteTaskProgress = progress;
+        UpdateUI();
+    }));
+}
+
+/// <summary>
+/// Handle background task completion.
+/// </summary>
+/// <param name="task">The task that is reporting completion.</param>
+/// <param name="args">Arguments of the completion report.</param>
+void ServicingCompleteTask::OnCompleted(BackgroundTaskRegistration^ task, BackgroundTaskCompletedEventArgs^ args)
+{
     UpdateUI();
 }
 

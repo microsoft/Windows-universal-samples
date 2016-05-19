@@ -14,7 +14,7 @@
     function writeText() {
         if (SdkSample.sampleFile !== null) {
             var textArea = document.getElementById("textarea");
-            var userContent = textArea.innerText;
+            var userContent = textArea.value;
             if (userContent !== "") {
                 Windows.Storage.FileIO.writeTextAsync(SdkSample.sampleFile, userContent).done(function () {
                     WinJS.log && WinJS.log("The following text was written to '" + SdkSample.sampleFile.name + "':\n" + userContent, "sample", "status");

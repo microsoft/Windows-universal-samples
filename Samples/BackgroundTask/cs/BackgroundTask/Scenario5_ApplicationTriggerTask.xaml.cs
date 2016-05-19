@@ -51,7 +51,7 @@ namespace SDKTemplate
                 if (task.Value.Name == BackgroundTaskSample.ApplicationTriggerTaskName)
                 {
                     AttachProgressAndCompletedHandlers(task.Value);
-                    BackgroundTaskSample.UpdateBackgroundTaskStatus(BackgroundTaskSample.ApplicationTriggerTaskName, true);
+                    BackgroundTaskSample.UpdateBackgroundTaskRegistrationStatus(BackgroundTaskSample.ApplicationTriggerTaskName, true);
                     break;
                 }
             }
@@ -64,7 +64,7 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void RegisterBackgroundTask(object sender, RoutedEventArgs e)
+        private void RegisterBackgroundTask(object sender, RoutedEventArgs e)
         {
             trigger = new ApplicationTrigger();
 
@@ -72,8 +72,7 @@ namespace SDKTemplate
                                                                    BackgroundTaskSample.ApplicationTriggerTaskName,
                                                                    trigger,
                                                                    null);
-            await task;
-            AttachProgressAndCompletedHandlers(task.Result);
+            AttachProgressAndCompletedHandlers(task);
             UpdateUI();
         }
 
@@ -123,9 +122,12 @@ namespace SDKTemplate
         /// <param name="e">Arguments of the progress report.</param>
         private void OnProgress(IBackgroundTaskRegistration task, BackgroundTaskProgressEventArgs args)
         {
-            var progress = "Progress: " + args.Progress + "%";
-            BackgroundTaskSample.ApplicationTriggerTaskProgress = progress;
-            UpdateUI();
+            var ignored = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                var progress = "Progress: " + args.Progress + "%";
+                BackgroundTaskSample.ApplicationTriggerTaskProgress = progress;
+                UpdateUI();
+            });
         }
 
         /// <summary>
