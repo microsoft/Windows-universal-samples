@@ -16,6 +16,7 @@ $httpFirewallRuleName = "HttpClientSample - HTTP 80"
 $httpsFirewallRuleName = "HttpClientSample - HTTPS 443"
 $settingsFile = "$scriptPath\HttpClientSampleScriptSettings"
 
+
 # Check if running as Administrator.
 $windowsIdentity = [System.Security.Principal.WindowsIdentity]::GetCurrent()
 $principal = New-Object System.Security.Principal.WindowsPrincipal($windowsIdentity)
@@ -45,6 +46,9 @@ Remove-NetFirewallRule -DisplayName $httpsFirewallRuleName > $null
 
 "Removing certificate with thumbprint " + $settings.certificateThumbprint
 gci cert:\ -Recurse | where {$_.Thumbprint -eq $settings.certificateThumbprint } | Remove-Item
+
+# Import necessary modules
+Import-Module WebAdministration
 
 if ($settings.webBindingAdded) {
     Remove-WebBinding -Name "Default Web Site" -IP "*" -Port 443 -Protocol https

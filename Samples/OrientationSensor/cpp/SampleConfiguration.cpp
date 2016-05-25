@@ -20,6 +20,7 @@ using namespace Windows::UI::Xaml::Controls;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
+    { "Choose orientation sensor", "SDKTemplate.Scenario0_Choose" },
     { "Data Events", "SDKTemplate.Scenario1_DataEvents" },
     { "Polling", "SDKTemplate.Scenario2_Polling" },
     { "Calibration", "SDKTemplate.Scenario3_Calibration" }

@@ -8,6 +8,7 @@
     <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Scenario0_Choose.xaml.cpp" />
     <ClCompile Include="Scenario1_DataEvents.xaml.cpp" />
     <ClCompile Include="Scenario2_ShakeEvents.xaml.cpp" />
     <ClCompile Include="Scenario3_Polling.xaml.cpp" />
@@ -19,6 +20,7 @@
     <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
     <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Scenario0_Choose.xaml.h" />
     <ClInclude Include="Scenario1_DataEvents.xaml.h" />
     <ClInclude Include="Scenario2_ShakeEvents.xaml.h" />
     <ClInclude Include="Scenario3_Polling.xaml.h" />
@@ -53,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
+    <Page Include="..\shared\Scenario0_Choose.xaml" />
     <Page Include="..\shared\Scenario1_DataEvents.xaml" />
     <Page Include="..\shared\Scenario2_ShakeEvents.xaml" />
     <Page Include="..\shared\Scenario3_Polling.xaml" />

@@ -11,8 +11,8 @@
     <AssemblyName>SimpleInk</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14295.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14295.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -113,6 +113,12 @@
     <Compile Include="Scenario3.xaml.cs">
       <DependentUpon>Scenario3.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario4.xaml.cs">
+      <DependentUpon>Scenario4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario5.xaml.cs">
+      <DependentUpon>Scenario5.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -146,6 +152,14 @@
     <Page Include="Scenario3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scenario4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scenario5.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

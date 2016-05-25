@@ -19,11 +19,14 @@
             scenarioEnable.addEventListener("click", enableGetReadingScenario, false);
             scenarioDisable.addEventListener("click", disableGetReadingScenario, false);
 
-            sensor = Windows.Devices.Sensors.OrientationSensor.getDefault();
+            var readingType = Windows.Devices.Sensors.SensorReadingType[SdkSample.sensorReadingType];
+            var optimizationGoal = Windows.Devices.Sensors.SensorOptimizationGoal[SdkSample.sensorOptimizationGoal];
+            sensor = Windows.Devices.Sensors.OrientationSensor.getDefault(readingType, optimizationGoal);
             if (sensor) {
+                WinJS.log && WinJS.log(SdkSample.sensorDescription() + " is ready", "sample", "status");
                 scenarioEnable.disabled = false;
             } else {
-                WinJS.log && WinJS.log("No orientation sensor found", "sample", "error");
+                WinJS.log && WinJS.log(SdkSample.sensorDescription() + " not found", "sample", "error");
             }
         },
         unload: function () {

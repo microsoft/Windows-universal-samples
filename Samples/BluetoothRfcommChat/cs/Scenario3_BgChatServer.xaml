@@ -52,7 +52,7 @@
                     <TextBlock Grid.ColumnSpan="2" Style="{StaticResource BaseTextBlockStyle}" TextWrapping="Wrap">Enter a message to send:</TextBlock>
                     <TextBox x:Name="MessageTextBox" Grid.Column="0" Grid.Row="1" Margin="0,10,10,0" KeyDown="KeyboardKey_Pressed"/>
                     <Button x:Name="SendButton" Grid.Column="1" Grid.Row="1" Content="Send" Margin="0,10,10,0" Click="SendButton_Click"/>
-                    <ListBox x:Name="ConversationListBox" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="300" Margin="0,10,0,0" ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
+                    <ListBox x:Name="ConversationListBox" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight ="300" Margin="0,10,0,50" ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
                 </Grid>
             </ScrollViewer>
         </Grid>

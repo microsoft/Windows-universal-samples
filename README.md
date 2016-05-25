@@ -146,48 +146,53 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/XamlAutoSuggestBox">AutoSuggestBox migration</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/XamlBottomUpList">Bottom-up list (XAML)</a></td>
   <td><a href="Samples/Clipboard">Clipboard</a></td>
   <td><a href="Samples/XamlCommanding">Commanding</a></td>
-  <td><a href="Samples/ContextMenu">Context menu</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/ContextMenu">Context menu</a></td>
   <td><a href="Samples/XamlContextMenu">Context menu (XAML)</a></td>
   <td><a href="Samples/XamlDataVirtualization">Data virtualization</a></td>
-  <td><a href="Samples/UserSelection">Disabling selection</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/UserSelection">Disabling selection</a></td>
   <td><a href="Samples/DisplayOrientation">Display orientation</a></td>
   <td><a href="Samples/DWriteTextLayoutCloudFont">Downloadable fonts (DirectWrite)</a></td>
-  <td><a href="Samples/XamlCloudFontIntegration">Downloadable fonts (XAML)</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/XamlCloudFontIntegration">Downloadable fonts (XAML)</a></td>
   <td><a href="Samples/XamlDragAndDrop">Drag and drop</a></td>
   <td><a href="Samples/XamlFocusVisuals">Focus visuals</a></td>
-  <td><a href="Samples/FullScreenMode">Full screen mode</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/FullScreenMode">Full screen mode</a></td>
+  <td><a href="Samples/XamlGamepadNavigation">Gamepad-style navigation (XAML)</a></td>
   <td><a href="Samples/DWriteLineSpacingModes">Line spacing (DirectWrite)</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/XamlListView">ListView and GridView</a></td>
   <td><a href="Samples/LockScreenApps">Lock screen apps</a></td>
+  <td><a href="Samples/MessageDialog">Message dialog</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/MessageDialog">Message dialog</a></td>
   <td><a href="Samples/MultipleViews">Multiple views</a></td>
   <td><a href="Samples/OCR">OCR</a></td>
+  <td><a href="Samples/Printing">Printing</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/Printing">Printing</a></td>
   <td><a href="Samples/XamlPullToRefresh">Pull-to-refresh</a></td>
   <td><a href="Samples/XamlResponsiveTechniques">Responsiveness techniques</a></td>
+  <td><a href="Samples/DpiScaling">Scaling according to DPI</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/DpiScaling">Scaling according to DPI</a></td>
   <td><a href="Samples/SplashScreen">Splash screen</a></td>
   <td><a href="Samples/XamlStateTriggers">State triggers</a></td>
+  <td><a href="Samples/XamlTailoredMultipleViews">Tailored multiple views</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/XamlTailoredMultipleViews">Tailored multiple views</a></td>
   <td><a href="Samples/TitleBar">Title bar</a></td>
+  <td><a href="Samples/XamlTreeView">TreeView (XAML)</a></td>
   <td><a href="Samples/XamlUIBasics">UI basics (XAML)</a></td>
  </tr>
  <tr>
@@ -275,42 +280,42 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/BluetoothAdvertisement">Bluetooth advertisement</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/CameraBarcodeScanner">Camera barcode scanner</a></td>
   <td><a href="Samples/CashDrawer">Cash drawer</a></td>
   <td><a href="Samples/Compass">Compass</a></td>
-  <td><a href="Samples/CustomHidDeviceAccess">Custom HID device</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/CustomHidDeviceAccess">Custom HID device</a></td>
   <td><a href="Samples/CustomSensors">Custom sensors</a></td>
   <td><a href="Samples/CustomSerialDeviceAccess">Custom serial device</a></td>
-  <td><a href="Samples/CustomUsbDeviceAccess">Custom USB device</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/CustomUsbDeviceAccess">Custom USB device</a></td>
   <td><a href="Samples/DeviceEnumerationAndPairing">Device enumeration and pairing</a></td>
   <td><a href="Samples/IoT-GPIO">General Purpose Input/Output (GPIO)</a></td>
-  <td><a href="Samples/Gyrometer">Gyrometer</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/Gyrometer">Gyrometer</a></td>
   <td><a href="Samples/Inclinometer">Inclinometer</a></td>
   <td><a href="Samples/IoT-I2C">Inter-Integrated Circuit (I2C)</a></td>
-  <td><a href="Samples/LampDevice">Lamp device</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/LampDevice">Lamp device</a></td>
   <td><a href="Samples/LightSensor">Light sensor</a></td>
   <td><a href="Samples/MagneticStripeReader">Magnetic stripe reader</a></td>
-  <td><a href="Samples/Nfc">Near field communication (NFC)</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/Nfc">Near field communication (NFC)</a></td>
   <td><a href="Samples/NfcProvisioner">NFC enterprise provisioner</a></td>
   <td><a href="Samples/OrientationSensor">Orientation sensor</a></td>
-  <td><a href="Samples/Pedometer">Pedometer</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/Pedometer">Pedometer</a></td>
   <td><a href="Samples/PosPrinter">POS printer</a></td>
   <td><a href="Samples/ProximitySensor">Proximity sensor</a></td>
-  <td><a href="Samples/RelativeInclinometer">Relative inclinometer</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/RelativeOrientationSensor">Relative orientation sensor</a></td>
+  <td><a href="Samples/RelativeInclinometer">Relative inclinometer</a></td>
   <td><a href="Samples/SerialArduino">Serial Arduino</a></td>
   <td><a href="Samples/IoT-SPI">Serial Peripheral Interface (SPI)</a></td>
  </tr>
@@ -376,17 +381,16 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 
 <table>
  <tr>
-  <td><a href="Samples/XamlAnimatedGif">Animated GIF playback (XAML)</a></td>
   <td><a href="Samples/AnimationLibrary">Animation library (HTML)</a></td>
   <td><a href="Samples/AnimationMetrics">Animation metrics</a></td>
+  <td><a href="Samples/CompositionVisual">Composition visual without framework</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/CompositionVisual">Composition visual without framework</a></td>
   <td><a href="Samples/D2DCustomEffects">Direct2D custom image effects</a></td>
   <td><a href="Samples/D2DGradientMesh">Direct2D gradient mesh</a></td>
+  <td><a href="Samples/EfficientAnimations">Efficient animations (HTML)</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/EfficientAnimations">Efficient animations (HTML)</a></td>
   <td><a href="Samples/XamlTransform3DAnimations">Transform3D animations</a></td>
   <td><a href="Samples/XamlTransform3DParallax">Transform3D parallax</a></td>
  </tr>
@@ -421,9 +425,10 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/SmartCard">Smart cards</a></td>
   <td><a href="Samples/UserInfo">User information</a></td>
-  <td><a href="Samples/UserConsentVerifier">UserConsentVerifier</a></td>
+  <td><a href="Samples/UserCertificateStore">UserCertificateStore</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/UserConsentVerifier">UserConsentVerifier</a></td>
   <td><a href="Samples/WebAccountManagement">Web account management</a></td>
   <td><a href="Samples/WebAuthenticationBroker">WebAuthenticationBroker</a></td>
  </tr>
@@ -434,10 +439,11 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 <table>
  <tr>
   <td><a href="Samples/AssociationLaunching">Association launching</a></td>
+  <td><a href="Samples/BackgroundActivation">Background activation</a></td>
   <td><a href="Samples/BackgroundTask">Background task</a></td>
-  <td><a href="Samples/ExtendedExecution">Extended execution</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/ExtendedExecution">Extended execution</a></td>
   <td><a href="Samples/BasicSuspension">Suspend and resume</a></td>
  </tr>
 </table>

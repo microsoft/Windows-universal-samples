@@ -45,8 +45,9 @@ namespace SDKTemplate
         void UpdateVisualState();
         void SetBusy(bool value);
         Concurrency::task<void> StartAsync();
-        Concurrency::task<void> StopAsync();
-
+        void OnServerCustomValidationRequested(
+            Windows::Networking::Sockets::StreamWebSocket^ sender,
+            Windows::Networking::Sockets::WebSocketServerCustomValidationRequestedEventArgs^ args);
         void StartReceiveData(Windows::Networking::Sockets::StreamWebSocket^ activeSocket);
         void ReceiveDataLoop(
             Windows::Networking::Sockets::StreamWebSocket^ activeSocket,
@@ -58,6 +59,7 @@ namespace SDKTemplate
             Windows::Storage::Streams::IBuffer^ sendBuffer,
             UINT32 bytesSentSoFar);
 
+        Concurrency::task<void> StopAsync();
         void OnClosed(Windows::Networking::Sockets::IWebSocket^ sender, Windows::Networking::Sockets::WebSocketClosedEventArgs^ args);
         void CloseSocket();
         void AppendOutputLine(Platform::String^ value);

@@ -12,5 +12,6 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Standard Options", "SDKTemplate.Scenario2StandardOptions" },
     { "Custom Options", "SDKTemplate.Scenario3CustomOptions" },
     { "Page Range", "SDKTemplate.Scenario4PageRange" },
-    { "Photos", "SDKTemplate.Scenario5Photos" }
+    { "Photos", "SDKTemplate.Scenario5Photos" },
+    { "Disable Preview", "SDKTemplate.Scenario6DisablePreview" }
 };

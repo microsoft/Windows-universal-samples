@@ -17,6 +17,7 @@ using namespace SDKTemplate;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
+    { "Choose accelerometer", "SDKTemplate.Scenario0_Choose" },
     { "Data Events", "SDKTemplate.Scenario1_DataEvents" },
     { "Shake Events", "SDKTemplate.Scenario2_ShakeEvents" },
     { "Polling", "SDKTemplate.Scenario3_Polling" },

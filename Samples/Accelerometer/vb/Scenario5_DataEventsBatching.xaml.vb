@@ -29,7 +29,7 @@ Namespace Global.SDKTemplate
         End Sub
 
         Protected Overrides Sub OnNavigatedTo(e As NavigationEventArgs)
-            accelerometer = Accelerometer.GetDefault()
+            accelerometer = Accelerometer.GetDefault(rootPage.AccelerometerReadingType)
             If accelerometer IsNot Nothing Then
                 ' Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
                 ' This value will be used later to activate the sensor.
@@ -38,9 +38,10 @@ Namespace Global.SDKTemplate
                 Dim maxLatency As UInteger = accelerometer.MaxBatchSize * desiredReportInterval
                 desiredReportLatency = Math.Min(maxLatency, 10000)
 
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType.ToString & " accelerometer ready", NotifyType.StatusMessage)
                 ScenarioEnableButton.IsEnabled = True
             Else
-                rootPage.NotifyUser("No accelerometer found", NotifyType.ErrorMessage)
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType.ToString & " accelerometer not found", NotifyType.ErrorMessage)
             End If
         End Sub
 

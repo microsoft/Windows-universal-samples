@@ -214,15 +214,29 @@ namespace PrintSample
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (PrintManager.IsSupported())
+            {
+                // Tell the user how to print
+                MainPage.Current.NotifyUser("Print contract registered with customization, use the Print button to print.", NotifyType.StatusMessage);
+            }
+            else
+            {
+                // Remove the print button
+                InvokePrintingButton.Visibility = Visibility.Collapsed;
+
+                // Inform user that Printing is not supported
+                MainPage.Current.NotifyUser("Printing is not supported.", NotifyType.ErrorMessage);
+
+                // Printing-related event handlers will never be called if printing
+                // is not supported, but it's okay to register for them anyway.
+            }
+
             // Initalize common helper class and register for printing
             printHelper = new CustomOptionsPrintHelper(this);
             printHelper.RegisterForPrinting();
 
             // Initialize print content for this scenario
             printHelper.PreparePrintContent(new PageToPrint());
-
-            // Tell the user how to print
-            MainPage.Current.NotifyUser("Print contract registered with customization, use the Print button to print.", NotifyType.StatusMessage);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
