@@ -36,14 +36,15 @@ namespace SDKTemplate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            _accelerometer = Accelerometer.GetDefault();
+            _accelerometer = Accelerometer.GetDefault(rootPage.AccelerometerReadingType);
             if (_accelerometer != null)
             {
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType + " accelerometer ready", NotifyType.StatusMessage);
                 ScenarioEnableButton.IsEnabled = true;
             }
             else
             {
-                rootPage.NotifyUser("No accelerometer found", NotifyType.ErrorMessage);
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType + " accelerometer not found", NotifyType.ErrorMessage);
             }
         }
 

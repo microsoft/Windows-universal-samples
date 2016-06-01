@@ -48,11 +48,12 @@ void Scenario2_Polling::OnNavigatedTo(NavigationEventArgs^ e)
         dispatcherTimer->Interval = span;
         dispatcherTimer->Tick += ref new Windows::Foundation::EventHandler<Object^>(this, &Scenario2_Polling::DisplayCurrentReading);
 
+        rootPage->NotifyUser(rootPage->SensorDescription + " is ready", NotifyType::StatusMessage);
         ScenarioEnableButton->IsEnabled = true;
     }
     else
     {
-        rootPage->NotifyUser("No orientation sensor found", NotifyType::ErrorMessage);
+        rootPage->NotifyUser(rootPage->SensorDescription + " not found", NotifyType::ErrorMessage);
     }
 }
 

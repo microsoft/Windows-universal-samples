@@ -26,7 +26,7 @@ namespace SimpleInk
     /// - Load/Save ink files
     /// - Usage of drawing attributes
     /// - Input type switching to enable/disable touch
-    /// - Pen tip transform, highlighter and different pen colors and sizes
+    /// - Pen tip transform, highlighter, pencil, and different pen colors and sizes
     /// </summary>
     public sealed partial class Scenario1 : Page
     {
@@ -117,6 +117,12 @@ namespace SimpleInk
 
                 if (value == "Ballpoint")
                 {
+                    if (drawingAttributes.Kind != InkDrawingAttributesKind.Default) 
+                    {
+                        var newDrawingAttributes = new InkDrawingAttributes();
+                        newDrawingAttributes.Color = drawingAttributes.Color;
+                        drawingAttributes = newDrawingAttributes;
+                    }
                     drawingAttributes.Size = new Size(penSize, penSize);
                     drawingAttributes.PenTip = PenTipShape.Circle;
                     drawingAttributes.DrawAsHighlighter = false;
@@ -124,14 +130,26 @@ namespace SimpleInk
                 }
                 else if (value == "Highlighter")
                 {
+                    if (drawingAttributes.Kind != InkDrawingAttributesKind.Default)
+                    {
+                        var newDrawingAttributes = new InkDrawingAttributes();
+                        newDrawingAttributes.Color = drawingAttributes.Color;
+                        drawingAttributes = newDrawingAttributes;
+                    }
                     // Make the pen rectangular for highlighter
                     drawingAttributes.Size = new Size(penSize, penSize * 2);
                     drawingAttributes.PenTip = PenTipShape.Rectangle;
                     drawingAttributes.DrawAsHighlighter = true;
                     drawingAttributes.PenTipTransform = System.Numerics.Matrix3x2.Identity;
                 }
-                if (value == "Calligraphy")
+                else if (value == "Calligraphy")
                 {
+                    if (drawingAttributes.Kind != InkDrawingAttributesKind.Default)
+                    {
+                        var newDrawingAttributes = new InkDrawingAttributes();
+                        newDrawingAttributes.Color = drawingAttributes.Color;
+                        drawingAttributes = newDrawingAttributes;
+                    }
                     drawingAttributes.Size = new Size(penSize, penSize * 2);
                     drawingAttributes.PenTip = PenTipShape.Rectangle;
                     drawingAttributes.DrawAsHighlighter = false;
@@ -140,17 +158,25 @@ namespace SimpleInk
                     double radians = 45.0 * Math.PI / 180;
                     drawingAttributes.PenTipTransform = System.Numerics.Matrix3x2.CreateRotation((float)radians);
                 }
+                else if (value == "Pencil")
+                {
+                    if (drawingAttributes.Kind != InkDrawingAttributesKind.Pencil)
+                    {
+                        var newDrawingAttributes = InkDrawingAttributes.CreateForPencil();
+                        newDrawingAttributes.Color = drawingAttributes.Color;
+                        newDrawingAttributes.Size = drawingAttributes.Size;
+                        drawingAttributes = newDrawingAttributes;
+                    }
+                }
                 inkCanvas.InkPresenter.UpdateDefaultDrawingAttributes(drawingAttributes);
             }
         }
-
 
         void OnClear(object sender, RoutedEventArgs e)
         {
             inkCanvas.InkPresenter.StrokeContainer.Clear();
             rootPage.NotifyUser("Cleared Canvas", NotifyType.StatusMessage);
         }
-
 
         async void OnSaveAsync(object sender, RoutedEventArgs e)
         {

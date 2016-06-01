@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: NetworkingAndWebServices 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620551
 --->
@@ -27,12 +27,13 @@ Scenario 7: Use HTTP POST command to upload a stream - use progress indicator an
 
 Scenario 8: Use HTTP POST command to upload custom content
 
-Scenario 9-11: Query for cookies, set new cookies and delete existing cookies
-
-Scenario 12: Use a filter to adapt download behavior based on whether the device is on a metered network connection or not
+Scenario 9-12: Query for cookies, set new cookies, delete existing cookies, and disable cookies
 
 Scenario 13: Use a filter to retry HTTP requests if required
 
+Scenario 14: Use a filter to adapt download behavior based on whether the device is on a metered network connection or not
+
+Scenario 15: Validate the server certificate
 
 **Note**  This sample by default requires network access using the loopback interface.
 
@@ -107,11 +108,11 @@ For more information on network capabilities, see [How to set network capabiliti
 
 ## System requirements
 
-**Client:** Windows 10
+**Client:** Windows 10 version 1604 preview
 
 **Server:** Windows Server 2016 Technical Preview
 
-**Phone:** Windows 10
+**Phone:** Windows 10 version 1604 preview
 
 ## Build the sample
 

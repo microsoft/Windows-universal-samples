@@ -34,14 +34,15 @@ Scenario1_DataEvents::Scenario1_DataEvents()
 
 void Scenario1_DataEvents::OnNavigatedTo(NavigationEventArgs^ e)
 {
-    sensor = OrientationSensor::GetDefault();
+    sensor = OrientationSensor::GetDefault(rootPage->SensorReadingType, rootPage->SensorOptimizationGoal);
     if (sensor != nullptr)
     {
+        rootPage->NotifyUser(rootPage->SensorDescription + " is ready", NotifyType::StatusMessage);
         ScenarioEnableButton->IsEnabled = true;
     }
     else
     {
-        rootPage->NotifyUser("No orientation sensor found", NotifyType::ErrorMessage);
+        rootPage->NotifyUser(rootPage->SensorDescription + " not found", NotifyType::ErrorMessage);
     }
 }
 

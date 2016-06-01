@@ -18,10 +18,11 @@ namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        public const string FEATURE_NAME = "Accelerometer";
+        public const string FEATURE_NAME = "Accelerometer C# Sample";
 
         List<Scenario> scenarios = new List<Scenario>
         {
+            new Scenario() { Title = "Choose accelerometer", ClassType = typeof(Scenario0_Choose) },
             new Scenario() { Title = "Data events", ClassType = typeof(Scenario1_DataEvents) },
             new Scenario() { Title = "Shake events", ClassType = typeof(Scenario2_ShakeEvents) },
             new Scenario() { Title = "Polling", ClassType = typeof(Scenario3_Polling) },
@@ -34,6 +35,8 @@ namespace SDKTemplate
             textBlock.Text = string.Format("X: {0,5:0.00}, Y: {1,5:0.00}, Z: {2,5:0.00}",
                 reading.AccelerationX, reading.AccelerationY, reading.AccelerationZ);
         }
+
+        public AccelerometerReadingType AccelerometerReadingType { get; set; } = AccelerometerReadingType.Standard;
     }
 
     public class Scenario
