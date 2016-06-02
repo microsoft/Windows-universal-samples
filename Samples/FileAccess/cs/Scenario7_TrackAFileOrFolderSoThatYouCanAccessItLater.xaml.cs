@@ -116,14 +116,15 @@ namespace SDKTemplate
             {
                 if (rootPage.mruToken != null)
                 {
-                    try
+                    // When the MRU becomes full, older entries are automatically deleted, so check if the
+                    // token is still valid before using it.
+                    if (StorageApplicationPermissions.MostRecentlyUsedList.ContainsItem(rootPage.mruToken))
                     {
                         // Open the file via the token that was stored when adding this file into the MRU list
                         file = await StorageApplicationPermissions.MostRecentlyUsedList.GetFileAsync(rootPage.mruToken);
                     }
-                    catch (ArgumentException)
+                    else
                     {
-                        // When the MRU becomes full, older entries are automatically deleted.
                         rootPage.NotifyUser("The token is no longer valid.", NotifyType.ErrorMessage);
                     }
                 }
@@ -137,6 +138,7 @@ namespace SDKTemplate
                 if (rootPage.falToken != null)
                 {
                     // Open the file via the token that was stored when adding this file into the FAL list.
+                    // The token remains valid until we explicitly remove it.
                     file = await StorageApplicationPermissions.FutureAccessList.GetFileAsync(rootPage.falToken);
                 }
                 else

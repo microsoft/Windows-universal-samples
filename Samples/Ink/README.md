@@ -37,13 +37,11 @@ Specifically, this sample covers using the [**Windows.UI.Input.Inking**](http://
     -   Use **Save** and **Load** to read and write Ink Serialized Format (ISF) files to the Libraries or Pictures folder or both.
 -   All buttons and menu choices can be activated with mouse, pen, or touch.
 
-To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
-
-[Getting started with apps](https://dev.windows.com/getstarted)
 
 [Responding to pen and stylus interactions](http://msdn.microsoft.com/library/windows/apps/hh700425)
 

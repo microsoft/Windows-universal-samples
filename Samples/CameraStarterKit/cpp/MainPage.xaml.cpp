@@ -384,29 +384,29 @@ task<void> MainPage::ReencodeAndSavePhotoAsync(Streams::IRandomAccessStream^ str
 {
     // Using this state variable to pass multiple values through our task chain
     ReencodeState^ state = ref new ReencodeState();
-    state->_orientation = photoOrientation;
+    state->Orientation = photoOrientation;
 
     return create_task(BitmapDecoder::CreateAsync(stream))
         .then([state](BitmapDecoder^ decoder)
     {
-        state->_decoder = decoder;
+        state->Decoder = decoder;
         return create_task(KnownFolders::PicturesLibrary->CreateFileAsync("SimplePhoto.jpg", CreationCollisionOption::GenerateUniqueName));
     }).then([](StorageFile^ file)
     {
         return create_task(file->OpenAsync(FileAccessMode::ReadWrite));
     }).then([state](Streams::IRandomAccessStream^ outputStream)
     {
-        return create_task(BitmapEncoder::CreateForTranscodingAsync(outputStream, state->_decoder));
+        return create_task(BitmapEncoder::CreateForTranscodingAsync(outputStream, state->Decoder));
     }).then([state](BitmapEncoder^ encoder)
     {
-        state->_encoder = encoder;
+        state->Encoder = encoder;
         auto properties = ref new Windows::Graphics::Imaging::BitmapPropertySet();
-        properties->Insert("System.Photo.Orientation", ref new BitmapTypedValue((unsigned short)state->_orientation, Windows::Foundation::PropertyType::UInt16));
+        properties->Insert("System.Photo.Orientation", ref new BitmapTypedValue((unsigned short)state->Orientation, Windows::Foundation::PropertyType::UInt16));
 
-        return create_task(state->_encoder->BitmapProperties->SetPropertiesAsync(properties));
+        return create_task(state->Encoder->BitmapProperties->SetPropertiesAsync(properties));
     }).then([state]()
     {
-        return state->_encoder->FlushAsync();
+        return state->Encoder->FlushAsync();
     });
 }
 

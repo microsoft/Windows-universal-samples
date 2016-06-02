@@ -18,9 +18,9 @@ namespace CameraHdr
     ref class ReencodeState sealed
     {
     internal:
-        Windows::Graphics::Imaging::BitmapDecoder^ _decoder;
-        Windows::Graphics::Imaging::BitmapEncoder^ _encoder;
-        Windows::Storage::FileProperties::PhotoOrientation _orientation;
+        Windows::Graphics::Imaging::BitmapDecoder^ Decoder;
+        Windows::Graphics::Imaging::BitmapEncoder^ Encoder;
+        Windows::Storage::FileProperties::PhotoOrientation Orientation;
     };
 
     /// <summary>
@@ -29,8 +29,8 @@ namespace CameraHdr
     ref class AdvancedCaptureContext
     {
     internal:
-        Platform::String^ _captureFileName;
-        Windows::Storage::FileProperties::PhotoOrientation _captureOrientation;
+        Platform::String^ CaptureFileName;
+        Windows::Storage::FileProperties::PhotoOrientation CaptureOrientation;
     };
 
     public ref class MainPage sealed
