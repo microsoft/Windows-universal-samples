@@ -447,18 +447,18 @@ task<void> MainPage::TakeHdrPhotoAsync()
     auto context = ref new AdvancedCaptureContext();
 
     // Create file based off the current time
-    context->_captureFileName = L"SimplePhoto_" + GetTimeStr() + L".jpg";;
-    context->_captureOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
+    context->CaptureFileName = L"SimplePhoto_" + GetTimeStr() + L".jpg";
+    context->CaptureOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
 
     return create_task(_advancedCapture->CaptureAsync(context))
         .then([this, context](Capture::AdvancedCapturedPhoto^ photo)
     {
-        context->_photo = photo;
-        return create_task(_captureFolder->CreateFileAsync(context->_captureFileName, CreationCollisionOption::GenerateUniqueName));
+        context->Photo = photo;
+        return create_task(_captureFolder->CreateFileAsync(context->CaptureFileName, CreationCollisionOption::GenerateUniqueName));
     }).then([this, context](StorageFile^ file)
     {
         WriteLine("HDR photo taken! Saving to " + file->Path);
-        return ReencodeAndSavePhotoAsync(context->_photo->Frame, file, context->_captureOrientation);
+        return ReencodeAndSavePhotoAsync(context->Photo->Frame, file, context->CaptureOrientation);
     }).then([this](task<void> previousTask)
     {
         try
@@ -516,27 +516,27 @@ task<void> MainPage::ReencodeAndSavePhotoAsync(Streams::IRandomAccessStream^ str
 {
     // Using this state variable to pass multiple values through our task chain
     ReencodeState^ state = ref new ReencodeState();
-    state->_file = file;
-    state->_orientation = photoOrientation;
+    state->File = file;
+    state->Orientation = photoOrientation;
 
     return create_task(BitmapDecoder::CreateAsync(stream))
         .then([state](BitmapDecoder^ decoder)
     {
-        state->_decoder = decoder;
-        return create_task(state->_file->OpenAsync(FileAccessMode::ReadWrite));
+        state->Decoder = decoder;
+        return create_task(state->File->OpenAsync(FileAccessMode::ReadWrite));
     }).then([state](Streams::IRandomAccessStream^ outputStream)
     {
-        return create_task(BitmapEncoder::CreateForTranscodingAsync(outputStream, state->_decoder));
+        return create_task(BitmapEncoder::CreateForTranscodingAsync(outputStream, state->Decoder));
     }).then([state](BitmapEncoder^ encoder)
     {
-        state->_encoder = encoder;
+        state->Encoder = encoder;
         auto properties = ref new Windows::Graphics::Imaging::BitmapPropertySet();
-        properties->Insert("System.Photo.Orientation", ref new BitmapTypedValue((unsigned short)state->_orientation, Windows::Foundation::PropertyType::UInt16));
+        properties->Insert("System.Photo.Orientation", ref new BitmapTypedValue((unsigned short)state->Orientation, Windows::Foundation::PropertyType::UInt16));
 
-        return create_task(state->_encoder->BitmapProperties->SetPropertiesAsync(properties));
+        return create_task(state->Encoder->BitmapProperties->SetPropertiesAsync(properties));
     }).then([state]()
     {
-        return state->_encoder->FlushAsync();
+        return state->Encoder->FlushAsync();
     });
 }
 
@@ -1020,17 +1020,17 @@ void MainPage::AdvancedCapture_OptionalReferencePhotoCaptured(Capture::AdvancedP
 {
     // Retrieve the context (i.e. what capture does this belong to?)
     auto context = static_cast<AdvancedCaptureContext^>(args->Context);
-    WriteLine("AdvancedCapture_OptionalReferencePhotoCaptured for " + context->_captureFileName);
+    WriteLine("AdvancedCapture_OptionalReferencePhotoCaptured for " + context->CaptureFileName);
 
     // Remove "_HDR" from the name of the capture to create the name of the reference photo (this is the non-HDR capture)
     std::wstringstream fileName;
-    fileName << context->_captureFileName->Data();
+    fileName << context->CaptureFileName->Data();
     StringReplace(fileName.str(), std::wstring(L"_HDR"), std::wstring(L""));
 
     create_task(_captureFolder->CreateFileAsync(ref new String(fileName.str().c_str()), CreationCollisionOption::GenerateUniqueName))
         .then([this, args, context](StorageFile^ file)
     {
-        ReencodeAndSavePhotoAsync(args->Frame, file, context->_captureOrientation);
+        ReencodeAndSavePhotoAsync(args->Frame, file, context->CaptureOrientation);
     });
 }
 

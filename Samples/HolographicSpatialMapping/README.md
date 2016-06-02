@@ -38,7 +38,7 @@ simplified lighting algorithm.
 to build, and a Windows Holographic device to execute. Windows Holographic devices include the
 Microsoft HoloLens and the Microsoft HoloLens Emulator.
 
-To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com).
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421).
 
 To obtain information about the tools used for Windows Holographic development, including
 Microsoft Visual Studio 2015 Update 2 and the Microsoft HoloLens Emulator, go to
