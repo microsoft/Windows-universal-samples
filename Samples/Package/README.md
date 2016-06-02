@@ -27,7 +27,7 @@ The sample covers these new tasks for Windows 10:
 -   Getting package logo using [**Package.Logo**](http://msdn.microsoft.com/library/windows/apps/dn175747)
 -   Getting publisher display name of the package using [**Package.PublisherDisplayName**](http://msdn.microsoft.com/library/windows/apps/dn175748)
 
-To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 

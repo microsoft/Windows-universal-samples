@@ -1,0 +1,42 @@
+﻿{
+  "mediaList": {
+    "title": "Ringtone Mix",
+    "items": [
+      {
+        "mediaType": "music",
+        "title": "Ring 1",
+        "mediaUri": "ms-appx:///Assets/Ring01.wma",
+        "albumArtUri": "ms-appx:///Assets/Ring01.jpg",
+        "albumArtAttribution": "Autumn Yellow Leaves | George Hodan"
+      },
+      {
+        "mediaType": "music",
+        "title": "Ring 2",
+        "mediaUri": "ms-appx:///Assets/Ring02.wma",
+        "albumArtUri": "ms-appx:///Assets/Ring02.jpg",
+        "albumArtAttribution": "Abstract Background | Larisa Koshkina"
+      },
+      {
+        "mediaType": "music",
+        "title": "Ring 3 Part 1",
+        "mediaUri": "ms-appx:///Assets/Ring03Part1.wma",
+        "albumArtUri": "ms-appx:///Assets/Ring03Part1.jpg",
+        "albumArtAttribution": "Snow Covered Mountains | Petr Kratochvil"
+      },
+      {
+        "mediaType": "music",
+        "title": "Ring 3 Part 2",
+        "mediaUri": "ms-appx:///Assets/Ring03Part2.wma",
+        "albumArtUri": "ms-appx:///Assets/Ring03Part2.jpg",
+        "albumArtAttribution": "Tropical Beach With Palm Trees | Petr Kratochvil"
+      },
+      {
+        "mediaType": "music",
+        "title": "Ring 3 Part 3",
+        "mediaUri": "ms-appx:///Assets/Ring03Part3.wma",
+        "albumArtUri": "ms-appx:///Assets/Ring03Part3.jpg",
+        "albumArtAttribution": "Alyssum Background | Anne Lowe"
+      }
+    ]
+  }
+}

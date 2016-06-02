@@ -18,10 +18,10 @@ namespace FaceDetection
     ref class ReencodeState sealed
     {
     internal:
-        Windows::Graphics::Imaging::BitmapDecoder^ _decoder;
-        Windows::Graphics::Imaging::BitmapEncoder^ _encoder;
-        Windows::Storage::StorageFile^ _file;
-        Windows::Storage::FileProperties::PhotoOrientation _orientation;
+        Windows::Graphics::Imaging::BitmapDecoder^ Decoder;
+        Windows::Graphics::Imaging::BitmapEncoder^ Encoder;
+        Windows::Storage::StorageFile^ File;
+        Windows::Storage::FileProperties::PhotoOrientation Orientation;
     };
 
     public ref class MainPage sealed

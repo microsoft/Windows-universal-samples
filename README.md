@@ -31,7 +31,7 @@ The samples use Linked files in Visual Studio to reduce duplication of common fi
 
 **Reminder:** If you unzip individual samples, they will not build due to references to other portions of the ZIP file that were not unzipped. You must unzip the entire archive if you intend to build the samples.
 
-For more info about the programming models, platforms, languages, and APIs demonstrated in these samples, please refer to the guidance, tutorials, and reference topics provided in the Windows 10 documentation available in the [Windows Developer Center](https://dev.windows.com). These samples are provided as-is in order to indicate or demonstrate the functionality of the programming models and feature APIs for Windows.
+For more info about the programming models, platforms, languages, and APIs demonstrated in these samples, please refer to the guidance, tutorials, and reference topics provided in the Windows 10 documentation available in the [Windows Developer Center](http://go.microsoft.com/fwlink/?LinkID=532421). These samples are provided as-is in order to indicate or demonstrate the functionality of the programming models and feature APIs for Windows.
 
 ## Contributions
 
@@ -63,7 +63,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/AudioCreation">Audio graphs</a></td>
-  <td><a href="Samples/BackgroundAudio">Background audio</a></td>
+  <td><a href="Samples/BackgroundMediaPlayback">Background media playback</a></td>
   <td><a href="Samples/CameraStarterKit">Basic camera app</a></td>
  </tr>
  <tr>

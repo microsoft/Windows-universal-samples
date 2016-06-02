@@ -109,21 +109,17 @@ void Scenario7::OpenFromListButton_Click(Object^ sender, RoutedEventArgs^ e)
     {
         if (rootPage->MruToken != nullptr)
         {
-            // Open the file via the token that was stored when adding this file into the MRU list
-            fileTask = create_task(StorageApplicationPermissions::MostRecentlyUsedList->GetFileAsync(rootPage->MruToken)).then([this](task<StorageFile^> task)
+            // When the MRU becomes full, older entries are automatically deleted, so check if the
+            // token is still valid before using it.
+            if (StorageApplicationPermissions::MostRecentlyUsedList->ContainsItem(rootPage->MruToken))
             {
-                StorageFile^ file = nullptr;
-                try
-                {
-                    file = task.get();
-                }
-                catch (InvalidArgumentException^)
-                {
-                    // When the MRU becomes full, older entries are automatically deleted.
-                    rootPage->NotifyUser("The token is no longer valid.", NotifyType::ErrorMessage);
-                }
-                return file;
-            });
+                // Open the file via the token that was stored when adding this file into the MRU list
+                fileTask = create_task(StorageApplicationPermissions::MostRecentlyUsedList->GetFileAsync(rootPage->MruToken));
+            }
+            else
+            {
+                rootPage->NotifyUser("The token is no longer valid.", NotifyType::ErrorMessage);
+            }
         }
         else
         {
@@ -134,7 +130,8 @@ void Scenario7::OpenFromListButton_Click(Object^ sender, RoutedEventArgs^ e)
     {
         if (rootPage->FalToken != nullptr)
         {
-            // Open the file via the token that was stored when adding this file into the FAL list
+            // Open the file via the token that was stored when adding this file into the FAL list.
+            // The token remains valid until we explicitly remove it.
             fileTask = create_task(StorageApplicationPermissions::FutureAccessList->GetFileAsync(rootPage->FalToken));
         }
         else
