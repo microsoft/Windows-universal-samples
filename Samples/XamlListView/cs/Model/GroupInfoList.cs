@@ -5,5 +5,6 @@ namespace ListViewSample.Model
     public class GroupInfoList : List<object>
     {
         public object Key { get; set; }
+        public bool isGroupCollapsed { get; set; }
     }
 }
