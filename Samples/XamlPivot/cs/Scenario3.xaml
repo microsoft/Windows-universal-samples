@@ -17,20 +17,20 @@
     xmlns:local="using:PivotCS"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
+
     <Page.Resources>
         <Style x:Key="TabsStylePivotStyle" TargetType="Pivot">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Pivot">
-                        <Grid
-                            x:Name="RootElement"
+                        <Grid x:Name="RootElement"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             Background="{TemplateBinding Background}">
-                            <Grid.Resources>
-                                
 
+                            <Grid.Resources>
                                 <Style x:Key="BaseContentControlStyle" TargetType="ContentControl">
                                     <Setter Property="FontFamily" Value="Segoe UI" />
                                     <Setter Property="FontWeight" Value="SemiBold" />
@@ -50,17 +50,19 @@
                                         </Setter.Value>
                                     </Setter>
                                 </Style>
+
                                 <Style x:Key="TitleContentControlStyle" BasedOn="{StaticResource BaseContentControlStyle}" TargetType="ContentControl">
                                     <Setter Property="FontWeight" Value="SemiLight" />
                                     <Setter Property="FontSize" Value="24" />
                                 </Style>
-                                
-                                <!-- While used here to remove the spacing between header items, the PivotHeaderItem template can also be used to 
+
+                                <!-- While used here to remove the spacing between header items, the PivotHeaderItem template can also be used to
                                 display custom 'selected' visuals -->
                                 <Style TargetType="PivotHeaderItem">
                                     <Setter Property="Padding" Value="0" />
                                 </Style>
                             </Grid.Resources>
+
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="Orientation">
                                     <VisualState x:Name="Portrait">
@@ -115,15 +117,17 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <ContentControl
-                                x:Name="TitleContentControl"
+
+                            <ContentControl x:Name="TitleContentControl"
                                 Margin="{StaticResource PivotPortraitThemePadding}"
                                 Content="{TemplateBinding Title}"
                                 ContentTemplate="{TemplateBinding TitleTemplate}"
                                 IsTabStop="False"
                                 Style="{StaticResource TitleContentControlStyle}"
                                 Visibility="Collapsed" />
+
                             <Grid Grid.Row="1">
+
                                 <Grid.Resources>
                                     <ResourceDictionary>
                                         <ResourceDictionary.ThemeDictionaries>
@@ -142,8 +146,7 @@
                                         </ResourceDictionary.ThemeDictionaries>
 
                                         <ControlTemplate x:Key="NextTemplate" TargetType="Button">
-                                            <Border
-                                                x:Name="Root"
+                                            <Border x:Name="Root"
                                                 Background="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}"
                                                 BorderBrush="{ThemeResource SystemControlForegroundTransparentBrush}"
                                                 BorderThickness="{ThemeResource PivotNavButtonBorderThemeThickness}">
@@ -172,8 +175,7 @@
                                                         </VisualState>
                                                     </VisualStateGroup>
                                                 </VisualStateManager.VisualStateGroups>
-                                                <FontIcon
-                                                    x:Name="Arrow"
+                                                <FontIcon x:Name="Arrow"
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
                                                     FontFamily="{ThemeResource SymbolThemeFontFamily}"
@@ -184,9 +186,9 @@
                                                     UseLayoutRounding="False" />
                                             </Border>
                                         </ControlTemplate>
+
                                         <ControlTemplate x:Key="PreviousTemplate" TargetType="Button">
-                                            <Border
-                                                x:Name="Root"
+                                            <Border x:Name="Root"
                                                 Background="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}"
                                                 BorderBrush="{ThemeResource SystemControlForegroundTransparentBrush}"
                                                 BorderThickness="{ThemeResource PivotNavButtonBorderThemeThickness}">
@@ -215,8 +217,7 @@
                                                         </VisualState>
                                                     </VisualStateGroup>
                                                 </VisualStateManager.VisualStateGroups>
-                                                <FontIcon
-                                                    x:Name="Arrow"
+                                                <FontIcon x:Name="Arrow"
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
                                                     FontFamily="{ThemeResource SymbolThemeFontFamily}"
@@ -229,8 +230,8 @@
                                         </ControlTemplate>
                                     </ResourceDictionary>
                                 </Grid.Resources>
-                                <ScrollViewer
-                                    x:Name="ScrollViewer"
+
+                                <ScrollViewer x:Name="ScrollViewer"
                                     Margin="{TemplateBinding Padding}"
                                     VerticalContentAlignment="Stretch"
                                     BringIntoViewOnFocusChange="False"
@@ -248,7 +249,7 @@
                                                 <RowDefinition Height="Auto" />
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            
+
                                             <!-- By setting the column definitions to *,Auto,* allows the tabs to be centered by default -->
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
@@ -266,14 +267,12 @@
                                                 BorderBrush="{ThemeResource SystemControlForegroundChromeMediumBrush}"
                                                 BorderThickness="0,0,0,1" />
 
-                                            <ContentPresenter
-                                                x:Name="LeftHeaderPresenter"
+                                            <ContentPresenter x:Name="LeftHeaderPresenter"
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
                                                 Content="{TemplateBinding LeftHeader}"
                                                 ContentTemplate="{TemplateBinding LeftHeaderTemplate}" />
-                                            <ContentControl
-                                                x:Name="HeaderClipper"
+                                            <ContentControl x:Name="HeaderClipper"
                                                 Grid.Column="1"
                                                 HorizontalContentAlignment="Stretch"
                                                 UseSystemFocusVisuals="True">
@@ -292,8 +291,7 @@
                                                     </PivotHeaderPanel>
                                                 </Grid>
                                             </ContentControl>
-                                            <Button
-                                                x:Name="PreviousButton"
+                                            <Button x:Name="PreviousButton"
                                                 Grid.Column="1"
                                                 Width="20"
                                                 Height="36"
@@ -306,8 +304,7 @@
                                                 Opacity="0"
                                                 Template="{StaticResource PreviousTemplate}"
                                                 UseSystemFocusVisuals="False" />
-                                            <Button
-                                                x:Name="NextButton"
+                                            <Button x:Name="NextButton"
                                                 Grid.Column="1"
                                                 Width="20"
                                                 Height="36"
@@ -320,8 +317,7 @@
                                                 Opacity="0"
                                                 Template="{StaticResource NextTemplate}"
                                                 UseSystemFocusVisuals="False" />
-                                            <ContentPresenter
-                                                x:Name="RightHeaderPresenter"
+                                            <ContentPresenter x:Name="RightHeaderPresenter"
                                                 Grid.Column="2"
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
@@ -346,44 +342,45 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <StackPanel Margin="0,0,0,10">
-                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                This pivot shows how to acheive a 'tab-like' visual using specially styled Pivot.  
-                </TextBlock>
-            </StackPanel>
+    <Grid Margin="24,0,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-                <Pivot Style="{StaticResource TabsStylePivotStyle}">
-                    <PivotItem>
-                        <PivotItem.Header>
-                            <local:TabHeader Label="item 1" Glyph="&#xE719;" />
-                        </PivotItem.Header>
-                        <TextBlock Text="Content content content" />
-                    </PivotItem>
-                    <PivotItem>
-                        <PivotItem.Header>
-                            <local:TabHeader Label="item 2" Glyph="&#xE721;" />
-                        </PivotItem.Header>
-                        <TextBlock Text="Content content content" />
-                    </PivotItem>
-                    <PivotItem>
-                        <PivotItem.Header>
-                            <local:TabHeader Label="item 3" Glyph="&#xE723;" />
-                        </PivotItem.Header>
-                        <TextBlock Text="Content content content" />
-                    </PivotItem>
-                </Pivot>
-            </ScrollViewer>
+        <StackPanel Margin="0,0,0,12">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap">
+                This pivot shows how to acheive the 'tabs' design pattern using specially styled Pivot.
+            </TextBlock>
+        </StackPanel>
 
-            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
-        </Grid>
+        <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <Pivot Style="{StaticResource TabsStylePivotStyle}">
+                <PivotItem>
+                    <PivotItem.Header>
+                        <local:TabHeader Label="item 1" Glyph="&#xE719;" />
+                    </PivotItem.Header>
+                    <TextBlock Text="Content content content" />
+                </PivotItem>
+
+                <PivotItem>
+                    <PivotItem.Header>
+                        <local:TabHeader Label="item 2" Glyph="&#xE721;" />
+                    </PivotItem.Header>
+                    <TextBlock Text="Content content content" />
+                </PivotItem>
+
+                <PivotItem>
+                    <PivotItem.Header>
+                        <local:TabHeader Label="item 3" Glyph="&#xE723;" />
+                    </PivotItem.Header>
+                    <TextBlock Text="Content content content" />
+                </PivotItem>
+            </Pivot>
+        </ScrollViewer>
+
+        <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12" Visibility="Collapsed"/>
     </Grid>
 </Page>

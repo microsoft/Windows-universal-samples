@@ -42,14 +42,7 @@ namespace SDKTemplate
         {
             // Populate the scenario list from the SampleConfiguration.cs file
             ScenarioControl.ItemsSource = scenarios;
-            if (Window.Current.Bounds.Width < 640)
-            {
-                ScenarioControl.SelectedIndex = -1;
-            }
-            else
-            {
-                ScenarioControl.SelectedIndex = 0;
-            }
+            ScenarioControl.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -63,7 +56,7 @@ namespace SDKTemplate
             // Clear the status block when navigating scenarios.
             NotifyUser(String.Empty, NotifyType.StatusMessage);
 
-            ListBox scenarioListBox = sender as ListBox;
+            ListView scenarioListBox = sender as ListView;
             Scenario s = scenarioListBox.SelectedItem as Scenario;
             if (s != null)
             {
@@ -100,7 +93,7 @@ namespace SDKTemplate
             StatusBlock.Text = strMessage;
 
             // Collapse the StatusBlock if it has no text to conserve real estate.
-            StatusBorder.Visibility = (StatusBlock.Text != String.Empty) ? Visibility.Visible : Visibility.Collapsed;
+            StatusPanel.Visibility = (StatusBlock.Text != String.Empty) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         async void Footer_Click(object sender, RoutedEventArgs e)

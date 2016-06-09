@@ -1012,7 +1012,7 @@ void MainPage::AdvancedCapture_OptionalReferencePhotoCaptured(Capture::AdvancedP
     fileName << context->CaptureFileName->Data();
     StringReplace(fileName.str(), std::wstring(L"_HDR"), std::wstring(L""));
 
-    ReencodeAndSavePhotoAsync(args->Frame, ref new String(fileName.str().c_str()), context->CptureOrientation);
+    ReencodeAndSavePhotoAsync(args->Frame, ref new String(fileName.str().c_str()), context->CaptureOrientation);
 }
 
 /// <summary>

@@ -18,10 +18,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+
     <Page.Resources>
         <DataTemplate x:Key="ItemTemplate" x:DataType="local:SampleDataModel">
             <StackPanel Orientation="Horizontal" Height="80">
-                <Border Background="#55000000" Margin="10,10,10,10">
+                <Border Background="#55000000" Margin="12">
                     <Image Source="{x:Bind ImagePath}" Stretch="UniformToFill" Width="60" Height="60" />
                 </Border>
                 <TextBlock Text="{x:Bind Title}" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
@@ -30,7 +31,6 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="MobileLayout">
@@ -65,19 +65,19 @@
                                   VerticalAlignment="Stretch">
                         <AppBarButton.Flyout>
                             <Flyout>
-                                <AutoSuggestBox  
-                                VerticalAlignment="Center" Width="250" Margin="4,4,8,4" 
-                                QueryIcon="Find" PlaceholderText="enter a search term"
-                                TextChanged="AutoSuggestBox_TextChanged"
-                                QuerySubmitted="AutoSuggestBox_QuerySubmitted"
-                                SuggestionChosen="AutoSuggestBox_SuggestionChosen"
-                                ItemsSource="{x:Bind Suggestions}"/>
+                                <AutoSuggestBox
+                                    VerticalAlignment="Center" Width="250" Margin="4,4,8,4"
+                                    QueryIcon="Find" PlaceholderText="enter a search term"
+                                    TextChanged="AutoSuggestBox_TextChanged"
+                                    QuerySubmitted="AutoSuggestBox_QuerySubmitted"
+                                    SuggestionChosen="AutoSuggestBox_SuggestionChosen"
+                                    ItemsSource="{x:Bind Suggestions}"/>
                             </Flyout>
                         </AppBarButton.Flyout>
                     </AppBarButton>
 
-                    <AutoSuggestBox x:Name="SearchBox"  
-                                VerticalAlignment="Center" Width="250" Margin="4,4,8,4" 
+                    <AutoSuggestBox x:Name="SearchBox"
+                                VerticalAlignment="Center" Width="250" Margin="4,4,8,4"
                                 QueryIcon="Find" PlaceholderText="enter a search term"
                                 TextChanged="AutoSuggestBox_TextChanged"
                                 QuerySubmitted="AutoSuggestBox_QuerySubmitted"
@@ -87,15 +87,17 @@
             </Pivot.RightHeader>
 
             <PivotItem Header="New">
-                <ListView ItemsSource="{x:Bind NewItems}" ItemTemplate="{StaticResource ItemTemplate}" 
+                <ListView ItemsSource="{x:Bind NewItems}" ItemTemplate="{StaticResource ItemTemplate}"
                           SelectionChanged="ListView_SelectionChanged" />
             </PivotItem>
+
             <PivotItem Header="Flagged">
-                <ListView ItemsSource="{x:Bind FlaggedItems}" ItemTemplate="{StaticResource ItemTemplate}" 
+                <ListView ItemsSource="{x:Bind FlaggedItems}" ItemTemplate="{StaticResource ItemTemplate}"
                           SelectionChanged="ListView_SelectionChanged" />
             </PivotItem>
+
             <PivotItem Header="All">
-                <ListView ItemsSource="{x:Bind AllItems}" ItemTemplate="{StaticResource ItemTemplate}" 
+                <ListView ItemsSource="{x:Bind AllItems}" ItemTemplate="{StaticResource ItemTemplate}"
                           SelectionChanged="ListView_SelectionChanged" />
             </PivotItem>
         </Pivot>
