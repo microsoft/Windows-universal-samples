@@ -306,7 +306,7 @@ Namespace Global.CameraStarterKit
         ''' <returns></returns>
         Private Async Function StartRecordingAsync() As Task
             Try
-                ' Create storage file in Pictures Library
+                ' Create storage file for the capture
                 Dim videoFile = Await _captureFolder.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName)
                 Dim encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto)
                 ' Calculate rotation angle, taking mirroring into account if necessary

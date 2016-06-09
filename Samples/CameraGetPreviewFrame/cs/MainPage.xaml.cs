@@ -502,9 +502,10 @@ namespace CameraGetPreviewFrame
         }
 
         /// <summary>
-        /// Saves a SoftwareBitmap with the specified name
+        /// Saves a SoftwareBitmap to the specified StorageFile
         /// </summary>
-        /// <param name="bitmap"></param>
+        /// <param name="bitmap">SoftwareBitmap to save</param>
+        /// <param name="file">Target StorageFile to save to</param>
         /// <returns></returns>
         private static async Task SaveSoftwareBitmapAsync(SoftwareBitmap bitmap, StorageFile file)
         {

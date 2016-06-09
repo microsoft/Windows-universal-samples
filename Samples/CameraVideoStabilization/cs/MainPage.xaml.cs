@@ -516,8 +516,8 @@ namespace CameraVideoStabilization
 
             _videoStabilizationEffect.EnabledChanged -= VideoStabilizationEffect_EnabledChanged;
 
-            // Remove the effect from the record stream
-            await _mediaCapture.ClearEffectsAsync(MediaStreamType.VideoRecord);
+            // Remove the effect (see ClearEffectsAsync method to remove all effects from a stream)
+            await _mediaCapture.RemoveEffectAsync(_videoStabilizationEffect);
 
             Debug.WriteLine("VS effect removed from pipeline");
 
@@ -546,7 +546,7 @@ namespace CameraVideoStabilization
         {
             try
             {
-                // Create storage file in Pictures Library
+                // Create storage file for the capture
                 var videoFile = await _captureFolder.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
 
                 // Calculate rotation angle, taking mirroring into account if necessary

@@ -46,17 +46,18 @@ namespace VideoPlayback
 
         private void TrackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Get the camera number based on the button name
+            // Get the video track index based on value of the 'tag' field
             var button = sender as Button;
-            var buttonNumberText = button.Name.Substring("button".Length);
-            int videoTrackNumber = int.Parse(buttonNumberText);
-            var videoTrackIndex = videoTrackNumber - 1;
+            int videoTrackIndex = int.Parse(button.Tag as string);
 
             // Select the clicked camera track
-            this.item.VideoTracks.SelectedIndex = videoTrackIndex;
-            rootPage.NotifyUser("Switched to video track #" + videoTrackNumber 
-                + " | Id: " + this.item.VideoTracks[videoTrackIndex].Id
-                + " | Label: " + this.item.VideoTracks[videoTrackIndex].Label, NotifyType.StatusMessage);
+            if (this.item != null && this.item.VideoTracks != null && this.item.VideoTracks.Count -1 >= videoTrackIndex)
+            {
+                this.item.VideoTracks.SelectedIndex = videoTrackIndex;
+                rootPage.NotifyUser("Switched to video track #" + (videoTrackIndex + 1)
+                    + " | Id: " + this.item.VideoTracks[videoTrackIndex].Id
+                    + " | Label: " + this.item.VideoTracks[videoTrackIndex].Label, NotifyType.StatusMessage);
+            }
         }
     }
 }

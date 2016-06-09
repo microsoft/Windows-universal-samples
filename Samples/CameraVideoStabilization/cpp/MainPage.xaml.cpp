@@ -378,8 +378,8 @@ task<void> MainPage::CleanUpVideoStabilizationEffectAsync()
 
     _videoStabilizationEffect->EnabledChanged -= _videoStabilizationEnabledToken;
 
-    // Remove the effect from the record stream
-    return create_task(_mediaCapture->ClearEffectsAsync(Capture::MediaStreamType::VideoRecord))
+    // Remove the effect (see ClearEffectsAsync method to remove all effects from a stream)
+    return create_task(_mediaCapture->RemoveEffectAsync(_videoStabilizationEffect))
         .then([this]()
     {
         WriteLine("VS effect removed from pipeline");
@@ -416,7 +416,7 @@ task<void> MainPage::CleanUpVideoStabilizationEffectAsync()
 /// <returns></returns>
 task<void> MainPage::StartRecordingAsync()
 {
-    // Create storage file in Pictures Library
+    // Create storage file for the capture
     return create_task(_captureFolder->CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption::GenerateUniqueName))
         .then([this](StorageFile^ file)
     {

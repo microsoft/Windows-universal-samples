@@ -48,7 +48,8 @@ namespace SDKTemplate
         private async void RegisterTask()
         {
             var access = await BackgroundExecutionManager.RequestAccessAsync();
-            if (access == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity)
+            if (access == BackgroundAccessStatus.AlwaysAllowed ||
+                access == BackgroundAccessStatus.AllowedSubjectToSystemPolicy)
             {
                 // Create a new background task builder.
                 BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();

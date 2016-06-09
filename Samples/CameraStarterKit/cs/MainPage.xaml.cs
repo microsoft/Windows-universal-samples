@@ -422,7 +422,7 @@ namespace CameraStarterKit
         {
             try
             {
-                // Create storage file in Pictures Library
+                // Create storage file for the capture
                 var videoFile = await _captureFolder.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
 
                 var encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);

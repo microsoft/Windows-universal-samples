@@ -303,9 +303,10 @@
     }
 
     /// <summary>
-    /// Saves a SoftwareBitmap to the Pictures library with the specified name
+    /// Saves a SoftwareBitmap to the specified StorageFile
     /// </summary>
-    /// <param name="bitmap"></param>
+    /// <param name="bitmap">SoftwareBitmap to save</param>
+    /// <param name="file">Target StorageFile to save to</param>
     /// <returns></returns>
     function saveAndShowSoftwareBitmapAsync(bitmap, file) {
         var imageStream = null;

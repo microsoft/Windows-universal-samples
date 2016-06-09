@@ -300,6 +300,7 @@ task<void> MainPage::TakePhotoAsync()
 /// <returns></returns>
 task<void> MainPage::StartRecordingAsync()
 {
+    // Create storage file for the capture
     return create_task(_captureFolder->CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption::GenerateUniqueName))
         .then([this](StorageFile^ file)
     {

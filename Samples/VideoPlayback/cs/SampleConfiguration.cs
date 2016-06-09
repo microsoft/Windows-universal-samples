@@ -28,7 +28,8 @@ namespace SDKTemplate
             new Scenario() { Title= "Displaying out-of-band closed captions (MP4+SRT)", ClassType=typeof(Scenario4)},
             new Scenario() { Title= "Selecting video tracks", ClassType=typeof(Scenario5)},
             new Scenario() { Title= "Selecting audio tracks", ClassType=typeof(Scenario6)},
-            new Scenario() { Title= "Playing video lists", ClassType=typeof(Scenario7)}
+            new Scenario() { Title= "Playing video lists", ClassType=typeof(Scenario7)},
+            new Scenario() { Title= "Playing on a composition surface", ClassType=typeof(Scenario8)}
         };
     }
 

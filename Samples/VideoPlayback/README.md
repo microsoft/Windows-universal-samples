@@ -10,14 +10,13 @@ This sample demonstrates how to create apps that take advantage of many media pl
 Specifically, this sample covers:
 
 - Playing local video 
-- Customizing media transport controls
+- Customizing media transport controls (XAML-only)
 - Using in-band closed captions in your app
 - Using out-of-band closed captions in your app
 - Dealing with multiple video tracks
 - Dealing with multiple audio tracks
 - Creating video playlists
-
-There are some scenarios that are not available in the JS version but they will be availble in future updates.
+- Playing on a composition surface (not available to JS apps)
 
 Related topics
 --------------

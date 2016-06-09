@@ -18,17 +18,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Main"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
     <Page.Resources>
         <local:ScenarioBindingConverter x:Key="ScenarioConverter"></local:ScenarioBindingConverter>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="wideState">
@@ -37,6 +34,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="Splitter.DisplayMode" Value="Inline"/>
+                        <Setter Target="Splitter.IsPaneOpen" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="narrowState">
@@ -45,57 +43,60 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="Splitter.DisplayMode" Value="Overlay"/>
+                        <Setter Target="Splitter.IsPaneOpen" Value="False"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <SplitView x:Name="Splitter" IsPaneOpen="True" Grid.Column="1">
+
+        <StackPanel Orientation="Horizontal" Canvas.ZIndex="100">
+            <ToggleButton Style="{StaticResource SymbolButton}" Click="Button_Click"/>
+            <TextBlock x:Name="SampleTitle" Text="Sample Title Here" Style="{StaticResource SampleHeaderTextStyle}" VerticalAlignment="Top" Margin="2,5,0,0"/>
+        </StackPanel>
+
+        <SplitView x:Name="Splitter" IsPaneOpen="True" OpenPaneLength="320" PaneBackground="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <SplitView.Pane>
-                <RelativePanel Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
-                    <StackPanel x:Name="HeaderPanel" Orientation="Horizontal">
-                        <Image x:Name="WindowsLogo" Stretch="None" Source="Assets/windows-sdk.png" Margin="0,15,0,0" />
-                        <TextBlock x:Name="Header" Text="Windows platform sample" Style="{StaticResource TagLineTextStyle}" Margin="0,15,0,0" />
-                    </StackPanel>
-                    <TextBlock x:Name="SampleTitle" Text="Sample Title Here" Style="{StaticResource SampleHeaderTextStyle}" TextWrapping="Wrap" RelativePanel.Below="HeaderPanel" Margin="0,10,0,0"/>
-                    <ListBox x:Name="ScenarioControl" SelectionChanged="ScenarioControl_SelectionChanged"
-                 SelectionMode="Single" HorizontalAlignment="Left" Style="{StaticResource ScenarioListBoxStyle}"
-                 VerticalAlignment="Top" RelativePanel.Below="SampleTitle" Margin="0,10,0,0" RelativePanel.Above="FooterPanel">
-                        <ListBox.ItemTemplate>
+                <RelativePanel HorizontalAlignment="Stretch">
+                    <ListView x:Name="ScenarioControl" SelectionChanged="ScenarioControl_SelectionChanged" SelectionMode="Single"
+                              Width="320" VerticalAlignment="Top" Margin="0,52,0,12" RelativePanel.AlignTopWithPanel="True"
+                              ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}">
+                        <ListView.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Converter={StaticResource ScenarioConverter}}" Style="{StaticResource ListItemTextStyle}"/>
+                                <TextBlock Text="{Binding Converter={StaticResource ScenarioConverter}}"/>
                             </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                    <StackPanel x:Name="FooterPanel" Orientation="Vertical" RelativePanel.AlignBottomWithPanel="True">
-                        <Image Source="Assets/microsoft-sdk.png" AutomationProperties.Name="Microsoft Logo" Stretch="None" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                        <TextBlock x:Name="Copyright" Text="&#xA9; Microsoft Corporation. All rights reserved." Style="{StaticResource CopyrightTextStyle}"
-                                   RelativePanel.Above="LinksPanel" Margin="10,10,0,0"
-                                   TextWrapping="Wrap"/>
-                        <StackPanel x:Name="LinksPanel" Orientation="Horizontal" Margin="10,10,0,10">
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <StackPanel x:Name="FooterPanel" Orientation="Vertical" RelativePanel.AlignBottomWithPanel="True" Margin="12,0">
+                        <Image Source="Assets/microsoft-sdk.png" AutomationProperties.Name="Microsoft Logo" Stretch="None" HorizontalAlignment="Left" Margin="0"/>
+                        <TextBlock x:Name="Copyright" Text="&#xA9; Microsoft Corporation. All rights reserved." Style="{StaticResource BodyTextBlockStyle}"
+                                   RelativePanel.Above="LinksPanel" Margin="0"/>
+                        <StackPanel x:Name="LinksPanel" Orientation="Horizontal" Margin="0,12,0,12">
                             <HyperlinkButton Content="Trademarks" Tag="http://www.microsoft.com/About/Legal/EN/US/IntellectualProperty/Trademarks/EN-US.aspx"
-                        Click="Footer_Click" FontSize="12" Style="{StaticResource HyperlinkStyle}" />
-                            <TextBlock Text="|"  Style="{StaticResource SeparatorStyle}" VerticalAlignment="Center" />
-                            <HyperlinkButton x:Name="PrivacyLink" Content="Privacy" Tag="http://privacy.microsoft.com" Click="Footer_Click" FontSize="12" Style="{StaticResource HyperlinkStyle}"/>
+                                Click="Footer_Click" Style="{StaticResource HyperlinkStyle}" />
+                            <TextBlock Text="|" Style="{StaticResource SeparatorStyle}" VerticalAlignment="Center" />
+                            <HyperlinkButton x:Name="PrivacyLink" Content="Privacy" Tag="http://privacy.microsoft.com" Click="Footer_Click" Style="{StaticResource HyperlinkStyle}"/>
                         </StackPanel>
                     </StackPanel>
                 </RelativePanel>
             </SplitView.Pane>
-            <RelativePanel>
-                <Frame x:Name="ScenarioFrame" Margin="0,5,0,0" RelativePanel.AlignTopWithPanel="True" RelativePanel.Above="StatusPanel"/>
-                <StackPanel x:Name="StatusPanel" Orientation="Vertical" RelativePanel.AlignBottomWithPanel="True">
-                    <TextBlock x:Name="StatusLabel" Margin="0,0,0,10" TextWrapping="Wrap" Text="Status:" />
-                    <Border x:Name="StatusBorder" Margin="0,0,0,0" Visibility="Collapsed" >
-                        <TextBlock x:Name="StatusBlock" FontWeight="Bold" MaxHeight="200" MinWidth="{Binding ElementName=Splitter, Path=ActualWidth}" TextTrimming="CharacterEllipsis"  Margin="20,10,10,20" TextWrapping="Wrap"/>
-                    </Border>
-                </StackPanel>
-            </RelativePanel>
+
+            <SplitView.Content>
+                <RelativePanel>
+                    <Frame x:Name="ScenarioFrame" Margin="0,42,0,0" RelativePanel.AlignTopWithPanel="True" RelativePanel.Above="StatusPanel"/>
+                    <StackPanel x:Name="StatusPanel" Orientation="Vertical" RelativePanel.AlignBottomWithPanel="True">
+                        <TextBlock x:Name="StatusLabel" Margin="12,0,0,0" Style="{StaticResource BodyTextBlockStyle}" Text="Status:" />
+                        <Border x:Name="StatusBorder" Margin="0,0,0,0" Visibility="Collapsed" >
+                            <TextBlock x:Name="StatusBlock" MaxHeight="200" MinWidth="{Binding ElementName=Splitter, Path=ActualWidth}" Style="{StaticResource BodyTextBlockStyle}" Margin="12,12,12,24"/>
+                        </Border>
+                    </StackPanel>
+                </RelativePanel>
+            </SplitView.Content>
         </SplitView>
-        <Border Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
-            <ToggleButton Style="{StaticResource SymbolButton}" Click="Button_Click" VerticalAlignment="Top" Foreground="{ThemeResource ApplicationForegroundThemeBrush}">
-                <ToggleButton.Content>
-                        <FontIcon x:Name="Hamburger" FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" Margin="0,10,0,0"/>
-                </ToggleButton.Content>
-            </ToggleButton>
-        </Border>
+
+        <StackPanel x:Name="HeaderPanel" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Image x:Name="WindowsLogo" Stretch="None" Source="Assets/windows-sdk.png" Margin="0,12,0,0" VerticalAlignment="Center"/>
+            <TextBlock x:Name="Header" Text="Universal Windows Platform sample" Style="{StaticResource CaptionTextBlockStyle}" Margin="0,12,12,0" VerticalAlignment="Center"/>
+        </StackPanel>
+
     </Grid>
 </Page>

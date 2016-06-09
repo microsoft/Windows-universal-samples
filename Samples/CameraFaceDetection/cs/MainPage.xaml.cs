@@ -446,8 +446,8 @@ namespace FaceDetection
             // Unregister the event handler
             _faceDetectionEffect.FaceDetected -= FaceDetectionEffect_FaceDetected;
 
-            // Remove the effect from the preview stream
-            await _mediaCapture.ClearEffectsAsync(MediaStreamType.VideoPreview);
+            // Remove the effect (see ClearEffectsAsync method to remove all effects from a stream)
+            await _mediaCapture.RemoveEffectAsync(_faceDetectionEffect);
 
             // Clear the member variable that held the effect instance
             _faceDetectionEffect = null;
@@ -501,7 +501,7 @@ namespace FaceDetection
         {
             try
             {
-                // Create storage file in Pictures Library
+                // Create storage file for the capture
                 var videoFile = await _captureFolder.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
 
                 var encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);

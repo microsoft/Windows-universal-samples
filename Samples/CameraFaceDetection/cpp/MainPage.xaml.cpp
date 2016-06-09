@@ -308,8 +308,8 @@ task<void> MainPage::CleanUpFaceDetectionEffectAsync()
     // Unregister the event handler
     _faceDetectionEffect->FaceDetected -= _faceDetectedEventToken;
 
-    // Remove the effect from the preview stream
-    return create_task(_mediaCapture->ClearEffectsAsync(Capture::MediaStreamType::VideoPreview))
+    // Remove the effect (see ClearEffectsAsync method to remove all effects from a stream)
+    return create_task(_mediaCapture->RemoveEffectAsync(_faceDetectionEffect))
         .then([this]()
     {
         // Clear the member variable that held the effect instance

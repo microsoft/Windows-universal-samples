@@ -49,21 +49,11 @@
                 </Grid.ColumnDefinitions>
                 <MediaElement Grid.Row="0" Grid.ColumnSpan="5" x:Name="mainVideoElement" HorizontalAlignment="Stretch" Margin="0,0,0,10" AreTransportControlsEnabled="True" />
                 <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Text="Cameras"></TextBlock>
-                <Button x:Name="button1" Grid.Row="2" Grid.Column="0" Click="TrackButton_Click" HorizontalAlignment="Center">
-                    1
-                </Button>
-                <Button x:Name="button2" Grid.Row="2" Grid.Column="1" Click="TrackButton_Click" HorizontalAlignment="Center">
-                    2
-                </Button>
-                <Button x:Name="button3" Grid.Row="2" Grid.Column="2" Click="TrackButton_Click" HorizontalAlignment="Center">
-                    3
-                </Button>
-                <Button x:Name="button4" Grid.Row="2" Grid.Column="3" Click="TrackButton_Click" HorizontalAlignment="Center">
-                    4
-                </Button>
-                <Button x:Name="button5" Grid.Row="2" Grid.Column="4" Click="TrackButton_Click" HorizontalAlignment="Center">
-                    5
-                </Button>
+                <Button x:Name="button1" Content="1" Tag="0" Grid.Row="2" Grid.Column="0" Click="TrackButton_Click" HorizontalAlignment="Center"/>
+                <Button x:Name="button2" Content="2" Tag="1" Grid.Row="2" Grid.Column="1" Click="TrackButton_Click" HorizontalAlignment="Center"/>
+                <Button x:Name="button3" Content="3" Tag="2" Grid.Row="2" Grid.Column="2" Click="TrackButton_Click" HorizontalAlignment="Center"/>
+                <Button x:Name="button4" Content="4" Tag="3" Grid.Row="2" Grid.Column="3" Click="TrackButton_Click" HorizontalAlignment="Center"/>
+                <Button x:Name="button5" Content="5" Tag="4" Grid.Row="2" Grid.Column="4" Click="TrackButton_Click" HorizontalAlignment="Center"/>
             </Grid>
 
             <!-- Status Block for providing messages to the user.  Use the

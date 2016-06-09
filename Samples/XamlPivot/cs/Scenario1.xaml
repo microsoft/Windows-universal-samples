@@ -17,78 +17,85 @@
     xmlns:local="using:PivotCS"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
+
     <Page.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="WrapWholeWords" />
         </Style>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid x:Name="RootGrid" Margin="12,10,12,12">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <StackPanel Margin="0,0,0,10">
-                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-          Pivot - Updated for Destkop
-                </TextBlock>
-            </StackPanel>
+    <Grid x:Name="RootGrid" Margin="12,0,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-            <Pivot Grid.Row="1">
-                <PivotItem Header="Mouse Support">
-                    <TextBlock>When headers are in 'Dynamic' mode, hovering a mouse over the pivot headers will show mouse flippers for easy tab switching
-                    </TextBlock>
-                </PivotItem>
-                <PivotItem Header="Keyboard Support">
-                    <TextBlock>
+        <StackPanel Margin="12,0,0,12">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource BodyTextBlockStyle}">
+                Pivot - Updated for Desktop
+            </TextBlock>
+        </StackPanel>
+
+        <Pivot Grid.Row="1">
+            <PivotItem Header="Mouse Support">
+                <TextBlock>
+                    When headers are in 'Dynamic' mode, hovering a mouse over the pivot headers will show mouse flippers for easy tab switching
+                </TextBlock>
+            </PivotItem>
+
+            <PivotItem Header="Keyboard Support">
+                <TextBlock>
                     <Run>Pivot now supports the following keyboard behaviors</Run><LineBreak/>
                     <Run> * While the HeaderPanel is focused:</Run><LineBreak/>
                     <Run> * * Left, Right, Ctrl+PgUp, Ctrl+PgDown: Changes the currently selected PivotItem</Run><LineBreak/>
                     <Run> * * Down: Sets focus in the content area</Run><LineBreak/>
                     <Run> * While the Content area is focused:</Run><LineBreak/>
                     <Run> * * Ctrl+PgUp, Ctrl+PgDown: Changes the currently selected PivotItem</Run>
-                    </TextBlock>
-                </PivotItem>
-                <PivotItem Header="Header Behaviors">
-                    <StackPanel>
-                        <TextBlock>To provide a great experience from mobile to desktop, Pivot now supports two header styles, Dynamic Headers and Static Headers.<LineBreak/></TextBlock>
+                </TextBlock>
+            </PivotItem>
 
-                        <TextBlock Style="{StaticResource SubheaderTextBlockStyle}">Dynamic Headers</TextBlock>
-                        <TextBlock>
+            <PivotItem Header="Header Behaviors">
+                <StackPanel>
+                    <TextBlock>To provide a great experience from mobile to desktop, Pivot now supports two header styles, Dynamic Headers and Static Headers.<LineBreak/></TextBlock>
+                    <TextBlock Style="{StaticResource SubheaderTextBlockStyle}">Dynamic Headers</TextBlock>
+                    <TextBlock>
                         <Run>With a focus on mobile and small screen, dynamic headers automatically revolve in the header area with the currently selected PivotItem always the first item.</Run><LineBreak/>
                         <Run>Dynamic headers are automatically enabled when the combined width of your PivotItem.Header elements exceeds the width availabe to the Pivot control.</Run><LineBreak/>
-                        </TextBlock>
-                        <Image Source="/Assets/DynamicHeader.png" Width="350" Stretch="Uniform" HorizontalAlignment="Left" />
+                    </TextBlock>
+                    <Image Source="/Assets/DynamicHeader.png" Width="350" Stretch="Uniform" HorizontalAlignment="Left" />
 
-                        <TextBlock Style="{StaticResource SubheaderTextBlockStyle}">Static Headers</TextBlock>
-                        <TextBlock>                   
+                    <TextBlock Style="{StaticResource SubheaderTextBlockStyle}">Static Headers</TextBlock>
+                    <TextBlock>
                         <Run>Targeting devices with larger displays, static headers keep a fixed position in the header area, regardless of which item is currently selected.</Run><LineBreak/>
                         <Run>Static headers are automatically enabled when the combined width of your PivotItem.Header elements fits within the width available to the Pivot control</Run><LineBreak/>
-                        </TextBlock>
-                        <Image Source="/Assets/StaticHeader.png" Width="350" Stretch="Uniform" HorizontalAlignment="Left" />
-
-                    </StackPanel>
-                </PivotItem>
-                <PivotItem Header="Header Content">
-                    <TextBlock>
-                    <Run>Pivot now supports custom content to the left and right of the PivotHeaderPanel.  For more information, see </Run> <Hyperlink Click="Scenario2_Click">Scenario #2: Pivot with Header Content</Hyperlink>
                     </TextBlock>
-                </PivotItem>
-                <PivotItem Header="Pivot Styling">
-                    <TextBlock>
-                    <Run>It is easier than ever to create custom Pivot experiences for your users.  For an example of a 'Tabs' experience created with pivot, see </Run> <Hyperlink Click="Scenario3_Click">Scenario #3: Pivot 'Tabs' styling</Hyperlink>
-                    </TextBlock>
-                </PivotItem>
-            </Pivot>
+                    <Image Source="/Assets/StaticHeader.png" Width="350" Stretch="Uniform" HorizontalAlignment="Left" />
+                </StackPanel>
+            </PivotItem>
 
-            <!-- Status Block for providing messages to the user.  Use the
-             NotifyUser() method to populate the message -->
-            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
-            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
-        </Grid>
+            <PivotItem Header="Header Content">
+                <TextBlock>
+                    <Run>Pivot now supports custom content to the left and right of the PivotHeaderPanel.  For more information, see </Run>
+                    <Hyperlink Click="Scenario2_Click">Scenario #2: Pivot with Header Content</Hyperlink>
+                </TextBlock>
+            </PivotItem>
+
+            <PivotItem Header="Pivot Styling">
+                <TextBlock>
+                    <Run>It is easier than ever to create custom Pivot experiences for your users.  For an example of a 'Tabs' experience created with pivot, see </Run>
+                    <Hyperlink Click="Scenario3_Click">Scenario #3: Pivot 'Tabs' styling</Hyperlink>
+                </TextBlock>
+            </PivotItem>
+        </Pivot>
+
+        <!-- Status Block for providing messages to the user.  Use the
+            NotifyUser() method to populate the message -->
+        <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
+        <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
     </Grid>
+
 </Page>

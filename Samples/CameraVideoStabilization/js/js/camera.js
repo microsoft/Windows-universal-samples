@@ -366,8 +366,8 @@
 
         oVideoStabilizationEffect.removeEventListener("enablechanged", videoStabilizationEffect_EnabledChanged);
 
-        // Remove the effect from the record stream
-        return oMediaCapture.clearEffectsAsync(Capture.MediaStreamType.videoRecord)
+        // Remove the effect (see clearEffectsAsync method to remove all effects from a stream)
+        return oMediaCapture.removeEffectAsync(oVideoStabilizationEffect)
         .then(function () {
             console.log("VS effect removed from camera pipeline");
 

@@ -75,13 +75,12 @@ namespace GeolocationCS
                     BackgroundAccessStatus backgroundAccessStatus = BackgroundExecutionManager.GetAccessStatus();
                     switch (backgroundAccessStatus)
                     {
-                        case BackgroundAccessStatus.Unspecified:
-                        case BackgroundAccessStatus.Denied:
-                            _rootPage.NotifyUser("Not able to run in background. Application must be added to the lock screen.", NotifyType.ErrorMessage);
-                            break;
+                        case BackgroundAccessStatus.AlwaysAllowed:
+                        case BackgroundAccessStatus.AllowedSubjectToSystemPolicy:
+                            _rootPage.NotifyUser("Background task is already registered. Waiting for next update...", NotifyType.StatusMessage);
 
                         default:
-                            _rootPage.NotifyUser("Background task is already registered. Waiting for next update...", NotifyType.StatusMessage);
+                            _rootPage.NotifyUser("Background tasks may be disabled for this app", NotifyType.ErrorMessage);
                             break;
                     }
                 }
@@ -153,15 +152,9 @@ namespace GeolocationCS
 
                 switch (backgroundAccessStatus)
                 {
-
-                    case BackgroundAccessStatus.Unspecified:
-                    case BackgroundAccessStatus.Denied:
-                        _rootPage.NotifyUser("Not able to run in background. Application must be added to the lock screen.",
-                                              NotifyType.ErrorMessage);
-                        break;
-
-                    default:
-                        // BckgroundTask is allowed
+                    case BackgroundAccessStatus.AlwaysAllowed:
+                    case BackgroundAccessStatus.AllowedSubjectToSystemPolicy:
+                        // BackgroundTask is allowed
                         _rootPage.NotifyUser("Geofence background task registered.", NotifyType.StatusMessage);
 
                         // Need to request access to location
@@ -169,6 +162,12 @@ namespace GeolocationCS
                         // because the background task cannot display UI.
                         RequestLocationAccess();
                         break;
+
+                    default:
+                        _rootPage.NotifyUser("Background tasks may be disabled for this app", NotifyType.ErrorMessage);
+                        break;
+
+                    default:
                 }
             }
             catch (Exception ex)

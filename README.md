@@ -381,16 +381,17 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 
 <table>
  <tr>
+  <td><a href="Samples/XamlAnimatedGif">Animated GIF playback (XAML)</a></td>
   <td><a href="Samples/AnimationLibrary">Animation library (HTML)</a></td>
   <td><a href="Samples/AnimationMetrics">Animation metrics</a></td>
-  <td><a href="Samples/CompositionVisual">Composition visual without framework</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/CompositionVisual">Composition visual without framework</a></td>
   <td><a href="Samples/D2DCustomEffects">Direct2D custom image effects</a></td>
   <td><a href="Samples/D2DGradientMesh">Direct2D gradient mesh</a></td>
-  <td><a href="Samples/EfficientAnimations">Efficient animations (HTML)</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/EfficientAnimations">Efficient animations (HTML)</a></td>
   <td><a href="Samples/XamlTransform3DAnimations">Transform3D animations</a></td>
   <td><a href="Samples/XamlTransform3DParallax">Transform3D parallax</a></td>
  </tr>
@@ -401,6 +402,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 <table>
  <tr>
   <td><a href="Samples/HolographicSpatialMapping">Holographic spatial mapping</a></td>
+  <td><a href="Samples/HolographicTagAlong">Tag-along hologram</a></td>
  </tr>
 </table>
 

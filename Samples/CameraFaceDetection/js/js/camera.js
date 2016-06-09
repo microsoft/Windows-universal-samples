@@ -295,8 +295,8 @@
         // Clear any rectangles that may have been left over
         facesCanvas.getContext("2d").clearRect(0, 0, facesCanvas.width, facesCanvas.height);
 
-        // Remove the effect from the preview stream
-        return oMediaCapture.clearEffectsAsync(Capture.MediaStreamType.videoPreview)
+        // Remove the effect (see clearEffectsAsync method to remove all effects from a stream)
+        return oMediaCapture.removeEffectAsync(oFaceDetectionEffect)
         .then(function () {
             // Clear the variable that held the effect instance
             oFaceDetectionEffect = null;

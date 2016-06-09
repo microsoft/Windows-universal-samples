@@ -11,8 +11,8 @@
     <AssemblyName>VideoPlayback</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14295.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14332.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14332.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -128,6 +128,9 @@
     <Compile Include="Scenario7_PlayingVideoLists.xaml.cs">
       <DependentUpon>Scenario7_PlayingVideoLists.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario8_VideoComposition.xaml.cs">
+      <DependentUpon>Scenario8_VideoComposition.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MediaPlaylistView.xaml.cs">
       <DependentUpon>MediaPlaylistView.xaml</DependentUpon>
     </Compile>
@@ -173,6 +176,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Scenario7_PlayingVideoLists.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scenario8_VideoComposition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
