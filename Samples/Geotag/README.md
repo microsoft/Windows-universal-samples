@@ -5,19 +5,19 @@
 
 # Geotag sample
 
-This sample demonstrates Windows.Storage.FileProperties.GeotagHelper API usage
+This sample demonstrates the GeotagHelper runtime class.
 
-Specifically, this sample covers:
-
-Scenario 1: Demonstrates using GetGeotagAsync API to retrieve location info from a file.
-            Also demostrates using SetGeotagAsync API to geotag a file with known location
-            info, and using SetGeotagFromGeolocatorAsync API to geotag a file with current
-            device location info provided by location framework.
+- Read geotag information from a file.
+- Set a file's geotag information to a specific location.
+- Set a file's geotag information to the location obtained from a Geolocator.
 
 Related topics
 --------------
-[Known Folders](https://msdn.microsoft.com/library/windows/apps/windows.storage.knownfolders.aspx)
+[GeotagHelper class](https://msdn.microsoft.com/library/windows/apps/windows.storage.fileproperties.geotaghelper.aspx)
 
+[Geolocator class](https://msdn.microsoft.com/library/windows/apps/windows.devices.geolocation.geolocator.aspx)
+
+[Geolocation sample](/Samples/Geolocation)
 
 System requirements
 -------------------

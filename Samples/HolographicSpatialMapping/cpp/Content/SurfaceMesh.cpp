@@ -26,11 +26,16 @@ using namespace Windows::Foundation::Numerics;
 
 SurfaceMesh::SurfaceMesh()
 {
-    ReleaseDeviceDependentResources();
+    std::lock_guard<std::mutex> lock(m_meshResourcesMutex);
+
+    ReleaseDeviceDependentResources();    
+    m_lastUpdateTime.UniversalTime = 0;
 }
 
 SurfaceMesh::~SurfaceMesh()
 {
+    std::lock_guard<std::mutex> lock(m_meshResourcesMutex);
+
     ReleaseDeviceDependentResources();
 }
 
@@ -42,6 +47,8 @@ void SurfaceMesh::UpdateSurface(SpatialSurfaceMesh^ surfaceMesh)
 
 void SurfaceMesh::UpdateDeviceBasedResources(ID3D11Device* device)
 {
+    std::lock_guard<std::mutex> lock(m_meshResourcesMutex);
+
     ReleaseDeviceDependentResources();
     CreateDeviceDependentResources(device);
 }
@@ -80,7 +87,7 @@ void SurfaceMesh::UpdateTransform(
                 m_colorFadeTimer = m_colorFadeTimeout = -1.f;
             }
         }
-
+        
         // The transform is updated relative to a SpatialCoordinateSystem. In the SurfaceMesh class, we
         // expect to be given the same SpatialCoordinateSystem that will be used to generate view
         // matrices, because this class uses the surface mesh for rendering.
@@ -93,7 +100,6 @@ void SurfaceMesh::UpdateTransform(
             // we have the information we need to draw it this frame.
             transform = XMLoadFloat4x4(&tryTransform->Value);
             m_lastActiveTime = static_cast<float>(timer.GetTotalSeconds());
-
         }
         else
         {
@@ -134,15 +140,19 @@ void SurfaceMesh::UpdateTransform(
         // code may be copied and re-used for CPU-based processing of surface data.
         return;
     }
+    
+    {
+        std::lock_guard<std::mutex> lock(m_meshResourcesMutex);
 
-    context->UpdateSubresource(
-        m_modelTransformBuffer.Get(),
-        0,
-        NULL,
-        &m_constantBufferData,
-        0,
-        0
+        context->UpdateSubresource(
+            m_modelTransformBuffer.Get(),
+            0,
+            NULL,
+            &m_constantBufferData,
+            0,
+            0
         );
+    }
 }
 
 // Does an indexed, instanced draw call after setting the IA stage to use the mesh's geometry, and
@@ -150,9 +160,21 @@ void SurfaceMesh::UpdateTransform(
 // The caller is responsible for the rest of the shader pipeline.
 void SurfaceMesh::Draw(ID3D11Device* device, ID3D11DeviceContext* context, bool usingVprtShaders, bool isStereo)
 {
+    {
+        std::lock_guard<std::mutex> lock(m_meshResourcesMutex);
+
+        if (m_updateReady)
+        {
+            // Surface mesh resources are created off-thread so that they don't affect rendering latency.
+            // When a new update is ready, we should begin using the updated vertex position, normal, and 
+            // index buffers.
+            GetUpdatedVertexResources();
+            m_updateReady = false;
+        }
+    }
+
     if (m_updateNeeded)
     {
-        ReleaseVertexResources();
         CreateVertexResources(device);
         m_updateNeeded = false;
     }
@@ -161,7 +183,7 @@ void SurfaceMesh::Draw(ID3D11Device* device, ID3D11DeviceContext* context, bool 
     {
         CreateDeviceDependentResources(device);
     }
-
+    
     if (!m_isActive)
     {
         // Mesh is not active this frame, and should not be drawn.
@@ -250,20 +272,49 @@ void SurfaceMesh::CreateVertexResources(ID3D11Device* device)
         return;
     }
 
-    // First, we acquire the raw data buffers.
-    Windows::Storage::Streams::IBuffer^ positions = m_surfaceMesh->VertexPositions->Data;
-    Windows::Storage::Streams::IBuffer^ normals   = m_surfaceMesh->VertexNormals->Data;
-    Windows::Storage::Streams::IBuffer^ indices   = m_surfaceMesh->TriangleIndices->Data;
+    // Surface mesh resources are created off-thread, so that they don't affect rendering latency.'
+    auto taskOptions = Concurrency::task_options();
+    auto task = concurrency::create_task([this, device]()
+    {
+        // Create new Direct3D device resources for the updated buffers. These will be set aside
+        // for now, and then swapped into the active slot next time the render loop is ready to draw.
 
-    // Then, we create Direct3D device buffers with the mesh data provided by HoloLens.
-    CreateDirectXBuffer(device, D3D11_BIND_VERTEX_BUFFER, positions, m_vertexPositions.GetAddressOf());
-    CreateDirectXBuffer(device, D3D11_BIND_VERTEX_BUFFER, normals, m_vertexNormals.GetAddressOf());
-    CreateDirectXBuffer(device, D3D11_BIND_INDEX_BUFFER, indices, m_triangleIndices.GetAddressOf());
+        // First, we acquire the raw data buffers.
+        Windows::Storage::Streams::IBuffer^ positions = m_surfaceMesh->VertexPositions->Data;
+        Windows::Storage::Streams::IBuffer^ normals   = m_surfaceMesh->VertexNormals->Data;
+        Windows::Storage::Streams::IBuffer^ indices   = m_surfaceMesh->TriangleIndices->Data;
 
-    // Finally, we cache properties for the buffers we just created.
-    m_vertexStride = m_surfaceMesh->VertexPositions->Stride;
-    m_normalStride = m_surfaceMesh->VertexNormals->Stride;
-    m_indexFormat  = static_cast<DXGI_FORMAT>(m_surfaceMesh->TriangleIndices->Format);
+        // Then, we create Direct3D device buffers with the mesh data provided by HoloLens.
+        Microsoft::WRL::ComPtr<ID3D11Buffer> updatedVertexPositions;
+        Microsoft::WRL::ComPtr<ID3D11Buffer> updatedVertexNormals;
+        Microsoft::WRL::ComPtr<ID3D11Buffer> updatedTriangleIndices;
+        CreateDirectXBuffer(device, D3D11_BIND_VERTEX_BUFFER, positions, updatedVertexPositions.GetAddressOf());
+        CreateDirectXBuffer(device, D3D11_BIND_VERTEX_BUFFER, normals,   updatedVertexNormals.GetAddressOf());
+        CreateDirectXBuffer(device, D3D11_BIND_INDEX_BUFFER,  indices,   updatedTriangleIndices.GetAddressOf());
+
+        // Before sending the new meshes to the renderer, check to ensure that there wasn't a more recent update.
+        {
+            std::lock_guard<std::mutex> lock(m_meshResourcesMutex);
+
+            auto meshUpdateTime = m_surfaceMesh->SurfaceInfo->UpdateTime;
+            if (meshUpdateTime.UniversalTime > m_lastUpdateTime.UniversalTime)
+            {
+                // Prepare to swap in the new meshes.
+                m_updatedVertexPositions.Swap(updatedVertexPositions);
+                m_updatedVertexNormals.Swap(updatedVertexNormals);
+                m_updatedTriangleIndices.Swap(updatedTriangleIndices);
+
+                // Cache properties for the buffers we will now use.
+                m_vertexStride = m_surfaceMesh->VertexPositions->Stride;
+                m_normalStride = m_surfaceMesh->VertexNormals->Stride;
+                m_indexFormat  = static_cast<DXGI_FORMAT>(m_surfaceMesh->TriangleIndices->Format);
+
+                // Send a signal to the render loop indicating that new resources are available to use.
+                m_updateReady    = true;
+                m_lastUpdateTime = meshUpdateTime;
+            }
+        }
+    });
 }
 
 void SurfaceMesh::CreateDeviceDependentResources(ID3D11Device* device)
@@ -290,8 +341,25 @@ void SurfaceMesh::ReleaseVertexResources()
     m_triangleIndices.Reset();
 }
 
+void SurfaceMesh::GetUpdatedVertexResources()
+{
+    // Swap out the previous vertex position, normal, and index buffers, and replace
+    // them with up-to-date buffers.
+    m_vertexPositions = m_updatedVertexPositions;
+    m_vertexNormals   = m_updatedVertexNormals;
+    m_triangleIndices = m_updatedTriangleIndices;
+
+    m_updatedVertexPositions.Reset();
+    m_updatedVertexNormals.Reset();
+    m_updatedTriangleIndices.Reset();
+}
+
 void SurfaceMesh::ReleaseDeviceDependentResources()
 {
+    // Clear out any pending resources.
+    GetUpdatedVertexResources();
+
+    // Clear out active resources.
     ReleaseVertexResources();
 
     m_modelTransformBuffer.Reset();

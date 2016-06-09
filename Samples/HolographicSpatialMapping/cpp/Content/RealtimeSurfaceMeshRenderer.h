@@ -40,6 +40,8 @@ namespace WindowsHolographicCodeSamples
         void RemoveSurface(Platform::Guid id);
         void ClearSurfaces();
 
+        Windows::Foundation::DateTime GetLastUpdateTime(Platform::Guid id);
+
         void HideInactiveMeshes(
             Windows::Foundation::Collections::IMapView<Platform::Guid,
             Windows::Perception::Spatial::Surfaces::SpatialSurfaceInfo^>^ const& surfaceCollection);

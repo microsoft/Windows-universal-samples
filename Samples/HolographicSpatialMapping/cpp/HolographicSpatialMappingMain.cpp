@@ -25,6 +25,7 @@ using namespace Platform;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 using namespace Windows::Foundation::Numerics;
+using namespace Windows::Graphics::DirectX;
 using namespace Windows::Graphics::Holographic;
 using namespace Windows::Perception::Spatial;
 using namespace Windows::Perception::Spatial::Surfaces;
@@ -161,9 +162,8 @@ void HolographicSpatialMappingMain::UpdateSurfaceObserverPosition(SpatialCoordin
         //     m_surfaceObserver->SetBoundingVolumes(/* iterable collection of bounding volumes*/);
         //
         // It is also possible to use other bounding shapes - such as a view frustum. Pseudocode:
-        //     m_surfaceObserver->SetBoundingVolume(
-        //         SpatialBoundingVolume::FromFrustum(/*SpatialCoordinateSystem*/, /*SpatialBoundingFrustum*/)
-        //         );
+        //     SpatialBoundingVolume^ bounds = SpatialBoundingVolume::FromFrustum(coordinateSystem, viewFrustum);
+        //     m_surfaceObserver->SetBoundingVolume(bounds);
     }
 }
 
@@ -186,7 +186,33 @@ void HolographicSpatialMappingMain::InitializeSurfaceObserver(SpatialCoordinateS
         case SpatialPerceptionAccessStatus::Allowed:
             {
                 // If status is Allowed, we can create the surface observer.
-                m_surfaceObserver = ref new SpatialSurfaceObserver();
+                {
+                    // First, we'll set up the surface observer to use our preferred data formats.
+                    // In this example, a "preferred" format is chosen that is compatible with our precompiled shader pipeline.
+                    m_surfaceMeshOptions = ref new SpatialSurfaceMeshOptions();
+                    IVectorView<DirectXPixelFormat>^ supportedVertexPositionFormats = m_surfaceMeshOptions->SupportedVertexPositionFormats;
+                    unsigned int formatIndex = 0;
+                    if (supportedVertexPositionFormats->IndexOf(DirectXPixelFormat::R16G16B16A16IntNormalized, &formatIndex))
+                    {
+                        m_surfaceMeshOptions->VertexPositionFormat = DirectXPixelFormat::R16G16B16A16IntNormalized;
+                    }
+                    IVectorView<DirectXPixelFormat>^ supportedVertexNormalFormats = m_surfaceMeshOptions->SupportedVertexNormalFormats;
+                    if (supportedVertexNormalFormats->IndexOf(DirectXPixelFormat::R8G8B8A8IntNormalized, &formatIndex))
+                    {
+                        m_surfaceMeshOptions->VertexNormalFormat = DirectXPixelFormat::R8G8B8A8IntNormalized;
+                    }
+
+                    // Our shader pipeline can handle a variety of triangle index formats, so we don't specify one here.
+                    // The code for doing so would be as follows:
+                    //IVectorView<DirectXPixelFormat>^ supportedTriangleIndexFormats = m_surfaceMeshOptions->SupportedTriangleIndexFormats;
+                    //if (supportedTriangleIndexFormats->IndexOf(DirectXPixelFormat::R16UInt, &formatIndex))
+                    //{
+                    //    m_surfaceMeshOptions->TriangleIndexFormat = DirectXPixelFormat::R16UInt;
+                    //}
+
+                    // Create the observer.
+                    m_surfaceObserver = ref new SpatialSurfaceObserver();
+                }
 
                 // The surface observer can now be configured as needed.
                 UpdateSurfaceObserverPosition(coordinateSystem);
@@ -253,8 +279,11 @@ void HolographicSpatialMappingMain::OnSurfacesChanged(SpatialSurfaceObserver^ se
         // defer processing of updates to existing surfaces.
         if (m_meshCollection->HasSurface(id))
         {
-            // Update existing surface.
-            m_meshCollection->UpdateSurface(id, surfaceInfo);
+            if (m_meshCollection->GetLastUpdateTime(id).UniversalTime < surfaceInfo->UpdateTime.UniversalTime)
+            {
+                // Update existing surface.
+                m_meshCollection->UpdateSurface(id, surfaceInfo);
+            }
         }
         else
         {

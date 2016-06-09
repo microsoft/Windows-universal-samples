@@ -22,7 +22,7 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="HolographicSpatialMapping.AppView">
       <uap:VisualElements
-        DisplayName="HolographicSpatialMapping"
+        DisplayName="SpatialMapping Sample"
         Square150x150Logo="Assets\squareTile-sdk.png"
         Square44x44Logo="Assets\smallTile-sdk.png"
         Description="HolographicSpatialMapping"

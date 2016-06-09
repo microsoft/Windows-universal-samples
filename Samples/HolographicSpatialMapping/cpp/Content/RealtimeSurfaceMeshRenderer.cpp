@@ -33,7 +33,7 @@ RealtimeSurfaceMeshRenderer::RealtimeSurfaceMeshRenderer(const std::shared_ptr<D
     CreateDeviceDependentResources();
 };
 
-// Called once per frame, rotates the cube and calculates the model and view matrices.
+// Called once per frame, maintains and updates the mesh collection.
 void RealtimeSurfaceMeshRenderer::Update(
     DX::StepTimer const& timer,
     SpatialCoordinateSystem^ coordinateSystem
@@ -139,14 +139,7 @@ void RealtimeSurfaceMeshRenderer::HideInactiveMeshes(IMapView<Guid, SpatialSurfa
         const auto& id = pair.first;
         auto& surfaceMesh = pair.second;
 
-        if (surfaceCollection->HasKey(id))
-        {
-            surfaceMesh.SetIsActive(true);
-        }
-        else
-        {
-            surfaceMesh.SetIsActive(false);
-        }
+        surfaceMesh.SetIsActive(surfaceCollection->HasKey(id) ? true : false);
     };
 }
 
@@ -172,7 +165,6 @@ void RealtimeSurfaceMeshRenderer::Render(bool isStereo, bool useWireframe)
         );
 
     // The constant buffer is per-mesh, and will be set for each one individually.
-
     if (!m_usingVprtShaders)
     {
         // Attach the passthrough geometry shader.
@@ -320,17 +312,16 @@ void RealtimeSurfaceMeshRenderer::CreateDeviceDependentResources()
         (createLightingPSTask && createWireframePSTask && createVSTask) :
         (createLightingPSTask && createWireframePSTask && createVSTask && createGSTask);
 
-    auto forceRecreateMeshResources = shaderTaskGroup.then([this] {
+    // Once the cube is loaded, the object is ready to be rendered.
+    auto finishLoadingTask = shaderTaskGroup.then([this]() {
 
+        // Recreate device-based surface mesh resources.
         std::lock_guard<std::mutex> guard(m_meshCollectionLock);
-        for (auto iter : m_meshCollection)
+        for (auto& iter : m_meshCollection)
         {
             iter.second.ReleaseDeviceDependentResources();
             iter.second.CreateDeviceDependentResources(m_deviceResources->GetD3DDevice());
         }
-    });
-
-    auto createRasterizerStates = forceRecreateMeshResources.then([this] {
 
         // Create a default rasterizer state descriptor.
         D3D11_RASTERIZER_DESC rasterizerDesc = CD3D11_RASTERIZER_DESC(D3D11_DEFAULT);
@@ -345,10 +336,7 @@ void RealtimeSurfaceMeshRenderer::CreateDeviceDependentResources()
 
         // Create a wireframe rasterizer state.
         m_deviceResources->GetD3DDevice()->CreateRasterizerState(&rasterizerDesc, m_wireframeRasterizerState.GetAddressOf());
-    });
 
-    // Once the cube is loaded, the object is ready to be rendered.
-    createRasterizerStates.then([this]() {
         m_loadingComplete = true;
     });
 }
@@ -367,7 +355,7 @@ void RealtimeSurfaceMeshRenderer::ReleaseDeviceDependentResources()
     m_wireframeRasterizerState.Reset();
 
     std::lock_guard<std::mutex> guard(m_meshCollectionLock);
-    for (auto iter : m_meshCollection)
+    for (auto& iter : m_meshCollection)
     {
         iter.second.ReleaseDeviceDependentResources();
     }
@@ -377,4 +365,20 @@ bool RealtimeSurfaceMeshRenderer::HasSurface(Platform::Guid id)
 {
     std::lock_guard<std::mutex> guard(m_meshCollectionLock);
     return m_meshCollection.find(id) != m_meshCollection.end();
+}
+
+Windows::Foundation::DateTime RealtimeSurfaceMeshRenderer::GetLastUpdateTime(Platform::Guid id)
+{
+    std::lock_guard<std::mutex> guard(m_meshCollectionLock);
+    auto& meshIter = m_meshCollection.find(id);
+    if (meshIter != m_meshCollection.end())
+    {
+        auto const& mesh = meshIter->second;
+        return mesh.GetLastUpdateTime();
+    }
+    else
+    {
+        static const Windows::Foundation::DateTime zero;
+        return zero;
+    }
 }
