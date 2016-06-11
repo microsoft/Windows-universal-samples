@@ -57,6 +57,14 @@ namespace AnimatedGif
             this.InitializeComponent();
         }
 
+        public void RestartAnimation()
+        {
+            if (_isLoaded)
+            {
+                _gifPresenter.StartAnimation();
+            }
+        }
+
         private async static void OnSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var that = d as GifView;
