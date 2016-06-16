@@ -49,7 +49,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Provide your own URL or use the one provided. Then click Play."></TextBlock>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <TextBox Name="txtInputURL" Width="200"></TextBox>
+                    <TextBox Name="txtInputURL" Text="http://amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest(format=mpd-time-csf)" Width="200"></TextBox>
                     <Button Name="btnPlay" Click="btnPlay_Click">Play</Button>
                 </StackPanel>
                 <MediaElement Grid.Row="2"  Name="mePlayer" AudioCategory="Movie" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"

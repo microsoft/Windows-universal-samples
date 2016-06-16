@@ -139,7 +139,7 @@
 
             // Now attach click handlers to each checkbox.
             var bookCheckBoxes = document.querySelectorAll(".bookCheckout");
-            for (var checkIndex in bookCheckBoxes) {
+            for (var checkIndex = 0; checkIndex < bookCheckBoxes.length; checkIndex++) {
                 bookCheckBoxes[checkIndex].onclick = toggleCheckout;
             }
 

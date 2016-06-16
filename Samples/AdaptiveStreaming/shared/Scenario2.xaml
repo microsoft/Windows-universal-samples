@@ -53,7 +53,7 @@
                 <TextBlock Grid.Row="0" Text="Provide your own URL or use the one provided. Then click Play."></TextBlock>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
 
-                    <TextBox Name="txtInputURL" Width="200"></TextBox>
+                    <TextBox Name="txtInputURL" Text="http://amssamples.streaming.mediaservices.windows.net/49b57c87-f5f3-48b3-ba22-c55cfdffa9cb/Sintel.ism/manifest(format=m3u8-aapl)" Width="200"></TextBox>
                     <Button Name="btnPlay" Click="btnPlay_Click" Margin="10,10,10,10">Play</Button>
                 </StackPanel>
 

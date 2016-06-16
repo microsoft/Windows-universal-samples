@@ -37,11 +37,11 @@
             languageList.remove(0);
         };
 
-        if (!userLangTogle.winControl.checked) {
-            var languages = Ocr.OcrEngine.availableRecognizerLanguages;
+        var languages = Ocr.OcrEngine.availableRecognizerLanguages;
 
-            // Check if any OCR language is available on device.
-            if (languages.length > 0) {
+        // Check if any OCR language is available on device.
+        if (languages.length > 0) {
+            if (!userLangTogle.winControl.checked) {
                 for (var i = 0; i < languages.length; i++) {
 
                     // Create option entry for every available language. 
@@ -56,28 +56,26 @@
                 extractButton.disabled = false;
 
                 languageChanged();
-            }
-            else {
-                // Prevent OCR if no OCR languages are available on device.
-                userLangTogle.disabled = true;
+            } else {
+                userLangTogle.disabled = false;
                 languageList.disabled = true;
-                extractButton.disabled = true;
+                extractButton.disabled = false;
 
                 WinJS.log && WinJS.log(
-                    "No available OCR languages.",
+                    "Run OCR in first OCR available language from UserProfile.GlobalizationPreferences.Languages list.",
                     "sample",
-                    "error");
+                    "status");
             }
-        }
-        else {
-            userLangTogle.disabled = false;
+        } else {
+            // Prevent OCR if no OCR languages are available on device.
+            userLangTogle.disabled = true;
             languageList.disabled = true;
-            extractButton.disabled = false;
+            extractButton.disabled = true;
 
             WinJS.log && WinJS.log(
-                "Run OCR in first OCR available language from UserProfile.GlobalizationPreferences.Languages list.",
+                "No available OCR languages.",
                 "sample",
-                "status");
+                "error");
         }
     }
 
@@ -149,7 +147,7 @@
         document.getElementById("imagePreview").style.transform = "";
         document.getElementById("imagePreview").hidden = false;
         document.getElementById("textOverlay").innerHTML = "";
-        document.getElementById("buttonExtract").disabled = false;
+        document.getElementById("buttonExtract").disabled = languageList.options.length === 0;
         document.getElementById("imageText").textContent = "";
     }
 
@@ -174,7 +172,7 @@
         }
 
         // Prevent another OCR request, since only image can be processed at the time at same OCR engine instance.
-        document.getElementById("buttonExtract").disabled = true;
+        document.getElementById("buttonExtract").winControl.disabled = true;
 
         var bitmap;
         FutureAccess.getFileAsync(FileToken).then(function (file) {

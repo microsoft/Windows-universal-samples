@@ -41,7 +41,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Provide your own URL or use the one provided. Then click Play."></TextBlock>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <TextBox Name="txtInputURL" Width="300" Text="http://wams.edgesuite.net/media/SintelTrailer_Smooth_from_WAME_CENC/NoSubSampleAdjustment/sintel_trailer-1080p.ism/manifest(format=mpd-time-csf)"></TextBox>
+                    <TextBox Name="txtInputURL" Width="300" Text="http://amssamples.streaming.mediaservices.windows.net/622b189f-ec39-43f2-93a2-201ac4e31ce1/BigBuckBunny.ism/manifest(format=mpd-time-csf)"></TextBox>
                     <Button Name="btnPlay" Click="btnPlay_Click">Play</Button>
                 </StackPanel>
                 <MediaElement Grid.Row="2"  Name="mePlayer" AudioCategory="Movie" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
