@@ -3,6 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="using:NavigationMenuSample.Controls"
+    xmlns:local="using:NavigationMenuSample"
+    xmlns:triggers="using:NavigationMenuSample.Triggers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
@@ -43,7 +45,7 @@
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
 
-        <ScrollViewer Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" Margin="12,4,0,0">
+        <ScrollViewer Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" IsTabStop="True" Margin="12,4,0,0">
             <StackPanel x:Name="ContentContainer" Margin="12,0,24,0">
                 <TextBlock Style="{StaticResource SubtitleTextBlockStyle}">Top-Level Navigation</TextBlock>
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,4">This sample demonstrates a universal Windows app with top-level navigation.</TextBlock>

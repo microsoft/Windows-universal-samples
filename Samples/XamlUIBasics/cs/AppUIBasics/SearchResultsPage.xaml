@@ -37,6 +37,7 @@
             <ItemsControl
                     x:Name="filtersItemsControl"
                     Canvas.ZIndex="1"
+                    IsTabStop="False"
                     ItemsSource="{x:Bind Filters, Mode=OneWay}"
                     Visibility="{x:Bind ShowFilters, Converter={StaticResource booleanToVisibilityConverter}, Mode=OneWay}" >
                 <ItemsControl.ItemsPanel>

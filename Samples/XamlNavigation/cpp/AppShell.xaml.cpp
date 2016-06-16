@@ -41,9 +41,9 @@ namespace NavigationMenuSample
 
         Loaded += ref new Windows::UI::Xaml::RoutedEventHandler(this, &AppShell::OnLoaded);
 
-		RootSplitView->RegisterPropertyChangedCallback(
-			SplitView::DisplayModeProperty,
-			ref new DependencyPropertyChangedCallback(this, &AppShell::RootSplitViewDisplayModeChangedCallback));
+        RootSplitView->RegisterPropertyChangedCallback(
+            SplitView::DisplayModeProperty,
+            ref new DependencyPropertyChangedCallback(this, &AppShell::RootSplitViewDisplayModeChangedCallback));
 
         SystemNavigationManager::GetForCurrentView()->BackRequested +=
             ref new EventHandler<Windows::UI::Core::BackRequestedEventArgs^>(this, &AppShell::SystemNavigationManager_BackRequested);
@@ -145,10 +145,16 @@ namespace NavigationMenuSample
     /// <param name="listViewItem"></param>
     void AppShell::NavMenuList_ItemInvoked(Object^ sender, ListViewItem^ listViewItem)
     {
+        for (NavMenuItem^ i : navlist)
+        {
+            i->IsSelected = false;
+        }
+
         auto item = (NavMenuItem^)((NavMenuListView^)(sender))->ItemFromContainer(listViewItem);
 
         if (item != nullptr)
         {
+            item->IsSelected = true;
             if (item->DestPage.Name != AppFrame->CurrentSourcePageType.Name)
             {
                 AppFrame->Navigate(item->DestPage, item->Arguments);
@@ -188,6 +194,15 @@ namespace NavigationMenuSample
                 }
             }
 
+            for (NavMenuItem^ i : navlist)
+            {
+                i->IsSelected = false;
+            }
+            if (item != nullptr)
+            {
+                item->IsSelected = true;
+            }
+
             auto container = (ListViewItem^)NavMenuList->ContainerFromItem(item);
 
             // While updating the selection state of the item prevent it from taking keyboard focus.  If a
@@ -197,27 +212,6 @@ namespace NavigationMenuSample
             NavMenuList->SetSelectedItem(container);
             if (container != nullptr) container->IsTabStop = true;
         }
-    }
-
-
-    void AppShell::OnNavigatedToPage(Object^ sender, NavigationEventArgs^ e)
-    {
-        // After a successful navigation set keyboard focus to the loaded page
-        if (e->Content != nullptr && dynamic_cast<Page^>(e->Content) != nullptr)
-        {
-            auto control = (Page^)e->Content;
-            control->Loaded += ref new RoutedEventHandler(this, &AppShell::Page_Loaded);
-        }
-
-        // Show the Back button
-        SystemNavigationManager::GetForCurrentView()->AppViewBackButtonVisibility =
-            Windows::UI::Core::AppViewBackButtonVisibility::Visible;
-    }
-
-    void AppShell::Page_Loaded(Object^ sender, RoutedEventArgs^ e)
-    {
-        ((Page^)sender)->Focus(Windows::UI::Xaml::FocusState::Programmatic);
-        CheckTogglePaneButtonSizeChanged();
     }
 
     /// <summary>
@@ -238,6 +232,10 @@ namespace NavigationMenuSample
     void AppShell::RootSplitView_PaneClosed(SplitView^ sender, Object^ args)
     {
         NavPaneDivider->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+
+        // Prevent focus from moving to elements when they're not visible on screen
+        FeedbackNavPaneButton->IsTabStop = false;
+        SettingsNavPaneButton->IsTabStop = false;
     }
 
     /// <summary>
@@ -250,6 +248,9 @@ namespace NavigationMenuSample
     {
         NavPaneDivider->Visibility = Windows::UI::Xaml::Visibility::Visible;
         CheckTogglePaneButtonSizeChanged();
+
+        FeedbackNavPaneButton->IsTabStop = true;
+        SettingsNavPaneButton->IsTabStop = true;
     }
 
     /// <summary>

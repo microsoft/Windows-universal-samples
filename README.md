@@ -254,9 +254,10 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/AppServices">App services</a></td>
   <td><a href="Samples/JumpList">Jump list customization</a></td>
-  <td><a href="Samples/ShareSource">Sharing content source app</a></td>
+  <td><a href="Samples/RemoteSystems">Remote systems</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/ShareSource">Sharing content source app</a></td>
   <td><a href="Samples/ShareTarget">Sharing content target app</a></td>
  </tr>
 </table>
@@ -515,6 +516,9 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/ProxyStubsForWinRTComponents">In-process component authoring</a></td>
   <td><a href="Samples/WRLInProcessWinRTComponent">In-process component authoring</a></td>
   <td><a href="Samples/WRLOutOfProcessWinRTComponent">Out-of-process component authoring</a></td>
+ </tr>
+ <tr>
+  <td><a href="Samples/VersionAdaptiveCode">Version adaptive code</a></td>
  </tr>
 </table>
 
