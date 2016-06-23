@@ -82,13 +82,12 @@
 
         if (conversionGenerator && !isNaN(selectedItem) && input) {
 
-            // Specifiy the candidate number to get.
+            // Specify the candidate number to get.
             if (selectedItem === GenerationMethod.GetCandidatesAsyncWithMaxCandidates) {
                 var maxCandidates = parseInt(maxCandidatesBox.value, 0);
                 if (!isNaN(maxCandidates) && (maxCandidates > 0)) {
 
-                    // Call the API with max candidate number we expect, and list the result when there are any candidates. 
-                    // Suspending the handling until the unsynchronous call finishes.
+                    // Call the API with max candidate number we expect, and list the results.
                     conversionGenerator.getCandidatesAsync(input, maxCandidates)
                       .done(function (result) {
                           displayResults(result);
@@ -99,8 +98,7 @@
                 }
             } else {
 
-                // Call the API with default candidate number, and list the result when there are any candidates. 
-                // Suspending the handling until the unsynchronous call finishes.
+                // Call the API with default candidate number, and list the results.
                 conversionGenerator.getCandidatesAsync(input)
                       .done(function (result) {
                           displayResults(result);

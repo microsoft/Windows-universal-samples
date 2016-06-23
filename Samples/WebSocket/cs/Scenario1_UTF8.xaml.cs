@@ -261,6 +261,18 @@ namespace SDKTemplate
 
         private void CloseSocket()
         {
+            if (messageWriter != null)
+            {
+                // In order to reuse the socket with another DataWriter, the socket's output stream needs to be detached.
+                // Otherwise, the DataWriter's destructor will automatically close the stream and all subsequent I/O operations
+                // invoked on the socket's output stream will fail with ObjectDisposedException.
+                //
+                // This is only added for completeness, as this sample closes the socket in the very next code block.
+                messageWriter.DetachStream();
+                messageWriter.Dispose();
+                messageWriter = null;
+            }
+
             if (messageWebSocket != null)
             {
                 try
@@ -273,11 +285,6 @@ namespace SDKTemplate
                     AppendOutputLine(ex.Message);
                 }
                 messageWebSocket = null;
-            }
-            if (messageWriter != null)
-            {
-                messageWriter.Dispose();
-                messageWriter = null;
             }
         }
 

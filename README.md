@@ -37,6 +37,10 @@ For more info about the programming models, platforms, languages, and APIs demon
 
 These samples are direct from the feature teams and we welcome your input on issues and suggestions for new samples.  At this time we are not accepting new samples from the public, but check back here as we evolve our contribution model.
 
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)
+or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
 ## See also
 
 For additional Windows samples, see [Windows on GitHub](http://microsoft.github.io/windows/). 
@@ -73,35 +77,36 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/CameraFaceDetection">Camera face detection</a></td>
+  <td><a href="Samples/CameraFrames">Camera frames</a></td>
   <td><a href="Samples/CameraGetPreviewFrame">Camera preview frame</a></td>
-  <td><a href="Samples/CameraProfile">Camera profiles</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/CameraProfile">Camera profiles</a></td>
   <td><a href="Samples/CameraResolution">Camera resolution</a></td>
   <td><a href="Samples/LiveDash">DASH streaming</a></td>
-  <td><a href="Samples/D2DPhotoAdjustment">Direct2D photo adjustment</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/D2DPhotoAdjustment">Direct2D photo adjustment</a></td>
   <td><a href="Samples/CameraHdr">High dynamic range</a></td>
   <td><a href="Samples/MediaEditing">Media editing</a></td>
-  <td><a href="Samples/XamlCustomMediaTransportControls">Media transport controls</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/XamlCustomMediaTransportControls">Media transport controls</a></td>
   <td><a href="Samples/MIDI">MIDI</a></td>
   <td><a href="Samples/Playlists">Playlists</a></td>
-  <td><a href="Samples/SimpleImaging">Simple imaging</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/SimpleImaging">Simple imaging</a></td>
   <td><a href="Samples/SpatialSound">Spatial audio</a></td>
   <td><a href="Samples/SystemMediaTransportControls">System media transport controls</a></td>
-  <td><a href="Samples/MediaTranscoding">Transcoding media</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/MediaTranscoding">Transcoding media</a></td>
   <td><a href="Samples/VideoPlayback">Video playback</a></td>
   <td><a href="Samples/CameraVideoStabilization">Video stabilization</a></td>
-  <td><a href="Samples/WindowsAudioSession">Windows audio session (WASAPI)</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/WindowsAudioSession">Windows audio session (WASAPI)</a></td>
   <td><a href="Samples/MediaImport">Windows media import</a></td>
  </tr>
 </table>

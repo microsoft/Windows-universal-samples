@@ -18,16 +18,20 @@ namespace xBindSampleModel
     {
         private Employee _employee;
         private EmployeeCollection _reports;
+        private EmployeeDictionary _reportsDictionary;
 
         public Manager()
         {
             _employee = new Employee();
             _reports = new EmployeeCollection();
+            _reportsDictionary = new EmployeeDictionary();
         }
 
         public IEnumerable<IEmployee> ReportsEnum { get { return _reports; } }
         public IList<IEmployee> ReportsList { get { return _reports; } }
         public EmployeeCollection ReportsOC { get { return _reports; } }
+                public EmployeeDictionary ReportsDict {  get { return _reportsDictionary; } }
+
         public string NullStringProperty { get; set; }
         public Windows.UI.Xaml.Media.ImageSource NullImageSource
         {
@@ -105,6 +109,8 @@ namespace xBindSampleModel
         }
 
         public string Name { get { return FirstName + " " + LastName; } }
+
+        public string FullName() {  return FirstName + " " + LastName; }
 
         #region INPC
 
