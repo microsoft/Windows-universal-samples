@@ -1,0 +1,47 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario5_NavToFiles"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Navigate to package and local state
+            </TextBlock>
+            <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
+                The WebView control can navigate to files in the
+                package or app state directories using the ms-appx-web:
+                and ms-appdata: protocols.
+                These protocols use a built-in
+                stream resolver object.
+                See the "Navigate with custom resolver" scenario
+                for a demonstration of a custom stream resolver object.
+            </TextBlock>
+
+            <VariableSizedWrapGrid Orientation="Horizontal">
+                <Button Content="Load HTML from app package" Click="{x:Bind LoadFromPackage_Click}"  Margin="0,10,10,0"/>
+                <Button Content="Load HTML from local state" Click="{x:Bind LoadFromLocalState_Click}" Margin="0,10,10,0"/>
+            </VariableSizedWrapGrid>
+
+            <Grid BorderBrush="#FF707070" BorderThickness="1" Margin="0,10,0,0" Height="300">
+                <WebView x:Name="WebViewControl"/>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -49,6 +49,7 @@ MainPage::MainPage()
     , _displayOrientation(DisplayOrientations::Portrait)
     , _displayRequest(ref new Windows::System::Display::DisplayRequest())
     , RotationKey({ 0xC380465D, 0x2271, 0x428C,{ 0x9B, 0x83, 0xEC, 0xEA, 0x3B, 0x4A, 0x85, 0xC1 } })
+    , _captureFolder(nullptr)
 {
     this->InitializeComponent();
 
@@ -140,22 +141,11 @@ task<void> MainPage::InitializeCameraAsync()
             {
                 previousTask.get();
             }
-            catch (Exception^ ex)
+            catch (AccessDeniedException^)
             {
-                WriteException(ex);
+                WriteLine("The app was denied access to the camera");
             }
         });
-    // Catch any exceptions that may have been thrown along the way
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -231,16 +221,6 @@ task<void> MainPage::StartPreviewAsync()
 
         // Not external, just return the previous task
         return previousTask;
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -284,16 +264,6 @@ task<void> MainPage::StopPreviewAsync()
             // Allow the device screen to sleep now that the preview is stopped
             _displayRequest->RequestRelease();
         }));
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -320,16 +290,6 @@ task<void> MainPage::CreateSceneAnalysisEffectAsync()
 
         // Enable HDR analysis
         _sceneAnalysisEffect->HighDynamicRangeAnalyzer->Enabled = true;
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -431,19 +391,10 @@ task<void> MainPage::TakePhotoInCurrentModeAsync()
         taskToExecute = TakeHdrPhotoAsync();
     }
 
-    return taskToExecute.then([this](task<void> previousTask)
+    return taskToExecute.then([this]()
     {
-        try
-        {
-            previousTask.get();
-
-            // Re-enable the buttons that should be enabled (checks for HDR support) in the current state of the app
-            UpdateUi();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }  
+        // Re-enable the buttons that should be enabled (checks for HDR support) in the current state of the app
+        UpdateUi();
     });
 }
 
@@ -460,13 +411,15 @@ task<void> MainPage::TakeNormalPhotoAsync()
     return create_task(_mediaCapture->CapturePhotoToStreamAsync(Windows::Media::MediaProperties::ImageEncodingProperties::CreateJpeg(), inputStream))
         .then([this, inputStream]()
     {
-        WriteLine("Photo taken!");
-        
         // Create file based off the current time
         auto fileName = L"SimplePhoto_" + GetTimeStr() + L".jpg";
+        return create_task(_captureFolder->CreateFileAsync(fileName, CreationCollisionOption::GenerateUniqueName));
+    }).then([this, inputStream](StorageFile^ file)
+    {
+        WriteLine("Photo taken! Saving to " + file->Path);
+        
         auto photoOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
-
-        return ReencodeAndSavePhotoAsync(inputStream, fileName, photoOrientation);
+        return ReencodeAndSavePhotoAsync(inputStream, file, photoOrientation);
     }).then([this](task<void> previousTask)
     {
         try
@@ -475,6 +428,7 @@ task<void> MainPage::TakeNormalPhotoAsync()
         }
         catch (Exception^ ex)
         {
+            // File I/O errors are reported as exceptions
             WriteException(ex);
         }
     });
@@ -493,14 +447,18 @@ task<void> MainPage::TakeHdrPhotoAsync()
     auto context = ref new AdvancedCaptureContext();
 
     // Create file based off the current time
-    context->_captureFileName = L"SimplePhoto_" + GetTimeStr() + L".jpg";;
-    context->_captureOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
+    context->CaptureFileName = L"SimplePhoto_" + GetTimeStr() + L".jpg";
+    context->CaptureOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
 
     return create_task(_advancedCapture->CaptureAsync(context))
         .then([this, context](Capture::AdvancedCapturedPhoto^ photo)
     {
-        WriteLine("HDR photo taken!");
-        return ReencodeAndSavePhotoAsync(photo->Frame, context->_captureFileName, context->_captureOrientation);
+        context->Photo = photo;
+        return create_task(_captureFolder->CreateFileAsync(context->CaptureFileName, CreationCollisionOption::GenerateUniqueName));
+    }).then([this, context](StorageFile^ file)
+    {
+        WriteLine("HDR photo taken! Saving to " + file->Path);
+        return ReencodeAndSavePhotoAsync(context->Photo->Frame, file, context->CaptureOrientation);
     }).then([this](task<void> previousTask)
     {
         try
@@ -509,6 +467,7 @@ task<void> MainPage::TakeHdrPhotoAsync()
         }
         catch (Exception^ ex)
         {
+            // File I/O errors are reported as exceptions
             WriteException(ex);
         }
     });
@@ -527,7 +486,7 @@ task<DeviceInformation^> MainPage::FindCameraDeviceByPanelAsync(Windows::Devices
     auto deviceEnumTask = create_task(allVideoDevices);
     return deviceEnumTask.then([panel](DeviceInformationCollection^ devices)
     {
-        for each(auto cameraDeviceInfo in devices)
+        for (auto cameraDeviceInfo : devices)
         {
             if (cameraDeviceInfo->EnclosureLocation != nullptr && cameraDeviceInfo->EnclosureLocation->Panel == panel)
             {
@@ -553,33 +512,31 @@ task<DeviceInformation^> MainPage::FindCameraDeviceByPanelAsync(Windows::Devices
 /// <param name="stream">The photo stream</param>
 /// <param name="photoOrientation">The orientation metadata to apply to the photo</param>
 /// <returns></returns>
-task<void> MainPage::ReencodeAndSavePhotoAsync(Streams::IRandomAccessStream^ stream, String^ fileName, FileProperties::PhotoOrientation photoOrientation)
+task<void> MainPage::ReencodeAndSavePhotoAsync(Streams::IRandomAccessStream^ stream, StorageFile^ file, FileProperties::PhotoOrientation photoOrientation)
 {
     // Using this state variable to pass multiple values through our task chain
     ReencodeState^ state = ref new ReencodeState();
-    state->_orientation = photoOrientation;
+    state->File = file;
+    state->Orientation = photoOrientation;
 
     return create_task(BitmapDecoder::CreateAsync(stream))
-        .then([state, fileName](BitmapDecoder^ decoder)
+        .then([state](BitmapDecoder^ decoder)
     {
-        state->_decoder = decoder;
-        return create_task(KnownFolders::PicturesLibrary->CreateFileAsync(fileName, CreationCollisionOption::GenerateUniqueName));
-    }).then([](StorageFile^ file)
-    {
-        return create_task(file->OpenAsync(FileAccessMode::ReadWrite));
+        state->Decoder = decoder;
+        return create_task(state->File->OpenAsync(FileAccessMode::ReadWrite));
     }).then([state](Streams::IRandomAccessStream^ outputStream)
     {
-        return create_task(BitmapEncoder::CreateForTranscodingAsync(outputStream, state->_decoder));
+        return create_task(BitmapEncoder::CreateForTranscodingAsync(outputStream, state->Decoder));
     }).then([state](BitmapEncoder^ encoder)
     {
-        state->_encoder = encoder;
+        state->Encoder = encoder;
         auto properties = ref new Windows::Graphics::Imaging::BitmapPropertySet();
-        properties->Insert("System.Photo.Orientation", ref new BitmapTypedValue((unsigned short)state->_orientation, Windows::Foundation::PropertyType::UInt16));
+        properties->Insert("System.Photo.Orientation", ref new BitmapTypedValue((unsigned short)state->Orientation, Windows::Foundation::PropertyType::UInt16));
 
-        return create_task(state->_encoder->BitmapProperties->SetPropertiesAsync(properties));
+        return create_task(state->Encoder->BitmapProperties->SetPropertiesAsync(properties));
     }).then([state]()
     {
-        return state->_encoder->FlushAsync();
+        return state->Encoder->FlushAsync();
     });
 }
 
@@ -616,6 +573,17 @@ task<void> MainPage::SetupUiAsync()
     {
         _deviceOrientation = _orientationSensor->GetCurrentOrientation();
     }
+
+    create_task(StorageLibrary::GetLibraryAsync(KnownLibraryId::Pictures))
+        .then([this](StorageLibrary^ picturesLibrary)
+    {
+        _captureFolder = picturesLibrary->SaveFolder;
+        if (_captureFolder == nullptr)
+        {
+            // In this case fall back to the local app storage since the Pictures Library is not available
+            _captureFolder = ApplicationData::Current->LocalFolder;
+        }
+    });
 
     // Hide the status bar
     if (Windows::Foundation::Metadata::ApiInformation::IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
@@ -968,7 +936,7 @@ void MainPage::SceneAnalysisEffect_SceneAnalyzed(Core::SceneAnalysisEffect^ send
     }));
 }
 
-void MainPage::PhotoButton_Tapped(Object^, Windows::UI::Xaml::RoutedEventArgs^)
+void MainPage::PhotoButton_Click(Object^, Windows::UI::Xaml::RoutedEventArgs^)
 {
     TakePhotoInCurrentModeAsync();
 }
@@ -1052,15 +1020,18 @@ void MainPage::AdvancedCapture_OptionalReferencePhotoCaptured(Capture::AdvancedP
 {
     // Retrieve the context (i.e. what capture does this belong to?)
     auto context = static_cast<AdvancedCaptureContext^>(args->Context);
+    WriteLine("AdvancedCapture_OptionalReferencePhotoCaptured for " + context->CaptureFileName);
 
-    WriteLine("AdvancedCapture_OptionalReferencePhotoCaptured for " + context->_captureFileName);
-
-    // Remove "_HDR" from the name of the capture to create the name of the reference
+    // Remove "_HDR" from the name of the capture to create the name of the reference photo (this is the non-HDR capture)
     std::wstringstream fileName;
-    fileName << context->_captureFileName->Data();
+    fileName << context->CaptureFileName->Data();
     StringReplace(fileName.str(), std::wstring(L"_HDR"), std::wstring(L""));
 
-    ReencodeAndSavePhotoAsync(args->Frame, ref new String(fileName.str().c_str()), context->_captureOrientation);
+    create_task(_captureFolder->CreateFileAsync(ref new String(fileName.str().c_str()), CreationCollisionOption::GenerateUniqueName))
+        .then([this, args, context](StorageFile^ file)
+    {
+        ReencodeAndSavePhotoAsync(args->Frame, file, context->CaptureOrientation);
+    });
 }
 
 /// <summary>

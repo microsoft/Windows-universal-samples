@@ -334,7 +334,7 @@ namespace AllJoynProducerExperiences
                         }
                         else
                         {
-                            if (AppData.OnboardingConfigurePassphrase.Equals(ConvertUtf8ToHex(AppData.SampleNetworkPassword)))
+                            if (AppData.OnboardingConfigurePassphrase.Equals(ConvertUtf8ToHex(AppData.SampleNetworkPassword), StringComparison.OrdinalIgnoreCase))
                             {
                                 returnArg.Value1 = (short)ConnectionResultCode.Validated;
                                 returnArg.Value2 = "Connected successfully";
@@ -343,7 +343,7 @@ namespace AllJoynProducerExperiences
                             else
                             {
                                 returnArg.Value1 = (short)ConnectionResultCode.Unauthorized;
-                                returnArg.Value2 = "Invalid Password";
+                                returnArg.Value2 = "Invalid password";
                                 AppData.OnboardingConfigurationState = (short)ConfigurationState.Error;
                             }
                         }
@@ -351,7 +351,7 @@ namespace AllJoynProducerExperiences
                     else
                     {
                         returnArg.Value1 = (short)ConnectionResultCode.UnsupportedProtocol;
-                        returnArg.Value2 = "Unsupported Authentication mechanism";
+                        returnArg.Value2 = "Unsupported authentication mechanism";
                         AppData.OnboardingConfigurationState = (short)ConfigurationState.Error;
                     }
                 }

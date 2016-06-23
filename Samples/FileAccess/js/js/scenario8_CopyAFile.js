@@ -12,7 +12,9 @@
 
     function copy() {
         if (SdkSample.sampleFile !== null) {
-            SdkSample.sampleFile.copyAsync(Windows.Storage.KnownFolders.picturesLibrary, "sample - Copy.dat", Windows.Storage.NameCollisionOption.replaceExisting).done(function (sampleFileCopy) {
+            Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.picturesLibrary).then(function (picturesLibrary) {
+                return SdkSample.sampleFile.copyAsync(picturesLibrary, "sample - Copy.dat", Windows.Storage.NameCollisionOption.replaceExisting);
+            }).done(function (sampleFileCopy) {
                 WinJS.log && WinJS.log("The file '" + SdkSample.sampleFile.name + "' was copied and the new file was named '" + sampleFileCopy.name + "'.", "sample", "status");
             },
             function (error) {

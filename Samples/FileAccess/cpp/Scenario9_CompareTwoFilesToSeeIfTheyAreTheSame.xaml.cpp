@@ -54,7 +54,7 @@ void Scenario9::CompareFilesButton_Click(Object^ sender, RoutedEventArgs^ e)
                 }
                 catch (COMException^ ex)
                 {
-                    rootPage->HandleFileNotFoundException(ex);
+                    rootPage->HandleIoException(ex, "Error determining whether two files are the same");
                 }
             }
             else

@@ -1,0 +1,53 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2_NavToString"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Navigate to string
+            </TextBlock>
+            <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
+                Loads string content into the WebView control.
+            </TextBlock>
+            <Button Content="Load as HTML" Margin="0,10,0,0" Click="{x:Bind LoadAsHtml}" />
+        </StackPanel>
+        <Grid Grid.Row="1" Margin="0,10,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="HTML:" Style="{StaticResource BasicTextStyle}"/>
+            <TextBlock Text="WebView:" Grid.Column="1" Style="{StaticResource BasicTextStyle}"/>
+            <TextBox x:Name="HtmlBox" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True"/>
+            <Grid Grid.Row="1" Grid.Column="1" BorderBrush="#FF707070" BorderThickness="1">
+                <WebView x:Name="WebViewControl"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

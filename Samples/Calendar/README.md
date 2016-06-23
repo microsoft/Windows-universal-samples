@@ -1,5 +1,6 @@
 <!--
   category: GlobalizationAndLocalization
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624043
 -->
 
 # Calendar sample
@@ -21,7 +22,7 @@ The Calendar object can convert to and from a language-specific date type:
 
 * C++: [**Windows::Foundation::DateTime**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.foundation.datetime.aspx)
 * C#: [**DateTimeOffset**](http://msdn.microsoft.com/library/windows/apps/system.datetimeoffset.aspx)
-* JavaScript: [**Date**](http://msdn.microsoft.com/library/vstudio/dca21baa)
+* JavaScript: [**Date**](https://msdn.microsoft.com/library/windows/apps/cd9w2te4(v=vs.94).aspx)
 
 The sample also uses the
 [**Windows.Globalization.CalendarIdentifiers**](http://msdn.microsoft.com/library/windows/apps/br229460)
@@ -72,7 +73,7 @@ This scenario also demonstrates converting from a language-specific date type to
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

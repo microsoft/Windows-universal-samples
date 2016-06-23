@@ -49,7 +49,7 @@ void Scenario3_Add::PickAudioButton_Click(Platform::Object^ sender, Windows::UI:
     {
         if (files->Size > 0)
         {
-            for each (StorageFile^ file in files)
+            for (StorageFile^ file : files)
             {
                 this->playlist->Files->Append(file);
             }

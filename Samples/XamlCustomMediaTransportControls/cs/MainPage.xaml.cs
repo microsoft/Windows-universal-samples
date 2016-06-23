@@ -27,7 +27,7 @@ namespace CustomMediaTransportControls
             this.InitializeComponent();
 
             //This following line is setting the source for the MediaElement
-            this.MainME.Source = new System.Uri("http://go.microsoft.com/fwlink/p/?LinkID=272585");
+            this.MainME.Source = new System.Uri("ms-appx:///Assets/fishes.wmv");
         }
     }
 }

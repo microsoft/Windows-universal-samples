@@ -40,13 +40,70 @@ public ref class SecureInterfaceServiceEventAdapter sealed : [Windows::Foundatio
 {
 public:
     // Method Invocation Events
-    event Windows::Foundation::TypedEventHandler<SecureInterfaceServiceEventAdapter^, SecureInterfaceConcatenateCalledEventArgs^>^ ConcatenateCalled;
+    event Windows::Foundation::TypedEventHandler<SecureInterfaceServiceEventAdapter^, SecureInterfaceConcatenateCalledEventArgs^>^ ConcatenateCalled 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<SecureInterfaceServiceEventAdapter^, SecureInterfaceConcatenateCalledEventArgs^>^ handler) 
+        { 
+            return _ConcatenateCalled += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<SecureInterfaceServiceEventAdapter^>(sender), safe_cast<SecureInterfaceConcatenateCalledEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _ConcatenateCalled -= token; 
+        } 
+    internal: 
+        void raise(SecureInterfaceServiceEventAdapter^ sender, SecureInterfaceConcatenateCalledEventArgs^ args) 
+        { 
+            _ConcatenateCalled(sender, args);
+        } 
+    }
 
     // Property Read Events
-    event Windows::Foundation::TypedEventHandler<SecureInterfaceServiceEventAdapter^, SecureInterfaceGetIsUpperCaseEnabledRequestedEventArgs^>^ GetIsUpperCaseEnabledRequested;
-    
+    event Windows::Foundation::TypedEventHandler<SecureInterfaceServiceEventAdapter^, SecureInterfaceGetIsUpperCaseEnabledRequestedEventArgs^>^ GetIsUpperCaseEnabledRequested 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<SecureInterfaceServiceEventAdapter^, SecureInterfaceGetIsUpperCaseEnabledRequestedEventArgs^>^ handler) 
+        { 
+            return _GetIsUpperCaseEnabledRequested += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<SecureInterfaceServiceEventAdapter^>(sender), safe_cast<SecureInterfaceGetIsUpperCaseEnabledRequestedEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _GetIsUpperCaseEnabledRequested -= token; 
+        } 
+    internal: 
+        void raise(SecureInterfaceServiceEventAdapter^ sender, SecureInterfaceGetIsUpperCaseEnabledRequestedEventArgs^ args) 
+        { 
+            _GetIsUpperCaseEnabledRequested(sender, args);
+        } 
+    }
+
     // Property Write Events
-    event Windows::Foundation::TypedEventHandler<SecureInterfaceServiceEventAdapter^, SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs^>^ SetIsUpperCaseEnabledRequested;
+    event Windows::Foundation::TypedEventHandler<SecureInterfaceServiceEventAdapter^, SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs^>^ SetIsUpperCaseEnabledRequested 
+    { 
+        Windows::Foundation::EventRegistrationToken add(Windows::Foundation::TypedEventHandler<SecureInterfaceServiceEventAdapter^, SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs^>^ handler) 
+        { 
+            return _SetIsUpperCaseEnabledRequested += ref new Windows::Foundation::EventHandler<Platform::Object^>
+            ([handler](Platform::Object^ sender, Platform::Object^ args)
+            {
+                handler->Invoke(safe_cast<SecureInterfaceServiceEventAdapter^>(sender), safe_cast<SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs^>(args));
+            }, Platform::CallbackContext::Same);
+        } 
+        void remove(Windows::Foundation::EventRegistrationToken token) 
+        { 
+            _SetIsUpperCaseEnabledRequested -= token; 
+        } 
+    internal: 
+        void raise(SecureInterfaceServiceEventAdapter^ sender, SecureInterfaceSetIsUpperCaseEnabledRequestedEventArgs^ args) 
+        { 
+            _SetIsUpperCaseEnabledRequested(sender, args);
+        } 
+    }
 
     // ISecureInterfaceService Implementation
     virtual Windows::Foundation::IAsyncOperation<SecureInterfaceConcatenateResult^>^ ConcatenateAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info, _In_ Platform::String^ interfaceMemberInStr1, _In_ Platform::String^ interfaceMemberInStr2);
@@ -54,6 +111,11 @@ public:
     virtual Windows::Foundation::IAsyncOperation<SecureInterfaceGetIsUpperCaseEnabledResult^>^ GetIsUpperCaseEnabledAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info);
 
     virtual Windows::Foundation::IAsyncOperation<SecureInterfaceSetIsUpperCaseEnabledResult^>^ SetIsUpperCaseEnabledAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info, _In_ bool value);
+
+private:
+    event Windows::Foundation::EventHandler<Platform::Object^>^ _ConcatenateCalled;
+    event Windows::Foundation::EventHandler<Platform::Object^>^ _GetIsUpperCaseEnabledRequested;
+    event Windows::Foundation::EventHandler<Platform::Object^>^ _SetIsUpperCaseEnabledRequested;
 };
 
 } } } } 

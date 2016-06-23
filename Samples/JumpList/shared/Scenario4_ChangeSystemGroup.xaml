@@ -1,0 +1,54 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario4_ChangeSystemGroup"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Change the system group
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock TextWrapping="Wrap">
+                        Select whether the system shows items based on whether they have been recently accessed,
+                        are frequently accessed, or if the system should not suggest any items.
+                    </TextBlock>
+                    <RadioButton x:Name="SystemGroup_Recent" GroupName="SystemGroup" Click="SystemGroup_Recent_Click" Margin="0,10,0,0">Recent (default)</RadioButton>
+                    <RadioButton x:Name="SystemGroup_Frequent" GroupName="SystemGroup" Click="SystemGroup_Frequent_Click">Frequent</RadioButton>
+                    <RadioButton x:Name="SystemGroup_None" GroupName="SystemGroup" Click="SystemGroup_None_Click">None</RadioButton>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                        Note: Until an app has accessed files it is associated with, there will be no contents in
+                        the system group. The button below will create some files and access them for the sake of
+                        the sample.
+                    </TextBlock>
+                    <Button Margin="0,10,0,0" Click="PrepareSampleFiles_Click">Prepare Sample Files</Button>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

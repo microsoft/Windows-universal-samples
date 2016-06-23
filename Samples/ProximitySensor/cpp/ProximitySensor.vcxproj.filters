@@ -55,6 +55,7 @@
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>
+    <Page Include="Scenario4_BackgroundProximitySensor.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">

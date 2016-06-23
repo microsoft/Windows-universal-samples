@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Scenario1_GetAndSetPin.xaml.cpp" />
+    <ClCompile Include="Scenario2_Listen.xaml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Scenario1_GetAndSetPin.xaml.h" />
+    <ClInclude Include="Scenario2_Listen.xaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\shared\gpio_sample_bb.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
+    <Page Include="..\shared\Scenario1_GetAndSetPin.xaml" />
+    <Page Include="..\shared\Scenario2_Listen.xaml" />
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{3d69c7fe-172e-4737-a906-6b0e1b47f307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{d6ad62a9-d6a8-4fe4-954b-07e844f1033d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

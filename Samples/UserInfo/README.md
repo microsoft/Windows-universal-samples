@@ -1,6 +1,6 @@
 ﻿<!---
   category: IdentitySecurityAndEncryption
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620617&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620617
 --->
 
 # User information sample
@@ -11,13 +11,13 @@ Specifically, this sample demonstrates the following scenarios:
 
 - How to find all users with [the `FindAllAsync` method](https://msdn.microsoft.com/library/windows/apps/windows.system.user.findallasync.aspx).
 - How to retrieve a specific user property with [the `GetPropertyAsync` method](https://msdn.microsoft.com/library/windows/apps/windows.system.user.getpropertyasync.aspx).
-- How to retrieve multiple user properties with [the `GetPropertiesAsync` method](https://msdn.microsoft.com/library/windows/apps/windows.system.user.getpropertiesasync.aspx).
+- How to retrieve multiple user properties with [the `GetPropertiesAsync` method](https://msdn.microsoft.com/library/windows/apps/dn996552.aspx).
 - How to obtain the profile picture for a user with [the `GetPictureAsync` method](https://msdn.microsoft.com/library/windows/apps/windows.system.user.getpictureasync.aspx).
 - How to monitor users dynamically with [the `CreateWatcher` method](https://msdn.microsoft.com/library/windows/apps/windows.system.user.createwatcher.aspx).
 
 **Note** The Universal Windows app samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 

@@ -21,8 +21,9 @@ namespace NavigationMenuSample
         public:
             PageHeader();
             void OnLoaded(Platform::Object ^sender, Windows::UI::Xaml::RoutedEventArgs ^e);
+            void OnUnloaded(Platform::Object ^sender, Windows::UI::Xaml::RoutedEventArgs ^e);
 
-            static property DependencyProperty^ HeaderContentProperty 
+            static property DependencyProperty^ HeaderContentProperty
             {
                 DependencyProperty^ get() { return _headerContentProperty; }
             }
@@ -35,6 +36,7 @@ namespace NavigationMenuSample
 
         private:
             static DependencyProperty^ _headerContentProperty;
+			Windows::Foundation::EventRegistrationToken _toggleButtonRectChangedToken;
             void Current_TogglePaneButtonSizeChanged(AppShell^ sender, Rect e);
         };
     }

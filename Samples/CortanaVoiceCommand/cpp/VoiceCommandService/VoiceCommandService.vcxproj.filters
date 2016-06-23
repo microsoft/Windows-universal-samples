@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>aa95eab8-ba7e-4f27-958e-7e15b6d4635a</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Images">
+      <UniqueIdentifier>{78aac2a2-3016-4375-854b-ae9888e55a45}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="AdventureworksVoiceCommandService.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="AdventureworksVoiceCommandService.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\GreyTile.scale-100.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="Images\GreyTile.scale-150.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="Images\GreyTile.scale-200.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="Images\GreyTile.scale-225.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="Images\GreyTile.scale-400.png">
+      <Filter>Images</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

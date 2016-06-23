@@ -77,7 +77,8 @@ namespace SDKTemplate
             */
 
             // Set up the query and retrieve files.
-            var query = KnownFolders.PicturesLibrary.CreateFileQueryWithOptions(queryOptions);
+            StorageFolder picturesFolder = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
+            var query = picturesFolder.CreateFileQueryWithOptions(queryOptions);
             IReadOnlyList<StorageFile> fileList = await query.GetFilesAsync();
             foreach (StorageFile file in fileList)
             {

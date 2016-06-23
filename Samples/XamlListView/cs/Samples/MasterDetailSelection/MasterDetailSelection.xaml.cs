@@ -164,6 +164,7 @@ namespace ListViewSample
                 {
                     // Details view is collapsed, in case there is not items.
                     DetailContentPresenter.Visibility = Visibility.Collapsed;
+                    selectedContact = null;
                 }
             }
         }

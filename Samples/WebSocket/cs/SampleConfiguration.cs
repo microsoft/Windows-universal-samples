@@ -9,45 +9,40 @@
 //
 //*********************************************************
 
+using System;
 using System.Collections.Generic;
-using Windows.UI.Xaml.Controls;using System;
-using Microsoft.Samples.Networking.WebSocket;
+using System.Threading.Tasks;
+using Windows.Networking.Sockets;
+using Windows.Security.Cryptography.Certificates;
+using Windows.UI.Xaml.Controls;
+using Windows.Web;
 
 namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        // Change the string below to reflect the name of your sample.
-        // This is used on the main page as the title of the sample.
-        public const string FEATURE_NAME = "WebSocket";
+        public const string FEATURE_NAME = "WebSocket C# Sample";
 
-        // Change the array below to reflect the name of your scenarios.
-        // This will be used to populate the list of scenarios on the main page with
-        // which the user will choose the specific scenario that they are interested in.
-        // These should be in the form: "Navigating to a web page".
-        // The code in MainPage will take care of turning this into: "1) Navigating to a web page"
         List<Scenario> scenarios = new List<Scenario>
         {
             new Scenario() { Title = "UTF-8 text messages", ClassType = typeof(Scenario1) },
             new Scenario() { Title = "Binary data stream", ClassType = typeof(Scenario2) },
         };
 
-        public bool TryGetUri(string uriString, out Uri uri)
+        public Uri TryGetUri(string uriString)
         {
-            uri = null;
-
             Uri webSocketUri;
             if (!Uri.TryCreate(uriString.Trim(), UriKind.Absolute, out webSocketUri))
             {
                 NotifyUser("Error: Invalid URI", NotifyType.ErrorMessage);
-                return false;
+                return null;
             }
-            
+
             // Fragments are not allowed in WebSocket URIs.
             if (!String.IsNullOrEmpty(webSocketUri.Fragment))
             {
                 NotifyUser("Error: URI fragments not supported in WebSocket URIs.", NotifyType.ErrorMessage);
-                return false;
+                return null;
             }
 
             // Uri.SchemeName returns the canonicalized scheme name so we can use case-sensitive, ordinal string
@@ -55,12 +50,33 @@ namespace SDKTemplate
             if ((webSocketUri.Scheme != "ws") && (webSocketUri.Scheme != "wss"))
             {
                 NotifyUser("Error: WebSockets only support ws:// and wss:// schemes.", NotifyType.ErrorMessage);
-                return false;
+                return null;
             }
 
-            uri = webSocketUri;
+            return webSocketUri;
+        }
 
-            return true;
+        public static string BuildWebSocketError(Exception ex)
+        {
+            ex = ex.GetBaseException();
+            WebErrorStatus status = WebSocketError.GetStatus(ex.HResult);
+
+            // Normally we'd use the HResult and status to test for specific conditions we want to handle.
+            // In this sample, we'll just output them for demonstration purposes.
+            switch (status)
+            {
+                case WebErrorStatus.CannotConnect:
+                case WebErrorStatus.NotFound:
+                case WebErrorStatus.RequestTimeout:
+                    return "Cannot connect to the server. Please make sure " +
+                        "to run the server setup script before running the sample.";
+
+                case WebErrorStatus.Unknown:
+                    return "COM error: " + ex.HResult;
+
+                default:
+                    return "Error: " + status;
+            }
         }
     }
 

@@ -189,10 +189,9 @@ private:
         _In_ Windows::Devices::Input::MouseDevice^ mouseDevice,
         _In_ Windows::Devices::Input::MouseEventArgs^ args
         );
-    // Hardware back button is only present on some device families such as Phone.
-    void OnHardwareBackButtonPressed(
+    void OnBackRequested(
         _In_ Platform::Object^ sender,
-        _In_ Windows::Phone::UI::Input::BackPressedEventArgs^ args
+        _In_ Windows::UI::Core::BackRequestedEventArgs^ args
         );
     void OnGamepadAdded(
         _In_ Platform::Object^ sender,

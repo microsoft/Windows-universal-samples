@@ -55,7 +55,7 @@ void SecureInterfaceSignals::TextSent(_In_ Platform::String^ interfaceMemberMess
 
     size_t argCount = 1;
     alljoyn_msgarg arguments = alljoyn_msgarg_array_create(argCount);
-    TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(arguments, 0), "s", interfaceMemberMessage);
+    (void)TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(arguments, 0), "s", interfaceMemberMessage);
     
     alljoyn_busobject_signal(
         m_busObject, 
@@ -73,8 +73,6 @@ void SecureInterfaceSignals::TextSent(_In_ Platform::String^ interfaceMemberMess
 
 void SecureInterfaceSignals::CallTextSentReceived(_In_ SecureInterfaceSignals^ sender, _In_ SecureInterfaceTextSentReceivedEventArgs^ args)
 {
-    AllJoynHelpers::DispatchEvent([=]() {
-        TextSentReceived(sender, args);
-    });
+    TextSentReceived(sender, args);
 }
 

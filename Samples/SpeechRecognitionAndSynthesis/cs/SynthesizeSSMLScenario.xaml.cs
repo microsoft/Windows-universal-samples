@@ -71,6 +71,17 @@ namespace SpeechAndTTS
                         media.SetSource(synthesisStream, synthesisStream.ContentType);
                         media.Play();
                     }
+                    catch (System.IO.FileNotFoundException)
+                    {
+                        // If media player components are unavailable, (eg, using a N SKU of windows), we won't
+                        // be able to start media playback. Handle this gracefully
+                        btnSpeak.Content = "Speak";
+                        btnSpeak.IsEnabled = false;
+                        textToSynthesize.IsEnabled = false;
+                        listboxVoiceChooser.IsEnabled = false;
+                        var messageDialog = new Windows.UI.Popups.MessageDialog("Media player components unavailable");
+                        await messageDialog.ShowAsync();
+                    }
                     catch (Exception)
                     {
                         // If the SSML stream is not in the correct format, throw an error message to the user.

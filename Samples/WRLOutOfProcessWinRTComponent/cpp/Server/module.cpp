@@ -9,19 +9,18 @@
 #include <Windows.ApplicationModel.Core.h>
 
 using namespace ABI::Windows::ApplicationModel::Core;
+using namespace ABI::Windows::Foundation;
 using namespace Microsoft::WRL;
+using namespace Microsoft::WRL::Wrappers;
 
-class ExeServerGetActivationFactory : public RuntimeClass<
-    ABI::Windows::Foundation::IGetActivationFactory,
-    FtmBase>
+class ExeServerGetActivationFactory WrlFinal : public RuntimeClass<IGetActivationFactory, FtmBase>
 {
 public:
-    IFACEMETHODIMP GetActivationFactory(_In_ HSTRING activatableClassId, _COM_Outptr_ IInspectable **factory)
+    STDMETHODIMP GetActivationFactory(_In_ HSTRING activatableClassId, _COM_Outptr_ IInspectable** factory)
     {
         *factory = nullptr;
         ComPtr<IActivationFactory> activationFactory;
-        auto &module = Microsoft::WRL::Module<Microsoft::WRL::InProc>::GetModule();
-        HRESULT hr = module.GetActivationFactory(activatableClassId, &activationFactory);
+        HRESULT hr = Module<InProc>::GetModule().GetActivationFactory(activatableClassId, &activationFactory);
         if (SUCCEEDED(hr))
         {
             *factory = activationFactory.Detach();
@@ -32,19 +31,16 @@ public:
 
 int CALLBACK WinMain(_In_  HINSTANCE, _In_  HINSTANCE, _In_  LPSTR, _In_  int)
 {
-    HRESULT hr = Windows::Foundation::Initialize(RO_INIT_MULTITHREADED);
-    if (SUCCEEDED(hr))
-    {
-        // Scoping for smart pointers
-        {
-            ComPtr<ICoreApplication> spApplicationFactory;
-            hr = Windows::Foundation::GetActivationFactory(Wrappers::HStringReference(RuntimeClass_Windows_ApplicationModel_Core_CoreApplication).Get(), &spApplicationFactory);
-            if (SUCCEEDED(hr))
-            {
-                ComPtr<ABI::Windows::Foundation::IGetActivationFactory> spGetActivationFactory = Make<ExeServerGetActivationFactory>();
-                spApplicationFactory->RunWithActivationFactories(spGetActivationFactory.Get());
-            }
-        }
-        Windows::Foundation::Uninitialize();
-    }
+    Microsoft::WRL::Wrappers::RoInitializeWrapper roInit(RO_INIT_MULTITHREADED);
+    if (FAILED(roInit)) return 0;
+
+    ComPtr<ICoreApplication> coreApp;
+    if (FAILED(GetActivationFactory(HStringReference(RuntimeClass_Windows_ApplicationModel_Core_CoreApplication).Get(), &coreApp))) return 0;
+
+    auto activationFactory = Make<ExeServerGetActivationFactory>();
+    if (!activationFactory) return 0;
+
+    coreApp->RunWithActivationFactories(activationFactory.Get());
+
+    return 0;
 }

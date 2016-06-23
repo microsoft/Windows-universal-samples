@@ -98,6 +98,13 @@ namespace SDKSample
             // Tracks if this ViewLifetimeControl object is still valid. If this is true, then the view is in the process
             // of closing itself down
             bool consolidated, released;
+
+            // Tracks whether the projected view has been made visible for the first time yet. If it has not yet been shown for the
+            // first time yet, we should not signal for it to be released yet. This protects against the fact that visibilityChanged
+            // is not guaranteed to fire until after the StartProjectingAsync task has completed, so refCount of the ViewLifeTimeControl
+            // may temporarily drop to 0 until the visibilityChanged event fires for the projected view first becoming visible.
+            bool madeVisible;
+
             std::mutex globalMutex;
         };
     }

@@ -33,7 +33,7 @@ Scenario3_CustomDecay::Scenario3_CustomDecay() : _rootPage(MainPage::Current)
     if (SUCCEEDED(hr))
     {
         _timer = ref new DispatcherTimer();
-        _timer->Tick += ref new EventHandler<Platform::Object^>(this, &Scenario3_CustomDecay::OnTimerTick);
+        _timerEventToken = _timer->Tick += ref new EventHandler<Platform::Object^>(this, &Scenario3_CustomDecay::OnTimerTick);
         TimeSpan timespan;
         timespan.Duration = 10000 / 30;
         _timer->Interval = timespan;
@@ -53,6 +53,14 @@ Scenario3_CustomDecay::Scenario3_CustomDecay() : _rootPage(MainPage::Current)
     }
 
     _initialized = SUCCEEDED(hr);
+}
+
+Scenario3_CustomDecay::~Scenario3_CustomDecay()
+{
+    if (_timerEventToken.Value != 0)
+    {
+        _timer->Tick -= _timerEventToken;
+    }
 }
 
 void SDKTemplate::Scenario3_CustomDecay::EnvironmentComboBox_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)

@@ -67,11 +67,9 @@ void SDKTemplate::Scenario5_ManyProvidersManyAccounts::CreateLocalDataContainers
 void SDKTemplate::Scenario5_ManyProvidersManyAccounts::InitalizeAccountsControlDialog()
 {
     // Add to the event AccountCommandsRequested to load our list of providers into the AccountSettingsPane
-    m_accountCommandsRequestedRegistrationToken = AccountsSettingsPane::GetForCurrentView()->AccountCommandsRequested::add(
+    m_accountCommandsRequestedRegistrationToken = AccountsSettingsPane::GetForCurrentView()->AccountCommandsRequested +=
         ref new TypedEventHandler<AccountsSettingsPane^, AccountsSettingsPaneCommandsRequestedEventArgs^>(
-            this,
-            &SDKTemplate::Scenario5_ManyProvidersManyAccounts::OnAccountCommandsRequested)
-    );
+            this, &SDKTemplate::Scenario5_ManyProvidersManyAccounts::OnAccountCommandsRequested);
 
     CreateLocalDataContainers();
     GetProviders();
@@ -81,7 +79,7 @@ void SDKTemplate::Scenario5_ManyProvidersManyAccounts::InitalizeAccountsControlD
 void SDKTemplate::Scenario5_ManyProvidersManyAccounts::CleanupAccountsControlDialog()
 {
     // Remove the event handler from the AccountCommandsRequested
-    AccountsSettingsPane::GetForCurrentView()->AccountCommandsRequested::remove(m_accountCommandsRequestedRegistrationToken);
+    AccountsSettingsPane::GetForCurrentView()->AccountCommandsRequested -= m_accountCommandsRequestedRegistrationToken;
 }
 
 void SDKTemplate::Scenario5_ManyProvidersManyAccounts::OnAccountCommandsRequested(
@@ -106,7 +104,8 @@ void SDKTemplate::Scenario5_ManyProvidersManyAccounts::GetProviders()
     m_providers = ref new Map<String^, WebAccountProvider^>();
 
     // Make tasks to get the MSA and AAD providers by their IDs
-    WebAccountProvider^ appSpecificProvider = ref new WebAccountProvider( APP_SPECIFIC_PROVIDER_ID,  APP_SPECIFIC_PROVIDER_NAME, ref new Uri(this->BaseUri->ToString(), "Assets/smallTile-sdk.png"));
+    auto appSpecificProvider = ref new WebAccountProvider( APP_SPECIFIC_PROVIDER_ID, APP_SPECIFIC_PROVIDER_NAME, 
+        ref new Uri(this->BaseUri->ToString(), "Assets/smallTile-sdk.png"));
 
     // When that task completes, save the providers found to the provider list
     concurrency::create_task(WebAuthenticationCoreManager::FindAccountProviderAsync(MICROSOFT_PROVIDER_ID, CONSUMER_AUTHORITY)).
@@ -154,8 +153,7 @@ void SDKTemplate::Scenario5_ManyProvidersManyAccounts::GetAccounts()
         {
             if (provider->Id == APP_SPECIFIC_PROVIDER_ID)
             {
-                WebAccount^ account = ref new WebAccount(provider, accountID, WebAccountState::None);
-                SaveAccount(account);
+                SaveAccount(ref new WebAccount(provider, accountID, WebAccountState::None));
             }
             else
             {
@@ -175,13 +173,13 @@ void SDKTemplate::Scenario5_ManyProvidersManyAccounts::AddWebAccountProviders(Ac
     for (const auto& pair : m_providers)
     {
         // Create a new WebAccountProviderCommandInvokedHandler for the event fired when a user clicks on a provider in the AccountSettingsPane
-        WebAccountProviderCommandInvokedHandler^ handler = ref new WebAccountProviderCommandInvokedHandler(this, &SDKTemplate::Scenario5_ManyProvidersManyAccounts::WebAccountProviderCommandInvoked);
+        auto handler = ref new WebAccountProviderCommandInvokedHandler(this, &SDKTemplate::Scenario5_ManyProvidersManyAccounts::WebAccountProviderCommandInvoked);
 
         // Make a new command based on the provider and the click handler we just created
-        WebAccountProviderCommand^ ProviderCommand = ref new WebAccountProviderCommand(pair->Value, handler);
+        auto providerCommand = ref new WebAccountProviderCommand(pair->Value, handler);
 
         // Append that command to the WebAccountProviderCommands list for the AccountSettingsPane
-        e->WebAccountProviderCommands->Append(ProviderCommand);
+        e->WebAccountProviderCommands->Append(providerCommand);
     }
 }
 
@@ -190,8 +188,8 @@ void SDKTemplate::Scenario5_ManyProvidersManyAccounts::AddWebAccounts(AccountsSe
 {
     for (const auto& account : m_accounts)
     {
-        WebAccountCommandInvokedHandler^ handler = ref new WebAccountCommandInvokedHandler(this, &SDKTemplate::Scenario5_ManyProvidersManyAccounts::WebAccountCommandInvoked);
-        WebAccountCommand^ command = ref new WebAccountCommand(account->Value, handler, SupportedWebAccountActions::Remove | SupportedWebAccountActions::Manage);
+        auto handler = ref new WebAccountCommandInvokedHandler(this, &SDKTemplate::Scenario5_ManyProvidersManyAccounts::WebAccountCommandInvoked);
+        auto command = ref new WebAccountCommand(account->Value, handler, SupportedWebAccountActions::Remove | SupportedWebAccountActions::Manage);
         e->WebAccountCommands->Append(command);
     }
 }

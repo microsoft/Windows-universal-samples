@@ -61,7 +61,7 @@ namespace SDKTemplate
         static BackgroundTaskRegistration^ RegisterBackgroundTask(String^ taskEntryPoint, String^ name, IBackgroundTrigger^ trigger, IBackgroundCondition^ condition);
         static bool TaskRequiresBackgroundAccess(String^ name);
         static void UnregisterBackgroundTasks(String^ name);
-        static void UpdateBackgroundTaskStatus(String^ name, bool registered);
+        static void UpdateBackgroundTaskRegistrationStatus(String^ name, bool registered);
 
         static String^ SampleBackgroundTaskProgress;
         static bool SampleBackgroundTaskRegistered;

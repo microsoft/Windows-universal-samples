@@ -13,22 +13,21 @@
 #include "Scenario2_ConcurrentProfile.xaml.h"
 #include <sstream>
 
-using namespace SDKTemplate;
-
+using namespace Concurrency;
 using namespace Platform;
+using namespace SDKTemplate;
+using namespace Windows::Devices::Enumeration;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
+using namespace Windows::Media::Capture;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Controls::Primitives;
+using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
-using namespace Concurrency;
-using namespace Windows::Devices::Enumeration;
-using namespace Windows::Media::Capture;
-using namespace Windows::UI::Core;
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Scenario2_ConcurrentProfile"/> class.
@@ -100,9 +99,9 @@ void Scenario2_ConcurrentProfile::CheckConcurrentProfileBtn_Click(Platform::Obje
             auto allBackProfiles = MediaCapture::FindConcurrentProfiles(backVideoDeviceId);
             MediaCaptureVideoProfile^ frontProfile = nullptr;
             MediaCaptureVideoProfile^ backProfile = nullptr;
-            for each (auto fProfile in allFrontProfiles)
+            for (auto fProfile : allFrontProfiles)
             {
-                for each (auto bProfile in allBackProfiles)
+                for (auto bProfile : allBackProfiles)
                 {
                     if (fProfile->Id == bProfile->Id)
                     {
@@ -149,29 +148,13 @@ void Scenario2_ConcurrentProfile::CheckConcurrentProfileBtn_Click(Platform::Obje
                 // camera).
                 initializeTasks.push_back(create_task(mediaCaptureBack->InitializeAsync(mediaInitSettingsBack)));
             }
+
             when_all(initializeTasks.begin(), initializeTasks.end())
-                .then([this](task<void> previousTask)
+                .then([this]()
             {
-                try
-                {
-                    previousTask.get();
-                }
-                catch (Exception^ ex)
-                {
-                    LogStatusAsync(ex->Message, NotifyType::ErrorMessage);
-                }
+                LogStatusToOutputBoxAsync("Initialization complete");
             });
         });
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            LogStatusAsync(ex->Message, NotifyType::ErrorMessage);
-        }
     });
 }
 
@@ -196,7 +179,7 @@ task<String^> Scenario2_ConcurrentProfile::GetVideoProfileSupportedDeviceIdAsync
         LogStatusToOutputBoxAsync(ref new String(ss.str().c_str()));
 
         // Loop through devices looking for device that supports Video Profile
-        for each(auto cameraDeviceInfo in devices)
+        for (auto cameraDeviceInfo : devices)
         {
             if (MediaCapture::IsVideoProfileSupported(cameraDeviceInfo->Id) && cameraDeviceInfo->EnclosureLocation->Panel == panel)
             {
@@ -222,17 +205,7 @@ task<void> Scenario2_ConcurrentProfile::LogStatusToOutputBoxAsync(String^ messag
     {
         outputBox->Text += message + "\r\n";
         outputScrollViewer->ChangeView(0.0, outputBox->ActualHeight, 1.0f);
-    }))).then([this, message](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-        }
-    });
+    })));
 }
 
 /// <summary>
@@ -252,15 +225,5 @@ task<void> Scenario2_ConcurrentProfile::LogStatusAsync(String^ message, NotifyTy
     }))).then([this, message]()
     {
         return LogStatusToOutputBoxAsync(message);
-    }).then([this, message](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-        }
     });
 }

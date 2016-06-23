@@ -35,22 +35,25 @@ void Scenario1::GetFilesAndFoldersButton_Click(Platform::Object^ sender, Windows
 {
     OutputTextBlock->Text = "";
 
-    create_task(KnownFolders::PicturesLibrary->GetFoldersAsync()).then([this](IVectorView<StorageFolder^>^ folders)
+    create_task(KnownFolders::GetFolderForUserAsync(nullptr /* current user */, KnownFolderId::PicturesLibrary)).then([this](StorageFolder^ picturesFolder)
     {
-        create_task(KnownFolders::PicturesLibrary->GetFilesAsync()).then([this, folders](IVectorView<StorageFile^>^ files)
+        create_task(picturesFolder->GetFoldersAsync()).then([this, picturesFolder](IVectorView<StorageFolder^>^ folders)
         {
-            auto count = folders->Size + files->Size;
-            String^ outputText = ref new String();
-            outputText = KnownFolders::PicturesLibrary->Name + " (" + count.ToString() + ")\n\n";
-            std::for_each(begin(folders), end(folders), [this, &outputText](StorageFolder^ folder)
+            create_task(picturesFolder->GetFilesAsync()).then([this, picturesFolder, folders](IVectorView<StorageFile^>^ files)
             {
-                outputText += "    " + folder->DisplayName + "\\\n";
+                auto count = folders->Size + files->Size;
+                String^ outputText = ref new String();
+                outputText = picturesFolder->Name + " (" + count.ToString() + ")\n\n";
+                std::for_each(begin(folders), end(folders), [this, &outputText](StorageFolder^ folder)
+                {
+                    outputText += "    " + folder->DisplayName + "\\\n";
+                });
+                std::for_each(begin(files), end(files), [this, &outputText](StorageFile^ file)
+                {
+                    outputText += "    " + file->Name + "\n";
+                });
+                OutputTextBlock->Text = outputText;
             });
-            std::for_each(begin(files), end(files), [this, &outputText](StorageFile^ file)
-            {
-                outputText += "    " + file->Name + "\n";
-            });
-            OutputTextBlock->Text = outputText;
         });
     });
 }

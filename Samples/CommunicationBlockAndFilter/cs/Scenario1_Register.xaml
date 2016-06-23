@@ -1,0 +1,45 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Register"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer Margin="12,10,12,12">
+            <StackPanel>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Register as blocking and filtering app
+                </TextBlock>
+                <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                    In order to appear in the list of communication blocking and filtering apps,
+                    the app must register certain background tasks.
+                </TextBlock>
+                <TextBlock x:Name="BackgroundTaskStatus" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0" />
+                <Button x:Name="RegisterButton" Content="Register" Click="{x:Bind RegisterUnregister}" Margin="0,10,0,0"/>
+                <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                    An app can check whether it is the currently-selected communication blocking
+                    and filtering app.
+                </TextBlock>
+                <Button Content="Check if app is active" Click="{x:Bind CheckIsActive}" Margin="0,10,0,0"/>
+                <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                    An app can direct the user to the Settings page for selecting a communication
+                    blocking and filtering app.
+                </TextBlock>
+                <Button Content="Select active app" Click="{x:Bind SelectActiveApp}" Margin="0,10,0,0"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

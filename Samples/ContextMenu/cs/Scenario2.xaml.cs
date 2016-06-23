@@ -56,26 +56,10 @@ namespace SDKTemplate
                 rectLast = textbox.GetRectFromCharacterIndex(lastIndex, false);
             }
 
-            GeneralTransform buttonTransform = textbox.TransformToVisual(null);
-            Point point = buttonTransform.TransformPoint(new Point());
+            rectFirst.Union(rectLast);
 
-            // Make sure that we return a valid rect if selection is on multiple lines
-            // and end of the selection is to the left of the start of the selection.
-            double x, y, dx, dy;
-            y = point.Y + rectFirst.Top;
-            dy = rectLast.Bottom - rectFirst.Top;
-            if (rectLast.Right > rectFirst.Left)
-            {
-                x = point.X + rectFirst.Left;
-                dx = rectLast.Right - rectFirst.Left;
-            }
-            else
-            {
-                x = point.X + rectLast.Right;
-                dx = rectFirst.Left - rectLast.Right;
-            }
-
-            return new Rect(x, dx, y, dy);
+            GeneralTransform transform = textbox.TransformToVisual(null);
+            return transform.TransformBounds(rectFirst);
         }
 
         private async void ReadOnlyTextBox_ContextMenuOpening(object sender, ContextMenuEventArgs e)

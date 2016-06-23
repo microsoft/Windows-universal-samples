@@ -18,13 +18,12 @@
 
 using namespace SDKTemplate;
 
-using namespace Windows::UI::Xaml;
-using namespace Windows::UI::Xaml::Controls;
-using namespace Windows::UI::Xaml::Navigation;
 using namespace Platform;
 using namespace Windows::ApplicationModel::Resources::Core;
 using namespace Windows::Globalization;
-
+using namespace Windows::UI::Xaml;
+using namespace Windows::UI::Xaml::Controls;
+using namespace Windows::UI::Xaml::Navigation;
 
 Scenario8::Scenario8()
 {
@@ -33,38 +32,22 @@ Scenario8::Scenario8()
     UpdateCurrentAppLanguageMessage();
 }
 
-/// <summary>
-/// Invoked when this page is about to be displayed in a Frame.
-/// </summary>
-/// <param name="e">Event data that describes how this page was reached.  The Parameter
-/// property is typically used to configure the page.</param>
-void Scenario8::OnNavigatedTo(NavigationEventArgs^ e)
+void Scenario8::ShowText()
 {
-    // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
-    // as NotifyUser()
-    rootPage = MainPage::Current;
-}
-
-
-void Scenario8::Scenario8Button_Show_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
-{
-    Button^ b = safe_cast<Button^>(sender);
-    if (b != nullptr)
-    {
-        ResourceContext^ defaultContextForCurrentView = ResourceContext::GetForCurrentView();
-
-        auto resourceStringMap = ResourceManager::Current->MainResourceMap->GetSubtree("Resources");
-        Scenario8MessageTextBlock->Text = resourceStringMap->GetValue("string1", defaultContextForCurrentView)->ValueAsString;
-    }
+    ResourceContext^ defaultContextForCurrentView = ResourceContext::GetForCurrentView();
+    auto resourceStringMap = ResourceManager::Current->MainResourceMap->GetSubtree("Resources");
+    Scenario8MessageTextBlock->Text = resourceStringMap->GetValue("string1", defaultContextForCurrentView)->ValueAsString;
 }
 
 
 void Scenario8::LanguageOverrideCombo_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
 {
-    ComboBox^ combo = safe_cast<ComboBox^>(sender);
+    auto combo = safe_cast<ComboBox^>(sender);
+    auto item = safe_cast<ComboBoxItem^>(combo->SelectedValue);
+    auto languageTag = safe_cast<String^>(item->Tag);
 
-    // Don't accept the list item for the divider (tag = "-")
-    if (combo->SelectedValue->ToString() == "-")
+    // Ignore the divider ((tag = "-")
+    if (languageTag == "-")
     {
         combo->SelectedIndex = lastSelectedIndex;
     }
@@ -73,22 +56,37 @@ void Scenario8::LanguageOverrideCombo_SelectionChanged(Platform::Object^ sender,
         lastSelectedIndex = combo->SelectedIndex;
 
         // Set the persistent language override
-        Windows::Globalization::ApplicationLanguages::PrimaryLanguageOverride = combo->SelectedValue->ToString();
+        ApplicationLanguages::PrimaryLanguageOverride = languageTag;
 
         // update current app languages message
         UpdateCurrentAppLanguageMessage();
     }
 }
 
+void Scenario8::AddItemForLanguageTag(String^ languageTag)
+{
+    auto language = ref new Windows::Globalization::Language(languageTag);
+    auto item = ref new ComboBoxItem();
+    item->Content = language->DisplayName;
+    item->Tag = languageTag;
+    LanguageOverrideCombo->Items->Append(item);
+
+    // Select this item if it is the primary language override.
+    if (languageTag == ApplicationLanguages::PrimaryLanguageOverride)
+    {
+        LanguageOverrideCombo->SelectedItem = item;
+    }
+}
+
 
 void Scenario8::PopulateComboBox()
 {
-    comboBoxValues = ref new Platform::Collections::Vector<ComboBoxValue^>();
-
-    //First, show the default setting
-    auto comboBoxValue_default = ref new ComboBoxValue("Use my default language preferences", "");
-    comboBoxValues->Append(comboBoxValue_default);
-
+    // First, show the default setting
+    auto defaultItem = ref new ComboBoxItem();
+    defaultItem->Content = "Use language preferences (recommended)";
+    defaultItem->Tag = "";
+    LanguageOverrideCombo->Items->Append(defaultItem);
+    LanguageOverrideCombo->SelectedIndex = 0;
 
     // If there are app languages that the user speaks, show them next
     
@@ -99,13 +97,9 @@ void Scenario8::PopulateComboBox()
     // could change. But if it's set as an override, then it will remain the primary
     // app language after the user changes their language preferences.
 
-    for (unsigned int i = 0; i < ApplicationLanguages::Languages->Size; i++)
+    for (auto languageTag : ApplicationLanguages::Languages)
     {
-        // ApplicationLanguages.Languages items are BCP-47 language tags. Need to use
-        // Windows.Globalization.Language to obtain a display name.
-        auto language = ref new Windows::Globalization::Language(ApplicationLanguages::Languages->GetAt(i));
-        auto comboBoxValue = ref new ComboBoxValue(language->NativeName, language->LanguageTag);
-        comboBoxValues->Append(comboBoxValue);
+        AddItemForLanguageTag(languageTag);
     }
 
     // Now add a divider followed by all the app manifest languages (in case the user
@@ -120,76 +114,42 @@ void Scenario8::PopulateComboBox()
     // from the set returned by ApplicationLanguages.Languages above would depend on 
     // which languages are included in the main app package.
 
-    auto comboBoxValue_divider = ref new ComboBoxValue("——————", "-");
-    comboBoxValues->Append(comboBoxValue_divider);
+    auto dividerItem = ref new ComboBoxItem();
+    dividerItem->Content = "——————";
+    dividerItem->Tag = "-";
+    LanguageOverrideCombo->Items->Append(dividerItem);
 
     // In a production app, this list should be sorted, but that's beyond the
     // focus of this sample.
-    for each (auto lang in ApplicationLanguages::ManifestLanguages)
+    for (auto languageTag : ApplicationLanguages::ManifestLanguages)
     {
-        Windows::Globalization::Language^ langObject = ref new Windows::Globalization::Language(lang);
-        auto comboBoxValue = ref new ComboBoxValue(langObject->NativeName, langObject->LanguageTag);
-        comboBoxValues->Append(comboBoxValue);
-    }
-    
+        AddItemForLanguageTag(languageTag);
+    }    
 
-    // Got all the entries; complete initialization of combo box
-    LanguageOverrideCombo->ItemsSource = comboBoxValues;
-    LanguageOverrideCombo->SelectedIndex = FindPrimaryLanguageOverrideIndex(comboBoxValues);
     LanguageOverrideCombo->SelectionChanged += ref new SelectionChangedEventHandler(this, &Scenario8::LanguageOverrideCombo_SelectionChanged);
 
     lastSelectedIndex = LanguageOverrideCombo->SelectedIndex;
 }
-
 
 void Scenario8::UpdateCurrentAppLanguageMessage()
 {
     Scenario8AppLanguagesTextBlock->Text = "Current app language(s): " + GetAppLanguagesAsFormattedString();
 }
 
-
 Platform::String^ Scenario8::GetAppLanguagesAsFormattedString()
 {
     Platform::String^ appLanguages = "";
 
-    auto countLanguages = ApplicationLanguages::Languages->Size;
-    for (unsigned int i = 0; i < countLanguages - 1; i++)
+    for (auto languageTag : ApplicationLanguages::Languages)
     {
-        appLanguages = appLanguages + ApplicationLanguages::Languages->GetAt(i) + ", ";
-    }
-    appLanguages = appLanguages + ApplicationLanguages::Languages->GetAt(countLanguages - 1);
-
-    return appLanguages;
-}
-
-
-unsigned int Scenario8::FindPrimaryLanguageOverrideIndex(Platform::Collections::Vector<ComboBoxValue^>^ comboBoxValues)
-{
-    // Go through the list and return the first matching index
-    for (unsigned int i = 0; i < comboBoxValues->Size; i++)
-    {
-        ComboBoxValue^ item = comboBoxValues->GetAt(i);
-        if (item->LanguageTag == ApplicationLanguages::PrimaryLanguageOverride)
+        if (appLanguages->Length() == 0)
         {
-            return i;
+            appLanguages = languageTag;
+        }
+        else
+        {
+            appLanguages = appLanguages + ", " + languageTag;
         }
     }
-
-    // There should always be a match in the list. The following catches a pathological
-    // case: for some reason, the current PrimaryLanguageOverride setting doesn't match
-    // anything from the set of the app languages + manifest languages (shouldn't happen).
-    // As a last resort, will clear the primary language override and select the default
-    // item in the combo box.
-    ApplicationLanguages::PrimaryLanguageOverride == "";
-    return 0;
+    return appLanguages;
 }
-
-
-
-ComboBoxValue::ComboBoxValue(Platform::String^ displayName, Platform::String^ languageTag)
-{
-    DisplayName = displayName;
-    LanguageTag = languageTag;
-}
-
-

@@ -1,0 +1,79 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<Page
+    x:Class="CameraVideoStabilization.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CameraVideoStabilization"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <SolidColorBrush x:Key="TranslucentBlackBrush" Color="Black" Opacity="0.3"/>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="10,40"/>
+                <Setter Property="MinWidth" Value="80"/>
+                <Setter Property="MinHeight" Value="80"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="{StaticResource TranslucentBlackBrush}"/>
+                <Setter Property="BorderBrush" Value="White"/>
+                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            </Style>
+        </Grid.Resources>
+
+        <!--Camera preview-->
+        <CaptureElement Name="PreviewControl" Stretch="Uniform"/>
+
+        <!-- VS On/Off + Record buttons -->
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+
+            <!--VS Toggle button-->
+            <Button Name="VsToggleButton" Click="VsToggleButton_Click" IsEnabled="False">
+                <Viewbox MaxHeight="40" MaxWidth="40">
+                    <Grid>
+                        <!--Off icon-->
+                        <StackPanel Name="VsOffIcon">
+                            <SymbolIcon Symbol="Camera" RenderTransformOrigin="0.5,0.5">
+                                <SymbolIcon.RenderTransform>
+                                    <RotateTransform Angle="-21"/>
+                                </SymbolIcon.RenderTransform>
+                            </SymbolIcon>
+                            <SymbolIcon Symbol="Remote"/>
+                        </StackPanel>
+                        <!--On icon-->
+                        <StackPanel Name="VsOnIcon" Visibility="Collapsed">
+                            <SymbolIcon Symbol="Camera"/>
+                            <SymbolIcon Symbol="Link"/>
+                        </StackPanel>
+                    </Grid>
+                </Viewbox>
+            </Button>
+
+            <!--Video record button-->
+            <Button Name="VideoButton" Click="VideoButton_Click" IsEnabled="False">
+                <Grid>
+                    <Ellipse Name="StartRecordingIcon" Fill="Red" Width="20" Height="20"/>
+                    <Rectangle Name="StopRecordingIcon" Fill="White" Width="20" Height="20" Visibility="Collapsed"/>
+                </Grid>
+            </Button>
+
+        </StackPanel>
+
+    </Grid>
+</Page>

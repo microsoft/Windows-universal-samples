@@ -80,7 +80,7 @@ void Scenario1_GetLamp::InitLampBtn_Click(Platform::Object^ sender, Windows::UI:
         // Select the first lamp device found on the back of the device
         LogStatusToOutputBoxAsync("Selecting first lamp device found on back of the device");
         DeviceInformation^ deviceInfo = nullptr;
-        for each (auto device in devices)
+        for (auto device : devices)
         {
             if (device->EnclosureLocation != nullptr && device->EnclosureLocation->Panel == Windows::Devices::Enumeration::Panel::Back)
             {
@@ -108,34 +108,12 @@ void Scenario1_GetLamp::InitLampBtn_Click(Platform::Object^ sender, Windows::UI:
             LogStatusToOutputBoxAsync("Disposing of lamp instance");
             lamp = nullptr;
             LogStatusToOutputBoxAsync("Disposed");
-        // Need to error check here since we cannot return up the chain due to different return types
-        }).then([this](task<void> previousTask)
-        {
-            try
-            {
-                previousTask.get();
-            }
-            catch (Exception^ ex)
-            {
-                _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-            }
         });
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-        }
     });
 }
 
 /// <summary>
-/// Gets the Default Lamp instance, if no instance is found it throws
-/// InvalidOperation Exception
+/// Gets the Default Lamp instance
 /// </summary>
 /// <param name="sender">Contains information regarding button that fired event</param>
 /// <param name="e">Contains state information and event data associated with the event</param>
@@ -155,16 +133,6 @@ void Scenario1_GetLamp::GetDefaultAsyncBtn_Click(Platform::Object^ sender, Windo
         std::wstringstream ss;
         ss << "Default lamp instance acquired, Device Id: " << lamp->DeviceId->Data();
         LogStatusAsync(ref new String(ss.str().c_str()), NotifyType::StatusMessage);
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-        }
     }); 
 }
 
@@ -180,17 +148,7 @@ task<void> Scenario1_GetLamp::LogStatusToOutputBoxAsync(String^ message)
     {
         outputBox->Text += message + "\r\n";
         outputScrollViewer->ChangeView(0.0, outputBox->ActualHeight, 1.0f);
-    }))).then([this, message](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-        }
-    });
+    })));
 }
 
 /// <summary>
@@ -209,15 +167,5 @@ task<void> Scenario1_GetLamp::LogStatusAsync(String^ message, NotifyType type)
     }))).then([this, message]()
     {
             return LogStatusToOutputBoxAsync(message);
-    }).then([this, message](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            _rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
-        }
     });
 }

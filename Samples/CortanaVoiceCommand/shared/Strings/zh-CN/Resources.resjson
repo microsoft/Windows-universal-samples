@@ -1,0 +1,16 @@
+{
+	"CancelledTripToDestination": "取消去{0}的行程",
+	"CancellingTripToDestination": "已经取消去伦敦的旅行",
+	"CancelTripToDestination": "取消去{0}的行程？",
+	"ConfirmCancelTripToDestination": "难道要\u003e取消去{0}的行程？",
+	"DisambiguationRepeat": "你要取消哪一个行程？",
+	"DisambiguationWhichTripToDest": "你要取消去{0}的哪一个行程",
+	"FoundNoTripToDestination": "对不起，你没有找到任何有关{0}的行程",
+	"KeepingTripToDestination": "好吧，保留去{0}的行程",
+	"LaunchingAdventureWorks": "启动Adventure Works应用",
+	"LoadingTripToDestination": "正在查询前往{0}的行程",
+	"NoSuchTripToDestination": "对不起，你没有任何前往{0}的行程",
+	"PluralUpcomingTrips": "这里是你即将到来的行程。",
+	"ProgressLookingForTripToDest": "正在查询前往{0}的行程",
+	"SingularUpcomingTrip": "这是你即将到来的旅行。"
+}

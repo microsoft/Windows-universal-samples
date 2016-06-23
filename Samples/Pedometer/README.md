@@ -1,17 +1,19 @@
 <!---
   category: DevicesSensorsAndPower
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620584&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620584
 --->
 
 # Pedometer sample
 
 This sample shows how to use the  Windows.Devices.Sensors.Pedometer API.
 
-This sample allows the user to view the default pedometer events and history available on the system. You can choose one of three scenarios:
+This sample allows the user to view the default pedometer events and history available on the system.
+It includes the following scenarios:
 
 -   Events
 -   History
 -   Current steps count
+-   Pedometer Background
 
 **Events**
 
@@ -25,7 +27,13 @@ When you click on the 'Get History' button, pedometer history for the requested 
 
 **Current steps count**
 
-When you click the 'Get steps count' button, it displays the last known step counts. Since 'ReadingChanged' may not be fired when there is no activity, this relies on History to get the last known step counts.
+When you click the 'Get steps count' button, it displays the last known step counts. This illustrates usage of GetCurrentReadings API.
+
+**Background Pedometer**
+
+This demonstrates using a Pedometer's step goal as a background trigger. 
+When you click the 'Register Task' button, it gets the current step count from the default Pedometer and sets a step goal of 50 additional steps.
+When the step goal is met, the registered background task gets fired. Pedometer readings are then retrieved from the trigger to update the scenario UI.
 
 ## System requirements
 
@@ -39,7 +47,7 @@ When you click the 'Get steps count' button, it displays the last known step cou
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

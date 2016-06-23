@@ -148,6 +148,7 @@ This scenario shows how to hook up a context menu for mouse, keyboard, and touch
 For keyboard users, Shift+F10 or the 'application' key invokes the context menu.  <LineBreak/>
 For touch, press and hold to invoke the menu.  <LineBreak/>
 For mouse, right click to invoke the menu.<LineBreak/>
+For game controller, press the Menu button to invoke the menu.<LineBreak/>
 <LineBreak/>
 When running on a desktop, MenuFlyout.ShowAt allows context menus to show outside the application window, such as when right clicking near the edges of your applicaiton.
 <LineBreak/>

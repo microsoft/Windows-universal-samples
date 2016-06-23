@@ -1,0 +1,84 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario9_custompairdevice.js"></script>
+    <script src="/js/displayhelpers.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="resultsViewTemplate" data-win-control="WinJS.Binding.Template">
+        <div style="padding:2px; border:1px solid gray; white-space:nowrap">
+            <div>Name: <span data-win-bind="innerText: name" style="font-weight:bold"></span></div>
+            <div>Id: <span data-win-bind="innerText: id"></span></div>
+            <div>CanPair: <span data-win-bind="innerText: canPair"></span></div>
+            <div>IsPaired: <span data-win-bind="innerText: isPaired"></span></div>
+        </div>
+    </div>
+
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                This scenario demonstrates how to perform custom pairing. Custom pairing allows your app to be involved in the pairing ceremony and use your on UI. 
+                If you want Windows to control the ceremony and display system UI, please look at the basic pairing scenario.                        
+                <br>This method can be used to pair devices like WiFiDirect, WSD, UPnP, Bluetooth or Bluetooth LE devices.
+                <br>Pairing can only be performed on DeviceInformation objects of kind DeviceInformationKind.AssociationEndpoint.
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                Choose a device selector:
+                <br>
+                <select id="selectorComboBox" class="win-dropdown"></select>
+            </p>
+            <p>
+                Select supported pairing ceremonies:
+                <br>
+                <input id="confirmOnlyOption" type="checkbox" class="win-checkbox" checked />
+                    <label for="confirmOnlyOption">ConfirmOnly</label>
+                <input id="displayPinOption" type="checkbox" class="win-checkbox" checked />
+                    <label for="displayPinOption">DisplayPin</label>
+                <input id="providePinOption" type="checkbox" class="win-checkbox" checked />
+                    <label for="providePinOption">ProvidePin</label>
+                <input id="confirmPinMatchOption" type="checkbox" class="win-checkbox" checked />
+                    <label for="confirmPinMatchOption">ConfirmPinMatch</label>
+            </p>
+            <p>
+                Choose a protection level:
+                <br>
+                <select id="protectionLevelComboBox" class="win-dropdown">
+                    <option>Default</option>
+                    <option>None</option>
+                    <option>Encryption</option>
+                    <option>Encryption and authentication</option>
+                </select>
+            </p>
+            <button id="startWatcherButton" class="win-button">Start Watcher</button>
+            <button id="stopWatcherButton" disabled class="win-button">Stop Watcher</button>
+            <button id="pairButton" disabled class="win-button">Pair Selected Device</button>
+            <button id="unpairButton" disabled class="win-button">Unpair Selected Device</button>
+            <div id="pairingPanel" style="display:none">
+                <span id="pairingTextBlock"></span>
+                <br>
+                <input type="text" id="pinEntryTextBox" class="win-textbox">
+                <button id="okButton" class="win-button">OK</button>
+                <button id="yesButton" class="win-button">Yes</button>
+                <button id="noButton" class="win-button">No</button>
+            </div>
+        </div>
+        <div id="resultsListView" style="border:2px solid white;" data-win-control="WinJS.UI.ListView" data-win-options="{
+                itemTemplate: select(&apos;#resultsViewTemplate&apos;),
+                layout: {type: WinJS.UI.ListLayout},
+                tapBehavior: &apos;toggleSelect&apos;,
+                selectionMode: &apos;single&apos;}">
+        </div>
+    </div>
+</body>
+
+</html>

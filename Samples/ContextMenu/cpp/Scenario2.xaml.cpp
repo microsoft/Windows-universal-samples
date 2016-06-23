@@ -59,27 +59,10 @@ Rect Scenario2::GetTextboxSelectionRect(TextBox^ textbox)
         rectLast = textbox->GetRectFromCharacterIndex(lastIndex, false);
     }
 
-    GeneralTransform^ buttonTransform = textbox->TransformToVisual(nullptr);
-    const Point pointOrig(0, 0);
-    const Point pointTransformed = buttonTransform->TransformPoint(pointOrig);
+    Rect selectionRect = RectHelper::Union(rectFirst, rectLast);
 
-    // Make sure that we return a valid rect if selection is on multiple lines
-    // and end of the selection is to the left of the start of the selection.
-    float x, y, dx, dy;
-    y = pointTransformed.Y + rectFirst.Top;
-    dy = rectLast.Bottom - rectFirst.Top;
-    if (rectLast.Right > rectFirst.Left)
-    {
-        x = pointTransformed.X + rectFirst.Left;
-        dx = rectLast.Right - rectFirst.Left;
-    }
-    else
-    {
-        x = pointTransformed.X + rectLast.Right;
-        dx = rectFirst.Left - rectLast.Right;
-    }
-
-    return Rect(x, y, dx, dy);
+    GeneralTransform^ transform = textbox->TransformToVisual(nullptr);
+    return transform->TransformBounds(selectionRect);
 }
 
 void Scenario2::ReadOnlyTextBox_ContextMenuOpening(Object^ sender, ContextMenuEventArgs^ e)

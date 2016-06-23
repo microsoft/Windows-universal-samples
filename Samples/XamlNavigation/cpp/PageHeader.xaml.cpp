@@ -35,14 +35,20 @@ namespace NavigationMenuSample
             InitializeComponent();
 
             PageHeader::Loaded += ref new Windows::UI::Xaml::RoutedEventHandler(this, &NavigationMenuSample::Controls::PageHeader::OnLoaded);
+            PageHeader::Unloaded += ref new Windows::UI::Xaml::RoutedEventHandler(this, &NavigationMenuSample::Controls::PageHeader::OnUnloaded);
         }
 
         void PageHeader::OnLoaded(Platform::Object ^sender, Windows::UI::Xaml::RoutedEventArgs ^e)
         {
-            AppShell::Current->TogglePaneButtonRectChanged += 
+            _toggleButtonRectChangedToken = AppShell::Current->TogglePaneButtonRectChanged +=
                 ref new TypedEventHandler<AppShell^, Rect>(this, &PageHeader::Current_TogglePaneButtonSizeChanged);
 
             titleBar->Margin = Thickness(AppShell::Current->TogglePaneButtonRect.Right, 0, 0, 0);
+        }
+
+        void PageHeader::OnUnloaded(Platform::Object ^sender, Windows::UI::Xaml::RoutedEventArgs ^e)
+        {
+			AppShell::Current->TogglePaneButtonRectChanged -= _toggleButtonRectChangedToken;
         }
 
         void PageHeader::Current_TogglePaneButtonSizeChanged(AppShell^ sender, Rect e)

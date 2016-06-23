@@ -1,11 +1,11 @@
-﻿<!---
+<!---
   category: AudioVideoAndCamera 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620517&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620517
 --->
 
 # High dynamic range sample
 
-This sample applies an end-to-end approach to demonstrate how to write a video recording camera application using the Windows.Media.Capture API in conjunction with orientation sensors to cover the functions that most camera apps will require. It will also use the Windows.Media.Core.SceneAnalysisEffect API to get information about the preview scene and give a recommendation on how beneficial an HDR capture would be. In addition, it will show a simple way to use the Windows.Media.Capture.AdvancedCapture API, which enables High Dynamic Range (HDR) captures, included in Windows. This sample is based on the CameraStarterKit.
+This sample applies an end-to-end approach to demonstrate how to write a camera application using the Windows.Media.Capture API in conjunction with orientation sensors to cover the functions that most camera apps will require. It will also use the Windows.Media.Core.SceneAnalysisEffect API to get information about the preview scene and give a recommendation on how beneficial an HDR capture would be. In addition, it will show a simple way to use the Windows.Media.Capture.AdvancedCapture API, which enables High Dynamic Range (HDR) captures, included in Windows. This sample is based on the CameraStarterKit.
 
 Specifically, this sample will cover how to:
 
@@ -32,6 +32,10 @@ This sample also implements a custom UI to better simulate the experience that a
 [Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
 
 [Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
+
+[High Dynamic Range photo capture](http://go.microsoft.com/fwlink/?LinkId=627230)
+
+[Using the Scene Analysis effect](http://go.microsoft.com/fwlink/?LinkId=627231)
 
 **Reference**
 

@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-using SDKTemplate;
 using Windows.Graphics.Imaging;
 using Windows.Media;
 using Windows.Media.Capture;
@@ -28,7 +27,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 
-namespace FaceTrackingSample
+namespace SDKTemplate
 {
     /// <summary>
     /// Page for demonstrating FaceTracking.
@@ -167,7 +166,7 @@ namespace FaceTrackingSample
                 MediaCaptureInitializationSettings settings = new MediaCaptureInitializationSettings();
                 settings.StreamingCaptureMode = StreamingCaptureMode.Video;
                 await this.mediaCapture.InitializeAsync(settings);
-                this.mediaCapture.CameraStreamStateChanged += this.MediaCapture_CameraStreamStateChanged;
+                this.mediaCapture.Failed += this.MediaCapture_CameraStreamFailed;
 
                 // Cache the media properties as we'll need them later.
                 var deviceController = this.mediaCapture.VideoDeviceController;
@@ -178,7 +177,7 @@ namespace FaceTrackingSample
                 this.CamPreview.Source = this.mediaCapture;
                 await this.mediaCapture.StartPreviewAsync();
 
-                // Use a 66 milisecond interval for our timer, i.e. 15 frames per second 
+                // Use a 66 millisecond interval for our timer, i.e. 15 frames per second
                 TimeSpan timerInterval = TimeSpan.FromMilliseconds(66);
                 this.frameProcessingTimer = Windows.System.Threading.ThreadPoolTimer.CreatePeriodicTimer(new Windows.System.Threading.TimerElapsedHandler(ProcessCurrentVideoFrame), timerInterval);
             }
@@ -211,22 +210,30 @@ namespace FaceTrackingSample
             {
                 if (this.mediaCapture.CameraStreamState == Windows.Media.Devices.CameraStreamState.Streaming)
                 {
-                    await this.mediaCapture.StopPreviewAsync();
+                    try
+                    {
+                        await this.mediaCapture.StopPreviewAsync();
+                    }
+                    catch(Exception)
+                    {
+                        ;   // Since we're going to destroy the MediaCapture object there's nothing to do here
+                    }
                 }
-
                 this.mediaCapture.Dispose();
             }
 
             this.frameProcessingTimer = null;
             this.CamPreview.Source = null;
             this.mediaCapture = null;
+            this.CameraStreamingButton.IsEnabled = true;
+
         }
 
         /// <summary>
         /// This method is invoked by a ThreadPoolTimer to execute the FaceTracker and Visualization logic at approximately 15 frames per second.
         /// </summary>
         /// <remarks>
-        /// Keep in mind this method is called from a Timer and not sychronized with the camera stream. Also, the processing time of FaceTracker
+        /// Keep in mind this method is called from a Timer and not synchronized with the camera stream. Also, the processing time of FaceTracker
         /// will vary depending on the size of each frame and the number of faces being tracked. That is, a large image with several tracked faces may
         /// take longer to process.
         /// </remarks>
@@ -297,10 +304,13 @@ namespace FaceTrackingSample
         {
             this.VisualizationCanvas.Children.Clear();
 
-            if (foundFaces != null)
+            double actualWidth = this.VisualizationCanvas.ActualWidth;
+            double actualHeight = this.VisualizationCanvas.ActualHeight;
+
+            if (this.currentState == ScenarioState.Streaming && foundFaces != null && actualWidth != 0 && actualHeight != 0)
             {
-                double widthScale = framePizelSize.Width / this.VisualizationCanvas.ActualWidth;
-                double heightScale = framePizelSize.Height / this.VisualizationCanvas.ActualHeight;
+                double widthScale = framePizelSize.Width / actualWidth;
+                double heightScale = framePizelSize.Height / actualHeight;
 
                 foreach (DetectedFace face in foundFaces)
                 {
@@ -326,6 +336,9 @@ namespace FaceTrackingSample
         /// <param name="newState">State to switch to</param>
         private async void ChangeScenarioState(ScenarioState newState)
         {
+            // Disable UI while state change is in progress
+            this.CameraStreamingButton.IsEnabled = false;
+
             switch (newState)
             {
                 case ScenarioState.Idle:
@@ -348,18 +361,19 @@ namespace FaceTrackingSample
                     this.VisualizationCanvas.Children.Clear();
                     this.CameraStreamingButton.Content = "Stop Streaming";
                     this.currentState = newState;
+                    this.CameraStreamingButton.IsEnabled = true;
                     break;
             }
         }
 
         /// <summary>
-        /// Handles MediaCapture changes by shutting down streaming and returning to Idle state.
+        /// Handles MediaCapture stream failures by shutting down streaming and returning to Idle state.
         /// </summary>
         /// <param name="sender">The source of the event, i.e. our MediaCapture object</param>
         /// <param name="args">Event data</param>
-        private void MediaCapture_CameraStreamStateChanged(MediaCapture sender, object args)
+        private void MediaCapture_CameraStreamFailed(MediaCapture sender, object args)
         {
-            // MediaCapture is not Agile and so we cannot invoke it's methods on this caller's thread
+            // MediaCapture is not Agile and so we cannot invoke its methods on this caller's thread
             // and instead need to schedule the state change on the UI thread.
             var ignored = this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {

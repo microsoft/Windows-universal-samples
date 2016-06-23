@@ -11,7 +11,7 @@
     <AssemblyName>WRLOutOfProcessWinRTComponent</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -168,12 +168,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Server\WRLOutOfProcessWinRTComponent_server.vcxproj">
-      <Project>{563e5bc0-fdff-413d-bd24-820119686520}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Server\WRLOutOfProcessWinRTComponentPS.vcxproj">
-      <Project>{62635C39-BF9D-4AF6-A83E-5D6C20A105E5}</Project>
-    </ProjectReference>
+    <ProjectReference Include="..\Server\WRLOutOfProcessWinRTComponent_server.vcxproj" />
+    <ProjectReference Include="..\Server\WRLOutOfProcessWinRTComponentPS.vcxproj" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

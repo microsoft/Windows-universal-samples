@@ -76,7 +76,7 @@ namespace AppUIBasics
                 Item = item;
 
                 // Load control page into frame.
-                var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+                var loader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView();
 
                 string pageRoot = loader.GetString("PageStringRoot");
 
@@ -120,7 +120,7 @@ namespace AppUIBasics
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             ShowHelp();
-            this.BottomAppBar.IsOpen = false;
+            bottomCommandBar.IsOpen = false;
         }
 
         protected void RelatedControl_Click(object sender, RoutedEventArgs e)
@@ -132,7 +132,7 @@ namespace AppUIBasics
 
         private void ShowHelp()
         {
-            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            var loader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView();
 
             string HTMLOpenTags = loader.GetString("HTMLOpenTags");
             string HTMLCloseTags = loader.GetString("HTMLCloseTags");

@@ -58,7 +58,7 @@ namespace SDKTemplate
         {
             OutputPanel.Children.Clear();
 
-            StorageFolder picturesFolder = KnownFolders.PicturesLibrary;
+            StorageFolder picturesFolder = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
             StorageFolderQueryResult queryResult = picturesFolder.CreateFolderQueryWithOptions(queryOptions);
 
             IReadOnlyList<StorageFolder> folderList = await queryResult.GetFoldersAsync();

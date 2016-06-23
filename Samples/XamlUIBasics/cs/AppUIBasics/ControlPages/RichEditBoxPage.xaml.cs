@@ -26,13 +26,9 @@ namespace AppUIBasics.ControlPages
     /// </summary>
     public sealed partial class RichEditBoxPage : Page
     {
-        List<ITextRange> m_highlightedWords = null;
-
         public RichEditBoxPage()
         {
             this.InitializeComponent();
-
-            m_highlightedWords = new List<ITextRange>();
         } 
 
         private async void OpenButton_Click(object sender, RoutedEventArgs e)
@@ -48,11 +44,12 @@ namespace AppUIBasics.ControlPages
 
             if (file != null)
             {
-                Windows.Storage.Streams.IRandomAccessStream randAccStream =
-                    await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
-
-                // Load the file into the Document property of the RichEditBox.
-                editor.Document.LoadFromStream(Windows.UI.Text.TextSetOptions.FormatRtf, randAccStream);
+                using (Windows.Storage.Streams.IRandomAccessStream randAccStream =
+                    await file.OpenAsync(Windows.Storage.FileAccessMode.Read))
+                {
+                    // Load the file into the Document property of the RichEditBox.
+                    editor.Document.LoadFromStream(Windows.UI.Text.TextSetOptions.FormatRtf, randAccStream);
+                }
             }
         }
 
@@ -74,10 +71,11 @@ namespace AppUIBasics.ControlPages
                 // finish making changes and call CompleteUpdatesAsync.
                 CachedFileManager.DeferUpdates(file);
                 // write to file
-                Windows.Storage.Streams.IRandomAccessStream randAccStream =
-                    await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
-
-                editor.Document.SaveToStream(Windows.UI.Text.TextGetOptions.FormatRtf, randAccStream);
+                using (Windows.Storage.Streams.IRandomAccessStream randAccStream =
+                    await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite))
+                {
+                    editor.Document.SaveToStream(Windows.UI.Text.TextGetOptions.FormatRtf, randAccStream);
+                }
 
                 // Let Windows know that we're finished changing the file so the 
                 // other app can update the remote version of the file.
@@ -93,79 +91,46 @@ namespace AppUIBasics.ControlPages
 
         private void BoldButton_Click(object sender, RoutedEventArgs e)
         {
-            ITextSelection selectedText = editor.Document.Selection;
-            if (selectedText != null)
-            {
-                ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
-                charFormatting.Bold = FormatEffect.Toggle;
-                selectedText.CharacterFormat = charFormatting;
-            }
+            editor.Document.Selection.CharacterFormat.Bold = FormatEffect.Toggle;
         }
 
         private void ItalicButton_Click(object sender, RoutedEventArgs e)
         {
-            ITextSelection selectedText = editor.Document.Selection;
-            if (selectedText != null)
-            {
-                ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
-                charFormatting.Italic = FormatEffect.Toggle;
-                selectedText.CharacterFormat = charFormatting;
-            }
+            editor.Document.Selection.CharacterFormat.Italic = FormatEffect.Toggle;
         }
 
         private void ColorButton_Click(object sender, RoutedEventArgs e)
         {
+            // Extract the color of the button that was clicked.
             Button clickedColor = (Button)sender;
+            var rectangle = (Windows.UI.Xaml.Shapes.Rectangle)clickedColor.Content;
+            var color = ((Windows.UI.Xaml.Media.SolidColorBrush)rectangle.Fill).Color;
 
-            ITextCharacterFormat charFormatting = editor.Document.Selection.CharacterFormat;
-            switch (clickedColor.Name)
-            {
-                case "black":
-                    {
-                        charFormatting.ForegroundColor = Colors.Black;
-                        break;
-                    }
+            editor.Document.Selection.CharacterFormat.ForegroundColor = color;
 
-                case "gray":
-                    {
-                        charFormatting.ForegroundColor = Colors.Gray;
-                        break;
-                    }
-
-                case "greenyellow":
-                    {
-                        charFormatting.ForegroundColor = Colors.GreenYellow;
-                        break;
-                    }
-
-                case "green":
-                    {
-                        charFormatting.ForegroundColor = Colors.Green;
-                        break;
-                    }
-
-                case "blue":
-                    {
-                        charFormatting.ForegroundColor = Colors.Blue;
-                        break;
-                    }
-
-                case "red":
-                    {
-                        charFormatting.ForegroundColor = Colors.Red;
-                        break;
-                    }
-
-                default:
-                    {
-                        charFormatting.ForegroundColor = Colors.Black;
-                        break;
-                    }
-            }
-            editor.Document.Selection.CharacterFormat = charFormatting;
-
-            editor.Focus(Windows.UI.Xaml.FocusState.Keyboard);
             fontColorButton.Flyout.Hide();
+            editor.Focus(Windows.UI.Xaml.FocusState.Keyboard);
+        }
+
+        private void FindBoxHighlightMatches()
+        {
+            FindBoxRemoveHighlights();
+
+            string textToFind = findBox.Text;
+            if (textToFind != null)
+            {
+                ITextRange searchRange = editor.Document.GetRange(0, 0);
+                while (searchRange.FindText(textToFind, TextConstants.MaxUnitCount, FindOptions.None) > 0)
+                {
+                    searchRange.CharacterFormat.BackgroundColor = Colors.Yellow;
+                }
+            }
+        }
+
+        private void FindBoxRemoveHighlights()
+        {
+            ITextRange documentRange = editor.Document.GetRange(0, TextConstants.MaxUnitCount);
+            documentRange.CharacterFormat.BackgroundColor = Colors.Transparent;
         }
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)

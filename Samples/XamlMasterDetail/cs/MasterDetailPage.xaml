@@ -17,57 +17,65 @@
 
     <Page.Resources>
         <DataTemplate x:Key="MasterListViewItemTemplate" x:DataType="viewmodels:ItemViewModel">
-            <Grid Margin="12,11,12,13">
+            <Grid Margin="0,11,0,13">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                    
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                    
-                <TextBlock Text="{x:Bind Title}"
-                           Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
-                           Style="{ThemeResource BodyTextBlockStyle}" />
 
-                <TextBlock Text="{x:Bind Text}" Grid.Row="1" MaxLines="1"
-                           Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                           Style="{ThemeResource BodyTextBlockStyle}" />
-                    
-                <TextBlock Text="{x:Bind DateCreatedHourMinute}" Grid.Column="1" Margin="12,2,0,0"
-                           Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                           Style="{ThemeResource BodyTextBlockStyle}" />
+                <TextBlock Text="{x:Bind Title}" Style="{ThemeResource BaseTextBlockStyle}" />
+
+                <TextBlock
+                    Text="{x:Bind Text}"
+                    Grid.Row="1"
+                    MaxLines="1"
+                    Style="{ThemeResource ListBodyTextBlockStyle}" />
+
+                <TextBlock
+                    Text="{x:Bind DateCreatedHourMinute}"
+                    Grid.Column="1"
+                    Margin="12,1,0,0"
+                    Style="{ThemeResource ListCaptionAltTextblockStyle}" />
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="DetailContentTemplate" x:DataType="viewmodels:ItemViewModel">
             <StackPanel>
-                <TextBlock Margin="0,8" Style="{ThemeResource TitleTextBlockStyle}"
-                           HorizontalAlignment="Left" Text="{x:Bind Title}"/>
+                <TextBlock
+                    Margin="0,8"
+                    Style="{ThemeResource TitleTextBlockStyle}"
+                    HorizontalAlignment="Left"
+                    Text="{x:Bind Title}"/>
 
-                <TextBlock Margin="0,9" HorizontalAlignment="Left" MaxWidth="560"
-                           Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind Text}" />
+                <TextBlock
+                    Margin="0,9"
+                    HorizontalAlignment="Left"
+                    MaxWidth="560"
+                    Style="{ThemeResource BodyTextBlockStyle}"
+                    Text="{x:Bind Text}" />
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot" Loaded="LayoutRoot_Loaded">
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="AdaptiveStates"
-                              CurrentStateChanged="AdaptiveStates_CurrentStateChanged">
+            <VisualStateGroup x:Name="AdaptiveStates" CurrentStateChanged="AdaptiveStates_CurrentStateChanged">
                 <VisualState x:Name="DefaultState">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="720" />
                     </VisualState.StateTriggers>
                 </VisualState>
-                
+
                 <VisualState x:Name="NarrowState">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
-                    
+
                     <VisualState.Setters>
                         <Setter Target="MasterColumn.Width" Value="*" />
                         <Setter Target="DetailColumn.Width" Value="0" />
@@ -76,7 +84,7 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -87,15 +95,18 @@
             <ColumnDefinition x:Name="DetailColumn" Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
-            <TextBlock Text="My Items" Margin="24,8,8,8"
-                       Style="{ThemeResource TitleTextBlockStyle}" />
-        </Grid>
-        
-        <ListView x:Name="MasterListView" Grid.Row="1" ItemContainerTransitions="{x:Null}"
-                  ItemTemplate="{StaticResource MasterListViewItemTemplate}"
-                  IsItemClickEnabled="True"
-                  ItemClick="MasterListView_ItemClick">
+        <TextBlock
+            Text="My Items"
+            Margin="12,8,8,8"
+            Style="{ThemeResource TitleTextBlockStyle}" />
+
+        <ListView
+            x:Name="MasterListView"
+            Grid.Row="1"
+            ItemContainerTransitions="{x:Null}"
+            ItemTemplate="{StaticResource MasterListViewItemTemplate}"
+            IsItemClickEnabled="True"
+            ItemClick="MasterListView_ItemClick">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -119,3 +130,4 @@
         </ContentPresenter>
     </Grid>
 </Page>
+    

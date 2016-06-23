@@ -95,7 +95,7 @@ namespace Pcsc
         /// Checks whether the device supports smart card reader mode
         /// </summary>
         /// <returns>None</returns>
-        public static async Task<DeviceInformation> GetFirstSmartCardReaderInfo(SmartCardReaderKind? readerKind = SmartCardReaderKind.Nfc)
+        public static async Task<DeviceInformation> GetFirstSmartCardReaderInfo(SmartCardReaderKind readerKind = SmartCardReaderKind.Any)
         {
             // Check if the SmartCardConnection API exists on this currently running SKU of Windows
             if (!Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Devices.SmartCards.SmartCardConnection"))
@@ -106,7 +106,13 @@ namespace Pcsc
 
             // Device selector string is from SmartCardReader.GetDeviceSelector(SmartCardReaderKind.Nfc) except that we remove the conditional
             // about the interface being enabled, since we want to get the device object regardless of whether the user turned it off in the CPL
-            DeviceInformationCollection devices = await DeviceInformation.FindAllAsync("System.Devices.InterfaceClassGuid:=\"{DEEBE6AD-9E01-47E2-A3B2-A66AA2C036C9}\"" + (readerKind == null ? string.Empty : " AND System.Devices.SmartCards.ReaderKind:=" + (int)readerKind));
+            string query = "System.Devices.InterfaceClassGuid:=\"{DEEBE6AD-9E01-47E2-A3B2-A66AA2C036C9}\"";
+            if (readerKind != SmartCardReaderKind.Any)
+            {
+                query += " AND System.Devices.SmartCards.ReaderKind:=" + (int)readerKind;
+            }
+
+            DeviceInformationCollection devices = await DeviceInformation.FindAllAsync(query);
 
             // There is a bug on some devices that were updated to WP8.1 where an NFC SmartCardReader is
             // enumerated despite that the device does not support it. As a workaround, we can do an additonal check

@@ -80,6 +80,21 @@
     <Filter Include="Strings\zh-TW">
       <UniqueIdentifier>{124f9795-6e8a-44cc-ac27-902fe186df35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SRGS\en-CA">
+      <UniqueIdentifier>{a0dbf835-69ef-4ea1-8dbf-95091d5df41a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRGS\en-IN">
+      <UniqueIdentifier>{b16fd5fe-d78a-481f-925c-7a31ff71580d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRGS\en-AU">
+      <UniqueIdentifier>{d77b1750-7ae5-4441-adbd-f888ae5c3a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\en-AU">
+      <UniqueIdentifier>{ad244057-db43-48d8-9394-be7ce7c7908c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\en-CA">
+      <UniqueIdentifier>{092b4b6c-c711-42b2-906f-83b0112b8f08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
@@ -99,6 +114,7 @@
     <ClCompile Include="Scenario_SynthesizeSSML.xaml.cpp" />
     <ClCompile Include="Scenario_ContinuousRecognitionListGrammar.xaml.cpp" />
     <ClCompile Include="Scenario_ContinuousRecognitionSRGSGrammar.xaml.cpp" />
+    <ClCompile Include="Scenario_PauseAsync.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -115,6 +131,7 @@
     <ClInclude Include="Scenario_SynthesizeSSML.xaml.h" />
     <ClInclude Include="Scenario_ContinuousRecognitionListGrammar.xaml.h" />
     <ClInclude Include="Scenario_ContinuousRecognitionSRGSGrammar.xaml.h" />
+    <ClInclude Include="Scenario_PauseAsync.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -133,6 +150,7 @@
     <Page Include="Scenario_ContinuousDictation.xaml" />
     <Page Include="Scenario_ContinuousRecognitionListGrammar.xaml" />
     <Page Include="Scenario_ContinuousRecognitionSRGSGrammar.xaml" />
+    <Page Include="Scenario_PauseAsync.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
@@ -167,6 +185,15 @@
     <Xml Include="..\shared\SRGS\en-GB\SRGSColors.xml">
       <Filter>SRGS\en-GB</Filter>
     </Xml>
+    <Xml Include="..\shared\SRGS\en-CA\SRGSColors.xml">
+      <Filter>SRGS\en-CA</Filter>
+    </Xml>
+    <Xml Include="..\shared\SRGS\en-AU\SRGSColors.xml">
+      <Filter>SRGS\en-AU</Filter>
+    </Xml>
+    <Xml Include="..\shared\SRGS\en-IN\SRGSColors.xml">
+      <Filter>SRGS\en-IN</Filter>
+    </Xml>
     <Xml Include="..\shared\SRGS\es-ES\SRGSColors.xml">
       <Filter>SRGS\es-ES</Filter>
     </Xml>
@@ -199,6 +226,18 @@
     <PRIResource Include="..\shared\Strings\en-GB\LocalizationTTSResources.resw">
       <Filter>Strings\en-GB</Filter>
     </PRIResource>
+    <PRIResource Include="..\shared\Strings\en-CA\LocalizationSpeechResources.resw">
+      <Filter>Strings\en-CA</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\Strings\en-CA\LocalizationTTSResources.resw">
+      <Filter>Strings\en-CA</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\Strings\en-AU\LocalizationSpeechResources.resw">
+      <Filter>Strings\en-AU</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\Strings\en-AU\LocalizationTTSResources.resw">
+      <Filter>Strings\en-AU</Filter>
+    </PRIResource>
     <PRIResource Include="..\shared\Strings\en-US\LocalizationTTSResources.resw">
       <Filter>Strings\en-US</Filter>
     </PRIResource>
@@ -222,6 +261,9 @@
     </PRIResource>
     <PRIResource Include="..\shared\Strings\fr-FR\LocalizationTTSResources.resw">
       <Filter>Strings\fr-FR</Filter>
+    </PRIResource>
+    <PRIResource Include="..\shared\Strings\en-IN\LocalizationSpeechResources.resw">
+      <Filter>Strings\en-IN</Filter>
     </PRIResource>
     <PRIResource Include="..\shared\Strings\en-IN\LocalizationTTSResources.resw">
       <Filter>Strings\en-IN</Filter>

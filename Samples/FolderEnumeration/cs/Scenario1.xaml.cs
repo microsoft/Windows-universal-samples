@@ -27,7 +27,7 @@ namespace SDKTemplate
 
         private async void GetFilesAndFoldersButton_Click(object sender, RoutedEventArgs e)
         {
-            StorageFolder picturesFolder = KnownFolders.PicturesLibrary;
+            StorageFolder picturesFolder = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
 
             IReadOnlyList<StorageFile> fileList = await picturesFolder.GetFilesAsync();
             IReadOnlyList<StorageFolder> folderList = await picturesFolder.GetFoldersAsync();

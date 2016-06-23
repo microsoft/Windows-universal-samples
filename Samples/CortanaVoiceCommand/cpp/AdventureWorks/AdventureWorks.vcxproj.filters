@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>80bfd669-aa83-4537-9611-027cffe0d8af</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{c6978fb6-bc64-498d-97c8-f5b53997e54e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View">
+      <UniqueIdentifier>{0c2ee6d1-3fbe-42af-92a5-edcada65c61c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ViewModel">
+      <UniqueIdentifier>{dc31d472-6ded-413c-8791-5ea05d59345d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{ab1efc2c-2f95-4941-b054-d06367ce307f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings">
+      <UniqueIdentifier>{0c536b2e-e006-4648-8cfb-35ad5d03f0c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\en-US">
+      <UniqueIdentifier>{f57b31de-5cb8-4cf8-a2d7-80cd6e7b291a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\de-DE">
+      <UniqueIdentifier>{d5c2b75e-7902-474d-826c-28b546085042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\en-GB">
+      <UniqueIdentifier>{990ffd9a-a8bb-4c31-a93f-14e362bf1999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\es-ES">
+      <UniqueIdentifier>{c56a5b86-bffc-4040-b5c3-d37b213f86be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\fr-FR">
+      <UniqueIdentifier>{ec7ce446-70a4-4280-8eaf-a5e9a5b46e14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\it-IT">
+      <UniqueIdentifier>{df3555af-3694-4eef-ae8d-6410c9a0facf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\zh-CN">
+      <UniqueIdentifier>{d96499de-5568-402a-b7e7-b82f61c7bc06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\en-CA">
+      <UniqueIdentifier>{5d522ece-8345-43d9-a598-73fa960c0697}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\en-AU">
+      <UniqueIdentifier>{108fefa4-0454-423e-b055-4acfb792e332}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strings\en-IN">
+      <UniqueIdentifier>{576b2b47-ecc9-4220-890b-df20c7f2e7be}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="View\TripListView.xaml.cpp" />
+    <ClCompile Include="ViewModel\ViewModelBase.cpp">
+      <Filter>ViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewModel\TripListViewModel.cpp">
+      <Filter>ViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\RelayCommand.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewModel\ViewModelLocator.cpp">
+      <Filter>ViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewModel\TripViewModel.cpp">
+      <Filter>ViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="View\TripDetails.xaml.cpp" />
+    <ClCompile Include="Common\CalendarConverter.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\BoolToVisibilityConverter.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewModel\TripVoiceCommand.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="App.xaml.h" />
+    <ClInclude Include="View\TripListView.xaml.h" />
+    <ClInclude Include="ViewModel\ViewModelBase.h">
+      <Filter>ViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewModel\TripListViewModel.h">
+      <Filter>ViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\RelayCommand.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewModel\ViewModelLocator.h">
+      <Filter>ViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewModel\TripViewModel.h">
+      <Filter>ViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="View\TripDetails.xaml.h" />
+    <ClInclude Include="Common\CalendarConverter.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\BoolToVisibilityConverter.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewModel\TripVoiceCommand.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\..\..\SharedContent\xaml\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+    <Page Include="View\TripListview.xaml">
+      <Filter>View</Filter>
+    </Page>
+    <Page Include="View\TripDetails.xaml">
+      <Filter>View</Filter>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\..\SharedContent\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\..\SharedContent\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\..\SharedContent\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\shared\AdventureWorksCommands.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\fr-FR\Resources.resw">
+      <Filter>Strings\fr-FR</Filter>
+    </PRIResource>
+    <PRIResource Include="..\..\shared\Strings\it-IT\Resources.resw">
+      <Filter>Strings\it-IT</Filter>
+    </PRIResource>
+    <PRIResource Include="..\..\shared\Strings\zh-CN\Resources.resw">
+      <Filter>Strings\zh-CN</Filter>
+    </PRIResource>
+    <PRIResource Include="..\..\shared\Strings\en-GB\Resources.resw">
+      <Filter>Strings\en-GB</Filter>
+    </PRIResource>
+    <PRIResource Include="..\..\shared\Strings\en-CA\Resources.resw">
+      <Filter>Strings\en-CA</Filter>
+    </PRIResource>
+    <PRIResource Include="..\..\shared\Strings\en-AU\Resources.resw">
+      <Filter>Strings\en-AU</Filter>
+    </PRIResource>
+    <PRIResource Include="..\..\shared\Strings\en-IN\Resources.resw">
+      <Filter>Strings\en-IN</Filter>
+    </PRIResource>
+    <PRIResource Include="..\..\shared\Strings\es-ES\Resources.resw">
+      <Filter>Strings\es-ES</Filter>
+    </PRIResource>
+    <PRIResource Include="..\..\shared\Strings\de-DE\Resources.resw">
+      <Filter>Strings\de-DE</Filter>
+    </PRIResource>
+    <PRIResource Include="..\..\shared\Strings\en-US\Resources.resw">
+      <Filter>Strings\en-US</Filter>
+    </PRIResource>
+  </ItemGroup>
+</Project>

@@ -1,5 +1,6 @@
 <!--
   category: GlobalizationAndLocalization
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624044
 -->
 
 # Date and time formatting sample
@@ -38,7 +39,7 @@ This sample contains scenarios that demonstrate:
 
 * [**Calendar** sample](../Calendar)
 * [**GlobalizationPreferences** sample](../GlobalizationPreferences)
-* [**NumberFormatting** sample](http://go.microsoft.com/fwlink/p/?LinkId=620578&clcid=0x409)
+* [**NumberFormatting** sample](../NumberFormatting)
 
 ### Reference
 
@@ -60,7 +61,7 @@ This sample contains scenarios that demonstrate:
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

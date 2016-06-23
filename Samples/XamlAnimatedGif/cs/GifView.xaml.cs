@@ -52,16 +52,9 @@ namespace AnimatedGif
         private GifPresenter _gifPresenter;
         private bool _isLoaded;
 
-        private CancellationTokenSource _initializationCancellationTokenSource;
-
         public GifView()
         {
             this.InitializeComponent();
-
-            // Register for visibility changed to stop the timer when minimized
-            Window.Current.VisibilityChanged += Window_VisibilityChanged;
-            // Register for SurfaceContentsLost to recreate the image source if necessary
-            CompositionTarget.SurfaceContentsLost += CompositionTarget_SurfaceContentsLost;
         }
 
         private async static void OnSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -73,7 +66,6 @@ namespace AnimatedGif
         private async Task UpdateSourceAsync()
         {
             _gifPresenter?.StopAnimation();
-            _initializationCancellationTokenSource?.Cancel();
 
             GifImage.Source = null;
             _gifPresenter = null;
@@ -81,47 +73,42 @@ namespace AnimatedGif
             if (UriSource != null)
             {
                 var uriSource = UriSource;
-                var cancellationTokenSource = new CancellationTokenSource();
-
-                _initializationCancellationTokenSource = cancellationTokenSource;
-
                 try
                 {
                     var streamReference = RandomAccessStreamReference.CreateFromUri(uriSource);
-                    var inMemoryStream = new InMemoryRandomAccessStream();
+                    var readStream = await streamReference.OpenReadAsync();
 
-                    using (inMemoryStream)
+                    if (readStream.ContentType.ToLowerInvariant() != "image/gif")
                     {
-                        var readStream = await streamReference.OpenReadAsync().AsTask(cancellationTokenSource.Token);
+                        throw new ArgumentException("Unsupported content type: " + readStream.ContentType);
+                    }
 
-                        if (readStream.ContentType.ToLowerInvariant() != "image/gif")
-                        {
-                            throw new ArgumentException("Unsupported content type: " + readStream.ContentType);
-                        }
+                    using (readStream)
+                    using (var inMemoryStream = new InMemoryRandomAccessStream())
+                    {
+                        await RandomAccessStream.CopyAndCloseAsync(
+                            readStream.GetInputStreamAt(0L),
+                            inMemoryStream.GetOutputStreamAt(0L)
+                            );
 
-                        var copyAction = RandomAccessStream.CopyAndCloseAsync(
-                                readStream.GetInputStreamAt(0L),
-                                inMemoryStream.GetOutputStreamAt(0L)
-                                );
-                        await copyAction.AsTask(cancellationTokenSource.Token);
-                        
+
                         if (uriSource.Equals(UriSource))
                         {
                             var gifPresenter = new GifPresenter();
-
                             GifImage.Source = await gifPresenter.InitializeAsync(inMemoryStream);
-                            _gifPresenter = gifPresenter;
 
-                            if (_isLoaded)
+                            if (uriSource.Equals(UriSource))
                             {
-                                _gifPresenter.StartAnimation();
+                                _gifPresenter?.StopAnimation();
+                                _gifPresenter = gifPresenter;
+
+                                if (_isLoaded)
+                                {
+                                    _gifPresenter.StartAnimation();
+                                }
                             }
                         }
                     }
-                }
-                catch (TaskCanceledException)
-                {
-                    // Just keep the empty image source.
                 }
                 catch (FileNotFoundException)
                 {
@@ -146,12 +133,22 @@ namespace AnimatedGif
 
         private void GifImage_Loaded(object sender, RoutedEventArgs e)
         {
+            // Register for visibility changed to stop the timer when minimized
+            Window.Current.VisibilityChanged += Window_VisibilityChanged;
+            // Register for SurfaceContentsLost to recreate the image source if necessary
+            CompositionTarget.SurfaceContentsLost += CompositionTarget_SurfaceContentsLost;
+
             _isLoaded = true;
             _gifPresenter?.StartAnimation();
         }
 
         private void GifImage_Unloaded(object sender, RoutedEventArgs e)
         {
+            // Register for visibility changed to stop the timer when minimized
+            Window.Current.VisibilityChanged -= Window_VisibilityChanged;
+            // Register for SurfaceContentsLost to recreate the image source if necessary
+            CompositionTarget.SurfaceContentsLost -= CompositionTarget_SurfaceContentsLost;
+
             _isLoaded = false;
             _gifPresenter?.StopAnimation();
         }
@@ -202,11 +199,10 @@ namespace AnimatedGif
 
             private int _currentFrameIndex;
             private int _completedLoops;
-            private bool _disposeRequested;
 
             private BitmapDecoder _bitmapDecoder;
             private ImageProperties _imageProperties;
-            private IList<FrameProperties> _frameProperties;
+            private FrameProperties?[] _frameProperties;
 
             private CanvasImageSource _canvasImageSource;
             private CanvasRenderTarget _accumulationRenderTarget;
@@ -219,15 +215,8 @@ namespace AnimatedGif
             {
                 var bitmapDecoder = await BitmapDecoder.CreateAsync(BitmapDecoder.GifDecoderId, streamSource);
                 var imageProperties = await RetrieveImagePropertiesAsync(bitmapDecoder);
-                var frameProperties = new List<FrameProperties>();
 
-                for (var i = 0u; i < bitmapDecoder.FrameCount; i++)
-                {
-                    var bitmapFrame = await bitmapDecoder.GetFrameAsync(i);
-                    frameProperties.Add(await RetrieveFramePropertiesAsync(bitmapFrame));
-                }
-
-                _frameProperties = frameProperties;
+                _frameProperties = new FrameProperties?[bitmapDecoder.FrameCount];
                 _bitmapDecoder = bitmapDecoder;
                 _imageProperties = imageProperties;
 
@@ -243,13 +232,12 @@ namespace AnimatedGif
                 {
                     _currentFrameIndex = 0;
                     _completedLoops = 0;
-                    _disposeRequested = false;
 
                     _animationTimer?.Stop();
 
                     _animationTimer = new DispatcherTimer();
                     _animationTimer.Tick += AnimationTimer_Tick;
-                    _animationTimer.Interval = TimeSpan.Zero;
+                    _animationTimer.Interval = TimeSpan.FromMilliseconds(1.0);
                     _animationTimer.Start();
 
                     _isAnimating = true;
@@ -275,8 +263,14 @@ namespace AnimatedGif
                 }
 
                 var frameIndex = _currentFrameIndex;
-                var frameProperties = _frameProperties[frameIndex];
-                var disposeRequested = _disposeRequested;
+                BitmapFrame frame = null;
+
+                if (!_frameProperties[frameIndex].HasValue)
+                {
+                    frame = await _bitmapDecoder.GetFrameAsync((uint)frameIndex);
+                    _frameProperties[frameIndex] = await RetrieveFramePropertiesAsync(frame);
+                }
+                FrameProperties frameProperties = _frameProperties[frameIndex].Value;
 
                 // Increment frame index and loop count
                 _currentFrameIndex++;
@@ -285,9 +279,6 @@ namespace AnimatedGif
                     _completedLoops++;
                     _currentFrameIndex = 0;
                 }
-
-                // Set flag to clear before next frame if necessary
-                _disposeRequested = frameProperties.ShouldDispose;
 
                 // Set up the timer to display the next frame
                 if (_imageProperties.IsAnimated &&
@@ -301,7 +292,10 @@ namespace AnimatedGif
                 }
 
                 // Decode the frame
-                var frame = await _bitmapDecoder.GetFrameAsync((uint)frameIndex);
+                if (frame == null)
+                {
+                    frame = await _bitmapDecoder.GetFrameAsync((uint)frameIndex);
+                }
                 var pixelData = await frame.GetPixelDataAsync(
                     BitmapPixelFormat.Bgra8,
                     BitmapAlphaMode.Premultiplied,
@@ -311,12 +305,27 @@ namespace AnimatedGif
                     );
                 var pixels = pixelData.DetachPixelData();
                 var frameRectangle = frameProperties.Rect;
-                var shouldClear = disposeRequested || frameIndex == 0;
+                var disposeRectangle = Rect.Empty;
+
+                if (frameIndex > 0)
+                {
+                    var previousFrameProperties = _frameProperties[frameIndex - 1].GetValueOrDefault();
+                    if (previousFrameProperties.ShouldDispose)
+                    {
+                        // Clear the pixels from the last frame
+                        disposeRectangle = previousFrameProperties.Rect;
+                    }
+                }
+                else
+                {
+                    disposeRectangle = new Rect(0, 0, _imageProperties.PixelWidth, _imageProperties.PixelHeight);
+                }
+
 
                 // Compose and display the frame
                 try
                 {
-                    PrepareFrame(pixels, frameRectangle, shouldClear);
+                    PrepareFrame(pixels, frameRectangle, disposeRectangle);
                     UpdateImageSource(frameRectangle);
                 }
                 catch (Exception e) when (_canvasImageSource.Device.IsDeviceLost(e.HResult))
@@ -388,7 +397,7 @@ namespace AnimatedGif
                 }
             }
 
-            private void PrepareFrame(byte[] pixels, Rect frameRectangle, bool clearAccumulation)
+            private void PrepareFrame(byte[] pixels, Rect frameRectangle, Rect disposeRectangle)
             {
                 var sharedDevice = GetSharedDevice();
 
@@ -405,10 +414,14 @@ namespace AnimatedGif
                 using (var drawingSession = _accumulationRenderTarget.CreateDrawingSession())
                 using (frameBitmap)
                 {
-                    if (clearAccumulation)
+                    if (!disposeRectangle.IsEmpty)
                     {
-                        drawingSession.Clear(Colors.Transparent);
+                        using (drawingSession.CreateLayer(1.0f, disposeRectangle))
+                        {
+                            drawingSession.Clear(Colors.Transparent);
+                        }
                     }
+
                     drawingSession.DrawImage(frameBitmap, frameRectangle);
                 }
             }
@@ -420,7 +433,7 @@ namespace AnimatedGif
                     var imageRectangle = new Rect(new Point(), _canvasImageSource.Size);
                     updateRectangle.Intersect(imageRectangle);
 
-                    using (var drawingSession = _canvasImageSource.CreateDrawingSession(Colors.Transparent, updateRectangle))
+                    using (var drawingSession = _canvasImageSource.CreateDrawingSession(Colors.Transparent))
                     {
                         drawingSession.DrawImage(_accumulationRenderTarget); // Render target has the composed frame
                     }
@@ -554,3 +567,4 @@ namespace AnimatedGif
         }
     }
 }
+

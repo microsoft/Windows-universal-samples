@@ -1,6 +1,6 @@
 <!---
   category: NetworkingAndWebServices 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620627&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620627
 --->
 
 # Wi-Fi Direct services sample
@@ -18,7 +18,7 @@ Specifically, this sample shows how to:
 
 **Note** This sample requires two or more devices with Wi-Fi chipsets and drivers that support Wi-Fi Direct services.
  
-**Note** This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on Windows 10. For more info about how to build apps that target Windows and Windows Phone with Visual Studio, see [Build apps that target Windows 10 by using Visual Studio](http://msdn.microsoft.com/library/windows/apps/dn609832).
+**Note**ï¿½This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on Windows 10. For more info about how to build apps that target Windows and Windows Phone with Visual Studio, see [Build apps that target Windows 10 by using Visual Studio](http://msdn.microsoft.com/library/windows/apps/dn609832).
 
 ## Related topics
 
@@ -42,7 +42,7 @@ Specifically, this sample shows how to:
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

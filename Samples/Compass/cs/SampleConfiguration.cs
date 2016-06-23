@@ -12,7 +12,6 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using CompassCS;
 
 namespace SDKTemplate
 {
@@ -22,9 +21,9 @@ namespace SDKTemplate
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title = "Data Events", ClassType = typeof(CompassCS.Scenario1_DataEvents) },
-            new Scenario() { Title = "Polling", ClassType = typeof(CompassCS.Scenario2_Polling) },
-            new Scenario() { Title = "Calibration", ClassType = typeof(CompassCS.Scenario3_Calibration) }
+            new Scenario() { Title = "Data Events", ClassType = typeof(Scenario1_DataEvents) },
+            new Scenario() { Title = "Polling", ClassType = typeof(Scenario2_Polling) },
+            new Scenario() { Title = "Calibration", ClassType = typeof(Scenario3_Calibration) }
         };
     }
 

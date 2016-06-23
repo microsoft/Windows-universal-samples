@@ -1,0 +1,69 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AppServicesClient.KeepConnectionOpenScenario"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppServicesClient"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Demonstrates keeping an AppServiceConnection open while 
+                    communicating with an app service. More efficient if you 
+                    are going to be exchanging a lot of messages with the 
+                    app service.
+                </TextBlock>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0, 5, 0, 0">
+                    Use the Open Connection button to open a connection. 
+                    Then use the Generate Random Number button to get 
+                    random numbers between Minimum Value and Maximum 
+                    Value from an app service. Use the Close Connection 
+                    button to close the AppServiceConnection.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="OpenConnection" Content="Open Connection" Click="OpenConnection_Click" />
+                        <Button x:Name="CloseConnection" Content="Close Connection" Margin="10, 0, 0, 0" Click="CloseConnection_Click" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                        <TextBlock Text="Minimum Value:" VerticalAlignment="Center"/>
+                        <TextBox x:Name="MinValue" Text="0" VerticalAlignment="Center" Margin="5,0,0,0" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBlock Text="Maximum Value:" VerticalAlignment="Center"/>
+                        <TextBox x:Name="MaxValue" Text="10" VerticalAlignment="Center" Margin="5,0,0,0" />
+                    </StackPanel>
+                    <Button x:Name="GenerateRandomNumber" Content="Generate Random Number" Margin="0, 10, 0, 0" Click="GenerateRandomNumber_Click" />
+                    <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                        <TextBlock Text="Result:" VerticalAlignment="Center" />
+                        <TextBlock x:Name="Result" VerticalAlignment="Center"  Margin="5, 0, 0, 0"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

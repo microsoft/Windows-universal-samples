@@ -9,7 +9,6 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using System;
 using System.Threading.Tasks;
 using Windows.Devices.Sensors;
@@ -19,7 +18,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace BarometerCS
+namespace SDKTemplate
 {
     public sealed partial class Scenario1_DataEvents : Page
     {

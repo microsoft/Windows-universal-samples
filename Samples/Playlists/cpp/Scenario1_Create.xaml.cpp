@@ -37,7 +37,7 @@ void Scenario1_Create::PickAudioButton_Click(Platform::Object^ sender, Windows::
         {
             Playlist^ playlist = ref new Playlist();
 
-            for each (StorageFile^ file in files)
+            for (StorageFile^ file : files)
             {
                 playlist->Files->Append(file);
             }

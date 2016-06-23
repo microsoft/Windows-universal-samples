@@ -41,6 +41,9 @@ namespace CameraGetPreviewFrame
         // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
         const GUID RotationKey;
 
+        // Folder in which the captures will be stored (availability check performed in InitializeCameraAsync)
+        Windows::Storage::StorageFolder^ _captureFolder;
+
         // Event tokens
         Windows::Foundation::EventRegistrationToken _applicationSuspendingEventToken;
         Windows::Foundation::EventRegistrationToken _applicationResumingEventToken;
@@ -63,13 +66,14 @@ namespace CameraGetPreviewFrame
         void WriteLine(Platform::String^ str);
         void WriteException(Platform::Exception^ ex);
         int ConvertDisplayOrientationToDegrees(Windows::Graphics::Display::DisplayOrientations orientation);
+        void ApplyGreenFilter(Windows::Graphics::Imaging::SoftwareBitmap^ bitmap);
 
         // Event handlers
         void Application_Suspending(Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e);
         void Application_Resuming(Object^ sender, Object^ args);
         void DisplayInformation_OrientationChanged(Windows::Graphics::Display::DisplayInformation^ sender, Object^ args);
         void SystemMediaControls_PropertyChanged(Windows::Media::SystemMediaTransportControls^ sender, Windows::Media::SystemMediaTransportControlsPropertyChangedEventArgs^ args);
-        void GetPreviewFrameButton_Tapped(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void GetPreviewFrameButton_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void MediaCapture_Failed(Windows::Media::Capture::MediaCapture ^currentCaptureObject, Windows::Media::Capture::MediaCaptureFailedEventArgs^ errorEventArgs);
 
     protected:

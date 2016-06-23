@@ -1,6 +1,6 @@
 <!---
   category: Gaming
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620598&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620598
 --->
 
 # Direct3D game sample
@@ -26,7 +26,7 @@ Both versions share significant amounts of logic: the Common and GameContent fol
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 

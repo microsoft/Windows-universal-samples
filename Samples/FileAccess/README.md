@@ -1,6 +1,6 @@
 <!---
   category: FilesFoldersAndLibraries
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619995&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619995
 --->
 
 # File access sample
@@ -45,8 +45,6 @@ The sample demonstrates these tasks:
 
     For more info, see [Track recently used files and folders](https://msdn.microsoft.com/library/windows/apps/mt186452).
 
-    Note that the "Add to system MRU" feature crashes on Phone. We apologize for the inconvenience.
-
 8.  **Copy a file**
 
     Uses one of the [**StorageFile**](http://msdn.microsoft.com/library/windows/apps/br227171).[**CopyAsync**](http://msdn.microsoft.com/library/windows/apps/br227190) methods to copy the file.
@@ -65,7 +63,7 @@ The sample demonstrates these tasks:
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
@@ -95,11 +93,11 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## System requirements
 
-**Client:** Windows 10
+**Client:** Windows 10 build 10500 or higher
 
-**Server:** Windows Server 2016 Technical Preview
+**Server:** Windows Server 2016 Technical Preview build 10500 or higher
 
-**Phone:** Windows 10
+**Phone:** Windows 10 build 10500 or higher
 
 ## Build the sample
 

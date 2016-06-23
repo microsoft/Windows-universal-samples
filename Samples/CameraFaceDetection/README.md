@@ -1,6 +1,6 @@
-﻿<!---
+<!---
   category: AudioVideoAndCamera 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619486&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619486
 --->
 
 # Camera face detection sample
@@ -31,6 +31,8 @@ This sample also implements a custom UI to better simulate the experience that a
 [Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
 
 [Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
+
+[Using the Face Detection effect](http://go.microsoft.com/fwlink/?LinkId=627228)
 
 **Reference**
 

@@ -1,6 +1,6 @@
 <!---
   category: LaunchingAndBackgroundTasks 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620490&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620490
 --->
 
 # Association launching sample

@@ -1,10 +1,10 @@
 ﻿using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Windows.Phone.UI.Input;
 
 namespace PhoneCall
 {
@@ -14,11 +14,14 @@ namespace PhoneCall
     sealed partial class App : Application
     {
         // Enables the old back button behavior by overriding the hardware button
-        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        private void App_BackRequested(object sender, BackRequestedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null)
+                return;
 
-            if (rootFrame != null && rootFrame.CanGoBack)
+            // If we can go back and the event has not already been handled, do so.
+            if (rootFrame.CanGoBack && e.Handled == false)
             {
                 e.Handled = true;
                 rootFrame.GoBack();
@@ -33,9 +36,6 @@ namespace PhoneCall
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-
-            // Registering the hardware back button override behavior
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
         }
 
         /// <summary>
@@ -82,6 +82,9 @@ namespace PhoneCall
             }
             // Ensure the current window is active
             Window.Current.Activate();
+
+            // Registering the back button behavior
+            SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
         }
 
         /// <summary>
