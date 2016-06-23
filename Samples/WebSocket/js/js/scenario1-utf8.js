@@ -162,6 +162,17 @@
     }
 
     function closeSocket() {
+        if (messageWriter) {
+            // In order to reuse the socket with another DataWriter, the socket's output stream needs to be detached.
+            // Otherwise, the DataWriter's destructor will automatically close the stream and all subsequent I/O
+            // operations invoked on the socket's output stream will fail with RO_E_CLOSED.
+            //
+            // This is only added for completeness, as this sample closes the socket in the very next code block.
+            messageWriter.detachStream();
+            messageWriter.close();
+            messageWriter = null;
+        }
+
         if (messageWebSocket) {
             try {
                 messageWebSocket.close(1000, "Closed due to user request.");
@@ -170,10 +181,6 @@
                 appendOutputLine(error.message);
             }
             messageWebSocket = null;
-        }
-        if (messageWriter) {
-            messageWriter.close();
-            messageWriter = null;
         }
     }
 
