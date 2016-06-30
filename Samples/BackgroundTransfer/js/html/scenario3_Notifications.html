@@ -1,0 +1,38 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="/js/scenario3_Notifications.js"></script>
+</head>
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">Completion notifications</div>
+    <p>
+        BackgroundTransfer completion notifications allow apps to show a toast or update a tile once a set of
+        operations complete.
+    </p>
+    <p>
+        <label for="serverAddressField">Remote address: </label>
+        <input type="text" class="win-textbox" id="serverAddressField" value="http://localhost/BackgroundTransferSample/notifications.aspx" />
+    </p>
+    <p>
+        <button class="win-button" id="toastNotificationButton" disabled="disabled">Start three downloads and show toast on completion</button>
+    </p>
+    <p>
+        <button class="win-button" id="tileNotificationButton" disabled="disabled">Start three downloads and update tile on completion</button>
+    </p>
+    <p id="outputConsole"></p>
+</body>
+</html>

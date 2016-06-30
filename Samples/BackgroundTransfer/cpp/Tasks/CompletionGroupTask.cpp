@@ -25,10 +25,10 @@ CompletionGroupTask::CompletionGroupTask()
 {
 }
 
-// Using completion groups we can take action immediately after a set of downloads completes.
-// In this sample, the server intentionally replies with an error status for some downloads.
-// Using completion groups, we can discover which of the downloads have an error status,
-// and try the failing downloads again using a new completion group.
+// Completion groups allow us to immediately take action after a set of downloads completes.
+// In this sample, the server intentionally replies with an error status for some of the downloads.
+// Based on the trigger details, we can determine which of the downloads have failed and try them again
+// using a new completion group.
 //
 // Apps generally do not need to implement basic retry logic themselves for normal network errors,
 // connectivity loss, etc. because Background Transfer does it internally.
