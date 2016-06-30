@@ -6,18 +6,41 @@
 # Background media playback sample
 
 This sample demonstrates how to use `MediaPlayer` and `MediaPlaybackList`
-to create a collection of songs or videos
-that can continue to play even when the app is no longer in the foreground.
+to create a collection of songs or videos that can continue to play even
+when the app is no longer in the foreground.
 
 Specifically, this sample covers:
 
--   Enabling background media playback through a manifest capability
--   Playing audio and video in the background with the `MediaPlayer` API
--   Gapless playback with `MediaPlaybackList`
--   Automatic `SystemMediaTransportControl` integration
--   Update of `MediaPlaybackItem` DisplayProperties
--   MVVM for media player apps
--   JSON playlist serialization
+- Enabling background media playback through a manifest capability
+- Playing audio and video in the background with the `MediaPlayer` API
+- Gapless playback with `MediaPlaybackList`
+- Automatic `SystemMediaTransportControl` integration
+- Update of `MediaPlaybackItem` DisplayProperties
+- MVVM for media player apps
+- JSON playlist serialization
+
+Other relevant application model considerations include:
+
+- Background applications have a memory target
+
+- There are lifecycle events to inform apps if over target
+
+- Apps can respond to being over target by unloading resources,
+  including views or view state to get under target
+
+- If an app needs to continue executing in the background when not
+  playing media it must use Extended Execution, background tasks,
+  or other supported mechanism to sponsor execution
+
+- If an app needs to make networking calls in the background when not
+  downloading or streaming media using platform media APIs these must
+  be wrapped in either an Extended Execution session or a background
+  task like `ApplicationTrigger`, `MaintenanceTrigger`, or 
+  `TimerTrigger`. Otherwise the network may be unavailble in
+  [standby](https://msdn.microsoft.com/en-us/library/windows/hardware/mt282515.aspx).
+
+See the [Background Activity With the Single Process Model](https://blogs.windows.com/buildingapps/2016/06/07/background-activity-with-the-single-process-model/)
+blog post for more information.
 
 There are approaches for performing background audio playback
 for earlier versions of Windows,
@@ -58,9 +81,18 @@ Adding this capability enables the following:
 as long as it plays audio.
 All streams become background capable so they don't mute.
  
-* All audio APIs become background enabled.
+* All media playback APIs become background enabled.
 That means you can use any platform audio APIs,
 such as MediaPlayer, AudioGraph, XAudio2, and the HTML Audio tag.
+
+`MediaPlayer` provides a default `SystemMediaTransportControls`
+implementation. If using another media API or if the 
+`MediaPlayer.CommandManager` is disabled then an application must
+also minimally:
+
+1. Enable `SystemMediaTransportControls` by setting `IsEnabled` to true
+2. Set `IsPlayEnabled` and `IsPauseEnabled` to true
+3. Handle the corresponding `ButtonPressed` events
 
 Background logic
 ----------------
@@ -131,6 +163,7 @@ when the item is playing.
 
 Related topics
 --------------
+* [Background Activity With the Single Process Model](https://blogs.windows.com/buildingapps/2016/06/07/background-activity-with-the-single-process-model/)
 * [BackgroundActivation sample](/Samples/BackgroundActivation)
 * Old [BackgroundAudio sample](http://go.microsoft.com/fwlink/p/?LinkId=619997),
   no longer recommended but available for reference.

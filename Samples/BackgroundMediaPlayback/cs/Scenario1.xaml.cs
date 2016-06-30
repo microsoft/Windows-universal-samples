@@ -61,8 +61,8 @@ namespace BackgroundMediaPlayback
         {
             this.InitializeComponent();
 
-            // Always use the cached page
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            // Never reuse the cached page because the model is designed to be unloaded and disposed
+            this.NavigationCacheMode = NavigationCacheMode.Disabled;
 
             // Setup MediaPlayer view model
             PlayerViewModel = new PlayerViewModel(Player, Dispatcher);

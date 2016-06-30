@@ -21,7 +21,7 @@
 
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock x:Name="InputTextBlock1" TextWrapping="Wrap" Grid.Row="0" Style="{StaticResource BasicTextStyle}">
-            Execute a background task when a set of uploads or downloads complete.
+            Execute a background task when a set of uploads or downloads completes.
         </TextBlock>
         <TextBlock Text="Remote address: " Style="{StaticResource BasicTextStyle}" Margin="0,8,10,0"/>
         <TextBox x:Name="serverAddressField" InputScope="Url" Text="http://localhost/BackgroundTransferSample/bitmap.aspx" />

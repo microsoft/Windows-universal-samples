@@ -44,15 +44,20 @@
                                 PosterSource="{x:Bind PlayerViewModel.MediaList.CurrentItem.PreviewImage, Mode=OneWay}" />
                             
                             <StackPanel x:Name="customButtons" Visibility="Collapsed" Orientation="Horizontal" Margin="10,40,0,0" VerticalAlignment="Top">
-                                <Button x:Name="prevButton" Content="|&lt;&lt;" Height="100" Width="100" 
+                                <Button x:Name="prevButton" Height="100" Width="100" 
                                     IsEnabled="{x:Bind PlayerViewModel.CanSkipPrevious, Mode=OneWay}"        
-                                    Click="{x:Bind PlayerViewModel.SkipPrevious}"/>
-                                <Button x:Name="playButton" Height="100" Width="100" 
-                                    Click="{x:Bind PlayerViewModel.TogglePlayPause}" 
-                                    Content="{x:Bind PlayerViewModel.PlaybackSession.PlaybackState, Mode=OneWay, Converter={StaticResource MediaPlaybackStateToButtonIconConverter}}"/>
-                                <Button x:Name="nextButton" Content="&gt;&gt;|" Height="100" Width="100" 
+                                    Click="{x:Bind PlayerViewModel.SkipPrevious}">
+                                    <SymbolIcon Symbol="Previous"/>
+                                </Button>
+                                <Button x:Name="playButton" Height="100" Width="100"
+                                    Click="{x:Bind PlayerViewModel.TogglePlayPause}">
+                                    <SymbolIcon Symbol="{x:Bind PlayerViewModel.PlaybackSession.PlaybackState, Mode=OneWay, Converter={StaticResource MediaPlaybackStateToButtonIconConverter}}"/>
+                                </Button>
+                                <Button x:Name="nextButton" Height="100" Width="100" 
                                     IsEnabled="{x:Bind PlayerViewModel.CanSkipNext, Mode=OneWay}"
-                                    Click="{x:Bind PlayerViewModel.SkipNext}"/>
+                                    Click="{x:Bind PlayerViewModel.SkipNext}">
+                                    <SymbolIcon Symbol="Next" />
+                                </Button>
                                 <Button x:Name="speedButton" Content="Speed" Height="100" Width="100" 
                                     Click="speedButton_Click" />
                             </StackPanel>

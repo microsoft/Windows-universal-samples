@@ -77,7 +77,12 @@
         busAttachment = new allJoyn.AllJoynBusAttachment();
         busAttachment.onstatechanged = stateChangedHandler;
         busAttachment.authenticationMechanisms.clear();
+
+        // EcdhePsk authentication is deprecated as of the AllJoyn 16.04 release.
+        // Newly added EcdheSpeke should be used instead. EcdhePsk authentication is
+        // added here to maintain compatibility with devices running older AllJoyn versions.
         busAttachment.authenticationMechanisms.append(allJoyn.AllJoynAuthenticationMechanism.ecdhePsk);
+        busAttachment.authenticationMechanisms.append(allJoyn.AllJoynAuthenticationMechanism.ecdheSpeke);
         busAttachment.onauthenticationcomplete = authenticationCompleteHandler;
         busAttachment.oncredentialsrequested = credentialsRequestedHandler;
         watcher = new onboarding.OnboardingWatcher(busAttachment);
@@ -110,14 +115,15 @@
         var credentialsDeferral = args.detail[0].getDeferral();
         isCredentialRequested = true;
 
-        if (args.detail[0].credentials.authenticationMechanism == allJoyn.AllJoynAuthenticationMechanism.ecdhePsk) {
+        if ((args.detail[0].credentials.authenticationMechanism == allJoyn.AllJoynAuthenticationMechanism.ecdhePsk) ||
+            (args.detail[0].credentials.authenticationMechanism == allJoyn.AllJoynAuthenticationMechanism.ecdheSpeke)) {
             reportStatus("Please enter the key.");
             authenticateButton.onclick = function () {
                 if (isNullOrWhitespace(keyInputText.value)) {
                     reportError("Please enter a key.");
                 } else {
                     reportStatus("Authenticating...");
-                    args.detail[0].credentials.passwordCredential.password = keyInputText.value.replace(/-/g, '');
+                    args.detail[0].credentials.passwordCredential.password = keyInputText.value;
                     credentialsDeferral.complete();
                 }
             };
@@ -381,7 +387,7 @@
                         // If the Onboardee does not connect to the desired AP concurrently, then there is no guaranteed way for the Onboarder application to find
                         // out if the connection attempt was successful or not. In the NotConcurrent connection attempt, if the Onboardee fails to connect to
                         // the desired AP, the Onboarder application will have to again start over with scanning and connecting to the Onboardee SoftAP.
-                        // For more information please visit https://allseenalliance.org/developers/learn/base-services/onboarding/interface
+                        // For more information please visit http://go.microsoft.com/fwlink/?LinkId=817239
                         consumer.signals.onconnectionresultreceived = connectionResultReceivedHandler;
                     }
                     attemptConnection();

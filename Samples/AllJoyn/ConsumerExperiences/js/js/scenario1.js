@@ -50,7 +50,7 @@
         busAttachment = new allJoyn.AllJoynBusAttachment();
         busAttachment.onstatechanged = stateChangedHandler;
         busAttachment.authenticationMechanisms.clear();
-        busAttachment.authenticationMechanisms.append(allJoyn.AllJoynAuthenticationMechanism.ecdhePsk);
+        busAttachment.authenticationMechanisms.append(allJoyn.AllJoynAuthenticationMechanism.ecdheSpeke);
         busAttachment.onauthenticationcomplete = authenticationCompleteHandler;
         busAttachment.oncredentialsrequested = credentialsRequestedHandler;
 
@@ -90,7 +90,7 @@
         var credentialsDeferral = args.detail[0].getDeferral();
         isCredentialsRequested = true;
 
-        if (args.detail[0].credentials.authenticationMechanism == allJoyn.AllJoynAuthenticationMechanism.ecdhePsk) {
+        if (args.detail[0].credentials.authenticationMechanism == allJoyn.AllJoynAuthenticationMechanism.ecdheSpeke) {
             // Wait for the user to provide key and click authenticate.
             reportStatus("Please enter the key.");
 
@@ -100,8 +100,7 @@
                 } else {
                     reportStatus("Authenticating...");
 
-                    // Ignore hyphens in the entered key. 
-                    args.detail[0].credentials.passwordCredential.password = keyInputText.value.replace(/-/g, '');
+                    args.detail[0].credentials.passwordCredential.password = keyInputText.value;
                     credentialsDeferral.complete();
                 }
             };
