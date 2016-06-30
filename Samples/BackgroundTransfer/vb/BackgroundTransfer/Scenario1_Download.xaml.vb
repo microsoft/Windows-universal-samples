@@ -151,8 +151,8 @@ Namespace Global.BackgroundTransfer
             Log("Downloads: " & activeDownloads.Count)
             For Each download In activeDownloads
                 ' DownloadOperation.Progress is updated in real-time while the operation is ongoing. Therefore,
-                ' we must make a local copy at the beginning of the progress handler, so that we can have a consistent
-                ' view of that ever-changing state throughout the handler's lifetime.
+                ' we must make a local copy so that we can have a consistent view of that ever-changing state
+                ' throughout this Sub procedure's lifetime.
                 Dim currentProgress As BackgroundDownloadProgress = download.Progress
                 If currentProgress.Status = BackgroundTransferStatus.Running Then
                     download.Pause()
@@ -167,8 +167,8 @@ Namespace Global.BackgroundTransfer
             Log("Downloads: " & activeDownloads.Count)
             For Each download In activeDownloads
                 ' DownloadOperation.Progress is updated in real-time while the operation is ongoing. Therefore,
-                ' we must make a local copy at the beginning of the progress handler, so that we can have a consistent
-                ' view of that ever-changing state throughout the handler's lifetime.
+                ' we must make a local copy so that we can have a consistent view of that ever-changing state
+                ' throughout this Sub procedure's lifetime.
                 Dim currentProgress As BackgroundDownloadProgress = download.Progress
                 If currentProgress.Status = BackgroundTransferStatus.PausedByApplication Then
                     download.Resume()
@@ -190,8 +190,8 @@ Namespace Global.BackgroundTransfer
         ' Note that this event is invoked on a background thread, so we cannot access the UI directly.
         Private Sub DownloadProgress(download As DownloadOperation)
             ' DownloadOperation.Progress is updated in real-time while the operation is ongoing. Therefore,
-            ' we must make a local copy at the beginning of the progress handler, so that we can have a consistent
-            ' view of that ever-changing state throughout the handler's lifetime.
+            ' we must make a local copy so that we can have a consistent view of that ever-changing state
+            ' throughout this Sub procedure's lifetime.
             Dim currentProgress As BackgroundDownloadProgress = download.Progress
             MarshalLog(String.Format(CultureInfo.CurrentCulture, "Progress: {0}, Status: {1}", download.Guid, currentProgress.Status))
             Dim percent As Double = 100
