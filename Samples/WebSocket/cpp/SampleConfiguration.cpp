@@ -14,11 +14,77 @@
 #include "SampleConfiguration.h"
 
 using namespace SDKTemplate;
+using namespace Concurrency;
+using namespace Platform;
+using namespace Windows::Foundation;
+using namespace Windows::Foundation::Collections;
+using namespace Windows::Networking::Sockets;
+using namespace Windows::Security::Cryptography::Certificates;
+using namespace Windows::Web;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>  
 {
-    // The format here is the following:
-    //     { "Description for the sample", "Fully qualified name for the class that implements the scenario" }
-    { "UTF-8 text messages", "SDKTemplate.WebSocket.Scenario1" }, 
-    { "Binary data stream", "SDKTemplate.WebSocket.Scenario2" }
+    { "UTF-8 text messages", "SDKTemplate.Scenario1" },
+    { "Binary data stream", "SDKTemplate.Scenario2" }
 }; 
+
+Uri^ MainPage::TryGetUri(String^ uriString)
+{
+    Windows::Foundation::Uri^ webSocketUri;
+
+    // Create a Uri instance and catch exceptions related to invalid input. This method returns 'true'
+    // if the Uri instance was successfully created and 'false' otherwise.
+    try
+    {
+        webSocketUri = ref new Uri(uriString);
+    }
+    catch (NullReferenceException^)
+    {
+        NotifyUser("Error: URI must not be null or empty.", NotifyType::ErrorMessage);
+        return nullptr;
+    }
+    catch (InvalidArgumentException^)
+    {
+        NotifyUser("Error: Invalid URI", NotifyType::ErrorMessage);
+        return nullptr;
+    }
+
+    if (webSocketUri->Fragment != "")
+    {
+        NotifyUser("Error: URI fragments not supported in WebSocket URIs.", NotifyType::ErrorMessage);
+        return nullptr;
+    }
+
+    // Uri->SchemeName returns the canonicalized scheme name so we can use case-sensitive, ordinal string
+    // comparison.
+    if (webSocketUri->SchemeName != "ws" && webSocketUri->SchemeName != "wss")
+    {
+        NotifyUser("Error: WebSockets only support ws:// and wss:// schemes.", NotifyType::ErrorMessage);
+        return nullptr;
+    }
+
+    return webSocketUri;
+}
+
+String^ MainPage::BuildWebSocketError(Exception^ ex)
+{
+    // Normally we'd use the HResult and status to test for specific conditions we want to handle.
+    // In this sample, we'll just output them for demonstration purposes.
+
+    WebErrorStatus status = WebSocketError::GetStatus(ex->HResult);
+
+    switch (status)
+    {
+    case WebErrorStatus::CannotConnect:
+    case WebErrorStatus::NotFound:
+    case WebErrorStatus::RequestTimeout:
+        return "Cannot connect to the server. Please make sure " +
+            "to run the server setup script before running the sample.";
+
+    case WebErrorStatus::Unknown:
+        return "COM error: " + ex->HResult.ToString();
+
+    default:
+        return "Error: " + status.ToString();
+    }
+}

@@ -34,17 +34,13 @@ void MainPage::Initialize()
 
 void MainPage::ValidateFile()
 {
-
     create_task(KnownFolders::GetFolderForUserAsync(nullptr /* current user */, KnownFolderId::PicturesLibrary)).then([this](StorageFolder^ picturesFolder)
     {
-        return picturesFolder->GetFileAsync(Filename);
-    }).then([this](task<StorageFile^> getFileTask)
+        return picturesFolder->TryGetItemAsync(Filename);
+    }).then([this](IStorageItem^ item)
     {
-        try
-        {
-            sampleFile = getFileTask.get();
-        }
-        catch (Exception^)
+        sampleFile = safe_cast<StorageFile^>(item);
+        if (item == nullptr)
         {
             // If file doesn't exist, indicate users to use scenario 1
             NotifyUserFileNotExist();
@@ -57,14 +53,15 @@ void MainPage::NotifyUserFileNotExist()
     NotifyUser("The file '" + Filename + "' does not exist. Use scenario one to create this file.", NotifyType::ErrorMessage);
 }
 
-void MainPage::HandleFileNotFoundException(Platform::COMException^ e)
+// I/O errors are reported as exceptions.
+void MainPage::HandleIoException(Platform::COMException^ e, Platform::String^ description)
 {
-    if (e->HResult == 0x80070002) // Catch FileNotExistException
+    if (e->HResult == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
     {
         NotifyUserFileNotExist();
     }
     else
     {
-        throw e;
+        NotifyUser(description + ": " + e->Message, NotifyType::ErrorMessage);
     }
 }

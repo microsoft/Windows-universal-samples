@@ -40,7 +40,7 @@ namespace NavigationMenuSample
 
         void PageHeader::OnLoaded(Platform::Object ^sender, Windows::UI::Xaml::RoutedEventArgs ^e)
         {
-            _toggleButtonRectChangedToken = AppShell::Current->TogglePaneButtonRectChanged += 
+            _toggleButtonRectChangedToken = AppShell::Current->TogglePaneButtonRectChanged +=
                 ref new TypedEventHandler<AppShell^, Rect>(this, &PageHeader::Current_TogglePaneButtonSizeChanged);
 
             titleBar->Margin = Thickness(AppShell::Current->TogglePaneButtonRect.Right, 0, 0, 0);

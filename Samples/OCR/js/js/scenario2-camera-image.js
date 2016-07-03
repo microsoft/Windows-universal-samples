@@ -56,7 +56,7 @@
             displayRequest = new Windows.System.Display.DisplayRequest();
 
             if (!Ocr.OcrEngine.isLanguageSupported(ocrLanguage)) {
-                WinJS.log && WinJS.log(ocrLanguage.displayName + "language is not supported.", "sample", "error");
+                WinJS.log && WinJS.log(ocrLanguage.displayName + " language is not supported.", "sample", "error");
                 return;
             }
 

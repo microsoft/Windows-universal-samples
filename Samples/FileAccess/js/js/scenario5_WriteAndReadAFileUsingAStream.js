@@ -14,7 +14,7 @@
     function writeToStream() {
         if (SdkSample.sampleFile !== null) {
             var textArea = document.getElementById("textarea");
-            var userContent = textArea.innerText;
+            var userContent = textArea.value;
             if (userContent !== "") {
                 SdkSample.sampleFile.openTransactedWriteAsync().then(function (transaction) {
                     var dataWriter = new Windows.Storage.Streams.DataWriter(transaction.stream);

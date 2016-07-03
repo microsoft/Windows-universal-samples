@@ -47,22 +47,13 @@ void Scenario6::ShowPropertiesButton_Click(Object^ sender, RoutedEventArgs^ e)
         *outputText += "\nFile type: " + file->FileType;
 
         // Get basic properties
-        create_task(file->GetBasicPropertiesAsync()).then([this, outputText](task<BasicProperties^> task)
+        create_task(file->GetBasicPropertiesAsync()).then([this, file, outputText](BasicProperties^ basicProperties)
         {
-            try
-            {
-                BasicProperties^ basicProperties = task.get();
-                *outputText += "\nFile size: " + basicProperties->Size.ToString() + " bytes";
+            *outputText += "\nFile size: " + basicProperties->Size.ToString() + " bytes";
 
-                String^ dateModifiedString = dateFormat->Format(basicProperties->DateModified) + " " + timeFormat->Format(basicProperties->DateModified);
-                *outputText += "\nDate modified: " + dateModifiedString;
-            }
-            catch (COMException^ ex)
-            {
-                rootPage->HandleFileNotFoundException(ex);
-            }
-        }).then([this, file]()
-        {
+            String^ dateModifiedString = dateFormat->Format(basicProperties->DateModified) + " " + timeFormat->Format(basicProperties->DateModified);
+            *outputText += "\nDate modified: " + dateModifiedString;
+
             // Get extra properties
             auto propertiesName = ref new Vector<String^>();
             propertiesName->Append(dateAccessedProperty);
@@ -83,6 +74,16 @@ void Scenario6::ShowPropertiesButton_Click(Object^ sender, RoutedEventArgs^ e)
             }
 
             rootPage->NotifyUser(*outputText, NotifyType::StatusMessage);
+        }).then([this, file](task<void> task)
+        {
+            try
+            {
+                task.get();
+            }
+            catch (COMException^ ex)
+            {
+                rootPage->HandleIoException(ex, "Error retrieving properties for '" + file->Name + "'");
+            }
         });
     }
     else

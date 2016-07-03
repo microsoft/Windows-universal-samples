@@ -172,8 +172,6 @@ namespace BackgroundAudioTask
                 BackgroundMediaPlayer.MessageReceivedFromForeground -= BackgroundMediaPlayer_MessageReceivedFromForeground;
                 smtc.ButtonPressed -= smtc_ButtonPressed;
                 smtc.PropertyChanged -= smtc_PropertyChanged;
-                
-                BackgroundMediaPlayer.Shutdown(); // shutdown media pipeline
             }
             catch (Exception ex)
             {

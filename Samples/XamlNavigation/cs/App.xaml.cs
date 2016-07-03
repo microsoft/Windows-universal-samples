@@ -20,7 +20,8 @@ using Windows.UI.Xaml.Navigation;
 namespace NavigationMenuSample
 {
     using Views;
-
+    using Windows.UI;
+    using Windows.UI.ViewManagement;
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
@@ -51,6 +52,17 @@ namespace NavigationMenuSample
                 //this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+            // Change minimum window size
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(320, 200));
+
+            // Darken the window title bar using a color value to match app theme
+            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            if (titleBar != null)
+            {
+                Color titleBarColor = (Color)App.Current.Resources["SystemChromeMediumColor"];
+                titleBar.BackgroundColor = titleBarColor;
+                titleBar.ButtonBackgroundColor = titleBarColor;
+            }
 
             AppShell shell = Window.Current.Content as AppShell;
 

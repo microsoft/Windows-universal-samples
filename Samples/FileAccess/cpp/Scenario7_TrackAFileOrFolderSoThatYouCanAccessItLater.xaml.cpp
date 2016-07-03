@@ -42,11 +42,26 @@ void Scenario7::AddToListButton_Click(Object^ sender, RoutedEventArgs^ e)
             rootPage->MruToken = StorageApplicationPermissions::MostRecentlyUsedList->Add(file, file->Name, visibility);
             rootPage->NotifyUser("The file '" + file->Name + "' was added to the MRU list and a token was stored.", NotifyType::StatusMessage);
         }
-        else if (FALRadioButton->IsChecked->Value)
+        else
         {
-            // Add the file to the MRU
-            rootPage->FalToken = StorageApplicationPermissions::FutureAccessList->Add(file, file->Name);
-            rootPage->NotifyUser("The file '" + file->Name + "' was added to the FAL list and a token was stored.", NotifyType::StatusMessage);
+            // Add the file to the FAL
+            try
+            {
+                rootPage->FalToken = StorageApplicationPermissions::FutureAccessList->Add(file, file->Name);
+                rootPage->NotifyUser("The file '" + file->Name + "' was added to the FAL list and a token was stored.", NotifyType::StatusMessage);
+            }
+            catch (COMException^ ex)
+            {
+                if (ex->HResult == FA_E_MAX_PERSISTED_ITEMS_REACHED)
+                {
+                    // A real program would call Remove() to create room in the FAL.
+                    rootPage->NotifyUser("The file '" + file->Name + "' was not added to the FAL list because the FAL list is full.", NotifyType::ErrorMessage);
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
     }
     else
@@ -57,115 +72,91 @@ void Scenario7::AddToListButton_Click(Object^ sender, RoutedEventArgs^ e)
 
 void Scenario7::ShowListButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
-    StorageFile^ file = rootPage->SampleFile;
-    if (file != nullptr)
+    AccessListEntryView^ entries = nullptr;
+    String^ listName;
+
+    if (MRURadioButton->IsChecked->Value)
     {
-        String^ outputText;
-        NotifyType statusOrError = NotifyType::StatusMessage;
-        if (MRURadioButton->IsChecked->Value)
-        {
-            AccessListEntryView^ entries = StorageApplicationPermissions::MostRecentlyUsedList->Entries;
-            if (entries->Size > 0)
-            {
-                outputText = "The MRU list contains the following item(s):";
-                std::for_each(begin(entries), end(entries), [this, &outputText](const AccessListEntry& entry)
-                {
-                    outputText += "\n" + entry.Metadata; // Application previously chose to store sampleFile->Name in this field
-                });
-            }
-            else
-            {
-                outputText = "The MRU list is empty, please select 'Most Recently Used' list and click 'Add to List' to add a file to the MRU list.";
-                statusOrError = NotifyType::ErrorMessage;
-            }
-        }
-        else if (FALRadioButton->IsChecked->Value)
-        {
-            AccessListEntryView^ entries = StorageApplicationPermissions::FutureAccessList->Entries;
-            if (entries->Size > 0)
-            {
-                outputText = "The FAL list contains the following item(s):";
-                std::for_each(begin(entries), end(entries), [this, &outputText](const AccessListEntry& entry)
-                {
-                    outputText += "\n" + entry.Metadata; // Application previously chose to store sampleFile->Name in this field
-                });
-            }
-            else
-            {
-                outputText = "The FAL list is empty, please select 'Future Access List' list and click 'Add to List' to add a file to the FAL list.";
-                statusOrError = NotifyType::ErrorMessage;
-            }
-        }
-        rootPage->NotifyUser(outputText, statusOrError);
+        listName = "MRU";
+        entries = StorageApplicationPermissions::MostRecentlyUsedList->Entries;
     }
     else
     {
-        rootPage->NotifyUserFileNotExist();
+        listName = "FAL";
+        entries = StorageApplicationPermissions::FutureAccessList->Entries;
+    }
+
+    if (entries->Size > 0)
+    {
+        String^ outputText = "The " + listName + " + list contains the following item(s):";
+        for (const AccessListEntry& entry : entries)
+        {
+            outputText += "\n" + entry.Metadata; // Application previously chose to store sampleFile->Name in this field
+        }
+        rootPage->NotifyUser(outputText, NotifyType::StatusMessage);
+    }
+    else
+    {
+        rootPage->NotifyUser("The " + listName + " list is empty.", NotifyType::ErrorMessage);
     }
 }
 
 void Scenario7::OpenFromListButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
-    StorageFile^ file = rootPage->SampleFile;
-    if (file != nullptr)
+    task<StorageFile^> fileTask = task_from_result<StorageFile^>(nullptr);
+
+    if (MRURadioButton->IsChecked->Value)
     {
-        if (MRURadioButton->IsChecked->Value)
+        if (rootPage->MruToken != nullptr)
         {
-            if (rootPage->MruToken != nullptr)
+            // When the MRU becomes full, older entries are automatically deleted, so check if the
+            // token is still valid before using it.
+            if (StorageApplicationPermissions::MostRecentlyUsedList->ContainsItem(rootPage->MruToken))
             {
                 // Open the file via the token that was stored when adding this file into the MRU list
-                create_task(StorageApplicationPermissions::MostRecentlyUsedList->GetFileAsync(rootPage->MruToken)).then([this](task<StorageFile^> task)
-                {
-                    try
-                    {
-                        StorageFile^ file = task.get();
-                        // Read the file
-                        create_task(FileIO::ReadTextAsync(file)).then([this, file](String^ fileContent)
-                        {
-                            rootPage->NotifyUser("The file '" + file->Name + "' was opened by a stored token from the MRU list, it contains the following text:\n" + fileContent, NotifyType::StatusMessage);
-                        });
-                    }
-                    catch (COMException^ ex)
-                    {
-                        rootPage->HandleFileNotFoundException(ex);
-                    }
-                });
+                fileTask = create_task(StorageApplicationPermissions::MostRecentlyUsedList->GetFileAsync(rootPage->MruToken));
             }
             else
             {
-                rootPage->NotifyUser("The MRU list is empty, please select 'Most Recently Used' list and click 'Add to List' to add a file to the MRU list.", NotifyType::ErrorMessage);
+                rootPage->NotifyUser("The token is no longer valid.", NotifyType::ErrorMessage);
             }
         }
-        else if (FALRadioButton->IsChecked->Value)
+        else
         {
-            if (rootPage->FalToken != nullptr)
-            {
-                // Open the file via the token that was stored when adding this file into the FAL list
-                create_task(StorageApplicationPermissions::FutureAccessList->GetFileAsync(rootPage->FalToken)).then([this](task<StorageFile^> task)
-                {
-                    try
-                    {
-                        StorageFile^ file = task.get();
-                        // Read the file
-                        create_task(FileIO::ReadTextAsync(file)).then([this, file](String^ fileContent)
-                        {
-                            rootPage->NotifyUser("The file '" + file->Name + "' was opened by a stored token from the FAL list, it contains the following text:\n" + fileContent, NotifyType::StatusMessage);
-                        });
-                    }
-                    catch (COMException^ ex)
-                    {
-                        rootPage->HandleFileNotFoundException(ex);
-                    }
-                });
-            }
-            else
-            {
-                rootPage->NotifyUser("The FAL list is empty, please select 'Future Access List' list and click 'Add to List' to add a file to the FAL list.", NotifyType::ErrorMessage);
-            }
+            rootPage->NotifyUser("This operation requires a token. Add file to the MRU list first.", NotifyType::ErrorMessage);
         }
     }
     else
     {
-        rootPage->NotifyUserFileNotExist();
+        if (rootPage->FalToken != nullptr)
+        {
+            // Open the file via the token that was stored when adding this file into the FAL list.
+            // The token remains valid until we explicitly remove it.
+            fileTask = create_task(StorageApplicationPermissions::FutureAccessList->GetFileAsync(rootPage->FalToken));
+        }
+        else
+        {
+            rootPage->NotifyUser("This operation requires a token. Add file to the FAL list first.", NotifyType::ErrorMessage);
+        }
     }
+
+    fileTask.then([this](StorageFile^ file)
+    {
+        if (file != nullptr)
+        {
+            create_task(FileIO::ReadTextAsync(file)).then([this, file](task<String^> task)
+            {
+                try
+                {
+                    String^ fileContent = task.get();
+                    rootPage->NotifyUser("The file '" + file->Name + "' was opened by a stored token. It contains the following text:\n" + fileContent, NotifyType::StatusMessage);
+                }
+                catch (COMException^ ex)
+                {
+                    // I/O errors are reported as exceptions.
+                    rootPage->HandleIoException(ex, "Error reading file opened from list");
+                }
+            });
+        }
+    });
 }

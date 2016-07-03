@@ -14,6 +14,10 @@
 
     var Capture = Windows.Media.Capture;
     var MediaProperties = Windows.Media.MediaProperties;
+    var StorageLibrary = Windows.Storage.StorageLibrary;
+    var KnownLibraryId = Windows.Storage.KnownLibraryId;
+    var ApplicationData = Windows.Storage.ApplicationData;
+
 
     var mediaCapture = null,
         previewProperties = [],
@@ -21,6 +25,9 @@
 
     var isPreviewing = false;
     var isRecording = false;
+
+    // Folder in which the captures will be stored (availability check performed in SetupUiAsync)
+    var captureFolder = Windows.Storage.KnownFolders.videosLibrary;
 
     var page = WinJS.UI.Pages.define("/html/Scenario3_AspectRatio.html", {
         ready: function (element, options) {
@@ -83,11 +90,16 @@
     /// Initializes the camera and populates the UI
     /// </summary>
     function initCameraBtn_click() {
-        initializeCameraAsync()
+        return StorageLibrary.getLibraryAsync(KnownLibraryId.pictures)
+        .then(function (picturesLibrary) {
+            // Fall back to the local app storage if the Pictures Library is not available
+            captureFolder = picturesLibrary.saveFolder || ApplicationData.current.localFolder;
+            return initializeCameraAsync();
+        })
         .then(function () {
             initCameraBtn.style.visibility = "hidden";
             checkIfStreamsAreIdentical();
-            populateComboBoxes();
+            populateComboBox();
             videoButton.disabled = false;
         });
     }
@@ -100,7 +112,7 @@
             // The first element is just text
             if (previewSettings.value == "")
                 return;
-
+            console.log(previewSettings.value)
             mediaCapture.videoDeviceController.setMediaStreamPropertiesAsync(Capture.MediaStreamType.videoPreview, previewProperties[previewSettings.value]);
 
             // The preview just changed, update the video combo box
@@ -116,7 +128,6 @@
             // The first element is just text
             if (videoSettings.value == "")
                 return;
-
             mediaCapture.videoDeviceController.setMediaStreamPropertiesAsync(Capture.MediaStreamType.videoRecord, videoProperties[videoSettings.value]);
         }
     }
@@ -131,7 +142,7 @@
                 var file = null;
 
                 // Create a storage file and begin recording
-                Storage.KnownFolders.videosLibrary.createFileAsync("SimpleVideo.mp4", Storage.CreationCollisionOption.generateUniqueName)
+                captureFolder.createFileAsync("SimpleVideo.mp4", Storage.CreationCollisionOption.generateUniqueName)
                 .then(function (videoFile) {
                     file = videoFile;
                     var encodingProfile = MediaProperties.MediaEncodingProfile.createMp4(MediaProperties.VideoEncodingQuality.auto);
@@ -185,7 +196,7 @@
     /// <summary>
     /// Populates the combo boxes with preview settings and matching ratio settings for the video stream
     /// </summary>
-    function populateComboBoxes() {
+    function populateComboBox() {
         // Query all properties preview properties of the device
         previewProperties = mediaCapture.videoDeviceController.getAvailableMediaStreamProperties(Capture.MediaStreamType.videoPreview);
 
@@ -194,8 +205,6 @@
             var streamResolution = new streamResolutionHelper(properties);
             addOptionToComboBox(previewSettings, streamResolution.getFriendlyName(true), index);
         });
-
-        MatchPreviewAspectRatio();
     }
 
     /// <summary>
@@ -216,10 +225,10 @@
         // Get all formats that have the same-ish aspect ratio as the preview and create new entries in the UI
         // Allow for some tolerance in the aspect ratio comparison
         const ASPECT_RATIO_TOLERANCE = 0.015;
-        videoProperties.forEach(function (properties) {
+        videoProperties.forEach(function (properties, index) {
             var streamHelper = new streamResolutionHelper(properties);
             if (Math.abs(streamHelper.aspectRatio() - previewProperties.aspectRatio()) < ASPECT_RATIO_TOLERANCE) {
-                addOptionToComboBox(videoSettings, streamHelper.getFriendlyName(true));
+                addOptionToComboBox(videoSettings, streamHelper.getFriendlyName(true), index);
             }
         })
     }

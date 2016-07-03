@@ -8,16 +8,16 @@
     <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="SampleConfiguration.cpp" />
-    <ClCompile Include="Scenario1.xaml.cpp" />
-    <ClCompile Include="Scenario2.xaml.cpp" />
+    <ClCompile Include="Scenario1_UTF8.xaml.cpp" />
+    <ClCompile Include="Scenario2_Binary.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
     <ClInclude Include="SampleConfiguration.h" />
-    <ClInclude Include="Scenario1.xaml.h" />
-    <ClInclude Include="Scenario2.xaml.h" />
+    <ClInclude Include="Scenario1_UTF8.xaml.h" />
+    <ClInclude Include="Scenario2_Binary.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
@@ -47,8 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
-    <Page Include="Scenario1.xaml" />
-    <Page Include="Scenario2.xaml" />
+    <Page Include="..\shared\Scenario1_UTF8.xaml" />
+    <Page Include="..\shared\Scenario2_Binary.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>

@@ -111,7 +111,7 @@ Namespace Global.SDKTemplate
                 Me.videoProperties = TryCast(deviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview), VideoEncodingProperties)
                 Me.CamPreview.Source = Me.mediaCapture
                 Await Me.mediaCapture.StartPreviewAsync()
-                ' Use a 66 milisecond interval for our timer, i.e. 15 frames per second 
+                ' Use a 66 millisecond interval for our timer, i.e. 15 frames per second
                 Dim timerInterval As TimeSpan = TimeSpan.FromMilliseconds(66)
                 Me.frameProcessingTimer = Windows.System.Threading.ThreadPoolTimer.CreatePeriodicTimer(New Windows.System.Threading.TimerElapsedHandler(AddressOf ProcessCurrentVideoFrame), timerInterval)
             Catch ex As System.UnauthorizedAccessException
@@ -150,7 +150,7 @@ Namespace Global.SDKTemplate
         ''' This method is invoked by a ThreadPoolTimer to execute the FaceTracker and Visualization logic at approximately 15 frames per second.
         ''' </summary>
         ''' <remarks>
-        ''' Keep in mind this method is called from a Timer and not sychronized with the camera stream. Also, the processing time of FaceTracker
+        ''' Keep in mind this method is called from a Timer and not synchronized with the camera stream. Also, the processing time of FaceTracker
         ''' will vary depending on the size of each frame and the number of faces being tracked. That is, a large image with several tracked faces may
         ''' take longer to process.
         ''' </remarks>

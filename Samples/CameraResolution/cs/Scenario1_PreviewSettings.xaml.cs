@@ -49,7 +49,7 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void InitializeCameraButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void InitializeCameraButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
 

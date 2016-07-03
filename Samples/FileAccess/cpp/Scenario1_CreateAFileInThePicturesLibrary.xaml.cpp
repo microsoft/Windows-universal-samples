@@ -15,6 +15,7 @@
 using namespace SDKTemplate;
 
 using namespace concurrency;
+using namespace Platform;
 using namespace Windows::Storage;
 using namespace Windows::UI::Xaml;
 
@@ -27,12 +28,22 @@ Scenario1::Scenario1() : rootPage(MainPage::Current)
 
 void Scenario1::CreateFileButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
-    create_task(KnownFolders::GetFolderForUserAsync(nullptr /* current user */, KnownFolderId::PicturesLibrary)).then([this](StorageFolder^ picturesFolder)
+    create_task(KnownFolders::GetFolderForUserAsync(nullptr /* current user */, KnownFolderId::PicturesLibrary))
+        .then([this](StorageFolder^ picturesFolder)
     {
         return picturesFolder->CreateFileAsync(rootPage->Filename, CreationCollisionOption::ReplaceExisting);
-    }).then([this](StorageFile^ file)
+    }).then([this](task<StorageFile^> task)
     {
-        rootPage->SampleFile = file;
-        rootPage->NotifyUser("The file '" + file->Name + "' was created.", NotifyType::StatusMessage);
+        try
+        {
+            StorageFile^ file = task.get();
+            rootPage->SampleFile = file;
+            rootPage->NotifyUser("The file '" + file->Name + "' was created.", NotifyType::StatusMessage);
+        }
+        catch (Exception^ e)
+        {
+            // I/O errors are reported as exceptions.
+            rootPage->NotifyUser("Error creating file '" + MainPage::Filename + "': " + e->Message, NotifyType::ErrorMessage);
+        }
     });
 }

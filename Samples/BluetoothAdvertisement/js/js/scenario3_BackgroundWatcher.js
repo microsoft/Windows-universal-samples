@@ -183,8 +183,8 @@
                     taskRegistration.addEventListener("completed", onBackgroundTaskCompleted, false);
 
                     // Even though the trigger is registered successfully, it might be blocked. Notify the user if that is the case.
-                    if ((backgroundAccessStatus == Windows.ApplicationModel.Background.BackgroundAccessStatus.Denied) ||
-                        (backgroundAccessStatus == Windows.ApplicationModel.Background.BackgroundAccessStatus.Unspecified)) {
+                    if ((backgroundAccessStatus == Windows.ApplicationModel.Background.BackgroundAccessStatus.denied) ||
+                        (backgroundAccessStatus == Windows.ApplicationModel.Background.BackgroundAccessStatus.unspecified)) {
                         WinJS.log && WinJS.log("Not able to run in background. Application must given permission to be added to lock screen.",
                             "sample", "error");
                     }

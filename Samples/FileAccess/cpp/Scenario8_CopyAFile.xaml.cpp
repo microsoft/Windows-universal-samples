@@ -45,7 +45,7 @@ void Scenario8::CopyFileButton_Click(Object^ sender, RoutedEventArgs^ e)
             }
             catch (COMException^ ex)
             {
-                rootPage->HandleFileNotFoundException(ex);
+                rootPage->HandleIoException(ex, "Error copying file '" + file->Name + "'");
             }
         });
     }

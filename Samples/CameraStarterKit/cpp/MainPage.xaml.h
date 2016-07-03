@@ -18,9 +18,10 @@ namespace CameraStarterKit
     ref class ReencodeState sealed
     {
     internal:
-        Windows::Graphics::Imaging::BitmapDecoder^ _decoder;
-        Windows::Graphics::Imaging::BitmapEncoder^ _encoder;
-        Windows::Storage::FileProperties::PhotoOrientation _orientation;
+        Windows::Graphics::Imaging::BitmapDecoder^ Decoder;
+        Windows::Graphics::Imaging::BitmapEncoder^ Encoder;
+        Windows::Storage::StorageFile^ File;
+        Windows::Storage::FileProperties::PhotoOrientation Orientation;
     };
 
     public ref class MainPage sealed
@@ -52,6 +53,9 @@ namespace CameraStarterKit
         // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
         const GUID RotationKey;
 
+        // Folder in which the captures will be stored (availability check performed in SetupUiAsync)
+        Windows::Storage::StorageFolder^ _captureFolder;
+
         // Event tokens
         Windows::Foundation::EventRegistrationToken _applicationSuspendingEventToken;
         Windows::Foundation::EventRegistrationToken _applicationResumingEventToken;
@@ -74,7 +78,7 @@ namespace CameraStarterKit
 
         // Helpers
         Concurrency::task<Windows::Devices::Enumeration::DeviceInformation^> FindCameraDeviceByPanelAsync(Windows::Devices::Enumeration::Panel panel);
-        Concurrency::task<void> ReencodeAndSavePhotoAsync(Windows::Storage::Streams::IRandomAccessStream^ stream, Windows::Storage::FileProperties::PhotoOrientation photoOrientation);
+        Concurrency::task<void> ReencodeAndSavePhotoAsync(Windows::Storage::Streams::IRandomAccessStream^ stream, Windows::Storage::StorageFile^ file, Windows::Storage::FileProperties::PhotoOrientation photoOrientation);
         void UpdateCaptureControls();
         Concurrency::task<void> SetupUiAsync();
         Concurrency::task<void> CleanupUiAsync();
@@ -95,8 +99,8 @@ namespace CameraStarterKit
         void Application_Suspending(Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e);
         void Application_Resuming(Object^ sender, Object^ args);
         void DisplayInformation_OrientationChanged(Windows::Graphics::Display::DisplayInformation^ sender, Object^ args);
-        void PhotoButton_Tapped(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-        void VideoButton_Tapped(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e); 
+        void PhotoButton_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void VideoButton_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e); 
         void SystemMediaControls_PropertyChanged(Windows::Media::SystemMediaTransportControls^ sender, Windows::Media::SystemMediaTransportControlsPropertyChangedEventArgs^ args);
         void OrientationSensor_OrientationChanged(Windows::Devices::Sensors::SimpleOrientationSensor^, Windows::Devices::Sensors::SimpleOrientationSensorOrientationChangedEventArgs^);
         void HardwareButtons_CameraPressed(Platform::Object^, Windows::Phone::UI::Input::CameraEventArgs^);

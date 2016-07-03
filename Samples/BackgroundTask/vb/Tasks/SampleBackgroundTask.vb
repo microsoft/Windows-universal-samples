@@ -72,10 +72,11 @@ Namespace Global.Tasks
                 _taskInstance.Progress = _progress
             Else
                 _periodicTimer.Cancel()
-                Dim settings = ApplicationData.Current.LocalSettings
+                Dim status As String = If((_progress < 100), "Canceled with reason: " & _cancelReason.ToString(), "Completed")
                 Dim key = _taskInstance.Task.Name
-                settings.Values(key) = If((_progress < 100), "Canceled with reason: " & _cancelReason.ToString(), "Completed")
-                Debug.WriteLine("Background " & _taskInstance.Task.Name & settings.Values(key))
+                Dim settings = ApplicationData.Current.LocalSettings
+                settings.Values(key) = status
+                Debug.WriteLine("Background " & _taskInstance.Task.Name & status)
                 _deferral.Complete()
             End If
         End Sub

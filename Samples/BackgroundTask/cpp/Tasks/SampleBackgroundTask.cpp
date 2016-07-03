@@ -13,17 +13,10 @@
 #include "SampleBackgroundTask.h"
 
 using namespace Tasks;
+using namespace Windows::ApplicationModel::Background;
 using namespace Windows::Foundation;
 using namespace Windows::Storage;
-
-SampleBackgroundTask::SampleBackgroundTask() :
-    CancelReason(BackgroundTaskCancellationReason::Abort), CancelRequested(false), TaskDeferral(nullptr), PeriodicTimer(nullptr), Progress(0), TaskInstance(nullptr)
-{
-}
-
-SampleBackgroundTask::~SampleBackgroundTask()
-{
-}
+using namespace Windows::System::Threading;
 
 void SampleBackgroundTask::Run(IBackgroundTaskInstance^ taskInstance)
 {
@@ -60,11 +53,12 @@ void SampleBackgroundTask::Run(IBackgroundTaskInstance^ taskInstance)
             PeriodicTimer->Cancel();
 
             //
-            // Write to LocalSettings to indicate that this background task ran.
+            // Record that this background task ran.
             //
-            auto settings = ApplicationData::Current->LocalSettings;
+            auto taskStatus = (Progress < 100) ? "Canceled with reason: " + CancelReason.ToString() : "Completed";
             auto key = TaskInstance->Task->Name;
-            settings->Values->Insert(key, (Progress < 100) ? "Canceled with reason: " + CancelReason.ToString() : "Completed");
+            auto settings = ApplicationData::Current->LocalSettings;
+            settings->Values->Insert(key, taskStatus);
 
             //
             // Indicate that the background task has completed.
