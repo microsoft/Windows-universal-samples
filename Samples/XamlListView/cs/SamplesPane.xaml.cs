@@ -33,5 +33,10 @@ namespace ListViewSample
         {
             ((Frame)Window.Current.Content).Navigate(typeof(MainPage));
         }
+
+        private void NavigateToSpecificPosition(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(ScrollIntoViewSample));
+        }
     }
 }

@@ -5,17 +5,18 @@
 
 # Barcode scanner sample
 
-This sample shows how to create a barcode scanner, claim it for exclusive use, enable it to receive data, and read a barcode. This sample uses [**Windows.Devices.PointOfService**](http://msdn.microsoft.com/library/windows/apps/dn298071) API.
+This sample shows how to obtain a barcode scanner,
+claim it for exclusive use, enable it to receive data, and read a barcode.
 
 Specifically, this sample shows how to:
 
-1.  **Create the barcode scanner**
+1.  **Obtain the barcode scanner**
 
-    Uses the [**BarcodeScanner.GetDefaultAsync**](http://msdn.microsoft.com/library/windows/apps/dn263790) to get the first available barcode scanner.
+    Uses [**BarcodeScanner.GetDefaultAsync**](http://msdn.microsoft.com/library/windows/apps/dn263790) to get the first available barcode scanner.
 
 2.  **Claim the barcode scanner for exclusive use**
 
-    Uses the [**ClaimScannerAsync**](http://msdn.microsoft.com/library/windows/apps/dn297696) to claim the device.
+    Uses [**ClaimScannerAsync**](http://msdn.microsoft.com/library/windows/apps/dn297696) to claim the device.
 
 3.  **Add event handlers**
 
@@ -35,19 +36,15 @@ In addition to the devices listed, you can use barcode scanners from various man
 
 **Note** The Universal Windows app samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
 
-### Samples
-
-[Barcode Scanner sample](/Samples/BarcodeScanner)
-
 ### Reference
 
-[Windows.Devices.PointOfService](http://msdn.microsoft.com/library/windows/apps/dn298071)
+[Windows.Devices.PointOfService namespace](http://msdn.microsoft.com/library/windows/apps/dn298071)
 
 [USB HID POS Scanner specification](http://go.microsoft.com/fwlink/p/?linkid=309230)
 

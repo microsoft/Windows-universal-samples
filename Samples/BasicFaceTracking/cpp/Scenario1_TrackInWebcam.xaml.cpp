@@ -116,10 +116,7 @@ Concurrency::task<bool> TrackFacesInWebcam::StartWebcamStreaming()
         {
             finalTask.get();
 
-            // Ensure the Semaphore is in the signalled state.
-            ReleaseSemaphore(frameProcessingSemaphore, 1, nullptr);
-
-            // Use a 66 milisecond interval for our timer, i.e. 15 frames per second.
+            // Use a 66 millisecond interval for our timer, i.e. 15 frames per second.
             // NOTE: Timespan is measured in 100 nanosecond units
             TimeSpan timerInterval;
             timerInterval.Duration = 66 * 10000;

@@ -137,8 +137,8 @@ void Scenario1_Download::HandleDownloadAsync(DownloadOperation^ download, boolea
 void Scenario1_Download::DownloadProgress(IAsyncOperationWithProgress<DownloadOperation^, DownloadOperation^>^ operation, DownloadOperation^ download)
 {
     // DownloadOperation.Progress is updated in real-time while the operation is ongoing. Therefore,
-    // we must make a local copy at the beginning of the progress handler, so that we can have a consistent
-    // view of that ever-changing state throughout the handler's lifetime.
+    // we must make a local copy so that we can have a consistent view of that ever-changing state
+    // throughout this method's lifetime.
     BackgroundDownloadProgress currentProgress = download->Progress;
 
     MarshalLog("Progress: " + download->Guid + ", Status: " + currentProgress.Status.ToString());
@@ -275,8 +275,8 @@ void Scenario1_Download::PauseAll_Click(Object^ sender, RoutedEventArgs^ e)
         DownloadOperation^ download = iterator->second;
 
         // DownloadOperation.Progress is updated in real-time while the operation is ongoing. Therefore,
-        // we must make a local copy at the beginning of the progress handler, so that we can have a consistent
-        // view of that ever-changing state throughout the handler's lifetime.
+        // we must make a local copy so that we can have a consistent view of that ever-changing state
+        // throughout this method's lifetime.
         BackgroundDownloadProgress currentProgress = download->Progress;
 
         if (currentProgress.Status == BackgroundTransferStatus::Running)
@@ -299,8 +299,8 @@ void Scenario1_Download::ResumeAll_Click(Object^ sender, RoutedEventArgs^ e)
         DownloadOperation^ download = iterator->second;
 
         // DownloadOperation.Progress is updated in real-time while the operation is ongoing. Therefore,
-        // we must make a local copy at the beginning of the progress handler, so that we can have a consistent
-        // view of that ever-changing state throughout the handler's lifetime.
+        // we must make a local copy so that we can have a consistent view of that ever-changing state
+        // throughout this method's lifetime.
         BackgroundDownloadProgress currentProgress = download->Progress;
 
         if (currentProgress.Status == BackgroundTransferStatus::PausedByApplication)

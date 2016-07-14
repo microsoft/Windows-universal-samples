@@ -2,7 +2,6 @@
   category: AppSettings
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=627610
 --->
-
 # Store sample
 
 This sample demonstrates how to perform in-app feature or product purchases operations
@@ -31,6 +30,21 @@ The sample app demonstrates the following tasks.
 -   Perform an in-app purchase to buy an app feature or product from a large purchase catalog.
 -   Launch the Windows Store page for the app, so users can purchase the app or write a review.
 -   Generate a receipt that can be used to verify the successful completion of the transaction.
+-   Generate a business to business (B2B) token that can be used to query or add to a user's collection.
+
+### Additional Setup Instructions for Scenario 9 - Business to Business
+
+These steps are necessary only if you want to run the code in Scenario 9 as it requires application and Azure configuration.
+
+1. You must have a real application available for download from the Windows Store.  This can be a private application.
+2. Download a copy of your application from the store to get a valid license.
+3. Associate this test application with this application in the store.
+4. Deploy this application to your machine and overwrite the existing application.
+5. Setup your application following the instructions under the **Adding an Application** section at [Integrating Applications with Azure Active Directory](https://azure.microsoft.com/en-us/documentation/articles/active-directory-integrating-applications/).
+6. Replace the provided value of "tenantId" with your actual tenant ID for your Azure account.
+7. Replace the provided value of "clientId" with the actual value of your native application created in Azure.
+8. Replace the provided value of "clientSecret" with the actual value for your Azure account.
+9. Replace the provided value of "appIdUri" with the actual value of your Azure application.
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
@@ -39,6 +53,10 @@ To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.c
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
+
+### Samples
+
+[Advertising](/Samples/Advertising)
 
 ### Reference
 

@@ -81,9 +81,10 @@ Namespace Global.SDKTemplate
         ''' <param name="name">A name for the background task.</param>
         ''' <param name="trigger">The trigger for the background task.</param>
         ''' <param name="condition">An optional conditional event that must be true for the task to fire.</param>
-        Public Shared Async Function RegisterBackgroundTask(taskEntryPoint As String, name As String, trigger As IBackgroundTrigger, condition As IBackgroundCondition) As Task(Of BackgroundTaskRegistration)
+        Public Shared Function RegisterBackgroundTask(taskEntryPoint As String, name As String, trigger As IBackgroundTrigger, condition As IBackgroundCondition) As BackgroundTaskRegistration
             If TaskRequiresBackgroundAccess(name) Then
-                Await BackgroundExecutionManager.RequestAccessAsync()
+                ' If the user denies access, the task will not run.
+                Dim requestTask = BackgroundExecutionManager.RequestAccessAsync()
             End If
 
             Dim builder = New BackgroundTaskBuilder()
@@ -96,9 +97,9 @@ Namespace Global.SDKTemplate
             End If
 
             Dim task As BackgroundTaskRegistration = builder.Register()
-            UpdateBackgroundTaskStatus(name, True)
+            UpdateBackgroundTaskRegistrationStatus(name, True)
             '
-            ' Remove previous completion status from local settings.
+            ' Remove previous completion status.
             '
             Dim settings = ApplicationData.Current.LocalSettings
             settings.Values.Remove(name)
@@ -116,7 +117,7 @@ Namespace Global.SDKTemplate
                 End If
             Next
 
-            UpdateBackgroundTaskStatus(name, False)
+            UpdateBackgroundTaskRegistrationStatus(name, False)
         End Sub
 
         ''' <summary>
@@ -124,7 +125,7 @@ Namespace Global.SDKTemplate
         ''' </summary>
         ''' <param name="name">Name of background task to store registration status for.</param>
         ''' <param name="registered">TRUE if registered, FALSE if unregistered.</param>
-        Public Shared Sub UpdateBackgroundTaskStatus(name As String, registered As Boolean)
+        Public Shared Sub UpdateBackgroundTaskRegistrationStatus(name As String, registered As Boolean)
             Select name
                 Case SampleBackgroundTaskName
                     SampleBackgroundTaskRegistered = registered
@@ -160,9 +161,10 @@ Namespace Global.SDKTemplate
                      End Select
 
             Dim status = If(registered, "Registered", "Unregistered")
+            Dim taskStatus As Object = Nothing
             Dim settings = ApplicationData.Current.LocalSettings
-            If settings.Values.ContainsKey(name) Then
-                status &= " - " & settings.Values(name).ToString()
+            If settings.Values.TryGetValue(name, taskStatus) Then
+                status &= " - " & taskStatus.ToString()
             End If
 
             Return status
@@ -173,7 +175,7 @@ Namespace Global.SDKTemplate
         ''' </summary>
         ''' <param name="name">Name of background task to query background access requirement.</param>
         Public Shared Function TaskRequiresBackgroundAccess(name As String) As Boolean
-            If(name = TimeTriggeredTaskName) OrElse (name = ApplicationTriggerTaskName) Then
+            If (name = TimeTriggeredTaskName) OrElse (name = ApplicationTriggerTaskName) Then
                 Return True
             Else
                 Return False

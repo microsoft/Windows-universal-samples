@@ -12,17 +12,16 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using GeotagCSSample;
 
 namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        public const string FEATURE_NAME = "Geotag API";
+        public const string FEATURE_NAME = "Geotag C# Sample";
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title="Geotag CS Sample", ClassType=typeof(Scenario1)}
+            new Scenario() { Title="Geotag a file", ClassType=typeof(Scenario1_Geotag)}
         };
     }
 

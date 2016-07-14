@@ -1,0 +1,36 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.SavingDataReason"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,20,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Text="Saving Data Reason" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"/>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                Requests for extended execution using the "SavingData" reason
+                are allowed only during the Suspending lifecycle stage.
+                The app raises a toast every ten seconds during the save operation
+                to demonstrate that it is still running.
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                See the instructions in the README for details on how to use this scenario.
+            </TextBlock>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -23,7 +23,7 @@
             </ListBox.ItemTemplate>
             <!-- Add your scenarios here -->
             <ListBoxItem x:Name="Scenario1">
-        <TextBlock Text="1) Adding, removing and querying lock screen capabilities"/>
+        <TextBlock Text="1) Adding app to the lock screen"/>
             </ListBoxItem>
             <ListBoxItem x:Name="Scenario2">
         <TextBlock Text="2) Sending lock screen badge notifications and tile updates"/>

@@ -1,0 +1,29 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario1.js"></script>
+
+    <!-- Reference for Microsoft Advertising -->
+    <script src="//Microsoft.Advertising.JavaScript/ad.js"></script>
+</head>
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">
+        Create an ad control in markup
+    </div>
+    <!--
+    Set the application id and ad unit id via markup.
+    The application id and ad unit id can be obtained from Dev Center.
+    See "Monetize with Ads" at https://msdn.microsoft.com/en-us/library/windows/apps/mt170658.aspx
+    -->
+    <div id="adContainer" style="width: 300px; height: 250px; z-index: 1"
+        data-win-control="MicrosoftNSJS.Advertising.AdControl"
+        data-win-options="{applicationId: 'd25517cb-12d4-4699-8bdc-52040c712cab', adUnitId: '10043058'}">
+    </div>
+</body>
+</html>

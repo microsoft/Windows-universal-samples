@@ -44,22 +44,18 @@ void ApplicationTriggerTask::OnNavigatedTo(NavigationEventArgs^ e)
     //
     // Attach progress and completed handlers to any existing tasks.
     //
-    auto iter = BackgroundTaskRegistration::AllTasks->First();
-    auto hascur = iter->HasCurrent;
-    while (hascur)
+    for (auto pair : BackgroundTaskRegistration::AllTasks)
     {
-        auto cur = iter->Current->Value;
-
-        if (cur->Name == ApplicationTriggerTaskName)
+        auto task = pair->Value;
+        if (task->Name == ApplicationTriggerTaskName)
         {
-            BackgroundTaskSample::UpdateBackgroundTaskStatus(cur->Name, true);
-            AttachProgressAndCompletedHandlers(cur);
+            BackgroundTaskSample::UpdateBackgroundTaskRegistrationStatus(task->Name, true);
+            AttachProgressAndCompletedHandlers(task);
             break;
         }
-
-        hascur = iter->MoveNext();
     }
 
+    trigger = ref new ApplicationTrigger();
     UpdateUI();
 }
 
@@ -69,19 +65,8 @@ void ApplicationTriggerTask::OnNavigatedTo(NavigationEventArgs^ e)
 /// <param name="task">The task to attach progress and completed handlers to.</param>
 void ApplicationTriggerTask::AttachProgressAndCompletedHandlers(IBackgroundTaskRegistration^ task)
 {
-    auto progress = [this](BackgroundTaskRegistration^ task, BackgroundTaskProgressEventArgs^ args)
-    {
-        auto progress = "Progress: " + args->Progress + "%";
-        BackgroundTaskSample::ApplicationTriggerTaskProgress = progress;
-        UpdateUI();
-    };
-    task->Progress += ref new BackgroundTaskProgressEventHandler(progress);
-
-    auto completed = [this](BackgroundTaskRegistration^ task, BackgroundTaskCompletedEventArgs^ args)
-    {
-        UpdateUI();
-    };
-    task->Completed += ref new BackgroundTaskCompletedEventHandler(completed);
+    task->Progress += ref new BackgroundTaskProgressEventHandler(this, &ApplicationTriggerTask::OnProgress);
+    task->Completed += ref new BackgroundTaskCompletedEventHandler(this, &ApplicationTriggerTask::OnCompleted);
 }
 
 /// <summary>
@@ -91,8 +76,6 @@ void ApplicationTriggerTask::AttachProgressAndCompletedHandlers(IBackgroundTaskR
 /// <param name="e"></param>
 void ApplicationTriggerTask::RegisterBackgroundTask(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-    trigger = ref new ApplicationTrigger();
-
     auto task = BackgroundTaskSample::RegisterBackgroundTask(SampleBackgroundTaskEntryPoint,
                                                              ApplicationTriggerTaskName,
                                                              trigger,
@@ -133,6 +116,31 @@ void ApplicationTriggerTask::SignalBackgroundTask(Platform::Object^ sender, Wind
     request.then([this](ApplicationTriggerResult result) {
         BackgroundTaskSample::ApplicationTriggerTaskResult = "Signal Result: " + result.ToString();
     });
+    UpdateUI();
+}
+
+/// <summary>
+/// Handle background task progress.
+/// </summary>
+/// <param name="task">The task that is reporting progress.</param>
+/// <param name="args">Arguments of the progress report.</param>
+void ApplicationTriggerTask::OnProgress(BackgroundTaskRegistration^ task, BackgroundTaskProgressEventArgs^ args)
+{
+    Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
+    {
+        auto progress = "Progress: " + args->Progress + "%";
+        BackgroundTaskSample::ApplicationTriggerTaskProgress = progress;
+        UpdateUI();
+    }));
+}
+
+/// <summary>
+/// Handle background task completion.
+/// </summary>
+/// <param name="task">The task that is reporting completion.</param>
+/// <param name="args">Arguments of the completion report.</param>
+void ApplicationTriggerTask::OnCompleted(BackgroundTaskRegistration^ task, BackgroundTaskCompletedEventArgs^ args)
+{
     UpdateUI();
 }
 

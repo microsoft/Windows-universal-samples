@@ -52,10 +52,11 @@ void Scenario2::GroupByHelper(QueryOptions^ queryOptions)
 {
     OutputPanel->Children->Clear();
 
-    StorageFolder^ picturesFolder = KnownFolders::PicturesLibrary;
-    StorageFolderQueryResult^ queryResult = picturesFolder->CreateFolderQueryWithOptions(queryOptions);
-
-    create_task(queryResult->GetFoldersAsync()).then([this](IVectorView<StorageFolder^>^ folders)
+    create_task(KnownFolders::GetFolderForUserAsync(nullptr /* current user */, KnownFolderId::PicturesLibrary)).then([this, queryOptions](StorageFolder^ picturesFolder)
+    {
+        StorageFolderQueryResult^ queryResult = picturesFolder->CreateFolderQueryWithOptions(queryOptions);
+        return queryResult->GetFoldersAsync();
+    }).then([this](IVectorView<StorageFolder^>^ folders)
     {
         // Add all file retrieval tasks to an array of tasks
         std::vector<task<std::pair<StorageFolder^, IVectorView<StorageFile^>^>>> fileTasks;

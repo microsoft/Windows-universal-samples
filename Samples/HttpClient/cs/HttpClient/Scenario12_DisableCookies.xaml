@@ -1,0 +1,70 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKSample.HttpClientSample.Scenario12"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid x:Name="LayoutRoot">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="Input" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="InputTextBlock1" TextWrapping="Wrap" Grid.Row="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+         Send a request to a given address with or without previously received cookies attached to it. First, use the Send initial request button to send a request to the
+        test server, and get a response with two cookies. Then, choose if you want to send the next request with or without those cookies. The test server response mirrors 
+        the client request and you can look for the 'Cookie' header to check if cookies were sent to the server or not.
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left">
+                    <TextBlock Text="Address: " Style="{StaticResource BasicTextStyle}" Margin="0,6,5,0" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="AddressField" InputScope="Url" Text="http://localhost/HttpClientSample/default.aspx?setCookies=1"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="0,10,0,0" Grid.Row="2">
+                    <Button Content="Send initial request" x:Name="SendInitialGetButton" Margin="0,10,10,0" Click="SendInitialGetButton_Click"/>
+                    <ToggleSwitch x:Name="CookieUsageBehaviorToggle" Margin="0,10,10,0" Header="Choose cookie behavior for next request:" OffContent="Disable" OnContent="Enable" IsOn="False"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button Content="Send next request" x:Name="SendNextRequestButton" IsEnabled="False" Margin="0,0,10,0" Click="SendNextRequestButton_Click"/>
+                        <Button Content="Cancel" x:Name="CancelButton" IsEnabled="False" Click="Cancel_Click"/>
+                    </StackPanel>
+                </StackPanel>
+                <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts for the input section -->
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup>
+                        <VisualState x:Name="InputDefaultLayout"/>
+                        <VisualState x:Name="InputBelow768Layout"/>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Grid>
+            <Grid x:Name="Output" Grid.Row="1">
+                <TextBox x:Name="OutputField" Margin="0" AcceptsReturn="True" TextWrapping="Wrap"/>
+                <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts for the output section -->
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup>
+                        <VisualState x:Name="OutputDefaultLayout"/>
+                        <VisualState x:Name="OutputBelow768Layout"/>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Page>

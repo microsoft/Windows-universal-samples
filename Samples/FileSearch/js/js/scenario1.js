@@ -23,11 +23,13 @@
         var searchFilter = queryBox.value;
 
         // Create a new file query from the music library and apply the AQS filter
-        var musicLibrary = Windows.Storage.KnownFolders.musicLibrary;
-        var options = new Windows.Storage.Search.QueryOptions(Windows.Storage.Search.CommonFileQuery.orderBySearchRank, ["*"]);
-        options.userSearchFilter = searchFilter;
-        var fileQuery = musicLibrary.createFileQueryWithOptions(options);
-        fileQuery.getFilesAsync().done(function (files) {
+        Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.musicLibrary).then(function (musicLibrary) {
+            var options = new Windows.Storage.Search.QueryOptions(Windows.Storage.Search.CommonFileQuery.orderBySearchRank, ["*"]);
+            options.userSearchFilter = searchFilter;
+            var fileQuery = musicLibrary.createFileQueryWithOptions(options);
+            return fileQuery.getFilesAsync();
+        })
+        .done(function (files) {
             if (files.size === 0) {
                 outputDiv.innerText = "No files found for '" + searchFilter + "'";
             } else {

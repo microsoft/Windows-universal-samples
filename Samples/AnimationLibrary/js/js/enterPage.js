@@ -20,7 +20,7 @@
         switch (pageSections) {
             case "1":
                 // Animate the whole page together
-                enterPage = WinJS.UI.Animation.enterPage([scenarioHeader, input, output], null);
+                enterPage = WinJS.UI.Animation.enterPage([[scenarioHeader, input, output]], null);
                 break;
             case "2":
                 // Stagger the header and body

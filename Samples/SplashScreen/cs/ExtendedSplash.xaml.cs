@@ -40,7 +40,7 @@ namespace SplashScreenSample
             // This is important to ensure that the extended splash screen is formatted properly in response to snapping, unsnapping, rotation, etc...
             Window.Current.SizeChanged += new WindowSizeChangedEventHandler(ExtendedSplash_OnResize);
 
-            ScaleFactor = (double)DisplayInformation.GetForCurrentView().ResolutionScale / 100;
+            ScaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
 
             splash = splashscreen;
 

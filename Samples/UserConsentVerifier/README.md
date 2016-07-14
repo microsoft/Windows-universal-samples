@@ -1,11 +1,11 @@
-<!---
+﻿<!---
   category: IdentitySecurityAndEncryption
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620615
 --->
 
 # UserConsentVerifier sample
 
-Demonstrates how to use the UserConsentVerifier class to check whether a biometric device is available to request fingerprint consent, and to request fingerprint verification from the user.
+Demonstrates how to use the UserConsentVerifier class to check whether a verifier device, such as a Microsoft Passport PIN, Windows Hello, or fingerprint reader, is available.
 
 **Note**  This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on both Windows 10 and Windows Phone 10.
 

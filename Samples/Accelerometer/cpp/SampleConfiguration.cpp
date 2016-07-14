@@ -23,3 +23,10 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "OrientationChanged", "SDKTemplate.Scenario4_OrientationChanged" },
     { "Data Events Batching", "SDKTemplate.Scenario5_DataEventsBatching" }
 };
+
+void MainPage::SetReadingText(Windows::UI::Xaml::Controls::TextBlock^ textBlock, Windows::Devices::Sensors::AccelerometerReading^ reading)
+{
+    textBlock->Text = "X: " + reading->AccelerationX.ToString() +
+        ", Y: " + reading->AccelerationY.ToString() +
+        ", Z: " + reading->AccelerationZ.ToString();
+}

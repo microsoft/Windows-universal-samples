@@ -10,6 +10,7 @@
 '*********************************************************
 Imports System
 Imports System.Collections.Generic
+Imports Windows.Devices.Sensors
 Imports Windows.UI.Xaml.Controls
 
 Namespace Global.SDKTemplate
@@ -20,6 +21,11 @@ Namespace Global.SDKTemplate
         Public Const FEATURE_NAME As String = "Accelerometer"
 
         Public ReadOnly Property scenarios As New List(Of Scenario) From {New Scenario() With {.Title = "Data events", .ClassType = GetType(Scenario1_DataEvents)}, New Scenario() With {.Title = "Shake events", .ClassType = GetType(Scenario2_ShakeEvents)}, New Scenario() With {.Title = "Polling", .ClassType = GetType(Scenario3_Polling)}, New Scenario() With {.Title = "OrientationChange", .ClassType = GetType(Scenario4_OrientationChanged)}, New Scenario() With {.Title = "Data events batching", .ClassType = GetType(Scenario5_DataEventsBatching)}}
+
+        Public Shared Sub SetReadingText(textBlock As TextBlock, reading As AccelerometerReading)
+            textBlock.Text = String.Format("X: {0,5:0.00}, Y: {1,5:0.00}, Z: {2,5:0.00}",
+                reading.AccelerationX, reading.AccelerationY, reading.AccelerationZ)
+        End Sub
     End Class
 
     Public Class Scenario

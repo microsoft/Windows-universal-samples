@@ -14,9 +14,4 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-  <Grid>
-    <TextBlock Style="{StaticResource DescriptionTextStyle}" TextWrapping="Wrap">
-      Apps can only prompt the user once, as enforced by the API.
-    </TextBlock>
-  </Grid>
 </Page>

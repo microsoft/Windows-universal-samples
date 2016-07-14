@@ -45,6 +45,9 @@ namespace CameraVideoStabilization
         // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
         const GUID RotationKey;
 
+        // Folder in which the captures will be stored (availability check performed in SetupUiAsync)
+        Windows::Storage::StorageFolder^ _captureFolder;
+
         Windows::Media::Core::VideoStabilizationEffect^ _videoStabilizationEffect;
         Windows::Media::MediaProperties::VideoEncodingProperties^ _inputPropertiesBackup;
         Windows::Media::MediaProperties::VideoEncodingProperties^ _outputPropertiesBackup;
@@ -94,8 +97,8 @@ namespace CameraVideoStabilization
         void Application_Suspending(Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e);
         void Application_Resuming(Object^ sender, Object^ args);
         void DisplayInformation_OrientationChanged(Windows::Graphics::Display::DisplayInformation^ sender, Object^ args);
-        void VsToggleButton_Tapped(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-        void VideoButton_Tapped(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void VsToggleButton_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void VideoButton_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void SystemMediaControls_PropertyChanged(Windows::Media::SystemMediaTransportControls^ sender, Windows::Media::SystemMediaTransportControlsPropertyChangedEventArgs^ args);
         void VideoStabilizationEffect_EnabledChanged(Windows::Media::Core::VideoStabilizationEffect^ sender, Windows::Media::Core::VideoStabilizationEffectEnabledChangedEventArgs^ args);
         void OrientationSensor_OrientationChanged(Windows::Devices::Sensors::SimpleOrientationSensor^, Windows::Devices::Sensors::SimpleOrientationSensorOrientationChangedEventArgs^);

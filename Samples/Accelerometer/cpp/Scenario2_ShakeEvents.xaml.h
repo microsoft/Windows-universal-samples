@@ -35,17 +35,18 @@ namespace SDKTemplate
         virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
         virtual void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 
+        void ScenarioEnable();
+        void ScenarioDisable();
+
     private:
-        SDKTemplate::MainPage^ rootPage;
+        SDKTemplate::MainPage^ rootPage = MainPage::Current;
         Windows::UI::Core::CoreDispatcher^ dispatcher;
         Windows::Devices::Sensors::Accelerometer^ accelerometer;
         Windows::Foundation::EventRegistrationToken visibilityToken;
         Windows::Foundation::EventRegistrationToken shakenToken;
-        uint16 shakeCounter;
+        uint16 shakeCounter = 0;
 
         void VisibilityChanged(Platform::Object^ sender, Windows::UI::Core::VisibilityChangedEventArgs^ e);
         void Shaken(Windows::Devices::Sensors::Accelerometer^ sender, Windows::Devices::Sensors::AccelerometerShakenEventArgs^ e);
-        void ScenarioEnable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-        void ScenarioDisable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
     };
 }

@@ -56,7 +56,7 @@ void Scenario4::WriteBytesButton_Click(Object^ sender, RoutedEventArgs^ e)
                 }
                 catch (COMException^ ex)
                 {
-                    rootPage->HandleFileNotFoundException(ex);
+                    rootPage->HandleIoException(ex, "Error writing to '" + file->Name + "'");
                 }
             });
         }
@@ -88,7 +88,7 @@ void Scenario4::ReadBytesButton_Click(Object^ sender, RoutedEventArgs^ e)
             }
             catch (COMException^ ex)
             {
-                rootPage->HandleFileNotFoundException(ex);
+                rootPage->HandleIoException(ex, "Error reading from '" + file->Name + "'");
             }
         });
     }

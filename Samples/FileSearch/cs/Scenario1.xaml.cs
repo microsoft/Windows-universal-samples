@@ -33,8 +33,8 @@ namespace SDKTemplate
 
         private async void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            StorageFolder musicFolder = KnownFolders.MusicLibrary;
-
+            StorageFolder musicFolder = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.MusicLibrary);
+            
             List<string> fileTypeFilter = new List<string>();
             fileTypeFilter.Add("*");
 

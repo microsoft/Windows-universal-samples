@@ -23,12 +23,12 @@
             <local:ControlExample.Example>
                 <StackPanel Orientation="Vertical">
                     <CheckBox x:Name="DisableControl1" Content="Disable hyperlink button" />
-                    <HyperlinkButton x:Name="Control1" Content="Windows Dev Center" NavigateUri="http://dev.windows.com" IsEnabled="{x:Bind DisableControl1.IsChecked, Converter={StaticResource negationConverter}, Mode=OneWay}" Grid.Row="1"/>
+                    <HyperlinkButton x:Name="Control1" Content="Microsoft home page" NavigateUri="http://www.microsoft.com" IsEnabled="{x:Bind DisableControl1.IsChecked, Converter={StaticResource negationConverter}, Mode=OneWay}" Grid.Row="1"/>
                 </StackPanel>
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
                 <RichTextBlock>
-                    <Paragraph>&lt;HyperlinkButton Content="Windows Dev Center" NavigateUri="http://dev.windows.com"/&gt;</Paragraph>
+                    <Paragraph>&lt;HyperlinkButton Content="Microsoft home page" NavigateUri="http://www.microsoft.com"/&gt;</Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>

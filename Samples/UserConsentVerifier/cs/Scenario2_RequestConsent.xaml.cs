@@ -41,54 +41,31 @@ namespace UserConsentVerifier
             {
                 try
                 {
-                    // Request the currently logged on user's consent via fingerprint swipe
+                    // Request the logged on user's consent using Windows Hello via biometric verification or a PIN.
                     UserConsentVerificationResult consentResult = await Windows.Security.Credentials.UI.UserConsentVerifier.RequestVerificationAsync(Message.Text);
                     switch (consentResult)
                     {
                         case UserConsentVerificationResult.Verified:
                             {
-                                rootPage.NotifyUser("User's presence verified.", NotifyType.StatusMessage);
-                                break;
-                            }
-
-                        case UserConsentVerificationResult.DeviceBusy:
-                            {
-                                rootPage.NotifyUser("Biometric device is busy.", NotifyType.ErrorMessage);
+                                rootPage.NotifyUser("User consent verified!", NotifyType.StatusMessage);
                                 break;
                             }
 
                         case UserConsentVerificationResult.DeviceNotPresent:
                             {
-                                rootPage.NotifyUser("No biometric device found.", NotifyType.ErrorMessage);
+                                rootPage.NotifyUser("No PIN or biometric found, please set one up.", NotifyType.ErrorMessage);
                                 break;
                             }
 
-                        case UserConsentVerificationResult.DisabledByPolicy:
-                            {
-                                rootPage.NotifyUser("Biometrics is disabled by policy.", NotifyType.ErrorMessage);
-                                break;
-                            }
-
-                        case UserConsentVerificationResult.NotConfiguredForUser:
-                            {
-                                rootPage.NotifyUser("User has no fingeprints registered.", NotifyType.ErrorMessage);
-                                break;
-                            }
-
-                        case UserConsentVerificationResult.RetriesExhausted:
-                            {
-                                rootPage.NotifyUser("Too many failed attempts.", NotifyType.ErrorMessage);
-                                break;
-                            }
                         case UserConsentVerificationResult.Canceled:
                             {
-                                rootPage.NotifyUser("Consent request prompt was canceled.", NotifyType.ErrorMessage);
+                                rootPage.NotifyUser("User consent verification canceled.", NotifyType.ErrorMessage);
                                 break;
                             }
 
                         default:
                             {
-                                rootPage.NotifyUser("Consent verification with fingerprints is currently unavailable.", NotifyType.ErrorMessage);
+                                rootPage.NotifyUser("User consent verification is currently unavailable.", NotifyType.ErrorMessage);
                                 break;
                             }
                     }

@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<grammar xml:lang="en-AU" root="colorChooser"
+tag-format="semantics/1.0" version="1.0"
+xmlns="http://www.w3.org/2001/06/grammar">
+
+    <!-- The following three rules recognize phrases where a user describes what color an -->
+    <!-- individual property should be. For example "blue background" or "green circle". -->
+
+    <rule id="background_Color">
+        <item>
+            <item>
+                <ruleref uri="#color"/>
+            </item>
+            background
+        </item>
+    </rule>
+
+    <rule id="border_Color">
+        <item>
+            <item>
+                <ruleref uri="#color"/>
+            </item>
+            border
+        </item>
+    </rule>
+
+    <rule id="circle_Color">
+        <item>
+            <item>
+                <ruleref uri="#color"/>
+            </item>
+            circle
+        </item>
+    </rule>
+
+    <!-- The following rule is the root rule. It allows the user to set the color of any permutation of one, two, or three -->
+    <!-- properties in a single phrase. The outer one-of element determines the first property spoken and then further -->
+    <!-- determines whether that was the first-of-one, first-of-two, or first-of-three properties in the phrase. -->
+    <!-- Twelve color names are recognized (see the rule with id "color"), therefore there are 3 * 12^1 ways of setting a single -->
+    <!-- property, 6 * 12^2 ways of setting two properties, and 6 * 12^3 ways of setting three properties. In total, that's -->
+    <!-- 11,268 permutations. -->
+
+  <rule id="colorChooser">
+    <one-of>
+
+      <item>
+        <item>
+          <ruleref uri="#background_Color"/>
+          <tag> out.KEY_BACKGROUND=rules.latest(); </tag>
+        </item>
+        <one-of>
+
+          <item/>
+
+          <item>
+            <item>
+              <ruleref uri="#border_Color"/>
+              <tag> out.KEY_BORDER=rules.latest(); </tag>
+            </item>
+            <item repeat="0-1">
+              <ruleref uri="#circle_Color"/>
+              <tag> out.KEY_CIRCLE=rules.latest(); </tag>
+            </item>
+          </item>
+
+          <item>
+            <item>
+              <ruleref uri="#circle_Color"/>
+              <tag> out.KEY_CIRCLE=rules.latest(); </tag>
+            </item>
+            <item repeat="0-1">
+              <ruleref uri="#border_Color"/>
+              <tag> out.KEY_BORDER=rules.latest(); </tag>
+            </item>
+          </item>
+
+        </one-of>
+      </item>
+
+      <item>
+        <item>
+          <ruleref uri="#border_Color"/>
+          <tag> out.KEY_BORDER=rules.latest(); </tag>
+        </item>
+        <one-of>
+
+          <item/>
+
+          <item>
+            <item>
+              <ruleref uri="#background_Color"/>
+              <tag> out.KEY_BACKGROUND=rules.latest(); </tag>
+            </item>
+            <item repeat="0-1">
+              <ruleref uri="#circle_Color"/>
+              <tag> out.KEY_CIRCLE=rules.latest(); </tag>
+            </item>
+          </item>
+
+          <item>
+            <item>
+              <ruleref uri="#circle_Color"/>
+              <tag> out.KEY_CIRCLE=rules.latest(); </tag>
+            </item>
+            <item repeat="0-1">
+              <ruleref uri="#background_Color"/>
+              <tag> out.KEY_BACKGROUND=rules.latest(); </tag>
+            </item>
+          </item>
+
+        </one-of>
+      </item>
+
+      <item>
+        <item>
+          <ruleref uri="#circle_Color"/>
+          <tag> out.KEY_CIRCLE=rules.latest(); </tag>
+        </item>
+        <one-of>
+
+          <item/>
+
+          <item>
+            <item>
+              <ruleref uri="#background_Color"/>
+              <tag> out.KEY_BACKGROUND=rules.latest(); </tag>
+            </item>
+            <item repeat="0-1">
+              <ruleref uri="#border_Color"/>
+              <tag> out.KEY_BORDER=rules.latest(); </tag>
+            </item>
+          </item>
+
+          <item>
+            <item>
+              <ruleref uri="#border_Color"/>
+              <tag> out.KEY_BORDER=rules.latest(); </tag>
+            </item>
+            <item repeat="0-1">
+              <ruleref uri="#background_Color"/>
+              <tag> out.KEY_BACKGROUND=rules.latest(); </tag>
+            </item>
+          </item>
+
+        </one-of>
+      </item>
+    </one-of>
+  </rule>
+
+    <!-- The list of colors that are recognized. Assigns a semantic value to each -->
+    <!-- color to give the app a standardized value in the recognition result -->
+
+    <rule id="color">
+        <one-of>
+            <item>
+              red <tag> out="COLOR_RED"; </tag>
+            </item>
+            <item>
+              orange <tag> out="COLOR_ORANGE"; </tag>
+            </item>
+            <item>
+              yellow <tag> out="COLOR_YELLOW"; </tag>
+            </item>
+            <item>
+              brown <tag> out="COLOR_BROWN"; </tag>
+            </item>
+            <item>
+              green <tag> out="COLOR_GREEN"; </tag>
+            </item>
+            <item>
+              cyan <tag> out="COLOR_CYAN"; </tag>
+            </item>
+            <item>
+              purple <tag> out="COLOR_PURPLE"; </tag>
+            </item>
+            <item>
+              magenta <tag> out="COLOR_MAGENTA"; </tag>
+            </item>
+            <item>
+              gray <tag> out="COLOR_GRAY"; </tag>
+            </item>
+            <item>
+              white <tag> out="COLOR_WHITE"; </tag>
+            </item>
+            <item>
+              blue <tag> out="COLOR_BLUE"; </tag>
+            </item>
+            <item>
+              black <tag> out="COLOR_BLACK"; </tag>
+            </item>
+        </one-of>
+    </rule>
+
+</grammar>
