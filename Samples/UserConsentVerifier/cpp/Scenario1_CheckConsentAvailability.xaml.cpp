@@ -23,7 +23,7 @@ Scenario1_CheckConsentAvailability::Scenario1_CheckConsentAvailability()
     InitializeComponent();
 }
 
-// Checks the availability of User consent requisition via registered fingerprints.
+// Check the availability of Windows Hello authentication through User Consent Verifier.
 void Scenario1_CheckConsentAvailability::CheckAvailability_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     Button^ checkAvailabilityButton = dynamic_cast<Button^>(sender);
@@ -31,7 +31,6 @@ void Scenario1_CheckConsentAvailability::CheckAvailability_Click(Platform::Objec
 
     try
     {
-        // Check the availability of User Consent with fingerprints facility
         create_task(Windows::Security::Credentials::UI::UserConsentVerifier::CheckAvailabilityAsync())
             .then([checkAvailabilityButton](UserConsentVerifierAvailability consentAvailability)
         {
@@ -39,37 +38,19 @@ void Scenario1_CheckConsentAvailability::CheckAvailability_Click(Platform::Objec
             {
             case UserConsentVerifierAvailability::Available:
             {
-                MainPage::Current->NotifyUser("User consent requisition facility is available.", NotifyType::StatusMessage);
-                break;
-            }
-
-            case UserConsentVerifierAvailability::DeviceBusy:
-            {
-                MainPage::Current->NotifyUser("Biometric device is busy.", NotifyType::ErrorMessage);
+                MainPage::Current->NotifyUser("User consent verification available!", NotifyType::StatusMessage);
                 break;
             }
 
             case UserConsentVerifierAvailability::DeviceNotPresent:
             {
-                MainPage::Current->NotifyUser("No biometric device found.", NotifyType::ErrorMessage);
-                break;
-            }
-
-            case UserConsentVerifierAvailability::DisabledByPolicy:
-            {
-                MainPage::Current->NotifyUser("Biometrics is disabled by policy.", NotifyType::ErrorMessage);
-                break;
-            }
-
-            case UserConsentVerifierAvailability::NotConfiguredForUser:
-            {
-                MainPage::Current->NotifyUser("User has no fingeprints registered.", NotifyType::ErrorMessage);
+                MainPage::Current->NotifyUser("No PIN or biometric found, please set one up.", NotifyType::ErrorMessage);
                 break;
             }
 
             default:
             {
-                MainPage::Current->NotifyUser("Consent verification with fingerprints is currently unavailable.", NotifyType::ErrorMessage);
+                MainPage::Current->NotifyUser("User consent verification is currently unavailable.", NotifyType::ErrorMessage);
                 break;
             }
             }
