@@ -9,14 +9,17 @@ This sample demonstrates how to use ink functionality (such as capturing ink fro
 
 Specifically, this sample covers using the Windows.UI.Input.Inking APIs to do the following:
 -   Capture user input and render as ink strokes
+-   Create an ink toolbar which is associated with an ink canvas
+-   Add custom buttons to the ink toolbar
+-   Create an ink toolbar with only specified buttons
+-   Control multiple ink canvases with a single ink toolbar
 -   Save and load ink strokes
 -   Erase ink strokes
--   Select different types of pens
+-   Create and select different types of pens
 -   Change which input types (Mouse/Touch/Pen) are used for inking
 -   Recognize handwriting from ink strokes
 -   Select ink strokes
--   add a custom button to the ink toolbar
--   show and position the ruler
+-   Create a ruler, show it, hide it, and reposition it
 -   manipulate wet ink strokes
     - make strokes follow a shape
     - complete a stroke prematurely if conditions are met

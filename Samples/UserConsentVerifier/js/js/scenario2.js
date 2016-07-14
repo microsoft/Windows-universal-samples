@@ -8,39 +8,26 @@
         }
     });
 
-    // Requests fingerprint consent from the current user.
+    // Request the logged on user's consent using Windows Hello via biometric verification or a PIN.
     function requestConsent() {
         try {
             // Read the message that has to be displayed in the consent request prompt
             var message = document.getElementById("Message").value;
 
-            // Request the currently logged on user's consent via fingerprint swipe
             Windows.Security.Credentials.UI.UserConsentVerifier.requestVerificationAsync(message)
             .then(function (consentResult) {
                 switch (consentResult) {
                     case Windows.Security.Credentials.UI.UserConsentVerificationResult.verified:
-                        WinJS.log && WinJS.log("User's presence verified.", "sample", "status");
+                        WinJS.log && WinJS.log("User consent verified!", "sample", "status");
                         break;
                     case Windows.Security.Credentials.UI.UserConsentVerificationResult.deviceNotPresent:
-                        WinJS.log && WinJS.log("No biometric device found.", "sample", "error");
-                        break;
-                    case Windows.Security.Credentials.UI.UserConsentVerificationResult.disabledByPolicy:
-                        WinJS.log && WinJS.log("Biometrics is disabled by policy.", "sample", "error");
-                        break;
-                    case Windows.Security.Credentials.UI.UserConsentVerificationResult.retriesExhausted:
-                        WinJS.log && WinJS.log("Too many failed attempts.", "sample", "error");
-                        break;
-                    case Windows.Security.Credentials.UI.UserConsentVerificationResult.notConfiguredForUser:
-                        WinJS.log && WinJS.log("User has no fingeprints registered.", "sample", "error");
-                        break;
-                    case Windows.Security.Credentials.UI.UserConsentVerificationResult.deviceBusy:
-                        WinJS.log && WinJS.log("Biometric device is busy.", "sample", "error");
+                        WinJS.log && WinJS.log("No PIN or biometric found, please set one up.", "sample", "error");
                         break;
                     case Windows.Security.Credentials.UI.UserConsentVerificationResult.canceled:
-                        WinJS.log && WinJS.log("Consent request prompt was canceled.", "sample", "error");
+                        WinJS.log && WinJS.log("User consent verification canceled.", "sample", "error");
                         break;
                     default:
-                        WinJS.log && WinJS.log("Consent verification is currently unavailable.", "sample", "error");
+                        WinJS.log && WinJS.log("User consent verification is currently unavailable.", "sample", "error");
                         break;
                 }
             });

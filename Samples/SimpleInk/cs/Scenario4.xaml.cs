@@ -1,4 +1,4 @@
-//*********************************************************
+﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
 // This code is licensed under the MIT License (MIT).
@@ -9,69 +9,183 @@
 //
 //*********************************************************
 
+using System;
+using System.Collections.Generic;
+using Windows.Globalization;
+using Windows.UI.Input.Inking;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Windows.UI.Input.Inking;
-using System.Numerics;
+using Windows.UI.Text.Core;
 using SDKTemplate;
 
-namespace SimpleInk
+namespace SDKTemplate
 {
     /// <summary>
-    ///   This scenario demonstrates how to Work with InkPresenterRuler in a ScrollViewer.
-    ///   -- It demonstrates how to reposition the InkPresenterRuler on demand
-    ///   -- It also demonstrates integrating a custom button with ruler functionality alongside the InkToolbar
+    /// This page shows the code to do ink recognition
     /// </summary>
     public sealed partial class Scenario4 : Page
     {
         private MainPage rootPage = MainPage.Current;
-
-        InkPresenterRuler ruler;
+        InkRecognizerContainer inkRecognizerContainer = null;
+        private IReadOnlyList<InkRecognizer> recoView = null;
+        private Language previousInputLanguage = null;
+        private CoreTextServicesManager textServiceManager = null;
 
         public Scenario4()
         {
             this.InitializeComponent();
 
-            InkCanvas.InkPresenter.InputDeviceTypes = Windows.UI.Core.CoreInputDeviceTypes.Mouse | Windows.UI.Core.CoreInputDeviceTypes.Pen;
+            // Initialize drawing attributes. These are used in inking mode.
+            InkDrawingAttributes drawingAttributes = new InkDrawingAttributes();
+            drawingAttributes.Color = Windows.UI.Colors.Red;
+            double penSize = 4;
+            drawingAttributes.Size = new Windows.Foundation.Size(penSize, penSize);
+            drawingAttributes.IgnorePressure = false;
+            drawingAttributes.FitToCurve = true;
 
-            ruler = new InkPresenterRuler(InkCanvas.InkPresenter);
+            // Show the available recognizers
+            inkRecognizerContainer = new InkRecognizerContainer();
+            recoView = inkRecognizerContainer.GetRecognizers();
+            if (recoView.Count > 0)
+            {
+                foreach (InkRecognizer recognizer in recoView)
+                {
+                    RecoName.Items.Add(recognizer.Name);
+                }
+            }
+            else
+            {
+                RecoName.IsEnabled = false;
+                RecoName.Items.Add("No Recognizer Available");
+            }
+            RecoName.SelectedIndex = 0;
 
-            // Customize Ruler
-            ruler.BackgroundColor = Windows.UI.Colors.PaleTurquoise;
-            ruler.ForegroundColor = Windows.UI.Colors.MidnightBlue;
-            ruler.Length = 800;
+            // Set the text services so we can query when language changes
+            textServiceManager = CoreTextServicesManager.GetForCurrentView();
+            textServiceManager.InputLanguageChanged += TextServiceManager_InputLanguageChanged;
+
+            SetDefaultRecognizerByCurrentInputMethodLanguageTag();
+
+            // Initialize the InkCanvas
+            inkCanvas.InkPresenter.UpdateDefaultDrawingAttributes(drawingAttributes);
+            inkCanvas.InkPresenter.InputDeviceTypes = Windows.UI.Core.CoreInputDeviceTypes.Mouse | Windows.UI.Core.CoreInputDeviceTypes.Pen | Windows.UI.Core.CoreInputDeviceTypes.Touch;
         }
 
-        private void InkToolbar_IsRulerButtonCheckedChanged(InkToolbar sender, object args)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            var rulerButton = (InkToolbarRulerButton)InkToolbar.GetToggleButton(InkToolbarToggle.Ruler);
-            BringIntoViewButton.IsEnabled = rulerButton.IsChecked.Value;
+            InstallReco.IsOpen = false;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void OnSizeChanged()
         {
-            // Make the canvas larger than the window in order to demonstrate scrolling.
-            InkCanvas.Width = Window.Current.Bounds.Width * 2;
-            InkCanvas.Height = Window.Current.Bounds.Height * 2;
+            HelperFunctions.UpdateCanvasSize(RootGrid, Output, inkCanvas);
         }
 
-        void OnBringIntoView(object sender, RoutedEventArgs e)
+        void OnRecognizerChanged(object sender, RoutedEventArgs e)
         {
-            // Set Ruler Origin to ScrollViewer Viewport origin.
-            // The purpose of this behavior is to allow the user to "grab" the 
-            // ruler and bring it into view no matter where the scrollviewer viewport
-            // happens to be.  Note that this is accomplished by a simple translation 
-            // that adjusts to the zoom factor.  The additional ZoomFactor term is to 
-            // make ensure the scale of the InkPresenterRuler is invariant to Zoom. 
-            Matrix3x2 viewportTransform =
-                Matrix3x2.CreateScale(ScrollViewer.ZoomFactor) *
-                Matrix3x2.CreateTranslation(
-                   (float)ScrollViewer.HorizontalOffset,
-                   (float)ScrollViewer.VerticalOffset) *
-                Matrix3x2.CreateScale(1.0f / ScrollViewer.ZoomFactor);
+            string selectedValue = (string)RecoName.SelectedValue;
+            SetRecognizerByName(selectedValue);
+        }
 
-            ruler.Transform = viewportTransform;
+        async void OnRecognizeAsync(object sender, RoutedEventArgs e)
+        {
+            IReadOnlyList<InkStroke> currentStrokes = inkCanvas.InkPresenter.StrokeContainer.GetStrokes();
+            if (currentStrokes.Count > 0)
+            {
+                RecognizeBtn.IsEnabled = false;
+                ClearBtn.IsEnabled = false;
+                RecoName.IsEnabled = false;
+
+                var recognitionResults = await inkRecognizerContainer.RecognizeAsync(inkCanvas.InkPresenter.StrokeContainer, InkRecognitionTarget.All);
+
+                if (recognitionResults.Count > 0)
+                {
+                    // Display recognition result
+                    string str = "Recognition result:";
+                    foreach (var r in recognitionResults)
+                    {
+                        str += " " + r.GetTextCandidates()[0];
+                    }
+                    rootPage.NotifyUser(str, NotifyType.StatusMessage);
+                }
+                else
+                {
+                    rootPage.NotifyUser("No text recognized.", NotifyType.StatusMessage);
+                }
+
+                RecognizeBtn.IsEnabled = true;
+                ClearBtn.IsEnabled = true;
+                RecoName.IsEnabled = true;
+            }
+            else
+            {
+                rootPage.NotifyUser("Must first write something.", NotifyType.ErrorMessage);
+            }
+        }
+
+        void OnClear(object sender, RoutedEventArgs e)
+        {
+            inkCanvas.InkPresenter.StrokeContainer.Clear();
+            rootPage.NotifyUser("Cleared Canvas.", NotifyType.StatusMessage);
+        }
+
+        bool SetRecognizerByName(string recognizerName)
+        {
+            bool recognizerFound = false;
+
+            foreach (InkRecognizer reco in recoView)
+            {
+                if (recognizerName == reco.Name)
+                {
+                    inkRecognizerContainer.SetDefaultRecognizer(reco);
+                    recognizerFound = true;
+                    break;
+                }
+            }
+
+            if (!recognizerFound && rootPage != null)
+            {
+                rootPage.NotifyUser("Could not find target recognizer.", NotifyType.ErrorMessage);
+            }
+
+            return recognizerFound;
+        }
+
+        private void TextServiceManager_InputLanguageChanged(CoreTextServicesManager sender, object args)
+        {
+            SetDefaultRecognizerByCurrentInputMethodLanguageTag();
+        }
+
+        private void SetDefaultRecognizerByCurrentInputMethodLanguageTag()
+        {
+            // Query recognizer name based on current input method language tag (bcp47 tag)
+            Language currentInputLanguage = textServiceManager.InputLanguage;
+
+            if (currentInputLanguage != previousInputLanguage)
+            {
+                // try query with the full BCP47 name
+                string recognizerName = RecognizerHelper.LanguageTagToRecognizerName(currentInputLanguage.LanguageTag);
+
+                if (recognizerName != string.Empty)
+                {
+                    for (int index = 0; index < recoView.Count; index++)
+                    {
+                        if (recoView[index].Name == recognizerName)
+                        {
+                            inkRecognizerContainer.SetDefaultRecognizer(recoView[index]);
+                            RecoName.SelectedIndex = index;
+                            previousInputLanguage = currentInputLanguage;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void RecoButton_Click(object sender, RoutedEventArgs e)
+        {
+            InstallReco.IsOpen = !InstallReco.IsOpen;
         }
     }
 }
