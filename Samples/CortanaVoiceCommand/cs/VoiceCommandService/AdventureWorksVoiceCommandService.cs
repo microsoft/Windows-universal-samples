@@ -218,8 +218,11 @@ namespace AdventureWorks.VoiceCommands
                     cortanaResourceMap.GetValue("ConfirmCancelTripToDestination", cortanaContext).ValueAsString,
                     destination);
                 userReprompt.DisplayMessage = userReprompt.SpokenMessage = confirmCancelTripToDestination;
-                
-                response = VoiceCommandResponse.CreateResponseForPrompt(userPrompt, userReprompt);
+
+                var tile = await MakeTileForTripAsync(1, trip);
+                var tileList = new List<VoiceCommandContentTile>();
+                tileList.Add(tile);
+                response = VoiceCommandResponse.CreateResponseForPrompt(userPrompt, userReprompt, tileList);
 
                 var voiceCommandConfirmation = await voiceServiceConnection.RequestConfirmationAsync(response);
 
@@ -305,30 +308,7 @@ namespace AdventureWorks.VoiceCommands
             int i = 1;
             foreach (Model.Trip trip in trips)
             {
-                var destinationTile = new VoiceCommandContentTile();
-
-                // To handle UI scaling, Cortana automatically looks up files with FileName.scale-<n>.ext formats based on the requested filename.
-                // See the VoiceCommandService\Images folder for an example.
-                destinationTile.ContentTileType = VoiceCommandContentTileType.TitleWith68x68IconAndText;
-                destinationTile.Image = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///AdventureWorks.VoiceCommands/Images/GreyTile.png"));
-                
-                // The AppContext can be any arbitrary object, and will be maintained for the
-                // response.
-                destinationTile.AppContext = trip;
-                string dateFormat = "";
-                if (trip.StartDate != null)
-                {
-                    dateFormat = trip.StartDate.Value.ToString(dateFormatInfo.LongDatePattern);
-                }
-                else
-                {
-                    // The app allows a trip to not have a date, but the choices must be unique
-                    // so they can be spoken aloud and be distinct, so add a number to identify them.
-                    dateFormat = string.Format("{0}", i);
-                } 
-
-                destinationTile.Title = trip.Destination + " " + dateFormat;
-                destinationTile.TextLine1 = trip.Description;
+                VoiceCommandContentTile destinationTile = await MakeTileForTripAsync(i, trip);
 
                 destinationContentTiles.Add(destinationTile);
                 i++;
@@ -346,6 +326,35 @@ namespace AdventureWorks.VoiceCommands
             }
 
             return null;
+        }
+
+        private async Task<VoiceCommandContentTile> MakeTileForTripAsync(int index, Model.Trip trip)
+        {
+            var destinationTile = new VoiceCommandContentTile();
+
+            // To handle UI scaling, Cortana automatically looks up files with FileName.scale-<n>.ext formats based on the requested filename.
+            // See the VoiceCommandService\Images folder for an example.
+            destinationTile.ContentTileType = VoiceCommandContentTileType.TitleWith68x68IconAndText;
+            destinationTile.Image = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///AdventureWorks.VoiceCommands/Images/GreyTile.png"));
+
+            // The AppContext can be any arbitrary object, and will be maintained for the
+            // response.
+            destinationTile.AppContext = trip;
+            string dateFormat = "";
+            if (trip.StartDate != null)
+            {
+                dateFormat = trip.StartDate.Value.ToString(dateFormatInfo.LongDatePattern);
+            }
+            else
+            {
+                // The app allows a trip to not have a date, but the choices must be unique
+                // so they can be spoken aloud and be distinct, so add a number to identify them.
+                dateFormat = string.Format("{0}", index);
+            }
+
+            destinationTile.Title = trip.Destination + " " + dateFormat;
+            destinationTile.TextLine1 = trip.Description;
+            return destinationTile;
         }
 
         /// <summary>
