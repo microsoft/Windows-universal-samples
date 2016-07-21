@@ -9,16 +9,14 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using System;
-using System.Collections.Generic;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace VideoPlayback
+namespace SDKTemplate
 {
     /// <summary>
     /// Demonstrates multi-track audio playback and language selection.
@@ -37,9 +35,7 @@ namespace VideoPlayback
         {
             rootPage = MainPage.Current;
 
-            this.item = new MediaPlaybackItem(
-                MediaSource.CreateFromUri(
-                    new Uri("https://mediaplatstorage1.blob.core.windows.net/windows-universal-samples-media/elephantsdream-clip-h264_sd-aac_eng-aac_spa-aac_eng_commentary-srt_eng-srt_por-srt_swe.mkv")));
+            this.item = new MediaPlaybackItem(MediaSource.CreateFromUri(rootPage.CaptionedMediaUri));
 
             this.mainVideoElement.SetPlaybackSource(item);
         }

@@ -12,7 +12,6 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using VideoPlayback;
 
 namespace SDKTemplate
 {
@@ -30,6 +29,16 @@ namespace SDKTemplate
             new Scenario() { Title= "Selecting audio tracks", ClassType=typeof(Scenario6)},
             new Scenario() { Title= "Playing video lists", ClassType=typeof(Scenario7)}
         };
+
+        // These are videos we use in many of our scenarios.
+        public Uri CaptionedMediaUri { get; } =
+            new Uri("https://mediaplatstorage1.blob.core.windows.net/windows-universal-samples-media/elephantsdream-clip-h264_sd-aac_eng-aac_spa-aac_eng_commentary-srt_eng-srt_por-srt_swe.mkv");
+        public Uri UncaptionedMediaUri { get; } =
+            new Uri("https://mediaplatstorage1.blob.core.windows.net/windows-universal-samples-media/elephantsdream-clip-h264_sd-aac_eng-aac_spa-aac_eng_commentary.mp4");
+        public Uri MultiTrackVideoMediaUri { get; } =
+            new Uri("https://mediaplatstorage1.blob.core.windows.net/windows-universal-samples-media/multivideo-with-captions.mkv");
+        public Uri SintelMediaUri { get; } =
+            new Uri("https://mediaplatstorage1.blob.core.windows.net/windows-universal-samples-media/sintel_trailer-480p.mp4");
     }
 
     public class Scenario

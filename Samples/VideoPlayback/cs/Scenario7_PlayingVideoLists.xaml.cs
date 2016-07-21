@@ -9,14 +9,9 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 using Windows.UI.Core;
@@ -24,35 +19,30 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
-namespace VideoPlayback
+namespace SDKTemplate
 {
     /// <summary>
     /// Demonstrates playing video lists using MediaPlaybackList.
     /// </summary>
     public sealed partial class Scenario7 : Page
     {
-        private MainPage rootPage;
-        private Dictionary<string, BitmapImage> artCache = new Dictionary<string, BitmapImage>();
+        private MainPage rootPage = MainPage.Current;
         private MediaPlaybackList playbackList = new MediaPlaybackList();
 
         public Scenario7()
         {
             this.InitializeComponent();
+        }
 
-            // Always use the cached page
-            this.NavigationCacheMode = NavigationCacheMode.Required;
-
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
             // Create a static playback list
             InitializePlaybackList();
 
-            // Subscribe to MediaElement events
-            mediaElement.CurrentStateChanged += MediaElement_CurrentStateChanged;
-
-            // Subscribe to list UI changes
-            playlistView.ItemClick += PlaylistView_ItemClick;
+            // Set list for playback
+            mediaElement.SetPlaybackSource(playbackList);
         }
 
         void InitializePlaybackList()
@@ -60,44 +50,30 @@ namespace VideoPlayback
             // Initialize the playlist data/view model.
             // In a production app your data would be sourced from a data store or service.
 
-            // Add content
-            var media1 = new MediaModel();
-            media1.Title = "Fitness";
-            media1.MediaUri = new Uri("https://mediaplatstorage1.blob.core.windows.net/windows-universal-samples-media/multivideo-with-captions.mkv");
-            media1.ArtUri = new Uri("ms-appx:///Assets/Media/multivideo.jpg");
-            playlistView.Media.Add(media1);
-
-            var media2 = new MediaModel();
-            media2.Title = "Elephant's Dream";
-            media2.MediaUri = new Uri("https://mediaplatstorage1.blob.core.windows.net/windows-universal-samples-media/elephantsdream-clip-h264_sd-aac_eng-aac_spa-aac_eng_commentary-srt_eng-srt_por-srt_swe.mkv");
-            media2.ArtUri = new Uri("ms-appx:///Assets/Media/ElephantsDream.jpg");
-            playlistView.Media.Add(media2);
-
-            var media3 = new MediaModel();
-            media3.Title = "Sintel";
-            media3.MediaUri = new Uri("https://mediaplatstorage1.blob.core.windows.net/windows-universal-samples-media/sintel_trailer-480p.mp4");
-            media3.ArtUri = new Uri("ms-appx:///Assets/Media/sintel.jpg");
-            playlistView.Media.Add(media3);
-
-            // Pre-cache all album art to facilitate smooth gapless transitions.
-            // A production app would have a more sophisticated object cache.
-            foreach (var media in playlistView.Media)
+            // Add content to the ListView and to the MediaPlaybackList.
+            MediaModel media = new MediaModel(rootPage.MultiTrackVideoMediaUri)
             {
-                var bitmap = new BitmapImage();
-                bitmap.UriSource = media.ArtUri;
-                artCache[media.ArtUri.ToString()] = bitmap;
-            }
+                Title = "Fitness",
+                ArtUri = new Uri("ms-appx:///Assets/Media/multivideo.jpg")
+            };
+            playlistView.Items.Add(media);
+            playbackList.Items.Add(media.MediaPlaybackItem);
 
-            // Initialize the playback list for this content
-            foreach(var media in playlistView.Media)
+            media = new MediaModel(rootPage.CaptionedMediaUri)
             {
-                var mediaSource = MediaSource.CreateFromUri(media.MediaUri);
-                mediaSource.CustomProperties["uri"] = media.MediaUri;
+                Title = "Elephant's Dream",
+                ArtUri = new Uri("ms-appx:///Assets/Media/ElephantsDream.jpg")
+            };
+            playlistView.Items.Add(media);
+            playbackList.Items.Add(media.MediaPlaybackItem);
 
-                var playbackItem = new MediaPlaybackItem(mediaSource);
-
-                playbackList.Items.Add(playbackItem);
-            }
+            media = new MediaModel(rootPage.SintelMediaUri)
+            {
+                Title = "Sintel",
+                ArtUri = new Uri("ms-appx:///Assets/Media/sintel.jpg")
+            };
+            playlistView.Items.Add(media);
+            playbackList.Items.Add(media.MediaPlaybackItem);
 
             // Subscribe for changes
             playbackList.CurrentItemChanged += PlaybackList_CurrentItemChanged;
@@ -108,24 +84,11 @@ namespace VideoPlayback
 
         private void PlaybackList_CurrentItemChanged(MediaPlaybackList sender, CurrentMediaPlaybackItemChangedEventArgs args)
         {
-            var ignoreAwaitWarning = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                var currentItem = sender.CurrentItem;
-                playlistView.SelectedIndex = playbackList.Items.ToList().FindIndex(i => i == currentItem);
+                // Synchronize our UI with the currently-playing item.
+                playlistView.SelectedIndex = (int)sender.CurrentItemIndex;
             });
-        }
-
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            rootPage = MainPage.Current;
-
-            // Set list for playback
-            mediaElement.SetPlaybackSource(playbackList);
         }
 
         /// <summary>
@@ -134,26 +97,24 @@ namespace VideoPlayback
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private async void MediaElement_CurrentStateChanged(object sender, RoutedEventArgs e)
+        private void MediaElement_CurrentStateChanged(object sender, RoutedEventArgs e)
         {
-            var currentState = mediaElement.CurrentState; // cache outside of completion or you might get a different value
-            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                // Update state label
-                txtCurrentState.Text = currentState.ToString();
+            var currentState = mediaElement.CurrentState;
 
-                // Update controls
-                UpdateTransportControls(currentState);
-            });
+            // Update state label
+            txtCurrentState.Text = currentState.ToString();
+
+            // Update controls
+            UpdateTransportControls(currentState);
         }
 
         private void PlaylistView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var item = e.ClickedItem as MediaModel;
-            Debug.WriteLine("Clicked item: " + item.MediaUri.ToString());
+            Debug.WriteLine("Clicked item: " + item.Title);
 
             // Start the background task if it wasn't running
-            playbackList.MoveTo((uint)playbackList.Items.ToList().FindIndex(i => (Uri)i.Source.CustomProperties["uri"] == item.MediaUri));
+            playbackList.MoveTo((uint)playbackList.Items.IndexOf(item.MediaPlaybackItem));
             
             if (MediaElementState.Paused == mediaElement.CurrentState ||
                 MediaElementState.Stopped == mediaElement.CurrentState)
@@ -198,7 +159,7 @@ namespace VideoPlayback
             playbackList.MoveNext();
         }
 
-        private void speedButton_Click(object sender, RoutedEventArgs e)
+        private async void speedButton_Click(object sender, RoutedEventArgs e)
         {
             // Create menu and add commands
             var popupMenu = new PopupMenu();
@@ -213,11 +174,14 @@ namespace VideoPlayback
             // width to center. This will show the popup just above the button.
             var button = (Button)sender;
             var transform = button.TransformToVisual(null);
-            var point = transform.TransformPoint(new Point(button.Width / 2, 0));
+            var point = transform.TransformPoint(new Point(button.ActualWidth / 2, 0));
             
             // Show popup
-            var ignoreAsyncResult = popupMenu.ShowAsync(point);
-
+            IUICommand result = await popupMenu.ShowAsync(point);
+            if (result != null)
+            {
+                button.Content = result.Label;
+            }
         }
 
         private void UpdateTransportControls(MediaElementState state)
@@ -226,12 +190,24 @@ namespace VideoPlayback
             prevButton.IsEnabled = true;
             if (state == MediaElementState.Playing)
             {
-                playButton.Content = "| |";     // Change to pause button
+                playButtonSymbol.Symbol = Symbol.Pause;
             }
             else
             {
-                playButton.Content = ">";     // Change to play button
+                playButtonSymbol.Symbol = Symbol.Play;
             }
         }
+    }
+
+    public class MediaModel
+    {
+        public MediaModel(Uri mediaUri)
+        {
+            MediaPlaybackItem = new MediaPlaybackItem(MediaSource.CreateFromUri(mediaUri));
+        }
+
+        public string Title { get; set; }
+        public Uri ArtUri { get; set; }
+        public MediaPlaybackItem MediaPlaybackItem { get; private set; }
     }
 }

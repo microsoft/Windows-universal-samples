@@ -7,7 +7,7 @@
     <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VideoPlayback</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>VideoPlayback</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
@@ -102,7 +102,6 @@
       <Link>MainPage.xaml.cs</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\MediaModel.cs" />
     <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
@@ -127,9 +126,6 @@
     </Compile>
     <Compile Include="Scenario7_PlayingVideoLists.xaml.cs">
       <DependentUpon>Scenario7_PlayingVideoLists.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MediaPlaylistView.xaml.cs">
-      <DependentUpon>MediaPlaylistView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -182,10 +178,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\MediaPlaylistView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

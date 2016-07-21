@@ -60,6 +60,5 @@ Rect MainPage::GetElementRect(FrameworkElement^ element)
 {
     Windows::UI::Xaml::Media::GeneralTransform^ buttonTransform = element->TransformToVisual(nullptr);
     Point point = buttonTransform->TransformPoint(Point());
-    return Rect(point, Size(element->ActualWidth, element->ActualHeight));
-
+    return Rect(point, Size(static_cast<float>(element->ActualWidth), static_cast<float>(element->ActualHeight)));
 }
