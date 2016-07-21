@@ -9,35 +9,26 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace VideoPlayback
+namespace SDKTemplate
 {
     /// <summary>
-    /// This scenario demonstrates how to customize the media transport controls. 
+    /// This scenario demonstrates how to customize the media transport controls.
     /// </summary>
     /// <remarks>
-    /// See related code in CustomMediaTransportControls.cs and generic.xaml. 
+    /// See related code in CustomMediaTransportControls.cs and generic.xaml.
     /// </remarks>
     public sealed partial class Scenario2 : Page
     {
-        private MainPage rootPage;
+        private MainPage rootPage = MainPage.Current;
         private int likes = 0;
 
         public Scenario2()
         {
             this.InitializeComponent();
-
-            // Subscribe to the clicked event for the custom like button
-            this.customMTC.Liked += CustomMTC_Liked;
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            rootPage = MainPage.Current;
         }
 
         private void CustomMTC_Liked(object sender, EventArgs e)

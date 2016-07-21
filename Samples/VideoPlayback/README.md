@@ -11,20 +11,25 @@ Specifically, this sample covers:
 
 - Playing local video 
 - Customizing media transport controls (XAML-only)
-- Using in-band closed captions in your app
-- Using out-of-band closed captions in your app
+- Using in-band closed captions
+- Using out-of-band closed captions
 - Dealing with multiple video tracks
 - Dealing with multiple audio tracks
 - Creating video playlists
 - Playing on a composition surface (not available to JS apps)
+- Transferring a MediaPlayer from one MediaPlayerElement to another (XAML-only)
 
-Related topics
---------------
+## Related topics
+
+### Samples
+
+* [VideoPlaybackSynchronization sample](/Samples/VideoPlaybackSynchronization)
+
+## Reference
 
 [Windows.Media.Playback namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.playback.aspx)
 
-System requirements
------------------------------
+## System requirements
 
 **Client:** Windows 10
 

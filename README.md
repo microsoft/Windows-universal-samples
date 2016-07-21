@@ -62,32 +62,32 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 <table>
  <tr>
   <td><a href="Samples/AdaptiveStreaming">Adaptive streaming</a></td>
+  <td><a href="Samples/CameraAdvancedCapture">Advanced capture</a></td>
   <td><a href="Samples/AdvancedCasting">Advanced casting</a></td>
-  <td><a href="Samples/AudioCategory">Audio categories</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/AudioCategory">Audio categories</a></td>
   <td><a href="Samples/AudioCreation">Audio graphs</a></td>
   <td><a href="Samples/BackgroundMediaPlayback">Background media playback</a></td>
-  <td><a href="Samples/CameraStarterKit">Basic camera app</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/CameraStarterKit">Basic camera app</a></td>
   <td><a href="Samples/BasicFaceDetection">Basic face detection</a></td>
   <td><a href="Samples/BasicFaceTracking">Basic face tracking</a></td>
-  <td><a href="Samples/BasicMediaCasting">Basic media casting</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/BasicMediaCasting">Basic media casting</a></td>
   <td><a href="Samples/CameraFaceDetection">Camera face detection</a></td>
   <td><a href="Samples/CameraFrames">Camera frames</a></td>
-  <td><a href="Samples/CameraGetPreviewFrame">Camera preview frame</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/CameraGetPreviewFrame">Camera preview frame</a></td>
   <td><a href="Samples/CameraProfile">Camera profiles</a></td>
   <td><a href="Samples/CameraResolution">Camera resolution</a></td>
-  <td><a href="Samples/LiveDash">DASH streaming</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/LiveDash">DASH streaming</a></td>
   <td><a href="Samples/D2DPhotoAdjustment">Direct2D photo adjustment</a></td>
-  <td><a href="Samples/CameraHdr">High dynamic range</a></td>
   <td><a href="Samples/MediaEditing">Media editing</a></td>
  </tr>
  <tr>
@@ -103,9 +103,10 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/MediaTranscoding">Transcoding media</a></td>
   <td><a href="Samples/VideoPlayback">Video playback</a></td>
-  <td><a href="Samples/CameraVideoStabilization">Video stabilization</a></td>
+  <td><a href="Samples/VideoPlaybackSynchronization">Video playback synchronization</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/CameraVideoStabilization">Video stabilization</a></td>
   <td><a href="Samples/WindowsAudioSession">Windows audio session (WASAPI)</a></td>
   <td><a href="Samples/MediaImport">Windows media import</a></td>
  </tr>

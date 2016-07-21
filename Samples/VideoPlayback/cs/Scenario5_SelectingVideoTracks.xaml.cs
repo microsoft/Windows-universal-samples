@@ -9,23 +9,22 @@
 //
 //*********************************************************
 
+using System;
+using Windows.Media.Core;
+using Windows.Media.Playback;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
-using System.Collections.Generic;
-using System;
-using Windows.Media.Playback;
-using Windows.Media.Core;
 
-namespace VideoPlayback
+namespace SDKTemplate
 {
     /// <summary>
     /// Demonstrates multi-track video playback and camera selection.
     /// </summary>
     public sealed partial class Scenario5 : Page
     {
-        MainPage rootPage;
+        MainPage rootPage = MainPage.Current;
         MediaPlaybackItem item;
 
         public Scenario5()
@@ -35,13 +34,16 @@ namespace VideoPlayback
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            rootPage = MainPage.Current;
+            this.item = new MediaPlaybackItem(MediaSource.CreateFromUri(rootPage.MultiTrackVideoMediaUri));
 
-            this.item = new MediaPlaybackItem(
-                MediaSource.CreateFromUri(
-                    new Uri("https://mediaplatstorage1.blob.core.windows.net/windows-universal-samples-media/multivideo-with-captions.mkv")));
+            item.VideoTracks.SelectedIndexChanged += VideoTracks_SelectedIndexChanged;
 
-            this.mainVideoElement.SetPlaybackSource(item);
+            this.mediaPlayerElement.Source = item;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            MediaPlayerHelper.CleanUpMediaPlayerSource(mediaPlayerElement.MediaPlayer);
         }
 
         private void TrackButton_Click(object sender, RoutedEventArgs e)
@@ -58,6 +60,19 @@ namespace VideoPlayback
                     + " | Id: " + this.item.VideoTracks[videoTrackIndex].Id
                     + " | Label: " + this.item.VideoTracks[videoTrackIndex].Label, NotifyType.StatusMessage);
             }
+        }
+
+        /// <summary>
+        /// Forces a new frame to be rendered when we are paused.
+        /// </summary>
+        private async void VideoTracks_SelectedIndexChanged(ISingleSelectMediaTrackList sender, object args)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                //Make sure to call the mediaPlayerElement on the UI thread:
+                if (mediaPlayerElement.MediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.Paused)
+                    mediaPlayerElement.MediaPlayer.StepForwardOneFrame();
+            });
         }
     }
 }

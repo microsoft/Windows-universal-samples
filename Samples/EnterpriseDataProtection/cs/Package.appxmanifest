@@ -69,7 +69,6 @@
                         <uap:ShowOn Tile="square150x150Logo" />
                     </uap:ShowNameOnTiles>
                 </uap:DefaultTile>
-             <uap:LockScreen Notification="badge" BadgeLogo="Assets\badgelogo-sdk.png"/>
             </uap:VisualElements>
         </Application>
     

@@ -78,6 +78,7 @@ namespace GeolocationCS
                         case BackgroundAccessStatus.AlwaysAllowed:
                         case BackgroundAccessStatus.AllowedSubjectToSystemPolicy:
                             _rootPage.NotifyUser("Background task is already registered. Waiting for next update...", NotifyType.StatusMessage);
+                            break;
 
                         default:
                             _rootPage.NotifyUser("Background tasks may be disabled for this app", NotifyType.ErrorMessage);
@@ -166,8 +167,6 @@ namespace GeolocationCS
                     default:
                         _rootPage.NotifyUser("Background tasks may be disabled for this app", NotifyType.ErrorMessage);
                         break;
-
-                    default:
                 }
             }
             catch (Exception ex)

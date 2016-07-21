@@ -7,12 +7,12 @@
     <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VideoPlayback</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>VideoPlayback</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14332.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.14332.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14366.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14366.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -102,11 +102,16 @@
       <Link>MainPage.xaml.cs</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\MediaModel.cs" />
     <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="SampleConfiguration.cs" />
+    <Compile Include="Scenario9_TransferMediaPlayer1.xaml.cs">
+      <DependentUpon>Scenario9_TransferMediaPlayer1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario10_TransferMediaPlayer2.xaml.cs">
+      <DependentUpon>Scenario10_TransferMediaPlayer2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Scenario1_PlayingVideos.xaml.cs">
       <DependentUpon>Scenario1_PlayingVideos.xaml</DependentUpon>
     </Compile>
@@ -131,9 +136,6 @@
     <Compile Include="Scenario8_VideoComposition.xaml.cs">
       <DependentUpon>Scenario8_VideoComposition.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MediaPlaylistView.xaml.cs">
-      <DependentUpon>MediaPlaylistView.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -150,6 +152,14 @@
       <Link>MainPage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario9_TransferMediaPlayer1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scenario10_TransferMediaPlayer2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Scenario1_PlayingVideos.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -189,10 +199,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\MediaPlaylistView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

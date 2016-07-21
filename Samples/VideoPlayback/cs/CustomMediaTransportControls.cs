@@ -22,7 +22,7 @@ using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
-namespace VideoPlayback
+namespace SDKTemplate
 {
     public sealed class CustomMediaTransportControls : MediaTransportControls
     {

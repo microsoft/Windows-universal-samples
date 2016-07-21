@@ -9,7 +9,6 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using System;
 using System.Numerics;
 using Windows.Media.Core;
@@ -22,7 +21,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Navigation;
 
-namespace VideoPlayback
+namespace SDKTemplate
 {
     /// <summary>
     /// Demonstrates basic rendering of a MediaPlayer to a Composition surface.
@@ -34,7 +33,7 @@ namespace VideoPlayback
     /// </summary>
     public sealed partial class Scenario8 : Page
     {
-        private MainPage rootPage;
+        private MainPage rootPage = MainPage.Current;
         private MediaPlayer mediaPlayer;
 
         public Scenario8()
@@ -46,14 +45,12 @@ namespace VideoPlayback
         private void Scenario8_Loaded(object sender, RoutedEventArgs e)
         {
             mediaPlayer = new MediaPlayer();
-            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("https://mediaplatstorage1.blob.core.windows.net/windows-universal-samples-media/elephantsdream-clip-h264_sd-aac_eng-aac_spa-aac_eng_commentary-srt_eng-srt_por-srt_swe.mkv"));
+            mediaPlayer.Source = MediaSource.CreateFromUri(rootPage.CaptionedMediaUri);
             mediaPlayer.Play();
-            BindMediaPlayerToUIElement(mediaPlayer, mediaPlayerButton);
-        }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            rootPage = MainPage.Current;
+            // Bind to the element in the Loaded event after the layout 
+            // pass has run and sized elements
+            BindMediaPlayerToUIElement(mediaPlayer, mediaPlayerButton);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

@@ -11,10 +11,10 @@
 //*********************************************************
 -->
 <Page
-    x:Class="VideoPlayback.Scenario6"
+    x:Class="SDKTemplate.Scenario6"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:VideoPlayback"
+    xmlns:local="using:SDKTemplate"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -45,17 +45,12 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <MediaElement Grid.Row="0" Grid.ColumnSpan="5" x:Name="mainVideoElement" HorizontalAlignment="Stretch" Margin="0,0,0,10" AreTransportControlsEnabled="True" />
+                <MediaPlayerElement Grid.Row="0" Grid.ColumnSpan="5" x:Name="mediaPlayerElement" HorizontalAlignment="Stretch" Margin="0,0,0,10" AreTransportControlsEnabled="True" />
                 <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Text="Audio Tracks"></TextBlock>
                 <Button x:Name="button1" Content="English" Tag="0" Grid.Row="2" Grid.Column="0" Click="TrackButton_Click" HorizontalAlignment="Center"/>
                 <Button x:Name="button2" Content="Spanish" Tag="1" Grid.Row="2" Grid.Column="1" Click="TrackButton_Click" HorizontalAlignment="Center"/>
                 <Button x:Name="button3" Content="English Director's Cut" Tag="2" Grid.Row="2" Grid.Column="2" Click="TrackButton_Click" HorizontalAlignment="Center"/>
             </Grid>
-
-            <!-- Status Block for providing messages to the user.  Use the
-             NotifyUser() method to populate the message -->
-            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
-            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </Page>
