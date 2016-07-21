@@ -9,35 +9,25 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using System;
 using Windows.Media.Core;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
-namespace VideoPlayback
+namespace SDKTemplate
 {
     /// <summary>
     /// Demonstrates basic video playback using MediaElement.
     /// </summary>
     public sealed partial class Scenario1 : Page
     {
-        private MainPage rootPage;
+        private MainPage rootPage = MainPage.Current;
 
         public Scenario1()
         {
             this.InitializeComponent();
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            rootPage = MainPage.Current;
-
-            // Load example video on startup
-            mediaElement.Source = new Uri("https://mediaplatstorage1.blob.core.windows.net/windows-universal-samples-media/elephantsdream-clip-h264_sd-aac_eng-aac_spa-aac_eng_commentary-srt_eng-srt_por-srt_swe.mkv");
         }
 
         /// <summary>

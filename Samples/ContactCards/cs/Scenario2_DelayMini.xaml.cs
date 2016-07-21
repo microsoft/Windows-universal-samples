@@ -112,21 +112,27 @@ namespace SDKTemplate
 
             using (ContactCardDelayedDataLoader dataLoader = ContactManager.ShowDelayLoadedContactCard(contact, rect, placement, options))
             {
-                // Simulate downloading more data from the network for the contact.
-                this.rootPage.NotifyUser("Simulating download...", NotifyType.StatusMessage);
-
-                Contact fullContact = await DownloadContactDataAsync(contact);
-                if (fullContact != null)
+                if (dataLoader != null)
                 {
-                    // Update the contact card with the full set of contact data.
-                    dataLoader.SetData(fullContact);
-                    this.rootPage.NotifyUser("Contact has been updated with downloaded data.", NotifyType.StatusMessage);
+                    // Simulate downloading more data from the network for the contact.
+                    this.rootPage.NotifyUser("Simulating download...", NotifyType.StatusMessage);
+
+                    Contact fullContact = await DownloadContactDataAsync(contact);
+                    if (fullContact != null)
+                    {
+                        // Update the contact card with the full set of contact data.
+                        dataLoader.SetData(fullContact);
+                        this.rootPage.NotifyUser("Contact has been updated with downloaded data.", NotifyType.StatusMessage);
+                    }
+                    else
+                    {
+                        this.rootPage.NotifyUser("No further information available.", NotifyType.StatusMessage);
+                    }
                 }
                 else
                 {
-                    this.rootPage.NotifyUser("No further information available.", NotifyType.StatusMessage);
+                    this.rootPage.NotifyUser("ShowDelayLoadedContactCard is not supported by this device.", NotifyType.ErrorMessage);
                 }
-
                 // The "using" statement will dispose the dataLoader for us.
             }
         }
