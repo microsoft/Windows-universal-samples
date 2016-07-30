@@ -133,19 +133,19 @@ public:
         return m_vector->GetView();
     }
 
-    virtual void SetAt(unsigned int index, Platform::Object^ item)
+    virtual void SetAt(unsigned int index, Platform::Object^ value)
     {
-        return m_vector->SetAt(index, item);
+        return m_vector->SetAt(index, value);
     }
 
-    virtual void InsertAt(unsigned int index, Platform::Object^ item)
+    virtual void InsertAt(unsigned int index, Platform::Object^ value)
     {
-        return m_vector->InsertAt(index, item);
+        return m_vector->InsertAt(index, value);
     }
 
-    virtual void Append(Platform::Object^ item)
+    virtual void Append(Platform::Object^ value)
     {
-        return m_vector->Append(item);
+        return m_vector->Append(value);
     }
 
     virtual void RemoveAt(unsigned int index)
@@ -163,9 +163,9 @@ public:
         return m_vector->Clear();
     }
 
-    virtual void ReplaceAll(const Platform::Array<Platform::Object^>^ arr)
+    virtual void ReplaceAll(const Platform::Array<Platform::Object^>^ items)
     {
-        return m_vector->ReplaceAll(arr);
+        return m_vector->ReplaceAll(items);
     }
 
 private:
