@@ -9,20 +9,21 @@
 //
 //*********************************************************
 
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Windows.Devices.Enumeration;
+using Windows.Devices.WiFiDirect;
+using Windows.Networking.Sockets;
+using Windows.Storage.Streams;
+using Windows.Security.Cryptography;
+using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Windows.Devices.WiFiDirect;
-using Windows.Networking.Sockets;
-using Windows.UI.Core;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using Windows.Storage.Streams;
-using Windows.Devices.Enumeration;
-using Windows.UI.Popups;
-using System.Collections.Generic;
-using System;
-
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -31,338 +32,337 @@ namespace SDKTemplate
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Scenario1 : Page
+    public sealed partial class Scenario1_Advertiser : Page
     {
-        private MainPage rootPage;
-        public ObservableCollection<ConnectedDevice> _connectedDevices
-        {
-            get;
-            private set;
-        }
+        private MainPage rootPage = MainPage.Current;
+        private ObservableCollection<ConnectedDevice> ConnectedDevices = new ObservableCollection<ConnectedDevice>();
         WiFiDirectAdvertisementPublisher _publisher;
         WiFiDirectConnectionListener _listener;
-        StreamSocketListener _listenerSocket;
+        List<WiFiDirectInformationElement> _informationElements = new List<WiFiDirectInformationElement>();
+        ConcurrentDictionary<StreamSocketListener, WiFiDirectDevice> _pendingConnections = new ConcurrentDictionary<StreamSocketListener, WiFiDirectDevice>();
 
-        public Scenario1()
+        public Scenario1_Advertiser()
         {
             this.InitializeComponent();
-
-            _connectedDevices = new ObservableCollection<ConnectedDevice>();
-            _listenerSocket = null;
-
-            lvConnectedDevices.ItemsSource = _connectedDevices;
-            lvConnectedDevices.SelectionMode = ListViewSelectionMode.Single;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            rootPage = MainPage.Current;
+            if (btnStopAdvertisement.IsEnabled)
+            {
+                StopAdvertisement();
+            }
         }
 
         private void btnStartAdvertisement_Click(object sender, RoutedEventArgs e)
         {
-            try
+            _publisher = new WiFiDirectAdvertisementPublisher();
+            _publisher.StatusChanged += OnStatusChanged;
+
+            _listener = new WiFiDirectConnectionListener();
+
+            if (chkListener.IsChecked.Value)
             {
-                if (_publisher == null)
+                try
                 {
-                    _publisher = new WiFiDirectAdvertisementPublisher();
-                }
-
-                if (chkListener.IsChecked == true)
-                {
-                    if (_listener == null)
-                    {
-                        _listener = new WiFiDirectConnectionListener();
-                    }
-
+                    // This can raise an exception if the machine does not support WiFi. Sorry.
                     _listener.ConnectionRequested += OnConnectionRequested;
                 }
-
-                _publisher.Advertisement.IsAutonomousGroupOwnerEnabled = (chkPreferGroupOwnerMode.IsChecked == true);
-
-                if (cmbListenState.SelectionBoxItem.ToString().Equals("Normal") == true)
+                catch (Exception ex)
                 {
-                    _publisher.Advertisement.ListenStateDiscoverability = WiFiDirectAdvertisementListenStateDiscoverability.Normal;
+                    rootPage.NotifyUser($"Error preparing Advertisement: {ex}", NotifyType.ErrorMessage);
+                    return;
                 }
-                else if (cmbListenState.SelectionBoxItem.ToString().Equals("Intensive") == true)
-                {
-                    _publisher.Advertisement.ListenStateDiscoverability = WiFiDirectAdvertisementListenStateDiscoverability.Intensive;
-                }
-                else if (cmbListenState.SelectionBoxItem.ToString().Equals("None") == true)
-                {
-                    _publisher.Advertisement.ListenStateDiscoverability = WiFiDirectAdvertisementListenStateDiscoverability.None;
-                }
-
-                _publisher.StatusChanged += OnStatusChanged;
-
-                _publisher.Start();
-
-                rootPage.NotifyUser("Advertisement started, waiting for StatusChanged callback...", NotifyType.StatusMessage);
             }
-            catch (Exception ex)
+
+            var discoverability = Utils.GetSelectedItemTag<WiFiDirectAdvertisementListenStateDiscoverability>(cmbListenState);
+            _publisher.Advertisement.ListenStateDiscoverability = discoverability;
+
+            _publisher.Advertisement.IsAutonomousGroupOwnerEnabled = chkPreferGroupOwnerMode.IsChecked.Value;
+
+            // Legacy settings are meaningful only if IsAutonomousGroupOwnerEnabled is true.
+            if (_publisher.Advertisement.IsAutonomousGroupOwnerEnabled && chkLegacySetting.IsChecked.Value)
             {
-                rootPage.NotifyUser("Error starting Advertisement: " + ex.ToString(), NotifyType.ErrorMessage);
+                _publisher.Advertisement.LegacySettings.IsEnabled = true;
+                if (!String.IsNullOrEmpty(txtPassphrase.Text))
+                {
+                    var creds = new Windows.Security.Credentials.PasswordCredential();
+                    creds.Password = txtPassphrase.Text;
+                    _publisher.Advertisement.LegacySettings.Passphrase = creds;
+                }
+
+                if (!String.IsNullOrEmpty(txtSsid.Text))
+                {
+                    _publisher.Advertisement.LegacySettings.Ssid = txtSsid.Text;
+                }
+            }
+
+            // Add the information elements.
+            foreach (WiFiDirectInformationElement informationElement in _informationElements)
+            {
+                _publisher.Advertisement.InformationElements.Add(informationElement);
+            }
+
+            _publisher.Start();
+
+            if (_publisher.Status == WiFiDirectAdvertisementPublisherStatus.Started)
+            {
+                btnStartAdvertisement.IsEnabled = false;
+                btnStopAdvertisement.IsEnabled = true;
+                rootPage.NotifyUser("Advertisement started.", NotifyType.StatusMessage);
+            }
+            else
+            {
+                rootPage.NotifyUser($"Advertisement failed to start. Status is {_publisher.Status}", NotifyType.ErrorMessage);
             }
         }
 
         private void btnAddIe_Click(object sender, RoutedEventArgs e)
         {
-            if (_publisher == null)
-            {
-                _publisher = new WiFiDirectAdvertisementPublisher();
-            }
+            WiFiDirectInformationElement informationElement = new WiFiDirectInformationElement();
 
-            if (txtInformationElement.Text == "")
-            {
-                rootPage.NotifyUser("Please specifiy an IE", NotifyType.ErrorMessage);
-                return;
-            }
-
-            WiFiDirectInformationElement IE = new WiFiDirectInformationElement();
-
-            // IE blob
+            // Information element blob
             DataWriter dataWriter = new DataWriter();
             dataWriter.UnicodeEncoding = UnicodeEncoding.Utf8;
             dataWriter.ByteOrder = ByteOrder.LittleEndian;
             dataWriter.WriteUInt32(dataWriter.MeasureString(txtInformationElement.Text));
             dataWriter.WriteString(txtInformationElement.Text);
-            IE.Value = dataWriter.DetachBuffer();
+            informationElement.Value = dataWriter.DetachBuffer();
 
-            // OUI
-            DataWriter dataWriterOUI = new DataWriter();
-            dataWriterOUI.WriteBytes(Globals.CustomOui);
-            IE.Oui = dataWriterOUI.DetachBuffer();
+            // Organizational unit identifier (OUI)
+            informationElement.Oui = CryptographicBuffer.CreateFromByteArray(Globals.CustomOui);
 
             // OUI Type
-            IE.OuiType = Globals.CustomOuiType;
+            informationElement.OuiType = Globals.CustomOuiType;
 
-            _publisher.Advertisement.InformationElements.Add(IE);
+            // Save this information element so we can add it when we advertise.
+            _informationElements.Add(informationElement);
+
             txtInformationElement.Text = "";
-
             rootPage.NotifyUser("IE added successfully", NotifyType.StatusMessage);
         }
 
         private void btnStopAdvertisement_Click(object sender, RoutedEventArgs e)
         {
+            StopAdvertisement();
+            rootPage.NotifyUser("Advertisement stopped successfully", NotifyType.StatusMessage);
+        }
+
+        private void StopAdvertisement()
+        {
+            _publisher.Stop();
+            _publisher.StatusChanged -= OnStatusChanged;
+
+            _listener.ConnectionRequested -= OnConnectionRequested;
+
+            connectionSettingsPanel.Reset();
+            _informationElements.Clear();
+
+            btnStartAdvertisement.IsEnabled = true;
+            btnStopAdvertisement.IsEnabled = false;
+        }
+
+        private async Task<bool> HandleConnectionRequestAsync(WiFiDirectConnectionRequest connectionRequest)
+        {
+            string deviceName = connectionRequest.DeviceInformation.Name;
+
+            bool isPaired = (connectionRequest.DeviceInformation.Pairing?.IsPaired == true) ||
+                            (await IsAepPairedAsync(connectionRequest.DeviceInformation.Id));
+
+            // Show the prompt only in case of WiFiDirect reconnection or Legacy client connection.
+            if (isPaired || _publisher.Advertisement.LegacySettings.IsEnabled)
+            {
+                var messageDialog = new MessageDialog($"Connection request received from {deviceName}", "Connection Request");
+
+                // Add two commands, distinguished by their tag.
+                // The default command is "Decline", and if the user cancels, we treat it as "Decline".
+                messageDialog.Commands.Add(new UICommand("Accept", null, true));
+                messageDialog.Commands.Add(new UICommand("Decline", null, null));
+                messageDialog.DefaultCommandIndex = 1;
+                messageDialog.CancelCommandIndex = 1;
+
+                // Show the message dialog
+                var commandChosen = await messageDialog.ShowAsync();
+
+                if (commandChosen.Id == null)
+                {
+                    return false;
+                }
+            }
+
+            rootPage.NotifyUser($"Connecting to {deviceName}...", NotifyType.StatusMessage);
+
+            // Pair device if not already paired and not using legacy settings
+            if (!isPaired && !_publisher.Advertisement.LegacySettings.IsEnabled)
+            {
+                if (!await connectionSettingsPanel.RequestPairDeviceAsync(connectionRequest.DeviceInformation.Pairing))
+                {
+                    return false;
+                }
+            }
+
+            WiFiDirectDevice wfdDevice = null;
             try
             {
-                if (_publisher != null)
-                {
-                    _publisher.Stop();
-                    _publisher.StatusChanged -= OnStatusChanged;
-                    rootPage.NotifyUser("Advertisement stopped successfully", NotifyType.StatusMessage);
-                }
-
-                if (_listener != null)
-                {
-                    _listener.ConnectionRequested -= OnConnectionRequested;
-                }
+                // IMPORTANT: FromIdAsync needs to be called from the UI thread
+                wfdDevice = await WiFiDirectDevice.FromIdAsync(connectionRequest.DeviceInformation.Id);
             }
             catch (Exception ex)
             {
-                rootPage.NotifyUser("Error stopping Advertisement: " + ex.ToString(), NotifyType.ErrorMessage);
+                rootPage.NotifyUser($"Exception in FromIdAsync: {ex}", NotifyType.ErrorMessage);
+                return false;
             }
+
+            // Register for the ConnectionStatusChanged event handler
+            wfdDevice.ConnectionStatusChanged += OnConnectionStatusChanged;
+
+            var listenerSocket = new StreamSocketListener();
+
+            // Save this (listenerSocket, wfdDevice) pair so we can hook it up when the socket connection is made.
+            _pendingConnections[listenerSocket] = wfdDevice;
+
+            var EndpointPairs = wfdDevice.GetConnectionEndpointPairs();
+
+            listenerSocket.ConnectionReceived += OnSocketConnectionReceived;
+            try
+            {
+                await listenerSocket.BindEndpointAsync(EndpointPairs[0].LocalHostName, Globals.strServerPort);
+            }
+            catch (Exception ex)
+            {
+                rootPage.NotifyUser($"Connect operation threw an exception: {ex.Message}", NotifyType.ErrorMessage);
+                return false;
+            }
+
+            rootPage.NotifyUser($"Devices connected on L2, listening on IP Address: {EndpointPairs[0].LocalHostName}" +
+                                $" Port: {Globals.strServerPort}", NotifyType.StatusMessage);
+            return true;
         }
 
         private async void OnConnectionRequested(WiFiDirectConnectionListener sender, WiFiDirectConnectionRequestedEventArgs connectionEventArgs)
         {
-            try
+            WiFiDirectConnectionRequest connectionRequest = connectionEventArgs.GetConnectionRequest();
+            bool success = await Dispatcher.RunTaskAsync(async () =>
             {
-                var connectionRequest = connectionEventArgs.GetConnectionRequest();
+                return await HandleConnectionRequestAsync(connectionRequest);
+            });
 
-                var tcs = new TaskCompletionSource<bool>();
-                var dialogTask = tcs.Task;
-                var messageDialog = new MessageDialog("Connection request received from " + connectionRequest.DeviceInformation.Name, "Connection Request");
-
-                // Add commands and set their callbacks; both buttons use the same callback function instead of inline event handlers 
-                messageDialog.Commands.Add(new UICommand("Accept", null, 0));
-                messageDialog.Commands.Add(new UICommand("Decline", null, 1));
-
-                // Set the command that will be invoked by default 
-                messageDialog.DefaultCommandIndex = 1;
-
-                // Set the command to be invoked when escape is pressed 
-                messageDialog.CancelCommandIndex = 1;
-
-                await Dispatcher.RunAsync(CoreDispatcherPriority.High, async () =>
-                {
-                    // Show the message dialog 
-                    var commandChosen = await messageDialog.ShowAsync();
-
-                    tcs.SetResult((commandChosen.Label == "Accept") ? true : false);
-                });
-
-                var fProceed = await dialogTask;
-
-                if (fProceed == true)
-                {
-                    var tcsWiFiDirectDevice = new TaskCompletionSource<WiFiDirectDevice>();
-                    var wfdDeviceTask = tcsWiFiDirectDevice.Task;
-
-                    await Dispatcher.RunAsync(CoreDispatcherPriority.High, async () =>
-                    {
-                        try
-                        {
-                            rootPage.NotifyUser("Connecting to " + connectionRequest.DeviceInformation.Name + "...", NotifyType.StatusMessage);
-
-                            WiFiDirectConnectionParameters connectionParams = new WiFiDirectConnectionParameters();
-                            connectionParams.GroupOwnerIntent = Convert.ToInt16(txtGOIntent.Text);
-
-                            // IMPORTANT: FromIdAsync needs to be called from the UI thread
-                            tcsWiFiDirectDevice.SetResult(await WiFiDirectDevice.FromIdAsync(connectionRequest.DeviceInformation.Id, connectionParams));
-                        }
-                        catch (Exception ex)
-                        {
-                            rootPage.NotifyUser("FromIdAsync task threw an exception: " + ex.ToString(), NotifyType.ErrorMessage);
-                        }
-                    });
-
-                    WiFiDirectDevice wfdDevice = await wfdDeviceTask;
-
-                    // Register for the ConnectionStatusChanged event handler
-                    wfdDevice.ConnectionStatusChanged += OnConnectionStatusChanged;
-
-                    await Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
-                    {
-                        ConnectedDevice connectedDevice = new ConnectedDevice("Waiting for client to connect...", wfdDevice, null);
-                        _connectedDevices.Add(connectedDevice);
-                    });
-
-                    var EndpointPairs = wfdDevice.GetConnectionEndpointPairs();
-
-                    _listenerSocket = null;
-                    _listenerSocket = new StreamSocketListener();
-                    _listenerSocket.ConnectionReceived += OnSocketConnectionReceived;
-                    await _listenerSocket.BindEndpointAsync(EndpointPairs[0].LocalHostName, Globals.strServerPort);
-
-                    rootPage.NotifyUserFromBackground("Devices connected on L2, listening on IP Address: " + EndpointPairs[0].LocalHostName.ToString() +
-                                            " Port: " + Globals.strServerPort, NotifyType.StatusMessage);
-                }
-                else
-                {
-                    // Decline the connection request
-                    rootPage.NotifyUserFromBackground("Connection request from " + connectionRequest.DeviceInformation.Name + " was declined", NotifyType.ErrorMessage);
-                    connectionRequest.Dispose();
-                }
-            }
-            catch (Exception ex)
+            if (!success)
             {
-                rootPage.NotifyUserFromBackground("Connect operation threw an exception: " + ex.Message, NotifyType.ErrorMessage);
+                // Decline the connection request
+                rootPage.NotifyUserFromBackground($"Connection request from {connectionRequest.DeviceInformation.Name} was declined", NotifyType.ErrorMessage);
+                connectionRequest.Dispose();
             }
         }
 
-        private void OnStatusChanged(WiFiDirectAdvertisementPublisher sender, WiFiDirectAdvertisementPublisherStatusChangedEventArgs statusEventArgs)
+        private async Task<bool> IsAepPairedAsync(string deviceId)
         {
-            rootPage.NotifyUserFromBackground("Advertisement: Status: " + statusEventArgs.Status.ToString() + " Error: " + statusEventArgs.Error.ToString(), NotifyType.StatusMessage);
+            List<string> additionalProperties = new List<string>();
+            additionalProperties.Add("System.Devices.Aep.DeviceAddress");
+            String deviceSelector = $"System.Devices.Aep.AepId:=\"{deviceId}\"";
+            DeviceInformation devInfo = null;
+
+            try
+            {
+                devInfo = await DeviceInformation.CreateFromIdAsync(deviceId, additionalProperties);
+            }
+            catch (Exception ex)
+            {
+                rootPage.NotifyUser("DeviceInformation.CreateFromIdAsync threw an exception: " + ex.Message, NotifyType.ErrorMessage);
+            }
+
+            if (devInfo == null)
+            {
+                rootPage.NotifyUser("Device Information is null", NotifyType.ErrorMessage);
+                return false;
+            }
+
+            deviceSelector = $"System.Devices.Aep.DeviceAddress:=\"{devInfo.Properties["System.Devices.Aep.DeviceAddress"]}\"";
+            DeviceInformationCollection pairedDeviceCollection = await DeviceInformation.FindAllAsync(deviceSelector, null, DeviceInformationKind.Device);
+            return pairedDeviceCollection.Count > 0;
+        }
+
+        private async void OnStatusChanged(WiFiDirectAdvertisementPublisher sender, WiFiDirectAdvertisementPublisherStatusChangedEventArgs statusEventArgs)
+        {
+            if (statusEventArgs.Status == WiFiDirectAdvertisementPublisherStatus.Started)
+            {
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    if (sender.Advertisement.LegacySettings.IsEnabled)
+                    {
+                        // Show the autogenerated passphrase and SSID.
+                        if (String.IsNullOrEmpty(txtPassphrase.Text))
+                        {
+                            txtPassphrase.Text = _publisher.Advertisement.LegacySettings.Passphrase.Password;
+                        }
+
+                        if (String.IsNullOrEmpty(txtSsid.Text))
+                        {
+                            txtSsid.Text = _publisher.Advertisement.LegacySettings.Ssid;
+                        }
+                    }
+                });
+            }
+
+            rootPage.NotifyUserFromBackground($"Advertisement: Status: {statusEventArgs.Status}, Error: {statusEventArgs.Error}", NotifyType.StatusMessage);
             return;
         }
 
-        private async void OnSocketConnectionReceived(StreamSocketListener sender, StreamSocketListenerConnectionReceivedEventArgs args)
+        private void OnSocketConnectionReceived(StreamSocketListener sender, StreamSocketListenerConnectionReceivedEventArgs args)
         {
-            rootPage.NotifyUserFromBackground("Connecting to remote side on L4 layer...", NotifyType.StatusMessage);
-            StreamSocket serverSocket = args.Socket;
-
-            try
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
+                rootPage.NotifyUser("Connecting to remote side on L4 layer...", NotifyType.StatusMessage);
+                StreamSocket serverSocket = args.Socket;
+
                 SocketReaderWriter socketRW = new SocketReaderWriter(serverSocket, rootPage);
-                socketRW.ReadMessage();
+                // The first message sent is the name of the connection.
+                string message = await socketRW.ReadMessageAsync();
 
-                while (true)
+                // Find the pending connection and add it to the list of active connections.
+                WiFiDirectDevice wfdDevice;
+                if (_pendingConnections.TryRemove(sender, out wfdDevice))
                 {
-                    string sessionId = socketRW.GetCurrentMessage();
-                    if (sessionId != null)
-                    {
-                        rootPage.NotifyUserFromBackground("Connected with remote side on L4 layer", NotifyType.StatusMessage);
-
-                        await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                        {
-                            for (int idx = 0; idx < _connectedDevices.Count; idx++)
-                            {
-                                if (_connectedDevices[idx].DisplayName.Equals("Waiting for client to connect...") == true)
-                                {
-                                    ConnectedDevice connectedDevice = _connectedDevices[idx];
-                                    _connectedDevices.RemoveAt(idx);
-
-                                    connectedDevice.DisplayName = sessionId;
-                                    connectedDevice.SocketRW = socketRW;
-
-                                    _connectedDevices.Add(connectedDevice);
-                                    break;
-                                }
-                            }
-                        });
-
-
-                        break;
-                    }
-
-                    await Task.Delay(100);
+                    ConnectedDevices.Add(new ConnectedDevice(message, wfdDevice, socketRW));
                 }
-            }
-            catch (Exception ex)
-            {
-                rootPage.NotifyUserFromBackground("Connection failed: " + ex.Message, NotifyType.ErrorMessage);
-            }
+
+                while (message != null)
+                {
+                    message = await socketRW.ReadMessageAsync();
+                }
+            });
         }
 
         private void OnConnectionStatusChanged(WiFiDirectDevice sender, object arg)
         {
-            rootPage.NotifyUserFromBackground("Connection status changed: " + sender.ConnectionStatus, NotifyType.StatusMessage);
+            rootPage.NotifyUserFromBackground($"Connection status changed: {sender.ConnectionStatus}", NotifyType.StatusMessage);
+
+            if (sender.ConnectionStatus == WiFiDirectConnectionStatus.Disconnected)
+            {
+                // TODO: Should we remove this connection from the list?
+                // (Yes, probably.)
+            }
         }
 
-        private void btnSendMessage_Click(object sender, RoutedEventArgs e)
+        private async void btnSendMessage_Click(object sender, RoutedEventArgs e)
         {
-            if (lvConnectedDevices.SelectedItems.Count == 0)
-            {
-                rootPage.NotifyUser("Please select a Session to send data", NotifyType.ErrorMessage);
-                return;
-            }
+            var connectedDevice = (ConnectedDevice)lvConnectedDevices.SelectedItem;
+            await connectedDevice.SocketRW.WriteMessageAsync(txtSendMessage.Text);
+        }
 
-            if (txtSendMessage.Text == "")
-            {
-                rootPage.NotifyUser("Please type a message to send", NotifyType.ErrorMessage);
-                return;
-            }
-
-            try
-            {
-                foreach (ConnectedDevice connectedDevice in lvConnectedDevices.SelectedItems)
-                {
-                    connectedDevice.SocketRW.WriteMessage(txtSendMessage.Text);
-                }
-            }
-            catch (Exception ex)
-            {
-                rootPage.NotifyUser("Send threw an exception: " + ex.Message, NotifyType.ErrorMessage);
-            }
+        private bool CanCloseDevice(object connectedDevice)
+        {
+            return connectedDevice != null;
         }
 
         private void btnCloseDevice_Click(object sender, RoutedEventArgs e)
         {
-            if (lvConnectedDevices.SelectedItems.Count == 0)
-            {
-                rootPage.NotifyUser("Please select a device to close", NotifyType.ErrorMessage);
-                return;
-            }
+            var connectedDevice = (ConnectedDevice)lvConnectedDevices.SelectedItem;
+            ConnectedDevices.Remove(connectedDevice);
 
-            try
-            {
-                foreach (ConnectedDevice connectedDevice in lvConnectedDevices.SelectedItems)
-                {
-                    // Close socket
-                    connectedDevice.SocketRW.Dispose();
-
-                    // Close WiFiDirectDevice object
-                    connectedDevice.WfdDevice.Dispose();
-                    _connectedDevices.Remove(connectedDevice);
-
-                    rootPage.NotifyUser(connectedDevice.DisplayName + " closed successfully", NotifyType.StatusMessage);
-                }
-            }
-            catch (Exception ex)
-            {
-                rootPage.NotifyUser("Close threw an exception: " + ex.Message, NotifyType.ErrorMessage);
-            }
+            // Close socket and WiFiDirect object
+            connectedDevice.Dispose();
         }
     }
 }
+

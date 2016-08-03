@@ -239,6 +239,27 @@ to track background status and then release UI resources from
 Be especially careful of references that could prevent resources from being
 garbage collected, such as strong references or subscribed event handlers.
 
+If your application clears window content on background transitions, be aware
+of the following.
+
+When the window content is set to be collected, each Frame will begin its
+disconnection process. If there are Pages in the visual object tree under the
+window content, these will raise their Unloaded event. Pages cannot be
+completely cleared from memory unless all references to them are removed. In the
+Unloaded callback, make sure to do these things to ensure memory is quickly
+removed:
+
+ ✓ **Do** clear and set any large data structures in your Page to null.
+
+ ✓ **Do** unregister for all event handlers that have callback methods within
+   the Page. Make sure to Register for those callbacks again during the Loaded
+   event handler for the Page. The Loaded event will be raised when the UI has
+   been reconstituted later and the Page has been added to the visual object
+   tree.
+
+ ✓ **Do** call GC.Collect at the end of the Unloaded callback to quickly garbage
+   collect any of the large data structures you have just set to null.
+
 ### Moving from the foreground to the background
 
 When an app moves from the foreground to the background, the system does work on

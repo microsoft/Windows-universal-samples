@@ -111,10 +111,18 @@ namespace BackgroundMediaPlayback
         {
             Debug.WriteLine("Scenario1_Unloaded");
 
+            // Ensure the page is no longer holding references and force a GC
+            // to ensure these are unloaded immediately since the app has
+            // only a short timeframe to reduce working set to avoid suspending
+            // on background transition.
+
             SettingsService.Instance.UseCustomControlsChanged -= SettingsService_UseCustomControlsChanged;
 
             PlaybackList.ItemFailed -= PlaybackList_ItemFailed;
             PlayerViewModel.Dispose();
+            PlayerViewModel = null;
+
+            GC.Collect();
         }
 
         private void SettingsService_UseCustomControlsChanged(object sender, EventArgs e)

@@ -309,7 +309,7 @@ namespace AllJoynProducerExperiences
                         }
                         else
                         {
-                            if (AppData.OnboardingConfigurePassphrase.Equals(ConvertUtf8ToHex(AppData.SampleNetworkPassword), StringComparison.OrdinalIgnoreCase))
+                            if (AppData.OnboardingConfigurePassphrase.Equals(AppData.SampleNetworkPassword, StringComparison.OrdinalIgnoreCase))
                             {
                                 returnArg.Value1 = (short)ConnectionResultCode.Validated;
                                 returnArg.Value2 = "Connected successfully";
@@ -349,18 +349,6 @@ namespace AllJoynProducerExperiences
             else
             {
                 UpdateStatusAsync(string.Format("Onboarding Failed. Attempt to connect failed with result code: {0} and message: {1}.", ((ConnectionResultCode)returnArg.Value1).ToString(), returnArg.Value2), NotifyType.ErrorMessage);
-            }
-        }
-
-        private string ConvertUtf8ToHex(string inputString)
-        {
-            if (string.IsNullOrEmpty(inputString))
-            {
-                return string.Empty;
-            }
-            else
-            {
-                return BitConverter.ToString(Encoding.UTF8.GetBytes(inputString)).Replace("-", string.Empty);
             }
         }
 

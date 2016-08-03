@@ -83,7 +83,7 @@ namespace SDKTemplate
                 // ERROR_DEVICE_NOT_AVAILABLE because the Bluetooth radio is not on.
             }
 
-            if (bluetoothLeDevice != null && bluetoothLeDevice.ConnectionStatus == BluetoothConnectionStatus.Connected)
+            if (bluetoothLeDevice != null)
             {
                 // BT_Code: GattServices returns a list of all the supported services of the device.
                 // If the services supported by the device are expected to change
@@ -324,21 +324,23 @@ namespace SDKTemplate
         }
         #endregion
 
-        private string FormatValueByPresentation(IBuffer value, GattPresentationFormat format)
+        private string FormatValueByPresentation(IBuffer buffer, GattPresentationFormat format)
         {
             // BT_Code: For the purpose of this sample, this function converts only UInt32 and
             // UTF-8 buffers to readable text. It can be extended to support other formats if your app needs them.
+            byte[] data;
+            CryptographicBuffer.CopyToByteArray(buffer, out data);
             if (format != null)
             {
-                if (format.FormatType == GattPresentationFormatTypes.UInt32 && value.Length >= 4)
+                if (format.FormatType == GattPresentationFormatTypes.UInt32 && data.Length >= 4)
                 {
-                    return BitConverter.ToInt32(Utilities.ReadBufferToBytes(value), 0).ToString();
+                    return BitConverter.ToInt32(data, 0).ToString();
                 }
                 else if (format.FormatType == GattPresentationFormatTypes.Utf8)
                 {
                     try
                     {
-                        return Encoding.UTF8.GetString(Utilities.ReadBufferToBytes(value));
+                        return Encoding.UTF8.GetString(data);
                     }
                     catch (ArgumentException)
                     {
@@ -348,20 +350,60 @@ namespace SDKTemplate
                 else
                 {
                     // Add support for other format types as needed.
-                    return "Unsupported format: " + CryptographicBuffer.EncodeToHexString(value);
+                    return "Unsupported format: " + CryptographicBuffer.EncodeToHexString(buffer);
                 }
             }
             else
             {
-                // We don't know what format to use. Let's try UTF-8.
-                try
+                // We don't know what format to use. Let's try a well-known profile, or default back to UTF-8.
+                if (selectedCharacteristic.Uuid.Equals(GattCharacteristicUuids.HeartRateMeasurement))
                 {
-                    return "Unknown format: " + Encoding.UTF8.GetString(Utilities.ReadBufferToBytes(value));
+                    try
+                    {
+                        return "Heart Rate: " + ParseHeartRateValue(data).ToString();
+                    }
+                    catch (ArgumentException)
+                    {
+                        return "Heart Rate: (unable to parse)";
+                    }
                 }
-                catch (ArgumentException)
+                else
                 {
-                    return "Unknown format";
+                    try
+                    {
+                        return "Unknown format: " + Encoding.UTF8.GetString(data);
+                    }
+                    catch (ArgumentException)
+                    {
+                        return "Unknown format";
+                    }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Process the raw data received from the device into application usable data,
+        /// according the the Bluetooth Heart Rate Profile.
+        /// https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.heart_rate_measurement.xml&u=org.bluetooth.characteristic.heart_rate_measurement.xml
+        /// This function throws an exception if the data cannot be parsed.
+        /// </summary>
+        /// <param name="data">Raw data received from the heart rate monitor.</param>
+        /// <returns>The heart rate measurement value.</returns>
+        private static ushort ParseHeartRateValue(byte[] data)
+        {
+            // Heart Rate profile defined flag values
+            const byte heartRateValueFormat = 0x01;
+
+            byte flags = data[0];
+            bool isHeartRateValueSizeLong = ((flags & heartRateValueFormat) != 0);
+
+            if (isHeartRateValueSizeLong)
+            {
+                return BitConverter.ToUInt16(data, 1);
+            }
+            else
+            {
+                return data[1];
             }
         }
     }

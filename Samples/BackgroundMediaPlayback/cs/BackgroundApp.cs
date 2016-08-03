@@ -205,18 +205,22 @@ namespace SDKTemplate
             {
                 ShowToast("Unloading view");
 
-                // Some apps may wish to use this helper to explicitly disconnect
-                // child references.
-                // VisualTreeHelper.DisconnectChildrenRecursive(Window.Current.Content);
-
                 // Clear the view content. Note that views should rely on
                 // events like Page.Unloaded to further release resources. Be careful
                 // to also release event handlers in views since references can
-                // prevent objects from being collected.
+                // prevent objects from being collected. C++ developers should take
+                // special care to use weak references for event handlers where appropriate.
                 Window.Current.Content = null;
+
+                // Finally, clearing the content above and calling GC.Collect() below 
+                // is what will trigger each Page.Unloaded handler to be called.
+                // In order for the resources each page has allocated to be released,
+                // it is necessary that each Page also call GC.Collect() from its
+                // Page.Unloaded handler.
             }
 
-            // Run the GC to collect released resources.
+            // Run the GC to collect released resources, including triggering
+            // each Page.Unloaded handler to run.
             GC.Collect();
 
             ShowToast("Finished reducing memory usage");

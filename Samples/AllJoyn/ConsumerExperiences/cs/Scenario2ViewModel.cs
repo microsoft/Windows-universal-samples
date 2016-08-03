@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Devices.AllJoyn;
@@ -60,13 +61,12 @@ namespace AllJoynConsumerExperiences
         private bool? m_physicalDeviceIsChecked = null;
         private bool m_showOnboardeeSsidList = true;
         private bool m_showOnboarderSsidList = false;
-        private bool m_isAuthenticated = false;
-        private bool m_isCredentialsRequested = false;
         private AllJoynBusAttachment m_busAttachment = null;
         private OnboardingWatcher m_watcher = null;
         private OnboardingConsumer m_consumer = null;
         private OnboardingAuthenticationType m_selectedAuthType = OnboardingAuthenticationType.Any;
         private TaskCompletionSource<bool> m_authenticateClicked = null;
+        private int m_onboardSessionAlreadyJoined;
 
         public Scenario2ViewModel()
         {
@@ -677,6 +677,9 @@ namespace AllJoynConsumerExperiences
         {
             ScenarioCleanup();
 
+            // Allow re-joining of a new session
+            Interlocked.Exchange(ref m_onboardSessionAlreadyJoined, 0);
+
             m_busAttachment = new AllJoynBusAttachment();
             m_busAttachment.StateChanged += BusAttachment_StateChanged;
             m_busAttachment.AuthenticationMechanisms.Clear();
@@ -684,6 +687,7 @@ namespace AllJoynConsumerExperiences
             // EcdhePsk authentication is deprecated as of the AllJoyn 16.04 release.
             // Newly added EcdheSpeke should be used instead. EcdhePsk authentication is
             // added here to maintain compatibility with devices running older AllJoyn versions.
+            m_busAttachment.AuthenticationMechanisms.Add(AllJoynAuthenticationMechanism.EcdheNull);
             m_busAttachment.AuthenticationMechanisms.Add(AllJoynAuthenticationMechanism.EcdhePsk);
             m_busAttachment.AuthenticationMechanisms.Add(AllJoynAuthenticationMechanism.EcdheSpeke);
             m_busAttachment.AuthenticationComplete += BusAttachment_AuthenticationComplete;
@@ -714,7 +718,6 @@ namespace AllJoynConsumerExperiences
                 UpdateStatusAsync("Authentication failed.", NotifyType.ErrorMessage);
             }
 
-            m_isAuthenticated = args.Succeeded;
             EnteredKey = "";
             AuthenticationVisibility = Visibility.Collapsed;
         }
@@ -722,7 +725,6 @@ namespace AllJoynConsumerExperiences
         private async void BusAttachment_CredentialsRequested(AllJoynBusAttachment sender, AllJoynCredentialsRequestedEventArgs args)
         {
             Windows.Foundation.Deferral credentialsDeferral = args.GetDeferral();
-            m_isCredentialsRequested = true;
 
             if ((args.Credentials.AuthenticationMechanism == AllJoynAuthenticationMechanism.EcdhePsk) ||
                 (args.Credentials.AuthenticationMechanism == AllJoynAuthenticationMechanism.EcdheSpeke))
@@ -743,6 +745,9 @@ namespace AllJoynConsumerExperiences
                     UpdateStatusAsync("Please enter a key.", NotifyType.ErrorMessage);
                 }
             }
+            else if (args.Credentials.AuthenticationMechanism == AllJoynAuthenticationMechanism.EcdheNull)
+            {
+            }
             else
             {
                 UpdateStatusAsync("Unexpected authentication mechanism.", NotifyType.ErrorMessage);
@@ -753,18 +758,25 @@ namespace AllJoynConsumerExperiences
 
         private async void Watcher_Added(OnboardingWatcher sender, AllJoynServiceInfo args)
         {
+            // This demo supports a single onboarding producer, if there are multiple onboarding producers found, then they are ignored.
+            // Another approach would be to create a list of all producers found and then allow the user to choose the one they want
+            bool bAlreadyJoined = (Interlocked.CompareExchange(ref m_onboardSessionAlreadyJoined, 1, 0) == 1);
+            if (bAlreadyJoined)
+            {
+                return;
+            }
+
             UpdateStatusAsync("Joining session...", NotifyType.StatusMessage);
+
             OnboardingJoinSessionResult joinSessionResult = await OnboardingConsumer.JoinSessionAsync(args, sender);
             if (joinSessionResult.Status == AllJoynStatus.Ok)
             {
+                UpdateStatusAsync("Session Joined.", NotifyType.ErrorMessage);
                 DisposeConsumer();
                 m_consumer = joinSessionResult.Consumer;
                 m_consumer.SessionLost += Consumer_SessionLost;
 
-                if (!m_isCredentialsRequested || m_isAuthenticated)
-                {
-                    GetOnboardeeNetworkListAsync();
-                }
+                GetOnboardeeNetworkListAsync();
             }
             else
             {
@@ -871,8 +883,8 @@ namespace AllJoynConsumerExperiences
             else
             {
                 UpdateStatusAsync("Attempting to configure onboardee...", NotifyType.StatusMessage);
-                // WiFi password must be converted to hex representation of the UTF-8 string.
-                OnboardingConfigureWiFiResult configureWifiResult = await m_consumer.ConfigureWiFiAsync(ssid, ConvertUtf8ToHex(password), authType);
+
+                OnboardingConfigureWiFiResult configureWifiResult = await m_consumer.ConfigureWiFiAsync(ssid, password, authType);
                 if (configureWifiResult.Status == AllJoynStatus.Ok)
                 {
                     UpdateStatusAsync("Onboardee sucessfully configured.", NotifyType.StatusMessage);
@@ -911,18 +923,6 @@ namespace AllJoynConsumerExperiences
             else
             {
                 UpdateStatusAsync(string.Format("Connection attempt failed with result code: {0} and message: {1}.", ((ConnectionResultCode)args.Arg.Value1).ToString(), args.Arg.Value2), NotifyType.ErrorMessage);
-            }
-        }
-
-        private string ConvertUtf8ToHex(string inputString)
-        {
-            if (string.IsNullOrEmpty(inputString))
-            {
-                return string.Empty;
-            }
-            else
-            {
-                return BitConverter.ToString(Encoding.UTF8.GetBytes(inputString)).Replace("-", string.Empty);
             }
         }
 

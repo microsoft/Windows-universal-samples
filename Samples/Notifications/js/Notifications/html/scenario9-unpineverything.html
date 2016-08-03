@@ -1,0 +1,65 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link href="/css/scenario9-unpineverything.css" rel="stylesheet" />
+    <script src="/js/scenario9-unpineverything.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenario9">
+        <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+        <div id="scenarioDescription">
+            Unpinning all secondary tiles for this app.
+        </div>
+
+        <br />
+        <button id="unpincommand" class="win-button">Unpin all secondary tiles</button>
+        <p>
+            Your app can programatically unpin its secondary tiles.
+        </p>
+        <p>
+            The above button loops through all secondary tiles using findAllAsync() and calls requestDeleteAsync() on each tile to unpin all secondary tiles.
+            Listed below are all of the secondary tiles currently pinned for this app.
+        </p>
+
+        <!-- WinJS.Binding.Template for #scenariocontrol -->
+        <div id="scenarioitem" data-win-control="WinJS.Binding.Template" data-win-options="{ debugBreakOnRender: false }" style="display: none;">
+            <div class="scenarioitem" data-win-bind="title: displayName">
+                <span class="displayname">displayName: </span><span class="displayname" data-win-bind="innerText: displayName"></span><br />
+                <span>tileId: </span><span data-win-bind="innerText: tileId"></span><br />
+                <span>arguments: </span><span data-win-bind="innerText: arguments"></span><br />
+                <span>visualElements.backgroundColor: </span><span data-win-bind="innerText: visualElements.backgroundColor"></span><br />
+                <span>visualElements.foregroundText: </span><span data-win-bind="innerText: visualElements.foregroundText"></span><br />
+                <span>visualElements.showNameOnSquare150x150Logo: </span><span data-win-bind="innerText: visualElements.showNameOnSquare150x150Logo"></span><br />
+                <span>visualElements.showNameOnSquare310x310Logo: </span><span data-win-bind="innerText: visualElements.showNameOnSquare310x310Logo"></span><br />
+                <span>visualElements.showNameOnWide310x150Logo: </span><span data-win-bind="innerText: visualElements.showNameOnWide310x150Logo"></span><br />
+                <span>visualElements.square30x30Logo: </span><span data-win-bind="innerText: visualElements.square30x30Logo"></span><br />
+                <span>visualElements.square44x44Logo: </span><span data-win-bind="innerText: visualElements.square44x44Logo"></span><br />
+                <span>visualElements.square70x70Logo: </span><span data-win-bind="innerText: visualElements.square70x70Logo"></span><br />
+                <span>visualElements.square71x71Logo: </span><span data-win-bind="innerText: visualElements.square71x71Logo"></span><br />
+                <span>visualElements.square150x150Logo: </span><span data-win-bind="innerText: visualElements.square150x150Logo"></span><br />
+                <span>visualElements.square310x310Logo: </span><span data-win-bind="innerText: visualElements.square310x310Logo"></span><br />
+                <span>visualElements.wide310x150Logo: </span><span data-win-bind="innerText: visualElements.wide310x150Logo"></span><br />
+            </div>
+        </div>
+
+        <!--itemDataSource: SdkSample.scenarios.dataSource,-->
+        <div id="scenariocontrol" class="win-selectionstylefilled"
+             data-win-control="WinJS.UI.ListView"
+             data-win-options="{
+            itemTemplate: select('#scenarioitem'),
+            selectionMode: WinJS.UI.SelectionMode.none,
+            tapBehavior: WinJS.UI.TapBehavior.none,
+            layout: { type: WinJS.UI.ListLayout }
+         }">
+        </div>
+    </div>
+</body>
+
+</html>

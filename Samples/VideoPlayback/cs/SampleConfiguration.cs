@@ -22,15 +22,14 @@ namespace SDKTemplate
         List<Scenario> scenarios = new List<Scenario>
         {
             new Scenario() { Title= "Playing videos", ClassType=typeof(Scenario1)},
-            new Scenario() { Title= "Customizing transport controls", ClassType=typeof(Scenario2)},
-            new Scenario() { Title= "Displaying in-band closed captions (MKV)", ClassType=typeof(Scenario3)},
-            new Scenario() { Title= "Displaying out-of-band closed captions (MP4+SRT)", ClassType=typeof(Scenario4)},
-            new Scenario() { Title= "Selecting video tracks", ClassType=typeof(Scenario5)},
-            new Scenario() { Title= "Selecting audio tracks", ClassType=typeof(Scenario6)},
-            new Scenario() { Title= "Playing video lists", ClassType=typeof(Scenario7)},
-            new Scenario() { Title= "Playing on a composition surface", ClassType=typeof(Scenario8)},
-            new Scenario() { Title= "Transferring a MediaPlayer 1", ClassType=typeof(Scenario9_TransferMediaPlayer1)},
-            new Scenario() { Title= "Transferring a MediaPlayer 2", ClassType=typeof(Scenario10_TransferMediaPlayer2)},
+            new Scenario() { Title= "Displaying in-band closed captions (MKV)", ClassType=typeof(Scenario2)},
+            new Scenario() { Title= "Displaying out-of-band closed captions (MP4+SRT)", ClassType=typeof(Scenario3)},
+            new Scenario() { Title= "Selecting video tracks", ClassType=typeof(Scenario4)},
+            new Scenario() { Title= "Selecting audio tracks", ClassType=typeof(Scenario5)},
+            new Scenario() { Title= "Playing video lists", ClassType=typeof(Scenario6)},
+            new Scenario() { Title= "Playing on a composition surface", ClassType=typeof(Scenario7)},
+            new Scenario() { Title= "Transferring a MediaPlayer 1", ClassType=typeof(Scenario8_TransferMediaPlayer1)},
+            new Scenario() { Title= "Transferring a MediaPlayer 2", ClassType=typeof(Scenario9_TransferMediaPlayer2)},
         };
 
         public Windows.Media.Playback.MediaPlayer commonMediaPlayer = null;

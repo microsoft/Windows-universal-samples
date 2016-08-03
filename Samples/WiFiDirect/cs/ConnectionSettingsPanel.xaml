@@ -1,0 +1,70 @@
+﻿<UserControl
+    x:Class="SDKTemplate.ConnectionSettingsPanel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:wifidirect="using:Windows.Devices.WiFiDirect"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="335"
+    d:DesignWidth="400">
+
+    <!-- Connection parameters -->
+    <StackPanel HorizontalAlignment="Left">
+        <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Connection"/>
+
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+            <TextBlock Text="Group Owner Intent:" Margin="0,5,0,0"/>
+            <ComboBox x:Name="cmbGOIntent" Width="120" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <TextBlock Margin="0,10,0,0" TextWrapping="Wrap" Text="Add configuration methods in order of preference, most preferred first."/>
+        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+            <ComboBox x:Name="cmbSupportedConfigMethods" Width="200">
+                <ComboBoxItem Content="Push Button" IsSelected="True">
+                    <ComboBoxItem.Tag>
+                        <wifidirect:WiFiDirectConfigurationMethod>
+                            PushButton
+                        </wifidirect:WiFiDirectConfigurationMethod>
+                    </ComboBoxItem.Tag>
+                </ComboBoxItem>
+                <ComboBoxItem Content="Provide Pin">
+                    <ComboBoxItem.Tag>
+                        <wifidirect:WiFiDirectConfigurationMethod>
+                            ProvidePin
+                        </wifidirect:WiFiDirectConfigurationMethod>
+                    </ComboBoxItem.Tag>
+                </ComboBoxItem>
+                <ComboBoxItem Content="Display Pin">
+                    <ComboBoxItem.Tag>
+                        <wifidirect:WiFiDirectConfigurationMethod>
+                            DisplayPin
+                        </wifidirect:WiFiDirectConfigurationMethod>
+                    </ComboBoxItem.Tag>
+                </ComboBoxItem>
+            </ComboBox>
+            <Button x:Name="btnAddConfigMethods" Content="Add" Click="btnAddConfigMethods_Click" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <TextBlock Margin="0,10,0,0" Text="Preferred Pairing Procedure:"/>
+        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+            <ComboBox x:Name="cmbPreferredPairingProcedure">
+                <ComboBoxItem Content="Group Owner Negotiation" IsSelected="True">
+                    <ComboBoxItem.Tag>
+                        <wifidirect:WiFiDirectPairingProcedure>
+                            GroupOwnerNegotiation
+                        </wifidirect:WiFiDirectPairingProcedure>
+                    </ComboBoxItem.Tag>
+                </ComboBoxItem>
+                <ComboBoxItem Content="Invitation">
+                    <ComboBoxItem.Tag>
+                        <wifidirect:WiFiDirectPairingProcedure>
+                            Invitation
+                        </wifidirect:WiFiDirectPairingProcedure>
+                    </ComboBoxItem.Tag>
+                </ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

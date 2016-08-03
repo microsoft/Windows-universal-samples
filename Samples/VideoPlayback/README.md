@@ -9,8 +9,7 @@ This sample demonstrates how to create apps that take advantage of many media pl
 
 Specifically, this sample covers:
 
-- Playing local video 
-- Customizing media transport controls (XAML-only)
+- Playing local video
 - Using in-band closed captions
 - Using out-of-band closed captions
 - Dealing with multiple video tracks
@@ -24,10 +23,11 @@ Specifically, this sample covers:
 ### Samples
 
 * [VideoPlaybackSynchronization sample](/Samples/VideoPlaybackSynchronization)
+* [XamlCustomMediaTransportControls sample](/Samples/XamlCustomMediaTransportControls)
 
-## Reference
+### Reference
 
-[Windows.Media.Playback namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.playback.aspx)
+* [Windows.Media.Playback namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.playback.aspx)
 
 ## System requirements
 
