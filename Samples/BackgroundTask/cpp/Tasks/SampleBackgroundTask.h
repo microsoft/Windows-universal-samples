@@ -10,32 +10,22 @@
 
 #pragma once
 
-#include "pch.h"
-#include <agile.h>
-
-using namespace Windows::ApplicationModel::Background;
-using namespace Windows::System::Threading;
-
 namespace Tasks
 {
     [Windows::Foundation::Metadata::WebHostHidden]
-    public ref class SampleBackgroundTask sealed : public IBackgroundTask
+    public ref class SampleBackgroundTask sealed : public Windows::ApplicationModel::Background::IBackgroundTask
     {
 
     public:
-        SampleBackgroundTask();
-
-        virtual void Run(IBackgroundTaskInstance^ taskInstance);
-        void OnCanceled(IBackgroundTaskInstance^ taskInstance, BackgroundTaskCancellationReason reason);
+        virtual void Run(Windows::ApplicationModel::Background::IBackgroundTaskInstance^ taskInstance);
+        void OnCanceled(Windows::ApplicationModel::Background::IBackgroundTaskInstance^ taskInstance, Windows::ApplicationModel::Background::BackgroundTaskCancellationReason reason);
 
     private:
-        ~SampleBackgroundTask();
-
-        BackgroundTaskCancellationReason CancelReason;
-        volatile bool CancelRequested;
-        Platform::Agile<Windows::ApplicationModel::Background::BackgroundTaskDeferral> TaskDeferral;
-        ThreadPoolTimer^ PeriodicTimer;
-        unsigned int Progress;
-        IBackgroundTaskInstance^ TaskInstance;
+        Windows::ApplicationModel::Background::BackgroundTaskCancellationReason CancelReason = Windows::ApplicationModel::Background::BackgroundTaskCancellationReason::Abort;
+        volatile bool CancelRequested = false;
+        Platform::Agile<Windows::ApplicationModel::Background::BackgroundTaskDeferral> TaskDeferral = nullptr;
+        Windows::System::Threading::ThreadPoolTimer^ PeriodicTimer = nullptr;
+        unsigned int Progress = 0;
+        Windows::ApplicationModel::Background::IBackgroundTaskInstance^ TaskInstance = nullptr;
     };
 }

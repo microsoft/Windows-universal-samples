@@ -166,10 +166,10 @@ Namespace Global.BluetoothAdvertisement
                 builder.Name = taskName
                 taskRegistration = builder.Register()
                 AddHandler taskRegistration.Completed, AddressOf OnBackgroundTaskCompleted
-                If(backgroundAccessStatus = BackgroundAccessStatus.Denied) OrElse (backgroundAccessStatus = BackgroundAccessStatus.Unspecified) Then
-                    rootPage.NotifyUser("Not able to run in background. Application must given permission to be added to lock screen.", NotifyType.ErrorMessage)
-                Else
+                If(backgroundAccessStatus = BackgroundAccessStatus.AlwaysAllowed) OrElse (backgroundAccessStatus = BackgroundAccessStatus.AllowedSubjectToSystemPolicy) Then
                     rootPage.NotifyUser("Background publisher registered.", NotifyType.StatusMessage)
+                Else
+                    rootPage.NotifyUser("Background tasks may be disabled for this app", NotifyType.ErrorMessage)
                 End If
             End If
         End Sub

@@ -34,14 +34,15 @@ namespace SDKTemplate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            _sensor = OrientationSensor.GetDefault();
+            _sensor = OrientationSensor.GetDefault(rootPage.SensorReadingType, rootPage.SensorOptimizationGoal);
             if (_sensor != null)
             {
+                rootPage.NotifyUser(rootPage.SensorDescription + " is ready", NotifyType.StatusMessage);
                 ScenarioEnableButton.IsEnabled = true;
             }
             else
             {
-                rootPage.NotifyUser("No orientation sensor found", NotifyType.ErrorMessage);
+                rootPage.NotifyUser(rootPage.SensorDescription + " not found", NotifyType.ErrorMessage);
             }
         }
 

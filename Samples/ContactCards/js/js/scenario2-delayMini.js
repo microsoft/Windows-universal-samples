@@ -35,7 +35,7 @@
         // Create contact object with small set of initial data to display.
         var contact = new Contact();
         contact.firstName = "Kim";
-        contact.LlstName = "Abercrombie";
+        contact.lastName = "Abercrombie";
 
         var email = new ContactEmail();
         email.address = "kim@contoso.com";
@@ -104,21 +104,25 @@
 
         var dataLoader = ContactManager.showDelayLoadedContactCard(contact, rect, placement, options);
 
-        // Simulate downloading more data from the network for the contact.
-        WinJS.log && WinJS.log("Simulating download...", "sample", "status");
+        if (dataLoader) {
+            // Simulate downloading more data from the network for the contact.
+            WinJS.log && WinJS.log("Simulating download...", "sample", "status");
 
-        downloadContactDataAsync(contact).then(function (fullContact) {
-            if (fullContact) {
-                // Update the contact card with the full set of contact data.
-                dataLoader.setData(fullContact);
-                WinJS.log && WinJS.log("Contact has been updated with downloaded data.", "sample", "status");
-            } else {
-                WinJS.log && WinJS.log("No further information available.", "sample", "status");
-            }
+            downloadContactDataAsync(contact).then(function (fullContact) {
+                if (fullContact) {
+                    // Update the contact card with the full set of contact data.
+                    dataLoader.setData(fullContact);
+                    WinJS.log && WinJS.log("Contact has been updated with downloaded data.", "sample", "status");
+                } else {
+                    WinJS.log && WinJS.log("No further information available.", "sample", "status");
+                }
 
-            // Close the object to indicate that the delay-loading operation has completed.
-            dataLoader.close();
-        });
+                // Close the object to indicate that the delay-loading operation has completed.
+                dataLoader.close();
+            });
+        } else {
+            WinJS.log && WinJS.log("ShowDelayLoadedContactCard is not supported by this device.", "sample", "error");
+        }
     }
 
 })();

@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "AppShell.xaml.h"
 #include "LandingPage.xaml.h"
+#include "SystemInformationHelpers.h"
 
 using namespace NavigationMenuSample;
 
@@ -62,6 +63,16 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
         Color color = safe_cast<Color>(this->Resources->Lookup(L"SystemChromeMediumColor"));
         titleBar->BackgroundColor = color;
         titleBar->ButtonBackgroundColor = color;
+    }
+
+    if (SystemInformationHelpers::IsTenFootExperience())
+    {
+        // Apply guidance from https://msdn.microsoft.com/windows/uwp/input-and-devices/designing-for-tv
+        ApplicationView::GetForCurrentView()->SetDesiredBoundsMode(ApplicationViewBoundsMode::UseCoreWindow);
+
+        ResourceDictionary^ TenFootDictionary = ref new ResourceDictionary();
+        TenFootDictionary->Source = ref new Uri("ms-appx:///Styles/TenFootStylesheet.xaml");
+        this->Resources->MergedDictionaries->Append(TenFootDictionary);
     }
 
     auto shell = dynamic_cast<AppShell^>(Window::Current->Content);

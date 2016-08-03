@@ -46,6 +46,7 @@ namespace AppUIBasics
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.RequiresPointerMode = ApplicationRequiresPointerMode.WhenRequested;
         }
 
         /// <summary>

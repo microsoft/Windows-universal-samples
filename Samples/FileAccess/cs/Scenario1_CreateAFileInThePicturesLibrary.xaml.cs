@@ -38,8 +38,16 @@ namespace SDKTemplate
         private async void CreateFileButton_Click(object sender, RoutedEventArgs e)
         {
             StorageFolder storageFolder = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
-            rootPage.sampleFile = await storageFolder.CreateFileAsync(MainPage.filename, CreationCollisionOption.ReplaceExisting);
-            rootPage.NotifyUser(String.Format("The file '{0}' was created.", rootPage.sampleFile.Name), NotifyType.StatusMessage);
+            try
+            {
+                rootPage.sampleFile = await storageFolder.CreateFileAsync(MainPage.filename, CreationCollisionOption.ReplaceExisting);
+                rootPage.NotifyUser(String.Format("The file '{0}' was created.", rootPage.sampleFile.Name), NotifyType.StatusMessage);
+            }
+            catch (Exception ex)
+            {
+                // I/O errors are reported as exceptions.
+                rootPage.NotifyUser(String.Format("Error creating file '{0}': {1}", MainPage.filename, ex.Message), NotifyType.ErrorMessage);
+            }
         }
     }
 }

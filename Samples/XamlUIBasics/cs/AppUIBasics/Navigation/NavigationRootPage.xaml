@@ -194,11 +194,11 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ControlPageBackgroundBrush}">
-        <SplitView x:Name="rootSplitView" DisplayMode="Overlay">
+        <SplitView x:Name="rootSplitView" DisplayMode="Overlay" IsTabStop="False">
             <SplitView.Pane>
                 <StackPanel Margin="12">
                     <Button x:Name="homeButton" Style="{StaticResource HomeButtonStyle}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Content="Home" Click="homeButton_Click" />
-                    <ItemsControl x:Name="groupsItemControl" ItemsSource="{x:Bind Groups}">
+                    <ItemsControl x:Name="groupsItemControl" ItemsSource="{x:Bind Groups}" IsTabStop="False">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="data:ControlInfoDataGroup">
                                 <StackPanel>

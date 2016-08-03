@@ -24,7 +24,7 @@
             <TextBlock Text="Saving Data Reason" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"/>
             <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
                 Requests for extended execution using the "SavingData" reason
-                are allowed only during the Suspending lifecycle stage.
+                are allowed during the Resumed or the Suspending lifecycle stages.
                 The app raises a toast every ten seconds during the save operation
                 to demonstrate that it is still running.
             </TextBlock>

@@ -146,8 +146,8 @@ namespace SDKTemplate
                 // RequestAccessAsync must be called on the UI thread.
                 BackgroundAccessStatus accessStatus = await BackgroundExecutionManager.RequestAccessAsync();
 
-                if ((BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity == accessStatus) ||
-                    (BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity == accessStatus))
+                if ((BackgroundAccessStatus.AlwaysAllowed == accessStatus) ||
+                    (BackgroundAccessStatus.AllowedSubjectToSystemPolicy == accessStatus))
                 {
                     if (await StartSensorBackgroundTaskAsync(Accelerometer.DeviceId))
                     {

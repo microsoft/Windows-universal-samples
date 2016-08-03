@@ -20,8 +20,7 @@
               visibility when the application is in the foreground. The Background
               Transfer API enables users to transfer content in the background.
               Therefore, application developers must also ensure they handle
-              application suspension/resumption and termination/activation cases as
-              well.
+              application suspension/resumption and termination/activation cases.
             </TextBlock>
             <TextBlock Text="Remote address: " Style="{StaticResource BasicTextStyle}" Margin="0,8,10,0"/>
             <TextBox x:Name="serverAddressField" InputScope="Url" Text="http://localhost/BackgroundTransferSample/Upload.aspx"/>

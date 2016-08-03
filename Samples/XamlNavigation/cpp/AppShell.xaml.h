@@ -61,8 +61,6 @@ namespace NavigationMenuSample
         void SystemNavigationManager_BackRequested(Object^, Windows::UI::Core::BackRequestedEventArgs^ e);
         void NavMenuList_ItemInvoked(Object^ sender, ListViewItem^ e);
         void OnNavigatingToPage(Object^ sender, NavigatingCancelEventArgs^ e);
-        void OnNavigatedToPage(Object^ sender, NavigationEventArgs^ e);
-        void Page_Loaded(Object^ sender, RoutedEventArgs^ e);
         void RootSplitView_PaneClosed(SplitView^ sender, Object^ args);
         void TogglePaneButton_Checked(Object^ sender, RoutedEventArgs^ e);
         void TogglePaneButton_Unchecked(Object^ sender, RoutedEventArgs^ e);

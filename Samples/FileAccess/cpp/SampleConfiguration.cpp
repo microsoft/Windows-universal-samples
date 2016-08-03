@@ -53,14 +53,15 @@ void MainPage::NotifyUserFileNotExist()
     NotifyUser("The file '" + Filename + "' does not exist. Use scenario one to create this file.", NotifyType::ErrorMessage);
 }
 
-void MainPage::HandleFileNotFoundException(Platform::COMException^ e)
+// I/O errors are reported as exceptions.
+void MainPage::HandleIoException(Platform::COMException^ e, Platform::String^ description)
 {
-    if (e->HResult == 0x80070002) // Catch FileNotExistException
+    if (e->HResult == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND))
     {
         NotifyUserFileNotExist();
     }
     else
     {
-        throw e;
+        NotifyUser(description + ": " + e->Message, NotifyType::ErrorMessage);
     }
 }

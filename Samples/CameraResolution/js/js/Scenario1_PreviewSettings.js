@@ -84,7 +84,7 @@
             if (cameraSettings.value == "")
                 return;
 
-            oMediaCapture.videoDeviceController.setMediaStreamPropertiesAsync(Capture.MediaStreamType.videoPreview, allProperties[cameraSettings.value]);
+            mediaCapture.videoDeviceController.setMediaStreamPropertiesAsync(Capture.MediaStreamType.videoPreview, allProperties[cameraSettings.value]);
         }
     }
     

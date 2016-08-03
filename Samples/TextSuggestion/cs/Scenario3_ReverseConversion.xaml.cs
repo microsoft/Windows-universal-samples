@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved
 
 using System;
+using System.Collections.Generic;
 using Windows.Data.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -47,7 +48,7 @@ namespace TextSuggestion
         private async void Execute_Click(object sender, RoutedEventArgs e)
         {
             // Clean up result column.
-            result.Text = string.Empty;
+            resultView.ItemsSource = null;
 
             // Clean notification area.
             rootPage.NotifyUser(string.Empty, NotifyType.StatusMessage);
@@ -58,12 +59,34 @@ namespace TextSuggestion
 
             if ((generator != null) && (selectedItem != null) && (!String.IsNullOrEmpty(input)))
             {
-                // Get the reverse conversion result through calling the API and print it in result area.
-                // Using 'await' expression here to suspend the execution of this method until the awaited task completes.
-                result.Text = await generator.ConvertBackAsync(input);
-                if (result.Text.Length == 0)
+                if ((selectedItem.Tag != null) && selectedItem.Tag.ToString().Equals("segmented"))
                 {
-                    rootPage.NotifyUser(string.Format("No candidates"), NotifyType.StatusMessage);
+                    // Get the reverse conversion result per phoneme through calling the API and print it in result area.
+                    // Using 'await' expression here to suspend the execution of this method until the awaited task completes.
+                    IReadOnlyList<TextPhoneme> phonemes = await generator.GetPhonemesAsync(input);
+                    List<string> results = new List<string>();
+                    foreach (TextPhoneme phoneme in phonemes)
+                    {
+                        results.Add(string.Format("{0} -> {1}", phoneme.DisplayText, phoneme.ReadingText));
+                    }
+                    resultView.ItemsSource = results;
+
+                    if (phonemes.Count == 0)
+                    {
+                        rootPage.NotifyUser(string.Format("No results"), NotifyType.StatusMessage);
+                    }
+                }
+                else
+                {
+                    // Get the reverse conversion result through calling the API and print it in result area.
+                    // Using 'await' expression here to suspend the execution of this method until the awaited task completes.                    
+                    string result = await generator.ConvertBackAsync(input);
+                    resultView.ItemsSource = new List<string> { result };
+
+                    if (result.Length == 0)
+                    {
+                        rootPage.NotifyUser(string.Format("No results"), NotifyType.StatusMessage);
+                    }
                 }
             }
         }

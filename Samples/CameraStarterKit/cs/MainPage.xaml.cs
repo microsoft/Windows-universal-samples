@@ -50,6 +50,9 @@ namespace CameraStarterKit
         // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
         private static readonly Guid RotationKey = new Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1");
 
+        // Folder in which the captures will be stored (initialized in SetupUiAsync)
+        private StorageFolder _captureFolder = null;
+
         // Prevent the screen from sleeping while the camera is running
         private readonly DisplayRequest _displayRequest = new DisplayRequest();
 
@@ -191,12 +194,12 @@ namespace CameraStarterKit
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => UpdateButtonOrientation());
         }
 
-        private async void PhotoButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void PhotoButton_Click(object sender, RoutedEventArgs e)
         {
             await TakePhotoAsync();
         }
 
-        private async void VideoButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void VideoButton_Click(object sender, RoutedEventArgs e)
         {
             if (!_isRecording)
             {
@@ -385,20 +388,25 @@ namespace CameraStarterKit
 
             var stream = new InMemoryRandomAccessStream();
 
+            Debug.WriteLine("Taking photo...");
+            await _mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream);
+
             try
             {
-                Debug.WriteLine("Taking photo...");
-                await _mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream);
-                Debug.WriteLine("Photo taken!");
+                var file = await _captureFolder.CreateFileAsync("SimplePhoto.jpg", CreationCollisionOption.GenerateUniqueName);
+
+                Debug.WriteLine("Photo taken! Saving to " + file.Path);
 
                 var photoOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
 
-                await ReencodeAndSavePhotoAsync(stream, photoOrientation);
+                await ReencodeAndSavePhotoAsync(stream, file, photoOrientation);
+
+                Debug.WriteLine("Photo saved!");
             }
             catch (Exception ex)
             {
                 // File I/O errors are reported as exceptions
-                Debug.WriteLine("Exception when taking a photo: {0}", ex.ToString());
+                Debug.WriteLine("Exception when taking a photo: " + ex.ToString());
             }
 
             // Done taking a photo, so re-enable the button
@@ -414,8 +422,8 @@ namespace CameraStarterKit
         {
             try
             {
-                // Create storage file in Pictures Library
-                var videoFile = await KnownFolders.PicturesLibrary.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
+                // Create storage file for the capture
+                var videoFile = await _captureFolder.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
 
                 var encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
 
@@ -423,7 +431,7 @@ namespace CameraStarterKit
                 var rotationAngle = 360 - ConvertDeviceOrientationToDegrees(GetCameraOrientation());
                 encodingProfile.Video.Properties.Add(RotationKey, PropertyValue.CreateInt32(rotationAngle));
 
-                Debug.WriteLine("Starting recording...");
+                Debug.WriteLine("Starting recording to " + videoFile.Path);
 
                 await _mediaCapture.StartRecordToStorageFileAsync(encodingProfile, videoFile);
                 _isRecording = true;
@@ -433,7 +441,7 @@ namespace CameraStarterKit
             catch (Exception ex)
             {
                 // File I/O errors are reported as exceptions
-                Debug.WriteLine("Exception when starting video recording: {0}", ex.ToString());
+                Debug.WriteLine("Exception when starting video recording: " + ex.ToString());
             }
         }
 
@@ -515,6 +523,10 @@ namespace CameraStarterKit
             }
 
             RegisterEventHandlers();
+
+            var picturesLibrary = await StorageLibrary.GetLibraryAsync(KnownLibraryId.Pictures);
+            // Fall back to the local app storage if the Pictures Library is not available
+            _captureFolder = picturesLibrary.SaveFolder ?? ApplicationData.Current.LocalFolder;
         }
 
         /// <summary>
@@ -621,15 +633,14 @@ namespace CameraStarterKit
         /// Applies the given orientation to a photo stream and saves it as a StorageFile
         /// </summary>
         /// <param name="stream">The photo stream</param>
+        /// <param name="file">The StorageFile in which the photo stream will be saved</param>
         /// <param name="photoOrientation">The orientation metadata to apply to the photo</param>
         /// <returns></returns>
-        private static async Task ReencodeAndSavePhotoAsync(IRandomAccessStream stream, PhotoOrientation photoOrientation)
+        private static async Task ReencodeAndSavePhotoAsync(IRandomAccessStream stream, StorageFile file, PhotoOrientation photoOrientation)
         {
             using (var inputStream = stream)
             {
                 var decoder = await BitmapDecoder.CreateAsync(inputStream);
-
-                var file = await KnownFolders.PicturesLibrary.CreateFileAsync("SimplePhoto.jpeg", CreationCollisionOption.GenerateUniqueName);
 
                 using (var outputStream = await file.OpenAsync(FileAccessMode.ReadWrite))
                 {

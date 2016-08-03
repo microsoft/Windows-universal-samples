@@ -18,7 +18,7 @@ The sample shows the following techniques:
 
 **Note** Not all of the title bar functionality is available in all builds. Functionality will arrive gradually as newer builds are released.
 
-To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 

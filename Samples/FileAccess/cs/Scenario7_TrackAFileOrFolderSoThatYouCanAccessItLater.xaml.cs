@@ -28,6 +28,8 @@ namespace SDKTemplate
     {
         MainPage rootPage;
 
+        const int FA_E_MAX_PERSISTED_ITEMS_REACHED = unchecked((int)0x80270220);
+
         public Scenario7()
         {
             this.InitializeComponent();
@@ -54,10 +56,18 @@ namespace SDKTemplate
                     rootPage.mruToken = StorageApplicationPermissions.MostRecentlyUsedList.Add(file, file.Name, visibility);
                     rootPage.NotifyUser(String.Format("The file '{0}' was added to the MRU list and a token was stored.", file.Name), NotifyType.StatusMessage);
                 }
-                else if (FALRadioButton.IsChecked.Value)
+                else
                 {
-                    rootPage.falToken = StorageApplicationPermissions.FutureAccessList.Add(file, file.Name);
-                    rootPage.NotifyUser(String.Format("The file '{0}' was added to the FAL list and a token was stored.", file.Name), NotifyType.StatusMessage);
+                    try
+                    {
+                        rootPage.falToken = StorageApplicationPermissions.FutureAccessList.Add(file, file.Name);
+                        rootPage.NotifyUser(String.Format("The file '{0}' was added to the FAL list and a token was stored.", file.Name), NotifyType.StatusMessage);
+                    }
+                    catch (Exception ex) when (ex.HResult == FA_E_MAX_PERSISTED_ITEMS_REACHED)
+                    {
+                        // A real program would call Remove() to create room in the FAL.
+                        rootPage.NotifyUser(String.Format("The file '{0}' was not added to the FAL list because the FAL list is full.", file.Name), NotifyType.ErrorMessage);
+                    }
                 }
             }
             else
@@ -68,101 +78,89 @@ namespace SDKTemplate
 
         private void ShowListButton_Click(object sender, RoutedEventArgs e)
         {
-            StorageFile file = rootPage.sampleFile;
-            if (file != null)
+            AccessListEntryView entries;
+            string listName;
+            if (MRURadioButton.IsChecked.Value)
             {
-                if (MRURadioButton.IsChecked.Value)
-                {
-                    AccessListEntryView entries = StorageApplicationPermissions.MostRecentlyUsedList.Entries;
-                    if (entries.Count > 0)
-                    {
-                        StringBuilder outputText = new StringBuilder("The MRU list contains the following item(s):");
-                        foreach (AccessListEntry entry in entries)
-                        {
-                            outputText.AppendLine();
-                            outputText.Append(entry.Metadata); // Application previously chose to store file.Name in this field
-                        }
-
-                        rootPage.NotifyUser(outputText.ToString(), NotifyType.StatusMessage);
-                    }
-                    else
-                    {
-                        rootPage.NotifyUser("The MRU list is empty, please select 'Most Recently Used' list and click 'Add to List' to add a file to the MRU list.", NotifyType.ErrorMessage);
-                    }
-                }
-                else if (FALRadioButton.IsChecked.Value)
-                {
-                    AccessListEntryView entries = StorageApplicationPermissions.FutureAccessList.Entries;
-                    if (entries.Count > 0)
-                    {
-                        StringBuilder outputText = new StringBuilder("The FAL list contains the following item(s):");
-                        foreach (AccessListEntry entry in entries)
-                        {
-                            outputText.AppendLine();
-                            outputText.Append(entry.Metadata); // Application previously chose to store file.Name in this field
-                        }
-
-                        rootPage.NotifyUser(outputText.ToString(), NotifyType.StatusMessage);
-                    }
-                    else
-                    {
-                        rootPage.NotifyUser("The FAL list is empty, please select 'Future Access List' list and click 'Add to List' to add a file to the FAL list.", NotifyType.ErrorMessage);
-                    }
-                }
+                listName = "MRU";
+                entries = StorageApplicationPermissions.MostRecentlyUsedList.Entries;
             }
             else
             {
-                rootPage.NotifyUserFileNotExist();
+                listName = "FAL";
+                entries = StorageApplicationPermissions.FutureAccessList.Entries;
+            }
+
+            if (entries.Count > 0)
+            {
+                StringBuilder outputText = new StringBuilder("The " + listName + " list contains the following item(s):");
+                foreach (AccessListEntry entry in entries)
+                {
+                    outputText.AppendLine();
+                    outputText.Append(entry.Metadata); // Application previously chose to store file.Name in this field
+                }
+
+                rootPage.NotifyUser(outputText.ToString(), NotifyType.StatusMessage);
+            }
+            else
+            {
+                rootPage.NotifyUser("The " + listName + " list is empty.", NotifyType.ErrorMessage);
             }
         }
 
         private async void OpenFromListButton_Click(object sender, RoutedEventArgs e)
         {
-            if (rootPage.sampleFile != null)
+            StorageFile file = null;
+
+            if (MRURadioButton.IsChecked.Value)
             {
-                try
+                if (rootPage.mruToken != null)
                 {
-                    if (MRURadioButton.IsChecked.Value)
+                    // When the MRU becomes full, older entries are automatically deleted, so check if the
+                    // token is still valid before using it.
+                    if (StorageApplicationPermissions.MostRecentlyUsedList.ContainsItem(rootPage.mruToken))
                     {
-                        if (rootPage.mruToken != null)
-                        {
-                            // Open the file via the token that was stored when adding this file into the MRU list
-                            StorageFile file = await StorageApplicationPermissions.MostRecentlyUsedList.GetFileAsync(rootPage.mruToken);
-
-                            // Read the file
-                            string fileContent = await FileIO.ReadTextAsync(file);
-                            rootPage.NotifyUser(String.Format("The file '{0}' was opened by a stored token from the MRU list, it contains the following text:{1}{2}", file.Name, Environment.NewLine, fileContent), NotifyType.StatusMessage);
-                        }
-                        else
-                        {
-                            rootPage.NotifyUser("The MRU list is empty, please select 'Most Recently Used' list and click 'Add to List' to add a file to the MRU list.", NotifyType.ErrorMessage);
-                        }
+                        // Open the file via the token that was stored when adding this file into the MRU list
+                        file = await StorageApplicationPermissions.MostRecentlyUsedList.GetFileAsync(rootPage.mruToken);
                     }
-                    else if (FALRadioButton.IsChecked.Value)
+                    else
                     {
-                        if (rootPage.falToken != null)
-                        {
-                            // Open the file via the token that was stored when adding this file into the FAL list
-                            StorageFile file = await StorageApplicationPermissions.FutureAccessList.GetFileAsync(rootPage.falToken);
-
-                            // Read the file
-                            string fileContent = await FileIO.ReadTextAsync(file);
-                            rootPage.NotifyUser(String.Format("The file '{0}' was opened by a stored token from the FAL list, it contains the following text:{1}{2}", file.Name, Environment.NewLine, fileContent), NotifyType.StatusMessage);
-                        }
-                        else
-                        {
-                            rootPage.NotifyUser("The FAL list is empty, please select 'Future Access List' list and click 'Add to List' to add a file to the FAL list.", NotifyType.ErrorMessage);
-                        }
+                        rootPage.NotifyUser("The token is no longer valid.", NotifyType.ErrorMessage);
                     }
                 }
-                catch (FileNotFoundException)
+                else
                 {
-                    rootPage.NotifyUserFileNotExist();
+                    rootPage.NotifyUser("This operation requires a token. Add file to the MRU list first.", NotifyType.ErrorMessage);
                 }
             }
             else
             {
-                rootPage.NotifyUserFileNotExist();
+                if (rootPage.falToken != null)
+                {
+                    // Open the file via the token that was stored when adding this file into the FAL list.
+                    // The token remains valid until we explicitly remove it.
+                    file = await StorageApplicationPermissions.FutureAccessList.GetFileAsync(rootPage.falToken);
+                }
+                else
+                {
+                    rootPage.NotifyUser("This operation requires a token. Add file to the FAL list first.", NotifyType.ErrorMessage);
+                }
+            }
+
+            if (file != null)
+            {
+                try
+                {
+                    // Read the file
+                    string fileContent = await FileIO.ReadTextAsync(file);
+                    rootPage.NotifyUser(String.Format("The file '{0}' was opened by a stored token. It contains the following text:{1}{2}", file.Name, Environment.NewLine, fileContent), NotifyType.StatusMessage);
+
+                }
+                catch (Exception ex)
+                {
+                    // I/O errors are reported as exceptions.
+                    rootPage.NotifyUser(String.Format("Error reading file opened from list: {0}", ex.Message), NotifyType.ErrorMessage);
+                }
             }
         }
     }

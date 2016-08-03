@@ -34,7 +34,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="AddressBox" Text="http://dev.windows.com" Margin="0,0,10,0" Grid.Column="0" KeyUp="Address_KeyUp"/>
+                <TextBox x:Name="AddressBox" Text="http://www.microsoft.com" Margin="0,0,10,0" Grid.Column="0" KeyUp="Address_KeyUp"/>
                 <Button x:Name="GoButton" Content="Go" Grid.Column="1" Click="{x:Bind GoButton_Click}"/>
             </Grid>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">

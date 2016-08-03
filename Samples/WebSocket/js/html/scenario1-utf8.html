@@ -1,0 +1,56 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario1-utf8.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div>
+        <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+        <div id="scenarioDescription">UTF-8 text messages</div>
+    </div>
+
+    <p>
+        This scenario uses a MessageWebSocket to send UTF-8 strings.
+        The sample server supports both plaintext WebSocket (ws://) and secure WebSocket (wss://) server endpoints.
+    </p>
+    <p>
+        <label>Server address:
+            <input type="text" id="serverAddressField" value="ws://localhost/WebSocketSample/EchoWebSocket.ashx" class="win-textbox" size="60" style="width: auto">
+        </label>
+        <br/>
+        <label><input type="checkbox" id="secureWebSocketCheckBox" class="win-checkbox" />Perform custom server certificate validation</label>
+    </p>
+    <p>
+        <button id="connectButton" class="win-button">Connect</button>
+        <button id="disconnectButton" class="win-button">Disconnect</button>
+    </p>
+    <p>
+        <label>
+            Enter text to send to the server:
+            <input type="text" id="inputField" value="Hello World" class="win-textbox">
+        </label>
+    </p>
+    <p>
+        <button id="sendButton" class="win-button">Send</button>
+    </p>
+    <p id="outputField">
+    </p>
+</body>
+
+</html>

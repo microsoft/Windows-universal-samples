@@ -12,16 +12,20 @@ Copyright (c) Microsoft Corporation. All rights reserved
 </head>
 
 <body class="win-type-body">
-    <div data-win-control="SdkSample.ScenarioInput">
+    <div>
         <p>Sometimes, webpage loaded inside the webview and vice versa needs to communicate or share some object with each other. To do this, you can implement a winrt object that implements IAgileObject and send it to the webview using AddWebAllowedObject
             method. A new metadata attribute AllowForWeb should be specified above the class which object will be projected. This provides a security option to filter context which can be exposed to the webpage loaded inside webview. </p>
-        <p>Under the Output heading below, the displayed HTML has been loaded into the WebView control. The Winrt object is a simple prime number caclulator. Enter a valid range below and then tap the &quot;Reload&quot; button. The webview page notifies
-            the app whenever it finds a new prime number in the range.</p>
+        <p>Under the Output heading below, the displayed HTML has been loaded into the WebView control. The Winrt object is a simple prime number calculator. Enter a valid range below and then tap the &quot;Reload&quot; button. The webview page notifies
+            the app whenever it finds a new prime number in the range.
+        The WinRT object will stop calculating when it reaches the end of the range or when the app sets the cancel property in the event handler.</p>
         <input type="number" id="startnumField" value="1" class="win-textbox">
         <input type="number" id="endnumField" value="100" class="win-textbox">
-        <button id="reloadButton" class="win-button">Reload</button>
+        <button id="reloadButton" class="win-button">Reload</button><br/>
+        <label for="cancelCheckbox">
+            <input type="checkbox" id="cancelCheckbox" class="win-checkbox"> Cancel after next prime is generated
+        </label>
     </div>
-    <div data-win-control="SdkSample.ScenarioOutput" id="outputContainer">
+    <div id="scenario10_output">
         <div id="scenario10_left">
             <textarea id="htmlString" readonly="readonly" class="win-textarea"></textarea>
         </div>

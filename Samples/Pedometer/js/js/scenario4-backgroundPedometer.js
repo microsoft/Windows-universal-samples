@@ -134,13 +134,11 @@
                 backgroundTask.addEventListener("completed", onBackgroundTaskCompleted, false);
 
                 // Even though the trigger is registered successfully, it might be blocked. Notify the user if that is the case.
-                if ((backgroundAccessStatus == BackgroundAccessStatus.denied) ||
-                    (backgroundAccessStatus == BackgroundAccessStatus.unspecified)) {
-                    WinJS.log && WinJS.log("Not able to run in background. Application must given permission to be added to lock screen.",
-                        "sample", "error");
-                }
-                else {
+                if ((backgroundAccessStatus == BackgroundAccessStatus.alwaysAllowed) ||
+                    (backgroundAccessStatus == BackgroundAccessStatus.allowedSubjectToSystemPolicy)) {
                     WinJS.log && WinJS.log("Pedometer background watcher registered.", "sample", "status");
+                } else {
+                    WinJS.log && WinJS.log("Background tasks may be disabled for this app", "sample", "error");
                 }
                 updateUI();
             });

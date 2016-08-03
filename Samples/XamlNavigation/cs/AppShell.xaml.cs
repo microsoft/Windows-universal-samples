@@ -105,8 +105,8 @@ namespace NavigationMenuSample
 
                 Thickness margin = NavMenuList.Margin;
                 NavMenuList.Margin = new Thickness(margin.Left, margin.Top + extraPadding, margin.Right, margin.Bottom);
-                margin = frame.Margin;
-                frame.Margin = new Thickness(margin.Left, margin.Top + extraPadding, margin.Right, margin.Bottom);
+                margin = AppFrame.Margin;
+                AppFrame.Margin = new Thickness(margin.Left, margin.Top + extraPadding, margin.Right, margin.Bottom);
                 margin = TogglePaneButton.Margin;
                 TogglePaneButton.Margin = new Thickness(margin.Left, margin.Top + extraPadding, margin.Right, margin.Bottom);
             }
@@ -155,7 +155,7 @@ namespace NavigationMenuSample
                 var control = FocusManager.FindNextFocusableElement(direction) as Control;
                 if (control != null)
                 {
-                    control.Focus(FocusState.Programmatic);
+                    control.Focus(FocusState.Keyboard);
                     e.Handled = true;
                 }
             }
@@ -197,10 +197,16 @@ namespace NavigationMenuSample
         /// <param name="listViewItem"></param>
         private void NavMenuList_ItemInvoked(object sender, ListViewItem listViewItem)
         {
+            foreach (var i in navlist)
+            {
+                i.IsSelected = false;
+            }
+
             var item = (NavMenuItem)((NavMenuListView)sender).ItemFromContainer(listViewItem);
 
             if (item != null)
             {
+                item.IsSelected = true;
                 if (item.DestPage != null &&
                     item.DestPage != this.AppFrame.CurrentSourcePageType)
                 {
@@ -232,6 +238,15 @@ namespace NavigationMenuSample
                     }
                 }
 
+                foreach (var i in navlist)
+                {
+                    i.IsSelected = false;
+                }
+                if (item != null)
+                {
+                    item.IsSelected = true;
+                }
+
                 var container = (ListViewItem)NavMenuList.ContainerFromItem(item);
 
                 // While updating the selection state of the item prevent it from taking keyboard focus.  If a
@@ -241,22 +256,6 @@ namespace NavigationMenuSample
                 NavMenuList.SetSelectedItem(container);
                 if (container != null) container.IsTabStop = true;
             }
-        }
-
-        private void OnNavigatedToPage(object sender, NavigationEventArgs e)
-        {
-            // After a successful navigation set keyboard focus to the loaded page
-            if (e.Content is Page && e.Content != null)
-            {
-                var control = (Page)e.Content;
-                control.Loaded += Page_Loaded;
-            }
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            ((Page)sender).Focus(FocusState.Programmatic);
-            ((Page)sender).Loaded -= Page_Loaded;
         }
 
         #endregion
@@ -291,6 +290,10 @@ namespace NavigationMenuSample
         private void RootSplitView_PaneClosed(SplitView sender, object args)
         {
             NavPaneDivider.Visibility = Visibility.Collapsed;
+
+            // Prevent focus from moving to elements when they're not visible on screen
+            FeedbackNavPaneButton.IsTabStop = false;
+            SettingsNavPaneButton.IsTabStop = false;
         }
 
         /// <summary>
@@ -314,6 +317,9 @@ namespace NavigationMenuSample
         {
             NavPaneDivider.Visibility = Visibility.Visible;
             this.CheckTogglePaneButtonSizeChanged();
+
+            FeedbackNavPaneButton.IsTabStop = true;
+            SettingsNavPaneButton.IsTabStop = true;
         }
 
         /// <summary>

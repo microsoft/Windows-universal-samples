@@ -13,6 +13,7 @@ using com.microsoft.Samples.SecureInterface;
 using SDKTemplate;
 using System;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Data.Xml.Dom;
@@ -56,7 +57,7 @@ namespace AllJoynConsumerExperiences
             private set
             {
                 m_authVisibility = value;
-                RaisePropertyChangedEventAsync("AuthenticationVisibility");
+                RaisePropertyChangedEventAsync();
             }
         }
 
@@ -69,7 +70,7 @@ namespace AllJoynConsumerExperiences
             private set
             {
                 m_consumerOptionsVisibility = value;
-                RaisePropertyChangedEventAsync("ConsumerOptionsVisibility");
+                RaisePropertyChangedEventAsync();
             }
         }
 
@@ -80,9 +81,8 @@ namespace AllJoynConsumerExperiences
             {
                 if (value != m_key)
                 {
-                    // Ignore hyphens in the entered key.
-                    m_key = value.Replace("-", string.Empty);
-                    RaisePropertyChangedEventAsync("EnteredKey");
+                    m_key = value;
+                    RaisePropertyChangedEventAsync();
                 }
             }
         }
@@ -100,7 +100,7 @@ namespace AllJoynConsumerExperiences
             set
             {
                 m_isUpperCaseEnabled = value;
-                RaisePropertyChangedEventAsync("IsUpperCaseEnabled");
+                RaisePropertyChangedEventAsync();
                 if (m_callSetProperty)
                 {
                     SetIsUpperCaseEnabledAsync(m_isUpperCaseEnabled);
@@ -160,15 +160,11 @@ namespace AllJoynConsumerExperiences
             }
         }
 
-        protected async void RaisePropertyChangedEventAsync(string name)
+        protected async void RaisePropertyChangedEventAsync([CallerMemberName] string name = "")
         {
             await m_dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                PropertyChangedEventHandler handler = PropertyChanged;
-                if (handler != null)
-                {
-                    handler(this, new PropertyChangedEventArgs(name));
-                }
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
             });
         }
 
@@ -179,7 +175,7 @@ namespace AllJoynConsumerExperiences
             m_busAttachment = new AllJoynBusAttachment();
             m_busAttachment.StateChanged += BusAttachment_StateChanged;
             m_busAttachment.AuthenticationMechanisms.Clear();
-            m_busAttachment.AuthenticationMechanisms.Add(AllJoynAuthenticationMechanism.EcdhePsk);
+            m_busAttachment.AuthenticationMechanisms.Add(AllJoynAuthenticationMechanism.EcdheSpeke);
             m_busAttachment.AuthenticationComplete += BusAttachment_AuthenticationComplete;
             m_busAttachment.CredentialsRequested += BusAttachment_CredentialsRequested;
 
@@ -197,7 +193,7 @@ namespace AllJoynConsumerExperiences
 
         private void Authenticate()
         {
-            if (String.IsNullOrWhiteSpace(m_key))
+            if (string.IsNullOrWhiteSpace(m_key))
             {
                 UpdateStatusAsync("Please enter a key.", NotifyType.ErrorMessage);
             }
@@ -215,7 +211,7 @@ namespace AllJoynConsumerExperiences
         {
             if (m_consumer != null)
             {
-                if (String.IsNullOrWhiteSpace(InputString1) || String.IsNullOrWhiteSpace(InputString2))
+                if (string.IsNullOrWhiteSpace(InputString1) || string.IsNullOrWhiteSpace(InputString2))
                 {
                     UpdateStatusAsync("Input strings cannot be empty.", NotifyType.ErrorMessage);
                 }
@@ -277,9 +273,9 @@ namespace AllJoynConsumerExperiences
             await m_authenticateClicked.Task;
             m_authenticateClicked = null;
 
-            if (args.Credentials.AuthenticationMechanism == AllJoynAuthenticationMechanism.EcdhePsk)
+            if (args.Credentials.AuthenticationMechanism == AllJoynAuthenticationMechanism.EcdheSpeke)
             {
-                if (!String.IsNullOrEmpty(m_key))
+                if (!string.IsNullOrEmpty(m_key))
                 {
                     args.Credentials.PasswordCredential.Password = m_key;
                 }

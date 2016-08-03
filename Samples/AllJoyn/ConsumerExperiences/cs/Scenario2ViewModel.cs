@@ -15,7 +15,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Devices.AllJoyn;
@@ -59,13 +61,12 @@ namespace AllJoynConsumerExperiences
         private bool? m_physicalDeviceIsChecked = null;
         private bool m_showOnboardeeSsidList = true;
         private bool m_showOnboarderSsidList = false;
-        private bool m_isAuthenticated = false;
-        private bool m_isCredentialsRequested = false;
         private AllJoynBusAttachment m_busAttachment = null;
         private OnboardingWatcher m_watcher = null;
         private OnboardingConsumer m_consumer = null;
         private OnboardingAuthenticationType m_selectedAuthType = OnboardingAuthenticationType.Any;
         private TaskCompletionSource<bool> m_authenticateClicked = null;
+        private int m_onboardSessionAlreadyJoined;
 
         public Scenario2ViewModel()
         {
@@ -180,7 +181,7 @@ namespace AllJoynConsumerExperiences
             private set
             {
                 m_passwordVisibility = value;
-                RaisePropertyChangedEventAsync("PasswordVisibility");
+                RaisePropertyChangedEventAsync();
             }
         }
 
@@ -207,7 +208,7 @@ namespace AllJoynConsumerExperiences
                             break;
                     }
                 }
-                RaisePropertyChangedEventAsync("OnboardeeSsidListVisibility");
+                RaisePropertyChangedEventAsync();
             }
         }
 
@@ -234,7 +235,7 @@ namespace AllJoynConsumerExperiences
                             break;
                     }
                 }
-                RaisePropertyChangedEventAsync("OnboarderSsidListVisibility");
+                RaisePropertyChangedEventAsync();
             }
         }
 
@@ -247,7 +248,7 @@ namespace AllJoynConsumerExperiences
             private set
             {
                 m_manualSsidTextBoxVisibility = value;
-                RaisePropertyChangedEventAsync("ManualSsidTextBoxVisibility");
+                RaisePropertyChangedEventAsync();
             }
         }
 
@@ -260,7 +261,7 @@ namespace AllJoynConsumerExperiences
             private set
             {
                 m_connectPanelVisibility = value;
-                RaisePropertyChangedEventAsync("ConnectPanelVisibility");
+                RaisePropertyChangedEventAsync();
             }
         }
 
@@ -273,7 +274,7 @@ namespace AllJoynConsumerExperiences
             private set
             {
                 m_onboardingConfigurationVisibility = value;
-                RaisePropertyChangedEventAsync("OnboardingConfigurationVisibility");
+                RaisePropertyChangedEventAsync();
             }
         }
 
@@ -286,7 +287,7 @@ namespace AllJoynConsumerExperiences
             private set
             {
                 m_scanPanelVisibility = value;
-                RaisePropertyChangedEventAsync("ScanPanelVisibility");
+                RaisePropertyChangedEventAsync();
             }
         }
 
@@ -299,7 +300,7 @@ namespace AllJoynConsumerExperiences
             private set
             {
                 m_wiFiAdapterListVisibility = value;
-                RaisePropertyChangedEventAsync("WiFiAdapterListVisibility");
+                RaisePropertyChangedEventAsync();
             }
         }
 
@@ -312,7 +313,7 @@ namespace AllJoynConsumerExperiences
             private set
             {
                 m_authenticationVisibility = value;
-                RaisePropertyChangedEventAsync("AuthenticationVisibility");
+                RaisePropertyChangedEventAsync();
             }
         }
 
@@ -391,7 +392,7 @@ namespace AllJoynConsumerExperiences
                 if (value != m_softAPPassword)
                 {
                     m_softAPPassword = value;
-                    RaisePropertyChangedEventAsync("SoftAPPassword");
+                    RaisePropertyChangedEventAsync();
                 }
             }
         }
@@ -407,7 +408,7 @@ namespace AllJoynConsumerExperiences
                 if (value != m_onboardingPassword)
                 {
                     m_onboardingPassword = value;
-                    RaisePropertyChangedEventAsync("OnboardingPassword");
+                    RaisePropertyChangedEventAsync();
                 }
             }
         }
@@ -434,9 +435,8 @@ namespace AllJoynConsumerExperiences
             {
                 if (value != m_key)
                 {
-                    // Ignore hyphens in the entered key.
-                    m_key = value.Replace("-", string.Empty);
-                    RaisePropertyChangedEventAsync("EnteredKey");
+                    m_key = value;
+                    RaisePropertyChangedEventAsync();
                 }
             }
         }
@@ -460,7 +460,7 @@ namespace AllJoynConsumerExperiences
                 if (value != m_selectedAuthType)
                 {
                     m_selectedAuthType = value;
-                    RaisePropertyChangedEventAsync("SelectedAuthType");
+                    RaisePropertyChangedEventAsync();
                 }
             }
         }
@@ -524,15 +524,11 @@ namespace AllJoynConsumerExperiences
             }
         }
 
-        protected async void RaisePropertyChangedEventAsync(string name)
+        protected async void RaisePropertyChangedEventAsync([CallerMemberName] string name = "")
         {
             await m_dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                PropertyChangedEventHandler handler = PropertyChanged;
-                if (handler != null)
-                {
-                    handler(this, new PropertyChangedEventArgs(name));
-                }
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
             });
         }
 
@@ -648,7 +644,7 @@ namespace AllJoynConsumerExperiences
                     }
                     else
                     {
-                        if (String.IsNullOrWhiteSpace(m_softAPPassword))
+                        if (string.IsNullOrWhiteSpace(m_softAPPassword))
                         {
                             UpdateStatusAsync("No password entered.", NotifyType.ErrorMessage);
                         }
@@ -681,10 +677,19 @@ namespace AllJoynConsumerExperiences
         {
             ScenarioCleanup();
 
+            // Allow re-joining of a new session
+            Interlocked.Exchange(ref m_onboardSessionAlreadyJoined, 0);
+
             m_busAttachment = new AllJoynBusAttachment();
             m_busAttachment.StateChanged += BusAttachment_StateChanged;
             m_busAttachment.AuthenticationMechanisms.Clear();
+
+            // EcdhePsk authentication is deprecated as of the AllJoyn 16.04 release.
+            // Newly added EcdheSpeke should be used instead. EcdhePsk authentication is
+            // added here to maintain compatibility with devices running older AllJoyn versions.
+            m_busAttachment.AuthenticationMechanisms.Add(AllJoynAuthenticationMechanism.EcdheNull);
             m_busAttachment.AuthenticationMechanisms.Add(AllJoynAuthenticationMechanism.EcdhePsk);
+            m_busAttachment.AuthenticationMechanisms.Add(AllJoynAuthenticationMechanism.EcdheSpeke);
             m_busAttachment.AuthenticationComplete += BusAttachment_AuthenticationComplete;
             m_busAttachment.CredentialsRequested += BusAttachment_CredentialsRequested;
             m_watcher = new OnboardingWatcher(m_busAttachment);
@@ -713,7 +718,6 @@ namespace AllJoynConsumerExperiences
                 UpdateStatusAsync("Authentication failed.", NotifyType.ErrorMessage);
             }
 
-            m_isAuthenticated = args.Succeeded;
             EnteredKey = "";
             AuthenticationVisibility = Visibility.Collapsed;
         }
@@ -721,9 +725,9 @@ namespace AllJoynConsumerExperiences
         private async void BusAttachment_CredentialsRequested(AllJoynBusAttachment sender, AllJoynCredentialsRequestedEventArgs args)
         {
             Windows.Foundation.Deferral credentialsDeferral = args.GetDeferral();
-            m_isCredentialsRequested = true;
 
-            if (args.Credentials.AuthenticationMechanism == AllJoynAuthenticationMechanism.EcdhePsk)
+            if ((args.Credentials.AuthenticationMechanism == AllJoynAuthenticationMechanism.EcdhePsk) ||
+                (args.Credentials.AuthenticationMechanism == AllJoynAuthenticationMechanism.EcdheSpeke))
             {
                 m_authenticateClicked = new TaskCompletionSource<bool>();
                 AuthenticationVisibility = Visibility.Visible;
@@ -732,7 +736,7 @@ namespace AllJoynConsumerExperiences
                 await m_authenticateClicked.Task;
                 m_authenticateClicked = null;
 
-                if (!String.IsNullOrEmpty(m_key))
+                if (!string.IsNullOrEmpty(m_key))
                 {
                     args.Credentials.PasswordCredential.Password = m_key;
                 }
@@ -740,6 +744,9 @@ namespace AllJoynConsumerExperiences
                 {
                     UpdateStatusAsync("Please enter a key.", NotifyType.ErrorMessage);
                 }
+            }
+            else if (args.Credentials.AuthenticationMechanism == AllJoynAuthenticationMechanism.EcdheNull)
+            {
             }
             else
             {
@@ -751,18 +758,25 @@ namespace AllJoynConsumerExperiences
 
         private async void Watcher_Added(OnboardingWatcher sender, AllJoynServiceInfo args)
         {
+            // This demo supports a single onboarding producer, if there are multiple onboarding producers found, then they are ignored.
+            // Another approach would be to create a list of all producers found and then allow the user to choose the one they want
+            bool bAlreadyJoined = (Interlocked.CompareExchange(ref m_onboardSessionAlreadyJoined, 1, 0) == 1);
+            if (bAlreadyJoined)
+            {
+                return;
+            }
+
             UpdateStatusAsync("Joining session...", NotifyType.StatusMessage);
+
             OnboardingJoinSessionResult joinSessionResult = await OnboardingConsumer.JoinSessionAsync(args, sender);
             if (joinSessionResult.Status == AllJoynStatus.Ok)
             {
+                UpdateStatusAsync("Session Joined.", NotifyType.ErrorMessage);
                 DisposeConsumer();
                 m_consumer = joinSessionResult.Consumer;
                 m_consumer.SessionLost += Consumer_SessionLost;
 
-                if (!m_isCredentialsRequested || m_isAuthenticated)
-                {
-                    GetOnboardeeNetworkListAsync();
-                }
+                GetOnboardeeNetworkListAsync();
             }
             else
             {
@@ -779,7 +793,7 @@ namespace AllJoynConsumerExperiences
 
         private void Authenticate()
         {
-            if (String.IsNullOrWhiteSpace(m_key))
+            if (string.IsNullOrWhiteSpace(m_key))
             {
                 UpdateStatusAsync("Please enter a key.", NotifyType.ErrorMessage);
             }
@@ -869,8 +883,8 @@ namespace AllJoynConsumerExperiences
             else
             {
                 UpdateStatusAsync("Attempting to configure onboardee...", NotifyType.StatusMessage);
-                // WiFi password must be converted to hex representation of the UTF-8 string.
-                OnboardingConfigureWiFiResult configureWifiResult = await m_consumer.ConfigureWiFiAsync(ssid, ConvertUtf8ToHex(password), authType);
+
+                OnboardingConfigureWiFiResult configureWifiResult = await m_consumer.ConfigureWiFiAsync(ssid, password, authType);
                 if (configureWifiResult.Status == AllJoynStatus.Ok)
                 {
                     UpdateStatusAsync("Onboardee sucessfully configured.", NotifyType.StatusMessage);
@@ -881,7 +895,7 @@ namespace AllJoynConsumerExperiences
                         // If the Onboardee does not connect to the desired AP concurrently, then there is no guaranteed way for the Onboarder application to find
                         // out if the connection attempt was successful or not. In the NotConcurrent connection attempt, if the Onboardee fails to connect to
                         // the desired AP, the Onboarder application will have to again start over with scanning and connecting to the Onboardee SoftAP.
-                        // For more information please visit https://allseenalliance.org/developers/learn/base-services/onboarding/interface
+                        // For more information please visit http://go.microsoft.com/fwlink/?LinkId=817239
                         m_consumer.Signals.ConnectionResultReceived += Signals_ConnectionResultReceived;
                     }
                     AttemptConnectionAsync();
@@ -909,18 +923,6 @@ namespace AllJoynConsumerExperiences
             else
             {
                 UpdateStatusAsync(string.Format("Connection attempt failed with result code: {0} and message: {1}.", ((ConnectionResultCode)args.Arg.Value1).ToString(), args.Arg.Value2), NotifyType.ErrorMessage);
-            }
-        }
-
-        private string ConvertUtf8ToHex(string inputString)
-        {
-            if (string.IsNullOrEmpty(inputString))
-            {
-                return string.Empty;
-            }
-            else
-            {
-                return BitConverter.ToString(Encoding.UTF8.GetBytes(inputString)).Replace("-", string.Empty);
             }
         }
 

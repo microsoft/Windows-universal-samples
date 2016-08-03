@@ -4,6 +4,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="using:NavigationMenuSample"
       xmlns:controls="using:NavigationMenuSample.Controls"
+      xmlns:triggers="using:NavigationMenuSample.Triggers"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -24,12 +25,32 @@
                     <ColumnDefinition Width="48" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
+                <Rectangle x:Name="SelectedPipe"
+                           Width="6"
+                           Height="24"
+                           Margin="-2,0,0,0"
+                           Fill="{ThemeResource SystemControlForegroundAccentBrush}"
+                           Visibility="{x:Bind SelectedVis, Mode=TwoWay}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"/>
                 <!-- Showing a ToolTip and the Label is redundant.  We put the ToolTip on the icon.
                      It appears when the user hovers over the icon, but not the label which provides
                      value when the SplitView is 'Compact' while reducing the likelihood of showing
                      redundant information when the label is shown.-->
                 <FontIcon x:Name="Glyph" FontSize="16" Glyph="{x:Bind SymbolAsChar}" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.ToolTip="{x:Bind Label}"/>
-                <TextBlock x:Name="Text" Grid.Column="1" Text="{x:Bind Label}" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="NoWrap"/>
+                <TextBlock x:Name="Text" Grid.Column="1" Text="{x:Bind Label}" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="NoWrap" VerticalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="NavMenuItem10ftTemplate" x:DataType="local:NavMenuItem">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <!-- Showing a ToolTip on Xbox is not desirable. The SelectedPipe is also deliberately omited. -->
+                <FontIcon x:Name="Glyph" FontSize="16" Glyph="{x:Bind SymbolAsChar}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="Text" Grid.Column="1" Text="{x:Bind Label}" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="NoWrap" Margin="0,0,16,0"/>
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -46,6 +67,8 @@
                         <Setter Target="RootSplitView.DisplayMode" Value="CompactInline"/>
                         <Setter Target="RootSplitView.IsPaneOpen" Value="True"/>
                         <Setter Target="NavPaneDivider.Visibility" Value="Visible"/>
+                        <Setter Target="FeedbackNavPaneButton.IsTabStop" Value="True"/>
+                        <Setter Target="SettingsNavPaneButton.IsTabStop" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -56,6 +79,8 @@
                         <Setter Target="RootSplitView.DisplayMode" Value="CompactOverlay"/>
                         <Setter Target="RootSplitView.IsPaneOpen" Value="False"/>
                         <Setter Target="NavPaneDivider.Visibility" Value="Collapsed"/>
+                        <Setter Target="FeedbackNavPaneButton.IsTabStop" Value="False"/>
+                        <Setter Target="SettingsNavPaneButton.IsTabStop" Value="False"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -65,20 +90,54 @@
                     <VisualState.Setters>
                         <Setter Target="RootSplitView.DisplayMode" Value="Overlay"/>
                         <Setter Target="RootSplitView.IsPaneOpen" Value="False"/>
+                        <Setter Target="FeedbackNavPaneButton.IsTabStop" Value="True"/>
+                        <Setter Target="SettingsNavPaneButton.IsTabStop" Value="True"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <triggers:IsTenFootTrigger/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RootSplitView.OpenPaneLength" Value="368"/>
+                        <Setter Target="RootSplitView.CompactPaneLength" Value="96"/>
+                        <Setter Target="PaneContentGrid.Margin" Value="0,0,0,27"/>
+                        <Setter Target="NavMenuList.Margin" Value="0,79,0,0"/>
+                        <Setter Target="frame.Margin" Value="0,27,48,27"/>
+                        <Setter Target="NavMenuList.ItemContainerStyle" Value="{StaticResource NavMenuItemContainer10ftStyle}"/>
+                        <Setter Target="NavMenuList.ItemTemplate" Value="{StaticResource NavMenuItem10ftTemplate}"/>
+                        <Setter Target="FeedbackNavPaneButton.Style" Value="{StaticResource SplitViewPaneButton10ftStyle}"/>
+                        <Setter Target="SettingsNavPaneButton.Style" Value="{StaticResource SplitViewPaneButton10ftStyle}"/>
+                        <Setter Target="TogglePaneButton.Style" Value="{StaticResource SplitViewTogglePaneButton10ftStyle}"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
+        <!-- Declared first for screen reader navigation order, ZIndex specified to have it rendered above everything else. -->
+        <ToggleButton x:Name="TogglePaneButton"
+                      Canvas.ZIndex="100"
+                      TabIndex="1"
+                      Style="{StaticResource SplitViewTogglePaneButtonStyle}"
+                      IsChecked="{Binding IsPaneOpen, ElementName=RootSplitView, Mode=TwoWay}"
+                      Unchecked="TogglePaneButton_Unchecked"
+                      Checked="TogglePaneButton_Checked"
+                      AutomationProperties.Name="Navigation"
+                      ToolTipService.ToolTip="Navigation"/>
+
         <!-- Top-level navigation menu + app content -->
         <SplitView x:Name="RootSplitView"
                    DisplayMode="Inline"
                    OpenPaneLength="320"
+                   PaneBackground="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                    PaneClosed="RootSplitView_PaneClosed"
+                   LightDismissOverlayMode="On"
                    IsTabStop="False">
 
             <SplitView.Pane>
-                <Grid>
+                <Grid x:Name="PaneContentGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
@@ -93,13 +152,13 @@
 
                     <!-- A custom ListView to display the items in the pane.  The automation Name is set in the ContainerContentChanging event. -->
                     <controls:NavMenuListView x:Name="NavMenuList"
-                                          Grid.ColumnSpan="3"
-                                          TabIndex="3"
-                                          Margin="0,52,0,0"
-                                          ContainerContentChanging="NavMenuItemContainerContentChanging"
-                                          ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
-                                          ItemTemplate="{StaticResource NavMenuItemTemplate}"
-                                          ItemInvoked="NavMenuList_ItemInvoked"/>
+                                              Grid.ColumnSpan="3"
+                                              TabIndex="3"
+                                              Margin="0,52,0,0"
+                                              ContainerContentChanging="NavMenuItemContainerContentChanging"
+                                              ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
+                                              ItemTemplate="{StaticResource NavMenuItemTemplate}"
+                                              ItemInvoked="NavMenuList_ItemInvoked"/>
                     <Rectangle x:Name="NavPaneDivider"
                                Grid.Row="1"
                                Grid.ColumnSpan="3"
@@ -123,33 +182,22 @@
                 </Grid>
             </SplitView.Pane>
 
-            <!-- OnNavigatingToPage we synchronize the selected item in the nav menu with the current page.
-                 OnNavigatedToPage we move keyboard focus to the first item on the page after it's loaded and update the Back button. -->
-            <Frame x:Name="frame"
+            <SplitView.Content>
+                <!-- OnNavigatingToPage we synchronize the selected item in the nav menu with the current page.-->
+                <Frame x:Name="frame"
                    Margin="0,4,0,0"
-                   Navigating="OnNavigatingToPage"
-                   Navigated="OnNavigatedToPage">
-                <Frame.ContentTransitions>
-                    <TransitionCollection>
-                        <NavigationThemeTransition>
-                            <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                <EntranceNavigationTransitionInfo/>
-                            </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                        </NavigationThemeTransition>
-                    </TransitionCollection>
-                </Frame.ContentTransitions>
-            </Frame>
+                   Navigating="OnNavigatingToPage">
+                    <Frame.ContentTransitions>
+                        <TransitionCollection>
+                            <NavigationThemeTransition>
+                                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                    <EntranceNavigationTransitionInfo/>
+                                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                            </NavigationThemeTransition>
+                        </TransitionCollection>
+                    </Frame.ContentTransitions>
+                </Frame>
+            </SplitView.Content>
         </SplitView>
-
-        <!-- Declared last to have it rendered above everything else, but it needs to be the first item in the tab sequence. -->
-        <ToggleButton x:Name="TogglePaneButton"
-                      TabIndex="1"
-                      Margin="0,4,0,0"
-                      Style="{StaticResource SplitViewTogglePaneButtonStyle}"
-                      IsChecked="{Binding IsPaneOpen, ElementName=RootSplitView, Mode=TwoWay}"
-                      Unchecked="TogglePaneButton_Unchecked"
-                      Checked="TogglePaneButton_Checked"
-                      AutomationProperties.Name="Menu"
-                      ToolTipService.ToolTip="Menu" />
     </Grid>
 </Page>

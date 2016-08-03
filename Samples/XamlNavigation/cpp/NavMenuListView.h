@@ -41,6 +41,7 @@ namespace NavigationMenuSample
             void OnLoaded(Object ^sender, RoutedEventArgs ^e);
             void OnPaneToggled();
             void IsOpenPanePropertyChangedCallback(DependencyObject^ sender, DependencyProperty^ args);
+            void DisplayModePropertyChangedCallback(DependencyObject^ sender, DependencyProperty^ args);
             void TryMoveFocus(FocusNavigationDirection direction);
         };
     }

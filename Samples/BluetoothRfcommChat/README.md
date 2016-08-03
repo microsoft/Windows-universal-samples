@@ -12,17 +12,30 @@ to communicate over sockets.
 
 **Note:** Two devices will be needed to run this sample.
 
-- **Chat Client**: Connects to an RFCOMM server running on another device and establishes a socket connection.
-  Demonstrates reading from and writing to the server.
-- **Foreground Chat Server**: Publish an RFCOMM server with a custom service.
-  When connected to by a client, establishes a socket connection and reads from and writes to the client.
-- **Background Chat Server**: Same as the Foreground Chat Server,
-  except that it initializes a Background task that runs only when a client device is connected.
-  The Background task also causes the host device to advertise support for the custom service in the SDP record until it is unregistered.
+##Chat Client
+Connects to an RFCOMM server running on another device and establishes a socket connection.
+Demonstrates reading from and writing to the server.
 
-**Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
+In order to use this scenario, you must have an Rfcomm server running on a remote device at the time of connection.
+Press the "Run" button, find the device in the list and select it.
+If the server has been found on the remote device,
+an Rfcomm socket will be established and you can chat with the remote device.
+
+Be sure to "Request Access" to the device if the remote device is likely to become paired.
+
+##Foreground Chat Server
+Publish an RFCOMM server with a custom service.
+When connected to by a client, establishes a socket connection to communicate with client.
+The server must be published when it is connected to for the client to find a valid service.
+
+##Background Chat Server
+Same as the Foreground Chat Server,
+except that it initializes a Background task that runs only when a client device is connected.
+The host device will advertise support for the custom service in the SDP record until the background task is unregistered.
+
+**Note:** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 

@@ -14,153 +14,160 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
-      <ScrollViewer>
-        <StackPanel Orientation="Vertical" Margin="10">
-            <TextBlock Text="Simple OneTime Bindings" Style="{StaticResource Section}"/>
-            <TextBlock Style="{StaticResource Note}"><Run>All of the following are using OneTime bindings so will not update based on model changes</Run></TextBlock>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical" Margin="10">
+                <TextBlock Text="Simple OneTime Bindings" Style="{StaticResource Section}"/>
+                <TextBlock Style="{StaticResource Note}"><Run>All of the following are using OneTime bindings so will not update based on model changes</Run></TextBlock>
 
-                <TextBlock Grid.Row="0" Text="String Field: "/>
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind CSharpModel.StringField, Mode=OneTime}"/>
-                <TextBlock Grid.Row="1" Text="Int Field: "/>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind CSharpModel.IntField, Mode=OneTime}" />
-                <TextBlock Grid.Row="2" Text="Dotted Property - Model.ManagerProp.Name: "/>
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind Model.ManagerProp.Name, Mode=OneTime}" />
-                <TextBlock Grid.Row="3" Text="DependencyProperty: "/>
-                <TextBlock Grid.Row="3"  Grid.Column="1" Text="{x:Bind DPOnPage, Mode=OneTime}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="4" Text="String Property: "/>
-                <TextBlock Grid.Row="4" Grid.Column="1" Text="{x:Bind Model.StringPropNoINPC, Mode=OneTime}" />
-                <TextBlock Grid.Row="5" Text="Int Property: "/>
-                <TextBlock Grid.Row="5" Grid.Column="1" Text="{x:Bind Model.IntPropNoINPC, Mode=OneTime}" />
-                <TextBlock Grid.Row="6" Text="String Property with INPC: "/>
-                <TextBlock Grid.Row="6" Grid.Column="1" Text="{x:Bind Model.StringPropWithINPC, Mode=OneTime}" />
-                <TextBlock Grid.Row="7" Text="Int Property with INPC: "/>
-                <TextBlock Grid.Row="7" Grid.Column="1" Text="{x:Bind Model.IntPropWithINPC, Mode=OneTime}" />
-                <TextBlock Grid.Row="8" Text="String Dependency Property: "/>
-                <TextBlock Grid.Row="8" Grid.Column="1" Text="{x:Bind Model.StringPropertyDP, Mode=OneTime}" />
-                <TextBlock Grid.Row="9" Text="Int DependencyProperty: "/>
-                <TextBlock Grid.Row="9" Grid.Column="1" Text="{x:Bind Model.IntPropertyDP, Mode=OneTime}" />
-            </Grid>
+                    <TextBlock Grid.Row="0" Text="String Field: "/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind CSharpModel.StringField, Mode=OneTime}"/>
+                    <TextBlock Grid.Row="1" Text="Int Field: "/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind CSharpModel.IntField, Mode=OneTime}" />
+                    <TextBlock Grid.Row="2" Text="Dotted Property - Model.ManagerProp.Name: "/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind Model.ManagerProp.Name, Mode=OneTime}" />
+                    <TextBlock Grid.Row="3" Text="DependencyProperty: "/>
+                    <TextBlock Grid.Row="3"  Grid.Column="1" Text="{x:Bind DPOnPage, Mode=OneTime}" />
 
-            <TextBlock Text="Simple OneWay Bindings" Style="{StaticResource Section}"/>
-            <TextBlock Style="{StaticResource Note}"><Run>Even though the following have OneWay bindings, they are bound to fields or properties that don't support change notifications</Run></TextBlock>
+                    <TextBlock Grid.Row="4" Text="String Property: "/>
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{x:Bind Model.StringPropNoINPC, Mode=OneTime}" />
+                    <TextBlock Grid.Row="5" Text="Int Property: "/>
+                    <TextBlock Grid.Row="5" Grid.Column="1" Text="{x:Bind Model.IntPropNoINPC, Mode=OneTime}" />
+                    <TextBlock Grid.Row="6" Text="String Property with INPC: "/>
+                    <TextBlock Grid.Row="6" Grid.Column="1" Text="{x:Bind Model.StringPropWithINPC, Mode=OneTime}" />
+                    <TextBlock Grid.Row="7" Text="Int Property with INPC: "/>
+                    <TextBlock Grid.Row="7" Grid.Column="1" Text="{x:Bind Model.IntPropWithINPC, Mode=OneTime}" />
+                    <TextBlock Grid.Row="8" Text="String Dependency Property: "/>
+                    <TextBlock Grid.Row="8" Grid.Column="1" Text="{x:Bind Model.StringPropertyDP, Mode=OneTime}" />
+                    <TextBlock Grid.Row="9" Text="Int DependencyProperty: "/>
+                    <TextBlock Grid.Row="9" Grid.Column="1" Text="{x:Bind Model.IntPropertyDP, Mode=OneTime}" />
+                </Grid>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+                <TextBlock Text="Simple OneWay Bindings" Style="{StaticResource Section}"/>
+                <TextBlock Style="{StaticResource Note}"><Run>Even though the following have OneWay bindings, they are bound to fields or properties that don't support change notifications</Run></TextBlock>
 
-                <TextBlock Grid.Row="0" Text="String Field: "/>
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind CSharpModel.StringField, Mode=OneWay}" />
-                <TextBlock Grid.Row="1" Text="Int Field: "/>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind CSharpModel.IntField, Mode=OneWay}" />
-                <TextBlock Grid.Row="2" Text="dotted path: "/>
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind Model.ManagerProp.Name, Mode=OneWay}" />
-                <TextBlock Grid.Row="3" Text="String Property without INPC: "/>
-                <TextBlock Grid.Row="3" Grid.Column="1" Text="{x:Bind Model.StringPropNoINPC, Mode=OneWay}" />
-                <TextBlock Grid.Row="4" Text="Int Property without INPC: "/>
-                <TextBlock Grid.Row="4" Grid.Column="1" Text="{x:Bind Model.IntPropNoINPC, Mode=OneWay}" />
-            </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-            <TextBlock Style="{StaticResource Note}"><Run>All of the following use OneWay bindings and are bound to model properties that support change notifications</Run></TextBlock>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="String Property with INPC: "/>
-                <TextBlock Grid.Row="0"  Grid.Column="1" Text="{x:Bind Model.StringPropWithINPC, Mode=OneWay}" />
-                <TextBlock Grid.Row="1" Text="Int Property with INPC: "/>
-                <TextBlock Grid.Row="1"  Grid.Column="1" Text="{x:Bind Model.IntPropWithINPC, Mode=OneWay}" />
-                <TextBlock Grid.Row="2" Text="String Dependency Property: "/>
-                <TextBlock Grid.Row="2"  Grid.Column="1" Text="{x:Bind Model.StringPropertyDP, Mode=OneWay}" />
-                <TextBlock Grid.Row="3" Text="Int Dependency Property: "/>
-                <TextBlock Grid.Row="3"  Grid.Column="1" Text="{x:Bind Model.IntPropertyDP, Mode=OneWay}" />
-            </Grid>
+                    <TextBlock Grid.Row="0" Text="String Field: "/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind CSharpModel.StringField, Mode=OneWay}" />
+                    <TextBlock Grid.Row="1" Text="Int Field: "/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind CSharpModel.IntField, Mode=OneWay}" />
+                    <TextBlock Grid.Row="2" Text="dotted path: "/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind Model.ManagerProp.Name, Mode=OneWay}" />
+                    <TextBlock Grid.Row="3" Text="String Property without INPC: "/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{x:Bind Model.StringPropNoINPC, Mode=OneWay}" />
+                    <TextBlock Grid.Row="4" Text="Int Property without INPC: "/>
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{x:Bind Model.IntPropNoINPC, Mode=OneWay}" />
+                </Grid>
 
-            <TextBlock Text="IndexPath bindings" Style="{StaticResource Section}"/>
-            <TextBlock Style="{StaticResource Note}"><Run>Bindings can be made to collections using property[index] syntax</Run></TextBlock>
-            <TextBlock Style="{StaticResource Note}"><Run>As these are OneTime bindings they will not update based on model changes</Run></TextBlock>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="Implicit OneTime - Model.Employees[0].Name: "/>
-                <TextBlock Grid.Row="0"  Grid.Column="1" Text="{x:Bind Model.Employees[0].Name}" />
-                <TextBlock Grid.Row="1" Text="Explicit OneTime - Model.Employees[0].Title: "/>
-                <TextBlock Grid.Row="1"  Grid.Column="1" Text="{x:Bind Model.Employees[0].Title, Mode=OneTime}"/>
-                <TextBlock Grid.Row="2" Text="Explicit OneTime - Model.ManagerProp.ReportsOC[0].Name: "/>
-                <TextBlock Grid.Row="2"  Grid.Column="1" Text="{x:Bind Model.ManagerProp.ReportsOC[0].Name, Mode=OneTime}"/>
-                <TextBlock Grid.Row="3" Text="Uses the implict ToString conversion - Model.Employees[0]: "/>
-                <TextBlock Grid.Row="3"  Grid.Column="1" Text="{x:Bind Model.Employees[0], Mode=OneTime}"/>
-            </Grid>
-            <TextBlock Style="{StaticResource Note}"><Run>The following are OneWay bindings, and ReportsOC will fire collection change notifications, so they should update on model changes</Run></TextBlock>
-            <Grid  >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="OneWay - Model.ManagerProp.ReportsOC[0].Title: "/>
-                <TextBlock Grid.Row="0"  Grid.Column="1" Text="{x:Bind Model.ManagerProp.ReportsOC[0].Title, Mode=OneWay}"/>
-                <TextBlock Grid.Row="1" Text="OneWay - Model.Employees[0].Name: "/>
-                <TextBlock Grid.Row="1"  Grid.Column="1" Text="{x:Bind Model.Employees[0].Name, Mode=OneWay}"/>
-                <TextBlock Grid.Row="2" Text="Uses the implicit ToString conversion - Model.ManagerProp.ReportsOC[0]: "/>
-                <TextBlock Grid.Row="2"  Grid.Column="1" Text="{x:Bind Model.ManagerProp.ReportsOC[0], Mode=OneWay}"/>
-            </Grid>
+                <TextBlock Style="{StaticResource Note}"><Run>All of the following use OneWay bindings and are bound to model properties that support change notifications</Run></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="String Property with INPC: "/>
+                    <TextBlock Grid.Row="0"  Grid.Column="1" Text="{x:Bind Model.StringPropWithINPC, Mode=OneWay}" />
+                    <TextBlock Grid.Row="1" Text="Int Property with INPC: "/>
+                    <TextBlock Grid.Row="1"  Grid.Column="1" Text="{x:Bind Model.IntPropWithINPC, Mode=OneWay}" />
+                    <TextBlock Grid.Row="2" Text="String Dependency Property: "/>
+                    <TextBlock Grid.Row="2"  Grid.Column="1" Text="{x:Bind Model.StringPropertyDP, Mode=OneWay}" />
+                    <TextBlock Grid.Row="3" Text="Int Dependency Property: "/>
+                    <TextBlock Grid.Row="3"  Grid.Column="1" Text="{x:Bind Model.IntPropertyDP, Mode=OneWay}" />
+                </Grid>
 
-        </StackPanel>
-    </ScrollViewer>
+                <TextBlock Text="Indexer bindings" Style="{StaticResource Section}"/>
+                <TextBlock Style="{StaticResource Note}"><Run>Bindings can be made to collections using property[index] syntax</Run></TextBlock>
+                <TextBlock Style="{StaticResource Note}"><Run>As these are OneTime bindings they will not update based on model changes</Run></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Implicit OneTime - Model.Employees[0].Name: "/>
+                    <TextBlock Grid.Row="0"  Grid.Column="1" Text="{x:Bind Model.Employees[0].Name}" />
+                    <TextBlock Grid.Row="1" Text="Explicit OneTime - Model.Employees[0].Title: "/>
+                    <TextBlock Grid.Row="1"  Grid.Column="1" Text="{x:Bind Model.Employees[0].Title, Mode=OneTime}"/>
+                    <TextBlock Grid.Row="2" Text="Explicit OneTime - Model.ManagerProp.ReportsOC[0].Name: "/>
+                    <TextBlock Grid.Row="2"  Grid.Column="1" Text="{x:Bind Model.ManagerProp.ReportsOC[0].Name, Mode=OneTime}"/>
+                    <TextBlock Grid.Row="3" Text="Uses the implict ToString conversion - Model.Employees[0]: "/>
+                    <TextBlock Grid.Row="3"  Grid.Column="1" Text="{x:Bind Model.Employees[0], Mode=OneTime}"/>
+
+                    <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource Note}"><Run>Dictionaries/Maps can be indexed using a string. Note the string needs to be quoted.</Run></TextBlock>
+
+                    <TextBlock Grid.Row="5" Text="Explicit OneTime - Model.ManagerProp.ReportsDict['Brian0'].FullName: "/>
+                    <TextBlock Grid.Row="5"  Grid.Column="1" Text="{x:Bind Model.ManagerProp.ReportsDict['Brian0'].FullName(), Mode=OneTime}"/>
+                </Grid>
+                <TextBlock Style="{StaticResource Note}"><Run>The following are OneWay bindings, and ReportsOC will fire collection change notifications, so they should update on model changes</Run></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="OneWay - Model.ManagerProp.ReportsOC[0].Title: "/>
+                    <TextBlock Grid.Row="0"  Grid.Column="1" Text="{x:Bind Model.ManagerProp.ReportsOC[0].Title, Mode=OneWay}"/>
+                    <TextBlock Grid.Row="1" Text="OneWay - Model.Employees[0].Name: "/>
+                    <TextBlock Grid.Row="1"  Grid.Column="1" Text="{x:Bind Model.Employees[0].Name, Mode=OneWay}"/>
+                    <TextBlock Grid.Row="2" Text="Uses the implicit ToString conversion - Model.ManagerProp.ReportsOC[0]: "/>
+                    <TextBlock Grid.Row="2"  Grid.Column="1" Text="{x:Bind Model.ManagerProp.ReportsOC[0], Mode=OneWay}"/>
+                </Grid>
+
+            </StackPanel>
+        </ScrollViewer>
         <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="1">
             <Button Click="UpdateValuesClick" >Update Model Values</Button>
             <Button Click="ResetValuesClick" >Reset Model Values</Button>
-            <!--<Button Click="{x:Bind Bindings.Update}">Force Bindings.Update()</Button>--> 
+            <!--<Button Click="{x:Bind Bindings.Update}">Force Bindings.Update()</Button>-->
         </StackPanel>
     </Grid>
-    
-   
+
+
 </Page>
