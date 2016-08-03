@@ -78,8 +78,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Bound to Grid1.Children[5].Visibility: "/>
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind Path=Grid1.Children[5].Visibility, Mode=OneWay}" />
+                    <TextBlock Grid.Row="0" Text="Bound to Grid1.Children[5].(TextBlock.Text): "/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind Path=Grid1.Children[5].(TextBlock.Text), Mode=OneTime}" />
 
                     <TextBlock Grid.Row="1" Text="LocalTextBox - source of data for other bindings:"/>
                     <TextBox Grid.Row="1" Grid.Column="1" Text="Hello World" x:Name="LocalTextBox" Width="250" />
