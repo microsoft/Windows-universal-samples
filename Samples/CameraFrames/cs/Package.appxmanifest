@@ -8,12 +8,12 @@
   <Identity Name="Microsoft.SDKSamples.CameraFrames.CS" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.0"/>
   <mp:PhoneIdentity PhoneProductId="2344b9de-5071-42a6-8873-7fdeb38d53dd" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
   <Properties>
-    <DisplayName>Camera Frame Access C# Sample</DisplayName>
+    <DisplayName>Camera Frames C# Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14332.0" MaxVersionTested="10.0.14393.0"/>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0"/>
   </Dependencies>
   <Resources>
     <Resource Language="x-generate"/>
@@ -37,7 +37,7 @@
     </Application>
   </Applications>
   <Capabilities>
-    <DeviceCapability Name="webcam"/>
     <DeviceCapability Name="microphone"/>
+    <DeviceCapability Name="webcam"/>
   </Capabilities>
 </Package>

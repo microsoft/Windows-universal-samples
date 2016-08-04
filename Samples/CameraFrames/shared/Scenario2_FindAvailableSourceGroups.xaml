@@ -19,6 +19,11 @@
     mc:Ignorable="d">
 
     <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,20,12,12">
+        <ScrollViewer.Resources>
+            <DataTemplate x:Key="DisplayNameTemplate">
+                <TextBlock Text="{Binding Path=DisplayName}" />
+            </DataTemplate>
+        </ScrollViewer.Resources>
         <StackPanel>
             <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
             <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
@@ -51,9 +56,9 @@
                 <TextBlock Grid.Row="0" Text="Source Group:"/>
                 <TextBlock Grid.Row="1" Text="Frame Source:"/>
                 <TextBlock Grid.Row="2" Text="Media Format:"/>
-                <ComboBox Name="GroupComboBox" Grid.Row="0" SelectionChanged="GroupComboBox_SelectionChanged" PlaceholderText="Select ..."/>
-                <ComboBox Name="SourceComboBox" Grid.Row="1" SelectionChanged="SourceComboBox_SelectionChanged" PlaceholderText="Select ..."/>
-                <ComboBox Name="FormatComboBox" Grid.Row="2" SelectionChanged="FormatComboBox_SelectionChanged" PlaceholderText="Default format"/>
+                <ComboBox Name="GroupComboBox" Grid.Row="0" SelectionChanged="GroupComboBox_SelectionChanged" PlaceholderText="Select ..." ItemTemplate="{StaticResource DisplayNameTemplate}"/>
+                <ComboBox Name="SourceComboBox" Grid.Row="1" SelectionChanged="SourceComboBox_SelectionChanged" PlaceholderText="Select ..." ItemTemplate="{StaticResource DisplayNameTemplate}"/>
+                <ComboBox Name="FormatComboBox" Grid.Row="2" SelectionChanged="FormatComboBox_SelectionChanged" PlaceholderText="Default format" ItemTemplate="{StaticResource DisplayNameTemplate}"/>
             </Grid>
             <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,0">
                 <Button Content="Start" Name="StartButton" IsEnabled="False" Click="StartButton_Click"/>

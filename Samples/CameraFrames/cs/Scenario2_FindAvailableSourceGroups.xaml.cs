@@ -54,7 +54,7 @@ namespace SDKTemplate
             DisposeMediaCapture();
         }
 
-        private async Task UpdateButtonState()
+        private async Task UpdateButtonStateAsync()
         {
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
@@ -136,14 +136,13 @@ namespace SDKTemplate
             if (_reader != null && !_streaming)
             {
                 MediaFrameReaderStartStatus result = await _reader.StartAsync();
+                _logger.Log($"Start reader with result: {result}");
 
                 if (result == MediaFrameReaderStartStatus.Success)
                 {
                     _streaming = true;
-                    await UpdateButtonState();
+                    await UpdateButtonStateAsync();
                 }
-
-                _logger.Log($"Start reader with result: {result}");
             }
         }
 
@@ -199,20 +198,30 @@ namespace SDKTemplate
             var groupModel = GroupComboBox.SelectedItem as FrameSourceGroupModel;
             if (_mediaCapture == null && groupModel != null)
             {
+                // Create a new media capture object.
                 _mediaCapture = new MediaCapture();
+
                 var settings = new MediaCaptureInitializationSettings()
                 {
+                    // Select the source we will be reading from.
                     SourceGroup = groupModel.SourceGroup,
 
-                    // Only capture video. Audio device will be not be initialized.
-                    StreamingCaptureMode = StreamingCaptureMode.Video,
+                    // This media capture has exclusive control of the source.
+                    SharingMode = MediaCaptureSharingMode.ExclusiveControl,
 
-                    // Video frames will always contain CPU SoftwareBitmaps instead of producing GPU D3DSurfaces.
-                    MemoryPreference = MediaCaptureMemoryPreference.Cpu
+                    // Set to CPU to ensure frames always contain CPU SoftwareBitmap images,
+                    // instead of preferring GPU D3DSurface images.
+                    MemoryPreference = MediaCaptureMemoryPreference.Cpu,
+
+                    // Capture only video. Audio device will not be initialized.
+                    StreamingCaptureMode = StreamingCaptureMode.Video,
                 };
 
                 try
                 {
+                    // Initialize MediaCapture with the specified group.
+                    // This can raise an exception if the source no longer exists,
+                    // or if the source could not be initialized.
                     await _mediaCapture.InitializeAsync(settings);
                     _logger.Log($"Successfully initialized MediaCapture for {groupModel.DisplayName}");
                 }
@@ -260,7 +269,7 @@ namespace SDKTemplate
                 _logger.Log("Reader stopped.");
             }
 
-            await UpdateButtonState();
+            await UpdateButtonStateAsync();
         }
 
         /// <summary>
@@ -280,9 +289,8 @@ namespace SDKTemplate
         }
 
         /// <summary>
-        /// Handles the frame arrived event by converting the frame to a dislayable
+        /// Handles the frame arrived event by converting the frame to a displayable
         /// format and rendering it to the screen.
-        /// Bound to the click of the Start button.
         /// </summary>
         private void Reader_FrameArrived(MediaFrameReader sender, MediaFrameArrivedEventArgs args)
         {

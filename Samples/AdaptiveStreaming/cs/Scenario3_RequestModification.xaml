@@ -44,7 +44,7 @@
                 <ComboBox x:Name="SelectedContent" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <StackPanel Margin="5,5">
+                <StackPanel x:Name="AzureAuthorizationMethodPanel" Margin="5,5">
                     <RadioButton x:Name="RadioButtonNone" GroupName="AzureMethod" Content="None" Tag="None" Click="AzureMethodSelected_Click" />
                     <RadioButton x:Name="RadioButtonAuthorizationHeader" GroupName="AzureMethod" Content="Authorization Header" Tag="AuthorizationHeader" Click="AzureMethodSelected_Click" IsChecked="True" />
                     <RadioButton x:Name="RadioButtonUrlQueryParameter" GroupName="AzureMethod" Content="Url Query Parameter" Tag="UrlQueryParameter" Click="AzureMethodSelected_Click" />

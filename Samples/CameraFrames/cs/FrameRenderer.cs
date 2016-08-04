@@ -103,8 +103,7 @@ namespace SDKTemplate
                     }
                     else if (inputBitmap.BitmapPixelFormat == BitmapPixelFormat.Gray16)
                     {
-                        string subtype = inputFrame.VideoFormat.MediaFrameFormat.Subtype;
-                        if (string.Equals(subtype, "D16", StringComparison.OrdinalIgnoreCase))
+                        if (inputFrame.FrameReference.SourceKind == MediaFrameSourceKind.Depth)
                         {
                             // Use a special pseudo color to render 16 bits depth frame.
                             result = TransformBitmap(inputBitmap, PseudoColorHelper.PseudoColorForDepth);

@@ -165,11 +165,11 @@ namespace BackgroundMediaPlayback
             // Create menu and add commands
             var popupMenu = new PopupMenu();
 
-            popupMenu.Commands.Add(new UICommand("4.0x", command => Player.PlaybackRate = 4.0));
-            popupMenu.Commands.Add(new UICommand("2.0x", command => Player.PlaybackRate = 2.0));
-            popupMenu.Commands.Add(new UICommand("1.5x", command => Player.PlaybackRate = 1.5));
-            popupMenu.Commands.Add(new UICommand("1.0x", command => Player.PlaybackRate = 1.0));
-            popupMenu.Commands.Add(new UICommand("0.5x", command => Player.PlaybackRate = 0.5));
+            popupMenu.Commands.Add(new UICommand("4.0x", command => Player.PlaybackSession.PlaybackRate = 4.0));
+            popupMenu.Commands.Add(new UICommand("2.0x", command => Player.PlaybackSession.PlaybackRate = 2.0));
+            popupMenu.Commands.Add(new UICommand("1.5x", command => Player.PlaybackSession.PlaybackRate = 1.5));
+            popupMenu.Commands.Add(new UICommand("1.0x", command => Player.PlaybackSession.PlaybackRate = 1.0));
+            popupMenu.Commands.Add(new UICommand("0.5x", command => Player.PlaybackSession.PlaybackRate = 0.5));
 
             // Get button transform and then offset it by half the button
             // width to center. This will show the popup just above the button.
@@ -189,7 +189,7 @@ namespace BackgroundMediaPlayback
 
         private void UpdatePlaybackSpeed()
         {
-            speedButton.Content = String.Format("{0:0.0}x", Player.PlaybackRate);
+            speedButton.Content = String.Format("{0:0.0}x", Player.PlaybackSession.PlaybackRate);
         }
     }
 }
