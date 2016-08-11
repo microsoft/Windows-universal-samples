@@ -15,6 +15,8 @@
 
 namespace SDKTemplate
 {
+    partial ref class ItemDetails;
+
     public value struct Scenario
     {
         Platform::String^ Title;
@@ -44,6 +46,20 @@ namespace SDKTemplate
         static Platform::Array<Scenario>^ scenariosInner;
     };
 
-    Concurrency::task<void> ConfigureSimulatorAsync(Platform::String^ filename);
-    int64_t DaysUntil(Windows::Foundation::DateTime endDate);
+    namespace Utils
+    {
+        int64_t DaysUntil(Windows::Foundation::DateTime endDate);
+
+        Platform::Collections::Vector<ItemDetails^>^
+            CreateProductListFromQueryResult(Windows::Services::Store::StoreProductQueryResult^ addOns, Platform::String^ description);
+
+        void ReportExtendedError(Windows::Foundation::HResult extendedError);
+    };
+
+    // Helper functions for binding.
+    public ref class BindingUtils sealed
+    {
+    public:
+        static bool IsNonNull(Platform::Object^ o);
+    };
 }

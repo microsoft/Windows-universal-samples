@@ -52,7 +52,7 @@ namespace SDKTemplate
             inkToolbar.TargetInkCanvas = inkCanvas2;
         }
 
-        private void OnSizeChanged()
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             SetCanvasSize();
         }

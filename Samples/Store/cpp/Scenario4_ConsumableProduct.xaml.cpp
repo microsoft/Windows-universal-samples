@@ -15,123 +15,156 @@
 using namespace SDKTemplate;
 
 using namespace Concurrency;
-using namespace Windows::ApplicationModel::Store;
-using namespace Windows::Foundation;
+using namespace Platform;
+using namespace Platform::Collections;
+using namespace Windows::Foundation::Collections;
+using namespace Windows::Services::Store;
+using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Navigation;
 
 Scenario4_ConsumableProduct::Scenario4_ConsumableProduct()
 {
     InitializeComponent();
+
+    storeContext = StoreContext::GetDefault();
 }
 
-/// <summary>
-/// Invoked when this page is about to be displayed in a Frame.
-/// </summary>
-/// <param name="e">Event data that describes how this page was reached.  The Parameter
-/// property is typically used to configure the page.</param>
-void Scenario4_ConsumableProduct::OnNavigatedTo(NavigationEventArgs^ e)
+
+void Scenario4_ConsumableProduct::GetManagedConsumablesButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
-    ConfigureSimulatorAsync("in-app-purchase-consumables.xml").then([]()
+    auto filterList = ref new Vector<String^>({ "Consumable" });
+
+    // Get list of Add Ons this app can sell, filtering for the types we know about.
+    create_task(storeContext->GetAssociatedStoreProductsAsync(filterList)).then([this](StoreProductQueryResult^ addOns)
     {
-        return create_task(CurrentAppSimulator::LoadListingInformationAsync());
-    }).then([this](task<ListingInformation^> currentTask)
+        ProductsListView->ItemsSource = Utils::CreateProductListFromQueryResult(addOns, "Consumable Add-Ons");
+    }, task_continuation_context::get_current_winrt_context());
+}
+
+void Scenario4_ConsumableProduct::PurchaseAddOnButton_Click(Object^ sender, RoutedEventArgs^ e)
+{
+    auto item = safe_cast<ItemDetails^>(ProductsListView->SelectedItem);
+
+    create_task(storeContext->RequestPurchaseAsync(item->StoreId)).then([this, item](StorePurchaseResult^ result)
     {
-        try
+        if (result->ExtendedError.Value != S_OK)
         {
-            ListingInformation^ listing = currentTask.get();
-            auto product1 = listing->ProductListings->Lookup("product1");
-            Product1Name->Text = product1->Name;
-            Product1Price->Text = product1->FormattedPrice;
-            rootPage->NotifyUser("", NotifyType::StatusMessage);
+            Utils::ReportExtendedError(result->ExtendedError);
+            return;
         }
-        catch (Platform::Exception^ exception)
+
+        switch (result->Status)
         {
-            rootPage->NotifyUser("LoadListingInformationAsync API call failed", NotifyType::ErrorMessage);
+        case StorePurchaseStatus::AlreadyPurchased: // should never get this for a managed consumable since they are stackable
+            rootPage->NotifyUser("You already bought this consumable.", NotifyType::ErrorMessage);
+            break;
+
+        case StorePurchaseStatus::Succeeded:
+            rootPage->NotifyUser("You bought " + item->Title + ".", NotifyType::StatusMessage);
+            break;
+
+        case StorePurchaseStatus::NotPurchased:
+            rootPage->NotifyUser("Product was not purchased, it may have been canceled.", NotifyType::ErrorMessage);
+            break;
+
+        case StorePurchaseStatus::NetworkError:
+            rootPage->NotifyUser("Product was not purchased due to a network error.", NotifyType::ErrorMessage);
+            break;
+
+        case StorePurchaseStatus::ServerError:
+            rootPage->NotifyUser("Product was not purchased due to a server error.", NotifyType::ErrorMessage);
+            break;
+
+        default:
+            rootPage->NotifyUser("Product was not purchased due to an unknown error.", NotifyType::ErrorMessage);
+            break;
         }
-    });
+    }, task_continuation_context::get_current_winrt_context());
 }
 
-void Scenario4_ConsumableProduct::BuyAndFulfillProduct1()
+void Scenario4_ConsumableProduct::GetConsumableBalanceButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
-    rootPage->NotifyUser("Buying Product 1...", NotifyType::StatusMessage);
-    create_task(CurrentAppSimulator::RequestProductPurchaseAsync("product1")).then([this](task<PurchaseResults^> currentTask)
+    auto item = safe_cast<ItemDetails^>(ProductsListView->SelectedItem);
+
+    create_task(storeContext->GetConsumableBalanceRemainingAsync(item->StoreId)).then([this](StoreConsumableResult^ result)
     {
-        try
+        if (result->ExtendedError.Value != S_OK)
         {
-            PurchaseResults^ results = currentTask.get();
-            switch (results->Status)
-            {
-            case ProductPurchaseStatus::Succeeded:
-                GrantFeatureLocally(results->TransactionId);
-                FulfillProduct1("product1", results->TransactionId);
-                break;
-            case ProductPurchaseStatus::NotFulfilled:
-                // The purchase failed because we haven't confirmed fulfillment of a previous purchase.
-                // Fulfill it now.
-                if (!IsLocallyFulfilled(results->TransactionId))
-                {
-                    GrantFeatureLocally(results->TransactionId);
-                }
-                FulfillProduct1("product1", results->TransactionId);
-                break;
-            case ProductPurchaseStatus::NotPurchased:
-                rootPage->NotifyUser("Product 1 was not purchased.", NotifyType::StatusMessage);
-                break;
-            }
+            Utils::ReportExtendedError(result->ExtendedError);
+            return;
         }
-        catch (Platform::Exception^ exception)
+
+        switch (result->Status)
         {
-            rootPage->NotifyUser("Unable to buy Product 1.", NotifyType::ErrorMessage);
+        case StoreConsumableStatus::InsufficentQuantity: // should never get this...
+            rootPage->NotifyUser("Insufficient Quantity! Balance Remaining: " + result->BalanceRemaining, NotifyType::ErrorMessage);
+            break;
+
+        case StoreConsumableStatus::Succeeded:
+            rootPage->NotifyUser("Balance Remaining: " + result->BalanceRemaining, NotifyType::StatusMessage);
+            break;
+
+        case StoreConsumableStatus::NetworkError:
+            rootPage->NotifyUser("Network error retrieving consumable balance.", NotifyType::ErrorMessage);
+            break;
+
+        case StoreConsumableStatus::ServerError:
+            rootPage->NotifyUser("Server error retrieving consumable balance.", NotifyType::ErrorMessage);
+            break;
+
+        default:
+            rootPage->NotifyUser("Unknown error retrieving consumable balance.", NotifyType::ErrorMessage);
+            break;
         }
-    });
+    }, task_continuation_context::get_current_winrt_context());
 }
 
-void Scenario4_ConsumableProduct::FulfillProduct1(Platform::String^ productId, Platform::Guid transactionId)
+void Scenario4_ConsumableProduct::FulfillConsumableButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
-    create_task(CurrentAppSimulator::ReportConsumableFulfillmentAsync(productId, transactionId)).then([this](task<FulfillmentResult> currentTask)
+    auto item = safe_cast<ItemDetails^>(ProductsListView->SelectedItem);
+
+    unsigned int quantity = _wtoi(safe_cast<String^>(QuantityComboBox->SelectedValue)->Data());
+
+    // This can be used to ensure this request is never double fulfilled. The server will
+    // only accept one report for this specific GUID.
+    GUID guid;
+    if (FAILED(CoCreateGuid(&guid)))
     {
-        try
+        rootPage->NotifyUser("Failed to create a tracking GUID.", NotifyType::ErrorMessage);
+        return;
+    }
+
+    Guid trackingId(guid);
+
+    create_task(storeContext->ReportConsumableFulfillmentAsync(item->StoreId, quantity, trackingId)).then([this](StoreConsumableResult^ result)
+    {
+        if (result->ExtendedError.Value != S_OK)
         {
-            FulfillmentResult result = currentTask.get();
-            switch (result)
-            {
-            case FulfillmentResult::Succeeded:
-                rootPage->NotifyUser("You bought and fulfilled product 1.", NotifyType::StatusMessage);
-                break;
-            case FulfillmentResult::NothingToFulfill:
-                rootPage->NotifyUser("There is no purchased product 1 to fulfill.", NotifyType::StatusMessage);
-                break;
-            case FulfillmentResult::PurchasePending:
-                rootPage->NotifyUser("You bought product 1. The purchase is pending so we cannot fulfill the product.", NotifyType::StatusMessage);
-                break;
-            case FulfillmentResult::PurchaseReverted:
-                rootPage->NotifyUser("You bought product 1. But your purchase has been reverted.", NotifyType::StatusMessage);
-                // Since the user's purchase was revoked, they got their money back.
-                // You may want to revoke the user's access to the consumable content that was granted.
-                break;
-            case FulfillmentResult::ServerError:
-                rootPage->NotifyUser("You bought product 1. There was an error when fulfilling.", NotifyType::StatusMessage);
-                break;
-            }
+            Utils::ReportExtendedError(result->ExtendedError);
+            return;
         }
-        catch (Platform::Exception^ exception)
+
+        switch (result->Status)
         {
-            rootPage->NotifyUser("You bought Product 1. There was an error when fulfilling.", NotifyType::ErrorMessage);
+        case StoreConsumableStatus::InsufficentQuantity:
+            rootPage->NotifyUser("Insufficient Quantity! Balance Remaining: " + result->BalanceRemaining, NotifyType::ErrorMessage);
+            break;
+
+        case StoreConsumableStatus::Succeeded:
+            rootPage->NotifyUser("Successful fulfillment! Balance Remaining: " + result->BalanceRemaining, NotifyType::StatusMessage);
+            break;
+
+        case StoreConsumableStatus::NetworkError:
+            rootPage->NotifyUser("Network error fulfilling consumable.", NotifyType::ErrorMessage);
+            break;
+
+        case StoreConsumableStatus::ServerError:
+            rootPage->NotifyUser("Server error fulfilling consumable.", NotifyType::ErrorMessage);
+            break;
+
+        default:
+            rootPage->NotifyUser("Unknown error fulfilling consumable.", NotifyType::ErrorMessage);
+            break;
         }
-    });
-}
-
-void Scenario4_ConsumableProduct::GrantFeatureLocally(Platform::Guid transactionId)
-{
-    consumedTransactionIds->Append(transactionId);
-
-    // Grant the user their content. You will likely increase some kind of gold/coins/some other asset count.
-    numberOfConsumablesPurchased++;
-    PurchaseCount->Text = numberOfConsumablesPurchased.ToString();
-}
-
-bool Scenario4_ConsumableProduct::IsLocallyFulfilled(Platform::Guid transactionId)
-{
-    unsigned int index;
-    return consumedTransactionIds->IndexOf(transactionId, &index);
+    }, task_continuation_context::get_current_winrt_context());
 }

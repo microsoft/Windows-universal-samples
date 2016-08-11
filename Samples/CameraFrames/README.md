@@ -37,7 +37,13 @@ and Windows SDK version 14332 or above to build.
 
 To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com).
 
-## Reference
+## See also
+
+### Samples
+
+[HolographicFaceTracking](/Samples/HolographicFaceTracking)
+
+### Reference
 
 [Windows.Media.Capture.Frames namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.frames.aspx)
 

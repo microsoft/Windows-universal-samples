@@ -11,13 +11,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Store;
-using Windows.Storage;
-using Windows.UI.Xaml;
+using Windows.Services.Store;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
 namespace SDKTemplate
 {
@@ -26,116 +21,138 @@ namespace SDKTemplate
     /// </summary>
     public sealed partial class Scenario4_ConsumableProduct : Page
     {
-        // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
-        // as NotifyUser()
         MainPage rootPage = MainPage.Current;
-        private int numberOfConsumablesPurchased = 0;
-        private HashSet<Guid> consumedTransactionIds = new HashSet<Guid>();
+        private StoreContext storeContext = StoreContext.GetDefault();
 
         public Scenario4_ConsumableProduct()
         {
             this.InitializeComponent();
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        private async void GetManagedConsumablesButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            await MainPage.ConfigureSimulatorAsync("in-app-purchase-consumables.xml");
+            // Create a filtered list of the product AddOns I care about
+            string[] filterList = new string[] { "Consumable" };
 
-            try
+            // Get list of Add Ons this app can sell, filtering for the types we know about
+            StoreProductQueryResult addOns = await storeContext.GetAssociatedStoreProductsAsync(filterList);
+
+            ProductsListView.ItemsSource = Utils.CreateProductListFromQueryResult(addOns, "Consumable Add-Ons");
+        }
+
+        private async void PurchaseAddOnButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var item = (ItemDetails)ProductsListView.SelectedItem;
+
+            StorePurchaseResult result = await storeContext.RequestPurchaseAsync(item.StoreId);
+            if (result.ExtendedError != null)
             {
-                ListingInformation listing = await CurrentAppSimulator.LoadListingInformationAsync();
-                var product1 = listing.ProductListings["product1"];
-                Product1Name.Text = product1.Name;
-                Product1Price.Text = product1.FormattedPrice;
-                rootPage.NotifyUser("", NotifyType.StatusMessage);
+                Utils.ReportExtendedError(result.ExtendedError);
+                return;
             }
-            catch (Exception)
+
+            switch (result.Status)
             {
-                rootPage.NotifyUser("LoadListingInformationAsync API call failed", NotifyType.ErrorMessage);
+                case StorePurchaseStatus.AlreadyPurchased: // should never get this for a managed consumable since they are stackable
+                    rootPage.NotifyUser($"You already bought this consumable.", NotifyType.ErrorMessage);
+                    break;
+
+                case StorePurchaseStatus.Succeeded:
+                    rootPage.NotifyUser($"You bought {item.Title}.", NotifyType.StatusMessage);
+                    break;
+
+                case StorePurchaseStatus.NotPurchased:
+                    rootPage.NotifyUser("Product was not purchased, it may have been canceled.", NotifyType.ErrorMessage);
+                    break;
+
+                case StorePurchaseStatus.NetworkError:
+                    rootPage.NotifyUser("Product was not purchased due to a network error.", NotifyType.ErrorMessage);
+                    break;
+
+                case StorePurchaseStatus.ServerError:
+                    rootPage.NotifyUser("Product was not purchased due to a server error.", NotifyType.ErrorMessage);
+                    break;
+
+                default:
+                    rootPage.NotifyUser("Product was not purchased due to an unknown error.", NotifyType.ErrorMessage);
+                    break;
             }
         }
 
-        private async void BuyAndFulfillProduct1()
+        private async void GetConsumableBalanceButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            rootPage.NotifyUser("Buying Product 1...", NotifyType.StatusMessage);
-            try
-            {
-                PurchaseResults purchaseResults = await CurrentAppSimulator.RequestProductPurchaseAsync("product1");
-                switch (purchaseResults.Status)
-                {
-                    case ProductPurchaseStatus.Succeeded:
-                        GrantFeatureLocally(purchaseResults.TransactionId);
-                        FulfillProduct1(purchaseResults.TransactionId);
-                        break;
-                    case ProductPurchaseStatus.NotFulfilled:
-                        // The purchase failed because we haven't confirmed fulfillment of a previous purchase.
-                        // Fulfill it now.
-                        if (!IsLocallyFulfilled(purchaseResults.TransactionId))
-                        {
-                            GrantFeatureLocally(purchaseResults.TransactionId);
-                        }
-                        FulfillProduct1(purchaseResults.TransactionId);
-                        break;
-                    case ProductPurchaseStatus.NotPurchased:
-                        rootPage.NotifyUser("Product 1 was not purchased.", NotifyType.StatusMessage);
-                        break;
-                }
-            }
-            catch (Exception)
-            {
-                rootPage.NotifyUser("Unable to buy Product 1.", NotifyType.ErrorMessage);
-            }
-        }
+            var item = (ItemDetails)ProductsListView.SelectedItem;
 
-        private async void FulfillProduct1(Guid transactionId)
-        {
-            try
+            StoreConsumableResult result = await storeContext.GetConsumableBalanceRemainingAsync(item.StoreId);
+            if (result.ExtendedError != null)
             {
-                FulfillmentResult result = await CurrentAppSimulator.ReportConsumableFulfillmentAsync("product1", transactionId);
-                switch (result)
-                {
-                    case FulfillmentResult.Succeeded:
-                        rootPage.NotifyUser("You bought and fulfilled product 1.", NotifyType.StatusMessage);
-                        break;
-                    case FulfillmentResult.NothingToFulfill:
-                        rootPage.NotifyUser("There is no purchased product 1 to fulfill.", NotifyType.StatusMessage);
-                        break;
-                    case FulfillmentResult.PurchasePending:
-                        rootPage.NotifyUser("You bought product 1. The purchase is pending so we cannot fulfill the product.", NotifyType.StatusMessage);
-                        break;
-                    case FulfillmentResult.PurchaseReverted:
-                        rootPage.NotifyUser("You bought product 1, but your purchase has been reverted.", NotifyType.StatusMessage);
-                        // Since the user's purchase was revoked, they got their money back.
-                        // You may want to revoke the user's access to the consumable content that was granted.
-                        break;
-                    case FulfillmentResult.ServerError:
-                        rootPage.NotifyUser("You bought product 1. There was an error when fulfilling.", NotifyType.StatusMessage);
-                        break;
-                }
+                Utils.ReportExtendedError(result.ExtendedError);
+                return;
             }
-            catch (Exception)
+
+            switch (result.Status)
             {
-                rootPage.NotifyUser("You bought Product 1. There was an error when fulfilling.", NotifyType.ErrorMessage);
+                case StoreConsumableStatus.InsufficentQuantity: // should never get this...
+                    rootPage.NotifyUser($"Insufficient Quantity! Balance Remaining: {result.BalanceRemaining}", NotifyType.ErrorMessage);
+                    break;
+
+                case StoreConsumableStatus.Succeeded:
+                    rootPage.NotifyUser($"Balance Remaining: {result.BalanceRemaining}", NotifyType.StatusMessage);
+                    break;
+
+                case StoreConsumableStatus.NetworkError:
+                    rootPage.NotifyUser("Network error retrieving consumable balance.", NotifyType.ErrorMessage);
+                    break;
+
+                case StoreConsumableStatus.ServerError:
+                    rootPage.NotifyUser("Server error retrieving consumable balance.", NotifyType.ErrorMessage);
+                    break;
+
+                default:
+                    rootPage.NotifyUser("Unknown error retrieving consumable balance.", NotifyType.ErrorMessage);
+                    break;
             }
         }
 
-        private void GrantFeatureLocally(Guid transactionId)
+        private async void FulfillConsumableButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            consumedTransactionIds.Add(transactionId);
+            var item = (ItemDetails)ProductsListView.SelectedItem;
 
-            // Grant the user their content. You will likely increase some kind of gold/coins/some other asset count.
-            numberOfConsumablesPurchased++;
-            PurchaseCount.Text = numberOfConsumablesPurchased.ToString();
-        }
+            UInt32 quantity = UInt32.Parse((string)QuantityComboBox.SelectedValue);
 
-        private bool IsLocallyFulfilled(Guid transactionId)
-        {
-            return consumedTransactionIds.Contains(transactionId);
+            // This can be used to ensure this request is never double fulfilled. The server will
+            // only accept one report for this specific GUID.
+            Guid trackingId = Guid.NewGuid();
+
+            StoreConsumableResult result = await storeContext.ReportConsumableFulfillmentAsync(item.StoreId, quantity, trackingId);
+            if (result.ExtendedError != null)
+            {
+                Utils.ReportExtendedError(result.ExtendedError);
+                return;
+            }
+
+            switch (result.Status)
+            {
+                case StoreConsumableStatus.InsufficentQuantity:
+                    rootPage.NotifyUser($"Insufficient Quantity! Balance Remaining: {result.BalanceRemaining}", NotifyType.ErrorMessage);
+                    break;
+
+                case StoreConsumableStatus.Succeeded:
+                    rootPage.NotifyUser($"Successful fulfillment! Balance Remaining: {result.BalanceRemaining}", NotifyType.StatusMessage);
+                    break;
+
+                case StoreConsumableStatus.NetworkError:
+                    rootPage.NotifyUser("Network error fulfilling consumable.", NotifyType.ErrorMessage);
+                    break;
+
+                case StoreConsumableStatus.ServerError:
+                    rootPage.NotifyUser("Server error fulfilling consumable.", NotifyType.ErrorMessage);
+                    break;
+
+                default:
+                    rootPage.NotifyUser("Unknown error fulfilling consumable.", NotifyType.ErrorMessage);
+                    break;
+            }
         }
     }
 }

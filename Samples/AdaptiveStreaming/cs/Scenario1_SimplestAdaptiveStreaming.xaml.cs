@@ -44,7 +44,7 @@ namespace SDKTemplate
             }
         }
 
-        private void Page_OnLoaded()
+        private void Page_OnLoaded(object sender, RoutedEventArgs e)
         {
             // NOTE: Change this to 110 to see DASH with PlayReady scenario
             const int contentIdForCMS = 1;

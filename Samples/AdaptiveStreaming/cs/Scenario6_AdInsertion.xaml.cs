@@ -53,7 +53,7 @@ namespace SDKTemplate
         private MediaPlaybackItem mpItem;
         private bool isLiveMediaSource = false;
 
-        private async void Page_OnLoaded()
+        private async void Page_OnLoaded(object sender, RoutedEventArgs e)
         {
             var mediaPlayer = new MediaPlayer();
             RegisterForMediaPlayerEvents(mediaPlayer);

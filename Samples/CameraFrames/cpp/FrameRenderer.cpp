@@ -31,21 +31,21 @@ using namespace Windows::UI::Xaml::Media::Imaging;
 template<typename T, typename U>
 T^ InterlockedExchangeRefPointer(T^* target, U value)
 {
-	static_assert(sizeof(T^) == sizeof(void*), "InterlockedExchangePointer is the wrong size");
-	T^ exchange = value;
-	void** rawExchange = reinterpret_cast<void**>(&exchange);
-	void** rawTarget = reinterpret_cast<void**>(target);
-	*rawExchange = static_cast<IInspectable*>(InterlockedExchangePointer(rawTarget, *rawExchange));
-	return exchange;
+    static_assert(sizeof(T^) == sizeof(void*), "InterlockedExchangePointer is the wrong size");
+    T^ exchange = value;
+    void** rawExchange = reinterpret_cast<void**>(&exchange);
+    void** rawTarget = reinterpret_cast<void**>(target);
+    *rawExchange = static_cast<IInspectable*>(InterlockedExchangePointer(rawTarget, *rawExchange));
+    return exchange;
 }
 
 // Convert a reference pointer to a specific ComPtr.
 template<typename T>
 Microsoft::WRL::ComPtr<T> AsComPtr(Platform::Object^ object)
 {
-	Microsoft::WRL::ComPtr<T> p;
-	reinterpret_cast<IUnknown*>(object)->QueryInterface(IID_PPV_ARGS(&p));
-	return p;
+    Microsoft::WRL::ComPtr<T> p;
+    reinterpret_cast<IUnknown*>(object)->QueryInterface(IID_PPV_ARGS(&p));
+    return p;
 }
 #pragma endregion
 
@@ -186,10 +186,10 @@ Concurrency::task<void> FrameRenderer::DrainBackBufferAsync()
         if (SoftwareBitmapSource^ imageSource = dynamic_cast<SoftwareBitmapSource^>(m_imageElement->Source))
         {
             return create_task(imageSource->SetBitmapAsync(latestBitmap))
-				.then([this]()
-			{
-				return DrainBackBufferAsync();
-			}, task_continuation_context::use_current());
+                .then([this]()
+            {
+                return DrainBackBufferAsync();
+            }, task_continuation_context::use_current());
         }
     }
 
@@ -209,11 +209,11 @@ void FrameRenderer::ProcessFrame(Windows::Media::Capture::Frames::MediaFrameRefe
         return;
     }
 
-	SoftwareBitmap^ softwareBitmap = ConvertToDisplayableImage(frame->VideoMediaFrame);
+    SoftwareBitmap^ softwareBitmap = ConvertToDisplayableImage(frame->VideoMediaFrame);
     if (softwareBitmap != nullptr)
     {
         // Swap the processed frame to _backBuffer, and trigger the UI thread to render it.
-		softwareBitmap = InterlockedExchangeRefPointer(&m_backBuffer, softwareBitmap);
+        softwareBitmap = InterlockedExchangeRefPointer(&m_backBuffer, softwareBitmap);
 
         // UI thread always resets m_backBuffer before using it. Unused bitmap should be disposed.
         delete softwareBitmap;
@@ -247,37 +247,37 @@ SoftwareBitmap^ FrameRenderer::ConvertToDisplayableImage(VideoMediaFrame^ inputF
     if ((inputBitmap->BitmapPixelFormat == BitmapPixelFormat::Bgra8) &&
         (inputBitmap->BitmapAlphaMode == BitmapAlphaMode::Premultiplied))
     {
-		// SoftwareBitmap is already in the correct format for an Image control, so just return a copy.
-		return SoftwareBitmap::Copy(inputBitmap);
+        // SoftwareBitmap is already in the correct format for an Image control, so just return a copy.
+        return SoftwareBitmap::Copy(inputBitmap);
     }
     else if ((inputBitmap->BitmapPixelFormat == BitmapPixelFormat::Gray16) && (inputFrame->FrameReference->SourceKind == MediaFrameSourceKind::Depth))
     {
-		// Use a special pseudo color to render 16 bits depth frame.
-		return TransformBitmap(inputBitmap, PseudoColorForDepth);
+        // Use a special pseudo color to render 16 bits depth frame.
+        return TransformBitmap(inputBitmap, PseudoColorForDepth);
     }
     else if (inputBitmap->BitmapPixelFormat == BitmapPixelFormat::Gray16)
     {
-		// Use pseudo color to render 16 bits frames.
-		return TransformBitmap(inputBitmap, PseudoColorFor16BitInfrared);
+        // Use pseudo color to render 16 bits frames.
+        return TransformBitmap(inputBitmap, PseudoColorFor16BitInfrared);
     }
     else if (inputBitmap->BitmapPixelFormat == BitmapPixelFormat::Gray8)
     {
-		// Use pseudo color to render 8 bits frames.
-		return TransformBitmap(inputBitmap, PseudoColorFor8BitInfrared);
+        // Use pseudo color to render 8 bits frames.
+        return TransformBitmap(inputBitmap, PseudoColorFor8BitInfrared);
     }
     else
     {
         try
         {
-			// Convert to Bgra8 Premultiplied SoftwareBitmap, so xaml can display in UI.
-			return SoftwareBitmap::Convert(inputBitmap, BitmapPixelFormat::Bgra8, BitmapAlphaMode::Premultiplied);
+            // Convert to Bgra8 Premultiplied SoftwareBitmap, so xaml can display in UI.
+            return SoftwareBitmap::Convert(inputBitmap, BitmapPixelFormat::Bgra8, BitmapAlphaMode::Premultiplied);
         }
         catch (InvalidArgumentException^ exception)
         {
-			// Conversion of software bitmap format is not supported.  Drop this frame.
-			OutputDebugStringW(exception->Message->Data());
-			OutputDebugStringW(L"\r\n");
-			return nullptr;
+            // Conversion of software bitmap format is not supported.  Drop this frame.
+            OutputDebugStringW(exception->Message->Data());
+            OutputDebugStringW(L"\r\n");
+            return nullptr;
         }
     }
 
@@ -286,8 +286,8 @@ SoftwareBitmap^ FrameRenderer::ConvertToDisplayableImage(VideoMediaFrame^ inputF
 
 SoftwareBitmap^ FrameRenderer::TransformBitmap(SoftwareBitmap^ inputBitmap, TransformScanline pixelTransformation)
 {
-	// XAML Image control only supports premultiplied Bgra8 format.
-	SoftwareBitmap^ outputBitmap = ref new SoftwareBitmap(
+    // XAML Image control only supports premultiplied Bgra8 format.
+    SoftwareBitmap^ outputBitmap = ref new SoftwareBitmap(
         BitmapPixelFormat::Bgra8,
         inputBitmap->PixelWidth,
         inputBitmap->PixelHeight,
@@ -303,17 +303,17 @@ SoftwareBitmap^ FrameRenderer::TransformBitmap(SoftwareBitmap^ inputBitmap, Tran
     int pixelWidth = inputBitmap->PixelWidth;
     int pixelHeight = inputBitmap->PixelHeight;
 
-	IMemoryBufferReference^ inputReference = input->CreateReference();
+    IMemoryBufferReference^ inputReference = input->CreateReference();
     IMemoryBufferReference^ outputReference = output->CreateReference();
 
     // Get input and output byte access buffers.
-	byte* inputBytes;
+    byte* inputBytes;
     UINT32 inputCapacity;
-	AsComPtr<IMemoryBufferByteAccess>(inputReference)->GetBuffer(&inputBytes, &inputCapacity);
+    AsComPtr<IMemoryBufferByteAccess>(inputReference)->GetBuffer(&inputBytes, &inputCapacity);
 
-	byte* outputBytes;
+    byte* outputBytes;
     UINT32 outputCapacity;
-	AsComPtr<IMemoryBufferByteAccess>(outputReference)->GetBuffer(&outputBytes, &outputCapacity);
+    AsComPtr<IMemoryBufferByteAccess>(outputReference)->GetBuffer(&outputBytes, &outputCapacity);
 
     // Iterate over all pixels, and store the converted value.
     for (int y = 0; y < pixelHeight; y++)
@@ -324,11 +324,11 @@ SoftwareBitmap^ FrameRenderer::TransformBitmap(SoftwareBitmap^ inputBitmap, Tran
         pixelTransformation(pixelWidth, inputRowBytes, outputRowBytes);
     }
 
-	// Close objects that need closing.
-	delete outputReference;
-	delete inputReference;
-	delete output;
-	delete input;
+    // Close objects that need closing.
+    delete outputReference;
+    delete inputReference;
+    delete output;
+    delete input;
 
     return outputBitmap;
 }

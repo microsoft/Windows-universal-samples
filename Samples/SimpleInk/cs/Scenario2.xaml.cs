@@ -90,7 +90,7 @@ namespace SDKTemplate
             inkCanvas.InkPresenter.UnprocessedInput.PointerReleased -= UnprocessedInput_PointerReleased;
         }
 
-        private void OnSizeChanged()
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             HelperFunctions.UpdateCanvasSize(RootGrid, outputGrid, inkCanvas);
         }

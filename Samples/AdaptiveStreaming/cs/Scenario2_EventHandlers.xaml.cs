@@ -73,7 +73,7 @@ namespace SDKTemplate
             UnregisterForAdaptiveMediaSourceEvents(adaptiveMediaSource);
         }
 
-        private async void Page_OnLoaded()
+        private async void Page_OnLoaded(object sender, RoutedEventArgs e)
         {
             // Explicitly create the instance of MediaPlayer if you need to register for its events
             // (like MediaOpened / MediaFailed) prior to setting an IMediaPlaybackSource.

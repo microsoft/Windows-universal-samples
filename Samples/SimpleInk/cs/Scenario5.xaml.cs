@@ -10,6 +10,7 @@
 //*********************************************************
 
 using Windows.Foundation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace SDKTemplate
@@ -30,7 +31,7 @@ namespace SDKTemplate
             inkCanvas.InkPresenter.InputDeviceTypes = Windows.UI.Core.CoreInputDeviceTypes.Mouse | Windows.UI.Core.CoreInputDeviceTypes.Pen | Windows.UI.Core.CoreInputDeviceTypes.Touch;
         }
 
-        private void OnSizeChanged()
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             HelperFunctions.UpdateCanvasSize(RootGrid, outputGrid, inkCanvas);
         }

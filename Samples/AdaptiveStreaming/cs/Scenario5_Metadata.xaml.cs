@@ -53,7 +53,7 @@ namespace SDKTemplate
         private AdaptiveContentModel adaptiveContentModel;
         private MediaPlaybackItem mpItem;
 
-        private async void Page_OnLoaded()
+        private async void Page_OnLoaded(object sender, RoutedEventArgs e)
         {
             var mediaPlayer = new MediaPlayer();
             mediaPlayer.AutoPlay = true;
