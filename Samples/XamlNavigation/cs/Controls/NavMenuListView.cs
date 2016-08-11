@@ -222,7 +222,7 @@ namespace NavigationMenuSample.Controls
         private void InvokeItem(object focusedItem)
         {
             this.SetSelectedItem(focusedItem as ListViewItem);
-            this.ItemInvoked(this, focusedItem as ListViewItem);
+            this.ItemInvoked?.Invoke(this, focusedItem as ListViewItem);
 
             if (this.splitViewHost.IsPaneOpen && (
                 this.splitViewHost.DisplayMode == SplitViewDisplayMode.CompactOverlay ||
