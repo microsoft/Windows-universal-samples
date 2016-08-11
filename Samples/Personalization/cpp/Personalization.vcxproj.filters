@@ -36,7 +36,6 @@
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>
-    <Page Include="..\shared\AddImageFeedScenario.xaml" />
     <Page Include="..\shared\SetLockScreenImage.xaml" />
   </ItemGroup>
   <ItemGroup>

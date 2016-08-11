@@ -151,9 +151,6 @@
       <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
-    <ClInclude Include="AddImageFeedScenario.xaml.h">
-      <DependentUpon>..\shared\AddImageFeedScenario.xaml</DependentUpon>
-    </ClInclude>
     <ClInclude Include="SetLockScreenImage.xaml.h">
       <DependentUpon>..\shared\SetLockScreenImage.xaml</DependentUpon>
     </ClInclude>
@@ -165,7 +162,6 @@
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\AddImageFeedScenario.xaml" />
     <Page Include="..\shared\SetLockScreenImage.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
@@ -192,9 +188,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
-    <ClCompile Include="AddImageFeedScenario.xaml.cpp">
-      <DependentUpon>..\shared\AddImageFeedScenario.xaml</DependentUpon>
-    </ClCompile>
     <ClCompile Include="SetLockScreenImage.xaml.cpp">
       <DependentUpon>..\shared\SetLockScreenImage.xaml</DependentUpon>
     </ClCompile>
