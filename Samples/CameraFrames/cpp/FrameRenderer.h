@@ -54,7 +54,7 @@ namespace SDKTemplate
     private: // Private data.
         Windows::UI::Xaml::Controls::Image^ m_imageElement;
         Windows::Graphics::Imaging::SoftwareBitmap^ m_backBuffer;
-		bool m_taskRunning = false;
+        bool m_taskRunning = false;
 
     };
 } // SDKTemplate

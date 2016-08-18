@@ -52,6 +52,7 @@ void RealtimeSurfaceMeshRenderer::Update(
 
         // Update the surface mesh.
         surfaceMesh.UpdateTransform(
+            m_deviceResources->GetD3DDevice(),
             m_deviceResources->GetD3DDeviceContext(),
             timer,
             coordinateSystem
