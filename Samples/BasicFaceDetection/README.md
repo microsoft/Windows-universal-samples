@@ -29,6 +29,8 @@ The FaceDetector is intended to operate on a static image or a single frame of v
 
 [BasicFaceTracking](/Samples/BasicFaceTracking)
 
+[HolographicFaceTracking](/Samples/HolographicFaceTracking)
+
 [FilePicker](/Samples/FilePicker)
 
 [CameraStarterKit](/Samples/CameraStarterKit)

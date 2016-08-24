@@ -33,14 +33,16 @@ using namespace Windows::UI::Input::Spatial;
 using namespace std::placeholders;
 
 // Loads and initializes application assets when the application is loaded.
-HolographicSpatialMappingMain::HolographicSpatialMappingMain(const std::shared_ptr<DX::DeviceResources>& deviceResources) :
+HolographicSpatialMappingMain::HolographicSpatialMappingMain(
+    const std::shared_ptr<DX::DeviceResources>& deviceResources) :
     m_deviceResources(deviceResources)
 {
     // Register to be notified if the device is lost or recreated.
     m_deviceResources->RegisterDeviceNotify(this);
 }
 
-void HolographicSpatialMappingMain::SetHolographicSpace(HolographicSpace^ holographicSpace)
+void HolographicSpatialMappingMain::SetHolographicSpace(
+    HolographicSpace^ holographicSpace)
 {
     UnregisterHolographicEventHandlers();
 
@@ -48,7 +50,7 @@ void HolographicSpatialMappingMain::SetHolographicSpace(HolographicSpace^ hologr
 
 #ifdef DRAW_SAMPLE_CONTENT
     // Initialize the sample hologram.
-    m_meshCollection = std::make_unique<RealtimeSurfaceMeshRenderer>(m_deviceResources);
+    m_meshRenderer = std::make_unique<RealtimeSurfaceMeshRenderer>(m_deviceResources);
 
     m_spatialInputHandler = std::make_unique<SpatialInputHandler>();
 #endif
@@ -56,12 +58,14 @@ void HolographicSpatialMappingMain::SetHolographicSpace(HolographicSpace^ hologr
     // Use the default SpatialLocator to track the motion of the device.
     m_locator = SpatialLocator::GetDefault();
 
-    // Be able to respond to changes in the positional tracking state.
-    m_locatabilityChangedToken =
-        m_locator->LocatabilityChanged +=
-            ref new Windows::Foundation::TypedEventHandler<SpatialLocator^, Object^>(
-                std::bind(&HolographicSpatialMappingMain::OnLocatabilityChanged, this, _1, _2)
+    // This sample responds to changes in the positional tracking state by cancelling deactivation 
+    // of positional tracking.
+    m_positionalTrackingDeactivatingToken =
+        m_locator->PositionalTrackingDeactivating +=
+            ref new Windows::Foundation::TypedEventHandler<SpatialLocator^, SpatialLocatorPositionalTrackingDeactivatingEventArgs^>(
+                std::bind(&HolographicSpatialMappingMain::OnPositionalTrackingDeactivating, this, _1, _2)
                 );
+            
 
     // Respond to camera added events by creating any resources that are specific
     // to that camera, such as the back buffer render target view.
@@ -125,12 +129,12 @@ void HolographicSpatialMappingMain::UnregisterHolographicEventHandlers()
 
     if (m_locator != nullptr)
     {
-        m_locator->LocatabilityChanged -= m_locatabilityChangedToken;
+        m_locator->PositionalTrackingDeactivating -= m_positionalTrackingDeactivatingToken;
     }
 
     if (m_surfaceObserver != nullptr)
     {
-        m_surfaceObserver->ObservedSurfacesChanged -= m_surfaceObserverEventToken;
+        m_surfaceObserver->ObservedSurfacesChanged -= m_surfacesChangedToken;
     }
 }
 
@@ -142,125 +146,9 @@ HolographicSpatialMappingMain::~HolographicSpatialMappingMain()
     UnregisterHolographicEventHandlers();
 }
 
-void HolographicSpatialMappingMain::UpdateSurfaceObserverPosition(SpatialCoordinateSystem^ coordinateSystem)
-{
-    // In this example, we specify one area to be observed using an axis-aligned
-    // bounding box 20 meters wide, and 5 meters tall, that is centered at the
-    // origin of coordinateSystem.
-    SpatialBoundingBox aabb =
-    {
-        { 0.f,  0.f, 0.f },
-        { 20.f, 20.f, 5.f },
-    };
-
-    if (m_surfaceObserver != nullptr)
-    {
-        SpatialBoundingVolume^ bounds = SpatialBoundingVolume::FromBox(coordinateSystem, aabb);
-        m_surfaceObserver->SetBoundingVolume(bounds);
-
-        // Note that it is possible to set multiple bounding volumes. Pseudocode:
-        //     m_surfaceObserver->SetBoundingVolumes(/* iterable collection of bounding volumes*/);
-        //
-        // It is also possible to use other bounding shapes - such as a view frustum. Pseudocode:
-        //     SpatialBoundingVolume^ bounds = SpatialBoundingVolume::FromFrustum(coordinateSystem, viewFrustum);
-        //     m_surfaceObserver->SetBoundingVolume(bounds);
-    }
-}
-
-void HolographicSpatialMappingMain::InitializeSurfaceObserver(SpatialCoordinateSystem^ coordinateSystem)
-{
-    // If a SpatialSurfaceObserver exists, we need to unregister from event notifications before releasing it.
-    if (m_surfaceObserver != nullptr)
-    {
-        m_surfaceObserver->ObservedSurfacesChanged -= m_surfaceObserverEventToken;
-        m_surfaceObserver = nullptr;
-    }
-
-    // The spatial mapping API reads information about the user's environment. The user must
-    // grant permission to the app to use this capability of the Windows Holographic device.
-    auto initSurfaceObserverTask = create_task(SpatialSurfaceObserver::RequestAccessAsync());
-    initSurfaceObserverTask.then([this, coordinateSystem](Windows::Perception::Spatial::SpatialPerceptionAccessStatus status)
-    {
-        switch (status)
-        {
-        case SpatialPerceptionAccessStatus::Allowed:
-            {
-                // If status is Allowed, we can create the surface observer.
-                {
-                    // First, we'll set up the surface observer to use our preferred data formats.
-                    // In this example, a "preferred" format is chosen that is compatible with our precompiled shader pipeline.
-                    m_surfaceMeshOptions = ref new SpatialSurfaceMeshOptions();
-                    IVectorView<DirectXPixelFormat>^ supportedVertexPositionFormats = m_surfaceMeshOptions->SupportedVertexPositionFormats;
-                    unsigned int formatIndex = 0;
-                    if (supportedVertexPositionFormats->IndexOf(DirectXPixelFormat::R16G16B16A16IntNormalized, &formatIndex))
-                    {
-                        m_surfaceMeshOptions->VertexPositionFormat = DirectXPixelFormat::R16G16B16A16IntNormalized;
-                    }
-                    IVectorView<DirectXPixelFormat>^ supportedVertexNormalFormats = m_surfaceMeshOptions->SupportedVertexNormalFormats;
-                    if (supportedVertexNormalFormats->IndexOf(DirectXPixelFormat::R8G8B8A8IntNormalized, &formatIndex))
-                    {
-                        m_surfaceMeshOptions->VertexNormalFormat = DirectXPixelFormat::R8G8B8A8IntNormalized;
-                    }
-
-                    // Our shader pipeline can handle a variety of triangle index formats, so we don't specify one here.
-                    // The code for doing so would be as follows:
-                    //IVectorView<DirectXPixelFormat>^ supportedTriangleIndexFormats = m_surfaceMeshOptions->SupportedTriangleIndexFormats;
-                    //if (supportedTriangleIndexFormats->IndexOf(DirectXPixelFormat::R16UInt, &formatIndex))
-                    //{
-                    //    m_surfaceMeshOptions->TriangleIndexFormat = DirectXPixelFormat::R16UInt;
-                    //}
-
-                    // Create the observer.
-                    m_surfaceObserver = ref new SpatialSurfaceObserver();
-                }
-
-                // The surface observer can now be configured as needed.
-                UpdateSurfaceObserverPosition(coordinateSystem);
-            }
-            break;
-        case SpatialPerceptionAccessStatus::DeniedBySystem:
-            {
-                OutputDebugString(L"Error: Cannot initialize surface observer because the system denied access to the spatialPerception capability.\n");
-            }
-            break;
-        case SpatialPerceptionAccessStatus::DeniedByUser:
-            {
-                OutputDebugString(L"Error: Cannot initialize surface observer because the user denied access to the spatialPerception capability.\n");
-            }
-            break;
-        case SpatialPerceptionAccessStatus::Unspecified:
-            {
-                OutputDebugString(L"Error: Cannot initialize surface observer. Access was denied for an unspecified reason.\n");
-            }
-            break;
-        default:
-            // unreachable
-            break;
-        }
-
-
-        if (m_surfaceObserver != nullptr)
-        {
-            // If the surface observer was successfully created, we can initialize our
-            // collection by pulling the current data set.
-            auto mapContainingSurfaceCollection = m_surfaceObserver->GetObservedSurfaces();
-            for (auto const& pair : mapContainingSurfaceCollection)
-            {
-                // Store the ID and metadata for each surface.
-                auto const& id = pair->Key;
-                auto const& surfaceInfo = pair->Value;
-                m_meshCollection->AddSurface(id, surfaceInfo);
-            }
-
-            // We can also subcribe to an event to receive up-to-date data.
-            m_surfaceObserver->ObservedSurfacesChanged += ref new TypedEventHandler<SpatialSurfaceObserver^, Platform::Object^>(
-                bind(&HolographicSpatialMappingMain::OnSurfacesChanged, this, _1, _2)
-                );
-        }
-    });
-}
-
-void HolographicSpatialMappingMain::OnSurfacesChanged(SpatialSurfaceObserver^ sender, Object^ args)
+void HolographicSpatialMappingMain::OnSurfacesChanged(
+    SpatialSurfaceObserver^ sender, 
+    Object^ args)
 {
     IMapView<Guid, SpatialSurfaceInfo^>^ const& surfaceCollection = sender->GetObservedSurfaces();
 
@@ -277,18 +165,18 @@ void HolographicSpatialMappingMain::OnSurfacesChanged(SpatialSurfaceObserver^ se
         // In your app, you might choose to process added surfaces differently than updated
         // surfaces. For example, you might prioritize processing of added surfaces, and
         // defer processing of updates to existing surfaces.
-        if (m_meshCollection->HasSurface(id))
+        if (m_meshRenderer->HasSurface(id))
         {
-            if (m_meshCollection->GetLastUpdateTime(id).UniversalTime < surfaceInfo->UpdateTime.UniversalTime)
+            if (m_meshRenderer->GetLastUpdateTime(id).UniversalTime < surfaceInfo->UpdateTime.UniversalTime)
             {
                 // Update existing surface.
-                m_meshCollection->UpdateSurface(id, surfaceInfo);
+                m_meshRenderer->UpdateSurface(id, surfaceInfo);
             }
         }
         else
         {
             // New surface.
-            m_meshCollection->AddSurface(id, surfaceInfo);
+            m_meshRenderer->AddSurface(id, surfaceInfo);
         }
     }
 
@@ -297,7 +185,7 @@ void HolographicSpatialMappingMain::OnSurfacesChanged(SpatialSurfaceObserver^ se
     // not included in the surface collection to avoid rendering them.
     // The system can including them in the collection again later, in which case
     // they will no longer be hidden.
-    m_meshCollection->HideInactiveMeshes(surfaceCollection);
+    m_meshRenderer->HideInactiveMeshes(surfaceCollection);
 }
 
 // Updates the application state once per frame.
@@ -329,12 +217,101 @@ HolographicFrame^ HolographicSpatialMappingMain::Update()
     if (m_surfaceObserver == nullptr)
     {
         // Initialize the Surface Observer using a valid coordinate system.
-        InitializeSurfaceObserver(currentCoordinateSystem);
+        if (!m_spatialPerceptionAccessRequested)
+        {
+            // The spatial mapping API reads information about the user's environment. The user must
+            // grant permission to the app to use this capability of the Windows Holographic device.
+            auto initSurfaceObserverTask = create_task(SpatialSurfaceObserver::RequestAccessAsync());
+            initSurfaceObserverTask.then([this, currentCoordinateSystem](Windows::Perception::Spatial::SpatialPerceptionAccessStatus status)
+            {
+                switch (status)
+                {
+                case SpatialPerceptionAccessStatus::Allowed:
+                    m_surfaceAccessAllowed = true;
+                    break;
+                default:
+                    // Access was denied. This usually happens because your AppX manifest file does not declare the
+                    // spatialPerception capability.
+                    // For info on what else can cause this, see: http://msdn.microsoft.com/library/windows/apps/mt621422.aspx
+                    m_surfaceAccessAllowed = false;
+                    break;
+                }
+            });
+
+            m_spatialPerceptionAccessRequested = true;
+        }
     }
-    else
+
+    if (m_surfaceAccessAllowed)
     {
+        SpatialBoundingBox axisAlignedBoundingBox =
+        {
+            {  0.f,  0.f, 0.f },
+            { 20.f, 20.f, 5.f },
+        };
+        SpatialBoundingVolume^ bounds = SpatialBoundingVolume::FromBox(currentCoordinateSystem, axisAlignedBoundingBox);
+
+        // If status is Allowed, we can create the surface observer.
+        if (m_surfaceObserver == nullptr)
+        {
+            // First, we'll set up the surface observer to use our preferred data formats.
+            // In this example, a "preferred" format is chosen that is compatible with our precompiled shader pipeline.
+            m_surfaceMeshOptions = ref new SpatialSurfaceMeshOptions();
+            IVectorView<DirectXPixelFormat>^ supportedVertexPositionFormats = m_surfaceMeshOptions->SupportedVertexPositionFormats;
+            unsigned int formatIndex = 0;
+            if (supportedVertexPositionFormats->IndexOf(DirectXPixelFormat::R16G16B16A16IntNormalized, &formatIndex))
+            {
+                m_surfaceMeshOptions->VertexPositionFormat = DirectXPixelFormat::R16G16B16A16IntNormalized;
+            }
+            IVectorView<DirectXPixelFormat>^ supportedVertexNormalFormats = m_surfaceMeshOptions->SupportedVertexNormalFormats;
+            if (supportedVertexNormalFormats->IndexOf(DirectXPixelFormat::R8G8B8A8IntNormalized, &formatIndex))
+            {
+                m_surfaceMeshOptions->VertexNormalFormat = DirectXPixelFormat::R8G8B8A8IntNormalized;
+            }
+
+            // If you are using a very high detail setting with spatial mapping, it can be beneficial
+            // to use a 32-bit unsigned integer format for indices instead of the default 16-bit. 
+            // Uncomment the following code to enable 32-bit indices.
+            //IVectorView<DirectXPixelFormat>^ supportedTriangleIndexFormats = m_surfaceMeshOptions->SupportedTriangleIndexFormats;
+            //if (supportedTriangleIndexFormats->IndexOf(DirectXPixelFormat::R32UInt, &formatIndex))
+            //{
+            //    m_surfaceMeshOptions->TriangleIndexFormat = DirectXPixelFormat::R32UInt;
+            //}
+
+            // Create the observer.
+            m_surfaceObserver = ref new SpatialSurfaceObserver();
+            if (m_surfaceObserver)
+            {
+                m_surfaceObserver->SetBoundingVolume(bounds);
+
+                // If the surface observer was successfully created, we can initialize our
+                // collection by pulling the current data set.
+                auto mapContainingSurfaceCollection = m_surfaceObserver->GetObservedSurfaces();
+                for (auto const& pair : mapContainingSurfaceCollection)
+                {
+                    // Store the ID and metadata for each surface.
+                    auto const& id = pair->Key;
+                    auto const& surfaceInfo = pair->Value;
+                    m_meshRenderer->AddSurface(id, surfaceInfo);
+                }
+
+                // We then subcribe to an event to receive up-to-date data.
+                m_surfacesChangedToken = m_surfaceObserver->ObservedSurfacesChanged += 
+                    ref new TypedEventHandler<SpatialSurfaceObserver^, Platform::Object^>(
+                        bind(&HolographicSpatialMappingMain::OnSurfacesChanged, this, _1, _2)
+                        );
+            }
+        }
+
         // Keep the surface observer positioned at the device's location.
-        UpdateSurfaceObserverPosition(currentCoordinateSystem);
+        m_surfaceObserver->SetBoundingVolume(bounds);
+
+        // Note that it is possible to set multiple bounding volumes. Pseudocode:
+        //     m_surfaceObserver->SetBoundingVolumes(/* iterable collection of bounding volumes*/);
+        //
+        // It is also possible to use other bounding shapes - such as a view frustum. Pseudocode:
+        //     SpatialBoundingVolume^ bounds = SpatialBoundingVolume::FromFrustum(coordinateSystem, viewFrustum);
+        //     m_surfaceObserver->SetBoundingVolume(bounds);
     }
 
 #ifdef DRAW_SAMPLE_CONTENT
@@ -350,7 +327,7 @@ HolographicFrame^ HolographicSpatialMappingMain::Update()
     m_timer.Tick([&] ()
     {
 #ifdef DRAW_SAMPLE_CONTENT
-        m_meshCollection->Update(m_timer, currentCoordinateSystem);
+        m_meshRenderer->Update(m_timer, currentCoordinateSystem);
 #endif
     });
 
@@ -364,7 +341,8 @@ HolographicFrame^ HolographicSpatialMappingMain::Update()
 // Renders the current frame to each holographic camera, according to the
 // current application and spatial positioning state. Returns true if the
 // frame was rendered to at least one camera.
-bool HolographicSpatialMappingMain::Render(Windows::Graphics::Holographic::HolographicFrame^ holographicFrame)
+bool HolographicSpatialMappingMain::Render(
+    HolographicFrame^ holographicFrame)
 {
     // Don't try to render anything before the first Update.
     if (m_timer.GetFrameCount() == 0)
@@ -414,7 +392,7 @@ bool HolographicSpatialMappingMain::Render(Windows::Graphics::Holographic::Holog
             if (cameraActive)
             {
                 // Draw the sample hologram.
-                m_meshCollection->Render(pCameraResources->IsRenderingStereoscopic(), m_drawWireframe);
+                m_meshRenderer->Render(pCameraResources->IsRenderingStereoscopic(), m_drawWireframe);
             }
 #endif
             atLeastOneCameraRendered = true;
@@ -439,7 +417,7 @@ void HolographicSpatialMappingMain::LoadAppState()
 void HolographicSpatialMappingMain::OnDeviceLost()
 {
 #ifdef DRAW_SAMPLE_CONTENT
-    m_meshCollection->ReleaseDeviceDependentResources();
+    m_meshRenderer->ReleaseDeviceDependentResources();
 #endif
 }
 
@@ -448,46 +426,21 @@ void HolographicSpatialMappingMain::OnDeviceLost()
 void HolographicSpatialMappingMain::OnDeviceRestored()
 {
 #ifdef DRAW_SAMPLE_CONTENT
-    m_meshCollection->CreateDeviceDependentResources();
+    m_meshRenderer->CreateDeviceDependentResources();
 #endif
 }
 
-void HolographicSpatialMappingMain::OnLocatabilityChanged(SpatialLocator^ sender, Object^ args)
+void HolographicSpatialMappingMain::OnPositionalTrackingDeactivating(
+    SpatialLocator^ sender, 
+    SpatialLocatorPositionalTrackingDeactivatingEventArgs^ args)
 {
-    switch (sender->Locatability)
-    {
-    case SpatialLocatability::Unavailable:
-        // Holograms cannot be rendered.
-        {
-            String^ message = L"Warning! Positional tracking is " +
-                                        sender->Locatability.ToString() + L".\n";
-            OutputDebugStringW(message->Data());
-        }
-        break;
-
-    // In the following three cases, it is still possible to place holograms using a
-    // SpatialLocatorAttachedFrameOfReference.
-    case SpatialLocatability::PositionalTrackingActivating:
-        // The system is preparing to use positional tracking.
-
-    case SpatialLocatability::OrientationOnly:
-        // Positional tracking has not been activated.
-
-    case SpatialLocatability::PositionalTrackingInhibited:
-        // Positional tracking is temporarily inhibited. User action may be required
-        // in order to restore positional tracking.
-        break;
-
-    case SpatialLocatability::PositionalTrackingActive:
-        // Positional tracking is active. World-locked content can be rendered.
-        break;
-    }
+    // Without positional tracking, spatial meshes will not be locatable.
+    args->Canceled = true;
 }
 
 void HolographicSpatialMappingMain::OnCameraAdded(
     HolographicSpace^ sender,
-    HolographicSpaceCameraAddedEventArgs^ args
-    )
+    HolographicSpaceCameraAddedEventArgs^ args)
 {
     Deferral^ deferral = args->GetDeferral();
     HolographicCamera^ holographicCamera = args->Camera;
@@ -511,8 +464,7 @@ void HolographicSpatialMappingMain::OnCameraAdded(
 
 void HolographicSpatialMappingMain::OnCameraRemoved(
     HolographicSpace^ sender,
-    HolographicSpaceCameraRemovedEventArgs^ args
-    )
+    HolographicSpaceCameraRemovedEventArgs^ args)
 {
     // Before letting this callback return, ensure that all references to the back buffer
     // are released.

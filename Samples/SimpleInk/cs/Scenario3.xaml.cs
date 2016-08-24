@@ -53,7 +53,7 @@ namespace SDKTemplate
             inkCanvas.InkPresenter.StrokesErased += InkPresenter_StrokesErased;
         }
 
-        private void OnSizeChanged()
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             HelperFunctions.UpdateCanvasSize(RootGrid, outputGrid, inkCanvas);
         }

@@ -16,6 +16,8 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Store;
 using Windows.Storage;
 using Windows.UI.Xaml.Controls;
+using System.Collections.ObjectModel;
+using Windows.Services.Store;
 
 namespace SDKTemplate
 {
@@ -28,20 +30,12 @@ namespace SDKTemplate
         {
             new Scenario() { Title = "Trial-mode", ClassType = typeof(Scenario1_TrialMode) },
             new Scenario() { Title = "In-app purchase", ClassType = typeof(Scenario2_InAppPurchase) },
-            new Scenario() { Title = "Expiring product", ClassType = typeof(Scenario3_ExpiringProduct) },
-            new Scenario() { Title = "Consumable product", ClassType = typeof(Scenario4_ConsumableProduct) },
-            new Scenario() { Title = "Advanced consumable product", ClassType = typeof(Scenario5_AdvancedConsumableProduct) },
-            new Scenario() { Title = "Large catalog product", ClassType = typeof(Scenario6_LargeCatalogProduct) },
-            new Scenario() { Title = "App listing URI", ClassType = typeof(Scenario7_AppListingURI) },
-            new Scenario() { Title = "Receipt", ClassType = typeof(Scenario8_Receipt) },
-            new Scenario() { Title = "Business to Business", ClassType = typeof(Scenario9_B2B) }
+            new Scenario() { Title = "Unmanaged consumable product", ClassType = typeof(Scenario3_UnmanagedConsumable) },
+            new Scenario() { Title = "Managed consumable product", ClassType = typeof(Scenario4_ConsumableProduct) },
+            new Scenario() { Title = "User collection", ClassType = typeof(Scenario5_UserCollection) },
+            new Scenario() { Title = "App listing URI", ClassType = typeof(Scenario6_AppListingURI) },
+            new Scenario() { Title = "Business to Business", ClassType = typeof(Scenario7_B2B) }
         };
-
-        public static async Task ConfigureSimulatorAsync(string filename)
-        {
-            StorageFile proxyFile = await Package.Current.InstalledLocation.GetFileAsync("data\\" + filename);
-            await CurrentAppSimulator.ReloadSimulatorAsync(proxyFile);
-        }
     }
 
     public class Scenario
@@ -53,6 +47,58 @@ namespace SDKTemplate
         public override string ToString()
         {
             return Title;
+        }
+    }
+
+    public static class Utils
+    {
+        public static ObservableCollection<ItemDetails>
+            CreateProductListFromQueryResult(StoreProductQueryResult addOns, string description)
+        {
+            var productList = new ObservableCollection<ItemDetails>();
+
+            if (addOns.ExtendedError != null)
+            {
+                ReportExtendedError(addOns.ExtendedError);
+            }
+            else if (addOns.Products.Count == 0)
+            {
+                MainPage.Current.NotifyUser($"No configured {description} found for this Store Product.", NotifyType.ErrorMessage);
+            }
+            else
+            {
+                foreach (StoreProduct product in addOns.Products.Values)
+                {
+                    productList.Add(new ItemDetails(product));
+                }
+            }
+            return productList;
+        }
+
+        static int IAP_E_UNEXPECTED = unchecked((int)0x803f6107);
+
+        public static void ReportExtendedError(Exception extendedError)
+        {
+            string message;
+            if (extendedError.HResult == IAP_E_UNEXPECTED)
+            {
+                message = "This sample has not been properly configured. See the README for instructions.";
+            }
+            else
+            {
+                // The user may be offline or there might be some other server failure.
+                message = $"ExtendedError: {extendedError.Message}";
+            }
+            MainPage.Current.NotifyUser(message, NotifyType.ErrorMessage);
+        }
+    }
+
+    public static class BindingUtils
+    {
+        // Helper function for binding.
+        public static bool IsNonNull(object o)
+        {
+            return o != null;
         }
     }
 }

@@ -26,10 +26,10 @@
                 </TextBlock>
 
                 <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
-                    Use scenario 2 of this sample or another language version of this sample
-                    and enter <Run Text="{x:Bind Protocol}"/>://hello as the URI, then click
-                    the "Launch default handler" button. It will launch this sample app into
-                    this page.
+                    Use scenario 2 of this sample or another language version of this sample.
+                    To test a custom scheme, enter <Run Text="{x:Bind Protocol}"/>://hello as the URI, then click
+                    the "Launch default handler" button. To test an AppUriHandler, enter https://msdn.microsoft.com/.
+                    Both links will launch this sample app into this page.
                 </TextBlock>
             </StackPanel>
         </ScrollViewer>

@@ -16,6 +16,14 @@
 
 namespace WindowsHolographicCodeSamples
 {
+    struct SurfaceMeshProperties
+    {
+        unsigned int vertexStride   = 0;
+        unsigned int normalStride   = 0;
+        unsigned int indexCount     = 0;
+        DXGI_FORMAT  indexFormat    = DXGI_FORMAT_UNKNOWN;
+    };
+
     class SurfaceMesh final
     {
     public:
@@ -25,6 +33,7 @@ namespace WindowsHolographicCodeSamples
         void UpdateSurface(Windows::Perception::Spatial::Surfaces::SpatialSurfaceMesh^ surface);
         void UpdateDeviceBasedResources(ID3D11Device* device);
         void UpdateTransform(
+            ID3D11Device* device, 
             ID3D11DeviceContext* context,
             DX::StepTimer const& timer,
             Windows::Perception::Spatial::SpatialCoordinateSystem^ baseCoordinateSystem
@@ -45,7 +54,7 @@ namespace WindowsHolographicCodeSamples
         void SetColorFadeTimer(const float& duration)   { m_colorFadeTimeout = duration; m_colorFadeTimer = 0.f;    }
 
     private:
-        void GetUpdatedVertexResources();
+        void SwapVertexBuffers();
         void CreateDirectXBuffer(
             ID3D11Device* device,
             D3D11_BIND_FLAG binding,
@@ -63,14 +72,14 @@ namespace WindowsHolographicCodeSamples
         Microsoft::WRL::ComPtr<ID3D11Buffer> m_updatedTriangleIndices;
         Microsoft::WRL::ComPtr<ID3D11Buffer> m_modelTransformBuffer;
 
-        ModelNormalConstantBuffer m_constantBufferData;
-
         Windows::Foundation::DateTime m_lastUpdateTime;
 
-        unsigned int m_vertexStride = 0;
-        unsigned int m_normalStride = 0;
-        DXGI_FORMAT  m_indexFormat  = DXGI_FORMAT_UNKNOWN;
+        SurfaceMeshProperties m_meshProperties;
+        SurfaceMeshProperties m_updatedMeshProperties;
 
+        ModelNormalConstantBuffer m_constantBufferData;
+
+        bool   m_constantBufferCreated = false;
         bool   m_loadingComplete    = false;
         bool   m_updateNeeded       = false;
         bool   m_updateReady        = false;
@@ -78,7 +87,6 @@ namespace WindowsHolographicCodeSamples
         float  m_lastActiveTime     = -1.f;
         float  m_colorFadeTimer     = -1.f;
         float  m_colorFadeTimeout   = -1.f;
-        uint32 m_indexCount         = 0;
 
         std::mutex m_meshResourcesMutex;
     };

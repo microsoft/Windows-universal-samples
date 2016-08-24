@@ -10,7 +10,6 @@
 //*********************************************************
 
 using System;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -106,7 +105,8 @@ namespace SDKTemplate
                         if (inputFrame.FrameReference.SourceKind == MediaFrameSourceKind.Depth)
                         {
                             // Use a special pseudo color to render 16 bits depth frame.
-                            result = TransformBitmap(inputBitmap, PseudoColorHelper.PseudoColorForDepth);
+                            var depthScale = (float)inputFrame.DepthMediaFrame.DepthFormat.DepthScaleInMeters;
+                            result = TransformBitmap(inputBitmap, (w, i, o) => PseudoColorHelper.PseudoColorForDepth(w, i, o, depthScale));
                         }
                         else
                         {
@@ -300,11 +300,12 @@ namespace SDKTemplate
             /// /// <param name="pixelWidth">Width of the input scanline, in pixels.</param>
             /// /// <param name="inputRowBytes">Pointer to the start of the input scanline.</param>
             /// /// <param name="outputRowBytes">Pointer to the start of the output scanline.</param>
-            public static unsafe void PseudoColorForDepth(int pixelWidth, byte* inputRowBytes, byte* outputRowBytes)
+            /// /// /// <param name="depthScale">Physical distance that corresponds to one unit in the input scanline.</param>
+            public static unsafe void PseudoColorForDepth(int pixelWidth, byte* inputRowBytes, byte* outputRowBytes, float depthScale)
             {
                 // Visualize space in front of your desktop.
-                const ushort min = 500;   // 0.5 meters
-                const ushort max = 4000;  // 4 meters
+                const float min = 0.5f;  // 0.5 meters
+                const float max = 4.0f;  // 4 meters
                 const float one_min = 1.0f / min;
                 const float range = 1.0f / max - one_min;
 
@@ -312,9 +313,9 @@ namespace SDKTemplate
                 uint* outputRow = (uint*)outputRowBytes;
                 for (int x = 0; x < pixelWidth; x++)
                 {
-                    var value = inputRow[x];
+                    var depth = inputRow[x] * depthScale;
 
-                    if (value == 0)
+                    if (depth == 0)
                     {
                         // Map invalid depth values to transparent pixels.
                         // This happens when depth information cannot be calculated, e.g. when objects are too close.
@@ -322,7 +323,7 @@ namespace SDKTemplate
                     }
                     else
                     {
-                        var alpha = (1.0f / value - one_min) / range;
+                        var alpha = (1.0f / depth - one_min) / range;
                         outputRow[x] = PseudoColor(alpha * alpha);
                     }
                 }

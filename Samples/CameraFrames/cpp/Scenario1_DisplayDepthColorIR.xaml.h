@@ -62,11 +62,6 @@ namespace SDKTemplate
         concurrency::task<void> CleanupMediaCaptureAsync();
 
         /// <summary>
-        /// Stop streaming from all readers.
-        /// </summary>
-        concurrency::task<void> StopCurrentStreamAsync();
-
-        /// <summary>
         /// Creates a reader for the frame source described by the MediaFrameSourceInfo.
         /// On frame arrived will render the output to the supplied software bitmap source.
         /// </summary>

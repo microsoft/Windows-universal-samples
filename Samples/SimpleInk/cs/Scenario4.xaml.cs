@@ -77,7 +77,7 @@ namespace SDKTemplate
             InstallReco.IsOpen = false;
         }
 
-        private void OnSizeChanged()
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             HelperFunctions.UpdateCanvasSize(RootGrid, Output, inkCanvas);
         }

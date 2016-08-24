@@ -31,21 +31,21 @@ using namespace Windows::UI::Xaml::Media::Imaging;
 template<typename T, typename U>
 T^ InterlockedExchangeRefPointer(T^* target, U value)
 {
-	static_assert(sizeof(T^) == sizeof(void*), "InterlockedExchangePointer is the wrong size");
-	T^ exchange = value;
-	void** rawExchange = reinterpret_cast<void**>(&exchange);
-	void** rawTarget = reinterpret_cast<void**>(target);
-	*rawExchange = static_cast<IInspectable*>(InterlockedExchangePointer(rawTarget, *rawExchange));
-	return exchange;
+    static_assert(sizeof(T^) == sizeof(void*), "InterlockedExchangePointer is the wrong size");
+    T^ exchange = value;
+    void** rawExchange = reinterpret_cast<void**>(&exchange);
+    void** rawTarget = reinterpret_cast<void**>(target);
+    *rawExchange = static_cast<IInspectable*>(InterlockedExchangePointer(rawTarget, *rawExchange));
+    return exchange;
 }
 
 // Convert a reference pointer to a specific ComPtr.
 template<typename T>
 Microsoft::WRL::ComPtr<T> AsComPtr(Platform::Object^ object)
 {
-	Microsoft::WRL::ComPtr<T> p;
-	reinterpret_cast<IUnknown*>(object)->QueryInterface(IID_PPV_ARGS(&p));
-	return p;
+    Microsoft::WRL::ComPtr<T> p;
+    reinterpret_cast<IUnknown*>(object)->QueryInterface(IID_PPV_ARGS(&p));
+    return p;
 }
 #pragma endregion
 
@@ -57,15 +57,15 @@ struct ColorBGRA
 
 // Colors to map values to based on intensity.
 static constexpr std::array<ColorBGRA, 9> colorRamp = {
-    ColorBGRA{0xFF, 0x7F, 0x00, 0x00},
-    ColorBGRA{0xFF, 0xFF, 0x00, 0x00},
-    ColorBGRA{0xFF, 0xFF, 0x7F, 0x00},
-    ColorBGRA{0xFF, 0xFF, 0xFF, 0x00},
-    ColorBGRA{0xFF, 0x7F, 0xFF, 0x7F},
-    ColorBGRA{0xFF, 0x00, 0xFF, 0xFF},
-    ColorBGRA{0xFF, 0x00, 0x7F, 0xFF},
-    ColorBGRA{0xFF, 0x00, 0x00, 0xFF},
-    ColorBGRA{0xFF, 0x00, 0x00, 0x7F}
+    ColorBGRA{ 0xFF, 0x7F, 0x00, 0x00 },
+    ColorBGRA{ 0xFF, 0xFF, 0x00, 0x00 },
+    ColorBGRA{ 0xFF, 0xFF, 0x7F, 0x00 },
+    ColorBGRA{ 0xFF, 0xFF, 0xFF, 0x00 },
+    ColorBGRA{ 0xFF, 0x7F, 0xFF, 0x7F },
+    ColorBGRA{ 0xFF, 0x00, 0xFF, 0xFF },
+    ColorBGRA{ 0xFF, 0x00, 0x7F, 0xFF },
+    ColorBGRA{ 0xFF, 0x00, 0x00, 0xFF },
+    ColorBGRA{ 0xFF, 0x00, 0x00, 0x7F }
 };
 
 static ColorBGRA ColorRampInterpolation(float value)
@@ -122,11 +122,11 @@ static ColorBGRA InfraredColor(float value)
 }
 
 // Maps each pixel in a scanline from a 16 bit depth value to a pseudo-color pixel.
-static void PseudoColorForDepth(int pixelWidth, byte* inputRowBytes, byte* outputRowBytes)
+static void PseudoColorForDepth(int pixelWidth, byte* inputRowBytes, byte* outputRowBytes, float depthScale)
 {
     // Visualize space in front of your desktop, in meters.
-    constexpr float min = 500;   // 0.5 meters
-    constexpr float max = 4000;  // 4 meters
+    constexpr float min = 0.5f;   // 0.5 meters
+    constexpr float max = 4.0f;  // 4 meters
     constexpr float one_min = 1.0f / min;
     constexpr float range = 1.0f / max - one_min;
 
@@ -134,17 +134,17 @@ static void PseudoColorForDepth(int pixelWidth, byte* inputRowBytes, byte* outpu
     ColorBGRA* outputRow = reinterpret_cast<ColorBGRA*>(outputRowBytes);
     for (int x = 0; x < pixelWidth; x++)
     {
-        UINT16 value = inputRow[x];
+        float depth = static_cast<float>(inputRow[x]) * depthScale;
 
         // Map invalid depth values to transparent pixels.
         // This happens when depth information cannot be calculated, e.g. when objects are too close.
-        if (value == 0)
+        if (depth == 0)
         {
             outputRow[x] = { 0 };
         }
         else
         {
-            float alpha = (1.0f / value - one_min) / range;
+            float alpha = (1.0f / depth - one_min) / range;
             outputRow[x] = PseudoColor(alpha * alpha);
         }
     }
@@ -186,10 +186,10 @@ Concurrency::task<void> FrameRenderer::DrainBackBufferAsync()
         if (SoftwareBitmapSource^ imageSource = dynamic_cast<SoftwareBitmapSource^>(m_imageElement->Source))
         {
             return create_task(imageSource->SetBitmapAsync(latestBitmap))
-				.then([this]()
-			{
-				return DrainBackBufferAsync();
-			}, task_continuation_context::use_current());
+                .then([this]()
+            {
+                return DrainBackBufferAsync();
+            }, task_continuation_context::use_current());
         }
     }
 
@@ -209,11 +209,11 @@ void FrameRenderer::ProcessFrame(Windows::Media::Capture::Frames::MediaFrameRefe
         return;
     }
 
-	SoftwareBitmap^ softwareBitmap = ConvertToDisplayableImage(frame->VideoMediaFrame);
+    SoftwareBitmap^ softwareBitmap = ConvertToDisplayableImage(frame->VideoMediaFrame);
     if (softwareBitmap != nullptr)
     {
         // Swap the processed frame to _backBuffer, and trigger the UI thread to render it.
-		softwareBitmap = InterlockedExchangeRefPointer(&m_backBuffer, softwareBitmap);
+        softwareBitmap = InterlockedExchangeRefPointer(&m_backBuffer, softwareBitmap);
 
         // UI thread always resets m_backBuffer before using it. Unused bitmap should be disposed.
         delete softwareBitmap;
@@ -247,37 +247,43 @@ SoftwareBitmap^ FrameRenderer::ConvertToDisplayableImage(VideoMediaFrame^ inputF
     if ((inputBitmap->BitmapPixelFormat == BitmapPixelFormat::Bgra8) &&
         (inputBitmap->BitmapAlphaMode == BitmapAlphaMode::Premultiplied))
     {
-		// SoftwareBitmap is already in the correct format for an Image control, so just return a copy.
-		return SoftwareBitmap::Copy(inputBitmap);
+        // SoftwareBitmap is already in the correct format for an Image control, so just return a copy.
+        return SoftwareBitmap::Copy(inputBitmap);
     }
     else if ((inputBitmap->BitmapPixelFormat == BitmapPixelFormat::Gray16) && (inputFrame->FrameReference->SourceKind == MediaFrameSourceKind::Depth))
     {
-		// Use a special pseudo color to render 16 bits depth frame.
-		return TransformBitmap(inputBitmap, PseudoColorForDepth);
+        using namespace std::placeholders;
+
+        // Use a special pseudo color to render 16 bits depth frame.
+        // Since we must scale the output appropriately we use std::bind to
+        // create a function that takes the depth scale as input but also matches
+        // the required signature.
+        double depthScale = inputFrame->DepthMediaFrame->DepthFormat->DepthScaleInMeters;
+        return TransformBitmap(inputBitmap, std::bind(&PseudoColorForDepth, _1, _2, _3, static_cast<float>(depthScale)));
     }
     else if (inputBitmap->BitmapPixelFormat == BitmapPixelFormat::Gray16)
     {
-		// Use pseudo color to render 16 bits frames.
-		return TransformBitmap(inputBitmap, PseudoColorFor16BitInfrared);
+        // Use pseudo color to render 16 bits frames.
+        return TransformBitmap(inputBitmap, PseudoColorFor16BitInfrared);
     }
     else if (inputBitmap->BitmapPixelFormat == BitmapPixelFormat::Gray8)
     {
-		// Use pseudo color to render 8 bits frames.
-		return TransformBitmap(inputBitmap, PseudoColorFor8BitInfrared);
+        // Use pseudo color to render 8 bits frames.
+        return TransformBitmap(inputBitmap, PseudoColorFor8BitInfrared);
     }
     else
     {
         try
         {
-			// Convert to Bgra8 Premultiplied SoftwareBitmap, so xaml can display in UI.
-			return SoftwareBitmap::Convert(inputBitmap, BitmapPixelFormat::Bgra8, BitmapAlphaMode::Premultiplied);
+            // Convert to Bgra8 Premultiplied SoftwareBitmap, so xaml can display in UI.
+            return SoftwareBitmap::Convert(inputBitmap, BitmapPixelFormat::Bgra8, BitmapAlphaMode::Premultiplied);
         }
         catch (InvalidArgumentException^ exception)
         {
-			// Conversion of software bitmap format is not supported.  Drop this frame.
-			OutputDebugStringW(exception->Message->Data());
-			OutputDebugStringW(L"\r\n");
-			return nullptr;
+            // Conversion of software bitmap format is not supported.  Drop this frame.
+            OutputDebugStringW(exception->Message->Data());
+            OutputDebugStringW(L"\r\n");
+            return nullptr;
         }
     }
 
@@ -286,8 +292,8 @@ SoftwareBitmap^ FrameRenderer::ConvertToDisplayableImage(VideoMediaFrame^ inputF
 
 SoftwareBitmap^ FrameRenderer::TransformBitmap(SoftwareBitmap^ inputBitmap, TransformScanline pixelTransformation)
 {
-	// XAML Image control only supports premultiplied Bgra8 format.
-	SoftwareBitmap^ outputBitmap = ref new SoftwareBitmap(
+    // XAML Image control only supports premultiplied Bgra8 format.
+    SoftwareBitmap^ outputBitmap = ref new SoftwareBitmap(
         BitmapPixelFormat::Bgra8,
         inputBitmap->PixelWidth,
         inputBitmap->PixelHeight,
@@ -303,17 +309,17 @@ SoftwareBitmap^ FrameRenderer::TransformBitmap(SoftwareBitmap^ inputBitmap, Tran
     int pixelWidth = inputBitmap->PixelWidth;
     int pixelHeight = inputBitmap->PixelHeight;
 
-	IMemoryBufferReference^ inputReference = input->CreateReference();
+    IMemoryBufferReference^ inputReference = input->CreateReference();
     IMemoryBufferReference^ outputReference = output->CreateReference();
 
     // Get input and output byte access buffers.
-	byte* inputBytes;
+    byte* inputBytes;
     UINT32 inputCapacity;
-	AsComPtr<IMemoryBufferByteAccess>(inputReference)->GetBuffer(&inputBytes, &inputCapacity);
+    AsComPtr<IMemoryBufferByteAccess>(inputReference)->GetBuffer(&inputBytes, &inputCapacity);
 
-	byte* outputBytes;
+    byte* outputBytes;
     UINT32 outputCapacity;
-	AsComPtr<IMemoryBufferByteAccess>(outputReference)->GetBuffer(&outputBytes, &outputCapacity);
+    AsComPtr<IMemoryBufferByteAccess>(outputReference)->GetBuffer(&outputBytes, &outputCapacity);
 
     // Iterate over all pixels, and store the converted value.
     for (int y = 0; y < pixelHeight; y++)
@@ -324,11 +330,11 @@ SoftwareBitmap^ FrameRenderer::TransformBitmap(SoftwareBitmap^ inputBitmap, Tran
         pixelTransformation(pixelWidth, inputRowBytes, outputRowBytes);
     }
 
-	// Close objects that need closing.
-	delete outputReference;
-	delete inputReference;
-	delete output;
-	delete input;
+    // Close objects that need closing.
+    delete outputReference;
+    delete inputReference;
+    delete output;
+    delete input;
 
     return outputBitmap;
 }

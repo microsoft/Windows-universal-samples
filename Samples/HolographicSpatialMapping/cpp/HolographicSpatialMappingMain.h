@@ -66,28 +66,23 @@ namespace HolographicSpatialMapping
         void OnCameraRemoved(
             Windows::Graphics::Holographic::HolographicSpace^ sender,
             Windows::Graphics::Holographic::HolographicSpaceCameraRemovedEventArgs^ args);
-
-        // Used to notify the app when the positional tracking state changes.
-        void OnLocatabilityChanged(
+        
+        // Used to prevent the device from deactivating positional tracking, which is 
+        // necessary to continue to receive spatial mapping data.
+        void OnPositionalTrackingDeactivating(
             Windows::Perception::Spatial::SpatialLocator^ sender,
-            Platform::Object^ args);
+            Windows::Perception::Spatial::SpatialLocatorPositionalTrackingDeactivatingEventArgs^ args);
 
         // Clears event registration state. Used when changing to a new HolographicSpace
         // and when tearing down AppMain.
         void UnregisterHolographicEventHandlers();
-
-        // Initializes the Spatial Mapping surface observer.
-        void InitializeSurfaceObserver(Windows::Perception::Spatial::SpatialCoordinateSystem^ coordinateSystem);
-
-        // Positions the Spatial Mapping surface observer at the origin of the given coordinate system.
-        void UpdateSurfaceObserverPosition(Windows::Perception::Spatial::SpatialCoordinateSystem^ coordinateSystem);
 
 #ifdef DRAW_SAMPLE_CONTENT
         // Listens for the Pressed spatial input event.
         std::shared_ptr<SpatialInputHandler>                                m_spatialInputHandler;
 
         // A data handler for surface meshes.
-        std::unique_ptr<WindowsHolographicCodeSamples::RealtimeSurfaceMeshRenderer> m_meshCollection;
+        std::unique_ptr<WindowsHolographicCodeSamples::RealtimeSurfaceMeshRenderer> m_meshRenderer;
 #endif
 
         // Cached pointer to device resources.
@@ -108,8 +103,14 @@ namespace HolographicSpatialMapping
         // Event registration tokens.
         Windows::Foundation::EventRegistrationToken                         m_cameraAddedToken;
         Windows::Foundation::EventRegistrationToken                         m_cameraRemovedToken;
-        Windows::Foundation::EventRegistrationToken                         m_locatabilityChangedToken;
-        Windows::Foundation::EventRegistrationToken                         m_surfaceObserverEventToken;
+        Windows::Foundation::EventRegistrationToken                         m_positionalTrackingDeactivatingToken;
+        Windows::Foundation::EventRegistrationToken                         m_surfacesChangedToken;
+
+        // Indicates whether access to spatial mapping data has been granted.
+        bool                                                                m_surfaceAccessAllowed = false;
+
+        // Indicates whether the surface observer initialization process was started.
+        bool                                                                m_spatialPerceptionAccessRequested = false;
 
         // Obtains spatial mapping data from the device in real time.
         Windows::Perception::Spatial::Surfaces::SpatialSurfaceObserver^     m_surfaceObserver;

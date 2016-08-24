@@ -10,13 +10,11 @@
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="Scenario1_TrialMode.xaml.cpp" />
     <ClCompile Include="Scenario2_InAppPurchase.xaml.cpp" />
-    <ClCompile Include="Scenario3_ExpiringProduct.xaml.cpp" />
     <ClCompile Include="Scenario4_ConsumableProduct.xaml.cpp" />
-    <ClCompile Include="Scenario5_AdvancedConsumableProduct.xaml.cpp" />
-    <ClCompile Include="Scenario6_LargeCatalogProduct.xaml.cpp" />
-    <ClCompile Include="Scenario7_AppListingURI.xaml.cpp" />
-    <ClCompile Include="Scenario8_Receipt.xaml.cpp" />
-    <ClCompile Include="Scenario9_B2B.xaml.cpp" />
+    <ClCompile Include="Scenario3_UnmanagedConsumable.xaml.cpp" />
+    <ClCompile Include="Scenario5_UserCollection.xaml.cpp" />
+    <ClCompile Include="Scenario6_AppListingURI.xaml.cpp" />
+    <ClCompile Include="Scenario7_B2B.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -25,13 +23,12 @@
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_TrialMode.xaml.h" />
     <ClInclude Include="Scenario2_InAppPurchase.xaml.h" />
-    <ClInclude Include="Scenario3_ExpiringProduct.xaml.h" />
     <ClInclude Include="Scenario4_ConsumableProduct.xaml.h" />
-    <ClInclude Include="Scenario5_AdvancedConsumableProduct.xaml.h" />
-    <ClInclude Include="Scenario6_LargeCatalogProduct.xaml.h" />
-    <ClInclude Include="Scenario7_AppListingURI.xaml.h" />
-    <ClInclude Include="Scenario8_Receipt.xaml.h" />
-    <ClInclude Include="Scenario9_B2B.xaml.h" />
+    <ClInclude Include="Scenario3_UnmanagedConsumable.xaml.h" />
+    <ClInclude Include="Scenario5_UserCollection.xaml.h" />
+    <ClInclude Include="Scenario6_AppListingURI.xaml.h" />
+    <ClInclude Include="Scenario7_B2B.xaml.h" />
+    <ClInclude Include="ItemsListViewModel.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
@@ -63,16 +60,14 @@
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
     <Page Include="..\shared\Scenario1_TrialMode.xaml" />
     <Page Include="..\shared\Scenario2_InAppPurchase.xaml" />
-    <Page Include="..\shared\Scenario3_ExpiringProduct.xaml" />
     <Page Include="..\shared\Scenario4_ConsumableProduct.xaml" />
-    <Page Include="..\shared\Scenario5_AdvancedConsumableProduct.xaml" />
+    <Page Include="..\shared\Scenario3_UnmanagedConsumable.xaml" />
+    <Page Include="..\shared\Scenario5_UserCollection.xaml" />
+    <Page Include="..\shared\Scenario6_AppListingURI.xaml" />
+    <Page Include="..\shared\Scenario7_B2B.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>
-    <Page Include="..\shared\Scenario6_LargeCatalogProduct.xaml" />
-    <Page Include="..\shared\Scenario7_AppListingURI.xaml" />
-    <Page Include="..\shared\Scenario8_Receipt.xaml" />
-    <Page Include="..\shared\Scenario9_B2B.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">
@@ -81,34 +76,5 @@
     <Filter Include="Styles">
       <UniqueIdentifier>{c94ee49f-5645-473b-bd60-ebc58bab2ede}</UniqueIdentifier>
     </Filter>
-    <Filter Include="data">
-      <UniqueIdentifier>{e4e9ce02-70b2-4391-b1c9-856ccc17e3e3}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <Xml Include="..\shared\data\app-listing-uri.xml">
-      <Filter>data</Filter>
-    </Xml>
-    <Xml Include="..\shared\data\expiring-product.xml">
-      <Filter>data</Filter>
-    </Xml>
-    <Xml Include="..\shared\data\in-app-purchase.xml">
-      <Filter>data</Filter>
-    </Xml>
-    <Xml Include="..\shared\data\in-app-purchase-consumables.xml">
-      <Filter>data</Filter>
-    </Xml>
-    <Xml Include="..\shared\data\in-app-purchase-consumables-advanced.xml">
-      <Filter>data</Filter>
-    </Xml>
-    <Xml Include="..\shared\data\in-app-purchase-large-catalog.xml">
-      <Filter>data</Filter>
-    </Xml>
-    <Xml Include="..\shared\data\receipt.xml">
-      <Filter>data</Filter>
-    </Xml>
-    <Xml Include="..\shared\data\trial-mode.xml">
-      <Filter>data</Filter>
-    </Xml>
-  </ItemGroup>
-  Project>
+</Project>

@@ -65,7 +65,7 @@ namespace SDKTemplate
         AdaptiveMediaSource adaptiveMS;
 
 
-        private void Page_OnLoaded()
+        private void Page_OnLoaded(object sender, RoutedEventArgs e)
         {
             // We enforce HDCP in this scenario that uses encryption but not PlayReady.
             hdcpSession = new HdcpSession();
@@ -86,7 +86,7 @@ namespace SDKTemplate
             SelectedContent.SelectedItem = MainPage.FindContentById(13);
 
             // Initialize tokenMethod based on the default selected radio button.
-            var defaultRadioButton = AzureAuthorizationMethodPanel.Children.OfType<RadioButton>().First(e => e.IsChecked.Value);
+            var defaultRadioButton = AzureAuthorizationMethodPanel.Children.OfType<RadioButton>().First(button => button.IsChecked.Value);
             Enum.TryParse((string)defaultRadioButton.Tag, out tokenMethod);
 
             Log("Content Id 13 and 14 require that you choose an authorization method.");

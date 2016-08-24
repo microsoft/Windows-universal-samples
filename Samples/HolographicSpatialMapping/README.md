@@ -116,4 +116,4 @@ you will need to use a PIN to pair your PC with the Microsoft HoloLens.
 
 - To debug the sample and then run it, follow the steps listed above to connect your
   developer-unlocked Microsoft HoloLens, then press F5 or select **Debug** \> **Start Debugging**.
-  To run  the sample without debugging, press Ctrl+F5 or select **Debug** \> **Start Without Debugging**.
+  To run the sample without debugging, press Ctrl+F5 or select **Debug** \> **Start Without Debugging**.

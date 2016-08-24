@@ -237,7 +237,7 @@ namespace AudioCreation
             speakerContainer.Background = new SolidColorBrush(Colors.Green);
 
             submixNode = graph.CreateSubmixNode();
-            subMixNode.Background = new SolidColorBrush(Colors.Green);
+            submixNodeContainer.Background = new SolidColorBrush(Colors.Green);
             submixNode.AddOutgoingConnection(deviceOutputNode);
 
             echoEffect = new EchoEffectDefinition(graph);
