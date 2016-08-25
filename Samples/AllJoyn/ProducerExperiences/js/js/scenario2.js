@@ -250,15 +250,8 @@
     }
 
     function convertUtf8ToHex(str) {
-        var result = "";
-        var hex;
-
-        for (var i = 0; i < str.length; i++) {
-            hex = str.charCodeAt(i).toString(16);
-            result += hex;
-        }
-
-        return result;
+        var tempBuffer = Windows.Security.Cryptography.CryptographicBuffer.convertStringToBinary(str, Windows.Security.Cryptography.BinaryStringEncoding.Utf8);
+        return Windows.Security.Cryptography.CryptographicBuffer.encodeToHexString(tempBuffer);
     }
 
     function reportStatus(message) {

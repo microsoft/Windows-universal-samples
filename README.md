@@ -86,29 +86,32 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/CameraResolution">Camera resolution</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/CameraStreamCorrelation">Camera stream correlation</a></td>
   <td><a href="Samples/LiveDash">DASH streaming</a></td>
   <td><a href="Samples/D2DPhotoAdjustment">Direct2D photo adjustment</a></td>
-  <td><a href="Samples/MediaEditing">Media editing</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/MediaEditing">Media editing</a></td>
+  <td><a href="Samples/MediaImport">Media import</a></td>
   <td><a href="Samples/XamlCustomMediaTransportControls">Media transport controls</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/MIDI">MIDI</a></td>
   <td><a href="Samples/Playlists">Playlists</a></td>
+  <td><a href="Samples/SimpleImaging">Simple imaging</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/SimpleImaging">Simple imaging</a></td>
   <td><a href="Samples/SpatialSound">Spatial audio</a></td>
   <td><a href="Samples/SystemMediaTransportControls">System media transport controls</a></td>
+  <td><a href="Samples/MediaTranscoding">Transcoding media</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/MediaTranscoding">Transcoding media</a></td>
   <td><a href="Samples/VideoPlayback">Video playback</a></td>
   <td><a href="Samples/VideoPlaybackSynchronization">Video playback synchronization</a></td>
+  <td><a href="Samples/CameraVideoStabilization">Video stabilization</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/CameraVideoStabilization">Video stabilization</a></td>
   <td><a href="Samples/WindowsAudioSession">Windows audio session (WASAPI)</a></td>
-  <td><a href="Samples/MediaImport">Windows media import</a></td>
  </tr>
 </table>
 

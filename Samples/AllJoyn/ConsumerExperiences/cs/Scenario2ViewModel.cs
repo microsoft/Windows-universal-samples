@@ -16,7 +16,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -24,6 +23,7 @@ using Windows.Devices.AllJoyn;
 using Windows.Devices.WiFi;
 using Windows.Networking.Connectivity;
 using Windows.Security.Credentials;
+using Windows.Security.Cryptography;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 
@@ -884,7 +884,7 @@ namespace AllJoynConsumerExperiences
             {
                 UpdateStatusAsync("Attempting to configure onboardee...", NotifyType.StatusMessage);
 
-                OnboardingConfigureWiFiResult configureWifiResult = await m_consumer.ConfigureWiFiAsync(ssid, password, authType);
+                OnboardingConfigureWiFiResult configureWifiResult = await m_consumer.ConfigureWiFiAsync(ssid, ConvertUtf8ToHex(password), authType);
                 if (configureWifiResult.Status == AllJoynStatus.Ok)
                 {
                     UpdateStatusAsync("Onboardee sucessfully configured.", NotifyType.StatusMessage);
@@ -906,6 +906,20 @@ namespace AllJoynConsumerExperiences
                 }
             }
             ClearPasswords();
+        }
+
+        private static string ConvertUtf8ToHex(string inputString)
+        {
+            if (string.IsNullOrEmpty(inputString))
+            {
+                return string.Empty;
+            }
+            else
+            {
+                var tempBuffer = CryptographicBuffer.ConvertStringToBinary(inputString, BinaryStringEncoding.Utf8);
+                var hexString = CryptographicBuffer.EncodeToHexString(tempBuffer);
+                return hexString;
+            }
         }
 
         private async void AttemptConnectionAsync()
