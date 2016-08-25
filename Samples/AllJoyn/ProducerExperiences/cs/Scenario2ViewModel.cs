@@ -14,10 +14,10 @@ using SDKTemplate;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Devices.AllJoyn;
+using Windows.Security.Cryptography;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 
@@ -334,7 +334,7 @@ namespace AllJoynProducerExperiences
                         }
                         else
                         {
-                            if (AppData.OnboardingConfigurePassphrase.Equals(AppData.SampleNetworkPassword, StringComparison.OrdinalIgnoreCase))
+                            if (AppData.OnboardingConfigurePassphrase.Equals(ConvertUtf8ToHex(AppData.SampleNetworkPassword), StringComparison.OrdinalIgnoreCase))
                             {
                                 returnArg.Value1 = (short)ConnectionResultCode.Validated;
                                 returnArg.Value2 = "Connected successfully";
@@ -374,6 +374,20 @@ namespace AllJoynProducerExperiences
             else
             {
                 UpdateStatusAsync(string.Format("Onboarding Failed. Attempt to connect failed with result code: {0} and message: {1}.", ((ConnectionResultCode)returnArg.Value1).ToString(), returnArg.Value2), NotifyType.ErrorMessage);
+            }
+        }
+
+        static private string ConvertUtf8ToHex(string inputString)
+        {
+            if (string.IsNullOrEmpty(inputString))
+            {
+                return string.Empty;
+            }
+            else
+            {
+                var tempBuffer = CryptographicBuffer.ConvertStringToBinary(inputString, BinaryStringEncoding.Utf8);
+                var hexString = CryptographicBuffer.EncodeToHexString(tempBuffer);
+                return hexString;
             }
         }
 

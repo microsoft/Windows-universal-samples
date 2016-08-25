@@ -192,19 +192,18 @@ namespace SDKTemplate
                     switch (systemMediaControls.SoundLevel)
                     {
                         case SoundLevel.Full:
+                        case SoundLevel.Low:
+                            // If we had paused due to system mute, then resume on unmute.
                             if (pausedDueToMute)
                             {
-                                // If we previously paused due to being muted, resume. 
                                 MyMediaElement.Play();
+                                pausedDueToMute = false;
                             }
                             break;
-                        case SoundLevel.Low:
-                            // We're being ducked, take no action. 
-                            break;
                         case SoundLevel.Muted:
+                            // We've been muted by the system. Pause playback to release resources.
                             if (MyMediaElement != null && MyMediaElement.CurrentState == MediaElementState.Playing)
                             {
-                                // We've been muted by the system, pause to save our playback position. 
                                 MyMediaElement.Pause();
                                 pausedDueToMute = true;
                             }
