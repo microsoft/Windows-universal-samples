@@ -136,6 +136,10 @@ namespace SDKTemplate
 
                     // after successfully claiming, attach the datareceived event handler.
                     claimedScanner.DataReceived += claimedScanner_DataReceived;
+                    
+                    // if your device has scanner button(hardware trigger), you catch trigger event(press/release)
+                    claimedScanner.TriggerPressed += claimedScanner_TriggerPress;
+                    claimedScanner.TriggerReleased += claimedScanner_TriggerRelease;
 
                     // Ask the API to decode the data by default. By setting this, API will decode the raw data from the barcode scanner and 
                     // send the ScanDataLabel and ScanDataType in the DataReceived event
@@ -262,6 +266,26 @@ namespace SDKTemplate
 
                 ScenarioOutputScanDataType.Text = BarcodeSymbologies.GetName(args.Report.ScanDataType);
             });
+        }
+        
+        // <summary>
+        /// Occurs when the barcode scanner trigger or button is pressed during a scanning operation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"> </param>
+        async void claimedScanner_TriggerPress(object sender, ClaimedBarcodeScanner e)
+        {
+            // TODO:
+        }
+        
+        // <summary>
+        /// Occurs when the barcode scanner trigger or button is released during a scanning operation.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"> </param>
+        async void claimedScanner_TriggerRelease(object sender, ClaimedBarcodeScanner e)
+        {
+            // TODO:
         }
 
         /// <summary>
