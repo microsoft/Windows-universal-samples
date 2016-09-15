@@ -39,7 +39,7 @@ OnboardingProducer::OnboardingProducer(AllJoynBusAttachment^ busAttachment)
 {
     m_weak = new WeakReference(this);
     ServiceObjectPath = ref new String(L"/Service");
-    m_signals = ref new OnboardingSignals();
+    m_signals = ref new OnboardingLegacySignals();
     m_busAttachmentStateChangedToken.Value = 0;
 }
 

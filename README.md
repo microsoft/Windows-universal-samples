@@ -413,7 +413,10 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 <table>
  <tr>
   <td><a href="Samples/HolographicFaceTracking">Holographic face tracking</a></td>
+  <td><a href="Samples/HolographicMixedRealityCapture">Holographic mixed reality capture</a></td>
   <td><a href="Samples/HolographicSpatialMapping">Holographic spatial mapping</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/HolographicTagAlong">Tag-along hologram</a></td>
  </tr>
 </table>

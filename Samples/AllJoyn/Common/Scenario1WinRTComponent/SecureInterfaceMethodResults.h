@@ -98,6 +98,7 @@ public:
         void set(_In_ int32 value) { m_status = value; }
     }
 
+    // "Determine if the output of the Concatenate method is returned as upper case string or not"
     property bool IsUpperCaseEnabled
     {
         bool get() { return m_value; }

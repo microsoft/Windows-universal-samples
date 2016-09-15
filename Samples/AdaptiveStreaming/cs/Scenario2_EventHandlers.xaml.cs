@@ -341,7 +341,7 @@ namespace SDKTemplate
 
                 // This extension method in MediaPlaybackItemStringExtensions dumps all the properties from all the tracks.
                 var allProperties = item.ToFormattedString();
-                Log(allProperties);
+                Log($"MediaPlaybackItem nested properties: {allProperties}");
                 // The AdaptiveMediaSource can manage multiple video tracks internally,
                 // but only a single video track is exposed in the MediaPlaybackItem, not a collection.
             }
@@ -354,6 +354,7 @@ namespace SDKTemplate
         {
             item.AudioTracks.SelectedIndexChanged += AudioTracks_SelectedIndexChanged;
             item.AudioTracksChanged += Item_AudioTracksChanged;
+            item.VideoTracksChanged += Item_VideoTracksChanged;
             item.TimedMetadataTracksChanged += Item_TimedMetadataTracksChanged;
         }
 
@@ -365,10 +366,15 @@ namespace SDKTemplate
             }
             item.AudioTracks.SelectedIndexChanged -= AudioTracks_SelectedIndexChanged;
             item.AudioTracksChanged -= Item_AudioTracksChanged;
+            item.VideoTracksChanged -= Item_VideoTracksChanged;
             item.TimedMetadataTracksChanged -= Item_TimedMetadataTracksChanged;
             foreach (AudioTrack audioTrack in item.AudioTracks)
             {
                 audioTrack.OpenFailed -= AudioTrack_OpenFailed;
+            }
+            foreach (VideoTrack videoTrack in item.VideoTracks)
+            {
+                videoTrack.OpenFailed -= VideoTrack_OpenFailed;
             }
         }
 
@@ -412,6 +418,25 @@ namespace SDKTemplate
             }
         }
 
+        private void Item_VideoTracksChanged(MediaPlaybackItem sender, IVectorChangedEventArgs args)
+        {
+            Log($"item.VideoTracksChanged: CollectionChange:{args.CollectionChange} Index:{args.Index} Total:{sender.VideoTracks.Count}");
+
+            switch (args.CollectionChange)
+            {
+                case CollectionChange.Reset:
+                    foreach (VideoTrack track in sender.VideoTracks)
+                    {
+                        track.OpenFailed += VideoTrack_OpenFailed;
+                    }
+                    break;
+                case CollectionChange.ItemInserted:
+                    VideoTrack newTrack = sender.VideoTracks[(int)args.Index];
+                    newTrack.OpenFailed += VideoTrack_OpenFailed;
+                    break;
+            }
+        }
+
         private void Item_TimedMetadataTracksChanged(MediaPlaybackItem sender, IVectorChangedEventArgs args)
         {
             Log($"item.TimedMetadataTracksChanged: CollectionChange:{args.CollectionChange} Index:{args.Index} Total:{sender.TimedMetadataTracks.Count}");
@@ -424,6 +449,12 @@ namespace SDKTemplate
         {
             Log($"AudioTrack.OpenFailed: ExtendedError:{args.ExtendedError} DecoderStatus:{sender.SupportInfo.DecoderStatus} MediaSourceStatus:{sender.SupportInfo.MediaSourceStatus}");
         }
+
+        private void VideoTrack_OpenFailed(VideoTrack sender, VideoTrackOpenFailedEventArgs args)
+        {
+            Log($"VideoTrack.OpenFailed: ExtendedError:{args.ExtendedError} DecoderStatus:{sender.SupportInfo.DecoderStatus} MediaSourceStatus:{sender.SupportInfo.MediaSourceStatus}");
+        }
+
 
         #endregion
 
