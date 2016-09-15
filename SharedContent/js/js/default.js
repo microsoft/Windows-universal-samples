@@ -9,19 +9,20 @@
     var splitView;
 
     WinJS.Namespace.define("SdkSample", {
-        paneHiddenInitially: false
+        paneOpenInitially: false
     });
 
     function activated(eventObject) {
         var activationKind = eventObject.detail.kind;
         var activatedEventArgs = eventObject.detail.detail;
 
-        SdkSample.paneHiddenInitially = window.innerWidth <= 768;
+        SdkSample.paneOpenInitially = window.innerWidth > 768;
         var p = WinJS.UI.processAll().
             then(function () {
                 splitView = document.querySelector("#root").winControl;
                 splitView.onbeforeclose = function () { WinJS.Utilities.addClass(splitView.element, "hiding"); };
                 splitView.onafterclose = function () { WinJS.Utilities.removeClass(splitView.element, "hiding"); };
+                splitView.onafteropen = handleOpened;
                 window.addEventListener("resize", handleResize);
                 handleResize();
 
@@ -82,6 +83,12 @@
 
     function handleSplitViewButton() {
         splitView.paneOpened = !splitView.paneOpened;
+    }
+
+    function handleOpened() {
+        // Different SplitView openedDisplayModes handle focus differently when opened.
+        // Normalize them and always put focus onto the SplitView pane element when opened.
+        splitView.element.querySelector(".win-splitview-pane").focus();
     }
 
     function handleResize() {
