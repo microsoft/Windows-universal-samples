@@ -13,13 +13,13 @@
   <mp:PhoneIdentity PhoneProductId="2a15042f-e258-4b7e-9260-62ceea6b5305" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>CameraProfile</DisplayName>
+    <DisplayName>CameraProfile JS Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>images\storelogo-sdk.png</Logo>
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.14393.0" />
   </Dependencies>
 
   <Resources>

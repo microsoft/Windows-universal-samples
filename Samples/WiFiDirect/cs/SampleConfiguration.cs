@@ -22,8 +22,8 @@ namespace SDKTemplate
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title="Advertiser", ClassType=typeof(Scenario1)},
-            new Scenario() { Title="Connector", ClassType=typeof(Scenario2)}
+            new Scenario() { Title="Advertiser", ClassType=typeof(Scenario1_Advertiser)},
+            new Scenario() { Title="Connector", ClassType=typeof(Scenario2_Connector)}
         };
 
         public async void NotifyUserFromBackground(string strMessage, NotifyType type)

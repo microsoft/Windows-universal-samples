@@ -15,11 +15,11 @@ This sample covers these key tasks:
 - handling file activation through the **Activated** event 
 - launching an app for a protocol using [**LaunchUriAsync**](http://msdn.microsoft.com/library/windows/apps/hh701476)
 - handling protocol activation through the **Activated** event 
+- associating the app with a website using the **AppUriHandler** extension
 - launching a target app and having the currently running source app remain on the screen for various amounts of screen space using [**LauncherOptions.DesiredRemainingView**](http://msdn.microsoft.com/library/windows/apps/dn298314).
 - **Note**  [**LauncherOptions.DesiredRemainingView**](http://msdn.microsoft.com/library/windows/apps/dn298314) is only supported on desktop Windows when it is running in tablet mode. 
 
 To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windows.com). 
-
 
 **Note**  For Windows 10 app samples, go to  [Windows 10 Samples](https://github.com/Microsoft/Windows-universal-samples). The samples for Windows 10 can be built and run using Windows developer [tools](https://developer.windows.com).
 
@@ -37,7 +37,7 @@ For more info about the concepts and APIs demonstrated in this sample, see these
 - [**Windows.System.Launcher.LaunchUriAsync**](http://msdn.microsoft.com/library/windows/apps/hh701476)
 - [**Windows.UI.WebUI.WebUIFileActivatedEventArgs**](http://msdn.microsoft.com/library/windows/apps/hh701781)
 - [**Windows.UI.WebUI.WebUIProtocolActivatedEventArgs**](http://msdn.microsoft.com/library/windows/apps/hh701885)
-
+- [**AppUriHandler extension**](https://msdn.microsoft.com/library/windows/apps/mt670665.aspx)
 ###Tasks
 
 - [Handle file activation](https://msdn.microsoft.com/library/windows/apps/mt269385)

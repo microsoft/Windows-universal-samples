@@ -34,11 +34,14 @@ namespace SDKTemplate
         bool _isPreviewing;
         bool _isRecording;
 
+        // Folder in which the captures will be stored
+        Windows::Storage::StorageFolder^ _captureFolder;
+
         Concurrency::task<void> InitializeCameraAsync();
         Concurrency::task<void> CleanupCameraAsync();
 
-        void InitializeCameraButton_Tapped(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-        void VideoButton_Tapped(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void InitializeCameraButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void VideoButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
         void PreviewSettings_Changed(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void VideoSettings_Changed(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);

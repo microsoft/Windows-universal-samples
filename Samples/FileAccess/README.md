@@ -93,11 +93,11 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## System requirements
 
-**Client:** Windows 10
+**Client:** Windows 10 build 10500 or higher
 
-**Server:** Windows Server 2016 Technical Preview
+**Server:** Windows Server 2016 Technical Preview build 10500 or higher
 
-**Phone:** Windows 10
+**Phone:** Windows 10 build 10500 or higher
 
 ## Build the sample
 

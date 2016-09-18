@@ -11,8 +11,8 @@
     <AssemblyName>SimpleInk</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -110,6 +110,21 @@
     <Compile Include="Scenario2.xaml.cs">
       <DependentUpon>Scenario2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario8.xaml.cs">
+      <DependentUpon>Scenario8.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario7.xaml.cs">
+      <DependentUpon>Scenario7.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario6.xaml.cs">
+      <DependentUpon>Scenario6.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario5.xaml.cs">
+      <DependentUpon>Scenario5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario4.xaml.cs">
+      <DependentUpon>Scenario4.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Scenario3.xaml.cs">
       <DependentUpon>Scenario3.xaml</DependentUpon>
     </Compile>
@@ -140,6 +155,26 @@
     </Page>
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario8.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario7.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario6.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario5.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario4.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

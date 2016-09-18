@@ -1,0 +1,76 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_CorrelateStreams"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:local="using:SDKTemplate"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,20,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Correlate and display frames from depth and custom stream sources.
+            </TextBlock>
+
+            <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Button x:Name="NextButton" Content="Next Source" Click="NextButton_Click" IsEnabled="False"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Button x:Name="ToggleDepth" Content="Toggle Depth Fading" Click="ToggleDepth_Click"/>
+                    <TextBlock x:Name="DepthMessage" Text="" Margin="10,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Button x:Name="ToggleSkeletons" Content="Toggle Skeletal Overlay" Click="ToggleSkeletons_Click"/>
+                    <TextBlock x:Name="SkeletalMessage" Text="" Margin="10,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Grid HorizontalAlignment="Stretch" Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition x:Name="WideColumn1" Width="Auto"/>
+                    <ColumnDefinition x:Name="WideColumn2" Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="Grid">
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="BorderBrush" Value="LightGray"/>
+                    </Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="TextWrapping" Value="Wrap"/>
+                    </Style>
+                </Grid.Resources>
+                <StackPanel>
+                    <TextBlock Text="Correlated stream output"/>
+                    <Grid>
+                        <Image Name="previewImage"/>
+                        <local:SkeletalFrameRenderer x:Name="skeletalFrameRenderer" />
+                    </Grid>
+                </StackPanel>
+            </Grid>
+
+            <TextBlock x:Name="outputTextBlock" TextWrapping="Wrap" Margin="0,10,0,0"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

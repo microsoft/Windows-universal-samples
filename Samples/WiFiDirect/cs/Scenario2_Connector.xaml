@@ -11,213 +11,99 @@
 //*********************************************************
 -->
 <Page
-    x:Class="SDKTemplate.Scenario2"
+    x:Class="SDKTemplate.Scenario2_Connector"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SDKTemplate"
+    xmlns:wifidirect="using:Windows.Devices.WiFiDirect"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid Margin="12,10,12,12">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <StackPanel Margin="0,0,0,10">
-                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12"
+                  VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
                 This scenario illustrates how to discover nearby Wi-Fi Direct devices, select a device, connect to it (pairing as necessary), and retrieve the available IP endpoint pairs that can be used to initiate socket connections.
-                </TextBlock>
+            </TextBlock>
+
+            <VariableSizedWrapGrid Orientation="Horizontal">
+                <!-- Discovery parameters -->
+                <StackPanel HorizontalAlignment="Left" Width="335" Margin="0,10,0,0" Padding="5">
+                    <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Discovering"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock HorizontalAlignment="Left" Margin="0,5,0,0" Text="Device Selector:"/>
+                        <ComboBox Name="cmbDeviceSelector" Margin="5,0,0,0" Width="194">
+                            <ComboBoxItem Content="Device Interface">
+                                <ComboBoxItem.Tag>
+                                    <wifidirect:WiFiDirectDeviceSelectorType>
+                                        DeviceInterface
+                                    </wifidirect:WiFiDirectDeviceSelectorType>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="Association Endpoint" IsSelected="True">
+                                <ComboBoxItem.Tag>
+                                    <wifidirect:WiFiDirectDeviceSelectorType>
+                                        AssociationEndpoint
+                                    </wifidirect:WiFiDirectDeviceSelectorType>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button Name="btnWatcher" Content="Start Watcher" Click="btnWatcher_Click" Grid.Row="0" Grid.Column="0"/>
+                        <Button Name="btnIe" Content="Show IEs"
+                                Click="btnIe_Click" Margin="10,0,0,0"/>
+                    </StackPanel>
+
+                </StackPanel>
+                <StackPanel Margin="0,10,0,0">
+                    <TextBlock Text="Discovered Devices:"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListView Name="lvDiscoveredDevices" MinHeight="200" Width="350"
+                                  ItemsSource="{x:Bind DiscoveredDevices}" DisplayMemberPath="DisplayName"
+                                  SelectionMode="Single" Margin="0,5,0,0" Background="DimGray"/>
+                    </ScrollViewer>
+                </StackPanel>
+            </VariableSizedWrapGrid>
+
+            <VariableSizedWrapGrid Orientation="Horizontal">
+                <StackPanel>
+                    <local:ConnectionSettingsPanel x:Name="connectionSettingsPanel" Width="335" Margin="0,10,0,0"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button Name="btnFromId" Content="Connect"
+                            Click="btnFromId_Click"/>
+                        <Button Name="btnUnpair" Content="Unpair"
+                            Margin="10,0,0,0" Click="btnUnpair_Click"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Connected devices -->
+                <StackPanel Margin="0,10,0,0">
+                    <TextBlock Text="Connected Devices:"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListView Name="lvConnectedDevices" MinHeight="200" Width="350"
+                                  ItemsSource="{x:Bind ConnectedDevices}" DisplayMemberPath="DisplayName"
+                                  SelectionMode="Single"
+                                  Margin="0,5,0,0" Background="DimGray"/>
+                    </ScrollViewer>
+                </StackPanel>
+            </VariableSizedWrapGrid>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBox x:Name="txtSendMessage" Width="200" PlaceholderText="Enter a message"/>
+                <Button x:Name="btnSendMessage" Content="Send"
+                        IsEnabled="{x:Bind local:Utils.CanSendMessage(txtSendMessage.Text\, lvConnectedDevices.SelectedItem), FallbackValue=False, Mode=OneWay}"
+                        Margin="10,0,0,0" Click="btnSendMessage_Click"/>
+            </StackPanel>
+            <StackPanel>
+                <Button x:Name="btnClose" Content="Close Device"
+                        IsEnabled="{x:Bind local:Utils.IsNonNull(lvConnectedDevices.SelectedItem), FallbackValue=False, Mode=OneWay}"
+                        Margin="0,10,0,0" Click="btnClose_Click"/>
             </StackPanel>
 
-            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto"
-                                       HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Name="Selector" Grid.Row ="0" Grid.Column ="0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition  Width="Auto"/>
-                                <ColumnDefinition  Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock HorizontalAlignment="Left" Height="45" Margin="5,0,0,0" TextWrapping="Wrap" Text="Device Selector:" VerticalAlignment="Top" Width="155" FontSize="20" FontFamily="Segoe UI" Grid.Row="0" Grid.Column="0"/>
-                            <ComboBox Name="cmbDeviceSelector" HorizontalAlignment="Left" Height="40" Margin="5,0,0,0" VerticalAlignment="Top" Width="194" Grid.Row="0" Grid.Column="1">
-                                <ComboBoxItem Content="Device Interface"/>
-                                <ComboBoxItem Content="Association Endpoint" IsSelected="True"/>
-                            </ComboBox>
-                        </Grid>
-                    </StackPanel>
-
-                    <StackPanel Name="Discover" Grid.Row ="0" Grid.Column ="1">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition  Width="Auto"/>
-                                <ColumnDefinition  Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                        </Grid>
-                        <Button Name="btnWatcher" Content="Start Watcher" Height="45" Margin="5,0,0,0"  Width="140" FontSize="20" Click="btnWatcher_Click" Grid.Row="0" Grid.Column="0"/>
-                        <Button Name="btnIe" Content="Show IEs" Height="45" Margin="155,-45,0,0"  Width="140" FontSize="20" Click="btnIe_Click" Grid.Row="0" Grid.Column="1"/>
-                    </StackPanel>
-
-                    <StackPanel Name="GoIntent" Grid.Row="1" Grid.Column="0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition  Width="Auto"/>
-                                <ColumnDefinition  Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock HorizontalAlignment="Left" Height="35" Margin="5,10,0,0" TextWrapping="Wrap" Text="GO Intent:" VerticalAlignment="Top" Width="155" FontSize="20" FontFamily="Segoe UI" Grid.Row="0" Grid.Column="0"/>
-                            <TextBox x:Name="txtGOIntent" HorizontalAlignment="Left" Height="35" Margin="5,10,0,0" Text="0" VerticalAlignment="Top" Width="30" InputScope="Number" FontSize="20" MaxLength="2" Grid.Column="1" Grid.Row="0" />
-                        </Grid>
-                    </StackPanel>
-
-                    <StackPanel Name="Connection" Grid.Row="1" Grid.Column="1">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition  Width="Auto"/>
-                                <ColumnDefinition  Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Button Name="btnFromId" Content="Connect" HorizontalAlignment="Left" Height="45" Margin="5,10,0,0" VerticalAlignment="Top" Width="140" FontSize="20" Click="btnFromId_Click" Grid.Row="0" Grid.Column="0" />
-                            <Button x:Name="btnClose" Content="Close Device" HorizontalAlignment="Left" Height="45" Margin="10,10,0,0" VerticalAlignment="Top" Width="140" FontSize="20" Click="btnClose_Click" Grid.Row="0" Grid.Column="1"/>
-                        </Grid>
-                    </StackPanel>
-
-                    <StackPanel Name="DiscoveredDevices" Grid.Row="2" Grid.Column="0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition  Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <!--<Grid.Resources>
-                                <CollectionViewSource x:Name="deviceListCVS"/>
-                            </Grid.Resources>-->
-                            <TextBlock Text="Discovered Devices:" Margin="5,10,0,0" Grid.Row="0" FontSize="20"/>
-                            <!--<ListView Name="lvDiscoveredDevices" Margin="5,5,0,0" Grid.Row="1" Height="200" Width="350" Background="DimGray" ItemsSource="{Binding Source={StaticResource deviceListCVS}}" />-->
-                            <ListView Name="lvDiscoveredDevices" Margin="5,5,0,0" Grid.Row="1" Height="200" Width="350" Background="DimGray"/>
-                        </Grid>
-                    </StackPanel>
-
-                    <StackPanel Name="ConnectedDevices" Grid.Row="2" Grid.Column="1">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition  Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Connected Devices:" Margin="5,10,0,0" Grid.Row="0" FontSize="20"/>
-                            <ListView Name="lvConnectedDevices" Margin="5,5,0,0" Grid.Row="1" Height="200" Width="350" Background="DimGray"/>
-                        </Grid>
-                    </StackPanel>
-
-                    <StackPanel x:Name="SendMessage" Grid.Row="3" Grid.Column="0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Button x:Name="btnSendMessage" Content="Send" Margin="5,10,0,0" Click="btnSendMessage_Click" Grid.Row="0" Height="45" Width="100" FontSize="20"/>
-                            <TextBox x:Name="txtSendMessage" Margin="110,10,0,0" Grid.Row="0"/>
-                        </Grid>
-                    </StackPanel>
-
-                </Grid>
-            </ScrollViewer>
-        </Grid>
-
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="WindowStates">
-                <VisualState x:Name="wideState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="641" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="Selector.(Grid.Row)" Value="0" />
-                        <Setter Target="Selector.(Grid.Column)" Value="0" />
-
-                        <Setter Target="Discover.(Grid.Row)" Value="0" />
-                        <Setter Target="Discover.(Grid.Column)" Value="1" />
-
-                        <Setter Target="GoIntent.(Grid.Row)" Value="1" />
-                        <Setter Target="GoIntent.(Grid.Column)" Value="0" />
-
-                        <Setter Target="Connection.(Grid.Row)" Value="1" />
-                        <Setter Target="Connection.(Grid.Column)" Value="1" />
-
-                        <Setter Target="DiscoveredDevices.(Grid.Row)" Value="2" />
-                        <Setter Target="DiscoveredDevices.(Grid.Column)" Value="0" />
-
-                        <Setter Target="ConnectedDevices.(Grid.Row)" Value="2" />
-                        <Setter Target="ConnectedDevices.(Grid.Column)" Value="1" />
-
-                        <Setter Target="SendMessage.(Grid.Row)" Value="3" />
-                        <Setter Target="SendMessage.(Grid.Column)" Value="0" />
-
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="narrowState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="Selector.(Grid.Row)" Value="0" />
-                        <Setter Target="Selector.(Grid.Column)" Value="0" />
-
-                        <Setter Target="Discover.(Grid.Row)" Value="1" />
-                        <Setter Target="Discover.(Grid.Column)" Value="0" />
-
-                        <Setter Target="GoIntent.(Grid.Row)" Value="2" />
-                        <Setter Target="GoIntent.(Grid.Column)" Value="0" />
-
-                        <Setter Target="Connection.(Grid.Row)" Value="3" />
-                        <Setter Target="Connection.(Grid.Column)" Value="0" />
-
-                        <Setter Target="DiscoveredDevices.(Grid.Row)" Value="4" />
-                        <Setter Target="DiscoveredDevices.(Grid.Column)" Value="0" />
-
-                        <Setter Target="ConnectedDevices.(Grid.Row)" Value="5" />
-                        <Setter Target="ConnectedDevices.(Grid.Column)" Value="0" />
-
-                        <Setter Target="SendMessage.(Grid.Row)" Value="6" />
-                        <Setter Target="SendMessage.(Grid.Column)" Value="0" />
-
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-    </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

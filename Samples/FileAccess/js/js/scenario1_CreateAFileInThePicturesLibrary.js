@@ -10,7 +10,9 @@
     });
 
     function createFile() {
-        Windows.Storage.KnownFolders.picturesLibrary.createFileAsync("sample.dat", Windows.Storage.CreationCollisionOption.replaceExisting).done(
+        Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.picturesLibrary).then(function (picturesLibrary) {
+            return picturesLibrary.createFileAsync("sample.dat", Windows.Storage.CreationCollisionOption.replaceExisting);
+        }).done(
         function (file) {
             SdkSample.sampleFile = file;
             WinJS.log && WinJS.log("The file '" + SdkSample.sampleFile.name + "' was created.", "sample", "status");

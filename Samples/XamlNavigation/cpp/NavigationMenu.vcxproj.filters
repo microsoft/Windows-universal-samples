@@ -17,13 +17,15 @@
     <Filter Include="Views">
       <UniqueIdentifier>{452ca0da-0294-49f1-8b84-37b967bb8122}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Triggers">
+      <UniqueIdentifier>{fe712577-0857-40ea-b8ab-7b1e8f31d44e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml" />
+    <ApplicationDefinition Include="..\shared\App.xaml" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.xaml.cpp" />
-    <ClCompile Include="MainPage.xaml.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="PageHeader.xaml.cpp" />
     <ClCompile Include="NavMenuListView.cpp">
@@ -36,11 +38,13 @@
     <ClCompile Include="CommandBarPage.xaml.cpp" />
     <ClCompile Include="DrillInPage.xaml.cpp" />
     <ClCompile Include="LandingPage.xaml.cpp" />
+    <ClCompile Include="IsTenFootTrigger.cpp">
+      <Filter>Triggers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h" />
-    <ClInclude Include="MainPage.xaml.h" />
     <ClInclude Include="PageHeader.xaml.h" />
     <ClInclude Include="NavMenuListView.h">
       <Filter>Controls</Filter>
@@ -52,32 +56,39 @@
     <ClInclude Include="CommandBarPage.xaml.h" />
     <ClInclude Include="DrillInPage.xaml.h" />
     <ClInclude Include="LandingPage.xaml.h" />
+    <ClInclude Include="IsTenFootTrigger.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemInformationHelpers.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="PageHeader.xaml">
+    <Page Include="..\shared\PageHeader.xaml">
       <Filter>Controls</Filter>
     </Page>
-    <Page Include="AppShell.xaml" />
-    <Page Include="Styles.xaml">
+    <Page Include="..\shared\AppShell.xaml" />
+    <Page Include="..\shared\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>
-    <Page Include="BasicPage.xaml">
+    <Page Include="..\shared\BasicPage.xaml">
       <Filter>Views</Filter>
     </Page>
-    <Page Include="CommandBarPage.xaml">
+    <Page Include="..\shared\CommandBarPage.xaml">
       <Filter>Views</Filter>
     </Page>
-    <Page Include="BasicSubPage.xaml">
+    <Page Include="..\shared\BasicSubPage.xaml">
       <Filter>Views</Filter>
     </Page>
-    <Page Include="DrillInPage.xaml">
+    <Page Include="..\shared\DrillInPage.xaml">
       <Filter>Views</Filter>
     </Page>
-    <Page Include="LandingPage.xaml">
+    <Page Include="..\shared\LandingPage.xaml">
       <Filter>Views</Filter>
+    </Page>
+    <Page Include="..\shared\TenFootStylesheet.xaml">
+      <Filter>Styles</Filter>
     </Page>
   </ItemGroup>
   <ItemGroup>

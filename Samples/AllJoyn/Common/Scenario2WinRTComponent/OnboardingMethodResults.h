@@ -210,6 +210,7 @@ public:
         void set(_In_ int32 value) { m_status = value; }
     }
 
+    // "Interface version number"
     property uint16 Version
     {
         uint16 get() { return m_value; }
@@ -250,6 +251,7 @@ public:
         void set(_In_ int32 value) { m_status = value; }
     }
 
+    // "The configuration state"
     property int16 State
     {
         int16 get() { return m_value; }
@@ -290,6 +292,7 @@ public:
         void set(_In_ int32 value) { m_status = value; }
     }
 
+    // "The last error code and error message"
     property OnboardingLastError^ LastError
     {
         OnboardingLastError^ get() { return m_value; }

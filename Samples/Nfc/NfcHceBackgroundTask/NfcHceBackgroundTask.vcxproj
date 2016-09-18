@@ -36,7 +36,7 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
@@ -113,7 +113,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <GenerateManifest>false</GenerateManifest>
     <ReferencePath>$(WindowsSDK_MetadataPath)\Windows.Phone.PhoneContract\1.0.0.0;$(WindowsSDK_MetadataPath)\Windows.Devices.SmartCards.SmartCardBackgroundTriggerContract\1.0.0.0;$(WindowsSDK_MetadataPath)\Windows.Devices.SmartCards.SmartCardEmulatorContract\1.0.0.0;$(ReferencePath)</ReferencePath>
-    <LibraryPath>$(FrameworkSdkDir)\Lib\10.0.10053.0\um\arm;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(FrameworkSdkDir)\Lib\10.0.14393.0\um\arm;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <GenerateManifest>false</GenerateManifest>

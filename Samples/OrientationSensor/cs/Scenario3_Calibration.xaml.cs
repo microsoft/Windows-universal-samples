@@ -26,6 +26,12 @@ namespace SDKTemplate
         public Scenario3_Calibration()
         {
             this.InitializeComponent();
+
+            if (rootPage.SensorReadingType == SensorReadingType.Relative)
+            {
+                EnabledContent.Visibility = Visibility.Collapsed;
+                DisabledContent.Visibility = Visibility.Visible;
+            }
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)

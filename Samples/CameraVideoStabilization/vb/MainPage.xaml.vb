@@ -51,6 +51,9 @@ Namespace Global.CameraVideoStabilization
         ' Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
         Private Shared ReadOnly RotationKey As Guid = New Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1")
 
+        ' Folder in which the captures will be stored (initialized in SetupUiAsync)
+        Private _captureFolder As StorageFolder = Nothing
+
         ' Prevent the screen from sleeping while the camera is running
         Private ReadOnly _displayRequest As DisplayRequest = New DisplayRequest()
 
@@ -161,7 +164,7 @@ Namespace Global.CameraVideoStabilization
             Await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Sub() UpdateButtonOrientation())
         End Sub
 
-        Private Async Sub VsToggleButton_Tapped(sender As Object, e As RoutedEventArgs)
+        Private Async Sub VsToggleButton_Click(sender As Object, e As RoutedEventArgs)
             If Not _isRecording Then
                 If _videoStabilizationEffect Is Nothing Then
                     Await CreateVideoStabilizationEffectAsync()
@@ -175,7 +178,7 @@ Namespace Global.CameraVideoStabilization
             UpdateCaptureControls()
         End Sub
 
-        Private Async Sub VideoButton_Tapped(sender As Object, e As TappedRoutedEventArgs)
+        Private Async Sub VideoButton_Click(sender As Object, e As RoutedEventArgs)
             If Not _isRecording Then
                 Await StartRecordingAsync()
             Else
@@ -350,7 +353,9 @@ Namespace Global.CameraVideoStabilization
 
             _videoStabilizationEffect.Enabled = False
             RemoveHandler _videoStabilizationEffect.EnabledChanged, AddressOf VideoStabilizationEffect_EnabledChanged
-            Await _mediaCapture.ClearEffectsAsync(MediaStreamType.VideoRecord)
+
+            ' Remove the effect (see ClearEffectsAsync method to remove all effects from a stream)
+            Await _mediaCapture.RemoveEffectAsync(_videoStabilizationEffect)
             Debug.WriteLine("VS effect removed from pipeline")
             If _inputPropertiesBackup IsNot Nothing Then
                 Await _mediaCapture.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoRecord, _inputPropertiesBackup)
@@ -371,17 +376,17 @@ Namespace Global.CameraVideoStabilization
         ''' <returns></returns>
         Private Async Function StartRecordingAsync() As Task
             Try
-                ' Create storage file in Pictures Library
-                Dim videoFile = Await KnownFolders.PicturesLibrary.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName)
+                ' Create storage file for the capture
+                Dim videoFile = Await _captureFolder.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName)
                 ' Calculate rotation angle, taking mirroring into account if necessary
                 Dim rotationAngle = 360 - ConvertDeviceOrientationToDegrees(GetCameraOrientation())
                 _encodingProfile.Video.Properties(RotationKey) = PropertyValue.CreateInt32(rotationAngle)
-                Debug.WriteLine("Starting recording...")
+                Debug.WriteLine("Starting recording to " & videoFile.Path)
                 Await _mediaCapture.StartRecordToStorageFileAsync(_encodingProfile, videoFile)
                 _isRecording = True
-                Debug.WriteLine("Started recording to: " & videoFile.Path)
+                Debug.WriteLine("Started recording!")
             Catch ex As Exception
-                Debug.WriteLine("Exception when starting video recording: {0}", ex.ToString())
+                Debug.WriteLine("Exception when starting video recording: " & ex.ToString())
             End Try
         End Function
 
@@ -454,6 +459,10 @@ Namespace Global.CameraVideoStabilization
             End If
 
             RegisterEventHandlers()
+
+            Dim picturesLibrary = Await StorageLibrary.GetLibraryAsync(KnownLibraryId.Pictures)
+            ' Fall back to the local app storage if the Pictures Library is not available
+            _captureFolder = If(picturesLibrary.SaveFolder, ApplicationData.Current.LocalFolder)
         End Function
 
         ''' <summary>

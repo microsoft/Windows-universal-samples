@@ -35,7 +35,7 @@ namespace SDKTemplate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            _accelerometer = Accelerometer.GetDefault();
+            _accelerometer = Accelerometer.GetDefault(rootPage.AccelerometerReadingType);
             if (_accelerometer != null)
             {
                 // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
@@ -47,11 +47,12 @@ namespace SDKTemplate
                 _dispatcherTimer.Tick += DisplayCurrentReading;
                 _dispatcherTimer.Interval = TimeSpan.FromMilliseconds(_desiredReportInterval);
 
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType + " accelerometer ready", NotifyType.StatusMessage);
                 ScenarioEnableButton.IsEnabled = true;
             }
             else
             {
-                rootPage.NotifyUser("No accelerometer found", NotifyType.ErrorMessage);
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType + " accelerometer not found", NotifyType.ErrorMessage);
             }
         }
 

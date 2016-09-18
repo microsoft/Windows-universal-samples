@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,12 +24,20 @@ namespace CustomMediaTransportControls
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private int likes = 0;
+
         public MainPage()
         {
             this.InitializeComponent();
 
-            //This following line is setting the source for the MediaElement
-            this.MainME.Source = new System.Uri("http://go.microsoft.com/fwlink/p/?LinkID=272585");
+            //This following line is setting the source for the MediaPlayerElement
+            this.MainMPE.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/fishes.wmv"));            
+        }
+
+        private async void CustomMTC_Liked(object sender, EventArgs e)
+        {
+            var messageDialog = new MessageDialog("You liked this video " + (++likes) + " times.");
+            await messageDialog.ShowAsync();
         }
     }
 }

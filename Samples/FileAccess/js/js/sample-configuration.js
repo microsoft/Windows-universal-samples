@@ -23,7 +23,9 @@
     ];
 
     function validateFileExistence() {
-        Windows.Storage.KnownFolders.picturesLibrary.tryGetItemAsync("sample.dat").done(function (item) {
+        Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.picturesLibrary).then(function (picturesLibrary) {
+            return picturesLibrary.tryGetItemAsync("sample.dat");
+        }).done(function (item) {
             SdkSample.sampleFile = item;
             if (!item) {
                 // If file doesn't exist, indicate users to use scenario 1. 

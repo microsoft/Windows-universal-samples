@@ -15,6 +15,7 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace SDKTemplate
 {
@@ -30,12 +31,17 @@ namespace SDKTemplate
             this.InitializeComponent();
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            MediaPlayerHelper.CleanUpMediaPlayerSource(mediaPlayerElement.MediaPlayer);
+        }
+
         /// <summary>
         /// Handles the pick file button click event to load a video.
         /// </summary>
         private async void pickFileButton_Click(object sender, RoutedEventArgs e)
         {
-            // Clear previous returned file name, if it exists, between iterations of this scenario 
+            // Clear previous returned file name, if it exists, between iterations of this scenario
             rootPage.NotifyUser("", NotifyType.StatusMessage);
 
             // Create and open the file picker
@@ -50,8 +56,8 @@ namespace SDKTemplate
             if (file != null)
             {
                 rootPage.NotifyUser("Picked video: " + file.Name, NotifyType.StatusMessage);
-                this.mediaElement.SetPlaybackSource(MediaSource.CreateFromStorageFile(file));
-                this.mediaElement.Play();
+                this.mediaPlayerElement.MediaPlayer.Source = MediaSource.CreateFromStorageFile(file);
+                this.mediaPlayerElement.MediaPlayer.Play();
             }
             else
             {

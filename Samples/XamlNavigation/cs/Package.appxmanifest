@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
@@ -14,13 +13,13 @@
   <mp:PhoneIdentity PhoneProductId="bdf9127b-7e32-469b-a6ed-f57a0a80ae23" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>XAML Navigation Menu CS Sample</DisplayName>
+    <DisplayName>XAML Navigation Menu C# Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0" />
   </Dependencies>
 
   <Resources>
@@ -32,10 +31,10 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="NavigationMenuSample.App">
       <uap:VisualElements
-        DisplayName="XAML Navigation Menu CS Sample"
+        DisplayName="XAML Navigation Menu C# Sample"
         Square150x150Logo="Assets\squaretile-sdk.png"
         Square44x44Logo="Assets\smalltile-sdk.png"
-        Description="XAML Navigation Menu CS Sample"
+        Description="XAML Navigation Menu C# Sample"
         BackgroundColor="#00B2F0">
         <uap:SplashScreen Image="Assets\splash-sdk.png" />
       </uap:VisualElements>

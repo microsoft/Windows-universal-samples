@@ -8,6 +8,7 @@
     var MagnetometerAccuracy = Windows.Devices.Sensors.MagnetometerAccuracy;
 
     var scenarios = [
+        { url: "/html/scenario0_Choose.html", title: "Choose orientation sensor" },
         { url: "/html/scenario1_DataEvents.html", title: "Data Events" },
         { url: "/html/scenario2_Polling.html", title: "Polling" },
         { url: "/html/scenario3_Calibration.html", title: "Calibration" }
@@ -56,9 +57,16 @@
             "Yaw Accuracy:\n" + yawAccuracyReport;
     } 
 
+    function sensorDescription() {
+        return SdkSample.sensorReadingType + " orientation sensor with " + SdkSample.sensorOptimizationGoal + " optimization goal";
+    }
+
     WinJS.Namespace.define("SdkSample", {
         sampleTitle: sampleTitle,
         scenarios: new WinJS.Binding.List(scenarios),
-        setReadingText: setReadingText
+        setReadingText: setReadingText,
+        sensorReadingType: "absolute",
+        sensorOptimizationGoal: "precision",
+        sensorDescription: sensorDescription
     });
 })();

@@ -1,0 +1,78 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario3-customitems.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Creating custom items
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                Fill out the item below and click add to add a custom category item:
+            </p>
+
+            <div>
+                <input type="text" id="Arguments" placeholder="Arguments" class="win-textbox" /><br />
+            </div>
+
+            <p>
+                Display Name:
+            </p>
+            <div>
+                <input type="text" id="DisplayName" placeholder="Custom String" class="win-textbox" /><br />
+            </div>
+            <div>
+                <label for="DisplayNameLocalizedResource">
+                    <input type="checkbox" id="DisplayNameLocalizedResource" class="win-checkbox" />Use a localizable resource instead
+                </label>
+            </div>
+
+            <p>
+                Description (tooltip):
+            </p>
+            <div>
+                <input type="text" id="Description" placeholder="Custom String" class="win-textbox" />
+            </div>
+            <div>
+                <label for="DescriptionLocalizedResource">
+                    <input type="checkbox" id="DescriptionLocalizedResource" class="win-checkbox" />Use a localizable resource instead
+                </label>
+            </div>
+
+            <p>
+                GroupName:
+            </p>
+            <p>
+                Leaving the group name empty will add the item to the Tasks category.
+            </p>
+            <div>
+                <input type="text" id="GroupName" placeholder="Custom String" class="win-textbox" /><br />
+            </div>
+            <div>
+                <label for="GroupNameLocalizedResource">
+                    <input type="checkbox" id="GroupNameLocalizedResource" class="win-checkbox" />Use a localizable resource instead
+                </label>
+            </div>
+            
+            <p>
+                <button id="AddToJumpList" class="win-button">
+                    Add to Jump List
+                </button>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

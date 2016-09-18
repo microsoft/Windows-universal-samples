@@ -22,7 +22,6 @@
         <!-- Application-specific resources -->
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-
                 <!-- 
                     Styles that define common aspects of the platform look and feel
                     Required by Visual Studio project and item templates
@@ -46,6 +45,7 @@
                 <Setter Property="Foreground" Value="LightGray" />
                 <Setter Property="FontSize" Value="15" />
                 <Setter Property="Margin" Value="0,5,0,5" />
+                <Setter Property="TextWrapping" Value="Wrap" />
             </Style>
 
             <Style TargetType="TextBlock" >

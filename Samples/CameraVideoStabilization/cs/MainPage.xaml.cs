@@ -50,6 +50,9 @@ namespace CameraVideoStabilization
         // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
         private static readonly Guid RotationKey = new Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1");
 
+        // Folder in which the captures will be stored (initialized in SetupUiAsync)
+        private StorageFolder _captureFolder = null;
+
         // Prevent the screen from sleeping while the camera is running
         private readonly DisplayRequest _displayRequest = new DisplayRequest();
 
@@ -196,7 +199,7 @@ namespace CameraVideoStabilization
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => UpdateButtonOrientation());
         }
 
-        private async void VsToggleButton_Tapped(object sender, RoutedEventArgs e)
+        private async void VsToggleButton_Click(object sender, RoutedEventArgs e)
         {
             // Note that for the most part, this button is disabled during recording, except when VS is turned off automatically
 
@@ -227,7 +230,7 @@ namespace CameraVideoStabilization
             UpdateCaptureControls();
         }
 
-        private async void VideoButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void VideoButton_Click(object sender, RoutedEventArgs e)
         {
             if (!_isRecording)
             {
@@ -513,8 +516,8 @@ namespace CameraVideoStabilization
 
             _videoStabilizationEffect.EnabledChanged -= VideoStabilizationEffect_EnabledChanged;
 
-            // Remove the effect from the record stream
-            await _mediaCapture.ClearEffectsAsync(MediaStreamType.VideoRecord);
+            // Remove the effect (see ClearEffectsAsync method to remove all effects from a stream)
+            await _mediaCapture.RemoveEffectAsync(_videoStabilizationEffect);
 
             Debug.WriteLine("VS effect removed from pipeline");
 
@@ -543,8 +546,8 @@ namespace CameraVideoStabilization
         {
             try
             {
-                // Create storage file in Pictures Library
-                var videoFile = await KnownFolders.PicturesLibrary.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
+                // Create storage file for the capture
+                var videoFile = await _captureFolder.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
 
                 // Calculate rotation angle, taking mirroring into account if necessary
                 var rotationAngle = 360 - ConvertDeviceOrientationToDegrees(GetCameraOrientation());
@@ -552,7 +555,7 @@ namespace CameraVideoStabilization
                 // Add it to the encoding profile, or edit the value if the GUID was already a part of the properties
                 _encodingProfile.Video.Properties[RotationKey] = PropertyValue.CreateInt32(rotationAngle);
 
-                Debug.WriteLine("Starting recording...");
+                Debug.WriteLine("Starting recording to " + videoFile.Path);
 
                 await _mediaCapture.StartRecordToStorageFileAsync(_encodingProfile, videoFile);
                 _isRecording = true;
@@ -562,7 +565,7 @@ namespace CameraVideoStabilization
             catch (Exception ex)
             {
                 // File I/O errors are reported as exceptions
-                Debug.WriteLine("Exception when starting video recording: {0}", ex.ToString());
+                Debug.WriteLine("Exception when starting video recording: " + ex.ToString());
             }
         }
 
@@ -594,7 +597,7 @@ namespace CameraVideoStabilization
             catch (Exception ex)
             {
                 // File I/O errors are reported as exceptions
-                Debug.WriteLine("Exception when stopping video recording: {0}", ex.ToString());
+                Debug.WriteLine("Exception when stopping video recording: " + ex.ToString());
             }
         }
 
@@ -668,6 +671,10 @@ namespace CameraVideoStabilization
             }
             
             RegisterEventHandlers();
+
+            var picturesLibrary = await StorageLibrary.GetLibraryAsync(KnownLibraryId.Pictures);
+            // Fall back to the local app storage if the Pictures Library is not available
+            _captureFolder = picturesLibrary.SaveFolder ?? ApplicationData.Current.LocalFolder;
         }
 
         /// <summary>
@@ -765,7 +772,6 @@ namespace CameraVideoStabilization
             // If there is no device mounted on the desired panel, return the first device found
             return desiredDevice ?? allVideoDevices.FirstOrDefault();
         }
-
 
         #endregion Helper functions
 

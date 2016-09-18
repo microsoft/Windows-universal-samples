@@ -1,0 +1,53 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario3-unmanagedConsumable.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Unmanaged Consumables
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                Unmanaged Consumable products require both a purchase call and a fulfillment call to report usage of consumables.  Stackable purchases are not supported on Unmanaged consumables.
+            </p>
+            <p>
+                <button id="getAssociatedProductsButton" class="win-button">Get Associated Add-Ons</button>
+            </p>
+            <p>
+                <button id="purchaseAddOnButton" class="win-button">Purchase Selected Consumable</button>
+            </p>
+            <p>
+                <button id="getConsumableBalanceButton" class="win-button">Get Consumable Balance</button>
+            </p>
+            <p>
+                <button id="fulfillConsumableButton" class="win-button">Fulfill Consumable</button>
+            </p>
+            <p>
+                <div id="productTemplate" data-win-control="WinJS.Binding.Template">
+                    <h4 data-win-bind="innerText: formattedTitle" />
+                </div>
+                <div id="productsListView" class="win-selectionstylefilled" data-win-control="WinJS.UI.ListView" data-win-options="{
+                    selectionMode: &apos;single&apos;,
+                    tapBehavior: &apos;toggleSelect&apos;,
+                    layout: { type: WinJS.UI.ListLayout },
+                    itemTemplate: select ('#productTemplate')}"></div>
+
+                <div id="productsListView" data-win-control="WinJS.UI.ListView"></div>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

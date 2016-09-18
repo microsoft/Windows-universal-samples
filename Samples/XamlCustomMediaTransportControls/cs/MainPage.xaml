@@ -9,8 +9,8 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <!--In the following section we are creating our MediaElement and adding custom controls to it-->
-        <MediaElement x:Name="MainME" AreTransportControlsEnabled="True">
-            <MediaElement.TransportControls>
+        <MediaPlayerElement x:Name="MainMPE" AreTransportControlsEnabled="True">
+            <MediaPlayerElement.TransportControls>
                 <!--Instead of using the regular MediaTransportControls we are using our custom local:CustomMediaTransportControls.
                 The style is found in Themes/generic.xaml. The custom button is defined in CustomControls.cs. One thing to note is that
                 even when using a custom control, our API's for hiding and showing buttons still work as expected-->
@@ -18,9 +18,10 @@
                                                     IsZoomButtonVisible="True"
                                                     IsZoomEnabled="True"
                                                     IsPlaybackRateButtonVisible="True"
-                                                    IsPlaybackRateEnabled="True">
+                                                    IsPlaybackRateEnabled="True"
+                                                    Liked="CustomMTC_Liked">
                 </local:CustomMediaTransportControls>
-            </MediaElement.TransportControls>
-        </MediaElement>
+            </MediaPlayerElement.TransportControls>
+        </MediaPlayerElement>
     </Grid>
 </Page>

@@ -35,6 +35,9 @@ namespace SDKTemplate
         // Object to manage access to camera devices
         private MediaCapturePreviewer _previewer = null;
 
+        // Folder in which the captures will be stored (initialized in InitializeCameraButton_Click)
+        private StorageFolder _captureFolder = null;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Scenario2_PhotoSettings"/> class.
         /// </summary>
@@ -67,7 +70,7 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void InitializeCameraButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void InitializeCameraButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
 
@@ -87,6 +90,10 @@ namespace SDKTemplate
                 PopulateComboBox(MediaStreamType.Photo, PhotoSettings, false);
                 PhotoButton.IsEnabled = true;
             }
+
+            var picturesLibrary = await StorageLibrary.GetLibraryAsync(KnownLibraryId.Pictures);
+            // Fall back to the local app storage if the Pictures Library is not available
+            _captureFolder = picturesLibrary.SaveFolder ?? ApplicationData.Current.LocalFolder;
         }
 
         /// <summary>
@@ -124,7 +131,7 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void PhotoButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void PhotoButton_Click(object sender, RoutedEventArgs e)
         {
             if (_previewer.IsPreviewing)
             {
@@ -136,7 +143,7 @@ namespace SDKTemplate
                 try
                 {
                     // Take and save the photo
-                    var file = await KnownFolders.PicturesLibrary.CreateFileAsync("SimplePhoto.jpeg", CreationCollisionOption.GenerateUniqueName);
+                    var file = await _captureFolder.CreateFileAsync("SimplePhoto.jpg", CreationCollisionOption.GenerateUniqueName);
                     await _previewer.MediaCapture.CapturePhotoToStorageFileAsync(ImageEncodingProperties.CreateJpeg(), file);
                     rootPage.NotifyUser("Photo taken, saved to: " + file.Path, NotifyType.StatusMessage);
                 }

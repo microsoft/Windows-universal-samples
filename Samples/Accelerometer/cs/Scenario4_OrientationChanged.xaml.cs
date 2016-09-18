@@ -41,16 +41,17 @@ namespace SDKTemplate
         {
             // Get two instances of the accelerometer:
             // One that returns the raw accelerometer data
-            accelerometerOriginal = Accelerometer.GetDefault();
+            accelerometerOriginal = Accelerometer.GetDefault(rootPage.AccelerometerReadingType);
             // Other on which the 'ReadingTransform' is updated so that data returned aligns with the request transformation.
-            accelerometerReadingTransform = Accelerometer.GetDefault();
+            accelerometerReadingTransform = Accelerometer.GetDefault(rootPage.AccelerometerReadingType);
 
-            if(accelerometerOriginal == null || accelerometerReadingTransform == null)
+            if (accelerometerOriginal == null || accelerometerReadingTransform == null)
             {
-                rootPage.NotifyUser("No accelerometer found", NotifyType.ErrorMessage);
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType + " accelerometer not found", NotifyType.ErrorMessage);
             }
             else
             {
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType + " accelerometer ready", NotifyType.StatusMessage);
                 ScenarioEnableButton.IsEnabled = true;
             }
 

@@ -12,15 +12,15 @@
 namespace VoiceCommandService
 {
     [Windows::Foundation::Metadata::WebHostHidden]
-    public ref class AdventureworksVoiceCommandService sealed : public Windows::ApplicationModel::Background::IBackgroundTask
+    public ref class AdventureWorksVoiceCommandService sealed : public Windows::ApplicationModel::Background::IBackgroundTask
     {
     public:
         // Inherited via IBackgroundTask
         virtual void Run(Windows::ApplicationModel::Background::IBackgroundTaskInstance ^taskInstance);
 
     private:
-		Windows::ApplicationModel::Resources::Core::ResourceContext^ context;
-		Windows::ApplicationModel::Resources::Core::ResourceMap^ resourceMap;
+        Windows::ApplicationModel::Resources::Core::ResourceContext^ context;
+        Windows::ApplicationModel::Resources::Core::ResourceMap^ resourceMap;
 
         Windows::Foundation::EventRegistrationToken taskCancelledToken;
         Windows::ApplicationModel::VoiceCommands::VoiceCommandServiceConnection^ voiceServiceConnection;
@@ -40,7 +40,7 @@ namespace VoiceCommandService
 
         void ShowProgressScreen(Platform::String^ progressMessage);
 
-		Platform::String^ GetResourceString(Platform::String^ resourceName);
-		Platform::String^ GetResourceStringAndFormat(Platform::String^ resourceName, Platform::String^ param);
+        Platform::String^ GetResourceString(Platform::String^ resourceName);
+        Platform::String^ GetResourceStringAndFormat(Platform::String^ resourceName, Platform::String^ param);
     };
 }

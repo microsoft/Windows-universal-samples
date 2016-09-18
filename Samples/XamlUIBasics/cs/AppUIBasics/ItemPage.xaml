@@ -54,7 +54,7 @@
 
                 <StackPanel x:Name="seeAlsoPanel" Grid.Row="1">
                     <TextBlock x:Uid="DocHeader" />
-                    <ItemsControl ItemsSource="{x:Bind Item.Docs}">
+                    <ItemsControl ItemsSource="{x:Bind Item.Docs}" IsTabStop="False">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <local:WrapPanel Orientation="Horizontal" />
@@ -67,7 +67,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                     <TextBlock x:Uid="RelatedControlsHeader" />
-                    <ItemsControl ItemsSource="{x:Bind Item.RelatedControls}">
+                    <ItemsControl ItemsSource="{x:Bind Item.RelatedControls}" IsTabStop="False">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <local:WrapPanel Orientation="Horizontal" />
@@ -86,8 +86,8 @@
         </ScrollViewer>
 
         <CommandBar x:Name="bottomCommandBar" x:FieldModifier="Protected" Grid.Row="2" IsOpen="False" ClosedDisplayMode="Compact" IsSticky="False">
-            <AppBarButton x:Name="searchButton" Label="Search" Icon="Find" Click="SearchButton_Click" Visibility="Collapsed" />
-            <AppBarToggleButton Label="Theme" Checked="ThemeToggleButton_Checked" Unchecked="ThemeToggleButton_Unchecked">
+            <AppBarButton x:Name="searchButton" Label="Search" Icon="Find" Click="SearchButton_Click" Visibility="Collapsed" GotFocus="AppBarButton_GotFocus"/>
+            <AppBarToggleButton Label="Theme" Checked="ThemeToggleButton_Checked" Unchecked="ThemeToggleButton_Unchecked" GotFocus="AppBarButton_GotFocus">
                 <AppBarToggleButton.Icon>
                     <FontIcon Glyph="&#xE771;" />
                 </AppBarToggleButton.Icon>

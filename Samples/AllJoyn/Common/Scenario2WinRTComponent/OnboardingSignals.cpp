@@ -26,18 +26,17 @@ using namespace Windows::Devices::AllJoyn;
 using namespace Windows::Foundation;
 using namespace org::alljoyn::Onboarding;
 
-void OnboardingSignals::Initialize(_In_ alljoyn_busobject busObject, _In_ alljoyn_sessionid sessionId)
+void OnboardingSignals::Initialize(_In_ ISignalEmitter^ emitter)
 {
-    m_busObject = busObject;
-    m_sessionId = sessionId;
-
-    auto interfaceDefinition = alljoyn_busattachment_getinterface(alljoyn_busobject_getbusattachment(busObject), "org.alljoyn.Onboarding");
+    m_emitter = emitter;
+    alljoyn_busattachment nativeBusAttachment = AllJoynHelpers::GetInternalBusAttachment(m_emitter->BusObject->BusAttachment);
+    auto interfaceDefinition = alljoyn_busattachment_getinterface(nativeBusAttachment, "org.alljoyn.Onboarding");
     alljoyn_interfacedescription_getmember(interfaceDefinition, "ConnectionResult", &m_memberConnectionResult);
 }
 
 void OnboardingSignals::ConnectionResult(_In_ Onboarding^ interfaceMemberArg)
 {
-    if (nullptr == m_busObject)
+    if (nullptr == AllJoynHelpers::GetInternalBusObject(m_emitter->BusObject))
     {
         return;
     }
@@ -47,9 +46,9 @@ void OnboardingSignals::ConnectionResult(_In_ Onboarding^ interfaceMemberArg)
     (void)TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(arguments, 0), "(ns)", interfaceMemberArg);
     
     alljoyn_busobject_signal(
-        m_busObject, 
+        AllJoynHelpers::GetInternalBusObject(m_emitter->BusObject), 
         NULL,  // Generated code only supports broadcast signals.
-        m_sessionId,
+        m_emitter->Session->Id,
         m_memberConnectionResult,
         arguments,
         argCount, 

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package 
+    xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+    xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+    xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+    IgnorableNamespaces="uap mp">
+    
+  <Identity 
+      Name="Microsoft.SDKSamples.ActivitySensor.JS"
+      Version="1.0.0.0"
+      Publisher="CN=Microsoft" />
+  <mp:PhoneIdentity PhoneProductId="c626e8fb-e702-4957-b0c6-5d8616342b2b" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+    
+  <Properties>
+    <DisplayName>Activity Sensor JS Sample</DisplayName>
+    <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+    <Logo>images\storelogo-sdk.png</Logo>
+  </Properties>
+    
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10586.0" MaxVersionTested="10.0.14393.0" />
+  </Dependencies>
+    
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+    
+  <Applications>
+    <Application Id="App" StartPage="default.html">
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" StartPage="js\activitySensorBackgroundTask.js">
+          <BackgroundTasks>
+            <Task Type="general" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
+      <uap:VisualElements 
+          DisplayName="Activity Sensor JS Sample"
+          Description="Activity Sensor JS Sample"
+          BackgroundColor="#00b2f0"
+          Square150x150Logo="images\storelogo-sdk.png"
+          Square44x44Logo="images\smalltile-sdk.png">
+        <uap:SplashScreen Image="images\splash-sdk.png" />
+        <uap:DefaultTile>
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+    
+  <Capabilities>
+    <DeviceCapability Name="activity" />
+  </Capabilities>
+</Package>

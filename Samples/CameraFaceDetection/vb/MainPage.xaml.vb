@@ -57,6 +57,9 @@ Namespace Global.FaceDetection
         ' Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
         Private Shared ReadOnly RotationKey As Guid = New Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1")
 
+        ' Folder in which the captures will be stored (initialized in SetupUiAsync)
+        Private _captureFolder As StorageFolder = Nothing
+
         ' Prevent the screen from sleeping while the camera is running
         Private ReadOnly _displayRequest As DisplayRequest = New DisplayRequest()
 
@@ -161,11 +164,11 @@ Namespace Global.FaceDetection
             Await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Sub() UpdateButtonOrientation())
         End Sub
 
-        Private Async Sub PhotoButton_Tapped(sender As Object, e As TappedRoutedEventArgs)
+        Private Async Sub PhotoButton_Click(sender As Object, e As RoutedEventArgs)
             Await TakePhotoAsync()
         End Sub
 
-        Private Async Sub VideoButton_Tapped(sender As Object, e As TappedRoutedEventArgs)
+        Private Async Sub VideoButton_Click(sender As Object, e As RoutedEventArgs)
             If Not _isRecording Then
                 Await StartRecordingAsync()
             Else
@@ -175,7 +178,7 @@ Namespace Global.FaceDetection
             UpdateCaptureControls()
         End Sub
 
-        Private Async Sub FaceDetectionButton_Tapped(sender As Object, e As TappedRoutedEventArgs)
+        Private Async Sub FaceDetectionButton_Click(sender As Object, e As RoutedEventArgs)
             If _faceDetectionEffect Is Nothing OrElse Not _faceDetectionEffect.Enabled Then
                 FacesCanvas.Children.Clear()
                 Await CreateFaceDetectionEffectAsync()
@@ -319,7 +322,9 @@ Namespace Global.FaceDetection
         Private Async Function CleanUpFaceDetectionEffectAsync() As Task
             _faceDetectionEffect.Enabled = False
             RemoveHandler _faceDetectionEffect.FaceDetected, AddressOf FaceDetectionEffect_FaceDetected
-            Await _mediaCapture.ClearEffectsAsync(MediaStreamType.VideoPreview)
+
+            ' Remove the effect (see ClearEffectsAsync method to remove all effects from a stream)
+            Await _mediaCapture.RemoveEffectAsync(_faceDetectionEffect)
             _faceDetectionEffect = Nothing
         End Function
 
@@ -331,14 +336,15 @@ Namespace Global.FaceDetection
             VideoButton.IsEnabled = _mediaCapture.MediaCaptureSettings.ConcurrentRecordAndPhotoSupported
             VideoButton.Opacity = If(VideoButton.IsEnabled, 1, 0)
             Dim stream = New InMemoryRandomAccessStream()
+            Debug.WriteLine("Taking photo...")
+            Await _mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream)
             Try
-                Debug.WriteLine("Taking photo...")
-                Await _mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream)
-                Debug.WriteLine("Photo taken!")
+                Dim file = Await _captureFolder.CreateFileAsync("SimplePhoto.jpg", CreationCollisionOption.GenerateUniqueName)
+                Debug.WriteLine("Photo taken! Saving to " & file.Path)
                 Dim photoOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation())
-                Await ReencodeAndSavePhotoAsync(stream, photoOrientation)
+                Await ReencodeAndSavePhotoAsync(stream, file, photoOrientation)
             Catch ex As Exception
-                Debug.WriteLine("Exception when taking a photo: {0}", ex.ToString())
+                Debug.WriteLine("Exception when taking a photo: " & ex.ToString())
             End Try
 
             VideoButton.IsEnabled = True
@@ -351,18 +357,18 @@ Namespace Global.FaceDetection
         ''' <returns></returns>
         Private Async Function StartRecordingAsync() As Task
             Try
-                ' Create storage file in Pictures Library
-                Dim videoFile = Await KnownFolders.PicturesLibrary.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName)
+                ' Create storage file for the capture
+                Dim videoFile = Await _captureFolder.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName)
                 Dim encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto)
                 ' Calculate rotation angle, taking mirroring into account if necessary
                 Dim rotationAngle = 360 - ConvertDeviceOrientationToDegrees(GetCameraOrientation())
                 encodingProfile.Video.Properties.Add(RotationKey, PropertyValue.CreateInt32(rotationAngle))
-                Debug.WriteLine("Starting recording...")
+                Debug.WriteLine("Starting recording to " & videoFile.Path)
                 Await _mediaCapture.StartRecordToStorageFileAsync(encodingProfile, videoFile)
                 _isRecording = True
                 Debug.WriteLine("Started recording!")
             Catch ex As Exception
-                Debug.WriteLine("Exception when starting video recording: {0}", ex.ToString())
+                Debug.WriteLine("Exception when starting video recording: " & ex.ToString())
             End Try
         End Function
 
@@ -427,6 +433,10 @@ Namespace Global.FaceDetection
             End If
 
             RegisterEventHandlers()
+
+            Dim picturesLibrary = Await StorageLibrary.GetLibraryAsync(KnownLibraryId.Pictures)
+            ' Fall back to the local app storage if the Pictures Library is not available
+            _captureFolder = If(picturesLibrary.SaveFolder, ApplicationData.Current.LocalFolder)
         End Function
 
         ''' <summary>
@@ -510,12 +520,12 @@ Namespace Global.FaceDetection
         ''' Applies the given orientation to a photo stream and saves it as a StorageFile
         ''' </summary>
         ''' <param name="stream">The photo stream</param>
+        ''' <param name="file">The StorageFile in which the photo stream will be saved</param>
         ''' <param name="photoOrientation">The orientation metadata to apply to the photo</param>
         ''' <returns></returns>
-        Private Shared Async Function ReencodeAndSavePhotoAsync(stream As IRandomAccessStream, photoOrientation As PhotoOrientation) As Task
+        Private Shared Async Function ReencodeAndSavePhotoAsync(stream As IRandomAccessStream, file As StorageFile, photoOrientation As PhotoOrientation) As Task
             Using inputStream = stream
                 Dim decoder = Await BitmapDecoder.CreateAsync(inputStream)
-                Dim file = Await KnownFolders.PicturesLibrary.CreateFileAsync("SimplePhoto.jpeg", CreationCollisionOption.GenerateUniqueName)
                 Using outputStream = Await file.OpenAsync(FileAccessMode.ReadWrite)
                     Dim encoder = Await BitmapEncoder.CreateForTranscodingAsync(outputStream, decoder)
                     Dim properties = New BitmapPropertySet From {{"System.Photo.Orientation", New BitmapTypedValue(photoOrientation, PropertyType.UInt16)}}

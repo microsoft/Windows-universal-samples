@@ -11,8 +11,8 @@
 
 using System;
 using System.Collections.Generic;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using SimpleInk;
 
 namespace SDKTemplate
 {
@@ -24,7 +24,12 @@ namespace SDKTemplate
         {
             new Scenario() { Title="Scenario 1", ClassType=typeof(Scenario1)},
             new Scenario() { Title="Scenario 2", ClassType=typeof(Scenario2)},
-            new Scenario() { Title="Scenario 3", ClassType=typeof(Scenario3)}
+            new Scenario() { Title="Scenario 3", ClassType=typeof(Scenario3)},
+            new Scenario() { Title="Scenario 4", ClassType=typeof(Scenario4)},
+            new Scenario() { Title="Scenario 5", ClassType=typeof(Scenario5)},
+            new Scenario() { Title="Scenario 6", ClassType=typeof(Scenario6)},
+            new Scenario() { Title="Scenario 7", ClassType=typeof(Scenario7)},
+            new Scenario() { Title="Scenario 8", ClassType=typeof(Scenario8)},
         };
     }
 
@@ -32,5 +37,23 @@ namespace SDKTemplate
     {
         public string Title { get; set; }
         public Type ClassType { get; set; }
+    }
+
+    static class HelperFunctions
+    {
+        public static void UpdateCanvasSize(FrameworkElement root, FrameworkElement output, FrameworkElement inkCanvas)
+        {
+            output.Width = root.ActualWidth;
+            output.Height = root.ActualHeight / 2;
+            inkCanvas.Width = root.ActualWidth;
+            inkCanvas.Height = root.ActualHeight / 2;
+        }
+    }
+
+    static class MoreSymbols
+    {
+        static public Symbol CalligraphyPen = (Symbol)0xEDFB;
+        static public Symbol LassoSelect = (Symbol)0xEF20;
+        static public Symbol TouchWriting = (Symbol)0xED5F;
     }
 }

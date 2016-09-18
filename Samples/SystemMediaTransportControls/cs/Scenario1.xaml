@@ -37,7 +37,7 @@
 
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel Orientation="Horizontal" Grid.Row="0">
-                    <MediaElement x:Name="MyMediaElement" Margin="0,0,10,0" AudioCategory="Media" AreTransportControlsEnabled="True" VerticalAlignment="Top"/>
+                    <MediaPlayerElement x:Name="mediaPlayerElement" Margin="0,0,10,0" AreTransportControlsEnabled="True" VerticalAlignment="Top"/>
                     <Button x:Name="SelectFilesButton" Content="Select Files" Click="SelectFilesButton_Click" VerticalAlignment="Top"/>
                 </StackPanel>
             </ScrollViewer>

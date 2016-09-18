@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,6 +26,26 @@ namespace NavigationMenuSample.Views
         public CommandBarPage()
         {
             this.InitializeComponent();
+            this.Loaded += CommandBarPage_Loaded;
+        }
+
+        private void CommandBarPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            double? diagonal = DisplayInformation.GetForCurrentView().DiagonalSizeInInches;
+
+            //move commandbar to page bottom on small screens
+            if (diagonal < 7)
+            {
+                topbar.Visibility = Visibility.Collapsed;
+                pageTitleContainer.Visibility = Visibility.Visible;
+                bottombar.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                topbar.Visibility = Visibility.Visible;
+                pageTitleContainer.Visibility = Visibility.Collapsed;
+                bottombar.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

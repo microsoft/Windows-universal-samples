@@ -8,31 +8,21 @@
         }
     });
 
-    // Checks the availability of User consent requisition via registered fingerprints.
+    // Check the availability of Windows Hello authentication through User Consent Verifier.
     function checkConsentAvailability() {
         try {
 
-            // Check the availability of User Consent with fingerprints facility
             Windows.Security.Credentials.UI.UserConsentVerifier.checkAvailabilityAsync()
             .then(function (consentAvailability) {
                 switch (consentAvailability) {
                     case Windows.Security.Credentials.UI.UserConsentVerifierAvailability.available:
-                        WinJS.log && WinJS.log("User consent requisition facility is available.", "sample", "status");
+                        WinJS.log && WinJS.log("User consent verification available!", "sample", "status");
                         break;
                     case Windows.Security.Credentials.UI.UserConsentVerifierAvailability.deviceNotPresent:
-                        WinJS.log && WinJS.log("No biometric device found.", "sample", "error");
-                        break;
-                    case Windows.Security.Credentials.UI.UserConsentVerifierAvailability.disabledByPolicy:
-                        WinJS.log && WinJS.log("Biometrics is disabled by policy.", "sample", "error");
-                        break;
-                    case Windows.Security.Credentials.UI.UserConsentVerifierAvailability.notConfiguredForUser:
-                        WinJS.log && WinJS.log("User has no fingeprints registered.", "sample", "error");
-                        break;
-                    case Windows.Security.Credentials.UI.UserConsentVerifierAvailability.deviceBusy:
-                        WinJS.log && WinJS.log("Biometric device is busy.", "sample", "error");
+                        WinJS.log && WinJS.log("No PIN or biometric found, please set one up.", "sample", "error");
                         break;
                     default:
-                        WinJS.log && WinJS.log("Consent verification is currently unavailable.", "sample", "error");
+                        WinJS.log && WinJS.log("User consent verification is currently unavailable.", "sample", "error");
                         break;
                 }
             });

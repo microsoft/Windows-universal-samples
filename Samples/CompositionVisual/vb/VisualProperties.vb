@@ -67,7 +67,7 @@ Namespace Global.CompositionVisual
                 If Not _dragging Then
                     _currentVisual.Opacity = 1.0f
                     For Each child In _currentVisual.Children
-                        child.RotationAngle = 45.0f
+                        child.RotationAngleInDegrees = 45.0F
                         child.CenterPoint = New Vector3(_currentVisual.Size.X / 2, _currentVisual.Size.Y / 2, 0)
                         Exit For
                     Next
@@ -142,14 +142,14 @@ Namespace Global.CompositionVisual
             '
             ' The outer rectangle is always white
             '
-            Dim visual = _compositor.CreateSolidColorVisual()
+            Dim visual = _compositor.CreateSpriteVisual()
             element.Children.InsertAtTop(visual)
-            visual.Color = Color.FromArgb(&HFF, &HFF, &HFF, &HFF)
+            visual.Brush = _compositor.CreateColorBrush(Color.FromArgb(&HFF, &HFF, &HFF, &HFF))
             visual.Size = New Vector2(100.0f, 100.0f)
             '
             ' The inner rectangle is inset from the outer by three pixels all around
             '
-            Dim child = _compositor.CreateSolidColorVisual()
+            Dim child = _compositor.CreateSpriteVisual()
             visual.Children.InsertAtTop(child)
             child.Offset = New Vector3(3.0f, 3.0f, 0.0f)
             child.Size = New Vector2(94.0f, 94.0f)
@@ -159,7 +159,7 @@ Namespace Global.CompositionVisual
             Dim red As Byte = CType((&HFF * (0.2f + (_random.NextDouble() / 0.8f))), Byte)
             Dim green As Byte = CType((&HFF * (0.2f + (_random.NextDouble() / 0.8f))), Byte)
             Dim blue As Byte = CType((&HFF * (0.2f + (_random.NextDouble() / 0.8f))), Byte)
-            child.Color = Color.FromArgb(&HFF, red, green, blue)
+            child.Brush = _compositor.CreateColorBrush(Color.FromArgb(&HFF, red, green, blue))
             element.Opacity = 0.8f
             Return element
         End Function

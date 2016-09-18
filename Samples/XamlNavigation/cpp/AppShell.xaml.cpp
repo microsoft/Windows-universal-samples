@@ -41,9 +41,9 @@ namespace NavigationMenuSample
 
         Loaded += ref new Windows::UI::Xaml::RoutedEventHandler(this, &AppShell::OnLoaded);
 
-		RootSplitView->RegisterPropertyChangedCallback(
-			SplitView::DisplayModeProperty,
-			ref new DependencyPropertyChangedCallback(this, &AppShell::RootSplitViewDisplayModeChangedCallback));
+        RootSplitView->RegisterPropertyChangedCallback(
+            SplitView::DisplayModeProperty,
+            ref new DependencyPropertyChangedCallback(this, &AppShell::RootSplitViewDisplayModeChangedCallback));
 
         SystemNavigationManager::GetForCurrentView()->BackRequested +=
             ref new EventHandler<Windows::UI::Core::BackRequestedEventArgs^>(this, &AppShell::SystemNavigationManager_BackRequested);
@@ -145,10 +145,16 @@ namespace NavigationMenuSample
     /// <param name="listViewItem"></param>
     void AppShell::NavMenuList_ItemInvoked(Object^ sender, ListViewItem^ listViewItem)
     {
+        for (NavMenuItem^ i : navlist)
+        {
+            i->IsSelected = false;
+        }
+
         auto item = (NavMenuItem^)((NavMenuListView^)(sender))->ItemFromContainer(listViewItem);
 
         if (item != nullptr)
         {
+            item->IsSelected = true;
             if (item->DestPage.Name != AppFrame->CurrentSourcePageType.Name)
             {
                 AppFrame->Navigate(item->DestPage, item->Arguments);
@@ -188,10 +194,19 @@ namespace NavigationMenuSample
                 }
             }
 
+            for (NavMenuItem^ i : navlist)
+            {
+                i->IsSelected = false;
+            }
+            if (item != nullptr)
+            {
+                item->IsSelected = true;
+            }
+
             auto container = (ListViewItem^)NavMenuList->ContainerFromItem(item);
 
             // While updating the selection state of the item prevent it from taking keyboard focus.  If a
-            // user is invoking the back button via the keyboard causing the selected nav menu item to change 
+            // user is invoking the back button via the keyboard causing the selected nav menu item to change
             // then focus will remain on the back button.
             if (container != nullptr) container->IsTabStop = false;
             NavMenuList->SetSelectedItem(container);
@@ -199,48 +214,64 @@ namespace NavigationMenuSample
         }
     }
 
-
-    void AppShell::OnNavigatedToPage(Object^ sender, NavigationEventArgs^ e)
+    /// <summary>
+    /// Public method to allow pages to open SplitView's pane.
+    /// Used for custom app shortcuts like navigating left from page's left-most item
+    /// </summary>
+    void AppShell::OpenNavePane()
     {
-        // After a successful navigation set keyboard focus to the loaded page
-        if (e->Content != nullptr && dynamic_cast<Page^>(e->Content) != nullptr)
-        {
-            auto control = (Page^)e->Content;
-            control->Loaded += ref new RoutedEventHandler(this, &AppShell::Page_Loaded);
-        }
-
-        // Update the Back button depending on whether we can go Back.
-        SystemNavigationManager::GetForCurrentView()->AppViewBackButtonVisibility =
-            AppFrame->CanGoBack ?
-            Windows::UI::Core::AppViewBackButtonVisibility::Visible :
-            Windows::UI::Core::AppViewBackButtonVisibility::Collapsed;
+        TogglePaneButton->IsChecked = true;
+        NavPaneDivider->Visibility = Windows::UI::Xaml::Visibility::Visible;
     }
 
-    void AppShell::Page_Loaded(Object^ sender, RoutedEventArgs^ e)
+    // <summary>
+    /// Hide divider when nav pane is closed.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    void AppShell::RootSplitView_PaneClosed(SplitView^ sender, Object^ args)
     {
-        ((Page^)sender)->Focus(Windows::UI::Xaml::FocusState::Programmatic);
-        CheckTogglePaneButtonSizeChanged();
+        NavPaneDivider->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+
+        // Prevent focus from moving to elements when they're not visible on screen
+        FeedbackNavPaneButton->IsTabStop = false;
+        SettingsNavPaneButton->IsTabStop = false;
     }
 
     /// <summary>
-    /// Callback when the SplitView's Pane is toggled open or close.  When the Pane is not visible
-    /// then the floating hamburger may be occluding other content in the app unless it is aware.
+    /// Callback when the SplitView's Pane is toggled opened.
+    /// Restores divider's visibility and ensures that margins around the floating hamburger are correctly set.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     void AppShell::TogglePaneButton_Checked(Object^ sender, RoutedEventArgs^ e)
     {
+        NavPaneDivider->Visibility = Windows::UI::Xaml::Visibility::Visible;
+        CheckTogglePaneButtonSizeChanged();
+
+        FeedbackNavPaneButton->IsTabStop = true;
+        SettingsNavPaneButton->IsTabStop = true;
+    }
+
+    /// <summary>
+    /// Callback when the SplitView's Pane is toggled closed.  When the Pane is not visible
+    /// then the floating hamburger may be occluding other content in the app unless it is aware.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    void AppShell::TogglePaneButton_Unchecked(Object^ sender, RoutedEventArgs^ e)
+    {
         CheckTogglePaneButtonSizeChanged();
     }
 
-	/// <summary>
-	/// Ensure that we update the reported size of the TogglePaneButton when the SplitView's 
-	/// DisplayMode changes.
-	/// </summary>
-	void AppShell::RootSplitViewDisplayModeChangedCallback(DependencyObject^ sender, DependencyProperty^ dp)
-	{
-		CheckTogglePaneButtonSizeChanged();
-	}
+    /// <summary>
+    /// Ensure that we update the reported size of the TogglePaneButton when the SplitView's
+    /// DisplayMode changes.
+    /// </summary>
+    void AppShell::RootSplitViewDisplayModeChangedCallback(DependencyObject^ sender, DependencyProperty^ dp)
+    {
+        CheckTogglePaneButtonSizeChanged();
+    }
 
     /// <summary>
     /// Check for the conditions where the navigation pane does not occupy the space under the floating

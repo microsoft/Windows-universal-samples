@@ -1,0 +1,46 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario1.css" />
+    <script src="/js/scenario1.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                By default textarea and contenteditable elements have spell checking and text suggestions enabled; single-line input boxes (inputtype=text) are not enabled by default The spellcheck attribute defined by HTML5 allows you to override the default behaviour for an element and all of it's children. 
+                By adding the spellcheck=false attribute value on any element, you disable spellchecking and text prediction. Setting it to true enables the same scenario.
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <table>
+                <tr><td colspan="2"><label for="text"></label><center>spellcheck=false</center></td></tr>
+                <tr>
+                    <td>TextArea Controls: </td>
+                    <td><textarea name="textarea" id="textarea" rows="2" spellcheck="false"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Text Controls: </td>
+                    <td><input type="text" name="text" id="text" /></td>
+                </tr>
+                <tr><td colspan="2"><label for="text1"></label><center>spellcheck=true</center></td></tr>
+                <tr>
+                    <td>TextArea Controls: </td>
+                    <td><textarea name="textarea1" id="textarea1" rows="2"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Text Controls: </td>
+                    <td><input type="text" name="text1" id="text1" spellcheck="true" /></td>
+                </tr>
+            </table>
+            <p>When typing in an enabled edit control using the Windows 10 Touch Keyboard, spell checking and text suggestion services will be automatically provided. Enabling this attribute will also provide spellchecking for the text entered using the hardware keyboard.</p>
+        </div>
+    </div>
+</body>
+</html>

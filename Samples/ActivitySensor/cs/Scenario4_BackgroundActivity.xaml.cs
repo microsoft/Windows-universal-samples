@@ -75,12 +75,12 @@ namespace SDKTemplate
                 // Determine if an activity sensor is present
                 // This can also be done using Windows::Devices::Enumeration::DeviceInformation::FindAllAsync
                 var activitySensor = await ActivitySensor.GetDefaultAsync();
-                if (activitySensor != null)
+                if (true||activitySensor != null)
                 {
                     var status = await BackgroundExecutionManager.RequestAccessAsync();
 
-                    if ((BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity == status) ||
-                        (BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity == status))
+                    if ((BackgroundAccessStatus.AlwaysAllowed == status) ||
+                        (BackgroundAccessStatus.AllowedSubjectToSystemPolicy == status))
                     {
                         RegisterBackgroundTask();
                     }

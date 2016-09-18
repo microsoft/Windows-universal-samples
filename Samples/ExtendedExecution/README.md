@@ -17,6 +17,7 @@ This sample demonstrates the following:
 -   Creating an extended execution session to extend suspending time and complete saving data.
 -   Creating an extended execution session to extend foreground time and continue location tracking.
 -   Creating an extended execution session to extend foreground time and continue an unspecified task.
+-   Sharing an extended execution session among multiple tasks.
 -   Handling a denied request for extended execution.
 -   Handling the revocation of an extended execution session.
 
@@ -80,7 +81,7 @@ some scenarios require you to run the sample without debugging.
    On Phone, switch to another app.
    On PC, minimize the app.
 4. The app continues to display toast notifications.
-5. Bring the app back to the foreground to cause a revoke due to Resume.
+5. Bring the app back to the foreground and the session will continue running.
 6. Run the sample with debugging.
 7. Repeat steps 2 through 4 above.
 8. Use the Lifecycle events menu in the debugger to suspend the app.
@@ -103,15 +104,22 @@ some scenarios require you to run the sample without debugging.
    On Phone, switch to another app.
    On PC, minimize the app.
 4. The app continues to report your location every 10 seconds.
-5. Bring the app back to the foreground to cause a revoke due to Resume.
+5. Bring the app back to the foreground and the session will continue running.
 6. Run the sample with debugging.
 7. Repeat steps 2 through 4 above.
 8. Use the Lifecycle events menu in the debugger to suspend the app.
    This simulates a revoke due to SystemPolicy.
 
-## Read more
+**Using Multiple Tasks**:
 
-See the following topics for step-by-step information about using extended execution:
-
--   [Background Tasks and Extended Execution](https://msdn.microsoft.com/en-us/magazine/mt590969)
-
+1. Run the sample without debugging and go to the **Using Multiple Tasks** scenario.
+2. Click **Begin Extended Execution and Tasks**.
+3. Send the program to the background:
+   On Phone, switch to another app.
+   On PC, minimize the app.
+4. The app displays toast notifications as each of three Tasks complete.
+5. Bring the app back to the foreground and the session will continue running.
+6. Run the sample with debugging.
+7. Repeat steps 2 through 4 above.
+8. Use the Lifecycle events menu in the debugger to suspend the app.
+   This simulates a revoke due to SystemPolicy.

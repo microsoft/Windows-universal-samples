@@ -13,6 +13,11 @@
             document.getElementById("accuracyHighRadio").addEventListener("click", onAccuracyHigh, false);
             document.getElementById("accuracyApproximateRadio").addEventListener("click", onAccuracyApproximate, false);
             document.getElementById("accuracyUnreliableRadio").addEventListener("click", onAccuracyUnreliable, false);
+
+            if (SdkSample.sensorReadingType == "relative") {
+                document.getElementById("enabledContent").style.display = "none";
+                document.getElementById("disabledContent").style.display = "block";
+            }
         }
     });
 

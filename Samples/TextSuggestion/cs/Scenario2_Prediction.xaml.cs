@@ -59,14 +59,13 @@ namespace TextSuggestion
             if ((generator != null) && (selectedItem != null) && !String.IsNullOrEmpty(input))
             {
                 // Specifiy the candidate number to get.
-                if (selectedItem.Content.Equals("GetCandidatesAsync(WithMaxCount)"))
+                if ((selectedItem.Tag != null) && selectedItem.Tag.ToString().Equals("needMaxCount"))
                 {
                     uint MaxCandidates = 0;
                     UInt32.TryParse(maxCandidates.Text, out MaxCandidates);
 
                     if (MaxCandidates != 0)
                     {
-
                         // Call the API with max candidate number user expect, and list the result when there are any candidates. 
                         // Using 'await' expression here to suspend the execution of this method until the awaited task completes.
                         resultView.ItemsSource = await generator.GetCandidatesAsync(input, MaxCandidates);
@@ -107,9 +106,8 @@ namespace TextSuggestion
             if (maxCandidatesArea != null)
             {
                 // Only show the candidate number input control when user chooses to specify the number.
-                if (selectedItem.Content.Equals("GetCandidatesAsync(WithMaxCount)"))
+                if ((selectedItem.Tag != null) && selectedItem.Tag.ToString().Equals("needMaxCount"))
                 {
-
                     maxCandidatesArea.Visibility = Visibility.Visible;
                 }
                 else

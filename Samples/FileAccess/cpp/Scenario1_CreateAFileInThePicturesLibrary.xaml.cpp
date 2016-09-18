@@ -28,7 +28,11 @@ Scenario1::Scenario1() : rootPage(MainPage::Current)
 
 void Scenario1::CreateFileButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
-    create_task(KnownFolders::PicturesLibrary->CreateFileAsync(rootPage->Filename, CreationCollisionOption::ReplaceExisting)).then([this](task<StorageFile^> task)
+    create_task(KnownFolders::GetFolderForUserAsync(nullptr /* current user */, KnownFolderId::PicturesLibrary))
+        .then([this](StorageFolder^ picturesFolder)
+    {
+        return picturesFolder->CreateFileAsync(rootPage->Filename, CreationCollisionOption::ReplaceExisting);
+    }).then([this](task<StorageFile^> task)
     {
         try
         {

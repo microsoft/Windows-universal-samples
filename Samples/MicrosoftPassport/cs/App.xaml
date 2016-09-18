@@ -1,0 +1,51 @@
+﻿<Application
+    x:Class="SDKTemplate.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    RequestedTheme="Light">
+
+    <Application.Resources>
+        <SolidColorBrush x:Key="BlackBrush">#FF000000</SolidColorBrush>
+        <SolidColorBrush x:Key="WhiteBrush">#FFFFFFFF</SolidColorBrush>
+
+        <SolidColorBrush x:Key="BlueBrush">#FF6cb8ff</SolidColorBrush>
+
+        <SolidColorBrush x:Key="Grey01Brush">#FF202020</SolidColorBrush>
+        <SolidColorBrush x:Key="Grey02Brush">#FF404040</SolidColorBrush>
+        <SolidColorBrush x:Key="Grey03Brush">#FF808080</SolidColorBrush>
+        <SolidColorBrush x:Key="Grey04Brush">#FFC0C0C0</SolidColorBrush>
+        <SolidColorBrush x:Key="Grey05Brush">#FFC8C8C8</SolidColorBrush>
+        <SolidColorBrush x:Key="Grey06Brush">#FFDCDCDC</SolidColorBrush>
+        <SolidColorBrush x:Key="Grey07Brush">#FFF0F0F0</SolidColorBrush>
+
+        <FontFamily x:Key="StandardFont">Segoe UI</FontFamily>
+        <FontFamily x:Key="LightFont">Segoe UI Light</FontFamily>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource Grey02Brush}"/>
+            <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilySemiLight}"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BlueBrush}"/>
+            <Setter Property="Background" Value="{StaticResource Grey07Brush}"/>
+        </Style>
+
+        <Style TargetType="PasswordBox">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BlueBrush}"/>
+            <Setter Property="Background" Value="{StaticResource Grey07Brush}"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
+            <Setter Property="FontFamily" Value="{StaticResource LightFont}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Background" Value="{StaticResource BlueBrush}"/>
+        </Style>
+
+    </Application.Resources>
+
+</Application>

@@ -43,8 +43,13 @@ namespace SDKTemplate
     internal:
         Windows::Foundation::Uri^ TryGetUri(Platform::String^ uriString);
         static Platform::String^ BuildWebSocketError(Platform::Exception^ ex);
+        static concurrency::task<bool> AreCertificateAndCertChainValidAsync(
+            Windows::Security::Cryptography::Certificates::Certificate^ serverCert,
+            Windows::Foundation::Collections::IVectorView<Windows::Security::Cryptography::Certificates::Certificate^>^ certChain);
 
     private:
         static Platform::Array<Scenario>^ scenariosInner;
+
+        static concurrency::task<bool> IsCertificateValidAsync(Windows::Security::Cryptography::Certificates::Certificate^ serverCert);
     };
 }

@@ -1,0 +1,80 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page x:Class="SDKSample.HttpClientSample.Scenario14" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:SDKSample.HttpClientSample" xmlns:common="using:SDKTemplate.Common" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+  <Page.Resources>
+    <Style x:Key="LeftFriendly" TargetType="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="FontSize" Value="14.66"/>
+      <Setter Property="Margin" Value="0,0,10,0"/>
+    </Style>
+    <Style x:Key="HorizontalFriendly" TargetType="FrameworkElement">
+      <Setter Property="Margin" Value="0,5,0,5"/>
+    </Style>
+  </Page.Resources>
+  <Grid x:Name="LayoutRoot">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Grid x:Name="Input" Grid.Row="0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <TextBlock Grid.Row="0" Grid.ColumnSpan="2" x:Name="InputTextBlock1" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
+         The Metered Connection Filter sends all requests while in Normal mode,
+        only medium and high priority requests while in Conservative mode and
+        only high priority requests if the app opts in while in Opt-In mode.
+      </TextBlock>
+      <TextBlock Grid.Row="1" Grid.Column="0" Text="Address" Style="{StaticResource LeftFriendly}"/>
+      <TextBox Grid.Row="1" Grid.Column="1" x:Name="AddressField" Text="http://localhost/HttpClientSample/default.aspx" Style="{StaticResource HorizontalFriendly}"/>
+      <TextBlock Grid.Row="2" Grid.Column="0" Text="Priority" Style="{StaticResource LeftFriendly}"/>
+      <StackPanel Grid.Row="2" Grid.Column="1" Style="{StaticResource HorizontalFriendly}">
+        <RadioButton GroupName="PriorityGroup" x:Name="LowRadio" Content="Low" IsChecked="True"/>
+        <RadioButton GroupName="PriorityGroup" x:Name="MediumRadio" Content="Medium"/>
+        <RadioButton GroupName="PriorityGroup" x:Name="HighRadio" Content="High"/>
+      </StackPanel>
+      <TextBlock Grid.Row="4" Grid.Column="0" Text="Opt-In" Style="{StaticResource LeftFriendly}"/>
+      <ToggleSwitch Grid.Row="4" Grid.Column="1" x:Name="OptInSwitch" Toggled="OptInSwitch_Toggled"/>
+      <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Style="{StaticResource HorizontalFriendly}">
+        <Button Content="Start" x:Name="StartButton" Margin="0,0,10,0" Click="Start_Click"/>
+        <Button Content="Cancel" x:Name="CancelButton" IsEnabled="False" Click="Cancel_Click"/>
+      </StackPanel>
+      <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts for the input section -->
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup>
+          <VisualState x:Name="InputDefaultLayout"/>
+          <VisualState x:Name="InputBelow768Layout"/>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+    <Grid x:Name="Output" Grid.Row="1">
+      <TextBox x:Name="OutputField" Margin="0" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
+      <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts for the output section -->
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup>
+          <VisualState x:Name="OutputDefaultLayout"/>
+          <VisualState x:Name="OutputBelow768Layout"/>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Grid>
+  </Grid>
+</Page>

@@ -32,6 +32,7 @@ public interface class IOnboardingSignals
 public ref class OnboardingSignals sealed : [Windows::Foundation::Metadata::Default] IOnboardingSignals
 {
 public:
+    // "This signal is emitted when the connection attempt against the personal AP is completed"
     // Calling this method will send the ConnectionResult signal to every member of the session.
     void ConnectionResult(_In_ Onboarding^ interfaceMemberArg);
 
@@ -58,12 +59,11 @@ public:
     }
 
 internal:
-    void Initialize(_In_ alljoyn_busobject busObject, _In_ alljoyn_sessionid sessionId);
+    void Initialize(_In_ ISignalEmitter^ emitter);
     void CallConnectionResultReceived(_In_ OnboardingSignals^ sender, _In_ OnboardingConnectionResultReceivedEventArgs^ args);
 
 private:
-    alljoyn_busobject m_busObject;
-    alljoyn_sessionid m_sessionId;
+    ISignalEmitter^ m_emitter;
 
     virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _ConnectionResultReceived;
 

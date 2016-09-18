@@ -16,107 +16,68 @@ using namespace SDKTemplate;
 
 using namespace Concurrency;
 using namespace Platform;
-using namespace Windows::ApplicationModel::Store;
+using namespace Platform::Collections;
+using namespace Windows::Foundation::Collections;
+using namespace Windows::Services::Store;
+using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Navigation;
 
 Scenario2_InAppPurchase::Scenario2_InAppPurchase()
 {
     InitializeComponent();
+
+    storeContext = StoreContext::GetDefault();
 }
 
-/// <summary>
-/// Invoked when this page is about to be displayed in a Frame.
-/// </summary>
-/// <param name="e">Event data that describes how this page was reached.  The Parameter
-/// property is typically used to configure the page.</param>
-void Scenario2_InAppPurchase::OnNavigatedTo(NavigationEventArgs^ e)
+void Scenario2_InAppPurchase::GetAssociatedProductsButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
-    ConfigureSimulatorAsync("in-app-purchase.xml").then([]()
-    {
-        return create_task(CurrentAppSimulator::LoadListingInformationAsync());
-    }).then([this](task<ListingInformation^> currentTask)
-    {
-        try
-        {
-            ListingInformation^ listing = currentTask.get();
-            auto product1 = listing->ProductListings->Lookup("product1");
-            Product1Name->Text = product1->Name;
-            Product1Price->Text = product1->FormattedPrice;
+    // Create a filtered list of the product AddOns I care about
+    auto filterList = ref new Vector<String^>({ "Consumable" ,"Durable", "UnmanagedConsumable" });
 
-            auto product2 = listing->ProductListings->Lookup("product2");
-            Product2Name->Text = product2->Name;
-            Product2Price->Text = product2->FormattedPrice;
+    // Get list of Add Ons this app can sell, filtering for the types we know about
+    create_task(storeContext->GetAssociatedStoreProductsAsync(filterList)).then([this](StoreProductQueryResult^ addOns)
+    {
+        ProductsListView->ItemsSource = Utils::CreateProductListFromQueryResult(addOns, "Add-Ons");
+    }, task_continuation_context::get_current_winrt_context());
+}
+
+void Scenario2_InAppPurchase::PurchaseAddOnButton_Click(Object^ sender, RoutedEventArgs^ e)
+{
+    ItemDetails^ item = safe_cast<ItemDetails^>(ProductsListView->SelectedItem);
+    create_task(storeContext->RequestPurchaseAsync(item->StoreId)).then([this, item](StorePurchaseResult^ result)
+    {
+        if (result->ExtendedError.Value != S_OK)
+        {
+            Utils::ReportExtendedError(result->ExtendedError);
+            return;
         }
-        catch (Platform::Exception^ exception)
+
+        switch (result->Status)
         {
-            rootPage->NotifyUser("LoadListingInformationAsync API call failed", NotifyType::ErrorMessage);
+        case StorePurchaseStatus::AlreadyPurchased:
+            rootPage->NotifyUser("You already bought this AddOn.", NotifyType::ErrorMessage);
+            break;
+
+        case StorePurchaseStatus::Succeeded:
+            rootPage->NotifyUser("You bought " + item->Title + ".", NotifyType::StatusMessage);
+            break;
+
+        case StorePurchaseStatus::NotPurchased:
+            rootPage->NotifyUser("Product was not purchased, it may have been canceled.", NotifyType::ErrorMessage);
+            break;
+
+        case StorePurchaseStatus::NetworkError:
+            rootPage->NotifyUser("Product was not purchased due to a network error.", NotifyType::ErrorMessage);
+            break;
+
+        case StorePurchaseStatus::ServerError:
+            rootPage->NotifyUser("Product was not purchased due to a server error.", NotifyType::ErrorMessage);
+            break;
+
+        default:
+            rootPage->NotifyUser("Product was not purchased due to an unknown error.", NotifyType::ErrorMessage);
+            break;
         }
-    });
-}
-
-void Scenario2_InAppPurchase::TestProduct(Platform::String^ productId, Platform::String^ productName)
-{
-    auto licenseInformation = CurrentAppSimulator::LicenseInformation;
-    auto productLicense = licenseInformation->ProductLicenses->Lookup(productId);
-    if (productLicense->IsActive)
-    {
-        rootPage->NotifyUser("You can use " + productName + ".", NotifyType::StatusMessage);
-    }
-    else
-    {
-        rootPage->NotifyUser("You don't own " + productName + ".", NotifyType::ErrorMessage);
-    }
-}
-
-void Scenario2_InAppPurchase::BuyProduct(Platform::String^ productId, Platform::String^ productName)
-{
-    auto licenseInformation = CurrentAppSimulator::LicenseInformation;
-    if (!licenseInformation->ProductLicenses->Lookup(productId)->IsActive)
-    {
-        rootPage->NotifyUser("Buying " + productName + "...", NotifyType::StatusMessage);
-        create_task(CurrentAppSimulator::RequestProductPurchaseAsync(productId)).then([this, productId, productName](task<PurchaseResults^> currentTask)
-        {
-            try
-            {
-                currentTask.get();
-                auto licenseInformation = CurrentAppSimulator::LicenseInformation;
-                if (licenseInformation->ProductLicenses->Lookup(productId)->IsActive)
-                {
-                    rootPage->NotifyUser("You bought " + productName + ".", NotifyType::StatusMessage);
-                }
-                else
-                {
-                    rootPage->NotifyUser(productName + " was not purchased.", NotifyType::StatusMessage);
-                }
-            }
-            catch (Platform::Exception^ exception)
-            {
-                rootPage->NotifyUser("Unable to buy " + productName + ".", NotifyType::ErrorMessage);
-            }
-        });
-    }
-    else
-    {
-        rootPage->NotifyUser("You already own " + productName + ".", NotifyType::ErrorMessage);
-    }
-}
-void Scenario2_InAppPurchase::TestProduct1()
-{
-    TestProduct("product1", Product1Name->Text);
-}
-
-void Scenario2_InAppPurchase::BuyProduct1()
-{
-    BuyProduct("product1", Product1Name->Text);
-}
-
-void Scenario2_InAppPurchase::TestProduct2()
-{
-    TestProduct("product2", Product2Name->Text);
-}
-
-void Scenario2_InAppPurchase::BuyProduct2()
-{
-    BuyProduct("product2", Product2Name->Text);
+    }, task_continuation_context::get_current_winrt_context());
 }
