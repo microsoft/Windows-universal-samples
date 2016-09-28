@@ -36,6 +36,7 @@ namespace NavigationMenuSample.Controls
         public NavMenuListView()
         {
             this.SelectionMode = ListViewSelectionMode.Single;
+            this.SingleSelectionFollowsFocus = false;
             this.IsItemClickEnabled = true;
             this.ItemClick += ItemClickedHandler;
 
@@ -53,6 +54,11 @@ namespace NavigationMenuSample.Controls
                     this.splitViewHost = parent as SplitView;
 
                     splitViewHost.RegisterPropertyChangedCallback(SplitView.IsPaneOpenProperty, (sender, args) =>
+                    {
+                        this.OnPaneToggled();
+                    });
+
+                    splitViewHost.RegisterPropertyChangedCallback(SplitView.DisplayModeProperty, (sender, args) =>
                     {
                         this.OnPaneToggled();
                     });
@@ -110,13 +116,13 @@ namespace NavigationMenuSample.Controls
         public event EventHandler<ListViewItem> ItemInvoked;
 
         /// <summary>
-        /// Custom keyboarding logic to enable movement via the arrow keys without triggering selection
-        /// until a 'Space' or 'Enter' key is pressed.
+        /// Custom keyboarding logic to enable movement via the arrow keys without triggering selection 
+        /// until a 'Space' or 'Enter' key is pressed. 
         /// </summary>
         /// <param name="e"></param>
         protected override void OnKeyDown(KeyRoutedEventArgs e)
         {
-        var focusedItem = FocusManager.GetFocusedElement();
+            var focusedItem = FocusManager.GetFocusedElement();
 
             switch (e.Key)
             {
@@ -127,55 +133,6 @@ namespace NavigationMenuSample.Controls
 
                 case VirtualKey.Down:
                     this.TryMoveFocus(FocusNavigationDirection.Down);
-                    e.Handled = true;
-                    break;
-
-                case VirtualKey.Tab:
-                    var shiftKeyState = CoreWindow.GetForCurrentThread().GetKeyState(VirtualKey.Shift);
-                    var shiftKeyDown = (shiftKeyState & CoreVirtualKeyStates.Down) == CoreVirtualKeyStates.Down;
-
-                    // If we're on the header item then this will be null and we'll still get the default behavior.
-                    if (focusedItem is ListViewItem)
-                    {
-                        var currentItem = (ListViewItem)focusedItem;
-                        bool onlastitem = currentItem != null && this.IndexFromContainer(currentItem) == this.Items.Count - 1;
-                        bool onfirstitem = currentItem != null && this.IndexFromContainer(currentItem) == 0;
-
-                        if (!shiftKeyDown)
-                        {
-                            if (onlastitem)
-                            {
-                                this.TryMoveFocus(FocusNavigationDirection.Next);
-                            }
-                            else
-                            {
-                                this.TryMoveFocus(FocusNavigationDirection.Down);
-                            }
-                        }
-                        else // Shift + Tab
-                        {
-                            if (onfirstitem)
-                            {
-                                this.TryMoveFocus(FocusNavigationDirection.Previous);
-                            }
-                            else
-                            {
-                                this.TryMoveFocus(FocusNavigationDirection.Up);
-                            }
-                        }
-                    }
-                    else if (focusedItem is Control)
-                    {
-                        if (!shiftKeyDown)
-                        {
-                            this.TryMoveFocus(FocusNavigationDirection.Down);
-                        }
-                        else // Shift + Tab
-                        {
-                            this.TryMoveFocus(FocusNavigationDirection.Up);
-                        }
-                    }
-
                     e.Handled = true;
                     break;
 
@@ -222,17 +179,18 @@ namespace NavigationMenuSample.Controls
         private void InvokeItem(object focusedItem)
         {
             this.SetSelectedItem(focusedItem as ListViewItem);
-            this.ItemInvoked(this, focusedItem as ListViewItem);
+            this.ItemInvoked?.Invoke(this, focusedItem as ListViewItem);
 
             if (this.splitViewHost.IsPaneOpen && (
                 this.splitViewHost.DisplayMode == SplitViewDisplayMode.CompactOverlay ||
                 this.splitViewHost.DisplayMode == SplitViewDisplayMode.Overlay))
             {
                 this.splitViewHost.IsPaneOpen = false;
-                if (focusedItem is ListViewItem)
-                {
-                    ((ListViewItem)focusedItem).Focus(FocusState.Programmatic);
-                }
+            }
+
+            if (focusedItem is ListViewItem)
+            {
+                ((ListViewItem)focusedItem).Focus(FocusState.Programmatic);
             }
         }
 

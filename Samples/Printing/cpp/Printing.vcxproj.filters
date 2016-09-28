@@ -17,6 +17,7 @@
     <ClCompile Include="PrintHelper.cpp" />
     <ClCompile Include="Scenario4PageRange.xaml.cpp" />
     <ClCompile Include="Scenario5Photos.xaml.cpp" />
+    <ClCompile Include="Scenario6DisablePreview.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContinuationPage.xaml.h" />
@@ -32,6 +33,7 @@
     <ClInclude Include="Scenario3CustomOptions.xaml.h" />
     <ClInclude Include="Scenario4PageRange.xaml.h" />
     <ClInclude Include="Scenario5Photos.xaml.h" />
+    <ClInclude Include="Scenario6DisablePreview.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
@@ -93,6 +95,7 @@
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Sty%3bes</Filter>
     </Page>
+    <Page Include="Scenario6DisablePreview.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">

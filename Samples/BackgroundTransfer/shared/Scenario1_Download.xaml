@@ -21,7 +21,7 @@
                 foreground. The Background Transfer API enables users to transfer
                 content in the background. Therefore, application developers must also
                 ensure they handle application suspension/resumption and
-                termination/activation cases as well. 
+                termination/activation cases. 
             </TextBlock>
             <TextBlock Text="Remote address: " Style="{StaticResource BasicTextStyle}" Margin="0,8,10,0"/>
             <TextBox x:Name="serverAddressField" InputScope="Url" Text="http://localhost/BackgroundTransferSample/download.aspx" />
@@ -32,10 +32,7 @@
                 <Button x:Name="StartHighPriorityDownloadButton" Content="Start High Priority Download" Margin="0,0,10,0" Click="StartHighPriorityDownload_Click"/>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,0">
-                <Button x:Name="StartUnconstrainedDownloadButton" Content="Start Unconstrained Download" Margin="0,0,10,0" Click="StartUnconstrainedDownload_Click"/>
                 <Button x:Name="PauseAllButton" Content="Pause All" Margin="0,0,10,0" Click="PauseAll_Click"/>
-            </StackPanel>
-            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,10">
                 <Button x:Name="ResumeAllButton" Content="Resume All" Margin="0,0,10,0" Click="ResumeAll_Click"/>
                 <Button x:Name="CancelAllButton" Content="Cancel All" Margin="0,0,10,0" Click="CancelAll_Click"/>
             </StackPanel>

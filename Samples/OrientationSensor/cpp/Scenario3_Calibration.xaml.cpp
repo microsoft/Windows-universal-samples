@@ -31,30 +31,16 @@ Scenario3_Calibration::Scenario3_Calibration() : rootPage(MainPage::Current)
 {
     InitializeComponent();
     calibrationBar = ref new CalibrationBar();
+
+    if (rootPage->SensorReadingType == SensorReadingType::Relative)
+    {
+        EnabledContent->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+        DisabledContent->Visibility = Windows::UI::Xaml::Visibility::Visible;
+    }
 }
 
-/// <summary>
-/// Invoked when this page is about to be displayed in a Frame.
-/// </summary>
-/// <param name="e">Event data that describes how this page was reached.  The Parameter
-/// property is typically used to configure the page.</param>
-void Scenario3_Calibration::OnNavigatedTo(NavigationEventArgs^ e)
-{
-}
-
-/// <summary>
-/// Invoked when this page is no longer displayed.
-/// </summary>
-/// <param name="e"></param>
 void Scenario3_Calibration::OnNavigatedFrom(NavigationEventArgs^ e)
 {
-    // If the navigation is external to the app do not clean up.
-    // This can occur on Phone when suspending the app.
-    if (e->NavigationMode == NavigationMode::Forward && e->Uri == nullptr)
-    {
-        return;
-    }
-
     calibrationBar->Hide();
 }
 
@@ -64,7 +50,7 @@ void Scenario3_Calibration::OnNavigatedFrom(NavigationEventArgs^ e)
 /// </summary>
 /// <param name="sender"></param>
 /// <param name="e"></param>
-void Scenario3_Calibration::OnHighAccuracy(Object^ sender, RoutedEventArgs^ e)
+void Scenario3_Calibration::OnHighAccuracy()
 {
     calibrationBar->Hide();
 }
@@ -75,7 +61,7 @@ void Scenario3_Calibration::OnHighAccuracy(Object^ sender, RoutedEventArgs^ e)
 /// </summary>
 /// <param name="sender"></param>
 /// <param name="e"></param>
-void Scenario3_Calibration::OnApproximateAccuracy(Object^ sender, RoutedEventArgs^ e)
+void Scenario3_Calibration::OnApproximateAccuracy()
 {
     calibrationBar->Hide();
 }
@@ -86,7 +72,7 @@ void Scenario3_Calibration::OnApproximateAccuracy(Object^ sender, RoutedEventArg
 /// </summary>
 /// <param name="sender"></param>
 /// <param name="e"></param>
-void Scenario3_Calibration::OnUnreliableAccuracy(Object^ sender, RoutedEventArgs^ e)
+void Scenario3_Calibration::OnUnreliableAccuracy()
 {
     calibrationBar->RequestCalibration(MagnetometerAccuracy::Unreliable);
 }

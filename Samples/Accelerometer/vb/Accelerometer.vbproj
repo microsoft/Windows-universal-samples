@@ -11,7 +11,7 @@
     <AssemblyName>Accelerometer</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -107,6 +107,7 @@
       <Link>Properties\AssemblyInfo.vb</Link>
     </Compile>
     <Compile Include="SampleConfiguration.vb" />
+    <Compile Include="Scenario0_Choose.xaml.vb" />
     <Compile Include="Scenario1_DataEvents.xaml.vb" />
     <Compile Include="Scenario2_ShakeEvents.xaml.vb" />
     <Compile Include="Scenario3_Polling.xaml.vb" />
@@ -126,6 +127,11 @@
     </ApplicationDefinition>
     <Page Include="..\..\..\SharedContent\vb\MainPage.xaml">
       <Link>MainPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario0_Choose.xaml">
+      <Link>Scenario0_Choose.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

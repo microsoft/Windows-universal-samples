@@ -1,0 +1,31 @@
+﻿<UserControl
+    x:Class="SDKTemplate.TransportOptions"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    UseSystemFocusVisuals="True"
+    IsFocusEngagementEnabled="True"
+    Loaded="OnLoaded"
+    FocusEngaged="OnFocusEngaged">
+
+    <StackPanel
+        Orientation="Horizontal" 
+        VerticalAlignment="Center" 
+        HorizontalAlignment="Center">
+        <StackPanel.Resources>
+            <Style TargetType="RadioButton">
+                <Setter Property="Width" Value="30" />
+                <Setter Property="Height" Value="30" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="FontFamily" Value="Segoe UI MDL" />
+            </Style>
+        </StackPanel.Resources>
+        <ToggleButton x:Name="InitialButton" Content="&#x1f698;"/>
+        <ToggleButton Content="&#x1f68c;"/>
+        <ToggleButton Content="&#x1f6b6;"/>
+        <ToggleButton Content="&#x1f6b2;"/>
+        <ToggleButton Content="&#x1f687;"/>
+    </StackPanel>
+</UserControl>

@@ -81,8 +81,8 @@ namespace PedometerCS
                 {
                     var status = await BackgroundExecutionManager.RequestAccessAsync();
 
-                    if ((BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity == status) ||
-                        (BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity == status))
+                    if ((BackgroundAccessStatus.AlwaysAllowed == status) ||
+                        (BackgroundAccessStatus.AllowedSubjectToSystemPolicy == status))
                     {
                         RegisterBackgroundTask();
                     }

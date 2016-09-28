@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: DevicesSensorsAndPower
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620580
 --->
@@ -7,9 +7,9 @@
 
 This sample shows how to use the [**Windows.Devices.Sensors.OrientationSensor**](http://msdn.microsoft.com/library/windows/apps/br206371) API.
 
-**Note**  This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on both Windows 10 and Windows Phone 10.
-
-This sample allows the user to view the rotation matrix and Quaternion values that reflect the current device orientation. You can choose one of these scenarios:
+This sample allows the user to view the rotation matrix and Quaternion values that reflect the current device orientation.
+After choosing the sensor reporting type and optimization goal,
+you can choose one of these scenarios:
 
 -   Orientation sensor data events
 -   Poll orientation sensor readings
@@ -27,29 +27,21 @@ When you click the **Enable** button for the **Polling** option, the app will re
 
 Allows the user to simulate sensor accuracy and demonstrates usage of the calibration bar.
 
-**Note**  For Windows 8 app samples, download the [Windows 8 app samples pack](http://go.microsoft.com/fwlink/p/?LinkId=301698). The samples in the Windows 8 app samples pack will build and run only on Microsoft Visual Studio 2012.
-
 Related topics
 --------------
 
-[Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
+[**Accelerometer** sample](../Accelerometer)
 
 [**Windows.Devices.Sensors namespace**](http://msdn.microsoft.com/library/windows/apps/br206408)
 
 Operating system requirements
 -----------------------------
 
-Client
+**Client:** Windows 10 build 14295
 
-Windows 10
+**Server:** Windows Server 2016 Technical Preview
 
-Server
-
-None supported
-
-Phone
-
-Windows Phone 10
+**Phone:** Windows 10 build 14295
 
 Build the sample
 ----------------

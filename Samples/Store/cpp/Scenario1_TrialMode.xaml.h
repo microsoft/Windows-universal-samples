@@ -17,9 +17,6 @@
 
 namespace SDKTemplate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     [Windows::Foundation::Metadata::WebHostHidden]
     public ref class Scenario1_TrialMode sealed
     {
@@ -33,10 +30,11 @@ namespace SDKTemplate
         virtual void OnNavigatingFrom(Windows::UI::Xaml::Navigation::NavigatingCancelEventArgs^ e) override;
     private:
         MainPage^ rootPage = MainPage::Current;
-
+        Windows::Services::Store::StoreContext^ storeContext;
         Windows::Foundation::EventRegistrationToken eventRegistrationToken;
 
-        void TrialModeRefreshScenario();
+        void OfflineLicensesChanged(Windows::Services::Store::StoreContext^ sender, Platform::Object^ args);
+        void GetLicenseState();
     };
 }
 

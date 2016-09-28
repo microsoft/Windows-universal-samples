@@ -17,6 +17,9 @@
     <Filter Include="Views">
       <UniqueIdentifier>{452ca0da-0294-49f1-8b84-37b967bb8122}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Triggers">
+      <UniqueIdentifier>{fe712577-0857-40ea-b8ab-7b1e8f31d44e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\shared\App.xaml" />
@@ -35,6 +38,9 @@
     <ClCompile Include="CommandBarPage.xaml.cpp" />
     <ClCompile Include="DrillInPage.xaml.cpp" />
     <ClCompile Include="LandingPage.xaml.cpp" />
+    <ClCompile Include="IsTenFootTrigger.cpp">
+      <Filter>Triggers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -50,6 +56,10 @@
     <ClInclude Include="CommandBarPage.xaml.h" />
     <ClInclude Include="DrillInPage.xaml.h" />
     <ClInclude Include="LandingPage.xaml.h" />
+    <ClInclude Include="IsTenFootTrigger.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemInformationHelpers.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -76,6 +86,9 @@
     </Page>
     <Page Include="..\shared\LandingPage.xaml">
       <Filter>Views</Filter>
+    </Page>
+    <Page Include="..\shared\TenFootStylesheet.xaml">
+      <Filter>Styles</Filter>
     </Page>
   </ItemGroup>
   <ItemGroup>

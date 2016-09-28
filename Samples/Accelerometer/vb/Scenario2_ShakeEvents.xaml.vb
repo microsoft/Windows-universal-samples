@@ -9,12 +9,7 @@
 '
 '*********************************************************
 ' Windows Store code
-Imports Windows.UI.Xaml
-Imports Windows.UI.Xaml.Controls
-Imports Windows.UI.Xaml.Navigation
-Imports System
 Imports Windows.Devices.Sensors
-Imports Windows.Foundation
 Imports Windows.UI.Core
 
 Namespace Global.SDKTemplate
@@ -24,45 +19,28 @@ Namespace Global.SDKTemplate
 
         Private _accelerometer As Accelerometer
 
-        Private _shakeCount As UShort
+        Private _shakeCount As UShort = 0
 
         Dim rootPage As MainPage = MainPage.Current
 
         Public Sub New()
             Me.InitializeComponent()
-            _accelerometer = Accelerometer.GetDefault()
-            If _accelerometer Is Nothing Then
-                rootPage.NotifyUser("No accelerometer found", NotifyType.ErrorMessage)
-            End If
-
-            _shakeCount = 0
         End Sub
 
-        ''' <summary>
-        ''' Invoked when this page is about to be displayed in a Frame.
-        ''' </summary>
-        ''' <param name="e">Event data that describes how this page was reached. The Parameter
-        ''' property is typically used to configure the page.</param>
         Protected Overrides Sub OnNavigatedTo(e As NavigationEventArgs)
-            ScenarioEnableButton.IsEnabled = True
-            ScenarioDisableButton.IsEnabled = False
+            _accelerometer = Accelerometer.GetDefault(rootPage.AccelerometerReadingType)
+            If _accelerometer IsNot Nothing Then
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType.ToString & " accelerometer ready", NotifyType.StatusMessage)
+                ScenarioEnableButton.IsEnabled = True
+            Else
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType.ToString & " accelerometer not found", NotifyType.ErrorMessage)
+            End If
         End Sub
 
-        ''' <summary>
-        ''' Invoked immediately before the Page is unloaded and is no longer the current source of a parent Frame.
-        ''' </summary>
-        ''' <param name="e">
-        ''' Event data that can be examined by overriding code. The event data is representative
-        ''' of the navigation that will unload the current Page unless canceled. The
-        ''' navigation can potentially be canceled by setting Cancel.
-        ''' </param>
         Protected Overrides Sub OnNavigatingFrom(e As NavigatingCancelEventArgs)
             If ScenarioDisableButton.IsEnabled Then
-                RemoveHandler Window.Current.VisibilityChanged, New WindowVisibilityChangedEventHandler(AddressOf VisibilityChanged)
-                RemoveHandler _accelerometer.Shaken, New TypedEventHandler(Of Accelerometer, AccelerometerShakenEventArgs)(AddressOf Shaken)
+                ScenarioDisable()
             End If
-
-            MyBase.OnNavigatingFrom(e)
         End Sub
 
         ''' <summary>
@@ -76,9 +54,9 @@ Namespace Global.SDKTemplate
         Private Sub VisibilityChanged(sender As Object, e As VisibilityChangedEventArgs)
             If ScenarioDisableButton.IsEnabled Then
                 If e.Visible Then
-                    AddHandler _accelerometer.Shaken, New TypedEventHandler(Of Accelerometer, AccelerometerShakenEventArgs)(AddressOf Shaken)
+                    AddHandler _accelerometer.Shaken, AddressOf Shaken
                 Else
-                    RemoveHandler _accelerometer.Shaken, New TypedEventHandler(Of Accelerometer, AccelerometerShakenEventArgs)(AddressOf Shaken)
+                    RemoveHandler _accelerometer.Shaken, AddressOf Shaken
                 End If
             End If
         End Sub
@@ -98,27 +76,19 @@ Namespace Global.SDKTemplate
         ''' <summary>
         ''' This is the click handler for the 'Enable' button.
         ''' </summary>
-        ''' <param name="sender"></param>
-        ''' <param name="e"></param>
-        Private Sub ScenarioEnable(sender As Object, e As RoutedEventArgs)
-            If _accelerometer IsNot Nothing Then
-                AddHandler Window.Current.VisibilityChanged, New WindowVisibilityChangedEventHandler(AddressOf VisibilityChanged)
-                AddHandler _accelerometer.Shaken, New TypedEventHandler(Of Accelerometer, AccelerometerShakenEventArgs)(AddressOf Shaken)
-                ScenarioEnableButton.IsEnabled = False
-                ScenarioDisableButton.IsEnabled = True
-            Else
-                rootPage.NotifyUser("No accelerometer found", NotifyType.ErrorMessage)
-            End If
+        Private Sub ScenarioEnable()
+            AddHandler Window.Current.VisibilityChanged, AddressOf VisibilityChanged
+            AddHandler _accelerometer.Shaken, AddressOf Shaken
+            ScenarioEnableButton.IsEnabled = False
+            ScenarioDisableButton.IsEnabled = True
         End Sub
 
         ''' <summary>
         ''' This is the click handler for the 'Disable' button.
         ''' </summary>
-        ''' <param name="sender"></param>
-        ''' <param name="e"></param>
-        Private Sub ScenarioDisable(sender As Object, e As RoutedEventArgs)
-            RemoveHandler Window.Current.VisibilityChanged, New WindowVisibilityChangedEventHandler(AddressOf VisibilityChanged)
-            RemoveHandler _accelerometer.Shaken, New TypedEventHandler(Of Accelerometer, AccelerometerShakenEventArgs)(AddressOf Shaken)
+        Private Sub ScenarioDisable()
+            RemoveHandler Window.Current.VisibilityChanged, AddressOf VisibilityChanged
+            RemoveHandler _accelerometer.Shaken, AddressOf Shaken
             ScenarioEnableButton.IsEnabled = True
             ScenarioDisableButton.IsEnabled = False
         End Sub

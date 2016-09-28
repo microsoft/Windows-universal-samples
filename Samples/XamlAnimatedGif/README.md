@@ -4,7 +4,10 @@
 --->
 # Animated GIF playback (XAML) sample
 
-This sample demonstrates a solution for playback of animated GIF images using Windows XAML and the [Win2D](https://github.com/Microsoft/win2d "Win2D GitHub page") graphics framework. You can reuse the **GifView** class in your own apps to display animated GIF images loaded from a URI.
+In the Windows 10 Anniversary Update,
+[Image](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.image.aspx)
+elements automatically play an animated GIF image source.
+This sample demonstrates basic implementation of animated GIF, and how to control GIF playback.
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
@@ -14,26 +17,19 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## Related topics
 
-### Samples
-
-
-[SimpleImaging](https://github.com/Microsoft/Windows-universal-samples/tree/master/Samples/SimpleImaging)
-
 ### Reference
 
 [Image](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.image.aspx)
 
-[CanvasImageSource](http://microsoft.github.io/Win2D/html/T_Microsoft_Graphics_Canvas_UI_Xaml_CanvasImageSource.htm)
-
-[BitmapDecoder](https://msdn.microsoft.com/en-us/library/windows/apps/windows.graphics.imaging.bitmapdecoder.aspx)
+[BitmapImage](https://msdn.microsoft.com/library/windows/apps/br243235)
 
 ## System requirements
 
-**Client:** Windows 10 
+**Client:** Windows 10 build 14295
 
 **Server:** Windows Server 2016 Technical Preview
 
-**Phone:**  Windows 10 
+**Phone:**  Windows 10 build 14295
 
 ## Build the sample
 

@@ -1,0 +1,61 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link href="/css/scenario1-pinningsecondarytiles.css" rel="stylesheet" />
+    <script src="/js/scenario1-pinningsecondarytiles.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenario1">
+        <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+        <div id="scenarioDescription">
+            Pinning secondary tiles
+        </div>
+        <p>
+            Every app, upon installation, gets its own default primary tile.
+            Primary tiles are unpinned by default, and it is only up to each individual
+            user to initiate a request to pin a primary tile to their start menu.
+            If your app would like to pin tiles to the start menu programatically,
+            it can do so by creating a secondary tile and prompting the user to authorize
+            a request to pin that secondary tile to their start menu.
+        </p>
+
+        <span>Secondary Tile Name:</span>
+        <input type="text" id="displayname" class='win-textbox' placeholder="Optional label for tile" /><br />
+
+        <input type="checkbox" class='win-checkbox' id="checkboxsquare71x71logo" />
+        <label for="checkboxsquare71x71logo">Square71x71Logo (uses Square150x150 if not provided)</label><br />
+        <img class="smalltile" src="/images/Square150x150Logo.png" /><br />
+
+        <input type="checkbox" class='win-checkbox' id="checkboxsquare150x150logo" checked disabled />
+        <label for="checkboxsquare150x150logo">Support Square150x150Logo (required)</label><br />
+        <img class="mediumtile" src="/images/Square150x150Logo.png" /><br />
+
+        <input type="checkbox" class='win-checkbox' id="checkboxwide310x150logo" />
+        <label for="checkboxwide310x150logo">Support Wide310x150Logo</label><br />
+        <img class="widetile" src="/images/Wide310x150Logo.png" /><br />
+
+        <input type="checkbox" class='win-checkbox' id="checkboxsquare310x310logo" />
+        <label for="checkboxsquare310x310logo">Support Square310x310Logo</label><br />
+        <img class="largetile" src="/images/Square310x310Logo.png" /><br />
+
+        <input type="checkbox" class='win-checkbox' id="checkboxshownameonsquare150x150logo" />
+        <label for="checkboxshownameonsquare150x150logo">Show name on Square150x150Logo</label><br />
+
+        <input type="checkbox" class='win-checkbox' id="checkboxshownameonwide310x150logo" />
+        <label for="checkboxshownameonwide310x150logo">Show name on Wide310x150Logo</label><br />
+
+        <input type="checkbox" class='win-checkbox' id="checkboxshownameonsquare310x310logo" />
+        <label for="checkboxshownameonsquare310x310logo">Show name on Square310x310Logo</label><br />
+
+        <button class="win-button" id="pincommand">Pin secondary tile</button>
+    </div>
+</body>
+
+</html>

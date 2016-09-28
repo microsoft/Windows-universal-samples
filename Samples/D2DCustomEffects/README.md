@@ -15,9 +15,47 @@ Specifically, this sample shows how to:
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
+
+## Sample project files
+
+This sample contains three separate projects, demonstrating a custom pixel, vertex, and compute shader effect.
+Each project has a similar set of files that follow the same pattern.
+
+### Custom Direct2D effect implementation
+The following files are the core effect implementation, i.e. the main educational content of the sample:
+
+- ***.hlsl:** The core shader routines that operate on image data. These are written using standard HLSL with some helper Direct2D intrinsics that enable the custom effect to take advantage of shader linking.
+[TODO: link to the intrinsics/shader linking page]
+- ***Effect.cpp/.h,** ***Transform.cpp/.h:** Implementation of the Direct2D effect interfaces, e.g. ID2D1EffectImpl. This code is called by the Direct2D renderer to setup and control the effect shader operation.
+
+### Demo app
+A custom Direct2D effect does nothing on its own, as it must be loaded and executed by a calling app. The following files provide a simple demo environment to exercise the effect:
+
+- App.cpp/.h
+- *Main.cpp/.h, *Renderer.cpp/.h
+
+### DirectX SDK sample common files
+The following files provide common functionality needed by DirectX SDK samples:
+
+- **DeviceResources.cpp/.h:** Manages creation and lifetime of the core Direct3D and Direct2D device-dependent resources. Handles cases such as device lost and window size and orientation changes.
+- **DirectXHelper.h:** Common inline helper functions, including ThrowIfFailed which converts HRESULT-based APIs into an exception model.
+- **BasicReaderWriter.cpp/.h:** Basic file I/O functionality, needed for things like loading shaders, textures and geometry.
+- **SampleOverlay.cpp/.h:** Renders the Windows SDK overlay badge on top of sample content.
+- **BasicTimer.cpp/.h:** Wraps QueryPerformanceCounter to provide an accurate, low-overhead timer.
+
+All DX SDK samples and the Visual Studio template DX project contain a version of these files (some are not always needed). These common files demonstrate important best practices for DX UWP apps, and you are encouraged to use them in your own projects.
+
+### C++ UWP common files
+Variants of the following files are found in every UWP app written in C++:
+
+- Package.appxmanifest
+- pch.cpp/.h
+- *.vcxproj
+- *.vcxproj.filters
+- *.sln
 
 ## Related topics
 

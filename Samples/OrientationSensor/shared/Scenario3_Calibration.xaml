@@ -1,0 +1,37 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<Page
+    x:Class="SDKTemplate.Scenario3_Calibration"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" Text="Calibration"/>
+            <StackPanel x:Name="EnabledContent">
+                <TextBlock TextWrapping="Wrap" Margin="0,10,0,0" Text="Simulates the current sensor accuracy. Setting to 'Unreliable' will invoke the calibration bar until accuracy improves or 30 seconds passes. The calibration bar will not be shown again for at least 5 minutes, even when accuracy returns to 'Unreliable'."/>
+                <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="Yaw Accuracy:"/>
+                    <RadioButton Content="High" Click="{x:Bind OnHighAccuracy}" IsChecked="True"/>
+                    <RadioButton Content="Approximate" Click="{x:Bind OnApproximateAccuracy}"/>
+                    <RadioButton Content="Unreliable" Click="{x:Bind OnUnreliableAccuracy}"/>
+                </StackPanel>
+            </StackPanel>
+            <TextBlock x:Name="DisabledContent" TextWrapping="Wrap" Margin="0,10,0,0" Visibility="Collapsed" Text="Yaw accuracy is reported only for absolute sensor reading types."/>
+        </StackPanel>
+    </Grid>
+</Page>

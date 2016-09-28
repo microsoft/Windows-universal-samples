@@ -177,10 +177,7 @@ namespace SDKTemplate
                 this.CamPreview.Source = this.mediaCapture;
                 await this.mediaCapture.StartPreviewAsync();
 
-                // Ensure the Semaphore is in the signalled state.
-                this.frameProcessingSemaphore.Release();
-
-                // Use a 66 milisecond interval for our timer, i.e. 15 frames per second 
+                // Use a 66 millisecond interval for our timer, i.e. 15 frames per second
                 TimeSpan timerInterval = TimeSpan.FromMilliseconds(66);
                 this.frameProcessingTimer = Windows.System.Threading.ThreadPoolTimer.CreatePeriodicTimer(new Windows.System.Threading.TimerElapsedHandler(ProcessCurrentVideoFrame), timerInterval);
             }
@@ -236,7 +233,7 @@ namespace SDKTemplate
         /// This method is invoked by a ThreadPoolTimer to execute the FaceTracker and Visualization logic at approximately 15 frames per second.
         /// </summary>
         /// <remarks>
-        /// Keep in mind this method is called from a Timer and not sychronized with the camera stream. Also, the processing time of FaceTracker
+        /// Keep in mind this method is called from a Timer and not synchronized with the camera stream. Also, the processing time of FaceTracker
         /// will vary depending on the size of each frame and the number of faces being tracked. That is, a large image with several tracked faces may
         /// take longer to process.
         /// </remarks>

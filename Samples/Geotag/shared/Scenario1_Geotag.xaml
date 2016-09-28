@@ -1,0 +1,37 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Geotag"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,20,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Use the Geotag API to set and read geolocation information from JPEG and MP4 files.
+            </TextBlock>
+
+            <Button Content="Choose file" Click="{x:Bind ChooseFileButton_Click}" Margin="0,10,0,0"/>
+            <StackPanel x:Name="FileOperationsPanel" Visibility="Collapsed">
+                <TextBlock Margin="0,10,0,0">File: <Run x:Name="FileDisplayName"/></TextBlock>
+                <Button Content="Read geotag from file" Click="{x:Bind GetGeotagButton_Click}" Margin="0,10,0,0"/>
+                <Button Content="Set geotag from geolocator" Click="{x:Bind SetGeotagFromGeolocatorButton_Click}" Margin="0,10,0,0"/>
+                <Button Content="Set geotag to Seattle Space Needle" Click="{x:Bind SetGeotagButton_Click}" Margin="0,10,0,0"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

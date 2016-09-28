@@ -6,22 +6,21 @@ Copyright (c) Microsoft Corporation. All rights reserved
 
 <head>
     <title></title>
-    <link rel="stylesheet" href="/css/scenario2_ShakeEvents.css">
     <script src="/js/scenario2_ShakeEvents.js"></script>
 </head>
 
 <body class="win-type-body">
-    <div>
-        <p>
-            Registers an event listener for accelerometer shake events and displays the cumulative count of shake events.
-        </p>
-        <button class="action win-button" id="scenario2Open">Enable</button>
-        <button class="action secondary win-button" id="scenario2Revoke">Disable</button>
-    </div>
-    <div>
-        Shake count: <a id="shakeOutput" class="win-link">0</a>
-        <br>
-    </div>
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">Shake events</div>
+
+    <p>Registers an event listener for accelerometer shake events and displays the cumulative count of shake events.</p>
+    <p>
+        <button class="win-button" id="scenarioEnable" disabled>Enable</button>
+        <button class="win-button" id="scenarioDisable" disabled>Disable</button>
+    </p>
+    <p>
+        Shake count: <span id="shakeOutput">0</span>
+    </p>
 </body>
 
 </html>

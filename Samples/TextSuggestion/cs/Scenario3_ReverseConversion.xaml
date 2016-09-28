@@ -36,6 +36,7 @@ Copyright (c) Microsoft Corporation. All rights reserved
             <ComboBox Name="methods" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,10" SelectedIndex="0">
               <ComboBox.Items>
                 <ComboBoxItem Content="ConvertBackAsync" IsSelected="True"/>
+                <ComboBoxItem Content="GetPhonemesAsync" Tag="segmented"/>
               </ComboBox.Items>
             </ComboBox>
             <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0,50,0,0">
@@ -49,7 +50,7 @@ Copyright (c) Microsoft Corporation. All rights reserved
             <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
               Result
             </TextBlock>
-            <TextBlock Name="result" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,10"/>
+            <ListView Name="resultView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="300" Margin="10,10,10,10"/>
           </StackPanel>
         </StackPanel>
       </ScrollViewer>

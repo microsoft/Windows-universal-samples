@@ -6,26 +6,21 @@ Copyright (c) Microsoft Corporation. All rights reserved
 
 <head>
     <title></title>
-    <link rel="stylesheet" href="/css/scenario5_DataEventsBatching.css">
     <script src="/js/scenario5_DataEventsBatching.js"></script>
 </head>
 
 <body class="win-type-body">
-    <div>
-        <p>
-            Registers an event listener for accelerometer data (with a report latency specified) and displays the X, Y and Z acceleration values as they are reported.
-        </p>
-        <button class="action win-button" id="scenario5Open">Enable</button>
-        <button class="action secondary win-button" id="scenario5Revoke">Disable</button>
-        <br>
-        <br>
-    </div>
-    <div>
-        X: <a id="eventOutputX" class="win-link">no data</a>
-        <br> Y: <a id="eventOutputY" class="win-link">no data</a>
-        <br> Z: <a id="eventOutputZ" class="win-link">no data</a>
-        <br>
-    </div>
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">Data events batching</div>
+
+    <p>
+        Registers an event listener for accelerometer data (with a report latency specified) and displays the X, Y and Z acceleration values as they are reported.
+    </p>
+    <p>
+        <button class="win-button" id="scenarioEnable" disabled>Enable</button>
+        <button class="win-button" id="scenarioDisable" disabled>Disable</button>
+    </p>
+    <p id="eventOutput">no data</p>
 </body>
 
 </html>

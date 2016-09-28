@@ -11,8 +11,8 @@
     <AssemblyName>Store</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -102,34 +102,15 @@
     <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ItemsListViewModel.cs" />
     <Compile Include="SampleConfiguration.cs" />
-    <Compile Include="Scenario1_TrialMode.xaml.cs">
-      <DependentUpon>Scenario1_TrialMode.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Scenario2_InAppPurchase.xaml.cs">
-      <DependentUpon>Scenario2_InAppPurchase.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Scenario3_ExpiringProduct.xaml.cs">
-      <DependentUpon>Scenario3_ExpiringProduct.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Scenario4_ConsumableProduct.xaml.cs">
-      <DependentUpon>Scenario4_ConsumableProduct.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Scenario5_AdvancedConsumableProduct.xaml.cs">
-      <DependentUpon>Scenario5_AdvancedConsumableProduct.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Scenario8_Receipt.xaml.cs">
-      <DependentUpon>Scenario8_Receipt.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Scenario7_AppListingURI.xaml.cs">
-      <DependentUpon>Scenario7_AppListingURI.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Scenario6_LargeCatalogProduct.xaml.cs">
-      <DependentUpon>Scenario6_LargeCatalogProduct.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Scenario9_B2B.xaml.cs">
-      <DependentUpon>Scenario9_B2B.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Scenario1_TrialMode.xaml.cs" />
+    <Compile Include="Scenario2_InAppPurchase.xaml.cs" />
+    <Compile Include="Scenario3_UnmanagedConsumable.xaml.cs" />
+    <Compile Include="Scenario4_ConsumableProduct.xaml.cs" />
+    <Compile Include="Scenario5_UserCollection.xaml.cs" />
+    <Compile Include="Scenario6_AppListingURI.xaml.cs" />
+    <Compile Include="Scenario7_B2B.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -147,6 +128,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Link>Styles\Styles.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="..\shared\Scenario1_TrialMode.xaml">
       <Link>Scenario1_TrialMode.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
@@ -157,8 +143,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario3_ExpiringProduct.xaml">
-      <Link>Scenario3_ExpiringProduct.xaml</Link>
+    <Page Include="..\shared\Scenario3_UnmanagedConsumable.xaml">
+      <Link>Scenario3_UnmanagedConsumable.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -167,33 +153,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario5_AdvancedConsumableProduct.xaml">
-      <Link>Scenario5_AdvancedConsumableProduct.xaml</Link>
+    <Page Include="..\shared\Scenario5_UserCollection.xaml">
+      <Link>Scenario5_UserCollection.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario8_Receipt.xaml">
-      <Link>Scenario8_Receipt.xaml</Link>
+    <Page Include="..\shared\Scenario6_AppListingURI.xaml">
+      <Link>Scenario6_AppListingURI.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario7_AppListingURI.xaml">
-      <Link>Scenario7_AppListingURI.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\shared\Scenario6_LargeCatalogProduct.xaml">
-      <Link>Scenario6_LargeCatalogProduct.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\shared\Scenario9_B2B.xaml">
-      <Link>Scenario9_B2B.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
-      <Link>Styles\Styles.xaml</Link>
+    <Page Include="..\shared\Scenario7_B2B.xaml">
+      <Link>Scenario7_B2B.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -222,38 +193,6 @@
     </Content>
     <Content Include="..\..\..\SharedContent\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
-    </Content>
-    <Content Include="..\shared\data\app-listing-uri.xml">
-      <Link>data\app-listing-uri.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\shared\data\expiring-product.xml">
-      <Link>data\expiring-product.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\shared\data\in-app-purchase-consumables-advanced.xml">
-      <Link>data\in-app-purchase-consumables-advanced.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\shared\data\in-app-purchase-consumables.xml">
-      <Link>data\in-app-purchase-consumables.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\shared\data\in-app-purchase-large-catalog.xml">
-      <Link>data\in-app-purchase-large-catalog.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\shared\data\in-app-purchase.xml">
-      <Link>data\in-app-purchase.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\shared\data\receipt.xml">
-      <Link>data\receipt.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\shared\data\trial-mode.xml">
-      <Link>data\trial-mode.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

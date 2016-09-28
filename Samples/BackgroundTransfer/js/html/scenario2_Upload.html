@@ -1,0 +1,42 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="/js/scenario2_Upload.js"></script>
+</head>
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">File upload</div>
+    <p>
+        When uploading a file to a server, application developers must ensure they receive user consent for the
+        upload. Additionally they must expose facilities to control each upload (like cancel) and ensure progress
+        visibility when the application is in the foreground. The Background Transfer API enables users to transfer
+        content in the background. Therefore, application developers must also ensure they handle application
+        suspension/resumption and termination/activation cases.
+    </p>
+    <p>
+        <label for="serverAddressField">Remote address: </label>
+        <input type="text" class="win-textbox" id="serverAddressField" value="http://localhost/BackgroundTransferSample/Upload.aspx" />
+    </p>
+    <p>
+        <button class="win-button" id="startUploadButton">Start Upload</button>
+        <button class="win-button" id="startMultipartUploadButton">Start Multipart Upload</button>
+    </p>
+    <p>
+        <button class="win-button" id="cancelAllButton">Cancel All</button>
+    </p>
+    <p id="outputConsole"></p>
+</body>
+</html>

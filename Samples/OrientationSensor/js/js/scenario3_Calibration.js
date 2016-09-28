@@ -3,27 +3,33 @@
 (function () {
     "use strict";
 
+    // DOM elements
+    var calibrationBarControl;
+
     var page = WinJS.UI.Pages.define("/html/scenario3_Calibration.html", {
         ready: function (element, options) {
+            calibrationBarControl = document.getElementById("calibrationBarControl");
+
             document.getElementById("accuracyHighRadio").addEventListener("click", onAccuracyHigh, false);
             document.getElementById("accuracyApproximateRadio").addEventListener("click", onAccuracyApproximate, false);
             document.getElementById("accuracyUnreliableRadio").addEventListener("click", onAccuracyUnreliable, false);
-            document.getElementById("accuracyHighRadio").checked = "true";
-        },
-        unload: function () {
+
+            if (SdkSample.sensorReadingType == "relative") {
+                document.getElementById("enabledContent").style.display = "none";
+                document.getElementById("disabledContent").style.display = "block";
+            }
         }
     });
 
     function onAccuracyHigh() {
-        document.getElementById("calibrationBarControl").winControl.hide();
+        calibrationBarControl.winControl.hide();
     }
 
     function onAccuracyApproximate() {
-        document.getElementById("calibrationBarControl").winControl.hide();
+        calibrationBarControl.winControl.hide();
     }
 
     function onAccuracyUnreliable() {
-        document.getElementById("calibrationBarControl").winControl.requestCalibration(Windows.Devices.Sensors.MagnetometerAccuracy.unreliable);
+        calibrationBarControl.winControl.requestCalibration(Windows.Devices.Sensors.MagnetometerAccuracy.unreliable);
     }
-
 })();

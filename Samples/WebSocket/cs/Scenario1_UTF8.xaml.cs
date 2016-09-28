@@ -9,17 +9,18 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using System;
+using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Networking.Sockets;
+using Windows.Security.Cryptography.Certificates;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Windows.Web;
 
-namespace Microsoft.Samples.Networking.WebSocket
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -32,22 +33,46 @@ namespace Microsoft.Samples.Networking.WebSocket
 
         private MessageWebSocket messageWebSocket;
         private DataWriter messageWriter;
+        private bool busy;
 
         public Scenario1()
         {
             this.InitializeComponent();
+            UpdateVisualState();
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            CloseSocket();    
         }
 
-        private async void Start_Click(object sender, RoutedEventArgs e)
+        private void UpdateVisualState()
+        {
+            if (busy)
+            {
+                VisualStateManager.GoToState(this, "Busy", false);
+            }
+            else
+            {
+                bool connected = (messageWebSocket != null);
+                VisualStateManager.GoToState(this, connected ? "Connected" : "Disconnected", false);
+            }
+        }
+
+        private void SetBusy(bool value)
+        {
+            busy = value;
+            UpdateVisualState();
+        }
+
+        private async void OnConnect()
+        {
+            SetBusy(true);
+            await ConnectAsync();
+            SetBusy(false);
+        }
+
+        private async Task ConnectAsync()
         {
             if (String.IsNullOrEmpty(InputField.Text))
             {
@@ -55,185 +80,217 @@ namespace Microsoft.Samples.Networking.WebSocket
                 return;
             }
 
-            bool connecting = true;
+            // Validating the URI is required since it was received from an untrusted source (user input).
+            // The URI is validated by calling TryGetUri() that will return 'false' for strings that are not
+            // valid WebSocket URIs.
+            // Note that when enabling the text box users may provide URIs to machines on the intrAnet
+            // or intErnet. In these cases the app requires the "Home or Work Networking" or
+            // "Internet (Client)" capability respectively.
+            Uri server = rootPage.TryGetUri(ServerAddressField.Text);
+            if (server == null)
+            {
+                return;
+            }
+
+            messageWebSocket = new MessageWebSocket();
+            messageWebSocket.Control.MessageType = SocketMessageType.Utf8;
+            messageWebSocket.MessageReceived += MessageReceived;
+            messageWebSocket.Closed += OnClosed;
+
+            // If we are connecting to wss:// endpoint, by default, the OS performs validation of
+            // the server certificate based on well-known trusted CAs. We can perform additional custom
+            // validation if needed.
+            if (SecureWebSocketCheckBox.IsChecked == true)
+            {
+                // WARNING: Only test applications should ignore SSL errors.
+                // In real applications, ignoring server certificate errors can lead to Man-In-The-Middle
+                // attacks. (Although the connection is secure, the server is not authenticated.)
+                // Note that not all certificate validation errors can be ignored.
+                // In this case, we are ignoring these errors since the certificate assigned to the localhost
+                // URI is self-signed and has subject name = fabrikam.com
+                messageWebSocket.Control.IgnorableServerCertificateErrors.Add(ChainValidationResult.Untrusted);
+                messageWebSocket.Control.IgnorableServerCertificateErrors.Add(ChainValidationResult.InvalidName);
+
+                // Add event handler to listen to the ServerCustomValidationRequested event. This enables performing
+                // custom validation of the server certificate. The event handler must implement the desired
+                // custom certificate validation logic.
+                messageWebSocket.ServerCustomValidationRequested += OnServerCustomValidationRequested;
+
+                // Certificate validation occurs only for secure connections.
+                if (server.Scheme != "wss")
+                {
+                    AppendOutputLine("Note: Certificate validation is performed only for the wss: scheme.");
+                }
+            }
+
+            AppendOutputLine($"Connecting to {server}...");
             try
             {
-                // Have we connected yet?
-                if (messageWebSocket == null)
-                {
-                    // Validating the URI is required since it was received from an untrusted source (user input). 
-                    // The URI is validated by calling TryGetUri() that will return 'false' for strings that are not
-                    // valid WebSocket URIs.
-                    // Note that when enabling the text box users may provide URIs to machines on the intrAnet 
-                    // or intErnet. In these cases the app requires the "Home or Work Networking" or 
-                    // "Internet (Client)" capability respectively.
-                    Uri server;
-                    if (!rootPage.TryGetUri(ServerAddressField.Text, out server))
-                    {
-                        return;
-                    }
-
-                    rootPage.NotifyUser("Connecting to: " + server, NotifyType.StatusMessage);
-
-                    messageWebSocket = new MessageWebSocket();
-                    messageWebSocket.Control.MessageType = SocketMessageType.Utf8;
-                    messageWebSocket.MessageReceived += MessageReceived;
-
-                    // Dispatch close event on UI thread. This allows us to avoid synchronizing access to messageWebSocket.
-                    messageWebSocket.Closed += async (senderSocket, args) =>
-                    {
-                        await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => Closed(senderSocket, args));
-                    };
-
-                    await messageWebSocket.ConnectAsync(server);
-                    messageWriter = new DataWriter(messageWebSocket.OutputStream);
-
-                    rootPage.NotifyUser("Connected", NotifyType.StatusMessage);
-                }
-                else
-                {
-                    rootPage.NotifyUser("Already connected", NotifyType.StatusMessage);
-                }
-
-                connecting = false;
-                string message = InputField.Text;
-                OutputField.Text += "Sending Message:\r\n" + message + "\r\n";
-
-                // Buffer any data we want to send.
-                messageWriter.WriteString(message);
-
-                // Send the data as one complete message.
-                await messageWriter.StoreAsync();
-
-                rootPage.NotifyUser("Send Complete", NotifyType.StatusMessage);
+                await messageWebSocket.ConnectAsync(server);
             }
             catch (Exception ex) // For debugging
             {
                 // Error happened during connect operation.
-                if (connecting && messageWebSocket != null)
-                {
-                    messageWebSocket.Dispose();
-                    messageWebSocket = null;
-                }
+                messageWebSocket.Dispose();
+                messageWebSocket = null;
 
-                WebErrorStatus status = WebSocketError.GetStatus(ex.GetBaseException().HResult);
-
-                switch (status)
-                {
-                    case WebErrorStatus.CannotConnect:
-                    case WebErrorStatus.NotFound:
-                    case WebErrorStatus.RequestTimeout:
-                        rootPage.NotifyUser("Cannot connect to the server. Please make sure " +
-                            "to run the server setup script before running the sample.", NotifyType.ErrorMessage);
-                        break;
-
-                    case WebErrorStatus.Unknown:
-                        throw;
-
-                    default:
-                        rootPage.NotifyUser("Error: " + status, NotifyType.ErrorMessage);
-                        break;
-                }
-
-                OutputField.Text += ex.Message + "\r\n";
+                AppendOutputLine(MainPage.BuildWebSocketError(ex));
+                AppendOutputLine(ex.Message);
+                return;
             }
+
+            // The default DataWriter encoding is Utf8.
+            messageWriter = new DataWriter(messageWebSocket.OutputStream);
+            rootPage.NotifyUser("Connected", NotifyType.StatusMessage);
+        }
+
+        private async void OnServerCustomValidationRequested(MessageWebSocket sender, WebSocketServerCustomValidationRequestedEventArgs args)
+        {
+            // In order to call async APIs in this handler, you must first take a deferral and then
+            // release it once you are done with the operation. The "using" statement
+            // ensures that the deferral completes when control leaves the block.
+            bool isValid;
+            using (Deferral deferral = args.GetDeferral())
+            {
+                // Get the server certificate and certificate chain from the args parameter.
+                isValid = await MainPage.AreCertificateAndCertChainValidAsync(args.ServerCertificate, args.ServerIntermediateCertificates);
+
+                if (!isValid)
+                {
+                    args.Reject();
+                }
+            }
+
+            // Continue on the UI thread so we can update UI.
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (isValid)
+                {
+                    AppendOutputLine("Custom validation of server certificate passed.");
+                }
+                else
+                {
+                    AppendOutputLine("Custom validation of server certificate failed.");
+                }
+            });
+        }
+
+        async void OnSend()
+        {
+            SetBusy(true);
+            await SendAsync();
+            SetBusy(false);
+        }
+
+        async Task SendAsync()
+        {
+            string message = InputField.Text;
+            if (String.IsNullOrEmpty(message))
+            {
+                rootPage.NotifyUser("Please specify text to send", NotifyType.ErrorMessage);
+                return;
+            }
+
+            AppendOutputLine("Sending Message: " + message);
+
+            // Buffer any data we want to send.
+            messageWriter.WriteString(message);
+
+            try
+            {
+                // Send the data as one complete message.
+                await messageWriter.StoreAsync();
+            }
+            catch (Exception ex)
+            {
+                AppendOutputLine(MainPage.BuildWebSocketError(ex));
+                AppendOutputLine(ex.Message);
+                return;
+            }
+
+            rootPage.NotifyUser("Send Complete", NotifyType.StatusMessage);
         }
 
         private void MessageReceived(MessageWebSocket sender, MessageWebSocketMessageReceivedEventArgs args)
         {
-            try
+            // Dispatch the event to the UI thread so we can update UI.
+            var ignore = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                MarshalText(OutputField, "Message Received; Type: " + args.MessageType + "\r\n");
+                AppendOutputLine("Message Received; Type: " + args.MessageType);
                 using (DataReader reader = args.GetDataReader())
                 {
-                    reader.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
+                    reader.UnicodeEncoding = UnicodeEncoding.Utf8;
 
-                    string read = reader.ReadString(reader.UnconsumedBufferLength);
-                    MarshalText(OutputField, read + "\r\n");
+                    try
+                    {
+                        string read = reader.ReadString(reader.UnconsumedBufferLength);
+                        AppendOutputLine(read);
+                    }
+                    catch (Exception ex)
+                    {
+                        AppendOutputLine(MainPage.BuildWebSocketError(ex));
+                        AppendOutputLine(ex.Message);
+                    }
                 }
-            }
-            catch (Exception ex) // For debugging
-            {
-                WebErrorStatus status = WebSocketError.GetStatus(ex.GetBaseException().HResult);
-
-                if (status == WebErrorStatus.Unknown)
-                {
-                    throw;
-                }
-
-                // Normally we'd use the status to test for specific conditions we want to handle specially,
-                // and only use ex.Message for display purposes.  In this sample, we'll just output the
-                // status for debugging here, but still use ex.Message below.
-                MarshalText(OutputField, "Error: " + status + "\r\n");
-
-                MarshalText(OutputField, ex.Message + "\r\n");
-            }
+            });
         }
 
-        private void Close_Click(object sender, RoutedEventArgs e)
+        private void OnDisconnect()
         {
-            try
-            {
-                if (messageWebSocket != null)
-                {
-                    rootPage.NotifyUser("Closing", NotifyType.StatusMessage);
-                    messageWebSocket.Close(1000, "Closed due to user request.");
-                    messageWebSocket = null;
-                }
-                else
-                {
-                    rootPage.NotifyUser("No active WebSocket, send something first", NotifyType.StatusMessage);
-                }
-            }
-            catch (Exception ex)
-            {
-                WebErrorStatus status = WebSocketError.GetStatus(ex.GetBaseException().HResult);
-
-                if (status == WebErrorStatus.Unknown)
-                {
-                    throw;
-                }
-
-                // Normally we'd use the status to test for specific conditions we want to handle specially,
-                // and only use ex.Message for display purposes.  In this sample, we'll just output the
-                // status for debugging here, but still use ex.Message below.
-                rootPage.NotifyUser("Error: " + status, NotifyType.ErrorMessage);
-
-                OutputField.Text += ex.Message + "\r\n";
-            }
+            SetBusy(true);
+            rootPage.NotifyUser("Closing", NotifyType.StatusMessage);
+            CloseSocket();
+            SetBusy(false);
         }
 
         // This may be triggered remotely by the server or locally by Close/Dispose()
-        private void Closed(IWebSocket sender, WebSocketClosedEventArgs args)
+        private async void OnClosed(IWebSocket sender, WebSocketClosedEventArgs args)
         {
-            MarshalText(OutputField, "Closed; Code: " + args.Code + ", Reason: " + args.Reason + "\r\n");
+            // Dispatch the event to the UI thread so we do not need to synchronize access to messageWebSocket.
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                AppendOutputLine("Closed; Code: " + args.Code + ", Reason: " + args.Reason);
+
+                if (messageWebSocket == sender)
+                {
+                    CloseSocket();
+                    UpdateVisualState();
+                }
+            });
+        }
+
+        private void CloseSocket()
+        {
+            if (messageWriter != null)
+            {
+                // In order to reuse the socket with another DataWriter, the socket's output stream needs to be detached.
+                // Otherwise, the DataWriter's destructor will automatically close the stream and all subsequent I/O operations
+                // invoked on the socket's output stream will fail with ObjectDisposedException.
+                //
+                // This is only added for completeness, as this sample closes the socket in the very next code block.
+                messageWriter.DetachStream();
+                messageWriter.Dispose();
+                messageWriter = null;
+            }
 
             if (messageWebSocket != null)
             {
-                messageWebSocket.Dispose();
+                try
+                {
+                    messageWebSocket.Close(1000, "Closed due to user request.");
+                }
+                catch (Exception ex)
+                {
+                    AppendOutputLine(MainPage.BuildWebSocketError(ex));
+                    AppendOutputLine(ex.Message);
+                }
                 messageWebSocket = null;
             }
         }
 
-        private void MarshalText(TextBox output, string value)
+        private void AppendOutputLine(string value)
         {
-            MarshalText(output, value, true);
-        }
-
-        // When operations happen on a background thread we have to marshal UI updates back to the UI thread.
-        private void MarshalText(TextBox output, string value, bool append)
-        {
-            var ignore = output.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-            {
-                if (append)
-                {
-                    output.Text += value;
-                }
-                else
-                {
-                    output.Text = value;
-                }
-            });
+            OutputField.Text += value + "\r\n";
         }
     }
 }

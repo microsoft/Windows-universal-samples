@@ -20,7 +20,7 @@ Specifically, this sample shows the following:
 -   Read the compressed data from a file.
 -   Decompress the data.
 
-To obtain the Windows 10 developer tools preview, go to [Windows 10 developer tools](https://dev.windows.com/en-us/downloads/windows-10-developer-tools).
+To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Operating system requirements
 

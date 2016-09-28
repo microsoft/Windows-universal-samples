@@ -8,8 +8,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10586.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.14393.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -137,6 +137,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ItemsListViewModel.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h">
       <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
@@ -151,26 +152,20 @@
     <ClInclude Include="Scenario2_InAppPurchase.xaml.h">
       <DependentUpon>..\shared\Scenario2_InAppPurchase.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scenario3_ExpiringProduct.xaml.h">
-      <DependentUpon>..\shared\Scenario3_ExpiringProduct.xaml</DependentUpon>
+    <ClInclude Include="Scenario3_UnmanagedConsumable.xaml.h">
+      <DependentUpon>..\shared\Scenario3_UnmanagedConsumable.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario4_ConsumableProduct.xaml.h">
       <DependentUpon>..\shared\Scenario4_ConsumableProduct.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scenario5_AdvancedConsumableProduct.xaml.h">
-      <DependentUpon>..\shared\Scenario5_AdvancedConsumableProduct.xaml</DependentUpon>
+    <ClInclude Include="Scenario5_UserCollection.xaml.h">
+      <DependentUpon>..\shared\Scenario5_UserCollection.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scenario6_LargeCatalogProduct.xaml.h">
-      <DependentUpon>..\shared\Scenario6_LargeCatalogProduct.xaml</DependentUpon>
+    <ClInclude Include="Scenario6_AppListingURI.xaml.h">
+      <DependentUpon>..\shared\Scenario6_AppListingURI.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scenario7_AppListingURI.xaml.h">
-      <DependentUpon>..\shared\Scenario7_AppListingURI.xaml</DependentUpon>
-    </ClInclude>
-    <ClInclude Include="Scenario8_Receipt.xaml.h">
-      <DependentUpon>..\shared\Scenario8_Receipt.xaml</DependentUpon>
-    </ClInclude>
-    <ClInclude Include="Scenario9_B2B.xaml.h">
-      <DependentUpon>..\shared\Scenario9_B2B.xaml</DependentUpon>
+    <ClInclude Include="Scenario7_B2B.xaml.h">
+      <DependentUpon>..\shared\Scenario7_B2B.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -182,16 +177,14 @@
     </Page>
     <Page Include="..\shared\Scenario1_TrialMode.xaml" />
     <Page Include="..\shared\Scenario2_InAppPurchase.xaml" />
-    <Page Include="..\shared\Scenario3_ExpiringProduct.xaml" />
+    <Page Include="..\shared\Scenario3_UnmanagedConsumable.xaml" />
     <Page Include="..\shared\Scenario4_ConsumableProduct.xaml" />
-    <Page Include="..\shared\Scenario5_AdvancedConsumableProduct.xaml" />
+    <Page Include="..\shared\Scenario5_UserCollection.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
-    <Page Include="..\shared\Scenario6_LargeCatalogProduct.xaml" />
-    <Page Include="..\shared\Scenario7_AppListingURI.xaml" />
-    <Page Include="..\shared\Scenario8_Receipt.xaml" />
-    <Page Include="..\shared\Scenario9_B2B.xaml" />
+    <Page Include="..\shared\Scenario6_AppListingURI.xaml" />
+    <Page Include="..\shared\Scenario7_B2B.xaml" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -220,26 +213,20 @@
     <ClCompile Include="Scenario2_InAppPurchase.xaml.cpp">
       <DependentUpon>..\shared\Scenario2_InAppPurchase.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario3_ExpiringProduct.xaml.cpp">
-      <DependentUpon>..\shared\Scenario3_ExpiringProduct.xaml</DependentUpon>
+    <ClCompile Include="Scenario3_UnmanagedConsumable.xaml.cpp">
+      <DependentUpon>..\shared\Scenario3_UnmanagedConsumable.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario4_ConsumableProduct.xaml.cpp">
       <DependentUpon>..\shared\Scenario4_ConsumableProduct.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario5_AdvancedConsumableProduct.xaml.cpp">
-      <DependentUpon>..\shared\Scenario5_AdvancedConsumableProduct.xaml</DependentUpon>
+    <ClCompile Include="Scenario5_UserCollection.xaml.cpp">
+      <DependentUpon>..\shared\Scenario5_UserCollection.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario6_LargeCatalogProduct.xaml.cpp">
-      <DependentUpon>..\shared\Scenario6_LargeCatalogProduct.xaml</DependentUpon>
+    <ClCompile Include="Scenario6_AppListingURI.xaml.cpp">
+      <DependentUpon>..\shared\Scenario6_AppListingURI.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario7_AppListingURI.xaml.cpp">
-      <DependentUpon>..\shared\Scenario7_AppListingURI.xaml</DependentUpon>
-    </ClCompile>
-    <ClCompile Include="Scenario8_Receipt.xaml.cpp">
-      <DependentUpon>..\shared\Scenario8_Receipt.xaml</DependentUpon>
-    </ClCompile>
-    <ClCompile Include="Scenario9_B2B.xaml.cpp">
-      <DependentUpon>..\shared\Scenario9_B2B.xaml</DependentUpon>
+    <ClCompile Include="Scenario7_B2B.xaml.cpp">
+      <DependentUpon>..\shared\Scenario7_B2B.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -264,32 +251,6 @@
     <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="..\shared\data\app-listing-uri.xml">
-      <Link>data\app-listing-uri.xml</Link>
-    </Xml>
-    <Xml Include="..\shared\data\expiring-product.xml">
-      <Link>data\expiring-product.xml</Link>
-    </Xml>
-    <Xml Include="..\shared\data\in-app-purchase-consumables-advanced.xml">
-      <Link>data\in-app-purchase-consumables-advanced.xml</Link>
-    </Xml>
-    <Xml Include="..\shared\data\in-app-purchase-consumables.xml">
-      <Link>data\in-app-purchase-consumables.xml</Link>
-    </Xml>
-    <Xml Include="..\shared\data\in-app-purchase-large-catalog.xml">
-      <Link>data\in-app-purchase-large-catalog.xml</Link>
-    </Xml>
-    <Xml Include="..\shared\data\in-app-purchase.xml">
-      <Link>data\in-app-purchase.xml</Link>
-    </Xml>
-    <Xml Include="..\shared\data\receipt.xml">
-      <Link>data\receipt.xml</Link>
-    </Xml>
-    <Xml Include="..\shared\data\trial-mode.xml">
-      <Link>data\trial-mode.xml</Link>
-    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

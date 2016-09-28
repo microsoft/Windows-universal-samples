@@ -9,3 +9,4 @@
 #include <ppltasks.h>
 
 #include "App.xaml.h"
+#include "IsTenFootTrigger.h"

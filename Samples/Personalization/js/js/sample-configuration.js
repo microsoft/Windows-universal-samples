@@ -7,7 +7,6 @@
 
     var scenarios = [
         { url: "/html/SetLockScreenImage.html", title: "Set lock screen image" },
-        { url: "/html/AddImageFeedScenario.html", title: "Register lock screen slide show image feed" }
     ];
 
     WinJS.Namespace.define("SdkSample", {

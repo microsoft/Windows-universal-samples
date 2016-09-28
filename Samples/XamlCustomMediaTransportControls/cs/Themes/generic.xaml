@@ -1,4 +1,4 @@
-﻿<ResourceDictionary
+<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CustomMediaTransportControls">
@@ -6,570 +6,49 @@
     <!--This is the style for a custom Media Transport Control. We are taking the default control and simply tweaking it to fit our needs.
     The default template can be found here: C:\Program Files (x86)\Windows Kits\10\DesignTime\CommonConfiguration\Neutral\UAP\10.0.10069.0\Generic
     Simply take the portion of code that corresponds to the MediaTransportControl and bring it in to your app just like we have done in this sample-->
+
     <Style TargetType="local:CustomMediaTransportControls">
-        <Setter Property="RequestedTheme" Value="Dark"/>
-        <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="UseSystemFocusVisuals" Value="True"/>
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FlowDirection" Value="LeftToRight" />
+        <Setter Property="UseSystemFocusVisuals" Value="True" />
+        <Setter Property="IsTextScaleFactorEnabled" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="MediaTransportControls">
-                    <Grid x:Name='RootGrid' Background='Transparent'>
+                <ControlTemplate TargetType="local:CustomMediaTransportControls">
+                    <Grid x:Name="RootGrid" Background="Transparent">
                         <Grid.Resources>
-                            <!--New play pause button style 48x48 pixels in size-->
-                            <Style x:Key='PlayPauseButtonStyle' TargetType='AppBarToggleButton'>
-                                <Setter Property='Margin' Value='0' />
-                                <Setter Property='Width' Value='{ThemeResource MTCMediaButtonWidth}' />
-                                <Setter Property='Height' Value='{ThemeResource MTCMediaButtonHeight}' />
-                                <Setter Property='Padding' Value='28' />
-                                <Setter Property='Template'>
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType='AppBarToggleButton'>
-                                            <Grid x:Name='grid' Background="Transparent">
-                                                <VisualStateManager.VisualStateGroups>
-                                                    <VisualStateGroup x:Name='CommonStates'>
-                                                        <VisualState x:Name='Normal' />
-                                                        <VisualState x:Name='PointerOver'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='Pressed'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='Disabled'>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetName='grid'
-                                    Storyboard.TargetProperty='Opacity'
-                                    To='0.35'
-                                    Duration='0' />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name="Checked">
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="Pause"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='CheckedPointerOver'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="Pause"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='CheckedPressed'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="Pause"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='CheckedDisabled'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="Pause"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <DoubleAnimation Storyboard.TargetName='grid'
-                                    Storyboard.TargetProperty='Opacity'
-                                    To='0.35'
-                                    Duration='0' />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-                                                </VisualStateManager.VisualStateGroups>
-                                                <StackPanel VerticalAlignment="Center">
-                                                    <ContentPresenter
-                                x:Name='Content'
-                                Height="20"
-                                Width="20"
-                                Content="{TemplateBinding Icon}"
-                                Foreground="{ThemeResource MediaButtonForegroundThemeBrush}"
-                                Margin="0,0,0,4"
-                                HorizontalAlignment="Stretch"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
+                            <!-- New AppBar button style 48x48 pixels in size -->
+                            <Style x:Key="AppBarButtonStyle" TargetType="AppBarButton">
+                                <Setter Property="Width" Value="{ThemeResource MTCMediaButtonWidth}" />
+                                <Setter Property="Height" Value="{ThemeResource MTCMediaButtonHeight}" />
+                                <Setter Property="AllowFocusOnInteraction" Value="True" />
                             </Style>
-
-                            <!--New AppBar button style 48x48 pixels in size-->
-                            <Style x:Key='AppBarButtonStyle' TargetType='AppBarButton'>
-                                <Setter Property='Margin' Value='0' />
-                                <Setter Property='Width' Value='{ThemeResource MTCMediaButtonWidth}' />
-                                <Setter Property='Height' Value='{ThemeResource MTCMediaButtonHeight}' />
-                                <Setter Property='Padding' Value='28' />
-                                <Setter Property="UseSystemFocusVisuals" Value="True" />
-                                <Setter Property='Template'>
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType='AppBarButton'>
-                                            <Grid x:Name='grid' Background="Transparent">
-                                                <VisualStateManager.VisualStateGroups>
-                                                    <VisualStateGroup x:Name='CommonStates'>
-                                                        <VisualState x:Name='Normal' />
-                                                        <VisualState x:Name='PointerOver'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='Pressed'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='Disabled'>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetName='grid'
-                                                                    Storyboard.TargetProperty='Opacity'
-                                                                    To='0.35'
-                                                                    Duration='0' />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-                                                </VisualStateManager.VisualStateGroups>
-                                                <ContentPresenter
-                                                    x:Name='Content'
-                                                    Content="{TemplateBinding Icon}"
-                                                    Foreground="{ThemeResource MediaButtonForegroundThemeBrush}"/>
-                                            </Grid>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
+                            <!-- New CommandBar Style -->
+                            <Style x:Key="CommandBarStyle" TargetType="CommandBar">
+                                <Setter Property="Height" Value="{ThemeResource MTCMediaButtonHeight}" />
+                                <Setter Property="Background" Value="Transparent" />
                             </Style>
-
-                            <!--Full Window button style 48x48 pixels in size-->
-                            <Style x:Key='FullWindowButtonStyle' TargetType='AppBarToggleButton'>
-                                <Setter Property='Margin' Value='0' />
-                                <Setter Property='Width' Value='{ThemeResource MTCMediaButtonWidth}' />
-                                <Setter Property='Height' Value='{ThemeResource MTCMediaButtonHeight}' />
-                                <Setter Property='Padding' Value='28'/>
-                                <Setter Property='UseSystemFocusVisuals' Value='True'/>
-                                <Setter Property='Template'>
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType='AppBarToggleButton'>
-                                            <Grid x:Name='grid' Background="Transparent">
-                                                <VisualStateManager.VisualStateGroups>
-                                                    <VisualStateGroup x:Name='CommonStates'>
-                                                        <VisualState x:Name='Normal' />
-                                                        <VisualState x:Name='PointerOver'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='Pressed'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='Disabled'>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetName='grid'
-                                    Storyboard.TargetProperty='Opacity'
-                                    To='0.35'
-                                    Duration='0' />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name="Checked">
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="BackToWindow"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='CheckedPointerOver'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="BackToWindow"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='CheckedPressed'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="BackToWindow"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='CheckedDisabled'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="BackToWindow"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <DoubleAnimation Storyboard.TargetName='grid'
-                                    Storyboard.TargetProperty='Opacity'
-                                    To='0.35'
-                                    Duration='0' />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-                                                </VisualStateManager.VisualStateGroups>
-                                                <StackPanel VerticalAlignment="Center">
-                                                    <ContentPresenter
-                                x:Name='Content'
-                                Height="20"
-                                Width="20"
-                                Content="{TemplateBinding Icon}"
-                                Foreground="{ThemeResource MediaButtonForegroundThemeBrush}"
-                                Margin="0,0,0,4"
-                                HorizontalAlignment="Stretch"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
+                            <!-- Style for Error Message text -->
+                            <Style x:Key="MediaTextBlockStyle" TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+                                <Setter Property="FontSize" Value="{ThemeResource MTCMediaFontSize}" />
+                                <Setter Property="FontFamily" Value="{ThemeResource MTCMediaFontFamily}" />
+                                <Setter Property="Style" Value="{ThemeResource CaptionTextBlockStyle }" />
+                                <Setter Property="IsTextScaleFactorEnabled" Value="False" />
                             </Style>
-
-                            <!--Zoom button style 48x48 pixels in size-->
-                            <Style x:Key='ZoomButtonStyle' TargetType='AppBarToggleButton'>
-                                <Setter Property='Margin' Value='0' />
-                                <Setter Property='Width' Value='{ThemeResource MTCMediaButtonWidth}' />
-                                <Setter Property='Height' Value='{ThemeResource MTCMediaButtonHeight}' />
-                                <Setter Property='Padding' Value='28'/>
-                                <Setter Property='UseSystemFocusVisuals' Value='True'/>
-                                <Setter Property='Template'>
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType='AppBarToggleButton'>
-                                            <Grid x:Name='grid' Background="Transparent">
-                                                <VisualStateManager.VisualStateGroups>
-                                                    <VisualStateGroup x:Name='CommonStates'>
-                                                        <VisualState x:Name='Normal' />
-                                                        <VisualState x:Name='PointerOver'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='Pressed'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='Disabled'>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetName='grid'
-                                    Storyboard.TargetProperty='Opacity'
-                                    To='0.35'
-                                    Duration='0' />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name="Checked">
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="ZoomOut"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='CheckedPointerOver'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="ZoomOut"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='CheckedPressed'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="ZoomOut"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='CheckedDisabled'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="ZoomOut"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <DoubleAnimation Storyboard.TargetName='grid'
-                                    Storyboard.TargetProperty='Opacity'
-                                    To='0.35'
-                                    Duration='0' />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-                                                </VisualStateManager.VisualStateGroups>
-                                                <StackPanel VerticalAlignment="Center">
-                                                    <ContentPresenter
-                                x:Name='Content'
-                                Height="20"
-                                Width="20"
-                                Content="{TemplateBinding Icon}"
-                                Foreground="{ThemeResource MediaButtonForegroundThemeBrush}"
-                                Margin="0,0,0,4"
-                                HorizontalAlignment="Stretch"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-
-                            <Style x:Key='VolumeMuteButtonStyle' TargetType='AppBarToggleButton'>
-                                <Setter Property='Margin' Value='12' />
-                                <Setter Property='Width' Value='{ThemeResource MTCMediaButtonWidth}' />
-                                <Setter Property='Height' Value='{ThemeResource MTCMediaButtonHeight}' />
-                                <Setter Property="Padding" Value='28' />
-                                <Setter Property='UseSystemFocusVisuals' Value='True'/>
-                                <Setter Property='Template'>
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType='AppBarToggleButton'>
-                                            <Grid x:Name='grid' Background="Transparent">
-                                                <VisualStateManager.VisualStateGroups>
-                                                    <VisualStateGroup x:Name='CommonStates'>
-                                                        <VisualState x:Name='Normal' />
-                                                        <VisualState x:Name='PointerOver'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='Pressed'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='Disabled'>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetName='grid'
-                                    Storyboard.TargetProperty='Opacity'
-                                    To='0.35'
-                                    Duration='0' />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name="Checked">
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="Mute"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='CheckedPointerOver'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="Mute"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPointerOverForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='CheckedPressed'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="Mute"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedBackgroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource MediaButtonPressedForegroundThemeBrush}"/>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name='CheckedDisabled'>
-                                                            <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="Content">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                                        <DiscreteObjectKeyFrame.Value>
-                                                                            <SymbolIcon Symbol="Mute"/>
-                                                                        </DiscreteObjectKeyFrame.Value>
-                                                                    </DiscreteObjectKeyFrame>
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <DoubleAnimation Storyboard.TargetName='grid'
-                                    Storyboard.TargetProperty='Opacity'
-                                    To='0.35'
-                                    Duration='0' />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-                                                </VisualStateManager.VisualStateGroups>
-                                                <StackPanel VerticalAlignment="Center">
-                                                    <ContentPresenter
-                                x:Name='Content'
-                                Height="20"
-                                Width="20"
-                                Content="{TemplateBinding Icon}"
-                                Foreground="{ThemeResource MediaButtonForegroundThemeBrush}"
-                                Margin="0,0,0,4"
-                                HorizontalAlignment="Stretch"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-
-                            <!--Style for Error Message text-->
-                            <Style x:Key='MediaTextBlockStyle' TargetType='TextBlock'>
-                                <Setter Property='VerticalAlignment' Value='Center' />
-                                <Setter Property='Foreground' Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
-                                <Setter Property='FontSize' Value="{ThemeResource MTCMediaFontSize}" />
-                                <Setter Property='FontFamily' Value="{ThemeResource MTCMediaFontFamily}" />
-                            </Style>
-
-
-                            <!--Style for Position slider used in Media Transport Controls-->
-                            <Style x:Key='MediaSliderStyle' TargetType='Slider'>
-                                <Setter Property="Background" Value="{ThemeResource SystemControlHighlightAltBaseMediumLowBrush}" />
+                            <!-- Style for Position slider used in Media Transport Controls -->
+                            <Style x:Key="MediaSliderStyle" TargetType="Slider">
+                                <Setter Property="Background" Value="{ThemeResource SliderTrackFill}" />
                                 <Setter Property="BorderThickness" Value="{ThemeResource SliderBorderThemeThickness}" />
-                                <!--The following line sets the color for the slider background. By default, it uses the user preference color. The original line in the 
-                                template was: <Setter Property="Foreground" Value="{ThemeResource SystemControlHighlightAccentBrush}" /> 
-                                Please also look at line 770-->
-                                <Setter Property="Foreground" Value="{ThemeResource sliderBrush}"/>
+                                <Setter Property="Foreground" Value="{ThemeResource SliderTrackValueFill}" />
                                 <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
                                 <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
-                                <Setter Property='ManipulationMode' Value='None' />
+                                <Setter Property="ManipulationMode" Value="None" />
                                 <Setter Property="UseSystemFocusVisuals" Value="True" />
+                                <Setter Property="FocusVisualMargin" Value="-7,0,-7,0" />
+                                <Setter Property="IsFocusEngagementEnabled" Value="True" />
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Slider">
@@ -577,29 +56,27 @@
                                                 <Grid.Resources>
                                                     <Style TargetType="Thumb" x:Key="SliderThumbStyle">
                                                         <Setter Property="BorderThickness" Value="0" />
-                                                        <!--The following line sets the color for the slider thumb. By default, it uses the user preference color. The original line in the 
-                                                        template was: <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundAccentBrush}"
-                                                        Please also look at line 770/> -->
-                                                        <Setter Property="Background" Value="{ThemeResource sliderBrush}" />
+                                                        <Setter Property="Background" Value="{ThemeResource SliderThumbBackground}" />
+                                                        <Setter Property="Foreground" Value="{ThemeResource SystemControlBackgroundChromeMediumBrush}" />
                                                         <Setter Property="Template">
                                                             <Setter.Value>
                                                                 <ControlTemplate TargetType="Thumb">
-                                                                    <Ellipse x:Name='ellipse'
-                                                                    Stroke='{TemplateBinding Background}'
-                                                                    StrokeThickness='3'
-                                                                    Fill="{ThemeResource SystemControlBackgroundChromeMediumBrush}"/>
+                                                                    <Ellipse x:Name="ellipse"
+                                                                        Stroke="{TemplateBinding Background}"
+                                                                        StrokeThickness="2"
+                                                                        Fill="{TemplateBinding Foreground}" />
                                                                 </ControlTemplate>
                                                             </Setter.Value>
                                                         </Setter>
                                                     </Style>
-                                                    <Style TargetType='ProgressBar' x:Key='MediaSliderProgressBarStyle'>
-                                                        <Setter Property='Height' Value='{ThemeResource SliderTrackThemeHeight}' />
-                                                        <Setter Property='Minimum' Value='0' />
-                                                        <Setter Property='Maximum' Value='100' />
-                                                        <Setter Property='Foreground' Value='{ThemeResource MediaDownloadProgressIndicatorThemeBrush}' />
-                                                        <Setter Property='Background' Value='Transparent' />
-                                                        <Setter Property='BorderBrush' Value='Transparent' />
-                                                        <Setter Property='BorderThickness' Value='0' />
+                                                    <Style TargetType="ProgressBar" x:Key="MediaSliderProgressBarStyle">
+                                                        <Setter Property="Height" Value="{ThemeResource SliderTrackThemeHeight}" />
+                                                        <Setter Property="Minimum" Value="0" />
+                                                        <Setter Property="Maximum" Value="100" />
+                                                        <Setter Property="Foreground" Value="{ThemeResource SystemControlHighlightChromeAltLowBrush}" />
+                                                        <Setter Property="Background" Value="Transparent" />
+                                                        <Setter Property="BorderBrush" Value="Transparent" />
+                                                        <Setter Property="BorderThickness" Value="1" />
                                                     </Style>
                                                 </Grid.Resources>
                                                 <Grid.RowDefinitions>
@@ -611,119 +88,132 @@
                                                         <VisualState x:Name="Normal" />
                                                         <VisualState x:Name="Pressed">
                                                             <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb"
-                                                                       Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundChromeHighBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalTrackRect" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackFillPressed}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb"
-                                                                       Storyboard.TargetProperty="BorderBrush">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundChromeHighBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalTrackRect" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackFillPressed}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb"
-                                                                       Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundChromeHighBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb" Storyboard.TargetProperty="Background">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderThumbBackgroundPressed}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb"
-                                                                       Storyboard.TargetProperty="BorderBrush">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundChromeHighBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb" Storyboard.TargetProperty="Background">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderThumbBackgroundPressed}" />
+                                                                </ObjectAnimationUsingKeyFrames>
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SliderContainer" Storyboard.TargetProperty="Background">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderContainerBackgroundPressed}" />
+                                                                </ObjectAnimationUsingKeyFrames>
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalDecreaseRect" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackValueFillPressed}" />
+                                                                </ObjectAnimationUsingKeyFrames>
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalDecreaseRect" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackValueFillPressed}" />
                                                                 </ObjectAnimationUsingKeyFrames>
                                                             </Storyboard>
                                                         </VisualState>
                                                         <VisualState x:Name="Disabled">
                                                             <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter"
-                                                                       Storyboard.TargetProperty="Foreground">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderHeaderForegroundDisabled}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalDecreaseRect"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledChromeDisabledHighBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalDecreaseRect" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackValueFillDisabled}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalTrackRect"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledChromeDisabledHighBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalTrackRect" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackFillDisabled}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalDecreaseRect"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledChromeDisabledHighBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalDecreaseRect" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackValueFillDisabled}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalTrackRect"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledChromeDisabledHighBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalTrackRect" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackFillDisabled}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb"
-                                                                       Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledChromeDisabledHighBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb" Storyboard.TargetProperty="Background">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderThumbBackgroundDisabled}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb"
-                                                                       Storyboard.TargetProperty="BorderBrush">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledChromeDisabledHighBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb" Storyboard.TargetProperty="Background">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderThumbBackgroundDisabled}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb"
-                                                                       Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledChromeDisabledHighBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TopTickBar" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTickBarFillDisabled}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb"
-                                                                       Storyboard.TargetProperty="BorderBrush">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledChromeDisabledHighBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BottomTickBar" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTickBarFillDisabled}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TopTickBar"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftTickBar" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTickBarFillDisabled}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BottomTickBar"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightTickBar" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTickBarFillDisabled}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftTickBar"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
-                                                                </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightTickBar"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SliderContainer" Storyboard.TargetProperty="Background">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderContainerBackgroundDisabled}" />
                                                                 </ObjectAnimationUsingKeyFrames>
                                                             </Storyboard>
                                                         </VisualState>
                                                         <VisualState x:Name="PointerOver">
                                                             <Storyboard>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalTrackRect"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseMediumBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalTrackRect" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackFillPointerOver}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalTrackRect"
-                                                                       Storyboard.TargetProperty="Fill">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseMediumBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalTrackRect" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackFillPointerOver}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb"
-                                                                       Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightChromeAltLowBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb" Storyboard.TargetProperty="Background">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderThumbBackgroundPointerOver}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb"
-                                                                       Storyboard.TargetProperty="BorderBrush">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightChromeAltLowBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb" Storyboard.TargetProperty="Background">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderThumbBackgroundPointerOver}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb"
-                                                                       Storyboard.TargetProperty="Background">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightChromeAltLowBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SliderContainer" Storyboard.TargetProperty="Background">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderContainerBackgroundPointerOver}" />
                                                                 </ObjectAnimationUsingKeyFrames>
-                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb"
-                                                                       Storyboard.TargetProperty="BorderBrush">
-                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightChromeAltLowBrush}" />
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalDecreaseRect" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackValueFillPointerOver}" />
+                                                                </ObjectAnimationUsingKeyFrames>
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalDecreaseRect" Storyboard.TargetProperty="Fill">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackValueFillPointerOver}" />
+                                                                </ObjectAnimationUsingKeyFrames>
+                                                            </Storyboard>
+                                                        </VisualState>
+                                                    </VisualStateGroup>
+                                                    <VisualStateGroup x:Name="FocusEngagementStates">
+                                                        <VisualState x:Name="FocusDisengaged" />
+                                                        <VisualState x:Name="FocusEngagedHorizontal">
+                                                            <Storyboard>
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SliderContainer" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="False" />
+                                                                </ObjectAnimationUsingKeyFrames>
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="True" />
+                                                                </ObjectAnimationUsingKeyFrames>
+                                                            </Storyboard>
+                                                        </VisualState>
+                                                        <VisualState x:Name="FocusEngagedVertical">
+                                                            <Storyboard>
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SliderContainer" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="False" />
+                                                                </ObjectAnimationUsingKeyFrames>
+                                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="True" />
                                                                 </ObjectAnimationUsingKeyFrames>
                                                             </Storyboard>
                                                         </VisualState>
                                                     </VisualStateGroup>
                                                 </VisualStateManager.VisualStateGroups>
-
-
                                                 <ContentPresenter x:Name="HeaderContentPresenter"
-                                              Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
-                                              Margin="{ThemeResource SliderHeaderThemeMargin}"
-                                              Content="{TemplateBinding Header}"
-                                              ContentTemplate="{TemplateBinding HeaderTemplate}"
-                                              FontWeight="{ThemeResource SliderHeaderThemeFontWeight}" />
-                                                <Grid x:Name="SliderContainer" Background="Transparent" Grid.Row="1" Control.IsTemplateFocusTarget="True">
+                                                    x:DeferLoadStrategy="Lazy"
+                                                    Visibility="Collapsed"
+                                                    Foreground="{ThemeResource SliderHeaderForeground}"
+                                                    Margin="{ThemeResource SliderHeaderThemeMargin}"
+                                                    Content="{TemplateBinding Header}"
+                                                    ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                                    FontWeight="{ThemeResource SliderHeaderThemeFontWeight}" 
+                                                    TextWrapping="Wrap" />
+                                                <Grid x:Name="SliderContainer"
+                                                    Background="{ThemeResource SliderContainerBackground}"
+                                                    Grid.Row="1"
+                                                    Control.IsTemplateFocusTarget="True">
                                                     <Grid x:Name="HorizontalTemplate" MinHeight="44">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="Auto" />
@@ -736,54 +226,68 @@
                                                             <RowDefinition Height="18" />
                                                         </Grid.RowDefinitions>
                                                         <Rectangle x:Name="HorizontalTrackRect"
-                                                  Fill="{TemplateBinding Background}"
-                                                  Height="{ThemeResource SliderTrackThemeHeight}"
-                                                  Grid.Row="1"
-                                                  Grid.ColumnSpan="3" />
-                                                        <ProgressBar x:Name='DownloadProgressIndicator'
-                                                    Style='{StaticResource MediaSliderProgressBarStyle}'
-                                                    Grid.Row='1'
-                                                    Grid.ColumnSpan='3'
-                                                    HorizontalAlignment='Stretch'
-                                                    VerticalAlignment='Center'/>
-                                                        <Rectangle x:Name="HorizontalDecreaseRect"
-                                                                Fill="{TemplateBinding Foreground}"
-                                                                Grid.Row="1" />
+                                                            Fill="{TemplateBinding Background}"
+                                                            Height="{ThemeResource SliderTrackThemeHeight}"
+                                                            Grid.Row="1"
+                                                            Grid.ColumnSpan="3" />
+                                                        <ProgressBar x:Name="DownloadProgressIndicator"
+                                                            Style="{StaticResource MediaSliderProgressBarStyle}"
+                                                            Grid.Row="1"
+                                                            Grid.ColumnSpan="3"
+                                                            HorizontalAlignment="Stretch"
+                                                            VerticalAlignment="Center" />
+                                                        <Rectangle x:Name="HorizontalDecreaseRect" Fill="{TemplateBinding Foreground}" Grid.Row="1" />
                                                         <TickBar x:Name="TopTickBar"
-                                                                Visibility="Collapsed"
-                                                                Fill="{ThemeResource SystemControlHighlightAltBaseMediumLowBrush}"
-                                                                Height="{ThemeResource SliderOutsideTickBarThemeHeight}"
-                                                                VerticalAlignment="Bottom"
-                                                                Margin="0,0,0,4"
-                                                                Grid.ColumnSpan="3" />
+                                                            Visibility="Collapsed"
+                                                            Fill="{ThemeResource SliderTickBarFill}"
+                                                            Height="{ThemeResource SliderOutsideTickBarThemeHeight}"
+                                                            VerticalAlignment="Bottom"
+                                                            Margin="0,0,0,4"
+                                                            Grid.ColumnSpan="3" />
                                                         <TickBar x:Name="HorizontalInlineTickBar"
-                                                                Visibility="Collapsed"
-                                                                Fill="{ThemeResource SystemControlBackgroundAltHighBrush}"
-                                                                Height="{ThemeResource SliderTrackThemeHeight}"
-                                                                Grid.Row="1"
-                                                                Grid.ColumnSpan="3" />
+                                                            Visibility="Collapsed"
+                                                            Fill="{ThemeResource SliderInlineTickBarFill}"
+                                                            Height="{ThemeResource SliderTrackThemeHeight}"
+                                                            Grid.Row="1"
+                                                            Grid.ColumnSpan="3" />
                                                         <TickBar x:Name="BottomTickBar"
-                                                                Visibility="Collapsed"
-                                                                Fill="{ThemeResource SystemControlHighlightAltBaseMediumLowBrush}"
-                                                                Height="{ThemeResource SliderOutsideTickBarThemeHeight}"
-                                                                VerticalAlignment="Top"
-                                                                Margin="0,4,0,0"
-                                                                Grid.Row="2"
-                                                                Grid.ColumnSpan="3" />
-                                                        <!--The following section is used to set the theme of the scrubber thumb. We set the color here as well as in line 574.
-                                                        The original templated background property was: Background="{ThemeResource SystemControlForegroundAccentBrush}"-->
+                                                            Visibility="Collapsed"
+                                                            Fill="{ThemeResource SliderTickBarFill}"
+                                                            Height="{ThemeResource SliderOutsideTickBarThemeHeight}"
+                                                            VerticalAlignment="Top"
+                                                            Margin="0,4,0,0"
+                                                            Grid.Row="2"
+                                                            Grid.ColumnSpan="3" />
                                                         <Thumb x:Name="HorizontalThumb"
-                                                                Background="{ThemeResource sliderBrush}"
-                                                                Style="{StaticResource SliderThumbStyle}"
-                                                                DataContext="{TemplateBinding Value}"
-                                                                Height="24"
-                                                                Width="24"
-                                                                Grid.Row="0"
-                                                                Grid.RowSpan="3"
-                                                                Grid.Column="1"
-                                                                AutomationProperties.AccessibilityView="Raw" />
+                                                            Style="{StaticResource SliderThumbStyle}"
+                                                            Height="24"
+                                                            Width="24"
+                                                            Grid.Row="0"
+                                                            Grid.RowSpan="3"
+                                                            Grid.Column="1"
+                                                            FocusVisualMargin="-14,-6,-14,-6"
+                                                            AutomationProperties.AccessibilityView="Raw">
+                                                            <ToolTipService.ToolTip>
+                                                                <ToolTip x:Name="ThumbnailTooltip">
+                                                                    <ContentPresenter Content="{Binding}" />
+                                                                </ToolTip>
+                                                            </ToolTipService.ToolTip>
+                                                            <Thumb.DataContext>
+                                                                <Grid Height="112" Width="192">
+                                                                    <Image x:Name="ThumbnailImage"/>
+                                                                    <Border Background="{ThemeResource SystemControlBackgroundBaseMediumBrush}" 
+                                                                      VerticalAlignment="Bottom" 
+                                                                      HorizontalAlignment="Left">
+                                                                        <TextBlock x:Name="TimeElapsedPreview"
+                                                                      Margin="6,1,6,3"
+                                                                      Style="{StaticResource BodyTextBlockStyle}"
+                                                                      IsTextScaleFactorEnabled="False"
+                                                                      Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}" />
+                                                                    </Border>
+                                                                </Grid>
+                                                            </Thumb.DataContext>
+                                                        </Thumb>
                                                     </Grid>
-
                                                     <Grid x:Name="VerticalTemplate" MinWidth="44" Visibility="Collapsed">
                                                         <Grid.RowDefinitions>
                                                             <RowDefinition Height="*" />
@@ -796,45 +300,45 @@
                                                             <ColumnDefinition Width="18" />
                                                         </Grid.ColumnDefinitions>
                                                         <Rectangle x:Name="VerticalTrackRect"
-                                                                Fill="{TemplateBinding Background}"
-                                                                Width="{ThemeResource SliderTrackThemeHeight}"
-                                                                Grid.Column="1"
-                                                                Grid.RowSpan="3" />
+                                                            Fill="{TemplateBinding Background}"
+                                                            Width="{ThemeResource SliderTrackThemeHeight}"
+                                                            Grid.Column="1"
+                                                            Grid.RowSpan="3" />
                                                         <Rectangle x:Name="VerticalDecreaseRect"
-                                                                Fill="{TemplateBinding Foreground}"
-                                                                Grid.Column="1"
-                                                                Grid.Row="2" />
+                                                            Fill="{TemplateBinding Foreground}"
+                                                            Grid.Column="1"
+                                                            Grid.Row="2" />
                                                         <TickBar x:Name="LeftTickBar"
-                                                                Visibility="Collapsed"
-                                                                Fill="{ThemeResource SystemControlHighlightAltBaseMediumLowBrush}"
-                                                                Width="{ThemeResource SliderOutsideTickBarThemeHeight}"
-                                                                HorizontalAlignment="Right"
-                                                                Margin="0,0,4,0"
-                                                                Grid.RowSpan="3" />
+                                                            Visibility="Collapsed"
+                                                            Fill="{ThemeResource SliderTickBarFill}"
+                                                            Width="{ThemeResource SliderOutsideTickBarThemeHeight}"
+                                                            HorizontalAlignment="Right"
+                                                            Margin="0,0,4,0"
+                                                            Grid.RowSpan="3" />
                                                         <TickBar x:Name="VerticalInlineTickBar"
-                                                                Visibility="Collapsed"
-                                                                Fill="{ThemeResource SystemControlBackgroundAltHighBrush}"
-                                                                Width="{ThemeResource SliderTrackThemeHeight}"
-                                                                Grid.Column="1"
-                                                                Grid.RowSpan="3" />
+                                                            Visibility="Collapsed"
+                                                            Fill="{ThemeResource SliderInlineTickBarFill}"
+                                                            Width="{ThemeResource SliderTrackThemeHeight}"
+                                                            Grid.Column="1"
+                                                            Grid.RowSpan="3" />
                                                         <TickBar x:Name="RightTickBar"
-                                                                Visibility="Collapsed"
-                                                                Fill="{ThemeResource SystemControlHighlightAltBaseMediumLowBrush}"
-                                                                Width="{ThemeResource SliderOutsideTickBarThemeHeight}"
-                                                                HorizontalAlignment="Left"
-                                                                Margin="4,0,0,0"
-                                                                Grid.Column="2"
-                                                                Grid.RowSpan="3" />
+                                                            Visibility="Collapsed"
+                                                            Fill="{ThemeResource SliderTickBarFill}"
+                                                            Width="{ThemeResource SliderOutsideTickBarThemeHeight}"
+                                                            HorizontalAlignment="Left"
+                                                            Margin="4,0,0,0"
+                                                            Grid.Column="2"
+                                                            Grid.RowSpan="3" />
                                                         <Thumb x:Name="VerticalThumb"
-                                                                Background="{ThemeResource SystemControlForegroundAccentBrush}"
-                                                                Style="{StaticResource SliderThumbStyle}"
-                                                                DataContext="{TemplateBinding Value}"
-                                                                Width="8"
-                                                                Height="24"
-                                                                Grid.Row="1"
-                                                                Grid.Column="0"
-                                                                Grid.ColumnSpan="3"
-                                                                AutomationProperties.AccessibilityView="Raw"/>
+                                                            Style="{StaticResource SliderThumbStyle}"
+                                                            DataContext="{TemplateBinding Value}"
+                                                            Width="24"
+                                                            Height="8"
+                                                            Grid.Row="1"
+                                                            Grid.Column="0"
+                                                            Grid.ColumnSpan="3"
+                                                            FocusVisualMargin="-6,-14,-6,-14"
+                                                            AutomationProperties.AccessibilityView="Raw" />
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
@@ -842,45 +346,45 @@
                                     </Setter.Value>
                                 </Setter>
                             </Style>
-
-                            <!--Style for Volume Flyout used in Media Transport Controls-->
-                            <Style x:Key='FlyoutStyle' TargetType='FlyoutPresenter'>
-                                <Setter Property='Background' Value='{ThemeResource SystemControlBackgroundChromeMediumBrush}' />
-                                <Setter Property='BorderBrush' Value='{ThemeResource SystemControlBackgroundChromeMediumBrush}' />
-                                <Setter Property="Padding" Value="0"/>
+                            <!-- Style for Volume Flyout used in Media Transport Controls -->
+                            <Style x:Key="FlyoutStyle" TargetType="FlyoutPresenter">
+                                <Setter Property="Background" Value="{ThemeResource SystemControlPageBackgroundMediumAltMediumBrush}" />
+                                <Setter Property="Padding" Value="0" />
                             </Style>
                         </Grid.Resources>
-
                         <VisualStateManager.VisualStateGroups>
-
                             <!-- ControlPanel Visibility states -->
-                            <VisualStateGroup x:Name='ControlPanelVisibilityStates'>
-                                <VisualState x:Name='ControlPanelFadeIn'>
+                            <VisualStateGroup x:Name="ControlPanelVisibilityStates">
+                                <VisualState x:Name="ControlPanelFadeIn">
                                     <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty='Opacity' Storyboard.TargetName='ControlPanel_ControlPanelVisibilityStates_Border'>
-                                            <EasingDoubleKeyFrame KeyTime='0' Value='0' />
-                                            <EasingDoubleKeyFrame KeyTime='0:0:0.3' Value='1' />
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="ControlPanel_ControlPanelVisibilityStates_Border">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1" />
                                         </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimation Storyboard.TargetProperty="Y" Storyboard.TargetName="TranslateVertical" From="50" To ="0.5" Duration="0:0:0.3"/>
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name='ControlPanelFadeOut'>
+                                <VisualState x:Name="ControlPanelFadeOut">
                                     <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty='Opacity' Storyboard.TargetName='ControlPanel_ControlPanelVisibilityStates_Border'>
-                                            <EasingDoubleKeyFrame KeyTime='0' Value='1' />
-                                            <EasingDoubleKeyFrame KeyTime='0:0:0.7' Value='0' />
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="ControlPanel_ControlPanelVisibilityStates_Border">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0" />
                                         </DoubleAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible" Storyboard.TargetName="ControlPanel_ControlPanelVisibilityStates_Border">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="False" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation Storyboard.TargetProperty="Y" Storyboard.TargetName="TranslateVertical" From="0.5" To ="50" Duration="0:0:0.7"/>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
                             <!-- ControlPanel Visibility states -->
-
                             <!-- Media state visual states -->
-                            <VisualStateGroup x:Name='MediaStates'>
-                                <VisualState x:Name='Normal' />
-                                <VisualState x:Name='Buffering'>
+                            <VisualStateGroup x:Name="MediaStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Buffering">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty='Visibility' Storyboard.TargetName='BufferingProgressBar'>
-                                            <DiscreteObjectKeyFrame KeyTime='0'>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="BufferingProgressBar">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <Visibility>Visible</Visibility>
                                                 </DiscreteObjectKeyFrame.Value>
@@ -888,29 +392,29 @@
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name='Loading'>
+                                <VisualState x:Name="Loading">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty='Visibility' Storyboard.TargetName='BufferingProgressBar'>
-                                            <DiscreteObjectKeyFrame KeyTime='0'>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="BufferingProgressBar">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <Visibility>Visible</Visibility>
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
-                                        <DoubleAnimation Storyboard.TargetName='ProgressSlider'
-                                            Storyboard.TargetProperty='Opacity'
-                                            To='0'
-                                            Duration='0' />
-                                        <DoubleAnimation Storyboard.TargetName='MediaControlsCommandBar'
-                                            Storyboard.TargetProperty='Opacity'
-                                            To='0'
-                                            Duration='0' />
+                                        <DoubleAnimation Storyboard.TargetName="ProgressSlider"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="0"
+                                            Duration="0" />
+                                        <DoubleAnimation Storyboard.TargetName="MediaControlsCommandBar"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="0"
+                                            Duration="0" />
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name='Error'>
+                                <VisualState x:Name="Error">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty='Visibility' Storyboard.TargetName='ErrorBorder'>
-                                            <DiscreteObjectKeyFrame KeyTime='0'>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="ErrorBorder">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <Visibility>Visible</Visibility>
                                                 </DiscreteObjectKeyFrame.Value>
@@ -918,19 +422,17 @@
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name='Disabled'>
-                                    <Storyboard>
-                                    </Storyboard>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard />
                                 </VisualState>
                             </VisualStateGroup>
                             <!-- Media state visual states -->
-
                             <!-- Audio Selection Button visibility states -->
-                            <VisualStateGroup x:Name='AudioSelectionAvailablityStates'>
-                                <VisualState x:Name='AudioSelectionAvailable'>
+                            <VisualStateGroup x:Name="AudioSelectionAvailablityStates">
+                                <VisualState x:Name="AudioSelectionAvailable">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty='Visibility' Storyboard.TargetName='AudioTracksSelectionButton'>
-                                            <DiscreteObjectKeyFrame KeyTime='0'>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="AudioTracksSelectionButton">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <Visibility>Visible</Visibility>
                                                 </DiscreteObjectKeyFrame.Value>
@@ -938,16 +440,15 @@
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name='AudioSelectionUnavailable' />
+                                <VisualState x:Name="AudioSelectionUnavailable" />
                             </VisualStateGroup>
                             <!-- Video volume visibility states -->
-
                             <!-- Closed Captioning Selection Button visibility states -->
-                            <VisualStateGroup x:Name='CCSelectionAvailablityStates'>
-                                <VisualState x:Name='CCSelectionAvailable'>
+                            <VisualStateGroup x:Name="CCSelectionAvailablityStates">
+                                <VisualState x:Name="CCSelectionAvailable">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty='Visibility' Storyboard.TargetName='CCSelectionButton'>
-                                            <DiscreteObjectKeyFrame KeyTime='0'>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CCSelectionButton">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <Visibility>Visible</Visibility>
                                                 </DiscreteObjectKeyFrame.Value>
@@ -955,26 +456,25 @@
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name='CCSelectionUnavailable' />
+                                <VisualState x:Name="CCSelectionUnavailable" />
                             </VisualStateGroup>
                             <!-- Closed Captioning  visibility states -->
-
                             <!-- Focus states -->
-                            <VisualStateGroup x:Name='FocusStates'>
-                                <VisualState x:Name='Focused'>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Focused">
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName='FocusVisualWhite'
-                                             Storyboard.TargetProperty='Opacity'
-                                             To='1'
-                                             Duration='0' />
-                                        <DoubleAnimation Storyboard.TargetName='FocusVisualBlack'
-                                             Storyboard.TargetProperty='Opacity'
-                                             To='1'
-                                             Duration='0' />
+                                        <DoubleAnimation Storyboard.TargetName="FocusVisualWhite"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="1"
+                                            Duration="0" />
+                                        <DoubleAnimation Storyboard.TargetName="FocusVisualBlack"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="1"
+                                            Duration="0" />
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name='Unfocused' />
-                                <VisualState x:Name='PointerFocused' />
+                                <VisualState x:Name="Unfocused" />
+                                <VisualState x:Name="PointerFocused" />
                             </VisualStateGroup>
                             <!-- Focus states -->
                             <VisualStateGroup x:Name="MediaTransportControlMode">
@@ -993,8 +493,11 @@
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MediaTransportControls_Command_Border" Storyboard.TargetProperty="(Grid.Row)">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="1" />
                                         </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MediaControlsCommandBar" Storyboard.TargetProperty="Margin">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0" />
+                                        </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlayPauseButton" Storyboard.TargetProperty="Visibility">
-                                            <DiscreteObjectKeyFrame KeyTime='0'>
+                                            <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <Visibility>Collapsed</Visibility>
                                                 </DiscreteObjectKeyFrame.Value>
@@ -1003,193 +506,284 @@
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
+                            <!-- PlayPause states -->
+                            <VisualStateGroup x:Name="PlayPauseStates">
+                                <VisualState x:Name="PlayState" />
+                                <VisualState x:Name="PauseState">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlayPauseSymbolLeft" Storyboard.TargetProperty="Symbol">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Pause" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlayPauseSymbol" Storyboard.TargetProperty="Symbol">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Pause" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <!-- VolumeMute states -->
+                            <VisualStateGroup x:Name="VolumeMuteStates">
+                                <VisualState x:Name="VolumeState" />
+                                <VisualState x:Name="MuteState">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AudioMuteSymbol" Storyboard.TargetProperty="Symbol">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Mute" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VolumeMuteSymbol" Storyboard.TargetProperty="Symbol">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Mute" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <!-- FullWindow states -->
+                            <VisualStateGroup x:Name="FullWindowStates">
+                                <VisualState x:Name="NonFullWindowState" />
+                                <VisualState x:Name="FullWindowState">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FullWindowSymbol" Storyboard.TargetProperty="Symbol">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="BackToWindow" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-
-                        <Border x:Name='ControlPanel_ControlPanelVisibilityStates_Border'>
-                            <Grid x:Name='ControlPanelGrid'
-                                  Background='Transparent'
-                                  VerticalAlignment='Bottom'
-                                  RenderTransformOrigin='0.5,0.5'>
+                        <Border x:Name="ControlPanel_ControlPanelVisibilityStates_Border">
+                            <Grid x:Name="ControlPanelGrid"
+                                Background="{ThemeResource SystemControlPageBackgroundMediumAltMediumBrush}"
+                                VerticalAlignment="Bottom"
+                                RenderTransformOrigin="0.5,0.5">
                                 <Grid.RenderTransform>
-                                    <TranslateTransform />
+                                    <TranslateTransform x:Name="TranslateVertical"/>
                                 </Grid.RenderTransform>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width='Auto' />
-                                    <ColumnDefinition Width='*' />
-                                    <ColumnDefinition Width='Auto' />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height='Auto' />
-                                    <RowDefinition Height='*' />
-                                    <RowDefinition Height='Auto'/>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <Border x:Name="ErrorBorder"  Width='320' Height='96'
-                                    Grid.ColumnSpan='3'
-                                    HorizontalAlignment="Center" Background='{ThemeResource SystemControlBackgroundChromeMediumBrush}'
-                                    Visibility='Collapsed'>
-                                    <TextBlock x:Name='ErrorTextBlock'
+                                <Border x:Name="ErrorBorder"
+                                    Width="320"
+                                    Height="96"
+                                    Grid.ColumnSpan="3"
+                                    HorizontalAlignment="Center"
+                                    Background="{ThemeResource SystemControlPageBackgroundMediumAltMediumBrush}"
+                                    Visibility="Collapsed">
+                                    <TextBlock x:Name="ErrorTextBlock"
                                         Style="{StaticResource MediaTextBlockStyle}"
                                         TextWrapping="WrapWholeWords"
-                                        Margin='12'/>
+                                        Margin="12" />
                                 </Border>
-                                <Border x:Name='MediaTransportControls_Timeline_Border'
-                                    Grid.Column='1'
-                                    Grid.Row='1'
-                                    Background='{ThemeResource SystemControlBackgroundChromeMediumBrush}'>
-                                    <Grid x:Name='MediaTransportControls_Timeline_Grid' >
+                                <Border x:Name="MediaTransportControls_Timeline_Border" Grid.Column="1" Grid.Row="1">
+                                    <Grid x:Name="MediaTransportControls_Timeline_Grid">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
-                                            <RowDefinition Height='Auto' />
+                                            <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-                                        <Slider x:Name='ProgressSlider'
-                                             Style='{StaticResource MediaSliderStyle}'
-                                             Margin='12,0'
-                                             MinWidth='80'
-                                             VerticalAlignment='Center'
-                                             IsThumbToolTipEnabled='False'/>
-                                        <ProgressBar x:Name='BufferingProgressBar'
-                                                            Height='4'
-                                                            IsIndeterminate='True'
-                                                            IsHitTestVisible='False'
-                                                            VerticalAlignment='Top'
-                                                            Margin='0,2,0,0'
-                                                            Visibility='Collapsed'/>
+                                        <Slider x:Name="ProgressSlider"
+                                            Style="{StaticResource MediaSliderStyle}"
+                                            Margin="12,0"
+                                            MinWidth="80"
+                                            Height="33"
+                                            VerticalAlignment="Center"
+                                            IsThumbToolTipEnabled="False" />
+                                        <ProgressBar x:Name="BufferingProgressBar"
+                                            Height="4"
+                                            IsIndeterminate="True"
+                                            IsHitTestVisible="False"
+                                            VerticalAlignment="Top"
+                                            Margin="0,2,0,0"
+                                            Visibility="Collapsed" />
                                         <Grid x:Name="TimeTextGrid"
-                                              Margin="12,0"
-                                              Grid.Row="1"
-                                              Height="16"  >
-                                            <TextBlock x:Name='TimeElapsedElement'
-                                                     Style="{StaticResource MediaTextBlockStyle}"
-                                                     Margin="0"
-                                                     Text="00:00"
-                                                     HorizontalAlignment='Left' />
-                                            <TextBlock x:Name='TimeRemainingElement'
-                                                     Style="{StaticResource MediaTextBlockStyle}"
-                                                     Text="00:00"
-                                                     HorizontalAlignment='Right'/>
+                                            Margin="12,0"
+                                            Grid.Row="1"
+                                            Height="15">
+                                            <TextBlock x:Name="TimeElapsedElement"
+                                                Style="{StaticResource MediaTextBlockStyle}"
+                                                Margin="0"
+                                                Text="00:00"
+                                                HorizontalAlignment="Left" 
+                                                VerticalAlignment="Bottom"/>
+                                            <TextBlock x:Name="TimeRemainingElement"
+                                                Style="{StaticResource MediaTextBlockStyle}"
+                                                Text="00:00"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Bottom" />
                                         </Grid>
                                     </Grid>
                                 </Border>
-                                <Border  Background='{ThemeResource SystemControlBackgroundChromeMediumBrush}'
-                                         Grid.Row='2'
-                                         Grid.ColumnSpan='2'>
+                                <Border x:Name="LeftSidePlayBorder"
+                                    Grid.Column="0"
+                                    Grid.Row="1"
+                                    Visibility="Collapsed">
+                                    <AppBarButton x:Name="PlayPauseButtonOnLeft"
+                                        Margin="0"
+                                        VerticalAlignment="Center"
+                                        Style="{StaticResource AppBarButtonStyle}">
+                                        <AppBarButton.Icon>
+                                            <SymbolIcon x:Name="PlayPauseSymbolLeft" Symbol="Play" />
+                                        </AppBarButton.Icon>
+                                    </AppBarButton>
                                 </Border>
-                                <Border x:Name='LeftSidePlayBorder'
-                                        Background='{ThemeResource SystemControlBackgroundChromeMediumBrush}'
-                                        Grid.Column='0'
-                                        Grid.Row='1'
-                                        Visibility='Collapsed'>
-                                    <AppBarToggleButton x:Name='PlayPauseButtononLeft'
-                                                      Icon='Play'
-                                                      Margin='0' VerticalAlignment='Center'
-                                                      Style='{StaticResource PlayPauseButtonStyle}'/>
-                                </Border>
-                                <Border x:Name='MediaTransportControls_Command_Border'
-                                        Grid.Column='1'
-                                        Grid.Row='2'
-                                        HorizontalAlignment='Center'>
-                                    <CommandBar x:Name="MediaControlsCommandBar">
-                                        <!--The CommandBar primary commands are the buttons that are visible to the user during media playback. These are shown in left-to-right
-                                        order. Some buttons are turned off by default. Please look at our MSDN documentation for further information about the button ordering.
-                                        In order to turn a button on/off, you can simply use our API's. Check MainPage.xaml for an example on how to do this.-->
+                                <Border x:Name="MediaTransportControls_Command_Border"
+                                    Grid.Column="1"
+                                    Grid.Row="2">
+                                    <CommandBar x:Name="MediaControlsCommandBar" Margin="0,0" Style="{StaticResource CommandBarStyle}" IsDynamicOverflowEnabled="False">
                                         <CommandBar.PrimaryCommands>
-                                            <AppBarButton x:Name='StopButton'
-                                                          Icon='Stop'
-                                                          Style='{StaticResource AppBarButtonStyle}'
-                                                          MediaTransportControlsHelper.DropoutOrder='1'
+                                            <AppBarButton x:Name='VolumeMuteButton'
+                                                Style='{StaticResource AppBarButtonStyle}'
+                                                MediaTransportControlsHelper.DropoutOrder='19'>
+                                                <AppBarButton.Flyout>
+                                                    <Flyout x:Name='VolumeFlyout' FlyoutPresenterStyle="{StaticResource FlyoutStyle}">
+                                                        <StackPanel Orientation="Horizontal" >
+                                                            <AppBarButton x:Name='AudioMuteButton'
+                                                                    Style='{StaticResource AppBarButtonStyle}'
+                                                                    VerticalAlignment='Center'
+                                                                    HorizontalAlignment='Center'
+                                                                    Margin='12'>
+                                                                <AppBarButton.Icon>
+                                                                    <SymbolIcon x:Name='AudioMuteSymbol' Symbol='Volume' />
+                                                                </AppBarButton.Icon>
+                                                            </AppBarButton>
+                                                            <Slider x:Name='VolumeSlider'
+                                                          Value='50'
+                                                          IsThumbToolTipEnabled='False'
+                                                          Width='{ThemeResource MTCHorizontalVolumeSliderWidth}'
                                                           VerticalAlignment='Center'
-                                                          Visibility='Collapsed'/>
-                                            <AppBarButton x:Name='CastButton'
-                                                                Style='{StaticResource AppBarButtonStyle}'
-                                                                MediaTransportControlsHelper.DropoutOrder='7'
-                                                                VerticalAlignment='Center'>
+                                                          HorizontalAlignment='Center'
+                                                          Margin='0'/>
+                                                            <TextBlock x:Name='VolumeValue'
+                                                            Style='{StaticResource MediaTextBlockStyle}'
+                                                            Text="{Binding ElementName=VolumeSlider,Path=Value}"
+                                                            HorizontalAlignment='Center'
+                                                            VerticalAlignment='Center'
+                                                            Width='24'
+                                                            Margin='12'/>
+                                                        </StackPanel>
+                                                    </Flyout>
+                                                </AppBarButton.Flyout>
                                                 <AppBarButton.Icon>
-                                                    <FontIcon Glyph="&#xE29B;"/>
+                                                    <SymbolIcon x:Name='VolumeMuteSymbol' Symbol='Volume' />
                                                 </AppBarButton.Icon>
                                             </AppBarButton>
-                                            <AppBarButton x:Name='RateButton'
+                                            <AppBarButton x:Name='CCSelectionButton'
+                                              Style='{StaticResource AppBarButtonStyle}'
+                                              MediaTransportControlsHelper.DropoutOrder='15'
+                                              Visibility='Collapsed'>
+                                                <AppBarButton.Icon>
+                                                    <FontIcon Glyph="&#xED1E;"/>
+                                                </AppBarButton.Icon>
+                                            </AppBarButton>
+                                            <AppBarButton x:Name='AudioTracksSelectionButton'
+                                                Style='{StaticResource AppBarButtonStyle}'
+                                                MediaTransportControlsHelper.DropoutOrder='13'
+                                                Visibility='Collapsed'>
+                                                <AppBarButton.Icon>
+                                                    <FontIcon Glyph="&#xED1F;"/>
+                                                </AppBarButton.Icon>
+                                            </AppBarButton>
+                                            <AppBarButton x:Name='LikeButton'
                                                           Icon="Like"
                                                           Label="Like"
                                                           VerticalAlignment="Center"
                                                           Style='{StaticResource AppBarButtonStyle}'></AppBarButton>
-                                            <AppBarButton x:Name='CCSelectionButton'
-                                                          Icon='ClosedCaption'
-                                                          Style='{StaticResource AppBarButtonStyle}'
-                                                          MediaTransportControlsHelper.DropoutOrder='9'
-                                                          VerticalAlignment='Center'
-                                                          Visibility='Collapsed'/>
-                                            <AppBarButton x:Name='RewindButton'
-                                                         Icon='Previous'
-                                                         Style='{StaticResource AppBarButtonStyle}'
-                                                         MediaTransportControlsHelper.DropoutOrder='2'
-                                                         VerticalAlignment='Center'
-                                                         Visibility='Visible'/>
-                                            <AppBarToggleButton x:Name='PlayPauseButton'
-                                                                Icon='Play'
-                                                                Style='{StaticResource PlayPauseButtonStyle}'
-                                                                MediaTransportControlsHelper.DropoutOrder='11'
-                                                                VerticalAlignment='Center'/>
-                                            <AppBarButton x:Name='FastForwardButton'
-                                                          Icon='Next'
-                                                          Style='{StaticResource AppBarButtonStyle}'
-                                                          MediaTransportControlsHelper.DropoutOrder='3'
-                                                          VerticalAlignment='Center'
-                                                          Visibility='Collapsed'/>
-                                            <AppBarButton x:Name='AudioTracksSelectionButton'
-                                                          Icon='Audio'
-                                                          Style='{StaticResource AppBarButtonStyle}'
-                                                          MediaTransportControlsHelper.DropoutOrder='5'
-                                                          VerticalAlignment="Center"
-                                                          Visibility='Collapsed'/>
-                                            <AppBarButton x:Name='VolumeMuteButton'
-                                                          Icon='Volume'
-                                                          Style='{StaticResource AppBarButtonStyle}'
-                                                          MediaTransportControlsHelper.DropoutOrder='10'
-                                                          VerticalAlignment='Center'>
-                                                <AppBarButton.Flyout>
-                                                    <Flyout x:Name='VolumeFlyout' FlyoutPresenterStyle="{StaticResource FlyoutStyle}">
-                                                        <StackPanel Orientation="Horizontal" >
-                                                            <AppBarToggleButton x:Name='AudioMuteButton'
-                                                                                Icon='Volume'
-                                                                                Style='{StaticResource VolumeMuteButtonStyle}'
-                                                                                VerticalAlignment='Center'
-                                                                                HorizontalAlignment='Center'
-                                                                                Margin='12'/>
-                                                            <Slider x:Name='VolumeSlider'
-                                                                    Value='50'
-                                                                    IsThumbToolTipEnabled='False'
-                                                                    Width='{ThemeResource MTCHorizontalVolumeSliderWidth}'
-                                                                    VerticalAlignment='Center'
-                                                                    HorizontalAlignment='Center'/>
-                                                            <TextBlock x:Name='VolumeValue'
-                                                                       Style='{StaticResource MediaTextBlockStyle}'
-                                                                       Text="{Binding ElementName=VolumeSlider,Path=Value}"
-                                                                       HorizontalAlignment='Center'
-                                                                       VerticalAlignment='Center'
-                                                                       Width='24'
-                                                                       Margin='12'/>
-                                                        </StackPanel>
-                                                    </Flyout>
-                                                </AppBarButton.Flyout>
+                                            <AppBarSeparator x:Name='LeftSeparator'
+                                                Height='0'
+                                                Width ='0'
+                                                Margin='0,0' />
+                                            <AppBarButton x:Name='StopButton'
+                                                Icon='Stop'
+                                                Style='{StaticResource AppBarButtonStyle}'
+                                                MediaTransportControlsHelper.DropoutOrder='7'
+                                                Visibility='Collapsed'/>
+                                            <AppBarButton x:Name='SkipBackwardButton'
+                                                Style='{StaticResource AppBarButtonStyle}'
+                                                MediaTransportControlsHelper.DropoutOrder='5'
+                                                Visibility='Collapsed'>
+                                                <AppBarButton.Icon>
+                                                    <FontIcon Glyph="&#xED3C;"/>
+                                                </AppBarButton.Icon>
                                             </AppBarButton>
-                                            <AppBarToggleButton x:Name='FullWindowButton'
-                                                                Icon='FullScreen'
-                                                                Style='{StaticResource FullWindowButtonStyle}'
-                                                                MediaTransportControlsHelper.DropoutOrder='8'
-                                                                VerticalAlignment='Center'/>
-                                        </CommandBar.PrimaryCommands>
-                                        <!--The secondary commands section is how we would add buttons to the overflow menu (...). You can simply move the buttons into this
-                                        section and they will automatically appear in the menu. Make sure to remove any styling and icons.-->
-                                        <CommandBar.SecondaryCommands>
+                                            <AppBarButton x:Name='PreviousTrackButton'
+                                                Icon='Previous'
+                                                Style='{StaticResource AppBarButtonStyle}'
+                                                MediaTransportControlsHelper.DropoutOrder='3'
+                                                Visibility='Collapsed'/>
+                                            <AppBarButton x:Name='RewindButton'
+                                              Style='{StaticResource AppBarButtonStyle}'
+                                              MediaTransportControlsHelper.DropoutOrder='1'
+                                              Visibility='Collapsed'>
+                                                <AppBarButton.Icon>
+                                                    <FontIcon Glyph="&#xEB9E;"/>
+                                                </AppBarButton.Icon>
+                                            </AppBarButton>
+                                            <AppBarButton x:Name='PlayPauseButton'
+                                                Style='{StaticResource AppBarButtonStyle}'
+                                                MediaTransportControlsHelper.DropoutOrder='23'>
+                                                <AppBarButton.Icon>
+                                                    <SymbolIcon x:Name='PlayPauseSymbol' Symbol='Play' />
+                                                </AppBarButton.Icon>
+                                            </AppBarButton>
+                                            <AppBarButton x:Name='FastForwardButton'
+                                              Style='{StaticResource AppBarButtonStyle}'
+                                              MediaTransportControlsHelper.DropoutOrder='1'
+                                              Visibility='Collapsed'>
+                                                <AppBarButton.Icon>
+                                                    <FontIcon Glyph="&#xEB9D;"/>
+                                                </AppBarButton.Icon>
+                                            </AppBarButton>
+                                            <AppBarButton x:Name='NextTrackButton'
+                                                Icon='Next'
+                                                Style='{StaticResource AppBarButtonStyle}'
+                                                MediaTransportControlsHelper.DropoutOrder='3'
+                                                Visibility='Collapsed'/>
+                                            <AppBarButton x:Name='SkipForwardButton'
+                                                Style='{StaticResource AppBarButtonStyle}'
+                                                MediaTransportControlsHelper.DropoutOrder='5'
+                                                Visibility='Collapsed'>
+                                                <AppBarButton.Icon>
+                                                    <FontIcon Glyph="&#xED3D;"/>
+                                                </AppBarButton.Icon>
+                                            </AppBarButton>
                                             <AppBarButton x:Name='PlaybackRateButton'
-                                                          Label="Playback Rate"/>
-                                            <AppBarToggleButton x:Name='ZoomButton'
-                                                                Label="Aspect Ratio"
-                                                                VerticalAlignment='Center'/>
-                                        </CommandBar.SecondaryCommands>
+                                                Style='{StaticResource AppBarButtonStyle}'
+                                                MediaTransportControlsHelper.DropoutOrder='10'
+                                                Visibility='Collapsed'>
+                                                <AppBarButton.Icon>
+                                                    <FontIcon Glyph="&#xEC57;"/>
+                                                </AppBarButton.Icon>
+                                            </AppBarButton>
+                                            <AppBarSeparator x:Name='RightSeparator'
+                                                Height='0'
+                                                Width ='0'
+                                                Margin='0,0' />
+                                            <AppBarButton x:Name='ZoomButton'
+                                                Style='{StaticResource AppBarButtonStyle}'
+                                                MediaTransportControlsHelper.DropoutOrder='9'>
+                                                <AppBarButton.Icon>
+                                                    <FontIcon Glyph="&#xE799;"/>
+                                                </AppBarButton.Icon>
+                                            </AppBarButton>
+                                            <AppBarButton x:Name='CastButton'
+                                                Style='{StaticResource AppBarButtonStyle}'
+                                                MediaTransportControlsHelper.DropoutOrder='11'>
+                                                <AppBarButton.Icon>
+                                                    <FontIcon Glyph="&#xEC15;"/>
+                                                </AppBarButton.Icon>
+                                            </AppBarButton>
+                                            <AppBarButton x:Name='FullWindowButton'
+                                                Style='{StaticResource AppBarButtonStyle}'
+                                                MediaTransportControlsHelper.DropoutOrder='17'>
+                                                <AppBarButton.Icon>
+                                                    <SymbolIcon x:Name='FullWindowSymbol' Symbol='FullScreen' />
+                                                </AppBarButton.Icon>
+                                            </AppBarButton>
+                                        </CommandBar.PrimaryCommands>
                                     </CommandBar>
                                 </Border>
                             </Grid>

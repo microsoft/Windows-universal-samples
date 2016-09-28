@@ -26,6 +26,7 @@ namespace xBindSampleModel
         string NullStringProperty { get; set; }
         Windows.UI.Xaml.Media.ImageSource NullImageSource { get; set; }
         void Poke(object sender, RoutedEventArgs e);
+        string FullName();
     }
 }
 

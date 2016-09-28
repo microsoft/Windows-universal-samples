@@ -27,55 +27,30 @@ using namespace Windows::Foundation;
 using namespace Windows::UI::Core;
 using namespace Platform;
 
-Scenario1_DataEvents::Scenario1_DataEvents() : rootPage(MainPage::Current), desiredReportInterval(0)
+Scenario1_DataEvents::Scenario1_DataEvents()
 {
     InitializeComponent();
+}
 
-    sensor = OrientationSensor::GetDefault();
+void Scenario1_DataEvents::OnNavigatedTo(NavigationEventArgs^ e)
+{
+    sensor = OrientationSensor::GetDefault(rootPage->SensorReadingType, rootPage->SensorOptimizationGoal);
     if (sensor != nullptr)
     {
-        // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
-        // This value will be used later to activate the sensor.
-        uint32 minReportInterval = sensor->MinimumReportInterval;
-        desiredReportInterval = minReportInterval > 16 ? minReportInterval : 16;
+        rootPage->NotifyUser(rootPage->SensorDescription + " is ready", NotifyType::StatusMessage);
+        ScenarioEnableButton->IsEnabled = true;
     }
     else
     {
-        rootPage->NotifyUser("No orientation sensor found", NotifyType::ErrorMessage);
+        rootPage->NotifyUser(rootPage->SensorDescription + " not found", NotifyType::ErrorMessage);
     }
 }
 
-/// <summary>
-/// Invoked when this page is about to be displayed in a Frame.
-/// </summary>
-/// <param name="e">Event data that describes how this page was reached.  The Parameter
-/// property is typically used to configure the page.</param>
-void Scenario1_DataEvents::OnNavigatedTo(NavigationEventArgs^ e)
-{
-    ScenarioEnableButton->IsEnabled = true;
-    ScenarioDisableButton->IsEnabled = false;
-}
-
-/// <summary>
-/// Invoked when this page is no longer displayed.
-/// </summary>
-/// <param name="e"></param>
 void Scenario1_DataEvents::OnNavigatedFrom(NavigationEventArgs^ e)
 {
-    // If the navigation is external to the app do not clean up.
-    // This can occur on Phone when suspending the app.
-    if (e->NavigationMode == NavigationMode::Forward && e->Uri == nullptr)
-    {
-        return;
-    }
-
     if (ScenarioDisableButton->IsEnabled)
     {
-        Window::Current->VisibilityChanged::remove(visibilityToken);
-        sensor->ReadingChanged::remove(readingToken);
-
-        // Restore the default report interval to release resources while the sensor is not in use
-        sensor->ReportInterval = 0;
+        ScenarioDisable();
     }
 }
 
@@ -95,12 +70,12 @@ void Scenario1_DataEvents::VisibilityChanged(Object^ sender, VisibilityChangedEv
         if (e->Visible)
         {
             // Re-enable sensor input (no need to restore the desired reportInterval... it is restored for us upon app resume)
-            readingToken = sensor->ReadingChanged::add(ref new TypedEventHandler<OrientationSensor^, OrientationSensorReadingChangedEventArgs^>(this, &Scenario1_DataEvents::ReadingChanged));
+            readingToken = sensor->ReadingChanged += ref new TypedEventHandler<OrientationSensor^, OrientationSensorReadingChangedEventArgs^>(this, &Scenario1_DataEvents::ReadingChanged);
         }
         else
         {
             // Disable sensor input (no need to restore the default reportInterval... resources will be released upon app suspension)
-            sensor->ReadingChanged::remove(readingToken);
+            sensor->ReadingChanged -= readingToken;
         }
     }
 }
@@ -113,75 +88,29 @@ void Scenario1_DataEvents::ReadingChanged(OrientationSensor^ sender, Orientation
         ref new DispatchedHandler(
             [this, e]()
             {
-                OrientationSensorReading^ reading = e->Reading;
-
-                // Quaternion values
-                SensorQuaternion^ quaternion = reading->Quaternion; // get a reference to the object to avoid re-creating it for each access
-                ScenarioOutput_X->Text = quaternion->X.ToString();
-                ScenarioOutput_Y->Text = quaternion->Y.ToString();
-                ScenarioOutput_Z->Text = quaternion->Z.ToString();
-                ScenarioOutput_W->Text = quaternion->W.ToString();
-
-                // Rotation Matrix values
-                SensorRotationMatrix^ rotationMatrix = reading->RotationMatrix;
-                ScenarioOutput_M11->Text = rotationMatrix->M11.ToString();
-                ScenarioOutput_M12->Text = rotationMatrix->M12.ToString();
-                ScenarioOutput_M13->Text = rotationMatrix->M13.ToString();
-                ScenarioOutput_M21->Text = rotationMatrix->M21.ToString();
-                ScenarioOutput_M22->Text = rotationMatrix->M22.ToString();
-                ScenarioOutput_M23->Text = rotationMatrix->M23.ToString();
-                ScenarioOutput_M31->Text = rotationMatrix->M31.ToString();
-                ScenarioOutput_M32->Text = rotationMatrix->M32.ToString();
-                ScenarioOutput_M33->Text = rotationMatrix->M33.ToString();
-
-                // Yaw accuracy
-                switch (reading->YawAccuracy)
-                {
-                    case MagnetometerAccuracy::Unknown:
-                        ScenarioOutput_YawAccuracy->Text = "Unknown";
-                        break;
-                    case MagnetometerAccuracy::Unreliable:
-                        ScenarioOutput_YawAccuracy->Text = "Unreliable";
-                        break;
-                    case MagnetometerAccuracy::Approximate:
-                        ScenarioOutput_YawAccuracy->Text = "Approximate";
-                        break;
-                    case MagnetometerAccuracy::High:
-                        ScenarioOutput_YawAccuracy->Text = "High";
-                        break;
-                    default:
-                        ScenarioOutput_YawAccuracy->Text = "No data";
-                        break;
-                }
+                MainPage::SetReadingText(ScenarioOutput, e->Reading);
             },
             CallbackContext::Any
             )
         );
 }
 
-void Scenario1_DataEvents::ScenarioEnable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario1_DataEvents::ScenarioEnable()
 {
-    if (sensor != nullptr)
-    {
-        // Establish the report interval
-        sensor->ReportInterval = desiredReportInterval;
+    // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
+    sensor->ReportInterval = (std::max)(sensor->MinimumReportInterval, 16U);
 
-        visibilityToken = Window::Current->VisibilityChanged::add(ref new WindowVisibilityChangedEventHandler(this, &Scenario1_DataEvents::VisibilityChanged));
-        readingToken = sensor->ReadingChanged::add(ref new TypedEventHandler<OrientationSensor^, OrientationSensorReadingChangedEventArgs^>(this, &Scenario1_DataEvents::ReadingChanged));
+    visibilityToken = Window::Current->VisibilityChanged += ref new WindowVisibilityChangedEventHandler(this, &Scenario1_DataEvents::VisibilityChanged);
+    readingToken = sensor->ReadingChanged += ref new TypedEventHandler<OrientationSensor^, OrientationSensorReadingChangedEventArgs^>(this, &Scenario1_DataEvents::ReadingChanged);
 
-        ScenarioEnableButton->IsEnabled = false;
-        ScenarioDisableButton->IsEnabled = true;
-    }
-    else
-    {
-        rootPage->NotifyUser("No orientation sensor found", NotifyType::ErrorMessage);
-    }
+    ScenarioEnableButton->IsEnabled = false;
+    ScenarioDisableButton->IsEnabled = true;
 }
 
-void Scenario1_DataEvents::ScenarioDisable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario1_DataEvents::ScenarioDisable()
 {
-    Window::Current->VisibilityChanged::remove(visibilityToken);
-    sensor->ReadingChanged::remove(readingToken);
+    Window::Current->VisibilityChanged -= visibilityToken;
+    sensor->ReadingChanged -= readingToken;
 
     // Restore the default report interval to release resources while the sensor is not in use
     sensor->ReportInterval = 0;

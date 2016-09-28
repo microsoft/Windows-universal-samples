@@ -14,7 +14,7 @@
     function writeBytes() {
         if (SdkSample.sampleFile !== null) {
             var textArea = document.getElementById("textarea");
-            var userContent = textArea.innerText;
+            var userContent = textArea.value;
             if (userContent !== "") {
                 var buffer = getBufferFromString(userContent);
                 Windows.Storage.FileIO.writeBufferAsync(SdkSample.sampleFile, buffer).done(function () {

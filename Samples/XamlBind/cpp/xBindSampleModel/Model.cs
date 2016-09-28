@@ -175,6 +175,7 @@ namespace xBindSampleModel
         }
         public void UpdateValues()
         {
+            this.BoolPropWithINPC = !this.BoolPropWithINPC;
             this.IntPropNoINPC = IntPropNoINPC + 10 % 100;
             this.IntPropWithINPC = IntPropWithINPC + 1 % 10;
             this.IntPropertyDP = IntPropertyDP + 10 % 100;
@@ -192,6 +193,11 @@ namespace xBindSampleModel
             ManagerProp.ReportsOC[2] = temp;
         }
 
+        public string SubString(string data, int startIndex)
+        {
+            return data.Substring(startIndex);
+        }
+
 
         #region Employee Tree Creation
         private static string[] fnames = { "Alice", "Brian", "Chris", "David", "Emily", "Freda", "Garry", "Harriet", "Isobel", "John", "Keith", "Lisa", "Mark", "Nathan", "Olivia", "Penelope", "Quentin", "Robert", "Simon", "Tom", "Veronica", "Will", "Xavier", "Yvette", "Zach" };
@@ -199,7 +205,7 @@ namespace xBindSampleModel
 
         public static Manager CreateManagerEmployeeTree()
         {
-            Random rnd = new Random(4524);
+            Random rnd = new Random(4524); // Passing in a seed guarantees the same values each time
             Manager CEO = new Manager() { FirstName = fnames[rnd.Next(fnames.Length)], LastName = lnames[rnd.Next(lnames.Length)] };
             CreateReports(5, CEO, rnd);
             return CEO;
@@ -216,6 +222,7 @@ namespace xBindSampleModel
                 e.FirstName = fnames[rnd.Next(fnames.Length)];
                 e.DirectManager = m;
                 m.ReportsList.Add(e);
+                m.ReportsDict.Add(e.FirstName + i, e);
                 if (e.IsManager) CreateReports(depth - 1, (Manager)e, rnd);
             }
         }

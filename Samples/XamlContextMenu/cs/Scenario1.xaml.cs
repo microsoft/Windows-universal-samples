@@ -77,7 +77,7 @@ namespace ContextMenuCS
             }
 
             // The 'Menu' key next to Right Ctrl on most keyboards
-            else if (e.Key == Windows.System.VirtualKey.Application)
+            else if (e.Key == Windows.System.VirtualKey.Application || e.Key == Windows.System.VirtualKey.GamepadMenu)
             {
                 var FocusedElement = FocusManager.GetFocusedElement() as UIElement;
                 SampleDataModel MyObject = null;

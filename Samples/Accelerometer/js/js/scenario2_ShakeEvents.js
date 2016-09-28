@@ -3,23 +3,34 @@
 (function () {
     "use strict";
     var accelerometer;
+    var shakeCount = 0;
+
+    // DOM elements
+    var scenarioEnable;
+    var scenarioDisable;
+    var shakeOutput;
 
     var page = WinJS.UI.Pages.define("/html/scenario2_ShakeEvents.html", {
         ready: function (element, options) {
-            document.getElementById("scenario2Open").addEventListener("click", enableShakenScenario, false);
-            document.getElementById("scenario2Revoke").addEventListener("click", disableShakenScenario, false);
-            document.getElementById("scenario2Open").disabled = false;
-            document.getElementById("scenario2Revoke").disabled = true;
+            scenarioEnable = document.getElementById("scenarioEnable");
+            scenarioDisable = document.getElementById("scenarioDisable");
+            shakeOutput = document.getElementById("shakeOutput");
 
-            accelerometer = Windows.Devices.Sensors.Accelerometer.getDefault();
-            if (accelerometer === null) {
-                WinJS.log && WinJS.log("No accelerometer found", "sample", "error");
+            scenarioEnable.addEventListener("click", enableShakenScenario, false);
+            scenarioDisable.addEventListener("click", disableShakenScenario, false);
+ 
+            var readingType = SdkSample.accelerometerReadingType;
+            accelerometer = Windows.Devices.Sensors.Accelerometer.getDefault(Windows.Devices.Sensors.AccelerometerReadingType[readingType]);
+            if (accelerometer) {
+                WinJS.log && WinJS.log(readingType + " accelerometer ready", "sample", "status");
+                scenarioEnable.disabled = false;
+            } else {
+                WinJS.log && WinJS.log(readingType + " accelerometer not found", "sample", "error");
             }
         },
         unload: function () {
-            if (document.getElementById("scenario2Open").disabled) {
-                document.removeEventListener("visibilitychange", visibilityChangeHandler, false);
-                accelerometer.removeEventListener("shaken", onShaken);
+            if (!scenarioDisable.disabled) {
+                disableShakenScenario();
             }
         }
     });
@@ -27,7 +38,7 @@
     function visibilityChangeHandler() {
         // This is the event handler for VisibilityChanged events. You would register for these notifications
         // if handling sensor data when the app is not visible could cause unintended actions in the app.
-        if (document.getElementById("scenario2Open").disabled) {
+        if (!scenarioDisable.disabled) {
             if (document.msVisibilityState === "visible") {
                 // Re-enable sensor input
                 accelerometer.addEventListener("shaken", onShaken);
@@ -38,30 +49,22 @@
         }
     }
 
-    var onShaken = (function () {
-        var shakeCount = 0;
-
-        return function (e) {
-            shakeCount++;
-            document.getElementById("shakeOutput").innerHTML = shakeCount;
-        };
-    })();
+    function onShaken() {
+        shakeCount++;
+        shakeOutput.innerHTML = shakeCount;
+    }
 
     function enableShakenScenario() {
-        if (accelerometer) {
-            document.addEventListener("visibilitychange", visibilityChangeHandler, false);
-            accelerometer.addEventListener("shaken", onShaken);
-            document.getElementById("scenario2Open").disabled = true;
-            document.getElementById("scenario2Revoke").disabled = false;
-        } else {
-            WinJS.log && WinJS.log("No accelerometer found", "sample", "error");
-        }
+        document.addEventListener("visibilitychange", visibilityChangeHandler, false);
+        accelerometer.addEventListener("shaken", onShaken);
+        scenarioEnable.disabled = true;
+        scenarioDisable.disabled = false;
     }
 
     function disableShakenScenario() {
         document.removeEventListener("visibilitychange", visibilityChangeHandler, false);
         accelerometer.removeEventListener("shaken", onShaken);
-        document.getElementById("scenario2Open").disabled = false;
-        document.getElementById("scenario2Revoke").disabled = true;
+        scenarioEnable.disabled = false;
+        scenarioDisable.disabled = true;
     }
 })();

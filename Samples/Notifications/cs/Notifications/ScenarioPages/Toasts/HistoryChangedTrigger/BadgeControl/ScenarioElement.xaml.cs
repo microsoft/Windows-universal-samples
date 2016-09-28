@@ -56,7 +56,7 @@ namespace Notifications.ScenarioPages.Toasts.HistoryChangedTrigger.BadgeControl
             BackgroundAccessStatus status = await BackgroundExecutionManager.RequestAccessAsync();
 
             // If denied
-            if (status != BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity && status != BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
+            if (status != BackgroundAccessStatus.AlwaysAllowed && status != BackgroundAccessStatus.AllowedSubjectToSystemPolicy)
                 return false;
 
             // Construct the background task

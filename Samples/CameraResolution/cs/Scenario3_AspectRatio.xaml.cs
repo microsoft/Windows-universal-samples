@@ -33,6 +33,9 @@ namespace SDKTemplate
         // Object to manage access to camera devices
         private MediaCapturePreviewer _previewer = null;
 
+        // Folder in which the captures will be stored (initialized in InitializeCameraButton_Click)
+        private StorageFolder _captureFolder = null;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Scenario1_PreviewSettings"/> class.
         /// </summary>
@@ -65,7 +68,7 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void InitializeCameraButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void InitializeCameraButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
 
@@ -91,6 +94,10 @@ namespace SDKTemplate
                     VideoButton.IsEnabled = true;
                 }
             }
+
+            var picturesLibrary = await StorageLibrary.GetLibraryAsync(KnownLibraryId.Pictures);
+            // Fall back to the local app storage if the Pictures Library is not available
+            _captureFolder = picturesLibrary.SaveFolder ?? ApplicationData.Current.LocalFolder;
         }
 
         /// <summary>
@@ -132,7 +139,7 @@ namespace SDKTemplate
         /// <summary>
         /// Records an MP4 video to a StorageFile
         /// </summary>
-        private async void VideoButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void VideoButton_Click(object sender, RoutedEventArgs e)
         {
             if (_previewer.IsPreviewing)
             {
@@ -141,7 +148,7 @@ namespace SDKTemplate
                     try
                     {
                         // Create storage file in Video Library
-                        var videoFile = await KnownFolders.VideosLibrary.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
+                        var videoFile = await _captureFolder.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
                         var encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
 
                         await _previewer.MediaCapture.StartRecordToStorageFileAsync(encodingProfile, videoFile);

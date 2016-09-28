@@ -53,6 +53,7 @@
     <Page Include="PhasingTests.xaml" />
     <Page Include="Templates.xaml" />
     <Page Include="MyUserControl1.xaml" />
+    <Page Include="Functions.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">

@@ -15,23 +15,55 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:SDKTemplate"
     mc:Ignorable="d">
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ScrollViewer Margin="12,20,12,12">
-            <StackPanel>
-                <TextBlock Text="Consumable product" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                    Consumable products require both a purchase call and a fulfillment call per purchase.
-                    <Bold>Do not</Bold> require a user action for fulfillment in your app.
-                </TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-                <Button Margin="0,10,0,0" Click="{x:Bind BuyAndFulfillProduct1}">
-                    <TextBlock>Buy <Run x:Name="Product1Name"/> (<Run x:Name="Product1Price"/>)</TextBlock>
-                </Button>
-                <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
-                    Products bought during this visit: <Run x:Name="PurchaseCount">0</Run>.
-                </TextBlock>
+        <StackPanel Margin="12" Grid.Row="0">
+            <TextBlock Text="Managed Consumables" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Managed Consumable products require both a purchase call and a fulfillment call to report usage of consumables and Microsoft Store Services will maintain the users balance.  Stackable purchases are supported.
+            </TextBlock>
+
+            <Button x:Name="GetManagedConsumablesButton" Content="Get Associated Add-Ons" Margin="0,12,0,0" Click="GetManagedConsumablesButton_Click"/>
+            <Button x:Name="PurchaseAddOnButton" Content="Purchase Selected Consumable" Margin="0,12,0,0" Click="PurchaseAddOnButton_Click"
+                    IsEnabled="{x:Bind local:BindingUtils.IsNonNull(ProductsListView.SelectedItem), FallbackValue=False, Mode=OneWay}" />
+            <Button x:Name="GetConsumableBalanceButton" Content="Get Consumable Balance" Margin="0,12,0,0" Click="GetConsumableBalanceButton_Click"
+                    IsEnabled="{x:Bind local:BindingUtils.IsNonNull(ProductsListView.SelectedItem), FallbackValue=False, Mode=OneWay}" />
+            <Button x:Name="FulfillConsumableButton" Content="Fulfill Consumable" Margin="0,12,0,12" Click="FulfillConsumableButton_Click"
+                    IsEnabled="{x:Bind local:BindingUtils.IsNonNull(ProductsListView.SelectedItem), FallbackValue=False, Mode=OneWay}" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Quantity" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="QuantityComboBox"
+                          SelectedValuePath="Tag"
+                          IsEnabled="{x:Bind local:BindingUtils.IsNonNull(ProductsListView.SelectedItem), FallbackValue=False, Mode=OneWay}">
+                    <ComboBoxItem Content="1" Tag="1" IsSelected="True"/>
+                    <ComboBoxItem Content="2" Tag="2"/>
+                    <ComboBoxItem Content="3" Tag="3"/>
+                    <ComboBoxItem Content="4" Tag="4"/>
+                    <ComboBoxItem Content="5" Tag="5"/>
+                </ComboBox>
             </StackPanel>
-        </ScrollViewer>
+        </StackPanel>
+
+        <ListView x:Name="ProductsListView" 
+                  Grid.Row="1"
+                  BorderBrush="Black" 
+                  BorderThickness="1" 
+                  SelectionMode="Single"
+                  SingleSelectionFollowsFocus="False">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="12">
+                        <TextBlock Text="{Binding FormattedTitle}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
+

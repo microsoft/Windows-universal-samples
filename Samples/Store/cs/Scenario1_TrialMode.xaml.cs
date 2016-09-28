@@ -11,99 +11,83 @@
 
 using System;
 using System.Threading.Tasks;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Store;
-using Windows.Storage;
+using Windows.Services.Store;
 using Windows.UI.Core;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 namespace SDKTemplate
 {
-    /// <summary>
-    /// A page for first scenario.
-    /// </summary>
     public sealed partial class Scenario1_TrialMode : Page
     {
-        // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
-        // as NotifyUser()
-        MainPage rootPage = MainPage.Current;
+        private MainPage rootPage = MainPage.Current;
+        private StoreContext storeContext = null;
 
         public Scenario1_TrialMode()
         {
             this.InitializeComponent();
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            CurrentAppSimulator.LicenseInformation.LicenseChanged += OnLicenseInformationChanged;
-            await MainPage.ConfigureSimulatorAsync("trial-mode.xml");
+            storeContext = StoreContext.GetDefault();
+            storeContext.OfflineLicensesChanged += OfflineLicensesChanged;
 
-            try
+            StoreProductResult result = await storeContext.GetStoreProductForCurrentAppAsync();
+            if (result.ExtendedError == null)
             {
-                ListingInformation listing = await CurrentAppSimulator.LoadListingInformationAsync();
-                PurchasePrice.Text = listing.FormattedPrice;
+                PurchasePrice.Text = result.Product.Price.FormattedPrice;
             }
-            catch (Exception)
-            {
-                rootPage.NotifyUser("LoadListingInformationAsync API call failed", NotifyType.ErrorMessage);
-            }
+
+            await GetLicenseState();
         }
 
-        /// <summary>
-        /// Invoked when this page is about to unload
-        /// </summary>
-        /// <param name="e"></param>
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            CurrentAppSimulator.LicenseInformation.LicenseChanged -= OnLicenseInformationChanged;
-            base.OnNavigatingFrom(e);
+            storeContext.OfflineLicensesChanged -= OfflineLicensesChanged;
         }
 
-        /// <summary>
-        /// Invoked when the licensing information changes.
-        /// </summary>
-        private void OnLicenseInformationChanged()
+        private void OfflineLicensesChanged(StoreContext sender, object args)
         {
-            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-                LicenseInformation licenseInformation = CurrentAppSimulator.LicenseInformation;
-                if (licenseInformation.IsActive)
+                await GetLicenseState();
+            });
+        }
+
+        private async Task GetLicenseState()
+        {
+            StoreAppLicense license = await storeContext.GetAppLicenseAsync();
+
+            if (license.IsActive)
+            {
+                if (license.IsTrial)
                 {
-                    if (licenseInformation.IsTrial)
-                    {
-                        LicenseMode.Text = "Trial license";
-                    }
-                    else
-                    {
-                        LicenseMode.Text = "Full license";
-                    }
+                    LicenseMode.Text = "Trial license";
                 }
                 else
                 {
-                    LicenseMode.Text = "Inactive license";
+                    LicenseMode.Text = "Full license";
                 }
-            });
+            }
+            else
+            {
+                LicenseMode.Text = "Inactive license";
+            }
         }
 
         /// <summary>
         /// Invoked when the user asks to see trial period information.
         /// </summary>
-        private void ShowTrialPeriodInformation()
+        private async void ShowTrialPeriodInformation()
         {
-            LicenseInformation licenseInformation = CurrentAppSimulator.LicenseInformation;
-            if (licenseInformation.IsActive)
+            StoreAppLicense license = await storeContext.GetAppLicenseAsync();
+            if (license.IsActive)
             {
-                if (licenseInformation.IsTrial)
+                if (license.IsTrial)
                 {
-                    var remainingTrialTime = (licenseInformation.ExpirationDate - DateTime.Now).Days;
-                    rootPage.NotifyUser("You can use this app for " + remainingTrialTime + " more days before the trial period ends.", NotifyType.StatusMessage);
+                    int remainingTrialTime = (license.ExpirationDate - DateTime.Now).Days;
+                    rootPage.NotifyUser($"You can use this app for {remainingTrialTime} more days before the trial period ends.", NotifyType.StatusMessage);
                 }
                 else
                 {
@@ -121,25 +105,51 @@ namespace SDKTemplate
         /// </summary>
         private async void PurchaseFullLicense()
         {
-            LicenseInformation licenseInformation = CurrentAppSimulator.LicenseInformation;
-            rootPage.NotifyUser("Buying the full license...", NotifyType.StatusMessage);
-            if (licenseInformation.IsTrial)
+            // Get app store product details
+            StoreProductResult productResult = await storeContext.GetStoreProductForCurrentAppAsync();
+            if (productResult.ExtendedError != null)
             {
-                try
+                // The user may be offline or there might be some other server failure
+                rootPage.NotifyUser($"ExtendedError: {productResult.ExtendedError.Message}", NotifyType.ErrorMessage);
+                return;
+            }
+
+            rootPage.NotifyUser("Buying the full license...", NotifyType.StatusMessage);
+            StoreAppLicense license = await storeContext.GetAppLicenseAsync();
+            if (license.IsTrial)
+            {
+                StorePurchaseResult result = await productResult.Product.RequestPurchaseAsync();
+                if (result.ExtendedError != null)
                 {
-                    await CurrentAppSimulator.RequestAppPurchaseAsync(false);
-                    if (!licenseInformation.IsTrial && licenseInformation.IsActive)
-                    {
-                        rootPage.NotifyUser("You successfully upgraded your app to the fully-licensed version.", NotifyType.StatusMessage);
-                    }
-                    else
-                    {
-                        rootPage.NotifyUser("You still have a trial license for this app.", NotifyType.ErrorMessage);
-                    }
+                    rootPage.NotifyUser($"Purchase failed: ExtendedError: {result.ExtendedError.Message}", NotifyType.ErrorMessage);
+                    return;
                 }
-                catch (Exception)
+
+                switch (result.Status)
                 {
-                    rootPage.NotifyUser("The upgrade transaction failed. You still have a trial license for this app.", NotifyType.ErrorMessage);
+                    case StorePurchaseStatus.AlreadyPurchased:
+                        rootPage.NotifyUser($"You already bought this app and have a fully-licensed version.", NotifyType.ErrorMessage);
+                        break;
+
+                    case StorePurchaseStatus.Succeeded:
+                        // License will refresh automatically using the StoreContext.OfflineLicensesChanged event
+                        break;
+
+                    case StorePurchaseStatus.NotPurchased:
+                        rootPage.NotifyUser("Product was not purchased, it may have been canceled.", NotifyType.ErrorMessage);
+                        break;
+
+                    case StorePurchaseStatus.NetworkError:
+                        rootPage.NotifyUser("Product was not purchased due to a Network Error.", NotifyType.ErrorMessage);
+                        break;
+
+                    case StorePurchaseStatus.ServerError:
+                        rootPage.NotifyUser("Product was not purchased due to a Server Error.", NotifyType.ErrorMessage);
+                        break;
+
+                    default:
+                        rootPage.NotifyUser("Product was not purchased due to an Unknown Error.", NotifyType.ErrorMessage);
+                        break;
                 }
             }
             else

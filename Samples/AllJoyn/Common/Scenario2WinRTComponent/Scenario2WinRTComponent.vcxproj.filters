@@ -11,27 +11,27 @@
     <ClCompile Include="..\..\shared\AllJoynBusObjectManager.cpp" />
     <ClCompile Include="..\..\shared\AllJoynHelpers.cpp" />
     <ClCompile Include="OnboardingConsumer.cpp" />
+    <ClCompile Include="OnboardingLegacySignals.cpp" />
     <ClCompile Include="OnboardingProducer.cpp" />
     <ClCompile Include="OnboardingServiceEventAdapter.cpp" />
     <ClCompile Include="OnboardingServiceEventArgs.cpp" />
     <ClCompile Include="OnboardingSignals.cpp" />
-    <ClCompile Include="OnboardingWatcher.cpp" />
     <ClCompile Include="..\..\shared\TypeConversionHelpers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="..\..\shared\AllJoynBusObjectManager.h" />
-    <ClInclude Include="..\..\shared\AllJoynHelpers.h" />
+    <ClInclude Include="AllJoynHelpers.h" />
     <ClInclude Include="IOnboardingService.h" />
     <ClInclude Include="OnboardingConsumer.h" />
     <ClInclude Include="OnboardingEventArgs.h" />
+    <ClInclude Include="OnboardingLegacySignals.h" />
     <ClInclude Include="OnboardingMethodResults.h" />
     <ClInclude Include="OnboardingProducer.h" />
     <ClInclude Include="OnboardingServiceEventAdapter.h" />
     <ClInclude Include="OnboardingServiceEventArgs.h" />
     <ClInclude Include="OnboardingSignals.h" />
     <ClInclude Include="OnboardingStructures.h" />
-    <ClInclude Include="OnboardingWatcher.h" />
     <ClInclude Include="..\..\shared\TypeConversionHelpers.h" />
   </ItemGroup>
 </Project>

@@ -6,21 +6,19 @@ Copyright (c) Microsoft Corporation. All rights reserved
 
 <head>
     <title></title>
-    <link rel="stylesheet" href="/css/scenario1_DataEvents.css">
     <script src="/js/scenario1_DataEvents.js"></script>
 </head>
 
 <body class="win-type-body">
-    <div>
-        <p>Registers an event listener for orientation sensor data and displays the rotation data as it is reported.</p>
-        <button class="action win-button" id="scenario1Open">Enable</button>
-        <button class="action secondary win-button" id="scenario1Revoke">Disable</button>
-        <br>
-        <br> Quaternion: <a id="eventOutputQuaternion" class="win-link">no data</a>
-        <br> Rotation Matrix: <a id="eventOutputRotationMatrix" class="win-link">no data</a>
-        <br> Yaw Accuracy: <a id="eventOutputYawAccuracy" class="win-link">no data</a>
-        <br>
-    </div>
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">Data events</div>
+
+    <p>Registers an event listener for orientation sensor data and displays the rotation data as it is reported.</p>
+    <p>
+        <button class="win-button" id="scenarioEnable" disabled>Enable</button>
+        <button class="win-button" id="scenarioDisable" disabled>Disable</button>
+    </p>
+    <p id="output">no data</p>
 </body>
 
 </html>

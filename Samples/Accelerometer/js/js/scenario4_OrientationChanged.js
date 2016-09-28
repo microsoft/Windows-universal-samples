@@ -6,39 +6,42 @@
     var accelerometerReadingTransform;
     var displayInformation;
 
+    // DOM elements
+    var scenarioEnable;
+    var scenarioDisable;
+    var eventOutputOriginal;
+    var eventOutputDataTransform;
+
     var page = WinJS.UI.Pages.define("/html/scenario4_OrientationChanged.html", {
         ready: function (element, options) {
-            var disableOpen = true;
-            document.getElementById("scenario4Open").addEventListener("click", enableOrientationChangedScenario, false);
-            document.getElementById("scenario4Revoke").addEventListener("click", disableOrientationChangedScenario, false);
-            document.getElementById("scenario4Revoke").disabled = true;
+            scenarioEnable = document.getElementById("scenarioEnable");
+            scenarioDisable = document.getElementById("scenarioDisable");
+            eventOutputOriginal = document.getElementById("eventOutputOriginal");
+            eventOutputDataTransform = document.getElementById("eventOutputDataTransform");
 
-            displayInformation = Windows.Graphics.Display.DisplayInformation.getForCurrentView();
+            scenarioEnable.addEventListener("click", enableOrientationChangedScenario, false);
+            scenarioDisable.addEventListener("click", disableOrientationChangedScenario, false);
 
             // Get two instances of the accelerometer:
             // One that returns the raw accelerometer data
-            accelerometerOriginal = Windows.Devices.Sensors.Accelerometer.getDefault();
+            var readingType = SdkSample.accelerometerReadingType;
+            accelerometerOriginal = Windows.Devices.Sensors.Accelerometer.getDefault(Windows.Devices.Sensors.AccelerometerReadingType[readingType]);
             // Other on which the 'ReadingTransform' is updated so that data returned aligns with the request transformation.
-            accelerometerReadingTransform = Windows.Devices.Sensors.Accelerometer.getDefault();
+            accelerometerReadingTransform = Windows.Devices.Sensors.Accelerometer.getDefault(Windows.Devices.Sensors.AccelerometerReadingType[readingType]);
 
             if (!accelerometerOriginal || !accelerometerReadingTransform) {
-                WinJS.log && WinJS.log("No accelerometer found", "sample", "error");
+                WinJS.log && WinJS.log(readingType + " accelerometer not found", "sample", "error");
             } else {
-                disableOpen = false;
-                displayInformation.addEventListener("orientationchanged", onOrientationChanged);
+                WinJS.log && WinJS.log(readingType + " accelerometer ready", "sample", "status");
+                scenarioEnable.disabled = false;
             }
-            document.getElementById("scenario4Open").disabled = disableOpen;
+
+            displayInformation = Windows.Graphics.Display.DisplayInformation.getForCurrentView();
+            displayInformation.addEventListener("orientationchanged", onOrientationChanged);
         },
         unload: function () {
-            if (!document.getElementById("scenario4Revoke").disabled) {
-                document.removeEventListener("visibilitychange", visibilityChangeHandler, false);
-                displayInformation.removeEventListener("orientationchanged", onOrientationChanged);
-                accelerometerOriginal.removeEventListener("readingchanged", onDataChangedOriginal);
-                accelerometerReadingTransform.removeEventListener("readingchanged", onDataChangedReadingTransform);
-
-                // Return the report interval to its default to release resources while the sensor is not in use
-                accelerometerOriginal.reportInterval = 0;
-                accelerometerReadingTransform.reportInterval = 0;
+            if (!scenarioDisable.disabled) {
+                disableOrientationChangedScenario();
             }
         }
     });
@@ -46,7 +49,7 @@
     function visibilityChangeHandler() {
         // This is the event handler for VisibilityChanged events. You would register for these notifications
         // if handling sensor data when the app is not visible could cause unintended actions in the app.
-        if (!document.getElementById("scenario4Revoke").disabled) {
+        if (!scenarioDisable.disabled) {
             if (document.msVisibilityState === "visible") {
                 // Re-enable sensor input. No need to restore the desired reportInterval (it is restored for us upon app resume)
                 accelerometerOriginal.addEventListener("readingchanged", onDataChangedOriginal);
@@ -60,43 +63,17 @@
     }
 
     function onDataChangedOriginal(e) {
-        var reading = e.reading;
-
-        // event can still be in queue after unload is called
-        // so check if elements are still loaded
-
-        if (document.getElementById("eventOutputXOriginal")) {
-            document.getElementById("eventOutputXOriginal").innerHTML = reading.accelerationX.toFixed(2);
-        }
-        if (document.getElementById("eventOutputYOriginal")) {
-            document.getElementById("eventOutputYOriginal").innerHTML = reading.accelerationY.toFixed(2);
-        }
-        if (document.getElementById("eventOutputZOriginal")) {
-            document.getElementById("eventOutputZOriginal").innerHTML = reading.accelerationZ.toFixed(2);
-        }
+        SdkSample.setReadingText(eventOutputOriginal, e.reading);
     }
 
     function onDataChangedReadingTransform(e) {
-        var reading = e.reading;
-
-        // event can still be in queue after unload is called
-        // so check if elements are still loaded
-
-        if (document.getElementById("eventOutputXDataTransform")) {
-            document.getElementById("eventOutputXDataTransform").innerHTML = reading.accelerationX.toFixed(2);
-        }
-        if (document.getElementById("eventOutputYDataTransform")) {
-            document.getElementById("eventOutputYDataTransform").innerHTML = reading.accelerationY.toFixed(2);
-        }
-        if (document.getElementById("eventOutputZDataTransform")) {
-            document.getElementById("eventOutputZDataTransform").innerHTML = reading.accelerationZ.toFixed(2);
-        }
+        SdkSample.setReadingText(eventOutputDataTransform, e.reading);
     }
 
     function enableOrientationChangedScenario() {
-        // Set the reportInterval to enable the sensor events
-        accelerometerOriginal.reportInterval = accelerometerOriginal.minimumReportInterval;
-        accelerometerReadingTransform.reportInterval = accelerometerReadingTransform.minimumReportInterval;
+        // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
+        accelerometerOriginal.reportInterval = Math.max(accelerometerOriginal.minimumReportInterval, 16);
+        accelerometerReadingTransform.reportInterval = Math.max(accelerometerReadingTransform.minimumReportInterval, 16);
 
         // Set the readingTransform to align with the current display orientation
         accelerometerReadingTransform.readingTransform = displayInformation.currentOrientation;
@@ -106,8 +83,8 @@
 
         document.addEventListener("visibilitychange", visibilityChangeHandler, false);
 
-        document.getElementById("scenario4Open").disabled = true;
-        document.getElementById("scenario4Revoke").disabled = false;
+        scenarioEnable.disabled = true;
+        scenarioDisable.disabled = false;
     }
 
     function disableOrientationChangedScenario() {
@@ -119,8 +96,8 @@
         accelerometerOriginal.reportInterval = 0;
         accelerometerReadingTransform.reportInterval = 0;
 
-        document.getElementById("scenario4Open").disabled = false;
-        document.getElementById("scenario4Revoke").disabled = true;
+        scenarioEnable.disabled = false;
+        scenarioDisable.disabled = true;
     }
 
     function onOrientationChanged(eventArgs) {

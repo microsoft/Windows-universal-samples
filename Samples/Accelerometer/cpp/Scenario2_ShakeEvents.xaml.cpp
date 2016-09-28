@@ -19,53 +19,38 @@
 
 using namespace SDKTemplate;
 
-using namespace Windows::UI::Xaml;
-using namespace Windows::UI::Xaml::Controls;
-using namespace Windows::UI::Xaml::Navigation;
+using namespace Platform;
 using namespace Windows::Devices::Sensors;
 using namespace Windows::Foundation;
 using namespace Windows::UI::Core;
-using namespace Platform;
+using namespace Windows::UI::Xaml;
+using namespace Windows::UI::Xaml::Controls;
+using namespace Windows::UI::Xaml::Navigation;
 
-Scenario2_ShakeEvents::Scenario2_ShakeEvents() : rootPage(MainPage::Current), shakeCounter(0)
+Scenario2_ShakeEvents::Scenario2_ShakeEvents()
 {
     InitializeComponent();
-
-    accelerometer = Accelerometer::GetDefault();
-    if (accelerometer == nullptr)
-    {
-        rootPage->NotifyUser("No accelerometer found", NotifyType::ErrorMessage);
-    }
 }
 
-/// <summary>
-/// Invoked when this page is about to be displayed in a Frame.
-/// </summary>
-/// <param name="e">Event data that describes how this page was reached.  The Parameter
-/// property is typically used to configure the page.</param>
 void Scenario2_ShakeEvents::OnNavigatedTo(NavigationEventArgs^ e)
 {
-    ScenarioEnableButton->IsEnabled = true;
-    ScenarioDisableButton->IsEnabled = false;
+    accelerometer = Accelerometer::GetDefault(rootPage->AccelerometerReadingType);
+    if (accelerometer != nullptr)
+    {
+        rootPage->NotifyUser(rootPage->AccelerometerReadingType.ToString() + " accelerometer ready", NotifyType::StatusMessage);
+        ScenarioEnableButton->IsEnabled = true;
+    }
+    else
+    {
+        rootPage->NotifyUser(rootPage->AccelerometerReadingType.ToString() + " accelerometer not found", NotifyType::ErrorMessage);
+    }
 }
 
-/// <summary>
-/// Invoked when this page is no longer displayed.
-/// </summary>
-/// <param name="e"></param>
 void Scenario2_ShakeEvents::OnNavigatedFrom(NavigationEventArgs^ e)
 {
-    // If the navigation is external to the app do not clean up.
-    // This can occur on Phone when suspending the app.
-    if (e->NavigationMode == NavigationMode::Forward && e->Uri == nullptr)
-    {
-        return;
-    }
-
     if (ScenarioDisableButton->IsEnabled)
     {
-        Window::Current->VisibilityChanged::remove(visibilityToken);
-        accelerometer->Shaken::remove(shakenToken);
+        ScenarioDisable();
     }
 }
 
@@ -85,12 +70,12 @@ void Scenario2_ShakeEvents::VisibilityChanged(Object^ sender, VisibilityChangedE
         if (e->Visible)
         {
             // Re-enable sensor input
-            shakenToken = accelerometer->Shaken::add(ref new TypedEventHandler<Accelerometer^, AccelerometerShakenEventArgs^>(this, &Scenario2_ShakeEvents::Shaken));
+            shakenToken = accelerometer->Shaken += ref new TypedEventHandler<Accelerometer^, AccelerometerShakenEventArgs^>(this, &Scenario2_ShakeEvents::Shaken);
         }
         else
         {
             // Disable sensor input
-            accelerometer->Shaken::remove(shakenToken);
+            accelerometer->Shaken -= shakenToken;
         }
     }
 }
@@ -112,26 +97,19 @@ void Scenario2_ShakeEvents::Shaken(Accelerometer^ sender, AccelerometerShakenEve
         );
 }
 
-void Scenario2_ShakeEvents::ScenarioEnable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario2_ShakeEvents::ScenarioEnable()
 {
-    if (accelerometer != nullptr)
-    {
-        visibilityToken = Window::Current->VisibilityChanged::add(ref new WindowVisibilityChangedEventHandler(this, &Scenario2_ShakeEvents::VisibilityChanged));
-        shakenToken = accelerometer->Shaken::add(ref new TypedEventHandler<Accelerometer^, AccelerometerShakenEventArgs^>(this, &Scenario2_ShakeEvents::Shaken));
+    visibilityToken = Window::Current->VisibilityChanged += ref new WindowVisibilityChangedEventHandler(this, &Scenario2_ShakeEvents::VisibilityChanged);
+    shakenToken = accelerometer->Shaken += ref new TypedEventHandler<Accelerometer^, AccelerometerShakenEventArgs^>(this, &Scenario2_ShakeEvents::Shaken);
 
-        ScenarioEnableButton->IsEnabled = false;
-        ScenarioDisableButton->IsEnabled = true;
-    }
-    else
-    {
-        rootPage->NotifyUser("No accelerometer found", NotifyType::ErrorMessage);
-    }
+    ScenarioEnableButton->IsEnabled = false;
+    ScenarioDisableButton->IsEnabled = true;
 }
 
-void Scenario2_ShakeEvents::ScenarioDisable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario2_ShakeEvents::ScenarioDisable()
 {
-    Window::Current->VisibilityChanged::remove(visibilityToken);
-    accelerometer->Shaken::remove(shakenToken);
+    Window::Current->VisibilityChanged -= visibilityToken;
+    accelerometer->Shaken -= shakenToken;
 
     ScenarioEnableButton->IsEnabled = true;
     ScenarioDisableButton->IsEnabled = false;

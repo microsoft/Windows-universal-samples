@@ -95,8 +95,8 @@ void Scenario4_BackgroundProximitySensor::ScenarioRegisterTask_Click(Object^ /*s
     {
         create_task(BackgroundExecutionManager::RequestAccessAsync()).then([this](BackgroundAccessStatus status) {
 
-            if ((BackgroundAccessStatus::AllowedWithAlwaysOnRealTimeConnectivity == status) ||
-                (BackgroundAccessStatus::AllowedMayUseActiveRealTimeConnectivity == status))
+            if ((BackgroundAccessStatus::AlwaysAllowed == status) ||
+                (BackgroundAccessStatus::AllowedSubjectToSystemPolicy == status))
             {
                 RegisterBackgroundTask();
             }

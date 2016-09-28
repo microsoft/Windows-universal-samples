@@ -1,0 +1,37 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario3-chooseControl.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Choosing controls
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                This page speaks text with the speechSynthesis object if it is available.
+                Otherwise, it uses the SpeechSynthesizer object.
+            </p>
+            <p>
+                <input id="textToSpeak" class="win-textbox" type="text" size="40" placeholder="Enter text to speak">
+            </p>
+            <p>
+                <button id="speakButton" class="win-button">Speak</button>
+            </p>
+        </div>
+        <div id="speechGenerator"></div>
+    </div>
+</body>
+
+</html>

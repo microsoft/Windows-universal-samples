@@ -78,7 +78,7 @@ Namespace Global.BackgroundTransfer
             If downloads.Count > 0 Then
                 Dim canceledToken As CancellationTokenSource = New CancellationTokenSource()
                 canceledToken.Cancel()
-                Dim tasks As Task() = New Task() {}
+                Dim tasks As Task() = New Task(downloads.Count - 1) {}
                 For i = 0 To downloads.Count - 1
                     tasks(i) = downloads(i).AttachAsync().AsTask(canceledToken.Token)
                 Next
@@ -146,7 +146,7 @@ Namespace Global.BackgroundTransfer
             End If
 
             runId = runId + 1
-            Dim downloads As DownloadOperation() = New DownloadOperation() {}
+            Dim downloads As DownloadOperation() = New DownloadOperation(2) {}
             Try
                 downloads(0) = Await CreateDownload(downloader, 1, String.Format(CultureInfo.InvariantCulture, "{0}.{1}.FastDownload.txt", type, runId))
                 downloads(1) = Await CreateDownload(downloader, 5, String.Format(CultureInfo.InvariantCulture, "{0}.{1}.MediumDownload.txt", type, runId))
@@ -156,7 +156,7 @@ Namespace Global.BackgroundTransfer
             End Try
 
             ' Once all downloads participating in the toast/tile update have been created, start them.
-            Dim downloadTasks As Task() = New Task() {}
+            Dim downloadTasks As Task() = New Task(downloads.Length - 1) {}
             For i = 0 To downloads.Length - 1
                 downloadTasks(i) = DownloadAsync(downloads(i))
             Next

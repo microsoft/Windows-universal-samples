@@ -19,63 +19,38 @@
 
 using namespace SDKTemplate;
 
-using namespace Windows::UI::Xaml;
-using namespace Windows::UI::Xaml::Controls;
-using namespace Windows::UI::Xaml::Navigation;
+using namespace Platform;
 using namespace Windows::Devices::Sensors;
 using namespace Windows::Foundation;
 using namespace Windows::UI::Core;
-using namespace Platform;
+using namespace Windows::UI::Xaml;
+using namespace Windows::UI::Xaml::Controls;
+using namespace Windows::UI::Xaml::Navigation;
 
-Scenario1_DataEvents::Scenario1_DataEvents() : rootPage(MainPage::Current), desiredReportInterval(0)
+Scenario1_DataEvents::Scenario1_DataEvents()
 {
     InitializeComponent();
+}
 
-    accelerometer = Accelerometer::GetDefault();
+void Scenario1_DataEvents::OnNavigatedTo(NavigationEventArgs^ e)
+{
+    accelerometer = Accelerometer::GetDefault(rootPage->AccelerometerReadingType);
     if (accelerometer != nullptr)
     {
-        // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
-        // This value will be used later to activate the sensor.
-        uint32 minReportInterval = accelerometer->MinimumReportInterval;
-        desiredReportInterval = minReportInterval > 16 ? minReportInterval : 16;
+        rootPage->NotifyUser(rootPage->AccelerometerReadingType.ToString() + " accelerometer ready", NotifyType::StatusMessage);
+        ScenarioEnableButton->IsEnabled = true;
     }
     else
     {
-        rootPage->NotifyUser("No accelerometer found", NotifyType::ErrorMessage);
+        rootPage->NotifyUser(rootPage->AccelerometerReadingType.ToString() + " accelerometer not found", NotifyType::ErrorMessage);
     }
 }
 
-/// <summary>
-/// Invoked when this page is about to be displayed in a Frame.
-/// </summary>
-/// <param name="e">Event data that describes how this page was reached.  The Parameter
-/// property is typically used to configure the page.</param>
-void Scenario1_DataEvents::OnNavigatedTo(NavigationEventArgs^ e)
-{
-    ScenarioEnableButton->IsEnabled = true;
-    ScenarioDisableButton->IsEnabled = false;
-}
-
-/// <summary>
-/// Invoked when this page is no longer displayed.
-/// </summary>
-/// <param name="e"></param>
 void Scenario1_DataEvents::OnNavigatedFrom(NavigationEventArgs^ e)
 {
-    // If the navigation is external to the app do not clean up.
-    // This can occur on Phone when suspending the app.
-    if (e->NavigationMode == NavigationMode::Forward && e->Uri == nullptr)
-    {
-        return;
-    }
-
     if (ScenarioDisableButton->IsEnabled)
     {
-        Window::Current->VisibilityChanged::remove(visibilityToken);
-        accelerometer->ReadingChanged::remove(readingToken);
-
-        // Restore the default report interval to release resources while the sensor is not in use
-        accelerometer->ReportInterval = 0;
+        ScenarioDisable();
     }
 }
 
@@ -95,12 +70,12 @@ void Scenario1_DataEvents::VisibilityChanged(Object^ sender, VisibilityChangedEv
         if (e->Visible)
         {
             // Re-enable sensor input (no need to restore the desired reportInterval... it is restored for us upon app resume)
-            readingToken = accelerometer->ReadingChanged::add(ref new TypedEventHandler<Accelerometer^, AccelerometerReadingChangedEventArgs^>(this, &Scenario1_DataEvents::ReadingChanged));
+            readingToken = accelerometer->ReadingChanged += ref new TypedEventHandler<Accelerometer^, AccelerometerReadingChangedEventArgs^>(this, &Scenario1_DataEvents::ReadingChanged);
         }
         else
         {
             // Disable sensor input (no need to restore the default reportInterval... resources will be released upon app suspension)
-            accelerometer->ReadingChanged::remove(readingToken);
+            accelerometer->ReadingChanged -= readingToken;
         }
     }
 }
@@ -113,40 +88,29 @@ void Scenario1_DataEvents::ReadingChanged(Accelerometer^ sender, AccelerometerRe
         ref new DispatchedHandler(
             [this, e]()
             {
-                AccelerometerReading^ reading = e->Reading;
-
-                ScenarioOutput_X->Text = reading->AccelerationX.ToString();
-                ScenarioOutput_Y->Text = reading->AccelerationY.ToString();
-                ScenarioOutput_Z->Text = reading->AccelerationZ.ToString();
+                MainPage::SetReadingText(ScenarioOutput, e->Reading);
             },
             CallbackContext::Any
             )
         );
 }
 
-void Scenario1_DataEvents::ScenarioEnable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario1_DataEvents::ScenarioEnable()
 {
-    if (accelerometer != nullptr)
-    {
-        // Establish the report interval
-        accelerometer->ReportInterval = desiredReportInterval;
+    // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
+    accelerometer->ReportInterval = (std::max)(accelerometer->MinimumReportInterval, 16U);
 
-        visibilityToken = Window::Current->VisibilityChanged::add(ref new WindowVisibilityChangedEventHandler(this, &Scenario1_DataEvents::VisibilityChanged));
-        readingToken = accelerometer->ReadingChanged::add(ref new TypedEventHandler<Accelerometer^, AccelerometerReadingChangedEventArgs^>(this, &Scenario1_DataEvents::ReadingChanged));
+    visibilityToken = Window::Current->VisibilityChanged += ref new WindowVisibilityChangedEventHandler(this, &Scenario1_DataEvents::VisibilityChanged);
+    readingToken = accelerometer->ReadingChanged += ref new TypedEventHandler<Accelerometer^, AccelerometerReadingChangedEventArgs^>(this, &Scenario1_DataEvents::ReadingChanged);
 
-        ScenarioEnableButton->IsEnabled = false;
-        ScenarioDisableButton->IsEnabled = true;
-    }
-    else
-    {
-        rootPage->NotifyUser("No accelerometer found", NotifyType::ErrorMessage);
-    }
+    ScenarioEnableButton->IsEnabled = false;
+    ScenarioDisableButton->IsEnabled = true;
 }
 
-void Scenario1_DataEvents::ScenarioDisable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario1_DataEvents::ScenarioDisable()
 {
-    Window::Current->VisibilityChanged::remove(visibilityToken);
-    accelerometer->ReadingChanged::remove(readingToken);
+    Window::Current->VisibilityChanged -= visibilityToken;
+    accelerometer->ReadingChanged -= readingToken;
 
     // Restore the default report interval to release resources while the sensor is not in use
     accelerometer->ReportInterval = 0;

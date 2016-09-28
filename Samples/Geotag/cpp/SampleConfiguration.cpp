@@ -8,5 +8,5 @@ using namespace SDKTemplate;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
-    { "Geotag CPP Sample", "GeotagCPPSample.Scenario1_Geotag" }
+    { "Geotag a file", "SDKTemplate.Scenario1_Geotag" }
 };

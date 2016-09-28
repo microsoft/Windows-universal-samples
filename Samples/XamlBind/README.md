@@ -14,26 +14,31 @@ Specifically, this sample shows how to:
 - **Use x:Bind with x:Phase:** x:Phase can be used with x:Bind for list scenarios to enable incremental binding and rendering of data templates to improve the panning experience on low end devices.
 - **Use x:Bind to bind event handlers:** x:Bind can be used in markup to specify event handlers as part of the data model, rather than requiring them to be in the code behind. 
 
+New for Windows 10 Anniversary Update:
+* Indexing dictionaries/maps with a string. (See Basic Bindings scenario.)
+* Implicit bool-to-Visibility conversion. (See Other Bindings scenario.)
+* C-style casts. (See Other Bindings scenario.)
+* Function binding. (See Function Binding scenario.)
+
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
 
-### Samples
+### Reference
 
-[x:Bind](/Samples/XamlBind)
-
+[{x:Bind} markup extension](https://msdn.microsoft.com/en-us/windows/uwp/xaml-platform/x-bind-markup-extension)
 
 ## System requirements
 
-**Client:** Windows 10
+**Client:** Windows 10 build 14366
 
 **Server:** Windows Server 2016 Technical Preview
 
-**Phone:**  Windows 10
+**Phone:**  Windows 10 build 14366
 
 ## Build the sample
 

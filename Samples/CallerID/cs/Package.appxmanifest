@@ -4,7 +4,7 @@
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:mobile="http://schemas.microsoft.com/appx/manifest/mobile/windows10"
-  IgnorableNamespaces="uap mp"
+  IgnorableNamespaces="uap mp mobile"
   >
   <Identity Name="Microsoft.SDKSamples.CallerID.CS" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.0"/>
   <mp:PhoneIdentity PhoneProductId="2ae61f23-a2f1-48d1-8f76-57a630592a18" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
@@ -14,7 +14,7 @@
     <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Mobile" MinVersion="10.0.10586.0" MaxVersionTested="10.0.10586.0"/>
+    <TargetDeviceFamily Name="Windows.Mobile" MinVersion="10.0.10586.0" MaxVersionTested="10.0.14393.0"/>
   </Dependencies>
   <Resources>
     <Resource Language="x-generate"/>

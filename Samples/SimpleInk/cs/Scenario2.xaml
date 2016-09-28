@@ -11,50 +11,82 @@
 //*********************************************************
 -->
 <Page
-    x:Class="SimpleInk.Scenario2"
+    x:Class="SDKTemplate.Scenario2"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SDKTemplate"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    SizeChanged="OnSizeChanged"
     mc:Ignorable="d">
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <StackPanel Margin="0,0,0,10">
+            <StackPanel Grid.Row="0" Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                This scenario demonstrates how to use Ink Recognition.<LineBreak/>
+                    This scenario demonstrates creating custom features and add them to the InkToolbar. <LineBreak/>
+                    Custom InkToolbar features can include: <LineBreak/>
+                    Custom pen - A pen for which the ink color palette and pen tip properties, such as shape, rotation, and size, are defined by the app. For this example, we added a calligraphic pen.<LineBreak/>
+                    Custom tool - A non-pen tool, defined by the app, that complements the built-in features of an InkToolbar. For this example, we added a stroke selection tool. <LineBreak/>
+                    Custom toggle - Sets the state of an app-defined feature to on or off. When turned on, the feature works in conjunction with the active tool. For this example, we added touch writing.
                 </TextBlock>
             </StackPanel>
-            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto">
-                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                        <TextBlock Text="Available Recognizers:" Margin="0,8"/>
-                        <ComboBox
-                            x:Name="RecoName"
-                            MaxWidth="500"
-                            SelectionChanged="OnRecognizerChanged">
-                        </ComboBox>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0"  Orientation="Horizontal">
+                        <InkToolbar TargetInkCanvas="{x:Bind inkCanvas}" ActiveToolChanged="CurrentToolChanged">
+                            <InkToolbar.Resources>
+                                <BrushCollection x:Key="CalligraphicPenPalette">
+                                    <SolidColorBrush>Black</SolidColorBrush>
+                                    <SolidColorBrush>Brown</SolidColorBrush>
+                                    <SolidColorBrush>Red</SolidColorBrush>
+                                    <SolidColorBrush Color="#FFFFCE00"/>
+                                    <SolidColorBrush Color="#FF26E600"/>
+                                    <SolidColorBrush Color="#FF004DE6"/>
+                                </BrushCollection>
+                                <local:CalligraphicPen x:Key="CalligraphicPen"/>
+                            </InkToolbar.Resources>
+                            <InkToolbarCustomPenButton x:Name="calligraphyPen"
+                                                   CustomPen="{StaticResource CalligraphicPen}"
+                                                   Palette="{StaticResource CalligraphicPenPalette}"
+                                                   SelectedBrushIndex="0"
+                                                   MinStrokeWidth="4"
+                                                   MaxStrokeWidth="10"
+                                                   ToolTipService.ToolTip="Calligraphy pen">
+                                <SymbolIcon Symbol="{x:Bind CalligraphyPen}"/>
+                                <InkToolbarCustomPenButton.ConfigurationContent>
+                                    <InkToolbarPenConfigurationControl/>
+                                </InkToolbarCustomPenButton.ConfigurationContent>
+                            </InkToolbarCustomPenButton>
+                            <InkToolbarCustomToolButton x:Name="toolButtonLasso" Click="ToolButton_Lasso" ToolTipService.ToolTip="Selection tool">
+                                <SymbolIcon Symbol="{x:Bind LassoSelect}"/>
+                            </InkToolbarCustomToolButton>
+                            <InkToolbarCustomToggleButton x:Name="toggleButton" Click="Toggle_Custom" ToolTipService.ToolTip="Touch Writing">
+                                <SymbolIcon Symbol="{x:Bind TouchWriting}"/>
+                            </InkToolbarCustomToggleButton>
+                        </InkToolbar>
+                        <Button x:Name="ButtonCut" Content="Cut" Width="65" Margin="3,0,3,0" Click="OnCut"/>
+                        <Button x:Name="ButtonCopy" Content="Copy" Width="65" Margin="0,0,3,0" Click="OnCopy"/>
+                        <Button x:Name="ButtonPaste" Content="Paste" Width="65" Margin="0,0,3,0" Click="OnPaste"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,10">
-                        <Button x:Name="RecognizeBtn" Content="Recognize" Width="100" Margin="0,0,3,0" Click="OnRecognizeAsync"/>
-                        <Button x:Name="ClearBtn" Content="Clear" Width="65" Margin="0,0,3,0" Click="OnClear"/>
-                        <HyperlinkButton x:Name="InstallReco"
-                                         Content="Install more recognizers"
-                                         Click="RecoButton_Click"
-                                         Foreground="LightGray"
-                                         Margin="5,0"/>
-                    </StackPanel>
-                    <Grid x:Name="Output" Background="{ThemeResource SystemControlBackgroundChromeWhiteBrush}" Height="Auto">
-                        <!-- Inking area -->
-                        <InkCanvas x:Name="inkCanvas"/>
-                    </Grid>
-                </StackPanel>
+                    <ScrollViewer Grid.Row="1" x:Name="scrollViewer" ZoomMode="Enabled" MinZoomFactor="1" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto">
+                        <Grid x:Name="outputGrid" Background="{ThemeResource SystemControlBackgroundChromeWhiteBrush}" Height="Auto">
+                            <!-- Inking area -->
+                            <Canvas x:Name="selectionCanvas"/>
+                            <InkCanvas x:Name="inkCanvas" Height="Auto"/>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
             </ScrollViewer>
         </Grid>
     </Grid>
