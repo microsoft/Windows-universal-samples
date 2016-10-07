@@ -91,22 +91,30 @@ namespace SDKTemplate
             UpdateBackgroundTaskUIState();
         }
 
-        private void RegisterBackgroundTask(Type type, IBackgroundTrigger trigger)
+        private async void RegisterBackgroundTask(Type type, IBackgroundTrigger trigger)
         {
-            // If the task is already registered. then don't register it again.
-            foreach (IBackgroundTaskRegistration task in BackgroundTaskRegistration.AllTasks.Values)
+            BackgroundAccessStatus access = await BackgroundExecutionManager.RequestAccessAsync();
+            if (access == BackgroundAccessStatus.AlwaysAllowed ||
+                access == BackgroundAccessStatus.AllowedSubjectToSystemPolicy)
             {
-                if (task.Name == type.Name)
-                {
-                    return;
-                }
-            }
 
-            var builder = new BackgroundTaskBuilder();
-            builder.Name = type.Name;
-            builder.TaskEntryPoint = type.FullName;
-            builder.SetTrigger(trigger);
-            BackgroundTaskRegistration taskRegistration = builder.Register();
+                // If the task is already registered. then don't register it again.
+                foreach (IBackgroundTaskRegistration task in BackgroundTaskRegistration.AllTasks.Values)
+                {
+                    if (task.Name == type.Name)
+                    {
+                        return;
+                    }
+                }
+
+                var builder = new BackgroundTaskBuilder();
+                builder.Name = type.Name;
+                builder.TaskEntryPoint = type.FullName;
+                builder.SetTrigger(trigger);
+                BackgroundTaskRegistration taskRegistration = builder.Register();
+            }
+            else
+                rootPage.NotifyUser("Background agent access denied", NotifyType.ErrorMessage);
         }
 
         private void CheckIsActive()
