@@ -97,7 +97,6 @@ namespace SDKTemplate
             if (access == BackgroundAccessStatus.AlwaysAllowed ||
                 access == BackgroundAccessStatus.AllowedSubjectToSystemPolicy)
             {
-
                 // If the task is already registered. then don't register it again.
                 foreach (IBackgroundTaskRegistration task in BackgroundTaskRegistration.AllTasks.Values)
                 {
