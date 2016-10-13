@@ -297,8 +297,14 @@ namespace ScreenCasting
         {
             ProjectionViewBroker broker = sender as ProjectionViewBroker;
 
-            TimeSpan position = broker.ProjectedPage.Player.Position;
-            Uri source = broker.ProjectedPage.Player.Source;
+            TimeSpan position;
+            Uri source = null;
+
+            await broker.ProjectedPage.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                position = broker.ProjectedPage.Player.Position;
+                source = broker.ProjectedPage.Player.Source;
+            });
 
             await rootPage.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
