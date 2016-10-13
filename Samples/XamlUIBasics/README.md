@@ -21,14 +21,15 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## Related topics
 
-
-### Reference
-
-<!-- Add links to related API -->
-
 [Windows Store app UI, start to finish](http://msdn.microsoft.com/library/windows/apps/dn263191.aspx)
 
 Each control page in the application has links to the relevant MSDN documentation for that control.
+
+## Related samples
+
+[RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)  
+[Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)  
+[Customers Orders Database sample](https://github.com/Microsoft/Windows-appsample-customers-orders-database)  
 
 ## System requirements
 

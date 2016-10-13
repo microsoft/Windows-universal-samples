@@ -1,7 +1,8 @@
 ﻿<!---
-  category: AppSettings
+  category: AppSettings TrialsAdsAndInAppPurchases
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=627610
 --->
+
 # Store sample
 
 This sample demonstrates how to perform in-app feature or product purchases operations
@@ -58,6 +59,8 @@ To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.c
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
+
+[Coloring Book app sample](https://github.com/Microsoft/Windows-appsample-coloringbook)  
 
 ### Samples
 

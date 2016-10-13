@@ -32,6 +32,15 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 [{x:Bind} markup extension](https://msdn.microsoft.com/en-us/windows/uwp/xaml-platform/x-bind-markup-extension)
 
+### Other samples
+
+[Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)  
+[RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)  
+[Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)  
+[Customers Orders Database sample](https://github.com/Microsoft/Windows-appsample-customers-orders-database)  
+[Hue Lights sample](https://github.com/Microsoft/Windows-appsample-huelightcontroller)  
+[Network Helper sample library](https://github.com/Microsoft/Windows-appsample-networkhelper)  
+
 ## System requirements
 
 **Client:** Windows 10 build 14366

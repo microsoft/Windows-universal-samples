@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: FilesFoldersAndLibraries
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619995
 --->
@@ -80,6 +80,14 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 [Programmatic file search sample](http://go.microsoft.com/fwlink/p/?linkid=231532)
 
 [File and folder thumbnail sample](http://go.microsoft.com/fwlink/p/?linkid=231522)
+
+[RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)  
+
+[Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
+
+[Coloring Book app sample](https://github.com/Microsoft/Windows-appsample-coloringbook)  
+
+[Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)  
 
 ## Reference
 

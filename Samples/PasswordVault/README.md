@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: IdentitySecurityAndEncryption
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620583
 --->
@@ -41,6 +41,8 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 ### Samples
 
 [**KeyCredentialManager**](../KeyCredentialManager)
+
+[Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)  
 
 ### Reference
 

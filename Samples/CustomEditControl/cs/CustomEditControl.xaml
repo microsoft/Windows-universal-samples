@@ -1,0 +1,40 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<UserControl
+    x:Class="SDKTemplate.CustomEditControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="30"
+    d:DesignWidth="400">
+
+    <StackPanel>
+        <!-- Our custom edit control -->
+        <StackPanel x:Name="BorderPanel" BorderThickness="4" Background="White">
+            <StackPanel x:Name="ContentPanel" Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBlock x:Name="BeforeSelectionText" Foreground="Black"/>
+                <TextBlock x:Name="CaretText" Text="&#xe12b;" Foreground="Blue" FontFamily="Segoe UI Symbol"/>
+                <Border Background="Blue">
+                    <TextBlock x:Name="SelectionText" Foreground="White"/>
+                </Border>
+                <TextBlock x:Name="AfterSelectionText" Foreground="Black"/>
+            </StackPanel>
+        </StackPanel>
+        <!-- Additional statistics for demonstration purposes -->
+        <TextBlock>Full text: <Run x:Name="FullText"/></TextBlock>
+        <TextBlock>Selection start index: <Run x:Name="SelectionStartIndexText"/></TextBlock>
+        <TextBlock>Selection end index: <Run x:Name="SelectionEndIndexText"/></TextBlock>
+    </StackPanel>
+</UserControl>

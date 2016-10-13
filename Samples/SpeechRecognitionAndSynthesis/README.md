@@ -36,6 +36,10 @@ You can disable functionality that requires accepting this policy by turning off
 -  [Speech interactions](https://msdn.microsoft.com/library/windows/apps/mt185614)
 -  [Responding to speech interactions (HTML)](https://msdn.microsoft.com/en-us/library/windows/apps/dn720491.aspx)
 
+## Related samples
+
+[Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
+
 ## System requirements
 
 **Hardware:** Speech recognition requires an appropriate audio input device. 

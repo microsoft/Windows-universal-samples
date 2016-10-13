@@ -1,6 +1,7 @@
 <!---
   category: DevicesSensorsAndPower
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620575
+  language: cs cpp
 --->
 
 # Near field communication (NFC) sample

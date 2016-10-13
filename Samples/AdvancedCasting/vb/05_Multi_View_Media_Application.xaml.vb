@@ -156,8 +156,12 @@ Namespace Global.ScreenCasting
 
         Private Async Sub Pvb_ProjectionStopping(sender As Object, e As EventArgs)
             Dim broker As ProjectionViewBroker = TryCast(sender, ProjectionViewBroker)
-            Dim position As TimeSpan = broker.ProjectedPage.Player.Position
-            Dim source As Uri = broker.ProjectedPage.Player.Source
+            Dim position As TimeSpan
+            Dim source As Uri = Nothing
+            Await broker.ProjectedPage.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, Sub()
+                                                                                                              position = broker.ProjectedPage.Player.Position
+                                                                                                              source = broker.ProjectedPage.Player.Source
+                                                                                                          End Sub)
             Await rootPage.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, Sub()
                                                                                                   rootPage.NotifyUser("Resuming playback on the first screen", NotifyType.StatusMessage)
                                                                                                   Me.player.Source = source

@@ -87,6 +87,11 @@ Duplicates can also be handled. For an example of handling disambiguation, add a
 -  [Cortana interactions (XAML)](https://msdn.microsoft.com/library/windows/apps/mt185598)
 -  [Cortana interactions (HTML)](https://msdn.microsoft.com/en-us/library/windows/apps/dn974231.aspx)
 
+## See also
+
+- [Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
+- [Hue Lights sample](https://github.com/Microsoft/Windows-appsample-huelightcontroller)  
+
 ## System requirements
 
 **Client:** Windows 10

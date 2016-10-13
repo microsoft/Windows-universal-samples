@@ -37,7 +37,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 **Server:** Windows Server 2016 Technical Preview
 
-**Phone:** Windows 10 build 14332
+**Phone:** Not supported
 
 ## Build the sample
 

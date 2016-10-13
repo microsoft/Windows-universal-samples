@@ -1,5 +1,5 @@
 ﻿<!---
-  category: ControlsLayoutAndText
+  category: ControlsLayoutAndText Printing
   samplefwlink: http://go.microsoft.com/fwlink/?LinkId=746898
 --->
 

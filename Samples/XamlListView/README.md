@@ -28,6 +28,8 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 [Master Detail in XAML](/Samples/XamlMasterDetail)
 
+[RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)  
+
 ### Reference
 
 <!-- Add links to related API -->

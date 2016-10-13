@@ -45,6 +45,10 @@ These topics provide info about the APIs used in this sample:
 - [XAudio2](http://msdn.microsoft.com/library/windows/apps/hh405049)
 - [Windows.Gaming.Input](https://msdn.microsoft.com/library/windows/apps/windows.gaming.input.aspx)
 
+## See also
+
+[DirectX marble maze game sample](https://github.com/Microsoft/Windows-appsample-marble-maze)  
+
 ## System requirements
 
 **Client:** Windows 10

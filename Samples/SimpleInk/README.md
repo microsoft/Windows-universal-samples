@@ -1,5 +1,5 @@
 <!---
-  category: CustomUserInteractions
+  category: CustomUserInteractions Inking
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620602
 --->
 
@@ -29,6 +29,10 @@ Specifically, this sample covers using the Windows.UI.Input.Inking APIs to do th
 **Samples**
 
 [ComplexInk](/Samples/ComplexInk)
+
+[Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
+
+[Coloring Book app sample](https://github.com/Microsoft/Windows-appsample-coloringbook)  
 
 **Reference**
 

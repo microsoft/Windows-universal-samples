@@ -38,6 +38,12 @@ This sample requires that location capability be set in the *Package.appxmanifes
   
 [Guidelines for location-aware apps](https://msdn.microsoft.com/library/windows/apps/hh465148)
 
+## Related samples
+
+[Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)  
+
+[Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)  
+
 ## System requirements
 
 **Client:** Windows 10

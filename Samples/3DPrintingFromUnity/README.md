@@ -1,6 +1,7 @@
 <!---
-  category: ControlsLayoutAndText
+  category: ControlsLayoutAndText Printing
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=722936
+  language: cs
 --->
 
 # 3D Printing from Unity sample

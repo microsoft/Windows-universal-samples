@@ -1,5 +1,5 @@
 ﻿<!---
-  category: ControlsLayoutAndText
+  category: ControlsLayoutAndText Printing
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619984
 --->
 
@@ -15,6 +15,10 @@ The scenarios demonstrated in this sample include:
 - Printing alternate content that is not part of the current document
 - Disabling print preview
 - Removing the Print button if the device does not support printing
+
+## Related samples
+
+[Coloring Book app sample](https://github.com/Microsoft/Windows-appsample-coloringbook)  
 
 System requirements
 -------------------

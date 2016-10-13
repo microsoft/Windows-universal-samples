@@ -34,6 +34,10 @@ Develop Windows Universal Apps with Azure AD and the Windows 10 Identity API:
 Azure sample:
 [Universal Windows Platform app calling the directory Graph API](https://github.com/Azure-Samples/active-directory-dotnet-native-uwp-wam/tree/master/NativeClient-UWP-WAM/)
 
+[Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)  
+
+[Customers Orders Database sample](https://github.com/Microsoft/Windows-appsample-customers-orders-database)  
+
 ### Reference
 
 ## System requirements
