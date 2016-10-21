@@ -112,7 +112,7 @@ namespace Commanding
             }
 
             // Next move items out of the overflow if room is available
-            while (overflow.Count > 0 && requestedWidth + separatorQueueWidth + overflow.Peek().Item2 <= availableSize.Width)
+            if (overflow.Count > 0 && requestedWidth + separatorQueueWidth + overflow.Peek().Item2 <= availableSize.Width)
             {
                 var t = overflow.Pop();
 
@@ -129,7 +129,7 @@ namespace Commanding
                 {
                     this.separatorQueue.Enqueue(t);
                     separatorQueueWidth += t.Item2;
-                    continue;
+                   
                 }
                 else
                 {
