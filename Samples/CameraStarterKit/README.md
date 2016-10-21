@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: AudioVideoAndCamera 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619479
 --->
@@ -52,6 +52,10 @@ For apps that are interested in capturing a photo or video without requiring acc
 [Windows.Graphics.Imaging.BitmapDecoder class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.graphics.imaging.bitmapdecoder.aspx)
 
 [Windows.Graphics.Imaging.BitmapEncoder class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.graphics.imaging.bitmapencoder.aspx)
+
+## Related samples
+
+[Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
 
 ## System requirements
 

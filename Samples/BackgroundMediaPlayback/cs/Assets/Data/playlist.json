@@ -1,0 +1,47 @@
+﻿{
+  "mediaList": {
+    "title": "Ringtone Mix",
+    "items": [
+      {
+        "id": "9E5402EC-9291-4A71-BC10-832FDD544793",
+        "mediaType": "music",
+        "title": "Ring 1",
+        "mediaUri": "ms-appx:///Assets/Media/Ring01.wma",
+        "albumArtUri": "ms-appx:///Assets/Media/Ring01.jpg",
+        "albumArtAttribution": "Autumn Yellow Leaves | George Hodan"
+      },
+      {
+        "id": "557F5981-DDD0-4426-9CF0-D2A47D7F82B1",
+        "mediaType": "music",
+        "title": "Ring 2",
+        "mediaUri": "ms-appx:///Assets/Media/Ring02.wma",
+        "albumArtUri": "ms-appx:///Assets/Media/Ring02.jpg",
+        "albumArtAttribution": "Abstract Background | Larisa Koshkina"
+      },
+      {
+        "id": "2DD7732C-C5BA-46BB-AC0C-F4D3FD82FF80",
+        "mediaType": "music",
+        "title": "Ring 3 Part 1",
+        "mediaUri": "ms-appx:///Assets/Media/Ring03Part1.wma",
+        "albumArtUri": "ms-appx:///Assets/Media/Ring03Part1.jpg",
+        "albumArtAttribution": "Snow Covered Mountains | Petr Kratochvil"
+      },
+      {
+        "id": "24A03815-4A97-485B-A47C-B48C9B136317",
+        "mediaType": "music",
+        "title": "Ring 3 Part 2",
+        "mediaUri": "ms-appx:///Assets/Media/Ring03Part2.wma",
+        "albumArtUri": "ms-appx:///Assets/Media/Ring03Part2.jpg",
+        "albumArtAttribution": "Tropical Beach With Palm Trees | Petr Kratochvil"
+      },
+      {
+        "id": "C83B5D9C-B550-43DF-8A5B-9986ED2AE073",
+        "mediaType": "music",
+        "title": "Ring 3 Part 3",
+        "mediaUri": "ms-appx:///Assets/Media/Ring03Part3.wma",
+        "albumArtUri": "ms-appx:///Assets/Media/Ring03Part3.jpg",
+        "albumArtAttribution": "Alyssum Background | Anne Lowe"
+      }
+    ]
+  }
+}

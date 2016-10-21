@@ -100,6 +100,10 @@ There are two kinds of **LiveTiles**, Primary and Secondary tiles. Primary tiles
   - Remove by Group
   - Clear All
 
+## See also
+
+[Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)  
+[Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)  
 
 ## System requirements
 

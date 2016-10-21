@@ -10,207 +10,224 @@
 //*********************************************************
 
 using System;
-using System.Collections.Generic;
+using System.Linq;
+using Windows.Foundation;
+using Windows.UI.Core;
+using Windows.UI.Input.Inking;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Input.Inking;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.UI.Text.Core;
-using Windows.Globalization;
-using SDKTemplate;
+using Windows.UI.Xaml.Shapes;
 
-namespace SimpleInk
+namespace SDKTemplate
 {
+    public class CalligraphicPen : InkToolbarCustomPen
+    {
+        public CalligraphicPen()
+        {
+        }
+
+        protected override InkDrawingAttributes CreateInkDrawingAttributesCore(Brush brush, double strokeWidth)
+        {
+
+            InkDrawingAttributes inkDrawingAttributes = new InkDrawingAttributes();
+            inkDrawingAttributes.PenTip = PenTipShape.Circle;
+            inkDrawingAttributes.IgnorePressure = false;
+            SolidColorBrush solidColorBrush = (SolidColorBrush)brush;
+
+            if (solidColorBrush != null)
+            {
+                inkDrawingAttributes.Color = solidColorBrush.Color;
+            }
+
+            inkDrawingAttributes.Size = new Size(strokeWidth, 2.0f * strokeWidth);
+            inkDrawingAttributes.PenTipTransform = System.Numerics.Matrix3x2.CreateRotation(45.0f);
+
+            return inkDrawingAttributes;
+        }
+    }
+
     /// <summary>
-    /// This page shows the code to do ink recognition
+    /// This page shows the code to configure the InkToolbar.
     /// </summary>
     public sealed partial class Scenario2 : Page
     {
-        const string InstallRecoText = "You can install handwriting recognition engines for other languages by this: go to Settings -> Time & language -> Region & language, choose a language, and click Options, then click Download under Handwriting";
+        private Polyline lasso;
+        private Rect boundingRect;
+        private MainPage rootPage = MainPage.Current;
+        private bool isBoundRect;
 
-        private MainPage rootPage;
-        InkRecognizerContainer inkRecognizerContainer = null;
-        private IReadOnlyList<InkRecognizer> recoView = null;
-        private Language previousInputLanguage = null;
-        private CoreTextServicesManager textServiceManager = null;
-        private ToolTip recoTooltip;
+        Symbol CalligraphyPen = (Symbol)0xEDFB;
+        Symbol LassoSelect = (Symbol)0xEF20;
+        Symbol TouchWriting = (Symbol)0xED5F;
 
         public Scenario2()
         {
             this.InitializeComponent();
 
-            // Initialize drawing attributes. These are used in inking mode.
-            InkDrawingAttributes drawingAttributes = new InkDrawingAttributes();
-            drawingAttributes.Color = Windows.UI.Colors.Red;
-            double penSize = 4;
-            drawingAttributes.Size = new Windows.Foundation.Size(penSize, penSize);
-            drawingAttributes.IgnorePressure = false;
-            drawingAttributes.FitToCurve = true;
-
-            // Show the available recognizers
-            inkRecognizerContainer = new InkRecognizerContainer();
-            recoView = inkRecognizerContainer.GetRecognizers();
-            if (recoView.Count > 0)
-            {
-                foreach (InkRecognizer recognizer in recoView)
-                {
-                    RecoName.Items.Add(recognizer.Name);
-                }
-            }
-            else
-            {
-                RecoName.IsEnabled = false;
-                RecoName.Items.Add("No Recognizer Available");
-            }
-            RecoName.SelectedIndex = 0;
-
-            // Set the text services so we can query when language changes
-            textServiceManager = CoreTextServicesManager.GetForCurrentView();
-            textServiceManager.InputLanguageChanged += TextServiceManager_InputLanguageChanged;
-
-            SetDefaultRecognizerByCurrentInputMethodLanguageTag();
-
-            // Initialize reco tooltip
-            recoTooltip = new ToolTip();
-            recoTooltip.Content = InstallRecoText;
-            ToolTipService.SetToolTip(InstallReco, recoTooltip);
-
             // Initialize the InkCanvas
-            inkCanvas.InkPresenter.UpdateDefaultDrawingAttributes(drawingAttributes);
-            inkCanvas.InkPresenter.InputDeviceTypes = Windows.UI.Core.CoreInputDeviceTypes.Mouse | Windows.UI.Core.CoreInputDeviceTypes.Pen | Windows.UI.Core.CoreInputDeviceTypes.Touch;
+            inkCanvas.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Mouse | CoreInputDeviceTypes.Pen;
 
-            this.Unloaded += Scenario2_Unloaded;
-            this.SizeChanged += Scenario2_SizeChanged;
+            // Handlers to clear the selection when inking or erasing is detected
+            inkCanvas.InkPresenter.StrokeInput.StrokeStarted += StrokeInput_StrokeStarted;
+            inkCanvas.InkPresenter.StrokesErased += InkPresenter_StrokesErased;
         }
 
-        private void Scenario2_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void StrokeInput_StrokeStarted(InkStrokeInput sender, PointerEventArgs args)
         {
-            SetCanvasSize();
+            ClearSelection();
+            inkCanvas.InkPresenter.UnprocessedInput.PointerPressed -= UnprocessedInput_PointerPressed;
+            inkCanvas.InkPresenter.UnprocessedInput.PointerMoved -= UnprocessedInput_PointerMoved;
+            inkCanvas.InkPresenter.UnprocessedInput.PointerReleased -= UnprocessedInput_PointerReleased;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void InkPresenter_StrokesErased(InkPresenter sender, InkStrokesErasedEventArgs args)
         {
-            rootPage = MainPage.Current;
-            SetCanvasSize();
+            ClearSelection();
+            inkCanvas.InkPresenter.UnprocessedInput.PointerPressed -= UnprocessedInput_PointerPressed;
+            inkCanvas.InkPresenter.UnprocessedInput.PointerMoved -= UnprocessedInput_PointerMoved;
+            inkCanvas.InkPresenter.UnprocessedInput.PointerReleased -= UnprocessedInput_PointerReleased;
         }
 
-        private void Scenario2_Unloaded(object sender, RoutedEventArgs e)
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            recoTooltip.IsOpen = false;
+            HelperFunctions.UpdateCanvasSize(RootGrid, outputGrid, inkCanvas);
         }
 
-        private void SetCanvasSize()
+        // This is the recommended way to implement inking with touch on Windows.
+        // Since touch is reserved for navigation (pan, zoom, rotate, etc.),
+        // if you’d like your app to have inking with touch, it is recommended
+        // that it is enabled via CustomToggle like in this scenario, with the
+        // same icon and tooltip.
+        private void Toggle_Custom(object sender, RoutedEventArgs e)
         {
-            Output.Width = Window.Current.Bounds.Width;
-            Output.Height = Window.Current.Bounds.Height / 2;
-            inkCanvas.Width = Window.Current.Bounds.Width;
-            inkCanvas.Height = Window.Current.Bounds.Height / 2;
-        }
-
-        void OnRecognizerChanged(object sender, RoutedEventArgs e)
-        {
-            string selectedValue = (string)RecoName.SelectedValue;
-            SetRecognizerByName(selectedValue);
-        }
-
-        async void OnRecognizeAsync(object sender, RoutedEventArgs e)
-        {
-            IReadOnlyList<InkStroke> currentStrokes = inkCanvas.InkPresenter.StrokeContainer.GetStrokes();
-            if (currentStrokes.Count > 0)
+            if (toggleButton.IsChecked == true)
             {
-                RecognizeBtn.IsEnabled = false;
-                ClearBtn.IsEnabled = false;
-                RecoName.IsEnabled = false;
-
-                var recognitionResults = await inkRecognizerContainer.RecognizeAsync(inkCanvas.InkPresenter.StrokeContainer, InkRecognitionTarget.All);
-
-                if (recognitionResults.Count > 0)
-                {
-                    // Display recognition result
-                    string str = "Recognition result:";
-                    foreach (var r in recognitionResults)
-                    {
-                        str += " " + r.GetTextCandidates()[0];
-                    }
-                    rootPage.NotifyUser(str, NotifyType.StatusMessage);
-                }
-                else
-                {
-                    rootPage.NotifyUser("No text recognized.", NotifyType.StatusMessage);
-                }
-
-                RecognizeBtn.IsEnabled = true;
-                ClearBtn.IsEnabled = true;
-                RecoName.IsEnabled = true;
+                inkCanvas.InkPresenter.InputDeviceTypes |= CoreInputDeviceTypes.Touch;
             }
             else
             {
-                rootPage.NotifyUser("Must first write something.", NotifyType.ErrorMessage);
+                inkCanvas.InkPresenter.InputDeviceTypes &= ~CoreInputDeviceTypes.Touch;
             }
         }
 
-        void OnClear(object sender, RoutedEventArgs e)
+        private void UnprocessedInput_PointerPressed(InkUnprocessedInput sender, PointerEventArgs args)
         {
-            inkCanvas.InkPresenter.StrokeContainer.Clear();
-            rootPage.NotifyUser("Cleared Canvas.", NotifyType.StatusMessage);
-        }
-
-        bool SetRecognizerByName(string recognizerName)
-        {
-            bool recognizerFound = false;
-
-            foreach (InkRecognizer reco in recoView)
+            lasso = new Polyline()
             {
-                if (recognizerName == reco.Name)
-                {
-                    inkRecognizerContainer.SetDefaultRecognizer(reco);
-                    recognizerFound = true;
-                    break;
-                }
-            }
+                Stroke = new SolidColorBrush(Windows.UI.Colors.Blue),
+                StrokeThickness = 1,
+                StrokeDashArray = new DoubleCollection() { 5, 2 },
+            };
 
-            if (!recognizerFound && rootPage != null)
+            lasso.Points.Add(args.CurrentPoint.RawPosition);
+            selectionCanvas.Children.Add(lasso);
+            isBoundRect = true;
+        }
+
+        private void UnprocessedInput_PointerMoved(InkUnprocessedInput sender, PointerEventArgs args)
+        {
+            if (isBoundRect)
             {
-                rootPage.NotifyUser("Could not find target recognizer.", NotifyType.ErrorMessage);
+                lasso.Points.Add(args.CurrentPoint.RawPosition);
             }
-
-            return recognizerFound;
         }
 
-        private void TextServiceManager_InputLanguageChanged(CoreTextServicesManager sender, object args)
+        private void UnprocessedInput_PointerReleased(InkUnprocessedInput sender, PointerEventArgs args)
         {
-            SetDefaultRecognizerByCurrentInputMethodLanguageTag();
+            lasso.Points.Add(args.CurrentPoint.RawPosition);
+
+            boundingRect = inkCanvas.InkPresenter.StrokeContainer.SelectWithPolyLine(lasso.Points);
+            isBoundRect = false;
+            DrawBoundingRect();
         }
 
-        private void SetDefaultRecognizerByCurrentInputMethodLanguageTag()
+        private void DrawBoundingRect()
         {
-            // Query recognizer name based on current input method language tag (bcp47 tag)
-            Language currentInputLanguage = textServiceManager.InputLanguage;
+            selectionCanvas.Children.Clear();
 
-            if (currentInputLanguage != previousInputLanguage)
+            if (boundingRect.Width <= 0 || boundingRect.Height <= 0)
             {
-                // try query with the full BCP47 name
-                string recognizerName = RecognizerHelper.LanguageTagToRecognizerName(currentInputLanguage.LanguageTag);
+                return;
+            }
 
-                if (recognizerName != string.Empty)
-                {
-                    for (int index = 0; index < recoView.Count; index++)
-                    {
-                        if (recoView[index].Name == recognizerName)
-                        {
-                            inkRecognizerContainer.SetDefaultRecognizer(recoView[index]);
-                            RecoName.SelectedIndex = index;
-                            previousInputLanguage = currentInputLanguage;
-                            break;
-                        }
-                    }
-                }
+            var rectangle = new Rectangle()
+            {
+                Stroke = new SolidColorBrush(Windows.UI.Colors.Blue),
+                StrokeThickness = 1,
+                StrokeDashArray = new DoubleCollection() { 5, 2 },
+                Width = boundingRect.Width,
+                Height = boundingRect.Height
+            };
+
+            Canvas.SetLeft(rectangle, boundingRect.X);
+            Canvas.SetTop(rectangle, boundingRect.Y);
+
+            selectionCanvas.Children.Add(rectangle);
+        }
+
+        private void ToolButton_Lasso(object sender, RoutedEventArgs e)
+        {
+            // By default, pen barrel button or right mouse button is processed for inking
+            // Set the configuration to instead allow processing these input on the UI thread
+            inkCanvas.InkPresenter.InputProcessingConfiguration.RightDragAction = InkInputRightDragAction.LeaveUnprocessed;
+
+            inkCanvas.InkPresenter.UnprocessedInput.PointerPressed += UnprocessedInput_PointerPressed;
+            inkCanvas.InkPresenter.UnprocessedInput.PointerMoved += UnprocessedInput_PointerMoved;
+            inkCanvas.InkPresenter.UnprocessedInput.PointerReleased += UnprocessedInput_PointerReleased;
+        }
+
+        private void ClearDrawnBoundingRect()
+        {
+            if (selectionCanvas.Children.Count > 0)
+            {
+                selectionCanvas.Children.Clear();
+                boundingRect = Rect.Empty;
             }
         }
 
-        private void RecoButton_Click(object sender, RoutedEventArgs e)
+        private void OnCopy(object sender, RoutedEventArgs e)
         {
-            recoTooltip.IsOpen = !recoTooltip.IsOpen;
+            inkCanvas.InkPresenter.StrokeContainer.CopySelectedToClipboard();
+        }
+
+        private void OnCut(object sender, RoutedEventArgs e)
+        {
+            inkCanvas.InkPresenter.StrokeContainer.CopySelectedToClipboard();
+            inkCanvas.InkPresenter.StrokeContainer.DeleteSelected();
+            ClearDrawnBoundingRect();
+        }
+
+        private void OnPaste(object sender, RoutedEventArgs e)
+        {
+            if (inkCanvas.InkPresenter.StrokeContainer.CanPasteFromClipboard())
+            {
+                inkCanvas.InkPresenter.StrokeContainer.PasteFromClipboard(new Point((scrollViewer.HorizontalOffset + 10) / scrollViewer.ZoomFactor, (scrollViewer.VerticalOffset + 10) / scrollViewer.ZoomFactor));
+            }
+            else
+            {
+                rootPage.NotifyUser("Cannot paste from clipboard.", NotifyType.ErrorMessage);
+            }
+        }
+
+        private void ClearSelection()
+        {
+            var strokes = inkCanvas.InkPresenter.StrokeContainer.GetStrokes();
+            foreach (var stroke in strokes)
+            {
+                stroke.Selected = false;
+            }
+            ClearDrawnBoundingRect();
+        }
+
+        private void CurrentToolChanged(InkToolbar sender, object args)
+        {
+            bool enabled = sender.ActiveTool.Equals(toolButtonLasso);
+
+            ButtonCut.IsEnabled = enabled;
+            ButtonCopy.IsEnabled = enabled;
+            ButtonPaste.IsEnabled = enabled;
         }
     }
 }

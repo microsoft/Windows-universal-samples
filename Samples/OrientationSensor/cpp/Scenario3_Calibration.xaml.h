@@ -33,15 +33,14 @@ namespace SDKTemplate
         Scenario3_Calibration();
 
     protected:
-        virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
         virtual void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
+
+        void OnHighAccuracy();
+        void OnApproximateAccuracy();
+        void OnUnreliableAccuracy();
 
     private:
         SDKTemplate::MainPage^ rootPage;
         SDKTemplate::CalibrationBar^ calibrationBar;
-
-        void OnHighAccuracy(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-        void OnApproximateAccuracy(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-        void OnUnreliableAccuracy(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
     };
 }

@@ -9,178 +9,251 @@
 //
 //*********************************************************
 
+using System;
+using Windows.Foundation;
+using Windows.Storage;
+using Windows.Storage.Streams;
+using Windows.UI.Core;
+using Windows.UI.Input.Inking;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Input.Inking;
-using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
-using Windows.UI.Xaml.Shapes;
-using Windows.Foundation;
-using System.Linq;
-using Windows.UI.Xaml.Media;
 
-namespace SimpleInk
+namespace SDKTemplate
 {
     /// <summary>
-    /// This page shows the code to do ink selection and cut/copy/paste
+    /// This page demonstrates the usage of the InkPresenter APIs. It shows the following functionality:
+    /// - Load/Save ink files
+    /// - Usage of drawing attributes
+    /// - Input type switching to enable/disable touch
+    /// - Pen tip transform, highlighter, pencil, and different pen colors and sizes
     /// </summary>
     public sealed partial class Scenario3 : Page
     {
-        private Polyline lasso;
-        private Rect boundingRect;
+        private MainPage rootPage = MainPage.Current;
 
-        private MainPage rootPage;
+        const int minPenSize = 2;
+        const int penSizeIncrement = 2;
+        int penSize;
 
         public Scenario3()
         {
             this.InitializeComponent();
 
-            // Initialize the InkCanvas
-            inkCanvas.InkPresenter.InputDeviceTypes = Windows.UI.Core.CoreInputDeviceTypes.Mouse | Windows.UI.Core.CoreInputDeviceTypes.Pen | Windows.UI.Core.CoreInputDeviceTypes.Touch;
+            penSize = minPenSize + penSizeIncrement * PenThickness.SelectedIndex;
 
-            // By default, pen barrel button or right mouse button is processed for inking
-            // Set the configuration to instead allow processing these input on the UI thread
-            inkCanvas.InkPresenter.InputProcessingConfiguration.RightDragAction = InkInputRightDragAction.LeaveUnprocessed;
+            InkDrawingAttributes drawingAttributes = new InkDrawingAttributes();
+            drawingAttributes.Color = Windows.UI.Colors.Red;
+            drawingAttributes.Size = new Size(penSize, penSize);
+            drawingAttributes.IgnorePressure = false;
+            drawingAttributes.FitToCurve = true;
 
-            inkCanvas.InkPresenter.UnprocessedInput.PointerPressed += UnprocessedInput_PointerPressed;
-            inkCanvas.InkPresenter.UnprocessedInput.PointerMoved += UnprocessedInput_PointerMoved;
-            inkCanvas.InkPresenter.UnprocessedInput.PointerReleased += UnprocessedInput_PointerReleased;
-
-            // Handlers to clear the selection when inking or erasing is detected
-            inkCanvas.InkPresenter.StrokeInput.StrokeStarted += StrokeInput_StrokeStarted;
+            inkCanvas.InkPresenter.UpdateDefaultDrawingAttributes(drawingAttributes);
+            inkCanvas.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Mouse | CoreInputDeviceTypes.Pen;
+            inkCanvas.InkPresenter.StrokesCollected += InkPresenter_StrokesCollected;
             inkCanvas.InkPresenter.StrokesErased += InkPresenter_StrokesErased;
-
-            SizeChanged += Scenario3_SizeChanged;
         }
 
-        private void StrokeInput_StrokeStarted(InkStrokeInput sender, Windows.UI.Core.PointerEventArgs args)
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            ClearSelection();
+            HelperFunctions.UpdateCanvasSize(RootGrid, outputGrid, inkCanvas);
         }
+
 
         private void InkPresenter_StrokesErased(InkPresenter sender, InkStrokesErasedEventArgs args)
         {
-            ClearSelection();
+            rootPage.NotifyUser(args.Strokes.Count + " stroke(s) erased!", NotifyType.StatusMessage);
         }
 
-        private void UnprocessedInput_PointerPressed(InkUnprocessedInput sender, Windows.UI.Core.PointerEventArgs args)
+        private void InkPresenter_StrokesCollected(InkPresenter sender, InkStrokesCollectedEventArgs args)
         {
-            lasso = new Polyline()
+            rootPage.NotifyUser(args.Strokes.Count + " stroke(s) collected!", NotifyType.StatusMessage);
+        }
+
+        void OnPenColorChanged(object sender, RoutedEventArgs e)
+        {
+            if (inkCanvas != null)
             {
-                Stroke = new SolidColorBrush(Windows.UI.Colors.Blue),
-                StrokeThickness = 1,
-                StrokeDashArray = new DoubleCollection() {5, 2},
-            };
+                InkDrawingAttributes drawingAttributes = inkCanvas.InkPresenter.CopyDefaultDrawingAttributes();
 
-            lasso.Points.Add(args.CurrentPoint.RawPosition);
+                // Use button's background to set new pen's color
+                var btnSender = sender as Button;
+                var brush = btnSender.Background as Windows.UI.Xaml.Media.SolidColorBrush;
 
-            selectionCanvas.Children.Add(lasso);
-        }
-
-        private void UnprocessedInput_PointerMoved(InkUnprocessedInput sender, Windows.UI.Core.PointerEventArgs args)
-        {
-            lasso.Points.Add(args.CurrentPoint.RawPosition);
-        }
-
-        private void UnprocessedInput_PointerReleased(InkUnprocessedInput sender, Windows.UI.Core.PointerEventArgs args)
-        {
-            lasso.Points.Add(args.CurrentPoint.RawPosition);
-
-            boundingRect = inkCanvas.InkPresenter.StrokeContainer.SelectWithPolyLine(lasso.Points);
-
-            DrawBoundingRect();
-        }
-
-        private void DrawBoundingRect()
-        {
-            selectionCanvas.Children.Clear();
-
-            if ((boundingRect.Width == 0) || (boundingRect.Height == 0) || boundingRect.IsEmpty)
-            {
-                return;
-            }
-
-            var rectangle = new Rectangle()
-            {
-                Stroke = new SolidColorBrush(Windows.UI.Colors.Blue),
-                StrokeThickness = 1,
-                StrokeDashArray = new DoubleCollection() {5, 2},
-                Width = boundingRect.Width,
-                Height = boundingRect.Height
-            };
-
-            Canvas.SetLeft(rectangle, boundingRect.X);
-            Canvas.SetTop(rectangle, boundingRect.Y);
-
-            selectionCanvas.Children.Add(rectangle);
-        }
-
-        private void ClearDrawnBoundingRect()
-        {
-            if (selectionCanvas.Children.Any())
-            {
-                selectionCanvas.Children.Clear();
-                boundingRect = Rect.Empty;
+                drawingAttributes.Color = brush.Color;
+                inkCanvas.InkPresenter.UpdateDefaultDrawingAttributes(drawingAttributes);
             }
         }
 
-        private void ClearSelection()
+        void OnPenThicknessChanged(object sender, RoutedEventArgs e)
         {
-            var strokes = inkCanvas.InkPresenter.StrokeContainer.GetStrokes();
-            foreach (var stroke in strokes)
+            if (inkCanvas != null)
             {
-                stroke.Selected = false;
+                InkDrawingAttributes drawingAttributes = inkCanvas.InkPresenter.CopyDefaultDrawingAttributes();
+                penSize = minPenSize + penSizeIncrement * PenThickness.SelectedIndex;
+                string value = ((ComboBoxItem)PenType.SelectedItem).Content.ToString();
+                if (value == "Highlighter" || value == "Calligraphy")
+                {
+                    // Make the pen tip rectangular for highlighter and calligraphy pen
+                    drawingAttributes.Size = new Size(penSize, penSize * 2);
+                }
+                else
+                {
+                    // Otherwise, use a square pen tim.
+                    drawingAttributes.Size = new Size(penSize, penSize);
+                }
+                inkCanvas.InkPresenter.UpdateDefaultDrawingAttributes(drawingAttributes);
             }
-            ClearDrawnBoundingRect();
         }
 
-        private void Scenario3_SizeChanged(object sender, SizeChangedEventArgs e)
+        void OnPenTypeChanged(object sender, RoutedEventArgs e)
         {
-            SetCanvasSize();
+            if (inkCanvas != null)
+            {
+                InkDrawingAttributes drawingAttributes = inkCanvas.InkPresenter.CopyDefaultDrawingAttributes();
+                string value = ((ComboBoxItem)PenType.SelectedItem).Content.ToString();
+
+                if (value == "Ballpoint")
+                {
+                    if (drawingAttributes.Kind != InkDrawingAttributesKind.Default)
+                    {
+                        var newDrawingAttributes = new InkDrawingAttributes();
+                        newDrawingAttributes.Color = drawingAttributes.Color;
+                        drawingAttributes = newDrawingAttributes;
+                    }
+                    drawingAttributes.Size = new Size(penSize, penSize);
+                    drawingAttributes.PenTip = PenTipShape.Circle;
+                    drawingAttributes.DrawAsHighlighter = false;
+                    drawingAttributes.PenTipTransform = System.Numerics.Matrix3x2.Identity;
+                }
+                else if (value == "Highlighter")
+                {
+                    if (drawingAttributes.Kind != InkDrawingAttributesKind.Default)
+                    {
+                        var newDrawingAttributes = new InkDrawingAttributes();
+                        newDrawingAttributes.Color = drawingAttributes.Color;
+                        drawingAttributes = newDrawingAttributes;
+                    }
+                    // Make the pen rectangular for highlighter
+                    drawingAttributes.Size = new Size(penSize, penSize * 2);
+                    drawingAttributes.PenTip = PenTipShape.Rectangle;
+                    drawingAttributes.DrawAsHighlighter = true;
+                    drawingAttributes.PenTipTransform = System.Numerics.Matrix3x2.Identity;
+                }
+                else if (value == "Calligraphy")
+                {
+                    if (drawingAttributes.Kind != InkDrawingAttributesKind.Default)
+                    {
+                        var newDrawingAttributes = new InkDrawingAttributes();
+                        newDrawingAttributes.Color = drawingAttributes.Color;
+                        drawingAttributes = newDrawingAttributes;
+                    }
+                    drawingAttributes.Size = new Size(penSize, penSize * 2);
+                    drawingAttributes.PenTip = PenTipShape.Rectangle;
+                    drawingAttributes.DrawAsHighlighter = false;
+
+                    // Set a 45 degree rotation on the pen tip
+                    double radians = 45.0 * Math.PI / 180;
+                    drawingAttributes.PenTipTransform = System.Numerics.Matrix3x2.CreateRotation((float)radians);
+                }
+                else if (value == "Windows.UI.Xaml.Controls.TextBlock")
+                {
+                    if (drawingAttributes.Kind != InkDrawingAttributesKind.Pencil)
+                    {
+                        var newDrawingAttributes = InkDrawingAttributes.CreateForPencil();
+                        newDrawingAttributes.Color = drawingAttributes.Color;
+                        newDrawingAttributes.Size = drawingAttributes.Size;
+                        drawingAttributes = newDrawingAttributes;
+                    }
+                }
+                inkCanvas.InkPresenter.UpdateDefaultDrawingAttributes(drawingAttributes);
+            }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            rootPage = MainPage.Current;
-            SetCanvasSize();
-        }
-
-        private void SetCanvasSize()
-        {
-            outputGrid.Width = RootGrid.ActualWidth;
-            outputGrid.Height = RootGrid.ActualHeight / 2;
-            inkCanvas.Width = RootGrid.ActualWidth;
-            inkCanvas.Height = RootGrid.ActualHeight / 2;
-        }
-
-        void OnClear(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        void OnClear(object sender, RoutedEventArgs e)
         {
             inkCanvas.InkPresenter.StrokeContainer.Clear();
-            ClearDrawnBoundingRect();
+            rootPage.NotifyUser("Cleared Canvas", NotifyType.StatusMessage);
         }
 
-        void OnCut(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        async void OnSaveAsync(object sender, RoutedEventArgs e)
         {
-            inkCanvas.InkPresenter.StrokeContainer.CopySelectedToClipboard();
-            inkCanvas.InkPresenter.StrokeContainer.DeleteSelected();
-            ClearDrawnBoundingRect();
-        }
-
-        void OnCopy(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            inkCanvas.InkPresenter.StrokeContainer.CopySelectedToClipboard();
-        }
-
-        void OnPaste(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            if (inkCanvas.InkPresenter.StrokeContainer.CanPasteFromClipboard())
+            // We don't want to save an empty file
+            if (inkCanvas.InkPresenter.StrokeContainer.GetStrokes().Count > 0)
             {
-                inkCanvas.InkPresenter.StrokeContainer.PasteFromClipboard(new Point((scrollViewer.HorizontalOffset + 10) / scrollViewer.ZoomFactor, (scrollViewer.VerticalOffset + 10) / scrollViewer.ZoomFactor));
+                var savePicker = new Windows.Storage.Pickers.FileSavePicker();
+                savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
+                savePicker.FileTypeChoices.Add("Gif with embedded ISF", new System.Collections.Generic.List<string> { ".gif" });
+
+                Windows.Storage.StorageFile file = await savePicker.PickSaveFileAsync();
+                if (null != file)
+                {
+                    try
+                    {
+                        using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.ReadWrite))
+                        {
+                            await inkCanvas.InkPresenter.StrokeContainer.SaveAsync(stream);
+                        }
+                        rootPage.NotifyUser(inkCanvas.InkPresenter.StrokeContainer.GetStrokes().Count + " stroke(s) saved!", NotifyType.StatusMessage);
+                    }
+                    catch (Exception ex)
+                    {
+                        rootPage.NotifyUser(ex.Message, NotifyType.ErrorMessage);
+                    }
+                }
             }
             else
             {
-                rootPage.NotifyUser("Cannot paste from clipboard.", NotifyType.ErrorMessage);
+                rootPage.NotifyUser("There is no ink to save.", NotifyType.ErrorMessage);
             }
+        }
+
+        async void OnLoadAsync(object sender, RoutedEventArgs e)
+        {
+            var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
+            openPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
+            openPicker.FileTypeFilter.Add(".gif");
+            openPicker.FileTypeFilter.Add(".isf");
+            Windows.Storage.StorageFile file = await openPicker.PickSingleFileAsync();
+            if (null != file)
+            {
+                using (var stream = await file.OpenSequentialReadAsync())
+                {
+                    try
+                    {
+                        await inkCanvas.InkPresenter.StrokeContainer.LoadAsync(stream);
+                    }
+                    catch (Exception ex)
+                    {
+                        rootPage.NotifyUser(ex.Message, NotifyType.ErrorMessage);
+                    }
+                }
+
+                rootPage.NotifyUser(inkCanvas.InkPresenter.StrokeContainer.GetStrokes().Count + " stroke(s) loaded!", NotifyType.StatusMessage);
+            }
+        }
+
+        private void TouchInkingCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            inkCanvas.InkPresenter.InputDeviceTypes |= CoreInputDeviceTypes.Touch;
+            rootPage.NotifyUser("Enable Touch Inking", NotifyType.StatusMessage);
+        }
+
+        private void TouchInkingCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            inkCanvas.InkPresenter.InputDeviceTypes &= ~CoreInputDeviceTypes.Touch;
+            rootPage.NotifyUser("Disable Touch Inking", NotifyType.StatusMessage);
+        }
+
+        private void ErasingModeCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            inkCanvas.InkPresenter.InputProcessingConfiguration.Mode = InkInputProcessingMode.Erasing;
+            rootPage.NotifyUser("Enable Erasing Mode", NotifyType.StatusMessage);
+        }
+
+        private void ErasingModeCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            inkCanvas.InkPresenter.InputProcessingConfiguration.Mode = InkInputProcessingMode.Inking;
+            rootPage.NotifyUser("Disable Erasing Mode", NotifyType.StatusMessage);
         }
     }
 }

@@ -22,6 +22,7 @@ namespace NavigationMenuSample
         NavMenuListView::NavMenuListView()
         {
             this->SelectionMode = ListViewSelectionMode::Single;
+            this->SingleSelectionFollowsFocus = false;
             this->IsItemClickEnabled = true;
             this->ItemClick += ref new ItemClickEventHandler(this, &NavMenuListView::ItemClickHandler);
 
@@ -41,9 +42,14 @@ namespace NavigationMenuSample
             {
                 _splitViewHost = dynamic_cast<SplitView^>(parent);
 
+
                 _splitViewHost->RegisterPropertyChangedCallback(
                     SplitView::IsPaneOpenProperty,
                     ref new DependencyPropertyChangedCallback(this, &NavMenuListView::IsOpenPanePropertyChangedCallback));
+
+                _splitViewHost->RegisterPropertyChangedCallback(
+                    SplitView::DisplayModeProperty,
+                    ref new DependencyPropertyChangedCallback(this, &NavMenuListView::DisplayModePropertyChangedCallback));
 
                 // Call once to ensure we're in the correct state
                 OnPaneToggled();
@@ -51,6 +57,11 @@ namespace NavigationMenuSample
         }
 
         void NavMenuListView::IsOpenPanePropertyChangedCallback(DependencyObject^ sender, DependencyProperty^ args)
+        {
+            OnPaneToggled();
+        }
+
+        void NavMenuListView::DisplayModePropertyChangedCallback(DependencyObject^ sender, DependencyProperty^ args)
         {
             OnPaneToggled();
         }
@@ -96,9 +107,9 @@ namespace NavigationMenuSample
             }
         }
 
-        /// <summary>
-        /// Custom keyboarding logic to enable movement via the arrow keys without triggering selection 
-        /// until a 'Space' or 'Enter' key is pressed. 
+	/// <summary>
+        /// Custom keyboarding logic to enable movement via the arrow keys without triggering selection
+        /// until a 'Space' or 'Enter' key is pressed.
         /// </summary>
         /// <param name="e"></param>
         void NavMenuListView::OnKeyDown(KeyRoutedEventArgs^ e)
@@ -117,52 +128,6 @@ namespace NavigationMenuSample
 
             case VirtualKey::Down:
                 this->TryMoveFocus(FocusNavigationDirection::Down);
-                e->Handled = true;
-                break;
-
-            case VirtualKey::Tab:
-                // If we're on the header item then this will be null and we'll still get the default behavior.
-                if (dynamic_cast<ListViewItem^>(focusedItem) != nullptr)
-                {
-                    auto currentItem = (ListViewItem^)focusedItem;
-                    bool onlastitem = currentItem != nullptr && IndexFromContainer(currentItem) == Items->Size - 1;
-                    bool onfirstitem = currentItem != nullptr && IndexFromContainer(currentItem) == 0;
-
-                    if (!shiftKeyDown)
-                    {
-                        if (onlastitem)
-                        {
-                            this->TryMoveFocus(FocusNavigationDirection::Next);
-                        }
-                        else
-                        {
-                            this->TryMoveFocus(FocusNavigationDirection::Down);
-                        }
-                    }
-                    else // Shift + Tab
-                    {
-                        if (onfirstitem)
-                        {
-                            this->TryMoveFocus(FocusNavigationDirection::Previous);
-                        }
-                        else
-                        {
-                            this->TryMoveFocus(FocusNavigationDirection::Up);
-                        }
-                    }
-                }
-                else if (dynamic_cast<Control^>(focusedItem) != nullptr)
-                {
-                    if (!shiftKeyDown)
-                    {
-                        this->TryMoveFocus(FocusNavigationDirection::Down);
-                    }
-                    else // Shift + Tab
-                    {
-                        this->TryMoveFocus(FocusNavigationDirection::Up);
-                    }
-                }
-
                 e->Handled = true;
                 break;
 
@@ -217,10 +182,10 @@ namespace NavigationMenuSample
                 _splitViewHost->DisplayMode == SplitViewDisplayMode::Overlay))
             {
                 _splitViewHost->IsPaneOpen = false;
-                if (item != nullptr)
-                {
-                    item->Focus(Windows::UI::Xaml::FocusState::Programmatic);
-                }
+            }
+            if (item != nullptr)
+            {
+                item->Focus(Windows::UI::Xaml::FocusState::Programmatic);
             }
         }
 

@@ -69,7 +69,7 @@
                 </Grid>
             </Grid>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" Grid.Row="1">
-                <Button Name="ExtractButton" Tapped="ExtractButton_Tapped">
+                <Button Name="ExtractButton" Tapped="ExtractButton_Tapped" Visibility="Collapsed">
                     <Viewbox MaxHeight="40" MaxWidth="40">
                         <SymbolIcon Symbol="Character"/>
                     </Viewbox>

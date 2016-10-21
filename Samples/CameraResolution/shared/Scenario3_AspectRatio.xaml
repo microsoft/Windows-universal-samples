@@ -35,10 +35,10 @@
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <ComboBox Name="PreviewSettings" PlaceholderText="Preview Settings" SelectionChanged="PreviewSettings_Changed" Width="auto"/>
                 <ComboBox Name="VideoSettings" PlaceholderText="Video Settings" SelectionChanged="VideoSettings_Changed" Width="auto"/>
-                <Button Name="VideoButton" Tapped="VideoButton_Tapped" IsEnabled="False">Record Video</Button>
+                <Button Name="VideoButton" Click="VideoButton_Click" IsEnabled="False">Record Video</Button>
             </StackPanel>
 
-            <Button Grid.Row="2" Content="Initialize Camera" Tapped="InitializeCameraButton_Tapped"
+            <Button Grid.Row="2" Content="Initialize Camera" Click="InitializeCameraButton_Click"
                     HorizontalAlignment="Center" VerticalAlignment="Center">
             </Button>
             <Viewbox Grid.Row="2">

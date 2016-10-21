@@ -21,11 +21,35 @@ This sample uses the following Direct2D effects:
 - [Contrast](http://msdn.microsoft.com/en-us/library/windows/desktop/dn890716)
 - [Highlights and Shadows](http://msdn.microsoft.com/en-us/library/windows/desktop/dn890773)
 
-**Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
- 
-To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
+## Sample project files
 
-To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
+The sample's project files fall into the following categories.
+
+### Sample-specific files
+The following files form the main educational content of the sample:
+
+- **DirectXPage.xaml/.cpp/.h/:** Implements a XAML-based UI to drive the photo pipeline. Hosts the DirectX content in a SwapChainPanel.
+- **App.xaml/.cpp/.h:** The app's main entry point.
+- **D2DPhotoAdjustmentRenderer.cpp/.h:** The core implementation of the Direct2D photo pipeline using effects.
+- **D2DPhotoAdjustmentProperties.h:** Defines the struct used for databinding effect properties with the UI.
+
+### DirectX SDK sample common files
+The following files provide common functionality needed by DirectX SDK samples:
+
+- **DeviceResources.cpp/.h:** Manages creation and lifetime of the core Direct3D and Direct2D device-dependent resources. Handles cases such as device lost and window size and orientation changes.
+- **DirectXHelper.h:** Common inline helper functions, including ThrowIfFailed which converts HRESULT-based APIs into an exception model.
+- **SampleOverlay.cpp/.h:** Renders the Windows SDK overlay badge on top of sample content.
+
+All DX SDK samples and the Visual Studio template DX project contain a version of these files. These common files demonstrate important best practices for DX UWP apps, and you are encouraged to use them in your own projects.
+
+### C++ UWP common files
+Variants of the following files are found in every UWP app written in C++:
+
+- Package.appxmanifest
+- pch.cpp/.h
+- D2DPhotoAdjustment.vcxproj
+- D2DPhotoAdjustment.vcxproj.filters
+- D2DPhotoAdjustment.sln
 
 ## Related topics
 

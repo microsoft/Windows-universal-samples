@@ -10,15 +10,15 @@
 //*********************************************************
 
 using SDKTemplate;
-using Windows.UI.Xaml.Controls;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.Security.Cryptography.Certificates;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http;
 using Windows.Web.Http.Filters;
-using Windows.Security.Cryptography.Certificates;
 
 namespace SDKSample.HttpClientSample
 {
@@ -107,6 +107,10 @@ namespace SDKSample.HttpClientSample
                 else if (ReadOnlyFromCacheRadio.IsChecked.Value)
                 {
                     filter.CacheControl.ReadBehavior = HttpCacheReadBehavior.OnlyFromCache;
+                }
+                else if (ReadNoCacheRadio.IsChecked.Value)
+                {
+                    filter.CacheControl.ReadBehavior = HttpCacheReadBehavior.NoCache;
                 }
 
                 if (WriteDefaultRadio.IsChecked.Value)

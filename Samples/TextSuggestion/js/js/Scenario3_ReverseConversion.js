@@ -6,10 +6,15 @@
     var reverseConversionGenerator = Windows.Data.Text.TextReverseConversionGenerator;
     var notifyText = "";
 
+    var GenerationMethod = {
+        ConvertBackAsync: 0,
+        GetPhonemesAsync: 1
+    };
+
     var page = WinJS.UI.Pages.define("/html/Scenario3_ReverseConversion.html", {
         ready: function (element, options) {
             document.getElementById("createGeneratorButton").addEventListener("click", createGenerator, false);
-            document.getElementById("executeButton").addEventListener("click", executePredicton, false);
+            document.getElementById("executeButton").addEventListener("click", executeReverseConversion, false);
         }
     });
 
@@ -50,9 +55,9 @@
         }
     }
 
-    function executePredicton() {
+    function executeReverseConversion() {
         // Clean up result column.
-        if (resultList.firstChild) {
+        while (resultList.firstChild) {
             resultList.removeChild(resultList.firstChild);
         }
 
@@ -63,20 +68,40 @@
             selectedItem = generationMethodSelector.selectedIndex;
 
         if (reverseConversionGenerator && !isNaN(selectedItem) && input) {
-            // Call the API with max candidate number we expect, and list the result when there are any candidates.
-            // Suspending the handling until the unsynchronous call finishes.
-            reverseConversionGenerator.convertBackAsync(input)
-              .done(function (result) {
-                  var node = document.createElement("li"),
-                      textnode = document.createTextNode(result);
-                  node.appendChild(textnode);
-                  resultList.appendChild(node);
 
-                  if (result.length === 0) {
-                      var notifyText = "\nNo candidates.";
-                      WinJS.log && WinJS.log(notifyText, "sample", "status");
-                  }
-              });
+            // Specify the candidate number to get.
+            if (selectedItem === GenerationMethod.ConvertBackAsync) {
+                // Call the reverse conversion API, and list the results.
+                reverseConversionGenerator.convertBackAsync(input)
+                  .done(function (result) {
+                      var node = document.createElement("li"),
+                          textnode = document.createTextNode(result);
+                      node.appendChild(textnode);
+                      resultList.appendChild(node);
+
+                      if (result.length === 0) {
+                          var notifyText = "\nNo results.";
+                          WinJS.log && WinJS.log(notifyText, "sample", "status");
+                      }
+                  });
+            }
+            else {
+                // Call the reverse conversion per phoneme API, and list the results.
+                reverseConversionGenerator.getPhonemesAsync(input)
+                .done(function (phonemes) {
+                    for (var index = 0; index < phonemes.length; index++) {
+                        var node = document.createElement("li"),
+                            textnode = document.createTextNode(phonemes[index].displayText + " -> " + phonemes[index].readingText);
+                        node.appendChild(textnode);
+                        resultList.appendChild(node);
+                    }
+
+                    if (phonemes.length === 0) {
+                        var notifyText = "\nNo results.";
+                        WinJS.log && WinJS.log(notifyText, "sample", "status");
+                    }
+                });
+            }
         }
     }
 })();

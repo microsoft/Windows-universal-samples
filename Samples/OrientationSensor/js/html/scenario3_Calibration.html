@@ -6,28 +6,39 @@ Copyright (c) Microsoft Corporation. All rights reserved
 
 <head>
     <title></title>
-    <link rel="stylesheet" href="/css/scenario3_Calibration.css">
     <script src="/js/scenario3_Calibration.js"></script>
     <script src="/js/calibrationBar.js"></script>
 </head>
 
 <body class="win-type-body">
-    <div>
-        <p>Simulates the current sensor accuracy. Setting to &apos;Unreliable&apos; will invoke the calibration bar until accuracy improves or 30 seconds passes. The calibration bar will not be shown again for at least 5 minutes, even when accuracy returns
-            to &apos;Unreliable&apos;.</p>
-        <p>Yaw accuracy: </p>
-        <input type="radio" id="accuracyHighRadio" name="accuracyRadio" class="win-radio">
-        <label for="accuracyHigh">High</label>
-        <br>
-        <input type="radio" id="accuracyApproximateRadio" name="accuracyRadio" class="win-radio">
-        <label for="accuracyApproximate">Approximate</label>
-        <br>
-        <input type="radio" id="accuracyUnreliableRadio" name="accuracyRadio" class="win-radio">
-        <label for="accuracyUnreliable">Unreliable</label>
-        <br>
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">Calibration</div>
+
+    <div id="enabledContent">
+        <p>
+            Simulates the current sensor accuracy. Setting to Unreliable will invoke the calibration bar until accuracy improves or 30 seconds passes. The calibration bar will not be shown again for at least 5 minutes, even when accuracy returns
+            to Unreliable.
+        </p>
+        <p>Yaw accuracy:</p>
+        <p>
+            <input type="radio" id="accuracyHighRadio" name="accuracyRadio" class="win-radio" checked>
+            <label for="accuracyHighRadio">High</label>
+            <br>
+            <input type="radio" id="accuracyApproximateRadio" name="accuracyRadio" class="win-radio">
+            <label for="accuracyApproximateRadio">Approximate</label>
+            <br>
+            <input type="radio" id="accuracyUnreliableRadio" name="accuracyRadio" class="win-radio">
+            <label for="accuracyUnreliableRadio">Unreliable</label>
+        </p>
+    </div>
+    <div id="disabledContent" style="display:none">
+        <p>
+            Yaw accuracy is reported only for absolute sensor reading types.
+        </p>
     </div>
     <div id="calibrationBarControl" data-win-control="CalibrationControls.CalibrationBar">
     </div>
+</div>
 </body>
 
 </html>

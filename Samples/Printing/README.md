@@ -1,5 +1,5 @@
-<!---
-  category: ControlsLayoutAndText
+﻿<!---
+  category: ControlsLayoutAndText Printing
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619984
 --->
 
@@ -13,20 +13,21 @@ The scenarios demonstrated in this sample include:
 - Customizing the print experience by changing how the printer settings are shown to the user
 - Using a custom print template to print a range of pages
 - Printing alternate content that is not part of the current document
+- Disabling print preview
+- Removing the Print button if the device does not support printing
 
-Changes from previous versions of the sample:
-- Removed charms-based printing scenario
-- Refactored BasePrintPage out of solution for increased clarity. Sample now uses PageToPrint class and PrintHelper class instead. 
-- Added exception handling to ShowPrintUIAsync calls
-- Updated app to Universal Windows Platform (UWP)
+## Related samples
+
+[Coloring Book app sample](https://github.com/Microsoft/Windows-appsample-coloringbook)  
 
 System requirements
 -------------------
 
-Client
+**Client:** Windows 10 build 14295
 
-Windows 10
+**Server:** Windows Server 2016 Technical Preview
 
+**Phone:** Windows 10 build 14295
 
 Build the sample
 ----------------

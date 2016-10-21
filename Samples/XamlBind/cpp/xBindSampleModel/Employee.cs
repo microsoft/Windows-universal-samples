@@ -75,5 +75,7 @@ namespace xBindSampleModel
         public String Title { get { return "Developer"; } }
 
         public string Name { get { return FirstName + " " + LastName; } }
+
+        public string FullName() { return FirstName + " " + LastName; }
     }
 }

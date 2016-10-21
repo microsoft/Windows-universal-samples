@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: NetworkingAndWebServices 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620610
 --->
@@ -50,7 +50,7 @@ For more information on network capabilities, see [How to set network capabiliti
 
 ### Samples
 
-[RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)
+[RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)  
 
 [AtomPub sample](http://go.microsoft.com/fwlink/p/?linkid=245061)
 

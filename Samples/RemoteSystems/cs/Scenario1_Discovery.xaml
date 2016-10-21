@@ -1,0 +1,103 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Discovery"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:SDKTemplate"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Discover all of your systems that are logged in with your MSA, or discover systems filtered by 
+                    discovery type, device type, status type or discover systems by their host names.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <GridView Header="Select Search Type">
+                        <RadioButton GroupName="SearchType" Content="All" x:Name="AllSearch" IsChecked="True"/>
+                        <RadioButton GroupName="SearchType" Content="With Filters" x:Name="FilterSearch"/>
+                        <RadioButton GroupName="SearchType" Content="By Host Address" x:Name="HostNameSearch"/>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                    <StackPanel x:Name="FilterOptions" Visibility="{Binding ElementName=FilterSearch, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <CheckBox Content="Filter by discovery type" x:Name="DiscoveryTypeOptions" Margin="0,10,0,0"/>
+                        <GridView Margin="20,0,0,0" Visibility="{Binding ElementName=DiscoveryTypeOptions, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <RadioButton GroupName="DiscoveryTypeFilters" Content="Any" IsChecked="True"/>
+                            <RadioButton GroupName="DiscoveryTypeFilters" Content="Proximal" x:Name="ProximalRadioButton"/>
+                            <RadioButton GroupName="DiscoveryTypeFilters" Content="Cloud" x:Name="CloudRadioButton"/>
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                        </GridView>
+                        <CheckBox Content="Filter by device type" x:Name="DeviceTypeOptions" Margin="0,10,0,0"/>
+                        <GridView Margin="20,0,0,0" Visibility="{Binding ElementName=DeviceTypeOptions, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <CheckBox Content="Desktop" x:Name="DesktopCheckBox"/>
+                            <CheckBox Content="Holographic" x:Name="HolographicCheckBox"/>
+                            <CheckBox Content="Hub" x:Name="HubCheckBox"/>
+                            <CheckBox Content="Phone" x:Name="PhoneCheckBox"/>
+                            <CheckBox Content="Xbox" x:Name="XboxCheckBox"/>
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                        </GridView>
+                        <CheckBox Content="Filter by status" x:Name="StatusTypeOptions" Margin="0,10,0,0"/>
+                        <GridView Margin="20,0,0,0" Visibility="{Binding ElementName=StatusTypeOptions, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <RadioButton GroupName="StatusTypeFilters" Content="Any" IsChecked="True"/>
+                            <RadioButton GroupName="StatusTypeFilters" Content="Available" x:Name="AvailableRadioButton"/>
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                        </GridView>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" x:Name="HostNameInput" Visibility="{Binding ElementName=HostNameSearch, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <TextBlock Text="Enter host name:"/>
+                        <TextBox x:Name="HostNameTextBox" Width="160" Margin="5,0,0,0"/>
+                    </StackPanel>
+                    <Button Content="Search for Devices" x:Name="SearchButton" Click="Search_Clicked" Margin="0,10,0,0"/>
+                    <ListBox Width="160" ItemsSource="{Binding DeviceList}" Margin="5" x:Name="DeviceListBox" HorizontalAlignment="Left">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DisplayName}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

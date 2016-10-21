@@ -1,0 +1,150 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario7"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.Resources>
+                <Style x:Key="InkRulerRepositionButtonStyle" TargetType="Button">
+                    <Setter Property="MinWidth" Value="{ThemeResource InkToolbarButtonWidth}"/>
+                    <Setter Property="MinHeight" Value="{ThemeResource InkToolbarButtonHeight}"/>
+                    <Setter Property="MaxWidth" Value="{ThemeResource InkToolbarButtonWidth}"/>
+                    <Setter Property="MaxHeight" Value="{ThemeResource InkToolbarButtonHeight}"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Background" Value="{ThemeResource InkToolbarButtonBackgroundThemeBrush}"/>
+                    <Setter Property="Foreground" Value="{ThemeResource InkToolbarButtonForegroundThemeBrush}"/>
+                </Style>
+                <Style x:Key="InkRulerRepositionButton" TargetType="Button" BasedOn="{StaticResource InkRulerRepositionButtonStyle}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Grid x:Name="RootElement" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal" />
+                                            <VisualState x:Name="PointerOver">
+                                                <VisualState.Setters>
+                                                    <Setter Target="ContentGrid.Background" Value="{ThemeResource InkToolbarButtonHoverBackgroundThemeBrush}"/>
+                                                    <Setter Target="Content.Stroke" Value="{ThemeResource InkToolbarButtonHoverForegroundThemeBrush}"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="Pressed">
+                                                <VisualState.Setters>
+                                                    <Setter Target="ContentGrid.Background" Value="{ThemeResource InkToolbarButtonPressedBackgroundThemeBrush}"/>
+                                                    <Setter Target="Content.Stroke" Value="{ThemeResource InkToolbarButtonPressedForegroundThemeBrush}"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="Disabled">
+                                                <VisualState.Setters>
+                                                    <Setter Target="ContentGrid.Opacity" Value="0.5"/>
+                                                    <Setter Target="ContentViewOutline.Opacity" Value="0.5"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Grid x:Name="ContentGrid"
+                                          Width="{ThemeResource InkToolbarButtonWidth}"
+                                          Height="{ThemeResource InkToolbarButtonHeight}"
+                                          Margin="0" HorizontalAlignment="Center">
+                                        <Path x:Name="Content" Width="31" Height="31"
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                                            Stroke="{ThemeResource InkToolbarButtonForegroundThemeBrush}">
+                                            <Path.Data>
+                                                <GeometryGroup>
+                                                    <LineGeometry StartPoint="6,16" EndPoint="24,16"/>
+                                                    <LineGeometry StartPoint="6,16" EndPoint="6,30"/>
+                                                    <LineGeometry StartPoint="6,30" EndPoint="24,30"/>
+                                                    <LineGeometry StartPoint="10,16" EndPoint="10,19"/>
+                                                    <LineGeometry StartPoint="14,16" EndPoint="14,20"/>
+                                                    <LineGeometry StartPoint="18,16" EndPoint="18,19"/>
+                                                    <LineGeometry StartPoint="22,16" EndPoint="22,20"/>
+                                                </GeometryGroup>
+                                            </Path.Data>
+                                        </Path>
+
+                                        <Path x:Name="ContentViewOutline" Width="31" Height="31"
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                                            Stroke="Turquoise">
+                                            <Path.Data>
+                                                <GeometryGroup>
+                                                    <LineGeometry StartPoint="16,12" EndPoint="6,2"/>
+                                                    <LineGeometry StartPoint="6,2" EndPoint="6,7"/>
+                                                    <LineGeometry StartPoint="6,2" EndPoint="11,2"/>
+                                                </GeometryGroup>
+                                            </Path.Data>
+                                        </Path>
+                                    </Grid>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    This scenario we demonstrates how to work with InkPresenterRuler in a ScrollViewer and how to reposition the InkPresenterRuler on demand.
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="{ThemeResource SystemChromeMediumColor}">
+                <InkToolbar x:Name="InkToolbar" HorizontalAlignment="Left" TargetInkCanvas="{x:Bind InkCanvas}"
+                            IsRulerButtonCheckedChanged="{x:Bind InkToolbar_IsRulerButtonCheckedChanged}"/>
+                <Line Y1="0"
+                      Y2="{ThemeResource InkToolbarButtonHeight}"
+                      HorizontalAlignment="Stretch"
+                      Width="2"
+                      Height="{ThemeResource InkToolbarButtonHeight}"
+                      StrokeThickness="2"
+                      Stroke="Gray"/>
+                <Button  x:Name="BringIntoViewButton"
+                         IsEnabled="False"
+                         Click="OnBringIntoView"
+                         Style="{StaticResource InkRulerRepositionButton}">
+                </Button>
+            </StackPanel>
+
+            <ScrollViewer x:Name="ScrollViewer"
+                              Grid.Row="2"
+                              ZoomMode="Enabled"
+                              MinZoomFactor="1"
+                              MaxZoomFactor="6"
+                              VerticalScrollMode="Enabled"
+                              VerticalScrollBarVisibility="Visible"
+                              HorizontalScrollMode="Enabled"
+                              HorizontalScrollBarVisibility="Visible"
+                              Background="{ThemeResource SystemControlBackgroundChromeWhiteBrush}">
+                <Grid x:Name="OutputGrid" Background="{ThemeResource SystemControlBackgroundChromeWhiteBrush}">
+                    <!-- Inking area -->
+                    <InkCanvas x:Name="InkCanvas"/>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

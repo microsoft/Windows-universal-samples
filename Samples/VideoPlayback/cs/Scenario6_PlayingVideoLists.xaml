@@ -1,0 +1,85 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario6"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Demonstrates playing video lists using MediaPlaybackList.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <MediaPlayerElement x:Name="mediaPlayerElement" Width="400" Height="300" AreTransportControlsEnabled="True" />
+                            <StackPanel Orientation="Horizontal" Margin="10,40,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <Button IsEnabled="False" x:Name="prevButton" Click="prevButton_Click">
+                                    <SymbolIcon Symbol="Previous"/>
+                                </Button>
+                                <Button x:Name="playButton" Click="playButton_Click">
+                                    <SymbolIcon x:Name="playButtonSymbol" Symbol="Play"/>
+                                </Button>
+                                <Button IsEnabled="False" x:Name="nextButton" Click="nextButton_Click">
+                                    <SymbolIcon Symbol="Next"/>
+                                </Button>
+                                <Button x:Name="speedButton" Content="1.0x" Click="speedButton_Click" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Margin="40,0,0,0">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <ListView x:Name="playlistView" IsItemClickEnabled="True" ItemClick="PlaylistView_ItemClick">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Height="32" Margin="6">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="64" Height="32">
+                                                    <Image Source="{Binding ArtUri}" Stretch="UniformToFill"/>
+                                                </Border>
+                                                <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
+                                                    <TextBlock Text="{Binding Title}" TextWrapping="NoWrap"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </ScrollViewer>
+
+                            <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0"  VerticalAlignment="Top" TextWrapping="Wrap">
+                                Current state: <Run x:Name="txtCurrentState"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

@@ -26,7 +26,7 @@ Both versions share significant amounts of logic: the Common and GameContent fol
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
@@ -44,6 +44,10 @@ These topics provide info about the APIs used in this sample:
 - [DXGI reference](http://msdn.microsoft.com/library/windows/apps/bb205169)
 - [XAudio2](http://msdn.microsoft.com/library/windows/apps/hh405049)
 - [Windows.Gaming.Input](https://msdn.microsoft.com/library/windows/apps/windows.gaming.input.aspx)
+
+## See also
+
+[DirectX marble maze game sample](https://github.com/Microsoft/Windows-appsample-marble-maze)  
 
 ## System requirements
 

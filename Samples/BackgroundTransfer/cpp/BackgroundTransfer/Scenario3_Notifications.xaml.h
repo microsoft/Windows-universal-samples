@@ -51,9 +51,6 @@ namespace BackgroundTransfer
         void ToastNotificationButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void TileNotificationButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
-        void StartDownload(
-            Windows::Networking::BackgroundTransfer::BackgroundTransferPriority priority,
-            boolean requestUnconstrainedDownload);
         void RunDownloads(
             Windows::Networking::BackgroundTransfer::BackgroundDownloader^ downloader,
             ScenarioType type);

@@ -19,6 +19,7 @@ namespace NavigationMenuSample
         {
         public:
             CommandBarPage();
+            void OnLoaded(Platform::Object ^sender, Windows::UI::Xaml::RoutedEventArgs ^e);
         };
     }
 }

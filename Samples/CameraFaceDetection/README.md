@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: AudioVideoAndCamera 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619486
 --->
@@ -25,6 +25,8 @@ This sample also implements a custom UI to better simulate the experience that a
 **Samples**
 
 [CameraStarterKit](/Samples/CameraStarterKit)
+
+[Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
 
 **Conceptual**
 

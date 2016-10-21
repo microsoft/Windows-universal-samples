@@ -16,9 +16,8 @@ using namespace SDKTemplate;
 
 using namespace Concurrency;
 using namespace Platform;
-using namespace Platform::Collections;
-using namespace Windows::ApplicationModel::Store;
 using namespace Windows::Foundation;
+using namespace Windows::Services::Store;
 using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml::Navigation;
 
@@ -27,44 +26,42 @@ Scenario1_TrialMode::Scenario1_TrialMode()
     InitializeComponent();
 }
 
-/// <summary>
-/// Invoked when this page is about to be displayed in a Frame.
-/// </summary>
-/// <param name="e">Event data that describes how this page was reached.  The Parameter
-/// property is typically used to configure the page.</param>
 void Scenario1_TrialMode::OnNavigatedTo(NavigationEventArgs^ e)
 {
-    eventRegistrationToken = (CurrentAppSimulator::LicenseInformation->LicenseChanged += ref new LicenseChangedEventHandler(this, &Scenario1_TrialMode::TrialModeRefreshScenario));
-    ConfigureSimulatorAsync("trial-mode.xml").then([]()
+    storeContext = StoreContext::GetDefault();
+    eventRegistrationToken = storeContext->OfflineLicensesChanged += ref new TypedEventHandler<StoreContext^, Object^>(this, &Scenario1_TrialMode::OfflineLicensesChanged);
+
+    create_task(storeContext->GetStoreProductForCurrentAppAsync()).then([this](StoreProductResult^ result)
     {
-        return create_task(CurrentAppSimulator::LoadListingInformationAsync());
-    }).then([this](task<ListingInformation^> currentTask)
-    {
-        try
+        if (result->ExtendedError.Value == S_OK)
         {
-            ListingInformation^ listing = currentTask.get();
-            PurchasePrice->Text = listing->FormattedPrice;
-        }
-        catch (Platform::Exception^ exception)
-        {
-            rootPage->NotifyUser("LoadListingInformationAsync API call failed", NotifyType::ErrorMessage);
+            PurchasePrice->Text = result->Product->Price->FormattedPrice;
         }
     });
+
+    GetLicenseState();
 }
 
-void Scenario1_TrialMode::OnNavigatingFrom(Windows::UI::Xaml::Navigation::NavigatingCancelEventArgs^ e)
+void Scenario1_TrialMode::OnNavigatingFrom(NavigatingCancelEventArgs^ e)
 {
-    CurrentAppSimulator::LicenseInformation->LicenseChanged -= eventRegistrationToken;
+    storeContext->OfflineLicensesChanged -= eventRegistrationToken;
 }
 
-void Scenario1_TrialMode::TrialModeRefreshScenario()
+void Scenario1_TrialMode::OfflineLicensesChanged(StoreContext^ sender, Object^ args)
 {
     Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this]()
     {
-        auto licenseInformation = CurrentAppSimulator::LicenseInformation;
-        if (licenseInformation->IsActive)
+        GetLicenseState();
+    }));
+}
+
+void Scenario1_TrialMode::GetLicenseState()
+{
+    create_task(storeContext->GetAppLicenseAsync()).then([this](StoreAppLicense^ license)
+    {
+        if (license->IsActive)
         {
-            if (licenseInformation->IsTrial)
+            if (license->IsTrial)
             {
                 LicenseMode->Text = "Trial license";
             }
@@ -77,58 +74,80 @@ void Scenario1_TrialMode::TrialModeRefreshScenario()
         {
             LicenseMode->Text = "Inactive license";
         }
-    }));
+    }, task_continuation_context::get_current_winrt_context());
 }
 
 void Scenario1_TrialMode::ShowTrialPeriodInformation()
 {
-    auto licenseInformation = CurrentAppSimulator::LicenseInformation;
-    if (licenseInformation->IsActive)
+    create_task(storeContext->GetAppLicenseAsync()).then([this](StoreAppLicense^ license)
     {
-        if (licenseInformation->IsTrial)
+        if (license->IsActive)
         {
-            rootPage->NotifyUser("You can use this app for " + DaysUntil(licenseInformation->ExpirationDate) + " more days before the trial period ends.", NotifyType::StatusMessage);
+            if (license->IsTrial)
+            {
+                rootPage->NotifyUser("You can use this app for " + Utils::DaysUntil(license->ExpirationDate) + " more days before the trial period ends.", NotifyType::StatusMessage);
+            }
+            else
+            {
+                rootPage->NotifyUser("You have a full license. The trial time is not meaningful.", NotifyType::ErrorMessage);
+            }
         }
         else
         {
-            rootPage->NotifyUser("You have a full license. The trial time is not meaningful.", NotifyType::ErrorMessage);
+            rootPage->NotifyUser("You don't have a license. The trial time can't be determined.", NotifyType::ErrorMessage);
         }
-    }
-    else
-    {
-        rootPage->NotifyUser("You don't have a license. The trial time can't be determined.", NotifyType::ErrorMessage);
-    }
+    }, task_continuation_context::get_current_winrt_context());
 }
 
 void Scenario1_TrialMode::PurchaseFullLicense()
 {
-    auto licenseInformation = CurrentAppSimulator::LicenseInformation;
-    rootPage->NotifyUser("Buying the full license...", NotifyType::StatusMessage);
-    if (licenseInformation->IsTrial)
+    create_task(storeContext->GetStoreProductForCurrentAppAsync()).then([this](StoreProductResult^ productResult)
     {
-        create_task(CurrentAppSimulator::RequestAppPurchaseAsync(false)).then([this](task<Platform::String^> currentTask)
+        if (productResult->ExtendedError.Value != S_OK)
         {
-            try
+            Utils::ReportExtendedError(productResult->ExtendedError);
+            return;
+        }
+
+        rootPage->NotifyUser("Buying the full license...", NotifyType::StatusMessage);
+        create_task(storeContext->GetAppLicenseAsync()).then([this, productResult](StoreAppLicense^ license)
+        {
+            if (license->IsTrial)
             {
-                currentTask.get();
-                auto licenseInformation = CurrentAppSimulator::LicenseInformation;
-                if (licenseInformation->IsActive && !licenseInformation->IsTrial)
+                create_task(productResult->Product->RequestPurchaseAsync()).then([this](StorePurchaseResult^ result)
                 {
-                    rootPage->NotifyUser("You successfully upgraded your app to the fully-licensed version.", NotifyType::StatusMessage);
-                }
-                else
-                {
-                    rootPage->NotifyUser("You still have a trial license for this app.", NotifyType::ErrorMessage);
-                }
+                    switch (result->Status)
+                    {
+                    case StorePurchaseStatus::AlreadyPurchased:
+                        rootPage->NotifyUser("You already bought this app and have a fully-licensed version.", NotifyType::ErrorMessage);
+                        break;
+
+                    case StorePurchaseStatus::Succeeded:
+                        // License will refresh automatically using the StoreContext.OfflineLicensesChanged event
+                        break;
+
+                    case StorePurchaseStatus::NotPurchased:
+                        rootPage->NotifyUser("Product was not purchased, it may have been canceled.", NotifyType::ErrorMessage);
+                        break;
+
+                    case StorePurchaseStatus::NetworkError:
+                        rootPage->NotifyUser("Product was not purchased due to a Network Error.", NotifyType::ErrorMessage);
+                        break;
+
+                    case StorePurchaseStatus::ServerError:
+                        rootPage->NotifyUser("Product was not purchased due to a Server Error.", NotifyType::ErrorMessage);
+                        break;
+
+                    default:
+                        rootPage->NotifyUser("Product was not purchased due to an Unknown Error.", NotifyType::ErrorMessage);
+                        break;
+                    }
+                });
             }
-            catch (Platform::Exception^ exception)
+            else
             {
-                rootPage->NotifyUser("The upgrade transaction failed. You still have a trial license for this app.", NotifyType::ErrorMessage);
+                rootPage->NotifyUser("You already bought this app and have a fully-licensed version.", NotifyType::ErrorMessage);
             }
-        });
-    }
-    else
-    {
-        rootPage->NotifyUser("You already bought this app and have a fully-licensed version.", NotifyType::ErrorMessage);
-    }
+        }, task_continuation_context::get_current_winrt_context());
+    }, task_continuation_context::get_current_winrt_context());
 }

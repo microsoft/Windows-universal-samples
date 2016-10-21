@@ -11,7 +11,6 @@
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
-
     <mp:PhoneIdentity PhoneProductId="780f479e-f431-4ab8-bcab-50a29e32f713" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
@@ -21,7 +20,7 @@
     </Properties>
 
     <Dependencies>
-        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0" />
     </Dependencies>
 
     <Resources>

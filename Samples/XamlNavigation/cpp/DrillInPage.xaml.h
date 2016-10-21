@@ -8,6 +8,7 @@
 using namespace Platform;
 
 #include "DrillInPage.g.h"
+#include "AppShell.xaml.h"
 
 namespace NavigationMenuSample
 {

@@ -23,7 +23,6 @@ using namespace Windows::UI;
 using namespace Windows::Foundation;
 using namespace Windows::Devices::Input;
 using namespace Windows::Gaming::Input;
-using namespace Windows::Phone::UI::Input;
 using namespace Windows::System;
 
 // Analog control deadzone definitions. Tune these values to adjust the size of the deadzone.
@@ -92,12 +91,8 @@ void MoveLookController::InitWindow(_In_ CoreWindow^ window)
     MouseDevice::GetForCurrentView()->MouseMoved +=
         ref new TypedEventHandler<MouseDevice^, MouseEventArgs^>(this, &MoveLookController::OnMouseMoved);
 
-    // Hardware back button is only available on some device families such as Phone.
-    if (Windows::Foundation::Metadata::ApiInformation::IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-    {
-        HardwareButtons::BackPressed +=
-            ref new EventHandler<BackPressedEventArgs^>(this, &MoveLookController::OnHardwareBackButtonPressed);
-    }
+    SystemNavigationManager::GetForCurrentView()->BackRequested +=
+            ref new EventHandler<BackRequestedEventArgs^>(this, &MoveLookController::OnBackRequested);
 
     // Detect gamepad connection and disconnection events.
     Gamepad::GamepadAdded +=
@@ -663,16 +658,19 @@ void MoveLookController::UpdatePollingDevices()
         m_gamepadsChanged = false;
         unsigned int index = 0;
 
-        if (Gamepad::Gamepads->Size == 0)
+        // Capture the list of gamepads so it won't change while we are studying it.
+        auto gamepads = Gamepad::Gamepads;
+
+        if (gamepads->Size == 0)
         {
             m_activeGamepad = nullptr;
         }
         // Check if the cached gamepad is still connected.
-        else if(!Gamepad::Gamepads->IndexOf(m_activeGamepad, &index))
+        else if (!gamepads->IndexOf(m_activeGamepad, &index))
         {
             // MoveLookController is intended to handle input for a single player, so it
             // defaults to the first active gamepad.
-            m_activeGamepad = Gamepad::Gamepads->GetAt(0);
+            m_activeGamepad = gamepads->GetAt(0);
         }
     }
 
@@ -1077,9 +1075,9 @@ void MoveLookController::Update()
 
 //----------------------------------------------------------------------
 
-void MoveLookController::OnHardwareBackButtonPressed(
+void MoveLookController::OnBackRequested(
     _In_ Platform::Object^ sender,
-    _In_ BackPressedEventArgs^ args
+    _In_ BackRequestedEventArgs^ args
     )
 {
     if (m_state == MoveLookControllerState::Active)

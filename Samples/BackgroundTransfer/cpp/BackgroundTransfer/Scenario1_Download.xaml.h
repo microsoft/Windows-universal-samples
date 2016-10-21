@@ -49,7 +49,6 @@ namespace BackgroundTransfer
     
         void StartDownload_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void StartHighPriorityDownload_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-        void StartUnconstrainedDownload_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void CancelAll_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void ResumeAll_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void PauseAll_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
@@ -63,10 +62,8 @@ namespace BackgroundTransfer
         void MarshalLog(Platform::String^ value);
         void Log(Platform::String^ message);
         void LogStatus(Platform::String^ message, SDKTemplate::NotifyType type);
-        void StartDownload(
-            Windows::Networking::BackgroundTransfer::BackgroundTransferPriority priority,
-            boolean requestUnconstrainedDownload);
-            
+        void StartDownload(Windows::Networking::BackgroundTransfer::BackgroundTransferPriority priority);
+
         ~Scenario1_Download();
     };
 }

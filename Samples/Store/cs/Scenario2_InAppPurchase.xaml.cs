@@ -10,117 +10,70 @@
 //*********************************************************
 
 using System;
-using System.Threading.Tasks;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Store;
-using Windows.Storage;
+using Windows.Services.Store;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
 namespace SDKTemplate
 {
-    /// <summary>
-    /// A page for second scenario.
-    /// </summary>
     public sealed partial class Scenario2_InAppPurchase : Page
     {
-        // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
-        // as NotifyUser()
-        MainPage rootPage = MainPage.Current;
+        private MainPage rootPage = MainPage.Current;
+        private StoreContext storeContext = StoreContext.GetDefault();
 
         public Scenario2_InAppPurchase()
         {
             this.InitializeComponent();
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        private async void GetAssociatedProductsButton_Click(object sender, RoutedEventArgs e)
         {
-            await MainPage.ConfigureSimulatorAsync("in-app-purchase.xml");
+            // Create a filtered list of the product AddOns I care about
+            string[] filterList = new string[] { "Consumable", "Durable", "UnmanagedConsumable" };
 
-            try
-            {
-                ListingInformation listing = await CurrentAppSimulator.LoadListingInformationAsync();
-                var product1 = listing.ProductListings["product1"];
-                Product1Name.Text = product1.Name;
-                Product1Price.Text = product1.FormattedPrice;
+            // Get list of Add Ons this app can sell, filtering for the types we know about
+            StoreProductQueryResult addOns = await storeContext.GetAssociatedStoreProductsAsync(filterList);
 
-                var product2 = listing.ProductListings["product2"];
-                Product2Name.Text = product2.Name;
-                Product2Price.Text = product2.FormattedPrice;
-            }
-            catch (Exception)
-            {
-                rootPage.NotifyUser("LoadListingInformationAsync API call failed", NotifyType.ErrorMessage);
-            }
+            ProductsListView.ItemsSource = Utils.CreateProductListFromQueryResult(addOns, "Add-Ons");
         }
 
-        private void TestProduct(string productId, string productName)
+        private async void PurchaseAddOnButton_Click(object sender, RoutedEventArgs e)
         {
-            LicenseInformation licenseInformation = CurrentAppSimulator.LicenseInformation;
-            var productLicense = licenseInformation.ProductLicenses[productId];
-            if (productLicense.IsActive)
+            var item = (ItemDetails)ProductsListView.SelectedItem;
+
+            StorePurchaseResult result = await storeContext.RequestPurchaseAsync(item.StoreId);
+            if (result.ExtendedError != null)
             {
-                rootPage.NotifyUser("You can use " + productName + ".", NotifyType.StatusMessage);
+                Utils.ReportExtendedError(result.ExtendedError);
+                return;
             }
-            else
+
+            switch (result.Status)
             {
-                rootPage.NotifyUser("You don't own " + productName + ".", NotifyType.ErrorMessage);
-            }
-        }
+                case StorePurchaseStatus.AlreadyPurchased:
+                    rootPage.NotifyUser($"You already bought this AddOn.", NotifyType.ErrorMessage);
+                    break;
 
-        private async Task BuyProductAsync(string productId, string productName)
-        {
-            LicenseInformation licenseInformation = CurrentAppSimulator.LicenseInformation;
-            if (!licenseInformation.ProductLicenses[productId].IsActive)
-            {
-                rootPage.NotifyUser("Buying " + productName + "...", NotifyType.StatusMessage);
-                try
-                {
-                    await CurrentAppSimulator.RequestProductPurchaseAsync(productId);
-                    if (licenseInformation.ProductLicenses[productId].IsActive)
-                    {
-                        rootPage.NotifyUser("You bought " + productName + ".", NotifyType.StatusMessage);
-                    }
-                    else
-                    {
-                        rootPage.NotifyUser(productName + " was not purchased.", NotifyType.StatusMessage);
-                    }
-                }
-                catch (Exception)
-                {
-                    rootPage.NotifyUser("Unable to buy " + productName + ".", NotifyType.ErrorMessage);
-                }
-            }
-            else
-            {
-                rootPage.NotifyUser("You already own " + productName + ".", NotifyType.ErrorMessage);
-            }
-        }
+                case StorePurchaseStatus.Succeeded:
+                    rootPage.NotifyUser($"You bought {item.Title}.", NotifyType.StatusMessage);
+                    break;
 
-        private void TestProduct1()
-        {
-            TestProduct("product1", Product1Name.Text);
-        }
+                case StorePurchaseStatus.NotPurchased:
+                    rootPage.NotifyUser("Product was not purchased, it may have been canceled.", NotifyType.ErrorMessage);
+                    break;
 
-        private async void BuyProduct1()
-        {
-            await BuyProductAsync("product1", Product1Name.Text);
-        }
+                case StorePurchaseStatus.NetworkError:
+                    rootPage.NotifyUser("Product was not purchased due to a network error.", NotifyType.ErrorMessage);
+                    break;
 
-        private void TestProduct2()
-        {
-            TestProduct("product2", Product2Name.Text);
-        }
+                case StorePurchaseStatus.ServerError:
+                    rootPage.NotifyUser("Product was not purchased due to a server error.", NotifyType.ErrorMessage);
+                    break;
 
-        private async void BuyProduct2()
-        {
-            await BuyProductAsync("product2", Product2Name.Text);
+                default:
+                    rootPage.NotifyUser("Product was not purchased due to an unknown error.", NotifyType.ErrorMessage);
+                    break;
+            }        
         }
     }
 }

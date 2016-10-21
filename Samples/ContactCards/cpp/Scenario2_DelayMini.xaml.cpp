@@ -119,29 +119,36 @@ void Scenario2_DelayMini::ShowContactCard_Click(Platform::Object^ sender, Routed
 
     ContactCardDelayedDataLoader^ dataLoader = ContactManager::ShowDelayLoadedContactCard(contact, rect, placement, options);
 
-    // Simulate downloading more data from the network for the contact.
-    this->rootPage->NotifyUser("Simulating download...", NotifyType::StatusMessage);
-
-    DownloadContactDataAsync(contact).then([this, dataLoader](Contact^ fullContact)
+    if (dataLoader != nullptr)
     {
-        String^ message;
-        if (fullContact != nullptr)
-        {
-            // Update the contact card with the full set of contact data.
-            dataLoader->SetData(fullContact);
-            message = "Contact has been updated with downloaded data.";
-        }
-        else
-        {
-            message = "No further information available.";
-        }
+        // Simulate downloading more data from the network for the contact.
+        this->rootPage->NotifyUser("Simulating download...", NotifyType::StatusMessage);
 
-        Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, message]()
+        DownloadContactDataAsync(contact).then([this, dataLoader](Contact^ fullContact)
         {
-            this->rootPage->NotifyUser(message, NotifyType::StatusMessage);
-        }));
+            String^ message;
+            if (fullContact != nullptr)
+            {
+                // Update the contact card with the full set of contact data.
+                dataLoader->SetData(fullContact);
+                message = "Contact has been updated with downloaded data.";
+            }
+            else
+            {
+                message = "No further information available.";
+            }
 
-        // Dispose the object to indicate that the delay-loading operation has completed.
-        delete dataLoader;
-    });
+            Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, message]()
+            {
+                this->rootPage->NotifyUser(message, NotifyType::StatusMessage);
+            }));
+
+            // Dispose the object to indicate that the delay-loading operation has completed.
+            delete dataLoader;
+        });
+    }
+    else
+    {
+        this->rootPage->NotifyUser("ShowDelayLoadedContactCard is not supported by this device.", NotifyType::ErrorMessage);
+    }
 }

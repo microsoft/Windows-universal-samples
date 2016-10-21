@@ -22,7 +22,6 @@ namespace SDKTemplate
         List<Scenario> scenarios = new List<Scenario>
         {
             new Scenario() { Title = "Pick and set lock screen image", ClassType = typeof(SetLockScreenImage) },
-            new Scenario() { Title = "Register lock screen slide show image feed", ClassType = typeof(AddImageFeedScenario) }
         };
     }
 

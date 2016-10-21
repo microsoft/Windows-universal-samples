@@ -6,24 +6,19 @@ Copyright (c) Microsoft Corporation. All rights reserved
 
 <head>
     <title></title>
-    <link rel="stylesheet" href="/css/scenario3_Polling.css">
     <script src="/js/scenario3_Polling.js"></script>
 </head>
 
 <body class="win-type-body">
-    <div>
-        <p>Polls for accelerometer data and displays the X, Y and Z acceleration values at a set interval.</p>
-        <button class="action win-button" id="scenario3Open">Enable</button>
-        <button class="action secondary win-button" id="scenario3Revoke">Disable</button>
-        <br>
-        <br>
-    </div>
-    <div>
-        X: <a id="readingOutputX" class="win-link">no data</a>
-        <br> Y: <a id="readingOutputY" class="win-link">no data</a>
-        <br> Z: <a id="readingOutputZ" class="win-link">no data</a>
-        <br>
-    </div>
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">Polling</div>
+
+    <p>Polls for accelerometer data and displays the X, Y and Z acceleration values at a set interval.</p>
+    <p>
+        <button class="win-button" id="scenarioEnable" disabled>Enable</button>
+        <button class="win-button" id="scenarioDisable" disabled>Disable</button>
+    </p>
+    <p id="readingOutput">no data</p>
 </body>
 
 </html>

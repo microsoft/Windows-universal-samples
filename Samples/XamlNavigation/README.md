@@ -11,10 +11,12 @@ Specifically, this sample shows how to:
 
 - **Utilize a SplitView control:** The SplitView is a control with two content areas: the Pane and the Content.  The Pane can be opened or closed.  Using the DisplayMode property the app can switch the Pane to Overlay the Content or appear Inline.  When the available space is constrained the Pane can be put into a CompactOverlay or CompactInline mode where it provides a visual hint to the user. 
 - **Customize a ListView to present menu items with a single-selection experience:** This uses a ListView to present the default visuals for the menu items and customizes the keyboarding behavior to provide a single selection model where up/down/tab/shift+tab moves through each item and 'Enter' and 'Space' select the item. 
+- **Position the CommandBar based on the screen size:** This sample moves the CommandBar to the bottom on screens less than seven inches diagonal.
+- **Adapt UI to the ten-foot experience:** This sample uses a style sheet and a state trigger to adapt the UI when running on a TV.
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
@@ -24,21 +26,29 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 [Master Detail](/Samples/XamlMasterDetail)
 
-### Reference
+[RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)  
 
-<!-- Add links to related API -->
+[Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)  
+
+[Customers Orders Database sample](https://github.com/Microsoft/Windows-appsample-customers-orders-database)  
+
+[Photosharing app sample](https://github.com/Microsoft/Appsample-Photosharing)  
+
+### Reference
 
 [SplitView API](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.splitview.aspx)
 
 [ListView API](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.listview.aspx)
 
+[Designing for Xbox and TV](https://msdn.microsoft.com/windows/uwp/input-and-devices/designing-for-tv)
+
 ## System requirements
 
-**Client:** Windows 10
+**Client:** Windows 10 build 14332
 
 **Server:** Windows Server 2016 Technical Preview
 
-**Phone:**  Windows 10
+**Phone:**  Windows 10 build 14332
 
 ## Build the sample
 

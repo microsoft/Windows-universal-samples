@@ -17,7 +17,7 @@ Specifically, this sample demonstrates the following scenarios:
 
 **Note** The Universal Windows app samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
@@ -26,6 +26,10 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 ### Reference
 
 [**Windows.System.UserProfile** namespace](http://msdn.microsoft.com/library/windows/apps/br241881)
+
+## Related samples
+
+[Customers Orders Database sample](https://github.com/Microsoft/Windows-appsample-customers-orders-database)  
 
 ## System requirements
 

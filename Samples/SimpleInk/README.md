@@ -1,5 +1,5 @@
 <!---
-  category: CustomUserInteractions
+  category: CustomUserInteractions Inking
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620602
 --->
 
@@ -9,11 +9,20 @@ This sample demonstrates how to use ink functionality (such as capturing ink fro
 
 Specifically, this sample covers using the Windows.UI.Input.Inking APIs to do the following:
 -   Capture user input and render as ink strokes
+-   Create an ink toolbar which is associated with an ink canvas
+-   Add custom buttons to the ink toolbar
+-   Create an ink toolbar with only specified buttons
+-   Control multiple ink canvases with a single ink toolbar
 -   Save and load ink strokes
 -   Erase ink strokes
--   Change which input types (Mouse/Touch/Pen) are used for inking 
--   Recognize handwriting from ink strokes 
--   Select ink strokes 
+-   Create and select different types of pens
+-   Change which input types (Mouse/Touch/Pen) are used for inking
+-   Recognize handwriting from ink strokes
+-   Select ink strokes
+-   Create a ruler, show it, hide it, and reposition it
+-   manipulate wet ink strokes
+    - make strokes follow a shape
+    - complete a stroke prematurely if conditions are met
 
 ## Related topics
 
@@ -21,17 +30,21 @@ Specifically, this sample covers using the Windows.UI.Input.Inking APIs to do th
 
 [ComplexInk](/Samples/ComplexInk)
 
+[Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
+
+[Coloring Book app sample](https://github.com/Microsoft/Windows-appsample-coloringbook)  
+
 **Reference**
 
 [**Windows.UI.Input.Inking**](http://msdn.microsoft.com/library/windows/apps/br208524)
 
 ## Operating system requirements
 
-**Client:** Windows 10
+**Client:** Windows 10 build 14295
 
 **Server:** Windows Server 2016 Technical Preview
 
-**Phone:** Windows 10
+**Phone:** Windows 10 build 14295
 
 ## Build the sample
 

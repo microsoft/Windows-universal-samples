@@ -30,12 +30,18 @@ namespace CustomEffect
         // Mix does not have a set - all updates should be done through the property set.
         private float Mix
         {
-            get { return (float)propertySet["Mix"]; }
+            get
+            {
+                object val;
+                if (propertySet != null && propertySet.TryGetValue("Mix", out val))
+                {
+                    return (float)val;
+                }
+                return .5f;
+            }
         }
 
         public bool UseInputFrameForOutput { get { return false; } }
-        public bool TimeIndependent { get { return true; } }
-        public bool IsReadyOnly { get { return true; } }
 
         // Set up constant members in the constructor
         public AudioEchoEffect()
@@ -100,7 +106,7 @@ namespace CustomEffect
                     inputData = inputDataInFloat[i] * (1.0f - this.Mix);
                     echoData = echoBuffer[currentActiveSampleIndex] * this.Mix;
                     outputDataInFloat[i] = inputData + echoData;
-                    echoBuffer[currentActiveSampleIndex] = inputData;
+                    echoBuffer[currentActiveSampleIndex] = inputDataInFloat[i];
                     currentActiveSampleIndex++;
 
                     if (currentActiveSampleIndex == echoBuffer.Length)

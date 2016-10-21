@@ -44,7 +44,7 @@
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
 
             <!--VS Toggle button-->
-            <Button Name="VsToggleButton" Tapped="VsToggleButton_Tapped" IsEnabled="False">
+            <Button Name="VsToggleButton" Click="VsToggleButton_Click" IsEnabled="False">
                 <Viewbox MaxHeight="40" MaxWidth="40">
                     <Grid>
                         <!--Off icon-->
@@ -66,7 +66,7 @@
             </Button>
 
             <!--Video record button-->
-            <Button Name="VideoButton" Tapped="VideoButton_Tapped" IsEnabled="False">
+            <Button Name="VideoButton" Click="VideoButton_Click" IsEnabled="False">
                 <Grid>
                     <Ellipse Name="StartRecordingIcon" Fill="Red" Width="20" Height="20"/>
                     <Rectangle Name="StopRecordingIcon" Fill="White" Width="20" Height="20" Visibility="Collapsed"/>

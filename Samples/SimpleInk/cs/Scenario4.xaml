@@ -1,0 +1,67 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario4"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    SizeChanged="OnSizeChanged"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid  x:Name="RootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                This scenario demonstrates recognizing ink strokes as text.<LineBreak/>
+                </TextBlock>
+            </StackPanel>
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                        <TextBlock Text="Available Recognizers:" Margin="0,8"/>
+                        <ComboBox
+                            x:Name="RecoName"
+                            MaxWidth="500"
+                            SelectionChanged="OnRecognizerChanged">
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,10">
+                        <Button x:Name="RecognizeBtn" Content="Recognize" Width="100" Margin="0,0,3,0" Click="OnRecognizeAsync"/>
+                        <Button x:Name="ClearBtn" Content="Clear" Width="65" Margin="0,0,3,0" Click="OnClear"/>
+                        <HyperlinkButton Content="Install more recognizers"
+                                         Click="RecoButton_Click"
+                                         Foreground="LightGray"
+                                         Margin="5,0">
+                            <ToolTipService.ToolTip>
+                                <ToolTip x:Name="InstallReco">
+                                    Install handwriting recognition engines for other languages as follows:
+                                    Go to Settings &#x2192; Time &amp; language &#x2192; Region &amp; language,
+                                    choose a language, and click Options, then click Download under Handwriting.
+                                </ToolTip>
+                            </ToolTipService.ToolTip>
+                        </HyperlinkButton>
+                    </StackPanel>
+                    <Grid x:Name="Output" Background="{ThemeResource SystemControlBackgroundChromeWhiteBrush}" Height="Auto">
+                        <!-- Inking area -->
+                        <InkCanvas x:Name="inkCanvas"/>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

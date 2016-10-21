@@ -19,15 +19,24 @@ Specifically, this sample demonstrates the following scenarios:
 
 **Note 2** The app as provided will not be able to get tokens without having it's app manifest being modified to use the App Identity of a registered Microsoft Store/registered AAD app. See 'Related Topics' for instructions on how to register an app.
  
-To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
 
-Registration of application to use a Microsoft account [Preparing your account to use Windows Live Services in your Windows Store apps](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh770854.aspx)
+Registration of application to use a Microsoft account:
+[Preparing your account to use Windows Live Services in your Windows Store apps](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh770854.aspx)
 
-Configuring an application to authorize with Azure Active Directory (https://auth0.com/docs/connections/enterprise/azure-active-directory)
+Develop Windows Universal Apps with Azure AD and the Windows 10 Identity API:
+[Using WebAccountManager to Integrate with Azure AD](http://blogs.technet.com/b/ad/archive/2015/08/03/develop-windows-universal-apps-with-azure-ad-and-the-windows-10-identity-api.aspx)
+
+Azure sample:
+[Universal Windows Platform app calling the directory Graph API](https://github.com/Azure-Samples/active-directory-dotnet-native-uwp-wam/tree/master/NativeClient-UWP-WAM/)
+
+[Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)  
+
+[Customers Orders Database sample](https://github.com/Microsoft/Windows-appsample-customers-orders-database)  
 
 ### Reference
 

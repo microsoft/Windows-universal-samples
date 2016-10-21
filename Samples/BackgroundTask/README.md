@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: LaunchingAndBackgroundTasks 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=618666
 --->
@@ -32,6 +32,14 @@ To obtain an evaluation copy of Microsoft Visual Studio 2013, go to [Visual Stu
 
 ## Related topics
 
+### Samples
+
+[Background Activation](/Samples/BackgroundActivation)  
+
+[Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)  
+
+### Reference
+
 [Displaying tiles on the lock screen](http://msdn.microsoft.com/library/windows/apps/hh868260)
 
 [Launching, resuming, and multitasking](http://msdn.microsoft.com/library/windows/apps/hh770837)
@@ -48,7 +56,7 @@ To obtain an evaluation copy of Microsoft Visual Studio 2013, go to [Visual Stu
 
 [**Windows.UI.WebUI.WebUIBackgroundTaskInstance (HTML)**](http://msdn.microsoft.com/library/windows/apps/hh701740)
 
-## Related technologies
+### Related technologies
 
 [**Windows.ApplicationModel.Background**](http://msdn.microsoft.com/library/windows/apps/br224847)
 

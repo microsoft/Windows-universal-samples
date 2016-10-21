@@ -9,21 +9,20 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using System;
 using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Networking.Sockets;
-using Windows.Storage.Streams;
+using Windows.Security.Cryptography.Certificates;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web;
 
-namespace Microsoft.Samples.Networking.WebSocket
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -35,132 +34,173 @@ namespace Microsoft.Samples.Networking.WebSocket
         MainPage rootPage = MainPage.Current;
 
         private StreamWebSocket streamWebSocket;
-        private byte[] readBuffer;
+        private bool busy;
 
         public Scenario2()
         {
             this.InitializeComponent();
+            UpdateVisualState();
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            CloseSocket();
         }
 
-        private async void Start_Click(object sender, RoutedEventArgs e)
+        private void UpdateVisualState()
         {
-            // Have we connected yet?
-            if (streamWebSocket != null)
+            if (busy)
             {
-                rootPage.NotifyUser("Already connected", NotifyType.StatusMessage);
-                return;
+                VisualStateManager.GoToState(this, "Busy", false);
             }
+            else
+            {
+                bool connected = (streamWebSocket != null);
+                VisualStateManager.GoToState(this, connected ? "Connected" : "Disconnected", false);
+            }
+        }
 
+        private void SetBusy(bool value)
+        {
+            busy = value;
+            UpdateVisualState();
+        }
+
+        private async void OnStart()
+        {
+            SetBusy(true);
+            await StartAsync();
+            SetBusy(false);
+        }
+
+        private async Task StartAsync()
+        {
             // Validating the URI is required since it was received from an untrusted source (user input).
             // The URI is validated by calling TryGetUri() that will return 'false' for strings that are not
             // valid WebSocket URIs.
             // Note that when enabling the text box users may provide URIs to machines on the intrAnet
             // or intErnet. In these cases the app requires the "Home or Work Networking" or
             // "Internet (Client)" capability respectively.
-            Uri server;
-            if (!rootPage.TryGetUri(ServerAddressField.Text, out server))
+            Uri server = rootPage.TryGetUri(ServerAddressField.Text);
+            if (server == null)
             {
                 return;
             }
 
+            streamWebSocket = new StreamWebSocket();
+            streamWebSocket.Closed += OnClosed;
+
+            // If we are connecting to wss:// endpoint, by default, the OS performs validation of
+            // the server certificate based on well-known trusted CAs. We can perform additional custom
+            // validation if needed.
+            if (SecureWebSocketCheckBox.IsChecked == true)
+            {
+                // WARNING: Only test applications should ignore SSL errors.
+                // In real applications, ignoring server certificate errors can lead to Man-In-The-Middle
+                // attacks. (Although the connection is secure, the server is not authenticated.)
+                // Note that not all certificate validation errors can be ignored.
+                // In this case, we are ignoring these errors since the certificate assigned to the localhost
+                // URI is self-signed and has subject name = fabrikam.com
+                streamWebSocket.Control.IgnorableServerCertificateErrors.Add(ChainValidationResult.Untrusted);
+                streamWebSocket.Control.IgnorableServerCertificateErrors.Add(ChainValidationResult.InvalidName);
+
+                // Add event handler to listen to the ServerCustomValidationRequested event. This enables performing
+                // custom validation of the server certificate. The event handler must implement the desired
+                // custom certificate validation logic.
+                streamWebSocket.ServerCustomValidationRequested += OnServerCustomValidationRequested;
+
+                // Certificate validation is meaningful only for secure connections.
+                if (server.Scheme != "wss")
+                {
+                    AppendOutputLine("Note: Certificate validation is performed only for the wss: scheme.");
+                }
+            }
+
+            AppendOutputLine($"Connecting to {server}...");
             try
             {
-                rootPage.NotifyUser("Connecting to: " + server, NotifyType.StatusMessage);
-
-                streamWebSocket = new StreamWebSocket();
-
-                // Dispatch close event on UI thread. This allows us to avoid synchronizing access to streamWebSocket.
-                streamWebSocket.Closed += async (senderSocket, args) =>
-                {
-                    await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => Closed(senderSocket, args));
-                };
-
                 await streamWebSocket.ConnectAsync(server);
-
-                readBuffer = new byte[1000];
-
-                // Start a background task to continuously read for incoming data
-                Task receiving = Task.Factory.StartNew(Scenario2ReceiveData,
-                    streamWebSocket.InputStream.AsStreamForRead(), TaskCreationOptions.LongRunning);
-
-                // Start a background task to continuously write outgoing data
-                Task sending = Task.Factory.StartNew(Scenario2SendData,
-                    streamWebSocket.OutputStream, TaskCreationOptions.LongRunning);
-
-                rootPage.NotifyUser("Connected", NotifyType.StatusMessage);
             }
             catch (Exception ex) // For debugging
             {
-                if (streamWebSocket != null)
-                {
-                    streamWebSocket.Dispose();
-                    streamWebSocket = null;
-                }
+                streamWebSocket.Dispose();
+                streamWebSocket = null;
 
-                WebErrorStatus status = WebSocketError.GetStatus(ex.GetBaseException().HResult);
-
-                switch (status)
-                {
-                    case WebErrorStatus.CannotConnect:
-                    case WebErrorStatus.NotFound:
-                    case WebErrorStatus.RequestTimeout:
-                        rootPage.NotifyUser("Cannot connect to the server. Please make sure " +
-                            "to run the server setup script before running the sample.", NotifyType.ErrorMessage);
-                        break;
-
-                    case WebErrorStatus.Unknown:
-                        throw;
-
-                    default:
-                        rootPage.NotifyUser("Error: " + status, NotifyType.ErrorMessage);
-                        break;
-                }
-
-                OutputField.Text += ex.Message + "\r\n";
+                AppendOutputLine(MainPage.BuildWebSocketError(ex));
+                AppendOutputLine(ex.Message);
+                return;
             }
+            rootPage.NotifyUser("Connected", NotifyType.StatusMessage);
+
+            // Start a task to continuously read for incoming data
+            Task receiving = ReceiveDataAsync(streamWebSocket);
+
+            // Start a task to continuously write outgoing data
+            Task sending = SendDataAsync(streamWebSocket);
         }
 
-        // Continuously write outgoing data. For writing data we'll show how to use data.AsBuffer() to get an
-        // IBuffer for use with webSocket.OutputStream.WriteAsync.  Alternatively you can call
-        // webSocket.OutputStream.AsStreamForWrite() to use .NET streams.
-        private async void Scenario2SendData(object state)
+        private async void OnServerCustomValidationRequested(StreamWebSocket sender, WebSocketServerCustomValidationRequestedEventArgs args)
         {
-            int dataSent = 0;
+            // In order to call async APIs in this handler, you must first take a deferral and then
+            // release it once you are done with the operation. The "using" statement
+            // ensures that the deferral completes when control leaves the block.
+            bool isValid;
+            using (Deferral deferral = args.GetDeferral())
+            {
+                // Get the server certificate and certificate chain from the args parameter.
+                isValid = await MainPage.AreCertificateAndCertChainValidAsync(args.ServerCertificate, args.ServerIntermediateCertificates);
+
+                if (!isValid)
+                {
+                    args.Reject();
+                }
+            }
+
+            // Continue on the UI thread so we can update UI.
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (isValid)
+                {
+                    AppendOutputLine("Custom validation of server certificate passed.");
+                }
+                else
+                {
+                    AppendOutputLine("Custom validation of server certificate failed.");
+                }
+            });
+        }
+        
+        // Continuously write outgoing data. For writing data we'll show how to use data.AsBuffer() to get an
+        // IBuffer for use with activeSocket.OutputStream.WriteAsync.  Alternatively you can call
+        // activeSocket.OutputStream.AsStreamForWrite() to use .NET streams.
+        private async Task SendDataAsync(StreamWebSocket activeSocket)
+        {
+            int bytesSent = 0;
             byte[] data = new byte[] { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09 };
 
-            MarshalText(OutputField, "Background sending data in " + data.Length
-                + " byte chunks each second.\r\n");
+            AppendOutputLine($"Background sending data in {data.Length} byte chunks each second.");
 
             try
             {
-                IOutputStream writeStream = (IOutputStream)state;
-
                 // Send until the socket gets closed/stopped
                 while (true)
                 {
-                    // using System.Runtime.InteropServices.WindowsRuntime;
-                    await writeStream.WriteAsync(data.AsBuffer());
+                    if (streamWebSocket != activeSocket)
+                    {
+                        // Our socket is no longer active. Stop sending.
+                        AppendOutputLine("Background write stopped.");
+                        return;
+                    }
 
-                    dataSent += data.Length;
-                    MarshalText(DataSentField, dataSent.ToString(), false);
+                    await activeSocket.OutputStream.WriteAsync(data.AsBuffer());
+
+                    bytesSent += data.Length;
+                    DataSentField.Text = bytesSent.ToString();
 
                     // Delay so the user can watch what's going on.
                     await Task.Delay(TimeSpan.FromSeconds(1));
                 }
             }
-            catch (ObjectDisposedException)
-            {
-                MarshalText(OutputField, "Background write stopped.\r\n");
-            }
             catch (Exception ex)
             {
                 WebErrorStatus status = WebSocketError.GetStatus(ex.GetBaseException().HResult);
@@ -168,43 +208,47 @@ namespace Microsoft.Samples.Networking.WebSocket
                 switch (status)
                 {
                     case WebErrorStatus.OperationCanceled:
-                        MarshalText(OutputField, "Background write canceled.\r\n");
+                        AppendOutputLine("Background write canceled.");
                         break;
 
-                    case WebErrorStatus.Unknown:
-                        throw;
-
                     default:
-                        MarshalText(OutputField, "Error: " + status + "\r\n");
-                        MarshalText(OutputField, ex.Message + "\r\n");
+                        AppendOutputLine("Error: " + status);
+                        AppendOutputLine(ex.Message);
                         break;
                 }
             }
         }
 
-        // Continuously read incoming data. For reading data we'll show how to use webSocket.InputStream.AsStream()
+        // Continuously read incoming data. For reading data we'll show how to use activeSocket.InputStream.AsStream()
         // to get a .NET stream. Alternatively you could call readBuffer.AsBuffer() to use IBuffer with
-        // webSocket.InputStream.ReadAsync.
-        private async void Scenario2ReceiveData(object state)
+        // activeSocket.InputStream.ReadAsync.
+        private async Task ReceiveDataAsync(StreamWebSocket activeSocket)
         {
+            Stream readStream = streamWebSocket.InputStream.AsStreamForRead();
             int bytesReceived = 0;
             try
             {
-                Stream readStream = (Stream)state;
-                MarshalText(OutputField, "Background read starting.\r\n");
+                AppendOutputLine("Background read starting.");
 
-                while (true) // Until closed and ReadAsync fails.
+                byte[] readBuffer = new byte[1000];
+
+                while (true)
                 {
+                    if (streamWebSocket != activeSocket)
+                    {
+                        // Our socket is no longer active. Stop reading.
+                        AppendOutputLine("Background read stopped.");
+                        return;
+                    }
+
                     int read = await readStream.ReadAsync(readBuffer, 0, readBuffer.Length);
-                    bytesReceived += read;
-                    MarshalText(DataReceivedField, bytesReceived.ToString(), false);
 
                     // Do something with the data.
+                    // This sample merely reports that the data was received.
+
+                    bytesReceived += read;
+                    DataReceivedField.Text = bytesReceived.ToString();
                 }
-            }
-            catch (ObjectDisposedException)
-            {
-                MarshalText(OutputField, "Background read stopped.\r\n");
             }
             catch (Exception ex)
             {
@@ -213,84 +257,61 @@ namespace Microsoft.Samples.Networking.WebSocket
                 switch (status)
                 {
                     case WebErrorStatus.OperationCanceled:
-                        MarshalText(OutputField, "Background write canceled.\r\n");
+                        AppendOutputLine("Background read canceled.");
                         break;
 
-                    case WebErrorStatus.Unknown:
-                        throw;
-
                     default:
-                        MarshalText(OutputField, "Error: " + status + "\r\n");
-                        MarshalText(OutputField, ex.Message + "\r\n");
+                        AppendOutputLine("Error: " + status);
+                        AppendOutputLine(ex.Message);
                         break;
                 }
             }
         }
 
-        private void Stop_Click(object sender, RoutedEventArgs e)
+        private void OnStop()
         {
-            try
-            {
-                if (streamWebSocket != null)
-                {
-                    rootPage.NotifyUser("Stopping", NotifyType.StatusMessage);
-                    streamWebSocket.Close(1000, "Closed due to user request.");
-                    streamWebSocket = null;
-                }
-                else
-                {
-                    rootPage.NotifyUser("There is no active socket to stop.", NotifyType.StatusMessage);
-                }
-            }
-            catch (Exception ex)
-            {
-                WebErrorStatus status = WebSocketError.GetStatus(ex.GetBaseException().HResult);
-
-                if (status == WebErrorStatus.Unknown)
-                {
-                    throw;
-                }
-
-                // Normally we'd use the status to test for specific conditions we want to handle specially,
-                // and only use ex.Message for display purposes.  In this sample, we'll just output the
-                // status for debugging here, but still use ex.Message below.
-                rootPage.NotifyUser("Error: " + status, NotifyType.ErrorMessage);
-
-                OutputField.Text += ex.Message + "\r\n";
-            }
+            SetBusy(true);
+            rootPage.NotifyUser("Stopping", NotifyType.StatusMessage);
+            CloseSocket();
+            SetBusy(false);
         }
 
         // This may be triggered remotely by the server or locally by Close/Dispose()
-        private void Closed(IWebSocket sender, WebSocketClosedEventArgs args)
+        private async void OnClosed(IWebSocket sender, WebSocketClosedEventArgs args)
         {
-            MarshalText(OutputField, "Closed; Code: " + args.Code + ", Reason: " + args.Reason + "\r\n");
+            // Dispatch the event to the UI thread so we do not need to synchronize access to streamWebSocket.
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                AppendOutputLine("Closed; Code: " + args.Code + ", Reason: " + args.Reason);
 
+                if (streamWebSocket == sender)
+                {
+                    CloseSocket();
+                    UpdateVisualState();
+                }
+            });
+        }
+
+        private void CloseSocket()
+        {
             if (streamWebSocket != null)
             {
-                streamWebSocket.Dispose();
+                try
+                {
+                    streamWebSocket.Close(1000, "Closed due to user request.");
+                }
+                catch (Exception ex)
+                {
+                    AppendOutputLine(MainPage.BuildWebSocketError(ex));
+                    AppendOutputLine(ex.Message);
+                }
                 streamWebSocket = null;
             }
         }
 
-        private void MarshalText(TextBox output, string value)
+        private void AppendOutputLine(string value)
         {
-            MarshalText(output, value, true);
-        }
-
-        // When operations happen on a background thread we have to marshal UI updates back to the UI thread.
-        private void MarshalText(TextBox output, string value, bool append)
-        {
-            var ignore = output.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-            {
-                if (append)
-                {
-                    output.Text += value;
-                }
-                else
-                {
-                    output.Text = value;
-                }
-            });
+            OutputField.Text += value + "\r\n";
         }
     }
 }

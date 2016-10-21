@@ -1,0 +1,162 @@
+﻿<Page
+    x:Class="SDKTemplate.Functions"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:appm="using:Windows.ApplicationModel"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:model="using:xBindSampleModel">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical" Margin="10">
+                <TextBlock Text="Functions on the current page" Style="{StaticResource Section}"/>
+                <TextBlock Style="{StaticResource Note}">
+                    <Run>The leaf of an x:Bind expression can be a call to a function, which can fetch and convert values as needed.</Run>
+                </TextBlock>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"  Grid.ColumnSpan="2" Text="Functions are specified using the name and parentheses, even if there are no parameters."/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" >Text="{x:Bind GetTime()}"</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{x:Bind GetTime()}"/>
+
+                    <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="Constant parameters can be passed as string, number or boolean "/>
+                    <TextBlock Grid.Row="3" Grid.Column="1"> Text="{x:Bind Display('Hello World', 42, 3.147, x:True)}"</TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="{x:Bind Display('Hello World', 42, 3.147, x:True)}" />
+
+                    <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Text="Parameters can be specified using binding paths"/>
+                    <TextBlock Grid.Row="5" Grid.Column="1"> Text="{x:Bind countVowels(Model.ManagerProp.Name)}"</TextBlock>
+                    <TextBlock Grid.Row="5" Grid.Column="2" Text="{x:Bind countVowels(Model.ManagerProp.Name)}" />
+
+                    <TextBlock Grid.Row="6" Grid.ColumnSpan="2" Text="If Mode=OneWay, then the change detection will be applied to any path parameters"/>
+                    <TextBlock Grid.Row="7" Grid.Column="1" >Text="{x:Bind countVowels(Model.StringPropWithINPC), Mode=OneWay}"</TextBlock>
+                    <TextBlock Grid.Row="7" Grid.Column="2" Text="{x:Bind countVowels(Model.StringPropWithINPC), Mode=OneWay}" />
+
+                    <TextBlock Grid.Row="8" Grid.ColumnSpan="2" Text="Multiple parameters can be paths and if any change, the value will be updated, such as with these sliders"/>
+                    <TextBlock Grid.Row="9" Grid.Column="1" VerticalAlignment="Top">Fill="{x:Bind MakeColor(RedSlider.Value, GreenSlider.Value, BlueSlider.Value), Mode=OneWay}"</TextBlock>
+                    <Grid Grid.Row="9" Grid.Column="2"  VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock>Red:</TextBlock>
+                        <Slider x:Name="RedSlider" Grid.Column="1" Minimum="0" Maximum="255" Value="50" Width="180"/>
+
+                        <TextBlock Grid.Row="1">Green:</TextBlock>
+                        <Slider x:Name="GreenSlider" Grid.Column="1" Grid.Row="1" Minimum="0" Maximum="255" Value="100" Width="180"/>
+
+                        <TextBlock Grid.Row="2">Blue:</TextBlock>
+                        <Slider x:Name="BlueSlider" Grid.Column="1" Grid.Row="2" Minimum="0" Maximum="255" Value="150" Width="180"/>
+
+                        <Rectangle  Fill="{x:Bind MakeColor(RedSlider.Value, GreenSlider.Value, BlueSlider.Value), Mode=OneWay}" Grid.Column="2" Grid.RowSpan="2" Width="50" Height="50" Margin="5,0" />
+                    </Grid>
+
+                    <TextBlock Text="Two-way bindings with functions" Style="{StaticResource Section}" Grid.Row="10" Grid.ColumnSpan="2"/>
+                    <TextBlock Grid.Row="11" Grid.ColumnSpan="2" MaxWidth="600" HorizontalAlignment="Left" TextWrapping="Wrap">
+                    <Run>To enable the reverse direction of a two-way binding, you specify the path to a second function that will process the value from the control. That function should take a single parameter of the property type, and push the value back where it needs to go in the model.</Run>
+                    </TextBlock>
+
+                    <TextBlock Grid.Row="12"  Grid.ColumnSpan="2" Text="Two way binding for the value of the color above"/>
+                    <TextBlock Grid.Row="13" Grid.Column="1" >Text="{x:Bind ColorValue(RedSlider.Value, GreenSlider.Value, BlueSlider.Value), Mode=TwoWay, BindBack=ProcessColor}"</TextBlock>
+                    <TextBox Text="{x:Bind ColorValue(RedSlider.Value, GreenSlider.Value, BlueSlider.Value), Mode=TwoWay, BindBack=ProcessColor}" Grid.Row="13" Grid.Column="2" Width="250" HorizontalAlignment="Left"/>
+                </Grid>
+
+                <TextBlock Text="Paths to functions" Style="{StaticResource Section}"/>
+                <TextBlock Style="{StaticResource Note}">
+          <Run>The function can be specified using a path</Run>
+                </TextBlock>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"  Grid.ColumnSpan="2" Text="Function on the model:"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" >Text="{x:Bind Model.SubString(Model.StringPropWithINPC,5)}"</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{x:Bind Model.SubString(Model.StringPropWithINPC,5)}"/>
+
+                    <TextBlock Grid.Row="2"  Grid.ColumnSpan="2" Text="If the Mode=OneWay, then the function path will have change detection:"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" >Text="{x:Bind Model.SubString(Model.StringPropWithINPC,5), Mode=OneWay}"</TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="{x:Bind Model.SubString(Model.StringPropWithINPC,5), Mode=Oneway}"/>
+
+                    <TextBlock Grid.Row="4"  Grid.ColumnSpan="2" Text="Static functions can be located using xmlns:type syntax"/>
+                    <TextBlock Grid.Row="5" Grid.Column="1" >Text="{x:Bind appm:Package.Current.DisplayName}"</TextBlock>
+                    <TextBlock Grid.Row="5" Grid.Column="2" Text="{x:Bind appm:Package.Current.DisplayName}"/>
+                </Grid>
+
+                <TextBlock Text="Data Templates" Style="{StaticResource Section}"/>
+                <TextBlock Text="In data templates you can bind to functions on the model. In the following list, the color of the text and item is calculated using functions on the model."/>
+                <Grid BorderBrush="LightGray" Padding="3" BorderThickness="2" Width="200" HorizontalAlignment="Left" Margin="0,5">
+                    <ListView ItemsSource="{x:Bind ColorEntries, Mode=OneWay}" Height="300" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="local:ColorEntry">
+                                <!-- The following binding is against the Brushify method on ColorEntry -->
+                                <Grid Background="{x:Bind Brushify(Color)}" >
+                                    <!-- The following binding is using "local:Functions" to map to the Functions class to be able to use a static method-->
+                                    <TextBlock Foreground="{x:Bind local:Functions.TextColor(Color)}" Text="{x:Bind ColorName}" Margin="10,5" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBlock Margin="20" Visibility="{x:Bind ShowPlaceholder(ColorEntries.Size),Mode=OneWay}" TextWrapping="Wrap">This placeholder is shown based on the size of the collection backing the list. Click the Populate Colors button to add the named colors to the collection.</TextBlock>
+                </Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Button Click="PopulateColorsClick">Populate Colors</Button>
+                    <Button Click="ClearColorsClick">Clear Colors</Button>
+                </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="1">
+            <Button Click="UpdateValuesClick" >Update Model Values</Button>
+            <Button Click="ResetValuesClick" >Reset Model Values</Button>
+        </StackPanel>
+    </Grid>
+</Page>

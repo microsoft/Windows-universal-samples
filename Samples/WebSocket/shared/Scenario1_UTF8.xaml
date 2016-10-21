@@ -1,0 +1,75 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="UTF-8 text messages"/>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                This scenario uses a MessageWebSocket to send UTF-8 strings.
+                The sample server supports both plaintext WebSocket (ws://) and secure WebSocket (wss://) server endpoints.
+            </TextBlock>
+            <TextBlock Text="Server Address:" Margin="0,10,0,0"/>
+            <TextBox x:Name="ServerAddressField" InputScope="Url" Text="ws://localhost/WebSocketSample/EchoWebSocket.ashx"  Margin="0,10,0,0"/>
+            <CheckBox x:Name="SecureWebSocketCheckBox" Content="Perform custom server certificate validation" IsChecked="False" Margin="0,10,0,0"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button x:Name="ConnectButton" Content="Connect" Margin="0,0,10,0" Click="{x:Bind OnConnect}"/>
+                <Button x:Name="DisconnectButton" Content="Disconnect" Margin="0,0,10,0" Click="{x:Bind OnDisconnect}"/>
+            </StackPanel>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">Enter text to send to the server.</TextBlock>
+            <TextBox x:Name="InputField" Text="Hello World" Margin="0,10,0,0"/>
+            <Button x:Name="SendButton" Content="Send" Margin="0,10,0,0" Click="{x:Bind OnSend}"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
+            <TextBox x:Name="OutputField" TextWrapping="Wrap" IsReadOnly="True"/>
+        </ScrollViewer>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Disconnected">
+                    <VisualState.Setters>
+                        <Setter Target="DisconnectButton.IsEnabled" Value="False"/>
+                        <Setter Target="InputField.IsEnabled" Value="False"/>
+                        <Setter Target="SendButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Connected">
+                    <VisualState.Setters>
+                        <Setter Target="ServerAddressField.IsEnabled" Value="False"/>
+                        <Setter Target="SecureWebSocketCheckBox.IsEnabled" Value="False"/>
+                        <Setter Target="ConnectButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Busy">
+                    <VisualState.Setters>
+                        <Setter Target="ServerAddressField.IsEnabled" Value="False"/>
+                        <Setter Target="SecureWebSocketCheckBox.IsEnabled" Value="False"/>
+                        <Setter Target="ConnectButton.IsEnabled" Value="False"/>
+                        <Setter Target="DisconnectButton.IsEnabled" Value="False"/>
+                        <Setter Target="InputField.IsEnabled" Value="False"/>
+                        <Setter Target="SendButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</Page>

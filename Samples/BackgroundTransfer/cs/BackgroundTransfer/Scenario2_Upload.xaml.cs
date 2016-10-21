@@ -253,8 +253,8 @@ namespace BackgroundTransfer
         private void UploadProgress(UploadOperation upload)
         {
             // UploadOperation.Progress is updated in real-time while the operation is ongoing. Therefore,
-            // we must make a local copy at the beginning of the progress handler, so that we can have a consistent
-            // view of that ever-changing state throughout the handler's lifetime.
+            // we must make a local copy so that we can have a consistent view of that ever-changing state
+            // throughout this method's lifetime.
             BackgroundUploadProgress currentProgress = upload.Progress;
 
             MarshalLog(String.Format(CultureInfo.CurrentCulture, "Progress: {0}, Status: {1}", upload.Guid, 

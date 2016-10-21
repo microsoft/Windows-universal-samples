@@ -7,7 +7,15 @@
 
 This sample shows how to use the [**Accelerometer**](http://msdn.microsoft.com/library/windows/apps/br225687) class.
 
-This sample allows the user to view the acceleration forces along the X-, Y-, and Z-axes for a 3-axis accelerometer. You can choose one of four scenarios:
+This sample allows the user to view the acceleration forces along the X-, Y-, and Z-axes for a 3-axis accelerometer.
+
+The sample asks you to choose an accelerometer.
+
+- The standard accelerometer reports total acceleration.
+- The linear accelerometer reports acceleration due to motion.
+- The gravity accelerometer reports acceleration due to gravity.
+
+After choosing your accelerometer, you can choose one of these scenarios:
 
 -   Accelerometer data events
 -   Accelerometer shake events
@@ -55,11 +63,11 @@ When you choose the **Enable** button for the **Data Events** option, the app be
 
 ## System requirements
 
-**Client:** Windows 10
+**Client:** Windows 10 build 14295
 
 **Server:** Windows Server 2016 Technical Preview
 
-**Phone:** Windows 10
+**Phone:** Windows 10 build 14295
 
 ## Build the sample
 

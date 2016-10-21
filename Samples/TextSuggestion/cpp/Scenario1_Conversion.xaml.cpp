@@ -94,9 +94,8 @@ void Scenario1_Conversion::Methods_SelectionChanged(Platform::Object^ sender, Se
     if (maxCandidatesArea != nullptr)
     {
         // Only show the candidate number input control when user chooses to specify the number.
-        if (selectedItem->Content->ToString()->Equals("GetCandidatesAsync(WithMaxCount)"))
+        if ((selectedItem->Tag != nullptr) && selectedItem->Tag->ToString()->Equals("needMaxCount"))
         {
-
             maxCandidatesArea->Visibility = Windows::UI::Xaml::Visibility::Visible;
         }
         else
@@ -131,8 +130,8 @@ void Scenario1_Conversion::Execute_Click(Platform::Object^ sender, RoutedEventAr
 
     if ((generator != nullptr) && (selectedItem != nullptr) && !input->IsEmpty())
     {
-        // Specifiy the candidate number to get.
-        if (selectedItem->Content->ToString()->Equals("GetCandidatesAsync(WithMaxCount)"))
+        // Specify the candidate number to get.
+        if ((selectedItem->Tag != nullptr) && selectedItem->Tag->ToString()->Equals("needMaxCount"))
         {
             int maxCandidateCount = _wtoi(maxCandidates->Text->Data());
 
@@ -141,7 +140,7 @@ void Scenario1_Conversion::Execute_Click(Platform::Object^ sender, RoutedEventAr
                 // Call the API with max candidate number we expect, and list the result when there are any candidates.
                 concurrency::create_task(generator->GetCandidatesAsync(input, static_cast<UINT>(maxCandidateCount))).then([this](IVectorView<String^>^ candidates)
                 {
-                    displayMultipleCandidates(candidates);
+                    DisplayMultipleCandidates(candidates);
                 });
             }
             else
@@ -154,7 +153,7 @@ void Scenario1_Conversion::Execute_Click(Platform::Object^ sender, RoutedEventAr
             // Call the API with default candidate number, and list the result when there are any candidates. 
             concurrency::create_task(generator->GetCandidatesAsync(input)).then([this](IVectorView<String^>^ candidates)
             {
-                displayMultipleCandidates(candidates);
+                DisplayMultipleCandidates(candidates);
             });
         }
     }
@@ -164,7 +163,7 @@ void Scenario1_Conversion::Execute_Click(Platform::Object^ sender, RoutedEventAr
 /// Helper method for displaying conversion candidates.
 /// </summary>
 /// <param name="result">The converison candidates we got from text conversion generator.</param>
-void Scenario1_Conversion::displayMultipleCandidates(IVectorView<String^>^ candidates)
+void Scenario1_Conversion::DisplayMultipleCandidates(IVectorView<String^>^ candidates)
 {
     Vector<String^>^ itemsSource = ref new Vector<String^>();
     for (unsigned int i = 0; i < candidates->Size; i++)

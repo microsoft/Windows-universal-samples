@@ -72,7 +72,7 @@
                 <Paragraph></Paragraph>
                 <Paragraph TextIndent="12">&lt;SemanticZoom.ZoomedOutView&gt;</Paragraph>
                 <Paragraph TextIndent="24">&lt;ListView ItemsSource="{x:Bind cvsGroups.View.CollectionGroups}" HorizontalAlignment="Stretch"</Paragraph>
-                <Paragraph TextIndent="60">SelectionMode="None" ItemTemplate="{StaticResource ZoomedOutTemplate}" /gt;</Paragraph>
+                <Paragraph TextIndent="60">SelectionMode="None" ItemTemplate="{StaticResource ZoomedOutTemplate}" /&gt;</Paragraph>
                 <Paragraph TextIndent="12">&lt;/SemanticZoom.ZoomedOutView&gt;</Paragraph>
                 <Paragraph>&lt;/SemanticZoom&gt;</Paragraph>
             </RichTextBlock>

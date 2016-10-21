@@ -60,6 +60,11 @@ namespace SDKTemplate
                 {
                     rootPage.NotifyUserFileNotExist();
                 }
+                catch (Exception ex)
+                {
+                    // I/O errors are reported as exceptions.
+                    rootPage.NotifyUser(String.Format("Error writing to '{0}': {1}", file.Name, ex.Message), NotifyType.ErrorMessage);
+                }
             }
             else
             {
@@ -80,6 +85,11 @@ namespace SDKTemplate
                 catch (FileNotFoundException)
                 {
                     rootPage.NotifyUserFileNotExist();
+                }
+                catch (Exception ex)
+                {
+                    // I/O errors are reported as exceptions.
+                    rootPage.NotifyUser(String.Format("Error reading from '{0}': {1}", file.Name, ex.Message), NotifyType.ErrorMessage);
                 }
             }
             else

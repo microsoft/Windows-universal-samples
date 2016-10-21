@@ -44,20 +44,15 @@ void TimeTriggeredTask::OnNavigatedTo(NavigationEventArgs^ e)
     //
     // Attach progress and completed handlers to any existing tasks.
     //
-    auto iter = BackgroundTaskRegistration::AllTasks->First();
-    auto hascur = iter->HasCurrent;
-    while (hascur)
+    for (auto pair : BackgroundTaskRegistration::AllTasks)
     {
-        auto cur = iter->Current->Value;
-
-        if (cur->Name == TimeTriggeredTaskName)
+        auto task = pair->Value;
+        if (task->Name == TimeTriggeredTaskName)
         {
-            BackgroundTaskSample::UpdateBackgroundTaskStatus(cur->Name, true);
-            AttachProgressAndCompletedHandlers(cur);
+            BackgroundTaskSample::UpdateBackgroundTaskRegistrationStatus(task->Name, true);
+            AttachProgressAndCompletedHandlers(task);
             break;
         }
-
-        hascur = iter->MoveNext();
     }
 
     UpdateUI();
@@ -69,19 +64,8 @@ void TimeTriggeredTask::OnNavigatedTo(NavigationEventArgs^ e)
 /// <param name="task">The task to attach progress and completed handlers to.</param>
 void TimeTriggeredTask::AttachProgressAndCompletedHandlers(IBackgroundTaskRegistration^ task)
 {
-    auto progress = [this](BackgroundTaskRegistration^ task, BackgroundTaskProgressEventArgs^ args)
-    {
-        auto progress = "Progress: " + args->Progress + "%";
-        BackgroundTaskSample::TimeTriggeredTaskProgress = progress;
-        UpdateUI();
-    };
-    task->Progress += ref new BackgroundTaskProgressEventHandler(progress);
-
-    auto completed = [this](BackgroundTaskRegistration^ task, BackgroundTaskCompletedEventArgs^ args)
-    {
-        UpdateUI();
-    };
-    task->Completed += ref new BackgroundTaskCompletedEventHandler(completed);
+    task->Progress += ref new BackgroundTaskProgressEventHandler(this, &TimeTriggeredTask::OnProgress);
+    task->Completed += ref new BackgroundTaskCompletedEventHandler(this, &TimeTriggeredTask::OnCompleted);
 }
 
 /// <summary>
@@ -107,6 +91,31 @@ void TimeTriggeredTask::RegisterBackgroundTask(Platform::Object^ sender, Windows
 void TimeTriggeredTask::UnregisterBackgroundTask(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     BackgroundTaskSample::UnregisterBackgroundTasks(TimeTriggeredTaskName);
+    UpdateUI();
+}
+
+/// <summary>
+/// Handle background task progress.
+/// </summary>
+/// <param name="task">The task that is reporting progress.</param>
+/// <param name="args">Arguments of the progress report.</param>
+void TimeTriggeredTask::OnProgress(BackgroundTaskRegistration^ task, BackgroundTaskProgressEventArgs^ args)
+{
+    Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
+    {
+        auto progress = "Progress: " + args->Progress + "%";
+        BackgroundTaskSample::TimeTriggeredTaskProgress = progress;
+        UpdateUI();
+    }));
+}
+
+/// <summary>
+/// Handle background task completion.
+/// </summary>
+/// <param name="task">The task that is reporting completion.</param>
+/// <param name="args">Arguments of the completion report.</param>
+void TimeTriggeredTask::OnCompleted(BackgroundTaskRegistration^ task, BackgroundTaskCompletedEventArgs^ args)
+{
     UpdateUI();
 }
 

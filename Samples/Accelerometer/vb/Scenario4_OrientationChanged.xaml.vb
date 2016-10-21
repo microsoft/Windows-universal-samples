@@ -8,15 +8,8 @@
 ' PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 '
 '*********************************************************
-Imports Windows.UI.Xaml
-Imports Windows.UI.Xaml.Controls
-Imports Windows.UI.Xaml.Navigation
-Imports System
 Imports Windows.Devices.Sensors
-Imports Windows.Foundation
-Imports System.Threading.Tasks
 Imports Windows.UI.Core
-Imports Windows.Graphics.Display
 
 Namespace Global.SDKTemplate
 
@@ -36,50 +29,28 @@ Namespace Global.SDKTemplate
 
         Public Sub New()
             Me.InitializeComponent()
-            accelerometerOriginal = Accelerometer.GetDefault()
-            accelerometerReadingTransform = Accelerometer.GetDefault()
-            If accelerometerOriginal Is Nothing OrElse accelerometerReadingTransform Is Nothing Then
-                rootPage.NotifyUser("No accelerometer found", NotifyType.ErrorMessage)
-            End If
-
-            displayInformation = DisplayInformation.GetForCurrentView()
         End Sub
 
-        ''' <summary>
-        ''' Invoked when this page is about to be displayed in a Frame.
-        ''' </summary>
-        ''' <param name="e">Event data that describes how this page was reached. The Parameter
-        ''' property is typically used to configure the page.</param>
         Protected Overrides Sub OnNavigatedTo(e As NavigationEventArgs)
+            accelerometerOriginal = Accelerometer.GetDefault(rootPage.AccelerometerReadingType)
+            accelerometerReadingTransform = Accelerometer.GetDefault(rootPage.AccelerometerReadingType)
             If accelerometerOriginal Is Nothing OrElse accelerometerReadingTransform Is Nothing Then
-                ScenarioEnableButton.IsEnabled = False
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType.ToString & " accelerometer not found", NotifyType.ErrorMessage)
             Else
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType.ToString & " accelerometer ready", NotifyType.StatusMessage)
                 ScenarioEnableButton.IsEnabled = True
             End If
 
-            ScenarioDisableButton.IsEnabled = False
+            displayInformation = DisplayInformation.GetForCurrentView()
             AddHandler displayInformation.OrientationChanged, AddressOf displayInformation_OrientationChanged
         End Sub
 
-        ''' <summary>
-        ''' Invoked immediately before the Page is unloaded and is no longer the current source of a parent Frame.
-        ''' </summary>
-        ''' <param name="e">
-        ''' Event data that can be examined by overriding code. The event data is representative
-        ''' of the navigation that will unload the current Page unless canceled. The
-        ''' navigation can potentially be canceled by setting Cancel.
-        ''' </param>
         Protected Overrides Sub OnNavigatingFrom(e As NavigatingCancelEventArgs)
             If ScenarioDisableButton.IsEnabled Then
-                RemoveHandler Window.Current.VisibilityChanged, AddressOf Current_VisibilityChanged
-                RemoveHandler accelerometerOriginal.ReadingChanged, AddressOf _accelerometerOriginal_ReadingChanged
-                RemoveHandler accelerometerReadingTransform.ReadingChanged, AddressOf _accelerometerReadingTransform_ReadingChanged
-                accelerometerOriginal.ReportInterval = 0
-                accelerometerReadingTransform.ReportInterval = 0
+                ScenarioDisable()
             End If
 
             RemoveHandler displayInformation.OrientationChanged, AddressOf displayInformation_OrientationChanged
-            MyBase.OnNavigatingFrom(e)
         End Sub
 
         ''' <summary>
@@ -98,8 +69,6 @@ Namespace Global.SDKTemplate
         ''' <summary>
         ''' This is the click handler for the 'Enable' button.
         ''' </summary>
-        ''' <param name="sender"></param>
-        ''' <param name="e"></param>
         Sub ScenarioEnable(sender As Object, e As RoutedEventArgs)
             accelerometerOriginal.ReportInterval = accelerometerOriginal.MinimumReportInterval
             accelerometerReadingTransform.ReportInterval = accelerometerReadingTransform.MinimumReportInterval
@@ -121,10 +90,7 @@ Namespace Global.SDKTemplate
         ''' </param>
         Async Sub _accelerometerOriginal_ReadingChanged(sender As Accelerometer, args As AccelerometerReadingChangedEventArgs)
             Await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Sub()
-                Dim reading As AccelerometerReading = args.Reading
-                ScenarioOutput_X_Original.Text = String.Format("{0,5:0.00}", reading.AccelerationX)
-                ScenarioOutput_Y_Original.Text = String.Format("{0,5:0.00}", reading.AccelerationY)
-                ScenarioOutput_Z_Original.Text = String.Format("{0,5:0.00}", reading.AccelerationZ)
+                MainPage.SetReadingText(ScenarioOutputOriginal, args.Reading)
             End Sub)
         End Sub
 
@@ -138,10 +104,7 @@ Namespace Global.SDKTemplate
         ''' </param>
         Async Sub _accelerometerReadingTransform_ReadingChanged(sender As Accelerometer, args As AccelerometerReadingChangedEventArgs)
             Await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Sub()
-                Dim reading As AccelerometerReading = args.Reading
-                ScenarioOutput_X_ReadingTransform.Text = String.Format("{0,5:0.00}", reading.AccelerationX)
-                ScenarioOutput_Y_ReadingTransform.Text = String.Format("{0,5:0.00}", reading.AccelerationY)
-                ScenarioOutput_Z_ReadingTransform.Text = String.Format("{0,5:0.00}", reading.AccelerationZ)
+                MainPage.SetReadingText(ScenarioOutputReadingTransform, args.Reading)
             End Sub)
         End Sub
 
@@ -168,9 +131,7 @@ Namespace Global.SDKTemplate
         ''' <summary>
         ''' This is the click handler for the 'Disable' button.
         ''' </summary>
-        ''' <param name="sender"></param>
-        ''' <param name="e"></param>
-        Sub ScenarioDisable(sender As Object, e As RoutedEventArgs)
+        Sub ScenarioDisable()
             RemoveHandler Window.Current.VisibilityChanged, AddressOf Current_VisibilityChanged
             RemoveHandler accelerometerOriginal.ReadingChanged, AddressOf _accelerometerOriginal_ReadingChanged
             RemoveHandler accelerometerReadingTransform.ReadingChanged, AddressOf _accelerometerReadingTransform_ReadingChanged

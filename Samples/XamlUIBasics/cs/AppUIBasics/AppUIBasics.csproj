@@ -10,8 +10,8 @@
     <AssemblyName>AppUIBasics</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -305,14 +305,14 @@
       <Link>Assets\SplashScreen.png</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\media\smalltile-sdk.png">
-        <Link>Assets\smalltile-sdk.png</Link>
+      <Link>Assets\smalltile-sdk.png</Link>
     </Content>
     <Content Include="Assets\SplitView.png" />
     <Content Include="..\..\..\..\SharedContent\media\Samples\treetops.jpg">
       <Link>Assets\treetops.jpg</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\media\storelogo-sdk.png">
-        <Link>Assets\storelogo-sdk.png</Link>
+      <Link>Assets\storelogo-sdk.png</Link>
     </Content>
     <Content Include="DataModel\ControlInfoData.json" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
@@ -618,11 +618,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <SDKReference Include="WindowsMobile, Version=10.0.10240.0">
-      <Name>Microsoft Mobile Extension SDK for Universal App Platform</Name>
-    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
