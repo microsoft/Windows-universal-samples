@@ -1,0 +1,43 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario.css" />
+    <script src="/js/playreadyeme.js"></script>
+    <script src="/js/scenario3_eme.js"></script>
+</head>
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This example uses W3C standards based Encrypted Media Extensions(EME) to enable protected playback. This is useful for Hosted Web Applications where protected playback is configured the same way it would be in the browser.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <div class="playreadyScenario">
+
+                <div class="scenarioField">
+                    <label>License URL:</label>
+                    <input type="text" id="inputLaUrl" data-win-bind="value: laURL;onchange: laUrlHandler" />
+                    <span style="width:124px"></span>
+                    <span style="width:124px"></span>
+                </div>
+                <div class="scenarioField">
+                    <label>Content:</label>
+                    <input type="text" id="inputContentUrl" data-win-bind="value: contentURL;onchange: contentUrlHandler" />
+                    <button class="win-button" id="btnPlay" data-win-bind="onclick: playHandler">Play</button>
+                    <button class="win-button" data-win-bind="onclick: stopHandler">Stop</button>
+                </div>
+                <div class="videoDiv">
+                    <video data-win-bind="onerror: videoErrorHandler" id="video" />
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

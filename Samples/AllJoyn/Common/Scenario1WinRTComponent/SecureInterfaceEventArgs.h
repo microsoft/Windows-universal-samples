@@ -23,6 +23,7 @@
 namespace com { namespace microsoft { namespace Samples { namespace SecureInterface {
 
 // Signals
+// "This signal is emitted when producer sends a text message to consumer"
 public ref class SecureInterfaceTextSentReceivedEventArgs sealed
 {
 public:

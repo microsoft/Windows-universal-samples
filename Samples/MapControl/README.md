@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: MapsAndLocation 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619977
 --->
@@ -25,6 +25,8 @@ This sample is written in XAML and C#.
 [MapControl API reference]( https://msdn.microsoft.com/en-us/library/windows/apps/xaml/windows.ui.xaml.controls.maps.mapcontrol.aspx) 
 
 [Launch the Windows Maps app](https://msdn.microsoft.com/library/windows/apps/mt228341)
+
+[Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)  
 
 ## Operating system requirements
 

@@ -27,6 +27,10 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 [**Windows.System.UserProfile** namespace](http://msdn.microsoft.com/library/windows/apps/br241881)
 
+## Related samples
+
+[Customers Orders Database sample](https://github.com/Microsoft/Windows-appsample-customers-orders-database)  
+
 ## System requirements
 
 **Client:** Windows 10

@@ -39,7 +39,7 @@ SecureInterfaceProducer::SecureInterfaceProducer(AllJoynBusAttachment^ busAttach
 {
     m_weak = new WeakReference(this);
     ServiceObjectPath = ref new String(L"/Service");
-    m_signals = ref new SecureInterfaceSignals();
+    m_signals = ref new SecureInterfaceLegacySignals();
     m_busAttachmentStateChangedToken.Value = 0;
 }
 

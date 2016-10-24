@@ -62,9 +62,23 @@ void App::Initialize(_In_ CoreApplicationView^ applicationView)
     CoreApplication::Resuming +=
         ref new EventHandler<Platform::Object^>(this, &App::OnResuming);
 
-    // At this point we have access to the device. 
+    // At this point we have access to the device.
     // We can create the device-dependent resources.
     m_deviceResources = std::make_shared<DX::DeviceResources>();
+
+    auto device = m_deviceResources->GetD3DDevice();
+
+    // Check whether the graphics hardware supports compute shaders. If not, switch to a WARP device
+    // which is guaranteed to support at least D3D_FEATURE_LEVEL_11_0.
+    if (device->GetFeatureLevel() < D3D_FEATURE_LEVEL_11_0)
+    {
+        D3D11_FEATURE_DATA_D3D10_X_HARDWARE_OPTIONS hwopts = { 0 };
+        DX::ThrowIfFailed(device->CheckFeatureSupport(D3D11_FEATURE_D3D10_X_HARDWARE_OPTIONS, &hwopts, sizeof(hwopts)));
+        if (!hwopts.ComputeShaders_Plus_RawAndStructuredBuffers_Via_Shader_4_x)
+        {
+            m_deviceResources.reset(new DX::DeviceResources(true));
+        }
+    }
 }
 
 // Called when the CoreWindow object is created (or re-created).

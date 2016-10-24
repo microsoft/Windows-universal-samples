@@ -328,25 +328,23 @@
         if (eventIn.property == Windows.Media.SystemMediaTransportControlsProperty.soundLevel) {
             switch (systemMediaControls.soundLevel) {
                 case Windows.Media.SoundLevel.muted:
-                    // We;ve been muted by the system, pause to save out state if we're currently playing. 
-                    if (player != null && player.playerState == playerState.playing) {
-                        WinJS.log && WinJS.log("Play pressed", "sample", "status");
+                    // We've been muted by the system. Pause playback to release resources.
+                    if (player != null && !player.paused && !player.ended) {
+                        WinJS.log && WinJS.log("Paused due to system mute", "sample", "status");
                         player.pause();
                         pausedDueToMute = true;
                     }
                     break;
 
                 case Windows.Media.SoundLevel.full:
-                    // We've just been unmuted, if we paused when we muted resume. 
+                case Windows.Media.SoundLevel.low:
+                    // If we had paused due to system mute, then resume on unmute.
                     if (pausedDueToMute) {
-                        WinJS.log && WinJS.log("Pause pressed", "sample", "status");
+                        WinJS.log && WinJS.log("Unpause due to system unmute", "sample", "status");
                         player.play();
+                        pausedDueToMute = false;
                     }
                     break;
-
-                case Windows.Media.SoundLevel.low:
-                    // We're being ducked, take no action. 
-                    break;               
             }
         }
     }
@@ -554,13 +552,6 @@
         currentItemIndex = newItemIndex;
         var mediaFile = playlist[currentItemIndex];
         player.src = URL.createObjectURL(mediaFile, { oneTimeOnly: true });
-
-        // for sample purpose only: the setActive() as a side effect will temporarily 
-        // fades in the build-in transport controls of the <video> element as visual 
-        // feedback, in case the mediaFile being loaded/played is audio-only.  Not 
-        // necessary with <audio> elements as their build-in transport controls 
-        // (when enabled) are always visible.
-        player.setActive();
 
         updateSystemMediaControlsDisplayAsync(mediaFile).done(function (done) {
             // no further actions needed

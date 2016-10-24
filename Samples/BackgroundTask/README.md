@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: LaunchingAndBackgroundTasks 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=618666
 --->
@@ -34,7 +34,9 @@ To obtain an evaluation copy of Microsoft Visual Studio 2013, go to [Visual Stu
 
 ### Samples
 
-[Background Activation](/Samples/BackgroundActivation)
+[Background Activation](/Samples/BackgroundActivation)  
+
+[Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)  
 
 ### Reference
 

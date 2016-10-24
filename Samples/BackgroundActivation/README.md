@@ -32,6 +32,8 @@ This sample uses the Single Process Model method for background activity. Applic
 
 [Background Tasks](/Samples/BackgroundTasks)
 
+[Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)  
+
 ### Reference
 
 [Launching, resuming, and multitasking](http://msdn.microsoft.com/library/windows/apps/hh770837)

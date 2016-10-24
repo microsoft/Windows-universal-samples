@@ -16,14 +16,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Devices.AllJoyn;
+using Windows.Devices.Enumeration;
 using Windows.Devices.WiFi;
 using Windows.Networking.Connectivity;
 using Windows.Security.Credentials;
+using Windows.Security.Cryptography;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 
@@ -62,7 +63,7 @@ namespace AllJoynConsumerExperiences
         private bool m_showOnboardeeSsidList = true;
         private bool m_showOnboarderSsidList = false;
         private AllJoynBusAttachment m_busAttachment = null;
-        private OnboardingWatcher m_watcher = null;
+        private DeviceWatcher m_watcher = null;
         private OnboardingConsumer m_consumer = null;
         private OnboardingAuthenticationType m_selectedAuthType = OnboardingAuthenticationType.Any;
         private TaskCompletionSource<bool> m_authenticateClicked = null;
@@ -692,7 +693,7 @@ namespace AllJoynConsumerExperiences
             m_busAttachment.AuthenticationMechanisms.Add(AllJoynAuthenticationMechanism.EcdheSpeke);
             m_busAttachment.AuthenticationComplete += BusAttachment_AuthenticationComplete;
             m_busAttachment.CredentialsRequested += BusAttachment_CredentialsRequested;
-            m_watcher = new OnboardingWatcher(m_busAttachment);
+            m_watcher = AllJoynBusAttachment.GetWatcher(new List<string> { "org.alljoyn.Onboarding" });
             m_watcher.Added += Watcher_Added;
             UpdateStatusAsync("Searching for onboarding interface...", NotifyType.StatusMessage);
             m_watcher.Start();
@@ -756,7 +757,7 @@ namespace AllJoynConsumerExperiences
             credentialsDeferral.Complete();
         }
 
-        private async void Watcher_Added(OnboardingWatcher sender, AllJoynServiceInfo args)
+        private async void Watcher_Added(DeviceWatcher sender, DeviceInformation args)
         {
             // This demo supports a single onboarding producer, if there are multiple onboarding producers found, then they are ignored.
             // Another approach would be to create a list of all producers found and then allow the user to choose the one they want
@@ -766,25 +767,22 @@ namespace AllJoynConsumerExperiences
                 return;
             }
 
+            DisposeConsumer();
             UpdateStatusAsync("Joining session...", NotifyType.StatusMessage);
+            m_consumer = await OnboardingConsumer.FromIdAsync(args.Id, m_busAttachment);
 
-            OnboardingJoinSessionResult joinSessionResult = await OnboardingConsumer.JoinSessionAsync(args, sender);
-            if (joinSessionResult.Status == AllJoynStatus.Ok)
+            if (m_consumer != null)
             {
-                UpdateStatusAsync("Session Joined.", NotifyType.ErrorMessage);
-                DisposeConsumer();
-                m_consumer = joinSessionResult.Consumer;
-                m_consumer.SessionLost += Consumer_SessionLost;
-
+                m_consumer.Session.Lost += Consumer_SessionLost;
                 GetOnboardeeNetworkListAsync();
             }
             else
             {
-                UpdateStatusAsync(string.Format("Attempt to join session failed with AllJoyn error: 0x{0:X}.", joinSessionResult.Status), NotifyType.ErrorMessage);
+                UpdateStatusAsync("Attempt to join session failed.", NotifyType.ErrorMessage);
             }
         }
 
-        private void Consumer_SessionLost(OnboardingConsumer sender, AllJoynSessionLostEventArgs args)
+        private void Consumer_SessionLost(AllJoynSession sender, AllJoynSessionLostEventArgs args)
         {
             UpdateStatusAsync(string.Format("AllJoyn session with the onboardee lost due to {0}.", args.Reason.ToString()), NotifyType.StatusMessage);
             DisposeConsumer();
@@ -884,7 +882,7 @@ namespace AllJoynConsumerExperiences
             {
                 UpdateStatusAsync("Attempting to configure onboardee...", NotifyType.StatusMessage);
 
-                OnboardingConfigureWiFiResult configureWifiResult = await m_consumer.ConfigureWiFiAsync(ssid, password, authType);
+                OnboardingConfigureWiFiResult configureWifiResult = await m_consumer.ConfigureWiFiAsync(ssid, ConvertUtf8ToHex(password), authType);
                 if (configureWifiResult.Status == AllJoynStatus.Ok)
                 {
                     UpdateStatusAsync("Onboardee sucessfully configured.", NotifyType.StatusMessage);
@@ -906,6 +904,20 @@ namespace AllJoynConsumerExperiences
                 }
             }
             ClearPasswords();
+        }
+
+        private static string ConvertUtf8ToHex(string inputString)
+        {
+            if (string.IsNullOrEmpty(inputString))
+            {
+                return string.Empty;
+            }
+            else
+            {
+                var tempBuffer = CryptographicBuffer.ConvertStringToBinary(inputString, BinaryStringEncoding.Utf8);
+                var hexString = CryptographicBuffer.EncodeToHexString(tempBuffer);
+                return hexString;
+            }
         }
 
         private async void AttemptConnectionAsync()
@@ -973,7 +985,7 @@ namespace AllJoynConsumerExperiences
         {
             if (m_consumer != null)
             {
-                m_consumer.SessionLost -= Consumer_SessionLost;
+                m_consumer.Session.Lost -= Consumer_SessionLost;
                 m_consumer.Dispose();
                 m_consumer = null;
             }
@@ -985,7 +997,6 @@ namespace AllJoynConsumerExperiences
             {
                 m_watcher.Added -= Watcher_Added;
                 m_watcher.Stop();
-                m_watcher.Dispose();
                 m_watcher = null;
             }
         }

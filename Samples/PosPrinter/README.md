@@ -1,5 +1,5 @@
 <!---
-  category: DevicesSensorsAndPower
+  category: DevicesSensorsAndPower Printing
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620018
 --->
 

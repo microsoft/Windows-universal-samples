@@ -26,18 +26,17 @@ using namespace Windows::Devices::AllJoyn;
 using namespace Windows::Foundation;
 using namespace com::microsoft::Samples::SecureInterface;
 
-void SecureInterfaceSignals::Initialize(_In_ alljoyn_busobject busObject, _In_ alljoyn_sessionid sessionId)
+void SecureInterfaceSignals::Initialize(_In_ ISignalEmitter^ emitter)
 {
-    m_busObject = busObject;
-    m_sessionId = sessionId;
-
-    auto interfaceDefinition = alljoyn_busattachment_getinterface(alljoyn_busobject_getbusattachment(busObject), "com.microsoft.Samples.SecureInterface");
+    m_emitter = emitter;
+    alljoyn_busattachment nativeBusAttachment = AllJoynHelpers::GetInternalBusAttachment(m_emitter->BusObject->BusAttachment);
+    auto interfaceDefinition = alljoyn_busattachment_getinterface(nativeBusAttachment, "com.microsoft.Samples.SecureInterface");
     alljoyn_interfacedescription_getmember(interfaceDefinition, "TextSent", &m_memberTextSent);
 }
 
 void SecureInterfaceSignals::TextSent(_In_ Platform::String^ interfaceMemberMessage)
 {
-    if (nullptr == m_busObject)
+    if (nullptr == AllJoynHelpers::GetInternalBusObject(m_emitter->BusObject))
     {
         return;
     }
@@ -47,9 +46,9 @@ void SecureInterfaceSignals::TextSent(_In_ Platform::String^ interfaceMemberMess
     (void)TypeConversionHelpers::SetAllJoynMessageArg(alljoyn_msgarg_array_element(arguments, 0), "s", interfaceMemberMessage);
     
     alljoyn_busobject_signal(
-        m_busObject, 
+        AllJoynHelpers::GetInternalBusObject(m_emitter->BusObject), 
         NULL,  // Generated code only supports broadcast signals.
-        m_sessionId,
+        m_emitter->Session->Id,
         m_memberTextSent,
         arguments,
         argCount, 

@@ -1,0 +1,48 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario.css" />
+    
+    <script src="/js/playreadyuwp.js"></script>
+    <script src="/js/scenario1_reactive.js"></script>
+</head>
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This example shows the basics of configuring the MediaElement's MediaProtectionManager property to support PlayReady and reactively handle license service requests. License service requests are triggered automatically when PlayReady does not have a media license available.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <div class="playreadyScenario">
+
+                <div class="scenarioField">
+                    <label>License URL:</label>
+                    <input type="text" id="inputLaUrl" data-win-bind="value: laURL;onchange: laUrlHandler" />
+                    <span style="width:124px"></span>
+                    <span style="width:124px"></span>
+                </div>
+                <div class="scenarioField">
+                    <label>Content:</label>
+                    <input type="text" id="inputContentUrl" data-win-bind="value: contentURL;onchange: contentUrlHandler" />
+                    <button class="win-button" id="btnPlay" data-win-bind="onclick: playHandler">Play</button>
+                    <button class="win-button" data-win-bind="onclick: stopHandler">Stop</button>
+                </div>
+
+                <div class="videoDiv">
+                    <video style="width:100%;height:100%;" data-win-bind="onerror: videoErrorHandler" id="video" />
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

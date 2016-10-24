@@ -3,7 +3,7 @@
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620479
 -->
 
-# AdpativeStreaming sample
+# Adaptive streaming sample
 
 This sample demonstrates various features of the AdaptiveMediaSource object,
 used in conjunction with MediaSource, MediaPlaybackItem, MediaPlayer and MediaPlayerElement.
@@ -103,7 +103,7 @@ as TimedMetadataTracks.
 This sample shows how to register to consume this data in the app.
 
 The captioning system will also publish TimedMetadataTracks for:
-WebVTT segments within an HLS presention,
+WebVTT segments within an HLS presentation,
 additional files (TTML, SRT or WebVTT) added to the source,
 or 608 captions within SEI NALUs of H.264.
 Although it is not demonstrated in this sample,

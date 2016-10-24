@@ -29,6 +29,8 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 [Tailored Multiple Views](/Samples/XamlTailoredMultipleViews/)
 
+[RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)  
+
 ### Reference
 
 [VisualState](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.visualstate.aspx)

@@ -85,7 +85,7 @@
         busAttachment.authenticationMechanisms.append(allJoyn.AllJoynAuthenticationMechanism.ecdheSpeke);
         busAttachment.onauthenticationcomplete = authenticationCompleteHandler;
         busAttachment.oncredentialsrequested = credentialsRequestedHandler;
-        watcher = new onboarding.OnboardingWatcher(busAttachment);
+        watcher = new allJoyn.AllJoynBusAttachment.getWatcher(["org.alljoyn.Onboarding"]);
         watcher.onadded = watcherAddedHandler;
         reportStatus("Searching for onboarding interface...");
         watcher.start();
@@ -136,18 +136,18 @@
 
     function watcherAddedHandler(args) {
         reportStatus("Joining session...");
-        onboarding.OnboardingConsumer.joinSessionAsync(args, watcher)
-            .then(function (joinSessionResult) {
-                if (joinSessionResult.status === allJoyn.AllJoynStatus.ok) {
+        onboarding.OnboardingConsumer.fromIdAsync(args.id, busAttachment)
+            .then(function (onboardingConsumer) {
+                if (onboardingConsumer != null) {
                     disposeConsumer();
-                    consumer = joinSessionResult.consumer;
-                    consumer.onsessionlost = sessionLostHandler;
+                    consumer = onboardingConsumer;
+                    consumer.session.onlost = sessionLostHandler;
 
                     if (!isCredentialRequested || isAuthenticated) {
                         getOnboardeeNetworkList();
                     }
                 } else {
-                    reportError("Attempt to join session failed with AllJoyn error: 0x" + joinSessionResult.status.toString(16));
+                    reportError("Attempt to join session failed.");
                 }
             });
     }
@@ -440,20 +440,13 @@
     }
 
     function convertUtf8ToHex(str) {
-        var result = "";
-        var hex;
-
-        for (var i = 0; i < str.length; i++) {
-            hex = str.charCodeAt(i).toString(16);
-            result += hex;
-        }
-
-        return result;
+        var tempBuffer = Windows.Security.Cryptography.CryptographicBuffer.convertStringToBinary(str, Windows.Security.Cryptography.BinaryStringEncoding.Utf8);
+        return Windows.Security.Cryptography.CryptographicBuffer.encodeToHexString(tempBuffer);
     }
 
     function disposeConsumer() {
         if (consumer != null) {
-            consumer.onsessionlost = null;
+            consumer.session.onlost = null;
             consumer.close();
             consumer = null;
         }

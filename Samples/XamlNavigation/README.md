@@ -26,6 +26,14 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 [Master Detail](/Samples/XamlMasterDetail)
 
+[RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)  
+
+[Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)  
+
+[Customers Orders Database sample](https://github.com/Microsoft/Windows-appsample-customers-orders-database)  
+
+[Photosharing app sample](https://github.com/Microsoft/Appsample-Photosharing)  
+
 ### Reference
 
 [SplitView API](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.splitview.aspx)

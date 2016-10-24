@@ -62,6 +62,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 * [FullScreenMode](../FullScreenMode)
 * [ShareSource](../ShareSource)
+* [RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)  
 
 ### Reference
 

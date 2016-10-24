@@ -25,28 +25,35 @@ namespace org { namespace alljoyn { namespace Onboarding {
 public interface class IOnboardingService
 {
 public:
+    // "Sends the personal AP information to the onboardee"
     // Implement this function to handle calls to the ConfigureWiFi method.
     Windows::Foundation::IAsyncOperation<OnboardingConfigureWiFiResult^>^ ConfigureWiFiAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info , _In_ Platform::String^ interfaceMemberSSID, _In_ Platform::String^ interfaceMemberPassphrase, _In_ int16 interfaceMemberAuthType);
 
+    // "Tells the onboardee to connect to the personal AP"
     // Implement this function to handle calls to the Connect method.
     Windows::Foundation::IAsyncOperation<OnboardingConnectResult^>^ ConnectAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info );
 
+    // "Tells the onboardee to disconnect from the personal AP"
     // Implement this function to handle calls to the Offboard method.
     Windows::Foundation::IAsyncOperation<OnboardingOffboardResult^>^ OffboardAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info );
 
+    // "Scans all the Wi-Fi access points in the onboardee's proximity"
     // Implement this function to handle calls to the GetScanInfo method.
     Windows::Foundation::IAsyncOperation<OnboardingGetScanInfoResult^>^ GetScanInfoAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info );
 
+    // "Interface version number"
     // Implement this function to handle requests for the value of the Version property.
     //
     // Currently, info will always be null, because no information is available about the requestor.
     Windows::Foundation::IAsyncOperation<OnboardingGetVersionResult^>^ GetVersionAsync(Windows::Devices::AllJoyn::AllJoynMessageInfo^ info);
 
+    // "The configuration state"
     // Implement this function to handle requests for the value of the State property.
     //
     // Currently, info will always be null, because no information is available about the requestor.
     Windows::Foundation::IAsyncOperation<OnboardingGetStateResult^>^ GetStateAsync(Windows::Devices::AllJoyn::AllJoynMessageInfo^ info);
 
+    // "The last error code and error message"
     // Implement this function to handle requests for the value of the LastError property.
     //
     // Currently, info will always be null, because no information is available about the requestor.
