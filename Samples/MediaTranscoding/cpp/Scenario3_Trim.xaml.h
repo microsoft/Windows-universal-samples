@@ -31,8 +31,11 @@ namespace SDKTemplate
     private:
         void GetPresetProfile(Windows::UI::Xaml::Controls::ComboBox^ comboBox);
         void PickFile(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void PickOutput(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void OnTargetFormatChanged(Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
         void SetPickFileButton(bool isEnabled);
+        void SetOutputFileButton(bool isEnabled);
+        void SetTranscodeButton(bool isEnabled);
         void StopPlayers();
         void PlayFile(Windows::Storage::StorageFile^ MediaFile);
 
@@ -70,6 +73,7 @@ namespace SDKTemplate
         Windows::Foundation::TimeSpan _stop;
 
         Platform::String^ _OutputType;
+        Platform::String^ _OutputFileExtension;
 
         SDKTemplate::MainPage^ rootPage;
     };

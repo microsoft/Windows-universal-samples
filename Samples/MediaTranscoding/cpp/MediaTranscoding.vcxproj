@@ -146,13 +146,13 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_Default.xaml.h">
-      <DependentUpon>Scenario1_Default.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_Default.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario2_Custom.xaml.h">
-      <DependentUpon>Scenario2_Custom.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_Custom.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario3_Trim.xaml.h">
-      <DependentUpon>Scenario3_Trim.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_Trim.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -165,9 +165,9 @@
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
-    <Page Include="Scenario1_Default.xaml" />
-    <Page Include="Scenario2_Custom.xaml" />
-    <Page Include="Scenario3_Trim.xaml" />
+    <Page Include="..\shared\Scenario1_Default.xaml" />
+    <Page Include="..\shared\Scenario2_Custom.xaml" />
+    <Page Include="..\shared\Scenario3_Trim.xaml" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -191,13 +191,13 @@
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="Scenario1_Default.xaml.cpp">
-      <DependentUpon>Scenario1_Default.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_Default.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario2_Custom.xaml.cpp">
-      <DependentUpon>Scenario2_Custom.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_Custom.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario3_Trim.xaml.cpp">
-      <DependentUpon>Scenario3_Trim.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_Trim.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

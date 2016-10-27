@@ -59,7 +59,13 @@ namespace ScreenRotation
 };
 
 // Constructor for DeviceResources.
-DX::DeviceResources::DeviceResources() : 
+DX::DeviceResources::DeviceResources() :
+    DeviceResources(false /* _In_ bool forceWarpDevice */)
+{}
+
+// Constructor for DeviceResources; allows the caller to force usage of the WARP software
+// device which is useful if we need to use D3D features that are unsupported by the hardware.
+DX::DeviceResources::DeviceResources(_In_ bool forceWarpDevice) :
     m_screenViewport(),
     m_d3dFeatureLevel(D3D_FEATURE_LEVEL_9_1),
     m_d3dRenderTargetSize(),
@@ -68,7 +74,8 @@ DX::DeviceResources::DeviceResources() :
     m_nativeOrientation(DisplayOrientations::None),
     m_currentOrientation(DisplayOrientations::None),
     m_dpi(-1.0f),
-    m_deviceNotify(nullptr)
+    m_deviceNotify(nullptr),
+    m_forceWarpDevice(forceWarpDevice)
 {
     CreateDeviceIndependentResources();
     CreateDeviceResources();
@@ -150,9 +157,12 @@ void DX::DeviceResources::CreateDeviceResources()
     ComPtr<ID3D11Device> device;
     ComPtr<ID3D11DeviceContext> context;
 
+    // Create a device using the hardware graphics driver, unless WARP override is set.
+    D3D_DRIVER_TYPE driverType = m_forceWarpDevice ? D3D_DRIVER_TYPE_WARP : D3D_DRIVER_TYPE_HARDWARE;
+
     HRESULT hr = D3D11CreateDevice(
         nullptr,                    // Specify nullptr to use the default adapter.
-        D3D_DRIVER_TYPE_HARDWARE,   // Create a device using the hardware graphics driver.
+        driverType,
         0,                          // Should be 0 unless the driver is D3D_DRIVER_TYPE_SOFTWARE.
         creationFlags,              // Set debug and Direct2D compatibility flags.
         featureLevels,              // List of feature levels this app can support.

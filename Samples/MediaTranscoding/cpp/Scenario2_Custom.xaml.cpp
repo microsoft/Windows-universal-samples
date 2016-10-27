@@ -32,6 +32,7 @@ Scenario2_Custom::Scenario2_Custom()
 
     // Hook up the UI
     PickFileButton->Click += ref new RoutedEventHandler(this, &Scenario2_Custom::PickFile);
+    SetOutputButton->Click += ref new RoutedEventHandler(this, &Scenario2_Custom::PickOutput);
     TargetFormat->SelectionChanged += ref new SelectionChangedEventHandler(this, &Scenario2_Custom::OnTargetFormatChanged);
     Transcode->Click += ref new RoutedEventHandler(this, &Scenario2_Custom::TranscodeCustom);
     Cancel->Click += ref new RoutedEventHandler(this, &Scenario2_Custom::TranscodeCancel);
@@ -48,13 +49,16 @@ Scenario2_Custom::Scenario2_Custom()
     DisableButtons();
     SetPickFileButton(true);
     SetCancelButton(false);
+    SetOutputFileButton(false);
 
     // Initialize Objects
     _Transcoder = ref new MediaTranscoder();
     _Profile = nullptr;
     _InputFile = nullptr;
     _OutputFile = nullptr;
-    _OutputFileName = "TranscodeSampleOutput.mp4";
+    _OutputFileName = "TranscodeSampleOutput";
+    _OutputFileExtension = ".mp4";
+    _OutputType = "MP4";
     _CTS = cancellation_token_source();
 
     // Initialize UI with default settings
@@ -133,24 +137,9 @@ void Scenario2_Custom::TranscodeCustom(Object^ sender, RoutedEventArgs^ e)
 
     try
     {
-        if (_InputFile != nullptr)
+        if ((_InputFile != nullptr) && (_OutputFile != nullptr))
         {
-            auto videoLibrary = KnownFolders::VideosLibrary;
-            create_task(videoLibrary->CreateFileAsync(_OutputFileName, CreationCollisionOption::GenerateUniqueName), _CTS.get_token()).then(
-                [this](StorageFile^ destinationFile)
-            {
-                try
-                {
-                    _OutputFile = destinationFile;
-                    return _Transcoder->PrepareFileTranscodeAsync(_InputFile, _OutputFile, _Profile);
-                }
-                catch (Platform::Exception^ exception)
-                {
-                    TranscodeError(exception->Message);
-                }
-
-                cancel_current_task();
-            }).then(
+            create_task(_Transcoder->PrepareFileTranscodeAsync(_InputFile, _OutputFile, _Profile)).then(
                 [this](PrepareTranscodeResult^ transcode)
             {
                 try
@@ -300,14 +289,19 @@ void Scenario2_Custom::SetCancelButton(bool isEnabled)
 void Scenario2_Custom::EnableButtons()
 {
     PickFileButton->IsEnabled = true;
+    SetOutputButton->IsEnabled = true;
     TargetFormat->IsEnabled = true;
-    Transcode->IsEnabled = true;
     EnableMrfCrf444->IsEnabled = true;
+
+    // The transcode button's initial state should be disabled until an output
+    // file has been set.
+    Transcode->IsEnabled = false;
 }
 
 void Scenario2_Custom::DisableButtons()
 {
     PickFileButton->IsEnabled = false;
+    SetOutputButton->IsEnabled = false;
     TargetFormat->IsEnabled = false;
     Transcode->IsEnabled = false;
     EnableMrfCrf444->IsEnabled = false;
@@ -363,16 +357,44 @@ void Scenario2_Custom::PickFile(Object^ sender, Windows::UI::Xaml::RoutedEventAr
     }
 }
 
+void Scenario2_Custom::PickOutput(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+    try
+    {
+        FileSavePicker^ picker = ref new FileSavePicker();
+        picker->SuggestedStartLocation = PickerLocationId::VideosLibrary;
+        picker->SuggestedFileName = _OutputFileName;
+
+        auto extensions = ref new Platform::Collections::Vector<String^>();
+        extensions->Append(_OutputFileExtension);
+        picker->FileTypeChoices->Insert(_OutputType, extensions);
+
+        create_task(picker->PickSaveFileAsync()).then([this](StorageFile^ file) {
+            if (file != nullptr)
+            {
+                _OutputFile = file;
+                SetTranscodeButton(true);
+            }
+        });
+    }
+    catch (Exception^ exception)
+    {
+        TranscodeError(exception->Message);
+    }
+}
+
 void Scenario2_Custom::OnTargetFormatChanged(Object^ sender, SelectionChangedEventArgs^ e)
 {
     if (TargetFormat->SelectedIndex > 0)
     {
-        _OutputFileName = "TranscodeSampleOutput.wmv";
+        _OutputFileExtension = ".wmv";
+        _OutputType = "WMV";
         _UseMp4 = false;
     }
     else
     {
-        _OutputFileName = "TranscodeSampleOutput.mp4";
+        _OutputFileExtension = ".mp4";
+        _OutputType = "MP4";
         _UseMp4 = true;
     }
 }
@@ -422,6 +444,16 @@ void Scenario2_Custom::OutputPauseButton_Click(Object^ sender, Windows::UI::Xaml
 void Scenario2_Custom::SetPickFileButton(bool isEnabled)
 {
     PickFileButton->IsEnabled = isEnabled;
+}
+
+void Scenario2_Custom::SetOutputFileButton(bool isEnabled)
+{
+    SetOutputButton->IsEnabled = isEnabled;
+}
+
+void Scenario2_Custom::SetTranscodeButton(bool isEnabled)
+{
+    Transcode->IsEnabled = isEnabled;
 }
 
 
