@@ -49,9 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
-    <Page Include="Scenario1_Default.xaml" />
-    <Page Include="Scenario2_Custom.xaml" />
-    <Page Include="Scenario3_Trim.xaml" />
+    <Page Include="..\shared\Scenario1_Default.xaml" />
+    <Page Include="..\shared\Scenario2_Custom.xaml" />
+    <Page Include="..\shared\Scenario3_Trim.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>

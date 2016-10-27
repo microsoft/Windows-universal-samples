@@ -42,6 +42,7 @@ namespace FilePickerContracts
             FileOpenPicker fileOpenPicker = new FileOpenPicker();
             fileOpenPicker.ViewMode = PickerViewMode.Thumbnail;
             fileOpenPicker.FileTypeFilter.Add(".png");
+            fileOpenPicker.FileTypeFilter.Add(".txt");
 
             IReadOnlyList<StorageFile> files = await fileOpenPicker.PickMultipleFilesAsync();
             StringBuilder fileNames = new StringBuilder();

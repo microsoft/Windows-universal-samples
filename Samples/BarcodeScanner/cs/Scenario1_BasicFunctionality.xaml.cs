@@ -162,11 +162,11 @@ namespace SDKTemplate
         /// <param name="args"> Contains the ClamiedBarcodeScanner that is sending this request</param>
         async void claimedScanner_ReleaseDeviceRequested(object sender, ClaimedBarcodeScanner e)
         {
+            // always retain the device
+            e.RetainDevice();
+
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
-                // always retain the device
-                e.RetainDevice();
-
                 rootPage.NotifyUser("Event ReleaseDeviceRequested received. Retaining the barcode scanner.", NotifyType.StatusMessage);
             });
         }
