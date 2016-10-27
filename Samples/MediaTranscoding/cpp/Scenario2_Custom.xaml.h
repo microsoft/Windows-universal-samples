@@ -30,6 +30,7 @@ namespace SDKTemplate
     private:
         void GetCustomProfile();
         void PickFile(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void PickOutput(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void OnTargetFormatChanged(Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
         void SetPickFileButton(bool isEnabled);
         void StopPlayers();
@@ -38,10 +39,11 @@ namespace SDKTemplate
         void TranscodeCustom(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void TranscodeCancel(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void TranscodeProgress(Windows::Foundation::IAsyncActionWithProgress<double>^ asyncInfo, double percent);
-        void TranscodeComplete(Windows::Foundation::IAsyncActionWithProgress<double>^ asyncInfo, Windows::Foundation::AsyncStatus status);
         void TranscodeError(Platform::String^ error);
         void TranscodeFailure(Windows::Media::Transcoding::TranscodeFailureReason reason);
         void SetCancelButton(bool isEnabled);
+        void SetOutputFileButton(bool isEnabled);
+        void SetTranscodeButton(bool isEnabled);
         void EnableButtons();
         void DisableButtons();
 
@@ -55,6 +57,8 @@ namespace SDKTemplate
 
 
         Platform::String^ _OutputFileName;
+        Platform::String^ _OutputFileExtension = ".mp4";
+        Platform::String^ _OutputType = "MP4";
         Windows::Media::MediaProperties::MediaEncodingProfile^ _Profile;
         Windows::Storage::StorageFile^ _InputFile;
         Windows::Storage::StorageFile^ _OutputFile;

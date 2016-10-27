@@ -10,21 +10,20 @@
 //*********************************************************
 
 using System;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using Windows.Storage;
-using Windows.Media.Transcoding;
-using Windows.UI.Core;
-using SDKTemplate;
-using Windows.UI.Xaml.Media;
-using Windows.Media.MediaProperties;
-using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.Media.MediaProperties;
+using Windows.Media.Transcoding;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
 
-namespace MediaTranscodingSample
+namespace SDKTemplate
 {
     public sealed partial class Scenario1_Default : Page
     {
@@ -32,12 +31,13 @@ namespace MediaTranscodingSample
 
         CoreDispatcher _dispatcher = Window.Current.Dispatcher;
         CancellationTokenSource _cts;
-        string _OutputFileName = "TranscodeSampleOutput.mp4";
+        string _OutputFileName = "TranscodeSampleOutput";
         MediaEncodingProfile _Profile;
         StorageFile _InputFile = null;
         StorageFile _OutputFile = null;
         MediaTranscoder _Transcoder = new MediaTranscoder();
         string _OutputType = "MP4";
+        string _OutputFileExtension = ".mp4";
 
         public Scenario1_Default()
         {
@@ -46,6 +46,7 @@ namespace MediaTranscodingSample
 
             // Hook up UI
             PickFileButton.Click += new RoutedEventHandler(PickFile);
+            SetOutputButton.Click += new RoutedEventHandler(PickOutput);
             TargetFormat.SelectionChanged += new SelectionChangedEventHandler(OnTargetFormatChanged);
             Transcode.Click += new RoutedEventHandler(TranscodePreset);
             Cancel.Click += new RoutedEventHandler(TranscodeCancel);
@@ -61,6 +62,7 @@ namespace MediaTranscodingSample
             // File is not selected, disable all buttons but PickFileButton
             DisableButtons();
             SetPickFileButton(true);
+            SetOutputFileButton(true);
             SetCancelButton(false);
         }
 
@@ -89,10 +91,8 @@ namespace MediaTranscodingSample
 
             try
             {
-                if (_InputFile != null)
+                if ((_InputFile != null) && (_OutputFile != null))
                 {
-                    _OutputFile = await KnownFolders.VideosLibrary.CreateFileAsync(_OutputFileName, CreationCollisionOption.GenerateUniqueName);
-
                     var preparedTranscodeResult = await _Transcoder.PrepareFileTranscodeAsync(_InputFile, _OutputFile, _Profile);
 
                     if (EnableMrfCrf444.IsChecked.HasValue && (bool)EnableMrfCrf444.IsChecked)
@@ -271,25 +271,40 @@ namespace MediaTranscodingSample
             }
         }
 
+        async void PickOutput(object sender, RoutedEventArgs e)
+        {
+            FileSavePicker picker = new FileSavePicker();
+            picker.SuggestedStartLocation = PickerLocationId.VideosLibrary;
+            picker.SuggestedFileName = _OutputFileName;
+            picker.FileTypeChoices.Add(_OutputType, new System.Collections.Generic.List<string>() { _OutputFileExtension });
+
+            _OutputFile = await picker.PickSaveFileAsync();
+
+            if (_OutputFile != null)
+            {
+                SetTranscodeButton(true);
+            }
+        }
+
         void OnTargetFormatChanged(object sender, SelectionChangedEventArgs e)
         {
             switch (TargetFormat.SelectedIndex)
             {
                 case 1:
-                    _OutputFileName = "TranscodeSampleOutput.wmv";
                     _OutputType = "WMV";
+                    _OutputFileExtension = ".wmv";
                     EnableNonSquarePARProfiles();
                     break;
                 case 2:
-                    _OutputFileName = "TranscodeSampleOutput.avi";
                     _OutputType = "AVI";
+                    _OutputFileExtension = ".avi";
 
                     // Disable NTSC and PAL profiles as non-square pixel aspect ratios are not supported by AVI
                     DisableNonSquarePARProfiles();
                     break;
                 default:
-                    _OutputFileName = "TranscodeSampleOutput.mp4";
                     _OutputType = "MP4";
+                    _OutputFileExtension = ".mp4";
                     EnableNonSquarePARProfiles();
                     break;
             }
@@ -345,6 +360,22 @@ namespace MediaTranscodingSample
             });
         }
 
+        async void SetOutputFileButton(bool isEnabled)
+        {
+            await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                SetOutputButton.IsEnabled = isEnabled;
+            });
+        }
+
+        async void SetTranscodeButton(bool isEnabled)
+        {
+            await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                Transcode.IsEnabled = isEnabled;
+            });
+        }
+
         async void SetCancelButton(bool isEnabled)
         {
             await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -358,10 +389,14 @@ namespace MediaTranscodingSample
             await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 PickFileButton.IsEnabled = true;
+                SetOutputButton.IsEnabled = true;
                 TargetFormat.IsEnabled = true;
                 ProfileSelect.IsEnabled = true;
-                Transcode.IsEnabled = true;
                 EnableMrfCrf444.IsEnabled = true;
+
+                // The transcode button's initial state should be disabled until an output
+                // file has been set.
+                Transcode.IsEnabled = false;
             });
         }
 
@@ -372,6 +407,7 @@ namespace MediaTranscodingSample
                 ProfileSelect.IsEnabled = false;
                 Transcode.IsEnabled = false;
                 PickFileButton.IsEnabled = false;
+                SetOutputButton.IsEnabled = false;
                 TargetFormat.IsEnabled = false;
                 EnableMrfCrf444.IsEnabled = false;
             });

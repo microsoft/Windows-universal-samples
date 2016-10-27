@@ -34,6 +34,7 @@ Scenario1_Default::Scenario1_Default()
 
     // Hook up UI
     PickFileButton->Click += ref new RoutedEventHandler(this, &Scenario1_Default::PickFile);
+    SetOutputButton->Click += ref new RoutedEventHandler(this, &Scenario1_Default::PickOutput);
     TargetFormat->SelectionChanged += ref new SelectionChangedEventHandler(this, &Scenario1_Default::OnTargetFormatChanged);
     Transcode->Click += ref new RoutedEventHandler(this, &Scenario1_Default::TranscodePreset);
     Cancel->Click += ref new RoutedEventHandler(this, &Scenario1_Default::TranscodeCancel);
@@ -59,7 +60,9 @@ Scenario1_Default::Scenario1_Default()
     _OutputFileName = "TranscodeSampleOutput.mp4";
     _CTS = cancellation_token_source();
 
+    // Initial values
     _OutputType = "MP4";
+    _OutputFileExtension = ".mp4";
 }
 
 /// <summary>
@@ -150,24 +153,9 @@ void Scenario1_Default::TranscodePreset(Object^ sender, Windows::UI::Xaml::Route
 
     try
     {
-        if (_InputFile != nullptr)
+        if ((_InputFile != nullptr) && (_OutputFile != nullptr))
         {
-            auto videoLibrary = KnownFolders::VideosLibrary;
-            create_task(videoLibrary->CreateFileAsync(_OutputFileName, CreationCollisionOption::GenerateUniqueName), _CTS.get_token()).then(
-                [this](StorageFile^ destinationFile)
-            {
-                try
-                {
-                    _OutputFile = destinationFile;
-                    return _Transcoder->PrepareFileTranscodeAsync(_InputFile, _OutputFile, _Profile);
-                }
-                catch (Platform::Exception^ exception)
-                {
-                    TranscodeError(exception->Message);
-                }
-
-                cancel_current_task();
-            }).then(
+            create_task(_Transcoder->PrepareFileTranscodeAsync(_InputFile, _OutputFile, _Profile)).then(
                 [this](PrepareTranscodeResult^ transcode)
             {
                 try
@@ -317,10 +305,12 @@ void Scenario1_Default::SetCancelButton(bool isEnabled)
 void Scenario1_Default::EnableButtons()
 {
     PickFileButton->IsEnabled = true;
+    SetOutputButton->IsEnabled = true;
     TargetFormat->IsEnabled = true;
     ProfileSelect->IsEnabled = true;
-    Transcode->IsEnabled = true;
     EnableMrfCrf444->IsEnabled = true;
+
+
 }
 
 void Scenario1_Default::DisableButtons()
@@ -328,6 +318,7 @@ void Scenario1_Default::DisableButtons()
     ProfileSelect->IsEnabled = false;
     Transcode->IsEnabled = false;
     PickFileButton->IsEnabled = false;
+    SetOutputButton->IsEnabled = false;
     TargetFormat->IsEnabled = false;
     EnableMrfCrf444->IsEnabled = false;
 }
@@ -400,24 +391,50 @@ void Scenario1_Default::PickFile(Object^ sender, Windows::UI::Xaml::RoutedEventA
     }
 }
 
+void Scenario1_Default::PickOutput(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+    try
+    {
+        FileSavePicker^ picker = ref new FileSavePicker();
+        picker->SuggestedStartLocation = PickerLocationId::VideosLibrary;
+        picker->SuggestedFileName = _OutputFileName;
+
+        auto extensions = ref new Platform::Collections::Vector<String^>();
+        extensions->Append(_OutputFileExtension);
+        picker->FileTypeChoices->Insert(_OutputType, extensions);
+
+        create_task(picker->PickSaveFileAsync()).then([this](StorageFile^ file) {
+            if (file != nullptr)
+            {
+                _OutputFile = file;
+                SetTranscodeButton(true);
+            }
+        });
+    }
+    catch (Exception^ exception)
+    {
+        TranscodeError(exception->Message);
+    }
+}
+
 void Scenario1_Default::OnTargetFormatChanged(Object^ sender, SelectionChangedEventArgs^ e)
 {
     switch (TargetFormat->SelectedIndex)
     {
     case 1:
-        _OutputFileName = "TranscodeSampleOutput.wmv";
+        _OutputFileExtension = ".wmv";
         _OutputType = "WMV";
         EnableNonSquarePARProfiles();
         break;
     case 2:
-        _OutputFileName = "TranscodeSampleOutput.avi";
+        _OutputFileExtension = ".avi";
         _OutputType = "AVI";
 
         // Disable NTSC and PAL profiles as non-square pixel aspect ratios are not supported by AVI
         DisableNonSquarePARProfiles();
         break;
     default:
-        _OutputFileName = "TranscodeSampleOutput.mp4";
+        _OutputFileExtension = ".mp4";
         _OutputType = "MP4";
         EnableNonSquarePARProfiles();
         break;
@@ -471,6 +488,10 @@ void Scenario1_Default::SetPickFileButton(bool isEnabled)
     PickFileButton->IsEnabled = isEnabled;
 }
 
+void Scenario1_Default::SetTranscodeButton(bool isEnabled)
+{
+    Transcode->IsEnabled = isEnabled;
+}
 
 void Scenario1_Default::StopPlayers()
 {

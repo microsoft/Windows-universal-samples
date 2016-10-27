@@ -542,6 +542,8 @@ namespace SDKTemplate
             }
 
             UpdateSmtcPosition();
+
+            UpdateCustomTransportControls();
         }
 
         private async void mediaPlayer_PlaybackStateChanged(MediaPlaybackSession sender, object e)
@@ -846,6 +848,85 @@ namespace SDKTemplate
                     rootPage.NotifyUser(e.Message, NotifyType.ErrorMessage);
                 }
             }
+        }
+
+        /// <summary>
+        /// Updates the custom transport controls (XAML).
+        /// 
+        /// For the sake of clarity in this Sample, we'll handle updating our custom transport controls
+        /// seperately from updating the SystemMediaTransportControls.
+        /// 
+        /// This should be called on the UI thread.
+        /// </summary>
+        private void UpdateCustomTransportControls()
+        {
+            // Update the custom controls based upon the state of our playlist.
+            // We want to match the same state that was previously set on the SystemMediaTransportControls
+            nextButton.IsEnabled = systemMediaControls.IsNextEnabled;
+            previousButton.IsEnabled = systemMediaControls.IsPreviousEnabled;
+
+            // Update the Play / Pause Toggle button based upon the MediaPlayer's current state
+            switch (mediaPlayer.PlaybackSession.PlaybackState)
+            {
+                case MediaPlaybackState.None:
+                    // Revert back to a known play / pause toggle state
+                    playPauseButton.Content = new SymbolIcon(Symbol.Play);
+                    playPauseButton.IsEnabled = false;
+                    break;
+
+                case MediaPlaybackState.Paused:
+                    playPauseButton.Content = new SymbolIcon(Symbol.Play);
+                    playPauseButton.IsEnabled = true;
+                    break;
+
+                case MediaPlaybackState.Playing:
+                    playPauseButton.Content = new SymbolIcon(Symbol.Pause);
+                    playPauseButton.IsEnabled = true;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Handle the Custom Transport Controls Play / Pause button being clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void playPauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (mediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.Paused)
+            {
+                mediaPlayer.Play();
+                rootPage.NotifyUser("Custom Transport Controls Play pressed", NotifyType.StatusMessage);
+            }
+            else
+            {
+                mediaPlayer.Pause();
+                rootPage.NotifyUser("Custom Transport Controls Pause pressed", NotifyType.StatusMessage);
+            }
+        }
+
+        /// <summary>
+        /// Handle the Custom Transport Controls SkipNext button click.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void nextButton_Click(object sender, RoutedEventArgs e)
+        {
+            rootPage.NotifyUser("Custom Transport Controls Next pressed", NotifyType.StatusMessage);
+            // range-checking will be performed in SetNewMediaItem()
+            await SetNewMediaItem(currentItemIndex + 1);
+        }
+
+        /// <summary>
+        /// Handle the Custom Transport Controls SkipPrevious button click.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void previousButton_Click(object sender, RoutedEventArgs e)
+        {
+            rootPage.NotifyUser("Custom Transport Controls Previous pressed", NotifyType.StatusMessage);
+            // range-checking will be performed in SetNewMediaItem()
+            await SetNewMediaItem(currentItemIndex - 1);
         }
     }
 }

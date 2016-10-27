@@ -127,12 +127,12 @@ void Scenario1_BasicFunctionality::ScenarioStartScanButton_Click(Platform::Objec
 /// <param name="args"> Contains the ClamiedBarcodeScanner that is sending this request</param>
 void Scenario1_BasicFunctionality::OnReleaseDeviceRequested(Platform::Object ^sender, Windows::Devices::PointOfService::ClaimedBarcodeScanner ^args)
 {
+    // let us retain the device always. If it is not retained, this exclusive claim will be lost.
+    args->RetainDevice();
+
     Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler(
         [this, args]()
     {
-        // let us retain the device always. If it is not retained, this exclusive claim will be lost.
-        args->RetainDevice();
-        
         rootPage->NotifyUser("Event ReleaseDeviceRequested received. Retaining the barcode scanner.", NotifyType::StatusMessage);
     }));
 }

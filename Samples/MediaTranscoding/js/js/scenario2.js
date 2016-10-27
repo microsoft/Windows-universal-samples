@@ -4,7 +4,9 @@
     "use strict";
 
     var g_useMp4 = true,
-        g_outputFileName = "TranscodeSampleOutput.mp4";
+        g_outputType = "MP4",
+        g_outputFileExtension= ".mp4",
+        g_outputFileName = "TranscodeSampleOutput";
 
     var g_inputFile = null,
         g_outputFile = null;
@@ -12,11 +14,10 @@
     var g_profile,
         g_transcodeOp;
 
-    var g_openPickerOp = null;
-
     var page = WinJS.UI.Pages.define("/html/scenario2.html", {
         ready: function (element, options) {
             id("pickFileButton").addEventListener("click", pickFile, false);
+            id("pickDestinationButton").addEventListener("click", pickSave, false);
             id("targetFormat").addEventListener("change", onTargetFormatChanged, false);
             id("transcode").addEventListener("click", onTranscode, false);
             id("cancel").addEventListener("click", transcodeCancel, false);
@@ -52,24 +53,18 @@
         // Clear messages.
         WinJS.log && WinJS.log("", "sample", "status");
 
-        // Create output file and transcode.
-        var videoLib = Windows.Storage.KnownFolders.videosLibrary;
-        var createFileOp = videoLib.createFileAsync(g_outputFileName,
-            Windows.Storage.CreationCollisionOption.generateUniqueName);
-        createFileOp.done(function (ofile) {
-            g_outputFile = ofile;
-            g_transcodeOp = null;
-            var prepareOp = transcoder.prepareFileTranscodeAsync(g_inputFile, g_outputFile, g_profile);
-            prepareOp.done(function (result) {
-                if (result.canTranscode) {
-                    g_transcodeOp = result.transcodeAsync();
-                    g_transcodeOp.done(transcodeComplete, transcoderErrorHandler, transcodeProgress);
-                } else {
-                    transcodeFailure(result.failureReason);
-                }
-            }); // prepareOp.done
-            id("cancel").disabled = false;
-        }); // createFileOp.done
+        // Transcode.
+        g_transcodeOp = null;
+        var prepareOp = transcoder.prepareFileTranscodeAsync(g_inputFile, g_outputFile, g_profile);
+        prepareOp.done(function (result) {
+            if (result.canTranscode) {
+                g_transcodeOp = result.transcodeAsync();
+                g_transcodeOp.done(transcodeComplete, transcoderErrorHandler, transcodeProgress);
+            } else {
+                transcodeFailure(result.failureReason);
+            }
+        }); // prepareOp.done
+        id("cancel").disabled = false;
     }
 
 
@@ -161,25 +156,25 @@
 
     function enableButtons() {
         id("pickFileButton").disabled = false;
+        id("pickDestinationButton").disabled = false;
         id("targetFormat").disabled = false;
-        id("transcode").disabled = false;
+        id("transcode").disabled = true;
         id("enableMrfCrf444").disabled = false;
     }
 
     function disableButtons() {
         id("pickFileButton").disabled = true;
+        id("pickDestinationButton").disabled = true;
         id("targetFormat").disabled = true;
         id("transcode").disabled = true;
         id("enableMrfCrf444").disabled = true;
     }
 
     function pickFile() {
-        g_openPickerOp = null;
         var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
         openPicker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.videosLibrary;
         openPicker.fileTypeFilter.replaceAll([".mp4", ".wmv"]);
-        g_openPickerOp = openPicker.pickSingleFileAsync();
-        g_openPickerOp.done(function (file) {
+        openPicker.pickSingleFileAsync().done(function (file) {
             try {
                 if (file) {
                     g_inputFile = file;
@@ -189,7 +184,26 @@
                     video.play();
                     // Enable buttons.
                     enableButtons();
-                    g_openPickerOp = null;
+                }
+            } catch (e) {
+                WinJS.log && WinJS.log(e.message, "sample", "error");
+            }
+        });
+    }
+
+    function pickSave() {
+        var savePicker = new Windows.Storage.Pickers.FileSavePicker();
+        savePicker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.videosLibrary;
+        savePicker.fileTypeChoices.insert(g_outputType, [g_outputFileExtension]);
+        savePicker.suggestedFileName = g_outputFileName;
+
+        savePicker.pickSaveFileAsync().done(function (file) {
+            try {
+                if (file) {
+                    g_outputFile = file;
+
+                    id("transcode").disabled = false;
+
                 }
             } catch (e) {
                 WinJS.log && WinJS.log(e.message, "sample", "error");
@@ -199,10 +213,12 @@
 
     function onTargetFormatChanged() {
         if (id("targetFormat").selectedIndex === 0) {
-            g_outputFileName = "TranscodeSampleOutput.mp4";
+            g_outputFileExtension = ".mp4";
+            g_outputType = "MP4";
             g_useMp4 = true;
         } else {
-            g_outputFileName = "TranscodeSampleOutput.wmv";
+            g_outputFileExtension = ".wmv";
+            g_outputType = "WMV";
             g_useMp4 = false;
         }
     }
