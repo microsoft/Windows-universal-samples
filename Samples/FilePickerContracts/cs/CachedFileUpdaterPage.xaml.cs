@@ -38,6 +38,7 @@ namespace SDKTemplate
         internal CachedFileUpdaterUI cachedFileUpdaterUI = null;
         internal FileUpdateRequest fileUpdateRequest = null;
         internal FileUpdateRequestDeferral fileUpdateRequestDeferral = null;
+        internal bool isOnDesktop = true;
 
         private CoreDispatcher dispatcher = Window.Current.Dispatcher;
 
@@ -50,8 +51,29 @@ namespace SDKTemplate
             // cache CachedFileUpdaterUI
             cachedFileUpdaterUI = args.CachedFileUpdaterUI;
 
-            cachedFileUpdaterUI.FileUpdateRequested += CachedFileUpdaterUI_FileUpdateRequested;
-            cachedFileUpdaterUI.UIRequested += CachedFileUpdaterUI_UIRequested;
+            // Some platforms (Desktop) activate the app in the background. All other platforms like mobile, onecore,
+            // xbox, and hololens use a background task activation. We need to handle both cases.
+
+            // We can check to see if there is UI on activation to determine which case we are in.
+
+            // If activated in the background (not visible), then the app isn't given the FileUpdateRequest
+            // and FileUpdateRequestDeferral on activation. Instead it subscribes to the FileUpdateRequested
+            // and UIRequested events. FileUpdateRequest and FileUpdateRequestDeferral are then passed to the
+            // app when FileUpdateRequested is fired. UIRequested is fired when user input is needed to resolve
+            // a conflict. If activated in the foreground (visible), then the FileUpdateRequest and FileUpdateRequestDeferral
+            // are passed on activation so there is no need to subscribe to those events (Also they won't fire on mobile).
+
+            isOnDesktop = (cachedFileUpdaterUI.UIStatus != UIStatus.Visible);
+            if (isOnDesktop)
+            {
+                cachedFileUpdaterUI.FileUpdateRequested += CachedFileUpdaterUI_FileUpdateRequested;
+                cachedFileUpdaterUI.UIRequested += CachedFileUpdaterUI_UIRequested;
+            }
+            else
+            {
+                fileUpdateRequest = cachedFileUpdaterUI.UpdateRequest;
+                fileUpdateRequestDeferral = cachedFileUpdaterUI.GetDeferral();
+            }
 
             switch (cachedFileUpdaterUI.UpdateTarget)
             {
@@ -63,7 +85,12 @@ namespace SDKTemplate
                     break;
             }
 
-            Window.Current.Activate();
+            if (!isOnDesktop)
+            {
+                Window.Current.Content = this;
+                this.OnNavigatedTo(null);
+                Window.Current.Activate();
+            }
         }
 
         async void CachedFileUpdaterUI_UIRequested(CachedFileUpdaterUI sender, object args)
@@ -83,7 +110,14 @@ namespace SDKTemplate
             switch (cachedFileUpdaterUI.UIStatus)
             {
                 case UIStatus.Hidden:
-                    fileUpdateRequest.Status = FileUpdateStatus.UserInputNeeded;
+                    if (fileUpdateRequest.File.Name.Contains("ConflictingFile"))
+                    {
+                        fileUpdateRequest.Status = FileUpdateStatus.UserInputNeeded;
+                    }
+                    else
+                    {
+                        fileUpdateRequest.Status = FileUpdateStatus.Complete;
+                    }
                     fileUpdateRequestDeferral.Complete();
                     break;
                 case UIStatus.Visible:

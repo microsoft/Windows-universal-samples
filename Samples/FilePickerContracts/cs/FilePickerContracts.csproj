@@ -123,6 +123,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="SampleConfiguration.cs" />
+    <Compile Include="BGTaskHelper.cs" />
     <Compile Include="FileOpenPickerPage.xaml.cs">
       <DependentUpon>FileOpenPickerPage.xaml</DependentUpon>
     </Compile>
@@ -260,6 +261,12 @@
     <Content Include="..\..\..\SharedContent\media\tile-sdk.png">
       <Link>Assets\tile-sdk.png</Link>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CachedFileUpdaterContract\CachedFileUpdaterContract.csproj">
+      <Project>{428fa31b-64e3-4f6d-894f-c0a886577c35}</Project>
+      <Name>CachedFileUpdaterContract</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
