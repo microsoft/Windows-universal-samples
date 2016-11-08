@@ -18,6 +18,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage.Provider;
+using Windows.ApplicationModel.Background;
 
 namespace FilePickerContracts
 {
@@ -27,9 +28,11 @@ namespace FilePickerContracts
     public sealed partial class FileSavePicker_SaveToCachedFile : Page
     {
         FileSavePickerUI fileSavePickerUI = FileSavePickerPage.Current.fileSavePickerUI;
+        bool immitateUpdateConflict = false;
 
         public FileSavePicker_SaveToCachedFile()
         {
+            immitateUpdateConflict = false;
             this.InitializeComponent();
         }
 
@@ -39,8 +42,18 @@ namespace FilePickerContracts
 
             // Requesting a deferral allows the app to call another asynchronous method and complete the request at a later time
             var deferral = e.Request.GetDeferral();
-
-            StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(sender.FileName, CreationCollisionOption.ReplaceExisting);
+            StorageFile file;
+            // If the checkbox is checked then the requested file name will be ConflictingFile.txt instead of what was sent to us in sender.name.
+            // If background task sees that ConflictingFile is in the name of the file it sets the returned status to FileUpdateStatus.UserInputNeeded.
+            // This will cause a prompt for the user to open the app to fix the conflict.
+            if (immitateUpdateConflict)
+            {
+                file = await ApplicationData.Current.LocalFolder.CreateFileAsync("ConflictingFile.txt", CreationCollisionOption.ReplaceExisting);
+            }
+            else
+            {
+                file = await ApplicationData.Current.LocalFolder.CreateFileAsync(sender.FileName, CreationCollisionOption.ReplaceExisting);
+            }
             CachedFileUpdater.SetUpdateInformation(file, "CachedFile", ReadActivationMode.NotNeeded, WriteActivationMode.AfterWrite, CachedFileOptions.RequireUpdateOnAccess);
             e.Request.TargetFile = file;
 
@@ -48,14 +61,21 @@ namespace FilePickerContracts
             deferral.Complete();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            await BackgroundExecutionManager.RequestAccessAsync();
+            await FilePickerContracts.BGTaskHelper.RegisterBackgroundTask();
             fileSavePickerUI.TargetFileRequested += new TypedEventHandler<FileSavePickerUI, TargetFileRequestedEventArgs>(OnTargetFileRequested);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             fileSavePickerUI.TargetFileRequested -= new TypedEventHandler<FileSavePickerUI, TargetFileRequestedEventArgs>(OnTargetFileRequested);
+        }
+
+        private void Immitate_Update_Collision_Click(object sender, RoutedEventArgs e)
+        {
+            immitateUpdateConflict = ImitateUpdateCollisionCheckBox.IsChecked.HasValue && (bool)ImitateUpdateCollisionCheckBox.IsChecked;
         }
     }
 }
