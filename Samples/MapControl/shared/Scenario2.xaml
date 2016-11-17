@@ -1,4 +1,4 @@
-﻿<!--
+<!-- 
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
@@ -10,12 +10,10 @@
 //
 //*********************************************************
 -->
-    
-    <Page
-    x:Class="MapControlSample.Scenario4"
+<Page
+    x:Class="SDKTemplate.Scenario2"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MapControlSample"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
@@ -55,20 +53,17 @@
             <StackPanel Margin="0,0,0,10">
                 <TextBlock x:Name="description" Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-              Turn on Aerial 3D within the MapControl and customize the perspective using Scenes, which provide a simplified way to describe a desired view outcome that works great across map styles.
+               Display info about points of interest on a map by adding pushpins, images and shapes embedded in the MapControl.
                 </TextBlock>
             </StackPanel>
 
 
             <StackPanel  Grid.Row="1">
-                <Button x:Name="showSpaceNeedleButton" Content="Show Space Needle in 3D" Click="showSpaceNeedleButton_Click"/>
-                <maps:MapControl x:Name="myMap" HorizontalAlignment="Left" Height="500" Width="500"  Loaded="myMap_Loaded" />
+                <Button Content="Add MapIcon to center of Map" x:Name="mapIconAddButton" Click="mapIconAddButton_Click"/>
+                <Button Content="Add MapPolygon to center of Map" x:Name="mapPolygonAddButton" Click="mapPolygonAddButton_Click"/>
+                <Button Content="Add MapPolyline to center of Map" x:Name="mapPolylineAddButton" Click="mapPolylineAddButton_Click"/>
+                <maps:MapControl x:Name="myMap" HorizontalAlignment="Left" TransitFeaturesVisible="False" Loaded="MyMap_Loaded"/>
             </StackPanel>
-
-
-            <!-- Status Block for providing messages to the user.  Use the
-             NotifyUser() method to populate the message -->
-            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </Page>

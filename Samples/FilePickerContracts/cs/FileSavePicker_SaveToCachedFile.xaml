@@ -33,6 +33,7 @@
                 Save the file to the app's storage folder. 
                 The SetUpdateInformation API is used so that this file can be updated with the Cached File Updater contract.
             </TextBlock>
+            <CheckBox x:Name="SimulateUpdateCollisionCheckBox" Content="Simulate update conflict" HorizontalAlignment="Left" Margin="10,5,0,0" Grid.Row="7" VerticalAlignment="Top" Click="Simulate_Update_Collision_Click"/>
         </Grid>
 
         <Grid x:Name="Output" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">

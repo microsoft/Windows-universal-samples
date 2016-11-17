@@ -9,23 +9,17 @@
 //
 //*********************************************************
 
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 using SDKTemplate;
-using Windows.UI.Xaml.Controls.Maps;
+using System;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
-using Windows.Storage.Streams;
-using System;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Maps;
+using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
-namespace MapControlSample
+namespace SDKTemplate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class Scenario1 : Page
     {
         private MainPage rootPage;
@@ -33,21 +27,12 @@ namespace MapControlSample
         public Scenario1()
         {
             this.InitializeComponent();            
-            myMap.Loaded += MyMap_Loaded;
-            myMap.MapTapped += MyMap_MapTapped;
         }
 
         private void MyMap_Loaded(object sender, RoutedEventArgs e)
         {
-            myMap.Center =
-                new Geopoint(new BasicGeoposition()
-                {
-                    //Geopoint for Seattle 
-                    Latitude = 47.604,
-                    Longitude = -122.329
-                });
+            myMap.Center = MainPage.SeattleGeopoint;
             myMap.ZoomLevel = 12;      
-                  
         }
                 
         private void MyMap_MapTapped(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapInputEventArgs args)

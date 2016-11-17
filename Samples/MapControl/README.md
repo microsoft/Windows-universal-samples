@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: MapsAndLocation 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619977
 --->
@@ -7,14 +7,15 @@
 
 This sample demonstrates how to use the universal map control ([MapControl]( https://msdn.microsoft.com/en-us/library/windows/apps/xaml/windows.ui.xaml.controls.maps.mapcontrol.aspx)) in a UWP app. 
 
-* MapControl Basics: adjusting the ZoomLevel, Heading, DesiredPtich, and map stype
+* MapControl Basics: adjusting the ZoomLevel, Heading, DesiredPtich, and map style
 * Adding points of interest on the map: PushPins, images, and shapes
 * Adding XAML overlays on the map
 * Showing 3D locations in MapControl
 * Showing Streetside experience within MapControl
 * Launching Maps using URI Schemes
+* Displaying points of interest with clustering
 
-This sample is written in XAML and C#.
+This sample is written in XAML.
 
 ## For more info
 

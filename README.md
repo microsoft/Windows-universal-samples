@@ -148,7 +148,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/3DPrinting">3D Printing</a></td>
   <td><a href="Samples/3DPrintingFromUnity">3D Printing from Unity</a></td>
-  <td><a href="Samples/XamlAutoSuggestBox">AutoSuggestBox migration</a></td>
+  <td><a href="Samples/XamlAutoSuggestBox">AutoSuggestBox</a></td>
  </tr>
  <tr>
   <td><a href="Samples/Clipboard">Clipboard</a></td>
