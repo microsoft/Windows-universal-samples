@@ -5,9 +5,16 @@
 
 # Background sensors sample
 
-This sample shows how to use background tasks with a device use trigger targetting sensors APIs. For the sake of the example, the [**Accelerometer**](http://msdn.microsoft.com/library/windows/apps/br225687) API is used in this sample.
+Shows how to use background tasks with a device-use trigger targetting sensor APIs. 
 
-**Note** The Universal Windows app samples require Visual Studio 2015 to build and Windows 10 to execute.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+For the sake of the example, the [Accelerometer](http://msdn.microsoft.com/library/windows/apps/br225687) API is used in this sample.
 
 This sample allows the user to view the event count. Only one scenario is available:
 

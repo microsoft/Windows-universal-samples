@@ -52,12 +52,12 @@
             <StackPanel x:Name="PlaybackButtons" Orientation="Horizontal" Visibility="Collapsed">
                 <Button
                     x:Name="PlayButton"
-                    Click="{x:Bind PlayButton_Click}"
+                    Click="{x:Bind ClickToPlaySource.Play}"
                     Content="Play"
                     Margin="10,0,0,0"/>
                 <Button
                     x:Name="StopButton"
-                    Click="{x:Bind StopButton_Click}"
+                    Click="{x:Bind ClickToPlaySource.Stop}"
                     Content="Stop"
                     Margin="10,0,0,0"/>
             </StackPanel>

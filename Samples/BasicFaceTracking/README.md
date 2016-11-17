@@ -5,7 +5,15 @@
 
 # Basic face tracking sample
 
-This sample shows how to use the Windows.Media.FaceAnalysis.FaceTracker WinRT class to find human faces within an video stream.
+Shows how to use the [FaceTracker](https://msdn.microsoft.com/library/windows/apps/windows.media.faceanalysis.facetracker.aspx) 
+class to find human faces within an video stream.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample shows how to:
 
@@ -37,11 +45,11 @@ The FaceTracker is intended to operate on a running video stream and is optimize
 
 ### Reference
 
-[Windows.Media.FaceAnalysis.FaceTracker](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.faceanalysis.facetracker.aspx)
+[Windows.Media.FaceAnalysis.FaceTracker](https://msdn.microsoft.com/library/windows/apps/windows.media.faceanalysis.facetracker.aspx)
 
-[Windows.Media.FaceAnalysis namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.faceanalysis.aspx)
+[Windows.Media.FaceAnalysis namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.faceanalysis.aspx)
 
-[Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.devices.aspx)
+[Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)
 
 ## System requirements
 

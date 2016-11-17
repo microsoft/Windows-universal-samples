@@ -152,15 +152,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_UnspecifiedReason.xaml">
+    <Page Include="..\shared\Scenario1_UnspecifiedReason.xaml">
+      <Link>Scenario1_UnspecifiedReason.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Scenario2_SavingDataReason.xaml">
+    <Page Include="..\shared\Scenario2_SavingDataReason.xaml">
+      <Link>Scenario2_SavingDataReason.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Scenario3_LocationTrackingReason.xaml">
+    <Page Include="..\shared\Scenario3_LocationTrackingReason.xaml">
+      <Link>Scenario3_LocationTrackingReason.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,7 +172,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Scenario4_MultipleTasks.xaml">
+    <Page Include="..\shared\Scenario4_MultipleTasks.xaml">
+      <Link>Scenario4_MultipleTasks.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,16 +5,23 @@
 
 # ListView and GridView sample
 
-This sample shows the usage of ListView and Gridview. 
+Shows how to use the ListView and GridView controls. 
 
-Specifically, this sample shows how to:
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-- **Simple ListView Sample:** Demonstrate how to implement a grouped ListView using the new x:Bind and x:Phase features.  
-- **Simple GridView Sample:** Demonstrate how to implement a grouped GridView using the new x:Bind and x:Phase features.
-- **Master/Details plus Selection Sample:** How to implement a responsive master/details experience with a successful multiple selection experience.
-- **Tap on the left edge of ListView:** Implement the behavior Tap on the left edge of ListView to going into multiple selection mode. 
-- **Restore Scroll Position Sample:** Demonstrates how to restore a list's scrollviewer position when a user navigates away and back from a page. Implements the ListViewPersistenceHelper API
-- **Scroll into View Sample:** Demonstrates how to scroll a specific item into view.
+Specifically, this sample shows:
+
+- **Simple ListView Sample:** Shows how to implement a grouped ListView using the new x:Bind and x:Phase features.  
+- **Simple GridView Sample:** Shows how to implement a grouped GridView using the new x:Bind and x:Phase features.
+- **Master/Details plus Selection Sample:** Shows how to implement a responsive master/details experience with a successful multiple selection experience.
+- **Tap on the left edge of ListView:** Shows how to implement the behavior Tap on the left edge of ListView to going into multiple selection mode. 
+- **Restore Scroll Position Sample:** Shows how to restore a list's scrollviewer position when a user navigates away and back from a page. Implements the ListViewPersistenceHelper API.
+- **Scroll into View Sample:** Shows how to scroll a specific item into view.
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
@@ -26,17 +33,13 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[Master Detail in XAML](/Samples/XamlMasterDetail)
-
+[Master Detail in XAML](/Samples/XamlMasterDetail)  
 [RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)  
 
 ### Reference
 
-<!-- Add links to related API -->
-
-[ListView](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.listview.aspx)
-
-[GridView](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.gridview.aspx)
+[ListView](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.listview.aspx)  
+[GridView](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.gridview.aspx)  
 
 ## System requirements
 

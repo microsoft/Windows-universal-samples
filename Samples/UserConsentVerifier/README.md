@@ -5,17 +5,25 @@
 
 # UserConsentVerifier sample
 
-Demonstrates how to use the UserConsentVerifier class to check whether a verifier device, such as a Microsoft Passport PIN, Windows Hello, or fingerprint reader, is available.
+Shows how to use the UserConsentVerifier class to check whether a verifier device, such as a Microsoft Passport PIN, Windows Hello, or fingerprint reader, is available.
 
-**Note**  This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on both Windows 10 and Windows Phone 10.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Related topics
 --------------
-[UserConsentVerifier](http://msdn.microsoft.com/library/windows/apps/dn279134)
+
+[UserConsentVerifier](http://msdn.microsoft.com/library/windows/apps/dn279134)  
 
 Related technologies
 --------------------
-[Windows.Security.Credentials.UI](http://msdn.microsoft.com/library/windows/apps/hh701356), [Windows.Security.Credentials.UI.UserConsentVerifier](http://msdn.microsoft.com/library/windows/apps/dn279134)
+
+[Windows.Security.Credentials.UI](http://msdn.microsoft.com/library/windows/apps/hh701356)  
+[Windows.Security.Credentials.UI.UserConsentVerifier](http://msdn.microsoft.com/library/windows/apps/dn279134)  
 
 Operating system requirements
 -----------------------------

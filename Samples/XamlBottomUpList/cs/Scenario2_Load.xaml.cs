@@ -14,27 +14,19 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.System;
-using Windows.UI;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 
 namespace SDKTemplate
 {
     // Bindable class representing a single text message.
     public class TextMessage
     {
-        private static readonly SolidColorBrush _sentBackground = new SolidColorBrush(Color.FromArgb(255, 170, 20, 40));
-        private static readonly SolidColorBrush _receivedBackground = new SolidColorBrush(Colors.Crimson);
-
-        public string Message { get; set; }
-        public DateTime Time { get; set; }
+        public string Body { get; set; }
+        public string DisplayTime { get; set; }
         public bool IsSent { get; set; }
-        public SolidColorBrush Background { get { return IsSent ? _sentBackground : _receivedBackground; } }
-        public Visibility SentVisibility { get { return IsSent ? Visibility.Visible : Visibility.Collapsed; } }
-        public Visibility ReceiveVisibility { get { return !IsSent ? Visibility.Visible : Visibility.Collapsed; } }
+        public bool IsReceived { get { return !IsSent; } }
     }
 
     // Observable collection representing a text message conversation
@@ -66,9 +58,9 @@ namespace SDKTemplate
             {
                 this.Insert(0, new TextMessage()
                 {
-                    Message = $"{messageCount}: {CreateRandomMessage()}",
+                    Body = $"{messageCount}: {CreateRandomMessage()}",
                     IsSent = 0 == messageCount++ % 2,
-                    Time = DateTime.Now
+                    DisplayTime = DateTime.Now.ToString()
                 });
             }
         }
@@ -80,7 +72,6 @@ namespace SDKTemplate
         {
             return fillerText.Substring(0, rand.Next(5, fillerText.Length));
         }
-
     }
 
     /// <summary>
@@ -95,7 +86,8 @@ namespace SDKTemplate
     {
         private uint itemsSeen;
         private double averageContainerHeight;
-        private bool loadingInProcess = false;
+        private bool processingScrollOffsets = false;
+        private bool processingScrollOffsetsDeferred = false;
 
         public ChatListView()
         {
@@ -117,7 +109,7 @@ namespace SDKTemplate
                 {
                     // Check if we should load more data when the scroll position changes.
                     // We only get this once the content/panel is large enough to be scrollable.
-                    this.ProcessDataVirtualizationScrollOffsetsAsync(this.ActualHeight);
+                    this.StartProcessingDataVirtualizationScrollOffsets(this.ActualHeight);
                 };
             }
 
@@ -130,35 +122,64 @@ namespace SDKTemplate
             // Allow the panel to arrange first
             var result = base.ArrangeOverride(finalSize);
 
-            ProcessDataVirtualizationScrollOffsetsAsync(finalSize.Height);
+            StartProcessingDataVirtualizationScrollOffsets(finalSize.Height);
 
             return result;
         }
 
-        private async void ProcessDataVirtualizationScrollOffsetsAsync(double actualHeight)
+        private async void StartProcessingDataVirtualizationScrollOffsets(double actualHeight)
+        {
+            // Avoid re-entrancy. If we are already processing, then defer this request.
+            if (processingScrollOffsets)
+            {
+                processingScrollOffsetsDeferred = true;
+                return;
+            }
+
+            this.processingScrollOffsets = true;
+
+            do
+            {
+                processingScrollOffsetsDeferred = false;
+                await ProcessDataVirtualizationScrollOffsetsAsync(actualHeight);
+
+                // If a request to process scroll offsets occurred while we were processing
+                // the previous request, then process the deferred request now.
+            }
+            while (processingScrollOffsetsDeferred);
+
+            // We have finished. Allow new requests to be processed.
+            this.processingScrollOffsets = false;
+        }
+
+        private async Task ProcessDataVirtualizationScrollOffsetsAsync(double actualHeight)
         {
             var panel = this.ItemsPanelRoot as ItemsStackPanel;
-            if (panel != null && !this.loadingInProcess)
+            if (panel != null)
             {
                 if ((panel.FirstVisibleIndex != -1 && panel.FirstVisibleIndex * this.averageContainerHeight < actualHeight * this.IncrementalLoadingThreshold) ||
-                    (panel.FirstVisibleIndex == -1 && Items.Count <= 1))
+                    (Items.Count == 0))
                 {
                     var virtualizingDataSource = this.ItemsSource as ISupportIncrementalLoading;
                     if (virtualizingDataSource != null)
                     {
                         if (virtualizingDataSource.HasMoreItems)
                         {
-                            double avgItemsPerPage = actualHeight / this.averageContainerHeight;
-                            var itemsToLoad = (uint)(this.DataFetchSize * avgItemsPerPage);
-                            if (itemsToLoad <= 0)
+                            uint itemsToLoad;
+                            if (this.averageContainerHeight == 0.0)
                             {
-                                // We know there's data to be loaded so load at least one item
+                                // We don't have any items yet. Load the first one so we can get an
+                                // estimate of the height of one item, and then we can load the rest.
                                 itemsToLoad = 1;
                             }
+                            else
+                            {
+                                double avgItemsPerPage = actualHeight / this.averageContainerHeight;
+                                // We know there's data to be loaded so load at least one item
+                                itemsToLoad = Math.Max((uint)(this.DataFetchSize * avgItemsPerPage), 1);
+                            }
 
-                            this.loadingInProcess = true;
                             await virtualizingDataSource.LoadMoreItemsAsync(itemsToLoad);
-                            this.loadingInProcess = false;
                         }
                     }
                 }
@@ -167,32 +188,34 @@ namespace SDKTemplate
 
         private void UpdateRunningAverageContainerHeight(ListViewBase sender, ContainerContentChangingEventArgs args)
         {
-            if (args.ItemContainer != null && args.InRecycleQueue != true)
+            if (args.ItemContainer != null && !args.InRecycleQueue)
             {
-                if (args.Phase == 0)
+                switch (args.Phase)
                 {
-                    // use the size of the very first placeholder as a starting point until
-                    // we've seen the first item
-                    if (this.averageContainerHeight == 0)
-                    {
-                        this.averageContainerHeight = args.ItemContainer.DesiredSize.Height;
-                    }
+                    case 0:
+                        // use the size of the very first placeholder as a starting point until
+                        // we've seen the first item
+                        if (this.averageContainerHeight == 0)
+                        {
+                            this.averageContainerHeight = args.ItemContainer.DesiredSize.Height;
+                        }
 
-                    args.RegisterUpdateCallback(1, this.UpdateRunningAverageContainerHeight);
-                    args.Handled = true;
-                }
-                else if (args.Phase == 1)
-                {
-                    // set the content
-                    args.ItemContainer.Content = args.Item;
-                    args.RegisterUpdateCallback(2, this.UpdateRunningAverageContainerHeight);
-                    args.Handled = true;
-                }
-                else if (args.Phase == 2)
-                {
-                    // refine the estimate based on the item's DesiredSize
-                    this.averageContainerHeight = (this.averageContainerHeight * itemsSeen + args.ItemContainer.DesiredSize.Height) / ++itemsSeen;
-                    args.Handled = true;
+                        args.RegisterUpdateCallback(1, this.UpdateRunningAverageContainerHeight);
+                        args.Handled = true;
+                        break;
+
+                    case 1:
+                        // set the content
+                        args.ItemContainer.Content = args.Item;
+                        args.RegisterUpdateCallback(2, this.UpdateRunningAverageContainerHeight);
+                        args.Handled = true;
+                        break;
+
+                    case 2:
+                        // refine the estimate based on the item's DesiredSize
+                        this.averageContainerHeight = (this.averageContainerHeight * itemsSeen + args.ItemContainer.DesiredSize.Height) / ++itemsSeen;
+                        args.Handled = true;
+                        break;
                 }
             }
         }
@@ -217,8 +240,8 @@ namespace SDKTemplate
             {
                 this.conversation.Add(new TextMessage
                 {
-                    Message = MessageTextBox.Text,
-                    Time = DateTime.Now,
+                    Body = MessageTextBox.Text,
+                    DisplayTime = DateTime.Now.ToString(),
                     IsSent = true
                 });
                 MessageTextBox.Text = string.Empty;
@@ -228,8 +251,8 @@ namespace SDKTemplate
 
                 this.conversation.Add(new TextMessage
                 {
-                    Message = Conversation.CreateRandomMessage(),
-                    Time = DateTime.Now,
+                    Body = Conversation.CreateRandomMessage(),
+                    DisplayTime = DateTime.Now.ToString(),
                     IsSent = false
                 });
             }

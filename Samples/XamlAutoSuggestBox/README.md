@@ -3,14 +3,21 @@
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619996
 --->
 
-# AutoSuggestBox migration sample
+# AutoSuggestBox sample
 
-This sample shows how to migrate your Windows 8.1 app to Windows 10 by replacing your SearchBox with an AutoSuggestBox.  With the improvements in AutoSuggestBox, you will get the same end-user experience across all supported Windows 10 devices.
+Shows how to use an AutoSuggestBox.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample shows how to:
 
-- **Add a glyph to your AutoSuggestBox:** With the new QueryIcon API, you can specify a glyph to put in the TextBox of your AutoSuggestBox without re-templating.
-- **Add keyboarding support:** The QuerySubmitted event has been added to support all cases where an item could be selected, including Enter key, mouse click, or tap.
+- **Add a glyph to your AutoSuggestBox:** With the QueryIcon property, you can specify a glyph to put in the TextBox of your AutoSuggestBox without re-templating.
+- **Add keyboarding support:** The QuerySubmitted event supports all cases where an item could be selected, including Enter key, mouse click, or tap.
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
@@ -22,13 +29,11 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[XAML UI Basics](/Samples/XamlUIBasics)
+[XAML UI Basics](/Samples/XamlUIBasics)  
 
 ### Reference
 
-
-[AutoSuggestBox](http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.autosuggestbox.aspx)
-
+[AutoSuggestBox](http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.autosuggestbox.aspx)  
 
 ## System requirements
 

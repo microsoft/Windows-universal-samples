@@ -5,7 +5,14 @@
 
 # Orientation sensor sample
 
-This sample shows how to use the [**Windows.Devices.Sensors.OrientationSensor**](http://msdn.microsoft.com/library/windows/apps/br206371) API.
+Shows how to use the [Windows.Devices.Sensors.OrientationSensor](http://msdn.microsoft.com/library/windows/apps/br206371) API.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample allows the user to view the rotation matrix and Quaternion values that reflect the current device orientation.
 After choosing the sensor reporting type and optimization goal,
@@ -30,9 +37,8 @@ Allows the user to simulate sensor accuracy and demonstrates usage of the calibr
 Related topics
 --------------
 
-[**Accelerometer** sample](../Accelerometer)
-
-[**Windows.Devices.Sensors namespace**](http://msdn.microsoft.com/library/windows/apps/br206408)
+[Accelerometer sample](../Accelerometer)  
+[Windows.Devices.Sensors namespace](http://msdn.microsoft.com/library/windows/apps/br206408)  
 
 Operating system requirements
 -----------------------------

@@ -1,21 +1,28 @@
-<!---
+﻿<!---
   category: AudioVideoAndCamera
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=800141
 --->
 
 # Background media playback sample
 
-This sample demonstrates how to use `MediaPlayer` and `MediaPlaybackList`
+Shows how to use MediaPlayer and MediaPlaybackList
 to create a collection of songs or videos that can continue to play even
 when the app is no longer in the foreground.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample covers:
 
 - Enabling background media playback through a manifest capability
-- Playing audio and video in the background with the `MediaPlayer` API
-- Gapless playback with `MediaPlaybackList`
-- Automatic `SystemMediaTransportControl` integration
-- Update of `MediaPlaybackItem` DisplayProperties
+- Playing audio and video in the background with the MediaPlayer API
+- Gapless playback with MediaPlaybackList
+- Automatic SystemMediaTransportControl integration
+- Update of MediaPlaybackItem DisplayProperties
 - MVVM for media player apps
 - JSON playlist serialization
 
@@ -35,15 +42,15 @@ Other relevant application model considerations include:
 - If an app needs to make networking calls in the background when not
   downloading or streaming media using platform media APIs these must be wrapped
   in either a foreground initiated Extended Execution session or a background
-  task like `ApplicationTrigger`, `MaintenanceTrigger`, or `TimerTrigger`.
-  Otherwise the network may be unavailable in [standby](https://msdn.microsoft.com/en-us/library/windows/hardware/mt282515.aspx).
+  task like ApplicationTrigger, MaintenanceTrigger, or TimerTrigger.
+  Otherwise the network may be unavailable in [standby](https://msdn.microsoft.com/library/windows/hardware/mt282515.aspx).
 
 See the [Background Activity With the Single Process Model](https://blogs.windows.com/buildingapps/2016/06/07/background-activity-with-the-single-process-model/)
 blog post for more information.
 
 There are approaches for performing background audio playback for earlier
-versions of Windows, such as using `BackgroundMediaPlayer` in a dual-process
-application or `AudioCategory.BackgroundCapableMedia` in a single-process
+versions of Windows, such as using BackgroundMediaPlayer in a dual-process
+application or AudioCategory.BackgroundCapableMedia in a single-process
 desktop application, but this sample demonstrates the recommended single-process
 technique for background playback on all supported UWP platforms.
 
@@ -51,7 +58,7 @@ Enabling background media playback
 ----------------------------------
 
 To enable background media playback, add the capability to the
-`Package.appxmanifest`. Note the `uap3` namespace.
+Package.appxmanifest. Note the uap3 namespace.
 
 ```
 <Package
@@ -80,40 +87,40 @@ mute.
 platform audio APIs, such as MediaPlayer, AudioGraph, XAudio2, and the HTML
 Audio tag.
 
-`MediaPlayer` provides a default `SystemMediaTransportControls` implementation.
-If using another media API or if the `MediaPlayer.CommandManager` is disabled
+MediaPlayer provides a default SystemMediaTransportControls implementation.
+If using another media API or if the MediaPlayer.CommandManager is disabled
 then an application must also minimally:
 
-1. Enable `SystemMediaTransportControls` by setting `IsEnabled` to true
-2. Set `IsPlayEnabled` and `IsPauseEnabled` to true
-3. Handle the corresponding `ButtonPressed` events
+1. Enable SystemMediaTransportControls by setting IsEnabled to true
+2. Set IsPlayEnabled and IsPauseEnabled to true
+3. Handle the corresponding ButtonPressed events
 
 Background logic
 ----------------
 To perform background logic when not playing audio, use a foreground initiated
 Extended Execution session or a background or foreground initiated
-`ApplicationTrigger`. Handling triggers and running background tasks inside a
-single process can be done through the `OnBackgroundActivated` handler. See the
+ApplicationTrigger. Handling triggers and running background tasks inside a
+single process can be done through the OnBackgroundActivated handler. See the
 [BackgroundActivation sample](/Samples/BackgroundActivation) for details.
 
 Lifecycle
 ---------
-* Over limit policy: Apps must handle `OnAppMemoryUsageLimitChanging` to reduce
+* Over limit policy: Apps must handle OnAppMemoryUsageLimitChanging to reduce
 memory usage if over the new limit about to be enforced. Instead of terminating
 the app immediately, apps continue to run on some platforms despite being over
 target provided that the system doesn't need the memory. Apps can improve their
 priority by keeping usage low when backgrounded and can maximize the range of
 devices supported by ensuring the application stays under the limit.
 
-* Apps can use CoreApplication lifecycle events `EnteredBackground` and
-`LeavingBackground` as a trigger to free memory used by a GUI if needed since
+* Apps can use CoreApplication lifecycle events EnteredBackground and
+LeavingBackground as a trigger to free memory used by a GUI if needed since
 the GUI is not displayed in the background. If needed, apps can release GUI
 resources by setting Window.Current.Content to null and unregistering event
 handlers.
 
-* Apps can use the `MemoryManager` class to monitor their memory usage after a
+* Apps can use the MemoryManager class to monitor their memory usage after a
 new limit has been applied. In particular, apps can reduce their memory usage
-when the `AppMemoryUsageLevel` reaches `High` or `OverLimit`.
+when the AppMemoryUsageLevel reaches High or OverLimit.
 
 * When the app enters the background or receives an over limit notification,
 platform frameworks will take steps to release unused resources, such as cached
@@ -128,15 +135,15 @@ key media features from MediaElement are available to MediaPlayer. Now you can
 * A lightweight MediaPlayerElement allows binding and unbinding to a player for
 displaying video. This design enables support for background video since
 rendering to an element is decoupled from the player. Additionally, background
-audio apps can leverage its platform `MediaTransportControls` if desired.
+audio apps can leverage its platform MediaTransportControls if desired.
 
-* `MediaPlayer` has a `MediaPlayerSurface` that can be used to render video to a
+* MediaPlayer has a MediaPlayerSurface that can be used to render video to a
 Windows.UI.Composition surface. This enables media playback in "framework-less
 apps". Furthermore, since all XAML elements are backed by these surfaces, apps
 can render video to any XAML element.
 
-* `MediaPlayer` connects to `SystemMediaTransportControls` through a
-`CommandManager`. These controls are important because that's how the app
+* MediaPlayer connects to SystemMediaTransportControls through a
+CommandManager. These controls are important because that's how the app
 responds to hardware button presses and Bluetooth, and they are required for
 background audio.
 
@@ -158,14 +165,14 @@ There are three events for controlling your memory usage (but only one is mandat
    suspending or terminating the app.
  
  * **MemoryManager::AppMemoryUsageIncreased** – Raised when the app's memory
-   consumption has increased to a higher value in the `AppMemoryUsageLevel`
+   consumption has increased to a higher value in the AppMemoryUsageLevel
    enumeration. For example, from Low to Medium. Handling this event is optional
    but recommended since the application is still responsible for staying under
    limit.
 
  * **MemoryManager::AppMemoryUsageDecreased** – Raised when the app's memory
    consumption has decreased to a higher lower value in the
-   `AppMemoryUsageLevel` enumeration. For example, from High to Low. Handling
+   AppMemoryUsageLevel enumeration. For example, from High to Low. Handling
    this event is optional but indicates the application may be able to allocate
    additional memory if needed.
 
@@ -178,12 +185,12 @@ leaving the background:
  * **WebUIApplication/Application::LeavingBackground** – Raised when the is
    about to move from the background to the foreground.
  
-### Managing memory using the `AppMemoryLimitChanging` event 
+### Managing memory using the AppMemoryLimitChanging event 
 
-The `AppMemoryLimitChanging` event notifies an application that the memory limit
-is about to change. The `NewLimit` property on the
-`AppMemoryUsageLimitChangingEventArgs` can be used to determine whether the
-current app memory usage (`MemoryManager::AppMemoryUsage`) is over the new limit
+The AppMemoryLimitChanging event notifies an application that the memory limit
+is about to change. The NewLimit property on the
+AppMemoryUsageLimitChangingEventArgs can be used to determine whether the
+current app memory usage (MemoryManager::AppMemoryUsage) is over the new limit
 or not. If app memory usage is over the new limit, the app must free resources
 or risk being suspended or terminated when the new memory limit comes into
 effect.
@@ -199,42 +206,42 @@ Note:
    range of devices by using this event to reduce resource usage below the limit
    within 2 seconds of the event being raised.
 
-### Managing memory using the `AppMemoryUsageIncreased` and `AppMemoryUsageDecreased` events
+### Managing memory using the AppMemoryUsageIncreased and AppMemoryUsageDecreased events
 
-When running in the foreground or the background the `AppMemoryUsageIncreased`
+When running in the foreground or the background the AppMemoryUsageIncreased
 and AppMemoryUsageDecreased events can be used control the amount of memory an
 app uses. For example:
 
- - if an app gets an `AppMemoryUsageIncreased` event and the
-   `MemoryManager::AppMemoryUsageLevel` is `AppMemoryUsageLevel::High` then it
+ - if an app gets an AppMemoryUsageIncreased event and the
+   MemoryManager::AppMemoryUsageLevel is AppMemoryUsageLevel::High then it
    should consider freeing resources to stay within the memory constraints of
    the system.
 
- - if an app gets an `AppMemoryUsageIncreased` event and the
-   `MemoryManager.AppMemoryUsageLevel` is `AppMemoryUsageLevel.OverLimit` then
+ - if an app gets an AppMemoryUsageIncreased event and the
+   MemoryManager.AppMemoryUsageLevel is AppMemoryUsageLevel.OverLimit then
    it must free resources to stay within the memory constraints of the system.
    If it does not the app may be suspended or terminated (see Notes above for
    more information).  On Xbox if the app does not reduce memory within 2
    seconds of receiving an OverLimit event it will be suspended or terminated.
 
- - The `MemoryManager::AppMemoryUsage` and `MemoryManager::AppMemoryUsageLimit`
+ - The MemoryManager::AppMemoryUsage and MemoryManager::AppMemoryUsageLimit
    properties can be used to determine actual memory usage and the current
    limit. Note: These events are not a replacement handling the
-   `AppMemoryLimitChanging` event, but rather allow the application to continue
+   AppMemoryLimitChanging event, but rather allow the application to continue
    to monitor its memory usage after limits have been applied.
 
 ### Freeing resources
 
 An app may have resources such as cached data that can be released at any point
 in time and recreated easily. These are ideal to release in
-`AppMemoryLimitChanging` or as needed in `AppMemoryUsageIncreased`.
+AppMemoryLimitChanging or as needed in AppMemoryUsageIncreased.
 
 Some resources cannot be released while the UI is present, such as visible
 images, 3D models, or the view itself and its backing data. These can be
-released directly in `EnteredBackground` but this could result in releasing
-views unnecessarily. Alternatively, use `EnteredBackground`/`LeavingBackground`
+released directly in EnteredBackground but this could result in releasing
+views unnecessarily. Alternatively, use EnteredBackground/LeavingBackground
 to track background status and then release UI resources from
-`AppMemoryLimitChanging` only if needed.
+AppMemoryLimitChanging only if needed.
 
 Be especially careful of references that could prevent resources from being
 garbage collected, such as strong references or subscribed event handlers.
@@ -270,43 +277,43 @@ carefully monitor its memory usage to avoid being suspended or terminated by the
 system.
 
 When an app moves from the foreground to the background it will first get an
-`EnteredBackground` event and then a `AppMemoryLimitChanging` event.
+EnteredBackground event and then a AppMemoryLimitChanging event.
 
- ✓ **Do** use the `EnteredBackground` event to free up UI resources that you know
+ ✓ **Do** use the EnteredBackground event to free up UI resources that you know
  your app does not need when running in the background – for example the cover
  art image for a song.
 
- ✘ **Do not** perform long running operations in the `EnteredBackground` event
+ ✘ **Do not** perform long running operations in the EnteredBackground event
  as you can cause the system to appear to be slow to transition between
  applications as a result.
 
- ✓ **Do** use the `AppMemoryLimitChanging` event to ensure that your app is
+ ✓ **Do** use the AppMemoryLimitChanging event to ensure that your app is
  using less memory than the new background limit. Make sure that you free up
  resources if this is not the case. If you do not your app may be suspended or
  terminated according to device specific policy.
 
  ✓ **Do** manually invoke the garbage collector if your app is over the new
- memory limit when the `AppMemoryLimitChanging` event is raised.
+ memory limit when the AppMemoryLimitChanging event is raised.
 
  ✓ **Consider** as a performance optimization, freeing UI resources in the
- `AppMemoryLimitChanging` event handler instead of in the `EnteredBackground`
- handler. Use a boolean value set in the `EnteredBackground`/`LeavingBackground`
+ AppMemoryLimitChanging event handler instead of in the EnteredBackground
+ handler. Use a boolean value set in the EnteredBackground/LeavingBackground
  event handlers to track whether the app is in the background or foreground.
- Then in the `AppMemoryLimitChanging` event handler, if `AppMemoryUsage` is over
+ Then in the AppMemoryLimitChanging event handler, if AppMemoryUsage is over
  the limit and the app is in the background (based on the Boolean value) you can
  free UI resources.
 
- ✓ **Do** use the `AppMemoryUsageIncreased` event to continue to monitor your
+ ✓ **Do** use the AppMemoryUsageIncreased event to continue to monitor your
  app’s memory usage while running in the background if you expect it to change.
- If the `AppMemoryUsageLevel` is `High` or `OverLimit` make sure that you free
+ If the AppMemoryUsageLevel is High or OverLimit make sure that you free
  up resources.
 
 ### Moving from the background to the foreground
 
 When an app moves from the background to the foreground, the app will first get
-an `AppMemoryLimitChanging` event and then a `LeavingBackground` event.
+an AppMemoryLimitChanging event and then a LeavingBackground event.
 
- ✓ **Do** use the `LeavingBackground` event to recreate UI resources that your app
+ ✓ **Do** use the LeavingBackground event to recreate UI resources that your app
  discarded when moving into the background.
 
 Related topics

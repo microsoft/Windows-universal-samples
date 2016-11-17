@@ -5,7 +5,16 @@
 
 # Video playback synchronization sample
 
-This sample demonstrates how to use `MediaTimelineController` to synchronize multiple videos by assigning the controller to multiple `MediaPlayer` instances.
+Shows how to use the [MediaTimelineController](https://msdn.microsoft.com/library/windows/apps/windows.media.mediatimelinecontroller.aspx) 
+class to synchronize multiple videos by assigning the controller to multiple [MediaPlayer](https://msdn.microsoft.com/library/windows/apps/windows.media.playback.mediaplayer.aspx) 
+instances.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
 
@@ -17,7 +26,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-* [VideoPlayback sample](/Samples/VideoPlayback)
+[VideoPlayback sample](/Samples/VideoPlayback)  
 
 ## System requirements
 

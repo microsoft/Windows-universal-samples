@@ -5,10 +5,20 @@
 
 # Serializing and deserializing data sample
 
-This sample shows how to use the [**DataReader**](http://msdn.microsoft.com/library/windows/apps/br208119) and [**DataWriter**](http://msdn.microsoft.com/library/windows/apps/br208154) classes to store and retrieve data.  Specifcially, this sample demonstrates the following scenarios:
+Shows how to use the [DataReader](http://msdn.microsoft.com/library/windows/apps/br208119) and 
+[DataWriter](http://msdn.microsoft.com/library/windows/apps/br208154) classes to store and retrieve data.  
 
--   Creating a memory-backed stream by using the [**InMemoryRandomAccessStream**](http://msdn.microsoft.com/library/windows/apps/br241720) class and storing strings by using a [**DataWriter**](http://msdn.microsoft.com/library/windows/apps/br208154) object. When the write operation completes, a [**DataReader**](http://msdn.microsoft.com/library/windows/apps/br208119) object extracts the stored strings from the stream and displays them.
--   Opening a sequential-access stream over an image by using the [**OpenSequentialReadAsync**](http://msdn.microsoft.com/library/windows/apps/hh701853) and [**ReadBytes**](http://msdn.microsoft.com/library/windows/apps/br208139) methods to retrieve and display its binary data.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+Specifically, this sample shows how to:
+
+-   Create a memory-backed stream by using the [InMemoryRandomAccessStream](http://msdn.microsoft.com/library/windows/apps/br241720) class and storing strings by using a [DataWriter](http://msdn.microsoft.com/library/windows/apps/br208154) object. When the write operation completes, a [DataReader](http://msdn.microsoft.com/library/windows/apps/br208119) object extracts the stored strings from the stream and displays them.
+-   Open a sequential-access stream over an image by using the [OpenSequentialReadAsync](http://msdn.microsoft.com/library/windows/apps/hh701853) and [ReadBytes](http://msdn.microsoft.com/library/windows/apps/br208139) methods to retrieve and display its binary data.
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
@@ -18,17 +28,14 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## Related topics
 
-[**DataReader**](http://msdn.microsoft.com/library/windows/apps/br208119)
-
-[**DataWriter**](http://msdn.microsoft.com/library/windows/apps/br208154)
-
-[**OpenSequentialReadAsync**](http://msdn.microsoft.com/library/windows/apps/hh701853)
-
-[**InMemoryRandomAccessStream**](http://msdn.microsoft.com/library/windows/apps/br241720)
+[DataReader](http://msdn.microsoft.com/library/windows/apps/br208119)  
+[DataWriter](http://msdn.microsoft.com/library/windows/apps/br208154)  
+[OpenSequentialReadAsync](http://msdn.microsoft.com/library/windows/apps/hh701853)  
+[InMemoryRandomAccessStream](http://msdn.microsoft.com/library/windows/apps/br241720)  
 
 ### Reference
 
-[**Streams**](http://msdn.microsoft.com/library/windows/apps/br241791)
+[Streams](http://msdn.microsoft.com/library/windows/apps/br241791)  
 
 ## System requirements
 

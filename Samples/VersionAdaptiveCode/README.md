@@ -5,12 +5,19 @@
 
 # Version adaptive code sample
 
-This sample demonstrates ways of writing an app which
+Shows ways of writing an app which
 adapts to the version of Windows it is running on,
 taking advantage of new features if available,
 and falling back to a simpler version if not.
 
-Common to all samples
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+Specifically, this sample shows:
 
 - Detecting whether a specific runtime class, property, event, method, or enumerated value is available.
 - Executing code conditionally based on whether an API is present.
@@ -27,37 +34,25 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[ApiInformation class](https://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.apiinformation.aspx)
-
-[HardwareButtons.CameraPressed event](https://msdn.microsoft.com/library/windows/apps/windows.phone.ui.input.hardwarebuttons.camerapressed.aspx)
-
-[BackgroundAccessStatus enumeration](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.background.backgroundaccessstatus.aspx)
-
-[OrientationSensor.GetDefault method](https://msdn.microsoft.com/library/windows/apps/windows.devices.sensors.orientationSensor.getdefault.aspx)
-
-[MediaElement](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.mediaelement.aspx)
-
-[CreateBackdropBrush](https://msdn.microsoft.com/library/windows/apps/windows.ui.composition.compositor.createbackdropbrush.aspx)
-
-[AllowFocusOnInteraction property](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.primitives.flyoutbase.allowfocusoninteraction.aspx)
-
-[MediaPlayerElement](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.mediaplayerelement.aspx)
+[ApiInformation class](https://msdn.microsoft.com/library/windows/apps/windows.foundation.metadata.apiinformation.aspx)  
+[HardwareButtons.CameraPressed event](https://msdn.microsoft.com/library/windows/apps/windows.phone.ui.input.hardwarebuttons.camerapressed.aspx)  
+[BackgroundAccessStatus enumeration](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.background.backgroundaccessstatus.aspx)  
+[OrientationSensor.GetDefault method](https://msdn.microsoft.com/library/windows/apps/windows.devices.sensors.orientationSensor.getdefault.aspx)  
+[MediaElement](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.mediaelement.aspx)  
+[CreateBackdropBrush](https://msdn.microsoft.com/library/windows/apps/windows.ui.composition.compositor.createbackdropbrush.aspx)  
+[AllowFocusOnInteraction property](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.primitives.flyoutbase.allowfocusoninteraction.aspx)  
+[MediaPlayerElement](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.mediaplayerelement.aspx)  
 
 ### Conceptual
 
-<!-- Link is not yet live.
-[Version adaptive code](https://msdn.microsoft.com/windows/uwp/debug-test-perf/version-adaptive-code)
--->
-
-[Guide to UWP apps](https://msdn.microsoft.com/windows/uwp/get-started/universal-application-platform-guide)
+[Version adaptive code](https://msdn.microsoft.com/windows/uwp/debug-test-perf/version-adaptive-code)  
+[Guide to UWP apps](https://msdn.microsoft.com/windows/uwp/get-started/universal-application-platform-guide)  
 
 #### Samples
 
-[OrientationSensor sample](/Samples/OrientationSensor)
-
-[BackgroundActivation sample](/Samples/BackgroundActivation)
-
-[XamlStateTriggers sample](/Samples/XamlStateTriggers)
+[OrientationSensor sample](/Samples/OrientationSensor)  
+[BackgroundActivation sample](/Samples/BackgroundActivation)  
+[XamlStateTriggers sample](/Samples/XamlStateTriggers)  
 
 ## System requirements
 

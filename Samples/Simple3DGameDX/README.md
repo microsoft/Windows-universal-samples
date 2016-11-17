@@ -5,7 +5,14 @@
 
 # Direct3D game sample
 
-This sample demonstrates the basic end-to-end implementation of a simple first person 3-D game using DirectX (Direct3D 11.2, Direct2D, Windows.Gaming.Input, and XAudio2) in a C++ app.
+Shows the basic end-to-end implementation of a simple first person 3-D game using DirectX (Direct3D 11.2, Direct2D, Windows.Gaming.Input, and XAudio2) in a C++ app.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample supports:
 

@@ -5,7 +5,19 @@
 
 # Tailored multiple views sample
 
-Showcases how to build tailored UI using multiple views that are optimized for one-handed use.  Specifically, the usage of the Pivot control plus commands at the bottom of devices that are < 7" in size and the usage of the SplitView control plus commands at the top of the device for devices > 7" in size.
+Shows how to build a tailored UI using multiple views that are optimized for one-handed use.  
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+Specifically, this sample shows how to:
+
+* Use the Pivot control plus commands at the bottom of devices that are less than 7" in size. 
+* Use the SplitView control plus commands at the top of devices greater than 7" in size.
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
@@ -15,11 +27,8 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-<!-- Add links to related API -->
-
-[Pivot control](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.pivot.aspx)
-
-[SplitView control](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.splitview.aspx)
+[Pivot control](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.pivot.aspx)  
+[SplitView control](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.splitview.aspx)  
 
 ## System requirements
 

@@ -5,21 +5,28 @@
 
 # Gamepad-style navigation (XAML) sample
 
-This sample shows ways of improving directional navigation in your app.
+Shows ways of improving directional navigation in your app.
 Controllers such as remote controls,
 gamepad joystick, or gamepad D-pad allow the user to navigate in the
 four cardinal directions.
 
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
 The sample shows the following techniques:
 
-- Opt the app into using directional navigation by setting `Application.RequiresPointerMode` to `WhenRequested`.
+- Opt the app into using directional navigation by setting Application.RequiresPointerMode to WhenRequested.
   Without this step, the app defaults to using pointer mode everywhere.
 - Customize directional navigation to improve navigation targeting.
 - Customize directional navigation to prevent navigation in a particular direction.
 - A custom control which requires the user to press the "A" button on the game controller in order to engage the control.
 - Mitigations for custom controls which are not aware of directional navigation.
 
-When the `IsFocusEngagementEnabled` property is set to `True`,
+When the IsFocusEngagementEnabled property is set to True,
 the control is not given focus upon navigation.
 The user must press
 the "A" button on the game controller
@@ -30,8 +37,7 @@ from the control and allow the directional navigation
 buttons to be used for navigation.
 
 For information about directional navigation in JavaScript apps,
-see
-[WinJS.UI.XYFocus](https://msdn.microsoft.com/library/windows/apps/dn904246.aspx).
+see [WinJS.UI.XYFocus](https://msdn.microsoft.com/library/windows/apps/dn904246.aspx).
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
@@ -43,22 +49,17 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[XYFocusDown property](https://msdn.microsoft.com/library/windows/apps/xaml/windows.ui.xaml.controls.control.xyfocusdown.aspx)
+[XYFocusDown property](https://msdn.microsoft.com/library/windows/apps/xaml/windows.ui.xaml.controls.control.xyfocusdown.aspx)  
+[XYFocusLeft property](https://msdn.microsoft.com/library/windows/apps/xaml/windows.ui.xaml.controls.control.xyfocusleft.aspx)  
+[XYFocusRight property](https://msdn.microsoft.com/library/windows/apps/xaml/windows.ui.xaml.controls.control.xyfocusright.aspx)  
+[XYFocusUp property](https://msdn.microsoft.com/library/windows/apps/xaml/windows.ui.xaml.controls.control.xyfocusup.aspx)  
+[IsFocusEngaged property](https://msdn.microsoft.com/library/windows/apps/xaml/windows.ui.xaml.controls.control.isfocusengaged.aspx)  
+[IsFocusEngagementEnabled property](https://msdn.microsoft.com/library/windows/apps/xaml/windows.ui.xaml.controls.control.isfocusengagementenabled.aspx)  
 
-[XYFocusLeft property](https://msdn.microsoft.com/library/windows/apps/xaml/windows.ui.xaml.controls.control.xyfocusleft.aspx)
-
-[XYFocusRight property](https://msdn.microsoft.com/library/windows/apps/xaml/windows.ui.xaml.controls.control.xyfocusright.aspx)
-
-[XYFocusUp property](https://msdn.microsoft.com/library/windows/apps/xaml/windows.ui.xaml.controls.control.xyfocusup.aspx)
-
-[IsFocusEngaged property](https://msdn.microsoft.com/library/windows/apps/xaml/windows.ui.xaml.controls.control.isfocusengaged.aspx)
-
-[IsFocusEngagementEnabled property](https://msdn.microsoft.com/library/windows/apps/xaml/windows.ui.xaml.controls.control.isfocusengagementenabled.aspx)
-
-* [Designing for Xbox and TV](https://msdn.microsoft.com/en-us/windows/uwp/input-and-devices/designing-for-tv)
-  * [XY focus navigation and interaction](https://msdn.microsoft.com/en-us/windows/uwp/input-and-devices/designing-for-tv#xy-focus-navigation-and-interaction)
-  * [Mouse mode](https://msdn.microsoft.com/en-us/windows/uwp/input-and-devices/designing-for-tv#mouse-mode)
-  * [Focus engagement](https://msdn.microsoft.com/en-us/windows/uwp/input-and-devices/designing-for-tv#focus-engagement)
+[Designing for Xbox and TV](https://msdn.microsoft.com/windows/uwp/input-and-devices/designing-for-tv)  
+* [XY focus navigation and interaction](https://msdn.microsoft.com/windows/uwp/input-and-devices/designing-for-tv#xy-focus-navigation-and-interaction)  
+* [Mouse mode](https://msdn.microsoft.com/windows/uwp/input-and-devices/designing-for-tv#mouse-mode)  
+* [Focus engagement](https://msdn.microsoft.com/windows/uwp/input-and-devices/designing-for-tv#focus-engagement)  
 
 ## System requirements
 

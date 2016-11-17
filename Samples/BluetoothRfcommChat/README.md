@@ -5,12 +5,17 @@
 
 # Bluetooth RFCOMM chat sample
 
-This sample demonstrates the use of classes in the
-[**Windows.Devices.Bluetooth.Rfcomm**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.bluetooth.rfcomm.aspx)
-namespace
-to communicate over sockets.
+Shows how to use the [Windows.Devices.Bluetooth.Rfcomm](https://msdn.microsoft.com/library/windows/apps/windows.devices.bluetooth.rfcomm.aspx)
+namespace to communicate over sockets.
 
-**Note:** Two devices will be needed to run this sample.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+**Note:** You need two devices to run this sample.
 
 ##Chat Client
 Connects to an RFCOMM server running on another device and establishes a socket connection.
@@ -43,16 +48,13 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[DataReaderWriter sample](../DataReaderWriter)
-
-[DeviceEnumeration sample](../DeviceEnumerationAndPairing)
-
-[StreamSocket sample](../StreamSocket)
+[DataReaderWriter sample](../DataReaderWriter)  
+[DeviceEnumeration sample](../DeviceEnumerationAndPairing)  
+[StreamSocket sample](../StreamSocket)  
 
 ### Reference
 
-[**Windows.Devices.Bluetooth.Rfcomm**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.bluetooth.rfcomm.aspx)
-namespace
+[Windows.Devices.Bluetooth.Rfcomm](https://msdn.microsoft.com/library/windows/apps/windows.devices.bluetooth.rfcomm.aspx) namespace  
 
 ## System requirements
 

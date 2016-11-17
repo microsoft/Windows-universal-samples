@@ -5,9 +5,16 @@
 
 # Enterprise data protection sample
 
-This sample demonstrates Enterprise Data Protection (EDP) scenarios: File and buffer protection, clipboard protection,
+Shows Enterprise Data Protection (EDP) scenarios: File and buffer protection, clipboard protection,
 data protection under lock, and protected access to network resources.
 All APIs except File and Buffer protection APIs require Enterprise data policy to be set for a specific identity.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 If you have EDP policy set for a specific identity, you should expect the IsIdentityManaged API to return true. If the API returns false, all APIs except the File and Buffer APIs will not work as expected. Each API has a detailed scenario description that describes the purpose and behavior of the API.
 
@@ -17,7 +24,7 @@ This sample will not pass WACK because it uses a special-use capability.
 
 ## Related Topics
 
-[Enterprise Data Protection Overview](https://msdn.microsoft.com/en-us/library/Dn985838(v=VS.85).aspx)
+[Enterprise Data Protection Overview](https://msdn.microsoft.com/library/Dn985838.aspx)  
 
 ## System requirements
 

@@ -5,7 +5,14 @@
 
 # AllJoyn producer experiences sample
 
-This sample demonstrates how to create an AllJoyn Windows Universal app using Code Generation with Introspection XML and Windows.Devices.AllJoyn.
+Shows how to create an AllJoyn Windows Universal app using Code Generation with Introspection XML and Windows.Devices.AllJoyn.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample covers:
 
@@ -34,7 +41,7 @@ The AllSeen Alliance has samples in [Windows SDK](https://allseenalliance.org/de
 
 ### Reference
 
-[MSDN Reference](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.alljoyn.aspx)
+[MSDN Reference](https://msdn.microsoft.com/library/windows/apps/windows.devices.alljoyn.aspx)
 [AllJoyn Reference] (https://allseenalliance.org/developers/develop/api-reference)
 [Troubleshooting AllJoyn blog](http://channel9.msdn.com/Blogs/Internet-of-Things-Blog/Troubleshooting-AllJoyn-with-Windows-10-Insider-Preview-Builds)
 

@@ -5,7 +5,14 @@
 
 # UI basics (XAML) sample
 
-This sample shows all of the XAML controls in an interactive format.
+Shows all of the XAML controls in an interactive format.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample shows how to:
 
@@ -21,7 +28,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## Related topics
 
-[Windows Store app UI, start to finish](http://msdn.microsoft.com/library/windows/apps/dn263191.aspx)
+[Windows Store app UI, start to finish](http://msdn.microsoft.com/library/windows/apps/dn263191.aspx)  
 
 Each control page in the application has links to the relevant MSDN documentation for that control.
 

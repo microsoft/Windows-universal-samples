@@ -5,9 +5,15 @@
 
 # Accelerometer sample
 
-This sample shows how to use the [**Accelerometer**](http://msdn.microsoft.com/library/windows/apps/br225687) class.
+Shows how to use the [Accelerometer](http://msdn.microsoft.com/library/windows/apps/br225687) class, and 
+allows the user to view the acceleration forces along the X-, Y-, and Z-axes for a 3-axis accelerometer.
 
-This sample allows the user to view the acceleration forces along the X-, Y-, and Z-axes for a 3-axis accelerometer.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 The sample asks you to choose an accelerometer.
 
@@ -49,17 +55,17 @@ When you choose the **Enable** button for the **Data Events** option, the app be
 
 ### Samples
 
-[**Display orientation** sample](../DisplayOrientation)
+[Display orientation sample](../DisplayOrientation)
 
 ### Reference
 
-[**Accelerometer.GetCurrentReading** method](http://msdn.microsoft.com/library/windows/apps/br225699)
+[Accelerometer.GetCurrentReading method](http://msdn.microsoft.com/library/windows/apps/br225699)
 
-[**Accelerometer.ReadingChanged** event handler](http://msdn.microsoft.com/library/windows/apps/br225702)
+[Accelerometer.ReadingChanged event handler](http://msdn.microsoft.com/library/windows/apps/br225702)
 
 [Quickstart: Responding to user movement with the accelerometer](http://msdn.microsoft.com/library/windows/apps/hh465265)
 
-[**Windows.Devices.Sensors** namespace](http://go.microsoft.com/fwlink/p/?linkid=241981)
+[Windows.Devices.Sensors namespace](http://go.microsoft.com/fwlink/p/?linkid=241981)
 
 ## System requirements
 

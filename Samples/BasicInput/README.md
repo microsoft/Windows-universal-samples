@@ -5,7 +5,14 @@
 
 # Basic input sample
 
-This sample shows how to handle input in Universal Windows Apps.
+Shows how to handle user input in Universal Windows Platform (UWP) apps.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample shows how to:
 
@@ -25,17 +32,17 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[PointerPoint](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.input.pointerpoint.aspx)
+[PointerPoint](https://msdn.microsoft.com/library/windows/apps/windows.ui.input.pointerpoint.aspx)
 
-[KeyboardCapabilities](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.input.keyboardcapabilities.aspx)
+[KeyboardCapabilities](https://msdn.microsoft.com/library/windows/apps/windows.devices.input.keyboardcapabilities.aspx)
 
-[MouseCapabilities](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.input.mousecapabilities.aspx)
+[MouseCapabilities](https://msdn.microsoft.com/library/windows/apps/windows.devices.input.mousecapabilities.aspx)
 
-[TouchCapabilities](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.input.touchcapabilities.aspx)
+[TouchCapabilities](https://msdn.microsoft.com/library/windows/apps/windows.devices.input.touchcapabilities.aspx)
 
-[ManipulationMode](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.uielement.manipulationmode.aspx)
+[ManipulationMode](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.uielement.manipulationmode.aspx)
 
-[GestureRecognizer](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.input.gesturerecognizer.aspx)
+[GestureRecognizer](https://msdn.microsoft.com/library/windows/apps/windows.ui.input.gesturerecognizer.aspx)
 
 ## System requirements
 

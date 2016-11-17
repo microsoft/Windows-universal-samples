@@ -6,12 +6,16 @@
 
 # 3D Printing from Unity sample
 
-This sample demonstrates loading a Unity 3D asset
-into the Windows 10 3D print dialog.
-From there,
-the user can repair the model,
-make simple modifications,
+Shows how to load a Unity 3D asset into the Windows 10 3D print dialog.
+From there, the user can repair the model, make simple modifications,
 and send it to a local 3D printer or an online 3D print service.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 **Note** that this is not a traditional sample
 that you can simply load into Visual Studio.
@@ -34,7 +38,7 @@ In addition to Visual Studio and the Windows SDK, you need the following:
   This application comes preinstalled with Windows 10.
   If you have uninstalled it,
   you can
-  [reinstall it from the Store](https://www.microsoft.com/en-us/store/apps/3d-builder/9wzdncrfj3t6 "3D Builder").
+  [reinstall it from the Store](https://www.microsoft.com/store/apps/3d-builder/9wzdncrfj3t6 "3D Builder").
 
 A basic understanding of Unity is assumed.
 Learn how to get started with Unity
@@ -42,7 +46,7 @@ Learn how to get started with Unity
 
 # Create the sample
 
-We provide only the scripts `Print3D.cs` and `Turn.cs`.
+We provide only the scripts Print3D.cs and Turn.cs.
 You will create the scene and the model (fbx model, material, and texture)
 yourself.
 
@@ -67,8 +71,8 @@ yourself.
 
 7. Go to the All Scripts folder, right-click an empty space,
    and select **Import New Asset**.
-   Select the `Print3D.cs` and (optionally) `Turn.cs` files from this sample.
-   The `Turn.cs` script lets the user rotate the object and inspect
+   Select the Print3D.cs and (optionally) Turn.cs files from this sample.
+   The Turn.cs script lets the user rotate the object and inspect
    it within the Unity editor.
 
 8. Expand the GameObject you created in step 3
@@ -76,7 +80,7 @@ yourself.
    Expand the **cruscarp** node to reveal a second
    **cruscarp** node. This is the rendering mesh.
 
-9. Drag the `Print3D.cs` file (and optionally `Turn.cs` file)
+9. Drag the Print3D.cs file (and optionally Turn.cs file)
    from the All Scripts folder onto the rendering mesh node
    you revealed in step 8.
 
@@ -97,7 +101,7 @@ yourself.
     <SDKReference Include="WindowsMobile, Version=10.0.N.0.0">
 
     (The value of N will depend on the SDK you are using.)
-    Delete the extra `.0`:
+    Delete the extra .0:
 
     <TargetPlatformVersion>10.0.N.0</TargetPlatformVersion>
 
@@ -130,9 +134,9 @@ that has been generated using the commented function in Print3D.cs.
 
 * [3D Printing in Windows](https://www.microsoft.com/3d)
 
-* [**Windows.Graphics.Printing3D** namespace](https://msdn.microsoft.com/library/windows/apps/windows.graphics.printing3d.aspx)
-* [**Print3DManager** class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.printing3d.print3dmanager.aspx) launches the print dialog
-* [**Printing3D3MFPackage** class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.printing3d.printing3d3mfpackage.aspx).
+* [Windows.Graphics.Printing3D namespace](https://msdn.microsoft.com/library/windows/apps/windows.graphics.printing3d.aspx)
+* [Print3DManager class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.printing3d.print3dmanager.aspx) launches the print dialog
+* [Printing3D3MFPackage class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.printing3d.printing3d3mfpackage.aspx).
 
 ## System requirements
 

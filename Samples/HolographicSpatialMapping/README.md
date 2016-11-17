@@ -5,8 +5,15 @@
 
 # Holographic spatial mapping sample
 
-This sample demonstrates how to acquire spatial mapping data from Windows Perception in
+Shows how to acquire spatial mapping data from Windows Perception in
 real-time, and provides a simple example for consuming the spatial mapping data.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample requests spatial mapping updates for a space with rectangular extents
 20x20x5 meters from the device, and renders the data as a mesh in holographic space. You can choose
@@ -48,16 +55,16 @@ Microsoft Visual Studio 2015 Update 2 and the Microsoft HoloLens Emulator, go to
 
 The following are used to demonstrate spatial mapping in this code sample:
 
-* [Windows.Perception namespace]                   (https://msdn.microsoft.com/library/windows/apps/windows.perception.aspx)
-* [Windows.Perception.Spatial namespace]           (https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.aspx)
-  * [SpatialPerceptionAccessStatus enumeration]    (https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.spatialperceptionaccessstatus.aspx)
-* [Windows.Perception.Spatial.Surfaces]            (https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.surfaces.aspx)
-  * [SpatialSurfaceObserver class]                 (https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.surfaces.spatialsurfaceobserver.aspx)
-  * [SpatialSurfaceInfo class]                     (https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.surfaces.spatialsurfaceinfo.aspx)
-  * [SpatialSurfaceMeshOptions class]              (https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.surfaces.spatialsurfacemeshoptions.aspx)
-  * [SpatialSurfaceInfo.TryComputeLatestMeshAsync] (https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.surfaces.spatialsurfaceinfo.trycomputelatestmeshasync.aspx)
-  * [SpatialSurfaceMesh class]                     (https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.surfaces.spatialsurfacemesh.aspx)
-  * [SpatialSurfaceMeshBuffer class]               (https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.surfaces.spatialsurfacemeshbuffer.aspx)
+* [Windows.Perception namespace](https://msdn.microsoft.com/library/windows/apps/windows.perception.aspx)
+* [Windows.Perception.Spatial namespace](https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.aspx)
+  * [SpatialPerceptionAccessStatus enumeration](https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.spatialperceptionaccessstatus.aspx)
+* [Windows.Perception.Spatial.Surfaces](https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.surfaces.aspx)
+  * [SpatialSurfaceObserver class](https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.surfaces.spatialsurfaceobserver.aspx)
+  * [SpatialSurfaceInfo class](https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.surfaces.spatialsurfaceinfo.aspx)
+  * [SpatialSurfaceMeshOptions class](https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.surfaces.spatialsurfacemeshoptions.aspx)
+  * [SpatialSurfaceInfo.TryComputeLatestMeshAsync](https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.surfaces.spatialsurfaceinfo.trycomputelatestmeshasync.aspx)
+  * [SpatialSurfaceMesh class](https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.surfaces.spatialsurfacemesh.aspx)
+  * [SpatialSurfaceMeshBuffer class](https://msdn.microsoft.com/library/windows/apps/windows.perception.spatial.surfaces.spatialsurfacemeshbuffer.aspx)
 
 
 ## System requirements

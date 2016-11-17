@@ -5,8 +5,15 @@
 
 # Adaptive streaming sample
 
-This sample demonstrates various features of the AdaptiveMediaSource object,
+Shows various features of the AdaptiveMediaSource object,
 used in conjunction with MediaSource, MediaPlaybackItem, MediaPlayer and MediaPlayerElement.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample demonstrates the following:
 
@@ -146,17 +153,11 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[AdaptiveMediaSource](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.streaming.adaptive.adaptivemediasource.aspx)
-
-[AdaptiveMediaSourceAdvancedSettings](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.streaming.adaptive.adaptivemediasourceadvancedsettings.aspx)
-
-[Windows.Media.Streaming.Adaptive namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.streaming.adaptive.aspx)
-
-[How client pass tokens to Azure Media Services Key delivery services]
-(http://mingfeiy.com/how-client-pass-tokens-to-azure-media-services-key-delivery-services).
-
-[An End-to-End Prototype of AES Encryption with ACS Authentication and ACS Token Authorization]
-(https://azure.microsoft.com/en-us/blog/an-end-to-end-prototype-of-aes-encryption-with-acs-authentication-and-acs-token-authorization/).
+[AdaptiveMediaSource](https://msdn.microsoft.com/library/windows/apps/windows.media.streaming.adaptive.adaptivemediasource.aspx)  
+[AdaptiveMediaSourceAdvancedSettings](https://msdn.microsoft.com/library/windows/apps/windows.media.streaming.adaptive.adaptivemediasourceadvancedsettings.aspx)  
+[Windows.Media.Streaming.Adaptive namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.streaming.adaptive.aspx)  
+[How client pass tokens to Azure Media Services Key delivery services](http://mingfeiy.com/how-client-pass-tokens-to-azure-media-services-key-delivery-services)  
+[An End-to-End Prototype of AES Encryption with ACS Authentication and ACS Token Authorization](https://azure.microsoft.com/blog/an-end-to-end-prototype-of-aes-encryption-with-acs-authentication-and-acs-token-authorization/).
 
 ## System requirements
 

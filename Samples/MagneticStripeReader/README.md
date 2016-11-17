@@ -5,29 +5,37 @@
 
 # Magnetic stripe reader sample
 
-This sample shows how to create a magnetic stripe reader, claim it for exclusive use, enable it to receive data, and read data from a bank card or a motor vehicle card. This sample uses [**Windows.Devices.PointOfService**](http://msdn.microsoft.com/library/windows/apps/dn298071) API.
+Shows how to create a magnetic stripe reader, claim it for exclusive use, enable it to receive data, and read data from a bank card or a motor vehicle card. 
+This sample uses the [Windows.Devices.PointOfService](http://msdn.microsoft.com/library/windows/apps/dn298071) API.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample shows how to:
 
 1.  **Get the magnetic stripe reader**
 
-    Uses the [**MagneticStripeReader.GetDefaultAsync**](http://msdn.microsoft.com/library/windows/apps/dn297987) method to get the first available magnetic stripe reader.
+    Uses the [MagneticStripeReader.GetDefaultAsync](http://msdn.microsoft.com/library/windows/apps/dn297987) method to get the first available magnetic stripe reader.
 
 2.  **Claim the magnetic stripe reader for exclusive use**
 
-    Uses [**ClaimReaderAsync**](http://msdn.microsoft.com/library/windows/apps/dn297979) to claim the device.
+    Uses [ClaimReaderAsync](http://msdn.microsoft.com/library/windows/apps/dn297979) to claim the device.
 
 3.  **Add event handlers**
 
-    Uses [**BankCardDataReceived**](http://msdn.microsoft.com/library/windows/apps/dn278599), [**AamvaCardDataReceived**](http://msdn.microsoft.com/library/windows/apps/dn278595), and [**ReleaseDeviceRequested**](http://msdn.microsoft.com/library/windows/apps/dn278626) events.
+    Uses [BankCardDataReceived](http://msdn.microsoft.com/library/windows/apps/dn278599), [AamvaCardDataReceived](http://msdn.microsoft.com/library/windows/apps/dn278595), and [ReleaseDeviceRequested](http://msdn.microsoft.com/library/windows/apps/dn278626) events.
 
-    When an application gets a request from another application to release its exclusive claim to the magnetic stripe reader, it must handle the request by retaining the device; otherwise, it will lose its claim. The event handler for [**ReleaseDeviceRequested**](http://msdn.microsoft.com/library/windows/apps/dn278626) shows how to do this.
+    When an application gets a request from another application to release its exclusive claim to the magnetic stripe reader, it must handle the request by retaining the device; otherwise, it will lose its claim. The event handler for [ReleaseDeviceRequested](http://msdn.microsoft.com/library/windows/apps/dn278626) shows how to do this.
 
 4.  **Enable the device to receive data**
 
-    Uses [**EnableAsync**](http://msdn.microsoft.com/library/windows/apps/dn278612).
+    Uses [EnableAsync](http://msdn.microsoft.com/library/windows/apps/dn278612).
 
-The app package manifest shows how to specify the device capability name for the Point of Service (POS) devices. All POS apps are required declare [**DeviceCapability**](http://msdn.microsoft.com/library/windows/apps/br211430) in the app package manifest, either by using "PointofService" as shown in this sample or by using device specific GUID, such as "2A9FE532-0CDC-44F9-9827-76192F2CA2FB" for a magnetic stripe reader.
+The app package manifest shows how to specify the device capability name for the Point of Service (POS) devices. All POS apps are required declare [DeviceCapability](http://msdn.microsoft.com/library/windows/apps/br211430) in the app package manifest, either by using "PointofService" as shown in this sample or by using device specific GUID, such as "2A9FE532-0CDC-44F9-9827-76192F2CA2FB" for a magnetic stripe reader.
 
 The following list shows the magnetic stripe readers that were used with this code sample:
 
@@ -47,13 +55,12 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[Magnetic Stripe Reader sample](/Samples/MagneticStripeReader)
+[Magnetic Stripe Reader sample](/Samples/MagneticStripeReader)  
 
 ### Reference
 
-[Windows.Devices.PointOfService](http://msdn.microsoft.com/library/windows/apps/dn298071)
-
-[Windows app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
+[Windows.Devices.PointOfService](http://msdn.microsoft.com/library/windows/apps/dn298071)  
+[Windows app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 
 ## System requirements
 

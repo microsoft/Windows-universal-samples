@@ -1,11 +1,18 @@
-<!---
+﻿<!---
   category: ControlsLayoutAndText
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620539
 --->
 
 # Downloadable fonts (DirectWrite) sample
 
-This sample demonstrates how to use DirectWrite downloadable fonts, a feature added in Windows 10, together with the DirectWrite text layout API.
+Shows how to use DirectWrite downloadable fonts, a feature added in Windows 10, together with the DirectWrite text layout API.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 A new capability in DirectWrite for Windows 10 allows an app to format text content using fonts that may not be installed on a device, and for the font to be downloaded on demand from a Microsoft service. DirectWrite now includes low-level APIs for using downloadable fonts. An easy way to leverage the downloadable font mechanism is to use DirectWrite's text layout (IDWriteTextLayout3), which integrates the lower-level APIs and does part of the work for you. When a text layout is created with a Windows font that is not locally installed, the text layout will automatically add requests for the font data to a font download queue. You need to add code that initiates the download and that responds when the download is completed.
 
@@ -39,12 +46,11 @@ The ClearDownloadableFontCache.ps1 file is not part of the sample project itself
 
 ## Related topics
 
-[IDWriteFactory3::GetSystemFontCollection method](https://msdn.microsoft.com/en-us/library/windows/desktop/dn890761)  
-[IDWriteTextLayout3 interface](https://msdn.microsoft.com/en-us/library/windows/desktop/dn900405)  
-[IDWriteFontDownloadQueue interface](https://msdn.microsoft.com/en-us/library/windows/desktop/dn890778)  
-[IDWriteFontDownloadListener interface](https://msdn.microsoft.com/en-us/library/windows/desktop/dn890775)  
+[IDWriteFactory3::GetSystemFontCollection method](https://msdn.microsoft.com/library/windows/desktop/dn890761)  
+[IDWriteTextLayout3 interface](https://msdn.microsoft.com/library/windows/desktop/dn900405)  
+[IDWriteFontDownloadQueue interface](https://msdn.microsoft.com/library/windows/desktop/dn890778)  
+[IDWriteFontDownloadListener interface](https://msdn.microsoft.com/library/windows/desktop/dn890775)  
 [Guidelines for fonts](https://msdn.microsoft.com/library/windows/apps/hh700394)  
-
 
 ## System requirements
 

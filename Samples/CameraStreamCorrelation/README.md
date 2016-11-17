@@ -5,11 +5,18 @@
 
 # Camera stream correlation sample
 
-This sample shows how to use spatially correlated color and depth cameras and the depth frames
+Shows how to use spatially correlated color and depth cameras and the depth frames
 to map image pixels from one camera to another using a [DepthCorrelatedCoordinateMapper]
 (https://msdn.microsoft.com/library/windows/apps/windows.media.devices.core.depthcorrelatedcoordinatemapper.aspx),
 as well as decoding a vendor-specific media frame layout with a [BufferMediaFrame]
 (https://msdn.microsoft.com/library/windows/apps/Windows.Media.Capture.Frames.BufferMediaFrame.aspx).
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample demonstrates how to:
 
@@ -50,15 +57,13 @@ To obtain information about Windows 10 development, go to the [Windows Dev Cente
 
 ### Samples
 
-[CameraFrames](/Samples/CameraFrames)
+[CameraFrames](/Samples/CameraFrames)  
 
 ### Reference
 
-[Windows.Media.Capture.Frames namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.frames.aspx)
-
-[Windows.Media.Devices.Core.DepthCorrelatedCoordinateMapper](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.core.depthcorrelatedcoordinatemapper.aspx)
-
-[Windows.Media.Devices.Core.CameraIntrinsics](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.core.cameraintrinsics.aspx)
+[Windows.Media.Capture.Frames namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.frames.aspx)  
+[Windows.Media.Devices.Core.DepthCorrelatedCoordinateMapper](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.core.depthcorrelatedcoordinatemapper.aspx)  
+[Windows.Media.Devices.Core.CameraIntrinsics](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.core.cameraintrinsics.aspx)  
 
 ## System requirements
 

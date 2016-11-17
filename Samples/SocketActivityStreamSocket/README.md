@@ -5,9 +5,18 @@
 
 # Socket activity trigger stream socket sample
 
-This sample shows how to use the Socket Activity Stream Socket API to keep a socket connection alive beyond the lifetime of the application.
+Shows how to use the [StreamSocket](https://msdn.microsoft.com/library/windows/apps/windows.networking.sockets.streamsocket.aspx) Socket Activity Stream API 
+to keep a socket connection alive beyond the lifetime of the application.
 
-This sample connects to a server listening on TCP port 40404. The application can be terminated but the connection to the server will remain alive and will get background notifications if the server sends messages on the connection.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+This sample connects to a server listening on TCP port 40404. The application can be terminated but the connection to the server will remain alive 
+and will get background notifications if the server sends messages on the connection.
 
 This sample requires the following capabilities:
 
@@ -15,16 +24,16 @@ This sample requires the following capabilities:
 
 For more information on network capabilities, see [How to set network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532).
 
-**Note**  This sample is comprised of two apps: SocketActivityStreamSocket (client-side) and StreamSocketListenerServer (server-side). Due to loopback restrictions enforced by network isolation policy, these apps must run on separate machines for them to be able to communicate with each other. The sample scenario will not work if both apps are running on the same machine.
-
+**Note**  This sample is comprised of two apps: SocketActivityStreamSocket (client-side) and StreamSocketListenerServer (server-side). Due to loopback restrictions 
+enforced by network isolation policy, these apps must run on separate machines for them to be able to communicate with each other. The sample scenario will not work 
+if both apps are running on the same machine.
 
 ## Related topics
 
 ### Other resources
 
-[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)
-
-[How to configure network isolation capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)
+[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)  
+[How to configure network isolation capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)  
 
 ## System requirements
 

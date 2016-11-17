@@ -5,19 +5,27 @@
 
 # Bottom-up list (XAML) sample
 
-Demonstrates a ListView that is tailored for scenarios
+Shows a ListView that is tailored for scenarios
 in which the last item is the most interesting.
 This type of ListView is common for chat windows.
 You might also find it useful for showing a trace log.
 
-* Sets the ItemsStackPanel.ItemsUpdatingScrollMode property to KeepLastItemInView
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+Specifically, this sample shows how to:
+* Set the ItemsStackPanel.ItemsUpdatingScrollMode property to KeepLastItemInView
 to indicate that the last item should be used as the anchor when performing layout.
 This affects how the scroll offset is persisted,
 how it is maintained when items are added/removed,
 and the animation that occurs when items are added/removed.
-* Saves and restores the scroll position.
-* Adds older items to the top of the list incrementally.
-* Manually triggers the ISupportIncrementalLoading.LoadMoreAsync method
+* Save and restore the scroll position.
+* Add older items to the top of the list incrementally.
+* Manually trigger the ISupportIncrementalLoading.LoadMoreAsync method
 as the scroll position nears the top of the list.
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.

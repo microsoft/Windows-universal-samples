@@ -5,7 +5,15 @@
 
 # x:Bind sample
 
-This sample shows how to use x:Bind for data binding in XAML apps. x:Bind is a new compile time binding mechanism for XAML in windows 10, which is faster and provides more developer feedback in the form of compile errors and generated code that can be inspected.
+Shows how to use x:Bind for data binding in XAML apps. x:Bind is a new compile time binding mechanism for XAML in windows 10, 
+which is faster and provides more developer feedback in the form of compile errors and generated code that can be inspected.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample shows how to:
 
@@ -30,7 +38,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[{x:Bind} markup extension](https://msdn.microsoft.com/en-us/windows/uwp/xaml-platform/x-bind-markup-extension)
+[{x:Bind} markup extension](https://msdn.microsoft.com/windows/uwp/xaml-platform/x-bind-markup-extension)  
 
 ### Other samples
 

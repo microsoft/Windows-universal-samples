@@ -179,7 +179,7 @@ namespace SDKTemplate
                     // It's difficult to figure out how to split up a characteristic and encode its different parts propertly.
                     // In this case, we'll just encode the whole thing to a string to make it easy to print out.
                 }
-                else
+                else if (selectedCharacteristic.PresentationFormats.Count == 1)
                 {
                     // Get the presentation format since there's only one way of presenting it
                     presentationFormat = selectedCharacteristic.PresentationFormats[0];
@@ -365,6 +365,19 @@ namespace SDKTemplate
                     catch (ArgumentException)
                     {
                         return "Heart Rate: (unable to parse)";
+                    }
+                }
+                else if (selectedCharacteristic.Uuid.Equals(GattCharacteristicUuids.BatteryLevel))
+                {
+                    try
+                    {
+                        // battery level is encoded as a percentage value in the first byte according to
+                        // https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.battery_level.xml
+                        return "Battery Level: " + data[0].ToString() + "%";
+                    }
+                    catch (ArgumentException)
+                    {
+                        return "Battery Level: (unable to parse)";
                     }
                 }
                 else

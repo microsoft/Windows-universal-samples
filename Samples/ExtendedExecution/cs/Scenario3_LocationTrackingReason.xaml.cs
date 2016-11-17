@@ -135,29 +135,26 @@ namespace SDKTemplate
 
         private async void OnTimer(object state)
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            var geolocator = (Geolocator)state;
+            string message;
+            if (geolocator == null)
             {
-                var geolocator = (Geolocator)state;
-                string message;
-                if (geolocator == null)
+                message = "No geolocator";
+            }
+            else
+            {
+                Geoposition geoposition = await geolocator.GetGeopositionAsync();
+                if (geoposition == null)
                 {
-                    message = "No geolocator";
+                    message = "Cannot get current location";
                 }
                 else
                 {
-                    Geoposition geoposition = await geolocator.GetGeopositionAsync();
-                    if (geoposition == null)
-                    {
-                        message = "Cannot get current location";
-                    }
-                    else
-                    {
-                        BasicGeoposition basicPosition = geoposition.Coordinate.Point.Position;
-                        message = $"Longitude = {basicPosition.Longitude}, Latitude = {basicPosition.Latitude}";
-                    }
+                    BasicGeoposition basicPosition = geoposition.Coordinate.Point.Position;
+                    message = $"Longitude = {basicPosition.Longitude}, Latitude = {basicPosition.Latitude}";
                 }
-                MainPage.DisplayToast(message);
-            });
+            }
+            MainPage.DisplayToast(message);
         }
 
         private void EndExtendedExecution()

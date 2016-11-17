@@ -1,36 +1,36 @@
-<!--
+﻿<!--
   category: GlobalizationAndLocalization
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624045
 -->
 
 # Globalization preferences sample
 
-This sample demonstrates how to use the
-[**Windows.System.UserProfile.GlobalizationPreferences**](http://msdn.microsoft.com/library/windows/apps/br241825)
-class to obtain the user's globalization preferences.
-In addition, it shows how to use the
-[**GeographicRegion**](http://msdn.microsoft.com/library/windows/apps/br206792)
-and
-[**Language**](http://msdn.microsoft.com/library/windows/apps/br206804)
-classes in the
-[**Windows.Globalization**](http://msdn.microsoft.com/library/windows/apps/br206813)
+Shows how to use the [Windows.System.UserProfile.GlobalizationPreferences](http://msdn.microsoft.com/library/windows/apps/br241825)
+class to obtain the user's globalization preferences. In addition, it shows how to use the
+[GeographicRegion](http://msdn.microsoft.com/library/windows/apps/br206792) and
+[Language](http://msdn.microsoft.com/library/windows/apps/br206804) classes in the
+[Windows.Globalization](http://msdn.microsoft.com/library/windows/apps/br206813)
 namespace in order to display language and geographic region characteristics..
 
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
 Several user preferences related to globalization settings are available in the
-[**Windows.System.UserProfile**](http://msdn.microsoft.com/library/windows/apps/br241881)
-namespace.
-The
-[**GlobalizationPreferences**](http://msdn.microsoft.com/library/windows/apps/br241825)
+[Windows.System.UserProfile](http://msdn.microsoft.com/library/windows/apps/br241881)
+namespace. The [GlobalizationPreferences](http://msdn.microsoft.com/library/windows/apps/br241825)
 class provides specific methods for accessing the following user preferences:
 
-- Language list ([**Languages**](http://msdn.microsoft.com/library/windows/apps/br241830)).
-- Geographic region ([**HomeGeographicRegion**](http://msdn.microsoft.com/library/windows/apps/br241829)).
-- Calendar system and settings ([**Calendars**](http://msdn.microsoft.com/library/windows/apps/br241826)).
-- Clock ([**Clocks**](http://msdn.microsoft.com/library/windows/apps/br241827)).
-- First day of the week ([**WeekStartsOn**](http://msdn.microsoft.com/library/windows/apps/br241831)).
+- Language list ([Languages](http://msdn.microsoft.com/library/windows/apps/br241830)).
+- Geographic region ([HomeGeographicRegion](http://msdn.microsoft.com/library/windows/apps/br241829)).
+- Calendar system and settings ([Calendars](http://msdn.microsoft.com/library/windows/apps/br241826)).
+- Clock ([Clocks](http://msdn.microsoft.com/library/windows/apps/br241827)).
+- First day of the week ([WeekStartsOn](http://msdn.microsoft.com/library/windows/apps/br241831)).
 
-The
-[**GeographicRegion**](http://msdn.microsoft.com/library/windows/apps/br206792)
+The [GeographicRegion](http://msdn.microsoft.com/library/windows/apps/br206792)
 class also enables the caller to obtain details about a given geographic region or language.
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
@@ -43,18 +43,18 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-* [**Calendar** sample](../Calendar)
-* [**DateTimeFormatting** sample](../DateTimeFormatting)
-* [**NumberFormatting** sample](../NumberFormatting)
+[Calendar sample](../Calendar)  
+[DateTimeFormatting sample](../DateTimeFormatting)  
+[NumberFormatting sample](../NumberFormatting)  
 
 ### Reference
 
-* [**Windows.System.UserProfile** namespace](http://msdn.microsoft.com/library/windows/apps/br241881)
-* [**Windows.System.UserProfile.GlobalizationPreferences** class](http://msdn.microsoft.com/library/windows/apps/br241825)
-* [**Windows.Globalization** namespace](http://msdn.microsoft.com/library/windows/apps/br206813)
-* [**Windows.Globalization.Calendar**](http://msdn.microsoft.com/library/windows/apps/br206724)
-* [**Windows.Globalization.GeographicRegion** class](http://msdn.microsoft.com/library/windows/apps/br206792)
-* [**Windows.Globalization.Language** class](http://msdn.microsoft.com/library/windows/apps/br206804)
+[Windows.System.UserProfile namespace](http://msdn.microsoft.com/library/windows/apps/br241881)  
+[Windows.System.UserProfile.GlobalizationPreferences class](http://msdn.microsoft.com/library/windows/apps/br241825)  
+[Windows.Globalization namespace](http://msdn.microsoft.com/library/windows/apps/br206813)  
+[Windows.Globalization.Calendar](http://msdn.microsoft.com/library/windows/apps/br206724)  
+[Windows.Globalization.GeographicRegion class](http://msdn.microsoft.com/library/windows/apps/br206792)  
+[Windows.Globalization.Language class](http://msdn.microsoft.com/library/windows/apps/br206804)  
 
 ## System requirements
 

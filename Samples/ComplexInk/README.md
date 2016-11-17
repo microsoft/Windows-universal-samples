@@ -5,9 +5,17 @@
 
 # Complex inking sample
 
-This sample demonstrates how to use advanced InkPresenter functionality to achieve scenarios such as interleaving ink with other objects, selecting ink, copy/paste, and event handling.  It is built upon the Universal Windows Platform (UWP) in C++ and can run on both Desktop and Mobile Windows 10 SKUs.
+Shows how to use advanced InkPresenter functionality to achieve scenarios such as interleaving ink with other objects, selecting ink, 
+copy/paste, and event handling.  It is built upon the Universal Windows Platform (UWP) in C++ and can run on both Desktop and Mobile Windows 10 SKUs.
 
-Specifically, this sample covers using the [**Windows.UI.Input.Inking**](http://msdn.microsoft.com/library/windows/apps/br208524) APIs to:
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+Specifically, this sample covers using the [Windows.UI.Input.Inking](http://msdn.microsoft.com/library/windows/apps/br208524) APIs to:
 -   Render ink strokes onto app specified VSIS surface
 -   Erase ink strokes via mode toggle or eraser button
 -   Select ink strokes via mode toggle or barrel button drag
@@ -30,11 +38,11 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 ## Related topics
 --------------
 
-[Getting started with apps](http://msdn.microsoft.com/library/windows/apps/)
+[Getting started with apps](http://msdn.microsoft.com/library/windows/apps/)  
 
 ## Reference
 
-[**Windows.UI.Input.Inking**](http://msdn.microsoft.com/library/windows/apps/br208524)
+[Windows.UI.Input.Inking](http://msdn.microsoft.com/library/windows/apps/br208524)  
 
 ## Operating system requirements
 -----------------------------

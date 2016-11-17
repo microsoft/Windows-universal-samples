@@ -1,0 +1,66 @@
+<!-- 
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario5"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="wideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="641" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="myMap.Height" Value="500"/>
+                        <Setter Target="myMap.Width" Value="500"/>
+                        <Setter Target="description.Margin" Value="0,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="narrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="myMap.Height" Value="280"/>
+                        <Setter Target="myMap.Width" Value="280"/>
+                        <Setter Target="description.Margin" Value="28,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock x:Name="description" Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+          A Streetside Panorama near to the Space Needle is queried for, and when found, is interactively displayed within the control.
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="1">
+                <Button x:Name="showStreetSideNearSpaceneedle" Content="Show Streetside near SpaceNeedle" Click="showStreetSideNearSpaceneedle_Click"/>
+                <maps:MapControl x:Name="myMap" HorizontalAlignment="Left" Height="500" Width="500" Loaded="myMap_Loaded" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

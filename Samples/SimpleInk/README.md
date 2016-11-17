@@ -5,7 +5,14 @@
 
 # Simple inking sample
 
-This sample demonstrates how to use ink functionality (such as capturing ink from user input and performing handwriting recognition on ink strokes) in Universal Windows apps using C#.
+Shows how to use ink functionality (such as capturing ink from user input and performing handwriting recognition on ink strokes) in Universal Windows apps using C#.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample covers using the Windows.UI.Input.Inking APIs to do the following:
 -   Capture user input and render as ink strokes
@@ -28,15 +35,13 @@ Specifically, this sample covers using the Windows.UI.Input.Inking APIs to do th
 
 **Samples**
 
-[ComplexInk](/Samples/ComplexInk)
-
+[ComplexInk](/Samples/ComplexInk)  
 [Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
-
 [Coloring Book app sample](https://github.com/Microsoft/Windows-appsample-coloringbook)  
 
 **Reference**
 
-[**Windows.UI.Input.Inking**](http://msdn.microsoft.com/library/windows/apps/br208524)
+[Windows.UI.Input.Inking](http://msdn.microsoft.com/library/windows/apps/br208524)  
 
 ## Operating system requirements
 

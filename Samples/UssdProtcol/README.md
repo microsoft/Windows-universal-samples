@@ -5,9 +5,16 @@
 
 # USSD protocol sample
 
-This sample demonstrates the usage of the USSD protocol with GSM-capable mobile broadband adapters. 
+Shows how to use the USSD protocol with GSM-capable mobile broadband adapters. 
 USSD is typically used for account management of a mobile broadband subscription. 
 USSD messages are specific to the mobile broadband operator and must be choosen accordingly when used in a live network. 
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 ## Prerequisites
 
@@ -22,7 +29,7 @@ to be declared in package manifest.
 
 ### Reference
 
-[USSD API reference](https://msdn.microsoft.com/en-us/library/windows/apps/windows.networking.networkoperators.aspx)
+[USSD API reference](https://msdn.microsoft.com/library/windows/apps/windows.networking.networkoperators.aspx)  
 
 ## System requirements
 

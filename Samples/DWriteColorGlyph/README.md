@@ -5,13 +5,22 @@
 
 # DirectWrite colored glyph sample
 
-This sample demonstrates how to implement a custom text renderer to handle different kinds of color glyph runs in [DirectWrite](https://msdn.microsoft.com/en-us/library/windows/desktop/dd368038) and [Direct2D](http://msdn.microsoft.com/en-us/library/windows/desktop/dd370990). This sample uses the custom renderer to draw a string of text with color glyphs. 
+Shows how to implement a custom text renderer to handle different kinds of color glyph runs in 
+[DirectWrite](https://msdn.microsoft.com/library/windows/desktop/dd368038) and 
+[Direct2D](http://msdn.microsoft.com/library/windows/desktop/dd370990). This sample uses the custom renderer to draw a string of text with color glyphs. 
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Some important APIs used in this sample are:
 
-- The [**IDWriteFactory4::TranslateColorGlyphRun**](http://msdn.microsoft.com/en-us/library/windows/desktop/mt761992) method, which translates a glyph run to a sequence of color glyph runs.
-- The [**ID2D1DeviceContext4::DrawSvgGlyphRun**](http://msdn.microsoft.com/en-us/library/windows/desktop/mt750185) method, which draws a color glyph run that's defined in the SVG format.
-- The [**ID2D1DeviceContext4::DrawColorBitmapGlyphRun**](http://msdn.microsoft.com/en-us/library/windows/desktop/mt750184) method, which draws a color glyph run that's defined in one of the bitmap formats.
+- The [IDWriteFactory4::TranslateColorGlyphRun](http://msdn.microsoft.com/library/windows/desktop/mt761992) method, which translates a glyph run to a sequence of color glyph runs.
+- The [ID2D1DeviceContext4::DrawSvgGlyphRun](http://msdn.microsoft.com/library/windows/desktop/mt750185) method, which draws a color glyph run that's defined in the SVG format.
+- The [ID2D1DeviceContext4::DrawColorBitmapGlyphRun](http://msdn.microsoft.com/library/windows/desktop/mt750184) method, which draws a color glyph run that's defined in one of the bitmap formats.
 
 ## Sample project files
 
@@ -50,7 +59,7 @@ Variants of the following files are found in every UWP app written in C++:
 
 ## Related topics
 
-[**Color fonts**](http://msdn.microsoft.com/en-us/library/windows/desktop/mt765165)
+[Color fonts](http://msdn.microsoft.com/library/windows/desktop/mt765165)  
 
 ## System requirements
 

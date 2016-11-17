@@ -5,7 +5,14 @@
 
 # POS printer sample
 
-This sample demonstrates the use of the [**Windows.Devices.PointOfService.PosPrinter**](http://msdn.microsoft.com/library/windows/apps/dn298071) API.
+Shows how to use the [Windows.Devices.PointOfService.PosPrinter](http://msdn.microsoft.com/library/windows/apps/dn298071) API.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample shows how to:
 
@@ -31,13 +38,12 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[POS Printer sample](/Samples/PosPrinter)
+[POS Printer sample](/Samples/PosPrinter)  
 
 ### Reference
 
-[Windows.Devices.PointOfService](http://msdn.microsoft.com/library/windows/apps/dn298071)
-
-[Windows app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
+[Windows.Devices.PointOfService](http://msdn.microsoft.com/library/windows/apps/dn298071)  
+[Windows app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 
 ## System requirements
 

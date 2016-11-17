@@ -5,8 +5,14 @@
 
 # App services sample
 
-This sample demonstrates how an app can provide a service that other apps
-or other computers can consume.
+Shows how an app can provide a service that other apps or other computers can consume.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Each app service scenario usually involves two apps—the client app that opens the connection and sends messages and a provider app that contains the app service and responds to messages. The sample contains a client project called AppServicesClient and a provider project called AppServicesProvider. The AppServicesProvider provides an app service that can generate random numbers. The AppServicesClient demonstrates
 - a scenario where the client connects to the app service, gets a random number and closes a connection (OpenCloseConnectionScenario.xaml) 
@@ -15,7 +21,7 @@ Each app service scenario usually involves two apps—the client app that opens 
 The [RemoteSystem](/Samples/RemoteSystem) sample includes a scenario where
 the client connects to this app service from another computer.
 This sample declares
-`SupportsRemoteSystems="true"` in its manifest to allow connections from other computers.
+SupportsRemoteSystems="true" in its manifest to allow connections from other computers.
 
 To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windows.com). 
 
@@ -30,12 +36,12 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 
 ## Reference
 
-[**Windows.ApplicationModel.AppServices** namespace](https://msdn.microsoft.com/en-us/library/windows.applicationmodel.appservice.aspx)
+[Windows.ApplicationModel.AppServices namespace](https://msdn.microsoft.com/library/windows.applicationmodel.appservice.aspx)
 
-[**AppServiceConnection** class](https://msdn.microsoft.com/en-us/library/windows.applicationmodel.appservice.appserviceconnection.aspx),
+[AppServiceConnection class](https://msdn.microsoft.com/library/windows.applicationmodel.appservice.appserviceconnection.aspx),
 which an app uses to open a connection to an app service and send messages to it.
 
-[**AppServiceTriggerDetails** class](https://msdn.microsoft.com/en-us/library/windows.applicationmodel.appservice.appservicetriggerdetails.aspx)
+[AppServiceTriggerDetails class](https://msdn.microsoft.com/library/windows.applicationmodel.appservice.appservicetriggerdetails.aspx)
 which an app service uses to receive and respond to messages.
 
 ## System requirements

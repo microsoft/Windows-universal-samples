@@ -5,9 +5,16 @@
 
 # Holographic face tracking sample
 
-This sample demonstrates how to acquire video frames from the photo/video (PV) camera and use the FaceAnalysis
+Shows how to acquire video frames from the photo/video (PV) camera and use the FaceAnalysis
 API to determine if there are any faces in front of the HoloLens. We display a cube on top of the
 detected face and a video stream inside the user's view.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 If multiple faces are detected, then the sample will pick the face closest to the center of the
 user's gaze. If no faces are detected then the text "No faces detected" is displayed.
@@ -36,7 +43,7 @@ the face was detected. So instead of converting the full image, we can convert N
 pixel shader itself.
 
 NV12 is a 8-bit YUV format for video rendering. To obtain more information about YUV and video formats,
-see [Recommended 8-Bit YUV Formats for Video Rendering](https://msdn.microsoft.com/library/windows/desktop/dd206750(v=vs.85).aspx).
+see [Recommended 8-Bit YUV Formats for Video Rendering](https://msdn.microsoft.com/library/windows/desktop/dd206750.aspx).
 
 ### Additional remarks
 

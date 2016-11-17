@@ -158,7 +158,9 @@
     <Content Include="..\..\..\SharedContent\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Content>
-    <Content Include="Images\sample.gif" />
+    <Content Include="..\shared\sample.gif">
+      <Link>Images\sample.gif</Link>
+    </Content>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

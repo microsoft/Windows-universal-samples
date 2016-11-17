@@ -4,7 +4,14 @@
 
 # Surface Dial C++ API sample
 
-This sample shows how to use the Surface Dial API to create custom menu items and control haptic feedback.
+Shows how to use the Surface Dial API to create custom menu items and control haptic feedback.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample shows how to:
 
@@ -21,18 +28,14 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[C# Sample](../cs)
+[C# Sample](../cs)  
 
 ### Reference
 
-[Radial Controller](https://msdn.microsoft.com/en-us/library/windows/apps/Windows.UI.Input.RadialController.aspx)
-
-[Radial Controller Menu](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.input.radialcontrollermenu.aspx)
-
-[Radial Controller Menu Item](https://msdn.microsoft.com/en-us/library/windows/apps/Windows.UI.Input.RadialControllerMenuItem.aspx)
-
-[Radial Controller Configuration](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.input.radialcontrollerconfiguration.aspx)
-
+[Radial Controller](https://msdn.microsoft.com/library/windows/apps/Windows.UI.Input.RadialController.aspx)  
+[Radial Controller Menu](https://msdn.microsoft.com/library/windows/apps/windows.ui.input.radialcontrollermenu.aspx)  
+[Radial Controller Menu Item](https://msdn.microsoft.com/library/windows/apps/Windows.UI.Input.RadialControllerMenuItem.aspx)  
+[Radial Controller Configuration](https://msdn.microsoft.com/library/windows/apps/windows.ui.input.radialcontrollerconfiguration.aspx)  
 
 ## System requirements
 

@@ -1,11 +1,21 @@
-<!---
+﻿<!---
   category: GraphicsAndAnimation
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620484
 --->
 
 # Animation metrics sample
 
-This sample shows how to use the Animation Metrics APIs ([**Windows.UI.Core.AnimationMetrics**](http://msdn.microsoft.com/library/windows/apps/br241916) to access the raw parameters that define the animations in the Windows [Animation Library](http://msdn.microsoft.com/library/windows/apps/hh465165). This info can help developers of applications and application frameworks to create animations that are consistent with Windows and other apps that use the Windows Animation Library.
+Shows how to use the Animation Metrics APIs ([Windows.UI.Core.AnimationMetrics](http://msdn.microsoft.com/library/windows/apps/br241916) 
+to access the raw parameters that define the animations in the Windows [Animation Library](http://msdn.microsoft.com/library/windows/apps/hh465165). 
+This info can help developers of applications and application frameworks to create animations that are consistent with Windows and other 
+apps that use the Windows Animation Library.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 The sample shows the metrics involved in the following scenarios:
 
@@ -26,7 +36,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[AnimationMetrics namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.core.animationmetrics.aspx)
+[AnimationMetrics namespace](https://msdn.microsoft.com/library/windows/apps/windows.ui.core.animationmetrics.aspx)
 
 ## System requirements
 

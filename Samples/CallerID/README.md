@@ -4,7 +4,14 @@
 
 # Caller ID sample
 
-This sample shows how to set Call Origin information for an unrecognized incoming call.
+Shows how to set Call Origin information for an unrecognized incoming call.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample shows how to:
 - Register a Caller ID background task to be triggered when an unrecognized incoming call arrives.
@@ -22,11 +29,11 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[Windows.ApplicationModel.Calls.Provider namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.calls.provider.aspx)
+[Windows.ApplicationModel.Calls.Provider namespace](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.calls.provider.aspx)
 
-[PhoneCallOriginManager class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.calls.provider.phonecalloriginmanager.aspx)
+[PhoneCallOriginManager class](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.calls.provider.phonecalloriginmanager.aspx)
 
-[PhoneCallOrigin class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.calls.provider.phonecallorigin.aspx)
+[PhoneCallOrigin class](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.calls.provider.phonecallorigin.aspx)
 
 ## System requirements
 

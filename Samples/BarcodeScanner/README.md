@@ -5,27 +5,33 @@
 
 # Barcode scanner sample
 
-This sample shows how to obtain a barcode scanner,
-claim it for exclusive use, enable it to receive data, and read a barcode.
-To use a camera to scan bar codes, see the [Camera Barcode Scanner sample](/Samples/CameraBarcodeScanner).
+Shows how to obtain a barcode scanner, claim it for exclusive use, enable it to receive data, and read a barcode.
+To use a camera to scan bar codes, see the [Camera Barcode Scanner sample](/Samples/CameraBarcodeScanner) instead. 
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample shows how to:
 
 1.  **Obtain the barcode scanner**
 
-    Uses [**BarcodeScanner.GetDefaultAsync**](http://msdn.microsoft.com/library/windows/apps/dn263790) to get the first available barcode scanner.
+    Uses [BarcodeScanner.GetDefaultAsync](http://msdn.microsoft.com/library/windows/apps/dn263790) to get the first available barcode scanner.
 
 2.  **Claim the barcode scanner for exclusive use**
 
-    Uses [**ClaimScannerAsync**](http://msdn.microsoft.com/library/windows/apps/dn297696) to claim the device.
+    Uses [ClaimScannerAsync](http://msdn.microsoft.com/library/windows/apps/dn297696) to claim the device.
 
 3.  **Add event handlers**
 
-    Uses [**DataReceived**](http://msdn.microsoft.com/library/windows/apps/dn278556) and [**ReleaseDeviceRequested**](http://msdn.microsoft.com/library/windows/apps/dn278578) events.
+    Uses [DataReceived](http://msdn.microsoft.com/library/windows/apps/dn278556) and [ReleaseDeviceRequested](http://msdn.microsoft.com/library/windows/apps/dn278578) events.
 
-    When an application gets a request to release its exclusive claim to the barcode scanner, it must handle the request by retaining the device; otherwise, it will lose its claim. The second scenario in this sample shows the release and retain functionality. The event handler for [**ReleaseDeviceRequested**](http://msdn.microsoft.com/library/windows/apps/dn278578) shows how retain the device.
+    When an application gets a request to release its exclusive claim to the barcode scanner, it must handle the request by retaining the device; otherwise, it will lose its claim. The second scenario in this sample shows the release and retain functionality. The event handler for [ReleaseDeviceRequested](http://msdn.microsoft.com/library/windows/apps/dn278578) shows how retain the device.
 
-The app package manifest shows how to specify the device capability name for the Point of Service (POS) devices. All POS apps are required declare [**DeviceCapability**](http://msdn.microsoft.com/library/windows/apps/br211430) in the app package manifest, either by using "PointofService" as shown in this sample or by using a device specific GUID, such as "C243FFBD-3AFC-45E9-B3D3-2BA18BC7EBC5" for a barcode scanner.
+The app package manifest shows how to specify the device capability name for the Point of Service (POS) devices. All POS apps are required declare [DeviceCapability](http://msdn.microsoft.com/library/windows/apps/br211430) in the app package manifest, either by using "PointofService" as shown in this sample or by using a device specific GUID, such as "C243FFBD-3AFC-45E9-B3D3-2BA18BC7EBC5" for a barcode scanner.
 
 The following list shows the barcode scanners that were used with this sample:
 
@@ -45,15 +51,13 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[Camera Barcode Scanner sample](/Samples/CameraBarcodeScanner)
+[Camera Barcode Scanner sample](/Samples/CameraBarcodeScanner)  
 
 ### Reference
 
-[Windows.Devices.PointOfService namespace](http://msdn.microsoft.com/library/windows/apps/dn298071)
-
-[USB HID POS Scanner specification](http://go.microsoft.com/fwlink/p/?linkid=309230)
-
-[Windows app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
+[Windows.Devices.PointOfService namespace](http://msdn.microsoft.com/library/windows/apps/dn298071)  
+[USB HID POS Scanner specification](http://go.microsoft.com/fwlink/p/?linkid=309230)  
+[Windows app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 
 ## System requirements
 

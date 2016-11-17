@@ -5,7 +5,14 @@
 
 # Cortana voice command sample
 
-This sample demonstrates integrating with Cortana to provide Voice Command Definitions (VCDs) that allow an application to be invoked in a variety of ways.
+Shows how to integrate with Cortana by providing Voice Command Definitions (VCDs) that allow an app to be invoked in a variety of ways.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample covers:
 
@@ -83,14 +90,14 @@ Duplicates can also be handled. For an example of handling disambiguation, add a
 
 ## Related topics
 
--  [Cortana design guidelines](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/dn974233.aspx)
--  [Cortana interactions (XAML)](https://msdn.microsoft.com/library/windows/apps/mt185598)
--  [Cortana interactions (HTML)](https://msdn.microsoft.com/en-us/library/windows/apps/dn974231.aspx)
+[Cortana design guidelines](https://msdn.microsoft.com/library/windows/apps/xaml/dn974233.aspx)  
+[Cortana interactions (XAML)](https://msdn.microsoft.com/library/windows/apps/mt185598)  
+[Cortana interactions (HTML)](https://msdn.microsoft.com/library/windows/apps/dn974231.aspx)  
 
 ## See also
 
-- [Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
-- [Hue Lights sample](https://github.com/Microsoft/Windows-appsample-huelightcontroller)  
+[Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
+[Hue Lights sample](https://github.com/Microsoft/Windows-appsample-huelightcontroller)  
 
 ## System requirements
 

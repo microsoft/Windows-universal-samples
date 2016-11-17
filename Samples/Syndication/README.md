@@ -5,14 +5,20 @@
 
 # Syndication sample
 
-This sample shows you how to retrieve feeds from a web service using classes in the [**Windows.Web.Syndication**](http://msdn.microsoft.com/library/windows/apps/br243632) namespace in your Universal Windows Platform (UWP) app. This sample is provided in the JavaScript, C\#, and C++ programming languages.
+Shows how to retrieve feeds from a web service using classes in the [Windows.Web.Syndication](http://msdn.microsoft.com/library/windows/apps/br243632) 
+namespace in your Universal Windows Platform (UWP) app. This sample is provided in the JavaScript, C\#, and C++ programming languages.
 
-**Note**  This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on Windows 10. For more info about how to build apps that target Windows and Windows Phone with Visual Studio, see [Build apps that target Windows 10 by using Visual Studio](http://msdn.microsoft.com/library/windows/apps/dn609832).
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample demonstrates the following features:
 
--   Use the [**SyndicationClient**](http://msdn.microsoft.com/library/windows/apps/br243456) class and class members to retrieve a web feed.
--   Use the [**SyndicationItem**](http://msdn.microsoft.com/library/windows/apps/br243533) class and class members to display items in a web feed.
+-   Use the [SyndicationClient](http://msdn.microsoft.com/library/windows/apps/br243456) class and class members to retrieve a web feed.
+-   Use the [SyndicationItem](http://msdn.microsoft.com/library/windows/apps/br243533) class and class members to display items in a web feed.
 
 **Note**  Use of this sample requires Internet or intranet access in order to retrieve feeds.
 
@@ -32,27 +38,21 @@ For more information on network capabilities, see [How to set network capabiliti
 
 ### Other - C\#/VB/C++ and XAML
 
-[RSS/Atom feeds](https://msdn.microsoft.com/library/windows/apps/mt429379)
-
-[Adding support for networking (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452751)
-
-[Networking basics](https://msdn.microsoft.com/library/windows/apps/mt280233)
+[RSS/Atom feeds](https://msdn.microsoft.com/library/windows/apps/mt429379)  
+[Adding support for networking (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452751)  
+[Networking basics](https://msdn.microsoft.com/library/windows/apps/mt280233)  
 
 ### Reference
 
-[**SyndicationClient**](http://msdn.microsoft.com/library/windows/apps/br243456)
-
-[**SyndicationItem**](http://msdn.microsoft.com/library/windows/apps/br243533)
-
-[**Windows.Web.AtomPub**](http://msdn.microsoft.com/library/windows/apps/br210609)
-
-[**Windows.Web.Syndication**](http://msdn.microsoft.com/library/windows/apps/br243632)
+[SyndicationClient](http://msdn.microsoft.com/library/windows/apps/br243456)  
+[SyndicationItem](http://msdn.microsoft.com/library/windows/apps/br243533)  
+[Windows.Web.AtomPub](http://msdn.microsoft.com/library/windows/apps/br210609)  
+[Windows.Web.Syndication](http://msdn.microsoft.com/library/windows/apps/br243632)  
 
 ### Samples
 
 [RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)  
-
-[AtomPub sample](http://go.microsoft.com/fwlink/p/?linkid=245061)
+[AtomPub sample](http://go.microsoft.com/fwlink/p/?linkid=245061)  
 
 ## System requirements
 

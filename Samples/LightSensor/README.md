@@ -5,7 +5,14 @@
 
 # Light sensor sample
 
-This sample shows how to use the [**Windows.Devices.Sensors.LightSensor**](http://msdn.microsoft.com/library/windows/apps/br225790) API.
+Shows how to use the [Windows.Devices.Sensors.LightSensor](http://msdn.microsoft.com/library/windows/apps/br225790) API.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample allows the user to view the ambient light reading as a LUX value. You can choose one of two scenarios:
 
@@ -22,7 +29,7 @@ When you click the **Enable** button for the **Polling** option, the app will re
 
 ## Related topics
 
-[Windows.Devices.Sensors namespace](http://go.microsoft.com/fwlink/p/?linkid=241981)
+[Windows.Devices.Sensors namespace](http://go.microsoft.com/fwlink/p/?linkid=241981)  
 
 ## System requirements
 

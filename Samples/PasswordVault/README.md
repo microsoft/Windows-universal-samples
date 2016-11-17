@@ -5,17 +5,21 @@
 
 # Credential locker sample
 
-The Credential Locker, also known as Password Vault,
+Shows how to use the Credential Locker, also known as Password Vault, which
 provides a way for you to store user credentials (username, password) in a secure fashion for your app.
 Usernames and passwords stored using the Credential Locker are encrypted and saved locally.
 Once you have the credentials stored, you can automatically sign users in for a more convenient user experience.
 Additionally, user credentials stored in the Credential Locker roam with the user's Microsoft Account for added convenience.
 The Credential Locker can be used whether your app supports a single user accessing a single resource,
-a single user accessing multiple resources,
-multiple users accessing a single resource,
-or
-multiple users accessing multiple resources.
-For more information, see the reference materials below.
+a single user accessing multiple resources, multiple users accessing a single resource, or
+multiple users accessing multiple resources. For more information, see the reference materials below.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample demonstrates the following operations:
 
@@ -40,15 +44,14 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[**KeyCredentialManager**](../KeyCredentialManager)
-
+[KeyCredentialManager](../KeyCredentialManager)  
 [Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)  
 
 ### Reference
 
-[**Storing user credentials using the Credential Locker**](https://msdn.microsoft.com/en-us/library/windows/apps/dn448950.aspx)  
-[**Storing user credentials**](http://msdn.microsoft.com/library/windows/apps/hh465060)   
-[**Windows.Security.Credentials** namespace](http://msdn.microsoft.com/library/windows/apps/br227089) 
+[Storing user credentials using the Credential Locker](https://msdn.microsoft.com/library/windows/apps/dn448950.aspx)  
+[Storing user credentials](http://msdn.microsoft.com/library/windows/apps/hh465060)  
+[Windows.Security.Credentials namespace](http://msdn.microsoft.com/library/windows/apps/br227089)  
 
 ## System requirements
 

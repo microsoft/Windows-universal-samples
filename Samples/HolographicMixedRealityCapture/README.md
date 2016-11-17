@@ -5,8 +5,15 @@
 
 # Holographic Mixed Reality Capture sample
 
-This sample demonstrates how to capture mixed reality photo and video by using Windows.Media.Capture.MediaCapture and
+Shows how to capture mixed reality photo and video by using Windows.Media.Capture.MediaCapture and
 MixedRealityCapture video/audio effects.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 ## Holographic Mixed Reality Capture sample application (HolographicMRCapture solution)
 
@@ -36,10 +43,10 @@ Microsoft Visual Studio 2015 Update 2 and the Microsoft HoloLens Emulator, go to
 
 The following are used to demonstrate spatial mapping in this code sample:
 
-* [Windows.Media.Capture namespace]                (https://msdn.microsoft.com/library/windows/apps/windows.media.capture.aspx)
-  * [MediaCapture class]                           (https://msdn.microsoft.com/library/windows/apps/windows.media.capture.mediacapture.aspx)
+* [Windows.Media.Capture namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.aspx)
+  * [MediaCapture class](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.mediacapture.aspx)
 
-* [Mixed reality capture for developers](https://developer.microsoft.com/en-us/windows/holographic/mixed_reality_capture_for_developers)
+* [Mixed reality capture for developers](https://developer.microsoft.com/windows/holographic/mixed_reality_capture_for_developers)
 
 ## System requirements
 

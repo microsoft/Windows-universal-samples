@@ -5,14 +5,23 @@
 
 # Touch keyboard sample
 
-This sample demonstrates how apps can influence whether the touch keyboard displays when the user taps on a control with the pen or touch.
+Shows how apps can influence whether the touch keyboard displays when the user taps on a control with the pen or touch.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+Specifically, this sample shows how:
 
 * Standard XAML text controls (such as TextBox, RichTextBox, and PaswordBox) display the touch keyboard by default.
 * Controls derived from standard XAML text controls display the touch keyboard by default.
 * Other controls do not display the touch keyboard by default.
 * On the PC, you can request that the touch keyboard display for a custom control
-  by implementing the TextPattern provider interface ([**ITextProvider**](http://msdn.microsoft.com/library/windows/apps/br242627))
-  and the ValuePattern provider interface ([**IValueProvider**](http://msdn.microsoft.com/library/windows/apps/br242663)).
+  by implementing the TextPattern provider interface ([ITextProvider](http://msdn.microsoft.com/library/windows/apps/br242627))
+  and the ValuePattern provider interface ([IValueProvider](http://msdn.microsoft.com/library/windows/apps/br242663)).
   Not supported on Phone.
 * You can request that the touch keyboard not display when focus is programmatically placed on a control.
 

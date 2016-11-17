@@ -5,9 +5,18 @@
 
 # Geolocation sample
 
-The Geolocation sample shows how to use the Windows.Devices.Geolocation namespace to get the geographic location of the user's device. An app can use the Geolocation namespace to request access to user location, get the location one time, continuously track the location by getting location update events, or get alerts when the device has entered or exited locations of interest.
+Shows how to use the Windows.Devices.Geolocation namespace to get the geographic location of the user's device. 
+An app can use the Geolocation namespace to request access to user location, get the location one time, 
+continuously track the location by getting location update events, or get alerts when the device has entered or exited locations of interest.
 
-### This sample also shows how to:
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+This sample also shows how to:
 
 - **Use a [geofence](http://msdn.microsoft.com/library/windows/apps/dn263744):** Receive notifications when the user's device has entered or left an area of interest. 
 - **Handle changes in location permissions**:  Register for the Geolocator's StatusChanged event and use the [StatusChangedEventArgs](http://msdn.microsoft.com/library/windows/apps/br225600) to determine the current position status. 
@@ -30,18 +39,14 @@ This sample requires that location capability be set in the *Package.appxmanifes
 
 ## Related topics
 
-[Get current location](https://msdn.microsoft.com/library/windows/apps/mt219698)
-
-[Windows.Devices.Geolocation](http://msdn.microsoft.com/library/windows/apps/br225603)
-
-[Windows.Devices.Geolocation.Geofencing](https://msdn.microsoft.com/library/windows/apps/dn263744)
-  
-[Guidelines for location-aware apps](https://msdn.microsoft.com/library/windows/apps/hh465148)
+[Get current location](https://msdn.microsoft.com/library/windows/apps/mt219698)  
+[Windows.Devices.Geolocation](http://msdn.microsoft.com/library/windows/apps/br225603)  
+[Windows.Devices.Geolocation.Geofencing](https://msdn.microsoft.com/library/windows/apps/dn263744)    
+[Guidelines for location-aware apps](https://msdn.microsoft.com/library/windows/apps/hh465148)  
 
 ## Related samples
 
 [Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)  
-
 [Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)  
 
 ## System requirements

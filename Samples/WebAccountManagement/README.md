@@ -5,7 +5,14 @@
 
 # Web account management sample
 
-This sample demonstrates the way to get Tokens to access different accounts 
+Shows how to get tokens to access different accounts.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample demonstrates the following scenarios:
 
@@ -26,7 +33,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 ## Related topics
 
 Registration of application to use a Microsoft account:
-[Preparing your account to use Windows Live Services in your Windows Store apps](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh770854.aspx)
+[Preparing your account to use Windows Live Services in your Windows Store apps](https://msdn.microsoft.com/library/windows/apps/xaml/hh770854.aspx)
 
 Develop Windows Universal Apps with Azure AD and the Windows 10 Identity API:
 [Using WebAccountManager to Integrate with Azure AD](http://blogs.technet.com/b/ad/archive/2015/08/03/develop-windows-universal-apps-with-azure-ad-and-the-windows-10-identity-api.aspx)
