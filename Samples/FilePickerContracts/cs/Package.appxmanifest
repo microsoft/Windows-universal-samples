@@ -39,6 +39,11 @@
           </uap:FileSavePicker>
         </uap:Extension>
         <uap:Extension Category="windows.cachedFileUpdater" />
+        <Extension Category="windows.backgroundTasks" EntryPoint="CachedFileUpdaterContract.UpdateFileTask">
+          <BackgroundTasks>
+            <Task Type="systemEvent" />
+          </BackgroundTasks>
+        </Extension>
       </Extensions>
     </Application>
   </Applications>

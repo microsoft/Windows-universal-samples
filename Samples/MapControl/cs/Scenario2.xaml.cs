@@ -20,32 +20,20 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Data;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
-namespace MapControlSample
+namespace SDKTemplate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class Scenario2 : Page
     {
         RandomAccessStreamReference mapIconStreamReference;
         public Scenario2()
         {
             this.InitializeComponent();
-            myMap.Loaded += MyMap_Loaded;
             mapIconStreamReference = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/MapPin.png"));
         }
 
         private void MyMap_Loaded(object sender, RoutedEventArgs e)
         {
-            myMap.Center =
-               new Geopoint(new BasicGeoposition()
-               {
-                   //Geopoint for Seattle 
-                   Latitude = 47.604,
-                   Longitude = -122.329
-               });
+            myMap.Center = MainPage.SeattleGeopoint;
             myMap.ZoomLevel = 17;
         }
 
@@ -58,7 +46,6 @@ namespace MapControlSample
             mapIcon1.Image = mapIconStreamReference;
             mapIcon1.ZIndex = 0;
             myMap.MapElements.Add(mapIcon1);
-
         }
 
         /// <summary>
@@ -70,13 +57,12 @@ namespace MapControlSample
             double centerLongitude = myMap.Center.Position.Longitude;
             MapPolygon mapPolygon = new MapPolygon();
             mapPolygon.Path = new Geopath(new List<BasicGeoposition>() {
-                new BasicGeoposition() {Latitude=centerLatitude+0.0005, Longitude=centerLongitude-0.001 },                
-                new BasicGeoposition() {Latitude=centerLatitude-0.0005, Longitude=centerLongitude-0.001 },                
+                new BasicGeoposition() {Latitude=centerLatitude+0.0005, Longitude=centerLongitude-0.001 },
+                new BasicGeoposition() {Latitude=centerLatitude-0.0005, Longitude=centerLongitude-0.001 },
                 new BasicGeoposition() {Latitude=centerLatitude-0.0005, Longitude=centerLongitude+0.001 },
                 new BasicGeoposition() {Latitude=centerLatitude+0.0005, Longitude=centerLongitude+0.001 },
-
             });
-           
+
             mapPolygon.ZIndex = 1;
             mapPolygon.FillColor = Colors.Red;
             mapPolygon.StrokeColor = Colors.Blue;
@@ -90,11 +76,11 @@ namespace MapControlSample
             double centerLatitude = myMap.Center.Position.Latitude;
             double centerLongitude = myMap.Center.Position.Longitude;
             MapPolyline mapPolyline = new MapPolyline();
-            mapPolyline.Path = new Geopath(new List<BasicGeoposition>() {                
-                new BasicGeoposition() {Latitude=centerLatitude-0.0005, Longitude=centerLongitude-0.001 },                
+            mapPolyline.Path = new Geopath(new List<BasicGeoposition>() {
+                new BasicGeoposition() {Latitude=centerLatitude-0.0005, Longitude=centerLongitude-0.001 },
                 new BasicGeoposition() {Latitude=centerLatitude+0.0005, Longitude=centerLongitude+0.001 },
             });
-              
+
             mapPolyline.StrokeColor = Colors.Black;
             mapPolyline.StrokeThickness = 3;
             mapPolyline.StrokeDashed = true;

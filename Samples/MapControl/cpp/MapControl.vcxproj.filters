@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>80bfd669-aa83-4537-9611-027cffe0d8af</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{c6978fb6-bc64-498d-97c8-f5b53997e54e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Numbers">
+      <UniqueIdentifier>{39f2a014-3b32-4eb2-806d-5838120c2c40}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Scenario1.xaml.cpp" />
+    <ClCompile Include="Scenario2.xaml.cpp" />
+    <ClCompile Include="Scenario3.xaml.cpp" />
+    <ClCompile Include="Scenario4.xaml.cpp" />
+    <ClCompile Include="Scenario5.xaml.cpp" />
+    <ClCompile Include="Scenario6.xaml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Scenario1.xaml.h" />
+    <ClInclude Include="Scenario2.xaml.h" />
+    <ClInclude Include="Scenario3.xaml.h" />
+    <ClInclude Include="Scenario4.xaml.h" />
+    <ClInclude Include="Scenario5.xaml.h" />
+    <ClInclude Include="Scenario6.xaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+    <Page Include="..\shared\Scenario1.xaml" />
+    <Page Include="..\shared\Scenario2.xaml" />
+    <Page Include="..\shared\Scenario3.xaml" />
+    <Page Include="..\shared\Scenario4.xaml" />
+    <Page Include="..\shared\Scenario5.xaml" />
+    <Page Include="..\shared\Scenario6.xaml" />
+    <Page Include="..\shared\Scenario7.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\shared\mappin.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\shared\2.png">
+      <Filter>Assets\Numbers</Filter>
+    </Image>
+    <Image Include="..\shared\3.png">
+      <Filter>Assets\Numbers</Filter>
+    </Image>
+    <Image Include="..\shared\4.png">
+      <Filter>Assets\Numbers</Filter>
+    </Image>
+    <Image Include="..\shared\5.png">
+      <Filter>Assets\Numbers</Filter>
+    </Image>
+    <Image Include="..\shared\6.png">
+      <Filter>Assets\Numbers</Filter>
+    </Image>
+    <Image Include="..\shared\7.png">
+      <Filter>Assets\Numbers</Filter>
+    </Image>
+    <Image Include="..\shared\8.png">
+      <Filter>Assets\Numbers</Filter>
+    </Image>
+    <Image Include="..\shared\9.png">
+      <Filter>Assets\Numbers</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\shared\places.txt" />
+  </ItemGroup>
+</Project>

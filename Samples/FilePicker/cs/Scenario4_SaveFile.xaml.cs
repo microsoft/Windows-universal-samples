@@ -50,13 +50,17 @@ namespace SDKTemplate
                 // Prevent updates to the remote version of the file until we finish making changes and call CompleteUpdatesAsync.
                 CachedFileManager.DeferUpdates(file);
                 // write to file
-                await FileIO.WriteTextAsync(file, file.Name);
+                await FileIO.WriteTextAsync(file, "Example file contents.");
                 // Let Windows know that we're finished changing the file so the other app can update the remote version of the file.
                 // Completing updates may require Windows to ask for user input.
                 FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
                 if (status == FileUpdateStatus.Complete)
                 {
                     OutputTextBlock.Text = "File " + file.Name + " was saved.";
+                }
+                else if (status == FileUpdateStatus.CompleteAndRenamed)
+                {
+                    OutputTextBlock.Text = "File " + file.Name + " was renamed and saved.";
                 }
                 else
                 {

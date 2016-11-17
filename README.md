@@ -143,7 +143,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <th colspan="3" align="left">Controls, layout, and text</th>
  </tr>
  <tr>
-  <td><a href="Samples/XamlAutoSuggestBox">AutoSuggestBox migration</a></td>
+  <td><a href="Samples/XamlAutoSuggestBox">AutoSuggestBox</a></td>
   <td><a href="Samples/Clipboard">Clipboard</a></td>
   <td><a href="Samples/XamlCommanding">Commanding</a></td>
  </tr>

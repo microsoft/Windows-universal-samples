@@ -261,6 +261,12 @@
       <Link>Assets\tile-sdk.png</Link>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Tasks\FilePickerContractsTasks.csproj">
+      <Project>{428fa31b-64e3-4f6d-894f-c0a886577c35}</Project>
+      <Name>FilePickerContractsTasks</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

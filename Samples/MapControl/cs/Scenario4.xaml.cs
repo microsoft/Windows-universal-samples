@@ -21,46 +21,28 @@ using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
-namespace MapControlSample
+namespace SDKTemplate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class Scenario4 : Page
     {
-        private MainPage rootPage;
+        private MainPage rootPage = MainPage.Current;
 
         public Scenario4()
         {
             this.InitializeComponent();
-        }
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            rootPage = MainPage.Current;
         }
 
         private async void showSpaceNeedleButton_Click(object sender, RoutedEventArgs e)
         {
             if (myMap.Is3DSupported)
             {
-                this.myMap.Style = MapStyle.Aerial3DWithRoads;
+                myMap.Style = MapStyle.Aerial3DWithRoads;
 
-                BasicGeoposition spaceNeedlePosition = new BasicGeoposition();
-                spaceNeedlePosition.Latitude = 47.6204;
-                spaceNeedlePosition.Longitude = -122.3491;
-
-                Geopoint spaceNeedlePoint = new Geopoint(spaceNeedlePosition);
+                Geopoint spaceNeedlePoint = new Geopoint(new BasicGeoposition() { Latitude = 47.6204, Longitude = -122.3491 });
 
                 MapScene spaceNeedleScene = MapScene.CreateFromLocationAndRadius(spaceNeedlePoint,
                                                                                     400, /* show this many meters around */
@@ -80,13 +62,7 @@ namespace MapControlSample
 
         private void myMap_Loaded(object sender, RoutedEventArgs e)
         {
-            myMap.Center =
-              new Geopoint(new BasicGeoposition()
-              {
-                   //Geopoint for Seattle 
-                   Latitude = 47.604,
-                  Longitude = -122.329
-              });
+            myMap.Center = MainPage.SeattleGeopoint;
             myMap.ZoomLevel = 12;
         }
     }

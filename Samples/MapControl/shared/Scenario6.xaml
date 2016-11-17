@@ -1,4 +1,4 @@
-﻿<!--
+<!-- 
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
@@ -10,12 +10,10 @@
 //
 //*********************************************************
 -->
-    
-    <Page
-    x:Class="MapControlSample.Scenario6"
+<Page
+    x:Class="SDKTemplate.Scenario6"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MapControlSample"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -58,9 +56,8 @@
                 </TextBlock>
             </StackPanel>
 
-
             <ScrollViewer Grid.Row="1">
-            <StackPanel>
+                <StackPanel>
                     <TextBlock x:Name="directionsText" TextWrapping="Wrap" Margin="0,24,0,0">
                     Opens the Maps app with driving directions from Mountain View, CA to San Francisco, CA with traffic shown:
                     </TextBlock>
@@ -112,10 +109,6 @@
                     </HyperlinkButton>
                 </StackPanel>
             </ScrollViewer>
-
-            <!-- Status Block for providing messages to the user.  Use the
-             NotifyUser() method to populate the message -->
-            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </Page>

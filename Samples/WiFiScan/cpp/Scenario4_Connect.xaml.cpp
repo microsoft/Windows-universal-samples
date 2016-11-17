@@ -174,7 +174,8 @@ void Scenario4_Connect::ResultsListView_SelectionChanged(Platform::Object^ sende
     ConnectionBar->Visibility = Windows::UI::Xaml::Visibility::Visible;
 
     // Only show the password box if needed
-    if (selectedNetwork->AvailableNetwork->SecuritySettings->NetworkAuthenticationType == NetworkAuthenticationType::Open80211)
+    if (selectedNetwork->AvailableNetwork->SecuritySettings->NetworkAuthenticationType == NetworkAuthenticationType::Open80211 &&
+        selectedNetwork->AvailableNetwork->SecuritySettings->NetworkEncryptionType == NetworkEncryptionType::None)
     {
         NetworkKeyInfo->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
     }
@@ -202,7 +203,8 @@ void Scenario4_Connect::ConnectButton_Click(Platform::Object^ sender, Windows::U
 
     IAsyncOperation<WiFiConnectionResult^>^ connectOperation;
 
-    if (selectedNetwork->AvailableNetwork->SecuritySettings->NetworkAuthenticationType == NetworkAuthenticationType::Open80211)
+    if (selectedNetwork->AvailableNetwork->SecuritySettings->NetworkAuthenticationType == NetworkAuthenticationType::Open80211 &&
+        selectedNetwork->AvailableNetwork->SecuritySettings->NetworkEncryptionType == NetworkEncryptionType::None)
     {
         connectOperation = _firstAdapter->ConnectAsync(selectedNetwork->AvailableNetwork, reconnectionKind);
     }
