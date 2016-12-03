@@ -135,6 +135,6 @@ Dies ist ein Beispiel für eine Zahl zu sagen:
 &lt;/speak&gt;</value>
   </data>
   <data name="SynthesizeTextDefaultText" xml:space="preserve">
-    <value>Der schnelle rot-Fuchs sprang über den faulen Hund der braun</value>
+    <value>Der schnelle rote Fuchs sprang über den faulen braunen Hund</value>
   </data>
 </root>
