@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 // 
 
-#include <SerialCommand.h>      // Steven Cogswell ArduinoSerialCommand library from http://GitHub.com
+#include <SerialCommand.h>      // Steven Cogswell ArduinoSerialCommand library from https://github.com/scogswell/ArduinoSerialCommand
 #include <DHT.h>                // Adafruit DHT library - see: https://learn.adafruit.com/dht/overview
 
 #define DHTPIN 2     // what digital pin we're connected to

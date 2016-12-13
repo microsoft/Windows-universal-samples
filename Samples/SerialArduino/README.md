@@ -15,11 +15,11 @@ APIs to communicate with an Arduino device.
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-This sample allows the user to configure and communicate with an Arduino board that has simple wired circuitry consisting of 4 LEDs and a temperature sensor. 
+This sample allows the user to configure and communicate with an Arduino board that has simple wired circuitry consisting of 4 LEDs and a DHT temperature & humidity sensor. 
 This sample demonstrates the following
 
 -   Connect/Disconnect using Device Selection list
--   Communicating with the Arduino board and toggle the LEDs and get readings from the temperature sensor.
+-   Communicating with the Arduino board and toggle the LEDs and get readings from the DHT temperature & humidity sensor.
 
 **Connect/Disconnect using Device Selection list**
 
@@ -28,12 +28,12 @@ When the application starts, a list of available matching Arduino devices is dis
 **LED/Temperature**
 
 This scenario demonstrates the use of Input and Output streams on the SerialDevice object in order to communicate with the Serial device specifically to 
-toggle the four LEDs and get temperature readings from the temperature sensor.
+toggle the four LEDs, get temperature and humidity readings from the temperature sensor.
 
 ## Hardware requirements
 
-Any Arduino board with a header that can be used to wire up the simple circuit of LEDs and the temperature sensor. The Arduino uses a custom sketch that 
-goes along with the sample and is included in the sketch folder as SerialCommand.ino.
+Any Arduino board with a header that can be used to wire up the simple circuit of LEDs and the DHT temperature & humidity sensor. The Arduino uses a custom sketch that 
+goes along with the sample and is included in the *SerialCommand* folder as SerialCommand.ino.
 
 The wiring diagram is also provided as SerialCommand.fzz can be opened with Fritzing application. (Download at http://Fritzing.org)
 
@@ -45,11 +45,22 @@ The wiring diagram is also provided as SerialCommand.fzz can be opened with Frit
 
 **Phone:** Windows 10
 
-## Build and Deploy the sketch 
+## Compile and Upload the sketch 
 
-1. Install the Arduino IDE.
-2. Open the SerialCommand.ino sketch.
-3. Compile and deploy the sketch to the Arduino device.
+1. Install Arduino IDE based on https://www.arduino.cc/en/Guide/Windows 
+2. Install Steven Cogswell's ArduinoSerialCommand library from https://github.com/scogswell/ArduinoSerialCommand
+3. Install the Adafruit DHT library based on https://learn.adafruit.com/dht/overview
+4. Open the SerialCommand.ino sketch
+5. Compile the sketch
+6. Connect the Arduino board with the Windows 10 device, which runs Arduino IDE 
+6. Upload the sketch to the connected Arduino board
+
+## Test the uploaded sketch
+
+1. Open *Serial Monitor* from the Tools menu of Arduino IDE
+2. Make sure that the selected baud rate is *9600*
+3. Make sure that *Carriage return* is selected as line ending
+4. Type some commands like *temp*, *hum*, *ledon 5*, *ledoff 5* into the text box and click Send
 
 ## Build the sample
 
