@@ -21,35 +21,35 @@
 // THE SOFTWARE.
 // 
 
-#include <SoftwareSerial.h>
 #include <SerialCommand.h>      // Steven Cogswell ArduinoSerialCommand library from http://GitHub.com
-#include <DallasTemperature.h>  // Miles Burton Arduino-Temperature-Contol library from http://GitHub.com
-#include <OneWire.h>            // Paul Stoffregen OneWire library from http://www.pjrc.com
+#include <DHT.h>                // Adafruit DHT library - see: https://learn.adafruit.com/dht/overview
 
-#define ONE_WIRE_BUS 2
+#define DHTPIN 2     // what digital pin we're connected to
 #define LED_LOW      3
 #define LED_HIGH     6
-#define TEMP_MAX     99.99
-#define TEMP_MIN     00.00
 #define DBGMSG(A)    if (dbg){ Serial.print("DBG: "); Serial.println(A);}
+
+// Uncomment whatever type you're using!
+//#define DHTTYPE DHT11   // DHT 11
+#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
+//#define DHTTYPE DHT21   // DHT 21 (AM2301)
 
 //
 // Globals
 //
+DHT dht(DHTPIN, DHTTYPE);
 SerialCommand     serialCommand;
-OneWire           oneWire(ONE_WIRE_BUS);
-DallasTemperature sensors(&oneWire);
-DeviceAddress     thermometerAddress = {-1};
 boolean           dbg = false;
 
 //
-// Initialize the serial command table, I/O pins, and the temperature sensor
+// Initialize the serial command table, I/O pins, and the DHT sensor
 //
 void setup() {
   Serial.begin(9600);
   serialCommand.addCommand("ledon", SetLedOn );
   serialCommand.addCommand("ledoff", SetLedOff );
   serialCommand.addCommand("temp", GetTemp );
+  serialCommand.addCommand("hum", GetHum );
   serialCommand.addCommand("debug", SetDebug ); 
   serialCommand.addDefaultHandler(UnrecognizedCommand );
   
@@ -57,7 +57,7 @@ void setup() {
     pinMode( i, OUTPUT );
   }
 
-  sensors.begin();
+  dht.begin();
 }
 
 //
@@ -104,32 +104,21 @@ void SetLedOff() {
 }
 
 //
-// Locate the temperature sensor, read the temperature in Celcius,
+// Read the temperature in Celcius,
 // and return the temperature via the serial interface as a 5 character
-// string.  Valid temperatures are from 0.00 to 99.99 degrees
-// Celcius.  -9.99 is returned on an error condition.
 //
 void GetTemp() {
-  float temperature=-9.99;
-  
-  if (!sensors.getAddress(thermometerAddress, 0)){
-    DBGMSG( F("Unable to locate sensor") );
-  } else {
-    sensors.setWaitForConversion(true);
-    sensors.requestTemperaturesByAddress(thermometerAddress);  
-    temperature = sensors.getTempC(thermometerAddress);
-    sensors.requestTemperaturesByAddress(thermometerAddress);  
-    temperature = sensors.getTempC(thermometerAddress);   
-  }
-  
-  if ( temperature < 9.995 && temperature > TEMP_MIN )
-    Serial.print("0");
-  if (temperature > TEMP_MAX || temperature < TEMP_MIN ){
-    DBGMSG( F("Temperature out of bounds") );
-    temperature = -9.99;
-  }
-  
-  Serial.println(temperature, 2);
+  DBGMSG(F("Requested temperature: "));  
+  Serial.println(dht.readTemperature(), 2);
+}
+
+//
+// Read the humidity in % (between 0% and 100%),
+// and return the humidity via the serial interface as a 5 character
+//
+void GetHum() {
+  DBGMSG(F("Requested humidity: "));
+  Serial.println(dht.readHumidity(), 2);
 }
 
 //
@@ -165,6 +154,7 @@ void UnrecognizedCommand(){
   DBGMSG(F(" ledoff 5 - turn off led connected to digital I/O 5"));
   DBGMSG(F(" ledoff 6 - turn off led connected to digital I/O 6"));
   DBGMSG(F(" temp     - read temperature" ));
+  DBGMSG(F(" hum      - read humidity" ));
   DBGMSG(F(" debug on - turn on debug messages" ));
   DBGMSG(F(" debug off- turn off debug messages" ));
 }
