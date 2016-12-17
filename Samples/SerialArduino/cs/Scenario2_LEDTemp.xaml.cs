@@ -100,6 +100,15 @@ namespace SerialArduino
                 MainPage.Current.NotifyUser("Connected to " + EventHandlerForDevice.Current.DeviceInformation.Id,
                                             NotifyType.StatusMessage);
 
+                //Set device connection defaults for Read and Write
+                EventHandlerForDevice.Current.Device.BaudRate = 9600;
+                EventHandlerForDevice.Current.Device.StopBits = SerialStopBitCount.One;
+                EventHandlerForDevice.Current.Device.DataBits = 8;
+                EventHandlerForDevice.Current.Device.Parity = SerialParity.None;
+                EventHandlerForDevice.Current.Device.Handshake = SerialHandshake.None;
+                EventHandlerForDevice.Current.Device.WriteTimeout = TimeSpan.FromMilliseconds(500);
+                EventHandlerForDevice.Current.Device.ReadTimeout = TimeSpan.FromMilliseconds(500);
+
                 // So we can reset future tasks
                 ResetReadCancellationTokenSource();
                 ResetWriteCancellationTokenSource();
