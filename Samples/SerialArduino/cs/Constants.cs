@@ -22,7 +22,8 @@ namespace SerialArduino
 {
     public class DeviceProperties
     {
-        public const String DeviceInstanceId = "System.Devices.DeviceInstanceId";
+        //public const String DeviceInstanceId = "System.Devices.DeviceInstanceId";
+        public const String DeviceInstanceId = "System.ItemNameDisplay";
     }
 
     public class ArduinoDevice

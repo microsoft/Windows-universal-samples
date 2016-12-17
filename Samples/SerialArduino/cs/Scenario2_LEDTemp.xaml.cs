@@ -261,12 +261,11 @@ namespace SerialArduino
                     DataWriterObject = null;
                 }
 
+                String temperature = String.Empty;
                 try
                 {
-                    TemperatureValue.Text = String.Empty;
-
                     DataReaderObject = new DataReader(EventHandlerForDevice.Current.Device.InputStream);
-                    await ReadAsync(ReadCancellationTokenSource.Token);
+                    temperature = await ReadAsync(ReadCancellationTokenSource.Token, 7);
                 }
                 catch (OperationCanceledException /*exception*/)
                 {
@@ -282,6 +281,61 @@ namespace SerialArduino
                     DataReaderObject.DetachStream();
                     DataReaderObject = null;
                 }
+
+                TemperatureValue.Text = temperature.Trim() + " °C";
+            }
+            else
+            {
+                Utilities.NotifyDeviceNotConnected();
+            }
+        }
+
+        private async void HumidityButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (EventHandlerForDevice.Current.IsDeviceConnected)
+            {
+                try
+                {
+                    rootPage.NotifyUser("Getting humidity...", NotifyType.StatusMessage);
+
+                    DataWriterObject = new DataWriter(EventHandlerForDevice.Current.Device.OutputStream);
+                    DataWriterObject.WriteString("hum\r");
+
+                    await WriteAsync(WriteCancellationTokenSource.Token);
+                }
+                catch (OperationCanceledException /*exception*/)
+                {
+                    NotifyWriteTaskCanceled();
+                }
+                catch (Exception exception)
+                {
+                    MainPage.Current.NotifyUser(exception.Message.ToString(), NotifyType.ErrorMessage);
+                    Debug.WriteLine(exception.Message.ToString());
+                }
+                finally
+                {
+                    DataWriterObject.DetachStream();
+                    DataWriterObject = null;
+                }
+
+                String humidity = String.Empty;
+                try
+                {
+                    DataReaderObject = new DataReader(EventHandlerForDevice.Current.Device.InputStream);
+                    humidity = await ReadAsync(ReadCancellationTokenSource.Token, 7);
+                    Debug.WriteLine("Arduino response: " + humidity);
+                }
+                catch (OperationCanceledException /*exception*/)
+                {
+                    NotifyReadTaskCanceled();
+                }
+                catch (Exception exception)
+                {
+                    MainPage.Current.NotifyUser(exception.Message.ToString(), NotifyType.ErrorMessage);
+                    Debug.WriteLine(exception.Message.ToString());
+                }
+
+                HumidityValue.Text = humidity.Trim() + " %";
             }
             else
             {
@@ -315,32 +369,35 @@ namespace SerialArduino
         /// Read from the input output stream using a task 
         /// </summary>
         /// <param name="cancellationToken"></param>
-        private async Task ReadAsync(CancellationToken cancellationToken)
+        private async Task<string> ReadAsync(CancellationToken cancellationToken, uint ReadBufferLength)
         {
             Task<UInt32> loadAsyncTask;
-
-            uint ReadBufferLength = 7;
 
             // Don't start any IO if we canceled the task
             lock (ReadCancelLock)
             {
-                cancellationToken.ThrowIfCancellationRequested();
-
                 // Cancellation Token will be used so we can stop the task operation explicitly
                 // The completion function should still be called so that we can properly handle a canceled task
+                cancellationToken.ThrowIfCancellationRequested();
+
+                // Set InputStreamOptions to complete the asynchronous read operation when one or more bytes is available
                 DataReaderObject.InputStreamOptions = InputStreamOptions.Partial;
+
+                // Create a task object to wait for data on the serialPort.InputStream
                 loadAsyncTask = DataReaderObject.LoadAsync(ReadBufferLength).AsTask(cancellationToken);
             }
 
+            // Launch the task and wait until the read timeout expires - the bytes returned is the number of bytes were read
             UInt32 bytesRead = await loadAsyncTask;
 
+            String output = String.Empty;
             if (bytesRead > 0)
             {
-                String temp = DataReaderObject.ReadString(bytesRead);
-                TemperatureValue.Text = temp.Trim() + "°C";
+                output = DataReaderObject.ReadString(bytesRead);
             }
 
             rootPage.NotifyUser("Read completed - " + bytesRead.ToString() + " bytes were read", NotifyType.StatusMessage);
+            return output;
         }
 
 

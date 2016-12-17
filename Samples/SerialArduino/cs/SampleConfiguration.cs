@@ -23,7 +23,7 @@ namespace SDKTemplate
         List<Scenario> scenarios = new List<Scenario>
         {
             new Scenario() { Title="Connect/Disconnect", ClassType=typeof(Scenario1_ConnectDisconnect)},
-            new Scenario() { Title="LED/Temperature", ClassType=typeof(Scenario2_LEDTemp)}
+            new Scenario() { Title="LED/Sensor data", ClassType=typeof(Scenario2_LEDTemp)}
         };
     }
 
