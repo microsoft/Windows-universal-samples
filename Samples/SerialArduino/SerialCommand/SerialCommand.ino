@@ -104,8 +104,8 @@ void SetLedOff() {
 }
 
 //
-// Read the temperature in Celcius,
-// and return the temperature via the serial interface as a 5 character
+// Read the temperature in Celsius,
+// and return it via the serial interface in 5 characters
 //
 void GetTemp() {
   DBGMSG(F("Requested temperature: "));  
@@ -114,7 +114,7 @@ void GetTemp() {
 
 //
 // Read the humidity in % (between 0% and 100%),
-// and return the humidity via the serial interface as a 5 character
+// and return it via the serial interface in 5 characters
 //
 void GetHum() {
   DBGMSG(F("Requested humidity: "));
