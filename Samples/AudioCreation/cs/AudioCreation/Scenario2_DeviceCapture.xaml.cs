@@ -12,8 +12,11 @@
 using SDKTemplate;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
+using Windows.Foundation;
+using Windows.Media;
 using Windows.Media.Audio;
 using Windows.Media.Capture;
 using Windows.Media.Devices;
@@ -43,6 +46,9 @@ namespace AudioCreation
         private AudioFileOutputNode fileOutputNode;
         private AudioDeviceOutputNode deviceOutputNode;
         private AudioDeviceInputNode deviceInputNode;
+        private AudioFrameOutputNode frameOutputNode;
+        // 16K stereo float audio samples        
+        private byte[] byteBuffer = new byte[16384 * 2 * 4];
         private DeviceInformationCollection outputDevices;
 
         public Scenario2_DeviceCapture()
@@ -111,9 +117,12 @@ namespace AudioCreation
             fileOutputNode = fileOutputNodeResult.FileOutputNode;
             fileButton.Background = new SolidColorBrush(Colors.YellowGreen);
 
+            frameOutputNode = graph.CreateFrameOutputNode();
+
             // Connect the input node to both output nodes
             deviceInputNode.AddOutgoingConnection(fileOutputNode);
             deviceInputNode.AddOutgoingConnection(deviceOutputNode);
+            deviceInputNode.AddOutgoingConnection(frameOutputNode);
             recordStopButton.IsEnabled = true;
         }
 
@@ -136,6 +145,7 @@ namespace AudioCreation
         {
             if (recordStopButton.Content.Equals("Record"))
             {
+                graph.QuantumProcessed += Graph_QuantumProcessed;
                 graph.Start();
                 recordStopButton.Content = "Stop";
                 audioPipe1.Fill = new SolidColorBrush(Colors.Blue);
@@ -162,6 +172,34 @@ namespace AudioCreation
                 fileButton.Background = new SolidColorBrush(Colors.Green);
                 recordStopButton.IsEnabled = false;
                 createGraphButton.IsEnabled = false;
+            }
+        }
+
+        private unsafe void Graph_QuantumProcessed(AudioGraph sender, object args)
+        {
+            AudioFrame frame = frameOutputNode.GetFrame();
+
+            using (AudioBuffer buffer = frame.LockBuffer(AudioBufferAccessMode.Read))
+            using (IMemoryBufferReference reference = buffer.CreateReference())
+            {
+                byte* dataInBytes;
+                uint capacityInBytes;
+
+                // Get the buffer from the AudioFrame
+                ((IMemoryBufferByteAccess)reference).GetBuffer(out dataInBytes, out capacityInBytes);
+
+                if (capacityInBytes == 0)
+                {
+                    Debug.Fail("Why is quantum processing zero bytes?");
+                }
+
+                fixed (byte* buf = byteBuffer)
+                {
+                    for (int i = 0; i < capacityInBytes; i++)
+                    {
+                        buf[i] = dataInBytes[i];
+                    }
+                }
             }
         }
 
@@ -222,6 +260,9 @@ namespace AudioCreation
             deviceInputNode = deviceInputNodeResult.DeviceInputNode;
             rootPage.NotifyUser("Device Input connection successfully created", NotifyType.StatusMessage);
             inputDeviceContainer.Background = new SolidColorBrush(Colors.Green);
+
+            frameOutputNode = graph.CreateFrameOutputNode();
+            deviceInputNode.AddOutgoingConnection(frameOutputNode);
 
             // Since graph is successfully created, enable the button to select a file output
             fileButton.IsEnabled = true;
