@@ -117,12 +117,9 @@ namespace AudioCreation
             fileOutputNode = fileOutputNodeResult.FileOutputNode;
             fileButton.Background = new SolidColorBrush(Colors.YellowGreen);
 
-            frameOutputNode = graph.CreateFrameOutputNode();
-
             // Connect the input node to both output nodes
             deviceInputNode.AddOutgoingConnection(fileOutputNode);
             deviceInputNode.AddOutgoingConnection(deviceOutputNode);
-            deviceInputNode.AddOutgoingConnection(frameOutputNode);
             recordStopButton.IsEnabled = true;
         }
 
@@ -145,7 +142,6 @@ namespace AudioCreation
         {
             if (recordStopButton.Content.Equals("Record"))
             {
-                graph.QuantumProcessed += Graph_QuantumProcessed;
                 graph.Start();
                 recordStopButton.Content = "Stop";
                 audioPipe1.Fill = new SolidColorBrush(Colors.Blue);
@@ -175,7 +171,9 @@ namespace AudioCreation
             }
         }
 
-        private unsafe void Graph_QuantumProcessed(AudioGraph sender, object args)
+        static int s_zeroByteBufferCount, s_nonZeroByteBufferCount;
+
+        private unsafe void Graph_QuantumStarted(AudioGraph sender, object args)
         {
             AudioFrame frame = frameOutputNode.GetFrame();
 
@@ -190,7 +188,11 @@ namespace AudioCreation
 
                 if (capacityInBytes == 0)
                 {
-                    Debug.Fail("Why is quantum processing zero bytes?");
+                    s_zeroByteBufferCount++;
+                }
+                else
+                {
+                    s_nonZeroByteBufferCount++;
                 }
 
                 fixed (byte* buf = byteBuffer)
@@ -263,6 +265,9 @@ namespace AudioCreation
 
             frameOutputNode = graph.CreateFrameOutputNode();
             deviceInputNode.AddOutgoingConnection(frameOutputNode);
+
+            // Attach to QuantumStarted event in order to receive synchronous updates from audio graph.
+            graph.QuantumStarted += Graph_QuantumStarted;
 
             // Since graph is successfully created, enable the button to select a file output
             fileButton.IsEnabled = true;
