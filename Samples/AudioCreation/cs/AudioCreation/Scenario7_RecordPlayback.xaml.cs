@@ -47,8 +47,27 @@ namespace AudioCreation
         private AudioDeviceInputNode deviceInputNode;
         private AudioFrameOutputNode frameOutputNode;
         private AudioFrameInputNode frameInputNode;
-        private bool isRecording;
-        private bool isPlaying;
+
+        // These variables are synchronization points; they experience the following
+        // state transitions:
+        // requestStartRecording: false -> true (UI thread, user clicks Start Recording)
+        // requestStartRecording: true -> false (audio thread, when it registers request)
+        // isRecording: false -> true (audio thread, when it registers request)
+        // isRecording: true -> false (UI thread, user clicks Stop Recording)
+        // isRecording: true -> false (audio thread, buffer reaches maximum capacity)
+        //
+        // And similarly for requestStartPlaying and isPlaying.
+        //
+        private volatile bool requestStartRecording;
+        private volatile bool requestStartPlaying;
+        private volatile bool isRecording;
+        private volatile bool isPlaying;
+
+        // Current record/play index into the buffer.
+        private uint currentIndex;
+        // Maximum index recorded in the buffer.
+        private uint maxIndex;
+
         // 1024K stereo float audio samples (8MB byte array)
         private byte[] byteBuffer = new byte[1024 * 1024 * 2 * 4];
         private DeviceInformationCollection outputDevices;
@@ -68,6 +87,7 @@ namespace AudioCreation
         {
             if (graph != null)
             {
+                graph.Stop();
                 graph.Dispose();
             }
         }
@@ -94,23 +114,24 @@ namespace AudioCreation
                 Debug.Assert(!isRecording);
                 Debug.Assert(!isPlaying);
 
-                graph.Start();
                 recordButton.Content = "Stop";
                 playButton.IsEnabled = false;
-                isRecording = true;
+
+                // This volatile write will be polled by the audio thread and will cause recording to start there.
+                requestStartRecording = true;
             }
             else
             {
                 Debug.Assert(isRecording);
                 Debug.Assert(!isPlaying);
 
-                // Good idea to stop the graph to avoid data loss
-                graph.Stop();
-
                 recordButton.Content = "Record";
                 rootPage.NotifyUser("Recording to memory buffer completed successfully!", NotifyType.StatusMessage);
                 createGraphButton.IsEnabled = false;
                 playButton.IsEnabled = true;
+
+                // This volatile write will cause recording to stop on the audio thread.
+                isRecording = false;
             }
         }
 
@@ -121,29 +142,50 @@ namespace AudioCreation
                 Debug.Assert(!isRecording);
                 Debug.Assert(!isPlaying);
 
-                graph.Start();
                 playButton.Content = "Stop";
                 recordButton.IsEnabled = false;
-                isPlaying = true;
+
+                // This volatile write will cause playing to start once the audio thread polls it.
+                requestStartPlaying = true;
             }
-            else if (recordButton.Content.Equals("Stop"))
+            else if (playButton.Content.Equals("Stop"))
             {
                 Debug.Assert(!isRecording);
                 Debug.Assert(isPlaying);
 
-                // Good idea to stop the graph to avoid data loss
-                graph.Stop();
-
-                playButton.Content = "Stop";
+                playButton.Content = "Play";
                 rootPage.NotifyUser("Playing from memory buffer completed successfully!", NotifyType.StatusMessage);
                 recordButton.IsEnabled = true;
+
+                // This volatile write will stop playing on the audio thread immediately.
                 isPlaying = false;
             }
         }
 
-        static int s_zeroByteBufferCount, s_nonZeroByteBufferCount;
-
         private unsafe void Graph_QuantumStarted(AudioGraph sender, object args)
+        {
+            if (requestStartRecording)
+            {
+                Debug.Assert(!isRecording);
+                Debug.Assert(!requestStartPlaying);
+                Debug.Assert(!isPlaying);
+
+                isRecording = true;
+                requestStartRecording = false;
+                maxIndex = 0;
+                currentIndex = 0;
+                HandleIncomingAudio();
+            }
+            else if (isRecording)
+            {
+                HandleIncomingAudio();
+            }
+        }
+
+        /// <summary>
+        /// Handle a frame of incoming audio from the input device.
+        /// </summary>
+        private unsafe void HandleIncomingAudio()
         {
             AudioFrame frame = frameOutputNode.GetFrame();
 
@@ -156,23 +198,88 @@ namespace AudioCreation
                 // Get the buffer from the AudioFrame
                 ((IMemoryBufferByteAccess)reference).GetBuffer(out dataInBytes, out capacityInBytes);
 
-                if (capacityInBytes == 0)
+                // if we fill up, just spin forever.  don't try to exit recording from audio thread,
+                // we don't bother with two-way signaling.
+                if (maxIndex + capacityInBytes > byteBuffer.Length)
                 {
-                    s_zeroByteBufferCount++;
-                }
-                else
-                {
-                    s_nonZeroByteBufferCount++;
+                    Debug.Assert(byteBuffer.Length >= maxIndex);
+                    capacityInBytes = (uint)byteBuffer.Length - maxIndex;
                 }
 
                 fixed (byte* buf = byteBuffer)
                 {
                     for (int i = 0; i < capacityInBytes; i++)
                     {
-                        buf[i] = dataInBytes[i];
+                        byte b = dataInBytes[i];
+                        buf[i + maxIndex] = b;
+                    }
+                }
+                maxIndex += capacityInBytes;
+            }
+        }
+
+        // We keep the last AudioFrame in the common case that it's the same size as the next requested buffer.
+        static AudioFrame s_lastAudioFrame = null;
+        static uint s_lastAudioFrameSampleCount = 0;
+
+        /// <summary>
+        /// Handle a frame of outgoing audio to the output device.
+        /// </summary>
+        private unsafe void HandleOutgoingAudio(uint samples)
+        {
+            uint bufferSize = samples * sizeof(float) * 2;
+
+            AudioFrame frame;
+            if (s_lastAudioFrameSampleCount == samples)
+            {
+                frame = s_lastAudioFrame;
+            }
+            else
+            {
+                frame = new Windows.Media.AudioFrame(bufferSize);
+                s_lastAudioFrame = frame;
+                s_lastAudioFrameSampleCount = bufferSize;
+            }
+
+            using (AudioBuffer buffer = frame.LockBuffer(AudioBufferAccessMode.Write))
+            using (IMemoryBufferReference reference = buffer.CreateReference())
+            {
+                byte* dataInBytes;
+                uint capacityInBytes;
+
+                // Get the buffer from the AudioFrame
+                ((IMemoryBufferByteAccess)reference).GetBuffer(out dataInBytes, out capacityInBytes);
+
+                uint tailCount = 0;
+
+                if (capacityInBytes + currentIndex > maxIndex)
+                {
+                    Debug.Assert(maxIndex >= currentIndex);
+                    uint newCapacityInBytes = Math.Max(0, maxIndex - currentIndex);
+                    tailCount = capacityInBytes - newCapacityInBytes;
+                    capacityInBytes = newCapacityInBytes;
+                }
+
+                fixed (byte* buf = byteBuffer)
+                {
+                    for (int i = 0; i < capacityInBytes; i++)
+                    {
+                        dataInBytes[i] = buf[i + currentIndex];
+                    }
+                    currentIndex += capacityInBytes;
+                    if (currentIndex == maxIndex)
+                    {
+                        // loop time!
+                        currentIndex = 0;
+                    }
+                    for (int i = 0; i < tailCount; i++)
+                    {
+                        dataInBytes[capacityInBytes + i] = buf[i];
                     }
                 }
             }
+
+            frameInputNode.AddFrame(frame);
         }
 
         private async Task PopulateDeviceList()
@@ -235,8 +342,16 @@ namespace AudioCreation
 
             frameOutputNode = graph.CreateFrameOutputNode();
             deviceInputNode.AddOutgoingConnection(frameOutputNode);
+            // We keep the output node and input node running all the time, even if they have nothing to do.
+            // Optimizations might be possible here but this gets our inner loop running consistently.
+            frameOutputNode.Start();
 
-            // Attach to QuantumStarted event in order to receive synchronous updates from audio graph.
+            frameInputNode = graph.CreateFrameInputNode();
+            frameInputNode.AddOutgoingConnection(deviceOutputNode);
+            frameInputNode.QuantumStarted += FrameInputNode_QuantumStarted;
+            frameInputNode.Start();
+                                                        
+            // Attach to QuantumStarted event in order to receive synchronous updates from audio graph (to capture incoming audio).
             graph.QuantumStarted += Graph_QuantumStarted;
 
             // Disable the graph button to prevent accidental click
@@ -244,6 +359,33 @@ namespace AudioCreation
 
             // Because we are using lowest latency setting, we need to handle device disconnection errors
             graph.UnrecoverableErrorOccurred += Graph_UnrecoverableErrorOccurred;
+
+            // Start the graph and keep it running.
+            graph.Start();
+
+            // Enable recording.
+            recordButton.IsEnabled = true;
+        }
+
+        private void FrameInputNode_QuantumStarted(AudioFrameInputNode sender, FrameInputNodeQuantumStartedEventArgs args)
+        {
+            Debug.Assert(args.RequiredSamples >= 0);
+            uint requiredSamples = (uint)args.RequiredSamples;
+            if (requestStartPlaying)
+            {
+                Debug.Assert(!isRecording);
+                Debug.Assert(!requestStartRecording);
+                Debug.Assert(!isPlaying);
+
+                isPlaying = true;
+                requestStartPlaying = false;
+                currentIndex = 0;
+                HandleOutgoingAudio(requiredSamples);
+            }
+            else if (isPlaying)
+            {
+                HandleOutgoingAudio(requiredSamples);
+            }
         }
 
         private async void Graph_UnrecoverableErrorOccurred(AudioGraph sender, AudioGraphUnrecoverableErrorOccurredEventArgs args)
@@ -255,8 +397,11 @@ namespace AudioCreation
                 // Re-query for devices
                 await PopulateDeviceList();
                 // Reset UI
-                recordButton.IsEnabled = false;
-                playButton.Content = "Record";
+                recordButton.IsEnabled = true;
+                recordButton.Content = "Start Recording";
+                playButton.IsEnabled = false;
+                playButton.Content = "Start Playing";
+                isRecording = isPlaying = false;
                 outputDeviceContainer.Background = new SolidColorBrush(Color.FromArgb(255, 74, 74, 74));
             });
         }

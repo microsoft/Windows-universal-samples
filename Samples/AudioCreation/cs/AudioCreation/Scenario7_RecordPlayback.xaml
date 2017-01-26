@@ -59,8 +59,8 @@
                         <TextBlock x:Name="outputDevice" Text="Output Device" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#6E6E6E" />
                     </Border>
                     <Button x:Name="createGraphButton" Content="Create Graph" Click="CreateGraphButton_Click" Margin="0,30,0,0" MinWidth="120" MinHeight="45" IsEnabled="False"/>
-                    <Button x:Name="recordButton" Content="Start Recording" Click="RecordButton_Click" Margin="0,30,0,0" MinWidth="120" MinHeight="45" IsEnabled="False"/>
-                    <Button x:Name="playButton" Content="Start Playing" Click="PlayButton_Click" Margin="0,30,0,0" MinWidth="120" MinHeight="45" IsEnabled="False"/>
+                    <Button x:Name="recordButton" Content="Record" Click="RecordButton_Click" Margin="0,30,0,0" MinWidth="120" MinHeight="45" IsEnabled="False"/>
+                    <Button x:Name="playButton" Content="Play" Click="PlayButton_Click" Margin="0,30,0,0" MinWidth="120" MinHeight="45" IsEnabled="False"/>
                 </RelativePanel>
             </ScrollViewer>
 
