@@ -11,7 +11,6 @@
 
 using SDKTemplate;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
@@ -20,11 +19,7 @@ using Windows.Media;
 using Windows.Media.Audio;
 using Windows.Media.Capture;
 using Windows.Media.Devices;
-using Windows.Media.MediaProperties;
 using Windows.Media.Render;
-using Windows.Media.Transcoding;
-using Windows.Storage;
-using Windows.Storage.Pickers;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -37,7 +32,8 @@ using Windows.UI.Xaml.Navigation;
 namespace AudioCreation
 {
     /// <summary>
-    /// This scenario shows using AudioGraph for audio capture from a microphone with low latency.
+    /// This scenario shows using AudioGraph for audio capture from a microphone with low latency
+    /// to a memory buffer, and looping playback of the captured audio buffer.
     /// </summary>
     public sealed partial class Scenario7_RecordPlayback : Page
     {
@@ -68,8 +64,8 @@ namespace AudioCreation
         // Maximum index recorded in the buffer.
         private uint maxIndex;
 
-        // 1024K stereo float audio samples (8MB byte array)
-        private byte[] byteBuffer = new byte[1024 * 1024 * 2 * 4];
+        // 120 seconds of 48Khz stereo float audio samples (43.9MB byte array)
+        private byte[] byteBuffer = new byte[120 * 48000 * 2 * 4];
         private DeviceInformationCollection outputDevices;
 
         public Scenario7_RecordPlayback()
@@ -126,7 +122,7 @@ namespace AudioCreation
                 Debug.Assert(!isPlaying);
 
                 recordButton.Content = "Record";
-                rootPage.NotifyUser("Recording to memory buffer completed successfully!", NotifyType.StatusMessage);
+                rootPage.NotifyUser($"Recording to memory buffer completed successfully! {maxIndex} bytes recorded", NotifyType.StatusMessage);
                 createGraphButton.IsEnabled = false;
                 playButton.IsEnabled = true;
 
@@ -174,9 +170,9 @@ namespace AudioCreation
                 requestStartRecording = false;
                 maxIndex = 0;
                 currentIndex = 0;
-                HandleIncomingAudio();
             }
-            else if (isRecording)
+
+            if (isRecording)
             {
                 HandleIncomingAudio();
             }
@@ -218,6 +214,27 @@ namespace AudioCreation
             }
         }
 
+        private void FrameInputNode_QuantumStarted(AudioFrameInputNode sender, FrameInputNodeQuantumStartedEventArgs args)
+        {
+            Debug.Assert(args.RequiredSamples >= 0);
+            uint requiredSamples = (uint)args.RequiredSamples;
+            if (requestStartPlaying)
+            {
+                Debug.Assert(!isRecording);
+                Debug.Assert(!requestStartRecording);
+                Debug.Assert(!isPlaying);
+
+                isPlaying = true;
+                requestStartPlaying = false;
+                currentIndex = 0;
+            }
+
+            if (isPlaying)
+            {
+                HandleOutgoingAudio(requiredSamples);
+            }
+        }
+
         // We keep the last AudioFrame in the common case that it's the same size as the next requested buffer.
         static AudioFrame s_lastAudioFrame = null;
         static uint s_lastAudioFrameSampleCount = 0;
@@ -225,12 +242,14 @@ namespace AudioCreation
         /// <summary>
         /// Handle a frame of outgoing audio to the output device.
         /// </summary>
-        private unsafe void HandleOutgoingAudio(uint samples)
+        private unsafe void HandleOutgoingAudio(uint requiredSampleCount)
         {
-            uint bufferSize = samples * sizeof(float) * 2;
+            Debug.Assert(requiredSampleCount > 0);
+
+            uint bufferSize = requiredSampleCount * sizeof(float) * 2;
 
             AudioFrame frame;
-            if (s_lastAudioFrameSampleCount == samples)
+            if (s_lastAudioFrameSampleCount == requiredSampleCount)
             {
                 frame = s_lastAudioFrame;
             }
@@ -249,6 +268,8 @@ namespace AudioCreation
 
                 // Get the buffer from the AudioFrame
                 ((IMemoryBufferByteAccess)reference).GetBuffer(out dataInBytes, out capacityInBytes);
+
+                Debug.Assert(requiredSampleCount == capacityInBytes / 2 / 4);
 
                 uint tailCount = 0;
 
@@ -367,27 +388,6 @@ namespace AudioCreation
             recordButton.IsEnabled = true;
         }
 
-        private void FrameInputNode_QuantumStarted(AudioFrameInputNode sender, FrameInputNodeQuantumStartedEventArgs args)
-        {
-            Debug.Assert(args.RequiredSamples >= 0);
-            uint requiredSamples = (uint)args.RequiredSamples;
-            if (requestStartPlaying)
-            {
-                Debug.Assert(!isRecording);
-                Debug.Assert(!requestStartRecording);
-                Debug.Assert(!isPlaying);
-
-                isPlaying = true;
-                requestStartPlaying = false;
-                currentIndex = 0;
-                HandleOutgoingAudio(requiredSamples);
-            }
-            else if (isPlaying)
-            {
-                HandleOutgoingAudio(requiredSamples);
-            }
-        }
-
         private async void Graph_UnrecoverableErrorOccurred(AudioGraph sender, AudioGraphUnrecoverableErrorOccurredEventArgs args)
         {
             // Recreate the graph and all nodes when this happens
@@ -398,9 +398,9 @@ namespace AudioCreation
                 await PopulateDeviceList();
                 // Reset UI
                 recordButton.IsEnabled = true;
-                recordButton.Content = "Start Recording";
+                recordButton.Content = "Record";
                 playButton.IsEnabled = false;
-                playButton.Content = "Start Playing";
+                playButton.Content = "Play";
                 isRecording = isPlaying = false;
                 outputDeviceContainer.Background = new SolidColorBrush(Color.FromArgb(255, 74, 74, 74));
             });
