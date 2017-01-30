@@ -27,13 +27,18 @@
                         <AdaptiveTrigger MinWindowWidth="0"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="inputDeviceContainer.(RelativePanel.Below)" Value="outputDevicesListBox" />
-
-                        <Setter Target="outputDeviceContainer.(RelativePanel.Below)" Value="inputDeviceContainer" />
+                        <Setter Target="inputDeviceContainer.(RelativePanel.Below)" Value="inputDevicesListBox" />
+                        <Setter Target="outputDevicesListBox.(RelativePanel.Below)" Value="inputDeviceContainer" />
+                        <Setter Target="outputDeviceContainer.(RelativePanel.Below)" Value="outputDevicesListBox" />
 
                         <Setter Target="createGraphButton.(RelativePanel.Below)" Value="outputDeviceContainer" />
+
                         <Setter Target="recordButton.(RelativePanel.Below)" Value="createGraphButton" />
-                        <Setter Target="playButton.(RelativePanel.Below)" Value="recordButton" />
+
+                        <Setter Target="audioPipe.(RelativePanel.RightOf)" Value="recordButton" />
+                        <Setter Target="audioPipe.(RelativePanel.AlignVerticalCenterWith)" Value="recordButton" />
+                        <Setter Target="playButton.(RelativePanel.RightOf)" Value="audioPipe" />
+                        <Setter Target="playButton.(RelativePanel.AlignVerticalCenterWith)" Value="recordButton" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -51,15 +56,17 @@
 
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <RelativePanel HorizontalAlignment="Stretch">
-                    <ListBox x:Name="outputDevicesListBox" IsEnabled="True" Margin="0,20,15,20" HorizontalAlignment="Stretch" MaxWidth="600" SelectionChanged="outputDevicesListBox_SelectionChanged"/>
+                    <ListBox x:Name="inputDevicesListBox" IsEnabled="True" Margin="0,20,15,20" HorizontalAlignment="Stretch" MaxWidth="600" SelectionChanged="inputDevicesListBox_SelectionChanged"/>
                     <Border x:Name="inputDeviceContainer" BorderThickness="0" Background="#4A4A4A" Margin="0,67,0,0" MinWidth="120" MinHeight="45">
-                        <TextBlock Text="Input Device" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBlock x:Name="inputDevice" Text="Input Device" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Border>
+                    <ListBox x:Name="outputDevicesListBox" IsEnabled="True" Margin="0,20,15,20" HorizontalAlignment="Stretch" MaxWidth="600" SelectionChanged="outputDevicesListBox_SelectionChanged"/>
                     <Border x:Name="outputDeviceContainer" BorderThickness="0" Background="#4A4A4A" Margin="8,150,0,0" MinWidth="120" MinHeight="45">
                         <TextBlock x:Name="outputDevice" Text="Output Device" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#6E6E6E" />
                     </Border>
                     <Button x:Name="createGraphButton" Content="Create Graph" Click="CreateGraphButton_Click" Margin="0,30,0,0" MinWidth="120" MinHeight="45" IsEnabled="False"/>
                     <Button x:Name="recordButton" Content="Record" Click="RecordButton_Click" Margin="0,30,0,0" MinWidth="120" MinHeight="45" IsEnabled="False"/>
+                    <Rectangle x:Name="audioPipe" Margin="0,20,0,0" Height="10" MinWidth="160" Fill="#313131" HorizontalAlignment="Stretch"/>
                     <Button x:Name="playButton" Content="Play" Click="PlayButton_Click" Margin="0,30,0,0" MinWidth="120" MinHeight="45" IsEnabled="False"/>
                 </RelativePanel>
             </ScrollViewer>

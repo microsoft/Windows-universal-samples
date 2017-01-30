@@ -37,12 +37,12 @@ namespace AudioCreation
     /// </summary>
     public sealed partial class Scenario7_RecordPlayback : Page
     {
-        private MainPage rootPage;
-        private AudioGraph graph;
-        private AudioDeviceOutputNode deviceOutputNode;
-        private AudioDeviceInputNode deviceInputNode;
-        private AudioFrameOutputNode frameOutputNode;
-        private AudioFrameInputNode frameInputNode;
+        MainPage rootPage;
+        AudioGraph graph;
+        AudioDeviceOutputNode deviceOutputNode;
+        AudioDeviceInputNode deviceInputNode;
+        AudioFrameOutputNode frameOutputNode;
+        AudioFrameInputNode frameInputNode;
 
         // These variables are synchronization points; they experience the following
         // state transitions:
@@ -54,19 +54,22 @@ namespace AudioCreation
         //
         // And similarly for requestStartPlaying and isPlaying.
         //
-        private volatile bool requestStartRecording;
-        private volatile bool requestStartPlaying;
-        private volatile bool isRecording;
-        private volatile bool isPlaying;
+        volatile bool requestStartRecording;
+        volatile bool requestStartPlaying;
+        volatile bool isRecording;
+        volatile bool isPlaying;
+        volatile int audioFrameCount;
+
+        DateTime recordingStartTime;
 
         // Current record/play index into the buffer.
-        private uint currentIndex;
+        uint currentIndex;
         // Maximum index recorded in the buffer.
-        private uint maxIndex;
+        uint maxIndex;
 
         // 120 seconds of 48Khz stereo float audio samples (43.9MB byte array)
-        private byte[] byteBuffer = new byte[120 * 48000 * 2 * 4];
-        private DeviceInformationCollection outputDevices;
+        byte[] byteBuffer = new byte[120 * 48000 * 2 * 4];
+        DeviceInformationCollection outputDevices;
 
         public Scenario7_RecordPlayback()
         {
@@ -122,9 +125,12 @@ namespace AudioCreation
                 Debug.Assert(!isPlaying);
 
                 recordButton.Content = "Record";
-                rootPage.NotifyUser($"Recording to memory buffer completed successfully! {maxIndex} bytes recorded", NotifyType.StatusMessage);
+                TimeSpan span = DateTime.Now - recordingStartTime;
+                int msec = span.Seconds * 1000 + span.Milliseconds;
+                rootPage.NotifyUser($"Recorded OK! {maxIndex} bytes, {audioFrameCount} samples, {msec} msec", NotifyType.StatusMessage);
                 createGraphButton.IsEnabled = false;
                 playButton.IsEnabled = true;
+                audioPipe.Fill = new SolidColorBrush(Color.FromArgb(255, 49, 49, 49));
 
                 // This volatile write will cause recording to stop on the audio thread.
                 isRecording = false;
@@ -170,6 +176,8 @@ namespace AudioCreation
                 requestStartRecording = false;
                 maxIndex = 0;
                 currentIndex = 0;
+                audioFrameCount = 0;
+                recordingStartTime = DateTime.Now;
             }
 
             if (isRecording)
@@ -194,6 +202,10 @@ namespace AudioCreation
                 // Get the buffer from the AudioFrame
                 ((IMemoryBufferByteAccess)reference).GetBuffer(out dataInBytes, out capacityInBytes);
 
+                Debug.Assert(capacityInBytes > 0);
+                // Must be multiple of 8 (2 channels, 4 bytes/float)
+                Debug.Assert((capacityInBytes & 0x7) == 0);
+
                 // if we fill up, just spin forever.  don't try to exit recording from audio thread,
                 // we don't bother with two-way signaling.
                 if (maxIndex + capacityInBytes > byteBuffer.Length)
@@ -212,6 +224,8 @@ namespace AudioCreation
                 }
                 maxIndex += capacityInBytes;
             }
+
+            audioFrameCount++;
         }
 
         private void FrameInputNode_QuantumStarted(AudioFrameInputNode sender, FrameInputNodeQuantumStartedEventArgs args)
@@ -426,6 +440,11 @@ namespace AudioCreation
                 createGraphButton.IsEnabled = true;
                 outputDevice.Foreground = new SolidColorBrush(Colors.White);
             }
+        }
+
+        private void inputDevicesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
