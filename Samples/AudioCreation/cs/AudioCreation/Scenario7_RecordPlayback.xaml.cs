@@ -13,6 +13,7 @@ using SDKTemplate;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Devices.Enumeration;
 using Windows.Foundation;
 using Windows.Media;
@@ -61,6 +62,10 @@ namespace AudioCreation
         volatile int audioFrameCount;
 
         DateTime recordingStartTime;
+        int lastStatusMsec;
+
+        uint maxCapacityEncountered;
+        uint lastCapacityEncountered;
 
         // Current record/play index into the buffer.
         uint currentIndex;
@@ -80,6 +85,8 @@ namespace AudioCreation
         {
             rootPage = MainPage.Current;
             await PopulateDeviceList();
+
+            
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -113,27 +120,27 @@ namespace AudioCreation
                 Debug.Assert(!isRecording);
                 Debug.Assert(!isPlaying);
 
-                recordButton.Content = "Stop";
-                playButton.IsEnabled = false;
-
                 // This volatile write will be polled by the audio thread and will cause recording to start there.
                 requestStartRecording = true;
+
+                recordButton.Content = "Stop";
+                playButton.IsEnabled = false;
             }
             else
             {
                 Debug.Assert(isRecording);
                 Debug.Assert(!isPlaying);
 
+                // This volatile write will cause recording to stop on the audio thread.
+                isRecording = false;
+
                 recordButton.Content = "Record";
                 TimeSpan span = DateTime.Now - recordingStartTime;
                 int msec = span.Seconds * 1000 + span.Milliseconds;
-                rootPage.NotifyUser($"Recorded OK! {maxIndex} bytes, {audioFrameCount} samples, {msec} msec", NotifyType.StatusMessage);
+                rootPage.NotifyUser($"Recorded OK! {maxIndex} bytes, {maxIndex>>3} samples, {audioFrameCount} frames, {msec} msec, last cap {lastCapacityEncountered}, max cap {maxCapacityEncountered}", NotifyType.StatusMessage);
                 createGraphButton.IsEnabled = false;
                 playButton.IsEnabled = true;
                 audioPipe.Fill = new SolidColorBrush(Color.FromArgb(255, 49, 49, 49));
-
-                // This volatile write will cause recording to stop on the audio thread.
-                isRecording = false;
             }
         }
 
@@ -144,23 +151,23 @@ namespace AudioCreation
                 Debug.Assert(!isRecording);
                 Debug.Assert(!isPlaying);
 
-                playButton.Content = "Stop";
-                recordButton.IsEnabled = false;
-
                 // This volatile write will cause playing to start once the audio thread polls it.
                 requestStartPlaying = true;
+
+                playButton.Content = "Stop";
+                recordButton.IsEnabled = false;
             }
             else if (playButton.Content.Equals("Stop"))
             {
                 Debug.Assert(!isRecording);
                 Debug.Assert(isPlaying);
 
+                // This volatile write will stop playing on the audio thread immediately.
+                isPlaying = false;
+
                 playButton.Content = "Play";
                 rootPage.NotifyUser("Playing from memory buffer completed successfully!", NotifyType.StatusMessage);
                 recordButton.IsEnabled = true;
-
-                // This volatile write will stop playing on the audio thread immediately.
-                isPlaying = false;
             }
         }
 
@@ -178,11 +185,26 @@ namespace AudioCreation
                 currentIndex = 0;
                 audioFrameCount = 0;
                 recordingStartTime = DateTime.Now;
+                lastCapacityEncountered = maxCapacityEncountered = 0;
             }
 
             if (isRecording)
             {
+                Debug.Assert(!isPlaying);
+                Debug.Assert(!requestStartPlaying);
+                Debug.Assert(!requestStartRecording);
+
                 HandleIncomingAudio();
+
+                int currentStatusMsec = DateTime.Now.Millisecond;
+                // update status every tenth of a second
+                if (lastStatusMsec % 100 > currentStatusMsec % 100)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.TryRunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.Normal,
+                        UpdateStatusWhileRecording);
+                }
+                lastStatusMsec = currentStatusMsec;
             }
         }
 
@@ -206,6 +228,23 @@ namespace AudioCreation
                 // Must be multiple of 8 (2 channels, 4 bytes/float)
                 Debug.Assert((capacityInBytes & 0x7) == 0);
 
+                lastCapacityEncountered = capacityInBytes;
+                maxCapacityEncountered = Math.Max(maxCapacityEncountered, capacityInBytes);
+
+                uint bufferStart = 0;
+                if (maxIndex == 0)
+                {
+                    // if maxCapacityEncountered is greater than the audio graph buffer size, 
+                    // then the audio graph decided to give us a big backload of buffer content
+                    // as its first callback.  Not sure why it does this, but we don't want it,
+                    // so take only the tail of the buffer.
+                    if (maxCapacityEncountered > (graph.LatencyInSamples << 3))
+                    {
+                        bufferStart = capacityInBytes - (uint)(graph.LatencyInSamples << 3);
+                        capacityInBytes = (uint)(graph.LatencyInSamples << 3);
+                    }
+                }
+
                 // if we fill up, just spin forever.  don't try to exit recording from audio thread,
                 // we don't bother with two-way signaling.
                 if (maxIndex + capacityInBytes > byteBuffer.Length)
@@ -218,7 +257,7 @@ namespace AudioCreation
                 {
                     for (int i = 0; i < capacityInBytes; i++)
                     {
-                        byte b = dataInBytes[i];
+                        byte b = dataInBytes[i + bufferStart];
                         buf[i + maxIndex] = b;
                     }
                 }
@@ -226,6 +265,18 @@ namespace AudioCreation
             }
 
             audioFrameCount++;
+        }
+
+        private void UpdateStatusWhileRecording()
+        {
+            uint max = maxIndex >> 3;
+            uint curr = currentIndex >> 3;
+            int frameCount = audioFrameCount;
+            // may have stopped recording while this async notification was in flight
+            if (isRecording)
+            {
+                rootPage.NotifyUser($"recording: max samples {max}, frame count {frameCount}, last cap {lastCapacityEncountered}, max cap {maxCapacityEncountered}", NotifyType.StatusMessage);
+            }
         }
 
         private void FrameInputNode_QuantumStarted(AudioFrameInputNode sender, FrameInputNodeQuantumStartedEventArgs args)
@@ -245,19 +296,39 @@ namespace AudioCreation
 
             if (isPlaying)
             {
+                Debug.Assert(!isRecording);
+                Debug.Assert(!requestStartPlaying);
+                Debug.Assert(!requestStartRecording);
+
                 HandleOutgoingAudio(requiredSamples);
+
+                int currentStatusMsec = DateTime.Now.Millisecond;
+                // update status every tenth of a second
+                if (lastStatusMsec % 100 > currentStatusMsec % 100)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.TryRunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.Normal,
+                        UpdateStatusWhilePlaying);
+                }
+                lastStatusMsec = currentStatusMsec;
             }
         }
 
         // We keep the last AudioFrame in the common case that it's the same size as the next requested buffer.
         static AudioFrame s_lastAudioFrame = null;
         static uint s_lastAudioFrameSampleCount = 0;
+        private int s_zeroByteOutgoingFrameCount;
 
         /// <summary>
         /// Handle a frame of outgoing audio to the output device.
         /// </summary>
         private unsafe void HandleOutgoingAudio(uint requiredSampleCount)
         {
+            if (requiredSampleCount == 0)
+            {
+                s_zeroByteOutgoingFrameCount++;
+                return;
+            }
             Debug.Assert(requiredSampleCount > 0);
 
             uint bufferSize = requiredSampleCount * sizeof(float) * 2;
@@ -283,7 +354,7 @@ namespace AudioCreation
                 // Get the buffer from the AudioFrame
                 ((IMemoryBufferByteAccess)reference).GetBuffer(out dataInBytes, out capacityInBytes);
 
-                Debug.Assert(requiredSampleCount == capacityInBytes / 2 / 4);
+                Debug.Assert(requiredSampleCount == (capacityInBytes / 8));
 
                 uint tailCount = 0;
 
@@ -315,6 +386,17 @@ namespace AudioCreation
             }
 
             frameInputNode.AddFrame(frame);
+        }
+
+        private void UpdateStatusWhilePlaying()
+        {
+            uint max = maxIndex >> 3;
+            uint curr = currentIndex >> 3;
+            // may have stopped playing while this async notification was in flight
+            if (isPlaying)
+            {
+                rootPage.NotifyUser($"playing: curr sample {curr}. max samples {max}", NotifyType.StatusMessage);
+            }
         }
 
         private async Task PopulateDeviceList()
@@ -384,6 +466,8 @@ namespace AudioCreation
             frameInputNode = graph.CreateFrameInputNode();
             frameInputNode.AddOutgoingConnection(deviceOutputNode);
             frameInputNode.QuantumStarted += FrameInputNode_QuantumStarted;
+            // Running the frameInputNode all the time seems OK but maybe suboptimal, though not harmful like
+            // the unbounded buffering when not even recording if the frame output node is started prematurely.
             frameInputNode.Start();
                                                         
             // Attach to QuantumStarted event in order to receive synchronous updates from audio graph (to capture incoming audio).
