@@ -122,6 +122,7 @@ namespace AudioCreation
 
                 // This volatile write will be polled by the audio thread and will cause recording to start there.
                 requestStartRecording = true;
+                frameOutputNode.Start();
 
                 recordButton.Content = "Stop";
                 playButton.IsEnabled = false;
@@ -133,6 +134,7 @@ namespace AudioCreation
 
                 // This volatile write will cause recording to stop on the audio thread.
                 isRecording = false;
+                frameOutputNode.Stop();
 
                 recordButton.Content = "Record";
                 TimeSpan span = DateTime.Now - recordingStartTime;
@@ -153,6 +155,7 @@ namespace AudioCreation
 
                 // This volatile write will cause playing to start once the audio thread polls it.
                 requestStartPlaying = true;
+                frameInputNode.Start();
 
                 playButton.Content = "Stop";
                 recordButton.IsEnabled = false;
@@ -164,6 +167,7 @@ namespace AudioCreation
 
                 // This volatile write will stop playing on the audio thread immediately.
                 isPlaying = false;
+                frameInputNode.Stop();
 
                 playButton.Content = "Play";
                 rootPage.NotifyUser("Playing from memory buffer completed successfully!", NotifyType.StatusMessage);
@@ -196,6 +200,7 @@ namespace AudioCreation
 
                 HandleIncomingAudio();
 
+                /*
                 int currentStatusMsec = DateTime.Now.Millisecond;
                 // update status every tenth of a second
                 if (lastStatusMsec % 100 > currentStatusMsec % 100)
@@ -205,6 +210,7 @@ namespace AudioCreation
                         UpdateStatusWhileRecording);
                 }
                 lastStatusMsec = currentStatusMsec;
+                */
             }
         }
 
@@ -224,7 +230,12 @@ namespace AudioCreation
                 // Get the buffer from the AudioFrame
                 ((IMemoryBufferByteAccess)reference).GetBuffer(out dataInBytes, out capacityInBytes);
 
-                Debug.Assert(capacityInBytes > 0);
+                if (capacityInBytes == 0)
+                {
+                    // we don't count zero-byte frames... and why do they ever happen???
+                    return;
+                }
+
                 // Must be multiple of 8 (2 channels, 4 bytes/float)
                 Debug.Assert((capacityInBytes & 0x7) == 0);
 
@@ -302,6 +313,7 @@ namespace AudioCreation
 
                 HandleOutgoingAudio(requiredSamples);
 
+                /*
                 int currentStatusMsec = DateTime.Now.Millisecond;
                 // update status every tenth of a second
                 if (lastStatusMsec % 100 > currentStatusMsec % 100)
@@ -311,6 +323,7 @@ namespace AudioCreation
                         UpdateStatusWhilePlaying);
                 }
                 lastStatusMsec = currentStatusMsec;
+                */
             }
         }
 
@@ -342,7 +355,7 @@ namespace AudioCreation
             {
                 frame = new Windows.Media.AudioFrame(bufferSize);
                 s_lastAudioFrame = frame;
-                s_lastAudioFrameSampleCount = bufferSize;
+                s_lastAudioFrameSampleCount = bufferSize >> 3;
             }
 
             using (AudioBuffer buffer = frame.LockBuffer(AudioBufferAccessMode.Write))
@@ -459,16 +472,10 @@ namespace AudioCreation
 
             frameOutputNode = graph.CreateFrameOutputNode();
             deviceInputNode.AddOutgoingConnection(frameOutputNode);
-            // We keep the output node and input node running all the time, even if they have nothing to do.
-            // Optimizations might be possible here but this gets our inner loop running consistently.
-            frameOutputNode.Start();
 
             frameInputNode = graph.CreateFrameInputNode();
             frameInputNode.AddOutgoingConnection(deviceOutputNode);
             frameInputNode.QuantumStarted += FrameInputNode_QuantumStarted;
-            // Running the frameInputNode all the time seems OK but maybe suboptimal, though not harmful like
-            // the unbounded buffering when not even recording if the frame output node is started prematurely.
-            frameInputNode.Start();
                                                         
             // Attach to QuantumStarted event in order to receive synchronous updates from audio graph (to capture incoming audio).
             graph.QuantumStarted += Graph_QuantumStarted;
@@ -484,6 +491,9 @@ namespace AudioCreation
 
             // Enable recording.
             recordButton.IsEnabled = true;
+
+            createGraphButton.Background = new SolidColorBrush(Color.FromArgb(255, 49, 49, 49));
+
         }
 
         private async void Graph_UnrecoverableErrorOccurred(AudioGraph sender, AudioGraphUnrecoverableErrorOccurredEventArgs args)
