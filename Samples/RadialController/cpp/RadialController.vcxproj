@@ -95,11 +95,6 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);..\..\..\SharedContent\cpp</IncludePath>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>EC050EC51A0A4A3A66245257463F27CA6063BCB6</PackageCertificateThumbprint>
-    <PackageCertificateKeyFile>RadialController_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
@@ -226,9 +221,6 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\shared\fontawesome-webfont.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="RadialController_TemporaryKey.pfx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

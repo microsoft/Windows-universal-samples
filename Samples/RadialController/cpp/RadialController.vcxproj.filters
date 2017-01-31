@@ -76,7 +76,4 @@
       <Filter>Assets</Filter>
     </Font>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="RadialController_TemporaryKey.pfx" />
-  </ItemGroup>
 </Project>
