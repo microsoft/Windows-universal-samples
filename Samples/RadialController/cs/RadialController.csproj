@@ -11,8 +11,8 @@
     <AssemblyName>RadialController</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.15003.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15003.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -88,6 +88,8 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Assets\fontawesome-webfont.ttf" />
+    <Content Include="Assets\Item3.png" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -175,15 +177,6 @@
     </Content>
     <Content Include="..\shared\Item2.png">
       <Link>Assets\Item2.png</Link>
-    </Content>
-    <Content Include="..\shared\Item3.png">
-      <Link>Assets\Item3.png</Link>
-    </Content>
-    <Content Include="..\shared\Item4.png">
-      <Link>Assets\Item4.png</Link>
-    </Content>
-    <Content Include="..\shared\Item5.png">
-      <Link>Assets\Item5.png</Link>
     </Content>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

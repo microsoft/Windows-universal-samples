@@ -1,4 +1,4 @@
-//*********************************************************
+﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
 // This code is licensed under the MIT License (MIT).
@@ -38,8 +38,6 @@ namespace SDKTemplate
         virtual void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 
     private:
-        MainPage^ rootPage;
-
         Windows::UI::Input::RadialController^ controller;
 
         int activeItemIndex;
@@ -49,6 +47,9 @@ namespace SDKTemplate
 
         void InitializeController();
         void CreateMenuItems();
+        void AddKnownIconItems();
+        void AddCustomIconItems();
+        void AddFontGlyphItems();
         void SetItemInvokedCallback(Windows::UI::Input::RadialControllerMenuItem^ menuItem, unsigned int index);
 
         void AddItem(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
@@ -62,18 +63,19 @@ namespace SDKTemplate
 
         void PrintSelectedItem(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
         void PrintSelectedItem();
-        Platform::String^ GetSelectedMenuItemName();
 
-        void OnLogSizeChanged(Platform::Object ^sender, Platform::Object ^args);
-        void OnControlAcquired(Windows::UI::Input::RadialController ^sender, Windows::UI::Input::RadialControllerControlAcquiredEventArgs ^args);
-        void OnControlLost(Windows::UI::Input::RadialController ^sender, Platform::Object ^args);
+        void OnLogSizeChanged(Platform::Object^ sender, Platform::Object^ args);
+        void OnControlAcquired(Windows::UI::Input::RadialController^ sender, Windows::UI::Input::RadialControllerControlAcquiredEventArgs^ args);
+        void OnControlLost(Windows::UI::Input::RadialController^ sender, Platform::Object^ args);
 
-        void OnScreenContactStarted(Windows::UI::Input::RadialController ^sender, Windows::UI::Input::RadialControllerScreenContactStartedEventArgs ^args);
-        void OnScreenContactContinued(Windows::UI::Input::RadialController ^sender, Windows::UI::Input::RadialControllerScreenContactContinuedEventArgs ^args);
-        void OnScreenContactEnded(Windows::UI::Input::RadialController ^sender, Platform::Object ^args);
+        void OnScreenContactStarted(Windows::UI::Input::RadialController^ sender, Windows::UI::Input::RadialControllerScreenContactStartedEventArgs^ args);
+        void OnScreenContactContinued(Windows::UI::Input::RadialController^ sender, Windows::UI::Input::RadialControllerScreenContactContinuedEventArgs^ args);
+        void OnScreenContactEnded(Windows::UI::Input::RadialController^ sender, Platform::Object^ args);
 
-        void OnButtonClicked(Windows::UI::Input::RadialController ^sender, Windows::UI::Input::RadialControllerButtonClickedEventArgs ^args);
-        void OnRotationChanged(Windows::UI::Input::RadialController ^sender, Windows::UI::Input::RadialControllerRotationChangedEventArgs ^args);
+        void ToggleMenuSuppression(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
+
+        void OnButtonClicked(Windows::UI::Input::RadialController^ sender, Windows::UI::Input::RadialControllerButtonClickedEventArgs^ args);
+        void OnRotationChanged(Windows::UI::Input::RadialController^ sender, Windows::UI::Input::RadialControllerRotationChangedEventArgs^ args);
         void LogContactInfo(Windows::UI::Input::RadialControllerScreenContact^ contact);
     };
 }

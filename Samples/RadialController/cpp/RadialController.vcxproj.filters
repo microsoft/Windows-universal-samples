@@ -70,11 +70,13 @@
     <Image Include="..\shared\Item3.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\shared\Item4.png">
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\shared\fontawesome-webfont.ttf">
       <Filter>Assets</Filter>
-    </Image>
-    <Image Include="..\shared\Item5.png">
-      <Filter>Assets</Filter>
-    </Image>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="RadialController_TemporaryKey.pfx" />
   </ItemGroup>
 </Project>
