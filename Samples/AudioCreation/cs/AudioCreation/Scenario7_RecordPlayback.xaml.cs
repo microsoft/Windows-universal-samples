@@ -168,6 +168,7 @@ namespace AudioCreation
                 // This volatile write will stop playing on the audio thread immediately.
                 isPlaying = false;
                 frameInputNode.Stop();
+                frameInputNode.DiscardQueuedFrames();
 
                 playButton.Content = "Play";
                 rootPage.NotifyUser("Playing from memory buffer completed successfully!", NotifyType.StatusMessage);
@@ -292,8 +293,8 @@ namespace AudioCreation
 
         private void FrameInputNode_QuantumStarted(AudioFrameInputNode sender, FrameInputNodeQuantumStartedEventArgs args)
         {
-            Debug.Assert(args.RequiredSamples >= 0);
             uint requiredSamples = (uint)args.RequiredSamples;
+
             if (requestStartPlaying)
             {
                 Debug.Assert(!isRecording);
@@ -327,38 +328,27 @@ namespace AudioCreation
             }
         }
 
-        // We keep the last AudioFrame in the common case that it's the same size as the next requested buffer.
-        static AudioFrame s_lastAudioFrame = null;
-        static uint s_lastAudioFrameSampleCount = 0;
+        // We keep a 1MB AudioFrame and reuse it.
+        static AudioFrame s_audioFrame = new Windows.Media.AudioFrame(1024 * 1024);
         private int s_zeroByteOutgoingFrameCount;
 
         /// <summary>
         /// Handle a frame of outgoing audio to the output device.
         /// </summary>
-        private unsafe void HandleOutgoingAudio(uint requiredSampleCount)
+        /// <remarks>
+        /// This pushes a megabyte of audio each time, to greatly reduce the number of callbacks.
+        /// 
+        /// We don't need the requiredSamples argument but we don't 
+        /// </remarks>
+        private unsafe void HandleOutgoingAudio(uint requiredSamples)
         {
-            if (requiredSampleCount == 0)
+            if (requiredSamples == 0)
             {
                 s_zeroByteOutgoingFrameCount++;
                 return;
             }
-            Debug.Assert(requiredSampleCount > 0);
 
-            uint bufferSize = requiredSampleCount * sizeof(float) * 2;
-
-            AudioFrame frame;
-            if (s_lastAudioFrameSampleCount == requiredSampleCount)
-            {
-                frame = s_lastAudioFrame;
-            }
-            else
-            {
-                frame = new Windows.Media.AudioFrame(bufferSize);
-                s_lastAudioFrame = frame;
-                s_lastAudioFrameSampleCount = bufferSize >> 3;
-            }
-
-            using (AudioBuffer buffer = frame.LockBuffer(AudioBufferAccessMode.Write))
+            using (AudioBuffer buffer = s_audioFrame.LockBuffer(AudioBufferAccessMode.Write))
             using (IMemoryBufferReference reference = buffer.CreateReference())
             {
                 byte* dataInBytes;
@@ -367,38 +357,38 @@ namespace AudioCreation
                 // Get the buffer from the AudioFrame
                 ((IMemoryBufferByteAccess)reference).GetBuffer(out dataInBytes, out capacityInBytes);
 
-                Debug.Assert(requiredSampleCount == (capacityInBytes / 8));
+                uint bytesRemaining = capacityInBytes;
+                uint position = 0;
 
-                uint tailCount = 0;
-
-                if (capacityInBytes + currentIndex > maxIndex)
+                while (bytesRemaining > 0)
                 {
-                    Debug.Assert(maxIndex >= currentIndex);
-                    uint newCapacityInBytes = Math.Max(0, maxIndex - currentIndex);
-                    tailCount = capacityInBytes - newCapacityInBytes;
-                    capacityInBytes = newCapacityInBytes;
-                }
+                    uint bytesInThisIteration = bytesRemaining;
+                    if (currentIndex + bytesRemaining > maxIndex)
+                    {
+                        bytesInThisIteration = maxIndex - currentIndex;
+                        if (bytesInThisIteration == 0)
+                        {
+                            // wraparound; next iteration will get more bytes
+                            currentIndex = 0;
+                            continue;
+                        }
+                    }
 
-                fixed (byte* buf = byteBuffer)
-                {
-                    for (int i = 0; i < capacityInBytes; i++)
+                    fixed (byte* buf = byteBuffer)
                     {
-                        dataInBytes[i] = buf[i + currentIndex];
+                        for (int i = 0; i < bytesInThisIteration; i++)
+                        {
+                            dataInBytes[position + i] = buf[i + currentIndex];
+                        }
                     }
-                    currentIndex += capacityInBytes;
-                    if (currentIndex == maxIndex)
-                    {
-                        // loop time!
-                        currentIndex = 0;
-                    }
-                    for (int i = 0; i < tailCount; i++)
-                    {
-                        dataInBytes[capacityInBytes + i] = buf[i];
-                    }
+                    currentIndex += bytesInThisIteration;
+                    position += bytesInThisIteration;
+
+                    bytesRemaining -= bytesInThisIteration;
                 }
             }
 
-            frameInputNode.AddFrame(frame);
+            frameInputNode.AddFrame(s_audioFrame);
         }
 
         private void UpdateStatusWhilePlaying()
