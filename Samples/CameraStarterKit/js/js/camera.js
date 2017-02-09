@@ -39,6 +39,11 @@
         isPreviewing = false,
         isRecording = false;
 
+    // UI state
+    var _isSuspending = false;
+    var _isUIActive = false;
+    var _setupPromise = WinJS.Promise.wrap();
+
     // Information about the camera device
     var externalCamera = false,
         mirroringPreview = false;
@@ -57,24 +62,20 @@
                 document.getElementById("videoButton").addEventListener("click", videoButton_tapped);
             }
 
-            setupUiAsync();
-            initializeCameraAsync();
-            args.setPromise(WinJS.UI.processAll());
+            args.setPromise(WinJS.Promise.join(setUpBasedOnStateAsync(), WinJS.UI.processAll()));
         }
     };
     
     // About to be suspended
     app.oncheckpoint = function (args) {
-        cleanupCameraAsync()
-        .then(function () {
-            args.setPromise(cleanupUiAsync());
-        }).done();
+        _isSuspending = true;
+        args.setPromise(setUpBasedOnStateAsync());
     };
 
     // Resuming from a user suspension
     Windows.UI.WebUI.WebUIApplication.addEventListener("resuming", function () {
-        setupUiAsync();
-        initializeCameraAsync();
+        _isSuspending = false;
+        setUpBasedOnStateAsync();
     }, false);
     
     // Closing
@@ -82,11 +83,13 @@
         document.getElementById("photoButton").removeEventListener("click", photoButton_tapped);
         document.getElementById("videoButton").removeEventListener("click", videoButton_tapped);
 
-        cleanupCameraAsync()
-        .then(function () {
-            args.setPromise(cleanupUiAsync());
-        }).done();
+        _isSuspending = true;
+        args.setPromise(setUpBasedOnStateAsync());
     };
+
+    document.addEventListener("visibilitychange", function () {
+        setUpBasedOnStateAsync();
+    });
 
     /// <summary>
     /// Initializes the MediaCapture, registers events, gets camera device information for mirroring and rotating, starts preview and unlocks the UI
@@ -462,6 +465,42 @@
 
         oDisplayInformation.removeEventListener("orientationchanged", displayInformation_orientationChanged);
         oSystemMediaControls.removeEventListener("propertychanged", systemMediaControls_PropertyChanged);
+    }
+
+    /// <summary>
+    /// Initialize or clean up the camera and our UI,
+    /// depending on the page state.
+    /// </summary>
+    /// <returns></returns>
+    function setUpBasedOnStateAsync(previousPromise) {
+        // Avoid reentrancy: Wait until nobody else is in this function.
+        // WinJS.Promise has no way to check whether a promise has completed,
+        // so we wait on the promise and then see if another task changed it.
+        // if not, then it was already completed.
+        if (previousPromise !== _setupPromise) {
+            previousPromise = _setupPromise;
+            return _setupPromise.then(function() {
+                return setUpBasedOnStateAsync(previousPromise);
+            });
+        }
+
+        // We want our UI to be active if
+        // * We are the current active page.
+        // * The window is visible.
+        // * The app is not suspending.
+        var wantUIActive = !document.hidden && !_isSuspending;
+
+        if (_isUIActive != wantUIActive) {
+            _isUIActive = wantUIActive;
+
+            if (wantUIActive) {
+                _setupPromise = WinJS.Promise.join(setupUiAsync(), initializeCameraAsync());
+            } else {
+                _setupPromise  = WinJS.Promise.join(cleanupCameraAsync(), cleanupUiAsync());
+            }
+        }
+
+        return _setupPromise;
     }
 
     /// <summary>

@@ -168,6 +168,10 @@ namespace SimpleInk
                     {
                         using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.ReadWrite))
                         {
+                            // Truncate any existing stream in case the new file
+                            // is smaller than the old file.
+                            stream.Size = 0;
+
                             await inkCanvas.InkPresenter.StrokeContainer.SaveAsync(stream);
                         }
                         rootPage.NotifyUser(inkCanvas.InkPresenter.StrokeContainer.GetStrokes().Count + " stroke(s) saved!", NotifyType.StatusMessage);

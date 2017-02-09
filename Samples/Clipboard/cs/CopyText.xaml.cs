@@ -29,18 +29,12 @@ namespace SDKTemplate
             this.Init();
         }
 
-        #region Scenario Specific Code
-
         void Init()
         {
             CopyButton.Click += new RoutedEventHandler(CopyButton_Click);
             PasteButton.Click += new RoutedEventHandler(PasteButton_Click);
             Description.NavigateToString(this.htmlFragment);
         }
-
-        #endregion
-
-        #region Button click
 
         void CopyButton_Click(object sender, RoutedEventArgs e)
         {
@@ -100,8 +94,6 @@ namespace SDKTemplate
                 OutputText.Text = "Text: " + Environment.NewLine + "Text format is not available in clipboard";
             }
 
-
-
             if (dataPackageView.Contains(StandardDataFormats.Html))
             {
                 this.DisplayResourceMapAsync(dataPackageView);
@@ -128,10 +120,6 @@ namespace SDKTemplate
             }
         }
 
-        #endregion
-
-        #region private member variables
-
         private string htmlFragment = "Use clipboard to copy and paste text in different formats, including plain text, and formatted text (HTML). <br />"
                                     + " To <b>copy</b>, add text formats to a <i>DataPackage</i>, and then place <i>DataPackage</i> to Clipboard.<br /> "
                                     + "To <b>paste</b>, get <i>DataPackageView</i> from clipboard, and retrieve the content of the desired text format from it.<br />"
@@ -143,10 +131,6 @@ namespace SDKTemplate
                                     + "See the Share SDK sample for more information.";
 
         private const string imgSrc = "ms-appx-web:///assets/windows-sdk.png";
-
-        #endregion
-
-        #region helper functions
 
         // Note: this sample is not trying to resolve and render the HTML using resource map.
         // Please refer to the Clipboard JavaScript sample for an example of how to use resource map
@@ -180,7 +164,5 @@ namespace SDKTemplate
                 }
             }
         }
-
-        #endregion
     }
 }

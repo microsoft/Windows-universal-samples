@@ -53,18 +53,10 @@ MainPage::MainPage()
 
     // Do not cache the state of the UI when suspending/navigating
     Page::NavigationCacheMode = Navigation::NavigationCacheMode::Disabled;
-
-    // Useful to know when to initialize/clean up the camera
-    _applicationSuspendingEventToken =
-        Application::Current->Suspending += ref new SuspendingEventHandler(this, &MainPage::Application_Suspending);
-    _applicationResumingEventToken =
-        Application::Current->Resuming += ref new EventHandler<Object^>(this, &MainPage::Application_Resuming);
 }
 
 MainPage::~MainPage()
 {
-    Application::Current->Suspending -= _applicationSuspendingEventToken;
-    Application::Current->Resuming -= _applicationResumingEventToken;
 }
 
 /// <summary>
@@ -434,6 +426,48 @@ void MainPage::UpdateCaptureControls()
 }
 
 /// <summary>
+/// Initialize or clean up the camera and our UI,
+/// depending on the page state.
+/// </summary>
+/// <returns></returns>
+Concurrency::task<void> MainPage::SetUpBasedOnStateAsync()
+{
+    // Avoid reentrancy: Wait until nobody else is in this function.
+    while (!_setupTask.is_done())
+    {
+        return _setupTask.then([this]() { return SetUpBasedOnStateAsync(); },
+            task_continuation_context::get_current_winrt_context());
+    }
+
+    // We want our UI to be active if
+    // * We are the current active page.
+    // * The window is visible.
+    // * The app is not suspending.
+    bool wantUIActive = _isActivePage && Window::Current->Visible && !_isSuspending;
+
+    if (_isUIActive != wantUIActive)
+    {
+        _isUIActive = wantUIActive;
+
+        if (wantUIActive)
+        {
+            _setupTask = SetupUiAsync().then([this]()
+            {
+                return InitializeCameraAsync();
+            }, task_continuation_context::get_current_winrt_context());
+        }
+        else
+        {
+            _setupTask = CleanupCameraAsync().then([this]()
+            {
+                return CleanupUiAsync();
+            }, task_continuation_context::get_current_winrt_context());
+        }
+    }
+    return _setupTask;
+}
+
+/// <summary>
 /// Attempts to lock the page orientation, hide the StatusBar (on Phone) and registers event handlers for hardware buttons and orientation sensors
 /// </summary>
 /// <returns></returns>
@@ -458,7 +492,7 @@ task<void> MainPage::SetupUiAsync()
     }
     else
     {
-        return EmptyTask();
+        return task_from_result();
     }
 }
 
@@ -480,7 +514,7 @@ task<void> MainPage::CleanupUiAsync()
     }
     else
     {
-        return EmptyTask();
+        return task_from_result();
     }
 }
 
@@ -551,16 +585,6 @@ void MainPage::WriteException(Exception^ ex)
     std::wstringstream wStringstream;
     wStringstream << "0x" << ex->HResult << ": " << ex->Message->Data();
     OutputDebugString(wStringstream.str().c_str());
-}
-
-/// <summary>
-/// Sometimes we need to conditionally return a task. If certain parameters are not met we cannot 
-/// return null, but we can return a task that does nothing.
-/// </summary>
-/// <returns></returns>
-task<void> MainPage::EmptyTask()
-{
-    return create_task([] {});
 }
 
 /// <summary>
@@ -705,29 +729,31 @@ void MainPage::UpdateButtonOrientation()
 
 void MainPage::Application_Suspending(Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e)
 {
-    // Handle global application events only if this page is active
-    if (Frame->CurrentSourcePageType.Name == Interop::TypeName(MainPage::typeid).Name)
+    _isSuspending = true;
+
+    auto deferral = e->SuspendingOperation->GetDeferral();
+    Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::High, ref new Windows::UI::Core::DispatchedHandler([this, deferral]()
     {
-        auto deferral = e->SuspendingOperation->GetDeferral();
-        CleanupUiAsync()
-            .then([this, deferral]()
-        {
-            CleanupCameraAsync();
-        }).then([this, deferral]()
+        SetUpBasedOnStateAsync().then([deferral]()
         {
             deferral->Complete();
         });
-    }
+    }));
 }
 
 void MainPage::Application_Resuming(Platform::Object^ sender, Platform::Object^ args)
 {
-    // Handle global application events only if this page is active
-    if (Frame->CurrentSourcePageType.Name == Interop::TypeName(MainPage::typeid).Name)
+    _isSuspending = false;
+
+    Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::High, ref new Windows::UI::Core::DispatchedHandler([this]()
     {
-        SetupUiAsync();
-        InitializeCameraAsync();
-    }
+        SetUpBasedOnStateAsync();
+    }));
+}
+
+void MainPage::Window_VisibilityChanged(Object^ sender, Windows::UI::Core::VisibilityChangedEventArgs^ e)
+{
+    SetUpBasedOnStateAsync();
 }
 
 void MainPage::DisplayInformation_OrientationChanged(DisplayInformation^ sender, Object^ args)
@@ -857,13 +883,26 @@ void MainPage::MediaCapture_Failed(Capture::MediaCapture ^currentCaptureObject, 
 
 void MainPage::OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e)
 {
-    SetupUiAsync();
-    InitializeCameraAsync();
+
+    // Useful to know when to initialize/clean up the camera
+    _applicationSuspendingEventToken =
+        Application::Current->Suspending += ref new SuspendingEventHandler(this, &MainPage::Application_Suspending);
+    _applicationResumingEventToken =
+        Application::Current->Resuming += ref new EventHandler<Object^>(this, &MainPage::Application_Resuming);
+    _windowVisibilityChangedEventToken =
+        Window::Current->VisibilityChanged += ref new WindowVisibilityChangedEventHandler(this, &MainPage::Window_VisibilityChanged);
+
+    _isActivePage = true;
+    SetUpBasedOnStateAsync();
 }
 
 void MainPage::OnNavigatingFrom(Windows::UI::Xaml::Navigation::NavigatingCancelEventArgs^ e)
 {
     // Handling of this event is included for completeness, as it will only fire when navigating between pages and this sample only includes one page
-    CleanupCameraAsync();
-    CleanupUiAsync();
+    Application::Current->Suspending -= _applicationSuspendingEventToken;
+    Application::Current->Resuming -= _applicationResumingEventToken;
+    Window::Current->VisibilityChanged -= _windowVisibilityChangedEventToken;
+
+    _isActivePage = false;
+    SetUpBasedOnStateAsync();
 }
