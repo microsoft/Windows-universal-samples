@@ -32,18 +32,12 @@ Namespace Global.SDKTemplate
             RegisterClipboardContentChanged.IsChecked = OtherScenarios.registerContentChanged
         End Sub
 
-#Region " Scenario Specific Code "
-
         Sub Init()
             AddHandler ShowFormatButton.Click, New RoutedEventHandler(AddressOf ShowFormatButton_Click)
             AddHandler EmptyClipboardButton.Click, New RoutedEventHandler(AddressOf EmptyClipboardButton_Click)
             AddHandler RegisterClipboardContentChanged.Click, New RoutedEventHandler(AddressOf RegisterClipboardContentChanged_Click)
             AddHandler ClearOutputButton.Click, New RoutedEventHandler(AddressOf ClearOutputButton_Click)
         End Sub
-
-#End Region
-
-#Region " Button Click "
 
         Sub ShowFormatButton_Click(sender As Object, e As RoutedEventArgs)
             Me.DisplayFormats()
@@ -75,9 +69,6 @@ Namespace Global.SDKTemplate
             Me.ClearOutput()
         End Sub
 
-#End Region
-
-#Region " Private helper methods "
         Private Sub ClearOutput()
             rootPage.NotifyUser("", NotifyType.StatusMessage)
             OutputText.Text = ""
@@ -87,6 +78,5 @@ Namespace Global.SDKTemplate
             rootPage.NotifyUser("", NotifyType.StatusMessage)
             OutputText.Text = rootPage.BuildClipboardFormatsOutputString()
         End Sub
-#End Region
     End Class
 End Namespace

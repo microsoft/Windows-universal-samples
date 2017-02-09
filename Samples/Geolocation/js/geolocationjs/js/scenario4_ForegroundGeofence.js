@@ -336,7 +336,7 @@
         // NOTE: After the app is no longer visible on the screen and before the app is suspended
         // you might want your app to use toast notification for any geofence activity (not shown here).
         // By registering for VisibiltyChanged the app is notified when the app is no longer visible in the foreground.
-        if (document.msVisibilityState === "visible") {
+        if (document.visibilityState === "visible") {
 
             // register for foreground events
             geofenceMonitor.addEventListener("geofencestatechanged", onGeofenceStateChanged);

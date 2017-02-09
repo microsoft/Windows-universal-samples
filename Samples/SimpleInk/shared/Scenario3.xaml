@@ -91,6 +91,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="110"/>
@@ -114,11 +115,7 @@
                             <ComboBoxItem Content="Ballpoint"/>
                             <ComboBoxItem Content="Highlighter"/>
                             <ComboBoxItem Content="Calligraphy"/>
-                            <ComboBoxItem>
-                                <TextBlock>
-                                    <Bold>Pencil</Bold>
-                                </TextBlock>
-                            </ComboBoxItem>
+                            <ComboBoxItem Content="Pencil"/>
                         </ComboBox>
 
                         <TextBlock

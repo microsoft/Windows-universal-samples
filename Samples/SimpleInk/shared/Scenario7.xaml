@@ -114,8 +114,8 @@
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         Background="{ThemeResource SystemChromeMediumColor}">
-                <InkToolbar x:Name="InkToolbar" HorizontalAlignment="Left" TargetInkCanvas="{x:Bind InkCanvas}"
-                            IsRulerButtonCheckedChanged="{x:Bind InkToolbar_IsRulerButtonCheckedChanged}"/>
+                <InkToolbar x:Name="inkToolbar" HorizontalAlignment="Left" TargetInkCanvas="{x:Bind inkCanvas}"
+                            IsStencilButtonCheckedChanged="InkToolbar_IsStencilButtonCheckedChanged"/>
                 <Line Y1="0"
                       Y2="{ThemeResource InkToolbarButtonHeight}"
                       HorizontalAlignment="Stretch"
@@ -142,7 +142,7 @@
                               Background="{ThemeResource SystemControlBackgroundChromeWhiteBrush}">
                 <Grid x:Name="OutputGrid" Background="{ThemeResource SystemControlBackgroundChromeWhiteBrush}">
                     <!-- Inking area -->
-                    <InkCanvas x:Name="InkCanvas"/>
+                    <InkCanvas x:Name="inkCanvas"/>
                 </Grid>
             </ScrollViewer>
         </Grid>

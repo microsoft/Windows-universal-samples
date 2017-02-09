@@ -31,8 +31,7 @@
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                    Discover all of your systems that are logged in with your MSA, or discover systems filtered by 
-                    discovery type, device type, status type or discover systems by their host names.
+                    Discovery
                 </TextBlock>
             </StackPanel>
 
@@ -53,6 +52,7 @@
                         <GridView Margin="20,0,0,0" Visibility="{Binding ElementName=DiscoveryTypeOptions, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <RadioButton GroupName="DiscoveryTypeFilters" Content="Any" IsChecked="True"/>
                             <RadioButton GroupName="DiscoveryTypeFilters" Content="Proximal" x:Name="ProximalRadioButton"/>
+                            <RadioButton GroupName="DiscoveryTypeFilters" Content="Spatially Proximal" x:Name="SpatiallyProximalRadioButton" />
                             <RadioButton GroupName="DiscoveryTypeFilters" Content="Cloud" x:Name="CloudRadioButton"/>
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -77,6 +77,16 @@
                         <GridView Margin="20,0,0,0" Visibility="{Binding ElementName=StatusTypeOptions, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <RadioButton GroupName="StatusTypeFilters" Content="Any" IsChecked="True"/>
                             <RadioButton GroupName="StatusTypeFilters" Content="Available" x:Name="AvailableRadioButton"/>
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                        </GridView>
+                        <CheckBox Content="Filter by authorization type" x:Name="AuthorizationTypeOptions" Margin="0,10,0,0"/>
+                        <GridView Margin="20,0,0,0" Visibility="{Binding ElementName=AuthorizationTypeOptions, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <RadioButton GroupName="AuthorizationTypeFilters" Content="Same User" IsChecked="True"/>
+                            <RadioButton GroupName="AuthorizationTypeFilters" Content="Anonymous" x:Name="AnonymousDiscoveryRadioButton"/>
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <ItemsWrapGrid Orientation="Horizontal"/>

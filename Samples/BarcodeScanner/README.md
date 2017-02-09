@@ -6,7 +6,6 @@
 # Barcode scanner sample
 
 Shows how to obtain a barcode scanner, claim it for exclusive use, enable it to receive data, and read a barcode.
-To use a camera to scan bar codes, see the [Camera Barcode Scanner sample](/Samples/CameraBarcodeScanner) instead. 
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -48,10 +47,6 @@ To obtain information about Windows 10 development, go to the [Windows Dev Cente
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
-
-### Samples
-
-[Camera Barcode Scanner sample](/Samples/CameraBarcodeScanner)  
 
 ### Reference
 

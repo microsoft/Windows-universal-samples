@@ -183,6 +183,12 @@ namespace SDKTemplate
                 claimedDrawer = null;
             }
 
+            if (drawer != null)
+            {
+                drawer.Dispose();
+                drawer = null;
+            }
+
             InitDrawerButton.IsEnabled = true;
             OpenDrawerButton.IsEnabled = false;
 

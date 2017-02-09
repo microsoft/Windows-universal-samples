@@ -35,7 +35,11 @@
                     _claimedScanner.close();
                     _claimedScanner = null;
                 }
-                _scanner = null;
+
+                if (_scanner !== null) {
+                    _scanner.close();
+                    _scanner = null;
+                }
             }
         }
     });
@@ -133,7 +137,11 @@
             _claimedScanner.close();
             _claimedScanner = null;
         }
-        _scanner = null;
+
+        if (_scanner !== null) {
+            _scanner.close();
+            _scanner = null;
+        }
 
         // Reset button states
         WinJS.log("Click the start scanning button to begin.", "sample", "status");

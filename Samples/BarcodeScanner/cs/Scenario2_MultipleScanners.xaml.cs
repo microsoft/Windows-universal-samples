@@ -33,8 +33,8 @@ namespace SDKTemplate
         // as NotifyUser()
         MainPage rootPage = MainPage.Current;
 
-        BarcodeScanner scannerInstance1 = null;
-        BarcodeScanner scannerInstance2 = null;
+        BarcodeScanner barcodeScannerInstance1 = null;
+        BarcodeScanner barcodeScannerInstance2 = null;
         ClaimedBarcodeScanner claimedBarcodeScannerInstance1 = null;
         ClaimedBarcodeScanner claimedBarcodeScannerInstance2 = null;
 
@@ -105,7 +105,11 @@ namespace SDKTemplate
                 }
                 else
                 {
-                    scannerInstance1 = null;
+                    if (barcodeScannerInstance1 != null)
+                    {
+                        barcodeScannerInstance1.Dispose();
+                        barcodeScannerInstance1 = null;
+                    }
                 }
             }
         }
@@ -139,6 +143,12 @@ namespace SDKTemplate
                     {
                         claimedBarcodeScannerInstance1.Dispose();
                         claimedBarcodeScannerInstance1 = null;
+
+                        if (barcodeScannerInstance1 != null)
+                        {
+                            barcodeScannerInstance1.Dispose();
+                            barcodeScannerInstance1 = null;
+                        }
                     }
                 }
             );
@@ -176,7 +186,11 @@ namespace SDKTemplate
                 }
                 else
                 {
-                    scannerInstance2 = null;
+                    if (barcodeScannerInstance2 != null)
+                    {
+                        barcodeScannerInstance2.Dispose();
+                        barcodeScannerInstance2 = null;
+                    }
                 }
             }
         }
@@ -210,6 +224,12 @@ namespace SDKTemplate
                     {
                         claimedBarcodeScannerInstance2.Dispose();
                         claimedBarcodeScannerInstance2 = null;
+
+                        if (barcodeScannerInstance2 != null)
+                        {
+                            barcodeScannerInstance2.Dispose();
+                            barcodeScannerInstance2 = null;
+                        }
                     }
 
                 }
@@ -225,14 +245,22 @@ namespace SDKTemplate
         /// 
         private void ButtonEndScanningInstance1_Click(object sender, RoutedEventArgs e)
         {
-            //remove the event handlers
-            claimedBarcodeScannerInstance1.DataReceived -= claimedBarcodeScannerInstance1_DataReceived;
-            claimedBarcodeScannerInstance1.ReleaseDeviceRequested -= claimedBarcodeScannerInstance1_ReleaseDeviceRequested;
+            if (claimedBarcodeScannerInstance1 != null)
+            {
+                //remove the event handlers
+                claimedBarcodeScannerInstance1.DataReceived -= claimedBarcodeScannerInstance1_DataReceived;
+                claimedBarcodeScannerInstance1.ReleaseDeviceRequested -= claimedBarcodeScannerInstance1_ReleaseDeviceRequested;
 
-            //dispose the instance
-            claimedBarcodeScannerInstance1.Dispose();
-            claimedBarcodeScannerInstance1 = null;
-            scannerInstance1 = null;
+                //dispose the instance
+                claimedBarcodeScannerInstance1.Dispose();
+                claimedBarcodeScannerInstance1 = null;
+            }
+
+            if (barcodeScannerInstance1 != null)
+            {
+                barcodeScannerInstance1.Dispose();
+                barcodeScannerInstance1 = null;
+            }
 
             //reset the UI
 
@@ -250,14 +278,22 @@ namespace SDKTemplate
         /// 
         private void ButtonEndScanningInstance2_Click(object sender, RoutedEventArgs e)
         {
-            //remove the event handlers
-            claimedBarcodeScannerInstance2.DataReceived -= claimedBarcodeScannerInstance2_DataReceived;
-            claimedBarcodeScannerInstance2.ReleaseDeviceRequested -= claimedBarcodeScannerInstance2_ReleaseDeviceRequested;
+            if (claimedBarcodeScannerInstance2 != null)
+            {
+                //remove the event handlers
+                claimedBarcodeScannerInstance2.DataReceived -= claimedBarcodeScannerInstance2_DataReceived;
+                claimedBarcodeScannerInstance2.ReleaseDeviceRequested -= claimedBarcodeScannerInstance2_ReleaseDeviceRequested;
 
-            //dispose the instance
-            claimedBarcodeScannerInstance2.Dispose();
-            claimedBarcodeScannerInstance2 = null;
-            scannerInstance2 = null;
+                //dispose the instance
+                claimedBarcodeScannerInstance2.Dispose();
+                claimedBarcodeScannerInstance2 = null;
+            }
+
+            if (barcodeScannerInstance2 != null)
+            {
+                barcodeScannerInstance2.Dispose();
+                barcodeScannerInstance2 = null;
+            }
 
             //reset the UI
             ResetUI();
@@ -283,10 +319,10 @@ namespace SDKTemplate
             switch (instance)
             {
                 case BarcodeScannerInstance.Instance1:
-                    scannerInstance1 = scanner;
+                    barcodeScannerInstance1 = scanner;
                     break;
                 case BarcodeScannerInstance.Instance2:
-                    scannerInstance2 = scanner;
+                    barcodeScannerInstance2 = scanner;
                     break;
                 default:
                     return false;
@@ -307,7 +343,7 @@ namespace SDKTemplate
             {
                 case BarcodeScannerInstance.Instance1:
 
-                    claimedBarcodeScannerInstance1 = await scannerInstance1.ClaimScannerAsync();
+                    claimedBarcodeScannerInstance1 = await barcodeScannerInstance1.ClaimScannerAsync();
                     if (claimedBarcodeScannerInstance1 == null)
                         rootPage.NotifyUser("Instance 1 claim barcode scanner failed.", NotifyType.ErrorMessage);
                     else
@@ -316,7 +352,7 @@ namespace SDKTemplate
 
                 case BarcodeScannerInstance.Instance2:
 
-                    claimedBarcodeScannerInstance2 = await scannerInstance2.ClaimScannerAsync();
+                    claimedBarcodeScannerInstance2 = await barcodeScannerInstance2.ClaimScannerAsync();
                     if (claimedBarcodeScannerInstance2 == null)
                         rootPage.NotifyUser("Instance 2 claim barcode scanner failed.", NotifyType.ErrorMessage);
                     else
@@ -362,7 +398,11 @@ namespace SDKTemplate
                 claimedBarcodeScannerInstance1 = null;
             }
 
-            scannerInstance1 = null;
+            if (barcodeScannerInstance1 != null)
+            {
+                barcodeScannerInstance1.Dispose();
+                barcodeScannerInstance1 = null;
+            }
 
             if (claimedBarcodeScannerInstance2 != null)
             {
@@ -370,7 +410,11 @@ namespace SDKTemplate
                 claimedBarcodeScannerInstance2 = null;
             }
 
-            scannerInstance2 = null;
+            if (barcodeScannerInstance2 != null)
+            {
+                barcodeScannerInstance2.Dispose();
+                barcodeScannerInstance2 = null;
+            }
 
             ResetUI();
         }

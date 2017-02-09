@@ -223,6 +223,12 @@ namespace SDKTemplate
                 claimedDrawer = null;
             }
 
+            if (drawer != null)
+            {
+                drawer.Dispose();
+                drawer = null;
+            }
+
             UpdateStatusOutput(CashDrawerStatusKind.Offline);
 
             InitDrawerButton.IsEnabled = true;

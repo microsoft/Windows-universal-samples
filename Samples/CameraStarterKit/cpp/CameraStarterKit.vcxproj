@@ -143,6 +143,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CameraRotationHelper.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
       <DependentUpon>..\shared\App.xaml</DependentUpon>
@@ -168,6 +169,7 @@
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>..\shared\App.xaml</DependentUpon>
     </ClCompile>
+    <ClCompile Include="CameraRotationHelper.cpp" />
     <ClCompile Include="MainPage.xaml.cpp">
       <DependentUpon>..\shared\MainPage.xaml</DependentUpon>
     </ClCompile>

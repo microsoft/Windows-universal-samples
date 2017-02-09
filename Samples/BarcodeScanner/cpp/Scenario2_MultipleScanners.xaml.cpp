@@ -326,6 +326,7 @@ void Scenario2_MultipleScanners::ButtonStartScanningInstance1_Click(Platform::Ob
                 }
                 else
                 {
+                    delete scannerInstance1;
                     scannerInstance1 = nullptr;
                 }
             });
@@ -373,6 +374,7 @@ void Scenario2_MultipleScanners::ButtonStartScanningInstance2_Click(Platform::Ob
                 }
                 else
                 {
+                    delete scannerInstance1;
                     scannerInstance1 = nullptr;
                 }
             });

@@ -26,10 +26,11 @@ Specifically, this sample covers using the Windows.UI.Input.Inking APIs to do th
 -   Change which input types (Mouse/Touch/Pen) are used for inking
 -   Recognize handwriting from ink strokes
 -   Select ink strokes
--   Create a ruler, show it, hide it, and reposition it
--   manipulate wet ink strokes
+-   Create a ruler and protractor, show them, hide them, and reposition them
+-   Manipulate wet ink strokes
     - make strokes follow a shape
     - complete a stroke prematurely if conditions are met
+-   Use ink stroke timestamps to replay ink strokes
 
 ## Related topics
 
