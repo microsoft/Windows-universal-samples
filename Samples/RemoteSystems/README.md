@@ -33,6 +33,12 @@ To obtain information about Windows 10 development, go to the [Windows Dev Cente
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
+## Related topics
+
+### Resources
+
+[Remote Systems samples for non-Windows platforms](https://github.com/Microsoft/project-rome)  
+
 ## System requirements
 
 **Client:** Windows 10 Anniversary Update

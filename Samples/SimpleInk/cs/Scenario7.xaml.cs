@@ -25,17 +25,15 @@ namespace SDKTemplate
     /// </summary>
     public sealed partial class Scenario7 : Page
     {
-        private MainPage rootPage = MainPage.Current;
-
         InkPresenterRuler ruler;
 
         public Scenario7()
         {
             this.InitializeComponent();
 
-            InkCanvas.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Mouse | CoreInputDeviceTypes.Pen;
+            inkCanvas.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Mouse | CoreInputDeviceTypes.Pen;
 
-            ruler = new InkPresenterRuler(InkCanvas.InkPresenter);
+            ruler = new InkPresenterRuler(inkCanvas.InkPresenter);
 
             // Customize Ruler
             ruler.BackgroundColor = Windows.UI.Colors.PaleTurquoise;
@@ -45,7 +43,7 @@ namespace SDKTemplate
 
         private void InkToolbar_IsRulerButtonCheckedChanged(InkToolbar sender, object args)
         {
-            var rulerButton = (InkToolbarRulerButton)InkToolbar.GetToggleButton(InkToolbarToggle.Ruler);
+            var rulerButton = (InkToolbarRulerButton)inkToolbar.GetToggleButton(InkToolbarToggle.Ruler);
             BringIntoViewButton.IsEnabled = rulerButton.IsChecked.Value;
         }
 
@@ -53,8 +51,8 @@ namespace SDKTemplate
         {
             // Make the ink canvas larger than the window, so that we can demonstrate
             // scrolling and zooming.
-            InkCanvas.Width = Window.Current.Bounds.Width * 2;
-            InkCanvas.Height = Window.Current.Bounds.Height * 2;
+            inkCanvas.Width = Window.Current.Bounds.Width * 2;
+            inkCanvas.Height = Window.Current.Bounds.Height * 2;
         }
 
         void OnBringIntoView(object sender, RoutedEventArgs e)

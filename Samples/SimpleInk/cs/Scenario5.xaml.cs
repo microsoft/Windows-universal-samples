@@ -10,6 +10,7 @@
 //*********************************************************
 
 using Windows.Foundation;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -20,15 +21,12 @@ namespace SDKTemplate
     /// </summary>
     public sealed partial class Scenario5 : Page
     {
-
-        private MainPage rootPage = MainPage.Current;
-
         public Scenario5()
         {
             this.InitializeComponent();
 
             // Initialize the InkCanvas
-            inkCanvas.InkPresenter.InputDeviceTypes = Windows.UI.Core.CoreInputDeviceTypes.Mouse | Windows.UI.Core.CoreInputDeviceTypes.Pen | Windows.UI.Core.CoreInputDeviceTypes.Touch;
+            inkCanvas.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Mouse | CoreInputDeviceTypes.Pen | CoreInputDeviceTypes.Touch;
         }
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)

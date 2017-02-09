@@ -55,6 +55,12 @@ namespace CameraStarterKit
         private bool _isPreviewing;
         private bool _isRecording;
 
+        // UI state
+        private bool _isSuspending;
+        private bool _isActivePage;
+        private bool _isUIActive;
+        private Task _setupTask = Task.CompletedTask;
+
         // Information about the camera device
         private bool _mirroringPreview;
         private bool _externalCamera;
@@ -70,58 +76,60 @@ namespace CameraStarterKit
 
             // Do not cache the state of the UI when suspending/navigating
             NavigationCacheMode = NavigationCacheMode.Disabled;
-
-            // Useful to know when to initialize/clean up the camera
-            Application.Current.Suspending += Application_Suspending;
-            Application.Current.Resuming += Application_Resuming;
         }
 
-        private async void Application_Suspending(object sender, SuspendingEventArgs e)
+        private void Application_Suspending(object sender, SuspendingEventArgs e)
         {
-            // Handle global application events only if this page is active
-            if (Frame.CurrentSourcePageType == typeof(MainPage))
+            _isSuspending = false;
+
+            var deferral = e.SuspendingOperation.GetDeferral();
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.High, async () =>
             {
-                var deferral = e.SuspendingOperation.GetDeferral();
-
-                await CleanupCameraAsync();
-
-                await CleanupUiAsync();
-
+                await SetUpBasedOnStateAsync();
                 deferral.Complete();
-            }
+            });
         }
 
-        private async void Application_Resuming(object sender, object o)
+        private void Application_Resuming(object sender, object o)
         {
-            // Handle global application events only if this page is active
-            if (Frame.CurrentSourcePageType == typeof(MainPage))
-            {
-                await SetupUiAsync();
+            _isSuspending = false;
 
-                await InitializeCameraAsync();
-            }
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.High, async () =>
+            {
+                await SetUpBasedOnStateAsync();
+            });
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            await SetupUiAsync();
+            // Useful to know when to initialize/clean up the camera
+            Application.Current.Suspending += Application_Suspending;
+            Application.Current.Resuming += Application_Resuming;
+            Window.Current.VisibilityChanged += Window_VisibilityChanged;
 
-            await InitializeCameraAsync();
+            _isActivePage = true;
+            await SetUpBasedOnStateAsync();
         }
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             // Handling of this event is included for completenes, as it will only fire when navigating between pages and this sample only includes one page
+            Application.Current.Suspending -= Application_Suspending;
+            Application.Current.Resuming -= Application_Resuming;
+            Window.Current.VisibilityChanged -= Window_VisibilityChanged;
 
-            await CleanupCameraAsync();
-
-            await CleanupUiAsync();
+            _isActivePage = false;
+            await SetUpBasedOnStateAsync();
         }
 
         #endregion Constructor, lifecycle and navigation
 
 
         #region Event handlers
+        private async void Window_VisibilityChanged(object sender, VisibilityChangedEventArgs args)
+        {
+            await SetUpBasedOnStateAsync();
+        }
 
         /// <summary>
         /// In the event of the app being minimized this method handles media property change events. If the app receives a mute
@@ -482,6 +490,48 @@ namespace CameraStarterKit
 
 
         #region Helper functions
+
+        /// <summary>
+        /// Initialize or clean up the camera and our UI,
+        /// depending on the page state.
+        /// </summary>
+        /// <returns></returns>
+        private async Task SetUpBasedOnStateAsync()
+        {
+            // Avoid reentrancy: Wait until nobody else is in this function.
+            while (!_setupTask.IsCompleted)
+            {
+                await _setupTask;
+            }
+
+            // We want our UI to be active if
+            // * We are the current active page.
+            // * The window is visible.
+            // * The app is not suspending.
+            bool wantUIActive = _isActivePage && Window.Current.Visible && !_isSuspending;
+
+            if (_isUIActive != wantUIActive)
+            {
+                _isUIActive = wantUIActive;
+
+                Func<Task> setupAsync = async () =>
+                {
+                    if (wantUIActive)
+                    {
+                        await SetupUiAsync();
+                        await InitializeCameraAsync();
+                    }
+                    else
+                    {
+                        await CleanupCameraAsync();
+                        await CleanupUiAsync();
+                    }
+                };
+                _setupTask = setupAsync();
+            }
+
+            await _setupTask;
+        }
 
         /// <summary>
         /// Attempts to lock the page orientation, hide the StatusBar (on Phone) and registers event handlers for hardware buttons and orientation sensors

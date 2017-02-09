@@ -30,7 +30,7 @@
                 strokes that begin near the circle are snapped to the circumference of the circle.
             </TextBlock>
         </StackPanel>
-        <StackPanel x:Name="InkStackPanel" Grid.Row="1" VerticalAlignment="Stretch" Loaded="{x:Bind InkStackPanel_Loaded}">
+        <StackPanel x:Name="InkStackPanel" Grid.Row="1" VerticalAlignment="Stretch" Loaded="InkStackPanel_Loaded">
             <Grid x:Name="Output" Background="{ThemeResource SystemControlBackgroundChromeWhiteBrush}" Margin="0,0,0,10" >
                 <Path x:Name="InkCirclePath"
                   Stroke="Red"
@@ -39,7 +39,7 @@
                         <EllipseGeometry x:Name="InkCircle" Center="100,100" RadiusX="100" RadiusY="100" />
                     </Path.Data>
                 </Path>
-                <InkCanvas x:Name="InkCanvas"/>
+                <InkCanvas x:Name="inkCanvas"/>
             </Grid>
         </StackPanel>
     </Grid>

@@ -11,7 +11,7 @@
 //*********************************************************
 -->
 <Page
-    x:Class="BasicInput.Scenario5"
+    x:Class="SDKTemplate.Scenario5"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BasicInput"
