@@ -26,6 +26,9 @@ using BackgroundAudioShared;
 using Windows.Foundation;
 using BackgroundAudioShared.Messages;
 using Windows.Storage.Streams;
+using Windows.Foundation.Diagnostics;
+using System.Runtime.Serialization;
+using System.IO;
 
 /* This background task will start running the first time the
  * MediaPlayer singleton instance is accessed from foreground. When a new audio 
@@ -53,6 +56,7 @@ namespace BackgroundAudioTask
         private const string TrackIdKey = "trackid";
         private const string TitleKey = "title";
         private const string AlbumArtKey = "albumart";
+        private const string PlaylistFileName = "MyPlaylist.txt";
         private SystemMediaTransportControls smtc;
         private MediaPlaybackList playbackList = new MediaPlaybackList();
         private BackgroundTaskDeferral deferral; // Used to keep task alive
@@ -150,6 +154,7 @@ namespace BackgroundAudioTask
         {
             // You get some time here to save your state before process and resources are reclaimed
             Debug.WriteLine("MyBackgroundAudioTask " + sender.Task.TaskId + " Cancel Requested...");
+
             try
             {
                 // immediately set not running
@@ -242,7 +247,7 @@ namespace BackgroundAudioTask
                     bool result = backgroundTaskStarted.WaitOne(5000);
                     if (!result)
                         throw new Exception("Background Task didnt initialize in time");
-                    
+
                     StartPlayback();
                     break;
                 case SystemMediaTransportControlsButton.Pause:
@@ -275,7 +280,7 @@ namespace BackgroundAudioTask
         /// <summary>
         /// Start playlist and change UVC state
         /// </summary>
-        private void StartPlayback()
+        async private void StartPlayback()
         {
             try
             {
@@ -287,8 +292,21 @@ namespace BackgroundAudioTask
                     // If the task was cancelled we would have saved the current track and its position. We will try playback from there.
                     var currentTrackId = ApplicationSettingsHelper.ReadResetSettingsValue(ApplicationSettingsConstants.TrackId);
                     var currentTrackPosition = ApplicationSettingsHelper.ReadResetSettingsValue(ApplicationSettingsConstants.Position);
+
                     if (currentTrackId != null)
                     {
+                        if (playbackList.Items.Count == 0)
+                        {
+                            // We're being re-launched via the Universal Volume Control (UVC),
+                            // so we need to read in the last saved playlist.
+                            UpdatePlaylistMessage playlistMessage = await ReadPlaylist();
+
+                            if (null != playlistMessage)
+                            {
+                                CreatePlaybackList(playlistMessage.Songs);
+                            }
+                        }
+
                         // Find the index of the item by name
                         var index = playbackList.Items.ToList().FindIndex(item =>
                             GetTrackId(item).ToString() == (string)currentTrackId);
@@ -307,7 +325,7 @@ namespace BackgroundAudioTask
                             // Play from exact position otherwise
                             TypedEventHandler<MediaPlaybackList, CurrentMediaPlaybackItemChangedEventArgs> handler = null;
                             handler = (MediaPlaybackList list, CurrentMediaPlaybackItemChangedEventArgs args) =>
-                            {
+                            {     
                                 if (args.NewItem == playbackList.Items[index])
                                 {
                                     // Unsubscribe because this only had to run once for this item
@@ -326,6 +344,7 @@ namespace BackgroundAudioTask
 
                             // Switch to the track which will trigger an item changed event
                             Debug.WriteLine("StartPlayback: Switching to track " + index);
+                            
                             playbackList.MoveTo((uint)index);
                         }
                     }
@@ -475,6 +494,7 @@ namespace BackgroundAudioTask
             if(MessageService.TryParseMessage(e.Data, out updatePlaylistMessage))
             {
                 CreatePlaybackList(updatePlaylistMessage.Songs);
+                SavePlaylist(updatePlaylistMessage);
                 return;
             }
         }
@@ -507,6 +527,68 @@ namespace BackgroundAudioTask
 
             // Add handler for future playlist item changes
             playbackList.CurrentItemChanged += PlaybackList_CurrentItemChanged;
+        }
+
+        /// <summary>
+        /// Saves the given UpdatePlaylistMessage to Application Storage
+        /// </summary>
+        async void SavePlaylist(UpdatePlaylistMessage message)
+        {
+            Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            var builder = new System.Text.StringBuilder();
+
+            try
+            {
+                var writer = System.Xml.XmlWriter.Create(builder);
+
+                DataContractSerializer ser = new DataContractSerializer(typeof(UpdatePlaylistMessage));
+
+                ser.WriteObject(writer, message);
+                writer.Flush();
+
+                // For the sake of this sample, simply write to a local file with a fixed name
+                StorageFile playlist = await localFolder.CreateFileAsync(PlaylistFileName, CreationCollisionOption.ReplaceExisting);
+
+                await FileIO.WriteTextAsync(playlist, builder.ToString());
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Reads in a previously stored playlist
+        /// </summary>
+        async System.Threading.Tasks.Task<UpdatePlaylistMessage> ReadPlaylist()
+        {
+            UpdatePlaylistMessage message = null;
+
+            Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            DataContractSerializer ser = new DataContractSerializer(typeof(UpdatePlaylistMessage));
+
+            try
+            {
+                var playlist = await localFolder.TryGetItemAsync(PlaylistFileName);
+
+                if ((null != playlist) && (playlist.IsOfType(StorageItemTypes.File)))
+                {
+                    // re-create the message
+                    StorageFile playlistFile = (StorageFile)playlist;
+
+                    string playlistXml = await FileIO.ReadTextAsync(playlistFile);
+
+                    System.Xml.XmlReader reader = System.Xml.XmlReader.Create(new StringReader(playlistXml));
+
+                    message = (UpdatePlaylistMessage)ser.ReadObject(reader);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+
+            return message;
         }
         #endregion
     }

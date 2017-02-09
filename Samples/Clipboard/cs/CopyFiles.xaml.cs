@@ -29,15 +29,12 @@ namespace SDKTemplate
             this.Init();
         }
 
-        
         void Init()
         {
             CopyButton.Click += new RoutedEventHandler(CopyButton_Click);
             PasteButton.Click += new RoutedEventHandler(PasteButton_Click);
         }
 
-        
-        
         async void CopyButton_Click(object sender, RoutedEventArgs e)
         {
             OutputText.Text = "Storage Items: ";
@@ -78,7 +75,6 @@ namespace SDKTemplate
 
             // Get data package from clipboard
             var dataPackageView = Windows.ApplicationModel.DataTransfer.Clipboard.GetContent();
-
             if (dataPackageView.Contains(StandardDataFormats.StorageItems))
             {
                 IReadOnlyList<IStorageItem> storageItems = null;
@@ -146,6 +142,5 @@ namespace SDKTemplate
                 OutputText.Text = "StorageItems format is not available in clipboard";
             }
         }
-
-            }
+    }
 }

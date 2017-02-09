@@ -10,6 +10,7 @@
 '*********************************************************
 Imports System
 Imports System.Collections.Generic
+Imports Windows.UI.Core
 Imports Windows.UI.Xaml
 Imports Windows.UI.Xaml.Controls
 Imports Windows.UI.Xaml.Data
@@ -60,11 +61,22 @@ Namespace Global.SDKTemplate
         End Sub
 
         ''' <summary>
-        ''' Used to display messages to the user
+        ''' Display a message to the user.
+        ''' This method may be called from any thread.
         ''' </summary>
         ''' <param name="strMessage"></param>
         ''' <param name="type"></param>
         Public Sub NotifyUser(strMessage As String, type As NotifyType)
+            ''' If called from the UI thread, then update immediately.
+            ''' Otherwise, schedule a task on the UI thread to perform the update.
+            If Dispatcher.HasThreadAccess
+                UpdateStatus(strMessage, type)
+            Else
+                Dim task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Sub() UpdateStatus(strMessage, type))
+            End If
+        End Sub
+
+        Private Sub UpdateStatus(strMessage As String, type As NotifyType)
             Select Case type
                 Case NotifyType.StatusMessage
                     StatusBorder.Background = New SolidColorBrush(Windows.UI.Colors.Green)

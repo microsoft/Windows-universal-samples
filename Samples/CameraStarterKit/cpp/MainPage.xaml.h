@@ -45,6 +45,12 @@ namespace CameraStarterKit
         bool _isPreviewing;
         bool _isRecording;
 
+        // UI state
+        bool _isSuspending = false;
+        bool _isActivePage = false;
+        bool _isUIActive = false;
+        concurrency::task<void> _setupTask = concurrency::task_from_result();
+
         // Information about the camera device
         bool _externalCamera;
         bool _mirroringPreview;
@@ -59,6 +65,7 @@ namespace CameraStarterKit
         // Event tokens
         Windows::Foundation::EventRegistrationToken _applicationSuspendingEventToken;
         Windows::Foundation::EventRegistrationToken _applicationResumingEventToken;
+        Windows::Foundation::EventRegistrationToken _windowVisibilityChangedEventToken;
         Windows::Foundation::EventRegistrationToken _mediaControlPropChangedEventToken;
         Windows::Foundation::EventRegistrationToken _displayInformationEventToken;
         Windows::Foundation::EventRegistrationToken _recordLimitationExceededEventToken;
@@ -80,13 +87,13 @@ namespace CameraStarterKit
         Concurrency::task<Windows::Devices::Enumeration::DeviceInformation^> FindCameraDeviceByPanelAsync(Windows::Devices::Enumeration::Panel panel);
         Concurrency::task<void> ReencodeAndSavePhotoAsync(Windows::Storage::Streams::IRandomAccessStream^ stream, Windows::Storage::StorageFile^ file, Windows::Storage::FileProperties::PhotoOrientation photoOrientation);
         void UpdateCaptureControls();
+        Concurrency::task<void> SetUpBasedOnStateAsync();
         Concurrency::task<void> SetupUiAsync();
         Concurrency::task<void> CleanupUiAsync();
         void RegisterEventHandlers();
         void UnregisterEventHandlers();
         void WriteLine(Platform::String^ str);
         void WriteException(Platform::Exception^ ex);
-        Concurrency::task<void> EmptyTask();
 
         // Rotation helpers
         Windows::Devices::Sensors::SimpleOrientation GetCameraOrientation();
@@ -98,6 +105,7 @@ namespace CameraStarterKit
         // UI event handlers
         void Application_Suspending(Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e);
         void Application_Resuming(Object^ sender, Object^ args);
+        void Window_VisibilityChanged(Object^ sender, Windows::UI::Core::VisibilityChangedEventArgs^ e);
         void DisplayInformation_OrientationChanged(Windows::Graphics::Display::DisplayInformation^ sender, Object^ args);
         void PhotoButton_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void VideoButton_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e); 

@@ -50,7 +50,7 @@
     function visibilityChangeHandler() {
         // This is the event handler for VisibilityChanged events. You would register for these notifications
         // if handling sensor data when the app is not visible could cause unintended actions in the app.
-        if (document.msVisibilityState === "visible") {
+        if (document.visibilityState === "visible") {
             // Re-enable sensor input. No need to restore the desired reportInterval (it is restored for us upon app resume)
             pedometer.addEventListener("readingchanged", onReadingChanged);
         } else {

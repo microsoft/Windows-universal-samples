@@ -28,17 +28,11 @@ Namespace Global.SDKTemplate
             Me.Init()
         End Sub
 
-#Region " Scenario Specific Code "
-
         Sub Init()
             AddHandler CopyButton.Click, New RoutedEventHandler(AddressOf CopyButton_Click)
             AddHandler PasteButton.Click, New RoutedEventHandler(AddressOf PasteButton_Click)
             Description.NavigateToString(Me.htmlFragment)
         End Sub
-
-#End Region
-
-#Region " Button click "
 
         Sub CopyButton_Click(sender As Object, e As RoutedEventArgs)
             OutputText.Text = ""
@@ -98,16 +92,10 @@ Namespace Global.SDKTemplate
             End If
         End Sub
 
-#End Region
-
-#Region " private member variables "
         Private htmlFragment As String = "Use clipboard to copy and paste text in different formats, including plain text, and formatted text (HTML). <br />" & " To <b>copy</b>, add text formats to a <i>DataPackage</i>, and then place <i>DataPackage</i> to Clipboard.<br /> " & "To <b>paste</b>, get <i>DataPackageView</i> from clipboard, and retrieve the content of the desired text format from it.<br />" & "To handle local image files in the formatted text (such as the one below), use ResourceMap collection." & "<br /><img id=""scenario1LocalImage"" src=""" & imgSrc & """ /><br />" & "<i>DataPackage</i> class is also used to share or send content between applications. <br />" & "See the Share SDK sample for more information."
 
         Private Const imgSrc As String = "ms-appx-web:///assets/windows-sdk.png"
 
-#End Region
-
-#Region " helper functions "
         ' Note: this sample is not trying to resolve and render the HTML using resource map.
         ' Please refer to the Clipboard JavaScript sample for an example of how to use resource map
         ' for local images display within an HTML format. This sample will only demonstrate how to
@@ -131,6 +119,5 @@ Namespace Global.SDKTemplate
                 End If
             End If
         End Sub
-#End Region
     End Class
 End Namespace
