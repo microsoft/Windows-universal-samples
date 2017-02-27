@@ -74,6 +74,8 @@ namespace AudioCreation
 
         // 120 seconds of 48Khz stereo float audio samples (43.9MB byte array)
         byte[] byteBuffer = new byte[120 * 48000 * 2 * 4];
+
+        DeviceInformationCollection inputDevices;
         DeviceInformationCollection outputDevices;
 
         public Scenario7_RecordPlayback()
@@ -84,9 +86,7 @@ namespace AudioCreation
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             rootPage = MainPage.Current;
-            await PopulateDeviceList();
-
-            
+            await PopulateDeviceLists();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -402,7 +402,7 @@ namespace AudioCreation
             }
         }
 
-        private async Task PopulateDeviceList()
+        private async Task PopulateDeviceLists()
         {
             outputDevicesListBox.Items.Clear();
             outputDevices = await DeviceInformation.FindAllAsync(MediaDevice.GetAudioRenderSelector());
@@ -411,12 +411,20 @@ namespace AudioCreation
             {
                 outputDevicesListBox.Items.Add(device.Name);
             }
+
+            inputDevicesListBox.Items.Clear();
+            inputDevices = await DeviceInformation.FindAllAsync(MediaDevice.GetAudioCaptureSelector());
+            inputDevicesListBox.Items.Add("-- Pick input device --");
+            foreach (var device in inputDevices)
+            {
+                inputDevicesListBox.Items.Add(device.Name);
+            }
         }
 
         private async Task CreateAudioGraph()
         {
             AudioGraphSettings settings = new AudioGraphSettings(AudioRenderCategory.Media);
-            settings.QuantumSizeSelectionMode = QuantumSizeSelectionMode.LowestLatency;
+            settings.QuantumSizeSelectionMode = QuantumSizeSelectionMode.LowestLatency;            
             settings.PrimaryRenderDevice = outputDevices[outputDevicesListBox.SelectedIndex - 1];
 
             CreateAudioGraphResult result = await AudioGraph.CreateAsync(settings);
@@ -446,7 +454,10 @@ namespace AudioCreation
             outputDeviceContainer.Background = new SolidColorBrush(Colors.Green);
 
             // Create a device input node using the default audio input device
-            CreateAudioDeviceInputNodeResult deviceInputNodeResult = await graph.CreateDeviceInputNodeAsync(MediaCategory.Other);
+            CreateAudioDeviceInputNodeResult deviceInputNodeResult = await graph.CreateDeviceInputNodeAsync(
+                MediaCategory.Other,
+                graph.EncodingProperties,
+                inputDevices[inputDevicesListBox.SelectedIndex - 1]);
 
             if (deviceInputNodeResult.Status != AudioDeviceNodeCreationStatus.Success)
             {
@@ -493,7 +504,7 @@ namespace AudioCreation
             {
                 sender.Dispose();
                 // Re-query for devices
-                await PopulateDeviceList();
+                await PopulateDeviceLists();
                 // Reset UI
                 recordButton.IsEnabled = true;
                 recordButton.Content = "Record";
@@ -519,7 +530,7 @@ namespace AudioCreation
                     graph = null;
                 }
             }
-            else
+            else if (inputDevicesListBox.SelectedIndex != 0)
             {
                 createGraphButton.IsEnabled = true;
                 outputDevice.Foreground = new SolidColorBrush(Colors.White);
@@ -528,7 +539,24 @@ namespace AudioCreation
 
         private void inputDevicesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (inputDevicesListBox.SelectedIndex == 0)
+            {
+                createGraphButton.IsEnabled = false;
+                inputDevice.Foreground = new SolidColorBrush(Color.FromArgb(255, 110, 110, 110));
+                inputDeviceContainer.Background = new SolidColorBrush(Color.FromArgb(255, 74, 74, 74));
 
+                // Destroy graph
+                if (graph != null)
+                {
+                    graph.Dispose();
+                    graph = null;
+                }
+            }
+            else if (outputDevicesListBox.SelectedIndex != 0)
+            {
+                createGraphButton.IsEnabled = true;
+                inputDevice.Foreground = new SolidColorBrush(Colors.White);
+            }
         }
     }
 }
