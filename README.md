@@ -428,6 +428,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/HolographicSpatialMapping">Holographic spatial mapping</a></td>
   <td><a href="Samples/HolographicTagAlong">Tag-along hologram</a></td>
+  <td><a href="Samples/HolographicViewSwitcher">XAML & Direct3D View Switching</a></td>
  </tr>
 </table>
 

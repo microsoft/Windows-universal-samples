@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>8aa9f56b-617f-42f9-b6c6-f717266f182d</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="DirectX">
+      <UniqueIdentifier>{7851df1c-8024-416b-aebb-8c050bdc56b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XAML">
+      <UniqueIdentifier>{48c74ba8-0f14-46ea-bd60-85ecfb391891}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX\Common">
+      <UniqueIdentifier>9cdd3072-361c-4da0-9c71-9956882811ad</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX\Content">
+      <UniqueIdentifier>{464bf646-2519-442a-97a0-98cbf419e268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX\Content\Shaders">
+      <UniqueIdentifier>{6ea03680-420e-4e66-b3a9-dabf8cfbeef1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{2d3dcb02-800f-4d39-a005-4c87a8ba00a4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="AppView.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="HolographicViewSwitcherMain.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\CameraResources.cpp">
+      <Filter>DirectX\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DeviceResources.cpp">
+      <Filter>DirectX\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Content\DDSTextureLoader.cpp">
+      <Filter>DirectX\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="Content\QuadRenderer.cpp">
+      <Filter>DirectX\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="Content\SpatialInputHandler.cpp">
+      <Filter>DirectX\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleConfiguration.cpp">
+      <Filter>XAML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp">
+      <Filter>XAML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
+    <ClCompile Include="Scenario1_ViewSwitch.xaml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="AppView.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="HolographicViewSwitcherMain.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\StepTimer.h">
+      <Filter>DirectX\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\CameraResources.h">
+      <Filter>DirectX\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DeviceResources.h">
+      <Filter>DirectX\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DirectXHelper.h">
+      <Filter>DirectX\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Content\DDSTextureLoader.h">
+      <Filter>DirectX\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="Content\QuadRenderer.h">
+      <Filter>DirectX\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="Content\ShaderStructures.h">
+      <Filter>DirectX\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="Content\SpatialInputHandler.h">
+      <Filter>DirectX\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleConfiguration.h">
+      <Filter>XAML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h">
+      <Filter>XAML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
+    <ClInclude Include="Scenario1_ViewSwitch.xaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="HolographicViewSwitcher_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\Square310x310Logo.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\holoHello.dds">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\SplashScreen.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Content\VertexShader.hlsl">
+      <Filter>DirectX\Content\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Content\VPRTVertexShader.hlsl">
+      <Filter>DirectX\Content\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Content\GeometryShader.hlsl">
+      <Filter>DirectX\Content\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Content\PixelShader.hlsl">
+      <Filter>DirectX\Content\Shaders</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
+      <Filter>XAML</Filter>
+    </Page>
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+    <Page Include="Scenario1_ViewSwitch.xaml">
+      <Filter>XAML</Filter>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
+      <Filter>XAML</Filter>
+    </ApplicationDefinition>
+  </ItemGroup>
+</Project>
