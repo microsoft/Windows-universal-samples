@@ -21,28 +21,41 @@ using Windows.UI.Xaml.Media;
 
 namespace SDKTemplate
 {
-    public sealed partial class Scenario1 : Page
+    public sealed partial class Scenario2 : Page
     {
         private MainPage rootPage = MainPage.Current;
+        public List<SampleDataModel> AllItems = SampleDataModel.GetSampleData();
 
-        public Scenario1()
+        public Scenario2()
         {
             this.InitializeComponent();
         }
 
+        private SampleDataModel GetDataModelForCurrentListViewFlyout()
+        {
+            // Obtain the ListViewItem for which the user requested a context menu.
+            var listViewItem = SharedFlyout.Target;
+
+            // Get the data model for the ListViewItem.
+            return (SampleDataModel)ItemListView.ItemFromContainer(listViewItem);
+        }
+
         private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            rootPage.NotifyUser("Action: Open", NotifyType.StatusMessage);
+            SampleDataModel model = GetDataModelForCurrentListViewFlyout();
+            rootPage.NotifyUser($"Item: {model.Title}, Action: Open", NotifyType.StatusMessage);
         }
 
         private void PrintMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            rootPage.NotifyUser("Action: Print", NotifyType.StatusMessage);
+            SampleDataModel model = GetDataModelForCurrentListViewFlyout();
+            rootPage.NotifyUser($"Item: {model.Title}, Action: Print", NotifyType.StatusMessage);
         }
 
         private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            rootPage.NotifyUser("Action: Delete", NotifyType.StatusMessage);
+            SampleDataModel model = GetDataModelForCurrentListViewFlyout();
+            rootPage.NotifyUser($"Item: {model.Title}, Action: Delete", NotifyType.StatusMessage);
         }
     }
 }

@@ -160,7 +160,7 @@ void Scenario3::OnPenTypeChanged(Object^ sender, RoutedEventArgs^ e)
 
             // Set a 45 degree rotation on the pen tip
             double radians = 45.0 * M_PI / 180.0;
-            drawingAttributes->PenTipTransform = make_float3x2_rotation((float)radians, float2::zero());
+            drawingAttributes->PenTipTransform = make_float3x2_rotation((float)radians);
         }
         else if (value == "Pencil")
         {

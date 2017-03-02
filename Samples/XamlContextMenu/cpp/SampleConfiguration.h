@@ -23,7 +23,7 @@ namespace SDKTemplate
         {
             Platform::String^ get()
             {
-                return "Altimeter";
+                return "Resize app view";
             }
         }
 
@@ -34,8 +34,6 @@ namespace SDKTemplate
                 return scenariosInner;
             }
         }
-
-        static Concurrency::task<Windows::Devices::Sensors::Altimeter^> GetDefaultAltimeterAsync();
 
     private:
         static Platform::Array<Scenario>^ scenariosInner;

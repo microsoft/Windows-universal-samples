@@ -40,7 +40,7 @@ namespace SDKTemplate
             }
 
             inkDrawingAttributes.Size = new Size(strokeWidth, 2.0f * strokeWidth);
-            inkDrawingAttributes.PenTipTransform = System.Numerics.Matrix3x2.CreateRotation(45.0f);
+            inkDrawingAttributes.PenTipTransform = System.Numerics.Matrix3x2.CreateRotation((float)(Math.PI * 45 / 180));
 
             return inkDrawingAttributes;
         }

@@ -7,14 +7,14 @@
   IgnorableNamespaces="uap mp">
 
     <Identity
-      Name="Microsoft.SDKSamples.XamlContextMenu.CS"
+      Name="Microsoft.SDKSamples.XamlContextMenu.CPP"
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
-    <mp:PhoneIdentity PhoneProductId="54bef673-731a-4545-a520-7a28dc87b06c" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="347f5593-f2fe-48a1-b28b-bc0f23067ebb" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>XAML Context Menu C# Sample</DisplayName>
+        <DisplayName>Xaml Context Menu C++ Sample</DisplayName>
         <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
         <Logo>Assets\StoreLogo-sdk.png</Logo>
     </Properties>
@@ -32,8 +32,8 @@
           Executable="$targetnametoken$.exe"
           EntryPoint="ContextMenu.App">
             <uap:VisualElements
-              DisplayName="XAML Context Menu C# Sample"
-              Description="XAML Context Menu C# Sample"
+              DisplayName="Xaml Context Menu C++ Sample"
+              Description="Xaml Context Menu C++ Sample"
               Square150x150Logo="Assets\squareTile-sdk.png"
               Square44x44Logo="Assets\SmallTile-sdk.png"
               BackgroundColor="#00b2f0">

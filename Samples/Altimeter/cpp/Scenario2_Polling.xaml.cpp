@@ -19,6 +19,7 @@
 
 using namespace SDKTemplate;
 
+using namespace Concurrency;
 using namespace Platform;
 using namespace Windows::Devices::Sensors;
 using namespace Windows::Foundation;
@@ -30,26 +31,24 @@ using namespace Windows::UI::Xaml::Navigation;
 Scenario2_Polling::Scenario2_Polling() : rootPage(MainPage::Current)
 {
     InitializeComponent();
-
-    sensor = Altimeter::GetDefault();
-    if (nullptr == sensor)
-    {
-        rootPage->NotifyUser("No altimeter found", NotifyType::ErrorMessage);
-    }
 }
 
 void Scenario2_Polling::ScenarioGetData(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-    if (nullptr != sensor)
+    MainPage::GetDefaultAltimeterAsync().then([this](Altimeter^ result)
     {
-        AltimeterReading^ reading = sensor->GetCurrentReading();
-        if (nullptr != reading)
+        sensor = result;
+        if (nullptr != sensor)
         {
-            ScenarioOutput_M->Text = reading->AltitudeChangeInMeters.ToString();
+            AltimeterReading^ reading = sensor->GetCurrentReading();
+            if (nullptr != reading)
+            {
+                ScenarioOutput_M->Text = reading->AltitudeChangeInMeters.ToString();
+            }
         }
-    }
-    else
-    {
-        rootPage->NotifyUser("No altimeter found", NotifyType::ErrorMessage);
-    }
+        else
+        {
+            rootPage->NotifyUser("No altimeter found", NotifyType::ErrorMessage);
+        }
+    }, task_continuation_context::get_current_winrt_context());
 }

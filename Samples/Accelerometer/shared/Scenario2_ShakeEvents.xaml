@@ -22,7 +22,10 @@
         <StackPanel>
             <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
             <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" Text="Shake events"/>
-            <TextBlock TextWrapping="Wrap" Text="Registers an event listener for accelerometer shake events and displays the cumulative count of shake events."/>
+            <TextBlock TextWrapping="Wrap">
+                Registers an event listener for accelerometer shake events and displays the cumulative count of shake events.
+                Note that not all accelerometers report shake events.
+            </TextBlock>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <Button x:Name="ScenarioEnableButton" Content="Enable" Margin="0,0,10,0" Click="{x:Bind ScenarioEnable}" IsEnabled="False"/>
                 <Button x:Name="ScenarioDisableButton" Content="Disable" Margin="0,0,10,0" Click="{x:Bind ScenarioDisable}" IsEnabled="False"/>
