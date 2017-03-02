@@ -27,22 +27,11 @@ using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Navigation;
 
+using namespace Concurrency;
+
 Scenario1_DataEvents::Scenario1_DataEvents() : rootPage(MainPage::Current), desiredReportIntervalMs(0)
 {
     InitializeComponent();
-
-    sensor = Altimeter::GetDefault();
-    if (nullptr != sensor)
-    {
-        // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
-        // This value will be used later to activate the sensor.
-        uint32 minReportIntervalMs = sensor->MinimumReportInterval;
-        desiredReportIntervalMs = minReportIntervalMs > 1000 ? minReportIntervalMs : 1000;
-    }
-    else
-    {
-        rootPage->NotifyUser("No altimeter found", NotifyType::ErrorMessage);
-    }
 }
 
 /// <summary>
@@ -124,21 +113,29 @@ void Scenario1_DataEvents::ReadingChanged(Altimeter^ sender, AltimeterReadingCha
 
 void Scenario1_DataEvents::ScenarioEnable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-    if (nullptr != sensor)
+    ScenarioEnableButton->IsEnabled = false;
+    MainPage::GetDefaultAltimeterAsync().then([this](Altimeter^ result)
     {
-        // Establish the report interval
-        sensor->ReportInterval = desiredReportIntervalMs;
+        sensor = result;
+        if (nullptr != sensor)
+        {
+            // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
+            uint32 minReportIntervalMs = sensor->MinimumReportInterval;
+            desiredReportIntervalMs = minReportIntervalMs > 1000 ? minReportIntervalMs : 1000;
+            sensor->ReportInterval = desiredReportIntervalMs;
 
-        visibilityToken = Window::Current->VisibilityChanged::add(ref new WindowVisibilityChangedEventHandler(this, &Scenario1_DataEvents::VisibilityChanged));
-        readingToken = sensor->ReadingChanged::add(ref new TypedEventHandler<Altimeter^, AltimeterReadingChangedEventArgs^>(this, &Scenario1_DataEvents::ReadingChanged));
+            visibilityToken = Window::Current->VisibilityChanged::add(ref new WindowVisibilityChangedEventHandler(this, &Scenario1_DataEvents::VisibilityChanged));
+            readingToken = sensor->ReadingChanged::add(ref new TypedEventHandler<Altimeter^, AltimeterReadingChangedEventArgs^>(this, &Scenario1_DataEvents::ReadingChanged));
 
-        ScenarioEnableButton->IsEnabled = false;
-        ScenarioDisableButton->IsEnabled = true;
-    }
-    else
-    {
-        rootPage->NotifyUser("No Altimeter found", NotifyType::ErrorMessage);
-    }
+            ScenarioEnableButton->IsEnabled = false;
+            ScenarioDisableButton->IsEnabled = true;
+        }
+        else
+        {
+            ScenarioEnableButton->IsEnabled = true;
+            rootPage->NotifyUser("No Altimeter found", NotifyType::ErrorMessage);
+        }
+    }, task_continuation_context::get_current_winrt_context());
 }
 
 void Scenario1_DataEvents::ScenarioDisable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
