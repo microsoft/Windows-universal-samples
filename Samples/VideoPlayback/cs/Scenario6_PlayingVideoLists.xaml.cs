@@ -9,7 +9,9 @@
 //
 //*********************************************************
 
+using SDKTemplate.Logging;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Windows.Foundation;
 using Windows.Media.Core;
@@ -30,6 +32,9 @@ namespace SDKTemplate
         private MainPage rootPage = MainPage.Current;
         private MediaPlaybackList playbackList = new MediaPlaybackList();
         private MediaPlayer mp;
+        private MediaPlayerLogger mpLogger;
+        private MediaPlaybackListLogger mplLogger;
+        private List<MediaPlaybackItemLogger> mpiLoggerList = new List<MediaPlaybackItemLogger>();
 
         public Scenario6()
         {
@@ -39,16 +44,21 @@ namespace SDKTemplate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Create a static playback list
+            mplLogger = new MediaPlaybackListLogger(LoggerControl, playbackList);
             InitializePlaybackList();
 
             //Create the MediaPlayer:
             mp = new MediaPlayer();
+            mpLogger = new MediaPlayerLogger(LoggerControl, mp);
 
             // Subscribe to MediaPlayer PlaybackState changed events
             mp.PlaybackSession.PlaybackStateChanged += PlaybackSession_PlaybackStateChanged;
 
-            // Subscribe to list UI changes
-            playlistView.ItemClick += PlaylistView_ItemClick;
+            // Subscribe to MediaPlayer PlaybackRate changed events
+            mp.PlaybackSession.PlaybackRateChanged += PlaybackSession_PlaybackRateChanged;
+
+           // Subscribe to list UI changes
+           playlistView.ItemClick += PlaylistView_ItemClick;
 
             //Attach the player to the MediaPlayerElement:
             mediaPlayerElement.SetMediaPlayer(mp);
@@ -56,6 +66,7 @@ namespace SDKTemplate
             // Set list for playback
             mp.Source = playbackList;
         }
+
 
         void InitializePlaybackList()
         {
@@ -70,6 +81,7 @@ namespace SDKTemplate
             };
             playlistView.Items.Add(media);
             playbackList.Items.Add(media.MediaPlaybackItem);
+            mpiLoggerList.Add(new MediaPlaybackItemLogger(LoggerControl, media.MediaPlaybackItem));
 
             media = new MediaModel(rootPage.CaptionedMediaUri)
             {
@@ -78,6 +90,7 @@ namespace SDKTemplate
             };
             playlistView.Items.Add(media);
             playbackList.Items.Add(media.MediaPlaybackItem);
+            mpiLoggerList.Add(new MediaPlaybackItemLogger(LoggerControl, media.MediaPlaybackItem));
 
             media = new MediaModel(rootPage.SintelMediaUri)
             {
@@ -86,6 +99,7 @@ namespace SDKTemplate
             };
             playlistView.Items.Add(media);
             playbackList.Items.Add(media.MediaPlaybackItem);
+            mpiLoggerList.Add(new MediaPlaybackItemLogger(LoggerControl, media.MediaPlaybackItem));
 
             // Subscribe for changes
             playbackList.CurrentItemChanged += PlaybackList_CurrentItemChanged;
@@ -96,6 +110,14 @@ namespace SDKTemplate
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            foreach (var mpiLogger in mpiLoggerList)
+            {
+                mpiLogger.Dispose();
+            }
+            mpiLoggerList.Clear();
+            mpLogger?.Dispose();
+            mpLogger = null;
+
             MediaPlayerHelper.CleanUpMediaPlayerSource(mp);
             playbackList.Items.Clear();
             playlistView.Items.Clear();
@@ -103,6 +125,7 @@ namespace SDKTemplate
 
         private void PlaybackList_CurrentItemChanged(MediaPlaybackList sender, CurrentMediaPlaybackItemChangedEventArgs args)
         {
+            LoggerControl.Log($"Current item changed to index: {sender.CurrentItemIndex}");
             var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 // Synchronize our UI with the currently-playing item.
@@ -119,6 +142,8 @@ namespace SDKTemplate
         ///
         private async void PlaybackSession_PlaybackStateChanged(MediaPlaybackSession sender, object args)
         {
+            LoggerControl.Log($"Current playback state changed to: {sender.PlaybackState}");
+
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 var currentState = sender.PlaybackState;
@@ -134,7 +159,7 @@ namespace SDKTemplate
         private void PlaylistView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var item = e.ClickedItem as MediaModel;
-            Debug.WriteLine("Clicked item: " + item.Title);
+            LoggerControl.Log("Clicked item: " + item.Title);
 
             // Start the background task if it wasn't running
             playbackList.MoveTo((uint)playbackList.Items.IndexOf(item.MediaPlaybackItem));
@@ -203,6 +228,11 @@ namespace SDKTemplate
             {
                 button.Content = result.Label;
             }
+        }
+
+        private void PlaybackSession_PlaybackRateChanged(MediaPlaybackSession sender, object args)
+        {
+            LoggerControl.Log($"Current playback rate changed to: {sender.PlaybackRate}");
         }
 
         private void UpdateTransportControls(MediaPlaybackState state)

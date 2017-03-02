@@ -9,6 +9,7 @@
 //
 //*********************************************************
 
+using SDKTemplate.Logging;
 using System;
 using Windows.Foundation.Collections;
 using Windows.Media.Core;
@@ -24,6 +25,8 @@ namespace SDKTemplate
     public sealed partial class Scenario2 : Page
     {
         private MainPage rootPage = MainPage.Current;
+        private MediaPlaybackItemLogger mpiLogger;
+        private MediaSourceLogger msLogger;
 
         public Scenario2()
         {
@@ -34,13 +37,17 @@ namespace SDKTemplate
         {
             // Create the playback item
             var source = MediaSource.CreateFromUri(rootPage.CaptionedMediaUri);
+            msLogger = new MediaSourceLogger(LoggerControl, source);
             var playbackItem = new MediaPlaybackItem(source);
+            mpiLogger = new MediaPlaybackItemLogger(LoggerControl, playbackItem);
 
             // Turn on English captions by default
             playbackItem.TimedMetadataTracksChanged += (item, args) =>
             {
                 if (args.CollectionChange == CollectionChange.ItemInserted)
                 {
+                    LoggerControl.Log($"TimedMetadataTracksChanged, Number of tracks: {item.TimedMetadataTracks.Count}");
+
                     uint changedTrackIndex = args.Index;
                     TimedMetadataTrack changedTrack = playbackItem.TimedMetadataTracks[(int)changedTrackIndex];
 
@@ -53,10 +60,15 @@ namespace SDKTemplate
 
             // Set the source to begin playback of the item
             this.mediaPlayerElement.Source = playbackItem;
+            LoggerControl.Log($"Loaded: {rootPage.CaptionedMediaUri}");
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            msLogger?.Dispose();
+            msLogger = null;
+            mpiLogger?.Dispose();
+            mpiLogger = null;
             MediaPlayerHelper.CleanUpMediaPlayerSource(mediaPlayerElement.MediaPlayer);
         }
     }

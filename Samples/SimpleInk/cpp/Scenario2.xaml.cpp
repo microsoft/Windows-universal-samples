@@ -42,7 +42,7 @@ InkDrawingAttributes^ CalligraphicPen::CreateInkDrawingAttributesCore(Brush^ bru
     }
 
     inkDrawingAttributes->Size = Size((float)strokeWidth, 2.0f * (float)strokeWidth);
-    inkDrawingAttributes->PenTipTransform = make_float3x2_rotation((float)((M_PI * 45.0) / 180.0), float2::zero());
+    inkDrawingAttributes->PenTipTransform = make_float3x2_rotation((float)((M_PI * 45.0) / 180.0));
 
     return inkDrawingAttributes;
 }

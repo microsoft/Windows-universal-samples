@@ -7,12 +7,12 @@
     <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ContextMenuCS</RootNamespace>
-    <AssemblyName>ContextMenuCS</AssemblyName>
+    <RootNamespace>SDKTemplate</RootNamespace>
+    <AssemblyName>ContextMenu</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -95,7 +95,8 @@
       <Link>App.xaml.cs</Link>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="..\..\..\SharedContent\cs\MainPage.xaml.cs">
+      <Link>MainPage.xaml.cs</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
@@ -105,6 +106,12 @@
     <Compile Include="SampleData.cs" />
     <Compile Include="Scenario1.xaml.cs">
       <DependentUpon>Scenario1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario2.xaml.cs">
+      <DependentUpon>Scenario2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario3.xaml.cs">
+      <DependentUpon>Scenario3.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -118,11 +125,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
+    <Page Include="..\..\..\SharedContent\cs\MainPage.xaml">
+      <Link>MainPage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1.xaml">
+    <Page Include="..\shared\Scenario1.xaml">
+      <Link>Scenario1.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario2.xaml">
+      <Link>Scenario2.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario3.xaml">
+      <Link>Scenario3.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
