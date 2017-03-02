@@ -76,7 +76,7 @@ namespace FilePickerContracts
         {
             await BackgroundExecutionManager.RequestAccessAsync();
 
-            string backgroundTaskName = "CachedFileUpdaterTask";
+            string backgroundTaskName = "FilePickerContractsTasks";
             string backgroundTaskEntryPoint = typeof(FilePickerContractsTasks.UpdateFileTask).FullName;
 
             // Do nothing if the task is already registered.

@@ -11,20 +11,11 @@
             document.getElementById("scenario1Revoke").addEventListener("click", disableReadingChangedScenario, false);
             document.getElementById("scenario1Open").disabled = false;
             document.getElementById("scenario1Revoke").disabled = true;
-
-            altimeter = Windows.Devices.Sensors.Altimeter.getDefault();
-            if (altimeter) {
-                // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
-                // This value will be used later to activate the sensor.
-                var minReportIntervalMs = altimeter.minReportIntervalMs;
-                desiredReportIntervalMs = minReportIntervalMs > 1000 ? minReportIntervalMs : 1000;
-            } else {
-                WinJS.log && WinJS.log("No altimeter found", "sample", "error");
-            }
         },
         unload: function () {
             if (document.getElementById("scenario1Open").disabled) {
                 document.removeEventListener("visibilitychange", visibilityChangeHandler, false);
+
                 altimeter.removeEventListener("readingchanged", onDataChanged);
 
                 // Return the report interval to its default to release resources while the sensor is not in use
@@ -59,17 +50,21 @@
     }
 
     function enableReadingChangedScenario() {
-        if (altimeter) {
-            // Set the desiredReportIntervalMs to enable the sensor events
-            altimeter.desiredReportIntervalMs = desiredReportIntervalMs;
+        document.getElementById("scenario1Open").disabled = true;
+        SdkSample.getDefaultAltimeterAsync().then(function (result) {
+            altimeter = result;
+            if (altimeter) {
+                // Set the desiredReportIntervalMs to enable the sensor events
+                altimeter.desiredReportIntervalMs = desiredReportIntervalMs;
 
-            document.addEventListener("visibilitychange", visibilityChangeHandler, false);
-            altimeter.addEventListener("readingchanged", onDataChanged);
-            document.getElementById("scenario1Open").disabled = true;
-            document.getElementById("scenario1Revoke").disabled = false;
-        } else {
-            WinJS.log && WinJS.log("No altimeter found", "sample", "error");
-        }
+                document.addEventListener("visibilitychange", visibilityChangeHandler, false);
+                altimeter.addEventListener("readingchanged", onDataChanged);
+                document.getElementById("scenario1Revoke").disabled = false;
+            } else {
+                document.getElementById("scenario1Open").disabled = false;
+                WinJS.log && WinJS.log("No altimeter found", "sample", "error");
+            }
+        });
     }
 
     function disableReadingChangedScenario() {

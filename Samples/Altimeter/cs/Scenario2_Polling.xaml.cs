@@ -31,12 +31,6 @@ namespace SDKTemplate
         public Scenario2_Polling()
         {
             this.InitializeComponent();
-
-            sensor = Altimeter.GetDefault();
-            if (null == sensor)
-            {
-                rootPage.NotifyUser("No altimeter found", NotifyType.ErrorMessage);
-            }
         }
 
         /// <summary>
@@ -44,8 +38,9 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ScenarioGetData(object sender, RoutedEventArgs e)
+        private async void ScenarioGetData(object sender, RoutedEventArgs e)
         {
+            sensor = await MainPage.GetDefaultAltimeterAsync();
             if (null != sensor)
             {
                 AltimeterReading reading = sensor.GetCurrentReading();

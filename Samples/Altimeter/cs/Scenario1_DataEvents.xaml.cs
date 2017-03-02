@@ -32,19 +32,6 @@ namespace SDKTemplate
         public Scenario1_DataEvents()
         {
             this.InitializeComponent();
-
-            sensor = Altimeter.GetDefault();
-            if (null != sensor)
-            {
-                // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
-                // This value will be used later to activate the sensor.
-                uint minReportIntervalMs = sensor.MinimumReportInterval;
-                desiredReportIntervalMs = minReportIntervalMs > 1000 ? minReportIntervalMs : 1000;
-            }
-            else
-            {
-                rootPage.NotifyUser("No altimeter found", NotifyType.ErrorMessage);
-            }
         }
 
         /// <summary>
@@ -124,11 +111,15 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ScenarioEnable(object sender, RoutedEventArgs e)
+        private async void ScenarioEnable(object sender, RoutedEventArgs e)
         {
+            ScenarioEnableButton.IsEnabled = false;
+            sensor = await MainPage.GetDefaultAltimeterAsync();
             if (null != sensor)
             {
-                // Establish the report interval
+                // Set a report interval that is both suitable for the purposes of the app and supported by the sensor.
+                uint minReportIntervalMs = sensor.MinimumReportInterval;
+                desiredReportIntervalMs = minReportIntervalMs > 1000 ? minReportIntervalMs : 1000;
                 sensor.ReportInterval = desiredReportIntervalMs;
 
                 Window.Current.VisibilityChanged += new WindowVisibilityChangedEventHandler(VisibilityChanged);
@@ -139,6 +130,7 @@ namespace SDKTemplate
             }
             else
             {
+                ScenarioEnableButton.IsEnabled = true;
                 rootPage.NotifyUser("No altimeter found", NotifyType.ErrorMessage);
             }
         }
