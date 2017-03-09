@@ -25,7 +25,7 @@ namespace SDKTemplate
     {
         private MediaCapture _mediaCapture;
 
-        private MediaFrameReader[] _sourceReaders = new MediaFrameReader[3];
+        private List<MediaFrameReader> _sourceReaders = new List<MediaFrameReader>();
         private IReadOnlyDictionary<MediaFrameSourceKind, FrameRenderer> _frameRenderers;
        
         private int _groupSelectionIndex;
@@ -84,41 +84,26 @@ namespace SDKTemplate
         {
             await CleanupMediaCaptureAsync();
 
-            // Identify the color, depth, and infrared sources of each group,
-            // and keep only the groups that have at least one recognized source.
             var allGroups = await MediaFrameSourceGroup.FindAllAsync();
-            var eligibleGroups = allGroups.Select(g => new
-            {
-                Group = g,
 
-                // For each source kind, find the source which offers that kind of media frame,
-                // or null if there is no such source.
-                SourceInfos = new MediaFrameSourceInfo[]
-                {
-                    g.SourceInfos.FirstOrDefault(info => info.SourceKind == MediaFrameSourceKind.Color),
-                    g.SourceInfos.FirstOrDefault(info => info.SourceKind == MediaFrameSourceKind.Depth),
-                    g.SourceInfos.FirstOrDefault(info => info.SourceKind == MediaFrameSourceKind.Infrared),
-                }
-            }).Where(g => g.SourceInfos.Any(info => info != null)).ToList();
-
-            if (eligibleGroups.Count == 0)
+            if (allGroups.Count == 0)
             {
-                _logger.Log("No source group with color, depth or infrared found.");
+                _logger.Log("No source groups found.");
                 return;
             }
 
             // Pick next group in the array after each time the Next button is clicked.
-            _groupSelectionIndex = (_groupSelectionIndex + 1) % eligibleGroups.Count;
-            var selected = eligibleGroups[_groupSelectionIndex];
+            _groupSelectionIndex = (_groupSelectionIndex + 1) % allGroups.Count;
+            var selectedGroup = allGroups[_groupSelectionIndex];
 
-            _logger.Log($"Found {eligibleGroups.Count} groups and selecting index [{_groupSelectionIndex}]: {selected.Group.DisplayName}");
+            _logger.Log($"Found {allGroups.Count} groups and selecting index [{_groupSelectionIndex}]: {selectedGroup.DisplayName}");
 
             try
             {
                 // Initialize MediaCapture with selected group.
                 // This can raise an exception if the source no longer exists,
                 // or if the source could not be initialized.
-                await InitializeMediaCaptureAsync(selected.Group);
+                await InitializeMediaCaptureAsync(selectedGroup);
             }
             catch (Exception exception)
             {
@@ -128,36 +113,55 @@ namespace SDKTemplate
             }
 
             // Set up frame readers, register event handlers and start streaming.
-            for (int i = 0; i < selected.SourceInfos.Length; i++)
+            var startedKinds = new HashSet<MediaFrameSourceKind>();
+            foreach (MediaFrameSource source in _mediaCapture.FrameSources.Values)
             {
-                MediaFrameSourceInfo info = selected.SourceInfos[i];
-                if (info != null)
-                {
-                    // Access the initialized frame source by looking up the the ID of the source found above.
-                    // Verify that the Id is present, because it may have left the group while were were
-                    // busy deciding which group to use.
-                    MediaFrameSource frameSource = null;
-                    if (_mediaCapture.FrameSources.TryGetValue(info.Id, out frameSource))
-                    {
-                        MediaFrameReader frameReader = await _mediaCapture.CreateFrameReaderAsync(frameSource);
-                        frameReader.FrameArrived += FrameReader_FrameArrived;
+                MediaFrameSourceKind kind = source.Info.SourceKind;
 
-                        MediaFrameReaderStartStatus status = await frameReader.StartAsync();
-                        if (status != MediaFrameReaderStartStatus.Success)
-                        {
-                            _logger.Log($"Unable to start {info.SourceKind} reader. Error: {status}");
-                        }
-                    }
-                    else
+                // Ignore this source if we already have a source of this kind.
+                if (startedKinds.Contains(kind))
+                {
+                    continue;
+                }
+
+                // Look for a format which the FrameRenderer can render.
+                string requestedSubtype = null;
+                foreach (MediaFrameFormat format in source.SupportedFormats)
+                {
+                    requestedSubtype = FrameRenderer.GetSubtypeForFrameReader(kind, format);
+                    if (requestedSubtype != null)
                     {
-                        _logger.Log($"Unable to start {info.SourceKind} reader. Frame source not found");
+                        // Tell the source to use the format we can render.
+                        await source.SetFormatAsync(format);
+                        break;
                     }
+                }
+                if (requestedSubtype == null)
+                {
+                    // No acceptable format was found. Ignore this source.
+                    continue;
+                }
+
+                MediaFrameReader frameReader = await _mediaCapture.CreateFrameReaderAsync(source, requestedSubtype);
+
+                frameReader.FrameArrived += FrameReader_FrameArrived;
+                _sourceReaders.Add(frameReader);
+
+                MediaFrameReaderStartStatus status = await frameReader.StartAsync();
+                if (status == MediaFrameReaderStartStatus.Success)
+                {
+                    _logger.Log($"Started {kind} reader.");
+                    startedKinds.Add(kind);
                 }
                 else
                 {
-                    string frameKind = (i == 0 ? "Color" : i == 1 ? "Depth" : "Infrared");
-                    _logger.Log($"No {frameKind} source in group '{selected.Group.DisplayName}'.");
+                    _logger.Log($"Unable to start {kind} reader. Error: {status}");
                 }
+            }
+
+            if (startedKinds.Count == 0)
+            {
+                _logger.Log($"No eligible sources in {selectedGroup.DisplayName}.");
             }
         }
 
@@ -214,6 +218,7 @@ namespace SDKTemplate
                             reader.Dispose();
                         }
                     }
+                    _sourceReaders.Clear();
                 }
             }
         }

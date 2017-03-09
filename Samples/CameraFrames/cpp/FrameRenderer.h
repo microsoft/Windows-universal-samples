@@ -29,6 +29,15 @@ namespace SDKTemplate
         /// </summary>
         void ProcessFrame(Windows::Media::Capture::Frames::MediaFrameReference^ frame);
 
+        /// <summary>
+        /// Determines the subtype to request from the MediaFrameReader that will result in
+        /// a frame that can be rendered by ConvertToDisplayableImage.
+        /// </summary>
+        /// <returns>Subtype string to request, or null if subtype is not renderable.</returns>
+        static Platform::String^ GetSubtypeForFrameReader(
+            Windows::Media::Capture::Frames::MediaFrameSourceKind kind,
+            Windows::Media::Capture::Frames::MediaFrameFormat^ format);
+
     private: // Private static methods.
         /// <summary>
         /// Converts the input frame to BGRA8 premultiplied alpha format and returns the result.
@@ -36,7 +45,7 @@ namespace SDKTemplate
         /// </summary>
         static Windows::Graphics::Imaging::SoftwareBitmap^ ConvertToDisplayableImage(
             Windows::Media::Capture::Frames::VideoMediaFrame^ inputFrame);
-            
+
         /// <summary>
         /// Transforms pixels of inputBitmap to an output bitmap using the supplied pixel transformation method.
         /// Returns nullptr if translation fails.

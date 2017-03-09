@@ -118,7 +118,11 @@ void Scenario2_FindAvailableSourceGroups::SourceComboBox_SelectionChanged(Object
                 {
                     for (MediaFrameFormat^ format : m_source->SupportedFormats)
                     {
-                        formats->Append(ref new FrameFormatModel(format));
+                        // Limit ourselves to formats that we can render.
+                        if (FrameRenderer::GetSubtypeForFrameReader(m_source->Info->SourceKind, format) != nullptr)
+                        {
+                            formats->Append(ref new FrameFormatModel(format));
+                        }
                     }
                 }
 
@@ -169,15 +173,20 @@ task<void> Scenario2_FindAvailableSourceGroups::CreateReaderAsync()
             UpdateFrameSource();
             if (m_source != nullptr)
             {
-                return create_task(m_mediaCapture->CreateFrameReaderAsync(m_source))
-                    .then([this](MediaFrameReader^ reader)
+                // Ask the MediaFrameReader to use a subtype that we can render.
+                String^ requestedSubtype = FrameRenderer::GetSubtypeForFrameReader(m_source->Info->SourceKind, m_source->CurrentFormat);
+                if (requestedSubtype != nullptr)
                 {
-                    m_reader = reader;
-                    m_frameArrivedToken = reader->FrameArrived +=
-                        ref new TypedEventHandler<MediaFrameReader^, MediaFrameArrivedEventArgs^>(
-                            this, &Scenario2_FindAvailableSourceGroups::Reader_FrameArrived);
-                    m_logger->Log("Reader created on source: " + m_source->Info->Id);
-                });
+                    return create_task(m_mediaCapture->CreateFrameReaderAsync(m_source, requestedSubtype))
+                        .then([this](MediaFrameReader^ reader)
+                    {
+                        m_reader = reader;
+                        m_frameArrivedToken = reader->FrameArrived +=
+                            ref new TypedEventHandler<MediaFrameReader^, MediaFrameArrivedEventArgs^>(
+                                this, &Scenario2_FindAvailableSourceGroups::Reader_FrameArrived);
+                        m_logger->Log("Reader created on source: " + m_source->Info->Id);
+                    });
+                }
             }
         }
         return task_from_result();
