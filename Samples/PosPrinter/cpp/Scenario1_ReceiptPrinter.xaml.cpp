@@ -227,7 +227,7 @@ ReceiptPrintJob^ Scenario1_ReceiptPrinter::GetMerchantFooter(ClaimedPosPrinter ^
     merchantFooter->PrintLine("Signature");
     merchantFooter->PrintLine();
     merchantFooter->PrintLine("Merchant Copy");
-    merchantFooter->CutPaper();
+    LineFeedAndCutPaper(merchantFooter);
 
     return merchantFooter;
 }
@@ -240,9 +240,26 @@ ReceiptPrintJob^ Scenario1_ReceiptPrinter::GetCustomerFooter(ClaimedPosPrinter ^
     customerFooter->PrintLine("Tip");
     customerFooter->PrintLine();
     customerFooter->PrintLine("Customer Copy");
-    customerFooter->CutPaper();
+    LineFeedAndCutPaper(customerFooter);
 
     return customerFooter;
+}
+
+// Cut the paper after printing enough blank lines to clear the paper cutter.
+void Scenario1_ReceiptPrinter::LineFeedAndCutPaper(ReceiptPrintJob^ job)
+{
+    if (printer != nullptr && claimedPrinter != nullptr)
+    {
+        for (unsigned int n = 0; n < claimedPrinter->Receipt->LinesToPaperCut; n++)
+        {
+            job->PrintLine();
+        }
+
+        if (printer->Capabilities->Receipt->CanCutPaper)
+        {
+            job->CutPaper();
+        }
+    }
 }
 
 //

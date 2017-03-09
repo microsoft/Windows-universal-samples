@@ -22,6 +22,7 @@ using namespace Microsoft::WRL;
 using namespace Windows::Foundation;
 using namespace Windows::Graphics::Imaging;
 using namespace Windows::Media::Capture::Frames;
+using namespace Windows::Media::MediaProperties;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Media::Imaging;
 
@@ -236,6 +237,33 @@ void FrameRenderer::ProcessFrame(Windows::Media::Capture::Frames::MediaFrameRefe
     }
 }
 
+String^ FrameRenderer::GetSubtypeForFrameReader(MediaFrameSourceKind kind, MediaFrameFormat^ format)
+{
+    // Note that media encoding subtypes may differ in case.
+    // https://docs.microsoft.com/en-us/uwp/api/Windows.Media.MediaProperties.MediaEncodingSubtypes
+
+    String^ subtype = format->Subtype;
+    switch (kind)
+    {
+        // For color sources, we accept anything and request that it be converted to Bgra8.
+    case MediaFrameSourceKind::Color:
+        return MediaEncodingSubtypes::Bgra8;
+
+        // The only depth format we can render is D16.
+    case MediaFrameSourceKind::Depth:
+        return CompareStringOrdinal(subtype->Data(), -1, L"D16", -1, TRUE) == CSTR_EQUAL ? subtype : nullptr;
+
+        // The only infrared formats we can render are L8 and L16.
+    case MediaFrameSourceKind::Infrared:
+        return (CompareStringOrdinal(subtype->Data(), -1, L"L8", -1, TRUE) == CSTR_EQUAL ||
+            CompareStringOrdinal(subtype->Data(), -1, L"L16", -1, TRUE) == CSTR_EQUAL) ? subtype : nullptr;
+
+        // No other source kinds are supported by this class.
+    default:
+        return nullptr;
+    }
+}
+
 SoftwareBitmap^ FrameRenderer::ConvertToDisplayableImage(VideoMediaFrame^ inputFrame)
 {
     if (inputFrame == nullptr)
@@ -244,45 +272,66 @@ SoftwareBitmap^ FrameRenderer::ConvertToDisplayableImage(VideoMediaFrame^ inputF
     }
 
     SoftwareBitmap^ inputBitmap = inputFrame->SoftwareBitmap;
-    if ((inputBitmap->BitmapPixelFormat == BitmapPixelFormat::Bgra8) &&
-        (inputBitmap->BitmapAlphaMode == BitmapAlphaMode::Premultiplied))
-    {
-        // SoftwareBitmap is already in the correct format for an Image control, so just return a copy.
-        return SoftwareBitmap::Copy(inputBitmap);
-    }
-    else if ((inputBitmap->BitmapPixelFormat == BitmapPixelFormat::Gray16) && (inputFrame->FrameReference->SourceKind == MediaFrameSourceKind::Depth))
-    {
-        using namespace std::placeholders;
+    auto mode = inputBitmap->BitmapAlphaMode;
 
-        // Use a special pseudo color to render 16 bits depth frame.
-        // Since we must scale the output appropriately we use std::bind to
-        // create a function that takes the depth scale as input but also matches
-        // the required signature.
-        double depthScale = inputFrame->DepthMediaFrame->DepthFormat->DepthScaleInMeters;
-        return TransformBitmap(inputBitmap, std::bind(&PseudoColorForDepth, _1, _2, _3, static_cast<float>(depthScale)));
-    }
-    else if (inputBitmap->BitmapPixelFormat == BitmapPixelFormat::Gray16)
+    switch (inputFrame->FrameReference->SourceKind)
     {
-        // Use pseudo color to render 16 bits frames.
-        return TransformBitmap(inputBitmap, PseudoColorFor16BitInfrared);
-    }
-    else if (inputBitmap->BitmapPixelFormat == BitmapPixelFormat::Gray8)
-    {
-        // Use pseudo color to render 8 bits frames.
-        return TransformBitmap(inputBitmap, PseudoColorFor8BitInfrared);
-    }
-    else
-    {
-        try
+    case MediaFrameSourceKind::Color:
+        // XAML requires Bgra8 with premultiplied alpha.
+        // We requested Bgra8 from the MediaFrameReader, so all that's
+        // left is fixing the alpha channel if necessary.
+        if (inputBitmap->BitmapPixelFormat != BitmapPixelFormat::Bgra8)
         {
-            // Convert to Bgra8 Premultiplied SoftwareBitmap, so xaml can display in UI.
+            OutputDebugStringW(L"Color format should have been Bgra8.\r\n");
+        }
+        else if (inputBitmap->BitmapAlphaMode == BitmapAlphaMode::Premultiplied)
+        {
+            // Already in the correct format.
+            return SoftwareBitmap::Copy(inputBitmap);
+        }
+        else
+        {
+            // Convert to premultiplied alpha.
             return SoftwareBitmap::Convert(inputBitmap, BitmapPixelFormat::Bgra8, BitmapAlphaMode::Premultiplied);
         }
-        catch (InvalidArgumentException^ exception)
+        return nullptr;
+
+    case MediaFrameSourceKind::Depth:
+        // We requested D16 from the MediaFrameReader, so the frame should
+        // be in Gray16 format.
+
+        if (inputBitmap->BitmapPixelFormat == BitmapPixelFormat::Gray16)
         {
-            // Conversion of software bitmap format is not supported.  Drop this frame.
-            OutputDebugStringW(exception->Message->Data());
-            OutputDebugStringW(L"\r\n");
+            using namespace std::placeholders;
+
+            // Use a special pseudo color to render 16 bits depth frame.
+            // Since we must scale the output appropriately we use std::bind to
+            // create a function that takes the depth scale as input but also matches
+            // the required signature.
+            double depthScale = inputFrame->DepthMediaFrame->DepthFormat->DepthScaleInMeters;
+            return TransformBitmap(inputBitmap, std::bind(&PseudoColorForDepth, _1, _2, _3, static_cast<float>(depthScale)));
+        }
+        else
+        {
+            OutputDebugStringW(L"Depth format in unexpected format.\r\n");
+        }
+        return nullptr;
+
+    case MediaFrameSourceKind::Infrared:
+        // We requested L8 or L16 from the MediaFrameReader, so the frame should
+        // be in Gray8 or Gray16 format. 
+        switch (inputBitmap->BitmapPixelFormat)
+        {
+        case BitmapPixelFormat::Gray8:
+            // Use pseudo color to render 8 bits frames.
+            return TransformBitmap(inputBitmap, PseudoColorFor8BitInfrared);
+
+        case BitmapPixelFormat::Gray16:
+            // Use pseudo color to render 16 bits frames.
+            return TransformBitmap(inputBitmap, PseudoColorFor16BitInfrared);
+
+        default:
+            OutputDebugStringW(L"Infrared format should have been Gray8 or Gray16.\r\n");
             return nullptr;
         }
     }

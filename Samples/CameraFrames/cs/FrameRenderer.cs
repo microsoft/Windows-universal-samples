@@ -10,12 +10,14 @@
 //*********************************************************
 
 using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
 using Windows.Media.Capture.Frames;
+using Windows.Media.MediaProperties;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
@@ -84,6 +86,37 @@ namespace SDKTemplate
         private unsafe delegate void TransformScanline(int pixelWidth, byte* inputRowBytes, byte* outputRowBytes);
 
         /// <summary>
+        /// Determines the subtype to request from the MediaFrameReader that will result in
+        /// a frame that can be rendered by ConvertToDisplayableImage.
+        /// </summary>
+        /// <returns>Subtype string to request, or null if subtype is not renderable.</returns>
+        public static string GetSubtypeForFrameReader(MediaFrameSourceKind kind, MediaFrameFormat format)
+        {
+            // Note that media encoding subtypes may differ in case.
+            // https://docs.microsoft.com/en-us/uwp/api/Windows.Media.MediaProperties.MediaEncodingSubtypes
+            string subtype = format.Subtype;
+            switch (kind)
+            {
+                // For color sources, we accept anything and request that it be converted to Bgra8.
+                case MediaFrameSourceKind.Color:
+                    return MediaEncodingSubtypes.Bgra8;
+
+                // The only depth format we can render is D16.
+                case MediaFrameSourceKind.Depth:
+                    return String.Equals(subtype, "D16", StringComparison.OrdinalIgnoreCase) ? subtype : null;
+
+                // The only infrared formats we can render are L8 and L16.
+                case MediaFrameSourceKind.Infrared:
+                    return (String.Equals(subtype, "L8", StringComparison.OrdinalIgnoreCase) ||
+                        String.Equals(subtype, "L16", StringComparison.OrdinalIgnoreCase)) ? subtype : null;
+
+                // No other source kinds are supported by this class.
+                default:
+                    return null;
+            }
+        }
+
+        /// <summary>
         /// Converts a frame to a SoftwareBitmap of a valid format to display in an Image control.
         /// </summary>
         /// <param name="inputFrame">Frame to convert.</param>
@@ -94,44 +127,64 @@ namespace SDKTemplate
             {
                 if (inputBitmap != null)
                 {
-                    if (inputBitmap.BitmapPixelFormat == BitmapPixelFormat.Bgra8 &&
-                        inputBitmap.BitmapAlphaMode == BitmapAlphaMode.Premultiplied)
+                    switch (inputFrame.FrameReference.SourceKind)
                     {
-                        // SoftwareBitmap is already in the correct format for an Image control, so just return a copy.
-                        result = SoftwareBitmap.Copy(inputBitmap);
-                    }
-                    else if (inputBitmap.BitmapPixelFormat == BitmapPixelFormat.Gray16)
-                    {
-                        if (inputFrame.FrameReference.SourceKind == MediaFrameSourceKind.Depth)
-                        {
-                            // Use a special pseudo color to render 16 bits depth frame.
-                            var depthScale = (float)inputFrame.DepthMediaFrame.DepthFormat.DepthScaleInMeters;
-                            result = TransformBitmap(inputBitmap, (w, i, o) => PseudoColorHelper.PseudoColorForDepth(w, i, o, depthScale));
-                        }
-                        else
-                        {
-                            // Use pseudo color to render 16 bits frames.
-                            result = TransformBitmap(inputBitmap, PseudoColorHelper.PseudoColorFor16BitInfrared);
-                        }
-                    }
-                    else if (inputBitmap.BitmapPixelFormat == BitmapPixelFormat.Gray8)
-                    {
-                        // Use pseudo color to render 8 bits frames.
-                        result = TransformBitmap(inputBitmap, PseudoColorHelper.PseudoColorFor8BitInfrared);
-                    }
-                    else
-                    {
-                        try
-                        {
-                            // Convert to Bgra8 Premultiplied SoftwareBitmap, so xaml can display in UI.
-                            result = SoftwareBitmap.Convert(inputBitmap, BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
-                        }
-                        catch (ArgumentException exception)
-                        {
-                            // Conversion of software bitmap format is not supported.  Drop this frame.
-                            System.Diagnostics.Debug.WriteLine(exception.Message);
-                        }
+                        case MediaFrameSourceKind.Color:
+                            // XAML requires Bgra8 with premultiplied alpha.
+                            // We requested Bgra8 from the MediaFrameReader, so all that's
+                            // left is fixing the alpha channel if necessary.
+                            if (inputBitmap.BitmapPixelFormat != BitmapPixelFormat.Bgra8)
+                            {
+                                Debug.WriteLine("Color frame in unexpected format.");
+                            }
+                            else if (inputBitmap.BitmapAlphaMode == BitmapAlphaMode.Premultiplied)
+                            {
+                                // Already in the correct format.
+                                result = SoftwareBitmap.Copy(inputBitmap);
+                            }
+                            else
+                            {
+                                // Convert to premultiplied alpha.
+                                result = SoftwareBitmap.Convert(inputBitmap, BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
+                            }
+                            break;
 
+                        case MediaFrameSourceKind.Depth:
+                            // We requested D16 from the MediaFrameReader, so the frame should
+                            // be in Gray16 format.
+                            if (inputBitmap.BitmapPixelFormat == BitmapPixelFormat.Gray16)
+                            {
+                                // Use a special pseudo color to render 16 bits depth frame.
+                                var depthScale = (float)inputFrame.DepthMediaFrame.DepthFormat.DepthScaleInMeters;
+                                result = TransformBitmap(inputBitmap, (w, i, o) => PseudoColorHelper.PseudoColorForDepth(w, i, o, depthScale));
+                            }
+                            else
+                            {
+                                Debug.WriteLine("Depth frame in unexpected format.");
+                            }
+                            break;
+
+                        case MediaFrameSourceKind.Infrared:
+                            // We requested L8 or L16 from the MediaFrameReader, so the frame should
+                            // be in Gray8 or Gray16 format. 
+                            switch (inputBitmap.BitmapPixelFormat)
+                            {
+                                case BitmapPixelFormat.Gray16:
+                                    // Use pseudo color to render 16 bits frames.
+                                    result = TransformBitmap(inputBitmap, PseudoColorHelper.PseudoColorFor16BitInfrared);
+                                    break;
+
+                                case BitmapPixelFormat.Gray8:
+
+                                    // Use pseudo color to render 8 bits frames.
+                                    result = TransformBitmap(inputBitmap, PseudoColorHelper.PseudoColorFor8BitInfrared);
+                                    break;
+
+                                default:
+                                    Debug.WriteLine("Infrared frame in unexpected format.");
+                                    break;
+                            }
+                            break;
                     }
                 }
             }

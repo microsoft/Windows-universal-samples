@@ -20,35 +20,11 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="wideState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="641" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="myMap.Height" Value="500"/>
-                        <Setter Target="myMap.Width" Value="500"/>
-                        <Setter Target="description.Margin" Value="0,0,0,0"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="narrowState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="myMap.Height" Value="280"/>
-                        <Setter Target="myMap.Width" Value="280"/>
-                        <Setter Target="description.Margin" Value="28,0,0,0"/>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Margin="0,0,0,10">
                 <TextBlock x:Name="description" Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
@@ -62,8 +38,9 @@
                 <Button Content="Add MapIcon to center of Map" x:Name="mapIconAddButton" Click="mapIconAddButton_Click"/>
                 <Button Content="Add MapPolygon to center of Map" x:Name="mapPolygonAddButton" Click="mapPolygonAddButton_Click"/>
                 <Button Content="Add MapPolyline to center of Map" x:Name="mapPolylineAddButton" Click="mapPolylineAddButton_Click"/>
-                <maps:MapControl x:Name="myMap" HorizontalAlignment="Left" TransitFeaturesVisible="False" Loaded="MyMap_Loaded"/>
             </StackPanel>
+
+            <maps:MapControl x:Name="myMap" TransitFeaturesVisible="False" Loaded="MyMap_Loaded" Grid.Row="2"/>
         </Grid>
     </Grid>
 </Page>
