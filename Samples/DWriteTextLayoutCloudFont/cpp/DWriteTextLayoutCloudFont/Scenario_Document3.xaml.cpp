@@ -32,10 +32,8 @@ using Windows::Graphics::Display::DisplayInformation;
 
 
 Scenario_Document3::Scenario_Document3()
-    : rootPage(MainPage::Current)
+    : m_rootPage(MainPage::Current)
 {
-    m_eventToken.Value = 0;
-
     InitializeComponent();
 
     String^ text =
@@ -58,24 +56,29 @@ Scenario_Document3::Scenario_Document3()
     // Initialize FontDownloadListener, register the event handler, and initiate 
     // the download.
     FontDownloadListener::Initialize();
-    m_eventToken = FontDownloadListener::DownloadCompleted += ref new FontDownloadCompletedHandler(this, &Scenario_Document3::FontDownloadListener_DownloadCompleted);
+    m_downloadCompletedEventToken = FontDownloadListener::DownloadCompleted += ref new FontDownloadCompletedHandler(this, &Scenario_Document3::FontDownloadListener_DownloadCompleted);
     FontDownloadListener::BeginDownload();
 
     // Handle DPI.
-    DisplayInformation^ displayInformation = DisplayInformation::GetForCurrentView();
-    m_dpi = displayInformation->LogicalDpi;
-    displayInformation->DpiChanged += ref new TypedEventHandler<DisplayInformation^, Object^>([this](DisplayInformation^ sender, Object^)
-    {
-        this->HandleDpiChanged(sender);
-    });
+    m_displayInformation = DisplayInformation::GetForCurrentView();
+    m_dpi = m_displayInformation->LogicalDpi;
+    m_dpiChangedEventToken = m_displayInformation->DpiChanged += ref new TypedEventHandler<DisplayInformation^, Object^>(this, &Scenario_Document3::DisplayInformation_DpiChanged);
 
     // Handle window visibility change.
-    Window::Current->VisibilityChanged += ref new Windows::UI::Xaml::WindowVisibilityChangedEventHandler(this, &SDKTemplate::Scenario_Document3::OnVisibilityChanged);
+    m_visibilityChangedEventToken = Window::Current->VisibilityChanged += ref new WindowVisibilityChangedEventHandler(this, &Scenario_Document3::Window_VisibilityChanged);
 }
+
+void Scenario_Document3::OnNavigatedFrom(NavigationEventArgs^ e)
+{
+    FontDownloadListener::DownloadCompleted -= m_downloadCompletedEventToken;
+    m_displayInformation->DpiChanged -= m_dpiChangedEventToken;
+    Window::Current->VisibilityChanged -= m_visibilityChangedEventToken;
+}
+
 
 // Event handlers:
 
-void Scenario_Document3::TextLayoutFrame_SizeChanged(Platform::Object^ sender, Windows::UI::Xaml::SizeChangedEventArgs^ e)
+void Scenario_Document3::TextLayoutFrame_SizeChanged(Object^ sender, SizeChangedEventArgs^ e)
 {
     // Get the current available width and update the TextLayout if different.
     // The available width will be the actual width less the left and right padding.
@@ -97,15 +100,6 @@ void Scenario_Document3::TextLayoutFrame_SizeChanged(Platform::Object^ sender, W
 }
 
 
-void Scenario_Document3::OnNavigatedFrom(NavigationEventArgs^ e)
-{
-    if (m_eventToken.Value != 0)
-    {
-        FontDownloadListener::DownloadCompleted -= m_eventToken;
-    }
-}
-
-
 void Scenario_Document3::FontDownloadListener_DownloadCompleted()
 {
     // DownloadCompleted is called from a worker thread, so schedule work
@@ -117,11 +111,22 @@ void Scenario_Document3::FontDownloadListener_DownloadCompleted()
 }
 
 
-void Scenario_Document3::HandleDpiChanged(DisplayInformation^ displayInformation)
+void Scenario_Document3::DisplayInformation_DpiChanged(DisplayInformation^ displayInformation, Object^ e)
 {
     m_dpi = displayInformation->LogicalDpi;
     PresentTextLayout();
 }
+
+
+void Scenario_Document3::Window_VisibilityChanged(Object^ sender, Windows::UI::Core::VisibilityChangedEventArgs^ e)
+{
+    // Re-create the SurfaceImageSource if the window has just become visible.
+    if (e->Visible)
+    {
+        PresentTextLayout();
+    }
+}
+
 
 
 // Private helper methods:
@@ -150,6 +155,8 @@ void Scenario_Document3::UpdateTextLayout()
 
     // Update the status bar to show what fonts have actually been used.
     UpdateStatus();
+
+    m_layoutUpdateInProgress = false;
 }
 
 
@@ -172,15 +179,5 @@ void Scenario_Document3::UpdateStatus()
     NotifyType statusType = (fontsUsed == m_downloadableFontName) ? NotifyType::StatusMessage : NotifyType::ErrorMessage;
 
     // Now update the status.
-    rootPage->NotifyUser("Fonts actually used: " + fontsUsed, statusType);
-}
-
-
-void Scenario_Document3::OnVisibilityChanged(Platform::Object ^sender, Windows::UI::Core::VisibilityChangedEventArgs ^e)
-{
-    // Re-create the SurfaceImageSource if the window has just become visible.
-    if (e->Visible)
-    {
-        PresentTextLayout();
-    }
+    m_rootPage->NotifyUser("Fonts actually used: " + fontsUsed, statusType);
 }
