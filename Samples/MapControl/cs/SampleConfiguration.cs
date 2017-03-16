@@ -28,7 +28,8 @@ namespace SDKTemplate
             new Scenario() { Title="Showing 3D locations in the MapControl", ClassType=typeof(Scenario4)},
             new Scenario() { Title="Showing Streetside experience within the MapControl", ClassType=typeof(Scenario5)},
             new Scenario() { Title= "Launching Maps using URI Schemes", ClassType=typeof(Scenario6)},
-            new Scenario() { Title= "Displaying points of interest with clustering", ClassType=typeof(Scenario7)}
+            new Scenario() { Title= "Displaying points of interest with clustering", ClassType=typeof(Scenario7)},
+            new Scenario() { Title= "Find and download Offline Maps", ClassType=typeof(Scenario8)},
         };
 
         public static readonly Geopoint SeattleGeopoint = new Geopoint(new BasicGeoposition() { Latitude = 47.604, Longitude = -122.329 });

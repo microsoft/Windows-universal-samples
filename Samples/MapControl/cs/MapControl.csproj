@@ -11,8 +11,8 @@
     <AssemblyName>MapControlSample</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.15052.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15042.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -88,6 +88,9 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage10.jpg">
+      <Link>Assets\billboard.jpg</Link>
+    </Content>
     <Content Include="..\shared\places.txt">
       <Link>places.txt</Link>
     </Content>
@@ -126,6 +129,9 @@
     </Compile>
     <Compile Include="Scenario7.xaml.cs">
       <DependentUpon>Scenario7.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario8.xaml.cs">
+      <DependentUpon>Scenario8.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +187,11 @@
     </Page>
     <Page Include="..\shared\Scenario7.xaml">
       <Link>Scenario7.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\shared\Scenario8.xaml">
+      <Link>Scenario8.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

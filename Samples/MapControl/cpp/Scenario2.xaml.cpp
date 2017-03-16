@@ -24,7 +24,9 @@ using namespace Windows::UI::Xaml::Controls::Maps;
 Scenario2::Scenario2()
 {
     InitializeComponent();
+
     mapIconStreamReference = RandomAccessStreamReference::CreateFromUri(ref new Uri("ms-appx:///Assets/MapPin.png"));
+    mapBillboardStreamReference = RandomAccessStreamReference::CreateFromUri(ref new Uri("ms-appx:///Assets/billboard.jpg"));
 }
 
 void Scenario2::MyMap_Loaded(Object^ sender, RoutedEventArgs^ e)
@@ -44,6 +46,15 @@ void Scenario2::mapIconAddButton_Click(Object^ sender, RoutedEventArgs^ e)
     myMap->MapElements->Append(mapIcon);
 }
 
+void Scenario2::mapBillboardAddButton_Click(Object^ sender, RoutedEventArgs^ e)
+{
+    MapBillboard^ mapBillboard = ref new MapBillboard(myMap->ActualCamera);
+    mapBillboard->Location = myMap->Center;
+    mapBillboard->NormalizedAnchorPoint = Point(0.5, 1.0);
+    mapBillboard->Image = mapBillboardStreamReference;
+    myMap->MapElements->Append(mapBillboard);
+}
+
 void Scenario2::mapPolygonAddButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
     double centerLatitude = myMap->Center->Position.Latitude;
@@ -55,7 +66,7 @@ void Scenario2::mapPolygonAddButton_Click(Object^ sender, RoutedEventArgs^ e)
     list->Append({ centerLatitude - 0.0005, centerLongitude - 0.001 });
     list->Append({ centerLatitude - 0.0005, centerLongitude + 0.001 });
     list->Append({ centerLatitude + 0.0005, centerLongitude + 0.001 });
-    
+
     mapPolygon->Path = ref new Geopath(list);
     mapPolygon->ZIndex = 1;
     mapPolygon->FillColor = Windows::UI::Colors::Red;

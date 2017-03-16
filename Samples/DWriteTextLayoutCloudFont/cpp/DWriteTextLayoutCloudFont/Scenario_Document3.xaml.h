@@ -25,29 +25,33 @@ namespace SDKTemplate
     {
     public:
         Scenario_Document3();
-        void HandleDpiChanged(DisplayInformation^ displayInformation);
 
     protected:
         virtual void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 
     private:
-        MainPage^                                       rootPage;
+        MainPage^                                       m_rootPage;
         TextLayout^                                     m_textLayout;
         TextLayoutImageSource^                          m_textLayoutImageSource;
         FontDownloadListener^                           m_fontDownloadListener;
-        Windows::Foundation::EventRegistrationToken     m_eventToken;
         Windows::UI::Color                              m_textColor;
         Windows::UI::Color                              m_textBackgroundColor;
         Platform::String^                               m_downloadableFontName;
         bool                                            m_layoutUpdateInProgress = false;
+        Windows::Graphics::Display::DisplayInformation^ m_displayInformation;
         float                                           m_dpi = 96.0f;
 
-        void TextLayoutFrame_SizeChanged(Platform::Object^ sender, Windows::UI::Xaml::SizeChangedEventArgs^ e);
-        void FontDownloadListener_DownloadCompleted();
+        Windows::Foundation::EventRegistrationToken     m_downloadCompletedEventToken{};
+        Windows::Foundation::EventRegistrationToken     m_dpiChangedEventToken{};
+        Windows::Foundation::EventRegistrationToken     m_visibilityChangedEventToken{};
+
         void RequestTextLayoutUpdate();
         void UpdateTextLayout();
         void PresentTextLayout();
         void UpdateStatus();
-        void OnVisibilityChanged(Platform::Object ^sender, Windows::UI::Core::VisibilityChangedEventArgs ^e);
+        void DisplayInformation_DpiChanged(DisplayInformation^ sender, Object^ e);
+        void FontDownloadListener_DownloadCompleted();
+        void TextLayoutFrame_SizeChanged(Platform::Object^ sender, Windows::UI::Xaml::SizeChangedEventArgs^ e);
+        void Window_VisibilityChanged(Platform::Object^ sender, Windows::UI::Core::VisibilityChangedEventArgs^ e);
     };
 }

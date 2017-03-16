@@ -25,6 +25,7 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Showing Streetside experience within the MapControl", "SDKTemplate.Scenario5" },
     { "Launching Maps using URI Schemes", "SDKTemplate.Scenario6" },
     { "Displaying points of interest with clustering", "SDKTemplate.Scenario7" },
+    { "Find and download Offline Maps", "SDKTemplate.Scenario8" },
 };
 
 Geopoint^ MainPage::SeattleGeopoint = ref new Geopoint({ 47.604, -122.329 });
