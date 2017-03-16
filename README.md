@@ -427,6 +427,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/HolographicSpatialMapping">Holographic spatial mapping</a></td>
+  <td><a href="Samples/HolographicVoiceInput">Holographic voice input</a></td>
   <td><a href="Samples/HolographicTagAlong">Tag-along hologram</a></td>
  </tr>
 </table>

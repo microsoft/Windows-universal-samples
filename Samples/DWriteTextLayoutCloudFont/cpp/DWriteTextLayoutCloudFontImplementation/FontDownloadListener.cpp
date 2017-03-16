@@ -136,7 +136,8 @@ FontDownloadListener::FontDownloadListener()
     //
     // In general, if your app has a download queue that's shared between 
     // different objects that can independently call BeginDownload, you should 
-    // always register a global listener. 
+    // always register a listener so that any of your objects that may need to
+    // respond will see all DownloadCompleted events. 
     //
     // This does create the possibility that an object could get multiple 
     // DownloadCompleted calls while it only called BeginDownload once, or that 
