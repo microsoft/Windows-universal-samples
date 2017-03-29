@@ -5,7 +5,7 @@
 
 # Media transport controls sample
 
-Shows how to create customized media transport controls for the [MediaElement control](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.mediaelement.aspx) 
+Shows how to create customized media transport controls for the [MediaPlayerElement control](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.mediaplayerelement.aspx) 
 in your XAML Windows App.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
@@ -37,7 +37,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 ### Reference
 
 [Media Transport Controls](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.mediatransportcontrols.aspx)  
-[MediaElement class](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.mediaelement.aspx)  
+[MediaPlayerElement class](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.mediaplayerelement.aspx)  
 
 ## System requirements
 
