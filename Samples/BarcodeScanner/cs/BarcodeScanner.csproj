@@ -96,6 +96,9 @@
     <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\DeviceHelpers.cs">
+      <Link>DeviceHelpers.cs</Link>
+    </Compile>
     <Compile Include="SampleConfiguration.cs" />
     <Compile Include="Scenario1_BasicFunctionality.xaml.cs">
       <DependentUpon>Scenario1_BasicFunctionality.xaml</DependentUpon>

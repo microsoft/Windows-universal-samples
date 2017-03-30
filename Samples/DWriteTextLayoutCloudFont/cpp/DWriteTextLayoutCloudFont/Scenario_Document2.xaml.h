@@ -13,10 +13,8 @@
 
 #include "Scenario_Document2.g.h"
 #include "MainPage.xaml.h"
+#include "DocumentPresenter.h"
 
-using namespace DWriteTextLayoutCloudFontImplementation;
-
-using Windows::Graphics::Display::DisplayInformation;
 
 namespace SDKTemplate
 {
@@ -30,28 +28,8 @@ namespace SDKTemplate
         virtual void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 
     private:
-        MainPage^                                       m_rootPage;
-        TextLayout^                                     m_textLayout;
-        TextLayoutImageSource^                          m_textLayoutImageSource;
-        FontDownloadListener^                           m_fontDownloadListener;
-        Windows::UI::Color                              m_textColor;
-        Windows::UI::Color                              m_textBackgroundColor;
-        Platform::String^                               m_downloadableFontName;
-        bool                                            m_layoutUpdateInProgress = false;
-        Windows::Graphics::Display::DisplayInformation^ m_displayInformation;
-        float                                           m_dpi = 96.0f;
+        DocumentPresenter^                              m_documentPresenter;
 
-        Windows::Foundation::EventRegistrationToken     m_downloadCompletedEventToken{};
-        Windows::Foundation::EventRegistrationToken     m_dpiChangedEventToken{};
-        Windows::Foundation::EventRegistrationToken     m_visibilityChangedEventToken{};
-
-        void RequestTextLayoutUpdate();
-        void UpdateTextLayout();
-        void PresentTextLayout();
-        void UpdateStatus();
-        void DisplayInformation_DpiChanged(DisplayInformation^ sender, Object^ e);
-        void FontDownloadListener_DownloadCompleted();
         void TextLayoutFrame_SizeChanged(Platform::Object^ sender, Windows::UI::Xaml::SizeChangedEventArgs^ e);
-        void Window_VisibilityChanged(Platform::Object^ sender, Windows::UI::Core::VisibilityChangedEventArgs^ e);
     };
 }
