@@ -13,10 +13,21 @@
 #include "MainPage.xaml.h"
 #include "SampleConfiguration.h"
 
+using namespace Concurrency;
+using namespace Platform;
 using namespace SDKTemplate;
+using namespace Windows::Devices::Enumeration;
+using namespace Windows::Devices::PointOfService;
+using namespace Windows::Foundation;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
     { "DataReceived Event", "SDKTemplate.Scenario1_BasicFunctionality" },
     { "Release/Retain Functionality", "SDKTemplate.Scenario2_MultipleScanners" },
 };
+
+task<BarcodeScanner^> DeviceHelpers::GetFirstBarcodeScannerAsync()
+{
+    return DeviceHelpers::GetFirstDeviceAsync(BarcodeScanner::GetDeviceSelector(),
+        [](String^ id) { return create_task(BarcodeScanner::FromIdAsync(id)); });
+}
