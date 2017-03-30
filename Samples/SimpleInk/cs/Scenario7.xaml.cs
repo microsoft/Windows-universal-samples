@@ -36,12 +36,18 @@ namespace SDKTemplate
             ruler.BackgroundColor = Windows.UI.Colors.PaleTurquoise;
             ruler.ForegroundColor = Windows.UI.Colors.MidnightBlue;
             ruler.Length = 800;
+            ruler.AreTickMarksVisible = false;
+            ruler.IsCompassVisible = false;
 
             // Customize the protractor
             var protractor = new InkPresenterProtractor(inkCanvas.InkPresenter);
             protractor.BackgroundColor = Windows.UI.Colors.Bisque;
             protractor.ForegroundColor = Windows.UI.Colors.DarkGreen;
             protractor.AccentColor = Windows.UI.Colors.Firebrick;
+            protractor.AreRaysVisible = false;
+            protractor.AreTickMarksVisible = false;
+            protractor.IsAngleReadoutVisible = false;
+            protractor.IsCenterMarkerVisible = false;
         }
 
         private void InkToolbar_IsStencilButtonCheckedChanged(InkToolbar sender, InkToolbarIsStencilButtonCheckedChangedEventArgs args)

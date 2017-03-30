@@ -28,6 +28,7 @@
     <ClCompile Include="Scenario6.xaml.cpp" />
     <ClCompile Include="Scenario7.xaml.cpp" />
     <ClCompile Include="Scenario8.xaml.cpp" />
+    <ClCompile Include="Scenario9.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -42,6 +43,7 @@
     <ClInclude Include="Scenario6.xaml.h" />
     <ClInclude Include="Scenario7.xaml.h" />
     <ClInclude Include="Scenario8.xaml.h" />
+    <ClInclude Include="Scenario9.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -59,6 +61,7 @@
     <Page Include="..\shared\Scenario6.xaml" />
     <Page Include="..\shared\Scenario7.xaml" />
     <Page Include="..\shared\Scenario8.xaml" />
+    <Page Include="..\shared\Scenario9.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">

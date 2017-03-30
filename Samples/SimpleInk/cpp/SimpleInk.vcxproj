@@ -8,8 +8,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.15021.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.15021.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.15063.0</WindowsTargetPlatformMinVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <ItemGroup Label="ProjectConfigurations">
@@ -169,6 +169,15 @@
     <ClInclude Include="Scenario9.xaml.h">
       <DependentUpon>..\shared\Scenario9.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario10.xaml.h">
+      <DependentUpon>..\shared\Scenario10.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario11.xaml.h">
+      <DependentUpon>..\shared\Scenario11.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario12.xaml.h">
+      <DependentUpon>..\shared\Scenario12.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
@@ -189,6 +198,9 @@
     <Page Include="..\shared\Scenario7.xaml" />
     <Page Include="..\shared\Scenario8.xaml" />
     <Page Include="..\shared\Scenario9.xaml" />
+    <Page Include="..\shared\Scenario10.xaml" />
+    <Page Include="..\shared\Scenario11.xaml" />
+    <Page Include="..\shared\Scenario12.xaml" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -239,8 +251,23 @@
     <ClCompile Include="Scenario9.xaml.cpp">
       <DependentUpon>..\shared\Scenario9.xaml</DependentUpon>
     </ClCompile>
+    <ClCompile Include="Scenario10.xaml.cpp">
+      <DependentUpon>..\shared\Scenario10.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario11.xaml.cpp">
+      <DependentUpon>..\shared\Scenario11.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario12.xaml.cpp">
+      <DependentUpon>..\shared\Scenario12.xaml</DependentUpon>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\shared\ButtonIconFill.png">
+      <Link>Assets\ButtonIconFill.png</Link>
+    </Image>
+    <Image Include="..\shared\ButtonIconOutline.png">
+      <Link>Assets\ButtonIconOutline.png</Link>
+    </Image>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Image>

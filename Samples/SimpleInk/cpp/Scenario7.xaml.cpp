@@ -40,12 +40,18 @@ Scenario7::Scenario7()
     ruler->BackgroundColor = Colors::PaleTurquoise;
     ruler->ForegroundColor = Colors::MidnightBlue;
     ruler->Length = 800;
+    ruler->AreTickMarksVisible = false;
+    ruler->IsCompassVisible = false;
 
     // Customize the protractor
     auto protractor = ref new InkPresenterProtractor(inkCanvas->InkPresenter);
     protractor->BackgroundColor = Colors::Bisque;
     protractor->ForegroundColor = Colors::DarkGreen;
     protractor->AccentColor = Colors::Firebrick;
+    protractor->AreRaysVisible = false;
+    protractor->AreTickMarksVisible = false;
+    protractor->IsAngleReadoutVisible = false;
+    protractor->IsCenterMarkerVisible = false;
 }
 
 void Scenario7::InkToolbar_IsStencilButtonCheckedChanged(InkToolbar^ sender, InkToolbarIsStencilButtonCheckedChangedEventArgs^ args)

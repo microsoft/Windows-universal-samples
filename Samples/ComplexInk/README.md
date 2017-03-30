@@ -19,6 +19,7 @@ Specifically, this sample covers using the [Windows.UI.Input.Inking](http://msdn
 -   Render ink strokes onto app specified VSIS surface
 -   Erase ink strokes via mode toggle or eraser button
 -   Select ink strokes via mode toggle or barrel button drag
+-   Use InkToolbar in custom dry mode
 
 **Note**  Read the following instructions before using the app.
 

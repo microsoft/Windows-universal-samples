@@ -30,48 +30,6 @@ Scenario1_BasicFunctionality::Scenario1_BasicFunctionality() : rootPage(MainPage
     InitializeComponent();
 }
 
-/// <summary>
-/// Creates the default barcode scanner.
-/// </summary>
-task<void> Scenario1_BasicFunctionality::CreateDefaultScannerObject()
-{
-    return create_task(DeviceInformation::FindAllAsync(BarcodeScanner::GetDeviceSelector())).then([this](DeviceInformationCollection^ deviceCollection)
-    {
-        if (deviceCollection == nullptr || deviceCollection->Size == 0)
-        {
-            rootPage->NotifyUser("Barcode scanner not found. Please connect a barcode scanner.", NotifyType::ErrorMessage);
-            return task_from_result();
-        }
-
-        DeviceInformation^ scannerInfo = deviceCollection->GetAt(0);
-        return create_task(BarcodeScanner::FromIdAsync(scannerInfo->Id)).then([this](BarcodeScanner^ _scanner)
-        {
-            this->scanner = _scanner;
-            if (this->scanner == nullptr)
-            {
-                rootPage->NotifyUser("Failed to create barcode scanner object.", NotifyType::ErrorMessage);
-            }
-        });
-    });
-}
-
-/// <summary>
-/// This method claims the barcode scanner
-/// </summary>
-task<void> Scenario1_BasicFunctionality::ClaimScanner()
-{
-    // claim the barcode scanner
-    return create_task(scanner->ClaimScannerAsync()).then([this](ClaimedBarcodeScanner^ _claimedScanner)
-    {
-        this->claimedScanner = _claimedScanner;
-        // enable the claimed barcode scanner
-        if (claimedScanner == nullptr)
-        {
-            rootPage->NotifyUser("Claim barcode scanner failed.", NotifyType::ErrorMessage);
-        }
-    });
-}
-
 // <summary>
 /// Setup the barcode scanner to be ready to receive the data events from the scan.
 /// </summary>
@@ -79,26 +37,30 @@ task<void> Scenario1_BasicFunctionality::ClaimScanner()
 /// <param name="e"></param>
 void Scenario1_BasicFunctionality::ScenarioStartScanButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-    rootPage->NotifyUser("Creating barcode scanner object.", NotifyType::StatusMessage);
+    ScenarioStartScanButton->IsEnabled = false;
 
-    // create the barcode scanner. 
-    create_task(CreateDefaultScannerObject()).then([this](void)
+    rootPage->NotifyUser("Acquiring barcode scanner object.", NotifyType::StatusMessage);
+
+    // Acquire the barcode scanner.
+    DeviceHelpers::GetFirstBarcodeScannerAsync().then([this](BarcodeScanner^ foundScanner)
     {
+        scanner = foundScanner;
         if (scanner != nullptr)
         {
-            // after successful creation, claim the scanner for exclusive use and enable it so that data reveived events are received.
-            create_task(ClaimScanner()).then([this](void)
+            // After acquiring, claim the scanner for exclusive use and enable it so that data received events are received.
+            create_task(scanner->ClaimScannerAsync()).then([this](ClaimedBarcodeScanner^ _claimedScanner)
             {
+                claimedScanner = _claimedScanner;
                 if (claimedScanner)
                 {
                     // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can 
                     // claim ownsership of the barcode scanner.
-                    releaseDeviceRequestedToken = claimedScanner->ReleaseDeviceRequested::add(ref new EventHandler<ClaimedBarcodeScanner^>(this, &Scenario1_BasicFunctionality::OnReleaseDeviceRequested));
+                    releaseDeviceRequestedToken = claimedScanner->ReleaseDeviceRequested += ref new EventHandler<ClaimedBarcodeScanner^>(this, &Scenario1_BasicFunctionality::OnReleaseDeviceRequested);
 
-                    // after successfully claiming, attach the datareceived event handler.
-                    dataReceivedToken = claimedScanner->DataReceived::add(ref new TypedEventHandler<ClaimedBarcodeScanner^, BarcodeScannerDataReceivedEventArgs^>(this, &Scenario1_BasicFunctionality::OnDataReceived));
+                    // After successfully claiming, attach the datareceived event handler.
+                    dataReceivedToken = claimedScanner->DataReceived += ref new TypedEventHandler<ClaimedBarcodeScanner^, BarcodeScannerDataReceivedEventArgs^>(this, &Scenario1_BasicFunctionality::OnDataReceived);
 
-                    // Ask the API to decode the data by default. By setting this, API will decode the raw data from the barcode scanner and 
+                    // Ask for the raw data from the barcode scanner to be decoded and
                     // send the ScanDataLabel and ScanDataType in the DataReceived event
                     claimedScanner->IsDecodeDataEnabled = true;
 
@@ -108,15 +70,22 @@ void Scenario1_BasicFunctionality::ScenarioStartScanButton_Click(Platform::Objec
                     create_task(claimedScanner->EnableAsync()).then([this](void)
                     {
                         rootPage->NotifyUser("Ready to scan. Device ID: " + claimedScanner->DeviceId, NotifyType::StatusMessage);
-
-                        // reset the button state
                         ScenarioEndScanButton->IsEnabled = true;
-                        ScenarioStartScanButton->IsEnabled = false;
-                    });
+                    }, task_continuation_context::use_current());
+                }
+                else
+                {
+                    rootPage->NotifyUser("Claim barcode scanner failed.", NotifyType::ErrorMessage);
+                    ScenarioStartScanButton->IsEnabled = true;
                 }
             });
         }
-    });
+        else
+        {
+            rootPage->NotifyUser("Barcode scanner not found. Please connect a barcode scanner.", NotifyType::ErrorMessage);
+            ScenarioStartScanButton->IsEnabled = true;
+        }
+    }, task_continuation_context::use_current());
 
 }
 
@@ -197,8 +166,8 @@ void Scenario1_BasicFunctionality::ResetTheScenarioState()
     if (claimedScanner != nullptr)
     {
         // Detach the event handlers
-        claimedScanner->DataReceived::remove(dataReceivedToken);
-        claimedScanner->ReleaseDeviceRequested::remove(releaseDeviceRequestedToken);
+        claimedScanner->DataReceived -= dataReceivedToken;
+        claimedScanner->ReleaseDeviceRequested -= releaseDeviceRequestedToken;
 
         // release the Barcode Scanner and set to null
         delete claimedScanner;

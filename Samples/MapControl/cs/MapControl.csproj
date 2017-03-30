@@ -11,8 +11,8 @@
     <AssemblyName>MapControlSample</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15052.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15042.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -133,6 +133,9 @@
     <Compile Include="Scenario8.xaml.cs">
       <DependentUpon>Scenario8.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario9.xaml.cs">
+      <DependentUpon>Scenario9.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -192,6 +195,11 @@
     </Page>
     <Page Include="..\shared\Scenario8.xaml">
       <Link>Scenario8.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\shared\Scenario9.xaml">
+      <Link>Scenario9.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

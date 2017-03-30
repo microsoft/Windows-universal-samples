@@ -23,20 +23,19 @@ and a target app that receives the content—we recommend you install and deploy
 [Sharing content target app sample](http://go.microsoft.com/fwlink/p/?linkid=231519) when you install and run this one. 
 This way, you can see how sharing works from end to end.
 
-This sample covers how to share content in a variety of formats, including:
+This sample demonstrates the following:
 
--   Text
--   Web link
--   Application link
--   Images
--   Files
--   Delay-rendered files
--   HTML content
--   Custom data
-
-Also, this sample shows how to share a 30x30 logo and specify its background color, and how to share the app's package family name.
-
-Also, this sample shows how to display text when your app can't support a share operation.
+* Sharing content in a variety of formats, including:
+  *  Text
+  *  Web link
+  *  Application link (with logo and background color)
+  *  Images
+  *  Files
+  *  Delay-rendered files
+  *  HTML content
+  *  Custom data
+* Displaying a custom message when your app has nothing to share.
+* Adding a custom [ShareProvider](https://docs.microsoft.com/en-us/uwp/api/windows.applicationmodel.datatransfer.shareprovider) so your app can be its own share target.
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  

@@ -19,8 +19,15 @@
         { url: "/html/scenario2_MultipleScanners.html", title: "Release/Retain functionality" }
     ];
 
+    var BarcodeScanner = Windows.Devices.PointOfService.BarcodeScanner;
+
+    function getFirstBarcodeScannerAsync() {
+        return DeviceHelpers.getFirstDeviceAsync(BarcodeScanner.getDeviceSelector(), (id) => BarcodeScanner.fromIdAsync(id));
+}
+
     WinJS.Namespace.define("SdkSample", {
         sampleTitle: sampleTitle,
-        scenarios: new WinJS.Binding.List(scenarios)
+        scenarios: new WinJS.Binding.List(scenarios),
+        getFirstBarcodeScannerAsync: getFirstBarcodeScannerAsync
     });
 })();

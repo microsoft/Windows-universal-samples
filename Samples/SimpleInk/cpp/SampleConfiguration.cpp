@@ -28,6 +28,9 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Scenario 7", "SDKTemplate.Scenario7" },
     { "Scenario 8", "SDKTemplate.Scenario8" },
     { "Scenario 9", "SDKTemplate.Scenario9" },
+    { "Scenario 10", "SDKTemplate.Scenario10" },
+    { "Scenario 11", "SDKTemplate.Scenario11" },
+    { "Scenario 12", "SDKTemplate.Scenario12" },
 };
 
 void HelperFunctions::UpdateCanvasSize(FrameworkElement^ root, FrameworkElement^ output, FrameworkElement^ inkCanvas)

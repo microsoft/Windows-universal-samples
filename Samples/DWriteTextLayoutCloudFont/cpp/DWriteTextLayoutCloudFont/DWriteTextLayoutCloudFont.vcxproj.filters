@@ -22,6 +22,7 @@
     <ClCompile Include="Scenario_Document1.xaml.cpp" />
     <ClCompile Include="Scenario_CloudFontOverview.xaml.cpp" />
     <ClCompile Include="Scenario_SampleOverview.xaml.cpp" />
+    <ClCompile Include="DocumentPresenter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -33,6 +34,7 @@
     <ClInclude Include="Scenario_Document1.xaml.h" />
     <ClInclude Include="Scenario_CloudFontOverview.xaml.h" />
     <ClInclude Include="Scenario_SampleOverview.xaml.h" />
+    <ClInclude Include="DocumentPresenter.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />

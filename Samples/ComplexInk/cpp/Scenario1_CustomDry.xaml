@@ -30,7 +30,7 @@
       <StackPanel Margin="0,0,0,10">
         <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
         <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-          This scenario demonstrates custom dry.<LineBreak />
+          This scenario demonstrates custom dry.
         </TextBlock>
       </StackPanel>
 
@@ -39,10 +39,11 @@
             <StackPanel Orientation="Horizontal" Margin="0,0,0,0" HorizontalAlignment="Left">
                 <Button Content="Clear" Width="65" Margin="0,0,3,0" Click="OnClear"/>
                 <Button Content="Insert Shape" Margin="0,0,3,0" Click="OnInsertShape"/>
-                <ComboBox x:Name="InputMode" SelectedIndex="0" Width="150" Margin="10">
+                <ComboBox x:Name="InputMode" SelectedIndex="0" Width="200" Margin="10">
                     <x:String>Inking Mode</x:String>
                     <x:String>Erase Mode</x:String>
                     <x:String>Selection Mode</x:String>
+                    <x:String>InkToolbar Mode</x:String>
                 </ComboBox>
                 <CheckBox Content="Enable Touch Inking" Checked="TouchInking_Checked" Unchecked="TouchInking_Unchecked" Margin="10"/>
             </StackPanel>
@@ -50,9 +51,12 @@
       </StackPanel>
       
       <ScrollViewer x:Name="inkScrollViewer" Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ZoomMode="Enabled" HorizontalScrollMode="Enabled" VerticalScrollMode="Enabled" Background="CornflowerBlue">
-        <Grid x:Name="Output">
+        <StackPanel>
+          <InkToolbar x:Name="inkToolbar" TargetInkCanvas="{x:Bind inkCanvas}" Visibility="Collapsed" EraseAllClicked="OnClear"/>
+          <Grid x:Name="Output">
             <InkCanvas x:Name="inkCanvas"/>
-        </Grid>
+          </Grid>
+        </StackPanel>
       </ScrollViewer>
       
       <StackPanel x:Name="LogPanel" Grid.Row="3" Orientation="Vertical">

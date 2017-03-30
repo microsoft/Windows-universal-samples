@@ -43,10 +43,14 @@
                                Unchecked="trafficFlowVisibleCheckBox_Unchecked" Margin="10" />
                             <ComboBox Header="Style" Name="styleCombobox" SelectionChanged="styleCombobox_SelectionChanged" Margin="10">
                                 <ComboBoxItem>None</ComboBoxItem>
-                                <ComboBoxItem>Road</ComboBoxItem>
+                                <ComboBoxItem IsSelected="True">Road</ComboBoxItem>
                                 <ComboBoxItem>Aerial</ComboBoxItem>
                                 <ComboBoxItem>AerialWithRoads</ComboBoxItem>
                                 <ComboBoxItem>Terrain</ComboBoxItem>
+                            </ComboBox>
+                            <ComboBox Header="Projection" Name="projectionCombobox" SelectionChanged="projectionCombobox_SelectionChanged" Margin="10">
+                                <ComboBoxItem IsSelected="True">Web Mercator</ComboBoxItem>
+                                <ComboBoxItem>Globe</ComboBoxItem>
                             </ComboBox>
                         </StackPanel>
                     </StackPanel>

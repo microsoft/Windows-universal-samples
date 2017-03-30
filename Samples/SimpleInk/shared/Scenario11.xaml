@@ -1,0 +1,60 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario11"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    SizeChanged="OnSizeChanged"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                This scenario shows how the rendering of the strokes and the color palette change when the high contrast adjustment mode is changed.<LineBreak/>
+                    - Ink on the canvas in a variety of colors.<LineBreak/>
+                    - Go to Setting &#x2192; Ease of Access &#x2192; High contrast.<LineBreak/>
+                    - Select a high contrast theme and apply it.<LineBreak/>
+                    - A new button will appear in the toolbar. Toggle it to choose whether to show the original colors or to convert them to contrasting colors.
+                </TextBlock>
+            </StackPanel>
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <InkToolbar x:Name="inkToolbar" Grid.Row="0" TargetInkCanvas="{x:Bind inkCanvas}">
+                        <InkToolbarCustomToggleButton x:Name="ContrastingColorButton" Checked="ContrastingColorButtonCheckedChanged" Unchecked="ContrastingColorButtonCheckedChanged"
+                                                      ToolTipService.ToolTip="Contrasting Colors">
+                            <Border>
+                                <TextBlock AutomationProperties.AccessibilityView="Raw" FontFamily="Segoe MDL2 Assets" Text="&#xE793;" HighContrastAdjustment="None"/>
+                            </Border>
+                        </InkToolbarCustomToggleButton>
+                    </InkToolbar>
+                    <Grid Grid.Row="1" x:Name="outputGrid" Background="{ThemeResource SystemControlBackgroundChromeWhiteBrush}" Height="Auto">
+                        <!-- Inking area -->
+                        <InkCanvas x:Name="inkCanvas" Height="Auto"/>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

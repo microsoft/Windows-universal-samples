@@ -12,6 +12,7 @@
 #pragma once
 
 #include "pch.h"
+#include "DeviceHelpers.h"
 
 namespace SDKTemplate
 {
@@ -45,4 +46,9 @@ namespace SDKTemplate
         Platform::String^ Title;
         Platform::String^ ClassName;
     };
+
+    namespace DeviceHelpers
+    {
+        Concurrency::task<Windows::Devices::PointOfService::BarcodeScanner^> GetFirstBarcodeScannerAsync();
+    }
 }

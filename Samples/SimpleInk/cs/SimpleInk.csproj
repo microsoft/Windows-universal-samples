@@ -11,8 +11,8 @@
     <AssemblyName>SimpleInk</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15021.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15021.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -131,6 +131,15 @@
     <Compile Include="Scenario9.xaml.cs">
       <DependentUpon>Scenario9.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario10.xaml.cs">
+      <DependentUpon>Scenario10.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario11.xaml.cs">
+      <DependentUpon>Scenario11.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario12.xaml.cs">
+      <DependentUpon>Scenario12.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -198,8 +207,32 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="..\shared\Scenario10.xaml">
+      <Link>Scenario10.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\shared\Scenario11.xaml">
+      <Link>Scenario11.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\shared\Scenario12.xaml">
+      <Link>Scenario12.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\shared\ButtonIconFill.png">
+      <Link>Assets\ButtonIconFill.png</Link>
+    </Content>
+    <Content Include="..\shared\ButtonIconOutline.png">
+      <Link>Assets\ButtonIconOutline.png</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Link>Assets\microsoft-sdk.png</Link>
+    </Content>
     <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>

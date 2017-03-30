@@ -63,7 +63,13 @@
                                                    MinStrokeWidth="4"
                                                    MaxStrokeWidth="10"
                                                    ToolTipService.ToolTip="Calligraphy pen">
-                                <SymbolIcon Symbol="{x:Bind CalligraphyPen}"/>
+                                <Border>
+                                    <Grid>
+                                        <TextBlock AutomationProperties.AccessibilityView="Raw" FontFamily="Segoe MDL2 Assets" Text="&#xEDFB;" Canvas.ZIndex="1"/>
+                                        <TextBlock AutomationProperties.AccessibilityView="Raw" FontFamily="Segoe MDL2 Assets" Text="&#xF0C7;" 
+                                                   Foreground="{x:Bind calligraphyPen.SelectedBrush, Mode=OneWay}" Canvas.ZIndex="0"/>
+                                    </Grid>
+                                </Border>
                                 <InkToolbarCustomPenButton.ConfigurationContent>
                                     <InkToolbarPenConfigurationControl/>
                                 </InkToolbarCustomPenButton.ConfigurationContent>
