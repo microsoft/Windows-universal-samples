@@ -23,8 +23,6 @@ namespace DWriteTextLayoutCloudFontImplementation
         TextLayoutImageSource(TextLayout^ textLayout, float dpi, Windows::UI::Color textColor, Windows::UI::Color backgroundColor);
         virtual ~TextLayoutImageSource();
 
-        Windows::UI::Xaml::Media::ImageSource^ GetImageSource() { return this; }
-
     private:
         void CreateDeviceResources();
         void SetTextBackgroundColor(Windows::UI::Color color);

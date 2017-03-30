@@ -145,6 +145,7 @@
     <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h">
       <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="..\..\..\SharedContent\cpp\DeviceHelpers.h" />
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_BasicFunctionality.xaml.h">
       <DependentUpon>..\shared\Scenario1_BasicFunctionality.xaml</DependentUpon>

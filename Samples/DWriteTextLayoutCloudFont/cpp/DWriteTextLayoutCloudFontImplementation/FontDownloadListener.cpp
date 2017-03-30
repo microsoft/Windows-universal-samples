@@ -143,8 +143,11 @@ FontDownloadListener::FontDownloadListener()
     // DownloadCompleted calls while it only called BeginDownload once, or that 
     // it gets DownloadCompleted calls resulting from download requests that 
     // another object generated. There are mitigations that can be put in place 
-    // in the UI layer to avoid doing redundant work. See Scenario_Document1.cpp
-    // for an example of this.
+    // in the UI layer to avoid doing redundant work. See DocumentPresenter.cpp
+    // for an example of this: the DownloadCompleted handler calls
+    // RequestTextLayoutUpdate which schedules the actual update as a low-priority
+    // task, allowing response for multiple events occurring in rapid succession to
+    // be consolidated.
 
     DX::ThrowIfFailed(
         m_downloadQueue->AddListener(m_registeredListener.Get(), &m_token)

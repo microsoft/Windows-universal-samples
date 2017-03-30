@@ -82,6 +82,9 @@
     <Content Include="..\..\..\SharedContent\js\js\default.js">
       <Link>js\default.js</Link>
     </Content>
+    <Content Include="..\..\..\SharedContent\js\js\devicehelpers.js">
+      <Link>js\devicehelpers.js</Link>
+    </Content>
     <Content Include="..\..\..\SharedContent\js\css\default.css">
       <Link>css\default.css</Link>
     </Content>

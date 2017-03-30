@@ -1,4 +1,4 @@
-<!---
+﻿<!---
   category: ControlsLayoutAndText
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620539
 --->
@@ -28,7 +28,8 @@ Within the DWriteTextLayoutCloudFontImplementation project, the following files 
 ### DWriteTextLayoutCloudFont project
 Within the DWriteTextLayoutCloudFont project, the following files are significant:
 
-* The Scenario\_Document1.\*, Scenario\_Document2.\* and Scenario\_Document3.\* files each invoke text layout using a different downloadable font, and then invoke and respond to the downloadable font mechanism.
+* The Scenario\_Document1.\*, Scenario\_Document2.\* and Scenario\_Document3.\* files each present a DirectWrite text layout using a different downloadable font that gets downloaded, with the layout subsequently being updated.
+* The DocumentPresenter.\* files provide the higher-level implementation for the three documents (Scenario\_Document1, etc.) The DocumentPresenter class creates the text layout and the surface image source used to present it. It also creates the FontDownloadListener that interacts with DirectWrites font download mechanism and initiates the download of remote fonts. It also implements event handlers to update the layout and the surface image source when the remote font has been downloaded, and on other relevant events. 
 * The Scenario\_SampleOverview.\* files provide guidance for using the sample app.
 * The Scenario\_CloudFontOverview.\* files provide more information about the downloadable font mechanism.
 
@@ -39,12 +40,11 @@ The ClearDownloadableFontCache.ps1 file is not part of the sample project itself
 
 ## Related topics
 
-[IDWriteFactory3::GetSystemFontCollection method](https://msdn.microsoft.com/en-us/library/windows/desktop/dn890761)  
-[IDWriteTextLayout3 interface](https://msdn.microsoft.com/en-us/library/windows/desktop/dn900405)  
-[IDWriteFontDownloadQueue interface](https://msdn.microsoft.com/en-us/library/windows/desktop/dn890778)  
-[IDWriteFontDownloadListener interface](https://msdn.microsoft.com/en-us/library/windows/desktop/dn890775)  
+[IDWriteFactory3::GetSystemFontCollection method](https://msdn.microsoft.com/library/windows/desktop/dn890761)  
+[IDWriteTextLayout3 interface](https://msdn.microsoft.com/library/windows/desktop/dn900405)  
+[IDWriteFontDownloadQueue interface](https://msdn.microsoft.com/library/windows/desktop/dn890778)  
+[IDWriteFontDownloadListener interface](https://msdn.microsoft.com/library/windows/desktop/dn890775)  
 [Guidelines for fonts](https://msdn.microsoft.com/library/windows/apps/hh700394)  
-
 
 ## System requirements
 

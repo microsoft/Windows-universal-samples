@@ -41,57 +41,6 @@ namespace SDKTemplate
         }
 
         /// <summary>
-        /// Creates the default barcode scanner.
-        /// </summary>
-        /// <returns>true if barcode scanner is created. Otherwise returns false</returns>
-        private async Task<bool> CreateDefaultScannerObject()
-        {
-            if (scanner == null)
-            {
-                rootPage.NotifyUser("Creating barcode scanner object.", NotifyType.StatusMessage);
-                DeviceInformationCollection deviceCollection = await DeviceInformation.FindAllAsync(BarcodeScanner.GetDeviceSelector());
-                if (deviceCollection != null && deviceCollection.Count > 0)
-                {
-                    scanner = await BarcodeScanner.FromIdAsync(deviceCollection[0].Id);
-
-                    if (scanner == null)
-                    {
-                        rootPage.NotifyUser("Failed to create barcode scanner object.", NotifyType.ErrorMessage);
-                        return false;
-                    }
-                }
-                else
-                {
-                    rootPage.NotifyUser("Barcode scanner not found. Please connect a barcode scanner.", NotifyType.ErrorMessage);
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// This method claims the barcode scanner 
-        /// </summary>
-        /// <returns>true if claim is successful. Otherwise returns false</returns>
-        private async Task<bool> ClaimScanner()
-        {
-            if (claimedScanner == null)
-            {
-                // claim the barcode scanner
-                claimedScanner = await scanner.ClaimScannerAsync();
-
-                // enable the claimed barcode scanner
-                if (claimedScanner == null)
-                {
-                    rootPage.NotifyUser("Claim barcode scanner failed.", NotifyType.ErrorMessage);
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.  The Parameter
@@ -121,15 +70,19 @@ namespace SDKTemplate
         /// <param name="e"></param>
         private async void ScenarioStartScanButton_Click(object sender, RoutedEventArgs e)
         {
-            rootPage.NotifyUser("Creating barcode scanner object.", NotifyType.StatusMessage);
+            ScenarioStartScanButton.IsEnabled = false;
 
-            // create the barcode scanner. 
-            if (await CreateDefaultScannerObject())
+            rootPage.NotifyUser("Acquiring barcode scanner object.", NotifyType.StatusMessage);
+
+            // Acquire the barcode scanner.
+            scanner = await DeviceHelpers.GetFirstBarcodeScannerAsync();
+            if (scanner != null)
             {
                 // after successful creation, claim the scanner for exclusive use and enable it so that data reveived events are received.
-                if (await ClaimScanner())
-                {
+                claimedScanner = await scanner.ClaimScannerAsync();
 
+                if (claimedScanner != null)
+                {
                     // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can 
                     // claim ownsership of the barcode scanner.
                     claimedScanner.ReleaseDeviceRequested += claimedScanner_ReleaseDeviceRequested;
@@ -146,12 +99,19 @@ namespace SDKTemplate
                     // if the claimedScanner has not beed Enabled
                     await claimedScanner.EnableAsync();
 
-                    // reset the button state
-                    ScenarioEndScanButton.IsEnabled = true;
-                    ScenarioStartScanButton.IsEnabled = false;
-
                     rootPage.NotifyUser("Ready to scan. Device ID: " + claimedScanner.DeviceId, NotifyType.StatusMessage);
+                    ScenarioEndScanButton.IsEnabled = true;
                 }
+                else
+                {
+                    rootPage.NotifyUser("Claim barcode scanner failed.", NotifyType.ErrorMessage);
+                    ScenarioStartScanButton.IsEnabled = true;
+                }
+            }
+            else
+            {
+                rootPage.NotifyUser("Barcode scanner not found. Please connect a barcode scanner.", NotifyType.ErrorMessage);
+                ScenarioStartScanButton.IsEnabled = true;
             }
         }
 
