@@ -200,7 +200,7 @@ void Scenario3_MultipleReceipt::FindReceiptPrinter_Click(Platform::Object^ sende
                 String^ deviceId = printerInfo->Id;
                 return create_task(PosPrinter::FromIdAsync(deviceId)).then([this, deviceId](PosPrinter^ _printer)
                 {
-                    printerInstance1 = _printer;;
+                    printerInstance1 = _printer;
                     if (printerInstance1 != nullptr)
                     {
                         if (printerInstance1->Capabilities->Receipt->IsPrinterPresent)
@@ -217,6 +217,7 @@ void Scenario3_MultipleReceipt::FindReceiptPrinter_Click(Platform::Object^ sende
                         }
                         else
                         {
+                            delete printerInstance1;
                             printerInstance1 = nullptr;
                             rootPage->NotifyUser("No receipt printer found. ", NotifyType::ErrorMessage);
                         }

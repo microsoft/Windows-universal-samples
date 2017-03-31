@@ -9,6 +9,7 @@
 //
 //*********************************************************
 
+using SDKTemplate.Logging;
 using System;
 using Windows.Media.Core;
 using Windows.Media.Playback;
@@ -23,7 +24,8 @@ namespace SDKTemplate
     /// </summary>
     public sealed partial class Scenario5 : Page
     {
-        MainPage rootPage;
+        MainPage rootPage = MainPage.Current;
+        private MediaPlaybackItemLogger mpiLogger;
         MediaPlaybackItem item;
 
         public Scenario5()
@@ -33,15 +35,19 @@ namespace SDKTemplate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            rootPage = MainPage.Current;
-
             this.item = new MediaPlaybackItem(MediaSource.CreateFromUri(rootPage.CaptionedMediaUri));
+            mpiLogger = new MediaPlaybackItemLogger(LoggerControl, item);
+
+            item.AudioTracks.SelectedIndexChanged += AudioTracks_SelectedIndexChanged;
 
             this.mediaPlayerElement.Source = item;
+            LoggerControl.Log($"Loaded: {rootPage.CaptionedMediaUri}");
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            mpiLogger?.Dispose();
+            mpiLogger = null;
             MediaPlayerHelper.CleanUpMediaPlayerSource(mediaPlayerElement.MediaPlayer);
         }
 
@@ -55,11 +61,18 @@ namespace SDKTemplate
             if (this.item != null && this.item.AudioTracks != null && this.item.AudioTracks.Count - 1 >= audioTrackIndex)
             {
                 this.item.AudioTracks.SelectedIndex = audioTrackIndex;
-                rootPage.NotifyUser("Switched to audio track #" + (audioTrackIndex + 1)
+            }
+        }
+
+        private void AudioTracks_SelectedIndexChanged(ISingleSelectMediaTrackList sender, object args)
+        {
+            var audioTrackIndex = sender.SelectedIndex;
+
+            LoggerControl.Log("Switched to audio track #" + (audioTrackIndex + 1)
                     + " | Id: " + this.item.AudioTracks[audioTrackIndex].Id
                     + " | Label: " + this.item.AudioTracks[audioTrackIndex].Label
-                    + " | Language: " + this.item.AudioTracks[audioTrackIndex].Language, NotifyType.StatusMessage);
-            }
+                    + " | Language: " + this.item.AudioTracks[audioTrackIndex].Language);
+
         }
     }
 }

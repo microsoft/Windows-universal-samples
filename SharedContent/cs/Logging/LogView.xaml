@@ -1,0 +1,55 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<UserControl
+    x:Class="SDKTemplate.Logging.LogView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="VerboseLogBrush" Color="Gray" />
+        <SolidColorBrush x:Key="InformationLogBrush" Color="White" />
+        <SolidColorBrush x:Key="WarningLogBrush" Color="Yellow" />
+        <SolidColorBrush x:Key="ErrorLogBrush" Color="Red" />
+        <SolidColorBrush x:Key="CriticalLogBrush" Color="Magenta" />
+        <SolidColorBrush x:Key="AlwaysLogBrush" Color="YellowGreen" />
+    </UserControl.Resources>
+
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Button Click="CopyLogToClipboard_Click" Content="Copy log" Margin="0,0,10,0"/>
+            <Button Click="ClearLog_Click" Content="Clear log" Margin="0,0,10,0"/>
+            <TextBlock Text="Logging level:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <ComboBox x:Name="LogLevelComboBox" SelectionChanged="LogLevel_Changed">
+                <ComboBoxItem Content="Verbose"/>
+                <ComboBoxItem Content="Information"/>
+                <ComboBoxItem Content="Warning"/>
+                <ComboBoxItem Content="Error"/>
+                <ComboBoxItem Content="Critical"/>
+            </ComboBox>
+        </StackPanel>
+        <ScrollViewer x:Name="ListBoxScrollViewer" Margin="0,10,0,0" Height="100" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
+            <ListBox x:Name="LoggingListBox">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="0"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </ScrollViewer>
+    </StackPanel>
+</UserControl>

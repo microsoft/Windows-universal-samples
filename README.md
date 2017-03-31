@@ -229,14 +229,15 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/BasicInput">Basic input</a></td>
   <td><a href="Samples/ComplexInk">Complex inking</a></td>
-  <td><a href="Samples/Ink">Inking</a></td>
+  <td><a href="Samples/InkAnalysis">Ink analysis/a></td>
  </tr>
  <tr>
+  <td><a href="Samples/Ink">Inking</a></td>
   <td><a href="Samples/LowLatencyInput">Low latency input</a></td>
   <td><a href="Samples/SimpleInk">Simple inking</a></td>
-  <td><a href="Samples/TouchKeyboard">Touch keyboard</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/TouchKeyboard">Touch keyboard</a></td>
   <td><a href="Samples/TouchKeyboardTextInput">Touch keyboard text input</a></td>
  </tr>
 </table>

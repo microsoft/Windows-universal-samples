@@ -17,6 +17,7 @@
     xmlns:local="using:SDKTemplate"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:logging="using:SDKTemplate.Logging"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -26,7 +27,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <StackPanel Margin="0,0,0,10">
+            <StackPanel Grid.Row="0" Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
           Demonstrates multi-track video playback and camera selection.
@@ -55,6 +56,7 @@
                 <Button x:Name="button4" Content="4" Tag="3" Grid.Row="2" Grid.Column="3" Click="TrackButton_Click" HorizontalAlignment="Center"/>
                 <Button x:Name="button5" Content="5" Tag="4" Grid.Row="2" Grid.Column="4" Click="TrackButton_Click" HorizontalAlignment="Center"/>
             </Grid>
+            <logging:LogView x:Name="LoggerControl" Tag="Information" Grid.Row="2" Margin="0,10,0,0"/>
         </Grid>
     </Grid>
 </Page>

@@ -49,7 +49,11 @@ namespace PosPrinterSample
                 claimedPrinter = null;
             }
 
-            printer = null;
+            if (printer != null)
+            {
+                printer.Dispose();
+                printer = null;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

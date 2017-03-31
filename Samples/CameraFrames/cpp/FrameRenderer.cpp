@@ -123,13 +123,13 @@ static ColorBGRA InfraredColor(float value)
 }
 
 // Maps each pixel in a scanline from a 16 bit depth value to a pseudo-color pixel.
-static void PseudoColorForDepth(int pixelWidth, byte* inputRowBytes, byte* outputRowBytes, float depthScale)
+static void PseudoColorForDepth(int pixelWidth, byte* inputRowBytes, byte* outputRowBytes, float depthScale, float minReliableDepth, float maxReliableDepth)
 {
     // Visualize space in front of your desktop, in meters.
-    constexpr float min = 0.5f;   // 0.5 meters
-    constexpr float max = 4.0f;  // 4 meters
-    constexpr float one_min = 1.0f / min;
-    constexpr float range = 1.0f / max - one_min;
+    float minInMeters = minReliableDepth * depthScale;
+    float maxInMeters = maxReliableDepth * depthScale;
+    float one_min = 1.0f / minInMeters;
+    float range = 1.0f / maxInMeters - one_min;
 
     UINT16* inputRow = reinterpret_cast<UINT16*>(inputRowBytes);
     ColorBGRA* outputRow = reinterpret_cast<ColorBGRA*>(outputRowBytes);
@@ -251,12 +251,12 @@ String^ FrameRenderer::GetSubtypeForFrameReader(MediaFrameSourceKind kind, Media
 
         // The only depth format we can render is D16.
     case MediaFrameSourceKind::Depth:
-        return CompareStringOrdinal(subtype->Data(), -1, L"D16", -1, TRUE) == CSTR_EQUAL ? subtype : nullptr;
+        return CompareStringOrdinal(subtype->Data(), -1, MediaEncodingSubtypes::D16->Data(), -1, TRUE) == CSTR_EQUAL ? subtype : nullptr;
 
         // The only infrared formats we can render are L8 and L16.
     case MediaFrameSourceKind::Infrared:
-        return (CompareStringOrdinal(subtype->Data(), -1, L"L8", -1, TRUE) == CSTR_EQUAL ||
-            CompareStringOrdinal(subtype->Data(), -1, L"L16", -1, TRUE) == CSTR_EQUAL) ? subtype : nullptr;
+        return (CompareStringOrdinal(subtype->Data(), -1, MediaEncodingSubtypes::L8->Data(), -1, TRUE) == CSTR_EQUAL ||
+            CompareStringOrdinal(subtype->Data(), -1, MediaEncodingSubtypes::L16->Data(), -1, TRUE) == CSTR_EQUAL) ? subtype : nullptr;
 
         // No other source kinds are supported by this class.
     default:
@@ -309,7 +309,9 @@ SoftwareBitmap^ FrameRenderer::ConvertToDisplayableImage(VideoMediaFrame^ inputF
             // create a function that takes the depth scale as input but also matches
             // the required signature.
             double depthScale = inputFrame->DepthMediaFrame->DepthFormat->DepthScaleInMeters;
-            return TransformBitmap(inputBitmap, std::bind(&PseudoColorForDepth, _1, _2, _3, static_cast<float>(depthScale)));
+            unsigned int minReliableDepth = inputFrame->DepthMediaFrame->MinReliableDepth;
+            unsigned int maxReliableDepth = inputFrame->DepthMediaFrame->MaxReliableDepth;
+            return TransformBitmap(inputBitmap, std::bind(&PseudoColorForDepth, _1, _2, _3, static_cast<float>(depthScale), minReliableDepth, maxReliableDepth));
         }
         else
         {

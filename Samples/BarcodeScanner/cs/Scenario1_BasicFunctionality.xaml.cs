@@ -239,7 +239,11 @@ namespace SDKTemplate
                 claimedScanner = null;
             }
 
-            scanner = null;
+            if (scanner != null)
+            {
+                scanner.Dispose();
+                scanner = null;
+            }
 
             // Reset the strings in the UI
             rootPage.NotifyUser("Click the start scanning button to begin.", NotifyType.StatusMessage);

@@ -33,7 +33,11 @@
                 _claimedPrinter.close();
                 _claimedPrinter = null;
             }
-            _printer = null;
+
+            if (_printer !== null) {
+                _printer.close();
+                _printer = null;
+            }
         }
     });
 
@@ -116,7 +120,11 @@
             _claimedPrinter = null;
         }
 
-        _printer = null;
+        if (_printer !== null) {
+            _printer.close();
+            _printer = null;
+        }
+
         WinJS.log("Scenario ended.", "sample", "status");
 
         document.getElementById("findClaimEnableButton").disabled = false;

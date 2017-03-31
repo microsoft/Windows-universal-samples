@@ -103,12 +103,12 @@ namespace SDKTemplate
 
                 // The only depth format we can render is D16.
                 case MediaFrameSourceKind.Depth:
-                    return String.Equals(subtype, "D16", StringComparison.OrdinalIgnoreCase) ? subtype : null;
+                    return String.Equals(subtype, MediaEncodingSubtypes.D16, StringComparison.OrdinalIgnoreCase) ? subtype : null;
 
                 // The only infrared formats we can render are L8 and L16.
                 case MediaFrameSourceKind.Infrared:
-                    return (String.Equals(subtype, "L8", StringComparison.OrdinalIgnoreCase) ||
-                        String.Equals(subtype, "L16", StringComparison.OrdinalIgnoreCase)) ? subtype : null;
+                    return (String.Equals(subtype, MediaEncodingSubtypes.L8, StringComparison.OrdinalIgnoreCase) ||
+                        String.Equals(subtype, MediaEncodingSubtypes.L16, StringComparison.OrdinalIgnoreCase)) ? subtype : null;
 
                 // No other source kinds are supported by this class.
                 default:
@@ -156,7 +156,9 @@ namespace SDKTemplate
                             {
                                 // Use a special pseudo color to render 16 bits depth frame.
                                 var depthScale = (float)inputFrame.DepthMediaFrame.DepthFormat.DepthScaleInMeters;
-                                result = TransformBitmap(inputBitmap, (w, i, o) => PseudoColorHelper.PseudoColorForDepth(w, i, o, depthScale));
+                                var minReliableDepth = inputFrame.DepthMediaFrame.MinReliableDepth;
+                                var maxReliableDepth = inputFrame.DepthMediaFrame.MaxReliableDepth;
+                                result = TransformBitmap(inputBitmap, (w, i, o) => PseudoColorHelper.PseudoColorForDepth(w, i, o, depthScale, minReliableDepth, maxReliableDepth));
                             }
                             else
                             {
@@ -350,17 +352,19 @@ namespace SDKTemplate
             /// <summary>
             /// Maps each pixel in a scanline from a 16 bit depth value to a pseudo-color pixel.
             /// </summary>
-            /// /// <param name="pixelWidth">Width of the input scanline, in pixels.</param>
-            /// /// <param name="inputRowBytes">Pointer to the start of the input scanline.</param>
-            /// /// <param name="outputRowBytes">Pointer to the start of the output scanline.</param>
-            /// /// /// <param name="depthScale">Physical distance that corresponds to one unit in the input scanline.</param>
-            public static unsafe void PseudoColorForDepth(int pixelWidth, byte* inputRowBytes, byte* outputRowBytes, float depthScale)
+            /// <param name="pixelWidth">Width of the input scanline, in pixels.</param>
+            /// <param name="inputRowBytes">Pointer to the start of the input scanline.</param>
+            /// <param name="outputRowBytes">Pointer to the start of the output scanline.</param>
+            /// <param name="depthScale">Physical distance that corresponds to one unit in the input scanline.</param>
+            /// <param name="minReliableDepth">Shortest distance at which the sensor can provide reliable measurements.</param>
+            /// <param name="maxReliableDepth">Furthest distance at which the sensor can provide reliable measurements.</param>
+            public static unsafe void PseudoColorForDepth(int pixelWidth, byte* inputRowBytes, byte* outputRowBytes, float depthScale, float minReliableDepth, float maxReliableDepth)
             {
                 // Visualize space in front of your desktop.
-                const float min = 0.5f;  // 0.5 meters
-                const float max = 4.0f;  // 4 meters
-                const float one_min = 1.0f / min;
-                const float range = 1.0f / max - one_min;
+                float minInMeters = minReliableDepth * depthScale;
+                float maxInMeters = maxReliableDepth * depthScale;
+                float one_min = 1.0f / minInMeters;
+                float range = 1.0f / maxInMeters - one_min;
 
                 ushort* inputRow = (ushort*)inputRowBytes;
                 uint* outputRow = (uint*)outputRowBytes;

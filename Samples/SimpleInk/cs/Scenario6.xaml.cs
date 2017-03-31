@@ -24,6 +24,8 @@ namespace SDKTemplate
     /// </summary>
     public sealed partial class Scenario6 : Page
     {
+        long selectedStencilChangedToken;
+
         public Scenario6()
         {
             this.InitializeComponent();
@@ -69,13 +71,16 @@ namespace SDKTemplate
 
         private void ToggleLogs(object sender, RoutedEventArgs e)
         {
+            var stencilButton = (InkToolbarStencilButton)inkToolbar.GetMenuButton(InkToolbarMenuKind.Stencil);
+
             if (toggleLog.IsOn)
             {
                 LogBorder.Visibility = Visibility.Visible;
                 inkToolbar.ActiveToolChanged += InkToolbar_ActiveToolChanged;
                 inkToolbar.InkDrawingAttributesChanged += InkToolbar_InkDrawingAttributesChanged;
                 inkToolbar.EraseAllClicked += InkToolbar_EraseAllClicked;
-                inkToolbar.IsRulerButtonCheckedChanged += InkToolbar_IsRulerButtonCheckedChanged;
+                inkToolbar.IsStencilButtonCheckedChanged += InkToolbar_IsStencilButtonCheckedChanged;
+                selectedStencilChangedToken = stencilButton.RegisterPropertyChangedCallback(InkToolbarStencilButton.SelectedStencilProperty, InkToolbar_SelectedStencilChanged);
             }
             else
             {
@@ -84,14 +89,20 @@ namespace SDKTemplate
                 inkToolbar.ActiveToolChanged -= InkToolbar_ActiveToolChanged;
                 inkToolbar.InkDrawingAttributesChanged -= InkToolbar_InkDrawingAttributesChanged;
                 inkToolbar.EraseAllClicked -= InkToolbar_EraseAllClicked;
-                inkToolbar.IsRulerButtonCheckedChanged -= InkToolbar_IsRulerButtonCheckedChanged;
-
+                inkToolbar.IsStencilButtonCheckedChanged -= InkToolbar_IsStencilButtonCheckedChanged;
+                stencilButton.UnregisterPropertyChangedCallback(InkToolbarStencilButton.SelectedStencilProperty, selectedStencilChangedToken);
             }
         }
 
-        private void InkToolbar_IsRulerButtonCheckedChanged(InkToolbar sender, object args)
+        private void InkToolbar_IsStencilButtonCheckedChanged(InkToolbar sender, InkToolbarIsStencilButtonCheckedChangedEventArgs args)
         {
-            textLogs.Text = "IsRulerButtonCheckedChanged\n" + textLogs.Text;
+            textLogs.Text = $"IsStencilButtonCheckedChanged(Kind = {args.StencilKind}, IsChecked = {args.StencilButton.IsChecked.Value})\n" + textLogs.Text;
+        }
+
+        private void InkToolbar_SelectedStencilChanged(DependencyObject sender, DependencyProperty dp)
+        {
+            var stencilButton = (InkToolbarStencilButton)sender;
+            textLogs.Text = $"SelectedStencil changed to {stencilButton.SelectedStencil}\n" + textLogs.Text;
         }
 
         private void InkToolbar_EraseAllClicked(InkToolbar sender, object args)

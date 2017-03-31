@@ -8,8 +8,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.14393.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.15021.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.15021.0</WindowsTargetPlatformMinVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <ItemGroup Label="ProjectConfigurations">
@@ -166,6 +166,9 @@
     <ClInclude Include="Scenario8.xaml.h">
       <DependentUpon>..\shared\Scenario8.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario9.xaml.h">
+      <DependentUpon>..\shared\Scenario9.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
@@ -185,6 +188,7 @@
     <Page Include="..\shared\Scenario6.xaml" />
     <Page Include="..\shared\Scenario7.xaml" />
     <Page Include="..\shared\Scenario8.xaml" />
+    <Page Include="..\shared\Scenario9.xaml" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -231,6 +235,9 @@
     </ClCompile>
     <ClCompile Include="Scenario8.xaml.cpp">
       <DependentUpon>..\shared\Scenario8.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario9.xaml.cpp">
+      <DependentUpon>..\shared\Scenario9.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

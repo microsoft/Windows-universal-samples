@@ -48,8 +48,16 @@
                 _claimedScanner2.close();
                 _claimedScanner2 = null;
             }
-            _scanner1 = null;
-            _scanner2 = null;
+
+            if (_scanner1 !== null) {
+                _scanner1.close();
+                _scanner1 = null;
+            }
+
+            if (_scanner2 !== null) {
+                _scanner2.close();
+                _scanner2 = null;
+            }
         }
     });
 
@@ -310,7 +318,11 @@
                 _claimedScanner1 = null;
             }
 
-            _scanner1 = null;
+            if (_scanner1 !== null) {
+                _scanner1.close();
+                _scanner1 = null;
+            }
+
             resetUI();
             complete(true);
         });
@@ -328,7 +340,11 @@
                 _claimedScanner2 = null;
             }
 
-            _scanner2 = null;
+            if (_scanner2 !== null) {
+                _scanner2.close();
+                _scanner2 = null;
+            }
+
             resetUI();
             complete(true);
         });

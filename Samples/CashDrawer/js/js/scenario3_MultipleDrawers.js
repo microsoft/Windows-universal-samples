@@ -205,12 +205,22 @@
                 _claimedInstance1.close();
                 _claimedInstance1 = null;
             }
+
+            if (_drawerInstance1 !== null) {
+                _drawerInstance1.close();
+                _drawerInstance1 = null;
+            }
         }
         else {
             if (_claimedInstance2 !== null) {
                 _claimedInstance2.removeEventListener("releasedevicerequested", onReleaseDeviceRequested2);
                 _claimedInstance2.close();
                 _claimedInstance2 = null;
+            }
+
+            if (_drawerInstance2 !== null) {
+                _drawerInstance2.close();
+                _drawerInstance2 = null;
             }
         }
     }

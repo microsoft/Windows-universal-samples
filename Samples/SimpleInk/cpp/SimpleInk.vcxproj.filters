@@ -58,6 +58,7 @@
     <Page Include="..\shared\Scenario6.xaml" />
     <Page Include="..\shared\Scenario7.xaml" />
     <Page Include="..\shared\Scenario8.xaml" />
+    <Page Include="..\shared\Scenario9.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">

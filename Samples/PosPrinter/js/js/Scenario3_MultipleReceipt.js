@@ -37,12 +37,21 @@
                 _claimedPrinter1.close();
                 _claimedPrinter1 = null;
             }
-            _printerInstance1 = null;
+
+            if (_printerInstance1 !== null) {
+                _printerInstance1.close();
+                _printerInstance1 = null;
+            }
+
             if (_claimedPrinter2 !== null) {
                 _claimedPrinter2.close();
                 _claimedPrinter2 = null;
             }
-            _printerInstance2 = null;
+
+            if (_printerInstance2 !== null) {
+                _printerInstance2.close();
+                _printerInstance2 = null;
+            }
         }
     });
 
@@ -190,6 +199,11 @@
             _claimedPrinter1.close();
             _claimedPrinter1 = null;
 
+            if (_printerInstance1 !== null) {
+                _printerInstance1.close();
+                _printerInstance1 = null;
+            }
+
             WinJS.log("Instance 1 released claim.", "sample", "status");
 
             setUnclaimedUI();
@@ -205,6 +219,11 @@
             _claimedPrinter2.removeEventListener("releasedevicerequested", onReleasedeviceRequested2);
             _claimedPrinter2.close();
             _claimedPrinter2 = null;
+
+            if (_printerInstance2 !== null) {
+                _printerInstance2.close();
+                _printerInstance2 = null;
+            }
 
             WinJS.log("Instance 2 released claim.", "sample", "status");
 
@@ -260,6 +279,11 @@
         } else if (_claimedPrinter1) {
             _claimedPrinter1.close();
             _claimedPrinter1 = null;
+
+            if (_printerInstance1 !== null) {
+                _printerInstance1.close();
+                _printerInstance1 = null;
+            }
         }
     }
 
@@ -272,6 +296,11 @@
         } else if (_claimedPrinter2) {
             _claimedPrinter2.close();
             _claimedPrinter2 = null;
+
+            if (_printerInstance2 !== null) {
+                _printerInstance2.close();
+                _printerInstance2 = null;
+            }
         }
     }
 
@@ -291,8 +320,16 @@
             _claimedPrinter2.close();
             _claimedPrinter2 = null;
         }
-        _printerInstance1 = null;
-        _printerInstance2 = null;
+        
+        if (_printerInstance1 !== null) {
+            _printerInstance1.close();
+            _printerInstance1 = null;
+        }
+
+        if (_printerInstance2 !== null) {
+            _printerInstance2.close();
+            _printerInstance2 = null;
+        }
 
         WinJS.log("Create the printers to begin.", "sample", "status");
     }

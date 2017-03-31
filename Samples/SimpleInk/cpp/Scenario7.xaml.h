@@ -29,10 +29,9 @@ namespace SDKTemplate
         virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 
     private:
-        void InkToolbar_IsRulerButtonCheckedChanged(Windows::UI::Xaml::Controls::InkToolbar^ sender, Platform::Object^ args);
+        void InkToolbar_IsStencilButtonCheckedChanged(Windows::UI::Xaml::Controls::InkToolbar^ sender, Windows::UI::Xaml::Controls::InkToolbarIsStencilButtonCheckedChangedEventArgs^ args);
         void OnBringIntoView(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
         MainPage^ rootPage = MainPage::Current;
-        Windows::UI::Input::Inking::InkPresenterRuler^ ruler;
     };
 }
