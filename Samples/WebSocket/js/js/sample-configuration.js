@@ -79,11 +79,35 @@
         }
     }
 
+    // All the certificates in the certificate chain as well as the final certificate itself
+    // must be valid.
+    function areCertificateAndCertChainValidAsync(serverCert, certChain) {
+        // Call isCertificateValidAsync for each certificate in certChain and for serverCert.
+        var tasks = certChain.slice().concat(serverCert).map(isCertificateValidAsync);
+        return WinJS.Promise.join(tasks).then(function (results) {
+            // Return true if every result is true.
+            return !results.includes(false);
+        });
+    }
+    
+    // This is a placeholder call to simulate long-running async calls. Note that this code runs synchronously as part  
+    // of the SSL/TLS handshake. Avoid performing lengthy operations here - else, the remote server may terminate the 
+    // connection abruptly. 
+    function isCertificateValidAsync(serverCert) {
+        return WinJS.Promise.timeout(100).then(function () {
+            // In this sample, we check the issuer of the certificate - this is purely for illustration 
+            // purposes and should not be considered as a recommendation for certificate validation.
+            return serverCert.issuer == "www.fabrikam.com";
+        });
+    }
+
+    //
     WinJS.Namespace.define("SdkSample", {
         sampleTitle: sampleTitle,
         scenarios: new WinJS.Binding.List(scenarios),
         lookupEnumName: lookupEnumName,
         validateAndCreateUri: validateAndCreateUri,
-        buildWebSocketError: buildWebSocketError
+        buildWebSocketError: buildWebSocketError,
+        areCertificateAndCertChainValidAsync: areCertificateAndCertChainValidAsync
     });
 })();

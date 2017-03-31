@@ -37,17 +37,18 @@ void Scenario4_OrientationChanged::OnNavigatedTo(NavigationEventArgs^ e)
 {
     // Get two instances of the accelerometer:
     // One that returns the raw accelerometer data
-    accelerometerOriginal = Accelerometer::GetDefault();
+    accelerometerOriginal = Accelerometer::GetDefault(rootPage->AccelerometerReadingType);
     // Other on which the 'ReadingTransform' is updated so that data returned aligns with the request transformation.
-    accelerometerReadingTransform = Accelerometer::GetDefault();
+    accelerometerReadingTransform = Accelerometer::GetDefault(rootPage->AccelerometerReadingType);
 
-    if (nullptr == accelerometerOriginal || nullptr == accelerometerReadingTransform)
+    if (accelerometerOriginal != nullptr && accelerometerReadingTransform != nullptr)
     {
-        rootPage->NotifyUser("No accelerometerReadingTransform found", NotifyType::ErrorMessage);
+        rootPage->NotifyUser(rootPage->AccelerometerReadingType.ToString() + " accelerometers ready", NotifyType::StatusMessage);
+        ScenarioEnableButton->IsEnabled = true;
     }
     else
     {
-        ScenarioEnableButton->IsEnabled = true;
+        rootPage->NotifyUser(rootPage->AccelerometerReadingType.ToString() + " accelerometers not found", NotifyType::ErrorMessage);
     }
 
     // Register for orientation change

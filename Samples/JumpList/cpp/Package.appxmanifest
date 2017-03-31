@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+    <Identity
+      Name="Microsoft.SDKSamples.JumpList.CPP"
+      Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+      Version="1.0.0.0" />
+
+    <mp:PhoneIdentity PhoneProductId="3dfde56f-f6cf-4e60-8cda-ad10854d1f3d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+    <Properties>
+        <DisplayName>Jump List C++ sample</DisplayName>
+        <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+        <Logo>Assets\StoreLogo-sdk.png</Logo>
+    </Properties>
+
+    <Dependencies>
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10586.0" MaxVersionTested="10.0.14393.0" />
+    </Dependencies>
+
+    <Resources>
+        <Resource Language="x-generate"/>
+    </Resources>
+
+    <Applications>
+        <Application Id="JumpList.App"
+          Executable="$targetnametoken$.exe"
+          EntryPoint="JumpList.App">
+            <uap:VisualElements
+              DisplayName="Jump List C++ sample"
+              Square150x150Logo="Assets\squareTile-sdk.png"
+              Square44x44Logo="Assets\smallTile-sdk.png"
+              Description="Jump List C++ sample"
+              BackgroundColor="#00B2F0">
+                <uap:SplashScreen Image="Assets\splash-sdk.png" />
+                <uap:DefaultTile>
+                    <uap:ShowNameOnTiles>
+                        <uap:ShowOn Tile="square150x150Logo" />
+                    </uap:ShowNameOnTiles>
+                </uap:DefaultTile>
+            </uap:VisualElements>
+            <Extensions>
+              <uap:Extension Category="windows.fileTypeAssociation">
+                <uap:FileTypeAssociation Name="mssamplefile">
+                  <uap:SupportedFileTypes>
+                    <uap:FileType ContentType="text/plain">.ms-jumplist-sample</uap:FileType>
+                  </uap:SupportedFileTypes>
+                </uap:FileTypeAssociation>
+              </uap:Extension>
+            </Extensions>
+        </Application>
+    </Applications>
+</Package>

@@ -8,8 +8,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.10586.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -154,6 +154,9 @@
     <ClInclude Include="Scenario3_DisplayOnOff.xaml.h">
       <DependentUpon>Scenario3_DisplayOnOff.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario4_BackgroundProximitySensor.xaml.h">
+      <DependentUpon>Scenario4_BackgroundProximitySensor.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
@@ -169,6 +172,9 @@
     </Page>
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
+    </Page>
+    <Page Include="Scenario4_BackgroundProximitySensor.xaml">
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -201,6 +207,9 @@
     <ClCompile Include="Scenario3_DisplayOnOff.xaml.cpp">
       <DependentUpon>Scenario3_DisplayOnOff.xaml</DependentUpon>
     </ClCompile>
+    <ClCompile Include="Scenario4_BackgroundProximitySensor.xaml.cpp">
+      <DependentUpon>Scenario4_BackgroundProximitySensor.xaml</DependentUpon>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
@@ -224,6 +233,11 @@
     <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Tasks\Tasks.vcxproj">
+      <Project>{53aed5f7-4379-4162-bb13-498b37796764}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

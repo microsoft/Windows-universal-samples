@@ -171,7 +171,7 @@ void Scenario1_Download::DownloadProgress(IAsyncOperationWithProgress<DownloadOp
     }
 }
 
-void Scenario1_Download::StartDownload(BackgroundTransferPriority priority, boolean requestUnconstrainedDownload)
+void Scenario1_Download::StartDownload(BackgroundTransferPriority priority)
 {
     // By default 'serverAddressField' is disabled and URI validation is not required. When enabling the text box
     // validating the URI is required since it was received from an untrusted source (user input).
@@ -193,7 +193,7 @@ void Scenario1_Download::StartDownload(BackgroundTransferPriority priority, bool
     }
 
     create_task(KnownFolders::PicturesLibrary->CreateFileAsync(destination, CreationCollisionOption::GenerateUniqueName))
-        .then([this, source, priority, requestUnconstrainedDownload] (StorageFile^ destinationFile)
+        .then([this, source, priority] (StorageFile^ destinationFile)
     {
         BackgroundDownloader^ downloader = ref new BackgroundDownloader();
         DownloadOperation^ download = downloader->CreateDownload(source, destinationFile);
@@ -204,41 +204,8 @@ void Scenario1_Download::StartDownload(BackgroundTransferPriority priority, bool
 
         download->Priority = priority;
 
-        if (!requestUnconstrainedDownload)
-        {
-            // Attach progress and completion handlers.
-            HandleDownloadAsync(download, true);
-            return;
-        }
-
-        Vector<DownloadOperation^>^ requestOperations = ref new Vector<DownloadOperation^>();
-        requestOperations->Append(download);
-
-        // If the app isn't actively being used, at some point the system may slow down or pause long running
-        // downloads. The purpose of this behavior is to increase the device's battery life.
-        // By requesting unconstrained downloads, the app can request the system to not suspend any of the
-        // downloads in the list for power saving reasons.
-        // Use this API with caution since it not only may reduce battery life, but it may show a prompt to
-        // the user.
-        create_task(BackgroundDownloader::RequestUnconstrainedDownloadsAsync(requestOperations)).then(
-            [this, download](UnconstrainedTransferRequestResult^ result)
-        {
-            Log("Request for unconstrained downloads has been " + (result->IsUnconstrained ? "granted" : "denied"));
-
-            HandleDownloadAsync(download, true);
-
-        }).then([this] (task<void> previousTask)
-        {
-            try
-            {
-                previousTask.get();
-            }
-            catch (Exception^ ex)
-            {
-                LogException("Error while requesting consent for unconstrained transfers", ex);
-            }
-        });
-
+        // Attach progress and completion handlers.
+        HandleDownloadAsync(download, true);
     }).then([this] (task<void> previousTask)
     {
         try
@@ -254,17 +221,12 @@ void Scenario1_Download::StartDownload(BackgroundTransferPriority priority, bool
 
 void Scenario1_Download::StartDownload_Click(Object^ sender, RoutedEventArgs^ e)
 {
-    StartDownload(BackgroundTransferPriority::Default, false);
+    StartDownload(BackgroundTransferPriority::Default);
 }
 
 void Scenario1_Download::StartHighPriorityDownload_Click(Object^ sender, RoutedEventArgs^ e)
 {
-    StartDownload(BackgroundTransferPriority::High, false);
-}
-
-void Scenario1_Download::StartUnconstrainedDownload_Click(Object^ sender, RoutedEventArgs^ e)
-{
-    StartDownload(BackgroundTransferPriority::Default, true);
+    StartDownload(BackgroundTransferPriority::High);
 }
 
 void Scenario1_Download::PauseAll_Click(Object^ sender, RoutedEventArgs^ e)

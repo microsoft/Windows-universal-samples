@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>80bfd669-aa83-4537-9611-027cffe0d8af</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{c6978fb6-bc64-498d-97c8-f5b53997e54e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Scenario1.xaml.cpp" />
+    <ClCompile Include="Scenario2.xaml.cpp" />
+    <ClCompile Include="Scenario3.xaml.cpp" />
+    <ClCompile Include="Scenario4.xaml.cpp" />
+    <ClCompile Include="Scenario5.xaml.cpp" />
+    <ClCompile Include="Scenario6.xaml.cpp" />
+    <ClCompile Include="Scenario7.xaml.cpp" />
+    <ClCompile Include="Scenario8.xaml.cpp" />
+    <ClCompile Include="RecognizerHelper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Scenario1.xaml.h" />
+    <ClInclude Include="Scenario2.xaml.h" />
+    <ClInclude Include="Scenario3.xaml.h" />
+    <ClInclude Include="Scenario4.xaml.h" />
+    <ClInclude Include="Scenario5.xaml.h" />
+    <ClInclude Include="Scenario6.xaml.h" />
+    <ClInclude Include="Scenario7.xaml.h" />
+    <ClInclude Include="Scenario8.xaml.h" />
+    <ClInclude Include="RecognizerHelper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+    <Page Include="..\shared\Scenario1.xaml" />
+    <Page Include="..\shared\Scenario2.xaml" />
+    <Page Include="..\shared\Scenario3.xaml" />
+    <Page Include="..\shared\Scenario4.xaml" />
+    <Page Include="..\shared\Scenario5.xaml" />
+    <Page Include="..\shared\Scenario6.xaml" />
+    <Page Include="..\shared\Scenario7.xaml" />
+    <Page Include="..\shared\Scenario8.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

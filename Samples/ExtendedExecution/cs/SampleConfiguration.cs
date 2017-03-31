@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using Windows.ApplicationModel.Background;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml.Controls;
@@ -27,6 +28,7 @@ namespace SDKTemplate
             new Scenario() { Title="Unspecified Reason", ClassType=typeof(UnspecifiedReason)},
             new Scenario() { Title="Saving Data Reason", ClassType=typeof(SavingDataReason)},
             new Scenario() { Title="Location Tracking Reason", ClassType=typeof(LocationTrackingReason)},
+            new Scenario() { Title="Using Multiple Tasks", ClassType=typeof(MultipleTasks)},
         };
 
         public static ToastNotification DisplayToast(string content)

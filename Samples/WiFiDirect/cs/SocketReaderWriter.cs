@@ -15,25 +15,19 @@ using Windows.Storage.Streams;
 using Windows.Devices.Enumeration;
 using System.ComponentModel;
 using Windows.Devices.WiFiDirect;
+using System.Threading.Tasks;
+using Windows.UI.Popups;
+using Windows.UI.Core;
+using Windows.Foundation;
 
 namespace SDKTemplate
 {
-    public static class Globals
-    {
-        public static readonly byte[] CustomOui = { 0xAA, 0xBB, 0xCC };
-        public static readonly byte CustomOuiType = 0xDD;
-        public static readonly byte[] WfaOui = { 0x50, 0x6F, 0x9A };
-        public static readonly byte[] MsftOui = { 0x00, 0x50, 0xF2 };
-        public static readonly string strServerPort = "50001";
-    }
-
     public class SocketReaderWriter : IDisposable
     {
         DataReader _dataReader;
         DataWriter _dataWriter;
         StreamSocket _streamSocket;
         private MainPage _rootPage;
-        string _currentMessage;
 
         public SocketReaderWriter(StreamSocket socket, MainPage mainPage)
         {
@@ -47,7 +41,6 @@ namespace SDKTemplate
 
             _streamSocket = socket;
             _rootPage = mainPage;
-            _currentMessage = null;
         }
 
         public void Dispose()
@@ -57,7 +50,7 @@ namespace SDKTemplate
             _streamSocket.Dispose();
         }
 
-        public async void WriteMessage(string message)
+        public async Task WriteMessageAsync(string message)
         {
             try
             {
@@ -72,7 +65,7 @@ namespace SDKTemplate
             }
         }
 
-        public async void ReadMessage()
+        public async Task<string> ReadMessageAsync()
         {
             try
             {
@@ -85,10 +78,9 @@ namespace SDKTemplate
                     if (bytesRead > 0)
                     {
                         // Decode the string.
-                        _currentMessage = _dataReader.ReadString(messageLength);
-                        _rootPage.NotifyUserFromBackground("Got message: " + _currentMessage, NotifyType.StatusMessage);
-
-                        ReadMessage();
+                        string message = _dataReader.ReadString(messageLength);
+                        _rootPage.NotifyUserFromBackground("Got message: " + message, NotifyType.StatusMessage);
+                        return message;
                     }
                 }
             }
@@ -96,98 +88,53 @@ namespace SDKTemplate
             {
                 _rootPage.NotifyUserFromBackground("Socket was closed!", NotifyType.StatusMessage);
             }
-        }
-
-        public string GetCurrentMessage()
-        {
-            return _currentMessage;
+            return null;
         }
     }
 
     public class DiscoveredDevice : INotifyPropertyChanged
     {
-        private DeviceInformation deviceInfo;
+        public DeviceInformation DeviceInfo { get; private set; }
 
-        public DiscoveredDevice(DeviceInformation deviceInfoIn)
+        public DiscoveredDevice(DeviceInformation deviceInfo)
         {
-            deviceInfo = deviceInfoIn;
+            DeviceInfo = deviceInfo;
         }
 
-        public DeviceInformation DeviceInfo
-        {
-            get
-            {
-                return deviceInfo;
-            }
-        }
+        public string DisplayName => DeviceInfo.Name + " - " + (DeviceInfo.Pairing.IsPaired ? "Paired" : "Unpaired");
+        public override string ToString() => DisplayName;
 
-        public override string ToString()
+        public void UpdateDeviceInfo(DeviceInformationUpdate update)
         {
-            return deviceInfo.Name;
+            DeviceInfo.Update(update);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DisplayName"));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
-    public class ConnectedDevice : INotifyPropertyChanged
+    public class ConnectedDevice : IDisposable
     {
-        private SocketReaderWriter socketRW;
-        private WiFiDirectDevice wfdDevice;
-        private string displayName = "";
+        public SocketReaderWriter SocketRW { get; }
+        public WiFiDirectDevice WfdDevice { get; }
+        public string DisplayName { get; }
 
         public ConnectedDevice(string displayName, WiFiDirectDevice wfdDevice, SocketReaderWriter socketRW)
         {
-            this.socketRW = socketRW;
-            this.wfdDevice = wfdDevice;
-            this.displayName = displayName;
+            DisplayName = displayName;
+            WfdDevice = wfdDevice;
+            SocketRW = socketRW;
         }
 
-        private ConnectedDevice() { }
+        public override string ToString() => DisplayName;
 
-    public SocketReaderWriter SocketRW
+        public void Dispose()
         {
-            get
-            {
-                return socketRW;
-            }
+            // Close socket
+            SocketRW.Dispose();
 
-            set
-            {
-                socketRW = value;
-            }
+            // Close WiFiDirectDevice object
+            WfdDevice.Dispose();
         }
-
-        public WiFiDirectDevice WfdDevice
-        {
-            get
-            {
-                return wfdDevice;
-            }
-
-            set
-            {
-                wfdDevice = value;
-            }
-        }
-
-        public override string ToString()
-        {
-            return displayName;
-        }
-
-        public string DisplayName
-        {
-            get
-            {
-                return displayName;
-            }
-
-            set
-            {
-                displayName = value;
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

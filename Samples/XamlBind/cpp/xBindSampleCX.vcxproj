@@ -8,8 +8,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.14393.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -143,6 +143,9 @@
     <ClInclude Include="EventTests.xaml.h">
       <DependentUpon>EventTests.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Functions.xaml.h">
+      <DependentUpon>Functions.xaml</DependentUpon>
+    </ClInclude>
     <ClInclude Include="ListsAndTemplates.xaml.h">
       <DependentUpon>ListsAndTemplates.xaml</DependentUpon>
     </ClInclude>
@@ -177,6 +180,7 @@
     <Page Include="EventTests.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Functions.xaml" />
     <Page Include="ListsAndTemplates.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -211,6 +215,9 @@
     </ClCompile>
     <ClCompile Include="EventTests.xaml.cpp">
       <DependentUpon>EventTests.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Functions.xaml.cpp">
+      <DependentUpon>Functions.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="ListsAndTemplates.xaml.cpp">
       <DependentUpon>ListsAndTemplates.xaml</DependentUpon>

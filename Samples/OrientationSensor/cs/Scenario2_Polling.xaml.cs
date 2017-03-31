@@ -38,7 +38,7 @@ namespace SDKTemplate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            _sensor = OrientationSensor.GetDefault();
+            _sensor = OrientationSensor.GetDefault(rootPage.SensorReadingType, rootPage.SensorOptimizationGoal);
             if (_sensor != null)
             {
                 // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
@@ -50,11 +50,12 @@ namespace SDKTemplate
                 _dispatcherTimer.Tick += DisplayCurrentReading;
                 _dispatcherTimer.Interval = TimeSpan.FromMilliseconds(_desiredReportInterval);
 
+                rootPage.NotifyUser(rootPage.SensorDescription + " is ready", NotifyType.StatusMessage);
                 ScenarioEnableButton.IsEnabled = true;
             }
             else
             {
-                rootPage.NotifyUser("No orientation sensor found", NotifyType.ErrorMessage);
+                rootPage.NotifyUser(rootPage.SensorDescription + " not found", NotifyType.ErrorMessage);
             }
         }
 

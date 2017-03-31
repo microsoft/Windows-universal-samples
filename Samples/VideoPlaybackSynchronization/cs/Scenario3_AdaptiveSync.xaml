@@ -1,0 +1,77 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario3_AdaptiveSync"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="Page_OnLoaded"
+    Unloaded="Page_OnUnloaded"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    This scenario synchronizes live playback using an AdaptiveMediaSource.
+                    This is currently only a technology demonstration.
+                    We do not recommend using it in production.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto">
+                <Grid Grid.Row="1" x:Name="ContentGrid" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="85*"/>
+                        <RowDefinition Height="5*" MinHeight="20"/>
+                        <RowDefinition Height="10*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" MinWidth="300"/>
+                        <ColumnDefinition Width="50*" MinWidth="300"/>
+                    </Grid.ColumnDefinitions>
+                    <MediaPlayerElement x:Name="mpeMain" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    <TextBox x:Name="mpeMainUri" MaxWidth="300" TextWrapping="Wrap" Text="http://b028.wpc.azureedge.net/80B028/Samples/a38e6323-95e9-4f1f-9b38-75eba91704e4/5f2ce531-d508-49fb-8152-647eba422aec.ism/manifest(format=m3u8-aapl)" Grid.Row="1" Grid.Column="0"/>
+                    <MediaPlayerElement x:Name="mpeCopy" Grid.Row="0"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <TextBox x:Name="mpeCopyUri" MaxWidth="300" TextWrapping="Wrap" Text="http://b028.wpc.azureedge.net/80B028/Samples/a38e6323-95e9-4f1f-9b38-75eba91704e4/5f2ce531-d508-49fb-8152-647eba422aec.ism/manifest(format=m3u8-aapl)" Grid.Row="1" Grid.Column="1"/>
+                    <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <Button x:Name="Load" IsEnabled="False" Click="Load_Click">
+                            <SymbolIcon Symbol="Refresh"/>
+                        </Button>
+                        <Button x:Name="Seek30SecondsBack" Content="&lt;&lt;30s" IsEnabled="False" Click="Seek30SecondsBack_Click"/>
+                        <Button x:Name="Seek2SecondsBack" Content="&lt;&lt;2s" IsEnabled="False" Click="Seek2SecondsBack_Click"/>
+                        <Button x:Name="PlayPause" IsEnabled="False" Click="PlayPause_Click">
+                            <SymbolIcon x:Name="PlayPauseIcon" Symbol="Play"/>
+                        </Button>
+                        <Button x:Name="Seek2SecondsForward" Content="2s&gt;&gt;" IsEnabled="False" Click="Seek2SecondsForward_Click"/>
+                        <Button x:Name="Seek30SecondsForward" Content="30s&gt;&gt;" IsEnabled="False" Click="Seek30SecondsForward_Click"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <TextBlock Text=" Offset: "/>
+                        <TextBox x:Name="mpeCopyOffset" Text="0.0" Height="20"/>
+                        <TextBlock Text=" Position: "/>
+                        <TextBlock x:Name="SeekPosition"/>
+                        <TextBlock x:Name="NaturalDuration"/>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

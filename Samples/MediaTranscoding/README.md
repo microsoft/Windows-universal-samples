@@ -5,24 +5,31 @@
 
 # Transcoding media sample
   
-This sample demonstrates how to use the [**Windows.Media.Transcoding**](http://msdn.microsoft.com/library/windows/apps/br207105) API to transcode a video file in a Windows Store app.. Transcoding is the conversion of a digital media file, such as a video or audio file, from one format to another. For example, you might convert a Windows Media file to MP4 so that it can be played on a portable device that supports MP4 format. Or, you might convert a high-definition video file to a lower resolution. In that case, the re-encoded file might use the same codec as the original file, but it would have a different encoding profile.  
+Shows how to use the [Windows.Media.Transcoding](http://msdn.microsoft.com/library/windows/apps/br207105) API to transcode a video file in a Windows Store app.. Transcoding is the conversion of a digital media file, such as a video or audio file, from one format to another. For example, you might convert a Windows Media file to MP4 so that it can be played on a portable device that supports MP4 format. Or, you might convert a high-definition video file to a lower resolution. In that case, the re-encoded file might use the same codec as the original file, but it would have a different encoding profile.  
   
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
 This sample covers the following scenarios:  
   
 -   Converting a video file from one resolution to another resolution.  
 -   Converting a video file using a custom output format.  
--   Creating a clip from a video using the [**TrimStart**](http://msdn.microsoft.com/library/windows/apps/br207103) and [**TrimStop**](http://msdn.microsoft.com/library/windows/apps/br207104) API.  
+-   Creating a clip from a video using the [TrimStart](http://msdn.microsoft.com/library/windows/apps/br207103) and [TrimStop](http://msdn.microsoft.com/library/windows/apps/br207104) API.  
   
 Some of the transcode API covered in this sample are:  
   
--   [**Windows.Media.Transcoding**](http://msdn.microsoft.com/library/windows/apps/br207105)  
--   [**MediaTranscoder**](http://msdn.microsoft.com/library/windows/apps/br207080)  
--   [**MediaTranscoder.PrepareFileTranscodeAsync**](http://msdn.microsoft.com/library/windows/apps/hh700936)  
--   [**PrepareTranscodeResult**](http://msdn.microsoft.com/library/windows/apps/hh700941)  
--   [**PrepareTranscodeResult.TranscodeAsync**](http://msdn.microsoft.com/library/windows/apps/hh700946)  
--   [**MediaProperties.MediaEncodingProfile**](http://msdn.microsoft.com/library/windows/apps/hh701026)  
--   [**TrimStart**](http://msdn.microsoft.com/library/windows/apps/br207103)  
--   [**TrimStop**](http://msdn.microsoft.com/library/windows/apps/br207104)  
+-   [Windows.Media.Transcoding](http://msdn.microsoft.com/library/windows/apps/br207105)  
+-   [MediaTranscoder](http://msdn.microsoft.com/library/windows/apps/br207080)  
+-   [MediaTranscoder.PrepareFileTranscodeAsync](http://msdn.microsoft.com/library/windows/apps/hh700936)  
+-   [PrepareTranscodeResult](http://msdn.microsoft.com/library/windows/apps/hh700941)  
+-   [PrepareTranscodeResult.TranscodeAsync](http://msdn.microsoft.com/library/windows/apps/hh700946)  
+-   [MediaProperties.MediaEncodingProfile](http://msdn.microsoft.com/library/windows/apps/hh701026)  
+-   [TrimStart](http://msdn.microsoft.com/library/windows/apps/br207103)  
+-   [TrimStop](http://msdn.microsoft.com/library/windows/apps/br207104)  
   
 For more info about transcoding video files in Windows Store apps, see [Transcode media files](https://msdn.microsoft.com/library/windows/apps/mt282149) and [Transcode media files](https://msdn.microsoft.com/library/windows/apps/mt282149).  
 
@@ -33,36 +40,25 @@ For more info about transcoding video files in Windows Store apps, see [Transcod
 **Roadmaps**  
   
 [Roadmap for apps using C\# and Visual Basic](http://msdn.microsoft.com/library/windows/apps/br229583)  
-  
 [Roadmap for apps using JavaScript](http://msdn.microsoft.com/library/windows/apps/hh465037)  
-  
 [Roadmap for apps using C++](http://msdn.microsoft.com/library/windows/apps/hh700360)  
-  
 [Designing UX for apps](http://msdn.microsoft.com/library/windows/apps/hh767284)  
-  
-[Audio, video, and camera](https://msdn.microsoft.com/library/windows/apps/mt203788)
+[Audio, video, and camera](https://msdn.microsoft.com/library/windows/apps/mt203788)  
   
 **Tasks**  
   
-[Transcode media files](https://msdn.microsoft.com/library/windows/apps/mt282149)
-  
+[Transcode media files](https://msdn.microsoft.com/library/windows/apps/mt282149)  
+
 **Reference**  
   
-[**Windows.Media.Transcoding**](http://msdn.microsoft.com/library/windows/apps/br207105)  
-  
-[**MediaTranscoder**](http://msdn.microsoft.com/library/windows/apps/br207080)  
-  
-[**MediaTranscoder.PrepareFileTranscodeAsync**](http://msdn.microsoft.com/library/windows/apps/hh700936)  
-  
-[**PrepareTranscodeResult**](http://msdn.microsoft.com/library/windows/apps/hh700941)  
-  
-[**PrepareTranscodeResult.TranscodeAsync**](http://msdn.microsoft.com/library/windows/apps/hh700946)  
-  
-[**MediaProperties.MediaEncodingProfile**](http://msdn.microsoft.com/library/windows/apps/hh701026)  
-  
-[**TrimStart**](http://msdn.microsoft.com/library/windows/apps/br207103)  
-  
-[**TrimStop**](http://msdn.microsoft.com/library/windows/apps/br207104)  
+[Windows.Media.Transcoding](http://msdn.microsoft.com/library/windows/apps/br207105)  
+[MediaTranscoder](http://msdn.microsoft.com/library/windows/apps/br207080)  
+[MediaTranscoder.PrepareFileTranscodeAsync](http://msdn.microsoft.com/library/windows/apps/hh700936)  
+[PrepareTranscodeResult](http://msdn.microsoft.com/library/windows/apps/hh700941)  
+[PrepareTranscodeResult.TranscodeAsync](http://msdn.microsoft.com/library/windows/apps/hh700946)  
+[MediaProperties.MediaEncodingProfile](http://msdn.microsoft.com/library/windows/apps/hh701026)  
+[TrimStart](http://msdn.microsoft.com/library/windows/apps/br207103)  
+[TrimStop](http://msdn.microsoft.com/library/windows/apps/br207104)  
   
 ## System requirements
 

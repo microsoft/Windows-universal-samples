@@ -23,6 +23,7 @@
 namespace org { namespace alljoyn { namespace Onboarding {
 
 // Signals
+// "This signal is emitted when the connection attempt against the personal AP is completed"
 public ref class OnboardingConnectionResultReceivedEventArgs sealed
 {
 public:

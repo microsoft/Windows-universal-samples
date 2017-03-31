@@ -42,6 +42,7 @@ Scenario3_AspectRatio::Scenario3_AspectRatio()
     , _mediaCapture(nullptr)
     , _isPreviewing(false)
     , _isRecording(false)
+    , _captureFolder(nullptr)
 {
     InitializeComponent();
 }
@@ -70,6 +71,17 @@ task<void> Scenario3_AspectRatio::InitializeCameraAsync()
     {
         PreviewControl->Source = _mediaCapture.Get();
         return create_task(_mediaCapture->StartPreviewAsync());
+    }).then([this]()
+    {
+        return create_task(StorageLibrary::GetLibraryAsync(KnownLibraryId::Pictures));
+    }).then([this](StorageLibrary^ picturesLibrary)
+    {
+        _captureFolder = picturesLibrary->SaveFolder;
+        if (_captureFolder == nullptr)
+        {
+            // In this case fall back to the local app storage since the Pictures Library is not available
+            _captureFolder = ApplicationData::Current->LocalFolder;
+        }
     }).then([this](task<void> previousTask)
     {
         try
@@ -119,7 +131,7 @@ task<void> Scenario3_AspectRatio::CleanupCameraAsync()
 /// Initializes the camera and populates the UI
 /// </summary>
 /// <param name="sender"></param>
-void Scenario3_AspectRatio::InitializeCameraButton_Tapped(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^)
+void Scenario3_AspectRatio::InitializeCameraButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^)
 {
     Button^ button = static_cast<Button^>(sender);
     button->IsEnabled = false;
@@ -141,14 +153,14 @@ void Scenario3_AspectRatio::InitializeCameraButton_Tapped(Platform::Object^ send
 /// <summary>
 /// Records an MP4 video to a StorageFile
 /// </summary>
-void Scenario3_AspectRatio::VideoButton_Tapped(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^)
+void Scenario3_AspectRatio::VideoButton_Click(Platform::Object^, Windows::UI::Xaml::RoutedEventArgs^)
 {
     if (_isPreviewing)
     {
         if (!_isRecording)
         {
             // Create a storage file and begin recording
-            create_task(KnownFolders::VideosLibrary->CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption::GenerateUniqueName))
+            create_task(_captureFolder->CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption::GenerateUniqueName))
                 .then([this](StorageFile^ file)
             {
                 return create_task(_mediaCapture->StartRecordToStorageFileAsync(MediaEncodingProfile::CreateMp4(VideoEncodingQuality::Auto), file))

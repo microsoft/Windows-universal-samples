@@ -88,7 +88,7 @@ Namespace Global.BackgroundTransfer
             End If
         End Function
 
-        Private Async Sub StartDownload(priority As BackgroundTransferPriority, requestUnconstrainedDownload As Boolean)
+        Private Async Sub StartDownload(priority As BackgroundTransferPriority)
             ' Validating the URI is required since it was received from an untrusted source (user input).
             ' The URI is validated by calling Uri.TryCreate() that will return 'false' for strings that are not valid URIs.
             ' Note that when enabling the text box users may provide URIs to machines on the intrAnet that require
@@ -117,34 +117,15 @@ Namespace Global.BackgroundTransfer
             Dim download As DownloadOperation = downloader.CreateDownload(source, destinationFile)
             Log(String.Format(CultureInfo.CurrentCulture, "Downloading {0} to {1} with {2} priority, {3}", source.AbsoluteUri, destinationFile.Name, priority, download.Guid))
             download.Priority = priority
-            If Not requestUnconstrainedDownload Then
-                Await HandleDownloadAsync(download, True)
-                Return
-            End If
-
-            Dim requestOperations As List(Of DownloadOperation) = New List(Of DownloadOperation)()
-            requestOperations.Add(download)
-            ' If the app isn't actively being used, at some point the system may slow down or pause long running
-            ' downloads. The purpose of this behavior is to increase the device's battery life.
-            ' By requesting unconstrained downloads, the app can request the system to not suspend any of the
-            ' downloads in the list for power saving reasons.
-            ' Use this API with caution since it not only may reduce battery life, but it may show a prompt to
-            ' the user.
-            Dim result As UnconstrainedTransferRequestResult = Await BackgroundDownloader.RequestUnconstrainedDownloadsAsync(requestOperations)
-            Log(String.Format(CultureInfo.CurrentCulture, "Request for unconstrained downloads has been {0}", (If(result.IsUnconstrained, "granted", "denied"))))
             Await HandleDownloadAsync(download, True)
         End Sub
 
         Private Sub StartDownload_Click(sender As Object, e As RoutedEventArgs)
-            StartDownload(BackgroundTransferPriority.Default, False)
+            StartDownload(BackgroundTransferPriority.Default)
         End Sub
 
         Private Sub StartHighPriorityDownload_Click(sender As Object, e As RoutedEventArgs)
-            StartDownload(BackgroundTransferPriority.High, False)
-        End Sub
-
-        Private Sub StartUnconstrainedDownload_Click(sender As Object, e As RoutedEventArgs)
-            StartDownload(BackgroundTransferPriority.Default, True)
+            StartDownload(BackgroundTransferPriority.High)
         End Sub
 
         Private Sub PauseAll_Click(sender As Object, e As RoutedEventArgs)

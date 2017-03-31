@@ -37,7 +37,7 @@ namespace SDKTemplate
 
         private async void CreateFileButton_Click(object sender, RoutedEventArgs e)
         {
-            StorageFolder storageFolder = KnownFolders.PicturesLibrary;
+            StorageFolder storageFolder = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
             try
             {
                 rootPage.sampleFile = await storageFolder.CreateFileAsync(MainPage.filename, CreationCollisionOption.ReplaceExisting);

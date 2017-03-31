@@ -25,7 +25,7 @@ BasicSubPage::BasicSubPage()
 }
 
 
-void BasicSubPage::OnNavigatedTo(NavigationEventArgs^ e) 
+void BasicSubPage::OnNavigatedTo(NavigationEventArgs^ e)
 {
     auto param = dynamic_cast<String^>(e->Parameter);
     if (nullptr != param)

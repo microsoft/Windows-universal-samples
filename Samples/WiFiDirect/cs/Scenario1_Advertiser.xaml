@@ -11,158 +11,113 @@
 //*********************************************************
 -->
 <Page
-    x:Class="SDKTemplate.Scenario1"
+    x:Class="SDKTemplate.Scenario1_Advertiser"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SDKTemplate"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:SDKTemplate"
+    xmlns:wifidirect="using:Windows.Devices.WiFiDirect"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid x:Name="RootGrid" Margin="12,10,12,12">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <StackPanel Margin="0,0,0,10">
-                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                    This scenario illustrates how to make the local device discoverable, and how to listen for and accept an incoming connection request.
-                </TextBlock>
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12"
+                  VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                        This scenario illustrates how to make the system discoverable, and how to listen for and accept an incoming connection request.
+            </TextBlock>
+
+            <VariableSizedWrapGrid Orientation="Horizontal">
+                <!-- Advertisement parameters -->
+                <StackPanel HorizontalAlignment="Left" Width="335" Margin="0,10,10,0" Padding="5">
+                    <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Advertisement"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBlock Text="Listen State:" Margin="0,5,10,0"/>
+                        <ComboBox x:Name="cmbListenState">
+                            <ComboBoxItem Content="Normal" IsSelected="True">
+                                <ComboBoxItem.Tag>
+                                    <wifidirect:WiFiDirectAdvertisementListenStateDiscoverability>
+                                        Normal
+                                    </wifidirect:WiFiDirectAdvertisementListenStateDiscoverability>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="Intensive">
+                                <ComboBoxItem.Tag>
+                                    <wifidirect:WiFiDirectAdvertisementListenStateDiscoverability>
+                                        Intensive
+                                    </wifidirect:WiFiDirectAdvertisementListenStateDiscoverability>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="None">
+                                <ComboBoxItem.Tag>
+                                    <wifidirect:WiFiDirectAdvertisementListenStateDiscoverability>
+                                        None
+                                    </wifidirect:WiFiDirectAdvertisementListenStateDiscoverability>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <CheckBox x:Name="chkListener" Content="Enable Listener" IsChecked="True"/>
+                    <CheckBox x:Name="chkPreferGroupOwnerMode" Content="Group Owner"/>
+
+                    <!-- Legacy mode group owner settings require that IsAutonomousGroupOwnerEnabled be true -->
+                    <StackPanel Margin="20,0,0,0" Visibility="{x:Bind chkPreferGroupOwnerMode.IsChecked.Value, Mode=OneWay}">
+                        <CheckBox x:Name="chkLegacySetting" Content="Enable legacy mode GO"/>
+                        <!-- Legacy mode properties require that legacy mode be enabled -->
+                        <Grid Visibility="{x:Bind chkLegacySetting.IsChecked.Value, Mode=OneWay}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Passphrase:" Grid.Column="0" Grid.Row="0" Margin="5,5,0,0"/>
+                            <TextBox x:Name="txtPassphrase" Margin="10,5,0,0" ToolTipService.ToolTip="Passphrase for legacy mode GO" Grid.Row ="0" Grid.Column="1"/>
+                            <TextBlock Text="SSID:" Grid.Column="0" Grid.Row="1" Margin="5,5,0,0"/>
+                            <TextBox x:Name="txtSsid" Margin="10,5,0,0" ToolTipService.ToolTip="SSID for legacy mode GO" Grid.Row ="1" Grid.Column="1"/>
+                        </Grid>
+                    </StackPanel>
+                    <TextBlock HorizontalAlignment="Left" Text="Informational Element:" Margin="0,10,0,0"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBox x:Name="txtInformationElement" Width="250"/>
+                        <Button x:Name="btnAddIe"
+                                IsEnabled="{x:Bind local:Utils.IsNonEmptyString(txtInformationElement.Text), Mode=OneWay}"
+                                Content="Add" Click="btnAddIe_Click" Margin="10,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button x:Name="btnStartAdvertisement" Content="Start Advertisement" Click="btnStartAdvertisement_Click"/>
+                        <Button x:Name="btnStopAdvertisement" Content="Stop Advertisement" IsEnabled="False" Click="btnStopAdvertisement_Click" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Connection parameters -->
+                <local:ConnectionSettingsPanel x:Name="connectionSettingsPanel" Width="335" Margin="0,10,0,0"/>
+            </VariableSizedWrapGrid>
+
+            <StackPanel Margin="0,10,0,0">
+                <TextBlock Text="Connected devices:"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ListView x:Name="lvConnectedDevices" HorizontalAlignment="Left" Height="134" Width="314"
+                              ItemsSource="{x:Bind ConnectedDevices}" DisplayMemberPath="DisplayName"
+                              SelectionMode="Single" Background="DimGray"/>
+                </ScrollViewer>
+                <Button Name="btnCloseDevice" Content="Close Device"
+                        Click="btnCloseDevice_Click" Margin="0,10,0,0"/>
+
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBox x:Name="txtSendMessage" Width="200" PlaceholderText="Enter a message"/>
+                        <Button x:Name="btnSendMessage" Content="Send"
+                                IsEnabled="{x:Bind local:Utils.CanSendMessage(txtSendMessage.Text\, lvConnectedDevices.SelectedItem), FallbackValue=False, Mode=OneWay}"
+                                Margin="10,0,0,0" Click="btnSendMessage_Click"/>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
-
-            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto"
-                                       HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel x:Name="ListenState" Grid.Row="0" Grid.Column="0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-                            <TextBlock HorizontalAlignment="Left" Height="35" TextWrapping="Wrap" Text="Listen State:" VerticalAlignment="Top" Width="113" FontSize="20" FontFamily="Segoe UI" Grid.Column="0" Grid.Row="0" Margin="5,0,0,0"/>
-                            <ComboBox x:Name="cmbListenState" HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="208" Margin="113,2,0,0" Grid.Column="0" Grid.Row="0">
-                                <ComboBoxItem Content="Normal" IsSelected="True"/>
-                                <ComboBoxItem Content="Intensive"/>
-                                <ComboBoxItem Content="None"/>
-                            </ComboBox>
-                            <Button x:Name="btnStartAdvertisement" Content="Start Adv" HorizontalAlignment="Left" Height="45" Margin="5,10,0,0" VerticalAlignment="Top" Width="140" FontSize="20" Click="btnStartAdvertisement_Click"  ToolTipService.ToolTip="WiFiDirectAdvertisementPublisher.Start" Grid.Row ="1" Grid.Column="0"/>
-                            <Button x:Name="btnStopAdvertisement" Content="Stop Adv" HorizontalAlignment="Left" Height="45"  VerticalAlignment="Top" Width="140" FontSize="20" Click="btnStopAdvertisement_Click"  ToolTipService.ToolTip="WiFiDirectAdvertisementPublisher.Stop" Grid.Row ="1" Grid.Column="1" Margin="155,10,0,0"/>
-                        </Grid>
-                    </StackPanel>
-
-                    <StackPanel x:Name="GroupOwner" Grid.Row="0" Grid.Column="1">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <CheckBox x:Name="chkListener" Content="Enable Listener" HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="168" FontSize="20" IsChecked="True" Grid.Row="0" Margin="10,0,0,0"/>
-                            <CheckBox x:Name="chkPreferGroupOwnerMode" Content="Group Owner" HorizontalAlignment="Left" Height="33" Margin="10,0,0,0" VerticalAlignment="Top" Width="158" FontSize="20" Grid.Row="1"/>
-                            <TextBlock HorizontalAlignment="Left" Height="35" Margin="170,5,0,0" TextWrapping="Wrap" Text="GO Intent:" VerticalAlignment="Top" Width="95" FontSize="20" FontFamily="Segoe UI" Grid.Row="1"/>
-                            <TextBox x:Name="txtGOIntent" HorizontalAlignment="Left" Height="35" Margin="270,0,0,0" Text="0" VerticalAlignment="Top" Width="30" InputScope="Number" FontSize="20" MaxLength="3" ToolTipService.ToolTip="GO Intent" Grid.Row="1"/>
-                        </Grid>
-                    </StackPanel>
-
-                    <StackPanel x:Name="IE" Grid.Row="0" Grid.Column="2">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <TextBlock HorizontalAlignment="Left" Height="35" TextWrapping="Wrap" Text="IE:" VerticalAlignment="Top" Width="25" FontSize="20" FontFamily="Segoe UI" Margin="10,0,0,0"/>
-                            <TextBox x:Name="txtInformationElement" HorizontalAlignment="Left" Height="39"  TextWrapping="Wrap" VerticalAlignment="Center" Width="227" Margin="40,0,0,0"/>
-                            <Button x:Name="btnAddIe" Content="Add" HorizontalAlignment="Left" Height="45" VerticalAlignment="Center" Width="140" FontSize="20" Click="btnAddIe_Click"  HorizontalContentAlignment="Center" Margin="275,0,0,0"/>
-                        </Grid>
-                    </StackPanel>
-
-                    <StackPanel x:Name="ConnectedDevices" Grid.Row="1" Grid.Column="0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <TextBlock HorizontalAlignment="Left" Height="34" Margin="10,10,0,0" TextWrapping="Wrap" Text="Connected Devices:" VerticalAlignment="Top" Width="183" FontSize="20" FontFamily="Segoe UI"/>
-                            <ListView x:Name="lvConnectedDevices" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="134" Margin="10,50,0,0" VerticalAlignment="Top" Width="314" Background="DimGray"/>
-                        </Grid>
-                    </StackPanel>
-
-                    <StackPanel x:Name="SendMessage" Grid.Row="1" Grid.Column="1">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Button x:Name="btnSendMessage" Content="Send" Margin="10,10,0,0" Click="btnSendMessage_Click" Grid.Row="0" Width="100" FontSize="20"/>
-                            <TextBox x:Name="txtSendMessage" Margin="115,10,0,0" Grid.Row="0"/>
-                            <Button Name="btnCloseDevice" Content="Close Device" Grid.Row="1" Margin="10,10,0,0" Click="btnCloseDevice_Click" Height="45" Width="140" HorizontalContentAlignment="Center" FontSize="20"/>
-                        </Grid>
-                    </StackPanel>
-                </Grid>
-            </ScrollViewer>
-        </Grid>
-
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="WindowStates">
-                <VisualState x:Name="wideState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="641" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="ListenState.(Grid.Row)" Value="0" />
-                        <Setter Target="ListenState.(Grid.Column)" Value="0" />
-
-                        <Setter Target="GroupOwner.(Grid.Row)" Value="0" />
-                        <Setter Target="GroupOwner.(Grid.Column)" Value="1" />
-
-                        <Setter Target="IE.(Grid.Row)" Value="0" />
-                        <Setter Target="IE.(Grid.Column)" Value="2" />
-
-                        <Setter Target="ConnectedDevices.(Grid.Row)" Value="1" />
-                        <Setter Target="ConnectedDevices.(Grid.Column)" Value="0" />
-
-                        <Setter Target="SendMessage.(Grid.Row)" Value="1" />
-                        <Setter Target="SendMessage.(Grid.Column)" Value="1" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="narrowState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="ListenState.(Grid.Row)" Value="0" />
-                        <Setter Target="ListenState.(Grid.Column)" Value="0" />
-
-                        <Setter Target="GroupOwner.(Grid.Column)" Value="0" />
-                        <Setter Target="GroupOwner.(Grid.Row)" Value="1" />
-
-                        <Setter Target="IE.(Grid.Column)" Value="0" />
-                        <Setter Target="IE.(Grid.Row)" Value="2" />
-
-                        <Setter Target="ConnectedDevices.(Grid.Column)" Value="0" />
-                        <Setter Target="ConnectedDevices.(Grid.Row)" Value="3" />
-
-                        <Setter Target="SendMessage.(Grid.Row)" Value="4" />
-                        <Setter Target="SendMessage.(Grid.Column)" Value="0" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-    </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

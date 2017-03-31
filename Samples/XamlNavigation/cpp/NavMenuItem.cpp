@@ -34,4 +34,33 @@ namespace NavigationMenuSample
         wchar_t c[] = { (wchar_t)((int)(Symbol)), '\0' };
         return ref new String(c);
     }
+
+    bool NavMenuItem::IsSelected::get()
+    {
+        return m_isSelected;
+    }
+
+    void NavMenuItem::IsSelected::set(bool value)
+    {
+        m_isSelected = value;
+        NavMenuItem::SelectedVis = value ? Visibility::Visible : Visibility::Collapsed;
+        NotifyPropertyChanged("IsSelected");
+    }
+
+    Visibility NavMenuItem::SelectedVis::get()
+    {
+        m_selectedVisibility = NavMenuItem::IsSelected ? Visibility::Visible : Visibility::Collapsed;
+        return m_selectedVisibility;
+    }
+
+    void NavMenuItem::SelectedVis::set(Visibility value)
+    {
+        m_selectedVisibility = value;
+        NotifyPropertyChanged("SelectedVis");
+    }
+
+    void NavMenuItem::NotifyPropertyChanged(String^ prop)
+    {
+        PropertyChanged(this, ref new PropertyChangedEventArgs(prop));
+    }
 }

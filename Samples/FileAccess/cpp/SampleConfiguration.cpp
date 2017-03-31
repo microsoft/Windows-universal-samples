@@ -34,7 +34,10 @@ void MainPage::Initialize()
 
 void MainPage::ValidateFile()
 {
-    create_task(KnownFolders::PicturesLibrary->TryGetItemAsync(Filename)).then([this](IStorageItem^ item)
+    create_task(KnownFolders::GetFolderForUserAsync(nullptr /* current user */, KnownFolderId::PicturesLibrary)).then([this](StorageFolder^ picturesFolder)
+    {
+        return picturesFolder->TryGetItemAsync(Filename);
+    }).then([this](IStorageItem^ item)
     {
         sampleFile = safe_cast<StorageFile^>(item);
         if (item == nullptr)

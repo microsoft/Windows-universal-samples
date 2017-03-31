@@ -28,8 +28,8 @@
                     Current license mode: <Run x:Name="LicenseMode">Unknown</Run>
                 </TextBlock>
 
-                <Button Content="Show trial period information" Margin="0,10,0,0" Click="{x:Bind ShowTrialPeriodInformation}"/>
-                <Button Margin="0,10,0,0" Click="{x:Bind PurchaseFullLicense}">
+                <Button Content="Show trial period information" Margin="0,12,0,0" Click="{x:Bind ShowTrialPeriodInformation}"/>
+                <Button Margin="0,12,0,0" Click="{x:Bind PurchaseFullLicense}">
                     <TextBlock>Buy app (<Run x:Name="PurchasePrice">Price unknown</Run>)</TextBlock>
                 </Button>
             </StackPanel>

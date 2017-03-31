@@ -24,7 +24,8 @@ namespace SDKTemplate
         {
             new Scenario() { Title = "Data Events", ClassType = typeof(ProximityCS.Scenario1_DataEvents) },
             new Scenario() { Title = "Polling", ClassType = typeof(ProximityCS.Scenario2_Polling) },
-            new Scenario() { Title = "Display On/Off", ClassType = typeof(ProximityCS.Scenario3_DisplayOnOff) }
+            new Scenario() { Title = "Display On/Off", ClassType = typeof(ProximityCS.Scenario3_DisplayOnOff) },
+            new Scenario() { Title = "Background Proximity Sensor", ClassType = typeof(ProximityCS.Scenario4_BackgroundProximitySensor) }
         };
     }
 

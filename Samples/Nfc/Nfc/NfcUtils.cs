@@ -90,8 +90,8 @@ namespace NfcSample
 
             BackgroundAccessStatus status = await BackgroundExecutionManager.RequestAccessAsync();
 
-            return status == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity 
-                || status == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity;
+            return status == BackgroundAccessStatus.AlwaysAllowed
+                || status == BackgroundAccessStatus.AllowedSubjectToSystemPolicy;
         }
 
         private static void BgTask_Progress(BackgroundTaskRegistration sender, BackgroundTaskProgressEventArgs args)

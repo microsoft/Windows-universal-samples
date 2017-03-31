@@ -8,8 +8,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.14393.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -145,6 +145,9 @@
       <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Scenario0_Choose.xaml.h">
+      <DependentUpon>..\shared\Scenario0_Choose.xaml</DependentUpon>
+    </ClInclude>
     <ClInclude Include="Scenario1_DataEvents.xaml.h">
       <DependentUpon>..\shared\Scenario1_DataEvents.xaml</DependentUpon>
     </ClInclude>
@@ -168,6 +171,7 @@
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="..\shared\Scenario0_Choose.xaml" />
     <Page Include="..\shared\Scenario1_DataEvents.xaml" />
     <Page Include="..\shared\Scenario2_ShakeEvents.xaml" />
     <Page Include="..\shared\Scenario3_Polling.xaml" />
@@ -198,6 +202,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Scenario0_Choose.xaml.cpp">
+      <DependentUpon>..\shared\Scenario0_Choose.xaml</DependentUpon>
+    </ClCompile>
     <ClCompile Include="Scenario1_DataEvents.xaml.cpp">
       <DependentUpon>..\shared\Scenario1_DataEvents.xaml</DependentUpon>
     </ClCompile>

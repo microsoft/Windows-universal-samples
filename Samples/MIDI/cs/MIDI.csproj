@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -183,16 +183,15 @@
   <!--
 
    This framework is required for using the GS Synth from appx packages.
-   However, there is currently a problem with referencing this framework and it won't work.
-   Leaving this commented out will allow this appx to be deployed, but trying to use the GS synth will not work.
-
+   Note: This requires Visual Studio 2015 Update 1 : https://www.visualstudio.com/news/vs2015-update1-vs
+   Appx will not deploy successfully unless Visual Studio 2015 Update 1 is used.
+  -->
+  
   <ItemGroup>
-    <SDKReference Include="Microsoft.Midi.GmDls, Version=10.0.10240.0">
+    <SDKReference Include="Microsoft.Midi.GmDls, Version=10.0.14393.0">
       <Name>Microsoft General MIDI DLS for Universal Windows Apps</Name>
     </SDKReference>
   </ItemGroup>
-  
-  -->
   
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

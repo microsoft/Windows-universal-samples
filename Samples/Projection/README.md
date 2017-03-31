@@ -5,20 +5,26 @@
 
 # Projection sample
 
-This sample demonstrates how to display two different views of your app UI on different screens, as users might do when projecting your app in a meeting or conference.
+Shows how to display two different views of your app UI on different screens, as users might do when projecting your app in a meeting or conference.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 The sample demonstrates:
 
 -  Displaying two different views of your app on different screens.
 -  Starting, stopping and swapping views.
--  Using [**ProjectionManager**](http://msdn.microsoft.com/library/windows/apps/dn281126) and [**ApplicationViewSwitcher**](http://msdn.microsoft.com/library/windows/apps/dn281094) APIs.
+-  Using [ProjectionManager](http://msdn.microsoft.com/library/windows/apps/dn281126) and [ApplicationViewSwitcher](http://msdn.microsoft.com/library/windows/apps/dn281094) APIs.
 -  Enumerating available screens to project to and projecting a view of your app to a specific one.
 
 ## Related topics
 
-[**ProjectionManager**](http://msdn.microsoft.com/library/windows/apps/dn281126)
-
-[**ApplicationViewSwitcher**](http://msdn.microsoft.com/library/windows/apps/dn281094)
+[ProjectionManager](http://msdn.microsoft.com/library/windows/apps/dn281126)  
+[ApplicationViewSwitcher](http://msdn.microsoft.com/library/windows/apps/dn281094)  
 
 ## System requirements
 

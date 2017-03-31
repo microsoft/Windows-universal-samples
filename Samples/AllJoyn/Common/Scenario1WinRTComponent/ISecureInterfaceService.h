@@ -25,14 +25,17 @@ namespace com { namespace microsoft { namespace Samples { namespace SecureInterf
 public interface class ISecureInterfaceService
 {
 public:
+    // "Concatenate two input strings and returns the concatenated string as output"
     // Implement this function to handle calls to the Concatenate method.
     Windows::Foundation::IAsyncOperation<SecureInterfaceConcatenateResult^>^ ConcatenateAsync(_In_ Windows::Devices::AllJoyn::AllJoynMessageInfo^ info , _In_ Platform::String^ interfaceMemberInStr1, _In_ Platform::String^ interfaceMemberInStr2);
 
+    // "Determine if the output of the Concatenate method is returned as upper case string or not"
     // Implement this function to handle requests for the value of the IsUpperCaseEnabled property.
     //
     // Currently, info will always be null, because no information is available about the requestor.
     Windows::Foundation::IAsyncOperation<SecureInterfaceGetIsUpperCaseEnabledResult^>^ GetIsUpperCaseEnabledAsync(Windows::Devices::AllJoyn::AllJoynMessageInfo^ info);
 
+    // "Determine if the output of the Concatenate method is returned as upper case string or not"
     // Implement this function to handle requests to set the IsUpperCaseEnabled property.
     //
     // Currently, info will always be null, because no information is available about the requestor.

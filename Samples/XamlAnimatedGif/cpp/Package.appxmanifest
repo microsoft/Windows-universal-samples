@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp"
+  >
+  <Identity Name="Microsoft.SDKSamples.AnimatedGif.CPP" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.0"/>
+  <mp:PhoneIdentity PhoneProductId="eb5c141f-2f94-4fd7-8839-5db07b8b9720" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <Properties>
+    <DisplayName>XAML Animated GIF C++ Sample</DisplayName>
+    <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+    <Logo>Assets\StoreLogo-sdk.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0"/>
+  </Dependencies>
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="App">
+      <uap:VisualElements
+        DisplayName="XAML Animated GIF C++ Sample"
+        Square150x150Logo="Assets\squaretile-sdk.png"
+        Square44x44Logo="Assets\Smalltile-sdk.png"
+        Description="XAML Animated GIF C++ Sample"
+        BackgroundColor="#00b2f0"
+        >
+        <uap:SplashScreen Image="Assets\Splash-sdk.png"/>
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+</Package>

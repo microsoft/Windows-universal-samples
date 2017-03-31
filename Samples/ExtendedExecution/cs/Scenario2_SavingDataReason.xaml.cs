@@ -11,6 +11,7 @@
 //*********************************************************
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.ExtendedExecution;
@@ -27,6 +28,8 @@ namespace SDKTemplate
     public sealed partial class SavingDataReason : Page
     {
         private MainPage rootPage = MainPage.Current;
+
+        private CancellationTokenSource cancellationTokenSource;
 
         public SavingDataReason()
         {
@@ -61,13 +64,17 @@ namespace SDKTemplate
                 {
                     case ExtendedExecutionResult.Allowed:
                         // We can perform a longer save operation (e.g., upload to the cloud).
-                        MainPage.DisplayToast("Performing a long save operation.");
-                        await Task.Delay(TimeSpan.FromSeconds(10));
-                        MainPage.DisplayToast("Still saving.");
-                        await Task.Delay(TimeSpan.FromSeconds(10));
-                        MainPage.DisplayToast("Long save complete.");
+                        try
+                        {
+                            MainPage.DisplayToast("Performing a long save operation.");
+                            cancellationTokenSource = new CancellationTokenSource();
+                            await Task.Delay(TimeSpan.FromSeconds(10), cancellationTokenSource.Token);
+                            MainPage.DisplayToast("Still saving.");
+                            await Task.Delay(TimeSpan.FromSeconds(10), cancellationTokenSource.Token);
+                            MainPage.DisplayToast("Long save complete.");
+                        }
+                        catch (TaskCanceledException) { }
                         break;
-
                     default:
                     case ExtendedExecutionResult.Denied:
                         // We must perform a fast save operation.
@@ -85,15 +92,21 @@ namespace SDKTemplate
 
         private async void ExtendedExecutionSessionRevoked(object sender, ExtendedExecutionRevokedEventArgs args)
         {
+            //If session is revoked, make the OnSuspending event handler stop or the application will be terminated
+            if (cancellationTokenSource != null){ cancellationTokenSource.Cancel(); }
+
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 switch (args.Reason)
                 {
                     case ExtendedExecutionRevokedReason.Resumed:
+                        // A resumed app has returned to the foreground
                         rootPage.NotifyUser("Extended execution revoked due to returning to foreground.", NotifyType.StatusMessage);
                         break;
 
                     case ExtendedExecutionRevokedReason.SystemPolicy:
+                        //An app can be in the foreground or background when a revocation due to system policy occurs
+                        MainPage.DisplayToast("Extended execution revoked due to system policy.");
                         rootPage.NotifyUser("Extended execution revoked due to system policy.", NotifyType.StatusMessage);
                         break;
                 }

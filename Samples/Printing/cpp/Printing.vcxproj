@@ -8,8 +8,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.14393.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -170,6 +170,9 @@
     <ClInclude Include="Scenario5Photos.xaml.h">
       <DependentUpon>Scenario5Photos.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario6DisablePreview.xaml.h">
+      <DependentUpon>Scenario6DisablePreview.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
@@ -199,6 +202,7 @@
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
+    <Page Include="Scenario6DisablePreview.xaml" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -245,6 +249,9 @@
     </ClCompile>
     <ClCompile Include="Scenario5Photos.xaml.cpp">
       <DependentUpon>Scenario5Photos.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario6DisablePreview.xaml.cpp">
+      <DependentUpon>Scenario6DisablePreview.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

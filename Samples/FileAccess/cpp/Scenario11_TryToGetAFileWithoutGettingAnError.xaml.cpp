@@ -27,8 +27,11 @@ Scenario11::Scenario11() : rootPage(MainPage::Current)
 
 void Scenario11::GetFileButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
-    // Gets a file without throwing an exception
-    create_task(KnownFolders::PicturesLibrary->TryGetItemAsync("sample.dat")).then([this](IStorageItem^ item)
+    create_task(KnownFolders::GetFolderForUserAsync(nullptr /* current user */, KnownFolderId::PicturesLibrary)).then([](StorageFolder^ picturesFolder)
+    {
+        // Gets a file without throwing an exception
+        return picturesFolder->TryGetItemAsync("sample.dat");
+    }).then([this](IStorageItem^ item)
     {
         if (item != nullptr)
         {

@@ -12,9 +12,18 @@
 
         <ResourceDictionary>
             <DataTemplate x:DataType="model:IEmployee" x:Key="FullNameTemplateInSameFile">
-                <Grid>
-                    <TextBlock Text="{x:Bind Name}"/>
-                </Grid>
+                <StackPanel>
+                    <TextBlock Text="{x:Bind Name}" x:Name="tbInTemplate" />
+                    <ListView ItemsSource="{x:Bind DirectManager.ReportsOC}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="model:IEmployee">
+                                <StackPanel>
+                                    <TextBlock Text="{x:Bind Name}" x:Name="tbInTemplate"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
             </DataTemplate>
             
             <Style TargetType="ListView">
@@ -68,7 +77,7 @@
                     </ListView>
 
                     <TextBlock Grid.Row="1" Margin="10" VerticalAlignment="Top"><Run>Listview - template in same file:</Run></TextBlock>
-                    <ListView Grid.Row="1" Grid.Column="1"  ItemTemplate="{StaticResource FullNameTemplateInSameFile}" ItemsSource="{x:Bind Employees, Mode=OneWay}" />
+                    <ListView Grid.Row="1" Grid.Column="1"  ItemTemplate="{StaticResource FullNameTemplateInSameFile}" ItemsSource="{x:Bind Model.Employees, Mode=OneWay}" />
 
                     <TextBlock Grid.Row="2" Margin="10" VerticalAlignment="Top"><Run>Listview - template in a resource dictionary:</Run></TextBlock>
                     <ListView Grid.Row="2" Grid.Column="1"  ItemTemplate="{StaticResource FullNameTemplateInRDFile}" ItemsSource="{x:Bind Model.Employees, Mode=OneWay}"  />

@@ -5,9 +5,29 @@
 
 # AudioGraph sample
 
-This sample shows how to use the APIs in the **Windows.Media.Audio** namespace to create audio graphs for audio routing, mixing, and processing scenarios. An audio graph is a set of interconnected audio nodes through which audio data flows. Audio input nodes supply audio data to the graph from audio input devices, audio files, or from custom code. Audio output nodes are the destination for audio processed by the graph. Audio can be routed out of the graph to audio output devices, audio files, or custom code. The last type of node is a submix node which takes audio from one or more nodes and combines them into a single output that can be routed to other nodes in the graph. After all of the nodes have been created and the connections between them set up, you simply start the audio graph and the audio data flows from the input nodes, through any submix nodes, to the output nodes. This model makes scenarios like recording from a device's microphone to an audio file, playing audio from a file to a device's speaker, or mixing audio from multiple sources quick and easy to implement.  
+Shows how to use the **Windows.Media.Audio** namespace to create audio graphs for audio routing, mixing, and processing scenarios. 
 
-Additional scenarios are enabled with the addition of audio effects to the audio graph. Every node in an audio graph can be populated with zero or more audio effects that perform audio processing on the audio passing through the node. There are several built-in effects such as echo, equalizer, limiting, and reverb that can be attached to an audio node with just a few lines of code. You can also create your own custom audio effects that work exactly the same as the built-in effects.  
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+An audio graph is a set of interconnected audio nodes through which audio data flows. Audio input nodes supply audio data to the graph 
+from audio input devices, audio files, or from custom code. Audio output nodes are the destination for audio processed by the graph. 
+
+Audio can be routed out of the graph to audio output devices, audio files, or custom code. The last type of node is a submix node which 
+takes audio from one or more nodes and combines them into a single output that can be routed to other nodes in the graph. 
+
+After all of the nodes have been created and the connections between them set up, you simply start the audio graph and the audio data flows from the 
+input nodes, through any submix nodes, to the output nodes. This model makes scenarios like recording from a device's microphone to an 
+audio file, playing audio from a file to a device's speaker, or mixing audio from multiple sources quick and easy to implement.  
+
+Additional scenarios are enabled with the addition of audio effects to the audio graph. Every node in an audio graph can be populated with zero 
+or more audio effects that perform audio processing on the audio passing through the node. There are several built-in effects such as echo, 
+equalizer, limiting, and reverb that can be attached to an audio node with just a few lines of code. 
+You can also create your own custom audio effects that work exactly the same as the built-in effects.  
 
 This sample demonstrates several common scenarios for routing and processing audio with an audio graph:  
 
@@ -52,7 +72,7 @@ The custom effect has a property set that can be modified by calling the **SetPr
 Related topics
 --------------
 
-[Windows.Media.Audio namespace] (https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.audio.aspx)
+[Windows.Media.Audio namespace] (https://msdn.microsoft.com/library/windows/apps/windows.media.audio.aspx)
 
 
 System requirements

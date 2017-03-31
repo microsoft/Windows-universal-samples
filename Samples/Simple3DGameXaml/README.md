@@ -5,7 +5,15 @@
 
 # DirectX and XAML game sample
 
-This sample demonstrates the basic end-to-end implementation of a simple first person 3-D game using DirectX (Direct3D 11.2, Direct2D, Windows.Gaming.Input, and XAudio2) and XAML in a C++ app. XAML is used for the heads-up display and game state messages.
+Shows the basic end-to-end implementation of a simple first person 3-D game using DirectX (Direct3D 11.2, Direct2D, Windows.Gaming.Input, and XAudio2) 
+and XAML in a C++ app. XAML is used for the heads-up display and game state messages.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample supports:
 
@@ -47,7 +55,7 @@ These topics provide info about the APIs used in this sample:
 - [Windows.Gaming.Input](http://msdn.microsoft.com/library/windows/apps/windows.gaming.input)
 - [Windows.UI.Xaml](http://msdn.microsoft.com/library/windows/apps/br209045)
 - [Windows.UI.Xaml.Controls](http://msdn.microsoft.com/library/windows/apps/br227716)
-- [Windows.UI.Xaml.Controls.SwapChainPanel](http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.swapchainpanel)
+- [Windows.UI.Xaml.Controls.SwapChainPanel](http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.swapchainpanel)
 
 ## System requirements
 

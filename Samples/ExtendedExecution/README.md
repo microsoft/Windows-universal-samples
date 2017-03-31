@@ -5,9 +5,14 @@
 
 # Extended execution sample
 
-This sample shows you how to create extended execution sessions using the Windows Runtime extended execution API.
+Shows how to create extended execution sessions using the Windows Runtime extended execution API.
 
-**Note** The Universal Windows app samples require Visual Studio 2015 to build and Windows 10 to execute.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 An app requests an extended execution session when a task requires time to complete before the application is suspended or terminated.
 Different types of extended execution can be requested during the Suspending state or the Resumed state of the application.
@@ -17,6 +22,7 @@ This sample demonstrates the following:
 -   Creating an extended execution session to extend suspending time and complete saving data.
 -   Creating an extended execution session to extend foreground time and continue location tracking.
 -   Creating an extended execution session to extend foreground time and continue an unspecified task.
+-   Sharing an extended execution session among multiple tasks.
 -   Handling a denied request for extended execution.
 -   Handling the revocation of an extended execution session.
 
@@ -26,24 +32,22 @@ See **Deploying and running the sample** below for instructions on using the sam
 
 ### Samples
 
-* [Background audio](/Samples/BackgroundAudio)
-* [Geolocation](/Samples/Geolocation)
+[Background audio](/Samples/BackgroundAudio)  
+[Geolocation](/Samples/Geolocation)  
 
 ### Other resources
 
-[Background Tasks and Extended Execution](https://msdn.microsoft.com/en-us/magazine/mt590969)
-
-[Launching, resuming, and background tasks](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/mt227652.aspx)
-
-[Support your app with background tasks](https://msdn.microsoft.com/library/windows/apps/mt299103)
+[Background Tasks and Extended Execution](https://msdn.microsoft.com/magazine/mt590969)  
+[Launching, resuming, and background tasks](https://msdn.microsoft.com/library/windows/apps/xaml/mt227652.aspx)  
+[Support your app with background tasks](https://msdn.microsoft.com/library/windows/apps/mt299103)  
 
 ### Reference
 
-[**Windows.ApplicationModel.ExtendedExecution**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.extendedexecution.aspx)
+[Windows.ApplicationModel.ExtendedExecution](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.extendedexecution.aspx)  
 
 ### Related technologies
 
-[**Windows.ApplicationModel.Background**](http://msdn.microsoft.com/library/windows/apps/br224847)
+[Windows.ApplicationModel.Background](http://msdn.microsoft.com/library/windows/apps/br224847)  
 
 ## Operating system requirements
 
@@ -80,7 +84,7 @@ some scenarios require you to run the sample without debugging.
    On Phone, switch to another app.
    On PC, minimize the app.
 4. The app continues to display toast notifications.
-5. Bring the app back to the foreground to cause a revoke due to Resume.
+5. Bring the app back to the foreground and the session will continue running.
 6. Run the sample with debugging.
 7. Repeat steps 2 through 4 above.
 8. Use the Lifecycle events menu in the debugger to suspend the app.
@@ -103,15 +107,22 @@ some scenarios require you to run the sample without debugging.
    On Phone, switch to another app.
    On PC, minimize the app.
 4. The app continues to report your location every 10 seconds.
-5. Bring the app back to the foreground to cause a revoke due to Resume.
+5. Bring the app back to the foreground and the session will continue running.
 6. Run the sample with debugging.
 7. Repeat steps 2 through 4 above.
 8. Use the Lifecycle events menu in the debugger to suspend the app.
    This simulates a revoke due to SystemPolicy.
 
-## Read more
+**Using Multiple Tasks**:
 
-See the following topics for step-by-step information about using extended execution:
-
--   [Background Tasks and Extended Execution](https://msdn.microsoft.com/en-us/magazine/mt590969)
-
+1. Run the sample without debugging and go to the **Using Multiple Tasks** scenario.
+2. Click **Begin Extended Execution and Tasks**.
+3. Send the program to the background:
+   On Phone, switch to another app.
+   On PC, minimize the app.
+4. The app displays toast notifications as each of three Tasks complete.
+5. Bring the app back to the foreground and the session will continue running.
+6. Run the sample with debugging.
+7. Repeat steps 2 through 4 above.
+8. Use the Lifecycle events menu in the debugger to suspend the app.
+   This simulates a revoke due to SystemPolicy.

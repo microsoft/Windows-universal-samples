@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp"
+  >
+  <Identity Name="Microsoft.SDKSamples.UserCertificateStore.JS" Version="1.0.0.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"/>
+  <mp:PhoneIdentity PhoneProductId="1a1d7147-a951-4d48-b889-e30c26e8c88f" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <Properties>
+    <DisplayName>UserCertificateStore JS Sample</DisplayName>
+    <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+    <Logo>images\storelogo-sdk.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0"/>
+  </Dependencies>
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+  <Applications>
+    <Application Id="App" StartPage="default.html">
+      <uap:VisualElements
+        DisplayName="UserCertificateStore JS Sample"
+        Description="UserCertificateStore JS Sample"
+        BackgroundColor="#00b2f0"
+        Square150x150Logo="images\squareTile-sdk.png"
+        Square44x44Logo="images\smalltile-sdk.png"
+        >
+        <uap:SplashScreen Image="images\splash-sdk.png"/>
+        <uap:DefaultTile>
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <uap:Capability Name="sharedUserCertificates"/>
+  </Capabilities>
+</Package>

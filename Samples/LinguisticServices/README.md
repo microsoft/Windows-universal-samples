@@ -5,9 +5,16 @@
 
 # Linguistic services sample
 
-This sample demonstrates the use of [Extended Linguistic Services (ELS)](http://msdn.microsoft.com/library/windows/apps/dd317839) in a Windows Store app.
+Shows how to use [Extended Linguistic Services (ELS)](http://msdn.microsoft.com/library/windows/apps/dd317839) in a Windows Store app.
 
-The sample implements scenarios that demonstrate the use of the three available services. The scenarios demonstrate how to request the desired service using the [**MappingGetServices**](http://msdn.microsoft.com/library/windows/apps/dd319060) function, and how to prepare parameters to be passed to the [**MappingRecognizeText**](http://msdn.microsoft.com/library/windows/apps/dd319063) function using that service.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+The sample implements scenarios that demonstrate the use of the three available services. The scenarios demonstrate how to request the desired service using the [MappingGetServices](http://msdn.microsoft.com/library/windows/apps/dd319060) function, and how to prepare parameters to be passed to the [MappingRecognizeText](http://msdn.microsoft.com/library/windows/apps/dd319063) function using that service.
 
 The scenarios demonstrate the use of the these services:
 

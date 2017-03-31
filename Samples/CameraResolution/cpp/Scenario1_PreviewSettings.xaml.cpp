@@ -114,7 +114,7 @@ task<void> Scenario1_PreviewSettings::CleanupCameraAsync()
 /// Initializes the camera and populates the UI
 /// </summary>
 /// <param name="sender"></param>
-void Scenario1_PreviewSettings::InitializeCameraButton_Tapped(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^)
+void Scenario1_PreviewSettings::InitializeCameraButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^)
 {
     Button^ button = static_cast<Button^>(sender);
     button->IsEnabled = false;

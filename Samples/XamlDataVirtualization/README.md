@@ -5,7 +5,14 @@
 
 # Data virtualization sample
 
-This sample shows how to implement a data source for XAML list controls that implements data virtualization.
+Shows how to implement a data source for XAML list controls that implements data virtualization.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample shows how to:
 
@@ -19,21 +26,17 @@ To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.c
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
-[ListView and GridView UI optimization](https://msdn.microsoft.com/en-us/library/windows/apps/mt204776.aspx)
+[ListView and GridView UI optimization](https://msdn.microsoft.com/library/windows/apps/mt204776.aspx)
 
 ### Samples
 
-[XAML data binding](https://code.msdn.microsoft.com/windowsapps/Data-Binding-7b1d67b5/)
-
-[XAML data binding with x:Bind](../XamlBind)
+[XAML data binding](https://code.msdn.microsoft.com/windowsapps/Data-Binding-7b1d67b5/)  
+[XAML data binding with x:Bind](../XamlBind)  
 
 ### Reference
 
-<!-- Add links to related API -->
-
-[IItemsRangeInfo](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.data.iitemsrangeinfo.aspx)
-
-[ISelectionInfo](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.data.iselectioninfo.aspx)
+[IItemsRangeInfo](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.data.iitemsrangeinfo.aspx)  
+[ISelectionInfo](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.data.iselectioninfo.aspx)  
 
 ## System requirements
 

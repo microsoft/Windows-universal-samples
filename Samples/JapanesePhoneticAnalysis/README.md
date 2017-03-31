@@ -5,13 +5,21 @@
 
 # Japanese phonetic analysis sample
 
-This sample demonstrates how to analyze Japanese texts and retrieves words or segments in the text by using the [**JapanesePhoneticAnalyzer**](http://msdn.microsoft.com/library/windows/apps/dn434076) class.
+Shows how to analyze Japanese texts and retrieves words or segments in the text by using the 
+[JapanesePhoneticAnalyzer](http://msdn.microsoft.com/library/windows/apps/dn434076) class.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 The sample demonstrates these tasks:
 
 1.  **Analyze Japanese text**
 
-    This scenario shows how to use the [**GetWords**](http://msdn.microsoft.com/library/windows/apps/dn434078) method to split Japanese text, one segment per line.
+    This scenario shows how to use the [GetWords](http://msdn.microsoft.com/library/windows/apps/dn434078) method to split Japanese text, one segment per line.
     The segments can be words or pronunciation units.
 
 **Note** The Universal Windows app samples require Visual Studio 2015 to build and Windows 10 to execute.
@@ -24,11 +32,11 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[Unicode](/Samples/Unicode)
+[Unicode](/Samples/Unicode)  
 
 ### Reference
 
-[JapanesePhoneticAnalyzer class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.globalization.japanesephoneticanalyzer.aspx)
+[JapanesePhoneticAnalyzer class](https://msdn.microsoft.com/library/windows/apps/windows.globalization.japanesephoneticanalyzer.aspx)  
 
 ## System requirements
 

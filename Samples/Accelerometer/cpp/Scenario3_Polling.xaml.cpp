@@ -33,7 +33,7 @@ Scenario3_Polling::Scenario3_Polling()
 }
 void Scenario3_Polling::OnNavigatedTo(NavigationEventArgs^ e)
 {
-    accelerometer = Accelerometer::GetDefault();
+    accelerometer = Accelerometer::GetDefault(rootPage->AccelerometerReadingType);
     if (accelerometer != nullptr)
     {
         // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
@@ -47,11 +47,12 @@ void Scenario3_Polling::OnNavigatedTo(NavigationEventArgs^ e)
         dispatcherTimer->Interval = span;
         dispatcherTimer->Tick += ref new Windows::Foundation::EventHandler<Object^>(this, &Scenario3_Polling::DisplayCurrentReading);
 
+        rootPage->NotifyUser(rootPage->AccelerometerReadingType.ToString() + " accelerometer ready", NotifyType::StatusMessage);
         ScenarioEnableButton->IsEnabled = true;
     }
     else
     {
-        rootPage->NotifyUser("No accelerometer found", NotifyType::ErrorMessage);
+        rootPage->NotifyUser(rootPage->AccelerometerReadingType.ToString() + " accelerometer not found", NotifyType::ErrorMessage);
     }
 }
 

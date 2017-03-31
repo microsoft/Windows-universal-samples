@@ -9,7 +9,7 @@
 //
 //*********************************************************
 #include "pch.h"
-#include "AdventureworksVoiceCommandService.h"
+#include "AdventureWorksVoiceCommandService.h"
 
 using namespace VoiceCommandService;
 
@@ -46,7 +46,7 @@ using namespace Windows::Storage;
 /// be required.
 /// </summary>
 /// <param name="taskInstance">Connection to the hosting background service process.</param>
-void AdventureworksVoiceCommandService::Run(IBackgroundTaskInstance ^taskInstance)
+void AdventureWorksVoiceCommandService::Run(IBackgroundTaskInstance ^taskInstance)
 {
     serviceDeferral = taskInstance->GetDeferral();
 
@@ -56,14 +56,14 @@ void AdventureworksVoiceCommandService::Run(IBackgroundTaskInstance ^taskInstanc
     taskCancelledToken = taskInstance->Canceled +=
         ref new BackgroundTaskCanceledEventHandler(
             this,
-            &AdventureworksVoiceCommandService::OnCanceled);
+            &AdventureWorksVoiceCommandService::OnCanceled);
 
     AppServiceTriggerDetails^ triggerDetails = dynamic_cast<AppServiceTriggerDetails^>(taskInstance->TriggerDetails);
 
     // This should match the uap:AppService and VoiceCommandService references from the 
     // package manifest and VCD files, respectively. Make sure we've been launched by
     // a Cortana Voice Command.
-    if (triggerDetails != nullptr && triggerDetails->Name == "AdventureworksVoiceCommandService")
+    if (triggerDetails != nullptr && triggerDetails->Name == "AdventureWorksVoiceCommandService")
     {
         try
         {
@@ -74,13 +74,15 @@ void AdventureworksVoiceCommandService::Run(IBackgroundTaskInstance ^taskInstanc
                 VoiceCommandServiceConnection ^,
                 VoiceCommandCompletedEventArgs ^>(
                     this,
-                    &AdventureworksVoiceCommandService::OnVoiceCommandCompleted);
+                    &AdventureWorksVoiceCommandService::OnVoiceCommandCompleted);
 
-			resourceMap = ResourceManager::Current->MainResourceMap->GetSubtree("Resources");
+            resourceMap = ResourceManager::Current->MainResourceMap->GetSubtree("Resources");
+			      // Select the system language, which is what Cortana should be running as.
+            context = ResourceContext::GetForViewIndependentUse();
 
-			// Select the system language, which is what Cortana should be running as.
-			context = ResourceContext::GetForViewIndependentUse();
-
+            // GetVoiceCommandAsync establishes initial connection to Cortana, and must be called prior to any 
+            // messages sent to Cortana. Attempting to use ReportSuccessAsync, ReportProgressAsync, etc
+            // prior to calling this will produce undefined behavior.
             // Note, since this is running synchronously, and not part of the UI thread, blocking
             // with .wait() is ideal in most cases.
             create_task(voiceServiceConnection->GetVoiceCommandAsync())
@@ -121,7 +123,7 @@ void AdventureworksVoiceCommandService::Run(IBackgroundTaskInstance ^taskInstanc
 /// </summary>
 /// <param name="sender">This background task instance</param>
 /// <param name="reason">Contains an enumeration with the reason for task cancellation</param>
-void AdventureworksVoiceCommandService::OnCanceled(IBackgroundTaskInstance ^sender, BackgroundTaskCancellationReason reason)
+void AdventureWorksVoiceCommandService::OnCanceled(IBackgroundTaskInstance ^sender, BackgroundTaskCancellationReason reason)
 {
     OutputDebugStringW(L"Task cancelled, cleaning up");
     if (this->serviceDeferral.Get() != nullptr)
@@ -138,7 +140,7 @@ void AdventureworksVoiceCommandService::OnCanceled(IBackgroundTaskInstance ^send
 /// </summary>
 /// <param name="sender">The voice connection associated with the command.</param>
 /// <param name="args">Contains an Enumeration indicating why the command was terminated.</param>
-void AdventureworksVoiceCommandService::OnVoiceCommandCompleted(VoiceCommandServiceConnection ^sender, VoiceCommandCompletedEventArgs ^args)
+void AdventureWorksVoiceCommandService::OnVoiceCommandCompleted(VoiceCommandServiceConnection ^sender, VoiceCommandCompletedEventArgs ^args)
 {
     if (this->serviceDeferral.Get() != nullptr)
     {
@@ -153,7 +155,7 @@ void AdventureworksVoiceCommandService::OnVoiceCommandCompleted(VoiceCommandServ
 /// </summary>
 /// <param name="destination">The name of a destination, expected to match the phrase list.</param>
 /// <returns></returns>
-void AdventureworksVoiceCommandService::SendCompletionMessageForDestination(String^ destination)
+void AdventureWorksVoiceCommandService::SendCompletionMessageForDestination(String^ destination)
 {
     // Begin loading data to search for the target trip. If this operation is going to take 
     // a non-trivial amount of time, show a progress screen in order to prevent Cortana
@@ -245,7 +247,7 @@ void AdventureworksVoiceCommandService::SendCompletionMessageForDestination(Stri
 /// </summary>
 /// <param name="destination">The name of a destination, expected to match the phrase list.</param>
 /// <returns></returns>
-void AdventureworksVoiceCommandService::SendCompletionMessageForCancellation(String^ destination)
+void AdventureWorksVoiceCommandService::SendCompletionMessageForCancellation(String^ destination)
 {
     // Begin loading data to search for the target trip. If this operation is going to take 
     // a non-trivial amount of time, show a progress screen in order to prevent Cortana
@@ -353,7 +355,7 @@ void AdventureworksVoiceCommandService::SendCompletionMessageForCancellation(Str
 /// <param name="disambiguationMessage">The initial disambiguation message</param>
 /// <param name="secondDisambiguationMessage">Repeat prompt retry message</param>
 /// <returns></returns>
-Trip^ VoiceCommandService::AdventureworksVoiceCommandService::DisambiguateTrips(std::vector<Trip^> trips, Platform::String ^ disambiguationMessage, String ^ secondDisambiguationMessage)
+Trip^ VoiceCommandService::AdventureWorksVoiceCommandService::DisambiguateTrips(std::vector<Trip^> trips, Platform::String ^ disambiguationMessage, String ^ secondDisambiguationMessage)
 {
     auto userPrompt = ref new VoiceCommandUserMessage();
     userPrompt->DisplayMessage = disambiguationMessage;
@@ -412,7 +414,7 @@ Trip^ VoiceCommandService::AdventureworksVoiceCommandService::DisambiguateTrips(
 /// Provide a simple response that launches the app. Expected to be used in the
 /// case where the voice command could not be recognized (eg, a VCD/code mismatch.)
 /// </summary>
-void VoiceCommandService::AdventureworksVoiceCommandService::LaunchAppInForeground()
+void VoiceCommandService::AdventureWorksVoiceCommandService::LaunchAppInForeground()
 {
     auto userProgressMessage = ref new VoiceCommandUserMessage();
 	userProgressMessage->SpokenMessage = GetResourceString(L"LaunchingAdventureWorks");
@@ -429,7 +431,7 @@ void VoiceCommandService::AdventureworksVoiceCommandService::LaunchAppInForegrou
 /// </summary>
 /// <param name="message">The message to display, relating to the task being performed.</param>
 /// <returns></returns>
-void VoiceCommandService::AdventureworksVoiceCommandService::ShowProgressScreen(Platform::String ^ progressMessage)
+void VoiceCommandService::AdventureWorksVoiceCommandService::ShowProgressScreen(Platform::String ^ progressMessage)
 {
     auto userProgressMessage = ref new VoiceCommandUserMessage();
     userProgressMessage->DisplayMessage = progressMessage;
@@ -441,14 +443,14 @@ void VoiceCommandService::AdventureworksVoiceCommandService::ShowProgressScreen(
 
 /// <Summary> Look up a resource string and return it. </Summary>
 /// <returns>The resource string requested for the current context</returns>
-String ^ AdventureworksVoiceCommandService::GetResourceString(String ^ resourceName)
+String ^ AdventureWorksVoiceCommandService::GetResourceString(String ^ resourceName)
 {
 	return resourceMap->GetValue(resourceName, context)->ValueAsString;
 }
 
 /// <Summary> Look up a resource string and replace {0} with the parameter provided (simple string.format) </Summary>
 /// <returns>The resource string requested for the current context, with substitution</returns>
-String ^ AdventureworksVoiceCommandService::GetResourceStringAndFormat(String ^ resourceName, Platform::String ^ param)
+String ^ AdventureWorksVoiceCommandService::GetResourceStringAndFormat(String ^ resourceName, Platform::String ^ param)
 {
 	String^ resource = GetResourceString(resourceName);
 	std::wstring str = resource->Data();

@@ -19,7 +19,10 @@
     <RelativePanel>
         <local:ControlExample x:Name="Example1" HeaderText="A basic SplitView." HorizontalAlignment="Left">
             <Grid MaxWidth="500" Height="300">
-                <SplitView x:Name="splitView" PaneBackground="{x:Bind paneBackgroundCombobox.SelectedValue, Mode=OneWay, Converter={StaticResource stringToBrushConverter}}" IsPaneOpen="{x:Bind togglePaneButton.IsChecked, Mode=TwoWay, Converter={StaticResource nullableBooleanToBooleanConverter}}" OpenPaneLength="{x:Bind openPaneLengthSlider.Value, Mode=OneWay}" CompactPaneLength="{x:Bind compactPaneLengthSlider.Value, Mode=OneWay}" DisplayMode="CompactOverlay">
+                <SplitView x:Name="splitView" PaneBackground="{x:Bind paneBackgroundCombobox.SelectedValue, Mode=OneWay, Converter={StaticResource stringToBrushConverter}}" 
+                           IsPaneOpen="{x:Bind togglePaneButton.IsChecked, Mode=TwoWay, Converter={StaticResource nullableBooleanToBooleanConverter}}" 
+                           OpenPaneLength="{x:Bind openPaneLengthSlider.Value, Mode=OneWay}" CompactPaneLength="{x:Bind compactPaneLengthSlider.Value, Mode=OneWay}" 
+                           DisplayMode="CompactOverlay" IsTabStop="False">
                     <SplitView.Pane>
                         <Grid>
                             <Grid.RowDefinitions>

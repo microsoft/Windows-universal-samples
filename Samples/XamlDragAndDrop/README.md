@@ -1,11 +1,18 @@
-<!---
+<!--
   category: ControlsLayoutAndText
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620634
 --->
 
 # Drag and drop sample
 
-This sample shows how to enable Drag and Drop in a XAML Application.
+Shows how to enable Drag and Drop in a XAML Application.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample shows how to:
 
@@ -23,25 +30,22 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-<!-- Add links to related API -->
-
-[ListViewBase.CanDragItems](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.listviewbase.candragitems.aspx)
-[ListViewBase.CanReorderItems](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.listviewbase.canreorderitems.aspx)
-[ListViewBase.DragItemsStarting](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.listviewbase.dragitemsstarting.aspx)
-[ListViewBase.DragItemsCompleted](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.listviewbase.dragitemscompleted.aspx)
-[DragItemsStartingEventArgs](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.dragitemsstartingeventargs.aspx)
-[UIElement.AllowDrop](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.uielement.allowdrop.aspx)
-[UIElement.StartDragAsync](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.uielement.startdragasync.aspx)
-[UIElement.DragStarting](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.uielement.dragstarting.aspx)
-[UIElement.DragEnter](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.uielement.dragenter.aspx)
-[UIElement.DragLeave](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.uielement.dragleave.aspx)
-[UIElement.Drop](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.uielement.drop.aspx)
-[DragStartingEventArgs](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.dragstartingeventargs.aspx)
-[DragEventArgs](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.drageventargs.aspx)
-[DragUI](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.dragui.aspx)
-[DragUIOverride](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.draguioverride.aspx)
-[DragOperationDeferral](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.dragoperationdeferral.aspx)
-
+[ListViewBase.CanDragItems](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.listviewbase.candragitems.aspx)  
+[ListViewBase.CanReorderItems](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.listviewbase.canreorderitems.aspx)  
+[ListViewBase.DragItemsStarting](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.listviewbase.dragitemsstarting.aspx)  
+[ListViewBase.DragItemsCompleted](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.listviewbase.dragitemscompleted.aspx)  
+[DragItemsStartingEventArgs](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.dragitemsstartingeventargs.aspx)  
+[UIElement.AllowDrop](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.uielement.allowdrop.aspx)  
+[UIElement.StartDragAsync](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.uielement.startdragasync.aspx)  
+[UIElement.DragStarting](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.uielement.dragstarting.aspx)  
+[UIElement.DragEnter](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.uielement.dragenter.aspx)  
+[UIElement.DragLeave](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.uielement.dragleave.aspx)  
+[UIElement.Drop](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.uielement.drop.aspx)  
+[DragStartingEventArgs](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.dragstartingeventargs.aspx)  
+[DragEventArgs](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.drageventargs.aspx)  
+[DragUI](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.dragui.aspx)  
+[DragUIOverride](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.draguioverride.aspx)  
+[DragOperationDeferral](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.dragoperationdeferral.aspx)  
 
 ## System requirements
 

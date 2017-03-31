@@ -3,91 +3,120 @@
 (function () {
     "use strict";
 
-    var CurrentAppSimulator = Windows.ApplicationModel.Store.CurrentAppSimulator;
-    var ProductPurchaseStatus = Windows.ApplicationModel.Store.ProductPurchaseStatus;
-    var FulfillmentResult = Windows.ApplicationModel.Store.FulfillmentResult;
+    var StorePurchaseStatus = Windows.Services.Store.StorePurchaseStatus;
+    var StoreConsumableStatus = Windows.Services.Store.StoreConsumableStatus;
+    var storeContext = Windows.Services.Store.StoreContext.getDefault();
 
-    var numberOfConsumablesPurchased = 0;
-    var consumedTransactionIds = {};
-
-    var purchaseCount;
+    var productsListView;
+    var quantity;
 
     var page = WinJS.UI.Pages.define("/html/scenario4-consumableProduct.html", {
         ready: function (element, options) {
-            purchaseCount = document.getElementById("purchaseCount");
-            var product1Name = document.getElementById("product1Name");
-            var product1Price = document.getElementById("product1Price");
+            productsListView = document.getElementById('productsListView').winControl;
 
-            document.getElementById("buyAndFulfillProduct1").addEventListener("click", buyAndFulfillProduct1);
+            quantity = document.getElementById('quantity');
+            SdkSample.enableWhenOneItemIsSelected(quantity, productsListView);
 
-            return SdkSample.configureSimulatorAsync("in-app-purchase-consumables.xml").then(function () {
-                return CurrentAppSimulator.loadListingInformationAsync();
-            }).then(function (listing) {
-                var product1 = listing.productListings["product1"];
-                product1Name.innerText = product1.name;
-                product1Price.innerText = product1.formattedPrice;
-                WinJS.log && WinJS.log("", "samples", "status");
-            }, function () {
-                WinJS.log && WinJS.log("LoadListingInformationAsync API call failed", "samples", "error");
-            });
+            document.getElementById("getAssociatedProductsButton").addEventListener("click", getAssociatedProductsButton);
+            SdkSample.addSingleItemClickHandler("purchaseAddOnButton", productsListView, purchaseAddOnButton);
+            SdkSample.addSingleItemClickHandler("getConsumableBalanceButton", productsListView, getConsumableBalanceButton);
+            SdkSample.addSingleItemClickHandler("fulfillConsumableButton", productsListView, fulfillConsumableButton);
         }
     });
 
-    function buyAndFulfillProduct1() {
-        WinJS.log && WinJS.log("Buying product 1...", "sample", "status");
-        CurrentAppSimulator.requestProductPurchaseAsync("product1").done(function (purchaseResults) {
-            if (purchaseResults.status === ProductPurchaseStatus.succeeded) {
-                grantFeatureLocally(purchaseResults.transactionId);
-                fulfillProduct1(purchaseResults.transactionId);
-            } else if (purchaseResults.status === ProductPurchaseStatus.notFulfilled) {
-                if (!isLocallyFulfilled(purchaseResults.transactionId)) {
-                    grantFeatureLocally(purchaseResults.transactionId);
-                }
-                fulfillProduct1(purchaseResults.transactionId);
-            } else if (purchaseResults.status === ProductPurchaseStatus.notPurchased) {
-                WinJS.log && WinJS.log("Product 1 was not purchased.", "sample", "status");
-            }
-        },
-        function () {
-            WinJS.log && WinJS.log("Unable to buy product 1.", "sample", "error");
+    function getAssociatedProductsButton() {
+        var productKinds = ["Consumable"];
+        storeContext.getAssociatedStoreProductsAsync(productKinds).then(function (addOns) {
+            var productList = SdkSample.createProductListFromQueryResult(addOns, "Consumable Add-Ons");
+            productsListView.itemDataSource = productList.dataSource;
         });
     }
 
-    function fulfillProduct1(transactionId) {
-        CurrentAppSimulator.reportConsumableFulfillmentAsync("product1", transactionId).done(function (result) {
-            switch (result) {
-                case FulfillmentResult.succeeded:
-                    WinJS.log && WinJS.log("You bought and fulfilled product 1.", "sample", "status");
+    function purchaseAddOnButton(item) {
+        storeContext.requestPurchaseAsync(item.storeId).done(function (result) {
+            if (result.extendedError) {
+                SdkSample.reportExtendedError(result.extendedError);
+                return;
+            }
+
+            switch (result.status) {
+                case StorePurchaseStatus.alreadyPurchased: // should never get this for a managed consumable since they are stackable
+                    WinJS.log && WinJS.log("You already bought this consumable.", "samples", "error");
                     break;
-                case FulfillmentResult.nothingToFulfill:
-                    WinJS.log && WinJS.log("There is no purchased product 1 to fulfill.", "sample", "status");
+                case StorePurchaseStatus.succeeded:
+                    WinJS.log && WinJS.log("You bought " + item.title, "samples", "status");
                     break;
-                case FulfillmentResult.purchasePending:
-                    WinJS.log && WinJS.log("You bought product 1. The purchase is pending so we cannot fulfill the product.", "sample", "status");
+                case StorePurchaseStatus.notPurchased:
+                    WinJS.log && WinJS.log("Product was not purchased, it may have been canceled.", "samples", "error");
                     break;
-                case FulfillmentResult.purchaseReverted:
-                    WinJS.log && WinJS.log("You bought product 1, but your purchase has been reverted.", "sample", "status");
-                    // Since the user's purchase was revoked, they got their money back.
-                    // You may want to revoke the user's access to the consumable content that was granted.
+                case StorePurchaseStatus.networkError:
+                    WinJS.log && WinJS.log("Product was not purchased due to a network error.", "samples", "error");
                     break;
-                case FulfillmentResult.serverError:
-                    WinJS.log && WinJS.log("You bought product 1. There was an error when fulfilling.", "sample", "status");
+                case StorePurchaseStatus.serverError:
+                    WinJS.log && WinJS.log("Product was not purchased due to a server error.", "samples", "error");
+                    break;
+                default:
+                    WinJS.log && WinJS.log("Product was not purchased due to an unknown error.", "samples", "error");
                     break;
             }
-        }, function () {
-            WinJS.log && WinJS.log("You bought Product 1. There was an error when fulfilling.", "sample", "error");
         });
     }
 
-    function grantFeatureLocally(transactionId) {
-        consumedTransactionIds[transactionId] = true;
+    function getConsumableBalanceButton(item) {
+        storeContext.getConsumableBalanceRemainingAsync(item.storeId).done(function (result) {
+            if (result.extendedError) {
+                SdkSample.reportExtendedError(result.extendedError);
+                return;
+            }
 
-        // Grant the user the content, such as by increasing some kind of asset count
-        numberOfConsumablesPurchased++;
-        purchaseCount.innerText = numberOfConsumablesPurchased;
+            switch (result.status) {
+                case StoreConsumableStatus.insufficentQuantity:
+                    WinJS.log && WinJS.log("Insufficient Quantity! Balance Remaining: " + result.balanceRemaining, "samples", "error");
+                    break;
+                case StoreConsumableStatus.succeeded:
+                    WinJS.log && WinJS.log("Balance Remaining: " + result.balanceRemaining, "samples", "status");
+                    break;
+                case StoreConsumableStatus.networkError:
+                    WinJS.log && WinJS.log("Network error retrieving consumable balance.", "samples", "error");
+                    break;
+                case StoreConsumableStatus.serverError:
+                    WinJS.log && WinJS.log("Server error retrieving consumable balance.", "samples", "error");
+                    break;
+                default:
+                    WinJS.log && WinJS.log("Unknown error retrieving consumable balance.", "samples", "error");
+                    break;
+            }
+        });
     }
 
-    function isLocallyFulfilled(transactionId) {
-        return consumedTransactionIds[transactionId];
+    function fulfillConsumableButton(item) {
+        // This can be used to ensure this request is never double fulfilled. The server will
+        // only accept one report for this specific GUID.
+        var trackingGuid = SdkSample.generateGuid();
+
+        storeContext.reportConsumableFulfillmentAsync(item.storeId, quantity.value, trackingGuid).done(function (result) {
+            if (result.extendedError) {
+                SdkSample.reportExtendedError(result.extendedError);
+                return;
+            }
+
+            switch (result.status) {
+                case StoreConsumableStatus.insufficentQuantity:
+                    WinJS.log && WinJS.log("Insufficient Quantity! Balance Remaining: " + result.balanceRemaining, "samples", "error");
+                    break;
+                case StoreConsumableStatus.succeeded:
+                    WinJS.log && WinJS.log("Successful fulfillment! Balance Remaining: " + result.balanceRemaining, "samples", "status");
+                    break;
+                case StoreConsumableStatus.networkError:
+                    WinJS.log && WinJS.log("Network error retrieving consumable balance.", "samples", "error");
+                    break;
+                case StoreConsumableStatus.serverError:
+                    WinJS.log && WinJS.log("Server error retrieving consumable balance.", "samples", "error");
+                    break;
+                default:
+                    WinJS.log && WinJS.log("Unknown error retrieving consumable balance.", "samples", "error");
+                    break;
+            }
+        });
     }
 })();

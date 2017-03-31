@@ -88,3 +88,32 @@ String^ MainPage::BuildWebSocketError(Exception^ ex)
         return "Error: " + status.ToString();
     }
 }
+
+// All the certificates in the certificate chain as well as the final certificate itself
+// must be valid.
+task<bool> MainPage::AreCertificateAndCertChainValidAsync(
+    Certificate^ serverCert,
+    IVectorView<Windows::Security::Cryptography::Certificates::Certificate^>^ certChain)
+{
+    std::vector<task<bool>> tasks(certChain->Size + 1);
+    // Check validity of all the certificates in the certificate chain.
+    std::transform(begin(certChain), end(certChain), begin(tasks), IsCertificateValidAsync);
+    // Check validity of the final certificate.
+    tasks[certChain->Size] = IsCertificateValidAsync(serverCert);
+
+    return when_all(begin(tasks), end(tasks)).then([](std::vector<bool> results)
+    {
+        // Return true if every result is true.
+        return std::find(begin(results), end(results), false) == end(results);
+    });
+}
+
+// This is a placeholder call to simulate long-running async calls. Note that this code runs synchronously as part  
+// of the SSL/TLS handshake. Avoid performing lengthy operations here - else, the remote server may terminate the 
+// connection abruptly. 
+task<bool> MainPage::IsCertificateValidAsync(Certificate^ serverCert)
+{
+    // In this sample, we check the issuer of the certificate - this is purely for illustration 
+    // purposes and should not be considered as a recommendation for certificate validation.
+    return task_from_result(serverCert->Issuer == "www.fabrikam.com");
+}

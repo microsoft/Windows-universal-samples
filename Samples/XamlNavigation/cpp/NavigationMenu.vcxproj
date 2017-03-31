@@ -8,8 +8,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.14393.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -138,60 +138,65 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AppShell.xaml.h">
-      <DependentUpon>AppShell.xaml</DependentUpon>
+      <DependentUpon>..\shared\AppShell.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="BasicPage.xaml.h">
-      <DependentUpon>BasicPage.xaml</DependentUpon>
+      <DependentUpon>..\shared\BasicPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="BasicSubPage.xaml.h">
-      <DependentUpon>BasicSubPage.xaml</DependentUpon>
+      <DependentUpon>..\shared\BasicSubPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="CommandBarPage.xaml.h">
-      <DependentUpon>CommandBarPage.xaml</DependentUpon>
+      <DependentUpon>..\shared\CommandBarPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="DrillInPage.xaml.h">
-      <DependentUpon>DrillInPage.xaml</DependentUpon>
+      <DependentUpon>..\shared\DrillInPage.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="IsTenFootTrigger.h" />
     <ClInclude Include="LandingPage.xaml.h">
-      <DependentUpon>LandingPage.xaml</DependentUpon>
+      <DependentUpon>..\shared\LandingPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="NavMenuItem.h" />
     <ClInclude Include="NavMenuListView.h" />
     <ClInclude Include="PageHeader.xaml.h">
-      <DependentUpon>PageHeader.xaml</DependentUpon>
+      <DependentUpon>..\shared\PageHeader.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
-      <DependentUpon>App.xaml</DependentUpon>
+      <DependentUpon>..\shared\App.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="SystemInformationHelpers.h" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="..\shared\App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AppShell.xaml">
+    <Page Include="..\shared\AppShell.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BasicPage.xaml">
+    <Page Include="..\shared\BasicPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BasicSubPage.xaml">
+    <Page Include="..\shared\BasicSubPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CommandBarPage.xaml">
+    <Page Include="..\shared\CommandBarPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="DrillInPage.xaml">
+    <Page Include="..\shared\DrillInPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="LandingPage.xaml">
+    <Page Include="..\shared\LandingPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PageHeader.xaml">
+    <Page Include="..\shared\PageHeader.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles.xaml">
-      <DeploymentContent>true</DeploymentContent>
+    <Page Include="..\shared\Styles.xaml">
+      <Link>Styles\Styles.xaml</Link>
+    </Page>
+    <Page Include="..\shared\TenFootStylesheet.xaml">
+      <Link>Styles\TenFootStylesheet.xaml</Link>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -201,30 +206,31 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.xaml.cpp">
-      <DependentUpon>App.xaml</DependentUpon>
+      <DependentUpon>..\shared\App.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="AppShell.xaml.cpp">
-      <DependentUpon>AppShell.xaml</DependentUpon>
+      <DependentUpon>..\shared\AppShell.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="BasicPage.xaml.cpp">
-      <DependentUpon>BasicPage.xaml</DependentUpon>
+      <DependentUpon>..\shared\BasicPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="BasicSubPage.xaml.cpp">
-      <DependentUpon>BasicSubPage.xaml</DependentUpon>
+      <DependentUpon>..\shared\BasicSubPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="CommandBarPage.xaml.cpp">
-      <DependentUpon>CommandBarPage.xaml</DependentUpon>
+      <DependentUpon>..\shared\CommandBarPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="DrillInPage.xaml.cpp">
-      <DependentUpon>DrillInPage.xaml</DependentUpon>
+      <DependentUpon>..\shared\DrillInPage.xaml</DependentUpon>
     </ClCompile>
+    <ClCompile Include="IsTenFootTrigger.cpp" />
     <ClCompile Include="LandingPage.xaml.cpp">
-      <DependentUpon>LandingPage.xaml</DependentUpon>
+      <DependentUpon>..\shared\LandingPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="NavMenuItem.cpp" />
     <ClCompile Include="NavMenuListView.cpp" />
     <ClCompile Include="PageHeader.xaml.cpp">
-      <DependentUpon>PageHeader.xaml</DependentUpon>
+      <DependentUpon>..\shared\PageHeader.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

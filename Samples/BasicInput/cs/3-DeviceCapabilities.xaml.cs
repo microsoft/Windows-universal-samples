@@ -12,7 +12,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace BasicInput
+namespace SDKTemplate
 {
     public sealed partial class Scenario3 : Page
     {

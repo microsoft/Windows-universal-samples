@@ -66,6 +66,9 @@ var appService = Windows.ApplicationModel.AppService;
             voiceServiceConnection = voiceCommands.VoiceCommandServiceConnection.fromAppServiceTriggerDetails(details);
             voiceServiceConnection.addEventListener("voiceCommandCompleted", onVoiceCommandCompleted);
 
+            // getVoiceCommandAsync establishes initial connection to Cortana, and must be called prior to any 
+            // messages sent to Cortana. Attempting to use reportSuccessAsync, reportProgressAsync, etc
+            // prior to calling this will produce undefined behavior.
             voiceServiceConnection.getVoiceCommandAsync().then(function completed(voiceCommand) {
 
                 switch (voiceCommand.commandName) {

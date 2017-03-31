@@ -48,6 +48,7 @@ MainPage::MainPage()
     , _videoStabilizationEffect(nullptr)
     , _inputPropertiesBackup(nullptr)
     , _outputPropertiesBackup(nullptr)
+    , _captureFolder(nullptr)
 {
     InitializeComponent();
 
@@ -377,8 +378,8 @@ task<void> MainPage::CleanUpVideoStabilizationEffectAsync()
 
     _videoStabilizationEffect->EnabledChanged -= _videoStabilizationEnabledToken;
 
-    // Remove the effect from the record stream
-    return create_task(_mediaCapture->ClearEffectsAsync(Capture::MediaStreamType::VideoRecord))
+    // Remove the effect (see ClearEffectsAsync method to remove all effects from a stream)
+    return create_task(_mediaCapture->RemoveEffectAsync(_videoStabilizationEffect))
         .then([this]()
     {
         WriteLine("VS effect removed from pipeline");
@@ -415,8 +416,8 @@ task<void> MainPage::CleanUpVideoStabilizationEffectAsync()
 /// <returns></returns>
 task<void> MainPage::StartRecordingAsync()
 {
-    // Create storage file in Pictures Library
-    return create_task(KnownFolders::PicturesLibrary->CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption::GenerateUniqueName))
+    // Create storage file for the capture
+    return create_task(_captureFolder->CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption::GenerateUniqueName))
         .then([this](StorageFile^ file)
     {
         // Calculate rotation angle, taking mirroring into account if necessary
@@ -425,12 +426,11 @@ task<void> MainPage::StartRecordingAsync()
         // Add it to the encoding profile, or edit the value if the GUID was already a part of the properties
         _encodingProfile->Video->Properties->Insert(RotationKey, rotationAngle);
 
-        WriteLine("Starting recording...");
         return create_task(_mediaCapture->StartRecordToStorageFileAsync(_encodingProfile, file))
-            .then([this]()
+            .then([this, file]()
         {
             _isRecording = true;
-            WriteLine("Started recording!");
+            WriteLine("Started recording to: " + file->Path);
         });
     }).then([this](task<void> previousTask)
     {
@@ -555,6 +555,17 @@ task<void> MainPage::SetupUiAsync()
     {
         _deviceOrientation = _orientationSensor->GetCurrentOrientation();
     }
+
+    create_task(StorageLibrary::GetLibraryAsync(KnownLibraryId::Pictures))
+        .then([this](StorageLibrary^ picturesLibrary)
+    {
+        _captureFolder = picturesLibrary->SaveFolder;
+        if (_captureFolder == nullptr)
+        {
+            // In this case fall back to the local app storage since the Pictures Library is not available
+            _captureFolder = ApplicationData::Current->LocalFolder;
+        }
+    });
 
     // Hide the status bar
     if (Windows::Foundation::Metadata::ApiInformation::IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
@@ -845,7 +856,7 @@ void MainPage::DisplayInformation_OrientationChanged(DisplayInformation^ sender,
     }));
 }
 
-void MainPage::VsToggleButton_Tapped(Object^, Windows::UI::Xaml::RoutedEventArgs^)
+void MainPage::VsToggleButton_Click(Object^, Windows::UI::Xaml::RoutedEventArgs^)
 {
     // Note that for the most part, this button is disabled during recording, except when VS is turned off automatically
     task<void> taskToExecute;
@@ -884,7 +895,7 @@ void MainPage::VsToggleButton_Tapped(Object^, Windows::UI::Xaml::RoutedEventArgs
     });
 }
 
-void MainPage::VideoButton_Tapped(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void MainPage::VideoButton_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     task<void> taskToExecute;
     if (!_isRecording)

@@ -5,7 +5,14 @@
 
 # OCR sample
 
-This sample demonstrates how to use Windows.Media.Ocr API. Optical character recognition (OCR) API allows for application developer to extract text in the specific language from an image.
+Shows how to use Windows.Media.Ocr API. Optical character recognition (OCR) API allows for application developer to extract text in the specific language from an image.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample covers:
 
@@ -29,17 +36,12 @@ Scenario 2: Capture image from camera and extract text.
 
 **Reference**
 
-[Windows.Media.Ocr namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.ocr.aspx)
-
-[Windows.Globalization.Language class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.globalization.language.aspx)
-
-[GlobalizationPreferences.Languages property](https://msdn.microsoft.com/en-us/library/windows/apps/windows.system.userprofile.globalizationpreferences.languages.aspx)
-
-[Language matching] (https://msdn.microsoft.com/en-us/library/windows/apps/jj673578.aspx)
-
-[Windows.Graphics.Imaging.BitmapDecoder class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.graphics.imaging.bitmapdecoder.aspx)
-
-[Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.capture.aspx)
+[Windows.Media.Ocr namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.ocr.aspx)  
+[Windows.Globalization.Language class](https://msdn.microsoft.com/library/windows/apps/windows.globalization.language.aspx)  
+[GlobalizationPreferences.Languages property](https://msdn.microsoft.com/library/windows/apps/windows.system.userprofile.globalizationpreferences.languages.aspx)  
+[Language matching] (https://msdn.microsoft.com/library/windows/apps/jj673578.aspx)  
+[Windows.Graphics.Imaging.BitmapDecoder class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.bitmapdecoder.aspx)  
+[Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.aspx)  
 
 ## System requirements
 

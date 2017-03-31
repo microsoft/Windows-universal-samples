@@ -1,15 +1,20 @@
-<!---
+﻿<!---
   category: AudioVideoAndCamera
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624252
 --->
 
 # Camera resolution sample
 
-This sample demonstrates changing the resolution of a capture device with the
-[**GetMediaStreamProperties**](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.videodevicecontroller.getmediastreamproperties.aspx)
-and
-[**SetMediaStreamPropertiesAsync**](https://msdn.microsoft.com/library/windows/apps/hh700895.aspx)
-methods. 
+Shows how to change the resolution of a capture device with the
+[GetMediaStreamProperties](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.videodevicecontroller.getmediastreamproperties.aspx)
+and [SetMediaStreamPropertiesAsync](https://msdn.microsoft.com/library/windows/apps/hh700895.aspx) methods. 
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample covers the three common scenarios for changing the resolution:
 
@@ -17,7 +22,7 @@ This sample covers the three common scenarios for changing the resolution:
 
 1. Press the *Initialize Camera* button to populate the combo box with the resolutions
 returned by the
-[**GetAvailableMediaStreamProperties**](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.videodevicecontroller.getmediastreamproperties.aspx)
+[GetAvailableMediaStreamProperties](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.videodevicecontroller.getmediastreamproperties.aspx)
 method.
 2. When an option from the combo box is selected, the changes will be reflected in the preview.
 
@@ -25,7 +30,7 @@ method.
 
 1. Press the *Initialize Camera* button to populate the combo boxes with the resolutions
 returned by the
-[**GetAvailableMediaStreamProperties**](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.videodevicecontroller.getmediastreamproperties.aspx)
+[GetAvailableMediaStreamProperties](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.videodevicecontroller.getmediastreamproperties.aspx)
 method.
 2. When an option from the preview stream combo box is selected, the changes will be reflected in the preview.
 3. When an option from the photo stream combo box is selected, the changes will be reflected in any photos taken with the photo button.
@@ -35,7 +40,7 @@ method.
 
 1. Press the *Initialize Camera* button to populate the combo boxes with the resolutions
 returned by the
-[**GetAvailableMediaStreamProperties**](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.videodevicecontroller.getmediastreamproperties.aspx)
+[GetAvailableMediaStreamProperties](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.videodevicecontroller.getmediastreamproperties.aspx)
 method.
 Video settings will be based on the aspect ratio of the default resolution.
 2. When an option from the preview stream combo box is selected, the changes will be reflected in the preview.
@@ -51,27 +56,19 @@ the changes will be reflected in any videos taken with the video button.
 
 ### Samples
 
-* [Camera Starter Kit](/Samples/CameraStarterKit)
+[Basic camera app sample](/Samples/CameraStarterKit)  
+[Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)  
 
 ### Reference
 
-* [**Windows.Media.Devices** namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)
-
-* [**Windows.Media.Capture.MediaCapture** namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)
-
-* [**Windows.Media.Capture.MediaCaptureInitializationSettings** constructor](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.mediacaptureinitializationsettings.mediacaptureinitializationsettings.aspx) 
-
-* [**Windows.Media.Capture.MediaCaptureInitializationSettings.VideoDeviceId** property](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.mediacaptureinitializationsettings.videodeviceid.aspx)
-
-* [**Windows.Devices.Enumeration.DeviceInformation** class](https://msdn.microsoft.com/library/windows/apps/windows.devices.enumeration.deviceinformation)
-
-* [**Windows.Graphics.Imaging.BitmapDecoder** class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.bitmapdecoder.aspx)
-
-* [**Windows.Graphics.Imaging.BitmapEncoder** class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.bitmapencoder.aspx)
-
-* [Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
-
-* [Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
+[Windows.Media.Devices namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)  
+[Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)  
+[Windows.Media.Capture.MediaCaptureInitializationSettings constructor](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.mediacaptureinitializationsettings.mediacaptureinitializationsettings.aspx)  
+[Windows.Media.Capture.MediaCaptureInitializationSettings.VideoDeviceId property](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.mediacaptureinitializationsettings.videodeviceid.aspx)  
+[Windows.Devices.Enumeration.DeviceInformation class](https://msdn.microsoft.com/library/windows/apps/windows.devices.enumeration.deviceinformation)  
+[Windows.Graphics.Imaging.BitmapDecoder class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.bitmapdecoder.aspx)  
+[Windows.Graphics.Imaging.BitmapEncoder class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.bitmapencoder.aspx)  
+[Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)  
 
 ### System requirements
 

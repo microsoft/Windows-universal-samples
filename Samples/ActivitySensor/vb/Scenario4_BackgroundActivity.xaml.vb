@@ -70,7 +70,7 @@ Namespace Global.SDKTemplate
                 Dim activitySensor As ActivitySensor = Await ActivitySensor.GetDefaultAsync()
                 If activitySensor IsNot Nothing Then
                     Dim status = Await BackgroundExecutionManager.RequestAccessAsync()
-                    If(BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity = status) OrElse (BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity = status) Then
+                    If(BackgroundAccessStatus.AlwaysAllowed = status) OrElse (BackgroundAccessStatus.AllowedSubjectToSystemPolicy = status) Then
                         RegisterBackgroundTask()
                     Else
                         rootPage.NotifyUser("Background tasks may be disabled for this app", NotifyType.ErrorMessage)

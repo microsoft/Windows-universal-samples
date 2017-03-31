@@ -1,0 +1,14 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+/* styles */
+
+.imageHolder {
+    max-width: 382px;
+}
+
+    .imageHolder.withText {
+        float: left;
+        margin-right: 10px;
+    }
