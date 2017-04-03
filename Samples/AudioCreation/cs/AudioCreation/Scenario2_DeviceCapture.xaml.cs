@@ -12,11 +12,8 @@
 using SDKTemplate;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
-using Windows.Foundation;
-using Windows.Media;
 using Windows.Media.Audio;
 using Windows.Media.Capture;
 using Windows.Media.Devices;
@@ -46,9 +43,6 @@ namespace AudioCreation
         private AudioFileOutputNode fileOutputNode;
         private AudioDeviceOutputNode deviceOutputNode;
         private AudioDeviceInputNode deviceInputNode;
-        private AudioFrameOutputNode frameOutputNode;
-        // 16K stereo float audio samples        
-        private byte[] byteBuffer = new byte[16384 * 2 * 4];
         private DeviceInformationCollection outputDevices;
 
         public Scenario2_DeviceCapture()
@@ -171,40 +165,6 @@ namespace AudioCreation
             }
         }
 
-        static int s_zeroByteBufferCount, s_nonZeroByteBufferCount;
-
-        private unsafe void Graph_QuantumStarted(AudioGraph sender, object args)
-        {
-            AudioFrame frame = frameOutputNode.GetFrame();
-
-            using (AudioBuffer buffer = frame.LockBuffer(AudioBufferAccessMode.Read))
-            using (IMemoryBufferReference reference = buffer.CreateReference())
-            {
-                byte* dataInBytes;
-                uint capacityInBytes;
-
-                // Get the buffer from the AudioFrame
-                ((IMemoryBufferByteAccess)reference).GetBuffer(out dataInBytes, out capacityInBytes);
-
-                if (capacityInBytes == 0)
-                {
-                    s_zeroByteBufferCount++;
-                }
-                else
-                {
-                    s_nonZeroByteBufferCount++;
-                }
-
-                fixed (byte* buf = byteBuffer)
-                {
-                    for (int i = 0; i < capacityInBytes; i++)
-                    {
-                        buf[i] = dataInBytes[i];
-                    }
-                }
-            }
-        }
-
         private async Task PopulateDeviceList()
         {
             outputDevicesListBox.Items.Clear();
@@ -262,12 +222,6 @@ namespace AudioCreation
             deviceInputNode = deviceInputNodeResult.DeviceInputNode;
             rootPage.NotifyUser("Device Input connection successfully created", NotifyType.StatusMessage);
             inputDeviceContainer.Background = new SolidColorBrush(Colors.Green);
-
-            frameOutputNode = graph.CreateFrameOutputNode();
-            deviceInputNode.AddOutgoingConnection(frameOutputNode);
-
-            // Attach to QuantumStarted event in order to receive synchronous updates from audio graph.
-            graph.QuantumStarted += Graph_QuantumStarted;
 
             // Since graph is successfully created, enable the button to select a file output
             fileButton.IsEnabled = true;

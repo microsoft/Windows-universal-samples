@@ -118,9 +118,6 @@
     <Compile Include="Scenario1_FilePlayback.xaml.cs">
       <DependentUpon>Scenario1_FilePlayback.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario7_RecordPlayback.xaml.cs">
-      <DependentUpon>Scenario7_RecordPlayback.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Scenario2_DeviceCapture.xaml.cs">
       <DependentUpon>Scenario2_DeviceCapture.xaml</DependentUpon>
     </Compile>
@@ -135,6 +132,9 @@
     </Compile>
     <Compile Include="Scenario6_CustomEffects.xaml.cs">
       <DependentUpon>Scenario6_CustomEffects.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario7_RecordPlayback.xaml.cs">
+      <DependentUpon>Scenario7_RecordPlayback.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -153,15 +153,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario7_RecordPlayback.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Scenario4_Submix.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>
-      </SubType>
-    </Page>
     <Page Include="Scenario1_FilePlayback.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>
@@ -177,6 +168,11 @@
       <SubType>
       </SubType>
     </Page>
+    <Page Include="Scenario4_Submix.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>
+      </SubType>
+    </Page>
     <Page Include="Scenario5_InboxEffects.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>
@@ -186,6 +182,10 @@
       <SubType>
       </SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scenario7_RecordPlayback.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="..\..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
