@@ -178,7 +178,7 @@
             job.printLine("Signature");
             job.printLine();
             job.printLine("Merchant Copy");
-            job.cutPaper();
+            lineFeedAndCutPaper(job);
 
 
             job.executeAsync().done(function () {
@@ -189,4 +189,22 @@
         }
     }
 
+    // Cut the paper after printing enough blank lines to clear the paper cutter.
+    function lineFeedAndCutPaper(job) {
+
+        if (_printer == null) {
+            WinJS.log("No printers found. Cannot print.", "sample", "error");
+        }
+        else if (_claimedPrinter == null) {
+            WinJS.log("Claimed printer instance is null. Cannot print.", "sample", "error");
+        }
+        else {
+            for (var n = 0; n < _claimedPrinter.receipt.linesToPaperCut; n++) {
+                job.printLine();
+            }
+            if (_printer.capabilities.receipt.canCutPaper) {
+                job.cutPaper();
+            }
+        }
+    }
 })();

@@ -38,9 +38,6 @@ namespace SDKTemplate
         void ScenarioStartScanButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void ScenarioEndScanButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
-        Concurrency::task<void> CreateDefaultScannerObject();
-        Concurrency::task<void> ClaimScanner();
-        void UpdateOutput(Platform::String^ strMessage);
         void ResetTheScenarioState();
 
         void OnDataReceived(Windows::Devices::PointOfService::ClaimedBarcodeScanner ^sender, Windows::Devices::PointOfService::BarcodeScannerDataReceivedEventArgs ^args);

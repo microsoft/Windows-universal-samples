@@ -110,7 +110,10 @@ namespace SDKTemplate
                 IEnumerable<FrameFormatModel> formats = null;
                 if (_mediaCapture != null && _source != null)
                 {
-                    formats = _source.SupportedFormats.Select(format => new FrameFormatModel(format));
+                    // Limit ourselves to formats that we can render.
+                    formats = _source.SupportedFormats
+                        .Where(format => FrameRenderer.GetSubtypeForFrameReader(_source.Info.SourceKind, format) != null)
+                        .Select(format => new FrameFormatModel(format));
                 }
 
                 FormatComboBox.ItemsSource = formats;
@@ -157,10 +160,20 @@ namespace SDKTemplate
 
             if (_source != null)
             {
-                _reader = await _mediaCapture.CreateFrameReaderAsync(_source);
-                _reader.FrameArrived += Reader_FrameArrived;
-                
-                _logger.Log($"Reader created on source: {_source.Info.Id}");
+                // Ask the MediaFrameReader to use a subtype that we can render.
+                string requestedSubtype = FrameRenderer.GetSubtypeForFrameReader(_source.Info.SourceKind, _source.CurrentFormat);
+                if (requestedSubtype != null)
+                {
+                    _reader = await _mediaCapture.CreateFrameReaderAsync(_source, requestedSubtype);
+
+                    _reader.FrameArrived += Reader_FrameArrived;
+
+                    _logger.Log($"Reader created on source: {_source.Info.Id}");
+                }
+                else
+                {
+                    _logger.Log($"Cannot render current format on source: {_source.Info.Id}");
+                }
             }
         }
 

@@ -35,6 +35,8 @@ namespace SDKTemplate
             }
         }
 
+        static Concurrency::task<Windows::Devices::Sensors::Altimeter^> GetDefaultAltimeterAsync();
+
     private:
         static Platform::Array<Scenario>^ scenariosInner;
     };

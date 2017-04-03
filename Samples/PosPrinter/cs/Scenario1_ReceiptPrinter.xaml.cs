@@ -267,7 +267,7 @@ namespace PosPrinterSample
             merchantFooter.PrintLine("Signature");
             merchantFooter.PrintLine();
             merchantFooter.PrintLine("Merchant Copy");
-            merchantFooter.CutPaper();
+            LineFeedAndCutPaper(merchantFooter);
 
             return merchantFooter;
         }
@@ -280,9 +280,26 @@ namespace PosPrinterSample
             customerFooter.PrintLine("Tip");
             customerFooter.PrintLine();
             customerFooter.PrintLine("Customer Copy");
-            customerFooter.CutPaper();
+            LineFeedAndCutPaper(customerFooter);
 
             return customerFooter;
+        }
+
+        // Cut the paper after printing enough blank lines to clear the paper cutter.
+        private void LineFeedAndCutPaper(ReceiptPrintJob job)
+        {
+            if (IsPrinterClaimed())
+            {
+                for (uint n = 0; n < claimedPrinter.Receipt.LinesToPaperCut; n++)
+                {
+                    job.PrintLine();
+                }
+
+                if (printer.Capabilities.Receipt.CanCutPaper)
+                {
+                    job.CutPaper();
+                }
+            }
         }
 
         /// <summary>

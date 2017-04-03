@@ -25,8 +25,6 @@ namespace SDKTemplate
     /// </summary>
     public sealed partial class Scenario1 : Page
     {
-        private MainPage rootPage = MainPage.Current;
-
         public Scenario1()
         {
             this.InitializeComponent();

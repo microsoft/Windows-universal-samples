@@ -60,7 +60,7 @@
                             <VariableSizedWrapGrid Orientation="Horizontal" ItemWidth="60">
                                 <Button x:Name="RunButton" HorizontalAlignment="Stretch"
                                         VerticalAlignment="Stretch"
-                                        Content="Run"
+                                        Content="Start"
                                         Margin="1"
                                         VariableSizedWrapGrid.ColumnSpan="2"
                                         Click="RunButton_Click"/>

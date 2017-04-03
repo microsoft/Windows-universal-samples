@@ -5,7 +5,7 @@
 
 # Animation metrics sample
 
-Shows how to use the Animation Metrics APIs ([Windows.UI.Core.AnimationMetrics](http://msdn.microsoft.com/library/windows/apps/br241916) 
+Shows how to use the Animation Metrics APIs ([Windows.UI.Core.AnimationMetrics](http://msdn.microsoft.com/library/windows/apps/br241916)) 
 to access the raw parameters that define the animations in the Windows [Animation Library](http://msdn.microsoft.com/library/windows/apps/hh465165). 
 This info can help developers of applications and application frameworks to create animations that are consistent with Windows and other 
 apps that use the Windows Animation Library.

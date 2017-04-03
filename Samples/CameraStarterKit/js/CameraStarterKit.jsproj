@@ -91,6 +91,7 @@
     <Content Include="..\..\..\SharedContent\js\Microsoft.WinJS\js\WinJS.intellisense-setup.js">
       <Link>WinJS\js\WinJS.intellisense-setup.js</Link>
     </Content>
+    <Content Include="js\cameraRotationHelper.js" />
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="WindowsMobile, Version=10.0.14393.0" />

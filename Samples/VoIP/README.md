@@ -19,6 +19,13 @@ WASAPI has been implemented into the sample to provide audio loopback. It simply
 
 This Sample utilizes Windows Mobile Extensions for UWP and will only work on mobile devices with right capabilities.
 
+## Related topics
+
+### Other repos
+
+* [WebRTC universal samples](https://github.com/Microsoft/WebRTC-universal-samples/)
+ * [ChatterBox sample](https://github.com/Microsoft/WebRTC-universal-samples/tree/master/Samples/ChatterBox-Sample)
+
 ## System requirements
 
 **Client:** Windows 10

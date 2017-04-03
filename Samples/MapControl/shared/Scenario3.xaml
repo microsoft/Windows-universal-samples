@@ -21,35 +21,11 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="wideState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="641" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="myMap.Height" Value="500"/>
-                        <Setter Target="myMap.Width" Value="500"/>
-                        <Setter Target="description.Margin" Value="0,0,0,0"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="narrowState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="myMap.Height" Value="280"/>
-                        <Setter Target="myMap.Width" Value="280"/>
-                        <Setter Target="description.Margin" Value="28,0,0,0"/>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Margin="0,0,0,10">
                 <TextBlock x:Name="description" Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
@@ -58,35 +34,34 @@
                 </TextBlock>
             </StackPanel>
 
-            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-                <StackPanel>
-                    <Button x:Name="addXamlChildrenButton" Content="Add XAML on MapControl" Click="addXamlChildrenButton_Click"/>
-                    <maps:MapControl x:Name="myMap" HorizontalAlignment="Left" Loaded="MyMap_Loaded">
-                        <maps:MapItemsControl x:Name="MapItems">
-                            <maps:MapItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Button x:Name="mapItemButton" Click="mapItemButton_Click" Background="Transparent">
-                                        <StackPanel>
-                                            <Border Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                                                <TextBlock Text="{Binding DisplayName}"/>
-                                            </Border>
-                                            <Image Source="{Binding ImageSourceUri}"
+            <StackPanel Grid.Row="1">
+                <Button x:Name="addXamlChildrenButton" Content="Add XAML on MapControl" Click="addXamlChildrenButton_Click"/>
+            </StackPanel>
+
+            <maps:MapControl x:Name="myMap" Loaded="MyMap_Loaded" Grid.Row="2">
+                <maps:MapItemsControl x:Name="MapItems">
+                    <maps:MapItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button x:Name="mapItemButton" Click="mapItemButton_Click" Background="Transparent">
+                                <StackPanel>
+                                    <Border Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                                        <TextBlock Text="{Binding DisplayName}"/>
+                                    </Border>
+                                    <Image Source="{Binding ImageSourceUri}"
                                                maps:MapControl.NormalizedAnchorPoint="{Binding NormalizedAnchorPoint}"
                                                maps:MapControl.Location="{Binding Location}">
-                                                <Image.Transitions>
-                                                    <TransitionCollection>
-                                                        <EntranceThemeTransition/>
-                                                    </TransitionCollection>
-                                                </Image.Transitions>
-                                            </Image>
-                                        </StackPanel>
-                                    </Button>
-                                </DataTemplate>
-                            </maps:MapItemsControl.ItemTemplate>
-                        </maps:MapItemsControl>
-                    </maps:MapControl>
-                </StackPanel>
-            </ScrollViewer>
+                                        <Image.Transitions>
+                                            <TransitionCollection>
+                                                <EntranceThemeTransition/>
+                                            </TransitionCollection>
+                                        </Image.Transitions>
+                                    </Image>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </maps:MapItemsControl.ItemTemplate>
+                </maps:MapItemsControl>
+            </maps:MapControl>
         </Grid>
     </Grid>
 </Page>

@@ -31,14 +31,14 @@
             </Grid.ColumnDefinitions>
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Document 2:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" 
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"
                            Text="Lorem ipsum (Chinese script)" />
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="Font: FangSong Regular" />
             </StackPanel>
 
-            <ScrollViewer Name="TextLayoutFrame" 
+            <ScrollViewer Name="TextLayoutFrame"
                           Grid.Row="1" Grid.Column="0" VerticalAlignment="Top"
-                          VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" 
+                          VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto"
                           Padding="10,10,15,10" Background="#FF303030"
                           SizeChanged="TextLayoutFrame_SizeChanged">
                 <Image Name="TextLayoutImage" />

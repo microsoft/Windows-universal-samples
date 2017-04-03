@@ -17,7 +17,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Text.Core;
-using SDKTemplate;
 
 namespace SDKTemplate
 {
@@ -75,6 +74,7 @@ namespace SDKTemplate
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             InstallReco.IsOpen = false;
+            textServiceManager.InputLanguageChanged -= TextServiceManager_InputLanguageChanged;
         }
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)

@@ -12,23 +12,19 @@
 (function () {
     "use strict";
 
+    var ApplicationData = Windows.Storage.ApplicationData;
+    var CameraRotationHelper = SDKSample.CameraRotationHelper;
     var Capture = Windows.Media.Capture;
     var DeviceInformation = Windows.Devices.Enumeration.DeviceInformation;
     var DeviceClass = Windows.Devices.Enumeration.DeviceClass;
+    var Display = Windows.Graphics.Display;
     var DisplayOrientations = Windows.Graphics.Display.DisplayOrientations;
-    var FileProperties = Windows.Storage.FileProperties;
-    var Media = Windows.Media;
-    var SimpleOrientation = Windows.Devices.Sensors.SimpleOrientation;
-    var SimpleOrientationSensor = Windows.Devices.Sensors.SimpleOrientationSensor;
-    var StorageLibrary = Windows.Storage.StorageLibrary;
     var KnownLibraryId = Windows.Storage.KnownLibraryId;
-    var ApplicationData = Windows.Storage.ApplicationData;
+    var Media = Windows.Media;
+    var StorageLibrary = Windows.Storage.StorageLibrary;
 
-    // Receive notifications about rotation of the device and UI and apply any necessary rotation to the preview stream and UI controls
-    var oOrientationSensor = SimpleOrientationSensor.getDefault(),
-        oDisplayInformation = Windows.Graphics.Display.DisplayInformation.getForCurrentView(),
-        oDeviceOrientation = SimpleOrientation.notRotated,
-        oDisplayOrientation = DisplayOrientations.portrait;
+    // Rotation Helper to simplify handling rotation compensation for the camera streams
+    var oRotationHelper = null;
 
     // Prevent the screen from sleeping while the camera is running
     var oDisplayRequest = new Windows.System.Display.DisplayRequest();
@@ -41,6 +37,11 @@
         isInitialized = false,
         isPreviewing = false,
         isRecording = false;
+
+    // UI state
+    var _isSuspending = false;
+    var _isUIActive = false;
+    var _setupPromise = WinJS.Promise.wrap();
 
     // Information about the camera device
     var externalCamera = false,
@@ -63,24 +64,20 @@
                 document.getElementById("videoButton").addEventListener("click", videoButton_tapped);
             }
 
-            setupUiAsync();
-            initializeCameraAsync();
-            args.setPromise(WinJS.UI.processAll());
+            args.setPromise(WinJS.Promise.join(setUpBasedOnStateAsync(), WinJS.UI.processAll()));
         }
     };
     
     // About to be suspended
     app.oncheckpoint = function (args) {
-        cleanupCameraAsync()
-        .then(function () {
-            args.setPromise(cleanupUiAsync());
-        }).done();
+        _isSuspending = true;
+        args.setPromise(setUpBasedOnStateAsync());
     };
 
     // Resuming from a user suspension
     Windows.UI.WebUI.WebUIApplication.addEventListener("resuming", function () {
-        setupUiAsync();
-        initializeCameraAsync();
+        _isSuspending = false;
+        setUpBasedOnStateAsync();
     }, false);
     
     // Closing
@@ -88,11 +85,13 @@
         document.getElementById("photoButton").removeEventListener("click", photoButton_tapped);
         document.getElementById("videoButton").removeEventListener("click", videoButton_tapped);
 
-        cleanupCameraAsync()
-        .then(function () {
-            args.setPromise(cleanupUiAsync());
-        }).done();
+        _isSuspending = true;
+        args.setPromise(setUpBasedOnStateAsync());
     };
+
+    document.addEventListener("visibilitychange", function () {
+        setUpBasedOnStateAsync();
+    });
 
     /// <summary>
     /// Initializes the MediaCapture, registers events, gets camera device information for mirroring and rotating, starts preview and unlocks the UI
@@ -121,6 +120,10 @@
                 mirroringPreview = (camera.enclosureLocation.panel === Windows.Devices.Enumeration.Panel.front);
             }
 
+            // Initialize rotationHelper
+            oRotationHelper = new CameraRotationHelper(camera.enclosureLocation);
+            oRotationHelper.addEventListener("orientationchanged", rotationHelper_orientationChanged);
+
             oMediaCapture = new Capture.MediaCapture();
 
             // Register for a notification when video recording has reached the maximum time and when something goes wrong
@@ -143,19 +146,42 @@
     }
 
     /// <summary>
+    /// Handles an orientation changed event
+    /// </summary>
+    function rotationHelper_orientationChanged(event) {
+        if (event.detail.updatePreview) {
+            setPreviewRotationAsync();
+        }
+        updateButtonOrientation();
+    }
+
+    /// <summary>
+    /// Uses the current device orientation in space and page orientation on the screen to calculate the rotation
+    /// transformation to apply to the controls
+    /// </summary>
+    function updateButtonOrientation() {
+        // Rotate the buttons in the UI to match the rotation of the device
+        var angle = CameraRotationHelper.convertSimpleOrientationToClockwiseDegrees(oRotationHelper.getUIOrientation());
+
+        // Rotate the buttons in the UI to match the rotation of the device
+        videoButton.style.transform = "rotate(" + angle + "deg)";
+        photoButton.style.transform = "rotate(" + angle + "deg)";
+    }
+
+    /// <summary>
     /// Cleans up the camera resources (after stopping any video recording and/or preview if necessary) and unregisters from MediaCapture events
     /// </summary>
     /// <returns></returns>
     function cleanupCameraAsync() {
         console.log("cleanupCameraAsync");
 
-        var promiseList = {};
+        var promiseList = [];
 
         if (isInitialized) {
             // If a recording is in progress during cleanup, stop it to save the recording
             if (isRecording) {
                 var stopRecordPromise = stopRecordingAsync();
-                promiseList[promiseList.length] = stopRecordPromise;
+                promiseList.push(stopRecordPromise);
             }
 
             if (isPreviewing) {
@@ -208,20 +234,11 @@
     /// Gets the current orientation of the UI in relation to the device (when AutoRotationPreferences cannot be honored) and applies a corrective rotation to the preview
     /// </summary>
     /// <returns></returns>
-    function setPreviewRotationAsync()
-    {
-        // Calculate which way and how far to rotate the preview
-        var rotationDegrees = convertDisplayOrientationToDegrees(oDisplayOrientation);
-
-        // The rotation direction needs to be inverted if the preview is being mirrored
-        if (mirroringPreview)
-        {
-            rotationDegrees = (360 - rotationDegrees) % 360;
-        }
-
+    function setPreviewRotationAsync() {
         // Add rotation metadata to the preview stream to make sure the aspect ratio / dimensions match when rendering and getting preview frames
+        var rotation = oRotationHelper.getCameraPreviewOrientation();
         var props = oMediaCapture.videoDeviceController.getMediaStreamProperties(Capture.MediaStreamType.videoPreview);
-        props.properties.insert(RotationKey, rotationDegrees);
+        props.properties.insert(RotationKey, CameraRotationHelper.convertSimpleOrientationToClockwiseDegrees(rotation));
         return oMediaCapture.setEncodingPropertiesAsync(Capture.MediaStreamType.videoPreview, props, null);
     }
 
@@ -264,7 +281,7 @@
             // Done taking a photo, so re-enable the button
             videoButton.disabled = false;
 
-            var photoOrientation = convertOrientationToPhotoOrientation(getCameraOrientation());
+            var photoOrientation = CameraRotationHelper.convertSimpleOrientationToPhotoOrientation(oRotationHelper.getCameraCaptureOrientation());
             return reencodeAndSavePhotoAsync(inputStream, file, photoOrientation);
         }).then(function () {
             console.log("Photo saved!");
@@ -281,7 +298,7 @@
         return oCaptureFolder.createFileAsync("SimpleVideo.mp4", Windows.Storage.CreationCollisionOption.generateUniqueName)
         .then(function (file) {
             // Calculate rotation angle, taking mirroring into account if necessary
-            var rotationAngle = 360 - convertDeviceOrientationToDegrees(getCameraOrientation());
+            var rotationAngle = CameraRotationHelper.convertSimpleOrientationToClockwiseDegrees(oRotationHelper.getCameraCaptureOrientation());
             var encodingProfile = Windows.Media.MediaProperties.MediaEncodingProfile.createMp4(Windows.Media.MediaProperties.VideoEncodingQuality.auto);
             encodingProfile.video.properties.insert(RotationKey, rotationAngle);
 
@@ -392,18 +409,10 @@
     /// Attempts to lock the page orientation, hide the StatusBar (on Phone) and registers event handlers for hardware buttons and orientation sensors
     /// </summary>
     function setupUiAsync() {
-        var Display = Windows.Graphics.Display;
-
         // Attempt to lock page to landscape orientation to prevent the CaptureElement from rotating, as this gives a better experience
-        Display.DisplayInformation.autoRotationPreferences = Display.DisplayOrientations.landscape;
+        Display.DisplayInformation.autoRotationPreferences = DisplayOrientations.landscape;
 
         registerEventHandlers();
-
-        // Populate orientation variables with the current state
-        oDisplayOrientation = oDisplayInformation.currentOrientation;
-        if (oOrientationSensor != null) {
-            oDeviceOrientation = oOrientationSensor.getCurrentOrientation();
-        }
 
         return StorageLibrary.getLibraryAsync(KnownLibraryId.pictures)
         .then(function (picturesLibrary) {
@@ -427,9 +436,6 @@
     function cleanupUiAsync() {
         unregisterEventHandlers();
 
-        // Revert orientation preferences
-        oDisplayInformation.AutoRotationPreferences = DisplayOrientations.none;
-
         // Show the status bar
         if (Windows.Foundation.Metadata.ApiInformation.isTypePresent("Windows.UI.ViewManagement.StatusBar")) {
             return Windows.UI.ViewManagement.StatusBar.getForCurrentView().showAsync();
@@ -442,177 +448,59 @@
     /// <summary>
     /// Registers event handlers for hardware buttons and orientation sensors, and performs an initial update of the UI rotation
     /// </summary>
-    function registerEventHandlers()
-    {
-        if (Windows.Foundation.Metadata.ApiInformation.isTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-        {
+    function registerEventHandlers() {
+        if (Windows.Foundation.Metadata.ApiInformation.isTypePresent("Windows.Phone.UI.Input.HardwareButtons")) {
             Windows.Phone.UI.Input.HardwareButtons.addEventListener("camerapressed", hardwareButtons_cameraPress);
         }
 
-        // If there is an orientation sensor present on the device, register for notifications
-        if (oOrientationSensor != null) {
-            oOrientationSensor.addEventListener("orientationchanged", orientationSensor_orientationChanged);
-        
-            // Update orientation of buttons with the current orientation
-            updateButtonOrientation();
-        }
-
-        oDisplayInformation.addEventListener("orientationchanged", displayInformation_orientationChanged);
         oSystemMediaControls.addEventListener("propertychanged", systemMediaControls_PropertyChanged);
     }
 
     /// <summary>
     /// Unregisters event handlers for hardware buttons and orientation sensors
     /// </summary>
-    function unregisterEventHandlers()
-    {
-        if (Windows.Foundation.Metadata.ApiInformation.isTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-        {
+    function unregisterEventHandlers() {
+        if (Windows.Foundation.Metadata.ApiInformation.isTypePresent("Windows.Phone.UI.Input.HardwareButtons")) {
             Windows.Phone.UI.Input.HardwareButtons.removeEventListener("camerapressed", hardwareButtons_cameraPress);
         }
 
-        if (oOrientationSensor != null) {
-            oOrientationSensor.removeEventListener("orientationchanged", orientationSensor_orientationChanged);
-        }
-
-        oDisplayInformation.removeEventListener("orientationchanged", displayInformation_orientationChanged);
         oSystemMediaControls.removeEventListener("propertychanged", systemMediaControls_PropertyChanged);
     }
 
     /// <summary>
-    /// Calculates the current camera orientation from the device orientation by taking into account whether the camera is external or facing the user
+    /// Initialize or clean up the camera and our UI,
+    /// depending on the page state.
     /// </summary>
-    /// <returns>The camera orientation in space, with an inverted rotation in the case the camera is mounted on the device and is facing the user</returns>
-    function getCameraOrientation() {
-        if (externalCamera) {
-            // Cameras that are not attached to the device do not rotate along with it, so apply no rotation
-            return SimpleOrientation.notRotated;
-        }
-
-        var result = oDeviceOrientation;
-
-        // Account for the fact that, on portrait-first devices, the camera sensor is mounted at a 90 degree offset to the native orientation
-        if (oDisplayInformation.nativeOrientation === DisplayOrientations.portrait) {
-            switch (result) {
-                case SimpleOrientation.rotated90DegreesCounterclockwise:
-                    result = SimpleOrientation.notRotated;
-                    break;
-                case SimpleOrientation.rotated180DegreesCounterclockwise:
-                    result = SimpleOrientation.rotated90DegreesCounterclockwise;
-                    break;
-                case SimpleOrientation.rotated270DegreesCounterclockwise:
-                    result = SimpleOrientation.rotated180DegreesCounterclockwise;
-                    break;
-                case SimpleOrientation.notRotated:
-                default:
-                    result = SimpleOrientation.rotated270DegreesCounterclockwise;
-                    break;
-            }
-        }
-
-        // If the preview is being mirrored for a front-facing camera, then the rotation should be inverted
-        if (mirroringPreview) {
-            // This only affects the 90 and 270 degree cases, because rotating 0 and 180 degrees is the same clockwise and counter-clockwise
-            switch (result) {
-                case SimpleOrientation.rotated90DegreesCounterclockwise:
-                    return SimpleOrientation.rotated270DegreesCounterclockwise;
-                case SimpleOrientation.rotated270DegreesCounterclockwise:
-                    return SimpleOrientation.rotated90DegreesCounterclockwise;
-            }
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    /// Converts the given orientation of the device in space to the metadata that can be added to captured photos
-    /// </summary>
-    /// <param name="orientation">The orientation of the device in space</param>
     /// <returns></returns>
-    function convertOrientationToPhotoOrientation(orientation) {
-        switch (orientation) {
-            case SimpleOrientation.rotated90DegreesCounterclockwise:
-                return FileProperties.PhotoOrientation.rotate90;
-            case SimpleOrientation.rotated180DegreesCounterclockwise:
-                return FileProperties.PhotoOrientation.rotate180;
-            case SimpleOrientation.rotated270DegreesCounterclockwise:
-                return FileProperties.PhotoOrientation.rotate270;
-            case SimpleOrientation.notRotated:
-            default:
-                return FileProperties.PhotoOrientation.normal;
-        }
-    }
-
-    /// <summary>
-    /// Converts the given orientation of the device in space to the corresponding rotation in degrees
-    /// </summary>
-    /// <param name="orientation">The orientation of the device in space</param>
-    /// <returns>An orientation in degrees</returns>
-    function convertDeviceOrientationToDegrees(orientation) {
-        switch (orientation) {
-            case SimpleOrientation.rotated90DegreesCounterclockwise:
-                return 90;
-            case SimpleOrientation.rotated180DegreesCounterclockwise:
-                return 180;
-            case SimpleOrientation.rotated270DegreesCounterclockwise:
-                return 270;
-            case SimpleOrientation.notRotated:
-            default:
-                return 0;
-        }
-    }
-
-    /// <summary>
-    /// Converts the given orientation of the app on the screen to the corresponding rotation in degrees
-    /// </summary>
-    /// <param name="orientation">The orientation of the app on the screen</param>
-    /// <returns>An orientation in degrees</returns>
-    function convertDisplayOrientationToDegrees(orientation) {
-        switch (orientation) {
-            case DisplayOrientations.portrait:
-                return 90;
-            case DisplayOrientations.LandscapeFlipped:
-                return 180;
-            case DisplayOrientations.PortraitFlipped:
-                return 270;
-            case DisplayOrientations.Landscape:
-            default:
-                return 0;
-        }
-    }
-
-    /// <summary>
-    /// Uses the current device orientation in space and page orientation on the screen to calculate the rotation
-    /// transformation to apply to the controls
-    /// </summary>
-    function updateButtonOrientation() {
-        var currDeviceOrientation = convertDeviceOrientationToDegrees(oDeviceOrientation);
-        var currDisplayOrientation = convertDisplayOrientationToDegrees(oDisplayOrientation);
-
-        if (oDisplayInformation.nativeOrientation === DisplayOrientations.portrait) {
-            currDeviceOrientation -= 90;
+    function setUpBasedOnStateAsync(previousPromise) {
+        // Avoid reentrancy: Wait until nobody else is in this function.
+        // WinJS.Promise has no way to check whether a promise has completed,
+        // so we wait on the promise and then see if another task changed it.
+        // if not, then it was already completed.
+        if (previousPromise !== _setupPromise) {
+            previousPromise = _setupPromise;
+            return _setupPromise.then(function() {
+                return setUpBasedOnStateAsync(previousPromise);
+            });
         }
 
-        // Combine both rotations and make sure that 0 <= result < 360
-        var angle = (360 + currDisplayOrientation + currDeviceOrientation) % 360;
+        // We want our UI to be active if
+        // * We are the current active page.
+        // * The window is visible.
+        // * The app is not suspending.
+        var wantUIActive = !document.hidden && !_isSuspending;
 
-        // Rotate the buttons in the UI to match the rotation of the device
-        videoButton.style.transform = "rotate(" + angle + "deg)";
-        photoButton.style.transform = "rotate(" + angle + "deg)";
-    }
+        if (_isUIActive != wantUIActive) {
+            _isUIActive = wantUIActive;
 
-    /// <summary>
-    /// This event will fire when the page is rotated, when the DisplayInformation.AutoRotationPreferences value set in the setupUiAsync() method cannot be not honored.
-    /// </summary>
-    /// <param name="sender">The event source.</param>
-    function displayInformation_orientationChanged(sender) {
-        oDisplayOrientation = sender.currentOrientation;
-
-        if (isPreviewing) {
-            setPreviewRotationAsync();
+            if (wantUIActive) {
+                _setupPromise = WinJS.Promise.join(setupUiAsync(), initializeCameraAsync());
+            } else {
+                _setupPromise  = WinJS.Promise.join(cleanupCameraAsync(), cleanupUiAsync());
+            }
         }
-       
-        updateButtonOrientation();
+
+        return _setupPromise;
     }
 
     function photoButton_tapped() {
@@ -652,22 +540,7 @@
         }
     }
 
-    /// <summary>
-    /// Occurs each time the simple orientation sensor reports a new sensor reading.
-    /// </summary>
-    /// <param name="args">The event data.</param>
-    function orientationSensor_orientationChanged(args) {
-        // If the device is parallel to the ground, keep the last orientation used. This allows users to take pictures of documents (FaceUp)
-        // or the ceiling (FaceDown) in any orientation, by first holding the device in the desired orientation, and then pointing the camera
-        // at the desired subject.
-        if (args.orientation != SimpleOrientation.faceup && args.orientation != SimpleOrientation.facedown) {
-            oDeviceOrientation = args.orientation;
-            updateButtonOrientation();
-        }
-    }
-
-    function hardwareButtons_cameraPress()
-    {
+    function hardwareButtons_cameraPress() {
         takePhotoAsync();
     }
 
@@ -681,8 +554,7 @@
         });
     }
 
-    function mediaCapture_failed(errorEventArgs)
-    {
+    function mediaCapture_failed(errorEventArgs) {
         console.log("MediaCapture_Failed: 0x" + errorEventArgs.code + ": " + errorEventArgs.message);
 
         cleanupCameraAsync()
