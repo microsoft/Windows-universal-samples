@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: Holographic
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=832542
 --->
@@ -29,8 +29,7 @@ For an example, see the [Holographic Tag-along Sample](http://go.microsoft.com/f
 
 This sample demonstrates best practices for user comfort by always setting the image stabilization plane.
 
-**Note** The image stabilization plane can be observed via the [Windows Device Portal] 
-(https://developer.microsoft.com/windows/holographic/Using_the_Windows_Device_Portal.html).
+**Note** The image stabilization plane can be observed via the [Windows Device Portal](https://developer.microsoft.com/windows/mixed-reality/Using_the_Windows_Device_Portal.html).
 
 ## Compute shaders
 
@@ -47,8 +46,7 @@ Microsoft HoloLens and the Microsoft HoloLens Emulator.
 To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421).
 
 To obtain information about the tools used for Windows Holographic development, including Microsoft 
-Visual Studio 2015 Update 2 and the Microsoft HoloLens Emulator, go to [Install the tools]
-(https://developer.microsoft.com/windows/holographic/install_the_tools).
+Visual Studio 2015 Update 2 and the Microsoft HoloLens Emulator, go to [Install the tools](https://developer.microsoft.com/windows/mixed-reality/install_the_tools).
 
 ## Reference
 
