@@ -23,6 +23,8 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using System.Diagnostics;
+using Windows.Media.Playback;
+using Windows.Media.Core;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -61,6 +63,10 @@ namespace SDKTemplate
 
         private bool pausedDueToMute = false;
 
+        private MediaPlayer mediaPlayer;
+
+        private MediaPlaybackItem mediaPlaybackItem;
+
         public Scenario1()
         {
             this.InitializeComponent();
@@ -85,14 +91,26 @@ namespace SDKTemplate
             if (!isInitialized)
             {
                 isInitialized = true;
-                MyMediaElement.CurrentStateChanged += MyMediaElement_CurrentStateChanged;
-                MyMediaElement.MediaOpened += MyMediaElement_MediaOpened;
-                MyMediaElement.MediaEnded += MyMediaElement_MediaEnded;
-                MyMediaElement.MediaFailed += MyMediaElement_MediaFailed;
+
+                // Create a new MediaPlayer and assign it to the element for video rendering
+                mediaPlayer = new MediaPlayer();
+                mediaPlayerElement.SetMediaPlayer(mediaPlayer);
+
+                // MediaPlayer has automatic integration with SMTC. This sample demonstrates manual
+                // integration with SMTC, and so we disable the MediaPlayer's CommandManager.
+                // Unless you have a need to manually integrate with SMTC, it is recommended that
+                // you use the built-in integration through CommandManager instead of the
+                // procedures demonstrated throughout this sample.
+                mediaPlayer.CommandManager.IsEnabled = false;
+
+                mediaPlayer.PlaybackSession.PlaybackStateChanged += mediaPlayer_PlaybackStateChanged;
+                mediaPlayer.MediaOpened += mediaPlayer_MediaOpened;
+                mediaPlayer.MediaEnded += mediaPlayer_MediaEnded;
+                mediaPlayer.MediaFailed += mediaPlayer_MediaFailed;
 
                 smtcPositionUpdateTimer = new DispatcherTimer();
                 smtcPositionUpdateTimer.Interval = TimeSpan.FromSeconds(5);
-                smtcPositionUpdateTimer.Tick += positionUpdate_TimerTick;                
+                smtcPositionUpdateTimer.Tick += positionUpdate_TimerTick;
             }
         }
 
@@ -121,7 +139,7 @@ namespace SDKTemplate
             systemMediaControls.AutoRepeatModeChangeRequested -= systemMediaControls_AutoRepeatModeChangeRequested;
 
             // Perform other cleanup for this scenario page.
-            MyMediaElement.Source = null;
+            mediaPlayer.Source = null;
             playlist = null;
             currentItemIndex = 0;
         }
@@ -138,7 +156,7 @@ namespace SDKTemplate
             // calls to GetForCurrentView() from the same view (eg. from different scenario pages in 
             // this sample) will return the same instance of the object.
             systemMediaControls = SystemMediaTransportControls.GetForCurrentView();
-                     
+
             // This scenario will always start off with no media loaded, so we will start off disabling the 
             // system media transport controls.  Doing so will hide the system UI for media transport controls
             // from being displayed, and will prevent the app from receiving any events such as ButtonPressed 
@@ -179,7 +197,7 @@ namespace SDKTemplate
             systemMediaControls.IsPlayEnabled = true;
             systemMediaControls.IsPauseEnabled = true;
             systemMediaControls.IsStopEnabled = true;
-            systemMediaControls.PlaybackStatus = MediaPlaybackStatus.Closed;        
+            systemMediaControls.PlaybackStatus = MediaPlaybackStatus.Closed;
         }
 
         private async void systemMediaControls_PropertyChanged(SystemMediaTransportControls sender, SystemMediaTransportControlsPropertyChangedEventArgs args)
@@ -192,20 +210,19 @@ namespace SDKTemplate
                     switch (systemMediaControls.SoundLevel)
                     {
                         case SoundLevel.Full:
+                        case SoundLevel.Low:
+                            // If we had paused due to system mute, then resume on unmute.
                             if (pausedDueToMute)
                             {
-                                // If we previously paused due to being muted, resume. 
-                                MyMediaElement.Play();
+                                mediaPlayer.Play();
+                                pausedDueToMute = false;
                             }
                             break;
-                        case SoundLevel.Low:
-                            // We're being ducked, take no action. 
-                            break;
                         case SoundLevel.Muted:
-                            if (MyMediaElement != null && MyMediaElement.CurrentState == MediaElementState.Playing)
+                            // We've been muted by the system. Pause playback to release resources.
+                            if (mediaPlayer != null && mediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.Playing)
                             {
-                                // We've been muted by the system, pause to save our playback position. 
-                                MyMediaElement.Pause();
+                                mediaPlayer.Pause();
                                 pausedDueToMute = true;
                             }
                             break;
@@ -218,19 +235,19 @@ namespace SDKTemplate
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                // Media Element only supports repeating a track, if we want to repeat a list we need to handle it ourselves
+                // MediaPlayer only supports repeating a track, if we want to repeat a list we need to handle it ourselves (or use a MediaPlaybackList)
                 switch (args.RequestedAutoRepeatMode)
                 {
                     case MediaPlaybackAutoRepeatMode.None:
-                        MyMediaElement.IsLooping = false;
+                        mediaPlayer.IsLoopingEnabled = false;
                         repeatPlaylist = false;
                         break;
                     case MediaPlaybackAutoRepeatMode.List:
-                        MyMediaElement.IsLooping = false;
+                        mediaPlayer.IsLoopingEnabled = false;
                         repeatPlaylist = true;
                         break;
                     case MediaPlaybackAutoRepeatMode.Track:
-                        MyMediaElement.IsLooping = true;
+                        mediaPlayer.IsLoopingEnabled = true;
                         repeatPlaylist = false;
                         break;
                 }
@@ -253,16 +270,16 @@ namespace SDKTemplate
 
             // This is a simple scenario that supports seeking, therefore start time and min seek are both 0 and 
             // end time and max seek are both the duration. This allows the system to suggest seeking anywhere in the track.
-            // Position is obviously the current media elements position.
+            // Position is the current player position.
 
             // Note: More complex scenarios may alter more of these values, such as only allowing seeking in a section of the content,
             // by setting min and max seek differently to start and end. For other scenarios such as live playback, end time may be 
             // updated frequently too. 
             timelineProperties.StartTime = TimeSpan.FromSeconds(0);
             timelineProperties.MinSeekTime = TimeSpan.FromSeconds(0);
-            timelineProperties.Position = MyMediaElement.Position;
-            timelineProperties.MaxSeekTime = MyMediaElement.NaturalDuration.TimeSpan;
-            timelineProperties.EndTime = MyMediaElement.NaturalDuration.TimeSpan; 
+            timelineProperties.Position = mediaPlayer.PlaybackSession.Position;
+            timelineProperties.MaxSeekTime = mediaPlayer.PlaybackSession.NaturalDuration;
+            timelineProperties.EndTime = mediaPlayer.PlaybackSession.NaturalDuration;
 
             systemMediaControls.UpdateTimelineProperties(timelineProperties);
         }
@@ -276,14 +293,14 @@ namespace SDKTemplate
             {
                 // First we validate that the requested position falls within the range of the current piece of content we are playing,
                 // this should usually be the case but the content may have changed whilst the request was coming in.
-                if (args.RequestedPlaybackPosition.Duration() <= MyMediaElement.NaturalDuration.TimeSpan.Duration() &&
+                if (args.RequestedPlaybackPosition.Duration() <= mediaPlayer.PlaybackSession.NaturalDuration.Duration() &&
                 args.RequestedPlaybackPosition.Duration().TotalSeconds >= 0)
                 {
-                    // Next we verify that our media element is in a state that we think is valid to change the position
-                    if (MyMediaElement.CurrentState == MediaElementState.Paused || MyMediaElement.CurrentState == MediaElementState.Playing)
+                    // Next we verify that our player is in a state that we think is valid to change the position
+                    if (mediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.Paused || mediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.Playing)
                     {
                         // Finally if the above conditions are met we update the position and report the new position back to SMTC. 
-                        MyMediaElement.Position = args.RequestedPlaybackPosition.Duration();
+                        mediaPlayer.PlaybackSession.Position = args.RequestedPlaybackPosition.Duration();
                         UpdateSmtcPosition();
                     }
                 }
@@ -293,18 +310,18 @@ namespace SDKTemplate
         }
 
         /// <summary>
-        /// Handles a request from the System Media Transport Controls tro change our current playback rate
+        /// Handles a request from the System Media Transport Controls to change our current playback rate
         /// </summary>
         private async void systemMediaControls_PlaybackRateChangeRequested(SystemMediaTransportControls sender, PlaybackRateChangeRequestedEventArgs args)
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                // Check to make sure the requested value is in a range we deem appropriate, if so set it on the MediaElement. 
+                // Check to make sure the requested value is in a range we deem appropriate, if so set it on the MediaPlayer. 
                 // We then need to turn around and update SMTC so that the system knows the new value.
                 if (args.RequestedPlaybackRate >= 0 && args.RequestedPlaybackRate <= 2)
                 {
-                    MyMediaElement.PlaybackRate = args.RequestedPlaybackRate;
-                    systemMediaControls.PlaybackRate = MyMediaElement.PlaybackRate;
+                    mediaPlayer.PlaybackSession.PlaybackRate = args.RequestedPlaybackRate;
+                    systemMediaControls.PlaybackRate = mediaPlayer.PlaybackSession.PlaybackRate;
                 }
 
                 rootPage.NotifyUser("Playback rate change requested", NotifyType.StatusMessage);
@@ -354,14 +371,14 @@ namespace SDKTemplate
 
                 // Now that we have a playlist ready, allow the user to control media playback via system media 
                 // transport controls.  We enable it now even if one or more files may turn out unable to load
-                // into the MediaElement control, to allow the user to invoke Next/Previous to go to another
+                // into the MediaPlayer, to allow the user to invoke Next/Previous to go to another
                 // item in the playlist to try playing.
                 systemMediaControls.IsEnabled = true;
 
                 // For the design of this sample scenario, we will always automatically start playback after
-                // the user has selected new files to play.  Set AutoPlay to true so the XAML MediaElement
-                // control will automatically start playing after we do a SetSource() on it in SetNewMediaItem().
-                MyMediaElement.AutoPlay = true;
+                // the user has selected new files to play.  Set AutoPlay to true so the MediaPlayer
+                // will automatically start playing after we set Source on it in SetNewMediaItem().
+                mediaPlayer.AutoPlay = true;
                 await SetNewMediaItem(0);   // Start with first file in the list of picked files.
             }
             else
@@ -371,37 +388,41 @@ namespace SDKTemplate
             }
         }
 
-        private void MyMediaElement_MediaOpened(object sender, RoutedEventArgs e)
+        private async void mediaPlayer_MediaOpened(MediaPlayer sender, object e)
         {
-            if (isThisPageActive)
+            // UI updates must happen on dispatcher thread
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                if (MyMediaElement.IsAudioOnly)
+                if (isThisPageActive)
                 {
-                    // Ensure the XAML MediaElement control has enough height and some reasonable width
-                    // to display the build-in transport controls for audio-only playback.
-                    MyMediaElement.MinWidth = 456;
-                    MyMediaElement.MinHeight = 120;
-                    MyMediaElement.MaxHeight = 120;
+                    if (mediaPlaybackItem.AudioTracks.Count == 0)
+                    {
+                        // Ensure the XAML MediaPlayerElement control has enough height and some reasonable width
+                        // to display the build-in transport controls for audio-only playback.
+                        mediaPlayerElement.MinWidth = 456;
+                        mediaPlayerElement.MinHeight = 120;
+                        mediaPlayerElement.MaxHeight = 120;
 
-                    // Force the MediaElement out of fullscreen mode in case the user was using that
-                    // for a video playback but we are now loading audio-only content.  The build-in 
-                    // transport controls for audio-only playback do not have the button to 
-                    // enter/exit fullscreen mode.
-                    MyMediaElement.IsFullWindow = false;
+                        // Force the MediaPlayerElement out of fullscreen mode in case the user was using that
+                        // for a video playback but we are now loading audio-only content.  The build-in 
+                        // transport controls for audio-only playback do not have the button to 
+                        // enter/exit fullscreen mode.
+                        mediaPlayerElement.IsFullWindow = false;
+                    }
+                    else
+                    {
+                        // For video playback, let XAML resize MediaPlayerElement control based on the dimensions 
+                        // of the video, but also have XAML scale it down as necessary (preserving aspect ratio)
+                        // to a reasonable maximum height like 300.
+                        mediaPlayerElement.MinWidth = 0;
+                        mediaPlayerElement.MinHeight = 0;
+                        mediaPlayerElement.MaxHeight = 300;
+                    }
                 }
-                else
-                {
-                    // For video playback, let XAML resize MediaElement control based on the dimensions 
-                    // of the video, but also have XAML scale it down as necessary (preserving aspect ratio)
-                    // to a reasonable maximum height like 300.
-                    MyMediaElement.MinWidth = 0;
-                    MyMediaElement.MinHeight = 0;
-                    MyMediaElement.MaxHeight = 300;
-                }
-            }
+            });
         }
 
-        private async void MyMediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        private async void mediaPlayer_MediaEnded(MediaPlayer sender, object e)
         {
             if (isThisPageActive)
             {
@@ -410,9 +431,9 @@ namespace SDKTemplate
                     // Current media must've been playing if we received an event about it ending.
                     // The design of this sample scenario is to automatically start playing the next
                     // item in the playlist.  So we'll set the AutoPlay property to true, then in 
-                    // SetNewMediaItem() when we eventually call SetSource() on the XAML MediaElement 
-                    // control, it will automatically playing the new media item.
-                    MyMediaElement.AutoPlay = true;
+                    // SetNewMediaItem() when we eventually set Source on the MediaPlayer,
+                    // it will automatically playing the new media item.
+                    mediaPlayer.AutoPlay = true;
                     await SetNewMediaItem(currentItemIndex + 1);
                 }
                 else
@@ -421,131 +442,149 @@ namespace SDKTemplate
                     if (repeatPlaylist)
                     {
                         // Playlist repeat was selected so start again. 
-                        MyMediaElement.AutoPlay = true;
+                        mediaPlayer.AutoPlay = true;
                         await SetNewMediaItem(0);
-                        rootPage.NotifyUser("end of playlist, starting playback again at beginning of playlist", NotifyType.StatusMessage);
-                    }                
+                        await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => // UI updates must happen on dispatcher thread
+                        {
+                            rootPage.NotifyUser("end of playlist, starting playback again at beginning of playlist", NotifyType.StatusMessage);
+                        });
+                    }
                     else
                     {
                         // Repeat wasn't selected so just stop playback.
-                        MyMediaElement.AutoPlay = false;
-                        MyMediaElement.Stop();
-                        rootPage.NotifyUser("end of playlist, stopping playback", NotifyType.StatusMessage);
+                        mediaPlayer.AutoPlay = false;
+                        mediaPlayer.Pause();
+                        mediaPlayer.PlaybackSession.Position = TimeSpan.Zero;
+                        await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            rootPage.NotifyUser("end of playlist, stopping playback", NotifyType.StatusMessage);
+                        });
                     }
                 }
             }
         }
 
-        private void MyMediaElement_MediaFailed(object sender, ExceptionRoutedEventArgs e)
+        private async void mediaPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFailedEventArgs e)
         {
-            if (isThisPageActive)
+            // UI updates must happen on dispatcher thread
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                string errorMessage = String.Format(@"Cannot play {0} [""{1}""]." +
-                    "\nPress Next or Previous to continue, or select new files to play.",
-                    playlist[currentItemIndex].Name,
-                    e.ErrorMessage.Trim());
-                rootPage.NotifyUser(errorMessage, NotifyType.ErrorMessage);
-            }
+                if (isThisPageActive)
+                {
+                    string errorMessage = String.Format(@"Cannot play {0} [""{1}""]." +
+                        "\nPress Next or Previous to continue, or select new files to play.",
+                        playlist[currentItemIndex].Name,
+                        e.ErrorMessage.Trim());
+
+                    rootPage.NotifyUser(errorMessage, NotifyType.ErrorMessage);
+                }
+            });
         }
 
         /// <summary>
-        /// Updates the SystemMediaTransportControls' PlaybackStatus property based on the CurrentState property of the
-        /// MediaElement control.
+        /// Updates the SystemMediaTransportControls' PlaybackStatus property based on the PlaybackState property of the
+        /// MediaPlayer.
         /// </summary>
-        /// <remarks>Invoked mainly from the MediaElement control's CurrentStateChanged event handler.</remarks>
-        private void SyncPlaybackStatusToMediaElementState()
+        /// <remarks>Invoked mainly from the MediaPlayer's PlaybackStateChanged event handler.</remarks>
+        private void SyncPlaybackStatusToMediaPlayerState()
         {
             // Updating PlaybackStatus with accurate information is important; for example, it determines whether the system media
             // transport controls UI will show a play vs pause software button, and whether hitting the play/pause toggle key on 
             // the keyboard will translate to a Play vs a Pause ButtonPressed event.
             //
             // Even if your app uses its own custom transport controls in place of the built-in ones from XAML, it is still a good
-            // idea to update PlaybackStatus in response to the MediaElement's CurrentStateChanged event.  Windows supports scenarios 
-            // such as streaming media from a MediaElement to a networked device (eg. TV) selected by the user from Devices charm 
+            // idea to update PlaybackStatus in response to the MediaPlayer's PlaybackStateChanged event.  Windows supports scenarios 
+            // such as streaming media from a MediaPlayer to a networked device (eg. TV) selected by the user from Devices charm 
             // (ie. "Play To"), in which case the user may pause and resume media streaming using a TV remote or similar means.  
             // The CurrentStateChanged event may be the only way to get notified of playback status changes in those cases.
-            switch (MyMediaElement.CurrentState)
+            switch (mediaPlayer.PlaybackSession.PlaybackState)
             {
-                case MediaElementState.Closed:
+                case MediaPlaybackState.None:
                     systemMediaControls.PlaybackStatus = MediaPlaybackStatus.Closed;
                     break;
 
-                case MediaElementState.Opening:
-                    // This state is when new media is being loaded to the XAML MediaElement control [ie.
-                    // SetSource()].  For this sample the design is to maintain the previous playing/pause 
+                case MediaPlaybackState.Opening:
+                    // This state is when new media is being loaded to the MediaPlayer [ie.
+                    // Source].  For this sample the design is to maintain the previous playing/pause 
                     // state before the new media is being loaded.  So we'll leave the PlaybackStatus alone
                     // during loading.  This keeps the system UI from flickering between displaying a "Play" 
                     // vs "Pause" software button during the transition to a new media item.
                     break;
 
-                case MediaElementState.Buffering:
+                case MediaPlaybackState.Buffering:
                     // No updates in MediaPlaybackStatus necessary--buffering is just
                     // a transitional state where the system is still working to get
                     // media to start or to continue playing.
                     break;
 
-                case MediaElementState.Paused:
-                    systemMediaControls.PlaybackStatus = MediaPlaybackStatus.Paused;
+                case MediaPlaybackState.Paused:
+                    if (mediaPlayer.PlaybackSession.Position == TimeSpan.Zero)
+                        systemMediaControls.PlaybackStatus = MediaPlaybackStatus.Stopped;
+                    else
+                        systemMediaControls.PlaybackStatus = MediaPlaybackStatus.Paused;
                     break;
 
-                case MediaElementState.Playing:
+                case MediaPlaybackState.Playing:
                     systemMediaControls.PlaybackStatus = MediaPlaybackStatus.Playing;
                     break;
 
-                case MediaElementState.Stopped:
-                    systemMediaControls.PlaybackStatus = MediaPlaybackStatus.Stopped;
-                    break;
             }
 
             // If we started playing start our timer else make sure it's stopped.
             // On state changed always send an update to keep the system in sync. 
-            if(MyMediaElement.CurrentState == MediaElementState.Playing)
+            if (mediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.Playing)
             {
                 smtcPositionUpdateTimer.Start();
             }
             else
             {
-                smtcPositionUpdateTimer.Stop();                
+                smtcPositionUpdateTimer.Stop();
             }
 
             UpdateSmtcPosition();
+
+            UpdateCustomTransportControls();
         }
 
-        private void MyMediaElement_CurrentStateChanged(object sender, RoutedEventArgs e)
+        private async void mediaPlayer_PlaybackStateChanged(MediaPlaybackSession sender, object e)
         {
-            if (!isThisPageActive)
+            // UI updates must happen on dispatcher thread
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                return;
-            }
+                if (!isThisPageActive)
+                {
+                    return;
+                }
 
-            // For the design of this sample, the general idea is that if user is playing
-            // media when Next/Previous is invoked, we will automatically start playing
-            // the new item once it has loaded.  Whereas if the user has paused or stopped
-            // media playback when Next/Previous is invoked, we won't automatically start
-            // playing the new item.  In other words, we maintain the user's intent to
-            // play or not play across changing the media.  This is most easily handled
-            // using the AutoPlay property of the XAML MediaElement control.
-            if (MyMediaElement.CurrentState == MediaElementState.Playing)
-            {
-                MyMediaElement.AutoPlay = true;
-            }
-            else if (MyMediaElement.CurrentState == MediaElementState.Stopped ||
-                     MyMediaElement.CurrentState == MediaElementState.Paused)
-            {
-                MyMediaElement.AutoPlay = false;
-            }
+                // For the design of this sample, the general idea is that if user is playing
+                // media when Next/Previous is invoked, we will automatically start playing
+                // the new item once it has loaded.  Whereas if the user has paused or stopped
+                // media playback when Next/Previous is invoked, we won't automatically start
+                // playing the new item.  In other words, we maintain the user's intent to
+                // play or not play across changing the media.  This is most easily handled
+                // using the AutoPlay property of the MediaPlayer.
+                if (mediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.Playing)
+                {
+                    mediaPlayer.AutoPlay = true;
+                }
+                else if (mediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.None ||
+                         mediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.Paused)
+                {
+                    mediaPlayer.AutoPlay = false;
+                }
 
-            // Update the playback status tracked by SystemMediaTransportControls.  See comments
-            // in SyncPlaybackStatusToMediaElementState()'s body for why this is important.
-            SyncPlaybackStatusToMediaElementState();
+                // Update the playback status tracked by SystemMediaTransportControls.  See comments
+                // in SyncPlaybackStatusToMediaPlayerState()'s body for why this is important.
+                SyncPlaybackStatusToMediaPlayerState();
+            });
         }
 
         private async void systemMediaControls_ButtonPressed(SystemMediaTransportControls sender, SystemMediaTransportControlsButtonPressedEventArgs args)
         {
             // The system media transport control's ButtonPressed event may not fire on the app's UI thread.  XAML controls 
-            // (including the MediaElement control in our page as well as the scenario page itself) typically can only be 
+            // (including the MediaPlayerElement control in our page as well as the scenario page itself) typically can only be 
             // safely accessed and manipulated on the UI thread, so here for simplicity, we dispatch our entire event handling 
-            // code to execute on the UI thread, as our code here primarily deals with updating the UI and the MediaElement.
+            // code to execute on the UI thread, as our code here primarily deals with updating the UI and the MediaPlayerElement.
             // 
             // Depending on how exactly you are handling the different button presses (which for your app may include buttons 
             // not used in this sample scenario), you may instead choose to only dispatch certain parts of your app's 
@@ -561,17 +600,18 @@ namespace SDKTemplate
                     {
                         case SystemMediaTransportControlsButton.Play:
                             rootPage.NotifyUser("Play pressed", NotifyType.StatusMessage);
-                            MyMediaElement.Play();
+                            mediaPlayer.Play();
                             break;
 
                         case SystemMediaTransportControlsButton.Pause:
                             rootPage.NotifyUser("Pause pressed", NotifyType.StatusMessage);
-                            MyMediaElement.Pause();
+                            mediaPlayer.Pause();
                             break;
 
                         case SystemMediaTransportControlsButton.Stop:
                             rootPage.NotifyUser("Stop pressed", NotifyType.StatusMessage);
-                            MyMediaElement.Stop();
+                            mediaPlayer.Pause();
+                            mediaPlayer.PlaybackSession.Position = TimeSpan.Zero;
                             break;
 
                         case SystemMediaTransportControlsButton.Next:
@@ -663,7 +703,7 @@ namespace SDKTemplate
                 //       file-not-found error (eg. file was deleted after user had picked it from file picker earlier).
                 try
                 {
-                    copyFromFileAsyncSuccessful = await systemMediaControls.DisplayUpdater.CopyFromFileAsync(mediaType, mediaFile);                   
+                    copyFromFileAsyncSuccessful = await systemMediaControls.DisplayUpdater.CopyFromFileAsync(mediaType, mediaFile);
                 }
                 catch (Exception)
 
@@ -756,11 +796,11 @@ namespace SDKTemplate
                 if (isThisPageActive)
                 {
                     // If the file can't be opened, for this sample we will behave similar to the case of
-                    // setting a corrupted/invalid media file stream on the MediaElement (which triggers a 
-                    // MediaFailed event).  We abort any ongoing playback by nulling the MediaElement's 
+                    // setting a corrupted/invalid media file stream on the MediaPlayer (which triggers a 
+                    // MediaFailed event).  We abort any ongoing playback by nulling the MediaPlayer's 
                     // source.  The user must press Next or Previous to move to a different media item, 
                     // or use the file picker to load a new set of files to play.
-                    MyMediaElement.Source = null;
+                    mediaPlayer.Source = null;
 
                     string errorMessage = String.Format(@"Cannot open {0} [""{1}""]." +
                         "\nPress Next or Previous to continue, or select new files to play.",
@@ -779,11 +819,16 @@ namespace SDKTemplate
 
             if (stream != null)
             {
-                // We're about to change the MediaElement's source media, so put ourselves into a 
+                // We're about to change the MediaPlayer's source media, so put ourselves into a 
                 // "changing media" state.  We stay in that state until the new media is playing,
                 // loaded (if user has currently paused or stopped playback), or failed to load.
                 // At those points we will call OnChangingMediaEnded().
-                MyMediaElement.SetSource(stream, mediaFile.ContentType);
+                //
+                // Note that the SMTC visual state may not update until assigning a source or
+                // beginning playback. If using a different API than MediaPlayer, such as AudioGraph,
+                // you will need to begin playing a stream to see SMTC update.
+                mediaPlaybackItem = new MediaPlaybackItem(MediaSource.CreateFromStream(stream, mediaFile.ContentType));
+                mediaPlayer.Source = mediaPlaybackItem;
             }
 
             try
@@ -803,6 +848,85 @@ namespace SDKTemplate
                     rootPage.NotifyUser(e.Message, NotifyType.ErrorMessage);
                 }
             }
+        }
+
+        /// <summary>
+        /// Updates the custom transport controls (XAML).
+        /// 
+        /// For the sake of clarity in this Sample, we'll handle updating our custom transport controls
+        /// seperately from updating the SystemMediaTransportControls.
+        /// 
+        /// This should be called on the UI thread.
+        /// </summary>
+        private void UpdateCustomTransportControls()
+        {
+            // Update the custom controls based upon the state of our playlist.
+            // We want to match the same state that was previously set on the SystemMediaTransportControls
+            nextButton.IsEnabled = systemMediaControls.IsNextEnabled;
+            previousButton.IsEnabled = systemMediaControls.IsPreviousEnabled;
+
+            // Update the Play / Pause Toggle button based upon the MediaPlayer's current state
+            switch (mediaPlayer.PlaybackSession.PlaybackState)
+            {
+                case MediaPlaybackState.None:
+                    // Revert back to a known play / pause toggle state
+                    playPauseButton.Content = new SymbolIcon(Symbol.Play);
+                    playPauseButton.IsEnabled = false;
+                    break;
+
+                case MediaPlaybackState.Paused:
+                    playPauseButton.Content = new SymbolIcon(Symbol.Play);
+                    playPauseButton.IsEnabled = true;
+                    break;
+
+                case MediaPlaybackState.Playing:
+                    playPauseButton.Content = new SymbolIcon(Symbol.Pause);
+                    playPauseButton.IsEnabled = true;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Handle the Custom Transport Controls Play / Pause button being clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void playPauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (mediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.Paused)
+            {
+                mediaPlayer.Play();
+                rootPage.NotifyUser("Custom Transport Controls Play pressed", NotifyType.StatusMessage);
+            }
+            else
+            {
+                mediaPlayer.Pause();
+                rootPage.NotifyUser("Custom Transport Controls Pause pressed", NotifyType.StatusMessage);
+            }
+        }
+
+        /// <summary>
+        /// Handle the Custom Transport Controls SkipNext button click.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void nextButton_Click(object sender, RoutedEventArgs e)
+        {
+            rootPage.NotifyUser("Custom Transport Controls Next pressed", NotifyType.StatusMessage);
+            // range-checking will be performed in SetNewMediaItem()
+            await SetNewMediaItem(currentItemIndex + 1);
+        }
+
+        /// <summary>
+        /// Handle the Custom Transport Controls SkipPrevious button click.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void previousButton_Click(object sender, RoutedEventArgs e)
+        {
+            rootPage.NotifyUser("Custom Transport Controls Previous pressed", NotifyType.StatusMessage);
+            // range-checking will be performed in SetNewMediaItem()
+            await SetNewMediaItem(currentItemIndex - 1);
         }
     }
 }

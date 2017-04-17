@@ -55,48 +55,41 @@ namespace Lamp
         /// <param name="e">Contains state information and event data associated with the event</param>
         private async void BrightnessBtn_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            try
+            await LogStatusToOutputBoxAsync("Initializing lamp");
+
+            // acquiring lamp instance via using statement allows for the 
+            // object to be automatically disposed once the lamp object
+            // goes out of scope releasing native resources
+            using (var lamp = await Lamp.GetDefaultAsync())
             {
-                await LogStatusToOutputBoxAsync("Initializing lamp");
-
-                // acquiring lamp instance via using statement allows for the 
-                // object to be automatically disposed once the lamp object
-                // goes out of scope releasing native resources
-                using (var lamp = await Lamp.GetDefaultAsync())
+                if (lamp == null)
                 {
-                    if (lamp == null)
-                    {
-                        await LogStatusAsync("Error: No lamp device was found", NotifyType.ErrorMessage);
-                        return;
-                    }
-
-                    await LogStatusAsync(string.Format(CultureInfo.InvariantCulture, "Default lamp instance acquired, Device Id: {0}", lamp.DeviceId), NotifyType.StatusMessage);
-                    await LogStatusToOutputBoxAsync("Lamp Default settings:");
-                    await LogStatusToOutputBoxAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Enabled: {0}, Brightness: {1}", lamp.IsEnabled, lamp.BrightnessLevel));
-
-                    // Set the Brightness Level
-                    await LogStatusToOutputBoxAsync("Adjusting Brightness");
-                    lamp.BrightnessLevel = 0.5F;
-                    await LogStatusAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Settings After Brightness Adjustment: Brightness: {0}", lamp.BrightnessLevel), NotifyType.StatusMessage);
-
-                    // Turn Lamp on
-                    await LogStatusToOutputBoxAsync("Turning Lamp on");
-                    lamp.IsEnabled = true;
-                    await LogStatusToOutputBoxAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Enabled: {0}", lamp.IsEnabled));
-
-                    // Turn Lamp off
-                    await LogStatusToOutputBoxAsync("Turning Lamp off");
-                    lamp.IsEnabled = false;
-                    await LogStatusToOutputBoxAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Enabled: {0}", lamp.IsEnabled));
-
+                    await LogStatusAsync("Error: No lamp device was found", NotifyType.ErrorMessage);
+                    return;
                 }
 
-                await LogStatusToOutputBoxAsync("Lamp Disposed");
+                await LogStatusAsync(string.Format(CultureInfo.InvariantCulture, "Default lamp instance acquired, Device Id: {0}", lamp.DeviceId), NotifyType.StatusMessage);
+                await LogStatusToOutputBoxAsync("Lamp Default settings:");
+                await LogStatusToOutputBoxAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Enabled: {0}, Brightness: {1}", lamp.IsEnabled, lamp.BrightnessLevel));
+
+                // Set the Brightness Level
+                await LogStatusToOutputBoxAsync("Adjusting Brightness");
+                lamp.BrightnessLevel = 0.5F;
+                await LogStatusAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Settings After Brightness Adjustment: Brightness: {0}", lamp.BrightnessLevel), NotifyType.StatusMessage);
+
+                // Turn Lamp on
+                await LogStatusToOutputBoxAsync("Turning Lamp on");
+                lamp.IsEnabled = true;
+                await LogStatusToOutputBoxAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Enabled: {0}", lamp.IsEnabled));
+
+                // Turn Lamp off
+                await LogStatusToOutputBoxAsync("Turning Lamp off");
+                lamp.IsEnabled = false;
+                await LogStatusToOutputBoxAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Enabled: {0}", lamp.IsEnabled));
+
             }
-            catch (Exception ex)
-            {
-                await LogStatusAsync(ex.ToString(), NotifyType.ErrorMessage);
-            }
+
+            await LogStatusToOutputBoxAsync("Lamp Disposed");
         }
 
         /// <summary>
@@ -108,56 +101,49 @@ namespace Lamp
         /// <param name="e">Contains state information and event data associated with the event</param>
         private async void ColorLampBtn_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            try
+            await LogStatusToOutputBoxAsync("Initializing lamp");
+
+            // Acquiring lamp instance via using statement allows for the 
+            // object to be automatically disposed once the lamp object
+            // goes out of scope releasing native resources
+            using (var lamp = await Lamp.GetDefaultAsync())
             {
-                await LogStatusToOutputBoxAsync("Initializing lamp");
-
-                // Acquiring lamp instance via using statement allows for the 
-                // object to be automatically disposed once the lamp object
-                // goes out of scope releasing native resources
-                using (var lamp = await Lamp.GetDefaultAsync())
+                if (lamp == null)
                 {
-                    if (lamp == null)
-                    {
-                        await LogStatusAsync("Error: No lamp device was found", NotifyType.ErrorMessage);
-                        return;
-                    }
-
-                    // With Lamp instance required, query for the default settings of the Lamp
-                    await LogStatusAsync("Default lamp instance acquired", NotifyType.StatusMessage);
-                    await LogStatusToOutputBoxAsync("Lamp Default settings:");
-                    await LogStatusToOutputBoxAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Enabled: {0}, Is Color Settable: {1}, Color: {2}", lamp.IsEnabled, lamp.IsColorSettable, lamp.Color));
-
-                    // If this lamp device is not Color Settable exit color lamp adjustment
-                    if (lamp.IsColorSettable == false)
-                    {
-                        await LogStatusAsync("Selected Lamp device doesn't support Color lamp adjustment", NotifyType.ErrorMessage);
-                        return;
-                    }
-
-                    // Change Lamp Color
-                    await LogStatusToOutputBoxAsync("Adjusting Color");
-                    lamp.Color = Colors.Blue;
-                    await LogStatusAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Settings After Color Adjustment: Color: {0}", lamp.Color), NotifyType.StatusMessage);
-
-                    // Turn Lamp on
-                    await LogStatusToOutputBoxAsync("Turning Lamp on");
-                    lamp.IsEnabled = true;
-                    await LogStatusToOutputBoxAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Enabled: {0}", lamp.IsEnabled));
-
-                    // Turn Lamp off
-                    await LogStatusToOutputBoxAsync("Turning Lamp off");
-                    lamp.IsEnabled = false;
-                    await LogStatusToOutputBoxAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Enabled: {0}", lamp.IsEnabled));
+                    await LogStatusAsync("Error: No lamp device was found", NotifyType.ErrorMessage);
+                    return;
                 }
 
-                /// Lamp gets disposed automatically when it goes out of scope of using block
-                await LogStatusToOutputBoxAsync("Lamp Disposed");
+                // With Lamp instance required, query for the default settings of the Lamp
+                await LogStatusAsync("Default lamp instance acquired", NotifyType.StatusMessage);
+                await LogStatusToOutputBoxAsync("Lamp Default settings:");
+                await LogStatusToOutputBoxAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Enabled: {0}, Is Color Settable: {1}, Color: {2}", lamp.IsEnabled, lamp.IsColorSettable, lamp.Color));
+
+                // If this lamp device is not Color Settable exit color lamp adjustment
+                if (lamp.IsColorSettable == false)
+                {
+                    await LogStatusAsync("Selected Lamp device doesn't support Color lamp adjustment", NotifyType.ErrorMessage);
+                    return;
+                }
+
+                // Change Lamp Color
+                await LogStatusToOutputBoxAsync("Adjusting Color");
+                lamp.Color = Colors.Blue;
+                await LogStatusAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Settings After Color Adjustment: Color: {0}", lamp.Color), NotifyType.StatusMessage);
+
+                // Turn Lamp on
+                await LogStatusToOutputBoxAsync("Turning Lamp on");
+                lamp.IsEnabled = true;
+                await LogStatusToOutputBoxAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Enabled: {0}", lamp.IsEnabled));
+
+                // Turn Lamp off
+                await LogStatusToOutputBoxAsync("Turning Lamp off");
+                lamp.IsEnabled = false;
+                await LogStatusToOutputBoxAsync(string.Format(CultureInfo.InvariantCulture, "Lamp Enabled: {0}", lamp.IsEnabled));
             }
-            catch (Exception ex)
-            {
-                await LogStatusAsync(ex.ToString(), NotifyType.ErrorMessage);
-            }
+
+            /// Lamp gets disposed automatically when it goes out of scope of using block
+            await LogStatusToOutputBoxAsync("Lamp Disposed");
         }
 
         /// <summary>

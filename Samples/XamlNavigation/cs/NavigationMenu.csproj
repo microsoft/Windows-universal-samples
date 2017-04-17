@@ -10,8 +10,8 @@
     <AssemblyName>NavigationMenuSample</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -98,6 +98,8 @@
       <DependentUpon>PageHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="NavMenuItem.cs" />
+    <Compile Include="SystemInformationHelpers.cs" />
+    <Compile Include="Triggers\IsTenFootTrigger.cs" />
     <Compile Include="Views\BasicPage.xaml.cs">
       <DependentUpon>BasicPage.xaml</DependentUpon>
     </Compile>
@@ -133,44 +135,61 @@
     <Content Include="..\..\..\SharedContent\media\squaretile-sdk.png">
       <Link>Assets\squaretile-sdk.png</Link>
     </Content>
-    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
+      <Link>Properties\Default.rd.xml</Link>
+    </Content>
     <Content Include="Assets\StoreLogo.scale-100.png" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="..\shared\App.xaml">
+      <Link>App.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\PageHeader.xaml">
+    <Page Include="..\shared\PageHeader.xaml">
+      <Link>Controls\PageHeader.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles\Styles.xaml">
+    <Page Include="..\shared\Styles.xaml">
+      <Link>Styles\Styles.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Views\BasicPage.xaml">
+    <Page Include="..\shared\TenFootStylesheet.xaml">
+      <Link>Styles\TenFootStylesheet.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="..\shared\BasicPage.xaml">
+      <Link>Views\BasicPage.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AppShell.xaml">
+    <Page Include="..\shared\AppShell.xaml">
+      <Link>AppShell.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CommandBarPage.xaml">
+    <Page Include="..\shared\CommandBarPage.xaml">
+      <Link>Views\CommandBarPage.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\BasicSubPage.xaml">
+    <Page Include="..\shared\BasicSubPage.xaml">
+      <Link>Views\BasicSubPage.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DrillInPage.xaml">
+    <Page Include="..\shared\DrillInPage.xaml">
+      <Link>Views\DrillInPage.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LandingPage.xaml">
+    <Page Include="..\shared\LandingPage.xaml">
+      <Link>Views\LandingPage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

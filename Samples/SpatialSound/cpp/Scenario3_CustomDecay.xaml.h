@@ -25,6 +25,7 @@ namespace SDKTemplate
     {
     public:
         Scenario3_CustomDecay();
+        virtual ~Scenario3_CustomDecay();
     private:
         void SourcePositionX_ValueChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs^ e);
         void SourcePositionY_ValueChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs^ e);
@@ -39,6 +40,7 @@ namespace SDKTemplate
         bool                        _initialized = false;
         CustomDecaySound            _customDecaySound;
         DispatcherTimer^            _timer;
+        EventRegistrationToken      _timerEventToken;
         float                       _x = 0;            // Source is centered
         float                       _y = 0;            // Source is at eye level with the listener
         float                       _z = -2;           // Source is 2 meters in front of the listener

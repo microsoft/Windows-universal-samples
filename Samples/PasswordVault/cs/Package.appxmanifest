@@ -15,13 +15,13 @@
     <mp:PhoneIdentity PhoneProductId="b4a2bf6c-771a-4179-ba7f-0324a5246eae" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>PasswordVault</DisplayName>
+        <DisplayName>Password Vault C# Sample</DisplayName>
         <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
         <Logo>Assets\StoreLogo-sdk.png</Logo>
     </Properties>
 
     <Dependencies>
-        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.14393.0" />
     </Dependencies>
 
     <Resources>
@@ -33,11 +33,10 @@
           Executable="$targetnametoken$.exe"
           EntryPoint="PasswordVault.App">
             <uap:VisualElements
-              DisplayName="PasswordVault"
+              DisplayName="Password Vault C# Sample"
               Square150x150Logo="Assets\squareTile-sdk.png"
               Square44x44Logo="Assets\SmallTile-sdk.png"
-              Description="PasswordVault"
-              
+              Description="Password Vault C# Sample"
               BackgroundColor="#00b2f0">
                 <uap:SplashScreen Image="Assets\Splash-sdk.png" />
                 <uap:DefaultTile>
@@ -48,8 +47,4 @@
             </uap:VisualElements>
         </Application>
     </Applications>
-
-    <Capabilities>
-        <Capability Name="internetClient" />
-    </Capabilities>
 </Package>

@@ -91,13 +91,14 @@ namespace Tasks
             {
                 _periodicTimer.Cancel();
 
-                var settings = ApplicationData.Current.LocalSettings;
                 var key = _taskInstance.Task.Name;
 
                 //
-                // Write to LocalSettings to indicate that this background task ran.
+                // Record that this background task ran.
                 //
-                settings.Values[key] = (_progress < 100) ? "Canceled with reason: " + _cancelReason.ToString() : "Completed";
+                String taskStatus = (_progress < 100) ? "Canceled with reason: " + _cancelReason.ToString() : "Completed";
+                var settings = ApplicationData.Current.LocalSettings;
+                settings.Values[key] = taskStatus;
                 Debug.WriteLine("Background " + _taskInstance.Task.Name + settings.Values[key]);
 
                 //

@@ -33,14 +33,14 @@
                         <Setter Target="audioPipe1.(RelativePanel.AlignVerticalCenterWith)" Value="fileButton1" />
                         <Setter Target="audioPipe2.(RelativePanel.RightOf)" Value="fileButton2" />
                         <Setter Target="audioPipe2.(RelativePanel.AlignVerticalCenterWith)" Value="fileButton2" />
-                        <Setter Target="subMixNode.(RelativePanel.RightOf)" Value="audioPipe1" />
-                        <Setter Target="subMixNode.(RelativePanel.AlignTopWith)" Value="fileButton1" />
+                        <Setter Target="submixNodeContainer.(RelativePanel.RightOf)" Value="audioPipe1" />
+                        <Setter Target="submixNodeContainer.(RelativePanel.AlignTopWith)" Value="fileButton1" />
                         <!--Output device is to the right of submix node-->
                         <Setter Target="audioPipe3.Height" Value="10" />
                         <Setter Target="audioPipe3.Width" Value="80" />
                         <Setter Target="audioPipe3.Margin" Value="0,20,0,0" />
-                        <Setter Target="audioPipe3.(RelativePanel.RightOf)" Value="subMixNode" />
-                        <Setter Target="audioPipe3.(RelativePanel.AlignVerticalCenterWith)" Value="subMixNode" />
+                        <Setter Target="audioPipe3.(RelativePanel.RightOf)" Value="submixNodeContainer" />
+                        <Setter Target="audioPipe3.(RelativePanel.AlignVerticalCenterWith)" Value="submixNodeContainer" />
                         <Setter Target="speakerContainer.Margin" Value="0,20,0,0" />
                         <Setter Target="speakerContainer.(RelativePanel.RightOf)" Value="audioPipe3" />
                         <Setter Target="speakerContainer.(RelativePanel.AlignVerticalCenterWith)" Value="audioPipe3" />
@@ -60,14 +60,14 @@
                         <Setter Target="audioPipe1.(RelativePanel.AlignVerticalCenterWith)" Value="fileButton1" />
                         <Setter Target="audioPipe2.(RelativePanel.RightOf)" Value="fileButton2" />
                         <Setter Target="audioPipe2.(RelativePanel.AlignVerticalCenterWith)" Value="fileButton2" />
-                        <Setter Target="subMixNode.(RelativePanel.RightOf)" Value="audioPipe1" />
-                        <Setter Target="subMixNode.(RelativePanel.AlignTopWith)" Value="fileButton1" />
+                        <Setter Target="submixNodeContainer.(RelativePanel.RightOf)" Value="audioPipe1" />
+                        <Setter Target="submixNodeContainer.(RelativePanel.AlignTopWith)" Value="fileButton1" />
                         <!--Output device is below submix node-->
                         <Setter Target="audioPipe3.Height" Value="80" />
                         <Setter Target="audioPipe3.Width" Value="10" />
                         <Setter Target="audioPipe3.Margin" Value="0,0,0,0" />
-                        <Setter Target="audioPipe3.(RelativePanel.Below)" Value="subMixNode" />
-                        <Setter Target="audioPipe3.(RelativePanel.AlignHorizontalCenterWith)" Value="subMixNode" />
+                        <Setter Target="audioPipe3.(RelativePanel.Below)" Value="submixNodeContainer" />
+                        <Setter Target="audioPipe3.(RelativePanel.AlignHorizontalCenterWith)" Value="submixNodeContainer" />
                         <Setter Target="speakerContainer.Margin" Value="0,0,0,0" />
                         <Setter Target="speakerContainer.(RelativePanel.Below)" Value="audioPipe3" />
                         <Setter Target="speakerContainer.(RelativePanel.AlignHorizontalCenterWith)" Value="audioPipe3" />
@@ -110,7 +110,7 @@
                             </TransformGroup>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Border x:Name="subMixNode" Background="#313131" Width="160" Height="130" Margin="-10,20,0,0">
+                    <Border x:Name="submixNodeContainer" Background="#313131" Width="160" Height="130" Margin="-10,20,0,0">
                         <StackPanel Orientation="Vertical">
                             <TextBlock x:Name="submixLabel" Text="SubMix Node" HorizontalAlignment="Center" Margin="0,20,0,0"/>
                             <ToggleSwitch x:Name="echoEffectToggle" Header="Echo" IsOn="False" Toggled="EchoEffectToggle_Toggled" IsEnabled="False" Margin="40,15,0,0"/>

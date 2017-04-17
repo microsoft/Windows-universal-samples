@@ -8,8 +8,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.10586.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -158,6 +158,9 @@
     <ClInclude Include="Scenario_ListConstraint.xaml.h">
       <DependentUpon>Scenario_ListConstraint.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario_PauseAsync.xaml.h">
+      <DependentUpon>Scenario_PauseAsync.xaml</DependentUpon>
+    </ClInclude>
     <ClInclude Include="Scenario_PredefinedDictationGrammar.xaml.h">
       <DependentUpon>Scenario_PredefinedDictationGrammar.xaml</DependentUpon>
     </ClInclude>
@@ -185,6 +188,7 @@
     <Page Include="Scenario_ContinuousRecognitionListGrammar.xaml" />
     <Page Include="Scenario_ContinuousRecognitionSRGSGrammar.xaml" />
     <Page Include="Scenario_ListConstraint.xaml" />
+    <Page Include="Scenario_PauseAsync.xaml" />
     <Page Include="Scenario_PredefinedDictationGrammar.xaml" />
     <Page Include="Scenario_PredefinedWebSearchGrammar.xaml" />
     <Page Include="Scenario_SRGSConstraint.xaml" />
@@ -227,6 +231,9 @@
     </ClCompile>
     <ClCompile Include="Scenario_ListConstraint.xaml.cpp">
       <DependentUpon>Scenario_ListConstraint.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario_PauseAsync.xaml.cpp">
+      <DependentUpon>Scenario_PauseAsync.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario_PredefinedDictationGrammar.xaml.cpp">
       <DependentUpon>Scenario_PredefinedDictationGrammar.xaml</DependentUpon>
@@ -274,6 +281,15 @@
     <Xml Include="..\shared\SRGS\en-GB\SRGSColors.xml">
       <Link>SRGS\en-GB\SRGSColors.xml</Link>
     </Xml>
+    <Xml Include="..\shared\SRGS\en-AU\SRGSColors.xml">
+      <Link>SRGS\en-AU\SRGSColors.xml</Link>
+    </Xml>
+    <Xml Include="..\shared\SRGS\en-CA\SRGSColors.xml">
+      <Link>SRGS\en-CA\SRGSColors.xml</Link>
+    </Xml>
+    <Xml Include="..\shared\SRGS\en-IN\SRGSColors.xml">
+      <Link>SRGS\en-IN\SRGSColors.xml</Link>
+    </Xml>
     <Xml Include="..\shared\SRGS\en-US\SRGSColors.xml">
       <Link>SRGS\en-US\SRGSColors.xml</Link>
     </Xml>
@@ -302,6 +318,21 @@
     </PRIResource>
     <PRIResource Include="..\shared\Strings\en-GB\LocalizationTTSResources.resw">
       <Link>Strings\en-GB\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+    <PRIResource Include="..\shared\Strings\en-CA\LocalizationSpeechResources.resw">
+      <Link>Strings\en-CA\LocalizationSpeechResources.resw</Link>
+    </PRIResource>
+    <PRIResource Include="..\shared\Strings\en-CA\LocalizationTTSResources.resw">
+      <Link>Strings\en-CA\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+    <PRIResource Include="..\shared\Strings\en-AU\LocalizationSpeechResources.resw">
+      <Link>Strings\en-AU\LocalizationSpeechResources.resw</Link>
+    </PRIResource>
+    <PRIResource Include="..\shared\Strings\en-AU\LocalizationTTSResources.resw">
+      <Link>Strings\en-AU\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+    <PRIResource Include="..\shared\Strings\en-IN\LocalizationSpeechResources.resw">
+      <Link>Strings\en-IN\LocalizationSpeechResources.resw</Link>
     </PRIResource>
     <PRIResource Include="..\shared\Strings\en-IN\LocalizationTTSResources.resw">
       <Link>Strings\en-IN\LocalizationTTSResources.resw</Link>

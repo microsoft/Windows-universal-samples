@@ -11,8 +11,8 @@
     <AssemblyName>SpeechAndTTS</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -119,7 +119,9 @@
     <Compile Include="ListConstraintScenario.xaml.cs">
       <DependentUpon>ListConstraintScenario.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="SampleConfiguration.cs" />
     <Compile Include="SRGSConstraintScenario.xaml.cs">
       <DependentUpon>SRGSConstraintScenario.xaml</DependentUpon>
@@ -227,6 +229,15 @@
     <Content Include="..\shared\SRGS\en-GB\SRGSColors.xml">
       <Link>SRGS\en-GB\SRGSColors.xml</Link>
     </Content>
+    <Content Include="..\shared\SRGS\en-IN\SRGSColors.xml">
+      <Link>SRGS\en-IN\SRGSColors.xml</Link>
+    </Content>
+    <Content Include="..\shared\SRGS\en-CA\SRGSColors.xml">
+      <Link>SRGS\en-CA\SRGSColors.xml</Link>
+    </Content>
+    <Content Include="..\shared\SRGS\en-AU\SRGSColors.xml">
+      <Link>SRGS\en-AU\SRGSColors.xml</Link>
+    </Content>
     <Content Include="..\shared\SRGS\en-US\SRGSColors.xml">
       <Link>SRGS\en-US\SRGSColors.xml</Link>
       <SubType>Designer</SubType>
@@ -315,8 +326,33 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-AU\LocalizationSpeechResources.resw">
+      <Link>Strings\en-AU\LocalizationSpeechResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-AU\LocalizationTTSResources.resw">
+      <Link>Strings\en-AU\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-CA\LocalizationSpeechResources.resw">
+      <Link>Strings\en-CA\LocalizationSpeechResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-CA\LocalizationTTSResources.resw">
+      <Link>Strings\en-CA\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
     <PRIResource Include="..\shared\Strings\en-IN\LocalizationTTSResources.resw">
       <Link>Strings\en-IN\LocalizationTTSResources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-IN\LocalizationSpeechResources.resw">
+      <Link>Strings\en-IN\LocalizationSpeechResources.resw</Link>
     </PRIResource>
   </ItemGroup>
   <ItemGroup>

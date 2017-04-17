@@ -11,19 +11,10 @@
 
     <RelativePanel x:Name="headerRoot" Background="{ThemeResource PageHeaderBackgroundBrush}">
         <Button x:Name="splitViewToggle" Style="{StaticResource SplitViewTogglePaneButtonStyle}" Click="splitViewToggle_Click" />
-        <Button x:Name="backButton" Height="48" Width="48" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                      Command="{x:Bind GoBackCommand}"
-                      Style="{StaticResource BackButtonStyle}"
-                      VerticalAlignment="Top"
-                      AutomationProperties.Name="Back"
-                      AutomationProperties.AutomationId="BackButton"
-                      AutomationProperties.ItemType="Navigation Button"
-                RelativePanel.RightOf="splitViewToggle">
-            <FontIcon x:Name="backButtonIcon" Glyph="&#xE72B;" />
-        </Button>
         <ContentPresenter x:Name="pageTitle" Content="{x:Bind Title}" FontSize="24" FontWeight="Light"
                           IsHitTestVisible="false" TextWrapping="NoWrap" Margin="8,0,0,0" Height="48" VerticalContentAlignment="Center"  
-                          RelativePanel.RightOf="backButton" RelativePanel.AlignTopWith="backButton" />
+                          VerticalAlignment="Top"
+                          RelativePanel.RightOf="splitViewToggle" />
         <AutoSuggestBox x:Name="controlsSearchBox"
                         Margin="0,8,12,0"
                         Width="270"

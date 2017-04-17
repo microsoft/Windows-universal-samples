@@ -1,11 +1,18 @@
 ﻿<!---
   category: ControlsLayoutAndText
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620026&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620026
 --->
 
 # Window resizing sample
 
-This sample shows how to customize the size of your app's view.
+Shows how to customize the size of your app's view.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 The sample shows the following techniques:
 
@@ -18,7 +25,7 @@ In particular, the view resizing feature is not enabled on phones or on PCs in T
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
@@ -26,11 +33,11 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[FullScreenMode](/Samples/FullScreenMode)
+[FullScreenMode](/Samples/FullScreenMode)  
 
 ### Reference
 
-[ApplicationView class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.applicationview.aspx)
+[ApplicationView class](https://msdn.microsoft.com/library/windows/apps/windows.ui.viewmanagement.applicationview.aspx)  
 
 ## System requirements
 

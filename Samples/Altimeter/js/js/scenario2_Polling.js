@@ -8,24 +8,20 @@
         ready: function (element, options) {
             document.getElementById("scenario2Open").addEventListener("click", enableGetReadingScenario, false);
             document.getElementById("scenario2Open").disabled = false;
-
-            altimeter = Windows.Devices.Sensors.Altimeter.getDefault();
-            if (!altimeter) {
-                WinJS.log && WinJS.log("No altimeter found", "sample", "error");
-            }
-        },
-        unload: function () {
         }
     });
 
     function enableGetReadingScenario() {
-        if (altimeter) {
-            var reading = altimeter.getCurrentReading();
-            if (reading) {
-                document.getElementById("readingOutputChangeInMeters").innerText = reading.altitudeChangeInMeters.toFixed(2);
+        SdkSample.getDefaultAltimeterAsync().then(function (result) {
+            altimeter = result;
+            if (altimeter) {
+                var reading = altimeter.getCurrentReading();
+                if (reading) {
+                    document.getElementById("readingOutputChangeInMeters").innerText = reading.altitudeChangeInMeters.toFixed(2);
+                }
+            } else {
+                WinJS.log && WinJS.log("No altimeter found", "sample", "error");
             }
-        } else {
-            WinJS.log && WinJS.log("No altimeter found", "sample", "error");
-        }
+        });
     }
 })();

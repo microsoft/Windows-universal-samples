@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="AdventureWorks.TripListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AdventureWorks"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=TripListViewModel}"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <x:String x:Key="AppName">Adventure Works</x:String>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Page title -->
+        <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource ScenarioHeaderTextStyle}"
+                   IsHitTestVisible="false" VerticalAlignment="Bottom" Margin="10,12,10,12"/>
+
+        <StackPanel Grid.Row="1">
+            <ListBox x:Name="tripListBox" 
+                     ItemsSource="{Binding Trips}" 
+                     SelectedItem="{Binding Path=SelectedTrip, Mode=TwoWay}" 
+                     Height="250" 
+                     Width="Auto"
+                     MaxWidth="450"
+                     Margin="30,0,30,0"
+                     HorizontalAlignment="Left"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                     SelectionChanged="tripListBox_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding Destination}" FontSize="18.667" FontWeight="Bold" />
+                            <TextBlock Text="{Binding Description}" Margin="20,0,0,0" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Command="{Binding AddTripCommand}" 
+                    Content="Add Trip" 
+                    Margin="30,10,0,0"/>
+        </StackPanel>
+
+        <StackPanel x:Name="FooterPanel" Orientation="Vertical" RelativePanel.AlignBottomWithPanel="True" Grid.Row="2">
+            <Image Source="Assets/microsoft-sdk.png" AutomationProperties.Name="Microsoft Logo" Stretch="None" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+            <TextBlock x:Name="Copyright" Text="&#xA9; Microsoft Corporation. All rights reserved." Style="{StaticResource CopyrightTextStyle}"
+                                   Margin="10,10,0,0"
+                                   TextWrapping="Wrap"/>
+            <StackPanel x:Name="LinksPanel" Orientation="Horizontal" Margin="10,10,0,10">
+                <HyperlinkButton Content="Trademarks" Tag="http://go.microsoft.com/fwlink/?LinkID=623755"
+                        Click="Footer_Click" FontSize="12" Style="{StaticResource HyperlinkStyle}" />
+                <TextBlock Text="|"  Style="{StaticResource SeparatorStyle}" VerticalAlignment="Center" />
+                <HyperlinkButton x:Name="PrivacyLink" Content="Privacy" Tag="http://privacy.microsoft.com" Click="Footer_Click" FontSize="12" Style="{StaticResource HyperlinkStyle}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

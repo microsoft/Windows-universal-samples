@@ -11,10 +11,11 @@ using AppUIBasics.Common;
 using AppUIBasics.ControlPages;
 using AppUIBasics.Data;
 using System;
-using Windows.Foundation.Metadata;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 // The Item Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234232
@@ -76,7 +77,7 @@ namespace AppUIBasics
                 Item = item;
 
                 // Load control page into frame.
-                var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+                var loader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView();
 
                 string pageRoot = loader.GetString("PageStringRoot");
 
@@ -120,7 +121,29 @@ namespace AppUIBasics
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             ShowHelp();
-            this.BottomAppBar.IsOpen = false;
+            bottomCommandBar.IsOpen = false;
+        }
+
+        private void AppBarButton_GotFocus(object sender, RoutedEventArgs e)
+        {
+            // The default gamepad navigation is awkward in this app due to the way the app lays
+            // out its pages. It is common for users to overshoot when navigating with the gamepad.
+            // If users press Down too many times, they end up on the command bar buttons in
+            // the bottom right corner of the page. Pressing Up doesn't return focus anywhere
+            // close to where it came from because pressing Up puts focus on the search box
+            // because that's the next control in the upward direction.
+            //
+            // Ideally, we would revise the page layout so that there is a clear next control
+            // in each direction. Here, we programmatically set the XYFocusUp property
+            // to the control that is closest to the command bar, which is usually the
+            // bottom-most control in the content frame.
+
+            var transform = bottomCommandBar.TransformToVisual(null);
+            // Calculate the rectangle that describes the top edge of the bottom command bar.
+            var rect = new Rect(0, 0, bottomCommandBar.ActualWidth, 0);
+            rect = transform.TransformBounds(rect);
+            var destinationElement = FocusManager.FindNextFocusableElement(FocusNavigationDirection.Up, rect);
+            searchButton.XYFocusUp = destinationElement;
         }
 
         protected void RelatedControl_Click(object sender, RoutedEventArgs e)
@@ -132,7 +155,7 @@ namespace AppUIBasics
 
         private void ShowHelp()
         {
-            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            var loader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView();
 
             string HTMLOpenTags = loader.GetString("HTMLOpenTags");
             string HTMLCloseTags = loader.GetString("HTMLCloseTags");

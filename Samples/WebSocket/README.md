@@ -1,23 +1,31 @@
-﻿<!---
+﻿<!--
   category: NetworkingAndWebServices 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620623&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620623
 --->
 
 # WebSocket sample
 
-This sample shows you how to send and receive date using the WebSocket classes in the [**Windows.Networking.Sockets**](http://msdn.microsoft.com/library/windows/apps/br226960) namespace in your Universal Windows Platform (UWP) app. The sample covers basic features that include making a WebSocket connection, sending and receiving data, and closing the connection. The sample also shows recommended ways of handling both trusted (hard coded) URI inputs and unvalidated (user-entered) URI inputs.
+Shows how to send and receive data using the WebSocket classes in the [Windows.Networking.Sockets](http://msdn.microsoft.com/library/windows/apps/br226960) 
+namespace. The sample covers basic features that include making a WebSocket connection, sending and receiving data, and closing the connection. 
+It also shows recommended ways of handling both trusted (hard coded) URI inputs and unvalidated (user-entered) URI inputs, and it 
+shows how to access the server certificate information and perform custom validation (if needed) when using a secure Websocket (wss://) endpoint.
 
-**Note**  This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on Windows 10. For more info about how to build apps that target Windows and Windows Phone with Visual Studio, see [Build apps that target Windows 10 by using Visual Studio](http://msdn.microsoft.com/library/windows/apps/dn609832).
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-Windows 10 provides support for the client use of WebSockets in a Universal Windows Platform (UWP) app. The [**Windows.Networking.Sockets**](http://msdn.microsoft.com/library/windows/apps/br226960) namespace defines two types of WebSocket objects for use by clients:
+Windows 10 provides support for the client use of WebSockets in a Universal Windows Platform (UWP) app. The [Windows.Networking.Sockets](http://msdn.microsoft.com/library/windows/apps/br226960) namespace defines two types of WebSocket objects for use by clients:
 
--   [**MessageWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226842) is suitable for typical scenarios where messages are not extremely large. Both UTF-8 and binary messages are supported.
--   [**StreamWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226923) is more suitable for scenarios in which large files (such as photos or movies) are being transferred, allowing sections of a message to be read with each read operation rather than reading the entire message at once. Only binary messages are supported.
+-   [MessageWebSocket](http://msdn.microsoft.com/library/windows/apps/br226842) is suitable for typical scenarios where messages are not extremely large. Both UTF-8 and binary messages are supported.
+-   [StreamWebSocket](http://msdn.microsoft.com/library/windows/apps/br226923) is more suitable for scenarios in which large files (such as photos or movies) are being transferred, allowing sections of a message to be read with each read operation rather than reading the entire message at once. Only binary messages are supported.
 
-Both [**MessageWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226842) and [**StreamWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226923) connections are demonstrated in this sample. This sample shows how to use the following features:
+Both [MessageWebSocket](http://msdn.microsoft.com/library/windows/apps/br226842) and [StreamWebSocket](http://msdn.microsoft.com/library/windows/apps/br226923) connections are demonstrated in this sample. This sample shows how to use the following features:
 
--   Use a [**MessageWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226842) to send UTF-8 text messages. The server will echo the messages back.
--   Use a [**StreamWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226923) to send binary data. The server will echo the binary data back.
+-   Use a [MessageWebSocket](http://msdn.microsoft.com/library/windows/apps/br226842) to send UTF-8 text messages. The server will echo the messages back.
+-   Use a [StreamWebSocket](http://msdn.microsoft.com/library/windows/apps/br226923) to send binary data. The server will echo the binary data back.
 
 **Note**  This sample by default requires network access using the loopback interface.
 
@@ -33,27 +41,21 @@ This sample requires that network capabilities be set in the *Package.appxmanife
 
 ### Other resources
 
-[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)
-
-[Connecting with WebSockets](http://msdn.microsoft.com/library/windows/apps/hh761442)
-
-[How to configure network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)
-
-[How to connect with a MessageWebSocket](http://msdn.microsoft.com/library/windows/apps/hh761443)
-
-[How to connect with a StreamWebSocket](http://msdn.microsoft.com/library/windows/apps/hh761445)
+[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)  
+[Connecting with WebSockets](http://msdn.microsoft.com/library/windows/apps/hh761442)  
+[How to configure network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)  
+[How to connect with a MessageWebSocket](http://msdn.microsoft.com/library/windows/apps/hh761443)  
+[How to connect with a StreamWebSocket](http://msdn.microsoft.com/library/windows/apps/hh761445)  
 
 ### Reference
 
-[**MessageWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226842)
-
-[**StreamWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226923)
-
-[**Windows.Networking.Sockets**](http://msdn.microsoft.com/library/windows/apps/br226960)
+[MessageWebSocket](http://msdn.microsoft.com/library/windows/apps/br226842)  
+[StreamWebSocket](http://msdn.microsoft.com/library/windows/apps/br226923)  
+[Windows.Networking.Sockets](http://msdn.microsoft.com/library/windows/apps/br226960)  
 
 ### Related technologies
 
-[**Windows.Networking.Sockets**](http://msdn.microsoft.com/library/windows/apps/br226960)
+[Windows.Networking.Sockets](http://msdn.microsoft.com/library/windows/apps/br226960)  
 
 ## System requirements
 

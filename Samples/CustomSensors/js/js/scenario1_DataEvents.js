@@ -93,7 +93,7 @@
     /// </summary>
     function onVisibilityChanged() {
         if (customSensor && document.getElementById("scenario1Open").disabled) {
-            if (document.msVisibilityState === "visible") {
+            if (document.visibilityState === "visible") {
                 // Re-enable sensor input. No need to restore the desired reportInterval (it is restored for us upon app resume)
                 customSensor.addEventListener("readingchanged", onDataChanged);
             } else {

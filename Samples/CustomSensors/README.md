@@ -1,11 +1,18 @@
 <!---
   category: DevicesSensorsAndPower
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620528&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620528
 --->
 
 # Custom sensors sample
 
-This sample demonstrates the use of the Windows.Devices.Sensors.Custom sensor API.
+Shows how to use the [Windows.Devices.Sensors.Custom](https://msdn.microsoft.com/library/windows/apps/windows.devices.sensors.custom.aspx) namespace.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample allows the user to view the CO2 level for custom sensor based CO2 sensor. You can choose one of two scenarios:
 
@@ -32,7 +39,7 @@ When you click on the **Get CO2 level** button for the **Polling** option, the a
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

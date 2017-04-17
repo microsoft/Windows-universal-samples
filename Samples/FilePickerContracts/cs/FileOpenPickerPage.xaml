@@ -18,7 +18,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    x:Name="RootPage">
+    SizeChanged="FileOpenPickerPage_SizeChanged">
 
     <Page.Resources>
         <Style x:Key="BaseStatusStyle" TargetType="TextBlock">
@@ -79,10 +79,11 @@
                             <TextBlock x:Name="ScenarioListLabel" Text="Select Scenario:" Grid.Row="1"  Style="{StaticResource SubheaderTextBlockStyle}" Margin="0,5,0,0" />
                             <ListBox x:Name="Scenarios" Margin="0,0,20,0" Grid.Row="2" AutomationProperties.Name="Scenarios" HorizontalAlignment="Left"
                                          VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                         SelectionChanged="{x:Bind OnScenarioSelectionChanged}"
                                          AutomationProperties.LabeledBy="{Binding ElementName=ScenarioListLabel}" MaxHeight="125">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"/>
+                                        <TextBlock Text="{Binding Path=Title}"/>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>

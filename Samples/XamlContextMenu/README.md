@@ -1,11 +1,18 @@
 <!---
   category: ControlsLayoutAndText
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620021&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620021
 --->
 
 # Context menu (XAML) sample
 
-This sample shows how to create context menus experiences in UWP.
+Shows how to create context menus experiences in UWP apps.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample shows how to:
 
@@ -16,7 +23,7 @@ Specifically, this sample shows how to:
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
@@ -24,10 +31,9 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-* MenuFlyout
-* MenuFlyout.ShowAt(UIElement, Point) 
-* MenuFlyoutSubItem
-
+[MenuFlyout class](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.menuflyout.aspx)  
+[MenuFlyout.ShowAt method](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.menuflyout.showat.aspx)  
+[MenuFlyoutSubItem](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.menuflyoutsubitem.aspx)  
 
 ## System requirements
 
@@ -41,7 +47,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

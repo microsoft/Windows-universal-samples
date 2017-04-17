@@ -1,11 +1,18 @@
 ﻿<!---
   category: Data
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620550&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620550
 --->
 
-# HTML5 form validation sample
+# Form validation (HTML) sample
 
-Demonstrates HTML5 input form and validation attributes that enable you to help your users enter the correct data in the right format into your page's forms.
+Shows HTML5 input form and validation attributes that enable you to help your users enter the correct data in the right format into your page's forms.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 ## Operating system requirements
 

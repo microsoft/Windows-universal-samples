@@ -1,13 +1,18 @@
 ﻿<!---
   category: LaunchingAndBackgroundTasks 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=618666&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=618666
 --->
 
 # Background task sample
 
-This sample shows you how to create and register background tasks using the Windows Runtime background task API.
+Shows how to create and register background tasks using the Windows Runtime background task API.
 
-**Note** The Universal Windows app samples require Visual Studio 2015 to build and Windows 10 to execute.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 A background task is triggered by a system or time event and can be constrained by one or more conditions. When a background task is triggered, its associated handler runs and performs the work of the background task. A background task can run even when the app that registered the background task is suspended.
 
@@ -32,25 +37,27 @@ To obtain an evaluation copy of Microsoft Visual Studio 2013, go to [Visual Stu
 
 ## Related topics
 
-[Displaying tiles on the lock screen](http://msdn.microsoft.com/library/windows/apps/hh868260)
+### Samples
 
-[Launching, resuming, and multitasking](http://msdn.microsoft.com/library/windows/apps/hh770837)
+[Background Activation](/Samples/BackgroundActivation)  
+[Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)  
 
-[Managing background tasks](http://msdn.microsoft.com/library/windows/apps/hh977053)
+### Reference
 
-[Supporting your app with background tasks](http://msdn.microsoft.com/library/windows/apps/hh977056)
-
-[Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
+[Displaying tiles on the lock screen](http://msdn.microsoft.com/library/windows/apps/hh868260)  
+[Launching, resuming, and multitasking](http://msdn.microsoft.com/library/windows/apps/hh770837)  
+[Managing background tasks](http://msdn.microsoft.com/library/windows/apps/hh977053)  
+[Support your app with background tasks](https://msdn.microsoft.com/library/windows/apps/mt299103)  
+[Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 
 **API reference**
 
-[**Windows.ApplicationModel.Background (XAML)**](http://msdn.microsoft.com/library/windows/apps/br224847)
+[Windows.ApplicationModel.Background (XAML)](http://msdn.microsoft.com/library/windows/apps/br224847)  
+[Windows.UI.WebUI.WebUIBackgroundTaskInstance (HTML)](http://msdn.microsoft.com/library/windows/apps/hh701740)  
 
-[**Windows.UI.WebUI.WebUIBackgroundTaskInstance (HTML)**](http://msdn.microsoft.com/library/windows/apps/hh701740)
+### Related technologies
 
-## Related technologies
-
-[**Windows.ApplicationModel.Background**](http://msdn.microsoft.com/library/windows/apps/br224847)
+[Windows.ApplicationModel.Background](http://msdn.microsoft.com/library/windows/apps/br224847)  
 
 ## Operating system requirements
 
@@ -85,14 +92,14 @@ Windows Phone 10
 
 **Triggering background tasks**
 
-To trigger the background tasks associated with the `TimeZoneChange` event:
+To trigger the background tasks associated with the TimeZoneChange event:
 
 1.  Change date and time settings.
 2.  Click **Change time zone...**
 3.  Select a time zone that has a UTC offset different from the currently selected time zone.
 4.  Click **OK**.
 
-Background tasks associated with the `TimeTrigger` event will only fire if the app is currently on the lock screen. There are two ways to accomplish this.
+Background tasks associated with the TimeTrigger event will only fire if the app is currently on the lock screen. There are two ways to accomplish this.
 
 Accept the initial request to add the BackgroundTaskSample app to the lock screen:
 
@@ -112,14 +119,14 @@ Add the BackgroundTaskSample app to the lock screen manually:
 
 See the following topics for step-by-step information about using background tasks:
 
--   [Quickstart: Create and register a background task](http://msdn.microsoft.com/library/windows/apps/hh977055)
--   [How to respond to system events with background tasks](http://msdn.microsoft.com/library/windows/apps/hh977058)
--   [How to set conditions for running a background task](http://msdn.microsoft.com/library/windows/apps/hh977057)
--   [How to handle a cancelled background task](http://msdn.microsoft.com/library/windows/apps/hh977052)
--   [How to monitor background task progress and completion](http://msdn.microsoft.com/library/windows/apps/hh977054)
--   [How to run a background task on a timer](http://msdn.microsoft.com/library/windows/apps/hh977059)
--   [How to use maintenance triggers](http://msdn.microsoft.com/library/windows/apps/jj883699)
--   [How to declare background tasks in the application manifest](http://msdn.microsoft.com/library/windows/apps/hh977049)
--   [Guidelines and checklists for background tasks](http://msdn.microsoft.com/library/windows/apps/hh977051)
--   [**How to debug a background task**](http://msdn.microsoft.com/library/windows/apps/jj542416)
+-   [Create and register a background task](https://msdn.microsoft.com/library/windows/apps/mt299100)
+-   [Respond to system events with background tasks](https://msdn.microsoft.com/library/windows/apps/mt185414)
+-   [Set conditions for running a background task](https://msdn.microsoft.com/library/windows/apps/mt185620)
+-   [Handle a cancelled background task](https://msdn.microsoft.com/library/windows/apps/mt187312)
+-   [Monitor background task progress and completion](https://msdn.microsoft.com/library/windows/apps/mt186457)
+-   [Run a background task on a timer ](https://msdn.microsoft.com/library/windows/apps/mt186458)
+-   [Use a maintenance trigger](https://msdn.microsoft.com/library/windows/apps/mt185632)
+-   [Declare background tasks in the application manifest](https://msdn.microsoft.com/library/windows/apps/mt185412)
+-   [Guidelines for background tasks](https://msdn.microsoft.com/library/windows/apps/mt187310)
+-   [Debug a background task](https://msdn.microsoft.com/library/windows/apps/mt299101)
 

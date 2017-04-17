@@ -1,0 +1,45 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Basics"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Text="Basics" Style="{StaticResource ScenarioDescriptionTextStyle}"/>
+
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                If the OS supports hardware camera buttons,
+                a message is displayed each time you press the camera button.
+            </TextBlock>
+
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                Click the button below to display the current orientation,
+                using a power-efficient mode if available.
+            </TextBlock>
+            <Button Content="Get orientation" Click="{x:Bind GetOrientationReport}" Margin="0,10,0,0"/>
+
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                Click the button below to determine whether background access
+                is allowed, using a mechanism appropriate to the OS.
+            </TextBlock>
+            <Button Content="Check background access" Click="{x:Bind CheckBackgroundAccessStatus}" Margin="0,10,0,0"/>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

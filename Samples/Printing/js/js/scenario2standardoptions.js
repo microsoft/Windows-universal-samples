@@ -2,23 +2,31 @@
 
 (function () {
     "use strict";
+
+    var printManager = Windows.Graphics.Printing.PrintManager.getForCurrentView();
+
     var page = WinJS.UI.Pages.define("/html/scenario2standardoptions.html", {
         ready: function (element, options) {
-            document.getElementById("printButton").addEventListener("click", printButtonHandler, false);
+            var printButton = document.getElementById("printButton");
+            if (!Windows.Graphics.Printing.PrintManager.isSupported()) {
+                WinJS.log && WinJS.log("Printing is not supported.", "sample", "error");
+
+                // Hide the Print button if printing is not supported.
+                printButton.style.display = "none";
+
+                // Printing-related event handlers will never be called if printing
+                // is not supported, but it's okay to register for them anyway.
+            }
+
+            printButton.addEventListener("click", printButtonHandler, false);
 
             // Register for Print Contract
-            registerForPrintContract();
+            printManager.addEventListener("printtaskrequested", onPrintTaskRequested);
+        },
+        unload: function () {
+            printManager.removeEventListener("printtaskrequested", onPrintTaskRequested);
         }
     });
-
-    function registerForPrintContract() {
-        var printManager = Windows.Graphics.Printing.PrintManager.getForCurrentView();
-        printManager.onprinttaskrequested = onPrintTaskRequested;
-        WinJS.log && WinJS.log("Print Contract registered. Use the Print button to print.", "sample", "status");
-    }
-
-    // Variable to hold the document source to print
-    var gHtmlPrintDocumentSource = null;
 
     /// <summary>
     /// Print event handler for printing via the PrintManager API.
@@ -31,21 +39,28 @@
     /// </param>
     function onPrintTaskRequested(printEvent) {
         var printTask = printEvent.request.createPrintTask("Print Sample", function (args) {
-            args.setSource(gHtmlPrintDocumentSource);
+            var deferral = args.getDeferral();
 
             // Choose the printer options to be shown.
             // The order in which the options are appended determines the order in which they appear in the UI
             printTask.options.displayedOptions.clear();
-            printTask.options.displayedOptions.append(Windows.Graphics.Printing.StandardPrintTaskOptions.copies);
-            printTask.options.displayedOptions.append(Windows.Graphics.Printing.StandardPrintTaskOptions.mediaSize);
-            printTask.options.displayedOptions.append(Windows.Graphics.Printing.StandardPrintTaskOptions.orientation);
-            printTask.options.displayedOptions.append(Windows.Graphics.Printing.StandardPrintTaskOptions.duplex);
+            printTask.options.displayedOptions.push(
+                Windows.Graphics.Printing.StandardPrintTaskOptions.copies,
+                Windows.Graphics.Printing.StandardPrintTaskOptions.mediaSize,
+                Windows.Graphics.Printing.StandardPrintTaskOptions.orientation,
+                Windows.Graphics.Printing.StandardPrintTaskOptions.duplex);
 
             // Preset the default value of the printer option
             printTask.options.mediaSize = Windows.Graphics.Printing.PrintMediaSize.northAmericaLegal;
 
             // Register the handler for print task completion event
-            printTask.oncompleted = onPrintTaskCompleted;
+            printTask.addEventListener("completed", onPrintTaskCompleted);
+
+            // Get document source to print
+            MSApp.getHtmlPrintDocumentSourceAsync(document).then(function (source) {
+                args.setSource(source);
+                deferral.complete();
+            });
         });
     }
 
@@ -63,12 +78,7 @@
     }
 
     function printButtonHandler() {
-        // Get document source to print
-        MSApp.getHtmlPrintDocumentSourceAsync(document).then(function (htmlPrintDocumentSource) {
-            gHtmlPrintDocumentSource = htmlPrintDocumentSource;
-
-            // If the print contract is registered, the print experience is invoked.
-            Windows.Graphics.Printing.PrintManager.showPrintUIAsync();
-        });
+        // If the print contract is registered, the print experience is invoked.
+        Windows.Graphics.Printing.PrintManager.showPrintUIAsync();
     }
 })();

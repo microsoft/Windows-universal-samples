@@ -1,0 +1,66 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario4_SecureStop"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:user="using:SDKTemplate.Controls"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="0,0,0,10">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" Text="Secure Stop"/>
+            <TextBlock TextWrapping="Wrap">
+                Secure Stop notifies the service when playback has stopped and the media license is no longer valid.
+                A publisher certificate is first requested which is associated with the PublisherId sent in the license.
+                The certificate will be sent with the ProcessSecureStopData service call.
+            </TextBlock>
+        </StackPanel>
+        <StackPanel Margin="0,0,0,10" Grid.Row="1" Orientation="Horizontal">
+            <Button Grid.Column="1" Content="Get Publisher Cert" Command="{Binding CmdGetPublisherCert}" />
+            <Button Grid.Column="1" Content="Renew License" Command="{Binding CmdRenewLicense}" Margin="2,0"/>
+            <!--
+                <Button Grid.Column="1" Content="Log Session Data" Command="{Binding CmdLogSessionData}" />
+                -->
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Text="{Binding MoviePath, Mode=TwoWay}" />
+                <Button Grid.Column="1" Content="Play" Command="{Binding CmdPlayMovie}" Margin="2,0"/>
+                <Button Grid.Column="2" Content="Stop" Command="{Binding CmdStopMovie}" />
+            </Grid>
+
+            <Border Background="#000000" Grid.Row="1">
+                <MediaElement Name="mediaElement" AreTransportControlsEnabled="{Binding PlaybackEnabled}" />
+            </Border>
+            <user:PlayReadyInfo HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Width="350" Height="375"   />
+        </Grid>
+    </Grid>
+</Page>

@@ -17,9 +17,17 @@ using namespace SDKTemplate;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
+    { "Choose accelerometer", "SDKTemplate.Scenario0_Choose" },
     { "Data Events", "SDKTemplate.Scenario1_DataEvents" },
     { "Shake Events", "SDKTemplate.Scenario2_ShakeEvents" },
     { "Polling", "SDKTemplate.Scenario3_Polling" },
     { "OrientationChanged", "SDKTemplate.Scenario4_OrientationChanged" },
     { "Data Events Batching", "SDKTemplate.Scenario5_DataEventsBatching" }
 };
+
+void MainPage::SetReadingText(Windows::UI::Xaml::Controls::TextBlock^ textBlock, Windows::Devices::Sensors::AccelerometerReading^ reading)
+{
+    textBlock->Text = "X: " + reading->AccelerationX.ToString() +
+        ", Y: " + reading->AccelerationY.ToString() +
+        ", Z: " + reading->AccelerationZ.ToString();
+}

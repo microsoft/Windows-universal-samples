@@ -1,0 +1,48 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="/js/scenario1_Download.js"></script>
+</head>
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">File download</div>
+    <p>
+        When downloading a file from a server, application developers must ensure they receive user consent for the
+        download. Additionally they must expose facilities to control each download (pause, resume, and cancel) and
+        ensure progress visibility when the application is in the foreground. The Background Transfer API enables
+        users to transfer content in the background. Therefore, application developers must also ensure they handle
+        application suspension/resumption and termination/activation cases.
+    </p>
+    <p>
+        <label for="serverAddressField">Remote address: </label>
+        <input type="text" class="win-textbox" id="serverAddressField" value="http://localhost/BackgroundTransferSample/download.aspx" />
+    </p>
+    <p>
+        <label for="fileNameField">Local file name: </label>
+        <input type="text" class="win-textbox" id="fileNameField" value="DownloadedFile.txt" />
+    </p>
+    <p>
+        <button class="win-button" id="startDownloadButton">Start Download</button>
+        <button class="win-button" id="startHighPriorityDownloadButton">Start High Priority Download</button>
+    </p>
+    <p>
+        <button class="win-button" id="cancelAllButton">Cancel All</button>
+        <button class="win-button" id="pauseAllButton">Pause All</button>
+        <button class="win-button" id="resumeAllButton">Resume All</button>
+    </p>
+    <p id="outputConsole"></p>
+</body>
+</html>

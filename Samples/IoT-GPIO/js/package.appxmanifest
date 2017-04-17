@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+  <Identity
+    Name="Microsoft.SDKSamples.Gpio.JS"
+    Version="1.0.0.0"
+    Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+
+  <mp:PhoneIdentity PhoneProductId="cc602f61-65a5-4137-9ce3-87c0790f9e1d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>Gpio JS Sample</DisplayName>
+    <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+    <Logo>Assets\StoreLogo-sdk.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.IoT" MinVersion="10.0.0.0" MaxVersionTested="10.0.14393.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+
+  <Applications>
+    <Application 
+      Id="App"
+      StartPage="default.html">
+
+      <uap:VisualElements
+        DisplayName="GPIO JS Sample"
+        Description="GPIO JS Sample"
+        BackgroundColor="#00b2f0"
+        Square150x150Logo="images\storelogo-sdk.png"
+        Square44x44Logo="images\smalltile-sdk.png">
+        <uap:DefaultTile Wide310x150Logo="images\Wide310x150Logo.png"/>
+        <uap:SplashScreen Image="images\splash-sdk.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+</Package>

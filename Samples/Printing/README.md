@@ -1,11 +1,18 @@
 ﻿<!---
-  category: ControlsLayoutAndText
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619984&clcid=0x409
+  category: ControlsLayoutAndText Printing
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619984
 --->
 
 # Printing sample
 
-This sample demonstrates how apps can add support for printing on Windows. 
+Shows how apps can add support for printing on Windows. 
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 The scenarios demonstrated in this sample include:
 
@@ -13,20 +20,21 @@ The scenarios demonstrated in this sample include:
 - Customizing the print experience by changing how the printer settings are shown to the user
 - Using a custom print template to print a range of pages
 - Printing alternate content that is not part of the current document
+- Disabling print preview
+- Removing the Print button if the device does not support printing
 
-Changes from previous versions of the sample:
-- Removed charms-based printing scenario
-- Refactored BasePrintPage out of solution for increased clarity. Sample now uses PageToPrint class and PrintHelper class instead. 
-- Added exception handling to ShowPrintUIAsync calls
-- Updated app to Universal Windows Platform (UWP)
+## Related samples
+
+[Coloring Book app sample](https://github.com/Microsoft/Windows-appsample-coloringbook)  
 
 System requirements
 -------------------
 
-Client
+**Client:** Windows 10 build 14295
 
-Windows 10
+**Server:** Windows Server 2016 Technical Preview
 
+**Phone:** Windows 10 build 14295
 
 Build the sample
 ----------------

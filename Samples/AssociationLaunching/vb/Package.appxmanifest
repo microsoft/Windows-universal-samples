@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  IgnorableNamespaces="uap mp uap2 uap3"
+  >
+  <Identity Name="Microsoft.SDKSamples.AssociationLaunching.VB" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.1.0" />
+  <mp:PhoneIdentity PhoneProductId="4b4a5960-161a-4aa8-b8cf-eadcbc68a208" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Properties>
+    <DisplayName>AssociationLaunching VB Sample</DisplayName>
+    <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+    <Logo>Assets\StoreLogo-sdk.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.14393.0" />
+  </Dependencies>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="AssociationLaunching.App" Executable="$targetnametoken$.exe" EntryPoint="AssociationLaunching.App">
+      <Extensions>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="alsdkvb" DesiredView="useLess"/>
+        </uap:Extension>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name=".alsdkvb" DesiredView="useLess">
+            <uap:SupportedFileTypes>
+              <uap:FileType>.alsdkvb</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+        <uap3:Extension Category="windows.appUriHandler">
+          <uap3:AppUriHandler>
+            <uap3:Host Name="msdn.microsoft.com" />
+          </uap3:AppUriHandler>
+        </uap3:Extension>
+      </Extensions>
+      <uap:VisualElements DisplayName="AssociationLaunching VB sample" Square150x150Logo="Assets\squareTile-sdk.png" Square44x44Logo="Assets\SmallTile-sdk.png" Description="AssociationLaunching VB sample" BackgroundColor="#00b2f0">
+        <uap:SplashScreen Image="Assets\Splash-sdk.png" />
+        <uap:DefaultTile>
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <uap:Capability Name="picturesLibrary" />
+  </Capabilities>
+</Package>

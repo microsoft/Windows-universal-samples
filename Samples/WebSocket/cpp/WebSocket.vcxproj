@@ -8,8 +8,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.14393.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -145,11 +145,11 @@
       <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
-    <ClInclude Include="Scenario1.xaml.h">
-      <DependentUpon>Scenario1.xaml</DependentUpon>
+    <ClInclude Include="Scenario1_UTF8.xaml.h">
+      <DependentUpon>..\shared\Scenario1_UTF8.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scenario2.xaml.h">
-      <DependentUpon>Scenario2.xaml</DependentUpon>
+    <ClInclude Include="Scenario2_Binary.xaml.h">
+      <DependentUpon>..\shared\Scenario2_Binary.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -159,8 +159,8 @@
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1.xaml" />
-    <Page Include="Scenario2.xaml" />
+    <Page Include="..\shared\Scenario1_UTF8.xaml" />
+    <Page Include="..\shared\Scenario2_Binary.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -186,11 +186,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
-    <ClCompile Include="Scenario1.xaml.cpp">
-      <DependentUpon>Scenario1.xaml</DependentUpon>
+    <ClCompile Include="Scenario1_UTF8.xaml.cpp">
+      <DependentUpon>..\shared\Scenario1_UTF8.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario2.xaml.cpp">
-      <DependentUpon>Scenario2.xaml</DependentUpon>
+    <ClCompile Include="Scenario2_Binary.xaml.cpp">
+      <DependentUpon>..\shared\Scenario2_Binary.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

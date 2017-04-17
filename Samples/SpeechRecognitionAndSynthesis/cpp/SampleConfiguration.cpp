@@ -26,4 +26,5 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Continuous Dictation", "SDKTemplate.Scenario_ContinuousDictation" },
     { "Continuous List Constraint", "SDKTemplate.Scenario_ContinuousRecognitionListGrammar" },
     { "Continuous SRGS Constraint", "SDKTemplate.Scenario_ContinuousRecognitionSRGSGrammar" },
+    { "PauseAsync to Change Grammars", "SDKTemplate.Scenario_PauseAsync" }
 };

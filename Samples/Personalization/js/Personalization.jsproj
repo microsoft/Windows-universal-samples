@@ -45,7 +45,7 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -57,7 +57,6 @@
     <Content Include="..\..\..\SharedContent\js\default.html">
       <Link>default.html</Link>
     </Content>
-    <Content Include="html\AddImageFeedScenario.html" />
     <Content Include="html\SetLockScreenImage.html" />
     <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>images\microsoft-sdk.png</Link>
@@ -84,7 +83,6 @@
       <Link>css\default.css</Link>
     </Content>
     <Content Include="js\sample-configuration.js" />
-    <Content Include="js\AddImageFeedScenario.js" />
     <Content Include="js\SetLockScreenImage.js" />
     <Content Include="..\..\..\SharedContent\js\Microsoft.WinJS\css\ui-dark.css">
       <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>

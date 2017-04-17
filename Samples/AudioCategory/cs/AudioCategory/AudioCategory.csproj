@@ -10,7 +10,7 @@
     <AssemblyName>AudioCategory</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -130,47 +130,58 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PlaybackControl.xaml">
+    <Page Include="..\..\shared\PlaybackControl.xaml">
+      <Link>PlaybackControl.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1.xaml">
+    <Page Include="..\..\shared\Scenario1.xaml">
+      <Link>Scenario1.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario10.xaml">
+    <Page Include="..\..\shared\Scenario10.xaml">
+      <Link>Scenario10.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2.xaml">
+    <Page Include="..\..\shared\Scenario2.xaml">
+      <Link>Scenario2.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3.xaml">
+    <Page Include="..\..\shared\Scenario3.xaml">
+      <Link>Scenario3.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario4.xaml">
+    <Page Include="..\..\shared\Scenario4.xaml">
+      <Link>Scenario4.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario5.xaml">
+    <Page Include="..\..\shared\Scenario5.xaml">
+      <Link>Scenario5.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario6.xaml">
+    <Page Include="..\..\shared\Scenario6.xaml">
+      <Link>Scenario6.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario7.xaml">
+    <Page Include="..\..\shared\Scenario7.xaml">
+      <Link>Scenario7.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario8.xaml">
+    <Page Include="..\..\shared\Scenario8.xaml">
+      <Link>Scenario8.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario9.xaml">
+    <Page Include="..\..\shared\Scenario9.xaml">
+      <Link>Scenario9.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

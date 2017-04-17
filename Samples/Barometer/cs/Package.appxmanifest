@@ -7,7 +7,7 @@
   IgnorableNamespaces="uap mp">
 
     <Identity
-      Name="Microsoft.SDKSamples.BarometerCS.CS"
+      Name="Microsoft.SDKSamples.Barometer.CS"
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
@@ -15,13 +15,13 @@
     <mp:PhoneIdentity PhoneProductId="f9939099-bbd5-46b6-95f0-638e0e120702" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>BarometerCS</DisplayName>
+        <DisplayName>Barometer C# Sample</DisplayName>
         <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
         <Logo>Assets\StoreLogo-sdk.png</Logo>
     </Properties>
 
     <Dependencies>
-        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.14393.0" />
     </Dependencies>
 
     <Resources>
@@ -31,12 +31,12 @@
     <Applications>
         <Application Id="App"
           Executable="$targetnametoken$.exe"
-          EntryPoint="BarometerCS.App">
+          EntryPoint="Barometer.App">
             <uap:VisualElements
-              DisplayName="BarometerCS"
+              DisplayName="Barometer C# Sample"
               Square150x150Logo="Assets\SquareTile-sdk.png"
               Square44x44Logo="Assets\SmallTile-sdk.png"
-              Description="BarometerCS"
+              Description="Barometer C# Sample"
               BackgroundColor="#00b2f0">
                 <uap:SplashScreen Image="Assets\Splash-sdk.png" />
                 <uap:DefaultTile>

@@ -1,0 +1,67 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Basic"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Animated GIFs
+            </TextBlock>
+
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                Image elements automatically play an animated GIF source.
+            </TextBlock>
+            <Image Margin="20" HorizontalAlignment="Left" Stretch="None" Source="Images\sample.gif" />
+
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                Set AutoPlay to False to prevent them from playing automatically.
+            </TextBlock>
+            <Image Margin="20" HorizontalAlignment="Left" Stretch="None">
+                <Image.Source>
+                    <BitmapImage AutoPlay="False" UriSource="Images\sample.gif"/>
+                </Image.Source>
+            </Image>
+
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                Control playback manually with the Play() and Stop() methods.
+            </TextBlock>
+            <Image Margin="20" HorizontalAlignment="Left" Stretch="None">
+                <Image.Source>
+                    <BitmapImage x:Name="ClickToPlaySource" AutoPlay="False"
+                        UriSource="Images\sample.gif" ImageOpened="ClickToPlaySource_ImageOpened" />
+                </Image.Source>
+            </Image>
+
+            <StackPanel x:Name="PlaybackButtons" Orientation="Horizontal" Visibility="Collapsed">
+                <Button
+                    x:Name="PlayButton"
+                    Click="{x:Bind ClickToPlaySource.Play}"
+                    Content="Play"
+                    Margin="10,0,0,0"/>
+                <Button
+                    x:Name="StopButton"
+                    Click="{x:Bind ClickToPlaySource.Stop}"
+                    Content="Stop"
+                    Margin="10,0,0,0"/>
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

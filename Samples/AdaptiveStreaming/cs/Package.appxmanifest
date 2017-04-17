@@ -1,31 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="Microsoft.SDKSamples.AdaptiveStreaming.CS" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.2" />
-  <mp:PhoneIdentity PhoneProductId="f14b66c8-a6f2-4870-87c7-5208b2679716" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
-  <Properties>
-    <DisplayName>AdaptiveStreaming</DisplayName>
-    <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
-    <Logo>Assets\StoreLogo-sdk.png</Logo>
-  </Properties>
-  <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
-  </Dependencies>
-  <Resources>
-    <Resource Language="x-generate" />
-  </Resources>
-  <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="AdaptiveStreaming.App">
-      <uap:VisualElements DisplayName="AdaptiveStreaming" Square150x150Logo="Assets\SquareTile-sdk.png" Square44x44Logo="Assets\SmallTile-sdk.png" Description="AdaptiveStreaming"  BackgroundColor="#00b2f0">
-        <uap:SplashScreen Image="Assets\Splash-sdk.png" />
-        <uap:DefaultTile>
-          <uap:ShowNameOnTiles>
-            <uap:ShowOn Tile="square150x150Logo" />
-          </uap:ShowNameOnTiles>
-        </uap:DefaultTile>
-      </uap:VisualElements>
-    </Application>
-  </Applications>
-  <Capabilities>
-    <Capability Name="internetClient" />
-  </Capabilities>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+    <Identity
+      Name="Microsoft.SDKSamples.AdaptiveStreaming.CS"
+      Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+      Version="1.0.0.0" />
+
+    <mp:PhoneIdentity PhoneProductId="c574da2b-31b8-4717-bcc5-61e6c552487d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+    <Properties>
+        <DisplayName>AdaptiveStreaming Sample</DisplayName>
+        <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+        <Logo>Assets\StoreLogo-sdk.png</Logo>
+    </Properties>
+
+    <Dependencies>
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10586.0" MaxVersionTested="10.0.14393.0" />
+    </Dependencies>
+
+    <Resources>
+        <Resource Language="x-generate"/>
+    </Resources>
+
+    <Applications>
+        <Application Id="AdaptiveStreaming.App"
+          Executable="$targetnametoken$.exe"
+          EntryPoint="AdaptiveStreaming.App">
+            <uap:VisualElements
+              DisplayName="AdaptiveStreaming sample"
+              Square150x150Logo="Assets\squareTile-sdk.png"
+              Square44x44Logo="Assets\SmallTile-sdk.png"
+              Description="AdaptiveStreaming sample"
+              BackgroundColor="#00b2f0">
+                <uap:SplashScreen Image="Assets\Splash-sdk.png" />
+                <uap:DefaultTile>
+                    <uap:ShowNameOnTiles>
+                        <uap:ShowOn Tile="square150x150Logo" />
+                    </uap:ShowNameOnTiles>
+                </uap:DefaultTile>
+            </uap:VisualElements>
+        </Application>
+    </Applications>
+
+    <Capabilities>
+        <Capability Name="internetClient" />
+    </Capabilities>
 </Package>

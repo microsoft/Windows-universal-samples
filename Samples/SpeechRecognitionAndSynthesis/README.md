@@ -1,11 +1,18 @@
 <!---
   category: SpeechAndCortana 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619897&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619897
 --->
 
 # Speech recognition and synthesis sample
 
-This sample demonstrates the usage of Speech Recognition and Speech Synthesis (Text-to-speech) within Universal Applications.
+Shows how to use Speech Recognition and Speech Synthesis (Text-to-speech) in UWP apps. 
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample covers the following scenarios:
 
@@ -30,11 +37,15 @@ You can disable functionality that requires accepting this policy by turning off
 
 ## Related topics
 
--  [Speech recognition](https://msdn.microsoft.com/en-us/library/windows.media.speechrecognition.aspx)
--  [Speech synthesis](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.speechsynthesis.aspx)
--  [Speech design guidelines](https://msdn.microsoft.com/en-us/library/windows/apps/dn596121.aspx)
--  [Responding to speech interactions (XAML)](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/dn630426.aspx)
--  [Responding to speech interactions (HTML)](https://msdn.microsoft.com/en-us/library/windows/apps/dn720491.aspx)
+[Speech recognition](https://msdn.microsoft.com/library/windows.media.speechrecognition.aspx)  
+[Speech synthesis](https://msdn.microsoft.com/library/windows/apps/windows.media.speechsynthesis.aspx)  
+[Speech design guidelines](https://msdn.microsoft.com/library/windows/apps/dn596121.aspx)  
+[Speech interactions](https://msdn.microsoft.com/library/windows/apps/mt185614)  
+[Responding to speech interactions (HTML)](https://msdn.microsoft.com/library/windows/apps/dn720491.aspx)  
+
+## Related samples
+
+[Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
 
 ## System requirements
 
@@ -50,7 +61,7 @@ You can disable functionality that requires accepting this policy by turning off
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
@@ -65,3 +76,8 @@ The next steps depend on whether you just want to deploy the sample or you want 
 
 - To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or selectDebug > Start Without Debugging. 
 
+### Known Issues
+
+ - The sample requires Media Player components to be available. If media player has been uninstalled, or when using an 'N' SKU of windows without media player components, the sample will not function. Note, however, that Speech Synthesis and Speech Recognition do not require media player directly, but other components of the samples do (Such as playback of synthesized text, or checking to see if a microphone is present and the app has permission to use it.) Developers should make sure their app is aware of it and handles this gracefully.
+ 
+ 

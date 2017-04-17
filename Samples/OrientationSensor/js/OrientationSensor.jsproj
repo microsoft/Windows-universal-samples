@@ -45,8 +45,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
@@ -55,13 +55,11 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="css\CalibrationBar.css" />
-    <Content Include="css\scenario1_DataEvents.css" />
-    <Content Include="css\scenario2_Polling.css" />
-    <Content Include="css\scenario3_Calibration.css" />
     <Content Include="..\..\..\SharedContent\js\default.html">
       <Link>default.html</Link>
     </Content>
     <Content Include="html\CalibrationBar.html" />
+    <Content Include="html\scenario0_Choose.html" />
     <Content Include="html\scenario1_DataEvents.html" />
     <Content Include="html\scenario2_Polling.html" />
     <Content Include="html\scenario3_Calibration.html" />
@@ -94,6 +92,7 @@
       <Link>css\default.css</Link>
     </Content>
     <Content Include="js\sample-configuration.js" />
+    <Content Include="js\scenario0_Choose.js" />
     <Content Include="js\scenario1_DataEvents.js" />
     <Content Include="js\scenario2_Polling.js" />
     <Content Include="js\scenario3_Calibration.js" />

@@ -14,13 +14,13 @@
     <mp:PhoneIdentity PhoneProductId="4b0acfe0-3bbe-41a2-9244-e8a09c6a8673" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>BarcodeScanner</DisplayName>
+        <DisplayName>Barcode Scanner C++ Sample</DisplayName>
         <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
         <Logo>Assets\StoreLogo-sdk.png</Logo>
     </Properties>
 
     <Dependencies>
-        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.14393.0" />
     </Dependencies>
 
     <Resources>
@@ -32,10 +32,10 @@
           Executable="$targetnametoken$.exe"
           EntryPoint="BarcodeScanner.App">
             <uap:VisualElements
-              DisplayName="BarcodeScanner"
+              DisplayName="Barcode Scanner C++ Sample"
               Square150x150Logo="Assets\squareTile-sdk.png"
               Square44x44Logo="Assets\smallTile-sdk.png"
-              Description="BarcodeScanner"
+              Description="Barcode Scanner C++ Sample"
               BackgroundColor="#00B2F0">
                 <uap:SplashScreen Image="Assets\splash-sdk.png" />
                 <uap:DefaultTile>

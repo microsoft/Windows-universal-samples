@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "MainPage.xaml.h"
+#include <MemoryBuffer.h>   // IMemoryBufferByteAccess
 #include <sstream>
 
 using namespace Concurrency;
@@ -41,6 +42,7 @@ MainPage::MainPage()
     , _displayOrientation(DisplayOrientations::Portrait)
     , _displayRequest(ref new Windows::System::Display::DisplayRequest())
     , RotationKey({ 0xC380465D, 0x2271, 0x428C,{ 0x9B, 0x83, 0xEC, 0xEA, 0x3B, 0x4A, 0x85, 0xC1 } })
+    , _captureFolder(nullptr)
 {
     InitializeComponent();
 
@@ -121,26 +123,23 @@ task<void> MainPage::InitializeCameraAsync()
             {
                 previousTask.get();
             }
-            catch (Platform::AccessDeniedException^)
+            catch (AccessDeniedException^)
             {
                 WriteLine("The app was denied access to the camera");
             }
-            catch (Exception^ ex)
+        });
+    }).then([this]()
+    {
+        create_task(StorageLibrary::GetLibraryAsync(KnownLibraryId::Pictures))
+            .then([this](StorageLibrary^ picturesLibrary)
+        {
+            _captureFolder = picturesLibrary->SaveFolder;
+            if (_captureFolder == nullptr)
             {
-                WriteException(ex);
+                // In this case fall back to the local app storage since the Pictures Library is not available
+                _captureFolder = ApplicationData::Current->LocalFolder;
             }
         });
-        // Catch any exceptions that may have been thrown along the way
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -167,19 +166,12 @@ task<void> MainPage::CleanupCameraAsync()
 
     // When all our tasks complete, clean up MediaCapture
     return when_all(taskList.begin(), taskList.end())
-        .then([this](task<void> previousTask)
+        .then([this]()
     {
-        try
+        if (_mediaCapture.Get() != nullptr)
         {
-            if (_mediaCapture != nullptr)
-            {
-                _mediaCapture->Failed -= _mediaCaptureFailedEventToken;
-                _mediaCapture = nullptr;
-            }
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
+            _mediaCapture->Failed -= _mediaCaptureFailedEventToken;
+            _mediaCapture = nullptr;
         }
     });
 }
@@ -218,16 +210,6 @@ task<void> MainPage::StartPreviewAsync()
 
         // Not external, just return the previous task
         return previousTask;
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -271,16 +253,6 @@ task<void> MainPage::StopPreviewAsync()
 
             GetPreviewFrameButton->IsEnabled = _isPreviewing;
         }));
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -311,6 +283,12 @@ task<void> MainPage::GetPreviewFrameAsSoftwareBitmapAsync()
         ss << previewFrame->PixelWidth << "x" << previewFrame->PixelHeight << " " << previewFrame->BitmapPixelFormat.ToString()->Data();
         FrameInfoTextBlock->Text = ref new String(ss.str().c_str());
 
+        // Add a simple green filter effect to the SoftwareBitmap
+        if (GreenEffectCheckBox->IsChecked->Value)
+        {
+            ApplyGreenFilter(previewFrame);
+        }
+
         std::vector<task<void>> taskList;
 
         // Show the frame (as is, no rotation is being applied)
@@ -332,17 +310,10 @@ task<void> MainPage::GetPreviewFrameAsSoftwareBitmapAsync()
             taskList.push_back(SaveSoftwareBitmapAsync(previewFrame));
         }
 
-        return when_all(taskList.begin(), taskList.end());
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
+        return when_all(taskList.begin(), taskList.end()).then([currentFrame]() {
+            // IClosable.Close projects into CX as operator delete.
+            delete currentFrame;
+        });
     });
 }
 
@@ -381,49 +352,98 @@ task<void> MainPage::GetPreviewFrameAsD3DSurfaceAsync()
 
         // Clear the image
         PreviewFrameImage->Source = nullptr;
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
+
+        // IClosable.Close projects into CX as operator delete.
+        delete currentFrame;
     });
 }
 
 /// <summary>
-/// Saves a SoftwareBitmap to the Pictures library with the specified name
+/// Saves a SoftwareBitmap to the _captureFolder
 /// </summary>
 /// <param name="bitmap"></param>
 /// <returns></returns>
 task<void> MainPage::SaveSoftwareBitmapAsync(SoftwareBitmap^ bitmap)
 {
-    return create_task(KnownFolders::PicturesLibrary->CreateFileAsync("PreviewFrame.jpg", CreationCollisionOption::GenerateUniqueName))
+    return create_task(_captureFolder->CreateFileAsync("PreviewFrame.jpg", CreationCollisionOption::GenerateUniqueName))
         .then([bitmap](StorageFile^ file)
     {
         return create_task(file->OpenAsync(FileAccessMode::ReadWrite));
-    }).then([bitmap](Streams::IRandomAccessStream^ outputStream)
+    }).then([this, bitmap](Streams::IRandomAccessStream^ outputStream)
     {
-        return create_task(BitmapEncoder::CreateAsync(BitmapEncoder::JpegEncoderId, outputStream));
-    }).then([bitmap](BitmapEncoder^ encoder)
-    {
-        // Grab the data from the SoftwareBitmap
-        encoder->SetSoftwareBitmap(bitmap);
-        return create_task(encoder->FlushAsync());
-    }).then([this](task<void> previousTask)
-    {
-        try
+        return create_task(BitmapEncoder::CreateAsync(BitmapEncoder::JpegEncoderId, outputStream))
+            .then([bitmap](BitmapEncoder^ encoder)
         {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
+            // Grab the data from the SoftwareBitmap
+            encoder->SetSoftwareBitmap(bitmap);
+            return create_task(encoder->FlushAsync());
+        }).then([this, outputStream](task<void> previousTask)
         {
-            WriteException(ex);
-        }
+            // IClosable.Close projects into CX as operator delete.
+            delete outputStream;
+            try
+            {
+                previousTask.get();
+            }
+            catch (Exception^ ex)
+            {
+                // File I/O errors are reported as exceptions
+                WriteException(ex);
+            }
+        });
     });
+}
+
+
+/// <summary>
+/// Applies a basic effect to a Bgra8 SoftwareBitmap in-place
+/// </summary>
+/// <param name="bitmap">SoftwareBitmap that will receive the effect</param>
+void MainPage::ApplyGreenFilter(SoftwareBitmap^ bitmap)
+{
+    // Effect is hard-coded to operate on BGRA8 format only
+    if (bitmap->BitmapPixelFormat == BitmapPixelFormat::Bgra8)
+    {
+        // In BGRA8 format, each pixel is defined by 4 bytes
+        const int BYTES_PER_PIXEL = 4;
+
+        BitmapBuffer^ buffer = bitmap->LockBuffer(BitmapBufferAccessMode::ReadWrite);
+        IMemoryBufferReference^ reference = buffer->CreateReference();
+
+        Microsoft::WRL::ComPtr<IMemoryBufferByteAccess> byteAccess;
+        if (SUCCEEDED(reinterpret_cast<IUnknown*>(reference)->QueryInterface(IID_PPV_ARGS(&byteAccess))))
+        {
+            // Get a pointer to the pixel buffer
+            byte* data;
+            unsigned capacity;
+            byteAccess->GetBuffer(&data, &capacity);
+
+            // Get information about the BitmapBuffer
+            auto desc = buffer->GetPlaneDescription(0);
+
+            // Iterate over all pixels
+            for (int row = 0; row < desc.Height; row++)
+            {
+                for (int col = 0; col < desc.Width; col++)
+                {
+                    // Index of the current pixel in the buffer (defined by the next 4 bytes, BGRA8)
+                    auto currPixel = desc.StartIndex + desc.Stride * row + BYTES_PER_PIXEL * col;
+
+                    // Read the current pixel information into b,g,r channels (leave out alpha channel)
+                    auto b = data[currPixel + 0]; // Blue
+                    auto g = data[currPixel + 1]; // Green
+                    auto r = data[currPixel + 2]; // Red
+
+                    // Boost the green channel, leave the other two untouched
+                    data[currPixel + 0] = b;
+                    data[currPixel + 1] = min(g + 80, 255);
+                    data[currPixel + 2] = r;
+                }
+            }
+        }
+        delete reference;
+        delete buffer;
+    }
 }
 
 /// <summary>
@@ -440,7 +460,7 @@ task<DeviceInformation^> MainPage::FindCameraDeviceByPanelAsync(Windows::Devices
     auto deviceEnumTask = create_task(allVideoDevices);
     return deviceEnumTask.then([panel](DeviceInformationCollection^ devices)
     {
-        for each(auto cameraDeviceInfo in devices)
+        for (auto cameraDeviceInfo : devices)
         {
             if (cameraDeviceInfo->EnclosureLocation != nullptr && cameraDeviceInfo->EnclosureLocation->Panel == panel)
             {
@@ -574,7 +594,7 @@ void MainPage::DisplayInformation_OrientationChanged(DisplayInformation^ sender,
     }
 }
 
-void MainPage::GetPreviewFrameButton_Tapped(Object^, RoutedEventArgs^)
+void MainPage::GetPreviewFrameButton_Click(Object^, RoutedEventArgs^)
 {
     // If preview is not running, no preview frames can be acquired
     if (!_isPreviewing) return;

@@ -140,6 +140,19 @@
     <value>C# リソース</value>
     <comment>Must be less than 13 characters and should be an abbreviation for the displayName</comment>
   </data>
+  <data name="appDescriptionVB" xml:space="preserve">
+    <value>アプリケーション リソース VB サンプル</value>
+  </data>
+  <data name="appDisplayNameVB" xml:space="preserve">
+    <value>アプリケーション リソース VB サンプル</value>
+  </data>
+  <data name="displayNameVB" xml:space="preserve">
+    <value>アプリケーション リソース VB サンプル</value>
+  </data>
+  <data name="shortNameVB" xml:space="preserve">
+    <value>C# リソース</value>
+    <comment>Must be less than 13 characters and should be an abbreviation for the displayName</comment>
+  </data>
   <data name="appDescriptionCPP" xml:space="preserve">
     <value>アプリケーション リソース C++ サンプル</value>
   </data>

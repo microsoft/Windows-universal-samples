@@ -9,7 +9,6 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using System;
 using Windows.Media.Core;
 using Windows.Storage;
@@ -18,26 +17,23 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace VideoPlayback
+namespace SDKTemplate
 {
     /// <summary>
     /// Demonstrates basic video playback using MediaElement.
     /// </summary>
     public sealed partial class Scenario1 : Page
     {
-        private MainPage rootPage;
+        private MainPage rootPage = MainPage.Current;
 
         public Scenario1()
         {
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            rootPage = MainPage.Current;
-
-            // Load example video on startup
-            mediaElement.Source = new Uri("https://mediaplatstorage1.blob.core.windows.net/windows-universal-samples-media/elephantsdream-clip-h264_sd-aac_eng-aac_spa-aac_eng_commentary-srt_eng-srt_por-srt_swe.mkv");
+            MediaPlayerHelper.CleanUpMediaPlayerSource(mediaPlayerElement.MediaPlayer);
         }
 
         /// <summary>
@@ -45,7 +41,7 @@ namespace VideoPlayback
         /// </summary>
         private async void pickFileButton_Click(object sender, RoutedEventArgs e)
         {
-            // Clear previous returned file name, if it exists, between iterations of this scenario 
+            // Clear previous returned file name, if it exists, between iterations of this scenario
             rootPage.NotifyUser("", NotifyType.StatusMessage);
 
             // Create and open the file picker
@@ -60,8 +56,8 @@ namespace VideoPlayback
             if (file != null)
             {
                 rootPage.NotifyUser("Picked video: " + file.Name, NotifyType.StatusMessage);
-                this.mediaElement.SetPlaybackSource(MediaSource.CreateFromStorageFile(file));
-                this.mediaElement.Play();
+                this.mediaPlayerElement.MediaPlayer.Source = MediaSource.CreateFromStorageFile(file);
+                this.mediaPlayerElement.MediaPlayer.Play();
             }
             else
             {

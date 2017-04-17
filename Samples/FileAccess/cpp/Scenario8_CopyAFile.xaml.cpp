@@ -28,13 +28,15 @@ Scenario8::Scenario8() : rootPage(MainPage::Current)
 }
 
 void Scenario8::CopyFileButton_Click(Object^ sender, RoutedEventArgs^ e)
-{
+{    
     StorageFile^ file = rootPage->SampleFile;
     if (file != nullptr)
     {
         // Get the returned file and copy it
-        StorageFolder^ picturesFolder = KnownFolders::PicturesLibrary;
-        create_task(file->CopyAsync(picturesFolder, "sample - Copy.dat", NameCollisionOption::ReplaceExisting)).then([this, file](task<StorageFile^> task)
+        create_task(KnownFolders::GetFolderForUserAsync(nullptr /* current user */, KnownFolderId::PicturesLibrary)).then([this, file](StorageFolder^ picturesFolder)
+        {
+            return file->CopyAsync(picturesFolder, "sample - Copy.dat", NameCollisionOption::ReplaceExisting);
+        }).then([this, file](task<StorageFile^> task)
         {
             try
             {
@@ -43,7 +45,7 @@ void Scenario8::CopyFileButton_Click(Object^ sender, RoutedEventArgs^ e)
             }
             catch (COMException^ ex)
             {
-                rootPage->HandleFileNotFoundException(ex);
+                rootPage->HandleIoException(ex, "Error copying file '" + file->Name + "'");
             }
         });
     }

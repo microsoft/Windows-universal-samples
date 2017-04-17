@@ -7,20 +7,20 @@
   IgnorableNamespaces="uap mp">
 
     <Identity
-      Name="Microsoft.SDKSamples.CompassCPP.CPP"
+      Name="Microsoft.SDKSamples.Compass.CPP"
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
     <mp:PhoneIdentity PhoneProductId="d11f157a-2c5e-45a6-a79f-db3bfd80e4ff" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>CompassCPP</DisplayName>
+        <DisplayName>Compass C++ Sample</DisplayName>
         <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
         <Logo>Assets\StoreLogo-sdk.png</Logo>
     </Properties>
 
     <Dependencies>
-        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.14393.0" />
     </Dependencies>
 
     <Resources>
@@ -30,12 +30,12 @@
     <Applications>
         <Application Id="App"
           Executable="$targetnametoken$.exe"
-          EntryPoint="CompassCPP.App">
+          EntryPoint="Compass.App">
             <uap:VisualElements
-              DisplayName="CompassCPP"
+              DisplayName="Compass C++ Sample"
               Square150x150Logo="Assets\squareTile-sdk.png"
               Square44x44Logo="Assets\smallTile-sdk.png"
-              Description="CompassCPP"
+              Description="Compass C++ Sample"
               BackgroundColor="#00B2F0">
                 <uap:SplashScreen Image="Assets\splash-sdk.png" />
                 <uap:DefaultTile>

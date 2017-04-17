@@ -11,7 +11,7 @@
     <AssemblyName>ApplicationDataSample</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -155,51 +155,63 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="..\shared\App.xaml">
+      <Link>App.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
+    <Page Include="..\shared\MainPage.xaml">
+      <Link>MainPage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_Files.xaml">
+    <Page Include="..\shared\Scenario1_Files.xaml">
+      <Link>Scenario1_Files.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_Settings.xaml">
+    <Page Include="..\shared\Scenario2_Settings.xaml">
+      <Link>Scenario2_Settings.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3_SettingContainer.xaml">
+    <Page Include="..\shared\Scenario3_SettingContainer.xaml">
+      <Link>Scenario3_SettingContainer.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario4_CompositeSettings.xaml">
+    <Page Include="..\shared\Scenario4_CompositeSettings.xaml">
+      <Link>Scenario4_CompositeSettings.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario5_DataChangedEvent.xaml">
+    <Page Include="..\shared\Scenario5_DataChangedEvent.xaml">
+      <Link>Scenario5_DataChangedEvent.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario6_HighPriority.xaml">
+    <Page Include="..\shared\Scenario6_HighPriority.xaml">
+      <Link>Scenario6_HighPriority.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario7_Msappdata.xaml">
+    <Page Include="..\shared\Scenario7_Msappdata.xaml">
+      <Link>Scenario7_Msappdata.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario8_ClearScenario.xaml">
+    <Page Include="..\shared\Scenario8_ClearScenario.xaml">
+      <Link>Scenario8_ClearScenario.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario9_SetVersion.xaml">
+    <Page Include="..\shared\Scenario9_SetVersion.xaml">
+      <Link>Scenario9_SetVersion.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles\Styles.xaml">
+    <Page Include="..\shared\Styles.xaml">
+      <Link>Styles\Styles.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

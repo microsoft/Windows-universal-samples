@@ -8,7 +8,7 @@
     <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10586.0" MaxVersionTested="10.0.14393.0" />
   </Dependencies>
   <Resources>
     <Resource Language="x-generate" />
@@ -28,6 +28,7 @@
         </uap:InitialRotationPreference>
       </uap:VisualElements>
       <Extensions>
+        <uap:Extension Category="windows.voipCall"></uap:Extension>
         <Extension Category="windows.backgroundTasks" EntryPoint="VoipTasks.CallRtcTask">
           <BackgroundTasks ServerName="VoipHost">
             <Task Type="systemEvent" />

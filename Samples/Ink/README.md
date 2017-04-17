@@ -1,13 +1,20 @@
 ﻿<!---
-  category: CustomUserInteractions
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620554&clcid=0x409
----!>
+  category: CustomUserInteractions Inking
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620554
+--->
 
 # Inking sample
 
-This sample demonstrates how to use ink functionality (such as, capturing, manipulating, and interpreting ink strokes) in Universal Windows apps using JavaScript.
+Shows how to use ink functionality (such as, capturing, manipulating, and interpreting ink strokes) in Universal Windows apps using JavaScript.
 
-Specifically, this sample covers using the [**Windows.UI.Input.Inking**](http://msdn.microsoft.com/library/windows/apps/br208524) APIs to:
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+Specifically, this sample covers using the [Windows.UI.Input.Inking](http://msdn.microsoft.com/library/windows/apps/br208524) APIs to:
 
 -   Render ink strokes
 -   Save and load ink strokes
@@ -37,27 +44,23 @@ Specifically, this sample covers using the [**Windows.UI.Input.Inking**](http://
     -   Use **Save** and **Load** to read and write Ink Serialized Format (ISF) files to the Libraries or Pictures folder or both.
 -   All buttons and menu choices can be activated with mouse, pen, or touch.
 
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
 
-[Getting started with apps](https://dev.windows.com/getstarted)
-
-[Responding to pen and stylus interactions](http://msdn.microsoft.com/library/windows/apps/hh700425)
-
-[Responding to user interaction](http://msdn.microsoft.com/library/windows/apps/hh700412)
+[Responding to pen and stylus interactions](http://msdn.microsoft.com/library/windows/apps/hh700425)  
+[Responding to user interaction](http://msdn.microsoft.com/library/windows/apps/hh700412)  
 
 **Samples**
 
-[SimpleInk](/Samples/SimpleInk)
-
-[ComplexInk](/Samples/ComplexInk)
+[SimpleInk](/Samples/SimpleInk)  
+[ComplexInk](/Samples/ComplexInk)  
 
 **Reference**
 
-[**Windows.UI.Input.Inking**](http://msdn.microsoft.com/library/windows/apps/br208524)
+[Windows.UI.Input.Inking](http://msdn.microsoft.com/library/windows/apps/br208524)  
 
 ## Operating system requirements
 

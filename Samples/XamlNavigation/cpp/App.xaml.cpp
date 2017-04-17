@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "AppShell.xaml.h"
 #include "LandingPage.xaml.h"
+#include "SystemInformationHelpers.h"
 
 using namespace NavigationMenuSample;
 
@@ -14,6 +15,8 @@ using namespace Windows::ApplicationModel;
 using namespace Windows::ApplicationModel::Activation;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
+using namespace Windows::UI;
+using namespace Windows::UI::ViewManagement;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Controls::Primitives;
@@ -50,6 +53,28 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
     }
 #endif
 
+    // Change minimum window size
+    ApplicationView::GetForCurrentView()->SetPreferredMinSize(Size(320, 200));
+
+    // Darken the window title bar using a color value to match app theme
+    ApplicationViewTitleBar^ titleBar = ApplicationView::GetForCurrentView()->TitleBar;
+    if (titleBar != nullptr)
+    {
+        Color color = safe_cast<Color>(this->Resources->Lookup(L"SystemChromeMediumColor"));
+        titleBar->BackgroundColor = color;
+        titleBar->ButtonBackgroundColor = color;
+    }
+
+    if (SystemInformationHelpers::IsTenFootExperience())
+    {
+        // Apply guidance from https://msdn.microsoft.com/windows/uwp/input-and-devices/designing-for-tv
+        ApplicationView::GetForCurrentView()->SetDesiredBoundsMode(ApplicationViewBoundsMode::UseCoreWindow);
+
+        ResourceDictionary^ TenFootDictionary = ref new ResourceDictionary();
+        TenFootDictionary->Source = ref new Uri("ms-appx:///Styles/TenFootStylesheet.xaml");
+        this->Resources->MergedDictionaries->Append(TenFootDictionary);
+    }
+
     auto shell = dynamic_cast<AppShell^>(Window::Current->Content);
 
     // Do not repeat app initialization when the Window already has content,
@@ -75,7 +100,7 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
     if (shell->AppFrame->Content == nullptr)
     {
         // When the navigation stack isn't restored navigate to the first page,
-        // suppressing the initial entrance animation and configuring the new 
+        // suppressing the initial entrance animation and configuring the new
         // page by passing required information as a navigation parameter
         shell->AppFrame->Navigate(TypeName(Views::LandingPage::typeid), e->Arguments, ref new Windows::UI::Xaml::Media::Animation::SuppressNavigationTransitionInfo());
     }

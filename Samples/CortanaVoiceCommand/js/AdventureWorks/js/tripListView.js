@@ -19,7 +19,6 @@
             tripList = element.querySelector("#tripListBox").winControl;
             tripList.addEventListener("selectionchanged", this.tripSelected);
             
-
             var addTripButton = document.getElementById("addTripButton");
             addTripButton.addEventListener("click", this.addTrip, false);
 

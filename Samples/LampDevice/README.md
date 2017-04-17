@@ -1,13 +1,22 @@
 ﻿<!---
   category: DevicesSensorsAndPower 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620558&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620558
 --->
 
 # Lamp device sample
 
-This sample demonstrates Windows.Devices.Lights.Lamp API usage. The Windows.Devices.Lights.Lamp API enables applications to use the camera flash
-independently of the capture device. The Windows.Devices.Lights.Lamp API allows for more control over the flash device and consumes less power and CPU
+Shows how to use the [Windows.Devices.Lights.Lamp](https://msdn.microsoft.com/library/windows/apps/windows.devices.lights.aspx) 
+API to enable apps to use the camera flash
+independently of the capture device. The Windows.Devices.Lights.Lamp API allows for more control 
+over the flash device and consumes less power and CPU
 resources because the overhead of running capture device is avoided.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample covers the three most common scenarios for utilizing the flash:
 
@@ -31,10 +40,10 @@ the default lamp device when page loads and provide a toggle to turn the lamp on
 Related topics
 --------------
 
-[Windows.Media.Devices namespace] (https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.devices.aspx)
+[Windows.Media.Devices namespace] (https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)
 
 Windows 8 and 8.1 method for turning on flash (requires starting a video recording session)
-[Windows.Media.Devices.VideoDeviceController.TorchControl] (https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.devices.videodevicecontroller.torchcontrol.aspx)
+[Windows.Media.Devices.VideoDeviceController.TorchControl] (https://msdn.microsoft.com/library/windows/apps/windows.media.devices.videodevicecontroller.torchcontrol.aspx)
 
 
 System requirements

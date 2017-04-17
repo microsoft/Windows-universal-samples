@@ -1,0 +1,67 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Save"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Save credentials
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0,10,0,0">
+                        Each app can access only the credentials which it saved. It cannot access any credentials created by other apps or processes.
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0,10,0,0">
+                        Save credentials to this app's PasswordVault for later retrieval.
+                        Saving a credential replaces any existing credential for the same resource and user name.
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0,10,0,0">
+                        The resource identifies the entity that requires a user name and password. It may not be blank.
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}">
+                        The user name identifies the account at the resource. It can be any non-blank string.
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}">
+                        The password is the password for the user name at the resource. It can be any non-blank string.
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}">
+                        <Run FontWeight="Bold">Note</Run>:
+                        This app will display passwords on the screen for demonstration purposes, so don't enter your real password.
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource BasicTextStyle}" Text="Resource:" Margin="0,10,0,0"/>
+                    <TextBox x:Name="InputResourceValue" PlaceholderText="https://example.com" Width="200" HorizontalAlignment="Left" AutomationProperties.AutomationId="InputResourceValue"/>
+                    <TextBlock Style="{StaticResource BasicTextStyle}"  Text="User Name:" Margin="0,10,0,0"/>
+                    <TextBox x:Name="InputUserNameValue" PlaceholderText="abby" Width="200" HorizontalAlignment="Left" AutomationProperties.AutomationId="InputUserNameValue"/>
+                    <TextBlock Style="{StaticResource BasicTextStyle}"  Text="Password:" Margin="0,10,0,0"/>
+                    <PasswordBox x:Name="InputPasswordValue" Width="200" HorizontalAlignment="Left" AutomationProperties.AutomationId="InputPasswordValue"/>
+                    <Button x:Name="SaveCredButton" AutomationProperties.AutomationId="AddCredButton" Content="Save Credential" Click="{x:Bind SaveCredential}" Margin="0,10,0,0"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

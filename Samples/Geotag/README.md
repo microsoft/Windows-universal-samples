@@ -1,29 +1,31 @@
 ﻿<!---
   category: MapsAndLocation 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620547&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620547
 --->
 
 # Geotag sample
 
-This sample demonstrates Windows.Storage.FileProperties.GeotagHelper API usage
+Shows how to use the GeotagHelper class to read geotag information from a file and set a file's geotag information to a specific location
+or to a location obtained from a Geolocator.
 
-Specifically, this sample covers:
-
-Scenario 1: Demonstrates using GetGeotagAsync API to retrieve location info from a file.
-            Also demostrates using SetGeotagAsync API to geotag a file with known location
-            info, and using SetGeotagFromGeolocatorAsync API to geotag a file with current
-            device location info provided by location framework.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Related topics
 --------------
-[Known Folders] https://msdn.microsoft.com/library/windows/apps/windows.storage.knownfolders.aspx
 
+[GeotagHelper class](https://msdn.microsoft.com/library/windows/apps/windows.storage.fileproperties.geotaghelper.aspx)  
+[Geolocator class](https://msdn.microsoft.com/library/windows/apps/windows.devices.geolocation.geolocator.aspx)  
+[Geolocation sample](/Samples/Geolocation)  
 
 System requirements
 -------------------
 
 Windows 10
-
 
 Build the sample
 ----------------

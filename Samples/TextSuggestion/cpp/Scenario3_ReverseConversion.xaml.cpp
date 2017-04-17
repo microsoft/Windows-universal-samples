@@ -6,6 +6,7 @@
 using namespace SDKTemplate;
 
 using namespace Platform;
+using namespace Platform::Collections;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 using namespace Windows::UI::Xaml;
@@ -93,7 +94,7 @@ void Scenario3_ReverseConversion::CreateGeneratorButton_Click(Platform::Object^ 
 void Scenario3_ReverseConversion::Execute_Click(Platform::Object^ sender, RoutedEventArgs^ e)
 {
     // Clean up result column.
-    resultText->Text = "";
+    resultView->ItemsSource = nullptr;
 
     // Clean notification area.
     String^ notifyText = ref new String();
@@ -105,15 +106,39 @@ void Scenario3_ReverseConversion::Execute_Click(Platform::Object^ sender, Routed
 
     if ((generator != nullptr) && (selectedItem != nullptr) && !input->IsEmpty())
     {
-        // Get the reverse conversion result through calling the API and print it in result area.
-        concurrency::create_task(generator->ConvertBackAsync(input)).then([this](Platform::String^ result)
+        // Specify the candidate number to get.
+        if ((selectedItem->Tag != nullptr) && selectedItem->Tag->ToString()->Equals("segmented"))
         {
-            resultText->Text = result;
-
-            if (resultText->Text->IsEmpty())
+            // Get the reverse conversion result per phoneme through calling the API and print it in result area.
+            concurrency::create_task(generator->GetPhonemesAsync(input)).then([this](IVectorView <Windows::Data::Text::TextPhoneme^>^ phonemes)
             {
-                MainPage::Current->NotifyUser("No candidates.", NotifyType::StatusMessage);
-            }
-        });
+                Vector<String^>^ itemsSource = ref new Vector<String^>();
+                for (const auto& phoneme : phonemes)
+                {
+                    itemsSource->Append(phoneme->DisplayText + " -> " + phoneme->ReadingText);
+                }
+                resultView->ItemsSource = itemsSource;
+
+                if (phonemes->Size == 0)
+                {
+                    MainPage::Current->NotifyUser("No results.", NotifyType::StatusMessage);
+                }
+            });
+        }
+        else
+        {
+            // Get the reverse conversion result through calling the API and print it in result area.
+            concurrency::create_task(generator->ConvertBackAsync(input)).then([this](Platform::String^ result)
+            {
+                Vector<String^>^ itemsSource = ref new Vector<String^>();
+                itemsSource->Append(result);
+                resultView->ItemsSource = itemsSource;
+
+                if ((result == nullptr) || result->IsEmpty())
+                {
+                    MainPage::Current->NotifyUser("No results.", NotifyType::StatusMessage);
+                }
+            });
+        }
     }
 }

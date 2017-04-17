@@ -23,6 +23,9 @@
     var Media = Windows.Media;
     var SimpleOrientation = Windows.Devices.Sensors.SimpleOrientation;
     var SimpleOrientationSensor = Windows.Devices.Sensors.SimpleOrientationSensor;
+    var StorageLibrary = Windows.Storage.StorageLibrary;
+    var KnownLibraryId = Windows.Storage.KnownLibraryId;
+    var ApplicationData = Windows.Storage.ApplicationData;
 
     // Receive notifications about rotation of the device and UI and apply any necessary rotation to the preview stream and UI controls
     var oOrientationSensor = SimpleOrientationSensor.getDefault(),
@@ -55,6 +58,9 @@
     // Rotation metadata to apply to the preview stream and recorded videos (MF_MT_VIDEO_ROTATION)
     // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
     var RotationKey = "C380465D-2271-428C-9B83-ECEA3B4A85C1";
+
+    // Folder in which the captures will be stored (initialized in SetupUiAsync)
+    var oCaptureFolder;
 
     // Initialization
     var app = WinJS.Application;
@@ -301,8 +307,6 @@
                 // original capture resolution
                 return WinJS.Promise.as();
             }
-        }, function (error) {
-            console.log(error.message);
         });
     }
 
@@ -362,8 +366,8 @@
 
         oVideoStabilizationEffect.removeEventListener("enablechanged", videoStabilizationEffect_EnabledChanged);
 
-        // Remove the effect from the record stream
-        return oMediaCapture.clearEffectsAsync(Capture.MediaStreamType.videoRecord)
+        // Remove the effect (see clearEffectsAsync method to remove all effects from a stream)
+        return oMediaCapture.removeEffectAsync(oVideoStabilizationEffect)
         .then(function () {
             console.log("VS effect removed from camera pipeline");
 
@@ -394,14 +398,14 @@
     /// </summary>
     /// <returns></returns>
     function startRecordingAsync() {
-        return Windows.Storage.KnownFolders.picturesLibrary.createFileAsync("SimpleVideo.mp4", Windows.Storage.CreationCollisionOption.generateUniqueName)
+        return oCaptureFolder.createFileAsync("SimpleVideo.mp4", Windows.Storage.CreationCollisionOption.generateUniqueName)
         .then(function (file) {
             // Calculate rotation angle, taking mirroring into account if necessary
             var rotationAngle = 360 - convertDeviceOrientationToDegrees(getCameraOrientation());
             var encodingProfile = Windows.Media.MediaProperties.MediaEncodingProfile.createMp4(Windows.Media.MediaProperties.VideoEncodingQuality.auto);
             encodingProfile.video.properties.insert(RotationKey, rotationAngle);
 
-            console.log("Starting recording...");
+            console.log("Starting recording to " + file.path);
             return oMediaCapture.startRecordToStorageFileAsync(encodingProfile, file)
             .then(function () {
                 isRecording = true;
@@ -462,7 +466,7 @@
     /// <param name="stream">The photo stream</param>
     /// <param name="photoOrientation">The orientation metadata to apply to the photo</param>
     /// <returns></returns>
-    function reencodeAndSavePhotoAsync(inputStream, orientation) {
+    function reencodeAndSavePhotoAsync(inputStream, file, orientation) {
         var Imaging = Windows.Graphics.Imaging;
         var bitmapDecoder = null,
             bitmapEncoder = null,
@@ -471,8 +475,6 @@
         return Imaging.BitmapDecoder.createAsync(inputStream)
         .then(function (decoder) {
             bitmapDecoder = decoder;
-            return Windows.Storage.KnownFolders.picturesLibrary.createFileAsync("SimplePhoto.jpg", Windows.Storage.CreationCollisionOption.generateUniqueName);
-        }).then(function (file) {
             return file.openAsync(Windows.Storage.FileAccessMode.readWrite);
         }).then(function (outStream) {
             outputStream = outStream;
@@ -482,7 +484,7 @@
             var properties = new Imaging.BitmapPropertySet();
             properties.insert("System.Photo.Orientation", new Imaging.BitmapTypedValue(orientation, Windows.Foundation.PropertyType.uint16));
             return bitmapEncoder.bitmapProperties.setPropertiesAsync(properties)
-        }).then(function() {
+        }).then(function () {
             return bitmapEncoder.flushAsync();
         }).then(function () {
             inputStream.close();
@@ -560,13 +562,19 @@
             oDeviceOrientation = oOrientationSensor.getCurrentOrientation();
         }
 
-        // Hide the status bar
-        if (Windows.Foundation.Metadata.ApiInformation.isTypePresent("Windows.UI.ViewManagement.StatusBar")) {
-            return Windows.UI.ViewManagement.StatusBar.getForCurrentView().hideAsync();
-        }
-        else {
-            return WinJS.Promise.as();
-        }
+        return StorageLibrary.getLibraryAsync(KnownLibraryId.pictures)
+        .then(function (picturesLibrary) {
+            // Fall back to the local app storage if the Pictures Library is not available
+            oCaptureFolder = picturesLibrary.saveFolder || ApplicationData.current.localFolder;
+
+            // Hide the status bar
+            if (Windows.Foundation.Metadata.ApiInformation.isTypePresent("Windows.UI.ViewManagement.StatusBar")) {
+                return Windows.UI.ViewManagement.StatusBar.getForCurrentView().hideAsync();
+            }
+            else {
+                return WinJS.Promise.as();
+            }
+        })
     }
 
     /// <summary>
@@ -789,8 +797,6 @@
 
         promiseToExecute.then(function() {
             updateCaptureControls();
-        },function(error) {
-            console.log(error.message);
         }).done();
     }
 

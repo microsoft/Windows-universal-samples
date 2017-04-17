@@ -1,11 +1,20 @@
 ﻿<!---
   category: ControlsLayoutAndText 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620564&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620564
 --->
 
 # Lock screen apps sample
 
-This sample shows how an app can have a presence on the lock screen—the screen that is shown when the computer is locked—with a badge to provide basic status information or a tile to provide more detailed status. An app can also send toast notifications to the lock screen. All apps that are granted a lock screen presence also have the ability to perform background tasks. 
+Shows how an app can have a presence on the lock screen—the screen that is shown when the computer is locked—with a badge to provide basic status information 
+or a tile to provide more detailed status. An app can also send toast notifications to the lock screen. All apps that are granted a lock screen presence also 
+have the ability to perform background tasks. 
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 The sample demonstrates the following scenarios:
 
@@ -22,7 +31,7 @@ The app that has a lock screen presence must declare one or more of the followin
 - Timer
 - Push notification
 
-In Microsoft Visual Studio 2013, this value is set in the **Declarations** page of the manifest editor, which sets the [**BackgroundTasks**](http://msdn.microsoft.com/library/windows/apps/br211421) element in the package.appxmanifest file. This value has been set for this sample.
+In Microsoft Visual Studio 2013, this value is set in the **Declarations** page of the manifest editor, which sets the [BackgroundTasks](http://msdn.microsoft.com/library/windows/apps/br211421) element in the package.appxmanifest file. This value has been set for this sample.
 
 For an app to send a toast notification, the developer must have declared that the app is toast-capable in its app manifest file (package.appxmanifest) as has been done in this sample app. Normally, you do this by using the Visual Studio 2013 manifest editor, where you'll find the setting in the **Application UI** tab, under the **Notifications** section. For more info, see [How to opt in for toast notifications](http://msdn.microsoft.com/library/windows/apps/hh781238).
 
@@ -33,10 +42,10 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 
 ## Related topics
 
-- [Guidelines and checklist for tiles and badges](http://msdn.microsoft.com/library/windows/apps/hh465403)
-- [Quickstart: Showing tile and badge updates on the lock screen](http://msdn.microsoft.com/library/windows/apps/hh700416) 
-- [Lock screen overview](http://msdn.microsoft.com/library/windows/apps/hh779720)
-- [Windows 8 Windows Store app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
+[Guidelines and checklist for tiles and badges](http://msdn.microsoft.com/library/windows/apps/hh465403)  
+[Quickstart: Showing tile and badge updates on the lock screen](http://msdn.microsoft.com/library/windows/apps/hh700416)  
+[Lock screen overview](http://msdn.microsoft.com/library/windows/apps/hh779720)  
+[Windows 8 Windows Store app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 
 ## System requirements
 

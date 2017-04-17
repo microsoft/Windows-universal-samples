@@ -1,0 +1,41 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2_Engage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:SDKTemplate"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" Text="Engaging focus"/>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                This custom control uses the IsFocusEngagementEnabled property to allow the
+                user to navigate quickly past the control.
+                The user presses the "A" button to engage the control
+                and the "B" button to disengage.
+                The custom control uses the UseSystemFocusVisuals property to
+                draw focus visuals.
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+            <Button Content="Button 1" Margin="0,10,10,0"/>
+            <local:TransportOptions Margin="0,10,10,0"/>
+            <Button Content="Button 2" Margin="0,10,10,0"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

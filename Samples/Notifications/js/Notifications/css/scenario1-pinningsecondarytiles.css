@@ -1,0 +1,23 @@
+﻿#scenario1 img {
+    background-color: purple;
+}
+
+#scenario1 img.smalltile {
+    height: 71px;
+    width: 71px;
+}
+
+#scenario1 img.mediumtile {
+    height: 150px;
+    width: 150px;
+}
+
+#scenario1 img.widetile {
+    height: 150px;
+    width: 310px;
+}
+
+#scenario1 img.largetile {
+    height: 310px;
+    width: 310px;
+}

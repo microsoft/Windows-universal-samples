@@ -44,7 +44,7 @@ void Scenario10::DeleteFileButton_Click(Object^ sender, RoutedEventArgs^ e)
             }
             catch (COMException^ ex)
             {
-                rootPage->HandleFileNotFoundException(ex);
+                rootPage->HandleIoException(ex, "Error deleting file '" + fileName + "'");
             }
         });
     }

@@ -35,8 +35,44 @@ namespace SDKTemplate
             }
         }
 
+        static void SetReadingText(Windows::UI::Xaml::Controls::TextBlock^ textBlock, Windows::Devices::Sensors::OrientationSensorReading^ reading);
+
+        property Windows::Devices::Sensors::SensorReadingType SensorReadingType
+        {
+            Windows::Devices::Sensors::SensorReadingType get()
+            {
+                return sensorReadingType;
+            }
+            void set(Windows::Devices::Sensors::SensorReadingType value)
+            {
+                sensorReadingType = value;
+            }
+        }
+
+        property Windows::Devices::Sensors::SensorOptimizationGoal SensorOptimizationGoal
+        {
+            Windows::Devices::Sensors::SensorOptimizationGoal get()
+            {
+                return sensorOptimizationGoal;
+            }
+            void set(Windows::Devices::Sensors::SensorOptimizationGoal value)
+            {
+                sensorOptimizationGoal = value;
+            }
+        }
+
+        property Platform::String^ SensorDescription
+        {
+            Platform::String^ get()
+            {
+                return SensorReadingType.ToString() + " orientation sensor with " + SensorOptimizationGoal.ToString() + " optimization goal";
+            }
+        }
+
     private:
         static Platform::Array<Scenario>^ scenariosInner;
+        Windows::Devices::Sensors::SensorReadingType sensorReadingType;
+        Windows::Devices::Sensors::SensorOptimizationGoal sensorOptimizationGoal;
     };
 
     public value struct Scenario

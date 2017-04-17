@@ -83,25 +83,26 @@ namespace SpeechAndTTS
             if (permissionGained)
             {
                 btnContinuousRecognize.IsEnabled = true;
+                
+                Language speechLanguage = SpeechRecognizer.SystemSpeechLanguage;
+                string langTag = speechLanguage.LanguageTag;
+                speechContext = ResourceContext.GetForCurrentView();
+                speechContext.Languages = new string[] { langTag };
+
+                speechResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("LocalizationSpeechResources");
+
+                PopulateLanguageDropdown();
+
+                // Initialize the recognizer. Since the recognizer is disposed on scenario exit, we need to make sure we re-initialize it on scenario
+                // entrance, as the xaml page may not get destroyed between openings of the scenario.
+                await InitializeRecognizer(SpeechRecognizer.SystemSpeechLanguage);
             }
             else
             {
                 resultTextBlock.Text = "Permission to access capture resources was not given by the user, reset the application setting in Settings->Privacy->Microphone.";
+                btnContinuousRecognize.IsEnabled = false;
+                cbLanguageSelection.IsEnabled = false;
             }
-
-
-            Language speechLanguage = SpeechRecognizer.SystemSpeechLanguage;
-            string langTag = speechLanguage.LanguageTag;
-            speechContext = ResourceContext.GetForCurrentView();
-            speechContext.Languages = new string[] { langTag };
-
-            speechResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("LocalizationSpeechResources");
-
-            PopulateLanguageDropdown();
-
-            // Initialize the recognizer. Since the recognizer is disposed on scenario exit, we need to make sure we re-initialize it on scenario
-            // entrance, as the xaml page may not get destroyed between openings of the scenario.
-            await InitializeRecognizer(SpeechRecognizer.SystemSpeechLanguage);
         }
 
         /// <summary>
@@ -139,6 +140,7 @@ namespace SpeechAndTTS
         /// <param name="e">Ignored</param>
         private async void cbLanguageSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            btnContinuousRecognize.IsEnabled = false;
             ComboBoxItem item = (ComboBoxItem)(cbLanguageSelection.SelectedItem);
             Language newLanguage = (Language)item.Tag;
             if (speechRecognizer != null)
@@ -162,7 +164,7 @@ namespace SpeechAndTTS
                 var messageDialog = new Windows.UI.Popups.MessageDialog(exception.Message, "Exception");
                 await messageDialog.ShowAsync();
             }
-
+            btnContinuousRecognize.IsEnabled = true;
         }
 
         /// <summary>
@@ -282,27 +284,45 @@ namespace SpeechAndTTS
         /// <param name="e">Unused event details</param>
         public async void ContinuousRecognize_Click(object sender, RoutedEventArgs e)
         {
+            btnContinuousRecognize.IsEnabled = false;
             // The recognizer can only start listening in a continuous fashion if the recognizer is currently idle.
             // This prevents an exception from occurring.
             if (speechRecognizer.State == SpeechRecognizerState.Idle)
             {
                 // Reset the text to prompt the user.
-                resultTextBlock.Text = speechResourceMap.GetValue("SRGSHelpText", speechContext).ValueAsString;
-                ContinuousRecoButtonText.Text = " Stop Continuous Recognition";
-                cbLanguageSelection.IsEnabled = false;
-                await speechRecognizer.ContinuousRecognitionSession.StartAsync();
+                try
+                {
+                    await speechRecognizer.ContinuousRecognitionSession.StartAsync();
+                    resultTextBlock.Text = speechResourceMap.GetValue("SRGSHelpText", speechContext).ValueAsString;
+                    ContinuousRecoButtonText.Text = " Stop Continuous Recognition";
+                    cbLanguageSelection.IsEnabled = false;
+                }
+                catch (Exception ex)
+                {
+                    var messageDialog = new Windows.UI.Popups.MessageDialog(ex.Message, "StartAsync Exception");
+                    await messageDialog.ShowAsync();
+                }
             }
             else
             {
-                // Reset the text to prompt the user.
-                ContinuousRecoButtonText.Text = " Continuous Recognition";
-                cbLanguageSelection.IsEnabled = true;
-                resultTextBlock.Text = speechResourceMap.GetValue("SRGSHelpText", speechContext).ValueAsString;
-                // Cancelling recognition prevents any currently recognized speech from
-                // generating a ResultGenerated event. StopAsync() will allow the final session to 
-                // complete.
-                await speechRecognizer.ContinuousRecognitionSession.CancelAsync();
+                try
+                {
+                    // Reset the text to prompt the user.
+                    ContinuousRecoButtonText.Text = " Continuous Recognition";
+                    cbLanguageSelection.IsEnabled = true;
+                    resultTextBlock.Text = speechResourceMap.GetValue("SRGSHelpText", speechContext).ValueAsString;
+                    // Cancelling recognition prevents any currently recognized speech from
+                    // generating a ResultGenerated event. StopAsync() will allow the final session to 
+                    // complete.
+                    await speechRecognizer.ContinuousRecognitionSession.CancelAsync();
+                }
+                catch (Exception ex)
+                {
+                    var messageDialog = new Windows.UI.Popups.MessageDialog(ex.Message, "CancelAsync Exception");
+                    await messageDialog.ShowAsync();
+                }
             }
+            btnContinuousRecognize.IsEnabled = true;
         }
 
         /// <summary>

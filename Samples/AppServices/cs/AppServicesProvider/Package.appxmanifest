@@ -4,7 +4,8 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-  IgnorableNamespaces="uap mp">
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  IgnorableNamespaces="uap mp uap3">
 
     <Identity
       Name="Microsoft.SDKSamples.AppServicesProvider.CS"
@@ -21,7 +22,7 @@
     </Properties>
 
     <Dependencies>
-        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0" />
     </Dependencies>
 
     <Resources>
@@ -47,7 +48,7 @@
             </uap:VisualElements>
           <Extensions>
             <uap:Extension Category="windows.appService" EntryPoint="RandomNumberService.RandomNumberGeneratorTask">
-              <uap:AppService Name="com.microsoft.randomnumbergenerator"/>
+              <uap3:AppService Name="com.microsoft.randomnumbergenerator" SupportsRemoteSystems="true"/>
             </uap:Extension>
           </Extensions>
         </Application>

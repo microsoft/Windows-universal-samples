@@ -1,23 +1,32 @@
 ﻿<!---
   category: ControlsLayoutAndText
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620570&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620570
 --->
 
 # Message dialog sample
 
-This sample demonstrates how to use a [**MessageDialog**](http://msdn.microsoft.com/library/windows/apps/br208674) for displaying dialogs, setting commands and the actions they will perform, and changing the default button.
+Shows how to use a [MessageDialog](http://msdn.microsoft.com/library/windows/apps/br208674) for displaying dialogs, setting commands and the actions they will perform, 
+and changing the default button.
 
-The [**Windows.UI.Popups**](http://msdn.microsoft.com/library/windows/apps/br242180) namespace contains the [**MessageDialog**](http://msdn.microsoft.com/library/windows/apps/br208674) class. You can use this class to present an urgent message that the user must acknowledge before continuing, or to present an urgent question that the user must answer.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+The [Windows.UI.Popups](http://msdn.microsoft.com/library/windows/apps/br242180) namespace contains the [MessageDialog](http://msdn.microsoft.com/library/windows/apps/br208674) 
+class. You can use this class to present an urgent message that the user must acknowledge before continuing, or to present an urgent question that the user must answer.
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
 
-[Adding message dialogs](http://msdn.microsoft.com/library/windows/apps/hh738361)
+[Adding message dialogs](http://msdn.microsoft.com/library/windows/apps/hh738361)  
 
 ## System requirements
 

@@ -15,13 +15,13 @@
     <mp:PhoneIdentity PhoneProductId="51b2b23d-cdd8-4ffa-a0e4-eea1c6263c8c" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>CashDrawer</DisplayName>
+        <DisplayName>Cash Drawer C# Sample</DisplayName>
         <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
         <Logo>Assets\StoreLogo-sdk.png</Logo>
     </Properties>
 
     <Dependencies>
-        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.14393.0" />
     </Dependencies>
 
     <Resources>
@@ -33,10 +33,10 @@
           Executable="$targetnametoken$.exe"
           EntryPoint="CashDrawer.App">
             <uap:VisualElements
-              DisplayName="CashDrawer"
+              DisplayName="Cash Drawer C# Sample"
               Square150x150Logo="Assets\SquareTile-sdk.png"
               Square44x44Logo="Assets\SmallTile-sdk.png"
-              Description="CashDrawer"
+              Description="Cash Drawer C# Sample"
               BackgroundColor="#00b2f0">
                 <uap:SplashScreen Image="Assets\Splash-sdk.png" />
                 <uap:DefaultTile>

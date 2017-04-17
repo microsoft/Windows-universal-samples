@@ -10,7 +10,7 @@
     <AssemblyName>Appointments</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -137,27 +137,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_Define.xaml">
+    <Page Include="..\shared\Scenario1_Define.xaml">
+      <Link>Scenario1_Define.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_Add.xaml">
+    <Page Include="..\shared\Scenario2_Add.xaml">
+      <Link>Scenario2_Add.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3_Replace.xaml">
+    <Page Include="..\shared\Scenario3_Replace.xaml">
+      <Link>Scenario3_Replace.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario4_Remove.xaml">
+    <Page Include="..\shared\Scenario4_Remove.xaml">
+      <Link>Scenario4_Remove.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario5_Show.xaml">
+    <Page Include="..\shared\Scenario5_Show.xaml">
+      <Link>Scenario5_Show.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario6_Recurrence.xaml">
+    <Page Include="..\shared\Scenario6_Recurrence.xaml">
+      <Link>Scenario6_Recurrence.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -18,10 +18,13 @@
     var DisplayOrientations = Windows.Graphics.Display.DisplayOrientations;
     var Imaging = Windows.Graphics.Imaging;
     var Media = Windows.Media;
+    var StorageLibrary = Windows.Storage.StorageLibrary;
+    var KnownLibraryId = Windows.Storage.KnownLibraryId;
+    var ApplicationData = Windows.Storage.ApplicationData;
 
     // Receive notifications about rotation of the device and UI and apply any necessary rotation to the preview stream and UI controls
     var oDisplayInformation = Windows.Graphics.Display.DisplayInformation.getForCurrentView(),
-        oDisplayOrientation = DisplayOrientations.portrait;
+        oDisplayOrientation = DisplayOrientations.landscape;
 
     // Prevent the screen from sleeping while the camera is running
     var oDisplayRequest = new Windows.System.Display.DisplayRequest();
@@ -42,6 +45,9 @@
     // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
     var RotationKey = "C380465D-2271-428C-9B83-ECEA3B4A85C1";
 
+    // Folder in which the captures will be stored (initialized in SetupUiAsync)
+    var oCaptureFolder;
+
     // Initialization
     var app = WinJS.Application;
     var activation = Windows.ApplicationModel.Activation;
@@ -49,7 +55,7 @@
         if (args.detail.kind === activation.ActivationKind.launch) {
             if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
                 document.getElementById("getPreviewFrameButton").addEventListener("click", getPreviewFrameButton_tapped);
-                previewFrameImage.src = null;
+                previewFrameImage.src = "";
             }
 
             oDisplayInformation.addEventListener("orientationchanged", displayInformation_orientationChanged);
@@ -117,11 +123,16 @@
 
             // Initialize media capture and start the preview
             return oMediaCapture.initializeAsync(settings);
+        }, function (error) {
+            console.log(error.message);
         }).then(function () {
             isInitialized = true;
             return startPreviewAsync();
-        }, function (error) {
-            console.log(error.message);
+        }).then(function () {
+            return StorageLibrary.getLibraryAsync(KnownLibraryId.pictures)
+        }).then(function (picturesLibrary) {
+            // Fall back to the local app storage if the Pictures Library is not available
+            oCaptureFolder = picturesLibrary.saveFolder || ApplicationData.current.localFolder;
         }).done();
     }
 
@@ -216,7 +227,7 @@
         // Cleanup the UI
         var previewVidTag = document.getElementById("cameraPreview");
         previewVidTag.pause();
-        previewVidTag.src = null;
+        previewVidTag.src = "";
 
         // Allow the device screen to sleep now that the preview is stopped
         oDisplayRequest.requestRelease();
@@ -248,13 +259,14 @@
 
             // Save and show the frame (as is, no rotation is being applied)
             if (saveShowFrameCheckBox.checked === true) {
-                return saveAndShowSoftwareBitmapAsync(frameBitmap);
+                return oCaptureFolder.createFileAsync("PreviewFrame.jpg", Windows.Storage.CreationCollisionOption.generateUniqueName)
+                .then(function (file) {
+                    return saveAndShowSoftwareBitmapAsync(frameBitmap, file);
+                })
             }
             else {
                 return WinJS.Promise.as();
             }
-        }, function (error) {
-            console.log(error.message);
         });
     }
 
@@ -286,34 +298,32 @@
             }
 
             // Clear the image
-            previewFrameImage.src = null;
-        }, function (error) {
-            console.log(error.message)
+            previewFrameImage.src = "";
         });
     }
 
     /// <summary>
-    /// Saves a SoftwareBitmap to the Pictures library with the specified name
+    /// Saves a SoftwareBitmap to the specified StorageFile
     /// </summary>
-    /// <param name="bitmap"></param>
+    /// <param name="bitmap">SoftwareBitmap to save</param>
+    /// <param name="file">Target StorageFile to save to</param>
     /// <returns></returns>
-    function saveAndShowSoftwareBitmapAsync(bitmap) {
-        var oFile = null;
-        return Windows.Storage.ApplicationData.current.localFolder.createFileAsync("PreviewFrame.jpg", Windows.Storage.CreationCollisionOption.generateUniqueName)
-        .then(function (file) {
-            oFile = file;
-            return file.openAsync(Windows.Storage.FileAccessMode.readWrite);
-        }).then(function (outputStream) {
-            return Imaging.BitmapEncoder.createAsync(Imaging.BitmapEncoder.jpegEncoderId, outputStream);
+    function saveAndShowSoftwareBitmapAsync(bitmap, file) {
+        var imageStream = null;
+        return file.openAsync(Windows.Storage.FileAccessMode.readWrite)
+        .then(function (outputStream) {
+            imageStream = outputStream;
+            return Imaging.BitmapEncoder.createAsync(Imaging.BitmapEncoder.jpegEncoderId, imageStream);
         }).then(function (encoder) {
             // Grab the data from the SoftwareBitmap
             encoder.setSoftwareBitmap(bitmap);
             return encoder.flushAsync();
-        }).done(function () {
+        }).then(function () {
+            var imageBlob = window.MSApp.createBlobFromRandomAccessStream("image/jpg", imageStream);
             // Finally display the image at the correct orientation
-            previewFrameImage.src = oFile.path;
+            previewFrameImage.src = URL.createObjectURL(imageBlob, { oneTimeOnly: true });
             previewFrameImage.style.transform = "rotate(" + convertDisplayOrientationToDegrees(oDisplayOrientation) + "deg)";
-        });
+        })
     }
 
 

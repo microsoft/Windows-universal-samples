@@ -1,13 +1,22 @@
 <!---
   category: NetworkingAndWebServices 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620606&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620606
 --->
 
 # Socket activity trigger stream socket sample
 
-This sample shows how to use the Socket Activity Stream Socket API to keep a socket connection alive beyond the lifetime of the application.
+Shows how to use the [StreamSocket](https://msdn.microsoft.com/library/windows/apps/windows.networking.sockets.streamsocket.aspx) Socket Activity Stream API 
+to keep a socket connection alive beyond the lifetime of the application.
 
-This sample connects to a server listening on TCP port 40404. The application can be terminated but the connection to the server will remain alive and will get background notifications if the server sends messages on the connection.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+This sample connects to a server listening on TCP port 40404. The application can be terminated but the connection to the server will remain alive 
+and will get background notifications if the server sends messages on the connection.
 
 This sample requires the following capabilities:
 
@@ -15,16 +24,16 @@ This sample requires the following capabilities:
 
 For more information on network capabilities, see [How to set network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532).
 
-**Note**  This sample uses IP loopback. Network communications using an IP loopback address cannot normally be used for inter process communication between a Universal Windows Platform (UWP) app and a different process (a different UWP app or a desktop app) because this is restricted by network isolation. Network communication using an IP loopback address is allowed within the same process for communication purposes in a UWP app.
-
+**Note**  This sample is comprised of two apps: SocketActivityStreamSocket (client-side) and StreamSocketListenerServer (server-side). Due to loopback restrictions 
+enforced by network isolation policy, these apps must run on separate machines for them to be able to communicate with each other. The sample scenario will not work 
+if both apps are running on the same machine.
 
 ## Related topics
 
 ### Other resources
 
-[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)
-
-[How to configure network isolation capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)
+[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)  
+[How to configure network isolation capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)  
 
 ## System requirements
 
@@ -38,7 +47,7 @@ For more information on network capabilities, see [How to set network capabiliti
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

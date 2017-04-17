@@ -1,11 +1,21 @@
 <!---
   category: TilesToastAndNotifications
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620577&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620577
 --->
 
 # Notifications sample
 
-This sample demonstrates the use of the various Toast and LiveTile related API, such as Windows.UI including Notifications, Popups, and StartScreen namespaces.
+Shows how to use the various Toast and LiveTile related APIs, such as 
+[Notification](https://msdn.microsoft.com/library/windows/apps/Windows.UI.Notifications.Notification.aspx), 
+[Popup](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.primitives.popup.aspx), 
+and the [Windows.UI.StartScreen](https://msdn.microsoft.com/library/windows/apps/windows.ui.startscreen.aspx) namespace.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 There are many scenarios in this sample broken down to three major sections:
  
@@ -15,7 +25,8 @@ There are many scenarios in this sample broken down to three major sections:
 
 ### Badge
 
-**Badges** are optional numbers of glyphs that are applied to **LiveTiles**. They enable the app to communicate whether the user has certain amount of notifications, or their attention is needed due to an event. They can also convey user status in a chat application.
+**Badges** are optional numbers of glyphs that are applied to **LiveTiles**. They enable the app to communicate whether the user has certain amount of notifications, 
+or their attention is needed due to an event. They can also convey user status in a chat application.
 
 **Scenarios include:**
 
@@ -26,7 +37,8 @@ There are many scenarios in this sample broken down to three major sections:
 
 ### LiveTile
 
-There are two kinds of **LiveTiles**, Primary and Secondary tiles. Primary tiles are persistent and only one exist for each individual application. Secondary tiles can be more numerous and be used as shortcuts to various locations within the app. **LiveTiles** need to be pinned to the Start Menu.
+There are two kinds of **LiveTiles**, Primary and Secondary tiles. Primary tiles are persistent and only one exist for each individual application. 
+Secondary tiles can be more numerous and be used as shortcuts to various locations within the app. **LiveTiles** need to be pinned to the Start Menu.
 
 **Scenarios include:**
 
@@ -53,7 +65,8 @@ There are two kinds of **LiveTiles**, Primary and Secondary tiles. Primary tiles
 
 ### Toast
 
-**Toast** notifications are small pop ups that appear on the screen for few seconds. They convey messages and can be customized to even play different sounds. New to Windows 10 are actionable toasts where a user has a choice to interact with the notifications by use of a button, for example.  
+**Toast** notifications are small pop ups that appear on the screen for few seconds. They convey messages and can be customized to even play different sounds. 
+New to Windows 10 are actionable toasts where a user has a choice to interact with the notifications by use of a button, for example.  
 
 **Scenarios Include:**
 
@@ -100,6 +113,10 @@ There are two kinds of **LiveTiles**, Primary and Secondary tiles. Primary tiles
   - Remove by Group
   - Clear All
 
+## See also
+
+[Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)  
+[Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)  
 
 ## System requirements
 
@@ -113,7 +130,7 @@ There are two kinds of **LiveTiles**, Primary and Secondary tiles. Primary tiles
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

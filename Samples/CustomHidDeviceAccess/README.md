@@ -1,17 +1,29 @@
 <!---
   category: DevicesSensorsAndPower
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620527&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620527
 --->
 
 # Custom HID device sample
 
-This sample shows how to use the [**Windows.Devices.HumanInterfaceDevices**](http://msdn.microsoft.com/library/windows/apps/dn264174) API. It was designed to work with a programmable, USB-based, HID device called the SuperMUTT.
+Shows how to use the [Windows.Devices.HumanInterfaceDevices](http://msdn.microsoft.com/library/windows/apps/dn264174) API. 
+Designed to work with a programmable, USB-based, HID device called the SuperMUTT.
 
-You can use the sample to toggle an LED on the device by sending feature reports. You can also retrieve a feature report to determine the current LED blink pattern. In addition, you can use the sample to send output reports, receive input reports, and receive input-report interrupts.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-If you are new to the HID protocol and concepts like: feature reports, input reports, and output reports, you can find more information [here](http://go.microsoft.com/fwlink/p/?linkid=296834).
+You can use the sample to toggle an LED on the device by sending feature reports. You can also retrieve a feature report 
+to determine the current LED blink pattern. In addition, you can use the sample to send output reports, receive input 
+reports, and receive input-report interrupts.
 
-You can purchase a SuperMUTT device from [JJG Technologies](http://go.microsoft.com/fwlink/p/?linkid=296610). (Note that you will need to update the device firmware before you can run the app.)
+If you are new to the HID protocol and concepts like: feature reports, input reports, and output reports, you can find 
+more information [here](http://go.microsoft.com/fwlink/p/?linkid=296834).
+
+You can purchase a SuperMUTT device from [JJG Technologies](http://go.microsoft.com/fwlink/p/?linkid=296610). 
+(Note that you will need to update the device firmware before you can run the app.)
 
 The sample demonstrates the following tasks:
 
@@ -77,7 +89,7 @@ Also, whenever the app is suspended, it executes code that disconnects from the 
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

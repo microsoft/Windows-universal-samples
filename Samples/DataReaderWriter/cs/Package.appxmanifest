@@ -11,7 +11,7 @@
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
-    <mp:PhoneIdentity PhoneProductId="05777116-8530-42a2-914d-9dae4b4da01a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="22491c71-e467-42ba-b05d-06e0712d7b0f" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>DataReader/Writer C# Sample</DisplayName>
@@ -20,7 +20,7 @@
     </Properties>
 
     <Dependencies>
-        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10058.0" MaxVersionTested="10.0.10058.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10058.0" MaxVersionTested="10.0.14393.0" />
     </Dependencies>
 
     <Resources>

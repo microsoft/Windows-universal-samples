@@ -34,7 +34,17 @@
                             Style="{StaticResource HomeButtonStyle}" 
                             HorizontalAlignment="Stretch" 
                             HorizontalContentAlignment="Left" />
-                </StackPanel>
+                    <Button Content="Restore Scroll Position Sample" 
+                            Click="NavigateToRestoreScrollPosition" 
+                            Style="{StaticResource HomeButtonStyle}" 
+                            HorizontalAlignment="Stretch" 
+                            HorizontalContentAlignment="Left" />
+                    <Button Content="Scroll into View"
+                            Click="NavigateToSpecificPosition"
+                            Style="{StaticResource HomeButtonStyle}"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Left" />
+            </StackPanel>
             </SplitView.Pane>
         </SplitView>
 </UserControl>

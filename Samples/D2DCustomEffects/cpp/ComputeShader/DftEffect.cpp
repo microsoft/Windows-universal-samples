@@ -78,10 +78,10 @@ IFACEMETHODIMP DftEffect::Initialize(
         sizeof(hardwareOptions)
         );
 
-    // As stated above, not all DX Feature Level 10_0 parts support compute shaders. In this app's case,
-    // it checks for compute shader support at device creation in DirectXBase.cpp. If support is missing,
-    // it uses a software fallback (WARP). All effects that use compute shaders should perform this
-    // check at instantiation.
+    // As stated above, not all DX Feature Level 10_0 parts support compute shaders. In this sample's case,
+    // it checks for compute shader support at device creation in DeviceResources. If support is missing,
+    // it uses the WARP software fallback, which is guaranteed to support compute.
+    // All effects that use compute shaders should perform this check at instantiation.
     if (SUCCEEDED(hr))
     {
         if (!hardwareOptions.computeShaders_Plus_RawAndStructuredBuffers_Via_Shader_4_x)

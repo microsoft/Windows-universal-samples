@@ -1,11 +1,27 @@
 ﻿<!---
   category: DeepLinksAndAppToAppCommunication 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620597&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620597
 --->
 
 # Sharing content target app sample
 
-This sample demonstrates how an app receives content shared from another app. This sample uses classes from the [**Windows.ApplicationModel.DataTransfer**](http://msdn.microsoft.com/library/windows/apps/br205967) and [**Windows.ApplicationModel.DataTransfer.Share**](http://msdn.microsoft.com/library/windows/apps/br205989) namespaces. Some of the classes you might want to review in more detail are the [**ShareOperation**](http://msdn.microsoft.com/library/windows/apps/br205977) class, which you use to manage a share operation, and the [**DataPackageView**](http://msdn.microsoft.com/library/windows/apps/hh738408) class, which you use to get the content being shared. Because each share scenario usually involves two apps—the source app that provides the content and a target app that receives the content—we recommend you install and deploy the  [**Sharing content source app sample**](http://go.microsoft.com/fwlink/p/?linkid=231511) when you install and run this one. That way, you can see how sharing works from end to end. 
+Shows how an app receives content shared from another app. This sample uses classes from the 
+[Windows.ApplicationModel.DataTransfer](http://msdn.microsoft.com/library/windows/apps/br205967) and 
+[Windows.ApplicationModel.DataTransfer.Share](http://msdn.microsoft.com/library/windows/apps/br205989) namespaces. 
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+Some of the classes you might want to review in more detail are the [ShareOperation](http://msdn.microsoft.com/library/windows/apps/br205977) 
+class, which you use to manage a share operation, and the [DataPackageView](http://msdn.microsoft.com/library/windows/apps/hh738408) class, 
+which you use to get the content being shared. Because each share scenario usually involves two apps—the source app that provides the content 
+and a target app that receives the content—we recommend you install and deploy the 
+[Sharing content source app sample](http://go.microsoft.com/fwlink/p/?linkid=231511) when you install and run this one. 
+That way, you can see how sharing works from end to end. 
 
 This sample covers how to receive shared content in a variety of formats, including:
 
@@ -32,11 +48,11 @@ For more info about the concepts and APIs demonstrated in this sample, see these
 - [How to receive text (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758304)
 - [How to receive text (XAML)](http://msdn.microsoft.com/library/windows/apps/hh973054)
 - [Quickstart: Receiving shared content (HTML)](http://msdn.microsoft.com/library/windows/apps/hh465255)
-- [Quickstart: Receiving shared content (XAML)](http://msdn.microsoft.com/library/windows/apps/hh871367)
-- [**DataPackageView**](http://msdn.microsoft.com/library/windows/apps/hh738408)
-- [**ShareOperation**](http://msdn.microsoft.com/library/windows/apps/br205977)
-- [**Windows.ApplicationModel.DataTransfer**](http://msdn.microsoft.com/library/windows/apps/br205967)
-- [**Windows.ApplicationModel.DataTransfer.Share**](http://msdn.microsoft.com/library/windows/apps/br205989)
+- [Receive data](https://msdn.microsoft.com/library/windows/apps/mt243292)
+- [DataPackageView](http://msdn.microsoft.com/library/windows/apps/hh738408)
+- [ShareOperation](http://msdn.microsoft.com/library/windows/apps/br205977)
+- [Windows.ApplicationModel.DataTransfer](http://msdn.microsoft.com/library/windows/apps/br205967)
+- [Windows.ApplicationModel.DataTransfer.Share](http://msdn.microsoft.com/library/windows/apps/br205989)
 
 
 

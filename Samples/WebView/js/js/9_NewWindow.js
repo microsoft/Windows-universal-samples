@@ -30,7 +30,7 @@
     }
 
     function onNewWindowRequested(e) {
-        if (e.referrer.search("ms-appx-web") >= 0) {
+        if (e.referer.search("ms-appx-web") >= 0) {
             // create a new webview and open the page in that webview
             var webView = document.createElement("x-ms-webview");
             webView.navigate(e.uri);

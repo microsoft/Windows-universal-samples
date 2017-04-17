@@ -41,35 +41,9 @@ namespace AppUIBasics
             }
         }
 
-        private ICommand _goBackCommand;
-        public ICommand GoBackCommand
-        {
-            get
-            {
-                if (_goBackCommand == null)
-                {
-                    _goBackCommand = new RelayCommand(() =>
-                    {
-                        NavigationRootPage.RootFrame.GoBack();
-                    }, () =>
-                    {
-                        return NavigationRootPage.RootFrame != null &&
-                        NavigationRootPage.RootFrame.CanGoBack;
-                    });
-                }
-                return _goBackCommand;
-            }
-        }
-
         public PageHeader()
         {
             this.InitializeComponent();
-
-            if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-            {
-                //Remove the backbutton because physical buttons are present
-                backButton.Visibility = Visibility.Collapsed;
-            }
         }
 
         private async void controlsSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)

@@ -11,7 +11,7 @@
     <AssemblyName>XamlListView</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -97,6 +97,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Item.cs" />
     <Compile Include="SamplesPane.xaml.cs">
       <DependentUpon>SamplesPane.xaml</DependentUpon>
     </Compile>
@@ -108,6 +109,15 @@
     </Compile>
     <Compile Include="Model\Contact.cs" />
     <Compile Include="Model\GroupInfoList.cs" />
+    <Compile Include="Samples\RestoreScrollPositionSample\Page2.xaml.cs">
+      <DependentUpon>Page2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\RestoreScrollPositionSample\RestoreScrollPositionSample.xaml.cs">
+      <DependentUpon>RestoreScrollPositionSample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\ScrollIntoViewSample\ScrollIntoViewSample.xaml.cs">
+      <DependentUpon>ScrollIntoViewSample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\SimpleGridViewSample\SimpleGridViewSample.xaml.cs">
       <DependentUpon>SimpleGridViewSample.xaml</DependentUpon>
     </Compile>
@@ -126,7 +136,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
+      <Link>Properties\Default.rd.xml</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\..\SharedContent\media\smalltile-sdk.png">
@@ -143,6 +155,44 @@
     </Content>
     <Content Include="..\..\..\SharedContent\media\tile-sdk.png">
       <Link>Assets\tile-sdk.png</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\SharedContent\media\Samples\cliff.jpg">
+      <Link>Assets\cliff.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\grapes_background.jpg">
+      <Link>Assets\grapes_background.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage13.jpg">
+      <Link>Assets\LandscapeImage13.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage2.jpg">
+      <Link>Assets\LandscapeImage2.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage24.jpg">
+      <Link>Assets\LandscapeImage24.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage3.jpg">
+      <Link>Assets\LandscapeImage3.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage6.jpg">
+      <Link>Assets\LandscapeImage6.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage7.jpg">
+      <Link>Assets\LandscapeImage7.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\Ring01.jpg">
+      <Link>Assets\Ring01.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\Ring03Part1.jpg">
+      <Link>Assets\Ring03Part1.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\Ring03Part3.jpg">
+      <Link>Assets\Ring03Part3.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\sunset.jpg">
+      <Link>Assets\sunset.jpg</Link>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +213,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Samples\MasterDetailSelection\MasterDetailSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\RestoreScrollPositionSample\Page2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\RestoreScrollPositionSample\RestoreScrollPositionSample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\ScrollIntoViewSample\ScrollIntoViewSample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

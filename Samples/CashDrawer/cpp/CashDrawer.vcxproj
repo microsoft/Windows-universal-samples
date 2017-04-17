@@ -8,7 +8,7 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
@@ -146,13 +146,13 @@
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_OpenDrawer.xaml.h">
-      <DependentUpon>Scenario1_OpenDrawer.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_OpenDrawer.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario2_CloseDrawer.xaml.h">
-      <DependentUpon>Scenario2_CloseDrawer.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_CloseDrawer.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario3_MultipleDrawers.xaml.h">
-      <DependentUpon>Scenario3_MultipleDrawers.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_MultipleDrawers.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -162,9 +162,9 @@
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_OpenDrawer.xaml" />
-    <Page Include="Scenario2_CloseDrawer.xaml" />
-    <Page Include="Scenario3_MultipleDrawers.xaml" />
+    <Page Include="..\shared\Scenario1_OpenDrawer.xaml" />
+    <Page Include="..\shared\Scenario2_CloseDrawer.xaml" />
+    <Page Include="..\shared\Scenario3_MultipleDrawers.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -191,13 +191,13 @@
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="Scenario1_OpenDrawer.xaml.cpp">
-      <DependentUpon>Scenario1_OpenDrawer.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_OpenDrawer.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario2_CloseDrawer.xaml.cpp">
-      <DependentUpon>Scenario2_CloseDrawer.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_CloseDrawer.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario3_MultipleDrawers.xaml.cpp">
-      <DependentUpon>Scenario3_MultipleDrawers.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_MultipleDrawers.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

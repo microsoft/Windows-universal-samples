@@ -37,8 +37,48 @@
 
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel Orientation="Horizontal" Grid.Row="0">
-                    <MediaElement x:Name="MyMediaElement" Margin="0,0,10,0" AudioCategory="Media" AreTransportControlsEnabled="True" VerticalAlignment="Top"/>
-                    <Button x:Name="SelectFilesButton" Content="Select Files" Click="SelectFilesButton_Click" VerticalAlignment="Top"/>
+                    <MediaPlayerElement x:Name="mediaPlayerElement" Margin="0,0,10,0" AreTransportControlsEnabled="False" VerticalAlignment="Top"/>
+                    <Grid VerticalAlignment="Bottom" Margin="10,40,0,0">
+                        <Grid.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="Margin" Value="0,0,0,5" />
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid x:Name="transportControls" Grid.Row="0">
+                            <Grid.Resources>
+                                <Style TargetType="Button">
+                                    <Setter Property="Margin" Value="0,0,5,5" />
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="previousButton" Height="Auto" Width="Auto" Grid.Column="0"
+                                    IsEnabled="False"
+                                    Click="previousButton_Click">
+                                <SymbolIcon Symbol="Previous"/>
+                            </Button>
+                            <Button x:Name="playPauseButton" Height="Auto" Width="Auto" Grid.Column="1"
+                                    IsEnabled="False"
+                                    Click="playPauseButton_Click">
+                                <SymbolIcon Symbol="Play"/>
+                            </Button>
+                            <Button x:Name="nextButton" Height="Auto" Width="Auto" Grid.Column="2"
+                                    IsEnabled="False"
+                                    Click="nextButton_Click">
+                                <SymbolIcon Symbol="Next"/>
+                            </Button>
+                        </Grid>
+                        <Grid x:Name="fileButton" Grid.Column="0" Grid.Row="1">
+                            <Button x:Name="SelectFilesButton" Content="Select Files" Click="SelectFilesButton_Click" VerticalAlignment="Bottom"/>
+                        </Grid>
+                    </Grid>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

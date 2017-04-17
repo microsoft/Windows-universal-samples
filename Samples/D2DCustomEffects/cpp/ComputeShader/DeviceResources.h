@@ -25,6 +25,7 @@ namespace DX
     {
     public:
         DeviceResources();
+        DeviceResources(_In_ bool forceWarpDevice);
         void SetWindow(Windows::UI::Core::CoreWindow^ window);
         void SetLogicalSize(Windows::Foundation::Size logicalSize);
         void SetCurrentOrientation(Windows::Graphics::Display::DisplayOrientations currentOrientation);
@@ -95,6 +96,7 @@ namespace DX
         Windows::Graphics::Display::DisplayOrientations m_nativeOrientation;
         Windows::Graphics::Display::DisplayOrientations m_currentOrientation;
         float                                           m_dpi;
+        bool                                            m_forceWarpDevice;
 
         // Transforms used for display orientation.
         D2D1::Matrix3x2F    m_orientationTransform2D;

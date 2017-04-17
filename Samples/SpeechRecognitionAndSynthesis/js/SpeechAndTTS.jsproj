@@ -37,8 +37,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
@@ -140,6 +140,18 @@
       <Link>SRGS\en-GB\SRGSColors.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\shared\SRGS\en-CA\SRGSColors.xml">
+      <Link>SRGS\en-CA\SRGSColors.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\shared\SRGS\en-AU\SRGSColors.xml">
+      <Link>SRGS\en-AU\SRGSColors.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\shared\SRGS\en-IN\SRGSColors.xml">
+      <Link>SRGS\en-IN\SRGSColors.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\shared\SRGS\en-US\SRGSColors.xml">
       <Link>SRGS\en-US\SRGSColors.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -229,6 +241,31 @@
   <ItemGroup>
     <PRIResource Include="..\shared\Strings\en-GB\LocalizationTTSResources.resjson">
       <Link>Strings\en-GB\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-CA\LocalizationSpeechResources.resjson">
+      <Link>Strings\en-CA\LocalizationSpeechResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-CA\LocalizationTTSResources.resjson">
+      <Link>Strings\en-CA\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-AU\LocalizationSpeechResources.resjson">
+      <Link>Strings\en-AU\LocalizationSpeechResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-AU\LocalizationTTSResources.resjson">
+      <Link>Strings\en-AU\LocalizationTTSResources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\shared\Strings\en-IN\LocalizationSpeechResources.resjson">
+      <Link>Strings\en-IN\LocalizationSpeechResources.resjson</Link>
     </PRIResource>
   </ItemGroup>
   <ItemGroup>

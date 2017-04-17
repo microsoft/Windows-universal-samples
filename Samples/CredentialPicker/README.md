@@ -1,13 +1,19 @@
 ﻿<!---
   category: IdentitySecurityAndEncryption
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620526&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620526
 --->
 
 # Credential picker sample
 
-This sample shows how to use the Windows.Security.Credentials.UI.CredentialPicker class to retrieve credentials, which can then be passed to APIs that may require credentials (for example, HttpClient). This can be used in support of single sign on (SSO).
+Shows how to use the Windows.Security.Credentials.UI.CredentialPicker class to retrieve credentials, 
+which can then be passed to APIs that may require credentials (for example, HttpClient). This can be used in support of single sign on (SSO).
 
-**Note**  This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on both Windows 10 and Windows Phone 10.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample allows the user launch different types of credential prompts. You can choose one of three scenarios: 
 - Message
@@ -22,8 +28,8 @@ Windows 10
 Related topics
 ---------------
 
-[Windows.Security.Credentials] (https://msdn.microsoft.com/library/windows/apps/br227089)
-[Windows.Security.Credentials.UI] (https://msdn.microsoft.com/library/windows/apps/hh701356)
+[Windows.Security.Credentials] (https://msdn.microsoft.com/library/windows/apps/br227089)  
+[Windows.Security.Credentials.UI] (https://msdn.microsoft.com/library/windows/apps/hh701356)  
 
 Build the sample
 ----------------

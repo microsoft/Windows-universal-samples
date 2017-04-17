@@ -12,7 +12,6 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using MediaTranscodingSample;
 
 namespace SDKTemplate
 {

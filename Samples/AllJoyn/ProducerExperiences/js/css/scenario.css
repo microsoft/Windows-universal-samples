@@ -1,0 +1,9 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+/* styles */
+
+.selectableText{
+-ms-user-select: text;
+}

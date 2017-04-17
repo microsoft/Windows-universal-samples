@@ -1,34 +1,40 @@
 ﻿<!---
   category: Navigation
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620582&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620582
 --->
 
 # XHR, handling navigation errors, and URL schemes sample
 
-This sample demonstrates how to handle navigation errors, how to use the right URL scheme to reference packaged content, and how to use [**XMLHttpRequest**](http://msdn.microsoft.com/library/windows/apps/hh453379) (XHR) to retrieve remote and local content.
+Shows how to handle navigation errors, how to use the right URL scheme to reference packaged content, and how to use
+[XMLHttpRequest](http://msdn.microsoft.com/library/windows/apps/hh453379) (XHR) to retrieve remote and local content.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 For more info about the concepts and APIs demonstrated in this sample, see these topics:
 
 -   [How to reference content](http://msdn.microsoft.com/library/windows/apps/hh781215)
 -   [How to link to external web pages](http://msdn.microsoft.com/library/windows/apps/hh780594)
 -   [Quickstart: Using single-page navigation](http://msdn.microsoft.com/library/windows/apps/hh452768)
--   [How to create a mashup](http://msdn.microsoft.com/library/windows/apps/)
+-   [How to create a mashup](http://msdn.microsoft.com/library/windows/apps/hh452745)
 
 This sample is written in HTML, CSS, and JavaScript.
 
 Related topics
 --------------
 
-[How to link to external web pages](http://msdn.microsoft.com/library/windows/apps/hh780594)
-
-[How to reference content](http://msdn.microsoft.com/library/windows/apps/hh781215)
-
-[Quickstart: Using single-page navigation](http://msdn.microsoft.com/library/windows/apps/hh452768)
+[How to link to external web pages](http://msdn.microsoft.com/library/windows/apps/hh780594)  
+[How to reference content](http://msdn.microsoft.com/library/windows/apps/hh781215)  
+[Quickstart: Using single-page navigation](http://msdn.microsoft.com/library/windows/apps/hh452768)  
 
 Related technologies
 --------------------
 
-[Windows 10 apps using JavaScript](http://msdn.microsoft.com/library/windows/apps/br211385)
+[Windows 10 apps using JavaScript](http://msdn.microsoft.com/library/windows/apps/br211385)  
 
 Operating system requirements
 -----------------------------

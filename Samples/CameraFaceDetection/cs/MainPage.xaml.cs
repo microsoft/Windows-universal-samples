@@ -40,7 +40,7 @@ using Windows.Media.FaceAnalysis;
 using Windows.UI;
 using System.Collections.Generic;
 
-namespace CameraFaceDetection
+namespace FaceDetection
 {
 
     public sealed partial class MainPage : Page
@@ -54,6 +54,9 @@ namespace CameraFaceDetection
         // Rotation metadata to apply to the preview stream and recorded videos (MF_MT_VIDEO_ROTATION)
         // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
         private static readonly Guid RotationKey = new Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1");
+
+        // Folder in which the captures will be stored (initialized in SetupUiAsync)
+        private StorageFolder _captureFolder = null;
 
         // Prevent the screen from sleeping while the camera is running
         private readonly DisplayRequest _displayRequest = new DisplayRequest();
@@ -198,12 +201,12 @@ namespace CameraFaceDetection
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => UpdateButtonOrientation());
         }
 
-        private async void PhotoButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void PhotoButton_Click(object sender, RoutedEventArgs e)
         {
             await TakePhotoAsync();
         }
 
-        private async void VideoButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void VideoButton_Click(object sender, RoutedEventArgs e)
         {
             if (!_isRecording)
             {
@@ -218,7 +221,7 @@ namespace CameraFaceDetection
             UpdateCaptureControls();
         }
 
-        private async void FaceDetectionButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void FaceDetectionButton_Click(object sender, RoutedEventArgs e)
         {
             if (_faceDetectionEffect == null || !_faceDetectionEffect.Enabled)
             {
@@ -307,10 +310,6 @@ namespace CameraFaceDetection
                 {
                     Debug.WriteLine("The app was denied access to the camera");
                 }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Exception when initializing MediaCapture with {0}: {1}", cameraDevice.Id, ex.ToString());
-                }
 
                 // If initialization succeeded, start the preview
                 if (_isInitialized)
@@ -351,16 +350,8 @@ namespace CameraFaceDetection
             PreviewControl.FlowDirection = _mirroringPreview ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
             // Start the preview
-            try
-            {
-                await _mediaCapture.StartPreviewAsync();
-
-                _previewProperties = _mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Exception when starting the preview: {0}", ex.ToString());
-            }
+            await _mediaCapture.StartPreviewAsync();
+            _previewProperties = _mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview);
 
             // Initialize the preview to the current orientation
             if (_previewProperties != null)
@@ -401,15 +392,8 @@ namespace CameraFaceDetection
         private async Task StopPreviewAsync()
         {
             // Stop the preview
-            try
-            {
-                _previewProperties = null;
-                await _mediaCapture.StopPreviewAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Exception when stopping the preview: {0}", ex.ToString());
-            }
+            _previewProperties = null;
+            await _mediaCapture.StopPreviewAsync();
 
             // Use the dispatcher because this method is sometimes called from non-UI threads
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -462,8 +446,8 @@ namespace CameraFaceDetection
             // Unregister the event handler
             _faceDetectionEffect.FaceDetected -= FaceDetectionEffect_FaceDetected;
 
-            // Remove the effect from the preview stream
-            await _mediaCapture.ClearEffectsAsync(MediaStreamType.VideoPreview);
+            // Remove the effect (see ClearEffectsAsync method to remove all effects from a stream)
+            await _mediaCapture.RemoveEffectAsync(_faceDetectionEffect);
 
             // Clear the member variable that held the effect instance
             _faceDetectionEffect = null;
@@ -475,7 +459,7 @@ namespace CameraFaceDetection
         /// <returns></returns>
         private async Task TakePhotoAsync()
         {
-            // While taking a photo, keep the video button enabled only if the camera supports simultaneosly taking pictures and recording video
+            // While taking a photo, keep the video button enabled only if the camera supports simultaneously taking pictures and recording video
             VideoButton.IsEnabled = _mediaCapture.MediaCaptureSettings.ConcurrentRecordAndPhotoSupported;
 
             // Make the button invisible if it's disabled, so it's obvious it cannot be interacted with
@@ -483,19 +467,25 @@ namespace CameraFaceDetection
 
             var stream = new InMemoryRandomAccessStream();
 
+            Debug.WriteLine("Taking photo...");
+            await _mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream);
+
             try
             {
-                Debug.WriteLine("Taking photo...");
-                await _mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream);
-                Debug.WriteLine("Photo taken!");
+                var file = await _captureFolder.CreateFileAsync("SimplePhoto.jpg", CreationCollisionOption.GenerateUniqueName);
+
+                Debug.WriteLine("Photo taken! Saving to " + file.Path);
 
                 var photoOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
 
-                await ReencodeAndSavePhotoAsync(stream, photoOrientation);
+                await ReencodeAndSavePhotoAsync(stream, file, photoOrientation);
+
+                Debug.WriteLine("Photo saved!");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Exception when taking a photo: {0}", ex.ToString());
+                // File I/O errors are reported as exceptions
+                Debug.WriteLine("Exception when taking a photo: " + ex.ToString());
             }
 
             // Done taking a photo, so re-enable the button
@@ -511,8 +501,8 @@ namespace CameraFaceDetection
         {
             try
             {
-                // Create storage file in Pictures Library
-                var videoFile = await KnownFolders.PicturesLibrary.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
+                // Create storage file for the capture
+                var videoFile = await _captureFolder.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
 
                 var encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
 
@@ -520,7 +510,7 @@ namespace CameraFaceDetection
                 var rotationAngle = 360 - ConvertDeviceOrientationToDegrees(GetCameraOrientation());
                 encodingProfile.Video.Properties.Add(RotationKey, PropertyValue.CreateInt32(rotationAngle));
 
-                Debug.WriteLine("Starting recording...");
+                Debug.WriteLine("Starting recording to " + videoFile.Path);
 
                 await _mediaCapture.StartRecordToStorageFileAsync(encodingProfile, videoFile);
                 _isRecording = true;
@@ -529,7 +519,8 @@ namespace CameraFaceDetection
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Exception when starting video recording: {0}", ex.ToString());
+                // File I/O errors are reported as exceptions
+                Debug.WriteLine("Exception when starting video recording: " + ex.ToString());
             }
         }
 
@@ -539,19 +530,12 @@ namespace CameraFaceDetection
         /// <returns></returns>
         private async Task StopRecordingAsync()
         {
-            try
-            {
-                Debug.WriteLine("Stopping recording...");
+            Debug.WriteLine("Stopping recording...");
 
-                _isRecording = false;
-                await _mediaCapture.StopRecordAsync();
+            _isRecording = false;
+            await _mediaCapture.StopRecordAsync();
 
-                Debug.WriteLine("Stopped recording!");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Exception when stopping video recording: {0}", ex.ToString());
-            }
+            Debug.WriteLine("Stopped recording!");
         }
 
         /// <summary>
@@ -623,6 +607,10 @@ namespace CameraFaceDetection
             }
             
             RegisterEventHandlers();
+
+            var picturesLibrary = await StorageLibrary.GetLibraryAsync(KnownLibraryId.Pictures);
+            // Fall back to the local app storage if the Pictures Library is not available
+            _captureFolder = picturesLibrary.SaveFolder ?? ApplicationData.Current.LocalFolder;
         }
 
         /// <summary>
@@ -737,15 +725,14 @@ namespace CameraFaceDetection
         /// Applies the given orientation to a photo stream and saves it as a StorageFile
         /// </summary>
         /// <param name="stream">The photo stream</param>
+        /// <param name="file">The StorageFile in which the photo stream will be saved</param>
         /// <param name="photoOrientation">The orientation metadata to apply to the photo</param>
         /// <returns></returns>
-        private static async Task ReencodeAndSavePhotoAsync(IRandomAccessStream stream, PhotoOrientation photoOrientation)
+        private static async Task ReencodeAndSavePhotoAsync(IRandomAccessStream stream, StorageFile file, PhotoOrientation photoOrientation)
         {
             using (var inputStream = stream)
             {
                 var decoder = await BitmapDecoder.CreateAsync(inputStream);
-
-                var file = await KnownFolders.PicturesLibrary.CreateFileAsync("SimplePhoto.jpeg", CreationCollisionOption.GenerateUniqueName);
 
                 using (var outputStream = await file.OpenAsync(FileAccessMode.ReadWrite))
                 {

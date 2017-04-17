@@ -1,17 +1,25 @@
 ﻿<!---
   category: GlobalizationAndLocalization
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620612&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620612
 --->
 
 # Text suggestions sample
 
-This sample shows how to get text suggestion(including Conversion, Prediction, Reverse Conversion) results when it is available to given language. 
+Shows how to get text suggestion (including Conversion, Prediction, Reverse Conversion) results when it is available to given language. 
 
-**Note**  For Windows 10 app samples, download the Windows 10 app samples pack. The samples in the Windows 10 app samples pack will build and run only on Microsoft Visual Studio 2015.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-**Reference**
+## Reference
 
-[**Windows.Data.Text**](http://msdn.microsoft.com/library/windows/apps/dn263535)
+[Windows.Data.Text](http://msdn.microsoft.com/library/windows/apps/dn263535)  
+[TextConversionGenerator class](http://msdn.microsoft.com/library/windows/apps/xaml/windows.data.text.textconversiongenerator.aspx)  
+[TextPredictionGenerator class](http://msdn.microsoft.com/library/windows/apps/xaml/windows.data.text.textpredictiongenerator.aspx)  
+[TextReverseConversionGenerator class](http://msdn.microsoft.com/library/windows/apps/xaml/windows.data.text.textreverseconversiongenerator.aspx)  
 
 ## Operating system requirements
 

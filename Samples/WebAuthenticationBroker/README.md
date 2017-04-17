@@ -1,15 +1,21 @@
 ﻿<!---
   category: IdentitySecurityAndEncryption
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620622&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620622
 --->
 
 # WebAuthenticationBroker sample
 
-This sample shows how you can use the WebAuthenticationBroker class to connect to OAuth providers such as Facebook, Flickr, Google, and Twitter.
+Shows how to use the WebAuthenticationBroker class to connect to OAuth providers such as Facebook, Flickr, Google, and Twitter.
 
-**Note** This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on both Windows 10 and Windows Phone 10.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-Shows using the OAuth protocol for authentication and authorization. You can choose one of three scenarios: 
+Specifically, this sample shows you how to use the OAuth protocol for authentication and authorization. You can choose one of three scenarios: 
+
 - Facebook [C++, C#, JS]
 - Twitter [C#, JS]
 - Flickr [C#, JS]
@@ -17,15 +23,14 @@ Shows using the OAuth protocol for authentication and authorization. You can cho
 
 ## Related Topics
 
-[Web Authentication Broker](http://msdn.microsoft.com/library/windows/apps/)
-[Quickstart: Connecting using XML HTTP Request](http://msdn.microsoft.com/library/windows/apps/hh770550)
-[Setting up single sign-on using the web authentication broker](http://msdn.microsoft.com/library/windows/apps/hh465283)
+[Quickstart: Connecting using XML HTTP Request](http://msdn.microsoft.com/library/windows/apps/hh770550)  
+[Setting up single sign-on using the web authentication broker](http://msdn.microsoft.com/library/windows/apps/hh465283)  
 
-[WebAccount](http://msdn.microsoft.com/library/windows/apps/dn279122)
-[WebAccountCommand](http://msdn.microsoft.com/library/windows/apps/dn298413)
-[WebAccountProvider](http://msdn.microsoft.com/library/windows/apps/dn279123)
-[WebAuthenticationBroker](http://msdn.microsoft.com/library/windows/apps/br227025)
-[Windows.Security.Authentication.Web](http://msdn.microsoft.com/library/windows/apps/br227044)
+[WebAccount](http://msdn.microsoft.com/library/windows/apps/dn279122)  
+[WebAccountCommand](http://msdn.microsoft.com/library/windows/apps/dn298413)  
+[WebAccountProvider](http://msdn.microsoft.com/library/windows/apps/dn279123)  
+[WebAuthenticationBroker](http://msdn.microsoft.com/library/windows/apps/br227025)  
+[Windows.Security.Authentication.Web](http://msdn.microsoft.com/library/windows/apps/br227044)  
 
 ## Obtaining Client Ids For Use with OAuth APIs
 

@@ -1,11 +1,22 @@
 ﻿<!---
   category: ControlsLayoutAndText
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620520&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620520
 --->
 
 # Clipboard sample
 
-This sample demonstrates how an app can use clipboard commands, including copy, paste, cut, and move. This sample uses classes from the [**Windows.ApplicationModel.DataTransfer**](http://msdn.microsoft.com/library/windows/apps/br205967) namespace. Some of the classes you might want to review in more detail include the [**Clipboard**](http://msdn.microsoft.com/library/windows/apps/br205867) class, which accesses the Clipboard, and the [**DataPackage**](http://msdn.microsoft.com/library/windows/apps/br205873) class, which you use to package the content before adding it to the Clipboard.
+Shows how to use clipboard commands, including copy, paste, cut, and move. 
+This sample uses classes from the [Windows.ApplicationModel.DataTransfer](http://msdn.microsoft.com/library/windows/apps/br205967) namespace. 
+Some of the classes you might want to review in more detail include the [Clipboard](http://msdn.microsoft.com/library/windows/apps/br205867) class, 
+which accesses the Clipboard, and the [DataPackage](http://msdn.microsoft.com/library/windows/apps/br205873) class, which you use to package the 
+content before adding it to the Clipboard.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample covers the following:
 
@@ -17,7 +28,7 @@ This sample covers the following:
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
@@ -25,13 +36,10 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[**Clipboard**](http://msdn.microsoft.com/library/windows/apps/br205867)
-
-[Guidelines and checklist for clipboard commands](http://msdn.microsoft.com/library/windows/apps/hh700347)
-
-[QuickStart: Clipboard basics](http://msdn.microsoft.com/library/windows/apps/hh750308)
-
-[**Windows.ApplicationModel.DataTransfer**](http://msdn.microsoft.com/library/windows/apps/br205967)
+[Clipboard](http://msdn.microsoft.com/library/windows/apps/br205867)  
+[Guidelines and checklist for clipboard commands](http://msdn.microsoft.com/library/windows/apps/hh700347)  
+[QuickStart: Clipboard basics](http://msdn.microsoft.com/library/windows/apps/hh750308)  
+[Windows.ApplicationModel.DataTransfer](http://msdn.microsoft.com/library/windows/apps/br205967)  
 
 ## System requirements
 

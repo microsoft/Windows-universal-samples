@@ -47,6 +47,7 @@ MainPage::MainPage()
     , _displayOrientation(DisplayOrientations::Portrait)
     , _displayRequest(ref new Windows::System::Display::DisplayRequest())
     , RotationKey({ 0xC380465D, 0x2271, 0x428C,{ 0x9B, 0x83, 0xEC, 0xEA, 0x3B, 0x4A, 0x85, 0xC1 } })
+    , _captureFolder(nullptr)
 {
     InitializeComponent();
 
@@ -125,30 +126,17 @@ task<void> MainPage::InitializeCameraAsync()
             {
                 UpdateCaptureControls();
             });
-            // Different return types, must do the error checking here since we cannot return and send
-            // execeptions back up the chain.
         }).then([this](task<void> previousTask)
         {
             try
             {
                 previousTask.get();
             }
-            catch (Exception^ ex)
+            catch (AccessDeniedException^ ex)
             {
-                WriteException(ex);
+                WriteLine("The app was denied access to the camera");
             }
         });
-        // Catch any exceptions that may have been thrown along the way
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -227,16 +215,6 @@ task<void> MainPage::StartPreviewAsync()
 
         // Not external, just return the previous task
         return previousTask;
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -280,16 +258,6 @@ task<void> MainPage::StopPreviewAsync()
             // Allow the device screen to sleep now that the preview is stopped
             _displayRequest->RequestRelease();
         }));
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -325,16 +293,6 @@ task<void> MainPage::CreateFaceDetectionEffectAsync()
 
         // Start detecting faces
         _faceDetectionEffect->Enabled = true;
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -350,20 +308,12 @@ task<void> MainPage::CleanUpFaceDetectionEffectAsync()
     // Unregister the event handler
     _faceDetectionEffect->FaceDetected -= _faceDetectedEventToken;
 
-    // Remove the effect from the preview stream
-    return create_task(_mediaCapture->ClearEffectsAsync(Capture::MediaStreamType::VideoPreview))
-        .then([this](task<void> previousTask)
+    // Remove the effect (see ClearEffectsAsync method to remove all effects from a stream)
+    return create_task(_mediaCapture->RemoveEffectAsync(_faceDetectionEffect))
+        .then([this]()
     {
-        try
-        {
-            // Clear the member variable that held the effect instance
-            _faceDetectionEffect = nullptr;
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
+        // Clear the member variable that held the effect instance
+        _faceDetectionEffect = nullptr;
     });
 }
 
@@ -385,14 +335,17 @@ task<void> MainPage::TakePhotoAsync()
     return create_task(_mediaCapture->CapturePhotoToStreamAsync(Windows::Media::MediaProperties::ImageEncodingProperties::CreateJpeg(), inputStream))
         .then([this, inputStream]()
     {
-        WriteLine("Photo taken!");
+        return create_task(_captureFolder->CreateFileAsync("SimplePhoto.jpg", CreationCollisionOption::GenerateUniqueName));
+    }).then([this, inputStream](StorageFile^ file)
+    {
+        WriteLine("Photo taken! Saving to " + file->Path);
 
         // Done taking a photo, so re-enable the button
         VideoButton->IsEnabled = true;
         VideoButton->Opacity = 1;
 
         auto photoOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
-        return ReencodeAndSavePhotoAsync(inputStream, photoOrientation);
+        return ReencodeAndSavePhotoAsync(inputStream, file, photoOrientation);
     }).then([this](task<void> previousTask)
     {
         try
@@ -401,6 +354,7 @@ task<void> MainPage::TakePhotoAsync()
         }
         catch (Exception^ ex)
         {
+            // File I/O errors are reported as exceptions
             WriteException(ex);
         }
     });
@@ -412,7 +366,7 @@ task<void> MainPage::TakePhotoAsync()
 /// <returns></returns>
 task<void> MainPage::StartRecordingAsync()
 {
-    return create_task(KnownFolders::PicturesLibrary->CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption::GenerateUniqueName))
+    return create_task(_captureFolder->CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption::GenerateUniqueName))
         .then([this](StorageFile^ file)
     {
         // Calculate rotation angle, taking mirroring into account if necessary
@@ -420,12 +374,11 @@ task<void> MainPage::StartRecordingAsync()
         auto encodingProfile = MediaProperties::MediaEncodingProfile::CreateMp4(MediaProperties::VideoEncodingQuality::Auto);
         encodingProfile->Video->Properties->Insert(RotationKey, rotationAngle);
 
-        WriteLine("Starting recording...");
         return create_task(_mediaCapture->StartRecordToStorageFileAsync(encodingProfile, file))
-            .then([this]()
+            .then([this, file]()
         {
             _isRecording = true;
-            WriteLine("Started recording!");
+            WriteLine("Started recording to " + file->Path);
         });
     }).then([this](task<void> previousTask)
     {
@@ -435,6 +388,7 @@ task<void> MainPage::StartRecordingAsync()
         }
         catch (Exception^ ex)
         {
+            // File I/O errors are reported as exceptions
             WriteException(ex);
         }
     });
@@ -453,16 +407,6 @@ task<void> MainPage::StopRecordingAsync()
         .then([this]()
     {
         WriteLine("Stopped recording!");
-    }).then([this](task<void> previousTask)
-    {
-        try
-        {
-            previousTask.get();
-        }
-        catch (Exception^ ex)
-        {
-            WriteException(ex);
-        }
     });
 }
 
@@ -479,7 +423,7 @@ task<DeviceInformation^> MainPage::FindCameraDeviceByPanelAsync(Windows::Devices
     auto deviceEnumTask = create_task(allVideoDevices);
     return deviceEnumTask.then([panel](DeviceInformationCollection^ devices)
     {
-        for each(auto cameraDeviceInfo in devices)
+        for (auto cameraDeviceInfo : devices)
         {
             if (cameraDeviceInfo->EnclosureLocation != nullptr && cameraDeviceInfo->EnclosureLocation->Panel == panel)
             {
@@ -503,35 +447,34 @@ task<DeviceInformation^> MainPage::FindCameraDeviceByPanelAsync(Windows::Devices
 /// Applies the given orientation to a photo stream and saves it as a StorageFile
 /// </summary>
 /// <param name="stream">The photo stream</param>
+/// <param name="file">The StorageFile in which the photo stream will be saved</param>
 /// <param name="photoOrientation">The orientation metadata to apply to the photo</param>
 /// <returns></returns>
-task<void> MainPage::ReencodeAndSavePhotoAsync(Streams::IRandomAccessStream^ stream, FileProperties::PhotoOrientation photoOrientation)
+task<void> MainPage::ReencodeAndSavePhotoAsync(Streams::IRandomAccessStream^ stream, StorageFile^ file, FileProperties::PhotoOrientation photoOrientation)
 {
     // Using this state variable to pass multiple values through our task chain
     ReencodeState^ state = ref new ReencodeState();
-    state->_orientation = photoOrientation;
+    state->File = file;
+    state->Orientation = photoOrientation;
 
     return create_task(BitmapDecoder::CreateAsync(stream))
         .then([state](BitmapDecoder^ decoder)
     {
-        state->_decoder = decoder;
-        return create_task(KnownFolders::PicturesLibrary->CreateFileAsync("SimplePhoto.jpg", CreationCollisionOption::GenerateUniqueName));
-    }).then([](StorageFile^ file)
-    {
-        return create_task(file->OpenAsync(FileAccessMode::ReadWrite));
+        state->Decoder = decoder;
+        return create_task(state->File->OpenAsync(FileAccessMode::ReadWrite));
     }).then([state](Streams::IRandomAccessStream^ outputStream)
     {
-        return create_task(BitmapEncoder::CreateForTranscodingAsync(outputStream, state->_decoder));
+        return create_task(BitmapEncoder::CreateForTranscodingAsync(outputStream, state->Decoder));
     }).then([state](BitmapEncoder^ encoder)
     {
-        state->_encoder = encoder;
+        state->Encoder = encoder;
         auto properties = ref new Windows::Graphics::Imaging::BitmapPropertySet();
-        properties->Insert("System.Photo.Orientation", ref new BitmapTypedValue((unsigned short)state->_orientation, Windows::Foundation::PropertyType::UInt16));
+        properties->Insert("System.Photo.Orientation", ref new BitmapTypedValue((unsigned short)state->Orientation, Windows::Foundation::PropertyType::UInt16));
 
-        return create_task(state->_encoder->BitmapProperties->SetPropertiesAsync(properties));
+        return create_task(state->Encoder->BitmapProperties->SetPropertiesAsync(properties));
     }).then([state]()
     {
-        return state->_encoder->FlushAsync();
+        return state->Encoder->FlushAsync();
     });
 }
 
@@ -586,6 +529,17 @@ task<void> MainPage::SetupUiAsync()
     {
         _deviceOrientation = _orientationSensor->GetCurrentOrientation();
     }
+
+    create_task(StorageLibrary::GetLibraryAsync(KnownLibraryId::Pictures))
+        .then([this](StorageLibrary^ picturesLibrary)
+    {
+        _captureFolder = picturesLibrary->SaveFolder;
+        if (_captureFolder == nullptr)
+        {
+            // In this case fall back to the local app storage since the Pictures Library is not available
+            _captureFolder = ApplicationData::Current->LocalFolder;
+        }
+    });
 
     // Hide the status bar
     if (Windows::Foundation::Metadata::ApiInformation::IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
@@ -1065,12 +1019,12 @@ void MainPage::DisplayInformation_OrientationChanged(DisplayInformation^ sender,
     }));
 }
 
-void MainPage::PhotoButton_Tapped(Object^, Windows::UI::Xaml::RoutedEventArgs^)
+void MainPage::PhotoButton_Click(Object^, Windows::UI::Xaml::RoutedEventArgs^)
 {
     TakePhotoAsync();
 }
 
-void MainPage::VideoButton_Tapped(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void MainPage::VideoButton_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     task<void> taskToExecute;
     if (!_isRecording)
@@ -1089,7 +1043,7 @@ void MainPage::VideoButton_Tapped(Object^ sender, Windows::UI::Xaml::RoutedEvent
     });
 }
 
-void MainPage::FaceDetectionButton_Tapped(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void MainPage::FaceDetectionButton_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     task<void> taskToExecute;
 

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+    <Identity
+      Name="Microsoft.SDKSamples.FaceTracking.CPP"
+      Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+      Version="1.0.0.0" />
+
+    <mp:PhoneIdentity PhoneProductId="59ed8335-1a24-445d-807e-ecd87620bb2d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+
+    <Properties>
+        <DisplayName>Basic Face Tracking C++ Sample</DisplayName>
+        <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+        <Logo>Assets\StoreLogo-sdk.png</Logo>
+    </Properties>
+
+    <Dependencies>
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10069.0" MaxVersionTested="10.0.14393.0" />
+    </Dependencies>
+
+    <Resources>
+        <Resource Language="x-generate" />
+    </Resources>
+
+    <Applications>
+        <Application Id="BasicFaceTracking.App"
+          Executable="$targetnametoken$.exe"
+          EntryPoint="FaceTracking.App">
+            <uap:VisualElements
+              DisplayName="Basic Face Tracking C++ Sample"
+              Square150x150Logo="Assets\squareTile-sdk.png"
+              Square44x44Logo="Assets\smallTile-sdk.png"
+              Description="Basic Face Tracking C++ Sample"
+              BackgroundColor="#00B2F0">
+                <uap:SplashScreen Image="Assets\splash-sdk.png" />
+                <uap:DefaultTile>
+                    <uap:ShowNameOnTiles>
+                        <uap:ShowOn Tile="square150x150Logo" />
+                    </uap:ShowNameOnTiles>
+                </uap:DefaultTile>
+            </uap:VisualElements>
+        </Application>
+    </Applications>
+
+    <Capabilities>
+        <Capability Name="internetClient" />
+        <DeviceCapability Name="webcam" />
+    </Capabilities>
+</Package>

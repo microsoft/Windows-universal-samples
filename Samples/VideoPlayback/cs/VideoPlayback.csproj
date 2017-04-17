@@ -7,12 +7,12 @@
     <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VideoPlayback</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>VideoPlayback</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -97,39 +97,40 @@
       <Link>App.xaml.cs</Link>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMediaTransportControls.cs" />
     <Compile Include="..\..\..\SharedContent\cs\MainPage.xaml.cs">
       <Link>MainPage.xaml.cs</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\MediaModel.cs" />
     <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="SampleConfiguration.cs" />
+    <Compile Include="Scenario8_TransferMediaPlayer1.xaml.cs">
+      <DependentUpon>Scenario8_TransferMediaPlayer1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario9_TransferMediaPlayer2.xaml.cs">
+      <DependentUpon>Scenario9_TransferMediaPlayer2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Scenario1_PlayingVideos.xaml.cs">
       <DependentUpon>Scenario1_PlayingVideos.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario2_CustomizingMediaTransportControls.xaml.cs">
-      <DependentUpon>Scenario2_CustomizingMediaTransportControls.xaml</DependentUpon>
+    <Compile Include="Scenario3_DisplayingOutOfBandClosedCaptions.xaml.cs">
+      <DependentUpon>Scenario3_DisplayingOutOfBandClosedCaptions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario4_DisplayingOutOfBandClosedCaptions.xaml.cs">
-      <DependentUpon>Scenario4_DisplayingOutOfBandClosedCaptions.xaml</DependentUpon>
+    <Compile Include="Scenario2_DisplayingInBandClosedCaptions.xaml.cs">
+      <DependentUpon>Scenario2_DisplayingInBandClosedCaptions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario3_DisplayingInBandClosedCaptions.xaml.cs">
-      <DependentUpon>Scenario3_DisplayingInBandClosedCaptions.xaml</DependentUpon>
+    <Compile Include="Scenario5_SelectingAudioTracks.xaml.cs">
+      <DependentUpon>Scenario5_SelectingAudioTracks.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario6_SelectingAudioTracks.xaml.cs">
-      <DependentUpon>Scenario6_SelectingAudioTracks.xaml</DependentUpon>
+    <Compile Include="Scenario4_SelectingVideoTracks.xaml.cs">
+      <DependentUpon>Scenario4_SelectingVideoTracks.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario5_SelectingVideoTracks.xaml.cs">
-      <DependentUpon>Scenario5_SelectingVideoTracks.xaml</DependentUpon>
+    <Compile Include="Scenario6_PlayingVideoLists.xaml.cs">
+      <DependentUpon>Scenario6_PlayingVideoLists.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario7_PlayingVideoLists.xaml.cs">
-      <DependentUpon>Scenario7_PlayingVideoLists.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MediaPlaylistView.xaml.cs">
-      <DependentUpon>MediaPlaylistView.xaml</DependentUpon>
+    <Compile Include="Scenario7_VideoComposition.xaml.cs">
+      <DependentUpon>Scenario7_VideoComposition.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -148,44 +149,44 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Scenario8_TransferMediaPlayer1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scenario9_TransferMediaPlayer2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Scenario1_PlayingVideos.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_CustomizingMediaTransportControls.xaml">
+    <Page Include="Scenario3_DisplayingOutOfBandClosedCaptions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario4_DisplayingOutOfBandClosedCaptions.xaml">
+    <Page Include="Scenario2_DisplayingInBandClosedCaptions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3_DisplayingInBandClosedCaptions.xaml">
+    <Page Include="Scenario5_SelectingAudioTracks.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario6_SelectingAudioTracks.xaml">
+    <Page Include="Scenario4_SelectingVideoTracks.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario5_SelectingVideoTracks.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Scenario6_PlayingVideoLists.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Scenario7_PlayingVideoLists.xaml">
+    <Page Include="Scenario7_VideoComposition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\MediaPlaylistView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

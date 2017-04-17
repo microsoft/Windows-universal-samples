@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Assets">
@@ -54,9 +54,6 @@
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>
-    <Page Include="Scenario1_ShortName.xaml" />
-    <Page Include="Scenario2_ShortName.xaml" />
-    <Page Include="Scenario3_ShortName.xaml" />
     <Page Include="..\shared\Scenario1_CreateAFileInThePicturesLibrary.xaml" />
     <Page Include="..\shared\Scenario2_GetTheParentFolderOfAFile.xaml" />
     <Page Include="..\shared\Scenario3_WriteAndReadTextInAFile.xaml" />

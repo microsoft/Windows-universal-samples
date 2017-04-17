@@ -10,7 +10,7 @@
     Version="1.0.0.0"
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
 
-  <mp:PhoneIdentity PhoneProductId="c2adb9af-edb3-4e57-8056-9d0531d4a6b2" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="37809973-0b49-4745-8fe9-da9cec781b1e" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>WRL In-process Runtime Component client JS sample</DisplayName>
@@ -19,7 +19,7 @@
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10058.0" MaxVersionTested="10.0.10058.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10058.0" MaxVersionTested="10.0.14393.0" />
   </Dependencies>
 
   <Resources>
@@ -51,10 +51,12 @@
     <Extension Category="windows.activatableClass.proxyStub">
       <ProxyStub ClassId="332fd2f1-1c69-4c91-949e-4bb67a85bdc5">
         <Path>Microsoft.SDKSamples.Kitchen.Proxies.dll</Path>
-        <Interface Name="IOven" InterfaceId="6a112353-4f87-4460-a908-2944e92686f3" />
-        <Interface Name="IBread" InterfaceId="699b1394-3ceb-4a14-ae23-efec518b088b" />
-        <Interface Name="IAppliance" InterfaceId="332fd2f1-1c69-4c91-949e-4bb67a85bdc5" />
-        <Interface Name="__FITypedEventHandler_2_Microsoft__CSDKSamples__CKitchen__COven_Microsoft__CSDKSamples__CKitchen__CBread" InterfaceId="528cc6e3-86fd-581c-a266-77a00a07e668" />
+          <Interface Name="IAppliance" InterfaceId="332fd2f1-1c69-4c91-949e-4bb67a85bdc5" />
+          <Interface Name="IBread" InterfaceId="F13EA3D5-7B24-4CDE-9E5F-57AF30F0733C"/>
+          <Interface Name="IBreakBakedEventArgs" InterfaceId="699b1394-3ceb-4a14-ae23-efec518b088b" />
+          <Interface Name="IOven" InterfaceId="6a112353-4f87-4460-a908-2944e92686f3" />
+          <Interface Name="IOvenFactory" InterfaceId="f36c2a21-f4e3-4c39-94ce-eb9190afdab3" />
+          <Interface Name="ITypedEventHandler_Oven_BreadBakedEventArgs" InterfaceId="6582b851-18cc-5835-8c50-d896eedda300" />
       </ProxyStub>
     </Extension>
   </Extensions>

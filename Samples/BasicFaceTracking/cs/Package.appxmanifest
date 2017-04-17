@@ -14,13 +14,13 @@
     <mp:PhoneIdentity PhoneProductId="527be1f2-951a-43f0-ac9a-0d2858fe7fcf" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>Basic FaceTracking C# Sample</DisplayName>
+        <DisplayName>Basic Face Tracking C# Sample</DisplayName>
         <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
         <Logo>Assets\StoreLogo-sdk.png</Logo>
     </Properties>
 
     <Dependencies>
-      <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+      <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.14393.0" />
     </Dependencies>
 
     <Resources>
@@ -32,8 +32,8 @@
           Executable="$targetnametoken$.exe"
           EntryPoint="FaceTracking.App">
             <uap:VisualElements
-              DisplayName="Basic FaceTracking C# Sample"
-              Description="Basic FaceTracking C# Sample"
+              DisplayName="Basic Face Tracking C# Sample"
+              Description="Basic Face Tracking C# Sample"
               Square150x150Logo="Assets\squareTile-sdk.png"
               Square44x44Logo="Assets\SmallTile-sdk.png"
               BackgroundColor="#00b2f0">

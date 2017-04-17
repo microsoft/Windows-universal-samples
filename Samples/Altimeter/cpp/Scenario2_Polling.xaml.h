@@ -35,6 +35,7 @@ namespace SDKTemplate
         SDKTemplate::MainPage^ rootPage;
         Windows::UI::Core::CoreDispatcher^ dispatcher;
         Windows::Devices::Sensors::Altimeter^ sensor;
+
         void ScenarioGetData(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
     };
 }

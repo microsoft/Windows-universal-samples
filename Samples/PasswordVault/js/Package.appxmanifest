@@ -6,20 +6,20 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="1ed2f2da-18ff-4210-929d-b0e201b9f9a8"
+    Name="Microsoft.SDKSamples.PasswordVault.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 
   <mp:PhoneIdentity PhoneProductId="1ed2f2da-18ff-4210-929d-b0e201b9f9a8" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Microsoft SDK Sample - Password Vault</DisplayName>
+    <DisplayName>Password Vault JS Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>images\storelogo-sdk.png</Logo>
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.14393.0" />
     <!--<PackageDependency Name="Microsoft.WinJS.4.0" MinVersion="1.0.9927.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />-->
   </Dependencies>
 
@@ -31,15 +31,12 @@
     <Application
       Id="App"
       StartPage="default.html">
-
       <uap:VisualElements
-        DisplayName="Microsoft SDK Sample - Password Vault"
-        Description="Microsoft SDK Sample - Password Vault"
-        
+        DisplayName="Password Vault JS Sample"
+        Description="Password Vault JS Sample"
         BackgroundColor="#00b2f0"
         Square150x150Logo="images\storelogo-sdk.png"
         Square44x44Logo="images\smalltile-sdk.png">
-
         <uap:SplashScreen Image="images\splash-sdk.png" />
         <uap:DefaultTile>
           <uap:ShowNameOnTiles>
@@ -49,8 +46,4 @@
       </uap:VisualElements>
     </Application>
   </Applications>
-
-  <Capabilities>
-  </Capabilities>
-
 </Package>

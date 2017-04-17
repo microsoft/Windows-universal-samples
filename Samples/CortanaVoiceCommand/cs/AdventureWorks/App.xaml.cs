@@ -46,6 +46,7 @@ namespace AdventureWorks
         /// </summary>
         public static NavigationService NavigationService { get; private set; }
 
+        private RootFrameNavigationHelper rootFrameNavigationHelper;
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
@@ -64,6 +65,9 @@ namespace AdventureWorks
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
                 App.NavigationService = new NavigationService(rootFrame);
+
+                // Use the RootFrameNavigationHelper to respond to keyboard and mouse shortcuts.
+                this.rootFrameNavigationHelper = new RootFrameNavigationHelper(rootFrame);
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 

@@ -123,6 +123,11 @@ namespace ListViewSample.Model
 
             return groups;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
         #endregion
 
         #region Helpers

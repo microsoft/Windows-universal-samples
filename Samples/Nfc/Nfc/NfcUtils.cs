@@ -31,14 +31,6 @@ namespace NfcSample
 
     public class NfcUtils
     {
-        public static byte[] AID_PPSE =
-        {
-            // File name "2PAY.SYS.DDF01" (14 bytes)
-            (byte)'2', (byte)'P', (byte)'A', (byte)'Y',
-            (byte)'.', (byte)'S', (byte)'Y', (byte)'S',
-            (byte)'.', (byte)'D', (byte)'D', (byte)'F', (byte)'0', (byte)'1'
-        };
-
         public static async Task<IBackgroundTaskRegistration> GetOrRegisterHceBackgroundTask(string bgTaskName, string taskEntryPoint, SmartCardTriggerType triggerType)
         {
             try
@@ -98,8 +90,8 @@ namespace NfcSample
 
             BackgroundAccessStatus status = await BackgroundExecutionManager.RequestAccessAsync();
 
-            return status == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity 
-                || status == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity;
+            return status == BackgroundAccessStatus.AlwaysAllowed
+                || status == BackgroundAccessStatus.AllowedSubjectToSystemPolicy;
         }
 
         private static void BgTask_Progress(BackgroundTaskRegistration sender, BackgroundTaskProgressEventArgs args)

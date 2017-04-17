@@ -1,11 +1,19 @@
 ﻿<!---
   category: AppSettings 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620581&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620581
 --->
 
 # App package information sample
 
-This sample shows you how to get package info by using the Windows Runtime packaging API ([**Windows.ApplicationModel.Package**](http://msdn.microsoft.com/library/windows/apps/br224667) and [**Windows.ApplicationModel.PackageId**](http://msdn.microsoft.com/library/windows/apps/br224668)).
+Shows how to get package info by using the Windows Runtime packaging API ([Windows.ApplicationModel.Package](http://msdn.microsoft.com/library/windows/apps/br224667) 
+and [Windows.ApplicationModel.PackageId](http://msdn.microsoft.com/library/windows/apps/br224668)).
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Users acquire your Windows Runtime app as an app package. The operating system uses the info in an app package to install the app on a per-user basis, and ensure that all traces of the app are gone from the device after all users who installed the app uninstall it. Each package consists of the files that constitute the app, along with a package manifest file that describes the app to the operating system.
 
@@ -13,37 +21,40 @@ Each package is defined by a globally unique identifier known as the package ide
 
 The sample covers these key tasks:
 
--   Getting the package identity using [**Package.Id**](http://msdn.microsoft.com/library/windows/apps/br224680)
--   Getting the package directory using [**Package.InstalledLocation**](http://msdn.microsoft.com/library/windows/apps/br224681)
--   Getting package dependencies using [**Package.Dependencies**](http://msdn.microsoft.com/library/windows/apps/br224679)
+-   Getting the package identity using [Package.Id](http://msdn.microsoft.com/library/windows/apps/br224680)
+-   Getting the package directory using [Package.InstalledLocation](http://msdn.microsoft.com/library/windows/apps/br224681)
+-   Getting package dependencies using [Package.Dependencies](http://msdn.microsoft.com/library/windows/apps/br224679)
 
 The sample covers these new tasks for Windows 10:
 
--   Getting the package description using [**Package.Description**](http://msdn.microsoft.com/library/windows/apps/dn175742)
--   Getting the package display name using [**Package.DisplayName**](http://msdn.microsoft.com/library/windows/apps/dn175743)
--   Determining whether the package is a bundle package using [**Package.IsBundle**](http://msdn.microsoft.com/library/windows/apps/dn175744)
--   Determining whether the package is installed in development mode using [**Package.IsDevelopmentMode**](http://msdn.microsoft.com/library/windows/apps/dn175745)
--   Determining whether the package is a resource package using [**Package.IsResourcePackage**](http://msdn.microsoft.com/library/windows/apps/dn175746)
--   Getting package logo using [**Package.Logo**](http://msdn.microsoft.com/library/windows/apps/dn175747)
--   Getting publisher display name of the package using [**Package.PublisherDisplayName**](http://msdn.microsoft.com/library/windows/apps/dn175748)
+-   Getting the package description using [Package.Description](http://msdn.microsoft.com/library/windows/apps/dn175742)
+-   Getting the package display name using [Package.DisplayName](http://msdn.microsoft.com/library/windows/apps/dn175743)
+-   Determining whether the package is a bundle package using [Package.IsBundle](http://msdn.microsoft.com/library/windows/apps/dn175744)
+-   Determining whether the package is installed in development mode using [Package.IsDevelopmentMode](http://msdn.microsoft.com/library/windows/apps/dn175745)
+-   Determining whether the package is a resource package using [Package.IsResourcePackage](http://msdn.microsoft.com/library/windows/apps/dn175746)
+-   Getting package logo using [Package.Logo](http://msdn.microsoft.com/library/windows/apps/dn175747)
+-   Getting publisher display name of the package using [Package.PublisherDisplayName](http://msdn.microsoft.com/library/windows/apps/dn175748)
 
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 **Conceptual**
 
-[App packages and deployment](http://msdn.microsoft.com/library/windows/apps/hh464929)
+[Packaging apps](https://msdn.microsoft.com/library/windows/apps/mt270969)  
 
 **Reference**
 
-[**Windows.ApplicationModel.Package**](http://msdn.microsoft.com/library/windows/apps/br224667)
-
-[**Windows.ApplicationModel.PackageId**](http://msdn.microsoft.com/library/windows/apps/br224668)
+[Windows.ApplicationModel.Package](http://msdn.microsoft.com/library/windows/apps/br224667)  
+[Windows.ApplicationModel.PackageId](http://msdn.microsoft.com/library/windows/apps/br224668)  
 
 ### Reference
 
-To learn more about sharing and the [**Windows.ApplicationModel.DataTransfer**](http://msdn.microsoft.com/library/windows/apps/br205967) namespace, we recommend you take a look at the [Sharing and exchanging data](http://msdn.microsoft.com/library/windows/apps/hh464923) section of our documentation, which describes how sharing works and contains several how-to topics that cover how to share [text](http://msdn.microsoft.com/library/windows/apps/hh758313), an [image](http://msdn.microsoft.com/library/windows/apps/hh758305), files, and other formats. Our [Guidelines for sharing content](http://msdn.microsoft.com/library/windows/apps/hh465251) can also help you create a great user experience with the share feature.
+To learn more about sharing and the [Windows.ApplicationModel.DataTransfer](http://msdn.microsoft.com/library/windows/apps/br205967) namespace, 
+we recommend you take a look at the [Sharing and exchanging data](http://msdn.microsoft.com/library/windows/apps/hh464923) section of our documentation, 
+which describes how sharing works and contains several how-to topics that cover how to share [text](http://msdn.microsoft.com/library/windows/apps/hh758313), 
+an [image](http://msdn.microsoft.com/library/windows/apps/hh758305), files, and other formats. Our 
+[Guidelines for sharing content](http://msdn.microsoft.com/library/windows/apps/hh465251) can also help you create a great user experience with the share feature.
 
 For more info about the concepts and APIs demonstrated in this sample, see these topics:
 
@@ -56,11 +67,11 @@ For more info about the concepts and APIs demonstrated in this sample, see these
 -   [How to share text (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758313)
 -   [How to share text (XAML)](http://msdn.microsoft.com/library/windows/apps/hh871372)
 -   [Quickstart: Sharing content (HTML)](http://msdn.microsoft.com/library/windows/apps/hh465261)
--   [Quickstart: Sharing content (XAML)](http://msdn.microsoft.com/library/windows/apps/hh871368)
--   [**DataPackageView**](http://msdn.microsoft.com/library/windows/apps/hh738408)
--   [**ShareOperation**](http://msdn.microsoft.com/library/windows/apps/br205977)
--   [**Windows.ApplicationModel.DataTransfer**](http://msdn.microsoft.com/library/windows/apps/br205967)
--   [**Windows.ApplicationModel.DataTransfer.Share**](http://msdn.microsoft.com/library/windows/apps/br205989)
+-   [Share data](https://msdn.microsoft.com/library/windows/apps/mt243293)
+-   [DataPackageView](http://msdn.microsoft.com/library/windows/apps/hh738408)
+-   [ShareOperation](http://msdn.microsoft.com/library/windows/apps/br205977)
+-   [Windows.ApplicationModel.DataTransfer](http://msdn.microsoft.com/library/windows/apps/br205967)
+-   [Windows.ApplicationModel.DataTransfer.Share](http://msdn.microsoft.com/library/windows/apps/br205989)
 
 ## System requirements
 

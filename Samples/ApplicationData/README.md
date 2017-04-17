@@ -1,11 +1,19 @@
 ﻿<!---
   category: AppSettings
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620486&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620486
 --->
 
 # Application data sample
 
-This sample shows you how to store and retrieve data that is specific to each user and Windows Runtime app by using the Windows Runtime application data APIs ([**Windows.Storage.ApplicationData**](http://msdn.microsoft.com/library/windows/apps/br241587) and so on). 
+Shows how to store and retrieve data that is specific to each user and app by using the Windows Runtime application data APIs 
+([Windows.Storage.ApplicationData](http://msdn.microsoft.com/library/windows/apps/br241587) and so on). 
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Application data includes session state, user preferences, and other settings. It is created, read, updated, and deleted when the app is running. The operating system manages these data stores for your app: 
 
@@ -24,41 +32,21 @@ The sample covers these key tasks:
 - Reading and writing files to an app data store 
 - Responding to roaming events 
 
-
-## Tasks 
-
-[**Quickstart: Local application data (JavaScript)**](http://msdn.microsoft.com/library/windows/apps/hh465118)
-
-[**Quickstart: Local application data (C#/VB/C++)**](http://msdn.microsoft.com/library/windows/apps/hh700361)
-
-[**Quickstart: Roaming application data (JavaScript)**](http://msdn.microsoft.com/library/windows/apps/hh465123)
-
-[**Quickstart: Roaming application data (C#/VB/C++)**](http://msdn.microsoft.com/library/windows/apps/hh700362)
-
-[**Quickstart: Temporary application data (JavaScript)**](http://msdn.microsoft.com/library/windows/apps/hh465130)
-
-[**Quickstart: Temporary application data (C#/VB/C++)**](http://msdn.microsoft.com/library/windows/apps/hh700363)
-
 ## Guidelines 
 
-[**Guidelines for roaming application data**](http://msdn.microsoft.com/library/windows/apps/hh465094)
+[Guidelines for roaming application data](http://msdn.microsoft.com/library/windows/apps/hh465094)  
 
 ## Concepts 
 
-[**Application data**](http://msdn.microsoft.com/library/windows/apps/hh464917)
+[Store and retrieve settings and other app data](https://msdn.microsoft.com/library/windows/apps/mt299098)  
 
 ## Reference 
 
-[**Windows.Storage.ApplicationData**](http://msdn.microsoft.com/library/windows/apps/br241587)
-
-[**Windows.Storage.ApplicationDataCompositeValue**](http://msdn.microsoft.com/library/windows/apps/br241588)
-
-[**Windows.Storage.ApplicationDataContainer**](http://msdn.microsoft.com/library/windows/apps/br241599)
-
-[**Windows.Storage.ApplicationDataContainerSettings**](http://msdn.microsoft.com/library/windows/apps/br241600)
-
-[**WinJS.Application**](http://msdn.microsoft.com/library/windows/apps/br229774)
-
+[Windows.Storage.ApplicationData](http://msdn.microsoft.com/library/windows/apps/br241587)  
+[Windows.Storage.ApplicationDataCompositeValue](http://msdn.microsoft.com/library/windows/apps/br241588)  
+[Windows.Storage.ApplicationDataContainer](http://msdn.microsoft.com/library/windows/apps/br241599)  
+[Windows.Storage.ApplicationDataContainerSettings](http://msdn.microsoft.com/library/windows/apps/br241600)  
+[WinJS.Application](http://msdn.microsoft.com/library/windows/apps/br229774)  
 
 ## System requirements
 

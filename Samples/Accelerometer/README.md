@@ -1,13 +1,27 @@
 ﻿<!---
   category: DevicesSensorsAndPower
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620477&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620477
 --->
 
 # Accelerometer sample
 
-This sample shows how to use the [**Accelerometer**](http://msdn.microsoft.com/library/windows/apps/br225687) class.
+Shows how to use the [Accelerometer](http://msdn.microsoft.com/library/windows/apps/br225687) class, and 
+allows the user to view the acceleration forces along the X-, Y-, and Z-axes for a 3-axis accelerometer.
 
-This sample allows the user to view the acceleration forces along the X-, Y-, and Z-axes for a 3-axis accelerometer. You can choose one of four scenarios:
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+The sample asks you to choose an accelerometer.
+
+- The standard accelerometer reports total acceleration.
+- The linear accelerometer reports acceleration due to motion.
+- The gravity accelerometer reports acceleration due to gravity.
+
+After choosing your accelerometer, you can choose one of these scenarios:
 
 -   Accelerometer data events
 -   Accelerometer shake events
@@ -22,6 +36,9 @@ When you choose the **Enable** button for the **Data Events** option, the app be
 ### Accelerometer Shake Events
 
 When you choose the **Enable** button for the **Shake Events** option, the app displays the cumulative number of shake events each time an event occurs. (The app first increments the event count and then renders the most recent value.)
+
+Note that support for the Shaken event is dependent upon hardware and driver support.
+In practice, very few accelerometers support the Shaken event.
 
 ### Poll Accelerometer Readings
 
@@ -39,25 +56,25 @@ When you choose the **Enable** button for the **Data Events** option, the app be
 
 ### Samples
 
-[**Display orientation** sample](../DisplayOrientation)
+[Display orientation sample](../DisplayOrientation)
 
 ### Reference
 
-[**Accelerometer.GetCurrentReading** method](http://msdn.microsoft.com/library/windows/apps/br225699)
+[Accelerometer.GetCurrentReading method](http://msdn.microsoft.com/library/windows/apps/br225699)
 
-[**Accelerometer.ReadingChanged** event handler](http://msdn.microsoft.com/library/windows/apps/br225702)
+[Accelerometer.ReadingChanged event handler](http://msdn.microsoft.com/library/windows/apps/br225702)
 
 [Quickstart: Responding to user movement with the accelerometer](http://msdn.microsoft.com/library/windows/apps/hh465265)
 
-[**Windows.Devices.Sensors** namespace](http://go.microsoft.com/fwlink/p/?linkid=241981)
+[Windows.Devices.Sensors namespace](http://go.microsoft.com/fwlink/p/?linkid=241981)
 
 ## System requirements
 
-**Client:** Windows 10
+**Client:** Windows 10 build 14295
 
 **Server:** Windows Server 2016 Technical Preview
 
-**Phone:** Windows 10
+**Phone:** Windows 10 build 14295
 
 ## Build the sample
 

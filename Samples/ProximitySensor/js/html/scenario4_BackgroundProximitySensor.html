@@ -1,0 +1,40 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario4_BackgroundProximitySensor.css">
+    <script src="/js/scenario4_BackgroundProximitySensor.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div>
+        <p>Demonstrates usage of proximity sensor in a background task to monitor the changes in the proximity of the selected sensor</p>
+        <button class="action win-button" id="registerBackgroundTask">Enable</button>
+        <button class="action secondary win-button" id="unregisterBackgroundTask">Disable</button>
+        <br>
+        <br>
+        <div>
+            Task Registration: <a id="registrationStatus" class="win-link">Unregistered</a>
+            <br> Task Status: <a id="taskStatus" class="win-link">no data</a>
+            <br> Report Count: <a id="reportCount" class="win-link">0</a>
+            <br> Last Reading Timestamp: <a id="lastReadingTimestamp" class="win-link">no data</a>
+            <br> Detected: <a id="detectionStatus" class="win-link">Not detected</a>
+            <br>
+        </div>
+    </div>
+</body>
+
+</html>

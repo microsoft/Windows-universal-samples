@@ -1,19 +1,39 @@
 ﻿<!---
   category: Communications
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620605&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620605
 --->
 
 # SMS send and receive sample
 
-This sample shows how to use the SMS API (Windows.Devices.Sms) using following scenarios:
+Shows how to use the SMS API (Windows.Devices.Sms)
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+Specifically, this sample shows how to: 
+
 - Send text message.
 - Set filter rules for registering with background infrastructure and then receiving the SMS based on filter rules.
+
+Windows.Devices.Sms is a low-level API intended for use by mobile operators
+to push information to apps on devices by using SMS as the signaling channel.
+For example, a mobile operator may send a specially-formatted SMS message
+to signal the voicemail app that the number of unread messages has changed.
+
+If you are interested in writing a chat app
+for sending and receiving messages that are visible to end users,
+then use the Windows.ApplicationModel.Chat namespace instead.
 
 ## Prerequisites
 
 This sample accesses privileged APIs used by mobile broadband operators.
-Hence it requires a [special-use capability](https://msdn.microsoft.com/en-us/library/windows/apps/hh464936.aspx#special_capabilities)
-to be declared in package manifest.
+Hence it requires the **cellularMessaging** capability,
+a [special-use capability](https://msdn.microsoft.com/library/windows/apps/mt270968#special_and_restricted_capabilities),
+to be declared in the package manifest.
 
 ### Remark
 
@@ -22,7 +42,7 @@ to be declared in package manifest.
 
 ### Reference
 
-[SMS API reference](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.sms.aspx)
+[SMS API reference](https://msdn.microsoft.com/library/windows/apps/windows.devices.sms.aspx)  
 
 ## System requirements
 

@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{0D1C9ABB-1A10-4BB5-B8EB-83A4930CCD78}</ProjectGuid>
+    <ProjectGuid>{E1F933C6-7F61-43CB-8556-84CE5841D7B3}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XamlPullToRefresh</RootNamespace>
-    <AssemblyName>XamlPullToRefresh</AssemblyName>
+    <RootNamespace>SDKTemplate</RootNamespace>
+    <AssemblyName>PullToRefresh</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -88,16 +88,22 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="..\..\..\SharedContent\cs\App.xaml.cs">
+      <Link>App.xaml.cs</Link>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListItemData.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="RefreshableListView.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -105,11 +111,88 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\InnerCircle.png" />
-    <Content Include="Assets\OuterCircle.png" />
-    <Content Include="Properties\Default.rd.xml" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage1.jpg">
+      <Link>Assets\lorem\LandscapeImage1.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage10.jpg">
+      <Link>Assets\lorem\LandscapeImage10.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage11.jpg">
+      <Link>Assets\lorem\LandscapeImage11.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage12.jpg">
+      <Link>Assets\lorem\LandscapeImage12.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage13.jpg">
+      <Link>Assets\lorem\LandscapeImage13.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage14.jpg">
+      <Link>Assets\lorem\LandscapeImage14.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage15.jpg">
+      <Link>Assets\lorem\LandscapeImage15.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage16.jpg">
+      <Link>Assets\lorem\LandscapeImage16.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage17.jpg">
+      <Link>Assets\lorem\LandscapeImage17.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage18.jpg">
+      <Link>Assets\lorem\LandscapeImage18.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage19.jpg">
+      <Link>Assets\lorem\LandscapeImage19.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage2.jpg">
+      <Link>Assets\lorem\LandscapeImage2.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage20.jpg">
+      <Link>Assets\lorem\LandscapeImage20.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage21.jpg">
+      <Link>Assets\lorem\LandscapeImage21.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage22.jpg">
+      <Link>Assets\lorem\LandscapeImage22.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage23.jpg">
+      <Link>Assets\lorem\LandscapeImage23.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage24.jpg">
+      <Link>Assets\lorem\LandscapeImage24.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage25.jpg">
+      <Link>Assets\lorem\LandscapeImage25.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage3.jpg">
+      <Link>Assets\lorem\LandscapeImage3.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage4.jpg">
+      <Link>Assets\lorem\LandscapeImage4.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage5.jpg">
+      <Link>Assets\lorem\LandscapeImage5.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage6.jpg">
+      <Link>Assets\lorem\LandscapeImage6.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage7.jpg">
+      <Link>Assets\lorem\LandscapeImage7.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage8.jpg">
+      <Link>Assets\lorem\LandscapeImage8.jpg</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage9.jpg">
+      <Link>Assets\lorem\LandscapeImage9.jpg</Link>
+    </Content>
+    <Content Include="Assets\lorem\lorem.txt" />
+    <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
+      <Link>Properties\Default.rd.xml</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Link>Assets\microsoft-sdk.png</Link>
+    </Content>
     <Content Include="..\..\..\SharedContent\media\smalltile-sdk.png">
       <Link>Assets\smallTile-sdk.png</Link>
     </Content>
@@ -125,16 +208,29 @@
     <Content Include="..\..\..\SharedContent\media\tile-sdk.png">
       <Link>Assets\tile-sdk.png</Link>
     </Content>
+    <Content Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Link>Assets\windows-sdk.png</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
+      <Link>App.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Styles\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.14393.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

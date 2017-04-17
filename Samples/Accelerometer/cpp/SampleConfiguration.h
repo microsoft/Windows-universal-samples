@@ -23,7 +23,7 @@ namespace SDKTemplate
         {
             Platform::String^ get()
             {
-                return "Accelerometer";
+                return "Accelerometer C# Sample";
             }
         }
 
@@ -35,8 +35,23 @@ namespace SDKTemplate
             }
         }
 
+        static void SetReadingText(Windows::UI::Xaml::Controls::TextBlock^ textBlock, Windows::Devices::Sensors::AccelerometerReading^ reading);
+
+        property Windows::Devices::Sensors::AccelerometerReadingType AccelerometerReadingType
+        {
+            Windows::Devices::Sensors::AccelerometerReadingType get()
+            {
+                return accelerometerReadingType;
+            }
+            void set(Windows::Devices::Sensors::AccelerometerReadingType value)
+            {
+                accelerometerReadingType = value;
+            }
+        }
+
     private:
         static Platform::Array<Scenario>^ scenariosInner;
+        Windows::Devices::Sensors::AccelerometerReadingType accelerometerReadingType = Windows::Devices::Sensors::AccelerometerReadingType::Standard;
     };
 
     public value struct Scenario

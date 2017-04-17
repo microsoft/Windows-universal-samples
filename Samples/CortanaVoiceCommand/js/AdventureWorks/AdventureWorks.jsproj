@@ -37,8 +37,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
@@ -46,7 +46,8 @@
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Content Include="adventureworkscommands.xml">
+    <Content Include="..\..\shared\AdventureWorksCommands.xml">
+      <Link>AdventureWorksCommands.xml</Link>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
     <Content Include="css\tripDetails.css" />
@@ -60,22 +61,22 @@
     <Content Include="images\GreyTile.scale-225.png" />
     <Content Include="images\GreyTile.scale-400.png" />
     <Content Include="..\..\..\..\SharedContent\media\microsoft-sdk.png">
-        <Link>images\microsoft-sdk.png</Link>
+      <Link>images\microsoft-sdk.png</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\media\smalltile-sdk.png">
-        <Link>images\smallTile-sdk.png</Link>
+      <Link>images\smallTile-sdk.png</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\media\splash-sdk.png">
-        <Link>images\splash-sdk.png</Link>
+      <Link>images\splash-sdk.png</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\media\storelogo-sdk.png">
-        <Link>images\storeLogo-sdk.png</Link>
+      <Link>images\storeLogo-sdk.png</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\media\tile-sdk.png">
-        <Link>images\tile-sdk.png</Link>
+      <Link>images\tile-sdk.png</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\media\windows-sdk.png">
-        <Link>images\windows-sdk.png</Link>
+      <Link>images\windows-sdk.png</Link>
     </Content>
     <Content Include="js\default.js" />
     <Content Include="css\default.css" />
@@ -84,19 +85,19 @@
     <Content Include="js\tripListView.js" />
     <Content Include="js\voiceCommandService.js" />
     <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\css\ui-dark.css">
-        <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>
+      <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\css\ui-light.css">
-        <Link>Microsoft.WinJS.4.0\css\ui-light.css</Link>
+      <Link>Microsoft.WinJS.4.0\css\ui-light.css</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\js\en-US\ui.strings.js">
-        <Link>Microsoft.WinJS.4.0\js\en-US\ui.strings.js</Link>
+      <Link>Microsoft.WinJS.4.0\js\en-US\ui.strings.js</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\js\WinJS.intellisense-setup.js">
-        <Link>Microsoft.WinJS.4.0\js\WinJS.intellisense-setup.js</Link>
+      <Link>Microsoft.WinJS.4.0\js\WinJS.intellisense-setup.js</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\js\WinJS.intellisense.js">
-        <Link>Microsoft.WinJS.4.0\js\WinJS.intellisense.js</Link>
+      <Link>Microsoft.WinJS.4.0\js\WinJS.intellisense.js</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\fonts\Symbols.ttf">
       <Link>Microsoft.WinJS.4.0\fonts\Symbols.ttf</Link>
@@ -107,6 +108,41 @@
     <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\js\ui.js">
       <Link>Microsoft.WinJS.4.0\js\ui.js</Link>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\de-DE\Resources.resjson">
+      <Link>Strings\de-DE\Resources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\en-GB\Resources.resjson">
+      <Link>Strings\en-GB\Resources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\en-US\Resources.resjson">
+      <Link>Strings\en-US\Resources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\es-ES\Resources.resjson">
+      <Link>Strings\es-ES\Resources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\fr-FR\Resources.resjson">
+      <Link>Strings\fr-FR\Resources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\it-IT\Resources.resjson">
+      <Link>Strings\it-IT\Resources.resjson</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\zh-CN\Resources.resjson">
+      <Link>Strings\zh-CN\Resources.resjson</Link>
+    </PRIResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <!-- To modify your build process, add your task inside one of the targets below then uncomment

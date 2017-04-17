@@ -1,0 +1,63 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2_LaunchUri"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer Margin="12,20,12,12">
+            <StackPanel>
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Launching a URI with LaunchUriAsync.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                    To see the effect of different launcher options,
+                    try launching different URI schemes.
+                </TextBlock>
+                <TextBox x:Name="UriToLaunch" HorizontalAlignment="Stretch" MaxLength="1024" Text="http://www.bing.com" Margin="0,10,0,0"/>
+
+                <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                    Launch the URI with the default handler installed on the system.
+                </TextBlock>
+                <Button Content="Launch default handler" Click="{x:Bind LaunchUriDefault}" Margin="0,10,0,0"/>
+
+                <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                    If supported, let the user choose the handler for the URI.
+                </TextBlock>
+                <Button Content="Launch Open With" Click="{x:Bind LaunchUriOpenWith}" Margin="0,10,0,0"/>
+
+                <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                    If supported, warn the user before launching. 
+                </TextBlock>
+                <Button Content="Launch with warning" Click="{x:Bind LaunchUriWithWarning}" Margin="0,10,0,0"/>
+
+                <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                    If supported, launch the URI with a preference for how much of the screen to leave for this app.
+                </TextBlock>
+
+                <ComboBox x:Name="ViewPreference" Margin="0,10,0,0"/>
+                <Button Content="Launch with view preference" Click="{x:Bind LaunchUriSplitScreen}" Margin="0,10,0,0"/>
+
+                <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                    The result depends on a number of things, including the preferences of the app being launched.
+                    Pick URI schemes of various types to see the behavior when launching different apps.
+                </TextBlock>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

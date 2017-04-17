@@ -10,8 +10,8 @@
     <AssemblyName>WiFiDirectApi</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -101,6 +101,10 @@
     <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ConnectionSettingsPanel.xaml.cs">
+      <DependentUpon>ConnectionSettingsPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DispatcherTaskExtensions.cs" />
     <Compile Include="SampleConfiguration.cs" />
     <Compile Include="Scenario1_Advertiser.xaml.cs">
       <DependentUpon>Scenario1_Advertiser.xaml</DependentUpon>
@@ -109,6 +113,7 @@
       <DependentUpon>Scenario2_Connector.xaml</DependentUpon>
     </Compile>
     <Compile Include="SocketReaderWriter.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -125,6 +130,10 @@
       <Link>MainPage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ConnectionSettingsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Scenario1_Advertiser.xaml">
       <Generator>MSBuild:Compile</Generator>

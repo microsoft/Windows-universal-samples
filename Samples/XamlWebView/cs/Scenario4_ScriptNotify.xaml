@@ -1,0 +1,48 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario4_ScriptNotify"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Script notify
+            </TextBlock>
+            <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
+                When a script calls window.&#8203;external.&#8203;notify(value),
+                the ScriptNotify event is raised with the specified value.
+                <Hyperlink Click="MoreLess_Click"><Run x:Name="MoreLessText">Show more information</Run></Hyperlink>
+            </TextBlock>
+            <TextBlock x:Name="MoreInformationText" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Visibility="Collapsed">
+                The following pages can call window.&#8203;external.&#8203;notify:
+                <LineBreak/>
+                ● Content loaded using the NavigateToString() method; or ms-appx-web, ms-appdata, ms-webview-stream:// URI
+                schemes.
+                <LineBreak/>               
+                ● Content loaded from the web, provided they use the https:// protocol, and the site is listed
+                in the app's manifest under the Content Uri's node.
+            </TextBlock>
+        </StackPanel>
+        <WebView x:Name="WebViewControl" Grid.Row="1" ScriptNotify="WebViewControl_ScriptNotify"/>
+    </Grid>
+</Page>

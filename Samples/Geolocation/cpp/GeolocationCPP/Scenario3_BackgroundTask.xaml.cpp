@@ -68,13 +68,13 @@ void Scenario3::OnNavigatedTo(NavigationEventArgs^ e)
             // Check the background access status of the application and display the appropriate status message
             switch (BackgroundExecutionManager::GetAccessStatus())
             {
-            case BackgroundAccessStatus::Unspecified:
-            case BackgroundAccessStatus::Denied:
-                rootPage->NotifyUser("This application must be added to the lock screen before the background task will run.", NotifyType::ErrorMessage);
+            case BackgroundAccessStatus::AlwaysAllowed:
+            case BackgroundAccessStatus::AllowedSubjectToSystemPolicy:
+                rootPage->NotifyUser("Background task is already registered. Waiting for next update...", NotifyType::StatusMessage);
                 break;
 
             default:
-                rootPage->NotifyUser("Background task is already registered. Waiting for next update...", NotifyType::StatusMessage);
+                rootPage->NotifyUser("Background tasks may be disabled for this app", NotifyType::ErrorMessage);
                 break;
             }
         }
@@ -136,20 +136,20 @@ void Scenario3::RegisterBackgroundTask(Platform::Object^ sender, Windows::UI::Xa
             // Check the background access status of the application and display the appropriate status message
             switch (backgroundAccessStatus)
             {
-            case BackgroundAccessStatus::Unspecified:
-            case BackgroundAccessStatus::Denied:
-                rootPage->NotifyUser("Not able to run in background. Application must be added to the lock screen.",
-                    NotifyType::ErrorMessage);
-                break;
-
-            default:
+            case BackgroundAccessStatus::AlwaysAllowed:
+            case BackgroundAccessStatus::AllowedSubjectToSystemPolicy:
                 rootPage->NotifyUser("Background task registered.", NotifyType::StatusMessage);
 
-                // Need tp request access to location
-                // This must be done with background task registeration
+                // Need to request access to location
+                // This must be done with background task registration
                 // because the background task cannot display UI
                 RequestLocationAccess();
                 break;
+
+            default:
+                rootPage->NotifyUser("Background tasks may be disabled for this app", NotifyType::ErrorMessage);
+                break;
+
             }
         });
     }

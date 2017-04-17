@@ -50,6 +50,9 @@ namespace CameraGetPreviewFrame
         // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
         private static readonly Guid RotationKey = new Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1");
 
+        // Folder in which the captures will be stored (initialized in InitializeCameraAsync)
+        private StorageFolder _captureFolder = null;
+
         // Prevent the screen from sleeping while the camera is running
         private readonly DisplayRequest _displayRequest = new DisplayRequest();
 
@@ -173,7 +176,7 @@ namespace CameraGetPreviewFrame
             }
         }
 
-        private async void GetPreviewFrameButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void GetPreviewFrameButton_Click(object sender, RoutedEventArgs e)
         {
             // If preview is not running, no preview frames can be acquired
             if (!_isPreviewing) return;
@@ -239,10 +242,6 @@ namespace CameraGetPreviewFrame
                 {
                     Debug.WriteLine("The app was denied access to the camera");
                 }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Exception when initializing MediaCapture with {0}: {1}", cameraDevice.Id, ex.ToString());
-                }
 
                 // If initialization succeeded, start the preview
                 if (_isInitialized)
@@ -263,6 +262,10 @@ namespace CameraGetPreviewFrame
                     }
                     
                     await StartPreviewAsync();
+
+                    var picturesLibrary = await StorageLibrary.GetLibraryAsync(KnownLibraryId.Pictures);
+                    // Fall back to the local app storage if the Pictures Library is not available
+                    _captureFolder = picturesLibrary.SaveFolder ?? ApplicationData.Current.LocalFolder;
                 }
             }
         }
@@ -286,15 +289,8 @@ namespace CameraGetPreviewFrame
             PreviewControl.FlowDirection = _mirroringPreview ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
             // Start the preview
-            try
-            {
-                await _mediaCapture.StartPreviewAsync();
-                _isPreviewing = true;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Exception when starting the preview: {0}", ex.ToString());
-            }
+            await _mediaCapture.StartPreviewAsync();
+            _isPreviewing = true;
 
             // Initialize the preview to the current orientation
             if (_isPreviewing)
@@ -335,15 +331,8 @@ namespace CameraGetPreviewFrame
         /// <returns></returns>
         private async Task StopPreviewAsync()
         {
-            try
-            {
-                _isPreviewing = false;
-                await _mediaCapture.StopPreviewAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Exception when stopping the preview: {0}", ex.ToString());
-            }
+            _isPreviewing = false;
+            await _mediaCapture.StopPreviewAsync();
 
             // Use the dispatcher because this method is sometimes called from non-UI threads
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -399,7 +388,11 @@ namespace CameraGetPreviewFrame
                 // Save the frame (as is, no rotation is being applied)
                 if (SaveFrameCheckBox.IsChecked == true)
                 {
-                    await SaveSoftwareBitmapAsync(previewFrame);
+                    var file = await _captureFolder.CreateFileAsync("PreviewFrame.jpg", CreationCollisionOption.GenerateUniqueName);
+
+                    Debug.WriteLine("Saving preview frame to " + file.Path);
+
+                    await SaveSoftwareBitmapAsync(previewFrame, file);
                 }
             }
         }
@@ -509,13 +502,13 @@ namespace CameraGetPreviewFrame
         }
 
         /// <summary>
-        /// Saves a SoftwareBitmap to the Pictures library with the specified name
+        /// Saves a SoftwareBitmap to the specified StorageFile
         /// </summary>
-        /// <param name="bitmap"></param>
+        /// <param name="bitmap">SoftwareBitmap to save</param>
+        /// <param name="file">Target StorageFile to save to</param>
         /// <returns></returns>
-        private static async Task SaveSoftwareBitmapAsync(SoftwareBitmap bitmap)
+        private static async Task SaveSoftwareBitmapAsync(SoftwareBitmap bitmap, StorageFile file)
         {
-            var file = await KnownFolders.PicturesLibrary.CreateFileAsync("PreviewFrame.jpg", CreationCollisionOption.GenerateUniqueName);
             using (var outputStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {
                 var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, outputStream);

@@ -11,16 +11,16 @@
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="955ca3aa-f603-4811-a14a-edb211eb26e0" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="b0b6d141-2fa8-436b-9388-762c937cf3e1" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>CameraVideoStabilization</DisplayName>
+    <DisplayName>Camera Video Stabilization C# Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0" />
   </Dependencies>
 
   <Resources>
@@ -32,10 +32,10 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="CameraVideoStabilization.App">
       <uap:VisualElements
-        DisplayName="CameraVideoStabilization"
+        DisplayName="Camera Video Stabilization C# Sample"
         Square150x150Logo="Assets\SquareTile-sdk.png"
         Square44x44Logo="Assets\SmallTile-sdk.png"
-        Description="CameraVideoStabilization"
+        Description="Camera Video Stabilization C# Sample"
         BackgroundColor="#00b2f0">
         <uap:SplashScreen Image="Assets\Splash-sdk.png" />
         <uap:DefaultTile>

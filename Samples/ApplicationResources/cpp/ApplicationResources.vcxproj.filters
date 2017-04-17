@@ -37,11 +37,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml" />
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="App.xaml.cpp" />
-    <ClCompile Include="MainPage.xaml.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="scenario10.xaml.cpp" />
@@ -58,8 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="App.xaml.h" />
-    <ClInclude Include="MainPage.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="scenario10.xaml.h" />
     <ClInclude Include="scenario11.xaml.h" />
@@ -77,21 +77,21 @@
     <AppxManifest Include="Package.appxmanifest" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MainPage.xaml" />
+    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>
-    <Page Include="scenario2.xaml" />
-    <Page Include="scenario3.xaml" />
-    <Page Include="scenario4.xaml" />
-    <Page Include="scenario5.xaml" />
-    <Page Include="scenario7.xaml" />
-    <Page Include="scenario8.xaml" />
-    <Page Include="scenario10.xaml" />
-    <Page Include="scenario11.xaml" />
-    <Page Include="scenario12.xaml" />
-    <Page Include="scenario13.xaml" />
-    <Page Include="scenario1.xaml" />
+    <Page Include="..\shared\xaml\scenario2.xaml" />
+    <Page Include="..\shared\xaml\scenario3.xaml" />
+    <Page Include="..\shared\xaml\scenario4.xaml" />
+    <Page Include="..\shared\xaml\scenario5.xaml" />
+    <Page Include="..\shared\xaml\scenario7.xaml" />
+    <Page Include="..\shared\xaml\scenario8.xaml" />
+    <Page Include="..\shared\xaml\scenario10.xaml" />
+    <Page Include="..\shared\xaml\scenario11.xaml" />
+    <Page Include="..\shared\xaml\scenario12.xaml" />
+    <Page Include="..\shared\xaml\scenario13.xaml" />
+    <Page Include="..\shared\xaml\scenario1.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">

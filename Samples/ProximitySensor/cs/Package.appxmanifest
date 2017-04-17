@@ -11,7 +11,6 @@
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
-
     <mp:PhoneIdentity PhoneProductId="a4805caf-f369-4f3b-945c-8314986f804c" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
@@ -21,7 +20,7 @@
     </Properties>
 
     <Dependencies>
-        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10586.0" MaxVersionTested="10.0.14393.0" />
     </Dependencies>
 
     <Resources>
@@ -40,6 +39,13 @@
               BackgroundColor="#00b2f0">
                 <uap:SplashScreen Image="Assets\Splash-sdk.png" />
             </uap:VisualElements>
+            <Extensions>
+                <Extension Category="windows.backgroundTasks" EntryPoint="Tasks.ProximitySensorBackgroundTask">
+                    <BackgroundTasks>
+                        <Task Type="general" />
+                    </BackgroundTasks>
+                </Extension>
+            </Extensions>
         </Application>
     </Applications>
 

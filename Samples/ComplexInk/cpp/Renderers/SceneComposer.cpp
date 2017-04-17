@@ -32,6 +32,10 @@ Windows::UI::Xaml::Media::Imaging::VirtualSurfaceImageSource^ SceneComposer::Ini
 
 SceneComposer::~SceneComposer()
 {
+    // Unregister image source's update callback
+    ComPtr<IVirtualSurfaceImageSourceNative> imageSourceNative = _deviceResources->GetImageSourceNative();
+    DX::ThrowIfFailed(imageSourceNative->RegisterForUpdatesNeeded(nullptr));
+
     DeleteSceneObjects();
 }
 

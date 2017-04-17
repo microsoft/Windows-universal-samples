@@ -1,31 +1,42 @@
 <!---
   category: AudioVideoAndCamera
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620020&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620020
 --->
 
 # Video playback sample
 
-This sample demonstrates how to create apps that take advantage of many media platform features.
+Shows how to create apps that take advantage of many media platform features.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample covers:
 
-- Playing local video 
-- Customizing media transport controls
-- Using in-band closed captions in your app
-- Using out-of-band closed captions in your app
+- Playing local video
+- Using in-band closed captions
+- Using out-of-band closed captions
 - Dealing with multiple video tracks
 - Dealing with multiple audio tracks
 - Creating video playlists
+- Playing on a composition surface (not available to JS apps)
+- Transferring a MediaPlayer from one MediaPlayerElement to another (XAML-only)
 
-There are some scenarios that are not available in the JS version but they will be availble in future updates.
+## Related topics
 
-Related topics
---------------
+### Samples
 
-[Windows.Media.Playback namespace] https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.playback.aspx
+[VideoPlaybackSynchronization sample](/Samples/VideoPlaybackSynchronization)  
+[XamlCustomMediaTransportControls sample](/Samples/XamlCustomMediaTransportControls)  
 
-System requirements
------------------------------
+### Reference
+
+[Windows.Media.Playback namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.playback.aspx)  
+
+## System requirements
 
 **Client:** Windows 10
 
@@ -36,7 +47,7 @@ Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 Run the sample

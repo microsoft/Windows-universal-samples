@@ -1,15 +1,22 @@
 ﻿<!---
   category: DevicesSensorsAndPower
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620580&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620580
 --->
 
 # Orientation sensor sample
 
-This sample shows how to use the [**Windows.Devices.Sensors.OrientationSensor**](http://msdn.microsoft.com/library/windows/apps/br206371) API.
+Shows how to use the [Windows.Devices.Sensors.OrientationSensor](http://msdn.microsoft.com/library/windows/apps/br206371) API.
 
-**Note**  This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on both Windows 10 and Windows Phone 10.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-This sample allows the user to view the rotation matrix and Quaternion values that reflect the current device orientation. You can choose one of these scenarios:
+This sample allows the user to view the rotation matrix and Quaternion values that reflect the current device orientation.
+After choosing the sensor reporting type and optimization goal,
+you can choose one of these scenarios:
 
 -   Orientation sensor data events
 -   Poll orientation sensor readings
@@ -27,29 +34,20 @@ When you click the **Enable** button for the **Polling** option, the app will re
 
 Allows the user to simulate sensor accuracy and demonstrates usage of the calibration bar.
 
-**Note**  For Windows 8 app samples, download the [Windows 8 app samples pack](http://go.microsoft.com/fwlink/p/?LinkId=301698). The samples in the Windows 8 app samples pack will build and run only on Microsoft Visual Studio 2012.
-
 Related topics
 --------------
 
-[Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
-
-[**Windows.Devices.Sensors namespace**](http://msdn.microsoft.com/library/windows/apps/br206408)
+[Accelerometer sample](../Accelerometer)  
+[Windows.Devices.Sensors namespace](http://msdn.microsoft.com/library/windows/apps/br206408)  
 
 Operating system requirements
 -----------------------------
 
-Client
+**Client:** Windows 10 build 14295
 
-Windows 10
+**Server:** Windows Server 2016 Technical Preview
 
-Server
-
-None supported
-
-Phone
-
-Windows Phone 10
+**Phone:** Windows 10 build 14295
 
 Build the sample
 ----------------

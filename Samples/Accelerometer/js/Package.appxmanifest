@@ -6,20 +6,20 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="d2f9bcca-1673-49cf-a80b-0b5db8a03bf0"
+    Name="Microsoft.SDKSamples.Accelerometer.JS"
     Version="1.0.0.0"
     Publisher="CN=Microsoft" />
 
   <mp:PhoneIdentity PhoneProductId="d2f9bcca-1673-49cf-a80b-0b5db8a03bf0" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Accelerometer JS SDK Sample</DisplayName>
+    <DisplayName>Accelerometer JS Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>images\storelogo-sdk.png</Logo>
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0" />
   </Dependencies>
 
   <Resources>
@@ -32,8 +32,8 @@
       StartPage="default.html">
 
       <uap:VisualElements
-        DisplayName="Accelerometer JS SDK Sample"
-        Description="Accelerometer JS SDK Sample"
+        DisplayName="Accelerometer JS Sample"
+        Description="Accelerometer JS Sample"
         BackgroundColor="#00b2f0"
         Square150x150Logo="images\storelogo-sdk.png"
         Square44x44Logo="images\smalltile-sdk.png">

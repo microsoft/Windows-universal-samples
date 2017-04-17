@@ -1,0 +1,38 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_TrialMode"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer Margin="12,20,12,12">
+            <StackPanel>
+                <TextBlock Text="Trial-mode" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Determines the type of license the customer has, days remaining in trial mode, and offers to upgrade to the fully-licensed version.
+                </TextBlock>
+                <TextBlock Margin="0,10,0,0" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
+                    Current license mode: <Run x:Name="LicenseMode">Unknown</Run>
+                </TextBlock>
+
+                <Button Content="Show trial period information" Margin="0,12,0,0" Click="{x:Bind ShowTrialPeriodInformation}"/>
+                <Button Margin="0,12,0,0" Click="{x:Bind PurchaseFullLicense}">
+                    <TextBlock>Buy app (<Run x:Name="PurchasePrice">Price unknown</Run>)</TextBlock>
+                </Button>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

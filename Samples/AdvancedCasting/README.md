@@ -1,11 +1,22 @@
 ﻿<!---
   category: AudioVideoAndCamera
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620480&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620480
 --->
 
 # Advanced casting sample
 
-This sample shows how to use the APIs in the **Windows.Media.Casting** and **Windows.Media.DialProtocol** namespaces.  It also illustrates how to use the **Windows.UI.ViewManagement.ProjectionManager** and **Windows.Devices.Enumeration.DevicePicker** APIs to render media on a remote device.  It covers sending media to various devices- Miracast, DLNA, DIAL, and Bluetooth.  For an intro to casting, see the *Basic Media Casting Sample*.
+Shows how to use the **Windows.Media.Casting** and **Windows.Media.DialProtocol** namespaces. 
+Also shows how to use the **Windows.UI.ViewManagement.ProjectionManager** and **Windows.Devices.Enumeration.DevicePicker** APIs 
+to render media on a remote device. It covers sending media to various devices: Miracast, DLNA, DIAL, and Bluetooth.  
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+For an intro to casting, see the *Basic Media Casting Sample*.
 
 **Scenario 1: Media Element Casting 101:**   
 Press the *Cast* button next to the progress bar in the video element.  Select the device you'd like to cast to.
@@ -34,10 +45,10 @@ This scenario brings all the prior scenarios together and shows how to use them 
 Related topics
 --------------
 
-[Windows.Media.Casting namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.casting.aspx)
-[Windows.Media.DialProtocol namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.dialprotocol.aspx)
-[Windows.UI.ViewManagement.ProjectionManager API](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.projectionmanager.aspx)
-[Windows.Devices.Enumeration.DevicePicker API](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.enumeration.devicepicker.aspx)
+[Windows.Media.Casting namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.casting.aspx)
+[Windows.Media.DialProtocol namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.dialprotocol.aspx)
+[Windows.UI.ViewManagement.ProjectionManager API](https://msdn.microsoft.com/library/windows/apps/windows.ui.viewmanagement.projectionmanager.aspx)
+[Windows.Devices.Enumeration.DevicePicker API](https://msdn.microsoft.com/library/windows/apps/windows.devices.enumeration.devicepicker.aspx)
 
 System requirements
 -----------------------------

@@ -7,9 +7,11 @@
 // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 //
 //*********************************************************
+using AppUIBasics.Common;
 using AppUIBasics.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -44,38 +46,28 @@ namespace AppUIBasics
 
         public event EventHandler GroupsLoaded;
 
-        //public static CommandBar TopCommandBar
-        //{
-        //    get { return Current.topCommandBar; }
-        //}
-
         public static SplitView RootSplitView
         {
             get { return Current.rootSplitView; }
         }
 
+        private RootFrameNavigationHelper rootFrameNavigationHelper;
+
         public NavigationRootPage()
         {
             this.InitializeComponent();
-
+            this.rootFrameNavigationHelper = new RootFrameNavigationHelper(rootFrame);
             LoadGroups();
             Current = this;
             RootFrame = rootFrame;
 
-            //Loaded += NavigationRootPage_Loaded;
-
-            //Use the hardware back button instead of showing the back button in the page
-            if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            this.GotFocus += (object sender, RoutedEventArgs e) =>
             {
-                Windows.Phone.UI.Input.HardwareButtons.BackPressed += (s, e) =>
-                {
-                    if (rootFrame.CanGoBack)
-                    {
-                        rootFrame.GoBack();
-                        e.Handled = true;
-                    }
-                };
-            }
+                // helpful for debugging focus problems w/ keyboard & gamepad
+                FrameworkElement focus = FocusManager.GetFocusedElement() as FrameworkElement;
+                if (focus != null)
+                    Debug.WriteLine("got focus: " + focus.Name + " (" + focus.GetType().ToString() + ")");
+            };
         }
 
         private async void LoadGroups()
@@ -83,17 +75,6 @@ namespace AppUIBasics
             _groups = await ControlInfoDataSource.GetGroupsAsync();
             if (GroupsLoaded != null)
                 GroupsLoaded(this, new EventArgs());
-        }
-
-        //async void NavigationRootPage_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    this.DataContext = Groups;
-        //}
-
-
-        private void AppBar_Closed(object sender, object e)
-        {
-            //this.navControl.HideSecondLevelNav();
         }
 
         private void ControlGroupItems_ItemClick(object sender, ItemClickEventArgs e)

@@ -8,8 +8,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.14393.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -138,7 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CalibrationBar.xaml.h">
-      <DependentUpon>CalibrationBar.xaml</DependentUpon>
+      <DependentUpon>..\shared\CalibrationBar.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h">
@@ -148,27 +148,31 @@
       <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Scenario0_Choose.xaml.h">
+      <DependentUpon>..\shared\Scenario0_Choose.xaml</DependentUpon>
+    </ClInclude>
     <ClInclude Include="Scenario1_DataEvents.xaml.h">
-      <DependentUpon>Scenario1_DataEvents.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_DataEvents.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario2_Polling.xaml.h">
-      <DependentUpon>Scenario2_Polling.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_Polling.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario3_Calibration.xaml.h">
-      <DependentUpon>Scenario3_Calibration.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_Calibration.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="CalibrationBar.xaml" />
+    <Page Include="..\shared\CalibrationBar.xaml" />
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_DataEvents.xaml" />
-    <Page Include="Scenario2_Polling.xaml" />
-    <Page Include="Scenario3_Calibration.xaml" />
+    <Page Include="..\shared\Scenario0_Choose.xaml" />
+    <Page Include="..\shared\Scenario1_DataEvents.xaml" />
+    <Page Include="..\shared\Scenario2_Polling.xaml" />
+    <Page Include="..\shared\Scenario3_Calibration.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -183,7 +187,7 @@
       <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="CalibrationBar.xaml.cpp">
-      <DependentUpon>CalibrationBar.xaml</DependentUpon>
+      <DependentUpon>..\shared\CalibrationBar.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp">
       <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
@@ -197,14 +201,17 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Scenario0_Choose.xaml.cpp">
+      <DependentUpon>..\shared\Scenario0_Choose.xaml</DependentUpon>
+    </ClCompile>
     <ClCompile Include="Scenario1_DataEvents.xaml.cpp">
-      <DependentUpon>Scenario1_DataEvents.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_DataEvents.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario2_Polling.xaml.cpp">
-      <DependentUpon>Scenario2_Polling.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_Polling.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario3_Calibration.xaml.cpp">
-      <DependentUpon>Scenario3_Calibration.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_Calibration.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

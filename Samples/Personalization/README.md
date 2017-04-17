@@ -1,15 +1,27 @@
 ﻿<!--
   category: IdentitySecurityAndEncryption
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620585&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620585
 -->
 
 # Lock screen personalization sample
 
-This sample demonstrates how a developer can use the [**LockScreen**](http://msdn.microsoft.com/library/windows/apps/br241847) API to set the current user's lock screen image. This sample uses classes from the [**Windows.System.UserProfile**](http://msdn.microsoft.com/library/windows/apps/br241881) namespace. In particular, it uses the **LockScreen** class to set the user's lock screen image. It also demonstrates how to register an RSS feed that can be used as a source for a lock screen slideshow.
+Shows how a developer can use the [LockScreen](http://msdn.microsoft.com/library/windows/apps/br241847) API to set the current user's lock screen image. 
 
-The lock screen is the screen shown when you lock your computer, as well as when you reboot the device or wake it from a sleep state. It is a user-customizable surface that both conveys information and protects the computer against unauthorized use.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-The sample lets you use the item picker to select an image your Pictures library to use as the lock screen image. If the sample successfully uses the selected image for the lock screen, the image appears in the output area of the sample's main page. You can also select the location of an RSS feed that can supply images for a lock screen slideshow.
+This sample uses classes from the [Windows.System.UserProfile](http://msdn.microsoft.com/library/windows/apps/br241881) namespace. 
+In particular, it uses the **LockScreen** class to set the user's lock screen image.
+
+The lock screen is the screen shown when you lock your computer, as well as when you reboot the device or wake it from a sleep state. 
+It is a user-customizable surface that both conveys information and protects the computer against unauthorized use.
+
+The sample lets you use the item picker to select an image your Pictures library to use as the lock screen image. 
+If the sample successfully uses the selected image for the lock screen, the image appears in the output area of the sample's main page.
 
 To learn more about the lock screen, see [Lock screen overview](http://msdn.microsoft.com/library/windows/apps/hh779720).
 
@@ -17,9 +29,8 @@ To learn more about the lock screen, see [Lock screen overview](http://msdn.micr
 
 ### Reference
 
-[**LockScreen**](http://msdn.microsoft.com/library/windows/apps/br241847)
-
-[**Windows.System.UserProfile**](http://msdn.microsoft.com/library/windows/apps/br241881)
+[LockScreen](http://msdn.microsoft.com/library/windows/apps/br241847)  
+[Windows.System.UserProfile](http://msdn.microsoft.com/library/windows/apps/br241881)  
 
 ## System requirements
 

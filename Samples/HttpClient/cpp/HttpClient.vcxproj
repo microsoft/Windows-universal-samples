@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{f710b9fd-4e6b-42d7-a99a-6d48888d48b0}</ProjectGuid>
+    <RootNamespace>SDKTemplate</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.14393.0</WindowsTargetPlatformMinVersion>
+    <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);..\..\..\SharedContent\cpp</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <ClCompile>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Helpers.h" />
+    <ClInclude Include="HttpJsonContent.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h">
+      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h">
+      <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="PlugInFilter.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Scenario10_SetCookie.xaml.h">
+      <DependentUpon>..\shared\Scenario10_SetCookie.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario11_DeleteCookie.xaml.h">
+      <DependentUpon>..\shared\Scenario11_DeleteCookie.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario12_DisableCookies.xaml.h">
+      <DependentUpon>..\shared\Scenario12_DisableCookies.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario13_RetryFilter.xaml.h">
+      <DependentUpon>..\shared\Scenario13_RetryFilter.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario14_MeteredConnectionFilter.xaml.h">
+      <DependentUpon>..\shared\Scenario14_MeteredConnectionFilter.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario15_ServerCertificateValidation.xaml.h">
+      <DependentUpon>..\shared\Scenario15_ServerCertificateValidation.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario1_GetText.xaml.h">
+      <DependentUpon>..\shared\Scenario1_GetText.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario2_GetStream.xaml.h">
+      <DependentUpon>..\shared\Scenario2_GetStream.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario3_GetList.xaml.h">
+      <DependentUpon>..\shared\Scenario3_GetList.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario4_PostText.xaml.h">
+      <DependentUpon>..\shared\Scenario4_PostText.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario5_PostStream.xaml.h">
+      <DependentUpon>..\shared\Scenario5_PostStream.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario6_PostMultipart.xaml.h">
+      <DependentUpon>..\shared\Scenario6_PostMultipart.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario7_PostStreamWithProgress.xaml.h">
+      <DependentUpon>..\shared\Scenario7_PostStreamWithProgress.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario8_PostCustomContent.xaml.h">
+      <DependentUpon>..\shared\Scenario8_PostCustomContent.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario9_GetCookie.xaml.h">
+      <DependentUpon>..\shared\Scenario9_GetCookie.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="SlowInputStream.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Link>Styles\Styles.xaml</Link>
+    </Page>
+    <Page Include="..\shared\Scenario10_SetCookie.xaml" />
+    <Page Include="..\shared\Scenario11_DeleteCookie.xaml" />
+    <Page Include="..\shared\Scenario12_DisableCookies.xaml" />
+    <Page Include="..\shared\Scenario13_RetryFilter.xaml" />
+    <Page Include="..\shared\Scenario14_MeteredConnectionFilter.xaml" />
+    <Page Include="..\shared\Scenario15_ServerCertificateValidation.xaml" />
+    <Page Include="..\shared\Scenario1_GetText.xaml" />
+    <Page Include="..\shared\Scenario2_GetStream.xaml" />
+    <Page Include="..\shared\Scenario3_GetList.xaml" />
+    <Page Include="..\shared\Scenario4_PostText.xaml" />
+    <Page Include="..\shared\Scenario5_PostStream.xaml" />
+    <Page Include="..\shared\Scenario6_PostMultipart.xaml" />
+    <Page Include="..\shared\Scenario7_PostStreamWithProgress.xaml" />
+    <Page Include="..\shared\Scenario8_PostCustomContent.xaml" />
+    <Page Include="..\shared\Scenario9_GetCookie.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp">
+      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp">
+      <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Helpers.cpp" />
+    <ClCompile Include="HttpJsonContent.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="PlugInFilter.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Scenario10_SetCookie.xaml.cpp">
+      <DependentUpon>..\shared\Scenario10_SetCookie.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario11_DeleteCookie.xaml.cpp">
+      <DependentUpon>..\shared\Scenario11_DeleteCookie.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario12_DisableCookies.xaml.cpp">
+      <DependentUpon>..\shared\Scenario12_DisableCookies.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario13_RetryFilter.xaml.cpp">
+      <DependentUpon>..\shared\Scenario13_RetryFilter.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario14_MeteredConnectionFilter.xaml.cpp">
+      <DependentUpon>..\shared\Scenario14_MeteredConnectionFilter.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario15_ServerCertificateValidation.xaml.cpp">
+      <DependentUpon>..\shared\Scenario15_ServerCertificateValidation.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario1_GetText.xaml.cpp">
+      <DependentUpon>..\shared\Scenario1_GetText.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario2_GetStream.xaml.cpp">
+      <DependentUpon>..\shared\Scenario2_GetStream.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario3_GetList.xaml.cpp">
+      <DependentUpon>..\shared\Scenario3_GetList.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario4_PostText.xaml.cpp">
+      <DependentUpon>..\shared\Scenario4_PostText.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario5_PostStream.xaml.cpp">
+      <DependentUpon>..\shared\Scenario5_PostStream.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario6_PostMultipart.xaml.cpp">
+      <DependentUpon>..\shared\Scenario6_PostMultipart.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario7_PostStreamWithProgress.xaml.cpp">
+      <DependentUpon>..\shared\Scenario7_PostStreamWithProgress.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario8_PostCustomContent.xaml.cpp">
+      <DependentUpon>..\shared\Scenario8_PostCustomContent.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario9_GetCookie.xaml.cpp">
+      <DependentUpon>..\shared\Scenario9_GetCookie.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="SlowInputStream.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Link>Assets\microsoft-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Link>Assets\smalltile-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Link>Assets\splash-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>Assets\squaretile-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Link>Assets\storelogo-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Link>Assets\tile-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Link>Assets\windows-sdk.png</Link>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HttpFilters\HttpFilters.vcxproj">
+      <Project>{dcd26505-40fb-4396-a9fc-92460e709480}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -51,6 +51,7 @@ namespace SDKTemplate
         void ResetTheScenarioState();
         ReceiptPrintJob^ GetMerchantFooter(ClaimedPosPrinter^ claimedInstance);
         ReceiptPrintJob^ GetCustomerFooter(ClaimedPosPrinter^ claimedInstance);
+        void LineFeedAndCutPaper(ReceiptPrintJob^ job);
 
         task<void> ClaimPrinter();
         task<void> EnableAsync();

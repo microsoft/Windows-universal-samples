@@ -10,7 +10,7 @@
     <AssemblyName>BasicInput</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -127,23 +127,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="1-InputEvents.xaml">
+    <Page Include="..\shared\1-InputEvents.xaml">
+      <Link>1-InputEvents.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="2-PointerPointProperties.xaml">
+    <Page Include="..\shared\2-PointerPointProperties.xaml">
+      <Link>2-PointerPointProperties.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="3-DeviceCapabilities.xaml">
+    <Page Include="..\shared\3-DeviceCapabilities.xaml">
+      <Link>3-DeviceCapabilities.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="4-XAMLManipulations.xaml">
+    <Page Include="..\shared\4-XAMLManipulations.xaml">
+      <Link>4-XAMLManipulations.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="5-GestureRecognizer.xaml">
+    <Page Include="..\shared\5-GestureRecognizer.xaml">
+      <Link>5-GestureRecognizer.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

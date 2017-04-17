@@ -8,7 +8,7 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
@@ -138,65 +138,65 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="App.xaml.h">
-      <DependentUpon>App.xaml</DependentUpon>
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h">
+      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="MainPage.xaml.h">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h">
+      <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="scenario1.xaml.h">
-      <DependentUpon>scenario1.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario1.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="scenario10.xaml.h">
-      <DependentUpon>scenario10.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario10.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="scenario11.xaml.h">
-      <DependentUpon>scenario11.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario11.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="scenario12.xaml.h">
-      <DependentUpon>scenario12.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario12.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="scenario13.xaml.h">
-      <DependentUpon>scenario13.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario13.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="scenario2.xaml.h">
-      <DependentUpon>scenario2.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario2.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="scenario3.xaml.h">
-      <DependentUpon>scenario3.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario3.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="scenario4.xaml.h">
-      <DependentUpon>scenario4.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario4.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="scenario5.xaml.h">
-      <DependentUpon>scenario5.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario5.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="scenario7.xaml.h">
-      <DependentUpon>scenario7.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario7.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="scenario8.xaml.h">
-      <DependentUpon>scenario8.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario8.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
+    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="scenario1.xaml" />
-    <Page Include="scenario10.xaml" />
-    <Page Include="scenario11.xaml" />
-    <Page Include="scenario12.xaml" />
-    <Page Include="scenario13.xaml" />
-    <Page Include="scenario2.xaml" />
-    <Page Include="scenario3.xaml" />
-    <Page Include="scenario4.xaml" />
-    <Page Include="scenario5.xaml" />
-    <Page Include="scenario7.xaml" />
-    <Page Include="scenario8.xaml" />
+    <Page Include="..\shared\xaml\scenario1.xaml" />
+    <Page Include="..\shared\xaml\scenario10.xaml" />
+    <Page Include="..\shared\xaml\scenario11.xaml" />
+    <Page Include="..\shared\xaml\scenario12.xaml" />
+    <Page Include="..\shared\xaml\scenario13.xaml" />
+    <Page Include="..\shared\xaml\scenario2.xaml" />
+    <Page Include="..\shared\xaml\scenario3.xaml" />
+    <Page Include="..\shared\xaml\scenario4.xaml" />
+    <Page Include="..\shared\xaml\scenario5.xaml" />
+    <Page Include="..\shared\xaml\scenario7.xaml" />
+    <Page Include="..\shared\xaml\scenario8.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -207,11 +207,11 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="App.xaml.cpp">
-      <DependentUpon>App.xaml</DependentUpon>
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp">
+      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="MainPage.xaml.cpp">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp">
+      <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -223,37 +223,37 @@
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="scenario1.xaml.cpp">
-      <DependentUpon>scenario1.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario1.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="scenario10.xaml.cpp">
-      <DependentUpon>scenario10.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario10.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="scenario11.xaml.cpp">
-      <DependentUpon>scenario11.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario11.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="scenario12.xaml.cpp">
-      <DependentUpon>scenario12.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario12.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="scenario13.xaml.cpp">
-      <DependentUpon>scenario13.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario13.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="scenario2.xaml.cpp">
-      <DependentUpon>scenario2.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario2.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="scenario3.xaml.cpp">
-      <DependentUpon>scenario3.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario3.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="scenario4.xaml.cpp">
-      <DependentUpon>scenario4.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario4.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="scenario5.xaml.cpp">
-      <DependentUpon>scenario5.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario5.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="scenario7.xaml.cpp">
-      <DependentUpon>scenario7.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario7.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="scenario8.xaml.cpp">
-      <DependentUpon>scenario8.xaml</DependentUpon>
+      <DependentUpon>..\shared\xaml\scenario8.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

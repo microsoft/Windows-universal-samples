@@ -14,13 +14,13 @@
     <mp:PhoneIdentity PhoneProductId="97579e01-6ae7-4894-8ae7-93525f66c9ba" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>AutoSuggestBox Migration C# Sample</DisplayName>
+        <DisplayName>AutoSuggestBox C# Sample</DisplayName>
         <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
         <Logo>Assets\StoreLogo-sdk.png</Logo>
     </Properties>
 
     <Dependencies>
-        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.14393.0" />
     </Dependencies>
 
     <Resources>
@@ -30,10 +30,10 @@
     <Applications>
         <Application Id="App"
           Executable="$targetnametoken$.exe"
-          EntryPoint="ASBMigrationSample.App">
+          EntryPoint="AutoSuggestBox.App">
             <uap:VisualElements
-              DisplayName="AutoSuggestBox Migration C# Sample"
-              Description="AutoSuggestBox Migration C# Sample"
+              DisplayName="AutoSuggestBox C# Sample"
+              Description="AutoSuggestBox C# Sample"
               Square150x150Logo="Assets\squareTile-sdk.png"
               Square44x44Logo="Assets\SmallTile-sdk.png"
               BackgroundColor="#00b2f0">
@@ -46,8 +46,4 @@
             </uap:VisualElements>
         </Application>
     </Applications>
-
-    <Capabilities>
-        <Capability Name="internetClient" />
-    </Capabilities>
 </Package>

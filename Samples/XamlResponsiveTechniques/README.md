@@ -1,18 +1,29 @@
 ﻿<!---
   category: ControlsLayoutAndText
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620024&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620024
 --->
 
 # Responsiveness techniques sample
 
-Showcases a UI scenario from Settings (Personalization UI) and highlights the simple responsive techniques we have introduced in Windows 10 – namely, VisualState.Setters, AdaptiveTriggers, SplitView and RelativePanel (static and dynamically modifying properties). This sample can be viewed as a getting started sample.
+Shows a UI scenario from Settings (Personalization UI) and highlights the simple responsive techniques we have introduced in 
+Windows 10 – namely, [VisualState.Setters](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.visualstate.setters.aspx), 
+[AdaptiveTrigger](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.adaptivetrigger.aspx), 
+[SplitView](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.splitview.aspx), 
+and [RelativePanel](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.relativepanel.aspx) (static and dynamically modifying properties). 
+This sample can be viewed as a getting started sample.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
-
 
 ## System requirements
 

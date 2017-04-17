@@ -21,7 +21,7 @@
     </Properties>
 
     <Dependencies>
-      <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+      <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10586.0" MaxVersionTested="10.0.14393.0" />
     </Dependencies>
 
     <Resources>
@@ -45,6 +45,13 @@
                     </uap:ShowNameOnTiles>
                 </uap:DefaultTile>
             </uap:VisualElements>
+            <Extensions>
+                <Extension Category="windows.backgroundTasks" EntryPoint="Tasks.PedometerBackgroundTask">
+                    <BackgroundTasks>
+                        <Task Type="general" />
+                    </BackgroundTasks>
+                </Extension>
+            </Extensions>
         </Application>
     </Applications>
 

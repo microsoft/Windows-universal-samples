@@ -1,14 +1,21 @@
 ﻿<!---
   category: AudioVideoAndCamera 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620518&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620518
 --->
 
 # Camera profiles sample
 
-This sample demonstrates a new extension to Windows.Media.Capture.MediaCaptureInitializationSettings API. This new API allows for application
-developer to query a device for a collection of media types that can work together on a given device called a Video Profile. These new Video Profiles 
+Shows a new extension to Windows.Media.Capture.MediaCaptureInitializationSettings API. This new API lets app 
+developers query a device for a collection of media types that can work together on a given device called a Video Profile. These new Video Profiles 
 expose the capabilities of the capture device which the developer can use to set MediaCaptureInitializationSettings to the desired capabilities. In 
-addition the developer can query the driver to see if it supports additional features available through custom profiles.
+addition, the developer can query the driver to see if it supports additional features available through custom profiles.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample covers:
 
@@ -35,15 +42,18 @@ Hdr Video.
 
 Related topics
 --------------
-[Windows.Media.Capture.MediaCapture namespace] (https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.devices.aspx)
-[Windows.Devices.Enumeration namespace] (https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.enumeration.aspx)
+[Windows.Media.Capture.MediaCapture namespace] (https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)  
+[Windows.Devices.Enumeration namespace] (https://msdn.microsoft.com/library/windows/apps/windows.devices.enumeration.aspx)  
+
+**Conceptual**
+
+[How to use Camera Profiles](http://go.microsoft.com/fwlink/?LinkId=627233)  
 
 **Reference**
 
-[Windows.Media.Capture.MediaCaptureInitializationSettings] (https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.capture.mediacaptureinitializationsettings.mediacaptureinitializationsettings.aspx) 
-[Windows.Media.Capture.MediaCaptureInitilizationSettings.VideoDeviceId](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.capture.mediacaptureinitializationsettings.videodeviceid.aspx)
-[Windows.Devices.Enumeration.DeviceInformation class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.enumeration.deviceinformation.aspx)
-
+[Windows.Media.Capture.MediaCaptureInitializationSettings](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.mediacaptureinitializationsettings.mediacaptureinitializationsettings.aspx)  
+[Windows.Media.Capture.MediaCaptureInitilizationSettings.VideoDeviceId](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.mediacaptureinitializationsettings.videodeviceid.aspx)  
+[Windows.Devices.Enumeration.DeviceInformation class](https://msdn.microsoft.com/library/windows/apps/windows.devices.enumeration.deviceinformation.aspx)  
 
 System requirements
 -----------------------------

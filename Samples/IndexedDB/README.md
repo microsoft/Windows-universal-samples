@@ -1,11 +1,20 @@
 ﻿<!---
   category: Data
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620553&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620553
 --->
 
 # IndexedDB sample
 
-This sample demonstrates a common usage pattern for the IndexedDB web standard API. This includes creation of a database, loading a schema from an XML file and applying that schema to the database, and reading from and writing to the database. This sample is illustrated through a simple book lending library scenario.
+Shows a common usage pattern for the IndexedDB web standard API. This includes creation of a database, loading a schema 
+from an XML file and applying that schema to the database, and reading from and writing to the database. 
+This sample is illustrated through a simple book lending library scenario.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 ## Related topics
 

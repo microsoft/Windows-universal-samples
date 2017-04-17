@@ -35,9 +35,9 @@
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.14393.0</WindowsTargetPlatformMinVersion>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -126,112 +126,112 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;%(PreprocessorDefinitions);QCC_OS_GROUP_WINDOWS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT_DLL;QCC_OS_GROUP_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalOptions>/bigobj -Zm210 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm250</AdditionalOptions>
       <DisableSpecificWarnings>28204</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);msajapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>WindowsApp.lib;msajapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;NDEBUG;%(PreprocessorDefinitions);QCC_OS_GROUP_WINDOWS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT_DLL;QCC_OS_GROUP_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalOptions>/bigobj -Zm210 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm250</AdditionalOptions>
       <DisableSpecificWarnings>28204</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);msajapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>WindowsApp.lib;msajapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;%(PreprocessorDefinitions);QCC_OS_GROUP_WINDOWS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT_DLL;QCC_OS_GROUP_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalOptions>/bigobj -Zm210 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm250</AdditionalOptions>
       <DisableSpecificWarnings>28204</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);msajapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>WindowsApp.lib;msajapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;NDEBUG;%(PreprocessorDefinitions);QCC_OS_GROUP_WINDOWS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT_DLL;QCC_OS_GROUP_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalOptions>/bigobj -Zm210 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm250</AdditionalOptions>
       <DisableSpecificWarnings>28204</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);msajapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>WindowsApp.lib;msajapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;%(PreprocessorDefinitions);QCC_OS_GROUP_WINDOWS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT_DLL;QCC_OS_GROUP_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalOptions>/bigobj -Zm210 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm250</AdditionalOptions>
       <DisableSpecificWarnings>28204</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);msajapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>WindowsApp.lib;msajapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;NDEBUG;%(PreprocessorDefinitions);QCC_OS_GROUP_WINDOWS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT_DLL;QCC_OS_GROUP_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalOptions>/bigobj -Zm210 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj /Zm250</AdditionalOptions>
       <DisableSpecificWarnings>28204</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>WindowsApp.lib;%(AdditionalDependencies);msajapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>WindowsApp.lib;msajapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\shared\AllJoynBusObjectManager.h" />
-    <ClInclude Include="..\..\shared\AllJoynHelpers.h" />
+    <ClInclude Include="AllJoynHelpers.h" />
     <ClInclude Include="IOnboardingService.h" />
     <ClInclude Include="OnboardingConsumer.h" />
     <ClInclude Include="OnboardingEventArgs.h" />
+    <ClInclude Include="OnboardingLegacySignals.h" />
     <ClInclude Include="OnboardingMethodResults.h" />
     <ClInclude Include="OnboardingProducer.h" />
     <ClInclude Include="OnboardingServiceEventAdapter.h" />
     <ClInclude Include="OnboardingServiceEventArgs.h" />
     <ClInclude Include="OnboardingSignals.h" />
     <ClInclude Include="OnboardingStructures.h" />
-    <ClInclude Include="OnboardingWatcher.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="..\..\shared\TypeConversionHelpers.h" />
   </ItemGroup>
@@ -239,11 +239,11 @@
     <ClCompile Include="..\..\shared\AllJoynBusObjectManager.cpp" />
     <ClCompile Include="..\..\shared\AllJoynHelpers.cpp" />
     <ClCompile Include="OnboardingConsumer.cpp" />
+    <ClCompile Include="OnboardingLegacySignals.cpp" />
     <ClCompile Include="OnboardingProducer.cpp" />
     <ClCompile Include="OnboardingServiceEventAdapter.cpp" />
     <ClCompile Include="OnboardingServiceEventArgs.cpp" />
     <ClCompile Include="OnboardingSignals.cpp" />
-    <ClCompile Include="OnboardingWatcher.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -257,4 +257,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties AllJoynProjectRole="AllJoynInterfaceProject" ImplementsAllJoynInterface="org.alljoyn.Onboarding" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

@@ -25,10 +25,18 @@ namespace ListViewSample
         {
             ((Frame)Window.Current.Content).Navigate(typeof(TapOnTheEdgeSample));
         }
-
+        private void NavigateToRestoreScrollPosition(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(RestoreScrollPositionSample));
+        }
         private void NavigateToHome(object sender, RoutedEventArgs e)
         {
             ((Frame)Window.Current.Content).Navigate(typeof(MainPage));
+        }
+
+        private void NavigateToSpecificPosition(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(ScrollIntoViewSample));
         }
     }
 }

@@ -33,7 +33,7 @@ Scenario1_OmnidirectionalSound::Scenario1_OmnidirectionalSound() : _rootPage(Mai
     if (SUCCEEDED(hr))
     {
         _timer = ref new DispatcherTimer();
-        _timer->Tick += ref new EventHandler<Platform::Object^>(this, &Scenario1_OmnidirectionalSound::OnTimerTick);
+        _timerEventToken = _timer->Tick += ref new EventHandler<Platform::Object^>(this, &Scenario1_OmnidirectionalSound::OnTimerTick);
         TimeSpan timespan;
         timespan.Duration = 10000 / 30;
         _timer->Interval = timespan;
@@ -53,6 +53,14 @@ Scenario1_OmnidirectionalSound::Scenario1_OmnidirectionalSound() : _rootPage(Mai
     }
 
     _initialized = SUCCEEDED(hr);
+}
+
+Scenario1_OmnidirectionalSound::~Scenario1_OmnidirectionalSound()
+{
+    if (_timerEventToken.Value != 0)
+    {
+        _timer->Tick -= _timerEventToken;
+    }
 }
 
 void SDKTemplate::Scenario1_OmnidirectionalSound::PlayButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)

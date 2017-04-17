@@ -1,11 +1,22 @@
 ﻿<!---
   category: ControlsLayoutAndText
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620525&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620525
 --->
 
 # Context menu sample
 
-This sample shows how to create a context menu and how to replace the default context menu for text. This sample uses [**Windows.UI.Popups**](http://msdn.microsoft.com/library/windows/apps/br242180) API, including the [**PopupMenu**](http://msdn.microsoft.com/library/windows/apps/br208693) and the [**oncontextmenu**](http://msdn.microsoft.com/library/windows/apps/hh441317) event.
+Shows how to create a context menu and how to replace the default context menu for text. 
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+This sample uses [Windows.UI.Popups](http://msdn.microsoft.com/library/windows/apps/br242180) API, 
+including the [PopupMenu](http://msdn.microsoft.com/library/windows/apps/br208693) and the 
+[contextmenu | oncontextmenu](http://msdn.microsoft.com/library/windows/apps/hh441317) event.
 
 The sample demonstrates these two tasks:
 
@@ -17,12 +28,12 @@ To learn about choosing commands and designing a context menu, see [Guidelines a
 
 Additional APIs for this sample include:
 
--   [**UICommand**](http://msdn.microsoft.com/library/windows/apps/br242166) class
--   [**UICommandSeparator**](http://msdn.microsoft.com/library/windows/apps/br242168) class
+-   [UICommand](http://msdn.microsoft.com/library/windows/apps/br242166) class
+-   [UICommandSeparator](http://msdn.microsoft.com/library/windows/apps/br242168) class
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
-To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
@@ -30,7 +41,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[**Windows.UI.Popups**](http://msdn.microsoft.com/library/windows/apps/br242180)
+[Windows.UI.Popups](http://msdn.microsoft.com/library/windows/apps/br242180)  
 
 ## System requirements
 

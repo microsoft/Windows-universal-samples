@@ -53,13 +53,16 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="Int Property with INPC: "/>
-                    <Slider Grid.Row="0" Grid.Column="1"  Minimum="0" Maximum="10" Value="{x:Bind Model.IntPropWithINPC, Mode=TwoWay, Converter={StaticResource IntToDouble}}"  />
+                  <!-- Before RS1, the following would need a converter to enable the double to int conversion for the reverse direction-->
+                  <Slider Grid.Row="0" Grid.Column="1"  Minimum="0" Maximum="10" Value="{x:Bind Model.IntPropWithINPC, Mode=TwoWay}"  />
                     <TextBlock Grid.Row="1" Text="Int Dependency Property : "/>
                     <Slider Grid.Row="1" Grid.Column="1" Value="{x:Bind Model.IntPropertyDP, Mode=TwoWay, Converter={StaticResource IntToDouble}}" Minimum="0" Maximum="100" />
                     <ToggleSwitch  Grid.Row="2" IsOn="{x:Bind Model.BoolPropWithINPC, Mode=TwoWay}" />
                     <TextBlock Grid.Row="2" Grid.Column="1" Visibility="{x:Bind Model.BoolPropWithINPC, Mode=OneWay, Converter={StaticResource BoolToVisibility}}" x:Name="ToggledVisibility" Text="My visibility is controlled by the same property as the toggleswitch" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Visibility="{x:Bind Model.BoolPropWithINPC, Mode=OneWay}" Text="My visibility is also controlled by the same property as the toggleswitch, but I rely on implicit bool to Visibility conversion." />
                 </Grid>
 
                 <TextBlock Text="Bindings to the current page" Style="{StaticResource Section}"/>
@@ -74,18 +77,19 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Bound to Grid1.Children[5].Visibility: "/>
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind Path=Grid1.Children[5].Visibility, Mode=OneWay}" />
+                    <TextBlock Grid.Row="0" Text="LocalTextBox - source of data for other bindings:"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="Hello World" x:Name="LocalTextBox" Width="250" />
 
-                    <TextBlock Grid.Row="1" Text="LocalTextBox - source of data for other bindings:"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="Hello World" x:Name="LocalTextBox" Width="250" />
+                    <TextBlock Grid.Row="1" Text="Text and FontSize are both bound"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind LocalTextBox.Text, Mode=OneWay}" FontSize="{x:Bind Model.IntPropWithINPC, Mode=OneWay}" />
 
-                    <TextBlock Grid.Row="2" Text="Text and FontSize are both bound"/>
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind LocalTextBox.Text, Mode=OneWay}" FontSize="{x:Bind Model.IntPropWithINPC, Mode=OneWay}" />
+                    <TextBlock Grid.Row="2" Text="Bound to Grid1.Children[5].Visibility: "/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind Path=Grid1.Children[5].Visibility, Mode=OneWay}" />
                 </Grid>
 
-                <TextBlock Style="{StaticResource Note}"><Run>The following is a grid panel with rectangles with bindings to the Grid.Column property</Run></TextBlock>
+                <TextBlock Style="{StaticResource Note}"><Run>The following is a grid panel with rectangles with bindings to the (Grid.Column) attatched property</Run></TextBlock>
                 <TextBlock Style="{StaticResource Note}"><Run>The Green box should move based on the value updates. The purple box is controlled by a slider above.</Run></TextBlock>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -120,7 +124,9 @@
                                 <RowDefinition Height="20" />
                             </Grid.RowDefinitions>
                             <Rectangle Grid.Column="{x:Bind Model.IntPropWithINPC, Mode=OneWay}" Fill="Green" Width="20" Height="20" />
-                            <Rectangle Grid.Row="1" Grid.Column="{x:Bind OneTimeSlider3.Value, Mode=OneWay, Converter={StaticResource DoubleToInt}}" Fill="Purple" Width="20" Height="20" />
+                            <!-- Pre RS1, the following needed a converter to go from Double to Int32. We can now use a cast instead. -->
+                            <!-- <Rectangle Grid.Row="1" Grid.Column="{x:Bind OneTimeSlider3.Value, Mode=OneWay, Converter={StaticResource DoubleToInt}}" Fill="Purple" Width="20" Height="20" /> -->
+                            <Rectangle Grid.Row="1" Grid.Column="{x:Bind (x:Int32)OneTimeSlider3.Value, Mode=OneWay}" Fill="Purple" Width="20" Height="20" />
                         </Grid>
                     </Border>
                     <TextBlock Grid.Row="1" Text="Grid.Row bound to OneTimeSlider3.Value"/>
@@ -143,9 +149,9 @@
                     </Border>
                 </StackPanel>
 
+                <TextBlock Text="Casts, FallbackValue &amp; TargetNullValue" Style="{StaticResource Section}"/>
 
-                <TextBlock Text="FallbackValue &amp; TargetNullValue" Style="{StaticResource Section}"/>
-
+                <TextBlock Style="{StaticResource Note}"><Run>Casts can use a C-style or an attached property syntax to change the type of an object before retrieving the value.</Run></TextBlock>
                 <TextBlock Style="{StaticResource Note}"><Run>TargetNullValue is used when the binding path results in null</Run></TextBlock>
                 <TextBlock Style="{StaticResource Note}"><Run>FallbackValue is used when intermediary binding bath nodes are null</Run></TextBlock>
                 <Grid>
@@ -161,20 +167,23 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Bound to Background.(SolidColorBrush.Color) with a fallback:" />
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind Background.(SolidColorBrush.Color), FallbackValue='This is my fallback value', Mode=OneWay}" />
-                    <TextBlock Grid.Row="0" Grid.Column="2" Text="The background is cast from Brush to SolidColorBrush so the color can be accessed" />
 
+                  <TextBlock Grid.Row="0" Text="Bound to ((SolidColorBrush)Background).Color with a fallback:" />
+                  <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind ((SolidColorBrush)Background).Color, FallbackValue='This is my fallback value', Mode=OneWay}" />
+                  <TextBlock Grid.Row="0" Grid.Column="2" Text="The background is cast using c# syntax from Brush to SolidColorBrush so the color can be accessed" />
 
-                    <TextBlock Grid.Row="1" Text="Bound to NullEmployee.FirstName with a fallback:" />
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind NullEmployee.FirstName, FallbackValue='Name Not Available'}"/>
+                  <TextBlock Grid.Row="1" Text="Bound to Background.(SolidColorBrush.Color) with a fallback:" />
+                  <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind Background.(SolidColorBrush.Color), FallbackValue='This is my fallback value', Mode=OneWay}" />
+                  <TextBlock Grid.Row="1" Grid.Column="2" Text="The background is cast using attached property syntax so the color can be accessed" />
 
-                    <TextBlock Grid.Row="2" Text="Bound to NullStringProperty with a TargetNullValue:" />
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind NullStringProperty, TargetNullValue='This is a null string property'}"/>
+                  <TextBlock Grid.Row="2" Text="Bound to NullEmployee.FirstName with a fallback:" />
+                  <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind NullEmployee.FirstName, FallbackValue='Name Not Available'}"/>
 
+                  <TextBlock Grid.Row="3" Text="Bound to NullStringProperty with a TargetNullValue:" />
+                  <TextBlock Grid.Row="3" Grid.Column="1" Text="{x:Bind NullStringProperty, TargetNullValue='This is a null string property'}"/>
 
-                    <TextBlock Grid.Row="3" Text="Bound to NullEmployee.NullImageSource with a FallbackValue" />
-                    <Image Grid.Row="3" Grid.Column="1" Width="72" Height="72" Source="{x:Bind NullEmployee.NullImageSource,  FallbackValue='http://static-hp-wus.s-msn.com/sc/homepage/i/65/e8a77758e8644573ba5d41ada16e8c.jpg', TargetNullValue='http://static-hp-wus.s-msn.com/sc/homepage/i/65/e8a77758e8644573ba5d41ada16e8c.jpg'}"/>
+                  <TextBlock Grid.Row="4" Text="Bound to NullEmployee.NullImageSource with a FallbackValue" />
+                  <Image Grid.Row="4" Grid.Column="1" Width="72" Height="72" Source="{x:Bind NullEmployee.NullImageSource,  FallbackValue='http://static-hp-wus.s-msn.com/sc/homepage/i/65/e8a77758e8644573ba5d41ada16e8c.jpg', TargetNullValue='http://static-hp-wus.s-msn.com/sc/homepage/i/65/e8a77758e8644573ba5d41ada16e8c.jpg'}"/>
                 </Grid>
 
                 <TextBlock Text="Deferred Elements" Style="{StaticResource Section}"/>

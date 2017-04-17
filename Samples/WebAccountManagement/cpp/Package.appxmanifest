@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="Microsoft.SDKSamples.WebAccountManagement.CPP" Publisher="CN=3B3B1E5A-CE36-4D75-AEDA-6809021F7AA1" Version="1.1.0.8" />
-  <mp:PhoneIdentity PhoneProductId="35ba7848-dfec-48e3-9197-ac01fd9d3e74" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Name="Microsoft.SDKSamples.WebAccountManagement.CPP" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="ecd494c6-8bb7-4f4e-b04a-a4e96b9eba60" PhonePublisherId="00000000-0000-0000-0000-000000000000" />  
   <Properties>
     <DisplayName>Web Account Manager C++ Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.14393.0" />
   </Dependencies>
   <Resources>
     <Resource Language="x-generate" />

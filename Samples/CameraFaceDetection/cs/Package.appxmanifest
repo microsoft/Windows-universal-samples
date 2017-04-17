@@ -11,16 +11,16 @@
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="b34fdb3c-60c8-476e-8225-a5d3a141370d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="d84d43cf-9193-4c11-a761-fe484a055751" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>CameraFaceDetection</DisplayName>
+    <DisplayName>Face Detection C# Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
 
   <Dependencies>
-      <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+      <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0" />
   </Dependencies>
 
   <Resources>
@@ -32,10 +32,10 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="CameraFaceDetection.App">
       <uap:VisualElements
-        DisplayName="CameraFaceDetection"
+        DisplayName="Face Detection C# Sample"
         Square150x150Logo="Assets\SquareTile-sdk.png"
         Square44x44Logo="Assets\SmallTile-sdk.png"
-        Description="CameraFaceDetection"
+        Description="Face Detection C# Sample"
         BackgroundColor="#00b2f0">
         <uap:SplashScreen Image="Assets\Splash-sdk.png" />
         <uap:DefaultTile>

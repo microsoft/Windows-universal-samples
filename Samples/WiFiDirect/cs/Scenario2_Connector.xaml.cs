@@ -9,21 +9,22 @@
 //
 //*********************************************************
 
-using Windows.UI.Xaml.Controls;
-using Windows.Devices.Enumeration;
-using System.Threading;
-using Windows.UI.Xaml.Navigation;
-using Windows.Devices.WiFiDirect;
 using System;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
-using Windows.UI.Core;
+using System.Collections.ObjectModel;
 using System.IO;
-using System.Threading.Tasks;
-using Windows.Networking.Sockets;
-using Windows.Storage.Streams;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Windows.Devices.Enumeration;
+using Windows.Devices.WiFiDirect;
+using Windows.Networking;
+using Windows.Networking.Sockets;
+using Windows.Security.Cryptography;
+using Windows.Storage.Streams;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -32,54 +33,38 @@ namespace SDKTemplate
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Scenario2 : Page
+    public sealed partial class Scenario2_Connector : Page
     {
-        private MainPage rootPage;
+        private MainPage rootPage = MainPage.Current;
         DeviceWatcher _deviceWatcher;
-        ReaderWriterLockSlim _discoveryRWLock;
-        bool _fWatcherStarted;
-        public ObservableCollection<DiscoveredDevice> _discoveredDevices
-        {
-            get;
-            private set;
-        }
-        CancellationTokenSource _cancellationTokenSource;
+        bool _fWatcherStarted = false;
+        WiFiDirectAdvertisementPublisher _publisher = new WiFiDirectAdvertisementPublisher();
 
-        public ObservableCollection<ConnectedDevice> _connectedDevices
-        {
-            get;
-            private set;
-        }
+        public ObservableCollection<DiscoveredDevice> DiscoveredDevices { get; } = new ObservableCollection<DiscoveredDevice>();
+        public ObservableCollection<ConnectedDevice> ConnectedDevices { get; } = new ObservableCollection<ConnectedDevice>();
 
-        public Scenario2()
+        public Scenario2_Connector()
         {
             this.InitializeComponent();
-
-            _discoveryRWLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
-            _fWatcherStarted = false;
-            _discoveredDevices = new ObservableCollection<DiscoveredDevice>();
-            _connectedDevices = new ObservableCollection<ConnectedDevice>();
-
-            lvDiscoveredDevices.ItemsSource = _discoveredDevices;
-            lvDiscoveredDevices.SelectionMode = ListViewSelectionMode.Single;
-
-            lvConnectedDevices.ItemsSource = _connectedDevices;
-            lvConnectedDevices.SelectionMode = ListViewSelectionMode.Single;
         }
 
-        private void btnWatcher_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void btnWatcher_Click(object sender, RoutedEventArgs e)
         {
             if (_fWatcherStarted == false)
             {
-                btnWatcher.Content = "Stop Watcher";
-                _fWatcherStarted = true;
+                _publisher.Start();
 
-                _discoveredDevices.Clear();
+                if (_publisher.Status != WiFiDirectAdvertisementPublisherStatus.Started)
+                {
+                    rootPage.NotifyUser("Failed to start advertisement.", NotifyType.ErrorMessage);
+                    return;
+                }
+
+                DiscoveredDevices.Clear();
                 rootPage.NotifyUser("Finding Devices...", NotifyType.StatusMessage);
 
-                _deviceWatcher = null;
-                String deviceSelector = WiFiDirectDevice.GetDeviceSelector((cmbDeviceSelector.ToString().Equals("Device Interface") == true) ?
-                                                            WiFiDirectDeviceSelectorType.DeviceInterface : WiFiDirectDeviceSelectorType.AssociationEndpoint);
+                String deviceSelector = WiFiDirectDevice.GetDeviceSelector(
+                    Utils.GetSelectedItemTag<WiFiDirectDeviceSelectorType>(cmbDeviceSelector));
 
                 _deviceWatcher = DeviceInformation.CreateWatcher(deviceSelector, new string[] { "System.Devices.WiFiDirect.InformationElements" });
 
@@ -90,9 +75,14 @@ namespace SDKTemplate
                 _deviceWatcher.Stopped += OnStopped;
 
                 _deviceWatcher.Start();
+
+                btnWatcher.Content = "Stop Watcher";
+                _fWatcherStarted = true;
             }
             else
             {
+                _publisher.Stop();
+
                 btnWatcher.Content = "Start Watcher";
                 _fWatcherStarted = false;
 
@@ -103,6 +93,8 @@ namespace SDKTemplate
                 _deviceWatcher.Stopped -= OnStopped;
 
                 _deviceWatcher.Stop();
+
+                rootPage.NotifyUser("Device watcher stopped.", NotifyType.StatusMessage);
             }
         }
 
@@ -111,12 +103,7 @@ namespace SDKTemplate
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                _discoveryRWLock.EnterWriteLock();
-
-                var deviceInfoDisplay = new DiscoveredDevice(deviceInfo);
-                _discoveredDevices.Add(deviceInfoDisplay);
-
-                _discoveryRWLock.ExitWriteLock();
+                DiscoveredDevices.Add(new DiscoveredDevice(deviceInfo));
             });
         }
 
@@ -124,18 +111,14 @@ namespace SDKTemplate
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                _discoveryRWLock.EnterWriteLock();
-
-                foreach (DiscoveredDevice devInfodisplay in _discoveredDevices)
+                foreach (DiscoveredDevice discoveredDevice in DiscoveredDevices)
                 {
-                    if (devInfodisplay.DeviceInfo.Id == deviceInfoUpdate.Id)
+                    if (discoveredDevice.DeviceInfo.Id == deviceInfoUpdate.Id)
                     {
-                        _discoveredDevices.Remove(devInfodisplay);
+                        DiscoveredDevices.Remove(discoveredDevice);
                         break;
                     }
                 }
-
-                _discoveryRWLock.ExitWriteLock();
             });
         }
 
@@ -143,14 +126,11 @@ namespace SDKTemplate
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                _discoveryRWLock.EnterWriteLock();
-
-                for (int idx = 0; idx < _discoveredDevices.Count; idx++)
+                foreach (DiscoveredDevice discoveredDevice in DiscoveredDevices)
                 {
-                    DiscoveredDevice devInfodisplay = _discoveredDevices[idx];
-                    if (devInfodisplay.DeviceInfo.Id == deviceInfoUpdate.Id)
+                    if (discoveredDevice.DeviceInfo.Id == deviceInfoUpdate.Id)
                     {
-                        devInfodisplay.DeviceInfo.Update(deviceInfoUpdate);
+                        discoveredDevice.UpdateDeviceInfo(deviceInfoUpdate);
                         break;
                     }
                 }
@@ -166,203 +146,181 @@ namespace SDKTemplate
         {
             rootPage.NotifyUserFromBackground("DeviceWatcher stopped", NotifyType.StatusMessage);
         }
-
         #endregion
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            rootPage = MainPage.Current;
-        }
 
-        private void btnIe_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void btnIe_Click(object sender, RoutedEventArgs e)
         {
-            if (lvDiscoveredDevices.SelectedItems.Count == 0)
+            var discoveredDevice = (DiscoveredDevice)lvDiscoveredDevices.SelectedItem;
+
+            if (discoveredDevice == null)
             {
                 rootPage.NotifyUser("No device selected, please select one.", NotifyType.ErrorMessage);
                 return;
             }
 
-            var selectedDevices = lvDiscoveredDevices.SelectedItems;
-
-            foreach (DiscoveredDevice discoveredDevice in selectedDevices)
+            IList<WiFiDirectInformationElement> informationElements = null;
+            try
             {
-                try
+                informationElements = WiFiDirectInformationElement.CreateFromDeviceInformation(discoveredDevice.DeviceInfo);
+            }
+            catch (Exception ex)
+            {
+                rootPage.NotifyUser("No Information element found: " + ex.Message, NotifyType.ErrorMessage);
+            }
+
+            if (informationElements != null)
+            {
+                StringWriter message = new StringWriter();
+
+                foreach (WiFiDirectInformationElement informationElement in informationElements)
                 {
-                    var iECollection = WiFiDirectInformationElement.CreateFromDeviceInformation(discoveredDevice.DeviceInfo);
+                    string ouiName = CryptographicBuffer.EncodeToHexString(informationElement.Oui);
+                    string value = string.Empty;
+                    Byte[] bOui = informationElement.Oui.ToArray();
 
-                    if (iECollection.Count == 0)
+                    if (bOui.SequenceEqual(Globals.MsftOui))
                     {
-                        rootPage.NotifyUser("No Information Elements found", NotifyType.StatusMessage);
-                        return;
+                        // The format of Microsoft information elements is documented here:
+                        // https://msdn.microsoft.com/en-us/library/dn392651.aspx
+                        // with errata here:
+                        // https://msdn.microsoft.com/en-us/library/mt242386.aspx
+                        ouiName += " (Microsoft)";
                     }
-
-                    StringWriter strIeOutput = new StringWriter();
-                    String strIe = "N/A";
-
-                    foreach (WiFiDirectInformationElement ie in iECollection)
+                    else if (bOui.SequenceEqual(Globals.WfaOui))
                     {
-                        Byte[] bOui = ie.Oui.ToArray();
+                        ouiName += " (WFA)";
+                    }
+                    else if (bOui.SequenceEqual(Globals.CustomOui))
+                    {
+                        ouiName += " (Custom)";
 
-                        if (bOui.SequenceEqual(Globals.MsftOui))
+                        if (informationElement.OuiType == Globals.CustomOuiType)
                         {
-                            strIeOutput.Write("Microsoft IE: ");
-                        }
-                        else if (bOui.SequenceEqual(Globals.WfaOui))
-                        {
-                            strIeOutput.Write("WFA IE: ");
-                        }
-                        else if (bOui.SequenceEqual(Globals.CustomOui))
-                        {
-                            strIeOutput.Write("Custom IE: ");
-
-                            DataReader dataReader = Windows.Storage.Streams.DataReader.FromBuffer(ie.Value);
-                            dataReader.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
+                            DataReader dataReader = DataReader.FromBuffer(informationElement.Value);
+                            dataReader.UnicodeEncoding = UnicodeEncoding.Utf8;
                             dataReader.ByteOrder = ByteOrder.LittleEndian;
 
                             // Read the string.
-                            strIe = dataReader.ReadString(dataReader.ReadUInt32());
+                            try
+                            {
+                                string data = dataReader.ReadString(dataReader.ReadUInt32());
+                                value = $"Data: {data}";
+                            }
+                            catch (Exception)
+                            {
+                                value = "(Unable to parse)";
+                            }
                         }
-                        else
-                        {
-                            strIeOutput.Write("Unknown IE: ");
-                        }
-
-                        strIeOutput.WriteLine(String.Format("OUI Type: {0} OUI: 0x{1} 0x{2} 0x{3} IE Data: {4}\n",
-                                              Convert.ToString(ie.OuiType), Convert.ToString(bOui[0], 16), Convert.ToString(bOui[1], 16),
-                                              Convert.ToString(bOui[2], 16), strIe));
-
-                        strIe = "N/A";
                     }
 
-                    rootPage.NotifyUser(strIeOutput.ToString(), NotifyType.StatusMessage);
+                    message.WriteLine($"OUI {ouiName}, Type {informationElement.OuiType} {value}");
                 }
-                catch (Exception ex)
-                {
-                    rootPage.NotifyUser("No Information element found: " + ex.Message, NotifyType.ErrorMessage);
-                }
+
+                message.Write($"Information elements found: {informationElements.Count}");
+
+                rootPage.NotifyUser(message.ToString(), NotifyType.StatusMessage);
             }
         }
 
-        private async void btnFromId_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void btnFromId_Click(object sender, RoutedEventArgs e)
         {
-            if (lvDiscoveredDevices.SelectedItems.Count == 0)
+            var discoveredDevice = (DiscoveredDevice)lvDiscoveredDevices.SelectedItem;
+
+            if (discoveredDevice == null)
             {
-                rootPage.NotifyUser("No device selected, please select atleast one.", NotifyType.ErrorMessage);
+                rootPage.NotifyUser("No device selected, please select one.", NotifyType.ErrorMessage);
                 return;
             }
 
-            var selectedDevices = lvDiscoveredDevices.SelectedItems;
+            rootPage.NotifyUser($"Connecting to {discoveredDevice.DeviceInfo.Name}...", NotifyType.StatusMessage);
 
-            foreach (DiscoveredDevice discoveredDevice in selectedDevices)
+            if (!discoveredDevice.DeviceInfo.Pairing.IsPaired)
             {
-                rootPage.NotifyUser("Connecting to " + discoveredDevice.DeviceInfo.Name + "...", NotifyType.StatusMessage);
-
-                try
+                if (!await connectionSettingsPanel.RequestPairDeviceAsync(discoveredDevice.DeviceInfo.Pairing))
                 {
-                    WiFiDirectConnectionParameters connectionParams = new WiFiDirectConnectionParameters();
-                    connectionParams.GroupOwnerIntent = Convert.ToInt16(txtGOIntent.Text);
-
-                    _cancellationTokenSource = new CancellationTokenSource();
-
-                    // IMPORTANT: FromIdAsync needs to be called from the UI thread
-                    var wfdDevice = await WiFiDirectDevice.FromIdAsync(discoveredDevice.DeviceInfo.Id, connectionParams).AsTask(_cancellationTokenSource.Token);
-
-                    // Register for the ConnectionStatusChanged event handler
-                    wfdDevice.ConnectionStatusChanged += OnConnectionStatusChanged;
-
-                    var endpointPairs = wfdDevice.GetConnectionEndpointPairs();
-
-                    rootPage.NotifyUser("Devices connected on L2 layer, connecting to IP Address: " + endpointPairs[0].RemoteHostName +
-                                        " Port: " + Globals.strServerPort, NotifyType.StatusMessage);
-
-                    // Wait for server to start listening on a socket
-                    await Task.Delay(2000);
-
-                    // Connect to Advertiser on L4 layer
-                    StreamSocket clientSocket = new StreamSocket();
-                    await clientSocket.ConnectAsync(endpointPairs[0].RemoteHostName, Globals.strServerPort);
-
-                    SocketReaderWriter socketRW = new SocketReaderWriter(clientSocket, rootPage);
-
-                    string sessionId = "Session: " + Path.GetRandomFileName();
-                    ConnectedDevice connectedDevice = new ConnectedDevice(sessionId, wfdDevice, socketRW);
-                    _connectedDevices.Add(connectedDevice);
-
-                    socketRW.ReadMessage();
-                    socketRW.WriteMessage(sessionId);
-
-                    rootPage.NotifyUser("Connected with remote side on L4 layer", NotifyType.StatusMessage);
+                    return;
                 }
-                catch (TaskCanceledException)
+            }
+
+            try
+            {
+                // IMPORTANT: FromIdAsync needs to be called from the UI thread
+                var wfdDevice = await WiFiDirectDevice.FromIdAsync(discoveredDevice.DeviceInfo.Id);
+
+                // Register for the ConnectionStatusChanged event handler
+                wfdDevice.ConnectionStatusChanged += OnConnectionStatusChanged;
+
+                IReadOnlyList<EndpointPair> endpointPairs = wfdDevice.GetConnectionEndpointPairs();
+                HostName remoteHostName = endpointPairs[0].RemoteHostName;
+
+                rootPage.NotifyUser($"Devices connected on L2 layer, connecting to IP Address: {remoteHostName} Port: {Globals.strServerPort}",
+                    NotifyType.StatusMessage);
+
+                // Wait for server to start listening on a socket
+                await Task.Delay(2000);
+
+                // Connect to Advertiser on L4 layer
+                StreamSocket clientSocket = new StreamSocket();
+                await clientSocket.ConnectAsync(remoteHostName, Globals.strServerPort);
+                rootPage.NotifyUser("Connected with remote side on L4 layer", NotifyType.StatusMessage);
+
+                SocketReaderWriter socketRW = new SocketReaderWriter(clientSocket, rootPage);
+
+                string sessionId = Path.GetRandomFileName();
+                ConnectedDevice connectedDevice = new ConnectedDevice(sessionId, wfdDevice, socketRW);
+                ConnectedDevices.Add(connectedDevice);
+
+                // The first message sent over the socket is the name of the connection.
+                await socketRW.WriteMessageAsync(sessionId);
+
+                while (await socketRW.ReadMessageAsync() != null)
                 {
-                    rootPage.NotifyUser("FromIdAsync was canceled by user", NotifyType.ErrorMessage);
-                }
-                catch (Exception ex)
-                {
-                    rootPage.NotifyUser("Connect operation threw an exception: " + ex.Message, NotifyType.ErrorMessage);
+                    // Keep reading messages
                 }
 
-                _cancellationTokenSource = null;
+            }
+            catch (TaskCanceledException)
+            {
+                rootPage.NotifyUser("FromIdAsync was canceled by user", NotifyType.ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                rootPage.NotifyUser($"Connect operation threw an exception: {ex.Message}", NotifyType.ErrorMessage);
             }
         }
 
         private void OnConnectionStatusChanged(WiFiDirectDevice sender, object arg)
         {
-            rootPage.NotifyUserFromBackground("Connection status changed: " + sender.ConnectionStatus, NotifyType.StatusMessage);
+            rootPage.NotifyUserFromBackground($"Connection status changed: {sender.ConnectionStatus}", NotifyType.StatusMessage);
         }
 
-        private void btnSendMessage_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void btnSendMessage_Click(object sender, RoutedEventArgs e)
         {
-            if (lvConnectedDevices.SelectedItems.Count == 0)
-            {
-                rootPage.NotifyUser("Please select a Session to send data", NotifyType.ErrorMessage);
-                return;
-            }
-
-            if (txtSendMessage.Text == "")
-            {
-                rootPage.NotifyUser("Please type a message to send", NotifyType.ErrorMessage);
-                return;
-            }
-
-            try
-            {
-                foreach (ConnectedDevice connectedDevice in lvConnectedDevices.SelectedItems)
-                {
-                    connectedDevice.SocketRW.WriteMessage(txtSendMessage.Text);
-                }
-            }
-            catch (Exception ex)
-            {
-                rootPage.NotifyUser("Send threw an exception: " + ex.Message, NotifyType.ErrorMessage);
-            }
+            var connectedDevice = (ConnectedDevice)lvConnectedDevices.SelectedItem;
+            await connectedDevice.SocketRW.WriteMessageAsync(txtSendMessage.Text);
         }
 
-        private void btnClose_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            if (lvConnectedDevices.SelectedItems.Count == 0)
+            var connectedDevice = (ConnectedDevice)lvConnectedDevices.SelectedItem;
+            ConnectedDevices.Remove(connectedDevice);
+
+            // Close socket and WiFiDirect object
+            connectedDevice.Dispose();
+        }
+
+        private async void btnUnpair_Click(object sender, RoutedEventArgs e)
+        {
+            var discoveredDevice = (DiscoveredDevice)lvDiscoveredDevices.SelectedItem;
+
+            if (discoveredDevice == null)
             {
-                rootPage.NotifyUser("Please select a device to close", NotifyType.ErrorMessage);
+                rootPage.NotifyUser("No device selected, please select one.", NotifyType.ErrorMessage);
                 return;
             }
 
-            try
-            {
-                foreach (ConnectedDevice connectedDevice in lvConnectedDevices.SelectedItems)
-                {
-                    // Close socket
-                    connectedDevice.SocketRW.Dispose();
-
-                    // Close WiFiDirectDevice object
-                    connectedDevice.WfdDevice.Dispose();
-                    _connectedDevices.Remove(connectedDevice);
-
-                    rootPage.NotifyUser(connectedDevice.DisplayName + " closed successfully", NotifyType.StatusMessage);
-                }
-            }
-            catch (Exception ex)
-            {
-                rootPage.NotifyUser("Close threw an exception: " + ex.Message, NotifyType.ErrorMessage);
-            }
+            DeviceUnpairingResult result = await discoveredDevice.DeviceInfo.Pairing.UnpairAsync();
+            rootPage.NotifyUser($"Unpair result: {result.Status}", NotifyType.StatusMessage);
         }
     }
 }

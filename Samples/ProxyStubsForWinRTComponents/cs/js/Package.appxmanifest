@@ -10,7 +10,7 @@
     Version="1.0.0.0"
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
 
-  <mp:PhoneIdentity PhoneProductId="c2adb9af-edb3-4e57-8056-9d0531d4a6b2" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="abf0f968-50dd-4ac1-858d-78ff336f7ae8" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Proxy and stub generation for Windows Runtime components client JS sample</DisplayName>
@@ -19,7 +19,7 @@
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10058.0" MaxVersionTested="10.0.10058.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10058.0" MaxVersionTested="10.0.14393.0" />
   </Dependencies>
 
   <Resources>

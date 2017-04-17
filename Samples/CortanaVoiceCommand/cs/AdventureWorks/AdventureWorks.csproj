@@ -11,8 +11,8 @@
     <AssemblyName>AdventureWorks</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -145,7 +145,7 @@
     <Content Include="..\..\..\..\SharedContent\cs\Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>
-    <Content Include="AdventureWorksCommands.xml">
+    <Content Include="..\..\shared\AdventureWorksCommands.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
@@ -182,7 +182,54 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="Strings\en-US\Resources.resw" />
+    <PRIResource Include="..\..\shared\Strings\de-DE\Resources.resw">
+      <Link>Strings\de-DE\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\en-GB\Resources.resw">
+      <Link>Strings\en-GB\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\en-CA\Resources.resw">
+      <Link>Strings\en-CA\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\en-AU\Resources.resw">
+      <Link>Strings\en-AU\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\en-IN\Resources.resw">
+      <Link>Strings\en-IN\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\en-US\Resources.resw">
+      <Link>Strings\en-US\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\es-ES\Resources.resw">
+      <Link>Strings\es-ES\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\fr-FR\Resources.resw">
+      <Link>Strings\fr-FR\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\it-IT\Resources.resw">
+      <Link>Strings\it-IT\Resources.resw</Link>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="..\..\shared\Strings\zh-CN\Resources.resw">
+      <Link>Strings\zh-CN\Resources.resw</Link>
+    </PRIResource>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -11,7 +11,7 @@
     <AssemblyName>Notifications</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -119,7 +119,9 @@
     <Compile Include="Model\Scenario.cs" />
     <Compile Include="Model\ScenarioGroup.cs" />
     <Compile Include="Model\Scenarios.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\..\SharedContent\cs\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="ScenarioPages\Badges\Local\PrimaryTile\ClearBadge\ScenarioElement.xaml.cs">
       <DependentUpon>ScenarioElement.xaml</DependentUpon>
     </Compile>
@@ -422,7 +424,9 @@
     <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage10.jpg">
       <Link>Assets\Photos\10.jpg</Link>
     </Content>
-    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="..\..\..\..\SharedContent\cs\Default.rd.xml">
+      <Link>Properties\Default.rd.xml</Link>
+    </Content>
     <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage1.jpg">
       <Link>ScenarioPages\Toasts\AdaptiveTemplates\Image\Src\FromAppData\Image.jpg</Link>
     </Content>

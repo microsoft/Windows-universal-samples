@@ -18,8 +18,8 @@
     xmlns:local="using:ImportSample"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Width="949.333">
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,0.333,-208">
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid x:Name="RootGrid" Margin="12,10,12,12">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -33,7 +33,7 @@
                 </TextBlock>
             </StackPanel>
 
-            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto">
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
                     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="673" Width="949">
                         <Button x:Name="findSourceButton" 

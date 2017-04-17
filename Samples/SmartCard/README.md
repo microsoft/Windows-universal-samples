@@ -1,15 +1,21 @@
 ﻿<!---
   category: IdentitySecurityAndEncryption
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620604&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620604
 --->
 
 # Smart cards sample
 
-This sample demonstrates how to use the Windows.Devices.SmartCards API to work with smart cards and smart card readers programmatically.
+Shows how to use the Windows.Devices.SmartCards API to work with smart cards and smart card readers programmatically.
 
-**Note**  This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on both Windows 10 and Windows Phone 10.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-Specifically, this sample shows the scenarios of:
+Specifically, this sample shows:
+
 - Creating a virtual smart card
 - Changing the PIN on a virtual smart card
 - Resetting the PIN on a virtual smart card
@@ -21,7 +27,8 @@ Specifically, this sample shows the scenarios of:
 
 Related topics
 --------------
-[Windows.Devices.SmartCards](http://msdn.microsoft.com/library/windows/apps/dn263949)
+
+[Windows.Devices.SmartCards](http://msdn.microsoft.com/library/windows/apps/dn263949)  
 
 Operating system requirements
 -----------------------------

@@ -7,20 +7,20 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="Microsoft.SDKSamples.MasterDetail.CS"
+    Name="Microsoft.SDKSamples.MasterDetail.CPP"
     Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="5be2afdb-cae8-4f36-a598-5f337951231b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>XAML Master/Detail CS Sample</DisplayName>
+    <DisplayName>XAML Master/Detail C++ Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.14393.0" />
   </Dependencies>
 
   <Resources>
@@ -32,8 +32,8 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="MasterDetailApp.App">
       <uap:VisualElements
-        DisplayName="XAML Master/Detail CS Sample"
-        Description="XAML Master/Detail CS Sample"
+        DisplayName="XAML Master/Detail C++ Sample"
+        Description="XAML Master/Detail C++ Sample"
         Square150x150Logo="Assets\squareTile-sdk.png"
         Square44x44Logo="Assets\SmallTile-sdk.png"
         BackgroundColor="#00b2f0">

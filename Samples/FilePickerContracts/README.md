@@ -1,44 +1,56 @@
 ﻿<!---
   category: FilesFoldersAndLibraries
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620543&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620543
 --->
 
 # File picker provider sample
 
-This sample shows how an app can provide files, a save location, and real-time file updates to other apps through the file picker by participating in the File Open Picker contract, File Save Picker contract, and Cached File Updater contract, respectively. This sample uses [**Windows.Storage.Pickers.Provider**]9http://msdn.microsoft.com/library/windows/apps/br207954) and [**Windows.Storage.Provider**](http://msdn.microsoft.com/library/windows/apps/hh747812) API. 
+Shows how an app can provide files, a save location, and real-time file updates to other apps through the 
+file picker by participating in the File Open Picker contract, File Save Picker contract, and Cached File 
+Updater contract, respectively. This sample uses the [Windows.Storage.Pickers.Provider](http://msdn.microsoft.com/library/windows/apps/br207954) and 
+[Windows.Storage.Provider](http://msdn.microsoft.com/library/windows/apps/hh747812) APIs. 
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 The sample demonstrates these tasks:
 
-1.Provide files by integrating with the File Open Picker contract
+1. Provide files by integrating with the File Open Picker contract
 Uses the following API:
 
-- JavaScript: [**WebUIFileOpenPickerActivatedEventArgs**](http://msdn.microsoft.com/library/windows/apps/hh701800) class
-C#/C++/VB: [**FileOpenPickerActivatedEventArgs**](http://msdn.microsoft.com/library/windows/apps/hh700467) class method 
-- [**FileOpenPickerUI**](http://msdn.microsoft.com/library/windows/apps/hh738453) class 
+- JavaScript: [WebUIFileOpenPickerActivatedEventArgs](http://msdn.microsoft.com/library/windows/apps/hh701800) class
+C#/C++/VB: [FileOpenPickerActivatedEventArgs](http://msdn.microsoft.com/library/windows/apps/hh700467) class method 
+- [FileOpenPickerUI](http://msdn.microsoft.com/library/windows/apps/hh738453) class 
 
 
-2.Provide a save location by integrating with the File Save Picker contract
+2. Provide a save location by integrating with the File Save Picker contract
 Uses the following API:
 
-- JavaScript: [**WebUIFileSavePickerActivatedEventArgs**](http://msdn.microsoft.com/library/windows/apps/hh701822) class
-C#/C++/VB: [**FileSavePickerActivatedEventArgs**](http://msdn.microsoft.com/library/windows/apps/hh700489) class method 
-- [**FileSavePickerUI**](http://msdn.microsoft.com/library/windows/apps/hh738463) class 
+- JavaScript: [WebUIFileSavePickerActivatedEventArgs](http://msdn.microsoft.com/library/windows/apps/hh701822) class
+C#/C++/VB: [FileSavePickerActivatedEventArgs](http://msdn.microsoft.com/library/windows/apps/hh700489) class method 
+- [FileSavePickerUI](http://msdn.microsoft.com/library/windows/apps/hh738463) class 
 
 
-3.Provide real-time file updates by integrating with the Cached File Updater contract
+3. Provide real-time file updates by integrating with the Cached File Updater contract
 Uses the following API:
 
-- JavaScript: [**WebUICachedFileUpdaterActivatedEventArgs**](http://msdn.microsoft.com/library/windows/apps/hh701752) class
-C#/C++/VB: [**CachedFileUpdaterActivatedEventArgs**](http://msdn.microsoft.com/library/windows/apps/hh7004400 class method 
-- [**CachedFileUpdaterUI**](http://msdn.microsoft.com/library/windows/apps/hh747794) class 
-- [**CachedFileUpdater**](http://msdn.microsoft.com/library/windows/apps/hh747793) class 
+- JavaScript: [WebUICachedFileUpdaterActivatedEventArgs](http://msdn.microsoft.com/library/windows/apps/hh701752) class
+C#/C++/VB: [CachedFileUpdaterActivatedEventArgs](http://msdn.microsoft.com/library/windows/apps/hh7004400 class method 
+- [CachedFileUpdaterUI](http://msdn.microsoft.com/library/windows/apps/hh747794) class 
+- [CachedFileUpdater](http://msdn.microsoft.com/library/windows/apps/hh747793) class 
 
-Note  This scenario requires the  File picker sample.
-To learn more about integrating with file picker contracts, see  [**Quickstart: Integrating with file picker contracts**](http://msdn.microsoft.com/library/windows/apps/hh465192) and  [**Guidelines and checklist for file picker contracts**](http://msdn.microsoft.com/library/windows/apps/jj150594).
+**Note** This scenario requires the File picker sample.
+To learn more about integrating with file picker contracts, see [Quickstart: Integrating with file picker contracts](http://msdn.microsoft.com/library/windows/apps/hh465192) 
+and [Guidelines and checklist for file picker contracts](http://msdn.microsoft.com/library/windows/apps/jj150594).
 
 ## Related technologies
 
-[**Windows.Storage.Pickers namespace**](http://msdn.microsoft.com/library/windows/apps/br207928), [**Windows.Storage.Pickers.Provider namespace**](http://msdn.microsoft.com/library/windows/apps/br207954)
+[Windows.Storage.Pickers namespace](http://msdn.microsoft.com/library/windows/apps/br207928)  
+[Windows.Storage.Pickers.Provider namespace](http://msdn.microsoft.com/library/windows/apps/br207954)  
 
 ## System requirements
 

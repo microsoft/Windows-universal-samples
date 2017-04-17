@@ -25,44 +25,54 @@ namespace Microsoft.SDKSamples.Kitchen
         High
     } OvenTemperature;
 
-    // Forward declarations
-    runtimeclass Oven;
     runtimeclass Bread;
+    runtimeclass BreadBakedEventArgs;
+    runtimeclass Oven;
 
-    // Interface definitions
+    [version(1.0), uuid(F13EA3D5-7B24-4CDE-9E5F-57AF30F0733C), exclusiveto(Bread)]
+    interface IBread : IInspectable
+    {
+        [propget] HRESULT Flavor([out, retval] HSTRING* value);
+    }
+
     [version(1.0), uuid(332FD2F1-1C69-4C91-949E-4BB67A85BDC5)]
     interface IAppliance : IInspectable
     {
         [propget] HRESULT Volume([out, retval] double* value);
     }
 
-    [version(1.0), uuid(699B1394-3CEB-4A14-AE23-EFEC518B088B)]
-    interface IBread : IInspectable
+    [version(1.0), uuid(699B1394-3CEB-4A14-AE23-EFEC518B088B), exclusiveto(BreadBakedEventArgs)]
+    interface IBreakBakedEventArgs : IInspectable
     {
-        [propget] HRESULT Flavor([out, retval] HSTRING* flavor);
+        [propget] HRESULT Bread([out, retval] Bread** value);
     }
 
-    [version(1.0), uuid(6A112353-4F87-4460-A908-2944E92686F3), exclusiveto(Oven)] 
-    interface IOven : IInspectable
-        requires IAppliance
+    [version(1.0), uuid(6A112353-4F87-4460-A908-2944E92686F3), exclusiveto(Oven)]
+    interface IOven : IInspectable requires IAppliance
     {
         HRESULT ConfigurePreheatTemperature([in] OvenTemperature temperature);
         HRESULT BakeBread([in] HSTRING flavor);
 
-        [eventadd] HRESULT BreadBaked([in] Windows.Foundation.TypedEventHandler<Oven*, Bread*> *handler, [out, retval] EventRegistrationToken * token);
+        [eventadd] HRESULT BreadBaked([in] Windows.Foundation.TypedEventHandler<Oven*, BreadBakedEventArgs*>* handler, [out, retval] EventRegistrationToken* token);
         [eventremove] HRESULT BreadBaked([in] EventRegistrationToken token);
     }
 
     [version(1.0), uuid(F36C2A21-F4E3-4C39-94CE-EB9190AFDAB3), exclusiveto(Oven)]
     interface IOvenFactory : IInspectable
     {
-        HRESULT CreateOven([in] Dimensions dimensions, [out, retval] Oven **oven);
+        HRESULT CreateOven([in] Dimensions dimensions, [out, retval] Oven** result);
     }
 
     [version(1.0)]
     runtimeclass Bread
     {
         [default] interface IBread;
+    }
+    
+    [version(1.0)]
+    runtimeclass BreadBakedEventArgs
+    {
+        [default] interface IBreakBakedEventArgs;
     }
 
     [version(1.0), activatable(1.0), activatable(IOvenFactory, 1.0)]

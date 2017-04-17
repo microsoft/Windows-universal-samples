@@ -11,7 +11,7 @@
     <AssemblyName>Personalization</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -103,9 +103,6 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="SampleConfiguration.cs" />
-    <Compile Include="AddImageFeedScenario.xaml.cs">
-      <DependentUpon>AddImageFeedScenario.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SetLockScreenImage.xaml.cs">
       <DependentUpon>SetLockScreenImage.xaml</DependentUpon>
     </Compile>
@@ -123,11 +120,6 @@
     </ApplicationDefinition>
     <Page Include="..\..\..\SharedContent\cs\MainPage.xaml">
       <Link>MainPage.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\shared\AddImageFeedScenario.xaml">
-      <Link>AddImageFeedScenario.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -169,7 +161,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="WindowsDesktop, Version=10.0.10240.0">
+    <SDKReference Include="WindowsDesktop, Version=10.0.14393.0">
       <Name>Microsoft Desktop Extension SDK for Universal App Platform</Name>
     </SDKReference>
   </ItemGroup>

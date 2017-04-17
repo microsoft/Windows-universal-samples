@@ -1,11 +1,18 @@
 ﻿<!---
   category: AudioVideoAndCamera
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620571&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620571
 --->
 
 # MIDI sample
 
-This sample demonstrates how to use the Windows.Devices.Midi API in a Windows Runtime app.
+Shows how to use the [Windows.Devices.Midi](https://msdn.microsoft.com/library/windows/apps/windows.devices.midi.aspx) API in a Windows Runtime app.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample demonstrates the following features:
 -   Enumerate MIDI In and MIDI Out ports.
@@ -17,7 +24,8 @@ This sample demonstrates the following features:
 
 ## Related topics
 
-AudioGraph, Video editing
+[AudioGraph class](https://msdn.microsoft.com/library/windows/apps/windows.media.audio.audiograph.aspx)  
+[Media compositions and editing](https://msdn.microsoft.com/windows/uwp/audio-video-camera/media-compositions-and-editing)  
 
 ## Operating system requirements
 
@@ -36,6 +44,6 @@ AudioGraph, Video editing
 
 To debug the app and then run it, press F5 or use **Debug** \> **Start Debugging**. To run the app without debugging, press Ctrl+F5 or use **Debug** \> **Start Without Debugging**.
 
-## Known Issues
+## Sounds for the MIDI synth
 
-There is currently a problem with deploying the Microsoft.Midi.GmDls framework package within the SDK. Because of this, the GS Synth is not currently usable. The code required for the reference framework is in MIDI.csproj, but has been commented out until the issue with deploying the framework package is resolved.
+The sounds for the inbox MIDI GS synth are available when the Microsoft.Midi.GmDls framework package is added to the package. This SDK sample has the reference added to the project already. Note that this requires Visual Studio 2015 Update 1 [https://www.visualstudio.com/news/vs2015-update1-vs] to be installed for the appx to deploy successfully.

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+    <Identity
+      Name="Microsoft.SDKSamples.TouchKeyboard.CPP"
+      Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+      Version="1.0.0.0" />
+
+    <mp:PhoneIdentity PhoneProductId="2943bd21-567b-4fdd-a13e-17a8aff61fa1" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+    <Properties>
+        <DisplayName>Touch Keyboard C++ Sample</DisplayName>
+        <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+        <Logo>Assets\StoreLogo-sdk.png</Logo>
+    </Properties>
+
+    <Dependencies>
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.14393.0" />
+    </Dependencies>
+
+    <Resources>
+        <Resource Language="x-generate"/>
+    </Resources>
+
+    <Applications>
+        <Application Id="TouchKeyboard.App"
+          Executable="$targetnametoken$.exe"
+          EntryPoint="TouchKeyboard.App">
+            <uap:VisualElements
+              DisplayName="Touch Keyboard C++ Sample"
+              Square150x150Logo="Assets\squareTile-sdk.png"
+              Square44x44Logo="Assets\smallTile-sdk.png"
+              Description="Touch Keyboard C++ Sample"
+              BackgroundColor="#00B2F0">
+                <uap:SplashScreen Image="Assets\splash-sdk.png" />
+                <uap:DefaultTile>
+                    <uap:ShowNameOnTiles>
+                        <uap:ShowOn Tile="square150x150Logo" />
+                    </uap:ShowNameOnTiles>
+                </uap:DefaultTile>
+            </uap:VisualElements>
+        </Application>
+    </Applications>
+</Package>

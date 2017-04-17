@@ -1,11 +1,18 @@
 <!---
   category: SpeechAndCortana 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619899&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619899
 --->
 
 # Cortana voice command sample
 
-This sample demonstrates integrating with Cortana to provide Voice Command Definitions (VCDs) that allow an application to be invoked in a variety of ways.
+Shows how to integrate with Cortana by providing Voice Command Definitions (VCDs) that allow an app to be invoked in a variety of ways.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample covers:
 
@@ -34,6 +41,19 @@ Specifically, this sample covers:
   - Disambiguation of multiple items with automatic reprompting.
   - Resolution scaling images
   - Progress dialogs for lengthy operations.
+  
+**C++/CX**
+
+-  Installing a VCD file. (adventureworkscommands.xml, App.xaml.cpp:OnLaunched() )
+-  Updating a phrase list within a VCD file at runtime. (TripViewModel.cpp:UpdateDestinationPhraseList())
+-  Handling App::OnActivation() being called with details of a voice command (App.xaml.cs:OnActivation())
+-  Handling registration of a background task and hooking it up to a voice command. (Package.appxmanifest, AdventureWorksCommands.xml)
+-  Implementing the headless invocation APIs for Cortana to acknowledge the invocation, handle cancellation, and completion of the headless invocation to maintain the contract with Cortana, and avoid being terminated. (AdventureworksVoiceCommandService.cpp:Run())
+-  Providing various responses to Cortana, which Cortana will display within its own UI, including text, images, app activation URIs, etc. (AdventureworksVoiceCommandService.cpp:SendCompletionMessageForDestination())
+-   Implements disambiguation, providing a user with multiple choices, which can either be chosen via voice, or other input mechanisms. (AdventureworksVoiceCommandService.cpp:DisambiguateTrips())
+-   Implements a confirmation dialog in Cortana, ensuring a user can review a destructive action that will be taken (AdventureworksVoiceCommandService.cpp:SendCompletionMessageForCancellation())
+-   Implements progress screens, ensuring that Cortana does not time out during lengthy I/O operations (AdventureworksVoiceCommandService.cpp:ShowProgressScreen())
+-   Infix/Suffix Voice Command support, allowing for more natural phrases to be used. 
 
 The sample also includes a basic application in order to demonstrate how to integrate this functionality with applications. 
 
@@ -70,9 +90,14 @@ Duplicates can also be handled. For an example of handling disambiguation, add a
 
 ## Related topics
 
--  [Cortana design guidelines](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/dn974233.aspx)
--  [Cortana interactions (XAML)](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/dn974230.aspx)
--  [Cortana interactions (HTML)](https://msdn.microsoft.com/en-us/library/windows/apps/dn974231.aspx)
+[Cortana design guidelines](https://msdn.microsoft.com/library/windows/apps/xaml/dn974233.aspx)  
+[Cortana interactions (XAML)](https://msdn.microsoft.com/library/windows/apps/mt185598)  
+[Cortana interactions (HTML)](https://msdn.microsoft.com/library/windows/apps/dn974231.aspx)  
+
+## See also
+
+[Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
+[Hue Lights sample](https://github.com/Microsoft/Windows-appsample-huelightcontroller)  
 
 ## System requirements
 
@@ -90,7 +115,7 @@ Cortana requires an appropriate recording device, and the system must be associa
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

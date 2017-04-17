@@ -151,4 +151,105 @@ namespace xBindSampleModel
         }
         #endregion
     }
+
+    internal class MapChangedEventArgs<K> : IMapChangedEventArgs<K>
+    {
+        public CollectionChange CollectionChange { get; set; }
+        public K Key { get; set; }
+    }
+
+    public sealed class EmployeeDictionary : IDictionary<string, IEmployee>, IObservableMap<string, IEmployee>
+    {
+        private Dictionary<string, IEmployee> data = new Dictionary<string, IEmployee>();
+        #region IObservable MAP
+        public event MapChangedEventHandler<string, IEmployee> MapChanged;
+
+        private void FireMapChanged(CollectionChange change, string key)
+        {
+            if (MapChanged != null)
+            {
+                MapChanged(this, new MapChangedEventArgs<string>() { CollectionChange = change, Key = key });
+            }
+        }
+
+        #endregion
+
+        #region Generic Dictionary
+        public IEmployee this[string key]
+        {
+            get
+            {
+                return data[key];
+            }
+            set
+            {
+                data[key] = value;
+                FireMapChanged(CollectionChange.ItemChanged, key);
+            }
+        }
+
+        public int Count { get { return data.Count; } }
+
+        public bool IsReadOnly { get { return false; } }
+
+        public ICollection<string> Keys { get { return data.Keys; } }
+
+        public ICollection<IEmployee> Values { get { return data.Values; } }
+
+        public void Add(KeyValuePair<string, IEmployee> item)
+        {
+            data.Add(item.Key, item.Value);
+            FireMapChanged(CollectionChange.ItemInserted, item.Key);
+        }
+
+        public void Add(string key, IEmployee value)
+        {
+            data.Add(key, value);
+            FireMapChanged(CollectionChange.ItemInserted, key);
+        }
+
+        public void Clear()
+        {
+            data.Clear();
+            FireMapChanged(CollectionChange.Reset, default(string));
+        }
+
+        public bool Contains(KeyValuePair<string, IEmployee> item) { return data.Contains(item); }
+
+        public bool ContainsKey(string key) { return data.ContainsKey(key); }
+
+        public void CopyTo(KeyValuePair<string, IEmployee>[] array, int arrayIndex)
+        {
+            var keys = data.Keys.GetEnumerator();
+            var values = data.Values.GetEnumerator();
+            for (int i = 0; i < data.Count; i++)
+            {
+                KeyValuePair<string, IEmployee> pair = new KeyValuePair<string, IEmployee>(keys.Current, values.Current);
+                array[arrayIndex + i] = pair;
+                keys.MoveNext();
+                values.MoveNext();
+            }
+        }
+
+        public IEnumerator<KeyValuePair<string, IEmployee>> GetEnumerator() { return data.GetEnumerator(); }
+
+        public bool Remove(KeyValuePair<string, IEmployee> item) { return Remove(item.Key); }
+
+        public bool Remove(string key)
+        {
+            bool removed = data.Remove(key);
+            if (removed) { FireMapChanged(CollectionChange.ItemRemoved, key); }
+            return removed;
+        }
+
+        public bool TryGetValue(string key, out IEmployee value)
+        {
+            return data.TryGetValue(key, out value);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() { return ((IEnumerable)data).GetEnumerator(); }
+        #endregion
+
+    }
+
 }

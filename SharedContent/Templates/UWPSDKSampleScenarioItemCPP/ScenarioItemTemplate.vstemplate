@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <Name>SDK Sample Scenario Page</Name>
+    <Description>Template for creating a Windows SDK Sample Scenario</Description>
+    <Icon>windows-sdk.png</Icon>
+    <TemplateID>Microsoft.CPP.WinRT.ScenarioPage</TemplateID>
+    <TemplateGroupID>WinRT-Managed-UAP</TemplateGroupID>
+    <ProjectType>VC</ProjectType>
+    <DefaultName>Scenario1_ShortName.xaml</DefaultName>
+    <TargetPlatformName>Windows</TargetPlatformName>
+    <RequiredPlatformVersion>6.3.0</RequiredPlatformVersion>
+  </TemplateData>
+  <TemplateContent>
+      <ProjectItem SubType="Designer" ReplaceParameters="true" TargetFileName="$fileinputname$.xaml">Scenario1_ShortName.xaml</ProjectItem>
+      <ProjectItem SubType="Code" ReplaceParameters="true" TargetFileName="$fileinputname$.xaml.cpp">Scenario1_ShortName.xaml.cpp</ProjectItem>
+      <ProjectItem SubType="Code" ReplaceParameters="true" TargetFileName="$fileinputname$.xaml.h">Scenario1_ShortName.xaml.h</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

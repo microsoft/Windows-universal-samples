@@ -50,7 +50,7 @@
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                    The Secure Consumer will use About to find a Secure Producer and then make a call to the "Concatenate" method.
+                    The SecureInterface consumer will use About to find a SecureInterface producer and then make a call to the "Concatenate" method.
                 </TextBlock>
             </StackPanel>
 

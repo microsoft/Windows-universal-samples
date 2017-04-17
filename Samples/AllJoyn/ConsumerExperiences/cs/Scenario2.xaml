@@ -56,8 +56,8 @@
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                    The Onboarding Consumer discovers and connects to an Onboarding Producer. 
-                    Once connected, the Consumer can pass an SSID and password to the Producer to onboard it,
+                    The Onboarding consumer discovers and connects to an Onboarding producer. 
+                    Once connected, the consumer can pass an SSID and password to the producer to onboard it
                     by using the "Configure" and "Connect" methods described in the Onboarding Service Framework XML.
                     You can validate with an AllJoyn device which implements the onboarding interface.
                     For more information: https://allseenalliance.org/developers/learn/base-services/onboarding/interface

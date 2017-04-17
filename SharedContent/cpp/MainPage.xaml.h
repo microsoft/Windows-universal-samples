@@ -37,6 +37,7 @@ namespace SDKTemplate
         void ScenarioControl_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
         void Footer_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void UpdateStatus(Platform::String^ strMessage, NotifyType type);
 
     internal:
         static MainPage^ Current;
