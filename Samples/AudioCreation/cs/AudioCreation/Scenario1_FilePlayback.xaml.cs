@@ -99,6 +99,13 @@ namespace AudioCreation
             fileInput.AddOutgoingConnection(deviceOutput);
             fileButton.Background = new SolidColorBrush(Colors.Green);
 
+            if (fileInput.Duration.TotalSeconds <  3)
+            {
+                // Imported file is too short
+                rootPage.NotifyUser(String.Format("This scenario requires a sound file which is longer than 3 seconds"), NotifyType.ErrorMessage);
+                return;
+            }
+
             // Trim the file: set the start time to 3 seconds from the beginning
             // fileInput.EndTime can be used to trim from the end of file
             fileInput.StartTime = TimeSpan.FromSeconds(3);
