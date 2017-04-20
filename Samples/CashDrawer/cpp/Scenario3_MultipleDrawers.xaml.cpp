@@ -65,7 +65,7 @@ task<bool> Scenario3_MultipleDrawers::CreateDefaultCashDrawerObject(CashDrawerIn
 {
     rootPage->NotifyUser("Creating cash drawer object.", NotifyType::StatusMessage);
 
-    return create_task(CashDrawer::GetDefaultAsync()).then([this, instance](CashDrawer^ defaultDrawer)
+    return DeviceHelpers::GetFirstCashDrawerAsync().then([this, instance](CashDrawer^ defaultDrawer)
     {
         if (defaultDrawer == nullptr)
         {

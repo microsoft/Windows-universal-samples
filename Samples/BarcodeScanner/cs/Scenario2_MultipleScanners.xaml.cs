@@ -272,7 +272,7 @@ namespace SDKTemplate
         private async Task<bool> CreateDefaultScannerObjectAsync(BarcodeScannerInstance instance)
         {
             BarcodeScanner scanner = null;
-            scanner = await BarcodeScanner.GetDefaultAsync();
+            scanner = await DeviceHelpers.GetFirstBarcodeScannerAsync();
 
             if (scanner == null)
             {

@@ -51,50 +51,31 @@
     var _claimedPrinter1 = null;
     var _claimedPrinter2 = null;
 
-    //
-    //PosPrinter GetDeviceSelector gets the string format used to search for pos printer. This is then used to find any pos printers.
-    //The method then takes the first printer id found and tries to create two instances for that printer.
-    //
+    /// Find the first receipt printer and create two instances of it.
     function findClaimEnable() {
 
         if (_printerInstance1 == null || _printerInstance2 == null) {
 
             WinJS.log("Finding printer...", "sample", "status");
-            var devicestr = Windows.Devices.PointOfService.PosPrinter.getDeviceSelector();
+            SdkSample.getFirstReceiptPrinterAsync().then(function (printer) {
 
-            Windows.Devices.Enumeration.DeviceInformation.findAllAsync(devicestr, null).then(function (deviceCollection) {
+                if (printer != null) {
+                    _printerInstance1 = printer;
 
-                if (deviceCollection.length == 0) {
-                    WinJS.log("No printers found during enumeration.", "sample", "error");
-                }
+                    //Now create second instance of printer as well with the same id.
+                    Windows.Devices.PointOfService.PosPrinter.fromIdAsync(_printerInstance1.deviceId).then(function (printer) {
 
-                var id = deviceCollection[0].id;
-                Windows.Devices.PointOfService.PosPrinter.fromIdAsync(id).then(function (printer) {
-
-                    if (printer != null) {
-                        _printerInstance1 = printer;
-
-                        if (_printerInstance1.capabilities.receipt.isPrinterPresent) {
-
-                            //Now create second instance of printer as well with the same id.
-                            Windows.Devices.PointOfService.PosPrinter.fromIdAsync(id).then(function (printer) {
-
-                                if (printer != null) {
-                                    _printerInstance2 = printer;
-                                    WinJS.log("Created two receipt printer instances. Device ID: " + printer.deviceId, "sample", "status");
-                                    setUnclaimedUI();
-                                }
-                            });
+                        if (printer != null) {
+                            _printerInstance2 = printer;
+                            WinJS.log("Created two receipt printer instances. Device ID: " + printer.deviceId, "sample", "status");
+                            setUnclaimedUI();
+                        } else {
+                            WinJS.log("Couldn't create second instance of printer.", "sample", "error");
                         }
-                    } else {
-                        WinJS.log("FromIdAsync was unsuccessful.", "sample", "error");
-                    }
-                },
-                function error(e) {
-                    WinJS.log("FromIdAsync was unsuccessful: " + e.message, "sample", "error");
-                });//end of fromIdAsync
-            }, function error(e) {
-                WinJS.log("Printer device enumeration unsuccessful: " + e.message, "sample", "error");
+                    });
+                } else {
+                    WinJS.log("No printer found", "sample", "error");
+                }
             });
         }
     }

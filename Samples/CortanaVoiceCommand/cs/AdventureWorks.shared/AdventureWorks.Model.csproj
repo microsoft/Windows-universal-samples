@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{0E177301-05B1-4225-B0F2-EBC4612B0B4E}</ProjectGuid>
+    <ProjectGuid>{EBE2EEE2-6BF6-5B5E-9E71-D13AFD1DD045}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AdventureWorks.Model</RootNamespace>

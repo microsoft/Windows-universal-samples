@@ -12,7 +12,6 @@
 #pragma once
 
 #include "pch.h"
-#include "DeviceHelpers.h"
 
 namespace SDKTemplate
 {

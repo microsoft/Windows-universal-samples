@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{ccd4daf9-f561-4917-84aa-7bfa0799909f}</ProjectGuid>
+    <ProjectGuid>{616f86c8-6881-51cf-99d8-a88d2d70a344}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>AdventureWorks.Shared</ProjectName>
     <RootNamespace>AdventureWorks_Shared</RootNamespace>

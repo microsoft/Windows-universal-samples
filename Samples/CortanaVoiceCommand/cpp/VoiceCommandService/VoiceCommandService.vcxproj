@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{c705e765-23ee-458e-b47c-73248b51278f}</ProjectGuid>
+    <ProjectGuid>{1be5b4c8-10bf-5a00-8d04-cf9c34363fed}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>VoiceCommandService</ProjectName>
     <RootNamespace>VoiceCommandService</RootNamespace>

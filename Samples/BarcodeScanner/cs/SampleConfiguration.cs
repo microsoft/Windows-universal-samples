@@ -12,7 +12,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Windows.Devices.Enumeration;
 using Windows.Devices.PointOfService;
 using Windows.UI.Xaml.Controls;
 

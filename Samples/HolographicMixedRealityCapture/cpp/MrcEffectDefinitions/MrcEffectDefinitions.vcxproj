@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{358730a2-220f-47ee-bea9-77e450c2919f}</ProjectGuid>
+    <ProjectGuid>{d2415ba1-7c6e-503d-a1f2-3223b776639d}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>MrcEffectDefinitions</ProjectName>
     <RootNamespace>MrcEffectDefinitions</RootNamespace>

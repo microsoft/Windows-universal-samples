@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{bea6cfdc-1696-40b6-a809-359f0daad909}</ProjectGuid>
+    <ProjectGuid>{cf7849d3-f2ae-56fd-887e-043029c6a147}</ProjectGuid>
     <Keyword>HolographicApp</Keyword>
     <RootNamespace>HolographicSpatialMapping</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>

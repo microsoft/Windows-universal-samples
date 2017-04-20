@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{96cb6789-0be9-4536-b667-583a59a2f3cc}</ProjectGuid>
+    <ProjectGuid>{721d71ec-d20b-5c8b-b9b7-28741d1c3f96}</ProjectGuid>
     <Keyword>HolographicApp</Keyword>
     <RootNamespace>HolographicDepthBasedImageStabilization</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -9,7 +9,7 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformMinVersion>10.0.10586.0</WindowsTargetPlatformMinVersion>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <ProjectName>HolographicDepthBasedImageStabilization</ProjectName>

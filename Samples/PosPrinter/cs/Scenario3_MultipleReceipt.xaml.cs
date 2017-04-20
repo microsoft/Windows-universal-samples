@@ -184,8 +184,7 @@ namespace PosPrinterSample
         }
 
         /// <summary>
-        /// PosPrinter GetDeviceSelector gets the string format used to search for pos printer. This is then used to find any pos printers.
-        /// The method then takes the first printer id found and tries to create two instances for that printer.
+        /// Find the first receipt printer and create two instances of it.
         /// </summary>
         /// <returns></returns>
         private async Task<bool> FindReceiptPrinterInstances()
@@ -193,35 +192,30 @@ namespace PosPrinterSample
             if (printerInstance1 == null || printerInstance2 == null)
             {
                 rootPage.NotifyUser("Finding printer", NotifyType.StatusMessage);
-                DeviceInformationCollection deviceCollection = await DeviceInformation.FindAllAsync(PosPrinter.GetDeviceSelector());
-                if (deviceCollection != null && deviceCollection.Count > 0)
+                printerInstance1 = await DeviceHelpers.GetFirstReceiptPrinterAsync();
+
+                if (printerInstance1 != null)
                 {
-                    DeviceInformation deviceInfo = deviceCollection[0];
-                    printerInstance1 = await PosPrinter.FromIdAsync(deviceInfo.Id);
-                    if (printerInstance1.Capabilities.Receipt.IsPrinterPresent)
+                    rootPage.NotifyUser("Got Printer Instance 1 with Device Id : " + printerInstance1.DeviceId, NotifyType.StatusMessage);
+
+                    // Create another instance of the same printer.
+                    printerInstance2 = await PosPrinter.FromIdAsync(printerInstance1.DeviceId);
+                    if (printerInstance2 != null)
                     {
-                        rootPage.NotifyUser("Got Printer Instance 1 with Device Id : " + printerInstance1.DeviceId, NotifyType.StatusMessage);
-
-                        printerInstance2 = await PosPrinter.FromIdAsync(deviceInfo.Id);
-                        if (printerInstance2.Capabilities.Receipt.IsPrinterPresent)
-                        {
-                            rootPage.NotifyUser("Got Printer Instance 2 with Device Id : " + printerInstance2.DeviceId, NotifyType.StatusMessage);
-                        }
-
+                        rootPage.NotifyUser("Got Printer Instance 2 with Device Id : " + printerInstance2.DeviceId, NotifyType.StatusMessage);
                         return true;
                     }
                     else
                     {
-                        rootPage.NotifyUser("Did not find a Receipt printer ", NotifyType.ErrorMessage);
-                        return false;
+                        rootPage.NotifyUser("Couldn't create second instance of printer.", NotifyType.StatusMessage);
                     }
+                    return false;
                 }
                 else
                 {
-                    rootPage.NotifyUser("No devices returned by FindAllAsync.", NotifyType.ErrorMessage);
+                    rootPage.NotifyUser("No Printer found", NotifyType.ErrorMessage);
                     return false;
                 }
-
             }
 
             return true;

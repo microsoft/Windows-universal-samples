@@ -20,8 +20,19 @@
         { url: "/html/Scenario3_MultipleReceipt.html", title: "Multiple Receipt Printers" }
     ];
 
+    var PosPrinter = Windows.Devices.PointOfService.PosPrinter;
+
+    function getFirstReceiptPrinterAsync() {
+        return DeviceHelpers.getFirstDeviceAsync(PosPrinter.getDeviceSelector(), (id) => {
+            return PosPrinter.fromIdAsync(id).then((printer) => {
+                return printer && printer.capabilities.receipt.isPrinterPresent && printer;
+            });
+        });
+    }
+
     WinJS.Namespace.define("SdkSample", {
         sampleTitle: sampleTitle,
-        scenarios: new WinJS.Binding.List(scenarios)
+        scenarios: new WinJS.Binding.List(scenarios),
+        getFirstReceiptPrinterAsync: getFirstReceiptPrinterAsync
     });
 })();

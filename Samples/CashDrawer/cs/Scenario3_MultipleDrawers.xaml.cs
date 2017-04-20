@@ -80,7 +80,7 @@ namespace SDKTemplate
             rootPage.NotifyUser("Creating cash drawer object.", NotifyType.StatusMessage);
 
             CashDrawer tempDrawer = null;
-            tempDrawer = await CashDrawer.GetDefaultAsync();
+            tempDrawer = await DeviceHelpers.GetFirstCashDrawerAsync();
 
             if (tempDrawer == null)
             {

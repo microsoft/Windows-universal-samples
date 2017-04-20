@@ -20,8 +20,15 @@
         { url: "/html/Scenario3_MultipleDrawers.html", title: "Drawer Retain" }
     ];
 
+    var CashDrawer = Windows.Devices.PointOfService.CashDrawer;
+
+    function getFirstCashDrawerAsync() {
+        return DeviceHelpers.getFirstDeviceAsync(CashDrawer.getDeviceSelector(), (id) => CashDrawer.fromIdAsync(id));
+    }
+
     WinJS.Namespace.define("SdkSample", {
         sampleTitle: sampleTitle,
-        scenarios: new WinJS.Binding.List(scenarios)
+        scenarios: new WinJS.Binding.List(scenarios),
+        getFirstCashDrawerAsync: getFirstCashDrawerAsync
     });
 })();
