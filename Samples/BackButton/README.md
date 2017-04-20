@@ -5,7 +5,14 @@
 
 # Back Button Sample
 
-This sample demonstrates how to set up an event handler for the back button event and how to enable the title bar back button for when the app is in windowed Desktop mode.
+Shows how to set up an event handler for the back button event and how to enable the title bar back button for when the app is in windowed Desktop mode.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample covers:
 

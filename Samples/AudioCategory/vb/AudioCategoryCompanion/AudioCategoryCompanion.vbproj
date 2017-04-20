@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{89C7B322-BDC1-550F-B465-92D9F9D547C0}</ProjectGuid>
+    <ProjectGuid>{875FB74A-5754-5FC0-A996-E2F2146E9C4A}</ProjectGuid>
     <!--<OutputType>AppContainerExe</OutputType>-->
     <OutputType>AppContainerExe</OutputType>
     <RootNamespace>AudioCategoryCompanion</RootNamespace>
     <AssemblyName>AudioCategoryCompanion</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>

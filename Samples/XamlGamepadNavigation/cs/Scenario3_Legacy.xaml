@@ -1,0 +1,51 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario3_Legacy"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:SDKTemplate"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" Text="Legacy controls"/>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                This scenario mitigates navigation issues with
+                controls which have not been updated for directional navigation.
+                See the XAML markup for further discussion.
+            </TextBlock>
+            <!--
+            For best results when adapting a legacy control to directional navigation:
+            
+            Set UseSystemFocusVisuals="True" so that the control receives system focus visuals.
+            Set IsFocusEngagementEnabled="True" so that the control does not receive focus until engaged.
+            If applicable, set RequiresPointer="WhenEngaged" so that the directional buttons control a virtual mouse within the control.
+            (Also remember to set Application.RequiresPointerMode to WhenRequested.)
+            -->
+            <local:TransportOptions Margin="0,10,10,0" Tag="Legacy"
+                KeyUp="LegacyControl_KeyUp"
+                UseSystemFocusVisuals="True" IsFocusEngagementEnabled="True"
+                RequiresPointer="WhenEngaged"/>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                In extreme cases, a control may prevent the user from
+                removing engagement with the "B" button.
+                The page can manually force removal of engagement
+                with the RemoveFocusEngagement method.
+            </TextBlock>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

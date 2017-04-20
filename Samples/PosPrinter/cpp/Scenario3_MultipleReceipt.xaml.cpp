@@ -193,6 +193,7 @@ void Scenario3_MultipleReceipt::FindReceiptPrinter_Click(Platform::Object^ sende
                 // Create another instance of the same printer.
                 create_task(PosPrinter::FromIdAsync(printerInstance1->DeviceId)).then([this](PosPrinter^ _printer)
                 {
+                    delete printerInstance2;
                     printerInstance2 = _printer;
                     if (printerInstance2 != nullptr)
                     {

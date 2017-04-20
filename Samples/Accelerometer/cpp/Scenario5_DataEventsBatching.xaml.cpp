@@ -34,7 +34,7 @@ Scenario5_DataEventsBatching::Scenario5_DataEventsBatching()
 
 void Scenario5_DataEventsBatching::OnNavigatedTo(NavigationEventArgs^ e)
 {
-    accelerometer = Accelerometer::GetDefault();
+    accelerometer = Accelerometer::GetDefault(rootPage->AccelerometerReadingType);
     if (accelerometer != nullptr)
     {
         // Select a report interval and report latency that is both suitable for the purposes of the app and supported by the sensor.
@@ -43,12 +43,13 @@ void Scenario5_DataEventsBatching::OnNavigatedTo(NavigationEventArgs^ e)
 
         // MaxBatchSize will be 0 if the accelerometer does not support batching.
         desiredReportLatency = (std::min)(desiredReportInterval * accelerometer->MaxBatchSize, 10000U);
-    
+
+        rootPage->NotifyUser(rootPage->AccelerometerReadingType.ToString() + " accelerometer ready", NotifyType::StatusMessage);
         ScenarioEnableButton->IsEnabled = true;
     }
     else
     {
-        rootPage->NotifyUser("No accelerometer found", NotifyType::ErrorMessage);
+        rootPage->NotifyUser(rootPage->AccelerometerReadingType.ToString() + " accelerometer not found", NotifyType::ErrorMessage);
     }
 }
 

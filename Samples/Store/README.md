@@ -1,12 +1,20 @@
 ﻿<!---
-  category: AppSettings
+  category: AppSettings TrialsAdsAndInAppPurchases
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=627610
 --->
+
 # Store sample
 
-This sample demonstrates how to perform in-app feature or product purchases operations
+Shows how to perform in-app feature or product purchases operations
 and use the licensing API provided by the Windows Store
 to determine the license status of an app or a feature that is enabled by an in-app purchase.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 The Windows Store supports the following types of in-app purchases:
 
@@ -24,23 +32,28 @@ The sample app demonstrates the following tasks.
 -   Check if an in-app product has been purchased through an in-app purchase.
 -   Perform an in-app purchase to buy the app.
 -   Perform an in-app purchase to buy an in-app product.
--   Check the expiration date (if any) of a product.
 -   Confirm the fulfillment of an in-app consumable product.
 -   Perform an in-app purchase transaction using the Windows Store commerce platform.
--   Perform an in-app purchase to buy an app feature or product from a large purchase catalog.
 -   Launch the Windows Store page for the app, so users can purchase the app or write a review.
--   Generate a receipt that can be used to verify the successful completion of the transaction.
 -   Generate a business to business (B2B) token that can be used to query or add to a user's collection.
 
-### Additional Setup Instructions for Scenario 9 - Business to Business
+### Setup Instructions
 
-These steps are necessary only if you want to run the code in Scenario 9 as it requires application and Azure configuration.
+Before running this sample, you must associate it with an app in the Store.
+
+1. [Register as an app developer](https://developer.microsoft.com/store/register).
+2. Follow the instructions in
+[Testing apps that use the Windows.Services.Store namespace](https://msdn.microsoft.com/windows/uwp/monetize/in-app-purchases-and-trials#testing-apps-that-use-the-windows-services-store-namespace).
+
+### Additional Setup Instructions for Business to Business Scenario
+
+These steps are necessary only if you want to run the code in the Business to Business Scenario, which requires application and Azure configuration.
 
 1. You must have a real application available for download from the Windows Store.  This can be a private application.
 2. Download a copy of your application from the store to get a valid license.
 3. Associate this test application with this application in the store.
 4. Deploy this application to your machine and overwrite the existing application.
-5. Setup your application following the instructions under the **Adding an Application** section at [Integrating Applications with Azure Active Directory](https://azure.microsoft.com/en-us/documentation/articles/active-directory-integrating-applications/).
+5. Setup your application following the instructions under the **Adding an Application** section at [Integrating Applications with Azure Active Directory](https://azure.microsoft.com/documentation/articles/active-directory-integrating-applications/).
 6. Replace the provided value of "tenantId" with your actual tenant ID for your Azure account.
 7. Replace the provided value of "clientId" with the actual value of your native application created in Azure.
 8. Replace the provided value of "clientSecret" with the actual value for your Azure account.
@@ -54,21 +67,24 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## Related topics
 
+[Coloring Book app sample](https://github.com/Microsoft/Windows-appsample-coloringbook)  
+
 ### Samples
 
-[Advertising](/Samples/Advertising)
+[Advertising](/Samples/Advertising)  
 
 ### Reference
 
-[**Windows.ApplicationModel.Store**](http://msdn.microsoft.com/library/windows/apps/br225197)
+[Windows.Services.Store namespace](https://msdn.microsoft.com/library/windows/apps/windows.services.store.aspx)  
+[Monetization, customer engagement, and Store services](https://msdn.microsoft.com/windows/uwp/monetize/)  
 
 ## System requirements
 
-**Client:** Windows 10
+**Client:** Windows 10 version 1607
 
 **Server:** Windows Server 2016 Technical Preview
 
-**Phone:**  Windows 10
+**Phone:**  Windows 10 version 1607
 
 ## Build the sample
 

@@ -5,11 +5,19 @@
 
 # General Purpose Input/Output (GPIO) sample
 
-The [**Windows.Devices.Gpio**](http://msdn.microsoft.com/en-us/library/windows.devices.gpio.aspx) namespace
-allows apps to set, read, and react to state changes in the
+Shows how to use the [Windows.Devices.Gpio](http://msdn.microsoft.com/library/windows.devices.gpio.aspx) namespace
+to allow apps to set, read, and react to state changes in the
 General Purpose Input/Output (GPIO) pins
 on a Windows IoT (Internet of Things) device.
 These pins are often used to access sensors, motors, LEDs, etc.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
 This sample demonstrates the following:
 
 - Setting GPIO pin values.
@@ -20,7 +28,7 @@ This sample demonstrates the following:
 
 To obtain information about Windows 10 IoT Core, go to [Windows on Devices](http://windowsondevices.com)
 
-To see more samples specifically describing how to leverage Windows 10 IoT Core, click on the [Samples tab here](http://ms-iot.github.io/content/en-US/win10/StartCoding.htm).
+To see more samples specifically describing how to leverage Windows 10 IoT Core, click on the [Samples tab here](http://ms-iot.github.io/content/win10/StartCoding.htm).
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 

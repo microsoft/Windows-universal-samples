@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22512.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MagneticStripeReader", "MagneticStripeReader.vcxproj", "{07CA6A01-0D6E-50B6-B139-BF5EAFB29445}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MagneticStripeReader", "MagneticStripeReader.vcxproj", "{C624FB3E-9791-5728-B955-2F607A23B9B6}"
 EndProject
 Global
     GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
         Release|x86 = Release|x86
     EndGlobalSection
     GlobalSection(ProjectConfigurationPlatforms) = postSolution
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Debug|ARM.ActiveCfg = Debug|ARM
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Debug|ARM.Build.0 = Debug|ARM
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Debug|ARM.Deploy.0 = Debug|ARM
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Debug|x64.ActiveCfg = Debug|x64
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Debug|x64.Build.0 = Debug|x64
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Debug|x64.Deploy.0 = Debug|x64
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Debug|x86.ActiveCfg = Debug|Win32
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Debug|x86.Build.0 = Debug|Win32
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Debug|x86.Deploy.0 = Debug|Win32
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Release|ARM.ActiveCfg = Release|ARM
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Release|ARM.Build.0 = Release|ARM
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Release|ARM.Deploy.0 = Release|ARM
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Release|x64.ActiveCfg = Release|x64
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Release|x64.Build.0 = Release|x64
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Release|x64.Deploy.0 = Release|x64
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Release|x86.ActiveCfg = Release|Win32
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Release|x86.Build.0 = Release|Win32
-        {07CA6A01-0D6E-50B6-B139-BF5EAFB29445}.Release|x86.Deploy.0 = Release|Win32
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Debug|ARM.ActiveCfg = Debug|ARM
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Debug|ARM.Build.0 = Debug|ARM
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Debug|ARM.Deploy.0 = Debug|ARM
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Debug|x64.ActiveCfg = Debug|x64
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Debug|x64.Build.0 = Debug|x64
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Debug|x64.Deploy.0 = Debug|x64
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Debug|x86.ActiveCfg = Debug|Win32
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Debug|x86.Build.0 = Debug|Win32
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Debug|x86.Deploy.0 = Debug|Win32
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Release|ARM.ActiveCfg = Release|ARM
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Release|ARM.Build.0 = Release|ARM
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Release|ARM.Deploy.0 = Release|ARM
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Release|x64.ActiveCfg = Release|x64
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Release|x64.Build.0 = Release|x64
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Release|x64.Deploy.0 = Release|x64
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Release|x86.ActiveCfg = Release|Win32
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Release|x86.Build.0 = Release|Win32
+        {C624FB3E-9791-5728-B955-2F607A23B9B6}.Release|x86.Deploy.0 = Release|Win32
     EndGlobalSection
     GlobalSection(SolutionProperties) = preSolution
         HideSolutionNode = FALSE

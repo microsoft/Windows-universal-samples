@@ -22,13 +22,16 @@
         <StackPanel>
             <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
             <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" Text="Calibration"/>
-            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0" Text="Simulates the current sensor accuracy. Setting to 'Unreliable' will invoke the calibration bar until accuracy improves or 30 seconds passes. The calibration bar will not be shown again for at least 5 minutes, even when accuracy returns to 'Unreliable'."/>
-            <StackPanel Orientation="Vertical" Margin="0,10,0,0">
-                <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="Yaw Accuracy:"/>
-                <RadioButton Content="High" Click="{x:Bind OnHighAccuracy}" IsChecked="True"/>
-                <RadioButton Content="Approximate" Click="{x:Bind OnApproximateAccuracy}"/>
-                <RadioButton Content="Unreliable" Click="{x:Bind OnUnreliableAccuracy}"/>
+            <StackPanel x:Name="EnabledContent">
+                <TextBlock TextWrapping="Wrap" Margin="0,10,0,0" Text="Simulates the current sensor accuracy. Setting to 'Unreliable' will invoke the calibration bar until accuracy improves or 30 seconds passes. The calibration bar will not be shown again for at least 5 minutes, even when accuracy returns to 'Unreliable'."/>
+                <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="Yaw Accuracy:"/>
+                    <RadioButton Content="High" Click="{x:Bind OnHighAccuracy}" IsChecked="True"/>
+                    <RadioButton Content="Approximate" Click="{x:Bind OnApproximateAccuracy}"/>
+                    <RadioButton Content="Unreliable" Click="{x:Bind OnUnreliableAccuracy}"/>
+                </StackPanel>
             </StackPanel>
+            <TextBlock x:Name="DisabledContent" TextWrapping="Wrap" Margin="0,10,0,0" Visibility="Collapsed" Text="Yaw accuracy is reported only for absolute sensor reading types."/>
         </StackPanel>
     </Grid>
 </Page>

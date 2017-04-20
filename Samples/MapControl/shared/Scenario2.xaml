@@ -36,6 +36,7 @@
 
             <StackPanel  Grid.Row="1">
                 <Button Content="Add MapIcon to center of Map" x:Name="mapIconAddButton" Click="mapIconAddButton_Click"/>
+                <Button Content="Add MapBillboard to center of Map" x:Name="mapBillboardAddButton" Click="mapBillboardAddButton_Click"/>
                 <Button Content="Add MapPolygon to center of Map" x:Name="mapPolygonAddButton" Click="mapPolygonAddButton_Click"/>
                 <Button Content="Add MapPolyline to center of Map" x:Name="mapPolylineAddButton" Click="mapPolylineAddButton_Click"/>
             </StackPanel>

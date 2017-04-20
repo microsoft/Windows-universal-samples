@@ -5,11 +5,15 @@
 
 # Radios sample
 
-This sample demonstrates:
+Shows how to use the [Windows.Devices.Radios](https://msdn.microsoft.com/library/windows/apps/windows.devices.radios.aspx) API to enumerate radios on a device, 
+toggle radio state changes, and register for state changes on individual radios. 
 
--   Enumerating Radios on the device
--   Registering for state changes on individual Radios
--   Toggling Radio state changes
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 ## System requirements
 

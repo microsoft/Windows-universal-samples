@@ -5,7 +5,14 @@
 
 # Spatial audio sample
 
-This sample demonstrates how to render spatial audio using HRTF xAPO and XAudio2 API within Universal Applications.
+Shows how to render spatial audio using HRTF xAPO and XAudio2 API within Universal Applications.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample covers hosting the HRTF xAPO in an XAudio2 graph for rendering sources with different spatial locations, radiation patterns and distance decay behaviors. You can choose one of the following three scenarios:
 
@@ -32,12 +39,13 @@ To obtain information about Windows 10 development, go to the [Windows Dev Cente
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ### Remark
+
 HRTF xAPO API is present but nonfunctional on Phone devices.
 
 ## Reference
 
-* [XAudio2 API](https://msdn.microsoft.com/en-us/library/windows/desktop/hh405049(v=vs.85).aspx)
-* [IXAPOHrtfParameters] (https://msdn.microsoft.com/en-us/library/windows/desktop/mt186608(v=vs.85).aspx)
+[XAudio2 API](https://msdn.microsoft.com/library/windows/desktop/hh405049.aspx)  
+[IXAPOHrtfParameters] (https://msdn.microsoft.com/library/windows/desktop/mt186608.aspx)  
 
 ## System requirements
 

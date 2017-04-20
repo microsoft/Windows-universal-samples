@@ -32,6 +32,7 @@ public interface class ISecureInterfaceSignals
 public ref class SecureInterfaceSignals sealed : [Windows::Foundation::Metadata::Default] ISecureInterfaceSignals
 {
 public:
+    // "This signal is emitted when producer sends a text message to consumer"
     // Calling this method will send the TextSent signal to every member of the session.
     void TextSent(_In_ Platform::String^ interfaceMemberMessage);
 
@@ -58,12 +59,11 @@ public:
     }
 
 internal:
-    void Initialize(_In_ alljoyn_busobject busObject, _In_ alljoyn_sessionid sessionId);
+    void Initialize(_In_ ISignalEmitter^ emitter);
     void CallTextSentReceived(_In_ SecureInterfaceSignals^ sender, _In_ SecureInterfaceTextSentReceivedEventArgs^ args);
 
 private:
-    alljoyn_busobject m_busObject;
-    alljoyn_sessionid m_sessionId;
+    ISignalEmitter^ m_emitter;
 
     virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _TextSentReceived;
 

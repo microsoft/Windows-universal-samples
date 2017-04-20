@@ -70,9 +70,11 @@ namespace SDKTemplate
         {
             this.InitializeComponent();
             trigger = new RfcommConnectionTrigger();
+
+            // Local service Id is the only mandatory field that should be used to filter a known service UUID.  
             trigger.InboundConnection.LocalServiceId = RfcommServiceId.FromUuid(Constants.RfcommChatServiceUuid);
 
-            // TODO:  helper function to create sdpRecordBlob
+            // The SDP record is nice in order to populate optional name and description fields
             trigger.InboundConnection.SdpRecord = sdpRecordBlob.AsBuffer();
         }
 
@@ -125,14 +127,13 @@ namespace SDKTemplate
                     AttachProgressAndCompletedHandlers(taskRegistration);
 
                     // Even though the trigger is registered successfully, it might be blocked. Notify the user if that is the case.
-                    if ((backgroundAccessStatus == BackgroundAccessStatus.Denied) || (backgroundAccessStatus == BackgroundAccessStatus.Unspecified))
+                    if ((backgroundAccessStatus == BackgroundAccessStatus.AlwaysAllowed) || (backgroundAccessStatus == BackgroundAccessStatus.AllowedSubjectToSystemPolicy))
                     {
-                        rootPage.NotifyUser("Not able to run in background. Application must given permission to be added to lock screen.",
-                            NotifyType.ErrorMessage);
+                        rootPage.NotifyUser("Background watcher registered.", NotifyType.StatusMessage);
                     }
                     else
                     {
-                        rootPage.NotifyUser("Background watcher registered.", NotifyType.StatusMessage);
+                        rootPage.NotifyUser("Background tasks may be disabled for this app", NotifyType.ErrorMessage);
                     }
                 }
                 catch (Exception)
@@ -255,15 +256,21 @@ namespace SDKTemplate
         /// <param name="args"></param>
         private async void OnProgress(IBackgroundTaskRegistration task, BackgroundTaskProgressEventArgs args)
         {
+
             if (ApplicationData.Current.LocalSettings.Values.Keys.Contains("ReceivedMessage"))
             {
                 string backgroundMessage = (string)ApplicationData.Current.LocalSettings.Values["ReceivedMessage"];
-                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                string remoteDeviceName = (string)ApplicationData.Current.LocalSettings.Values["RemoteDeviceName"];
+
+                if(!backgroundMessage.Equals(""))
                 {
-                    rootPage.NotifyUser("Client Connected", NotifyType.StatusMessage);
-                    ConversationListBox.Items.Add("Received: " + backgroundMessage);
-                });
-            }        
+                    await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                    {
+                        rootPage.NotifyUser("Client Connected: " + remoteDeviceName, NotifyType.StatusMessage);
+                        ConversationListBox.Items.Add("Received: " + backgroundMessage);
+                    });
+                }
+            }
         }
 
         private void AttachProgressAndCompletedHandlers(IBackgroundTaskRegistration task)
@@ -271,6 +278,5 @@ namespace SDKTemplate
             task.Progress += new BackgroundTaskProgressEventHandler(OnProgress);
             task.Completed += new BackgroundTaskCompletedEventHandler(OnCompleted);
         }
-
     }
 }

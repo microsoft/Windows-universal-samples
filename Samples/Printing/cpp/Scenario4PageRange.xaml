@@ -20,9 +20,7 @@
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                    <Run Text="Sample implementation of Page Range feature."/>
-                    <LineBreak/>
-                    <Run Text="Select some text below to print selected content using Print Selection option."/>
+                    Sample implementation of Page Range feature.
                 </TextBlock>
             </StackPanel>
 

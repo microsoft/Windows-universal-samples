@@ -3,15 +3,15 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <ProjectGuid>{27FF5EE3-A984-5350-879A-C8B685292B8B}</ProjectGuid>
+    <ProjectGuid>{CE1A54F7-DCBE-5E06-BBDB-5AAB921670F4}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NavigationMenuSample</RootNamespace>
     <AssemblyName>NavigationMenuSample</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -98,6 +98,8 @@
       <DependentUpon>PageHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="NavMenuItem.cs" />
+    <Compile Include="SystemInformationHelpers.cs" />
+    <Compile Include="Triggers\IsTenFootTrigger.cs" />
     <Compile Include="Views\BasicPage.xaml.cs">
       <DependentUpon>BasicPage.xaml</DependentUpon>
     </Compile>
@@ -151,6 +153,12 @@
     </Page>
     <Page Include="..\shared\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="..\shared\TenFootStylesheet.xaml">
+      <Link>Styles\TenFootStylesheet.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

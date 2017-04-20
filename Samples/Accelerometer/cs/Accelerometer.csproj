@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{319B7FD7-EB8E-592B-8227-98E4E80AC7DA}</ProjectGuid>
+    <ProjectGuid>{8ECB1F8D-8B5C-541C-8DF6-3F9EC6085379}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>Accelerometer</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -103,6 +103,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="SampleConfiguration.cs" />
+    <Compile Include="Scenario0_Choose.xaml.cs" />
     <Compile Include="Scenario1_DataEvents.xaml.cs" />
     <Compile Include="Scenario2_ShakeEvents.xaml.cs" />
     <Compile Include="Scenario3_Polling.xaml.cs" />
@@ -122,6 +123,11 @@
     </ApplicationDefinition>
     <Page Include="..\..\..\SharedContent\cs\MainPage.xaml">
       <Link>MainPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario0_Choose.xaml">
+      <Link>Scenario0_Choose.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

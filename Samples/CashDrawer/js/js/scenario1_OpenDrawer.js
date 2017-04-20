@@ -27,7 +27,10 @@
                 _claimedDrawer = null;
             }
 
-            _drawer = null;
+            if (_drawer !== null) {
+                _drawer.close();
+                _drawer = null;
+            }
         }
     });
 

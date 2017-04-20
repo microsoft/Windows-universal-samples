@@ -7,7 +7,18 @@
 
     var page = WinJS.UI.Pages.define("/html/scenario2standardoptions.html", {
         ready: function (element, options) {
-            document.getElementById("printButton").addEventListener("click", printButtonHandler, false);
+            var printButton = document.getElementById("printButton");
+            if (!Windows.Graphics.Printing.PrintManager.isSupported()) {
+                WinJS.log && WinJS.log("Printing is not supported.", "sample", "error");
+
+                // Hide the Print button if printing is not supported.
+                printButton.style.display = "none";
+
+                // Printing-related event handlers will never be called if printing
+                // is not supported, but it's okay to register for them anyway.
+            }
+
+            printButton.addEventListener("click", printButtonHandler, false);
 
             // Register for Print Contract
             printManager.addEventListener("printtaskrequested", onPrintTaskRequested);

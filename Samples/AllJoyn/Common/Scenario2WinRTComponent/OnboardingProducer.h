@@ -48,9 +48,9 @@ public:
     }
 
     // Used to send signals or register functions to handle received signals.
-    property OnboardingSignals^ Signals
+    property OnboardingLegacySignals^ Signals
     {
-        OnboardingSignals^ get() { return m_signals; }
+        OnboardingLegacySignals^ get() { return m_signals; }
     }
     
     // This event will fire whenever this producer is stopped.
@@ -206,10 +206,15 @@ private:
     virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _SessionMemberAdded;
     virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _SessionMemberRemoved;
 
+    // "Sends the personal AP information to the onboardee"
     static void CallConfigureWiFiHandler(_Inout_ alljoyn_busobject busObject, _In_ alljoyn_message message);
+    // "Tells the onboardee to connect to the personal AP"
     static void CallConnectHandler(_Inout_ alljoyn_busobject busObject, _In_ alljoyn_message message);
+    // "Tells the onboardee to disconnect from the personal AP"
     static void CallOffboardHandler(_Inout_ alljoyn_busobject busObject, _In_ alljoyn_message message);
+    // "Scans all the Wi-Fi access points in the onboardee's proximity"
     static void CallGetScanInfoHandler(_Inout_ alljoyn_busobject busObject, _In_ alljoyn_message message);
+    // "This signal is emitted when the connection attempt against the personal AP is completed"
     static void CallConnectionResultSignalHandler(_In_ const alljoyn_interfacedescription_member* member, _In_ alljoyn_message message);
       
     // Register a callback function to handle methods.
@@ -221,7 +226,7 @@ private:
     
     Windows::Devices::AllJoyn::AllJoynBusAttachment^ m_busAttachment;
     Windows::Foundation::EventRegistrationToken m_busAttachmentStateChangedToken;
-    OnboardingSignals^ m_signals;
+    OnboardingLegacySignals^ m_signals;
     IOnboardingService^ m_serviceInterface;
     Platform::String^ m_ServiceObjectPath;
 

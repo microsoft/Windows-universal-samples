@@ -31,6 +31,7 @@
             </TextBlock>
             <TextBlock Text="Server Address:" Margin="0,10,0,0"/>
             <TextBox x:Name="ServerAddressField" InputScope="Url" Text="ws://localhost/WebSocketSample/EchoWebSocket.ashx"  Margin="0,10,0,0"/>
+            <CheckBox x:Name="SecureWebSocketCheckBox" Content="Perform custom server certificate validation" IsChecked="False" Margin="0,10,0,0"/>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <Button x:Name="ConnectButton" Content="Connect" Margin="0,0,10,0" Click="{x:Bind OnConnect}"/>
                 <Button x:Name="DisconnectButton" Content="Disconnect" Margin="0,0,10,0" Click="{x:Bind OnDisconnect}"/>
@@ -54,12 +55,14 @@
                 <VisualState x:Name="Connected">
                     <VisualState.Setters>
                         <Setter Target="ServerAddressField.IsEnabled" Value="False"/>
+                        <Setter Target="SecureWebSocketCheckBox.IsEnabled" Value="False"/>
                         <Setter Target="ConnectButton.IsEnabled" Value="False"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Busy">
                     <VisualState.Setters>
                         <Setter Target="ServerAddressField.IsEnabled" Value="False"/>
+                        <Setter Target="SecureWebSocketCheckBox.IsEnabled" Value="False"/>
                         <Setter Target="ConnectButton.IsEnabled" Value="False"/>
                         <Setter Target="DisconnectButton.IsEnabled" Value="False"/>
                         <Setter Target="InputField.IsEnabled" Value="False"/>

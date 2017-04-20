@@ -64,7 +64,11 @@ namespace PosPrinterSample
                 claimedPrinter = null;
             }
 
-            printer = null;
+            if (printer != null)
+            {
+                printer.Dispose();
+                printer = null;
+            }
         }
 
         /// <summary>

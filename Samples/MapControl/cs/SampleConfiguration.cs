@@ -22,13 +22,15 @@ namespace SDKTemplate
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title="MapControl Configuration", ClassType=typeof(Scenario1)},
-            new Scenario() { Title="Adding MapElements to MapControl", ClassType=typeof(Scenario2)},
-            new Scenario() { Title="Adding XAML children to MapControl", ClassType=typeof(Scenario3)},
-            new Scenario() { Title="Showing 3D locations in the MapControl", ClassType=typeof(Scenario4)},
-            new Scenario() { Title="Showing Streetside experience within the MapControl", ClassType=typeof(Scenario5)},
-            new Scenario() { Title= "Launching Maps using URI Schemes", ClassType=typeof(Scenario6)},
-            new Scenario() { Title= "Displaying points of interest with clustering", ClassType=typeof(Scenario7)}
+            new Scenario() { Title="MapControl configuration", ClassType=typeof(Scenario1)},
+            new Scenario() { Title="Adding MapElements", ClassType=typeof(Scenario2)},
+            new Scenario() { Title="Adding XAML children", ClassType=typeof(Scenario3)},
+            new Scenario() { Title="Showing 3D locations", ClassType=typeof(Scenario4)},
+            new Scenario() { Title="Showing Streetside experience", ClassType=typeof(Scenario5)},
+            new Scenario() { Title="Launching Maps using URI Schemes", ClassType=typeof(Scenario6)},
+            new Scenario() { Title="Displaying points with clustering", ClassType=typeof(Scenario7)},
+            new Scenario() { Title="Find and download Offline Maps", ClassType=typeof(Scenario8)},
+            new Scenario() { Title="Custom map appearance", ClassType=typeof(Scenario9)},
         };
 
         public static readonly Geopoint SeattleGeopoint = new Geopoint(new BasicGeoposition() { Latitude = 47.604, Longitude = -122.329 });

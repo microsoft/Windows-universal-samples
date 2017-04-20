@@ -12,12 +12,15 @@
 (function () {
     "use strict";
 
+    var ChainValidationResult = Windows.Security.Cryptography.Certificates.ChainValidationResult;
+
     // Local variables
     var streamWebSocket;
     var busy;
 
     // DOM elements
     var serverAddressField;
+    var secureWebSocketCheckBox;
     var startButton;
     var stopButton;
     var outputField;
@@ -25,6 +28,7 @@
     var page = WinJS.UI.Pages.define("/html/scenario2-binary.html", {
         ready: function (element, options) {
             serverAddressField = document.getElementById("serverAddressField");
+            secureWebSocketCheckBox = document.getElementById("secureWebSocketCheckBox");
             startButton = document.getElementById("startButton");
             stopButton = document.getElementById("stopButton");
             outputField = document.getElementById("outputField");
@@ -41,6 +45,7 @@
 
     function updateVisualState() {
         serverAddressField.disabled = busy || streamWebSocket;
+        secureWebSocketCheckBox.disabled = busy || streamWebSocket;
         startButton.disabled = busy || streamWebSocket;
         stopButton.disabled = busy || !streamWebSocket;
     }
@@ -72,6 +77,31 @@
         streamWebSocket = new Windows.Networking.Sockets.StreamWebSocket();
         streamWebSocket.addEventListener("closed", onClosed);
 
+        // When connecting to wss:// endpoint, the OS by default performs validation of
+        // the server certificate based on well-known trusted CAs. We can perform additional custom
+        // validation if needed.
+        if (secureWebSocketCheckBox.checked) {
+            // WARNING: Only test applications should ignore SSL errors.
+            // In real applications, ignoring server certificate errors can lead to Man-In-The-Middle
+            // attacks. (Although the connection is secure, the server is not authenticated.)
+            // Note that not all certificate validation errors can be ignored.
+            // In this case, we are ignoring these errors since the certificate assigned to the localhost
+            // URI is self-signed and has subject name = fabrikam.com
+            streamWebSocket.control.ignorableServerCertificateErrors.push(
+                ChainValidationResult.untrusted,
+                ChainValidationResult.invalidName);
+
+            // Add event handler to listen to the ServerCustomValidationRequested event. This enables performing
+            // custom validation of the server certificate. The event handler must implement the desired 
+            // custom certificate validation logic.
+            streamWebSocket.addEventListener("servercustomvalidationrequested", onServerCustomValidationRequested);
+
+            // Certificate validation occurs only for secure connections.
+            if (server.schemeName !== "wss") {
+                appendOutputLine("Note: Certificate validation is performed only for the wss: scheme.");
+            }
+        }
+
         appendOutputLine("Connecting to: " + server.absoluteUri);
 
         return streamWebSocket.connectAsync(server).then(function () {
@@ -88,6 +118,24 @@
 
             appendOutputLine(SdkSample.buildWebSocketError(error));
             appendOutputLine(error.message);
+        });
+    }
+
+    function onServerCustomValidationRequested(args) {
+        // In order to call async APIs in this handler, you must first take a deferral and then
+        // release it once you are done with the operation. The "using" statement
+        // ensures that the deferral completes when control leaves the method.
+        var deferral = args.getDeferral();
+
+        // Get the server certificate and certificate chain from the args parameter.
+        SdkSample.areCertificateAndCertChainValidAsync(args.serverCertificate, args.serverIntermediateCertificates).then(function (isValid) {
+            if (isValid) {
+                appendOutputLine("Custom validation of server certificate passed.");
+            } else {
+                args.reject();
+                appendOutputLine("Custom validation of server certificate failed.");
+            }
+            deferral.complete();
         });
     }
 

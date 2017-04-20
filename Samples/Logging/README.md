@@ -5,10 +5,19 @@
 
 # Logging sample
 
-This sample shows how to use the Logging APIs in the
+Shows how to use the Logging APIs in the
 Windows.Foundation.Diagnostics namespace, including LoggingChannel,
 LoggingActivity, LoggingSession, and FileLoggingSession. These classes are
-designed for diagnostic logging within a modern application. These APIs were
+designed for diagnostic logging within a modern application. 
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+These APIs were
 added in Windows 8.1. The LoggingChannel and LoggingActivity APIs have been
 extended in Windows 10 to support writing complex events using TraceLogging
 event encoding.
@@ -46,19 +55,14 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[Logging Sample](/Samples/Logging)
+[Logging Sample](/Samples/Logging)  
 
 ### Reference
 
-<!-- Add links to related API -->
-
-[LoggingChannel](https://msdn.microsoft.com/en-us/library/windows/apps/windows.foundation.diagnostics.loggingchannel.aspx)
-
-[LoggingActivity](https://msdn.microsoft.com/en-us/library/windows/apps/windows.foundation.diagnostics.loggingactivity.aspx)
-
-[LoggingSession](https://msdn.microsoft.com/en-us/library/windows/apps/windows.foundation.diagnostics.loggingsession.aspx)
-
-[FileLoggingSession](https://msdn.microsoft.com/en-us/library/windows/apps/windows.foundation.diagnostics.fileloggingsession.aspx)
+[LoggingChannel](https://msdn.microsoft.com/library/windows/apps/windows.foundation.diagnostics.loggingchannel.aspx)  
+[LoggingActivity](https://msdn.microsoft.com/library/windows/apps/windows.foundation.diagnostics.loggingactivity.aspx)  
+[LoggingSession](https://msdn.microsoft.com/library/windows/apps/windows.foundation.diagnostics.loggingsession.aspx)  
+[FileLoggingSession](https://msdn.microsoft.com/library/windows/apps/windows.foundation.diagnostics.fileloggingsession.aspx)  
 
 ## System requirements
 

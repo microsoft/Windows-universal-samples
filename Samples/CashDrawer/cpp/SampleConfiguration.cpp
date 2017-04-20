@@ -27,8 +27,8 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Drawer Retain", "SDKTemplate.Scenario3_MultipleDrawers" }
 };
 
-task<CashDrawer^> DeviceHelpers::GetFirstCashDrawerAsync()
+task<CashDrawer^> DeviceHelpers::GetFirstCashDrawerAsync(PosConnectionTypes connectionTypes)
 {
-    return DeviceHelpers::GetFirstDeviceAsync(CashDrawer::GetDeviceSelector(),
+    return DeviceHelpers::GetFirstDeviceAsync(CashDrawer::GetDeviceSelector(connectionTypes),
         [](String^ id) { return create_task(CashDrawer::FromIdAsync(id)); });
 }

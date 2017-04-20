@@ -5,9 +5,17 @@
 
 # Serial Peripheral Interface (SPI) sample
 
-The [**Windows.Devices.Spi**](http://msdn.microsoft.com/en-us/library/windows.devices.spi.aspx) namespace
-allows apps to communicate with Serial Peripheral Interface (SPI) devices
+Shows how to use the [Windows.Devices.Spi](http://msdn.microsoft.com/library/windows.devices.spi.aspx) namespace
+to allow apps to communicate with Serial Peripheral Interface (SPI) devices
 on a Windows IoT (Internet of Things) device.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
 SPI is a four-wire bus used to interface devices such as analog to digital converters,
 digital to analog converters, IO expanders, displays, and embedded subsystems.
 This sample shows how to access the SPI bus.  
@@ -20,7 +28,7 @@ The sample shows the following techniques:
 
 To obtain information about Windows 10 IoT Core, go to [Windows on Devices](http://windowsondevices.com).
 
-To see more samples specifically describing how to leverage Windows 10 IoT Core, click on the [Samples tab here](http://ms-iot.github.io/content/en-US/win10/StartCoding.htm).
+To see more samples specifically describing how to leverage Windows 10 IoT Core, click on the [Samples tab here](http://ms-iot.github.io/content/win10/StartCoding.htm).
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 

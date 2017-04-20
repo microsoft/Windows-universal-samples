@@ -47,6 +47,8 @@ namespace SDKTemplate
 
     namespace DeviceHelpers
     {
-        Concurrency::task<Windows::Devices::PointOfService::PosPrinter^> GetFirstReceiptPrinterAsync();
+        // By default, use all connections types.
+        Concurrency::task<Windows::Devices::PointOfService::PosPrinter^> GetFirstReceiptPrinterAsync(
+            Windows::Devices::PointOfService::PosConnectionTypes connectionTypes = Windows::Devices::PointOfService::PosConnectionTypes::All);
     }
 }

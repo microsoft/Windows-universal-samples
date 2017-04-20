@@ -46,6 +46,7 @@ task<void> Scenario1_BankCards::CreateDefaultReaderObject()
 {
     return create_task(DeviceHelpers::GetFirstMagneticStripeReaderAsync()).then([this](MagneticStripeReader^ reader)
     {
+        delete _reader;
         _reader = reader;
         if (_reader == nullptr)
         {
@@ -62,6 +63,7 @@ task<void> Scenario1_BankCards::ClaimReader()
     // claim the magnetic stripe reader
     return create_task(_reader->ClaimReaderAsync()).then([this](ClaimedMagneticStripeReader^ claimedReader)
     {
+        delete _claimedReader;
         _claimedReader = claimedReader;
         if (_claimedReader == nullptr)
         {

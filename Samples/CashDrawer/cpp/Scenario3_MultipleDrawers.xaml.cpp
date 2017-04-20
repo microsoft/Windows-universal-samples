@@ -285,8 +285,17 @@ void Scenario3_MultipleDrawers::claimedCashDrawerInstance2_ReleaseDeviceRequeste
 /// </summary>
 void Scenario3_MultipleDrawers::ResetScenarioState()
 {
-    cashDrawerInstance1 = nullptr;
-    cashDrawerInstance2 = nullptr;
+    if (cashDrawerInstance1 != nullptr)
+    {
+        delete cashDrawerInstance1;
+        cashDrawerInstance1 = nullptr;
+    }
+
+    if (cashDrawerInstance2 != nullptr)
+    {
+        delete cashDrawerInstance2;
+        cashDrawerInstance2 = nullptr;
+    }
 
     if (claimedCashDrawerInstance1 != nullptr)
     {

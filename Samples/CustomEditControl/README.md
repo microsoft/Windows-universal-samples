@@ -5,10 +5,16 @@
 
 # Custom Edit Control sample
 
-This sample uses the CoreTextEditContext class in the Windows.UI.Text.Core namespace
-to create a rudimentary text control.
-Note that this text control is not complete;
+Shows how to use the CoreTextEditContext class in the Windows.UI.Text.Core namespace
+to create a rudimentary text control. Note that this text control is not complete;
 it glosses over many details that would be necessary for a complete text edit control.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 The focus of the sample is in CustomEditControl.cs to show how to implement and manage a text control.
 There is much more functionality built in to the CoreTextEditContext that is not covered in this sample.
@@ -78,17 +84,16 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[Unicode](/Samples/Unicode)
+[Unicode](/Samples/Unicode)  
 
 ### Reference
 
-[CoreTextEditContext](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.text.core.coretexteditcontext.aspx)
+[CoreTextEditContext](https://msdn.microsoft.com/library/windows/apps/windows.ui.text.core.coretexteditcontext.aspx)  
 
 ### Conceptual
 
-[Custom text input](https://msdn.microsoft.com/windows/uwp/input-and-devices/custom-text-input)
-
-[Unicode Standard Annex #29 "Unicode Text Segmentation"](http://www.unicode.org/reports/tr29/)
+[Custom text input](https://msdn.microsoft.com/windows/uwp/input-and-devices/custom-text-input)  
+[Unicode Standard Annex #29 "Unicode Text Segmentation"](http://www.unicode.org/reports/tr29/)  
 
 ## System requirements
 

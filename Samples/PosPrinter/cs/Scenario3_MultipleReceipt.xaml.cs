@@ -77,6 +77,13 @@ namespace PosPrinterSample
                 claimedPrinter1.ReleaseDeviceRequested -= ClaimedPrinter1_ReleaseDeviceRequested;
                 claimedPrinter1.Dispose();
                 claimedPrinter1 = null;
+
+                if (printerInstance1 != null)
+                {
+                    printerInstance1.Dispose();
+                    printerInstance1 = null;
+                }
+
                 rootPage.NotifyUser("Released claimed Instance 1", NotifyType.StatusMessage);
             }
             else
@@ -103,6 +110,13 @@ namespace PosPrinterSample
                 claimedPrinter2.ReleaseDeviceRequested -= ClaimedPrinter2_ReleaseDeviceRequested;
                 claimedPrinter2.Dispose();
                 claimedPrinter2 = null;
+
+                if (printerInstance2 != null)
+                {
+                    printerInstance2.Dispose();
+                    printerInstance2 = null;
+                }
+
                 rootPage.NotifyUser("Released claimed Instance 2", NotifyType.StatusMessage);
             }
             else
@@ -199,6 +213,11 @@ namespace PosPrinterSample
                     rootPage.NotifyUser("Got Printer Instance 1 with Device Id : " + printerInstance1.DeviceId, NotifyType.StatusMessage);
 
                     // Create another instance of the same printer.
+                    if (printerInstance2 != null)
+                    {
+                        printerInstance2.Dispose();
+                        printerInstance2 = null;
+                    }
                     printerInstance2 = await PosPrinter.FromIdAsync(printerInstance1.DeviceId);
                     if (printerInstance2 != null)
                     {
@@ -245,8 +264,18 @@ namespace PosPrinterSample
                 claimedPrinter2.Dispose();
                 claimedPrinter2 = null;
             }
-            printerInstance1 = null;
-            printerInstance2 = null;
+
+            if (printerInstance1 != null)
+            {
+                printerInstance1.Dispose();
+                printerInstance1 = null;
+            }
+
+            if (printerInstance2 != null)
+            {
+                printerInstance2.Dispose();
+                printerInstance2 = null;
+            }
         }
 
         async void ClaimedPrinter1_ReleaseDeviceRequested(ClaimedPosPrinter sender, PosPrinterReleaseDeviceRequestedEventArgs args)
@@ -260,6 +289,12 @@ namespace PosPrinterSample
                 claimedPrinter1.ReleaseDeviceRequested -= ClaimedPrinter1_ReleaseDeviceRequested;
                 claimedPrinter1.Dispose();
                 claimedPrinter1 = null;
+
+                if (printerInstance1 != null)
+                {
+                    printerInstance1.Dispose();
+                    printerInstance1 = null;
+                }
             }
         }
 
@@ -274,6 +309,12 @@ namespace PosPrinterSample
                 claimedPrinter2.ReleaseDeviceRequested -= ClaimedPrinter2_ReleaseDeviceRequested;
                 claimedPrinter2.Dispose();
                 claimedPrinter2 = null;
+
+                if (printerInstance2 != null)
+                {
+                    printerInstance2.Dispose();
+                    printerInstance2 = null;
+                }
             }
         }
 

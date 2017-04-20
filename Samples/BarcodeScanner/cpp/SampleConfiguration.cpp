@@ -24,10 +24,12 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
 {
     { "DataReceived Event", "SDKTemplate.Scenario1_BasicFunctionality" },
     { "Release/Retain Functionality", "SDKTemplate.Scenario2_MultipleScanners" },
+    { "Active Symbologies", "SDKTemplate.Scenario3_ActiveSymbologies" },
+    { "Symbology Attributes", "SDKTemplate.Scenario4_SymbologyAttributes" }
 };
 
-task<BarcodeScanner^> DeviceHelpers::GetFirstBarcodeScannerAsync()
+task<BarcodeScanner^> DeviceHelpers::GetFirstBarcodeScannerAsync(PosConnectionTypes connectionTypes)
 {
-    return DeviceHelpers::GetFirstDeviceAsync(BarcodeScanner::GetDeviceSelector(),
+    return DeviceHelpers::GetFirstDeviceAsync(BarcodeScanner::GetDeviceSelector(connectionTypes),
         [](String^ id) { return create_task(BarcodeScanner::FromIdAsync(id)); });
 }

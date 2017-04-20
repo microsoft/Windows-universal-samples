@@ -59,6 +59,7 @@ namespace SDKTemplate
             new Scenario() { Title = "Share delay rendered files",  ClassType = typeof(ShareDelayRenderedFiles) },
             new Scenario() { Title = "Share HTML content",          ClassType = typeof(ShareHtml) },
             new Scenario() { Title = "Share custom data",           ClassType = typeof(ShareCustomData) },
+            new Scenario() { Title = "Share with custom provider",  ClassType = typeof(ShareCustomProvider) },
             new Scenario() { Title = "Fail with display text",      ClassType = typeof(SetErrorMessage) }
         };
 

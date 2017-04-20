@@ -51,8 +51,8 @@
     function registerTaskScenario() {
         registerTaskButton.disabled = true;
         BackgroundExecutionManager.requestAccessAsync().done(function (status) {
-            if (BackgroundAccessStatus.allowedWithAlwaysOnRealTimeConnectivity === status ||
-                BackgroundAccessStatus.allowedMayUseActiveRealTimeConnectivity === status) {
+            if (BackgroundAccessStatus.alwaysAllowed === status ||
+                BackgroundAccessStatus.allowedSubjectToSystemPolicy === status) {
                 registerBackgroundTask();
             } else {
                 WinJS.log && WinJS.log("Background tasks may be disabled for this app", "sample", "error");

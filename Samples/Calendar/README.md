@@ -5,29 +5,34 @@
 
 # Calendar sample
 
-This sample demonstrates how to use the
-[**Calendar**](http://msdn.microsoft.com/library/windows/apps/br206724)
-class in the
-[**Windows.Globalization**]()
+Shows how to use the [Calendar](http://msdn.microsoft.com/library/windows/apps/br206724) class in the
+[Windows.Globalization](https://msdn.microsoft.com/library/windows/apps/windows.globalization.aspx)
 namespace to manipulate and process dates based on a calendar system and the user's globalization preferences.
-(If you are looking for a sample which demonstrates an appointment calendar, see the [**Appointments**](../Appointments) sample.)
+(If you are looking for a sample which demonstrates an appointment calendar, see the [Appointments](../Appointments) sample.)
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 The
-[**Calendar**](http://msdn.microsoft.com/library/windows/apps/br206724)
+[Calendar](http://msdn.microsoft.com/library/windows/apps/br206724)
 class provides details of the user's default calendar or a caller-specified calendar system.
 The class gives access to specific statistical details
 as well as the ability to perform calendar-aware math operations.
 
 The Calendar object can convert to and from a language-specific date type:
 
-* C++: [**Windows::Foundation::DateTime**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.foundation.datetime.aspx)
-* C#: [**DateTimeOffset**](http://msdn.microsoft.com/library/windows/apps/system.datetimeoffset.aspx)
-* JavaScript: [**Date**](https://msdn.microsoft.com/library/windows/apps/cd9w2te4(v=vs.94).aspx)
+* C++: [Windows::Foundation::DateTime](https://msdn.microsoft.com/library/windows/apps/windows.foundation.datetime.aspx)
+* C#: [DateTimeOffset](http://msdn.microsoft.com/library/windows/apps/system.datetimeoffset.aspx)
+* JavaScript: [Date](https://msdn.microsoft.com/library/windows/apps/cd9w2te4.aspx)
 
 The sample also uses the
-[**Windows.Globalization.CalendarIdentifiers**](http://msdn.microsoft.com/library/windows/apps/br229460)
+[Windows.Globalization.CalendarIdentifiers](http://msdn.microsoft.com/library/windows/apps/br229460)
 and
-[**Windows.Globalization.ClockIdentifiers**](http://msdn.microsoft.com/library/windows/apps/br229462)
+[Windows.Globalization.ClockIdentifiers](http://msdn.microsoft.com/library/windows/apps/br229462)
 classes.
 
 This sample contains scenarios that demonstrate:
@@ -49,17 +54,15 @@ This scenario also demonstrates converting from a language-specific date type to
 
 ### Samples
 
-* [**DateTimeFormatting** sample](../DateTimeFormatting)
-* [**GlobalizationPreferences** sample](../GlobalizationPreferences)
-* [**NumberFormatting** sample](../NumberFormatting)
+[DateTimeFormatting sample](../DateTimeFormatting)  
+[GlobalizationPreferences sample](../GlobalizationPreferences)  
+[NumberFormatting sample](../NumberFormatting)  
 
 ### Reference
 
-[**Windows.Globalization.Calendar**](http://msdn.microsoft.com/library/windows/apps/br206724)
-
-[**Windows.Globalization.CalendarIdentifiers**](http://msdn.microsoft.com/library/windows/apps/br229460)
-
-[**Windows.Globalization.ClockIdentifiers**](http://msdn.microsoft.com/library/windows/apps/br229462)
+[Windows.Globalization.Calendar](http://msdn.microsoft.com/library/windows/apps/br206724)  
+[Windows.Globalization.CalendarIdentifiers](http://msdn.microsoft.com/library/windows/apps/br229460)  
+[Windows.Globalization.ClockIdentifiers](http://msdn.microsoft.com/library/windows/apps/br229462)  
 
 ## System requirements
 

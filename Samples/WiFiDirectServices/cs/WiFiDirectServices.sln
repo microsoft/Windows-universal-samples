@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFiDirectServices", "WiFiDirectServices.csproj", "{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFiDirectServices", "WiFiDirectServices.csproj", "{48C42A69-0F12-527D-9DCE-0BC1CF70B814}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Debug|ARM.ActiveCfg = Debug|ARM
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Debug|ARM.Build.0 = Debug|ARM
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Debug|ARM.Deploy.0 = Debug|ARM
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Debug|x64.ActiveCfg = Debug|x64
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Debug|x64.Build.0 = Debug|x64
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Debug|x64.Deploy.0 = Debug|x64
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Debug|x86.ActiveCfg = Debug|x86
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Debug|x86.Build.0 = Debug|x86
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Debug|x86.Deploy.0 = Debug|x86
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Release|ARM.ActiveCfg = Release|ARM
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Release|ARM.Build.0 = Release|ARM
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Release|ARM.Deploy.0 = Release|ARM
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Release|x64.ActiveCfg = Release|x64
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Release|x64.Build.0 = Release|x64
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Release|x64.Deploy.0 = Release|x64
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Release|x86.ActiveCfg = Release|x86
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Release|x86.Build.0 = Release|x86
-		{EFE0815D-1DD1-51EA-A6FA-FC644D8B126A}.Release|x86.Deploy.0 = Release|x86
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Debug|ARM.ActiveCfg = Debug|ARM
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Debug|ARM.Build.0 = Debug|ARM
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Debug|ARM.Deploy.0 = Debug|ARM
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Debug|x64.ActiveCfg = Debug|x64
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Debug|x64.Build.0 = Debug|x64
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Debug|x64.Deploy.0 = Debug|x64
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Debug|x86.ActiveCfg = Debug|x86
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Debug|x86.Build.0 = Debug|x86
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Debug|x86.Deploy.0 = Debug|x86
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Release|ARM.ActiveCfg = Release|ARM
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Release|ARM.Build.0 = Release|ARM
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Release|ARM.Deploy.0 = Release|ARM
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Release|x64.ActiveCfg = Release|x64
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Release|x64.Build.0 = Release|x64
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Release|x64.Deploy.0 = Release|x64
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Release|x86.ActiveCfg = Release|x86
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Release|x86.Build.0 = Release|x86
+		{48C42A69-0F12-527D-9DCE-0BC1CF70B814}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

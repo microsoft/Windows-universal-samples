@@ -22,8 +22,12 @@
 
     var CashDrawer = Windows.Devices.PointOfService.CashDrawer;
 
-    function getFirstCashDrawerAsync() {
-        return DeviceHelpers.getFirstDeviceAsync(CashDrawer.getDeviceSelector(), (id) => CashDrawer.fromIdAsync(id));
+    function getFirstCashDrawerAsync(connectionTypes) {
+        if (connectionTypes === undefined) {
+            // By default, use all connections types.
+            connectionTypes = Windows.Devices.PointOfService.PosConnectionTypes.all;
+        }
+        return DeviceHelpers.getFirstDeviceAsync(CashDrawer.getDeviceSelector(connectionTypes), (id) => CashDrawer.fromIdAsync(id));
     }
 
     WinJS.Namespace.define("SdkSample", {

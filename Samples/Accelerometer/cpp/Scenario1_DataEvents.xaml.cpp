@@ -34,14 +34,15 @@ Scenario1_DataEvents::Scenario1_DataEvents()
 
 void Scenario1_DataEvents::OnNavigatedTo(NavigationEventArgs^ e)
 {
-    accelerometer = Accelerometer::GetDefault();
+    accelerometer = Accelerometer::GetDefault(rootPage->AccelerometerReadingType);
     if (accelerometer != nullptr)
     {
+        rootPage->NotifyUser(rootPage->AccelerometerReadingType.ToString() + " accelerometer ready", NotifyType::StatusMessage);
         ScenarioEnableButton->IsEnabled = true;
     }
     else
     {
-        rootPage->NotifyUser("No accelerometer not found", NotifyType::ErrorMessage);
+        rootPage->NotifyUser(rootPage->AccelerometerReadingType.ToString() + " accelerometer not found", NotifyType::ErrorMessage);
     }
 }
 

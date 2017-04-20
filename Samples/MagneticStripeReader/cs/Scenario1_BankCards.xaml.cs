@@ -199,6 +199,7 @@ namespace MagneticStripeReaderSample
             if (_reader != null)
             {
                 // release the Magnetic Stripe Reader and set to null
+                _reader.Dispose();
                 _reader = null;
             }
 

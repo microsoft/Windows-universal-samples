@@ -1,32 +1,52 @@
-<!---
+﻿<!---
   category: NetworkingAndWebServices 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620626
 --->
 
 # Wi-Fi Direct sample
 
-This sample shows how to use the Wi-Fi Direct API to discover devices and connect to the them over Wi-Fi Direct.
+Shows how to use the Wi-Fi Direct API to discover devices and connect to the them over Wi-Fi Direct.
 
-Specifically, this sample shows how to:
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-- **Advertise a Wi-Fi Direct device:** A device can advertise it's presence so that other Wi-Fi Direct devices can discover and connect to it. There are optional settings that an advertiser may specify, such as custom information elements to share during discovery, and options for how to establish a connection.
+Specifically, this sample demonstrates the following:
+
+- **Advertise a Wi-Fi Direct device:**
+A device can advertise its presence so that other Wi-Fi Direct devices
+can discover and connect to it. There are optional settings that
+an advertiser may specify, such as custom information elements
+to share during discovery, and options for how to establish a connection.
+An advertiser can also specify advanced optional settings such as
+pairing configuration methods (in order of preference)
+and the preferred pairing procedure.
+The advertiser can also be cofigured in legacy mode wherein legacy
+(non-WiFiDirect) clients can connect to it.
+The legacy mode also supports specifying a SSID and a passphrase.
 - **Discover a Wi-Fi Direct device:** Discover advertising devices over Wi-Fi Direct.
 - **Connect to a device/Accept an incoming connection:** After discovering a Wi-Fi Direct device, a device may connect to it. The advertising device may accept or decline the connection.
+The connector can also be configured with optional advanced settings
+such as the pairing configuration methods (in order of preference)
+and the preferred pairing procedure.
 - **Send data over Wi-Fi Direct after connecting to a device:** Connected peers may open TCP and UDP sockets and send data. This sample just sends text strings as a sample.
+
+The C++ and JS samples do not demonstrate advanced optional settings yet.
+Support for those will come in a future sample.
 
 **Note** This sample requires two or more devices with Wi-Fi chipsets and drivers that support Wi-Fi Direct.
  
-**Note**�This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on Windows 10. For more info about how to build apps that target Windows and Windows Phone with Visual Studio, see [Build apps that target Windows 10 by using Visual Studio](http://msdn.microsoft.com/library/windows/apps/dn609832).
+**Note** This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on Windows 10. For more info about how to build apps that target Windows and Windows Phone with Visual Studio, see [Build apps that target Windows 10 by using Visual Studio](http://msdn.microsoft.com/library/windows/apps/dn609832).
 
 ## Related topics
 
 ### Reference
 
-<!-- Add links to related API -->
-
-[Wi-Fi Direct](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.wifidirect.aspx)
-
-[Sockets](https://msdn.microsoft.com/en-us/library/windows/apps/windows.networking.sockets.aspx)
+[Wi-Fi Direct](https://msdn.microsoft.com/library/windows/apps/windows.devices.wifidirect.aspx)  
+[Sockets](https://msdn.microsoft.com/library/windows/apps/windows.networking.sockets.aspx)  
 
 ## System requirements
 

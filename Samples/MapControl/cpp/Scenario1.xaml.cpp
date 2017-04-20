@@ -30,6 +30,8 @@ void Scenario1::MyMap_Loaded(Object^ sender, RoutedEventArgs^ e)
 {
     myMap->Center = MainPage::SeattleGeopoint;
     myMap->ZoomLevel = 12;
+    SetMapStyle();
+    SetMapProjection();
 }
 
 void Scenario1::MyMap_MapTapped(MapControl^ sender, MapInputEventArgs^ args)
@@ -51,6 +53,15 @@ void Scenario1::trafficFlowVisibleCheckBox_Unchecked(Object^ sender, RoutedEvent
 
 void Scenario1::styleCombobox_SelectionChanged(Object^ sender, SelectionChangedEventArgs^ e)
 {
+    // Protect against events that are raised before we are fully initialized.
+    if (myMap != nullptr)
+    {
+        SetMapStyle();
+    }
+}
+
+void Scenario1::SetMapStyle()
+{
     switch (styleCombobox->SelectedIndex)
     {
     case 0:
@@ -69,4 +80,26 @@ void Scenario1::styleCombobox_SelectionChanged(Object^ sender, SelectionChangedE
         myMap->Style = MapStyle::Terrain;
         break;
     }
+}
+
+void Scenario1::projectionCombobox_SelectionChanged(Object^ sender, SelectionChangedEventArgs^ e)
+{
+    // Protect against events that are raised before we are fully initialized.
+    if (myMap != nullptr)
+    {
+        SetMapProjection();
+    }
+}
+
+void Scenario1::SetMapProjection()
+{
+    switch (projectionCombobox->SelectedIndex)
+    {
+    case 0:
+        myMap->MapProjection = MapProjection::WebMercator;
+        break;
+    case 1:
+        myMap->MapProjection = MapProjection::Globe;
+        break;
+   }
 }

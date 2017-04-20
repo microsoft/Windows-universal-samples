@@ -353,7 +353,9 @@ Namespace Global.CameraVideoStabilization
 
             _videoStabilizationEffect.Enabled = False
             RemoveHandler _videoStabilizationEffect.EnabledChanged, AddressOf VideoStabilizationEffect_EnabledChanged
-            Await _mediaCapture.ClearEffectsAsync(MediaStreamType.VideoRecord)
+
+            ' Remove the effect (see ClearEffectsAsync method to remove all effects from a stream)
+            Await _mediaCapture.RemoveEffectAsync(_videoStabilizationEffect)
             Debug.WriteLine("VS effect removed from pipeline")
             If _inputPropertiesBackup IsNot Nothing Then
                 Await _mediaCapture.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoRecord, _inputPropertiesBackup)
@@ -374,7 +376,7 @@ Namespace Global.CameraVideoStabilization
         ''' <returns></returns>
         Private Async Function StartRecordingAsync() As Task
             Try
-                ' Create storage file in Pictures Library
+                ' Create storage file for the capture
                 Dim videoFile = Await _captureFolder.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName)
                 ' Calculate rotation angle, taking mirroring into account if necessary
                 Dim rotationAngle = 360 - ConvertDeviceOrientationToDegrees(GetCameraOrientation())

@@ -37,9 +37,10 @@ namespace SDKTemplate
 
     public partial class DeviceHelpers
     {
-        public static async Task<MagneticStripeReader> GetFirstMagneticStripeReaderAsync()
+        // By default, use all connections types.
+        public static async Task<MagneticStripeReader> GetFirstMagneticStripeReaderAsync(PosConnectionTypes connectionTypes = PosConnectionTypes.All)
         {
-            return await DeviceHelpers.GetFirstDeviceAsync(MagneticStripeReader.GetDeviceSelector(), async (id) => await MagneticStripeReader.FromIdAsync(id));
+            return await DeviceHelpers.GetFirstDeviceAsync(MagneticStripeReader.GetDeviceSelector(connectionTypes), async (id) => await MagneticStripeReader.FromIdAsync(id));
         }
     }
 }

@@ -105,7 +105,7 @@ Namespace Global.SDKTemplate
                 ' Make sure this app is allowed to run background tasks.
                 ' RequestAccessAsync must be called on the UI thread.
                 Dim accessStatus As BackgroundAccessStatus = Await BackgroundExecutionManager.RequestAccessAsync()
-                If(BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity = accessStatus) OrElse (BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity = accessStatus) Then
+                If(BackgroundAccessStatus.AlwaysAllowed = accessStatus) OrElse (BackgroundAccessStatus.AllowedSubjectToSystemPolicy = accessStatus) Then
                     If Await StartSensorBackgroundTaskAsync(Accelerometer.DeviceId) Then
                         _refreshTimer.Start()
                         ScenarioEnableButton.IsEnabled = False

@@ -97,6 +97,37 @@ task<void> Scenario1::ConnectAsync()
         MessageWebSocketMessageReceivedEventArgs^>(this, &Scenario1::MessageReceived);
     messageWebSocket->Closed += ref new TypedEventHandler<IWebSocket^, WebSocketClosedEventArgs^>(this, &Scenario1::OnClosed);
 
+    // When connecting to wss:// endpoint, the OS by default performs validation of
+    // the server certificate based on well-known trusted CAs. We can perform additional custom
+    // validation if needed.
+    if (SecureWebSocketCheckBox->IsChecked->Value)
+    {
+        // WARNING: Only test applications should ignore SSL errors.
+        // In real applications, ignoring server certificate errors can lead to Man-In-The-Middle
+        // attacks. (Although the connection is secure, the server is not authenticated.)
+        // Note that not all certificate validation errors can be ignored.
+        // In this case, we are ignoring these errors since the certificate assigned to the localhost
+        // URI is self-signed and has subject name = fabrikam.com
+        messageWebSocket->Control->IgnorableServerCertificateErrors->Append(ChainValidationResult::Untrusted);
+        messageWebSocket->Control->IgnorableServerCertificateErrors->Append(ChainValidationResult::InvalidName);
+
+        // Add event handler to listen to the ServerCustomValidationRequested event. This enables performing
+        // custom validation of the server certificate. The event handler must implement the desired 
+        // custom certificate validation logic.
+        messageWebSocket->ServerCustomValidationRequested +=
+            ref new TypedEventHandler<
+            MessageWebSocket^,
+            WebSocketServerCustomValidationRequestedEventArgs^>(
+                this,
+                &Scenario1::OnServerCustomValidationRequested);
+
+        // Certificate validation occurs only for secure connections.
+        if (server->SchemeName != "wss")
+        {
+            AppendOutputLine("Note: Certificate validation is performed only for the wss: scheme.");
+        }
+    }
+
     AppendOutputLine("Connecting to " + server->DisplayUri + "...");
 
     return create_task(messageWebSocket->ConnectAsync(server))
@@ -121,6 +152,39 @@ task<void> Scenario1::ConnectAsync()
         // The default DataWriter encoding is Utf8.
         messageWriter = ref new DataWriter(messageWebSocket->OutputStream);
         rootPage->NotifyUser("Connected", NotifyType::StatusMessage);
+    });
+}
+
+void Scenario1::OnServerCustomValidationRequested(
+    MessageWebSocket^ sender,
+    WebSocketServerCustomValidationRequestedEventArgs^ args)
+{
+    // In order to call async APIs in this handler, you must first take a deferral and then
+    // complete it once you are done validating the certificate.
+    auto deferral = args->GetDeferral();
+
+    // Get the server certificate and certificate chain from the args parameter.
+    MainPage::AreCertificateAndCertChainValidAsync(args->ServerCertificate, args->ServerIntermediateCertificates)
+        .then([this, args, deferral](bool isValid)
+    {
+        if (!isValid)
+        {
+            args->Reject();
+        }
+        deferral->Complete();
+
+        // Continue on the UI thread so we can update UI.
+        Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, isValid]()
+        {
+            if (isValid)
+            {
+                AppendOutputLine("Custom validation of server certificate passed.");
+            }
+            else
+            {
+                AppendOutputLine("Custom validation of server certificate failed.");
+            }
+        }));
     });
 }
 

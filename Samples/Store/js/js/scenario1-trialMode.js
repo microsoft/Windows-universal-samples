@@ -3,7 +3,8 @@
 (function () {
     "use strict";
 
-    var CurrentAppSimulator = Windows.ApplicationModel.Store.CurrentAppSimulator;
+    var StorePurchaseStatus = Windows.Services.Store.StorePurchaseStatus;
+    var storeContext = Windows.Services.Store.StoreContext.getDefault();
 
     var licenseMode;
 
@@ -15,63 +16,96 @@
             document.getElementById("showTrialPeriodInformation").addEventListener("click", showTrialPeriodInformation);
             document.getElementById("purchaseFullLicense").addEventListener("click", purchaseFullLicense);
 
-            CurrentAppSimulator.licenseInformation.addEventListener("licensechanged", onLicenseChanged);
-            return SdkSample.configureSimulatorAsync("trial-mode.xml").then(function () {
-                return CurrentAppSimulator.loadListingInformationAsync();
-            }).then(function (listing) {
-                purchasePrice.innerText = listing.formattedPrice;
-            }, function () {
-                WinJS.log && WinJS.log("LoadListingInformationAsync API call failed", "samples", "error");
+            storeContext.addEventListener("offlinelicenseschanged", onLicenseChanged);
+
+            storeContext.getStoreProductForCurrentAppAsync().then(function (result) {
+                if (!result.extendedError) {
+                    purchasePrice.innerText = result.product.price.formattedPrice;
+                }
             });
         },
 
         unload: function () {
-            CurrentAppSimulator.licenseInformation.removeEventListener("licensechanged", onLicenseChanged);
+            storeContext.removeEventListener("offlinelicenseschanged", onLicenseChanged);
         }
     });
 
-    function onLicenseChanged() {
-        var licenseInformation = CurrentAppSimulator.licenseInformation;
-        if (licenseInformation.isActive) {
-            if (licenseInformation.isTrial) {
-                licenseMode.innerText = "Trial license";
+    function onLicenseChanged(sender, args) {
+        getLicenseState();
+    }
+
+    function getLicenseState() {
+        storeContext.getAppLicenseAsync().then(function(license) {
+            if (license.isActive) {
+                if (license.isTrial) {
+                    licenseMode.innerText = "Trial license";
+                } else {
+                    licenseMode.innerText = "Full license";
+                }
             } else {
-                licenseMode.innerText = "Full license";
+                licenseMode.innerText = "Inactive license";
             }
-        } else {
-            licenseMode.innerText = "Inactive license";
-        }
+        });
     }
 
     function showTrialPeriodInformation() {
-        var licenseInformation = CurrentAppSimulator.licenseInformation;
-        if (licenseInformation.isActive) {
-            if (licenseInformation.isTrial) {
-                var remainingTrialTime = Math.ceil((licenseInformation.expirationDate - Date.now()) / 86400000);
-                WinJS.log && WinJS.log("You can use this app for " + remainingTrialTime + " more days before the trial period ends.", "samples", "status");
-            } else {
-                WinJS.log && WinJS.log("You have a full license. The trial time is not meaningful.", "samples", "error");
+        storeContext.getAppLicenseAsync().then(function(license) {
+            if (license.isActive) {
+                if (license.isTrial) {
+                    var remainingTrialTime = Math.ceil((license.expirationDate - Date.now()) / 86400000);
+                    WinJS.log && WinJS.log("You can use this app for " + remainingTrialTime + " more days before the trial period ends.", "samples", "status");
+                }
+                else {
+                    WinJS.log && WinJS.log("You have a full license. The trial time is not meaningful.", "samples", "error");
+                }
             }
-        } else {
-            WinJS.log && WinJS.log("You don't have a license. The trial time can't be determined.", "samples", "error");
-        }
+            else
+            {
+                WinJS.log && WinJS.log("You don't have a license. The trial time can't be determined.", "samples", "error");
+            }
+        });
     }
 
     function purchaseFullLicense() {
-        WinJS.log && WinJS.log("Buying the full license...", "sample", "status");
-        var licenseInformation = CurrentAppSimulator.licenseInformation;
-        if (!licenseInformation.isActive || licenseInformation.isTrial) {
-            CurrentAppSimulator.requestAppPurchaseAsync(false).done(function () {
-                if (licenseInformation.isActive && !licenseInformation.isTrial) {
-                    WinJS.log && WinJS.log("You successfully upgraded your app to the fully-licensed version.", "sample", "status");
+        storeContext.getStoreProductForCurrentAppAsync().then(function (productResult) {
+            if (productResult.extendedError) {
+                SdkSample.reportExtendedError(productResult.extendedError);
+                return;
+            }
+            WinJS.log && WinJS.log("Buying the full license...", "sample", "status");
+            storeContext.getAppLicenseAsync().then(function (license) {
+                if (license.isTrial) {
+                    return productResult.product.requestPurchaseAsync().then(function (result) {
+                        switch (result.status) {
+                            case StorePurchaseStatus.alreadyPurchased:
+                                WinJS.log && WinJS.log("You already bought this app and have a fully-licensed version.", "sample", "error");
+                                break;
+
+                            case StorePurchaseStatus.succeeded:
+                                // License will refresh automatically using the StoreContext.OfflineLicensesChanged event
+                                break;
+
+                            case StorePurchaseStatus.notPurchased:
+                                WinJS.log && WinJS.log("Product was not purchased, it may have been canceled.", "sample", "error");
+                                break;
+
+                            case StorePurchaseStatus.networkError:
+                                WinJS.log && WinJS.log("Product was not purchased due to a Network Error.", "sample", "error");
+                                break;
+
+                            case StorePurchaseStatus.serverError:
+                                WinJS.log && WinJS.log("Product was not purchased due to a Server Error.", "sample", "error");
+                                break;
+
+                            default:
+                                WinJS.log && WinJS.log("Product was not purchased due to an Unknown Error.", "sample", "error");
+                                break;
+                        }
+                    });
                 } else {
-                    WinJS.log && WinJS.log("You decided not to upgrade.", "sample", "error");
+                    WinJS.log && WinJS.log("You already bought this app and have a fully-licensed version.", "sample", "error");
                 }
-            }, function () {
-                WinJS.log && WinJS.log("The upgrade transaction faioed.", "sample", "error");
             });
-        } else {
-            WinJS.log && WinJS.log("You already bought this app and have a fully-licensed version.", "sample", "error");
-        }
+        });
     }
 })();

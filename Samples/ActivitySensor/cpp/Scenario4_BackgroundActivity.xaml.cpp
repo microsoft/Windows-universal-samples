@@ -74,8 +74,8 @@ void Scenario4_BackgroundActivity::ScenarioRegisterTask(Object^ sender, RoutedEv
             {
                 create_task(BackgroundExecutionManager::RequestAccessAsync()).then([this](BackgroundAccessStatus status)
                 {
-                    if ((BackgroundAccessStatus::AllowedWithAlwaysOnRealTimeConnectivity == status) ||
-                        (BackgroundAccessStatus::AllowedMayUseActiveRealTimeConnectivity == status))
+                    if ((BackgroundAccessStatus::AlwaysAllowed == status) ||
+                        (BackgroundAccessStatus::AllowedSubjectToSystemPolicy == status))
                     {
                         RegisterBackgroundTask();
                     }

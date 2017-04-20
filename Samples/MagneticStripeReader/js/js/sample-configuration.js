@@ -21,8 +21,12 @@
 
     var MagneticStripeReader = Windows.Devices.PointOfService.MagneticStripeReader;
 
-    function getFirstMagneticStripeReaderAsync() {
-        return DeviceHelpers.getFirstDeviceAsync(MagneticStripeReader.getDeviceSelector(), (id) => MagneticStripeReader.fromIdAsync(id));
+    function getFirstMagneticStripeReaderAsync(connectionTypes) {
+        if (connectionTypes === undefined) {
+            // By default, use all connections types.
+            connectionTypes = Windows.Devices.PointOfService.PosConnectionTypes.all;
+        }
+        return DeviceHelpers.getFirstDeviceAsync(MagneticStripeReader.getDeviceSelector(connectionTypes), (id) => MagneticStripeReader.fromIdAsync(id));
     }
 
     WinJS.Namespace.define("SdkSample", {

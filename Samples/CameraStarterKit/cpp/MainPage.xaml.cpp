@@ -40,16 +40,13 @@ MainPage::MainPage()
     , _isRecording(false)
     , _externalCamera(false)
     , _mirroringPreview(false)
-    , _deviceOrientation(SimpleOrientation::NotRotated)
-    , _displayOrientation(DisplayOrientations::Portrait)
     , _displayRequest(ref new Windows::System::Display::DisplayRequest())
     , RotationKey({ 0xC380465D, 0x2271, 0x428C,{ 0x9B, 0x83, 0xEC, 0xEA, 0x3B, 0x4A, 0x85, 0xC1 } })
     , _captureFolder(nullptr)
+    , _rotationHelper(nullptr)
 {
     InitializeComponent();
 
-    _orientationSensor = SimpleOrientationSensor::GetDefault();
-    _displayInformation = DisplayInformation::GetForCurrentView();
     _systemMediaControls = SystemMediaTransportControls::GetForCurrentView();
 
     // Do not cache the state of the UI when suspending/navigating
@@ -91,6 +88,10 @@ task<void> MainPage::InitializeCameraAsync()
             // Only mirror the preview if the camera is on the front panel
             _mirroringPreview = (camera->EnclosureLocation->Panel == Windows::Devices::Enumeration::Panel::Front);
         }
+
+        // Initialize rotationHelper
+        _rotationHelper = ref new CameraRotationHelper(camera->EnclosureLocation);
+        _orientationChangedEventToken = _rotationHelper->OrientationChanged += ref new EventHandler<bool>(this, &MainPage::RotationHelper_OrientationChanged);
 
         _mediaCapture = ref new Capture::MediaCapture();
 
@@ -167,6 +168,12 @@ Concurrency::task<void> MainPage::CleanupCameraAsync()
             _mediaCapture->Failed -= _mediaCaptureFailedEventToken;
             _mediaCapture = nullptr;
         }
+
+        if (_rotationHelper != nullptr)
+        {
+            _rotationHelper->OrientationChanged -= _orientationChangedEventToken;
+            _rotationHelper = nullptr;
+        }
     });
 }
 
@@ -206,18 +213,10 @@ task<void> MainPage::StartPreviewAsync()
 /// <returns></returns>
 task<void> MainPage::SetPreviewRotationAsync()
 {
-    // Calculate which way and how far to rotate the preview
-    int rotationDegrees = ConvertDisplayOrientationToDegrees(_displayOrientation);
-
-    // The rotation direction needs to be inverted if the preview is being mirrored
-    if (_mirroringPreview)
-    {
-        rotationDegrees = (360 - rotationDegrees) % 360;
-    }
-
     // Add rotation metadata to the preview stream to make sure the aspect ratio / dimensions match when rendering and getting preview frames
+    auto rotation = _rotationHelper->GetCameraPreviewOrientation();
     auto props = _mediaCapture->VideoDeviceController->GetMediaStreamProperties(Capture::MediaStreamType::VideoPreview);
-    props->Properties->Insert(RotationKey, rotationDegrees);
+    props->Properties->Insert(RotationKey, CameraRotationHelper::ConvertSimpleOrientationToClockwiseDegrees(rotation));
     return create_task(_mediaCapture->SetEncodingPropertiesAsync(Capture::MediaStreamType::VideoPreview, props, nullptr));
 }
 
@@ -270,7 +269,7 @@ task<void> MainPage::TakePhotoAsync()
         VideoButton->IsEnabled = true;
         VideoButton->Opacity = 1;
 
-        auto photoOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
+        auto photoOrientation = CameraRotationHelper::ConvertSimpleOrientationToPhotoOrientation(_rotationHelper->GetCameraCaptureOrientation());
         return ReencodeAndSavePhotoAsync(inputStream, file, photoOrientation);
     }).then([this](task<void> previousTask)
     {
@@ -292,11 +291,12 @@ task<void> MainPage::TakePhotoAsync()
 /// <returns></returns>
 task<void> MainPage::StartRecordingAsync()
 {
+    // Create storage file for the capture
     return create_task(_captureFolder->CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption::GenerateUniqueName))
         .then([this](StorageFile^ file)
     {
         // Calculate rotation angle, taking mirroring into account if necessary
-        auto rotationAngle = 360 - ConvertDeviceOrientationToDegrees(GetCameraOrientation());
+        auto rotationAngle = CameraRotationHelper::ConvertSimpleOrientationToClockwiseDegrees(_rotationHelper->GetCameraCaptureOrientation());
         auto encodingProfile = MediaProperties::MediaEncodingProfile::CreateMp4(MediaProperties::VideoEncodingQuality::Auto);
         encodingProfile->Video->Properties->Insert(RotationKey, rotationAngle);
 
@@ -480,13 +480,6 @@ task<void> MainPage::SetupUiAsync()
 
     RegisterEventHandlers();
 
-    // Populate orientation variables with the current state
-    _displayOrientation = _displayInformation->CurrentOrientation;
-    if (_orientationSensor != nullptr)
-    {
-        _deviceOrientation = _orientationSensor->GetCurrentOrientation();
-    }
-
     create_task(StorageLibrary::GetLibraryAsync(KnownLibraryId::Pictures))
         .then([this](StorageLibrary^ picturesLibrary)
     {
@@ -542,19 +535,6 @@ void MainPage::RegisterEventHandlers()
             HardwareButtons::CameraPressed += ref new Windows::Foundation::EventHandler<CameraEventArgs^>(this, &MainPage::HardwareButtons_CameraPress);
     }
 
-    // If there is an orientation sensor present on the device, register for notifications
-    if (_orientationSensor != nullptr)
-    {
-        _orientationChangedEventToken =
-            _orientationSensor->OrientationChanged += ref new TypedEventHandler<SimpleOrientationSensor^, SimpleOrientationSensorOrientationChangedEventArgs^>(this, &MainPage::OrientationSensor_OrientationChanged);
-
-        // Update orientation of buttons with the current orientation
-        UpdateButtonOrientation();
-    }
-
-    _displayInformationEventToken =
-        _displayInformation->OrientationChanged += ref new TypedEventHandler<DisplayInformation^, Object^>(this, &MainPage::DisplayInformation_OrientationChanged);
-
     _mediaControlPropChangedEventToken =
         _systemMediaControls->PropertyChanged += ref new TypedEventHandler<SystemMediaTransportControls^, SystemMediaTransportControlsPropertyChangedEventArgs^>(this, &MainPage::SystemMediaControls_PropertyChanged);
 }
@@ -569,12 +549,6 @@ void MainPage::UnregisterEventHandlers()
         HardwareButtons::CameraPressed -= _hardwareCameraButtonEventToken;
     }
 
-    if (_orientationSensor != nullptr)
-    {
-        _orientationSensor->OrientationChanged -= _orientationChangedEventToken;
-    }
-
-    _displayInformation->OrientationChanged -= _displayInformationEventToken;
     _systemMediaControls->PropertyChanged -= _mediaControlPropChangedEventToken;
 }
 
@@ -601,135 +575,13 @@ void MainPage::WriteException(Exception^ ex)
 }
 
 /// <summary>
-/// Calculates the current camera orientation from the device orientation by taking into account whether the camera is external or facing the user
-/// </summary>
-/// <returns>The camera orientation in space, with an inverted rotation in the case the camera is mounted on the device and is facing the user</returns>
-SimpleOrientation MainPage::GetCameraOrientation()
-{
-    if (_externalCamera)
-    {
-        // Cameras that are not attached to the device do not rotate along with it, so apply no rotation
-        return SimpleOrientation::NotRotated;
-    }
-
-    auto result = _deviceOrientation;
-
-    // Account for the fact that, on portrait-first devices, the camera sensor is mounted at a 90 degree offset to the native orientation
-    if (_displayInformation->NativeOrientation == DisplayOrientations::Portrait)
-    {
-        switch (result)
-        {
-        case SimpleOrientation::Rotated90DegreesCounterclockwise:
-            result = SimpleOrientation::NotRotated;
-            break;
-        case SimpleOrientation::Rotated180DegreesCounterclockwise:
-            result = SimpleOrientation::Rotated90DegreesCounterclockwise;
-            break;
-        case SimpleOrientation::Rotated270DegreesCounterclockwise:
-            result = SimpleOrientation::Rotated180DegreesCounterclockwise;
-            break;
-        case SimpleOrientation::NotRotated:
-        default:
-            result = SimpleOrientation::Rotated270DegreesCounterclockwise;
-            break;
-        }
-    }
-
-    // If the preview is being mirrored for a front-facing camera, then the rotation should be inverted
-    if (_mirroringPreview)
-    {
-        // This only affects the 90 and 270 degree cases, because rotating 0 and 180 degrees is the same clockwise and counter-clockwise
-        switch (_deviceOrientation)
-        {
-        case SimpleOrientation::Rotated90DegreesCounterclockwise:
-            return SimpleOrientation::Rotated270DegreesCounterclockwise;
-        case SimpleOrientation::Rotated270DegreesCounterclockwise:
-            return SimpleOrientation::Rotated90DegreesCounterclockwise;
-        }
-    }
-
-    return result;
-}
-
-/// <summary>
-/// Converts the given orientation of the device in space to the metadata that can be added to captured photos
-/// </summary>
-/// <param name="orientation">The orientation of the device in space</param>
-/// <returns></returns>
-FileProperties::PhotoOrientation MainPage::ConvertOrientationToPhotoOrientation(SimpleOrientation orientation)
-{
-    switch (orientation)
-    {
-    case SimpleOrientation::Rotated90DegreesCounterclockwise:
-        return FileProperties::PhotoOrientation::Rotate90;
-    case SimpleOrientation::Rotated180DegreesCounterclockwise:
-        return FileProperties::PhotoOrientation::Rotate180;
-    case SimpleOrientation::Rotated270DegreesCounterclockwise:
-        return FileProperties::PhotoOrientation::Rotate270;
-    case SimpleOrientation::NotRotated:
-    default:
-        return FileProperties::PhotoOrientation::Normal;
-    }
-}
-
-/// <summary>
-/// Converts the given orientation of the device in space to the corresponding rotation in degrees
-/// </summary>
-/// <param name="orientation">The orientation of the device in space</param>
-/// <returns>An orientation in degrees</returns>
-int MainPage::ConvertDeviceOrientationToDegrees(SimpleOrientation orientation)
-{
-    switch (orientation)
-    {
-    case SimpleOrientation::Rotated90DegreesCounterclockwise:
-        return 90;
-    case SimpleOrientation::Rotated180DegreesCounterclockwise:
-        return 180;
-    case SimpleOrientation::Rotated270DegreesCounterclockwise:
-        return 270;
-    case SimpleOrientation::NotRotated:
-    default:
-        return 0;
-    }
-}
-
-/// <summary>
-/// Converts the given orientation of the app on the screen to the corresponding rotation in degrees
-/// </summary>
-/// <param name="orientation">The orientation of the app on the screen</param>
-/// <returns>An orientation in degrees</returns>
-int MainPage::ConvertDisplayOrientationToDegrees(DisplayOrientations orientation)
-{
-    switch (orientation)
-    {
-    case DisplayOrientations::Portrait:
-        return 90;
-    case DisplayOrientations::LandscapeFlipped:
-        return 180;
-    case DisplayOrientations::PortraitFlipped:
-        return 270;
-    case DisplayOrientations::Landscape:
-    default:
-        return 0;
-    }
-}
-
-/// <summary>
 /// Uses the current device orientation in space and page orientation on the screen to calculate the rotation
 /// transformation to apply to the controls
 /// </summary>
 void MainPage::UpdateButtonOrientation()
 {
-    int currDeviceOrientation = ConvertDeviceOrientationToDegrees(_deviceOrientation);
-    int currDisplayOrientation = ConvertDisplayOrientationToDegrees(_displayOrientation);
-
-    if (_displayInformation->NativeOrientation == DisplayOrientations::Portrait)
-    {
-        currDeviceOrientation -= 90;
-    }
-
-    // Combine both rotations and make sure that 0 <= result < 360
-    auto angle = (360 + currDisplayOrientation + currDeviceOrientation) % 360;
+    // Rotate the buttons in the UI to match the rotation of the device
+    auto angle = CameraRotationHelper::ConvertSimpleOrientationToClockwiseDegrees(_rotationHelper->GetUIOrientation());
 
     // Rotate the buttons in the UI to match the rotation of the device
     auto transform = ref new RotateTransform();
@@ -767,23 +619,6 @@ void MainPage::Application_Resuming(Platform::Object^ sender, Platform::Object^ 
 void MainPage::Window_VisibilityChanged(Object^ sender, Windows::UI::Core::VisibilityChangedEventArgs^ e)
 {
     SetUpBasedOnStateAsync();
-}
-
-void MainPage::DisplayInformation_OrientationChanged(DisplayInformation^ sender, Object^ args)
-{
-    _displayOrientation = sender->CurrentOrientation;
-
-    // This event will fire when the page is rotated, when the DisplayInformation.AutoRotationPreferences
-    // value set in the SetupUiAsync() method cannot be not honored
-    if (_isPreviewing)
-    {
-        SetPreviewRotationAsync();
-    }
-
-    Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([this]()
-    {
-        UpdateButtonOrientation();
-    }));
 }
 
 void MainPage::PhotoButton_Click(Object^, Windows::UI::Xaml::RoutedEventArgs^)
@@ -838,23 +673,23 @@ void MainPage::SystemMediaControls_PropertyChanged(SystemMediaTransportControls^
 }
 
 /// <summary>
-/// Occurs each time the simple orientation sensor reports a new sensor reading.
+/// Handles an orientation changed event
 /// </summary>
-/// <param name="args">The event data.</param>
-void MainPage::OrientationSensor_OrientationChanged(SimpleOrientationSensor^, SimpleOrientationSensorOrientationChangedEventArgs^ args)
+void MainPage::RotationHelper_OrientationChanged(Object^, bool updatePreview)
 {
-    // If the device is parallel to the ground, keep the last orientation used. This allows users to take pictures of documents (FaceUp)
-    // or the ceiling (FaceDown) in any orientation, by first holding the device in the desired orientation, and then pointing the camera
-    // at the desired subject.
-    if (args->Orientation != SimpleOrientation::Faceup && args->Orientation != SimpleOrientation::Facedown)
+    Concurrency::task<void> task = create_task([]() {});
+    if (updatePreview)
     {
-        _deviceOrientation = args->Orientation;
+        task = create_task(SetPreviewRotationAsync());
+    }
 
+    task.then([this]()
+    {
         Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([this]()
         {
             UpdateButtonOrientation();
         }));
-    }
+    });
 }
 
 void MainPage::HardwareButtons_CameraPress(Platform::Object^, Windows::Phone::UI::Input::CameraEventArgs^)

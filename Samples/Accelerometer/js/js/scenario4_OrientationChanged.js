@@ -24,13 +24,15 @@
 
             // Get two instances of the accelerometer:
             // One that returns the raw accelerometer data
-            accelerometerOriginal = Windows.Devices.Sensors.Accelerometer.getDefault();
+            var readingType = SdkSample.accelerometerReadingType;
+            accelerometerOriginal = Windows.Devices.Sensors.Accelerometer.getDefault(Windows.Devices.Sensors.AccelerometerReadingType[readingType]);
             // Other on which the 'ReadingTransform' is updated so that data returned aligns with the request transformation.
-            accelerometerReadingTransform = Windows.Devices.Sensors.Accelerometer.getDefault();
+            accelerometerReadingTransform = Windows.Devices.Sensors.Accelerometer.getDefault(Windows.Devices.Sensors.AccelerometerReadingType[readingType]);
 
             if (!accelerometerOriginal || !accelerometerReadingTransform) {
-                WinJS.log && WinJS.log("No accelerometer found", "sample", "error");
+                WinJS.log && WinJS.log(readingType + " accelerometer not found", "sample", "error");
             } else {
+                WinJS.log && WinJS.log(readingType + " accelerometer ready", "sample", "status");
                 scenarioEnable.disabled = false;
             }
 

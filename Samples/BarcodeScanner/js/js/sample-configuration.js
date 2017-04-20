@@ -16,13 +16,19 @@
 
     var scenarios = [
         { url: "/html/scenario1_BasicFunctionality.html", title: "DataReceived event" },
-        { url: "/html/scenario2_MultipleScanners.html", title: "Release/Retain functionality" }
+        { url: "/html/scenario2_MultipleScanners.html", title: "Release/Retain functionality" },
+        { url: "/html/scenario3_ActiveSymbologies.html", title: "Active Symbologies" },
+        { url: "/html/scenario4_SymbologyAttributes.html", title: "Symbology Attributes" },
     ];
 
     var BarcodeScanner = Windows.Devices.PointOfService.BarcodeScanner;
 
-    function getFirstBarcodeScannerAsync() {
-        return DeviceHelpers.getFirstDeviceAsync(BarcodeScanner.getDeviceSelector(), (id) => BarcodeScanner.fromIdAsync(id));
+    function getFirstBarcodeScannerAsync(connectionTypes) {
+        if (connectionTypes === undefined) {
+            // By default, use all connections types.
+            connectionTypes = Windows.Devices.PointOfService.PosConnectionTypes.all;
+        }
+        return DeviceHelpers.getFirstDeviceAsync(BarcodeScanner.getDeviceSelector(connectionTypes), (id) => BarcodeScanner.fromIdAsync(id));
     }
 
     WinJS.Namespace.define("SdkSample", {

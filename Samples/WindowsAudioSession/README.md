@@ -5,7 +5,14 @@
 
 # Windows audio session (WASAPI) sample
 
-Demonstrates how to do various audio related tasks using the [Windows Audio Session API (WASAPI)](http://msdn.microsoft.com/library/windows/apps/dd371455).
+Shows how to do various audio related tasks using the [Windows Audio Session API (WASAPI)](http://msdn.microsoft.com/library/windows/apps/dd371455).
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample covers:
 
@@ -27,29 +34,22 @@ use the BackgroundMediaPlayer class demonstrated in the [Background Audio](/Samp
 
 ### Samples
 
-[Background Audio](/Samples/BackgroundAudio)
-
-[VoIP](/Samples/VoIP)
+[Background Audio](/Samples/BackgroundAudio)  
+[VoIP](/Samples/VoIP)  
 
 ### Roadmaps
 
-[Audio, video, and camera](https://msdn.microsoft.com/library/windows/apps/mt203788)
-
-[Designing UX for apps](http://msdn.microsoft.com/library/windows/apps/hh767284)
-
-[Roadmap for apps using C\# and Visual Basic](http://msdn.microsoft.com/library/windows/apps/br229583)
-
-[Roadmap for apps using C++](http://msdn.microsoft.com/library/windows/apps/hh700360)
-
-[Roadmap for apps using JavaScript](http://msdn.microsoft.com/library/windows/apps/hh465037)
+[Audio, video, and camera](https://msdn.microsoft.com/library/windows/apps/mt203788)  
+[Designing UX for apps](http://msdn.microsoft.com/library/windows/apps/hh767284)  
+[Roadmap for apps using C\# and Visual Basic](http://msdn.microsoft.com/library/windows/apps/br229583)  
+[Roadmap for apps using C++](http://msdn.microsoft.com/library/windows/apps/hh700360)  
+[Roadmap for apps using JavaScript](http://msdn.microsoft.com/library/windows/apps/hh465037)  
 
 ### Reference
 
-[Windows Audio Session API (WASAPI)](http://msdn.microsoft.com/library/windows/apps/dd371455)
-
-[Core Audio APIs](http://msdn.microsoft.com/library/windows/apps/dd370802)
-
-[Media Foundation](http://msdn.microsoft.com/library/windows/apps/ms694197)
+[Windows Audio Session API (WASAPI)](http://msdn.microsoft.com/library/windows/apps/dd371455)  
+[Core Audio APIs](http://msdn.microsoft.com/library/windows/apps/dd370802)  
+[Media Foundation](http://msdn.microsoft.com/library/windows/apps/ms694197)  
 
 ## Operating system requirements
 

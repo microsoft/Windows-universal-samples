@@ -5,10 +5,20 @@
 
 # Advertising sample
 
-This sample shows how to use the Microsoft Advertising SDK (Microsoft.Advertising) to show display ads and interstitial ads using the following methods:
-- Creating an ad control to show display ads using only XAML / HTML markup
-- Creating an ad control to show display ads programatically
-- Creating an ad control to show interstitial video ads programatically
+Shows how to use the Microsoft Advertising SDK (Microsoft.Advertising) to show display ads and interstitial ads.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+Specifically, this sample shows how to:
+
+- Create an ad control to show display ads using only XAML / HTML markup
+- Create an ad control to show display ads programatically
+- Create an ad control to show interstitial video ads programatically
 
 ## Prerequisites
 
@@ -18,26 +28,24 @@ It also requires the [internet client capability](https://msdn.microsoft.com/lib
 
 When you incorporate this sample into your own app,
 obtain your own ApplicationId and AdUnitId from the Dev Center.
-See [Monetize with Ads](https://msdn.microsoft.com/en-us/library/windows/apps/mt170658.aspx) on MSDN
+See [Monetize with Ads](https://msdn.microsoft.com/library/windows/apps/mt170658.aspx) on MSDN
 for more details.
 
 ## Related topics
 
 ### Samples
 
-[Store in-app purchase](/Samples/Store)
+[Store in-app purchase](/Samples/Store)  
 
 ## Reference
 
-[Microsoft Advertising Client SDK API Reference](https://msdn.microsoft.com/en-US/library/mt313151(v=msads.30).aspx)
+[Microsoft Advertising Client SDK API Reference](https://msdn.microsoft.com/library/windows/apps/mt691884.aspx)  
 
 ### See also
 
-[Getting Started](https://msdn.microsoft.com/en-US/library/mt313197(v=msads.30).aspx)
-
-[Developer Walkthroughs](https://msdn.microsoft.com/en-US/library/mt313121(v=msads.30).aspx)
-
-[Interstitial Ads](https://msdn.microsoft.com/en-US/library/mt313191(v=msads.30).aspx)
+[Getting Started](https://msdn.microsoft.com/windows/uwp/monetize/get-started-with-microsoft-advertising-libraries)  
+[Developer Walkthroughs](https://msdn.microsoft.com/windows/uwp/monetize/developer-walkthroughs)  
+[Interstitial Ads](https://msdn.microsoft.com/windows/uwp/monetize/interstitial-ads)  
 
 ## System requirements
 

@@ -26,8 +26,8 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "AamvaCardDataReceived Event", "SDKTemplate.Scenario2_AamvaCards" }
 };
 
-task<MagneticStripeReader^> DeviceHelpers::GetFirstMagneticStripeReaderAsync()
+task<MagneticStripeReader^> DeviceHelpers::GetFirstMagneticStripeReaderAsync(PosConnectionTypes connectionTypes)
 {
-    return DeviceHelpers::GetFirstDeviceAsync(MagneticStripeReader::GetDeviceSelector(),
+    return DeviceHelpers::GetFirstDeviceAsync(MagneticStripeReader::GetDeviceSelector(connectionTypes),
         [](String^ id) { return create_task(MagneticStripeReader::FromIdAsync(id)); });
 }

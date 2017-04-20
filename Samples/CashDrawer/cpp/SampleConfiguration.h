@@ -47,6 +47,8 @@ namespace SDKTemplate
 
     namespace DeviceHelpers
     {
-        Concurrency::task<Windows::Devices::PointOfService::CashDrawer^> GetFirstCashDrawerAsync();
+        // By default, use all connections types.
+        Concurrency::task<Windows::Devices::PointOfService::CashDrawer^> GetFirstCashDrawerAsync(
+            Windows::Devices::PointOfService::PosConnectionTypes connectionTypes = Windows::Devices::PointOfService::PosConnectionTypes::All);
     }
 }

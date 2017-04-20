@@ -359,7 +359,7 @@ task<void> MainPage::GetPreviewFrameAsD3DSurfaceAsync()
 }
 
 /// <summary>
-/// Saves a SoftwareBitmap to the Pictures library with the specified name
+/// Saves a SoftwareBitmap to the _captureFolder
 /// </summary>
 /// <param name="bitmap"></param>
 /// <returns></returns>

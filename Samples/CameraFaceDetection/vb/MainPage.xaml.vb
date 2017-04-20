@@ -322,7 +322,9 @@ Namespace Global.FaceDetection
         Private Async Function CleanUpFaceDetectionEffectAsync() As Task
             _faceDetectionEffect.Enabled = False
             RemoveHandler _faceDetectionEffect.FaceDetected, AddressOf FaceDetectionEffect_FaceDetected
-            Await _mediaCapture.ClearEffectsAsync(MediaStreamType.VideoPreview)
+
+            ' Remove the effect (see ClearEffectsAsync method to remove all effects from a stream)
+            Await _mediaCapture.RemoveEffectAsync(_faceDetectionEffect)
             _faceDetectionEffect = Nothing
         End Function
 
@@ -355,7 +357,7 @@ Namespace Global.FaceDetection
         ''' <returns></returns>
         Private Async Function StartRecordingAsync() As Task
             Try
-                ' Create storage file in Pictures Library
+                ' Create storage file for the capture
                 Dim videoFile = Await _captureFolder.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName)
                 Dim encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto)
                 ' Calculate rotation angle, taking mirroring into account if necessary

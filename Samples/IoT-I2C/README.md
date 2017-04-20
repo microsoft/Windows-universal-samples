@@ -1,16 +1,23 @@
-<!---
+﻿<!---
   category: DevicesSensorsAndPower
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624150
 --->
 
 # Inter-Integrated Circuit (I2C) sample
 
-The [**Windows.Devices.I2c**](http://msdn.microsoft.com/en-us/library/windows.devices.i2c.aspx) namespace
-allows apps to communicate with Inter-Integrated Circuit devices
-(commmonly abbreviated I�C or I2C)
+Shows how to use the [Windows.Devices.I2c](http://msdn.microsoft.com/library/windows.devices.i2c.aspx) namespace
+to allow apps to communicate with Inter-Integrated Circuit devices
+(commmonly abbreviated IIC or I2C)
 on a Windows IoT (Internet of Things) device.
-I2C is a two-wire low-speed bus used to interface devices such as sensors, EEPROMs, and touch controllers.
-This sample shows how to access the I2C bus.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+I2C is a two-wire low-speed bus used to interface devices such as sensors, EEPROMs, and touch controllers. This sample shows how to access the I2C bus.
 
 The sample shows the following techniques:
 
@@ -20,7 +27,7 @@ The sample shows the following techniques:
 
 To obtain information about Windows 10 IoT Core, go to [Windows on Devices](http://windowsondevices.com)
 
-To see more samples specifically describing how to leverage Windows 10 IoT Core, click on the [Samples tab here](http://ms-iot.github.io/content/en-US/win10/StartCoding.htm).
+To see more samples specifically describing how to leverage Windows 10 IoT Core, click on the [Samples tab here](http://ms-iot.github.io/content/win10/StartCoding.htm).
 
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 

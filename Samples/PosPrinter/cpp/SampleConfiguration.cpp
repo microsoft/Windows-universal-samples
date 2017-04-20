@@ -27,9 +27,9 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Multiple Receipt Printers", "SDKTemplate.Scenario3_MultipleReceipt" }
 };
 
-task<PosPrinter^> DeviceHelpers::GetFirstReceiptPrinterAsync()
+task<PosPrinter^> DeviceHelpers::GetFirstReceiptPrinterAsync(PosConnectionTypes connectionTypes)
 {
-    return DeviceHelpers::GetFirstDeviceAsync(PosPrinter::GetDeviceSelector(),
+    return DeviceHelpers::GetFirstDeviceAsync(PosPrinter::GetDeviceSelector(connectionTypes),
         [](String^ id)
     {
         return create_task(PosPrinter::FromIdAsync(id)).then([](PosPrinter^ printer)
@@ -40,6 +40,8 @@ task<PosPrinter^> DeviceHelpers::GetFirstReceiptPrinterAsync()
             }
             else
             {
+                // Close the unwanted printer.
+                delete printer;
                 return static_cast<PosPrinter^>(nullptr);
             }
         });

@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{31c29c69-6d15-50d9-ba53-ef0136a858f5}</ProjectGuid>
+    <ProjectGuid>{a720ef58-6f66-5bd7-8eea-2995ec76c99c}</ProjectGuid>
     <RootNamespace>NavigationMenuSample</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10586.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.15063.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -152,6 +152,7 @@
     <ClInclude Include="DrillInPage.xaml.h">
       <DependentUpon>..\shared\DrillInPage.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="IsTenFootTrigger.h" />
     <ClInclude Include="LandingPage.xaml.h">
       <DependentUpon>..\shared\LandingPage.xaml</DependentUpon>
     </ClInclude>
@@ -164,6 +165,7 @@
     <ClInclude Include="App.xaml.h">
       <DependentUpon>..\shared\App.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="SystemInformationHelpers.h" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\shared\App.xaml">
@@ -193,6 +195,9 @@
     <Page Include="..\shared\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
+    <Page Include="..\shared\TenFootStylesheet.xaml">
+      <Link>Styles\TenFootStylesheet.xaml</Link>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -218,6 +223,7 @@
     <ClCompile Include="DrillInPage.xaml.cpp">
       <DependentUpon>..\shared\DrillInPage.xaml</DependentUpon>
     </ClCompile>
+    <ClCompile Include="IsTenFootTrigger.cpp" />
     <ClCompile Include="LandingPage.xaml.cpp">
       <DependentUpon>..\shared\LandingPage.xaml</DependentUpon>
     </ClCompile>

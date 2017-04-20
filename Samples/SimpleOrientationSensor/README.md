@@ -5,9 +5,18 @@
 
 # Simple orientation sensor sample
 
-This sample demonstrates the use of the Windows.Devices.Sensors.SimpleOrientationSensor API for a simple device orientation sensor.
+Shows how to use the [Windows.Devices.Sensors.SimpleOrientationSensor](https://msdn.microsoft.com/library/windows/apps/windows.devices.sensors.simpleorientationsensor.aspx) 
+class for a simple device orientation sensor.
 
-This sample allows the user to view the orientation values that reflect the simple device orientation (e.g. not rotated, face up, rotated 90 degrees counter-clockwise). You can choose one of two scenarios:
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+This sample allows the user to view the orientation values that reflect the simple device orientation (for example, not rotated, face up, rotated 90 degrees counter-clockwise). 
+You can choose one of two scenarios:
 
 -   Orientation sensor data events
 -   Polling orientation sensor readings

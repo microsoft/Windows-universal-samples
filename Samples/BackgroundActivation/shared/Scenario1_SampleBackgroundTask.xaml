@@ -1,0 +1,42 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.SampleBackgroundTask"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                    <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                        Registers a background task for the Time Zone Change system event. The
+                        background task runs whenever the Time Zone changes.
+                    </TextBlock>
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Margin="0,10,0,10">
+                        <Button x:Name="RegisterButton" Content="Register" Click="RegisterBackgroundTask" Margin="0,0,10,0"/>
+                        <Button x:Name="UnregisterButton" Content="Unregister" Click="UnregisterBackgroundTask"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock x:Name="Status" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Text="Unregistered"/>
+                        <TextBlock x:Name="Progress" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Text=""/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

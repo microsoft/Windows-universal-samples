@@ -5,7 +5,14 @@
 
 # Direct2D photo adjustment sample
 
-This sample demonstrates how to build a photo viewer and editor using [**Direct2D**](http://msdn.microsoft.com/library/windows/desktop/dd370990) and [**Direct2D Effects**](http://msdn.microsoft.com/library/windows/desktop/hh706327).
+Shows how to build a photo viewer and editor using [Direct2D](http://msdn.microsoft.com/library/windows/desktop/dd370990) and [Direct2D Effects](http://msdn.microsoft.com/library/windows/desktop/hh706327).
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample shows how to:
 
@@ -14,12 +21,12 @@ Specifically, this sample shows how to:
 - Hook up UI in XAML
 
 This sample uses the following Direct2D effects:
-- [Color management](http://msdn.microsoft.com/en-us/library/windows/desktop/hh706318)
-- [Straighten](http://msdn.microsoft.com/en-us/library/windows/desktop/dn900462)
-- [Temperature and tint](http://msdn.microsoft.com/en-us/library/windows/desktop/dn900463)
-- [Saturation](http://msdn.microsoft.com/en-us/library/windows/desktop/hh706369)
-- [Contrast](http://msdn.microsoft.com/en-us/library/windows/desktop/dn890716)
-- [Highlights and Shadows](http://msdn.microsoft.com/en-us/library/windows/desktop/dn890773)
+- [Color management](http://msdn.microsoft.com/library/windows/desktop/hh706318)
+- [Straighten](http://msdn.microsoft.com/library/windows/desktop/dn900462)
+- [Temperature and tint](http://msdn.microsoft.com/library/windows/desktop/dn900463)
+- [Saturation](http://msdn.microsoft.com/library/windows/desktop/hh706369)
+- [Contrast](http://msdn.microsoft.com/library/windows/desktop/dn890716)
+- [Highlights and Shadows](http://msdn.microsoft.com/library/windows/desktop/dn890773)
 
 ## Sample project files
 
@@ -55,22 +62,22 @@ Variants of the following files are found in every UWP app written in C++:
 
 ### Feature areas
 
-- [**Direct2D Effects**](http://msdn.microsoft.com/library/windows/desktop/hh706327): provides built-in effects including a rich library of photo editing operations.
-- [**Direct2D**](http://msdn.microsoft.com/library/windows/desktop/dd370990): used to render images, primitives, and text.
-- [**Windows Imaging Component (WIC)**](http://msdn.microsoft.com/library/windows/desktop/ee719655): used to decode images from disk.
-- [XAML overview](https://msdn.microsoft.com/library/windows/apps/mt185595): technology for building user interfaces in managed and C++ code.
+[Direct2D Effects](http://msdn.microsoft.com/library/windows/desktop/hh706327): provides built-in effects including a rich library of photo editing operations.  
+[Direct2D](http://msdn.microsoft.com/library/windows/desktop/dd370990): used to render images, primitives, and text.  
+[Windows Imaging Component (WIC)](http://msdn.microsoft.com/library/windows/desktop/ee719655): used to decode images from disk.  
+[XAML overview](https://msdn.microsoft.com/library/windows/apps/mt185595): technology for building user interfaces in managed and C++ code.  
 
 ### Reference
 
 Direct2D APIs:
 
-- [ID2D1ImageSourceFromWic](http://msdn.microsoft.com/library/windows/desktop/dn900414)
-- [ID2D1DeviceContext](http://msdn.microsoft.com/library/windows/desktop/hh404479)
-- [Direct2D built-in effects](https://msdn.microsoft.com/library/windows/desktop/hh706316)
+[ID2D1ImageSourceFromWic](http://msdn.microsoft.com/library/windows/desktop/dn900414)  
+[ID2D1DeviceContext](http://msdn.microsoft.com/library/windows/desktop/hh404479)  
+[Direct2D built-in effects](https://msdn.microsoft.com/library/windows/desktop/hh706316)  
 
 Related APIs:
 
-- [SwapChainPanel](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.swapchainpanel)
+[SwapChainPanel](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.swapchainpanel)  
 
 ## System requirements
 
@@ -98,7 +105,6 @@ The next steps depend on whether you just want to deploy the sample or you want 
 ### Deploying and running the sample
 
 - To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or selectDebug > Start Without Debugging. 
-
 
 ## Run the sample
 

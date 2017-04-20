@@ -38,9 +38,10 @@ namespace SDKTemplate
 
     public partial class DeviceHelpers
     {
-        public static async Task<PosPrinter> GetFirstReceiptPrinterAsync()
+        // By default, use all connections types.
+        public static async Task<PosPrinter> GetFirstReceiptPrinterAsync(PosConnectionTypes connectionTypes = PosConnectionTypes.All)
         {
-            return await DeviceHelpers.GetFirstDeviceAsync(PosPrinter.GetDeviceSelector(),
+            return await DeviceHelpers.GetFirstDeviceAsync(PosPrinter.GetDeviceSelector(connectionTypes),
                 async (id) =>
                 {
                     PosPrinter printer = await PosPrinter.FromIdAsync(id);
@@ -48,6 +49,8 @@ namespace SDKTemplate
                     {
                         return printer;
                     }
+                    // Dispose the unwanted printer.
+                    printer?.Dispose();
                     return null;
                 });
         }

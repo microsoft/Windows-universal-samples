@@ -48,9 +48,9 @@ public:
     }
 
     // Used to send signals or register functions to handle received signals.
-    property SecureInterfaceSignals^ Signals
+    property SecureInterfaceLegacySignals^ Signals
     {
-        SecureInterfaceSignals^ get() { return m_signals; }
+        SecureInterfaceLegacySignals^ get() { return m_signals; }
     }
     
     // This event will fire whenever this producer is stopped.
@@ -209,7 +209,9 @@ private:
     virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _SessionMemberAdded;
     virtual event Windows::Foundation::EventHandler<Platform::Object^>^ _SessionMemberRemoved;
 
+    // "Concatenate two input strings and returns the concatenated string as output"
     static void CallConcatenateHandler(_Inout_ alljoyn_busobject busObject, _In_ alljoyn_message message);
+    // "This signal is emitted when producer sends a text message to consumer"
     static void CallTextSentSignalHandler(_In_ const alljoyn_interfacedescription_member* member, _In_ alljoyn_message message);
       
     // Register a callback function to handle methods.
@@ -221,7 +223,7 @@ private:
     
     Windows::Devices::AllJoyn::AllJoynBusAttachment^ m_busAttachment;
     Windows::Foundation::EventRegistrationToken m_busAttachmentStateChangedToken;
-    SecureInterfaceSignals^ m_signals;
+    SecureInterfaceLegacySignals^ m_signals;
     ISecureInterfaceService^ m_serviceInterface;
     Platform::String^ m_ServiceObjectPath;
 

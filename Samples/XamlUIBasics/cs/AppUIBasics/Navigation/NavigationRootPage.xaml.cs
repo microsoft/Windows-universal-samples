@@ -11,6 +11,7 @@ using AppUIBasics.Common;
 using AppUIBasics.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -59,6 +60,14 @@ namespace AppUIBasics
             LoadGroups();
             Current = this;
             RootFrame = rootFrame;
+
+            this.GotFocus += (object sender, RoutedEventArgs e) =>
+            {
+                // helpful for debugging focus problems w/ keyboard & gamepad
+                FrameworkElement focus = FocusManager.GetFocusedElement() as FrameworkElement;
+                if (focus != null)
+                    Debug.WriteLine("got focus: " + focus.Name + " (" + focus.GetType().ToString() + ")");
+            };
         }
 
         private async void LoadGroups()

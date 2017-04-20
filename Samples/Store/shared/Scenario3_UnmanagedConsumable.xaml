@@ -1,0 +1,57 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page x:Class="SDKTemplate.Scenario3_UnmanagedConsumable"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:SDKTemplate"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="12" Grid.Row="0">
+            <TextBlock Text="Unmanaged Consumables" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Unmanaged Consumable products require both a purchase call and a fulfillment call to report usage of consumables.  Stackable purchases are not supported on Unmanaged consumables.
+            </TextBlock>
+
+            <Button x:Name="GetUnManagedConsumablesButton" Content="Get Associated Add-Ons" Margin="0,12,0,0" Click="GetUnmanagedConsumablesButton_Click"/>
+            <Button x:Name="PurchaseAddOnButton" Content="Purchase Selected Consumable" Margin="0,12,0,0" Click="PurchaseAddOnButton_Click"
+                    IsEnabled="{x:Bind local:BindingUtils.IsNonNull(ProductsListView.SelectedItem), FallbackValue=False, Mode=OneWay}" />
+            <Button x:Name="GetConsumableBalanceButton" Content="Get Consumable Balance" Margin="0,12,0,0" Click="GetConsumableBalanceButton_Click"
+                    IsEnabled="{x:Bind local:BindingUtils.IsNonNull(ProductsListView.SelectedItem), FallbackValue=False, Mode=OneWay}" />
+            <Button x:Name="FulfillConsumableButton" Content="Fulfill Consumable" Margin="0,12,0,12" Click="FulfillConsumableButton_Click"
+                    IsEnabled="{x:Bind local:BindingUtils.IsNonNull(ProductsListView.SelectedItem), FallbackValue=False, Mode=OneWay}" />
+        </StackPanel>
+
+        <ListView x:Name="ProductsListView" 
+                  Grid.Row="1"
+                  BorderBrush="Black" 
+                  BorderThickness="1" 
+                  SelectionMode="Single"
+                  SingleSelectionFollowsFocus="False">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="12">
+                        <TextBlock Text="{Binding FormattedTitle}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
+

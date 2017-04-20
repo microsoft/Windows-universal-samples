@@ -46,15 +46,19 @@ namespace SDKTemplate
                 Title = "Event Binding",
                 Description = "Demonstrates using x:Bind with Events",
                 ClassType=typeof(EventTests)
-            }
-        };
+            },
+            new Scenario() {
+                Title = "Function Binding",
+                Description = "Demonstrates using x:Bind to bind to functions which is an easier way to do value conversions than using IValueConverter",
+                ClassType=typeof(Functions)
+    }
+};
     }
     public class Scenario
     {
         public string Title { get; set; }
         public string Description { get; set; }
         public Type ClassType { get; set; }
-
     }
 }
 

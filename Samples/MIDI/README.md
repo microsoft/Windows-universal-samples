@@ -1,11 +1,18 @@
-<!---
+﻿<!---
   category: AudioVideoAndCamera
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620571
 --->
 
 # MIDI sample
 
-This sample demonstrates how to use the Windows.Devices.Midi API in a Windows Runtime app.
+Shows how to use the [Windows.Devices.Midi](https://msdn.microsoft.com/library/windows/apps/windows.devices.midi.aspx) API in a Windows Runtime app.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 This sample demonstrates the following features:
 -   Enumerate MIDI In and MIDI Out ports.
@@ -17,7 +24,8 @@ This sample demonstrates the following features:
 
 ## Related topics
 
-AudioGraph, Video editing
+[AudioGraph class](https://msdn.microsoft.com/library/windows/apps/windows.media.audio.audiograph.aspx)  
+[Media compositions and editing](https://msdn.microsoft.com/windows/uwp/audio-video-camera/media-compositions-and-editing)  
 
 ## Operating system requirements
 

@@ -36,7 +36,12 @@ Platform::Collections::Vector<Scenario^>^ MainPage::scenariosInner = ref new Pla
         "Event Binding",
         "Demonstrates using x:Bind with Events",
         "SDKTemplate.EventTests"
-        )
+    ),
+    ref new Scenario(
+        "Function Binding",
+        "Demonstrates using x:Bind to bind to functions which is an easier way to do value conversions than using IValueConverter",
+        "SDKTemplate.Functions"
+    )
 });
 
 Scenario::Scenario(Platform::String^ title, Platform::String^ description, Platform::String^ className)

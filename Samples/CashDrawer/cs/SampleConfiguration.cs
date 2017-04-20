@@ -37,9 +37,10 @@ namespace SDKTemplate
 
     public partial class DeviceHelpers
     {
-        public static async Task<CashDrawer> GetFirstCashDrawerAsync()
+        // By default, use all connections types.
+        public static async Task<CashDrawer> GetFirstCashDrawerAsync(PosConnectionTypes connectionTypes = PosConnectionTypes.All)
         {
-            return await DeviceHelpers.GetFirstDeviceAsync(CashDrawer.GetDeviceSelector(), async (id) => await CashDrawer.FromIdAsync(id));
+            return await DeviceHelpers.GetFirstDeviceAsync(CashDrawer.GetDeviceSelector(connectionTypes), async (id) => await CashDrawer.FromIdAsync(id));
         }
     }
 

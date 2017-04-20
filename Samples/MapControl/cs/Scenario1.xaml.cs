@@ -32,7 +32,9 @@ namespace SDKTemplate
         private void MyMap_Loaded(object sender, RoutedEventArgs e)
         {
             myMap.Center = MainPage.SeattleGeopoint;
-            myMap.ZoomLevel = 12;      
+            myMap.ZoomLevel = 12;
+            SetMapStyle();
+            SetMapProjection();
         }
                 
         private void MyMap_MapTapped(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapInputEventArgs args)
@@ -57,9 +59,16 @@ namespace SDKTemplate
             myMap.TrafficFlowVisible = false;
         }
 
-
-       
         private void styleCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Protect against events that are raised before we are fully initialized.
+            if (myMap != null)
+            {
+                SetMapStyle();
+            }
+        }
+
+        private void SetMapStyle()
         {
             switch(styleCombobox.SelectedIndex)
             {
@@ -79,6 +88,28 @@ namespace SDKTemplate
                     myMap.Style = MapStyle.Terrain;
                     break;
             }            
+        }
+
+        private void projectionCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Protect against events that are raised before we are fully initialized.
+            if (myMap != null)
+            {
+                SetMapProjection();
+            }
+        }
+
+        private void SetMapProjection()
+        {
+            switch (projectionCombobox.SelectedIndex)
+            {
+                case 0:
+                    myMap.MapProjection = MapProjection.WebMercator;
+                    break;
+                case 1:
+                    myMap.MapProjection = MapProjection.Globe;
+                    break;
+            }
         }
     }
 }

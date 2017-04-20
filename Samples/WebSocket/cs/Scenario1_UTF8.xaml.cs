@@ -13,6 +13,7 @@ using System;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Networking.Sockets;
+using Windows.Security.Cryptography.Certificates;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -96,6 +97,32 @@ namespace SDKTemplate
             messageWebSocket.MessageReceived += MessageReceived;
             messageWebSocket.Closed += OnClosed;
 
+            // If we are connecting to wss:// endpoint, by default, the OS performs validation of
+            // the server certificate based on well-known trusted CAs. We can perform additional custom
+            // validation if needed.
+            if (SecureWebSocketCheckBox.IsChecked == true)
+            {
+                // WARNING: Only test applications should ignore SSL errors.
+                // In real applications, ignoring server certificate errors can lead to Man-In-The-Middle
+                // attacks. (Although the connection is secure, the server is not authenticated.)
+                // Note that not all certificate validation errors can be ignored.
+                // In this case, we are ignoring these errors since the certificate assigned to the localhost
+                // URI is self-signed and has subject name = fabrikam.com
+                messageWebSocket.Control.IgnorableServerCertificateErrors.Add(ChainValidationResult.Untrusted);
+                messageWebSocket.Control.IgnorableServerCertificateErrors.Add(ChainValidationResult.InvalidName);
+
+                // Add event handler to listen to the ServerCustomValidationRequested event. This enables performing
+                // custom validation of the server certificate. The event handler must implement the desired
+                // custom certificate validation logic.
+                messageWebSocket.ServerCustomValidationRequested += OnServerCustomValidationRequested;
+
+                // Certificate validation occurs only for secure connections.
+                if (server.Scheme != "wss")
+                {
+                    AppendOutputLine("Note: Certificate validation is performed only for the wss: scheme.");
+                }
+            }
+
             AppendOutputLine($"Connecting to {server}...");
             try
             {
@@ -115,6 +142,37 @@ namespace SDKTemplate
             // The default DataWriter encoding is Utf8.
             messageWriter = new DataWriter(messageWebSocket.OutputStream);
             rootPage.NotifyUser("Connected", NotifyType.StatusMessage);
+        }
+
+        private async void OnServerCustomValidationRequested(MessageWebSocket sender, WebSocketServerCustomValidationRequestedEventArgs args)
+        {
+            // In order to call async APIs in this handler, you must first take a deferral and then
+            // release it once you are done with the operation. The "using" statement
+            // ensures that the deferral completes when control leaves the block.
+            bool isValid;
+            using (Deferral deferral = args.GetDeferral())
+            {
+                // Get the server certificate and certificate chain from the args parameter.
+                isValid = await MainPage.AreCertificateAndCertChainValidAsync(args.ServerCertificate, args.ServerIntermediateCertificates);
+
+                if (!isValid)
+                {
+                    args.Reject();
+                }
+            }
+
+            // Continue on the UI thread so we can update UI.
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (isValid)
+                {
+                    AppendOutputLine("Custom validation of server certificate passed.");
+                }
+                else
+                {
+                    AppendOutputLine("Custom validation of server certificate failed.");
+                }
+            });
         }
 
         async void OnSend()

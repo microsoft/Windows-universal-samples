@@ -64,6 +64,17 @@ namespace NavigationMenuSample
                 titleBar.ButtonBackgroundColor = titleBarColor;
             }
 
+            if (SystemInformationHelpers.IsTenFootExperience)
+            {
+                // Apply guidance from https://msdn.microsoft.com/windows/uwp/input-and-devices/designing-for-tv
+                ApplicationView.GetForCurrentView().SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+
+                this.Resources.MergedDictionaries.Add(new ResourceDictionary
+                {
+                    Source = new Uri("ms-appx:///Styles/TenFootStylesheet.xaml")
+                });
+            }
+
             AppShell shell = Window.Current.Content as AppShell;
 
             // Do not repeat app initialization when the Window already has content,

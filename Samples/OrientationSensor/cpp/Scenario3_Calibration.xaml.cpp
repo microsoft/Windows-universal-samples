@@ -31,10 +31,12 @@ Scenario3_Calibration::Scenario3_Calibration() : rootPage(MainPage::Current)
 {
     InitializeComponent();
     calibrationBar = ref new CalibrationBar();
-}
 
-void Scenario3_Calibration::OnNavigatedTo(NavigationEventArgs^ e)
-{
+    if (rootPage->SensorReadingType == SensorReadingType::Relative)
+    {
+        EnabledContent->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+        DisabledContent->Visibility = Windows::UI::Xaml::Visibility::Visible;
+    }
 }
 
 void Scenario3_Calibration::OnNavigatedFrom(NavigationEventArgs^ e)

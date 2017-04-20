@@ -4,9 +4,15 @@
 
 # Microsoft Passport and Windows Hello sample
 
-This sample shows how apps can incorporate Microsoft Passport and Windows Hello
-into their normal sign-in flow
-to offer convenient and secure multi-factor authentication.
+Shows how apps can incorporate Microsoft Passport and Windows Hello
+into their normal sign-in flow to offer convenient and secure multi-factor authentication.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Major steps include:
 
@@ -31,7 +37,7 @@ To do this, load the Server project into a second instance of Visual Studio and 
 **NOTE**
 The sample assumes that the server is running on the same computer.
 If you have deployed the sample to a device that is not a PC,
-you will need to edit the `serverBaseUri` variable to refer to the
+you will need to edit the serverBaseUri variable to refer to the
 device on which the server is running.
 
 **WARNING**
@@ -59,10 +65,10 @@ Microsoft Passport can be enabled by setting a PIN in Windows Settings under **A
 
 ## Related content
 
-* [Microsoft Passport and Windows Hello developer how-to guide](http://go.microsoft.com/fwlink/p/?LinkId=522066)
-* [Microsoft Passport architecture and implementation details on TechNet](https://technet.microsoft.com/library/mt589441%28v=vs.85%29.aspx)
-* [Windows Hello overview](http://windows.microsoft.com/windows-10/getstarted-what-is-hello)
-* [Implementation details for Microsoft Passport and Windows Hello](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/mt589441.aspx)
+[Microsoft Passport and Windows Hello](http://go.microsoft.com/fwlink/p/?LinkId=522066)  
+[Microsoft Passport guide](https://technet.microsoft.com/itpro/windows/keep-secure/microsoft-passport-guide)  
+[Windows Hello overview](http://windows.microsoft.com/windows-10/getstarted-what-is-hello)  
+[Implementation details for Microsoft Passport and Windows Hello](https://msdn.microsoft.com/library/windows/apps/xaml/mt589441.aspx)  
 
 ## System requirements
 

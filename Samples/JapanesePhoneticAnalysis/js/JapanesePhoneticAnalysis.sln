@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "JapanesePhoneticAnalysis", "JapanesePhoneticAnalysis.jsproj", "{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "JapanesePhoneticAnalysis", "JapanesePhoneticAnalysis.jsproj", "{5F192767-953A-50BC-A962-3E23E1926A05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,30 +17,30 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Debug|ARM.ActiveCfg = Debug|ARM
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Debug|ARM.Build.0 = Debug|ARM
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Debug|ARM.Deploy.0 = Debug|ARM
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Debug|x64.ActiveCfg = Debug|x64
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Debug|x64.Build.0 = Debug|x64
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Debug|x64.Deploy.0 = Debug|x64
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Debug|x86.ActiveCfg = Debug|x86
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Debug|x86.Build.0 = Debug|x86
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Debug|x86.Deploy.0 = Debug|x86
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Release|ARM.ActiveCfg = Release|ARM
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Release|ARM.Build.0 = Release|ARM
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Release|ARM.Deploy.0 = Release|ARM
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Release|x64.ActiveCfg = Release|x64
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Release|x64.Build.0 = Release|x64
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Release|x64.Deploy.0 = Release|x64
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Release|x86.ActiveCfg = Release|x86
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Release|x86.Build.0 = Release|x86
-		{CDDCFCB9-F104-55C1-A993-D95B52B2F7F2}.Release|x86.Deploy.0 = Release|x86
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Debug|ARM.ActiveCfg = Debug|ARM
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Debug|ARM.Build.0 = Debug|ARM
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Debug|ARM.Deploy.0 = Debug|ARM
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Debug|x64.ActiveCfg = Debug|x64
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Debug|x64.Build.0 = Debug|x64
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Debug|x64.Deploy.0 = Debug|x64
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Debug|x86.ActiveCfg = Debug|x86
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Debug|x86.Build.0 = Debug|x86
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Debug|x86.Deploy.0 = Debug|x86
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Release|ARM.ActiveCfg = Release|ARM
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Release|ARM.Build.0 = Release|ARM
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Release|ARM.Deploy.0 = Release|ARM
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Release|x64.ActiveCfg = Release|x64
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Release|x64.Build.0 = Release|x64
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Release|x64.Deploy.0 = Release|x64
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Release|x86.ActiveCfg = Release|x86
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Release|x86.Build.0 = Release|x86
+		{5F192767-953A-50BC-A962-3E23E1926A05}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

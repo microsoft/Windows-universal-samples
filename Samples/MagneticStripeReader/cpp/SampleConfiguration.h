@@ -47,7 +47,9 @@ namespace SDKTemplate
 
     namespace DeviceHelpers
     {
-        Concurrency::task<Windows::Devices::PointOfService::MagneticStripeReader^> GetFirstMagneticStripeReaderAsync();
+        // By default, use all connections types.
+        Concurrency::task<Windows::Devices::PointOfService::MagneticStripeReader^> GetFirstMagneticStripeReaderAsync(
+            Windows::Devices::PointOfService::PosConnectionTypes connectionTypes  = Windows::Devices::PointOfService::PosConnectionTypes::All);
     }
 
 }

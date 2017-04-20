@@ -5,12 +5,21 @@
 
 # Transform3D animations sample
 
-This sample shows how Transform3D can be used to create custom 3D animations and transitions in XAML apps.
+Shows how Transform3D can be used to create custom 3D animations and transitions in XAML apps.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, two effects are demonstrated in this sample:
 
-- **3D rotation animation:** In the main page for this app, the columns are animated with a custom 3D rotation animation when content changes, including a 3D shadowing effect. See the `SectionView` class for an implementation of this effect.
-- **3D staggered zoom animation:** When the user navigates to a specific item, a staggered zoom effect is used to announce the entrance of content. The `ArticlePage` class demonstrates how to create this effect.
+- **3D rotation animation:** In the main page for this app, the columns are animated with a custom 3D rotation animation when content changes, 
+including a 3D shadowing effect. See the SectionView class for an implementation of this effect.
+- **3D staggered zoom animation:** When the user navigates to a specific item, a staggered zoom effect is used to announce the entrance of content. 
+The ArticlePage class demonstrates how to create this effect.
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  
@@ -22,15 +31,13 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[Transform3D Parallax](/Samples/XamlTransform3DParallax)
+[Transform3D Parallax](/Samples/XamlTransform3DParallax)  
 
 ### Reference
 
-[UIElement.Transform3D](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.uielement.transform3d.aspx)
-
-[PerspectiveTransform3D](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.media.media3d.perspectivetransform3d.aspx)
-
-[CompositeTransform3D](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.media.media3d.compositetransform3d.aspx)
+[UIElement.Transform3D](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.uielement.transform3d.aspx)  
+[PerspectiveTransform3D](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.media.media3d.perspectivetransform3d.aspx)  
+[CompositeTransform3D](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.media.media3d.compositetransform3d.aspx)  
 
 ## System requirements
 

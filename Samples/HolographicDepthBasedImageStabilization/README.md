@@ -5,11 +5,18 @@
 
 # Depth-based focus plane
 
-This sample demonstrates how to set the focus plane automatically by looking at your depth buffer. A least-squares
+Shows how to set the focus plane automatically by looking at your depth buffer. A least-squares
 fit method is used to determine the plane that best fits the geometry that the user can see; in 
 that way, the plane passes through as much scene content as possible to reduce color separation. This is a 
 good default mode for setting up the focus plane, especially in cases where the scene is complex and the 
 optimal focus point and plane may be difficult to determine.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 The plane is computed separately for each holographic camera, since each has its own view of scene geometry,
 and each uses a different depth buffer. The implementation provided by this code sample takes very little 
@@ -48,10 +55,10 @@ Visual Studio 2015 Update 2 and the Microsoft HoloLens Emulator, go to [Install 
 The following Windows Universal APIs are used to demonstrate setting the image stabilization plane 
 in this code sample:
 
-* [Windows.Graphics.Holographic]                                 (https://msdn.microsoft.com/library/windows/apps/windows.graphics.holographic.aspx)
-  * [HolographicCamera class]                                    (https://msdn.microsoft.com/library/windows/apps/windows.graphics.holographic.holographiccamera.aspx)
-  * [HolographicCameraRenderingParameters class]                 (https://msdn.microsoft.com/library/windows/apps/windows.graphics.holographic.holographiccamerarenderingparameters.aspx)
-  * [HolographicCameraRenderingParameters.SetFocusPoint methods] (https://msdn.microsoft.com/library/windows/apps/windows.graphics.holographic.holographiccamerarenderingparameters.setfocuspoint.aspx)
+[Windows.Graphics.Holographic](https://msdn.microsoft.com/library/windows/apps/windows.graphics.holographic.aspx)  
+[HolographicCamera class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.holographic.holographiccamera.aspx)  
+[HolographicCameraRenderingParameters class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.holographic.holographiccamerarenderingparameters.aspx)  
+[HolographicCameraRenderingParameters.SetFocusPoint methods](https://msdn.microsoft.com/library/windows/apps/windows.graphics.holographic.holographiccamerarenderingparameters.setfocuspoint.aspx)  
 
 ## System requirements
 

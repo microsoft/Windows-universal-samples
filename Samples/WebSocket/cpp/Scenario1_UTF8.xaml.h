@@ -48,6 +48,9 @@ namespace SDKTemplate
         void SetBusy(bool value);
         Concurrency::task<void> ConnectAsync();
         Concurrency::task<void> SendAsync();
+        void OnServerCustomValidationRequested(
+            Windows::Networking::Sockets::MessageWebSocket^ sender,
+            Windows::Networking::Sockets::WebSocketServerCustomValidationRequestedEventArgs^ args);
         void MessageReceived(Windows::Networking::Sockets::MessageWebSocket^ sender, Windows::Networking::Sockets::MessageWebSocketMessageReceivedEventArgs^ args);
         void OnClosed(Windows::Networking::Sockets::IWebSocket^ sender, Windows::Networking::Sockets::WebSocketClosedEventArgs^ args);
         void CloseSocket();
