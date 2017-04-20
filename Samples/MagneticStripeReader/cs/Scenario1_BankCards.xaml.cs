@@ -47,7 +47,7 @@ namespace MagneticStripeReaderSample
         {
             if (_reader == null)
             {
-                _reader = await MagneticStripeReader.GetDefaultAsync();
+                _reader = await DeviceHelpers.GetFirstMagneticStripeReaderAsync();
 
                 if (_reader == null)
                 {

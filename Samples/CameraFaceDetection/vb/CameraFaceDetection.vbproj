@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{1399F59A-6590-4E35-ACCF-5200C175D88B}</ProjectGuid>
+    <ProjectGuid>{FE524B11-F10F-5FFB-A99C-8159C285952A}</ProjectGuid>
     <!--<OutputType>AppContainerExe</OutputType>-->
     <OutputType>AppContainerExe</OutputType>
     <RootNamespace>CameraFaceDetection</RootNamespace>

@@ -111,7 +111,7 @@
 
         return new WinJS.Promise(function (complete) {
 
-            Windows.Devices.PointOfService.CashDrawer.getDefaultAsync().then(function (drawer) {
+            SdkSample.getFirstCashDrawerAsync().then(function (drawer) {
                 if (drawer == null) {
                     WinJS.log("Cash drawer not found. Please connect a cash drawer.", "sample", "error");
                     complete(false);

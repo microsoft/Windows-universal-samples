@@ -11,6 +11,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Windows.Devices.PointOfService;
 using Windows.UI.Xaml.Controls;
 
 namespace SDKTemplate
@@ -32,4 +34,13 @@ namespace SDKTemplate
         public string Title { get; set; }
         public Type ClassType { get; set; }
     }
+
+    public partial class DeviceHelpers
+    {
+        public static async Task<CashDrawer> GetFirstCashDrawerAsync()
+        {
+            return await DeviceHelpers.GetFirstDeviceAsync(CashDrawer.GetDeviceSelector(), async (id) => await CashDrawer.FromIdAsync(id));
+        }
+    }
+
 }

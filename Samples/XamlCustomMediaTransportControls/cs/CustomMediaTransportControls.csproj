@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{5A2B30C7-AC83-4F55-8499-2171234D35A0}</ProjectGuid>
+    <ProjectGuid>{B397E091-AE11-5661-83FF-CFF196FCBF8D}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CustomMediaTransportControls</RootNamespace>

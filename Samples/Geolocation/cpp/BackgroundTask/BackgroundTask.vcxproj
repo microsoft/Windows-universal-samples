@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{a4072f75-ff35-4895-8559-8b67d00ff210}</ProjectGuid>
+    <ProjectGuid>{c7b15ce8-2898-5ddf-b8c2-3cab65f06626}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>BackgroundTask</ProjectName>
     <RootNamespace>BackgroundTask</RootNamespace>
@@ -37,7 +37,7 @@
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
     <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformMinVersion>10.0.14393.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

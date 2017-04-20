@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{93604df9-78be-473f-a9cb-9e7d1f8ab565}</ProjectGuid>
+    <ProjectGuid>{9f618e63-10bc-5420-80ac-1887629f81fd}</ProjectGuid>
     <RootNamespace>CameraVideoStabilization</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

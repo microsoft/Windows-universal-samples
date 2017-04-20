@@ -44,4 +44,9 @@ namespace SDKTemplate
         Platform::String^ Title;
         Platform::String^ ClassName;
     };
+
+    namespace DeviceHelpers
+    {
+        Concurrency::task<Windows::Devices::PointOfService::CashDrawer^> GetFirstCashDrawerAsync();
+    }
 }

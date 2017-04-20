@@ -19,7 +19,8 @@ Specifically, this sample shows how to:
 
 1.  **Get the magnetic stripe reader**
 
-    Uses the [MagneticStripeReader.GetDefaultAsync](http://msdn.microsoft.com/library/windows/apps/dn297987) method to get the first available magnetic stripe reader.
+    Uses a [**DeviceWatcher**](https://docs.microsoft.com/en-us/uwp/api/Windows.Devices.Enumeration.DeviceWatcher)
+    to enumerate and select the first magnetic stripe reader.
 
 2.  **Claim the magnetic stripe reader for exclusive use**
 

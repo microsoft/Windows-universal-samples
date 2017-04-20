@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0748B16E-2455-494B-9D33-0231960FF58A}</ProjectGuid>
+    <ProjectGuid>{2C44A9D0-8EFD-59A5-9ADE-B5069EE6AC8B}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>xBindSampleModel</RootNamespace>

@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{00000000-0000-0000-000A-000000000001}</ProjectGuid>
+    <ProjectGuid>{455D9D8C-4FB2-5698-9CC9-A558E8D932AD}</ProjectGuid>
     <RootNamespace>DWriteColorTextRenderer</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

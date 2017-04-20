@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{0a9e8245-5676-4b45-b34b-756927d85b3c}</ProjectGuid>
+    <ProjectGuid>{3332dcd5-27a8-591b-b44e-727ef9036fbe}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>Scenario1WinRTComponent</ProjectName>
     <RootNamespace>com.microsoft.Samples.SecureInterface</RootNamespace>

@@ -12,8 +12,13 @@
 #include "pch.h"
 #include "MainPage.xaml.h"
 #include "SampleConfiguration.h"
+#include "DeviceHelpers.h"
 
+using namespace Concurrency;
+using namespace Platform;
 using namespace SDKTemplate;
+using namespace Windows::Devices::PointOfService;
+using namespace Windows::Foundation;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
@@ -21,3 +26,22 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Receipt Printer Error Handling", "SDKTemplate.Scenario2_ErrorHandling" },
     { "Multiple Receipt Printers", "SDKTemplate.Scenario3_MultipleReceipt" }
 };
+
+task<PosPrinter^> DeviceHelpers::GetFirstReceiptPrinterAsync()
+{
+    return DeviceHelpers::GetFirstDeviceAsync(PosPrinter::GetDeviceSelector(),
+        [](String^ id)
+    {
+        return create_task(PosPrinter::FromIdAsync(id)).then([](PosPrinter^ printer)
+        {
+            if (printer && printer->Capabilities->Receipt->IsPrinterPresent)
+            {
+                return printer;
+            }
+            else
+            {
+                return static_cast<PosPrinter^>(nullptr);
+            }
+        });
+    });
+}

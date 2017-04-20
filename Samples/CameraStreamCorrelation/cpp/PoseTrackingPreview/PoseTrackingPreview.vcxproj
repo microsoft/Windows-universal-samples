@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{67b5157a-25b1-4ec3-98cf-50e1b9177db4}</ProjectGuid>
+    <ProjectGuid>{a48a1d2b-2439-56d2-afc0-199b62332cfc}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>PoseTrackingPreview</ProjectName>
     <RootNamespace>WindowsPreview.Media.Capture.Frames</RootNamespace>

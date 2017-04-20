@@ -44,7 +44,7 @@ Scenario1_BankCards::Scenario1_BankCards()
 /// </summary>
 task<void> Scenario1_BankCards::CreateDefaultReaderObject()
 {
-    return create_task(MagneticStripeReader::GetDefaultAsync()).then([this](MagneticStripeReader^ reader)
+    return create_task(DeviceHelpers::GetFirstMagneticStripeReaderAsync()).then([this](MagneticStripeReader^ reader)
     {
         _reader = reader;
         if (_reader == nullptr)

@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{94560d69-a345-4e44-b897-eaa2b0e23238}</ProjectGuid>
+    <ProjectGuid>{f1cdb126-d2e6-593b-a908-19a5545b3b1e}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>TreeViewControl</ProjectName>
     <RootNamespace>TreeViewControl</RootNamespace>

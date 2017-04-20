@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{11423e71-80c2-40bc-87fb-8c1d97bf3e25}</ProjectGuid>
+    <ProjectGuid>{b5ea084d-b6ea-512e-85e1-a505e61c602b}</ProjectGuid>
     <RootNamespace>Simple3DGameXaml</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

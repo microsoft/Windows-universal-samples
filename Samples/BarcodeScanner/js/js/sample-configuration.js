@@ -23,7 +23,7 @@
 
     function getFirstBarcodeScannerAsync() {
         return DeviceHelpers.getFirstDeviceAsync(BarcodeScanner.getDeviceSelector(), (id) => BarcodeScanner.fromIdAsync(id));
-}
+    }
 
     WinJS.Namespace.define("SdkSample", {
         sampleTitle: sampleTitle,

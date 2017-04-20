@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{dcd26505-40fb-4396-a9fc-92460e709480}</ProjectGuid>
+    <ProjectGuid>{05475163-3e86-5a90-82e1-cb640c33ff4d}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>HttpFilters</ProjectName>
     <RootNamespace>HttpFilters</RootNamespace>

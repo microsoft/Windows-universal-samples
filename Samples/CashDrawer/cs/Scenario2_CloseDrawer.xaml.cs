@@ -141,7 +141,7 @@ namespace SDKTemplate
 
             if (drawer == null)
             {
-                drawer = await CashDrawer.GetDefaultAsync();
+                drawer = await DeviceHelpers.GetFirstCashDrawerAsync();
                 if (drawer == null)
                     return false;
             }

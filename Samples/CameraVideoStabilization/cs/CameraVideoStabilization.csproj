@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{F4E2FB30-5D0E-4427-9C0D-DF01131362E7}</ProjectGuid>
+    <ProjectGuid>{87CC179B-0FB9-517E-838E-24E0ED46D9C0}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CameraVideoStabilization</RootNamespace>

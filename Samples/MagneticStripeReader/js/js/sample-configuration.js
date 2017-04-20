@@ -19,8 +19,15 @@
         { url: "/html/Scenario2_AamvaCards.html", title: "AamvaCardDataReceived Event" }
     ];
 
+    var MagneticStripeReader = Windows.Devices.PointOfService.MagneticStripeReader;
+
+    function getFirstMagneticStripeReaderAsync() {
+        return DeviceHelpers.getFirstDeviceAsync(MagneticStripeReader.getDeviceSelector(), (id) => MagneticStripeReader.fromIdAsync(id));
+    }
+
     WinJS.Namespace.define("SdkSample", {
         sampleTitle: sampleTitle,
-        scenarios: new WinJS.Binding.List(scenarios)
+        scenarios: new WinJS.Binding.List(scenarios),
+        getFirstMagneticStripeReaderAsync: getFirstMagneticStripeReaderAsync
     });
 })();

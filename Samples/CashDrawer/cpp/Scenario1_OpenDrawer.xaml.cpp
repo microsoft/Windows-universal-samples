@@ -123,7 +123,7 @@ task<bool> Scenario1_OpenDrawer::CreateDefaultCashDrawerObject()
 {
     rootPage->NotifyUser("Creating cash drawer object.", NotifyType::StatusMessage);
 
-    return create_task(CashDrawer::GetDefaultAsync()).then([this](CashDrawer^ defaultDrawer)
+    return DeviceHelpers::GetFirstCashDrawerAsync().then([this](CashDrawer^ defaultDrawer)
     {
         if (defaultDrawer == nullptr)
             return false;

@@ -269,7 +269,7 @@
         return new WinJS.Promise(function (complete) {
 
             // Get the handle to the default scanner 
-            Windows.Devices.PointOfService.BarcodeScanner.getDefaultAsync().done(function (scanner) {
+            SdkSample.getFirstBarcodeScannerAsync().done(function (scanner) {
                 if (scanner !== null) {
 
                     switch (instance) {

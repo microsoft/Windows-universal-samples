@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{a003ec31-4a21-4497-9efa-66773c67b81e}</ProjectGuid>
+    <ProjectGuid>{02ece961-fb18-51a8-9338-d8094bf7410d}</ProjectGuid>
     <Keyword>HolographicApp</Keyword>
     <RootNamespace>HolographicFaceTracker</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>

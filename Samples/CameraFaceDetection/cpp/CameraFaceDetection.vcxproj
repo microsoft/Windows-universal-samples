@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9bc07004-b531-49aa-944b-72fa3c25e190}</ProjectGuid>
+    <ProjectGuid>{fcc760c9-f16e-5ade-8eaa-d240e2b5fc6b}</ProjectGuid>
     <RootNamespace>FaceDetection</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
