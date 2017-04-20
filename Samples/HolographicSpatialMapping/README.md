@@ -49,7 +49,7 @@ To obtain information about Windows 10 development, go to the [Windows Dev Cente
 
 To obtain information about the tools used for Windows Holographic development, including
 Microsoft Visual Studio 2015 Update 2 and the Microsoft HoloLens Emulator, go to
-[Install the tools](https://developer.microsoft.com/windows/holographic/install_the_tools).
+[Install the tools](https://developer.microsoft.com/en-us/windows/mixed-reality/install_the_tools).
 
 ## Reference
 

@@ -1,4 +1,4 @@
-﻿<!---
+<!---
   category: Holographic
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=832542
 --->
@@ -29,8 +29,7 @@ For an example, see the [Holographic Tag-along Sample](http://go.microsoft.com/f
 
 This sample demonstrates best practices for user comfort by always setting the image stabilization plane.
 
-**Note** The image stabilization plane can be observed via the [Windows Device Portal] 
-(https://developer.microsoft.com/windows/holographic/Using_the_Windows_Device_Portal.html).
+**Note** The image stabilization plane can be observed via the [Windows Device Portal](https://developer.microsoft.com/windows/mixed-reality/Using_the_Windows_Device_Portal.html).
 
 ## Compute shaders
 
@@ -47,8 +46,7 @@ Microsoft HoloLens and the Microsoft HoloLens Emulator.
 To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421).
 
 To obtain information about the tools used for Windows Holographic development, including Microsoft 
-Visual Studio 2015 Update 2 and the Microsoft HoloLens Emulator, go to [Install the tools]
-(https://developer.microsoft.com/windows/holographic/install_the_tools).
+Visual Studio 2015 Update 2 and the Microsoft HoloLens Emulator, go to [Install the tools](https://developer.microsoft.com/windows/mixed-reality/install_the_tools).
 
 ## Reference
 
@@ -88,8 +86,7 @@ run it.
 
 ### Deploying the sample to a Microsoft HoloLens
 
-- Developer unlock your Microsoft HoloLens. For instructions, go to [Enable your device for development]
-  (https://msdn.microsoft.com/windows/uwp/get-started/enable-your-device-for-development#enable-your-windows-10-devices).
+- Developer unlock your Microsoft HoloLens. For instructions, go to [Enable your device for development](https://msdn.microsoft.com/windows/uwp/get-started/enable-your-device-for-development#enable-your-windows-10-devices).
 - Find the IP address of your Microsoft HoloLens. The IP address can be found in **Settings** \> 
   **Network & Internet** \> **Wi-Fi** \> **Advanced options**. Or, you can ask Cortana for this 
   information by saying: "Hey Cortana, what's my IP address?"
