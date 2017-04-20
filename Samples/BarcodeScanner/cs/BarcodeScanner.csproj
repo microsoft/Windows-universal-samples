@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
+    <ProjectGuid>{676FCC42-46A5-5156-9CD9-95C8A68EF3EA}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>BarcodeScanner</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15021.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15021.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -106,6 +106,12 @@
     <Compile Include="Scenario2_MultipleScanners.xaml.cs">
       <DependentUpon>Scenario2_MultipleScanners.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario3_ActiveSymbologies.xaml.cs">
+      <DependentUpon>Scenario3_ActiveSymbologies.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario4_SymbologyAttributes.xaml.cs">
+      <DependentUpon>Scenario4_SymbologyAttributes.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -130,6 +136,16 @@
     </Page>
     <Page Include="..\shared\Scenario2_MultipleScanners.xaml">
       <Link>Scenario2_MultipleScanners.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario3_ActiveSymbologies.xaml">
+      <Link>Scenario3_ActiveSymbologies.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario4_SymbologyAttributes.xaml">
+      <Link>Scenario4_SymbologyAttributes.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

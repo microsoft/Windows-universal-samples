@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "SimpleImaging", "SimpleImaging.jsproj", "{C2ADB9AF-EDB3-4E57-8056-9D0531D4A6B2}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "SimpleImaging", "SimpleImaging.jsproj", "{9228D607-45FC-57F8-A307-0728C026F272}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +11,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C2ADB9AF-EDB3-4E57-8056-9D0531D4A6B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2ADB9AF-EDB3-4E57-8056-9D0531D4A6B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2ADB9AF-EDB3-4E57-8056-9D0531D4A6B2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{C2ADB9AF-EDB3-4E57-8056-9D0531D4A6B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2ADB9AF-EDB3-4E57-8056-9D0531D4A6B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C2ADB9AF-EDB3-4E57-8056-9D0531D4A6B2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9228D607-45FC-57F8-A307-0728C026F272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9228D607-45FC-57F8-A307-0728C026F272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9228D607-45FC-57F8-A307-0728C026F272}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9228D607-45FC-57F8-A307-0728C026F272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9228D607-45FC-57F8-A307-0728C026F272}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9228D607-45FC-57F8-A307-0728C026F272}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

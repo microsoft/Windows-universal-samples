@@ -12,6 +12,7 @@
 (function () {
     "use strict";
     var DeviceInformation = Windows.Devices.Enumeration.DeviceInformation;
+    var PosConnectionTypes = Windows.Devices.PointOfService.PosConnectionTypes;
     var LineDisplay = Windows.Devices.PointOfService.LineDisplay;
     var ClaimedLineDisplay = Windows.Devices.PointOfService.ClaimedLineDisplay;
 
@@ -28,7 +29,7 @@
             selectButton.addEventListener("click", selectLineDisplay, false);
 
             // Enumerate all the LineDisplay devices and put them in our list box.
-            DeviceInformation.findAllAsync(LineDisplay.getDeviceSelector(), [])
+            DeviceInformation.findAllAsync(LineDisplay.getDeviceSelector(PosConnectionTypes.all), [])
                 .then(function(deviceInfoCollection) {
                     deviceInfoCollection.forEach(function(deviceInfo) {
                         var newOption = document.createElement("option");

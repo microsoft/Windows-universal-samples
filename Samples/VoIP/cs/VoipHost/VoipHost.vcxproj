@@ -33,7 +33,7 @@
     <AppxManifest Include="..\voip\package.appxmanifest" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{016d497f-0ee0-449e-89f5-bd63f7f9a8a6}</ProjectGuid>
+    <ProjectGuid>{20963476-e773-51cf-ab1c-17678dab756e}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>VoipHost</ProjectName>
     <RootNamespace>VoipHost</RootNamespace>
@@ -41,8 +41,8 @@
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.15063.0</WindowsTargetPlatformMinVersion>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

@@ -1,0 +1,35 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.DeviceEvents"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                This scenario uses asynchronous I/O controls to receive events from a device driver.
+                See the README for instructions on how to use this scenario.
+            </TextBlock>
+            <Button Content="Get Switch State from Fx2 Device" Margin="0,10,0,0" Click="deviceEventsGet_Click" Width="300"/>
+            <Button x:Name="deviceEventsBegin" Content="Begin Receiving Switch Change Events" Margin="0,10,0,0" Click="deviceEventsBegin_Click" Width="300"/>
+            <Button x:Name="deviceEventsCancel" Content="Stop Receiving Switch Change Events" Margin="0,10,0,0" Click="deviceEventsCancel_Click" Width="300"/>
+            <TextBlock TextWrapping="Wrap" Text="The switch state will be displayed below.  Bold entries have changed value." Margin="0,10,0,0"/>
+            <TextBlock x:Name="deviceEventsSwitches" FontFamily="Consolas" Margin="0,10,0,0"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -30,7 +30,7 @@ namespace SDKTemplate
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             // Enumerate all the LineDisplay devices and put them in our list box.
-            DeviceInformationCollection deviceInfoCollection = await DeviceInformation.FindAllAsync(LineDisplay.GetDeviceSelector());
+            DeviceInformationCollection deviceInfoCollection = await DeviceInformation.FindAllAsync(LineDisplay.GetDeviceSelector(PosConnectionTypes.All));
             foreach (DeviceInformation deviceInfo in deviceInfoCollection)
             {
                 var item = new ListBoxItem();

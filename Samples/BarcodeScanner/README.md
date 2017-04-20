@@ -18,7 +18,8 @@ This sample shows how to:
 
 1.  **Obtain the barcode scanner**
 
-    Uses [BarcodeScanner.GetDefaultAsync](http://msdn.microsoft.com/library/windows/apps/dn263790) to get the first available barcode scanner.
+    Uses a [**DeviceWatcher**](https://docs.microsoft.com/en-us/uwp/api/Windows.Devices.Enumeration.DeviceWatcher)
+    to enumerate and select the first barcode scanner.
 
 2.  **Claim the barcode scanner for exclusive use**
 
@@ -30,15 +31,23 @@ This sample shows how to:
 
     When an application gets a request to release its exclusive claim to the barcode scanner, it must handle the request by retaining the device; otherwise, it will lose its claim. The second scenario in this sample shows the release and retain functionality. The event handler for [ReleaseDeviceRequested](http://msdn.microsoft.com/library/windows/apps/dn278578) shows how retain the device.
 
+4.  **Set active symbologies**
+
+    Uses the [GetSupportedSymbologiesAsync](https://msdn.microsoft.com/library/windows/apps/windows.devices.pointofservice.barcodescanner.getsupportedsymbologiesasync) method
+    to determine which symbologies are supported by the scanner
+    and the [SetActiveSymbologiesAsync](https://msdn.microsoft.com/library/windows/apps/windows.devices.pointofservice.claimedbarcodescanner.setactivesymbologiesasync) method
+    to specify which symbologies are active.
+
+5. **Set symbology attributes**
+
+    Uses the [GetSymbologyAttributesAsync](https://msdn.microsoft.com/library/windows/apps/windows.devices.pointofservice.claimedbarcodescanner.getsymbologyattributesasync) method
+    to determine what symbology attributes are supported by the scanner
+    and the [SetSymbologyAttributesAsync](https://msdn.microsoft.com/library/windows/apps/windows.devices.pointofservice.claimedbarcodescanner.setsymbologyattributesasync) method
+    to enable or disable them.
+
 The app package manifest shows how to specify the device capability name for the Point of Service (POS) devices. All POS apps are required declare [DeviceCapability](http://msdn.microsoft.com/library/windows/apps/br211430) in the app package manifest, either by using "PointofService" as shown in this sample or by using a device specific GUID, such as "C243FFBD-3AFC-45E9-B3D3-2BA18BC7EBC5" for a barcode scanner.
 
-The following list shows the barcode scanners that were used with this sample:
-
--   Honeywell 1900GSR-2
--   Honeywell 1200g-2
--   Intermec SG20
-
-In addition to the devices listed, you can use barcode scanners from various manufacturers that adhere to the [USB HID POS Scanner specification](http://go.microsoft.com/fwlink/p/?linkid=309230).
+For a list of compatible barcode scanners, see [Barcode Scanner Compatible Hardware](https://docs.microsoft.com/en-us/windows/uwp/devices-sensors/barcode-scanner#compatible-hardware).
 
 **Note** The Universal Windows app samples require Visual Studio 2015 to build and Windows 10 to execute.
  
@@ -51,6 +60,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 ### Reference
 
 [Windows.Devices.PointOfService namespace](http://msdn.microsoft.com/library/windows/apps/dn298071)  
+[Barcode Scanner Compatible Hardware](https://docs.microsoft.com/en-us/windows/uwp/devices-sensors/barcode-scanner#compatible-hardware)  
 [USB HID POS Scanner specification](http://go.microsoft.com/fwlink/p/?linkid=309230)  
 [Windows app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 

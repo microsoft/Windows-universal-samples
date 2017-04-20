@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>81d95eea-286c-4a5e-98f1-eef612020bf0</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>85b464d3-9e56-4242-b58b-1f226dd034b4</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="ViewModel">
+      <UniqueIdentifier>{1c0f2943-52c2-4a54-93a2-971c14e7c8ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model">
+      <UniqueIdentifier>{33085be2-4c37-4eab-8f6e-6add0cffe2d4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="RpcClient.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Fx2Driver.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceList.cpp">
+      <Filter>ViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleConfiguration.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenario1_MeteringData.xaml.cpp" />
+    <ClCompile Include="Scenario2_DeviceConnect.xaml.cpp" />
+    <ClCompile Include="Scenario3_DeviceIO.xaml.cpp" />
+    <ClCompile Include="Scenario4_DeviceEvents.xaml.cpp" />
+    <ClCompile Include="Scenario5_DeviceReadWrite.xaml.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
+    <ClCompile Include="ServiceViewModel.cpp">
+      <Filter>ViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="RpcInterface.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="RpcClient.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Fx2Driver.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceList.h">
+      <Filter>ViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleConfiguration.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenario1_MeteringData.xaml.h" />
+    <ClInclude Include="Scenario2_DeviceConnect.xaml.h" />
+    <ClInclude Include="Scenario3_DeviceIO.xaml.h" />
+    <ClInclude Include="Scenario4_DeviceEvents.xaml.h" />
+    <ClInclude Include="Scenario5_DeviceReadWrite.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
+    <ClInclude Include="ServiceViewModel.h">
+      <Filter>ViewModel</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Scenario1_MeteringData.xaml" />
+    <Page Include="Scenario2_DeviceConnect.xaml" />
+    <Page Include="Scenario3_DeviceIO.xaml" />
+    <Page Include="Scenario4_DeviceEvents.xaml" />
+    <Page Include="Scenario5_DeviceReadWrite.xaml" />
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml" />
+    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CustomCapability.SCCD" />
+  </ItemGroup>
+</Project>

@@ -116,7 +116,7 @@ namespace SDKTemplate
 
             if (drawer == null)
             {
-                drawer = await CashDrawer.GetDefaultAsync();
+                drawer = await DeviceHelpers.GetFirstCashDrawerAsync();
                 if (drawer == null)
                     return false;
             }
@@ -175,8 +175,6 @@ namespace SDKTemplate
         /// </summary>
         private void ResetScenarioState()
         {
-            drawer = null;
-
             if (claimedDrawer != null)
             {
                 claimedDrawer.Dispose();

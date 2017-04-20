@@ -80,7 +80,7 @@ namespace SDKTemplate
             rootPage.NotifyUser("Creating cash drawer object.", NotifyType.StatusMessage);
 
             CashDrawer tempDrawer = null;
-            tempDrawer = await CashDrawer.GetDefaultAsync();
+            tempDrawer = await DeviceHelpers.GetFirstCashDrawerAsync();
 
             if (tempDrawer == null)
             {
@@ -308,9 +308,6 @@ namespace SDKTemplate
         /// </summary>
         private void ResetScenarioState()
         {
-            cashDrawerInstance1 = null;
-            cashDrawerInstance2 = null;
-
             if (claimedCashDrawerInstance1 != null)
             {
                 claimedCashDrawerInstance1.Dispose();

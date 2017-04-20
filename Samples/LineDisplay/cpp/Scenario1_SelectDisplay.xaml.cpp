@@ -31,7 +31,7 @@ Scenario1_SelectDisplay::Scenario1_SelectDisplay()
 void Scenario1_SelectDisplay::OnNavigatedTo(NavigationEventArgs^ e)
 {
     // Enumerate all the LineDisplay devices and put them in our list box.
-    create_task(DeviceInformation::FindAllAsync(LineDisplay::GetDeviceSelector()))
+    create_task(DeviceInformation::FindAllAsync(LineDisplay::GetDeviceSelector(PosConnectionTypes::All)))
         .then([this](DeviceInformationCollection^ deviceInfoCollection)
     {
         for (DeviceInformation^ deviceInfo : deviceInfoCollection)

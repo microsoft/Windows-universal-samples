@@ -44,4 +44,11 @@ namespace SDKTemplate
         Platform::String^ Title;
         Platform::String^ ClassName;
     };
+
+    namespace DeviceHelpers
+    {
+        // By default, use all connections types.
+        Concurrency::task<Windows::Devices::PointOfService::CashDrawer^> GetFirstCashDrawerAsync(
+            Windows::Devices::PointOfService::PosConnectionTypes connectionTypes = Windows::Devices::PointOfService::PosConnectionTypes::All);
+    }
 }
