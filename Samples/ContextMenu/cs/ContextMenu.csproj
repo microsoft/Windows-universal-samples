@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{CF1CD0D5-BF6B-457A-9927-8079FC667CA4}</ProjectGuid>
+    <ProjectGuid>{70AFD320-6C8F-5286-9F7F-CD174D7EE16D}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ContextMenu</RootNamespace>

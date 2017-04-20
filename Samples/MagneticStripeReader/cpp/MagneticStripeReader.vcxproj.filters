@@ -24,6 +24,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\DeviceHelpers.h" />
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_BankCards.xaml.h" />
     <ClInclude Include="Scenario2_AamvaCards.xaml.h" />

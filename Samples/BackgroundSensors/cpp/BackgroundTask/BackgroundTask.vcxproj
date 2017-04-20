@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{80817785-47d6-4c50-ba30-fba9680b6e4f}</ProjectGuid>
+    <ProjectGuid>{dfb94978-7cd3-56e2-bc54-1dc3eb7d328f}</ProjectGuid>
     <Keyword>DynamicLibrary</Keyword>
     <ProjectName>BackgroundTask</ProjectName>
     <RootNamespace>BackgroundTask</RootNamespace>

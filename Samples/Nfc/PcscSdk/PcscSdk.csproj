@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{78F7351D-0EB3-49E4-B257-36B7977954F9}</ProjectGuid>
+    <ProjectGuid>{536D843A-DE8A-5F91-91A0-887870464C98}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PcscSdk</RootNamespace>

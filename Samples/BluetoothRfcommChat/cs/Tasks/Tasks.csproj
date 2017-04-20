@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{13331B5B-97D7-4290-A230-67BAEAE415C5}</ProjectGuid>
+    <ProjectGuid>{FCD52825-3717-5515-81E7-4A6FA4DD33FD}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BackgroundTasks</RootNamespace>

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{321760af-52bd-4e08-9e80-abfa21c512fe}</ProjectGuid>
+    <ProjectGuid>{095af6c8-d5f1-51a7-9b20-6cb812517aec}</ProjectGuid>
     <RootNamespace>CameraHdr</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

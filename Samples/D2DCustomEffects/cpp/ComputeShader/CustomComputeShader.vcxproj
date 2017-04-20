@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{0b1bcb37-6ef7-4a76-ba59-65259b1c4628}</ProjectGuid>
+    <ProjectGuid>{94a0e086-d1f6-5881-9bcd-2499a51a0adf}</ProjectGuid>
     <RootNamespace>CustomComputeShader</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

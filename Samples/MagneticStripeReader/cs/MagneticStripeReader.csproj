@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
+    <ProjectGuid>{EFB2C9DA-F38E-53DC-9AA5-77CC22E37440}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MagneticStripeReaderSample</RootNamespace>
@@ -95,6 +95,9 @@
     </Compile>
     <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\DeviceHelpers.cs">
+      <Link>DeviceHelpers.cs</Link>
     </Compile>
     <Compile Include="SampleConfiguration.cs" />
     <Compile Include="Scenario1_BankCards.xaml.cs">

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{5ABBEEED-B941-429D-BABA-ED7102469866}</ProjectGuid>
+    <ProjectGuid>{F08C07B2-C6F6-5EE2-BD57-660F5A30DB76}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CameraGetPreviewFrame</RootNamespace>

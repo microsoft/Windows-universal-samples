@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{F858F338-9807-4075-AC17-1DDC06979C55}</ProjectGuid>
+    <ProjectGuid>{CDD2C633-4A90-5F90-8A55-B4A18A136F0E}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CameraManualControls</RootNamespace>

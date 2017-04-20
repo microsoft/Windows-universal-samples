@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{3615c4fb-b023-4914-8dbe-8f733f59d0f8}</ProjectGuid>
+    <ProjectGuid>{57865ed2-95ff-5f97-9eea-a63c5b1fd73a}</ProjectGuid>
     <RootNamespace>CustomVertexShader</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

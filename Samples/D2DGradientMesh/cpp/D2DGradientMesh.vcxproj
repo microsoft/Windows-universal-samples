@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{00000000-0000-0000-000A-000000000001}</ProjectGuid>
+    <ProjectGuid>{7E9A7F4A-99F2-573D-8485-1B470E773B04}</ProjectGuid>
     <RootNamespace>D2DGradientMesh</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

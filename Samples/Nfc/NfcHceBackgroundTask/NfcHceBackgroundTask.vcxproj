@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{a086ac6b-7a90-45fe-b26a-b58ea1c1d600}</ProjectGuid>
+    <ProjectGuid>{ce234a01-9d47-5f41-95e2-9e00204cc808}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>NfcHceBackgroundTask</ProjectName>
     <RootNamespace>NfcHceBackgroundTask</RootNamespace>

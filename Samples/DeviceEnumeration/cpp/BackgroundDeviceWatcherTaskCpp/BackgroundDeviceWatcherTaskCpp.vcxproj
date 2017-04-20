@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6e323ca9-b536-4bad-8b98-36b9d2e0f0af}</ProjectGuid>
+    <ProjectGuid>{363e06cc-0d3f-5348-acda-40586620c41b}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>BackgroundDeviceWatcherTaskCpp</ProjectName>
     <RootNamespace>BackgroundDeviceWatcherTaskCpp</RootNamespace>

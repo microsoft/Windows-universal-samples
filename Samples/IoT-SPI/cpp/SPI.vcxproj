@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{3B1D65E5-AA67-4884-9C5E-3192057468CF}</ProjectGuid>
+    <ProjectGuid>{CE2AD8C7-F425-5DA4-8A16-CF14C9B7C0E0}</ProjectGuid>
     <RootNamespace>SPI</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

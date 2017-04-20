@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{33A68122-A252-4315-A83C-CC1DD9C4CBC9}</ProjectGuid>
+    <ProjectGuid>{E973DBE3-7AE8-5667-AFDA-10AF418787B3}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XamlListView</RootNamespace>

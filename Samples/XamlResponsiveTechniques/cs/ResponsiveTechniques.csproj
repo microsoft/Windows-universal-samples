@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{55AEF524-CB25-476B-82FD-70CBEA6E9625}</ProjectGuid>
+    <ProjectGuid>{B5F8DC55-D04C-57BF-9EBA-7F56034A8FD9}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XAMLResponsiveTechniques</RootNamespace>

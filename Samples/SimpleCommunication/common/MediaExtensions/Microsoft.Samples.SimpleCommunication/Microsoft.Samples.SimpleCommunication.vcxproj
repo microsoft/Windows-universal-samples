@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{dfeea5aa-d079-40f7-bfd3-394d5c000047}</ProjectGuid>
+    <ProjectGuid>{4647778c-91ae-5487-8b51-4683a054df0e}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>Microsoft.Samples.SimpleCommunication</ProjectName>
     <RootNamespace>Microsoft.Samples.SimpleCommunication</RootNamespace>

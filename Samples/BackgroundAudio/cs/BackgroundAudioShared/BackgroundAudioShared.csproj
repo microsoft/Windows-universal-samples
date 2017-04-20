@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{62C43640-D9FB-41B8-81B7-A02BE8FACD09}</ProjectGuid>
+    <ProjectGuid>{A29B2274-AF10-53AE-B307-35C61960A168}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BackgroundAudioShared</RootNamespace>

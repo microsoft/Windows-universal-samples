@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{89fbe7fa-911b-4afc-9cf7-d2a316b5c578}</ProjectGuid>
+    <ProjectGuid>{7cea81d5-6f35-5f65-90a2-465233892495}</ProjectGuid>
     <RootNamespace>CustomPixelShader</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

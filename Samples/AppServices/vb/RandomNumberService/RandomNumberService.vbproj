@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{44BD24C4-7750-4F32-B768-27732D7D2ACD}</ProjectGuid>
+    <ProjectGuid>{9FDF5477-94ED-5624-8787-B452118E637F}</ProjectGuid>
     <!--<OutputType>AppContainerExe</OutputType>-->
     <OutputType>winmdobj</OutputType>
     <RootNamespace>RandomNumberService</RootNamespace>

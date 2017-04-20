@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{271E6F44-81FA-43BA-82A5-9991CB0B10EB}</ProjectGuid>
+    <ProjectGuid>{31FB1EE4-9E6C-56FC-A777-8966B5C207C0}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SDK.WebViewSampleCS</RootNamespace>

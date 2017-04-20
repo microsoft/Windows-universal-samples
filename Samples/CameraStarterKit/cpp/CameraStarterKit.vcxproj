@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{73ee6569-b7d0-43a0-ba3e-824910357a29}</ProjectGuid>
+    <ProjectGuid>{366b82f7-ce15-5d81-bc9a-c3dcce339354}</ProjectGuid>
     <RootNamespace>CameraStarterKit</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

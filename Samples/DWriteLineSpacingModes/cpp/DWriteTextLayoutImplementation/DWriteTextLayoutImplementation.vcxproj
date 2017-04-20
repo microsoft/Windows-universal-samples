@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7fc874e6-517d-43b2-bdba-4cf6e3e75ec6}</ProjectGuid>
+    <ProjectGuid>{ca7aab41-c07a-5740-b529-179ade3c6d82}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>DWriteTextLayoutImplementation</ProjectName>
     <RootNamespace>DWriteTextLayoutImplementation</RootNamespace>

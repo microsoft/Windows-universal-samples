@@ -12,11 +12,11 @@
 #include "pch.h"
 #include "MainPage.xaml.h"
 #include "SampleConfiguration.h"
+#include "DeviceHelpers.h"
 
 using namespace Concurrency;
 using namespace Platform;
 using namespace SDKTemplate;
-using namespace Windows::Devices::Enumeration;
 using namespace Windows::Devices::PointOfService;
 using namespace Windows::Foundation;
 

@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{1473efc7-293a-4b43-ba9c-7e2a0e1e23e2}</ProjectGuid>
+    <ProjectGuid>{7307100a-a076-5d78-bba1-bfad68f70f42}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>WRLOutOfProcessWinRTComponent</RootNamespace>
     <ProjectName>WRLOutOfProcessWinRTComponent_server</ProjectName>

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{3AE51190-E29B-44D1-8DC9-6D2868165C15}</ProjectGuid>
+    <ProjectGuid>{F17D48D5-FF38-5288-A455-F7A9DA162E6B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LiveDash</RootNamespace>

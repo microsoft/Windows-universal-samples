@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{ba07eacd-4433-4d54-bfe8-f17f764dcc06}</ProjectGuid>
+    <ProjectGuid>{024459e3-c776-5fe2-af7a-6f9a58c064af}</ProjectGuid>
     <RootNamespace>D2DPhotoAdjustment</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

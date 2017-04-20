@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{62635C39-BF9D-4AF6-A83E-5D6C20A105E5}</ProjectGuid>
+    <ProjectGuid>{EDB301E7-7C90-5A90-9C43-755279D81240}</ProjectGuid>
     <RootNamespace>WRLOutOfProcessWinRTComponent</RootNamespace>
     <ProjectName>WRLOutOfProcessWinRTComponentPS</ProjectName>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

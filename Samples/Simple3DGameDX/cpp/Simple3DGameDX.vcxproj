@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{270AFE5D-E2C3-4B7D-A424-C9A1C6D2E68C}</ProjectGuid>
+    <ProjectGuid>{C4963F1E-248D-5B81-868C-26C59BDBE9DF}</ProjectGuid>
     <RootNamespace>Simple3DGameDX</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

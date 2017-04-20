@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{8D0109B3-FEA4-4740-B850-24A1522348CB}</ProjectGuid>
+    <ProjectGuid>{1C93AD7C-0079-5333-9F30-12C9563AEFCA}</ProjectGuid>
     <!--<OutputType>AppContainerExe</OutputType>-->
     <OutputType>winmdobj</OutputType>
     <RootNamespace>BackgroundAudioTask</RootNamespace>

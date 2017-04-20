@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{B866A3F0-0D25-4146-9855-2C13C424F319}</ProjectGuid>
+    <ProjectGuid>{98B5C5A4-995A-551B-BD35-FC21E1CC79FE}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SmsBackgroundTask</RootNamespace>

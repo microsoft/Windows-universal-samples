@@ -41,8 +41,8 @@
     var _claimedReader = null;
 
     function startRead() {
-        // Get the default magnetic stripe reader.
-        Windows.Devices.PointOfService.MagneticStripeReader.getDefaultAsync().then(function (reader) {
+        // Get the first magnetic stripe reader.
+        SdkSample.getFirstMagneticStripeReaderAsync().then(function (reader) {
             if (reader !== null) {
                 _reader = reader;
 

@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{33d620bb-c9d5-4568-9066-56719fdc096e}</ProjectGuid>
+    <ProjectGuid>{ba8c92f0-f2ff-5de8-989e-858f749c9468}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>StreamUriResolverCPP</ProjectName>
     <RootNamespace>SDK.WebViewSampleCpp</RootNamespace>

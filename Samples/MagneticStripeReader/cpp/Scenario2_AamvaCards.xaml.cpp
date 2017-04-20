@@ -43,7 +43,7 @@ Scenario2_AamvaCards::Scenario2_AamvaCards()
 /// </summary>
 task<void> Scenario2_AamvaCards::CreateDefaultReaderObject()
 {
-    return create_task(MagneticStripeReader::GetDefaultAsync()).then([this](MagneticStripeReader^ reader)
+    return create_task(DeviceHelpers::GetFirstMagneticStripeReaderAsync()).then([this](MagneticStripeReader^ reader)
     {
         _reader = reader;
         if (_reader == nullptr)

@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{62635C39-BF9D-4AF6-A83E-5D6C20A105E5}</ProjectGuid>
+    <ProjectGuid>{F0E96D77-936A-5CA6-AB74-C5CBFD8857F1}</ProjectGuid>
     <RootNamespace>ProxyStubsForWinRTComponents</RootNamespace>
     <ProjectName>ProxyStubsForWinRTComponentsPS</ProjectName>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

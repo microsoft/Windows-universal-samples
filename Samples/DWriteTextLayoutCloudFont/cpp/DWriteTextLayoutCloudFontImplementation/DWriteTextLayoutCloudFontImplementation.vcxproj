@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6bd64053-abd1-41cb-8dae-a81076985137}</ProjectGuid>
+    <ProjectGuid>{8e001f2c-4878-5c5b-a4ee-a7637c487b68}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>DWriteTextLayoutCloudFontImplementation</ProjectName>
     <RootNamespace>DWriteTextLayoutCloudFontImplementation</RootNamespace>

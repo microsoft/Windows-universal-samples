@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{0750F780-D497-45EF-96B4-ABDC0E71A618}</ProjectGuid>
+    <ProjectGuid>{78666EA7-23B1-5678-9D31-3934204D9942}</ProjectGuid>
     <!--<OutputType>AppContainerExe</OutputType>-->
     <OutputType>winmdobj</OutputType>
     <RootNamespace>Tasks</RootNamespace>

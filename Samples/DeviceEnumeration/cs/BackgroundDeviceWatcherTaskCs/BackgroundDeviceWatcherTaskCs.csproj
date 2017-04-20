@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{268FCA4C-EFFB-46DA-A341-D4E3DD5496C4}</ProjectGuid>
+    <ProjectGuid>{45BDB4F3-2813-5FD2-B2CD-A3C5F7069711}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BackgroundDeviceWatcherTaskCs</RootNamespace>

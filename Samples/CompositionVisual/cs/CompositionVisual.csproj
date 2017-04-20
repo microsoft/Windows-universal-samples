@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{C43DEA94-A014-4F89-9865-AEE252BBBE5B}</ProjectGuid>
+    <ProjectGuid>{4795FD49-B830-536C-B88A-89359A6FD0D2}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CompositionVisual</RootNamespace>

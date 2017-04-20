@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{191dc140-ab0d-48c5-8717-d2fa789385bf}</ProjectGuid>
+    <ProjectGuid>{ce8a13a7-145a-51ad-b00e-b6fa97a19e2a}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>Tasks</ProjectName>
     <RootNamespace>Tasks</RootNamespace>

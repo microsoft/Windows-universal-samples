@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9cbe04f9-0f67-4a33-b8f9-15e9b36fea79}</ProjectGuid>
+    <ProjectGuid>{2900c34c-d914-56f8-a781-0e6e5a8c5b7f}</ProjectGuid>
     <RootNamespace>NavigationMenuSample</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

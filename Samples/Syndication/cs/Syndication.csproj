@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{78A8B7A3-0C96-4C43-AE9B-3CA5B8CDF17F}</ProjectGuid>
+    <ProjectGuid>{E7F06CD3-BDC6-5513-9BC7-2B49595D0FF7}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SDKTemplate</RootNamespace>

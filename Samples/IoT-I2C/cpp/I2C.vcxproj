@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{3B1D65E5-AA67-4884-9C5E-3192057468CF}</ProjectGuid>
+    <ProjectGuid>{1C5DD13C-E5D0-55FA-A140-33D6A1312479}</ProjectGuid>
     <RootNamespace>I2C</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

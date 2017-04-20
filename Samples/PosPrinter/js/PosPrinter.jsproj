@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>c2adb9af-edb3-4e57-8056-9d0531d4a6b2</ProjectGuid>
+    <ProjectGuid>6da26924-8665-53d2-9296-e611f146a895</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
@@ -86,6 +86,9 @@
     </Content>
     <Content Include="..\..\..\SharedContent\js\css\default.css">
       <Link>css\default.css</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\js\js\devicehelpers.js">
+      <Link>js\devicehelpers.js</Link>
     </Content>
     <Content Include="js\sample-configuration.js" />
     <Content Include="js\Scenario1_ReceiptPrinter.js" />

@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6a67ca28-89a5-4e04-8a8b-f9decd0c3afe}</ProjectGuid>
+    <ProjectGuid>{b8512b7d-92aa-53ca-aaa3-76fd3bffcd14}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>WinRTComponent</ProjectName>
     <RootNamespace>WinRTComponent</RootNamespace>

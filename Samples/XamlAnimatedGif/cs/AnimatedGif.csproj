@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{E2977354-9F34-43F1-BAB7-E29A912CCB7F}</ProjectGuid>
+    <ProjectGuid>{6AFA06BB-7710-5516-8827-D81AA7BAE0A1}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AnimatedGif</RootNamespace>

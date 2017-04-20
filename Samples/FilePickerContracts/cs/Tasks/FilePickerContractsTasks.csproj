@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{428FA31B-64E3-4F6D-894F-C0A886577C35}</ProjectGuid>
+    <ProjectGuid>{F0C50B30-F859-567C-A037-9BF32598A1B9}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FilePickerContractsTasks</RootNamespace>

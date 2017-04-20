@@ -45,7 +45,7 @@ Scenario2_MultipleScanners::Scenario2_MultipleScanners()
 /// </summary>
 task<void> Scenario2_MultipleScanners::CreateDefaultScannerObject(BarcodeScannerInstance instance)
 {
-    return create_task(BarcodeScanner::GetDefaultAsync()).then([this, instance](BarcodeScanner^ _scanner)
+    return DeviceHelpers::GetFirstBarcodeScannerAsync().then([this, instance](BarcodeScanner^ _scanner)
     {
         if (_scanner == nullptr)
         {

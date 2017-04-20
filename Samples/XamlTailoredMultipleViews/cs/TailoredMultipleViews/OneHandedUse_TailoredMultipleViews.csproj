@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{4E44140D-4A40-44F6-94EA-828468A73D83}</ProjectGuid>
+    <ProjectGuid>{CCB01CA4-9DFD-5186-BEF4-52C83529FC8E}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OneHandedUse_TailoredMultipleViews</RootNamespace>

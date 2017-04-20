@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{f8a147ce-9fab-44c5-aa1c-bb2e16e8ff41}</ProjectGuid>
+    <ProjectGuid>{227e9029-3e79-540e-b9c8-9d78b205f458}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>DisplaySizeHelper</ProjectName>
     <RootNamespace>DisplaySizeHelper</RootNamespace>

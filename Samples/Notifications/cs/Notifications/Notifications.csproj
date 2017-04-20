@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{90969BAA-F4EB-49A3-ADB6-F2B64AF9877A}</ProjectGuid>
+    <ProjectGuid>{B2494DBD-E080-5AED-BBFC-075D739CB26F}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Notifications</RootNamespace>

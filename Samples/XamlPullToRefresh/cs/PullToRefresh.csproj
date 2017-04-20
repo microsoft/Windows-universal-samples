@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{0D1C9ABB-1A10-4BB5-B8EB-83A4930CCD78}</ProjectGuid>
+    <ProjectGuid>{20BC1DE4-235F-594C-A7D3-3819B8EFEA2C}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XamlPullToRefresh</RootNamespace>

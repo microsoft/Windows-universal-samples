@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{3e3abd08-8d3d-4a49-be0c-0b625560e36f}</ProjectGuid>
+    <ProjectGuid>{352acdd0-cf72-57ab-a2c4-39f95183719c}</ProjectGuid>
     <RootNamespace>CameraGetPreviewFrame</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>

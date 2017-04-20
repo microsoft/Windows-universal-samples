@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DF6A0072-B29A-4B50-B941-78DD9E9B9EC5}</ProjectGuid>
+    <ProjectGuid>{265AD639-5142-5B95-AE6D-0ABA3742B19F}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BlockAndFilterTasks</RootNamespace>

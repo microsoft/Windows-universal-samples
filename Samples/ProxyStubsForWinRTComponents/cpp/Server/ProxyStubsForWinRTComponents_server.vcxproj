@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{563e5bc0-fdff-413d-bd24-820119686520}</ProjectGuid>
+    <ProjectGuid>{82cb1b1b-30b8-530c-ab77-d7ee9640416e}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>ProxyStubsForWinRTComponents</ProjectName>
     <RootNamespace>Microsoft.SDKSamples.Kitchen</RootNamespace>

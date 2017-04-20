@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{563E5BC0-FDFF-413D-BD24-820119686520}</ProjectGuid>
+    <ProjectGuid>{5897EE80-5811-5820-9135-524DB3F09E7C}</ProjectGuid>
     <RootNamespace>Microsoft.SDKSamples.Kitchen</RootNamespace>
     <ProjectName>WRLInProcessWinRTComponent_server</ProjectName>
     <TargetName>Microsoft.SDKSamples.Kitchen</TargetName>

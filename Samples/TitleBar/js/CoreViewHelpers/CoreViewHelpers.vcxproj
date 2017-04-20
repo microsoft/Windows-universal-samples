@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{e9bc02f8-9e4a-4e38-aac9-19600318db53}</ProjectGuid>
+    <ProjectGuid>{7294391d-5866-56a8-8324-a635f1d8af33}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>CoreViewHelpers</ProjectName>
     <RootNamespace>CoreViewHelpers</RootNamespace>

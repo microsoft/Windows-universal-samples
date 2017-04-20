@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
+    <ProjectGuid>{AE2C5F7D-0BA4-5A16-90D2-9356EC898256}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PosPrinterSample</RootNamespace>
@@ -95,6 +95,9 @@
     </Compile>
     <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\DeviceHelpers.cs">
+      <Link>DeviceHelpers.cs</Link>
     </Compile>
     <Compile Include="SampleConfiguration.cs" />
     <Compile Include="Scenario1_ReceiptPrinter.xaml.cs">

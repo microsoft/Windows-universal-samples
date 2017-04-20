@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{2FE0B807-5078-4BE1-843E-39FB61894BAF}</ProjectGuid>
+    <ProjectGuid>{42921E5A-A37C-5ED8-89B0-866F5F139F31}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Transform3DAnimations</RootNamespace>

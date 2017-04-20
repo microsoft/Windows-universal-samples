@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{EEF16289-70B9-4B42-9B67-904837309095}</ProjectGuid>
+    <ProjectGuid>{F487A1DE-EC1E-5B81-838A-847EBAB59BBE}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SocketActivityBackgroundTask</RootNamespace>

@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{f70f17ca-13c9-4386-80cf-bac562425c16}</ProjectGuid>
+    <ProjectGuid>{0b11e1de-b7d4-558f-a357-bead0fba29fd}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>Scenario2WinRTComponent</ProjectName>
     <RootNamespace>org.alljoyn.Onboarding</RootNamespace>
