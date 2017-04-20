@@ -25,7 +25,6 @@ namespace SDKTemplate
     public:
         Scenario2();
 
-        property Windows::UI::Xaml::Controls::Symbol CalligraphyPen;
         property Windows::UI::Xaml::Controls::Symbol LassoSelect;
         property Windows::UI::Xaml::Controls::Symbol TouchWriting;
 

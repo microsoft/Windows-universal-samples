@@ -50,7 +50,6 @@ InkDrawingAttributes^ CalligraphicPen::CreateInkDrawingAttributesCore(Brush^ bru
 Scenario2::Scenario2()
 {
     InitializeComponent();
-    CalligraphyPen = (Symbol)0xEDFB;
     LassoSelect = (Symbol)0xEF20;
     TouchWriting = (Symbol)0xED5F;
 

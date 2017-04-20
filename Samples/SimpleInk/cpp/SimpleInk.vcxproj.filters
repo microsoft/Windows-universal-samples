@@ -26,6 +26,10 @@
     <ClCompile Include="Scenario7.xaml.cpp" />
     <ClCompile Include="Scenario8.xaml.cpp" />
     <ClCompile Include="RecognizerHelper.cpp" />
+    <ClCompile Include="Scenario9.xaml.cpp" />
+    <ClCompile Include="Scenario10.xaml.cpp" />
+    <ClCompile Include="Scenario11.xaml.cpp" />
+    <ClCompile Include="Scenario12.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -41,6 +45,10 @@
     <ClInclude Include="Scenario7.xaml.h" />
     <ClInclude Include="Scenario8.xaml.h" />
     <ClInclude Include="RecognizerHelper.h" />
+    <ClInclude Include="Scenario9.xaml.h" />
+    <ClInclude Include="Scenario10.xaml.h" />
+    <ClInclude Include="Scenario11.xaml.h" />
+    <ClInclude Include="Scenario12.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -58,6 +66,10 @@
     <Page Include="..\shared\Scenario6.xaml" />
     <Page Include="..\shared\Scenario7.xaml" />
     <Page Include="..\shared\Scenario8.xaml" />
+    <Page Include="..\shared\Scenario9.xaml" />
+    <Page Include="..\shared\Scenario10.xaml" />
+    <Page Include="..\shared\Scenario11.xaml" />
+    <Page Include="..\shared\Scenario12.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
@@ -79,6 +91,12 @@
       <Filter>Assets</Filter>
     </Image>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\shared\ButtonIconFill.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\shared\ButtonIconOutline.png">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>

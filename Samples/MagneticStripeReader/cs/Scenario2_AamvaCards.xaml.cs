@@ -47,7 +47,7 @@ namespace MagneticStripeReaderSample
         {
             if (_reader == null)
             {
-                _reader = await MagneticStripeReader.GetDefaultAsync();
+                _reader = await DeviceHelpers.GetFirstMagneticStripeReaderAsync();
 
                 if (_reader == null)
                 {
@@ -209,6 +209,7 @@ namespace MagneticStripeReaderSample
             if (_reader != null)
             {
                 // release the Magnetic Stripe Reader and set to null
+                _reader.Dispose();
                 _reader = null;
             }
 

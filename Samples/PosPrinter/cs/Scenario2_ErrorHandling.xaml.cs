@@ -64,7 +64,11 @@ namespace PosPrinterSample
                 claimedPrinter = null;
             }
 
-            printer = null;
+            if (printer != null)
+            {
+                printer.Dispose();
+                printer = null;
+            }
         }
 
         /// <summary>
@@ -209,36 +213,20 @@ namespace PosPrinterSample
             return true;
         }
 
-        /// <summary>
-        /// GetDeviceSelector method returns the string needed to identify a PosPrinter. This is passed to FindAllAsync method to get the list of devices currently available and we connect the first device.
-        /// </summary>
         private async Task<bool> FindReceiptPrinter()
         {
             if (printer == null)
             {
                 rootPage.NotifyUser("Finding printer", NotifyType.StatusMessage);
-                DeviceInformationCollection deviceCollection = await DeviceInformation.FindAllAsync(PosPrinter.GetDeviceSelector());
-                if (deviceCollection != null && deviceCollection.Count > 0)
+                printer = await DeviceHelpers.GetFirstReceiptPrinterAsync();
+                if (printer != null)
                 {
-                    DeviceInformation deviceInfo = deviceCollection[0];
-                    printer = await PosPrinter.FromIdAsync(deviceInfo.Id);
-                    if (printer != null)
-                    {
-                        if (printer.Capabilities.Receipt.IsPrinterPresent)
-                        {
-                            rootPage.NotifyUser("Got Printer with Device Id : " + printer.DeviceId, NotifyType.StatusMessage);
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        rootPage.NotifyUser("No Printer found", NotifyType.ErrorMessage);
-                        return false;
-                    }
+                    rootPage.NotifyUser("Got Printer with Device Id : " + printer.DeviceId, NotifyType.StatusMessage);
+                    return true;
                 }
                 else
                 {
-                    rootPage.NotifyUser("No devices returned by FindAllAsync.", NotifyType.ErrorMessage);
+                    rootPage.NotifyUser("No Printer found", NotifyType.ErrorMessage);
                     return false;
                 }
             }

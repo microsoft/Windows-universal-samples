@@ -28,18 +28,25 @@ namespace SDKTemplate
             // Register the current page as a share source.
             this.dataTransferManager = DataTransferManager.GetForCurrentView();
             this.dataTransferManager.DataRequested += new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.OnDataRequested);
+
+            // Request to be notified when the user chooses a share target app.
+            this.dataTransferManager.TargetApplicationChosen += OnTargetApplicationChosen;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            // Unregister the current page as a share source.
+            // Unregister our event handlers.
             this.dataTransferManager.DataRequested -= new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.OnDataRequested);
+            this.dataTransferManager.TargetApplicationChosen -= OnTargetApplicationChosen;
         }
 
         // When share is invoked (by the user or programatically) the event handler we registered will be called to populate the datapackage with the
         // data to be shared.
         private void OnDataRequested(DataTransferManager sender, DataRequestedEventArgs e)
         {
+            // Register to be notified if the share operation completes.
+            e.Request.Data.ShareCompleted += OnShareCompleted;
+
             // Call the scenario specific function to populate the datapackage with the data to be shared.
             if (GetShareContent(e.Request))
             {
@@ -50,6 +57,31 @@ namespace SDKTemplate
                     e.Request.FailWithDisplayText(MainPage.MissingTitleError);
                 }
             }
+        }
+
+        private void OnTargetApplicationChosen(DataTransferManager sender, TargetApplicationChosenEventArgs e)
+        {
+            this.rootPage.NotifyUser($"User chose {e.ApplicationName}", NotifyType.StatusMessage);
+        }
+
+        private void OnShareCompleted(DataPackage sender, ShareCompletedEventArgs e)
+        {
+            string shareCompletedStatus = "Shared successfully. ";
+
+            // Typically, this information is not displayed to the user because the
+            // user already knows which share target was selected.
+            if (!String.IsNullOrEmpty(e.ShareTarget.AppUserModelId))
+            {
+                // The user picked an app.
+                shareCompletedStatus += $"Target: App \"{e.ShareTarget.AppUserModelId}\"";
+            }
+            else if (e.ShareTarget.ShareProvider != null)
+            {
+                // The user picked a ShareProvider.
+                shareCompletedStatus += $"Target: Share Provider \"{e.ShareTarget.ShareProvider.Title}\"";
+            }
+
+            this.rootPage.NotifyUser(shareCompletedStatus, NotifyType.StatusMessage);
         }
 
         protected void ShowUIButton_Click(object sender, RoutedEventArgs e)

@@ -77,6 +77,13 @@ namespace PosPrinterSample
                 claimedPrinter1.ReleaseDeviceRequested -= ClaimedPrinter1_ReleaseDeviceRequested;
                 claimedPrinter1.Dispose();
                 claimedPrinter1 = null;
+
+                if (printerInstance1 != null)
+                {
+                    printerInstance1.Dispose();
+                    printerInstance1 = null;
+                }
+
                 rootPage.NotifyUser("Released claimed Instance 1", NotifyType.StatusMessage);
             }
             else
@@ -103,6 +110,13 @@ namespace PosPrinterSample
                 claimedPrinter2.ReleaseDeviceRequested -= ClaimedPrinter2_ReleaseDeviceRequested;
                 claimedPrinter2.Dispose();
                 claimedPrinter2 = null;
+
+                if (printerInstance2 != null)
+                {
+                    printerInstance2.Dispose();
+                    printerInstance2 = null;
+                }
+
                 rootPage.NotifyUser("Released claimed Instance 2", NotifyType.StatusMessage);
             }
             else
@@ -184,8 +198,7 @@ namespace PosPrinterSample
         }
 
         /// <summary>
-        /// PosPrinter GetDeviceSelector gets the string format used to search for pos printer. This is then used to find any pos printers.
-        /// The method then takes the first printer id found and tries to create two instances for that printer.
+        /// Find the first receipt printer and create two instances of it.
         /// </summary>
         /// <returns></returns>
         private async Task<bool> FindReceiptPrinterInstances()
@@ -193,35 +206,35 @@ namespace PosPrinterSample
             if (printerInstance1 == null || printerInstance2 == null)
             {
                 rootPage.NotifyUser("Finding printer", NotifyType.StatusMessage);
-                DeviceInformationCollection deviceCollection = await DeviceInformation.FindAllAsync(PosPrinter.GetDeviceSelector());
-                if (deviceCollection != null && deviceCollection.Count > 0)
+                printerInstance1 = await DeviceHelpers.GetFirstReceiptPrinterAsync();
+
+                if (printerInstance1 != null)
                 {
-                    DeviceInformation deviceInfo = deviceCollection[0];
-                    printerInstance1 = await PosPrinter.FromIdAsync(deviceInfo.Id);
-                    if (printerInstance1.Capabilities.Receipt.IsPrinterPresent)
+                    rootPage.NotifyUser("Got Printer Instance 1 with Device Id : " + printerInstance1.DeviceId, NotifyType.StatusMessage);
+
+                    // Create another instance of the same printer.
+                    if (printerInstance2 != null)
                     {
-                        rootPage.NotifyUser("Got Printer Instance 1 with Device Id : " + printerInstance1.DeviceId, NotifyType.StatusMessage);
-
-                        printerInstance2 = await PosPrinter.FromIdAsync(deviceInfo.Id);
-                        if (printerInstance2.Capabilities.Receipt.IsPrinterPresent)
-                        {
-                            rootPage.NotifyUser("Got Printer Instance 2 with Device Id : " + printerInstance2.DeviceId, NotifyType.StatusMessage);
-                        }
-
+                        printerInstance2.Dispose();
+                        printerInstance2 = null;
+                    }
+                    printerInstance2 = await PosPrinter.FromIdAsync(printerInstance1.DeviceId);
+                    if (printerInstance2 != null)
+                    {
+                        rootPage.NotifyUser("Got Printer Instance 2 with Device Id : " + printerInstance2.DeviceId, NotifyType.StatusMessage);
                         return true;
                     }
                     else
                     {
-                        rootPage.NotifyUser("Did not find a Receipt printer ", NotifyType.ErrorMessage);
-                        return false;
+                        rootPage.NotifyUser("Couldn't create second instance of printer.", NotifyType.StatusMessage);
                     }
+                    return false;
                 }
                 else
                 {
-                    rootPage.NotifyUser("No devices returned by FindAllAsync.", NotifyType.ErrorMessage);
+                    rootPage.NotifyUser("No Printer found", NotifyType.ErrorMessage);
                     return false;
                 }
-
             }
 
             return true;
@@ -251,8 +264,18 @@ namespace PosPrinterSample
                 claimedPrinter2.Dispose();
                 claimedPrinter2 = null;
             }
-            printerInstance1 = null;
-            printerInstance2 = null;
+
+            if (printerInstance1 != null)
+            {
+                printerInstance1.Dispose();
+                printerInstance1 = null;
+            }
+
+            if (printerInstance2 != null)
+            {
+                printerInstance2.Dispose();
+                printerInstance2 = null;
+            }
         }
 
         async void ClaimedPrinter1_ReleaseDeviceRequested(ClaimedPosPrinter sender, PosPrinterReleaseDeviceRequestedEventArgs args)
@@ -266,6 +289,12 @@ namespace PosPrinterSample
                 claimedPrinter1.ReleaseDeviceRequested -= ClaimedPrinter1_ReleaseDeviceRequested;
                 claimedPrinter1.Dispose();
                 claimedPrinter1 = null;
+
+                if (printerInstance1 != null)
+                {
+                    printerInstance1.Dispose();
+                    printerInstance1 = null;
+                }
             }
         }
 
@@ -280,6 +309,12 @@ namespace PosPrinterSample
                 claimedPrinter2.ReleaseDeviceRequested -= ClaimedPrinter2_ReleaseDeviceRequested;
                 claimedPrinter2.Dispose();
                 claimedPrinter2 = null;
+
+                if (printerInstance2 != null)
+                {
+                    printerInstance2.Dispose();
+                    printerInstance2 = null;
+                }
             }
         }
 

@@ -16,13 +16,15 @@ Shows how to use the universal map control ([MapControl]( https://msdn.microsoft
 
 Specifically, this sample shows:
 
-* MapControl Basics: adjusting the ZoomLevel, Heading, DesiredPtich, and map style
-* Adding points of interest on the map: PushPins, images, and shapes
+* MapControl Basics: adjusting the ZoomLevel, Heading, DesiredPitch, map style, and map projection
+* Adding points of interest on the map: PushPins, images, billboards and shapes
 * Adding XAML overlays on the map
 * Showing 3D locations in MapControl
 * Showing Streetside experience within MapControl
 * Launching Maps using URI Schemes
 * Displaying points of interest with clustering
+* Finding and downloading Offline Maps
+* Customizing the map appearance
 
 This sample is written in XAML.
 

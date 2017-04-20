@@ -229,14 +229,15 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/BasicInput">Basic input</a></td>
   <td><a href="Samples/ComplexInk">Complex inking</a></td>
-  <td><a href="Samples/Ink">Inking</a></td>
+  <td><a href="Samples/InkAnalysis">Ink analysis/a></td>
  </tr>
  <tr>
+  <td><a href="Samples/Ink">Inking</a></td>
   <td><a href="Samples/LowLatencyInput">Low latency input</a></td>
   <td><a href="Samples/SimpleInk">Simple inking</a></td>
-  <td><a href="Samples/TouchKeyboard">Touch keyboard</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/TouchKeyboard">Touch keyboard</a></td>
   <td><a href="Samples/TouchKeyboardTextInput">Touch keyboard text input</a></td>
  </tr>
 </table>
@@ -428,6 +429,9 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/HolographicSpatialMapping">Holographic spatial mapping</a></td>
   <td><a href="Samples/HolographicVoiceInput">Holographic voice input</a></td>
+  <td><a href="Samples/SpatialInteractionSource">Spatial interaction source</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/HolographicTagAlong">Tag-along hologram</a></td>
  </tr>
 </table>
@@ -538,11 +542,12 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 
 <table>
  <tr>
+  <td><a href="Samples/CustomCapability">Custom capabilities</a></td>
   <td><a href="Samples/ProxyStubsForWinRTComponents">In-process component authoring</a></td>
   <td><a href="Samples/WRLInProcessWinRTComponent">In-process component authoring</a></td>
-  <td><a href="Samples/WRLOutOfProcessWinRTComponent">Out-of-process component authoring</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/WRLOutOfProcessWinRTComponent">Out-of-process component authoring</a></td>
   <td><a href="Samples/VersionAdaptiveCode">Version adaptive code</a></td>
  </tr>
 </table>

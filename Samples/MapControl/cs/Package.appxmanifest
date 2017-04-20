@@ -4,7 +4,8 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-  IgnorableNamespaces="uap mp">
+  xmlns:uap4="http://schemas.microsoft.com/appx/manifest/uap/windows10/4"
+  IgnorableNamespaces="uap mp uap4">
 
     <Identity
       Name="Microsoft.SDKSamples.MapControlSample.CS"
@@ -21,7 +22,7 @@
     </Properties>
 
     <Dependencies>
-      <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.14393.0" />
+      <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.15063.0" MaxVersionTested="10.0.15063.0" />
     </Dependencies>
 
     <Resources>
@@ -50,5 +51,6 @@
 
     <Capabilities>
         <Capability Name="internetClient" />
+        <uap4:Capability Name="offlineMapsManagement" />
     </Capabilities>
 </Package>

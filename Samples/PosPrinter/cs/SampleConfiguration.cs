@@ -11,6 +11,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Windows.Devices.PointOfService;
 using Windows.UI.Xaml.Controls;
 using PosPrinterSample;
 
@@ -32,5 +34,25 @@ namespace SDKTemplate
     {
         public string Title { get; set; }
         public Type ClassType { get; set; }
+    }
+
+    public partial class DeviceHelpers
+    {
+        // By default, use all connections types.
+        public static async Task<PosPrinter> GetFirstReceiptPrinterAsync(PosConnectionTypes connectionTypes = PosConnectionTypes.All)
+        {
+            return await DeviceHelpers.GetFirstDeviceAsync(PosPrinter.GetDeviceSelector(connectionTypes),
+                async (id) =>
+                {
+                    PosPrinter printer = await PosPrinter.FromIdAsync(id);
+                    if (printer != null && printer.Capabilities.Receipt.IsPrinterPresent)
+                    {
+                        return printer;
+                    }
+                    // Dispose the unwanted printer.
+                    printer?.Dispose();
+                    return null;
+                });
+        }
     }
 }

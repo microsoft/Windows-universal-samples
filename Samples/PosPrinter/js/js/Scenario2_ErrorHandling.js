@@ -31,7 +31,12 @@
                 _claimedPrinter.close();
                 _claimedPrinter = null;
             }
-            _printer = null;
+
+            if (_printer !== null)
+            {
+                _printer.close();
+                _printer = null;
+            }
         }
     });
 
@@ -48,60 +53,38 @@
 
         if (_printer == null) {
 
-            var devicestr = Windows.Devices.PointOfService.PosPrinter.getDeviceSelector();
-            Windows.Devices.Enumeration.DeviceInformation.findAllAsync(devicestr, null).then(function (deviceCollection) {
+            SdkSample.getFirstReceiptPrinterAsync().then(function (printer) {
 
-                if (deviceCollection.length == 0) {
-                    WinJS.log("No printers found during enumeration.", "sample", "error");
-                }
+                if (printer != null) {
+                    _printer = printer;
 
-                var id = deviceCollection[0].id;
-                Windows.Devices.PointOfService.PosPrinter.fromIdAsync(id).then(function (printer) {
+                    //Claim
+                    _printer.claimPrinterAsync().done(function (claimedPrinter) {
 
-                    if (printer != null) {
-                        _printer = printer;
+                        if (claimedPrinter !== null) {
 
-                        if (_printer.capabilities.receipt.isPrinterPresent) {
+                            _claimedPrinter = claimedPrinter;
 
-                            //Claim
-                            _printer.claimPrinterAsync().done(function (claimedPrinter) {
+                            //Enable printer
+                            _claimedPrinter.enableAsync().done(function (success) {
 
-                                if (claimedPrinter !== null) {
+                                if (success) {
+                                    WinJS.log("Enabled printer. Device ID: " + _claimedPrinter.deviceId, "sample", "status");
 
-                                    _claimedPrinter = claimedPrinter;
-
-                                    //Enable printer
-                                    _claimedPrinter.enableAsync().done(function (success) {
-
-                                        if (success) {
-                                            WinJS.log("Enabled printer. Device ID: " + _claimedPrinter.deviceId, "sample", "status");
-
-                                            document.getElementById("findClaimEnableButton").disabled = true;
-                                            document.getElementById("printLineButton").disabled = false;
-                                            document.getElementById("scenarioEndButton").disabled = false;
-                                        }
-                                        else {
-                                            WinJS.log("Could not enable printer.", "sample", "error");
-                                        }
-                                        return;
-                                    },
-                                    function error(e) {
-                                        WinJS.log("Error enabling printer: " + e.message, "sample", "error");
-                                    });
-                                    return;
-                                }
-                                else {
-                                    WinJS.log("Could not claim the printer.", "sample", "error");
+                                    document.getElementById("findClaimEnableButton").disabled = true;
+                                    document.getElementById("printLineButton").disabled = false;
+                                    document.getElementById("scenarioEndButton").disabled = false;
+                                } else {
+                                    WinJS.log("Could not enable printer.", "sample", "error");
                                 }
                             });
+                        } else {
+                            WinJS.log("Could not claim the printer.", "sample", "error");
                         }
-                    }
-                },
-                function error(e) {
-                    WinJS.log("FromIdAsync was unsuccessful: " + e.message, "sample", "error");
-                });//end of fromIdAsync
-            }, function error(e) {
-                WinJS.log("Printer device enumeration unsuccessful: " + e.message, "sample", "error");
+                    });
+                } else {
+                    WinJS.log("No printer found", "sample", "error");
+                }
             });
         }
     }
@@ -113,7 +96,11 @@
             _claimedPrinter = null;
         }
 
-        _printer = null;
+        if (_printer !== null) {
+            _printer.close();
+            _printer = null;
+        }
+
         WinJS.log("Scenario ended.", "sample", "status");
 
         document.getElementById("findClaimEnableButton").disabled = false;

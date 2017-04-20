@@ -31,14 +31,16 @@ namespace SDKTemplate
         void OnSizeChanged(Platform::Object^ sender, Windows::UI::Xaml::SizeChangedEventArgs^ e);
         void SetCanvasSize();
         void ToggleLogs(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-        void InkToolbar_IsRulerButtonCheckedChanged(Windows::UI::Xaml::Controls::InkToolbar^ sender, Platform::Object^ args);
+        void InkToolbar_IsStencilButtonCheckedChanged(Windows::UI::Xaml::Controls::InkToolbar^ sender, Windows::UI::Xaml::Controls::InkToolbarIsStencilButtonCheckedChangedEventArgs^ args);
+        void InkToolbar_SelectedStencilChanged(Windows::UI::Xaml::DependencyObject^ sender, Windows::UI::Xaml::DependencyProperty^ dp);
         void InkToolbar_EraseAllClicked(Windows::UI::Xaml::Controls::InkToolbar^ sender, Platform::Object^ args);
         void InkToolbar_InkDrawingAttributesChanged(Windows::UI::Xaml::Controls::InkToolbar^ sender, Platform::Object^ args);
         void InkToolbar_ActiveToolChanged(Windows::UI::Xaml::Controls::InkToolbar^ sender, Platform::Object^ args);
-        Windows::Foundation::EventRegistrationToken rulerButtonCheckedChangedToken;
+        Windows::Foundation::EventRegistrationToken stencilButtonCheckedChangedToken;
         Windows::Foundation::EventRegistrationToken eraseAllClickedToken;
         Windows::Foundation::EventRegistrationToken inkDrawingAttributesChangedToken;
         Windows::Foundation::EventRegistrationToken activeToolChangedToken;
+        int64_t selectedStencilChangedToken;
 
         MainPage^ rootPage;
     };

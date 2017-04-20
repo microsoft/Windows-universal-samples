@@ -177,51 +177,33 @@ task<void> Scenario3_MultipleReceipt::ClaimAndEnablePrinter2()
     return task_from_result();
 }
 
-//
-//PosPrinter GetDeviceSelector gets the string format used to search for pos printer. This is then used to find any pos printers.
-//The method then takes the first printer id found and tries to create two instances for that printer.
-//
+/// Find the first receipt printer and create two instances of it.
 void Scenario3_MultipleReceipt::FindReceiptPrinter_Click(Platform::Object^ sender, RoutedEventArgs^ e)
 {
     if (printerInstance1 == nullptr)
     {
         rootPage->NotifyUser("Finding printer", NotifyType::StatusMessage);
-        create_task(DeviceInformation::FindAllAsync(PosPrinter::GetDeviceSelector())).then([this](DeviceInformationCollection^ deviceCollection)
+        DeviceHelpers::GetFirstReceiptPrinterAsync().then([this](PosPrinter^ _printer)
         {
-            if (deviceCollection->Size == 0)
+            printerInstance1 = _printer;
+            if (printerInstance1 != nullptr)
             {
-                rootPage->NotifyUser("Did not find any printers", NotifyType::ErrorMessage);
-                return task_from_result();
+                rootPage->NotifyUser("Got Printer instance 1 with Device Id : " + printerInstance1->DeviceId, NotifyType::StatusMessage);
+
+                // Create another instance of the same printer.
+                create_task(PosPrinter::FromIdAsync(printerInstance1->DeviceId)).then([this](PosPrinter^ _printer)
+                {
+                    delete printerInstance2;
+                    printerInstance2 = _printer;
+                    if (printerInstance2 != nullptr)
+                    {
+                        rootPage->NotifyUser("Got Printer Instance 2 with Device Id : " + printerInstance2->DeviceId, NotifyType::StatusMessage);
+                    }
+                });
             }
             else
             {
-                //Try to get the first printer that matched.
-                DeviceInformation^ printerInfo = deviceCollection->GetAt(0);
-                String^ deviceId = printerInfo->Id;
-                return create_task(PosPrinter::FromIdAsync(deviceId)).then([this, deviceId](PosPrinter^ _printer)
-                {
-                    printerInstance1 = _printer;;
-                    if (printerInstance1 != nullptr)
-                    {
-                        if (printerInstance1->Capabilities->Receipt->IsPrinterPresent)
-                        {
-                            rootPage->NotifyUser("Got Printer instance 1 with Device Id : " + printerInstance1->DeviceId, NotifyType::StatusMessage);
-                            create_task(PosPrinter::FromIdAsync(deviceId)).then([this](PosPrinter^ _printer)
-                            {
-                                printerInstance2 = _printer;
-                                if (printerInstance2 != nullptr)
-                                {
-                                    rootPage->NotifyUser("Got Printer Instance 2 with Device Id : " + printerInstance2->DeviceId, NotifyType::StatusMessage);
-                                }
-                            });
-                        }
-                        else
-                        {
-                            printerInstance1 = nullptr;
-                            rootPage->NotifyUser("No receipt printer found. ", NotifyType::ErrorMessage);
-                        }
-                    }
-                });
+                rootPage->NotifyUser("No receipt printer found. ", NotifyType::ErrorMessage);
             }
         });
     }

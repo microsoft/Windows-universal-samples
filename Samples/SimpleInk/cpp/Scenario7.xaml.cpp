@@ -34,18 +34,30 @@ Scenario7::Scenario7()
     InitializeComponent();
 
     inkCanvas->InkPresenter->InputDeviceTypes = CoreInputDeviceTypes::Mouse | CoreInputDeviceTypes::Pen;
-    ruler = ref new InkPresenterRuler(inkCanvas->InkPresenter);
 
-    // Customize Ruler
+    // Customize the ruler
+    auto ruler = ref new InkPresenterRuler(inkCanvas->InkPresenter);
     ruler->BackgroundColor = Colors::PaleTurquoise;
     ruler->ForegroundColor = Colors::MidnightBlue;
     ruler->Length = 800;
+    ruler->AreTickMarksVisible = false;
+    ruler->IsCompassVisible = false;
+
+    // Customize the protractor
+    auto protractor = ref new InkPresenterProtractor(inkCanvas->InkPresenter);
+    protractor->BackgroundColor = Colors::Bisque;
+    protractor->ForegroundColor = Colors::DarkGreen;
+    protractor->AccentColor = Colors::Firebrick;
+    protractor->AreRaysVisible = false;
+    protractor->AreTickMarksVisible = false;
+    protractor->IsAngleReadoutVisible = false;
+    protractor->IsCenterMarkerVisible = false;
 }
 
-void Scenario7::InkToolbar_IsRulerButtonCheckedChanged(InkToolbar^ sender, Object^ args)
+void Scenario7::InkToolbar_IsStencilButtonCheckedChanged(InkToolbar^ sender, InkToolbarIsStencilButtonCheckedChangedEventArgs^ args)
 {
-    auto rulerButton = safe_cast<InkToolbarRulerButton^>(inkToolbar->GetToggleButton(InkToolbarToggle::Ruler));
-    BringIntoViewButton->IsEnabled = rulerButton->IsChecked->Value;
+    auto stencilButton = safe_cast<InkToolbarStencilButton^>(inkToolbar->GetMenuButton(InkToolbarMenuKind::Stencil));
+    BringIntoViewButton->IsEnabled = stencilButton->IsChecked->Value;
 }
 
 void Scenario7::OnNavigatedTo(NavigationEventArgs^ e)
@@ -58,16 +70,26 @@ void Scenario7::OnNavigatedTo(NavigationEventArgs^ e)
 
 void Scenario7::OnBringIntoView(Object^ sender, RoutedEventArgs^ e)
 {
-    // Set Ruler Origin to Scrollviewer Viewport origin.
+    // Set stencil Origin to Scrollviewer Viewport origin.
     // The purpose of this behavior is to allow the user to "grab" the
-    // ruler and bring it into view no matter where the scrollviewer viewport
+    // stencil and bring it into view no matter where the scrollviewer viewport
     // happens to be.  Note that this is accomplished by a simple translation
     // that adjusts to the zoom factor.  The additional ZoomFactor term is to
-    // make ensure the scale of the InkPresenterRuler is invariant to Zoom.
+    // make ensure the scale of the InkPresenterStencil is invariant to Zoom.
 
     float3x2 viewportTransform = make_float3x2_scale(ScrollViewer->ZoomFactor) *
         make_float3x2_translation((float)ScrollViewer->HorizontalOffset, (float)ScrollViewer->VerticalOffset) *
         make_float3x2_scale(1.0f / ScrollViewer->ZoomFactor);
 
-    ruler->Transform = viewportTransform;
+    auto stencilButton = safe_cast<InkToolbarStencilButton^>(inkToolbar->GetMenuButton(InkToolbarMenuKind::Stencil));
+    switch (stencilButton->SelectedStencil)
+    {
+    case InkToolbarStencilKind::Protractor:
+        stencilButton->Protractor->Transform = viewportTransform;
+        break;
+
+    case InkToolbarStencilKind::Ruler:
+        stencilButton->Ruler->Transform = viewportTransform;
+        break;
+    }
 }

@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
+    <ProjectGuid>{804C73B9-0248-5337-9289-0CEFFA987B6E}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MapControlSample</RootNamespace>
     <AssemblyName>MapControlSample</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -88,6 +88,9 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage10.jpg">
+      <Link>Assets\billboard.jpg</Link>
+    </Content>
     <Content Include="..\shared\places.txt">
       <Link>places.txt</Link>
     </Content>
@@ -126,6 +129,12 @@
     </Compile>
     <Compile Include="Scenario7.xaml.cs">
       <DependentUpon>Scenario7.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario8.xaml.cs">
+      <DependentUpon>Scenario8.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario9.xaml.cs">
+      <DependentUpon>Scenario9.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +190,16 @@
     </Page>
     <Page Include="..\shared\Scenario7.xaml">
       <Link>Scenario7.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\shared\Scenario8.xaml">
+      <Link>Scenario8.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\shared\Scenario9.xaml">
+      <Link>Scenario9.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

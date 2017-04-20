@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{CF1CD0D5-BF6B-457A-9927-8079FC667CA4}</ProjectGuid>
+    <ProjectGuid>{485B6BBC-EDC7-565C-8817-D8767BAD96AC}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>ShareSource</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -112,6 +112,9 @@
     <Compile Include="ShareCustomData.xaml.cs">
       <DependentUpon>ShareCustomData.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ShareCustomProvider.xaml.cs">
+      <DependentUpon>ShareCustomProvider.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShareDelayRenderedFiles.xaml.cs">
       <DependentUpon>ShareDelayRenderedFiles.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,11 @@
     </Page>
     <Page Include="..\shared\xaml\ShareCustomData.xaml">
       <Link>ShareCustomData.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\xaml\ShareCustomProvider.xaml">
+      <Link>ShareCustomProvider.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

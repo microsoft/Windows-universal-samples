@@ -54,6 +54,7 @@
     </Page>
     <Page Include="..\shared\xaml\SetErrorMessage.xaml" />
     <Page Include="..\shared\xaml\ShareCustomData.xaml" />
+    <Page Include="..\shared\xaml\ShareCustomProvider.xaml" />
     <Page Include="..\shared\xaml\ShareDelayRenderedFiles.xaml" />
     <Page Include="..\shared\xaml\ShareFiles.xaml" />
     <Page Include="..\shared\xaml\ShareHtml.xaml" />
@@ -69,6 +70,7 @@
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="SetErrorMessage.xaml.h" />
     <ClInclude Include="ShareCustomData.xaml.h" />
+    <ClInclude Include="ShareCustomProvider.xaml.h" />
     <ClInclude Include="ShareDelayRenderedFiles.xaml.h" />
     <ClInclude Include="ShareFiles.xaml.h" />
     <ClInclude Include="ShareHtml.xaml.h" />
@@ -83,6 +85,7 @@
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="SetErrorMessage.xaml.cpp" />
     <ClCompile Include="ShareCustomData.xaml.cpp" />
+    <ClCompile Include="ShareCustomProvider.xaml.cpp" />
     <ClCompile Include="ShareDelayRenderedFiles.xaml.cpp" />
     <ClCompile Include="ShareFiles.xaml.cpp" />
     <ClCompile Include="ShareHtml.xaml.cpp" />

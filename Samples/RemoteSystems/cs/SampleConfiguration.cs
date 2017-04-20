@@ -25,7 +25,8 @@ namespace SDKTemplate
         {
             new Scenario() { Title="Discovery", ClassType=typeof(Scenario1_Discovery)},
             new Scenario() { Title="Launch URI", ClassType=typeof(Scenario2_LaunchUri)},
-            new Scenario() { Title="Launch App Services", ClassType=typeof(Scenario3_LaunchAppServices)}
+            new Scenario() { Title="Launch App Services", ClassType=typeof(Scenario3_LaunchAppServices)},
+            new Scenario() { Title="Settings", ClassType=typeof(Scenario4_Settings)},
         };
 
         public ObservableCollection<RemoteSystem> deviceList = null;

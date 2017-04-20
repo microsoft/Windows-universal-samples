@@ -179,6 +179,7 @@ namespace SDKTemplate
         {
             List<IRemoteSystemFilter> filters = new List<IRemoteSystemFilter>();
             RemoteSystemDiscoveryTypeFilter discoveryFilter;
+            RemoteSystemAuthorizationKindFilter authorizationKindFilter;
             List<string> kinds = new List<string>();
             RemoteSystemStatusTypeFilter statusFilter;
 
@@ -193,11 +194,29 @@ namespace SDKTemplate
                 {
                     discoveryFilter = new RemoteSystemDiscoveryTypeFilter(RemoteSystemDiscoveryType.Cloud);
                 }
+                else if (SpatiallyProximalRadioButton.IsChecked.Value)
+                {
+                    discoveryFilter = new RemoteSystemDiscoveryTypeFilter(RemoteSystemDiscoveryType.SpatiallyProximal);
+                }
                 else
                 {
                     discoveryFilter = new RemoteSystemDiscoveryTypeFilter(RemoteSystemDiscoveryType.Any);
                 }
                 filters.Add(discoveryFilter);
+            }
+
+            if (AuthorizationTypeOptions.IsChecked.Value)
+            {
+                // Build authorization type filters
+                if (AnonymousDiscoveryRadioButton.IsChecked.Value)
+                {
+                    authorizationKindFilter = new RemoteSystemAuthorizationKindFilter(RemoteSystemAuthorizationKind.Anonymous);
+                }
+                else
+                {
+                    authorizationKindFilter = new RemoteSystemAuthorizationKindFilter(RemoteSystemAuthorizationKind.SameUser);
+                }
+                filters.Add(authorizationKindFilter);
             }
 
             if (DeviceTypeOptions.IsChecked.Value)

@@ -188,44 +188,24 @@ task<void> Scenario2_ErrorHandling::EnableAsync()
     return task_from_result();
 }
 
-//
-//PosPrinter GetDeviceSelector gets the string format used to search for pos printer. This is then used to find any pos printers.
-//The method then takes the first printer id found and tries to create an instance for that printer.
-//
 task<void> Scenario2_ErrorHandling::FindReceiptPrinter()
 {
     if (printer == nullptr)
     {
         rootPage->NotifyUser("Finding printer", NotifyType::StatusMessage);
-        return create_task(DeviceInformation::FindAllAsync(PosPrinter::GetDeviceSelector())).then([this](DeviceInformationCollection^ deviceCollection)
+        return DeviceHelpers::GetFirstReceiptPrinterAsync().then([this](PosPrinter^ _printer)
         {
-            if (deviceCollection->Size == 0)
+            printer = _printer;
+            if (printer != nullptr)
             {
-                rootPage->NotifyUser("Did not find any printers", NotifyType::ErrorMessage);
-                return task_from_result();
+                rootPage->NotifyUser("Got Printer with Device Id : " + printer->DeviceId, NotifyType::StatusMessage);
             }
             else
             {
-                //Try to get the first printer that matched.
-                DeviceInformation^ printerInfo = deviceCollection->GetAt(0);
-                return create_task(PosPrinter::FromIdAsync(printerInfo->Id)).then([this](PosPrinter^ _printer)
-                {
-                    printer = _printer;
-                    if (printer != nullptr)
-                    {
-                        if (printer->Capabilities->Receipt->IsPrinterPresent)
-                        {
-                            rootPage->NotifyUser("Got Printer with Device Id : " + printer->DeviceId, NotifyType::StatusMessage);
-                        }
-                    }
-                });
+                rootPage->NotifyUser("Could not get printer.", NotifyType::ErrorMessage);
             }
         });
-
-        rootPage->NotifyUser("No Printer found", NotifyType::ErrorMessage);
     }
-
-    rootPage->NotifyUser("Done finding printer", NotifyType::StatusMessage);
     return task_from_result();
 }
 

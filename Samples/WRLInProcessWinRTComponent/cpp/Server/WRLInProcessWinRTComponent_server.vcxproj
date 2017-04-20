@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{563E5BC0-FDFF-413D-BD24-820119686520}</ProjectGuid>
+    <ProjectGuid>{6FF843E3-01B4-56F8-8256-76F5EB6D24BA}</ProjectGuid>
     <RootNamespace>Microsoft.SDKSamples.Kitchen</RootNamespace>
     <ProjectName>WRLInProcessWinRTComponent_server</ProjectName>
     <TargetName>Microsoft.SDKSamples.Kitchen</TargetName>
@@ -36,8 +36,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.15063.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <GenerateManifest>false</GenerateManifest>
     <CustomBuildAfterTargets>Midl</CustomBuildAfterTargets>

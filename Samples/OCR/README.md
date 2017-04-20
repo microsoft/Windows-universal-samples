@@ -34,6 +34,10 @@ Scenario 2: Capture image from camera and extract text.
 
 ## Related topics
 
+**Samples**
+
+[InkAnalysis](/Samples/InkAnalysis)  
+
 **Reference**
 
 [Windows.Media.Ocr namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.ocr.aspx)  

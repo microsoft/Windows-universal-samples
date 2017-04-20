@@ -72,13 +72,16 @@ void Scenario6::SetCanvasSize()
 
 void Scenario6::ToggleLogs(Platform::Object^ sender, RoutedEventArgs^ e)
 {
+    auto stencilButton = safe_cast<InkToolbarStencilButton^>(inkToolbar->GetMenuButton(InkToolbarMenuKind::Stencil));
+
     if (toggleLog->IsOn)
     {
         LogBorder->Visibility = Windows::UI::Xaml::Visibility::Visible;
         activeToolChangedToken = inkToolbar->ActiveToolChanged += ref new TypedEventHandler<InkToolbar^, Platform::Object^>(this, &Scenario6::InkToolbar_ActiveToolChanged);
         inkDrawingAttributesChangedToken = inkToolbar->InkDrawingAttributesChanged += ref new TypedEventHandler<InkToolbar^, Platform::Object^>(this, &Scenario6::InkToolbar_InkDrawingAttributesChanged);
         eraseAllClickedToken = inkToolbar->EraseAllClicked += ref new TypedEventHandler<InkToolbar^, Platform::Object^>(this, &Scenario6::InkToolbar_EraseAllClicked);
-        rulerButtonCheckedChangedToken = inkToolbar->IsRulerButtonCheckedChanged += ref new TypedEventHandler<InkToolbar^, Platform::Object^>(this, &Scenario6::InkToolbar_IsRulerButtonCheckedChanged);
+        stencilButtonCheckedChangedToken = inkToolbar->IsStencilButtonCheckedChanged += ref new TypedEventHandler<InkToolbar^, InkToolbarIsStencilButtonCheckedChangedEventArgs^>(this, &Scenario6::InkToolbar_IsStencilButtonCheckedChanged);
+        selectedStencilChangedToken = stencilButton->RegisterPropertyChangedCallback(InkToolbarStencilButton::SelectedStencilProperty, ref new DependencyPropertyChangedCallback(this, &Scenario6::InkToolbar_SelectedStencilChanged));
     }
     else
     {
@@ -87,13 +90,21 @@ void Scenario6::ToggleLogs(Platform::Object^ sender, RoutedEventArgs^ e)
         inkToolbar->ActiveToolChanged -= activeToolChangedToken;
         inkToolbar->InkDrawingAttributesChanged -= inkDrawingAttributesChangedToken;
         inkToolbar->EraseAllClicked -= eraseAllClickedToken;
-        inkToolbar->IsRulerButtonCheckedChanged -= rulerButtonCheckedChangedToken;
+        inkToolbar->IsStencilButtonCheckedChanged -= stencilButtonCheckedChangedToken;
+        stencilButton->UnregisterPropertyChangedCallback(InkToolbarStencilButton::SelectedStencilProperty, selectedStencilChangedToken);
     }
 }
 
-void Scenario6::InkToolbar_IsRulerButtonCheckedChanged(InkToolbar^ sender, Platform::Object^ args)
+void Scenario6::InkToolbar_IsStencilButtonCheckedChanged(InkToolbar^ sender, InkToolbarIsStencilButtonCheckedChangedEventArgs^ args)
 {
-    textLogs->Text = "IsRulerButtonCheckedChanged\n" + textLogs->Text;
+    textLogs->Text = "IsStencilButtonCheckedChanged(Kind = " + args->StencilKind.ToString() +
+        ", IsChecked = " + args->StencilButton->IsChecked->Value.ToString() + ")\n" + textLogs->Text;
+}
+
+void Scenario6::InkToolbar_SelectedStencilChanged(DependencyObject^ sender, DependencyProperty^ dp)
+{
+    auto stencilButton = safe_cast<InkToolbarStencilButton^>(sender);
+    textLogs->Text = "SelectedStencil changed to " + stencilButton->SelectedStencil.ToString() + "\n" + textLogs->Text;
 }
 
 void Scenario6::InkToolbar_EraseAllClicked(InkToolbar^ sender, Platform::Object^ args)

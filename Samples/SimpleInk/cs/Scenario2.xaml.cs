@@ -55,8 +55,7 @@ namespace SDKTemplate
         private Rect boundingRect;
         private MainPage rootPage = MainPage.Current;
         private bool isBoundRect;
-
-        Symbol CalligraphyPen = (Symbol)0xEDFB;
+        
         Symbol LassoSelect = (Symbol)0xEF20;
         Symbol TouchWriting = (Symbol)0xED5F;
 

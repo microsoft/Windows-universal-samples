@@ -115,7 +115,7 @@
                         VerticalAlignment="Stretch"
                         Background="{ThemeResource SystemChromeMediumColor}">
                 <InkToolbar x:Name="inkToolbar" HorizontalAlignment="Left" TargetInkCanvas="{x:Bind inkCanvas}"
-                            IsRulerButtonCheckedChanged="InkToolbar_IsRulerButtonCheckedChanged"/>
+                            IsStencilButtonCheckedChanged="InkToolbar_IsStencilButtonCheckedChanged"/>
                 <Line Y1="0"
                       Y2="{ThemeResource InkToolbarButtonHeight}"
                       HorizontalAlignment="Stretch"

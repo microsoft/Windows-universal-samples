@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013 for Windows
 VisualStudioVersion = 12.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D2DGradientMesh", "D2DGradientMesh.vcxproj", "{00000000-0000-0000-000A-000000000001}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D2DGradientMesh", "D2DGradientMesh.vcxproj", "{120D27DA-64D3-5996-A34A-4FE5202283A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{00000000-0000-0000-000A-000000000001}.Debug|ARM.ActiveCfg = Debug|ARM
-		{00000000-0000-0000-000A-000000000001}.Debug|ARM.Build.0 = Debug|ARM
-		{00000000-0000-0000-000A-000000000001}.Debug|ARM.Deploy.0 = Debug|ARM
-		{00000000-0000-0000-000A-000000000001}.Debug|Win32.ActiveCfg = Debug|Win32
-		{00000000-0000-0000-000A-000000000001}.Debug|Win32.Build.0 = Debug|Win32
-		{00000000-0000-0000-000A-000000000001}.Debug|Win32.Deploy.0 = Debug|Win32
-		{00000000-0000-0000-000A-000000000001}.Debug|x64.ActiveCfg = Debug|x64
-		{00000000-0000-0000-000A-000000000001}.Debug|x64.Build.0 = Debug|x64
-		{00000000-0000-0000-000A-000000000001}.Debug|x64.Deploy.0 = Debug|x64
-		{00000000-0000-0000-000A-000000000001}.Release|ARM.ActiveCfg = Release|ARM
-		{00000000-0000-0000-000A-000000000001}.Release|ARM.Build.0 = Release|ARM
-		{00000000-0000-0000-000A-000000000001}.Release|ARM.Deploy.0 = Release|ARM
-		{00000000-0000-0000-000A-000000000001}.Release|Win32.ActiveCfg = Release|Win32
-		{00000000-0000-0000-000A-000000000001}.Release|Win32.Build.0 = Release|Win32
-		{00000000-0000-0000-000A-000000000001}.Release|Win32.Deploy.0 = Release|Win32
-		{00000000-0000-0000-000A-000000000001}.Release|x64.ActiveCfg = Release|x64
-		{00000000-0000-0000-000A-000000000001}.Release|x64.Build.0 = Release|x64
-		{00000000-0000-0000-000A-000000000001}.Release|x64.Deploy.0 = Release|x64
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Debug|ARM.ActiveCfg = Debug|ARM
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Debug|ARM.Build.0 = Debug|ARM
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Debug|ARM.Deploy.0 = Debug|ARM
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Debug|Win32.Build.0 = Debug|Win32
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Debug|Win32.Deploy.0 = Debug|Win32
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Debug|x64.ActiveCfg = Debug|x64
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Debug|x64.Build.0 = Debug|x64
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Debug|x64.Deploy.0 = Debug|x64
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Release|ARM.ActiveCfg = Release|ARM
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Release|ARM.Build.0 = Release|ARM
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Release|ARM.Deploy.0 = Release|ARM
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Release|Win32.ActiveCfg = Release|Win32
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Release|Win32.Build.0 = Release|Win32
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Release|Win32.Deploy.0 = Release|Win32
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Release|x64.ActiveCfg = Release|x64
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Release|x64.Build.0 = Release|x64
+		{120D27DA-64D3-5996-A34A-4FE5202283A2}.Release|x64.Deploy.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

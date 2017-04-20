@@ -1,0 +1,49 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario9"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10" Grid.Row="0">
+                <TextBlock x:Name="description" Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Custom map appearance
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+                <ComboBox Name="setDefaultStyleCombobox" SelectionChanged="SetDefaultStyleCombobox_SelectionChanged">
+                    <ComboBoxItem Content="Aerial" />
+                    <ComboBoxItem Content="Aerial With Overlay" />
+                    <ComboBoxItem Content="Road Dark" />
+                    <ComboBoxItem Content="Road Light" IsSelected="True" />
+                    <ComboBoxItem Content="High Contrast Dark" />
+                    <ComboBoxItem Content="High Contrast Light" />
+                    <ComboBoxItem Content="Custom" />
+                </ComboBox>
+            </StackPanel>
+            <maps:MapControl x:Name="myMap" Loaded="MyMap_Loaded" Grid.Row="3"/>
+        </Grid>
+    </Grid>
+</Page>

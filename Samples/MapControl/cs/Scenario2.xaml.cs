@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
+using Windows.Foundation.Metadata;
 using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -25,10 +26,14 @@ namespace SDKTemplate
     public sealed partial class Scenario2 : Page
     {
         RandomAccessStreamReference mapIconStreamReference;
+        RandomAccessStreamReference mapBillboardStreamReference;
+
         public Scenario2()
         {
             this.InitializeComponent();
+
             mapIconStreamReference = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/MapPin.png"));
+            mapBillboardStreamReference = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/billboard.jpg"));
         }
 
         private void MyMap_Loaded(object sender, RoutedEventArgs e)
@@ -46,6 +51,20 @@ namespace SDKTemplate
             mapIcon1.Image = mapIconStreamReference;
             mapIcon1.ZIndex = 0;
             myMap.MapElements.Add(mapIcon1);
+        }
+
+        /// <summary>
+        /// This method will create a new billboard at the center of the map with the current camera as reference
+        /// </summary>
+        private void mapBillboardAddButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            // MapBillboard scales with respect to the perspective projection of the 3D camera.
+            // The reference camera determines at what view distance the billboard image appears at 1x scale.
+            MapBillboard mapBillboard = new MapBillboard(myMap.ActualCamera);
+            mapBillboard.Location = myMap.Center;
+            mapBillboard.NormalizedAnchorPoint = new Point(0.5, 1.0);
+            mapBillboard.Image = mapBillboardStreamReference;
+            myMap.MapElements.Add(mapBillboard);
         }
 
         /// <summary>
