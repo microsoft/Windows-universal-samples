@@ -12,8 +12,8 @@
 using SDKTemplate;
 using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
 using Windows.Devices.Enumeration;
 using Windows.Foundation;
 using Windows.Media;
@@ -76,6 +76,16 @@ namespace AudioCreation
 
         // 120 seconds of 48Khz stereo float audio samples (43.9MB byte array)
         byte[] byteBuffer = new byte[120 * 48000 * 2 * 4];
+
+        /// <summary>
+        /// Unmanaged import of memcpy for maximally fast data copying.
+        /// </summary>
+        /// <remarks>
+        /// I didn't expect this to work in a UWP app, but evidently -- at least for x64 desktop execution -- it does!
+        /// http://code4k.blogspot.com/2010/10/high-performance-memcpy-gotchas-in-c.html is evidence that this is the fastest strategy.
+        /// </remarks>
+        [DllImport("msvcrt.dll", EntryPoint = "memcpy", CallingConvention = CallingConvention.Cdecl, SetLastError = false)]
+        public static unsafe extern void* CopyMemory(void* dest, void* src, ulong count);
 
         DeviceInformationCollection inputDevices;
         DeviceInformationCollection outputDevices;
@@ -268,18 +278,9 @@ namespace AudioCreation
                     capacityInBytes = (uint)byteBuffer.Length - maxIndexInBytes;
                 }
 
-                fixed (byte* buf = byteBuffer)
+                fixed (byte* bufferOfBytes = byteBuffer)
                 {
-                    for (int i = 0; i < capacityInBytes; i++)
-                    {
-                        byte b = dataInBytes[i + bufferStart];
-                        buf[i + maxIndexInBytes] = b;
-
-                        if (b != 0)
-                        {
-                            nonZeroSampleCount++;
-                        }
-                    }
+                    CopyMemory(bufferOfBytes + maxIndexInBytes, dataInBytes, capacityInBytes);
                 }
                 maxIndexInBytes += capacityInBytes;
             }
@@ -368,7 +369,7 @@ namespace AudioCreation
                 ((IMemoryBufferByteAccess)reference).GetBuffer(out dataInBytes, out capacityInBytes);
 
                 uint bytesRemaining = capacityInBytes;
-                uint position = 0;
+                uint positionInBytes = 0;
 
                 while (bytesRemaining > 0)
                 {
@@ -384,15 +385,12 @@ namespace AudioCreation
                         }
                     }
 
-                    fixed (byte* buf = byteBuffer)
+                    fixed (byte* bufOfBytes = byteBuffer)
                     {
-                        for (int i = 0; i < bytesInThisIteration; i++)
-                        {
-                            dataInBytes[position + i] = buf[i + currentIndexInBytes];
-                        }
+                        CopyMemory(dataInBytes + positionInBytes, bufOfBytes + currentIndexInBytes, bytesInThisIteration);
                     }
                     currentIndexInBytes += bytesInThisIteration;
-                    position += bytesInThisIteration;
+                    positionInBytes += bytesInThisIteration;
 
                     bytesRemaining -= bytesInThisIteration;
                 }
