@@ -68,9 +68,9 @@ namespace AudioCreation
         uint lastCapacityEncountered;
 
         // Current record/play index into the buffer.
-        uint currentIndex;
+        uint currentIndexInBytes;
         // Maximum index recorded in the buffer.
-        uint maxIndex;
+        uint maxIndexInBytes;
         // Number of nonzero samples in input.
         uint nonZeroSampleCount;
 
@@ -141,7 +141,7 @@ namespace AudioCreation
                 recordButton.Content = "Record";
                 TimeSpan span = DateTime.Now - recordingStartTime;
                 int msec = span.Seconds * 1000 + span.Milliseconds;
-                rootPage.NotifyUser($"Recorded OK! {maxIndex} bytes, {maxIndex>>3} samples, {audioFrameCount} frames, {msec} msec, {nonZeroSampleCount} non-zero samples", NotifyType.StatusMessage);
+                rootPage.NotifyUser($"Recorded OK! {maxIndexInBytes} bytes, {maxIndexInBytes>>3} samples, {audioFrameCount} frames, {msec} msec, {nonZeroSampleCount} non-zero samples", NotifyType.StatusMessage);
                 createGraphButton.IsEnabled = false;
                 playButton.IsEnabled = true;
                 audioPipe.Fill = new SolidColorBrush(Color.FromArgb(255, 49, 49, 49));
@@ -188,8 +188,8 @@ namespace AudioCreation
 
                 isRecording = true;
                 requestStartRecording = false;
-                maxIndex = 0;
-                currentIndex = 0;
+                maxIndexInBytes = 0;
+                currentIndexInBytes = 0;
                 audioFrameCount = 0;
                 nonZeroSampleCount = 0;
                 recordingStartTime = DateTime.Now;
@@ -247,7 +247,7 @@ namespace AudioCreation
                 maxCapacityEncountered = Math.Max(maxCapacityEncountered, capacityInBytes);
 
                 uint bufferStart = 0;
-                if (maxIndex == 0)
+                if (maxIndexInBytes == 0)
                 {
                     // if maxCapacityEncountered is greater than the audio graph buffer size, 
                     // then the audio graph decided to give us a big backload of buffer content
@@ -262,10 +262,10 @@ namespace AudioCreation
 
                 // if we fill up, just spin forever.  don't try to exit recording from audio thread,
                 // we don't bother with two-way signaling.
-                if (maxIndex + capacityInBytes > byteBuffer.Length)
+                if (maxIndexInBytes + capacityInBytes > byteBuffer.Length)
                 {
-                    Debug.Assert(byteBuffer.Length >= maxIndex);
-                    capacityInBytes = (uint)byteBuffer.Length - maxIndex;
+                    Debug.Assert(byteBuffer.Length >= maxIndexInBytes);
+                    capacityInBytes = (uint)byteBuffer.Length - maxIndexInBytes;
                 }
 
                 fixed (byte* buf = byteBuffer)
@@ -273,7 +273,7 @@ namespace AudioCreation
                     for (int i = 0; i < capacityInBytes; i++)
                     {
                         byte b = dataInBytes[i + bufferStart];
-                        buf[i + maxIndex] = b;
+                        buf[i + maxIndexInBytes] = b;
 
                         if (b != 0)
                         {
@@ -281,7 +281,7 @@ namespace AudioCreation
                         }
                     }
                 }
-                maxIndex += capacityInBytes;
+                maxIndexInBytes += capacityInBytes;
             }
 
             audioFrameCount++;
@@ -289,13 +289,13 @@ namespace AudioCreation
 
         private void UpdateStatusWhileRecording()
         {
-            uint max = maxIndex >> 3;
-            uint curr = currentIndex >> 3;
+            // Right-shifting by 3, aka dividing by 8, converts from number of bytes to number of samples.
+            uint maxSamples = maxIndexInBytes >> 3;
             int frameCount = audioFrameCount;
             // may have stopped recording while this async notification was in flight
             if (isRecording)
             {
-                rootPage.NotifyUser($"recording: max samples {max}, frame count {frameCount}, last cap {lastCapacityEncountered}, max cap {maxCapacityEncountered}", NotifyType.StatusMessage);
+                rootPage.NotifyUser($"recording: max samples {maxSamples}, frame count {frameCount}, last cap {lastCapacityEncountered}, max cap {maxCapacityEncountered}", NotifyType.StatusMessage);
             }
         }
 
@@ -311,7 +311,7 @@ namespace AudioCreation
 
                 isPlaying = true;
                 requestStartPlaying = false;
-                currentIndex = 0;
+                currentIndexInBytes = 0;
             }
 
             if (isPlaying)
@@ -322,7 +322,9 @@ namespace AudioCreation
 
                 HandleOutgoingAudio(requiredSamples);
 
-                /*
+                /* This code updates the status bar in realtime while recording.
+                 * It's commented out to reduce memory allocations, but can be commented back in to aid in debugging.
+
                 int currentStatusMsec = DateTime.Now.Millisecond;
                 // update status every tenth of a second
                 if (lastStatusMsec % 100 > currentStatusMsec % 100)
@@ -371,13 +373,13 @@ namespace AudioCreation
                 while (bytesRemaining > 0)
                 {
                     uint bytesInThisIteration = bytesRemaining;
-                    if (currentIndex + bytesRemaining > maxIndex)
+                    if (currentIndexInBytes + bytesRemaining > maxIndexInBytes)
                     {
-                        bytesInThisIteration = maxIndex - currentIndex;
+                        bytesInThisIteration = maxIndexInBytes - currentIndexInBytes;
                         if (bytesInThisIteration == 0)
                         {
                             // wraparound; next iteration will get more bytes
-                            currentIndex = 0;
+                            currentIndexInBytes = 0;
                             continue;
                         }
                     }
@@ -386,10 +388,10 @@ namespace AudioCreation
                     {
                         for (int i = 0; i < bytesInThisIteration; i++)
                         {
-                            dataInBytes[position + i] = buf[i + currentIndex];
+                            dataInBytes[position + i] = buf[i + currentIndexInBytes];
                         }
                     }
-                    currentIndex += bytesInThisIteration;
+                    currentIndexInBytes += bytesInThisIteration;
                     position += bytesInThisIteration;
 
                     bytesRemaining -= bytesInThisIteration;
@@ -401,8 +403,8 @@ namespace AudioCreation
 
         private void UpdateStatusWhilePlaying()
         {
-            uint max = maxIndex >> 3;
-            uint curr = currentIndex >> 3;
+            uint max = maxIndexInBytes >> 3;
+            uint curr = currentIndexInBytes >> 3;
             // may have stopped playing while this async notification was in flight
             if (isPlaying)
             {

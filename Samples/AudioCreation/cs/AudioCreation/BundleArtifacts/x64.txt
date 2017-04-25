@@ -1,2 +1,0 @@
-MainPackage=C:\Git\Windows-universal-samples\Samples\AudioCreation\cs\AudioCreation\bin\x64\Debug\AudioCreation_0.1.0.0_x64_Debug.appx
-SymbolPackage=C:\Git\Windows-universal-samples\Samples\AudioCreation\cs\AudioCreation\AppPackages\AudioCreation_0.1.0.0_Debug_Test\AudioCreation_0.1.0.0_x64_Debug.appxsym
