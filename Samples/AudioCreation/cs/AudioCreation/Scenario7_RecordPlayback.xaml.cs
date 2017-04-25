@@ -81,8 +81,8 @@ namespace AudioCreation
         /// Unmanaged import of memcpy for maximally fast data copying.
         /// </summary>
         /// <remarks>
-        /// I didn't expect this to work in a UWP app, but evidently -- at least for x64 desktop execution -- it does!
-        /// http://code4k.blogspot.com/2010/10/high-performance-memcpy-gotchas-in-c.html is evidence that this is the fastest strategy.
+        /// http://code4k.blogspot.com/2010/10/high-performance-memcpy-gotchas-in-c.html is evidence that this is likely
+        /// to be a fast strategy (though the article is from 2010, we would expect native memcpy to still be hard to beat).
         /// </remarks>
         [DllImport("msvcrt.dll", EntryPoint = "memcpy", CallingConvention = CallingConvention.Cdecl, SetLastError = false)]
         public static unsafe extern void* CopyMemory(void* dest, void* src, ulong count);
@@ -287,7 +287,7 @@ namespace AudioCreation
 
             audioFrameCount++;
         }
-
+        
         private void UpdateStatusWhileRecording()
         {
             // Right-shifting by 3, aka dividing by 8, converts from number of bytes to number of samples.
@@ -347,9 +347,11 @@ namespace AudioCreation
         /// Handle a frame of outgoing audio to the output device.
         /// </summary>
         /// <remarks>
-        /// This pushes a megabyte of audio each time, to greatly reduce the number of callbacks.
-        /// 
-        /// We don't need the requiredSamples argument but we don't 
+        /// There is a very interesting tradeoff here.  It is possible to push more audio into the FrameInputNode
+        /// than is requested; requiredSamples is a minimum value, but more data can be provided.  Below, the 
+        /// definition of bytesRemaining allows you to choose either alternative, or any value in between,
+        /// based on whether you want minimum callbacks to the app (return a full buffer of data), or low-latency
+        /// app responsiveness (return only the minimum requiredSamples).
         /// </remarks>
         private unsafe void HandleOutgoingAudio(uint requiredSamples)
         {
@@ -368,9 +370,19 @@ namespace AudioCreation
                 // Get the buffer from the AudioFrame
                 ((IMemoryBufferByteAccess)reference).GetBuffer(out dataInBytes, out capacityInBytes);
 
-                uint bytesRemaining = capacityInBytes;
+                // Return just the required number of samples.
+                uint bytesRemaining = requiredSamples << 3;
+                // Or, alternatively, comment out the line above and uncomment this one, to return a full buffer's worth of data.
+                // This results in far fewer callbacks to the application, which is desirable if there is no need for low-latency
+                // varying audio rendering.
+                // uint bytesRemaining = capacityInBytes;
+
+                buffer.Length = bytesRemaining;
+                
                 uint positionInBytes = 0;
 
+                // As long as there are more bytes remaining in the dataInBytes buffer, copy from
+                // our buffer (wrapping back to the start if the end is reached, i.e. looping).
                 while (bytesRemaining > 0)
                 {
                     uint bytesInThisIteration = bytesRemaining;
@@ -385,6 +397,7 @@ namespace AudioCreation
                         }
                     }
 
+                    // Now copy bytesInThisIteration bytes into the output.
                     fixed (byte* bufOfBytes = byteBuffer)
                     {
                         CopyMemory(dataInBytes + positionInBytes, bufOfBytes + currentIndexInBytes, bytesInThisIteration);
