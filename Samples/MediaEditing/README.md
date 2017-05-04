@@ -74,7 +74,7 @@ viewable in the UI.
 Related topics
 --------------
 
-[Windows.Media.Editing namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.editing.aspx)
+[Windows.Media.Editing namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.editing.aspx)
 
 
 System requirements

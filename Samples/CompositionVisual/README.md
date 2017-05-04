@@ -6,23 +6,23 @@
 # Composition visual without framework sample
 
 This sample provides an introduction to the
-[**Windows.UI.Composition**](https://msdn.microsoft.com/en-us/library/windows.ui.composition.aspx) namespace.
+[**Windows.UI.Composition**](https://msdn.microsoft.com/library/windows.ui.composition.aspx) namespace.
 
 Windows 10 introduces a unified compositor and rendering engine for universal applications.
 Application can use the
-[**Windows.UI.Composition**](https://msdn.microsoft.com/en-us/library/windows.ui.composition.aspx) namespace
+[**Windows.UI.Composition**](https://msdn.microsoft.com/library/windows.ui.composition.aspx) namespace
 to create composition objects and apply animation, effects and manipulations on those objects.
 
 The sample demonstrates the following:
 
 * Relying entirely on composition objects, rather than using XAML, HTML, or DirectX.
-* Setting up a [**Compositor**](https://msdn.microsoft.com/en-us/library/windows.ui.composition.compositor.aspx) for creating composition objects.
-* Creating a [**ContainerVisual**](https://msdn.microsoft.com/en-us/library/windows.ui.composition.containervisual.aspx)
+* Setting up a [**Compositor**](https://msdn.microsoft.com/library/windows.ui.composition.compositor.aspx) for creating composition objects.
+* Creating a [**ContainerVisual**](https://msdn.microsoft.com/library/windows.ui.composition.containervisual.aspx)
   to hold all of the composition objects.
-* Constructing and walking a simple tree of [**Visual**](https://msdn.microsoft.com/en-us/library/windows.ui.composition.visual.aspx) objects.
-* Using a [**SolidColorVisual**](https://msdn.microsoft.com/en-us/library/windows.ui.composition.solidcolorvisual.aspx)
+* Constructing and walking a simple tree of [**Visual**](https://msdn.microsoft.com/library/windows.ui.composition.visual.aspx) objects.
+* Using a [**SolidColorVisual**](https://msdn.microsoft.com/library/windows.ui.composition.solidcolorvisual.aspx)
 * Receiving input and
-  changing opacity of a [**Visual**](https://msdn.microsoft.com/en-us/library/windows.ui.composition.visual.aspx) based on that input.
+  changing opacity of a [**Visual**](https://msdn.microsoft.com/library/windows.ui.composition.visual.aspx) based on that input.
 
 **Note** The Universal Windows app samples require Visual Studio 2015 to build and Windows 10 to execute.
 (See additional discussion below under **Prerequisites**.)
@@ -35,7 +35,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 - This sample will not pass WACK because it uses the
   `previewUiComposition` capability in order to access the
-  [**Windows.UI.Composition**](https://msdn.microsoft.com/en-us/library/windows.ui.composition.aspx) preview namespace.
+  [**Windows.UI.Composition**](https://msdn.microsoft.com/library/windows.ui.composition.aspx) preview namespace.
 - This sample requires Windows 10 build 10240 to run. It will not run on Insider Builds after 10240 due to updates as noted in the Known Issues section on MSDN.
 (See **Other resources** below.)
 
@@ -43,11 +43,11 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-* [**Windows.UI.Composition**](https://msdn.microsoft.com/en-us/library/windows.ui.composition.aspx) namespace
-* [**Compositor**](https://msdn.microsoft.com/en-us/library/windows.ui.composition.compositor.aspx) class
-* [**ContainerVisual**](https://msdn.microsoft.com/en-us/library/windows.ui.composition.containervisual.aspx) class
-* [**SolidColorVisual**](https://msdn.microsoft.com/en-us/library/windows.ui.composition.solidcolorvisual.aspx) class
-* [**Visual**](https://msdn.microsoft.com/en-us/library/windows.ui.composition.visual.aspx) class
+* [**Windows.UI.Composition**](https://msdn.microsoft.com/library/windows.ui.composition.aspx) namespace
+* [**Compositor**](https://msdn.microsoft.com/library/windows.ui.composition.compositor.aspx) class
+* [**ContainerVisual**](https://msdn.microsoft.com/library/windows.ui.composition.containervisual.aspx) class
+* [**SolidColorVisual**](https://msdn.microsoft.com/library/windows.ui.composition.solidcolorvisual.aspx) class
+* [**Visual**](https://msdn.microsoft.com/library/windows.ui.composition.visual.aspx) class
 
 ### Other resources
 

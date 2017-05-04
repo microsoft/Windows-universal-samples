@@ -6,7 +6,7 @@
 # Bluetooth RFCOMM chat sample
 
 This sample demonstrates the use of classes in the
-[**Windows.Devices.Bluetooth.Rfcomm**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.bluetooth.rfcomm.aspx)
+[**Windows.Devices.Bluetooth.Rfcomm**](https://msdn.microsoft.com/library/windows/apps/windows.devices.bluetooth.rfcomm.aspx)
 namespace
 to communicate over sockets.
 
@@ -38,7 +38,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[**Windows.Devices.Bluetooth.Rfcomm**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.bluetooth.rfcomm.aspx)
+[**Windows.Devices.Bluetooth.Rfcomm**](https://msdn.microsoft.com/library/windows/apps/windows.devices.bluetooth.rfcomm.aspx)
 namespace
 
 ## System requirements

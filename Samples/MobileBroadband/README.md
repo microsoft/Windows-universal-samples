@@ -25,7 +25,7 @@ to be declared in package manifest.
 
 ### Reference
 
-[Mobile broadband API reference](https://msdn.microsoft.com/en-us/library/windows/apps/windows.networking.networkoperators.aspx)
+[Mobile broadband API reference](https://msdn.microsoft.com/library/windows/apps/windows.networking.networkoperators.aspx)
 
 ## System requirements
 

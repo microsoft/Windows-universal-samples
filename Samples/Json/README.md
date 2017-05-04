@@ -20,7 +20,7 @@ The following features can be used to retrieve text that contains JSON from an H
 
 -   [**Windows.Web.Http.HttpClient**](http://msdn.microsoft.com/library/windows/apps/dn298639) - Supports Universal Windows Platform (UWP) apps written in JavaScript, C\#, Visual Basic, or C++.
 -   [XML HTTP Extended Request (IXMLHttpRequest2)](http://msdn.microsoft.com/library/windows/apps/hh831163) - Supports UWP apps written in C++.
--   [C++ REST SDK](http://msdn.microsoft.com/en-us/library/jj988008(v=vs.120).aspx) - Supports UWP apps written in C++.
+-   [C++ REST SDK](http://msdn.microsoft.com/library/jj988008(v=vs.120).aspx) - Supports UWP apps written in C++.
 
 **Note** Use of this sample does not require Internet or intranet access so no network capabilities need to be set in the *Package.appmanifest* file.
 
@@ -35,7 +35,7 @@ The following features can be used to retrieve text that contains JSON from an H
 
 ### Reference
 
-[C++ REST SDK](http://msdn.microsoft.com/en-us/library/jj988008(v=vs.120).aspx)
+[C++ REST SDK](http://msdn.microsoft.com/library/jj988008(v=vs.120).aspx)
 
 [**JsonArray**](http://msdn.microsoft.com/library/windows/apps/br225234)
 

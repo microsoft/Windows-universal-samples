@@ -26,7 +26,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 <!-- Add links to related API -->
 
-[Media Transport Controls](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.mediatransportcontrols.aspx)
+[Media Transport Controls](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.mediatransportcontrols.aspx)
 
 ## System requirements
 

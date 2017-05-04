@@ -24,9 +24,9 @@ Specifically, this sample shows how to:
 
 <!-- Add links to related API -->
 
-[Wi-Fi Direct](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.wifidirect.aspx)
+[Wi-Fi Direct](https://msdn.microsoft.com/library/windows/apps/windows.devices.wifidirect.aspx)
 
-[Sockets](https://msdn.microsoft.com/en-us/library/windows/apps/windows.networking.sockets.aspx)
+[Sockets](https://msdn.microsoft.com/library/windows/apps/windows.networking.sockets.aspx)
 
 ## System requirements
 

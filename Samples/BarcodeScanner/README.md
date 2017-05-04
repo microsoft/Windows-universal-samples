@@ -12,7 +12,7 @@ Specifically, this sample shows how to:
 
 1.  **Obtain the barcode scanner**
 
-    Uses a [**DeviceWatcher**](https://docs.microsoft.com/en-us/uwp/api/Windows.Devices.Enumeration.DeviceWatcher)
+    Uses a [**DeviceWatcher**](https://docs.microsoft.com/uwp/api/Windows.Devices.Enumeration.DeviceWatcher)
     to enumerate and select the first barcode scanner.
 
 2.  **Claim the barcode scanner for exclusive use**

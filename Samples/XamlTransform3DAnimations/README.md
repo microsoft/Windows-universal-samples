@@ -26,11 +26,11 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[UIElement.Transform3D](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.uielement.transform3d.aspx)
+[UIElement.Transform3D](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.uielement.transform3d.aspx)
 
-[PerspectiveTransform3D](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.media.media3d.perspectivetransform3d.aspx)
+[PerspectiveTransform3D](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.media.media3d.perspectivetransform3d.aspx)
 
-[CompositeTransform3D](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.media.media3d.compositetransform3d.aspx)
+[CompositeTransform3D](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.media.media3d.compositetransform3d.aspx)
 
 ## System requirements
 

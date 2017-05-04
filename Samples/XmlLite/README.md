@@ -15,9 +15,9 @@ Specifically, this sample covers:
 
 ## Related topics
 
-[IXmlReader](https://msdn.microsoft.com/en-us/library/windows/desktop/ms752743(v=vs.85).aspx)
+[IXmlReader](https://msdn.microsoft.com/library/windows/desktop/ms752743(v=vs.85).aspx)
 
-[IXmlWriter](https://msdn.microsoft.com/en-us/library/windows/desktop/ms752860(v=vs.85).aspx)
+[IXmlWriter](https://msdn.microsoft.com/library/windows/desktop/ms752860(v=vs.85).aspx)
 
 ## System requirements
 

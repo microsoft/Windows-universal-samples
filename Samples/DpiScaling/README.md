@@ -19,7 +19,7 @@ Important APIs in this sample include:
 
 -   [**onresize**](http://msdn.microsoft.com/library/windows/apps/hh466035) event
 -   [**DisplayInformation**](http://msdn.microsoft.com/library/windows/apps/dn264258) class
--   [**RawPixelsPerViewPixel**](https://msdn.microsoft.com/en-us/library/windows.graphics.display.displayinformation.rawpixelsperviewpixel.aspx) property
+-   [**RawPixelsPerViewPixel**](https://msdn.microsoft.com/library/windows.graphics.display.displayinformation.rawpixelsperviewpixel.aspx) property
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
  

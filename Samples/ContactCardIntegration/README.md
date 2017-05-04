@@ -5,7 +5,7 @@
 
 # Contact Card integration sample
 
-This sample shows how to integrate your app into the People App's contact card and the Mini Contact card by using [**annotations**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.contacts.contactannotationlist.aspx).
+This sample shows how to integrate your app into the People App's contact card and the Mini Contact card by using [**annotations**](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.contacts.contactannotationlist.aspx).
 
 **Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
 
@@ -23,13 +23,13 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[**ContactAnnotationList**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.contacts.contactannotationlist.aspx)
+[**ContactAnnotationList**](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.contacts.contactannotationlist.aspx)
 
-[**ContactAnnotation**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.contacts.contactannotation.aspx)
+[**ContactAnnotation**](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.contacts.contactannotation.aspx)
 
 [**Windows.ApplicationModel.Contacts**](http://msdn.microsoft.com/library/windows/apps/br225002)
 
-[**Handling URI activation (XAML)**](https://technet.microsoft.com/en-us/windowsserver/hh779670)
+[**Handling URI activation (XAML)**](https://technet.microsoft.com/windowsserver/hh779670)
 
 ## System requirements
 

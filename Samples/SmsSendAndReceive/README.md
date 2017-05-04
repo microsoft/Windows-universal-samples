@@ -33,7 +33,7 @@ to be declared in the package manifest.
 
 ### Reference
 
-[SMS API reference](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.sms.aspx)
+[SMS API reference](https://msdn.microsoft.com/library/windows/apps/windows.devices.sms.aspx)
 
 ## System requirements
 

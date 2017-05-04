@@ -20,7 +20,7 @@ as well as the ability to perform calendar-aware math operations.
 
 The Calendar object can convert to and from a language-specific date type:
 
-* C++: [**Windows::Foundation::DateTime**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.foundation.datetime.aspx)
+* C++: [**Windows::Foundation::DateTime**](https://msdn.microsoft.com/library/windows/apps/windows.foundation.datetime.aspx)
 * C#: [**DateTimeOffset**](http://msdn.microsoft.com/library/windows/apps/system.datetimeoffset.aspx)
 * JavaScript: [**Date**](https://msdn.microsoft.com/library/windows/apps/cd9w2te4(v=vs.94).aspx)
 

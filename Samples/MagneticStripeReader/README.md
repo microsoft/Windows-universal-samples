@@ -11,7 +11,7 @@ Specifically, this sample shows how to:
 
 1.  **Get the magnetic stripe reader**
 
-    Uses a [**DeviceWatcher**](https://docs.microsoft.com/en-us/uwp/api/Windows.Devices.Enumeration.DeviceWatcher)
+    Uses a [**DeviceWatcher**](https://docs.microsoft.com/uwp/api/Windows.Devices.Enumeration.DeviceWatcher)
     to enumerate and select the first magnetic stripe reader.
 
 2.  **Claim the magnetic stripe reader for exclusive use**

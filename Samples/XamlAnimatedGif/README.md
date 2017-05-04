@@ -21,11 +21,11 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[Image](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.image.aspx)
+[Image](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.image.aspx)
 
 [CanvasImageSource](http://microsoft.github.io/Win2D/html/T_Microsoft_Graphics_Canvas_UI_Xaml_CanvasImageSource.htm)
 
-[BitmapDecoder](https://msdn.microsoft.com/en-us/library/windows/apps/windows.graphics.imaging.bitmapdecoder.aspx)
+[BitmapDecoder](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.bitmapdecoder.aspx)
 
 ## System requirements
 

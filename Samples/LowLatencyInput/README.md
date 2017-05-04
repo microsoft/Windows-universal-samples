@@ -27,9 +27,9 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 [Reduce latency with DXGI 1.3 swap chains](https://msdn.microsoft.com/library/windows/apps/mt210781)
 
-[DirectX and XAML](https://msdn.microsoft.com/en-us/library/windows/apps/hh825871.aspx)
+[DirectX and XAML](https://msdn.microsoft.com/library/windows/apps/hh825871.aspx)
 
-[Creating an dedicated input thread](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.swapchainpanel.createcoreindependentinputsource.aspx)
+[Creating an dedicated input thread](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.swapchainpanel.createcoreindependentinputsource.aspx)
 
 
 ## System requirements

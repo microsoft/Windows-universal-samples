@@ -36,13 +36,13 @@ Other files are boilerplate files used for UWP sample apps.
 
 ## Related topics
 
-[IDWriteTextLayout3 interface](https://msdn.microsoft.com/en-us/library/windows/desktop/dn900405)  
-[IDWriteTextLayout3::SetLineSpacing method](https://msdn.microsoft.com/en-us/library/windows/desktop/dn900409)  
-[DWRITE\_LINE\_SPACING structure](https://msdn.microsoft.com/en-us/library/windows/desktop/dn933216)  
-[DWRITE\_LINE\_SPACING_METHOD enumeration](https://msdn.microsoft.com/en-us/library/windows/desktop/dd368101)  
-[DWRITE\_FONT\_LINE_GAP\_USAGE enumeration](https://msdn.microsoft.com/en-us/library/windows/desktop/dn933211)  
-[IDWriteTextLayout3::GetLineMetrics method](https://msdn.microsoft.com/en-us/library/windows/desktop/dn900406)  
-[DWRITE\_LINE\_METRICS1 structure](https://msdn.microsoft.com/en-us/library/windows/desktop/dn933215)  
+[IDWriteTextLayout3 interface](https://msdn.microsoft.com/library/windows/desktop/dn900405)  
+[IDWriteTextLayout3::SetLineSpacing method](https://msdn.microsoft.com/library/windows/desktop/dn900409)  
+[DWRITE\_LINE\_SPACING structure](https://msdn.microsoft.com/library/windows/desktop/dn933216)  
+[DWRITE\_LINE\_SPACING_METHOD enumeration](https://msdn.microsoft.com/library/windows/desktop/dd368101)  
+[DWRITE\_FONT\_LINE_GAP\_USAGE enumeration](https://msdn.microsoft.com/library/windows/desktop/dn933211)  
+[IDWriteTextLayout3::GetLineMetrics method](https://msdn.microsoft.com/library/windows/desktop/dn900406)  
+[DWRITE\_LINE\_METRICS1 structure](https://msdn.microsoft.com/library/windows/desktop/dn933215)  
 
 
 ## System requirements

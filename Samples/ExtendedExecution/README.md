@@ -31,15 +31,15 @@ See **Deploying and running the sample** below for instructions on using the sam
 
 ### Other resources
 
-[Background Tasks and Extended Execution](https://msdn.microsoft.com/en-us/magazine/mt590969)
+[Background Tasks and Extended Execution](https://msdn.microsoft.com/magazine/mt590969)
 
-[Launching, resuming, and background tasks](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/mt227652.aspx)
+[Launching, resuming, and background tasks](https://msdn.microsoft.com/library/windows/apps/xaml/mt227652.aspx)
 
 [Support your app with background tasks](https://msdn.microsoft.com/library/windows/apps/mt299103)
 
 ### Reference
 
-[**Windows.ApplicationModel.ExtendedExecution**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.extendedexecution.aspx)
+[**Windows.ApplicationModel.ExtendedExecution**](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.extendedexecution.aspx)
 
 ### Related technologies
 
@@ -113,5 +113,5 @@ some scenarios require you to run the sample without debugging.
 
 See the following topics for step-by-step information about using extended execution:
 
--   [Background Tasks and Extended Execution](https://msdn.microsoft.com/en-us/magazine/mt590969)
+-   [Background Tasks and Extended Execution](https://msdn.microsoft.com/magazine/mt590969)
 

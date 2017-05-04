@@ -34,10 +34,10 @@ This scenario brings all the prior scenarios together and shows how to use them 
 Related topics
 --------------
 
-[Windows.Media.Casting namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.casting.aspx)
-[Windows.Media.DialProtocol namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.dialprotocol.aspx)
-[Windows.UI.ViewManagement.ProjectionManager API](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.projectionmanager.aspx)
-[Windows.Devices.Enumeration.DevicePicker API](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.enumeration.devicepicker.aspx)
+[Windows.Media.Casting namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.casting.aspx)
+[Windows.Media.DialProtocol namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.dialprotocol.aspx)
+[Windows.UI.ViewManagement.ProjectionManager API](https://msdn.microsoft.com/library/windows/apps/windows.ui.viewmanagement.projectionmanager.aspx)
+[Windows.Devices.Enumeration.DevicePicker API](https://msdn.microsoft.com/library/windows/apps/windows.devices.enumeration.devicepicker.aspx)
 
 System requirements
 -----------------------------

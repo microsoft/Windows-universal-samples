@@ -5,7 +5,7 @@
 
 # Phone call sample
 
-This sample shows how to use the [**Calls**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.calls.aspx) APIs. This sample does not follow the typical sample template pattern, it is a sample app that uses the MWC pattern to give you a working E2E phone call application to start with. 
+This sample shows how to use the [**Calls**](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.calls.aspx) APIs. This sample does not follow the typical sample template pattern, it is a sample app that uses the MWC pattern to give you a working E2E phone call application to start with. 
 
 NOTE: This is a mobile only sample.
 

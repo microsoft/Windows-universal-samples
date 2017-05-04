@@ -52,7 +52,7 @@ The custom effect has a property set that can be modified by calling the **SetPr
 Related topics
 --------------
 
-[Windows.Media.Audio namespace] (https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.audio.aspx)
+[Windows.Media.Audio namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.audio.aspx)
 
 
 System requirements

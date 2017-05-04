@@ -14,12 +14,12 @@ Specifically, this sample shows how to:
 - Hook up UI in XAML
 
 This sample uses the following Direct2D effects:
-- [Color management](http://msdn.microsoft.com/en-us/library/windows/desktop/hh706318)
-- [Straighten](http://msdn.microsoft.com/en-us/library/windows/desktop/dn900462)
-- [Temperature and tint](http://msdn.microsoft.com/en-us/library/windows/desktop/dn900463)
-- [Saturation](http://msdn.microsoft.com/en-us/library/windows/desktop/hh706369)
-- [Contrast](http://msdn.microsoft.com/en-us/library/windows/desktop/dn890716)
-- [Highlights and Shadows](http://msdn.microsoft.com/en-us/library/windows/desktop/dn890773)
+- [Color management](http://msdn.microsoft.com/library/windows/desktop/hh706318)
+- [Straighten](http://msdn.microsoft.com/library/windows/desktop/dn900462)
+- [Temperature and tint](http://msdn.microsoft.com/library/windows/desktop/dn900463)
+- [Saturation](http://msdn.microsoft.com/library/windows/desktop/hh706369)
+- [Contrast](http://msdn.microsoft.com/library/windows/desktop/dn890716)
+- [Highlights and Shadows](http://msdn.microsoft.com/library/windows/desktop/dn890773)
 
 ## Sample project files
 

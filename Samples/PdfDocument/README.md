@@ -25,11 +25,11 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[**Windows.Data.Pdf** namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.data.pdf.aspx)
+[**Windows.Data.Pdf** namespace](https://msdn.microsoft.com/library/windows/apps/windows.data.pdf.aspx)
 
-[**PdfDocument** class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.data.pdf.pdfdocument.aspx)
+[**PdfDocument** class](https://msdn.microsoft.com/library/windows/apps/windows.data.pdf.pdfdocument.aspx)
 
-[**PdfPage** class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.data.pdf.pdfpage.aspx)
+[**PdfPage** class](https://msdn.microsoft.com/library/windows/apps/windows.data.pdf.pdfpage.aspx)
 
 ## System requirements
 

@@ -19,7 +19,7 @@ To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.c
 To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
-[ListView and GridView UI optimization](https://msdn.microsoft.com/en-us/library/windows/apps/mt204776.aspx)
+[ListView and GridView UI optimization](https://msdn.microsoft.com/library/windows/apps/mt204776.aspx)
 
 ### Samples
 
@@ -31,9 +31,9 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 <!-- Add links to related API -->
 
-[IItemsRangeInfo](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.data.iitemsrangeinfo.aspx)
+[IItemsRangeInfo](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.data.iitemsrangeinfo.aspx)
 
-[ISelectionInfo](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.data.iselectioninfo.aspx)
+[ISelectionInfo](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.data.iselectioninfo.aspx)
 
 ## System requirements
 

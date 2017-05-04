@@ -28,7 +28,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[JapanesePhoneticAnalyzer class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.globalization.japanesephoneticanalyzer.aspx)
+[JapanesePhoneticAnalyzer class](https://msdn.microsoft.com/library/windows/apps/windows.globalization.japanesephoneticanalyzer.aspx)
 
 ## System requirements
 

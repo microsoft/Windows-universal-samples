@@ -18,7 +18,7 @@ It also requires the [internet client capability](https://msdn.microsoft.com/lib
 
 When you incorporate this sample into your own app,
 obtain your own ApplicationId and AdUnitId from the Dev Center.
-See [Monetize with Ads](https://msdn.microsoft.com/en-us/library/windows/apps/mt170658.aspx) on MSDN
+See [Monetize with Ads](https://msdn.microsoft.com/library/windows/apps/mt170658.aspx) on MSDN
 for more details.
 
 ## Related topics

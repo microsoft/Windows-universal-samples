@@ -6,7 +6,7 @@
 # Contact cards sample
 
 This sample shows how to show contact cards using methods of the
-[**ContactManager**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.contacts.contactmanager.aspx)
+[**ContactManager**](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.contacts.contactmanager.aspx)
 class.
 
 This sample has three scenarios.
@@ -16,7 +16,7 @@ This sample has three scenarios.
   Mini contact cards appear as a pop-up window inside the app.
   Apps provide an anchor rectangle around which the mini card will be displayed
   and can provide a suggested position of the mini contact card relative to the anchor rectangle.
-  The [**ShowContactCard**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.contacts.contactmanager.showcontactcard.aspx)
+  The [**ShowContactCard**](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.contacts.contactmanager.showcontactcard.aspx)
   method displays a mini contact card.
 
 - **Show mini contact card with delay loaded-data**
@@ -24,13 +24,13 @@ This sample has three scenarios.
   Display the mini contact card immediately
   while the app obtains additional information about the contact in the background.
   The card is updated when the additional information is available.
-  The [**ShowDelayLoadedContactCard**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.contacts.contactmanager.showdelayloadedcontactcard.aspx)
+  The [**ShowDelayLoadedContactCard**](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.contacts.contactmanager.showdelayloadedcontactcard.aspx)
   method displays a delay loaded mini contact card.
 
 - **Show full contact card**
 
   Full contact cards appear as a separate window.
-  The [**ShowFullContactCard**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.contacts.contactmanager.showfullcontactcard.aspx)
+  The [**ShowFullContactCard**](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.contacts.contactmanager.showfullcontactcard.aspx)
   method displays a full contact card.
 
 Not all devices support mini contact cards.

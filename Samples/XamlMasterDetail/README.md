@@ -5,7 +5,7 @@
 
 # Master/detail sample
 
-This sample shows how to implement a responsive master/detail experience in XAML. In the [master/detail pattern](https://msdn.microsoft.com/en-us/library/windows/apps/dn997765.aspx), a master list is used to select an item that will then appear in a detail view.
+This sample shows how to implement a responsive master/detail experience in XAML. In the [master/detail pattern](https://msdn.microsoft.com/library/windows/apps/dn997765.aspx), a master list is used to select an item that will then appear in a detail view.
 
 When the app view is sufficiently wide, the master list and detail view should appear side by side in the same app page. However, on smaller screen sizes, the two pieces of UI should appear on different pages, allowing the user to navigate between them. This sample shows how to implement these experiences and adaptively switch between them based on the size of the screen.
 
@@ -31,9 +31,9 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[VisualState](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.visualstate.aspx)
+[VisualState](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.visualstate.aspx)
 
-[NavigationThemeTransition](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/windows.ui.xaml.media.animation.navigationthemetransition.aspx)
+[NavigationThemeTransition](https://msdn.microsoft.com/library/windows/apps/xaml/windows.ui.xaml.media.animation.navigationthemetransition.aspx)
 
 
 ## System requirements

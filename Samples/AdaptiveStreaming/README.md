@@ -20,7 +20,7 @@ Related topics
 --------------
 
 
-[Windows.Media.Streaming.Adaptive namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.streaming.adaptive.aspx)
+[Windows.Media.Streaming.Adaptive namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.streaming.adaptive.aspx)
 
 System requirements
 -----------------------------
