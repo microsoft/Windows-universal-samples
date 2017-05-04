@@ -34,13 +34,13 @@ Microsoft Visual Studio 2015 Update 3 and the Microsoft HoloLens Emulator, go to
 ### Reference
 
 The following types are used in this code sample:
-* [Windows.Media.SpeechRecognition namespace](https://docs.microsoft.com/en-us/uwp/api/windows.media.speechrecognition)
-  * [SpeechRecognizer class](https://docs.microsoft.com/en-us/uwp/api/Windows.Media.SpeechRecognition.SpeechRecognizer)
-* [SpeechContinuousRecognitionSession class](https://docs.microsoft.com/en-us/uwp/api/windows.media.speechrecognition.speechcontinuousrecognitionsession)
-  * [SpeechRecognitionCompilationResult class](https://docs.microsoft.com/en-us/uwp/api/windows.media.speechrecognition.speechrecognitioncompilationresult)
-  * [SpeechRecognitionResult class](https://docs.microsoft.com/en-us/uwp/api/windows.media.speechrecognition.speechrecognitionresult)
-  * [SpeechRecognitionListConstraint class](https://docs.microsoft.com/en-us/uwp/api/windows.media.speechrecognition.speechrecognitionlistconstraint)
-  * [SpeechSynthesizer class](https://docs.microsoft.com/en-us/uwp/api/windows.media.speechsynthesis.speechsynthesizer)
+* [Windows.Media.SpeechRecognition namespace](https://docs.microsoft.com/uwp/api/windows.media.speechrecognition)
+  * [SpeechRecognizer class](https://docs.microsoft.com/uwp/api/Windows.Media.SpeechRecognition.SpeechRecognizer)
+* [SpeechContinuousRecognitionSession class](https://docs.microsoft.com/uwp/api/windows.media.speechrecognition.speechcontinuousrecognitionsession)
+  * [SpeechRecognitionCompilationResult class](https://docs.microsoft.com/uwp/api/windows.media.speechrecognition.speechrecognitioncompilationresult)
+  * [SpeechRecognitionResult class](https://docs.microsoft.com/uwp/api/windows.media.speechrecognition.speechrecognitionresult)
+  * [SpeechRecognitionListConstraint class](https://docs.microsoft.com/uwp/api/windows.media.speechrecognition.speechrecognitionlistconstraint)
+  * [SpeechSynthesizer class](https://docs.microsoft.com/uwp/api/windows.media.speechsynthesis.speechsynthesizer)
  
 ## System requirements
 

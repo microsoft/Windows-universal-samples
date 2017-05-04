@@ -39,7 +39,7 @@ Scenario 2: Capture image from camera and extract text.
 [Windows.Media.Ocr namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.ocr.aspx)  
 [Windows.Globalization.Language class](https://msdn.microsoft.com/library/windows/apps/windows.globalization.language.aspx)  
 [GlobalizationPreferences.Languages property](https://msdn.microsoft.com/library/windows/apps/windows.system.userprofile.globalizationpreferences.languages.aspx)  
-[Language matching] (https://msdn.microsoft.com/library/windows/apps/jj673578.aspx)  
+[Language matching](https://msdn.microsoft.com/library/windows/apps/jj673578.aspx)  
 [Windows.Graphics.Imaging.BitmapDecoder class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.bitmapdecoder.aspx)  
 [Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.aspx)  
 

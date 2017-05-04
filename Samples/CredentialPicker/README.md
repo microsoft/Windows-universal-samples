@@ -28,8 +28,8 @@ Windows 10
 Related topics
 ---------------
 
-[Windows.Security.Credentials] (https://msdn.microsoft.com/library/windows/apps/br227089)  
-[Windows.Security.Credentials.UI] (https://msdn.microsoft.com/library/windows/apps/hh701356)  
+[Windows.Security.Credentials](https://msdn.microsoft.com/library/windows/apps/br227089)  
+[Windows.Security.Credentials.UI](https://msdn.microsoft.com/library/windows/apps/hh701356)  
 
 Build the sample
 ----------------

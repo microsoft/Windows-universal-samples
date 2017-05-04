@@ -34,16 +34,16 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Samples
 
-[AllJoyn Producer Experiences](http://go.microsoft.com/fwlink/p/?LinkId=534025)
-[AllJoyn Consumer Experiences](http://go.microsoft.com/fwlink/p/?LinkID=534021)
+[AllJoyn Producer Experiences](http://go.microsoft.com/fwlink/p/?LinkId=534025)  
+[AllJoyn Consumer Experiences](http://go.microsoft.com/fwlink/p/?LinkID=534021)  
 
 The AllSeen Alliance has samples in [Windows SDK](https://allseenalliance.org/developers/download)
 
 ### Reference
 
-[MSDN Reference](https://msdn.microsoft.com/library/windows/apps/windows.devices.alljoyn.aspx)
-[AllJoyn Reference] (https://allseenalliance.org/developers/develop/api-reference)
-[Troubleshooting AllJoyn blog](http://channel9.msdn.com/Blogs/Internet-of-Things-Blog/Troubleshooting-AllJoyn-with-Windows-10-Insider-Preview-Builds)
+[MSDN Reference](https://msdn.microsoft.com/library/windows/apps/windows.devices.alljoyn.aspx)  
+[AllJoyn Reference](https://allseenalliance.org/developers/develop/api-reference)  
+[Troubleshooting AllJoyn blog](http://channel9.msdn.com/Blogs/Internet-of-Things-Blog/Troubleshooting-AllJoyn-with-Windows-10-Insider-Preview-Builds)  
 
 ## System requirements
 

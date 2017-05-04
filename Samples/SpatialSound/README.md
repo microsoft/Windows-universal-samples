@@ -45,7 +45,7 @@ HRTF xAPO API is present but nonfunctional on Phone devices.
 ## Reference
 
 [XAudio2 API](https://msdn.microsoft.com/library/windows/desktop/hh405049.aspx)  
-[IXAPOHrtfParameters] (https://msdn.microsoft.com/library/windows/desktop/mt186608.aspx)  
+[IXAPOHrtfParameters](https://msdn.microsoft.com/library/windows/desktop/mt186608.aspx)  
 
 ## System requirements
 

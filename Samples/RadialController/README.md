@@ -30,6 +30,10 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## Related topics
 
+### Developer and UX guidance
+
+[Surface Dial interactions](https://msdn.microsoft.com/windows/uwp/input-and-devices/windows-wheel-interactions)
+
 ### Reference
 
 [RadialController](https://msdn.microsoft.com/library/windows/apps/windows.ui.input.radialcontroller.aspx)  
