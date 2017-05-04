@@ -40,7 +40,7 @@ These steps are necessary only if you want to run the code in Scenario 9 as it r
 2. Download a copy of your application from the store to get a valid license.
 3. Associate this test application with this application in the store.
 4. Deploy this application to your machine and overwrite the existing application.
-5. Setup your application following the instructions under the **Adding an Application** section at [Integrating Applications with Azure Active Directory](https://azure.microsoft.com/en-us/documentation/articles/active-directory-integrating-applications/).
+5. Setup your application following the instructions under the **Adding an Application** section at [Integrating Applications with Azure Active Directory](https://azure.microsoft.com/documentation/articles/active-directory-integrating-applications/).
 6. Replace the provided value of "tenantId" with your actual tenant ID for your Azure account.
 7. Replace the provided value of "clientId" with the actual value of your native application created in Azure.
 8. Replace the provided value of "clientSecret" with the actual value for your Azure account.

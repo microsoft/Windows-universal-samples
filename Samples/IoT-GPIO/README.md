@@ -5,7 +5,7 @@
 
 # General Purpose Input/Output (GPIO) sample
 
-The [**Windows.Devices.Gpio**](http://msdn.microsoft.com/en-us/library/windows.devices.gpio.aspx) namespace
+The [**Windows.Devices.Gpio**](http://msdn.microsoft.com/library/windows.devices.gpio.aspx) namespace
 allows apps to set, read, and react to state changes in the
 General Purpose Input/Output (GPIO) pins
 on a Windows IoT (Internet of Things) device.

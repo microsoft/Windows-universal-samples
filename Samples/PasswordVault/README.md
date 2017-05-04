@@ -44,7 +44,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[**Storing user credentials using the Credential Locker**](https://msdn.microsoft.com/en-us/library/windows/apps/dn448950.aspx)  
+[**Storing user credentials using the Credential Locker**](https://msdn.microsoft.com/library/windows/apps/dn448950.aspx)  
 [**Storing user credentials**](http://msdn.microsoft.com/library/windows/apps/hh465060)   
 [**Windows.Security.Credentials** namespace](http://msdn.microsoft.com/library/windows/apps/br227089) 
 

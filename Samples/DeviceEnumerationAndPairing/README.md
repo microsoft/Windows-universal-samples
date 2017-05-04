@@ -34,9 +34,9 @@ The sample demonstrates eight scenarios:
 
 <!-- Add links to related API -->
 
-[**Enumerating devices article**](http://msdn.microsoft.com/en-us/library/windows/apps/Hh464977)
+[**Enumerating devices article**](http://msdn.microsoft.com/library/windows/apps/Hh464977)
 
-[**Windows.Devices.Enumeration reference**](http://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.enumeration.aspx)
+[**Windows.Devices.Enumeration reference**](http://msdn.microsoft.com/library/windows/apps/windows.devices.enumeration.aspx)
 
 [**Windows Universal App Samples**](https://github.com/Microsoft/Windows-universal-samples)
 

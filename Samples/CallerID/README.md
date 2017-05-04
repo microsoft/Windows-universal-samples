@@ -22,11 +22,11 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[Windows.ApplicationModel.Calls.Provider namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.calls.provider.aspx)
+[Windows.ApplicationModel.Calls.Provider namespace](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.calls.provider.aspx)
 
-[PhoneCallOriginManager class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.calls.provider.phonecalloriginmanager.aspx)
+[PhoneCallOriginManager class](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.calls.provider.phonecalloriginmanager.aspx)
 
-[PhoneCallOrigin class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.calls.provider.phonecallorigin.aspx)
+[PhoneCallOrigin class](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.calls.provider.phonecallorigin.aspx)
 
 ## System requirements
 

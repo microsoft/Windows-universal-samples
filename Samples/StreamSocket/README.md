@@ -35,7 +35,7 @@ For a sample that shows how to use a [**StreamSocket**](http://msdn.microsoft.co
 
 This sample requires that network capabilities be set in the *Package.appxmanifest* file to allow the app to access the network at runtime. These capabilities can be set in the app manifest using Microsoft Visual Studio. For more information on network capabilities, see [How to set network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532).
 
-**Note**  Network communications using an IP loopback address cannot normally be used for interprocess communication between a UWP app and a different process (a different UWP app or a desktop app) because this is restricted by network isolation. Network communication using an IP loopback address is allowed within the same process for communication purposes in a UWP app. For more information, see [How to enable loopback and troubleshoot network isolation](https://msdn.microsoft.com/en-us/library/windows/apps/hh780593).
+**Note**  Network communications using an IP loopback address cannot normally be used for interprocess communication between a UWP app and a different process (a different UWP app or a desktop app) because this is restricted by network isolation. Network communication using an IP loopback address is allowed within the same process for communication purposes in a UWP app. For more information, see [How to enable loopback and troubleshoot network isolation](https://msdn.microsoft.com/library/windows/apps/hh780593).
 
 ## Related topics
 
@@ -53,7 +53,7 @@ This sample requires that network capabilities be set in the *Package.appxmanife
 
 [**Windows.Storage.Streams.DataWriter**](http://msdn.microsoft.com/library/windows/apps/br208154)
 
-[**SocketActivityTrigger**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.background.socketactivitytrigger.aspx)
+[**SocketActivityTrigger**](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.background.socketactivitytrigger.aspx)
 
 ### Samples
 

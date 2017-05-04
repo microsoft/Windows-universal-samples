@@ -39,17 +39,17 @@ The FaceDetector is intended to operate on a static image or a single frame of v
 
 ### Reference
 
-[Windows.Media.FaceAnalysis.FaceDetector](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.faceanalysis.facedetector.aspx)
+[Windows.Media.FaceAnalysis.FaceDetector](https://msdn.microsoft.com/library/windows/apps/windows.media.faceanalysis.facedetector.aspx)
 
-[Windows.Media.FaceAnalysis namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.faceanalysis.aspx)
+[Windows.Media.FaceAnalysis namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.faceanalysis.aspx)
 
-[Windows.Graphics.Imaging namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.graphics.imaging.aspx)
+[Windows.Graphics.Imaging namespace](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.aspx)
 
-[Windows.Storage.Pickers namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.storage.pickers.aspx)
+[Windows.Storage.Pickers namespace](https://msdn.microsoft.com/library/windows/apps/windows.storage.pickers.aspx)
 
-[Windows.Storage.Streams namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.storage.streams.aspx)
+[Windows.Storage.Streams namespace](https://msdn.microsoft.com/library/windows/apps/windows.storage.streams.aspx)
 
-[Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.devices.aspx)
+[Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)
 
 ## System requirements
 

@@ -23,7 +23,7 @@ Specifically, this sample covers:
 
 [Windows.Data.Xml.Dom.XmlDocument](https://msdn.microsoft.com/library/windows/apps/br206173)
 
-[Windows.Data.Xml.Xsl.XsltProcessor](https://msdn.microsoft.com/en-us/library/windows/apps/windows.data.xml.xsl.xsltprocessor.aspx)
+[Windows.Data.Xml.Xsl.XsltProcessor](https://msdn.microsoft.com/library/windows/apps/windows.data.xml.xsl.xsltprocessor.aspx)
 
 ## System requirements
 

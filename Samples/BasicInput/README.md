@@ -25,17 +25,17 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[PointerPoint](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.input.pointerpoint.aspx)
+[PointerPoint](https://msdn.microsoft.com/library/windows/apps/windows.ui.input.pointerpoint.aspx)
 
-[KeyboardCapabilities](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.input.keyboardcapabilities.aspx)
+[KeyboardCapabilities](https://msdn.microsoft.com/library/windows/apps/windows.devices.input.keyboardcapabilities.aspx)
 
-[MouseCapabilities](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.input.mousecapabilities.aspx)
+[MouseCapabilities](https://msdn.microsoft.com/library/windows/apps/windows.devices.input.mousecapabilities.aspx)
 
-[TouchCapabilities](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.input.touchcapabilities.aspx)
+[TouchCapabilities](https://msdn.microsoft.com/library/windows/apps/windows.devices.input.touchcapabilities.aspx)
 
-[ManipulationMode](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.uielement.manipulationmode.aspx)
+[ManipulationMode](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.uielement.manipulationmode.aspx)
 
-[GestureRecognizer](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.input.gesturerecognizer.aspx)
+[GestureRecognizer](https://msdn.microsoft.com/library/windows/apps/windows.ui.input.gesturerecognizer.aspx)
 
 ## System requirements
 

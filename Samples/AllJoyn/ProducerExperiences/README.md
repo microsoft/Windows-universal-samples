@@ -34,8 +34,8 @@ The AllSeen Alliance has samples in [Windows SDK](https://allseenalliance.org/de
 
 ### Reference
 
-[MSDN Reference](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.alljoyn.aspx)
-[AllJoyn Reference] (https://allseenalliance.org/developers/develop/api-reference)
+[MSDN Reference](https://msdn.microsoft.com/library/windows/apps/windows.devices.alljoyn.aspx)
+[AllJoyn Reference](https://allseenalliance.org/developers/develop/api-reference)
 [Troubleshooting AllJoyn blog](http://channel9.msdn.com/Blogs/Internet-of-Things-Blog/Troubleshooting-AllJoyn-with-Windows-10-Insider-Preview-Builds)
 
 ## System requirements

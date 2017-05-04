@@ -22,7 +22,7 @@ to be declared in package manifest.
 
 ### Reference
 
-[USSD API reference](https://msdn.microsoft.com/en-us/library/windows/apps/windows.networking.networkoperators.aspx)
+[USSD API reference](https://msdn.microsoft.com/library/windows/apps/windows.networking.networkoperators.aspx)
 
 ## System requirements
 

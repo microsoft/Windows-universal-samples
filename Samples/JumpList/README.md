@@ -28,8 +28,8 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[JumpList class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.startscreen.jumplist.aspx)
-[JumpListItem class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.startscreen.jumplistitem.aspx)
+[JumpList class](https://msdn.microsoft.com/library/windows/apps/windows.ui.startscreen.jumplist.aspx)
+[JumpListItem class](https://msdn.microsoft.com/library/windows/apps/windows.ui.startscreen.jumplistitem.aspx)
 
 ## System requirements
 

@@ -62,7 +62,7 @@ Microsoft Passport can be enabled by setting a PIN in Windows Settings under **A
 * [Microsoft Passport and Windows Hello developer how-to guide](http://go.microsoft.com/fwlink/p/?LinkId=522066)
 * [Microsoft Passport architecture and implementation details on TechNet](https://technet.microsoft.com/library/mt589441%28v=vs.85%29.aspx)
 * [Windows Hello overview](http://windows.microsoft.com/windows-10/getstarted-what-is-hello)
-* [Implementation details for Microsoft Passport and Windows Hello](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/mt589441.aspx)
+* [Implementation details for Microsoft Passport and Windows Hello](https://msdn.microsoft.com/library/windows/apps/xaml/mt589441.aspx)
 
 ## System requirements
 

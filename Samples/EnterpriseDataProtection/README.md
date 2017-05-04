@@ -17,7 +17,7 @@ This sample will not pass WACK because it uses a special-use capability.
 
 ## Related Topics
 
-[Enterprise Data Protection Overview](https://msdn.microsoft.com/en-us/library/Dn985838(v=VS.85).aspx)
+[Enterprise Data Protection Overview](https://msdn.microsoft.com/library/Dn985838(v=VS.85).aspx)
 
 ## System requirements
 

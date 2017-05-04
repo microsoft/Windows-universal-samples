@@ -31,10 +31,10 @@ the default lamp device when page loads and provide a toggle to turn the lamp on
 Related topics
 --------------
 
-[Windows.Media.Devices namespace] (https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.devices.aspx)
+[Windows.Media.Devices namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)
 
 Windows 8 and 8.1 method for turning on flash (requires starting a video recording session)
-[Windows.Media.Devices.VideoDeviceController.TorchControl] (https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.devices.videodevicecontroller.torchcontrol.aspx)
+[Windows.Media.Devices.VideoDeviceController.TorchControl](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.videodevicecontroller.torchcontrol.aspx)
 
 
 System requirements

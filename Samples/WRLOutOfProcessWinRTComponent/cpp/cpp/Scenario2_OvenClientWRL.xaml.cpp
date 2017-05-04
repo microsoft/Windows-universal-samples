@@ -57,7 +57,7 @@ void OvenClientWRL::Start_Click(Platform::Object^ sender, Windows::UI::Xaml::Rou
 
         // Declare handlers for event callbacks
         auto handler1 = Callback<ABI::Windows::Foundation::ITypedEventHandler<ABI::Microsoft::SDKSamples::Kitchen::Oven*, ABI::Microsoft::SDKSamples::Kitchen::BreadBakedEventArgs*>>(
-            [this](ABI::Microsoft::SDKSamples::Kitchen::IOven* pOven, ABI::Microsoft::SDKSamples::Kitchen::IBreakBakedEventArgs* args) -> HRESULT
+            [this](ABI::Microsoft::SDKSamples::Kitchen::IOven* pOven, ABI::Microsoft::SDKSamples::Kitchen::IBreadBakedEventArgs* args) -> HRESULT
         {
             HRESULT hr = S_OK;
             try
@@ -93,7 +93,7 @@ void OvenClientWRL::Start_Click(Platform::Object^ sender, Windows::UI::Xaml::Rou
         });
 
         auto handler2 = Callback<ABI::Windows::Foundation::ITypedEventHandler<ABI::Microsoft::SDKSamples::Kitchen::Oven*, ABI::Microsoft::SDKSamples::Kitchen::BreadBakedEventArgs*>>(
-            [this](ABI::Microsoft::SDKSamples::Kitchen::IOven* oven, ABI::Microsoft::SDKSamples::Kitchen::IBreakBakedEventArgs* args) -> HRESULT
+            [this](ABI::Microsoft::SDKSamples::Kitchen::IOven* oven, ABI::Microsoft::SDKSamples::Kitchen::IBreadBakedEventArgs* args) -> HRESULT
         {
             HRESULT hr = S_OK;
             try
@@ -109,7 +109,7 @@ void OvenClientWRL::Start_Click(Platform::Object^ sender, Windows::UI::Xaml::Rou
         });
 
         auto handler3 = Callback<ABI::Windows::Foundation::ITypedEventHandler<ABI::Microsoft::SDKSamples::Kitchen::Oven*, ABI::Microsoft::SDKSamples::Kitchen::BreadBakedEventArgs*>>(
-            [this](ABI::Microsoft::SDKSamples::Kitchen::IOven* oven, ABI::Microsoft::SDKSamples::Kitchen::IBreakBakedEventArgs* args) -> HRESULT
+            [this](ABI::Microsoft::SDKSamples::Kitchen::IOven* oven, ABI::Microsoft::SDKSamples::Kitchen::IBreadBakedEventArgs* args) -> HRESULT
         {
             // Event handler 3 was removed and will not be invoked
             HRESULT hr = S_OK;

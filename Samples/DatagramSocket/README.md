@@ -18,7 +18,7 @@ The client component of the sample demonstrates the following features:
 -   Set the remote endpoint for a UDP network server where packets should be sent using one of the [**DatagramSocket.ConnectAsync**](http://msdn.microsoft.com/library/windows/apps/hh701219) methods.
 -   Send data to the server using the [**Streams.DataWriter**](http://msdn.microsoft.com/library/windows/apps/br208154) object which allows a programmer to write common types (integers and strings, for example) on any stream.
 -   Close the socket.
--   Send multicast and broadcast packets using IOutputStreams obtained through [**DatagramSocket.GetOutputStreamAsync**](https://msdn.microsoft.com/en-us/library/windows/apps/hh701265.aspx).
+-   Send multicast and broadcast packets using IOutputStreams obtained through [**DatagramSocket.GetOutputStreamAsync**](https://msdn.microsoft.com/library/windows/apps/hh701265.aspx).
 
 The server component of the sample demonstrates the following features:
 
@@ -28,11 +28,11 @@ The server component of the sample demonstrates the following features:
 -   Receive a [**DatagramSocket.MessageReceived**](http://msdn.microsoft.com/library/windows/apps/br241358) event that indicates that a UDP datagram was received on the [**DatagramSocket**](http://msdn.microsoft.com/library/windows/apps/br241319) object.
 -   Receive data from the client using the [**DatagramSocket.MessageReceived**](http://msdn.microsoft.com/library/windows/apps/br241358) handler. The [**DatagramSocketMessageReceivedEventArgs**](http://msdn.microsoft.com/library/windows/apps/br241344) object passed to the **DatagramSocket.MessageReceived** handler allows an app to receive data from the client and also determine the remote address and port that sent the data.
 -   Close the socket.
--   Listen for multicast packets while coexisting with other multicast applications by using the [**DatagramSocketControl.MulticastOnly**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.networking.sockets.datagramsocketcontrol.multicastonly.aspx) control option.
+-   Listen for multicast packets while coexisting with other multicast applications by using the [**DatagramSocketControl.MulticastOnly**](https://msdn.microsoft.com/library/windows/apps/windows.networking.sockets.datagramsocketcontrol.multicastonly.aspx) control option.
 
 For a sample that shows how to use a stream (TCP) socket to send and receive data in a UWP app, download the [StreamSocket sample](/Samples/StreamSocket).
 
-If you are interested in developing an app that is always connected and always reachable using background network notifications in a UWP app, refer to the [**SocketActivityTrigger**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.background.socketactivitytrigger.aspx) documentation. The [SocketActivityTrigger StreamSocket Sample](/Samples/SocketActivityStreamSocket) is a good starting point, since the programming pattern with DatagramSocket is essentially the same as with StreamSocket.
+If you are interested in developing an app that is always connected and always reachable using background network notifications in a UWP app, refer to the [**SocketActivityTrigger**](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.background.socketactivitytrigger.aspx) documentation. The [SocketActivityTrigger StreamSocket Sample](/Samples/SocketActivityStreamSocket) is a good starting point, since the programming pattern with DatagramSocket is essentially the same as with StreamSocket.
 
 ## Network capabilities
 
@@ -56,7 +56,7 @@ This sample requires that network capabilities be set in the *Package.appxmanife
 
 [**Windows.Storage.Streams.DataWriter**](http://msdn.microsoft.com/library/windows/apps/br208154)
 
-[**SocketActivityTrigger**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.background.socketactivitytrigger.aspx)
+[**SocketActivityTrigger**](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.background.socketactivitytrigger.aspx)
 
 ### Samples
 

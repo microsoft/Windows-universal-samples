@@ -178,7 +178,7 @@ The preceding procedure does not add a device interface GUID for the app to acce
 
 Windows automatically loads Winusb.sys as the device driver. Otherwise, manually install the driver by using the preceding instructions.
 
-1.  Download and install the [MUTT Software Package](http://msdn.microsoft.com/en-us/library/windows/hardware/jj590752.aspx).
+1.  Download and install the [MUTT Software Package](http://msdn.microsoft.com/library/windows/hardware/jj590752.aspx).
 2.  Open a command prompt and run the MuttUtil tool included in the package. Use the tool to update the firmware:
 
     `MuttUtil.exe -forceupdatefirmware`
@@ -196,7 +196,7 @@ You can extend this sample for your device by performing these tasks.
 1.  Create a [**DeviceWatcher**](http://msdn.microsoft.com/library/windows/apps/br225446) object for your device in Scenario1\_DeviceConnect.
 2.  Add information about your device in the [**DeviceCapability**](http://msdn.microsoft.com/library/windows/apps/br211430) in the Package.appxmanifest file. The information must be added under the **DeviceCapability** element with **Name** attribute set to "usb".
 
-    If you specify the device class code, make sure that it is supported. For a list of supported device classes see [How to add USB device capabilities to the app manifest](https://msdn.microsoft.com/en-us/library/windows/apps/dn303351).
+    If you specify the device class code, make sure that it is supported. For a list of supported device classes see [How to add USB device capabilities to the app manifest](https://msdn.microsoft.com/library/windows/apps/dn303351).
 
 ## Build the sample
 

@@ -35,11 +35,11 @@ The FaceTracker is intended to operate on a running video stream and is optimize
 
 ### Reference
 
-[Windows.Media.FaceAnalysis.FaceTracker](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.faceanalysis.facetracker.aspx)
+[Windows.Media.FaceAnalysis.FaceTracker](https://msdn.microsoft.com/library/windows/apps/windows.media.faceanalysis.facetracker.aspx)
 
-[Windows.Media.FaceAnalysis namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.faceanalysis.aspx)
+[Windows.Media.FaceAnalysis namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.faceanalysis.aspx)
 
-[Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.devices.aspx)
+[Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)
 
 ## System requirements
 

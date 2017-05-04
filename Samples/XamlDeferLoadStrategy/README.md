@@ -26,7 +26,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 <!-- Add links to related API -->
 
-[x:DeferLoadStrategy](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/mt204785.aspx)
+[x:DeferLoadStrategy](https://msdn.microsoft.com/library/windows/apps/xaml/mt204785.aspx)
 
 ## System requirements
 

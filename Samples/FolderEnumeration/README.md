@@ -31,7 +31,7 @@ The sample demonstrates these tasks:
 
 4.  **Query all the files in a folder and show file provider and availability**
 
-    Uses the [**Provider**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.storage.storagefile.provider.aspx) and [**IsAvailable*]() properties to obtain the provider and whether the file is available offline.
+    Uses the [**Provider**](https://msdn.microsoft.com/library/windows/apps/windows.storage.storagefile.provider.aspx) and [**IsAvailable*]() properties to obtain the provider and whether the file is available offline.
 
 Additional important APIs in this sample include:
 

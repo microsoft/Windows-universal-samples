@@ -25,8 +25,8 @@ This sample illustrates how to build a completely custom UX for selecting device
 Related topics
 --------------
 
-[Windows.Media.Casting namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.casting.aspx)
-[Windows.Devices.Enumeration namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.enumeration.aspx)
+[Windows.Media.Casting namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.casting.aspx)
+[Windows.Devices.Enumeration namespace](https://msdn.microsoft.com/library/windows/apps/windows.devices.enumeration.aspx)
 
 System requirements
 -----------------------------

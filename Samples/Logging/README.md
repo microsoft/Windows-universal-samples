@@ -52,13 +52,13 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 <!-- Add links to related API -->
 
-[LoggingChannel](https://msdn.microsoft.com/en-us/library/windows/apps/windows.foundation.diagnostics.loggingchannel.aspx)
+[LoggingChannel](https://msdn.microsoft.com/library/windows/apps/windows.foundation.diagnostics.loggingchannel.aspx)
 
-[LoggingActivity](https://msdn.microsoft.com/en-us/library/windows/apps/windows.foundation.diagnostics.loggingactivity.aspx)
+[LoggingActivity](https://msdn.microsoft.com/library/windows/apps/windows.foundation.diagnostics.loggingactivity.aspx)
 
-[LoggingSession](https://msdn.microsoft.com/en-us/library/windows/apps/windows.foundation.diagnostics.loggingsession.aspx)
+[LoggingSession](https://msdn.microsoft.com/library/windows/apps/windows.foundation.diagnostics.loggingsession.aspx)
 
-[FileLoggingSession](https://msdn.microsoft.com/en-us/library/windows/apps/windows.foundation.diagnostics.fileloggingsession.aspx)
+[FileLoggingSession](https://msdn.microsoft.com/library/windows/apps/windows.foundation.diagnostics.fileloggingsession.aspx)
 
 ## System requirements
 

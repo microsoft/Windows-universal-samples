@@ -51,19 +51,19 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[Windows.Media.Protection namespace](https://msdn.microsoft.com/en-us/library/windows/apps/br207056.aspx)
+[Windows.Media.Protection namespace](https://msdn.microsoft.com/library/windows/apps/br207056.aspx)
 
-[Windows.Media.Protection.PlayReady namespace](https://msdn.microsoft.com/en-us/library/windows/apps/dn986454.aspx)
+[Windows.Media.Protection.PlayReady namespace](https://msdn.microsoft.com/library/windows/apps/dn986454.aspx)
 
-[Windows.Media.Streaming.Adaptive namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.streaming.adaptive.aspx)
+[Windows.Media.Streaming.Adaptive namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.streaming.adaptive.aspx)
 
 ### Conceptual
 
-[PlayReady DRM](https://msdn.microsoft.com/en-us/windows/uwp/audio-video-camera/playready-client-sdk)
+[PlayReady DRM](https://msdn.microsoft.com/windows/uwp/audio-video-camera/playready-client-sdk)
 
-[Hardware DRM](https://msdn.microsoft.com/en-us/windows/uwp/audio-video-camera/hardware-drm)
+[Hardware DRM](https://msdn.microsoft.com/windows/uwp/audio-video-camera/hardware-drm)
 
-[Adaptive Streaming with PlayReady](https://msdn.microsoft.com/en-us/windows/uwp/audio-video-camera/adaptive-streaming-with-playready)
+[Adaptive Streaming with PlayReady](https://msdn.microsoft.com/windows/uwp/audio-video-camera/adaptive-streaming-with-playready)
 
 ## System requirements
 

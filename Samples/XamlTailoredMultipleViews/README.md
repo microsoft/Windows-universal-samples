@@ -17,9 +17,9 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 <!-- Add links to related API -->
 
-[Pivot control](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.pivot.aspx)
+[Pivot control](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.pivot.aspx)
 
-[SplitView control](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.splitview.aspx)
+[SplitView control](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.splitview.aspx)
 
 ## System requirements
 

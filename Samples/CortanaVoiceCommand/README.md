@@ -83,9 +83,9 @@ Duplicates can also be handled. For an example of handling disambiguation, add a
 
 ## Related topics
 
--  [Cortana design guidelines](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/dn974233.aspx)
+-  [Cortana design guidelines](https://msdn.microsoft.com/library/windows/apps/xaml/dn974233.aspx)
 -  [Cortana interactions (XAML)](https://msdn.microsoft.com/library/windows/apps/mt185598)
--  [Cortana interactions (HTML)](https://msdn.microsoft.com/en-us/library/windows/apps/dn974231.aspx)
+-  [Cortana interactions (HTML)](https://msdn.microsoft.com/library/windows/apps/dn974231.aspx)
 
 ## System requirements
 

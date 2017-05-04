@@ -7,10 +7,10 @@
 
 This sample shows how to make a block and filter application for call and text message.
 It uses the
-[**CommunicationBlockingAppManager**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.communicationblocking.communicationblockingappmanager.aspx)
+[**CommunicationBlockingAppManager**](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.communicationblocking.communicationblockingappmanager.aspx)
 class to set itself as the active communication blocking app
 and uses the
-[**PhoneCallBlocking**](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.calls.phonecallblocking.aspx) class
+[**PhoneCallBlocking**](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.calls.phonecallblocking.aspx) class
 to set the phone numbers which are blocked.
 
 This sample demonstrates how to
@@ -38,15 +38,15 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-* [**Windows.ApplicationModel.CommunicationBlocking** namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.communicationblocking.aspx)
-* [**Windows.ApplicationModel.Calls** namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.calls.aspx)
-* [**CommunicationBlockingAppManager** class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.communicationblocking.communicationblockingappmanager.aspx)
-* [**PhoneCallBlocking** class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.calls.phonecallblocking.aspx)
-* [**SystemTrigger** class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.background.systemtrigger.aspx)
-* [**CommunicationBlockingAppSetAsActiveTrigger** class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.background.communicationblockingappsetasactivetrigger.aspx)
-* [**PhoneTrigger** class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.background.phonetrigger.aspx)
-* [**ChatMessageNotificationTrigger** class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.background.chatmessagenotificationtrigger.aspx)
-* [**ChatMessageReceivedNotificationTrigger** class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.background.chatmessagereceivednotificationtrigger.aspx)
+* [**Windows.ApplicationModel.CommunicationBlocking** namespace](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.communicationblocking.aspx)
+* [**Windows.ApplicationModel.Calls** namespace](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.calls.aspx)
+* [**CommunicationBlockingAppManager** class](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.communicationblocking.communicationblockingappmanager.aspx)
+* [**PhoneCallBlocking** class](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.calls.phonecallblocking.aspx)
+* [**SystemTrigger** class](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.background.systemtrigger.aspx)
+* [**CommunicationBlockingAppSetAsActiveTrigger** class](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.background.communicationblockingappsetasactivetrigger.aspx)
+* [**PhoneTrigger** class](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.background.phonetrigger.aspx)
+* [**ChatMessageNotificationTrigger** class](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.background.chatmessagenotificationtrigger.aspx)
+* [**ChatMessageReceivedNotificationTrigger** class](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.background.chatmessagereceivednotificationtrigger.aspx)
 
 ## System requirements
 

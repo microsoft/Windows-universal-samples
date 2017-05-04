@@ -82,7 +82,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[CoreTextEditContext](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.text.core.coretexteditcontext.aspx)
+[CoreTextEditContext](https://msdn.microsoft.com/library/windows/apps/windows.ui.text.core.coretexteditcontext.aspx)
 
 ### Conceptual
 

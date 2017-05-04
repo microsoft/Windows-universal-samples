@@ -5,7 +5,7 @@
 
 # Serial Peripheral Interface (SPI) sample
 
-The [**Windows.Devices.Spi**](http://msdn.microsoft.com/en-us/library/windows.devices.spi.aspx) namespace
+The [**Windows.Devices.Spi**](http://msdn.microsoft.com/library/windows.devices.spi.aspx) namespace
 allows apps to communicate with Serial Peripheral Interface (SPI) devices
 on a Windows IoT (Internet of Things) device.
 SPI is a four-wire bus used to interface devices such as analog to digital converters,

@@ -22,7 +22,7 @@ Related topics
 
 MediaStreamSource Sample (https://code.msdn.microsoft.com/windowsapps/MediaStreamSource-media-dfd55dff)
 
-[Windows.Media.Core namespace] (https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.core.msesourcebuffer.aspx)
+[Windows.Media.Core namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.core.msesourcebuffer.aspx)
 
 
 System requirements

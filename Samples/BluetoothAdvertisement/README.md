@@ -5,7 +5,7 @@
 
 # Bluetooth advertisement sample
 
-This sample demonstrates use of the [**Bluetooth Advertisement**](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/windows.devices.bluetooth.advertisement.aspx) Runtime API to send and receive Bluetooth Low Energy advertisements.
+This sample demonstrates use of the [**Bluetooth Advertisement**](https://msdn.microsoft.com/library/windows/apps/xaml/windows.devices.bluetooth.advertisement.aspx) Runtime API to send and receive Bluetooth Low Energy advertisements.
 
 This sample allows the user to publish and watch for Bluetooth Low Energy advertisements.  You can choose one of four scenarios and you will likely need two Windows devices to see :
 - **Foreground watcher**: Scanning for a particular LE advertisement containing a matching manufacturer data section and above a certain RSSI threshold.

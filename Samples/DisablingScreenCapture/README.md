@@ -28,7 +28,7 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ### Reference
 
-[ApplicationView class](https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.applicationview.aspx)
+[ApplicationView class](https://msdn.microsoft.com/library/windows/apps/windows.ui.viewmanagement.applicationview.aspx)
 
 ## System requirements
 

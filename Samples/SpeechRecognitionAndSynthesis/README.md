@@ -30,11 +30,11 @@ You can disable functionality that requires accepting this policy by turning off
 
 ## Related topics
 
--  [Speech recognition](https://msdn.microsoft.com/en-us/library/windows.media.speechrecognition.aspx)
--  [Speech synthesis](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.speechsynthesis.aspx)
--  [Speech design guidelines](https://msdn.microsoft.com/en-us/library/windows/apps/dn596121.aspx)
+-  [Speech recognition](https://msdn.microsoft.com/library/windows.media.speechrecognition.aspx)
+-  [Speech synthesis](https://msdn.microsoft.com/library/windows/apps/windows.media.speechsynthesis.aspx)
+-  [Speech design guidelines](https://msdn.microsoft.com/library/windows/apps/dn596121.aspx)
 -  [Speech interactions](https://msdn.microsoft.com/library/windows/apps/mt185614)
--  [Responding to speech interactions (HTML)](https://msdn.microsoft.com/en-us/library/windows/apps/dn720491.aspx)
+-  [Responding to speech interactions (HTML)](https://msdn.microsoft.com/library/windows/apps/dn720491.aspx)
 
 ## System requirements
 
