@@ -93,27 +93,52 @@ namespace SDKTemplate.Models
             { Captions = "Indexer,en,http://nimbuspm.origin.mediaservices.windows.net/aed33834-ec2d-4788-88b5-a4505b3d032c/pp4_blog_demo.vtt" },
             
             // Live HLS content:
-            new AdaptiveContentModel(10, "Azure Media Services 24x7 (HLS, Live) - (CC) blender.org", "http://b028.wpc.azureedge.net/80B028/Samples/a38e6323-95e9-4f1f-9b38-75eba91704e4/5f2ce531-d508-49fb-8152-647eba422aec.ism/manifest(format=m3u8-aapl)")
+            new AdaptiveContentModel(10, "60min Azure Media Services 24x7 (HLS, Live) - (CC) blender.org", "http://b028.wpc.azureedge.net/80B028/Samples/a38e6323-95e9-4f1f-9b38-75eba91704e4/5f2ce531-d508-49fb-8152-647eba422aec.ism/manifest(format=m3u8-aapl)")
+            { Live = true },
+            new AdaptiveContentModel(15, "30min Azure Media Services 24x7 (HLS, Live) - (CC) blender.org", "http://b028.wpc.azureedge.net/80B028/Samples/a38e6323-95e9-4f1f-9b38-75eba91704e4/5f2ce531-d508-49fb-8152-647eba422aec.ism/manifest(format=m3u8-aapl,filter=30mindvr)")
+            { Live = true },
+            new AdaptiveContentModel(16, "5min Azure Media Services 24x7 (HLS, Live) - (CC) blender.org", "http://b028.wpc.azureedge.net/80B028/Samples/a38e6323-95e9-4f1f-9b38-75eba91704e4/5f2ce531-d508-49fb-8152-647eba422aec.ism/manifest(format=m3u8-aapl,filter=5mindvr)")
+            { Live = true },
+            new AdaptiveContentModel(17, "2min Azure Media Services 24x7 (HLS, Live) - (CC) blender.org", "http://b028.wpc.azureedge.net/80B028/Samples/a38e6323-95e9-4f1f-9b38-75eba91704e4/5f2ce531-d508-49fb-8152-647eba422aec.ism/manifest(format=m3u8-aapl,filter=2mindvr)")
             { Live = true },
 
             // Live DASH content (manifest type = dynamic) is not available using the AdaptiveMediaSource: 
-            // new AdaptiveContentModel(NA, "Azure Media Services 24x7 (DASH, Live) - (CC) blender.org", "http://b028.wpc.azureedge.net/80B028/Samples/a38e6323-95e9-4f1f-9b38-75eba91704e4/5f2ce531-d508-49fb-8152-647eba422aec.ism/manifest(format=mpd-time-csf)")
-            // { Live = true },
+            new AdaptiveContentModel(110, "60min Azure Media Services 24x7 (DASH, Live) - (CC) blender.org", "http://b028.wpc.azureedge.net/80B028/Samples/a38e6323-95e9-4f1f-9b38-75eba91704e4/5f2ce531-d508-49fb-8152-647eba422aec.ism/manifest(format=mpd-time-csf)")
+            { Live = true },
+            new AdaptiveContentModel(111, "30min Azure Media Services 24x7 (DASH, Live) - (CC) blender.org", "http://b028.wpc.azureedge.net/80B028/Samples/a38e6323-95e9-4f1f-9b38-75eba91704e4/5f2ce531-d508-49fb-8152-647eba422aec.ism/manifest(format=mpd-time-csf,filter=30mindvr)")
+            { Live = true },
+            new AdaptiveContentModel(112, "5min Azure Media Services 24x7 (DASH, Live) - (CC) blender.org", "http://b028.wpc.azureedge.net/80B028/Samples/a38e6323-95e9-4f1f-9b38-75eba91704e4/5f2ce531-d508-49fb-8152-647eba422aec.ism/manifest(format=mpd-time-csf,filter=5mindvr)")
+            { Live = true },
+            new AdaptiveContentModel(113, "2min Azure Media Services 24x7 (DASH, Live) - (CC) blender.org", "http://b028.wpc.azureedge.net/80B028/Samples/a38e6323-95e9-4f1f-9b38-75eba91704e4/5f2ce531-d508-49fb-8152-647eba422aec.ism/manifest(format=mpd-time-csf,filter=2mindvr)")
+            { Live = true },
 
             // PlayReady DASH streams need a properly setup MediaProtectionManager:
-            new AdaptiveContentModel(110, "Big Buck Bunny (DASH) with DRM (PlayReady/Widevine CENC) - (CC) peach.blender.org", "http://amssamples.streaming.mediaservices.windows.net/622b189f-ec39-43f2-93a2-201ac4e31ce1/BigBuckBunny.ism/manifest(format=mpd-time-csf)")
+            new AdaptiveContentModel(115, "Big Buck Bunny (DASH) with DRM (PlayReady/Widevine CENC) - (CC) peach.blender.org", "http://amssamples.streaming.mediaservices.windows.net/622b189f-ec39-43f2-93a2-201ac4e31ce1/BigBuckBunny.ism/manifest(format=mpd-time-csf)")
             { PlayReady = true },
-            new AdaptiveContentModel(111, "Tears of Steel Trailer (DASH, PlayReady) - (CC) mango.blender.org", "http://amssamples.streaming.mediaservices.windows.net/de1470b3-7b3c-4902-ab53-d19b37ef3bd7/TearsOfSteelTeaser.ism/manifest(format=mpd-time-csf)")
+            new AdaptiveContentModel(116, "Tears of Steel Trailer (DASH, PlayReady) - (CC) mango.blender.org", "http://amssamples.streaming.mediaservices.windows.net/de1470b3-7b3c-4902-ab53-d19b37ef3bd7/TearsOfSteelTeaser.ism/manifest(format=mpd-time-csf)")
             { PlayReady = true },
-            new AdaptiveContentModel(112, "Sintel Trailer (DASH, PlayReady) - (CC) durian.blender.org", "http://amssamples.streaming.mediaservices.windows.net/bf657309-71d9-4436-b94b-8ac0d2ca222b/SintelTrailer.ism/manifest(format=mpd-time-csf)")
+            new AdaptiveContentModel(117, "Sintel Trailer (DASH, PlayReady) - (CC) durian.blender.org", "http://amssamples.streaming.mediaservices.windows.net/bf657309-71d9-4436-b94b-8ac0d2ca222b/SintelTrailer.ism/manifest(format=mpd-time-csf)")
             { PlayReady = true },
 
             // Live DASH PlayReady content is not available using the AdaptiveMediaSource: 
-            // new AdaptiveContentModel(NA, "Azure Media Services 24x7 Live PlayReady/Widevine CENC - (CC) blender.org (DASH)", "http://b028.wpc.azureedge.net/80B028/SampleStream/3f6088ec-9e1f-4db7-b7d9-3ec07183ce7d/e405bd0a-a34f-40e2-b70b-4322c46f5cb7.ism/manifest(format=mpd-time-csf)")
-            // { PlayReady = true, Live = true },
-            // new AdaptiveContentModel(NA, "Azure Media Services 24x7 Live PlayReady - (CC) blender.org (DASH)", "http://b028.wpc.azureedge.net/80B028/Samples/859b335f-eebc-4ff1-ac03-98e9b614e2c1/0cc164eb-193e-48cb-bc6b-041cc28307e4.ism/manifest(format=mpd-time-csf)")
-            // { PlayReady = true, Live = true, },
+            new AdaptiveContentModel(118, "60min Azure Media Services 24x7 Live PlayReady/Widevine CENC - (CC) blender.org (DASH, Live)", "http://b028.wpc.azureedge.net/80B028/SampleStream/3f6088ec-9e1f-4db7-b7d9-3ec07183ce7d/e405bd0a-a34f-40e2-b70b-4322c46f5cb7.ism/manifest(format=mpd-time-csf)")
+            { PlayReady = true, Live = true },
+            new AdaptiveContentModel(119, "30min Azure Media Services 24x7 Live PlayReady/Widevine CENC - (CC) blender.org (DASH, Live)", "http://b028.wpc.azureedge.net/80B028/SampleStream/3f6088ec-9e1f-4db7-b7d9-3ec07183ce7d/e405bd0a-a34f-40e2-b70b-4322c46f5cb7.ism/manifest(format=mpd-time-csf,filter=30mindvr)")
+            { PlayReady = true, Live = true },
+            new AdaptiveContentModel(120, "5min Azure Media Services 24x7 Live PlayReady/Widevine CENC - (CC) blender.org (DASH, Live)", "http://b028.wpc.azureedge.net/80B028/SampleStream/3f6088ec-9e1f-4db7-b7d9-3ec07183ce7d/e405bd0a-a34f-40e2-b70b-4322c46f5cb7.ism/manifest(format=mpd-time-csf,filter=5mindvr)")
+            { PlayReady = true, Live = true },
+            new AdaptiveContentModel(121, "2min Azure Media Services 24x7 Live PlayReady/Widevine CENC - (CC) blender.org (DASH, Live)", "http://b028.wpc.azureedge.net/80B028/SampleStream/3f6088ec-9e1f-4db7-b7d9-3ec07183ce7d/e405bd0a-a34f-40e2-b70b-4322c46f5cb7.ism/manifest(format=mpd-time-csf,filter=2mindvr)")
+            { PlayReady = true, Live = true },
 
+            new AdaptiveContentModel(122, "60min Azure Media Services 24x7 Live PlayReady - (CC) blender.org (DASH, Live, 60min)", "http://b028.wpc.azureedge.net/80B028/Samples/859b335f-eebc-4ff1-ac03-98e9b614e2c1/0cc164eb-193e-48cb-bc6b-041cc28307e4.ism/manifest(format=mpd-time-csf)")
+            { PlayReady = true, Live = true, },
+            new AdaptiveContentModel(123, "30min Azure Media Services 24x7 Live PlayReady - (CC) blender.org (DASH, Live, 30min)", "http://b028.wpc.azureedge.net/80B028/Samples/859b335f-eebc-4ff1-ac03-98e9b614e2c1/0cc164eb-193e-48cb-bc6b-041cc28307e4.ism/manifest(format=mpd-time-csf,filter=30mindvr)")
+            { PlayReady = true, Live = true, },
+            new AdaptiveContentModel(124, "5min Azure Media Services 24x7 Live PlayReady - (CC) blender.org (DASH, Live, 5min)", "http://b028.wpc.azureedge.net/80B028/Samples/859b335f-eebc-4ff1-ac03-98e9b614e2c1/0cc164eb-193e-48cb-bc6b-041cc28307e4.ism/manifest(format=mpd-time-csf,filter=5mindvr)")
+            { PlayReady = true, Live = true, },
+            new AdaptiveContentModel(125, "2min Azure Media Services 24x7 Live PlayReady - (CC) blender.org (DASH, Live, 2min)", "http://b028.wpc.azureedge.net/80B028/Samples/859b335f-eebc-4ff1-ac03-98e9b614e2c1/0cc164eb-193e-48cb-bc6b-041cc28307e4.ism/manifest(format=mpd-time-csf,filter=2mindvr)")
+            { PlayReady = true, Live = true, },
+            
             // HLS streams with AES-128 CBC encryption:
             new AdaptiveContentModel(11, "Sintel (HLS, AES-128 encryption) - (CC) durian.blender.org", "http://amssamples.streaming.mediaservices.windows.net/49b57c87-f5f3-48b3-ba22-c55cfdffa9cb/Sintel.ism/manifest(format=m3u8-aapl)")
             { Aes = true },
@@ -132,6 +157,10 @@ namespace SDKTemplate.Models
                 Aes = true,
                 AesToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cm46bWljcm9zb2Z0OmF6dXJlOm1lZGlhc2VydmljZXM6Y29udGVudGtleWlkZW50aWZpZXIiOiI5ZGRhMGJjYy01NmZiLTQxNDMtOWQzMi0zYWI5Y2M2ZWE4MGIiLCJpc3MiOiJodHRwOi8vdGVzdGFjcy5jb20vIiwiYXVkIjoidXJuOnRlc3QiLCJleHAiOjE3MTA4MDczODl9.lJXm5hmkp5ArRIAHqVJGefW2bcTzd91iZphoKDwa6w8"
             },
+
+            // From: http://se-mashup.fokus.fraunhofer.de:8080/adinsertion-sample/scte.html
+             new AdaptiveContentModel(200, "Fraunhofer Fokus test stream (DASH, Live, SCTE35 emsg) - (Copyright) Fraunhofer Fokus", "http://vm2.dashif.org/livesim/scte35_1/testpic_2s/Manifest.mpd")
+            { Live = true },
         };
 
         public static IReadOnlyList<AdaptiveContentModel> GetKnownAzureMediaServicesModels()

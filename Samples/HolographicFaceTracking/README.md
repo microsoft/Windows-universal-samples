@@ -47,14 +47,14 @@ see [Recommended 8-Bit YUV Formats for Video Rendering](https://msdn.microsoft.c
 
 ### Additional remarks
 
-**Note** The Windows universal samples for Windows 10 Holographic require Visual Studio 2015 Update 3
+**Note** The Windows universal samples for Windows 10 Holographic require Visual Studio 2017 Update 3
 to build, and a Windows Holographic device to execute. Windows Holographic devices include the
 Microsoft HoloLens and the Microsoft HoloLens Emulator.
 
 To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421).
 
 To obtain information about the tools used for Windows Holographic development, including
-Microsoft Visual Studio 2015 Update 3 and the Microsoft HoloLens Emulator, go to
+Microsoft Visual Studio 2017 Update 3 and the Microsoft HoloLens Emulator, go to
 [Install the tools](https://developer.microsoft.com/windows/holographic/install_the_tools).
 
 ## Related topics
@@ -95,10 +95,10 @@ The following types are used in this code sample:
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with
    the sample you want to build.
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the
    subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or
-   JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+   JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

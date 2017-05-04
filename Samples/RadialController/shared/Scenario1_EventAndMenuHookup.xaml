@@ -25,12 +25,10 @@
             <Setter Property="Padding" Value="5" />
             <Setter Property="Margin" Value="5,0,0,5" />
         </Style>
-
         <Style x:Key="ButtonGroup" BasedOn="{StaticResource PaddedPanel}" TargetType="StackPanel">
             <Setter Property="BorderBrush" Value="WhiteSmoke" />
             <Setter Property="BorderThickness" Value="1" />
         </Style>
-
         <Style TargetType="Button">
             <Setter Property="Margin" Value="0,5,0,0"/>
         </Style>
@@ -60,63 +58,64 @@
 
                         <StackPanel Style="{StaticResource ButtonGroup}">
                             <Image Height="64" Width="64" HorizontalAlignment="Left" Source="Assets\Item0.png"/>
-                            <Button x:Name="AddButton0" Content="Add Item 0" Click="AddItem" CommandParameter="0"/>
-                            <Button x:Name="SelectButton0" Content="Select Item 0" Click="SelectItem" CommandParameter="0"/>
-                            <Button x:Name="RemoveButton0" Content="Remove Item 0" Click="RemoveItem" CommandParameter="0"/>
-                            <Slider x:Name="Slider0" />
-                            <ToggleSwitch x:Name="Toggle0" />
+                            <Button Content="Add Item 0" Click="AddItem" CommandParameter="0"/>
+                            <Button Content="Select Item 0" Click="SelectItem" CommandParameter="0"/>
+                            <Button Content="Remove Item 0" Click="RemoveItem" CommandParameter="0"/>
+                            <Slider x:Name="slider0" />
+                            <ToggleSwitch x:Name="toggle0" />
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource ButtonGroup}">
                             <Image Height="64" Width="64" HorizontalAlignment="Left" Source="Assets\Item1.png"/>
-                            <Button x:Name="AddButton1" Content="Add Item 1" Click="AddItem" CommandParameter="1"/>
-                            <Button x:Name="SelectButton1" Content="Select Item 1" Click="SelectItem" CommandParameter="1"/>
-                            <Button x:Name="RemoveButton1" Content="Remove Item 1" Click="RemoveItem" CommandParameter="1"/>
-                            <Slider x:Name="Slider1" />
-                            <ToggleSwitch x:Name="Toggle1" />
+                            <Button Content="Add Item 1" Click="AddItem" CommandParameter="1"/>
+                            <Button Content="Select Item 1" Click="SelectItem" CommandParameter="1"/>
+                            <Button Content="Remove Item 1" Click="RemoveItem" CommandParameter="1"/>
+                            <Slider x:Name="slider1" />
+                            <ToggleSwitch x:Name="toggle1" />
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource ButtonGroup}">
                             <Image Height="64" Width="64" HorizontalAlignment="Left" Source="Assets\Item2.png"/>
-                            <Button x:Name="AddButton2" Content="Add Item 2" Click="AddItem" CommandParameter="2"/>
-                            <Button x:Name="SelectButton2" Content="Select Item 2" Click="SelectItem" CommandParameter="2"/>
-                            <Button x:Name="RemoveButton2" Content="Remove Item 2" Click="RemoveItem" CommandParameter="2"/>
-                            <Slider x:Name="Slider2" />
-                            <ToggleSwitch x:Name="Toggle2" />
+                            <Button Content="Add Item 2" Click="AddItem" CommandParameter="2"/>
+                            <Button Content="Select Item 2" Click="SelectItem" CommandParameter="2"/>
+                            <Button Content="Remove Item 2" Click="RemoveItem" CommandParameter="2"/>
+                            <Slider x:Name="slider2" />
+                            <ToggleSwitch x:Name="toggle2" />
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource ButtonGroup}">
                             <Image Height="64" Width="64" HorizontalAlignment="Left" Source="Assets\Item3.png"/>
-                            <Button x:Name="AddButton3" Content="Add Item 3" Click="AddItem" CommandParameter="3"/>
-                            <Button x:Name="SelectButton3" Content="Select Item 3" Click="SelectItem" CommandParameter="3"/>
-                            <Button x:Name="RemoveButton3" Content="Remove Item 3" Click="RemoveItem" CommandParameter="3"/>
-                            <Slider x:Name="Slider3" />
-                            <ToggleSwitch x:Name="Toggle3" />
+                            <Button Content="Add Item 3" Click="AddItem" CommandParameter="3"/>
+                            <Button Content="Select Item 3" Click="SelectItem" CommandParameter="3"/>
+                            <Button Content="Remove Item 3" Click="RemoveItem" CommandParameter="3"/>
+                            <Slider x:Name="slider3" />
+                            <ToggleSwitch x:Name="toggle3" />
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource ButtonGroup}">
-                            <Image Height="64" Width="64" HorizontalAlignment="Left" Source="Assets\Item4.png"/>
-                            <Button x:Name="AddButton4" Content="Add Item 4" Click="AddItem" CommandParameter="4"/>
-                            <Button x:Name="SelectButton4" Content="Select Item 4" Click="SelectItem" CommandParameter="4"/>
-                            <Button x:Name="RemoveButton4" Content="Remove Item 4" Click="RemoveItem" CommandParameter="4"/>
-                            <Slider x:Name="Slider4" />
-                            <ToggleSwitch x:Name="Toggle4" />
+                            <TextBlock Height="64" Width="64" HorizontalAlignment="Left" FontFamily="Segoe UI Emoji" FontSize="45" Text="&#x2764;"/>
+                            <Button Content="Add Item 4" Click="AddItem" CommandParameter="4"/>
+                            <Button Content="Select Item 4" Click="SelectItem" CommandParameter="4"/>
+                            <Button Content="Remove Item 4" Click="RemoveItem" CommandParameter="4"/>
+                            <Slider x:Name="slider4" />
+                            <ToggleSwitch x:Name="toggle4" />
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource ButtonGroup}">
-                            <Image Height="64" Width="64" HorizontalAlignment="Left" Source="Assets\Item5.png"/>
-                            <Button x:Name="AddButton5" Content="Add Item 5" Click="AddItem" CommandParameter="5"/>
-                            <Button x:Name="SelectButton5" Content="Select Item 5" Click="SelectItem" CommandParameter="5"/>
-                            <Button x:Name="RemoveButton5" Content="Remove Item 5" Click="RemoveItem" CommandParameter="5"/>
-                            <Slider x:Name="Slider5" />
-                            <ToggleSwitch x:Name="Toggle5" />
+                            <TextBlock Height="64" Width="64" HorizontalAlignment="Left" FontFamily="Assets\fontawesome-webfont.ttf#FontAwesome" FontSize="57" Text="&#xf0a1;"/>
+                            <Button Content="Add Item 5" Click="AddItem" CommandParameter="5"/>
+                            <Button Content="Select Item 5" Click="SelectItem" CommandParameter="5"/>
+                            <Button Content="Remove Item 5" Click="RemoveItem" CommandParameter="5"/>
+                            <Slider x:Name="slider5" />
+                            <ToggleSwitch x:Name="toggle5" />
                         </StackPanel>
                     </GridView>
 
                     <StackPanel Style="{StaticResource PaddedPanel}" Orientation="Horizontal">
-                        <Button x:Name="GetSelected" Content="Get Selected Item" Click="PrintSelectedItem"/>
-                        <Button x:Name="SelectPreviousItem" Content="Select Previous Item" Click="SelectPreviouslySelectedItem" Margin="5,5,10,0"/>
+                        <Button Content="Get Selected Item" Click="PrintSelectedItem"/>
+                        <Button Content="Select Previous Item" Click="SelectPreviouslySelectedItem" Margin="5,5,10,0"/>
                         <ToggleSwitch IsOn="{x:Bind Controller.UseAutomaticHapticFeedback, Mode=TwoWay}">Haptics</ToggleSwitch>
+                        <ToggleSwitch x:Name="MenuSuppressionToggleSwitch" Toggled="ToggleMenuSuppression">Suppress Default Menu</ToggleSwitch>
                     </StackPanel>
 
                     <StackPanel Style="{StaticResource PaddedPanel}">

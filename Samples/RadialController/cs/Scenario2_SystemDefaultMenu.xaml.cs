@@ -48,7 +48,7 @@ namespace SDKTemplate
                 log.Text += "\nPosition = " + args.Contact.Position.ToString();
             }
 
-            Slider1.Value += args.RotationDeltaInDegrees;
+            slider1.Value += args.RotationDeltaInDegrees;
         }
 
         private void ModifySystemDefaults(object sender, RoutedEventArgs e)

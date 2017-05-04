@@ -10,6 +10,7 @@
 //*********************************************************
 
 using SDKTemplate;
+using SDKTemplate.Logging;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -36,11 +37,11 @@ namespace SDKTemplate.Helpers
     /// </summary>
     public class PlayReadyHelper
     {
-        public PlayReadyHelper(Logger logger = null)
+        public PlayReadyHelper(LogView logger = null)
         {
             this.logger = logger;
         }
-        private Logger logger;
+        private LogView logger;
 
 
         private const int MSPR_E_CONTENT_ENABLING_ACTION_REQUIRED = -2147174251;
@@ -58,7 +59,7 @@ namespace SDKTemplate.Helpers
         {
             if (logger != null)
             {
-                logger.Log(message);
+                logger.Log(message, LogViewLoggingLevel.Information);
             }
             else
             {

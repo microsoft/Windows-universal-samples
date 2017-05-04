@@ -110,21 +110,20 @@
                 <RichTextBlock>
                     <Paragraph>&lt;ListView ItemsSource="{x:Bind Groups}"</Paragraph>
                     <Paragraph TextIndent="36">ItemTemplate="{StaticResource
-                        <Run x:Name="itemTemplate">ImageTextListTemplate</Run> }"
+                        <Run x:Name="itemTemplate">ImageTextListTemplate</Run>}"
                     </Paragraph>
-                    <Paragraph TextIndent="36">IsItemClickEnabled="
-                        <Run Text="{x:Bind Control1.IsItemClickEnabled, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"></Run> "
+                    <Paragraph TextIndent="36">
+                        IsItemClickEnabled="<Run Text="{x:Bind Control1.IsItemClickEnabled, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"></Run>"
                     </Paragraph>
-                    <Paragraph TextIndent="36">IsSwipeEnabled="
-                        <Run Text="{x:Bind Control1.IsSwipeEnabled, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"/> "
+                    <Paragraph TextIndent="36">
+                        IsSwipeEnabled="<Run Text="{x:Bind Control1.IsSwipeEnabled, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"/>"
                     </Paragraph>
-                    <Paragraph TextIndent="36">CanDragItems="
-                        <Run Text="{x:Bind Control1.CanDragItems, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"/> "
+                    <Paragraph TextIndent="36">
+                        CanDragItems="<Run Text="{x:Bind Control1.CanDragItems, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"/>"
                     </Paragraph>
-                    <Paragraph TextIndent="36">SelectionMode="
-                        <Run Text="{x:Bind Control1.SelectionMode, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"/> "
+                    <Paragraph TextIndent="36">
+                        SelectionMode="<Run Text="{x:Bind Control1.SelectionMode, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"/>" /&gt;
                     </Paragraph>
-                    <Paragraph>&lt;/ListView&gt;</Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>

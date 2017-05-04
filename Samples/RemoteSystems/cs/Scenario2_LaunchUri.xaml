@@ -25,8 +25,8 @@
                     After discovering a system, you can launch a URI on it.
                     Each system must be on the same MSA and this works through any available transports.
             </TextBlock>
-            <ComboBox Width="160" ItemsSource="{Binding DeviceList}"
-                      PlaceholderText="Select Device" Margin="0,10,0,0" x:Name="DeviceListComboBox">
+            <ComboBox Width="160" ItemsSource="{Binding SystemList}"
+                      PlaceholderText="Select system" Margin="0,10,0,0" x:Name="SystemListComboBox">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding DisplayName}"/>

@@ -18,7 +18,7 @@ This sample shows how to:
 
 1.  **Obtain the barcode scanner**
 
-    Uses a [**DeviceWatcher**](https://docs.microsoft.com/en-us/uwp/api/Windows.Devices.Enumeration.DeviceWatcher)
+    Uses a [**DeviceWatcher**](https://docs.microsoft.com/uwp/api/Windows.Devices.Enumeration.DeviceWatcher)
     to enumerate and select the first barcode scanner.
 
 2.  **Claim the barcode scanner for exclusive use**
@@ -47,20 +47,20 @@ This sample shows how to:
 
 The app package manifest shows how to specify the device capability name for the Point of Service (POS) devices. All POS apps are required declare [DeviceCapability](http://msdn.microsoft.com/library/windows/apps/br211430) in the app package manifest, either by using "PointofService" as shown in this sample or by using a device specific GUID, such as "C243FFBD-3AFC-45E9-B3D3-2BA18BC7EBC5" for a barcode scanner.
 
-For a list of compatible barcode scanners, see [Barcode Scanner Compatible Hardware](https://docs.microsoft.com/en-us/windows/uwp/devices-sensors/barcode-scanner#compatible-hardware).
+For a list of compatible barcode scanners, see [Barcode Scanner Compatible Hardware](https://docs.microsoft.com/windows/uwp/devices-sensors/barcode-scanner#compatible-hardware).
 
-**Note** The Universal Windows app samples require Visual Studio 2015 to build and Windows 10 to execute.
+**Note** The Universal Windows app samples require Visual Studio 2017 to build and Windows 10 to execute.
  
 To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
-To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
+To obtain information about Microsoft Visual Studio and the tools for developing Windows apps, go to [Visual Studio](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
 
 ### Reference
 
 [Windows.Devices.PointOfService namespace](http://msdn.microsoft.com/library/windows/apps/dn298071)  
-[Barcode Scanner Compatible Hardware](https://docs.microsoft.com/en-us/windows/uwp/devices-sensors/barcode-scanner#compatible-hardware)  
+[Barcode Scanner Compatible Hardware](https://docs.microsoft.com/windows/uwp/devices-sensors/barcode-scanner#compatible-hardware)  
 [USB HID POS Scanner specification](http://go.microsoft.com/fwlink/p/?linkid=309230)  
 [Windows app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 
@@ -75,8 +75,8 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

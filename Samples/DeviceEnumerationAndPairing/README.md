@@ -54,7 +54,7 @@ The sample demonstrates eight scenarios:
 
 ## Build the sample
 
-1.  Start Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+1.  Start Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
 2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C\#, or JavaScript. Double-click the Visual Studio Solution (.sln) file.
 3.  Select the appropriate target: x86, x64, ARM. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 

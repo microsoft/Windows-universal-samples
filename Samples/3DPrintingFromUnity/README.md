@@ -31,7 +31,7 @@ In addition to Visual Studio and the Windows SDK, you need the following:
 * The Unity plugin for Visual Studio.
   This can be installed as part of installing Unity,
   or you can
-  [download it](https://visualstudiogallery.msdn.microsoft.com/8d26236e-4a64-4d64-8486-7df95156aba9 "Visual Studio 2015 Tools for Unity")
+  [download it](https://visualstudiogallery.msdn.microsoft.com/8d26236e-4a64-4d64-8486-7df95156aba9 "Visual Studio 2017 Tools for Unity")
   manually.
 
 * The 3D Builder app.

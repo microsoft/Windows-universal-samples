@@ -16,7 +16,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Loaded="Page_OnLoaded"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
@@ -31,6 +30,7 @@
                 An AdaptiveMediaSource is created implicitly when a manifest URI is used with MediaSource.CreateFromUri(uri).
                 No properties or callbacks of the AdaptiveMediaSource can be retrieved when it is created implicitly.
             </TextBlock>
+            <Button x:Name="Load" Content="Load" Click="Load_Click"/>
         </StackPanel>
         <MediaPlayerElement x:Name="mediaPlayerElement" Grid.Row="1" AreTransportControlsEnabled="True" />
         <!-- Alternatively, you can set the Source to your content Uri:

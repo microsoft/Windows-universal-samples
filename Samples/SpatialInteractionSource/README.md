@@ -61,23 +61,23 @@ Microsoft Visual Studio 2017 and the Microsoft HoloLens Emulator, go to
 ### Reference
 
 The following types are used in this code sample:
-* [Windows.UI.Input.Spatial](https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Input.Spatial)
-  * [SpatialGestureRecognizer class](https://docs.microsoft.com/en-us/uwp/api/windows.ui.input.spatial.spatialgesturerecognizer)
-  * [SpatialInteractionManager class](https://docs.microsoft.com/en-us/uwp/api/windows.ui.input.spatial.spatialinteractionmanager)
-  * [SpatialInteractionSource class](https://docs.microsoft.com/en-us/uwp/api/windows.ui.input.spatial.spatialinteractionsource)
-  * [SpatialInteractionSourceState class](https://docs.microsoft.com/en-us/uwp/api/windows.ui.input.spatial.spatialinteractionsourcestate)
-  * [SpatialInteractionSourceProperties class](https://docs.microsoft.com/en-us/uwp/api/windows.ui.input.spatial.spatialinteractionsourceproperties)
-  * [SpatialInteractionSourceLocation class](https://docs.microsoft.com/en-us/uwp/api/windows.ui.input.spatial.spatialinteractionsourcelocation)
-  * [SpatialPointerInteractionSourcePose class](https://docs.microsoft.com/en-us/uwp/api/windows.ui.input.spatial.spatialpointerinteractionsourcepose)
-  * [SpatialInteractionControllerProperties class](https://docs.microsoft.com/en-us/uwp/api/windows.ui.input.spatial.spatialinteractioncontrollerproperties)
-  * [SpatialInteractionController class](https://docs.microsoft.com/en-us/uwp/api/windows.ui.input.spatial.spatialinteractioncontroller)
-  * [SpatialInteractionPressKind enum](https://docs.microsoft.com/en-us/uwp/api/windows.ui.input.spatial.spatialinteractionpresskind)
-  * [SpatialInteractionSourceKind enum](https://docs.microsoft.com/en-us/uwp/api/windows.ui.input.spatial.spatialinteractionsourcekind)
-  * [SpatialGestureSettings enum](https://docs.microsoft.com/en-us/uwp/api/windows.ui.input.spatial.spatialgesturesettings)
-* [Windows.Devices.Haptics](https://docs.microsoft.com/en-us/uwp/api/windows.devices.haptics)
-  * [SimpleHapticsController class](https://docs.microsoft.com/en-us/uwp/api/windows.devices.haptics.simplehapticscontroller)
-  * [SimpleHapticsControllerFeedback class](https://docs.microsoft.com/en-us/uwp/api/windows.devices.haptics.simplehapticscontrollerfeedback)
-  * [KnownSimpleHapticsControllerWaveforms class](https://docs.microsoft.com/en-us/uwp/api/windows.devices.haptics.simplehapticscontrollerfeedback)
+* [Windows.UI.Input.Spatial](https://docs.microsoft.com/uwp/api/Windows.UI.Input.Spatial)
+  * [SpatialGestureRecognizer class](https://docs.microsoft.com/uwp/api/windows.ui.input.spatial.spatialgesturerecognizer)
+  * [SpatialInteractionManager class](https://docs.microsoft.com/uwp/api/windows.ui.input.spatial.spatialinteractionmanager)
+  * [SpatialInteractionSource class](https://docs.microsoft.com/uwp/api/windows.ui.input.spatial.spatialinteractionsource)
+  * [SpatialInteractionSourceState class](https://docs.microsoft.com/uwp/api/windows.ui.input.spatial.spatialinteractionsourcestate)
+  * [SpatialInteractionSourceProperties class](https://docs.microsoft.com/uwp/api/windows.ui.input.spatial.spatialinteractionsourceproperties)
+  * [SpatialInteractionSourceLocation class](https://docs.microsoft.com/uwp/api/windows.ui.input.spatial.spatialinteractionsourcelocation)
+  * [SpatialPointerInteractionSourcePose class](https://docs.microsoft.com/uwp/api/windows.ui.input.spatial.spatialpointerinteractionsourcepose)
+  * [SpatialInteractionControllerProperties class](https://docs.microsoft.com/uwp/api/windows.ui.input.spatial.spatialinteractioncontrollerproperties)
+  * [SpatialInteractionController class](https://docs.microsoft.com/uwp/api/windows.ui.input.spatial.spatialinteractioncontroller)
+  * [SpatialInteractionPressKind enum](https://docs.microsoft.com/uwp/api/windows.ui.input.spatial.spatialinteractionpresskind)
+  * [SpatialInteractionSourceKind enum](https://docs.microsoft.com/uwp/api/windows.ui.input.spatial.spatialinteractionsourcekind)
+  * [SpatialGestureSettings enum](https://docs.microsoft.com/uwp/api/windows.ui.input.spatial.spatialgesturesettings)
+* [Windows.Devices.Haptics](https://docs.microsoft.com/uwp/api/windows.devices.haptics)
+  * [SimpleHapticsController class](https://docs.microsoft.com/uwp/api/windows.devices.haptics.simplehapticscontroller)
+  * [SimpleHapticsControllerFeedback class](https://docs.microsoft.com/uwp/api/windows.devices.haptics.simplehapticscontrollerfeedback)
+  * [KnownSimpleHapticsControllerWaveforms class](https://docs.microsoft.com/uwp/api/windows.devices.haptics.simplehapticscontrollerfeedback)
 
 ## System requirements
 
@@ -92,7 +92,7 @@ The following types are used in this code sample:
 2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the
    subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or
-   JavaScript). Double-click the Visual Studio 2017 Solution (.sln) file.
+   JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

@@ -31,6 +31,7 @@ namespace SDKTemplate
             new Scenario() { Title="Adaptive Streaming Tuning", ClassType=typeof(Scenario4_Tuning)},
             new Scenario() { Title="Metadata", ClassType=typeof(Scenario5_Metadata)},
             new Scenario() { Title="Ad Insertion", ClassType=typeof(Scenario6_AdInsertion)},
+            new Scenario() { Title="Live Seekable Range", ClassType=typeof(Scenario7_LiveSeekableRange)},
         };
 
         public static IReadOnlyList<AdaptiveContentModel> ContentManagementSystemStub = AdaptiveContentModel.GetKnownAzureMediaServicesModels();

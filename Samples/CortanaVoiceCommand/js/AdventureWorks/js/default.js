@@ -46,25 +46,21 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
         var p = WinJS.UI.processAll().
             then(function () {
 
-                SdkSample.DataStore.TripStore.loadTrips().then(function () {
-                    return wap.current.installedLocation.getFileAsync("AdventureworksCommands.xml");
-                }).then(function (file) {
-                    return voiceCommandManager.installCommandDefinitionsFromStorageFileAsync(file);
-                }).then(function () {
-                    var language = window.navigator.userLanguage || window.navigator.language;
+                SdkSample.DataStore.TripStore.loadTrips().done(function () {
 
-                    var commandSetName = "AdventureWorksCommandSet_" + language.toLowerCase();
-                    if (voiceCommandManager.installedCommandDefinitions.hasKey(commandSetName)) {
-                        var vcd = voiceCommandManager.installedCommandDefinitions.lookup(commandSetName);
-                        var phraseList = [];
-                        SdkSample.DataStore.TripStore.Trips.forEach(function (trip) {
-                            phraseList.push(trip.destination);
-                        });
-                        vcd.setPhraseListAsync("destination", phraseList).done();
-                    } else {
-                        WinJS.log && WinJS.log("VCD not installed yet?", "", "warning");
-                    }
-                }).done(function () {
+                    // Install the VCD and phrase updates using a WebWorker to prevent hanging up the UI thread during app initialization.
+                    var language = window.navigator.userLanguage || window.navigator.language;
+                    var installVCDWorker = Worker("js/installVCD.js");
+                    var phraseList = [];
+                    SdkSample.DataStore.TripStore.Trips.forEach(function (trip) {
+                        phraseList.push(trip.destination);
+                    });
+
+                    // Pass in the phraselist from the loaded store and the language to install the phrase list into.
+                    installVCDWorker.postMessage({
+                        phraseList: phraseList,
+                        language: language
+                    });
 
                     var url = "/html/tripListView.html";
                     var initialState = {};

@@ -179,11 +179,8 @@
     <Content Include="..\shared\Item3.png">
       <Link>Assets\Item3.png</Link>
     </Content>
-    <Content Include="..\shared\Item4.png">
-      <Link>Assets\Item4.png</Link>
-    </Content>
-    <Content Include="..\shared\Item5.png">
-      <Link>Assets\Item5.png</Link>
+    <Content Include="..\..\..\SharedContent\js\Microsoft.WinJS\fonts\Symbols.ttf">
+      <Link>Assets\Symbols.ttf</Link>
     </Content>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

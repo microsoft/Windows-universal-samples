@@ -70,11 +70,10 @@
     <Image Include="..\shared\Item3.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\shared\Item4.png">
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\..\..\SharedContent\js\Microsoft.WinJS\fonts\Symbols.ttf">
       <Filter>Assets</Filter>
-    </Image>
-    <Image Include="..\shared\Item5.png">
-      <Filter>Assets</Filter>
-    </Image>
+    </Font>
   </ItemGroup>
 </Project>
