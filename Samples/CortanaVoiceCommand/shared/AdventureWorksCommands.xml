@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.2">
   <CommandSet xml:lang="en-us" Name="AdventureWorksCommandSet_en-us">
-    <AppName> Adventure Works </AppName>
+    <AppName> Smart Mirror </AppName>
     <Example> Show trip to London </Example>
 
     <Command Name="showTripToDestination">
       <Example> Show trip to London </Example>
-      <ListenFor RequireAppName="BeforeOrAfterPhrase"> show [my] trip to {destination} </ListenFor>
-      <ListenFor RequireAppName="ExplicitlySpecified"> show [my] {builtin:AppName} trip to {destination} </ListenFor>
-      <Feedback> Showing trip to {destination} </Feedback>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> show [me] [my] trip to {destination} </ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> show [me] [my] {builtin:AppName} trip to {destination} </ListenFor>
+      <ListenFor RequireAppName="BeforeOrAfterPhrase"> show [me] {destination} </ListenFor>
+      <Feedback> Showing trip to {destination} via LuxTravel. Shall I book a room for Matt Wright at Air B-and-B?</Feedback>
       <Navigate />
     </Command>
 
@@ -16,7 +17,7 @@
       <Example> When is my trip to Las Vegas?</Example>
       <ListenFor RequireAppName="BeforeOrAfterPhrase"> when is [my] trip to {destination}</ListenFor>
       <ListenFor RequireAppName="ExplicitlySpecified"> when is [my] {builtin:AppName} trip to {destination} </ListenFor>
-      <Feedback> Looking for trip to {destination}</Feedback>
+      <Feedback> Here's your LuxTravel trip to {destination}</Feedback>
       <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
     </Command>
     
@@ -24,7 +25,7 @@
       <Example> Cancel my trip to Las Vegas </Example>
       <ListenFor RequireAppName="BeforeOrAfterPhrase"> cancel [my] trip to {destination}</ListenFor>
       <ListenFor RequireAppName="ExplicitlySpecified"> cancel [my] {builtin:AppName} trip to {destination} </ListenFor>
-      <Feedback> Cancelling trip to {destination}</Feedback>
+      <Feedback> LuxTravel is cancelling trip to {destination} because Erik Olsen made me cry.</Feedback>
     <VoiceCommandService Target="AdventureWorksVoiceCommandService"/>
     </Command>
 
@@ -33,6 +34,9 @@
       <Item>Las Vegas</Item>
       <Item>Melbourne</Item>
       <Item>Yosemite National Park</Item>
+      <Item>Luxoft</Item>
+      <Item>Kirkland</Item>
+      <Item>Rio de Janeiro</Item>
     </PhraseList>
   </CommandSet>
 
