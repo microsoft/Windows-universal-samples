@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="AppUIBasics.ControlPages.PersonPicturePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:controls="using:Windows.UI.Xaml.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <local:ControlExample x:Name="Example1" HeaderText="Select different looks for the person picture." VerticalAlignment="Top"  Height="300">
+        <local:ControlExample.Example>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel Margin="0,12,0,0">
+                    <RadioButton x:Name="ProfileImageRadio" GroupName="Profile" Content="Profile Image" IsChecked="True" />
+                    <RadioButton x:Name="DisplayNameRadio" GroupName="Profile" Content="Display Name" />
+                    <RadioButton x:Name="InitialsRadio" GroupName="Profile" Content="Initials" Margin="0,0,0,10" />
+                </StackPanel>
+                <controls:PersonPicture x:Name="personPicture" HorizontalAlignment="Center" VerticalAlignment="Center" ProfilePicture="{Binding IsChecked, ElementName=ProfileImageRadio, Converter={StaticResource booleanToValueConverter}, ConverterParameter='ms-appx:///Assets/grapes.jpg'}"
+                                            DisplayName="{x:Bind DisplayNameRadio.IsChecked, Mode=OneWay, Converter={StaticResource booleanToValueConverter}, ConverterParameter='John Doe'}"
+                                            Initials="{x:Bind InitialsRadio.IsChecked, Mode=OneWay, Converter={StaticResource booleanToValueConverter}, ConverterParameter=SB}"
+                                            Grid.Column="1"/>
+            </Grid>
+        </local:ControlExample.Example>
+        <local:ControlExample.Xaml>
+            <Grid>
+                <RichTextBlock x:Name="rtb" Visibility="{x:Bind ProfileImageRadio.IsChecked, Converter={StaticResource booleanToVisibilityConverter}, Mode=OneWay}">
+                    <Paragraph>&lt;PersonPicture ProfilePicture=&quot;ms-appx:///Assets/grapes.jpg&quot; /&gt;</Paragraph>
+                </RichTextBlock>
+                <RichTextBlock x:Name="rtb1" Visibility="{x:Bind DisplayNameRadio.IsChecked, Converter={StaticResource booleanToVisibilityConverter}, Mode=OneWay}">
+                    <Paragraph>&lt;PersonPicture DisplayName=&quot;John Doe&quot; /&gt;</Paragraph>
+                </RichTextBlock>
+                <RichTextBlock x:Name="rtb2" Visibility="{x:Bind InitialsRadio.IsChecked, Converter={StaticResource booleanToVisibilityConverter}, Mode=OneWay}">
+                    <Paragraph>&lt;PersonPicture Initials=&quot;SB&quot; /&gt;</Paragraph>
+                </RichTextBlock>
+            </Grid>
+        </local:ControlExample.Xaml>
+    </local:ControlExample>
+
+</Page>

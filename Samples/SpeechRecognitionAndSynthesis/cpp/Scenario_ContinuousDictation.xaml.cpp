@@ -47,9 +47,6 @@ void Scenario_ContinuousDictation::OnNavigatedTo(NavigationEventArgs^ e)
 {
     Page::OnNavigatedTo(e);
 
-    // Keep track of the UI thread dispatcher, as speech events will come in on a separate thread.
-    dispatcher = CoreWindow::GetForCurrentThread()->Dispatcher;
-
     // Prompt the user for permission to access the microphone. This request will only happen
     // once, it will not re-prompt if the user rejects the permission.
     create_task(AudioCapturePermissions::RequestMicrophonePermissionAsync(), task_continuation_context::use_current())
@@ -59,15 +56,15 @@ void Scenario_ContinuousDictation::OnNavigatedTo(NavigationEventArgs^ e)
         {
             this->btnContinuousRecognize->IsEnabled = true;
 
-			PopulateLanguageDropdown();
-			InitializeRecognizer(SpeechRecognizer::SystemSpeechLanguage);
+            PopulateLanguageDropdown();
+            InitializeRecognizer(SpeechRecognizer::SystemSpeechLanguage);
         }
         else
         {
             this->dictationTextBox->Text = "Permission to access capture resources was not given by the user; please set the application setting in Settings->Privacy->Microphone.";
-			this->cbLanguageSelection->IsEnabled = false;
+            this->cbLanguageSelection->IsEnabled = false;
         }
-	});
+    });
 }
 
 /// <summary>
@@ -187,7 +184,7 @@ void Scenario_ContinuousDictation::OnNavigatedFrom(NavigationEventArgs^ e)
 /// <param name="e">Unused event details</param>
 void Scenario_ContinuousDictation::ContinuousRecognize_Click(Object^ sender, RoutedEventArgs^ e)
 {
-	btnContinuousRecognize->IsEnabled = false;
+    btnContinuousRecognize->IsEnabled = false;
     // The recognizer can only start listening in a continuous fashion if the recognizer is currently idle.
     // This prevents an exception from occurring.
     if (speechRecognizer->State == SpeechRecognizerState::Idle)
@@ -216,8 +213,8 @@ void Scenario_ContinuousDictation::ContinuousRecognize_Click(Object^ sender, Rou
                     create_task(messageDialog->ShowAsync());
                 }
             }).then([this]() {
-				btnContinuousRecognize->IsEnabled = true;
-			});
+                btnContinuousRecognize->IsEnabled = true;
+            });
         }
         catch (COMException^ exception)
         {
@@ -250,8 +247,8 @@ void Scenario_ContinuousDictation::ContinuousRecognize_Click(Object^ sender, Rou
             // Ensure we don't leave any hypothesis text behind
             dictationTextBox->Text = ref new Platform::String(this->dictatedTextBuilder.str().c_str());
         }).then([this]() {
-			btnContinuousRecognize->IsEnabled = true;
-		});
+            btnContinuousRecognize->IsEnabled = true;
+        });
     }
 }
 
@@ -296,7 +293,7 @@ void Scenario_ContinuousDictation::dictationTextBox_TextChanged(Object^ sender, 
 /// <param name="args">The current state of the recognizer.</param>
 void Scenario_ContinuousDictation::SpeechRecognizer_StateChanged(SpeechRecognizer ^sender, SpeechRecognizerStateChangedEventArgs ^args)
 {
-    dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
+    Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
     {
         rootPage->NotifyUser("Speech recognizer state: " + args->State.ToString(), NotifyType::StatusMessage);
     }));
@@ -319,7 +316,7 @@ void Scenario_ContinuousDictation::ContinuousRecognitionSession_Completed(Speech
         // With dictation (no grammar in place) modes, the default timeout is 20 seconds.
         if (args->Status == SpeechRecognitionResultStatus::TimeoutExceeded)
         {
-            dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
+            Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
             {
                 rootPage->NotifyUser("Automatic Time Out of Dictation", NotifyType::StatusMessage);
                 DictationButtonText->Text = " Dictate";
@@ -329,7 +326,7 @@ void Scenario_ContinuousDictation::ContinuousRecognitionSession_Completed(Speech
         }
         else
         {
-            dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
+            Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
             {
                 rootPage->NotifyUser("Continuous Recognition Completed: " + args->Status.ToString(), NotifyType::ErrorMessage);
                 DictationButtonText->Text = " Dictate";
@@ -355,7 +352,7 @@ void Scenario_ContinuousDictation::ContinuousRecognitionSession_ResultGenerated(
     {
         this->dictatedTextBuilder << args->Result->Text->Data() << " ";
 
-        dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this]()
+        Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this]()
         {
             this->discardedTextBlock->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
 
@@ -365,7 +362,7 @@ void Scenario_ContinuousDictation::ContinuousRecognitionSession_ResultGenerated(
     }
     else
     {
-        dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
+        Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
         {
             // In some scenarios, a developer may choose to ignore giving the user feedback in this case, if speech
             // is not the primary input mechanism for the application.
@@ -396,7 +393,7 @@ void Scenario_ContinuousDictation::SpeechRecognizer_HypothesisGenerated(SpeechRe
     String^ hypothesis = args->Hypothesis->Text;
 
     std::wstring textBoxContent = dictatedTextBuilder.str() + L" " + hypothesis->Data() + L"...";
-    dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, textBoxContent]()
+    Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, textBoxContent]()
     {
         // Update the textbox with the currently confirmed text, and the hypothesis combined.
         this->dictationTextBox->Text = ref new Platform::String(textBoxContent.c_str());
@@ -411,7 +408,7 @@ void Scenario_ContinuousDictation::PopulateLanguageDropdown()
 {
     Windows::Globalization::Language^ defaultLanguage = SpeechRecognizer::SystemSpeechLanguage;
     auto supportedLanguages = SpeechRecognizer::SupportedTopicLanguages;
-    std::for_each(begin(supportedLanguages), end(supportedLanguages), [&](Windows::Globalization::Language^ lang)
+    for (Windows::Globalization::Language^ lang : supportedLanguages)
     {
         ComboBoxItem^ item = ref new ComboBoxItem();
         item->Tag = lang;
@@ -423,7 +420,7 @@ void Scenario_ContinuousDictation::PopulateLanguageDropdown()
             item->IsSelected = true;
             cbLanguageSelection->SelectedItem = item;
         }
-    });
+    }
 }
 
 /// <summary>

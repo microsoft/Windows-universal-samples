@@ -11,15 +11,14 @@ using AppUIBasics.Common;
 using AppUIBasics.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using Windows.Foundation;
-using Windows.Foundation.Metadata;
-using Windows.System;
+using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 // The Hub Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=??????
 
@@ -33,9 +32,9 @@ namespace AppUIBasics
         private NavigationHelper navigationHelper;
         private IEnumerable<ControlInfoDataGroup> _groups;
         private List<ControlInfoDataItem> _items;
-
+        private string itemId;
         /// <summary>
-        /// NavigationHelper is used on each page to aid in navigation and 
+        /// NavigationHelper is used on each page to aid in navigation and
         /// process lifetime management
         /// </summary>
         public NavigationHelper NavigationHelper
@@ -73,9 +72,8 @@ namespace AppUIBasics
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.DataContext = this; //We have to set the DataContext to itself here to ensure the bindings get hooked up correctly in the Hub.
         }
-
         /// <summary>
-        /// Handler for after the groups load.  Since NavigationRootPage and MainPage get constructed at very similar times, there's a 
+        /// Handler for after the groups load.  Since NavigationRootPage and MainPage get constructed at very similar times, there's a
         /// possibility of a race condition, so we only get the groups on the NavigationRootPage and listen for it to finish on the MainPage.
         /// </summary>
         /// <param name="sender">The NavigationRootPage that has loaded the groups.</param>
@@ -113,6 +111,7 @@ namespace AppUIBasics
         /// session.  The state will be null the first time a page is visited.</param>
         private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            NavigationRootPage.Current.NavigationView.Header = "All controls";
         }
 
         /// <summary>
@@ -135,12 +134,14 @@ namespace AppUIBasics
         /// <param name="e">Event data that describes the item clicked.</param>
         void ItemView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            // Navigate to the appropriate destination page, configuring the new page
-            // by passing required information as a navigation parameter
-            var itemId = ((ControlInfoDataItem)e.ClickedItem).UniqueId;
+            itemId = ((ControlInfoDataItem)e.ClickedItem).UniqueId;
+            var container = itemGridView.ContainerFromItem(e.ClickedItem) as GridViewItem;
+            if (container != null)
+            {
+                itemGridView.PrepareConnectedAnimation("controlAnimation", (ControlInfoDataItem)e.ClickedItem, "controlRoot");
+            }
             this.Frame.Navigate(typeof(ItemPage), itemId);
         }
-
         void GroupView_ItemClick(object sender, ItemClickEventArgs e)
         {
             // Navigate to the appropriate destination page, configuring the new page
@@ -158,20 +159,27 @@ namespace AppUIBasics
 
         /// The methods provided in this section are simply used to allow
         /// NavigationHelper to respond to the page's navigation methods.
-        /// 
-        /// Page specific logic should be placed in event handlers for the  
+        ///
+        /// Page specific logic should be placed in event handlers for the
         /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
         /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
+        /// The navigation parameter is available in the LoadState method
         /// in addition to page state preserved during an earlier session.
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             navigationHelper.OnNavigatedTo(e);
+
+            var firstMenuItem = (NavigationMenuItem)NavigationRootPage.Current.NavigationView.MenuItems.FirstOrDefault();
+            if (firstMenuItem != null)
+                firstMenuItem.IsSelected = true;
+
+            NavigationRootPage.Current.NavigationView.AlwaysShowHeader = false;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            NavigationRootPage.Current.NavigationView.AlwaysShowHeader = true;
             navigationHelper.OnNavigatedFrom(e);
         }
 
@@ -210,6 +218,41 @@ namespace AppUIBasics
             if (eventHandler != null)
             {
                 eventHandler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        async private void itemGridView_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (itemId != null)
+            {
+                var item = Items.First(s => s.UniqueId == itemId);
+                itemGridView.ScrollIntoView(item);
+                if (NavigationRootPage.Current.IsFocusSupported)
+                {
+                    ((GridViewItem)itemGridView.ContainerFromItem(item))?.Focus(FocusState.Programmatic);
+                }
+                ConnectedAnimation animation =
+                    ConnectedAnimationService.GetForCurrentView().GetAnimation("controlAnimation");
+                if (animation != null)
+                {
+                    await itemGridView.TryStartConnectedAnimationAsync(
+                        animation, item, "controlRoot");
+                }
+            }
+        }
+
+        private void itemGridView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+        {
+            var container = itemGridView.ContainerFromItem(itemGridView.Items.LastOrDefault()) as GridViewItem;
+            if (container != null)
+                container.XYFocusDown = container;
+        }
+
+        private void itemGridView_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Up)
+            {
+                FocusManager.TryMoveFocus(FocusNavigationDirection.Up);
             }
         }
     }

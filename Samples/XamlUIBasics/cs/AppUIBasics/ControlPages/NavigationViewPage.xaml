@@ -1,0 +1,63 @@
+﻿<Page x:Class="AppUIBasics.ControlPages.NavigationViewPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics.ControlPages"
+        xmlns:controls="using:Windows.UI.Xaml.Controls" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+    <Grid x:Name="rootGrid" SizeChanged="rootGrid_SizeChanged">
+        <local:ControlExample x:Name="Example1" HeaderText="Resize window to view different modes of NavigationView."
+                Height="600" VerticalAlignment="Top" HorizontalContentAlignment="Stretch">
+            <local:ControlExample.Example>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <CheckBox Content="Show Settings button" x:Name="settingsCheck" />
+                    <controls:NavigationView Loaded="NavigationView_Loaded" Margin="0,12,0,0" Grid.Row="1" SettingsInvoked="NavigationView_SettingsInvoked"
+                                             x:Name="nvSample"
+                            IsSettingsVisible="{Binding ElementName=settingsCheck,Path=IsChecked}" IsTabStop="False"
+                            Header="This is header text.">
+                        <!--
+                        need to do this in code rather than markup in the current build
+
+                        <controls:NavigationView.MenuItems>
+                            <controls:NavigationMenuItem Icon="Play" Text="Menu Item1"
+                                    Invoked="NavigationMenuItem_Invoked" x:Name="MenuItem1" />
+                            <controls:NavigationMenuItemSeparator />
+                            <controls:NavigationMenuItem Icon="Save" Text="Menu Item2"
+                                    Invoked="NavigationMenuItem_Invoked_1" />
+                            <controls:NavigationMenuItem Icon="Refresh" Text="Menu Item3"
+                                    Invoked="NavigationMenuItem_Invoked_2" />
+                        </controls:NavigationView.MenuItems>-->
+                        <Frame x:Name="contentFrame">
+                            <Frame.ContentTransitions>
+                                <TransitionCollection>
+                                    <NavigationThemeTransition>
+                                        <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                            <EntranceNavigationTransitionInfo />
+                                        </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                    </NavigationThemeTransition>
+                                </TransitionCollection>
+                            </Frame.ContentTransitions>
+                        </Frame>
+                    </controls:NavigationView>
+                </Grid>
+            </local:ControlExample.Example>
+            <local:ControlExample.Xaml>
+                <RichTextBlock>
+                    <Paragraph>&lt;controls:NavigationView IsSettingsVisible="<Run Text="{x:Bind settingsCheck.IsChecked, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"></Run>"
+                        Header="This is header text."&gt;
+                    </Paragraph>
+                    <Paragraph TextIndent="12">&lt;controls:NavigationView.MenuItems&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;controls:NavigationMenuItem Icon="Play" Text="Menu Item1" /&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;controls:NavigationMenuItemSeparator/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;controls:NavigationMenuItem Icon="Save" Text="Menu Item2" /&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;controls:NavigationMenuItem Icon="Refresh" Text="Menu Item3" /&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/controls:NavigationView.MenuItems&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Frame x:Name="contentFrame" /&gt;</Paragraph>
+                    <Paragraph>&lt;/controls:NavigationView&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+    </Grid>
+</Page>

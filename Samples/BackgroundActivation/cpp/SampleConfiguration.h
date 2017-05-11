@@ -11,9 +11,12 @@
 #pragma once
 
 #include <collection.h>
+#include "App.g.h"
+#include "BackgroundActivity.h"
 
 using namespace Platform;
 using namespace Windows::ApplicationModel::Background;
+using namespace Windows::ApplicationModel::Activation;
 using namespace Windows::Storage;
 
 #define SampleBackgroundTaskName "SampleBackgroundTask"
@@ -21,6 +24,10 @@ using namespace Windows::Storage;
 #define ServicingCompleteTaskName "ServicingCompleteTask"
 #define TimeTriggeredTaskName "TimeTriggeredTask"
 #define ApplicationTriggerTaskName "ApplicationTriggerTask"
+#define GroupedBackgroundTaskName "GroupedBackgroundTask"
+#define BackgroundTaskGroupId "3F2504E0-5F89-41D3-9A0C-0405E82C3333"
+#define BackgroundTaskGroupFriendlyName "Background Task Group"
+
 
 namespace SDKTemplate
 {
@@ -56,9 +63,10 @@ namespace SDKTemplate
     {
     public:
         static String^ GetBackgroundTaskStatus(String^ name);
-        static BackgroundTaskRegistration^ RegisterBackgroundTask(String^ taskEntryPoint, String^ name, IBackgroundTrigger^ trigger, IBackgroundCondition^ condition);
+        static BackgroundTaskRegistration^ RegisterBackgroundTask(String^ taskEntryPoint, String^ name, IBackgroundTrigger^ trigger, IBackgroundCondition^ condition, BackgroundTaskRegistrationGroup^ group = nullptr);
         static bool TaskRequiresBackgroundAccess(String^ name);
-        static void UnregisterBackgroundTasks(String^ name);
+        static void UnregisterBackgroundTasks(String^ name, BackgroundTaskRegistrationGroup^ group = nullptr);
+        static BackgroundTaskRegistrationGroup^ GetTaskGroup(String^ id, String^ groupName);
         static void UpdateBackgroundTaskRegistrationStatus(String^ name, bool registered);
         static void RemoveBackgroundTaskStatus(String^ name);
 
@@ -78,7 +86,11 @@ namespace SDKTemplate
         static bool ApplicationTriggerTaskRegistered;
         static String^ ApplicationTriggerTaskResult;
 
+        static String^ GroupedBackgroundTaskProgress;
+        static bool GroupedBackgroundTaskRegistered;
+
         static Windows::Foundation::Collections::PropertySet^ TaskStatuses;
     };
-
 }
+
+

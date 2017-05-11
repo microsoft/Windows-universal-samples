@@ -18,6 +18,7 @@ using namespace  SDKTemplate;
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
     { "Synthesize Text", "SDKTemplate.Scenario_SynthesizeText" },
+    { "Synthesize Text with Boundaries", "SDKTemplate.Scenario_SynthesizeTextBoundaries" },
     { "Synthesize SSML", "SDKTemplate.Scenario_SynthesizeSSML" },
     { "Predefined Dictation Grammar", "SDKTemplate.Scenario_PredefinedDictationGrammar" },
     { "Predefined WebSearch Grammar", "SDKTemplate.Scenario_PredefinedWebSearchGrammar" },

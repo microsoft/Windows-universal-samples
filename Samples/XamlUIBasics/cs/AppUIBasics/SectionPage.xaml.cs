@@ -10,20 +10,13 @@
 using AppUIBasics.Common;
 using AppUIBasics.Data;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Windows.Input;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Foundation.Metadata;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 
@@ -39,10 +32,11 @@ namespace AppUIBasics
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private string itemId;
         ControlInfoDataGroup group;
 
         /// <summary>
-        /// NavigationHelper is used on each page to aid in navigation and 
+        /// NavigationHelper is used on each page to aid in navigation and
         /// process lifetime management
         /// </summary>
         public NavigationHelper NavigationHelper
@@ -70,34 +64,9 @@ namespace AppUIBasics
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
-            //controlsSearchBox.SuggestionsRequested += SearchResultsPage.SearchBox_SuggestionsRequested;
 
         }
 
-        //private async void controlsSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-        //{
-        //    var groups = await AppUIBasics.Data.ControlInfoDataSource.GetGroupsAsync();
-        //    var suggestions = new List<ControlInfoDataItem>();
-
-        //    foreach (var group in groups)
-        //    {
-        //        var matchingItems = group.Items.Where(
-        //            item => item.Title.Contains(sender.Text));
-
-        //        foreach (var item in matchingItems)
-        //        {
-        //            suggestions.Add(item);
-        //        }
-        //    }
-        //    controlsSearchBox.ItemsSource = suggestions;
-        //}
-
-        //private void controlsSearchBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
-        //{
-        //    var itemId = (args.SelectedItem as ControlInfoDataItem).UniqueId;
-        //    this.Frame.Navigate(typeof(ItemPage), itemId);
-
-        //}
 
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
@@ -114,6 +83,9 @@ namespace AppUIBasics
         {
             var group = await ControlInfoDataSource.GetGroupAsync((String)e.NavigationParameter);
             Group = group;
+            Bindings.Update();
+            ((NavigationMenuItem)NavigationRootPage.Current.NavigationView.MenuItems.FirstOrDefault(m => m.Tag?.ToString() == group.UniqueId)).IsSelected = true;
+            NavigationRootPage.Current.NavigationView.Header = group?.Title;
         }
 
         /// <summary>
@@ -125,7 +97,12 @@ namespace AppUIBasics
         {
             // Navigate to the appropriate destination page, configuring the new page
             // by passing required information as a navigation parameter
-            var itemId = ((ControlInfoDataItem)e.ClickedItem).UniqueId;
+            itemId = ((ControlInfoDataItem)e.ClickedItem).UniqueId;
+            var container = itemGridView.ContainerFromItem(e.ClickedItem) as GridViewItem;
+            if (container != null)
+            {
+                itemGridView.PrepareConnectedAnimation("controlAnimation", (ControlInfoDataItem)e.ClickedItem, "controlRoot");
+            }
             this.Frame.Navigate(typeof(ItemPage), itemId);
         }
 
@@ -140,23 +117,55 @@ namespace AppUIBasics
 
         /// The methods provided in this section are simply used to allow
         /// NavigationHelper to respond to the page's navigation methods.
-        /// 
-        /// Page specific logic should be placed in event handlers for the  
+        ///
+        /// Page specific logic should be placed in event handlers for the
         /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
         /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
+        /// The navigation parameter is available in the LoadState method
         /// in addition to page state preserved during an earlier session.
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             navigationHelper.OnNavigatedTo(e);
         }
-
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             navigationHelper.OnNavigatedFrom(e);
         }
-
+        async private void itemGridView_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (itemId != null)
+            {
+                var item = this.Group.Items.FirstOrDefault(s => s.UniqueId == itemId);
+                if (item != null)
+                {
+                    itemGridView.ScrollIntoView(item);
+                    if (NavigationRootPage.Current.IsFocusSupported)
+                    {
+                        ((GridViewItem)itemGridView.ContainerFromItem(item))?.Focus(FocusState.Programmatic);
+                    }
+                    ConnectedAnimation animation =
+                        ConnectedAnimationService.GetForCurrentView().GetAnimation("controlAnimation");
+                    if (animation != null)
+                    {
+                        await itemGridView.TryStartConnectedAnimationAsync(
+                            animation, item, "controlRoot");
+                    }
+                }
+            }
+        }
         #endregion
+
+        private void itemGridView_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Up)
+            {
+                var nextElement = FocusManager.FindNextElement(FocusNavigationDirection.Up);
+                if (nextElement.GetType() != typeof(TextBox))
+                {
+                    NavigationRootPage.Current.PageHeader.Focus(FocusState.Programmatic);
+                }
+            }
+        }
     }
 }

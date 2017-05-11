@@ -8,11 +8,13 @@
 //
 //*********************************************************
 using AppUIBasics.Common;
+using AppUIBasics.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -46,7 +48,28 @@ namespace AppUIBasics
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.Resuming += App_Resuming;
             this.RequiresPointerMode = ApplicationRequiresPointerMode.WhenRequested;
+            string selectedTheme = ApplicationData.Current.LocalSettings.Values["SelectedAppTheme"]?.ToString();
+            if (selectedTheme != null)
+            {
+                Enum.TryParse(selectedTheme, out ApplicationTheme appTheme);
+                RequestedTheme = appTheme;
+            }
+        }
+
+        private void App_Resuming(object sender, object e)
+        {
+            switch (NavigationRootPage.RootFrame?.Content)
+            {
+                case ItemPage page:
+                    page.SetInitialVisuals();
+                    break;
+                case NewControlsPage page:
+                case MainPage mainPage:
+                    NavigationRootPage.Current.NavigationView.AlwaysShowHeader = false;
+                    break;
+            }
         }
 
         /// <summary>
@@ -63,8 +86,7 @@ namespace AppUIBasics
             //}
 #endif
             await ShowWindow(e);
-            this.ShowDisclaimer();
-
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().SetDesiredBoundsMode(Windows.UI.ViewManagement.ApplicationViewBoundsMode.UseCoreWindow);
         }
 
         private async Task ShowWindow(LaunchActivatedEventArgs e)
@@ -90,7 +112,7 @@ namespace AppUIBasics
 
                 // Set the default language
                 rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
-                
+
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
@@ -121,6 +143,66 @@ namespace AppUIBasics
             Window.Current.Activate();
         }
 
+        protected async override void OnActivated(IActivatedEventArgs args)
+        {
+            if (args.Kind == ActivationKind.Protocol)
+            {
+                Match match;
+                Type targetPageType = typeof(MainPage);
+                string targetId = string.Empty;
+                Frame rootFrame = GetRootFrame();
+
+                switch (((ProtocolActivatedEventArgs)args).Uri?.AbsolutePath)
+                {
+                    case string s when IsMatching(s, "/category/(.*)"):
+                        targetId = match.Groups[1]?.ToString();
+                        var groups = NavigationRootPage.Current.Groups ?? (await ControlInfoDataSource.GetGroupsAsync()).ToList();
+                        if (groups.Any(g => g.UniqueId == targetId))
+                        {
+                            targetPageType = typeof(SectionPage);
+                        }
+                        break;
+
+                    case string s when IsMatching(s, "/item/(.*)"):
+                        targetId = match.Groups[1]?.ToString();
+                        groups = NavigationRootPage.Current.Groups ?? (await ControlInfoDataSource.GetGroupsAsync()).ToList();
+                        if (groups.Any(g => g.Items.Any(i => i.UniqueId == targetId)))
+                        {
+                            targetPageType = typeof(ItemPage);
+                        }
+                        break;
+                }
+                rootFrame.Navigate(targetPageType, targetId);
+
+                bool IsMatching(string parent, string expression)
+                {
+                    match = Regex.Match(parent, expression);
+                    return match.Success;
+                }
+            }
+            base.OnActivated(args);
+        }
+
+        private Frame GetRootFrame()
+        {
+            Frame rootFrame;
+            NavigationRootPage rootPage = Window.Current.Content as NavigationRootPage;
+            if (rootPage == null)
+            {
+                rootPage = new NavigationRootPage();
+                rootFrame = (Frame)rootPage.FindName("rootFrame");
+                rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
+                rootFrame.NavigationFailed += OnNavigationFailed;
+                Window.Current.Content = rootPage;
+                Window.Current.Activate();
+            }
+            else
+            {
+                rootFrame = (Frame)rootPage.FindName("rootFrame");
+            }
+            return rootFrame;
+        }
+
         /// <summary>
         /// Invoked when Navigation to a certain page fails
         /// </summary>
@@ -144,47 +226,6 @@ namespace AppUIBasics
             var deferral = e.SuspendingOperation.GetDeferral();
             await SuspensionManager.SaveAsync();
             deferral.Complete();
-        }
-        
-        private async void ShowDisclaimer()
-        {
-            ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView();
-            var roamingSettings = ApplicationData.Current.RoamingSettings;
-
-            // Show disclaimer regardless of how the app has been activated
-            // unless disclaimer already accepted.
-            var disclaimer = (bool)(roamingSettings.Values["disclaimer"] ?? false);
-
-            // If no disclaimer response, show disclaimer.
-            if (!disclaimer)
-            {
-                // Get disclaimer resources.
-                // See Globalizing your app at http://go.microsoft.com/fwlink/?LinkId=258266.
-                var resDisclaimer = resourceLoader.GetString("disclaimer").Replace(@"\n", Environment.NewLine);
-                if (String.IsNullOrEmpty(resDisclaimer)) resDisclaimer = "Disclaimer.";
-                var resDisclaimerTitle = resourceLoader.GetString("disclaimerTitle");
-                if (String.IsNullOrEmpty(resDisclaimerTitle)) resDisclaimerTitle = "Disclaimer";
-                var resDisclaimerButton = resourceLoader.GetString("disclaimerButton");
-                if (String.IsNullOrEmpty(resDisclaimerButton)) resDisclaimerButton = "Accept";
-
-                // Create a disclaimer message dialog and set its content.
-                // A message dialog can support up to three commands. 
-                // If no commands are specified, a close command is provided by default.
-                // Note: Message dialogs should be used sparingly, and only for messages or 
-                // questions critical to the continued use of your app.
-                // See Adding message dialogs at http://go.microsoft.com/fwlink/?LinkID=275116.
-                var msg = new Windows.UI.Popups.MessageDialog(resDisclaimer, resDisclaimerTitle);
-
-                // Handler for disclaimer.
-                msg.Commands.Add(new Windows.UI.Popups.UICommand(resDisclaimerButton,
-                    _ => roamingSettings.Values["disclaimer"] = true));
-
-                // If specifying your own commmands, set the command that will be invoked by default.
-                // For example, msg.defaultCommandIndex = 1;
-
-                // Show the message dialog
-                await msg.ShowAsync();
-            }
         }
     }
 }

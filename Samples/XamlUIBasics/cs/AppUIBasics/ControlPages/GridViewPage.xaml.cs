@@ -10,6 +10,7 @@
 using AppUIBasics.Common;
 using AppUIBasics.Data;
 using System.Collections.Generic;
+using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -23,22 +24,30 @@ namespace AppUIBasics.ControlPages
     /// </summary>
     public sealed partial class GridViewPage : Page
     {
-        private IEnumerable<ControlInfoDataGroup> _groups;
+        private List<ControlInfoDataItem> _items;
 
         public GridViewPage()
         {
             this.InitializeComponent();
         }
-        public IEnumerable<ControlInfoDataGroup> Groups
+        public List<ControlInfoDataItem> Groups
         {
-            get { return this._groups; }
+            get { return this._items; }
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            _groups = await ControlInfoDataSource.GetGroupsAsync();
+            var groups = NavigationRootPage.Current.Groups.Any() ? NavigationRootPage.Current.Groups : await ControlInfoDataSource.GetGroupsAsync();
+            _items = new List<ControlInfoDataItem>();
+            foreach (var group in groups.Take(3))
+            {
+                foreach (var item in group.Items)
+                {
+                    _items.Add(item);
+                }
+            }
         }
 
         private void ItemTemplate_Click(object sender, RoutedEventArgs e)
@@ -53,8 +62,8 @@ namespace AppUIBasics.ControlPages
             GridView gridView = sender as GridView;
             if (gridView != null)
             {
-                SelectionOutput.Text = string.Format("You have selected {0} item(s).", gridView.SelectedItems.Count);             
-            }      
+                SelectionOutput.Text = string.Format("You have selected {0} item(s).", gridView.SelectedItems.Count);
+            }
         }
 
         private void Control1_ItemClick(object sender, ItemClickEventArgs e)

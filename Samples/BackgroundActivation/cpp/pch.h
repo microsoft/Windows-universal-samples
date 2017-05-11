@@ -28,6 +28,10 @@ namespace SDKTemplate
         /// <param name="args"></param>
     protected:
         virtual void OnBackgroundActivated(Windows::ApplicationModel::Activation::BackgroundActivatedEventArgs^ args) override;
+
+    private:
+        void Partial_Construct();
     };
 }
+
 #include "App.xaml.h"

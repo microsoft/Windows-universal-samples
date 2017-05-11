@@ -22,11 +22,11 @@
 
         <SemanticZoom Grid.Row="1" Margin="0,0,30,10">
             <SemanticZoom.ZoomedInView>
-                <Hub x:Name="NewsHub" Header="News">
-                    <HubSection MinWidth="600" Header="Latest">
+                <Hub x:Name="NewsHub" Header="News" MinHeight="400" UseSystemFocusVisuals="True" IsTabStop="True">
+                    <HubSection MinWidth="600"  Header="Latest">
                         <DataTemplate>
                             <Grid>
-                                <TextBlock Text="The most recent news goes here." 
+                                <TextBlock Text="The most recent news goes here."
                            Style="{ThemeResource BodyTextBlockStyle}" />
                             </Grid>
                         </DataTemplate>
@@ -48,7 +48,7 @@
                             <StackPanel>
                                 <TextBlock Text="Rich content goes here."
                            Style="{ThemeResource BodyTextBlockStyle}" />
-                                <TextBlock Text="Click the &quot;See more&quot; button to go to the Sports news page." 
+                                <TextBlock Text="Click the &quot;See more&quot; button to go to the Sports news page."
                            Style="{ThemeResource BodyTextBlockStyle}" />
                             </StackPanel>
                         </DataTemplate>
@@ -59,7 +59,7 @@
                             <StackPanel>
                                 <TextBlock Text="Rich content goes here."
                            Style="{ThemeResource BodyTextBlockStyle}" />
-                                <TextBlock Text="Click the &quot;See more&quot; button to go to the Local news page." 
+                                <TextBlock Text="Click the &quot;See more&quot; button to go to the Local news page."
                            Style="{ThemeResource BodyTextBlockStyle}" />
                             </StackPanel>
                         </DataTemplate>
@@ -70,7 +70,7 @@
                             <StackPanel>
                                 <TextBlock Text="Rich content goes here."
                            Style="{ThemeResource BodyTextBlockStyle}" />
-                                <TextBlock Text="Click the &quot;See more&quot; button to go to the World news page." 
+                                <TextBlock Text="Click the &quot;See more&quot; button to go to the World news page."
                            Style="{ThemeResource BodyTextBlockStyle}" />
                             </StackPanel>
                         </DataTemplate>

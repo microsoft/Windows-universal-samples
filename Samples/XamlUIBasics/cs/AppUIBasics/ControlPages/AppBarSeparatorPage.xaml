@@ -20,17 +20,19 @@
 
     <local:ControlExample HeaderText="AppBarButtons separted by AppBarSeparators." HorizontalAlignment="Left" VerticalAlignment="Top">
         <local:ControlExample.Example>
-            <StackPanel x:Name="Control1" Orientation="Horizontal">
-                <AppBarButton Icon="AttachCamera" Label="Attach Camera"/>
-                <AppBarSeparator />
-                <AppBarButton Icon="Like" Label="Like"/>
-                <AppBarButton Icon="Dislike" Label="Dislike"/>
-                <AppBarSeparator />
-                <AppBarButton Icon="Orientation" Label="Orientation"/>
-            </StackPanel>
+            <ScrollViewer VerticalScrollMode="Disabled" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Hidden">
+                <StackPanel x:Name="Control1" Orientation="Horizontal">
+                    <AppBarButton Icon="AttachCamera" Label="Attach Camera" />
+                    <AppBarSeparator />
+                    <AppBarButton Icon="Like" Label="Like" />
+                    <AppBarButton Icon="Dislike" Label="Dislike" />
+                    <AppBarSeparator />
+                    <AppBarButton Icon="Orientation" Label="Orientation" />
+                </StackPanel>
+            </ScrollViewer>
         </local:ControlExample.Example>
         <local:ControlExample.Xaml>
-            <RichTextBlock Style="{StaticResource RichTextBlockCodeStyle}" >
+            <RichTextBlock>
                 <Paragraph>&lt;StackPanel Orientation="Horizontal"&gt;</Paragraph>
                 <Paragraph TextIndent="12">&lt;AppBarButton Icon="AttachCamera" Label="Attach Camera"/&gt;</Paragraph>
                 <Paragraph TextIndent="12">

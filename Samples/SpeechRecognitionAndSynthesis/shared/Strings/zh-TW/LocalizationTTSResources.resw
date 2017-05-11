@@ -123,18 +123,21 @@
                              xsi:schemaLocation='http://www.w3.org/2001/10/synthesis  http://www.w3.org/TR/speech-synthesis/synthesis.xsd' 
                              xml:lang='zh-TW'&gt;
 
-這是發音的一個語音的示例：
+&lt;mark name='phonetic'/&gt;這是發音的一個語音的示例：
 &lt;phoneme alphabet='x-microsoft-ups' ph='S1 W AA T . CH AX . M AX . S2 K AA L . IH T'&gt; whatchamacallit &lt;/phoneme&gt;.
 
-這是一個日期的示例：
+&lt;mark name='date'/&gt;這是一個日期的示例：
 &lt;say-as interpret-as='date' format='mdy'&gt; 04/30/2013 &lt;/say-as&gt;.
 
-這是說了一些示例：
+&lt;mark name='number'/&gt;這是說了一些示例：
 &lt;say-as interpret-as='ordinal'&gt; 4 &lt;/say-as&gt;.
-
+&lt;mark name='end'/&gt;
 &lt;/speak&gt;</value>
   </data>
   <data name="SynthesizeTextDefaultText" xml:space="preserve">
     <value>快速的紅狐狸跳過懶惰的棕色狗</value>
+  </data>
+  <data name="SynthesizeTextBoundariesDefaultText" xml:space="preserve">
+    <value>只要使用您的聲音，就可以啟動程式、開啟功能表、按一下按鈕和螢幕上的其他物件、將文字聽寫為文件，以及撰寫和傳送電子郵件。而可以使用鍵盤和滑鼠完成的所有事項，都可以使用您的聲音完成。</value>
   </data>
 </root>

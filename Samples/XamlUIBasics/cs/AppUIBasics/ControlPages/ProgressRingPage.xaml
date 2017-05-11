@@ -17,18 +17,20 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-  <local:ControlExample HeaderText="An indeterminate progress ring." HorizontalAlignment="Left" VerticalAlignment="Top">
-    <StackPanel Orientation="Horizontal">
-      <ProgressRing IsActive="{x:Bind ProgressToggle.IsOn, Mode=OneWay}" Width="130" Height="50"/>
-      <ToggleSwitch x:Name="ProgressToggle" Header="Toggle work" OffContent="Do work" OnContent="Working" IsOn="True"/>
+    <StackPanel>
+        <local:ControlExample HeaderText="An indeterminate progress ring." HorizontalAlignment="Left"
+                VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+                <ProgressRing IsActive="{x:Bind ProgressToggle.IsOn, Mode=OneWay}" Width="130" Height="50" />
+                <ToggleSwitch x:Name="ProgressToggle" Header="Toggle work" OffContent="Do work" OnContent="Working"
+                        IsOn="True" />
+            </StackPanel>
+            <local:ControlExample.Xaml>
+                <RichTextBlock>
+                    <Paragraph>&lt;ProgressRing IsActive="<Run Text="{x:Bind ProgressToggle.IsOn, Mode=OneWay}" />" /&gt;
+                    </Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
     </StackPanel>
-    <local:ControlExample.Xaml>
-      <RichTextBlock>
-        <Paragraph>
-          &lt;ProgressRing IsActive="<Run Text="{x:Bind ProgressToggle.IsOn, Mode=OneWay}" />" /&gt;
-        </Paragraph>
-      </RichTextBlock>
-    </local:ControlExample.Xaml>
-  </local:ControlExample>
 </Page>

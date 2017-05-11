@@ -21,8 +21,8 @@ using Windows.UI.Xaml.Media.Imaging;
 // model.  The property names chosen coincide with data bindings in the standard item templates.
 //
 // Applications may use this model as a starting point and build on it, or discard it entirely and
-// replace it with something appropriate to their needs. If using this model, you might improve app 
-// responsiveness by initiating the data loading task in the code behind for App.xaml when the app 
+// replace it with something appropriate to their needs. If using this model, you might improve app
+// responsiveness by initiating the data loading task in the code behind for App.xaml when the app
 // is first launched.
 
 namespace AppUIBasics.Data
@@ -32,7 +32,7 @@ namespace AppUIBasics.Data
     /// </summary>
     public class ControlInfoDataItem
     {
-        public ControlInfoDataItem(String uniqueId, String title, String subtitle, String imagePath, String description, String content)
+        public ControlInfoDataItem(String uniqueId, String title, String subtitle, String imagePath, String description, String content, bool isNew)
         {
             this.UniqueId = uniqueId;
             this.Title = title;
@@ -40,6 +40,7 @@ namespace AppUIBasics.Data
             this.Description = description;
             this.ImagePath = imagePath;
             this.Content = content;
+            this.IsNew = isNew;
             this.Docs = new ObservableCollection<ControlInfoDocLink>();
             this.RelatedControls = new ObservableCollection<string>();
         }
@@ -50,6 +51,7 @@ namespace AppUIBasics.Data
         public string Description { get; private set; }
         public string ImagePath { get; private set; }
         public string Content { get; private set; }
+        public bool IsNew { get; private set; }
         public ObservableCollection<ControlInfoDocLink> Docs { get; private set; }
         public ObservableCollection<string> RelatedControls { get; private set; }
 
@@ -101,8 +103,8 @@ namespace AppUIBasics.Data
 
     /// <summary>
     /// Creates a collection of groups and items with content read from a static json file.
-    /// 
-    /// ControlInfoSource initializes with data read from a static json file included in the 
+    ///
+    /// ControlInfoSource initializes with data read from a static json file included in the
     /// project.  This provides sample data at both design-time and run-time.
     /// </summary>
     public sealed class ControlInfoDataSource
@@ -138,6 +140,14 @@ namespace AppUIBasics.Data
             // Simple linear search is acceptable for small data sets
             var matches = _controlInfoDataSource.Groups.SelectMany(group => group.Items).Where((item) => item.UniqueId.Equals(uniqueId));
             if (matches.Count() > 0) return matches.First();
+            return null;
+        }
+
+        public static async Task<ControlInfoDataGroup> GetGroupFromItemAsync(string uniqueId)
+        {
+            await _controlInfoDataSource.GetControlInfoDataAsync();
+            var matches = _controlInfoDataSource.Groups.Where((group) => group.Items.FirstOrDefault(item => item.UniqueId.Equals(uniqueId)) != null);
+            if (matches.Count() == 1) return matches.First();
             return null;
         }
 
@@ -177,7 +187,8 @@ namespace AppUIBasics.Data
                                                                 itemObject["Subtitle"].GetString(),
                                                                 itemObject["ImagePath"].GetString(),
                                                                 itemObject["Description"].GetString(),
-                                                                itemObject["Content"].GetString());
+                                                                itemObject["Content"].GetString(),
+                                                                itemObject["IsNew"].GetBoolean());
                         if (itemObject.ContainsKey("Docs"))
                         {
                             foreach (JsonValue docValue in itemObject["Docs"].GetArray())

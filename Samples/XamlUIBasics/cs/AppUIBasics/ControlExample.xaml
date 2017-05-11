@@ -5,24 +5,75 @@
     xmlns:local="using:AppUIBasics"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Media="using:Microsoft.Xaml.Interactions.Media"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
-
-    <Grid HorizontalAlignment="Stretch">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="{x:Bind ExampleHeight}" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <TextBlock x:Name="Header" Text="{x:Bind HeaderText}" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,24,0,8" />
-
-        <!-- Control -->
-        <ContentPresenter x:Name="ControlPresenter" Content="{x:Bind Example}" HorizontalAlignment="{x:Bind HorizontalContentAlignment}" Grid.Row="1" />
-
-        <!-- XAML display -->
-        <Border x:Name="XamlBorder" Style="{StaticResource CodeBorderStyle}" Grid.Row="2" HorizontalAlignment="Stretch">
-            <ContentPresenter x:Name="XamlPresenter" Content="{x:Bind Xaml}" Style="{StaticResource CPCodeStyle}" />
-        </Border>
+    d:DesignWidth="580"
+    x:Name="RootPanel"
+    Width="627"
+    HorizontalAlignment="Left"
+    Margin="0,0,0,24">
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="IntermediateLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="740" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="500" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RootPanel.Width" Value="472" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="PhoneLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RootPanel.Width" Value="Auto" />
+                        <Setter Target="RootPanel.HorizontalAlignment" Value="Stretch" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid HorizontalAlignment="Stretch" x:Name="rootGrid">
+            <Grid.Resources>
+                <Storyboard x:Name="PopOutStoryboard">
+                    <PopInThemeAnimation TargetName="rootGrid" SpeedRatio="2"/>
+                </Storyboard>
+                <Storyboard x:Name="PopInStoryboard">
+                    <PopInThemeAnimation TargetName="rootGrid" SpeedRatio=".2" FromVerticalOffset="150"/>
+                </Storyboard>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="{x:Bind ExampleHeight}" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="Loaded">
+                    <Media:ControlStoryboardAction Storyboard="{StaticResource PopInStoryboard}"/>
+                </Core:EventTriggerBehavior>
+                <Core:EventTriggerBehavior EventName="Unloaded">
+                    <Media:ControlStoryboardAction Storyboard="{StaticResource PopOutStoryboard}"/>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+            <TextBlock x:Name="Header" Text="{x:Bind HeaderText}" Style="{ThemeResource BaseTextBlockStyle}"
+                    Margin="0,0,0,8" />
+            <!-- Control -->
+            <ContentPresenter x:Name="ControlPresenter" Content="{x:Bind Example}"
+                    HorizontalAlignment="{x:Bind HorizontalContentAlignment}" Grid.Row="1" />
+            <!-- XAML display -->
+            <Border x:Name="XamlBorder" Style="{StaticResource CodeBorderStyle}" Grid.Row="2"
+                    HorizontalAlignment="Stretch">
+                <ContentPresenter x:Name="XamlPresenter" Content="{x:Bind Xaml}" Style="{StaticResource CPCodeStyle}" />
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

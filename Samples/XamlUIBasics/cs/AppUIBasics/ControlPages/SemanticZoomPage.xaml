@@ -24,8 +24,8 @@
                               d:Source="{Binding Groups, Source={d:DesignData Source=/DataModel/ControlInfoData.json, Type=data:ControlInfoDataSource}}"/>
 
         <DataTemplate x:Key="ZoomedInTemplate" x:DataType="data:ControlInfoDataItem">
-            <StackPanel Orientation="Horizontal" MinWidth="200" Margin="12,6,0,6">
-                <Image Source="{x:Bind ImagePath}" Height="80" Width="80"/>
+            <StackPanel Orientation="Horizontal" MinWidth="200" Margin="12,6,12,6">
+                <Image Source="{x:Bind ImagePath}" Width="36"/>
                 <StackPanel Margin="20,0,0,0">
                     <TextBlock Text="{x:Bind Title}" Style="{StaticResource BaseTextBlockStyle}"/>
                     <TextBlock Text="{x:Bind Subtitle}" TextWrapping="Wrap" HorizontalAlignment="Left" Width="300" Style="{StaticResource BodyTextBlockStyle}"/>
@@ -43,10 +43,10 @@
     </Page.Resources>
 
 
-    <local:ControlExample HeaderText="A simple SemanticZoom">
+    <local:ControlExample HeaderText="A simple SemanticZoom" x:Name="Example1">
         <SemanticZoom x:Name="Control1" Height="500">
             <SemanticZoom.ZoomedInView>
-                <GridView ItemsSource="{x:Bind cvsGroups.View}" ScrollViewer.IsHorizontalScrollChainingEnabled="False" SelectionMode="None" 
+                <GridView ItemsSource="{x:Bind cvsGroups.View}" ScrollViewer.IsHorizontalScrollChainingEnabled="False" SelectionMode="None" GotFocus="List_GotFocus"
                     ItemTemplate="{StaticResource ZoomedInTemplate}">
                     <GridView.GroupStyle>
                         <GroupStyle HeaderTemplate="{StaticResource ZoomedInGroupHeaderTemplate}" />
@@ -55,7 +55,7 @@
             </SemanticZoom.ZoomedInView>
 
             <SemanticZoom.ZoomedOutView>
-                <ListView ItemsSource="{x:Bind cvsGroups.View.CollectionGroups}" SelectionMode="None" ItemTemplate="{StaticResource ZoomedOutTemplate}" />
+                <ListView ItemsSource="{x:Bind cvsGroups.View.CollectionGroups}" SelectionMode="None" ItemTemplate="{StaticResource ZoomedOutTemplate}" GotFocus="List_GotFocus" />
             </SemanticZoom.ZoomedOutView>
         </SemanticZoom>
         <local:ControlExample.Xaml>

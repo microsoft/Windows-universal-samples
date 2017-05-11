@@ -1,13 +1,13 @@
 ﻿using AppUIBasics.Common;
 using AppUIBasics.Data;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 // The Search Results Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234240
@@ -24,7 +24,7 @@ namespace AppUIBasics
         private List<Filter> _filters;
         private bool _showFilters;
         private List<ControlInfoDataItem> _results;
-
+        private int? pivotIndex;
 
         public string QueryText
         {
@@ -51,7 +51,7 @@ namespace AppUIBasics
         }
 
         /// <summary>
-        /// NavigationHelper is used on each page to aid in navigation and 
+        /// NavigationHelper is used on each page to aid in navigation and
         /// process lifetime management
         /// </summary>
         public NavigationHelper NavigationHelper
@@ -104,12 +104,12 @@ namespace AppUIBasics
                     if (numberOfMatchingItems > 0)
                     {
                         FullResults.Add(group.Title, matchingItems);
-                        filterList.Add(new Filter(group.Title, numberOfMatchingItems));
+                        filterList.Add(new Filter(group.Title, numberOfMatchingItems, GetItemsByFilterName(group.Title)));
                     }
                     totalMatchingItems += numberOfMatchingItems;
                 }
 
-                filterList.Insert(0, new Filter("All", totalMatchingItems, true));
+                filterList.Insert(0, new Filter("All", totalMatchingItems, filterList.SelectMany(s => s.Items).ToList(), true));
 
                 // Communicate results through the view model
                 QueryText = '\u201c' + queryText + '\u201d';
@@ -119,12 +119,24 @@ namespace AppUIBasics
                 {
                     // Display informational text when there are no search results.
                     VisualStateManager.GoToState(this, "NoResultsFound", true);
+                    var textbox = NavigationRootPage.Current.PageHeader.GetDescendantsOfType<AutoSuggestBox>().FirstOrDefault();
+                    textbox?.Focus(FocusState.Programmatic);
+                }
+                else
+                {
+                    VisualStateManager.GoToState(this, "ResultsFound", true);
                 }
             }
             else
             {
-                var isFocused = query.Focus(FocusState.Programmatic);
+                //var isFocused = query.Focus(FocusState.Programmatic);
             }
+            NavigationRootPage.Current.NavigationView.Header = "Search";
+        }
+
+        private List<ControlInfoDataItem> GetItemsByFilterName(string title)
+        {
+            return FullResults.FirstOrDefault(s => s.Key == title).Value.ToList();
         }
 
         /// <summary>
@@ -143,7 +155,7 @@ namespace AppUIBasics
                 // Mirror the results into the corresponding Filter object to allow the
                 // RadioButton representation used when not snapped to reflect the change
                 selectedFilter.Active = true;
-                
+
                 if (selectedFilter.Name.Equals("All"))
                 {
                     var tempResults = new List<AppUIBasics.Data.ControlInfoDataItem>();
@@ -175,7 +187,7 @@ namespace AppUIBasics
         public async static void SearchBox_SuggestionsRequested(SearchBox sender, SearchBoxSuggestionsRequestedEventArgs args)
         {
 
-            // This object lets us edit the SearchSuggestionCollection asynchronously. 
+            // This object lets us edit the SearchSuggestionCollection asynchronously.
             var deferral = args.Request.GetDeferral();
             try
             {
@@ -211,42 +223,15 @@ namespace AppUIBasics
 
         }
 
-        private async void query_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var filterList = new List<Filter>();
-            var totalMatchingItems = 0;
-            var groups = await AppUIBasics.Data.ControlInfoDataSource.GetGroupsAsync();
-            FullResults = new Dictionary<string, IEnumerable<Data.ControlInfoDataItem>>();
-
-            foreach (var group in groups)
-            {
-                var matchingItems = group.Items.Where(
-                    item => item.Title.IndexOf(query.Text, StringComparison.CurrentCultureIgnoreCase) >= 0
-                        || item.Subtitle.IndexOf(query.Text, StringComparison.CurrentCultureIgnoreCase) >= 0);
-                int numberOfMatchingItems = matchingItems.Count();
-                if (numberOfMatchingItems > 0)
-                {
-                    FullResults.Add(group.Title, matchingItems);
-                    filterList.Add(new Filter(group.Title, numberOfMatchingItems));
-                }
-                totalMatchingItems += numberOfMatchingItems;
-            }
-
-            filterList.Insert(0, new Filter("All", totalMatchingItems, true));
-
-            // Communicate results through the view model
-            QueryText = '\u201c' + query.Text + '\u201d';
-            Filters = filterList;
-            ShowFilters = filterList.Count > 1;
-            if (FullResults.Count() < 1)
-            {
-                // Display informational text when there are no search results.
-                VisualStateManager.GoToState(this, "NoResultsFound", true);
-            }
-        }
 
         private void resultsGridView_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var container = (sender as GridView).ContainerFromItem(e.ClickedItem) as GridViewItem;
+            if (container != null)
+            {
+                (sender as GridView).PrepareConnectedAnimation("controlAnimation", (ControlInfoDataItem)e.ClickedItem, "controlRoot");
+                pivotIndex = resultsPivot.SelectedIndex;
+            }
             this.Frame.Navigate(
                 typeof(ItemPage),
                 ((AppUIBasics.Data.ControlInfoDataItem)e.ClickedItem).UniqueId);
@@ -261,11 +246,11 @@ namespace AppUIBasics
 
         /// The methods provided in this section are simply used to allow
         /// NavigationHelper to respond to the page's navigation methods.
-        /// 
-        /// Page specific logic should be placed in event handlers for the  
+        ///
+        /// Page specific logic should be placed in event handlers for the
         /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
         /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
+        /// The navigation parameter is available in the LoadState method
         /// in addition to page state preserved during an earlier session.
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -317,6 +302,31 @@ namespace AppUIBasics
                 eventHandler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        private void resultsPivot_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (NavigationRootPage.Current.DeviceFamily == DeviceType.Xbox)
+            {
+                resultsPivot.IsHeaderItemsCarouselEnabled = false;
+                if (pivotIndex != null)
+                {
+                    resultsPivot.SelectedIndex = pivotIndex.Value;
+                }
+                resultsPivot.Focus(FocusState.Programmatic);
+            }
+        }
+
+        private void resultsPivot_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Up)
+            {
+                var nextElement = FocusManager.FindNextElement(FocusNavigationDirection.Up);
+                if (nextElement.GetType() != typeof(TextBox))
+                {
+                    NavigationRootPage.Current.PageHeader.Focus(FocusState.Programmatic);
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -327,17 +337,25 @@ namespace AppUIBasics
         private String _name;
         private int _count;
         private bool? _active;
+        private List<ControlInfoDataItem> items;
 
-        public Filter(String name, int count, bool active = false)
+        public Filter(String name, int count, List<ControlInfoDataItem> controlInfoList, bool active = false)
         {
             this.Name = name;
             this.Count = count;
             this.Active = active;
+            this.Items = controlInfoList;
         }
 
         public override String ToString()
         {
             return Description;
+        }
+
+        public List<ControlInfoDataItem> Items
+        {
+            get { return items; }
+            set { if (this.SetProperty(ref items, value)) this.OnPropertyChanged("Items"); }
         }
 
         public String Name

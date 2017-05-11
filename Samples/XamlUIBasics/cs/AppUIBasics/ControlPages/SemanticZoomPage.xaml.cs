@@ -39,5 +39,10 @@ namespace AppUIBasics.ControlPages
 
             _groups = await ControlInfoDataSource.GetGroupsAsync();
         }
+
+        private void List_GotFocus(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Control1.StartBringIntoView();
+        }
     }
 }

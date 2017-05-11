@@ -2,20 +2,15 @@
 using AppUIBasics.Data;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Windows.Input;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Foundation.Metadata;
+using Windows.ApplicationModel.Core;
+using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -30,6 +25,49 @@ namespace AppUIBasics
             set { SetValue(TitleProperty, value); }
         }
 
+        public ImageSource IconUri
+        {
+            get { return (ImageSource)GetValue(IconUriProperty); }
+            set { SetValue(IconUriProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IconUri.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IconUriProperty =
+            DependencyProperty.Register("IconUri", typeof(ImageSource), typeof(PageHeader), new PropertyMetadata(null));
+
+
+        public double BackgroundColorOpacity
+        {
+            get { return (double)GetValue(BackgroundColorOpacityProperty); }
+            set { SetValue(BackgroundColorOpacityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for BackgroundColorOpacity.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BackgroundColorOpacityProperty =
+            DependencyProperty.Register("BackgroundColorOpacity", typeof(double), typeof(PageHeader), new PropertyMetadata(0.0));
+
+        public double AcrylicOpacity
+        {
+            get { return (double)GetValue(AcrylicOpacityProperty); }
+            set { SetValue(AcrylicOpacityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for BackgroundColorOpacity.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AcrylicOpacityProperty =
+            DependencyProperty.Register("AcrylicOpacity", typeof(double), typeof(PageHeader), new PropertyMetadata(0.3));
+
+
+        public bool ShowAcrylicBehindHeader
+        {
+            get { return (bool)GetValue(ShowAcrylicBehindHeaderProperty); }
+            set { SetValue(ShowAcrylicBehindHeaderProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for BackgroundColorOpacity.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShowAcrylicBehindHeaderProperty =
+            DependencyProperty.Register("ShowAcrylicBehindHeader", typeof(Visibility), typeof(PageHeader), new PropertyMetadata(Visibility.Visible));
+
+
         public static readonly DependencyProperty WideLayoutThresholdProperty = DependencyProperty.Register("WideLayoutThreshold", typeof(double), typeof(PageHeader), new PropertyMetadata(600));
         public double WideLayoutThreshold
         {
@@ -38,6 +76,34 @@ namespace AppUIBasics
             {
                 SetValue(WideLayoutThresholdProperty, value);
                 WideLayoutTrigger.MinWindowWidth = value;
+            }
+        }
+
+
+        public SolidColorBrush BackgroundBrush
+        {
+            get { return (SolidColorBrush)GetValue(BackgroundBrushProperty); }
+            set { SetValue(BackgroundBrushProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for BackgroundBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BackgroundBrushProperty =
+            DependencyProperty.Register("BackgroundBrush", typeof(SolidColorBrush), typeof(PageHeader), new PropertyMetadata(new SolidColorBrush(Colors.White)));
+
+
+        public CommandBar TopCommandBar
+        {
+            get
+            {
+                return topCommandBar;
+            }
+        }
+
+        public Flyout ThemeFlyout
+        {
+            get
+            {
+                return themeFlyout;
             }
         }
 
@@ -83,9 +149,57 @@ namespace AppUIBasics
             }
         }
 
-        private void splitViewToggle_Click(object sender, RoutedEventArgs e)
+        private void searchButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationRootPage.RootSplitView.IsPaneOpen = !NavigationRootPage.RootSplitView.IsPaneOpen;
+            controlsSearchBox.Visibility = Visibility.Visible;
+            bool isFocused = controlsSearchBox.Focus(FocusState.Programmatic);
+            if (!isFocused)
+            {
+                controlsSearchBox.UpdateLayout();
+                controlsSearchBox.Focus(FocusState.Programmatic);
+            }
+            searchButton.Visibility = Visibility.Collapsed;
+            commandBarBorder.Visibility = Visibility.Collapsed;
+        }
+
+        private void controlsSearchBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Window.Current.Bounds.Width <= 640)
+            {
+                controlsSearchBox.Visibility = Visibility.Collapsed;
+                commandBarBorder.Visibility = Visibility.Visible;
+                searchButton.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void headerControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            if (NavigationRootPage.Current.DeviceFamily == DeviceType.Desktop)
+            {
+                MainTitleBar.Visibility = Visibility.Visible;
+            }
+            coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
+            this.Padding = NavigationRootPage.Current.DeviceFamily == DeviceType.Xbox ? new Thickness(24, 28, 48, 0) : NavigationRootPage.Current.DeviceFamily == DeviceType.Desktop ? new Thickness(24, 0, 12, 0) : new Thickness(14, 0, 14, 0);
+        }
+
+        private void CoreTitleBar_IsVisibleChanged(CoreApplicationViewTitleBar sender, object args)
+        {
+            MainTitleBar.Visibility = Visibility.Visible;
+
+            this.Padding = NavigationRootPage.Current.DeviceFamily == DeviceType.Xbox ? new Thickness(24, 28, 48, 0) : NavigationRootPage.Current.DeviceFamily == DeviceType.Desktop ? new Thickness(24, 0, 12, 0) : new Thickness(14, 0, 14, 0);
+        }
+
+        private void ThemeButton_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Right)
+            {
+                var nextElement = FocusManager.FindNextElement(FocusNavigationDirection.Right);
+                if (nextElement == null)
+                {
+                    controlsSearchBox.Focus(FocusState.Programmatic);
+                }
+            }
         }
     }
 }

@@ -9,129 +9,166 @@
 //
 //*********************************************************
 -->
-<Page
-    x:Name="pageRoot"
-    x:Class="AppUIBasics.ItemPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:AppUIBasics"
-    xmlns:data="using:AppUIBasics.Data"
-    xmlns:common="using:AppUIBasics.Common"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-
+<Page x:Name="pageRoot" x:Class="AppUIBasics.ItemPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
+        xmlns:data="using:AppUIBasics.Data" xmlns:common="using:AppUIBasics.Common"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+    <Page.Resources>
+        <Storyboard x:Name="PopOutStoryboard">
+            <PopOutThemeAnimation TargetName="samplesTextBox" SpeedRatio="2"/>
+            <!--<PopOutThemeAnimation TargetName="contentFrame" SpeedRatio="2"/>-->
+            <PopOutThemeAnimation TargetName="seeAlsoPanel" SpeedRatio="2"/>
+            <PopOutThemeAnimation TargetName="docItemsControl" SpeedRatio="2"/>
+            <PopOutThemeAnimation TargetName="relatedItemsControl" SpeedRatio="2"/>
+        </Storyboard>
+        <Storyboard x:Name="PopInStoryboard">
+            <PopInThemeAnimation TargetName="samplesTextBox" SpeedRatio=".35" FromVerticalOffset="50"/>
+            <PopInThemeAnimation TargetName="seeAlsoPanel" SpeedRatio=".3" FromVerticalOffset="150"/>
+            <PopInThemeAnimation TargetName="docItemsControl" SpeedRatio=".27" FromVerticalOffset="100"/>
+            <PopInThemeAnimation TargetName="relatedItemsControl" SpeedRatio=".27" FromVerticalOffset="100"/>
+        </Storyboard>
+    </Page.Resources>
     <!--
         This grid acts as a root panel for the page that defines two rows:
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Background="{ThemeResource ControlPageBackgroundBrush}"
-        d:DataContext="{Binding Groups[0].Items[0], Source={d:DesignData Source=/DataModel/ControlinfoData.json, Type=data:ControlInfoDataSource}}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="rootPanel"
+            d:DataContext="{Binding Groups[0].Items[0], Source={d:DesignData Source=/DataModel/ControlinfoData.json, Type=data:ControlInfoDataSource}}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
-                <EntranceThemeTransition/>
+                <EntranceThemeTransition />
             </TransitionCollection>
         </Grid.ChildrenTransitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <!-- Back button and page title -->
-        <local:PageHeader x:Name="header" Title="{x:Bind Item.Title}" />
-
         <!-- Content Region -->
-        <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid x:Name="contentRoot" Margin="24,24,24,0">
+        <ScrollViewer x:Name="svPanel" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="1" GotFocus="svPanel_GotFocus"
+                IsTabStop="True" UseSystemFocusVisuals="False" Loaded="svPanel_Loaded" KeyDown="svPanel_KeyDown">
+            <Grid Grid.Row="1" x:Name="contentRoot" Padding="24,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" x:Name="rightMargin" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock Text="{x:Bind Item.Description}" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,0,20,20"/>
+                <Grid x:Name="contentGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="subTitleText" Text="{x:Bind Item.Subtitle}" Margin="0,8,0,0"
+                            Style="{ThemeResource BodyTextBlockStyle}" />
+                    <TextBlock x:Name="samplesTextBox" Text="Samples" Margin="0,20,0,18" Grid.Row="1"
+                            Style="{StaticResource TitleTextBlockStyle}" FontWeight="Normal"/>
+                    <Frame x:Name="contentFrame"  Grid.Row="2"/>
 
-                <StackPanel x:Name="seeAlsoPanel" Grid.Row="1">
-                    <TextBlock x:Uid="DocHeader" />
-                    <ItemsControl ItemsSource="{x:Bind Item.Docs}" IsTabStop="False">
+                </Grid>
+                <StackPanel x:Name="seeAlsoPanel" Grid.Column="2" Width="350" Margin="0,60,24,0">
+                    <TextBlock x:Uid="DocHeader" x:Name="docMainHeader" Style="{StaticResource TitleTextBlockStyle}" FontWeight="Normal" />
+                    <ItemsControl x:Name="docItemsControl" ItemsSource="{x:Bind Item.Docs}" IsTabStop="False" Margin="0,12,0,40">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <local:WrapPanel Orientation="Horizontal" />
+                                <StackPanel Orientation="Vertical" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="data:ControlInfoDocLink">
-                                <HyperlinkButton Content="{x:Bind Title}" NavigateUri="{Binding Uri}" Margin="0,0,12,0" />
+                                <HyperlinkButton NavigateUri="{Binding Uri}">
+                                    <TextBlock Text="{x:Bind Title}" />
+                                </HyperlinkButton>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    <TextBlock x:Uid="RelatedControlsHeader" />
-                    <ItemsControl ItemsSource="{x:Bind Item.RelatedControls}" IsTabStop="False">
+                    <TextBlock x:Uid="RelatedControlsHeader" Style="{StaticResource TitleTextBlockStyle}"
+                            FontWeight="Normal" />
+                    <ItemsControl x:Name="relatedItemsControl" ItemsSource="{x:Bind Item.RelatedControls}" IsTabStop="False" Margin="0,12,0,0">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <local:WrapPanel Orientation="Horizontal" />
+                                <StackPanel Orientation="Vertical" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="x:String">
-                                <HyperlinkButton Content="{x:Bind}" Click="RelatedControl_Click" Margin="0,0,12,0" />
+                                <HyperlinkButton Click="RelatedControl_Click">
+                                    <RelativePanel>
+                                        <Image x:Name="iconImage" common:ImageLoader.Source="{Binding}" Width="25" Margin="0,0,15,0" />
+                                        <TextBlock Text="{x:Bind}" TextWrapping="Wrap" RelativePanel.RightOf="iconImage"/>
+                                    </RelativePanel>
+                                </HyperlinkButton>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
-
-                <Frame x:Name="contentFrame" Background="{ThemeResource ControlPageBackgroundBrush}"  Grid.Row="2" Margin="0,0,0,12"/>
+                <Grid x:Name="seeAlsoPanelBottom" Padding="0,0,0,24" Grid.Row="2" Grid.ColumnSpan="3"
+                        Visibility="Collapsed">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock x:Uid="DocHeader" Style="{StaticResource TitleTextBlockStyle}" FontWeight="Normal"
+                                x:Name="docHeader" />
+                        <ListView x:Name="DocsList" ItemsSource="{x:Bind Item.Docs}" IsTabStop="False" Margin="0,12,0,40" Loaded="List_Loaded" SelectionMode="None" IsItemClickEnabled="True" ItemClick="DocsList_ItemClick">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="data:ControlInfoDocLink">
+                                    <TextBlock Text="{x:Bind Title}" TextWrapping="Wrap"
+                                            Foreground="{ThemeResource HyperlinkButtonForeground}" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock x:Uid="RelatedControlsHeader" Style="{StaticResource TitleTextBlockStyle}"
+                                FontWeight="Normal" x:Name="relatedControlsHeader" />
+                        <ListView ItemsSource="{x:Bind Item.RelatedControls}" IsTabStop="False" Margin="0,12,0,40" ItemClick="ListView_ItemClick" IsItemClickEnabled="True" Loaded="List_Loaded" SelectionMode="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="x:String">
+                                        <RelativePanel>
+                                            <Image x:Name="iconImage" common:ImageLoader.Source="{Binding}" Width="25" Margin="0,0,15,0" />
+                                        <TextBlock Text="{x:Bind}" TextWrapping="Wrap" RelativePanel.RightOf="iconImage"
+                                                Foreground="{ThemeResource HyperlinkButtonForeground}" />
+                                        </RelativePanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </Grid>
             </Grid>
         </ScrollViewer>
-
-        <CommandBar x:Name="bottomCommandBar" x:FieldModifier="Protected" Grid.Row="2" IsOpen="False" ClosedDisplayMode="Compact" IsSticky="False">
-            <AppBarButton x:Name="searchButton" Label="Search" Icon="Find" Click="SearchButton_Click" Visibility="Collapsed" GotFocus="AppBarButton_GotFocus"/>
-            <AppBarToggleButton Label="Theme" Checked="ThemeToggleButton_Checked" Unchecked="ThemeToggleButton_Unchecked" GotFocus="AppBarButton_GotFocus">
-                <AppBarToggleButton.Icon>
-                    <FontIcon Glyph="&#xE771;" />
-                </AppBarToggleButton.Icon>
-            </AppBarToggleButton>
-            <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Help" Icon="Help" Click="HelpButton_Click"/>
-            </CommandBar.SecondaryCommands>
-        </CommandBar>
-
-        <Popup x:Name="helpPopup" IsOpen="False" IsLightDismissEnabled="True">
-            <Popup.ChildTransitions>
-                <TransitionCollection>
-                    <PaneThemeTransition Edge="Right" />
-                </TransitionCollection>
-            </Popup.ChildTransitions>
-            <Border BorderBrush="{StaticResource SystemControlForegroundAccentBrush}" BorderThickness="1" Background="{StaticResource SystemControlBackgroundChromeMediumLowBrush}" x:Name="rootPopupBorder">
-                <Grid Margin="12">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{x:Bind Item.Title}" />
-                    <WebView x:Name="contentWebView" Grid.Row="1" Margin="0,10,0,0"/>
-                </Grid>
-            </Border>
-        </Popup>
-
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
+                <VisualState x:Name="LargeLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1372" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters></VisualState.Setters>
+                </VisualState>
                 <VisualState x:Name="WideLayout">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="600" />
+                        <AdaptiveTrigger MinWindowWidth="640" />
                     </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="seeAlsoPanelBottom.Visibility" Value="Visible" />
+                        <Setter Target="seeAlsoPanel.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
                 </VisualState>
-
                 <VisualState x:Name="NarrowLayout">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="contentRoot.Margin" Value="12,12,12,0" />
-                        <Setter Target="pageTitle.Margin" Value="12,0,0,0" />
-                        <Setter Target="controlsSearchBox.Visibility" Value="Collapsed" />
-                        <Setter Target="searchButton.Visibility" Value="Visible" />
+                        <Setter Target="seeAlsoPanelBottom.Visibility" Value="Visible" />
+                        <Setter Target="seeAlsoPanel.Visibility" Value="Collapsed" />
+                        <Setter Target="rightMargin.Width" Value="0" />
+                        <Setter Target="contentRoot.Padding" Value="14,0" />
+                        <Setter Target="docHeader.Style" Value="{StaticResource SubtitleTextBlockStyle}" />
+                        <Setter Target="relatedControlsHeader.Style" Value="{StaticResource SubtitleTextBlockStyle}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

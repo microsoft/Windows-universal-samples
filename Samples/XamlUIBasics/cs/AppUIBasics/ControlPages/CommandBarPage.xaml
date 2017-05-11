@@ -18,29 +18,36 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <RelativePanel>
+    <StackPanel>
+        <CommandBar x:Name="PrimaryCommandBar" Margin="0,0,0,24">
+            <AppBarButton Icon="Accept" Label="Accept"/>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Edit" Label="Edit"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+
         <local:ControlExample x:Name="Example1" HeaderText="Show or hide the command bar programatically.">
             <local:ControlExample.Example>
-                <StackPanel Orientation="Horizontal">
-                    <Button Content="Show command bar" Click="OpenButton_Click"/>
-                    <Button Content="Hide command bar" Click="CloseButton_Click" Margin="12,0,0,0"/>
+                <StackPanel Orientation="Horizontal" x:Name="hidePanel">
+                    <Button Content="Open command bar" Click="OpenButton_Click" Margin="0,0,12,12" />
+                    <Button Content="Close command bar" Click="CloseButton_Click" VerticalAlignment="Top"/>
                 </StackPanel>
             </local:ControlExample.Example>
         </local:ControlExample>
-        
-        <local:ControlExample x:Name="Example2" HeaderText="Add and remove commands programatically." RelativePanel.Below="Example1">
+
+        <local:ControlExample x:Name="Example2" HeaderText="Add and remove commands programatically." >
             <local:ControlExample.Example>
-                <StackPanel Orientation="Horizontal">
-                    <Button Content="Add secondary commands" Click="AddSecondaryCommands_Click"/>
-                    <Button Content="Remove secondary commands" Click="RemoveSecondaryCommands_Click" Margin="12,0,0,0"/>
+                <StackPanel Orientation="Horizontal" x:Name="showPanel">
+                    <Button Content="Add secondary commands" Click="AddSecondaryCommands_Click" Margin="0,0,12,12"/>
+                    <Button Content="Remove secondary commands" Click="RemoveSecondaryCommands_Click" VerticalAlignment="Top" />
                     <TextBlock x:Name="Control2Output" Style="{StaticResource OutputTextBlockStyle}"/>
                 </StackPanel>
             </local:ControlExample.Example>
         </local:ControlExample>
-        
-        <local:ControlExample x:Name="Example3" HeaderText="A command bar free floating in a page." RelativePanel.Below="Example2">
+
+        <local:ControlExample x:Name="Example3" HeaderText="A command bar with labels on the side free floating in a page." >
             <local:ControlExample.Example>
-                <CommandBar Background="Transparent" IsOpen="False">
+                <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
                     <AppBarButton Icon="Add" Label="Add"/>
                     <AppBarButton Icon="ReShare" Label="Share"/>
                     <AppBarButton Icon="Edit" Label="Edit"/>
@@ -51,7 +58,7 @@
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
                 <RichTextBlock>
-                    <Paragraph>&lt;CommandBar Background="Transparent" IsOpen="False"&gt;</Paragraph>
+                    <Paragraph>&lt;CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right"&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;AppBarButton Icon="Add" Label="Add"/&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;AppBarButton Icon="ReShare" Label="Share"/&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;AppBarButton Icon="Edit" Label="Edit"/&gt;</Paragraph>
@@ -63,5 +70,24 @@
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
-    </RelativePanel>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="IntermediateLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="500" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters></VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="hidePanel.Orientation" Value="Vertical" />
+                        <Setter Target="showPanel.Orientation" Value="Vertical" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </StackPanel>
 </Page>

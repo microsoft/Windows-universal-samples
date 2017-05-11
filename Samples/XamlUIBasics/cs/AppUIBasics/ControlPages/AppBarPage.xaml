@@ -18,7 +18,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" NavigationCacheMode="Disabled">
 
-    <Page.TopAppBar>
+
+    <RelativePanel>
         <AppBar x:Name="topAppBar" Opened="topAppBar_Opened"
                 Background="Gray" Height="130" IsSticky="True" >
             <ScrollViewer VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto"
@@ -47,14 +48,12 @@
                 </StackPanel>
             </ScrollViewer>
         </AppBar>
-    </Page.TopAppBar>
 
-    <RelativePanel>
-        <local:ControlExample x:Name="Example1" HeaderText="Show or hide the top app bar programatically.">
+        <local:ControlExample x:Name="Example1" HeaderText="Show or hide the top app bar programatically." RelativePanel.Below="topAppBar">
             <local:ControlExample.Example>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Show app bar" Click="OpenButton_Click"/>
-                    <Button Content="Hide app bar" Click="CloseButton_Click" Margin="12,0,0,0"/>
+                    <Button Content="Open app bar" Click="OpenButton_Click"/>
+                    <Button Content="Close app bar" Click="CloseButton_Click" Margin="12,0,0,0"/>
                 </StackPanel>
             </local:ControlExample.Example>
         </local:ControlExample>

@@ -10,8 +10,9 @@
 using AppUIBasics.Common;
 using AppUIBasics.Data;
 using System.Collections.Generic;
-using Windows.UI.Xaml.Navigation;
+using System.Linq;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,22 +23,30 @@ namespace AppUIBasics.ControlPages
     /// </summary>
     public sealed partial class FlipViewPage : Page
     {
-        private IEnumerable<ControlInfoDataGroup> _groups;
+        private List<ControlInfoDataItem> _items;
 
         public FlipViewPage()
         {
             this.InitializeComponent();
         }
-        public IEnumerable<ControlInfoDataGroup> Groups
+        public List<ControlInfoDataItem> Items
         {
-            get { return this._groups; }
+            get { return this._items; }
         }
-       
+
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            _groups = await ControlInfoDataSource.GetGroupsAsync();
+            var groups = NavigationRootPage.Current.Groups.Any() ? NavigationRootPage.Current.Groups : await ControlInfoDataSource.GetGroupsAsync();
+            _items = new List<ControlInfoDataItem>();
+            foreach (var group in groups.Take(3))
+            {
+                foreach (var item in group.Items)
+                {
+                    _items.Add(item);
+                }
+            }
         }
     }
 }

@@ -30,6 +30,7 @@ This sample demonstrates the following:
 -   Using a deferral object to include asynchronous code in your background task.
 -   Handling the cancellation of a background task, and ensuring the task is cancelled when required conditions are no longer met.
 -   Initializing background task progress and completion handlers when the app is launched.
+-   Registering a background task in a Background Task Registration Group.
 
 This sample uses the Single Process Model method for background activity. Applications can also use the Multiple Process Model method for running Background Tasks in a separate process from the foreground application.
 

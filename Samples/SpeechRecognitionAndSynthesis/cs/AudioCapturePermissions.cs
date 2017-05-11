@@ -13,7 +13,7 @@ using System;
 using System.Threading.Tasks;
 using Windows.Media.Capture;
 
-namespace SpeechAndTTS
+namespace SDKTemplate
 {
     public class AudioCapturePermissions
     {
