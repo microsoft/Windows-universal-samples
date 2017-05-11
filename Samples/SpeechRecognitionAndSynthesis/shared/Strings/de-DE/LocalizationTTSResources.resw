@@ -123,18 +123,21 @@
                              xsi:schemaLocation='http://www.w3.org/2001/10/synthesis  http://www.w3.org/TR/speech-synthesis/synthesis.xsd' 
                              xml:lang='de-DE'&gt;
 
-Dies ist ein Beispiel für eine phonetische Aussprache:
+&lt;mark name='phonetic'/&gt;Dies ist ein Beispiel für eine phonetische Aussprache:
 &lt;phoneme alphabet='x-microsoft-ups' ph='S1 W AA T . CH AX . M AX . S2 K AA L . IH T'&gt; whatchamacallit &lt;/phoneme&gt;.
 
-Dies ist ein Beispiel eines Datums:
+&lt;mark name='date'/&gt;Dies ist ein Beispiel eines Datums:
 &lt;say-as interpret-as='date' format='mdy'&gt; 04/30/2013 &lt;/say-as&gt;.
 
-Dies ist ein Beispiel für eine Zahl zu sagen:
+&lt;mark name='number'/&gt;Dies ist ein Beispiel für eine Zahl zu sagen:
 &lt;say-as interpret-as='ordinal'&gt; 4 &lt;/say-as&gt;.
-
+&lt;mark name='end'/&gt;
 &lt;/speak&gt;</value>
   </data>
   <data name="SynthesizeTextDefaultText" xml:space="preserve">
-    <value>Der schnelle rot-Fuchs sprang über den faulen Hund der braun</value>
+    <value>Der schnelle rote Fuchs sprang über den faulen braunen Hund.</value>
+  </data>
+  <data name="SynthesizeTextBoundariesDefaultText" xml:space="preserve">
+    <value>Sie haben die Möglichkeit, allein per Spracheingabe Programme zu starten, Menüs zu öffnen, auf Schaltflächen oder andere Bildschirmobjekte zu klicken, Text in Dokumente zu diktieren sowie E-Mails zu schreiben und zu versenden. Nahezu alle Aktionen, die mittels Tastatur und Maus ausgeführt werden, lassen sich auch per Spracheingabe ausführen.</value>
   </data>
 </root>

@@ -445,11 +445,11 @@ Windows::UI::Color Scenario_SRGSConstraint::getColor(Platform::String^ colorStri
 void Scenario_SRGSConstraint::PopulateLanguageDropdown()
 {
     // disable callback temporarily.
-    cbLanguageSelection->SelectionChanged -= cbLanguageSelectionSelectionChangedToken;
+    isPopulatingLanguages = true;
 
     Windows::Globalization::Language^ defaultLanguage = SpeechRecognizer::SystemSpeechLanguage;
     auto supportedLanguages = SpeechRecognizer::SupportedGrammarLanguages;
-    std::for_each(begin(supportedLanguages), end(supportedLanguages), [&](Windows::Globalization::Language^ lang)
+    for (Windows::Globalization::Language^ lang : supportedLanguages)
     {
         ComboBoxItem^ item = ref new ComboBoxItem();
         item->Tag = lang;
@@ -461,9 +461,9 @@ void Scenario_SRGSConstraint::PopulateLanguageDropdown()
             item->IsSelected = true;
             cbLanguageSelection->SelectedItem = item;
         }
-    });
-    cbLanguageSelectionSelectionChangedToken = cbLanguageSelection->SelectionChanged +=
-        ref new SelectionChangedEventHandler(this, &Scenario_SRGSConstraint::cbLanguageSelection_SelectionChanged);
+    }
+
+    isPopulatingLanguages = false;
 }
 
 
@@ -472,6 +472,11 @@ void Scenario_SRGSConstraint::PopulateLanguageDropdown()
 /// </summary>
 void Scenario_SRGSConstraint::cbLanguageSelection_SelectionChanged(Object^ sender, SelectionChangedEventArgs^ e)
 {
+    if (isPopulatingLanguages)
+    {
+        return;
+    }
+
     ComboBoxItem^ item = (ComboBoxItem^)(cbLanguageSelection->SelectedItem);
     Windows::Globalization::Language^ newLanguage = (Windows::Globalization::Language^)item->Tag;
 

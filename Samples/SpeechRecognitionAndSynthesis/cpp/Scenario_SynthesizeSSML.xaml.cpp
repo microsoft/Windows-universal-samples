@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario_SynthesizeSSML.xaml.h"
+#include <pplawait.h>
 
 using namespace SDKTemplate;
 using namespace Concurrency;
@@ -20,6 +21,8 @@ using namespace Windows::ApplicationModel::Resources::Core;
 using namespace Windows::Data::Xml::Dom;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
+using namespace Windows::Media::Core;
+using namespace Windows::Media::Playback;
 using namespace Windows::Media::SpeechSynthesis;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
@@ -42,6 +45,12 @@ Scenario_SynthesizeSSML::Scenario_SynthesizeSSML() : rootPage(MainPage::Current)
 
     InitializeListboxVoiceChooser();
     UpdateSSMLText();
+
+    MediaPlayer^ player = ref new MediaPlayer();
+    player->AutoPlay = false;
+    player->MediaEnded += ref new  TypedEventHandler<MediaPlayer^, Object^>(this, &Scenario_SynthesizeSSML::media_MediaEnded);
+
+    media->SetMediaPlayer(player);
 }
 
 /// <summary>
@@ -52,9 +61,9 @@ Scenario_SynthesizeSSML::Scenario_SynthesizeSSML() : rootPage(MainPage::Current)
 void Scenario_SynthesizeSSML::Speak_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     // If the media is playing, the user has pressed the button to stop the playback.
-    if (media->CurrentState == MediaElementState::Playing)
+    if (media->MediaPlayer->PlaybackSession->PlaybackState == MediaPlaybackState::Playing)
     {
-        media->Stop();
+        media->MediaPlayer->Pause();
         btnSpeak->Content = "Speak";
     }
     else
@@ -66,37 +75,83 @@ void Scenario_SynthesizeSSML::Speak_Click(Platform::Object^ sender, Windows::UI:
             btnSpeak->Content = "Stop";
 
             // Create a stream from the text. This will be played using a media element.
-            create_task(synthesizer->SynthesizeSsmlToStreamAsync(text), task_continuation_context::use_current())
-                .then([this](task<SpeechSynthesisStream^> synthesisStreamTask)
-            {
-                try
-                {
-                    SpeechSynthesisStream^ synthesisStream = synthesisStreamTask.get();
-                    // Set the source and start playing the synthesized audio stream.
-                    media->AutoPlay = true;
-                    media->SetSource(synthesisStream, synthesisStream->ContentType);
-                    media->Play();
-                }
-                catch (Exception^ ex)
-                {
-					if (ex->HResult == HRESULT_FROM_WIN32(ERROR_MOD_NOT_FOUND))
-					{
-						btnSpeak->Content = L"Speak";
-						btnSpeak->IsEnabled = false;
-						listboxVoiceChooser->IsEnabled = false;
-						Windows::UI::Popups::MessageDialog^ dialog = ref new Windows::UI::Popups::MessageDialog(ex->Message, "Media playback components unavailable.");
-						create_task(dialog->ShowAsync());
-					}
-					else
-					{
-						// Typically occurs if the XML provided isn't valid.
-						btnSpeak->Content = "Speak";
-						Windows::UI::Popups::MessageDialog^ dialog = ref new Windows::UI::Popups::MessageDialog(ex->Message, "Unable to synthesize text (check for invalid xml)");
-						create_task(dialog->ShowAsync());
-					}
-                }
-            });
+            SynthesizeSSMLStream();
         }
+    }
+}
+
+task<void> Scenario_SynthesizeSSML::SynthesizeSSMLStream()
+{
+    String^ text = textToSynthesize->Text;
+
+    return create_task(synthesizer->SynthesizeSsmlToStreamAsync(text))
+        .then([this](task<SpeechSynthesisStream^> previousTask)
+    {
+        try
+        {
+            synthesisStream = previousTask.get();
+
+            // Create a media source from the stream: 
+            MediaSource^ mediaSource = MediaSource::CreateFromStream(synthesisStream, synthesisStream->ContentType);
+
+            //Create a Media Playback Item   
+            MediaPlaybackItem^ mediaPlaybackItem = ref new MediaPlaybackItem(mediaSource);
+
+            // Ensure that the app is notified for cues.  
+            RegisterForMarkEvents(mediaPlaybackItem);
+
+            // Set the source of the MediaElement or MediaPlayerElement to the MediaPlaybackItem 
+            // and start playing the synthesized audio stream.
+            media->Source = mediaPlaybackItem;
+            media->MediaPlayer->Play();
+        }
+        catch (Exception^ ex)
+        {
+            if (ex->HResult == HRESULT_FROM_WIN32(ERROR_MOD_NOT_FOUND))
+            {
+                btnSpeak->Content = L"Speak";
+                btnSpeak->IsEnabled = false;
+                listboxVoiceChooser->IsEnabled = false;
+                Windows::UI::Popups::MessageDialog^ dialog = ref new Windows::UI::Popups::MessageDialog(ex->Message, "Media playback components unavailable.");
+                create_task(dialog->ShowAsync());
+            }
+            else
+            {
+                // If the text is not able to be synthesized, throw an error message to the user.
+                btnSpeak->Content = L"Speak";
+                Windows::UI::Popups::MessageDialog^ dialog = ref new Windows::UI::Popups::MessageDialog(ex->Message, "Unable to synthesize text");
+                create_task(dialog->ShowAsync());
+            }
+        }
+    });
+}
+
+/// <summary>
+/// Register for all mark events
+/// </summary>
+/// <param name="mediaPlaybackItem">The Media PLayback Item add handlers to.</param>
+void Scenario_SynthesizeSSML::RegisterForMarkEvents(Windows::Media::Playback::MediaPlaybackItem^ mediaPlaybackItem)
+{
+    // If tracks were available at source resolution time, itterate through and register: 
+    for (unsigned int index = 0; index < mediaPlaybackItem->TimedMetadataTracks->Size; index++)
+    {
+        RegisterMetadataHandlerForMarks(mediaPlaybackItem, index);
+    }
+}
+
+/// <summary>
+/// Register for just word bookmark events.
+/// </summary>
+/// <param name="mediaPlaybackItem">The Media Playback Item to register handlers for.</param>
+/// <param name="index">Index of the timedMetadataTrack within the mediaPlaybackItem.</param>
+void Scenario_SynthesizeSSML::RegisterMetadataHandlerForMarks(Windows::Media::Playback::MediaPlaybackItem^ mediaPlaybackItem, int index)
+{
+    auto timedTrack = mediaPlaybackItem->TimedMetadataTracks->GetAt(index);
+    //register for only mark cues
+    if (timedTrack->Id == "SpeechBookmark" )
+    {
+        timedTrack->CueEntered += ref new  TypedEventHandler<TimedMetadataTrack^, MediaCueEventArgs^>(this, &Scenario_SynthesizeSSML::metadata_MarkCueEntered);
+        mediaPlaybackItem->TimedMetadataTracks->SetPresentationMode(index, TimedMetadataTrackPresentationMode::ApplicationPresented);
     }
 }
 
@@ -130,9 +185,50 @@ void Scenario_SynthesizeSSML::ListboxVoiceChooser_SelectionChanged(Platform::Obj
 /// </remarks>
 /// <param name="sender">unused object parameter</param>
 /// <param name="e">unused event parameter</param>
-void Scenario_SynthesizeSSML::media_MediaEnded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario_SynthesizeSSML::media_MediaEnded(Windows::Media::Playback::MediaPlayer^ timedMetadataTrack, Platform::Object^ e)
 {
-    btnSpeak->Content = "Speak";
+    // Because this call is not awaited, execution of the current method continues before the call is completed
+    Windows::ApplicationModel::Core::CoreApplication::MainView->CoreWindow->Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal,
+        ref new Windows::UI::Core::DispatchedHandler([this]()
+    {
+        btnSpeak->Content = "Speak";
+    }));
+}
+
+/// <summary>
+/// This function executes when a SpeechCue is hit and calls the functions to update the UI
+/// </summary>
+/// <param name="timedMetadataTrack">The timedMetadataTrack associated with the event.</param>
+/// <param name="args">the arguments associated with the event.</param>
+void Scenario_SynthesizeSSML::metadata_MarkCueEntered(Windows::Media::Core::TimedMetadataTrack^ timedMetadataTrack, Windows::Media::Core::MediaCueEventArgs^ args)
+{
+    // Check in case there are different tracks and the handler was used for more tracks 
+    if (timedMetadataTrack->TimedMetadataKind == TimedMetadataKind::Speech)
+    {
+        auto cue = (SpeechCue^)args->Cue;
+        if (cue != nullptr)
+        {
+            wprintf(L"Cue text:[%s]\r\n", cue->Text->Data());
+
+            // Do something with the cue 
+            // Because this call is not awaited, execution of the current method continues before the call is completed
+            Windows::ApplicationModel::Core::CoreApplication::MainView->CoreWindow->Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal,
+                ref new Windows::UI::Core::DispatchedHandler([this, cue, timedMetadataTrack]()
+            {
+                // Your UI update code goes here!
+                FillTextBox(cue);
+            }));
+        }
+    }
+}
+
+/// <summary>
+/// Update the UI with text from the mark
+/// </summary>
+/// <param name="cue">The cue containing the text</param>
+void Scenario_SynthesizeSSML::FillTextBox(SpeechCue^ cue)
+{
+    textBoxLastMarkTriggered->Text = cue->Text;
 }
 
 /// <summary>

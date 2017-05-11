@@ -123,18 +123,21 @@
                              xsi:schemaLocation='http://www.w3.org/2001/10/synthesis  http://www.w3.org/TR/speech-synthesis/synthesis.xsd' 
                              xml:lang='it-IT'&gt;
 
-Questo è un esempio di una pronuncia fonetica:
+&lt;mark name='phonetic'/&gt;Questo è un esempio di una pronuncia fonetica:
 &lt;phoneme alphabet='x-microsoft-ups' ph='S1 W AA T . CH AX . M AX . S2 K AA L . IH T'&gt; whatchamacallit &lt;/phoneme&gt;.
 
-Questo è un esempio di una data:
+&lt;mark name='date'/&gt;Questo è un esempio di una data:
 &lt;say-as interpret-as='date' format='mdy'&gt; 04/30/2013 &lt;/say-as&gt;.
 
-Questo è un esempio di dire un numero:
+&lt;mark name='number'/&gt;Questo è un esempio di dire un numero:
 &lt;say-as interpret-as='ordinal'&gt; 4 &lt;/say-as&gt;.
-
+&lt;mark name='end'/&gt;
 &lt;/speak&gt;</value>
   </data>
   <data name="SynthesizeTextDefaultText" xml:space="preserve">
     <value>Volpe veloce saltato sopra il cane pigro marrone</value>
+  </data>
+  <data name="SynthesizeTextBoundariesDefaultText" xml:space="preserve">
+    <value>Usando solo la voce puoi avviare programmi, aprire menu, fare clic su pulsanti e altri oggetti sullo schermo, dettare testo nei documenti e scrivere e inviare messaggi e-mail. Quasi tutte le operazioni svolte con la tastiera e il mouse possono essere eseguite con la voce.</value>
   </data>
 </root>

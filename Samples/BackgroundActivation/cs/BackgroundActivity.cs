@@ -11,6 +11,7 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
+using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
 using Windows.Foundation;
 using Windows.Storage;
@@ -97,6 +98,11 @@ namespace SDKTemplate
                 //
                 _deferral.Complete();
             }
+        }
+
+        public static void Start(BackgroundTaskRegistrationGroup sender, BackgroundActivatedEventArgs args)
+        {
+            Start(args.TaskInstance);
         }
 
         public static void Start(IBackgroundTaskInstance taskInstance)

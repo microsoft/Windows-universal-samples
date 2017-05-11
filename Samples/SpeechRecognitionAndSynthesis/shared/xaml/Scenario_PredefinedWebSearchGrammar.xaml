@@ -1,0 +1,63 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario_PredefinedWebSearchGrammar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    This sample showcases one-shot speech recognition using the predefined web search grammar.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Language: " Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cbLanguageSelection" SelectionChanged="cbLanguageSelection_SelectionChanged"  Margin="10" Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btnRecognizeWithUI" Click="RecognizeWithUIWebSearchGrammar_Click" IsEnabled="False" Margin="10,10,0,10">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Microphone"/>
+                                <TextBlock Text=" with UI"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="btnRecognizeWithoutUI" Click="RecognizeWithoutUIWebSearchGrammar_Click" IsEnabled="False" Margin="10,10,0,10">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Microphone"/>
+                                <TextBlock x:Name="listenWithoutUIButtonText" Text=" without UI" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <TextBlock Margin="0,14.5,0,0" Text="Tap the microphone and speak. This example uses a predefined web search grammar constraint, so you can speak web search keywords." TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"/>
+                    <TextBlock x:Name="heardYouSayTextBlock" Margin="0,14.5,0,0" Text="Heard you say" Visibility="Collapsed" TextWrapping="Wrap" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                    <TextBlock x:Name="resultTextBlock" Margin="0,14.5,0,0" Visibility="Collapsed" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"/>
+                    <TextBlock x:Name="hlOpenPrivacySettings" Visibility="Collapsed" TextWrapping="WrapWholeWords" Margin="0,10,0,0">The speech recognition privacy settings have not been accepted. <Hyperlink Click="openPrivacySettings_Click">Open Privacy Settings</Hyperlink> to review the privacy policy and enable personalization.</TextBlock>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,56 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario2_SynthesizeTextBoundaries.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This sample showcases basic speech synthesis using WinRT APIs to convert text to speech.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <button id="btnSpeak" class="win-button">Speak</button>
+            <select id="voicesSelect" class="win-dropdown">
+            </select>
+            <textarea id="textToSynthesize" style="width: 100%;height: 111px" name="textToSynthesize" class="win-textarea">
+                
+            </textarea>
+            <p id="errorTextArea"></p>
+        </div>
+        <div>
+            <input type="checkBox" id="checkBoxWordBoundaries" style="padding-right=20px" />Use Word Boundaries
+            <input type="checkBox" id="checkBoxSentenceBoundaries" />Use Sentence Boundaries
+            <br />
+            <br />
+            <p id="lastWordBoundaryLabel" style="font-size: large" >Last word boundary hit</p>
+            <textarea id="lastWordBoundaryText" style="width: 50%" name="lastWordBoundaryText" class="win-textarea">
+            </textarea>
+            <br />
+            <br />
+            <p id="lastSentenceBoundaryLabel" style="font-size: large">Last sentence boundary hit</p>
+            <textarea id="lastSentenceBoundaryText" style="width: 50%;" name="lastSentenceBoundaryText" class="win-textarea">
+            </textarea>
+        </div>
+    </div>
+</body>
+
+</html>

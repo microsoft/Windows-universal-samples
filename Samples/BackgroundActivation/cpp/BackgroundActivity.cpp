@@ -13,6 +13,7 @@
 #include "BackgroundActivity.h"
 
 using namespace SDKTemplate;
+using namespace Windows::ApplicationModel::Activation;
 using namespace Windows::ApplicationModel::Background;
 using namespace Windows::Foundation;
 using namespace Windows::Storage;
@@ -79,6 +80,11 @@ void BackgroundActivity::OnCanceled(IBackgroundTaskInstance^ taskInstance, Backg
     //
     CancelRequested = true;
     CancelReason = reason;
+}
+
+void BackgroundActivity::OnStart(BackgroundTaskRegistrationGroup^ sender, BackgroundActivatedEventArgs^ args)
+{
+    Start(args->TaskInstance);
 }
 
 void BackgroundActivity::Start(IBackgroundTaskInstance^ taskInstance)

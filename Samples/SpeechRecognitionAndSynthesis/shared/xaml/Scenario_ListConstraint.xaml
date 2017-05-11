@@ -1,0 +1,62 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario_ListConstraint"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    This sample showcases one-shot speech recognition using a custom list-based grammar.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Language: " Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cbLanguageSelection" SelectionChanged="cbLanguageSelection_SelectionChanged" Margin="10" Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" >
+                        <Button x:Name="btnRecognizeWithUI" Click="RecognizeWithUIListConstraint_Click" IsEnabled="False" Margin="10">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Microphone"/>
+                                <TextBlock Text=" with UI"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="btnRecognizeWithoutUI" Click="RecognizeWithoutUIListConstraint_Click" IsEnabled="False" Margin="10">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Microphone"/>
+                                <TextBlock x:Name="listenWithoutUIButtonText" Text=" without UI"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <TextBlock x:Name="helpTextBlock" Margin="0,14.5,0,0" Text="Tap the microphone, and speak. This scenario uses continuous recognition to provide a global-command type scenario. Try saying 'Go Home', 'Call Nita', 'Go to Contoso Studio', 'Send Email'." TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"/>
+                    <TextBlock x:Name="heardYouSayTextBlock" Margin="0,14.5,0,0" Text="Heard you say" Visibility="Collapsed" TextWrapping="Wrap" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                    <TextBlock x:Name="resultTextBlock" Margin="0,14.5,0,0" Visibility="Collapsed" TextWrapping="Wrap" Style="{StaticResource BodyTextBlockStyle}"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>
