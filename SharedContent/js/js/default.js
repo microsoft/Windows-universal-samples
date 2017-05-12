@@ -8,6 +8,9 @@
     var activationKinds = Windows.ApplicationModel.Activation.ActivationKind;
     var splitView;
 
+    var ViewManagement = Windows.UI.ViewManagement;
+    var ApplicationView = ViewManagement.ApplicationView;
+
     WinJS.Namespace.define("SdkSample", {
         paneOpenInitially: false
     });
@@ -102,8 +105,22 @@
         }
     }
 
+    function onToggleFullScreenMode() {
+        var view = ApplicationView.getForCurrentView();
+        if (view.isFullScreenMode) {
+            view.exitFullScreenMode();
+            // The resize event will be raised when the exit from full screen mode is complete.
+        } else {
+            if (view.tryEnterFullScreenMode()) {
+                // The resize event will be raised when the entry to full screen mode is complete.
+            } else {
+            }
+        }
+    }
+
     nav.addEventListener("navigating", navigating);
     app.addEventListener("activated", activated, false);
+    document.addEventListener("webkitfullscreenchange", onToggleFullScreenMode, false);
     app.start();
 })();
 
