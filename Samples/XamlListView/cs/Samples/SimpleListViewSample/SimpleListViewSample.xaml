@@ -24,14 +24,15 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Ellipse x:Name="Ellipse"
-                         Grid.RowSpan="2"
-                         Width ="32"
-                         Height="32"
-                         Margin="6"
+                <Grid Width="32" Height="32" Grid.RowSpan="2" Margin="6"
                          VerticalAlignment="Center"
-                         HorizontalAlignment="Center"
-                         Fill="LightGray"/>
+                         HorizontalAlignment="Center">
+                    <Ellipse x:Name="Ellipse"
+                         Fill="Gainsboro"/>
+                    <TextBlock Text="{x:Bind Initials}"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"/>
+                </Grid>
                 <TextBlock Grid.Column="1"
                            Text="{x:Bind Name}" 
                            x:Phase="1"  
@@ -69,14 +70,17 @@
                   SelectionMode="Single"
                   ShowsScrollingPlaceholders="True"
                   Grid.Row="1"
+                  x:Name="groupView"
                   Grid.ColumnSpan="2">
 
             <ListView.GroupStyle>
                 <GroupStyle >
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate x:DataType="data:GroupInfoList">
-                            <TextBlock Text="{x:Bind Key}" 
+                            <Grid Tapped="Grid_Tapped">
+                                <TextBlock Text="{x:Bind Key}" 
                                        Style="{ThemeResource TitleTextBlockStyle}"/>
+                            </Grid>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
