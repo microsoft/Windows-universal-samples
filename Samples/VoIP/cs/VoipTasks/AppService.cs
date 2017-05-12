@@ -41,7 +41,7 @@ namespace VoipTasks
         {
             var deferral = args.GetDeferral();
             var response = new ValueSet();
-            bool stop = false;
+            var stop = false;
             try
             {
                 var request = args.Request;
@@ -96,10 +96,7 @@ namespace VoipTasks
 
         private void TaskInstance_Canceled(IBackgroundTaskInstance sender, BackgroundTaskCancellationReason reason)
         {
-            if (_deferral != null)
-            {
-                _deferral.Complete();
-            }
+            _deferral?.Complete();
         }
 
         private static void Call_ResumeRequested(VoipPhoneCall sender, CallStateChangeEventArgs args)
