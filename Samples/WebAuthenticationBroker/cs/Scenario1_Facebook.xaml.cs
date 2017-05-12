@@ -47,14 +47,14 @@ namespace WebAuthentication
 
             try
             {
-                String FacebookURL = "https://www.facebook.com/dialog/oauth?client_id=" + Uri.EscapeDataString(FacebookClientID.Text) + "&redirect_uri=" + Uri.EscapeDataString(FacebookCallbackUrl.Text) + "&scope=read_stream&display=popup&response_type=token";
+                var facebookURL = "https://www.facebook.com/dialog/oauth?client_id=" + Uri.EscapeDataString(FacebookClientID.Text) + "&redirect_uri=" + Uri.EscapeDataString(FacebookCallbackUrl.Text) + "&scope=read_stream&display=popup&response_type=token";
 
-                System.Uri StartUri = new Uri(FacebookURL);
-                System.Uri EndUri = new Uri(FacebookCallbackUrl.Text);
+                var startUri = new Uri(facebookURL);
+                var endUri = new Uri(FacebookCallbackUrl.Text);
 
-                rootPage.NotifyUser("Navigating to: " + FacebookURL, NotifyType.StatusMessage);
+                rootPage.NotifyUser($"Navigating to: {facebookURL}", NotifyType.StatusMessage);
 
-                WebAuthenticationResult WebAuthenticationResult = await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, StartUri, EndUri);
+                WebAuthenticationResult WebAuthenticationResult = await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, startUri, endUri);
                 if (WebAuthenticationResult.ResponseStatus == WebAuthenticationStatus.Success)
                 {
                     OutputToken(WebAuthenticationResult.ResponseData.ToString());
@@ -70,9 +70,9 @@ namespace WebAuthentication
                 }
 
             }
-            catch (Exception Error)
+            catch (Exception ex)
             {
-                rootPage.NotifyUser(Error.Message, NotifyType.ErrorMessage);
+                rootPage.NotifyUser(ex.Message, NotifyType.ErrorMessage);
             }
         }
 
@@ -84,32 +84,32 @@ namespace WebAuthentication
         private async Task GetFacebookUserNameAsync(string webAuthResultResponseData)
         {
             //Get Access Token first
-            string responseData = webAuthResultResponseData.Substring(webAuthResultResponseData.IndexOf("access_token"));
-            String[] keyValPairs = responseData.Split('&');
-            string access_token = null;
-            string expires_in = null;
-            for (int i = 0; i < keyValPairs.Length; i++)
+            var responseData = webAuthResultResponseData.Substring(webAuthResultResponseData.IndexOf("access_token"));
+            var keyValPairs = responseData.Split('&');
+            string accessToken = null;
+            string expiresIn = null;
+            foreach (var pair in keyValPairs)
             {
-                String[] splits = keyValPairs[i].Split('=');
+                var splits = pair.Split('=');
                 switch (splits[0])
                 {
                     case "access_token":
-                        access_token = splits[1]; //you may want to store access_token for further use. Look at Scenario 5 (Account Management).
+                        accessToken = splits[1]; //you may want to store access_token for further use. Look at Scenario 5 (Account Management).
                         break;
                     case "expires_in":
-                        expires_in = splits[1];
+                        expiresIn = splits[1];
                         break;
                 }
             }
 
-            rootPage.NotifyUser("access_token = " + access_token, NotifyType.StatusMessage);
+            rootPage.NotifyUser("access_token = " + accessToken, NotifyType.StatusMessage);
             //Request User info.
-            HttpClient httpClient = new HttpClient();
-            string response = await httpClient.GetStringAsync(new Uri("https://graph.facebook.com/me?access_token=" + access_token));
-            JsonObject value = JsonValue.Parse(response).GetObject();
-            string facebookUserName = value.GetNamedString("name");
+            var httpClient = new HttpClient();
+            var response = await httpClient.GetStringAsync(new Uri($"https://graph.facebook.com/me?access_token={accessToken}"));
+            var value = JsonValue.Parse(response).GetObject();
+            var facebookUserName = value.GetNamedString("name");
 
-            rootPage.NotifyUser(facebookUserName + " is connected!", NotifyType.StatusMessage);
+            rootPage.NotifyUser($"{facebookUserName} is connected!", NotifyType.StatusMessage);
         }
     }
 }
