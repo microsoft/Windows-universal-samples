@@ -160,11 +160,7 @@ namespace VoipTasks.Helpers
                 await request.SendResponseAsync(response);
             }
 
-            if (deferal != null)
-            {
-                deferal.Complete();
-            }
-
+            deferal?.Complete();
             return true;
         }
 
@@ -185,10 +181,7 @@ namespace VoipTasks.Helpers
                     await request.SendResponseAsync(response);
                 }
 
-                if (deferal != null)
-                {
-                    deferal.Complete();
-                }
+                deferal?.Complete();
             }
             finally
             {
@@ -206,11 +199,7 @@ namespace VoipTasks.Helpers
             try
             {
                 StopAudio();
-
-                if (call != null)
-                {
-                    call.NotifyCallEnded();
-                }
+                call?.NotifyCallEnded();
             }
             catch
             {
@@ -219,11 +208,7 @@ namespace VoipTasks.Helpers
 
             try
             {
-                if (deferral != null)
-                {
-                    deferral.Complete();
-                }
-
+                deferral?.Complete();
             }
             catch
             {
@@ -245,12 +230,8 @@ namespace VoipTasks.Helpers
             {
                 vccCallHelper = _vccCallHelper;
             }
-
-            if (vccCallHelper != null)
-            {
-                status = await vccCallHelper.RequestNewCallAsync( context, contactName, serviceName);
-            }
-
+            
+            status = await vccCallHelper?.RequestNewCallAsync( context, contactName, serviceName);
             return status;
         }
 
