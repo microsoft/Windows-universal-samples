@@ -147,7 +147,13 @@
             RefreshRequested="listView_RefreshRequested">
 
             <c:RefreshableListView.RefreshIndicatorContent>
-                <Grid Height="100" Background="Transparent">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0" Height="100" Background="Transparent">
                     <FontIcon
                         Margin="0,0,0,30"
                         HorizontalAlignment="Center"
@@ -160,6 +166,10 @@
                             <RotateTransform x:Name="SpinnerTransform" Angle="0" />
                         </FontIcon.RenderTransform>
                     </FontIcon>
+                 
+                </Grid>
+                    <TextBlock x:Name="Text260Result"  HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom" Grid.Row="1" Text="yenilemek için çekin"></TextBlock>
                 </Grid>
             </c:RefreshableListView.RefreshIndicatorContent>
 
