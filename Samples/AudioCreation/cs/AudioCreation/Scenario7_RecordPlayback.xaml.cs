@@ -77,16 +77,6 @@ namespace AudioCreation
         // 120 seconds of 48Khz stereo float audio samples (43.9MB byte array)
         byte[] byteBuffer = new byte[120 * 48000 * 2 * 4];
 
-        /// <summary>
-        /// Unmanaged import of memcpy for maximally fast data copying.
-        /// </summary>
-        /// <remarks>
-        /// http://code4k.blogspot.com/2010/10/high-performance-memcpy-gotchas-in-c.html is evidence that this is likely
-        /// to be a fast strategy (though the article is from 2010, we would expect native memcpy to still be hard to beat).
-        /// </remarks>
-        [DllImport("msvcrt.dll", EntryPoint = "memcpy", CallingConvention = CallingConvention.Cdecl, SetLastError = false)]
-        public static unsafe extern void* CopyMemory(void* dest, void* src, ulong count);
-
         DeviceInformationCollection inputDevices;
         DeviceInformationCollection outputDevices;
 
@@ -280,7 +270,14 @@ namespace AudioCreation
 
                 fixed (byte* bufferOfBytes = byteBuffer)
                 {
-                    CopyMemory(bufferOfBytes + maxIndexInBytes, dataInBytes, capacityInBytes);
+                    long* dest = ((long*)bufferOfBytes) + (maxIndexInBytes / sizeof(long));
+                    long* src = (long*)dataInBytes;
+                    long* srcEnd = src + (capacityInBytes / sizeof(long));
+
+                    while (src < srcEnd)
+                    {
+                        *dest++ = *src++;
+                    }
                 }
                 maxIndexInBytes += capacityInBytes;
             }
@@ -400,7 +397,16 @@ namespace AudioCreation
                     // Now copy bytesInThisIteration bytes into the output.
                     fixed (byte* bufOfBytes = byteBuffer)
                     {
-                        CopyMemory(dataInBytes + positionInBytes, bufOfBytes + currentIndexInBytes, bytesInThisIteration);
+                        // CopyMemory(dataInBytes + positionInBytes, bufOfBytes + currentIndexInBytes, bytesInThisIteration);
+
+                        long* dest = ((long*)dataInBytes) + (positionInBytes / sizeof(long));
+                        long* src = ((long*)bufOfBytes) + (currentIndexInBytes / sizeof(long));
+                        long* srcEnd = ((long*)src) + (bytesInThisIteration / sizeof(long));
+
+                        while (src < srcEnd)
+                        {
+                            *dest++ = *src++;
+                        }
                     }
                     currentIndexInBytes += bytesInThisIteration;
                     positionInBytes += bytesInThisIteration;
