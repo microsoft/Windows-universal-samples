@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   id="svg2"
+   viewBox="0 0 744.09448819 1052.3622047">
+  <circle
+    id="head"
+    r="300"
+    cy="509"
+    cx="370"
+    style="fill:#ffff00;stroke:#000000;stroke-width:5" />
+  <ellipse
+    id="right_eye"
+    ry="60"
+    rx="40"
+    cy="410"
+    cx="455"
+    style="fill:#000000" />
+  <ellipse
+    id="left_eye"
+    ry="60"
+    rx="40"
+    cy="414"
+    cx="273"
+    style="fill:#000000" />
+  <path
+    id="mouth"
+    d="m 182.85715,620.93363 c 260,188.57143 391.42857,-65.71428 391.42857,-65.71428"
+    style="fill:none;stroke:#000000;stroke-width:5" />
+  <g
+    id="tongue"
+    style="display:none">
+    <path
+      d="m 376.05051,689.83601 c 0,0 119.25597,146.88184 118.63775,-43.81494"
+      style="fill:none;stroke:#000000;stroke-width:5" />
+    <path
+      d="m 439.58745,677.60462 18.91862,42.5669"
+      style="fill:none;stroke:#000000;stroke-width:5" />
+  </g>
+</svg>

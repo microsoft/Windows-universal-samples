@@ -19,11 +19,11 @@ Specifically, this sample shows how to:
 - **Implement IItemsRangeInfo:** Use the IItemsRangeInfo interface to understand which items are in view or the buffer area for a list view, and to manage a cache containing those items.
 - **Implement ISelectionInfo:** Use the ISelectionInfo interface to manage the selection of items in the list, accounting for the data virtualization.
 
-**Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
+**Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  
 To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
 
-To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
+To obtain information about Microsoft Visual Studio and the tools for developing Windows apps, go to [Visual Studio](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
 [ListView and GridView UI optimization](https://msdn.microsoft.com/library/windows/apps/mt204776.aspx)
@@ -48,8 +48,8 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-2. Go to the directory to which you unzipped the sample. Double-click the Visual Studio 2015 Solution (.sln) file. 
+1. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Go to the directory to which you unzipped the sample. Double-click the Visual Studio Solution (.sln) file. 
 3. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
 
 ## Run the sample

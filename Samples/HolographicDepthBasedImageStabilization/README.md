@@ -29,8 +29,8 @@ For an example, see the [Holographic Tag-along Sample](http://go.microsoft.com/f
 
 This sample demonstrates best practices for user comfort by always setting the image stabilization plane.
 
-**Note** The image stabilization plane can be observed via the [Windows Device Portal] 
-(https://developer.microsoft.com/windows/holographic/Using_the_Windows_Device_Portal.html).
+**Note** The image stabilization plane can be observed via the
+[Windows Device Portal](https://developer.microsoft.com/windows/mixed-reality/using_the_windows_device_portal).
 
 ## Compute shaders
 
@@ -40,15 +40,15 @@ require shader model 5.0. Running this code sample in the HoloLens emulator will
 
 ### Additional remarks
 
-**Note** The Windows universal samples for Windows 10 Holographic require Visual Studio 2015 Update 3
+**Note** The Windows universal samples for Windows 10 Holographic require Visual Studio 2017 Update 3
 to build, and a Windows Holographic device to execute. Windows Holographic devices include the 
 Microsoft HoloLens and the Microsoft HoloLens Emulator.
  
 To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421).
 
 To obtain information about the tools used for Windows Holographic development, including Microsoft 
-Visual Studio 2015 Update 2 and the Microsoft HoloLens Emulator, go to [Install the tools]
-(https://developer.microsoft.com/windows/holographic/install_the_tools).
+Visual Studio and the Microsoft HoloLens Emulator, go to
+[Install the tools](https://developer.microsoft.com/windows/mixed-reality/install_the_tools).
 
 ## Reference
 
@@ -70,10 +70,10 @@ in this code sample:
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with 
    the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the 
    subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or 
-   JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+   JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
@@ -88,8 +88,8 @@ run it.
 
 ### Deploying the sample to a Microsoft HoloLens
 
-- Developer unlock your Microsoft HoloLens. For instructions, go to [Enable your device for development]
-  (https://msdn.microsoft.com/windows/uwp/get-started/enable-your-device-for-development#enable-your-windows-10-devices).
+- Developer unlock your Microsoft HoloLens. For instructions, go to
+  [Enable your device for development](https://msdn.microsoft.com/windows/uwp/get-started/enable-your-device-for-development#enable-your-windows-10-devices).
 - Find the IP address of your Microsoft HoloLens. The IP address can be found in **Settings** \> 
   **Network & Internet** \> **Wi-Fi** \> **Advanced options**. Or, you can ask Cortana for this 
   information by saying: "Hey Cortana, what's my IP address?"

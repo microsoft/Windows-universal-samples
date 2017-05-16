@@ -44,9 +44,9 @@ namespace SDKTemplate
             }
         }
 
-        private void Page_OnLoaded(object sender, RoutedEventArgs e)
+        private void Load_Click(object sender, RoutedEventArgs e)
         {
-            // NOTE: Change this to 110 to see DASH with PlayReady scenario
+            // NOTE: Change this to 115 to see DASH with PlayReady scenario
             const int contentIdForCMS = 1;
 
             AdaptiveContentModel adaptiveContentModel = MainPage.FindContentById(contentIdForCMS);

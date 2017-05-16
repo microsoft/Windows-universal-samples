@@ -81,11 +81,11 @@ This step is needed if you intend to use Azure Authentication.
   * Replace the provided  value of "clientId" with the actual value of your native application created in Azure Active Directory.
     (See step 5 above.)
 
-**Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
+**Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
 
 To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
 
-To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
+To obtain information about Microsoft Visual Studio and the tools for developing Windows apps, go to [Visual Studio](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
 
@@ -108,8 +108,8 @@ Server: Not supported
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2015 and select **File** > **Open** > **Project/Solution**.
-2. Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C#, or JavaScript. Double-click the Visual Studio 2015 Solution (.sln) file. 
+1. Start Microsoft Visual Studio 2017 and select **File** > **Open** > **Project/Solution**.
+2. Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C#, or JavaScript. Double-click the Visual Studio Solution (.sln) file. 
 3. Press Ctrl+Shift+B, or select **Build** > **Build Solution**. 
 
 ## Run the sample

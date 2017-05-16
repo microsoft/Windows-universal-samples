@@ -144,40 +144,60 @@
             WinJS.log("Claimed printer instance is null. Cannot print.", "sample", "error");
         }
         else {
-            var job = _claimedPrinter.receipt.createJob();
-            job.printLine("======================");
-            job.printLine("|   Sample Header    |");
-            job.printLine("======================");
-
-            job.printLine("Item             Price");
-            job.printLine("----------------------");
-
-            job.printLine("Books            10.40");
-            job.printLine("Games             9.60");
-            job.printLine("----------------------");
-            job.printLine("Total----------- 20.00");
-
-            job.printLine();
-            job.printLine("______________________");
-            job.printLine("Tip");
-            job.printLine();
-            job.printLine("______________________");
-            job.printLine("Signature");
-            job.printLine();
-            job.printLine("Merchant Copy");
-            lineFeedAndCutPaper(job);
+            var receiptString = "======================\n" +
+                                "|   Sample Header    |\n" +
+                                "======================\n" +
+                                "Item             Price\n" +
+                                "----------------------\n" +
+                                "Books            10.40\n" +
+                                "Games             9.60\n" +
+                                "----------------------\n" +
+                                "Total----------- 20.00\n";
 
 
-            job.executeAsync().done(function () {
-                WinJS.log("Printed receipt.", "sample", "status");
+            var merchantJob = _claimedPrinter.receipt.createJob();
+            var merchantFooter = getMerchantFooter();
+            printLineFeedAndCutPaper(merchantJob, receiptString + merchantFooter);
+            var customerJob = _claimedPrinter.receipt.createJob();
+            var customerFooter = getCustomerFooter();
+            printLineFeedAndCutPaper(customerJob, receiptString + customerFooter);
+
+
+            merchantJob.executeAsync().done(function () {
+                WinJS.log("Printed merchant receipt.", "sample", "status");
             }, function error(e) {
                 WinJS.log("Was not able to print receipt: " + e.message, "sample", "error");
+            });
+
+            customerJob.executeAsync().done(function () {
+                WinJS.log("Printed customer receipt.", "sample", "status");
+            }, function error(e) {
+                WinJS.log("Was not able to print customer footer: " + e.message, "sample", "error");
             });
         }
     }
 
+    function getMerchantFooter() {
+        return "\n" +
+               "______________________\n" +
+               "Tip\n" +
+               "\n" +
+               "______________________\n" +
+               "Signature\n" +
+               "\n" +
+               "Merchant Copy\n";
+    }
+
+    function getCustomerFooter() {
+        return "\n" +
+               "______________________\n" +
+               "Tip\n" +
+               "\n" +
+               "Customer Copy\n";
+    }
+
     // Cut the paper after printing enough blank lines to clear the paper cutter.
-    function lineFeedAndCutPaper(job) {
+    function printLineFeedAndCutPaper(job, receipt) {
 
         if (_printer == null) {
             WinJS.log("No printers found. Cannot print.", "sample", "error");
@@ -186,9 +206,14 @@
             WinJS.log("Claimed printer instance is null. Cannot print.", "sample", "error");
         }
         else {
+            // Passing a multi-line string to the print method results in
+            // smoother paper feeding than sending multiple single-line strings
+            // to printLine.
+            var feedString = "";
             for (var n = 0; n < _claimedPrinter.receipt.linesToPaperCut; n++) {
-                job.printLine();
+                feedString += "\n";
             }
+            job.print(receipt + feedString);
             if (_printer.capabilities.receipt.canCutPaper) {
                 job.cutPaper();
             }

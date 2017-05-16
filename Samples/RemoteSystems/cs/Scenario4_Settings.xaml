@@ -35,9 +35,9 @@
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
                 <TextBlock>Check settings for cross-device experience.</TextBlock>
                 <Button Content="Check now" Click="CheckNow_Clicked" Margin="0,10,0,0"/>
-                <TextBlock Margin="0,10,0,0">Share across devices</TextBlock>
+                <TextBlock Margin="0,10,0,0">Share across systems</TextBlock>
                 <TextBlock Margin="0,10,0,0">Enabled for everyone: <Run x:Name="AnoymousAuthorizationEnabled"/></TextBlock>
-                <TextBlock>Enabled for my devices: <Run x:Name="SameUserAuthorizationEnabled"/></TextBlock>
+                <TextBlock>Enabled for my systems: <Run x:Name="SameUserAuthorizationEnabled"/></TextBlock>
             </StackPanel>
         </ScrollViewer>
     </Grid>

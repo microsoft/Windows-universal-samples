@@ -60,6 +60,9 @@ namespace AudioCreation
 
         private async void File_Click(object sender, RoutedEventArgs e)
         {
+            // Clear any old messages.
+            rootPage.NotifyUser("", NotifyType.StatusMessage);
+
             // If another file is already loaded into the FileInput node
             if (fileInput != null)
             {
@@ -96,6 +99,16 @@ namespace AudioCreation
             }
 
             fileInput = fileInputResult.FileInputNode;
+
+            if (fileInput.Duration <= TimeSpan.FromSeconds(3))
+            {
+                // Imported file is too short
+                rootPage.NotifyUser("Please pick an audio file which is longer than 3 seconds", NotifyType.ErrorMessage);
+                fileInput.Dispose();
+                fileInput = null;
+                return;
+            }
+
             fileInput.AddOutgoingConnection(deviceOutput);
             fileButton.Background = new SolidColorBrush(Colors.Green);
 

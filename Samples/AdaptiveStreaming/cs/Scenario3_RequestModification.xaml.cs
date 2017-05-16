@@ -10,7 +10,7 @@
 //*********************************************************
 
 using SDKTemplate.Helpers;
-using SDKTemplate.Models;
+using SDKTemplate.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +18,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Media.Core;
+using Windows.Media.Playback;
 using Windows.Media.Protection;
 using Windows.Media.Streaming.Adaptive;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -35,6 +37,10 @@ namespace SDKTemplate
     ///       scenario for patterns that can be used to clean up.
     public sealed partial class Scenario3_RequestModification : Page
     {
+
+        private AzureKeyAcquisitionMethod tokenMethod;
+        private CancellationTokenSource ctsForAppHttpClientForKeys = new CancellationTokenSource();
+
         public Scenario3_RequestModification()
         {
             this.InitializeComponent();
@@ -42,28 +48,60 @@ namespace SDKTemplate
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            ctsForAppHttpClientForKeys.Cancel(); // Cancel any HTTP requests the app was making.
-            adaptiveMS = null;
-            var mp = mediaPlayerElement.MediaPlayer;
-            if (mp != null)
+            // Cancel any HTTP requests the app was making:
+            ctsForAppHttpClientForKeys.Cancel();
+
+            // Release handles on various media objects to ensure a quick clean-up
+            ContentSelectorControl.MediaPlaybackItem = null;
+            var mediaPlayer = mediaPlayerElement.MediaPlayer;
+            if (mediaPlayer != null)
             {
-                mp.DisposeSource();
+                mediaPlayerLogger?.Dispose();
+                mediaPlayerLogger = null;
+
+                UnregisterHandlers(mediaPlayer);
+
+                mediaPlayer.DisposeSource();
                 mediaPlayerElement.SetMediaPlayer(null);
-                mp.Dispose();
+                mediaPlayer.Dispose();
             }
 
-            // We will clean up HDCP explicitly, this ensures the OutputProtectionManager
-            // does not have to continue to impose our policy until the Garbage Collector
-            // cleans the object.
+            // We clean up HDCP explicitly. Otherwise, the OutputProtectionManager
+            // will continue to impose our policy until it is finalized by the
+            // garbage collector.
             hdcpSession?.Dispose();
             hdcpSession = null;
         }
 
-        AdaptiveContentModel adaptiveContentModel;
+        private void UnregisterHandlers(MediaPlayer mediaPlayer)
+        {
+            AdaptiveMediaSource adaptiveMediaSource = null;
+            MediaPlaybackItem mpItem = mediaPlayer.Source as MediaPlaybackItem;
+            if (mpItem != null)
+            {
+                adaptiveMediaSource = mpItem.Source.AdaptiveMediaSource;
+            }
+            MediaSource source = mediaPlayer.Source as MediaSource;
+            if (source != null)
+            {
+                adaptiveMediaSource = source.AdaptiveMediaSource;
+            }
+
+            mediaPlaybackItemLogger?.Dispose();
+            mediaPlaybackItemLogger = null;
+
+            mediaSourceLogger?.Dispose();
+            mediaSourceLogger = null;
+
+            adaptiveMediaSourceLogger?.Dispose();
+            adaptiveMediaSourceLogger = null;
+
+            UnregisterForAdaptiveMediaSourceEvents(adaptiveMediaSource);
+        }
+
         AddAuthorizationHeaderFilter httpClientFilter;
         HdcpSession hdcpSession;
-        AdaptiveMediaSource adaptiveMS;
-
+        AdaptiveMediaSource adaptiveMediaSource;
 
         private void Page_OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -76,54 +114,62 @@ namespace SDKTemplate
             {
                 // After a change, impose a maximum bitrate based on the actual protection level.
                 HdcpProtection? protection = session.GetEffectiveProtection();
-                SetMaxBitrateForProtectionLevel(protection, adaptiveMS);
+                SetMaxBitrateForProtectionLevel(protection, adaptiveMediaSource);
             };
 
-            // Choose a default content, and tell the user that some content IDs
-            // require an authorization mode. Filter out the PlayReady content
-            // because this scenario does not support PlayReady.
-            SelectedContent.ItemsSource = MainPage.ContentManagementSystemStub.Where(model => !model.PlayReady);
-            SelectedContent.SelectedItem = MainPage.FindContentById(13);
+            // Explicitly create the instance of MediaPlayer if you need to register for its events
+            // (like MediaOpened / MediaFailed) prior to setting an IMediaPlaybackSource.
+            var mediaPlayer = new MediaPlayer();
+
+            // We use a helper class that logs all the events for the MediaPlayer:
+            mediaPlayerLogger = new MediaPlayerLogger(LoggerControl, mediaPlayer);
+
+            mediaPlayerElement.SetMediaPlayer(mediaPlayer);
+
+            ContentSelectorControl.Initialize(
+                mediaPlayer,
+                MainPage.ContentManagementSystemStub.Where(m =>!m.PlayReady),
+                null,
+                LoggerControl,
+                LoadSourceFromUriAsync);
+
+            ContentSelectorControl.HideLoadUri(); // Avoid free text URIs for this scenario.
 
             // Initialize tokenMethod based on the default selected radio button.
             var defaultRadioButton = AzureAuthorizationMethodPanel.Children.OfType<RadioButton>().First(button => button.IsChecked.Value);
             Enum.TryParse((string)defaultRadioButton.Tag, out tokenMethod);
 
             Log("Content Id 13 and 14 require that you choose an authorization method.");
+            ContentSelectorControl.SetSelectedModel(MainPage.ContentManagementSystemStub.Where(m => m.Id == 13).FirstOrDefault());
         }
 
-        private async void Load_Click(object sender, RoutedEventArgs e)
+
+        #region Content Loading
+
+        private async Task<MediaPlaybackItem> LoadSourceFromUriAsync(Uri uri, HttpClient httpClient = null)
         {
-            adaptiveContentModel = (AdaptiveContentModel)SelectedContent.SelectedItem;
+            UnregisterHandlers(mediaPlayerElement.MediaPlayer);
+            mediaPlayerElement.MediaPlayer?.DisposeSource();
 
             if (tokenMethod == AzureKeyAcquisitionMethod.AuthorizationHeader)
             {
+                if (ContentSelectorControl.SelectedModel == null)
+                {
+                    return null;
+                }
                 // Use an IHttpFilter to identify key request URIs and insert an Authorization header with the Bearer token.
                 var baseProtocolFilter = new HttpBaseProtocolFilter();
+                baseProtocolFilter.CacheControl.WriteBehavior = HttpCacheWriteBehavior.NoCache;  // Always set WriteBehavior = NoCache
                 httpClientFilter = new AddAuthorizationHeaderFilter(baseProtocolFilter);
-                httpClientFilter.AuthorizationHeader = new HttpCredentialsHeaderValue("Bearer", adaptiveContentModel.AesToken);
-                var httpClient = new HttpClient(httpClientFilter);
+                httpClientFilter.AuthorizationHeader = new HttpCredentialsHeaderValue("Bearer", ContentSelectorControl.SelectedModel.AesToken);
+                httpClient = new HttpClient(httpClientFilter);
 
                 // Here is where you can add any required custom CDN headers.
                 httpClient.DefaultRequestHeaders.Append("X-HeaderKey", "HeaderValue");
                 // NOTE: It is not recommended to set Authorization headers needed for key request on the
                 // default headers of the HttpClient, as these will also be used on non-HTTPS calls
                 // for media segments and manifests -- and thus will be easily visible.
-
-                await LoadSourceFromUriAsync(adaptiveContentModel.ManifestUri, httpClient);
             }
-            else
-            {
-                await LoadSourceFromUriAsync(adaptiveContentModel.ManifestUri);
-            }
-
-            // On small screens, hide the description text to make room for the video.
-            DescriptionText.Visibility = (ActualHeight < 650) ? Visibility.Collapsed : Visibility.Visible;
-        }
-
-        private async Task LoadSourceFromUriAsync(Uri uri, HttpClient httpClient = null)
-        {
-            mediaPlayerElement.MediaPlayer?.DisposeSource();
 
             AdaptiveMediaSourceCreationResult result = null;
             if (httpClient != null)
@@ -135,39 +181,76 @@ namespace SDKTemplate
                 result = await AdaptiveMediaSource.CreateFromUriAsync(uri);
             }
 
+            MediaSource source;
             if (result.Status == AdaptiveMediaSourceCreationStatus.Success)
             {
-                adaptiveMS = result.MediaSource;
+                adaptiveMediaSource = result.MediaSource;
 
-                // Register for events before setting the IMediaPlaybackSource
-                RegisterForAdaptiveMediaSourceEvents(adaptiveMS);
+                // We use a helper class that logs all the events for the AdaptiveMediaSource:
+                adaptiveMediaSourceLogger = new AdaptiveMediaSourceLogger(LoggerControl, adaptiveMediaSource);
 
+                // In addition to logging, we use the callbacks to update some UI elements in this scenario:
+                RegisterForAdaptiveMediaSourceEvents(adaptiveMediaSource);
+
+                // At this point, we have read the manifest of the media source, and all bitrates are known.
                 // Now that we have bitrates, attempt to cap them based on HdcpProtection.
                 HdcpProtection? protection = hdcpSession.GetEffectiveProtection();
-                SetMaxBitrateForProtectionLevel(protection, adaptiveMS);
+                SetMaxBitrateForProtectionLevel(protection, adaptiveMediaSource);
 
-                MediaSource source = MediaSource.CreateFromAdaptiveMediaSource(adaptiveMS);
+                source = MediaSource.CreateFromAdaptiveMediaSource(adaptiveMediaSource);
 
-                // Note that in this sample with very few event handlers, we are creating neither
-                // a MediaPlayer nor a MediaPlaybackItem. The MediaPlayer will be created implicitly
-                // by the mpElement, which will also manage its lifetime.
-
-                mediaPlayerElement.Source = source;
-                // You can now access mpElement.MediaPlayer, but it is too late to register
-                // to handle its MediaOpened event.
             }
             else
             {
-                Log($"Error creating the AdaptiveMediaSource: {result.Status}");
+                Log($"Error creating the AdaptiveMediaSource. Status: {result.Status}, ExtendedError.Message: {result.ExtendedError.Message}, ExtendedError.HResult: {result.ExtendedError.HResult.ToString("X8")}");
+                return null;
             }
+
+            // We use a helper class that logs all the events for the MediaSource:
+            mediaSourceLogger = new MediaSourceLogger(LoggerControl, source);
+
+            // Save the original Uri.
+            source.CustomProperties["uri"] = uri.ToString();
+
+            // You're likely to put a content tracking id into the CustomProperties.
+            source.CustomProperties["contentId"] = Guid.NewGuid().ToString();
+
+            var mpItem = new MediaPlaybackItem(source);
+
+            // We use a helper class that logs all the events for the MediaPlaybackItem:
+            mediaPlaybackItemLogger = new MediaPlaybackItemLogger(LoggerControl, mpItem);
+
+            HideDescriptionOnSmallScreen();
+
+            return mpItem;
         }
+
+        private async void HideDescriptionOnSmallScreen()
+        {
+            // On small screens, hide the description text to make room for the video.
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                DescriptionText.Visibility = (ActualHeight < 500) ? Visibility.Collapsed : Visibility.Visible;
+            });
+        }
+        #endregion
+
 
         #region AdaptiveMediaSource Event Handlers
 
-        private void RegisterForAdaptiveMediaSourceEvents(AdaptiveMediaSource aMS)
+        private void RegisterForAdaptiveMediaSourceEvents(AdaptiveMediaSource adaptiveMediaSource)
         {
-            aMS.DownloadRequested += DownloadRequested;
-            aMS.DownloadFailed += DownloadFailed;
+            adaptiveMediaSource.DownloadRequested += DownloadRequested;
+            adaptiveMediaSource.DownloadFailed += DownloadFailed;
+        }
+
+        private void UnregisterForAdaptiveMediaSourceEvents(AdaptiveMediaSource adaptiveMediaSource)
+        {
+            if (adaptiveMediaSource != null)
+            {
+                adaptiveMediaSource.DownloadRequested -= DownloadRequested;
+                adaptiveMediaSource.DownloadFailed -= DownloadFailed;
+            }
         }
 
         private async void DownloadRequested(AdaptiveMediaSource sender, AdaptiveMediaSourceDownloadRequestedEventArgs args)
@@ -201,7 +284,7 @@ namespace SDKTemplate
 
         private void ModifyKeyRequestUri(AdaptiveMediaSourceDownloadRequestedEventArgs args)
         {
-            if (adaptiveContentModel == null)
+            if (ContentSelectorControl.SelectedModel == null)
             {
                 return;
             }
@@ -211,14 +294,14 @@ namespace SDKTemplate
             //   To change an segment request into a byte-range Uri into another resource
 
             // Add the Bearer token to the Uri and modify the args.Result.ResourceUri
-            string armoredAuthToken = System.Net.WebUtility.UrlEncode("Bearer=" + adaptiveContentModel.AesToken);
+            string armoredAuthToken = System.Net.WebUtility.UrlEncode("Bearer=" + ContentSelectorControl.SelectedModel.AesToken);
             string uriWithTokenParameter = $"{args.ResourceUri.AbsoluteUri}&token={armoredAuthToken}";
             args.Result.ResourceUri = new Uri(uriWithTokenParameter);
         }
 
         private async Task AppDownloadedKeyRequest(AdaptiveMediaSourceDownloadRequestedEventArgs args)
         {
-            if (adaptiveContentModel == null)
+            if (ContentSelectorControl.SelectedModel == null)
             {
                 return;
             }
@@ -235,7 +318,7 @@ namespace SDKTemplate
             try
             {
                 var appHttpClientForKeys = new HttpClient();
-                appHttpClientForKeys.DefaultRequestHeaders.Authorization = new HttpCredentialsHeaderValue("Bearer", adaptiveContentModel.AesToken);
+                appHttpClientForKeys.DefaultRequestHeaders.Authorization = new HttpCredentialsHeaderValue("Bearer", ContentSelectorControl.SelectedModel.AesToken);
 
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, args.ResourceUri);
 
@@ -293,7 +376,9 @@ namespace SDKTemplate
         }
         #endregion
 
+
         #region AzureKeyAcquisitionMethod
+
         enum AzureKeyAcquisitionMethod
         {
             None,
@@ -301,8 +386,6 @@ namespace SDKTemplate
             UrlQueryParameter,
             ApplicationDownloaded,
         }
-        private AzureKeyAcquisitionMethod tokenMethod;
-        private CancellationTokenSource ctsForAppHttpClientForKeys = new CancellationTokenSource();
 
         private void AzureMethodSelected_Click(object sender, RoutedEventArgs e)
         {
@@ -314,6 +397,7 @@ namespace SDKTemplate
             }
         }
         #endregion
+
 
         #region HdcpDesiredMinimumProtection
 
@@ -344,50 +428,59 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="protection">Protection level to use when imposing bandwidth restriction.</param>
         /// <param name="ams">AdaptiveMediaSource on which to impose restrictions</param>
-        private void SetMaxBitrateForProtectionLevel(HdcpProtection? protection, AdaptiveMediaSource ams)
+        private async void SetMaxBitrateForProtectionLevel(HdcpProtection? protection, AdaptiveMediaSource ams)
         {
-            EffectiveHdcpProtectionText.Text = protection.ToString();
-
-            if (ams != null && ams.AvailableBitrates.Count > 1)
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                // Get a sorted list of available bitrates.
-                var bitrates = new List<uint>(ams.AvailableBitrates);
-                bitrates.Sort();
+                EffectiveHdcpProtectionText.Text = protection.ToString();
 
-                // Apply maximum bitrate policy based on a fictitious content publisher's rules.
-                switch (protection)
+                if (ams != null && ams.AvailableBitrates.Count > 1)
                 {
-                    case HdcpProtection.OnWithTypeEnforcement:
-                        // Allow full bitrate.
-                        ams.DesiredMaxBitrate = bitrates[bitrates.Count - 1];
-                        DesiredMaxBitrateText.Text = "full bitrate allowed";
-                        break;
-                    case HdcpProtection.On:
-                        // When there is no HDCP Type 1, make the highest bitrate unavailable.
-                        ams.DesiredMaxBitrate = bitrates[bitrates.Count - 2];
-                        DesiredMaxBitrateText.Text = "highest bitrate is unavailable";
-                        break;
-                    case HdcpProtection.Off:
-                    case null:
-                    default:
-                        // When there is no HDCP at all (Off), or the system is still trying to determine what
-                        // HDCP protection level to apply (null), then make only the lowest bitrate available.
-                        ams.DesiredMaxBitrate = bitrates[0];
-                        DesiredMaxBitrateText.Text = "lowest bitrate only";
-                        break;
+                    // Get a sorted list of available bitrates.
+                    var bitrates = new List<uint>(ams.AvailableBitrates);
+                    bitrates.Sort();
+
+                    // Apply maximum bitrate policy based on a fictitious content publisher's rules.
+                    switch (protection)
+                    {
+                        case HdcpProtection.OnWithTypeEnforcement:
+                            // Allow full bitrate.
+                            ams.DesiredMaxBitrate = bitrates[bitrates.Count - 1];
+                            DesiredMaxBitrateText.Text = "full bitrate allowed";
+                            break;
+                        case HdcpProtection.On:
+                            // When there is no HDCP Type 1, make the highest bitrate unavailable.
+                            ams.DesiredMaxBitrate = bitrates[bitrates.Count - 2];
+                            DesiredMaxBitrateText.Text = "highest bitrate is unavailable";
+                            break;
+                        case HdcpProtection.Off:
+                        case null:
+                        default:
+                            // When there is no HDCP at all (Off), or the system is still trying to determine what
+                            // HDCP protection level to apply (null), then make only the lowest bitrate available.
+                            ams.DesiredMaxBitrate = bitrates[0];
+                            DesiredMaxBitrateText.Text = "lowest bitrate only";
+                            break;
+                    }
+                    Log($"Imposed DesiredMaxBitrate={ams.DesiredMaxBitrate} for HdcpProtection.{protection}");
                 }
-                Log($"Imposed DesiredMaxBitrate={ams.DesiredMaxBitrate} for HdcpProtection.{protection}");
-            }
+            });
         }
         #endregion
+
 
         #region Utilities
         private void Log(string message)
         {
             LoggerControl.Log(message);
         }
+        MediaPlayerLogger mediaPlayerLogger;
+        MediaSourceLogger mediaSourceLogger;
+        MediaPlaybackItemLogger mediaPlaybackItemLogger;
+        AdaptiveMediaSourceLogger adaptiveMediaSourceLogger;
         #endregion
     }
+
 
     #region IHttpFilter to add an authorization header
 

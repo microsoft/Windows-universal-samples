@@ -14,9 +14,9 @@ This repo contains the samples that demonstrate the API usage patterns for the U
 
 ## Universal Windows Platform development
 
-These samples require Visual Studio 2015 and the Windows Software Development Kit (SDK) for Windows 10 to build, test, and deploy your Universal Windows Platform apps.
+These samples require Visual Studio 2017 and the Windows Software Development Kit (SDK) for Windows 10 to build, test, and deploy your Universal Windows Platform apps.
 
-   [Get a free copy of Visual Studio 2015 Community Edition with support for building Universal Windows Platform apps](http://go.microsoft.com/fwlink/p/?LinkID=280676)
+   [Get a free copy of Visual Studio 2017 Community Edition with support for building Universal Windows Platform apps](http://go.microsoft.com/fwlink/p/?LinkID=280676)
 
 Additionally, to stay on top of the latest updates to Windows and the development tools, become a Windows Insider by joining the Windows Insider Program.
 
@@ -24,14 +24,14 @@ Additionally, to stay on top of the latest updates to Windows and the developmen
 
 ## Using the samples
 
-The easiest way to use these samples without using Git is to download the zip file containing the current version (using the following link or by clicking the "Download ZIP" button on the repo page). You can then unzip the entire archive and use the samples in Visual Studio 2015.
+The easiest way to use these samples without using Git is to download the zip file containing the current version (using the following link or by clicking the "Download ZIP" button on the repo page). You can then unzip the entire archive and use the samples in Visual Studio 2017.
 
    [Download the samples ZIP](../../archive/master.zip)
 
    **Notes:** 
    * Before you unzip the archive, right-click it, select **Properties**, and then select **Unblock**.
    * Be sure to unzip the entire archive, and not just individual samples. The samples all depend on the SharedContent folder in the archive.   
-   * In Visual Studio 2015, the platform target defaults to ARM, so be sure to change that to x64 or x86 if you want to test on a non-ARM device. 
+   * In Visual Studio 2017, the platform target defaults to ARM, so be sure to change that to x64 or x86 if you want to test on a non-ARM device. 
    
 The samples use Linked files in Visual Studio to reduce duplication of common files, including sample template files and image assets. These common files are stored in the SharedContent folder at the root of the repository, and are referred to in the project files using links.
 
@@ -412,8 +412,11 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/D2DGradientMesh">Direct2D gradient mesh</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/D2DSvgImage">Direct2D SVG image rendering</a></td>
   <td><a href="Samples/EfficientAnimations">Efficient animations (HTML)</a></td>
   <td><a href="Samples/XamlTransform3DAnimations">Transform3D animations</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/XamlTransform3DParallax">Transform3D parallax</a></td>
  </tr>
 </table>

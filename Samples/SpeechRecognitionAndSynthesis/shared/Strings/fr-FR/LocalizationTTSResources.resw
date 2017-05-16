@@ -123,18 +123,21 @@
                              xsi:schemaLocation='http://www.w3.org/2001/10/synthesis  http://www.w3.org/TR/speech-synthesis/synthesis.xsd' 
                              xml:lang='fr-FR'&gt;
 
-Il s'agit d'un exemple d'une prononciation phonétique :
+&lt;mark name='phonetic'/&gt;Il s'agit d'un exemple d'une prononciation phonétique :
 &lt;phoneme alphabet='x-microsoft-ups' ph='S1 W AA T . CH AX . M AX . S2 K AA L . IH T'&gt; whatchamacallit &lt;/phoneme&gt;.
 
-Il s'agit d'un exemple d'une date :
+&lt;mark name='date'/&gt;Il s'agit d'un exemple d'une date :
 &lt;say-as interpret-as='date' format='mdy'&gt; 04/30/2013 &lt;/say-as&gt;.
 
-Il s'agit d'un exemple de dire un certain nombre :
+&lt;mark name='number'/&gt;Il s'agit d'un exemple de dire un certain nombre :
 &lt;say-as interpret-as='ordinal'&gt; 4 &lt;/say-as&gt;.
-
+&lt;mark name='end'/&gt;
 &lt;/speak&gt;</value>
   </data>
   <data name="SynthesizeTextDefaultText" xml:space="preserve">
     <value>Le rapide renard roux a sauté sur le chien paresseux brun</value>
+  </data>
+  <data name="SynthesizeTextBoundariesDefaultText" xml:space="preserve">
+    <value>Simplement à l’aide de votre voix, vous pouvez démarrer des programmes, ouvrir des menus, cliquer sur des boutons et autres objets à l’écran, dicter du texte dans des documents, et écrire et envoyer des courriers électroniques. Tout ce que vous faites habituellement avec votre clavier et votre souris, vous pouvez le faire avec votre voix.</value>
   </data>
 </root>

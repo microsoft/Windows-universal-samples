@@ -116,19 +116,26 @@ namespace SDKTemplate
                 return;
             }
 
-            // TimeSpan specifies a time period as (hours, minutes, seconds)
-            alarm.AlarmTimeout = new TimeSpan(0, 0, 30);
-            alarm.BeepDelay = new TimeSpan(0, 0, 3);
-            alarm.BeepDuration = new TimeSpan(0, 0, 1);
-            alarm.BeepFrequency = 700;
-            alarm.AlarmTimeoutExpired += drawer_AlarmExpired;
-
-            rootPage.NotifyUser("Waiting for drawer to close.", NotifyType.StatusMessage);
-
-            if (await alarm.StartAsync())
-                rootPage.NotifyUser("Successfully waited for drawer close.", NotifyType.StatusMessage);
+            if (!claimedDrawer.IsDrawerOpen)
+            {
+                rootPage.NotifyUser("Drawer is already closed.", NotifyType.StatusMessage);
+            }
             else
-                rootPage.NotifyUser("Failed to wait for drawer close.", NotifyType.ErrorMessage);
+            {
+                // TimeSpan specifies a time period as (hours, minutes, seconds)
+                alarm.AlarmTimeout = new TimeSpan(0, 0, 30);
+                alarm.BeepDelay = new TimeSpan(0, 0, 3);
+                alarm.BeepDuration = new TimeSpan(0, 0, 1);
+                alarm.BeepFrequency = 700;
+                alarm.AlarmTimeoutExpired += drawer_AlarmExpired;
+
+                rootPage.NotifyUser("Waiting for drawer to close.", NotifyType.StatusMessage);
+
+                if (await alarm.StartAsync())
+                    rootPage.NotifyUser("Successfully waited for drawer close.", NotifyType.StatusMessage);
+                else
+                    rootPage.NotifyUser("Failed to wait for drawer close.", NotifyType.ErrorMessage);
+            }
         }
 
         /// <summary>

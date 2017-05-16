@@ -11,7 +11,7 @@ Note that the SCCD file included with this sample is not valid,
 but it is included for instructional purposes.
 If the PC is Developer Mode, the sample will deploy despite the invalid SCCD file.
 When writing your own app, follow the instructions in
-[Custom Capabilities for Universal Windows Platform apps](https://msdn.microsoft.com/en-us/windows/hardware/drivers/devapps/custom-capabilities-for-universal-windows-platform-apps)
+[Custom Capabilities for Universal Windows Platform apps](https://msdn.microsoft.com/windows/hardware/drivers/devapps/custom-capabilities-for-universal-windows-platform-apps)
 to obtain a properly-signed SCCD file.
 
 ## Using a custom capability to connect to an NT service
@@ -119,7 +119,7 @@ When they are empty, the next read operation will wait until a message is writte
  
 To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
-To obtain information about Microsoft Visual Studio and the tools for developing Windows apps, go to [Visual Studio 2017](http://go.microsoft.com/fwlink/?LinkID=532422)
+To obtain information about Microsoft Visual Studio and the tools for developing Windows apps, go to [Visual Studio](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
 
@@ -138,8 +138,8 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 * The [Custom driver access sample](https://code.msdn.microsoft.com/windowsapps/Custom-device-access-sample-43bde679)
   sample has been converted to a Windows 10 app.
 * [How to use RPC callbacks](https://support.microsoft.com/kb/96781)
-* [Custom Capabilities for Universal Windows Platform apps](https://msdn.microsoft.com/en-us/windows/hardware/drivers/devapps/custom-capabilities-for-universal-windows-platform-apps)
-* [Hardware access for Universal Windows Platform apps](https://msdn.microsoft.com/en-us/windows/hardware/drivers/devapps/hardware-access-for-universal-windows-platform-apps)
+* [Custom Capabilities for Universal Windows Platform apps](https://msdn.microsoft.com/windows/hardware/drivers/devapps/custom-capabilities-for-universal-windows-platform-apps)
+* [Hardware access for Universal Windows Platform apps](https://msdn.microsoft.com/windows/hardware/drivers/devapps/hardware-access-for-universal-windows-platform-apps)
 ## System requirements
 
 **Client:** Windows 10 version 1703

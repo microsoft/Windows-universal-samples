@@ -80,6 +80,7 @@
     </Content>
     <Content Include="js\default.js" />
     <Content Include="css\default.css" />
+    <Content Include="js\installVCD.js" />
     <Content Include="js\store.js" />
     <Content Include="js\tripDetails.js" />
     <Content Include="js\tripListView.js" />

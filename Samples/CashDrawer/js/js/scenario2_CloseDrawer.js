@@ -101,26 +101,31 @@
 
         WinJS.log("Waiting for drawer to close.", "sample", "status");
 
-        var alarm = _claimedDrawer.closeAlarm;
-
-        // Specifying time periods in milliseconds
-        alarm.alarmTimeout = new Date(30000);
-        alarm.beepDelay = new Date(3000);
-        alarm.beepDuration = new Date(1000);
-        alarm.beepFrequency = 700;
-
-        _claimedDrawer.addEventListener("alarmtimeoutexpired", onAlarmExpired);
-
-        try {
-            alarm.startAsync().then(function (success) {
-                if (success)
-                    WinJS.log("Successfully waited for drawer close.", "sample", "status");
-                else
-                    WinJS.log("Failed to wait for drawer close.", "sample", "error");
-            });
+        if (!_claimedDrawer.IsDrawerOpen) {
+            WinJS.log("Drawer is already closed.", "sample", "status");
         }
-        catch (err) {
-            WinJS.log("error caught" + err.message);
+        else {
+            var alarm = _claimedDrawer.closeAlarm;
+
+            // Specifying time periods in milliseconds
+            alarm.alarmTimeout = new Date(30000);
+            alarm.beepDelay = new Date(3000);
+            alarm.beepDuration = new Date(1000);
+            alarm.beepFrequency = 700;
+
+            _claimedDrawer.addEventListener("alarmtimeoutexpired", onAlarmExpired);
+
+            try {
+                alarm.startAsync().then(function (success) {
+                    if (success)
+                        WinJS.log("Successfully waited for drawer close.", "sample", "status");
+                    else
+                        WinJS.log("Failed to wait for drawer close.", "sample", "error");
+                });
+            }
+            catch (err) {
+                WinJS.log("error caught" + err.message);
+            }
         }
 
     }

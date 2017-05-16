@@ -42,7 +42,7 @@ namespace Microsoft.SDKSamples.Kitchen
     }
 
     [version(1.0), uuid(699B1394-3CEB-4A14-AE23-EFEC518B088B), exclusiveto(BreadBakedEventArgs)]
-    interface IBreakBakedEventArgs : IInspectable
+    interface IBreadBakedEventArgs : IInspectable
     {
         [propget] HRESULT Bread([out, retval] Bread** value);
     }
@@ -72,7 +72,7 @@ namespace Microsoft.SDKSamples.Kitchen
     [version(1.0)]
     runtimeclass BreadBakedEventArgs
     {
-        [default] interface IBreakBakedEventArgs;
+        [default] interface IBreadBakedEventArgs;
     }
 
     [version(1.0), activatable(1.0), activatable(IOvenFactory, 1.0)]
