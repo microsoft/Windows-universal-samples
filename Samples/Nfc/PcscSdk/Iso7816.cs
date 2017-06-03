@@ -170,13 +170,15 @@ namespace Iso7816
                         throw new Exception("Invalid length for TLV response");
 
                     valueLength = reader.ReadByte();
-                    lengthLength = 1;
 
                     if ((valueLength & TAG_LENGTH_MULTI_BYTE_MASK) == TAG_LENGTH_MULTI_BYTE_MASK)
-                        lengthLength += (valueLength & ~TAG_LENGTH_MULTI_BYTE_MASK);
+                    {
+                        lengthLength = 1 + (valueLength & ~TAG_LENGTH_MULTI_BYTE_MASK);
 
-                    while (--lengthLength > 0)
-                        valueLength = (valueLength << 8) | reader.ReadByte();
+                        valueLength = 0;
+                        while (--lengthLength > 0)
+                            valueLength = (valueLength << 8) | reader.ReadByte();
+                    }
 
                     while (valueLength != 0 && valueLength-- > 0)
                         value.WriteByte(reader.ReadByte());
