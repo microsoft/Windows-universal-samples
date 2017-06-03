@@ -24,9 +24,9 @@ namespace Iso7816
     {
         public ApduCommand(byte cla, byte ins, byte p1, byte p2, byte[] commandData, byte? le)
         {
-            if (commandData != null && commandData.Length > 254)
+            if (commandData != null && commandData.Length > 0xFFFF)
             {
-                throw new NotImplementedException();
+                throw new Exception("CommandData exceeded max length.");
             }
             CLA = cla;
             INS = ins;
@@ -83,6 +83,11 @@ namespace Iso7816
 
                 if (CommandData != null && CommandData.Length > 0)
                 {
+                    if (CommandData.Length > 0xFF)
+                    {
+                        writer.WriteByte(0x00);
+                        writer.WriteByte((byte)(CommandData.Length >> 8));
+                    }
                     writer.WriteByte((byte)CommandData.Length);
                     writer.WriteBytes(CommandData);
                 }
