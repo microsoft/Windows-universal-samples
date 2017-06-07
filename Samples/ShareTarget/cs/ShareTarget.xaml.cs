@@ -292,13 +292,16 @@ namespace SDKTemplate
                                 foreach (KeyValuePair<string, RandomAccessStreamReference> item in this.sharedResourceMap)
                                 {
                                     var stream = await item.Value.OpenReadAsync();
+                                    if (!stream.ContentType.Contains("image/"))
+                                        continue;
                                     var reader = new DataReader(stream.GetInputStreamAt(0));
                                     await reader.LoadAsync((uint)stream.Size);
                                     byte[] byteArray = new byte[stream.Size];
                                     reader.ReadBytes(byteArray);
-                                    String base64String = "'data:image/gif;base64," + Convert.ToBase64String(byteArray) + "'";
+                                    String base64String = "<img src ='data:image/gif;base64," + Convert.ToBase64String(byteArray) + "'";
+                                    String replaceTarget = "<img src=" + item.Key;
 
-                                    htmlFragment = htmlFragment.Replace(item.Key, base64String);
+                                    htmlFragment = htmlFragment.Replace(replaceTarget, base64String);
                                 }
                             }
 
