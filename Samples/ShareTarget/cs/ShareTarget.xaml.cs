@@ -16,6 +16,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.DataTransfer.ShareTarget;
 using Windows.Data.Json;
+using Windows.Foundation;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI;
@@ -28,9 +29,35 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.Web;
 
 namespace SDKTemplate
 {
+    public sealed class StreamUriResolver : IUriToStreamResolver
+    {
+        public IAsyncOperation<IInputStream> UriToStreamAsync(Uri uri)
+        {
+            string path = uri.AbsolutePath;
+            return GetContentAsync(path).AsAsyncOperation();
+        }
+
+        private async Task<IInputStream> GetContentAsync(string URIPath)
+        {
+            try
+            {
+                Uri localUri = new Uri("ms-appdata:///temp/folder/" + URIPath);
+                StorageFile f = await StorageFile.GetFileFromApplicationUriAsync(localUri);
+                IRandomAccessStream stream = await f.OpenAsync(FileAccessMode.Read);
+                return stream.GetInputStreamAt(0);
+            }
+            catch (Exception)
+            {
+                System.Diagnostics.Debug.WriteLine("Invalid URI");
+            }
+            return null;
+        }
+    }
+
     public sealed partial class ShareTarget : Page
     {
         ShareOperation shareOperation;
@@ -292,20 +319,35 @@ namespace SDKTemplate
                                 foreach (KeyValuePair<string, RandomAccessStreamReference> item in this.sharedResourceMap)
                                 {
                                     var stream = await item.Value.OpenReadAsync();
-                                    if (!stream.ContentType.Contains("image/"))
+                                    String strContentType = stream.ContentType;
+
+                                    if (!strContentType.StartsWith("image/"))
                                         continue;
+
+                                    int indexOfComma = strContentType.IndexOf(",");
+                                    String strImageType;
+
+                                    if (indexOfComma == -1)
+                                        strImageType = strContentType;
+                                    else
+                                        strImageType = strContentType.Substring(0, indexOfComma);
+
                                     var reader = new DataReader(stream.GetInputStreamAt(0));
                                     await reader.LoadAsync((uint)stream.Size);
                                     byte[] byteArray = new byte[stream.Size];
                                     reader.ReadBytes(byteArray);
-                                    String base64String = "<img src ='data:image/gif;base64," + Convert.ToBase64String(byteArray) + "'";
-                                    String replaceTarget = "<img src=" + item.Key;
+                                    String base64String = "'data:" + strImageType + ";base64," + Convert.ToBase64String(byteArray) + "'";
 
-                                    htmlFragment = htmlFragment.Replace(replaceTarget, base64String);
+                                    htmlFragment = htmlFragment.Replace(item.Key, base64String);
                                 }
                             }
 
-                            ShareWebView.NavigateToString("<html><body>" + htmlFragment + "</body></html>");
+                            var folder = await ApplicationData.Current.TemporaryFolder.CreateFolderAsync("folder", CreationCollisionOption.OpenIfExists);
+                            var file = await folder.CreateFileAsync("index.html", CreationCollisionOption.OpenIfExists);
+                            await FileIO.WriteTextAsync(file, htmlFragment);
+
+                            var uri = ShareWebView.BuildLocalStreamUri("InternalAssets", "index.html");
+                            ShareWebView.NavigateToLocalStreamUri(uri, new StreamUriResolver());
                         }
                         else
                         {
