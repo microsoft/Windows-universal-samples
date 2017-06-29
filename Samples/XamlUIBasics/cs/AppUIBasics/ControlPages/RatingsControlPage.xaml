@@ -7,7 +7,7 @@
         <local:ControlExample x:Name="Example1" HeaderText="A simple RatingsControl">
             <local:ControlExample.Example>
                 <StackPanel>
-                    <controls:RatingsControl x:Name="ratingsControl1"
+                    <controls:RatingControl x:Name="ratingsControl1"
                             IsClearEnabled="{x:Bind clearEnabledCheck.IsChecked.Value, Mode=OneWay}"
                             IsReadOnly="{x:Bind readOnlyCheck.IsChecked.Value, Mode=OneWay}" HorizontalAlignment="Left" />
                     <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
@@ -32,7 +32,7 @@
                 <StackPanel>
                     <Slider x:Name="slider" Header="Use slider to change placeholder value" Minimum="0" Maximum="5"
                             StepFrequency="0.5" SmallChange="0.5" IsFocusEngagementEnabled="False"/>
-                    <controls:RatingsControl x:Name="ratingsControl2" HorizontalAlignment="Left"
+                    <controls:RatingControl x:Name="ratingsControl2" HorizontalAlignment="Left"
                             PlaceholderValue="{x:Bind slider.Value, Mode=TwoWay}" />
                 </StackPanel>
             </local:ControlExample.Example>

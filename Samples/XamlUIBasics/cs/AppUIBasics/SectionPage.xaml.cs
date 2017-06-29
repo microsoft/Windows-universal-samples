@@ -84,7 +84,7 @@ namespace AppUIBasics
             var group = await ControlInfoDataSource.GetGroupAsync((String)e.NavigationParameter);
             Group = group;
             Bindings.Update();
-            ((NavigationMenuItem)NavigationRootPage.Current.NavigationView.MenuItems.FirstOrDefault(m => m.Tag?.ToString() == group.UniqueId)).IsSelected = true;
+            NavigationRootPage.Current.NavigationView.MenuItems.Cast<NavigationViewItem>().FirstOrDefault(m => m.Tag?.ToString() == group.UniqueId).IsSelected = true;
             NavigationRootPage.Current.NavigationView.Header = group?.Title;
         }
 
