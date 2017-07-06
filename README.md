@@ -229,7 +229,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/BasicInput">Basic input</a></td>
   <td><a href="Samples/ComplexInk">Complex inking</a></td>
-  <td><a href="Samples/InkAnalysis">Ink analysis/a></td>
+  <td><a href="Samples/InkAnalysis">Ink analysis</a></td>
  </tr>
  <tr>
   <td><a href="Samples/Ink">Inking</a></td>
