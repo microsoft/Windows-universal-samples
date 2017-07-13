@@ -13,7 +13,7 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <CheckBox Content="Show Settings button" x:Name="settingsCheck" />
-                    <controls:NavigationView Loaded="NavigationView_Loaded" Margin="0,12,0,0" Grid.Row="1" SettingsInvoked="NavigationView_SettingsInvoked"
+                    <controls:NavigationView Loaded="NavigationView_Loaded" Margin="0,12,0,0" Grid.Row="1" SelectionChanged="NavigationView_SelectionChanged"
                                              x:Name="nvSample"
                             IsSettingsVisible="{Binding ElementName=settingsCheck,Path=IsChecked}" IsTabStop="False"
                             Header="This is header text.">

@@ -170,7 +170,7 @@ namespace AppUIBasics
         {
             navigationHelper.OnNavigatedTo(e);
 
-            var firstMenuItem = (NavigationMenuItem)NavigationRootPage.Current.NavigationView.MenuItems.FirstOrDefault();
+            var firstMenuItem = (NavigationViewItem)NavigationRootPage.Current.NavigationView.MenuItems.FirstOrDefault();
             if (firstMenuItem != null)
                 firstMenuItem.IsSelected = true;
 
