@@ -90,8 +90,8 @@ namespace AppUIBasics
 
         private RootFrameNavigationHelper rootFrameNavigationHelper;
 
-        private NavigationMenuItem AllControlsMenuItem;
-        public NavigationMenuItem NewControlsMenuItem;
+        private NavigationViewItem AllControlsMenuItem;
+        public NavigationViewItem NewControlsMenuItem;
 
         public NavigationRootPage()
         {
@@ -150,9 +150,8 @@ namespace AppUIBasics
         {
             foreach (var g in Groups)
             {
-                var item = new NavigationMenuItem() { Text = g.Title, Tag = g.UniqueId, DataContext = g };
+                var item = new NavigationViewItem() { Content = g.Title, Tag = g.UniqueId, DataContext = g };
                 AutomationProperties.SetName(item, g.Title);
-                item.Invoked += NavigationMenuItem_Invoked;
                 if (g.ImagePath.ToLowerInvariant().EndsWith(".png"))
                 {
                     item.Icon = new BitmapIcon() { UriSource = new Uri(g.ImagePath, UriKind.RelativeOrAbsolute) };
@@ -167,10 +166,10 @@ namespace AppUIBasics
                 }
                 NavigationViewControl.MenuItems.Add(item);
             }
-            this.AllControlsMenuItem = (NavigationMenuItem)NavigationViewControl.MenuItems[0];
+            this.AllControlsMenuItem = (NavigationViewItem)NavigationViewControl.MenuItems[0];
             AllControlsMenuItem.Loaded += AllControlsMenuItem_Loaded;
 
-            this.NewControlsMenuItem = (NavigationMenuItem)NavigationViewControl.MenuItems[1];
+            this.NewControlsMenuItem = (NavigationViewItem)NavigationViewControl.MenuItems[1];
         }
 
         private void NavigationRootPage_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -192,7 +191,7 @@ namespace AppUIBasics
             BackButtonGrid.Visibility = Visibility.Visible;
             DeviceFamily = DeviceType.Desktop;
             XboxContentSafeRect.Visibility = Visibility.Collapsed;
-            NavigationViewControl.GetDescendantsOfType<NavigationMenuItem>().Where(c => c.Name == "SettingsNavPaneItem").First().Margin = new Thickness(0);
+            NavigationViewControl.GetDescendantsOfType<NavigationViewItem>().Where(c => c.Name == "SettingsNavPaneItem").First().Margin = new Thickness(0);
 
         }
 
@@ -204,7 +203,7 @@ namespace AppUIBasics
                 DeviceFamily = DeviceType.Mobile;
                 BackButtonGrid.Visibility = Visibility.Collapsed;
                 XboxContentSafeRect.Visibility = Visibility.Collapsed;
-                NavigationViewControl.GetDescendantsOfType<NavigationMenuItem>().Where(c => c.Name == "SettingsNavPaneItem").First().Margin = new Thickness(0);
+                NavigationViewControl.GetDescendantsOfType<NavigationViewItem>().Where(c => c.Name == "SettingsNavPaneItem").First().Margin = new Thickness(0);
 
             }
             //xbox
@@ -213,7 +212,7 @@ namespace AppUIBasics
                 DeviceFamily = DeviceType.Xbox;
                 BackButtonGrid.Visibility = Visibility.Collapsed;
                 XboxContentSafeRect.Visibility = Visibility.Visible;
-                NavigationViewControl.GetDescendantsOfType<NavigationMenuItem>().Where(c => c.Name == "SettingsNavPaneItem").First().Margin = new Thickness(0, 0, 0, 40);
+                NavigationViewControl.GetDescendantsOfType<NavigationViewItem>().Where(c => c.Name == "SettingsNavPaneItem").First().Margin = new Thickness(0, 0, 0, 40);
 
             }
         }
@@ -226,7 +225,7 @@ namespace AppUIBasics
 
             if (NavigationRootPage.Current != null)
             {
-                var menuItem = (NavigationMenuItem)NavigationRootPage.Current.NavigationView.MenuItems.FirstOrDefault();
+                var menuItem = (NavigationViewItem)NavigationRootPage.Current.NavigationView.MenuItems.FirstOrDefault();
                 if (menuItem != null)
                     menuItem.IsSelected = true;
             }
@@ -235,27 +234,28 @@ namespace AppUIBasics
                 GroupsLoaded(this, new EventArgs());
         }
 
-        private void NavigationView_SettingsInvoked(NavigationView sender, object args)
+        private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            rootFrame.Navigate(typeof(SettingsPage));
-        }
-
-        private void NavigationMenuItem_Invoked(NavigationMenuItem sender, object args)
-        {
-            if (sender == AllControlsMenuItem)
+            if (args.IsSettingsSelected)
+            {
+                rootFrame.Navigate(typeof(SettingsPage));
+            }
+            else if (args.SelectedItem == AllControlsMenuItem)
             {
                 rootFrame.Navigate(typeof(MainPage));
             }
-            else if (sender == NewControlsMenuItem)
+            else if (args.SelectedItem == NewControlsMenuItem)
             {
                 rootFrame.Navigate(typeof(NewControlsPage));
             }
             else
             {
-                var itemId = ((ControlInfoDataGroup)sender.DataContext).UniqueId;
+                var selectedItem = (NavigationViewItem)args.SelectedItem;
+                var itemId = ((ControlInfoDataGroup)selectedItem.DataContext).UniqueId;
                 rootFrame.Navigate(typeof(SectionPage), itemId);
             }
         }
+
         private void rootFrame_Navigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
             SetCustomBackButtonVisibility();

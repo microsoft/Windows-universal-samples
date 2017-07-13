@@ -123,7 +123,7 @@ namespace AppUIBasics
             if (e.Key == Windows.System.VirtualKey.Up)
             {
                 var nextElement = FocusManager.FindNextElement(FocusNavigationDirection.Up);
-                if (nextElement.GetType() == typeof(NavigationMenuItem))
+                if (nextElement.GetType() == typeof(NavigationViewItem))
                 {
                     pageHeader.Focus(FocusState.Programmatic);
                 }

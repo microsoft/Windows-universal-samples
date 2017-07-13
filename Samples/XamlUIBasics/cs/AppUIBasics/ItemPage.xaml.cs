@@ -132,7 +132,7 @@ namespace AppUIBasics
                 }
 
                 ControlInfoDataGroup group = await ControlInfoDataSource.GetGroupFromItemAsync((String)e.NavigationParameter);
-                var menuItem = ((NavigationMenuItem)NavigationRootPage.Current.NavigationView.MenuItems.FirstOrDefault(m => m.Tag?.ToString() == group.UniqueId));
+                var menuItem = NavigationRootPage.Current.NavigationView.MenuItems.Cast<NavigationViewItem>().FirstOrDefault(m => m.Tag?.ToString() == group.UniqueId);
                 if (menuItem != null)
                 {
                     menuItem.IsSelected = true;
@@ -285,7 +285,7 @@ namespace AppUIBasics
             if (e.Key == VirtualKey.Up)
             {
                 var nextElement = FocusManager.FindNextElement(FocusNavigationDirection.Up);
-                if (nextElement.GetType() == typeof(NavigationMenuItem))
+                if (nextElement.GetType() == typeof(NavigationViewItem))
                 {
                     NavigationRootPage.Current.PageHeader.Focus(FocusState.Programmatic);
                 }
