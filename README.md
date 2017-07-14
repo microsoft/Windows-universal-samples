@@ -342,6 +342,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/IoT-SPI">Serial Peripheral Interface (SPI)</a></td>
   <td><a href="Samples/SimpleOrientationSensor">Simple orientation sensor</a></td>
+  <td><a href="Samples/LineDisplay">Line display</a></td>
  </tr>
 </table>
 
