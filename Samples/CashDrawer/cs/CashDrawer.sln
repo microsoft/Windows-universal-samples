@@ -1,8 +1,8 @@
 ﻿
 
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22512.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashDrawer", "CashDrawer.csproj", "{64C5F129-24C9-5920-B23B-AFABE7F18C42}"
 EndProject

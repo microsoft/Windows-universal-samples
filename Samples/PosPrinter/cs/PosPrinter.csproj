@@ -7,7 +7,7 @@
     <ProjectGuid>{D22D4718-85D7-59F5-812D-0BF7349309E3}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PosPrinterSample</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>PosPrinter</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
@@ -100,6 +100,9 @@
       <Link>DeviceHelpers.cs</Link>
     </Compile>
     <Compile Include="SampleConfiguration.cs" />
+    <Compile Include="Scenario4_BitmapReceipt.xaml.cs">
+      <DependentUpon>Scenario4_BitmapReceipt.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Scenario1_ReceiptPrinter.xaml.cs">
       <DependentUpon>Scenario1_ReceiptPrinter.xaml</DependentUpon>
     </Compile>
@@ -126,15 +129,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_ReceiptPrinter.xaml">
+    <Page Include="..\shared\Scenario4_BitmapReceipt.xaml">
+      <Link>Scenario4_BitmapReceipt.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_ErrorHandling.xaml">
+    <Page Include="..\shared\Scenario1_ReceiptPrinter.xaml">
+      <Link>Scenario1_ReceiptPrinter.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3_MultipleReceipt.xaml">
+    <Page Include="..\shared\Scenario2_ErrorHandling.xaml">
+      <Link>Scenario2_ErrorHandling.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario3_MultipleReceipt.xaml">
+      <Link>Scenario3_MultipleReceipt.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -145,6 +156,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\..\SharedContent\media\Samples\coffee-logo.png">
+      <Link>Assets\coffee-logo.png</Link>
+    </Content>
     <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>

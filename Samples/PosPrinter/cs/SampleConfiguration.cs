@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Devices.PointOfService;
 using Windows.UI.Xaml.Controls;
-using PosPrinterSample;
+using SDKTemplate;
 
 namespace SDKTemplate
 {
@@ -26,7 +26,8 @@ namespace SDKTemplate
         {
             new Scenario() { Title="Receipt Printer", ClassType=typeof(Scenario1_ReceiptPrinter)},
             new Scenario() { Title="Receipt Printer Error Handling", ClassType=typeof(Scenario2_ErrorHandling)},
-            new Scenario() { Title="Multiple Receipt Printers", ClassType=typeof(Scenario3_MultipleReceipt)}
+            new Scenario() { Title="Multiple Receipt Printers", ClassType=typeof(Scenario3_MultipleReceipt)},
+            new Scenario() { Title="Bitmap Receipt", ClassType=typeof(Scenario4_BitmapReceipt), }
         };
     }
 

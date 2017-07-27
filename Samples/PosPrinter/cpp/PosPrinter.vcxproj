@@ -147,13 +147,16 @@
     <ClInclude Include="..\..\..\SharedContent\cpp\DeviceHelpers.h" />
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_ReceiptPrinter.xaml.h">
-      <DependentUpon>Scenario1_ReceiptPrinter.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_ReceiptPrinter.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario2_ErrorHandling.xaml.h">
-      <DependentUpon>Scenario2_ErrorHandling.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_ErrorHandling.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario3_MultipleReceipt.xaml.h">
-      <DependentUpon>Scenario3_MultipleReceipt.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_MultipleReceipt.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario4_BitmapReceipt.xaml.h">
+      <DependentUpon>..\shared\Scenario4_BitmapReceipt.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -163,12 +166,13 @@
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_ReceiptPrinter.xaml" />
-    <Page Include="Scenario2_ErrorHandling.xaml" />
-    <Page Include="Scenario3_MultipleReceipt.xaml" />
+    <Page Include="..\shared\Scenario1_ReceiptPrinter.xaml" />
+    <Page Include="..\shared\Scenario2_ErrorHandling.xaml" />
+    <Page Include="..\shared\Scenario3_MultipleReceipt.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
+    <Page Include="..\shared\Scenario4_BitmapReceipt.xaml" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -192,16 +196,22 @@
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="Scenario1_ReceiptPrinter.xaml.cpp">
-      <DependentUpon>Scenario1_ReceiptPrinter.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_ReceiptPrinter.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario2_ErrorHandling.xaml.cpp">
-      <DependentUpon>Scenario2_ErrorHandling.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_ErrorHandling.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario3_MultipleReceipt.xaml.cpp">
-      <DependentUpon>Scenario3_MultipleReceipt.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_MultipleReceipt.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario4_BitmapReceipt.xaml.cpp">
+      <DependentUpon>..\shared\Scenario4_BitmapReceipt.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\Samples\coffee-logo.png">
+      <Link>Assets\coffee-logo.png</Link>
+    </Image>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Image>
