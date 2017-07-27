@@ -42,7 +42,7 @@ void SavingDataReason::OnNavigatingFrom(NavigatingCancelEventArgs^ e)
 
 void SavingDataReason::OnSuspending(Object^ sender, SuspendingEventArgs^ args)
 {
-    SuspendingDeferral^ suspendDeferral = args->SuspendingOperation->GetDeferral();
+    suspendDeferral = args->SuspendingOperation->GetDeferral();
 
     rootPage->NotifyUser("", NotifyType::StatusMessage);
 
@@ -91,11 +91,15 @@ void SavingDataReason::OnSuspending(Object^ sender, SuspendingEventArgs^ args)
             });
             break;
         }
-    }).then([this, session, revokedToken, suspendDeferral]()
+    }).then([this, session, revokedToken]()
     {
         session->Revoked -= revokedToken;
         delete session;
-        suspendDeferral->Complete();
+        if (suspendDeferral != nullptr)
+        {
+            suspendDeferral->Complete();
+            suspendDeferral = nullptr;
+        }
     });
 }
 
@@ -118,6 +122,12 @@ void SavingDataReason::ExtendedExecutionSessionRevoked(Object^ sender, ExtendedE
             MainPage::DisplayToast("Extended execution revoked due to system policy.");
             rootPage->NotifyUser("Extended execution revoked due to system policy.", NotifyType::StatusMessage);
             break;
+        }
+
+        if (suspendDeferral != nullptr)
+        {
+            suspendDeferral->Complete();
+            suspendDeferral = nullptr;
         }
     }));
 }
