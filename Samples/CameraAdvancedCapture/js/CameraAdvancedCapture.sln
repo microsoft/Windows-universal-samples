@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{89201536-2F87-4126-8592-2DE4CEFACA7E}") = "CameraAdvancedCapture", "CameraAdvancedCapture.jsproj", "{479DFEA6-5106-5E08-A135-FE45391C9A5A}"
 EndProject

@@ -36,6 +36,12 @@ namespace RandomNumberService
                 serviceDeferral.Complete();
                 serviceDeferral = null;
             }
+
+            if (connection != null)
+            {
+                connection.Dispose();
+                connection = null;
+            }
         }
 
         async void OnRequestReceived(AppServiceConnection sender, AppServiceRequestReceivedEventArgs args)

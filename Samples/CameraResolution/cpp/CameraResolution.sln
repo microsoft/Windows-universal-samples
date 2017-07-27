@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22808.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{65CFCD43-DEE5-43F7-833F-CE9BDCDE5471}") = "CameraResolution", "CameraResolution.vcxproj", "{1F8637EE-0143-5348-9DB9-D79ACB323394}"
 EndProject

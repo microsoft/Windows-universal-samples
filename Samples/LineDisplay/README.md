@@ -1,6 +1,6 @@
 <!---
   category: DevicesSensorsAndPower
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620015
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=851025
 --->
 
 # Line display sample

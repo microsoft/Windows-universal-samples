@@ -24,7 +24,8 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
 {
     { "Receipt Printer", "SDKTemplate.Scenario1_ReceiptPrinter" },
     { "Receipt Printer Error Handling", "SDKTemplate.Scenario2_ErrorHandling" },
-    { "Multiple Receipt Printers", "SDKTemplate.Scenario3_MultipleReceipt" }
+    { "Multiple Receipt Printers", "SDKTemplate.Scenario3_MultipleReceipt" },
+    { "Bitmap Receipt", "SDKTemplate.Scenario4_BitmapReceipt" },
 };
 
 task<PosPrinter^> DeviceHelpers::GetFirstReceiptPrinterAsync(PosConnectionTypes connectionTypes)

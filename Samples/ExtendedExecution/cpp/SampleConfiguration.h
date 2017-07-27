@@ -23,7 +23,7 @@ namespace SDKTemplate
         {
             Platform::String^ get()
             {
-                return "Resize app view";
+                return "Extended Execution";
             }
         }
 

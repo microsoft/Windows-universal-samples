@@ -22,7 +22,7 @@ Namespace Global.SDKTemplate
 
         Public Const FEATURE_NAME As String = "Background tasks"
 
-        Public ReadOnly Property scenarios As New List(Of Scenario) From {New Scenario() With {.Title = "Background Task", .ClassType = GetType(SampleBackgroundTask)}, New Scenario() With {.Title = "Background Task with Condition", .ClassType = GetType(SampleBackgroundTaskWithCondition)}, New Scenario() With {.Title = "Servicing Complete Task", .ClassType = GetType(ServicingCompleteTask)}, New Scenario() With {.Title = "Background Task with Time Trigger", .ClassType = GetType(TimeTriggeredTask)}, New Scenario() With {.Title = "Background Task with Application Trigger", .ClassType = GetType(ApplicationTriggerTask)}}
+        Public ReadOnly Property scenarios As New List(Of Scenario) From {New Scenario() With {.Title = "Background Task", .ClassType = GetType(SampleBackgroundTask)}, New Scenario() With {.Title = "Background Task with Condition", .ClassType = GetType(SampleBackgroundTaskWithCondition)}, New Scenario() With {.Title = "Servicing Complete Task", .ClassType = GetType(ServicingCompleteTask)}, New Scenario() With {.Title = "Background Task with Time Trigger", .ClassType = GetType(TimeTriggeredTask)}, New Scenario() With {.Title = "Background Task with Application Trigger", .ClassType = GetType(ApplicationTriggerTask)}, New Scenario() With {.Title = "Grouped Background Task", .ClassType = GetType(GroupedBackgroundTask)}}
     End Class
 
     Public Class Scenario
@@ -73,6 +73,16 @@ Namespace Global.SDKTemplate
 
         Public Shared ApplicationTriggerTaskRegistered As Boolean = False
 
+        Public Const GroupedBackgroundTaskName As String = "GroupedBackgroundTask"
+
+        Public Const BackgroundTaskGroupId As String = "3F2504E0-5F89-41D3-9A0C-0405E82C3333"
+
+        Public Const BackgroundTaskGroupFriendlyName As String = "Background Task Group"
+
+        Public Shared GroupedBackgroundTaskProgress As String = ""
+
+        Public Shared GroupedBackgroundTaskRegistered As Boolean = False
+
         ''' <summary>
         ''' Register a background task with the specified taskEntryPoint, name, trigger,
         ''' and condition (optional).
@@ -81,7 +91,7 @@ Namespace Global.SDKTemplate
         ''' <param name="name">A name for the background task.</param>
         ''' <param name="trigger">The trigger for the background task.</param>
         ''' <param name="condition">An optional conditional event that must be true for the task to fire.</param>
-        Public Shared Function RegisterBackgroundTask(taskEntryPoint As String, name As String, trigger As IBackgroundTrigger, condition As IBackgroundCondition) As BackgroundTaskRegistration
+        Public Shared Function RegisterBackgroundTask(taskEntryPoint As String, name As String, trigger As IBackgroundTrigger, condition As IBackgroundCondition, Optional group As BackgroundTaskRegistrationGroup = Nothing) As BackgroundTaskRegistration
             If TaskRequiresBackgroundAccess(name) Then
                 ' If the user denies access, the task will not run.
                 Dim requestTask = BackgroundExecutionManager.RequestAccessAsync()
@@ -94,6 +104,10 @@ Namespace Global.SDKTemplate
             If condition IsNot Nothing Then
                 builder.AddCondition(condition)
                 builder.CancelOnConditionLoss = True
+            End If
+
+            If group IsNot Nothing Then
+                builder.TaskGroup = group
             End If
 
             Dim task As BackgroundTaskRegistration = builder.Register()
@@ -110,15 +124,41 @@ Namespace Global.SDKTemplate
         ''' Unregister background tasks with specified name.
         ''' </summary>
         ''' <param name="name">Name of the background task to unregister.</param>
-        Public Shared Sub UnregisterBackgroundTasks(name As String)
-            For Each cur In BackgroundTaskRegistration.AllTasks
-                If cur.Value.Name = name Then
-                    cur.Value.Unregister(True)
-                End If
-            Next
+        Public Shared Sub UnregisterBackgroundTasks(name As String, Optional group As BackgroundTaskRegistrationGroup = Nothing)
+
+            If group IsNot Nothing Then
+                For Each cur In group.AllTasks
+                    If cur.Value.Name = name Then
+                        cur.Value.Unregister(True)
+                    End If
+                Next
+            Else
+                For Each cur In BackgroundTaskRegistration.AllTasks
+                    If cur.Value.Name = name Then
+                        cur.Value.Unregister(True)
+                    End If
+                Next
+            End If
 
             UpdateBackgroundTaskRegistrationStatus(name, False)
         End Sub
+
+        ''' <summary>
+        ''' Retrieve a registered background task group. If no group is registered with the given id,
+        ''' then create a new one and return it.
+        ''' </summary>
+        ''' <param name="id"></param>
+        ''' <param name="groupName"></param>
+        ''' <returns>The task group associated with the given id</returns>
+        Public Shared Function GetTaskGroup(id As String, groupName As String) As BackgroundTaskRegistrationGroup
+            Dim group = BackgroundTaskRegistration.GetTaskGroup(id)
+
+            If group Is Nothing Then
+                group = New BackgroundTaskRegistrationGroup(id, groupName)
+            End If
+
+            Return group
+        End Function
 
         ''' <summary>
         ''' Store the registration status of a background task with a given name.
@@ -137,7 +177,9 @@ Namespace Global.SDKTemplate
                     TimeTriggeredTaskRegistered = registered
                      Case ApplicationTriggerTaskName
                     ApplicationTriggerTaskRegistered = registered
-                     End Select
+                Case GroupedBackgroundTaskName
+                    GroupedBackgroundTaskRegistered = registered
+            End Select
         End Sub
 
         ''' <summary>
@@ -158,7 +200,9 @@ Namespace Global.SDKTemplate
                     registered = TimeTriggeredTaskRegistered
                      Case ApplicationTriggerTaskName
                     registered = ApplicationTriggerTaskRegistered
-                     End Select
+                Case GroupedBackgroundTaskName
+                    registered = GroupedBackgroundTaskRegistered
+            End Select
 
             Dim status = If(registered, "Registered", "Unregistered")
             Dim taskStatus As Object = Nothing

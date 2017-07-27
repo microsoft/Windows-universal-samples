@@ -162,6 +162,9 @@
     <ClInclude Include="Scenario5_ApplicationTriggerTask.xaml.h">
       <DependentUpon>..\..\shared\Scenario5_ApplicationTriggerTask.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario6_GroupedTask.xaml.h">
+      <DependentUpon>..\..\shared\Scenario6_GroupedTask.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\..\SharedContent\xaml\App.xaml">
@@ -175,6 +178,7 @@
     <Page Include="..\..\shared\Scenario3_ServicingCompleteTask.xaml" />
     <Page Include="..\..\shared\Scenario4_TimeTriggeredTask.xaml" />
     <Page Include="..\..\shared\Scenario5_ApplicationTriggerTask.xaml" />
+    <Page Include="..\..\shared\Scenario6_GroupedTask.xaml" />
     <Page Include="..\..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -214,6 +218,9 @@
     </ClCompile>
     <ClCompile Include="Scenario5_ApplicationTriggerTask.xaml.cpp">
       <DependentUpon>..\..\shared\Scenario5_ApplicationTriggerTask.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario6_GroupedTask.xaml.cpp">
+      <DependentUpon>..\..\shared\Scenario6_GroupedTask.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

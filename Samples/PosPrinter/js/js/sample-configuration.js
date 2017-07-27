@@ -17,7 +17,8 @@
     var scenarios = [
         { url: "/html/Scenario1_ReceiptPrinter.html", title: "Receipt Printer" },
         { url: "/html/Scenario2_ErrorHandling.html", title: "Error Handling" },
-        { url: "/html/Scenario3_MultipleReceipt.html", title: "Multiple Receipt Printers" }
+        { url: "/html/Scenario3_MultipleReceipt.html", title: "Multiple Receipt Printers" },
+        { url: "/html/Scenario4_BitmapReceipt.html", title: "Bitmap Receipt" },
     ];
 
     var PosPrinter = Windows.Devices.PointOfService.PosPrinter;

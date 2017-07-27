@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22808.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nfc", "Nfc\Nfc.csproj", "{268889BC-42C4-5D16-8DDE-5EB2CD4C9AF6}"
 	ProjectSection(ProjectDependencies) = postProject
