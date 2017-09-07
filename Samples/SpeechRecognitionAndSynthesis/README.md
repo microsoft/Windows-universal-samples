@@ -28,6 +28,7 @@ Specifically, this sample covers the following scenarios:
 10. Pausing and resuming continuous recognition 
 
 In addition, translations are shown for speech recognition and text-to-speech for supported languages. Translations provided may not be using ideal phrasing and are provided for demonstration purposes only.
+Scenarios 3-4-7 don't work without internet connectivity due to the use of the pre-defined grammar provided by a web service with the class [SpeechRecognitionTopicConstraint](https://docs.microsoft.com/en-us/uwp/api/windows.media.speechrecognition.speechrecognitiontopicconstraint)
 
 ## Privacy Policy
 
@@ -79,5 +80,4 @@ The next steps depend on whether you just want to deploy the sample or you want 
 ### Known Issues
 
  - The sample requires Media Player components to be available. If media player has been uninstalled, or when using an 'N' SKU of windows without media player components, the sample will not function. Note, however, that Speech Synthesis and Speech Recognition do not require media player directly, but other components of the samples do (Such as playback of synthesized text, or checking to see if a microphone is present and the app has permission to use it.) Developers should make sure their app is aware of it and handles this gracefully.
- 
  
