@@ -11,10 +11,10 @@
 //*********************************************************
 -->
 <Application
-    x:Class="SDKTemplate.App"
+    x:Class="D2DAdvancedColorImages.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SDKTemplate"
-    RequestedTheme="Light">
+    xmlns:local="using:D2DAdvancedColorImages"
+    RequestedTheme="Dark">
 
 </Application>

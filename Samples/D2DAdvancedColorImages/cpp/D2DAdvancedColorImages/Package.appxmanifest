@@ -38,9 +38,33 @@
       <Extensions>
         <uap:Extension Category="windows.fileTypeAssociation">
           <uap:FileTypeAssociation Name=".jxr">
-            <uap:DisplayName>JPEG XR File</uap:DisplayName>
+            <uap:DisplayName>JPEG XR image</uap:DisplayName>
             <uap:SupportedFileTypes>
               <uap:FileType ContentType="image/jxr">.jxr</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name=".jpg">
+            <uap:DisplayName>JPEG image</uap:DisplayName>
+            <uap:SupportedFileTypes>
+              <uap:FileType ContentType="image/jpg">.jpg</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name=".tif">
+            <uap:DisplayName>TIFF image</uap:DisplayName>
+            <uap:SupportedFileTypes>
+              <uap:FileType ContentType="image/tif">.tif</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name=".png">
+            <uap:DisplayName>PNG image</uap:DisplayName>
+            <uap:SupportedFileTypes>
+              <uap:FileType ContentType="image/png">.png</uap:FileType>
             </uap:SupportedFileTypes>
           </uap:FileTypeAssociation>
         </uap:Extension>

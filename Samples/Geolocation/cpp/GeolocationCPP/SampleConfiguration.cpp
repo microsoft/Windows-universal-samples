@@ -14,4 +14,7 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Background position", "SDKTemplate.GeolocationCPP.Scenario3" },
     { "Foreground geofencing", "SDKTemplate.GeolocationCPP.Scenario4" },
     { "Background geofencing", "SDKTemplate.GeolocationCPP.Scenario5" },
+    { "Get last visit", "SDKTemplate.GeolocationCPP.Scenario6" },
+    { "Foreground visit monitoring", "SDKTemplate.GeolocationCPP.Scenario7" },
+    { "Background visit monitoring", "SDKTemplate.GeolocationCPP.Scenario8" },
 };

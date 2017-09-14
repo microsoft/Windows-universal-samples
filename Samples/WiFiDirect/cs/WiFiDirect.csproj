@@ -104,7 +104,9 @@
     <Compile Include="ConnectionSettingsPanel.xaml.cs">
       <DependentUpon>ConnectionSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DispatcherTaskExtensions.cs" />
+    <Compile Include="..\..\..\SharedContent\cs\DispatcherTaskExtensions.cs">
+      <Link>DispatcherTaskExtensions.cs</Link>
+    </Compile>
     <Compile Include="SampleConfiguration.cs" />
     <Compile Include="Scenario1_Advertiser.xaml.cs">
       <DependentUpon>Scenario1_Advertiser.xaml</DependentUpon>

@@ -100,17 +100,14 @@
       <Link>DeviceHelpers.cs</Link>
     </Compile>
     <Compile Include="SampleConfiguration.cs" />
-    <Compile Include="Scenario4_BitmapReceipt.xaml.cs">
-      <DependentUpon>Scenario4_BitmapReceipt.xaml</DependentUpon>
+    <Compile Include="Scenario1_FindClaimEnable.xaml.cs">
+      <DependentUpon>Scenario1_FindClaimEnable.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario1_ReceiptPrinter.xaml.cs">
-      <DependentUpon>Scenario1_ReceiptPrinter.xaml</DependentUpon>
+    <Compile Include="Scenario2_PrintReceipt.xaml.cs">
+      <DependentUpon>Scenario2_PrintReceipt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario2_ErrorHandling.xaml.cs">
-      <DependentUpon>Scenario2_ErrorHandling.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Scenario3_MultipleReceipt.xaml.cs">
-      <DependentUpon>Scenario3_MultipleReceipt.xaml</DependentUpon>
+    <Compile Include="Scenario3_MultipleClaims.xaml.cs">
+      <DependentUpon>Scenario3_MultipleClaims.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -129,23 +126,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario4_BitmapReceipt.xaml">
-      <Link>Scenario4_BitmapReceipt.xaml</Link>
+    <Page Include="..\shared\Scenario1_FindClaimEnable.xaml">
+      <Link>Scenario1_FindClaimEnable.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario1_ReceiptPrinter.xaml">
-      <Link>Scenario1_ReceiptPrinter.xaml</Link>
+    <Page Include="..\shared\Scenario2_PrintReceipt.xaml">
+      <Link>Scenario2_PrintReceipt.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario2_ErrorHandling.xaml">
-      <Link>Scenario2_ErrorHandling.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\shared\Scenario3_MultipleReceipt.xaml">
-      <Link>Scenario3_MultipleReceipt.xaml</Link>
+    <Page Include="..\shared\Scenario3_MultipleClaims.xaml">
+      <Link>Scenario3_MultipleClaims.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

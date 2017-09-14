@@ -2,7 +2,6 @@
 /* Template for items in the ListView */
 .GeofenceBackgroundEventsListViewItemStyle
 {
-    height: 24px;
     width: 400px;
     padding: 4px;
     white-space: nowrap;

@@ -14,7 +14,7 @@
 #include "DirectXPage.xaml.h"
 #include "DirectXHelper.h"
 
-using namespace SDKTemplate;
+using namespace D2DAdvancedColorImages;
 
 using namespace concurrency;
 using namespace DirectX;
@@ -29,13 +29,21 @@ using namespace Windows::Storage::Streams;
 using namespace Windows::UI::Input;
 using namespace Windows::UI::Xaml;
 
-D2DAdvancedColorImages::D2DAdvancedColorImages(const std::shared_ptr<DX::DeviceResources>& deviceResources) :
+D2DAdvancedColorImagesRenderer::D2DAdvancedColorImagesRenderer(
+    const std::shared_ptr<DX::DeviceResources>& deviceResources,
+    IDisplayACStateChanged^ handler
+    ) :
     m_deviceResources(deviceResources),
-    m_imageSize(),
-    m_useToneMapping(true),
-    m_numberOfProfiles(0),
+    m_tonemapperKind(TonemapperKind::Disabled),
+    m_userDisabledScaling(false),
+    m_useTonemapping(true),
+    m_imageInfo{},
+    m_outputDesc{},
     m_zoom(1.0f),
-    m_offset()
+    m_offset(),
+    m_imageColorSpace(DXGI_COLOR_SPACE_CUSTOM),
+    m_whiteLevelScale(1.0f),
+    m_dispStateChangeHandler(handler)
 {
     // Register to be notified if the GPU device is lost or recreated.
     m_deviceResources->RegisterDeviceNotify(this);
@@ -45,45 +53,72 @@ D2DAdvancedColorImages::D2DAdvancedColorImages(const std::shared_ptr<DX::DeviceR
     CreateWindowSizeDependentResources();
 }
 
-D2DAdvancedColorImages::~D2DAdvancedColorImages()
+D2DAdvancedColorImagesRenderer::~D2DAdvancedColorImagesRenderer()
 {
     // Deregister device notification.
     m_deviceResources->RegisterDeviceNotify(nullptr);
 }
 
-void D2DAdvancedColorImages::CreateDeviceIndependentResources()
+void D2DAdvancedColorImagesRenderer::CreateDeviceIndependentResources()
 {
-    // Register the custom effect.
+    // Register the custom tonemapper effects.
     DX::ThrowIfFailed(
-        ToneMapEffect::Register(m_deviceResources->GetD2DFactory())
+        ReinhardEffect::Register(m_deviceResources->GetD2DFactory())
+        );
+
+    DX::ThrowIfFailed(
+        FilmicEffect::Register(m_deviceResources->GetD2DFactory())
         );
 }
 
-void D2DAdvancedColorImages::CreateDeviceDependentResources()
+void D2DAdvancedColorImagesRenderer::CreateDeviceDependentResources()
 {
     // All this app's device-dependent resources also depend on
     // the loaded image, so they are all created in
     // CreateImageDependentResources.
 }
 
-void D2DAdvancedColorImages::ReleaseDeviceDependentResources()
+void D2DAdvancedColorImagesRenderer::ReleaseDeviceDependentResources()
 {
 }
 
 // Whenever the app window is resized or changes displays, this method is used
 // to update the app's sizing and advanced color state.
-void D2DAdvancedColorImages::CreateWindowSizeDependentResources()
+void D2DAdvancedColorImagesRenderer::CreateWindowSizeDependentResources()
 {
-    UpdateAdvancedColorState();
-
-    // In case the window size changed, update the app's image scaling values.
     FitImageToWindow();
+    UpdateAdvancedColorState();
 }
 
-// Reads the provided data stream and decodes a JPEG XR image from it. Retrieves the
+// White level scale is used to multiply the color values in the image; allows the user to
+// adjust the brightness of the image on an HDR display.
+void D2DAdvancedColorImagesRenderer::SetRenderOptions(
+    bool disableScaling,
+    TonemapperKind tonemapper,
+    float whiteLevelScale,
+    DXGI_COLOR_SPACE_TYPE colorspace
+    )
+{
+    m_userDisabledScaling = disableScaling;
+    FitImageToWindow();
+
+    m_tonemapperKind = tonemapper;
+    UpdateAdvancedColorState();
+
+    m_imageColorSpace = colorspace;
+    UpdateImageColorContext();
+
+    // Image colorspace can affect white level scale, so call this last.
+    m_whiteLevelScale = whiteLevelScale;
+    UpdateWhiteLevelScale();
+
+    Draw();
+}
+
+// Reads the provided data stream and decodes an image from it. Retrieves the
 // ICC color profile attached to that image, if any. These resources are device-
 // independent.
-void D2DAdvancedColorImages::LoadImage(IStream* imageStream)
+ImageInfo D2DAdvancedColorImagesRenderer::LoadImage(_In_ IStream* imageStream)
 {
     auto wicFactory = m_deviceResources->GetWicImagingFactory();
 
@@ -104,9 +139,8 @@ void D2DAdvancedColorImages::LoadImage(IStream* imageStream)
         decoder->GetFrame(0, &frame)
         );
 
-    // Check that the image data is in a floating-point format. This app
-    // only supports JPEG XR images containing scRGB content, expressed
-    // in an extended-range, floating-point format.
+    // Check whether the image data is natively stored in a floating-point format, and
+    // decode to the appropriate WIC pixel format.
 
     WICPixelFormatGUID pixelFormat;
     DX::ThrowIfFailed(
@@ -131,18 +165,26 @@ void D2DAdvancedColorImages::LoadImage(IStream* imageStream)
         pixelFormatInfo->GetNumericRepresentation(&formatNumber)
         );
 
-    if (formatNumber != WICPixelFormatNumericRepresentationFloat)
-    {
-        // Terminate image loading if the image is not in a floating-point format.
-        return;
-    }
+    DX::ThrowIfFailed(pixelFormatInfo->GetBitsPerPixel(&m_imageInfo.bitsPerPixel));
+    m_imageInfo.isFloat = (WICPixelFormatNumericRepresentationFloat == formatNumber) ? true : false;
 
-    // Convert the image to a pixel format supported by Direct2D. Note that WIC
-    // performs an implicit gamma conversion when converting between a fixed-point/
-    // integer pixel format (sRGB gamma) and a float-point pixel format (linear gamma).
-    // In this case, no gamma adjustment is performed since the source content
-    // is already in a floating-point format. Gamma adjustment, if specified by
-    // the ICC profile, will be performed by the color management effect.
+    // When decoding, preserve the numeric representation (float vs. non-float)
+    // of the native image data. This avoids WIC performing an implicit gamma conversion
+    // which occurs when converting between a fixed-point/integer pixel format (sRGB gamma)
+    // and a float-point pixel format (linear gamma). Gamma adjustment, if specified by
+    // the ICC profile, will be performed by the Direct2D color management effect.
+
+    WICPixelFormatGUID fmt = {};
+    if (m_imageInfo.isFloat)
+    {
+        fmt = GUID_WICPixelFormat64bppPRGBAHalf; // Equivalent to DXGI_FORMAT_R16G16B16A16_FLOAT.
+    }
+    else
+    {
+        fmt = GUID_WICPixelFormat64bppPRGBA; // Equivalent to DXGI_FORMAT_R16G16B16A16_UNORM.
+                                             // Many SDR images (e.g. JPEG) use <=32bpp, so it
+                                             // is possible to further optimize this for memory usage.
+    }
 
     DX::ThrowIfFailed(
         wicFactory->CreateFormatConverter(&m_formatConvert)
@@ -151,7 +193,7 @@ void D2DAdvancedColorImages::LoadImage(IStream* imageStream)
     DX::ThrowIfFailed(
         m_formatConvert->Initialize(
             frame.Get(),
-            GUID_WICPixelFormat64bppPRGBAHalf, // Equivalent to DXGI_FORMAT_R16G16B16A16_FLOAT.
+            fmt,
             WICBitmapDitherTypeNone,
             nullptr,
             0.0f,
@@ -164,24 +206,28 @@ void D2DAdvancedColorImages::LoadImage(IStream* imageStream)
     DX::ThrowIfFailed(
         m_formatConvert->GetSize(&width, &height)
         );
-    m_imageSize = Size(static_cast<float>(width), static_cast<float>(height));
+
+    m_imageInfo.size = Size(static_cast<float>(width), static_cast<float>(height));
 
     // Attempt to read the embedded color profile from the image.
     DX::ThrowIfFailed(
         wicFactory->CreateColorContext(&m_wicColorContext)
         );
+
     DX::ThrowIfFailed(
         frame->GetColorContexts(
             1,
             m_wicColorContext.GetAddressOf(),
-            &m_numberOfProfiles
+            &m_imageInfo.numProfiles
             )
         );
+
+    return m_imageInfo;
 }
 
-// Configures a Direct2D image source, a color management effect, and a
-// tone mapping effect, based on the loaded image. 
-void D2DAdvancedColorImages::CreateImageDependentResources()
+// Configures a Direct2D image pipeline, including source, color management, 
+// tonemapping, and white level, based on the loaded image.
+void D2DAdvancedColorImagesRenderer::CreateImageDependentResources()
 {
     auto d2dFactory = m_deviceResources->GetD2DFactory();
     auto context = m_deviceResources->GetD2DDeviceContext();
@@ -209,46 +255,15 @@ void D2DAdvancedColorImages::CreateImageDependentResources()
         );
 
     // The color management effect takes a source color space and a destination color space,
-    // and performs the appropriate math to convert images between them. Color contexts can be
-    // "hard-coded" (by providing a set of color primaries and a white point), but in this case
-    // we will use the color context attached to the image. This color context, if it exists,
-    // was retrieved by WIC in the LoadImage method. If it doesn't exist, default to scRGB.
+    // and performs the appropriate math to convert images between them.
+    UpdateImageColorContext();
 
-    ComPtr<ID2D1ColorContext> sourceColorContext;
-    if (m_numberOfProfiles >= 1)
-    {
-        DX::ThrowIfFailed(
-            context->CreateColorContextFromWicColorContext(
-                m_wicColorContext.Get(),
-                &sourceColorContext
-                )
-            );
-    }
-    else
-    {
-        DX::ThrowIfFailed(
-            context->CreateColorContext(
-                D2D1_COLOR_SPACE_SCRGB,
-                nullptr,
-                0,
-                &sourceColorContext
-                )
-            );
-    }
-
-    DX::ThrowIfFailed(
-        m_colorManagementEffect->SetValue(
-            D2D1_COLORMANAGEMENT_PROP_SOURCE_COLOR_CONTEXT,
-            sourceColorContext.Get()
-            )
-        );
-
-    // For the destination color space, we will use scRGB. This is appropriate for this app's
-    // choice of swap chain pixel format.
+    // The destination color space is the render target's (swap chain's) color space. This app uses an
+    // FP16 swap chain, which requires the colorspace to be scRGB.
     ComPtr<ID2D1ColorContext1> destColorContext;
     DX::ThrowIfFailed(
         context->CreateColorContextFromDxgiColorSpace(
-            DXGI_COLOR_SPACE_RGB_FULL_G10_NONE_P709,
+            DXGI_COLOR_SPACE_RGB_FULL_G10_NONE_P709, // scRGB
             &destColorContext
             )
         );
@@ -260,26 +275,41 @@ void D2DAdvancedColorImages::CreateImageDependentResources()
             )
         );
 
-    // Instantiate and configure the tone mapping effect, which is a custom Direct2D effect
-    // implemented in ToneMapEffect.cpp and ToneMapEffect.hlsl. It performs a very basic
-    // HDR-to-SDR tone mapping operation.
+    // White level scale is used to multiply the color values in the image; this allows the user
+    // to adjust the brightness of the image on an HDR display.
+    DX::ThrowIfFailed(context->CreateEffect(CLSID_D2D1ColorMatrix, &m_whiteScaleEffect));
+
+    m_whiteScaleEffect->SetInputEffect(0, m_colorManagementEffect.Get());
+
+    // Set the actual matrix in SetRenderOptions.
+
+    // Instantiate and cache all of the tonemapping effects. Selection is performed in Draw().
+    // Each tonemapper is implemented as a Direct2D custom effect; see the Tonemappers filter in the
+    // Solution Explorer.
     DX::ThrowIfFailed(
-        context->CreateEffect(CLSID_CustomToneMapEffect, &m_toneMapEffect)
+        context->CreateEffect(CLSID_CustomReinhardEffect, &m_reinhardEffect)
         );
 
-    m_toneMapEffect->SetInputEffect(0, m_colorManagementEffect.Get());
+    DX::ThrowIfFailed(
+        context->CreateEffect(CLSID_CustomFilmicEffect, &m_filmicEffect)
+        );
+
+    m_reinhardEffect->SetInputEffect(0, m_whiteScaleEffect.Get());
+    m_filmicEffect->SetInputEffect(0, m_whiteScaleEffect.Get());
 }
 
-void D2DAdvancedColorImages::ReleaseImageDependentResources()
+void D2DAdvancedColorImagesRenderer::ReleaseImageDependentResources()
 {
     m_imageSource.Reset();
     m_scaledImage.Reset();
     m_colorManagementEffect.Reset();
-    m_toneMapEffect.Reset();
+    m_whiteScaleEffect.Reset();
+    m_reinhardEffect.Reset();
+    m_filmicEffect.Reset();
 }
 
 // Update zoom state to keep the image fit to the app window.
-void D2DAdvancedColorImages::FitImageToWindow()
+void D2DAdvancedColorImagesRenderer::FitImageToWindow()
 {
     if (m_imageSource)
     {
@@ -288,17 +318,27 @@ void D2DAdvancedColorImages::FitImageToWindow()
         // Letterbox but never exceed max scale.
         m_zoom = min(
             min(
-                panelSize.Width / m_imageSize.Width,
-                panelSize.Height / m_imageSize.Height
+                panelSize.Width / m_imageInfo.size.Width,
+                panelSize.Height / m_imageInfo.size.Height
                 ),
             1.0f
             );
 
-        // Center the image.
-        m_offset = D2D1::Point2F(
-            (panelSize.Width - (m_imageSize.Width * m_zoom)) / 2.0f,
-            (panelSize.Height - (m_imageSize.Height * m_zoom)) / 2.0f
-            );
+        // User can disable spatial scaling.
+        m_zoom = m_userDisabledScaling ? 1.0f : m_zoom;
+
+        if (m_userDisabledScaling)
+        {
+            m_offset = {};
+        }
+        else
+        {
+            // Center the image.
+            m_offset = D2D1::Point2F(
+                (panelSize.Width - (m_imageInfo.size.Width * m_zoom)) / 2.0f,
+                (panelSize.Height - (m_imageInfo.size.Height * m_zoom)) / 2.0f
+                );
+        }
 
         // When using ID2D1ImageSource, the recommend method of scaling is to use
         // ID2D1TransformedImageSource. It is inexpensive to recreate this object.
@@ -327,25 +367,143 @@ void D2DAdvancedColorImages::FitImageToWindow()
 // Uses DXGI APIs to query the capabilities of the app's current display, and
 // enables HDR-to-SDR tone mapping if the display does not meet a particular
 // brightness threshold or is not in advanced color mode.
-void D2DAdvancedColorImages::UpdateAdvancedColorState()
+void D2DAdvancedColorImagesRenderer::UpdateAdvancedColorState()
 {
-    DXGI_OUTPUT_DESC1 outputDesc = m_deviceResources->GetCurrentOutputDesc1();
+    m_outputDesc = m_deviceResources->GetCurrentOutputDesc1();
 
-    // Decide whether or not the app needs to apply tone mapping, based on the brightness
-    // capabilities of the display (maximum luminance at least 300) and the mode of the display.
-    if ((outputDesc.MaxLuminance >= 300.0f) && (outputDesc.ColorSpace == DXGI_COLOR_SPACE_RGB_FULL_G2084_NONE_P2020))
+    // Tonemapping is only needed on low dynamic range displays; the user can also force it off.
+    if (m_tonemapperKind == TonemapperKind::Disabled ||
+        GetDisplayACKind() == DisplayACKind::AdvancedColor_HighDynamicRange)
     {
-        m_useToneMapping = false;
+        m_useTonemapping = false;
     }
     else
     {
-        m_useToneMapping = true;
+        m_useTonemapping = true;
+    }
+
+    if (m_dispStateChangeHandler)
+    {
+        m_dispStateChangeHandler->OnDisplayACStateChanged(
+            m_outputDesc.MaxLuminance,
+            m_outputDesc.BitsPerColor,
+            GetDisplayACKind()
+            );
     }
 }
 
-// Renders the loaded JPEG XR image, optionally applying HDR-to-SDR tone mapping,
-// if appropriate.
-void D2DAdvancedColorImages::Draw()
+// Based on the user's choice, either derive the source color context from the image
+// (embedded ICC profile or metadata), or create a context using the user's specified colorspace.
+void D2DAdvancedColorImagesRenderer::UpdateImageColorContext()
+{
+    auto context = m_deviceResources->GetD2DDeviceContext();
+
+    ComPtr<ID2D1ColorContext> sourceColorContext;
+
+    if (m_imageColorSpace == DXGI_COLOR_SPACE_CUSTOM)
+    {
+        // Derive the color context from the image.
+        if (m_imageInfo.numProfiles >= 1)
+        {
+            DX::ThrowIfFailed(
+                context->CreateColorContextFromWicColorContext(
+                    m_wicColorContext.Get(),
+                    &sourceColorContext
+                    )
+                );
+        }
+        else
+        {
+            // Since no embedded color profile/metadata exists, select a default
+            // based on the pixel format: floating point == scRGB, others == sRGB.
+            DX::ThrowIfFailed(
+                context->CreateColorContext(
+                    m_imageInfo.isFloat ? D2D1_COLOR_SPACE_SCRGB : D2D1_COLOR_SPACE_SRGB,
+                    nullptr,
+                    0,
+                    &sourceColorContext
+                    )
+                );
+        }
+    }
+    else
+    {
+        // Use the user's explicitly defined colorspace.
+        ComPtr<ID2D1ColorContext1> colorContext1;
+        DX::ThrowIfFailed(
+            context->CreateColorContextFromDxgiColorSpace(m_imageColorSpace, &colorContext1)
+            );
+
+        DX::ThrowIfFailed(colorContext1.As(&sourceColorContext));
+    }
+
+    DX::ThrowIfFailed(
+        m_colorManagementEffect->SetValue(
+            D2D1_COLORMANAGEMENT_PROP_SOURCE_COLOR_CONTEXT,
+            sourceColorContext.Get()
+        )
+    );
+}
+
+void D2DAdvancedColorImagesRenderer::UpdateWhiteLevelScale()
+{
+    // If we are viewing an HDR10-encoded image and are using an HDR display,
+    // we need to map the [0, 1] range of the image pixels to [0, 10000] nits
+    // of the SMPTE.2084 EOTF. We render in scRGB, which defines 1.0 reference white
+    // as 80 nits; therefore, we must scale up by 125x (10000 / 80).
+    switch (m_imageColorSpace)
+    {
+    case DXGI_COLOR_SPACE_RGB_FULL_G2084_NONE_P2020:
+    case DXGI_COLOR_SPACE_RGB_STUDIO_G2084_NONE_P2020:
+        if (GetDisplayACKind() == DisplayACKind::AdvancedColor_HighDynamicRange)
+        {
+            m_whiteLevelScale = 125.0f;
+        }
+        break;
+    }
+    
+    D2D1_MATRIX_5X4_F matrix = D2D1::Matrix5x4F(
+        m_whiteLevelScale, 0, 0, 0,  // [R] Multiply each color channel
+        0, m_whiteLevelScale, 0, 0,  // [G] by the scale factor in 
+        0, 0, m_whiteLevelScale, 0,  // [B] linear gamma space.
+        0, 0, 0                , 1,  // [A] Preserve alpha values.
+        0, 0, 0                , 0); //     No offset.
+
+    DX::ThrowIfFailed(m_whiteScaleEffect->SetValue(D2D1_COLORMATRIX_PROP_COLOR_MATRIX, matrix));
+}
+
+// Determines what class of advanced color capabilities the current display has.
+DisplayACKind D2DAdvancedColorImagesRenderer::GetDisplayACKind()
+{
+    switch (m_outputDesc.ColorSpace)
+    {
+    case DXGI_COLOR_SPACE_RGB_FULL_G22_NONE_P709:
+        return DisplayACKind::NotAdvancedColor;
+        break;
+
+    case DXGI_COLOR_SPACE_RGB_FULL_G2084_NONE_P2020:
+        // 300 nits is considered the cutoff between an HDR and LDR display.
+        // HDR displays support overbright, i.e. colors brighter than reference white.
+        // LDR displays are limited to the [0, 1] luminance range.
+        if (m_outputDesc.MaxLuminance < 300.0f)
+        {
+            return DisplayACKind::AdvancedColor_LowDynamicRange;
+        }
+        else
+        {
+            return DisplayACKind::AdvancedColor_HighDynamicRange;
+        }
+        break;
+
+    default:
+        // DXGI_OUTPUT_DESC1 should only contain one of the above values.
+        return DisplayACKind::NotAdvancedColor;
+        break;
+    }
+}
+
+// Renders the loaded image with user-specified options.
+void D2DAdvancedColorImagesRenderer::Draw()
 {
     auto d2dContext = m_deviceResources->GetD2DDeviceContext();
 
@@ -357,15 +515,28 @@ void D2DAdvancedColorImages::Draw()
 
     if (m_scaledImage)
     {
-        if (m_useToneMapping)
+        if (m_useTonemapping)
         {
-            // Draw the full effect pipeline, which includes the tone mapping effect.
-            d2dContext->DrawImage(m_toneMapEffect.Get(), m_offset);
+            // Draw the full effect pipeline including the HDR tonemapper.
+            ComPtr<ID2D1Effect> tonemapper;
+            switch (m_tonemapperKind)
+            {
+            case TonemapperKind::Reinhard:
+                tonemapper = m_reinhardEffect.Get();
+                break;
+
+            case TonemapperKind::Filmic:
+            default:
+                tonemapper = m_filmicEffect.Get();
+                break;
+            }
+
+            d2dContext->DrawImage(tonemapper.Get(), m_offset);
         }
         else
         {
-            // Omit the tone mapping effect and just draw the color-managed image.
-            d2dContext->DrawImage(m_colorManagementEffect.Get(), m_offset);
+            // Omit the tone mapping effect and just draw the color-managed, scaled image.
+            d2dContext->DrawImage(m_whiteScaleEffect.Get(), m_offset);
         }
     }
 
@@ -381,14 +552,14 @@ void D2DAdvancedColorImages::Draw()
 }
 
 // Notifies renderers that device resources need to be released.
-void D2DAdvancedColorImages::OnDeviceLost()
+void D2DAdvancedColorImagesRenderer::OnDeviceLost()
 {
     ReleaseImageDependentResources();
     ReleaseDeviceDependentResources();
 }
 
 // Notifies renderers that device resources may now be recreated.
-void D2DAdvancedColorImages::OnDeviceRestored()
+void D2DAdvancedColorImagesRenderer::OnDeviceRestored()
 {
     CreateDeviceDependentResources();
     CreateImageDependentResources();

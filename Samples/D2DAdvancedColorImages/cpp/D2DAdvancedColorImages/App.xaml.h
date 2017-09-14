@@ -14,7 +14,7 @@
 #include "App.g.h"
 #include "DirectXPage.xaml.h"
 
-namespace SDKTemplate
+namespace D2DAdvancedColorImages
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

@@ -8356,8 +8356,12 @@ define('WinJS/Controls/ItemContainer/_ItemEventsHandler',[
 
                 resetPointerDownState: function ItemEventsHandler_resetPointerDownState() {
                     this._site.pressedElement = null;
-                    _ElementUtilities._removeEventListener(_Global, "pointerup", this._resetPointerDownStateBound);
-                    _ElementUtilities._removeEventListener(_Global, "pointercancel", this._resetPointerDownStateBound);
+
+                    if(this._resetPointerDownStateBound)
+                    {
+                        _ElementUtilities._removeEventListener(_Global, "pointerup", this._resetPointerDownStateBound);
+                        _ElementUtilities._removeEventListener(_Global, "pointercancel", this._resetPointerDownStateBound);
+                    }
 
                     this._resetPressedContainer();
 

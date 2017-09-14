@@ -14,19 +14,12 @@ Shows how to use the [Windows.Devices.PointOfService.PosPrinter](http://msdn.mic
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-Specifically, this sample shows how to:
+Specifically, this sample shows the following:
 
-1.  **Receipt printer basic operation**
-
-    This scenario demonstrates how to find, claim, and enable a receipt printer and then allows the user to print a line or a sample receipt.
-
-2.  **Receipt printer error handling**
-
-    This scenario demonstrates how to check for error conditions during basic printer operation, and reports any errors to the user.
-
-3.  **Multiple instances of receipt printers**
-
-    This scenario demonstrates the claim/release model used by the POS Printer API by allowing the user to manager two printer instances with UI controls for claiming, retaining, and releasing the printer objects.
+* Finding, claiming, and enabling a receipt printer.
+* Printing to a claimed receipt printer.
+* Ensuring the paper cutter does not cut the printed portion of the receipt.
+* Managing competing claims on a receipt printer.
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  

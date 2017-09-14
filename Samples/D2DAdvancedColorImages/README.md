@@ -5,7 +5,9 @@
 
 # Direct2D advanced color image rendering sample
 
-Shows how to use [Direct2D](http://msdn.microsoft.com/library/windows/desktop/dd370990) to load and draw advanced color images.
+Shows how to use [Direct2D](http://msdn.microsoft.com/library/windows/desktop/dd370990) to load and draw advanced color images. Advanced color images have high dynamic range (HDR), wide color gamut (WCG) and/or high bit depth content.
+
+Advanced color content is best viewed on an advanced color-capable device, such as an HDR10 display. However, this sample shows how to render content on any display type.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -17,10 +19,10 @@ Shows how to use [Direct2D](http://msdn.microsoft.com/library/windows/desktop/dd
 Specifically, this sample shows how to:
 
 - Create and configure an advanced color (FP16) DirectX render pipeline.
-- Load a JPEG XR containing extended-range floating point data from the disk and decode it with WIC.
-- Use Direct2D's effect pipeline to correctly handle an attached ICC profile.
-- Implement a custom Direct2D image effect to perform HDR-to-SDR tone mapping, so that HDR images can be rendered in higher quality on SDR displays.
-- Use DXGI to retrieve display color capabilities and determine whether tone mapping should be applied.
+- Use WIC to decode a variety of SDR, WCG and HDR image content, including extended-range floating point data.
+- Use Direct2D's effect pipeline to correctly perform color management and HDR brightness adjustment.
+- Use DXGI to retrieve display color capabilities and adapt the image rendering pipeline to the display.
+- Implement a custom Direct2D effect to perform HDR-to-SDR tonemapping.
 
 ## Sample project files
 
@@ -32,6 +34,8 @@ The following files form the main educational content of the sample:
 - **DirectXPage.xaml/.cpp/.h/:** Implements a XAML-based UI to drive the app. Hosts the DirectX content in a SwapChainPanel.
 - **App.xaml/.cpp/.h:** The app's main entry point.
 - **D2DAdvancedColorImagesRenderer.cpp/.h:** The core implementation of the Direct2D scene.
+- **RenderOptions.h:** Helper classes for databinding rendering options to the XAML UI.
+- ***Effect.cpp/.h/.hlsl:** Custom Direct2D effects implementing some example tonemappers.
 
 ### DirectX SDK sample common files
 The following files provide common functionality needed by DirectX SDK samples:
