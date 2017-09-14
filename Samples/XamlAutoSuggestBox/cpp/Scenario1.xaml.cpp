@@ -42,6 +42,11 @@ void Scenario1::asb_TextChanged(AutoSuggestBox^ sender, AutoSuggestBoxTextChange
 
         sender->ItemsSource = ref new Vector<Contact^>(matchingContacts);
     }
+
+    if (args->Reason != AutoSuggestionBoxTextChangeReason::SuggestionChosen)
+    {
+        rootPage->NotifyUser("", NotifyType::StatusMessage);
+    }
 }
 
 /// <summary>
@@ -55,6 +60,8 @@ void Scenario1::asb_TextChanged(AutoSuggestBox^ sender, AutoSuggestBoxTextChange
 /// and also ChosenSuggestion, which is only non-null when a user selects an item in the list.</param>
 void Scenario1::asb_QuerySubmitted(AutoSuggestBox^ sender, AutoSuggestBoxQuerySubmittedEventArgs^ args)
 {
+    rootPage->NotifyUser("", NotifyType::StatusMessage);
+
     if (args->ChosenSuggestion != nullptr)
     {
         // User selected an item, take an action on it here
@@ -71,17 +78,16 @@ void Scenario1::asb_QuerySubmitted(AutoSuggestBox^ sender, AutoSuggestBoxQuerySu
 }
 
 /// <summary>
-/// This event gets fired as the user keys through the list, or taps on a suggestion.
-/// This allows you to change the text in the TextBox to reflect the item in the list.
-/// Alternatively you can use TextMemberPath.
+/// This event is raised as the user keys through the list, or taps on a suggestion.
+/// The AutoSuggestBox.TextMemberPath property controls what text appears in the TextBox.
+/// You could use this event to trigger a prefetch of the suggestion.
 /// </summary>
 /// <param name="sender">The AutoSuggestBox that fired the event.</param>
 /// <param name="args">The args contain SelectedItem, which contains the data item of the item that is currently highlighted.</param>
 void Scenario1::asb_SuggestionChosen(AutoSuggestBox^ sender, AutoSuggestBoxSuggestionChosenEventArgs^ args)
 {
     auto contact = safe_cast<Contact^>(args->SelectedItem);
-
-    sender->Text = contact->DisplayName;
+    rootPage->NotifyUser("Suggestion chosen: " + contact->DisplayName, NotifyType::StatusMessage);
 }
 
 /// <summary>

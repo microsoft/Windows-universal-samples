@@ -28,7 +28,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{e680bd3c-51e4-524b-a709-b472289a5bec}</ProjectGuid>
-    <RootNamespace>SDKTemplate</RootNamespace>
+    <RootNamespace>D2DAdvancedColorImages</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
@@ -100,7 +100,6 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <CustomBuildBeforeTargets>ClCompile</CustomBuildBeforeTargets>
   </PropertyGroup>
@@ -137,17 +136,20 @@
 :: Parse the Visual Studio macro into a form usable by fxc.exe.
 set INCLUDEPATHS="$(WindowsSDK_IncludePath)"
 set INCLUDEPATHS=%INCLUDEPATHS:;=" /I "%
-fxc /T lib_4_0_level_9_1_ps_only ToneMapEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ToneMapEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_4_0_level_9_1 ToneMapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ToneMapEffect.fxlib" /Fo "$(OutDir)ToneMapEffect.cso" /Fh "$(OutDir)ToneMapEffectShader.h" /nologo /I %INCLUDEPATHS%</Command>
+fxc /T lib_5_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_5_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_5_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+</Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Message>Generate a linking compatible pixel shader</Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDir)ToneMapEffect.cso;$(OutDir)ToneMapEffectShader.h</Outputs>
+      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h</Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Inputs>ToneMapEffect.hlsl</Inputs>
+      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl</Inputs>
     </CustomBuildStep>
     <CustomBuildStep>
       <TreatOutputAsContent>true</TreatOutputAsContent>
@@ -171,17 +173,20 @@ fxc /T ps_4_0_level_9_1 ToneMapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main 
 :: Parse the Visual Studio macro into a form usable by fxc.exe.
 set INCLUDEPATHS="$(WindowsSDK_IncludePath)"
 set INCLUDEPATHS=%INCLUDEPATHS:;=" /I "%
-fxc /T lib_4_0_level_9_1_ps_only ToneMapEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ToneMapEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_4_0_level_9_1 ToneMapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ToneMapEffect.fxlib" /Fo "$(OutDir)ToneMapEffect.cso" /Fh "$(OutDir)ToneMapEffectShader.h" /nologo /I %INCLUDEPATHS%</Command>
+fxc /T lib_5_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_5_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_5_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+</Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Message>Generate a linking compatible pixel shader</Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDir)ToneMapEffect.cso;$(OutDir)ToneMapEffectShader.h</Outputs>
+      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h</Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Inputs>ToneMapEffect.hlsl</Inputs>
+      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl</Inputs>
     </CustomBuildStep>
     <CustomBuildStep>
       <TreatOutputAsContent>true</TreatOutputAsContent>
@@ -205,17 +210,20 @@ fxc /T ps_4_0_level_9_1 ToneMapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main 
 :: Parse the Visual Studio macro into a form usable by fxc.exe.
 set INCLUDEPATHS="$(WindowsSDK_IncludePath)"
 set INCLUDEPATHS=%INCLUDEPATHS:;=" /I "%
-fxc /T lib_4_0_level_9_1_ps_only ToneMapEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ToneMapEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_4_0_level_9_1 ToneMapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ToneMapEffect.fxlib" /Fo "$(OutDir)ToneMapEffect.cso" /Fh "$(OutDir)ToneMapEffectShader.h" /nologo /I %INCLUDEPATHS%</Command>
+fxc /T lib_5_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_5_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_5_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+</Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Message>Generate a linking compatible pixel shader</Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDir)ToneMapEffect.cso;$(OutDir)ToneMapEffectShader.h</Outputs>
+      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h</Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Inputs>ToneMapEffect.hlsl</Inputs>
+      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl</Inputs>
     </CustomBuildStep>
     <CustomBuildStep>
       <TreatOutputAsContent>true</TreatOutputAsContent>
@@ -239,17 +247,20 @@ fxc /T ps_4_0_level_9_1 ToneMapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main 
 :: Parse the Visual Studio macro into a form usable by fxc.exe.
 set INCLUDEPATHS="$(WindowsSDK_IncludePath)"
 set INCLUDEPATHS=%INCLUDEPATHS:;=" /I "%
-fxc /T lib_4_0_level_9_1_ps_only ToneMapEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ToneMapEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_4_0_level_9_1 ToneMapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ToneMapEffect.fxlib" /Fo "$(OutDir)ToneMapEffect.cso" /Fh "$(OutDir)ToneMapEffectShader.h" /nologo /I %INCLUDEPATHS%</Command>
+fxc /T lib_5_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_5_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_5_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+</Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Message>Generate a linking compatible pixel shader</Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDir)ToneMapEffect.cso;$(OutDir)ToneMapEffectShader.h</Outputs>
+      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h</Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Inputs>ToneMapEffect.hlsl</Inputs>
+      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl</Inputs>
     </CustomBuildStep>
     <CustomBuildStep>
       <TreatOutputAsContent>true</TreatOutputAsContent>
@@ -273,17 +284,20 @@ fxc /T ps_4_0_level_9_1 ToneMapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main 
 :: Parse the Visual Studio macro into a form usable by fxc.exe.
 set INCLUDEPATHS="$(WindowsSDK_IncludePath)"
 set INCLUDEPATHS=%INCLUDEPATHS:;=" /I "%
-fxc /T lib_4_0_level_9_1_ps_only ToneMapEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ToneMapEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_4_0_level_9_1 ToneMapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ToneMapEffect.fxlib" /Fo "$(OutDir)ToneMapEffect.cso" /Fh "$(OutDir)ToneMapEffectShader.h" /nologo /I %INCLUDEPATHS%</Command>
+fxc /T lib_5_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_5_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_5_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+</Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Message>Generate a linking compatible pixel shader</Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDir)ToneMapEffect.cso;$(OutDir)ToneMapEffectShader.h</Outputs>
+      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h</Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Inputs>ToneMapEffect.hlsl</Inputs>
+      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl</Inputs>
     </CustomBuildStep>
     <CustomBuildStep>
       <TreatOutputAsContent>true</TreatOutputAsContent>
@@ -307,17 +321,20 @@ fxc /T ps_4_0_level_9_1 ToneMapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main 
 :: Parse the Visual Studio macro into a form usable by fxc.exe.
 set INCLUDEPATHS="$(WindowsSDK_IncludePath)"
 set INCLUDEPATHS=%INCLUDEPATHS:;=" /I "%
-fxc /T lib_4_0_level_9_1_ps_only ToneMapEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ToneMapEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_4_0_level_9_1 ToneMapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ToneMapEffect.fxlib" /Fo "$(OutDir)ToneMapEffect.cso" /Fh "$(OutDir)ToneMapEffectShader.h" /nologo /I %INCLUDEPATHS%</Command>
+fxc /T lib_5_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_5_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_5_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+</Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Message>Generate a linking compatible pixel shader</Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDir)ToneMapEffect.cso;$(OutDir)ToneMapEffectShader.h</Outputs>
+      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h</Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Inputs>ToneMapEffect.hlsl</Inputs>
+      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl</Inputs>
     </CustomBuildStep>
     <CustomBuildStep>
       <TreatOutputAsContent>true</TreatOutputAsContent>
@@ -350,9 +367,11 @@ fxc /T ps_4_0_level_9_1 ToneMapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main 
     <ClInclude Include="DirectXPage.xaml.h">
       <DependentUpon>DirectXPage.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="FilmicEffect.h" />
+    <ClInclude Include="RenderOptions.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="D2DAdvancedColorImagesRenderer.h" />
-    <ClInclude Include="ToneMapEffect.h" />
+    <ClInclude Include="ReinhardEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.xaml.cpp">
@@ -363,6 +382,7 @@ fxc /T ps_4_0_level_9_1 ToneMapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main 
     <ClCompile Include="DirectXPage.xaml.cpp">
       <DependentUpon>DirectXPage.xaml</DependentUpon>
     </ClCompile>
+    <ClCompile Include="FilmicEffect.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -372,7 +392,7 @@ fxc /T ps_4_0_level_9_1 ToneMapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main 
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="D2DAdvancedColorImagesRenderer.cpp" />
-    <ClCompile Include="ToneMapEffect.cpp" />
+    <ClCompile Include="ReinhardEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -388,14 +408,13 @@ fxc /T ps_4_0_level_9_1 ToneMapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main 
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ToneMapEffect.hlsl">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
+    <Text Include="ReinhardEffect.hlsl">
       <FileType>Document</FileType>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</DeploymentContent>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</DeploymentContent>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</DeploymentContent>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="FilmicEffect.hlsl">
+      <FileType>Document</FileType>
     </Text>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

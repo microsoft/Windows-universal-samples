@@ -12,7 +12,7 @@
 #include "pch.h"
 #include "App.xaml.h"
 
-using namespace SDKTemplate;
+using namespace D2DAdvancedColorImages;
 
 using namespace Platform;
 using namespace Windows::ApplicationModel;

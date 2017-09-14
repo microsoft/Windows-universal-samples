@@ -12,15 +12,46 @@
 #pragma once
 
 #include "DeviceResources.h"
-#include "ToneMapEffect.h"
+#include "ReinhardEffect.h"
+#include "FilmicEffect.h"
+#include "RenderOptions.h"
 
-namespace SDKTemplate
+namespace D2DAdvancedColorImages
 {
-    class D2DAdvancedColorImages : public DX::IDeviceNotify
+    public enum class DisplayACKind
+    {
+        NotAdvancedColor,               // No AC capabilities: dynamic range, color gamut, bit depth
+        AdvancedColor_LowDynamicRange,  // Wide color gamut, high bit depth, but low dynamic range
+        AdvancedColor_HighDynamicRange  // Full high dynamic range, wide color gamut, high bit depth
+    };
+
+    struct ImageInfo
+    {
+        unsigned int                bitsPerPixel;
+        bool                        isFloat;
+        Windows::Foundation::Size   size;
+        unsigned int                numProfiles;
+    };
+
+    // Provides an interface for an application to be notified of changes in the display's
+    // advanced color state.
+    public interface class IDisplayACStateChanged
+    {
+        virtual void OnDisplayACStateChanged(
+            float maxLuminance,
+            unsigned int bitDepth,
+            DisplayACKind displayKind) = 0;
+    };
+
+    class D2DAdvancedColorImagesRenderer : public DX::IDeviceNotify
     {
     public:
-        D2DAdvancedColorImages(const std::shared_ptr<DX::DeviceResources>& deviceResources);
-        ~D2DAdvancedColorImages();
+        D2DAdvancedColorImagesRenderer(
+            const std::shared_ptr<DX::DeviceResources>& deviceResources,
+            IDisplayACStateChanged^ handler
+            );
+
+        ~D2DAdvancedColorImagesRenderer();
 
         void CreateDeviceIndependentResources();
         void CreateDeviceDependentResources();
@@ -28,18 +59,29 @@ namespace SDKTemplate
         void ReleaseDeviceDependentResources();
         void Draw();
 
-        void LoadImage(IStream* imageStream);
         void CreateImageDependentResources();
         void ReleaseImageDependentResources();
-        void FitImageToWindow();
 
-        void UpdateAdvancedColorState();
+        void FitImageToWindow();
+        void SetRenderOptions(
+            bool enableScaling,
+            TonemapperKind tonemapper,
+            float whiteLevelScale,
+            DXGI_COLOR_SPACE_TYPE colorspace
+            );
+
+        ImageInfo LoadImage(IStream* imageStream);
 
         // IDeviceNotify methods handle device lost and restored.
         virtual void OnDeviceLost();
         virtual void OnDeviceRestored();
 
     private:
+        void UpdateAdvancedColorState();
+        void UpdateImageColorContext();
+        void UpdateWhiteLevelScale();
+        DisplayACKind GetDisplayACKind();
+
         // Cached pointer to device resources.
         std::shared_ptr<DX::DeviceResources>                    m_deviceResources;
 
@@ -49,13 +91,23 @@ namespace SDKTemplate
         Microsoft::WRL::ComPtr<ID2D1ImageSourceFromWic>         m_imageSource;
         Microsoft::WRL::ComPtr<ID2D1TransformedImageSource>     m_scaledImage;
         Microsoft::WRL::ComPtr<ID2D1Effect>                     m_colorManagementEffect;
-        Microsoft::WRL::ComPtr<ID2D1Effect>                     m_toneMapEffect;
+        Microsoft::WRL::ComPtr<ID2D1Effect>                     m_whiteScaleEffect;
+        Microsoft::WRL::ComPtr<ID2D1Effect>                     m_reinhardEffect;
+        Microsoft::WRL::ComPtr<ID2D1Effect>                     m_filmicEffect;
 
         // Other renderer members.
-        bool                                                    m_useToneMapping;
-        Windows::Foundation::Size                               m_imageSize;
-        unsigned int                                            m_numberOfProfiles;
+        TonemapperKind                                          m_tonemapperKind;
+        bool                                                    m_userDisabledScaling;
+        bool                                                    m_useTonemapping;
         float                                                   m_zoom;
         D2D1_POINT_2F                                           m_offset;
+        DXGI_COLOR_SPACE_TYPE                                   m_imageColorSpace;
+        float                                                   m_whiteLevelScale;
+
+        DXGI_OUTPUT_DESC1                                       m_outputDesc;
+        ImageInfo                                               m_imageInfo;
+
+        // Registered handler for the display's advanced color state changes.
+        IDisplayACStateChanged^                                 m_dispStateChangeHandler;
     };
 }

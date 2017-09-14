@@ -304,7 +304,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/BluetoothAdvertisement">Bluetooth advertisement</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/BluetoothLEClient">Bluetooth Low Energy client</a></td>
+  <td><a href="Samples/BluetoothLE">Bluetooth Low Energy</a></td>
   <td><a href="Samples/CashDrawer">Cash drawer</a></td>
   <td><a href="Samples/Compass">Compass</a></td>
  </tr>
