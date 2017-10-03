@@ -70,9 +70,11 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="HDR Analyzer:" Foreground="White" Margin="10"/>
             <ProgressBar Name="HdrImpactBar" Grid.Column="1" MinHeight="20" Margin="10" Opacity="0.75"/>
+            <TextBlock Name="SceneTypeTextBlock" Grid.Column="2" Foreground="White" Margin="10"/>
         </Grid>
     </Grid>
 </Page>

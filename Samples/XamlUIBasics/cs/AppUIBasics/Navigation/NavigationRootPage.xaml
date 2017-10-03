@@ -33,7 +33,7 @@
         </Grid.ColumnDefinitions>
         <Rectangle Fill="{ThemeResource NavigationViewDefaultPaneBackground}" x:Name="XboxContentSafeRect" Width="48" Visibility="Collapsed" />
         <controls:NavigationView x:Name="NavigationViewControl" AlwaysShowHeader="True" Header=" " Grid.Column="1" IsTabStop="False"
-                SettingsInvoked="NavigationView_SettingsInvoked" Loaded="NavigationViewControl_Loaded">
+                SelectionChanged="NavigationView_SelectionChanged" Loaded="NavigationViewControl_Loaded">
             <controls:NavigationView.HeaderTemplate>
                 <DataTemplate>
                     <local:PageHeader Title="{Binding}"

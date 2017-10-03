@@ -54,15 +54,15 @@
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Content Include="css\Scenario1_ReceiptPrinter.css" />
-    <Content Include="css\Scenario2_ErrorHandling.css" />
-    <Content Include="css\Scenario3_MultipleReceipt.css" />
     <Content Include="..\..\..\SharedContent\js\default.html">
       <Link>default.html</Link>
     </Content>
-    <Content Include="html\Scenario1_ReceiptPrinter.html" />
-    <Content Include="html\Scenario2_ErrorHandling.html" />
-    <Content Include="html\Scenario3_MultipleReceipt.html" />
+    <Content Include="html\Scenario1_FindClaimEnable.html" />
+    <Content Include="html\Scenario2_PrintReceipt.html" />
+    <Content Include="html\Scenario3_MultipleClaims.html" />
+    <Content Include="..\..\..\SharedContent\media\Samples\coffee-logo.png">
+      <Link>images\coffee-logo.png</Link>
+    </Content>
     <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>images\microsoft-sdk.png</Link>
     </Content>
@@ -91,9 +91,9 @@
       <Link>js\devicehelpers.js</Link>
     </Content>
     <Content Include="js\sample-configuration.js" />
-    <Content Include="js\Scenario1_ReceiptPrinter.js" />
-    <Content Include="js\Scenario2_ErrorHandling.js" />
-    <Content Include="js\Scenario3_MultipleReceipt.js" />
+    <Content Include="js\Scenario1_FindClaimEnable.js" />
+    <Content Include="js\Scenario2_PrintReceipt.js" />
+    <Content Include="js\Scenario3_MultipleClaims.js" />
     <Content Include="..\..\..\SharedContent\js\Microsoft.WinJS\css\ui-dark.css">
       <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>
     </Content>

@@ -1,11 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HttpClient", "HttpClient.vcxproj", "{4AB0D3B9-5AE2-5755-9D94-00EF178BC6D6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DC7DFD34-63DC-5B78-914B-4435A2A87EAE} = {DC7DFD34-63DC-5B78-914B-4435A2A87EAE}
+	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HttpFilters", "..\HttpFilters\HttpFilters.vcxproj", "{682DF16E-DEB3-5F7E-851E-F45DDAEBBC09}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HttpFilters", "..\HttpFilters\HttpFilters.vcxproj", "{DC7DFD34-63DC-5B78-914B-4435A2A87EAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,18 +38,18 @@ Global
 		{4AB0D3B9-5AE2-5755-9D94-00EF178BC6D6}.Release|x86.ActiveCfg = Release|Win32
 		{4AB0D3B9-5AE2-5755-9D94-00EF178BC6D6}.Release|x86.Build.0 = Release|Win32
 		{4AB0D3B9-5AE2-5755-9D94-00EF178BC6D6}.Release|x86.Deploy.0 = Release|Win32
-		{682DF16E-DEB3-5F7E-851E-F45DDAEBBC09}.Debug|ARM.ActiveCfg = Debug|ARM
-		{682DF16E-DEB3-5F7E-851E-F45DDAEBBC09}.Debug|ARM.Build.0 = Debug|ARM
-		{682DF16E-DEB3-5F7E-851E-F45DDAEBBC09}.Debug|x64.ActiveCfg = Debug|x64
-		{682DF16E-DEB3-5F7E-851E-F45DDAEBBC09}.Debug|x64.Build.0 = Debug|x64
-		{682DF16E-DEB3-5F7E-851E-F45DDAEBBC09}.Debug|x86.ActiveCfg = Debug|Win32
-		{682DF16E-DEB3-5F7E-851E-F45DDAEBBC09}.Debug|x86.Build.0 = Debug|Win32
-		{682DF16E-DEB3-5F7E-851E-F45DDAEBBC09}.Release|ARM.ActiveCfg = Release|ARM
-		{682DF16E-DEB3-5F7E-851E-F45DDAEBBC09}.Release|ARM.Build.0 = Release|ARM
-		{682DF16E-DEB3-5F7E-851E-F45DDAEBBC09}.Release|x64.ActiveCfg = Release|x64
-		{682DF16E-DEB3-5F7E-851E-F45DDAEBBC09}.Release|x64.Build.0 = Release|x64
-		{682DF16E-DEB3-5F7E-851E-F45DDAEBBC09}.Release|x86.ActiveCfg = Release|Win32
-		{682DF16E-DEB3-5F7E-851E-F45DDAEBBC09}.Release|x86.Build.0 = Release|Win32
+		{DC7DFD34-63DC-5B78-914B-4435A2A87EAE}.Debug|ARM.ActiveCfg = Debug|ARM
+		{DC7DFD34-63DC-5B78-914B-4435A2A87EAE}.Debug|ARM.Build.0 = Debug|ARM
+		{DC7DFD34-63DC-5B78-914B-4435A2A87EAE}.Debug|x64.ActiveCfg = Debug|x64
+		{DC7DFD34-63DC-5B78-914B-4435A2A87EAE}.Debug|x64.Build.0 = Debug|x64
+		{DC7DFD34-63DC-5B78-914B-4435A2A87EAE}.Debug|x86.ActiveCfg = Debug|Win32
+		{DC7DFD34-63DC-5B78-914B-4435A2A87EAE}.Debug|x86.Build.0 = Debug|Win32
+		{DC7DFD34-63DC-5B78-914B-4435A2A87EAE}.Release|ARM.ActiveCfg = Release|ARM
+		{DC7DFD34-63DC-5B78-914B-4435A2A87EAE}.Release|ARM.Build.0 = Release|ARM
+		{DC7DFD34-63DC-5B78-914B-4435A2A87EAE}.Release|x64.ActiveCfg = Release|x64
+		{DC7DFD34-63DC-5B78-914B-4435A2A87EAE}.Release|x64.Build.0 = Release|x64
+		{DC7DFD34-63DC-5B78-914B-4435A2A87EAE}.Release|x86.ActiveCfg = Release|Win32
+		{DC7DFD34-63DC-5B78-914B-4435A2A87EAE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

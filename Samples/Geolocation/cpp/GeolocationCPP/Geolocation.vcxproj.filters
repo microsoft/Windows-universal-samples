@@ -15,6 +15,9 @@
     <ClCompile Include="Scenario4_ForegroundGeofence.xaml.cpp" />
     <ClCompile Include="Scenario4_ForegroundGeofenceHelpers.cpp" />
     <ClCompile Include="Scenario5_GeofenceBackgroundTask.xaml.cpp" />
+    <ClCompile Include="Scenario6_GetLastVisit.xaml.cpp" />
+    <ClCompile Include="Scenario7_ForegroundVisits.xaml.cpp" />
+    <ClCompile Include="Scenario8_VisitsBackgroundTask.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeofenceItem.h" />
@@ -27,6 +30,9 @@
     <ClInclude Include="Scenario3_BackgroundTask.xaml.h" />
     <ClInclude Include="Scenario4_ForegroundGeofence.xaml.h" />
     <ClInclude Include="Scenario5_GeofenceBackgroundTask.xaml.h" />
+    <ClInclude Include="Scenario6_GetLastVisit.xaml.h" />
+    <ClInclude Include="Scenario7_ForegroundVisits.xaml.h" />
+    <ClInclude Include="Scenario8_VisitsBackgroundTask.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\SharedContent\media\microsoft-sdk.png">
@@ -64,6 +70,9 @@
     <Page Include="..\..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>
+    <Page Include="Scenario6_GetLastVisit.xaml" />
+    <Page Include="Scenario7_ForegroundVisits.xaml" />
+    <Page Include="Scenario8_VisitsBackgroundTask.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">

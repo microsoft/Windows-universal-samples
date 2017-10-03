@@ -28,6 +28,7 @@ This sample demonstrates the following:
 -   Using a deferral object to include asynchronous code in your background task.
 -   Handling the cancellation of a background task, and ensuring the task is cancelled when required conditions are no longer met.
 -   Initializing background task progress and completion handlers when the app is launched.
+-   Registering a background task in a Background Task Registration Group.
 
 To obtain an evaluation copy of Windows 8.1, go to [Windows 8.1](http://go.microsoft.com/fwlink/p/?linkid=301696).
 

@@ -13,13 +13,12 @@ using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
 using Windows.ApplicationModel.AppService;
 using Windows.Foundation.Collections;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace AppServicesClient
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -78,6 +77,7 @@ namespace AppServicesClient
                         rootPage.NotifyUser(string.Format("The app AppServicesProvider is installed but it does not provide the app service {0}.", connection.AppServiceName), NotifyType.ErrorMessage);
                         break;
 
+                    default:
                     case AppServiceConnectionStatus.Unknown:
                         rootPage.NotifyUser("An unkown error occurred while we were trying to open an AppServiceConnection.", NotifyType.ErrorMessage);
                         break;
@@ -129,17 +129,15 @@ namespace AppServicesClient
             }
 
             //Parse user input
-            int minValueInput = 0;
-            bool valueParsed = int.TryParse(MinValue.Text, out minValueInput);
-            if (!valueParsed)
+            int minValueInput;
+            if (!int.TryParse(MinValue.Text, out minValueInput))
             {
                 rootPage.NotifyUser("The Minimum Value should be a valid integer", NotifyType.ErrorMessage);
                 return;
             }
 
-            int maxValueInput = 0;
-            valueParsed = int.TryParse(MaxValue.Text, out maxValueInput);
-            if (!valueParsed)
+            int maxValueInput;
+            if (!int.TryParse(MaxValue.Text, out maxValueInput))
             {
                 rootPage.NotifyUser("The Maximum Value should be a valid integer", NotifyType.ErrorMessage);
                 return;
@@ -191,8 +189,8 @@ namespace AppServicesClient
                         rootPage.NotifyUser("The service exceeded the resources allocated to it and had to be terminated.", NotifyType.ErrorMessage);
                         break;
 
-                    case AppServiceResponseStatus.Unknown:
                     default:
+                    case AppServiceResponseStatus.Unknown:
                         rootPage.NotifyUser("An unkown error occurred while we were trying to send a message to the service.", NotifyType.ErrorMessage);
                         break;
                 }

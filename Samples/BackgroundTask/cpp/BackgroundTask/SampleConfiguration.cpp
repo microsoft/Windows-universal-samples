@@ -30,6 +30,9 @@ String^ BackgroundTaskSample::ApplicationTriggerTaskProgress = "";
 bool BackgroundTaskSample::ApplicationTriggerTaskRegistered = false;
 String^ BackgroundTaskSample::ApplicationTriggerTaskResult = "";
 
+String^ BackgroundTaskSample::GroupedBackgroundTaskProgress = "";
+bool BackgroundTaskSample::GroupedBackgroundTaskRegistered = false;
+
 Array<Scenario>^ MainPage::scenariosInner = ref new Array<Scenario>
 {
     // The format here is the following:
@@ -38,7 +41,8 @@ Array<Scenario>^ MainPage::scenariosInner = ref new Array<Scenario>
     { "Background task with a condition", "SDKTemplate.SampleBackgroundTaskWithCondition" },
     { "Servicing complete task", "SDKTemplate.ServicingCompleteTask" },
     { "Background task with time trigger", "SDKTemplate.TimeTriggeredTask" },
-    { "Background task with application trigger", "SDKTemplate.ApplicationTriggerTask" }
+    { "Background task with application trigger", "SDKTemplate.ApplicationTriggerTask" },
+    { "Grouped background task", "SDKTemplate.GroupedBackgroundTask" },
 };
 
 String^ BackgroundTaskSample::GetBackgroundTaskStatus(String^ name)
@@ -64,6 +68,10 @@ String^ BackgroundTaskSample::GetBackgroundTaskStatus(String^ name)
     {
         registered = BackgroundTaskSample::ApplicationTriggerTaskRegistered;
     }
+    else if (name == GroupedBackgroundTaskName)
+    {
+        registered = BackgroundTaskSample::GroupedBackgroundTaskRegistered;
+    }
 
     String^ status = registered ? "Registered" : "Unregistered";
 
@@ -76,7 +84,7 @@ String^ BackgroundTaskSample::GetBackgroundTaskStatus(String^ name)
     return status;
 }
 
-BackgroundTaskRegistration^ BackgroundTaskSample::RegisterBackgroundTask(String^ taskEntryPoint, String^ name, IBackgroundTrigger^ trigger, IBackgroundCondition^ condition)
+BackgroundTaskRegistration^ BackgroundTaskSample::RegisterBackgroundTask(String^ taskEntryPoint, String^ name, IBackgroundTrigger^ trigger, IBackgroundCondition^ condition, BackgroundTaskRegistrationGroup^ group)
 {
     if (TaskRequiresBackgroundAccess(name))
     {
@@ -100,6 +108,11 @@ BackgroundTaskRegistration^ BackgroundTaskSample::RegisterBackgroundTask(String^
         builder->CancelOnConditionLoss = true;
     }
 
+    if (group != nullptr)
+    {
+        builder->TaskGroup = group;
+    }
+
     auto task = builder->Register();
 
     UpdateBackgroundTaskRegistrationStatus(name, true);
@@ -115,9 +128,6 @@ BackgroundTaskRegistration^ BackgroundTaskSample::RegisterBackgroundTask(String^
 
 bool BackgroundTaskSample::TaskRequiresBackgroundAccess(String^ name)
 {
-#if WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
-    return true;
-#else
     if ((name == TimeTriggeredTaskName) ||
         (name == ApplicationTriggerTaskName))
     {
@@ -127,29 +137,53 @@ bool BackgroundTaskSample::TaskRequiresBackgroundAccess(String^ name)
     {
         return false;
     }
-#endif
 }
 
-void BackgroundTaskSample::UnregisterBackgroundTasks(String^ name)
+void BackgroundTaskSample::UnregisterBackgroundTasks(String^ name, BackgroundTaskRegistrationGroup^ group)
 {
     //
-    // Loop through all background tasks and unregister any that have a name that matches
-    // the name passed into this function.
+    // If the given task group is registered then loop through all background tasks associated with it
+    // and unregister any with the name passed into this function.
     //
-    auto iter = BackgroundTaskRegistration::AllTasks->First();
-    auto hascur = iter->HasCurrent;
-    while (hascur)
+    if (group != nullptr)
     {
-        auto cur = iter->Current->Value;
-
-        if (cur->Name == name)
+        for (auto pair : group->AllTasks)
         {
-            cur->Unregister(true);
-            UpdateBackgroundTaskRegistrationStatus(name, false);
+            auto task = pair->Value;
+            if (task->Name == name)
+            {
+                task->Unregister(true);
+            }
         }
-
-        hascur = iter->MoveNext();
     }
+    else
+    {
+        //
+        // Loop through all ungrouped background tasks and unregister any with the name passed into this function.
+        //
+        for (auto pair : BackgroundTaskRegistration::AllTasks)
+        {
+            auto task = pair->Value;
+            if (task->Name == name)
+            {
+                task->Unregister(true);
+            }
+        }
+    }
+
+    UpdateBackgroundTaskRegistrationStatus(name, false);
+}
+
+BackgroundTaskRegistrationGroup^ BackgroundTaskSample::GetTaskGroup(String^ id, String^ groupName)
+{
+    auto group = BackgroundTaskRegistration::GetTaskGroup(id);
+
+    if (group == nullptr)
+    {
+        group = ref new BackgroundTaskRegistrationGroup(id, groupName);
+    }
+
+    return group;
 }
 
 void BackgroundTaskSample::UpdateBackgroundTaskRegistrationStatus(String^ name, bool registered)
@@ -173,5 +207,9 @@ void BackgroundTaskSample::UpdateBackgroundTaskRegistrationStatus(String^ name, 
     else if (name == ApplicationTriggerTaskName)
     {
         BackgroundTaskSample::ApplicationTriggerTaskRegistered = registered;
+    }
+    else if (name == GroupedBackgroundTaskName)
+    {
+        BackgroundTaskSample::GroupedBackgroundTaskRegistered = registered;
     }
 }

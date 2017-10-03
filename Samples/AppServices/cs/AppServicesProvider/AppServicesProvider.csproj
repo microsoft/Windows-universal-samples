@@ -6,7 +6,7 @@
     <ProjectGuid>{9D422B00-8BDB-5308-837A-BD3E2E139AF6}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AppServicesProvider</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>AppServicesProvider</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>

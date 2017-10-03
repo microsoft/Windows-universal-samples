@@ -23,6 +23,7 @@
     var StorageLibrary = Windows.Storage.StorageLibrary;
     var KnownLibraryId = Windows.Storage.KnownLibraryId;
     var ApplicationData = Windows.Storage.ApplicationData;
+    var SceneAnalysisRecommendation = Windows.Media.Core.SceneAnalysisRecommendation;
 
     // Receive notifications about rotation of the device and UI and apply any necessary rotation to the preview stream and UI controls
     var oOrientationSensor = SimpleOrientationSensor.getDefault(),
@@ -731,10 +732,17 @@
     }
 
     function sceneAnalysisEffect_sceneAnalyzed(args) {
-       // Update the graphical representation of how much detail could be recovered through an HDR capture, ranging
-       // from 0 ("everything is within the dynamic range of the camera") to CERTAINTY_CAP ("at this point the app
-       // strongly recommends an HDR capture"), where CERTAINTY_CAP can be any number between 0 and 1 that the app chooses.
-       hdrImpactBar.value = Math.min(certaintyCap, args.detail[0].resultFrame.highDynamicRange.certainty);
+        // Update the graphical representation of how much detail could be recovered through an HDR capture, ranging
+        // from 0 ("everything is within the dynamic range of the camera") to CERTAINTY_CAP ("at this point the app
+        // strongly recommends an HDR capture"), where CERTAINTY_CAP can be any number between 0 and 1 that the app chooses.
+        hdrImpactBar.value = Math.min(certaintyCap, args.detail[0].resultFrame.highDynamicRange.certainty);
+
+        for (var key in SceneAnalysisRecommendation) {
+            if (SceneAnalysisRecommendation[key] == args.resultFrame.analysisRecommendation) {
+                sceneTypeTextBlock.textContent = ("Scene: " + key);
+                break;
+            }
+        }
     }
 
     function photoButton_tapped() {

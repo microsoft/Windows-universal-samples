@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22512.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BackgroundTransfer", "BackgroundTransfer\BackgroundTransfer.vcxproj", "{D8C2D505-8ACC-5986-A26A-E36FB2D6ABA6}"
 	ProjectSection(ProjectDependencies) = postProject

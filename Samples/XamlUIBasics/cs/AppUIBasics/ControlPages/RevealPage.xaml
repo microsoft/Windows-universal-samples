@@ -97,14 +97,14 @@
         <local:ControlExample x:Name="Example2" RelativePanel.AlignLeftWith="Example1" RelativePanel.Below="Example1"  HeaderText="RevealBorderBrush applied on a Grid" Grid.Column="1">
             <local:ControlExample.Example>
                 <StackPanel VerticalAlignment="Center">
-                    <Grid BorderThickness="3" BorderBrush="{ThemeResource SystemControlRevealBorderListMediumBrush}" Height="100" >
-                        <TextBlock Text="SystemControlRevealBorderListMediumBrush"/>
+                    <Grid BorderThickness="3" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" Height="100" >
+                        <TextBlock Text="SystemControlBackgroundListMediumRevealBorderBrush"/>
                     </Grid>
                 </StackPanel>
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
                 <RichTextBlock>
-                    <Paragraph>&lt;Grid BorderThickness="3" BorderBrush="{ThemeResource SystemControlRevealBorderListMediumBrush}"&gt;</Paragraph>
+                    <Paragraph>&lt;Grid BorderThickness="3" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;TextBlock Text="SystemControlRevealBorderChromeWhiteBrush" /&gt;</Paragraph>
                     <Paragraph>&lt;/Grid&gt;</Paragraph>
                 </RichTextBlock>

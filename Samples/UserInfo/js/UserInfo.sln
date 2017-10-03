@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013 for Windows
-VisualStudioVersion = 12.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "UserInfo", "UserInfo.jsproj", "{9993CB68-BEB4-5771-BDE9-CFEBCD0265A3}"
 EndProject

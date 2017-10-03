@@ -28,6 +28,10 @@ Namespace Global.RandomNumberService
                 serviceDeferral.Complete()
                 serviceDeferral = Nothing
             End If
+            If connection IsNot Nothing Then
+                connection.Dispose()
+                connection = Nothing
+            End If
         End Sub
 
         Async Sub OnRequestReceived(sender As AppServiceConnection, args As AppServiceRequestReceivedEventArgs)

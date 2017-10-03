@@ -1,9 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppServicesClient", "AppServicesClient\AppServicesClient.csproj", "{1A6B6734-6036-5DDD-97B7-704E5F598901}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9D422B00-8BDB-5308-837A-BD3E2E139AF6} = {9D422B00-8BDB-5308-837A-BD3E2E139AF6}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppServicesProvider", "AppServicesProvider\AppServicesProvider.csproj", "{9D422B00-8BDB-5308-837A-BD3E2E139AF6}"
 EndProject

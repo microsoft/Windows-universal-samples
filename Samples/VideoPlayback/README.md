@@ -31,6 +31,7 @@ Specifically, this sample covers:
 
 [VideoPlaybackSynchronization sample](/Samples/VideoPlaybackSynchronization)  
 [XamlCustomMediaTransportControls sample](/Samples/XamlCustomMediaTransportControls)  
+[360VideoPlayback sample](/Samples/360VideoPlayback)  
 
 ### Reference
 

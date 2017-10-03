@@ -49,9 +49,9 @@ namespace SDKTemplate
         void EndScenario_Click(Platform::Object^ sender, RoutedEventArgs e);
 
         void ResetTheScenarioState();
-        ReceiptPrintJob^ GetMerchantFooter(ClaimedPosPrinter^ claimedInstance);
-        ReceiptPrintJob^ GetCustomerFooter(ClaimedPosPrinter^ claimedInstance);
-        void LineFeedAndCutPaper(ReceiptPrintJob^ job);
+        Platform::String^ GetMerchantFooter();
+        Platform::String^ GetCustomerFooter();
+        void PrintLineFeedAndCutPaper(ReceiptPrintJob^ job, Platform::String^ receipt);
 
         task<void> ClaimPrinter();
         task<void> EnableAsync();
