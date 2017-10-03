@@ -10,8 +10,8 @@
     <AssemblyName>AppUIBasics</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.16232.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16232.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16288.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16288.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -185,7 +185,6 @@
     <Content Include="Assets\Tiles\WideTile.scale-150.png" />
     <Content Include="Assets\Tiles\WideTile.scale-200.png" />
     <Content Include="Assets\Tiles\WideTile.scale-400.png" />
-    <Content Include="Assets\TreeView.png" />
     <Content Include="Assets\WebView.png" />
     <None Include="project.json" />
   </ItemGroup>
@@ -390,9 +389,6 @@
     </Compile>
     <Compile Include="ControlPages\ToolTipPage.xaml.cs">
       <DependentUpon>ToolTipPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ControlPages\TreeViewPage.xaml.cs">
-      <DependentUpon>TreeViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ControlPages\VariableSizedWrapGridPage.xaml.cs">
       <DependentUpon>VariableSizedWrapGridPage.xaml</DependentUpon>
@@ -746,10 +742,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ControlPages\ToolTipPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ControlPages\TreeViewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
