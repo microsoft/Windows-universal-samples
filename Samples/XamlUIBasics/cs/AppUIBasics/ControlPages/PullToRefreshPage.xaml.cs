@@ -24,7 +24,30 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+// From ControlInfoData.json:
+//{
+//  "UniqueId": "PullToRefresh",
+//  "Title": "Pull to refresh",
+//  "Subtitle": "Touch gesture for dragging down to fetch new data.",
+//  "ImagePath": "ms-appx:///Assets/PullToRefresh.png",
+//  "Description": "Touch gesture for dragging down to fetch new data.",
+//  "Content": "",
+//  "IsNew": true,
+//	"Docs": [
+//		{
+//			"Title": "RefreshContainer",
+//			"Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.RefreshContainer"
+//		},
+//		{
+//			"Title": "RefreshVisualizer",
+//			"Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.RefreshVisualizer"
+//		}
+//	],
+//  "RelatedControls": [
+//    "GridView",
+//    "ListView"
+//  ]
+//},
 
 namespace AppUIBasics.ControlPages
 {
@@ -39,7 +62,7 @@ namespace AppUIBasics.ControlPages
         public PullToRefreshPage()
         {
             this.InitializeComponent();
-            foreach (var c in @"AcrylicBrush ColorPicker NavigationView ParallaxView PersonPicture PullToRefresh RatingsControl RevealBrush TreeView".Split(' '))
+            foreach (var c in @"AcrylicBrush ColorPicker NavigationView ParallaxView PersonPicture PullToRefresh RatingControl RevealBrush TreeView".Split(' '))
                 items.Add(c);
             lv.ItemsSource = items;
         }

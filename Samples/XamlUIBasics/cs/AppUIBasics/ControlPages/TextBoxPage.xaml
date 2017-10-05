@@ -10,37 +10,35 @@
 //*********************************************************
 -->
 <Page x:Class="AppUIBasics.ControlPages.TextBoxPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics.ControlPages"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
     <StackPanel>
-        <local:ControlExample x:Name="Example1" HeaderText="A simple TextBox." HorizontalContentAlignment="Stretch">
+        <local:ControlExample x:Name="Example1" HeaderText="A simple TextBox.">
             <TextBox />
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;TextBox/&gt;</Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
-        <local:ControlExample x:Name="Example2" HeaderText="A TextBox with a header and placeholder text."
-                HorizontalContentAlignment="Stretch">
+        <local:ControlExample x:Name="Example2" HeaderText="A TextBox with a header and placeholder text.">
             <local:ControlExample.Example>
                 <TextBox Height="60" Header="Enter your name:" PlaceholderText="Name" />
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;TextBlock Height="60"
                         <Bold>Header="Enter your name:" PlaceholderText="Name"</Bold> /&gt;
                     </Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
-        <local:ControlExample x:Name="Example3" HeaderText="A read-only TextBox with various properties set."
-                HorizontalContentAlignment="Stretch">
+        <local:ControlExample x:Name="Example3" HeaderText="A read-only TextBox with various properties set.">
             <TextBox Text="I am super excited to be here!" IsReadOnly="True" FontFamily="Arial" FontSize="24"
                     FontStyle="Italic" CharacterSpacing="200" Foreground="CornflowerBlue" />
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;TextBox Text="I am super excited to be here!"
                         <Bold>IsReadOnly="True"</Bold>
                     </Paragraph>
@@ -53,12 +51,10 @@
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
-        <local:ControlExample x:Name="Example4"
-                HeaderText="A multi-line TextBox with spell checking and custom selection highlight color."
-                HorizontalContentAlignment="Stretch">
+        <local:ControlExample x:Name="Example4" HeaderText="A multi-line TextBox with spell checking and custom selection highlight color.">
             <TextBox TextWrapping="Wrap" AcceptsReturn="True" IsSpellCheckEnabled="True" SelectionHighlightColor="Green" />
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;TextBox
                         <Bold>TextWrapping="Wrap" AcceptsReturn="True" IsSpellCheckEnabled="True" SelectionHighlightColor="Green"</Bold> &gt;
                     </Paragraph>

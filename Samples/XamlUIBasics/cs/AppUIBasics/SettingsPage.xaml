@@ -1,65 +1,20 @@
-﻿<Page x:Class="AppUIBasics.SettingsPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+﻿<Page
+    x:Class="AppUIBasics.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition />
             </TransitionCollection>
         </Grid.ChildrenTransitions>
-        <ScrollViewer x:Name="contentSV" Grid.Row="1" VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" IsTabStop="False" UseSystemFocusVisuals="False"
-                Padding="24,0,0,0">
-            <StackPanel HorizontalAlignment="Left">
-                <TextBlock Text="Theme Mode" Style="{StaticResource TitleTextBlockStyle}" FontWeight="Normal"
-                        Margin="0,4,0,0" />
-                <TextBlock Text="You'll see your change next time you start the app" Margin="0,24,0,0"
-                        Style="{StaticResource BodyTextBlockStyle}" />
-                <StackPanel Margin="0,12,0,0" x:Name="ThemePanel">
-                    <RadioButton Content="Light" Checked="RadioButton_Checked" KeyDown="RadioButton_KeyDown">
-                        <RadioButton.Tag>
-                            <ApplicationTheme>Light</ApplicationTheme>
-                        </RadioButton.Tag>
-                    </RadioButton>
-                    <RadioButton Content="Dark" Checked="RadioButton_Checked">
-                        <RadioButton.Tag>
-                            <ApplicationTheme>Dark</ApplicationTheme>
-                        </RadioButton.Tag>
-                    </RadioButton>
-                    <RadioButton Content="Use system setting" Checked="RadioButton_Checked" />
-                    <Button Content="Feedback" Click="Button_Click"/>
-                </StackPanel>
-                <TextBlock Text="About" Style="{StaticResource TitleTextBlockStyle}" FontWeight="Normal"
-                        Margin="0,70,0,0" />
-                <RichTextBlock MaxWidth="840" Margin="0,24,0,0">
-                    <Paragraph>This app is a companion to the
-                        <Hyperlink NavigateUri="http://msdn.microsoft.com/library/windows/apps/dn263191.aspx">Windows Store app UI, start to finish</Hyperlink> topic on the
-                        <Bold>Windows Dev Center</Bold> . It demonstrates basic usage of various controls in isolation, but it also demonstrates real use of the controls and layout techniques in the app itself. To get the most out of it, browse the full code in Visual Studio and see how the app works.
-                    </Paragraph>
-                    <Paragraph>
-                        <LineBreak /> Each control has a dark theme and a light theme. On each control page, you can open the top app bar to toggle between each theme and see how it looks.
-                    </Paragraph>
-                    <Paragraph>
-                        <LineBreak /> Most control pages show the basic control usage in XAML, but you can view the complete XAML and code for each example in Visual Studio. Each control has its own page in the ControlPages folder.
-                    </Paragraph>
-                </RichTextBlock>
-                <TextBlock Text="Disclaimer" Style="{StaticResource TitleTextBlockStyle}" FontWeight="Normal"
-                        Margin="0,70,0,0" />
-                <RichTextBlock MaxWidth="840" Margin="0,24,0,50">
-                    <Paragraph>THIS CODE AND INFORMATION IS PROVIDED ‘AS IS’ WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.</Paragraph>
-                    <Paragraph>
-                        <LineBreak /> Copyright (c) Microsoft Corporation. All rights reserved.
-                    </Paragraph>
-                </RichTextBlock>
-            </StackPanel>
-        </ScrollViewer>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="WideLayout">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="640" />
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource Breakpoint640Plus}" />
                     </VisualState.StateTriggers>
-                    <VisualState.Setters></VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="NarrowLayout">
                     <VisualState.StateTriggers>
@@ -71,5 +26,63 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+        <ScrollViewer
+            x:Name="contentSV"
+            Grid.Row="1"
+            Padding="20,0,0,0"
+            IsTabStop="False"
+            UseSystemFocusVisuals="False"
+            VerticalScrollBarVisibility="Auto"
+            VerticalScrollMode="Auto">
+            <StackPanel HorizontalAlignment="Left">
+                <TextBlock
+                    Style="{StaticResource TitleTextBlockStyle}"
+                    Margin="0,4,0,0"
+                    FontWeight="Normal"
+                    Text="Theme Mode" />
+                <StackPanel x:Name="ThemePanel" Margin="0,10,0,0">
+                    <RadioButton Tag="Light" Checked="OnThemeRadioButtonChecked" Content="Light" KeyDown="OnThemeRadioButtonKeyDown" />
+                    <RadioButton Tag="Dark" Checked="OnThemeRadioButtonChecked" Content="Dark" />
+                    <RadioButton Tag="Default" Checked="OnThemeRadioButtonChecked" Content="Use system setting" />
+                </StackPanel>
+                <Button Click="OnFeedbackButtonClick" Content="Feedback" Margin="0,8,0,0" />
+                <TextBlock
+                    Style="{StaticResource TitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    FontWeight="Normal"
+                    Text="About" />
+                <RichTextBlock MaxWidth="840" Margin="0,10,0,0" IsTextSelectionEnabled="True">
+                    <Paragraph>
+                        This app is the interactive companion to the
+                        <Hyperlink NavigateUri="https://developer.microsoft.com/windows/apps/design">Fluent Design System web site</Hyperlink>. 
+                        The source code to this app is available on 
+                        <Hyperlink NavigateUri="https://github.com/Microsoft/Windows-universal-samples/tree/dev/Samples/XamlUIBasics">
+                            https://github.com/Microsoft/Windows-universal-samples/tree/dev/Samples/XamlUIBasics
+                        </Hyperlink>. 
+                    </Paragraph>
+                    <Paragraph Margin="0,10,0,0">
+                        To clone the source repository:
+                    </Paragraph>
+                    <Paragraph Margin="20,10,0,10">
+                        git clone https://github.com/Microsoft/Windows-universal-samples -b dev
+                    </Paragraph>
+                    <Paragraph>
+                        To contact the authors,
+                        <Hyperlink NavigateUri="mailto:ControlsGallery@microsoft.com"> mailto:ControlsGallery@microsoft.com </Hyperlink>.
+                    </Paragraph>
+                </RichTextBlock>
+                <TextBlock
+                    Style="{StaticResource TitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    FontWeight="Normal"
+                    Text="Disclaimer" />
+                <RichTextBlock MaxWidth="840" Margin="0,10,0,50" IsTextSelectionEnabled="True">
+                    <Paragraph>THIS CODE AND INFORMATION IS PROVIDED ‘AS IS’ WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.</Paragraph>
+                    <Paragraph>
+                        <LineBreak />Copyright (c) Microsoft Corporation. All rights reserved.
+                    </Paragraph>
+                </RichTextBlock>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

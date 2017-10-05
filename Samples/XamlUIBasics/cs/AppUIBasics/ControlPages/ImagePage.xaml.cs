@@ -36,7 +36,10 @@ namespace AppUIBasics.ControlPages
                 var stretch = (Stretch)Enum.Parse(typeof(Stretch), strStretch);
                 StretchImage.Stretch = stretch;
 
-                StretchLabel.Text = strStretch;
+                if (StretchLabel != null)
+                {
+                    StretchLabel.Text = strStretch;
+                }
             }
         }
     }

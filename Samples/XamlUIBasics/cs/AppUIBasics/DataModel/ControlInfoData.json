@@ -303,30 +303,29 @@
 								"AppBarButton"
 							]
 						},
-						{
-							"UniqueId": "Swipe",
-							"Title": "Swipe",
-							"Subtitle": "Touch gesture for quick menu actions on items.",
-							"ImagePath": "ms-appx:///Assets/Swipe.png",
-							"Description": "Touch gesture for quick menu actions on items.",
-							"Content": "",
-							"IsNew": true,
-													"Docs": [
-														{
-															"Title": "SwipeContainer",
-															"Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.SwipeContainer"
-														},
-														{
-															"Title": "SwipeContent",
-															"Uri": "https://docs.microsoft.com/uwp/api/windows/apps/Windows.UI.Xaml.Controls.SwipeContent"
-														}
-													],
-							"RelatedControls": [
-								"GridView",
-								"ListView",
-								"TreeView"
-							]
-						},
+            {
+              "UniqueId": "SwipeControl",
+              "Title": "SwipeControl",
+              "Subtitle": "Touch gesture for quick menu actions on items.",
+              "ImagePath": "ms-appx:///Assets/Swipe.png",
+              "Description": "Touch gesture for quick menu actions on items.",
+              "Content": "",
+              "IsNew": true,
+              "Docs": [
+                {
+                  "Title": "SwipeControl",
+                  "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.swipecontrol"
+                },
+                {
+                  "Title": "SwipeItems",
+                  "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.swipeitems"
+                }
+              ],
+              "RelatedControls": [
+                "GridView",
+                "ListView"
+              ]
+            },
 						{
 							"UniqueId": "ToggleButton",
 							"Title": "ToggleButton",
@@ -386,7 +385,7 @@
             "CheckBox",
             "ListView",
             "AutoSuggestBox",
-            "RatingsControl"
+            "RatingControl"
           ]
         },
         {
@@ -490,30 +489,6 @@
           ]
         },
         {
-          "UniqueId": "PullToRefresh",
-          "Title": "Pull to refresh",
-          "Subtitle": "Touch gesture for dragging down to fetch new data.",
-          "ImagePath": "ms-appx:///Assets/PullToRefresh.png",
-          "Description": "Touch gesture for dragging down to fetch new data.",
-          "Content": "",
-          "IsNew": true,
-									"Docs": [
-										{
-											"Title": "RefreshContainer",
-											"Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.RefreshContainer"
-										},
-										{
-											"Title": "RefreshVisualizer",
-											"Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.RefreshVisualizer"
-										}
-									],
-          "RelatedControls": [
-            "GridView",
-            "ListView",
-            "TreeView"
-          ]
-        },
-        {
           "UniqueId": "SemanticZoom",
           "Title": "SemanticZoom",
           "Subtitle": "Lets the user zoom between two different views of a collection, making it easier to navigate through large collections of items.",
@@ -535,25 +510,6 @@
             "GridView",
             "ListView",
             "Hub"
-          ]
-        },
-        {
-          "UniqueId": "TreeView",
-          "Title": "TreeView",
-          "Subtitle": "A hierarchical list with expanding and collapsing nodes that contain nested items.",
-          "ImagePath": "ms-appx:///Assets/TreeView.png",
-          "Description": "A hierarchical list with expanding and collapsing nodes that contain nested items.",
-          "Content": "",
-          "IsNew": true,
-          "Docs": [
-							{
-								"Title": "TreeView",
-								"Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.TreeView"
-							}
-          ],
-          "RelatedControls": [
-            "ListView",
-            "GridView"
           ]
         }
       ]
@@ -687,8 +643,8 @@
 						]
 					},
 					{
-						"UniqueId": "RatingsControl",
-						"Title": "RatingsControl",
+						"UniqueId": "RatingControl",
+						"Title": "RatingControl",
 						"Subtitle": "Rate something 1 to 5 stars.",
 						"ImagePath": "ms-appx:///Assets/RatingControl.png",
 						"Description": "Rate something 1 to 5 stars.",
@@ -696,8 +652,8 @@
 						"IsNew": true,
 						"Docs": [
 													{
-														"Title": "RatingsControl",
-														"Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.RatingsControl"
+														"Title": "RatingControl",
+														"Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.RatingControl"
 													}
 						],
 						"RelatedControls": [
@@ -722,7 +678,7 @@
 						"RelatedControls": [
 							"ComboBox",
 							"ListBox",
-							"RatingsControl"
+							"RatingControl"
 						]
 					},
 					{

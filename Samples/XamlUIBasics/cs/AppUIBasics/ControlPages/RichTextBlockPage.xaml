@@ -11,7 +11,7 @@
 -->
 <Page x:Class="AppUIBasics.ControlPages.RichTextBlockPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics.ControlPages"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
     <StackPanel>
@@ -22,7 +22,7 @@
                 </RichTextBlock>
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;RichTextBlock&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;Paragraph&gt;I am a RichTextBlock.&lt;/Paragraph&gt;</Paragraph>
                     <Paragraph>&lt;/RichTextBlock&gt;</Paragraph>
@@ -41,7 +41,7 @@
                 </RichTextBlock>
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
-                <RichTextBlock HorizontalAlignment="Left">
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;RichTextBlock SelectionHighlightColor="Green"&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;Paragraph&gt;RichTextBlock provides a rich text display container that supports</Paragraph>
                     <Paragraph TextIndent="24">&lt;Run FontStyle="Italic" FontWeight="Bold"&gt;formatted text&lt;/Run&gt;,</Paragraph>
@@ -72,7 +72,7 @@
                 </Grid>
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;Grid&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;Grid.ColumnDefinitions&gt;</Paragraph>
                     <Paragraph TextIndent="24">&lt;ColumnDefinition/&gt;</Paragraph>

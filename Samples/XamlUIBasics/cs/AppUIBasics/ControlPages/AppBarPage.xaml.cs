@@ -52,7 +52,7 @@ namespace AppUIBasics.ControlPages
             {
                 if (b.Tag.ToString() == "Home")
                 {
-                    rootFrame.Navigate(typeof(AppUIBasics.MainPage));
+                    rootFrame.Navigate(typeof(AppUIBasics.AllControlsPage));
                 }
                 else
                 {

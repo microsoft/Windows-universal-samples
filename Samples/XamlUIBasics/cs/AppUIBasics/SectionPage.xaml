@@ -1,90 +1,59 @@
 <!--
-//*********************************************************
-//
-// Copyright (c) Microsoft. All rights reserved.
-// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
-// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
-// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
-//
-//*********************************************************
+    //*********************************************************
+    //
+    // Copyright (c) Microsoft. All rights reserved.
+    // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+    // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+    // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+    // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+    //
+    //*********************************************************
 -->
-<Page x:Name="pageRoot" x:Class="AppUIBasics.SectionPage"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
-        xmlns:data="using:AppUIBasics.Data" xmlns:common="using:AppUIBasics.Common"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" NavigationCacheMode="Enabled" >
-    <Page.Resources>
-        <DataTemplate x:Key="ControlItemTemplate" x:DataType="data:ControlInfoDataItem">
-            <Grid x:Name="controlRoot" Height="145" Width="345" Padding="15" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Image x:Name="gridImage"  Source="{x:Bind ImagePath}" Stretch="Uniform" Width="36" VerticalAlignment="Top"
-                        AutomationProperties.Name="{x:Bind Title}" />
-                <RelativePanel Grid.Column="1" Margin="32,0,0,0">
-                    <TextBlock Text="{x:Bind Title}" Style="{StaticResource SubtitleTextBlockStyle}" x:Name="titleText"
-                            TextLineBounds="TrimToCapHeight" TextWrapping="NoWrap" FontWeight="SemiBold"
-                            Foreground="{ThemeResource HyperlinkButtonForeground}" />
-                    <TextBlock Text="{x:Bind Subtitle}" Style="{StaticResource BodyTextBlockStyle}" Margin="0,4,0,0"
-                            TextTrimming="CharacterEllipsis" RelativePanel.Below="titleText" />
-                </RelativePanel>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="ControlItemTemplateSmall" x:DataType="data:ControlInfoDataItem">
-            <Grid x:Name="controlRoot" Height="145" Width="332" Padding="15" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Image x:Name="gridImage"  Source="{x:Bind ImagePath}" Stretch="Uniform" Width="36" VerticalAlignment="Top"
-                        AutomationProperties.Name="{x:Bind Title}" />
-                <RelativePanel Grid.Column="1" Margin="32,0,0,0">
-                    <TextBlock x:Name="titleText" Text="{x:Bind Title}" Style="{StaticResource SubtitleTextBlockStyle}"
-                            TextLineBounds="TrimToCapHeight" TextWrapping="NoWrap" FontWeight="SemiBold"
-                            Foreground="{ThemeResource HyperlinkButtonForeground}" />
-                    <TextBlock Text="{x:Bind Subtitle}" Style="{StaticResource BodyTextBlockStyle}" Margin="0,4,0,0"
-                            TextTrimming="CharacterEllipsis" RelativePanel.Below="titleText" />
-                </RelativePanel>
-            </Grid>
-        </DataTemplate>
-    </Page.Resources>
-    <!--
-        This grid acts as a root panel for the page that defines two rows:
-        * Row 0 contains the back button and page title
-        * Row 1 contains the rest of the page layout
-    -->
-
-    <Grid Background="{StaticResource HomePageBackgroundBrush}"
-            d:DataContext="{Binding Groups[0], Source={d:DesignData Source=/DataModel/ControlInfoData.json, Type=data:ControlInfoDataSource}}">
-        <!-- Horizontal scrolling grid -->
-        <GridView x:Name="itemGridView" AutomationProperties.AutomationId="ItemGridView" Loaded="itemGridView_Loaded"
-                ItemTemplate="{StaticResource ControlItemTemplate}" KeyDown="itemGridView_KeyDown"
-                ItemContainerStyle="{StaticResource GridViewItemStyle}"
-                AutomationProperties.Name="Items In Group" TabIndex="1" Grid.Row="1" Padding="24,20,0,0"
-                ItemsSource="{x:Bind Group.Items}" SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"
-                ItemClick="ItemView_ItemClick"></GridView>
+<local:ItemsPageBase
+    x:Class="AppUIBasics.SectionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics"
+    NavigationCacheMode="Enabled">
+    
+    <!--  This grid acts as a root panel for the page.  -->
+    <Grid Background="{ThemeResource HomePageBackgroundBrush}">
+        <!--  Visual states reflect the application's window size  -->
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
+            <VisualStateGroup x:Name="LayoutVisualStates">
                 <VisualState x:Name="WideLayout">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="640" />
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource Breakpoint640Plus}" />
                     </VisualState.StateTriggers>
-                    <VisualState.Setters></VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="NarrowLayout">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="itemGridView.Padding" Value="14,14,0,0" />
-                        <Setter Target="itemGridView.ItemTemplate" Value="{StaticResource ControlItemTemplateSmall}" />
+                        <Setter Target="itemGridView.Padding" Value="14,0,14,0" />
                         <Setter Target="itemGridView.ItemContainerStyle" Value="{StaticResource GridViewItemStyleSmall}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+        
+        <GridView
+            x:Name="itemGridView"
+            Padding="24,0,0,0"
+            AutomationProperties.AutomationId="ItemGridView"
+            AutomationProperties.Name="Items In Group"
+            ContainerContentChanging="OnItemGridViewContainerContentChanging"
+            IsItemClickEnabled="True"
+            IsSwipeEnabled="False"
+            ItemClick="OnItemGridViewItemClick"
+            ItemContainerStyle="{StaticResource GridViewItemStyle}"
+            ItemTemplate="{StaticResource ControlItemTemplate}"
+            ItemsSource="{x:Bind Items, Mode=OneWay}"
+            KeyDown="OnItemGridViewKeyDown"
+            Loaded="OnItemGridViewLoaded"
+            SizeChanged="OnItemGridViewSizeChanged"
+            SelectionMode="None"
+            TabIndex="1" />
     </Grid>
-</Page>
+</local:ItemsPageBase>

@@ -28,7 +28,7 @@ For more information on adding audio to your Windows Store app, see [Quickstart:
 Playing audio in the background is supported by the Windows Audio Session API
 only in communication scenarios as demonstrated by the [VoIP](/Samples/VoIP) sample.
 Instead, for general background audio playback of media,
-use the BackgroundMediaPlayer class demonstrated in the [Background Audio](/Samples/BackgroundAudio) sample.
+use the MediaPlayer class demonstrated in the [Background Media Playback](/Samples/BackgroundMediaPlayback) sample.
 
 ## Related topics
 
@@ -66,4 +66,10 @@ use the BackgroundMediaPlayer class demonstrated in the [Background Audio](/Samp
 
 ## Run the sample
 
-To run this sample after building it, press F5 (run with debugging enabled) or Ctrl-F5 (run without debugging enabled) from Visual Studio 2013 for Windows 8.1 (any SKU). (Or select the corresponding options from the Debug menu.)
+The next steps depend on whether you just want to deploy the sample or you want to both deploy and run it.
+
+**Deploying the sample**
+1.  Select **Build** \> **Deploy Solution**.
+
+**Deploying and running the sample**
+1.  To debug the sample and then run it, press F5 or select **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or select**Debug** \> **Start Without Debugging**.

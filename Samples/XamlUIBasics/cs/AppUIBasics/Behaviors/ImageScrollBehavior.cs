@@ -1,8 +1,7 @@
 ﻿using Microsoft.Xaml.Interactivity;
 using System.Linq;
-using Windows.ApplicationModel.Core;
+using Windows.Storage;
 using Windows.UI;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -15,7 +14,7 @@ namespace AppUIBasics.Behaviors
         private const int _alpha = 255;
         private const int _maxFontSize = 42;
         private const int _minFontSize = 24;
-        private const int scrollViewerThresholdValue = 250;
+        private const int scrollViewerThresholdValue = 190;
         private ScrollViewer scrollViewer;
         private GridView gridView;
 
@@ -63,8 +62,9 @@ namespace AppUIBasics.Behaviors
             var header = (PageHeader)TargetControl;
             header.BackgroundColorOpacity = verticalOffset / _opacityMaxValue;
             header.AcrylicOpacity = 0.3 * (1 - (verticalOffset / _opacityMaxValue));
-            if (verticalOffset == 0)
+            if (verticalOffset < 10)
             {
+                VisualStateManager.GoToState(header, "DefaultForeground", false);
                 header.BackgroundColorOpacity = 0;
                 header.FontSize = 42;
                 header.Foreground = new SolidColorBrush(Colors.White);
@@ -72,32 +72,24 @@ namespace AppUIBasics.Behaviors
             }
             else if (verticalOffset > scrollViewerThresholdValue)
             {
-                TargetControl.FontSize = _minFontSize;
-                if (gridView != null)
-                {
-                    gridView.Margin = Window.Current.Bounds.Width > 640 ? new Thickness(0, 70, 0, 0) : new Thickness(0, 10, 0, 0);
-                }
-                ApplicationView.GetForCurrentView().TitleBar.ButtonForegroundColor = Colors.Black;
+                VisualStateManager.GoToState(header, "AlternateForeground", false);
+                header.FontSize = _minFontSize;
             }
             else
             {
-                TargetControl.FontSize = -(((verticalOffset / scrollViewerThresholdValue) * (_maxFontSize - _minFontSize)) - _maxFontSize);
-                if (gridView != null)
+                if (App.ActualTheme != ElementTheme.Dark)
                 {
-                    gridView.Margin = new Thickness(0);
+                    VisualStateManager.GoToState(header, "DefaultForeground", false);
+                    Color foreground = new Color() { A = _alpha };
+                    foreground.R = foreground.G = foreground.B = (byte)((verticalOffset > _alpha) ? 0 : (_alpha - verticalOffset));
+                    header.Foreground = new SolidColorBrush(foreground);
                 }
-                ApplicationView.GetForCurrentView().TitleBar.ButtonForegroundColor = Window.Current.Bounds.Width > 640 ? Colors.White : Colors.Black;
-            }
+                else
+                {
+                    VisualStateManager.GoToState(header, "AlternateForeground", false);
+                }
 
-            if (App.Current.RequestedTheme != ApplicationTheme.Dark)
-            {
-                Color foreground = new Color() { A = _alpha };
-                foreground.R = foreground.G = foreground.B = (byte)((verticalOffset > _alpha) ? 0 : (_alpha - verticalOffset));
-                TargetControl.Foreground = new SolidColorBrush(foreground);
-            }
-            else
-            {
-                ApplicationView.GetForCurrentView().TitleBar.ButtonForegroundColor = Colors.White;
+                header.FontSize = -(((verticalOffset / scrollViewerThresholdValue) * (_maxFontSize - _minFontSize)) - _maxFontSize);
             }
         }
 

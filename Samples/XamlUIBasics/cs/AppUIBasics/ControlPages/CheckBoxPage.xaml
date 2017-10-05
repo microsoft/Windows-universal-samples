@@ -10,7 +10,7 @@
 //*********************************************************
 -->
 <Page x:Class="AppUIBasics.ControlPages.CheckBoxPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics.ControlPages"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
     <StackPanel>
@@ -23,8 +23,10 @@
                 </StackPanel>
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
-                <RichTextBlock>
-                    <Paragraph>&lt;CheckBox Content="Two-state CheckBox" Checked="Control1_Checked" Unchecked="Control1_Unchecked"/&gt;</Paragraph>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>&lt;CheckBox Content="Two-state CheckBox"</Paragraph>
+                    <Paragraph TextIndent="24">Checked="Control1_Checked"</Paragraph>
+                    <Paragraph TextIndent="24">Unchecked="Control1_Unchecked" /&gt;</Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
@@ -37,8 +39,12 @@
                 </StackPanel>
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
-                <RichTextBlock>
-                    <Paragraph>&lt;CheckBox Content="Two-state CheckBox" IsThreeState="True" Checked="Control2_Checked" Unchecked="Control2_Unchecked" Indeterminate="Control2_Indeterminate"/&gt;</Paragraph>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>&lt;CheckBox Content="Two-state CheckBox"</Paragraph>
+                    <Paragraph TextIndent="24">IsThreeState="True"</Paragraph>
+                    <Paragraph TextIndent="24">Checked="Control2_Checked"</Paragraph>
+                    <Paragraph TextIndent="24">Unchecked="Control2_Unchecked"</Paragraph>
+                    <Paragraph TextIndent="24">Indeterminate="Control2_Indeterminate" /&gt;</Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
@@ -57,14 +63,14 @@
                 </StackPanel>
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;StackPanel&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;CheckBox x:Name="OptionsAllCheckBox" Content="Select all" IsThreeState="True" 
-                              Checked="SelectAll_Checked" Unchecked="SelectAll_Unchecked" Indeterminate="SelectAll_Indeterminate"&gt;</Paragraph>
-                    <Paragraph TextIndent="12">&lt;CheckBox x:Name="Option1CheckBox" Content="Option 1" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked"&gt;</Paragraph>
-                    <Paragraph TextIndent="12">&lt;CheckBox x:Name="Option2CheckBox" Content="Option 2" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" IsChecked="True"&gt;</Paragraph>
-                    <Paragraph TextIndent="12">&lt;CheckBox x:Name="Option3CheckBox" Content="Option 3" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked"&gt;</Paragraph>
-                    <Paragraph>&lt;/StackPanel&gt;"</Paragraph>
+                              Checked="SelectAll_Checked" Unchecked="SelectAll_Unchecked" Indeterminate="SelectAll_Indeterminate" /&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;CheckBox x:Name="Option1CheckBox" Content="Option 1" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" /&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;CheckBox x:Name="Option2CheckBox" Content="Option 2" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" IsChecked="True" /&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;CheckBox x:Name="Option3CheckBox" Content="Option 3" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" /&gt;</Paragraph>
+                    <Paragraph>&lt;/StackPanel&gt;</Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>

@@ -11,7 +11,7 @@
 -->
 <Page x:Class="AppUIBasics.ControlPages.RadioButtonPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics.ControlPages"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
     <RelativePanel HorizontalAlignment="Left">
@@ -33,7 +33,7 @@
                         VerticalAlignment="Center" Grid.Column="1" Margin="8,0"/>
             </Grid>
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;StackPanel&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;TextBlock Text="Options:" Style="{ThemeResource BaseTextBlockStyle}"/&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;RadioButton x:Name="Option1RadioButton" Content="Option 1" Checked="Option1RadioButton_Checked"/&gt;</Paragraph>
@@ -80,7 +80,7 @@
                         Height="50" Margin="0,10,0,10" />
             </StackPanel>
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;StackPanel&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;StackPanel Orientation="Horizontal"&gt;</Paragraph>
                     <Paragraph TextIndent="24">&lt;TextBlock Text="Background" Style="{ThemeResource BaseTextBlockStyle}"/&gt;</Paragraph>

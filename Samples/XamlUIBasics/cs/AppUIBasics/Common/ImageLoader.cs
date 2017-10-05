@@ -27,7 +27,7 @@ namespace AppUIBasics.Common
             var image = d as Image;
             if (image != null)
             {
-                var item = await ControlInfoDataSource.GetItemAsync(e.NewValue?.ToString());
+                var item = await ControlInfoDataSource.Instance.GetItemAsync(e.NewValue?.ToString());
                 if (item?.ImagePath != null)
                 {
                     Uri imageUri = new Uri(item.ImagePath, UriKind.Absolute);

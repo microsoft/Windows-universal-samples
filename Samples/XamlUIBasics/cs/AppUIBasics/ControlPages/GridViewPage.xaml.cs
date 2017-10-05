@@ -15,39 +15,23 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace AppUIBasics.ControlPages
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class GridViewPage : Page
+    public sealed partial class GridViewPage : ItemsPageBase
     {
-        private List<ControlInfoDataItem> _items;
-
         public GridViewPage()
         {
             this.InitializeComponent();
         }
-        public List<ControlInfoDataItem> Groups
-        {
-            get { return this._items; }
-        }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            var groups = NavigationRootPage.Current.Groups.Any() ? NavigationRootPage.Current.Groups : await ControlInfoDataSource.GetGroupsAsync();
-            _items = new List<ControlInfoDataItem>();
-            foreach (var group in groups.Take(3))
-            {
-                foreach (var item in group.Items)
-                {
-                    _items.Add(item);
-                }
-            }
+            Items = ControlInfoDataSource.Instance.Groups.Take(3).SelectMany(g => g.Items).ToList();
         }
 
         private void ItemTemplate_Click(object sender, RoutedEventArgs e)
@@ -59,8 +43,7 @@ namespace AppUIBasics.ControlPages
 
         private void Control1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            GridView gridView = sender as GridView;
-            if (gridView != null)
+            if (sender is GridView gridView)
             {
                 SelectionOutput.Text = string.Format("You have selected {0} item(s).", gridView.SelectedItems.Count);
             }

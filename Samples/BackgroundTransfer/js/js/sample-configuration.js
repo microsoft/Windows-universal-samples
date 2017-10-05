@@ -17,11 +17,24 @@
         { url: "/html/scenario1_Download.html", title: "File Download" },
         { url: "/html/scenario2_Upload.html", title: "File Upload" },
         { url: "/html/scenario3_Notifications.html", title: "Completion Notifications" },
-        { url: "/html/scenario4_CompletionGroups.html", title: "Completion Groups" }
+        { url: "/html/scenario4_CompletionGroups.html", title: "Completion Groups" },
+        { url: "/html/scenario5_RandomAccess.html", title: "Random Access" }
     ];
+
+    // Look up the name for an enumeration member.
+    function lookupEnumName(e, value) {
+        for (var name in e) {
+            if (e[name] === value) {
+                return name;
+            }
+        }
+        // No name available; just use the number.
+        return value.toString();
+    }
 
     WinJS.Namespace.define("SdkSample", {
         sampleTitle: sampleTitle,
-        scenarios: new WinJS.Binding.List(scenarios)
+        scenarios: new WinJS.Binding.List(scenarios),
+        lookupEnumName: lookupEnumName
     });
 })();

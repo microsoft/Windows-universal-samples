@@ -1,13 +1,19 @@
-﻿using AppUIBasics.Common;
+﻿//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
 using System;
 using System.Linq;
-using Windows.Storage;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-
-// The Settings Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using Windows.UI.Xaml.Navigation;
 
 namespace AppUIBasics
 {
@@ -19,27 +25,38 @@ namespace AppUIBasics
         public SettingsPage()
         {
             this.InitializeComponent();
-            Loaded += SettingsPage_Loaded;
+            Loaded += OnSettingsPageLoaded;
         }
 
-        private void SettingsPage_Loaded(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string selectedTheme = ApplicationData.Current.LocalSettings.Values["SelectedAppTheme"]?.ToString();
-            ((RadioButton)ThemePanel.Children.FirstOrDefault(c => ((RadioButton)c)?.Tag?.ToString() == selectedTheme)).IsChecked = true;
+            base.OnNavigatedTo(e);
+
             NavigationRootPage.Current.NavigationView.Header = "Settings";
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        private async void OnFeedbackButtonClick(object sender, RoutedEventArgs e)
         {
-            ApplicationData.Current.LocalSettings.Values["SelectedAppTheme"] = ((RadioButton)sender)?.Tag?.ToString();
+            await Launcher.LaunchUriAsync(new Uri("feedback-hub:"));
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private void OnSettingsPageLoaded(object sender, RoutedEventArgs e)
         {
-            await Launcher.LaunchUriAsync(new System.Uri("feedback-hub:"));
+            var currentTheme = App.RootTheme.ToString();
+            (ThemePanel.Children.Cast<RadioButton>().FirstOrDefault(c => c?.Tag?.ToString() == currentTheme)).IsChecked = true;
         }
 
-        private void RadioButton_KeyDown(object sender, KeyRoutedEventArgs e)
+        private void OnThemeRadioButtonChecked(object sender, RoutedEventArgs e)
+        {
+            var selectedTheme = ((RadioButton)sender)?.Tag?.ToString();
+
+            if (selectedTheme != null)
+            {
+                App.RootTheme = App.GetEnum<ElementTheme>(selectedTheme);
+            }
+        }
+        
+        private void OnThemeRadioButtonKeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == VirtualKey.Up)
             {

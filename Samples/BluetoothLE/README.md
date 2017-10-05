@@ -34,7 +34,7 @@ This sample can be used to advertise support for CalcService - a custom service 
 and an operator and read the result. 
 
 This samples shows how to:
-- Initialize and publish a custom service/characteristic heirarchy 
+- Initialize and publish a custom service/characteristic hierarchy 
 - Implement event handlers to handle incoming read/write requests
 - Notify connected clients of a characteristic value change
 
@@ -69,7 +69,17 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Conceptual
 
-[Bluetooth GATT Scenarios](https://msdn.microsoft.com/windows/uwp/devices-sensors/gatt-scenarios)
+* Documentation
+  * [Bluetooth GATT Client](https://msdn.microsoft.com/windows/uwp/devices-sensors/gatt-client)
+  * [Bluetooth GATT Server](https://msdn.microsoft.com/windows/uwp/devices-sensors/gatt-server)
+  * [Bluetooth LE Advertisements](https://docs.microsoft.com/windows/uwp/devices-sensors/ble-beacon)
+* [Windows Bluetooth Core Team Blog](https://blogs.msdn.microsoft.com/btblog/)
+* Videos from Build 2017
+  * [Introduction to the Bluetooth LE Explorer app](https://channel9.msdn.com/Events/Build/2017/P4177)
+    * [Source code](https://github.com/Microsoft/BluetoothLEExplorer)
+    * [Install it from the Store](https://www.microsoft.com/store/apps/9n0ztkf1qd98)
+  * [Unpaired Bluetooth LE Device Connectivity](https://channel9.msdn.com/Events/Build/2017/P4178)
+  * [Bluetooth GATT Server](https://channel9.msdn.com/Events/Build/2017/P4179)
 
 ## System requirements
 

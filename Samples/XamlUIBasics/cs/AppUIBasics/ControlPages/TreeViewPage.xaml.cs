@@ -1,7 +1,26 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+//From ControlInfoData.json:
+// {
+//    "UniqueId": "TreeView",
+//   "Title": "TreeView",
+//   "Subtitle": "A hierarchical list with expanding and collapsing nodes that contain nested items.",
+//   "ImagePath": "ms-appx:///Assets/TreeView.png",
+//   "Description": "A hierarchical list with expanding and collapsing nodes that contain nested items.",
+//   "Content": "",
+//   "IsNew": true,
+//   "Docs": [
+//					{
+//						"Title": "TreeView",
+//						"Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.TreeView"
+//					}
+//   ],
+//   "RelatedControls": [
+//     "ListView",
+//     "GridView"
+//   ]
+// }
 
 namespace AppUIBasics.ControlPages
 {

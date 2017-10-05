@@ -182,6 +182,11 @@ namespace AppUIBasics.Common
         public RootFrameNavigationHelper(Frame rootFrame)
         {
             this.Frame = rootFrame;
+            this.Frame.Navigated += (s, e) =>
+            {
+                // Update the Back button whenever a navigation occurs.
+                UpdateBackButton();
+            };
 
             // Handle keyboard and mouse navigation requests
             this.systemNavigationManager = SystemNavigationManager.GetForCurrentView();
@@ -193,8 +198,6 @@ namespace AppUIBasics.Common
                 CoreDispatcher_AcceleratorKeyActivated;
             Window.Current.CoreWindow.PointerPressed +=
                 this.CoreWindow_PointerPressed;
-
-            // Update the Back button whenever a navigation occurs.
         }
 
         private bool TryGoBack()
@@ -205,6 +208,7 @@ namespace AppUIBasics.Common
                 this.Frame.GoBack();
                 navigated = true;
             }
+            
             return navigated;
         }
 
@@ -218,7 +222,6 @@ namespace AppUIBasics.Common
             }
             return navigated;
         }
-
 
         private void SystemNavigationManager_BackRequested(object sender, BackRequestedEventArgs e)
         {

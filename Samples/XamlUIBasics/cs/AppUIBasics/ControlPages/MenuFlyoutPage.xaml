@@ -11,7 +11,7 @@
 -->
 <Page x:Class="AppUIBasics.ControlPages.MenuFlyoutPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics.ControlPages"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
     <StackPanel>
@@ -29,7 +29,7 @@
                 <TextBlock x:Name="Control1Output" Style="{StaticResource OutputTextBlockStyle}" />
             </StackPanel>
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;AppBarButton Icon="Sort" IsCompact="True"&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;AppBarButton.Flyout&gt;</Paragraph>
                     <Paragraph TextIndent="24">&lt;MenuFlyout&gt;</Paragraph>
@@ -55,7 +55,7 @@
                 </Button.Flyout>
             </Button>
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;Button Content="Options"&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;Button.Flyout&gt;</Paragraph>
                     <Paragraph TextIndent="24">&lt;MenuFlyout&gt;</Paragraph>
@@ -87,7 +87,7 @@
                 </Button.Flyout>
             </Button>
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;Button Content="File Options"&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;Button.Flyout&gt;</Paragraph>
                     <Paragraph TextIndent="24">&lt;MenuFlyout&gt;</Paragraph>
@@ -126,7 +126,7 @@
                 </Button.Flyout>
             </Button>
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;Button Content="Edit Options"&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;Button.Flyout&gt;</Paragraph>
                     <Paragraph TextIndent="24">&lt;MenuFlyout&gt;</Paragraph>

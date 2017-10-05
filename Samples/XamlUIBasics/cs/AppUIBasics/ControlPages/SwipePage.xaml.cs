@@ -7,73 +7,46 @@
 // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 //
 //*********************************************************
-//using Microsoft.UI.Preview;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace AppUIBasics.ControlPages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class SwipePage : Page
+    public sealed partial class SwipeControlPage : Page
     {
-#if false
-        public SwipePage()
+        public SwipeControlPage()
         {
             this.InitializeComponent();
-
-            lv.ItemsSource = @"AcrylicBrush ColorPicker NavigationView ParallaxView PersonPicture PullToRefresh RatingsControl RevealBrush TreeView".Split(' ');
+            var source = @"AcrylicBrush ColorPicker NavigationView ParallaxView PersonPicture RatingControl RevealBrush".Split(' ');
+            foreach (var item in source)
+                items.Add(item);
+            lv.ItemsSource = items;
         }
 
         ObservableCollection<object> items = new ObservableCollection<object>();
 
-        private void SwipeContent_ItemInvoked(SwipeItem sender, SwipeItemInvokedEventArgs args)
+        private void DeleteOne_ItemInvoked(SwipeItem sender, SwipeItemInvokedEventArgs args)
         {
-            //if (sender.Text == "Delete")
-            //{
-            //    items.RemoveAt(1);
-            //}
-            //else if (sender.Text == "Like")
-            //{
-            //    ListViewItem lvi = lv.ContainerFromIndex(0) as ListViewItem;
-
-            //    //(lvi.ContentTemplateRoot as SwipeContainer).Background = new SolidColorBrush(sender.Background);
-            //    //(lvi.ContentTemplateRoot as SwipeContainer).Reset();
-            //}
-            //else if (sender.Text == "Dislike")
-            //{
-            //    ListViewItem lvi = lv.ContainerFromIndex(0) as ListViewItem;
-
-            //    //(lvi.ContentTemplateRoot as SwipeContainer).Background = new SolidColorBrush(sender.Background);
-            //    //(lvi.ContentTemplateRoot as SwipeContainer).Reset();
-            //}
-            //else
-            //{
-            //    ListViewItem lvi = lv.ContainerFromIndex(0) as ListViewItem;
-            //    (lvi.ContentTemplateRoot as SwipeContainer).Reset();
-            //}
+            args.SwipeControl.Visibility = Visibility.Collapsed;
         }
-#else
-        public SwipePage()
+
+        private void DeleteItem_ItemInvoked(SwipeItem sender, SwipeItemInvokedEventArgs args)
         {
-            this.InitializeComponent();
+            int i = lv.Items.IndexOf(args.SwipeControl.DataContext);
+            items.RemoveAt(1);
         }
-#endif
+
+        private void Accept_ItemInvoked(SwipeItem sender, SwipeItemInvokedEventArgs args)
+        {
+            args.SwipeControl.Background = new SolidColorBrush(Colors.Cyan);
+        }
+
+        private void Flag_ItemInvoked(SwipeItem sender, SwipeItemInvokedEventArgs args)
+        {
+            args.SwipeControl.Background = new SolidColorBrush(Colors.Green);
+        }
     }
 }

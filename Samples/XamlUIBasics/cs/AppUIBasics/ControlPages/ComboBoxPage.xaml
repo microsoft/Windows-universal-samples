@@ -10,7 +10,7 @@
 //*********************************************************
 -->
 <Page x:Class="AppUIBasics.ControlPages.ComboBoxPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics.ControlPages"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
     <StackPanel>
@@ -28,7 +28,7 @@
                 </StackPanel>
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;ComboBox SelectionChanged="ColorComboBox_SelectionChanged" Header="Colors" PlaceholderText="Pick a color" Width="200"&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;x:String&gt;Blue&lt;x:String&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;x:String&gt;Green&lt;x:String&gt;</Paragraph>
@@ -49,7 +49,7 @@
                 </StackPanel>
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;ComboBox ItemsSource="{x:Bind Fonts}" DisplayMemberPath="Item1" SelectedValuePath="Item2"</Paragraph>
                     <Paragraph TextIndent="12">Header="Font" Width="200" Loaded="Combo2_Loaded"/&gt;</Paragraph>
                 </RichTextBlock>

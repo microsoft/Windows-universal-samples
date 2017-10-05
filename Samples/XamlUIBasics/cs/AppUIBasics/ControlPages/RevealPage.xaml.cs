@@ -11,7 +11,7 @@ namespace AppUIBasics.ControlPages
     {
         public RevealPage()
         {
-            this.InitializeComponent();           
+            this.InitializeComponent();
         }
     }
 }

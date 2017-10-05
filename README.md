@@ -153,6 +153,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/ContactPicker">Contact picker</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/MyPeopleNotifications">My People notifications</a></td>
   <td><a href="Samples/UserDataAccountManager">UserDataAccountManager</a></td>
  </tr>
 </table>

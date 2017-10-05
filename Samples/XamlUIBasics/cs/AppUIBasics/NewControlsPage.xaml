@@ -1,102 +1,90 @@
-﻿<Page
+﻿<!--
+    //*********************************************************
+    //
+    // Copyright (c) Microsoft. All rights reserved.
+    // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+    // ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+    // IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+    // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+    //
+    //*********************************************************
+-->
+<local:ItemsPageBase
     x:Class="AppUIBasics.NewControlsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:AppUIBasics"
-    xmlns:data="using:AppUIBasics.Data"
-    xmlns:controls="using:Windows.UI.Xaml.Controls"
-    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behavior="using:AppUIBasics.Behaviors"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    NavigationCacheMode="Enabled"
-    mc:Ignorable="d">
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    NavigationCacheMode="Enabled">
 
-    <Page.Resources>
-        <DataTemplate x:Key="ControlItemTemplate" x:DataType="data:ControlInfoDataItem">
-            <Grid x:Name="controlRoot" Height="145" Width="345" Padding="15" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Image x:Name="gridImage"  Source="{x:Bind ImagePath}" Stretch="Uniform" Width="36" VerticalAlignment="Top"
-                        AutomationProperties.Name="{x:Bind Title}" />
-                <RelativePanel Grid.Column="1" Margin="32,0,0,0">
-                    <TextBlock Text="{x:Bind Title}" Style="{StaticResource SubtitleTextBlockStyle}" x:Name="titleText"
-                            TextLineBounds="TrimToCapHeight" TextWrapping="NoWrap" FontWeight="SemiBold"
-                            Foreground="{ThemeResource HyperlinkButtonForeground}" />
-                    <TextBlock Text="{x:Bind Subtitle}" Style="{StaticResource BodyTextBlockStyle}" Margin="0,4,0,0"
-                            TextTrimming="CharacterEllipsis" RelativePanel.Below="titleText" />
-                </RelativePanel>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="ControlItemTemplateSmall" x:DataType="data:ControlInfoDataItem">
-            <Grid x:Name="controlRoot" Height="145" Width="332" Padding="15" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Image x:Name="gridImage"  Source="{x:Bind ImagePath}" Stretch="Uniform" Width="36" VerticalAlignment="Top"
-                        AutomationProperties.Name="{x:Bind Title}" />
-                <RelativePanel Grid.Column="1" Margin="32,0,0,0">
-                    <TextBlock x:Name="titleText" Text="{x:Bind Title}" Style="{StaticResource SubtitleTextBlockStyle}"
-                            TextLineBounds="TrimToCapHeight" TextWrapping="NoWrap" FontWeight="SemiBold"
-                            Foreground="{ThemeResource HyperlinkButtonForeground}" />
-                    <TextBlock Text="{x:Bind Subtitle}" Style="{StaticResource BodyTextBlockStyle}" Margin="0,4,0,0"
-                            TextTrimming="CharacterEllipsis" RelativePanel.Below="titleText" />
-                </RelativePanel>
-            </Grid>
-        </DataTemplate>
-    </Page.Resources>
-    <!--This grid acts as a root panel for the page.-->
-    <Grid Background="{StaticResource HomePageBackgroundBrush}">
-        <GridView x:Name="itemGridView" AutomationProperties.AutomationId="ItemGridView" Padding="24,0,0,0" Loaded="itemGridView_Loaded"
-                AutomationProperties.Name="Items In Group" ItemsSource="{x:Bind Items, Mode=OneWay}"
-                ItemTemplate="{StaticResource ControlItemTemplate}" KeyDown="itemGridView_KeyDown"
-                SelectionMode="None" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                ItemContainerStyle="{StaticResource GridViewItemStyle}" ScrollViewer.VerticalScrollMode="Auto"
-                IsSwipeEnabled="False" IsItemClickEnabled="True" ItemClick="ItemView_ItemClick">
-            <interactivity:Interaction.Behaviors>
-                <behavior:ImageScrollBehavior TargetControl="{Binding ElementName=pageHeader}" />
-            </interactivity:Interaction.Behaviors>
-            <GridView.Header>
-                <controls:ParallaxView x:Name="headerImageView" VerticalShift="350" Source="{x:Bind itemGridView}" Height="250"
-                        Margin="-24,0,0,24">
-                    <Grid>
-                        <Image x:Name="headerImage" Source="Assets/InnerPage_Banner.jpg" HorizontalAlignment="Center" VerticalAlignment="Top"
-                                Stretch="UniformToFill" />
-                    </Grid>
-                </controls:ParallaxView>
-            </GridView.Header>
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <ItemsWrapGrid Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
-        </GridView>
-        <local:PageHeader x:Name="pageHeader" Background="{StaticResource HomePageBackgroundBrush}" FontSize="42"
-                Title="New controls" Foreground="White" VerticalAlignment="Top" BackgroundBrush="Transparent"/>
+    <!--  This grid acts as a root panel for the page.  -->
+    <Grid Background="{ThemeResource HomePageBackgroundBrush}">
         <VisualStateManager.VisualStateGroups>
-            <!--Visual states reflect the application's window size-->
-            <VisualStateGroup>
+            <!--  Visual states reflect the application's window size  -->
+            <VisualStateGroup x:Name="LayoutVisualStates">
                 <VisualState x:Name="WideLayout">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="640" />
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource Breakpoint640Plus}" />
                     </VisualState.StateTriggers>
-                    <VisualState.Setters></VisualState.Setters>
+                    <VisualState.Setters />
                 </VisualState>
                 <VisualState x:Name="NarrowLayout">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="itemGridView.Padding" Value="14,0,0,0" />
-                        <Setter Target="itemGridView.ItemTemplate" Value="{StaticResource ControlItemTemplateSmall}" />
+                        <Setter Target="itemGridView.Padding" Value="14,0,14,0" />
+                        <Setter Target="headerImageView.Margin" Value="-14,0,-14,14" />
                         <Setter Target="itemGridView.ItemContainerStyle" Value="{StaticResource GridViewItemStyleSmall}" />
                         <Setter Target="pageHeader.Visibility" Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+
+        <GridView
+            x:Name="itemGridView"
+            Padding="24,0,0,0"
+            AutomationProperties.AutomationId="ItemGridView"
+            AutomationProperties.Name="Items In Group"
+            ContainerContentChanging="OnItemGridViewContainerContentChanging"
+            IsItemClickEnabled="True"
+            IsSwipeEnabled="False"
+            ItemClick="OnItemGridViewItemClick"
+            ItemContainerStyle="{StaticResource GridViewItemStyle}"
+            ItemTemplate="{StaticResource ControlItemTemplate}"
+            ItemsSource="{x:Bind Items, Mode=OneWay}"
+            KeyDown="OnItemGridViewKeyDown"
+            Loaded="OnItemGridViewLoaded"
+            SizeChanged="OnItemGridViewSizeChanged"
+            SelectionMode="None">
+            <interactivity:Interaction.Behaviors>
+                <behavior:ImageScrollBehavior TargetControl="{Binding ElementName=pageHeader}" />
+            </interactivity:Interaction.Behaviors>
+            
+            <GridView.Header>
+                <ParallaxView
+                    x:Name="headerImageView"
+                    Height="250"
+                    Margin="-24,0,0,24"
+                    Source="{x:Bind itemGridView}"
+                    VerticalShift="350">
+                    <Image
+                        x:Name="headerImage"
+                        HorizontalAlignment="Center"
+                        Source="Assets/InnerPage_Banner.jpg"
+                        Stretch="UniformToFill" />
+                </ParallaxView>
+            </GridView.Header>
+        </GridView>
+        
+        <local:PageHeader
+            x:Name="pageHeader"
+            Title="New controls"
+            VerticalAlignment="Top"
+            Background="{ThemeResource HomePageBackgroundBrush}"
+            FontSize="42"
+            Foreground="White" />
     </Grid>
-</Page>
+</local:ItemsPageBase>

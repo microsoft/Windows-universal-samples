@@ -14,8 +14,12 @@
 
     var BackgroundTransfer = Windows.Networking.BackgroundTransfer;
 
+    var outputConsole;
+
     var page = WinJS.UI.Pages.define("/html/scenario2_Upload.html", {
         ready: function (element, options) {
+            outputConsole = document.getElementById("outputConsole");
+
             // Assign event listeners for each button on click.
             id("startUploadButton").addEventListener("click", uploadFile, false);
             id("startMultipartUploadButton").addEventListener("click", uploadFiles, false);
@@ -237,7 +241,6 @@
 
     // Print helper function.
     function printLog(/*@type(String)*/txt) {
-        var outputConsole = document.getElementById("outputConsole");
         outputConsole.innerHTML += txt;
     }
 

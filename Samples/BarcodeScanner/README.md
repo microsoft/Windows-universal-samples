@@ -47,7 +47,7 @@ This sample shows how to:
 
 The app package manifest shows how to specify the device capability name for the Point of Service (POS) devices. All POS apps are required declare [DeviceCapability](http://msdn.microsoft.com/library/windows/apps/br211430) in the app package manifest, either by using "PointofService" as shown in this sample or by using a device specific GUID, such as "C243FFBD-3AFC-45E9-B3D3-2BA18BC7EBC5" for a barcode scanner.
 
-For a list of compatible barcode scanners, see [Barcode Scanner Compatible Hardware](https://docs.microsoft.com/windows/uwp/devices-sensors/barcode-scanner#compatible-hardware).
+For a list of compatible barcode scanners, see [Supported Point of Service Peripherals](https://docs.microsoft.com/windows/uwp/devices-sensors/pos-device-support).
 
 **Note** The Universal Windows app samples require Visual Studio 2017 to build and Windows 10 to execute.
  

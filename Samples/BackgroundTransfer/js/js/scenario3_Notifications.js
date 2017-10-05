@@ -14,6 +14,8 @@
 
     var BackgroundTransfer = Windows.Networking.BackgroundTransfer;
 
+    var outputConsole;
+
     var runId = 0;
     var notificationsGroup;
 
@@ -24,6 +26,8 @@
 
     var page = WinJS.UI.Pages.define("/html/scenario3_Notifications.html", {
         ready: function (element, options) {
+            outputConsole = document.getElementById("outputConsole");
+
             // Assign event listeners for each button on click.
             id("toastNotificationButton").addEventListener("click", toastNotificationButtonClick, false);
             id("tileNotificationButton").addEventListener("click", tileNotificationButtonClick, false);
@@ -231,7 +235,6 @@
 
     // Print helper function.
     function printLog(/*@type(String)*/txt) {
-        var outputConsole = document.getElementById("outputConsole");
         outputConsole.innerHTML += txt;
     }
 

@@ -10,8 +10,8 @@
     <AssemblyName>AppUIBasics</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.16232.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16232.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16288.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16288.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -187,7 +187,6 @@
     <Content Include="Assets\Tiles\WideTile.scale-400.png" />
     <Content Include="Assets\TreeView.png" />
     <Content Include="Assets\WebView.png" />
-    <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -199,9 +198,9 @@
     <Compile Include="Common\BooleanToVisibilityConverter.cs" />
     <Compile Include="Common\ColorStringConverter.cs" />
     <Compile Include="Common\ComboBoxItemToStringConverter.cs" />
+    <Compile Include="Common\DeviceFamilyTrigger.cs" />
     <Compile Include="Common\DoubleToIntConverter.cs" />
     <Compile Include="Common\ShowAcrylicBehindHeaderConverter.cs" />
-    <Compile Include="Common\HeaderBackgroundConverter.cs" />
     <Compile Include="Common\ImageLoader.cs" />
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\NullableBooleanToBooleanConverter.cs" />
@@ -391,9 +390,6 @@
     <Compile Include="ControlPages\ToolTipPage.xaml.cs">
       <DependentUpon>ToolTipPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ControlPages\TreeViewPage.xaml.cs">
-      <DependentUpon>TreeViewPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ControlPages\VariableSizedWrapGridPage.xaml.cs">
       <DependentUpon>VariableSizedWrapGridPage.xaml</DependentUpon>
     </Compile>
@@ -405,8 +401,11 @@
     <Compile Include="ItemPage.xaml.cs">
       <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="ItemTemplates.xaml.cs">
+      <DependentUpon>ItemTemplates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AllControlsPage.xaml.cs">
+      <DependentUpon>AllControlsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Navigation\NavigationRootPage.xaml.cs">
       <DependentUpon>NavigationRootPage.xaml</DependentUpon>
@@ -414,6 +413,7 @@
     <Compile Include="NewControlsPage.xaml.cs">
       <DependentUpon>NewControlsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ItemsPageBase.cs" />
     <Compile Include="PageHeader.xaml.cs">
       <DependentUpon>PageHeader.xaml</DependentUpon>
     </Compile>
@@ -749,10 +749,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ControlPages\TreeViewPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="ControlPages\VariableSizedWrapGridPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -765,7 +761,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="ItemTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AllControlsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -810,7 +810,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
+      <Version>2.0.0</Version>
+    </PackageReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -109,44 +109,64 @@ namespace AppUIBasics.Data
     /// </summary>
     public sealed class ControlInfoDataSource
     {
-        private static ControlInfoDataSource _controlInfoDataSource = new ControlInfoDataSource();
         private static readonly object _lock = new object();
 
-        private ObservableCollection<ControlInfoDataGroup> _groups = new ObservableCollection<ControlInfoDataGroup>();
-        public ObservableCollection<ControlInfoDataGroup> Groups
+        #region Singleton
+
+        private static ControlInfoDataSource _instance;
+
+        public static ControlInfoDataSource Instance
+        {
+            get
+            {
+                return _instance;
+            }
+        }
+
+        static ControlInfoDataSource()
+        {
+            _instance = new ControlInfoDataSource();
+        }
+
+        private ControlInfoDataSource() { }
+
+        #endregion
+        
+        private IList<ControlInfoDataGroup> _groups = new List<ControlInfoDataGroup>();
+        public IList<ControlInfoDataGroup> Groups
         {
             get { return this._groups; }
         }
 
-        public static async Task<IEnumerable<ControlInfoDataGroup>> GetGroupsAsync()
+        public async Task<IEnumerable<ControlInfoDataGroup>> GetGroupsAsync()
         {
-            await _controlInfoDataSource.GetControlInfoDataAsync();
+            await _instance.GetControlInfoDataAsync();
 
-            return _controlInfoDataSource.Groups;
+            return _instance.Groups;
         }
 
-        public static async Task<ControlInfoDataGroup> GetGroupAsync(string uniqueId)
+        public async Task<ControlInfoDataGroup> GetGroupAsync(string uniqueId)
         {
-            await _controlInfoDataSource.GetControlInfoDataAsync();
+            await _instance.GetControlInfoDataAsync();
             // Simple linear search is acceptable for small data sets
-            var matches = _controlInfoDataSource.Groups.Where((group) => group.UniqueId.Equals(uniqueId));
+            var matches = _instance.Groups.Where((group) => group.UniqueId.Equals(uniqueId));
             if (matches.Count() == 1) return matches.First();
             return null;
         }
 
-        public static async Task<ControlInfoDataItem> GetItemAsync(string uniqueId)
+        public async Task<ControlInfoDataItem> GetItemAsync(string uniqueId)
         {
-            await _controlInfoDataSource.GetControlInfoDataAsync();
+            await _instance.GetControlInfoDataAsync();
             // Simple linear search is acceptable for small data sets
-            var matches = _controlInfoDataSource.Groups.SelectMany(group => group.Items).Where((item) => item.UniqueId.Equals(uniqueId));
+            var matches = _instance.Groups.SelectMany(group => group.Items).Where((item) => item.UniqueId.Equals(uniqueId));
             if (matches.Count() > 0) return matches.First();
             return null;
         }
 
-        public static async Task<ControlInfoDataGroup> GetGroupFromItemAsync(string uniqueId)
+        public async Task<ControlInfoDataGroup> GetGroupFromItemAsync(string uniqueId)
         {
-            await _controlInfoDataSource.GetControlInfoDataAsync();
-            var matches = _controlInfoDataSource.Groups.Where((group) => group.Items.FirstOrDefault(item => item.UniqueId.Equals(uniqueId)) != null);
+            await _instance.GetControlInfoDataAsync();
+            var matches = _instance.Groups.Where((group) => group.Items.FirstOrDefault(item => item.UniqueId.Equals(uniqueId)) != null);
             if (matches.Count() == 1) return matches.First();
             return null;
         }
@@ -155,8 +175,10 @@ namespace AppUIBasics.Data
         {
             lock (_lock)
             {
-                if (this._groups.Count != 0)
+                if (this.Groups.Count() != 0)
+                {
                     return;
+                }
             }
 
             Uri dataUri = new Uri("ms-appx:///DataModel/ControlInfoData.json");
@@ -177,8 +199,7 @@ namespace AppUIBasics.Data
                                                                           groupObject["Subtitle"].GetString(),
                                                                           groupObject["ImagePath"].GetString(),
                                                                           groupObject["Description"].GetString());
-
-
+                    
                     foreach (JsonValue itemValue in groupObject["Items"].GetArray())
                     {
                         JsonObject itemObject = itemValue.GetObject();
@@ -189,6 +210,7 @@ namespace AppUIBasics.Data
                                                                 itemObject["Description"].GetString(),
                                                                 itemObject["Content"].GetString(),
                                                                 itemObject["IsNew"].GetBoolean());
+
                         if (itemObject.ContainsKey("Docs"))
                         {
                             foreach (JsonValue docValue in itemObject["Docs"].GetArray())
@@ -197,6 +219,7 @@ namespace AppUIBasics.Data
                                 item.Docs.Add(new ControlInfoDocLink(docObject["Title"].GetString(), docObject["Uri"].GetString()));
                             }
                         }
+
                         if (itemObject.ContainsKey("RelatedControls"))
                         {
                             foreach (JsonValue relatedControlValue in itemObject["RelatedControls"].GetArray())
@@ -204,10 +227,14 @@ namespace AppUIBasics.Data
                                 item.RelatedControls.Add(relatedControlValue.GetString());
                             }
                         }
+
                         group.Items.Add(item);
                     }
-                    if (!this.Groups.Any(g => g.Title == group.Title))
-                        this.Groups.Add(group);
+
+                    if (!Groups.Any(g => g.Title == group.Title))
+                    {
+                        Groups.Add(group);
+                    }
                 }
             }
         }

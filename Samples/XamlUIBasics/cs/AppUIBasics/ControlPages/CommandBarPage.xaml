@@ -13,51 +13,36 @@
     x:Class="AppUIBasics.ControlPages.CommandBarPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:local="using:AppUIBasics"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
     <StackPanel>
-        <CommandBar x:Name="PrimaryCommandBar" Margin="0,0,0,24">
-            <AppBarButton Icon="Accept" Label="Accept"/>
-            <CommandBar.SecondaryCommands>
-                <AppBarButton Icon="Edit" Label="Edit"/>
-            </CommandBar.SecondaryCommands>
-        </CommandBar>
-
-        <local:ControlExample x:Name="Example1" HeaderText="Show or hide the command bar programatically.">
-            <local:ControlExample.Example>
-                <StackPanel Orientation="Horizontal" x:Name="hidePanel">
-                    <Button Content="Open command bar" Click="OpenButton_Click" Margin="0,0,12,12" />
-                    <Button Content="Close command bar" Click="CloseButton_Click" VerticalAlignment="Top"/>
-                </StackPanel>
-            </local:ControlExample.Example>
-        </local:ControlExample>
-
-        <local:ControlExample x:Name="Example2" HeaderText="Add and remove commands programatically." >
-            <local:ControlExample.Example>
-                <StackPanel Orientation="Horizontal" x:Name="showPanel">
-                    <Button Content="Add secondary commands" Click="AddSecondaryCommands_Click" Margin="0,0,12,12"/>
-                    <Button Content="Remove secondary commands" Click="RemoveSecondaryCommands_Click" VerticalAlignment="Top" />
-                    <TextBlock x:Name="Control2Output" Style="{StaticResource OutputTextBlockStyle}"/>
-                </StackPanel>
-            </local:ControlExample.Example>
-        </local:ControlExample>
-
         <local:ControlExample x:Name="Example3" HeaderText="A command bar with labels on the side free floating in a page." >
-            <local:ControlExample.Example>
-                <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
-                    <AppBarButton Icon="Add" Label="Add"/>
-                    <AppBarButton Icon="ReShare" Label="Share"/>
-                    <AppBarButton Icon="Edit" Label="Edit"/>
-                    <CommandBar.SecondaryCommands>
-                        <AppBarButton Icon="Setting" Label="Settings"/>
-                    </CommandBar.SecondaryCommands>
-                </CommandBar>
-            </local:ControlExample.Example>
+
+            <CommandBar x:Name="PrimaryCommandBar" IsOpen="False" DefaultLabelPosition="Right">
+                <AppBarButton Icon="Add" Label="Add"/>
+                <AppBarButton Icon="ReShare" Label="Share"/>
+                <AppBarButton Icon="Edit" Label="Edit"/>
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton Icon="Setting" Label="Settings"/>
+                </CommandBar.SecondaryCommands>
+            </CommandBar>
+            
+            <local:ControlExample.Options>
+                <StackPanel>
+                    <TextBlock Text="Show or hide" />
+                    <Button Margin="0,12,0,0" Content="Open command bar" Click="OpenButton_Click" />
+                    <Button Margin="0,12,0,0" Content="Close command bar" Click="CloseButton_Click" />
+                    <TextBlock Margin="0,16,0,0" Text="Modify content" />
+                    <Button Margin="0,12,0,0" Content="Add secondary commands" Click="AddSecondaryCommands_Click" />
+                    <Button Margin="0,12,0,0" Content="Remove secondary commands" Click="RemoveSecondaryCommands_Click" />
+                </StackPanel>
+            </local:ControlExample.Options>
+            
             <local:ControlExample.Xaml>
-                <RichTextBlock>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right"&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;AppBarButton Icon="Add" Label="Add"/&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;AppBarButton Icon="ReShare" Label="Share"/&gt;</Paragraph>
@@ -66,28 +51,8 @@
                     <Paragraph TextIndent="24">&lt;AppBarButton Icon="Setting" Label="Settings"/&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;/CommandBar.SecondaryCommands&gt;</Paragraph>
                     <Paragraph>&lt;/CommandBar&gt;</Paragraph>
-
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="IntermediateLayout">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="500" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters></VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="NarrowLayout">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="hidePanel.Orientation" Value="Vertical" />
-                        <Setter Target="showPanel.Orientation" Value="Vertical" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
     </StackPanel>
 </Page>
