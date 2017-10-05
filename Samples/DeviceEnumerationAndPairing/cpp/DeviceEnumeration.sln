@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceEnumeration", "DeviceEnumeration.vcxproj", "{F23BD31A-138D-5C35-B1FC-52B6D76BB4F2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{32FE3132-9E5A-55F3-A70A-B33BCDC6D455} = {32FE3132-9E5A-55F3-A70A-B33BCDC6D455}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tasks", "Tasks\Tasks.vcxproj", "{32FE3132-9E5A-55F3-A70A-B33BCDC6D455}"
 EndProject
@@ -50,5 +53,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0802DBBC-07A9-40F3-B544-9FFA0BC4DC15}
 	EndGlobalSection
 EndGlobal

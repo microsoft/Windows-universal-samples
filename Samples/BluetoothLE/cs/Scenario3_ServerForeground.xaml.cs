@@ -72,7 +72,11 @@ namespace SDKTemplate
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             peripheralSupported = await CheckPeripheralRoleSupportAsync();
-            if (!peripheralSupported)
+            if (peripheralSupported)
+            {
+                ServerPanel.Visibility = Visibility.Visible;
+            }
+            else
             {
                 PeripheralWarning.Visibility = Visibility.Visible;
             }
