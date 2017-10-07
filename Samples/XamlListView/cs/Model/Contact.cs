@@ -113,7 +113,7 @@ namespace ListViewSample.Model
             foreach (var g in query)
             {
                 GroupInfoList info = new GroupInfoList();
-                info.Key = g.GroupName;
+                info.Key = g.GroupName.ToString();
                 foreach (var item in g.Items)
                 {
                     info.Add(item);
