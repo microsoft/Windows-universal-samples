@@ -23,7 +23,7 @@ Specifically, this sample covers:
 -   Capture of PCM audio using the **Windows Audio Session APIs**.
 -   Low latency audio playback and capture.
 
-For more information on adding audio to your Windows Store app, see [Quickstart: adding audio to an app](http://msdn.microsoft.com/library/windows/apps/hh452730).
+For more information on adding audio to your app, see [Quickstart: adding audio to an app](http://msdn.microsoft.com/library/windows/apps/hh452730).
 
 Playing audio in the background is supported by the Windows Audio Session API
 only in communication scenarios as demonstrated by the [VoIP](/Samples/VoIP) sample.

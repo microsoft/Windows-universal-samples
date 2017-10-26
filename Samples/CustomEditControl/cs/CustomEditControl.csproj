@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{F627CD06-9B7F-564B-AAE5-26CE53EF53F2}</ProjectGuid>
+    <ProjectGuid>{9736AB76-2A75-5E5D-ABEF-52009B9F5037}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>CustomEditControl</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>

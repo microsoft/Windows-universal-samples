@@ -5,7 +5,7 @@
 
 # Transcoding media sample
   
-Shows how to use the [Windows.Media.Transcoding](http://msdn.microsoft.com/library/windows/apps/br207105) API to transcode a video file in a Windows Store app.. Transcoding is the conversion of a digital media file, such as a video or audio file, from one format to another. For example, you might convert a Windows Media file to MP4 so that it can be played on a portable device that supports MP4 format. Or, you might convert a high-definition video file to a lower resolution. In that case, the re-encoded file might use the same codec as the original file, but it would have a different encoding profile.  
+Shows how to use the [Windows.Media.Transcoding](http://msdn.microsoft.com/library/windows/apps/br207105) API to transcode a video file. Transcoding is the conversion of a digital media file, such as a video or audio file, from one format to another. For example, you might convert a Windows Media file to MP4 so that it can be played on a portable device that supports MP4 format. Or, you might convert a high-definition video file to a lower resolution. In that case, the re-encoded file might use the same codec as the original file, but it would have a different encoding profile.  
   
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -31,7 +31,7 @@ Some of the transcode API covered in this sample are:
 -   [TrimStart](http://msdn.microsoft.com/library/windows/apps/br207103)  
 -   [TrimStop](http://msdn.microsoft.com/library/windows/apps/br207104)  
   
-For more info about transcoding video files in Windows Store apps, see [Transcode media files](https://msdn.microsoft.com/library/windows/apps/mt282149) and [Transcode media files](https://msdn.microsoft.com/library/windows/apps/mt282149).  
+For more info about transcoding video files, see [Transcode media files](https://msdn.microsoft.com/library/windows/apps/mt282149) and [Transcode media files](https://msdn.microsoft.com/library/windows/apps/mt282149).  
 
 ## Related topics  
   

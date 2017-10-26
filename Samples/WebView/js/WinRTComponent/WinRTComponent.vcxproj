@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{a4bbb6c0-4b27-563d-9fa4-f9bb92435b6a}</ProjectGuid>
+    <ProjectGuid>{66d6b287-557d-5025-bf97-836896bd6a4b}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>WinRTComponent</ProjectName>
     <RootNamespace>WinRTComponent</RootNamespace>
@@ -36,8 +36,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.15063.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.16299.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{dc7dfd34-63dc-5b78-914b-4435a2a87eae}</ProjectGuid>
+    <ProjectGuid>{e5419b63-2f86-55c0-9393-ee58cef35cb5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>HttpFilters</ProjectName>
     <RootNamespace>HttpFilters</RootNamespace>
@@ -36,8 +36,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.15063.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.16299.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

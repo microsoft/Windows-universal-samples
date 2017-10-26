@@ -97,7 +97,7 @@ void TextLayoutImageSource::CreateDeviceResources()
         creationFlags,              // Set debug and Direct2D compatibility flags.
         featureLevels,              // List of feature levels this app can support.
         ARRAYSIZE(featureLevels),
-        D3D11_SDK_VERSION,          // Always set this to D3D11_SDK_VERSION for Windows Store apps.
+        D3D11_SDK_VERSION,          // Always set this to D3D11_SDK_VERSION for Windows Runtime apps.
         &m_d3dDevice,               // Returns the Direct3D device created.
         nullptr,
         nullptr
@@ -150,7 +150,7 @@ void TextLayoutImageSource::CreateDeviceResources()
     // to device pixels.
     m_d2dContext->SetDpi(m_dpi, m_dpi);
 
-    // Grayscale text anti-aliasing is recommended for all Windows Store apps.
+    // Grayscale text anti-aliasing is recommended for all Windows Runtime apps.
     m_d2dContext->SetTextAntialiasMode(D2D1_TEXT_ANTIALIAS_MODE_GRAYSCALE);
 
     // Query for ISurfaceImageSourceNative interface.

@@ -35,7 +35,7 @@ for more details.
 
 ### Samples
 
-[Store in-app purchase](/Samples/Store)  
+[Microsoft Store in-app purchase](/Samples/Store)  
 
 ## Reference
 

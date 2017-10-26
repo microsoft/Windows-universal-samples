@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{d7e8b464-3243-557d-91ed-9da33f574761}</ProjectGuid>
+    <ProjectGuid>{4d1fe06b-606b-5276-ac26-a72b226bd7fe}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>Tasks</ProjectName>
     <RootNamespace>Tasks</RootNamespace>
@@ -35,8 +35,8 @@
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.15063.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.16299.0</WindowsTargetPlatformMinVersion>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

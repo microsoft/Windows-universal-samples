@@ -27,10 +27,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{ADFC4322-5F0E-5BFD-83DA-19B35EFD513B}</ProjectGuid>
+    <ProjectGuid>{D61475C4-185E-50F6-8FAD-A0163961B3B3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>RpcServer</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

@@ -28,7 +28,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-[Windows Store app UI, start to finish](http://msdn.microsoft.com/library/windows/apps/dn263191.aspx)  
+[XAML app UI, start to finish](http://msdn.microsoft.com/library/windows/apps/dn263191.aspx)  
 
 Each control page in the application has links to the relevant MSDN documentation for that control.
 

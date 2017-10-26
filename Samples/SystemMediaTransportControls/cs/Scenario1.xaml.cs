@@ -331,7 +331,7 @@ namespace SDKTemplate
 
 
 
-        // For supported audio and video formats for Windows Store apps, see:
+        // For supported audio and video formats, see:
         //     http://msdn.microsoft.com/en-us/library/windows/apps/hh986969.aspx
         private static string[] supportedAudioFormats = new string[]
         {

@@ -11,6 +11,9 @@
     <Filter Include="Assets\Numbers">
       <UniqueIdentifier>{39f2a014-3b32-4eb2-806d-5838120c2c40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StyleSheets">
+      <UniqueIdentifier>{6b161e90-c25d-4453-8f60-a41ddcf10cc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
@@ -29,6 +32,8 @@
     <ClCompile Include="Scenario7.xaml.cpp" />
     <ClCompile Include="Scenario8.xaml.cpp" />
     <ClCompile Include="Scenario9.xaml.cpp" />
+    <ClCompile Include="Scenario10.xaml.cpp" />
+    <ClCompile Include="Scenario11.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -44,6 +49,8 @@
     <ClInclude Include="Scenario7.xaml.h" />
     <ClInclude Include="Scenario8.xaml.h" />
     <ClInclude Include="Scenario9.xaml.h" />
+    <ClInclude Include="Scenario10.xaml.h" />
+    <ClInclude Include="Scenario11.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -62,6 +69,8 @@
     <Page Include="..\shared\Scenario7.xaml" />
     <Page Include="..\shared\Scenario8.xaml" />
     <Page Include="..\shared\Scenario9.xaml" />
+    <Page Include="..\shared\Scenario10.xaml" />
+    <Page Include="..\shared\Scenario11.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
@@ -118,5 +127,13 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\shared\places.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\shared\box.3mf">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="..\shared\MyCustomStates.json">
+      <Filter>StyleSheets</Filter>
+    </None>
   </ItemGroup>
 </Project>

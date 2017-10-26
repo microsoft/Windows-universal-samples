@@ -29,17 +29,18 @@
             <StackPanel Margin="0,0,0,10">
                 <TextBlock x:Name="description" Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-               Display info about points of interest on a map by adding pushpins, images and shapes embedded in the MapControl.
+               Display info about points of interest on a map by adding pushpins, images, 3D models and shapes embedded in the MapControl.
                 </TextBlock>
             </StackPanel>
 
-
-            <StackPanel  Grid.Row="1">
-                <Button Content="Add MapIcon to center of Map" x:Name="mapIconAddButton" Click="mapIconAddButton_Click"/>
-                <Button Content="Add MapBillboard to center of Map" x:Name="mapBillboardAddButton" Click="mapBillboardAddButton_Click"/>
-                <Button Content="Add MapPolygon to center of Map" x:Name="mapPolygonAddButton" Click="mapPolygonAddButton_Click"/>
-                <Button Content="Add MapPolyline to center of Map" x:Name="mapPolylineAddButton" Click="mapPolylineAddButton_Click"/>
-            </StackPanel>
+            <VariableSizedWrapGrid Grid.Row="1" Orientation="Horizontal" ItemWidth="170">
+                <Button Content="Add MapIcon" Click="mapIconAddButton_Click" Margin="3"/>
+                <Button Content="Add MapBillboard" Click="mapBillboardAddButton_Click" Margin="3"/>
+                <Button Content="Add MapElement3D" Click="mapElement3DAddButton_Click" Margin="3"/>
+                <Button Content="Add MapPolygon" Click="mapPolygonAddButton_Click" Margin="3"/>
+                <Button Content="Add MapPolyline" Click="mapPolylineAddButton_Click" Margin="3"/>
+                <Button Content="Clear" Click="mapClearButton_Click" Margin="3"/>
+            </VariableSizedWrapGrid>
 
             <maps:MapControl x:Name="myMap" TransitFeaturesVisible="False" Loaded="MyMap_Loaded" Grid.Row="2"/>
         </Grid>

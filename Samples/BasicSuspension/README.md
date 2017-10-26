@@ -31,7 +31,7 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 
 [Guidelines for app suspend and resume](https://msdn.microsoft.com/library/windows/apps/hh465088.aspx)
 
-[How to trigger suspend, resume, and background events for Windows Store apps in Visual Studio](https://msdn.microsoft.com/library/hh974425.aspx)
+[How to trigger suspend, resume, and background events in Visual Studio](https://msdn.microsoft.com/library/hh974425.aspx)
 
 
 ## System requirements

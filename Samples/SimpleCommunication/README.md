@@ -32,15 +32,15 @@ end-to-end latency of video captured, streamed to, and displayed by a remote cli
 
 This sample uses the Media Extension feature of Windows 8.1 to add functionality to the Microsoft Media Foundation pipeline. A Media Extension consists of a 
 hybrid object that implements both Component Object Model (COM) and Windows Runtime interfaces. The COM interfaces interact with the Media Foundation pipeline. 
-The Windows Runtime interfaces activate the component and interact with the Windows Store app.
+The Windows Runtime interfaces activate the component and interact with the Windows Runtime app.
 
 In most situations, it is recommended that you use Visual C++ with Component Extensions (C++/CX ) to interact with the Windows Runtime. But in the case of hybrid 
 components that implement both COM and Windows Runtime interfaces, such as Media Extensions, this is not possible. C++/CX can only create Windows Runtime objects. 
 So, for hybrid objects it is recommended that you use [Windows Runtime C++ Template Library](http://go.microsoft.com/fwlink/p/?linkid=243149) to interact with the 
 Windows Runtime. Be aware that Windows Runtime C++ Template Library has limited support for implementing COM interfaces.
 
-For more info on creating a Media Foundation media extension in Windows Store app, see Walkthrough: 
-[Creating a Windows Store app using WRL and Media Foundation](http://go.microsoft.com/fwlink/p/?LinkID=309355) and the 
+For more info on creating a Media Foundation media extension in Windows Runtime app, see Walkthrough: 
+[Creating an app using WRL and Media Foundation](http://go.microsoft.com/fwlink/p/?LinkID=309355) and the 
 [Media extension sample](http://go.microsoft.com/fwlink/p/?linkid=241427).
 
 **Important**  The binaries used by this sample have been included for proof of concept purposes only. They might have significant performance, reliability, 
@@ -68,7 +68,7 @@ Related topics
 **Tasks**
 
 [How to enable low-latency playback](http://msdn.microsoft.com/library/windows/apps/hh452742)  
-[Creating a Windows Store app using WRL and Media Foundation](http://go.microsoft.com/fwlink/p/?LinkID=309355)  
+[Creating an app using WRL and Media Foundation](http://go.microsoft.com/fwlink/p/?LinkID=309355)  
 
 **Reference**
 

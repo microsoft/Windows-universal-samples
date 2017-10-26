@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{FEE8B568-6D43-59ED-965E-769514E5FED9}</ProjectGuid>
+    <ProjectGuid>{8C07936C-9B8D-599D-9F08-274F4998BA0D}</ProjectGuid>
     <!--<OutputType>AppContainerExe</OutputType>-->
     <OutputType>AppContainerExe</OutputType>
     <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>AnimationMetrics</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -165,7 +165,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="WindowsDesktop, Version=10.0.15063.0">
+    <SDKReference Include="WindowsDesktop, Version=10.0.16299.0">
       <Name>Microsoft Desktop Extension SDK for Universal App Platform</Name>
     </SDKReference>
   </ItemGroup>

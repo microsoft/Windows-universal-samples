@@ -6,7 +6,7 @@
 # Animation library (HTML) sample
 
 Shows how to use the Animation Library APIs. These functions provide you with the ability to use animations 
-in your Windows Store apps and custom controls that are consistent with the animations used by Windows.
+that are consistent with those used by Windows.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 

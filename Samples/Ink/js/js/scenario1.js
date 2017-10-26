@@ -1,6 +1,6 @@
 ﻿//// Copyright (c) Microsoft Corporation. All rights reserved
 
-// Sample app demonstrating the use of Ink and Reco APIs for Windows Store apps.
+// Sample app demonstrating the use of Ink and Reco APIs.
 // We are using Windows.UI.Input.Inking.InkManager.
 
 (function () {

@@ -77,7 +77,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 * Videos from Build 2017
   * [Introduction to the Bluetooth LE Explorer app](https://channel9.msdn.com/Events/Build/2017/P4177)
     * [Source code](https://github.com/Microsoft/BluetoothLEExplorer)
-    * [Install it from the Store](https://www.microsoft.com/store/apps/9n0ztkf1qd98)
+    * [Install it from the Microsoft Store](https://www.microsoft.com/store/apps/9n0ztkf1qd98)
   * [Unpaired Bluetooth LE Device Connectivity](https://channel9.msdn.com/Events/Build/2017/P4178)
   * [Bluetooth GATT Server](https://channel9.msdn.com/Events/Build/2017/P4179)
 

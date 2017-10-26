@@ -38,7 +38,7 @@ In addition to Visual Studio and the Windows SDK, you need the following:
   This application comes preinstalled with Windows 10.
   If you have uninstalled it,
   you can
-  [reinstall it from the Store](https://www.microsoft.com/store/apps/3d-builder/9wzdncrfj3t6 "3D Builder").
+  [reinstall it from the Microsoft Store](https://www.microsoft.com/store/apps/3d-builder/9wzdncrfj3t6 "3D Builder").
 
 A basic understanding of Unity is assumed.
 Learn how to get started with Unity

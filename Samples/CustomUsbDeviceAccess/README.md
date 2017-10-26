@@ -29,7 +29,7 @@ The sample demonstrates these key scenarios:
 -   [How to select a USB interface setting](http://msdn.microsoft.com/library/windows/apps/dn303345)
 -   How to handle app suspension and resume events
 
-For step-by-step instructions about implementing USB features in a Windows Store app, see [Talking to USB devices, start to finish](http://msdn.microsoft.com/library/windows/apps/dn312121) and [Writing a Windows store app for a USB device](http://msdn.microsoft.com/library/windows/apps/dn303355).
+For step-by-step instructions about implementing USB features in a Windows Runtime app, see [Talking to USB devices, start to finish](http://msdn.microsoft.com/library/windows/apps/dn312121) and [Writing a Windows store app for a USB device](http://msdn.microsoft.com/library/windows/apps/dn303355).
 
 ## Code Structure
 
