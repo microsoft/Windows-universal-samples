@@ -109,6 +109,14 @@ void VideoRenderer::Render()
             0
         );
     }
+    else 
+    {
+        context->GSSetShader(
+            nullptr,
+            nullptr,
+            0
+        );
+    }
 
     // Attach the pixel shader.
     context->PSSetShader(
