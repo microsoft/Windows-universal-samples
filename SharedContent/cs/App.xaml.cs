@@ -14,6 +14,8 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=402347&clcid=0x409
 
@@ -32,6 +34,7 @@ namespace SDKTemplate
         {
             this.InitializeComponent();
             this.Construct();
+            AppCenter.Start("9d62f09e-f43e-4695-92ef-a877a2deddea", typeof(Analytics));
         }
 
         /// <summary>

@@ -1,12 +1,13 @@
 ﻿{
   "dependencies": {
+    "Microsoft.AppCenter.Analytics": "1.0.1",
     "Microsoft.ApplicationInsights": "1.0.0",
     "Microsoft.ApplicationInsights.PersistenceChannel": "1.0.0",
     "Microsoft.ApplicationInsights.WindowsApps": "1.0.0",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
   },
   "frameworks": {
-    "uap10.0": {}
+    "uap10.0.16299": {}
   },
   "runtimes": {
     "win10-arm": {},
