@@ -40,7 +40,6 @@ void Scenario9::SetDefaultStyleCombobox_SelectionChanged(Platform::Object^ sende
     {
         SetMapStyleSheet();
     }
-
 }
 
 void Scenario9::SetMapStyleSheet()

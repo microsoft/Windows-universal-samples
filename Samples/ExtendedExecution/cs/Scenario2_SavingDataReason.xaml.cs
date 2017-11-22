@@ -30,6 +30,7 @@ namespace SDKTemplate
         private MainPage rootPage = MainPage.Current;
 
         private CancellationTokenSource cancellationTokenSource;
+        private SuspendingDeferral suspendDeferral;
 
         public SavingDataReason()
         {
@@ -49,7 +50,7 @@ namespace SDKTemplate
 
         private async void OnSuspending(object sender, SuspendingEventArgs args)
         {
-            SuspendingDeferral suspendDeferral = args.SuspendingOperation.GetDeferral();
+            suspendDeferral = args.SuspendingOperation.GetDeferral();
 
             rootPage.NotifyUser("", NotifyType.StatusMessage);
 
@@ -87,7 +88,8 @@ namespace SDKTemplate
                 session.Revoked -= ExtendedExecutionSessionRevoked;
             }
 
-            suspendDeferral.Complete();
+            suspendDeferral?.Complete();
+            suspendDeferral = null;
         }
 
         private async void ExtendedExecutionSessionRevoked(object sender, ExtendedExecutionRevokedEventArgs args)
@@ -110,6 +112,9 @@ namespace SDKTemplate
                         rootPage.NotifyUser("Extended execution revoked due to system policy.", NotifyType.StatusMessage);
                         break;
                 }
+
+                suspendDeferral?.Complete();
+                suspendDeferral = null;
             });
         }
     }

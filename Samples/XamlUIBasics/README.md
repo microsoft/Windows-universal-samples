@@ -3,9 +3,9 @@
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619992
 --->
 
-# UI basics (XAML) sample
+# XAML Controls Gallery (aka XamlUiBasics)
 
-Shows all of the XAML controls in an interactive format.
+Shows all of the XAML controls in an interactive format. This app is the interactive companion to the [Windows Style Guide](https://getfluentdesign.com/).
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -28,7 +28,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-[Windows Store app UI, start to finish](http://msdn.microsoft.com/library/windows/apps/dn263191.aspx)  
+[XAML app UI, start to finish](http://msdn.microsoft.com/library/windows/apps/dn263191.aspx)  
 
 Each control page in the application has links to the relevant MSDN documentation for that control.
 

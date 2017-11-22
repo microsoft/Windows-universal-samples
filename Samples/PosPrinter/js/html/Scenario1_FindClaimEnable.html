@@ -1,0 +1,60 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/devicehelpers.js"></script>
+    <script src="/js/Scenario1_FindClaimEnable.js"></script>
+</head>
+
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">
+        Find, claim, and enable a receipt printer.
+    </div>
+
+    <p>
+        This scenario is a prerequisite for the other scenarios in this sample.
+    </p>
+
+    <p>
+        <button id="findButton" class="win-button">Find receipt printer</button>
+    </p>
+    <p>
+        Printer: <span id="printerNameSpan">None</span>
+    </p>
+    <p>
+        <button id="claimAndEnableButton" class="win-button">Claim and enable</button>
+    </p>
+    <p>
+        When informed that another app is trying to claim the device,
+        the owner must retain the device promptly in order to
+        preserve its claim.
+    </p>
+    <p>
+        <label for="retainDeviceCheckBox">
+            <input id="retainDeviceCheckBox" type="checkbox" class="win-checkbox">Retain device
+        </label>
+    </p>
+    <p>
+        <button id="releaseClaimedPrinterButton" class="win-button">Release claim</button>
+    </p>
+    <p>
+        <button id="releaseAllPrintersButton" class="win-button">Release printer</button>
+    </p>
+</body>
+
+</html>

@@ -83,7 +83,7 @@ void TextLayoutImageSource::CreateDeviceResources()
         creationFlags,              // Set debug and Direct2D compatibility flags.
         featureLevels,              // List of feature levels this app can support.
         ARRAYSIZE(featureLevels),
-        D3D11_SDK_VERSION,          // Always set this to D3D11_SDK_VERSION for Windows Store apps.
+        D3D11_SDK_VERSION,          // Always set this to D3D11_SDK_VERSION for Windows Runtime apps.
         &m_d3dDevice,               // Returns the Direct3D device created.
         &supportedFeatureLevel,
         nullptr

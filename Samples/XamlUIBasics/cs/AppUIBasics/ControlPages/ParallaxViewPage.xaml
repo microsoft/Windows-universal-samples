@@ -1,0 +1,54 @@
+﻿<local:ItemsPageBase
+    x:Class="AppUIBasics.ControlPages.ParallaxViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:local="using:AppUIBasics"
+    xmlns:data="using:AppUIBasics.Data">
+    <StackPanel>
+        <local:ControlExample x:Name="Example1" HeaderText="Parallax on a ListView" Height="750">
+            <local:ControlExample.Example>
+                <Grid>
+                    <ParallaxView x:Name="parallaxView" Source="{Binding ElementName=listView}"
+                            VerticalAlignment="Top" HorizontalAlignment="Left" VerticalShift="500">
+                        <Image Source="ms-appx:///Assets/cliff.jpg" />
+                    </ParallaxView>
+                    <ListView ItemsSource="{x:Bind Items}" x:Name="listView" 
+                              HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                              Background="#80000000" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="data:ControlInfoDataItem">
+                                <TextBlock Text="{x:Bind Title}" Foreground="White" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Header>
+                            <TextBlock Text="Scroll the list to see parallaxing of images" MaxWidth="280"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"
+                                    FontSize="28" TextWrapping="WrapWholeWords" />
+                        </ListView.Header>
+                    </ListView>
+                </Grid>
+            </local:ControlExample.Example>
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>&lt;Grid&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;ParallaxView Source="{Binding ElementName=listView}" VerticalShift="500"&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;Image Source="ms-appx:///Assets/cliff.jpg" /&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/ParallaxView&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;ListView x:Name="listView" ItemsSource="{x:Bind Items}"&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;ListView.Header&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;Grid&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;ParallaxView Source="{x:Bind listView}" VerticalShift="100"</Paragraph>
+                    <Paragraph TextIndent="72">VerticalSourceOffsetKind="Absolute" VerticalSourceStartOffset="-50"</Paragraph>
+                    <Paragraph TextIndent="72">VerticalSourceEndOffset="250"&gt;</Paragraph>
+                    <Paragraph TextIndent="80">&lt;Image Source="ms-appx:///Assets/cliff.jpg" /&gt;</Paragraph>
+                    <Paragraph TextIndent="60">&lt;/ParallaxView&gt;</Paragraph>
+                    <Paragraph TextIndent="60">&lt;TextBlock Text="Scroll the list to see parallaxing of images" /&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;/Grid&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;/ListView.Header&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/ListView&gt;</Paragraph>
+                    <Paragraph>&lt;/Grid&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+    </StackPanel>
+</local:ItemsPageBase>

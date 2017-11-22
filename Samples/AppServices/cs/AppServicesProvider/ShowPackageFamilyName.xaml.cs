@@ -9,31 +9,21 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using Windows.ApplicationModel;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace AppServicesProvider
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class ShowPackageFamilyName : Page
     {
-        private MainPage rootPage;
-
         public ShowPackageFamilyName()
         {
             this.InitializeComponent();
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            rootPage = MainPage.Current;
             PackageFamilyName.Text = Package.Current.Id.FamilyName;
         }
     }

@@ -1,0 +1,57 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page x:Class="AppUIBasics.ControlPages.PullToRefreshPage" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+    <!--<StackPanel>
+        <local:ControlExample x:Name="Example1"
+                HeaderText="A list with pull to refresh.">
+            <RefreshContainer x:Name="rc" Loaded="Rc_Loaded">
+                <ListView x:Name="lv" Width="300" Height="300" BorderThickness="1"
+                        BorderBrush="{ThemeResource TextControlBorderBrush}"/>
+            </RefreshContainer>
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph TextIndent='0'>&lt;RefreshContainer x:Name="rc"&gt;</Paragraph>
+                    <Paragraph TextIndent='12'>&lt;ListView x:Name="lv" Width="300" Height="300" BorderThickness="1" BorderBrush="Black"/&gt;</Paragraph>
+                    <Paragraph TextIndent='0'>&lt;/RefreshContainer&gt;</Paragraph>
+                    <Paragraph TextIndent='0'></Paragraph>
+                    <Paragraph TextIndent='0'>ObservableCollection&lt;string&gt; items = new ObservableCollection&lt;string&gt;();</Paragraph>
+                    <Paragraph TextIndent='0'>listview.ItemsSource = items;</Paragraph>
+                    <Paragraph TextIndent='0'></Paragraph>
+                    <Paragraph TextIndent='0'>private void Rc_Loaded(object sender, RoutedEventArgs e)</Paragraph>
+                    <Paragraph TextIndent='0'>{</Paragraph>
+                    <Paragraph TextIndent='12'>rc.RefreshVisualizer.RefreshRequested += RefreshVisualizer_RefreshRequested;</Paragraph>
+                    <Paragraph TextIndent='0'>}</Paragraph>
+                    <Paragraph TextIndent='0'></Paragraph>
+                    <Paragraph TextIndent='0'>private void RefreshVisualizer_RefreshRequested(RefreshVisualizer sender, RefreshRequestedEventArgs args)</Paragraph>
+                    <Paragraph TextIndent='0'>{</Paragraph>
+                    <Paragraph TextIndent='12'>items.Insert(0, "NewControl");</Paragraph>
+                    <Paragraph TextIndent='12'>args.GetDeferral().Complete();</Paragraph>
+                    <Paragraph TextIndent='0'>}</Paragraph>
+                    <Paragraph TextIndent='0'></Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+        <local:ControlExample x:Name="Example2"
+                HeaderText="A freestanding RefreshVisualizer">
+            <RefreshVisualizer />
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph TextIndent='0'>&lt;RefreshVisualizer /&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+    </StackPanel>-->
+</Page>

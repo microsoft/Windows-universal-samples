@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="AppUIBasics.ControlPages.RevealPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <StackPanel>
+        <local:ControlExample x:Name="Example1" HeaderText="Reveal style applied on buttons">
+
+            <Button Style="{StaticResource ButtonRevealStyle}" Content="Button" Width="130" />
+
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>&lt;Button Style="{StaticResource ButtonRevealStyle}" Content="Button" /&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+        
+        <local:ControlExample x:Name="Example2" HeaderText="RevealBorderBrush applied on a Grid">
+
+            <Grid BorderThickness="3" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" Height="100" >
+                <TextBlock Text="SystemControlBackgroundListMediumRevealBorderBrush" Margin="10"/>
+            </Grid>
+
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>&lt;Grid BorderThickness="3" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;TextBlock Text="SystemControlRevealBorderChromeWhiteBrush" /&gt;</Paragraph>
+                    <Paragraph>&lt;/Grid&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+    </StackPanel>
+</Page>

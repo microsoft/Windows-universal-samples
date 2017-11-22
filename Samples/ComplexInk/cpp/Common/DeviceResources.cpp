@@ -50,7 +50,7 @@ void DX::DeviceResources::CreateDeviceResources()
         creationFlags,                  // Set debug and Direct2D compatibility flags.
         nullptr,                        // List of feature levels this app can support.
         0,
-        D3D11_SDK_VERSION,              // Always set this to D3D11_SDK_VERSION for Windows Store apps.
+        D3D11_SDK_VERSION,              // Always set this to D3D11_SDK_VERSION for Windows Runtime apps.
         &_d3dDevice,                   // Returns the Direct3D device created.
         &d3dFeatureLevel,
         &context

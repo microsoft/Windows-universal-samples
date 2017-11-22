@@ -14,8 +14,12 @@
 
     var BackgroundTransfer = Windows.Networking.BackgroundTransfer;
 
+    var outputConsole;
+
     var page = WinJS.UI.Pages.define("/html/scenario1_Download.html", {
         ready: function (element, options) {
+            outputConsole = document.getElementById("outputConsole");
+
             // Assign event listeners for each button on click.
             id("startDownloadButton").addEventListener("click", startDownload, false);
             id("startHighPriorityDownloadButton").addEventListener("click", startHighPriorityDownload, false);
@@ -249,7 +253,6 @@
 
     // Print helper function.
     function printLog(/*@type(String)*/txt) {
-        var outputConsole = document.getElementById("outputConsole");
         outputConsole.innerHTML += txt;
     }
 

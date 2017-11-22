@@ -79,16 +79,13 @@
             result = CameraRotationHelper.subtractOrientations(result, this.getCameraOrientationRelativeToNativeOrientation());
             // If the preview is being mirrored for a front-facing camera, then the rotation should be inverted
             if (this.shouldMirrorPreview()) {
-                result = this.mirrorOrientation(result);
+                result = CameraRotationHelper.mirrorOrientation(result);
             }
             return result;
         },
         convertDisplayOrientationToSimpleOrientation: function (orientation) {
             var result;
             switch (orientation) {
-                case DisplayOrientations.landscape:
-                    result = SimpleOrientation.notRotated;
-                    break;
                 case DisplayOrientations.portraitFlipped:
                     result = SimpleOrientation.rotated90DegreesCounterclockwise;
                     break;
@@ -96,8 +93,11 @@
                     result = SimpleOrientation.rotated180DegreesCounterclockwise;
                     break;
                 case DisplayOrientations.portrait:
-                default:
                     result = SimpleOrientation.rotated270DegreesCounterclockwise;
+                    break;
+                case DisplayOrientations.landscape:
+                default:
+                    result = SimpleOrientation.notRotated;
                     break;
             }
 
@@ -128,7 +128,7 @@
         },
         getCameraOrientationRelativeToNativeOrientation: function () {
             // Get the rotation angle of the camera enclosure as it is mounted in the device hardware
-            var enclosureAngle = this.convertDisplayOrientationToSimpleOrientation(this._cameraEnclosureLocation.RotationAngleInDegreesClockwise);
+            var enclosureAngle = CameraRotationHelper.convertClockwiseDegreesToSimpleOrientation(this._cameraEnclosureLocation.rotationAngleInDegreesClockwise);
 
             // Account for the fact that, on portrait-first devices, the built in camera sensor is read at a 90 degree offset to the native orientation
             if (this._displayInformation.nativeOrientation === DisplayOrientations.portrait && !CameraRotationHelper.isEnclosureLocationExternal(this._cameraEnclosureLocation)) {

@@ -20,7 +20,10 @@ For the download scenario, the sample first uses methods on [BackgroundDownloade
 
 For the upload scenario, the sample first uses methods on [BackgroundUploader](http://msdn.microsoft.com/library/windows/apps/br207140) class to enumerate any uploads that were going on in the background while the app was closed. An app should enumerate these uploads when it gets started so it can attach a progress handler to these uploads to track progress and prevent stale uploads. Then other methods on the **BackgroundUploader** and related classes are used to start new uploads. The sample also shows how to set a content header and use a multipart upload.
 
-The sample also shows how to configure and use toast and tile notifications to inform the user when all transfers succeed or when at least one transfer fails.
+The sample also showcases several advanced usage scenarios:
+-   Configuring toast and tile notifications to inform the user when all transfers succeed or when at least one transfer fails.
+-   Executing a background task when a set of uploads or downloads completes.
+-   Accessing file content and seeking within that content while a download is still ongoing, effectively altering the order in which remote file data is requested from the server.
 
 **Note**  Background transfer is primarily designed for long-term transfer operations for resources like video, music, and large images. For short-term operations involving transfers of smaller resources (i.e. a few KB), the HTTP APIs are recommended. [HttpClient](http://msdn.microsoft.com/library/windows/apps/dn298639) is preferred and can be used in all languages supported by UWP apps. [XHR](http://msdn.microsoft.com/library/windows/apps/br229787) can be used in JavaScript. [IXHR2](http://msdn.microsoft.com/library/windows/apps/hh770550) can be used in C++.
 
@@ -110,7 +113,7 @@ The sample must also be updated when run against a non-localhost web server. To 
 
 **Note**  IIS is not available on ARM builds nor on Windows Phone. Instead, set up the web server on a separate 64-bit or 32-bit computer and follow the steps for using the sample against a non-localhost web server.
 
-**Note**  When used with the supplied scripts, this UWP app sample communicates with another process (IIS server which is a desktop app) on the same machine over loopback for demonstration purposes only. A UWP app that communicates over loopback to another process that represents a UWP app or a desktop app is not allowed and such apps will not pass Store validation. For more information, see [How to enable loopback and troubleshoot network isolation](http://msdn.microsoft.com/library/windows/apps/hh780593).
+**Note**  When used with the supplied scripts, this app sample communicates with another process (IIS server which is a desktop app) on the same machine over loopback for demonstration purposes only. A UWP app that communicates over loopback to another process that represents a UWP app or a desktop app is not allowed and such apps will not pass Microsoft Store validation. For more information, see [How to enable loopback and troubleshoot network isolation](http://msdn.microsoft.com/library/windows/apps/hh780593).
 
 However if a server different than IIS is used, then this requires some special configuration of the server to create the *BackgroundTransferSample* folder.
 

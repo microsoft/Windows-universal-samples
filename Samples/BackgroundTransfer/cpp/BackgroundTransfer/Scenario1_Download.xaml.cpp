@@ -17,7 +17,7 @@
 #include "pch.h"
 #include "Scenario1_Download.xaml.h"
 
-using namespace BackgroundTransfer;
+using namespace SDKTemplate;
 
 using namespace Concurrency;
 using namespace Platform;

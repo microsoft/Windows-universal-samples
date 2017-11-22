@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>8b4ef842-15ae-5f4e-ba13-5b6799d7fbe5</ProjectGuid>
+    <ProjectGuid>3311cf12-f9a4-524c-a2aa-beff052463e2</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
@@ -45,8 +45,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
@@ -85,12 +85,14 @@
     <Content Include="html\scenario2_Upload.html" />
     <Content Include="html\scenario3_Notifications.html" />
     <Content Include="html\scenario4_CompletionGroups.html" />
+    <Content Include="html\scenario5_RandomAccess.html" />
     <Content Include="js\completionGroupBackgroundTask.js" />
     <Content Include="js\sample-configuration.js" />
     <Content Include="js\scenario1_Download.js" />
     <Content Include="js\scenario2_Upload.js" />
     <Content Include="js\scenario3_Notifications.js" />
     <Content Include="js\scenario4_CompletionGroups.js" />
+    <Content Include="js\scenario5_RandomAccess.js" />
     <Content Include="..\..\..\SharedContent\js\Microsoft.WinJS\css\ui-dark.css">
       <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>
     </Content>

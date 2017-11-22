@@ -29,7 +29,7 @@
             <StackPanel Margin="0,0,0,10" Grid.Row="0">
                 <TextBlock x:Name="description" Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                    Custom map appearance
+                    Customize map appearance by using default style sheets or custom ones
                 </TextBlock>
             </StackPanel>
             <StackPanel Grid.Row="1">

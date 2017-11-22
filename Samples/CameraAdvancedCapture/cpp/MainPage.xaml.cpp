@@ -25,6 +25,7 @@ using namespace Windows::Foundation::Collections;
 using namespace Windows::Graphics::Imaging;
 using namespace Windows::Graphics::Display;
 using namespace Windows::Media;
+using namespace Windows::Media::Core;
 using namespace Windows::Phone::UI::Input;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
@@ -275,19 +276,19 @@ task<void> MainPage::StopPreviewAsync()
 task<void> MainPage::CreateSceneAnalysisEffectAsync()
 {
     // Create the definition, which will contain some initialization settings
-    auto definition = ref new Core::SceneAnalysisEffectDefinition();
+    auto definition = ref new SceneAnalysisEffectDefinition();
 
     // Add the effect to the video preview stream
     return create_task(_mediaCapture->AddVideoEffectAsync(definition, Capture::MediaStreamType::VideoPreview))
         .then([this](IMediaExtension^ effect)
     {
-        _sceneAnalysisEffect = static_cast<Core::SceneAnalysisEffect^>(effect);
+        _sceneAnalysisEffect = safe_cast<SceneAnalysisEffect^>(effect);
         
         WriteLine("SA effect added to pipeline");
 
         // Subscribe to notifications about scene information
         _sceneAnalyzedEventToken =
-            _sceneAnalysisEffect->SceneAnalyzed += ref new TypedEventHandler<Core::SceneAnalysisEffect^, Core::SceneAnalyzedEventArgs^>(this, &MainPage::SceneAnalysisEffect_SceneAnalyzed);
+            _sceneAnalysisEffect->SceneAnalyzed += ref new TypedEventHandler<SceneAnalysisEffect^, SceneAnalyzedEventArgs^>(this, &MainPage::SceneAnalysisEffect_SceneAnalyzed);
 
         // Enable HDR analysis
         _sceneAnalysisEffect->HighDynamicRangeAnalyzer->Enabled = true;
@@ -890,7 +891,7 @@ void MainPage::DisplayInformation_OrientationChanged(DisplayInformation^ sender,
 /// </summary>
 /// <param name="sender">The effect raising the event.</param>
 /// <param name="args">The event data.</param>
-void MainPage::SceneAnalysisEffect_SceneAnalyzed(Core::SceneAnalysisEffect^ sender, Core::SceneAnalyzedEventArgs^ args)
+void MainPage::SceneAnalysisEffect_SceneAnalyzed(SceneAnalysisEffect^ sender, SceneAnalyzedEventArgs^ args)
 {
     Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([this, args]()
     {
@@ -898,6 +899,8 @@ void MainPage::SceneAnalysisEffect_SceneAnalyzed(Core::SceneAnalysisEffect^ send
         // from 0 ("everything is within the dynamic range of the camera") to CERTAINTY_CAP ("at this point the app
         // strongly recommends an HDR capture"), where CERTAINTY_CAP can be any number between 0 and 1 that the app chooses.
         HdrImpactBar->Value = min(CERTAINTY_CAP, args->ResultFrame->HighDynamicRange->Certainty);
+
+        SceneTypeTextBlock->Text = "Scene: " + args->ResultFrame->AnalysisRecommendation.ToString();
     }));
 }
 

@@ -56,14 +56,14 @@ namespace AppUIBasics.ControlPages
         /// </summary>
         /// <param name="sender">The AutoSuggestBox whose text got changed.</param>
         /// <param name="args">The event arguments.</param>
-        private async void Control2_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        private void Control2_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             //We only want to get results when it was a user typing, 
             //otherwise we assume the value got filled in by TextMemberPath 
             //or the handler for SuggestionChosen
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                var suggestions = await SearchControls(sender.Text);
+                var suggestions = SearchControls(sender.Text);
 
                 if (suggestions.Count > 0)
                     sender.ItemsSource = suggestions;
@@ -81,7 +81,7 @@ namespace AppUIBasics.ControlPages
         /// <param name="sender">The AutoSuggestBox that fired the event.</param>
         /// <param name="args">The args contain the QueryText, which is the text in the TextBox, 
         /// and also ChosenSuggestion, which is only non-null when a user selects an item in the list.</param>
-        private async void Control2_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        private void Control2_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
             if (args.ChosenSuggestion != null && args.ChosenSuggestion is ControlInfoDataItem)
             {
@@ -91,7 +91,7 @@ namespace AppUIBasics.ControlPages
             else if (!string.IsNullOrEmpty(args.QueryText))
             {
                 //Do a fuzzy search based on the text
-                var suggestions = await SearchControls(sender.Text);
+                var suggestions = SearchControls(sender.Text);
                 if(suggestions.Count > 0)
                 {
                     SelectControl(suggestions.FirstOrDefault());
@@ -108,10 +108,8 @@ namespace AppUIBasics.ControlPages
         /// <param name="args">The args contain SelectedItem, which contains the data item of the item that is currently highlighted.</param>
         private void Control2_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            var control = args.SelectedItem as ControlInfoDataItem;
-
             //Don't autocomplete the TextBox when we are showing "no results"
-            if(control != null)
+            if (args.SelectedItem is ControlInfoDataItem control)
             {
                 sender.Text = control.Title;
             }
@@ -135,12 +133,11 @@ namespace AppUIBasics.ControlPages
             }
         }
 
-        private async Task<List<ControlInfoDataItem>> SearchControls(string query)
+        private List<ControlInfoDataItem> SearchControls(string query)
         {
-            var groups = await AppUIBasics.Data.ControlInfoDataSource.GetGroupsAsync();
             var suggestions = new List<ControlInfoDataItem>();
 
-            foreach (var group in groups)
+            foreach (var group in ControlInfoDataSource.Instance.Groups)
             {
                 var matchingItems = group.Items.Where(
                     item => item.Title.IndexOf(query, StringComparison.CurrentCultureIgnoreCase) >= 0);

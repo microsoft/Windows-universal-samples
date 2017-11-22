@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{12E2E221-37A9-5A37-84A9-9D2B396366E7}</ProjectGuid>
+    <ProjectGuid>{1438B9F5-B1A4-5F85-A1A9-A59847D3D5AB}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>BackgroundTransfer</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -115,6 +115,9 @@
     <Compile Include="Scenario4_CompletionGroups.xaml.cs">
       <DependentUpon>Scenario4_CompletionGroups.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario5_RandomAccess.xaml.cs">
+      <DependentUpon>Scenario5_RandomAccess.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -149,6 +152,11 @@
     </Page>
     <Page Include="..\..\shared\Scenario4_CompletionGroups.xaml">
       <Link>Scenario4_CompletionGroups.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\shared\Scenario5_RandomAccess.xaml">
+      <Link>Scenario5_RandomAccess.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

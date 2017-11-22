@@ -6,7 +6,7 @@
 # Store sample
 
 Shows how to perform in-app feature or product purchases operations
-and use the licensing API provided by the Windows Store
+and use the licensing API provided by the Microsoft Store
 to determine the license status of an app or a feature that is enabled by an in-app purchase.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
@@ -16,7 +16,7 @@ to determine the license status of an app or a feature that is enabled by an in-
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-The Windows Store supports the following types of in-app purchases:
+The Microsoft Store supports the following types of in-app purchases:
 
 -   Purchasing the app itself.
 -   Purchasing a durable in-app product, meaning that after the purchase, the user owns the product until it (optionally) expires.
@@ -33,13 +33,13 @@ The sample app demonstrates the following tasks.
 -   Perform an in-app purchase to buy the app.
 -   Perform an in-app purchase to buy an in-app product.
 -   Confirm the fulfillment of an in-app consumable product.
--   Perform an in-app purchase transaction using the Windows Store commerce platform.
--   Launch the Windows Store page for the app, so users can purchase the app or write a review.
+-   Perform an in-app purchase transaction using the Microsoft Store commerce platform.
+-   Launch the Microsoft Store page for the app, so users can purchase the app or write a review.
 -   Generate a business to business (B2B) token that can be used to query or add to a user's collection.
 
 ### Setup Instructions
 
-Before running this sample, you must associate it with an app in the Store.
+Before running this sample, you must associate it with an app in the Microsoft Store.
 
 1. [Register as an app developer](https://developer.microsoft.com/store/register).
 2. Follow the instructions in
@@ -49,9 +49,9 @@ Before running this sample, you must associate it with an app in the Store.
 
 These steps are necessary only if you want to run the code in the Business to Business Scenario, which requires application and Azure configuration.
 
-1. You must have a real application available for download from the Windows Store.  This can be a private application.
-2. Download a copy of your application from the store to get a valid license.
-3. Associate this test application with this application in the store.
+1. You must have a real application available for download from the Microsoft Store.  This can be a private application.
+2. Download a copy of your application from the Microsoft Store to get a valid license.
+3. Associate this test application with this application in the Microsoft Store.
 4. Deploy this application to your machine and overwrite the existing application.
 5. Setup your application following the instructions under the **Adding an Application** section at [Integrating Applications with Azure Active Directory](https://azure.microsoft.com/documentation/articles/active-directory-integrating-applications/).
 6. Replace the provided value of "tenantId" with your actual tenant ID for your Azure account.
@@ -76,7 +76,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 ### Reference
 
 [Windows.Services.Store namespace](https://msdn.microsoft.com/library/windows/apps/windows.services.store.aspx)  
-[Monetization, customer engagement, and Store services](https://msdn.microsoft.com/windows/uwp/monetize/)  
+[Monetization, customer engagement, and Microsoft Store services](https://msdn.microsoft.com/windows/uwp/monetize/)  
 
 ## System requirements
 

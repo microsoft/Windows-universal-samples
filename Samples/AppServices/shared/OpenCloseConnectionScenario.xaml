@@ -11,10 +11,9 @@
 //*********************************************************
 -->
 <Page
-    x:Class="AppServicesClient.OpenCloseConnectionScenario"
+    x:Class="SDKTemplate.OpenCloseConnectionScenario"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:AppServicesClient"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -47,7 +46,7 @@
                         <TextBox x:Name="MinValue" Text="0" VerticalAlignment="Center" Margin="5,0,0,0" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Minimum Value:" VerticalAlignment="Center"/>
+                        <TextBlock Text="Maximum Value:" VerticalAlignment="Center"/>
                         <TextBox x:Name="MaxValue" Text="10" VerticalAlignment="Center" Margin="5,0,0,0" />
                     </StackPanel>
                     <Button x:Name="GenerateRandomNumber" Content="Generate Random Number" Margin="0, 10, 0, 0" Click="GenerateRandomNumber_Click" />

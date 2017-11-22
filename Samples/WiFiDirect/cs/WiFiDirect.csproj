@@ -3,15 +3,15 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <ProjectGuid>{7D4442E9-13B7-5059-8903-C296E0770D08}</ProjectGuid>
+    <ProjectGuid>{36943420-000E-5A6A-8483-E3FF7E59713A}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WiFiDirectApi</RootNamespace>
     <AssemblyName>WiFiDirectApi</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -104,7 +104,9 @@
     <Compile Include="ConnectionSettingsPanel.xaml.cs">
       <DependentUpon>ConnectionSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DispatcherTaskExtensions.cs" />
+    <Compile Include="..\..\..\SharedContent\cs\DispatcherTaskExtensions.cs">
+      <Link>DispatcherTaskExtensions.cs</Link>
+    </Compile>
     <Compile Include="SampleConfiguration.cs" />
     <Compile Include="Scenario1_Advertiser.xaml.cs">
       <DependentUpon>Scenario1_Advertiser.xaml</DependentUpon>

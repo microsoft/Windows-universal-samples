@@ -45,7 +45,7 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 [Guidelines and checklist for tiles and badges](http://msdn.microsoft.com/library/windows/apps/hh465403)  
 [Quickstart: Showing tile and badge updates on the lock screen](http://msdn.microsoft.com/library/windows/apps/hh700416)  
 [Lock screen overview](http://msdn.microsoft.com/library/windows/apps/hh779720)  
-[Windows 8 Windows Store app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
+[Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 
 ## System requirements
 

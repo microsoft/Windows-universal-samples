@@ -53,7 +53,7 @@ void Scenario1_ReceiptPrinter::FindClaimEnable_Click(Platform::Object^ sender, R
                     create_task(EnableAsync()).then([this](void)
                     {
                         releaseDeviceRequestedToken = claimedPrinter->ReleaseDeviceRequested::add
-                            (ref new TypedEventHandler<ClaimedPosPrinter^, PosPrinterReleaseDeviceRequestedEventArgs^ >(this, &Scenario1_ReceiptPrinter::ClaimedPrinter_ReleaseDeviceRequested));
+                        (ref new TypedEventHandler<ClaimedPosPrinter^, PosPrinterReleaseDeviceRequestedEventArgs^ >(this, &Scenario1_ReceiptPrinter::ClaimedPrinter_ReleaseDeviceRequested));
                     });
                 }
             });
@@ -68,17 +68,7 @@ void Scenario1_ReceiptPrinter::ClaimedPrinter_ReleaseDeviceRequested(ClaimedPosP
 {
     if (IsAnImportantTransaction)
     {
-        create_task(claimedInstance->RetainDeviceAsync()).then([this](bool success)
-        {
-            if (success)
-            {
-                rootPage->NotifyUser("Retained Device", NotifyType::StatusMessage);
-            }
-            else
-            {
-                rootPage->NotifyUser("Could not retain device.", NotifyType::ErrorMessage);
-            }
-        });
+        create_task(claimedInstance->RetainDeviceAsync());
     }
     else
     {
@@ -175,15 +165,16 @@ void Scenario1_ReceiptPrinter::PrintReceipt()
 {
     if (printer != nullptr && claimedPrinter != nullptr)
     {
-        String^ receiptString = "======================\n" +
-                                "|   Sample Header    |\n" +
-                                "======================\n" +
-                                "Item             Price\n" +
-                                "----------------------\n" +
-                                "Books            10.40\n" +
-                                "Games             9.60\n" +
-                                "----------------------\n" +
-                                "Total----------- 20.00\n";
+        String^ receiptString =
+            "======================\n" +
+            "|   Sample Header    |\n" +
+            "======================\n" +
+            "Item             Price\n" +
+            "----------------------\n" +
+            "Books            10.40\n" +
+            "Games             9.60\n" +
+            "----------------------\n" +
+            "Total----------- 20.00\n";
 
         ReceiptPrintJob^ merchantJob = claimedPrinter->Receipt->CreateJob();
         String^ merchantFooter = GetMerchantFooter();
@@ -213,23 +204,25 @@ void Scenario1_ReceiptPrinter::PrintReceipt()
 
 Platform::String^ Scenario1_ReceiptPrinter::GetMerchantFooter()
 {
-    return "\n" +
-           "______________________\n" +
-           "Tip\n" +
-           "\n" +
-           "______________________\n" +
-           "Signature\n" +
-           "\n" +
-           "Merchant Copy\n";
+    return
+        "\n" +
+        "______________________\n" +
+        "Tip\n" +
+        "\n" +
+        "______________________\n" +
+        "Signature\n" +
+        "\n" +
+        "Merchant Copy\n";
 }
 
 Platform::String^ Scenario1_ReceiptPrinter::GetCustomerFooter()
 {
-    return "\n" +
-           "______________________\n" +
-           "Tip\n" +
-           "\n" +
-           "Customer Copy\n";
+    return
+        "\n" +
+        "______________________\n" +
+        "Tip\n" +
+        "\n" +
+        "Customer Copy\n";
 }
 
 // Cut the paper after printing enough blank lines to clear the paper cutter.

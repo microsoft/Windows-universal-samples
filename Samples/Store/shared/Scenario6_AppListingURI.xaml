@@ -22,7 +22,7 @@
             <StackPanel>
                 <TextBlock Text="App listing URI" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                    Goes to the app's listing in the Windows Store.
+                    Goes to the app's listing in the Microsoft Store.
                     You can use this information to make it easy for customers to purchase or review your app.
                 </TextBlock>
                 <Button Content="Rate this app" Margin="0,10,0,0" Click="{x:Bind DisplayLink}"/>
