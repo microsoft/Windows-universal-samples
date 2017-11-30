@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CameraStreamCorrelation", "CameraStreamCorrelation.vcxproj", "{BBEFBC68-284C-527C-9D87-474FA2AA52C5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A48A1D2B-2439-56D2-AFC0-199B62332CFC} = {A48A1D2B-2439-56D2-AFC0-199B62332CFC}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PoseTrackingPreview", "PoseTrackingPreview\PoseTrackingPreview.vcxproj", "{A48A1D2B-2439-56D2-AFC0-199B62332CFC}"
 EndProject
