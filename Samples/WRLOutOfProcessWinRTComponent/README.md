@@ -14,6 +14,9 @@ Shows how to create an out-of-process component in C++ using WRL that is consume
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
+See [this discussion](https://github.com/Microsoft/Windows-universal-samples/issues/526#issuecomment-346468732)
+for information on hosting out-of-process components in other languages.
+
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  
 To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)

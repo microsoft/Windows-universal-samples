@@ -50,5 +50,6 @@
 
     <Capabilities>
         <Capability Name="internetClient" />
+        <uap:Capability Name="sharedUserCertificates" />
     </Capabilities>
 </Package>

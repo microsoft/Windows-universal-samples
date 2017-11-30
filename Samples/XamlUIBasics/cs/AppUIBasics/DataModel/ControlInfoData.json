@@ -532,7 +532,7 @@
 						"Docs": [
 							{
 								"Title": "CalendarDatePicker",
-								"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.calendarview.aspx"
+								"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.calendardatepicker.aspx"
 							}
 						],
 						"RelatedControls": [

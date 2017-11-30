@@ -43,7 +43,7 @@ void Scenario1_oAuthGoogle::Launch_Click(Platform::Object^ sender, Windows::UI::
     try
     {
         auto startURI = ref new Uri(googleURL);
-        auto endURI = ref new Uri("https://accounts.google.com/o/oauth2/approval?");
+        auto endURI = ref new Uri("https://accounts.google.com/o/oauth2/approval");
         MainPage::Current->NotifyUser("Navigating to: " + googleURL + "\n", NotifyType::StatusMessage);
 
         create_task(WebAuthenticationBroker::AuthenticateAsync(WebAuthenticationOptions::UseTitle, startURI, endURI)).then([this](WebAuthenticationResult^ result)

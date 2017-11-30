@@ -14,7 +14,7 @@ This repo contains the samples that demonstrate the API usage patterns for the U
 
 ## Universal Windows Platform development
 
-These samples require Visual Studio 2017 and the Windows Software Development Kit (SDK) for Windows 10 to build, test, and deploy your Universal Windows Platform apps.
+These samples require Visual Studio 2017 Update 4 or higher and the Windows Software Development Kit (SDK) version 16299 for Windows 10.
 
    [Get a free copy of Visual Studio 2017 Community Edition with support for building Universal Windows Platform apps](http://go.microsoft.com/fwlink/p/?LinkID=280676)
 
@@ -431,16 +431,17 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 
 <table>
  <tr>
+  <td><a href="Samples/BasicHologram">Basic hologram</a></td>
   <td><a href="Samples/HolographicDepthBasedImageStabilization">Depth-based focus plane</a></td>
   <td><a href="Samples/HolographicFaceTracking">Holographic face tracking</a></td>
-  <td><a href="Samples/HolographicMixedRealityCapture">Holographic mixed reality capture</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/HolographicMixedRealityCapture">Holographic mixed reality capture</a></td>
   <td><a href="Samples/HolographicSpatialMapping">Holographic spatial mapping</a></td>
   <td><a href="Samples/HolographicSpatialStage">Holographic spatial stage</a></td>
-  <td><a href="Samples/HolographicVoiceInput">Holographic voice input</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/HolographicVoiceInput">Holographic voice input</a></td>
   <td><a href="Samples/SpatialInteractionSource">Spatial interaction source</a></td>
   <td><a href="Samples/HolographicTagAlong">Tag-along hologram</a></td>
  </tr>

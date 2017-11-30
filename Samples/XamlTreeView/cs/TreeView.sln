@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeView", "TreeView.csproj", "{646E8745-5342-55B2-A99D-01F4201D1DFA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TreeViewControl", "..\cpp\Control\TreeViewControl.vcxproj", "{D1DDEE5A-306B-55A1-AB43-84F07517AA51}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TreeViewControl", "..\cpp\Control\TreeViewControl.vcxproj", "{BDC228D2-7929-5A98-B7BA-5E28BD1ADBCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,18 +35,18 @@ Global
 		{646E8745-5342-55B2-A99D-01F4201D1DFA}.Release|x86.ActiveCfg = Release|x86
 		{646E8745-5342-55B2-A99D-01F4201D1DFA}.Release|x86.Build.0 = Release|x86
 		{646E8745-5342-55B2-A99D-01F4201D1DFA}.Release|x86.Deploy.0 = Release|x86
-		{D1DDEE5A-306B-55A1-AB43-84F07517AA51}.Debug|ARM.ActiveCfg = Debug|ARM
-		{D1DDEE5A-306B-55A1-AB43-84F07517AA51}.Debug|ARM.Build.0 = Debug|ARM
-		{D1DDEE5A-306B-55A1-AB43-84F07517AA51}.Debug|x64.ActiveCfg = Debug|x64
-		{D1DDEE5A-306B-55A1-AB43-84F07517AA51}.Debug|x64.Build.0 = Debug|x64
-		{D1DDEE5A-306B-55A1-AB43-84F07517AA51}.Debug|x86.ActiveCfg = Debug|Win32
-		{D1DDEE5A-306B-55A1-AB43-84F07517AA51}.Debug|x86.Build.0 = Debug|Win32
-		{D1DDEE5A-306B-55A1-AB43-84F07517AA51}.Release|ARM.ActiveCfg = Release|ARM
-		{D1DDEE5A-306B-55A1-AB43-84F07517AA51}.Release|ARM.Build.0 = Release|ARM
-		{D1DDEE5A-306B-55A1-AB43-84F07517AA51}.Release|x64.ActiveCfg = Release|x64
-		{D1DDEE5A-306B-55A1-AB43-84F07517AA51}.Release|x64.Build.0 = Release|x64
-		{D1DDEE5A-306B-55A1-AB43-84F07517AA51}.Release|x86.ActiveCfg = Release|Win32
-		{D1DDEE5A-306B-55A1-AB43-84F07517AA51}.Release|x86.Build.0 = Release|Win32
+		{BDC228D2-7929-5A98-B7BA-5E28BD1ADBCF}.Debug|ARM.ActiveCfg = Debug|ARM
+		{BDC228D2-7929-5A98-B7BA-5E28BD1ADBCF}.Debug|ARM.Build.0 = Debug|ARM
+		{BDC228D2-7929-5A98-B7BA-5E28BD1ADBCF}.Debug|x64.ActiveCfg = Debug|x64
+		{BDC228D2-7929-5A98-B7BA-5E28BD1ADBCF}.Debug|x64.Build.0 = Debug|x64
+		{BDC228D2-7929-5A98-B7BA-5E28BD1ADBCF}.Debug|x86.ActiveCfg = Debug|Win32
+		{BDC228D2-7929-5A98-B7BA-5E28BD1ADBCF}.Debug|x86.Build.0 = Debug|Win32
+		{BDC228D2-7929-5A98-B7BA-5E28BD1ADBCF}.Release|ARM.ActiveCfg = Release|ARM
+		{BDC228D2-7929-5A98-B7BA-5E28BD1ADBCF}.Release|ARM.Build.0 = Release|ARM
+		{BDC228D2-7929-5A98-B7BA-5E28BD1ADBCF}.Release|x64.ActiveCfg = Release|x64
+		{BDC228D2-7929-5A98-B7BA-5E28BD1ADBCF}.Release|x64.Build.0 = Release|x64
+		{BDC228D2-7929-5A98-B7BA-5E28BD1ADBCF}.Release|x86.ActiveCfg = Release|Win32
+		{BDC228D2-7929-5A98-B7BA-5E28BD1ADBCF}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
