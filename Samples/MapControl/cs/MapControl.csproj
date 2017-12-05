@@ -281,7 +281,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\shared\box.3mf">
-      <Link>Assets\ConkerAfro.3mf</Link>
+      <Link>Assets\box.3mf</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\shared\MyCustomStates.json">
