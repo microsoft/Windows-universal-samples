@@ -154,20 +154,20 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="NotificationsExtensions">
-      <HintPath>..\packages\NotificationsExtensions.Win10.JavaScript.14332.0.2\lib\Windows\NotificationsExtensions.winmd</HintPath>
+    <Reference Include="Microsoft.Toolkit.Uwp.Notifications">
+      <HintPath>..\packages\Microsoft.Toolkit.Uwp.Notifications.JavaScript.2.0.0\lib\Windows\Microsoft.Toolkit.Uwp.Notifications.winmd</HintPath>
       <IsWinMDFile>true</IsWinMDFile>
       <CopyLocal>True</CopyLocal>
       <SpecificVersion>True</SpecificVersion>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
-  <Import Project="..\packages\NotificationsExtensions.Win10.JavaScript.14332.0.2\build\Windows\NotificationsExtensions.Win10.JavaScript.targets" Condition="Exists('..\packages\NotificationsExtensions.Win10.JavaScript.14332.0.2\build\Windows\NotificationsExtensions.Win10.JavaScript.targets')" />
+  <Import Project="..\packages\Microsoft.Toolkit.Uwp.Notifications.JavaScript.2.0.0\build\Windows\Microsoft.Toolkit.Uwp.Notifications.JavaScript.targets" Condition="Exists('..\packages\Microsoft.Toolkit.Uwp.Notifications.JavaScript.2.0.0\build\Windows\Microsoft.Toolkit.Uwp.Notifications.JavaScript.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\NotificationsExtensions.Win10.JavaScript.14332.0.2\build\Windows\NotificationsExtensions.Win10.JavaScript.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NotificationsExtensions.Win10.JavaScript.14332.0.2\build\Windows\NotificationsExtensions.Win10.JavaScript.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Toolkit.Uwp.Notifications.JavaScript.2.0.0\build\Windows\Microsoft.Toolkit.Uwp.Notifications.JavaScript.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Toolkit.Uwp.Notifications.JavaScript.2.0.0\build\Windows\Microsoft.Toolkit.Uwp.Notifications.JavaScript.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below then uncomment
        that target and the DisableFastUpToDateCheck PropertyGroup. 

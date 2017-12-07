@@ -9,7 +9,7 @@
     
     var TileNotification = Windows.UI.Notifications.TileNotification;
     var TileUpdateManager = Windows.UI.Notifications.TileUpdateManager;
-    var Tiles = NotificationsExtensions.Tiles;
+    var Notifications = Microsoft.Toolkit.Uwp.Notifications;
 
     var _tileId;
 
@@ -57,21 +57,21 @@
         var expirationTimeString = expirationTime.toLocaleTimeString();
 
         // Build TileText
-        var lineOfText = new NotificationsExtensions.AdaptiveText();
+        var lineOfText = new Notifications.AdaptiveText();
         lineOfText.text = "This notification will expire at " + expirationTimeString;
         lineOfText.hintWrap = true;
-        var adaptiveContent = new Tiles.TileBindingContentAdaptive();
+        var adaptiveContent = new Notifications.TileBindingContentAdaptive();
         adaptiveContent.children.push(lineOfText);
 
         // Specify templates and send Notification.
-        var tileContent = new Tiles.TileContent();
-        tileContent.visual = new Tiles.TileVisual();
-        tileContent.visual.branding = Tiles.TileBranding.nameAndLogo;
-        tileContent.visual.tileMedium = new Tiles.TileBinding();
+        var tileContent = new Notifications.TileContent();
+        tileContent.visual = new Notifications.TileVisual();
+        tileContent.visual.branding = Notifications.TileBranding.nameAndLogo;
+        tileContent.visual.tileMedium = new Notifications.TileBinding();
         tileContent.visual.tileMedium.content = adaptiveContent;
-        tileContent.visual.tileWide = new Tiles.TileBinding();
+        tileContent.visual.tileWide = new Notifications.TileBinding();
         tileContent.visual.tileWide.content = adaptiveContent;
-        tileContent.visual.tileLarge = new Tiles.TileBinding();
+        tileContent.visual.tileLarge = new Notifications.TileBinding();
         tileContent.visual.tileLarge.content = adaptiveContent;
 
         var doc = tileContent.getXml();

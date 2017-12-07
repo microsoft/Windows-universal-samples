@@ -5,7 +5,7 @@
 
     var TileNotification = Windows.UI.Notifications.TileNotification;
     var TileUpdateManager = Windows.UI.Notifications.TileUpdateManager;
-    var Tiles = NotificationsExtensions.Tiles;
+    var Notifications = Microsoft.Toolkit.Uwp.Notifications;
 
     // UI elements on the page
     var sendCommand;
@@ -30,13 +30,13 @@
 
         var textConfigs = [
             { text: "New primary tile notification", hintWrap: true },
-            { text: nowTimeString, hintWrap: true, hintStyle: NotificationsExtensions.AdaptiveTextStyle.captionSubtle }
+            { text: nowTimeString, hintWrap: true, hintStyle: Notifications.AdaptiveTextStyle.captionSubtle }
         ];
 
         // Build and append content from textConfigs, line by line.
-        var adaptiveContent = new Tiles.TileBindingContentAdaptive();
+        var adaptiveContent = new Notifications.TileBindingContentAdaptive();
         textConfigs.forEach(function (lineConfig) {
-            var lineOfText = new NotificationsExtensions.AdaptiveText();
+            var lineOfText = new Notifications.AdaptiveText();
             for (var key in lineConfig) {
                 lineOfText[key] = lineConfig[key];
             }
@@ -44,14 +44,15 @@
         });
 
         // Specify templates and send Notification.
-        var tileContent = new Tiles.TileContent();
-        tileContent.visual = new Tiles.TileVisual();
-        tileContent.visual.branding = Tiles.TileBranding.nameAndLogo;
-        tileContent.visual.tileMedium = new Tiles.TileBinding();
+        var tileContent = new Notifications.TileContent();
+        tileContent.visual = new Notifications.TileVisual();
+        tileContent.visual.arguments = "My tile arguments";
+        tileContent.visual.branding = Notifications.TileBranding.nameAndLogo;
+        tileContent.visual.tileMedium = new Notifications.TileBinding();
         tileContent.visual.tileMedium.content = adaptiveContent;
-        tileContent.visual.tileWide = new Tiles.TileBinding();
+        tileContent.visual.tileWide = new Notifications.TileBinding();
         tileContent.visual.tileWide.content = adaptiveContent;
-        tileContent.visual.tileLarge = new Tiles.TileBinding();
+        tileContent.visual.tileLarge = new Notifications.TileBinding();
         tileContent.visual.tileLarge.content = adaptiveContent;
 
         var doc = tileContent.getXml();

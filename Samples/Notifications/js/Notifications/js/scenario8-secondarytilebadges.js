@@ -9,8 +9,8 @@
 
     var BadgeUpdateManager = Windows.UI.Notifications.BadgeUpdateManager;
     var BadgeNotification = Windows.UI.Notifications.BadgeNotification;
-    var Badges = NotificationsExtensions.Badges;
-    var GlyphValue = Badges.GlyphValue;
+    var Notifications = Microsoft.Toolkit.Uwp.Notifications;
+    var GlyphValue = Notifications.GlyphValue;
 
     var _tileId;
 
@@ -95,7 +95,7 @@
     function updateBadgeAsNumber() {
         var num = numberInput.value;
 
-        var badgeXml = new Badges.BadgeNumericNotificationContent(num).getXml();
+        var badgeXml = new Notifications.BadgeNumericNotificationContent(num).getXml();
 
         // Create the badge notification
         var badge = new BadgeNotification(badgeXml);
@@ -110,7 +110,7 @@
     function updateBadgeAsGlyph() {
         var glyph = GlyphValue[glyphSelect.value];
 
-        var badgeXml = new Badges.BadgeGlyphNotificationContent(glyph).getXml();
+        var badgeXml = new Notifications.BadgeGlyphNotificationContent(glyph).getXml();
 
         // Create the badge notification
         var badge = new BadgeNotification(badgeXml);
