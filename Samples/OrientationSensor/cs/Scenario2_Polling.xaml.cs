@@ -19,7 +19,7 @@ using Windows.Foundation;
 using System.Threading.Tasks;
 using Windows.UI.Core;
 
-namespace OrientationCS
+namespace SDKTemplate
 {
     public sealed partial class Scenario2_Polling : Page
     {
@@ -34,59 +34,37 @@ namespace OrientationCS
         public Scenario2_Polling()
         {
             this.InitializeComponent();
+        }
 
-            _sensor = OrientationSensor.GetDefault();
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            _sensor = OrientationSensor.GetDefault(rootPage.SensorReadingType, rootPage.SensorOptimizationGoal);
             if (_sensor != null)
             {
                 // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
                 // This value will be used later to activate the sensor.
-                uint minReportInterval = _sensor.MinimumReportInterval;
-                _desiredReportInterval = minReportInterval > 16 ? minReportInterval : 16;
+                _desiredReportInterval = Math.Max(_sensor.MinimumReportInterval, 16);
 
                 // Set up a DispatchTimer
                 _dispatcherTimer = new DispatcherTimer();
                 _dispatcherTimer.Tick += DisplayCurrentReading;
-                _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, (int)_desiredReportInterval);
+                _dispatcherTimer.Interval = TimeSpan.FromMilliseconds(_desiredReportInterval);
+
+                rootPage.NotifyUser(rootPage.SensorDescription + " is ready", NotifyType.StatusMessage);
+                ScenarioEnableButton.IsEnabled = true;
             }
             else
             {
-                rootPage.NotifyUser("No orientation sensor found", NotifyType.ErrorMessage);
+                rootPage.NotifyUser(rootPage.SensorDescription + " not found", NotifyType.ErrorMessage);
             }
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached. The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            ScenarioEnableButton.IsEnabled = true;
-            ScenarioDisableButton.IsEnabled = false;
-        }
-
-        /// <summary>
-        /// Invoked immediately before the Page is unloaded and is no longer the current source of a parent Frame.
-        /// </summary>
-        /// <param name="e">
-        /// Event data that can be examined by overriding code. The event data is representative
-        /// of the navigation that will unload the current Page unless canceled. The
-        /// navigation can potentially be canceled by setting Cancel.
-        /// </param>
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             if (ScenarioDisableButton.IsEnabled)
             {
-                Window.Current.VisibilityChanged -= new WindowVisibilityChangedEventHandler(VisibilityChanged);
-
-                // Stop the dispatcher
-                _dispatcherTimer.Stop();
-
-                // Restore the default report interval to release resources while the sensor is not in use
-                _sensor.ReportInterval = 0;
+                ScenarioDisable();
             }
-
-            base.OnNavigatingFrom(e);
         }
 
         /// <summary>
@@ -124,79 +102,31 @@ namespace OrientationCS
             OrientationSensorReading reading = _sensor.GetCurrentReading();
             if (reading != null)
             {
-                // Quaternion values
-                SensorQuaternion quaternion = reading.Quaternion;   // get a reference to the object to avoid re-creating it for each access
-                ScenarioOutput_X.Text = String.Format("{0,8:0.00000}", quaternion.X);
-                ScenarioOutput_Y.Text = String.Format("{0,8:0.00000}", quaternion.Y);
-                ScenarioOutput_Z.Text = String.Format("{0,8:0.00000}", quaternion.Z);
-                ScenarioOutput_W.Text = String.Format("{0,8:0.00000}", quaternion.W);
-
-                // Rotation Matrix values
-                SensorRotationMatrix rotationMatrix = reading.RotationMatrix;
-                ScenarioOutput_M11.Text = String.Format("{0,8:0.00000}", rotationMatrix.M11);
-                ScenarioOutput_M12.Text = String.Format("{0,8:0.00000}", rotationMatrix.M12);
-                ScenarioOutput_M13.Text = String.Format("{0,8:0.00000}", rotationMatrix.M13);
-                ScenarioOutput_M21.Text = String.Format("{0,8:0.00000}", rotationMatrix.M21);
-                ScenarioOutput_M22.Text = String.Format("{0,8:0.00000}", rotationMatrix.M22);
-                ScenarioOutput_M23.Text = String.Format("{0,8:0.00000}", rotationMatrix.M23);
-                ScenarioOutput_M31.Text = String.Format("{0,8:0.00000}", rotationMatrix.M31);
-                ScenarioOutput_M32.Text = String.Format("{0,8:0.00000}", rotationMatrix.M32);
-                ScenarioOutput_M33.Text = String.Format("{0,8:0.00000}", rotationMatrix.M33);
-
-                // Yaw accuracy
-                switch (reading.YawAccuracy)
-                {
-                    case MagnetometerAccuracy.Unknown:
-                        ScenarioOutput_YawAccuracy.Text = "Unknown";
-                        break;
-                    case MagnetometerAccuracy.Unreliable:
-                        ScenarioOutput_YawAccuracy.Text = "Unreliable";
-                        break;
-                    case MagnetometerAccuracy.Approximate:
-                        ScenarioOutput_YawAccuracy.Text = "Approximate";
-                        break;
-                    case MagnetometerAccuracy.High:
-                        ScenarioOutput_YawAccuracy.Text = "High";
-                        break;
-                    default:
-                        ScenarioOutput_YawAccuracy.Text = "No data";
-                        break;
-                }
+                MainPage.SetReadingText(ScenarioOutput, reading);
             }
         }
 
         /// <summary>
         /// This is the click handler for the 'Enable' button.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ScenarioEnable(object sender, RoutedEventArgs e)
+        private void ScenarioEnable()
         {
-            if (_sensor != null)
-            {
-                // Set the report interval to enable the sensor for polling
-                _sensor.ReportInterval = _desiredReportInterval;
+            // Set the report interval to enable the sensor for polling
+            _sensor.ReportInterval = _desiredReportInterval;
 
-                Window.Current.VisibilityChanged += new WindowVisibilityChangedEventHandler(VisibilityChanged);
-                _dispatcherTimer.Start();
+            Window.Current.VisibilityChanged += VisibilityChanged;
+            _dispatcherTimer.Start();
 
-                ScenarioEnableButton.IsEnabled = false;
-                ScenarioDisableButton.IsEnabled = true;
-            }
-            else
-            {
-                rootPage.NotifyUser("No orientation sensor found", NotifyType.ErrorMessage);
-            }
+            ScenarioEnableButton.IsEnabled = false;
+            ScenarioDisableButton.IsEnabled = true;
         }
 
         /// <summary>
         /// This is the click handler for the 'Disable' button.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ScenarioDisable(object sender, RoutedEventArgs e)
+        private void ScenarioDisable()
         {
-            Window.Current.VisibilityChanged -= new WindowVisibilityChangedEventHandler(VisibilityChanged);
+            Window.Current.VisibilityChanged -= VisibilityChanged;
 
             // Stop the dispatcher
             _dispatcherTimer.Stop();

@@ -14,47 +14,23 @@
     x:Class="SDKTemplate.Scenario4_OrientationChanged"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SDKTemplate"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot" HorizontalAlignment="Left" VerticalAlignment="Top">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="327*"/>
-            <RowDefinition Height="31*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical" Grid.RowSpan="2">
-            <TextBlock x:Name="InputTextBlock" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Registers for OrientationChanged event of the DisplayInformation class to illustrate the usage of the 'ReadingTransform' Property. Displays accelerometer readings with and without the transformation."/>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" Text="Orientation change"/>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0" Text="Registers for OrientationChanged event of the DisplayInformation class to illustrate the usage of the 'ReadingTransform' Property. Displays accelerometer readings with and without the transformation."/>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <Button x:Name="ScenarioEnableButton" Content="Enable" Margin="0,0,10,0" Click="ScenarioEnable"/>
-                <Button x:Name="ScenarioDisableButton" Content="Disable" Margin="0,0,10,0" Click="ScenarioDisable"/>
+                <Button x:Name="ScenarioEnableButton" Content="Enable" Margin="0,0,10,0" Click="{x:Bind ScenarioEnable}" IsEnabled="False"/>
+                <Button x:Name="ScenarioDisableButton" Content="Disable" Margin="0,0,10,0" Click="{x:Bind ScenarioDisable}" IsEnabled="False"/>
             </StackPanel>
-            <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" MinWidth="95"/>
-                    <ColumnDefinition Width="Auto" MinWidth="80"/>
-                    <ColumnDefinition Width="Auto" MinWidth="175"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Transform:"/>
-                <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" Text="None"/>
-                <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="2" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" Text="Display Orientation"/>
-                <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="X:"/>
-                <TextBlock TextWrapping="Wrap" Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Y:"/>
-                <TextBlock TextWrapping="Wrap" Grid.Row="3" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Z:"/>
-                <TextBlock x:Name="ScenarioOutput_X_Original" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" Text="No data"/>
-                <TextBlock x:Name="ScenarioOutput_Y_Original" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" Text="No data"/>
-                <TextBlock x:Name="ScenarioOutput_Z_Original" TextWrapping="Wrap" Grid.Row="3" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" Text="No data"/>
-                <TextBlock x:Name="ScenarioOutput_X_ReadingTransform" TextWrapping="Wrap" Grid.Row="1" Grid.Column="3" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" Text="No data"/>
-                <TextBlock x:Name="ScenarioOutput_Y_ReadingTransform" TextWrapping="Wrap" Grid.Row="2" Grid.Column="3" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" Text="No data"/>
-                <TextBlock x:Name="ScenarioOutput_Z_ReadingTransform" TextWrapping="Wrap" Grid.Row="3" Grid.Column="3" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Center" Text="No data"/>
-            </Grid>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0" Text="Untransformed:"/>
+            <TextBlock x:Name="ScenarioOutputOriginal" TextWrapping="Wrap" Margin="0,10,0,0">No data</TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0" Text="Transformed to DisplayOrientation:"/>
+            <TextBlock x:Name="ScenarioOutputReadingTransform" TextWrapping="Wrap" Margin="0,10,0,0">No data</TextBlock>
         </StackPanel>
     </Grid>
 </Page>

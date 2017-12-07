@@ -1,0 +1,65 @@
+<!-- 
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Launch"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer Margin="12,20,12,12">
+            <StackPanel>
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock TextWrapping="Wrap">
+                    The Touch Keyboard displays automatically
+                    when the user uses touch or pen to tap on a XAML control
+                    that accept text input (e.g., TextBox, RichTextBox, PasswordBox).
+                </TextBlock>
+                <TextBox PlaceholderText="The keyboard displays when you tap here." Margin="0,10,0,0"/>
+
+                <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                    This behavior also holds for controls that are derived from these classes,
+                    such as the CustomTextBox below.
+                </TextBlock>
+                <local:CustomTextBox PlaceholderText="The keyboard displays when you tap here." Margin="0,10,0,0"/>
+
+                <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                    To achieve similar behavior in other controls,
+                    the controls need to implement
+                    the TextPattern (ITextProvider) and  ValuePattern (IValueProvider)
+                    UI Automation Control Pattern interfaces.
+                    The KeyboardEnabledTextBlock custom control below implements these interfaces.
+                    (This control merely logs a keypress instead of displaying the typed character.)
+                    Note that this technique currently works only on the PC.
+                </TextBlock>
+                <local:KeyboardEnabledTextBlock Margin="0,10,0,0"/>
+
+                <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                    The KeyboardDisabledTextBlock below does not implement the necessary interfaces.
+                    The touch keyboard does not appear when you tap on it.
+                </TextBlock>
+                <local:KeyboardDisabledTextBlock Margin="0,10,0,0"/>
+
+                <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                    In Windows 10 on the PC,
+                    the touch keyboard does not display automatically if a hardware keyboard is connected or if the PC is in Desktop mode and
+                    &quot;Automatically show the touch keyboard in windowed apps when there is no keyboard attached to your device&quot;
+                    in Settings -&gt; Devices -&gt; Typing is disabled.
+                </TextBlock>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

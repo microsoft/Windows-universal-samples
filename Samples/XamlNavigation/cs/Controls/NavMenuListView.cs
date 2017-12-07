@@ -20,13 +20,13 @@ namespace NavigationMenuSample.Controls
     /// </summary>
     /// <remarks>
     /// This class handles the following:
-    /// 1. Sizes the panel that hosts the items so they fit in the hosting pane.  Otherwise, the keyboard 
+    /// 1. Sizes the panel that hosts the items so they fit in the hosting pane.  Otherwise, the keyboard
     ///    may appear cut off on one side b/c the Pane clips instead of affecting layout.
     /// 2. Provides a single selection experience where keyboard focus can move without changing selection.
     ///    Both the 'Space' and 'Enter' keys will trigger selection.  The up/down arrow keys can move
     ///    keyboard focus without triggering selection.  This is different than the default behavior when
     ///    SelectionMode == Single.  The default behavior for a ListView in single selection requires using
-    ///    the Ctrl + arrow key to move keyboard focus without triggering selection.  Users won't expect 
+    ///    the Ctrl + arrow key to move keyboard focus without triggering selection.  Users won't expect
     ///    this type of keyboarding model on the nav menu.
     /// </remarks>
     public class NavMenuListView : ListView
@@ -36,6 +36,7 @@ namespace NavigationMenuSample.Controls
         public NavMenuListView()
         {
             this.SelectionMode = ListViewSelectionMode.Single;
+            this.SingleSelectionFollowsFocus = false;
             this.IsItemClickEnabled = true;
             this.ItemClick += ItemClickedHandler;
 
@@ -53,6 +54,11 @@ namespace NavigationMenuSample.Controls
                     this.splitViewHost = parent as SplitView;
 
                     splitViewHost.RegisterPropertyChangedCallback(SplitView.IsPaneOpenProperty, (sender, args) =>
+                    {
+                        this.OnPaneToggled();
+                    });
+
+                    splitViewHost.RegisterPropertyChangedCallback(SplitView.DisplayModeProperty, (sender, args) =>
                     {
                         this.OnPaneToggled();
                     });
@@ -116,7 +122,7 @@ namespace NavigationMenuSample.Controls
         /// <param name="e"></param>
         protected override void OnKeyDown(KeyRoutedEventArgs e)
         {
-        var focusedItem = FocusManager.GetFocusedElement();
+            var focusedItem = FocusManager.GetFocusedElement();
 
             switch (e.Key)
             {
@@ -127,55 +133,6 @@ namespace NavigationMenuSample.Controls
 
                 case VirtualKey.Down:
                     this.TryMoveFocus(FocusNavigationDirection.Down);
-                    e.Handled = true;
-                    break;
-
-                case VirtualKey.Tab:
-                    var shiftKeyState = CoreWindow.GetForCurrentThread().GetKeyState(VirtualKey.Shift);
-                    var shiftKeyDown = (shiftKeyState & CoreVirtualKeyStates.Down) == CoreVirtualKeyStates.Down;
-
-                    // If we're on the header item then this will be null and we'll still get the default behavior.
-                    if (focusedItem is ListViewItem)
-                    {
-                        var currentItem = (ListViewItem)focusedItem;
-                        bool onlastitem = currentItem != null && this.IndexFromContainer(currentItem) == this.Items.Count - 1;
-                        bool onfirstitem = currentItem != null && this.IndexFromContainer(currentItem) == 0;
-
-                        if (!shiftKeyDown)
-                        {
-                            if (onlastitem)
-                            {
-                                this.TryMoveFocus(FocusNavigationDirection.Next);
-                            }
-                            else
-                            {
-                                this.TryMoveFocus(FocusNavigationDirection.Down);
-                            }
-                        }
-                        else // Shift + Tab
-                        {
-                            if (onfirstitem)
-                            {
-                                this.TryMoveFocus(FocusNavigationDirection.Previous);
-                            }
-                            else
-                            {
-                                this.TryMoveFocus(FocusNavigationDirection.Up);
-                            }
-                        }
-                    }
-                    else if (focusedItem is Control)
-                    {
-                        if (!shiftKeyDown)
-                        {
-                            this.TryMoveFocus(FocusNavigationDirection.Down);
-                        }
-                        else // Shift + Tab
-                        {
-                            this.TryMoveFocus(FocusNavigationDirection.Up);
-                        }
-                    }
-
                     e.Handled = true;
                     break;
 
@@ -222,17 +179,18 @@ namespace NavigationMenuSample.Controls
         private void InvokeItem(object focusedItem)
         {
             this.SetSelectedItem(focusedItem as ListViewItem);
-            this.ItemInvoked(this, focusedItem as ListViewItem);
+            this.ItemInvoked?.Invoke(this, focusedItem as ListViewItem);
 
             if (this.splitViewHost.IsPaneOpen && (
                 this.splitViewHost.DisplayMode == SplitViewDisplayMode.CompactOverlay ||
                 this.splitViewHost.DisplayMode == SplitViewDisplayMode.Overlay))
             {
                 this.splitViewHost.IsPaneOpen = false;
-                if (focusedItem is ListViewItem)
-                {
-                    ((ListViewItem)focusedItem).Focus(FocusState.Programmatic);
-                }
+            }
+
+            if (focusedItem is ListViewItem)
+            {
+                ((ListViewItem)focusedItem).Focus(FocusState.Programmatic);
             }
         }
 

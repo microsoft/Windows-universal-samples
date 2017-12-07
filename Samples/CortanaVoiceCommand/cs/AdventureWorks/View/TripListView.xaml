@@ -44,21 +44,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Back button and page title -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Margin="10" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
-                        Style="{StaticResource NavigationBackButtonNormalStyle}"
-                        VerticalAlignment="Top"
-                        AutomationProperties.Name="Back"
-                        AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button"/>
-            <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource ScenarioHeaderTextStyle}" Grid.Column="1" 
+        <!-- Page title -->
+        <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource ScenarioHeaderTextStyle}"
                         IsHitTestVisible="false" VerticalAlignment="Bottom" Margin="10,12,10,12"/>
-        </Grid>
+
         <StackPanel Grid.Row="1">
             <ListBox x:Name="tripListBox" 
                      ItemsSource="{Binding Trips}" 

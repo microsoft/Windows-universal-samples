@@ -16,10 +16,8 @@
 
         openPicker.pickSingleFileAsync().then(
             function (file) {
-                //HOW DO I SET THE VIDEO TAG SOURCE?
-                var video = document.getElementById(mainVideo);
-                var URI = encodeURI(file)
-                video.setAttribute("src", URI);
+                var video = document.getElementById("mainVideo");
+                video.src = URL.createObjectURL(file, { oneTimeOnly: true });
             });
     }
 })();

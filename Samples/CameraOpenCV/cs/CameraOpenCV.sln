@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraOpenCV", "CameraOpenCV.csproj", "{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenCVBridge", "..\shared\OpenCVBridge\OpenCVBridge.vcxproj", "{C8091855-0EAB-5A4B-9F7D-D927CA539F2E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Debug|ARM.ActiveCfg = Debug|ARM
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Debug|ARM.Build.0 = Debug|ARM
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Debug|ARM.Deploy.0 = Debug|ARM
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Debug|x64.ActiveCfg = Debug|x64
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Debug|x64.Build.0 = Debug|x64
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Debug|x64.Deploy.0 = Debug|x64
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Debug|x86.ActiveCfg = Debug|x86
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Debug|x86.Build.0 = Debug|x86
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Debug|x86.Deploy.0 = Debug|x86
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Release|ARM.ActiveCfg = Release|ARM
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Release|ARM.Build.0 = Release|ARM
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Release|ARM.Deploy.0 = Release|ARM
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Release|x64.ActiveCfg = Release|x64
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Release|x64.Build.0 = Release|x64
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Release|x64.Deploy.0 = Release|x64
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Release|x86.ActiveCfg = Release|x86
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Release|x86.Build.0 = Release|x86
+		{0E7859FA-ABD7-5C91-89E3-4C693B90FE5A}.Release|x86.Deploy.0 = Release|x86
+		{C8091855-0EAB-5A4B-9F7D-D927CA539F2E}.Debug|ARM.ActiveCfg = Debug|ARM
+		{C8091855-0EAB-5A4B-9F7D-D927CA539F2E}.Debug|ARM.Build.0 = Debug|ARM
+		{C8091855-0EAB-5A4B-9F7D-D927CA539F2E}.Debug|x64.ActiveCfg = Debug|x64
+		{C8091855-0EAB-5A4B-9F7D-D927CA539F2E}.Debug|x64.Build.0 = Debug|x64
+		{C8091855-0EAB-5A4B-9F7D-D927CA539F2E}.Debug|x86.ActiveCfg = Debug|Win32
+		{C8091855-0EAB-5A4B-9F7D-D927CA539F2E}.Debug|x86.Build.0 = Debug|Win32
+		{C8091855-0EAB-5A4B-9F7D-D927CA539F2E}.Release|ARM.ActiveCfg = Release|ARM
+		{C8091855-0EAB-5A4B-9F7D-D927CA539F2E}.Release|ARM.Build.0 = Release|ARM
+		{C8091855-0EAB-5A4B-9F7D-D927CA539F2E}.Release|x64.ActiveCfg = Release|x64
+		{C8091855-0EAB-5A4B-9F7D-D927CA539F2E}.Release|x64.Build.0 = Release|x64
+		{C8091855-0EAB-5A4B-9F7D-D927CA539F2E}.Release|x86.ActiveCfg = Release|Win32
+		{C8091855-0EAB-5A4B-9F7D-D927CA539F2E}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -58,8 +58,8 @@ namespace TextSuggestion
 
             if ((generator != null) && (selectedItem != null) && !String.IsNullOrEmpty(input))
             {
-                // Specifiy the candidate number to get.
-                if (selectedItem.Content.Equals("GetCandidatesAsync(WithMaxCount)"))
+                // Specify the candidate number to get.
+                if ((selectedItem.Tag != null) && selectedItem.Tag.ToString().Equals("needMaxCount"))
                 {
                     uint MaxCandidates = 0;
                     UInt32.TryParse(maxCandidates.Text, out MaxCandidates);
@@ -101,15 +101,13 @@ namespace TextSuggestion
         /// <param name="e">Event data that describes the click action on the button.</param>
         private void Methods_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             ComboBoxItem selectedItem = methods.SelectedItem as ComboBoxItem;
 
             if (maxCandidatesArea != null)
             {
                 // Only show the candidate number input control when user chooses to specify the number.
-                if (selectedItem.Content.Equals("GetCandidatesAsync(WithMaxCount)"))
+                if ((selectedItem.Tag != null) && selectedItem.Tag.ToString().Equals("needMaxCount"))
                 {
-
                     maxCandidatesArea.Visibility = Visibility.Visible;
                 }
                 else

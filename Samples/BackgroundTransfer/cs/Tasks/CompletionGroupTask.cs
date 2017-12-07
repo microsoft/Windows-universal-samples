@@ -25,10 +25,10 @@ namespace Tasks
 {
     public sealed class CompletionGroupTask : IBackgroundTask
     {
-        // Using completion groups we can take action immediately after a set of downloads completes.
-        // In this sample, the server intentionally replies with an error status for some downloads.
-        // Using completion groups, we can discover which of the downloads have an error status,
-        // and try the failing downloads again using a new completion group.
+        // Completion groups allow us to immediately take action after a set of downloads completes.
+        // In this sample, the server intentionally replies with an error status for some of the downloads.
+        // Based on the trigger details, we can determine which of the downloads have failed and try them again
+        // using a new completion group.
         public void Run(IBackgroundTaskInstance taskInstance)
         {
             BackgroundTransferCompletionGroupTriggerDetails details = taskInstance.TriggerDetails

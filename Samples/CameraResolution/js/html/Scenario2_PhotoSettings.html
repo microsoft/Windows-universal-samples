@@ -1,0 +1,47 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the Microsoft Public License.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/Scenario2_PhotoSettings.css">
+    <script src="/js/Scenario2_PhotoSettings.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Get and set resolutions of the preview and photo streams seperately
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <select id="previewSettings" class="win-dropdown">
+                <option selected="selected" value="">Preview Settings</option>
+            </select>
+            <select id="photoSettings" class="win-dropdown">
+                <option selected="selected" value="">Photo Settings</option>
+            </select>
+            <button id="photoButton" class="win-button" disabled>Take Photo</button>
+        </div>
+    </div>
+    <div>
+        <video id="cameraPreview" style="width:100%; height:100%"></video>
+        <button id="initCameraBtn" class="win-button" style="position:absolute; top:50%; left:50%">Initialize Camera</button>
+    </div>
+</body>
+
+</html>

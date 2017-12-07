@@ -25,6 +25,7 @@ using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 using namespace Windows::Media::SpeechRecognition;
 using namespace Windows::Storage;
+using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Controls::Primitives;
@@ -67,6 +68,11 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
 
         rootFrame->NavigationFailed += ref new Windows::UI::Xaml::Navigation::NavigationFailedEventHandler(this, &App::OnNavigationFailed);
 
+        // Register for Back button events.
+        SystemNavigationManager::GetForCurrentView()->BackRequested += ref new Windows::Foundation::EventHandler<BackRequestedEventArgs^>(this, &App::OnBackRequested);
+
+        // Register for navigation events so we can update the Back button.
+        rootFrame->Navigated += ref new NavigatedEventHandler(this, &App::OnNavigated);
 
         if (rootFrame->Content == nullptr)
         {
@@ -235,4 +241,38 @@ void App::OnActivated(IActivatedEventArgs^ e)
 void App::OnNavigationFailed(Platform::Object ^sender, Windows::UI::Xaml::Navigation::NavigationFailedEventArgs ^e)
 {
     throw ref new FailureException("Failed to load Page " + e->SourcePageType.Name);
+}
+
+void App::OnNavigated(Object^ sender, NavigationEventArgs^ args)
+{
+    bool canGoBack = false;
+    auto rootFrame = dynamic_cast<Frame^>(Window::Current->Content);
+    if (rootFrame != nullptr)
+    {
+        // If we returned to the root page, then empty the backstack.
+        if (rootFrame->BackStack->Size > 0 &&
+            args->SourcePageType.Name == rootFrame->BackStack->GetAt(0)->SourcePageType.Name)
+        {
+            rootFrame->BackStack->Clear();
+        }
+
+        canGoBack = rootFrame->CanGoBack;
+    }
+
+    // Set the Back button state appropriately.
+    SystemNavigationManager::GetForCurrentView()->AppViewBackButtonVisibility =
+        canGoBack ? AppViewBackButtonVisibility::Visible : AppViewBackButtonVisibility::Collapsed;
+}
+
+void App::OnBackRequested(Object^ sender, BackRequestedEventArgs^ e)
+{
+    if (!e->Handled)
+    {
+        auto rootFrame = dynamic_cast<Frame^>(Window::Current->Content);
+        if (rootFrame != nullptr && rootFrame->CanGoBack)
+        {
+            e->Handled = true;
+            rootFrame->GoBack();
+        }
+    }
 }

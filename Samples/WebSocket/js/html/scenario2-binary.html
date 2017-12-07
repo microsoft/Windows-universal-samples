@@ -1,0 +1,49 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario2-binary.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div>
+        <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+        <div id="scenarioDescription">Binary data stream</div>
+    </div>
+
+    <p>This shows how to use a StreamWebSocket to send and receive binary data.</p>
+    <p>
+        <label>
+            Server address:
+            <input type="text" id="serverAddressField" value="ws://localhost/WebSocketSample/EchoWebSocket.ashx" class="win-textbox" size="60" style="width: auto">
+        </label>
+        <br />
+        <label><input type="checkbox" id="secureWebSocketCheckBox" class="win-checkbox" />Perform custom server certificate validation</label>
+    </p>
+    <p>
+        <button id="startButton" class="win-button">Start</button>
+        <button id="stopButton" class="win-button">Stop</button>
+    </p>
+    <div>
+        <p>Data Sent: <span id="dataSent"></span></p>
+        <p>Data Received: <span id="dataReceived"></span></p>
+        <p id="outputField">
+        </p>
+    </div>
+</body>
+
+</html>

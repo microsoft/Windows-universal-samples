@@ -11,17 +11,17 @@
 //*********************************************************
 -->
 <Page
-    x:Class="BackgroundTransfer.Scenario4_CompletionGroups"
+    x:Class="SDKTemplate.Scenario4_CompletionGroups"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:BackgroundTransfer"
+    xmlns:local="using:SDKTemplate"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock x:Name="InputTextBlock1" TextWrapping="Wrap" Grid.Row="0" Style="{StaticResource BasicTextStyle}">
-            Execute a background task when a set of uploads or downloads complete.
+            Execute a background task when a set of uploads or downloads completes.
         </TextBlock>
         <TextBlock Text="Remote address: " Style="{StaticResource BasicTextStyle}" Margin="0,8,10,0"/>
         <TextBox x:Name="serverAddressField" InputScope="Url" Text="http://localhost/BackgroundTransferSample/bitmap.aspx" />

@@ -766,15 +766,23 @@ namespace SDKTemplate
                     listenerSocket,
                     this
                     );
+
+                try
+                {
+                    manager.NotifyUser("BindEndpointAsync...", NotifyType.StatusMessage);
+                    await listenerSocket.BindEndpointAsync(endpointPairCollection[0].LocalHostName, Convert.ToString(port, CultureInfo.InvariantCulture));
+                    manager.NotifyUser("BindEndpointAsync Done", NotifyType.StatusMessage);
+
+                    manager.NotifyUser("AddStreamSocketListenerAsync...", NotifyType.StatusMessage);
+                    await session.AddStreamSocketListenerAsync(listenerSocket);
+                    manager.NotifyUser("AddStreamSocketListenerAsync Done", NotifyType.StatusMessage);
+                }
+                catch (Exception ex)
+                {
+                    manager.NotifyUser("AddStreamSocketListenerAsync Failed: " + ex.Message, NotifyType.ErrorMessage);
+                }
+
                 streamSocketListeners.Add(listenerWrapper);
-
-                manager.NotifyUser("BindEndpointAsync...", NotifyType.StatusMessage);
-                await listenerSocket.BindEndpointAsync(endpointPairCollection[0].LocalHostName, Convert.ToString(port, CultureInfo.InvariantCulture));
-                manager.NotifyUser("BindEndpointAsync Done", NotifyType.StatusMessage);
-
-                manager.NotifyUser("AddStreamSocketListenerAsync...", NotifyType.StatusMessage);
-                await session.AddStreamSocketListenerAsync(listenerSocket);
-                manager.NotifyUser("AddStreamSocketListenerAsync Done", NotifyType.StatusMessage);
             }
 
             public async void AddDatagramSocketAsync(UInt16 port)
@@ -784,23 +792,32 @@ namespace SDKTemplate
                 manager.NotifyUser("Adding stream socket listener for UDP port " + port, NotifyType.StatusMessage);
 
                 var endpointPairCollection = session.GetConnectionEndpointPairs();
-                
+
                 DatagramSocket socket = new DatagramSocket();
-                SocketWrapper socketWrapper = new SocketWrapper(manager, null, socket);
+                // Socket is "read-only", cannot send data but can receive data
+                // Expectation is that application starts a listening socket, then remote device sends data
+                SocketWrapper socketWrapper = new SocketWrapper(manager, null, socket, false);
+
+                try
+                {
+                    // Bind UDP socket for receiving messages (peer should call connect and send messages to this socket)
+                    manager.NotifyUser("BindEndpointAsync...", NotifyType.StatusMessage);
+                    await socket.BindEndpointAsync(endpointPairCollection[0].LocalHostName, Convert.ToString(port, CultureInfo.InvariantCulture));
+                    manager.NotifyUser("BindEndpointAsync Done", NotifyType.StatusMessage);
+
+                    manager.NotifyUser("AddDatagramSocketAsync...", NotifyType.StatusMessage);
+                    await session.AddDatagramSocketAsync(socket);
+                    manager.NotifyUser("AddDatagramSocketAsync Done", NotifyType.StatusMessage);
+
+                    // Update manager so UI can add to list
+                    manager.AddSocket(socketWrapper);
+                }
+                catch (Exception ex)
+                {
+                    manager.NotifyUser("AddDatagramSocketAsync Failed: " + ex.Message, NotifyType.ErrorMessage);
+                }
 
                 socketList.Add(socketWrapper);
-
-                // Bind UDP socket for receiving messages (peer should call connect and send messages to this socket)
-                manager.NotifyUser("BindEndpointAsync...", NotifyType.StatusMessage);
-                await socket.BindEndpointAsync(endpointPairCollection[0].LocalHostName, Convert.ToString(port, CultureInfo.InvariantCulture));
-                manager.NotifyUser("BindEndpointAsync Done", NotifyType.StatusMessage);
-
-                manager.NotifyUser("AddDatagramSocketAsync...", NotifyType.StatusMessage);
-                await session.AddDatagramSocketAsync(socket);
-                manager.NotifyUser("AddDatagramSocketAsync Done", NotifyType.StatusMessage);
-                
-                // Update manager so UI can add to list
-                manager.AddSocket(socketWrapper);
             }
 
             // This will fire when the connected peer attempts to open a port for this connection
@@ -832,7 +849,7 @@ namespace SDKTemplate
                     {
                         // Connect to the stream socket listener
                         StreamSocket streamSocket = new StreamSocket();
-                        socketWrapper = new SocketWrapper(manager, streamSocket, null);
+                        socketWrapper = new SocketWrapper(manager, streamSocket, null, true);
 
                         manager.NotifyUser("Connecting to stream socket...", NotifyType.StatusMessage);
                         await streamSocket.ConnectAsync(endpointPairCollection[0]);
@@ -844,7 +861,7 @@ namespace SDKTemplate
                     {
                         // Connect a socket over UDP
                         DatagramSocket datagramSocket = new DatagramSocket();
-                        socketWrapper = new SocketWrapper(manager, null, datagramSocket);
+                        socketWrapper = new SocketWrapper(manager, null, datagramSocket, true);
 
                         manager.NotifyUser("Connecting to datagram socket...", NotifyType.StatusMessage);
                         await datagramSocket.ConnectAsync(endpointPairCollection[0]);
@@ -868,7 +885,7 @@ namespace SDKTemplate
 
             public void AddStreamSocketInternal(StreamSocket socket)
             {
-                SocketWrapper socketWrapper = new SocketWrapper(manager, socket, null);
+                SocketWrapper socketWrapper = new SocketWrapper(manager, socket, null, true);
                 
                 // Start receiving messages recursively
                 var rcv = socketWrapper.ReceiveMessageAsync();
@@ -1047,7 +1064,8 @@ namespace SDKTemplate
             public SocketWrapper(
                 WiFiDirectServiceManager manager,
                 StreamSocket streamSocket = null,
-                DatagramSocket datagramSocket = null)
+                DatagramSocket datagramSocket = null,
+                bool canSend = true)
             {
                 this.streamSocket = streamSocket;
                 this.datagramSocket = datagramSocket;
@@ -1064,12 +1082,18 @@ namespace SDKTemplate
                 else if (streamSocket != null)
                 {
                     reader = new DataReader(streamSocket.InputStream);
-                    writer = new DataWriter(streamSocket.OutputStream);
+                    if (canSend)
+                    {
+                        writer = new DataWriter(streamSocket.OutputStream);
+                    }
                 }
                 else
                 {
                     datagramSocket.MessageReceived += OnUDPMessageReceived;
-                    writer = new DataWriter(datagramSocket.OutputStream);
+                    if (canSend)
+                    {
+                        writer = new DataWriter(datagramSocket.OutputStream);
+                    }
                 }
 
                 if (reader != null)
@@ -1078,8 +1102,11 @@ namespace SDKTemplate
                     reader.ByteOrder = ByteOrder.LittleEndian;
                 }
 
-                writer.UnicodeEncoding = UnicodeEncoding.Utf8;
-                writer.ByteOrder = ByteOrder.LittleEndian;
+                if (writer != null)
+                {
+                    writer.UnicodeEncoding = UnicodeEncoding.Utf8;
+                    writer.ByteOrder = ByteOrder.LittleEndian;
+                }
             }
 
             public string Protocol
@@ -1131,18 +1158,25 @@ namespace SDKTemplate
                 {
                     ThrowIfDisposed();
 
-                    writer.WriteUInt32(writer.MeasureString(message));
-                    writer.WriteString(message);
-                    await writer.StoreAsync();
+                    if (writer == null)
+                    {
+                        manager.NotifyUser("Socket is unable to send messages (receive only socket).", NotifyType.ErrorMessage);
+                    }
+                    else
+                    {
+                        writer.WriteUInt32(writer.MeasureString(message));
+                        writer.WriteString(message);
+                        await writer.StoreAsync();
 
-                    uint bytesSent = writer.MeasureString(message);
+                        uint bytesSent = writer.MeasureString(message);
 
-                    manager.NotifyUser(String.Format("Sent Message: \"{0}\", {1} bytes",
-                            (message.Length > 32) ? message.Substring(0, 32) + "..." : message,
-                            bytesSent
-                            ),
-                        NotifyType.StatusMessage
-                        );
+                        manager.NotifyUser(String.Format("Sent Message: \"{0}\", {1} bytes",
+                                (message.Length > 32) ? message.Substring(0, 32) + "..." : message,
+                                bytesSent
+                                ),
+                            NotifyType.StatusMessage
+                            );
+                    }
                 }
                 catch (Exception ex)
                 {

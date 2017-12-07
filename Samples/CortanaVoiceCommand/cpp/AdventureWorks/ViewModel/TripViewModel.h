@@ -51,11 +51,6 @@ namespace AdventureWorks
             Windows::UI::Xaml::Input::ICommand^ get();
         }
 
-        property Windows::UI::Xaml::Input::ICommand^ GoBackCommand
-        {
-            Windows::UI::Xaml::Input::ICommand^ get();
-        }
-
         void LoadTripFromStore(Platform::String^ destination);
         void ShowTrip(AdventureWorks_Shared::Trip^ trip);
         void NewTrip();
@@ -67,7 +62,6 @@ namespace AdventureWorks
 
         Windows::UI::Xaml::Input::ICommand^ saveTripCommand;
         Windows::UI::Xaml::Input::ICommand^ deleteTripCommand;
-        Windows::UI::Xaml::Input::ICommand^ goBackCommand;
 
         bool showDestinationValidation = true;
         Platform::String^ destinationValidationError;

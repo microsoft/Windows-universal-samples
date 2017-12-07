@@ -44,6 +44,7 @@ namespace SDKTemplate
         Windows::Foundation::Collections::IMap<Platform::String^, Windows::UI::Color>^ colorLookup;
         Windows::ApplicationModel::Resources::Core::ResourceContext^ speechContext;
         Windows::ApplicationModel::Resources::Core::ResourceMap^ speechResourceMap;
+        bool isPopulatingLanguages = false;
 
         void RecognizeWithUI_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void RecognizeWithoutUI_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
@@ -55,7 +56,6 @@ namespace SDKTemplate
         Windows::UI::Color getColor(Platform::String^ colorString);
 
         Windows::Foundation::EventRegistrationToken stateChangedToken;
-        Windows::Foundation::EventRegistrationToken cbLanguageSelectionSelectionChangedToken;
 
         void SpeechRecognizer_StateChanged(Windows::Media::SpeechRecognition::SpeechRecognizer ^sender, Windows::Media::SpeechRecognition::SpeechRecognizerStateChangedEventArgs ^args);
         void cbLanguageSelection_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);

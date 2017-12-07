@@ -36,6 +36,8 @@ App::App()
         OutputDebugStringW(error->Data());
     });
 #endif
+
+    RequiresPointerMode = ApplicationRequiresPointerMode::WhenRequested;
 }
 
 //----------------------------------------------------------------------

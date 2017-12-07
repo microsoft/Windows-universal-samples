@@ -375,10 +375,11 @@ void WiFiDirectServiceManager::RemoveSession(SessionWrapper^ session)
         // Lookup the index
         for (auto&& s : _connectedSessions)
         {
-            if (s->Session->SessionId == session->Session->SessionId &&
+            if (!s->Session ||
+                (s->Session->SessionId == session->Session->SessionId &&
                 s->Session->SessionAddress == session->Session->SessionAddress &&
                 s->Session->AdvertisementId == session->Session->AdvertisementId &&
-                s->Session->ServiceAddress == session->Session->ServiceAddress)
+                s->Session->ServiceAddress == session->Session->ServiceAddress))
             {
                 fFound = true;
                 break;

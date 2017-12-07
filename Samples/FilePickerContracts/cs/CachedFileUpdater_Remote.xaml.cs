@@ -37,13 +37,10 @@ namespace FilePickerContracts
             OutputFileContent.Text = String.Format(@"File Content:{0}{1}", System.Environment.NewLine, fileContent);
         }
 
-        private void UpdateUI(UIStatus uiStatus)
+        private void UpdateUI()
         {
-            if (uiStatus == UIStatus.Complete)
-            {
-                OverwriteButton.IsEnabled = false;
-                RenameButton.IsEnabled = false;
-            }
+            OverwriteButton.IsEnabled = false;
+            RenameButton.IsEnabled = false;
         }
 
         private void OverwriteButton_Click(object sender, RoutedEventArgs e)
@@ -58,7 +55,7 @@ namespace FilePickerContracts
             fileUpdateRequest.Status = FileUpdateStatus.Complete;
             fileUpdateRequestDeferral.Complete();
 
-            UpdateUI(CachedFileUpdaterPage.Current.cachedFileUpdaterUI.UIStatus);
+            UpdateUI();
         }
 
         private async void RenameButton_Click(object sender, RoutedEventArgs e)
@@ -75,7 +72,7 @@ namespace FilePickerContracts
             fileUpdateRequest.Status = FileUpdateStatus.CompleteAndRenamed;
             fileUpdateRequestDeferral.Complete();
 
-            UpdateUI(CachedFileUpdaterPage.Current.cachedFileUpdaterUI.UIStatus);
+            UpdateUI();
         }
     }
 }

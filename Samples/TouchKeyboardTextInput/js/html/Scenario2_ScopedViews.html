@@ -1,0 +1,61 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario2.css" />
+    <script src="/js/scenario2.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>The Trident Text controls expose properties to enable optimized views on the Touch Keyboard, namely InputScopes. You can change the input scope to one of many built-in options, some examples below. When you change the input scope, you can make it much faster and easier for users to enter data in your application.</p>
+                <p>Here is a selection of controls with an InputType set on them.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <table>
+                <tr>
+                    <td><label for="url">URL InputType: </label></td>
+                    <td><input type="url" name="url" id="url" /></td>
+                    </tr>
+                <tr>
+                    <td><label for="email">Email InputType: </label></td>
+                    <td><input type="email" name="email" id="email" /></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password InputType: </label></td>
+                    <td><input type="password" name="password" id="password" /></td>
+                    </tr>
+                <tr>
+                    <td><label for="text">Default InputType: </label></td>
+                    <td><input type="text" name="text" id="text" /></td>
+                </tr>
+                <tr>
+                    <td><label for="number">Number InputType: </label></td>
+                    <td><input type="number" name="number" id="number" /></td>
+                    </tr>
+                <tr>
+                    <td><label for="search">Search InputType: </label></td>
+                    <td><input type="search" name="search" id="search" /></td>
+                </tr>
+                <tr>
+                    <td><label for="tel">Telephone InputType: </label></td>
+                    <td><input type="tel" name="tel" id="tel" /></td>
+                </tr>
+            </table>
+            <p>Touching into the edit control launches the Touch Keyboard with the appropriate keyboard layout enabled. </p>
+            <p>In Windows 10 on the PC,
+               the touch keyboard does not display automatically if a hardware keyboard is connected or if the PC is in Desktop mode and
+               &quot;Automatically show the touch keyboard in windowed apps when there is no keyboard attached to your device&quot;
+               in Settings -&gt; Devices -&gt; Typing is disabled.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

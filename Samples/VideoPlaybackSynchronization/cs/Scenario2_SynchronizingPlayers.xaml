@@ -1,0 +1,65 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2_SynchronizingPlayers"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="Page_OnLoaded"
+    Unloaded="Page_OnUnloaded"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    The two videos below are authored out of sync.
+                    This scenario applies an offset to the second video
+                    so that it plays in sync with the first.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto">
+                <Grid Grid.Row="1" x:Name="ContentGrid" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="90*"/>
+                        <RowDefinition Height="10*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <MediaPlayerElement x:Name="mpeMain" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    <MediaPlayerElement x:Name="mpeCopy" Grid.Row="0"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="Load" IsEnabled="False" Click="Load_Click">
+                            <SymbolIcon Symbol="Refresh"/>
+                        </Button>
+                        <Button x:Name="Seek2SecondsBack" Content="&lt;&lt;2s" IsEnabled="False" Click="Seek2SecondsBack_Click"/>
+                        <Button x:Name="PlayPause" IsEnabled="False" Click="PlayPause_Click">
+                            <SymbolIcon x:Name="PlayPauseIcon" Symbol="Play"/>
+                        </Button>
+                        <Button x:Name="Seek2SecondsForward" Content="2s&gt;&gt;" IsEnabled="False" Click="Seek2SecondsForward_Click"/>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

@@ -33,8 +33,6 @@ namespace SDKTemplate
             RegisterClipboardContentChanged.IsChecked = OtherScenarios.registerContentChanged;
         }
 
-        #region Scenario Specific Code
-
         void Init()
         {
             ShowFormatButton.Click += new RoutedEventHandler(ShowFormatButton_Click);
@@ -42,10 +40,6 @@ namespace SDKTemplate
             RegisterClipboardContentChanged.Click += new RoutedEventHandler(RegisterClipboardContentChanged_Click);
             ClearOutputButton.Click += new RoutedEventHandler(ClearOutputButton_Click);
         }
-
-        #endregion
-
-        #region Button Click
 
         void ShowFormatButton_Click(object sender, RoutedEventArgs e)
         {
@@ -94,10 +88,6 @@ namespace SDKTemplate
             this.ClearOutput();
         }
 
-        #endregion
-
-        #region Private helper methods
-
         private void ClearOutput()
         {
             rootPage.NotifyUser("", NotifyType.StatusMessage);
@@ -109,7 +99,5 @@ namespace SDKTemplate
             rootPage.NotifyUser("", NotifyType.StatusMessage);
             OutputText.Text = rootPage.BuildClipboardFormatsOutputString();
         }
-
-        #endregion
     }
 }

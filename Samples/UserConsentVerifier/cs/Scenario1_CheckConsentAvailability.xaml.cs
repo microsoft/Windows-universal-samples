@@ -28,8 +28,7 @@ namespace UserConsentVerifier
         }
 
         /// <summary>
-        /// This is the click handler for the 'Check Availability' button. It checks the availability of User consent requisition 
-        /// via registered fingerprints.
+        /// This is the click handler for the 'Check Availability' button. It checks the availability of Windows Hello via User Consent Verifier
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -39,43 +38,25 @@ namespace UserConsentVerifier
             b.IsEnabled = false;
             try
             {
-                // Check the availability of User Consent with fingerprints facility
+                // Check the availability of Windows Hello authentication through User Consent Verifier.
                 UserConsentVerifierAvailability consentAvailability = await Windows.Security.Credentials.UI.UserConsentVerifier.CheckAvailabilityAsync();
                 switch (consentAvailability)
                 {
                     case UserConsentVerifierAvailability.Available:
                         {
-                            rootPage.NotifyUser("User consent requisition facility is available.", NotifyType.StatusMessage);
-                            break;
-                        }
-
-                    case UserConsentVerifierAvailability.DeviceBusy:
-                        {
-                            rootPage.NotifyUser("Biometric device is busy.", NotifyType.ErrorMessage);
+                            rootPage.NotifyUser("User consent verification available!", NotifyType.StatusMessage);
                             break;
                         }
 
                     case UserConsentVerifierAvailability.DeviceNotPresent:
                         {
-                            rootPage.NotifyUser("No biometric device found.", NotifyType.ErrorMessage);
-                            break;
-                        }
-
-                    case UserConsentVerifierAvailability.DisabledByPolicy:
-                        {
-                            rootPage.NotifyUser("Biometrics is disabled by policy.", NotifyType.ErrorMessage);
-                            break;
-                        }
-
-                    case UserConsentVerifierAvailability.NotConfiguredForUser:
-                        {
-                            rootPage.NotifyUser("User has no fingeprints registered.", NotifyType.ErrorMessage);
+                            rootPage.NotifyUser("No PIN or biometric found, please set one up.", NotifyType.ErrorMessage);
                             break;
                         }
 
                     default:
                         {
-                            rootPage.NotifyUser("Consent verification with fingerprints is currently unavailable.", NotifyType.ErrorMessage);
+                            rootPage.NotifyUser("User consent verification is currently unavailable.", NotifyType.ErrorMessage);
                             break;
                         }
                 }

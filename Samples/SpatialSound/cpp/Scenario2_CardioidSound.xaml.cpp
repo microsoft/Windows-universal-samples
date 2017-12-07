@@ -34,7 +34,7 @@ Scenario2_CardioidSound::Scenario2_CardioidSound() : _rootPage(MainPage::Current
     if (SUCCEEDED(hr))
     {
         _timer = ref new DispatcherTimer();
-        _timer->Tick += ref new EventHandler<Platform::Object^>(this, &Scenario2_CardioidSound::OnTimerTick);
+        _timerEventToken = _timer->Tick += ref new EventHandler<Platform::Object^>(this, &Scenario2_CardioidSound::OnTimerTick);
         TimeSpan timespan;
         timespan.Duration = 10000 / 30;
         _timer->Interval = timespan;
@@ -54,6 +54,14 @@ Scenario2_CardioidSound::Scenario2_CardioidSound() : _rootPage(MainPage::Current
     }
 
     _initialized = SUCCEEDED(hr);
+}
+
+Scenario2_CardioidSound::~Scenario2_CardioidSound()
+{
+    if (_timerEventToken.Value != 0)
+    {
+        _timer->Tick -= _timerEventToken;
+    }
 }
 
 void SDKTemplate::Scenario2_CardioidSound::EnvironmentComboBox_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)

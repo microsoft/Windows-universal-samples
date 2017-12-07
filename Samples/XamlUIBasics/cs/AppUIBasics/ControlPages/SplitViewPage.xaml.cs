@@ -96,19 +96,9 @@ namespace AppUIBasics.ControlPages
 
         private void paneBackgroundCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var item = (e.AddedItems[0] as ComboBoxItem).Content;
-            if (item is SolidColorBrush)
-                splitView.PaneBackground = item as SolidColorBrush;
-            else
-            {
-                var hex = item.ToString().Substring(1);
-                var a = byte.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
-                var r = byte.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
-                var g = byte.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
-                var b = byte.Parse(hex.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
-                var brush = new SolidColorBrush(Color.FromArgb(a, r, g, b));
-                splitView.PaneBackground = brush;
-            }
+            var colorString = (e.AddedItems[0] as ComboBoxItem).Content.ToString();
+
+            VisualStateManager.GoToState(this, colorString, false);
         }
     }
 

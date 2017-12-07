@@ -16,22 +16,16 @@ Copyright (c) Microsoft Corporation. All rights reserved
         <div>
             <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
             <div id="scenarioDescription">
-                <p>Use Geotag API to geotag JPEG/MP4 test file and retrieve geolocation from the file. The test file needs to be put in Pictures library on the device. For example, put a test file test.jpg in pictures library, and input test.jpg in the text
-                    box under File Name: below. Then use these buttons to geotag test file or retrieve geolocation from the file.</p>
+                Use the Geotag API to set and read geolocation information from JPEG and MP4 files.
             </div>
         </div>
-        <div id="scenarioContent">
-            <form>
-                File name:
-                <br>
-                <input type="text" id="filename" class="win-textbox">
-            </form>
-            <button id="GetGeotagButton" class="win-button">GetGeotag</button>
-            <br>
-            <button id="SetGeotagFromGeolocatorButton" class="win-button">SetGeotagFromGeolocator</button>
-            <br>
-            <button id="SetGeotagButton" class="win-button">SetGeotag</button>
-            <p></p>
+
+        <p><button id="chooseFileButton" class="win-button">Choose file</button></p>
+        <div id="fileOperationsPanel" style="display:none">
+            <p>File: <span id="fileDisplayName"></span></p>
+            <p><button id="getGeotagButton" class="win-button">Read geotag from file</button></p>
+            <p><button id="setGeotagFromGeolocatorButton" class="win-button">Set geotag from geolocator</button></p>
+            <p><button id="setGeotagButton" class="win-button">Set geotag to Seattle Space Needle</button></p>
         </div>
     </div>
 </body>

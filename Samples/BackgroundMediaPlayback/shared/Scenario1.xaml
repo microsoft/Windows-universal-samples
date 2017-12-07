@@ -1,0 +1,96 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="BackgroundMediaPlayback.Scenario1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BackgroundMediaPlayback"
+    xmlns:vm="using:BackgroundMediaPlayback.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <vm:PlaybackStateToButtonIconConverter x:Key="MediaPlaybackStateToButtonIconConverter"/>
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Demonstrates playback lists and background audio.
+                </TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <MediaPlayerElement x:Name="mediaPlayerElement" AreTransportControlsEnabled="True" MaxWidth="400" MaxHeight="400"
+                                PosterSource="{x:Bind PlayerViewModel.MediaList.CurrentItem.PreviewImage, Mode=OneWay}" />
+                            
+                            <StackPanel x:Name="customButtons" Visibility="Collapsed" Orientation="Horizontal" Margin="10,40,0,0" VerticalAlignment="Top">
+                                <Button x:Name="prevButton" Height="100" Width="100" 
+                                    IsEnabled="{x:Bind PlayerViewModel.CanSkipPrevious, Mode=OneWay}"        
+                                    Click="{x:Bind PlayerViewModel.SkipPrevious}">
+                                    <SymbolIcon Symbol="Previous"/>
+                                </Button>
+                                <Button x:Name="playButton" Height="100" Width="100"
+                                    Click="{x:Bind PlayerViewModel.TogglePlayPause}">
+                                    <SymbolIcon Symbol="{x:Bind PlayerViewModel.PlaybackSession.PlaybackState, Mode=OneWay, Converter={StaticResource MediaPlaybackStateToButtonIconConverter}}"/>
+                                </Button>
+                                <Button x:Name="nextButton" Height="100" Width="100" 
+                                    IsEnabled="{x:Bind PlayerViewModel.CanSkipNext, Mode=OneWay}"
+                                    Click="{x:Bind PlayerViewModel.SkipNext}">
+                                    <SymbolIcon Symbol="Next" />
+                                </Button>
+                                <Button x:Name="speedButton" Content="Speed" Height="100" Width="100" 
+                                    Click="speedButton_Click" />
+                            </StackPanel>
+
+                            <TextBlock Margin="0,20,0,10">Audio Category</TextBlock>
+                            <ComboBox ItemsSource="{x:Bind PlayerViewModel.AudioCategories}"
+                                SelectedItem="{x:Bind PlayerViewModel.SelectedAudioCategory, Mode=TwoWay}" />
+                            
+                        </StackPanel>
+                        <StackPanel Margin="40,0,0,0">
+                            <local:PlaylistView x:Name="playlistView" MediaList="{x:Bind PlayerViewModel.MediaList, Mode=OneWay}" />
+
+                            <TextBlock x:Name="currentTrackTitle"
+                                Text="{x:Bind PlayerViewModel.MediaList.CurrentItem.Title, Mode=OneWay}"
+                                Visibility="Collapsed" Height="30" 
+                                HorizontalAlignment="Left" Margin="10,10,0,0"
+                                VerticalAlignment="Top" TextWrapping="Wrap" 
+                                Style="{StaticResource BodyTextBlockStyle}"/>
+                            <TextBlock x:Name="currentStateTextBlock" 
+                                 Text="{x:Bind PlayerViewModel.PlaybackSession.PlaybackState, Mode=OneWay}" 
+                                 Visibility="Collapsed" Height="30"
+                                 HorizontalAlignment="Left" Margin="10,50,0,0"
+                                 VerticalAlignment="Top" TextWrapping="Wrap"
+                                 Style="{StaticResource BodyTextBlockStyle}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
+            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Page>

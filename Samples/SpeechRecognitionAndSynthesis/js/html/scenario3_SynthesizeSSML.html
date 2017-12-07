@@ -1,0 +1,46 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario3_SynthesizeSSML.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>This sample showcases speech synthesis using WinRT APIs to convert SSML to speech.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <button id="btnSpeak" class="win-button">Speak</button>
+            <select id="voicesSelect" class="win-dropdown">
+            </select>
+            <textarea id="textToSynthesize" rows="13" style="width: 100%" name="textToSynthesize" class="win-textarea">
+            </textarea>
+            <p id="errorTextArea"></p>
+        </div>
+        <div>
+            <h3 id="markHeader" class="win-type-subheader">Last mark triggered:</h3>
+            <textarea id="lastMarkTriggered" rows="1" style="width: 50%" name="lastMarkTriggered" class="win-textarea">
+            </textarea>
+        </div>
+    </div>
+</body>
+
+</html>

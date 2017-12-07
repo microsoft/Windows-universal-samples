@@ -1,0 +1,36 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario3"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BasicInput"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+        <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                This scenario demonstrates how to use the KeyboardCapabilities, PenCapabilities, and TouchCapabilities classes to determine what type of input the current device an app is running on supports.
+            </TextBlock>
+            <TextBlock x:Name="keyboardHeader" Text="Keyboard Properties" Style="{StaticResource SubtitleTextBlockStyle}" Padding="0,12,0,0"/>
+            <TextBlock x:Name="keyboardText"/>
+            <TextBlock x:Name="mouseHeader" Text="Mouse Properties" Style="{StaticResource SubtitleTextBlockStyle}" Padding="0,12,0,0"/>
+            <TextBlock x:Name="mouseText"/>
+            <TextBlock x:Name="touchHeader" Text="Touch Properties" Style="{StaticResource SubtitleTextBlockStyle}" Padding="0,12,0,0"/>
+            <TextBlock x:Name="touchText"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

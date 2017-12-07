@@ -35,6 +35,9 @@ namespace SDKTemplate
         virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
         virtual void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 
+        void ScenarioEnable();
+        void ScenarioDisable();
+
     private:
         SDKTemplate::MainPage^ rootPage;
         Windows::UI::Core::CoreDispatcher^ dispatcher;
@@ -45,7 +48,5 @@ namespace SDKTemplate
 
         void VisibilityChanged(Platform::Object^ sender, Windows::UI::Core::VisibilityChangedEventArgs^ e);
         void DisplayCurrentReading(Platform::Object^ sender, Platform::Object^ e);
-        void ScenarioEnable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-        void ScenarioDisable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
     };
 }

@@ -13,7 +13,7 @@ using System;
 using System.Threading.Tasks;
 using Windows.Media.Capture;
 
-namespace SpeechAndTTS
+namespace SDKTemplate
 {
     public class AudioCapturePermissions
     {
@@ -44,6 +44,14 @@ namespace SpeechAndTTS
                 MediaCapture capture = new MediaCapture();
 
                 await capture.InitializeAsync(settings);
+            }
+            catch (TypeLoadException)
+            {
+                // On SKUs without media player (eg, the N SKUs), we may not have access to the Windows.Media.Capture
+                // namespace unless the media player pack is installed. Handle this gracefully.
+                var messageDialog = new Windows.UI.Popups.MessageDialog("Media player components are unavailable.");
+                await messageDialog.ShowAsync();
+                return false;
             }
             catch (UnauthorizedAccessException)
             {

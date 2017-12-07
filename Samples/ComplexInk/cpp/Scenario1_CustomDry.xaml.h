@@ -46,7 +46,8 @@ namespace SDKTemplate
         {
             InkingMode,
             SelectingMode,
-            ErasingMode
+            ErasingMode,
+            InkToolbarMode
         };
 
     private:

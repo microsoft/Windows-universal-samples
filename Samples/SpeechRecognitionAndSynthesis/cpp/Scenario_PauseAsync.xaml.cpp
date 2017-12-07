@@ -58,16 +58,15 @@ void Scenario_PauseAsync::OnNavigatedTo(NavigationEventArgs^ e)
         if (permissionGained)
         {
             this->btnRecognize->IsEnabled = true;
+			
+			InitializeRecognizer();
         }
         else
         {
             this->resultTextBlock->Visibility = Windows::UI::Xaml::Visibility::Visible;
             this->resultTextBlock->Text = L"Permission to access capture resources was not given by the user; please set the application setting in Settings->Privacy->Microphone.";
         }
-    }).then([this]()
-    {
-        InitializeRecognizer();
-    }, task_continuation_context::use_current());
+    });
 }
 
 /// <summary>
@@ -100,12 +99,17 @@ void Scenario_PauseAsync::InitializeRecognizer()
                 this,
                 &Scenario_PauseAsync::SpeechRecognizer_StateChanged);
 
+		// It's not valid to pause a list grammar recognizer and recompile the constraints without at least one
+		// constraint in place, so create a permanent constraint.
+		auto goHomeConstraint = ref new SpeechRecognitionListConstraint(ref new Vector<String^>( { L"Go Home" }), L"gohome");
+
         // These speech recognition constraints will be added and removed from the recognizer.
         emailConstraint = ref new SpeechRecognitionListConstraint(ref new Vector<String^>({ L"Send email" }), L"email");
         phoneConstraint = ref new SpeechRecognitionListConstraint(ref new Vector<String^>({ L"Call phone" }), L"phone");
 
         // Build a command-list grammar. Commands should ideally be drawn from a resource file for localization, and 
         // be grouped into tags for alternate forms of the same command.
+		speechRecognizer->Constraints->Append(goHomeConstraint);
         speechRecognizer->Constraints->Append(emailConstraint);
 
         create_task(speechRecognizer->CompileConstraintsAsync(), task_continuation_context::use_current())
@@ -199,6 +203,7 @@ void Scenario_PauseAsync::OnNavigatedFrom(NavigationEventArgs^ e)
 /// <param name="e">Unused event details</param>
 void Scenario_PauseAsync::Recognize_Click(Object^ sender, RoutedEventArgs^ e)
 {
+	EnableUI(false);
     // The recognizer can only start listening in a continuous fashion if the recognizer is currently idle.
     // This prevents an exception from occurring.
     if (speechRecognizer->State == SpeechRecognizerState::Idle)
@@ -212,8 +217,6 @@ void Scenario_PauseAsync::Recognize_Click(Object^ sender, RoutedEventArgs^ e)
                 startAsyncTask.get();
 
                 recognizeButtonText->Text = L" Stop Continuous Recognition";
-                btnEmailGrammar->IsEnabled = true;
-                btnPhoneGrammar->IsEnabled = true;
                 infoBoxes->Visibility = Windows::UI::Xaml::Visibility::Visible;
             }
             catch (Exception^ exception)
@@ -221,7 +224,9 @@ void Scenario_PauseAsync::Recognize_Click(Object^ sender, RoutedEventArgs^ e)
                 auto messageDialog = ref new Windows::UI::Popups::MessageDialog(exception->Message, L"Exception");
                 create_task(messageDialog->ShowAsync());
             }
-        });
+		}).then([this]() {
+			EnableUI(true);
+		});
     }
     else
     {
@@ -229,12 +234,15 @@ void Scenario_PauseAsync::Recognize_Click(Object^ sender, RoutedEventArgs^ e)
         // generating a ResultGenerated event. StopAsync() will allow the final session to 
         // complete.
         recognizeButtonText->Text = L" Continuous Recognition";
-        btnEmailGrammar->IsEnabled = false;
-        btnPhoneGrammar->IsEnabled = false;
         infoBoxes->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
 
-        create_task(speechRecognizer->ContinuousRecognitionSession->CancelAsync());
+		create_task(speechRecognizer->ContinuousRecognitionSession->CancelAsync()).then([this]() {
+			btnRecognize->IsEnabled = true;
+			btnEmailGrammar->IsEnabled = false;
+			btnPhoneGrammar->IsEnabled = false;
+		});
     }
+	
 }
 
 /// <summary>

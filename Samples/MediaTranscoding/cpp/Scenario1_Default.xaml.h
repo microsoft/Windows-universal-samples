@@ -31,6 +31,7 @@ namespace SDKTemplate
     private:
         void GetPresetProfile(Windows::UI::Xaml::Controls::ComboBox^ comboBox);
         void PickFile(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void PickOutput(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void OnTargetFormatChanged(Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
         void SetPickFileButton(bool isEnabled);
         void StopPlayers();
@@ -42,6 +43,7 @@ namespace SDKTemplate
         void TranscodeError(Platform::String^ error);
         void TranscodeFailure(Windows::Media::Transcoding::TranscodeFailureReason reason);
         void SetCancelButton(bool isEnabled);
+        void SetTranscodeButton(bool isEnabled);
         void EnableButtons();
         void DisableButtons();
         void EnableNonSquarePARProfiles();
@@ -56,6 +58,7 @@ namespace SDKTemplate
         void OutputStopButton_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
         Platform::String^ _OutputFileName;
+        Platform::String^ _OutputFileExtension;
         Windows::Media::MediaProperties::MediaEncodingProfile^ _Profile;
         Windows::Storage::StorageFile^ _InputFile;
         Windows::Storage::StorageFile^ _OutputFile;

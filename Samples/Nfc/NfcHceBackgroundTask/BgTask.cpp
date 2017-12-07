@@ -20,6 +20,7 @@ using namespace Platform;
 using namespace Windows::ApplicationModel::Background;
 using namespace Windows::Devices::SmartCards;
 using namespace Windows::Foundation;
+using namespace Windows::Storage;
 using namespace Windows::Storage::Streams;
 using namespace Windows::UI::Notifications;
 
@@ -231,7 +232,7 @@ void BgTask::Run(
         break;
 
     default:
-        DebugLog(m_triggerDetails->TriggerType.ToString()->Data());
+        DebugLogString(m_triggerDetails->TriggerType.ToString());
         FlushDebugLog();
 
         // Show toast displaying the type of the background task trigger
@@ -248,7 +249,7 @@ void BgTask::HandleHceActivation()
 {
     try
     {
-        auto lock = m_csEventLock.Lock();
+        auto lock = m_csLock.Lock();
 
         // Take a deferral to keep this background task alive even after this "Run" method returns.
         // You must complete this deferal immediately after you have done processing the current
@@ -264,14 +265,21 @@ void BgTask::HandleHceActivation()
             if (iter->Current->ActivationPolicy != SmartCardAppletIdGroupActivationPolicy::Disabled
                 && iter->Current->AppletIdGroup->SmartCardEmulationCategory == SmartCardEmulationCategory::Payment)
             {
-                DebugLog(L"Found enabled payment applet ID group");
                 m_paymentAidRegistration = iter->Current;
-                break;
+
+                // If the activation policy is Enabled, continue searching because there might be
+                // an applet ID group with an activation policy of ForegroundOverride
+                if (iter->Current->ActivationPolicy == SmartCardAppletIdGroupActivationPolicy::ForegroundOverride)
+                {
+                    break;
+                }
             }
         }
 
         if (m_paymentAidRegistration != nullptr)
         {
+            DebugLogString(L"Found enabled payment applet ID group: " + m_paymentAidRegistration->AppletIdGroup->DisplayName);
+
             // Check what type of payment card we're handling and set up for it
             auto appletIds = m_paymentAidRegistration->AppletIdGroup->AppletIds;
             for (auto iter = appletIds->First(); iter->HasCurrent; iter->MoveNext())
@@ -293,35 +301,34 @@ void BgTask::HandleHceActivation()
             }
         }
 
+        m_fDenyTransactions = false;
+
         if (Windows::Phone::System::SystemProtection::ScreenLocked)
         {
-            auto denyIfLocked = Windows::Storage::ApplicationData::Current->RoamingSettings->Values->Lookup("DenyIfPhoneLocked");
+            auto denyIfLocked = ApplicationData::Current->RoamingSettings->Values->Lookup("DenyIfPhoneLocked");
             if (denyIfLocked != nullptr && (bool)denyIfLocked == true)
             {
-                // The phone is locked, and our current user setting is to deny transactions while locked so let the user know
-                // Denied
-                DoLaunch(Denied, L"Phone was locked at the time of tap");
-
-                // We still need to respond to APDUs in a timely manner, even though we will just return failure
+                // The phone is locked, and our current user setting is to deny transactions while
+                // locked, so deny transactions and let the user know. We still need to respond to
+                // APDUs in a timely manner, even though we will just respond with failure APDUs
                 m_fDenyTransactions = true;
+                LaunchForegroundApp(Denied, L"Phone was locked at the time of tap");
             }
-        }
-        else
-        {
-            m_fDenyTransactions = false;
         }
 
         m_emulator->ApduReceived += ref new TypedEventHandler<SmartCardEmulator^, SmartCardEmulatorApduReceivedEventArgs^>(
             this, &BgTask::ApduReceived);
 
-        // Set up a handler for if the background task is cancelled, we must immediately complete our deferral
-        m_taskInstance->Canceled += ref new Windows::ApplicationModel::Background::BackgroundTaskCanceledEventHandler(
+        // Set up a handler for if the background task is canceled, we must immediately complete
+        // our deferral
+        m_taskInstance->Canceled += ref new BackgroundTaskCanceledEventHandler(
             [this](
                 IBackgroundTaskInstance^ sender,
                 BackgroundTaskCancellationReason reason)
             {
-                DebugLog(L"Canceled");
-                DebugLog(reason.ToString()->Data());
+                auto lock = m_csLock.Lock();
+
+                DebugLogString(L"Bg task canceled. Reason: " + reason.ToString());
                 EndTask();
             });
 
@@ -330,7 +337,9 @@ void BgTask::HandleHceActivation()
                 SmartCardEmulator^ emulator,
                 SmartCardEmulatorConnectionDeactivatedEventArgs^ eventArgs)
             {
-                DebugLog(L"Connection deactivated");
+                auto lock = m_csLock.Lock();
+
+                DebugLogString(L"Connection deactivated. Reason: " + eventArgs->Reason.ToString());
                 EndTask();
             });
 
@@ -343,6 +352,7 @@ void BgTask::HandleHceActivation()
         if (m_fTaskEnded)
         {
             DebugLog(L"Connection was deactivated before emulator could start");
+            FlushDebugLog();
         }
         else
         {
@@ -351,54 +361,63 @@ void BgTask::HandleHceActivation()
     }
     catch (Exception^ e)
     {
-        DebugLog(("Exception in Run: " + e->ToString())->Data());
+        DebugLogString(L"Exception in Run: " + e->ToString());
         EndTask();
     }
 }
 
-void BgTask::DoLaunch(DoLaunchType type, LPWSTR wszMessage)
+void BgTask::LaunchForegroundApp(LaunchType type, LPWSTR wszMessage)
 {
     SmartCardLaunchBehavior launchBehavior = SmartCardLaunchBehavior::Default;
-    auto launchAboveLock = Windows::Storage::ApplicationData::Current->RoamingSettings->Values->Lookup("LaunchAboveLock");
+    auto launchAboveLock = ApplicationData::Current->RoamingSettings->Values->Lookup("LaunchAboveLock");
     if (launchAboveLock != nullptr && (bool)launchAboveLock == true)
     {
         launchBehavior = SmartCardLaunchBehavior::AboveLock;
     }
 
-    auto args = ref new Platform::String(L"Receipt^");
+    auto args = ref new String(L"Receipt^");
     switch (type)
     {
     case Complete:
-        args += ref new Platform::String(L"Complete^");
+        args += ref new String(L"Complete^");
         break;
     case Failed:
-        args += ref new Platform::String(L"Failed^");
+        args += ref new String(L"Failed^");
         break;
     case Denied:
-        args += ref new Platform::String(L"Denied^");
+        args += ref new String(L"Denied^");
         break;
     }
 
-    args += ref new Platform::String(wszMessage);
+    args += ref new String(wszMessage);
 
-    create_task(m_triggerDetails->TryLaunchCurrentAppAsync(args, launchBehavior)).wait();
+    bool succeeded = create_task(
+        m_triggerDetails->TryLaunchCurrentAppAsync(args, launchBehavior)).get();
+    if (!succeeded)
+    {
+        DebugLog(L"Foreground app failed to launch");
+    }
 }
 
 void BgTask::EndTask()
 {
-    auto lock = m_csEventLock.Lock();
-
     if (m_fTaskEnded)
     {
         DebugLog(L"Background task has already ended. Leaving EndTask");
         return;
     }
 
-    if (!m_fDenyTransactions && !m_fTransactionCompleted)
+    if (!m_fDenyTransactions)
     {
-        // We haven't already launched the app because of denial/completion, and then something
-        // went wrong
-        DoLaunch(Failed, L"Try tapping again, and hold your phone on the reader longer");
+        if (!m_fTransactionCompleted)
+        {
+            DebugLog(L"Transaction failed to complete");
+            LaunchForegroundApp(Failed, L"Try tapping again, and hold your phone on the reader longer");
+        }
+        else
+        {
+            DebugLog(L"Transaction complete");
+        }
     }
 
     FlushDebugLog();
@@ -415,7 +434,7 @@ void BgTask::ApduReceived(SmartCardEmulator^ emulator, SmartCardEmulatorApduRece
 {
     try
     {
-        auto lock = m_csEventLock.Lock();
+        auto lock = m_csLock.Lock();
 
         if (m_fTaskEnded)
         {
@@ -458,28 +477,30 @@ void BgTask::ApduReceived(SmartCardEmulator^ emulator, SmartCardEmulatorApduRece
             create_task(eventArgs->TryRespondAsync(response)).then(
                 [this, fTransactionComplete](bool result)
             {
+                auto lock = m_csLock.Lock();
+
                 DebugLog(result ? L"+Responded successfully" : L"!TryRespondAsync returned false");
                 if (result && fTransactionComplete)
                 {
-                    DoLaunch(Complete, L"");
                     m_fTransactionCompleted = true;
+                    LaunchForegroundApp(Complete, L"");
                 }
-            }).wait();
+            });
         }
         else
         {
             DebugLog(L"+System auto-responded already");
             if (fTransactionComplete)
             {
-                DoLaunch(Complete, L"");
                 m_fTransactionCompleted = true;
+                LaunchForegroundApp(Complete, L"");
             }
         }
     }
     catch (Exception^ e)
     {
-        DebugLog(("Exception in ApduReceived: " + e->ToString() + "\r\n")->Data());
-        DoLaunch(Failed, L"Exception Occured");
+        DebugLogString(L"Exception in ApduReceived: " + e->ToString());
+        LaunchForegroundApp(Failed, L"Exception occurred");
         EndTask();
     }
 }
@@ -615,10 +636,8 @@ IBuffer^ BgTask::ProcessCommandApdu(IBuffer^ commandApdu, bool* pfComplete)
         }
 
         {
-            auto filename = ref new Platform::String(L"ReadRecordResponse-");
-            filename += m_paymentAidRegistration->Id.ToString();
-            filename += ref new Platform::String(L".dat");
-            DebugLog(filename->Data());
+            auto filename = L"ReadRecordResponse-" + m_paymentAidRegistration->Id.ToString() + L".dat";
+            DebugLogString(filename);
 
             auto readFile = ReadAndUnprotectFileAsync(filename);
             readFile.wait();
@@ -692,19 +711,32 @@ IBuffer^ BgTask::ProcessCommandApdu(IBuffer^ commandApdu, bool* pfComplete)
     return IBufferFromArray(R_APDU_FAIL);
 }
 
+void BgTask::DebugLogString(String^ message)
+{
+    DebugLog(message->Data());
+}
+
 void BgTask::DebugLog(const wchar_t* pwstrMessage)
 {
+    auto strTime = GetCurrentTimeString();
+
+    // To view output from OutputDebugString in the Output window of the debugger, go to the
+    // Properties page of the Nfc project, then go to the Debug tab and select "Native Only" for
+    // "Application process" in the "Debugger type" section
     OutputDebugStringW(pwstrMessage);
     OutputDebugStringW(L"\r\n");
 
+    // Lock m_csDebugLog so that we can call this method outside the class lock m_csLock
     auto lock = m_csDebugLog.Lock();
+    m_wsDebugLog += strTime->Data();
+    m_wsDebugLog += L": ";
     m_wsDebugLog += pwstrMessage;
     m_wsDebugLog += L"\r\n";
 }
 
 void BgTask::FlushDebugLog()
 {
-    auto debugLogLock = m_csDebugLog.Lock();
-    AppendFile(L"DebugLog.txt", ref new Platform::String(m_wsDebugLog.data()));
-    debugLogLock.Unlock();
+    // Lock m_csDebugLog so that we can call this method outside the class lock m_csLock
+    auto lock = m_csDebugLog.Lock();
+    AppendFile(L"DebugLog.txt", ref new String(m_wsDebugLog.data()));
 }

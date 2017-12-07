@@ -1,0 +1,60 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="/js/scenario5_RandomAccess.js"></script>
+</head>
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">Random access downloads</div>
+    <p>
+        When random access mode is enabled, apps can access file content and seek within that
+        content while the download is in progress. If the data at the new seek position is not yet available,
+        the transfer will prioritize that new position. This allows the app to alter the order in which
+        remote file data is requested from the server, which is useful for streaming media scenarios.
+    </p>
+    <p>
+        <label for="serverAddressField">Remote address: </label>
+        <input type="text" class="win-textbox" id="serverAddressField" value="http://localhost/BackgroundTransferSample/randomAccess.aspx" readonly />
+    </p>
+    <p>
+        <label for="fileNameField">Local file name: </label>
+        <input type="text" class="win-textbox" id="fileNameField" value="RandomAccessFile.txt" />
+    </p>
+    <p>
+        <button class="win-button" id="startDownloadButton">Start</button>
+        <button class="win-button" id="pauseDownloadButton" disabled>Pause</button>
+        <button class="win-button" id="resumeDownloadButton" disabled>Resume</button>
+    </p>
+    <p>
+        Seek to position (MB)
+        <input id="seekSlider" type="range" min="0" max="100" step="1" value="0" />
+        <span id="seekSliderText">0</span>
+    </p>
+    <p>
+        <button class="win-button" id="seekDownloadButton">Seek</button>
+    </p>
+    <p>
+        Current read position (MB)
+        <input id="currentPositionSlider" type="range" min="0" max="100" step="1" value="0" disabled />
+        <span id="currentPositionSliderText">0</span>
+    </p>
+    <div id="downloadedInfoText"></div>
+    <div>Download status: <span id="downloadStatusText"></span></div>
+    <div>Downloaded ranges: <span id="downloadedRangesText"></span></div>
+    <div>Previous read operation: <span id="previousReadText"></span></div>
+    <div>Current read operation: <span id="currentReadText"></span></div>
+</body>
+</html>

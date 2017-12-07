@@ -5546,11 +5546,11 @@ select[multiple].win-dropdown option:checked {
   background-color: rgba(0, 0, 0, 0.6);
   border-color: rgba(255, 255, 255, 0.6);
 }
-.win-textbox:focus,
-.win-textarea:focus {
-  color: #000000;
-  background-color: #ffffff;
-}
+    .win-textbox:focus,
+    .win-textarea:focus {
+        color: #ffffff;
+        background-color: #000000;
+    }
 .win-textbox::-ms-clear,
 .win-textbox::-ms-reveal {
   display: block;

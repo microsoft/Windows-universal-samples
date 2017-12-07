@@ -1,0 +1,62 @@
+﻿<Page
+    x:Class="SDKTemplate.Scenario2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.Resources>
+                <Style x:Key="InkToolBarActionButton" TargetType="Button">
+                    <Setter Property="MinWidth" Value="{ThemeResource InkToolbarButtonWidth}"/>
+                    <Setter Property="MinHeight" Value="{ThemeResource InkToolbarButtonHeight}"/>
+                    <Setter Property="MaxHeight" Value="{ThemeResource InkToolbarButtonHeight}"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Background" Value="{ThemeResource InkToolbarButtonBackgroundThemeBrush}"/>
+                    <Setter Property="Foreground" Value="{ThemeResource InkToolbarButtonForegroundThemeBrush}"/>
+                </Style>
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                  This scenario demonstrates text recognition with InkAnalyzer:<LineBreak/>
+                    - write with mouse or pen<LineBreak/>
+                    - one tap (touch) on the ink to visualize the paragraph<LineBreak/>
+                    - double tap (touch) to convert the paragraph to text.
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <InkToolbar x:Name="inkToolBar" HorizontalAlignment="Left" VerticalAlignment="Top" TargetInkCanvas="{x:Bind inkCanvas}" InitialControls="None">
+                    <InkToolbarBallpointPenButton SelectedStrokeWidth="2"/>
+                    <InkToolbarPencilButton/>
+                </InkToolbar>
+                <Line Y1="0" Y2="{ThemeResource InkToolbarButtonHeight}" HorizontalAlignment="Stretch" Width="2" Height="{ThemeResource InkToolbarButtonHeight}" StrokeThickness="1" Stroke="Gray"/>
+                <Button x:Name="clearButton" Click="ClearButton_Click" Style="{StaticResource InkToolBarActionButton}" Content="Clear"/>
+            </StackPanel>
+
+            <Grid Grid.Row ="2" BorderBrush="AliceBlue" BorderThickness="2" Background="White" x:Name="gridBox">
+                <Canvas x:Name="canvas">
+                    <Rectangle x:Name="SelectionRect" Stroke="Gray" StrokeThickness="2" StrokeDashArray="2,2" StrokeDashCap="Round" Visibility="Collapsed"/>
+                    <Canvas.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontFamily" Value="Verdana"/>
+                            <Setter Property="FontSize" Value="18"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Style>
+                    </Canvas.Resources>
+                </Canvas>
+                <InkCanvas x:Name="inkCanvas"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

@@ -250,14 +250,13 @@ namespace BluetoothAdvertisement
                     taskRegistration.Completed += OnBackgroundTaskCompleted;
 
                     // Even though the trigger is registered successfully, it might be blocked. Notify the user if that is the case.
-                    if ((backgroundAccessStatus == BackgroundAccessStatus.Denied) || (backgroundAccessStatus == BackgroundAccessStatus.Unspecified))
+                    if ((backgroundAccessStatus == BackgroundAccessStatus.AlwaysAllowed) || (backgroundAccessStatus == BackgroundAccessStatus.AllowedSubjectToSystemPolicy))
                     {
-                        rootPage.NotifyUser("Not able to run in background. Application must given permission to be added to lock screen.",
-                            NotifyType.ErrorMessage);
+                        rootPage.NotifyUser("Background watcher registered.", NotifyType.StatusMessage);
                     }
                     else
                     {
-                        rootPage.NotifyUser("Background watcher registered.", NotifyType.StatusMessage);
+                        rootPage.NotifyUser("Background tasks may be disabled for this app", NotifyType.ErrorMessage);
                     }
                 }
                 catch (Exception ex)

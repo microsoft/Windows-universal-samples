@@ -17,7 +17,7 @@
     </Page.Transitions>
 
     <Grid x:Name="LayoutRoot">
-               <VisualStateManager.VisualStateGroups>
+        <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ContentStates">
                 <VisualState x:Name="ContentNotLoadedState" />
                 <VisualState x:Name="ContentLoadedState">
@@ -134,8 +134,5 @@
                 </Grid>
             </StackPanel>
         </ScrollViewer>
-        
-        <Button VerticalAlignment="Top" Margin="5" Style="{StaticResource NavigationBackButtonSmallStyle}"
-                Click="BackButton_Click" />
     </Grid>
 </Page>

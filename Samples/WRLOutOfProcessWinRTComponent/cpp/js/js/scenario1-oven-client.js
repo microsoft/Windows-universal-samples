@@ -39,7 +39,7 @@
         // The sender of the event is mapped to evt.target
         printLn("Event Handler 1: Invoked");
         printLn("Event Handler 1: Oven volume is: " + evt.target.volume.toString());
-        printLn("Event Handler 1: Bread flavor is: " + evt.flavor);
+        printLn("Event Handler 1: Bread flavor is: " + evt.bread.flavor);
     }
 
     function breadCompleteHandler2(evt) {

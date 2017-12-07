@@ -29,8 +29,8 @@
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                   The Onboarding Producer accepts a connection form the Onboarding Consumer. Once connected, 
-                   the Producer will pass back a list of available networks, then accept an SSID and password 
+                   The Onboarding producer accepts a connection form the Onboarding consumer. Once connected, 
+                   the producer will pass back a list of available networks, then accept an SSID and password 
                    for connection purposes as described in the Onboarding Service Framework XML.
                 </TextBlock>
             </StackPanel>
@@ -40,10 +40,7 @@
                     <Button Content="Launch" Command="{Binding LaunchProducer}" Margin="0,5"/>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Visibility="{Binding SampleNetworkInfoVisibility}">
                         <TextBlock Text="Key:"/>
-                        <StackPanel Margin="5,0,0,0">
-                            <TextBlock Text="{Binding Path=Key,Mode=OneWay}" IsTextSelectionEnabled="True" TextWrapping="Wrap"/>
-                            <CheckBox Content="Hyphen separated" IsChecked="{Binding Path=HyphenSeparatedIsChecked, Mode=TwoWay}"/>
-                        </StackPanel>
+                        <TextBlock Text="{Binding Path=Key,Mode=OneWay}" IsTextSelectionEnabled="True" TextWrapping="Wrap" Margin="5,0,0,0"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,5" Visibility="{Binding SampleNetworkInfoVisibility}">
                         <TextBlock Text="Sample Networks:" VerticalAlignment="Center"/>

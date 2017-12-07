@@ -1,0 +1,16 @@
+{
+	"CancelledTripToDestination": "Cancelled the trip to {0}",
+	"CancellingTripToDestination": "Cancelling the trip to {0}",
+	"CancelTripToDestination": "Cancel this trip to {0}?",
+	"ConfirmCancelTripToDestination": "Did you want to cancel this trip to {0}?",
+	"DisambiguationRepeat": "Which one do you want to cancel?",
+	"DisambiguationWhichTripToDest": "Which trip to {0} did you want to cancel?",
+	"FoundNoTripToDestination": "Sorry, you don\u0027t have any trips to {0}",
+	"KeepingTripToDestination": "Okay, keeping the trip to {0}",
+	"LaunchingAdventureWorks": "Launching Adventure Works",
+	"LoadingTripToDestination": "Looking for trip to {0}",
+	"NoSuchTripToDestination": "Sorry, you don\u0027t have any trips to {0}",
+	"PluralUpcomingTrips": "Here are your upcoming trips.",
+	"ProgressLookingForTripToDest": "Looking for a trip to {0}",
+	"SingularUpcomingTrip": "Here\u0027s your upcoming trip."
+}

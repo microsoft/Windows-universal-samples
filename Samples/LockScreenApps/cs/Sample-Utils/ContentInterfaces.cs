@@ -2746,7 +2746,7 @@ namespace NotificationsExtensions
             bool AddImageQuery { get; set; }
 
             /// <summary>
-            /// The launch parameter passed into the Windows Store app when the toast is activated.
+            /// The launch parameter passed into the app when the toast is activated.
             /// </summary>
             string Launch { get; set; }
 

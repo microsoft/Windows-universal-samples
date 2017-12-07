@@ -15,18 +15,10 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <StackPanel Orientation="Horizontal">
-                <Button Style="{StaticResource NavigationBackButtonSmallStyle}"
-                        TabIndex="1"
-                        Margin="12,0,0,0"
-                        Padding="10"
-                        Click="BackToMainPage"
-                        AutomationProperties.Name="Back"/>
-                <TextBlock Text="Restore Scroll Position Sample"
-                   VerticalAlignment="Top"
-                   Style="{ThemeResource TitleTextBlockStyle}"
-                   Margin="10" />
-            </StackPanel>
+            <TextBlock Text="Restore Scroll Position Sample"
+               VerticalAlignment="Top"
+               Style="{ThemeResource TitleTextBlockStyle}"
+               Margin="10" />
 
             <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,0,0,0">
                 Use the back button above to navigate back to the main Restore Scroll Position Page. Once you navigate back, you should see that your scroll position has been maintained.

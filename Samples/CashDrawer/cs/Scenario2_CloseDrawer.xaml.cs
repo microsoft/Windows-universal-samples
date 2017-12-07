@@ -9,17 +9,16 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using System;
 using System.Threading.Tasks;
+using Windows.Devices.PointOfService;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Windows.Devices.PointOfService;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace CashDrawerSample
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -117,19 +116,26 @@ namespace CashDrawerSample
                 return;
             }
 
-            // TimeSpan specifies a time period as (hours, minutes, seconds)
-            alarm.AlarmTimeout = new TimeSpan(0, 0, 30);
-            alarm.BeepDelay = new TimeSpan(0, 0, 3);
-            alarm.BeepDuration = new TimeSpan(0, 0, 1);
-            alarm.BeepFrequency = 700;
-            alarm.AlarmTimeoutExpired += drawer_AlarmExpired;
-
-            rootPage.NotifyUser("Waiting for drawer to close.", NotifyType.StatusMessage);
-
-            if (await alarm.StartAsync())
-                rootPage.NotifyUser("Successfully waited for drawer close.", NotifyType.StatusMessage);
+            if (!claimedDrawer.IsDrawerOpen)
+            {
+                rootPage.NotifyUser("Drawer is already closed.", NotifyType.StatusMessage);
+            }
             else
-                rootPage.NotifyUser("Failed to wait for drawer close.", NotifyType.ErrorMessage);
+            {
+                // TimeSpan specifies a time period as (hours, minutes, seconds)
+                alarm.AlarmTimeout = new TimeSpan(0, 0, 30);
+                alarm.BeepDelay = new TimeSpan(0, 0, 3);
+                alarm.BeepDuration = new TimeSpan(0, 0, 1);
+                alarm.BeepFrequency = 700;
+                alarm.AlarmTimeoutExpired += drawer_AlarmExpired;
+
+                rootPage.NotifyUser("Waiting for drawer to close.", NotifyType.StatusMessage);
+
+                if (await alarm.StartAsync())
+                    rootPage.NotifyUser("Successfully waited for drawer close.", NotifyType.StatusMessage);
+                else
+                    rootPage.NotifyUser("Failed to wait for drawer close.", NotifyType.ErrorMessage);
+            }
         }
 
         /// <summary>
@@ -142,7 +148,7 @@ namespace CashDrawerSample
 
             if (drawer == null)
             {
-                drawer = await CashDrawer.GetDefaultAsync();
+                drawer = await DeviceHelpers.GetFirstCashDrawerAsync();
                 if (drawer == null)
                     return false;
             }
@@ -216,12 +222,16 @@ namespace CashDrawerSample
         /// </summary>
         private void ResetScenarioState()
         {
-            drawer = null;
-
             if (claimedDrawer != null)
             {
                 claimedDrawer.Dispose();
                 claimedDrawer = null;
+            }
+
+            if (drawer != null)
+            {
+                drawer.Dispose();
+                drawer = null;
             }
 
             UpdateStatusOutput(CashDrawerStatusKind.Offline);

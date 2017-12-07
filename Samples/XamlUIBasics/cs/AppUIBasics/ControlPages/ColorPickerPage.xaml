@@ -1,0 +1,58 @@
+﻿<Page x:Class="AppUIBasics.ControlPages.ColorPickerPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+    <StackPanel>
+        <local:ControlExample x:Name="Example1" HeaderText="ColorPicker Properties." HorizontalContentAlignment="Left">
+
+            <ColorPicker x:Name="colorPicker"
+                IsColorSliderVisible="{x:Bind colorSlider.IsChecked.Value, Mode=OneWay}"
+                IsColorChannelTextInputVisible="{x:Bind colorChannelInput.IsChecked.Value, Mode=OneWay}"
+                IsHexInputVisible="{x:Bind hexInput.IsChecked.Value, Mode=OneWay}"
+                IsAlphaEnabled="{x:Bind alpha.IsChecked.Value, Mode=OneWay}"
+                IsAlphaSliderVisible="{x:Bind alphaSlider.IsChecked.Value, Mode=OneWay}"
+                IsAlphaTextInputVisible="{x:Bind alphaTextInput.IsChecked.Value, Mode=OneWay}" />
+
+            <local:ControlExample.Options>
+                <StackPanel Width="250" Margin="0,-5,0,0">
+                    <CheckBox Content="IsColorSliderVisible" x:Name="colorSlider" IsChecked="True" />
+                    <CheckBox Content="IsColorChannelTextInputVisible" x:Name="colorChannelInput" IsChecked="True" />
+                    <CheckBox Content="IsHexInputVisible" x:Name="hexInput" IsChecked="True" />
+                    <CheckBox Content="Alpha Enabled" x:Name="alpha" />
+                    <CheckBox Content="IsAlphaSliderVisible" x:Name="alphaSlider" IsChecked="True"
+                                    IsEnabled="{x:Bind alpha.IsChecked.Value, Mode=OneWay}" />
+                    <CheckBox Content="IsAlphaTextInputVisible" x:Name="alphaTextInput"
+                                    IsEnabled="{x:Bind alpha.IsChecked.Value, Mode=OneWay}" IsChecked="True" />
+                    <StackPanel Margin="0,24,0,0">
+                        <TextBlock Text="ColorPicker applied on a Rectangle" />
+                        <Rectangle x:Name="previewRect" Height="100" Margin="0,12,0,0" StrokeThickness="1"
+                                        Stroke="{ThemeResource TextControlBorderBrush}">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{x:Bind colorPicker.Color, Mode=OneWay}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </StackPanel>
+                </StackPanel>
+            </local:ControlExample.Options>
+            
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>&lt;ColorPicker</Paragraph>
+                    <Paragraph TextIndent="24">IsColorSliderVisible="<Run Text="{x:Bind colorSlider.IsChecked, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"></Run>"
+                    </Paragraph>
+                    <Paragraph TextIndent="24">IsColorChannelTextInputVisible="<Run Text="{x:Bind colorChannelInput.IsChecked, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"></Run>"
+                    </Paragraph>
+                    <Paragraph TextIndent="24">IsHexInputVisible="<Run Text="{x:Bind hexInput.IsChecked, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"></Run>"
+                    </Paragraph>
+                    <Paragraph TextIndent="24">IsAlphaEnabled="<Run Text="{x:Bind alpha.IsChecked, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"></Run>"
+                    </Paragraph>
+                    <Paragraph TextIndent="24">IsAlphaSliderVisible="<Run Text="{x:Bind alphaSlider.IsChecked, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"></Run>"
+                    </Paragraph>
+                    <Paragraph TextIndent="24">IsAlphaTextInputVisible="<Run Text="{x:Bind alphaTextInput.IsChecked, Converter={StaticResource valueToStringConverter}, Mode=OneWay}"></Run>" /&gt;
+                    </Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+    </StackPanel>
+</Page>

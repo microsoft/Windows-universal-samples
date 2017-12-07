@@ -15,7 +15,6 @@ using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using SDKTemplate;
 using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
 using Windows.UI.Xaml;
@@ -23,7 +22,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web;
 
-namespace BackgroundTransfer
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -113,7 +112,7 @@ namespace BackgroundTransfer
             }
         }
 
-        private async void StartDownload(BackgroundTransferPriority priority, bool requestUnconstrainedDownload)
+        private async void StartDownload(BackgroundTransferPriority priority)
         {
             // Validating the URI is required since it was received from an untrusted source (user input).
             // The URI is validated by calling Uri.TryCreate() that will return 'false' for strings that are not valid URIs.
@@ -155,43 +154,18 @@ namespace BackgroundTransfer
 
             download.Priority = priority;
 
-            if (!requestUnconstrainedDownload)
-            {
-                // Attach progress and completion handlers.
-                await HandleDownloadAsync(download, true);
-                return;
-            }
-
-            List<DownloadOperation> requestOperations = new List<DownloadOperation>();
-            requestOperations.Add(download);
-
-            // If the app isn't actively being used, at some point the system may slow down or pause long running
-            // downloads. The purpose of this behavior is to increase the device's battery life.
-            // By requesting unconstrained downloads, the app can request the system to not suspend any of the
-            // downloads in the list for power saving reasons.
-            // Use this API with caution since it not only may reduce battery life, but it may show a prompt to
-            // the user.
-            UnconstrainedTransferRequestResult result = await BackgroundDownloader.RequestUnconstrainedDownloadsAsync(requestOperations);
-
-            Log(String.Format(CultureInfo.CurrentCulture, "Request for unconstrained downloads has been {0}",
-                (result.IsUnconstrained ? "granted" : "denied")));
-
+            // Attach progress and completion handlers.
             await HandleDownloadAsync(download, true);
         }
 
         private void StartDownload_Click(object sender, RoutedEventArgs e)
         {
-            StartDownload(BackgroundTransferPriority.Default, false);
+            StartDownload(BackgroundTransferPriority.Default);
         }
 
         private void StartHighPriorityDownload_Click(object sender, RoutedEventArgs e)
         {
-            StartDownload(BackgroundTransferPriority.High, false);
-        }
-
-        private void StartUnconstrainedDownload_Click(object sender, RoutedEventArgs e)
-        {
-            StartDownload(BackgroundTransferPriority.Default, true);
+            StartDownload(BackgroundTransferPriority.High);
         }
 
         private void PauseAll_Click(object sender, RoutedEventArgs e)
@@ -201,8 +175,8 @@ namespace BackgroundTransfer
             foreach (DownloadOperation download in activeDownloads)
             {
                 // DownloadOperation.Progress is updated in real-time while the operation is ongoing. Therefore,
-                // we must make a local copy at the beginning of the progress handler, so that we can have a consistent
-                // view of that ever-changing state throughout the handler's lifetime.
+                // we must make a local copy so that we can have a consistent view of that ever-changing state
+                // throughout this method's lifetime.
                 BackgroundDownloadProgress currentProgress = download.Progress;
 
                 if (currentProgress.Status == BackgroundTransferStatus.Running)
@@ -225,8 +199,8 @@ namespace BackgroundTransfer
             foreach (DownloadOperation download in activeDownloads)
             {
                 // DownloadOperation.Progress is updated in real-time while the operation is ongoing. Therefore,
-                // we must make a local copy at the beginning of the progress handler, so that we can have a consistent
-                // view of that ever-changing state throughout the handler's lifetime.
+                // we must make a local copy so that we can have a consistent view of that ever-changing state
+                // throughout this method's lifetime.
                 BackgroundDownloadProgress currentProgress = download.Progress;
 
                 if (currentProgress.Status == BackgroundTransferStatus.PausedByApplication)
@@ -258,8 +232,8 @@ namespace BackgroundTransfer
         private void DownloadProgress(DownloadOperation download)
         {
             // DownloadOperation.Progress is updated in real-time while the operation is ongoing. Therefore,
-            // we must make a local copy at the beginning of the progress handler, so that we can have a consistent
-            // view of that ever-changing state throughout the handler's lifetime.
+            // we must make a local copy so that we can have a consistent view of that ever-changing state
+            // throughout this method's lifetime.
             BackgroundDownloadProgress currentProgress = download.Progress;
 
             MarshalLog(String.Format(CultureInfo.CurrentCulture, "Progress: {0}, Status: {1}", download.Guid,
@@ -273,7 +247,7 @@ namespace BackgroundTransfer
 
             MarshalLog(String.Format(
                 CultureInfo.CurrentCulture,
-                " - Transfered bytes: {0} of {1}, {2}%",
+                " - Transferred bytes: {0} of {1}, {2}%",
                 currentProgress.BytesReceived,
                 currentProgress.TotalBytesToReceive,
                 percent));

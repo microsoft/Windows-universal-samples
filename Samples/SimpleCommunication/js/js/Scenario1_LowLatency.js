@@ -80,7 +80,7 @@
         },
 
         _onVisibilityChange: function (e) {
-            if (document.msVisibilityState !== "visible") {
+            if (document.visibilityState !== "visible") {
                 this._cleanup();
             } else {
                 this.initialize();

@@ -50,8 +50,30 @@ namespace SDKTemplate
             // cache CachedFileUpdaterUI
             cachedFileUpdaterUI = args.CachedFileUpdaterUI;
 
-            cachedFileUpdaterUI.FileUpdateRequested += CachedFileUpdaterUI_FileUpdateRequested;
-            cachedFileUpdaterUI.UIRequested += CachedFileUpdaterUI_UIRequested;
+            // Currently, the Desktop device family activates the app in the background. Other device families
+            // use a background task activation. We need to handle both cases.
+            //
+            // We can check to see if there is UI on activation to determine which case we are in, because
+            // we receive the FileUpdateRequest differently.
+            //
+            // If activated in the foreground (visible), then the FileUpdateRequest is passed explicitly as
+            // part of the activation.
+            //
+            // If activated in the background (not visible), then we subscribe to the FileUpdateRequested
+            // and UIRequest events. The FileUpdateRequest is received as part of the FileUpdatedRequested event,
+            // and UIRequested is raised when user input is needed to resolve a conflict.
+
+            bool isForegroundActivated = (cachedFileUpdaterUI.UIStatus == UIStatus.Visible);
+            if (isForegroundActivated)
+            {
+                fileUpdateRequest = cachedFileUpdaterUI.UpdateRequest;
+                fileUpdateRequestDeferral = cachedFileUpdaterUI.GetDeferral();
+            }
+            else
+            {
+                cachedFileUpdaterUI.FileUpdateRequested += CachedFileUpdaterUI_FileUpdateRequested;
+                cachedFileUpdaterUI.UIRequested += CachedFileUpdaterUI_UIRequested;
+            }
 
             switch (cachedFileUpdaterUI.UpdateTarget)
             {
@@ -63,7 +85,12 @@ namespace SDKTemplate
                     break;
             }
 
-            Window.Current.Activate();
+            if (isForegroundActivated)
+            {
+                Window.Current.Content = this;
+                this.OnNavigatedTo(null);
+                Window.Current.Activate();
+            }
         }
 
         async void CachedFileUpdaterUI_UIRequested(CachedFileUpdaterUI sender, object args)
@@ -83,7 +110,14 @@ namespace SDKTemplate
             switch (cachedFileUpdaterUI.UIStatus)
             {
                 case UIStatus.Hidden:
-                    fileUpdateRequest.Status = FileUpdateStatus.UserInputNeeded;
+                    if (fileUpdateRequest.File.Name.Contains("ConflictingFile"))
+                    {
+                        fileUpdateRequest.Status = FileUpdateStatus.UserInputNeeded;
+                    }
+                    else
+                    {
+                        fileUpdateRequest.Status = FileUpdateStatus.Complete;
+                    }
                     fileUpdateRequestDeferral.Complete();
                     break;
                 case UIStatus.Visible:

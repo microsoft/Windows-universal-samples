@@ -39,6 +39,11 @@
                             Style="{StaticResource HomeButtonStyle}" 
                             HorizontalAlignment="Stretch" 
                             HorizontalContentAlignment="Left" />
+                    <Button Content="Scroll into View"
+                            Click="NavigateToSpecificPosition"
+                            Style="{StaticResource HomeButtonStyle}"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Left" />
             </StackPanel>
             </SplitView.Pane>
         </SplitView>

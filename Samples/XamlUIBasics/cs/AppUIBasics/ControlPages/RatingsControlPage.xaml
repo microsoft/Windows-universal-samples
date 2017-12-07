@@ -1,0 +1,57 @@
+﻿<Page x:Class="AppUIBasics.ControlPages.RatingControlPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+    <StackPanel>
+        <local:ControlExample x:Name="Example1" HeaderText="A simple RatingControl">
+
+            <StackPanel VerticalAlignment="Top">
+                <RatingControl x:Name="RatingControl1"
+                    IsClearEnabled="{x:Bind clearEnabledCheck.IsChecked.Value, Mode=OneWay}"
+                    IsReadOnly="{x:Bind readOnlyCheck.IsChecked.Value, Mode=OneWay}" HorizontalAlignment="Left" />
+                
+                <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                    <TextBlock Text="Your Rating:" />
+                    <TextBlock Margin="5,0,0,0" FontWeight="Bold" Text="{x:Bind RatingControl1.Value, Mode=OneWay}" />
+                </StackPanel>
+            </StackPanel>
+
+            <local:ControlExample.Options>
+                <StackPanel Width="220">
+                    <CheckBox x:Name="clearEnabledCheck" Content="IsClearEnabled" />
+                    <TextBlock Text="Swipe left to clear your rating." />
+                    <CheckBox x:Name="readOnlyCheck" Content="Is Read Only" Margin="0,12,0,0"/>
+                </StackPanel>
+            </local:ControlExample.Options>
+
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>&lt;RatingControl IsClearEnabled="<Run Text="{x:Bind clearEnabledCheck.IsChecked.Value, Mode=OneWay}"></Run>"
+                        IsReadOnly="<Run Text="{x:Bind readOnlyCheck.IsChecked.Value, Mode=OneWay}"></Run> " /&gt;
+                    </Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+        
+        <local:ControlExample x:Name="Example2" HeaderText="PlaceholderValue of RatingControl">
+            
+            <RatingControl x:Name="RatingControl2" HorizontalAlignment="Left" VerticalAlignment="Top"
+                PlaceholderValue="{x:Bind slider.Value, Mode=TwoWay}" />
+
+            <local:ControlExample.Options>
+                <StackPanel Width="220">
+                    <Slider x:Name="slider" Header="PlaceholderValue" Minimum="0" Maximum="5"
+                        StepFrequency="0.5" SmallChange="0.5" IsFocusEngagementEnabled="False"/>
+                </StackPanel>
+            </local:ControlExample.Options>
+
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>&lt;RatingControl PlaceholderValue="<Run Text="{x:Bind slider.Value, Mode=OneWay}"></Run>" /&gt;
+                    </Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+    </StackPanel>
+</Page>

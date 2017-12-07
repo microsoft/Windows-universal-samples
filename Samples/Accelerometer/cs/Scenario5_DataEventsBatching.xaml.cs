@@ -9,14 +9,12 @@
 //
 //*********************************************************
 
+using System;
+using Windows.Devices.Sensors;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using System;
-using Windows.Devices.Sensors;
-using Windows.Foundation;
-using System.Threading.Tasks;
-using Windows.UI.Core;
 
 namespace SDKTemplate
 {
@@ -34,56 +32,36 @@ namespace SDKTemplate
         public Scenario5_DataEventsBatching()
         {
             this.InitializeComponent();
+        }
 
-            accelerometer = Accelerometer.GetDefault();
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            accelerometer = Accelerometer.GetDefault(rootPage.AccelerometerReadingType);
             if (accelerometer != null)
             {
                 // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
                 // This value will be used later to activate the sensor.
-                uint minReportInterval = accelerometer.MinimumReportInterval;
-                desiredReportInterval = minReportInterval > 16 ? minReportInterval : 16;
+                desiredReportInterval = Math.Max(accelerometer.MinimumReportInterval, 16);
 
                 // MaxBatchSize will be 0 if the accelerometer does not support batching.
                 uint maxLatency = accelerometer.MaxBatchSize * desiredReportInterval;
-                desiredReportLatency = maxLatency < 10000 ? maxLatency : 10000;
+                desiredReportLatency = Math.Min(maxLatency, 10000);
+
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType + " accelerometer ready", NotifyType.StatusMessage);
+                ScenarioEnableButton.IsEnabled = true;
             }
             else
             {
-                rootPage.NotifyUser("No accelerometer found", NotifyType.ErrorMessage);
+                rootPage.NotifyUser(rootPage.AccelerometerReadingType + " accelerometer not found", NotifyType.ErrorMessage);
             }
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached. The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            ScenarioEnableButton.IsEnabled = true;
-            ScenarioDisableButton.IsEnabled = false;
-        }
-
-        /// <summary>
-        /// Invoked immediately before the Page is unloaded and is no longer the current source of a parent Frame.
-        /// </summary>
-        /// <param name="e">
-        /// Event data that can be examined by overriding code. The event data is representative
-        /// of the navigation that will unload the current Page unless canceled. The
-        /// navigation can potentially be canceled by setting Cancel.
-        /// </param>
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             if (ScenarioDisableButton.IsEnabled)
             {
-                Window.Current.VisibilityChanged -= new WindowVisibilityChangedEventHandler(VisibilityChanged);
-                accelerometer.ReadingChanged -= new TypedEventHandler<Accelerometer, AccelerometerReadingChangedEventArgs>(ReadingChanged);
-
-                // Restore the default report interval to release resources while the sensor is not in use
-                accelerometer.ReportInterval = 0;
+                ScenarioDisable();
             }
-
-            base.OnNavigatingFrom(e);
         }
 
         /// <summary>
@@ -101,12 +79,12 @@ namespace SDKTemplate
                 if (e.Visible)
                 {
                     // Re-enable sensor input (no need to restore the desired reportInterval... it is restored for us upon app resume)
-                    accelerometer.ReadingChanged += new TypedEventHandler<Accelerometer, AccelerometerReadingChangedEventArgs>(ReadingChanged);
+                    accelerometer.ReadingChanged += ReadingChanged;
                 }
                 else
                 {
                     // Disable sensor input (no need to restore the default reportInterval... resources will be released upon app suspension)
-                    accelerometer.ReadingChanged -= new TypedEventHandler<Accelerometer, AccelerometerReadingChangedEventArgs>(ReadingChanged);
+                    accelerometer.ReadingChanged -= ReadingChanged;
                 }
             }
         }
@@ -120,48 +98,34 @@ namespace SDKTemplate
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                AccelerometerReading reading = e.Reading;
-                ScenarioOutput_X.Text = String.Format("{0,5:0.00}", reading.AccelerationX);
-                ScenarioOutput_Y.Text = String.Format("{0,5:0.00}", reading.AccelerationY);
-                ScenarioOutput_Z.Text = String.Format("{0,5:0.00}", reading.AccelerationZ);
+                MainPage.SetReadingText(ScenarioOutput, e.Reading);
             });
         }
 
         /// <summary>
         /// This is the click handler for the 'Enable' button.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ScenarioEnable(object sender, RoutedEventArgs e)
+        private void ScenarioEnable()
         {
-            if (accelerometer != null)
-            {
-                // Establish the report interval
-                accelerometer.ReportInterval = desiredReportInterval;
+            // Establish the report interval
+            accelerometer.ReportInterval = desiredReportInterval;
 
-                // Establish the report latency. This is a no-op if the accelerometer does not support batching
-                accelerometer.ReportLatency = desiredReportLatency;
-                Window.Current.VisibilityChanged += new WindowVisibilityChangedEventHandler(VisibilityChanged);
-                accelerometer.ReadingChanged += new TypedEventHandler<Accelerometer, AccelerometerReadingChangedEventArgs>(ReadingChanged);
+            // Establish the report latency. This is a no-op if the accelerometer does not support batching
+            accelerometer.ReportLatency = desiredReportLatency;
+            Window.Current.VisibilityChanged += VisibilityChanged;
+            accelerometer.ReadingChanged += ReadingChanged;
 
-                ScenarioEnableButton.IsEnabled = false;
-                ScenarioDisableButton.IsEnabled = true;
-            }
-            else
-            {
-                rootPage.NotifyUser("No accelerometer found", NotifyType.ErrorMessage);
-            }
+            ScenarioEnableButton.IsEnabled = false;
+            ScenarioDisableButton.IsEnabled = true;
         }
 
         /// <summary>
         /// This is the click handler for the 'Disable' button.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ScenarioDisable(object sender, RoutedEventArgs e)
+        private void ScenarioDisable()
         {
-            Window.Current.VisibilityChanged -= new WindowVisibilityChangedEventHandler(VisibilityChanged);
-            accelerometer.ReadingChanged -= new TypedEventHandler<Accelerometer, AccelerometerReadingChangedEventArgs>(ReadingChanged);
+            Window.Current.VisibilityChanged -= VisibilityChanged;
+            accelerometer.ReadingChanged -= ReadingChanged;
 
             // Restore the default report interval to release resources while the sensor is not in use
             accelerometer.ReportInterval = 0;

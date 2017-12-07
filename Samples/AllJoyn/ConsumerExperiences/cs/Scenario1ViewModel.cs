@@ -12,11 +12,14 @@
 using com.microsoft.Samples.SecureInterface;
 using SDKTemplate;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Data.Xml.Dom;
 using Windows.Devices.AllJoyn;
+using Windows.Devices.Enumeration;
 using Windows.UI.Core;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
@@ -28,7 +31,7 @@ namespace AllJoynConsumerExperiences
         private MainPage m_rootPage;
         private CoreDispatcher m_dispatcher;
         private AllJoynBusAttachment m_busAttachment = null;
-        private SecureInterfaceWatcher m_watcher = null;
+        private DeviceWatcher m_watcher = null;
         private SecureInterfaceConsumer m_consumer = null;
         private TaskCompletionSource<bool> m_authenticateClicked = null;
         private Visibility m_authVisibility = Visibility.Collapsed;
@@ -37,7 +40,7 @@ namespace AllJoynConsumerExperiences
         private bool m_isCredentialsRequested = false;
         private bool m_isUpperCaseEnabled = false;
         private bool m_callSetProperty = true;
-        private string m_key = "";
+        private string m_key = string.Empty;
 
         public Scenario1ViewModel()
         {
@@ -56,7 +59,7 @@ namespace AllJoynConsumerExperiences
             private set
             {
                 m_authVisibility = value;
-                RaisePropertyChangedEventAsync("AuthenticationVisibility");
+                RaisePropertyChangedEventAsync();
             }
         }
 
@@ -69,7 +72,7 @@ namespace AllJoynConsumerExperiences
             private set
             {
                 m_consumerOptionsVisibility = value;
-                RaisePropertyChangedEventAsync("ConsumerOptionsVisibility");
+                RaisePropertyChangedEventAsync();
             }
         }
 
@@ -80,9 +83,8 @@ namespace AllJoynConsumerExperiences
             {
                 if (value != m_key)
                 {
-                    // Ignore hyphens in the entered key.
-                    m_key = value.Replace("-", string.Empty);
-                    RaisePropertyChangedEventAsync("EnteredKey");
+                    m_key = value;
+                    RaisePropertyChangedEventAsync();
                 }
             }
         }
@@ -100,7 +102,7 @@ namespace AllJoynConsumerExperiences
             set
             {
                 m_isUpperCaseEnabled = value;
-                RaisePropertyChangedEventAsync("IsUpperCaseEnabled");
+                RaisePropertyChangedEventAsync();
                 if (m_callSetProperty)
                 {
                     SetIsUpperCaseEnabledAsync(m_isUpperCaseEnabled);
@@ -156,32 +158,31 @@ namespace AllJoynConsumerExperiences
                 m_busAttachment.AuthenticationComplete -= BusAttachment_AuthenticationComplete;
                 m_busAttachment.StateChanged -= BusAttachment_StateChanged;
                 m_busAttachment.Disconnect();
+                m_busAttachment = null;
             }
         }
 
-        protected async void RaisePropertyChangedEventAsync(string name)
+        protected async void RaisePropertyChangedEventAsync([CallerMemberName] string name = "")
         {
             await m_dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                PropertyChangedEventHandler handler = PropertyChanged;
-                if (handler != null)
-                {
-                    handler(this, new PropertyChangedEventArgs(name));
-                }
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
             });
         }
 
         private void Start()
         {
+            ScenarioCleanup();
+
             m_busAttachment = new AllJoynBusAttachment();
             m_busAttachment.StateChanged += BusAttachment_StateChanged;
             m_busAttachment.AuthenticationMechanisms.Clear();
-            m_busAttachment.AuthenticationMechanisms.Add(AllJoynAuthenticationMechanism.EcdhePsk);
+            m_busAttachment.AuthenticationMechanisms.Add(AllJoynAuthenticationMechanism.EcdheSpeke);
             m_busAttachment.AuthenticationComplete += BusAttachment_AuthenticationComplete;
             m_busAttachment.CredentialsRequested += BusAttachment_CredentialsRequested;
 
             // Initialize a watcher object to listen for about interfaces.
-            m_watcher = new SecureInterfaceWatcher(m_busAttachment);
+            m_watcher = AllJoynBusAttachment.GetWatcher(new List<string> { "com.microsoft.Samples.SecureInterface" });
 
             // Subscribing to the added event that will be raised whenever a producer for this service is found.
             m_watcher.Added += Watcher_Added;
@@ -194,7 +195,7 @@ namespace AllJoynConsumerExperiences
 
         private void Authenticate()
         {
-            if (String.IsNullOrWhiteSpace(m_key))
+            if (string.IsNullOrWhiteSpace(m_key))
             {
                 UpdateStatusAsync("Please enter a key.", NotifyType.ErrorMessage);
             }
@@ -212,7 +213,7 @@ namespace AllJoynConsumerExperiences
         {
             if (m_consumer != null)
             {
-                if (String.IsNullOrWhiteSpace(InputString1) || String.IsNullOrWhiteSpace(InputString2))
+                if (string.IsNullOrWhiteSpace(InputString1) || string.IsNullOrWhiteSpace(InputString2))
                 {
                     UpdateStatusAsync("Input strings cannot be empty.", NotifyType.ErrorMessage);
                 }
@@ -274,9 +275,9 @@ namespace AllJoynConsumerExperiences
             await m_authenticateClicked.Task;
             m_authenticateClicked = null;
 
-            if (args.Credentials.AuthenticationMechanism == AllJoynAuthenticationMechanism.EcdhePsk)
+            if (args.Credentials.AuthenticationMechanism == AllJoynAuthenticationMechanism.EcdheSpeke)
             {
-                if (!String.IsNullOrEmpty(m_key))
+                if (!string.IsNullOrEmpty(m_key))
                 {
                     args.Credentials.PasswordCredential.Password = m_key;
                 }
@@ -293,22 +294,29 @@ namespace AllJoynConsumerExperiences
             credentialsDeferral.Complete();
         }
 
-        private async void Watcher_Added(SecureInterfaceWatcher sender, AllJoynServiceInfo args)
+        private async void Watcher_Added(DeviceWatcher sender, DeviceInformation args)
         {
-            // Optional - Get the about data of the producer. 
-            AllJoynAboutDataView aboutData = await AllJoynAboutDataView.GetDataBySessionPortAsync(args.UniqueName, m_busAttachment, args.SessionPort);
-            UpdateStatusAsync(string.Format("Found {0} on {1} from manufacturer: {2}. Connecting...", aboutData.AppName, aboutData.DeviceName, aboutData.Manufacturer), NotifyType.StatusMessage);
+            // Optional - Get the About data of the producer. 
+            AllJoynAboutDataView aboutData = await m_busAttachment.GetAboutDataAsync(await AllJoynServiceInfo.FromIdAsync(args.Id));
 
-            // Attempt to join the session when a producer is discovered.
-            SecureInterfaceJoinSessionResult joinSessionResult = await SecureInterfaceConsumer.JoinSessionAsync(args, sender);
-
-            if (joinSessionResult.Status == AllJoynStatus.Ok)
+            // Check to see if device name is populated in the about data, since device name is not a mandatory field.
+            if (string.IsNullOrEmpty(aboutData.DeviceName))
             {
-                DisposeConsumer();
-                m_consumer = joinSessionResult.Consumer;
+                UpdateStatusAsync(string.Format("Found {0} from manufacturer: {1}. Connecting...", aboutData.AppName, aboutData.Manufacturer), NotifyType.StatusMessage);
+            }
+            else
+            {
+                UpdateStatusAsync(string.Format("Found {0} on {1} from manufacturer: {2}. Connecting...", aboutData.AppName, aboutData.DeviceName, aboutData.Manufacturer), NotifyType.StatusMessage);
+            }
+
+            DisposeConsumer();
+            UpdateStatusAsync("Joining session...", NotifyType.StatusMessage);
+            m_consumer = await SecureInterfaceConsumer.FromIdAsync(args.Id, m_busAttachment);
+            if (m_consumer != null)
+            {
                 m_consumer.IsUpperCaseEnabledChanged += Consumer_IsUpperCaseEnabledChanged;
                 m_consumer.Signals.TextSentReceived += Signals_TextSentReceived;
-                m_consumer.SessionLost += Consumer_SessionLost;
+                m_consumer.Session.Lost += Consumer_SessionLost;
 
                 // At the time of connection, the request credentials callback not being invoked is an
                 // indication that the consumer and producer are already authenticated from a previous session.
@@ -333,11 +341,11 @@ namespace AllJoynConsumerExperiences
             }
             else
             {
-                UpdateStatusAsync(string.Format("Attempt to connect failed with AllJoyn error: 0x{0:X}.", joinSessionResult.Status), NotifyType.ErrorMessage);
+                UpdateStatusAsync("Attempt to join session failed.", NotifyType.ErrorMessage);
             }
         }
 
-        private void Consumer_SessionLost(SecureInterfaceConsumer sender, AllJoynSessionLostEventArgs args)
+        private void Consumer_SessionLost(AllJoynSession sender, AllJoynSessionLostEventArgs args)
         {
             UpdateStatusAsync(string.Format("AllJoyn session with the producer lost due to {0}.", args.Reason.ToString()), NotifyType.StatusMessage);
             ConsumerOptionsVisibility = Visibility.Collapsed;
@@ -346,15 +354,15 @@ namespace AllJoynConsumerExperiences
 
         private void Signals_TextSentReceived(SecureInterfaceSignals sender, SecureInterfaceTextSentReceivedEventArgs args)
         {
-            //Show UI Toast
+            // Show UI Toast.
             ToastTemplateType toastTemplate = ToastTemplateType.ToastText02;
             XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
 
-            //Populate UI Toast
+            // Populate UI Toast.
             XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
             toastTextElements[0].AppendChild(toastXml.CreateTextNode("Signal Received - " + args.Message));
 
-            //Create and Send UI Toast
+            // Create and Send UI Toast.
             ToastNotification toast = new ToastNotification(toastXml);
             ToastNotificationManager.CreateToastNotifier().Show(toast);
 
@@ -399,7 +407,7 @@ namespace AllJoynConsumerExperiences
         {
             if (m_consumer != null)
             {
-                m_consumer.SessionLost -= Consumer_SessionLost;
+                m_consumer.Session.Lost -= Consumer_SessionLost;
                 m_consumer.Signals.TextSentReceived -= Signals_TextSentReceived;
                 m_consumer.IsUpperCaseEnabledChanged -= Consumer_IsUpperCaseEnabledChanged;
                 m_consumer.Dispose();
@@ -413,7 +421,6 @@ namespace AllJoynConsumerExperiences
             {
                 m_watcher.Added -= Watcher_Added;
                 m_watcher.Stop();
-                m_watcher.Dispose();
                 m_watcher = null;
             }
         }

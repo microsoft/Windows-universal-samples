@@ -22,12 +22,12 @@ namespace SDKTemplate
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title="Events", ClassType=typeof(Scenario1_Events)},
-            new Scenario() { Title="History", ClassType=typeof(Scenario2_History)},
-            new Scenario() { Title="Current step count", ClassType=typeof(Scenario3_CurrentStepCount)}
+            new Scenario() { Title="Events", ClassType=typeof(Scenario1_Events) },
+            new Scenario() { Title="History", ClassType=typeof(Scenario2_History) },
+            new Scenario() { Title="Current step count", ClassType=typeof(Scenario3_CurrentStepCount) },
+            new Scenario() { Title="Background Pedometer", ClassType=typeof(Scenario4_BackgroundPedometer) }
         };
     }
-
     public class Scenario
     {
         public string Title { get; set; }

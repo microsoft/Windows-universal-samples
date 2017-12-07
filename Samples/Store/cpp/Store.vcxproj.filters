@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Scenario1_TrialMode.xaml.cpp" />
+    <ClCompile Include="Scenario2_InAppPurchase.xaml.cpp" />
+    <ClCompile Include="Scenario4_ConsumableProduct.xaml.cpp" />
+    <ClCompile Include="Scenario3_UnmanagedConsumable.xaml.cpp" />
+    <ClCompile Include="Scenario5_UserCollection.xaml.cpp" />
+    <ClCompile Include="Scenario6_AppListingURI.xaml.cpp" />
+    <ClCompile Include="Scenario7_B2B.xaml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Scenario1_TrialMode.xaml.h" />
+    <ClInclude Include="Scenario2_InAppPurchase.xaml.h" />
+    <ClInclude Include="Scenario4_ConsumableProduct.xaml.h" />
+    <ClInclude Include="Scenario3_UnmanagedConsumable.xaml.h" />
+    <ClInclude Include="Scenario5_UserCollection.xaml.h" />
+    <ClInclude Include="Scenario6_AppListingURI.xaml.h" />
+    <ClInclude Include="Scenario7_B2B.xaml.h" />
+    <ClInclude Include="ItemsListViewModel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
+    <Page Include="..\shared\Scenario1_TrialMode.xaml" />
+    <Page Include="..\shared\Scenario2_InAppPurchase.xaml" />
+    <Page Include="..\shared\Scenario4_ConsumableProduct.xaml" />
+    <Page Include="..\shared\Scenario3_UnmanagedConsumable.xaml" />
+    <Page Include="..\shared\Scenario5_UserCollection.xaml" />
+    <Page Include="..\shared\Scenario6_AppListingURI.xaml" />
+    <Page Include="..\shared\Scenario7_B2B.xaml" />
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{602dcdc6-955b-4d8b-b891-b9736bdad41e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{c94ee49f-5645-473b-bd60-ebc58bab2ede}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

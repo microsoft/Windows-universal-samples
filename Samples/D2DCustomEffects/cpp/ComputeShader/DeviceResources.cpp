@@ -59,7 +59,13 @@ namespace ScreenRotation
 };
 
 // Constructor for DeviceResources.
-DX::DeviceResources::DeviceResources() : 
+DX::DeviceResources::DeviceResources() :
+    DeviceResources(false /* _In_ bool forceWarpDevice */)
+{}
+
+// Constructor for DeviceResources; allows the caller to force usage of the WARP software
+// device which is useful if we need to use D3D features that are unsupported by the hardware.
+DX::DeviceResources::DeviceResources(_In_ bool forceWarpDevice) :
     m_screenViewport(),
     m_d3dFeatureLevel(D3D_FEATURE_LEVEL_9_1),
     m_d3dRenderTargetSize(),
@@ -68,7 +74,8 @@ DX::DeviceResources::DeviceResources() :
     m_nativeOrientation(DisplayOrientations::None),
     m_currentOrientation(DisplayOrientations::None),
     m_dpi(-1.0f),
-    m_deviceNotify(nullptr)
+    m_deviceNotify(nullptr),
+    m_forceWarpDevice(forceWarpDevice)
 {
     CreateDeviceIndependentResources();
     CreateDeviceResources();
@@ -150,14 +157,17 @@ void DX::DeviceResources::CreateDeviceResources()
     ComPtr<ID3D11Device> device;
     ComPtr<ID3D11DeviceContext> context;
 
+    // Create a device using the hardware graphics driver, unless WARP override is set.
+    D3D_DRIVER_TYPE driverType = m_forceWarpDevice ? D3D_DRIVER_TYPE_WARP : D3D_DRIVER_TYPE_HARDWARE;
+
     HRESULT hr = D3D11CreateDevice(
         nullptr,                    // Specify nullptr to use the default adapter.
-        D3D_DRIVER_TYPE_HARDWARE,   // Create a device using the hardware graphics driver.
+        driverType,
         0,                          // Should be 0 unless the driver is D3D_DRIVER_TYPE_SOFTWARE.
         creationFlags,              // Set debug and Direct2D compatibility flags.
         featureLevels,              // List of feature levels this app can support.
         ARRAYSIZE(featureLevels),   // Size of the list above.
-        D3D11_SDK_VERSION,          // Always set this to D3D11_SDK_VERSION for Windows Store apps.
+        D3D11_SDK_VERSION,          // Always set this to D3D11_SDK_VERSION for Windows Runtime apps.
         &device,                    // Returns the Direct3D device created.
         &m_d3dFeatureLevel,         // Returns feature level of device created.
         &context                    // Returns the device immediate context.
@@ -278,7 +288,7 @@ void DX::DeviceResources::CreateWindowSizeDependentResources()
         swapChainDesc.SampleDesc.Quality = 0;
         swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
         swapChainDesc.BufferCount = 2; // Use double-buffering to minimize latency.
-        swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL; // All Windows Store apps must use this SwapEffect.
+        swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL; // All Windows Runtime apps must use this SwapEffect.
         swapChainDesc.Flags = 0;    
         swapChainDesc.Scaling = DXGI_SCALING_NONE;
         swapChainDesc.AlphaMode = DXGI_ALPHA_MODE_IGNORE;
@@ -435,7 +445,7 @@ void DX::DeviceResources::CreateWindowSizeDependentResources()
 
     m_d2dContext->SetTarget(m_d2dTargetBitmap.Get());
 
-    // Grayscale text anti-aliasing is recommended for all Windows Store apps.
+    // Grayscale text anti-aliasing is recommended for all Windows Runtime apps.
     m_d2dContext->SetTextAntialiasMode(D2D1_TEXT_ANTIALIAS_MODE_GRAYSCALE);
 }
 

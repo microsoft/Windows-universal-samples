@@ -80,7 +80,10 @@ namespace SDKTemplate
             {
                 if (_properties is VideoEncodingProperties)
                 {
-                    return (_properties as VideoEncodingProperties).FrameRate.Numerator / (_properties as VideoEncodingProperties).FrameRate.Denominator;
+                    if ((_properties as VideoEncodingProperties).FrameRate.Denominator != 0)
+                    {
+                        return (_properties as VideoEncodingProperties).FrameRate.Numerator / (_properties as VideoEncodingProperties).FrameRate.Denominator;
+                    }
                 }
 
                 return 0;
@@ -111,7 +114,7 @@ namespace SDKTemplate
             }
             else if (_properties is VideoEncodingProperties)
             {
-                return Width + "x" + Height + " [" + AspectRatio + "] " + FrameRate + "FPS" + " " + _properties.Subtype;
+                return Width + "x" + Height + " [" + AspectRatio + "] " + FrameRate + "FPS " + _properties.Subtype;
             }
 
             return String.Empty;

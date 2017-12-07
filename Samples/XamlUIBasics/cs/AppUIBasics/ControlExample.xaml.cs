@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Markup;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
-
-namespace AppUIBasics.ControlPages
+namespace AppUIBasics
 {
     [ContentProperty(Name="Example")]
     public sealed partial class ControlExample : UserControl
@@ -35,16 +30,18 @@ namespace AppUIBasics.ControlPages
             set { SetValue(ExampleProperty, value); }
         }
 
+        public static readonly DependencyProperty OptionsProperty = DependencyProperty.Register("Options", typeof(object), typeof(ControlExample), new PropertyMetadata(null));
+        public object Options
+        {
+            get { return GetValue(OptionsProperty); }
+            set { SetValue(OptionsProperty, value); }
+        }
+
         public static readonly DependencyProperty XamlProperty = DependencyProperty.Register("Xaml", typeof(object), typeof(ControlExample), new PropertyMetadata(null));
         public object Xaml
         {
             get { return GetValue(XamlProperty); }
-            set
-            {
-                if (value != null)
-                    XamlBorder.Visibility = Visibility.Visible;
-                SetValue(XamlProperty, value);
-            }
+            set { SetValue(XamlProperty, value); }
         }
 
         public static readonly DependencyProperty ExampleHeightProperty = DependencyProperty.Register("ExampleHeight", typeof(GridLength), typeof(ControlExample), new PropertyMetadata(new GridLength(1, GridUnitType.Star)));
@@ -64,11 +61,6 @@ namespace AppUIBasics.ControlPages
         public ControlExample()
         {
             this.InitializeComponent();
-
-            if (Xaml == null)
-            {
-                XamlBorder.Visibility = Visibility.Collapsed;
-            }
         }
     }
 }

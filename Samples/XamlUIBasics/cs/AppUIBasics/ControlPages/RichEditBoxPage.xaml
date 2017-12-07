@@ -13,7 +13,7 @@
     x:Class="AppUIBasics.ControlPages.RichEditBoxPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:AppUIBasics.ControlPages"
+    xmlns:local="using:AppUIBasics"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -33,62 +33,57 @@
             <AppBarButton x:Name="fontColorButton" Icon="FontColor" ToolTipService.ToolTip="Font color" RelativePanel.AlignRightWithPanel="True">
                 <AppBarButton.Flyout>
                     <Flyout>
-                        <Grid>
-                            <Grid.Resources>
+                        <VariableSizedWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="3">
+                            <VariableSizedWrapGrid.Resources>
                                 <Style TargetType="Rectangle">
                                     <Setter Property="Width" Value="50"/>
                                     <Setter Property="Height" Value="50"/>
                                 </Style>
-                            </Grid.Resources>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Button x:Name="black" Click="ColorButton_Click">
+                            </VariableSizedWrapGrid.Resources>
+                            <Button Click="ColorButton_Click">
                                 <Button.Content>
                                     <Rectangle Fill="Black"/>
                                 </Button.Content>
                             </Button>
-                            <Button x:Name="gray" Click="ColorButton_Click" Grid.Row="1">
+                            <Button Click="ColorButton_Click">
                                 <Button.Content>
                                     <Rectangle Fill="Gray"/>
                                 </Button.Content>
                             </Button>
-                            <Button x:Name="greenyellow" Click="ColorButton_Click" Grid.Column="1">
+                            <Button Click="ColorButton_Click">
                                 <Button.Content>
                                     <Rectangle Fill="GreenYellow"/>
                                 </Button.Content>
                             </Button>
-                            <Button x:Name="green" Click="ColorButton_Click" Grid.Row="1" Grid.Column="1">
+                            <Button Click="ColorButton_Click">
                                 <Button.Content>
                                     <Rectangle Fill="Green"/>
                                 </Button.Content>
                             </Button>
-                            <Button x:Name="blue" Click="ColorButton_Click" Grid.Column="2">
+                            <Button Click="ColorButton_Click">
                                 <Button.Content>
                                     <Rectangle Fill="Blue"/>
                                 </Button.Content>
                             </Button>
-                            <Button x:Name="red" Click="ColorButton_Click" Grid.Row="1" Grid.Column="2">
+                            <Button Click="ColorButton_Click">
                                 <Button.Content>
                                     <Rectangle Fill="Red"/>
                                 </Button.Content>
                             </Button>
-
-                        </Grid>
+                        </VariableSizedWrapGrid>
                     </Flyout>
                 </AppBarButton.Flyout>
             </AppBarButton>
 
             <RichEditBox x:Name="editor" Height="200" RelativePanel.Below="openFileButton" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+            <StackPanel Orientation="Horizontal" RelativePanel.Below="editor" RelativePanel.AlignLeftWith="editor" Margin="0,10,0,0">
+                <TextBlock x:Name="findBoxLabel" Text="Find:" Height="20"/>
+                <TextBox x:Name="findBox" Width="150" Height="20" PlaceholderText="Enter search text" Margin="10,0,0,0"
+                         TextChanged="{x:Bind FindBoxHighlightMatches}" GotFocus="{x:Bind FindBoxHighlightMatches}" LostFocus="{x:Bind FindBoxRemoveHighlights}"/>
+            </StackPanel>
         </RelativePanel>
         <local:ControlExample.Xaml>
-            <RichTextBlock>
+            <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                 <Paragraph>&lt;RichEditBox x:Name="editor" Height="200"/&gt;</Paragraph>
             </RichTextBlock>
         </local:ControlExample.Xaml>

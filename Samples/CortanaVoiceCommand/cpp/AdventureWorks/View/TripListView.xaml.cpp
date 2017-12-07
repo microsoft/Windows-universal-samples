@@ -34,6 +34,10 @@ TripListView::TripListView()
 void TripListView::tripListBox_SelectionChanged(Object^ sender, SelectionChangedEventArgs^ args)
 {
     this->DefaultViewModel->SelectionChanged();
+
+    // Immediately deselect the item so that the list box returns to its initial state.
+    DefaultViewModel->SelectedTrip = nullptr;
+
 }
 
 void TripListView::Footer_Click(Platform::Object^ sender, RoutedEventArgs^ args)
@@ -53,9 +57,11 @@ TripListViewModel^ TripListView::DefaultViewModel::get()
 void TripListView::OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ args)
 {
     defaultViewModel = (TripListViewModel^)this->DataContext;
-    if (this->DefaultViewModel->Trips->Size == 0)
+    if (!tripsLoaded)
     {
+        // On initial launch, load the trips.
         defaultViewModel->LoadTrips();
+        tripsLoaded = true;
     }
 
     if (args->Parameter != nullptr)

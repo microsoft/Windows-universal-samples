@@ -1,0 +1,37 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario.css" />
+    <script src="/js/scenario2.js"></script>
+    <script src="/js/cryptographichelpers.js"></script>
+    <script src="/js/appdata.js"></script>
+    <script src="/js/onboardingenumtypes.js"></script>
+</head>
+<body>
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>
+                    The Onboarding producer accepts a connection from the Onboarding consumer. Once connected, the producer will pass back a list of 
+                    available networks, then accept an SSID and password for connection purposes as described in the Onboarding Service Framework XML.
+                </p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <div><button id="launchButton">Launch</button></div>
+            <div id="producerOptions">
+                <div>Key: <span id="keyDisplay" class="selectableText"></span></div>
+                <div>Sample Networks: <select id="sampleNetworkSelect"></select></div>
+                <div>Password: <span id="passwordDisplay" class="selectableText"></span></div>
+                <div>Auth Type: <span id="authTypeDisplay"></span></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

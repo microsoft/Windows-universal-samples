@@ -9,18 +9,16 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using System;
 using System.Threading.Tasks;
+using Windows.Devices.PointOfService;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Windows.Devices.PointOfService;
-
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace CashDrawerSample
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -118,7 +116,7 @@ namespace CashDrawerSample
 
             if (drawer == null)
             {
-                drawer = await CashDrawer.GetDefaultAsync();
+                drawer = await DeviceHelpers.GetFirstCashDrawerAsync();
                 if (drawer == null)
                     return false;
             }
@@ -177,12 +175,16 @@ namespace CashDrawerSample
         /// </summary>
         private void ResetScenarioState()
         {
-            drawer = null;
-
             if (claimedDrawer != null)
             {
                 claimedDrawer.Dispose();
                 claimedDrawer = null;
+            }
+
+            if (drawer != null)
+            {
+                drawer.Dispose();
+                drawer = null;
             }
 
             InitDrawerButton.IsEnabled = true;

@@ -27,63 +27,44 @@ namespace AppUIBasics.ControlPages
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
         {
-            ItemPage itemPage = NavigationRootPage.RootFrame.Content as ItemPage;
-
-            if (itemPage != null)
-            {
-                CommandBar appBar = itemPage.BottomCommandBar;
-
-                appBar.IsOpen = true;
-                appBar.IsSticky = true;
-            }
+            PrimaryCommandBar.IsOpen = true;
+            PrimaryCommandBar.IsSticky = true;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            ItemPage itemPage = NavigationRootPage.RootFrame.Content as ItemPage;
-
-            if (itemPage != null)
-            {
-                CommandBar commandBar = itemPage.BottomCommandBar;
-
-                commandBar.IsOpen = false;
-            }
+            PrimaryCommandBar.IsOpen = false;
+            PrimaryCommandBar.IsSticky = false;
         }
 
         private void AddSecondaryCommands_Click(object sender, RoutedEventArgs e)
         {
             // Add compact button to the command bar. It provides functionality specific
             // to this page, and is removed when leaving the page.
-            ItemPage itemPage = NavigationRootPage.RootFrame.Content as ItemPage;
 
-            if (itemPage != null)
+            if (PrimaryCommandBar.SecondaryCommands.Count == 1)
             {
-                CommandBar commandBar = itemPage.BottomCommandBar;
+                var newButton = new AppBarButton();
+                newButton.Icon = new SymbolIcon(Symbol.Add);
+                newButton.Label = "Button 1";
+                PrimaryCommandBar.SecondaryCommands.Add(newButton);
 
-                if (commandBar.SecondaryCommands.Count == 1)
-                {
-                    var newButton = new AppBarButton();
-                    newButton.Icon = new SymbolIcon(Symbol.Add);
-                    newButton.Label = "Button 1";
-                    commandBar.SecondaryCommands.Add(newButton);
+                newButton = new AppBarButton();
+                newButton.Icon = new SymbolIcon(Symbol.Delete);
+                newButton.Label = "Button 2";
+                PrimaryCommandBar.SecondaryCommands.Add(newButton);
 
-                    newButton = new AppBarButton();
-                    newButton.Icon = new SymbolIcon(Symbol.Delete);
-                    newButton.Label = "Button 2";
-                    commandBar.SecondaryCommands.Add(newButton);
+                PrimaryCommandBar.SecondaryCommands.Add(new AppBarSeparator());
 
-                    commandBar.SecondaryCommands.Add(new AppBarSeparator());
+                newButton = new AppBarButton();
+                newButton.Icon = new SymbolIcon(Symbol.FontDecrease);
+                newButton.Label = "Button 3";
+                PrimaryCommandBar.SecondaryCommands.Add(newButton);
 
-                    newButton = new AppBarButton();
-                    newButton.Icon = new SymbolIcon(Symbol.FontDecrease);
-                    newButton.Label = "Button 3";
-                    commandBar.SecondaryCommands.Add(newButton);
-
-                    newButton = new AppBarButton();
-                    newButton.Icon = new SymbolIcon(Symbol.FontIncrease);
-                    newButton.Label = "Button 4";
-                    commandBar.SecondaryCommands.Add(newButton);
-                }
+                newButton = new AppBarButton();
+                newButton.Icon = new SymbolIcon(Symbol.FontIncrease);
+                newButton.Label = "Button 4";
+                PrimaryCommandBar.SecondaryCommands.Add(newButton);
             }
         }
 
@@ -100,16 +81,9 @@ namespace AppUIBasics.ControlPages
 
         private void RemoveSecondaryCommands()
         {
-            ItemPage itemPage = NavigationRootPage.RootFrame.Content as ItemPage;
-
-            if (itemPage != null)
+            while (PrimaryCommandBar.SecondaryCommands.Count > 1)
             {
-                CommandBar commandBar = itemPage.BottomCommandBar;
-
-                while (commandBar.SecondaryCommands.Count > 1)
-                {
-                    commandBar.SecondaryCommands.RemoveAt(commandBar.SecondaryCommands.Count - 1);
-                }
+                PrimaryCommandBar.SecondaryCommands.RemoveAt(PrimaryCommandBar.SecondaryCommands.Count - 1);
             }
         }
     }

@@ -47,9 +47,6 @@ void Scenario_ContinuousRecognitionListGrammar::OnNavigatedTo(NavigationEventArg
 {
     Page::OnNavigatedTo(e);
 
-    // Keep track of the UI thread dispatcher, as speech events will come in on a separate thread.
-    dispatcher = CoreWindow::GetForCurrentThread()->Dispatcher;
-
     // Prompt the user for permission to access the microphone. This request will only happen
     // once, it will not re-prompt if the user rejects the permission.
     create_task(AudioCapturePermissions::RequestMicrophonePermissionAsync(), task_continuation_context::use_current())
@@ -58,23 +55,23 @@ void Scenario_ContinuousRecognitionListGrammar::OnNavigatedTo(NavigationEventArg
         if (permissionGained)
         {
             this->btnContinuousRecognize->IsEnabled = true;
+
+            Windows::Globalization::Language^ speechLanguage = SpeechRecognizer::SystemSpeechLanguage;
+            speechContext = ResourceContext::GetForCurrentView();
+            speechContext->Languages = ref new VectorView<String^>(1, speechLanguage->LanguageTag);
+
+            speechResourceMap = ResourceManager::Current->MainResourceMap->GetSubtree(L"LocalizationSpeechResources");
+
+            PopulateLanguageDropdown();
+            InitializeRecognizer(SpeechRecognizer::SystemSpeechLanguage);
         }
         else
         {
             this->resultTextBlock->Visibility = Windows::UI::Xaml::Visibility::Visible;
             this->resultTextBlock->Text = L"Permission to access capture resources was not given by the user; please set the application setting in Settings->Privacy->Microphone.";
+            this->cbLanguageSelection->IsEnabled = false;
         }
-    }).then([this]()
-    {
-        Windows::Globalization::Language^ speechLanguage = SpeechRecognizer::SystemSpeechLanguage;
-        speechContext = ResourceContext::GetForCurrentView();
-        speechContext->Languages = ref new VectorView<String^>(1, speechLanguage->LanguageTag);
-
-        speechResourceMap = ResourceManager::Current->MainResourceMap->GetSubtree(L"LocalizationSpeechResources");
-
-        PopulateLanguageDropdown();
-        InitializeRecognizer(SpeechRecognizer::SystemSpeechLanguage);
-    }, task_continuation_context::use_current());
+    });
 }
 
 /// <summary>
@@ -149,7 +146,7 @@ void Scenario_ContinuousRecognitionListGrammar::InitializeRecognizer(Windows::Gl
             speechResourceMap->GetValue("ListGrammarGoHome", speechContext)->ValueAsString + L"', '" +
             speechResourceMap->GetValue("ListGrammarGoToContosoStudio", speechContext)->ValueAsString + L"' or '" +
             speechResourceMap->GetValue("ListGrammarShowMessage", speechContext)->ValueAsString + L"'";
-        listGrammarHelpText->Text = 
+        listGrammarHelpText->Text =
             speechResourceMap->GetValue("ListGrammarHelpText", speechContext)->ValueAsString + L"\n" +
             uiOptionsText;
 
@@ -231,7 +228,7 @@ void Scenario_ContinuousRecognitionListGrammar::OnNavigatedFrom(NavigationEventA
         }
         else
         {
-            cleanupTask = create_task([]() {}, task_continuation_context::use_current());
+            cleanupTask = task_from_result();
         }
 
         cleanupTask.then([this]()
@@ -255,6 +252,8 @@ void Scenario_ContinuousRecognitionListGrammar::OnNavigatedFrom(NavigationEventA
 /// <param name="e">Unused event details</param>
 void Scenario_ContinuousRecognitionListGrammar::ContinuousRecognize_Click(Object^ sender, RoutedEventArgs^ e)
 {
+    btnContinuousRecognize->IsEnabled = false;
+
     // The recognizer can only start listening in a continuous fashion if the recognizer is currently idle.
     // This prevents an exception from occurring.
     if (speechRecognizer->State == SpeechRecognizerState::Idle)
@@ -278,6 +277,8 @@ void Scenario_ContinuousRecognitionListGrammar::ContinuousRecognize_Click(Object
                 auto messageDialog = ref new Windows::UI::Popups::MessageDialog(exception->Message, "Exception");
                 create_task(messageDialog->ShowAsync());
             }
+        }).then([this]() {
+            btnContinuousRecognize->IsEnabled = true;
         });
     }
     else
@@ -288,7 +289,9 @@ void Scenario_ContinuousRecognitionListGrammar::ContinuousRecognize_Click(Object
         ContinuousRecoButtonText->Text = " Continuous Recognition";
         cbLanguageSelection->IsEnabled = true;
 
-        create_task(speechRecognizer->ContinuousRecognitionSession->CancelAsync());
+        create_task(speechRecognizer->ContinuousRecognitionSession->CancelAsync()).then([this]() {
+            btnContinuousRecognize->IsEnabled = true;
+        });
     }
 }
 
@@ -299,7 +302,7 @@ void Scenario_ContinuousRecognitionListGrammar::ContinuousRecognize_Click(Object
 /// <param name="args">The current state of the recognizer.</param>
 void Scenario_ContinuousRecognitionListGrammar::SpeechRecognizer_StateChanged(SpeechRecognizer ^sender, SpeechRecognizerStateChangedEventArgs ^args)
 {
-    dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
+    Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
     {
         rootPage->NotifyUser("Speech recognizer state: " + args->State.ToString(), NotifyType::StatusMessage);
     }));
@@ -316,7 +319,7 @@ void Scenario_ContinuousRecognitionListGrammar::ContinuousRecognitionSession_Com
 {
     if (args->Status != SpeechRecognitionResultStatus::Success)
     {
-        dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
+        Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args]()
         {
             rootPage->NotifyUser("Continuous Recognition Completed: " + args->Status.ToString(), NotifyType::ErrorMessage);
             ContinuousRecoButtonText->Text = " Continuous Recognition";
@@ -347,7 +350,7 @@ void Scenario_ContinuousRecognitionListGrammar::ContinuousRecognitionSession_Res
     if (args->Result->Confidence == SpeechRecognitionConfidence::Medium ||
         args->Result->Confidence == SpeechRecognitionConfidence::High)
     {
-        dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args, tag]()
+        Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args, tag]()
         {
             heardYouSayTextBlock->Visibility = Windows::UI::Xaml::Visibility::Visible;
             resultTextBlock->Visibility = Windows::UI::Xaml::Visibility::Visible;
@@ -358,7 +361,7 @@ void Scenario_ContinuousRecognitionListGrammar::ContinuousRecognitionSession_Res
     {
         // In some scenarios, a developer may choose to ignore giving the user feedback in this case, if speech
         // is not the primary input mechanism for the application.
-        dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args, tag]()
+        Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, args, tag]()
         {
             heardYouSayTextBlock->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
             resultTextBlock->Visibility = Windows::UI::Xaml::Visibility::Visible;
@@ -373,7 +376,7 @@ void Scenario_ContinuousRecognitionListGrammar::ContinuousRecognitionSession_Res
 void Scenario_ContinuousRecognitionListGrammar::PopulateLanguageDropdown()
 {
     // disable callback temporarily.
-    cbLanguageSelection->SelectionChanged -= cbLanguageSelectionSelectionChangedToken;
+    isPopulatingLanguages = true;
 
     Windows::Globalization::Language^ defaultLanguage = SpeechRecognizer::SystemSpeechLanguage;
     auto supportedLanguages = SpeechRecognizer::SupportedGrammarLanguages;
@@ -391,8 +394,7 @@ void Scenario_ContinuousRecognitionListGrammar::PopulateLanguageDropdown()
         }
     });
 
-    cbLanguageSelectionSelectionChangedToken = cbLanguageSelection->SelectionChanged += 
-        ref new SelectionChangedEventHandler(this, &Scenario_ContinuousRecognitionListGrammar::cbLanguageSelection_SelectionChanged);
+    isPopulatingLanguages = false;
 }
 
 /// <summary>
@@ -400,6 +402,11 @@ void Scenario_ContinuousRecognitionListGrammar::PopulateLanguageDropdown()
 /// </summary>
 void Scenario_ContinuousRecognitionListGrammar::cbLanguageSelection_SelectionChanged(Object^ sender, SelectionChangedEventArgs^ e)
 {
+    if (isPopulatingLanguages)
+    {
+        return;
+    }
+
     ComboBoxItem^ item = (ComboBoxItem^)(cbLanguageSelection->SelectedItem);
     Windows::Globalization::Language^ newLanguage = (Windows::Globalization::Language^)item->Tag;
 
@@ -410,7 +417,7 @@ void Scenario_ContinuousRecognitionListGrammar::cbLanguageSelection_SelectionCha
             return;
         }
     }
-   
+
     try
     {
         speechContext->Languages = ref new VectorView<String^>(1, newLanguage->LanguageTag);
@@ -422,5 +429,5 @@ void Scenario_ContinuousRecognitionListGrammar::cbLanguageSelection_SelectionCha
         auto messageDialog = ref new Windows::UI::Popups::MessageDialog(exception->Message, "Exception");
         create_task(messageDialog->ShowAsync());
     }
-    
+
 }

@@ -1,0 +1,65 @@
+﻿<Page
+    x:Class="SDKTemplate.EnableHelloPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource Grey02Brush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainText.FontSize" Value="46" />
+                        <Setter Target="ContentGrid.Padding" Value="0,0,0,24" />
+                        <Setter Target="WelcomeDescription.MaxWidth" Value="525" />
+                        <Setter Target="EnableHelloText.MaxWidth" Value="525" />
+                        <Setter Target="ButtonsPanel.Orientation" Value="Horizontal"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="ContentGrid" Grid.Row="1" VerticalAlignment="Center" Background="{StaticResource WhiteBrush}" Padding="18,0,18,24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="&#x1f3e6; Woodgrove" HorizontalAlignment="Left" FontSize="25" Height="40" VerticalAlignment="Top" Margin="0,24"/>
+                <TextBlock x:Name="MainText" Text="Introducing Windows Hello" FontSize="24" Style="{StaticResource HeaderTextBlockStyle}" Foreground="{StaticResource BlueBrush}" Margin="0,0,0,24"/>
+
+                <TextBlock x:Name="WelcomeTextBlock" Margin="0,0,0,12" Foreground="{StaticResource Grey01Brush}" FontSize="18" FontWeight="SemiBold">
+                    Welcome, <Run x:Name="WelcomeUserId"/>
+                </TextBlock>
+                <TextBlock x:Name="WelcomeDescription" Text="Good news, your device supports Windows Hello and you can use it to authenticate with the Woodgrove app. With Windows Hello, you can log in to Woodgrove on this PC without a password." MaxWidth="325" HorizontalAlignment="Left" TextWrapping="WrapWholeWords" Margin="0,0,0,12" Foreground="{StaticResource Grey02Brush}" FontSize="18"/>
+                <TextBlock x:Name="EnableHelloText" Text="Do you want to enable Windows Hello for your next sign in?" Margin="0,6,0,6" Foreground="{StaticResource Grey02Brush}" MaxWidth="325" HorizontalAlignment="Left" TextWrapping="WrapWholeWords" FontSize="18"/>
+
+                <StackPanel x:Name="ButtonsPanel" Orientation="Vertical" Margin="0,24,0,0">
+                    <HyperlinkButton x:Name="LearnMoreButton" Content="Learn more" Foreground="{StaticResource BlueBrush}" Click="{x:Bind LaunchHyperlink}" Tag="http://go.microsoft.com/fwlink/?LinkId=528180" Margin="0,0,10,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="LaterButton" VerticalAlignment="Top" Content="Maybe later" Margin="0,10,10,0" Background="{StaticResource Grey04Brush}" Click="{x:Bind SkipSetup}"/>
+                        <Button x:Name="StartUsingWindowsHelloButton" VerticalAlignment="Top" Content="Start using Windows Hello!" Margin="0,10,10,0" Click="{x:Bind StartUsingWindowsHello}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <ProgressRing x:Name="ProgressRing" Grid.Row="2" HorizontalAlignment="Center" Width="50" Height="50" VerticalAlignment="Top" Margin="0,50,0,0" />
+    </Grid>
+</Page>

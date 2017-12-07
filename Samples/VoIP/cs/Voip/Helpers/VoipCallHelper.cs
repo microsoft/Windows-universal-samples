@@ -20,7 +20,7 @@ namespace SDKTemplate.Helpers
     {
         public static async Task<OperationResult> NewOutgoingCallAsync(String contactName, String contactNumber)
         {
-            if (!ApiInformation.IsApiContractPresent("Windows.Phone.PhoneContract", 1))
+            if (!ApiInformation.IsApiContractPresent("Windows.ApplicationModel.Calls.CallsVoipContract", 1))
             {
                 return OperationResult.Failed;
             }
@@ -46,7 +46,7 @@ namespace SDKTemplate.Helpers
 
         public static async Task<OperationResult> NewIncomingCallAsync(String contactName, String contactNumber)
         {
-            if (!ApiInformation.IsApiContractPresent("Windows.Phone.PhoneContract", 1))
+            if (!ApiInformation.IsApiContractPresent("Windows.ApplicationModel.Calls.CallsVoipContract", 1))
             {
                 return OperationResult.Failed;
             }

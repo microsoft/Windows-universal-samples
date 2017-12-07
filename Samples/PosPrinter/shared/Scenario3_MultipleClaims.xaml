@@ -1,0 +1,41 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario3_MultipleClaims"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,20,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Multiple claims.
+            </TextBlock>
+
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                Use Scenario 1 to claim a receipt printer.
+                Use this scenario to claim the same
+                receipt printer. The call will succeed or
+                fail depending on whether Scenario 1 chooses
+                to release the device or retain it.
+            </TextBlock>
+
+            <Button Content="Claim the same printer as scenario 1" Click="{x:Bind ClaimSamePrinter_Click}" Margin="0,10,0,0"/>
+
+            <TextBlock x:Name="ClaimResultText" Margin="0,10,0,0"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

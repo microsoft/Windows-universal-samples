@@ -27,20 +27,30 @@ using namespace Windows::ApplicationModel::DataTransfer;
 
 void SharePage::OnNavigatedTo(NavigationEventArgs^ e)
 {
+    DataTransferManager^ dataTransferManager = DataTransferManager::GetForCurrentView();
+
     // Register the current page as a share source.
-    dataRequestedToken = DataTransferManager::GetForCurrentView()->DataRequested += ref new TypedEventHandler<DataTransferManager^, DataRequestedEventArgs^>(this, &SharePage::OnDataRequested);
+    dataRequestedToken = dataTransferManager->DataRequested += ref new TypedEventHandler<DataTransferManager^, DataRequestedEventArgs^>(this, &SharePage::OnDataRequested);
+
+    // Request to be notified when the user chooses a share target app.
+    targetApplicationChosenToken = dataTransferManager->TargetApplicationChosen += ref new TypedEventHandler<DataTransferManager^, TargetApplicationChosenEventArgs^>(this, &SharePage::OnTargetApplicationChosen);
 }
 
 void SharePage::OnNavigatedFrom(NavigationEventArgs^ e)
 {
-    // Unregister the current page as a share source.
-    DataTransferManager::GetForCurrentView()->DataRequested -= dataRequestedToken;
+    // Unregister our event handlers.
+    DataTransferManager^ dataTransferManager = DataTransferManager::GetForCurrentView();
+    dataTransferManager->DataRequested -= dataRequestedToken;
+    dataTransferManager->TargetApplicationChosen -= targetApplicationChosenToken;
 }
 
 // When share is invoked (by the user or programatically) the event handler we registered will be called to populate the datapackage with the
 // data to be shared.
 void SharePage::OnDataRequested(DataTransferManager^ sender, DataRequestedEventArgs^ e)
 {
+    // Register to be notified if the share operation completes.
+    e->Request->Data->ShareCompleted += ref new TypedEventHandler<DataPackage^, ShareCompletedEventArgs^>(this, &SharePage::OnShareCompleted);
+
     // Call the scenario specific function to populate the datapackage with the data to be shared.
     if (GetShareContent(e->Request))
     {
@@ -54,6 +64,31 @@ void SharePage::OnDataRequested(DataTransferManager^ sender, DataRequestedEventA
         // Populate the datapackage properties with the content source application link for this scenario
         e->Request->Data->Properties->ContentSourceApplicationLink = GetApplicationLink(GetType()->FullName);
     }
+}
+
+void SharePage::OnTargetApplicationChosen(DataTransferManager^ sender, TargetApplicationChosenEventArgs^ e)
+{
+    this->rootPage->NotifyUser("User chose " + e->ApplicationName, NotifyType::StatusMessage);
+}
+
+void SharePage::OnShareCompleted(DataPackage^ sender, ShareCompletedEventArgs^ e)
+{
+    String^ shareCompletedStatus = "Shared successfully. ";
+
+    // Typically, this information is not displayed to the user because the
+    // user already knows which share target was selected.
+    if (!e->ShareTarget->AppUserModelId->IsEmpty())
+    {
+        // The user picked an app.
+        shareCompletedStatus += "Target: App \"" + e->ShareTarget->AppUserModelId + "\"";
+    }
+    else if (e->ShareTarget->ShareProvider != nullptr)
+    {
+        // The user picked a ShareProvider.
+        shareCompletedStatus += "Target: Share Provider \"" + e->ShareTarget->ShareProvider->Title + "\"";
+    }
+
+    this->rootPage->NotifyUser(shareCompletedStatus, NotifyType::StatusMessage);
 }
 
 void SharePage::ShowUIButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)

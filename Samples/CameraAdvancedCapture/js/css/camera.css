@@ -1,0 +1,46 @@
+﻿/**********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//********************************************************/
+
+/*  The preview will take 100% of the screen. It needs a z-index so we can place
+    buttons on top of it */
+.cameraPreview {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+/*  Container to hold our buttons. Vertically centered on the right side. Higher
+    z-index so we can see our buttons on top of the camera preview */
+.stackPanel {
+    position: absolute;
+    left: calc(100% - 1.5 * 70px);
+    top: calc(50% - 70px);
+    transform: scale(1.5);
+    z-index: 2;
+}
+
+/*  Make the button square and give them a thick border */
+button.cameraButton {
+    width: 70px;
+    height: 70px;
+    border: 2px solid;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.impactBar {
+    position: absolute;
+    top: 90%;
+    left: 10%;
+    width: 80%;
+    height: 5%;
+    z-index: 2;
+}

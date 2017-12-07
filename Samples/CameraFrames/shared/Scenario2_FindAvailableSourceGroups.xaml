@@ -1,0 +1,73 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the Microsoft Public License.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2_FindAvailableSourceGroups"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,20,12,12">
+        <ScrollViewer.Resources>
+            <DataTemplate x:Key="DisplayNameTemplate">
+                <TextBlock Text="{Binding Path=DisplayName}" />
+            </DataTemplate>
+        </ScrollViewer.Resources>
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Enumerate frame sources, and initialize selected source using frame reader and display frames on screen.
+            </TextBlock>
+
+            <Grid Margin="0,10,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Grid.Column" Value="0"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                    </Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="Grid.Column" Value="1"/>
+                        <Setter Property="IsSynchronizedWithCurrentItem" Value="False"/>
+                        <Setter Property="Margin" Value="10,0,0,0"/>
+                    </Style>
+                </Grid.Resources>
+                <TextBlock Grid.Row="0" Text="Source Group:"/>
+                <TextBlock Grid.Row="1" Text="Frame Source:"/>
+                <TextBlock Grid.Row="2" Text="Media Format:"/>
+                <ComboBox Name="GroupComboBox" Grid.Row="0" SelectionChanged="GroupComboBox_SelectionChanged" PlaceholderText="Select ..." ItemTemplate="{StaticResource DisplayNameTemplate}"/>
+                <ComboBox Name="SourceComboBox" Grid.Row="1" SelectionChanged="SourceComboBox_SelectionChanged" PlaceholderText="Select ..." ItemTemplate="{StaticResource DisplayNameTemplate}"/>
+                <ComboBox Name="FormatComboBox" Grid.Row="2" SelectionChanged="FormatComboBox_SelectionChanged" PlaceholderText="Default format" ItemTemplate="{StaticResource DisplayNameTemplate}"/>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,0">
+                <Button Content="Start" Name="StartButton" IsEnabled="False" Click="StartButton_Click"/>
+                <Button Content="Stop" Name="StopButton" IsEnabled="False" Click="StopButton_Click" Margin="10,0,0,0"/>
+            </StackPanel>
+
+            <Image Name="PreviewImage" Margin="0,10,0,0"/>
+
+            <TextBlock x:Name="outputTextBlock" TextWrapping="Wrap" Margin="0,10,0,0"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
