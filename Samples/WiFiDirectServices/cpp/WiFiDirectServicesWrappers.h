@@ -221,7 +221,7 @@ namespace SDKTemplate
             WiFiDirectServiceManager^ _manager = nullptr;
 
             Windows::Storage::Streams::DataReader^ _reader = nullptr;
-            Windows::Storage::Streams::DataWriter^ _writer;
+            Windows::Storage::Streams::DataWriter^ _writer = nullptr;
 
             // Keep tokens to cleanup event handlers
             Windows::Foundation::EventRegistrationToken _datagramMessageReceivedToken;
@@ -230,7 +230,8 @@ namespace SDKTemplate
             SocketWrapper(
                 WiFiDirectServiceManager^ manager,
                 Windows::Networking::Sockets::StreamSocket^ streamSocket,
-                Windows::Networking::Sockets::DatagramSocket^ datagramSocket
+                Windows::Networking::Sockets::DatagramSocket^ datagramSocket,
+                bool canSend
                 );
             virtual ~SocketWrapper();
 
@@ -287,6 +288,12 @@ namespace SDKTemplate
             Windows::Foundation::EventRegistrationToken _remotePortAddedToken;
             Windows::Foundation::EventRegistrationToken _sessionStatusChangedToken;
 
+            // Used to wait for the session to close before cleaning up the wrapper
+            Concurrency::event _sessionClosedEvent;
+
+            // Protect changes to the _session member
+            std::mutex _sessionMutex;
+
         public:
             SessionWrapper(
                 Windows::Devices::WiFiDirect::Services::WiFiDirectServiceSession^ session,
@@ -295,7 +302,11 @@ namespace SDKTemplate
 
             property Windows::Devices::WiFiDirect::Services::WiFiDirectServiceSession^ Session
             {
-                Windows::Devices::WiFiDirect::Services::WiFiDirectServiceSession^ get() { return _session; }
+                Windows::Devices::WiFiDirect::Services::WiFiDirectServiceSession^ get()
+                {
+                    std::lock_guard<std::mutex> lock(_sessionMutex);
+                    return _session;
+                }
             }
 
             property unsigned int AdvertisementId

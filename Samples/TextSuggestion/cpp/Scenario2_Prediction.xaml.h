@@ -22,7 +22,7 @@ namespace SDKTemplate
         void Methods_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
         void Execute_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
-        void displayMultipleCandidates(Windows::Foundation::Collections::IVectorView<Platform::String^>^ candidates);
+        void DisplayMultipleCandidates(Windows::Foundation::Collections::IVectorView<Platform::String^>^ candidates);
 
         Windows::Data::Text::TextPredictionGenerator^ generator;
     };

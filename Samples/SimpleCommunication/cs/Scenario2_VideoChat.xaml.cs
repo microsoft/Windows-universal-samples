@@ -75,8 +75,11 @@ namespace SimpleCommunication
                 RemoteVideo.Source = null;
             }
 
-            await device.CleanUpAsync();
-            device = null;
+            if (device != null)
+            {
+                await device.CleanUpAsync();
+                device = null;
+            }
         }
 
         private async Task InitializeAsync(CancellationToken cancel = default(CancellationToken))

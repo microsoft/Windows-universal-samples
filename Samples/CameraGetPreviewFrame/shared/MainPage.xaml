@@ -36,13 +36,13 @@
             <CaptureElement Name="PreviewControl" Stretch="Uniform" Grid.Column="0"/>
 
             <!--Captured preview frame image-->
-            <Image Name="PreviewFrameImage" Grid.Column="1"/>   
+            <Image Name="PreviewFrameImage" Grid.Column="1"/>
         </Grid>
                 
         <!--User input-->
         <StackPanel Grid.Row="1">
             <StackPanel Orientation="Horizontal">
-                <Button Name="GetPreviewFrameButton" Content="GetPreviewFrameAsync" Tapped="GetPreviewFrameButton_Tapped" Margin="10" IsEnabled="False"/>
+                <Button Name="GetPreviewFrameButton" Content="GetPreviewFrameAsync" Click="GetPreviewFrameButton_Click" Margin="10" IsEnabled="False"/>
                 <TextBlock Name="FrameInfoTextBlock" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">

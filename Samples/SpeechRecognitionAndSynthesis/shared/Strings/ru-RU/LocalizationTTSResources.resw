@@ -123,18 +123,21 @@
                              xsi:schemaLocation='http://www.w3.org/2001/10/synthesis  http://www.w3.org/TR/speech-synthesis/synthesis.xsd' 
                              xml:lang='ru-RU'&gt;
 
-Это пример фонетического произношения:
+&lt;mark name='phonetic'/&gt;Это пример фонетического произношения:
 &lt;phoneme alphabet='x-microsoft-ups' ph='S1 W AA T . CH AX . M AX . S2 K AA L . IH T'&gt; whatchamacallit &lt;/phoneme&gt;.
 
-Это пример даты:
+&lt;mark name='date'/&gt;Это пример даты:
 &lt;say-as interpret-as='date' format='mdy'&gt; 04/30/2013 &lt;/say-as&gt;.
 
-Это пример сказать ряд:
+&lt;mark name='number'/&gt;Это пример сказать ряд:
 &lt;say-as interpret-as='ordinal'&gt; 4 &lt;/say-as&gt;.
-
+&lt;mark name='end'/&gt;
 &lt;/speak&gt;</value>
   </data>
   <data name="SynthesizeTextDefaultText" xml:space="preserve">
     <value>Быстрый red fox, перепрыгнул через ленивую собаку коричневый</value>
+  </data>
+  <data name="SynthesizeTextBoundariesDefaultText" xml:space="preserve">
+    <value>Используя только ваш голос, можно запускать программы, открывать меню, нажмите кнопки и другие объекты на экране, диктовать текст документов и писать и отправлять электронную почту. Почти все, что вы делаете с вашей клавиатуры и мыши может быть сделано с только ваш голос.</value>
   </data>
 </root>

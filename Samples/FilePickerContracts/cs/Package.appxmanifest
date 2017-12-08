@@ -8,7 +8,7 @@
     <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10042.0" MaxVersionTested="10.0.10042.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.16299.0" />
   </Dependencies>
   <Resources>
     <Resource Language="x-generate" />
@@ -39,6 +39,11 @@
           </uap:FileSavePicker>
         </uap:Extension>
         <uap:Extension Category="windows.cachedFileUpdater" />
+        <Extension Category="windows.backgroundTasks" EntryPoint="FilePickerContractsTasks.UpdateFileTask">
+          <BackgroundTasks>
+            <Task Type="systemEvent" />
+          </BackgroundTasks>
+        </Extension>
       </Extensions>
     </Application>
   </Applications>

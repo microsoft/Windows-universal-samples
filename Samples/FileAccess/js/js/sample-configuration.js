@@ -23,17 +23,15 @@
     ];
 
     function validateFileExistence() {
-        Windows.Storage.KnownFolders.picturesLibrary.getFileAsync("sample.dat").done(
-            function (file) {
-                // If file exists. 
-                SdkSample.sampleFile = file;
-            },
-            function (err) {
+        Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.picturesLibrary).then(function (picturesLibrary) {
+            return picturesLibrary.tryGetItemAsync("sample.dat");
+        }).done(function (item) {
+            SdkSample.sampleFile = item;
+            if (!item) {
                 // If file doesn't exist, indicate users to use scenario 1. 
-                SdkSample.sampleFile = null;
                 WinJS.log && WinJS.log("The file 'sample.dat' does not exist. Use scenario one to create this file.", "sample", "error");
             }
-        );
+        });
     };
 
     WinJS.Namespace.define("SdkSample", {

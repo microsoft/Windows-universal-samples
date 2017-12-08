@@ -19,76 +19,48 @@
 
 using namespace SDKTemplate;
 
+using namespace Platform;
+using namespace Windows::Foundation;
+using namespace Windows::Graphics::Display;
+using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::Devices::Sensors;
-using namespace Windows::Foundation;
-using namespace Windows::UI::Core;
-using namespace Platform;
-using namespace Windows::Graphics::Display;
 
-Scenario4_OrientationChanged::Scenario4_OrientationChanged() : rootPage(MainPage::Current)
+Scenario4_OrientationChanged::Scenario4_OrientationChanged()
 {
     InitializeComponent();
-
-    // Get two instances of the accelerometer:
-    // One that returns the raw accelerometer data
-    accelerometerOriginal = Accelerometer::GetDefault();
-    // Other on which the 'ReadingTransform' is updated so that data returned aligns with the request transformation.
-    accelerometerReadingTransform = Accelerometer::GetDefault();
-
-    if (nullptr == accelerometerOriginal || nullptr == accelerometerReadingTransform)
-    {
-        rootPage->NotifyUser("No accelerometerReadingTransform found", NotifyType::ErrorMessage);
-    }
-
-    displayInformation = DisplayInformation::GetForCurrentView();
 }
 
-/// <summary>
-/// Invoked when this page is about to be displayed in a Frame.
-/// </summary>
-/// <param name="e">Event data that describes how this page was reached.  The Parameter
-/// property is typically used to configure the page.</param>
 void Scenario4_OrientationChanged::OnNavigatedTo(NavigationEventArgs^ e)
 {
-    if (nullptr == accelerometerOriginal || nullptr == accelerometerReadingTransform)
+    // Get two instances of the accelerometer:
+    // One that returns the raw accelerometer data
+    accelerometerOriginal = Accelerometer::GetDefault(rootPage->AccelerometerReadingType);
+    // Other on which the 'ReadingTransform' is updated so that data returned aligns with the request transformation.
+    accelerometerReadingTransform = Accelerometer::GetDefault(rootPage->AccelerometerReadingType);
+
+    if (accelerometerOriginal != nullptr && accelerometerReadingTransform != nullptr)
     {
-        ScenarioEnableButton->IsEnabled = false;
+        rootPage->NotifyUser(rootPage->AccelerometerReadingType.ToString() + " accelerometers ready", NotifyType::StatusMessage);
+        ScenarioEnableButton->IsEnabled = true;
     }
     else
     {
-        ScenarioEnableButton->IsEnabled = true;
+        rootPage->NotifyUser(rootPage->AccelerometerReadingType.ToString() + " accelerometers not found", NotifyType::ErrorMessage);
     }
-    ScenarioDisableButton->IsEnabled = false;
 
     // Register for orientation change
+    displayInformation = DisplayInformation::GetForCurrentView();
     orientationChangedToken = displayInformation->OrientationChanged += ref new Windows::Foundation::TypedEventHandler<Windows::Graphics::Display::DisplayInformation ^, Platform::Object ^>(this, &Scenario4_OrientationChanged::OnOrientationChanged);
 }
 
-/// <summary>
-/// Invoked when this page is no longer displayed.
-/// </summary>
-/// <param name="e"></param>
 void Scenario4_OrientationChanged::OnNavigatedFrom(NavigationEventArgs^ e)
 {
-    // If the navigation is external to the app do not clean up.
-    // This can occur on Phone when suspending the app.
-    if (NavigationMode::Forward == e->NavigationMode && nullptr == e->Uri)
-    {
-        return;
-    }
-
     if (ScenarioDisableButton->IsEnabled)
     {
-        Window::Current->VisibilityChanged -= visibilityToken;
-        accelerometerOriginal->ReadingChanged -= readingTokenOriginal;
-        accelerometerReadingTransform->ReadingChanged -= readingTokenReadingTransform;
-
-        // Restore the default report interval to release resources while the sensor is not in use
-        accelerometerOriginal->ReportInterval = 0;
-        accelerometerReadingTransform->ReportInterval = 0;
+        ScenarioDisable();
     }
 
     displayInformation->OrientationChanged -= orientationChangedToken;
@@ -98,9 +70,7 @@ void Scenario4_OrientationChanged::OnNavigatedFrom(NavigationEventArgs^ e)
 /// <summary>
 /// Invoked on pressing 'Enable' button'.
 /// </summary>
-/// <param name="sender"></param>
-/// <param name="e"></param>
-void Scenario4_OrientationChanged::ScenarioEnable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario4_OrientationChanged::ScenarioEnable()
 {
     // Establish the report interval
     accelerometerOriginal->ReportInterval = accelerometerReadingTransform->MinimumReportInterval;
@@ -121,18 +91,14 @@ void Scenario4_OrientationChanged::ScenarioEnable(Platform::Object^ sender, Wind
     ScenarioDisableButton->IsEnabled = true;
 }
 
-
-
 /// <summary>
 /// Invoked on pressing 'Disable' button'.
 /// </summary>
-/// <param name="sender"></param>
-/// <param name="e"></param>
-void Scenario4_OrientationChanged::ScenarioDisable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario4_OrientationChanged::ScenarioDisable()
 {
-    Window::Current->VisibilityChanged::remove(visibilityToken);
-    accelerometerOriginal->ReadingChanged::remove(readingTokenOriginal);
-    accelerometerReadingTransform->ReadingChanged::remove(readingTokenReadingTransform);
+    Window::Current->VisibilityChanged -= visibilityToken;
+    accelerometerOriginal->ReadingChanged -= readingTokenOriginal;
+    accelerometerReadingTransform->ReadingChanged -= readingTokenReadingTransform;
 
     // Restore the default report interval to release resources while the sensor is not in use
     accelerometerOriginal->ReportInterval = 0;
@@ -140,7 +106,6 @@ void Scenario4_OrientationChanged::ScenarioDisable(Platform::Object^ sender, Win
 
     ScenarioEnableButton->IsEnabled = true;
     ScenarioDisableButton->IsEnabled = false;
-
 }
 
 /// <summary>
@@ -165,8 +130,8 @@ void Scenario4_OrientationChanged::VisibilityChanged(Object^ sender, VisibilityC
         else
         {
             // Disable sensor input (no need to restore the default reportInterval... resources will be released upon app suspension)
-            accelerometerOriginal->ReadingChanged::remove(readingTokenOriginal);
-            accelerometerReadingTransform->ReadingChanged::remove(readingTokenReadingTransform);
+            accelerometerOriginal->ReadingChanged -= readingTokenOriginal;
+            accelerometerReadingTransform->ReadingChanged -= readingTokenReadingTransform;
         }
     }
 }
@@ -188,11 +153,7 @@ void Scenario4_OrientationChanged::ReadingChangedOriginal(Accelerometer^ sender,
         ref new DispatchedHandler(
         [this, e]()
         {
-            AccelerometerReading^ reading = e->Reading;
-
-            ScenarioOutput_X_Original->Text = reading->AccelerationX.ToString();
-            ScenarioOutput_Y_Original->Text = reading->AccelerationY.ToString();
-            ScenarioOutput_Z_Original->Text = reading->AccelerationZ.ToString();
+            MainPage::SetReadingText(ScenarioOutputOriginal, e->Reading);
         },
         CallbackContext::Any
         )
@@ -217,11 +178,7 @@ void Scenario4_OrientationChanged::ReadingChangedReadingTransform(Accelerometer^
         ref new DispatchedHandler(
         [this, e]()
         {
-            AccelerometerReading^ reading = e->Reading;
-
-            ScenarioOutput_X_ReadingTransform->Text = reading->AccelerationX.ToString();
-            ScenarioOutput_Y_ReadingTransform->Text = reading->AccelerationY.ToString();
-            ScenarioOutput_Z_ReadingTransform->Text = reading->AccelerationZ.ToString();
+            MainPage::SetReadingText(ScenarioOutputReadingTransform, e->Reading);
         },
         CallbackContext::Any
         )

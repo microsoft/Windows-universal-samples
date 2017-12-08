@@ -10,7 +10,7 @@
 //
 //*********************************************************
 -->
-<Page x:Name="DownloadPage" x:Class="BackgroundTransfer.Scenario1_Download" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:BackgroundTransfer" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+<Page x:Name="DownloadPage" x:Class="SDKTemplate.Scenario1_Download" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:SDKTemplate" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
     <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <StackPanel x:Name="LayoutRoot">
             <TextBlock x:Name="InputTextBlock1" TextWrapping="Wrap" Grid.Row="0" Style="{StaticResource BasicTextStyle}">
@@ -21,7 +21,7 @@
                 foreground. The Background Transfer API enables users to transfer
                 content in the background. Therefore, application developers must also
                 ensure they handle application suspension/resumption and
-                termination/activation cases as well. 
+                termination/activation cases. 
             </TextBlock>
             <TextBlock Text="Remote address: " Style="{StaticResource BasicTextStyle}" Margin="0,8,10,0"/>
             <TextBox x:Name="serverAddressField" InputScope="Url" Text="http://localhost/BackgroundTransferSample/download.aspx" />
@@ -32,10 +32,7 @@
                 <Button x:Name="StartHighPriorityDownloadButton" Content="Start High Priority Download" Margin="0,0,10,0" Click="StartHighPriorityDownload_Click"/>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,0">
-                <Button x:Name="StartUnconstrainedDownloadButton" Content="Start Unconstrained Download" Margin="0,0,10,0" Click="StartUnconstrainedDownload_Click"/>
                 <Button x:Name="PauseAllButton" Content="Pause All" Margin="0,0,10,0" Click="PauseAll_Click"/>
-            </StackPanel>
-            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,10">
                 <Button x:Name="ResumeAllButton" Content="Resume All" Margin="0,0,10,0" Click="ResumeAll_Click"/>
                 <Button x:Name="CancelAllButton" Content="Cancel All" Margin="0,0,10,0" Click="CancelAll_Click"/>
             </StackPanel>

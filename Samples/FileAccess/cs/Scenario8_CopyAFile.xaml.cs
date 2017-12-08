@@ -44,12 +44,18 @@ namespace SDKTemplate
             {
                 try
                 {
-                    StorageFile fileCopy = await file.CopyAsync(KnownFolders.PicturesLibrary, "sample - Copy.dat", NameCollisionOption.ReplaceExisting);
+                    StorageFolder picturesLibrary = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
+                    StorageFile fileCopy = await file.CopyAsync(picturesLibrary, "sample - Copy.dat", NameCollisionOption.ReplaceExisting);
                     rootPage.NotifyUser(String.Format("The file '{0}' was copied and the new file was named '{1}'.", file.Name, fileCopy.Name), NotifyType.StatusMessage);
                 }
                 catch (FileNotFoundException)
                 {
                     rootPage.NotifyUserFileNotExist();
+                }
+                catch (Exception ex)
+                {
+                    // I/O errors are reported as exceptions.
+                    rootPage.NotifyUser(String.Format("Error copying file '{0}': {1}", file.Name, ex.Message), NotifyType.ErrorMessage);
                 }
             }
             else

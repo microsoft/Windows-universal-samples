@@ -35,12 +35,11 @@
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <ComboBox Name="PreviewSettings" PlaceholderText="Preview Settings" SelectionChanged="PreviewSettings_Changed" Width="auto"/>
                 <ComboBox Name="PhotoSettings" PlaceholderText="Photo Settings" SelectionChanged="PhotoSettings_Changed" Width="auto"/>
-                <Button Name="PhotoButton" Tapped="PhotoButton_Tapped" IsEnabled="False">Take Photo</Button>
+                <Button Name="PhotoButton" Click="PhotoButton_Click" IsEnabled="False">Take Photo</Button>
             </StackPanel>
 
-            <Button Grid.Row="2" Content="Initialize Camera" Tapped="InitializeCameraButton_Tapped"
-                    HorizontalAlignment="Center" VerticalAlignment="Center">
-            </Button>
+            <Button Grid.Row="2" Content="Initialize Camera" Click="InitializeCameraButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
             <Viewbox Grid.Row="2">
                 <!--Camera preview-->
                 <CaptureElement Name="PreviewControl" Stretch="Uniform" Visibility="Collapsed"/>

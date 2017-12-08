@@ -1,0 +1,58 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario5_RandomAccess"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,20,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Random Access Downloads
+            </TextBlock>
+            <TextBlock x:Name="inputTextBlock1" TextWrapping="Wrap" Grid.Row="0" Style="{StaticResource BasicTextStyle}">
+                When random access mode is enabled, apps can access file content and seek within that
+                content while the download is in progress. If the data at the new seek position is not yet available,
+                the transfer will prioritize that new position. This allows the app to alter the order in which
+                remote file data is requested from the server, which is useful for streaming media scenarios.
+            </TextBlock>
+            <TextBlock Text="Remote address: " Style="{StaticResource BasicTextStyle}" Margin="0,8,10,0"/>
+            <TextBox x:Name="serverAddressField" InputScope="Url" Text="http://localhost/BackgroundTransferSample/randomAccess.aspx" IsReadOnly="True" />
+            <TextBlock Text="Local file name: " Style="{StaticResource BasicTextStyle}" Margin="0,8,17,0"/>
+            <TextBox x:Name="fileNameField" Text="RandomAccessFile.txt"/>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="startDownloadButton" Content="Start" Margin="0,10,10,0" Click="StartDownload_Click"/>
+                <Button x:Name="pauseDownloadButton" Content="Pause" Margin="0,10,10,0" IsEnabled="False" Click="PauseDownload_Click"/>
+                <Button x:Name="resumeDownloadButton" Content="Resume" Margin="0,10,10,0" IsEnabled="False" Click="ResumeDownload_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="seekSlider" Header="Seek to position (MB)" TickPlacement="Outside" TickFrequency="10" Minimum="0" Maximum="100" Width="300" HorizontalAlignment="Left" StepFrequency="1" Margin="0,20,0,0" />
+                <TextBlock Text="{Binding ElementName=seekSlider, Path=Value}" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Margin="10,30,0,0"/>
+            </StackPanel>
+            <Button x:Name="seekDownloadButton" Content="Seek" Margin="0,0,10,0" Click="SeekDownload_Click"/>
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="currentPositionSlider" Header="Current read position (MB)" TickPlacement="Outside" TickFrequency="10" Minimum="0" Maximum="100" Width="300" HorizontalAlignment="Left" StepFrequency="1" Margin="0,10,0,0" IsEnabled="False" />
+                <TextBlock Text="{Binding ElementName=currentPositionSlider, Path=Value, Mode=OneWay}" Style="{StaticResource BasicTextStyle}" VerticalAlignment="Center" Margin="10,20,0,0"/>
+            </StackPanel>
+            <TextBlock x:Name="DownloadedInfoText"/>
+            <TextBlock>Download status: <Run x:Name="DownloadedStatusText"/></TextBlock>
+            <TextBlock>Downloaded ranges: <Run x:Name="DownloadedRangesText" Text="None"/></TextBlock>
+            <TextBlock>Previous read operation: <Run x:Name="PreviousReadText"/></TextBlock>
+            <TextBlock>Current read operation: <Run x:Name="CurrentReadText"/></TextBlock>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

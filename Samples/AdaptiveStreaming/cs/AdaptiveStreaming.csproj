@@ -4,27 +4,24 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
+    <ProjectGuid>{121FA814-9FAD-5431-8C63-499438B8E05D}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AdaptiveStreaming</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>AdaptiveStreaming</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <!--
-    -->
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\ARM\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
-    <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>ARM</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -35,7 +32,6 @@
     <OutputPath>bin\ARM\Release\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
     <Optimize>true</Optimize>
-    <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>ARM</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -47,7 +43,6 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
-    <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -58,7 +53,6 @@
     <OutputPath>bin\x64\Release\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
     <Optimize>true</Optimize>
-    <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -70,7 +64,6 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
-    <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -81,7 +74,6 @@
     <OutputPath>bin\x86\Release\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
     <Optimize>true</Optimize>
-    <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -101,23 +93,78 @@
       <Link>MainPage.xaml.cs</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PlayReady\CommonLicenseRequest.cs" />
     <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\Logging\LogView.xaml.cs">
+      <Link>Shared\Logging\LogView.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\Logging\AdaptiveMediaSourceHttpFilterLogger.cs">
+      <Link>Shared\Logging\AdaptiveMediaSourceHttpFilterLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\Logging\AdaptiveMediaSourceLogger.cs">
+      <Link>Shared\Logging\AdaptiveMediaSourceLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\Logging\MediaPlaybackItemLogger.cs">
+      <Link>Shared\Logging\MediaPlaybackItemLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\Logging\MediaPlaybackListLogger.cs">
+      <Link>Shared\Logging\MediaPlaybackListLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\Logging\MediaPlayerLogger.cs">
+      <Link>Shared\Logging\MediaPlayerLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\Logging\MediaSourceLogger.cs">
+      <Link>Shared\Logging\MediaSourceLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\Logging\Extensions\AdaptiveMediaSourceStringExtensions.cs">
+      <Link>Shared\Logging\Extensions\AdaptiveMediaSourceStringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\Logging\Extensions\HttpProgressStringExtensions.cs">
+      <Link>Shared\Logging\Extensions\HttpProgressStringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\Logging\Extensions\JsonFormatter.cs">
+      <Link>Shared\Logging\Extensions\JsonFormatter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\Logging\Extensions\MediaFoundationGuidStringExtensions.cs">
+      <Link>Shared\Logging\Extensions\MediaFoundationGuidStringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\Logging\Extensions\MediaPlaybackItemStringExtensions.cs">
+      <Link>Shared\Logging\Extensions\MediaPlaybackItemStringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\Logging\Extensions\MediaPlaybackListStringExtensions.cs">
+      <Link>Shared\Logging\Extensions\MediaPlaybackListStringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="Helpers\CommonLicenseRequest.cs" />
+    <Compile Include="Helpers\MediaPlayerExtensions.cs" />
+    <Compile Include="Helpers\PlayReadyHelper.cs" />
+    <Compile Include="Controls\ContentSelector.xaml.cs">
+      <DependentUpon>ContentSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdaptiveContentModel.cs" />
     <Compile Include="SampleConfiguration.cs" />
-    <Compile Include="Scenario1.xaml.cs">
-      <DependentUpon>Scenario1.xaml</DependentUpon>
+    <Compile Include="Scenario1_SimplestAdaptiveStreaming.xaml.cs">
+      <DependentUpon>Scenario1_SimplestAdaptiveStreaming.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario2.xaml.cs">
-      <DependentUpon>Scenario2.xaml</DependentUpon>
+    <Compile Include="Scenario2_EventHandlers.xaml.cs">
+      <DependentUpon>Scenario2_EventHandlers.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario3.xaml.cs">
-      <DependentUpon>Scenario3.xaml</DependentUpon>
+    <Compile Include="Scenario3_RequestModification.xaml.cs">
+      <DependentUpon>Scenario3_RequestModification.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario4.xaml.cs">
-      <DependentUpon>Scenario4.xaml</DependentUpon>
+    <Compile Include="Scenario4_Tuning.xaml.cs">
+      <DependentUpon>Scenario4_Tuning.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario5_Metadata.xaml.cs">
+      <DependentUpon>Scenario5_Metadata.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario6_AdInsertion.xaml.cs">
+      <DependentUpon>Scenario6_AdInsertion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario7_LiveSeekableRange.xaml.cs">
+      <DependentUpon>Scenario7_LiveSeekableRange.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\TrackingEventCue.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -135,30 +182,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario1.xaml">
-      <Link>Scenario1.xaml</Link>
+    <Page Include="..\..\..\SharedContent\cs\Logging\LogView.xaml">
+      <Link>Shared\Logging\LogView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario2.xaml">
-      <Link>Scenario2.xaml</Link>
+    <Page Include="Controls\ContentSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scenario1_SimplestAdaptiveStreaming.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario3.xaml">
-      <Link>Scenario3.xaml</Link>
+    <Page Include="Scenario2_EventHandlers.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario3_RequestModification.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario4_Tuning.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scenario5_Metadata.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scenario6_AdInsertion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scenario7_LiveSeekableRange.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\shared\Scenario4.xaml">
-      <Link>Scenario4.xaml</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -187,8 +251,6 @@
       <Link>Assets\windows-sdk.png</Link>
     </Content>
   </ItemGroup>
-  <!--
-  -->
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

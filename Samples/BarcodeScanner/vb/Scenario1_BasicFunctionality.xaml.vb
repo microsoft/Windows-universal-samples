@@ -122,8 +122,8 @@ Namespace Global.SDKTemplate
         ''' <param name="sender"></param>
         ''' <param name="args"> Contains the ClamiedBarcodeScanner that is sending this request</param>
         Async Sub claimedScanner_ReleaseDeviceRequested(sender As Object, e As ClaimedBarcodeScanner)
+            e.RetainDevice()
             Await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, Sub()
-                e.RetainDevice()
                 rootPage.NotifyUser("Event ReleaseDeviceRequested received. Retaining the barcode scanner.", NotifyType.StatusMessage)
             End Sub)
         End Sub

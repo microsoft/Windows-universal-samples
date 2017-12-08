@@ -14,7 +14,7 @@ namespace SDKTemplate
         {
             Platform::String^ get()
             {
-                return "PrintSample";
+                return "Printing C++ Sample";
             }
         }
 

@@ -123,18 +123,21 @@
                              xsi:schemaLocation='http://www.w3.org/2001/10/synthesis  http://www.w3.org/TR/speech-synthesis/synthesis.xsd' 
                              xml:lang='es-MX'&gt;
 
-Este es un ejemplo de una pronunciación fonética:
+&lt;mark name='phonetic'/&gt;Este es un ejemplo de una pronunciación fonética:
 &lt;phoneme alphabet='x-microsoft-ups' ph='S1 W AA T . CH AX . M AX . S2 K AA L . IH T'&gt; whatchamacallit &lt;/phoneme&gt;.
 
-Este es un ejemplo de una cita:
+&lt;mark name='date'/&gt;Este es un ejemplo de una cita:
 &lt;say-as interpret-as='date' format='mdy'&gt; 04/30/2013 &lt;/say-as&gt;.
 
-Este es un ejemplo de decir un número:
+&lt;mark name='number'/&gt;Este es un ejemplo de decir un número:
 &lt;say-as interpret-as='ordinal'&gt; 4 &lt;/say-as&gt;.
-
+&lt;mark name='end'/&gt;
 &lt;/speak&gt;</value>
   </data>
   <data name="SynthesizeTextDefaultText" xml:space="preserve">
     <value>El rápido zorro rojo saltado sobre el perro perezoso marrón</value>
+  </data>
+  <data name="SynthesizeTextBoundariesDefaultText" xml:space="preserve">
+    <value>Solo con su voz podrá iniciar programas, abrir menús, hacer clic en botones y otros objetos de la pantalla, dictar texto para insertar en documentos, y escribir y enviar mensajes de correo electrónico. Casi todo lo que hace con el teclado y el mouse lo puede hacer ahora con la voz.</value>
   </data>
 </root>

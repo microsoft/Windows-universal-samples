@@ -23,7 +23,7 @@ Scenario2_RequestConsent::Scenario2_RequestConsent()
     InitializeComponent();
 }
 
-// Requests fingerprint consent from the current user.
+// Requests consent from the current user.
 void Scenario2_RequestConsent::RequestConsent_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     Button^ requestConsentButton = dynamic_cast<Button^>(sender);
@@ -34,7 +34,7 @@ void Scenario2_RequestConsent::RequestConsent_Click(Platform::Object^ sender, Wi
     {
         try
         {
-            // Request the currently logged on user's consent via fingerprint swipe
+            // Request the logged on user's consent using Windows Hello via biometric verification or a PIN.
             create_task(Windows::Security::Credentials::UI::UserConsentVerifier::RequestVerificationAsync(Message->Text))
                 .then([requestConsentButton](UserConsentVerificationResult consentResult)
             {
@@ -42,49 +42,25 @@ void Scenario2_RequestConsent::RequestConsent_Click(Platform::Object^ sender, Wi
                 {
                 case UserConsentVerificationResult::Verified:
                 {
-                    MainPage::Current->NotifyUser("User's presence verified.", NotifyType::StatusMessage);
-                    break;
-                }
-
-                case UserConsentVerificationResult::DeviceBusy:
-                {
-                    MainPage::Current->NotifyUser("Biometric device is busy.", NotifyType::ErrorMessage);
+                    MainPage::Current->NotifyUser("User consent verified!", NotifyType::StatusMessage);
                     break;
                 }
 
                 case UserConsentVerificationResult::DeviceNotPresent:
                 {
-                    MainPage::Current->NotifyUser("No biometric device found.", NotifyType::ErrorMessage);
-                    break;
-                }
-
-                case UserConsentVerificationResult::DisabledByPolicy:
-                {
-                    MainPage::Current->NotifyUser("Biometrics is disabled by policy.", NotifyType::ErrorMessage);
-                    break;
-                }
-
-                case UserConsentVerificationResult::NotConfiguredForUser:
-                {
-                    MainPage::Current->NotifyUser("User has no fingeprints registered.", NotifyType::ErrorMessage);
-                    break;
-                }
-
-                case UserConsentVerificationResult::RetriesExhausted:
-                {
-                    MainPage::Current->NotifyUser("Too many failed attempts.", NotifyType::ErrorMessage);
+                    MainPage::Current->NotifyUser("No PIN or biometric found, please set one up.", NotifyType::ErrorMessage);
                     break;
                 }
 
                 case UserConsentVerificationResult::Canceled:
                 {
-                    MainPage::Current->NotifyUser("Consent request prompt was canceled.", NotifyType::ErrorMessage);
+                    MainPage::Current->NotifyUser("User consent verification canceled.", NotifyType::ErrorMessage);
                     break;
                 }
 
                 default:
                 {
-                    MainPage::Current->NotifyUser("Consent verification with fingerprints is currently unavailable.", NotifyType::ErrorMessage);
+                    MainPage::Current->NotifyUser("User consent verification is currently unavailable.", NotifyType::ErrorMessage);
                     break;
                 }
                 }

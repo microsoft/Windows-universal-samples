@@ -1,0 +1,69 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario4_StateTrigger"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:SDKTemplate"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="propertyPresentStateGroup">
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <!--Trigger will activate if the AllowFocusOnInteraction property is present-->
+                        <local:IsApiPropertyPresentTrigger TypeName="Windows.UI.Xaml.FrameworkElement" PropertyName="AllowFocusOnInteraction"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!-- If the AllowFocusOnInteraction property is present, then set it to False. -->
+                        <Setter Target="TheButton.AllowFocusOnInteraction" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <!--Trigger will activate if the AllowFocusOnInteraction property is not present-->
+                        <local:IsApiPropertyPresentTrigger TypeName="Windows.UI.Xaml.FrameworkElement" PropertyName="AllowFocusOnInteraction" IsPresent="False" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!-- If the AllowFocusOnInteraction property is not present, then do not attempt to set it. -->
+                        <!-- Show appropriate description text instead. -->
+                        <Setter Target="PropertyAbsentDescription.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <StackPanel>
+            <TextBlock Text="Description" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Text="Adaptive triggers" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"/>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                This scenario uses a state trigger to set the AllowFocusOnInteraction property
+                on the button to False if the property is available.
+                It also uses a negative state trigger to show some text if the property is not available.
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                Enter text into the box, then click on the button.
+                If the AllowFocusOnInteraction property is set to False, then focus will remain in the text box.
+            </TextBlock>
+            <TextBlock x:Name="PropertyAbsentDescription" TextWrapping="Wrap" Visibility="Collapsed" Margin="0,10,0,0">
+                The system does not support the AllowFocusOnInteraction property.
+            </TextBlock>
+
+            <TextBox PlaceholderText="Type here" Margin="0,10,0,0"/>
+            <Button x:Name="TheButton" Content="Button" Margin="0,10,0,0"/>
+        </StackPanel>
+    </Grid>
+</Page>

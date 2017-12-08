@@ -12,17 +12,18 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using ContextMenuCS;
 
 namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        public const string FEATURE_NAME = "ContextMenuCS";
+        public const string FEATURE_NAME = "XAML Context Menu";
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title="Scenario 1", ClassType=typeof(Scenario1)},
+            new Scenario() { Title="ContextFlyout on an element", ClassType=typeof(Scenario1)},
+            new Scenario() { Title="ContextFlyout in ListView", ClassType=typeof(Scenario2)},
+            new Scenario() { Title="ContextRequested event", ClassType=typeof(Scenario3)},
         };
     }
 

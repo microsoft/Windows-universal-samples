@@ -13,11 +13,10 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using System.Linq;
-using SDKTemplate;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace ASBMigrationSample
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -29,6 +28,7 @@ namespace ASBMigrationSample
         public Scenario1()
         {
             this.InitializeComponent();
+            var task = ContactSampleDataSource.CreateContactSampleDataAsync();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -44,14 +44,19 @@ namespace ASBMigrationSample
          /// <param name="args">The event arguments.</param>
         private void asb_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            //We only want to get results when it was a user typing, 
-            //otherwise we assume the value got filled in by TextMemberPath 
-            //or the handler for SuggestionChosen
+            // We only want to get results when it was a user typing, 
+            // otherwise we assume the value got filled in by TextMemberPath 
+            // or the handler for SuggestionChosen
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
                 var matchingContacts = ContactSampleDataSource.GetMatchingContacts(sender.Text);
 
                 sender.ItemsSource = matchingContacts.ToList();
+            }
+
+            if (args.Reason != AutoSuggestionBoxTextChangeReason.SuggestionChosen)
+            {
+                rootPage.NotifyUser("", NotifyType.StatusMessage);
             }
         }
 
@@ -66,53 +71,53 @@ namespace ASBMigrationSample
         /// and also ChosenSuggestion, which is only non-null when a user selects an item in the list.</param>
         private void asb_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
+            rootPage.NotifyUser("", NotifyType.StatusMessage);
+
             if (args.ChosenSuggestion != null)
             {
-                //User selected an item, take an action on it here
-                SelectContact(args.ChosenSuggestion as Contact);
+                // User selected an item, take an action on it here
+                SelectContact((Contact)args.ChosenSuggestion);
             }
             else
             {
-                //Do a fuzzy search on the query text
+                // Do a fuzzy search on the query text
                 var matchingContacts = ContactSampleDataSource.GetMatchingContacts(args.QueryText);
 
-                if (matchingContacts.Count() >= 1)
-                {
-                    //Choose the first match
-                    SelectContact(matchingContacts.FirstOrDefault());
-                }
-                else
-                {
-                    NoResults.Visibility = Visibility.Visible;
-                }
+                // Choose the first match, or clear the selection if there are no matches.
+                SelectContact(matchingContacts.FirstOrDefault());
             }
         }
 
         /// <summary>
-        /// This event gets fired as the user keys through the list, or taps on a suggestion.
-        /// This allows you to change the text in the TextBox to reflect the item in the list.
-        /// Alternatively you can use TextMemberPath.
+        /// This event is raised as the user keys through the list, or taps on a suggestion.
+        /// The AutoSuggestBox.TextMemberPath property controls what text appears in the TextBox.
+        /// You could use this event to trigger a prefetch of the suggestion.
         /// </summary>
         /// <param name="sender">The AutoSuggestBox that fired the event.</param>
         /// <param name="args">The args contain SelectedItem, which contains the data item of the item that is currently highlighted.</param>
         private void asb_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            var contact = args.SelectedItem as Contact;
-
-            sender.Text = string.Format("{0} ({1})", contact.FullName, contact.Company);
+            var contact = (Contact)args.SelectedItem;
+            rootPage.NotifyUser("Suggestion chosen: " + contact.DisplayName, NotifyType.StatusMessage);
         }
 
         /// <summary>
-        /// This 
+        /// Display details of the specified contact.
         /// </summary>
         /// <param name="contact"></param>
         private void SelectContact(Contact contact)
         {
             if (contact != null)
             {
+                NoResults.Visibility = Visibility.Collapsed;
                 ContactDetails.Visibility = Visibility.Visible;
                 ContactName.Text = contact.FullName;
                 ContactCompany.Text = contact.Company;
+            }
+            else
+            {
+                NoResults.Visibility = Visibility.Visible;
+                ContactDetails.Visibility = Visibility.Collapsed;
             }
         }
     }

@@ -416,6 +416,23 @@ void Scenario4PageRange::OnPrintButtonClick(Platform::Object^ sender, Windows::U
 
 void Scenario4PageRange::OnNavigatedTo(NavigationEventArgs^ e)
 {
+    if (PrintManager::IsSupported())
+    {
+        // Tell the user how to print
+        MainPage::Current->NotifyUser("Print contract registered with customization, select some text and use the Print Selection button to print.", NotifyType::StatusMessage);
+    }
+    else
+    {
+        // Remove the print button
+        InvokePrintingButton->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+
+        // Inform user that Printing is not supported
+        MainPage::Current->NotifyUser("Printing is not supported.", NotifyType::ErrorMessage);
+
+        // Printing-related event handlers will never be called if printing
+        // is not supported, but it's okay to register for them anyway.
+    }
+
     PageToPrintFrame->Navigate(TypeName(PageToPrint::typeid), this);
 
     // Initalize common helper class and register for printing
@@ -424,9 +441,6 @@ void Scenario4PageRange::OnNavigatedTo(NavigationEventArgs^ e)
 
     // Initialize print content for this scenario
     printHelper->PreparePrintContent(ref new PageToPrint());
-
-    // Tell the user how to print
-    MainPage::Current->NotifyUser("Print contract registered with customization, use the Print button to print.", NotifyType::StatusMessage);
 }
 
 void Scenario4PageRange::OnNavigatedFrom(NavigationEventArgs^ e)

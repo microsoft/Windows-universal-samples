@@ -14,6 +14,7 @@
 using namespace Platform;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
+using namespace Windows::UI::Input::Inking;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Controls::Primitives;
@@ -142,7 +143,6 @@ SDKTemplate::Scenario1_CustomDry::Scenario1_CustomDry() : rootPage(MainPage::Cur
 
     // Event handler for selection change in the input mode combobox
     InputMode->SelectionChanged += ref new Windows::UI::Xaml::Controls::SelectionChangedEventHandler(this, &SDKTemplate::Scenario1_CustomDry::InkingModeSelectionChanged);
-
 }
 
 
@@ -228,34 +228,47 @@ void SDKTemplate::Scenario1_CustomDry::InkingModeSelectionChanged(Platform::Obje
     }
 
     Concurrency::critical_section::scoped_lock lock(_criticalSection);
-    if (InputMode->SelectedIndex == 0)
+
+    if (InputMode->SelectedIndex == 3)
     {
-        _config->Mode = Windows::UI::Input::Inking::InkInputProcessingMode::Inking;
-        // We set the right drag action to leave unprocessed so that we can enable barrel button selection
-        _config->RightDragAction = Windows::UI::Input::Inking::InkInputRightDragAction::LeaveUnprocessed;
-        _inputMode = InputModes::InkingMode;
+        // Show InkToolbar
+        inkToolbar->Visibility = Windows::UI::Xaml::Visibility::Visible;
+        _inputMode = InputModes::InkToolbarMode;
     }
-    else if (InputMode->SelectedIndex == 1)
+    else
     {
-        _config->Mode = Windows::UI::Input::Inking::InkInputProcessingMode::None;
-        _inputMode = InputModes::ErasingMode;
-    }
-    else if (InputMode->SelectedIndex == 2)
-    {
-        _config->Mode = Windows::UI::Input::Inking::InkInputProcessingMode::None;
-        _inputMode = InputModes::SelectingMode;
+        inkToolbar->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+        if (InputMode->SelectedIndex == 0)
+        {
+            _config->Mode = Windows::UI::Input::Inking::InkInputProcessingMode::Inking;
+            // We set the right drag action to leave unprocessed so that we can enable barrel button selection
+            _config->RightDragAction = Windows::UI::Input::Inking::InkInputRightDragAction::LeaveUnprocessed;
+            _inputMode = InputModes::InkingMode;
+        }
+        else if (InputMode->SelectedIndex == 1)
+        {
+            _config->Mode = Windows::UI::Input::Inking::InkInputProcessingMode::None;
+            _inputMode = InputModes::ErasingMode;
+        }
+        else if (InputMode->SelectedIndex == 2)
+        {
+            _config->Mode = Windows::UI::Input::Inking::InkInputProcessingMode::None;
+            _inputMode = InputModes::SelectingMode;
+        }
     }
 }
 
 void SDKTemplate::Scenario1_CustomDry::TouchInking_Checked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     inkCanvas->InkPresenter->InputDeviceTypes = Windows::UI::Core::CoreInputDeviceTypes::Pen |
+        Windows::UI::Core::CoreInputDeviceTypes::Mouse |
         Windows::UI::Core::CoreInputDeviceTypes::Touch;
 }
 
 void SDKTemplate::Scenario1_CustomDry::TouchInking_Unchecked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-    inkCanvas->InkPresenter->InputDeviceTypes = Windows::UI::Core::CoreInputDeviceTypes::Pen;
+    inkCanvas->InkPresenter->InputDeviceTypes = Windows::UI::Core::CoreInputDeviceTypes::Pen |
+        Windows::UI::Core::CoreInputDeviceTypes::Mouse;
 }
 
 void SDKTemplate::Scenario1_CustomDry::InkingEvent_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
@@ -512,7 +525,7 @@ void SDKTemplate::Scenario1_CustomDry::IndependentInputOnPointerPressing(CoreInk
             {
                 _config->Mode = Windows::UI::Input::Inking::InkInputProcessingMode::Inking;
             }
-            else
+            else if (_inputMode != InputModes::InkToolbarMode)
             {
                 _config->Mode = Windows::UI::Input::Inking::InkInputProcessingMode::None;
             }
@@ -844,7 +857,13 @@ Scenario1_CustomDry::PointerHitTestStates SDKTemplate::Scenario1_CustomDry::GetH
 Scenario1_CustomDry::InkingAreaSubStates SDKTemplate::Scenario1_CustomDry::GetInkingSubstate(Windows::UI::Core::PointerEventArgs^ args)
 {
     InkingAreaSubStates state = InkingAreaSubStates::AreaNone;
+
     if (_inputMode == InputModes::ErasingMode || args->CurrentPoint->Properties->IsEraser)
+    {
+        state = InkingAreaSubStates::Erasing;
+    }
+    else if ((_inputMode == InputModes::InkToolbarMode) &&
+             (inkToolbar->ActiveTool == inkToolbar->GetToolButton(InkToolbarTool::Eraser)))
     {
         state = InkingAreaSubStates::Erasing;
     }

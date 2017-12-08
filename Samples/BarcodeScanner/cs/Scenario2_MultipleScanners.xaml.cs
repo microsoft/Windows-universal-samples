@@ -10,10 +10,8 @@
 //*********************************************************
 
 using System;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.PointOfService;
-using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -33,8 +31,8 @@ namespace SDKTemplate
         // as NotifyUser()
         MainPage rootPage = MainPage.Current;
 
-        BarcodeScanner scannerInstance1 = null;
-        BarcodeScanner scannerInstance2 = null;
+        BarcodeScanner barcodeScannerInstance1 = null;
+        BarcodeScanner barcodeScannerInstance2 = null;
         ClaimedBarcodeScanner claimedBarcodeScannerInstance1 = null;
         ClaimedBarcodeScanner claimedBarcodeScannerInstance2 = null;
 
@@ -105,7 +103,11 @@ namespace SDKTemplate
                 }
                 else
                 {
-                    scannerInstance1 = null;
+                    if (barcodeScannerInstance1 != null)
+                    {
+                        barcodeScannerInstance1.Dispose();
+                        barcodeScannerInstance1 = null;
+                    }
                 }
             }
         }
@@ -139,6 +141,12 @@ namespace SDKTemplate
                     {
                         claimedBarcodeScannerInstance1.Dispose();
                         claimedBarcodeScannerInstance1 = null;
+
+                        if (barcodeScannerInstance1 != null)
+                        {
+                            barcodeScannerInstance1.Dispose();
+                            barcodeScannerInstance1 = null;
+                        }
                     }
                 }
             );
@@ -176,7 +184,11 @@ namespace SDKTemplate
                 }
                 else
                 {
-                    scannerInstance2 = null;
+                    if (barcodeScannerInstance2 != null)
+                    {
+                        barcodeScannerInstance2.Dispose();
+                        barcodeScannerInstance2 = null;
+                    }
                 }
             }
         }
@@ -210,6 +222,12 @@ namespace SDKTemplate
                     {
                         claimedBarcodeScannerInstance2.Dispose();
                         claimedBarcodeScannerInstance2 = null;
+
+                        if (barcodeScannerInstance2 != null)
+                        {
+                            barcodeScannerInstance2.Dispose();
+                            barcodeScannerInstance2 = null;
+                        }
                     }
 
                 }
@@ -225,14 +243,22 @@ namespace SDKTemplate
         /// 
         private void ButtonEndScanningInstance1_Click(object sender, RoutedEventArgs e)
         {
-            //remove the event handlers
-            claimedBarcodeScannerInstance1.DataReceived -= claimedBarcodeScannerInstance1_DataReceived;
-            claimedBarcodeScannerInstance1.ReleaseDeviceRequested -= claimedBarcodeScannerInstance1_ReleaseDeviceRequested;
+            if (claimedBarcodeScannerInstance1 != null)
+            {
+                //remove the event handlers
+                claimedBarcodeScannerInstance1.DataReceived -= claimedBarcodeScannerInstance1_DataReceived;
+                claimedBarcodeScannerInstance1.ReleaseDeviceRequested -= claimedBarcodeScannerInstance1_ReleaseDeviceRequested;
 
-            //dispose the instance
-            claimedBarcodeScannerInstance1.Dispose();
-            claimedBarcodeScannerInstance1 = null;
-            scannerInstance1 = null;
+                //dispose the instance
+                claimedBarcodeScannerInstance1.Dispose();
+                claimedBarcodeScannerInstance1 = null;
+            }
+
+            if (barcodeScannerInstance1 != null)
+            {
+                barcodeScannerInstance1.Dispose();
+                barcodeScannerInstance1 = null;
+            }
 
             //reset the UI
 
@@ -250,14 +276,22 @@ namespace SDKTemplate
         /// 
         private void ButtonEndScanningInstance2_Click(object sender, RoutedEventArgs e)
         {
-            //remove the event handlers
-            claimedBarcodeScannerInstance2.DataReceived -= claimedBarcodeScannerInstance2_DataReceived;
-            claimedBarcodeScannerInstance2.ReleaseDeviceRequested -= claimedBarcodeScannerInstance2_ReleaseDeviceRequested;
+            if (claimedBarcodeScannerInstance2 != null)
+            {
+                //remove the event handlers
+                claimedBarcodeScannerInstance2.DataReceived -= claimedBarcodeScannerInstance2_DataReceived;
+                claimedBarcodeScannerInstance2.ReleaseDeviceRequested -= claimedBarcodeScannerInstance2_ReleaseDeviceRequested;
 
-            //dispose the instance
-            claimedBarcodeScannerInstance2.Dispose();
-            claimedBarcodeScannerInstance2 = null;
-            scannerInstance2 = null;
+                //dispose the instance
+                claimedBarcodeScannerInstance2.Dispose();
+                claimedBarcodeScannerInstance2 = null;
+            }
+
+            if (barcodeScannerInstance2 != null)
+            {
+                barcodeScannerInstance2.Dispose();
+                barcodeScannerInstance2 = null;
+            }
 
             //reset the UI
             ResetUI();
@@ -272,7 +306,7 @@ namespace SDKTemplate
         private async Task<bool> CreateDefaultScannerObjectAsync(BarcodeScannerInstance instance)
         {
             BarcodeScanner scanner = null;
-            scanner = await BarcodeScanner.GetDefaultAsync();
+            scanner = await DeviceHelpers.GetFirstBarcodeScannerAsync();
 
             if (scanner == null)
             {
@@ -283,10 +317,10 @@ namespace SDKTemplate
             switch (instance)
             {
                 case BarcodeScannerInstance.Instance1:
-                    scannerInstance1 = scanner;
+                    barcodeScannerInstance1 = scanner;
                     break;
                 case BarcodeScannerInstance.Instance2:
-                    scannerInstance2 = scanner;
+                    barcodeScannerInstance2 = scanner;
                     break;
                 default:
                     return false;
@@ -307,7 +341,7 @@ namespace SDKTemplate
             {
                 case BarcodeScannerInstance.Instance1:
 
-                    claimedBarcodeScannerInstance1 = await scannerInstance1.ClaimScannerAsync();
+                    claimedBarcodeScannerInstance1 = await barcodeScannerInstance1.ClaimScannerAsync();
                     if (claimedBarcodeScannerInstance1 == null)
                         rootPage.NotifyUser("Instance 1 claim barcode scanner failed.", NotifyType.ErrorMessage);
                     else
@@ -316,7 +350,7 @@ namespace SDKTemplate
 
                 case BarcodeScannerInstance.Instance2:
 
-                    claimedBarcodeScannerInstance2 = await scannerInstance2.ClaimScannerAsync();
+                    claimedBarcodeScannerInstance2 = await barcodeScannerInstance2.ClaimScannerAsync();
                     if (claimedBarcodeScannerInstance2 == null)
                         rootPage.NotifyUser("Instance 2 claim barcode scanner failed.", NotifyType.ErrorMessage);
                     else
@@ -362,7 +396,11 @@ namespace SDKTemplate
                 claimedBarcodeScannerInstance1 = null;
             }
 
-            scannerInstance1 = null;
+            if (barcodeScannerInstance1 != null)
+            {
+                barcodeScannerInstance1.Dispose();
+                barcodeScannerInstance1 = null;
+            }
 
             if (claimedBarcodeScannerInstance2 != null)
             {
@@ -370,11 +408,15 @@ namespace SDKTemplate
                 claimedBarcodeScannerInstance2 = null;
             }
 
-            scannerInstance2 = null;
+            if (barcodeScannerInstance2 != null)
+            {
+                barcodeScannerInstance2.Dispose();
+                barcodeScannerInstance2 = null;
+            }
 
             ResetUI();
         }
-        
+
         /// <summary>
         /// Resets the display Elements to original state
         /// </summary>
@@ -407,7 +449,6 @@ namespace SDKTemplate
 
             switch (instance)
             {
-
                 case BarcodeScannerInstance.Instance1:
                     await rootPage.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
                         () =>
@@ -424,93 +465,17 @@ namespace SDKTemplate
 
                 case BarcodeScannerInstance.Instance2:
                     await rootPage.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
-                    () =>
-                    {
-                        ScenarioStartScanningInstance1.IsEnabled = true;
-                        ScenarioStartScanningInstance2.IsEnabled = false;
-                        ScenarioEndScanningInstance1.IsEnabled = false;
-                        ScenarioEndScanningInstance2.IsEnabled = true;
-                        Instance2Border.BorderBrush = new SolidColorBrush(Colors.DarkBlue);
-                    }
-                );
-                    break;
-
-                default:
+                        () =>
+                        {
+                            ScenarioStartScanningInstance1.IsEnabled = true;
+                            ScenarioStartScanningInstance2.IsEnabled = false;
+                            ScenarioEndScanningInstance1.IsEnabled = false;
+                            ScenarioEndScanningInstance2.IsEnabled = true;
+                            Instance2Border.BorderBrush = new SolidColorBrush(Colors.DarkBlue);
+                        }
+                    );
                     break;
             }
-        }
-
-        string GetDataString(IBuffer data)
-        {
-            StringBuilder result = new StringBuilder();
-
-            if (data == null)
-            {
-                result.Append("No data");
-            }
-            else
-            {
-                // Just to show that we have the raw data, we'll print the value of the bytes.
-                // Arbitrarily limit the number of bytes printed to 20 so the UI isn't overloaded.
-                const uint MAX_BYTES_TO_PRINT = 20;
-                uint bytesToPrint = Math.Min(data.Length, MAX_BYTES_TO_PRINT);
-
-                DataReader reader = DataReader.FromBuffer(data);
-                byte[] dataBytes = new byte[bytesToPrint];
-                reader.ReadBytes(dataBytes);
-
-                for (uint byteIndex = 0; byteIndex < bytesToPrint; ++byteIndex)
-                {
-                    result.AppendFormat("{0:X2} ", dataBytes[byteIndex]);
-                }
-
-                if (bytesToPrint < data.Length)
-                {
-                    result.Append("...");
-                }
-            }
-
-            return result.ToString();
-        }
-
-        string GetDataLabelString(IBuffer data, uint scanDataType)
-        {
-            string result = null;
-            // Only certain data types contain encoded text.
-            //   To keep this simple, we'll just decode a few of them.
-            if (data == null)
-            {
-                result = "No data";
-            }
-            else
-            {
-                switch (BarcodeSymbologies.GetName(scanDataType))
-                {
-                    case "Upca":
-                    case "UpcaAdd2":
-                    case "UpcaAdd5":
-                    case "Upce":
-                    case "UpceAdd2":
-                    case "UpceAdd5":
-                    case "Ean8":
-                    case "TfStd":
-                        // The UPC, EAN8, and 2 of 5 families encode the digits 0..9
-                        // which are then sent to the app in a UTF8 string (like "01234")
-
-                        // This is not an exhaustive list of symbologies that can be converted to a string
-
-                        DataReader reader = DataReader.FromBuffer(data);
-                        result = reader.ReadString(data.Length);
-                        break;
-                    default:
-                        // Some other symbologies (typically 2-D symbologies) contain binary data that
-                        //  should not be converted to text.
-                        result = string.Format("Decoded data unavailable. Raw label data: {0}", GetDataString(data));
-                        break;
-                }
-            }
-
-            return result;
         }
 
         /// <summary>
@@ -520,31 +485,13 @@ namespace SDKTemplate
         /// <param name="args"></param>
         private async void claimedBarcodeScannerInstance1_DataReceived(ClaimedBarcodeScanner sender, BarcodeScannerDataReceivedEventArgs args)
         {
-            // Grab the data from the IBuffers
-            string scanData = String.Empty;
-            string scanDataLabel = String.Empty;
-
-            if (args.Report.ScanData != null)
-            {
-                scanData = GetDataString(args.Report.ScanData);
-            }
-
-            if (args.Report.ScanDataLabel != null)
-            {
-                scanDataLabel = GetDataLabelString(args.Report.ScanDataLabel, args.Report.ScanDataType);
-            }
-
             await MainPage.Current.Dispatcher.RunAsync(
                 Windows.UI.Core.CoreDispatcherPriority.Normal,
                 () =>
                 {
-                    ScanDataType1.Text = String.Format("{0}", BarcodeSymbologies.GetName(args.Report.ScanDataType));
-
-                    // DataLabel
-                    DataLabel1.Text = String.Format("{0}", scanDataLabel);
-
-                    // Data
-                    ScanData1.Text = String.Format("{0}", scanData);
+                    ScanDataType1.Text = BarcodeSymbologies.GetName(args.Report.ScanDataType);
+                    DataLabel1.Text = DataHelpers.GetDataLabelString(args.Report.ScanDataLabel, args.Report.ScanDataType);
+                    ScanData1.Text = DataHelpers.GetDataString(args.Report.ScanData);
 
                     rootPage.NotifyUser("Instance 1 received data from the barcode scanner.", NotifyType.StatusMessage);
                 }
@@ -558,32 +505,13 @@ namespace SDKTemplate
         /// <param name="args"></param>
         private async void claimedBarcodeScannerInstance2_DataReceived(ClaimedBarcodeScanner sender, BarcodeScannerDataReceivedEventArgs args)
         {
-            // Grab the data from the IBuffers
-            string scanData = String.Empty;
-            string scanDataLabel = String.Empty;
-
-            if (args.Report.ScanData != null)
-            {
-                scanData = GetDataString(args.Report.ScanData);
-            }
-
-            if (args.Report.ScanDataLabel != null)
-            {
-                scanDataLabel = GetDataLabelString(args.Report.ScanDataLabel, args.Report.ScanDataType);
-            }
-
             await MainPage.Current.Dispatcher.RunAsync(
                 Windows.UI.Core.CoreDispatcherPriority.Normal,
                 () =>
                 {
-                    // Symbology
-                    ScanDataType2.Text = String.Format("{0}", BarcodeSymbologies.GetName(args.Report.ScanDataType));
-
-                    // DataLabel
-                    DataLabel2.Text = String.Format("{0}", scanDataLabel);
-
-                    // Data
-                    ScanData2.Text = String.Format("{0}", scanData);
+                    ScanDataType2.Text = BarcodeSymbologies.GetName(args.Report.ScanDataType);
+                    DataLabel2.Text = DataHelpers.GetDataLabelString(args.Report.ScanDataLabel, args.Report.ScanDataType);
+                    ScanData2.Text = DataHelpers.GetDataString(args.Report.ScanData);
 
                     rootPage.NotifyUser("Instance 2 received data from the barcode scanner.", NotifyType.StatusMessage);
                 }

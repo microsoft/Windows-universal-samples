@@ -18,6 +18,8 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
     var app = WinJS.Application;
     var nav = WinJS.Navigation;
     var activationKinds = Windows.ApplicationModel.Activation.ActivationKind;
+    var AppViewBackButtonVisibility = Windows.UI.Core.AppViewBackButtonVisibility;
+    var systemNavigationManager = Windows.UI.Core.SystemNavigationManager.getForCurrentView();
     var splitView;
 
     WinJS.Namespace.define("SdkSample", {
@@ -44,25 +46,21 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
         var p = WinJS.UI.processAll().
             then(function () {
 
-                SdkSample.DataStore.TripStore.loadTrips().then(function () {
-                    return wap.current.installedLocation.getFileAsync("AdventureworksCommands.xml");
-                }).then(function (file) {
-                    return voiceCommandManager.installCommandDefinitionsFromStorageFileAsync(file);
-                }).then(function () {
-                    var language = window.navigator.userLanguage || window.navigator.language;
+                SdkSample.DataStore.TripStore.loadTrips().done(function () {
 
-                    var commandSetName = "AdventureWorksCommandSet_" + language.toLowerCase();
-                    if (voiceCommandManager.installedCommandDefinitions.hasKey(commandSetName)) {
-                        var vcd = voiceCommandManager.installedCommandDefinitions.lookup(commandSetName);
-                        var phraseList = [];
-                        SdkSample.DataStore.TripStore.Trips.forEach(function (trip) {
-                            phraseList.push(trip.destination);
-                        });
-                        vcd.setPhraseListAsync("destination", phraseList).done();
-                    } else {
-                        WinJS.log && WinJS.log("VCD not installed yet?", "", "warning");
-                    }
-                }).done(function () {
+                    // Install the VCD and phrase updates using a WebWorker to prevent hanging up the UI thread during app initialization.
+                    var language = window.navigator.userLanguage || window.navigator.language;
+                    var installVCDWorker = Worker("js/installVCD.js");
+                    var phraseList = [];
+                    SdkSample.DataStore.TripStore.Trips.forEach(function (trip) {
+                        phraseList.push(trip.destination);
+                    });
+
+                    // Pass in the phraselist from the loaded store and the language to install the phrase list into.
+                    installVCDWorker.postMessage({
+                        phraseList: phraseList,
+                        language: language
+                    });
 
                     var url = "/html/tripListView.html";
                     var initialState = {};
@@ -124,14 +122,10 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
                         }
                     }
 
-
                     initialState.activationKind = activationKind;
                     initialState.activatedEventArgs = activatedEventArgs;
                     nav.history.current.initialPlaceholder = true;
                     return nav.navigate(url, initialState);
-
-
-
                 }, function (e) {
                     WinJS.log && WinJS.log("Failed to load VCD", e.message, "error");
                 });
@@ -145,9 +139,6 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
         // until after processAll and navigate complete asynchronously.
         eventObject.setPromise(p);
     }
-
-
-
 
     function navigating(eventObject) {
         /// <summary> Handle swapping out the content block for the new page, and setting up
@@ -177,6 +168,30 @@ var voiceCommandManager = Windows.ApplicationModel.VoiceCommands.VoiceCommandDef
         p.done();
         eventObject.detail.setPromise(p);
     }
+
+    function navigated(eventObject) {
+        // If we returned to the root page, then empty the backstack.
+        if (nav.history.backStack.length > 0 && eventObject.detail.location == nav.history.backStack[0].location) {
+            nav.history.backStack.length = 0;
+        }
+
+        // Set the Back button state appropriately.
+        systemNavigationManager.appViewBackButtonVisibility = nav.canGoBack ? 
+            AppViewBackButtonVisibility.visible : AppViewBackButtonVisibility.collapsed;
+    }
+
+    function backRequested(eventObject) {
+        if (!eventObject.handled && nav.canGoBack) {
+            eventObject.handled = true;
+            nav.back();
+        }
+    }
+
+    // Register for Back button events.
+    systemNavigationManager.addEventListener("backrequested", backRequested);
+
+    // Register for the navigated event so we can update the Back button.
+    nav.addEventListener("navigated", navigated);
 
     nav.addEventListener("navigating", navigating);
     app.addEventListener("activated", activated, false);

@@ -1,11 +1,19 @@
 <!---
   category: AudioVideoAndCamera 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620512&clcid=0x409
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620512
 --->
 
 # Basic face detection sample
 
-This sample shows how to use the Windows.Media.FaceAnalysis.FaceDetector WinRT class to find human faces within a still image.
+Shows how to use the [FaceDetector](https://msdn.microsoft.com/library/windows/apps/windows.media.faceanalysis.facedetector.aspx) 
+class to find human faces within a still image.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Specifically, this sample shows how to:
 
@@ -15,11 +23,11 @@ Specifically, this sample shows how to:
 - **Acquire a video frame** from a video capture stream and convert it to a format supported by FaceDetector
 - **Retrieve results** from FaceDetector and visualize them
 
-**Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
+**Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  
-To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
+To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
-To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
+To obtain information about Microsoft Visual Studio and the tools for developing Windows apps, go to [Visual Studio](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
 
@@ -28,6 +36,8 @@ The FaceDetector is intended to operate on a static image or a single frame of v
 ### Samples
 
 [BasicFaceTracking](/Samples/BasicFaceTracking)
+
+[HolographicFaceTracking](/Samples/HolographicFaceTracking)
 
 [FilePicker](/Samples/FilePicker)
 
@@ -39,17 +49,17 @@ The FaceDetector is intended to operate on a static image or a single frame of v
 
 ### Reference
 
-[Windows.Media.FaceAnalysis.FaceDetector](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.faceanalysis.facedetector.aspx)
+[Windows.Media.FaceAnalysis.FaceDetector](https://msdn.microsoft.com/library/windows/apps/windows.media.faceanalysis.facedetector.aspx)
 
-[Windows.Media.FaceAnalysis namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.faceanalysis.aspx)
+[Windows.Media.FaceAnalysis namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.faceanalysis.aspx)
 
-[Windows.Graphics.Imaging namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.graphics.imaging.aspx)
+[Windows.Graphics.Imaging namespace](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.aspx)
 
-[Windows.Storage.Pickers namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.storage.pickers.aspx)
+[Windows.Storage.Pickers namespace](https://msdn.microsoft.com/library/windows/apps/windows.storage.pickers.aspx)
 
-[Windows.Storage.Streams namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.storage.streams.aspx)
+[Windows.Storage.Streams namespace](https://msdn.microsoft.com/library/windows/apps/windows.storage.streams.aspx)
 
-[Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.devices.aspx)
+[Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)
 
 ## System requirements
 
@@ -64,8 +74,8 @@ The FaceDetector is intended to operate on a static image or a single frame of v
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++ or C#). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++ or C#). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

@@ -49,7 +49,7 @@
 
         WinJS.log("Navigating to: " + googleURL, "Web Authentication SDK Sample", "error");
         var startURI = new Windows.Foundation.Uri(googleURL);
-        var endURI = new Windows.Foundation.Uri("https://accounts.google.com/o/oauth2/approval?");
+        var endURI = new Windows.Foundation.Uri("https://accounts.google.com/o/oauth2/approval");
 
         authzInProgress = true;
         if (Windows.Security.Authentication.Web.WebAuthenticationBroker.authenticateAndContinue) {

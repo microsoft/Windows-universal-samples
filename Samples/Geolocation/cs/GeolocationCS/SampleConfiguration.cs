@@ -26,6 +26,9 @@ namespace SDKTemplate
             new Scenario() { Title = "Background position", ClassType = typeof(GeolocationCS.Scenario3) },
             new Scenario() { Title = "Foreground geofencing", ClassType = typeof(GeolocationCS.Scenario4) },
             new Scenario() { Title = "Background geofencing", ClassType = typeof(GeolocationCS.Scenario5) },
+            new Scenario() { Title = "Get last visit", ClassType= typeof(GeolocationCS.Scenario6)},
+            new Scenario() { Title = "Foreground visit monitoring", ClassType= typeof(GeolocationCS.Scenario7)},
+            new Scenario() { Title = "Background visit monitoring", ClassType=typeof(GeolocationCS.Scenario8)},
         };
     }
 

@@ -40,13 +40,13 @@
                 try {
                     var backgroundAccessStatus = Background.BackgroundExecutionManager.getAccessStatus();
                     switch (backgroundAccessStatus) {
-                        case Background.BackgroundAccessStatus.unspecified:
-                        case Background.BackgroundAccessStatus.denied:
-                            WinJS.log && WinJS.log("This application must be added to the lock screen before the background task will run.", "sample", "status");
+                        case Background.BackgroundAccessStatus.alwaysAllowed:
+                        case Background.BackgroundAccessStatus.allowedSubjectToSystemPolicy:
+                            WinJS.log && WinJS.log("Background task is already registered. Waiting for next update...", "sample", "status");
                             break;
 
                         default:
-                            WinJS.log && WinJS.log("Background task is already registered. Waiting for next update...", "sample", "status");
+                            WinJS.log && WinJS.log("Background tasks may be disabled for this app", "sample", "status");
                             break;
                     }
                 } catch (ex) {
@@ -112,18 +112,18 @@
                     TimerTriggerBackgroundTask.updateButtonStates(/*registered:*/ true);
 
                     switch (backgroundAccessStatus) {
-                        case Background.BackgroundAccessStatus.unspecified:
-                        case Background.BackgroundAccessStatus.denied:
-                            WinJS.log && WinJS.log("Not able to run in background. Application must be added to the lock screen.", "sample", "error");
-                            break;
-
-                        default:
+                        case Background.BackgroundAccessStatus.alwaysAllowed:
+                        case Background.BackgroundAccessStatus.allowedSubjectToSystemPolicy:
                             WinJS.log && WinJS.log("Background task registered.", "sample", "status");
 
                             // Need to request access to location
-                            // This must be done with the background task registeration
+                            // This must be done with the background task registration
                             // because the background task cannot display UI.
                             requestLocationAccess();
+                            break;
+
+                        default:
+                            WinJS.log && WinJS.log("Background tasks may be disabled for this app", "sample", "error");
                             break;
                     }
                 },

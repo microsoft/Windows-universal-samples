@@ -30,6 +30,9 @@ namespace AdventureWorks
 
     private:
         void OnNavigationFailed(Platform::Object ^sender, Windows::UI::Xaml::Navigation::NavigationFailedEventArgs ^e);
+        void OnNavigated(Platform::Object^ sender, Windows::UI::Xaml::Navigation::NavigationEventArgs^ e);
+        void OnBackRequested(Platform::Object^ sender, Windows::UI::Core::BackRequestedEventArgs^ e);
+
         Platform::String^ SemanticInterpretation(Platform::String^ tag, Windows::Media::SpeechRecognition::SpeechRecognitionResult^ result);
     };
 }

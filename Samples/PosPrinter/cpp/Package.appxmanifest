@@ -14,13 +14,13 @@
     <mp:PhoneIdentity PhoneProductId="d391ec7f-5fb5-45c4-8628-03f4b7cf05d9" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>PosPrinter</DisplayName>
+        <DisplayName>PosPrinter C++ Sample</DisplayName>
         <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
         <Logo>Assets\StoreLogo-sdk.png</Logo>
     </Properties>
 
     <Dependencies>
-        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.15063.0" MaxVersionTested="10.0.16299.0" />
     </Dependencies>
 
     <Resources>
@@ -32,10 +32,10 @@
           Executable="$targetnametoken$.exe"
           EntryPoint="PosPrinter.App">
             <uap:VisualElements
-              DisplayName="PosPrinter"
+              DisplayName="PosPrinter C++ Sample"
               Square150x150Logo="Assets\squareTile-sdk.png"
               Square44x44Logo="Assets\smallTile-sdk.png"
-              Description="PosPrinter"
+              Description="PosPrinter C++ Sample"
               BackgroundColor="#00B2F0">
                 <uap:SplashScreen Image="Assets\splash-sdk.png" />
                 <uap:DefaultTile>

@@ -116,6 +116,9 @@ namespace AdventureWorks.VoiceCommands
 
                     voiceServiceConnection.VoiceCommandCompleted += OnVoiceCommandCompleted;
 
+                    // GetVoiceCommandAsync establishes initial connection to Cortana, and must be called prior to any 
+                    // messages sent to Cortana. Attempting to use ReportSuccessAsync, ReportProgressAsync, etc
+                    // prior to calling this will produce undefined behavior.
                     VoiceCommand voiceCommand = await voiceServiceConnection.GetVoiceCommandAsync();
 
                     // Depending on the operation (defined in AdventureWorks:AdventureWorksCommands.xml)

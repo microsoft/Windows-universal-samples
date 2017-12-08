@@ -78,8 +78,9 @@ Namespace Global.BackgroundTransfer
         End Sub
 
         Private Sub OnDownloadCompleted(task As Task(Of DownloadOperation))
+            downloadsCompleted += 1
             Dim ignore = rootPage.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Sub()
-                rootPage.NotifyUser(String.Format(CultureInfo.InvariantCulture, "{0} downloads completed.", "'downloadsCompleted=downloadsCompleted+1' could not be converted to a ExpressionSyntax"), NotifyType.StatusMessage)
+                rootPage.NotifyUser(String.Format(CultureInfo.InvariantCulture, "{0} downloads completed.", downloadsCompleted), NotifyType.StatusMessage)
             End Sub)
         End Sub
     End Class

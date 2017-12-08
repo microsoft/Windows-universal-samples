@@ -11,27 +11,27 @@
     <ClCompile Include="..\..\shared\AllJoynBusObjectManager.cpp" />
     <ClCompile Include="..\..\shared\AllJoynHelpers.cpp" />
     <ClCompile Include="SecureInterfaceConsumer.cpp" />
+    <ClCompile Include="SecureInterfaceLegacySignals.cpp" />
     <ClCompile Include="SecureInterfaceProducer.cpp" />
     <ClCompile Include="SecureInterfaceServiceEventAdapter.cpp" />
     <ClCompile Include="SecureInterfaceServiceEventArgs.cpp" />
     <ClCompile Include="SecureInterfaceSignals.cpp" />
-    <ClCompile Include="SecureInterfaceWatcher.cpp" />
     <ClCompile Include="..\..\shared\TypeConversionHelpers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="..\..\shared\AllJoynBusObjectManager.h" />
-    <ClInclude Include="..\..\shared\AllJoynHelpers.h" />
+    <ClInclude Include="AllJoynHelpers.h" />
     <ClInclude Include="ISecureInterfaceService.h" />
     <ClInclude Include="SecureInterfaceConsumer.h" />
     <ClInclude Include="SecureInterfaceEventArgs.h" />
+    <ClInclude Include="SecureInterfaceLegacySignals.h" />
     <ClInclude Include="SecureInterfaceMethodResults.h" />
     <ClInclude Include="SecureInterfaceProducer.h" />
     <ClInclude Include="SecureInterfaceServiceEventAdapter.h" />
     <ClInclude Include="SecureInterfaceServiceEventArgs.h" />
     <ClInclude Include="SecureInterfaceSignals.h" />
     <ClInclude Include="SecureInterfaceStructures.h" />
-    <ClInclude Include="SecureInterfaceWatcher.h" />
     <ClInclude Include="..\..\shared\TypeConversionHelpers.h" />
   </ItemGroup>
 </Project>

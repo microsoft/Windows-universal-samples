@@ -32,12 +32,11 @@
                 </TextBlock>
             </StackPanel>
 
-            <StackPanel Grid.Row="1"  HorizontalAlignment="Left" VerticalAlignment="Top">
-                <ComboBox Name="CameraSettings" PlaceholderText="Preview Settings" SelectionChanged="ComboBoxSettings_Changed" Width="auto"/>
-            </StackPanel>
+            <ComboBox Name="CameraSettings" PlaceholderText="Preview Settings" SelectionChanged="ComboBoxSettings_Changed" 
+                        Grid.Row="1"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto"/>
 
-            <Button Grid.Row="2" Content="Initialize Camera" Tapped="InitializeCameraButton_Tapped"
-                    HorizontalAlignment="Center" VerticalAlignment="Center"></Button>
+            <Button Grid.Row="2" Content="Initialize Camera" Click="InitializeCameraButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            
             <Viewbox Grid.Row="2">
                 <!--Camera preview-->
                 <CaptureElement Name="PreviewControl" Stretch="Uniform" Visibility="Collapsed"/>

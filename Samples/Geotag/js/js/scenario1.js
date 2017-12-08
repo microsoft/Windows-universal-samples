@@ -3,127 +3,89 @@
 (function () {
     "use strict";
 
-    function logError(msg) {
-        WinJS.log && WinJS.log(msg, "", "error");
-    }
+    // namespaces and classes
+    var GeotagHelper = Windows.Storage.FileProperties.GeotagHelper;
+    var Geolocator = Windows.Devices.Geolocation.Geolocator;
+    var GeolocationAccessStatus = Windows.Devices.Geolocation.GeolocationAccessStatus;
+    var Geopoint = Windows.Devices.Geolocation.Geopoint;
 
-    function logStatus(msg) {
-        WinJS.log && WinJS.log(msg, "", "status");
-    }
+    // Local variables
+    var file;
 
-    // Apps need to call RequestAccessAsync to get user permission on location usage,
-    // otherwise SetGeotagFromGeolocator will fail. Also RequestAccessAsync needs 
-    // to be called from a UI thread.
-    function requestLocationAccess() {
-        try {
-            Windows.Devices.Geolocation.Geolocator.requestAccessAsync().then(
-                function (status) {
-                    if (status != Windows.Devices.Geolocation.GeolocationAccessStatus.allowed) {
-                        logStatus("Location access is NOT allowed");
-                    }
-                },
-                function (error) {
-                    logError("requestAccessAsync failed: " + error.message);
-                }
-            );
-        } catch (error) {
-            logError("Expection: " + error.message);
-        }
-    }
-
-    function getGeotag() {
-        try {
-            var inputFilename = document.getElementById("filename").value;
-            Windows.Storage.KnownFolders.picturesLibrary.getFileAsync(inputFilename).then(
-                function (file) {
-                    try {
-                        Windows.Storage.FileProperties.GeotagHelper.getGeotagAsync(file).then(
-                            function (result) {
-                                if (result != null) {
-                                    logStatus("getGeotagAsync complete - latitude: " + result.position.latitude + " longitude: " + result.position.longitude);
-                                } else {
-                                    logStatus("getGeotagAsync complete - location info not available")
-                                }
-                            },
-                            function (error) {
-                                logError("getGeotagAsync failed: " + error.message);
-                            }
-                        );
-                    } catch (error) {
-                        logError("Expection: " + error.message);
-                    }
-                },
-                function (error) {
-                    logError("getGeotagAsync failed: " + error.message);
-                }
-            );
-        } catch (error) {
-            logError("Expection: " + error.message);
-        }
-    }
-
-    function setGeotagFromGeolocator() {
-        try {
-            var inputFilename = document.getElementById("filename").value;
-            Windows.Storage.KnownFolders.picturesLibrary.getFileAsync(inputFilename).then(
-                function (file) {
-                    var geolocator = new Windows.Devices.Geolocation.Geolocator();
-                    geolocator.DesiredAccuracy = Windows.Devices.Geolocation.PositionAccuracy.High;
-
-                    Windows.Storage.FileProperties.GeotagHelper.setGeotagFromGeolocatorAsync(file, geolocator).then(
-                        function () {
-                            logStatus("setGeotagFromGeolocatorAsync complete");
-                        },
-                        function (error) {
-                            logError("setGeotagFromGeolocatorAsync failed: " + error.message);
-                        }
-                    );
-                },
-                function (error) {
-                    logError("getFileAsync failed: " + error.message);
-                }
-            );
-        } catch (error) {
-            logError("Expection: " + error.message);
-        }
-    }
-
-    function setGeotag() {
-        try {
-            var inputFilename = document.getElementById("filename").value;
-            Windows.Storage.KnownFolders.picturesLibrary.getFileAsync(inputFilename).then(
-                function (file) {
-                    try {
-                        // Use latitude 10.0, longitude 20.0 as an example
-                        var geopoint = new Windows.Devices.Geolocation.Geopoint({ latitude: 10.0, longitude: 20.0, altitude: 0.0 });
-                        Windows.Storage.FileProperties.GeotagHelper.setGeotagAsync(file, geopoint).then(
-                            function () {
-                                logStatus("setGeotagAsync complete");
-                            },
-                            function (error) {
-                                logError("setGeotagAsync failed: " + error.message);
-                            }
-                        );
-                    } catch (error) {
-                        logError("Expection: " + error.message);
-                    }
-                },
-                function (error) {
-                    logError("getFileAsync failed: " + error.message);
-                }
-            );
-        } catch (error) {
-            logError("Expection: " + error.message);
-        }
-    }
+    // DOM elements
+    var fileOperationsPanel;
+    var fileDisplayName;
 
     var page = WinJS.UI.Pages.define("/html/scenario1.html", {
         ready: function (element, options) {
-            document.getElementById("GetGeotagButton").addEventListener("click", getGeotag, false);
-            document.getElementById("SetGeotagFromGeolocatorButton").addEventListener("click", setGeotagFromGeolocator, false);
-            document.getElementById("SetGeotagButton").addEventListener("click", setGeotag, false);
-            requestLocationAccess();
+            fileOperationsPanel = document.getElementById("fileOperationsPanel");
+            fileDisplayName = document.getElementById("fileDisplayName");
+
+            document.getElementById("chooseFileButton").addEventListener("click", chooseFile, false);
+            document.getElementById("getGeotagButton").addEventListener("click", getGeotag, false);
+            document.getElementById("setGeotagFromGeolocatorButton").addEventListener("click", setGeotagFromGeolocator, false);
+            document.getElementById("setGeotagButton").addEventListener("click", setGeotag, false);
         }
     });
+
+    function chooseFile() {
+        var picker = new Windows.Storage.Pickers.FileOpenPicker();
+        picker.fileTypeFilter.push(".jpg", ".jpeg", ".mp4");
+        picker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.picturesLibrary;
+        picker.pickSingleFileAsync().done(function (pickedFile) {
+            file = pickedFile;
+            if (file) {
+                fileDisplayName.innerText = file.displayName;
+                fileOperationsPanel.style.display = "block";
+            } else {
+                fileOperationsPanel.style.display = "none";
+            }
+        });
+    }
+
+    function getGeotag() {
+        GeotagHelper.getGeotagAsync(file).done(function (geopoint) {
+            if (geopoint) {
+                WinJS.log && WinJS.log("Latitude = " + geopoint.position.latitude
+                    + ", Longitude = " + geopoint.position.longitude, "sample", "status");
+            } else {
+                // File I/O errors are converted to "No information".
+                WinJS.log && WinJS.log("No location information available", "sample", "error");
+            }
+        });
+    }
+
+    function setGeotagFromGeolocator() {
+        // Call RequestAccessAsync to get user permission on location usage.
+        // Otherwise SetGeotagFromGeolocator will fail.
+        Geolocator.requestAccessAsync().done(function (status) {
+            if (status != GeolocationAccessStatus.allowed) {
+                WinJS.log && WinJS.log("Location access is not allowed", "sample", "error");
+            } else {
+                var geolocator = new Geolocator();
+                geolocator.desiredAccuracy = Windows.Devices.Geolocation.PositionAccuracy.high;
+                GeotagHelper.setGeotagFromGeolocatorAsync(file, geolocator).done(function () {
+                    WinJS.log && WinJS.log("Geolocation set to current location", "sample", "status");
+                }, function (e) {
+                    // File I/O errors are reported as exceptions.
+                    // AccessDeniedExcetion can be raised if the user revoked location access
+                    // after RequestAccessAsync completed.
+                    WinJS.log && WinJS.log("Exception: " + e.message, "sample", "error");
+                });
+            }
+        });
+    }
+
+    function setGeotag() {
+        // Set the approximate position of the observation deck of the Seattle Space Needle.
+        var geopoint = new Geopoint({ latitude: 47.620491, longitude: -122.349319, altitude: 158.12 });
+        
+        GeotagHelper.setGeotagAsync(file, geopoint).done(function() {
+            WinJS.log && WinJS.log("Geolocation set to Seattle Space Needle", "sample", "status");
+        }, function (e) {
+            // File I/O errors are reported as exceptions
+            WinJS.log && WinJS.log("Exception: " + e.message, "sample", "error");
+        });
+    }
 })();
 

@@ -8,28 +8,18 @@
 //
 //*********************************************************
 using AppUIBasics.Common;
+using AppUIBasics.Data;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
-using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The Hub App template is documented at http://go.microsoft.com/fwlink/?LinkId=286574
 
 namespace AppUIBasics
 {
@@ -38,6 +28,53 @@ namespace AppUIBasics
     /// </summary>
     sealed partial class App : Application
     {
+        private const string SelectedAppThemeKey = "SelectedAppTheme";
+
+        /// <summary>
+        /// Gets the current actual theme of the app based on the requested theme of the
+        /// root element, or if that value is Default, the requested theme of the Application.
+        /// </summary>
+        public static ElementTheme ActualTheme
+        {
+            get
+            {
+                if (Window.Current.Content is FrameworkElement rootElement)
+                {
+                    if (rootElement.RequestedTheme != ElementTheme.Default)
+                    {
+                        return rootElement.RequestedTheme;
+                    }
+                }
+
+                return GetEnum<ElementTheme>(Current.RequestedTheme.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets (with LocalSettings persistence) the RequestedTheme of the root element.
+        /// </summary>
+        public static ElementTheme RootTheme
+        {
+            get
+            {
+                if (Window.Current.Content is FrameworkElement rootElement)
+                {
+                    return rootElement.RequestedTheme;
+                }
+
+                return ElementTheme.Default;
+            }
+            set
+            {
+                if (Window.Current.Content is FrameworkElement rootElement)
+                {
+                    rootElement.RequestedTheme = value;
+                }
+
+                ApplicationData.Current.LocalSettings.Values[SelectedAppThemeKey] = value.ToString();
+            }
+        }
+
         /// <summary>
         /// Initializes the singleton Application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -46,6 +83,31 @@ namespace AppUIBasics
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.Resuming += App_Resuming;
+            this.RequiresPointerMode = ApplicationRequiresPointerMode.WhenRequested;
+        }
+
+        public static TEnum GetEnum<TEnum>(string text) where TEnum : struct
+        {
+            if (!typeof(TEnum).GetTypeInfo().IsEnum)
+            {
+                throw new InvalidOperationException("Generic parameter 'TEnum' must be an enum.");
+            }
+            return (TEnum)Enum.Parse(typeof(TEnum), text);
+        }
+
+        private void App_Resuming(object sender, object e)
+        {
+            switch (NavigationRootPage.RootFrame?.Content)
+            {
+                case ItemPage itemPage:
+                    itemPage.SetInitialVisuals();
+                    break;
+                case NewControlsPage newControlsPage:
+                case AllControlsPage allControlsPage:
+                    NavigationRootPage.Current.NavigationView.AlwaysShowHeader = false;
+                    break;
+            }
         }
 
         /// <summary>
@@ -53,7 +115,7 @@ namespace AppUIBasics
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override async void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
 #if DEBUG
             //if (System.Diagnostics.Debugger.IsAttached)
@@ -61,40 +123,38 @@ namespace AppUIBasics
             //    this.DebugSettings.EnableFrameRateCounter = true;
             //}
 #endif
-            await ShowWindow(e);
-            this.ShowDisclaimer();
-
+            await EnsureWindow(args);
         }
 
-        private async Task ShowWindow(LaunchActivatedEventArgs e)
+        protected async override void OnActivated(IActivatedEventArgs args)
         {
-            NavigationRootPage rootPage = Window.Current.Content as NavigationRootPage;
+            await EnsureWindow(args);
 
-            // Do not repeat app initialization when the Window already has content,
-            // just ensure that the window is active
-            if (rootPage == null)
+            base.OnActivated(args);
+        }
+
+        private async Task EnsureWindow(IActivatedEventArgs args)
+        {
+            // No matter what our destination is, we're going to need control data loaded - let's knock that out now.
+            // We'll never need to do this again.
+            await ControlInfoDataSource.Instance.GetGroupsAsync();
+
+            Frame rootFrame = GetRootFrame();
+
+            string savedTheme = ApplicationData.Current.LocalSettings.Values[SelectedAppThemeKey]?.ToString();
+
+            if (savedTheme != null)
             {
-                rootPage = new NavigationRootPage();
+                RootTheme = GetEnum<ElementTheme>(savedTheme);
+            }
+            
+            Type targetPageType = typeof(AllControlsPage);
+            string targetPageArguments = string.Empty;
 
-                // Retrieve the root Frame to act as the navigation context and navigate to the first page
-                Frame rootFrame = (Frame)rootPage.FindName("rootFrame");
-
-                if (rootFrame == null)
+            if (args.Kind == ActivationKind.Launch)
+            {
+                if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    throw new Exception("Root frame not found");
-                }
-
-                // Associate the frame with a SuspensionManager key.
-                SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
-
-                // Set the default language
-                rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
-                
-                rootFrame.NavigationFailed += OnNavigationFailed;
-
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    // Restore the saved session state only when appropriate
                     try
                     {
                         await SuspensionManager.RestoreAsync();
@@ -106,18 +166,72 @@ namespace AppUIBasics
                     }
                 }
 
-                if (rootFrame.Content == null)
+                targetPageArguments = ((LaunchActivatedEventArgs)args).Arguments;
+            }
+            else if (args.Kind == ActivationKind.Protocol)
+            {
+                Match match;
+                
+                string targetId = string.Empty;
+
+                switch (((ProtocolActivatedEventArgs)args).Uri?.AbsolutePath)
                 {
-                    // When the navigation stack isn't restored navigate to the first page.
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    case string s when IsMatching(s, "/category/(.*)"):
+                        targetId = match.Groups[1]?.ToString();
+                        if (ControlInfoDataSource.Instance.Groups.Any(g => g.UniqueId == targetId))
+                        {
+                            targetPageType = typeof(SectionPage);
+                        }
+                        break;
+
+                    case string s when IsMatching(s, "/item/(.*)"):
+                        targetId = match.Groups[1]?.ToString();
+                        if (ControlInfoDataSource.Instance.Groups.Any(g => g.Items.Any(i => i.UniqueId == targetId)))
+                        {
+                            targetPageType = typeof(ItemPage);
+                        }
+                        break;
                 }
 
-                // Place the main page in the current Window.
-                Window.Current.Content = rootPage;
+                targetPageArguments = targetId;
+
+                bool IsMatching(string parent, string expression)
+                {
+                    match = Regex.Match(parent, expression);
+                    return match.Success;
+                }
             }
+
+            rootFrame.Navigate(targetPageType, targetPageArguments);
 
             // Ensure the current window is active
             Window.Current.Activate();
+        }
+
+        private Frame GetRootFrame()
+        {
+            Frame rootFrame;
+            NavigationRootPage rootPage = Window.Current.Content as NavigationRootPage;
+            if (rootPage == null)
+            {
+                rootPage = new NavigationRootPage();
+                rootFrame = (Frame)rootPage.FindName("rootFrame");
+                if (rootFrame == null)
+                {
+                    throw new Exception("Root frame not found");
+                }
+                SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
+                rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
+                rootFrame.NavigationFailed += OnNavigationFailed;
+
+                Window.Current.Content = rootPage;
+            }
+            else
+            {
+                rootFrame = (Frame)rootPage.FindName("rootFrame");
+            }
+
+            return rootFrame;
         }
 
         /// <summary>
@@ -143,47 +257,6 @@ namespace AppUIBasics
             var deferral = e.SuspendingOperation.GetDeferral();
             await SuspensionManager.SaveAsync();
             deferral.Complete();
-        }
-        
-        private async void ShowDisclaimer()
-        {
-            ResourceLoader resourceLoader = new ResourceLoader();
-            var roamingSettings = ApplicationData.Current.RoamingSettings;
-
-            // Show disclaimer regardless of how the app has been activated
-            // unless disclaimer already accepted.
-            var disclaimer = (bool)(roamingSettings.Values["disclaimer"] ?? false);
-
-            // If no disclaimer response, show disclaimer.
-            if (!disclaimer)
-            {
-                // Get disclaimer resources.
-                // See Globalizing your app at http://go.microsoft.com/fwlink/?LinkId=258266.
-                var resDisclaimer = resourceLoader.GetString("disclaimer").Replace(@"\n", Environment.NewLine);
-                if (String.IsNullOrEmpty(resDisclaimer)) resDisclaimer = "Disclaimer.";
-                var resDisclaimerTitle = resourceLoader.GetString("disclaimerTitle");
-                if (String.IsNullOrEmpty(resDisclaimerTitle)) resDisclaimerTitle = "Disclaimer";
-                var resDisclaimerButton = resourceLoader.GetString("disclaimerButton");
-                if (String.IsNullOrEmpty(resDisclaimerButton)) resDisclaimerButton = "Accept";
-
-                // Create a disclaimer message dialog and set its content.
-                // A message dialog can support up to three commands. 
-                // If no commands are specified, a close command is provided by default.
-                // Note: Message dialogs should be used sparingly, and only for messages or 
-                // questions critical to the continued use of your app.
-                // See Adding message dialogs at http://go.microsoft.com/fwlink/?LinkID=275116.
-                var msg = new Windows.UI.Popups.MessageDialog(resDisclaimer, resDisclaimerTitle);
-
-                // Handler for disclaimer.
-                msg.Commands.Add(new Windows.UI.Popups.UICommand(resDisclaimerButton,
-                    _ => roamingSettings.Values["disclaimer"] = true));
-
-                // If specifying your own commmands, set the command that will be invoked by default.
-                // For example, msg.defaultCommandIndex = 1;
-
-                // Show the message dialog
-                await msg.ShowAsync();
-            }
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockAndFilter", "BlockAndFilter.csproj", "{FA96A66C-A9F0-4A67-9529-6296E339C186}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockAndFilter", "BlockAndFilter.csproj", "{3F17DBA9-FEC2-57DA-AAE1-653A14944389}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockAndFilterTasks", "Tasks\BlockAndFilterTasks.csproj", "{DF6A0072-B29A-4B50-B941-78DD9E9B9EC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockAndFilterTasks", "Tasks\BlockAndFilterTasks.csproj", "{7ACEF511-4F40-5E59-95FD-CB0E580CABD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,26 +15,26 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FA96A66C-A9F0-4A67-9529-6296E339C186}.Debug|ARM.ActiveCfg = Debug|ARM
-		{FA96A66C-A9F0-4A67-9529-6296E339C186}.Debug|ARM.Build.0 = Debug|ARM
-		{FA96A66C-A9F0-4A67-9529-6296E339C186}.Debug|ARM.Deploy.0 = Debug|ARM
-		{FA96A66C-A9F0-4A67-9529-6296E339C186}.Debug|x86.ActiveCfg = Debug|x86
-		{FA96A66C-A9F0-4A67-9529-6296E339C186}.Debug|x86.Build.0 = Debug|x86
-		{FA96A66C-A9F0-4A67-9529-6296E339C186}.Debug|x86.Deploy.0 = Debug|x86
-		{FA96A66C-A9F0-4A67-9529-6296E339C186}.Release|ARM.ActiveCfg = Release|ARM
-		{FA96A66C-A9F0-4A67-9529-6296E339C186}.Release|ARM.Build.0 = Release|ARM
-		{FA96A66C-A9F0-4A67-9529-6296E339C186}.Release|ARM.Deploy.0 = Release|ARM
-		{FA96A66C-A9F0-4A67-9529-6296E339C186}.Release|x86.ActiveCfg = Release|x86
-		{FA96A66C-A9F0-4A67-9529-6296E339C186}.Release|x86.Build.0 = Release|x86
-		{FA96A66C-A9F0-4A67-9529-6296E339C186}.Release|x86.Deploy.0 = Release|x86
-		{DF6A0072-B29A-4B50-B941-78DD9E9B9EC5}.Debug|ARM.ActiveCfg = Debug|ARM
-		{DF6A0072-B29A-4B50-B941-78DD9E9B9EC5}.Debug|ARM.Build.0 = Debug|ARM
-		{DF6A0072-B29A-4B50-B941-78DD9E9B9EC5}.Debug|x86.ActiveCfg = Debug|x86
-		{DF6A0072-B29A-4B50-B941-78DD9E9B9EC5}.Debug|x86.Build.0 = Debug|x86
-		{DF6A0072-B29A-4B50-B941-78DD9E9B9EC5}.Release|ARM.ActiveCfg = Release|ARM
-		{DF6A0072-B29A-4B50-B941-78DD9E9B9EC5}.Release|ARM.Build.0 = Release|ARM
-		{DF6A0072-B29A-4B50-B941-78DD9E9B9EC5}.Release|x86.ActiveCfg = Release|x86
-		{DF6A0072-B29A-4B50-B941-78DD9E9B9EC5}.Release|x86.Build.0 = Release|x86
+		{3F17DBA9-FEC2-57DA-AAE1-653A14944389}.Debug|ARM.ActiveCfg = Debug|ARM
+		{3F17DBA9-FEC2-57DA-AAE1-653A14944389}.Debug|ARM.Build.0 = Debug|ARM
+		{3F17DBA9-FEC2-57DA-AAE1-653A14944389}.Debug|ARM.Deploy.0 = Debug|ARM
+		{3F17DBA9-FEC2-57DA-AAE1-653A14944389}.Debug|x86.ActiveCfg = Debug|x86
+		{3F17DBA9-FEC2-57DA-AAE1-653A14944389}.Debug|x86.Build.0 = Debug|x86
+		{3F17DBA9-FEC2-57DA-AAE1-653A14944389}.Debug|x86.Deploy.0 = Debug|x86
+		{3F17DBA9-FEC2-57DA-AAE1-653A14944389}.Release|ARM.ActiveCfg = Release|ARM
+		{3F17DBA9-FEC2-57DA-AAE1-653A14944389}.Release|ARM.Build.0 = Release|ARM
+		{3F17DBA9-FEC2-57DA-AAE1-653A14944389}.Release|ARM.Deploy.0 = Release|ARM
+		{3F17DBA9-FEC2-57DA-AAE1-653A14944389}.Release|x86.ActiveCfg = Release|x86
+		{3F17DBA9-FEC2-57DA-AAE1-653A14944389}.Release|x86.Build.0 = Release|x86
+		{3F17DBA9-FEC2-57DA-AAE1-653A14944389}.Release|x86.Deploy.0 = Release|x86
+		{7ACEF511-4F40-5E59-95FD-CB0E580CABD0}.Debug|ARM.ActiveCfg = Debug|ARM
+		{7ACEF511-4F40-5E59-95FD-CB0E580CABD0}.Debug|ARM.Build.0 = Debug|ARM
+		{7ACEF511-4F40-5E59-95FD-CB0E580CABD0}.Debug|x86.ActiveCfg = Debug|x86
+		{7ACEF511-4F40-5E59-95FD-CB0E580CABD0}.Debug|x86.Build.0 = Debug|x86
+		{7ACEF511-4F40-5E59-95FD-CB0E580CABD0}.Release|ARM.ActiveCfg = Release|ARM
+		{7ACEF511-4F40-5E59-95FD-CB0E580CABD0}.Release|ARM.Build.0 = Release|ARM
+		{7ACEF511-4F40-5E59-95FD-CB0E580CABD0}.Release|x86.ActiveCfg = Release|x86
+		{7ACEF511-4F40-5E59-95FD-CB0E580CABD0}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,18 +9,12 @@
 //
 //*********************************************************
 
+using Windows.Devices.Sensors;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
-using System;
-using Windows.Devices.Sensors;
-using Windows.Foundation;
-using System.Threading.Tasks;
-using Windows.UI.Core;
-using Microsoft.Samples.Devices.Sensors.Calibration;
 
-namespace OrientationCS
+namespace SDKTemplate
 {
     public sealed partial class Scenario3_Calibration : Page
     {
@@ -32,38 +26,24 @@ namespace OrientationCS
         public Scenario3_Calibration()
         {
             this.InitializeComponent();
+
+            if (rootPage.SensorReadingType == SensorReadingType.Relative)
+            {
+                EnabledContent.Visibility = Visibility.Collapsed;
+                DisabledContent.Visibility = Visibility.Visible;
+            }
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached. The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-        }
-
-        /// <summary>
-        /// Invoked immediately before the Page is unloaded and is no longer the current source of a parent Frame.
-        /// </summary>
-        /// <param name="e">
-        /// Event data that can be examined by overriding code. The event data is representative
-        /// of the navigation that will unload the current Page unless canceled. The
-        /// navigation can potentially be canceled by setting Cancel.
-        /// </param>
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             calibrationBar.Hide();
-            base.OnNavigatingFrom(e);
         }
 
         /// <summary>
         /// This is the click handler for high accuracy. Acceptable accuracy met, so
         /// hide the calibration bar.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnHighAccuracy(object sender, RoutedEventArgs e)
+        private void OnHighAccuracy()
         {
             calibrationBar.Hide();
         }
@@ -72,9 +52,7 @@ namespace OrientationCS
         /// This is the click handler for approximate accuracy. Acceptable accuracy met, so
         /// hide the calibration bar.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnApproximateAccuracy(object sender, RoutedEventArgs e)
+        private void OnApproximateAccuracy()
         {
             calibrationBar.Hide();
         }
@@ -83,9 +61,7 @@ namespace OrientationCS
         /// This is the click handler for unreliable accuracy. Sensor does not meet accuracy
         /// requirements. Request to show the calibration bar per the calibration guidance.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnUnreliableAccuracy(object sender, RoutedEventArgs e)
+        private void OnUnreliableAccuracy()
         {
             calibrationBar.RequestCalibration(MagnetometerAccuracy.Unreliable);
         }

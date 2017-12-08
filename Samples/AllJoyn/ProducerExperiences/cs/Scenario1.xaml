@@ -40,10 +40,7 @@
                     <Button Content="Launch" Command="{Binding LaunchProducer}"/>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Visibility="{Binding ProducerOptionsVisibility}">
                         <TextBlock Text="Key:"/>
-                        <StackPanel Margin="5,0,0,0">
-                            <TextBlock Text="{Binding Path=Key,Mode=OneWay}" IsTextSelectionEnabled="True" TextWrapping="Wrap"/>
-                            <CheckBox Content="Hyphen separated" IsChecked="{Binding Path=HyphenSeparatedIsChecked, Mode=TwoWay}"/>
-                        </StackPanel>
+                        <TextBlock Text="{Binding Path=Key,Mode=OneWay}" IsTextSelectionEnabled="True" TextWrapping="Wrap" Margin="5,0,0,0"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Visibility="{Binding ProducerOptionsVisibility}">
                         <TextBlock Text="UpperCase:" VerticalAlignment="Center"/>

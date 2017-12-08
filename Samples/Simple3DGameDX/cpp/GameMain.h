@@ -10,7 +10,7 @@
 //*********************************************************
 
 // GameMain:
-// This class is the main class required for Windows Store apps.
+// This class is the main class required for Windows Runtime apps.
 // It it called on Launch activation and maintains the overall state of the game.
 // The GameMain class drives and maintains a state machine for the game.  It can be in
 // one of seven major states defined by the UpdateEngineState enum class.

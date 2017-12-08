@@ -14,18 +14,16 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
-using SDKTemplate;
 using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
 using Windows.Storage.FileProperties;
 using Windows.Storage.Pickers;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web;
 
-namespace BackgroundTransfer
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -253,8 +251,8 @@ namespace BackgroundTransfer
         private void UploadProgress(UploadOperation upload)
         {
             // UploadOperation.Progress is updated in real-time while the operation is ongoing. Therefore,
-            // we must make a local copy at the beginning of the progress handler, so that we can have a consistent
-            // view of that ever-changing state throughout the handler's lifetime.
+            // we must make a local copy so that we can have a consistent view of that ever-changing state
+            // throughout this method's lifetime.
             BackgroundUploadProgress currentProgress = upload.Progress;
 
             MarshalLog(String.Format(CultureInfo.CurrentCulture, "Progress: {0}, Status: {1}", upload.Guid, 

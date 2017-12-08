@@ -20,7 +20,7 @@
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.16299.0" MaxVersionTested="10.0.16299.0" />
   </Dependencies>
 
   <Resources>
@@ -36,7 +36,6 @@
       Square150x150Logo="Assets\squareTile-sdk.png"
       Square44x44Logo="Assets\smallTile-sdk.png"
       Description="GeolocationCPP"
-      
       BackgroundColor="#00B2F0">
         <uap:SplashScreen Image="Assets\Splash-sdk.png" />
         <uap:LockScreen Notification="badge" BadgeLogo="Assets\badge-logo.png" />
@@ -49,6 +48,11 @@
           </BackgroundTasks>
         </Extension>
         <Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTask.GeofenceBackgroundTask">
+          <BackgroundTasks>
+            <Task Type="location" />
+          </BackgroundTasks>
+        </Extension>
+        <Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTask.VisitBackgroundTask">
           <BackgroundTasks>
             <Task Type="location" />
           </BackgroundTasks>

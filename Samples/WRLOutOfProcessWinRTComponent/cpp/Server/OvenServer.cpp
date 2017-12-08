@@ -69,7 +69,7 @@ namespace ABI { namespace Microsoft { namespace SDKSamples { namespace Kitchen {
                     OvenTemperature _temperature = OvenTemperature::Medium;
                 };
 
-                class BreadBakedEventArgs WrlFinal : public RuntimeClass<IBreakBakedEventArgs>
+                class BreadBakedEventArgs WrlFinal : public RuntimeClass<IBreadBakedEventArgs>
                 {
                     InspectableClass(RuntimeClass_Microsoft_SDKSamples_Kitchen_BreadBakedEventArgs, TrustLevel::BaseTrust)
 
@@ -80,7 +80,7 @@ namespace ABI { namespace Microsoft { namespace SDKSamples { namespace Kitchen {
                         return S_OK;
                     }
 
-                    // IBreakBakedEventArgs
+                    // IBreadBakedEventArgs
                     STDMETHODIMP get_Bread(_COM_Outptr_ IBread** value) override
                     {
                         return m_bread.CopyTo(value);

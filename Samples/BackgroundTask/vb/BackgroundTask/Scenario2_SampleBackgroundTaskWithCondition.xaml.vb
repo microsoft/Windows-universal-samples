@@ -40,7 +40,7 @@ Namespace Global.SDKTemplate
             For Each task In BackgroundTaskRegistration.AllTasks
                 If task.Value.Name = BackgroundTaskSample.SampleBackgroundTaskWithConditionName Then
                     AttachProgressAndCompletedHandlers(task.Value)
-                    BackgroundTaskSample.UpdateBackgroundTaskStatus(BackgroundTaskSample.SampleBackgroundTaskWithConditionName, True)
+                    BackgroundTaskSample.UpdateBackgroundTaskRegistrationStatus(BackgroundTaskSample.SampleBackgroundTaskWithConditionName, True)
                     Exit For
                 End If
             Next
@@ -53,10 +53,9 @@ Namespace Global.SDKTemplate
         ''' </summary>
         ''' <param name="sender"></param>
         ''' <param name="e"></param>
-        Private Async Sub RegisterBackgroundTask(sender As Object, e As RoutedEventArgs)
+        Private Sub RegisterBackgroundTask(sender As Object, e As RoutedEventArgs)
             Dim task = BackgroundTaskSample.RegisterBackgroundTask(BackgroundTaskSample.SampleBackgroundTaskEntryPoint, BackgroundTaskSample.SampleBackgroundTaskWithConditionName, New SystemTrigger(SystemTriggerType.TimeZoneChange, False), New SystemCondition(SystemConditionType.InternetAvailable))
-            Await task
-            AttachProgressAndCompletedHandlers(task.Result)
+            AttachProgressAndCompletedHandlers(task)
             UpdateUI()
         End Sub
 
@@ -85,9 +84,11 @@ Namespace Global.SDKTemplate
         ''' <param name="task">The task that is reporting progress.</param>
         ''' <param name="e">Arguments of the progress report.</param>
         Private Sub OnProgress(task As IBackgroundTaskRegistration, args As BackgroundTaskProgressEventArgs)
-            Dim progress = "Progress: " & args.Progress & "%"
-            BackgroundTaskSample.SampleBackgroundTaskWithConditionProgress = progress
-            UpdateUI()
+            Dim ignored = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Sub()
+                Dim progress = "Progress: " & args.Progress & "%"
+                BackgroundTaskSample.SampleBackgroundTaskWithConditionProgress = progress
+                UpdateUI()
+            End Sub)
         End Sub
 
         ''' <summary>

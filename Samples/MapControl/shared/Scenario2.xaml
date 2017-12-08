@@ -1,0 +1,48 @@
+<!-- 
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock x:Name="description" Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+               Display info about points of interest on a map by adding pushpins, images, 3D models and shapes embedded in the MapControl.
+                </TextBlock>
+            </StackPanel>
+
+            <VariableSizedWrapGrid Grid.Row="1" Orientation="Horizontal" ItemWidth="170">
+                <Button Content="Add MapIcon" Click="mapIconAddButton_Click" Margin="3"/>
+                <Button Content="Add MapBillboard" Click="mapBillboardAddButton_Click" Margin="3"/>
+                <Button Content="Add MapElement3D" Click="mapElement3DAddButton_Click" Margin="3"/>
+                <Button Content="Add MapPolygon" Click="mapPolygonAddButton_Click" Margin="3"/>
+                <Button Content="Add MapPolyline" Click="mapPolylineAddButton_Click" Margin="3"/>
+                <Button Content="Clear" Click="mapClearButton_Click" Margin="3"/>
+            </VariableSizedWrapGrid>
+
+            <maps:MapControl x:Name="myMap" TransitFeaturesVisible="False" Loaded="MyMap_Loaded" Grid.Row="2"/>
+        </Grid>
+    </Grid>
+</Page>

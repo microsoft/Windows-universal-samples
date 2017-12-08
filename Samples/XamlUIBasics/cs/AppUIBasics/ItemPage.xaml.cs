@@ -8,16 +8,21 @@
 //
 //*********************************************************
 using AppUIBasics.Common;
-using AppUIBasics.ControlPages;
 using AppUIBasics.Data;
 using System;
-using Windows.Foundation.Metadata;
+using System.Linq;
+using System.Numerics;
+using Windows.ApplicationModel.Resources;
+using Windows.Foundation;
+using Windows.System;
+using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Hosting;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-
-// The Item Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234232
 
 namespace AppUIBasics
 {
@@ -26,57 +31,122 @@ namespace AppUIBasics
     /// </summary>
     public partial class ItemPage : Page
     {
-        private NavigationHelper navigationHelper;
-        private ControlInfoDataItem item;
-
-        /// <summary>
-        /// NavigationHelper is used on each page to aid in navigation and 
-        /// process lifetime management
-        /// </summary>
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
+        private Compositor _compositor;
+        private ControlInfoDataItem _item;
+        private ElementTheme? _currentElementTheme;
 
         public ControlInfoDataItem Item
         {
-            get { return item; }
-            set { item = value; }
+            get { return _item; }
+            set { _item = value; }
         }
-
-        public CommandBar BottomCommandBar
-        {
-            get { return bottomCommandBar; }
-        }
-
+        
         public ItemPage()
         {
             this.InitializeComponent();
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += navigationHelper_LoadState;
+
+            LayoutVisualStates.CurrentStateChanged += (s, e) => UpdateSeeAlsoPanelVerticalTranslationAnimation();
+            Loaded += (s,e) => SetInitialVisuals();
+        }
+        
+        public void SetInitialVisuals()
+        {
+            NavigationRootPage.Current.PageHeader.TopCommandBar.Visibility = Visibility.Visible;
+            NavigationRootPage.Current.PageHeader.ToggleThemeAction = OnToggleTheme;
+
+            if (NavigationRootPage.Current.IsFocusSupported)
+            {
+                this.Focus(FocusState.Programmatic);
+            }
+
+            _compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
+
+            UpdateSeeAlsoPanelVerticalTranslationAnimation();
         }
 
-        /// <summary>
-        /// Populates the page with content passed during navigation.  Any saved state is also
-        /// provided when recreating a page from a prior session.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event; typically <see cref="NavigationHelper"/>
-        /// </param>
-        /// <param name="e">Event data that provides both the navigation parameter passed to
-        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
-        /// a dictionary of state preserved by this page during an earlier
-        /// session.  The state will be null the first time a page is visited.</param>
-        private async void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private void UpdateSeeAlsoPanelVerticalTranslationAnimation()
         {
-            var item = await ControlInfoDataSource.GetItemAsync((String)e.NavigationParameter);
+            var isEnabled = LayoutVisualStates.CurrentState == LargeLayout;
+
+            ElementCompositionPreview.SetIsTranslationEnabled(seeAlsoPanel, true);
+            
+            var targetPanelVisual = ElementCompositionPreview.GetElementVisual(seeAlsoPanel);
+            targetPanelVisual.Properties.InsertVector3("Translation", Vector3.Zero);
+
+            if (isEnabled)
+            {
+                var scrollProperties = ElementCompositionPreview.GetScrollViewerManipulationPropertySet(svPanel);
+
+                var expression = _compositor.CreateExpressionAnimation("ScrollManipulation.Translation.Y * -1");
+                expression.SetReferenceParameter("ScrollManipulation", scrollProperties);
+                expression.Target = "Translation.Y";
+                targetPanelVisual.StartAnimation(expression.Target, expression);
+            }
+            else
+            {
+                targetPanelVisual.StopAnimation("Translation.Y");
+            }
+        }
+
+        private void OnToggleTheme()
+        {
+            var currentElementTheme = ((_currentElementTheme ?? ElementTheme.Default) == ElementTheme.Default) ? App.ActualTheme : _currentElementTheme.Value;
+            var newTheme = currentElementTheme == ElementTheme.Dark ? ElementTheme.Light : ElementTheme.Dark;
+            SetControlExamplesTheme(newTheme);
+        }
+
+        private void SetControlExamplesTheme(ElementTheme theme)
+        {
+            var controlExamples = (this.contentFrame.Content as UIElement)?.GetDescendantsOfType<ControlExample>();
+
+            if (controlExamples != null)
+            {
+                _currentElementTheme = theme;
+                foreach (var controlExample in controlExamples)
+                {
+                    var exampleContent = controlExample.Example as FrameworkElement;
+                    exampleContent.RequestedTheme = theme;
+                    controlExample.ExampleContainer.RequestedTheme = theme;
+                }
+            }
+        }
+
+        private void OnRelatedControlClick(object sender, RoutedEventArgs e)
+        {
+            ButtonBase b = (ButtonBase)sender;
+
+            this.Frame.Navigate(typeof(ItemPage), b.DataContext.ToString());
+        }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            //Connected Animation
+
+            PopOutStoryboard.Begin();
+            PopOutStoryboard.Completed += (sender1_, e1_) =>
+            {
+                PopInStoryboard.Begin();
+            };
+
+            if (NavigationRootPage.Current.PageHeader != null)
+            {
+                var connectedAnimation = ConnectedAnimationService.GetForCurrentView().GetAnimation("controlAnimation");
+                                
+                if (connectedAnimation != null)
+                {
+                    var target = NavigationRootPage.Current.PageHeader.TitlePanel;
+                    connectedAnimation.TryStart(target, new UIElement[] { subTitleText });
+                }
+            }
+
+            var item = await ControlInfoDataSource.Instance.GetItemAsync((String)e.Parameter);
 
             if (item != null)
             {
                 Item = item;
 
                 // Load control page into frame.
-                var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+                var loader = ResourceLoader.GetForCurrentView();
 
                 string pageRoot = loader.GetString("PageStringRoot");
 
@@ -88,95 +158,101 @@ namespace AppUIBasics
                     this.contentFrame.Navigate(pageType);
                 }
 
-                if(item.Title == "AppBar")
+                NavigationRootPage.Current.NavigationView.Header = item?.Title;
+                if (item.IsNew && NavigationRootPage.Current.CheckNewControlSelected())
                 {
-                    //Child pages don't follow the visible bounds, so we need to add margin to account for this
-                    header.Margin = new Thickness(0, 24, 0, 0);
+                    return;
+                }
+
+                ControlInfoDataGroup group = await ControlInfoDataSource.Instance.GetGroupFromItemAsync((String)e.Parameter);
+                var menuItem = NavigationRootPage.Current.NavigationView.MenuItems.Cast<NavigationViewItem>().FirstOrDefault(m => m.Tag?.ToString() == group.UniqueId);
+                if (menuItem != null)
+                {
+                    menuItem.IsSelected = true;
                 }
             }
-        }
 
-        private void ThemeToggleButton_Checked(object sender, RoutedEventArgs e)
-        {
-            this.RequestedTheme = ElementTheme.Light;
-        }
-
-        private void ThemeToggleButton_Unchecked(object sender, RoutedEventArgs e)
-        {
-            this.RequestedTheme = ElementTheme.Dark;
+            base.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
+            SetControlExamplesTheme(App.ActualTheme);
+
             base.OnNavigatingFrom(e);
-            this.RequestedTheme = ElementTheme.Dark;
-        }
-
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(SearchResultsPage));
-        }
-
-        private void HelpButton_Click(object sender, RoutedEventArgs e)
-        {
-            ShowHelp();
-            bottomCommandBar.IsOpen = false;
-        }
-
-        protected void RelatedControl_Click(object sender, RoutedEventArgs e)
-        {
-            ButtonBase b = (ButtonBase)sender;
-
-            NavigationRootPage.RootFrame.Navigate(typeof(ItemPage), b.Content.ToString());
-        }
-
-        private void ShowHelp()
-        {
-            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
-
-            string HTMLOpenTags = loader.GetString("HTMLOpenTags");
-            string HTMLCloseTags = loader.GetString("HTMLCloseTags");
-            
-            contentWebView.NavigateToString(HTMLOpenTags + Item.Content + HTMLCloseTags);
-
-            if (!helpPopup.IsOpen)
-            {
-                rootPopupBorder.Width = 346;
-                rootPopupBorder.Height = this.ActualHeight;
-                helpPopup.HorizontalOffset = Window.Current.Bounds.Width - 346;
-                helpPopup.IsOpen = true;
-            }
-        }
-
-        private void SearchBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
-        {
-
-            this.Frame.Navigate(typeof(SearchResultsPage), args.QueryText);
-
-        }
-
-        #region NavigationHelper registration
-
-        /// The methods provided in this section are simply used to allow
-        /// NavigationHelper to respond to the page's navigation methods.
-        /// 
-        /// Page specific logic should be placed in event handlers for the  
-        /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
-        /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
-        /// in addition to page state preserved during an earlier session.
-
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            navigationHelper.OnNavigatedFrom(e);
+            NavigationRootPage.Current.PageHeader.TopCommandBar.Visibility = Visibility.Collapsed;
+            NavigationRootPage.Current.PageHeader.ToggleThemeAction = null;
+
+            //Reverse Connected Animation
+            if (e.SourcePageType != typeof(ItemPage))
+            {
+                var target = NavigationRootPage.Current.PageHeader.TitlePanel;
+                ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("controlAnimation", target);
+            }
+
+            base.OnNavigatedFrom(e);
+        }
+                
+        private void OnSvPanelLoaded(object sender, RoutedEventArgs e)
+        {
+            svPanel.XYFocusDown = contentFrame.GetDescendantsOfType<Control>().FirstOrDefault(c => c.IsTabStop) ?? svPanel.GetDescendantsOfType<Control>().FirstOrDefault(c => c.IsTabStop);
         }
 
-        #endregion
+        private void OnSvPanelGotFocus(object sender, RoutedEventArgs e)
+        {
+            if (e.OriginalSource == sender && NavigationRootPage.Current.IsFocusSupported)
+            {
+                bool isElementFound = false;
+                var elements = contentFrame.GetDescendantsOfType<Control>().Where(c => c.IsTabStop);
+                foreach (var element in elements)
+                {
+                    Rect elementRect = element.TransformToVisual(svPanel).TransformBounds(new Rect(0.0, 0.0, element.ActualWidth, element.ActualHeight));
+                    Rect panelRect = new Rect(0.0, 70.0, svPanel.ActualWidth, svPanel.ActualHeight);
+
+                    if (elementRect.Top < panelRect.Bottom)
+                    {
+                        element.Focus(FocusState.Programmatic);
+                        isElementFound = true;
+                        break;
+                    }
+                }
+                if (!isElementFound)
+                {
+                    svPanel.UseSystemFocusVisuals = true;
+                }
+            }
+        }
+
+        private void OnSvPanelKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Up)
+            {
+                var nextElement = FocusManager.FindNextElement(FocusNavigationDirection.Up);
+                if (nextElement.GetType() == typeof(NavigationViewItem))
+                {
+                    NavigationRootPage.Current.PageHeader.Focus(FocusState.Programmatic);
+                }
+                else
+                {
+                    FocusManager.TryMoveFocus(FocusNavigationDirection.Up);
+                }
+            }
+        }
+
+        private void OnContentRootSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            string targetState = "NormalFrameContent";
+
+            if ((contentColumn.ActualWidth) >= 1000)
+            {
+                targetState = "WideFrameContent";
+            }
+
+            VisualStateManager.GoToState(this, targetState, false);
+        }
     }
 }

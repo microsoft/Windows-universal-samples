@@ -16,15 +16,16 @@
 
     var scenarios = [
         { url: "/html/scenario1_SynthesizeText.html", title: "Synthesize Text" },
-        { url: "/html/scenario2_SynthesizeSSML.html", title: "Synthesize SSML" },
-        { url: "/html/scenario3_PredefinedDictationGrammar.html", title: "Predefined Dictation Grammar" },
-        { url: "/html/scenario4_PredefinedWebSearchGrammar.html", title: "Predefined Web Search Grammar" },
-        { url: "/html/scenario5_ListConstraint.html", title: "Custom List Constraint" },
-        { url: "/html/scenario6_SRGSConstraint.html", title: "Custom SRGS Constraint" },
-        { url: "/html/scenario7_ContinuousDictation.html", title: "Continuous Dictation" },
-        { url: "/html/scenario8_ContinuousRecognitionListGrammar.html", title: "Continuous List Commands" },
-        { url: "/html/scenario9_ContinuousRecognitionSRGSGrammar.html", title: "Continuous SRGS Commands" },
-        { url: "/html/scenario10_PauseAsync.html", title: "PauseAsync to Change Grammar" }
+        { url: "/html/scenario2_SynthesizeTextBoundaries.html", title: "Synthesize Text with Boundaries" },
+        { url: "/html/scenario3_SynthesizeSSML.html", title: "Synthesize SSML" },
+        { url: "/html/scenario4_PredefinedDictationGrammar.html", title: "Predefined Dictation Grammar" },
+        { url: "/html/scenario5_PredefinedWebSearchGrammar.html", title: "Predefined Web Search Grammar" },
+        { url: "/html/scenario6_ListConstraint.html", title: "Custom List Constraint" },
+        { url: "/html/scenario7_SRGSConstraint.html", title: "Custom SRGS Constraint" },
+        { url: "/html/scenario8_ContinuousDictation.html", title: "Continuous Dictation" },
+        { url: "/html/scenario9_ContinuousRecognitionListGrammar.html", title: "Continuous List Commands" },
+        { url: "/html/scenario10_ContinuousRecognitionSRGSGrammar.html", title: "Continuous SRGS Commands" },
+        { url: "/html/scenario11_PauseAsync.html", title: "PauseAsync to Change Grammar" }
     ];
 
     WinJS.Namespace.define("SdkSample", {

@@ -30,14 +30,16 @@ using namespace Platform;
 Scenario2_Polling::Scenario2_Polling() : rootPage(MainPage::Current), desiredReportInterval(0)
 {
     InitializeComponent();
+}
 
+void Scenario2_Polling::OnNavigatedTo(NavigationEventArgs^ e)
+{
     sensor = OrientationSensor::GetDefault();
     if (sensor != nullptr)
     {
         // Select a report interval that is both suitable for the purposes of the app and supported by the sensor.
         // This value will be used later to activate the sensor.
-        uint32 minReportInterval = sensor->MinimumReportInterval;
-        desiredReportInterval = minReportInterval > 16 ? minReportInterval : 16;
+        desiredReportInterval = (std::max)(sensor->MinimumReportInterval, 16U);
 
         // Set up a DispatchTimer
         TimeSpan span;
@@ -45,44 +47,21 @@ Scenario2_Polling::Scenario2_Polling() : rootPage(MainPage::Current), desiredRep
         dispatcherTimer = ref new DispatcherTimer();
         dispatcherTimer->Interval = span;
         dispatcherTimer->Tick += ref new Windows::Foundation::EventHandler<Object^>(this, &Scenario2_Polling::DisplayCurrentReading);
+
+        rootPage->NotifyUser(rootPage->SensorDescription + " is ready", NotifyType::StatusMessage);
+        ScenarioEnableButton->IsEnabled = true;
     }
     else
     {
-        rootPage->NotifyUser("No orientation sensor found", NotifyType::ErrorMessage);
+        rootPage->NotifyUser(rootPage->SensorDescription + " not found", NotifyType::ErrorMessage);
     }
 }
 
-/// <summary>
-/// Invoked when this page is about to be displayed in a Frame.
-/// </summary>
-/// <param name="e">Event data that describes how this page was reached.  The Parameter
-/// property is typically used to configure the page.</param>
-void Scenario2_Polling::OnNavigatedTo(NavigationEventArgs^ e)
-{
-    ScenarioEnableButton->IsEnabled = true;
-    ScenarioDisableButton->IsEnabled = false;
-}
-
-/// <summary>
-/// Invoked when this page is no longer displayed.
-/// </summary>
-/// <param name="e"></param>
 void Scenario2_Polling::OnNavigatedFrom(NavigationEventArgs^ e)
 {
-    // If the navigation is external to the app do not clean up.
-    // This can occur on Phone when suspending the app.
-    if (e->NavigationMode == NavigationMode::Forward && e->Uri == nullptr)
-    {
-        return;
-    }
-
     if (ScenarioDisableButton->IsEnabled)
     {
-        Window::Current->VisibilityChanged::remove(visibilityToken);
-        dispatcherTimer->Stop();
-
-        // Restore the default report interval to release resources while the sensor is not in use
-        sensor->ReportInterval = 0;
+        ScenarioDisable();
     }
 }
 
@@ -117,70 +96,26 @@ void Scenario2_Polling::DisplayCurrentReading(Object^ sender, Object^ e)
     OrientationSensorReading^ reading = sensor->GetCurrentReading();
     if (reading != nullptr)
     {
-        // Quaternion values
-        SensorQuaternion^ quaternion = reading->Quaternion; // get a reference to the object to avoid re-creating it for each access
-        ScenarioOutput_X->Text = quaternion->X.ToString();
-        ScenarioOutput_Y->Text = quaternion->Y.ToString();
-        ScenarioOutput_Z->Text = quaternion->Z.ToString();
-        ScenarioOutput_W->Text = quaternion->W.ToString();
-
-        // Rotation Matrix values
-        SensorRotationMatrix^ rotationMatrix = reading->RotationMatrix;
-        ScenarioOutput_M11->Text = rotationMatrix->M11.ToString();
-        ScenarioOutput_M12->Text = rotationMatrix->M12.ToString();
-        ScenarioOutput_M13->Text = rotationMatrix->M13.ToString();
-        ScenarioOutput_M21->Text = rotationMatrix->M21.ToString();
-        ScenarioOutput_M22->Text = rotationMatrix->M22.ToString();
-        ScenarioOutput_M23->Text = rotationMatrix->M23.ToString();
-        ScenarioOutput_M31->Text = rotationMatrix->M31.ToString();
-        ScenarioOutput_M32->Text = rotationMatrix->M32.ToString();
-        ScenarioOutput_M33->Text = rotationMatrix->M33.ToString();
-        
-        // Yaw accuracy
-        switch (reading->YawAccuracy)
-        {
-            case MagnetometerAccuracy::Unknown:
-                ScenarioOutput_YawAccuracy->Text = "Unknown";
-                break;
-            case MagnetometerAccuracy::Unreliable:
-                ScenarioOutput_YawAccuracy->Text = "Unreliable";
-                break;
-            case MagnetometerAccuracy::Approximate:
-                ScenarioOutput_YawAccuracy->Text = "Approximate";
-                break;
-            case MagnetometerAccuracy::High:
-                ScenarioOutput_YawAccuracy->Text = "High";
-                break;
-            default:
-                ScenarioOutput_YawAccuracy->Text = "No data";
-                break;
-        }
+        MainPage::SetReadingText(ScenarioOutput, reading);
     }
 }
 
-void Scenario2_Polling::ScenarioEnable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario2_Polling::ScenarioEnable()
 {
-    if (sensor != nullptr)
-    {
-        visibilityToken = Window::Current->VisibilityChanged::add(ref new WindowVisibilityChangedEventHandler(this, &Scenario2_Polling::VisibilityChanged));
+    visibilityToken = Window::Current->VisibilityChanged += ref new WindowVisibilityChangedEventHandler(this, &Scenario2_Polling::VisibilityChanged);
 
-        // Set the report interval to enable the sensor for polling
-        sensor->ReportInterval = desiredReportInterval;
+    // Set the report interval to enable the sensor for polling
+    sensor->ReportInterval = desiredReportInterval;
 
-        dispatcherTimer->Start();
+    dispatcherTimer->Start();
 
-        ScenarioEnableButton->IsEnabled = false;
-        ScenarioDisableButton->IsEnabled = true;
-    }
-    else
-    {
-        rootPage->NotifyUser("No orientation sensor found", NotifyType::ErrorMessage);
-    }
+    ScenarioEnableButton->IsEnabled = false;
+    ScenarioDisableButton->IsEnabled = true;
 }
 
-void Scenario2_Polling::ScenarioDisable(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario2_Polling::ScenarioDisable()
 {
-    Window::Current->VisibilityChanged::remove(visibilityToken);
+    Window::Current->VisibilityChanged -= visibilityToken;
 
     dispatcherTimer->Stop();
 

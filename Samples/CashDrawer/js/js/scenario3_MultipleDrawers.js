@@ -23,12 +23,8 @@
         },
 
         unload: function () {
-
             disposeClaimedDrawer(_activeDrawerInstance.instance1);
             disposeClaimedDrawer(_activeDrawerInstance.instance2);
-
-            _drawerInstance1 = null;
-            _drawerInstance2 = null;
         }
     });
 
@@ -111,7 +107,7 @@
 
         return new WinJS.Promise(function (complete) {
 
-            Windows.Devices.PointOfService.CashDrawer.getDefaultAsync().then(function (drawer) {
+            SdkSample.getFirstCashDrawerAsync().then(function (drawer) {
                 if (drawer == null) {
                     WinJS.log("Cash drawer not found. Please connect a cash drawer.", "sample", "error");
                     complete(false);
@@ -205,12 +201,22 @@
                 _claimedInstance1.close();
                 _claimedInstance1 = null;
             }
+
+            if (_drawerInstance1 !== null) {
+                _drawerInstance1.close();
+                _drawerInstance1 = null;
+            }
         }
         else {
             if (_claimedInstance2 !== null) {
                 _claimedInstance2.removeEventListener("releasedevicerequested", onReleaseDeviceRequested2);
                 _claimedInstance2.close();
                 _claimedInstance2 = null;
+            }
+
+            if (_drawerInstance2 !== null) {
+                _drawerInstance2.close();
+                _drawerInstance2 = null;
             }
         }
     }

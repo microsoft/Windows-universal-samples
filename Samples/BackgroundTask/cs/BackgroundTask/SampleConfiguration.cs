@@ -28,7 +28,8 @@ namespace SDKTemplate
             new Scenario() { Title="Background Task with Condition", ClassType=typeof(SampleBackgroundTaskWithCondition)},
             new Scenario() { Title="Servicing Complete Task", ClassType=typeof(ServicingCompleteTask)},
             new Scenario() { Title="Background Task with Time Trigger", ClassType=typeof(TimeTriggeredTask) },
-            new Scenario() { Title="Background Task with Application Trigger", ClassType=typeof(ApplicationTriggerTask) }
+            new Scenario() { Title="Background Task with Application Trigger", ClassType=typeof(ApplicationTriggerTask) },
+            new Scenario() { Title="Grouped Background Task", ClassType=typeof(GroupedBackgroundTask) },
         };
     }
 
@@ -66,6 +67,12 @@ namespace SDKTemplate
         public static string ApplicationTriggerTaskResult = "";
         public static bool ApplicationTriggerTaskRegistered = false;
 
+        public const string GroupedBackgroundTaskName = "GroupedBackgroundTask";
+        public const string BackgroundTaskGroupId = "3F2504E0-5F89-41D3-9A0C-0405E82C3333";
+        public const string BackgroundTaskGroupFriendlyName = "Background Task Group";
+        public static string GroupedBackgroundTaskProgress = "";
+        public static bool GroupedBackgroundTaskRegistered = false;
+
         /// <summary>
         /// Register a background task with the specified taskEntryPoint, name, trigger,
         /// and condition (optional).
@@ -74,11 +81,12 @@ namespace SDKTemplate
         /// <param name="name">A name for the background task.</param>
         /// <param name="trigger">The trigger for the background task.</param>
         /// <param name="condition">An optional conditional event that must be true for the task to fire.</param>
-        public static async Task<BackgroundTaskRegistration> RegisterBackgroundTask(String taskEntryPoint, String name, IBackgroundTrigger trigger, IBackgroundCondition condition)
+        public static BackgroundTaskRegistration RegisterBackgroundTask(String taskEntryPoint, String name, IBackgroundTrigger trigger, IBackgroundCondition condition, BackgroundTaskRegistrationGroup group = null)
         {
             if (TaskRequiresBackgroundAccess(name))
             {
-                await BackgroundExecutionManager.RequestAccessAsync();
+                // If the user denies access, the task will not run.
+                var requestTask = BackgroundExecutionManager.RequestAccessAsync();
             }
 
             var builder = new BackgroundTaskBuilder();
@@ -98,12 +106,17 @@ namespace SDKTemplate
                 builder.CancelOnConditionLoss = true;
             }
 
+            if (group != null)
+            {
+                builder.TaskGroup = group;
+            }
+
             BackgroundTaskRegistration task = builder.Register();
 
-            UpdateBackgroundTaskStatus(name, true);
+            UpdateBackgroundTaskRegistrationStatus(name, true);
 
             //
-            // Remove previous completion status from local settings.
+            // Remove previous completion status.
             //
             var settings = ApplicationData.Current.LocalSettings;
             settings.Values.Remove(name);
@@ -115,21 +128,54 @@ namespace SDKTemplate
         /// Unregister background tasks with specified name.
         /// </summary>
         /// <param name="name">Name of the background task to unregister.</param>
-        public static void UnregisterBackgroundTasks(String name)
+        public static void UnregisterBackgroundTasks(String name, BackgroundTaskRegistrationGroup group = null)
         {
             //
-            // Loop through all background tasks and unregister any with SampleBackgroundTaskName or
-            // SampleBackgroundTaskWithConditionName.
+            // If the given task group is registered then loop through all background tasks associated with it
+            // and unregister any with the given name.
             //
-            foreach (var cur in BackgroundTaskRegistration.AllTasks)
+            if (group != null)
             {
-                if (cur.Value.Name == name)
+                foreach (var cur in group.AllTasks)
                 {
-                    cur.Value.Unregister(true);
+                    if (cur.Value.Name == name)
+                    {
+                        cur.Value.Unregister(true);
+                    }
+                }
+            }
+            else
+            {
+                //
+                // Loop through all ungrouped background tasks and unregister any with the given name.
+                //
+                foreach (var cur in BackgroundTaskRegistration.AllTasks)
+                {
+                    if (cur.Value.Name == name)
+                    {
+                        cur.Value.Unregister(true);
+                    }
                 }
             }
 
-            UpdateBackgroundTaskStatus(name, false);
+            UpdateBackgroundTaskRegistrationStatus(name, false);
+        }
+
+        /// <summary>
+        /// Retrieve a registered background task group. If no group is registered with the given id,
+        /// then create a new one and return it.
+        /// </summary>
+        /// <returns>The task group associated with the given id</returns>
+        public static BackgroundTaskRegistrationGroup GetTaskGroup(string id, string groupName)
+        {
+            var group = BackgroundTaskRegistration.GetTaskGroup(id);
+
+            if (group == null)
+            {
+                group = new BackgroundTaskRegistrationGroup(id, groupName);
+            }
+
+            return group;
         }
 
         /// <summary>
@@ -137,7 +183,7 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="name">Name of background task to store registration status for.</param>
         /// <param name="registered">TRUE if registered, FALSE if unregistered.</param>
-        public static void UpdateBackgroundTaskStatus(String name, bool registered)
+        public static void UpdateBackgroundTaskRegistrationStatus(String name, bool registered)
         {
             switch (name)
             {
@@ -155,6 +201,9 @@ namespace SDKTemplate
                     break;
                 case ApplicationTriggerTaskName:
                     ApplicationTriggerTaskRegistered = registered;
+                    break;
+                case GroupedBackgroundTaskName:
+                    GroupedBackgroundTaskRegistered = registered;
                     break;
             }
         }
@@ -184,14 +233,18 @@ namespace SDKTemplate
                 case ApplicationTriggerTaskName:
                     registered = ApplicationTriggerTaskRegistered;
                     break;
+                case GroupedBackgroundTaskName:
+                    registered = GroupedBackgroundTaskRegistered;
+                    break;
             }
 
             var status = registered ? "Registered" : "Unregistered";
 
+            object taskStatus;
             var settings = ApplicationData.Current.LocalSettings;
-            if (settings.Values.ContainsKey(name))
+            if (settings.Values.TryGetValue(name, out taskStatus))
             {
-                status += " - " + settings.Values[name].ToString();
+                status += " - " + taskStatus.ToString();
             }
 
             return status;

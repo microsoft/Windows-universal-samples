@@ -20,22 +20,26 @@ Copyright (c) Microsoft Corporation. All rights reserved
         </div>
         <div id="scenarioContent">
             <p>
-                This scenario shows two different in-app products.
-                In this example, the customer has already bought the first product but not the second.
-            </p>
-            <h2 id="product1Name"></h2>
-            <p>
-                <button id="testProduct1" class="win-button">Check if user has purchased it</button>
+                This scenario shows any in-app products that are sellable by this product.
+                Once one is selected from the list, a purchase can be attempted on it.
             </p>
             <p>
-                <button id="buyProduct1" class="win-button">Buy it (<span id="product1Price">Unknown price</span>)</button>
-            </p>
-            <h2 id="product2Name"></h2>
-            <p>
-                <button id="testProduct2" class="win-button">Check if user has purchased it</button>
+                <button id="getAssociatedProductsButton" class="win-button">Get Associated Add-Ons</button>
             </p>
             <p>
-                <button id="buyProduct2" class="win-button">Buy it (<span id="product2Price">Unknown price</span>)</button>
+                <button id="purchaseAddOnButton" class="win-button">Purchase Selected Add-On</button>
+            </p>
+            <p>
+                <div id="productTemplate" data-win-control="WinJS.Binding.Template">
+                    <h4 data-win-bind="innerText: formattedTitle"/>
+                </div>
+                <div id="productsListView" class="win-selectionstylefilled" data-win-control="WinJS.UI.ListView" data-win-options="{
+                    selectionMode: 'single',
+                    tapBehavior: 'toggleSelect',
+                    layout: { type: WinJS.UI.ListLayout },
+                    itemTemplate: select ('#productTemplate')}"></div>
+
+                <div id="productsListView" data-win-control="WinJS.UI.ListView"></div>
             </p>
         </div>
     </div>

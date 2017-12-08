@@ -3,7 +3,7 @@
 (function () {
     "use strict";
 
-    var sampleTitle = "PrintSample";
+    var sampleTitle = "Printing JS Sample";
 
     var scenarios = [
         { url: "/html/scenario1basic.html", title: "Basic" },

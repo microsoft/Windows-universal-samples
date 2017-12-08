@@ -34,7 +34,6 @@ namespace SDKTemplate
         static const unsigned int HResultPrivacyStatementDeclined = 0x80045509;
 
         SDKTemplate::MainPage^ rootPage;
-        Windows::UI::Core::CoreDispatcher^ dispatcher;
         Windows::Media::SpeechRecognition::SpeechRecognizer^ speechRecognizer;
         std::wstringstream dictatedTextBuilder;
 

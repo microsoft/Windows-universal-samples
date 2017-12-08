@@ -1,0 +1,47 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario5_Metadata"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:SDKTemplate.Controls"
+    xmlns:logging="using:SDKTemplate.Logging"
+    Loaded="Page_OnLoaded"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,10" Orientation="Vertical">
+            <StackPanel x:Name="DescriptionText">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    This scenario shows several ways in which the app can consume or create timed metadata.
+                    Enter your own: HLS manifest URI which contains m3u8 comments or ID3 tags in the TS segments;
+                    or DASH manifest URI with fMp4 segments that contain emsg boxes (stce35 will be parsed to insert ads).
+                </TextBlock>
+            </StackPanel>
+            <local:ContentSelector x:Name="ContentSelectorControl"/>
+        </StackPanel>
+
+        <MediaPlayerElement x:Name="mediaPlayerElement" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AreTransportControlsEnabled="True" />
+
+        <logging:LogView x:Name="LoggerControl" Grid.Row="2" Margin="0,10,0,0"/>
+    </Grid>
+</Page>

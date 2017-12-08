@@ -12,11 +12,22 @@
 #include "pch.h"
 #include "MainPage.xaml.h"
 #include "SampleConfiguration.h"
+#include "DeviceHelpers.h"
 
+using namespace Concurrency;
+using namespace Platform;
 using namespace SDKTemplate;
+using namespace Windows::Devices::PointOfService;
+using namespace Windows::Foundation;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
     { "BankCardDataReceived Event", "SDKTemplate.Scenario1_BankCards" },
     { "AamvaCardDataReceived Event", "SDKTemplate.Scenario2_AamvaCards" }
 };
+
+task<MagneticStripeReader^> DeviceHelpers::GetFirstMagneticStripeReaderAsync(PosConnectionTypes connectionTypes)
+{
+    return DeviceHelpers::GetFirstDeviceAsync(MagneticStripeReader::GetDeviceSelector(connectionTypes),
+        [](String^ id) { return create_task(MagneticStripeReader::FromIdAsync(id)); });
+}

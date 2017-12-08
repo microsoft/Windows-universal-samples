@@ -37,7 +37,7 @@
         // This is the event handler for VisibilityChanged events. You would register for these notifications
         // if handling sensor data when the app is not visible could cause unintended actions in the app.
         if (document.getElementById("scenario1Open").disabled) {
-            if (document.msVisibilityState === "visible") {
+            if (document.visibilityState === "visible") {
                 // Re-enable sensor input. No need to restore the desired desiredReportIntervalMs (it is restored for us upon app resume)
                 altimeter.addEventListener("readingchanged", onDataChanged);
             } else {

@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="SDKTemplate.AccountOverviewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource Grey02Brush}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="{StaticResource Grey06Brush}">
+            <TextBlock Text="&#x1f3e6; Woodgrove" FontSize="25" HorizontalAlignment="Left" Height="36" Margin="6"/>
+            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Content="Sign out" Click="{x:Bind SignOut}" Margin="10"/>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Margin="24">
+                <TextBlock Style="{ThemeResource HeaderTextBlockStyle}" Foreground="{StaticResource WhiteBrush}" Text="Accounts"/>
+
+                <Grid Background="{StaticResource Grey07Brush}" Margin="0,0,0,24">
+                    <StackPanel Margin="6">
+                        <TextBlock Text="Checking account" FontSize="18"/>
+                        <TextBlock Text="$1,234.56" Foreground="{StaticResource BlueBrush}" FontSize="36" FontFamily="{ThemeResource PhoneFontFamilySemiLight}"/>
+                        <TextBlock Text="Last updated today" FontSize="10"/>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Background="{StaticResource Grey07Brush}" Margin="0,0,0,24">
+                    <StackPanel Margin="6">
+                        <TextBlock Text="Savings account" FontSize="18"/>
+                        <TextBlock Text="$4,567.89" Foreground="{StaticResource BlueBrush}" FontSize="36" FontFamily="{ThemeResource PhoneFontFamilySemiLight}"/>
+                        <TextBlock Text="Last updated today" FontSize="10"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

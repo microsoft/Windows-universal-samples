@@ -1,0 +1,81 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario10"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    SizeChanged="OnSizeChanged"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                This scenario shows how to update the image on an InkToolbarCustomPenButton when the SelectedBrush property changes.
+                </TextBlock>
+            </StackPanel>
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <InkToolbar x:Name="inkToolbar" TargetInkCanvas="{x:Bind inkCanvas}" Grid.Row="0" InkDrawingAttributesChanged="inkToolbar_InkDrawingAttributesChanged"
+                                Loaded="inkToolbar_Loaded">
+                        <InkToolbar.Resources>
+                            <BrushCollection x:Key="CalligraphicPenPalette">
+                                <SolidColorBrush>Crimson</SolidColorBrush>
+                                <SolidColorBrush>Black</SolidColorBrush>
+                                <SolidColorBrush>Green</SolidColorBrush>
+                                <SolidColorBrush>DarkBlue</SolidColorBrush>
+                                <SolidColorBrush>Gold</SolidColorBrush>
+                            </BrushCollection>
+                            <local:CalligraphicPen x:Key="calligraphicPen"/>
+                        </InkToolbar.Resources>
+                        <InkToolbarCustomPenButton x:Name="CalligraphicPenButton"
+                                                           CustomPen="{StaticResource calligraphicPen}"
+                                                           Palette="{StaticResource CalligraphicPenPalette}"
+                                                           SelectedBrushIndex="0"
+                                                           MinStrokeWidth="4"
+                                                           MaxStrokeWidth="10"
+                                                           ToolTipService.ToolTip="Calligraphic Pen">
+                            <Border>
+                                <Grid x:Name="CaligraphicPenIcon">
+                                    <Image x:Name="CustomButtonFill" Width="16" Height="16" Stretch="UniformToFill" Canvas.ZIndex="0"/>
+                                    <Image x:Name="CustomButtonOutline" Source="ms-appx:///Assets/ButtonIconOutline.png" Width="16" Height="16"
+                                           Stretch="UniformToFill" Canvas.ZIndex="1"/>
+                                </Grid>
+                            </Border>
+
+                            <InkToolbarCustomPenButton.ConfigurationContent>
+                                <InkToolbarPenConfigurationControl/>
+                            </InkToolbarCustomPenButton.ConfigurationContent>
+                        </InkToolbarCustomPenButton>
+                    </InkToolbar>
+                    <Grid x:Name="outputGrid" Grid.Row="1" Background="{ThemeResource SystemControlBackgroundChromeWhiteBrush}" Height="Auto">
+                        <!-- Inking area -->
+                        <InkCanvas x:Name="inkCanvas" Height="Auto" Width="Auto"/>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

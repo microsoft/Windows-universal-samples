@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>c2adb9af-edb3-4e57-8056-9d0531d4a6b2</ProjectGuid>
+    <ProjectGuid>1ea69ecd-283e-5360-b110-19be3170bd6f</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
@@ -37,8 +37,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
@@ -46,7 +46,8 @@
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Content Include="adventureworkscommands.xml">
+    <Content Include="..\..\shared\AdventureWorksCommands.xml">
+      <Link>AdventureWorksCommands.xml</Link>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
     <Content Include="css\tripDetails.css" />
@@ -60,43 +61,44 @@
     <Content Include="images\GreyTile.scale-225.png" />
     <Content Include="images\GreyTile.scale-400.png" />
     <Content Include="..\..\..\..\SharedContent\media\microsoft-sdk.png">
-        <Link>images\microsoft-sdk.png</Link>
+      <Link>images\microsoft-sdk.png</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\media\smalltile-sdk.png">
-        <Link>images\smallTile-sdk.png</Link>
+      <Link>images\smallTile-sdk.png</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\media\splash-sdk.png">
-        <Link>images\splash-sdk.png</Link>
+      <Link>images\splash-sdk.png</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\media\storelogo-sdk.png">
-        <Link>images\storeLogo-sdk.png</Link>
+      <Link>images\storeLogo-sdk.png</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\media\tile-sdk.png">
-        <Link>images\tile-sdk.png</Link>
+      <Link>images\tile-sdk.png</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\media\windows-sdk.png">
-        <Link>images\windows-sdk.png</Link>
+      <Link>images\windows-sdk.png</Link>
     </Content>
     <Content Include="js\default.js" />
     <Content Include="css\default.css" />
+    <Content Include="js\installVCD.js" />
     <Content Include="js\store.js" />
     <Content Include="js\tripDetails.js" />
     <Content Include="js\tripListView.js" />
     <Content Include="js\voiceCommandService.js" />
     <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\css\ui-dark.css">
-        <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>
+      <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\css\ui-light.css">
-        <Link>Microsoft.WinJS.4.0\css\ui-light.css</Link>
+      <Link>Microsoft.WinJS.4.0\css\ui-light.css</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\js\en-US\ui.strings.js">
-        <Link>Microsoft.WinJS.4.0\js\en-US\ui.strings.js</Link>
+      <Link>Microsoft.WinJS.4.0\js\en-US\ui.strings.js</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\js\WinJS.intellisense-setup.js">
-        <Link>Microsoft.WinJS.4.0\js\WinJS.intellisense-setup.js</Link>
+      <Link>Microsoft.WinJS.4.0\js\WinJS.intellisense-setup.js</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\js\WinJS.intellisense.js">
-        <Link>Microsoft.WinJS.4.0\js\WinJS.intellisense.js</Link>
+      <Link>Microsoft.WinJS.4.0\js\WinJS.intellisense.js</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\js\Microsoft.WinJS\fonts\Symbols.ttf">
       <Link>Microsoft.WinJS.4.0\fonts\Symbols.ttf</Link>

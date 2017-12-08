@@ -70,15 +70,19 @@ void DetailPage::OnNavigatedTo(NavigationEventArgs ^ e)
     }
 
     // Register for hardware and software back request from the system
+    SystemNavigationManager^ systemNavigationManager = SystemNavigationManager::GetForCurrentView();
     m_backRequestedEventRegistrationToken =
-        SystemNavigationManager::GetForCurrentView()->BackRequested += ref new EventHandler<BackRequestedEventArgs ^>(this, &DetailPage::DetailPage_BackRequested);
+        systemNavigationManager->BackRequested += ref new EventHandler<BackRequestedEventArgs ^>(this, &DetailPage::DetailPage_BackRequested);
+    systemNavigationManager->AppViewBackButtonVisibility = AppViewBackButtonVisibility::Visible;
 }
 
 void DetailPage::OnNavigatedFrom(NavigationEventArgs ^ e)
 {
     Page::OnNavigatedFrom(e);
 
-    SystemNavigationManager::GetForCurrentView()->BackRequested -= m_backRequestedEventRegistrationToken;
+    SystemNavigationManager^ systemNavigationManager = SystemNavigationManager::GetForCurrentView();
+    systemNavigationManager->BackRequested -= m_backRequestedEventRegistrationToken;
+    systemNavigationManager->AppViewBackButtonVisibility = AppViewBackButtonVisibility::Collapsed;
 }
 
 void DetailPage::PageRoot_Loaded(Object^ sender, RoutedEventArgs^ e)

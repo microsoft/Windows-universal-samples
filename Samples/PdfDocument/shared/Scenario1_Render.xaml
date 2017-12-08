@@ -1,0 +1,54 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Render"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer Margin="12,20,12,12">
+            <StackPanel>
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Loading and rendering a PDF document
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Button x:Name="LoadButton" Content="Load document" Click="{x:Bind LoadDocument}" Margin="5,0"/>
+                    <PasswordBox x:Name="PasswordBox" Width="200" PlaceholderText="Optional password"/>
+                </StackPanel>
+                
+                <StackPanel x:Name="RenderingPanel" Visibility="Collapsed">
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBlock VerticalAlignment="center">View page</TextBlock>
+                        <TextBox x:Name="PageNumberBox" InputScope="Number" Width="30" Text="1" TextAlignment="Right" Margin="5,0,5,0"/>
+                        <TextBlock VerticalAlignment="Center">of <Run x:Name="PageCountText"/>.</TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <ComboBox x:Name="Options" SelectedIndex="0">
+                            <ComboBoxItem>Actual size</ComboBoxItem>
+                            <ComboBoxItem>Half size on beige background</ComboBoxItem>
+                            <ComboBoxItem>Crop to center of page</ComboBoxItem>
+                        </ComboBox>
+                        <Button Click="{x:Bind ViewPage}" Content="View" Margin="10,0,0,0"/>
+                    </StackPanel>
+
+                    <Image x:Name="Output" Stretch="None" Margin="0,10,0,0"/>
+                </StackPanel>
+                <ProgressRing x:Name="ProgressControl" Height="50" Width="50" IsActive="True" Visibility="Collapsed" Margin="0,10,0,0"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

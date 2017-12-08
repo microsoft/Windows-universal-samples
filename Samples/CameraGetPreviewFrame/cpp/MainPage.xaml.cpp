@@ -42,6 +42,7 @@ MainPage::MainPage()
     , _displayOrientation(DisplayOrientations::Portrait)
     , _displayRequest(ref new Windows::System::Display::DisplayRequest())
     , RotationKey({ 0xC380465D, 0x2271, 0x428C,{ 0x9B, 0x83, 0xEC, 0xEA, 0x3B, 0x4A, 0x85, 0xC1 } })
+    , _captureFolder(nullptr)
 {
     InitializeComponent();
 
@@ -125,6 +126,18 @@ task<void> MainPage::InitializeCameraAsync()
             catch (AccessDeniedException^)
             {
                 WriteLine("The app was denied access to the camera");
+            }
+        });
+    }).then([this]()
+    {
+        create_task(StorageLibrary::GetLibraryAsync(KnownLibraryId::Pictures))
+            .then([this](StorageLibrary^ picturesLibrary)
+        {
+            _captureFolder = picturesLibrary->SaveFolder;
+            if (_captureFolder == nullptr)
+            {
+                // In this case fall back to the local app storage since the Pictures Library is not available
+                _captureFolder = ApplicationData::Current->LocalFolder;
             }
         });
     });
@@ -346,13 +359,13 @@ task<void> MainPage::GetPreviewFrameAsD3DSurfaceAsync()
 }
 
 /// <summary>
-/// Saves a SoftwareBitmap to the Pictures library with the specified name
+/// Saves a SoftwareBitmap to the _captureFolder
 /// </summary>
 /// <param name="bitmap"></param>
 /// <returns></returns>
 task<void> MainPage::SaveSoftwareBitmapAsync(SoftwareBitmap^ bitmap)
 {
-    return create_task(KnownFolders::PicturesLibrary->CreateFileAsync("PreviewFrame.jpg", CreationCollisionOption::GenerateUniqueName))
+    return create_task(_captureFolder->CreateFileAsync("PreviewFrame.jpg", CreationCollisionOption::GenerateUniqueName))
         .then([bitmap](StorageFile^ file)
     {
         return create_task(file->OpenAsync(FileAccessMode::ReadWrite));
@@ -581,7 +594,7 @@ void MainPage::DisplayInformation_OrientationChanged(DisplayInformation^ sender,
     }
 }
 
-void MainPage::GetPreviewFrameButton_Tapped(Object^, RoutedEventArgs^)
+void MainPage::GetPreviewFrameButton_Click(Object^, RoutedEventArgs^)
 {
     // If preview is not running, no preview frames can be acquired
     if (!_isPreviewing) return;

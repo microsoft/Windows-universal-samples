@@ -54,11 +54,17 @@ namespace CameraManualControls
         // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
         private static readonly Guid RotationKey = new Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1");
 
+        // Folder in which the captures will be stored (initialized in SetupUiAsync)
+        private StorageFolder _captureFolder = null;
+
         // Prevent the screen from sleeping while the camera is running
         private readonly DisplayRequest _displayRequest = new DisplayRequest();
 
         // For listening to media property changes
         private readonly SystemMediaTransportControls _systemMediaControls = SystemMediaTransportControls.GetForCurrentView();
+
+        // Access to the Back button
+        private readonly SystemNavigationManager _systemNavigationManager = SystemNavigationManager.GetForCurrentView();
 
         // MediaCapture and its state variables
         private MediaCapture _mediaCapture;
@@ -202,12 +208,12 @@ namespace CameraManualControls
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => UpdateButtonOrientation());
         }
 
-        private async void PhotoButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void PhotoButton_Click(object sender, RoutedEventArgs e)
         {
             await TakePhotoAsync();
         }
 
-        private async void VideoButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void VideoButton_Click(object sender, RoutedEventArgs e)
         {
             if (!_isRecording)
             {
@@ -430,20 +436,25 @@ namespace CameraManualControls
 
             var stream = new InMemoryRandomAccessStream();
 
+            Debug.WriteLine("Taking photo...");
+            await _mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream);
+
             try
             {
-                Debug.WriteLine("Taking photo...");
-                await _mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream);
-                Debug.WriteLine("Photo taken!");
+                var file = await _captureFolder.CreateFileAsync("SimplePhoto.jpg", CreationCollisionOption.GenerateUniqueName);
+
+                Debug.WriteLine("Photo taken! Saving to " + file.Path);
 
                 var photoOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
 
-                await ReencodeAndSavePhotoAsync(stream, photoOrientation);
+                await ReencodeAndSavePhotoAsync(stream, file, photoOrientation);
+
+                Debug.WriteLine("Photo saved!");
             }
             catch (Exception ex)
             {
                 // File I/O errors are reported as exceptions
-                Debug.WriteLine("Exception when taking a photo: {0}", ex.ToString());
+                Debug.WriteLine("Exception when taking a photo: " + ex.ToString());
             }
 
             // Done taking a photo, so re-enable the button
@@ -459,8 +470,8 @@ namespace CameraManualControls
         {
             try
             {
-                // Create storage file in Pictures Library
-                var videoFile = await KnownFolders.PicturesLibrary.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
+                // Create storage file for the capture
+                var videoFile = await _captureFolder.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
 
                 var encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
 
@@ -468,7 +479,7 @@ namespace CameraManualControls
                 var rotationAngle = 360 - ConvertDeviceOrientationToDegrees(GetCameraOrientation());
                 encodingProfile.Video.Properties.Add(RotationKey, PropertyValue.CreateInt32(rotationAngle));
 
-                Debug.WriteLine("Starting recording...");
+                Debug.WriteLine("Starting recording to " + videoFile.Path);
 
                 await _mediaCapture.StartRecordToStorageFileAsync(encodingProfile, videoFile);
                 _isRecording = true;
@@ -478,7 +489,7 @@ namespace CameraManualControls
             catch (Exception ex)
             {
                 // File I/O errors are reported as exceptions
-                Debug.WriteLine("Exception when starting video recording: {0}", ex.ToString());
+                Debug.WriteLine("Exception when starting video recording: " + ex.ToString());
             }
         }
 
@@ -557,6 +568,10 @@ namespace CameraManualControls
             }
 
             RegisterEventHandlers();
+
+            var picturesLibrary = await StorageLibrary.GetLibraryAsync(KnownLibraryId.Pictures);
+            // Fall back to the local app storage if the Pictures Library is not available
+            _captureFolder = picturesLibrary.SaveFolder ?? ApplicationData.Current.LocalFolder;
         }
 
         /// <summary>
@@ -608,7 +623,6 @@ namespace CameraManualControls
             if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
             {
                 HardwareButtons.CameraPressed += HardwareButtons_CameraPressed;
-                HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             }
 
             // If there is an orientation sensor present on the device, register for notifications
@@ -622,31 +636,20 @@ namespace CameraManualControls
 
             _displayInformation.OrientationChanged += DisplayInformation_OrientationChanged;
             _systemMediaControls.PropertyChanged += SystemMediaControls_PropertyChanged;
+            _systemNavigationManager.BackRequested += SystemNavigationManager_BackRequested;
         }
 
-        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        private void SystemNavigationManager_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            // Back button exits single control mode
             if (_singleControlMode)
             {
                 // Exit single control mode
-                _singleControlMode = false;
-
-                // If in single control mode, hide all child buttons (except for the sender). Otherwise show all buttons.
-                foreach (var button in ScenarioControlStackPanel.Children)
-                {
-                    if (button is Button && button != sender)
-                    {
-                        button.Visibility = Visibility.Visible;
-                    }
-                }
-
-                // Hide the container control for manual input
-                ManualControlsGrid.Visibility = Visibility.Collapsed;
+                SetSingleControl(null);
 
                 e.Handled = true;
             }
         }
+
 
         /// <summary>
         /// Unregisters event handlers for hardware buttons and orientation sensors
@@ -656,7 +659,6 @@ namespace CameraManualControls
             if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
             {
                 HardwareButtons.CameraPressed -= HardwareButtons_CameraPressed;
-                HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
             }
 
             if (_orientationSensor != null)
@@ -666,6 +668,7 @@ namespace CameraManualControls
 
             _displayInformation.OrientationChanged -= DisplayInformation_OrientationChanged;
             _systemMediaControls.PropertyChanged -= SystemMediaControls_PropertyChanged;
+            _systemNavigationManager.BackRequested -= SystemNavigationManager_BackRequested;
         }
 
         /// <summary>
@@ -689,15 +692,14 @@ namespace CameraManualControls
         /// Applies the given orientation to a photo stream and saves it as a StorageFile
         /// </summary>
         /// <param name="stream">The photo stream</param>
+        /// <param name="file">The StorageFile in which the photo stream will be saved</param>
         /// <param name="photoOrientation">The orientation metadata to apply to the photo</param>
         /// <returns></returns>
-        private static async Task ReencodeAndSavePhotoAsync(IRandomAccessStream stream, PhotoOrientation photoOrientation)
+        private static async Task ReencodeAndSavePhotoAsync(IRandomAccessStream stream, StorageFile file, PhotoOrientation photoOrientation)
         {
             using (var inputStream = stream)
             {
                 var decoder = await BitmapDecoder.CreateAsync(inputStream);
-
-                var file = await KnownFolders.PicturesLibrary.CreateFileAsync("SimplePhoto.jpeg", CreationCollisionOption.GenerateUniqueName);
 
                 using (var outputStream = await file.OpenAsync(FileAccessMode.ReadWrite))
                 {
@@ -912,24 +914,35 @@ namespace CameraManualControls
 
         #region Manual controls setup
 
-        private void ManualControlButton_Tapped(object sender, TappedRoutedEventArgs e)
+        // If activeButton = null, then exit single control mode.
+        private void SetSingleControl(object activeButton)
         {
-            // Toggle single control mode
-            _singleControlMode = !_singleControlMode;
+            _singleControlMode = (activeButton != null);
 
-            // If in single control mode, hide all manual control buttons (except for the sender, which was tapped), otherwise show all buttons
-            foreach (var button in ScenarioControlStackPanel.Children)
+            // If in single control mode, hide all manual control buttons (except for the active button).
+            // if not in single control mode, then show all the buttons which are supported.
+            foreach (var button in ScenarioControlStackPanel.Children.OfType<Button>())
             {
-                if (button is Button && button != sender)
+                if (button != activeButton)
                 {
-                    // The Tag property of each button stores whether that button should be displayed or not, which depends on whether the control is supported or not
-                    // The value is set in the Update___ControlCapabilities method of each control
-                    button.Visibility = _singleControlMode ? Visibility.Collapsed : (Visibility)(button as Button).Tag;
+                    // The Tag property of each button stores whether that button is supported.
+                    // The value is set in the Update___ControlCapabilities method of each control.
+                    button.Visibility = _singleControlMode ? Visibility.Collapsed : (Visibility)button.Tag;
                 }
             }
 
             // Show the container control for manual configuration only when in single control mode
             ManualControlsGrid.Visibility = _singleControlMode ? Visibility.Visible : Visibility.Collapsed;
+
+            // Show the Back button only when in single control mode
+            _systemNavigationManager.AppViewBackButtonVisibility = _singleControlMode ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+
+        }
+
+        private void ManualControlButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Toggle single control mode
+            SetSingleControl(_singleControlMode ? null : sender);
         }
 
         /// <summary>

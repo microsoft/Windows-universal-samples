@@ -80,7 +80,7 @@ namespace SDKTemplate
             rootPage.NotifyUser("Creating cash drawer object.", NotifyType.StatusMessage);
 
             CashDrawer tempDrawer = null;
-            tempDrawer = await CashDrawer.GetDefaultAsync();
+            tempDrawer = await DeviceHelpers.GetFirstCashDrawerAsync();
 
             if (tempDrawer == null)
             {
@@ -207,6 +207,12 @@ namespace SDKTemplate
 
                 rootPage.NotifyUser("Claimed instance 1 was released.", NotifyType.StatusMessage);
             }
+
+            if (cashDrawerInstance1 != null)
+            {
+                cashDrawerInstance1.Dispose();
+                cashDrawerInstance1 = null;
+            }
         }
 
         /// <summary>
@@ -224,6 +230,12 @@ namespace SDKTemplate
                 SetReleasedUI(CashDrawerInstance.Instance2);
 
                 rootPage.NotifyUser("Claimed instance 2 was released.", NotifyType.StatusMessage);
+            }
+
+            if (cashDrawerInstance2 != null)
+            {
+                cashDrawerInstance2.Dispose();
+                cashDrawerInstance2 = null;
             }
         }
 
@@ -247,6 +259,12 @@ namespace SDKTemplate
                 {
                     claimedCashDrawerInstance1.Dispose();
                     claimedCashDrawerInstance1 = null;
+
+                    if (cashDrawerInstance1 != null)
+                    {
+                        cashDrawerInstance1.Dispose();
+                        cashDrawerInstance1 = null;
+                    }
 
                     SetReleasedUI(CashDrawerInstance.Instance1);
                 }
@@ -274,6 +292,12 @@ namespace SDKTemplate
                     claimedCashDrawerInstance2.Dispose();
                     claimedCashDrawerInstance2 = null;
 
+                    if (cashDrawerInstance2 != null)
+                    {
+                        cashDrawerInstance2.Dispose();
+                        cashDrawerInstance2 = null;
+                    }
+
                     SetReleasedUI(CashDrawerInstance.Instance2);
                 }
             });
@@ -284,9 +308,6 @@ namespace SDKTemplate
         /// </summary>
         private void ResetScenarioState()
         {
-            cashDrawerInstance1 = null;
-            cashDrawerInstance2 = null;
-
             if (claimedCashDrawerInstance1 != null)
             {
                 claimedCashDrawerInstance1.Dispose();
@@ -297,6 +318,18 @@ namespace SDKTemplate
             {
                 claimedCashDrawerInstance2.Dispose();
                 claimedCashDrawerInstance2 = null;
+            }
+
+            if (cashDrawerInstance1 != null)
+            {
+                cashDrawerInstance1.Dispose();
+                cashDrawerInstance1 = null;
+            }
+
+            if (cashDrawerInstance2 != null)
+            {
+                cashDrawerInstance2.Dispose();
+                cashDrawerInstance2 = null;
             }
 
             ClaimButton1.IsEnabled = true;

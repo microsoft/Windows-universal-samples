@@ -1,0 +1,29 @@
+<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario2-history.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div>
+        <p>Gets the activity history from at most 1 day ago. Displays the first entry, last entry, and count of entries.</p>
+        <p>
+            <button class="win-button" id="getActivityHistory">Get activity history</button>
+        </p>
+    </div>
+    <table id="scenarioOutput" style="display: none">
+        <tr><td>First Activity:</td><td id="activity1"></td></tr>
+        <tr><td>First Confidence:</td><td id="confidence1"></td></tr>
+        <tr><td>First Timestamp:</td><td id="timestamp1"></td></tr>
+        <tr><td>Last Activity:</td><td id="activityN"></td></tr>
+        <tr><td>Last Confidence:</td><td id="confidenceN"></td></tr>
+        <tr><td>Last Timestamp:</td><td id="timestampN"></td></tr>
+    </table>
+</body>
+
+</html>

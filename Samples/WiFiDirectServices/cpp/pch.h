@@ -17,6 +17,7 @@
 
 #include <collection.h>
 #include <ppltasks.h>
+#include <concrt.h>
 
 #include <sstream>
 

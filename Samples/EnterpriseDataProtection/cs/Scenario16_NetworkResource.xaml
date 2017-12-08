@@ -30,32 +30,38 @@
             <ScrollViewer Grid.Row="0" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="0,0,0,10">
                     <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                    <TextBlock Text="Get network resource" Style="{StaticResource ScenarioDescriptionTextStyle}"/>
                     <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                    <LineBreak/>The application calls CreateCurrentThreadNetworkContext with the user identity to create a protected thread context. 
+                    <LineBreak/>The application calls CreateCurrentThreadNetworkContext with the Enterprise Identity to create a protected thread context. 
                     This tags all network connections made on the current thread with the identity and allows access to enterprise resources that are access 
-                    controlled by the enterprise’s policy. Here the enterprise refers to the enterprise that the user identity belongs to. CreateCurrentThreadNetworkContext 
-                    returns a ThreadNetworkContext irrespective of policy enforcement. Generally, if the application expects to handle mixed resources, it can choose to always call 
-                    CreateCurrentThreadNetworkContext for all identities. After retrieving network resources, the application calls close on the returned context to clear any tag on the 
-                    current thread. If identity is unknown, the application can query the enterprise policy-managed identity from the network address of the resource using the GetPrimaryManagedIdentityForNetworkEndpoint API.
-                   ‘Closing’ the returned thread network context is specific to the language being used and is semantically equivalent to closing streams. In C#, this is done by calling “Dispose”, “close” in 
-                    JavaScript and “delete” in C++.
+                    controlled by the enterprise’s policy. Break the association by using the Dispose method.
+                    For System.Net.Http.HttpClient, the application sets the "X-MS-Windows-HttpClient-EnterpriseId" header, which preserves the Enterprise ID even if the
+                    original thread changes.
+                    An application should use the GetPrimaryManagedIdentityForNetworkEndpoint method to retrieve the Enterprise Identity associated with a specific URL and explicitly disallow access when no network context is set (personal mode). 
+                    Otherwise, the app may be able to retrieve cached versions of previously accessed enterprise resources.
                     </TextBlock>
                 </StackPanel>
             </ScrollViewer>
-            
+
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
                     <TextBlock  TextWrapping="Wrap" Width="600"  HorizontalAlignment="Left" TextAlignment="Left">    
-                       <LineBreak/>Please input Enterprise Uri in the box provided
+                       <LineBreak/>URI to access
                     </TextBlock>
-                    <TextBox Name="EnterpriseUri" Width="300" Text="http://toolbox" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock>Domain:</TextBlock>
-                    <TextBox Name="DomainBox" Width="200" PlaceholderText="domain" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock>UserName:</TextBlock>
-                    <TextBox Name="UserNameBox" Width="200" PlaceholderText="username" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock>Password:</TextBlock>
-                    <PasswordBox Name="Passwordbox" Width="200" HorizontalAlignment="Left"></PasswordBox>
-                    <Button Content="GetPrimaryManagedIdentity" Click="CheckUriIdentity_Click"/>
+                    <TextBox Name="ResourceUriText" Width="300" Text="http://toolbox" HorizontalAlignment="Left"></TextBox>
+                    <RadioButton x:Name="UseWindowsWebHttpClient" GroupName="ClientType" Content="Use Windows.Web.Http.HttpClient" Checked="{x:Bind ClientTypeChanged}" Unchecked="{x:Bind ClientTypeChanged}"/>
+                    <RadioButton x:Name="UseSystemNetHttpClient" GroupName="ClientType" Content="Use System.Net.Http.HttpClient"  />
+                    <RadioButton x:Name="UseBackgroundTransferButton" GroupName="ClientType" Content="Use Windows.Networking.BackgroundTransfer"  />
+                    <StackPanel x:Name="CredentialsContent" Visibility="Collapsed" Margin="10,0,0,0">
+                        <TextBlock Text="User name:" Margin="0,10,0,0"/>
+                        <TextBox x:Name="UserNameBox" PlaceholderText="username" IsSpellCheckEnabled="False"/>
+                        <TextBlock Text="Password:" Margin="0,10,0,0"/>
+                        <PasswordBox Name="Passwordbox" Width="200" HorizontalAlignment="Left"></PasswordBox>
+                    </StackPanel>
+                    <CheckBox x:Name="UsePersonalContext" Content="Use personal context" IsChecked="False" Margin="0,10,0,0"/>
+                    <Button Content="GetPrimaryManagedIdentity" Click="CheckUriIdentity_Click" Margin="0,10,0,0"/>
+                    <Button Content="Connect" Click="{x:Bind ConnectToUri}" Margin="0,10,0,0"/>
+                    <TextBlock x:Name="ActualEnterpriseContextTextBlock" Margin="0,10,0,0" />
                 </StackPanel>
             </ScrollViewer>
 

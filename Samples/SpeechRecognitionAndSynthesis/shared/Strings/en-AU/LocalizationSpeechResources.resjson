@@ -1,0 +1,23 @@
+{
+	"DictationUIOptionsExampleText": "For example, \"The quick red fox jumped over the lazy dog.\"",
+	"ListGrammarCallNita": "Call Nita",
+	"ListGrammarCallNitaFarley": "Call Nita Farley",
+	"ListGrammarCallWayne": "Call Wayne",
+	"ListGrammarCallWayneSigmon": "Call Wayne Sigmon",
+	"ListGrammarCreateEmail": "Write email",
+	"ListGrammarExamplesPrefix": "Examples:",
+	"ListGrammarGoHome": "Go Home",
+	"ListGrammarGoToContosoStudio": "Go to Contoso Studio",
+	"ListGrammarHelpText": "Tap the microphone, and speak. This scenario uses continuous recognition to provide a global-command type scenario. \r\nTry saying \u0027Go Home\u0027, \u0027Call Nita\u0027, \u0027Go to Contoso Studio\u0027, \u0027Send Email\u0027.",
+	"ListGrammarOpenMessage": "Open email",
+	"ListGrammarSendEmail": "Send email",
+	"ListGrammarShowMessage": "Show message",
+	"SRGSBackgroundGarbagePromptText": "Didn\u0027t get the background color \r\n\r\nTry saying blue background",
+	"SRGSBorderGarbagePromptText": "Didn\u0027t get the border color \r\n\r\nTry saying red border",
+	"SRGSCircleGarbagePromptText": "Didn\u0027t get the circle color \r\n\r\nTry saying green circle",
+	"SRGSGarbagePromptText": "Sorry, didn\u0027t get that\r\n\r\nTry saying -\u003e\r\nblue background\r\nred border\r\ngreen circle",
+	"SRGSHelpText": "Tap the microphone and speak to choose colors for the circle, background, and border. Try saying \u0027blue background, red border, green circle\u0027.",
+	"SRGSListeningPromptText": "Speak to choose colors for the circle, background, and border. Try saying \u0027blue background, red border, green circle\u0027.",
+	"SRGSUIOptionsExampleText": "Try \"blue background, red border, green circle\".",
+	"WebSearchUIOptionsExampleText": "For example, \"weather in London\""
+}

@@ -106,7 +106,7 @@ namespace ListViewSample.Model
             ObservableCollection<GroupInfoList> groups = new ObservableCollection<GroupInfoList>();
 
             var query = from item in GetContacts(numberOfContacts)
-                        group item by item.LastName[0] into g
+                        group item by item.LastName.Substring(0, 1).ToUpper() into g
                         orderby g.Key
                         select new { GroupName = g.Key, Items = g };
 
@@ -122,6 +122,11 @@ namespace ListViewSample.Model
             }
 
             return groups;
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
         #endregion
 

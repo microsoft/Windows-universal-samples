@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp"
+  >
+  <Identity Name="Microsoft.SDKSamples.D2DAdvancedColorImages.CPP" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.0"/>
+  <mp:PhoneIdentity PhoneProductId="9205f505-29fc-4a31-99ff-997609c55930" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <Properties>
+    <DisplayName>Direct2D Advanced Color Images C++ Sample</DisplayName>
+    <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+    <Logo>Assets\StoreLogo-sdk.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.15063.0" MaxVersionTested="10.0.16299.0"/>
+  </Dependencies>
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="D2DAdvancedColorImages.App">
+      <uap:VisualElements
+        DisplayName="Direct2D Advanced Color Images C++ Sample"
+        Square150x150Logo="Assets\squaretile-sdk.png"
+        Square44x44Logo="Assets\smalltile-sdk.png"
+        Description="Direct2D Advanced Color Images C++ Sample"
+        BackgroundColor="#00B2F0"
+        >
+        <uap:DefaultTile Wide310x150Logo="Assets\tile-sdk.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo"/>
+            <uap:ShowOn Tile="wide310x150Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+        <uap:SplashScreen Image="Assets\splash-sdk.png"/>
+      </uap:VisualElements>
+      <Extensions>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name=".jxr">
+            <uap:DisplayName>JPEG XR image</uap:DisplayName>
+            <uap:SupportedFileTypes>
+              <uap:FileType ContentType="image/jxr">.jxr</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name=".jpg">
+            <uap:DisplayName>JPEG image</uap:DisplayName>
+            <uap:SupportedFileTypes>
+              <uap:FileType ContentType="image/jpg">.jpg</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name=".tif">
+            <uap:DisplayName>TIFF image</uap:DisplayName>
+            <uap:SupportedFileTypes>
+              <uap:FileType ContentType="image/tif">.tif</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name=".png">
+            <uap:DisplayName>PNG image</uap:DisplayName>
+            <uap:SupportedFileTypes>
+              <uap:FileType ContentType="image/png">.png</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient"/>
+  </Capabilities>
+</Package>

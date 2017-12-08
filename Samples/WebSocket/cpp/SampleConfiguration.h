@@ -28,7 +28,7 @@ namespace SDKTemplate
         {
             Platform::String^ get()
             {
-                return ref new Platform::String(L"WebSocket");
+                return "WebSocket C++ Sample";
             }
         }
 
@@ -40,76 +40,16 @@ namespace SDKTemplate
             }
         }
 
-        bool TryGetUri(Platform::String^ uriString, Windows::Foundation::Uri^* uri)
-        {
-            *uri = nullptr;
-
-            Windows::Foundation::Uri^ webSocketUri;
-
-            // Create a Uri instance and catch exceptions related to invalid input. This method returns 'true'
-            // if the Uri instance was successfully created and 'false' otherwise.
-            try
-            {
-                webSocketUri = ref new Windows::Foundation::Uri(StringTrimmer::Trim(uriString));
-            }
-            catch (Platform::NullReferenceException^ exception)
-            {
-                NotifyUser("Error: URI must not be null or empty.", NotifyType::ErrorMessage);
-                return false;
-            }
-            catch (Platform::InvalidArgumentException^ exception)
-            {
-                NotifyUser("Error: Invalid URI", NotifyType::ErrorMessage);
-                return false;
-            }
-
-            if (webSocketUri->Fragment != "")
-            {
-                NotifyUser("Error: URI fragments not supported in WebSocket URIs.", NotifyType::ErrorMessage);
-                return false;
-            }
-
-            Platform::String^ wsScheme = "ws";
-            Platform::String^ wssScheme = "wss";
-            Platform::String^ scheme = webSocketUri->SchemeName;
-
-            // Uri->SchemeName returns the canonicalized scheme name so we can use case-sensitive, ordinal string
-            // comparison.
-            if ((CompareStringOrdinal(scheme->Begin(), scheme->Length(), wsScheme->Begin(), wsScheme->Length(), false) != CSTR_EQUAL) && 
-                (CompareStringOrdinal(scheme->Begin(), scheme->Length(), wssScheme->Begin(), wssScheme->Length(), false) != CSTR_EQUAL))
-            {
-                NotifyUser("Error: WebSockets only support ws:// and wss:// schemes.", NotifyType::ErrorMessage);
-                return false;
-            }
-
-            *uri = webSocketUri;
-
-            return true;
-        }
+    internal:
+        Windows::Foundation::Uri^ TryGetUri(Platform::String^ uriString);
+        static Platform::String^ BuildWebSocketError(Platform::Exception^ ex);
+        static concurrency::task<bool> AreCertificateAndCertChainValidAsync(
+            Windows::Security::Cryptography::Certificates::Certificate^ serverCert,
+            Windows::Foundation::Collections::IVectorView<Windows::Security::Cryptography::Certificates::Certificate^>^ certChain);
 
     private:
         static Platform::Array<Scenario>^ scenariosInner;
-    };
 
-    class StringTrimmer
-    {
-    public:
-        static Platform::String^ Trim(Platform::String^ s)
-        {
-            const WCHAR* first = s->Begin();
-            const WCHAR* last = s->End();
-
-            while (first != last && iswspace(*first))
-            {
-                ++first;
-            }
-
-            while (first != last && iswspace(last[-1]))
-            {
-                --last;
-            }
-
-            return ref new Platform::String(first, static_cast<unsigned int>(last - first));
-        }
+        static concurrency::task<bool> IsCertificateValidAsync(Windows::Security::Cryptography::Certificates::Certificate^ serverCert);
     };
 }

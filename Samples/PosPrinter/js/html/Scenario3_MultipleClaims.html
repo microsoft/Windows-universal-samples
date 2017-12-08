@@ -1,0 +1,45 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/devicehelpers.js"></script>
+    <script src="/js/Scenario3_MultipleClaims.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div>
+        <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+        <div id="scenarioDescription">
+            Multiple claims.
+        </div>
+        <p>
+            Use Scenario 1 to claim a receipt printer.
+            Use this scenario to claim the same
+            receipt printer. The call will succeed or
+            fail depending on whether Scenario 1 chooses
+            to release the device or retain it.
+        </p>
+
+        <p>
+            <button id="claimSamePrinterButton" class="win-button">Claim the same printer as scenario 1</button>
+        </p>
+
+        <p id="claimResultText"></p>
+    </div>
+</body>
+
+</html>

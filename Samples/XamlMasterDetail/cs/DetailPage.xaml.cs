@@ -68,14 +68,18 @@ namespace MasterDetailApp
             }
 
             // Register for hardware and software back request from the system
-            SystemNavigationManager.GetForCurrentView().BackRequested += DetailPage_BackRequested;
+            SystemNavigationManager systemNavigationManager = SystemNavigationManager.GetForCurrentView();
+            systemNavigationManager.BackRequested += DetailPage_BackRequested;
+            systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
 
-            SystemNavigationManager.GetForCurrentView().BackRequested -= DetailPage_BackRequested;
+            SystemNavigationManager systemNavigationManager = SystemNavigationManager.GetForCurrentView();
+            systemNavigationManager.BackRequested -= DetailPage_BackRequested;
+            systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
         private void OnBackRequested()
@@ -138,11 +142,6 @@ namespace MasterDetailApp
                 // We shouldn't see this page since we are in "wide master-detail" mode.
                 NavigateBackForWideState(useTransition:false);
             }
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            OnBackRequested();
         }
 
         private void DetailPage_BackRequested(object sender, BackRequestedEventArgs e)

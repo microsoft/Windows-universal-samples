@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="SDKTemplate.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ListView x:Name="list" Header="Click on an item or click a button in the AppBar." EntranceNavigationTransitionInfo.IsTargetElement="True" IsItemClickEnabled="True" ItemClick="ListView_ItemClick">
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Margin="12,4" Text="{Binding}" />
+                </DataTemplate>
+            </ListView.HeaderTemplate>
+        </ListView>
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Label="add" Icon="Add" Click="{x:Bind AddItem}"/>
+            <AppBarButton Label="reset" Icon="Refresh" Click="{x:Bind ResetItems}"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>

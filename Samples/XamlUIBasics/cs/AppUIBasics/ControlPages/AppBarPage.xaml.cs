@@ -28,23 +28,19 @@ namespace AppUIBasics.ControlPages
 
         private void topAppBar_Opened(object sender, object e)
         {
-            ItemPage itemPage = NavigationRootPage.RootFrame.Content as ItemPage;
 
-            if (itemPage != null)
-            {
-                CommandBar bottomAppBar = itemPage.BottomCommandBar;
-                bottomAppBar.IsOpen = false;
-            }
+                CommandBar headerTopAppBar = NavigationRootPage.Current.PageHeader.TopCommandBar;
+                headerTopAppBar.IsOpen = false;
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
         {
-            this.TopAppBar.IsOpen = true;
+            topAppBar.IsOpen = true;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            this.TopAppBar.IsOpen = false;
+            topAppBar.IsOpen = false;
         }
 
         private void NavBarButton_Click(object sender, RoutedEventArgs e)
@@ -56,7 +52,7 @@ namespace AppUIBasics.ControlPages
             {
                 if (b.Tag.ToString() == "Home")
                 {
-                    rootFrame.Navigate(typeof(AppUIBasics.MainPage));
+                    rootFrame.Navigate(typeof(AppUIBasics.AllControlsPage));
                 }
                 else
                 {

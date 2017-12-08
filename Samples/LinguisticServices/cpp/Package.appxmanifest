@@ -4,8 +4,7 @@
    xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
    xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
    xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-   xmlns:build="http://schemas.microsoft.com/developer/appx/2015/build"
-   IgnorableNamespaces= "build uap mp">
+   IgnorableNamespaces= "uap mp">
 
 
     <Identity
@@ -22,7 +21,7 @@
     </Properties>
 
     <Dependencies>
-        <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+        <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.10240.0" MaxVersionTested="10.0.16299.0" />
     </Dependencies>
 
     <Resources>

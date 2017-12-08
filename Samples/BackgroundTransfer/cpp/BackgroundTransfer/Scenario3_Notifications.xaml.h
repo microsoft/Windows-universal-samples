@@ -20,7 +20,7 @@
 #include "Scenario3_Notifications.g.h"
 #include "MainPage.xaml.h"
 
-namespace BackgroundTransfer
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -51,9 +51,6 @@ namespace BackgroundTransfer
         void ToastNotificationButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void TileNotificationButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
-        void StartDownload(
-            Windows::Networking::BackgroundTransfer::BackgroundTransferPriority priority,
-            boolean requestUnconstrainedDownload);
         void RunDownloads(
             Windows::Networking::BackgroundTransfer::BackgroundDownloader^ downloader,
             ScenarioType type);

@@ -121,8 +121,8 @@ void CopyText::PasteButton_Click(Object^ sender, RoutedEventArgs^ e)
             {
                 String^ htmlFragment = HtmlFormatHelper::GetStaticFragment(htmlFormat);
 
-                // Note: Windows Store apps may be unable to render some schemes (e.g., 'ms-clipboard-file') that reference local content.
-                // As a result, images may look broken. To learn the different URL schemes used by Windows Store apps and how to use them
+                // Note: Apps may be unable to render some schemes (e.g., 'ms-clipboard-file') that reference local content.
+                // As a result, images may look broken. To learn the different URL schemes used by apps and how to use them
                 // to refer to content, see MSDN - http://msdn.microsoft.com/en-us/library/windows/apps/hh781215.aspx
                 OutputHtml->NavigateToString("HTML:<br />" + htmlFragment);
             }

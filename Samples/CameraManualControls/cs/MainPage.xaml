@@ -67,13 +67,13 @@
                 </Style>
             </StackPanel.Resources>
 
-            <Button Name="PhotoButton" Tapped="PhotoButton_Tapped" IsEnabled="False">
+            <Button Name="PhotoButton" Click="PhotoButton_Click" IsEnabled="False">
                 <Viewbox MaxHeight="40" MaxWidth="40">
                     <SymbolIcon Symbol="Camera"/>
                 </Viewbox>
             </Button>
 
-            <Button Name="VideoButton" Tapped="VideoButton_Tapped" IsEnabled="False">
+            <Button Name="VideoButton" Click="VideoButton_Click" IsEnabled="False">
                 <Grid>
                     <Ellipse x:Name="StartRecordingIcon" Fill="Red" Width="20" Height="20"/>
                     <Rectangle x:Name="StopRecordingIcon" Fill="White" Width="20" Height="20" Visibility="Collapsed"/>
@@ -102,13 +102,13 @@
                         </TransitionCollection>
                     </StackPanel.ChildrenTransitions>
 
-                    <Button Name="FlashButton" Content="Flash" Tapped="ManualControlButton_Tapped"/>
-                    <Button Name="ZoomButton" Content="Zoom" Tapped="ManualControlButton_Tapped"/>
-                    <Button Name="FocusButton" Content="Focus" Tapped="ManualControlButton_Tapped"/>
-                    <Button Name="WbButton" Content="WB" Tapped="ManualControlButton_Tapped"/>
-                    <Button Name="IsoButton" Content="ISO" Tapped="ManualControlButton_Tapped"/>
-                    <Button Name="ShutterButton" Content="Shutter" Tapped="ManualControlButton_Tapped"/>
-                    <Button Name="EvButton" Content="EV" Tapped="ManualControlButton_Tapped"/>
+                    <Button Name="FlashButton" Content="Flash" Click="ManualControlButton_Click"/>
+                    <Button Name="ZoomButton" Content="Zoom" Click="ManualControlButton_Click"/>
+                    <Button Name="FocusButton" Content="Focus" Click="ManualControlButton_Click"/>
+                    <Button Name="WbButton" Content="WB" Click="ManualControlButton_Click"/>
+                    <Button Name="IsoButton" Content="ISO" Click="ManualControlButton_Click"/>
+                    <Button Name="ShutterButton" Content="Shutter" Click="ManualControlButton_Click"/>
+                    <Button Name="EvButton" Content="EV" Click="ManualControlButton_Click"/>
                 </StackPanel>
 
             <!--Grid that hosts all of the manual controls for the selected camera control-->

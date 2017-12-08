@@ -2,23 +2,42 @@
 
 (function () {
     "use strict";
+
+    var printManager = Windows.Graphics.Printing.PrintManager.getForCurrentView();
+    var printDate;
+
     var page = WinJS.UI.Pages.define("/html/scenario1basic.html", {
         ready: function (element, options) {
-            document.getElementById("printButton").addEventListener("click", printButtonHandler, false);
-            
+            printDate = document.getElementById("printDate");
+
+            var printButton = document.getElementById("printButton");
+            if (!Windows.Graphics.Printing.PrintManager.isSupported())
+            {
+                WinJS.log && WinJS.log("Printing is not supported.", "sample", "error");
+
+                // Hide the Print button if printing is not supported.
+                printButton.style.display = "none";
+
+                // Printing-related event handlers will never be called if printing
+                // is not supported, but it's okay to register for them anyway.
+            }
+
+            printButton.addEventListener("click", printButtonHandler, false);
+
             // Register for Print Contract
-            registerForPrintContract();
+            printManager.addEventListener("printtaskrequested", onPrintTaskRequested);
+
+            // Optionally, functions to be executed immediately before and after printing can be configured as follows:
+            window.addEventListener("beforeprint", beforePrint, false);
+            window.addEventListener("afterprint", afterPrint, false);
+
+        },
+        unload: function () {
+            printManager.removeEventListener("printtaskrequested", onPrintTaskRequested);
+            window.removeEventListener("beforeprint", beforePrint);
+            window.removeEventListener("afterprint", afterPrint);
         }
-    });   
-
-    function registerForPrintContract() {
-        var printManager = Windows.Graphics.Printing.PrintManager.getForCurrentView();
-        printManager.onprinttaskrequested = onPrintTaskRequested;
-        WinJS.log && WinJS.log("Print Contract registered. Use the Print button to print.", "sample", "status");
-    }
-
-    // Variable to hold the document source to print
-    var gHtmlPrintDocumentSource = null;
+    });
 
     /// <summary>
     /// Print event handler for printing via the PrintManager API.
@@ -28,10 +47,15 @@
     /// </param>
     function onPrintTaskRequested(printEvent) {
         var printTask = printEvent.request.createPrintTask("Print Sample", function (args) {
-            args.setSource(gHtmlPrintDocumentSource);
-            
+            var deferral = args.getDeferral();
+
             // Register the handler for print task completion event
-            printTask.oncompleted = onPrintTaskCompleted;
+            printTask.addEventListener("completed", onPrintTaskCompleted);
+
+            MSApp.getHtmlPrintDocumentSourceAsync(document).then(function (source) {
+                args.setSource(source);
+                deferral.complete();
+            });
         });
     }
 
@@ -52,27 +76,18 @@
     /// Executed just before printing.
     /// </summary>
     var beforePrint = function () {
-        // Replace with code to be executed just before printing the current document:
+        printDate.innerText = "Printed on " + new Date().toLocaleDateString();
     };
 
     /// <summary>
     /// Executed immediately after printing.
     /// </summary>
     var afterPrint = function () {
-        // Replace with code to be executed immediately after printing the current document:
+        printDate.innerText = "";
     };
 
     function printButtonHandler() {
-        // Optionally, functions to be executed immediately before and after printing can be configured as following:
-        window.document.body.onbeforeprint = beforePrint;
-        window.document.body.onafterprint = afterPrint;
-
-        // Get document source to print
-        MSApp.getHtmlPrintDocumentSourceAsync(document).then(function (htmlPrintDocumentSource) {
-            gHtmlPrintDocumentSource = htmlPrintDocumentSource;
-
-            // If the print contract is registered, the print experience is invoked.
-            Windows.Graphics.Printing.PrintManager.showPrintUIAsync();
-        });
+        // If the print contract is registered, the print experience is invoked.
+        Windows.Graphics.Printing.PrintManager.showPrintUIAsync();
     }
 })();

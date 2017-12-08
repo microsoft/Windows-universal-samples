@@ -50,12 +50,12 @@
         busAttachment = new allJoyn.AllJoynBusAttachment();
         busAttachment.onstatechanged = stateChangedHandler;
         busAttachment.authenticationMechanisms.clear();
-        busAttachment.authenticationMechanisms.append(allJoyn.AllJoynAuthenticationMechanism.ecdhePsk);
+        busAttachment.authenticationMechanisms.append(allJoyn.AllJoynAuthenticationMechanism.ecdheSpeke);
         busAttachment.onauthenticationcomplete = authenticationCompleteHandler;
         busAttachment.oncredentialsrequested = credentialsRequestedHandler;
 
         // Initialize a watcher object to listen for about interfaces.
-        watcher = new secureInterface.SecureInterfaceWatcher(busAttachment);
+        watcher = new allJoyn.AllJoynBusAttachment.getWatcher(["com.microsoft.Samples.SecureInterface"]);
 
         // Subscribing to the added event that will be raised whenever a producer for this service is found.
         watcher.onadded = watcherAddedHandler;
@@ -90,7 +90,7 @@
         var credentialsDeferral = args.detail[0].getDeferral();
         isCredentialsRequested = true;
 
-        if (args.detail[0].credentials.authenticationMechanism == allJoyn.AllJoynAuthenticationMechanism.ecdhePsk) {
+        if (args.detail[0].credentials.authenticationMechanism == allJoyn.AllJoynAuthenticationMechanism.ecdheSpeke) {
             // Wait for the user to provide key and click authenticate.
             reportStatus("Please enter the key.");
 
@@ -100,8 +100,7 @@
                 } else {
                     reportStatus("Authenticating...");
 
-                    // Ignore hyphens in the entered key. 
-                    args.detail[0].credentials.passwordCredential.password = keyInputText.value.replace(/-/g, '');
+                    args.detail[0].credentials.passwordCredential.password = keyInputText.value;
                     credentialsDeferral.complete();
                 }
             };
@@ -114,47 +113,51 @@
 
     function watcherAddedHandler(args) {
         // Optional - Get the About data of the producer.
-        allJoyn.AllJoynAboutDataView.getDataBySessionPortAsync(args.detail[0].uniqueName, busAttachment, args.detail[0].sessionPort)
-            .then(function (aboutData) {
-                if (aboutData != null) {
-                    // Check to see if device name is populated in the about data, since device name is not a mandatory field.
-                    if (aboutData.deviceName != null) {
-                        reportStatus("Found " + aboutData.appName + " on " + aboutData.deviceName + " from manufacturer: " + aboutData.manufacturer + ". Connecting...");
-                    } else {
-                        reportStatus("Found " + aboutData.appName + " from manufacturer: " + aboutData.manufacturer + ". Connecting...");
-                    }
-                } else {
-                    reportError("Unable to get About data.");
-                }
-            })
-            .then(function () {
-                // Attempt to join the session when a producer is discovered.
-                secureInterface.SecureInterfaceConsumer.joinSessionAsync(args, watcher)
-                    .then(function (joinSessionResult) {
-                        if (joinSessionResult.status === allJoyn.AllJoynStatus.ok) {
-                            disposeConsumer();
-                            consumer = joinSessionResult.consumer;
-                            consumer.onisuppercaseenabledchanged = isUpperCaseEnabledChangedHandler;
-                            consumer.signals.ontextsentreceived = textSentReceivedHandler;
-                            consumer.onsessionlost = sessionLostHandler;
-
-                            // At the time of connection, the request credentials callback not being invoked is an
-                            // indication that the consumer and producer are already authenticated from a previous session.
-                            if (!isCredentialsRequested) {
-                                reportStatus("Connected and already authenticated from previous session.");
-                                isUpperCaseEnabledChangedHandler();
+        allJoyn.AllJoynServiceInfo.fromIdAsync(args.id)
+            .then(function (alljoynServiceInfo) {
+                busAttachment.getAboutDataAsync(alljoynServiceInfo)
+                    .then(function (aboutData) {
+                        if (aboutData != null) {
+                            // Check to see if device name is populated in the about data, since device name is not a mandatory field.
+                            if (aboutData.deviceName != null) {
+                                reportStatus("Found " + aboutData.appName + " on " + aboutData.deviceName + " from manufacturer: " + aboutData.manufacturer + ". Connecting...");
                             } else {
-                                if (isAuthenticated) {
-                                    reportStatus("Connected with authentication.");
-                                    isUpperCaseEnabledChangedHandler();
-                                } else {
-                                    reportError("Connected but authentication failed.");
-                                }
+                                reportStatus("Found " + aboutData.appName + " from manufacturer: " + aboutData.manufacturer + ". Connecting...");
                             }
-                            consumerOptions.style.display = "block";
                         } else {
-                            reportError("Attempt to connect failed with AllJoyn error: 0x" + joinSessionResult.status.toString(16));
+                            reportError("Unable to get About data.");
                         }
+                    })
+                    .then(function () {
+                        reportStatus("Joining session...");
+                        // Attempt to join the session when a producer is discovered.
+                        secureInterface.SecureInterfaceConsumer.fromIdAsync(args.id, busAttachment)
+                            .then(function (secureInterfaceConsumer) {
+                                if (secureInterfaceConsumer != null) {
+                                    disposeConsumer();
+                                    consumer = secureInterfaceConsumer;
+                                    consumer.onisuppercaseenabledchanged = isUpperCaseEnabledChangedHandler;
+                                    consumer.signals.ontextsentreceived = textSentReceivedHandler;
+                                    consumer.session.onlost = sessionLostHandler;
+
+                                    // At the time of connection, the request credentials callback not being invoked is an
+                                    // indication that the consumer and producer are already authenticated from a previous session.
+                                    if (!isCredentialsRequested) {
+                                        reportStatus("Connected and already authenticated from previous session.");
+                                        isUpperCaseEnabledChangedHandler();
+                                    } else {
+                                        if (isAuthenticated) {
+                                            reportStatus("Connected with authentication.");
+                                            isUpperCaseEnabledChangedHandler();
+                                        } else {
+                                            reportError("Connected but authentication failed.");
+                                        }
+                                    }
+                                    consumerOptions.style.display = "block";
+                                } else {
+                                    reportError("Attempt to join session failed.");
+                                }
+                            });
                     });
             });
     }
@@ -232,7 +235,7 @@
         if (consumer != null) {
             consumer.onisuppercaseenabledchanged = null;
             consumer.signals.ontextsentreceived = null;
-            consumer.onsessionlost = null;
+            consumer.session.onlost = null;
             consumer.close();
             consumer = null;
         }
@@ -242,7 +245,6 @@
         if (watcher != null) {
             watcher.onadded = null;
             watcher.stop();
-            watcher.close();
             watcher = null;
         }
     }

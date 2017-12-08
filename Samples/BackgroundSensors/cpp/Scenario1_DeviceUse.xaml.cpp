@@ -140,8 +140,8 @@ void Scenario1_DeviceUse::ScenarioEnable(Object^ sender, RoutedEventArgs^ e)
         create_task(BackgroundExecutionManager::RequestAccessAsync())
             .then([this](BackgroundAccessStatus accessStatus)
         {
-            if ((BackgroundAccessStatus::AllowedWithAlwaysOnRealTimeConnectivity == accessStatus) ||
-                (BackgroundAccessStatus::AllowedMayUseActiveRealTimeConnectivity == accessStatus))
+            if ((BackgroundAccessStatus::AlwaysAllowed == accessStatus) ||
+                (BackgroundAccessStatus::AllowedSubjectToSystemPolicy == accessStatus))
             {
                 try
                 {

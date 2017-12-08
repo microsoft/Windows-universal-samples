@@ -1,0 +1,46 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.DeviceConnect"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="listSource"/>
+    </Page.Resources>
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                This scenario uses a DeviceWatcher to detect devices with a custom device interface and opens the device with the CustomDevice.FromIdAsync method.
+                Subsequent scenarios will use the device opened here.
+            </TextBlock>
+            <StackPanel Margin="0,10,0,0">
+                <Button x:Name="deviceConnectStart" Content="Start Device Watcher" Click="deviceConnectStart_Click"/>
+                <Button x:Name="deviceConnectStop"  Content="Stop Device Watcher" Click="deviceConnectStop_Click" Margin="0,10,0,0"/>
+                <TextBlock Text="Select an OSR FX-2 Device:" FontWeight="Bold" Margin="0,10,0,5"/>
+                <ListBox x:Name="deviceConnectDevices" SelectionChanged="deviceConnectDevices_SelectionChanged" ItemsSource="{Binding Source={StaticResource listSource}}" SelectionMode="Single" Height="100">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Id}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -543,12 +543,28 @@ SessionWrapper::~SessionWrapper()
 
 void SDKTemplate::WiFiDirectServices::SessionWrapper::Close()
 {
+    // When we assign to nullptr, that will close the session
+    // However, we will get a notification of the session closed at this time
+    // Make sure the _session variable is null before we start this
+    Windows::Devices::WiFiDirect::Services::WiFiDirectServiceSession^ tempSession;
+
     if (_session != nullptr)
     {
-        _session->RemotePortAdded -= _remotePortAddedToken;
-        _session->SessionStatusChanged -= _sessionStatusChangedToken;
-
+        lock_guard<mutex> lock(_sessionMutex);
+        tempSession = _session;
         _session = nullptr;
+    }
+
+    if (tempSession != nullptr)
+    {
+        tempSession = nullptr;
+
+        // Wait for status change
+        // NOTE: this should complete in 5 seconds under normal circumstances
+        if (0 != _sessionClosedEvent.wait(60000))
+        {
+            throw ref new FailureException("Timed out waiting for session to close");
+        }
     }
 }
 
@@ -565,10 +581,9 @@ Concurrency::task<void> SessionWrapper::AddStreamSocketListenerAsync(uint16 port
         listenerSocket,
         this
         );
-    _streamSocketListeners->Append(listenerWrapper);
 
     _manager->NotifyUser("BindEndpointAsync...", NotifyType::StatusMessage);
-    
+
     return create_task(listenerSocket->BindEndpointAsync(endpointPairCollection->GetAt(0)->LocalHostName, port.ToString()))
     .then([this, listenerSocket]()
     {
@@ -580,6 +595,20 @@ Concurrency::task<void> SessionWrapper::AddStreamSocketListenerAsync(uint16 port
         {
             _manager->NotifyUser("AddStreamSocketListenerAsync Done", NotifyType::StatusMessage);
         });
+    })
+    .then([this, listenerWrapper](task<void> finalTask)
+    {
+        try
+        {
+            // Rethrow exceptions from async task in case AddStreamSocketListenerAsync failed
+            finalTask.get();
+        }
+        catch (Exception^ ex)
+        {
+            _manager->NotifyUser("AddStreamSocketListenerAsync Failed: " + ex->Message, NotifyType::ErrorMessage);
+        }
+
+        _streamSocketListeners->Append(listenerWrapper);
     });
 }
 
@@ -590,34 +619,48 @@ Concurrency::task<void> SessionWrapper::AddDatagramSocketAsync(uint16 port)
     auto endpointPairCollection = _session->GetConnectionEndpointPairs();
 
     DatagramSocket^ socket = ref new DatagramSocket();
-    SocketWrapper^ socketWrapper = ref new SocketWrapper(_manager, nullptr, socket);
-
-    _socketList->Append(socketWrapper);
+    // Socket is "read-only", cannot send data but can receive data
+    // Expectation is that application starts a listening socket, then remote device sends data
+    SocketWrapper^ socketWrapper = ref new SocketWrapper(_manager, nullptr, socket, false);
 
     // Bind UDP socket for receiving messages (peer should call connect and send messages to this socket)
     _manager->NotifyUser("BindEndpointAsync...", NotifyType::StatusMessage);
 
     return create_task(socket->BindEndpointAsync(endpointPairCollection->GetAt(0)->LocalHostName, port.ToString()))
-        .then([this, socket, socketWrapper]()
-        {
-            _manager->NotifyUser("BindEndpointAsync Done", NotifyType::StatusMessage);
+    .then([this, socket, socketWrapper]()
+    {
+        _manager->NotifyUser("BindEndpointAsync Done", NotifyType::StatusMessage);
 
-            _manager->NotifyUser("AddDatagramSocketAsync...", NotifyType::StatusMessage);
-            return create_task(_session->AddDatagramSocketAsync(socket))
-                .then([this]()
-                {
-                    _manager->NotifyUser("AddDatagramSocketAsync Done", NotifyType::StatusMessage);
-                }).then([this, socketWrapper]()
-                {
-                    // Update manager so UI can add to list
-                    _manager->AddSocket(socketWrapper);
-                });
-        });
+        _manager->NotifyUser("AddDatagramSocketAsync...", NotifyType::StatusMessage);
+        return create_task(_session->AddDatagramSocketAsync(socket))
+            .then([this]()
+            {
+                _manager->NotifyUser("AddDatagramSocketAsync Done", NotifyType::StatusMessage);
+            }).then([this, socketWrapper]()
+            {
+                // Update manager so UI can add to list
+                _manager->AddSocket(socketWrapper);
+
+                _socketList->Append(socketWrapper);
+            });
+    })
+    .then([this](task<void> finalTask)
+    {
+        try
+        {
+            // Rethrow exceptions from async task in case AddDatagramSocketAsync failed
+            finalTask.get();
+        }
+        catch (Exception^ ex)
+        {
+            _manager->NotifyUser("AddDatagramSocketAsync Failed: " + ex->Message, NotifyType::ErrorMessage);
+        }
+    });
 }
 
 void SessionWrapper::AddStreamSocketInternal(StreamSocket ^ socket)
 {
-    SocketWrapper^ socketWrapper = ref new SocketWrapper(_manager, socket, nullptr);
+    SocketWrapper^ socketWrapper = ref new SocketWrapper(_manager, socket, nullptr, true);
 
     // Start receiving messages recursively
     socketWrapper->StartReceiveLoop();
@@ -649,7 +692,7 @@ void SessionWrapper::OnRemotePortAdded(WiFiDirectServiceSession^ sender, WiFiDir
     {
         // Connect to the stream socket listener
         StreamSocket^ streamSocket = ref new StreamSocket();
-        SocketWrapper^ socketWrapper = ref new SocketWrapper(_manager, streamSocket, nullptr);
+        SocketWrapper^ socketWrapper = ref new SocketWrapper(_manager, streamSocket, nullptr, true);
 
         _manager->NotifyUser("Connecting to stream socket...", NotifyType::StatusMessage);
 
@@ -670,7 +713,7 @@ void SessionWrapper::OnRemotePortAdded(WiFiDirectServiceSession^ sender, WiFiDir
     {
         // Connect a socket over UDP
         DatagramSocket^ datagramSocket = ref new DatagramSocket();
-        SocketWrapper^ socketWrapper = ref new SocketWrapper(_manager, nullptr, datagramSocket);
+        SocketWrapper^ socketWrapper = ref new SocketWrapper(_manager, nullptr, datagramSocket, true);
 
         _manager->NotifyUser("Connecting to datagram socket...", NotifyType::StatusMessage);
 
@@ -699,7 +742,7 @@ void SessionWrapper::OnRemotePortAdded(WiFiDirectServiceSession^ sender, WiFiDir
         }
         catch (Exception^ ex)
         {
-            _manager->NotifyUser("ConnectAsync Failed: " + ex->Message, NotifyType::ErrorMessage);
+            _manager->NotifyUser("Socket ConnectAsync Failed: " + ex->Message, NotifyType::ErrorMessage);
         }
     });
 }
@@ -707,6 +750,13 @@ void SessionWrapper::OnRemotePortAdded(WiFiDirectServiceSession^ sender, WiFiDir
 void SessionWrapper::OnSessionStatusChanged(Windows::Devices::WiFiDirect::Services::WiFiDirectServiceSession ^ sender, Platform::Object ^ args)
 {
     _manager->NotifyUser("Session Status Changed to " + sender->Status.ToString(), NotifyType::StatusMessage);
+
+    if (sender->Status == WiFiDirectServiceSessionStatus::Closed)
+    {
+        _sessionClosedEvent.set();
+        // Cleanup
+        _manager->RemoveSession(this);
+    }
 }
 
 StreamSocketListenerWrapper::StreamSocketListenerWrapper(
@@ -738,7 +788,8 @@ void StreamSocketListenerWrapper::OnConnectionReceived(Windows::Networking::Sock
 SocketWrapper::SocketWrapper(
     WiFiDirectServiceManager^ manager,
     StreamSocket^ streamSocket,
-    DatagramSocket^ datagramSocket
+    DatagramSocket^ datagramSocket,
+    bool canSend
     ) : _manager(manager),
         _streamSocket(streamSocket),
         _datagramSocket(datagramSocket)
@@ -754,7 +805,10 @@ SocketWrapper::SocketWrapper(
     else if (streamSocket != nullptr)
     {
         _reader = ref new DataReader(streamSocket->InputStream);
-        _writer = ref new DataWriter(streamSocket->OutputStream);
+        if (canSend)
+        {
+            _writer = ref new DataWriter(streamSocket->OutputStream);
+        }
     }
     else
     {
@@ -762,7 +816,10 @@ SocketWrapper::SocketWrapper(
             this,
             &SocketWrapper::OnUDPMessageReceived
             );
-        _writer = ref new DataWriter(datagramSocket->OutputStream);
+        if (canSend)
+        {
+            _writer = ref new DataWriter(datagramSocket->OutputStream);
+        }
     }
 
     if (_reader != nullptr)
@@ -771,8 +828,11 @@ SocketWrapper::SocketWrapper(
         _reader->ByteOrder = ByteOrder::LittleEndian;
     }
 
-    _writer->UnicodeEncoding = UnicodeEncoding::Utf8;
-    _writer->ByteOrder = ByteOrder::LittleEndian;
+    if (_writer != nullptr)
+    {
+        _writer->UnicodeEncoding = UnicodeEncoding::Utf8;
+        _writer->ByteOrder = ByteOrder::LittleEndian;
+    }
 }
 
 SocketWrapper::~SocketWrapper()
@@ -817,16 +877,35 @@ String^ SocketWrapper::Port::get()
 
 task<void> SocketWrapper::SendMessageAsync(String ^ message)
 {
-    _writer->WriteUInt32(_writer->MeasureString(message));
-    _writer->WriteString(message);
-
-    return create_task(_writer->StoreAsync()).then( [this, message](unsigned int bytesSent)
+    if (_writer == nullptr)
     {
-        _manager->NotifyUser(
-            "Sent Message: \"" + message + "\", " + bytesSent +" bytes",
-            NotifyType::StatusMessage
+        _manager->NotifyUser("Socket is unable to send messages (receive only socket).", NotifyType::ErrorMessage);
+        return create_task([]() { return; });
+    }
+    else
+    {
+        _writer->WriteUInt32(_writer->MeasureString(message));
+        _writer->WriteString(message);
+
+        return create_task(_writer->StoreAsync()).then([this, message](unsigned int bytesSent)
+        {
+            _manager->NotifyUser(
+                "Sent Message: \"" + message + "\", " + bytesSent + " bytes",
+                NotifyType::StatusMessage
             );
-    });
+        }).then([this](task<void> previousTask)
+        {
+            try
+            {
+                // Try getting all exceptions from the continuation chain above this point. 
+                previousTask.get();
+            }
+            catch (Exception^ ex)
+            {
+                _manager->NotifyUser("Send message Failed: " + ex->Message, NotifyType::ErrorMessage);
+            }
+        });
+    }
 }
 
 void SocketWrapper::StartReceiveLoop()

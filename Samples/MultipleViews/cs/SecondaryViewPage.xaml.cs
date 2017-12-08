@@ -33,12 +33,10 @@ namespace SDKTemplate
         ViewLifetimeControl thisViewControl;
         int mainViewId;
         CoreDispatcher mainDispatcher;
-        Storyboard EnterAnimation;
 
         public SecondaryViewPage()
         {
             this.InitializeComponent();
-            EnterAnimation = CreateEnterAnimation(LayoutRoot);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -149,11 +147,16 @@ namespace SDKTemplate
             // This continues the flow from Scenario 3
             thisViewControl.StartViewInUse();
 
+            // Calculate the entrance animation. Recalculate this every time,
+            // because the animation description can vary (for example,
+            // if the user changes accessibility settings).
+            Storyboard enterAnimation = CreateEnterAnimation(LayoutRoot);
+
             // Before switching, make this view match the outgoing window
             // (go to a blank background)
-            EnterAnimation.Begin();
-            EnterAnimation.Pause();
-            EnterAnimation.Seek(TimeSpan.FromMilliseconds(0));
+            enterAnimation.Begin();
+            enterAnimation.Pause();
+            enterAnimation.Seek(TimeSpan.FromMilliseconds(0));
 
             // Bring this view onto screen. Since the two view are drawing
             // the same visual, the user will not be able to perceive the switch
@@ -162,78 +165,82 @@ namespace SDKTemplate
                 ApplicationViewSwitchingOptions.SkipAnimation);
 
             // Now that this window is on screen, animate in its contents
-            EnterAnimation.Begin();
+            enterAnimation.Begin();
             thisViewControl.StopViewInUse();
         }
 
         private Storyboard CreateEnterAnimation(Panel layoutRoot)
         {
             var enterAnimation = new Storyboard();
-            Storyboard.SetTarget(enterAnimation, layoutRoot);
 
-            var ad = new AnimationDescription(AnimationEffect.EnterPage, AnimationEffectTarget.Primary);
-            for (int i = 0; i < layoutRoot.Children.Count; i++)
+            // Use the AnimationDescription object if available. Otherwise, return an empty storyboard (no animation).
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Core.AnimationMetrics.AnimationDescription"))
             {
-                // Add a render transform to the existing one just for animations
-                var element = layoutRoot.Children[i];
-                var tg = new TransformGroup();
-                tg.Children.Add(new TranslateTransform());
-                tg.Children.Add(element.RenderTransform);
-                element.RenderTransform = tg;
+                Storyboard.SetTarget(enterAnimation, layoutRoot);
 
-                // Calculate the stagger for each animation. Note that this has a max
-                var delayMs = Math.Min(ad.StaggerDelay.TotalMilliseconds * i * ad.StaggerDelayFactor, ad.DelayLimit.Milliseconds);
-                var delay = TimeSpan.FromMilliseconds(delayMs);
-
-                foreach (var description in ad.Animations)
+                var ad = new AnimationDescription(AnimationEffect.EnterPage, AnimationEffectTarget.Primary);
+                for (int i = 0; i < layoutRoot.Children.Count; i++)
                 {
-                    var animation = new DoubleAnimationUsingKeyFrames();
+                    // Add a render transform to the existing one just for animations
+                    var element = layoutRoot.Children[i];
+                    var tg = new TransformGroup();
+                    tg.Children.Add(new TranslateTransform());
+                    tg.Children.Add(element.RenderTransform);
+                    element.RenderTransform = tg;
 
-                    // Start the animation at the right offset
-                    var startSpline = new SplineDoubleKeyFrame();
-                    startSpline.KeyTime = TimeSpan.FromMilliseconds(0);
-                    Storyboard.SetTarget(animation, element);
+                    // Calculate the stagger for each animation. Note that this has a max
+                    var delayMs = Math.Min(ad.StaggerDelay.TotalMilliseconds * i * ad.StaggerDelayFactor, ad.DelayLimit.Milliseconds);
+                    var delay = TimeSpan.FromMilliseconds(delayMs);
 
-                    // Hold at that offset until the stagger delay is hit
-                    var middleSpline = new SplineDoubleKeyFrame();
-                    middleSpline.KeyTime = delay;
-
-                    // Animation from delayed time to last time
-                    var endSpline = new SplineDoubleKeyFrame();
-                    endSpline.KeySpline = new KeySpline() { ControlPoint1 = description.Control1, ControlPoint2 = description.Control2 };
-                    endSpline.KeyTime = description.Duration + delay;
-
-                    // Do the translation
-                    if (description.Type == PropertyAnimationType.Translation)
+                    foreach (var description in ad.Animations)
                     {
-                        startSpline.Value = ANIMATION_TRANSLATION_START;
-                        middleSpline.Value = ANIMATION_TRANSLATION_START;
-                        endSpline.Value = ANIMATION_TRANSLATION_END;
+                        var animation = new DoubleAnimationUsingKeyFrames();
 
-                        Storyboard.SetTargetProperty(animation, "(UIElement.RenderTransform).(TransformGroup.Children)[0].X");
-                    }
-                    // Opacity
-                    else if (description.Type == PropertyAnimationType.Opacity)
-                    {
-                        startSpline.Value = ANIMATION_OPACITY_START;
-                        middleSpline.Value = ANIMATION_OPACITY_START;
-                        endSpline.Value = ANIMATION_OPACITY_END;
+                        // Start the animation at the right offset
+                        var startSpline = new SplineDoubleKeyFrame();
+                        startSpline.KeyTime = TimeSpan.FromMilliseconds(0);
+                        Storyboard.SetTarget(animation, element);
 
-                        Storyboard.SetTargetProperty(animation, "Opacity");
-                    }
-                    else
-                    {
-                        throw new Exception("Encountered an unexpected animation type.");
-                    }
+                        // Hold at that offset until the stagger delay is hit
+                        var middleSpline = new SplineDoubleKeyFrame();
+                        middleSpline.KeyTime = delay;
 
-                    // Put the final animation together
-                    animation.KeyFrames.Add(startSpline);
-                    animation.KeyFrames.Add(middleSpline);
-                    animation.KeyFrames.Add(endSpline);
-                    enterAnimation.Children.Add(animation);
+                        // Animation from delayed time to last time
+                        var endSpline = new SplineDoubleKeyFrame();
+                        endSpline.KeySpline = new KeySpline() { ControlPoint1 = description.Control1, ControlPoint2 = description.Control2 };
+                        endSpline.KeyTime = description.Duration + delay;
+
+                        // Do the translation
+                        if (description.Type == PropertyAnimationType.Translation)
+                        {
+                            startSpline.Value = ANIMATION_TRANSLATION_START;
+                            middleSpline.Value = ANIMATION_TRANSLATION_START;
+                            endSpline.Value = ANIMATION_TRANSLATION_END;
+
+                            Storyboard.SetTargetProperty(animation, "(UIElement.RenderTransform).(TransformGroup.Children)[0].X");
+                        }
+                        // Opacity
+                        else if (description.Type == PropertyAnimationType.Opacity)
+                        {
+                            startSpline.Value = ANIMATION_OPACITY_START;
+                            middleSpline.Value = ANIMATION_OPACITY_START;
+                            endSpline.Value = ANIMATION_OPACITY_END;
+
+                            Storyboard.SetTargetProperty(animation, "Opacity");
+                        }
+                        else
+                        {
+                            throw new Exception("Encountered an unexpected animation type.");
+                        }
+
+                        // Put the final animation together
+                        animation.KeyFrames.Add(startSpline);
+                        animation.KeyFrames.Add(middleSpline);
+                        animation.KeyFrames.Add(endSpline);
+                        enterAnimation.Children.Add(animation);
+                    }
                 }
             }
-
             return enterAnimation;
         }
     }
