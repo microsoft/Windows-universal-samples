@@ -44,7 +44,7 @@ Each control page in the application has links to the relevant MSDN documentatio
 
 **Server:** Windows Server 2016 Technical Preview
 
-**Phone:**  Windows 10
+**Phone:**  Incompatible
 
 ## Build the sample
 
