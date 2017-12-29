@@ -73,6 +73,8 @@ namespace AudioCreation
         uint maxIndex;
         // Number of nonzero samples in input.
         uint nonZeroSampleCount;
+        // Number of max samples in input (equal to 1).
+        uint maxValueSampleCount;
 
         // 120 seconds of 48Khz stereo float audio samples (43.9MB byte array)
         byte[] byteBuffer = new byte[120 * 48000 * 2 * 4];
@@ -141,7 +143,7 @@ namespace AudioCreation
                 recordButton.Content = "Record";
                 TimeSpan span = DateTime.Now - recordingStartTime;
                 int msec = span.Seconds * 1000 + span.Milliseconds;
-                rootPage.NotifyUser($"Recorded OK! {maxIndex} bytes, {maxIndex>>3} samples, {audioFrameCount} frames, {msec} msec, {nonZeroSampleCount} non-zero samples", NotifyType.StatusMessage);
+                rootPage.NotifyUser($"Recorded OK! {maxIndex} bytes, {maxIndex>>3} samples, {audioFrameCount} frames, {msec} msec, {nonZeroSampleCount} non-zero samples, {maxValueSampleCount} maxed samples", NotifyType.StatusMessage);
                 createGraphButton.IsEnabled = false;
                 playButton.IsEnabled = true;
                 audioPipe.Fill = new SolidColorBrush(Color.FromArgb(255, 49, 49, 49));
@@ -278,6 +280,19 @@ namespace AudioCreation
                         if (b != 0)
                         {
                             nonZeroSampleCount++;
+                        }
+                    }
+                }
+
+                fixed (byte* buf = byteBuffer)
+                {
+                    float* floatBuf = (float*)buf;
+                    for (int i = 0; i < (capacityInBytes >> 2); i++)
+                    {
+                        float f = floatBuf[i];
+                        if (Math.Abs(f) >= 0.999f)
+                        {
+                            maxValueSampleCount++;
                         }
                     }
                 }
