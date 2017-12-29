@@ -13,10 +13,8 @@
 
 #include "Scenario_Document3.g.h"
 #include "MainPage.xaml.h"
+#include "DocumentPresenter.h"
 
-using namespace DWriteTextLayoutCloudFontImplementation;
-
-using Windows::Graphics::Display::DisplayInformation;
 
 namespace SDKTemplate
 {
@@ -25,29 +23,13 @@ namespace SDKTemplate
     {
     public:
         Scenario_Document3();
-        void HandleDpiChanged(DisplayInformation^ displayInformation);
 
     protected:
         virtual void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 
     private:
-        MainPage^                                       rootPage;
-        TextLayout^                                     m_textLayout;
-        TextLayoutImageSource^                          m_textLayoutImageSource;
-        FontDownloadListener^                           m_fontDownloadListener;
-        Windows::Foundation::EventRegistrationToken     m_eventToken;
-        Windows::UI::Color                              m_textColor;
-        Windows::UI::Color                              m_textBackgroundColor;
-        Platform::String^                               m_downloadableFontName;
-        bool                                            m_layoutUpdateInProgress = false;
-        float                                           m_dpi = 96.0f;
+        DocumentPresenter^                              m_documentPresenter;
 
         void TextLayoutFrame_SizeChanged(Platform::Object^ sender, Windows::UI::Xaml::SizeChangedEventArgs^ e);
-        void FontDownloadListener_DownloadCompleted();
-        void RequestTextLayoutUpdate();
-        void UpdateTextLayout();
-        void PresentTextLayout();
-        void UpdateStatus();
-        void OnVisibilityChanged(Platform::Object ^sender, Windows::UI::Core::VisibilityChangedEventArgs ^e);
     };
 }

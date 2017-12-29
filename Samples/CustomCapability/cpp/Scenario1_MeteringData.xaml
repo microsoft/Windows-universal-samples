@@ -1,0 +1,68 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.MeteringData"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                        This scenario demonstrates RPC communication between an app and an NT service. For demonstration purposes, the service reads data from an imaginary device.
+                </TextBlock>
+                <StackPanel BorderThickness="2" BorderBrush="{ThemeResource ButtonBorderThemeBrush}" Margin="0,10,0,0" Padding="5">
+                    <TextBlock TextWrapping="Wrap">
+                            <Run FontWeight="Bold" Text="Step 1: Choose a period at which the samples will be pushed from the NT service"/>
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Margin="0,10,5,0">
+                            Sample Period (ms): <Run Text="{x:Bind SamplePeriodSlider.Value, Mode=OneWay}"/>
+                    </TextBlock>
+                    <Slider x:Name="SamplePeriodSlider" HorizontalAlignment="Left" Width="300" IsEnabled="{x:Bind ViewModel.SliderEnabled, Mode=OneWay}" VerticalAlignment="Top" Minimum="1" Maximum="1000" ValueChanged="slider_ValueChanged" FontSize="20" Value="{x:Bind ViewModel.SliderValue, Mode=OneWay}"/>
+                </StackPanel>
+                <StackPanel BorderThickness="2" BorderBrush="{ThemeResource ButtonBorderThemeBrush}" Margin="0,10,0,0" Padding="5">
+                    <TextBlock TextWrapping="Wrap">
+                               <Run FontWeight="Bold" Text="Step 2: Click start to receive samples from the NT service"/>
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button IsEnabled="{x:Bind ViewModel.StartButtonEnabled, Mode=OneWay}" Content="Start" Click="button_Click_StartMetering"/>
+                        <Button IsEnabled="{x:Bind ViewModel.StopButtonEnabled, Mode=OneWay}" Content="Stop" Click="button_Click_StopMetering" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel BorderThickness="2" BorderBrush="{ThemeResource ButtonBorderThemeBrush}" Margin="0,10,0,0" Padding="5">
+                    <TextBlock TextWrapping="Wrap">
+                            <Run FontWeight="Bold" Text="Step 3: Observe the expected and actual incoming sample rate"/>
+                    </TextBlock>
+                    <TextBlock Margin="0,10,0,0">
+                            Expected Sample Rate: <Run Text="{x:Bind ViewModel.ExpectedRpcCallbackRate, Mode=OneWay}"/>
+                    </TextBlock>
+                    <TextBlock Margin="0,10,0,0">
+                            Actual Sample Rate: <Run Text="{x:Bind ViewModel.ActualRpcCallbackRate, Mode=OneWay}"/>
+                    </TextBlock>
+                </StackPanel>
+                <TextBlock FontWeight="Bold" Margin="0,10,0,0" Text="Samples:"/>
+            </StackPanel>
+            <ScrollViewer Grid.Row="2" HorizontalAlignment="Stretch" Margin="0,10,0,0" VerticalAlignment="Stretch">
+                <TextBox Height="400" IsReadOnly="true" HorizontalAlignment="Stretch" Text="{x:Bind ViewModel.SampleMessage, Mode=OneWay}" BorderThickness="0"/>
+            </ScrollViewer>
+        </Grid>
+    </ScrollViewer>
+</Page>

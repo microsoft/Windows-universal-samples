@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
+    <ProjectGuid>{2D35DA05-A786-545C-AD48-4FA949124122}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PosPrinterSample</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>PosPrinter</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -96,15 +96,18 @@
     <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\DeviceHelpers.cs">
+      <Link>DeviceHelpers.cs</Link>
+    </Compile>
     <Compile Include="SampleConfiguration.cs" />
-    <Compile Include="Scenario1_ReceiptPrinter.xaml.cs">
-      <DependentUpon>Scenario1_ReceiptPrinter.xaml</DependentUpon>
+    <Compile Include="Scenario1_FindClaimEnable.xaml.cs">
+      <DependentUpon>Scenario1_FindClaimEnable.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario2_ErrorHandling.xaml.cs">
-      <DependentUpon>Scenario2_ErrorHandling.xaml</DependentUpon>
+    <Compile Include="Scenario2_PrintReceipt.xaml.cs">
+      <DependentUpon>Scenario2_PrintReceipt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario3_MultipleReceipt.xaml.cs">
-      <DependentUpon>Scenario3_MultipleReceipt.xaml</DependentUpon>
+    <Compile Include="Scenario3_MultipleClaims.xaml.cs">
+      <DependentUpon>Scenario3_MultipleClaims.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -123,15 +126,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_ReceiptPrinter.xaml">
+    <Page Include="..\shared\Scenario1_FindClaimEnable.xaml">
+      <Link>Scenario1_FindClaimEnable.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_ErrorHandling.xaml">
+    <Page Include="..\shared\Scenario2_PrintReceipt.xaml">
+      <Link>Scenario2_PrintReceipt.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3_MultipleReceipt.xaml">
+    <Page Include="..\shared\Scenario3_MultipleClaims.xaml">
+      <Link>Scenario3_MultipleClaims.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -142,6 +148,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\..\SharedContent\media\Samples\coffee-logo.png">
+      <Link>Assets\coffee-logo.png</Link>
+    </Content>
     <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>

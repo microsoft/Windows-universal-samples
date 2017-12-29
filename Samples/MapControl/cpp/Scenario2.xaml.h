@@ -24,8 +24,13 @@ namespace SDKTemplate
     private:
         MainPage^ rootPage = MainPage::Current;
         Windows::Storage::Streams::RandomAccessStreamReference^ mapIconStreamReference;
+        Windows::Storage::Streams::RandomAccessStreamReference^ mapBillboardStreamReference;
+        Windows::Storage::Streams::RandomAccessStreamReference^ mapModelStreamReference;
         void MyMap_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void mapClearButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void mapIconAddButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void mapBillboardAddButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void mapElement3DAddButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void mapPolygonAddButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void mapPolylineAddButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
     };

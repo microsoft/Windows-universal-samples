@@ -36,6 +36,8 @@ namespace SDKTemplate
         }
 
         static Windows::Devices::Geolocation::Geopoint^ SeattleGeopoint;
+        static Platform::Collections::Vector<Windows::UI::Xaml::Controls::Maps::MapElement^>^ CreateCityBuildingsCollection();
+        static Platform::Collections::Vector<Windows::UI::Xaml::Controls::Maps::MapElement^>^ CreateCityParksCollection();
 
     private:
         static Platform::Array<Scenario>^ scenariosInner;

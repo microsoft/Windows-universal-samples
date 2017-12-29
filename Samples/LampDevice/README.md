@@ -40,10 +40,10 @@ the default lamp device when page loads and provide a toggle to turn the lamp on
 Related topics
 --------------
 
-[Windows.Media.Devices namespace] (https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)
+[Windows.Media.Devices namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)
 
 Windows 8 and 8.1 method for turning on flash (requires starting a video recording session)
-[Windows.Media.Devices.VideoDeviceController.TorchControl] (https://msdn.microsoft.com/library/windows/apps/windows.media.devices.videodevicecontroller.torchcontrol.aspx)
+[Windows.Media.Devices.VideoDeviceController.TorchControl](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.videodevicecontroller.torchcontrol.aspx)
 
 
 System requirements
@@ -57,8 +57,8 @@ Build the sample
 ----------------
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 Run the sample

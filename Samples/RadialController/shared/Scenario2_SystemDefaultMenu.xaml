@@ -26,7 +26,7 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+        <Grid Margin="12,10,12,12">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -42,18 +42,18 @@
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <StackPanel Style="{StaticResource ButtonGroup}">
                     <Image Height="64" Width="64" HorizontalAlignment="Left" Source="Assets\Item0.png"/>
-                    <Button x:Name="AddButton1" Content="Add Item 1" Click="AddCustomItem"/>
-                    <Button x:Name="SelectButton1" Content="Select Item 1" Click="SelectCustomItem"/>
-                    <Button x:Name="RemoveButton1" Content="Remove Item 1" Click="RemoveCustomItem"/>
-                    <Slider x:Name="Slider1" />
+                    <Button Content="Add Item 1" Click="AddCustomItem"/>
+                    <Button Content="Select Item 1" Click="SelectCustomItem"/>
+                    <Button Content="Remove Item 1" Click="RemoveCustomItem"/>
+                    <Slider x:Name="slider1" />
                 </StackPanel>
                 <StackPanel Style="{StaticResource ButtonGroup}">
                     <TextBlock FontSize="20">Configure</TextBlock>
-                    <Button x:Name="SelectVolume" Content="Select Volume" Click="Select_Volume"/>
-                    <Button x:Name="SelectPreviousItem" Content="Select Previous Item" Click="SelectPreviouslySelectedItem"/>
-                    <Button x:Name="ResetToDefault" Content="Add Default System Items" Click="Reset_ToDefault"/>
-                    <Button x:Name="RemoveAllDefaults" Content="Remove Default System Items" Click="Remove_Defaults"/>
-                    <Button x:Name="VolumeScrollOnly" Content="Set Default System Items to Volume and Scroll Only" Click="ModifySystemDefaults"/>
+                    <Button Content="Select Volume" Click="Select_Volume"/>
+                    <Button Content="Select Previous Item" Click="SelectPreviouslySelectedItem"/>
+                    <Button Content="Add Default System Items" Click="Reset_ToDefault"/>
+                    <Button Content="Remove Default System Items" Click="Remove_Defaults"/>
+                    <Button Content="Set Default System Items to Volume and Scroll Only" Click="ModifySystemDefaults"/>
                 </StackPanel>
             </StackPanel>
 

@@ -38,7 +38,7 @@ namespace AppUIBasics.ControlPages
 
             if (rb != null && Control1 != null)
             {
-                string colorName = rb.Tag.ToString();
+                string colorName = rb.Content.ToString();
                 switch (colorName)
                 {
                     case "Yellow":
@@ -63,7 +63,7 @@ namespace AppUIBasics.ControlPages
 
             if (rb != null && Control1 != null)
             {
-                string colorName = rb.Tag.ToString();
+                string colorName = rb.Content.ToString();
                 switch (colorName)
                 {
                     case "Yellow":

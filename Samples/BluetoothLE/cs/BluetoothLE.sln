@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluetoothLE", "BluetoothLE.csproj", "{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Debug|ARM.ActiveCfg = Debug|ARM
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Debug|ARM.Build.0 = Debug|ARM
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Debug|ARM.Deploy.0 = Debug|ARM
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Debug|x64.ActiveCfg = Debug|x64
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Debug|x64.Build.0 = Debug|x64
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Debug|x64.Deploy.0 = Debug|x64
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Debug|x86.ActiveCfg = Debug|x86
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Debug|x86.Build.0 = Debug|x86
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Debug|x86.Deploy.0 = Debug|x86
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Release|Any CPU.ActiveCfg = Release|x86
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Release|ARM.ActiveCfg = Release|ARM
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Release|ARM.Build.0 = Release|ARM
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Release|ARM.Deploy.0 = Release|ARM
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Release|x64.ActiveCfg = Release|x64
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Release|x64.Build.0 = Release|x64
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Release|x64.Deploy.0 = Release|x64
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Release|x86.ActiveCfg = Release|x86
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Release|x86.Build.0 = Release|x86
+		{BF5C0E49-5FD2-5AD0-BE7F-0840814DAEB6}.Release|x86.Deploy.0 = Release|x86
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Debug|ARM.ActiveCfg = Debug|ARM
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Debug|ARM.Build.0 = Debug|ARM
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Debug|x64.ActiveCfg = Debug|x64
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Debug|x64.Build.0 = Debug|x64
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Debug|x86.ActiveCfg = Debug|x86
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Debug|x86.Build.0 = Debug|x86
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Release|ARM.ActiveCfg = Release|ARM
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Release|ARM.Build.0 = Release|ARM
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Release|x64.ActiveCfg = Release|x64
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Release|x64.Build.0 = Release|x64
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Release|x86.ActiveCfg = Release|x86
+		{9860D297-FB11-48E5-8FEE-26727C4D8DB4}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

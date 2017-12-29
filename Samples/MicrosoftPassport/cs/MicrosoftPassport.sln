@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftPassport", "MicrosoftPassport.csproj", "{9925C643-C023-4D33-AAE9-F88559A0FBAA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftPassport", "MicrosoftPassport.csproj", "{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,28 +17,28 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Debug|Any CPU.Build.0 = Debug|x86
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Debug|Any CPU.Deploy.0 = Debug|x86
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Debug|ARM.ActiveCfg = Debug|ARM
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Debug|ARM.Build.0 = Debug|ARM
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Debug|ARM.Deploy.0 = Debug|ARM
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Debug|x64.ActiveCfg = Debug|x64
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Debug|x64.Build.0 = Debug|x64
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Debug|x64.Deploy.0 = Debug|x64
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Debug|x86.ActiveCfg = Debug|x86
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Debug|x86.Build.0 = Debug|x86
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Debug|x86.Deploy.0 = Debug|x86
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Release|Any CPU.ActiveCfg = Release|x86
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Release|ARM.ActiveCfg = Release|ARM
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Release|ARM.Build.0 = Release|ARM
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Release|ARM.Deploy.0 = Release|ARM
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Release|x64.ActiveCfg = Release|x64
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Release|x64.Build.0 = Release|x64
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Release|x64.Deploy.0 = Release|x64
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Release|x86.ActiveCfg = Release|x86
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Release|x86.Build.0 = Release|x86
-		{9925C643-C023-4D33-AAE9-F88559A0FBAA}.Release|x86.Deploy.0 = Release|x86
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Debug|Any CPU.Build.0 = Debug|x86
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Debug|Any CPU.Deploy.0 = Debug|x86
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Debug|ARM.ActiveCfg = Debug|ARM
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Debug|ARM.Build.0 = Debug|ARM
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Debug|ARM.Deploy.0 = Debug|ARM
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Debug|x64.ActiveCfg = Debug|x64
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Debug|x64.Build.0 = Debug|x64
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Debug|x64.Deploy.0 = Debug|x64
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Debug|x86.ActiveCfg = Debug|x86
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Debug|x86.Build.0 = Debug|x86
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Debug|x86.Deploy.0 = Debug|x86
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Release|Any CPU.ActiveCfg = Release|x86
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Release|ARM.ActiveCfg = Release|ARM
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Release|ARM.Build.0 = Release|ARM
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Release|ARM.Deploy.0 = Release|ARM
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Release|x64.ActiveCfg = Release|x64
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Release|x64.Build.0 = Release|x64
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Release|x64.Deploy.0 = Release|x64
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Release|x86.ActiveCfg = Release|x86
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Release|x86.Build.0 = Release|x86
+		{8EC77E30-CAF6-59AD-95E8-55F6C065B18B}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

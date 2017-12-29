@@ -11,26 +11,101 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Windows.Devices.PointOfService;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
-using PosPrinterSample;
 
 namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        public const string FEATURE_NAME = "POS Printer";
+        public const string FEATURE_NAME = "POS Printer C# Sample";
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title="Receipt Printer", ClassType=typeof(Scenario1_ReceiptPrinter)},
-            new Scenario() { Title="Receipt Printer Error Handling", ClassType=typeof(Scenario2_ErrorHandling)},
-            new Scenario() { Title="Multiple Receipt Printers", ClassType=typeof(Scenario3_MultipleReceipt)}
+            new Scenario() { Title="Find, claim, and enable printer", ClassType=typeof(Scenario1_FindClaimEnable)},
+            new Scenario() { Title="Print receipt", ClassType=typeof(Scenario2_PrintReceipt)},
+            new Scenario() { Title="Multiple claims", ClassType=typeof(Scenario3_MultipleClaims)},
         };
+
+        internal PosPrinter Printer = null;
+        internal ClaimedPosPrinter ClaimedPrinter = null;
+        internal bool IsAnImportantTransaction = true;
+        internal event Action StateChanged;
+
+        public void SubscribeToReleaseDeviceRequested()
+        {
+            ClaimedPrinter.ReleaseDeviceRequested += ClaimedPrinter_ReleaseDeviceRequested;
+        }
+
+        public void ReleaseClaimedPrinter()
+        {
+            if (ClaimedPrinter != null)
+            {
+                ClaimedPrinter.ReleaseDeviceRequested -= ClaimedPrinter_ReleaseDeviceRequested;
+                ClaimedPrinter.Dispose();
+                ClaimedPrinter = null;
+                StateChanged?.Invoke();
+            }
+        }
+
+        public void ReleaseAllPrinters()
+        {
+            ReleaseClaimedPrinter();
+
+            if (Printer != null)
+            {
+                Printer.Dispose();
+                Printer = null;
+                StateChanged?.Invoke();
+            }
+        }
+
+        /// <summary>
+        /// If the "Retain device" checkbox is checked, we retain the device.
+        /// Otherwise, we allow the other claimant to claim the device.
+        /// </summary>
+        private async void ClaimedPrinter_ReleaseDeviceRequested(ClaimedPosPrinter sender, PosPrinterReleaseDeviceRequestedEventArgs args)
+        {
+            if (IsAnImportantTransaction)
+            {
+                await sender.RetainDeviceAsync();
+            }
+            else
+            {
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    NotifyUser("Lost printer claim.", NotifyType.ErrorMessage);
+                    ReleaseClaimedPrinter();
+                });
+            }
+        }
     }
 
     public class Scenario
     {
         public string Title { get; set; }
         public Type ClassType { get; set; }
+    }
+
+    public partial class DeviceHelpers
+    {
+        // By default, use all connections types.
+        public static async Task<PosPrinter> GetFirstReceiptPrinterAsync(PosConnectionTypes connectionTypes = PosConnectionTypes.All)
+        {
+            return await DeviceHelpers.GetFirstDeviceAsync(PosPrinter.GetDeviceSelector(connectionTypes),
+                async (id) =>
+                {
+                    PosPrinter printer = await PosPrinter.FromIdAsync(id);
+                    if (printer != null && printer.Capabilities.Receipt.IsPrinterPresent)
+                    {
+                        return printer;
+                    }
+                    // Dispose the unwanted printer.
+                    printer?.Dispose();
+                    return null;
+                });
+        }
     }
 }

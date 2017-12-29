@@ -1,0 +1,39 @@
+{
+    "version": "1.*",
+    "elements": {
+        "hover": {
+            "fillColor": "#FFFDAA78",
+            "strokeColor": "#FFFD7E31"
+        },
+        "selected": {
+            "fillColor": "#FFFD7E31",
+            "strokeColor": "#FFFF0000"
+        },
+        "userPoint": {
+            "labelScale": 1.5,
+            "scale": 1.5
+        }
+    },
+    "extensions": {
+        "myNamespace": {
+            "myPoi": {
+                "parent": "userPoint",
+                "strokeColor": "#FF0000FF"
+            },
+            "focused": {
+                "parent": "selected",
+                "scale": 1.75
+            },
+            "hover": {
+                "parent": "hover",
+                "fillColor": "#FF78AAFD",
+                "strokeColor": "#FF317EFD"
+            },
+            "selected": {
+                "parent": "selected",
+                "fillColor": "#FF317EFD",
+                "strokeColor": "#FF0000FF"
+            }
+        }
+    }
+}

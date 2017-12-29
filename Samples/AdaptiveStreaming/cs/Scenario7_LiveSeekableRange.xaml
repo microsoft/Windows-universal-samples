@@ -1,0 +1,125 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario7_LiveSeekableRange"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:SDKTemplate.Controls"
+    xmlns:logging="using:SDKTemplate.Logging"
+    Loaded="Page_OnLoaded"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,10" Orientation="Vertical">
+          <StackPanel x:Name="DescriptionText">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                This scenario demonstrates a seekable range in Live content, also known as a Live DVR window.
+            </TextBlock>
+          </StackPanel>
+          <local:ContentSelector x:Name="ContentSelectorControl"/>
+        </StackPanel>
+
+        <MediaPlayerElement x:Name="mediaPlayerElement" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AreTransportControlsEnabled="True" />
+
+        <StackPanel x:Name="CustomMediaControl" Grid.Row="2" Margin="0,10,0,0" Orientation="Vertical">
+
+            <Grid x:Name="SeekableWindowControls" Margin="0,10,0,0" HorizontalAlignment="Center" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="MaxSeekableWindowSize" Margin="10,0" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" />
+                <TextBlock x:Name="MaxSeekableWindowSize" Text="MaxSeekableWindowSize" Margin="10,0" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" />
+
+                <TextBlock Text="DesiredSeekableWindowSize" Margin="10,0" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" />
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" >
+                    <TextBox x:Name="DesiredSeekableWindowSize" Text="DesiredSeekableWindowSize" Margin="10,0" HorizontalAlignment="Center" />
+                    <Button x:Name="DesiredSeekableWindowSizeButton" Content="Set" Margin="0,0,10,0" Click="DesiredSeekableWindowSizeButton_Click" HorizontalAlignment="Center" />
+                </StackPanel>
+
+                <TextBlock Text="DesiredLiveOffset" Margin="10,0" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" />
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" >
+                    <TextBox x:Name="DesiredLiveOffset" Text="DesiredLiveOffset" Margin="10,0" HorizontalAlignment="Center" />
+                    <Button x:Name="DesiredLiveOffsetButton" Content="Set" Margin="0,0,10,0" Click="DesiredLiveOffsetButton_Click" HorizontalAlignment="Center" />
+                </StackPanel>
+
+                <TextBlock Text="MinLiveOffset" Margin="10,0" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" />
+                <TextBlock x:Name="MinLiveOffset" Text="MinLiveOffset" Margin="10,0" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" />
+            </Grid>
+
+            <Grid x:Name="PositionUpdateControls" Margin="0,10,0,0" HorizontalAlignment="Center" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="StartPosition" Margin="10,0" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" />
+                <TextBlock x:Name="StartPosition" Text="Start" Margin="10,0" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" />
+
+                <TextBlock Text="CurrentPosition" Margin="10,0" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" />
+                <TextBlock x:Name="CurrentPosition" Text="Current" Margin="10,0" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" />
+
+                <TextBlock Text="EndPosition" Margin="10,0" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" />
+                <TextBlock x:Name="EndPosition" Text="End" Margin="10,0" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"  />
+
+                <Slider x:Name="PositionSlider" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Width="500" Orientation="Horizontal" Height="auto"/>
+            </Grid>
+
+
+            <StackPanel x:Name="DiscreteControls" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Button x:Name="LogCurrentTimeCorrelation" Content="Log Times" Click="LogCurrentTimeCorrelation_Click" />
+                <Button x:Name ="GoToStart" Content="GoToStart" Click="GoToStart_Click" />
+                <Button Tag="-00:15:00" Content="&lt;&lt;15m" Click="SeekFixedAmount_Click"/>
+                <Button Tag="-00:05:00" Content="&lt;&lt;5m" Click="SeekFixedAmount_Click"/>
+                <Button Tag="-00:00:30" Content="&lt;&lt;30s" Click="SeekFixedAmount_Click"/>
+                <Button Tag="-00:00:02" Content="&lt;&lt;2s" Click="SeekFixedAmount_Click"/>
+                <Button x:Name="PlayButton" IsEnabled="False" Click="Play_Click">
+                    <SymbolIcon x:Name="PlayIcon" Symbol="Play"/>
+                </Button>
+                <Button x:Name="PauseButton" IsEnabled="False" Click="Pause_Click">
+                    <SymbolIcon x:Name="PauseIcon" Symbol="Pause"/>
+                </Button>
+                <Button Tag="00:00:02" Content="2s&gt;&gt;"  Click="SeekFixedAmount_Click"/>
+                <Button Tag="00:00:30" Content="30s&gt;&gt;" Click="SeekFixedAmount_Click"/>
+                <Button Tag="00:05:00" Content="5m&gt;&gt;" Click="SeekFixedAmount_Click"/>
+                <Button Tag="00:15:00" Content="15m&gt;&gt;" Click="SeekFixedAmount_Click"/>
+                <Button x:Name ="GoToLive" Content="GoToLive" Click="GoToLive_Click" />
+            </StackPanel>
+        </StackPanel>
+
+        <logging:LogView x:Name="LoggerControl" Grid.Row="3" Margin="0,10,0,0"/>
+    </Grid>
+</Page>

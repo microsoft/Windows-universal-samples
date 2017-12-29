@@ -72,6 +72,11 @@ Namespace Global.SDKTemplate
             End If
         End Sub
 
+        Public Shared Sub Start(sender As BackgroundTaskRegistrationGroup, args As BackgroundActivatedEventArgs)
+            Start(args.TaskInstance)
+        End Sub
+
+
         Public Shared Sub Start(taskInstance As IBackgroundTaskInstance)
             ' Use the taskInstance.Name and/or taskInstance.InstanceId to determine
             ' what background activity to perform. In this sample, all of our

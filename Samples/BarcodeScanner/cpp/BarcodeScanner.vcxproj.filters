@@ -19,15 +19,20 @@
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="Scenario1_BasicFunctionality.xaml.cpp" />
     <ClCompile Include="Scenario2_MultipleScanners.xaml.cpp" />
+    <ClCompile Include="Scenario3_ActiveSymbologies.xaml.cpp" />
+    <ClCompile Include="Scenario4_SymbologyAttributes.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\DeviceHelpers.h" />
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_BasicFunctionality.xaml.h" />
     <ClInclude Include="Scenario2_MultipleScanners.xaml.h" />
     <ClInclude Include="DataHelpers.h" />
+    <ClInclude Include="Scenario3_ActiveSymbologies.xaml.h" />
+    <ClInclude Include="Scenario4_SymbologyAttributes.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -39,6 +44,8 @@
     </Page>
     <Page Include="..\shared\Scenario1_BasicFunctionality.xaml" />
     <Page Include="..\shared\Scenario2_MultipleScanners.xaml" />
+    <Page Include="..\shared\Scenario3_ActiveSymbologies.xaml" />
+    <Page Include="..\shared\Scenario4_SymbologyAttributes.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">

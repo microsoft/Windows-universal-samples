@@ -37,7 +37,8 @@ When you choose the **Enable** button for the **Data Events** option, the app be
 
 When you choose the **Enable** button for the **Shake Events** option, the app displays the cumulative number of shake events each time an event occurs. (The app first increments the event count and then renders the most recent value.)
 
-Note that shake events are not supported in Windows 10 build 10240, so the Shaken event will never be raised, but the sample demonstrates how to handle the event when support for shake is added.
+Note that support for the Shaken event is dependent upon hardware and driver support.
+In practice, very few accelerometers support the Shaken event.
 
 ### Poll Accelerometer Readings
 
@@ -78,8 +79,8 @@ When you choose the **Enable** button for the **Data Events** option, the app be
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

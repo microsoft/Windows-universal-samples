@@ -242,7 +242,7 @@ namespace CameraStarterKit
 
         private bool ShouldMirrorPreview()
         {
-            // We recommend that applications mirror the preview for front-facing cameras, as it gives users a more natural experience, since it behaves more like a mirror
+            // It is recommended that applications mirror the preview for front-facing cameras, as it gives users a more natural experience, since it behaves more like a mirror
             return (_cameraEnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Front);
         }
 

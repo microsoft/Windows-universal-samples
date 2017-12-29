@@ -36,17 +36,11 @@ namespace SDKTemplate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             m_rootPage = MainPage.Current;
-            m_rootPage.deviceList = new ObservableCollection<RemoteSystem>();
-            m_rootPage.deviceMap = new Dictionary<string, RemoteSystem>();
+            m_rootPage.systemList = new ObservableCollection<RemoteSystem>();
+            m_rootPage.systemMap = new Dictionary<string, RemoteSystem>();
         }
 
-        public ObservableCollection<RemoteSystem> DeviceList
-        {
-            get
-            {
-                return m_rootPage.deviceList;
-            }
-        }
+        public ObservableCollection<RemoteSystem> SystemList => m_rootPage.systemList;
 
         private async void Search_Clicked(object sender, RoutedEventArgs e)
         {
@@ -55,7 +49,7 @@ namespace SDKTemplate
             Button searchButton = sender as Button;
             searchButton.IsHitTestVisible = false;
 
-            // Cleaning up any existing devices from previous searches.
+            // Cleaning up any existing systems from previous searches.
             SearchCleanup();
 
             // Verify access for Remote Systems. 
@@ -86,20 +80,20 @@ namespace SDKTemplate
             if (!string.IsNullOrWhiteSpace(HostNameTextBox.Text))
             {
                 // Build hostname object.
-                HostName deviceHost = new HostName(HostNameTextBox.Text);
+                HostName hostName = new HostName(HostNameTextBox.Text);
 
                 // Get Remote System from HostName.
-                RemoteSystem remoteSystem = await RemoteSystem.FindByHostNameAsync(deviceHost);
+                RemoteSystem remoteSystem = await RemoteSystem.FindByHostNameAsync(hostName);
 
                 if (remoteSystem != null)
                 {
-                    m_rootPage.deviceList.Add(remoteSystem);
-                    DeviceListBox.Visibility = Visibility.Visible;
-                    UpdateStatus("Found device - " + remoteSystem.DisplayName, NotifyType.StatusMessage);
+                    m_rootPage.systemList.Add(remoteSystem);
+                    SystemListBox.Visibility = Visibility.Visible;
+                    UpdateStatus("Found system - " + remoteSystem.DisplayName, NotifyType.StatusMessage);
                 }
                 else
                 {
-                    UpdateStatus("Unable to find the device.", NotifyType.ErrorMessage);
+                    UpdateStatus("Unable to find the system.", NotifyType.ErrorMessage);
                 }
             }
             else
@@ -133,22 +127,22 @@ namespace SDKTemplate
             // Start the watcher.
             m_remoteSystemWatcher.Start();
 
-            UpdateStatus("Searching for devices...", NotifyType.StatusMessage);
-            DeviceListBox.Visibility = Visibility.Visible;
+            UpdateStatus("Searching for systems...", NotifyType.StatusMessage);
+            SystemListBox.Visibility = Visibility.Visible;
         }
 
         private async void RemoteSystemWatcher_RemoteSystemUpdated(RemoteSystemWatcher sender, RemoteSystemUpdatedEventArgs args)
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                if (m_rootPage.deviceMap.ContainsKey(args.RemoteSystem.Id))
+                if (m_rootPage.systemMap.ContainsKey(args.RemoteSystem.Id))
                 {
-                    m_rootPage.deviceList.Remove(m_rootPage.deviceMap[args.RemoteSystem.Id]);
-                    m_rootPage.deviceMap.Remove(args.RemoteSystem.Id);
+                    m_rootPage.systemList.Remove(m_rootPage.systemMap[args.RemoteSystem.Id]);
+                    m_rootPage.systemMap.Remove(args.RemoteSystem.Id);
                 }
-                m_rootPage.deviceList.Add(args.RemoteSystem);
-                m_rootPage.deviceMap.Add(args.RemoteSystem.Id, args.RemoteSystem);
-                UpdateStatus("Device updated with Id = " + args.RemoteSystem.Id, NotifyType.StatusMessage);
+                m_rootPage.systemList.Add(args.RemoteSystem);
+                m_rootPage.systemMap.Add(args.RemoteSystem.Id, args.RemoteSystem);
+                UpdateStatus("System updated with Id = " + args.RemoteSystem.Id, NotifyType.StatusMessage);
             });
         }
 
@@ -156,11 +150,11 @@ namespace SDKTemplate
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                if (m_rootPage.deviceMap.ContainsKey(args.RemoteSystemId))
+                if (m_rootPage.systemMap.ContainsKey(args.RemoteSystemId))
                 {
-                    m_rootPage.deviceList.Remove(m_rootPage.deviceMap[args.RemoteSystemId]);
-                    UpdateStatus(m_rootPage.deviceMap[args.RemoteSystemId].DisplayName + " removed.", NotifyType.StatusMessage);
-                    m_rootPage.deviceMap.Remove(args.RemoteSystemId);
+                    m_rootPage.systemList.Remove(m_rootPage.systemMap[args.RemoteSystemId]);
+                    UpdateStatus(m_rootPage.systemMap[args.RemoteSystemId].DisplayName + " removed.", NotifyType.StatusMessage);
+                    m_rootPage.systemMap.Remove(args.RemoteSystemId);
                 }
             });
         }
@@ -169,9 +163,9 @@ namespace SDKTemplate
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                m_rootPage.deviceList.Add(args.RemoteSystem);
-                m_rootPage.deviceMap.Add(args.RemoteSystem.Id, args.RemoteSystem);
-                UpdateStatus(string.Format("Found {0} devices.", m_rootPage.deviceList.Count), NotifyType.StatusMessage);
+                m_rootPage.systemList.Add(args.RemoteSystem);
+                m_rootPage.systemMap.Add(args.RemoteSystem.Id, args.RemoteSystem);
+                UpdateStatus(string.Format("Found {0} systems.", m_rootPage.systemList.Count), NotifyType.StatusMessage);
             });
         }
 
@@ -179,6 +173,7 @@ namespace SDKTemplate
         {
             List<IRemoteSystemFilter> filters = new List<IRemoteSystemFilter>();
             RemoteSystemDiscoveryTypeFilter discoveryFilter;
+            RemoteSystemAuthorizationKindFilter authorizationKindFilter;
             List<string> kinds = new List<string>();
             RemoteSystemStatusTypeFilter statusFilter;
 
@@ -193,6 +188,10 @@ namespace SDKTemplate
                 {
                     discoveryFilter = new RemoteSystemDiscoveryTypeFilter(RemoteSystemDiscoveryType.Cloud);
                 }
+                else if (SpatiallyProximalRadioButton.IsChecked.Value)
+                {
+                    discoveryFilter = new RemoteSystemDiscoveryTypeFilter(RemoteSystemDiscoveryType.SpatiallyProximal);
+                }
                 else
                 {
                     discoveryFilter = new RemoteSystemDiscoveryTypeFilter(RemoteSystemDiscoveryType.Any);
@@ -200,9 +199,23 @@ namespace SDKTemplate
                 filters.Add(discoveryFilter);
             }
 
-            if (DeviceTypeOptions.IsChecked.Value)
+            if (AuthorizationTypeOptions.IsChecked.Value)
             {
-                // Build device type filters
+                // Build authorization type filters
+                if (AnonymousDiscoveryRadioButton.IsChecked.Value)
+                {
+                    authorizationKindFilter = new RemoteSystemAuthorizationKindFilter(RemoteSystemAuthorizationKind.Anonymous);
+                }
+                else
+                {
+                    authorizationKindFilter = new RemoteSystemAuthorizationKindFilter(RemoteSystemAuthorizationKind.SameUser);
+                }
+                filters.Add(authorizationKindFilter);
+            }
+
+            if (SystemTypeOptions.IsChecked.Value)
+            {
+                // Build system type filters
                 if (DesktopCheckBox.IsChecked.Value)
                 {
                     kinds.Add(RemoteSystemKinds.Desktop);
@@ -225,7 +238,7 @@ namespace SDKTemplate
                 }
                 if (kinds.Count == 0)
                 {
-                    UpdateStatus("Select a Device type filter.", NotifyType.ErrorMessage);
+                    UpdateStatus("Select a system type filter.", NotifyType.ErrorMessage);
                 }
                 else
                 {
@@ -258,8 +271,8 @@ namespace SDKTemplate
                 m_remoteSystemWatcher.Stop();
                 m_remoteSystemWatcher = null;
             }
-            m_rootPage.deviceList.Clear();
-            m_rootPage.deviceMap.Clear();
+            m_rootPage.systemList.Clear();
+            m_rootPage.systemMap.Clear();
         }
 
         private void UpdateStatus(string status, NotifyType statusType)

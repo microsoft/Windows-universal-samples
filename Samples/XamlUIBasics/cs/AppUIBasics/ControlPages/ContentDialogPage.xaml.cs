@@ -30,19 +30,19 @@ namespace AppUIBasics.ControlPages
         private async void ShowDialog_Click(object sender, RoutedEventArgs e)
         {
             ContentDialogExample dialog = new ContentDialogExample();
-            await dialog.ShowAsync();
+            var result = await dialog.ShowAsync();
 
-            if(dialog.Result == SignInResult.SignInOK)
+            if (result == ContentDialogResult.Primary)
             {
-                DialogResult.Text = "Dialog result successful.";
+                DialogResult.Text = "User saved their work";
             }
-            else if(dialog.Result == SignInResult.SignInCancel)
+            else if (result == ContentDialogResult.Secondary)
             {
-                DialogResult.Text = "Dialog result canceled.";
+                DialogResult.Text = "User did not save their work";
             }
-            else if(dialog.Result == SignInResult.Nothing)
+            else
             {
-                DialogResult.Text = "Dialog dismissed.";
+                DialogResult.Text = "User cancelled the dialog";
             }
         }
     }

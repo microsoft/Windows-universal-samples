@@ -17,18 +17,19 @@
     <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="SampleConfiguration.cpp" />
-    <ClCompile Include="Scenario1_ReceiptPrinter.xaml.cpp" />
-    <ClCompile Include="Scenario2_ErrorHandling.xaml.cpp" />
-    <ClCompile Include="Scenario3_MultipleReceipt.xaml.cpp" />
+    <ClCompile Include="Scenario1_FindClaimEnable.xaml.cpp" />
+    <ClCompile Include="Scenario2_PrintReceipt.xaml.cpp" />
+    <ClCompile Include="Scenario3_MultipleClaims.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\DeviceHelpers.h" />
     <ClInclude Include="SampleConfiguration.h" />
-    <ClInclude Include="Scenario1_ReceiptPrinter.xaml.h" />
-    <ClInclude Include="Scenario2_ErrorHandling.xaml.h" />
-    <ClInclude Include="Scenario3_MultipleReceipt.xaml.h" />
+    <ClInclude Include="Scenario1_FindClaimEnable.xaml.h" />
+    <ClInclude Include="Scenario2_PrintReceipt.xaml.h" />
+    <ClInclude Include="Scenario3_MultipleClaims.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -38,11 +39,14 @@
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>
-    <Page Include="Scenario1_ReceiptPrinter.xaml" />
-    <Page Include="Scenario2_ErrorHandling.xaml" />
-    <Page Include="Scenario3_MultipleReceipt.xaml" />
+    <Page Include="..\shared\Scenario1_FindClaimEnable.xaml" />
+    <Page Include="..\shared\Scenario2_PrintReceipt.xaml" />
+    <Page Include="..\shared\Scenario3_MultipleClaims.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\Samples\coffee-logo.png">
+      <Filter>Assets</Filter>
+    </Image>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Filter>Assets</Filter>
     </Image>

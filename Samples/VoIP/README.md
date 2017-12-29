@@ -19,6 +19,13 @@ WASAPI has been implemented into the sample to provide audio loopback. It simply
 
 This Sample utilizes Windows Mobile Extensions for UWP and will only work on mobile devices with right capabilities.
 
+## Related topics
+
+### Other repos
+
+* [WebRTC universal samples](https://github.com/Microsoft/WebRTC-universal-samples/)
+ * [ChatterBox sample](https://github.com/Microsoft/WebRTC-universal-samples/tree/master/Samples/ChatterBox-Sample)
+
 ## System requirements
 
 **Client:** Windows 10
@@ -30,8 +37,8 @@ This Sample utilizes Windows Mobile Extensions for UWP and will only work on mob
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

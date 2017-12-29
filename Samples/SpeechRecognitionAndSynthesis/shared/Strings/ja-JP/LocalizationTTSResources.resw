@@ -123,18 +123,21 @@
                              xsi:schemaLocation='http://www.w3.org/2001/10/synthesis  http://www.w3.org/TR/speech-synthesis/synthesis.xsd' 
                              xml:lang='en-US'&gt;
 
-This is an example of a phonetic pronunciation:
+&lt;mark name='phonetic'/&gt;This is an example of a phonetic pronunciation:
 &lt;phoneme alphabet='x-microsoft-ups' ph='S1 W AA T . CH AX . M AX . S2 K AA L . IH T'&gt; whatchamacallit &lt;/phoneme&gt;.
 
-This is an example of a date:
+&lt;mark name='date'/&gt;This is an example of a date:
 &lt;say-as interpret-as='date' format='mdy'&gt; 04/30/2013 &lt;/say-as&gt;.
 
-This is an example of an ordinal number:
+&lt;mark name='number'/&gt;This is an example of an ordinal number:
 &lt;say-as interpret-as='ordinal'&gt; 4 &lt;/say-as&gt;.
-
+&lt;mark name='end'/&gt;
 &lt;/speak&gt;</value>
   </data>
   <data name="SynthesizeTextDefaultText" xml:space="preserve">
     <value>怠惰な茶色犬を飛び越えたクイック レッド フォックス</value>
+  </data>
+  <data name="SynthesizeTextBoundariesDefaultText" xml:space="preserve">
+    <value>プログラムの起動、メニューのオープン、ボタンなど画面上にあるオブジェクトのクリック、テキストをディクテーションしてドキュメントに保存、電子メールの作成と送信などの操作を、音声だけで行うことができます。キーボードとマウスの操作が、ほぼすべて音声のみで実行できます。</value>
   </data>
 </root>

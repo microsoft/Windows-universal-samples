@@ -1,0 +1,45 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario11"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,20,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Customize map elements appearance further by using default style entries or custom ones.
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                Hover over and click on map elements or use the combo box below to change their appearance.
+            </TextBlock>
+            <ComboBox Name="setStyleSheetStateCombobox" SelectedIndex="0" SelectionChanged="SetStyleSheetStateCombobox_SelectionChanged" Margin="0,10">
+                <ComboBoxItem Content="None" />
+                <ComboBoxItem Content="Disabled" />
+                <ComboBoxItem Content="Hover" />
+                <ComboBoxItem Content="Selected" />
+                <ComboBoxItem Content="Custom" />
+            </ComboBox>
+        </StackPanel>
+        <maps:MapControl x:Name="myMap" Loaded="MyMap_Loaded" Grid.Row="3"/>
+    </Grid>
+</Page>

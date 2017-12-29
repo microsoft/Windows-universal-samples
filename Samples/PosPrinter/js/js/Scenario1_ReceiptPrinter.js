@@ -11,182 +11,155 @@
 
 (function () {
     "use strict";
-    var page = WinJS.UI.Pages.define("/html/Scenario1_ReceiptPrinter.html", {
+
+    var BarcodeSymbologies = Windows.Devices.PointOfService.BarcodeSymbologies;
+    var PosPrinterAlignment = Windows.Devices.PointOfService.PosPrinterAlignment;
+    var PosPrinterBarcodeTextPosition = Windows.Devices.PointOfService.PosPrinterBarcodeTextPosition;
+
+    var page = WinJS.UI.Pages.define("/html/Scenario2_PrintReceipt.html", {
 
         ready: function (element, options) {
-
-            WinJS.log("Find and claim the printer to begin.", "sample", "status");
-
-            document.getElementById("findClaimEnableButton").disabled = false;
-            document.getElementById("printLineButton").disabled = true;
-            document.getElementById("printReceiptButton").disabled = true;
-            document.getElementById("scenarioEndButton").disabled = true;
-
-            document.getElementById("findClaimEnableButton").addEventListener("click", findClaimEnable, false);
-            document.getElementById("scenarioEndButton").addEventListener("click", endScenario, false);
-            document.getElementById("printLineButton").addEventListener("click", printLine, false);
-            document.getElementById("printReceiptButton").addEventListener("click", printReceipt, false);
-        },
-
-        unload: function () {
-            if (_claimedPrinter !== null) {
-                _claimedPrinter.close();
-                _claimedPrinter = null;
-            }
-            _printer = null;
         }
     });
 
-    var _printer = null;
-    var _claimedPrinter = null;
-    var _isImportantTransaction = true;
+    function isPrinterClaimed() {
+        if (SdkSample.claimedPrinter) {
+            WinJS.log("", "sample", "status");
+            return true;
+        } else {
+            WinJS.log("Use scenario 1 to find, claim, and enable a receipt printer.", "sample", "error");
+            return false;
+        }
+    }
 
-    //
-    //Creates multiple tasks, first to find a receipt printer, then to claim the printer and then to enable and add releasedevicerequested event handler.
-    //
-    function findClaimEnable() {
+    function executeJobAndReportResultAsync(job) {
 
-        WinJS.log("Finding printer...", "sample", "status");
-
-        if (_printer == null) {
-
-            var devicestr = Windows.Devices.PointOfService.PosPrinter.getDeviceSelector();
-            Windows.Devices.Enumeration.DeviceInformation.findAllAsync(devicestr, null).then(function (deviceCollection) {
-
-                if (deviceCollection.length == 0) {
-                    WinJS.log("No printers found during enumeration.", "sample", "error");
+        return job.executeAsync().then(function (success) {
+            if (success) {
+                WinJS.log("Printing complete.", "sample", "status");
+            }
+            else {
+                var reason;
+                var receipt = SdkSample.claimedPrinter.receipt;
+                if (receipt.isCartridgeEmpty) {
+                    reason = "Printer is out of ink. Please replace cartridge.";
                 }
-
-                var id = deviceCollection[0].id;
-                Windows.Devices.PointOfService.PosPrinter.fromIdAsync(id).then(function (printer) {
-
-                    if (printer != null) {
-                        _printer = printer;
-
-                        if (_printer.capabilities.receipt.isPrinterPresent) {
-
-                            //Claim
-                            _printer.claimPrinterAsync().done(function (claimedPrinter) {
-
-                                if (claimedPrinter !== null) {
-
-                                    _claimedPrinter = claimedPrinter;
-
-                                    //Enable printer
-                                    _claimedPrinter.enableAsync().done(function (success) {
-
-                                        if (success) {
-                                            WinJS.log("Enabled printer. Device ID: " + _claimedPrinter.deviceId, "sample", "status");
-
-                                            document.getElementById("findClaimEnableButton").disabled = true;
-                                            document.getElementById("printLineButton").disabled = false;
-                                            document.getElementById("printReceiptButton").disabled = false;
-                                            document.getElementById("scenarioEndButton").disabled = false;
-                                        }
-                                        else {
-                                            WinJS.log("Could not enable printer.", "sample", "error");
-                                        }
-                                        return;
-                                    },
-                                    function error(e) {
-                                        WinJS.log("Error enabling printer: " + e.message, "sample", "error");
-                                    });
-                                    return;
-                                }
-                                else {
-                                    WinJS.log("Could not claim the printer.", "sample", "error");
-                                }
-                            });
-                        }
-                    }
-                },
-                function error(e) {
-                    WinJS.log("FromIdAsync was unsuccessful: " + e.message, "sample", "error");
-                });//end of fromIdAsync
-            }, function error(e) {
-                WinJS.log("Printer device enumeration unsuccessful: " + e.message, "sample", "error");
-            });
-        }
+                else if (receipt.isCartridgeRemoved) {
+                    reason = "Printer cartridge is missing. Please replace cartridge.";
+                }
+                else if (receipt.isCoverOpen) {
+                    reason = "Printer cover is open. Please close it.";
+                }
+                else if (receipt.isHeadCleaning) {
+                    reason = "Printer is currently cleaning the cartridge. Please wait until cleaning has completed.";
+                }
+                else if (receipt.isPaperEmpty) {
+                    reason = "Printer is out of paper. Please insert a new roll.";
+                }
+                else {
+                    reason = "Unable to print.";
+                }
+                WinJS.log(reason, "sample", "error");
+            }
+            return success;
+        });
     }
 
-    function endScenario() {
-
-        if (_claimedPrinter !== null) {
-            _claimedPrinter.close();
-            _claimedPrinter = null;
-        }
-
-        _printer = null;
-        WinJS.log("Scenario ended.", "sample", "status");
-
-        document.getElementById("findClaimEnableButton").disabled = false;
-        document.getElementById("printLineButton").disabled = true;
-        document.getElementById("printReceiptButton").disabled = true;
-        document.getElementById("scenarioEndButton").disabled = true;
-    }
-
-    //
-    //Prints the line that is in the textbox.
-    //
     function printLine() {
-
-        if (_claimedPrinter == null) {
-            WinJS.log("Claimed printer instance is null. Cannot print.", "sample", "error");
+        if (!isPrinterClaimed()) {
+            return;
         }
-        else {
 
-            var job = _claimedPrinter.receipt.createJob();
-            job.printLine(document.getElementById("txtPrintLine").value);
+        var job = SdkSample.claimedPrinter.receipt.createJob();
+        job.printLine(printLineTextBox.value);
 
-            job.executeAsync().done(function () {
-                WinJS.log("Printed line.", "sample", "status");
-            }
-            , function error(e) {
-                WinJS.log("Was not able to print line: " + e.message, "sample", "error");
-            }
-            );
-        }
+        executeJobAndReportResultAsync(job).done();
     }
 
-    //
-    //Prints a sample receipt.
-    //
     function printReceipt() {
-
-        if (_claimedPrinter == null) {
-            WinJS.log("Claimed printer instance is null. Cannot print.", "sample", "error");
+        if (!isPrinterClaimed()) {
+            return;
         }
-        else {
-            var job = _claimedPrinter.receipt.createJob();
-            job.printLine("======================");
-            job.printLine("|   Sample Header    |");
-            job.printLine("======================");
 
-            job.printLine("Item             Price");
-            job.printLine("----------------------");
+        var receiptString =
+            "======================\n" +
+            "|   Sample Header    |\n" +
+            "======================\n" +
+            "Item             Price\n" +
+            "----------------------\n" +
+            "Books            10.40\n" +
+            "Games             9.60\n" +
+            "----------------------\n" +
+            "Total----------- 20.00\n";
 
-            job.printLine("Books            10.40");
-            job.printLine("Games             9.60");
-            job.printLine("----------------------");
-            job.printLine("Total----------- 20.00");
+        // The job consists of two receipts, one for the merchant and one
+        // for the customer.
+        var job = SdkSample.claimedPrinter.receipt.createJob();
+        printLineFeedAndCutPaper(job, receiptString + getMerchantFooter());
+        printLineFeedAndCutPaper(job, receiptString + getCustomerFooter());
 
-            job.printLine();
-            job.printLine("______________________");
-            job.printLine("Tip");
-            job.printLine();
-            job.printLine("______________________");
-            job.printLine("Signature");
-            job.printLine();
-            job.printLine("Merchant Copy");
+        executeJobAndReportResultAsync(job).done();
+    }
+
+    function getMerchantFooter() {
+        return "\n" +
+            "______________________\n" +
+            "Signature\n" +
+            "\n" +
+            "Merchant Copy\n";
+    }
+
+    function getCustomerFooter() {
+        return "\n" +
+            "Customer Copy\n";
+    }
+
+    // Cut the paper after printing enough blank lines to clear the paper cutter.
+    function printLineFeedAndCutPaper(job, receipt) {
+        // Passing a multi-line string to the print method results in
+        // smoother paper feeding than sending multiple single-line strings
+        // to printLine.
+        var feedString = "";
+        for (var n = 0; n < SdkSample.claimedPrinter.receipt.linesToPaperCut; n++) {
+            feedString += "\n";
+        }
+        job.print(receipt + feedString);
+        if (SdkSample.printer.capabilities.receipt.canCutPaper) {
             job.cutPaper();
-
-
-            job.executeAsync().done(function () {
-                WinJS.log("Printed receipt.", "sample", "status");
-            }, function error(e) {
-                WinJS.log("Was not able to print receipt: " + e.message, "sample", "error");
-            });
         }
     }
 
+    function printBitmap() {
+        if (!isPrinterClaimed()) {
+            return;
+        }
+
+        loadLogoBitmapAsync().done(function (bitmapFrame) {
+            SdkSample.claimedPrinter.receipt.isLetterQuality = true;
+            var job = SdkSample.claimedPrinter.receipt.createJob();
+            job.printBitmap(bitmapFrame, PosPrinterAlignment.center, 500);
+            return executeJobAndReportResultAsync(job);
+        });
+    }
+
+    function loadLogoBitmapAsync() {
+        var uri = new Windows.Foundation.Uri("ms-appx:///images/coffee-logo.png");
+        return Windows.Storage.StorageFile.getFileFromApplicationUriAsync(uri).then(function (file) {
+            return file.openReadAsync();
+        }).then(function (readStream) {
+            return Windows.Graphics.Imaging.BitmapDecoder.createAsync(readStream);
+        }).then(function (decoder) {
+            return decoder.getFrameAsync(0);
+        });
+    }
+
+    function printBarcode() {
+        if (!isPrinterClaimed()) {
+            return;
+        }
+
+        var job = SdkSample.claimedPrinter.receipt.createJob();
+        job.printBarcode(barcodeText.value, BarcodeSymbologies.upca, 60, 3, PosPrinterBarcodeTextPosition.below, PosPrinterAlignment.center);
+        executeJobAndReportResultAsync(job).done();
+    }
 })();

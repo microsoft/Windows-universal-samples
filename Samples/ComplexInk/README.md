@@ -19,6 +19,7 @@ Specifically, this sample covers using the [Windows.UI.Input.Inking](http://msdn
 -   Render ink strokes onto app specified VSIS surface
 -   Erase ink strokes via mode toggle or eraser button
 -   Select ink strokes via mode toggle or barrel button drag
+-   Use InkToolbar in custom dry mode
 
 **Note**  Read the following instructions before using the app.
 
@@ -33,7 +34,7 @@ Specifically, this sample covers using the [Windows.UI.Input.Inking](http://msdn
 
 To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
-To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
+To obtain information about Microsoft Visual Studio and the tools for developing Windows apps, go to [Visual Studio](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
 --------------
@@ -55,8 +56,8 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 ----------------
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

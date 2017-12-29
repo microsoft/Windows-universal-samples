@@ -27,9 +27,9 @@ namespace SDKTemplate
         private RadialController Controller;
 
         private int activeItemIndex;
-        private List<RadialControllerMenuItem> menuItems;
-        private List<Slider> sliders;
-        private List<ToggleSwitch> toggles;
+        private List<RadialControllerMenuItem> menuItems = new List<RadialControllerMenuItem>();
+        private List<Slider> sliders = new List<Slider>();
+        private List<ToggleSwitch> toggles = new List<ToggleSwitch>();
 
         public Scenario1_EventAndMenuHookup()
         {
@@ -69,18 +69,11 @@ namespace SDKTemplate
 
         private void CreateMenuItems()
         {
-            menuItems = new List<RadialControllerMenuItem>
-            {
-                RadialControllerMenuItem.CreateFromKnownIcon("Item0", RadialControllerMenuKnownIcon.InkColor),
-                RadialControllerMenuItem.CreateFromKnownIcon("Item1", RadialControllerMenuKnownIcon.NextPreviousTrack),
-                RadialControllerMenuItem.CreateFromKnownIcon("Item2", RadialControllerMenuKnownIcon.Volume),
-                RadialControllerMenuItem.CreateFromIcon("Item3", RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Item3.png"))),
-                RadialControllerMenuItem.CreateFromIcon("Item4", RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Item4.png"))),
-                RadialControllerMenuItem.CreateFromIcon("Item5", RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Item5.png")))
-            };
-            sliders = new List<Slider> { Slider0, Slider1, Slider2, Slider3, Slider4, Slider5 };
-            toggles = new List<ToggleSwitch> { Toggle0, Toggle1, Toggle2, Toggle3, Toggle4, Toggle5 };
+            AddKnownIconItems();
+            AddCustomIconItems();
+            AddFontGlyphItems();
 
+            // Set the invoked callbacks for each menu item
             for (int i = 0; i < menuItems.Count; ++i)
             {
                 RadialControllerMenuItem radialControllerItem = menuItems[i];
@@ -90,9 +83,48 @@ namespace SDKTemplate
             }
         }
 
+        private void AddKnownIconItems()
+        {
+            menuItems.Add(RadialControllerMenuItem.CreateFromKnownIcon("Item0", RadialControllerMenuKnownIcon.InkColor));
+            sliders.Add(slider0);
+            toggles.Add(toggle0);
+
+            menuItems.Add(RadialControllerMenuItem.CreateFromKnownIcon("Item1", RadialControllerMenuKnownIcon.NextPreviousTrack));
+            sliders.Add(slider1);
+            toggles.Add(toggle1);
+        }
+
+        private void AddCustomIconItems()
+        {
+            menuItems.Add(RadialControllerMenuItem.CreateFromIcon("Item2", RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Item2.png"))));
+            sliders.Add(slider2);
+            toggles.Add(toggle2);
+
+            menuItems.Add(RadialControllerMenuItem.CreateFromIcon("Item3", RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/Item3.png"))));
+            sliders.Add(slider3);
+            toggles.Add(toggle3);
+        }
+
+        private void AddFontGlyphItems()
+        {
+            // Using system font
+            menuItems.Add(RadialControllerMenuItem.CreateFromFontGlyph("Item4", "\x2764", "Segoe UI Emoji"));
+            sliders.Add(slider4);
+            toggles.Add(toggle4);
+
+            // Using custom font
+            menuItems.Add(RadialControllerMenuItem.CreateFromFontGlyph("Item5", "\ue102", "Symbols", new Uri("ms-appx:///Assets/Symbols.ttf")));
+            sliders.Add(slider5);
+            toggles.Add(toggle5);
+        }
+
         private void OnItemInvoked(int selectedItemIndex)
         {
-            activeItemIndex = selectedItemIndex;
+            if (activeItemIndex != selectedItemIndex)
+            {
+                activeItemIndex = selectedItemIndex;
+                PrintSelectedItem();
+            }
         }
 
         private void AddItem(object sender, RoutedEventArgs e)
@@ -102,6 +134,7 @@ namespace SDKTemplate
             if (!Controller.Menu.Items.Contains(radialControllerMenuItem))
             {
                 Controller.Menu.Items.Add(radialControllerMenuItem);
+                log.Text += "\n Added : " + radialControllerMenuItem.DisplayText;
             }
         }
 
@@ -112,6 +145,7 @@ namespace SDKTemplate
             if (Controller.Menu.Items.Contains(radialControllerMenuItem))
             {
                 Controller.Menu.Items.Remove(radialControllerMenuItem);
+                log.Text += "\n Removed : " + radialControllerMenuItem.DisplayText;
             }
         }
 
@@ -128,10 +162,8 @@ namespace SDKTemplate
 
         private void SelectPreviouslySelectedItem(object sender, RoutedEventArgs e)
         {
-            if (Controller.Menu.TrySelectPreviouslySelectedMenuItem())
-            {
-                PrintSelectedItem();
-            }
+            Controller.Menu.TrySelectPreviouslySelectedMenuItem();
+            PrintSelectedItem();
         }
 
         private RadialControllerMenuItem GetRadialControllerMenuItemFromSender(object sender)
@@ -149,22 +181,24 @@ namespace SDKTemplate
 
         private void PrintSelectedItem()
         {
-            log.Text += "\n Selected : " + GetSelectedMenuItemName();
-        }
-
-        private string GetSelectedMenuItemName()
-        {
             RadialControllerMenuItem selectedMenuItem = Controller.Menu.GetSelectedMenuItem();
+            string itemName = string.Empty;
 
             if (selectedMenuItem == menuItems[activeItemIndex])
             {
-                return selectedMenuItem.DisplayText;
+                itemName = selectedMenuItem.DisplayText;
             }
-            else
+            else if (selectedMenuItem == null)
             {
-                return "System Item";
+                itemName = "System Item";
+            }
+
+            if (itemName != string.Empty)
+            {
+                log.Text += "\n Selected : " + itemName;
             }
         }
+
         private void OnLogSizeChanged(object sender, object e)
         {
             logViewer.ChangeView(null, logViewer.ExtentHeight, null);
@@ -172,36 +206,48 @@ namespace SDKTemplate
 
         private void Controller_ControlAcquired(RadialController sender, RadialControllerControlAcquiredEventArgs args)
         {
-            log.Text += "\nControl Acquired";
+            log.Text += "\n Control Acquired";
             LogContactInfo(args.Contact);
         }
 
         private void Controller_ControlLost(RadialController sender, object args)
         {
-            log.Text += "\nControl Lost";
+            log.Text += "\n Control Lost";
         }
 
         private void Controller_ScreenContactStarted(RadialController sender, RadialControllerScreenContactStartedEventArgs args)
         {
-            log.Text += "\nContact Started ";
+            log.Text += "\n Contact Started ";
             LogContactInfo(args.Contact);
         }
 
         private void Controller_ScreenContactContinued(RadialController sender, RadialControllerScreenContactContinuedEventArgs args)
         {
 
-            log.Text += "\nContact Continued ";
+            log.Text += "\n Contact Continued ";
             LogContactInfo(args.Contact);
         }
 
         private void Controller_ScreenContactEnded(RadialController sender, object args)
         {
-            log.Text += "\nContact Ended";
+            log.Text += "\n Contact Ended";
+        }
+
+        private void ToggleMenuSuppression(Object sender, RoutedEventArgs args)
+        {
+            RadialControllerConfiguration radialControllerConfig = RadialControllerConfiguration.GetForCurrentView();
+
+            if (MenuSuppressionToggleSwitch.IsOn)
+            {
+                radialControllerConfig.ActiveControllerWhenMenuIsSuppressed = Controller;
+            }
+
+            radialControllerConfig.IsMenuSuppressed = MenuSuppressionToggleSwitch.IsOn;
         }
 
         private void Controller_ButtonClicked(RadialController sender, RadialControllerButtonClickedEventArgs args)
         {
-            log.Text += "\nButton Clicked ";
+            log.Text += "\n Button Clicked ";
             LogContactInfo(args.Contact);
 
             ToggleSwitch toggle = toggles[activeItemIndex];
@@ -210,7 +256,7 @@ namespace SDKTemplate
 
         private void Controller_RotationChanged(RadialController sender, RadialControllerRotationChangedEventArgs args)
         {
-            log.Text += "\nRotation Changed Delta = " + args.RotationDeltaInDegrees;
+            log.Text += "\n Rotation Changed Delta = " + args.RotationDeltaInDegrees;
             LogContactInfo(args.Contact);
 
             sliders[activeItemIndex].Value += args.RotationDeltaInDegrees;
@@ -220,8 +266,8 @@ namespace SDKTemplate
         {
             if (contact != null)
             {
-                log.Text += "\nBounds = " + contact.Bounds.ToString();
-                log.Text += "\nPosition = " + contact.Position.ToString();
+                log.Text += "\n Bounds = " + contact.Bounds.ToString();
+                log.Text += "\n Position = " + contact.Position.ToString();
             }
         }
     }

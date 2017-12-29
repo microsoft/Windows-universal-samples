@@ -44,6 +44,7 @@ namespace SDKTemplate
         Windows::Media::SpeechRecognition::SpeechRecognizer^ speechRecognizer;
         Windows::ApplicationModel::Resources::Core::ResourceContext^ speechContext;
         Windows::ApplicationModel::Resources::Core::ResourceMap^ speechResourceMap;
+        bool isPopulatingLanguages = false;
 
         void RecognizeWithUIListConstraint_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void RecognizeWithoutUIListConstraint_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
@@ -52,7 +53,6 @@ namespace SDKTemplate
         void PopulateLanguageDropdown();
 
         Windows::Foundation::EventRegistrationToken stateChangedToken;
-        Windows::Foundation::EventRegistrationToken cbLanguageSelectionSelectionChangedToken;
 
         void SpeechRecognizer_StateChanged(Windows::Media::SpeechRecognition::SpeechRecognizer ^sender, Windows::Media::SpeechRecognition::SpeechRecognizerStateChangedEventArgs ^args);
         void cbLanguageSelection_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);

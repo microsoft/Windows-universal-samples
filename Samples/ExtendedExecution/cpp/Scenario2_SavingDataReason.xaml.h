@@ -33,6 +33,7 @@ namespace SDKTemplate
         MainPage^ rootPage = MainPage::Current;
         Concurrency::cancellation_token_source cancellationTokenSource;
         Windows::Foundation::EventRegistrationToken suspendingToken;
+        Windows::ApplicationModel::SuspendingDeferral^ suspendDeferral = nullptr;
 
         void OnSuspending(Platform::Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ args);
         void ExtendedExecutionSessionRevoked(Platform::Object^ sender, Windows::ApplicationModel::ExtendedExecution::ExtendedExecutionRevokedEventArgs^ args);

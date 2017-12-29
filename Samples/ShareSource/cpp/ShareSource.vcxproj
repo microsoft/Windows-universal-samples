@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C5B886A7-8300-46FF-B533-9613DE2AF637}</ProjectGuid>
+    <ProjectGuid>{B0B493A6-8DC5-5DFD-BDA0-4AA2F11DC10C}</ProjectGuid>
     <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.16299.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -42,37 +42,37 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -154,6 +154,9 @@
     <ClInclude Include="ShareCustomData.xaml.h">
       <DependentUpon>..\shared\xaml\ShareCustomData.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="ShareCustomProvider.xaml.h">
+      <DependentUpon>..\shared\xaml\ShareCustomProvider.xaml</DependentUpon>
+    </ClInclude>
     <ClInclude Include="ShareDelayRenderedFiles.xaml.h">
       <DependentUpon>..\shared\xaml\ShareDelayRenderedFiles.xaml</DependentUpon>
     </ClInclude>
@@ -184,6 +187,7 @@
     <Page Include="..\shared\xaml\SetErrorMessage.xaml" />
     <Page Include="..\shared\xaml\ShareApplicationLink.xaml" />
     <Page Include="..\shared\xaml\ShareCustomData.xaml" />
+    <Page Include="..\shared\xaml\ShareCustomProvider.xaml" />
     <Page Include="..\shared\xaml\ShareDelayRenderedFiles.xaml" />
     <Page Include="..\shared\xaml\ShareFiles.xaml" />
     <Page Include="..\shared\xaml\ShareHtml.xaml" />
@@ -223,6 +227,9 @@
     </ClCompile>
     <ClCompile Include="ShareCustomData.xaml.cpp">
       <DependentUpon>..\shared\xaml\ShareCustomData.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="ShareCustomProvider.xaml.cpp">
+      <DependentUpon>..\shared\xaml\ShareCustomProvider.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="ShareDelayRenderedFiles.xaml.cpp">
       <DependentUpon>..\shared\xaml\ShareDelayRenderedFiles.xaml</DependentUpon>

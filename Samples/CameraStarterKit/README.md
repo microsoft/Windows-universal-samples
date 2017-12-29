@@ -1,19 +1,19 @@
 ﻿<!---
-  category: AudioVideoAndCamera 
+  category: AudioVideoAndCamera
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619479
 --->
 
 # Basic camera app sample
 
-Provides an end-to-end sample to show how to write a camera application using the Windows.Media.Capture API in 
+Provides an end-to-end sample to show how to write a camera application using the Windows.Media.Capture API in
 conjunction with orientation sensors to cover the functions that most camera apps will require.
 
-> **Note:** This sample is part of a large collection of UWP feature samples. 
-> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
-> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
-> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
-> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
-> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+> **Note:** This sample is part of a large collection of UWP feature samples.
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file,
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq).
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center.
 
 Specifically, this sample will cover how to:
 
@@ -24,6 +24,7 @@ Specifically, this sample will cover how to:
 5. **Record a video** to a file, and disable the photo capture button if the app is running on a device that doesn't support concurrent capturing of photos and video.
 6. **Handle rotation events** for both, the device moving in space and the page orientation changing on the screen. Also apply any necessary corrections to the preview stream rotation and to captured photos and videos.
 7. **Handle MediaCapture RecordLimitationExceeded and Failed events** to be notified that video recording needs to be stopped due to a video being too long, or clean up the MediaCapture instance when an error occurs.
+8. **Handle cameras mounted at an angle in the device enclosure** by inspecting the EnclosureLocation.RotationAngleInDegreesClockwise and adjusting the UI to take it into account.
 
 This sample also implements a custom UI to better simulate the experience that a camera application would provide, so any messages intended for the developer are printed to the debug console.
 
@@ -43,6 +44,7 @@ For apps that are interested in capturing a photo or video without requiring acc
 [Windows.Media.Capture.MediaCaptureInitializationSettings constructor](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.mediacaptureinitializationsettings.mediacaptureinitializationsettings.aspx)  
 [Windows.Media.Capture.MediaCaptureInitilizationSettings.VideoDeviceId property](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.mediacaptureinitializationsettings.videodeviceid.aspx)  
 [Windows.Devices.Enumeration namespace](https://msdn.microsoft.com/library/windows/apps/windows.devices.enumeration.aspx)  
+[Windows.Devices.Enumeration.EnclosureLocation namespace](https://msdn.microsoft.com/library/windows/apps/windows.devices.enumeration.enclosurelocation.aspx)  
 [Windows.Devices.Enumeration.DeviceInformation class](https://msdn.microsoft.com/library/windows/apps/windows.devices.enumeration.deviceinformation)  
 [Windows.Devices.Sensors.SimpleOrientationSensor class](https://msdn.microsoft.com/library/windows/apps/windows.devices.sensors.simpleorientationsensor.aspx)  
 [Windows.Graphics.Display.DisplayInformation class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.display.displayinformation.aspx)  
@@ -66,9 +68,9 @@ For apps that are interested in capturing a photo or video without requiring acc
 
 ## Build the sample
 
-1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
@@ -82,5 +84,3 @@ The next steps depend on whether you just want to deploy the sample or you want 
 **Deploying and running the sample:**
 
 1.  To debug the sample and then run it, press F5 or select **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or select **Debug** \> **Start Without Debugging**.
-
-

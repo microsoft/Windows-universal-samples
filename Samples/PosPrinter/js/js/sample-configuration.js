@@ -12,16 +12,75 @@
 (function () {
     "use strict";
 
-    var sampleTitle = "POS Printer";
+    var sampleTitle = "POS Printer JS Sample";
 
     var scenarios = [
-        { url: "/html/Scenario1_ReceiptPrinter.html", title: "Receipt Printer" },
-        { url: "/html/Scenario2_ErrorHandling.html", title: "Error Handling" },
-        { url: "/html/Scenario3_MultipleReceipt.html", title: "Multiple Receipt Printers" }
+        { url: "/html/Scenario1_FindClaimEnable.html", title: "Find, claim, and enable printer" },
+        { url: "/html/Scenario2_PrintReceipt.html", title: "Print receipt" },
+        { url: "/html/Scenario3_MultipleClaims.html", title: "Multiple claims" },
     ];
+
+    var PosPrinter = Windows.Devices.PointOfService.PosPrinter;
+
+    function subscribeToReleaseDeviceRequested() {
+        SdkSample.claimedPrinter.addEventListener("releasedevicerequested", claimedPrinter_releaseDeviceRequested);
+    }
+
+    function releaseClaimedPrinter() {
+        if (SdkSample.claimedPrinter) {
+            SdkSample.claimedPrinter.removeEventListener("releasedevicerequested", claimedPrinter_releaseDeviceRequested);
+            SdkSample.claimedPrinter.close();
+            SdkSample.claimedPrinter = null;
+            if (SdkSample.onstatechanged) SdkSample.onstatechanged();
+        }
+    }
+
+    function releaseAllPrinters() {
+        releaseClaimedPrinter();
+
+        if (SdkSample.printer) {
+            SdkSample.printer.close();
+            SdkSample.printer = null;
+            if (SdkSample.onstatechanged) SdkSample.onstatechanged();
+        }
+    }
+
+    // If the "Retain device" checkbox is checked, we retain the device.
+    // Otherwise, we allow the other claimant to claim the device.
+    function claimedPrinter_releaseDeviceRequested(args) {
+        if (SdkSample.isAnImportantTransaction) {
+            SdkSample.claimedPrinter.retainDeviceAsync();
+        } else {
+            WinJS.log("Lost printer claim.", "sample", "error");
+            releaseClaimedPrinter();
+        }
+    }
+
+    function getFirstReceiptPrinterAsync(connectionTypes) {
+        if (connectionTypes === undefined) {
+            // By default, use all connections types.
+            connectionTypes = Windows.Devices.PointOfService.PosConnectionTypes.all;
+        }
+        return DeviceHelpers.getFirstDeviceAsync(PosPrinter.getDeviceSelector(connectionTypes), (id) => {
+            return PosPrinter.fromIdAsync(id).then((printer) => {
+                if (printer && printer.capabilities.receipt.isPrinterPresent) {
+                    return printer;
+                }
+                // Close the unwanted printer.
+                printer && printer.close();
+                return null;
+            });
+        });
+    }
 
     WinJS.Namespace.define("SdkSample", {
         sampleTitle: sampleTitle,
-        scenarios: new WinJS.Binding.List(scenarios)
+        scenarios: new WinJS.Binding.List(scenarios),
+        printer: null,
+        claimedPrinter: null,
+        isAnImportantTransaction: true,
+        onstatechanged: null,
+        subscribeToReleaseDeviceRequested: subscribeToReleaseDeviceRequested,
+        getFirstReceiptPrinterAsync: getFirstReceiptPrinterAsync
     });
 })();

@@ -6,11 +6,17 @@
 
 This repo contains the samples that demonstrate the API usage patterns for the Universal Windows Platform (UWP) in the Windows Software Development Kit (SDK) for Windows 10. These code samples were created with the Universal Windows Platform templates available in Visual Studio, and are designed to run on desktop, mobile, and future devices that support the Universal Windows Platform.
 
+> **Note:** If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
 ## Universal Windows Platform development
 
-These samples require Visual Studio 2015 and the Windows Software Development Kit (SDK) for Windows 10 to build, test, and deploy your Universal Windows Platform apps.
+These samples require Visual Studio 2017 and the Windows Software Development Kit (SDK) for Windows 10 to build, test, and deploy your Universal Windows Platform apps.
 
-   [Get a free copy of Visual Studio 2015 Community Edition with support for building Universal Windows Platform apps](http://go.microsoft.com/fwlink/p/?LinkID=280676)
+   [Get a free copy of Visual Studio 2017 Community Edition with support for building Universal Windows Platform apps](http://go.microsoft.com/fwlink/p/?LinkID=280676)
 
 Additionally, to stay on top of the latest updates to Windows and the development tools, become a Windows Insider by joining the Windows Insider Program.
 
@@ -18,14 +24,14 @@ Additionally, to stay on top of the latest updates to Windows and the developmen
 
 ## Using the samples
 
-The easiest way to use these samples without using Git is to download the zip file containing the current version (using the following link or by clicking the "Download ZIP" button on the repo page). You can then unzip the entire archive and use the samples in Visual Studio 2015.
+The easiest way to use these samples without using Git is to download the zip file containing the current version (using the following link or by clicking the "Download ZIP" button on the repo page). You can then unzip the entire archive and use the samples in Visual Studio 2017.
 
    [Download the samples ZIP](../../archive/master.zip)
 
    **Notes:** 
    * Before you unzip the archive, right-click it, select **Properties**, and then select **Unblock**.
    * Be sure to unzip the entire archive, and not just individual samples. The samples all depend on the SharedContent folder in the archive.   
-   * In Visual Studio 2015, the platform target defaults to ARM, so be sure to change that to x64 or x86 if you want to test on a non-ARM device. 
+   * In Visual Studio 2017, the platform target defaults to ARM, so be sure to change that to x64 or x86 if you want to test on a non-ARM device. 
    
 The samples use Linked files in Visual Studio to reduce duplication of common files, including sample template files and image assets. These common files are stored in the SharedContent folder at the root of the repository, and are referred to in the project files using links.
 
@@ -61,57 +67,61 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 
 <table>
  <tr>
+  <td><a href="Samples/360VideoPlayback">360-degree video playback</a></td>
   <td><a href="Samples/AdaptiveStreaming">Adaptive streaming</a></td>
   <td><a href="Samples/CameraAdvancedCapture">Advanced capture</a></td>
-  <td><a href="Samples/AdvancedCasting">Advanced casting</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/AdvancedCasting">Advanced casting</a></td>
   <td><a href="Samples/AudioCategory">Audio categories</a></td>
   <td><a href="Samples/AudioCreation">Audio graphs</a></td>
-  <td><a href="Samples/BackgroundMediaPlayback">Background media playback</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/BackgroundMediaPlayback">Background media playback</a></td>
   <td><a href="Samples/CameraStarterKit">Basic camera app</a></td>
   <td><a href="Samples/BasicFaceDetection">Basic face detection</a></td>
-  <td><a href="Samples/BasicFaceTracking">Basic face tracking</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/BasicFaceTracking">Basic face tracking</a></td>
   <td><a href="Samples/BasicMediaCasting">Basic media casting</a></td>
   <td><a href="Samples/CameraFaceDetection">Camera face detection</a></td>
-  <td><a href="Samples/CameraFrames">Camera frames</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/CameraFrames">Camera frames</a></td>
   <td><a href="Samples/CameraGetPreviewFrame">Camera preview frame</a></td>
   <td><a href="Samples/CameraProfile">Camera profiles</a></td>
-  <td><a href="Samples/CameraResolution">Camera resolution</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/CameraResolution">Camera resolution</a></td>
   <td><a href="Samples/CameraStreamCorrelation">Camera stream correlation</a></td>
   <td><a href="Samples/LiveDash">DASH streaming</a></td>
-  <td><a href="Samples/D2DPhotoAdjustment">Direct2D photo adjustment</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/D2DPhotoAdjustment">Direct2D photo adjustment</a></td>
   <td><a href="Samples/MediaEditing">Media editing</a></td>
   <td><a href="Samples/MediaImport">Media import</a></td>
-  <td><a href="Samples/XamlCustomMediaTransportControls">Media transport controls</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/XamlCustomMediaTransportControls">Media transport controls</a></td>
   <td><a href="Samples/MIDI">MIDI</a></td>
   <td><a href="Samples/Playlists">Playlists</a></td>
-  <td><a href="Samples/PlayReady">PlayReady</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/PlayReady">PlayReady</a></td>
+  <td><a href="Samples/CameraOpenCV">Processing frames with OpenCV</a></td>
   <td><a href="Samples/SimpleImaging">Simple imaging</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/SpatialSound">Spatial audio</a></td>
   <td><a href="Samples/SystemMediaTransportControls">System media transport controls</a></td>
+  <td><a href="Samples/MediaTranscoding">Transcoding media</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/MediaTranscoding">Transcoding media</a></td>
   <td><a href="Samples/VideoPlayback">Video playback</a></td>
   <td><a href="Samples/VideoPlaybackSynchronization">Video playback synchronization</a></td>
+  <td><a href="Samples/CameraVideoStabilization">Video stabilization</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/CameraVideoStabilization">Video stabilization</a></td>
   <td><a href="Samples/WindowsAudioSession">Windows audio session (WASAPI)</a></td>
  </tr>
 </table>
@@ -143,6 +153,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/ContactPicker">Contact picker</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/MyPeopleNotifications">My People notifications</a></td>
   <td><a href="Samples/UserDataAccountManager">UserDataAccountManager</a></td>
  </tr>
 </table>
@@ -223,14 +234,15 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/BasicInput">Basic input</a></td>
   <td><a href="Samples/ComplexInk">Complex inking</a></td>
-  <td><a href="Samples/Ink">Inking</a></td>
+  <td><a href="Samples/InkAnalysis">Ink analysis/a></td>
  </tr>
  <tr>
+  <td><a href="Samples/Ink">Inking</a></td>
   <td><a href="Samples/LowLatencyInput">Low latency input</a></td>
   <td><a href="Samples/SimpleInk">Simple inking</a></td>
-  <td><a href="Samples/TouchKeyboard">Touch keyboard</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/TouchKeyboard">Touch keyboard</a></td>
   <td><a href="Samples/TouchKeyboardTextInput">Touch keyboard text input</a></td>
  </tr>
 </table>
@@ -293,7 +305,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/BluetoothAdvertisement">Bluetooth advertisement</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/BluetoothLEClient">Bluetooth Low Energy client</a></td>
+  <td><a href="Samples/BluetoothLE">Bluetooth Low Energy</a></td>
   <td><a href="Samples/CashDrawer">Cash drawer</a></td>
   <td><a href="Samples/Compass">Compass</a></td>
  </tr>
@@ -401,11 +413,15 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/CompositionVisual">Composition visual without framework</a></td>
+  <td><a href="Samples/D2AdvancedColorImages">Direct2D advanced color image rendering</a></td>
   <td><a href="Samples/D2DCustomEffects">Direct2D custom image effects</a></td>
-  <td><a href="Samples/D2DGradientMesh">Direct2D gradient mesh</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/D2DGradientMesh">Direct2D gradient mesh</a></td>
+  <td><a href="Samples/D2DSvgImage">Direct2D SVG image rendering</a></td>
   <td><a href="Samples/EfficientAnimations">Efficient animations (HTML)</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/XamlTransform3DAnimations">Transform3D animations</a></td>
   <td><a href="Samples/XamlTransform3DParallax">Transform3D parallax</a></td>
  </tr>
@@ -421,6 +437,11 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/HolographicSpatialMapping">Holographic spatial mapping</a></td>
+  <td><a href="Samples/HolographicSpatialStage">Holographic spatial stage</a></td>
+  <td><a href="Samples/HolographicVoiceInput">Holographic voice input</a></td>
+ </tr>
+ <tr>
+  <td><a href="Samples/SpatialInteractionSource">Spatial interaction source</a></td>
   <td><a href="Samples/HolographicTagAlong">Tag-along hologram</a></td>
  </tr>
 </table>
@@ -531,11 +552,12 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 
 <table>
  <tr>
+  <td><a href="Samples/CustomCapability">Custom capabilities</a></td>
   <td><a href="Samples/ProxyStubsForWinRTComponents">In-process component authoring</a></td>
   <td><a href="Samples/WRLInProcessWinRTComponent">In-process component authoring</a></td>
-  <td><a href="Samples/WRLOutOfProcessWinRTComponent">Out-of-process component authoring</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/WRLOutOfProcessWinRTComponent">Out-of-process component authoring</a></td>
   <td><a href="Samples/VersionAdaptiveCode">Version adaptive code</a></td>
  </tr>
 </table>

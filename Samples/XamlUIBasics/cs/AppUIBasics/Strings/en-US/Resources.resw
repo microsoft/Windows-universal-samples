@@ -126,18 +126,6 @@
   <data name="ByNameHeader.Text" xml:space="preserve">
     <value>Controls by name</value>
   </data>
-  <data name="disclaimer" xml:space="preserve">
-    <value>THIS CODE AND INFORMATION IS PROVIDED 'AS IS' WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.\n\nCopyright (c) Microsoft Corporation. All rights reserved</value>
-    <comment>Usage disclaimer.</comment>
-  </data>
-  <data name="disclaimerButton" xml:space="preserve">
-    <value>Accept</value>
-    <comment>Usage disclaimer button.</comment>
-  </data>
-  <data name="disclaimerTitle" xml:space="preserve">
-    <value>Disclaimer</value>
-    <comment>Usage disclaimer title.</comment>
-  </data>
   <data name="DocHeader.Text" xml:space="preserve">
     <value>Documentation</value>
   </data>
@@ -154,7 +142,7 @@
     <comment>Path to control pages. Used to load frame in ItemsPage.</comment>
   </data>
   <data name="RelatedControlsHeader.Text" xml:space="preserve">
-    <value>Related controls</value>
+    <value>Related controls </value>
   </data>
   <data name="helpFlyoutContent" xml:space="preserve">
     <value>From any control page, open the help panel from the bottom app bar to see custom help content for that control.</value>

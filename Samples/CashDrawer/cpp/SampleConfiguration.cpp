@@ -12,8 +12,13 @@
 #include "pch.h"
 #include "MainPage.xaml.h"
 #include "SampleConfiguration.h"
+#include "DeviceHelpers.h"
 
+using namespace Concurrency;
+using namespace Platform;
 using namespace SDKTemplate;
+using namespace Windows::Devices::PointOfService;
+using namespace Windows::Foundation;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
@@ -21,3 +26,9 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Wait for Drawer Close", "SDKTemplate.Scenario2_CloseDrawer" },
     { "Drawer Retain", "SDKTemplate.Scenario3_MultipleDrawers" }
 };
+
+task<CashDrawer^> DeviceHelpers::GetFirstCashDrawerAsync(PosConnectionTypes connectionTypes)
+{
+    return DeviceHelpers::GetFirstDeviceAsync(CashDrawer::GetDeviceSelector(connectionTypes),
+        [](String^ id) { return create_task(CashDrawer::FromIdAsync(id)); });
+}

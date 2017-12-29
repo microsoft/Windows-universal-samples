@@ -45,7 +45,7 @@ Scenario2_MultipleScanners::Scenario2_MultipleScanners()
 /// </summary>
 task<void> Scenario2_MultipleScanners::CreateDefaultScannerObject(BarcodeScannerInstance instance)
 {
-    return create_task(BarcodeScanner::GetDefaultAsync()).then([this, instance](BarcodeScanner^ _scanner)
+    return DeviceHelpers::GetFirstBarcodeScannerAsync().then([this, instance](BarcodeScanner^ _scanner)
     {
         if (_scanner == nullptr)
         {
@@ -313,8 +313,8 @@ void Scenario2_MultipleScanners::ButtonStartScanningInstance1_Click(Platform::Ob
                         // Note: If the scanner is not enabled (i.e. EnableAsync not called), attaching the event handler will not be any useful because the API will not fire the event 
                         // if the activeClaimedBarcodeScanner has not been Enabled
 
-                        dataReceivedTokenInstance1 = claimedBarcodeScannerInstance1->DataReceived::add(ref new TypedEventHandler<ClaimedBarcodeScanner^, BarcodeScannerDataReceivedEventArgs^>(this, &Scenario2_MultipleScanners::OnDataReceivedInstance1));
-                        releaseDeviceRequestedTokenInstance1 = claimedBarcodeScannerInstance1->ReleaseDeviceRequested::add(ref new EventHandler<ClaimedBarcodeScanner^>(this, &Scenario2_MultipleScanners::OnReleaseDeviceRequestedInstance1));
+                        dataReceivedTokenInstance1 = claimedBarcodeScannerInstance1->DataReceived += ref new TypedEventHandler<ClaimedBarcodeScanner^, BarcodeScannerDataReceivedEventArgs^>(this, &Scenario2_MultipleScanners::OnDataReceivedInstance1);
+                        releaseDeviceRequestedTokenInstance1 = claimedBarcodeScannerInstance1->ReleaseDeviceRequested += ref new EventHandler<ClaimedBarcodeScanner^>(this, &Scenario2_MultipleScanners::OnReleaseDeviceRequestedInstance1);
 
                         Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler(
                             [this]()
@@ -326,6 +326,7 @@ void Scenario2_MultipleScanners::ButtonStartScanningInstance1_Click(Platform::Ob
                 }
                 else
                 {
+                    delete scannerInstance1;
                     scannerInstance1 = nullptr;
                 }
             });
@@ -373,6 +374,7 @@ void Scenario2_MultipleScanners::ButtonStartScanningInstance2_Click(Platform::Ob
                 }
                 else
                 {
+                    delete scannerInstance1;
                     scannerInstance1 = nullptr;
                 }
             });
@@ -390,8 +392,8 @@ void Scenario2_MultipleScanners::ButtonEndScanningInstance1_Click(Platform::Obje
     // release the claimed scanner instance1
     if (claimedBarcodeScannerInstance1 != nullptr)
     {
-        claimedBarcodeScannerInstance1->DataReceived::remove(dataReceivedTokenInstance1);
-        claimedBarcodeScannerInstance1->ReleaseDeviceRequested::remove(releaseDeviceRequestedTokenInstance1);
+        claimedBarcodeScannerInstance1->DataReceived -= dataReceivedTokenInstance1;
+        claimedBarcodeScannerInstance1->ReleaseDeviceRequested -= releaseDeviceRequestedTokenInstance1;
         delete claimedBarcodeScannerInstance1;
         claimedBarcodeScannerInstance1 = nullptr;
     }

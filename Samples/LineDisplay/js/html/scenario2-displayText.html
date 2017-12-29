@@ -1,0 +1,46 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario2-displayText.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Display a greeting on the selected Line Display
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <p>
+                <input id="blinkCheckBox" type="checkbox" class="win-checkbox">Use blinking text
+                <br/>
+                <input id="centerCheckBox" type="checkbox" class="win-checkbox">Center the text
+            </p>
+            <div>
+                <button id="displayTextButton" class="win-button">Display text</button>
+            </div>
+            <p id="blinkNotSupportedText" style="display: none">
+                Warning: Line display does not support blink
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

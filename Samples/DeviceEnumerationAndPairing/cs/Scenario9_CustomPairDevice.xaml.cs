@@ -282,7 +282,7 @@ namespace DeviceEnumeration
 
                 case DevicePairingKinds.DisplayPin:
                     // We just show the PIN on this side. The ceremony is actually completed when the user enters the PIN
-                    // on the target device. We automatically except here since we can't really "cancel" the operation
+                    // on the target device. We automatically accept here since we can't really "cancel" the operation
                     // from this side.
                     args.Accept();
 

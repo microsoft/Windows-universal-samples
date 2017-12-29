@@ -35,7 +35,8 @@ Within the DWriteTextLayoutCloudFontImplementation project, the following files 
 ### DWriteTextLayoutCloudFont project
 Within the DWriteTextLayoutCloudFont project, the following files are significant:
 
-* The Scenario\_Document1.\*, Scenario\_Document2.\* and Scenario\_Document3.\* files each invoke text layout using a different downloadable font, and then invoke and respond to the downloadable font mechanism.
+* The Scenario\_Document1.\*, Scenario\_Document2.\* and Scenario\_Document3.\* files each present a DirectWrite text layout using a different downloadable font that gets downloaded, with the layout subsequently being updated.
+* The DocumentPresenter.\* files provide the higher-level implementation for the three documents (Scenario\_Document1, etc.) The DocumentPresenter class creates the text layout and the surface image source used to present it. It also creates the FontDownloadListener that interacts with DirectWrites font download mechanism and initiates the download of remote fonts. It also implements event handlers to update the layout and the surface image source when the remote font has been downloaded, and on other relevant events. 
 * The Scenario\_SampleOverview.\* files provide guidance for using the sample app.
 * The Scenario\_CloudFontOverview.\* files provide more information about the downloadable font mechanism.
 
@@ -63,8 +64,8 @@ The ClearDownloadableFontCache.ps1 file is not part of the sample project itself
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

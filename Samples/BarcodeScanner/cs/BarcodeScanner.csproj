@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
+    <ProjectGuid>{EAB86D72-F88E-5CA1-9BCF-476448CE835B}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>BarcodeScanner</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -96,12 +96,21 @@
     <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\SharedContent\cs\DeviceHelpers.cs">
+      <Link>DeviceHelpers.cs</Link>
+    </Compile>
     <Compile Include="SampleConfiguration.cs" />
     <Compile Include="Scenario1_BasicFunctionality.xaml.cs">
       <DependentUpon>Scenario1_BasicFunctionality.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scenario2_MultipleScanners.xaml.cs">
       <DependentUpon>Scenario2_MultipleScanners.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario3_ActiveSymbologies.xaml.cs">
+      <DependentUpon>Scenario3_ActiveSymbologies.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario4_SymbologyAttributes.xaml.cs">
+      <DependentUpon>Scenario4_SymbologyAttributes.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +136,16 @@
     </Page>
     <Page Include="..\shared\Scenario2_MultipleScanners.xaml">
       <Link>Scenario2_MultipleScanners.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario3_ActiveSymbologies.xaml">
+      <Link>Scenario3_ActiveSymbologies.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario4_SymbologyAttributes.xaml">
+      <Link>Scenario4_SymbologyAttributes.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

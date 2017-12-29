@@ -34,12 +34,16 @@ Scenario 2: Capture image from camera and extract text.
 
 ## Related topics
 
+**Samples**
+
+[InkAnalysis](/Samples/InkAnalysis)  
+
 **Reference**
 
 [Windows.Media.Ocr namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.ocr.aspx)  
 [Windows.Globalization.Language class](https://msdn.microsoft.com/library/windows/apps/windows.globalization.language.aspx)  
 [GlobalizationPreferences.Languages property](https://msdn.microsoft.com/library/windows/apps/windows.system.userprofile.globalizationpreferences.languages.aspx)  
-[Language matching] (https://msdn.microsoft.com/library/windows/apps/jj673578.aspx)  
+[Language matching](https://msdn.microsoft.com/library/windows/apps/jj673578.aspx)  
 [Windows.Graphics.Imaging.BitmapDecoder class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.bitmapdecoder.aspx)  
 [Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.aspx)  
 
@@ -56,8 +60,8 @@ Scenario 2: Capture image from camera and extract text.
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

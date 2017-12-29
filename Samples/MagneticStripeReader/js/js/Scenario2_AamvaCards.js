@@ -23,16 +23,7 @@
         },
 
         unload: function () {
-            if (document.getElementById("startReadButton").disabled) {
-                // Close the magnetic stripe reader.
-                if (_claimedReader !== null) {
-                    _claimedReader.removeEventListener("aamvacarddatareceived", onAamvaCardDataReceived);
-                    _claimedReader.close();
-                    _claimedReader = null;
-                }
-
-                _reader = null;
-            }
+            closeReaders();
         }
     });
 
@@ -40,8 +31,11 @@
     var _claimedReader = null;
 
     function startRead() {
-        // Get the default magnetic stripe reader.
-        Windows.Devices.PointOfService.MagneticStripeReader.getDefaultAsync().then(function (reader) {
+        // Clean up any leftover readers.
+        closeReaders();
+
+        // Get the first magnetic stripe reader.
+        SdkSample.getFirstMagneticStripeReaderAsync().then(function (reader) {
             if (reader !== null) {
                 _reader = reader;
 
@@ -105,13 +99,8 @@
     }
 
     function endRead() {
-        // Remove event listeners and unclaim the reader.
-        if (_claimedReader !== null) {
-            _claimedReader.removeEventListener("aamvacarddatareceived", onAamvaCardDataReceived);
-            _claimedReader.close();
-            _claimedReader = null;
-        }
-        _reader = null;
+        closeReaders();
+
         WinJS.log("Click the Start Receiving Data Button.", "sample", "status");
         document.getElementById("startReadButton").disabled = false;
         document.getElementById("endReadButton").disabled = true;
@@ -136,4 +125,19 @@
         document.getElementById("surname").textContent = "No data";
         document.getElementById("weight").textContent = "No data";
     }
+
+    function closeReaders() {
+        // Remove event listeners and unclaim the reader.
+        if (_claimedReader !== null) {
+            _claimedReader.removeEventListener("aamvacarddatareceived", onAamvaCardDataReceived);
+            _claimedReader.close();
+            _claimedReader = null;
+        }
+
+        if (_reader) {
+            _reader.close();
+            _reader = null;
+        }
+    }
+
 })();

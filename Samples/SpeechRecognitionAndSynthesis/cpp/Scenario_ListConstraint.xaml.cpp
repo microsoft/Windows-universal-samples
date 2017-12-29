@@ -378,11 +378,11 @@ void Scenario_ListConstraint::SpeechRecognizer_StateChanged(SpeechRecognizer ^se
 void Scenario_ListConstraint::PopulateLanguageDropdown()
 {
     // disable callback temporarily.
-    cbLanguageSelection->SelectionChanged -= cbLanguageSelectionSelectionChangedToken;
+    isPopulatingLanguages = true;
 
     Windows::Globalization::Language^ defaultLanguage = SpeechRecognizer::SystemSpeechLanguage;
     auto supportedLanguages = SpeechRecognizer::SupportedGrammarLanguages;
-    std::for_each(begin(supportedLanguages), end(supportedLanguages), [&](Windows::Globalization::Language^ lang)
+    for (Windows::Globalization::Language^ lang : supportedLanguages)
     {
         ComboBoxItem^ item = ref new ComboBoxItem();
         item->Tag = lang;
@@ -394,10 +394,9 @@ void Scenario_ListConstraint::PopulateLanguageDropdown()
             item->IsSelected = true;
             cbLanguageSelection->SelectedItem = item;
         }
-    });
+    }
 
-    cbLanguageSelectionSelectionChangedToken = cbLanguageSelection->SelectionChanged +=
-        ref new SelectionChangedEventHandler(this, &Scenario_ListConstraint::cbLanguageSelection_SelectionChanged);
+    isPopulatingLanguages = false;
 }
 
 
@@ -406,6 +405,11 @@ void Scenario_ListConstraint::PopulateLanguageDropdown()
 /// </summary>
 void Scenario_ListConstraint::cbLanguageSelection_SelectionChanged(Object^ sender, SelectionChangedEventArgs^ e)
 {
+    if (isPopulatingLanguages)
+    {
+        return;
+    }
+
     ComboBoxItem^ item = (ComboBoxItem^)(cbLanguageSelection->SelectedItem);
     Windows::Globalization::Language^ newLanguage = (Windows::Globalization::Language^)item->Tag;
 

@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
-namespace BasicInput
+namespace SDKTemplate
 {
     public sealed partial class Scenario1 : Page
     {
@@ -45,7 +45,7 @@ namespace BasicInput
             pressedTargetText.Text = "Pointer Pressed";
         }
 
-        // A PointerPressed event is sent whenever a mouse button, finger, or pen is released to remove
+        // A PointerReleased event is sent whenever a mouse button, finger, or pen is released to remove
         // contact from an object
         void target_PointerReleased(object sender, PointerRoutedEventArgs e)
         {

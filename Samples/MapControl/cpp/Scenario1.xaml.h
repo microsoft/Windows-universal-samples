@@ -23,10 +23,15 @@ namespace SDKTemplate
         Scenario1();
     private:
         MainPage^ rootPage = MainPage::Current;
+
+        void SetMapStyle();
+        void SetMapProjection();
+
         void MyMap_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void MyMap_MapTapped(Windows::UI::Xaml::Controls::Maps::MapControl^ sender, Windows::UI::Xaml::Controls::Maps::MapInputEventArgs^ args);
         void TrafficFlowVisible_Checked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void trafficFlowVisibleCheckBox_Unchecked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void styleCombobox_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
+        void projectionCombobox_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
     };
 }

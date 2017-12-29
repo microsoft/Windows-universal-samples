@@ -23,12 +23,12 @@ Specifically, this sample covers:
 -   Capture of PCM audio using the **Windows Audio Session APIs**.
 -   Low latency audio playback and capture.
 
-For more information on adding audio to your Windows Store app, see [Quickstart: adding audio to an app](http://msdn.microsoft.com/library/windows/apps/hh452730).
+For more information on adding audio to your app, see [Quickstart: adding audio to an app](http://msdn.microsoft.com/library/windows/apps/hh452730).
 
 Playing audio in the background is supported by the Windows Audio Session API
 only in communication scenarios as demonstrated by the [VoIP](/Samples/VoIP) sample.
 Instead, for general background audio playback of media,
-use the BackgroundMediaPlayer class demonstrated in the [Background Audio](/Samples/BackgroundAudio) sample.
+use the MediaPlayer class demonstrated in the [Background Media Playback](/Samples/BackgroundMediaPlayback) sample.
 
 ## Related topics
 
@@ -60,10 +60,16 @@ use the BackgroundMediaPlayer class demonstrated in the [Background Audio](/Samp
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
 
-To run this sample after building it, press F5 (run with debugging enabled) or Ctrl-F5 (run without debugging enabled) from Visual Studio 2013 for Windows 8.1 (any SKU). (Or select the corresponding options from the Debug menu.)
+The next steps depend on whether you just want to deploy the sample or you want to both deploy and run it.
+
+**Deploying the sample**
+1.  Select **Build** \> **Deploy Solution**.
+
+**Deploying and running the sample**
+1.  To debug the sample and then run it, press F5 or select **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or select**Debug** \> **Start Without Debugging**.

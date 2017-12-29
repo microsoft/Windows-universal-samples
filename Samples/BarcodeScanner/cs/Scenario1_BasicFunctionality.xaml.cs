@@ -10,14 +10,11 @@
 //*********************************************************
 
 using System;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Windows.Devices.Enumeration;
 using Windows.Devices.PointOfService;
-using Windows.Storage.Streams;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -38,57 +35,6 @@ namespace SDKTemplate
         public Scenario1_BasicFunctionality()
         {
             this.InitializeComponent();
-        }
-
-        /// <summary>
-        /// Creates the default barcode scanner.
-        /// </summary>
-        /// <returns>true if barcode scanner is created. Otherwise returns false</returns>
-        private async Task<bool> CreateDefaultScannerObject()
-        {
-            if (scanner == null)
-            {
-                rootPage.NotifyUser("Creating barcode scanner object.", NotifyType.StatusMessage);
-                DeviceInformationCollection deviceCollection = await DeviceInformation.FindAllAsync(BarcodeScanner.GetDeviceSelector());
-                if (deviceCollection != null && deviceCollection.Count > 0)
-                {
-                    scanner = await BarcodeScanner.FromIdAsync(deviceCollection[0].Id);
-
-                    if (scanner == null)
-                    {
-                        rootPage.NotifyUser("Failed to create barcode scanner object.", NotifyType.ErrorMessage);
-                        return false;
-                    }
-                }
-                else
-                {
-                    rootPage.NotifyUser("Barcode scanner not found. Please connect a barcode scanner.", NotifyType.ErrorMessage);
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// This method claims the barcode scanner 
-        /// </summary>
-        /// <returns>true if claim is successful. Otherwise returns false</returns>
-        private async Task<bool> ClaimScanner()
-        {
-            if (claimedScanner == null)
-            {
-                // claim the barcode scanner
-                claimedScanner = await scanner.ClaimScannerAsync();
-
-                // enable the claimed barcode scanner
-                if (claimedScanner == null)
-                {
-                    rootPage.NotifyUser("Claim barcode scanner failed.", NotifyType.ErrorMessage);
-                    return false;
-                }
-            }
-            return true;
         }
 
         /// <summary>
@@ -121,15 +67,19 @@ namespace SDKTemplate
         /// <param name="e"></param>
         private async void ScenarioStartScanButton_Click(object sender, RoutedEventArgs e)
         {
-            rootPage.NotifyUser("Creating barcode scanner object.", NotifyType.StatusMessage);
+            ScenarioStartScanButton.IsEnabled = false;
 
-            // create the barcode scanner. 
-            if (await CreateDefaultScannerObject())
+            rootPage.NotifyUser("Acquiring barcode scanner object.", NotifyType.StatusMessage);
+
+            // Acquire the barcode scanner.
+            scanner = await DeviceHelpers.GetFirstBarcodeScannerAsync();
+            if (scanner != null)
             {
                 // after successful creation, claim the scanner for exclusive use and enable it so that data reveived events are received.
-                if (await ClaimScanner())
-                {
+                claimedScanner = await scanner.ClaimScannerAsync();
 
+                if (claimedScanner != null)
+                {
                     // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can 
                     // claim ownsership of the barcode scanner.
                     claimedScanner.ReleaseDeviceRequested += claimedScanner_ReleaseDeviceRequested;
@@ -146,12 +96,19 @@ namespace SDKTemplate
                     // if the claimedScanner has not beed Enabled
                     await claimedScanner.EnableAsync();
 
-                    // reset the button state
-                    ScenarioEndScanButton.IsEnabled = true;
-                    ScenarioStartScanButton.IsEnabled = false;
-
                     rootPage.NotifyUser("Ready to scan. Device ID: " + claimedScanner.DeviceId, NotifyType.StatusMessage);
+                    ScenarioEndScanButton.IsEnabled = true;
                 }
+                else
+                {
+                    rootPage.NotifyUser("Claim barcode scanner failed.", NotifyType.ErrorMessage);
+                    ScenarioStartScanButton.IsEnabled = true;
+                }
+            }
+            else
+            {
+                rootPage.NotifyUser("Barcode scanner not found. Please connect a barcode scanner.", NotifyType.ErrorMessage);
+                ScenarioStartScanButton.IsEnabled = true;
             }
         }
 
@@ -171,79 +128,6 @@ namespace SDKTemplate
             });
         }
 
-        string GetDataString(IBuffer data)
-        {
-            StringBuilder result = new StringBuilder();
-
-            if (data == null)
-            {
-                result.Append("No data");
-            }
-            else
-            {
-                // Just to show that we have the raw data, we'll print the value of the bytes.
-                // Arbitrarily limit the number of bytes printed to 20 so the UI isn't overloaded.
-                const uint MAX_BYTES_TO_PRINT = 20;
-                uint bytesToPrint = Math.Min(data.Length, MAX_BYTES_TO_PRINT);
-
-                DataReader reader = DataReader.FromBuffer(data);
-                byte[] dataBytes = new byte[bytesToPrint];
-                reader.ReadBytes(dataBytes);
-
-                for (uint byteIndex = 0; byteIndex < bytesToPrint; ++byteIndex)
-                {
-                    result.AppendFormat("{0:X2} ", dataBytes[byteIndex]);
-                }
-
-                if (bytesToPrint < data.Length)
-                {
-                    result.Append("...");
-                }
-            }
-
-            return result.ToString();
-        }
-
-        string GetDataLabelString(IBuffer data, uint scanDataType)
-        {
-            string result = null;
-            // Only certain data types contain encoded text.
-            //   To keep this simple, we'll just decode a few of them.
-            if (data == null)
-            {
-                result = "No data";
-            }
-            else
-            {
-                switch (BarcodeSymbologies.GetName(scanDataType))
-                {
-                    case "Upca":
-                    case "UpcaAdd2":
-                    case "UpcaAdd5":
-                    case "Upce":
-                    case "UpceAdd2":
-                    case "UpceAdd5":
-                    case "Ean8":
-                    case "TfStd":
-                        // The UPC, EAN8, and 2 of 5 families encode the digits 0..9
-                        // which are then sent to the app in a UTF8 string (like "01234")
-
-                        // This is not an exhaustive list of symbologies that can be converted to a string
-
-                        DataReader reader = DataReader.FromBuffer(data);
-                        result = reader.ReadString(data.Length);
-                        break;
-                    default:
-                        // Some other symbologies (typically 2-D symbologies) contain binary data that
-                        //  should not be converted to text.
-                        result = string.Format("Decoded data unavailable. Raw label data: {0}", GetDataString(data));
-                        break;
-                }
-            }
-
-            return result;
-        }
-
         /// <summary>
         /// Event handler for the DataReceived event fired when a barcode is scanned by the barcode scanner 
         /// </summary>
@@ -256,10 +140,8 @@ namespace SDKTemplate
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
             {
                 // read the data from the buffer and convert to string.
-                ScenarioOutputScanDataLabel.Text = GetDataLabelString(args.Report.ScanDataLabel, args.Report.ScanDataType);
-
-                ScenarioOutputScanData.Text = GetDataString(args.Report.ScanData);
-
+                ScenarioOutputScanDataLabel.Text = DataHelpers.GetDataLabelString(args.Report.ScanDataLabel, args.Report.ScanDataType);
+                ScenarioOutputScanData.Text = DataHelpers.GetDataString(args.Report.ScanData);
                 ScenarioOutputScanDataType.Text = BarcodeSymbologies.GetName(args.Report.ScanDataType);
             });
         }
@@ -279,7 +161,11 @@ namespace SDKTemplate
                 claimedScanner = null;
             }
 
-            scanner = null;
+            if (scanner != null)
+            {
+                scanner.Dispose();
+                scanner = null;
+            }
 
             // Reset the strings in the UI
             rootPage.NotifyUser("Click the start scanning button to begin.", NotifyType.StatusMessage);

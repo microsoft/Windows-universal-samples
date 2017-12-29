@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>c2adb9af-edb3-4e57-8056-9d0531d4a6b2</ProjectGuid>
+    <ProjectGuid>a2d70005-5bc3-58d1-a4d6-a48554a7fe31</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
@@ -45,8 +45,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
@@ -56,11 +56,15 @@
     </AppxManifest>
     <Content Include="css\scenario1_BasicFunctionality.css" />
     <Content Include="css\scenario2_MultipleScanners.css" />
+    <Content Include="css\scenario3_ActiveSymbologies.css" />
+    <Content Include="css\scenario4_SymbologyAttributes.css" />
     <Content Include="..\..\..\SharedContent\js\default.html">
       <Link>default.html</Link>
     </Content>
     <Content Include="html\scenario1_BasicFunctionality.html" />
     <Content Include="html\scenario2_MultipleScanners.html" />
+    <Content Include="html\scenario3_ActiveSymbologies.html" />
+    <Content Include="html\scenario4_SymbologyAttributes.html" />
     <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>images\microsoft-sdk.png</Link>
     </Content>
@@ -82,12 +86,17 @@
     <Content Include="..\..\..\SharedContent\js\js\default.js">
       <Link>js\default.js</Link>
     </Content>
+    <Content Include="..\..\..\SharedContent\js\js\devicehelpers.js">
+      <Link>js\devicehelpers.js</Link>
+    </Content>
     <Content Include="..\..\..\SharedContent\js\css\default.css">
       <Link>css\default.css</Link>
     </Content>
     <Content Include="js\sample-configuration.js" />
     <Content Include="js\scenario1_BasicFunctionality.js" />
     <Content Include="js\scenario2_MultipleScanners.js" />
+    <Content Include="js\scenario3_ActiveSymbologies.js" />
+    <Content Include="js\scenario4_SymbologyAttributes.js" />
     <Content Include="js\util.js" />
     <Content Include="..\..\..\SharedContent\js\Microsoft.WinJS\css\ui-dark.css">
       <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>

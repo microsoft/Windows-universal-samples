@@ -45,7 +45,7 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 [Guidelines and checklist for tiles and badges](http://msdn.microsoft.com/library/windows/apps/hh465403)  
 [Quickstart: Showing tile and badge updates on the lock screen](http://msdn.microsoft.com/library/windows/apps/hh700416)  
 [Lock screen overview](http://msdn.microsoft.com/library/windows/apps/hh779720)  
-[Windows 8 Windows Store app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
+[Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 
 ## System requirements
 
@@ -58,8 +58,8 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

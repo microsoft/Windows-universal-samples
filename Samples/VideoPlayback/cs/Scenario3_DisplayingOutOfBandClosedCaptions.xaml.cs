@@ -9,6 +9,7 @@
 //
 //*********************************************************
 
+using SDKTemplate.Logging;
 using System;
 using System.Collections.Generic;
 using Windows.Media.Core;
@@ -25,6 +26,8 @@ namespace SDKTemplate
     public sealed partial class Scenario3 : Page
     {
         private MainPage rootPage = MainPage.Current;
+        private MediaPlaybackItemLogger mpiLogger;
+        private MediaSourceLogger msLogger;
 
         // Keep a map to correlate sources with their URIs for error handling
         private Dictionary<TimedTextSource, Uri> ttsMap = new Dictionary<TimedTextSource, Uri>();
@@ -38,6 +41,7 @@ namespace SDKTemplate
         {
             // Create the media source and supplement with external timed text sources.
             var source = MediaSource.CreateFromUri(rootPage.UncaptionedMediaUri);
+            msLogger = new MediaSourceLogger(LoggerControl, source);
 
             var ttsEnUri = new Uri("ms-appx:///Assets/Media/ElephantsDream-Clip-SRT_en.srt");
             var ttsEn = TimedTextSource.CreateFromUri(ttsEnUri);
@@ -61,19 +65,26 @@ namespace SDKTemplate
 
             // Create the playback item from the source
             var playbackItem = new MediaPlaybackItem(source);
+            mpiLogger = new MediaPlaybackItemLogger(LoggerControl, playbackItem);
 
             // Present the first track
             playbackItem.TimedMetadataTracksChanged += (item, args) =>
             {
+                LoggerControl.Log($"TimedMetadataTracksChanged, Number of tracks: {item.TimedMetadataTracks.Count}");
                 playbackItem.TimedMetadataTracks.SetPresentationMode(0, TimedMetadataTrackPresentationMode.PlatformPresented);
             };
 
             // Set the source to start playback of the item
             this.mediaPlayerElement.Source = playbackItem;
+            LoggerControl.Log($"Loaded: {rootPage.UncaptionedMediaUri}");
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            msLogger?.Dispose();
+            msLogger = null;
+            mpiLogger?.Dispose();
+            mpiLogger = null;
             MediaPlayerHelper.CleanUpMediaPlayerSource(mediaPlayerElement.MediaPlayer);
         }
 
@@ -86,10 +97,11 @@ namespace SDKTemplate
             {
                 var ignoreAwaitWarning = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
-                    rootPage.NotifyUser("Error resolving track " + ttsUri + " due to error " + args.Error.ErrorCode, NotifyType.ErrorMessage);
+                    LoggerControl.Log("Error resolving track " + ttsUri + " due to error " + args.Error.ErrorCode, LogViewLoggingLevel.Error);
                 });
                 return;
             }
+            LoggerControl.Log($"Resolved: {ttsUri}");
 
             // Update label manually since the external SRT does not contain it
             var ttsUriString = ttsUri.AbsoluteUri;

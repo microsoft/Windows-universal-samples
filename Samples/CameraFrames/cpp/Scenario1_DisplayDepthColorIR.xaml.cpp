@@ -12,6 +12,7 @@
 #include "pch.h"
 #include "Scenario1_DisplayDepthColorIR.xaml.h"
 #include "FrameRenderer.h"
+#include <unordered_set>
 
 using namespace SDKTemplate;
 
@@ -24,16 +25,6 @@ using namespace Windows::Graphics::Imaging;
 using namespace Windows::Media::Capture;
 using namespace Windows::Media::Capture::Frames;
 using namespace Windows::UI::Xaml::Media::Imaging;
-
-MediaFrameSourceInfo^ Scenario1_DisplayDepthColorIR::GetFirstSourceInfoOfKind(MediaFrameSourceGroup^ group, MediaFrameSourceKind kind)
-{
-    auto matchingInfo = std::find_if(begin(group->SourceInfos), end(group->SourceInfos),
-        [kind](MediaFrameSourceInfo^ sourceInfo)
-    {
-        return sourceInfo->SourceKind == kind;
-    });
-    return (matchingInfo != end(group->SourceInfos)) ? *matchingInfo : nullptr;
-}
 
 Scenario1_DisplayDepthColorIR::Scenario1_DisplayDepthColorIR()
 {
@@ -73,55 +64,30 @@ task<void> Scenario1_DisplayDepthColorIR::PickNextMediaSourceAsync()
 
 task<void> Scenario1_DisplayDepthColorIR::PickNextMediaSourceWorkerAsync()
 {
-    struct EligibleGroup
-    {
-        MediaFrameSourceGroup^ Group;
-        std::array<MediaFrameSourceInfo^, 3> SourceInfos;
-    };
-
     return CleanupMediaCaptureAsync()
         .then([this]()
     {
         return create_task(MediaFrameSourceGroup::FindAllAsync());
-    }).then([this](IVectorView<MediaFrameSourceGroup^>^ allGroups)
+    }, task_continuation_context::get_current_winrt_context())
+        .then([this](IVectorView<MediaFrameSourceGroup^>^ allGroups)
     {
-        // Identify the color, depth, and infrared sources of each group,
-        // and keep only the groups that have at least one recognized source.
-        std::vector<EligibleGroup> eligibleGroups;
-        for (auto group : allGroups)
+        if (allGroups->Size == 0)
         {
-            EligibleGroup eligibleGroup;
-            eligibleGroup.Group = group;
-            // For each source kind, find the source which offers that kind of media frame,
-            // or null if there is no such source.
-            eligibleGroup.SourceInfos[0] = GetFirstSourceInfoOfKind(group, MediaFrameSourceKind::Color);
-            eligibleGroup.SourceInfos[1] = GetFirstSourceInfoOfKind(group, MediaFrameSourceKind::Depth);
-            eligibleGroup.SourceInfos[2] = GetFirstSourceInfoOfKind(group, MediaFrameSourceKind::Infrared);
-            // If any source was found of any kind we support, keep this group.
-            if (std::any_of(eligibleGroup.SourceInfos.begin(), eligibleGroup.SourceInfos.end(),
-                [](MediaFrameSourceInfo^ sourceInfo) { return sourceInfo != nullptr; }))
-            {
-                eligibleGroups.push_back(eligibleGroup);
-            }
-        }
-
-        if (eligibleGroups.size() == 0)
-        {
-            m_logger->Log("No source group with color, depth or infrared found.");
+            m_logger->Log("No source groups found.");
             return task_from_result();
         }
 
         // Pick next group in the array after each time the Next button is clicked.
-        m_selectedSourceGroupIndex = (m_selectedSourceGroupIndex + 1) % eligibleGroups.size();
+        m_selectedSourceGroupIndex = (m_selectedSourceGroupIndex + 1) % allGroups->Size;
+        MediaFrameSourceGroup^ selectedGroup = allGroups->GetAt(m_selectedSourceGroupIndex);
 
-        m_logger->Log("Found " + eligibleGroups.size().ToString() + " groups and " +
+        m_logger->Log("Found " + allGroups->Size.ToString() + " groups and " +
             "selecting index [" + m_selectedSourceGroupIndex.ToString() + "] : " +
-            eligibleGroups[m_selectedSourceGroupIndex].Group->DisplayName);
-        EligibleGroup selected = eligibleGroups[m_selectedSourceGroupIndex];
+            selectedGroup->DisplayName);
 
         // Initialize MediaCapture with selected group.
-        return TryInitializeMediaCaptureAsync(selected.Group)
-            .then([this, selected](bool initialized)
+        return TryInitializeMediaCaptureAsync(selectedGroup)
+            .then([this, selectedGroup](bool initialized)
         {
             if (!initialized)
             {
@@ -129,56 +95,77 @@ task<void> Scenario1_DisplayDepthColorIR::PickNextMediaSourceWorkerAsync()
             }
 
             // Set up frame readers, register event handlers and start streaming.
+            auto startedKinds = std::make_shared<std::unordered_set<MediaFrameSourceKind>>();
             task<void> createReadersTask = task_from_result();
-            for (size_t i = 0; i < selected.SourceInfos.size(); i++)
+            for (IKeyValuePair<String^, MediaFrameSource^>^ kvp : m_mediaCapture->FrameSources)
             {
-                MediaFrameSourceInfo^ info = selected.SourceInfos[i];
-                if (info != nullptr)
+                MediaFrameSource^ source = kvp->Value;
+                createReadersTask = createReadersTask.then([this, startedKinds, source]()
                 {
-                    createReadersTask = createReadersTask && CreateReaderAsync(selected.Group, info);
-                }
-                else
-                {
-                    String^ frameKind = (i == 0 ? "Color" : i == 1 ? "Depth" : "Infrared");
-                    m_logger->Log("No " + frameKind + " source in group " + selected.Group->DisplayName);
-                }
+                    MediaFrameSourceKind kind = source->Info->SourceKind;
 
+                    // Ignore this source if we already have a source of this kind.
+                    if (startedKinds->find(kind) != startedKinds->end())
+                    {
+                        return task_from_result();
+                    }
+
+                    // Look for a format which the FrameRenderer can render.
+                    String^ requestedSubtype = nullptr;
+                    auto found = std::find_if(begin(source->SupportedFormats), end(source->SupportedFormats),
+                        [&](MediaFrameFormat^ format)
+                    {
+                        requestedSubtype = FrameRenderer::GetSubtypeForFrameReader(kind, format);
+                        return requestedSubtype != nullptr;
+                    });
+                    if (requestedSubtype == nullptr)
+                    {
+                        // No acceptable format was found. Ignore this source.
+                        return task_from_result();
+                    }
+
+                    // Tell the source to use the format we can render.
+                    return create_task(source->SetFormatAsync(*found))
+                        .then([this, source, requestedSubtype]()
+                    {
+                        return create_task(m_mediaCapture->CreateFrameReaderAsync(source, requestedSubtype));
+                    }, task_continuation_context::get_current_winrt_context())
+                        .then([this, kind](MediaFrameReader^ frameReader)
+                    {
+                        EventRegistrationToken token = frameReader->FrameArrived +=
+                            ref new TypedEventHandler<MediaFrameReader^, MediaFrameArrivedEventArgs^>(this, &Scenario1_DisplayDepthColorIR::FrameReader_FrameArrived);
+
+                        // Keep track of created reader and event handler so it can be stopped later.
+                        m_readers.push_back(std::make_pair(frameReader, token));
+
+                        m_logger->Log(kind.ToString() + " reader created");
+
+                        return create_task(frameReader->StartAsync());
+                    }, task_continuation_context::get_current_winrt_context())
+                        .then([this, kind, startedKinds](MediaFrameReaderStartStatus status)
+                    {
+                        if (status == MediaFrameReaderStartStatus::Success)
+                        {
+                            m_logger->Log("Started " + kind.ToString() + " reader.");
+                            startedKinds->insert(kind);
+                        }
+                        else
+                        {
+                            m_logger->Log("Unable to start " + kind.ToString() + "  reader. Error: " + status.ToString());
+                        }
+                    }, task_continuation_context::get_current_winrt_context());
+                }, task_continuation_context::get_current_winrt_context());
             }
-            return createReadersTask;
-        });
+            // Run the loop and see if any sources were used.
+            return createReadersTask.then([this, startedKinds, selectedGroup]()
+            {
+                if (startedKinds->size() == 0)
+                {
+                    m_logger->Log("No eligible sources in " + selectedGroup->DisplayName + ".");
+                }
+            }, task_continuation_context::get_current_winrt_context());
+        }, task_continuation_context::get_current_winrt_context());
     }, task_continuation_context::get_current_winrt_context());
-}
-
-task<void> Scenario1_DisplayDepthColorIR::CreateReaderAsync(MediaFrameSourceGroup^ group, MediaFrameSourceInfo^ info)
-{
-    // Access the initialized frame source by looking up the the Id of the source.
-    // Verify that the Id is present, because it may have left the group while were were
-    // busy deciding which group to use.
-    if (!m_mediaCapture->FrameSources->HasKey(info->Id))
-    {
-        m_logger->Log("Unable to start " + info->SourceKind.ToString() + " reader: Frame source not found");
-        return task_from_result();
-    }
-
-    return create_task(m_mediaCapture->CreateFrameReaderAsync(m_mediaCapture->FrameSources->Lookup(info->Id)))
-        .then([this, info](MediaFrameReader^ frameReader)
-    {
-        EventRegistrationToken token = frameReader->FrameArrived +=
-            ref new TypedEventHandler<MediaFrameReader^, MediaFrameArrivedEventArgs^>(this, &Scenario1_DisplayDepthColorIR::FrameReader_FrameArrived);
-
-        m_logger->Log(info->SourceKind.ToString() + " reader created");
-
-        // Keep track of created reader and event handler so it can be stopped later.
-        m_readers.push_back(std::make_pair(frameReader, token));
-
-        return create_task(frameReader->StartAsync());
-    }).then([this, info](MediaFrameReaderStartStatus status)
-    {
-        if (status != MediaFrameReaderStartStatus::Success)
-        {
-            m_logger->Log("Unable to start " + info->SourceKind.ToString() + "  reader. Error: " + status.ToString());
-        }
-    });
 }
 
 task<bool> Scenario1_DisplayDepthColorIR::TryInitializeMediaCaptureAsync(MediaFrameSourceGroup^ group)

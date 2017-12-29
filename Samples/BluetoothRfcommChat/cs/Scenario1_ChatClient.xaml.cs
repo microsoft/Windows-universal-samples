@@ -10,8 +10,8 @@
 //*********************************************************
 
 using System;
-using System.Threading;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.Rfcomm;
 using Windows.Devices.Enumeration;
@@ -22,10 +22,8 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Navigation;
-using System.ComponentModel;
 using Windows.UI.Xaml.Media.Imaging;
-using System.Collections.ObjectModel;
+using Windows.UI.Xaml.Navigation;
 
 namespace SDKTemplate
 {
@@ -67,10 +65,14 @@ namespace SDKTemplate
 
         private void StopWatcher()
         {
-            if (null != deviceWatcher && (DeviceWatcherStatus.Started == deviceWatcher.Status ||
-                    DeviceWatcherStatus.EnumerationCompleted == deviceWatcher.Status))
+            if (null != deviceWatcher)
             {
-                deviceWatcher.Stop();
+                if ((DeviceWatcherStatus.Started == deviceWatcher.Status ||
+                     DeviceWatcherStatus.EnumerationCompleted == deviceWatcher.Status))
+                {
+                    deviceWatcher.Stop();
+                }
+                deviceWatcher = null;
             }
         }
 
@@ -88,20 +90,39 @@ namespace SDKTemplate
         /// <param name="e">Event data describing the conditions that led to the event.</param>
         private void RunButton_Click(object sender, RoutedEventArgs e)
         {
-            SetDeviceWatcherUI();
-            StartUnpairedDeviceWatcher();
+            if (deviceWatcher == null)
+            {
+                SetDeviceWatcherUI();
+                StartUnpairedDeviceWatcher();
+            }
+            else
+            {
+                ResetMainUI();
+            }
         }
 
         private void SetDeviceWatcherUI()
         {
             // Disable the button while we do async operations so the user can't Run twice.
-            RunButton.IsEnabled = false;
-
-            // Clear any previous messages
-            rootPage.NotifyUser("", NotifyType.StatusMessage);
-
+            RunButton.Content = "Stop";
+            rootPage.NotifyUser("Device watcher started", NotifyType.StatusMessage);
             resultsListView.Visibility = Visibility.Visible;
             resultsListView.IsEnabled = true;
+        }
+
+        private void ResetMainUI()
+        {
+            RunButton.Content = "Start";
+            RunButton.IsEnabled = true;
+            ConnectButton.Visibility = Visibility.Visible;
+            resultsListView.Visibility = Visibility.Visible;
+            resultsListView.IsEnabled = true;
+
+            // Re-set device specific UX
+            ChatBox.Visibility = Visibility.Collapsed;
+            RequestAccessButton.Visibility = Visibility.Collapsed;
+            if (ConversationList.Items != null) ConversationList.Items.Clear();
+            StopWatcher();
         }
 
         private void StartUnpairedDeviceWatcher()
@@ -181,14 +202,7 @@ namespace SDKTemplate
             {
                 await rootPage.Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
                 {
-                    rootPage.NotifyUser(
-                        String.Format("{0} devices found. Watcher {1}.",
-                            ResultCollection.Count,
-                            DeviceWatcherStatus.Aborted == watcher.Status ? "aborted" : "stopped"),
-                        NotifyType.StatusMessage);
                     ResultCollection.Clear();
-
-                    RunButton.IsEnabled = true;
                 });
             });
 
@@ -203,7 +217,6 @@ namespace SDKTemplate
         /// <param name="e"></param>
         private async void ConnectButton_Click(object sender, RoutedEventArgs e)
         {
-
             // Make sure user has selected a device first
             if (resultsListView.SelectedItem != null)
             {
@@ -225,7 +238,6 @@ namespace SDKTemplate
                 rootPage.NotifyUser("This app does not have access to connect to the remote device (please grant access in Settings > Privacy > Other Devices", NotifyType.ErrorMessage);
                 return;
             }
-
             // If not, try to get the Bluetooth device
             try
             {
@@ -234,9 +246,9 @@ namespace SDKTemplate
             catch (Exception ex)
             {
                 rootPage.NotifyUser(ex.Message, NotifyType.ErrorMessage);
+                ResetMainUI();
                 return;
             }
-
             // If we were unable to get a valid Bluetooth device object,
             // it's most likely because the user has specified that all unpaired devices
             // should not be interacted with.
@@ -258,6 +270,7 @@ namespace SDKTemplate
                 rootPage.NotifyUser(
                    "Could not discover the chat service on the remote device",
                    NotifyType.StatusMessage);
+                ResetMainUI();
                 return;
             }
 
@@ -269,10 +282,9 @@ namespace SDKTemplate
                     "The Chat service is not advertising the Service Name attribute (attribute id=0x100). " +
                     "Please verify that you are running the BluetoothRfcommChat server.",
                     NotifyType.ErrorMessage);
-                RunButton.IsEnabled = true;
+                ResetMainUI();
                 return;
             }
-
             var attributeReader = DataReader.FromBuffer(attributes[Constants.SdpServiceNameAttributeId]);
             var attributeType = attributeReader.ReadByte();
             if (attributeType != Constants.SdpServiceNameAttributeType)
@@ -281,16 +293,15 @@ namespace SDKTemplate
                     "The Chat service is using an unexpected format for the Service Name attribute. " +
                     "Please verify that you are running the BluetoothRfcommChat server.",
                     NotifyType.ErrorMessage);
-                RunButton.IsEnabled = true;
+                ResetMainUI();
                 return;
             }
-
             var serviceNameLength = attributeReader.ReadByte();
 
             // The Service Name attribute requires UTF-8 encoding.
             attributeReader.UnicodeEncoding = UnicodeEncoding.Utf8;
 
-            deviceWatcher.Stop();
+            StopWatcher();
 
             lock (this)
             {
@@ -306,19 +317,16 @@ namespace SDKTemplate
                 DataReader chatReader = new DataReader(chatSocket.InputStream);
                 ReceiveStringLoop(chatReader);
             }
-            catch (Exception ex)
+            catch (Exception ex) when ((uint)ex.HResult == 0x80070490) // ERROR_ELEMENT_NOT_FOUND
             {
-                switch ((uint)ex.HResult)
-                {
-                    case (0x80070490): // ERROR_ELEMENT_NOT_FOUND
-                        rootPage.NotifyUser("Please verify that you are running the BluetoothRfcommChat server.", NotifyType.ErrorMessage);
-                        RunButton.IsEnabled = true;
-                        break;
-                    default:
-                        throw;
-                }
+                rootPage.NotifyUser("Please verify that you are running the BluetoothRfcommChat server.", NotifyType.ErrorMessage);
+                ResetMainUI();
             }
-
+            catch (Exception ex) when ((uint)ex.HResult == 0x80072740) // WSAEADDRINUSE
+            {
+                rootPage.NotifyUser("Please verify that there is no other RFCOMM connection to the same device.", NotifyType.ErrorMessage);
+                ResetMainUI();
+            }
         }
 
         /// <summary>
@@ -417,7 +425,10 @@ namespace SDKTemplate
                     if (chatSocket == null)
                     {
                         // Do not print anything here -  the user closed the socket.
-                        // HResult = 0x80072745 - catch this (remote device disconnect) ex = {"An established connection was aborted by the software in your host machine. (Exception from HRESULT: 0x80072745)"}
+                        if ((uint)ex.HResult == 0x80072745)
+                            rootPage.NotifyUser("Disconnect triggered by remote device", NotifyType.StatusMessage);
+                        else if ((uint)ex.HResult == 0x800703E3)
+                            rootPage.NotifyUser("The I/O operation has been aborted because of either a thread exit or an application request.", NotifyType.StatusMessage);
                     }
                     else
                     {
@@ -461,20 +472,12 @@ namespace SDKTemplate
             }
 
             rootPage.NotifyUser(disconnectReason, NotifyType.StatusMessage);
-            ResetUI();
-        }
-
-        private void ResetUI()
-        {
-            RunButton.IsEnabled = true;
-            ConnectButton.Visibility = Visibility.Visible;
-            ChatBox.Visibility = Visibility.Collapsed;
-            RequestAccessButton.Visibility = Visibility.Collapsed;
-            ConversationList.Items.Clear();
+            ResetMainUI();
         }
 
         private void SetChatUI(string serviceName, string deviceName)
         {
+            rootPage.NotifyUser("Connected", NotifyType.StatusMessage);
             ServiceName.Text = "Service Name: " + serviceName;
             DeviceName.Text = "Connected to: " + deviceName;
             RunButton.IsEnabled = false;

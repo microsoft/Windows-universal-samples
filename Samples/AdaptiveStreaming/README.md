@@ -86,11 +86,10 @@ by imposing a lower DesiredMaxBitrate in order to restrict content on unsecured 
 
 Not shown in this scenario, but related in concept:
 
-* Passing a Stream to a manifest in the constructor of AdaptiveMediaSource,
-to replace the first web request for a Uri.
+* Passing a Stream to a manifest in the constructor of AdaptiveMediaSource, to replace the first web request for a Uri.
 * Getting a copy of the downloaded bytes after they have been consumed by the platform in DownloadCompleted.
 
-*Tune the AdaptiveMediaSource download and bitrate switching heuristics**
+**Tune the AdaptiveMediaSource download and bitrate switching heuristics**
 
 This scenario shows ways in which the app can tune the adaptive media source.
 
@@ -104,10 +103,14 @@ only after extensive testing under a range of network conditions.
 
 This scenario shows ways in which the app can consume or create timed metadata.
 
-The AdaptiveMediaSource publishes ID3 tags within TS content
-and any M3U8 comment tags it finds in manifests
-as TimedMetadataTracks.
-This sample shows how to register to consume this data in the app.
+The AdaptiveMediaSource creates TimedMetadataTracks, and fires Cues for
+
+* ID3 tags within TS content
+* emsg boxes within fragmented MP4 content
+* Comment tags found in HLS manifests
+
+This sample shows how to register to consume this data in the app, and demonstrates 
+how SCTE-35 can be parsed from emsg boxes and used to schedule ads.
 
 The captioning system will also publish TimedMetadataTracks for:
 WebVTT segments within an HLS presentation,
@@ -115,13 +118,12 @@ additional files (TTML, SRT or WebVTT) added to the source,
 or 608 captions within SEI NALUs of H.264.
 Although it is not demonstrated in this sample,
 the app can opt to render the captions itself
-by following a process similar to one used in this scenario.
+by following a process similar to one used for data cues in this scenario.
 
 The app can also create a Custom TimedMetadataTrack and add it to a MediaSource.
 This provides a uniform event-based mechanism to consume timed-synchronized information.
 Here we demonstrate playback progress reporting using a custom class TrackingEventCue.
-We re-use this concept in the next sample
-to provide reporting on five ads inserted into a main MediaPlaybackItem.
+We re-use this concept in the next sample to provide reporting on ads inserted into a main MediaPlaybackItem.
 
 **Create advertisements within an AdaptiveMediaSource MediaPlaybackItem**
 
@@ -135,11 +137,37 @@ For each of these ads, and the main content,
 we re-use the Custom TimedMetadataTracks from the Metadata sample
 to raise playback progress events.
 
-**Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
+**Live Seekable Range**
+
+This scenario demonstrates seeking within the MediaTimeRange exposed by 
+`MediaPlayer.MediaPlaybackSession.GetSeekableRanges()`
+This is often called a DVR Window and is used in over the top television (OTT) broadcasts
+and live event streaming.
+
+The sample also demonstrate how to further limit the size of the DVR window 
+using the AdaptiveMediaSource properties:
+
+* MinLiveOffset: The leading edge of the DRV window, as imposed by the content or platform.
+
+* DesiredLiveOffset: The application-controlled leading-edge of the DRV window.
+It allows the app to provide additional back-off from the leading edge of the Content
+to manage Content Distribution Network conditions.
+
+* DesiredSeekableWindowSize: The application-controlled DVR window depth.
+This allows the app to limit how far back into the DVR window the user can seek.
+
+* MaxSeekableWindowSize: The DRV window depth, as imposed by the content.
+
+The sample demonstrates the use of AdaptiveMediaSourceCorrelatedTimes,
+an object which provides the offsets between the platform's media Position,
+the original PresentationTimeStamp within the media segments, and
+the content encoding time (EXT-X-PROGRAM-DATE-TIME in HLS and its equivalent in DASH).
+
+**Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
 
 To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
 
-To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
+To obtain information about Microsoft Visual Studio and the tools for developing Windows apps, go to [Visual Studio](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
 
@@ -169,9 +197,8 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 
 ## Build the sample
 
-1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio?2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
@@ -185,3 +212,4 @@ The next steps depend on whether you just want to deploy the sample or you want 
 ### Deploying and running the sample
 
 - To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or selectDebug > Start Without Debugging. 
+

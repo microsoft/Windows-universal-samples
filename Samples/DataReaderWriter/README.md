@@ -20,11 +20,11 @@ Specifically, this sample shows how to:
 -   Create a memory-backed stream by using the [InMemoryRandomAccessStream](http://msdn.microsoft.com/library/windows/apps/br241720) class and storing strings by using a [DataWriter](http://msdn.microsoft.com/library/windows/apps/br208154) object. When the write operation completes, a [DataReader](http://msdn.microsoft.com/library/windows/apps/br208119) object extracts the stored strings from the stream and displays them.
 -   Open a sequential-access stream over an image by using the [OpenSequentialReadAsync](http://msdn.microsoft.com/library/windows/apps/hh701853) and [ReadBytes](http://msdn.microsoft.com/library/windows/apps/br208139) methods to retrieve and display its binary data.
 
-**Note** The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
+**Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  
 To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
-To obtain information about Microsoft Visual Studio 2015 and the tools for developing Windows apps, go to [Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkID=532422)
+To obtain information about Microsoft Visual Studio and the tools for developing Windows apps, go to [Visual Studio](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
 
@@ -48,8 +48,8 @@ To obtain information about Microsoft Visual Studio 2015 and the tools for devel
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

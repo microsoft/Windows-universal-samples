@@ -72,7 +72,7 @@ Microsoft Passport can be enabled by setting a PIN in Windows Settings under **A
 
 ## System requirements
 
-**Development machine**: Windows 10, Version 1511 and Microsoft Visual Studio 2015 Update 1 with the Windows 10 Build 10586 SDK
+**Development machine**: Windows 10, Version 1511 and Microsoft Visual Studio 2017 Update 1 with the Windows 10 Build 10586 SDK
 
 **Client**: Windows 10, Version 1511
 
@@ -81,8 +81,8 @@ Microsoft Passport can be enabled by setting a PIN in Windows Settings under **A
 ## Build the sample
 
 1. Download and extract the samples ZIP
-2. Start Microsoft Visual Studio 2015 and select **File > Open > Project/Solution**
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample. Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File > Open > Project/Solution**
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample. Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build > Build Solution**.
 5. Repeat with the Server solution in the same directory.
 

@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
+    <ProjectGuid>{0F1B0BDC-6F94-5898-A38C-C7E7B7B4912A}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SpeechAndTTS</RootNamespace>
     <AssemblyName>SpeechAndTTS</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
-    <AppContainerApplication>true</AppContainerApplication>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -97,43 +96,46 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AudioCapturePermissions.cs" />
-    <Compile Include="ContinuousDictationScenario.xaml.cs">
-      <DependentUpon>ContinuousDictationScenario.xaml</DependentUpon>
+    <Compile Include="Scenario_ContinuousDictation.xaml.cs">
+      <DependentUpon>Scenario_ContinuousDictation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ContinuousRecognitionListGrammarScenario.xaml.cs">
-      <DependentUpon>ContinuousRecognitionListGrammarScenario.xaml</DependentUpon>
+    <Compile Include="Scenario_ContinuousRecognitionListGrammar.xaml.cs">
+      <DependentUpon>Scenario_ContinuousRecognitionListGrammar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ContinuousRecognitionSRGSConstraintScenario.xaml.cs">
-      <DependentUpon>ContinuousRecognitionSRGSConstraintScenario.xaml</DependentUpon>
+    <Compile Include="Scenario_ContinuousRecognitionSRGSGrammar.xaml.cs">
+      <DependentUpon>Scenario_ContinuousRecognitionSRGSGrammar.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\..\..\SharedContent\cs\MainPage.xaml.cs">
       <Link>MainPage.xaml.cs</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PredefinedDictationGrammarScenario.xaml.cs">
-      <DependentUpon>PredefinedDictationGrammarScenario.xaml</DependentUpon>
+    <Compile Include="Scenario_PredefinedDictationGrammar.xaml.cs">
+      <DependentUpon>Scenario_PredefinedDictationGrammar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PredefinedWebSearchGrammarScenario.xaml.cs">
-      <DependentUpon>PredefinedWebSearchGrammarScenario.xaml</DependentUpon>
+    <Compile Include="Scenario_PredefinedWebSearchGrammar.xaml.cs">
+      <DependentUpon>Scenario_PredefinedWebSearchGrammar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListConstraintScenario.xaml.cs">
-      <DependentUpon>ListConstraintScenario.xaml</DependentUpon>
+    <Compile Include="Scenario_ListConstraint.xaml.cs">
+      <DependentUpon>Scenario_ListConstraint.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="SampleConfiguration.cs" />
-    <Compile Include="SRGSConstraintScenario.xaml.cs">
-      <DependentUpon>SRGSConstraintScenario.xaml</DependentUpon>
+    <Compile Include="Scenario_SRGSConstraint.xaml.cs">
+      <DependentUpon>Scenario_SRGSConstraint.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PauseAsyncScenario.xaml.cs">
-      <DependentUpon>PauseAsyncScenario.xaml</DependentUpon>
+    <Compile Include="Scenario_PauseAsync.xaml.cs">
+      <DependentUpon>Scenario_PauseAsync.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SynthesizeSSMLScenario.xaml.cs">
-      <DependentUpon>SynthesizeSSMLScenario.xaml</DependentUpon>
+    <Compile Include="Scenario_SynthesizeSSML.xaml.cs">
+      <DependentUpon>Scenario_SynthesizeSSML.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SynthesizeTextScenario.xaml.cs">
-      <DependentUpon>SynthesizeTextScenario.xaml</DependentUpon>
+    <Compile Include="Scenario_SynthesizeTextBoundaries.xaml.cs">
+      <DependentUpon>Scenario_SynthesizeTextBoundaries.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario_SynthesizeText.xaml.cs">
+      <DependentUpon>Scenario_SynthesizeText.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -147,15 +149,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="ContinuousDictationScenario.xaml">
+    <Page Include="..\shared\xaml\Scenario_ContinuousDictation.xaml">
+      <Link>Scenario_ContinuousDictation.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ContinuousRecognitionListGrammarScenario.xaml">
+    <Page Include="..\shared\xaml\Scenario_ContinuousRecognitionListGrammar.xaml">
+      <Link>Scenario_ContinuousRecognitionListGrammar.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ContinuousRecognitionSRGSConstraintScenario.xaml">
+    <Page Include="..\shared\xaml\Scenario_ContinuousRecognitionSRGSGrammar.xaml">
+      <Link>Scenario_ContinuousRecognitionSRGSGrammar.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -164,19 +169,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PredefinedDictationGrammarScenario.xaml">
+    <Page Include="..\shared\xaml\Scenario_PredefinedDictationGrammar.xaml">
+      <Link>Scenario_PredefinedDictationGrammar.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PredefinedWebSearchGrammarScenario.xaml">
+    <Page Include="..\shared\xaml\Scenario_PredefinedWebSearchGrammar.xaml">
+      <Link>Scenario_PredefinedWebSearchGrammar.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ListConstraintScenario.xaml">
+    <Page Include="..\shared\xaml\Scenario_ListConstraint.xaml">
+      <Link>Scenario_ListConstraint.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SRGSConstraintScenario.xaml">
+    <Page Include="..\shared\xaml\Scenario_SRGSConstraint.xaml">
+      <Link>Scenario_SRGSConstraint.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -185,15 +194,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PauseAsyncScenario.xaml">
+    <Page Include="..\shared\xaml\Scenario_PauseAsync.xaml">
+      <Link>Scenario_PauseAsync.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SynthesizeSSMLScenario.xaml">
+    <Page Include="..\shared\xaml\Scenario_SynthesizeSSML.xaml">
+      <Link>Scenario_SynthesizeSSML.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SynthesizeTextScenario.xaml">
+    <Page Include="..\shared\xaml\Scenario_SynthesizeTextBoundaries.xaml">
+      <Link>Scenario_SynthesizeTextBoundaries.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\xaml\Scenario_SynthesizeText.xaml">
+      <Link>Scenario_SynthesizeText.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

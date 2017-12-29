@@ -10,12 +10,14 @@
 //*********************************************************
 
 using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
 using Windows.Media.Capture.Frames;
+using Windows.Media.MediaProperties;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
@@ -84,6 +86,37 @@ namespace SDKTemplate
         private unsafe delegate void TransformScanline(int pixelWidth, byte* inputRowBytes, byte* outputRowBytes);
 
         /// <summary>
+        /// Determines the subtype to request from the MediaFrameReader that will result in
+        /// a frame that can be rendered by ConvertToDisplayableImage.
+        /// </summary>
+        /// <returns>Subtype string to request, or null if subtype is not renderable.</returns>
+        public static string GetSubtypeForFrameReader(MediaFrameSourceKind kind, MediaFrameFormat format)
+        {
+            // Note that media encoding subtypes may differ in case.
+            // https://docs.microsoft.com/en-us/uwp/api/Windows.Media.MediaProperties.MediaEncodingSubtypes
+            string subtype = format.Subtype;
+            switch (kind)
+            {
+                // For color sources, we accept anything and request that it be converted to Bgra8.
+                case MediaFrameSourceKind.Color:
+                    return MediaEncodingSubtypes.Bgra8;
+
+                // The only depth format we can render is D16.
+                case MediaFrameSourceKind.Depth:
+                    return String.Equals(subtype, MediaEncodingSubtypes.D16, StringComparison.OrdinalIgnoreCase) ? subtype : null;
+
+                // The only infrared formats we can render are L8 and L16.
+                case MediaFrameSourceKind.Infrared:
+                    return (String.Equals(subtype, MediaEncodingSubtypes.L8, StringComparison.OrdinalIgnoreCase) ||
+                        String.Equals(subtype, MediaEncodingSubtypes.L16, StringComparison.OrdinalIgnoreCase)) ? subtype : null;
+
+                // No other source kinds are supported by this class.
+                default:
+                    return null;
+            }
+        }
+
+        /// <summary>
         /// Converts a frame to a SoftwareBitmap of a valid format to display in an Image control.
         /// </summary>
         /// <param name="inputFrame">Frame to convert.</param>
@@ -94,44 +127,66 @@ namespace SDKTemplate
             {
                 if (inputBitmap != null)
                 {
-                    if (inputBitmap.BitmapPixelFormat == BitmapPixelFormat.Bgra8 &&
-                        inputBitmap.BitmapAlphaMode == BitmapAlphaMode.Premultiplied)
+                    switch (inputFrame.FrameReference.SourceKind)
                     {
-                        // SoftwareBitmap is already in the correct format for an Image control, so just return a copy.
-                        result = SoftwareBitmap.Copy(inputBitmap);
-                    }
-                    else if (inputBitmap.BitmapPixelFormat == BitmapPixelFormat.Gray16)
-                    {
-                        if (inputFrame.FrameReference.SourceKind == MediaFrameSourceKind.Depth)
-                        {
-                            // Use a special pseudo color to render 16 bits depth frame.
-                            var depthScale = (float)inputFrame.DepthMediaFrame.DepthFormat.DepthScaleInMeters;
-                            result = TransformBitmap(inputBitmap, (w, i, o) => PseudoColorHelper.PseudoColorForDepth(w, i, o, depthScale));
-                        }
-                        else
-                        {
-                            // Use pseudo color to render 16 bits frames.
-                            result = TransformBitmap(inputBitmap, PseudoColorHelper.PseudoColorFor16BitInfrared);
-                        }
-                    }
-                    else if (inputBitmap.BitmapPixelFormat == BitmapPixelFormat.Gray8)
-                    {
-                        // Use pseudo color to render 8 bits frames.
-                        result = TransformBitmap(inputBitmap, PseudoColorHelper.PseudoColorFor8BitInfrared);
-                    }
-                    else
-                    {
-                        try
-                        {
-                            // Convert to Bgra8 Premultiplied SoftwareBitmap, so xaml can display in UI.
-                            result = SoftwareBitmap.Convert(inputBitmap, BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
-                        }
-                        catch (ArgumentException exception)
-                        {
-                            // Conversion of software bitmap format is not supported.  Drop this frame.
-                            System.Diagnostics.Debug.WriteLine(exception.Message);
-                        }
+                        case MediaFrameSourceKind.Color:
+                            // XAML requires Bgra8 with premultiplied alpha.
+                            // We requested Bgra8 from the MediaFrameReader, so all that's
+                            // left is fixing the alpha channel if necessary.
+                            if (inputBitmap.BitmapPixelFormat != BitmapPixelFormat.Bgra8)
+                            {
+                                Debug.WriteLine("Color frame in unexpected format.");
+                            }
+                            else if (inputBitmap.BitmapAlphaMode == BitmapAlphaMode.Premultiplied)
+                            {
+                                // Already in the correct format.
+                                result = SoftwareBitmap.Copy(inputBitmap);
+                            }
+                            else
+                            {
+                                // Convert to premultiplied alpha.
+                                result = SoftwareBitmap.Convert(inputBitmap, BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
+                            }
+                            break;
 
+                        case MediaFrameSourceKind.Depth:
+                            // We requested D16 from the MediaFrameReader, so the frame should
+                            // be in Gray16 format.
+                            if (inputBitmap.BitmapPixelFormat == BitmapPixelFormat.Gray16)
+                            {
+                                // Use a special pseudo color to render 16 bits depth frame.
+                                var depthScale = (float)inputFrame.DepthMediaFrame.DepthFormat.DepthScaleInMeters;
+                                var minReliableDepth = inputFrame.DepthMediaFrame.MinReliableDepth;
+                                var maxReliableDepth = inputFrame.DepthMediaFrame.MaxReliableDepth;
+                                result = TransformBitmap(inputBitmap, (w, i, o) => PseudoColorHelper.PseudoColorForDepth(w, i, o, depthScale, minReliableDepth, maxReliableDepth));
+                            }
+                            else
+                            {
+                                Debug.WriteLine("Depth frame in unexpected format.");
+                            }
+                            break;
+
+                        case MediaFrameSourceKind.Infrared:
+                            // We requested L8 or L16 from the MediaFrameReader, so the frame should
+                            // be in Gray8 or Gray16 format. 
+                            switch (inputBitmap.BitmapPixelFormat)
+                            {
+                                case BitmapPixelFormat.Gray16:
+                                    // Use pseudo color to render 16 bits frames.
+                                    result = TransformBitmap(inputBitmap, PseudoColorHelper.PseudoColorFor16BitInfrared);
+                                    break;
+
+                                case BitmapPixelFormat.Gray8:
+
+                                    // Use pseudo color to render 8 bits frames.
+                                    result = TransformBitmap(inputBitmap, PseudoColorHelper.PseudoColorFor8BitInfrared);
+                                    break;
+
+                                default:
+                                    Debug.WriteLine("Infrared frame in unexpected format.");
+                                    break;
+                            }
+                            break;
                     }
                 }
             }
@@ -297,17 +352,19 @@ namespace SDKTemplate
             /// <summary>
             /// Maps each pixel in a scanline from a 16 bit depth value to a pseudo-color pixel.
             /// </summary>
-            /// /// <param name="pixelWidth">Width of the input scanline, in pixels.</param>
-            /// /// <param name="inputRowBytes">Pointer to the start of the input scanline.</param>
-            /// /// <param name="outputRowBytes">Pointer to the start of the output scanline.</param>
-            /// /// /// <param name="depthScale">Physical distance that corresponds to one unit in the input scanline.</param>
-            public static unsafe void PseudoColorForDepth(int pixelWidth, byte* inputRowBytes, byte* outputRowBytes, float depthScale)
+            /// <param name="pixelWidth">Width of the input scanline, in pixels.</param>
+            /// <param name="inputRowBytes">Pointer to the start of the input scanline.</param>
+            /// <param name="outputRowBytes">Pointer to the start of the output scanline.</param>
+            /// <param name="depthScale">Physical distance that corresponds to one unit in the input scanline.</param>
+            /// <param name="minReliableDepth">Shortest distance at which the sensor can provide reliable measurements.</param>
+            /// <param name="maxReliableDepth">Furthest distance at which the sensor can provide reliable measurements.</param>
+            public static unsafe void PseudoColorForDepth(int pixelWidth, byte* inputRowBytes, byte* outputRowBytes, float depthScale, float minReliableDepth, float maxReliableDepth)
             {
                 // Visualize space in front of your desktop.
-                const float min = 0.5f;  // 0.5 meters
-                const float max = 4.0f;  // 4 meters
-                const float one_min = 1.0f / min;
-                const float range = 1.0f / max - one_min;
+                float minInMeters = minReliableDepth * depthScale;
+                float maxInMeters = maxReliableDepth * depthScale;
+                float one_min = 1.0f / minInMeters;
+                float range = 1.0f / maxInMeters - one_min;
 
                 ushort* inputRow = (ushort*)inputRowBytes;
                 uint* outputRow = (uint*)outputRowBytes;

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>80bfd669-aa83-4537-9611-027cffe0d8af</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{c6978fb6-bc64-498d-97c8-f5b53997e54e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Payload.xaml.cpp" />
+    <ClCompile Include="Scenario1_Setup.xaml.cpp" />
+    <ClCompile Include="Scenario2_Basic.xaml.cpp" />
+    <ClCompile Include="Scenario3_RemoteAssets.xaml.cpp" />
+    <ClCompile Include="Scenario4_TelIdentification.xaml.cpp" />
+    <ClCompile Include="Scenario5_RemoteId.xaml.cpp" />
+    <ClCompile Include="Scenario6_Gifs.xaml.cpp" />
+    <ClCompile Include="Scenario7_Spritesheets.xaml.cpp" />
+    <ClCompile Include="Scenario8_OffsetSpritesheets.xaml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Payload.xaml.h" />
+    <ClInclude Include="Scenario1_Setup.xaml.h" />
+    <ClInclude Include="Scenario2_Basic.xaml.h" />
+    <ClInclude Include="Scenario3_RemoteAssets.xaml.h" />
+    <ClInclude Include="Scenario4_TelIdentification.xaml.h" />
+    <ClInclude Include="Scenario5_RemoteId.xaml.h" />
+    <ClInclude Include="Scenario6_Gifs.xaml.h" />
+    <ClInclude Include="Scenario7_Spritesheets.xaml.h" />
+    <ClInclude Include="Scenario8_OffsetSpritesheets.xaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+    <Page Include="..\shared\Payload.xaml" />
+    <Page Include="..\shared\Scenario1_Setup.xaml" />
+    <Page Include="..\shared\Scenario2_Basic.xaml" />
+    <Page Include="..\shared\Scenario3_RemoteAssets.xaml" />
+    <Page Include="..\shared\Scenario4_TelIdentification.xaml" />
+    <Page Include="..\shared\Scenario5_RemoteId.xaml" />
+    <Page Include="..\shared\Scenario6_Gifs.xaml" />
+    <Page Include="..\shared\Scenario7_Spritesheets.xaml" />
+    <Page Include="..\shared\Scenario8_OffsetSpritesheets.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\Samples\LandscapeImage20.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\Samples\cliff.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\shared\animatedGif.gif">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

@@ -4,19 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
+    <ProjectGuid>{74FE78A3-9027-50D5-8DDF-E17BB1421359}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AudioCreation</RootNamespace>
     <AssemblyName>AudioCreation</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -112,9 +113,6 @@
     <Compile Include="Scenario1_FilePlayback.xaml.cs">
       <DependentUpon>Scenario1_FilePlayback.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario7_RecordPlayback.xaml.cs">
-      <DependentUpon>Scenario7_RecordPlayback.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Scenario2_DeviceCapture.xaml.cs">
       <DependentUpon>Scenario2_DeviceCapture.xaml</DependentUpon>
     </Compile>
@@ -129,6 +127,9 @@
     </Compile>
     <Compile Include="Scenario6_CustomEffects.xaml.cs">
       <DependentUpon>Scenario6_CustomEffects.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario7_RecordPlayback.xaml.cs">
+      <DependentUpon>Scenario7_RecordPlayback.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -147,15 +148,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario7_RecordPlayback.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Scenario4_Submix.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>
-      </SubType>
-    </Page>
     <Page Include="Scenario1_FilePlayback.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>
@@ -171,6 +163,11 @@
       <SubType>
       </SubType>
     </Page>
+    <Page Include="Scenario4_Submix.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>
+      </SubType>
+    </Page>
     <Page Include="Scenario5_InboxEffects.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>
@@ -180,6 +177,10 @@
       <SubType>
       </SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scenario7_RecordPlayback.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="..\..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>

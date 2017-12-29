@@ -23,7 +23,7 @@ namespace SDKTemplate
         {
             Platform::String^ get()
             {
-                return "POS Printer";
+                return "POS Printer C++ Sample";
             }
         }
 
@@ -35,8 +35,20 @@ namespace SDKTemplate
             }
         }
 
+        Windows::Devices::PointOfService::PosPrinter^ Printer = nullptr;
+        Windows::Devices::PointOfService::ClaimedPosPrinter^ ClaimedPrinter = nullptr;
+        bool IsAnImportantTransaction = true;
+        std::function<void(void)> StateChanged;
+
+        void SubscribeToReleaseDeviceRequested();
+        void ReleaseClaimedPrinter();
+        void ReleaseAllPrinters();
+
     private:
         static Platform::Array<Scenario>^ scenariosInner;
+
+        Windows::Foundation::EventRegistrationToken releaseDeviceRequestedToken;
+        void ClaimedPrinter_ReleaseDeviceRequested(Windows::Devices::PointOfService::ClaimedPosPrinter^ sender, Windows::Devices::PointOfService::PosPrinterReleaseDeviceRequestedEventArgs^ args);
     };
 
     public value struct Scenario
@@ -44,4 +56,11 @@ namespace SDKTemplate
         Platform::String^ Title;
         Platform::String^ ClassName;
     };
+
+    namespace DeviceHelpers
+    {
+        // By default, use all connections types.
+        Concurrency::task<Windows::Devices::PointOfService::PosPrinter^> GetFirstReceiptPrinterAsync(
+            Windows::Devices::PointOfService::PosConnectionTypes connectionTypes = Windows::Devices::PointOfService::PosConnectionTypes::All);
+    }
 }

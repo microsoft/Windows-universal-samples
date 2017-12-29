@@ -9,8 +9,6 @@
 //
 //*********************************************************
 
-// Windows Store code
-
 using System;
 using Windows.Devices.Sensors;
 using Windows.UI.Core;

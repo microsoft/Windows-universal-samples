@@ -11,6 +11,10 @@
 
 (function () {
     "use strict";
+
+    var scenarioStartScanButton;
+    var scenarioEndScanButton;
+
     var page = WinJS.UI.Pages.define("/html/scenario1_BasicFunctionality.html", {
 
         // On ready - set button states and add event listeners to the buttons.
@@ -18,15 +22,18 @@
 
             WinJS.log("Click the start scanning button to begin.", "sample", "status");
 
-            document.getElementById("scenarioStartScanButton").addEventListener("click", startReceivingData, false);
-            document.getElementById("scenarioEndScanButton").addEventListener("click", endReceivingData, false);
-            document.getElementById("scenarioStartScanButton").disabled = false;
-            document.getElementById("scenarioEndScanButton").disabled = true;
+            scenarioStartScanButton = document.getElementById("scenarioStartScanButton");
+            scenarioEndScanButton = document.getElementById("scenarioEndScanButton");
+
+            scenarioStartScanButton.addEventListener("click", startReceivingData, false);
+            scenarioEndScanButton.addEventListener("click", endReceivingData, false);
+            scenarioStartScanButton.disabled = false;
+            scenarioEndScanButton.disabled = true;
         },
 
         // On unload - clean up if claimedscanner object is not null.
         unload: function () {
-            if (document.getElementById("scenarioStartScanButton").disabled) {
+            if (scenarioStartScanButton.disabled) {
                 if (_claimedScanner !== null) {
 
                     // Remove event listeners that were added before and close.
@@ -35,7 +42,11 @@
                     _claimedScanner.close();
                     _claimedScanner = null;
                 }
-                _scanner = null;
+
+                if (_scanner !== null) {
+                    _scanner.close();
+                    _scanner = null;
+                }
             }
         }
     });
@@ -43,69 +54,49 @@
     var _scanner = null;
     var _claimedScanner = null;
 
-    // Creates the default barcode scanner and claims it. Once, claimed, it adds event listeners for onDataReceived and releaseDeviceRequested events.
+    // Acquires the default barcode scanner and claims it. Once claimed, it adds event listeners for datareceived and releasedevicerequested events.
     // On error, it logs the error message.
     function startReceivingData() {
+        scenarioStartScanButton.disabled = true;
 
-        // Create the barcode scanner. 
-        WinJS.log("Creating barcode scanner object.", "sample", "status")
+        // Acquire the barcode scanner.
+        WinJS.log("Acquiring barcode scanner object.", "sample", "status")
 
-        var deviceSelector = Windows.Devices.PointOfService.BarcodeScanner.getDeviceSelector();
-        Windows.Devices.Enumeration.DeviceInformation.findAllAsync(deviceSelector, null).then(function (deviceCollection) {
+        SdkSample.getFirstBarcodeScannerAsync().done(function (scanner) {
+            if (scanner) {
+                _scanner = scanner;
 
-            if (deviceCollection === null || deviceCollection.length == 0) {
-                WinJS.log("Barcode scanner not found. Please connect a barcode scanner.", "sample", "error");
-            }
-            else {
-                var deviceSelector = deviceCollection[0].id;
+                // After successful creation, claim the scanner for exclusive use and enable it so that data received events are raised.
+                scanner.claimScannerAsync().done(function (claimedScanner) {
+                    if (claimedScanner) {
+                        _claimedScanner = claimedScanner;
 
-                Windows.Devices.PointOfService.BarcodeScanner.fromIdAsync(deviceSelector).then(function (scanner) {
-                    if (scanner !== null) {
-                        _scanner = scanner;
+                        // Ask the API to decode the data by default. By setting this, API will decode the raw data from the barcode scanner and 
+                        // send the ScanDataLabel and ScanDataType in the DataReceived event
+                        claimedScanner.isDecodeDataEnabled = true;
 
-                        // After successful creation, claim the scanner for exclusive use and enable it so that data reveived events are received.
-                        scanner.claimScannerAsync().done(function (claimedScanner) {
-                            if (claimedScanner !== null) {
-                                _claimedScanner = claimedScanner;
+                        // After successfully claiming, attach the datareceived event handler.
+                        claimedScanner.addEventListener("datareceived", onDataReceived);
 
-                                // Ask the API to decode the data by default. By setting this, API will decode the raw data from the barcode scanner and 
-                                // send the ScanDataLabel and ScanDataType in the DataReceived event
-                                claimedScanner.isDecodeDataEnabled = true;
+                        // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can 
+                        // claim ownsership of the barcode scanner.
+                        claimedScanner.addEventListener("releasedevicerequested", onReleasedeviceRequested);
 
-                                // After successfully claiming, attach the datareceived event handler.
-                                claimedScanner.addEventListener("datareceived", onDataReceived);
-
-                                // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can 
-                                // claim ownsership of the barcode scanner.
-                                claimedScanner.addEventListener("releasedevicerequested", onReleasedeviceRequested);
-
-                                // Enable the scanner.
-                                // Note: If the scanner is not enabled (i.e. EnableAsync not called), attaching the event handler will not be any useful because the API will not fire the event 
-                                // if the claimedScanner has not beed Enabled
-                                claimedScanner.enableAsync().done(function () {
-
-                                    WinJS.log("Ready to scan. Device ID: " + _claimedScanner.deviceId, "sample", "status");
-
-                                    document.getElementById("scenarioStartScanButton").disabled = true;
-                                    document.getElementById("scenarioEndScanButton").disabled = false;
-                                }, function error(e) {
-                                    WinJS.log("Enable barcode scanner failed: " + e.message, "sample", "error")
-                                });
-
-                            } else {
-                                WinJS.log("Claim barcode scanner failed.", "sample", "error");
-                            }
-                        }, function error(e) {
-                            WinJS.log("Claim barcode scanner failed: " + e.message, "sample", "error");
+                        // Enable the scanner.
+                        // Note: If the scanner is not enabled (i.e. enableAsync not called), attaching the event handler will not be any useful because the API will not fire the event 
+                        // if the claimedScanner has not beed Enabled
+                        claimedScanner.enableAsync().done(function () {
+                            WinJS.log("Ready to scan. Device ID: " + _claimedScanner.deviceId, "sample", "status");
+                            scenarioEndScanButton.disabled = false;
                         });
-
                     } else {
-                        WinJS.log("Barcode scanner not found. Please connect a barcode scanner.", "sample", "error");
+                        WinJS.log("Claim barcode scanner failed.", "sample", "error");
+                        scenarioStartScanButton.disabled = false;
                     }
-
-                }, function error(e) {
-                    WinJS.log("Barcode scanner FromIdAsync unsuccessful: " + e.message, "sample", "error");
                 });
+            } else {
+                WinJS.log("Barcode scanner not found. Please connect a barcode scanner.", "sample", "error");
+                scenarioStartScanButton.disabled = false;
             }
         });
     }
@@ -133,7 +124,11 @@
             _claimedScanner.close();
             _claimedScanner = null;
         }
-        _scanner = null;
+
+        if (_scanner !== null) {
+            _scanner.close();
+            _scanner = null;
+        }
 
         // Reset button states
         WinJS.log("Click the start scanning button to begin.", "sample", "status");

@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
+    <ProjectGuid>{7C7B0752-4AC3-5F68-AD77-D31D37D58749}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>BackgroundTask</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -118,6 +118,9 @@
     <Compile Include="Scenario3_ServicingCompleteTask.xaml.cs">
       <DependentUpon>Scenario3_ServicingCompleteTask.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario6_GroupedTask.xaml.cs">
+      <DependentUpon>Scenario6_GroupedTask.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -160,6 +163,12 @@
     </Page>
     <Page Include="..\..\shared\Scenario3_ServicingCompleteTask.xaml">
       <Link>Scenario3_ServicingCompleteTask.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>
+      </SubType>
+    </Page>
+    <Page Include="..\..\shared\Scenario6_GroupedTask.xaml">
+      <Link>Scenario6_GroupedTask.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>
       </SubType>

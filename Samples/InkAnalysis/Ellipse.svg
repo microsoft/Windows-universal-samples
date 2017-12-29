@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<g transform="translate(100, 75) rotate(30)" font-family="Verdana" font-size="20">
+  <ellipse rx="100" ry="50" style="stroke:black; fill:none"/>
+  <g transform="translate(-100, 0) rotate(-30)">
+    <circle r="3" style="stroke:black; fill:black"/>
+    <text x="8" y="10">0</text>
+  </g>
+  <g transform="translate(0, -50) rotate(-30)">
+    <circle r="3" style="stroke:black; fill:black"/>
+    <text x="-10" y="25">1</text>
+  </g>
+  <g transform="translate(100, 0) rotate(-30)">
+    <circle r="3" style="stroke:black; fill:black"/>
+    <text x="-18">2</text>
+  </g>
+  <g transform="translate(0, 50) rotate(-30)">
+    <circle r="3" style="stroke:black; fill:black"/>
+    <text y="-10">3</text>
+  </g>
+</g>
+</svg>

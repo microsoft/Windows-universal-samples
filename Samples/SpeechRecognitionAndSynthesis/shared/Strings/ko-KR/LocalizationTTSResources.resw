@@ -123,18 +123,21 @@
                              xsi:schemaLocation='http://www.w3.org/2001/10/synthesis  http://www.w3.org/TR/speech-synthesis/synthesis.xsd' 
                              xml:lang='ko-KR'&gt;
 
-이것은 음성 발음의 예:
+&lt;mark name='phonetic'/&gt;이것은 음성 발음의 예:
 &lt;phoneme alphabet='x-microsoft-ups' ph='S1 W AA T . CH AX . M AX . S2 K AA L . IH T'&gt; whatchamacallit &lt;/phoneme&gt;.
 
-이것은 날짜의 예:
+&lt;mark name='date'/&gt;이것은 날짜의 예:
 &lt;say-as interpret-as='date' format='mdy'&gt; 04/30/2013 &lt;/say-as&gt;.
 
-이것은 말하는 숫자의 예입니다.
+&lt;mark name='number'/&gt;이것은 말하는 숫자의 예입니다.
 &lt;say-as interpret-as='ordinal'&gt; 4 &lt;/say-as&gt;.
-
+&lt;mark name='end'/&gt;
 &lt;/speak&gt;</value>
   </data>
   <data name="SynthesizeTextDefaultText" xml:space="preserve">
     <value>갈색 게으른 개에 뛰어 빠른 레드 폭스</value>
+  </data>
+  <data name="SynthesizeTextBoundariesDefaultText" xml:space="preserve">
+    <value>음성만 사용 하면 프로그램, 메뉴 열기, 화면에서 단추 및 기타 개체를 클릭 하 고 문서에 텍스트를 받아쓰게 한 다음 전자 메일을 쓰고 보낼 수 있습니다. 단지 당신이 당신의 키보드와 마우스와 더불어 하는 모든 것에 대해 당신의 목소리로 할 수 있다.</value>
   </data>
 </root>

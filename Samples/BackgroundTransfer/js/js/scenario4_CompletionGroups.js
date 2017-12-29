@@ -12,8 +12,12 @@
 (function () {
     "use strict";
 
+    var outputConsole;
+
     var page = WinJS.UI.Pages.define("/html/scenario4_CompletionGroups.html", {
         ready: function (element, options) {
+            outputConsole = document.getElementById("outputConsole");
+
             // Assign event listeners for each button on click.
             id("startDownloadsButton").addEventListener("click", startDownloadsButtonClick, false);
         }
@@ -107,7 +111,6 @@
 
     // Print helper function.
     function printLog(/*@type(String)*/txt) {
-        var outputConsole = document.getElementById("outputConsole");
         outputConsole.innerHTML += txt;
     }
 

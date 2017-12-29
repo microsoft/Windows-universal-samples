@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
+    <ProjectGuid>{2A07457F-AEE3-596F-BC0B-D52BA2326912}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SimpleInk</RootNamespace>
     <AssemblyName>SimpleInk</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -128,6 +128,18 @@
     <Compile Include="Scenario3.xaml.cs">
       <DependentUpon>Scenario3.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario9.xaml.cs">
+      <DependentUpon>Scenario9.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario10.xaml.cs">
+      <DependentUpon>Scenario10.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario11.xaml.cs">
+      <DependentUpon>Scenario11.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario12.xaml.cs">
+      <DependentUpon>Scenario12.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -145,11 +157,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1.xaml">
+    <Page Include="..\shared\Scenario1.xaml">
+      <Link>Scenario1.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2.xaml">
+    <Page Include="..\shared\Scenario2.xaml">
+      <Link>Scenario2.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -158,32 +172,67 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario8.xaml">
+    <Page Include="..\shared\Scenario8.xaml">
+      <Link>Scenario8.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario7.xaml">
+    <Page Include="..\shared\Scenario7.xaml">
+      <Link>Scenario7.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario6.xaml">
+    <Page Include="..\shared\Scenario6.xaml">
+      <Link>Scenario6.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario5.xaml">
+    <Page Include="..\shared\Scenario5.xaml">
+      <Link>Scenario5.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario4.xaml">
+    <Page Include="..\shared\Scenario4.xaml">
+      <Link>Scenario4.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3.xaml">
+    <Page Include="..\shared\Scenario3.xaml">
+      <Link>Scenario3.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\shared\Scenario9.xaml">
+      <Link>Scenario9.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\shared\Scenario10.xaml">
+      <Link>Scenario10.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\shared\Scenario11.xaml">
+      <Link>Scenario11.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\shared\Scenario12.xaml">
+      <Link>Scenario12.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\shared\ButtonIconFill.png">
+      <Link>Assets\ButtonIconFill.png</Link>
+    </Content>
+    <Content Include="..\shared\ButtonIconOutline.png">
+      <Link>Assets\ButtonIconOutline.png</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Link>Assets\microsoft-sdk.png</Link>
+    </Content>
     <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>

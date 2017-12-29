@@ -16,13 +16,17 @@ Shows how to use the universal map control ([MapControl]( https://msdn.microsoft
 
 Specifically, this sample shows:
 
-* MapControl Basics: adjusting the ZoomLevel, Heading, DesiredPtich, and map style
-* Adding points of interest on the map: PushPins, images, and shapes
+* MapControl Basics: adjusting the ZoomLevel, Heading, DesiredPitch, map style, and map projection
+* Adding points of interest on the map: PushPins, images, billboards, 3D models and shapes
+* Adding multiple layers (points of interests on the map) on the map
 * Adding XAML overlays on the map
 * Showing 3D locations in MapControl
 * Showing Streetside experience within MapControl
 * Launching Maps using URI Schemes
 * Displaying points of interest with clustering
+* Finding and downloading Offline Maps
+* Customizing the map appearance by using style sheets
+* Customizing the map elements appearance more deeply by using style entries and states
 
 This sample is written in XAML.
 
@@ -41,8 +45,8 @@ This sample is written in XAML.
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{f710b9fd-4e6b-42d7-a99a-6d48888d48b0}</ProjectGuid>
+    <ProjectGuid>{b614fb68-d25f-557c-bc9c-f8fb378354ee}</ProjectGuid>
     <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.16299.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -42,37 +42,37 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -144,15 +144,16 @@
     <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h">
       <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="..\..\..\SharedContent\cpp\DeviceHelpers.h" />
     <ClInclude Include="SampleConfiguration.h" />
-    <ClInclude Include="Scenario1_ReceiptPrinter.xaml.h">
-      <DependentUpon>Scenario1_ReceiptPrinter.xaml</DependentUpon>
+    <ClInclude Include="Scenario1_FindClaimEnable.xaml.h">
+      <DependentUpon>..\shared\Scenario1_FindClaimEnable.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scenario2_ErrorHandling.xaml.h">
-      <DependentUpon>Scenario2_ErrorHandling.xaml</DependentUpon>
+    <ClInclude Include="Scenario2_PrintReceipt.xaml.h">
+      <DependentUpon>..\shared\Scenario2_PrintReceipt.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scenario3_MultipleReceipt.xaml.h">
-      <DependentUpon>Scenario3_MultipleReceipt.xaml</DependentUpon>
+    <ClInclude Include="Scenario3_MultipleClaims.xaml.h">
+      <DependentUpon>..\shared\Scenario3_MultipleClaims.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -162,9 +163,9 @@
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_ReceiptPrinter.xaml" />
-    <Page Include="Scenario2_ErrorHandling.xaml" />
-    <Page Include="Scenario3_MultipleReceipt.xaml" />
+    <Page Include="..\shared\Scenario1_FindClaimEnable.xaml" />
+    <Page Include="..\shared\Scenario2_PrintReceipt.xaml" />
+    <Page Include="..\shared\Scenario3_MultipleClaims.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -190,17 +191,20 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
-    <ClCompile Include="Scenario1_ReceiptPrinter.xaml.cpp">
-      <DependentUpon>Scenario1_ReceiptPrinter.xaml</DependentUpon>
+    <ClCompile Include="Scenario1_FindClaimEnable.xaml.cpp">
+      <DependentUpon>..\shared\Scenario1_FindClaimEnable.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario2_ErrorHandling.xaml.cpp">
-      <DependentUpon>Scenario2_ErrorHandling.xaml</DependentUpon>
+    <ClCompile Include="Scenario2_PrintReceipt.xaml.cpp">
+      <DependentUpon>..\shared\Scenario2_PrintReceipt.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario3_MultipleReceipt.xaml.cpp">
-      <DependentUpon>Scenario3_MultipleReceipt.xaml</DependentUpon>
+    <ClCompile Include="Scenario3_MultipleClaims.xaml.cpp">
+      <DependentUpon>..\shared\Scenario3_MultipleClaims.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\Samples\coffee-logo.png">
+      <Link>Assets\coffee-logo.png</Link>
+    </Image>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Image>
