@@ -118,6 +118,9 @@
     <Compile Include="Scenario5_RandomAccess.xaml.cs">
       <DependentUpon>Scenario5_RandomAccess.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario6_RecoverableErrors.xaml.cs">
+      <DependentUpon>Scenario6_RecoverableErrors.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -157,6 +160,11 @@
     </Page>
     <Page Include="..\..\shared\Scenario5_RandomAccess.xaml">
       <Link>Scenario5_RandomAccess.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\shared\Scenario6_RecoverableErrors.xaml">
+      <Link>Scenario6_RecoverableErrors.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

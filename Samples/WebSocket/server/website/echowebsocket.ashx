@@ -1,17 +1,26 @@
-﻿<%@ WebHandler Language="C#" Class="EchoWebSocket" %>
+﻿<!--*********************************************************
+ Copyright (c) Microsoft. All rights reserved.
+ This code is licensed under the MIT License (MIT).
+ THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+ ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+ IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//********************************************************* -->
+
+<%@ WebHandler Language="C#" Class="EchoWebSocket" %>
 
 // This define is needed to enable System.Diagnostics.Trace methods. For more information go to:
 // http://msdn.microsoft.com/en-us/library/system.diagnostics.trace(v=vs.110).aspx
 #define TRACE
 
 using System;
-using System.Web;
 using System.Net.WebSockets;
-using System.Web.WebSockets;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.WebSockets;
 
 public class EchoWebSocket : IHttpHandler {
     private const int MaxBufferSize = 64 * 1024;

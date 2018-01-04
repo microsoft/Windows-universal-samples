@@ -601,6 +601,7 @@ Concurrency::task<void> SessionWrapper::AddStreamSocketListenerAsync(uint16 port
         try
         {
             // Rethrow exceptions from async task in case AddStreamSocketListenerAsync failed
+            // This may happen if the same TCP port is used multiple times
             finalTask.get();
         }
         catch (Exception^ ex)
@@ -649,6 +650,7 @@ Concurrency::task<void> SessionWrapper::AddDatagramSocketAsync(uint16 port)
         try
         {
             // Rethrow exceptions from async task in case AddDatagramSocketAsync failed
+            // This may happen if the same UDP port is used multiple times
             finalTask.get();
         }
         catch (Exception^ ex)
@@ -880,7 +882,7 @@ task<void> SocketWrapper::SendMessageAsync(String ^ message)
     if (_writer == nullptr)
     {
         _manager->NotifyUser("Socket is unable to send messages (receive only socket).", NotifyType::ErrorMessage);
-        return create_task([]() { return; });
+        return task_from_result();
     }
     else
     {

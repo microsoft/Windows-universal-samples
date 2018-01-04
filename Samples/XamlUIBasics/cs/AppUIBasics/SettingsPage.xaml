@@ -81,6 +81,11 @@
                     <Paragraph>
                         <LineBreak />Copyright (c) Microsoft Corporation. All rights reserved.
                     </Paragraph>
+                    <Paragraph Margin="0,10,0,10">
+                        <Hyperlink NavigateUri="https://go.microsoft.com/fwlink/?LinkId=822631">Microsoft Services Agreement</Hyperlink> ,
+                        <Hyperlink NavigateUri="https://go.microsoft.com/fwlink/?LinkId=521839">Microsoft Privacy Statement</Hyperlink>
+                    </Paragraph>
+
                 </RichTextBlock>
             </StackPanel>
         </ScrollViewer>

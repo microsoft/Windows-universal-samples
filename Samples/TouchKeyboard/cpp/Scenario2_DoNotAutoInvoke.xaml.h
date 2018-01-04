@@ -26,8 +26,7 @@ namespace SDKTemplate
         Scenario2_DoNotAutoInvoke();
 
     private:
-        void OnFocusClick(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-        void OnAutoInvokedChecked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-        void OnAutoInvokedUnchecked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void OnAutoInvokedClicked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void UpdateAutoInvokeState();
     };
 }

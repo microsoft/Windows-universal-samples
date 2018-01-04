@@ -14,23 +14,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="KeyboardDisabledTextBlock.xaml.cpp" />
+    <ClCompile Include="KeyboardEnabledTextBlock.xaml.cpp" />
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="Scenario1_Launch.xaml.cpp" />
-    <ClCompile Include="Scenario2_DoNotAutoInvoke.xaml.cpp" />
+    <ClCompile Include="Scenario2_ShowHideEvents.xaml.cpp" />
+    <ClCompile Include="Scenario3_ShowHideMethods.xaml.cpp" />
     <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp" />
     <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
-    <ClCompile Include="NonTouchableTextBlock.xaml.cpp" />
-    <ClCompile Include="TouchableTextBlock.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="KeyboardDisabledTextBlock.xaml.h" />
+    <ClInclude Include="KeyboardEnabledTextBlock.xaml.h" />
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_Launch.xaml.h" />
-    <ClInclude Include="Scenario2_DoNotAutoInvoke.xaml.h" />
-    <ClInclude Include="NonTouchableTextBlock.xaml.h" />
+    <ClInclude Include="Scenario2_ShowHideEvents.xaml.h" />
+    <ClInclude Include="Scenario3_ShowHideMethods.xaml.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
-    <ClInclude Include="TouchableTextBlock.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -40,10 +42,9 @@
       <Filter>Styles</Filter>
     </Page>
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
-    <Page Include="..\Shared\NonTouchableTextBlock.xaml" />
     <Page Include="..\Shared\Scenario1_Launch.xaml" />
-    <Page Include="..\Shared\Scenario2_DoNotAutoInvoke.xaml" />
-    <Page Include="..\Shared\TouchableTextBlock.xaml" />
+    <Page Include="..\Shared\Scenario2_ShowHideEvents.xaml" />
+    <Page Include="..\Shared\Scenario3_ShowHideMethods.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">

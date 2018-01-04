@@ -151,6 +151,9 @@
     <ClInclude Include="Scenario2_Binary.xaml.h">
       <DependentUpon>..\shared\Scenario2_Binary.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario3_ClientAuthentication.xaml.h">
+      <DependentUpon>..\shared\Scenario3_ClientAuthentication.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
@@ -161,6 +164,7 @@
     </Page>
     <Page Include="..\shared\Scenario1_UTF8.xaml" />
     <Page Include="..\shared\Scenario2_Binary.xaml" />
+    <Page Include="..\shared\Scenario3_ClientAuthentication.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -192,6 +196,9 @@
     <ClCompile Include="Scenario2_Binary.xaml.cpp">
       <DependentUpon>..\shared\Scenario2_Binary.xaml</DependentUpon>
     </ClCompile>
+    <ClCompile Include="Scenario3_ClientAuthentication.xaml.cpp">
+      <DependentUpon>..\shared\Scenario3_ClientAuthentication.xaml</DependentUpon>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
@@ -215,6 +222,12 @@
     <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\shared\clientCert.pfx">
+      <Link>Assets\clientCert.pfx</Link>
+      <DeploymentContent>true</DeploymentContent>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

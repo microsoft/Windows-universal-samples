@@ -259,6 +259,7 @@ void Scenario1::OnDisconnect()
     rootPage->NotifyUser("Closing", NotifyType::StatusMessage);
     CloseSocket();
     SetBusy(false);
+    rootPage->NotifyUser("Closed", NotifyType::StatusMessage);
 }
 
 // The method may be triggered remotely by the server sending unsolicited close frame or locally by Close()/delete operator.

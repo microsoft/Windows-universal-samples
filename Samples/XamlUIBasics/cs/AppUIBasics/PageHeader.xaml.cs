@@ -150,5 +150,10 @@ namespace AppUIBasics
         {
             ToggleThemeAction?.Invoke();
         }
+
+        private void KeyboardAccelerator_Invoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+        {
+            controlsSearchBox.Focus(FocusState.Keyboard);
+        }
     }
 }

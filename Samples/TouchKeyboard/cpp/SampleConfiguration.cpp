@@ -17,6 +17,7 @@ using namespace SDKTemplate;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
-    { "Launch Touch Keyboard", "SDKTemplate.Scenario1_Launch" },
-    { "Disable auto-invoke", "SDKTemplate.Scenario2_DoNotAutoInvoke" }
+    { "Display touch keyboard automatically", "SDKTemplate.Scenario1_Launch" },
+    { "Listen for Show/Hide events", "SDKTemplate.Scenario2_ShowHideEvents" },
+    { "Programmatically Show/Hide\nthe touch keyboard", "SDKTemplate.Scenario3_ShowHideMethods" }
 };

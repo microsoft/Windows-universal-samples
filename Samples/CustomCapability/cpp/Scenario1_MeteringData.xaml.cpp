@@ -23,7 +23,7 @@ using namespace Windows::UI::Xaml::Controls::Primitives;
 MeteringData::MeteringData()
 {
     InitializeComponent();
-    ViewModel = ref new ServiceViewModel();
+    ViewModel = ServiceViewModel::Current;
 }
 
 void SDKTemplate::MeteringData::button_Click_StartMetering(Object^ sender, RoutedEventArgs^ e)

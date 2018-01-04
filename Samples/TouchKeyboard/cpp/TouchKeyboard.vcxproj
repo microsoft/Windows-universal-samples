@@ -195,14 +195,11 @@
     <ClInclude Include="Scenario1_Launch.xaml.h">
       <DependentUpon>..\Shared\Scenario1_Launch.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scenario2_DoNotAutoInvoke.xaml.h">
-      <DependentUpon>..\Shared\Scenario2_DoNotAutoInvoke.xaml</DependentUpon>
+    <ClInclude Include="Scenario2_ShowHideEvents.xaml.h">
+      <DependentUpon>..\Shared\Scenario2_ShowHideEvents.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="KeyboardDisabledTextBlock.xaml.h">
-      <DependentUpon>..\Shared\KeyboardDisabledTextBlock.xaml</DependentUpon>
-    </ClInclude>
-    <ClInclude Include="KeyboardEnabledTextBlock.xaml.h">
-      <DependentUpon>..\Shared\KeyboardEnabledTextBlock.xaml</DependentUpon>
+    <ClInclude Include="Scenario3_ShowHideMethods.xaml.h">
+      <DependentUpon>..\Shared\Scenario3_ShowHideMethods.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,13 +209,12 @@
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\Shared\KeyboardDisabledTextBlock.xaml" />
     <Page Include="..\Shared\Scenario1_Launch.xaml" />
-    <Page Include="..\Shared\Scenario2_DoNotAutoInvoke.xaml" />
+    <Page Include="..\Shared\Scenario2_ShowHideEvents.xaml" />
+    <Page Include="..\Shared\Scenario3_ShowHideMethods.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
-    <Page Include="..\Shared\KeyboardEnabledTextBlock.xaml" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -232,9 +228,6 @@
     <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp">
       <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="KeyboardDisabledTextBlock.xaml.cpp">
-      <DependentUpon>..\Shared\KeyboardDisabledTextBlock.xaml</DependentUpon>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -247,11 +240,11 @@
     <ClCompile Include="Scenario1_Launch.xaml.cpp">
       <DependentUpon>..\Shared\Scenario1_Launch.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario2_DoNotAutoInvoke.xaml.cpp">
-      <DependentUpon>..\Shared\Scenario2_DoNotAutoInvoke.xaml</DependentUpon>
+    <ClCompile Include="Scenario2_ShowHideEvents.xaml.cpp">
+      <DependentUpon>..\Shared\Scenario2_ShowHideEvents.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="KeyboardEnabledTextBlock.xaml.cpp">
-      <DependentUpon>..\Shared\KeyboardEnabledTextBlock.xaml</DependentUpon>
+    <ClCompile Include="Scenario3_ShowHideMethods.xaml.cpp">
+      <DependentUpon>..\Shared\Scenario3_ShowHideMethods.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

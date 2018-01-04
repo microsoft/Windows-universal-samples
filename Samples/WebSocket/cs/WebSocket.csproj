@@ -88,6 +88,10 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="..\shared\clientCert.pfx">
+      <Link>Assets\clientCert.pfx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +112,9 @@
     </Compile>
     <Compile Include="Scenario2_Binary.xaml.cs">
       <DependentUpon>Scenario2_Binary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario3_ClientAuthentication.xaml.cs">
+      <DependentUpon>Scenario3_ClientAuthentication.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +145,11 @@
     </Page>
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario3_ClientAuthentication.xaml">
+      <Link>Scenario3_ClientAuthentication.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

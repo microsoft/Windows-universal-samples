@@ -162,12 +162,12 @@ namespace SDKTemplate
 
         private async void OnDownloadProgress(IAsyncOperationWithProgress<DownloadOperation, DownloadOperation> sender, DownloadOperation progress)
         {
+            // We capture a snapshot of DownloadOperation.Progress because
+            // it is is updated in real-time while the operation is ongoing.
+            BackgroundDownloadProgress currentProgress = progress.Progress;
+
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                // We capture a snapshot of DownloadOperation.Progress because
-                // it is is updated in real-time while the operation is ongoing.
-                BackgroundDownloadProgress currentProgress = progress.Progress;
-
                 // Prepare the progress message to display in the UI.
                 ulong percent = 100;
                 if (currentProgress.TotalBytesToReceive > 0)
@@ -233,7 +233,7 @@ namespace SDKTemplate
                 return;
             }
 
-            var picturesLibrary = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
+            StorageFolder picturesLibrary = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
             StorageFile destinationFile;
             try
             {

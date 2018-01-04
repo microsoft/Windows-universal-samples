@@ -163,12 +163,12 @@ String^ Scenario5_RandomAccess::FormatDownloadedRanges(IIterable<BackgroundTrans
 
 void Scenario5_RandomAccess::OnDownloadProgress(IAsyncOperationWithProgress<DownloadOperation^, DownloadOperation^>^ sender, DownloadOperation^ progress)
 {
-    Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, progress]()
-    {
-        // We capture a snapshot of DownloadOperation.Progress because
-        // it is is updated in real-time while the operation is ongoing.
-        BackgroundDownloadProgress currentProgress = progress->Progress;
+    // We capture a snapshot of DownloadOperation.Progress because
+    // it is is updated in real-time while the operation is ongoing.
+    BackgroundDownloadProgress currentProgress = progress->Progress;
 
+    Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([this, currentProgress]()
+    {
         // Prepare the progress message to display in the UI.
         uint64_t percent = 100;
         if (currentProgress.TotalBytesToReceive > 0)

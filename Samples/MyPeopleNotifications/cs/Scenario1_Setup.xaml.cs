@@ -69,11 +69,12 @@ namespace SDKTemplate
                 return;
             }
 
-            // Only contacts that appear on the taskbar will get notifications.
-            // Give a gentle warning if it looks like we may have gone into the overflow.
+            // It may not be obvious to the user that a contact was pinned if it goes into the overflow.
+            // If it looks like we may have gone into the overflow, notify the user that the pin was successful
+            // and the contact can still receive notifications.
             if ((await pinnedContactManager.GetPinnedContactIdsAsync()).ContactIds.Count > 3)
             {
-                rootPage.NotifyUser("The contact must appear on the taskbar, and not in the overflow, to receive notifications.", NotifyType.StatusMessage);
+                rootPage.NotifyUser("The contact was pinned, but may appear in the overflow. Contacts in the overflow can still receive notifications.", NotifyType.StatusMessage);
             }
         }
 

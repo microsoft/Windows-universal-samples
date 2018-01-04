@@ -160,6 +160,9 @@
     <ClInclude Include="Scenario5_RandomAccess.xaml.h">
       <DependentUpon>..\..\shared\Scenario5_RandomAccess.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario6_RecoverableErrors.xaml.h">
+      <DependentUpon>..\..\shared\Scenario6_RecoverableErrors.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\..\SharedContent\xaml\App.xaml">
@@ -173,6 +176,7 @@
     <Page Include="..\..\shared\Scenario3_Notifications.xaml" />
     <Page Include="..\..\shared\Scenario4_CompletionGroups.xaml" />
     <Page Include="..\..\shared\Scenario5_RandomAccess.xaml" />
+    <Page Include="..\..\shared\Scenario6_RecoverableErrors.xaml" />
     <Page Include="..\..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -212,6 +216,9 @@
     </ClCompile>
     <ClCompile Include="Scenario5_RandomAccess.xaml.cpp">
       <DependentUpon>..\..\shared\Scenario5_RandomAccess.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario6_RecoverableErrors.xaml.cpp">
+      <DependentUpon>..\..\shared\Scenario6_RecoverableErrors.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

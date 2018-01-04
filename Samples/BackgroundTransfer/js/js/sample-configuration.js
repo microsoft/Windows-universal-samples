@@ -18,7 +18,8 @@
         { url: "/html/scenario2_Upload.html", title: "File Upload" },
         { url: "/html/scenario3_Notifications.html", title: "Completion Notifications" },
         { url: "/html/scenario4_CompletionGroups.html", title: "Completion Groups" },
-        { url: "/html/scenario5_RandomAccess.html", title: "Random Access" }
+        { url: "/html/scenario5_RandomAccess.html", title: "Random Access" },
+        { url: "/html/scenario6_RecoverableErrors.html", title: "Recoverable Errors" }
     ];
 
     // Look up the name for an enumeration member.

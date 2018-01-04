@@ -19,7 +19,8 @@
 
     var scenarios = [
         { url: "/html/scenario1-utf8.html", title: "UTF-8 text messages" },
-        { url: "/html/scenario2-binary.html", title: "Binary data stream" }
+        { url: "/html/scenario2-binary.html", title: "Binary data stream" },
+        { url: "/html/scenario3-clientCertificate.html", title: "Client certificate" }
     ];
 
     // Look up the name for an enumeration member.

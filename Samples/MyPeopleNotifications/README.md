@@ -31,6 +31,9 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
+### Samples
+[ContactPanel] (../ContactPanel)
+
 ### Notifications
 
 [Notifications](/Samples/Notifications)  

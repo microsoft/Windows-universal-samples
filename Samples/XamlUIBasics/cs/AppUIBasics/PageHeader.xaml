@@ -145,7 +145,11 @@
                     QuerySubmitted="OnControlsSearchBoxQuerySubmitted"
                     RequestedTheme="Light"
                     TextChanged="OnControlsSearchBoxTextChanged"
-                    XYFocusLeft="{x:Bind ThemeButton}" />
+                    XYFocusLeft="{x:Bind ThemeButton}" >
+                    <AutoSuggestBox.KeyboardAccelerators>
+                        <KeyboardAccelerator Invoked="KeyboardAccelerator_Invoked" Key="E" Modifiers="Control"/>
+                    </AutoSuggestBox.KeyboardAccelerators>
+                </AutoSuggestBox>
                 <Button
                     x:Name="searchButton"
                     Style="{StaticResource TextBlockButtonStyle}"

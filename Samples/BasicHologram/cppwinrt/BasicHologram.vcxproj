@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.props" Condition="Exists('packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.props')" />
-  <Import Project="..\packages\cppwinrt.2017.2.28.3\build\native\cppwinrt.props" Condition="Exists('..\packages\cppwinrt.2017.2.28.3\build\native\cppwinrt.props')" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7e248c38-8f0d-4078-8548-88afd26d6352}</ProjectGuid>
     <Keyword>HolographicApp</Keyword>
@@ -80,6 +79,7 @@
       <AdditionalDependencies>d2d1.lib; d3d11.lib; dxgi.lib; dwrite.lib; windowscodecs.lib; %(AdditionalDependencies); </AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories); $(VCInstallDir)\lib\store; $(VCInstallDir)\lib</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>mincore.lib;kernel32.lib;ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
     <ClCompile>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -88,6 +88,7 @@
       <AdditionalOptions>/bigobj /await /std:c++latest  %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <CompileAsWinRT>false</CompileAsWinRT>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -95,6 +96,7 @@
       <AdditionalDependencies>d2d1.lib; d3d11.lib; dxgi.lib; dwrite.lib; windowscodecs.lib; %(AdditionalDependencies); </AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories); $(VCInstallDir)\lib\store; $(VCInstallDir)\lib</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>mincore.lib;kernel32.lib;ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
     <ClCompile>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -103,6 +105,7 @@
       <AdditionalOptions>/bigobj /await /std:c++latest  %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <CompileAsWinRT>false</CompileAsWinRT>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,6 +113,7 @@
       <AdditionalDependencies>d2d1.lib; d3d11.lib; dxgi.lib; dwrite.lib; windowscodecs.lib; %(AdditionalDependencies); </AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories); $(VCInstallDir)\lib\store\amd64; $(VCInstallDir)\lib\amd64</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>mincore.lib;kernel32.lib;ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
     <ClCompile>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -118,6 +122,7 @@
       <AdditionalOptions>/bigobj /await /std:c++latest  %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <CompileAsWinRT>false</CompileAsWinRT>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -125,6 +130,7 @@
       <AdditionalDependencies>d2d1.lib; d3d11.lib; dxgi.lib; dwrite.lib; windowscodecs.lib; %(AdditionalDependencies); </AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories); $(VCInstallDir)\lib\store\amd64; $(VCInstallDir)\lib\amd64</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>mincore.lib;kernel32.lib;ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
     <ClCompile>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -133,6 +139,7 @@
       <AdditionalOptions>/bigobj /await /std:c++latest  %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <CompileAsWinRT>false</CompileAsWinRT>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -211,13 +218,11 @@
     <Import Project="$(VSINSTALLDIR)\Common7\IDE\Extensions\Microsoft\VsGraphics\ImageContentTask.targets" />
     <Import Project="$(VSINSTALLDIR)\Common7\IDE\Extensions\Microsoft\VsGraphics\MeshContentTask.targets" />
     <Import Project="$(VSINSTALLDIR)\Common7\IDE\Extensions\Microsoft\VsGraphics\ShaderGraphContentTask.targets" />
+    <Import Project="packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.targets" Condition="Exists('packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.targets')" />
   </ImportGroup>
   <PropertyGroup>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);packages\cppwinrt.2017.10.13.1\build\native\include</IncludePath>
   </PropertyGroup>
-  <ImportGroup Label="NuGet Packages">
-    <Import Project="packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.targets" Condition="Exists('packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.targets')" />
-  </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>

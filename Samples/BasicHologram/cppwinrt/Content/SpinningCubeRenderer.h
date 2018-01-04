@@ -38,7 +38,7 @@ namespace BasicHologram
 
         // System resources for cube geometry.
         ModelConstantBuffer                             m_modelConstantBufferData;
-        uint32                                          m_indexCount = 0;
+        uint32_t                                        m_indexCount = 0;
 
         // Variables used with the rendering loop.
         bool                                            m_loadingComplete = false;

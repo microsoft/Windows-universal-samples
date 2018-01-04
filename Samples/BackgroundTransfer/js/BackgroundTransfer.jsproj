@@ -86,6 +86,7 @@
     <Content Include="html\scenario3_Notifications.html" />
     <Content Include="html\scenario4_CompletionGroups.html" />
     <Content Include="html\scenario5_RandomAccess.html" />
+    <Content Include="html\scenario6_RecoverableErrors.html" />
     <Content Include="js\completionGroupBackgroundTask.js" />
     <Content Include="js\sample-configuration.js" />
     <Content Include="js\scenario1_Download.js" />
@@ -93,6 +94,7 @@
     <Content Include="js\scenario3_Notifications.js" />
     <Content Include="js\scenario4_CompletionGroups.js" />
     <Content Include="js\scenario5_RandomAccess.js" />
+    <Content Include="js\scenario6_RecoverableErrors.js" />
     <Content Include="..\..\..\SharedContent\js\Microsoft.WinJS\css\ui-dark.css">
       <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>
     </Content>

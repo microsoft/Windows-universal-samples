@@ -1,6 +1,6 @@
 #pragma once
 
-#include "RpcClient.h"
+#include "RpcClientApi.h"
 #include <memory>
 
 namespace SDKTemplate
@@ -9,10 +9,10 @@ namespace SDKTemplate
     public ref class ServiceViewModel sealed : Windows::UI::Xaml::Data::INotifyPropertyChanged
     {
     public:
-        ServiceViewModel();
         void StartMetering(int sampleRate);
         void SetSamplePeriod(int rate);
         void StopMetering();
+        static property ServiceViewModel^ Current {ServiceViewModel^ get(); };
         property Platform::String^ ExpectedRpcCallbackRate 
         {
             Platform::String^ get();
@@ -51,13 +51,16 @@ namespace SDKTemplate
         virtual event Windows::UI::Xaml::Data::PropertyChangedEventHandler^ PropertyChanged;
 
     private:
+        ServiceViewModel();
+        static ServiceViewModel^ _Current;
         volatile bool meteringOn;
+        bool meteringOnWhileSuspension;
         Windows::UI::Core::ICoreDispatcher^ dispatcher;
         int samplePeriod;
         ULARGE_INTEGER lastUpdateTime;
         __int64 rpcDataCountOld = 0;
         unsigned int sampleRefreshCount = 0;
-        std::unique_ptr<RpcClient> rpcclient;
+        RPC_CLIENT_HANDLE rpcclient;
         bool stopMeteringRequested;
         bool NotifyIfAnyError(__int64 errCode);
 
@@ -71,6 +74,8 @@ namespace SDKTemplate
         double sliderValue;
 
         void NotifyPropertyChanged(Platform::String^ prop);
+        void ServiceViewModel::SuspendMeteringService(Object^, Windows::ApplicationModel::SuspendingEventArgs^);
+        void ServiceViewModel::ResumeMeteringService(Object^, Object^);
 
         Platform::Array<__int64>^ sampleArray;
     };

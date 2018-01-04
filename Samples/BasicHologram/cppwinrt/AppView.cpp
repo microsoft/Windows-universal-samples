@@ -13,9 +13,9 @@ using namespace winrt::Windows::Graphics::Holographic;
 using namespace winrt::Windows::UI::Core;
 
 // The main function bootstraps into the IFrameworkView.
-[Platform::MTAThread]
 int __stdcall wWinMain(HINSTANCE, HINSTANCE, PWSTR, int)
 {
+    winrt::init_apartment();
     CoreApplication::Run(AppViewSource());
     return 0;
 }

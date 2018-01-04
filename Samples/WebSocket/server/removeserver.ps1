@@ -44,8 +44,11 @@ Remove-NetFirewallRule -DisplayName $wsfirewallRuleName > $null
 "Removing firewall rule `'$wsssFirewallRuleName`'."
 Remove-NetFirewallRule -DisplayName $wssFirewallRuleName > $null
 
-"Removing certificate with thumbprint " + $settings.certificateThumbprint
-gci cert:\ -Recurse | where {$_.Thumbprint -eq $settings.certificateThumbprint } | Remove-Item
+"Removing server certificate with thumbprint " + $settings.serverCertificateThumbprint
+gci cert:\LocalMachine -Recurse | where {$_.Thumbprint -eq $settings.serverCertificateThumbprint} | Remove-Item
+"Removing client certificate root with thumbprint " + $settings.clientRootCertThumbprint
+gci cert:\LocalMachine -Recurse | where {$_.Thumbprint -eq $settings.clientRootCertThumbprint} | Remove-Item
+gci cert:\CurrentUser -Recurse | where {$_.Thumbprint -eq $settings.clientRootCertThumbprint} | Remove-Item
 
 if ($settings.webBindingAdded) 
 {

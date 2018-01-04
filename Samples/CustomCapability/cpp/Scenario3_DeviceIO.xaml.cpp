@@ -57,7 +57,10 @@ void DeviceIO::DeviceIOGet_Click(Platform::Object^ sender, RoutedEventArgs^ e)
                 "The segment display value is " + Fx2Driver::SevenSegmentToDigit(data[0]),
                 NotifyType::StatusMessage
             );
-
+        }
+        catch (InvalidArgumentException^)
+        {
+            rootPage->NotifyUser("The segment display value is not yet initialized", NotifyType::StatusMessage);
         }
         catch (Exception^ exception)
         {
@@ -88,11 +91,13 @@ void DeviceIO::DeviceIOSet_Click(Object^ sender, RoutedEventArgs^ e)
         Fx2Driver::SetSevenSegmentDisplay,
         inputBuffer,
         nullptr
-    )).then([this](task<unsigned int> result)
+    )).then([this, val](task<unsigned int> result)
     {
         try
         {
             result.get();
+
+            rootPage->NotifyUser("The segment display is set to " + val.ToString(), NotifyType::StatusMessage);
         }
         catch (Exception^ exception)
         {

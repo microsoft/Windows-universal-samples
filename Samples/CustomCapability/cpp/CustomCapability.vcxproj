@@ -80,45 +80,55 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.16299.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.16299.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.16299.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.16299.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.16299.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.16299.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.16299.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.16299.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.16299.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.16299.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.16299.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props" Condition="exists('$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformExtensionSDKLocation(`WindowsDesktop, Version=10.0.16299.0`, $(TargetPlatformIdentifier), $(TargetPlatformVersion),  $(SDKReferenceDirectoryRoot), $(SDKExtensionDirectoryRoot), $(SDKReferenceRegistryRoot)))\DesignTime\CommonConfiguration\Neutral\WindowsDesktop.props')" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <IncludePath>$(IncludePath);..\..\..\SharedContent\cpp</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories);$(OutDir)..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories);$(OutDir);..\Service\Client</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
+      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(OutDir)rpcclient.lib</AdditionalDependencies>
       <OptimizeReferences>false</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
@@ -126,11 +136,11 @@
     <ClCompile>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories);$(OutDir)..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories);$(OutDir);..\Service\Client</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
+      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(OutDir)rpcclient.lib</AdditionalDependencies>
       <OptimizeReferences>false</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
@@ -138,11 +148,11 @@
     <ClCompile>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories);$(OutDir)..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories);$(OutDir);..\Service\Client</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
+      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(OutDir)rpcclient.lib</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
@@ -150,11 +160,11 @@
     <ClCompile>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories);$(OutDir)..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories);$(OutDir);..\Service\Client</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
+      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(OutDir)rpcclient.lib</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
@@ -162,11 +172,11 @@
     <ClCompile>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories);$(OutDir)..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories);$(OutDir);..\Service\Client</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
+      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(OutDir)rpcclient.lib</AdditionalDependencies>
       <OptimizeReferences>false</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
@@ -174,11 +184,11 @@
     <ClCompile>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories);$(OutDir)..</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories);$(OutDir);..\Service\Client</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
+      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(OutDir)rpcclient.lib</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
@@ -194,21 +204,20 @@
       <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario1_MeteringData.xaml.h">
-      <DependentUpon>Scenario1_MeteringData.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_MeteringData.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="RpcClient.h" />
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario2_DeviceConnect.xaml.h">
-      <DependentUpon>Scenario2_DeviceConnect.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_DeviceConnect.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario3_DeviceIO.xaml.h">
-      <DependentUpon>Scenario3_DeviceIO.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_DeviceIO.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario4_DeviceEvents.xaml.h">
-      <DependentUpon>Scenario4_DeviceEvents.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario4_DeviceEvents.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario5_DeviceReadWrite.xaml.h">
-      <DependentUpon>Scenario5_DeviceReadWrite.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario5_DeviceReadWrite.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,13 +230,13 @@
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_MeteringData.xaml">
+    <Page Include="..\shared\Scenario1_MeteringData.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_DeviceConnect.xaml" />
-    <Page Include="Scenario3_DeviceIO.xaml" />
-    <Page Include="Scenario4_DeviceEvents.xaml" />
-    <Page Include="Scenario5_DeviceReadWrite.xaml" />
+    <Page Include="..\shared\Scenario2_DeviceConnect.xaml" />
+    <Page Include="..\shared\Scenario3_DeviceIO.xaml" />
+    <Page Include="..\shared\Scenario4_DeviceEvents.xaml" />
+    <Page Include="..\shared\Scenario5_DeviceReadWrite.xaml" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -258,10 +267,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RpcInterface.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp">
       <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
     </ClCompile>
@@ -272,7 +277,7 @@
     <ClCompile Include="Fx2Driver.cpp" />
     <ClCompile Include="ServiceViewModel.cpp" />
     <ClCompile Include="Scenario1_MeteringData.xaml.cpp">
-      <DependentUpon>Scenario1_MeteringData.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_MeteringData.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="pch.cpp">
@@ -283,35 +288,29 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="RpcClient.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="Scenario2_DeviceConnect.xaml.cpp">
-      <DependentUpon>Scenario2_DeviceConnect.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_DeviceConnect.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario3_DeviceIO.xaml.cpp">
-      <DependentUpon>Scenario3_DeviceIO.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_DeviceIO.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario4_DeviceEvents.xaml.cpp">
-      <DependentUpon>Scenario4_DeviceEvents.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario4_DeviceEvents.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario5_DeviceReadWrite.xaml.cpp">
-      <DependentUpon>Scenario5_DeviceReadWrite.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario5_DeviceReadWrite.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="CustomCapability.SCCD">
       <DeploymentContent>true</DeploymentContent>
-      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="WindowsDesktop, Version=10.0.16299.0" />
+    <ProjectReference Include="..\Service\Client\RpcClient.vcxproj">
+      <Project>{86B5561E-46B3-5DDE-9121-423803DA2807}</Project>
+      <Name>RpcClient</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

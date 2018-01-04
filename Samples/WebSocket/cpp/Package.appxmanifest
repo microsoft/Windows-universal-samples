@@ -20,7 +20,7 @@
     </Properties>
 
     <Dependencies>
-        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.16299.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.16299.0" MaxVersionTested="10.0.16299.0" />
     </Dependencies>
 
     <Resources>
@@ -50,5 +50,7 @@
     <Capabilities>
       <Capability Name="internetClientServer" />
       <Capability Name="privateNetworkClientServer" />
+      <!-- Uncomment this capability if you need to install a certificate to the CurrentUser\MY store -->
+      <!--uap:Capability Name="sharedUserCertificates" -->
     </Capabilities>
 </Package>

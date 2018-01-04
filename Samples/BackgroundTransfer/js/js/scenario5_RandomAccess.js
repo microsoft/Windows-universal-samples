@@ -102,7 +102,7 @@
             }
         }, function (e) {
             // Don't worry if the old downloads encountered web exceptions.
-            return allowWebException("Discovery error");
+            return allowWebException("Discovery error", e);
         });
     }
 
@@ -283,8 +283,8 @@
         }).then(function () {
             WinJS.log("Download completed successfully", "sample", "status");
         }, function (e) {
-            // Don't worry if the old downloads encountered web exceptions.
-            return allowWebException("Discovery error");
+            // Abandon the operation if a web exception occurs.
+            return allowWebException("Execution error", e);
         }).then(function () {
             download = null;
             randomAccessStream = null;

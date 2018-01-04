@@ -241,6 +241,7 @@ namespace SDKTemplate
             rootPage.NotifyUser("Closing", NotifyType.StatusMessage);
             CloseSocket();
             SetBusy(false);
+            rootPage.NotifyUser("Closed", NotifyType.StatusMessage);
         }
 
         // This may be triggered remotely by the server or locally by Close/Dispose()

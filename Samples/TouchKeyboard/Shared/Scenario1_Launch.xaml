@@ -19,47 +19,38 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ScrollViewer Margin="12,20,12,12">
-            <StackPanel>
-                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock TextWrapping="Wrap">
-                    The Touch Keyboard displays automatically
-                    when the user uses touch or pen to tap on a XAML control
-                    that accept text input (e.g., TextBox, RichTextBox, PasswordBox).
-                </TextBlock>
-                <TextBox PlaceholderText="The keyboard displays when you tap here." Margin="0,10,0,0"/>
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,20,12,12">
+        <StackPanel>
+            <TextBlock Text="Description" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock TextWrapping="Wrap">
+                The touch keyboard displays
+                when touch or pen is used to set focus on a XAML text control
+                (such as TextBox, RichTextBox, and PasswordBox)
+                or a control derived from a XAML text control,
+                subject to the note below.
+            </TextBlock>
+            <VariableSizedWrapGrid Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBox Header="TextBox control" PlaceholderText="The keyboard displays when you tap here." Margin="0,0,10,0"/>
+                <local:CustomTextBox Header="Custom control derived from TextBox" PlaceholderText="The keyboard displays when you tap here." Margin="0,0,10,0"/>
+                <StackPanel>
+                    <TextBlock Margin="0,0,0,5">The keyboard hides when you tap the button.</TextBlock>
+                    <Button Content="Button"/>
+                </StackPanel>
+            </VariableSizedWrapGrid>
 
-                <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
-                    This behavior also holds for controls that are derived from these classes,
-                    such as the CustomTextBox below.
-                </TextBlock>
-                <local:CustomTextBox PlaceholderText="The keyboard displays when you tap here." Margin="0,10,0,0"/>
 
-                <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
-                    To achieve similar behavior in other controls,
-                    the controls need to implement
-                    the TextPattern (ITextProvider) and  ValuePattern (IValueProvider)
-                    UI Automation Control Pattern interfaces.
-                    The KeyboardEnabledTextBlock custom control below implements these interfaces.
-                    (This control merely logs a keypress instead of displaying the typed character.)
-                    Note that this technique currently works only on the PC.
-                </TextBlock>
-                <local:KeyboardEnabledTextBlock Margin="0,10,0,0"/>
-
-                <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
-                    The KeyboardDisabledTextBlock below does not implement the necessary interfaces.
-                    The touch keyboard does not appear when you tap on it.
-                </TextBlock>
-                <local:KeyboardDisabledTextBlock Margin="0,10,0,0"/>
-
-                <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
-                    In Windows 10 on the PC,
-                    the touch keyboard does not display automatically if a hardware keyboard is connected or if the PC is in Desktop mode and
-                    &quot;Automatically show the touch keyboard in windowed apps when there is no keyboard attached to your device&quot;
-                    in Settings -&gt; Devices -&gt; Typing is disabled.
-                </TextBlock>
-            </StackPanel>
-        </ScrollViewer>
-    </Grid>
+            <TextBlock Text="Note" Style="{StaticResource SampleHeaderTextStyle}" Margin="0,30,0,0"/>
+            <TextBlock TextWrapping="Wrap">
+                The touch keyboard displays automatically when
+                <LineBreak/><Bold>1.</Bold> A hardware keyboard is not active, and
+                <LineBreak/><Bold>2.</Bold> Either of the following is true:
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="20,0,0,0">
+                <Bold>2a.</Bold> Tablet mode is turned on, or
+                <LineBreak/><Bold>2b.</Bold> "Show the touch keyboard when not in tablet mode
+                and there's no keyboard attached" is enabled in
+                <Bold>Settings &#8594; Devices &#8594; Typing</Bold>.
+            </TextBlock>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

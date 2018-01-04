@@ -150,9 +150,10 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/Appointments">Appointment calendar</a></td>
   <td><a href="Samples/ContactCards">Contact cards</a></td>
-  <td><a href="Samples/ContactPicker">Contact picker</a></td>
+  <td><a href="Samples/ContactPanel">Contact panel</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/ContactPicker">Contact picker</a></td>
   <td><a href="Samples/MyPeopleNotifications">My People notifications</a></td>
   <td><a href="Samples/UserDataAccountManager">UserDataAccountManager</a></td>
  </tr>
@@ -444,6 +445,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/HolographicVoiceInput">Holographic voice input</a></td>
   <td><a href="Samples/SpatialInteractionSource">Spatial interaction source</a></td>
   <td><a href="Samples/HolographicTagAlong">Tag-along hologram</a></td>
+  <td><a href="Samples/MixedRealityModel">Mixed Reality Model</a></td>
  </tr>
 </table>
 

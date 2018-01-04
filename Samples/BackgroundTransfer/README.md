@@ -24,6 +24,7 @@ The sample also showcases several advanced usage scenarios:
 -   Configuring toast and tile notifications to inform the user when all transfers succeed or when at least one transfer fails.
 -   Executing a background task when a set of uploads or downloads completes.
 -   Accessing file content and seeking within that content while a download is still ongoing, effectively altering the order in which remote file data is requested from the server.
+-   Recovering from a failed download without losing already-downloaded data.
 
 **Note**  Background transfer is primarily designed for long-term transfer operations for resources like video, music, and large images. For short-term operations involving transfers of smaller resources (i.e. a few KB), the HTTP APIs are recommended. [HttpClient](http://msdn.microsoft.com/library/windows/apps/dn298639) is preferred and can be used in all languages supported by UWP apps. [XHR](http://msdn.microsoft.com/library/windows/apps/br229787) can be used in JavaScript. [IXHR2](http://msdn.microsoft.com/library/windows/apps/hh770550) can be used in C++.
 
