@@ -218,6 +218,7 @@ namespace AppUIBasics
     public enum DeviceType
     {
         Desktop,
+        IoT,
         Mobile,
         Xbox
     }
