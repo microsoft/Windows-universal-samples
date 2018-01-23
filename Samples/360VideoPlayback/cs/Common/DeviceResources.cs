@@ -66,12 +66,12 @@ namespace _360VideoPlayback.Common
 
             // Initialize Direct2D resources.
             var debugLevel = SharpDX.Direct2D1.DebugLevel.None;
-            //#if DEBUG
+            #if DEBUG
             if (DirectXHelper.SdkLayersAvailable())
             {
                 debugLevel = SharpDX.Direct2D1.DebugLevel.Information;
             }
-            //#endif
+            #endif
 
             // Initialize the Direct2D Factory.
             d2dFactory = this.ToDispose(
