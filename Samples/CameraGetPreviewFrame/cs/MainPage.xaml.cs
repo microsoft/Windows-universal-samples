@@ -419,11 +419,11 @@ namespace CameraGetPreviewFrame
                 // Save the frame (as is, no rotation is being applied)
                 if (SaveFrameCheckBox.IsChecked == true)
                 {
-                        var file = await _captureFolder.CreateFileAsync("PreviewFrame.jpg", CreationCollisionOption.GenerateUniqueName);
+                    var file = await _captureFolder.CreateFileAsync("PreviewFrame.jpg", CreationCollisionOption.GenerateUniqueName);
     
-                        Debug.WriteLine("Saving preview frame to " + file.Path);
+                    Debug.WriteLine("Saving preview frame to " + file.Path);
     
-                        await SaveSoftwareBitmapAsync(previewFrame, file);
+                    await SaveSoftwareBitmapAsync(previewFrame, file);
                 }
             }
         }
