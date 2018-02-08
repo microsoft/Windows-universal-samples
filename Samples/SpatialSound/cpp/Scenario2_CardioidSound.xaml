@@ -26,32 +26,47 @@
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Description:" VerticalAlignment="Top" FontSize="26.667" Height="35" Width="140"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,50,0,0" TextWrapping="Wrap" Text="Source with cardioid directivity pattern" VerticalAlignment="Top" FontSize="13.333" Height="18" Width="229"/>
-        <Slider x:Name="ScalingSlider" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top" Width="160" LargeChange="0.5" Maximum="1" SmallChange="0.1" StepFrequency="0.1" TickFrequency="0.1" Height="44" ValueChanged="ScalingSlider_ValueChanged" ToolTipService.ToolTip="0 is Omnidirectional and 1 is fully directional"/>
-        <Slider x:Name="OrderSlider" HorizontalAlignment="Left" Margin="189,177,0,0" VerticalAlignment="Top" Width="160" LargeChange="0.5" Maximum="32" SmallChange="0.1" StepFrequency="0.1" Minimum="0.1" Height="44" TickFrequency="0.1" ValueChanged="OrderSlider_ValudChanged" ToolTipService.ToolTip="Higher the order, narrower the directivity pattern"/>
-        <ComboBox x:Name="EnvironmentComboBox" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top" Width="160" SelectionChanged="EnvironmentComboBox_SelectionChanged" Height="28">
+        <!-- Always give ComboBoxes and Sliders names that are accessible to a screen reader.
+             In this case, reference the labeling TextBlocks to have the accessible names set 
+             on the ComboBoxes and Sliders. -->
+        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="10,90,0,0" TextWrapping="Wrap" Text="Environment" VerticalAlignment="Top"/>
+        <ComboBox x:Name="EnvironmentComboBox" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top" Width="160" SelectionChanged="EnvironmentComboBox_SelectionChanged" Height="28"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock4}">
             <x:String>Small Room</x:String>
             <x:String>Medium Room</x:String>
             <x:String>Large Room</x:String>
             <x:String>Outdoors</x:String>
         </ComboBox>
-        <Slider x:Name="YawSlider" HorizontalAlignment="Left" Margin="10,337,0,0" VerticalAlignment="Top" Width="100" Maximum="6.283185307" SmallChange="0.5" Height="44" ValueChanged="YawSlider_ValueChanged" LargeChange="0.5"/>
-        <Slider x:Name="PitchSlider" HorizontalAlignment="Left" Margin="120,337,0,0" VerticalAlignment="Top" Width="100" Maximum="6.283185307" SmallChange="0.5" Height="44" ValueChanged="PitchSlider_ValueChanged" LargeChange="0.5"/>
-        <Slider x:Name="RollSlider" HorizontalAlignment="Left" Margin="235,337,0,0" VerticalAlignment="Top" Width="100" Maximum="6.283185307" SmallChange="0.5" Height="44" ValueChanged="RollSlider_ValueChanged" LargeChange="0.5"/>
-        <Button x:Name="PlayButton" Content="Play" HorizontalAlignment="Left" Margin="93,396,0,0" VerticalAlignment="Top" Height="32" Width="47" Click="PlayButton_Click"/>
-        <Button x:Name="StopButton" Content="Stop" HorizontalAlignment="Left" Margin="189,396,0,0" VerticalAlignment="Top" Height="32" Width="50" Click="StopButton_Click"/>
         <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,164,0,0" TextWrapping="Wrap" Text="Directivity Scaling" VerticalAlignment="Top"/>
+        <Slider x:Name="ScalingSlider" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top" Width="160" LargeChange="0.5" Maximum="1" SmallChange="0.1" StepFrequency="0.1" TickFrequency="0.1" Height="44" ValueChanged="ScalingSlider_ValueChanged" ToolTipService.ToolTip="0 is Omnidirectional and 1 is fully directional"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock2}" />
         <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="189,164,0,0" TextWrapping="Wrap" Text="Cardioid Order" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="10,90,0,0" TextWrapping="Wrap" Text="Environment" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="10,326,0,0" TextWrapping="Wrap" Text="Yaw" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="137,326,0,0" TextWrapping="Wrap" Text="Pitch" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="250,326,0,0" TextWrapping="Wrap" Text="Roll" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="10,300,0,0" TextWrapping="Wrap" Text="Source Orientation in Radians" VerticalAlignment="Top"/>
+        <Slider x:Name="OrderSlider" HorizontalAlignment="Left" Margin="189,177,0,0" VerticalAlignment="Top" Width="160" 
+                LargeChange="0.5" Maximum="32" SmallChange="0.1" StepFrequency="0.1" Minimum="0.1" Height="44" TickFrequency="0.1" 
+                ValueChanged="OrderSlider_ValudChanged" 
+                ToolTipService.ToolTip="Higher the order, narrower the directivity pattern"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock3}" />
         <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="10,220,0,0" TextWrapping="Wrap" Text="Source Position in Meters" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="10,252,0,364" TextWrapping="Wrap" Text="X:" VerticalAlignment="Center" Height="24" Width="25"/>
+        <Slider x:Name="SourcePositionXSlider" HorizontalAlignment="Left" Margin="30,244,0,0" VerticalAlignment="Top" Width="80" Height="44" Maximum="10" LargeChange="1" SmallChange="0.5" ValueChanged="SourcePositionX_ValueChanged" Minimum="-10"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock10}" />
         <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="126,253,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top" Width="27"/>
+        <Slider x:Name="SourcePositionYSlider" HorizontalAlignment="Left" Margin="149,244,0,0" VerticalAlignment="Top" Width="80" Height="44" Maximum="10" LargeChange="1" SmallChange="0.5" ValueChanged="SourcePositionY_ValueChanged" Minimum="-10"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock11}" />
         <TextBlock x:Name="textBlock12" HorizontalAlignment="Left" Margin="250,253,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
-        <Slider x:Name="SourcePositionXSlider" HorizontalAlignment="Left" Margin="30,244,0,0" VerticalAlignment="Top" Width="80" Height="44" Maximum="10" LargeChange="1" SmallChange="0.5" ValueChanged="SourcePositionX_ValueChanged" Minimum="-10"/>
-        <Slider x:Name="SourcePositionYSlider" HorizontalAlignment="Left" Margin="149,244,0,0" VerticalAlignment="Top" Width="80" Height="44" Maximum="10" LargeChange="1" SmallChange="0.5" ValueChanged="SourcePositionY_ValueChanged" Minimum="-10"/>
-        <Slider x:Name="SourcePositionZSlider" HorizontalAlignment="Left" Margin="269,244,0,0" VerticalAlignment="Top" Width="80" Height="44" Maximum="10" LargeChange="1" SmallChange="0.5" ValueChanged="SourcePositionZ_ValueChanged" Minimum="-10"/>
+        <Slider x:Name="SourcePositionZSlider" HorizontalAlignment="Left" Margin="269,244,0,0" VerticalAlignment="Top" Width="80" Height="44" Maximum="10" LargeChange="1" SmallChange="0.5" ValueChanged="SourcePositionZ_ValueChanged" Minimum="-10"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock12}" />
+        <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="10,300,0,0" TextWrapping="Wrap" Text="Source Orientation in Radians" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="10,326,0,0" TextWrapping="Wrap" Text="Yaw" VerticalAlignment="Top"/>
+        <Slider x:Name="YawSlider" HorizontalAlignment="Left" Margin="10,337,0,0" VerticalAlignment="Top" Width="100" Maximum="6.283185307" SmallChange="0.5" Height="44" ValueChanged="YawSlider_ValueChanged" LargeChange="0.5"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock5}" />
+        <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="137,326,0,0" TextWrapping="Wrap" Text="Pitch" VerticalAlignment="Top"/>
+        <Slider x:Name="PitchSlider" HorizontalAlignment="Left" Margin="120,337,0,0" VerticalAlignment="Top" Width="100" Maximum="6.283185307" SmallChange="0.5" Height="44" ValueChanged="PitchSlider_ValueChanged" LargeChange="0.5"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock6}" />
+        <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="250,326,0,0" TextWrapping="Wrap" Text="Roll" VerticalAlignment="Top"/>
+        <Slider x:Name="RollSlider" HorizontalAlignment="Left" Margin="235,337,0,0" VerticalAlignment="Top" Width="100" Maximum="6.283185307" SmallChange="0.5" Height="44" ValueChanged="RollSlider_ValueChanged" LargeChange="0.5"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock7}" />
+        <Button x:Name="PlayButton" Content="Play" HorizontalAlignment="Left" Margin="93,396,0,0" VerticalAlignment="Top" Height="32" Width="47" Click="PlayButton_Click"/>
+        <Button x:Name="StopButton" Content="Stop" HorizontalAlignment="Left" Margin="189,396,0,0" VerticalAlignment="Top" Height="32" Width="50" Click="StopButton_Click"/>
     </Grid>
 </Page>

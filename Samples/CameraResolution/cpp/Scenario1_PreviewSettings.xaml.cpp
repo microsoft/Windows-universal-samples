@@ -142,7 +142,7 @@ void Scenario1_PreviewSettings::ComboBoxSettings_Changed(Platform::Object^ sende
     {
         auto selectedItem = static_cast<ComboBoxItem^>(static_cast<ComboBox^>(sender)->SelectedItem);
         auto encodingProperties = static_cast<IMediaEncodingProperties^>(selectedItem->Tag);
-        create_task(_mediaCapture->VideoDeviceController->SetMediaStreamPropertiesAsync(MediaStreamType::VideoPreview, encodingProperties));
+        create_task(_rootPage->SetMediaStreamPropertiesAsync(_mediaCapture.Get(), PreviewControl, MediaStreamType::VideoPreview, encodingProperties));
     }
 }
 

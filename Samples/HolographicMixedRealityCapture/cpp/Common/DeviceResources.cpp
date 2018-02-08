@@ -15,8 +15,12 @@ using namespace Windows::Graphics::Holographic;
 static const std::wstring s_VertexShaderFiles[DX::VertexShader_Max] = 
 {
     L"ms-appx:///VertexShader.cso",
-    L"ms-appx:///VprtVertexShader.cso",
     L"ms-appx:///VertexShaderTexture.cso",
+};
+
+static const std::wstring s_VprtVertexShaderFiles[DX::VertexShader_Max] =
+{
+    L"ms-appx:///VprtVertexShader.cso",
     L"ms-appx:///VprtVertexShaderTexture.cso"
 };
 
@@ -393,7 +397,7 @@ Concurrency::task<void> DX::DeviceResources::LoadShaders()
     // Load vertex shaders and input layouts
     for (int i = 0; i < VertexShader_Max; i++)
     {
-        Concurrency::task<std::vector<byte>> loadVSTask = DX::ReadDataAsync(s_VertexShaderFiles[i]);
+        Concurrency::task<std::vector<byte>> loadVSTask = DX::ReadDataAsync(m_supportsVprt ? s_VprtVertexShaderFiles[i] : s_VertexShaderFiles[i]);
 
         Concurrency::task<void> createVSTask = loadVSTask.then([this, i](const std::vector<byte>& fileData)
         {
@@ -407,7 +411,6 @@ Concurrency::task<void> DX::DeviceResources::LoadShaders()
             switch (i)
             {
             case VertexShader_Simple:
-            case VertexShader_VPRT:
                 {
                     const D3D11_INPUT_ELEMENT_DESC vertexDesc[] =
                     {
@@ -425,7 +428,6 @@ Concurrency::task<void> DX::DeviceResources::LoadShaders()
                 }
                 break;
             case VertexShader_Texture:
-            case VertexShader_TextureVPRT:
                 {
                     const D3D11_INPUT_ELEMENT_DESC vertexDesc[] =
                     {

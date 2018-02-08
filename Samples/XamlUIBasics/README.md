@@ -32,6 +32,8 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 Each control page in the application has links to the relevant MSDN documentation for that control.
 
+[Install a prebuilt version of this sample](https://www.microsoft.com/store/productId/9MSVH128X2ZT).
+
 ## Related samples
 
 [RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)  

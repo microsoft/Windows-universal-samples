@@ -29,7 +29,7 @@ Scenario2::Scenario2()
 
     mapIconStreamReference = RandomAccessStreamReference::CreateFromUri(ref new Uri("ms-appx:///Assets/MapPin.png"));
     mapBillboardStreamReference = RandomAccessStreamReference::CreateFromUri(ref new Uri("ms-appx:///Assets/billboard.jpg"));
-    mapModelStreamReference = RandomAccessStreamReference::CreateFromUri(ref new Uri("ms-appx:///Assets/ConkerAfro.3mf"));
+    mapModelStreamReference = RandomAccessStreamReference::CreateFromUri(ref new Uri("ms-appx:///Assets/box.3mf"));
 }
 
 void Scenario2::MyMap_Loaded(Object^ sender, RoutedEventArgs^ e)

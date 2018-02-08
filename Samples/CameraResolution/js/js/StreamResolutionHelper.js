@@ -61,3 +61,23 @@ streamResolutionHelper.prototype.frameRate = function () {
 streamResolutionHelper.prototype.aspectRatio = function () {
     return (this.width() / this.height()).toFixed(2);
 }
+
+/// <summary>
+/// Sets encoding properties on a camera stream. Ensures VideoElement and preview stream are stopped before setting properties.
+/// </summary>
+function setMediaStreamPropertiesAsync(mediaCapture, streamType, encodingProperties) {
+    // Stop preview and unlink the VideoElement from the MediaCapture object
+    var previewVidTag = document.getElementById("cameraPreview");
+    previewVidTag.pause;
+    previewVidTag.src = null;
+
+    // Apply desired stream properties
+    return mediaCapture.videoDeviceController.setMediaStreamPropertiesAsync(streamType, encodingProperties)
+        .then(function () {
+            // Recreate pipeline and restart the preview
+            var previewVidTag = document.getElementById("cameraPreview");
+            var previewUrl = URL.createObjectURL(mediaCapture);
+            previewVidTag.src = previewUrl;
+            previewVidTag.play();
+        });
+}

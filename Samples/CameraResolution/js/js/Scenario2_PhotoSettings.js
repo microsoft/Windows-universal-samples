@@ -101,7 +101,7 @@
             if (previewSettings.value == "")
                 return;
 
-            mediaCapture.videoDeviceController.setMediaStreamPropertiesAsync(Capture.MediaStreamType.videoPreview, previewProperties[previewSettings.value]);
+            setMediaStreamPropertiesAsync(mediaCapture, Capture.MediaStreamType.videoPreview, previewProperties[previewSettings.value]);
         }
     }
 
@@ -114,7 +114,7 @@
             if (photoSettings.value == "")
                 return;
 
-            mediaCapture.videoDeviceController.setMediaStreamPropertiesAsync(Capture.MediaStreamType.videoPreview, photoProperties[photoSettings.value]);
+            setMediaStreamPropertiesAsync(mediaCapture, Capture.MediaStreamType.videoPreview, photoProperties[photoSettings.value]);
         }
     }
 

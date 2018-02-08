@@ -36,20 +36,27 @@
             <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
             <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
         </Grid>
-        <Button Content="Play" Click="PlayButton_Click" HorizontalAlignment="Left" Margin="93,273,0,335" Width="47"/>
-        <Button Content="Stop" Click="StopButton_Click" HorizontalAlignment="Left" Margin="189,273,0,335" Width="50"/>
-        <Slider x:Name="RadiusSlider" HorizontalAlignment="Left" Margin="9,213,0,0" VerticalAlignment="Top" Width="152" Maximum="10" LargeChange="1" Value="1" ValueChanged="RadiusSlider_ValueChanged" SmallChange="0.1" TickFrequency="1" StepFrequency="0.1"/>
-        <ComboBox x:Name="EnvironmentComboBox" HorizontalAlignment="Left" Margin="9,100,0,0" VerticalAlignment="Top" Width="160" IsDropDownOpen="True" SelectionChanged="EnvironmentComboBox_SelectionChanged">
+        <!-- Always give ComboBoxes and Sliders names that are accessible to a screen reader.
+             In this case, reference the labeling TextBlocks to have the accessible names set 
+             on the ComboBoxes and Sliders. -->
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,74,0,0" TextWrapping="Wrap" Text="Environment" VerticalAlignment="Top"/>
+        <ComboBox x:Name="EnvironmentComboBox" HorizontalAlignment="Left" Margin="9,100,0,0" VerticalAlignment="Top" Width="160" IsDropDownOpen="True" SelectionChanged="EnvironmentComboBox_SelectionChanged"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock1}">
             <x:String>Small Room</x:String>
             <x:String>Medium Room</x:String>
             <x:String>Large Room</x:String>
             <x:String>Outdoors</x:String>
         </ComboBox>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="9,203,0,0" TextWrapping="Wrap" Text="Radius of Orbit" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,74,0,0" TextWrapping="Wrap" Text="Environment" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="9,149,0,0" TextWrapping="Wrap" Text="Speed of Orbit in Seconds" VerticalAlignment="Top"/>
-        <Slider x:Name="RotationSpeedSlider" HorizontalAlignment="Left" Margin="10,159,0,0" VerticalAlignment="Top" Width="152" Maximum="20" LargeChange="1" ValueChanged="RotationSpeedSlider_ValueChanged" SmallChange="0.5"/>
-        <Slider x:Name="HeightSlider" HorizontalAlignment="Left" Margin="191,213,0,0" VerticalAlignment="Top" Width="152" Minimum="-10" Maximum="10" LargeChange="1" SmallChange="0.5" ValueChanged="HeightSlider_ValueChanged"/>
+        <Slider x:Name="RotationSpeedSlider" HorizontalAlignment="Left" Margin="10,159,0,0" VerticalAlignment="Top" Width="152" Maximum="20" LargeChange="1" ValueChanged="RotationSpeedSlider_ValueChanged" SmallChange="0.5"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock2}"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="9,203,0,0" TextWrapping="Wrap" Text="Radius of Orbit" VerticalAlignment="Top"/>
+        <Slider x:Name="RadiusSlider" HorizontalAlignment="Left" Margin="9,213,0,0" VerticalAlignment="Top" Width="152" Maximum="10" LargeChange="1" Value="1" ValueChanged="RadiusSlider_ValueChanged" SmallChange="0.1" TickFrequency="1" StepFrequency="0.1"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock}"/>
         <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="191,203,0,0" TextWrapping="Wrap" Text="Height of Orbit" VerticalAlignment="Top"/>
+        <Slider x:Name="HeightSlider" HorizontalAlignment="Left" Margin="191,213,0,0" VerticalAlignment="Top" Width="152" Minimum="-10" Maximum="10" LargeChange="1" SmallChange="0.5" ValueChanged="HeightSlider_ValueChanged"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock3}"/>
+        <Button Content="Play" Click="PlayButton_Click" HorizontalAlignment="Left" Margin="93,273,0,335" Width="47"/>
+        <Button Content="Stop" Click="StopButton_Click" HorizontalAlignment="Left" Margin="189,273,0,335" Width="50"/>
     </Grid>
 </Page>

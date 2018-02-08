@@ -29,7 +29,8 @@
             <SplitView.Pane>
                 <RelativePanel Margin="10,0,0,0">
                     <TextBlock x:Name="SampleTitle" Text="Sample Title Here" Style="{StaticResource SampleHeaderTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0"/>
-                    <ListBox x:Name="ScenarioControl" SelectionChanged="ScenarioControl_SelectionChanged"
+                    <!-- Provide an AutomationProperties.Name for a list to a screen reader. A shipping app would localize this. -->
+                    <ListBox x:Name="ScenarioControl" SelectionChanged="ScenarioControl_SelectionChanged" AutomationProperties.Name="Scenarios"
                  SelectionMode="Single" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0"
                  VerticalAlignment="Top" RelativePanel.Below="SampleTitle" Margin="0,10,0,0" RelativePanel.Above="FooterPanel">
                         <ListBox.ItemTemplate>
@@ -58,7 +59,8 @@
                     <TextBlock x:Name="StatusLabel" Margin="0,0,0,10" TextWrapping="Wrap" Text="Status:" />
                     <Border x:Name="StatusBorder" Margin="0,0,0,0" Visibility="Visible" >
                         <ScrollViewer VerticalScrollMode="Auto"  VerticalScrollBarVisibility="Auto" MaxHeight="200">
-                            <TextBlock x:Name="StatusBlock" FontWeight="Bold" 
+                            <!-- Use LiveSetting to enable screen readers to announce the status update. -->
+                            <TextBlock x:Name="StatusBlock" FontWeight="Bold" AutomationProperties.LiveSetting="Assertive"
                                    MaxWidth="{Binding ElementName=Splitter, Path=ActualWidth}" Margin="10,10,10,20" TextWrapping="Wrap"  />
                         </ScrollViewer>
                     </Border>
@@ -73,7 +75,10 @@
                     </ToggleButton.Content>
                 </ToggleButton>
             </Border>
-            <Image x:Name="WindowsLogo" Stretch="None" Source="Assets/windows-sdk.png" Margin="0,15,0,0" />
+            <!-- Use AutomationProperties.AccessibilityView to let a screen reader know that the image is purely decorative.
+                 (If the Image conveyed useful information we'd not use AccessibilityView, but instead provide a localized 
+                 name for the Image to convey its purpose.) -->
+            <Image x:Name="WindowsLogo" Stretch="None" Source="Assets/windows-sdk.png" Margin="0,15,0,0" AutomationProperties.AccessibilityView="Raw" />
             <TextBlock x:Name="Header" Text="Universal Windows Platform sample" Style="{StaticResource TagLineTextStyle}" Margin="0,15,0,0" />
         </StackPanel>
     </Grid>

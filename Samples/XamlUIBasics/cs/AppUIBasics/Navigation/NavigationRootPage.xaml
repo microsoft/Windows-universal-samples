@@ -23,7 +23,7 @@
                 BackgroundColorOpacity="1" />
         </DataTemplate>
 
-        <ControlTemplate x:Key="PlatformAdaptableNavigationViewStyle" TargetType="NavigationView">
+        <!--<ControlTemplate x:Key="PlatformAdaptableNavigationViewStyle" TargetType="NavigationView">
             <Grid x:Name="RootGrid">
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup x:Name="DisplayModeGroup">
@@ -114,7 +114,7 @@
 
                 <Grid
                     x:Name="TogglePaneButtonPanel"
-                    Width="{StaticResource PaneToggleButtonSize}"
+                    Width="{StaticResource PaneToggleButtonWidth}"
                     Margin="0,0,0,8"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
@@ -147,8 +147,8 @@
                         <Grid x:Name="PaneContentGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition x:Name="PaneContentGridToggleButtonRow" Height="56" />
-                                <!--  48 + 8 bottom margin  -->
+                                <RowDefinition x:Name="PaneContentGridToggleButtonRow" Height="56" /> -->
+                                <!--  48 + 8 bottom margin  --> <!--
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
@@ -218,7 +218,7 @@
                     </SplitView.Content>
                 </SplitView>
             </Grid>
-        </ControlTemplate>
+        </ControlTemplate>-->
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -253,8 +253,8 @@
             Header=" "
             HeaderTemplate="{StaticResource NavigationViewHeaderTemplate}"
             IsTabStop="False"
-            ItemInvoked="OnNavigationViewItemInvoked"
-            Template="{StaticResource PlatformAdaptableNavigationViewStyle}">
+            ItemInvoked="OnNavigationViewItemInvoked">
+            <!--Template="{StaticResource PlatformAdaptableNavigationViewStyle}"-->
             <Frame x:Name="rootFrame" Navigated="OnRootFrameNavigated" />
         </NavigationView>
     </Grid>

@@ -18,6 +18,7 @@ using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml;
+using namespace Windows::UI::Xaml::Automation::Peers;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Controls::Primitives;
 using namespace Windows::UI::Xaml::Data;
@@ -140,6 +141,13 @@ void MainPage::UpdateStatus(String^ strMessage, NotifyType type)
         StatusBorder->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
         StatusPanel->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
     }
+
+	// Raise an event if necessary to enable a screen reader to announce the status update.
+	auto peer = dynamic_cast<FrameworkElementAutomationPeer^>(FrameworkElementAutomationPeer::FromElement(StatusBlock));
+	if (peer != nullptr)
+	{
+		peer->RaiseAutomationEvent(AutomationEvents::LiveRegionChanged);
+	}
 }
 
 void MainPage::Footer_Click(Object^ sender, RoutedEventArgs^ e)

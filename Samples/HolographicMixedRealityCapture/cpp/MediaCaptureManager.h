@@ -35,6 +35,7 @@ namespace HolographicMRCSample
         bool IsHologramEnabled()    { auto lock = m_lock.LockShared(); return m_hologramEnabled; }
         bool IsSystemAudioEnabled() { auto lock = m_lock.LockShared(); return m_sysAudioEnabled; }
         bool CanTakePhoto();
+        bool CanToggleVideo();
 
     private:
         Microsoft::WRL::Wrappers::SRWLock m_lock;

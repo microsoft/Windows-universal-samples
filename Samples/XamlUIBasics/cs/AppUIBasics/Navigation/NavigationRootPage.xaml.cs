@@ -136,7 +136,7 @@ namespace AppUIBasics
 
             if (!Enum.TryParse(familyName.Replace("Windows.", string.Empty), out DeviceType parsedDeviceType))
             {
-                throw new NotSupportedException("Unsupported device family.");
+                parsedDeviceType = DeviceType.Other;
             }
 
             DeviceFamily = parsedDeviceType;
@@ -219,6 +219,7 @@ namespace AppUIBasics
     {
         Desktop,
         Mobile,
+        Other,
         Xbox
     }
 }
