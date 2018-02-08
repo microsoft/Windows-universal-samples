@@ -196,14 +196,28 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate x:DataType="x:String">
-                                    <HyperlinkButton Click="OnRelatedControlClick">
+                                    <!-- A HyperlinkButton must always provide an accessible name to a screen reader which 
+                                         conveys the purpose of the link. By default, when the HyperlinkButton is built 
+                                         as below, with an Image and TextBlock, the HyperlinkButton provides no accessible
+                                         name. So bind the accessible name to the same data that provides the text shown
+                                         visually on the contained TextBlock. -->
+                                    <HyperlinkButton AutomationProperties.Name="{x:Bind}" Click="OnRelatedControlClick">
                                         <RelativePanel>
+                                            <!-- Now that the HyperlinkButton has a helpful accessible name, it serves no
+                                                 useful purpose for the contained Image, (which is purely decorative,) or
+                                                 the contained TextBlock to be exposed to a screen reader. All the information 
+                                                 required by customers using a screen reader is accessible directly through the
+                                                 Hyperlink button. As such, mark the contained elements as not being interesting
+                                                 to a screen reader through use of the AutomationProperties.AccessibilityView
+                                                 property. -->
                                             <Image
+                                                AutomationProperties.AccessibilityView="Raw"
                                                 x:Name="iconImage"
                                                 Width="25"
                                                 Margin="0,0,15,0"
                                                 common:ImageLoader.Source="{Binding}" />
                                             <TextBlock
+                                                AutomationProperties.AccessibilityView="Raw"
                                                 Foreground="{ThemeResource HyperlinkButtonForeground}"
                                                 RelativePanel.RightOf="iconImage"
                                                 Text="{x:Bind}"

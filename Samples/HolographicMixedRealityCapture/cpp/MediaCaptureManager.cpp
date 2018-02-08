@@ -49,7 +49,16 @@ Concurrency::task<void> MediaCaptureManager::InitializeAsync(IMFDXGIDeviceManage
     return Concurrency::create_task(m_mediaCapture->InitializeAsync(initSetting)).then([this]()
     {
         auto lock = m_lock.LockExclusive();
-        m_currentState = Initialized;
+
+        if (m_mediaCapture->MediaCaptureSettings->AudioDeviceId && m_mediaCapture->MediaCaptureSettings->VideoDeviceId)
+        {
+            // MediaCapture is initialized with valid audio and video device.
+            m_currentState = Initialized;
+        }
+        else
+        {
+            OutputDebugString(L"MediaCapture is initialized without valid sources.\n");
+        }
     });
 }
 
@@ -295,13 +304,20 @@ bool MediaCaptureManager::CanTakePhoto()
 
     if (m_currentState == Initialized)
     {
-        OutputDebugString(L"Can Take Photo\n");
         ret = true;
     }
-    else
+
+    return ret;
+}
+
+bool MediaCaptureManager::CanToggleVideo()
+{
+    auto lock = m_lock.LockShared();
+    bool ret = false;
+
+    if (m_currentState == Initialized || m_currentState == Recording)
     {
-        OutputDebugString(L"Can NOT Take Photo\n");
-        ret = false;
+        ret = true;
     }
 
     return ret;

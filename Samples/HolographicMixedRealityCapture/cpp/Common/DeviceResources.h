@@ -9,9 +9,7 @@ namespace DX
     typedef enum
     {
         VertexShader_Simple = 0,
-        VertexShader_VPRT,
         VertexShader_Texture,
-        VertexShader_TextureVPRT,
         VertexShader_Max
     } VertexShaderIndex;
 

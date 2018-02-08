@@ -209,7 +209,8 @@ RichTextBlockOverflow^ PrintHelper::AddOnePrintPreviewPage(RichTextBlockOverflow
     {
         // If this is the first page add the specific scenario content
         page = FirstPage;
-        //Hide footer since we don't know yet if it will be displayed (this might not be the last page) - wait for layout
+
+        // Hide footer since we don't know yet if it will be displayed (this might not be the last page) - wait for layout
         StackPanel^ footer = safe_cast<StackPanel^>(page->FindName("Footer"));
         footer->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
     }
@@ -248,6 +249,7 @@ RichTextBlockOverflow^ PrintHelper::AddOnePrintPreviewPage(RichTextBlockOverflow
     {
         StackPanel^ footer = safe_cast<StackPanel^>(page->FindName("Footer"));
         footer->Visibility = Windows::UI::Xaml::Visibility::Visible;
+        PrintCanvas->UpdateLayout();
     }
 
     // Add the page to the page preview collection

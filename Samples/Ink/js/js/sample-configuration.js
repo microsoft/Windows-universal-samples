@@ -6,7 +6,8 @@
     var sampleTitle = "Ink sample";
 
     var scenarios = [
-        { url: "/html/scenario1.html", title: "Scenario 1" }
+        { url: "/html/scenario1.html", title: "Scenario 1" },
+        { url: "/html/scenario2.html", title: "Scenario 2" }
     ];
 
     WinJS.Namespace.define("SdkSample", {

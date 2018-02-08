@@ -49,65 +49,81 @@
 
             <ScrollViewer Grid.Row="1">
                 <StackPanel Orientation="Vertical">
-                    <GridView IsItemClickEnabled="False" SelectionMode="None">
+
+                    <!-- Provide an AutomationProperties.Name for a GridView to a screen reader. A shipping app would localize this. -->
+                    <GridView AutomationProperties.Name="Radial Controller Events Hookup" IsItemClickEnabled="False" SelectionMode="None">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <ItemsWrapGrid Orientation="Horizontal" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
                             </ItemsPanelTemplate>
                         </GridView.ItemsPanel>
 
-                        <StackPanel Style="{StaticResource ButtonGroup}">
-                            <Image Height="64" Width="64" HorizontalAlignment="Left" Source="Assets\Item0.png"/>
+                        <!-- All shipping GridView items must have helpful, concise, localized and unique accessible names, so that 
+                             a screen reader can make your customers aware of their purpose. Given that this sample defines each item
+                             here, (are the items are not databound,) set the accessible names on each item explicitly. This sample 
+                             contains placeholder text which would be replaced with appropriate localized text by a shipping app. -->
+
+                        <!-- All shipping Images, Sliders, and ToggleSwitches must have helpful, concise, localized and unique
+                             accessible names, so that a screen reader can make your customers aware of their purpose. This sample
+                             contains placeholder text which would be replaced with appropriate localized text by a shipping app. -->
+                        
+                        <StackPanel AutomationProperties.Name="Item 0 details" Style="{StaticResource ButtonGroup}">
+                            <Image AutomationProperties.Name="Item 0 Image accessible name" Height="64" Width="64" HorizontalAlignment="Left" Source="Assets\Item0.png"/>
                             <Button Content="Add Item 0" Click="AddItem" CommandParameter="0"/>
                             <Button Content="Select Item 0" Click="SelectItem" CommandParameter="0"/>
                             <Button Content="Remove Item 0" Click="RemoveItem" CommandParameter="0"/>
-                            <Slider x:Name="slider0" />
-                            <ToggleSwitch x:Name="toggle0" />
+                            <Slider AutomationProperties.Name="Item 0 Slider accessible name" x:Name="slider0" />
+                            <ToggleSwitch x:Name="toggle0" AutomationProperties.Name="Item 0 ToggleSwitch accessible name" />
                         </StackPanel>
 
-                        <StackPanel Style="{StaticResource ButtonGroup}">
-                            <Image Height="64" Width="64" HorizontalAlignment="Left" Source="Assets\Item1.png"/>
+                        <StackPanel AutomationProperties.Name="Item 1 details" Style="{StaticResource ButtonGroup}">
+                            <Image AutomationProperties.Name="Item 1 Image accessible name" Height="64" Width="64" HorizontalAlignment="Left" Source="Assets\Item1.png"/>
                             <Button Content="Add Item 1" Click="AddItem" CommandParameter="1"/>
                             <Button Content="Select Item 1" Click="SelectItem" CommandParameter="1"/>
                             <Button Content="Remove Item 1" Click="RemoveItem" CommandParameter="1"/>
-                            <Slider x:Name="slider1" />
-                            <ToggleSwitch x:Name="toggle1" />
+                            <Slider AutomationProperties.Name="Item 1 Slider accessible name" x:Name="slider1" />
+                            <ToggleSwitch x:Name="toggle1" AutomationProperties.Name="Item 1 ToggleSwitch accessible name" />
                         </StackPanel>
 
-                        <StackPanel Style="{StaticResource ButtonGroup}">
-                            <Image Height="64" Width="64" HorizontalAlignment="Left" Source="Assets\Item2.png"/>
+                        <StackPanel AutomationProperties.Name="Item 2 details" Style="{StaticResource ButtonGroup}">
+                            <Image AutomationProperties.Name="Item 2 Image accessible name" Height="64" Width="64" HorizontalAlignment="Left" Source="Assets\Item2.png"/>
                             <Button Content="Add Item 2" Click="AddItem" CommandParameter="2"/>
                             <Button Content="Select Item 2" Click="SelectItem" CommandParameter="2"/>
                             <Button Content="Remove Item 2" Click="RemoveItem" CommandParameter="2"/>
-                            <Slider x:Name="slider2" />
-                            <ToggleSwitch x:Name="toggle2" />
+                            <Slider AutomationProperties.Name="Item 2 Slider accessible name" x:Name="slider2" />
+                            <ToggleSwitch x:Name="toggle2" AutomationProperties.Name="Item 2 ToggleSwitch accessible name" />
                         </StackPanel>
 
-                        <StackPanel Style="{StaticResource ButtonGroup}">
-                            <Image Height="64" Width="64" HorizontalAlignment="Left" Source="Assets\Item3.png"/>
+                        <StackPanel AutomationProperties.Name="Item 3 details" Style="{StaticResource ButtonGroup}">
+                            <Image AutomationProperties.Name="Item 3 Image accessible name" Height="64" Width="64" HorizontalAlignment="Left" Source="Assets\Item3.png"/>
                             <Button Content="Add Item 3" Click="AddItem" CommandParameter="3"/>
                             <Button Content="Select Item 3" Click="SelectItem" CommandParameter="3"/>
                             <Button Content="Remove Item 3" Click="RemoveItem" CommandParameter="3"/>
-                            <Slider x:Name="slider3" />
-                            <ToggleSwitch x:Name="toggle3" />
+                            <Slider AutomationProperties.Name="Item 3 Slider accessible name" x:Name="slider3" />
+                            <ToggleSwitch x:Name="toggle3" AutomationProperties.Name="Item 3 ToggleSwitch accessible name" />
                         </StackPanel>
 
-                        <StackPanel Style="{StaticResource ButtonGroup}">
-                            <TextBlock Height="64" Width="64" HorizontalAlignment="Left" FontFamily="Segoe UI Emoji" FontSize="45" Text="&#x2764;"/>
+                        <!-- There's no guarantee that a symbolic character from some font will be pronounced by a screen reader 
+                             in a helpful way. So set helpful, concise, localized and uniqueaccessible names on the TextBlocks
+                             so that a screen reader can make your customers aware of their purpose. This sample contains 
+                             placeholder text which would be replaced with appropriate localized text by a shipping app. -->
+
+                        <StackPanel AutomationProperties.Name="Item 4 details" Style="{StaticResource ButtonGroup}">
+                            <TextBlock AutomationProperties.Name="Item 4 TextBlock accessible name" Height="64" Width="64" HorizontalAlignment="Left" FontFamily="Segoe UI Emoji" FontSize="45" Text="&#x2764;"/>
                             <Button Content="Add Item 4" Click="AddItem" CommandParameter="4"/>
                             <Button Content="Select Item 4" Click="SelectItem" CommandParameter="4"/>
                             <Button Content="Remove Item 4" Click="RemoveItem" CommandParameter="4"/>
-                            <Slider x:Name="slider4" />
-                            <ToggleSwitch x:Name="toggle4" />
+                            <Slider AutomationProperties.Name="Item 4 Slider accessible name" x:Name="slider4" />
+                            <ToggleSwitch x:Name="toggle4" AutomationProperties.Name="Item 4 ToggleSwitch accessible name" />
                         </StackPanel>
 
-                        <StackPanel Style="{StaticResource ButtonGroup}">
-                            <TextBlock Height="64" Width="64" HorizontalAlignment="Left" FontFamily="Assets\fontawesome-webfont.ttf#FontAwesome" FontSize="57" Text="&#xf0a1;"/>
+                        <StackPanel AutomationProperties.Name="Item 5 details" Style="{StaticResource ButtonGroup}">
+                            <TextBlock AutomationProperties.Name="Item 5 TextBlock accessible name" Height="64" Width="64" HorizontalAlignment="Left" FontFamily="Assets\fontawesome-webfont.ttf#FontAwesome" FontSize="57" Text="&#xf0a1;"/>
                             <Button Content="Add Item 5" Click="AddItem" CommandParameter="5"/>
                             <Button Content="Select Item 5" Click="SelectItem" CommandParameter="5"/>
                             <Button Content="Remove Item 5" Click="RemoveItem" CommandParameter="5"/>
-                            <Slider x:Name="slider5" />
-                            <ToggleSwitch x:Name="toggle5" />
+                            <Slider AutomationProperties.Name="Item 5 Slider accessible name" x:Name="slider5" />
+                            <ToggleSwitch x:Name="toggle5" AutomationProperties.Name="Item 5 ToggleSwitch accessible name" />
                         </StackPanel>
                     </GridView>
 
@@ -121,7 +137,7 @@
                     <StackPanel Style="{StaticResource PaddedPanel}">
                         <TextBlock FontSize="20">Log</TextBlock>
                         <ScrollViewer x:Name="logViewer" Grid.Column="0" MaxHeight="300" Padding="0,0,20,0">
-                            <TextBlock x:Name="log" SizeChanged="OnLogSizeChanged"/>
+                            <TextBlock x:Name="log" SizeChanged="OnLogSizeChanged" />
                         </ScrollViewer>
                     </StackPanel>
                 </StackPanel>

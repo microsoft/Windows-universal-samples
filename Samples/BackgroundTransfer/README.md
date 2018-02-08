@@ -64,7 +64,7 @@ For more information on network capabilities, see [How to set network capabiliti
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Technical Preview
+**Server:** Windows Server 2016
 
 **Phone:** Windows 10
 

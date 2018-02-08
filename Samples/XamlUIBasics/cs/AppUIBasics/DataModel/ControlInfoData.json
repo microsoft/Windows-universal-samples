@@ -1332,7 +1332,7 @@
 				"Subtitle": "Acrylic and Reveal",
 				"ImagePath": "\uE2B1",
 				"Description": "Acrylic and Reveal",
-				"Items": [
+        "Items": [
           {
             "UniqueId": "Acrylic",
             "Title": "Acrylic",
@@ -1368,9 +1368,27 @@
             "RelatedControls": [
               "Acrylic"
             ]
+          },
+          {
+            "UniqueId": "RevealFocus",
+            "Title": "Reveal Focus",
+            "Subtitle": "Customize the style of your focus rectangles.",
+            "ImagePath": "ms-appx:///Assets/RevealFocus.png",
+            "Description": "Reveal focus allows you to adapt focus rectangles to look like the focus rectangles available on Xbox.",
+            "Content": "<p>Look at the <i>RevealFocusPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+            "IsNew": true,
+            "Docs": [
+              {
+                "Title": "Reveal Focus",
+                "Uri": "https://docs.microsoft.com/"
+              }
+            ],
+            "RelatedControls": [
+              "Reveal"
+            ]
           }
 
-				]
+        ]
 			},
     {
       "UniqueId": "Text",

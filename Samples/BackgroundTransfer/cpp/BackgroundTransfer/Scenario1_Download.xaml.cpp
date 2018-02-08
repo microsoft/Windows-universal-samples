@@ -177,7 +177,7 @@ void Scenario1_Download::StartDownload(BackgroundTransferPriority priority)
     // validating the URI is required since it was received from an untrusted source (user input).
     // The URI is validated by calling TryGetUri() that will return 'false' for strings that are not valid URIs.
     // Note that when enabling the text box users may provide URIs to machines on the intrAnet that require the
-    // "Home or Work Networking" capability.
+    // "Private Networks (Client and Server)" capability.
     Uri^ source;
     if (!rootPage->TryGetUri(serverAddressField->Text, &source))
     {

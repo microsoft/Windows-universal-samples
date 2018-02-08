@@ -10,7 +10,7 @@
     <AssemblyName>AppUIBasics</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.17069.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -138,6 +138,7 @@
     <Content Include="Assets\PullToRefresh.png" />
     <Content Include="Assets\RatingControl.png" />
     <Content Include="Assets\Reveal.png" />
+    <Content Include="Assets\RevealFocus.png" />
     <Content Include="Assets\Swipe.png" />
     <Content Include="Assets\Tiles\LargeTile.scale-100.png" />
     <Content Include="Assets\Tiles\LargeTile.scale-125.png" />
@@ -196,6 +197,7 @@
     <Compile Include="Common\BooleanNegationConverter.cs" />
     <Compile Include="Common\BooleanToValueConverter.cs" />
     <Compile Include="Common\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Common\ColorToBrushConverter.cs" />
     <Compile Include="Common\ColorStringConverter.cs" />
     <Compile Include="Common\ComboBoxItemToStringConverter.cs" />
     <Compile Include="Common\DeviceFamilyTrigger.cs" />
@@ -323,6 +325,9 @@
     </Compile>
     <Compile Include="ControlPages\PivotPage.xaml.cs">
       <DependentUpon>PivotPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPages\RevealFocusPage.xaml.cs">
+      <DependentUpon>RevealFocusPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ControlPages\ProgressBarPage.xaml.cs">
       <DependentUpon>ProgressBarPage.xaml</DependentUpon>
@@ -660,6 +665,10 @@
     <Page Include="ControlPages\PivotPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlPages\RevealFocusPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ControlPages\ProgressBarPage.xaml">
       <Generator>MSBuild:Compile</Generator>

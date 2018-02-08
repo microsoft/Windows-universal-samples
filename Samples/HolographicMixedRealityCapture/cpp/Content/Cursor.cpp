@@ -154,8 +154,8 @@ void Cursor::CreateDeviceDependentResources()
     // target array index, thus avoiding any overhead that would be 
     // incurred by setting the geometry shader stage.
 
-    m_vertexShader = m_deviceResources->GetVertexShader(m_usingVprtShaders ? DX::VertexShader_TextureVPRT : DX::VertexShader_Texture);
-    m_inputLayout = m_deviceResources->GetInputLayout(m_usingVprtShaders ? DX::VertexShader_TextureVPRT : DX::VertexShader_Texture);
+    m_vertexShader = m_deviceResources->GetVertexShader(DX::VertexShader_Texture);
+    m_inputLayout = m_deviceResources->GetInputLayout(DX::VertexShader_Texture);
     m_pixelShader = m_deviceResources->GetPixelShader(DX::PixelShader_Cursor);
 
     D3D11_TEXTURE2D_DESC texDesc;

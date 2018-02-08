@@ -1,6 +1,7 @@
 ﻿using AppUIBasics.SamplePages;
 using System;
 using Windows.Foundation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -55,6 +56,18 @@ namespace AppUIBasics.ControlPages
                 Type pageType = Type.GetType(pageName);
                 contentFrame.Navigate(pageType);
             }
+        }
+
+        private void autoSuggestCheck_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            nvSample.AutoSuggestBox = new AutoSuggestBox() { QueryIcon= new SymbolIcon(Symbol.Find)};
+            XamlContent.ContentTemplate = (DataTemplate)this.Resources["AutoSuggestBoxCode"];
+        }
+
+        private void autoSuggestCheck_Unchecked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            nvSample.AutoSuggestBox = null;
+            XamlContent.ContentTemplate = (DataTemplate)this.Resources["NoAutoSuggestBoxCode"];
         }
     }
 }

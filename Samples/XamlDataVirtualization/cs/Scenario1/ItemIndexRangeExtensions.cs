@@ -24,7 +24,19 @@ namespace DataVirtualizationSample
 
         public static bool ContiguousOrOverlaps(this ItemIndexRange This, ItemIndexRange range)
         {
-            return (range.FirstIndex >= This.FirstIndex && range.FirstIndex <= This.LastIndex + 1) || (range.LastIndex + 1 >= This.FirstIndex && range.LastIndex <= This.LastIndex);
+            // This is left
+            if(This.FirstIndex < range.FirstIndex)
+            {
+                return (range.FirstIndex <= This.LastIndex + 1);
+            }
+            // This is right
+            else if (This.FirstIndex > range.FirstIndex)
+            {
+                return (This.FirstIndex <= range.LastIndex + 1);
+            }
+
+            // Aligned
+            return true;
         }
 
         public static bool Intersects(this ItemIndexRange This, ItemIndexRange range)
