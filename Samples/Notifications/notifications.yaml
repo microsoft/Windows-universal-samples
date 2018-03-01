@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Notifications sample
+  description: This sample demonstrates the use of the various Toast and LiveTile related API, such as Windows.UI including Notifications, Popups, and StartScreen namespaces.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - js
+  technologies:
+  - windows

@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Animation library (HTML) sample
+  description: This sample shows how to use the Animation Library APIs.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - js
+  technologies:
+  - windows

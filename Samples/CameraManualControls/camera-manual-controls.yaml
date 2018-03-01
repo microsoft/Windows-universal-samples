@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Manual camera controls sample
+  description: This extensive sample applies an end-to-end approach to demonstrate how to write a camera application using the Windows.Media.Capture API in conjunction with orientation sensors to cover some of the functions that advanced camera apps will require.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

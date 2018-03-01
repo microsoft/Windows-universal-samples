@@ -1,0 +1,13 @@
+### YamlMime:Sample
+sample:
+- name: Application resources and localization sample
+  description: This sample shows how to use application resources to separate localizable content from app code.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  - vb
+  technologies:
+  - windows

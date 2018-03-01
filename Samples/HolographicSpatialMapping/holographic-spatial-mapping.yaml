@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Holographic spatial mapping sample
+  description: This sample demonstrates how to acquire spatial mapping data from Windows Perception in real-time, and provides a simple example for consuming the spatial mapping data.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows

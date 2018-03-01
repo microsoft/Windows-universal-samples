@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: StreamSocket sample
+  description: This sample shows you how to a use stream (TCP) socket to send and receive data using the StreamSocket and related classes in the Windows.Networking.Sockets namespace in your Universal Windows Platform (UWP) app.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

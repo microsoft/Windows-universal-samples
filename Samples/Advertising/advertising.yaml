@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Advertising sample
+  description: This sample shows how to use the Microsoft Advertising SDK (Microsoft.Advertising) to show display ads and interstitial ads using the following methods: - Creating an ad control to show display ads using only XAML / HTML markup - Creating an ad control to show display ads programatically - Creating an ad control to show interstitial video ads programatically ## Prerequisites This sample requires the Microsoft Advertising SDK Libraries for XAML or JavaScript.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

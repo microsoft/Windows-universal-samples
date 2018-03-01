@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: HomeGroup sample
+  description: This sample demonstrates how to use a HomeGroup to open, search, and share files.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: AutoSuggestBox migration sample
+  description: This sample shows how to migrate your Windows 8.1 app to Windows 10 by replacing your SearchBox with an AutoSuggestBox.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

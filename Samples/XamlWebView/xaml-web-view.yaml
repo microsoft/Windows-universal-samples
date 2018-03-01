@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: WebView control (XAML) sample
+  description: This sample demonstrates how to use the XAML WebView control.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

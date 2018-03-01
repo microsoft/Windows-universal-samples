@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Contact picker sample
+  description: This sample shows how to use the ContactPicker class to select one or more contacts.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

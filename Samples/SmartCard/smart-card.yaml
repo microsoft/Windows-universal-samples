@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Smart cards sample
+  description: This sample demonstrates how to use the Windows.Devices.SmartCards API to work with smart cards and smart card readers programmatically.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

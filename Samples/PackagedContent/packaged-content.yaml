@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: XHR, handling navigation errors, and URL schemes sample
+  description: This sample demonstrates how to handle navigation errors, how to use the right URL scheme to reference packaged content, and how to use XMLHttpRequest (XHR) to retrieve remote and local content.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - js
+  technologies:
+  - windows

@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Linguistic services sample
+  description: This sample demonstrates the use of Extended Linguistic Services (ELS) in a Windows Store app.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows

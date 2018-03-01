@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Number formatting and parsing sample
+  description: This sample demonstrates how to use the DecimalFormatter, CurrencyFormatter, PercentFormatter and PermilleFormatter classes in the Windows.Globalization.NumberFormatting namespace to display and parse numbers, currencies, and percent values.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

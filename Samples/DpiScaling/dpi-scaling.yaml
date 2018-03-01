@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Scaling according to DPI sample
+  description: This sample describes how to build an app that scales according to the dots per inch (dpi) (pixel density) of the screen by loading images of the right scale or by overriding default scaling.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

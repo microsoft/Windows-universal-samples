@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Bluetooth RFCOMM chat sample
+  description: This sample demonstrates the use of classes in the Windows.Devices.Bluetooth.Rfcomm namespace to communicate over sockets.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

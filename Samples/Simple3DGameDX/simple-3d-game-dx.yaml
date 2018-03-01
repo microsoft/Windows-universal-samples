@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Direct3D game sample
+  description: This sample demonstrates the basic end-to-end implementation of a simple first person 3-D game using DirectX (Direct3D 11.2, Direct2D, Windows.Gaming.Input, and XAudio2) in a C++ app.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows

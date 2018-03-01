@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: XML DOM sample
+  description: This sample demonstrates common XML API use scenarios for the Windows.Data.Xml.Dom and Windows.Data.Xml.Xsl namespaces in the Windows Runtime.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - js
+  technologies:
+  - windows

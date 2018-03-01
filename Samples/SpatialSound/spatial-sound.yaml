@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Spatial audio sample
+  description: This sample demonstrates how to render spatial audio using HRTF xAPO and XAudio2 API within Universal Applications.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows

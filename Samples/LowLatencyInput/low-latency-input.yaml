@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Low latency input sample
+  description: This sample shows how to handle input on a dedicated input thread to achieve lowest input latency.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows

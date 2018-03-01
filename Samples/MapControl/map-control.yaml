@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: MapControl sample
+  description: This sample demonstrates how to use the universal map control (MapControl) in a UWP app.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

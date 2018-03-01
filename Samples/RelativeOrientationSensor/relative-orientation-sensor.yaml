@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Relative orientation sensor sample
+  description: This sample demonstrates use of the Windows.Devices.Sensors.Orientation API for the Relative Orientation sensor.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

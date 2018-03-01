@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: x:DeferLoadStrategy sample
+  description: This sample shows how to reduce your app's startup time by deferring the creation of elements defined in your markup until you really need them.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

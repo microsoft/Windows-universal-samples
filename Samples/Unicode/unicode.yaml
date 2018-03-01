@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Unicode string processing sample
+  description: Demonstrates how to use the UnicodeCharacters Windows Runtime class in processing Unicode properties in a string.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

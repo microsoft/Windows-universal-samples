@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: AudioGraph sample
+  description: This sample shows how to use the APIs in the Windows.Media.Audio namespace to create audio graphs for audio routing, mixing, and processing scenarios.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

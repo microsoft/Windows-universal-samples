@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: x:Bind sample
+  description: This sample shows how to use x:Bind for data binding in XAML apps.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows

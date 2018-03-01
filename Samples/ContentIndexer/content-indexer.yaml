@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Content indexer sample
+  description: This sample shows how to add, update, and retrieve items and properties from the indexer.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

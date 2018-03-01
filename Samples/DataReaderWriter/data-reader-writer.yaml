@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Serializing and deserializing data sample
+  description: This sample shows how to use the DataReader and DataWriter classes to store and retrieve data.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Custom serial device sample
+  description: This sample demonstrates the use of the Windows.Devices.SerialCommunication WinRT APIs to communicate with a Serial device.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - js
+  technologies:
+  - windows

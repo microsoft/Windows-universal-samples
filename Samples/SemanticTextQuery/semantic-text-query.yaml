@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Semantic text query sample
+  description: This sample shows the use of the different SemanticTextQuery APIs to find the corresponding hits when querying strings or file properties.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

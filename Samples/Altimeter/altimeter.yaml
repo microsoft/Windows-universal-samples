@@ -1,0 +1,13 @@
+### YamlMime:Sample
+sample:
+- name: Altimeter sample
+  description: This sample demonstrates the use of the Windows.Devices.Sensors.Altimeter API.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  - vb
+  technologies:
+  - windows

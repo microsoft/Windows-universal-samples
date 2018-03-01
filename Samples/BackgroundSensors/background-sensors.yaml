@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Background sensors sample
+  description: This sample shows how to use background tasks with a device use trigger targetting sensors APIs.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - vb
+  technologies:
+  - windows

@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Globalization preferences sample
+  description: This sample demonstrates how to use the Windows.System.UserProfile.GlobalizationPreferences class to obtain the user's globalization preferences.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

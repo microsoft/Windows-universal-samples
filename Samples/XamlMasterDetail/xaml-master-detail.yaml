@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Master/detail sample
+  description: This sample shows how to implement a responsive master/detail experience in XAML.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows

@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Direct2D gradient mesh sample
+  description: This sample demonstrates how to instantiate and render a gradient mesh in Direct2D.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows

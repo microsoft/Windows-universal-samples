@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Basic face detection sample
+  description: This sample shows how to use the Windows.Media.FaceAnalysis.FaceDetector WinRT class to find human faces within a still image.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - vb
+  technologies:
+  - windows

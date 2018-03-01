@@ -1,0 +1,13 @@
+### YamlMime:Sample
+sample:
+- name: Compass sample
+  description: This sample demonstrates how to use the Windows.Devices.Sensors.Compass API.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  - vb
+  technologies:
+  - windows

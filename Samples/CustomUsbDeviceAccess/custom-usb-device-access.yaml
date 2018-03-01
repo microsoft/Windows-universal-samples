@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Custom USB device sample
+  description: This sample shows how to communicate with a USB device by using the Windows.Devices.Usb namespace.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - js
+  technologies:
+  - windows

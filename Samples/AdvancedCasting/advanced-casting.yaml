@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Advanced casting sample
+  description: This sample shows how to use the APIs in the Windows.Media.Casting and Windows.Media.DialProtocol namespaces.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - vb
+  technologies:
+  - windows

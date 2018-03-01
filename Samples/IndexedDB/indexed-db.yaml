@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: IndexedDB sample
+  description: This sample demonstrates a common usage pattern for the IndexedDB web standard API.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - js
+  technologies:
+  - windows

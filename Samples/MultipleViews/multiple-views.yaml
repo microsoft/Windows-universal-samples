@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Multiple views sample
+  description: This sample demonstrates showing multiple windows for a single app.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

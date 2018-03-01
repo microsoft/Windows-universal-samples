@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: # Jump list customization sample
+  description: This sample shows how to customize your app's jump list.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

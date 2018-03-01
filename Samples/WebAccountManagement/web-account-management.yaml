@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Web account management sample
+  description: This sample demonstrates the way to get Tokens to access different accounts Specifically, this sample demonstrates the following scenarios: - How to get a token for a Microsoft account - How to get a token for an Azure AD account (Work or school account) - How to show UI and get a token for a single Microsoft account, Azure AD, or other account - How to show UI to add, manage, and remove many Microsoft accounts, Azure AD accounts, or custom accounts - Adding an account from a custom provider Note The Universal Windows app samples require Visual Studio 2015 to build and Windows 10 to execute.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows

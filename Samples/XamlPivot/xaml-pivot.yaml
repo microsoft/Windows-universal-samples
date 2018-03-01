@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Pivot sample
+  description: This sample shows how to use a Pivot control in your UWP application.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows
