@@ -127,11 +127,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_CheckConsentAvailability.xaml">
+    <Page Include="..\shared\Scenario1_CheckConsentAvailability.xaml">
+      <Link>Scenario1_CheckConsentAvailability.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_RequestConsent.xaml">
+    <Page Include="..\shared\Scenario2_RequestConsent.xaml">
+      <Link>Scenario2_RequestConsent.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -91,7 +91,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid
                 x:Name="pageTitle"
@@ -120,16 +119,16 @@
                     <AppBarButton
                         x:Name="ThemeButton"
                         Click="OnThemeButtonClick"
-                        KeyDown="OnThemeButtonKeyDown"
-                        Label="Toggle Theme"
-                        XYFocusRight="{x:Bind controlsSearchBox}">
+                        Label="Toggle Theme">
                         <AppBarButton.Icon>
                             <FontIcon Glyph="&#xE771;" Margin="0,-2,0,0" />
                         </AppBarButton.Icon>
                     </AppBarButton>
+                    <!--XYFocusRight="{x:Bind controlsSearchBox}" -->
+                    <!--KeyDown="OnThemeButtonKeyDown" (appbarbutton) -->
                 </CommandBar>
             </Border>
-            <Grid
+            <!--<Grid
                 x:Name="grid"
                 Grid.Column="2"
                 MinHeight="48"
@@ -163,7 +162,7 @@
                         <SymbolIcon Symbol="Find" />
                     </Button.Content>
                 </Button>
-            </Grid>
+            </Grid>-->
         </Grid>
     </Grid>
 </UserControl>

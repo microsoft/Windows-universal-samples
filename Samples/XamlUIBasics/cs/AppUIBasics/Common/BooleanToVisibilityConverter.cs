@@ -29,4 +29,30 @@ namespace AppUIBasics.Common
             return value is Visibility && (Visibility)value == Visibility.Visible;
         }
     }
+
+    public sealed class BooleanToBackButtonVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return (value is bool && (bool)value) ? NavigationViewBackButtonVisible.Visible : NavigationViewBackButtonVisible.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value is NavigationViewBackButtonVisible && (NavigationViewBackButtonVisible)value == NavigationViewBackButtonVisible.Visible;
+        }
+    }
+
+    public sealed class BooleanNegationToBackButtonVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return (value is bool && (bool)value) ? NavigationViewBackButtonVisible.Collapsed : NavigationViewBackButtonVisible.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value is NavigationViewBackButtonVisible && (NavigationViewBackButtonVisible)value == NavigationViewBackButtonVisible.Collapsed;
+        }
+    }
 }

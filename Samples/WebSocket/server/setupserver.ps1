@@ -13,7 +13,6 @@ $scriptPath = $(Split-Path $MyInvocation.MyCommand.Path)
 $iisAppName = "WebSocketSample"
 $iisAppPath = "$env:systemdrive\inetpub\wwwroot\WebSocketSample"
 $websitePath = "$scriptPath\website"
-$webpageFileName = "echowebsocket.ashx"
 $clientCertWebpageFileName = "EchoWebSocketWithClientAuthentication.ashx"
 $wsfirewallRuleName = "WebSocketSample - HTTP 80"
 $wssFirewallRuleName = "WebSocketSample - HTTPS 443"
@@ -54,8 +53,8 @@ if ($featuresToEnable.Count -gt 0)
 if (-not (Test-Path $iisAppPath))
 {
     mkdir $iisAppPath > $null
-    Copy-Item $websitePath\$webpageFileName $iisAppPath
-    Copy-Item $websitePath\$webpageFileName $iisAppPath\$clientCertWebpageFileName
+    Copy-Item $websitePath\* $iisAppPath -r
+    Copy-Item $websitePath\echowebsocket.ashx $iisAppPath\$clientCertWebpageFileName
 }
 
 # Add web application.

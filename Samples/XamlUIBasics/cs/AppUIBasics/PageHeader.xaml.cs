@@ -71,7 +71,7 @@ namespace AppUIBasics
             VisualStateManager.GoToState(this, isFilteredPage ? "FilteredPage" : "NonFilteredPage", false);
         }
 
-        private void OnControlsSearchBoxTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        /*private void OnControlsSearchBoxTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
@@ -96,9 +96,9 @@ namespace AppUIBasics
                     controlsSearchBox.ItemsSource = new string[] { "No results found" };
                 }
             }
-        }
+        }*/
 
-        private void OnControlsSearchBoxQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        /*private void OnControlsSearchBoxQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
             if (args.ChosenSuggestion != null && args.ChosenSuggestion is ControlInfoDataItem)
             {
@@ -109,9 +109,9 @@ namespace AppUIBasics
             {
                 NavigationRootPage.RootFrame.Navigate(typeof(SearchResultsPage), args.QueryText);
             }
-        }
+        }*/
 
-        private void OnSearchButtonClick(object sender, RoutedEventArgs e)
+        /*private void OnSearchButtonClick(object sender, RoutedEventArgs e)
         {
             controlsSearchBox.Visibility = Visibility.Visible;
             bool isFocused = controlsSearchBox.Focus(FocusState.Programmatic);
@@ -122,9 +122,9 @@ namespace AppUIBasics
             }
             searchButton.Visibility = Visibility.Collapsed;
             commandBarBorder.Visibility = Visibility.Collapsed;
-        }
+        }*/
 
-        private void OnControlsSearchBoxLostFocus(object sender, RoutedEventArgs e)
+        /*private void OnControlsSearchBoxLostFocus(object sender, RoutedEventArgs e)
         {
             if (Window.Current.Bounds.Width <= 640)
             {
@@ -132,9 +132,9 @@ namespace AppUIBasics
                 commandBarBorder.Visibility = Visibility.Visible;
                 searchButton.Visibility = Visibility.Visible;
             }
-        }
+        }*/
 
-        private void OnThemeButtonKeyDown(object sender, KeyRoutedEventArgs e)
+        /*private void OnThemeButtonKeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == VirtualKey.Right)
             {
@@ -144,16 +144,16 @@ namespace AppUIBasics
                     controlsSearchBox.Focus(FocusState.Programmatic);
                 }
             }
-        }
+        }*/
 
         private void OnThemeButtonClick(object sender, RoutedEventArgs e)
         {
             ToggleThemeAction?.Invoke();
         }
 
-        private void KeyboardAccelerator_Invoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+        /*private void KeyboardAccelerator_Invoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
         {
             controlsSearchBox.Focus(FocusState.Keyboard);
-        }
+        }*/
     }
 }

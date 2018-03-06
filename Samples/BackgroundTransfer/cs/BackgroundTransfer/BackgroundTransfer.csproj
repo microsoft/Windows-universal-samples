@@ -11,8 +11,8 @@
     <AssemblyName>BackgroundTransfer</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.17069.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17069.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -121,6 +121,9 @@
     <Compile Include="Scenario6_RecoverableErrors.xaml.cs">
       <DependentUpon>Scenario6_RecoverableErrors.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario7_DownloadReordering.xaml.cs">
+      <DependentUpon>Scenario7_DownloadReordering.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -165,6 +168,11 @@
     </Page>
     <Page Include="..\..\shared\Scenario6_RecoverableErrors.xaml">
       <Link>Scenario6_RecoverableErrors.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\shared\Scenario7_DownloadReordering.xaml">
+      <Link>Scenario7_DownloadReordering.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

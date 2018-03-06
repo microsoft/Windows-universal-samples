@@ -255,6 +255,26 @@
             IsTabStop="False"
             ItemInvoked="OnNavigationViewItemInvoked">
             <!--Template="{StaticResource PlatformAdaptableNavigationViewStyle}"-->
+            <NavigationView.AutoSuggestBox>
+                <!--<AutoSuggestBox x:Name="ASB" QueryIcon="Find"/>-->
+
+                <AutoSuggestBox
+                    x:Name="controlsSearchBox"
+                    Style="{StaticResource AutoSuggestBoxStyle}"
+                    VerticalAlignment="Center"
+                    x:FieldModifier="public"
+                    LostFocus="OnControlsSearchBoxLostFocus"
+                    PlaceholderText="Search"
+                    QueryIcon="Find"
+                    QuerySubmitted="OnControlsSearchBoxQuerySubmitted"
+                    RequestedTheme="Light"
+                    TextChanged="OnControlsSearchBoxTextChanged" >
+                    <AutoSuggestBox.KeyboardAccelerators>
+                        <KeyboardAccelerator Invoked="KeyboardAccelerator_Invoked" Key="E" Modifiers="Control"/>
+                    </AutoSuggestBox.KeyboardAccelerators>
+                </AutoSuggestBox>
+            </NavigationView.AutoSuggestBox>
+            
             <Frame x:Name="rootFrame" Navigated="OnRootFrameNavigated" />
         </NavigationView>
     </Grid>

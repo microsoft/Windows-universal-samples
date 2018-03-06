@@ -15,6 +15,7 @@
     var MessageWebSocket = Windows.Networking.Sockets.MessageWebSocket;
     var SocketMessageType = Windows.Networking.Sockets.SocketMessageType;
     var UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding;
+    var ChainValidationResult = Windows.Security.Cryptography.Certificates.ChainValidationResult;
 
     // Local variables
     var messageWebSocket;
@@ -77,11 +78,10 @@
         // input). The URI is validated by calling validateAndCreateUri() that will return null
         // for strings that are not valid WebSocket URIs.
         // Note that when enabling the text box users may provide URIs to machines on the local network
-        // or internet. In these cases the app requires the "Home or Work Networking" or
+        // or internet. In these cases the app requires the "Private Networks (Client and Server)" or
         // "Internet (Client)" capability respectively.
         var server = SdkSample.validateAndCreateUri(serverAddressField.value);
-        if (!server)
-        {
+        if (!server) {
             return WinJS.Promise.wrap();
         }
 

@@ -1,0 +1,77 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+{
+    -ms-content-zooming: none;
+}
+
+body
+{
+    touch-action: none;
+}
+
+#scenarioHeader
+{
+    flex-shrink: 0;
+}
+
+#scenarioView
+{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#scenarioContent
+{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#canvasGroup {
+    display: block;
+    position: relative;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    z-index: 0;
+    pen-action: none;
+}
+
+canvas.surface {
+    display: block;
+    position: absolute;
+    width: 2560px;
+    height: 2560px;
+}
+
+#ToolBar
+{
+    flex-shrink: 0;
+}
+
+#Black .win-label
+{
+    color: Black;
+}
+
+#Blue .win-label
+{
+    color: Blue;
+}
+
+#Red .win-label
+{
+    color: Red;
+}
+
+#Green .win-label
+{
+    color: Green;
+}

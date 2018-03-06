@@ -53,6 +53,7 @@
             <common:NullToVisibilityConverter x:Key="inverseNullToVisibilityConverter" NonNullValue="Collapsed" NullValue="Visible" />
             <common:BooleanToValueConverter x:Key="booleanToValueConverter" />
             <common:ShowAcrylicBehindHeaderConverter x:Key="showAcrylicBehindHeaderConverter" />
+            <common:ColorToBrushConverter x:Key="colorToBrushConverter"/>
 
             <!--  Breakpoints  -->
             <x:Double x:Key="Breakpoint640Plus">641</x:Double>
@@ -94,7 +95,7 @@
                 <Setter Property="PlaceholderForeground" Value="{ThemeResource ComboBoxPlaceHolderForeground}" />
             </Style>
 
-            <Style x:Key="AutoSuggestBoxTextBoxStyle" TargetType="TextBox">
+            <Style x:Key="CustomAutoSuggestBoxTextBoxStyle" TargetType="TextBox">
                 <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}" />
                 <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}" />
                 <Setter Property="Foreground" Value="{ThemeResource TextControlForeground}" />
@@ -414,7 +415,7 @@
             <Style x:Key="AutoSuggestBoxStyle" TargetType="AutoSuggestBox">
                 <Setter Property="VerticalAlignment" Value="Top" />
                 <Setter Property="IsTabStop" Value="False" />
-                <Setter Property="TextBoxStyle" Value="{StaticResource AutoSuggestBoxTextBoxStyle}" />
+                <Setter Property="TextBoxStyle" Value="{StaticResource CustomAutoSuggestBoxTextBoxStyle}" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="AutoSuggestBox">

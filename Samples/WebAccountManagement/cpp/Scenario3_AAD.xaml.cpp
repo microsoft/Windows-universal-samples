@@ -217,6 +217,9 @@ void SDKTemplate::Scenario3_Aad::AuthenticateWithRequestToken(WebAccountProvider
 
     auto wtr = ref new WebTokenRequest(passedProvider, scope, clientID);
 
+	//Include the resource for which the token is being requested as a property of WebTokenRequest
+	wtr->Properties->Insert(L"resource", L"https://graph.windows.net");
+
     // When our task finishes it will return result of the operation, and if successful it will contain a token
     // and WebAccount. We save the WebAccount as the "active" account.
     concurrency::create_task(WebAuthenticationCoreManager::RequestTokenAsync(wtr)).then([this](WebTokenRequestResult^ webTokenRequestResult)

@@ -10,10 +10,12 @@
 using AppUIBasics.Common;
 using AppUIBasics.Data;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Windows.Devices.Input;
 using Windows.Gaming.Input;
+using Windows.System;
 using Windows.System.Profile;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation;
@@ -63,7 +65,7 @@ namespace AppUIBasics
         {
             this.InitializeComponent();
 
-            _navHelper = new RootFrameNavigationHelper(rootFrame);
+            _navHelper = new RootFrameNavigationHelper(rootFrame, NavigationViewControl);
 
             SetDeviceFamily();
             AddNavigationMenuItems();
@@ -104,6 +106,9 @@ namespace AppUIBasics
 
         private void AddNavigationMenuItems()
         {
+            // for spacing from search box
+            //NavigationViewControl.MenuItems.Add(new NavigationViewItemSeparator());
+
             foreach (var group in ControlInfoDataSource.Instance.Groups)
             {
                 var item = new NavigationViewItem() { Content = group.Title, Tag = group.UniqueId, DataContext = group };
@@ -164,7 +169,8 @@ namespace AppUIBasics
         {
             if (!e.Handled && e.Key == Windows.System.VirtualKey.E)
             {
-                AutoSuggestBox box = this.GetDescendantsOfType<PageHeader>().First().controlsSearchBox;
+                //AutoSuggestBox box = this.GetDescendantsOfType<PageHeader>().First().controlsSearchBox;
+                AutoSuggestBox box = controlsSearchBox;
                 var f = box.Focus(FocusState.Programmatic);
             }
         }
@@ -212,6 +218,59 @@ namespace AppUIBasics
                 bool isFilteredPage = e.SourcePageType == typeof(SectionPage) || e.SourcePageType == typeof(SearchResultsPage);
                 PageHeader?.UpdateBackground(isFilteredPage);
             }
+        }
+
+        private void OnControlsSearchBoxTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                var suggestions = new List<ControlInfoDataItem>();
+
+                foreach (var group in ControlInfoDataSource.Instance.Groups)
+                {
+                    var matchingItems = group.Items.Where(
+                        item => item.Title.IndexOf(sender.Text, StringComparison.CurrentCultureIgnoreCase) >= 0);
+
+                    foreach (var item in matchingItems)
+                    {
+                        suggestions.Add(item);
+                    }
+                }
+                if (suggestions.Count > 0)
+                {
+                    controlsSearchBox.ItemsSource = suggestions.OrderByDescending(i => i.Title.StartsWith(sender.Text, StringComparison.CurrentCultureIgnoreCase)).ThenBy(i => i.Title);
+                }
+                else
+                {
+                    controlsSearchBox.ItemsSource = new string[] { "No results found" };
+                }
+            }
+        }
+
+        private void OnControlsSearchBoxQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (args.ChosenSuggestion != null && args.ChosenSuggestion is ControlInfoDataItem)
+            {
+                var itemId = (args.ChosenSuggestion as ControlInfoDataItem).UniqueId;
+                NavigationRootPage.RootFrame.Navigate(typeof(ItemPage), itemId);
+            }
+            else if (!string.IsNullOrEmpty(args.QueryText))
+            {
+                NavigationRootPage.RootFrame.Navigate(typeof(SearchResultsPage), args.QueryText);
+            }
+        }
+
+        private void OnControlsSearchBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Window.Current.Bounds.Width <= 640)
+            {
+                controlsSearchBox.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void KeyboardAccelerator_Invoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+        {
+            controlsSearchBox.Focus(FocusState.Keyboard);
         }
     }
 
