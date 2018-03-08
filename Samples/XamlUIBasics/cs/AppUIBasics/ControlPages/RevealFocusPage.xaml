@@ -68,7 +68,11 @@
                 </RelativePanel>
             </Flyout>
         </StackPanel.Resources>
-        
+
+        <TextBlock Margin="0,16,0,0">
+            Use the TAB key on your keyboard in the page below to see the focus visuals.
+        </TextBlock>
+
         <local:ControlExample x:Name="Example1" HeaderText="Change the appearance of the focus rectangle.">
 
             <StackPanel Orientation="Horizontal">
@@ -79,6 +83,9 @@
 
             <local:ControlExample.Options>
                 <StackPanel>
+                    <TextBlock Margin="0,0,0,10">
+                        FocusVisualKind:
+                    </TextBlock>
                     <RadioButton x:Name="HighVisibility" GroupName="FocusVisualKind" Content="High Visibility" Checked="HighVisibility_Checked"/>
                     <RadioButton x:Name="RevealFocus" GroupName="FocusVisualKind" Content="Reveal Focus"  Checked="RevealFocus_Checked"/>
                 </StackPanel>
@@ -91,11 +98,12 @@
             </local:ControlExample.Xaml>
         </local:ControlExample>
 
-        <TextBlock Margin="0,16,0,0">
+        <TextBlock Margin="0,16,0,0" TextWrapping="WrapWholeWords">
             Note: Turning on <Bold>Reveal</Bold> focus will change the focus visuals that "UseSystemFocusVisuals" in the entire app.
+            Reveal focus should be used on Xbox only. Apps should use high visibility focus rectangles across other form factors.
         </TextBlock>
-        
-        <local:ControlExample x:Name="Example2" HeaderText="Change the size of the focus rectangle.">
+
+        <local:ControlExample x:Name="Example2" HeaderText="Change the size of the focus rectangle." ActualThemeChanged="Example2_ActualThemeChanged">
 
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -132,12 +140,13 @@
                          />
 
                 <ComboBox MinWidth="300" Margin="0,16,0,0"
+                          SelectedIndex="0"
                     FocusVisualMargin="{x:Bind local2:MyConverters.IntToThickness(marginSlider.Value), Mode=OneWay}"
                     FocusVisualPrimaryThickness="{x:Bind local2:MyConverters.IntToThickness(primarySlider.Value), Mode=OneWay}"
                     FocusVisualSecondaryThickness="{x:Bind local2:MyConverters.IntToThickness(secondarySlider.Value), Mode=OneWay}"
                     FocusVisualPrimaryBrush="{x:Bind myPrimaryColorPicker.Color, Converter={StaticResource colorToBrushConverter}, Mode=OneWay}"
                     FocusVisualSecondaryBrush="{x:Bind mySecondaryColorPicker.Color, Converter={StaticResource colorToBrushConverter}, Mode=OneWay}">
-                    
+
                     <ComboBoxItem>Apples</ComboBoxItem>
                     <ComboBoxItem>Bananas</ComboBoxItem>
                     <ComboBoxItem>Oranges</ComboBoxItem>
@@ -178,7 +187,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <TextBlock
                             Text="Primary focus color:"
                             VerticalAlignment="Center"/>
@@ -208,15 +217,16 @@
                             Grid.Column="1"/>
                     </Grid>
                 </StackPanel>
-                
+
             </local:ControlExample.Options>
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;Grid.Resources&gt;</Paragraph>
-                    <Paragraph TextIndent="32">&lt;SolidColorBrush Color="
+                    <Paragraph TextIndent="32">&lt;SolidColorBrush x:Key="
+                        <Run x:Name="primaryColorRun"/> " Color="
                         <Run Text="{x:Bind myPrimaryColorPicker.Color.ToString(), Mode=OneWay}" /> "/&gt;
                     </Paragraph>
-                    <Paragraph TextIndent="32">&lt;SolidColorBrush Color="
+                    <Paragraph TextIndent="32">&lt;SolidColorBrush x:Key="SystemControlFocusVisualSecondaryBrush" Color="
                         <Run Text="{x:Bind mySecondaryColorPicker.Color.ToString(), Mode=OneWay}" /> "/&gt;
                     </Paragraph>
                     <Paragraph>&lt;/Grid.Resources&gt;</Paragraph>

@@ -170,7 +170,7 @@
     <Content Include="js\scenario5_deviceReadWrite.js" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="RpcClientRt\RpcClientRt.vcxproj" />
+    <ProjectReference Condition="'$(Platform)' == 'x86' Or '$(Platform)' == 'x64'" Include="RpcClientRt\RpcClientRt.vcxproj" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <!-- To modify your build process, add your task inside one of the targets below then uncomment

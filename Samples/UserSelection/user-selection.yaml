@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Disabling selection sample
+  description: This sample demonstrates how your app can make content areas in your Windows Store app using JavaScript unselectable using the -ms-user-select CSS attribute.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - js
+  technologies:
+  - windows

@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Composition visual without framework sample
+  description: This sample provides an introduction to the Windows.UI.Composition namespace.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - vb
+  technologies:
+  - windows

@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Appointment calendar sample
+  description: Demonstrates the functionality of the API of the Windows.ApplicationModel.Appointments namespace.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - vb
+  technologies:
+  - windows

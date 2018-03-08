@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Transcoding media sample
+  description: This sample demonstrates how to use the Windows.Media.Transcoding API to transcode a video file in a Windows Store app..
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

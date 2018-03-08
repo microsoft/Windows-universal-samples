@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Device enumeration and pairing sample
+  description: This sample shows how to use the Windows.Devices.Enumeration APIs find devices internally connected to the system, externally connected, or nearby over wireless or networking protocols and get information about them.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

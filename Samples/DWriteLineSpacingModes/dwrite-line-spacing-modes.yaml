@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Line spacing (DirectWrite) sample
+  description: This sample demonstrates how to use different line spacing options that are provided for the DirectWrite text layout API.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows

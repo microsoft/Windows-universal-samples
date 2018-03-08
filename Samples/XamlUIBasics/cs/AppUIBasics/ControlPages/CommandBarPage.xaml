@@ -29,7 +29,7 @@
                     <AppBarButton Icon="Setting" Label="Settings"/>
                 </CommandBar.SecondaryCommands>
             </CommandBar>
-            
+
             <local:ControlExample.Options>
                 <StackPanel>
                     <TextBlock Text="Show or hide" />
@@ -40,7 +40,7 @@
                     <Button Margin="0,12,0,0" Content="Remove secondary commands" Click="RemoveSecondaryCommands_Click" />
                 </StackPanel>
             </local:ControlExample.Options>
-            
+
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right"&gt;</Paragraph>

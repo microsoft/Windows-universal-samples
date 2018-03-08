@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Contact Card integration sample
+  description: This sample shows how to integrate your app into the People App's contact card and the Mini Contact card by using annotations.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

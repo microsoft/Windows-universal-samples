@@ -41,7 +41,7 @@ namespace AppUIBasics.ControlPages
             if (f != null)
             {
                 f.Hide();
-            }   
+            }
         }
     }
 }

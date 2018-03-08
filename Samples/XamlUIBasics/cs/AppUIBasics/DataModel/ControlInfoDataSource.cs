@@ -131,7 +131,7 @@ namespace AppUIBasics.Data
         private ControlInfoDataSource() { }
 
         #endregion
-        
+
         private IList<ControlInfoDataGroup> _groups = new List<ControlInfoDataGroup>();
         public IList<ControlInfoDataGroup> Groups
         {
@@ -199,7 +199,7 @@ namespace AppUIBasics.Data
                                                                           groupObject["Subtitle"].GetString(),
                                                                           groupObject["ImagePath"].GetString(),
                                                                           groupObject["Description"].GetString());
-                    
+
                     foreach (JsonValue itemValue in groupObject["Items"].GetArray())
                     {
                         JsonObject itemObject = itemValue.GetObject();

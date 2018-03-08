@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Animated GIF playback (XAML) sample
+  description: This sample demonstrates a solution for playback of animated GIF images using Windows XAML and the Win2D graphics framework.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Microsoft Passport and Windows Hello sample
+  description: This sample shows how apps can incorporate Microsoft Passport and Windows Hello into their normal sign-in flow to offer convenient and secure multi-factor authentication.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Geotag sample
+  description: This sample demonstrates the GeotagHelper runtime class.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

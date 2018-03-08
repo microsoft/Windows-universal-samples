@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Real-time communication sample
+  description: This sample demonstrates how to use the low latency feature to enable real-time communication applications.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

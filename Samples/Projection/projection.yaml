@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Projection sample
+  description: This sample demonstrates how to display two different views of your app UI on different screens, as users might do when projecting your app in a meeting or conference.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

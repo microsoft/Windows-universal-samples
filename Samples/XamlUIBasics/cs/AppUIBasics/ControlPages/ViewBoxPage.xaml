@@ -37,7 +37,7 @@
             <local:ControlExample.Options>
                 <StackPanel Width="200">
                     <Slider x:Name="SizeSlider" Header="Width/Height" Maximum="300" Minimum="20" Value="200" />
-                    
+
                     <TextBlock Text="Stretch" Margin="0,0,0,8" />
                     <RadioButton Content="None" Tag="None" GroupName="Stretch" Checked="StretchButton_Checked" />
                     <RadioButton Content="Fill" Tag="Fill" GroupName="Stretch" Checked="StretchButton_Checked" />
@@ -50,7 +50,7 @@
                     <RadioButton Content="Both" Tag="Both" GroupName="StretchDirection" Checked="StretchDirectionButton_Checked" IsChecked="True" />
                 </StackPanel>
             </local:ControlExample.Options>
-            
+
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;Viewbox Height="<Run Text="{x:Bind SizeSlider.Value, Mode=OneWay}" />"

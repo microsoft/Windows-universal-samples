@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Client Device Information sample
+  description: This sample shows how apps can retrieve device information such as operating system and manufacturer.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

@@ -195,7 +195,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Service\Client\RpcClient.vcxproj">
+    <ProjectReference Condition="'$(Platform)' == 'x86' Or '$(Platform)' == 'x64'" Include="..\Service\Client\RpcClient.vcxproj">
       <Project>{2c78f411-866b-472d-9c28-75d59f179525}</Project>
       <Name>RpcClient</Name>
     </ProjectReference>

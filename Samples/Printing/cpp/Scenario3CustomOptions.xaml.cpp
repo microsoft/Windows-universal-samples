@@ -6,6 +6,7 @@
 
 using namespace SDKTemplate;
 
+using namespace Concurrency;
 using namespace Platform;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
@@ -20,6 +21,22 @@ using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
+using namespace Windows::Storage::Streams;
+
+CustomOptionsPrintHelper::CustomOptionsPrintHelper(Page^ scenarioPage) : 
+    PrintHelper(scenarioPage)
+{
+    // Start these operations early because we know we're going to need the
+    // streams in PrintTaskRequested.
+    RandomAccessStreamReference^ wideMarginsIconReference = RandomAccessStreamReference::CreateFromUri(ref new Uri("ms-appx:///Assets/wideMargins.svg"));
+    m_wideMarginsIconAsyncOperation = wideMarginsIconReference->OpenReadAsync();
+
+    RandomAccessStreamReference^ moderateMarginsIconReference = RandomAccessStreamReference::CreateFromUri(ref new Uri("ms-appx:///Assets/moderateMargins.svg"));
+    m_moderateMarginsIconAsyncOperation = moderateMarginsIconReference->OpenReadAsync();
+
+    RandomAccessStreamReference^ narrowMarginsIconReference = RandomAccessStreamReference::CreateFromUri(ref new Uri("ms-appx:///Assets/narrowMargins.svg"));
+    m_narrowMarginsIconAsyncOperation = narrowMarginsIconReference->OpenReadAsync();
+}
 
 DisplayContent GetDisplayContent(int option)
 {
@@ -50,6 +67,8 @@ DisplayContent GetDisplayContent(int option)
 /// <param name="e">PrintTaskRequestedEventArgs</param>
 void CustomOptionsPrintHelper::PrintTaskRequested(PrintManager^ sender, PrintTaskRequestedEventArgs^ e)
 {
+    auto deferral = e->Request->GetDeferral();
+
     PrintTask^ printTask = e->Request->CreatePrintTask("C++ Printing SDK Sample", ref new PrintTaskSourceRequestedHandler([=](PrintTaskSourceRequestedArgs^ args)
     {
         args->SetSource(PrintDocumentSource);
@@ -77,21 +96,58 @@ void CustomOptionsPrintHelper::PrintTaskRequested(PrintManager^ sender, PrintTas
     // Add the custom option to the option list
     displayedOptions->Append(L"PageContent");
 
-    printDetailedOptions->OptionChanged += ref new TypedEventHandler<PrintTaskOptionDetails^, PrintTaskOptionChangedEventArgs^>(this, &CustomOptionsPrintHelper::printDetailedOptions_OptionChanged);
+    // Create a new toggle option "Show header". 
+    PrintCustomToggleOptionDetails^ header = printDetailedOptions->CreateToggleOption("Header", "Show header");
 
-    // Print Task event handler is invoked when the print job is completed.
-    printTask->Completed += ref new TypedEventHandler<PrintTask^, PrintTaskCompletedEventArgs^>([=](PrintTask^ sender, PrintTaskCompletedEventArgs^ e)
+    // App tells the user some more information about what the feature means.
+    header->Description = "Display a header on the first page";
+
+    // Set the default value
+    header->TrySetValue(m_showHeader);
+
+    // Add the custom option to the option list
+    displayedOptions->Append("Header");
+
+    // Create a new list option
+    PrintCustomItemListOptionDetails^ margins = printDetailedOptions->CreateItemListOption("Margins", "Margins");
+    create_task(m_wideMarginsIconAsyncOperation).then([this, margins](IRandomAccessStreamWithContentType^ stream)
     {
-        // Notify the user when the print operation fails.
-        if (e->Completion == Windows::Graphics::Printing::PrintTaskCompletion::Failed)
+        margins->AddItem("WideMargins", "Wide", "Each margin is 20% of the paper size", stream);
+        return create_task(m_moderateMarginsIconAsyncOperation);
+    }).then([this, margins](IRandomAccessStreamWithContentType^ stream)
+    {
+        margins->AddItem("ModerateMargins", "Moderate", "Each margin is 10% of the paper size", stream);
+        return create_task(m_narrowMarginsIconAsyncOperation);
+    }).then([this, margins](IRandomAccessStreamWithContentType^ stream)
+    {
+        margins->AddItem("NarrowMargins", "Narrow", "Each margin is 5% of the paper size", stream);
+    }).then([this, margins, displayedOptions, printDetailedOptions, printTask]()
+    {
+        // The default is ModerateMargins
+        SetMargins("ModerateMargins");
+        margins->TrySetValue("ModerateMargins");
+
+        // App tells the user some more information about what the feature means
+        margins->Description = "The space between the content of your document and the edge of the paper";
+
+        // Add the custom option to the option list
+        displayedOptions->Append("Margins");
+
+        printDetailedOptions->OptionChanged += ref new TypedEventHandler<PrintTaskOptionDetails^, PrintTaskOptionChangedEventArgs^>(this, &CustomOptionsPrintHelper::printDetailedOptions_OptionChanged);
+
+        // Print Task event handler is invoked when the print job is completed.
+        printTask->Completed += ref new TypedEventHandler<PrintTask^, PrintTaskCompletedEventArgs^>([=](PrintTask^ sender, PrintTaskCompletedEventArgs^ e)
         {
-            auto callback = ref new Windows::UI::Core::DispatchedHandler([=]()
+            // Notify the user when the print operation fails.
+            if (e->Completion == Windows::Graphics::Printing::PrintTaskCompletion::Failed)
             {
                 MainPage::Current->NotifyUser(ref new String(L"Failed to print."), NotifyType::ErrorMessage);
-            });
-
-            ScenarioPage->Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, callback);
-        }
+            }
+        });
+    }).then([deferral](task<void> previousTask)
+    {
+        deferral->Complete();
+        previousTask.get();
     });
 }
 
@@ -102,12 +158,62 @@ void CustomOptionsPrintHelper::PrintTaskRequested(PrintManager^ sender, PrintTas
 /// <param name="args">the event arguments containing the changed option id</param>
 void CustomOptionsPrintHelper::printDetailedOptions_OptionChanged(PrintTaskOptionDetails^ sender, PrintTaskOptionChangedEventArgs^ args)
 {
-    // Listen for PageContent changes
+    bool invalidatePreview = false;
+
     String^ optionId = safe_cast<String^>(args->OptionId);
 
-    if (optionId != nullptr && optionId == L"PageContent")
+    if (optionId == "PageContent")
+    {
+        invalidatePreview = true;
+    }
+    else if (optionId == "Margins")
+    {
+        PrintCustomItemListOptionDetails^ marginsOption = (PrintCustomItemListOptionDetails^)sender->Options->Lookup("Margins");
+        String^ marginsValue = marginsOption->Value->ToString();
+
+        SetMargins(marginsValue);
+
+        marginsOption->WarningText = "";
+        if (marginsValue == "NarrowMargins")
+        {
+            marginsOption->WarningText = "Narrow margins may not be supported by some printers";
+        }
+
+        invalidatePreview = true;
+    }
+    else if (optionId == "Header")
+    {
+        PrintCustomToggleOptionDetails^ headerOption = (PrintCustomToggleOptionDetails^)sender->Options->Lookup("Header");
+        m_showHeader = (bool)headerOption->Value;
+        invalidatePreview = true;
+    }
+
+    if (invalidatePreview)
     {
         RefreshPreview();
+    }
+}
+
+/// <summary>
+/// Helper function used to set the top and left margins based on used selection
+/// </summary>
+/// <param name="marginsValue">The Id of the option selected by the user</param>
+void CustomOptionsPrintHelper::SetMargins(String^ marginsValue)
+{
+    if (marginsValue == "WideMargins")
+    {
+        ApplicationContentMarginTop = 0.2f;
+        ApplicationContentMarginLeft = 0.2f;
+    }
+    else if (marginsValue == "ModerateMargins")
+    {
+        ApplicationContentMarginTop = 0.1f;
+        ApplicationContentMarginLeft = 0.1f;
+    }
+    else if (marginsValue == "NarrowMargins")
+    {
+        ApplicationContentMarginTop = 0.05f;
+        ApplicationContentMarginLeft = 0.05f;
     }
 }
 
@@ -178,9 +284,9 @@ RichTextBlockOverflow^ CustomOptionsPrintHelper::AddOnePrintPreviewPage(RichText
         mainText->Visibility = ShowText ? Windows::UI::Xaml::Visibility::Visible : Windows::UI::Xaml::Visibility::Collapsed;
         continuationLink->Visibility = ShowText ? Windows::UI::Xaml::Visibility::Visible : Windows::UI::Xaml::Visibility::Collapsed;
 
-        // Hide header if printing only images
+        // Hide header if appropriate
         StackPanel^ header = safe_cast<StackPanel^>(FirstPage->FindName("Header"));
-        header->Visibility = ShowText ? Windows::UI::Xaml::Visibility::Visible : Windows::UI::Xaml::Visibility::Collapsed;
+        header->Visibility = m_showHeader ? Windows::UI::Xaml::Visibility::Visible : Windows::UI::Xaml::Visibility::Collapsed;
     }
 
     //Continue with the rest of the base printing layout processing (paper size, printable page size)

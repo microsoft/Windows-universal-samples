@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Simple orientation sensor sample
+  description: This sample demonstrates the use of the Windows.Devices.Sensors.SimpleOrientationSensor API for a simple device orientation sensor.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

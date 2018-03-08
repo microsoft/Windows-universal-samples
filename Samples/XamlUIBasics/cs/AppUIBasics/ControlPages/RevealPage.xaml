@@ -123,7 +123,7 @@
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
-        
+
         <local:ControlExample x:Name="Example4" HeaderText="RevealBorderBrush applied on a Grid">
 
             <Grid BorderThickness="3" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" Height="100" >

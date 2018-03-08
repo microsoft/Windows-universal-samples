@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: File picker provider sample
+  description: This sample shows how an app can provide files, a save location, and real-time file updates to other apps through the file picker by participating in the File Open Picker contract, File Save Picker contract, and Cached File Updater contract, respectively.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

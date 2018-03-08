@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Commanding sample
+  description: This sample highlights the changes and new features to the CommandBar.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows

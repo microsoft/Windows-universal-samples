@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: System media transport controls sample
+  description: This sample shows how to use the APIs in the Windows.Media namespace to allow your app to respond to system media events as well as providing the system with metadata about the content that is playing.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - js
+  technologies:
+  - windows

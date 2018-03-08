@@ -1,0 +1,13 @@
+### YamlMime:Sample
+sample:
+- name: Video stabilization sample
+  description: This sample applies an end-to-end approach to demonstrate how to write a video recording camera application using the Windows.Media.Capture API in conjunction with orientation sensors to cover the functions that most camera apps will require.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  - vb
+  technologies:
+  - windows

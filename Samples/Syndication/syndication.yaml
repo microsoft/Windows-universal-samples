@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Syndication sample
+  description: This sample shows you how to retrieve feeds from a web service using classes in the Windows.Web.Syndication namespace in your Universal Windows Platform (UWP) app.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows

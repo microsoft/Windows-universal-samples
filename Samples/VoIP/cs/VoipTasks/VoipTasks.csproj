@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{42C1D941-EECA-587A-A867-6470FF94B2C3}</ProjectGuid>
+    <ProjectGuid>{AB4FF2A9-F89F-5C66-9FC8-869DE4ECAB53}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VoipTasks</RootNamespace>

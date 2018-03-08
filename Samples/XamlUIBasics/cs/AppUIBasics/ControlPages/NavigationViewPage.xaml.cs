@@ -1,6 +1,7 @@
 ﻿using AppUIBasics.SamplePages;
 using System;
 using Windows.Foundation;
+using Windows.Foundation.Metadata;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -16,22 +17,7 @@ namespace AppUIBasics.ControlPages
         public NavigationViewPage()
         {
             this.InitializeComponent();
-
-            //AddMenuItem(Symbol.Play, "Menu Item1", typeof(SamplePage1));
-            //AddMenuItem(Symbol.Save, "Menu Item2", typeof(SamplePage2));
-            //AddMenuItem(Symbol.Refresh, "Menu Item3", typeof(SamplePage3));
         }
-
-        //private void AddMenuItem(Symbol icon, string text, Type pageType)
-        //{
-        //    var item = new NavigationViewItem()
-        //    {
-        //        Icon = new SymbolIcon(icon),
-        //        Content = text,
-        //        Tag = pageType
-        //    };
-        //    nvSample.MenuItems.Add(item);
-        //}
 
         private void NavigationView_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
@@ -68,6 +54,64 @@ namespace AppUIBasics.ControlPages
         {
             nvSample.AutoSuggestBox = null;
             XamlContent.ContentTemplate = (DataTemplate)this.Resources["NoAutoSuggestBoxCode"];
+        }
+
+        private void hideback_Checked(object sender, RoutedEventArgs e)
+        {
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            {
+                nvSample.IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed;
+            }
+        }
+
+        private void hideback_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            {
+                nvSample.IsBackButtonVisible = NavigationViewBackButtonVisible.Visible;
+            }
+        }
+
+        private void enableback_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            {
+                nvSample.IsBackEnabled = false;
+            }
+        }
+
+        private void enableback_Checked(object sender, RoutedEventArgs e)
+        {
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            {
+                nvSample.IsBackEnabled = true;
+            }
+        }
+
+        private void TextBlock_CharacterReceived(UIElement sender, Windows.UI.Xaml.Input.CharacterReceivedRoutedEventArgs args)
+        {
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            {
+                nvSample.PaneTitle = ((TextBox)sender).Text;
+            }
+        }
+
+        private void settings_checked(object sender, RoutedEventArgs e)
+        {
+            nvSample.IsSettingsVisible = false;
+        }
+
+        private void settings_unchecked(object sender, RoutedEventArgs e)
+        {
+            nvSample.IsSettingsVisible = true;
+        }
+
+        private void TextBlock_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            {
+                nvSample.PaneTitle = ((TextBox)sender).Text;
+            }
         }
     }
 }

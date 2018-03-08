@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Blobs sample
+  description: This sample shows how to use a Blob and the Window.Storage.Pickers.FileOpenPicker to load and display images and video.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - js
+  technologies:
+  - windows

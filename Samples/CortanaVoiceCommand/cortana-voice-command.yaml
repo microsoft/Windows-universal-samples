@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Cortana voice command sample
+  description: This sample demonstrates integrating with Cortana to provide Voice Command Definitions (VCDs) that allow an application to be invoked in a variety of ways.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

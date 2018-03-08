@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Full screen mode sample
+  description: This sample shows how to use full screen mode so that your app can fill the entire screen.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

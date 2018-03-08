@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Background task sample
+  description: This sample shows you how to create and register background tasks using the Windows Runtime background task API.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - vb
+  technologies:
+  - windows

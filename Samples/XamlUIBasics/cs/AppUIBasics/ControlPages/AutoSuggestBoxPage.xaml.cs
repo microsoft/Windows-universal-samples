@@ -58,8 +58,8 @@ namespace AppUIBasics.ControlPages
         /// <param name="args">The event arguments.</param>
         private void Control2_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            //We only want to get results when it was a user typing, 
-            //otherwise we assume the value got filled in by TextMemberPath 
+            //We only want to get results when it was a user typing,
+            //otherwise we assume the value got filled in by TextMemberPath
             //or the handler for SuggestionChosen
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
@@ -79,7 +79,7 @@ namespace AppUIBasics.ControlPages
         ///     * a user presses selects (clicks/taps/presses Enter) a suggestion
         /// </summary>
         /// <param name="sender">The AutoSuggestBox that fired the event.</param>
-        /// <param name="args">The args contain the QueryText, which is the text in the TextBox, 
+        /// <param name="args">The args contain the QueryText, which is the text in the TextBox,
         /// and also ChosenSuggestion, which is only non-null when a user selects an item in the list.</param>
         private void Control2_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
@@ -116,7 +116,7 @@ namespace AppUIBasics.ControlPages
         }
 
         /// <summary>
-        /// This 
+        /// This
         /// </summary>
         /// <param name="contact"></param>
         private void SelectControl(ControlInfoDataItem control)

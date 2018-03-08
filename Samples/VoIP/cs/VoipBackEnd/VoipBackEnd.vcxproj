@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{b010d78d-a2c9-5aa4-95bd-75af44354935}</ProjectGuid>
+    <ProjectGuid>{cb1fc699-fa6e-5a55-baa1-8a8cf2a11fb6}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>VoipBackEnd</ProjectName>
     <RootNamespace>VoipBackEnd</RootNamespace>

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{ED24FB2E-4DFC-5299-B6FE-A396EE4ADE9D}</ProjectGuid>
+    <ProjectGuid>{D4F16C0D-9632-5807-BCEB-4F7929BD1C92}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UserConsentVerifierCS</RootNamespace>

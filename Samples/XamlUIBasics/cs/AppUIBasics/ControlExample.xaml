@@ -109,7 +109,7 @@
             </Grid>
 
             <Border VerticalAlignment="Bottom" BorderBrush="{ThemeResource SystemControlBackgroundChromeMediumBrush}" BorderThickness="0,0,0,1" Visibility="{x:Bind Xaml, Converter={StaticResource inverseNullToVisibilityConverter}}" />
-            
+
             <!--  XAML display  -->
             <ScrollViewer
                 Grid.Row="1"

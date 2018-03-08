@@ -33,7 +33,7 @@
     <AppxManifest Include="..\voip\package.appxmanifest" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{e18610bc-c3ae-5667-bffd-93a2c1719e4e}</ProjectGuid>
+    <ProjectGuid>{34c5bf63-fc9b-5954-b64f-bf5fa9275824}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <ProjectName>VoipHost</ProjectName>
     <RootNamespace>VoipHost</RootNamespace>

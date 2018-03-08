@@ -24,7 +24,7 @@ namespace AppUIBasics
         {
             this.InitializeComponent();
         }
-        
+
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -34,10 +34,10 @@ namespace AppUIBasics
             var menuItem = NavigationRootPage.Current.NavigationView.MenuItems.Cast<NavigationViewItem>().Single(i => (string)i.Tag == group.UniqueId);
             menuItem.IsSelected = true;
             NavigationRootPage.Current.NavigationView.Header = menuItem.Content;
-            
+
             Items = group.Items.OrderBy(i => i.Title).ToList();
         }
-        
+
         protected override bool GetIsNarrowLayoutState()
         {
             return LayoutVisualStates.CurrentState == NarrowLayout;

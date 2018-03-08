@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Bluetooth advertisement sample
+  description: This sample demonstrates use of the Bluetooth Advertisement Runtime API to send and receive Bluetooth Low Energy advertisements.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - js
+  - vb
+  technologies:
+  - windows

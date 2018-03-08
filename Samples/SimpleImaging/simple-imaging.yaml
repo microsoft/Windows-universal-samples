@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Simple imaging sample
+  description: This sample demonstrates some common imaging scenarios for Universal Windows apps including metadata and editing/saving.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - js
+  technologies:
+  - windows

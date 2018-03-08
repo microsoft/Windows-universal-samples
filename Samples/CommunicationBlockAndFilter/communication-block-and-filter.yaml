@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Communication blocking and filtering sample
+  description: This sample shows how to make a block and filter application for call and text message.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

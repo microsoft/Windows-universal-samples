@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Direct2D photo adjustment sample
+  description: This sample demonstrates how to build a photo viewer and editor using Direct2D and Direct2D Effects.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows

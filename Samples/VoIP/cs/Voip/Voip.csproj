@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{F7A54625-8F82-5A07-90C8-991875309070}</ProjectGuid>
+    <ProjectGuid>{495CD47A-0DEB-54D1-AD47-587442B01B48}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Voip</RootNamespace>

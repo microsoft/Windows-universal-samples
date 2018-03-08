@@ -1,0 +1,13 @@
+### YamlMime:Sample
+sample:
+- name: Clipboard sample
+  description: This sample demonstrates how an app can use clipboard commands, including copy, paste, cut, and move.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  - vb
+  technologies:
+  - windows

@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Transform3D animations sample
+  description: This sample shows how Transform3D can be used to create custom 3D animations and transitions in XAML apps.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

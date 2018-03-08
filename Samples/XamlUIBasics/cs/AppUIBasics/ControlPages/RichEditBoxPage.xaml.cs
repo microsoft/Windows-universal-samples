@@ -29,7 +29,7 @@ namespace AppUIBasics.ControlPages
         public RichEditBoxPage()
         {
             this.InitializeComponent();
-        } 
+        }
 
         private async void OpenButton_Click(object sender, RoutedEventArgs e)
         {
@@ -67,7 +67,7 @@ namespace AppUIBasics.ControlPages
             StorageFile file = await savePicker.PickSaveFileAsync();
             if (file != null)
             {
-                // Prevent updates to the remote version of the file until we 
+                // Prevent updates to the remote version of the file until we
                 // finish making changes and call CompleteUpdatesAsync.
                 CachedFileManager.DeferUpdates(file);
                 // write to file
@@ -77,7 +77,7 @@ namespace AppUIBasics.ControlPages
                     editor.Document.SaveToStream(Windows.UI.Text.TextGetOptions.FormatRtf, randAccStream);
                 }
 
-                // Let Windows know that we're finished changing the file so the 
+                // Let Windows know that we're finished changing the file so the
                 // other app can update the remote version of the file.
                 FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
                 if (status != FileUpdateStatus.Complete)

@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Wi-Fi scanning sample
+  description: This sample demonstrates: - Viewing cached list of available networks on each WiFi adapter on the system - Requesting a scan on a WiFi adapter and and viewing the results - Registering for available network changed notifications on a WiFi adapter - Connecting to a WiFi network ## System requirements Client: Windows 10 Server: Windows Server 2016 Technical Preview Phone: Windows 10 ## Build the sample 1.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows

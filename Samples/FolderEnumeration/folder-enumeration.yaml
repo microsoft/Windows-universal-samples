@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Folder enumeration sample
+  description: This sample shows how to enumerate the top-level files and folders inside a location (like a folder, device, or network location), and how to use queries to enumerate all files inside a location by sorting them into file groups.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

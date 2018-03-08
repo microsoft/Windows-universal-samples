@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Direct2D custom image effects sample
+  description: This sample demonstrates how to implement custom Direct2D effects using HLSL pixel, vertex, and compute shaders.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows

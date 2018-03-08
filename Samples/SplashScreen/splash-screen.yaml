@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Splash screen sample
+  description: This sample shows how to imitate the splash screen that Windows displays for your app by positioning a similar image correctly when Windows dismisses the splash screen that it displays.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

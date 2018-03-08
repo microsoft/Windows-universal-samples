@@ -75,7 +75,7 @@
     <Image Include="..\..\..\SharedContent\media\Samples\rainier.jpg">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="Assets\print_1.png">
+    <Image Include="..\shared\print_1.png">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>
@@ -104,5 +104,16 @@
     <Filter Include="Sty%3bes">
       <UniqueIdentifier>{d9eff7ec-82fb-491f-a182-0efd7b2de8f0}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\shared\moderateMargins.svg">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="..\shared\narrowMargins.svg">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="..\shared\wideMargins.svg">
+      <Filter>Assets</Filter>
+    </None>
   </ItemGroup>
 </Project>

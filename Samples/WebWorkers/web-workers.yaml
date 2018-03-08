@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: JavaScript Web Workers app multithreading sample
+  description: This sample demonstrates how to use multithreading with Web Workers in your Windows Store app using JavaScript.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - js
+  technologies:
+  - windows

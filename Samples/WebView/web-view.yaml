@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: WebView control (HTML) sample
+  description: This sample demonstrates how to use WebView.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - js
+  technologies:
+  - windows

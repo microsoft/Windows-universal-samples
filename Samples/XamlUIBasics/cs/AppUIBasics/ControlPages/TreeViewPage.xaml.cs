@@ -1,26 +1,12 @@
-﻿using Windows.UI.Xaml;
+﻿using AppUIBasics.Common;
+using AppUIBasics.Data;
+using System.Collections.Generic;
+using System.Linq;
+using Windows.Foundation.Metadata;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-//From ControlInfoData.json:
-// {
-//    "UniqueId": "TreeView",
-//   "Title": "TreeView",
-//   "Subtitle": "A hierarchical list with expanding and collapsing nodes that contain nested items.",
-//   "ImagePath": "ms-appx:///Assets/TreeView.png",
-//   "Description": "A hierarchical list with expanding and collapsing nodes that contain nested items.",
-//   "Content": "",
-//   "IsNew": true,
-//   "Docs": [
-//					{
-//						"Title": "TreeView",
-//						"Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.TreeView"
-//					}
-//   ],
-//   "RelatedControls": [
-//     "ListView",
-//     "GridView"
-//   ]
-// }
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace AppUIBasics.ControlPages
 {
@@ -30,39 +16,51 @@ namespace AppUIBasics.ControlPages
     public sealed partial class TreeViewPage : Page
     {
         TreeViewNode personalFolder;
+        TreeViewNode personalFolder2;
+
         public TreeViewPage()
         {
             this.InitializeComponent();
 
-            TreeViewNode workFolder = new TreeViewNode() { Data = "Folder1" };
-            workFolder.Add(new TreeViewNode() { Data = "1.1" });
-            workFolder.Add(new TreeViewNode() { Data = "1.2" });
-            workFolder.Add(new TreeViewNode() { Data = "1.3" });
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            {
 
-            TreeViewNode remodelFolder = new TreeViewNode() { Data = "Folder2" };
-            remodelFolder.Add(new TreeViewNode() { Data = "2.1" });
-            remodelFolder.Add(new TreeViewNode() { Data = "2.2" });
-            remodelFolder.Add(new TreeViewNode() { Data = "2.3" });
+                TreeViewNode workFolder = new TreeViewNode() { Content = "Work Documents" };
+                workFolder.IsExpanded = true;
 
-            personalFolder = new TreeViewNode() { Data = "TopLevel", IsExpanded = true };
+                workFolder.Children.Add(new TreeViewNode() { Content = "XYZ Functional Spec" });
+                workFolder.Children.Add(new TreeViewNode() { Content = "Feature Schedule" });
+                workFolder.Children.Add(new TreeViewNode() { Content = "Overall Project Plan" });
+                workFolder.Children.Add(new TreeViewNode() { Content = "Feature Rsource Allocation" });
 
-            personalFolder.Add(workFolder);
-            personalFolder.Add(remodelFolder);
-            sampleTreeView.RootNode.Add(personalFolder);
+                TreeViewNode remodelFolder = new TreeViewNode() { Content = "Home Remodel" };
+                remodelFolder.IsExpanded = true;
+
+                remodelFolder.Children.Add(new TreeViewNode() { Content = "Contractor Contact Info" });
+                remodelFolder.Children.Add(new TreeViewNode() { Content = "Paint Color Scheme" });
+                remodelFolder.Children.Add(new TreeViewNode() { Content = "Flooring woodgrain type" });
+                remodelFolder.Children.Add(new TreeViewNode() { Content = "Kitchen cabinet style" });
+
+                personalFolder = new TreeViewNode() { Content = "Personal Documents" };
+                personalFolder.IsExpanded = true;
+                personalFolder.Children.Add(remodelFolder);
+
+                personalFolder2 = new TreeViewNode() { Content = "Personal Documents" };
+                personalFolder2.IsExpanded = true;
+                personalFolder2.Children.Add(remodelFolder);
+
+                sampleTreeView.RootNodes.Add(workFolder);
+                sampleTreeView.RootNodes.Add(personalFolder);
+
+                sampleTreeView2.RootNodes.Add(workFolder);
+                sampleTreeView2.RootNodes.Add(personalFolder2);
+            }
+
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void sampleTreeView_ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
         {
-            if (sampleTreeView.ListControl.SelectedItem == null)
-            {
-                sampleTreeView.RootNode.Add(new TreeViewNode() { Data = "Inserted node" });
-            }
-            else
-            {
-                TreeViewNode selectedNode = ((TreeViewNode)sampleTreeView.ListControl.SelectedItem);
-                int index = selectedNode.ParentNode.IndexOf(selectedNode);
-                selectedNode.ParentNode.Insert(index + 1, (new TreeViewNode() { Data = "Inserted node" }));
-            }
+            return;
         }
     }
 }

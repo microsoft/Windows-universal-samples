@@ -62,7 +62,7 @@
             <interactivity:Interaction.Behaviors>
                 <behavior:ImageScrollBehavior TargetControl="{Binding ElementName=pageHeader}" />
             </interactivity:Interaction.Behaviors>
-            
+
             <GridView.Header>
                 <ParallaxView
                     x:Name="headerImageView"
@@ -78,10 +78,10 @@
                 </ParallaxView>
             </GridView.Header>
         </GridView>
-        
+
         <local:PageHeader
             x:Name="pageHeader"
-            Title="New controls"
+            Title="What's New"
             VerticalAlignment="Top"
             Background="{ThemeResource HomePageBackgroundBrush}"
             FontSize="42"

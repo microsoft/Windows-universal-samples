@@ -11,6 +11,10 @@ using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Data;
 using namespace Windows::ApplicationModel;
 
+#if defined (_M_IX86) || defined(_M_AMD64)
+#define SERVICE_SUPPORTED 1
+#endif
+
 ServiceViewModel::ServiceViewModel()
 {
     // Set default rate
@@ -184,6 +188,7 @@ void ServiceViewModel::StartMetering(int sampleRate)
         StopButtonEnabled = true;
         stopMeteringRequested = false;
 
+#ifdef SERVICE_SUPPORTED
         if (NotifyIfAnyError(RpcClientInitialize(&rpcclient))) return;
 
         meteringOn = true;
@@ -272,6 +277,9 @@ void ServiceViewModel::StartMetering(int sampleRate)
             }
             RpcClientClose(this->rpcclient);
         }
+#else
+        NotifyStatusMessage("NT service support has not been compiled for this architecture.", NotifyType::ErrorMessage);
+#endif
     });
 }
 
@@ -286,12 +294,14 @@ void ServiceViewModel::StopMetering()
         SliderEnabled = false;
         stopMeteringRequested = true;
 
+#ifdef SERVICE_SUPPORTED
         __int64 retCode = StopMeteringData(this->rpcclient);
         if (!NotifyIfAnyError(retCode))
         {
             NotifyStatusMessage("Metering stop command sent successfully",
                                 NotifyType::StatusMessage);
         }
+#endif
 
         SliderEnabled = true;
         StartButtonEnabled = true;
@@ -306,6 +316,7 @@ void ServiceViewModel::SetSamplePeriod(int samplePeriod)
     create_task([this, samplePeriod] 
     {
         this->samplePeriod = samplePeriod;
+#ifdef SERVICE_SUPPORTED
         if (meteringOn)
         {
             _int64 retCode = SetSampleRate(rpcclient, samplePeriod);
@@ -316,5 +327,6 @@ void ServiceViewModel::SetSamplePeriod(int samplePeriod)
                     NotifyType::StatusMessage);
             }
         }
+#endif
     });
 }

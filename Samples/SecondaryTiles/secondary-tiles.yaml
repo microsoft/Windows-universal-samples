@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Secondary tiles sample
+  description: This sample shows how to pin and use a secondary tile, which is a tile that directly accesses a specific, non-default section or experience within an app, such as a saved game or a specific friend in a social networking app.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

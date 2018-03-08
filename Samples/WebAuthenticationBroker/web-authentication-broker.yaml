@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: WebAuthenticationBroker sample
+  description: This sample shows how you can use the WebAuthenticationBroker class to connect to OAuth providers such as Facebook, Flickr, Google, and Twitter.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

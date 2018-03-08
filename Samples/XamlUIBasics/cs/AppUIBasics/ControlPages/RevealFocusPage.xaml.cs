@@ -38,8 +38,6 @@ namespace AppUIBasics.ControlPages
             else
             {
                 HighVisibility.IsChecked = true;
-                //myPrimaryColorPicker.Color = (this.Resources["SystemControlFocusVisualPrimaryBrush"] as SolidColorBrush).Color;
-                //mySecondaryColorPicker.Color = (this.Resources["SystemControlFocusVisualSecondaryBrush"] as SolidColorBrush).Color;
                 primaryColorPickerButton.Background = new SolidColorBrush(myPrimaryColorPicker.Color);
                 secondaryColorPickerButton.Background = new SolidColorBrush(mySecondaryColorPicker.Color);
             }
@@ -62,10 +60,12 @@ namespace AppUIBasics.ControlPages
 
             primaryColorPickerButton.Background = new SolidColorBrush(myPrimaryColorPicker.Color);
             primaryBrushRun.Text = "{StaticResource SystemControlFocusVisualPrimaryBrush}";
+            primaryColorRun.Text = "SystemControlFocusVisualPrimaryBrush";
             Application.Current.FocusVisualKind = FocusVisualKind.HighVisibility;
+            exampleButton.Focus(FocusState.Keyboard);
         }
 
-        // DEMO ONLY: Change focus visual mode to high visibility
+        // DEMO ONLY: Change focus visual mode to reveal focus
         private void RevealFocus_Checked(object sender, RoutedEventArgs e)
         {
             if (Spring2018)
@@ -73,8 +73,10 @@ namespace AppUIBasics.ControlPages
                 myPrimaryColorPicker.Color = (this.Resources["SystemControlRevealFocusVisualBrush"] as SolidColorBrush).Color;
                 primaryColorPickerButton.Background = new SolidColorBrush(myPrimaryColorPicker.Color);
                 primaryBrushRun.Text = "{StaticResource SystemControlRevealFocusVisualBrush}";
+                primaryColorRun.Text = "SystemControlRevealFocusVisualBrush";
                 Application.Current.FocusVisualKind = FocusVisualKind.Reveal;
             }
+            exampleButton.Focus(FocusState.Keyboard);
         }
 
         // DEMO ONLY: Set focus to button for better preview/demo of customization
@@ -109,12 +111,26 @@ namespace AppUIBasics.ControlPages
 
         /// <summary>
         /// A property to identify if app is running on Spring2018 version of Windows
-        /// </summary>        
+        /// </summary>
         public bool Spring2018
         {
             get
             {
                 return ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6);
+            }
+        }
+
+        private void Example2_ActualThemeChanged(FrameworkElement sender, object args)
+        {
+            if (Example2.ActualTheme == ElementTheme.Light)
+            {
+                myPrimaryColorPicker.Color = Colors.Black;
+                mySecondaryColorPicker.Color = Colors.White;
+            }
+            else if (Example2.ActualTheme == ElementTheme.Dark)
+            {
+                myPrimaryColorPicker.Color = Colors.White;
+                mySecondaryColorPicker.Color = Colors.Black;
             }
         }
     }

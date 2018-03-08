@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{7F0C8D3B-17E8-5AC7-8037-9547A33D9B9D}</ProjectGuid>
+    <ProjectGuid>{EA8A886D-D754-55F1-93E3-8493B6BA7E6C}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Accounts</RootNamespace>

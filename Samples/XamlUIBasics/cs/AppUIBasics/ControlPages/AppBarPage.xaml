@@ -54,7 +54,7 @@
                     </StackPanel>
                 </ScrollViewer>
             </AppBar>
-            
+
             <local:ControlExample.Options>
                 <StackPanel>
                     <TextBlock Text="Show or hide" />

@@ -165,50 +165,45 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/3DPrinting">3D Printing</a></td>
   <td><a href="Samples/3DPrintingFromUnity">3D Printing from Unity</a></td>
-  <td><a href="Samples/XamlAutoSuggestBox">AutoSuggestBox</a></td>
+  <td><a href="Samples/XamlBottomUpList">Bottom-up list (XAML)</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/XamlBottomUpList">Bottom-up list (XAML)</a></td>
   <td><a href="Samples/Clipboard">Clipboard</a></td>
   <td><a href="Samples/DWriteColorGlyph">Colored glyphs (DirectWrite)</a></td>
+  <td><a href="Samples/XamlCommanding">Commanding</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/XamlCommanding">Commanding</a></td>
   <td><a href="Samples/ContextMenu">Context menu</a></td>
   <td><a href="Samples/XamlContextMenu">Context menu (XAML)</a></td>
+  <td><a href="Samples/CustomEditControl">Custom text edit control</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/CustomEditControl">Custom text edit control</a></td>
   <td><a href="Samples/XamlDataVirtualization">Data virtualization</a></td>
   <td><a href="Samples/UserSelection">Disabling selection</a></td>
+  <td><a href="Samples/DisplayOrientation">Display orientation</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/DisplayOrientation">Display orientation</a></td>
   <td><a href="Samples/DWriteTextLayoutCloudFont">Downloadable fonts (DirectWrite)</a></td>
   <td><a href="Samples/XamlCloudFontIntegration">Downloadable fonts (XAML)</a></td>
+  <td><a href="Samples/XamlDragAndDrop">Drag and drop</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/XamlDragAndDrop">Drag and drop</a></td>
   <td><a href="Samples/XamlFocusVisuals">Focus visuals</a></td>
   <td><a href="Samples/FullScreenMode">Full screen mode</a></td>
+  <td><a href="Samples/XamlGamepadNavigation">Gamepad-style navigation (XAML)</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/XamlGamepadNavigation">Gamepad-style navigation (XAML)</a></td>
   <td><a href="Samples/DWriteLineSpacingModes">Line spacing (DirectWrite)</a></td>
   <td><a href="Samples/XamlListView">ListView and GridView</a></td>
+  <td><a href="Samples/LockScreenApps">Lock screen apps</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/LockScreenApps">Lock screen apps</a></td>
   <td><a href="Samples/MessageDialog">Message dialog</a></td>
   <td><a href="Samples/MultipleViews">Multiple views</a></td>
- </tr>
- <tr>
   <td><a href="Samples/OCR">OCR</a></td>
-  <td><a href="Samples/Printing">Printing</a></td>
-  <td><a href="Samples/XamlPullToRefresh">Pull-to-refresh</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/XamlResponsiveTechniques">Responsiveness techniques</a></td>
+  <td><a href="Samples/Printing">Printing</a></td>
   <td><a href="Samples/DpiScaling">Scaling according to DPI</a></td>
   <td><a href="Samples/SplashScreen">Splash screen</a></td>
  </tr>
@@ -218,12 +213,11 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/TitleBar">Title bar</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/XamlTreeView">TreeView (XAML)</a></td>
   <td><a href="Samples/XamlUIBasics">UI basics (XAML)</a></td>
   <td><a href="Samples/UserInteractionMode">User interaction mode</a></td>
+  <td><a href="Samples/WebView">WebView control (HTML)</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/WebView">WebView control (HTML)</a></td>
   <td><a href="Samples/XamlWebView">WebView control (XAML)</a></td>
   <td><a href="Samples/ResizeAppView">Window resizing</a></td>
  </tr>
@@ -328,24 +322,25 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/LampDevice">Lamp device</a></td>
   <td><a href="Samples/LightSensor">Light sensor</a></td>
-  <td><a href="Samples/MagneticStripeReader">Magnetic stripe reader</a></td>
+  <td><a href="Samples/Magnetometer">Magnetometer</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/MagneticStripeReader">Magnetic stripe reader</a></td>
   <td><a href="Samples/Nfc">Near field communication (NFC)</a></td>
   <td><a href="Samples/NfcProvisioner">NFC enterprise provisioner</a></td>
-  <td><a href="Samples/OrientationSensor">Orientation sensor</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/OrientationSensor">Orientation sensor</a></td>
   <td><a href="Samples/Pedometer">Pedometer</a></td>
   <td><a href="Samples/PosPrinter">POS printer</a></td>
-  <td><a href="Samples/ProximitySensor">Proximity sensor</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/ProximitySensor">Proximity sensor</a></td>
   <td><a href="Samples/RadialController">Radial controller</a></td>
   <td><a href="Samples/RelativeInclinometer">Relative inclinometer</a></td>
-  <td><a href="Samples/SerialArduino">Serial Arduino</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/SerialArduino">Serial Arduino</a></td>
   <td><a href="Samples/IoT-SPI">Serial Peripheral Interface (SPI)</a></td>
   <td><a href="Samples/SimpleOrientationSensor">Simple orientation sensor</a></td>
  </tr>
@@ -424,7 +419,6 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/XamlTransform3DAnimations">Transform3D animations</a></td>
-  <td><a href="Samples/XamlTransform3DParallax">Transform3D parallax</a></td>
  </tr>
 </table>
 
@@ -509,10 +503,9 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/BackButton">Back Button</a></td>
   <td><a href="Samples/XamlMasterDetail">Master/detail</a></td>
-  <td><a href="Samples/XamlNavigation">Navigation menu (XAML)</a></td>
+  <td><a href="Samples/XamlPivot">Pivot</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/XamlPivot">Pivot</a></td>
   <td><a href="Samples/Projection">Projection</a></td>
   <td><a href="Samples/PackagedContent">XHR, handling navigation errors, and URL schemes</a></td>
  </tr>

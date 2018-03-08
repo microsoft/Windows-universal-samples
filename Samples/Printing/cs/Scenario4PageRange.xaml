@@ -30,14 +30,13 @@
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                    Sample implementation of Page Range feature.
+                    Apps can allow users to print a subset of the pages in the document.
                 </TextBlock>
             </StackPanel>
 
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <Button x:Name="InvokePrintingButton" Content="Print Selection" Click="OnPrintButtonClick"/>
-                    <Frame x:Name="PageToPrintFrame" Background="White" Margin="0, 10, 10, 20" Padding="10, 10, 10, 10" IsTabStop="False"/>
+                    <Button x:Name="InvokePrintingButton" Content="Print" Click="OnPrintButtonClick"/>
                 </StackPanel>
             </ScrollViewer>                      
 

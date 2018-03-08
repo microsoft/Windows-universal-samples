@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: 3D Printing from Unity sample
+  description: This sample demonstrates loading a Unity 3D asset into the Windows 10 3D print dialog.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

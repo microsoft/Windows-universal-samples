@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: DASH streaming sample
+  description: How to create and use the MSEStreamSource API to playback Live DASH content.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

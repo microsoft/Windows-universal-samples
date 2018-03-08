@@ -55,6 +55,9 @@ namespace SDKTemplate
         [DllImport("api-ms-win-core-sysinfo-l1-2-1.dll")]
         static extern void GetSystemTimeAsFileTime(ref FILETIME lpSystemTimeAsFileTime);
 
+        [DllImport("api-ms-win-core-libraryloader-l2-1.dll")]
+        static extern IntPtr LoadPackagedLibrary(string filename, uint reserved);
+
         public static ServiceViewModel Current { get; private set; }
 
         static ServiceViewModel()
@@ -84,6 +87,7 @@ namespace SDKTemplate
             deferral.Complete();
         }
 
+        Lazy<bool> isSupported = new Lazy<bool>(() => LoadPackagedLibrary("RpcClient.dll", 0) != IntPtr.Zero);
         volatile bool meteringOn;
         volatile bool meteringOnWhileSuspension;
         Windows.UI.Core.CoreDispatcher dispatcher;
@@ -204,6 +208,12 @@ namespace SDKTemplate
                 StartButtonEnabled = false;
                 StopButtonEnabled = true;
                 stopMeteringRequested = false;
+
+                if (!isSupported.Value)
+                {
+                    NotifyStatusMessage("NT service support has not been compiled for this architecture.", NotifyType.ErrorMessage);
+                    return;
+                }
 
                 if (NotifyIfAnyError(RpcClientInitialize(out rpcClient))) return;
 
@@ -328,11 +338,14 @@ namespace SDKTemplate
                 SliderEnabled = false;
                 stopMeteringRequested = true;
 
-                long retCode = StopMeteringData(rpcClient);
-                if (!NotifyIfAnyError(retCode))
+                if (isSupported.Value)
                 {
-                    NotifyStatusMessage("Metering stop command sent successfully",
-                                        NotifyType.StatusMessage);
+                    long retCode = StopMeteringData(rpcClient);
+                    if (!NotifyIfAnyError(retCode))
+                    {
+                        NotifyStatusMessage("Metering stop command sent successfully",
+                                            NotifyType.StatusMessage);
+                    }
                 }
 
                 SliderEnabled = true;

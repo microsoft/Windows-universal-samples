@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Touch keyboard sample
+  description: This sample demonstrates how apps can influence whether the touch keyboard displays when the user taps on a control with the pen or touch.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows

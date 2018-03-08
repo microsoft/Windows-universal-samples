@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Store sample
+  description: This sample demonstrates how to perform in-app feature or product purchases operations and use the licensing API provided by the Windows Store to determine the license status of an app or a feature that is enabled by an in-app purchase.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

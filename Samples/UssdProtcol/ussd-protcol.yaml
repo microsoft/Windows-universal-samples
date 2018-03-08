@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: USSD protocol sample
+  description: This sample demonstrates the usage of the USSD protocol with GSM-capable mobile broadband adapters.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

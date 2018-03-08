@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.ApplicationModel.Core;
+using Windows.Foundation.Metadata;
 using Windows.System;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -195,7 +198,10 @@ namespace AppUIBasics.Common
             systemNavigationManager.BackRequested += SystemNavigationManager_BackRequested;
 
             // must register back requested on navview
-            CurrentNavView.BackRequested += NavView_BackRequested;
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            {
+                CurrentNavView.BackRequested += NavView_BackRequested;
+            }
 
             // Listen to the window directly so we will respond to hotkeys regardless
             // of which element has focus.
@@ -249,11 +255,14 @@ namespace AppUIBasics.Common
 
         private void UpdateBackButton()
         {
-            this.CurrentNavView.IsBackEnabled = 
-                this.Frame.CanGoBack ? true : false;
-
-            /*systemNavigationManager.AppViewBackButtonVisibility =
-                this.Frame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;*/
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            {
+                this.CurrentNavView.IsBackEnabled = this.Frame.CanGoBack ? true : false;
+            } else
+            {
+                systemNavigationManager.AppViewBackButtonVisibility = this.Frame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+            }
+            
         }
 
         /// <summary>

@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: DatagramSocket sample
+  description: This sample shows you how to a use datagram (UDP) socket to send and receive data using the DatagramSocket and related classes in the Windows.Networking.Sockets namespace in your Universal Windows Platform (UWP) app.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

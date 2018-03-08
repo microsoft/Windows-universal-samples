@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Printing sample
+  description: This sample demonstrates how apps can add support for printing on Windows.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

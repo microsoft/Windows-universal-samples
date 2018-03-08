@@ -56,7 +56,7 @@
                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                         Margin="0,4,0,0"
                         RelativePanel.Below="titleText"
-                        Text="{x:Bind Subtitle}"
+                        Text="{x:Bind Description}"
                         TextTrimming="CharacterEllipsis" />
                 </RelativePanel>
             </Grid>

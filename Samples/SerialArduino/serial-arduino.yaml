@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Serial Arduino sample
+  description: This sample demonstrates the use of the Windows.Devices.SerialCommunication WinRT APIs to communicate with an Arduino device.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows
