@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RpcInterface", "..\Service\Interface\RpcInterface.vcxproj", "{E70C6CFC-C72D-54DE-9729-B3594113D55C}"
 EndProject
@@ -11,7 +11,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RpcServer", "..\Service\Ser
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RpcClient", "..\Service\Client\RpcClient.vcxproj", "{86B5561E-46B3-5DDE-9121-423803DA2807}"
-    ProjectSection(ProjectDependencies) = postProject
+	ProjectSection(ProjectDependencies) = postProject
 		{E70C6CFC-C72D-54DE-9729-B3594113D55C} = {E70C6CFC-C72D-54DE-9729-B3594113D55C}
 	EndProjectSection
 EndProject
@@ -28,14 +28,12 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E70C6CFC-C72D-54DE-9729-B3594113D55C}.Debug|ARM.ActiveCfg = Debug|ARM
-		{E70C6CFC-C72D-54DE-9729-B3594113D55C}.Debug|ARM.Build.0 = Debug|ARM
 		{E70C6CFC-C72D-54DE-9729-B3594113D55C}.Debug|x64.ActiveCfg = Debug|x64
 		{E70C6CFC-C72D-54DE-9729-B3594113D55C}.Debug|x64.Build.0 = Debug|x64
 		{E70C6CFC-C72D-54DE-9729-B3594113D55C}.Debug|x64.Deploy.0 = Debug|x64
 		{E70C6CFC-C72D-54DE-9729-B3594113D55C}.Debug|x86.ActiveCfg = Debug|Win32
 		{E70C6CFC-C72D-54DE-9729-B3594113D55C}.Debug|x86.Build.0 = Debug|Win32
 		{E70C6CFC-C72D-54DE-9729-B3594113D55C}.Release|ARM.ActiveCfg = Release|ARM
-		{E70C6CFC-C72D-54DE-9729-B3594113D55C}.Release|ARM.Build.0 = Release|ARM
 		{E70C6CFC-C72D-54DE-9729-B3594113D55C}.Release|x64.ActiveCfg = Release|x64
 		{E70C6CFC-C72D-54DE-9729-B3594113D55C}.Release|x64.Build.0 = Release|x64
 		{E70C6CFC-C72D-54DE-9729-B3594113D55C}.Release|x86.ActiveCfg = Release|Win32
@@ -51,13 +49,11 @@ Global
 		{D61475C4-185E-50F6-8FAD-A0163961B3B3}.Release|x86.ActiveCfg = Release|Win32
 		{D61475C4-185E-50F6-8FAD-A0163961B3B3}.Release|x86.Build.0 = Release|Win32
 		{86B5561E-46B3-5DDE-9121-423803DA2807}.Debug|ARM.ActiveCfg = Debug|ARM
-		{86B5561E-46B3-5DDE-9121-423803DA2807}.Debug|ARM.Build.0 = Debug|ARM
 		{86B5561E-46B3-5DDE-9121-423803DA2807}.Debug|x64.ActiveCfg = Debug|x64
 		{86B5561E-46B3-5DDE-9121-423803DA2807}.Debug|x64.Build.0 = Debug|x64
 		{86B5561E-46B3-5DDE-9121-423803DA2807}.Debug|x86.ActiveCfg = Debug|Win32
 		{86B5561E-46B3-5DDE-9121-423803DA2807}.Debug|x86.Build.0 = Debug|Win32
 		{86B5561E-46B3-5DDE-9121-423803DA2807}.Release|ARM.ActiveCfg = Release|ARM
-		{86B5561E-46B3-5DDE-9121-423803DA2807}.Release|ARM.Build.0 = Release|ARM
 		{86B5561E-46B3-5DDE-9121-423803DA2807}.Release|x64.ActiveCfg = Release|x64
 		{86B5561E-46B3-5DDE-9121-423803DA2807}.Release|x64.Build.0 = Release|x64
 		{86B5561E-46B3-5DDE-9121-423803DA2807}.Release|x86.ActiveCfg = Release|Win32

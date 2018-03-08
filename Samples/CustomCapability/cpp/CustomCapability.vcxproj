@@ -101,24 +101,28 @@
     <IncludePath>$(IncludePath);..\..\..\SharedContent\cpp</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)</OutDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)</OutDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)</OutDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)</OutDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)</OutDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)</OutDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -128,7 +132,7 @@
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(OutDir)rpcclient.lib</AdditionalDependencies>
+      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(IntDir)rpcclient.lib</AdditionalDependencies>
       <OptimizeReferences>false</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
@@ -140,7 +144,7 @@
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(OutDir)rpcclient.lib</AdditionalDependencies>
+      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
       <OptimizeReferences>false</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
@@ -152,7 +156,7 @@
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(OutDir)rpcclient.lib</AdditionalDependencies>
+      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(IntDir)rpcclient.lib</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
@@ -164,7 +168,7 @@
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(OutDir)rpcclient.lib</AdditionalDependencies>
+      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
@@ -176,7 +180,7 @@
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(OutDir)rpcclient.lib</AdditionalDependencies>
+      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(IntDir)rpcclient.lib</AdditionalDependencies>
       <OptimizeReferences>false</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
@@ -188,7 +192,7 @@
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(OutDir)rpcclient.lib</AdditionalDependencies>
+      <AdditionalDependencies>vccorlib.lib;WindowsApp.lib;%(AdditionalDependencies);rpcrt4.lib;$(IntDir)rpcclient.lib</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
@@ -307,7 +311,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Service\Client\RpcClient.vcxproj">
+    <ProjectReference Condition="'$(Platform)' == 'x86' Or '$(Platform)' == 'x64'" Include="..\Service\Client\RpcClient.vcxproj">
       <Project>{86B5561E-46B3-5DDE-9121-423803DA2807}</Project>
       <Name>RpcClient</Name>
     </ProjectReference>

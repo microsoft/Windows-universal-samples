@@ -205,14 +205,14 @@ void Scenario3::OnSaveAsync(Object^ sender, RoutedEventArgs^ e)
                 .then([this](IRandomAccessStream^ stream)
             {
                 return create_task(inkCanvas->InkPresenter->StrokeContainer->SaveAsync(stream))
-                    .then([this, stream](task<std::size_t> saveTask)
+                    .then([this, stream](task<unsigned int> saveTask)
                 {
                     // Always close the stream, even if an error occurs.
                     delete stream;
 
                     return saveTask;
                 });
-            }).then([this, file](task<std::size_t> openSaveTask)
+            }).then([this, file](task<unsigned int> openSaveTask)
             {
                 // Report whether the file was successfully saved.
                 try

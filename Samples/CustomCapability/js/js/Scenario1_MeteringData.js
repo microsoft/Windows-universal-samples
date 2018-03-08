@@ -5,7 +5,7 @@
 
     // Instance of WinRT component that implements
     // RPC metering service client
-    var rpcClient = new RpcClientRt.RpcClient;
+    var rpcClient = window.RpcClientRt && new RpcClientRt.RpcClient;
     var meteringOn = false;
     var meteringPageInForeground = false;
     var samplePeriod = 100;
@@ -93,7 +93,7 @@
                     meteringIntervalId = 0;
                 }
                 var currentCallbackCount = rpcClient.getCallbackCount();
-                if (currentCallbackCount != meteringCallbackCount) {
+                if (currentCallbackCount !== meteringCallbackCount) {
                     
                     var now = (new Date()).getTime();
                     var diff = now - lastMeteringCallbackTime;
@@ -113,10 +113,10 @@
     // Called when the user drags the scale factor slider control.
     function onSampleSliderChange(args) {
         samplePeriod = Math.floor(document.getElementById("SamplePeriodSlider").value);
-        document.getElementById("SamplePeriod").innerHTML = "Sample Period (ms): " + samplePeriod
+        document.getElementById("SamplePeriod").innerHTML = "Sample Period (ms): " + samplePeriod;
         if (meteringOn) {
             var ret = rpcClient.setSampleRate(samplePeriod);
-            if (ret != 0) {
+            if (ret) {
                 WinJS.log && WinJS.log("Error occured while communicating with RPC server: " + ret, "sample", "error");
             }
             else {
@@ -133,10 +133,14 @@
         meteringOn = true;
         updateStartStopButtons();
         samplePeriod = Math.floor(document.getElementById("SamplePeriodSlider").value);
-        rpcClient.startMeteringAsync(samplePeriod);
-        CheckMeteringStatusAsync();
+        if (rpcClient) {
+            rpcClient.startMeteringAsync(samplePeriod);
+            CheckMeteringStatusAsync();
 
-        WinJS.log && WinJS.log("Metering start command sent successfully", "sample", "status");
+            WinJS.log && WinJS.log("Metering start command sent successfully", "sample", "status");
+        } else {
+            WinJS.log && WinJS.log("NT service support has not been compiled for this architecture.", "sample", "error");
+        }
     }
 
     /// <summary>
@@ -146,12 +150,13 @@
     function onStopButtonClick(args) {
         clearInterval(meteringIntervalId);
         meteringIntervalId = 0;
-        var ret = rpcClient.stopMeteringData();
-        if (ret != 0) {
-            WinJS.log && WinJS.log("Error occured while communicating with RPC server: " + ret, "sample", "error");
-        }
-        else {
-            WinJS.log && WinJS.log("Metering stop command sent successfully", "sample", "status");
+        if (rpcClient) {
+            var ret = rpcClient.stopMeteringData();
+            if (ret) {
+                WinJS.log && WinJS.log("Error occured while communicating with RPC server: " + ret, "sample", "error");
+            } else {
+                WinJS.log && WinJS.log("Metering stop command sent successfully", "sample", "status");
+            }
         }
 
         meteringOn = false;
