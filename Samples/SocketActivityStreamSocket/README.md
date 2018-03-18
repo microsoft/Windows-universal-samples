@@ -39,7 +39,7 @@ if both apps are running on the same machine.
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Technical Preview
+**Server:** Windows Server 2016 Technical Preview, Windows 10 IoT Core
 
 **Phone:** Windows 10
 
