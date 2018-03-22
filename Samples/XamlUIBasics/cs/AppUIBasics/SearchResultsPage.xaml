@@ -44,7 +44,7 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        
+
         <Pivot
             x:Name="resultsPivot"
             Margin="12,0,0,0"
@@ -99,7 +99,7 @@
                 </DataTemplate>
             </Pivot.ItemTemplate>
         </Pivot>
-        
+
         <TextBlock
             x:Name="noResultsTextBlock"
             Style="{StaticResource TitleTextBlockStyle}"

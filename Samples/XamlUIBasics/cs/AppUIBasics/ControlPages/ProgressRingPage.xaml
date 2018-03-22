@@ -19,13 +19,13 @@
     mc:Ignorable="d">
     <StackPanel>
         <local:ControlExample HeaderText="An indeterminate progress ring.">
-                
+
             <ProgressRing IsActive="{x:Bind ProgressToggle.IsOn, Mode=OneWay}" Height="60" Width="60" VerticalAlignment="Top" Margin="10,10,0,0"/>
 
             <local:ControlExample.Options>
                 <StackPanel>
                     <ToggleSwitch x:Name="ProgressToggle" Header="Toggle work" OffContent="Do work" OnContent="Working" IsOn="True" />
-                </StackPanel>                
+                </StackPanel>
             </local:ControlExample.Options>
 
             <local:ControlExample.Xaml>

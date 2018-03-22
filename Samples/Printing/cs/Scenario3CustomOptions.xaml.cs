@@ -11,12 +11,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Printing;
 using Windows.Graphics.Printing;
 using Windows.Graphics.Printing.OptionDetails;
+using Windows.Storage.Streams;
 using SDKTemplate;
 
 namespace PrintSample
@@ -63,7 +65,25 @@ namespace PrintSample
             get { return (imageText & DisplayContent.Images) == DisplayContent.Images; }
         }
 
-        public CustomOptionsPrintHelper(Page scenarioPage) : base(scenarioPage) { }
+        private bool showHeader = true;
+
+        Task<IRandomAccessStreamWithContentType> wideMarginsIconTask;
+        Task<IRandomAccessStreamWithContentType> moderateMarginsIconTask;
+        Task<IRandomAccessStreamWithContentType> narrowMarginsIconTask;
+
+        public CustomOptionsPrintHelper(Page scenarioPage) : base(scenarioPage)
+        {
+            // Start these tasks early because we know we're going to need the
+            // streams in PrintTaskRequested.
+            RandomAccessStreamReference wideMarginsIconReference = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/wideMargins.svg"));
+            wideMarginsIconTask = wideMarginsIconReference.OpenReadAsync().AsTask();
+
+            RandomAccessStreamReference moderateMarginsIconReference = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/moderateMargins.svg"));
+            moderateMarginsIconTask = moderateMarginsIconReference.OpenReadAsync().AsTask();
+
+            RandomAccessStreamReference narrowMarginsIconReference = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/narrowMargins.svg"));
+            narrowMarginsIconTask = narrowMarginsIconReference.OpenReadAsync().AsTask();
+        }
 
         /// <summary>
         /// This is the event handler for PrintManager.PrintTaskRequested.
@@ -76,8 +96,9 @@ namespace PrintSample
         protected override void PrintTaskRequested(PrintManager sender, PrintTaskRequestedEventArgs e)
         {
             PrintTask printTask = null;
-            printTask = e.Request.CreatePrintTask("C# Printing SDK Sample", sourceRequestedArgs =>
+            printTask = e.Request.CreatePrintTask("C# Printing SDK Sample", async sourceRequestedArgs =>
             {
+                var deferral = sourceRequestedArgs.GetDeferral();
                 PrintTaskOptionDetails printDetailedOptions = PrintTaskOptionDetails.GetFromPrintTaskOptions(printTask.Options);
                 IList<string> displayedOptions = printDetailedOptions.DisplayedOptions;
 
@@ -97,29 +118,64 @@ namespace PrintSample
 
                 // Add the custom option to the option list
                 displayedOptions.Add("PageContent");
+                
+                // Create a new toggle option "Show header". 
+                PrintCustomToggleOptionDetails header = printDetailedOptions.CreateToggleOption("Header", "Show header");
 
+                // App tells the user some more information about what the feature means.
+                header.Description = "Display a header on the first page";
+
+                // Set the default value
+                header.TrySetValue(showHeader);
+                
+                // Add the custom option to the option list
+                displayedOptions.Add("Header");
+                
+                // Create a new list option
+                PrintCustomItemListOptionDetails margins = printDetailedOptions.CreateItemListOption("Margins", "Margins");
+                margins.AddItem("WideMargins", "Wide", "Each margin is 20% of the paper size", await wideMarginsIconTask);
+                margins.AddItem("ModerateMargins", "Moderate", "Each margin is 10% of the paper size", await moderateMarginsIconTask);
+                margins.AddItem("NarrowMargins", "Narrow", "Each margin is 5% of the paper size", await narrowMarginsIconTask);
+                
+                // The default is ModerateMargins
+                ApplicationContentMarginTop = 0.1;
+                ApplicationContentMarginLeft = 0.1;
+                margins.TrySetValue("ModerateMargins");
+
+                // App tells the user some more information about what the feature means.
+                margins.Description = "The space between the content of your document and the edge of the paper";
+
+                // Add the custom option to the option list
+                displayedOptions.Add("Margins");
+                
                 printDetailedOptions.OptionChanged += printDetailedOptions_OptionChanged;
 
                 // Print Task event handler is invoked when the print job is completed.
-                printTask.Completed += async (s, args) =>
+                printTask.Completed += (s, args) =>
                 {
                     // Notify the user when the print operation fails.
                     if (args.Completion == PrintTaskCompletion.Failed)
                     {
-                        await scenarioPage.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-                        {
-                            MainPage.Current.NotifyUser("Failed to print.", NotifyType.ErrorMessage);
-                        });
+                        MainPage.Current.NotifyUser("Failed to print.", NotifyType.ErrorMessage);
                     }
                 };
 
                 sourceRequestedArgs.SetSource(printDocumentSource);
+
+                deferral.Complete();
             });
         }
 
+        /// <summary>
+        /// This is the event handler for whenever the user makes changes to the options. 
+        /// In this case, the options of interest are PageContent, Margins and Header.
+        /// </summary>
+        /// <param name="sender">PrintTaskOptionDetails</param>
+        /// <param name="args">PrintTaskOptionChangedEventArgs</param>
         async void printDetailedOptions_OptionChanged(PrintTaskOptionDetails sender, PrintTaskOptionChangedEventArgs args)
         {
-            // Listen for PageContent changes
+            bool invalidatePreview = false;
+            
             string optionId = args.OptionId as string;
             if (string.IsNullOrEmpty(optionId))
             {
@@ -127,6 +183,51 @@ namespace PrintSample
             }
 
             if (optionId == "PageContent")
+            {
+                invalidatePreview = true;
+            }
+
+            if (optionId == "Margins")
+            {
+                PrintCustomItemListOptionDetails marginsOption = (PrintCustomItemListOptionDetails)sender.Options["Margins"];
+                string marginsValue = marginsOption.Value.ToString();
+                
+                switch (marginsValue)
+                {
+                    case "WideMargins":
+                        ApplicationContentMarginTop = 0.2;
+                        ApplicationContentMarginLeft = 0.2; 
+                        break;
+                    case "ModerateMargins":
+                        ApplicationContentMarginTop = 0.1;
+                        ApplicationContentMarginLeft = 0.1;
+                        break;
+                    case "NarrowMargins":
+                        ApplicationContentMarginTop = 0.05;
+                        ApplicationContentMarginLeft = 0.05;
+                        break;
+                }
+
+                if (marginsValue == "NarrowMargins")
+                {
+                    marginsOption.WarningText = "Narrow margins may not be supported by some printers";
+                }
+                else
+                {
+                    marginsOption.WarningText = "";
+                }
+
+                invalidatePreview = true;
+            }
+
+            if (optionId == "Header")
+            {
+                PrintCustomToggleOptionDetails headerOption = (PrintCustomToggleOptionDetails)sender.Options["Header"];
+                showHeader = (bool)headerOption.Value;
+                invalidatePreview = true;
+            }
+
+            if (invalidatePreview)
             {
                 await scenarioPage.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                 {
@@ -165,9 +266,9 @@ namespace PrintSample
                 mainText.Visibility = ShowText ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;
                 continuationLink.Visibility = ShowText ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;
 
-                // Hide header if printing only images
+                // Hide header if appropriate
                 StackPanel header = (StackPanel)firstPage.FindName("Header");
-                header.Visibility = ShowText ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;
+                header.Visibility = showHeader ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;
             }
 
             //Continue with the rest of the base printing layout processing (paper size, printable page size)

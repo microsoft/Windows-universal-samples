@@ -79,11 +79,11 @@ void PreviewOptionsPrintHelper::AddPrintPages(Object^ sender, AddPagesEventArgs^
 
     PrintDocument^ printDocument = safe_cast<PrintDocument^>(sender);
 
-    // Loop over all of the print pages and add each one to  add each page to be printed
+    // Loop over all of the print pages and add each one to be printed
 
-    for (int i = 0; i < m_printPages.size(); i++)
+    for (UIElement^ page : m_printPages)
     {
-        printDocument->AddPage(m_printPages[i]);
+        printDocument->AddPage(page);
     }
 
     // Indicate that all of the print pages have been provided

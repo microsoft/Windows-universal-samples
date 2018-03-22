@@ -11,20 +11,16 @@ namespace PrintSample
 {
     public class PrintHelper
     {
-        #region Application Content Size Constants given in percents (normalized)
-
         /// <summary>
         /// The percent of app's margin width, content is set at 85% (0.85) of the area's width
         /// </summary>
-        protected const double ApplicationContentMarginLeft = 0.075;
+        protected double ApplicationContentMarginLeft = 0.075;
 
         /// <summary>
         /// The percent of app's margin height, content is set at 94% (0.94) of tha area's height
         /// </summary>
-        protected const double ApplicationContentMarginTop = 0.03;
-
-        #endregion
-
+        protected double ApplicationContentMarginTop = 0.03;
+        
         /// <summary>
         /// PrintDocument is used to prepare the pages for printing.
         /// Prepare the pages to print in the handlers for the Paginate, GetPreviewPage, and AddPages events.
@@ -182,41 +178,44 @@ namespace PrintSample
         /// <param name="e">Paginate Event Arguments</param>
         protected virtual void CreatePrintPreviewPages(object sender, PaginateEventArgs e)
         {
-            // Clear the cache of preview pages
-            printPreviewPages.Clear();
-
-            // Clear the print canvas of preview pages
-            PrintCanvas.Children.Clear();
-
-            // This variable keeps track of the last RichTextBlockOverflow element that was added to a page which will be printed
-            RichTextBlockOverflow lastRTBOOnPage;
-
-            // Get the PrintTaskOptions
-            PrintTaskOptions printingOptions = ((PrintTaskOptions)e.PrintTaskOptions);
-
-            // Get the page description to deterimine how big the page is
-            PrintPageDescription pageDescription = printingOptions.GetPageDescription(0);
-
-            // We know there is at least one page to be printed. passing null as the first parameter to
-            // AddOnePrintPreviewPage tells the function to add the first page.
-            lastRTBOOnPage = AddOnePrintPreviewPage(null, pageDescription);
-
-            // We know there are more pages to be added as long as the last RichTextBoxOverflow added to a print preview
-            // page has extra content
-            while (lastRTBOOnPage.HasOverflowContent && lastRTBOOnPage.Visibility == Windows.UI.Xaml.Visibility.Visible)
+            lock (printPreviewPages)
             {
-                lastRTBOOnPage = AddOnePrintPreviewPage(lastRTBOOnPage, pageDescription);
+                // Clear the cache of preview pages
+                printPreviewPages.Clear();
+
+                // Clear the print canvas of preview pages
+                PrintCanvas.Children.Clear();
+
+                // This variable keeps track of the last RichTextBlockOverflow element that was added to a page which will be printed
+                RichTextBlockOverflow lastRTBOOnPage;
+
+                // Get the PrintTaskOptions
+                PrintTaskOptions printingOptions = ((PrintTaskOptions)e.PrintTaskOptions);
+
+                // Get the page description to deterimine how big the page is
+                PrintPageDescription pageDescription = printingOptions.GetPageDescription(0);
+
+                // We know there is at least one page to be printed. passing null as the first parameter to
+                // AddOnePrintPreviewPage tells the function to add the first page.
+                lastRTBOOnPage = AddOnePrintPreviewPage(null, pageDescription);
+
+                // We know there are more pages to be added as long as the last RichTextBoxOverflow added to a print preview
+                // page has extra content
+                while (lastRTBOOnPage.HasOverflowContent && lastRTBOOnPage.Visibility == Windows.UI.Xaml.Visibility.Visible)
+                {
+                    lastRTBOOnPage = AddOnePrintPreviewPage(lastRTBOOnPage, pageDescription);
+                }
+
+                if (PreviewPagesCreated != null)
+                {
+                    PreviewPagesCreated.Invoke(printPreviewPages, null);
+                }
+
+                PrintDocument printDoc = (PrintDocument)sender;
+
+                // Report the number of preview pages created
+                printDoc.SetPreviewPageCount(printPreviewPages.Count, PreviewPageCountType.Intermediate);
             }
-
-            if (PreviewPagesCreated != null)
-            {
-                PreviewPagesCreated.Invoke(printPreviewPages, null);
-            }
-
-            PrintDocument printDoc = (PrintDocument)sender;
-
-            // Report the number of preview pages created
-            printDoc.SetPreviewPageCount(printPreviewPages.Count, PreviewPageCountType.Intermediate);
         }
 
         /// <summary>
@@ -247,9 +246,9 @@ namespace PrintSample
                 // We should have all pages ready at this point...
                 printDocument.AddPage(printPreviewPages[i]);
             }
-
+            
             PrintDocument printDoc = (PrintDocument)sender;
-
+            
             // Indicate that all of the print pages have been provided
             printDoc.AddPagesComplete();
         }
@@ -287,7 +286,7 @@ namespace PrintSample
             // Set "paper" width
             page.Width = printPageDescription.PageSize.Width;
             page.Height = printPageDescription.PageSize.Height;
-
+            
             Grid printableArea = (Grid)page.FindName("PrintableArea");
 
             // Get the margins size

@@ -11,31 +11,16 @@ Copyright (c) Microsoft Corporation. All rights reserved
 </head>
 
 <body class="win-type-body">
-    <div id="scenarioView">
-        <div>
-            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
-            <div id="scenarioDescription">
-                <p>Requests fingerprint consent from the current user. Allows the calling application to specify a message to display.</p>
-            </div>
-        </div>
-        <div id="scenarioContent">
-            <table id="Scenario1InputTable">
-                <tr>
-                    <td>
-                        <label for="Message">Message: </label>
-                    </td>
-                    <td>
-                        <input type="text" value="Message to user" size="40" id="Message" class="win-textbox">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button id="RequestConsent" class="win-button">Request Consent</button>
-                    </td>
-                </tr>
-            </table>
+    <div>
+        <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+        <div id="scenarioDescription">
+            Requests consent from the user using
+            a verification device, such as a Microsoft Passport PIN, Windows Hello biometric, or fingerprint reader.
         </div>
     </div>
+    <p>
+        <button id="RequestConsent" class="win-button">Request Consent</button>
+    </p>
 </body>
 
 </html>

@@ -10,11 +10,19 @@
     <StackPanel>
         <local:ControlExample x:Name="Example1" HeaderText="Select different looks for the person picture.">
 
-            <PersonPicture x:Name="personPicture" 
+            <local:ControlExample.Example>
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="300" />
+                    </Grid.RowDefinitions>
+                    <PersonPicture x:Name="personPicture" Grid.Row="1"
                 VerticalAlignment="Top"
                 ProfilePicture="{Binding IsChecked, ElementName=ProfileImageRadio, Converter={StaticResource booleanToValueConverter}, ConverterParameter='https://docs.microsoft.com/en-us/windows/uwp/contacts-and-calendar/images/shoulder-tap-static-payload.png'}"
                 DisplayName="{x:Bind DisplayNameRadio.IsChecked, Mode=OneWay, Converter={StaticResource booleanToValueConverter}, ConverterParameter='Jane Doe'}"
                 Initials="{x:Bind InitialsRadio.IsChecked, Mode=OneWay, Converter={StaticResource booleanToValueConverter}, ConverterParameter='SB'}" />
+                </Grid>
+            </local:ControlExample.Example>
 
             <local:ControlExample.Options>
                 <StackPanel>

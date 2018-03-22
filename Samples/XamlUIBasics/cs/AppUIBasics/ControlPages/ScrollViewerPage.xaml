@@ -17,7 +17,7 @@
         mc:Ignorable="d">
     <StackPanel>
         <local:ControlExample x:Name="Example1" HeaderText="Content inside of a ScrollViewer.">
-            
+
             <ScrollViewer x:Name="Control1" Height="270" ZoomMode="Disabled" IsVerticalScrollChainingEnabled="True"
                     ManipulationCompleted="Control1_ManipulationCompleted" VerticalAlignment="Top"
                     HorizontalAlignment="Left">
@@ -43,15 +43,15 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="ZoomMode" VerticalAlignment="Center" Margin="0,0,10,0" />
-                    
+
                     <ComboBox Grid.Column="1" SelectionChanged="ZoomModeComboBox_SelectionChanged" HorizontalAlignment="Stretch">
                         <ComboBoxItem>Enabled</ComboBoxItem>
                         <ComboBoxItem IsSelected="True">Disabled</ComboBoxItem>
                     </ComboBox>
-                    
+
                     <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="ZoomSlider" Header="Zoom" IsEnabled="False"
                         Maximum="{x:Bind Control1.MaxZoomFactor, Mode=OneWay}"
-                        Minimum="{x:Bind Control1.MinZoomFactor, Mode=OneWay}" 
+                        Minimum="{x:Bind Control1.MinZoomFactor, Mode=OneWay}"
                         Value="1"
                         Margin="0,10,0,0"
                         ValueChanged="ZoomSlider_ValueChanged" />
@@ -65,7 +65,7 @@
                         <ComboBoxItem>Enabled</ComboBoxItem>
                         <ComboBoxItem>Disabled</ComboBoxItem>
                     </ComboBox>
-                    
+
                     <TextBlock Grid.Row="4" Text="Vertical" VerticalAlignment="Center" Margin="0,8,10,0" />
 
                     <ComboBox Grid.Row="4" Grid.Column="1" x:Name="vsmCombo" Margin="0,8,0,0" SelectedIndex="1" SelectionChanged="vsmCombo_SelectionChanged_1" HorizontalAlignment="Stretch">
@@ -95,7 +95,7 @@
                     </ComboBox>
                 </Grid>
             </local:ControlExample.Options>
-            
+
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;ScrollViewer Height="270" ZoomMode="Disabled"</Paragraph>

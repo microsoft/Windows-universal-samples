@@ -13,6 +13,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+
     <StackPanel>
         <StackPanel.Resources>
             <Style TargetType="ListViewItem">
@@ -29,17 +30,14 @@
                             <FontIconSource x:Key="FlagIcon" Glyph="&#xE129;"/>
 
                             <SwipeItems x:Key="left" Mode="Reveal">
-                                <SwipeItem Text="Accept" IconSource="{StaticResource AcceptIcon}" 
-                                           Background="#FFC5E0B4" Invoked="Accept_ItemInvoked"/>
-                                <SwipeItem Text="Flag" IconSource="{StaticResource FlagIcon}" 
-                                           Background="#FFFFE699" Invoked="Flag_ItemInvoked"/>
+                                <SwipeItem Background="{ThemeResource ButtonBackgroundThemeBrush}" Foreground="{ThemeResource AppBarItemForegroundThemeBrush}" Text="Accept" IconSource="{StaticResource AcceptIcon}"
+                                           Invoked="Accept_ItemInvoked"/>
+                                <SwipeItem Background="{ThemeResource ButtonBackgroundThemeBrush}" Foreground="{ThemeResource AppBarItemForegroundThemeBrush}" Text="Flag" IconSource="{StaticResource FlagIcon}"
+                                           Invoked="Flag_ItemInvoked"/>
                             </SwipeItems>
                         </Border.Resources>
-                        <SwipeControl 
-                            LeftItems="{StaticResource left}"
-                            Background="Gray" Width="300" Margin="12" Height="68">
-                                <TextBlock Text="Swipe me to the right" Margin="12" 
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <SwipeControl BorderThickness="1" BorderBrush="{ThemeResource ButtonBackground}" LeftItems="{StaticResource left}" Width="300" Margin="12" Height="68">
+                                <TextBlock Text="Swipe Right" Margin="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </SwipeControl>
                     </Border>
                 </local:ControlExample.Example>
@@ -51,16 +49,14 @@
                         <Paragraph TextIndent='24'>&lt;FontIconSource x:Key="FlagIcon" Glyph="&amp;#xE129;"/&gt;</Paragraph>
                         <Paragraph TextIndent='0'></Paragraph>
                         <Paragraph TextIndent='24'>&lt;SwipeItems x:Key="left" Mode="Reveal"&gt;</Paragraph>
-                        <Paragraph TextIndent='36'>&lt;SwipeItem Text="Accept" IconSource="{StaticResource AcceptIcon}"</Paragraph>
-                        <Paragraph TextIndent='69'>Background="#FFC5E0B4" Invoked="Accept_ItemInvoked"/&gt;</Paragraph>
-                        <Paragraph TextIndent='36'>&lt;SwipeItem Text="Flag" IconSource="{StaticResource FlagIcon}"</Paragraph>
-                        <Paragraph TextIndent='69'>Background="#FFFFE699" Invoked="Flag_ItemInvoked"/&gt;</Paragraph>
+                        <Paragraph TextIndent='36'>&lt;SwipeItem Text="Accept" IconSource="{StaticResource AcceptIcon}" Invoked="Accept_ItemInvoked"/&gt;</Paragraph>
+                        <Paragraph TextIndent='36'>&lt;SwipeItem Text="Flag" IconSource="{StaticResource FlagIcon}" Invoked="Flag_ItemInvoked"/&gt;</Paragraph>
                         <Paragraph TextIndent='24'>&lt;/SwipeItems&gt;</Paragraph>
                         <Paragraph TextIndent='12'>&lt;/Border.Resources&gt;</Paragraph>
-                        <Paragraph TextIndent='12'>&lt;SwipeControl</Paragraph>
-                        <Paragraph TextIndent='24'>LeftItems="{StaticResource left}"</Paragraph>
-                        <Paragraph TextIndent='24'>Background="Gray" Width="300" Margin="12" Height="68"&gt;</Paragraph>
-                        <Paragraph TextIndent='36'>&lt;TextBlock Text="Swipe me to the right" Margin="12"</Paragraph>
+                        <Paragraph TextIndent='12'>&lt;SwipeControl BorderThickness="1"</Paragraph>
+                        <Paragraph TextIndent='24'>LeftItems="{StaticResource left}" BorderBrush="{ThemeResource ButtonBackground}"</Paragraph>
+                        <Paragraph TextIndent='24'>Width="300" Margin="12" Height="68"&gt;</Paragraph>
+                        <Paragraph TextIndent='36'>&lt;TextBlock Text="Swipe Right" Margin="12"</Paragraph>
                         <Paragraph TextIndent='69'>HorizontalAlignment="Center" VerticalAlignment="Center"/&gt;</Paragraph>
                         <Paragraph TextIndent='12'>&lt;/SwipeControl&gt;</Paragraph>
                         <Paragraph TextIndent='0'>&lt;/Border&gt;</Paragraph>
@@ -69,20 +65,17 @@
                 </local:ControlExample.Xaml>
             </local:ControlExample>
 
-            <local:ControlExample x:Name="Example2" HeaderText="Swipe left to execute">
+            <local:ControlExample x:Name="Example2" HeaderText="Swipe left to invoke an execute">
                 <local:ControlExample.Example>
                     <Border>
                         <Border.Resources>
-                            <FontIconSource x:Key="DeleteIcon" Glyph="&#xE107;"/>
+                            <FontIconSource x:Key="ArchiveIcon" Glyph="&#xE7B8;"/>
                             <SwipeItems x:Key="right" Mode="Execute">
-                                <SwipeItem Text="Delete" IconSource="{StaticResource DeleteIcon}" 
-                                           Background="#FFF4B183" Invoked="DeleteOne_ItemInvoked"/>
+                                <SwipeItem Text="Archive" IconSource="{StaticResource ArchiveIcon}" BehaviorOnInvoked="Close" Invoked="DeleteOne_ItemInvoked"/>
                             </SwipeItems>
                         </Border.Resources>
-                        <SwipeControl 
-                            RightItems="{StaticResource right}"
-                            Background="Gray" Width="300" Margin="12" Height="68">
-                            <TextBlock Text="Swipe me to the left" Margin="12" 
+                        <SwipeControl BorderThickness="1" BorderBrush="{ThemeResource ButtonBackground}" RightItems="{StaticResource right}" Width="300" Margin="12" Height="68">
+                            <TextBlock Text="Swipe Left" Margin="12"
                                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </SwipeControl>
                     </Border>
@@ -93,14 +86,14 @@
                         <Paragraph TextIndent='12'>&lt;Border.Resources&gt;</Paragraph>
                         <Paragraph TextIndent='24'>&lt;FontIconSource x:Key="DeleteIcon" Glyph="&amp;#xE107;"/&gt;</Paragraph>
                         <Paragraph TextIndent='24'>&lt;SwipeItems x:Key="right" Mode="Execute"&gt;</Paragraph>
-                        <Paragraph TextIndent='36'>&lt;SwipeItem Text="Delete" IconSource="{StaticResource DeleteIcon}"</Paragraph>
-                        <Paragraph TextIndent='69'>Background="#FFF4B183" Invoked="DeleteOne_ItemInvoked"/&gt;</Paragraph>
+                        <Paragraph TextIndent='36'>&lt;SwipeItem Text="Archive" IconSource="{StaticResource ArchiveIcon}"</Paragraph>
+                        <Paragraph TextIndent='69'>BehaviorOnInvoked="Close" Invoked="DeleteOne_ItemInvoked"/&gt;</Paragraph>
                         <Paragraph TextIndent='24'>&lt;/SwipeItems&gt;</Paragraph>
                         <Paragraph TextIndent='12'>&lt;/Border.Resources&gt;</Paragraph>
-                        <Paragraph TextIndent='12'>&lt;SwipeControl</Paragraph>
+                        <Paragraph TextIndent='12'>&lt;SwipeControl BorderThickness="1" BorderBrush="{ThemeResource ButtonBackground}"</Paragraph>
                         <Paragraph TextIndent='24'>RightItems="{StaticResource right}"</Paragraph>
-                        <Paragraph TextIndent='24'>Background="Gray" Width="300" Margin="12" Height="68"&gt;</Paragraph>
-                        <Paragraph TextIndent='24'>&lt;TextBlock Text="Swipe me to the left" Margin="12"</Paragraph>
+                        <Paragraph TextIndent='24'>Width="300" Margin="12" Height="68"&gt;</Paragraph>
+                        <Paragraph TextIndent='24'>&lt;TextBlock Text="Swipe Left" Margin="12"</Paragraph>
                         <Paragraph TextIndent='57'>HorizontalAlignment="Center" VerticalAlignment="Center"/&gt;</Paragraph>
                         <Paragraph TextIndent='12'>&lt;/SwipeControl&gt;</Paragraph>
                         <Paragraph TextIndent='0'>&lt;/Border&gt;</Paragraph>
@@ -108,52 +101,50 @@
                 </local:ControlExample.Xaml>
             </local:ControlExample>
 
-            <local:ControlExample x:Name="Example3" HeaderText="Swipe in a ListView">
+            <local:ControlExample x:Name="Example3" HeaderText="Custom Swipe in a ListView">
                 <local:ControlExample.Example>
+                     <ListView x:Name="lv" Width="800" MinWidth="200" Height="300" Margin="12">
+                         <ListView.Resources>
+                             <FontIconSource x:Key="ReplyAllIcon" Glyph="&#xE8C2;"/>
+                             <FontIconSource x:Key="ReadIcon" Glyph="&#xE8C3;"/>
+                             <FontIconSource x:Key="DeleteIcon" Glyph="&#xE107;"/>
 
-                    <ListView x:Name="lv" Width="400" Height="300" Margin="12">
-                        <ListView.Resources>
-                            <FontIconSource x:Key="AcceptIcon" Glyph="&#xE10B;"/>
-                            <FontIconSource x:Key="FlagIcon" Glyph="&#xE129;"/>
-                            <FontIconSource x:Key="DeleteIcon" Glyph="&#xE107;"/>
+                             <SwipeItems x:Key="left" Mode="Reveal">
+                                 <SwipeItem Text="Reply All" IconSource="{StaticResource ReplyAllIcon}"
+                                        Background="#FF3e6fa7" Foreground="White"/>
+                                 <SwipeItem Text="Open" IconSource="{StaticResource ReadIcon}"
+                                        Background="#FFff9501" Foreground="White"/>
+                             </SwipeItems>
+                             <SwipeItems x:Key="right" Mode="Execute">
+                                 <SwipeItem Text="Delete" IconSource="{StaticResource DeleteIcon}"
+                                        Background="Red" Invoked="DeleteItem_ItemInvoked"/>
+                             </SwipeItems>
+                         </ListView.Resources>
 
-                            <SwipeItems x:Key="left" Mode="Reveal">
-                                <SwipeItem Text="Accept" IconSource="{StaticResource AcceptIcon}" 
-                                           Background="#FFC5E0B4" Invoked="Accept_ItemInvoked"/>
-                                <SwipeItem Text="Flag" IconSource="{StaticResource FlagIcon}" 
-                                           Background="#FFFFE699" Invoked="Flag_ItemInvoked"/>
-                            </SwipeItems>
-                            <SwipeItems x:Key="right" Mode="Execute">
-                                <SwipeItem Text="Delete" IconSource="{StaticResource DeleteIcon}" 
-                                           Background="#FFF4B183" Invoked="DeleteItem_ItemInvoked"/>
-                            </SwipeItems>
-                        </ListView.Resources>
-
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <SwipeControl Background="Gray" Height="68" Width="380"
-                                           LeftItems="{StaticResource left}"
-                                              RightItems="{StaticResource right}">
-                                    <TextBlock Text="{Binding}" FontSize="24" Margin="12" 
-                                               HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                                </SwipeControl>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                         <ListView.ItemTemplate>
+                             <DataTemplate>
+                                 <SwipeControl BorderThickness="0,1,0,0" BorderBrush="{ThemeResource ButtonBackground}" Height="68" Width="800" MinWidth="200" LeftItems="{StaticResource left}"
+                                           RightItems="{StaticResource right}">
+                                     <TextBlock Text="{Binding}" FontSize="24" Margin="12"
+                                            HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                                 </SwipeControl>
+                             </DataTemplate>
+                         </ListView.ItemTemplate>
+                     </ListView>
                 </local:ControlExample.Example>
                 <local:ControlExample.Xaml>
                     <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                         <Paragraph TextIndent='0'>&lt;ListView x:Name="lv" Width="400" Height="300" Margin="12"&gt;</Paragraph>
                         <Paragraph TextIndent='12'>&lt;ListView.Resources&gt;</Paragraph>
-                        <Paragraph TextIndent='24'>&lt;FontIconSource x:Key="AcceptIcon" Glyph="&amp;#xE10B;"/&gt;</Paragraph>
-                        <Paragraph TextIndent='24'>&lt;FontIconSource x:Key="FlagIcon" Glyph="&amp;#xE129;"/&gt;</Paragraph>
+                        <Paragraph TextIndent='24'>&lt;FontIconSource x:Key="ReplyAllIcon" Glyph="&amp;#xE8C2;"/&gt;</Paragraph>
+                        <Paragraph TextIndent='24'>&lt;FontIconSource x:Key="ReadIcon" Glyph="&amp;#xE8C3;"/&gt;</Paragraph>
                         <Paragraph TextIndent='24'>&lt;FontIconSource x:Key="DeleteIcon" Glyph="&amp;#xE107;"/&gt;</Paragraph>
                         <Paragraph TextIndent='0'></Paragraph>
                         <Paragraph TextIndent='24'>&lt;SwipeItems x:Key="left" Mode="Reveal"&gt;</Paragraph>
-                        <Paragraph TextIndent='36'>&lt;SwipeItem Text="Accept" IconSource="{StaticResource AcceptIcon}"</Paragraph>
-                        <Paragraph TextIndent='69'>Background="#FFC5E0B4" Invoked="Accept_ItemInvoked"/&gt;</Paragraph>
-                        <Paragraph TextIndent='36'>&lt;SwipeItem Text="Flag" IconSource="{StaticResource FlagIcon}"</Paragraph>
-                        <Paragraph TextIndent='69'>Background="#FFFFE699" Invoked="Flag_ItemInvoked"/&gt;</Paragraph>
+                        <Paragraph TextIndent='36'>&lt;SwipeItem Text="Reply All" IconSource="{StaticResource ReplyAllIcon}"</Paragraph>
+                        <Paragraph TextIndent='69'>Background="#FF3e6fa7" Foreground="White"/&gt;</Paragraph>
+                        <Paragraph TextIndent='36'>&lt;SwipeItem Text="Open" IconSource="{StaticResource ReadIcon}"</Paragraph>
+                        <Paragraph TextIndent='69'>Background="#FFff9501" Foreground="White"/&gt;</Paragraph>
                         <Paragraph TextIndent='24'>&lt;/SwipeItems&gt;</Paragraph>
                         <Paragraph TextIndent='24'>&lt;SwipeItems x:Key="right" Mode="Execute"&gt;</Paragraph>
                         <Paragraph TextIndent='36'>&lt;SwipeItem Text="Delete" IconSource="{StaticResource DeleteIcon}"</Paragraph>
@@ -163,8 +154,8 @@
                         <Paragraph TextIndent='0'></Paragraph>
                         <Paragraph TextIndent='12'>&lt;ListView.ItemTemplate&gt;</Paragraph>
                         <Paragraph TextIndent='24'>&lt;DataTemplate&gt;</Paragraph>
-                        <Paragraph TextIndent='36'>&lt;SwipeControl Background="Gray" Height="68" Width="380"</Paragraph>
-                        <Paragraph TextIndent='69'>LeftItems="{StaticResource left}"</Paragraph>
+                        <Paragraph TextIndent='36'>&lt;SwipeControl BorderThickness="0,1,0,0" BorderBrush="{ThemeResource ButtonBackground}" Height="68"</Paragraph>
+                        <Paragraph TextIndent='69'>Width="800" MinWidth="200" LeftItems="{StaticResource left}"</Paragraph>
                         <Paragraph TextIndent='78'>RightItems="{StaticResource right}"&gt;</Paragraph>
                         <Paragraph TextIndent='48'>&lt;TextBlock Text="{Binding}" FontSize="24" Margin="12"</Paragraph>
                         <Paragraph TextIndent='81'>HorizontalAlignment="Stretch" VerticalAlignment="Center"/&gt;</Paragraph>
@@ -176,6 +167,92 @@
                 </local:ControlExample.Xaml>
             </local:ControlExample>
 
+            <local:ControlExample x:Name="Example4" HeaderText="Gradient Background">
+                <local:ControlExample.Example>
+                    <Border>
+                        <Border.Resources>
+                            <FontIconSource x:Key="LockIcon" Glyph="&#xE8D7;"/>
+                            <LinearGradientBrush x:Key="PurpleGradient" StartPoint="0,0.5" EndPoint="1,0.5">
+                                <GradientStop Color="#ff8990f9" Offset="0.0"/>
+                                <GradientStop Color="#ff5b66fb" Offset="0.5"/>
+                                <GradientStop Color="#ff5c1df4" Offset="1.0"/>
+                            </LinearGradientBrush>
+                            <SwipeItems x:Key="right" Mode="Execute">
+                                <SwipeItem Text="Lock" Background="{StaticResource PurpleGradient}" IconSource="{StaticResource LockIcon}" BehaviorOnInvoked="Close"/>
+                            </SwipeItems>
+                        </Border.Resources>
+                        <SwipeControl BorderThickness="1" BorderBrush="{ThemeResource ButtonBackground}" RightItems="{StaticResource right}" Width="300" Margin="12" Height="68">
+                            <TextBlock Text="Swipe Left" Margin="12"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </SwipeControl>
+                    </Border>
+                </local:ControlExample.Example>
+                <local:ControlExample.Xaml>
+                    <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                        <Paragraph TextIndent='0'>&lt;Border&gt;</Paragraph>
+                        <Paragraph TextIndent='12'>&lt;Border.Resources&gt;</Paragraph>
+                        <Paragraph TextIndent='24'>&lt;FontIconSource x:Key="LockIcon" Glyph="&amp;#xE107;"/&gt;</Paragraph>
+                        <Paragraph TextIndent='24'>&lt;LinearGradientBrush x:Key="PurpleGradient" StartPoint="0,0.5" EndPoint="1,0.5"&gt;</Paragraph>
+                        <Paragraph TextIndent='36'>&lt;GradientStop Color="#ff8990f9" Offset="0.0"/&gt;</Paragraph>
+                        <Paragraph TextIndent='36'>&lt;GradientStop Color="#ff5b66fb" Offset="0.5"/&gt;</Paragraph>
+                        <Paragraph TextIndent='36'>&lt;GradientStop Color="#ff5c1df4" Offset="1.0"/&gt;</Paragraph>
+                        <Paragraph TextIndent='24'>&lt;LinearGradientBrush/&gt;</Paragraph>
+                        <Paragraph TextIndent='24'>&lt;SwipeItems x:Key="right" Mode="Execute"&gt;</Paragraph>
+                        <Paragraph TextIndent='36'>&lt;SwipeItem Text="Lock" Background="{StaticResource PurpleGradient}" </Paragraph>
+                        <Paragraph TextIndent='69'>BehaviorOnInvoked="Close" IconSource="{StaticResource LockIcon}"/&gt;</Paragraph>
+                        <Paragraph TextIndent='24'>&lt;/SwipeItems&gt;</Paragraph>
+                        <Paragraph TextIndent='12'>&lt;/Border.Resources&gt;</Paragraph>
+                        <Paragraph TextIndent='12'>&lt;SwipeControl BorderThickness="1" BorderBrush="{ThemeResource ButtonBackground}"</Paragraph>
+                        <Paragraph TextIndent='24'>RightItems="{StaticResource right}"</Paragraph>
+                        <Paragraph TextIndent='24'>Width="300" Margin="12" Height="68"&gt;</Paragraph>
+                        <Paragraph TextIndent='24'>&lt;TextBlock Text="Swipe Left" Margin="12"</Paragraph>
+                        <Paragraph TextIndent='57'>HorizontalAlignment="Center" VerticalAlignment="Center"/&gt;</Paragraph>
+                        <Paragraph TextIndent='12'>&lt;/SwipeControl&gt;</Paragraph>
+                        <Paragraph TextIndent='0'>&lt;/Border&gt;</Paragraph>
+                    </RichTextBlock>
+                </local:ControlExample.Xaml>
+            </local:ControlExample>
+
+            <local:ControlExample x:Name="Example5" HeaderText="Custom icons">
+                <local:ControlExample.Example>
+                    <Border>
+                        <Border.Resources>
+                            <SwipeItems x:Key="left" Mode="Reveal">
+                                <SwipeItem Text="Coffee" Background="{ThemeResource ButtonBackgroundThemeBrush}" Foreground="{ThemeResource AppBarItemForegroundThemeBrush}">
+                                    <SwipeItem.IconSource>
+                                        <BitmapIconSource UriSource="ms-appx:///Assets/CoffeeCup.png"/>
+                                    </SwipeItem.IconSource>
+                                </SwipeItem>
+                            </SwipeItems>
+                        </Border.Resources>
+                        <SwipeControl BorderThickness="1" BorderBrush="{ThemeResource ButtonBackground}" LeftItems="{StaticResource left}" Width="300" Margin="12" Height="68">
+                            <TextBlock Text="Swipe Right" Margin="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </SwipeControl>
+                    </Border>
+                </local:ControlExample.Example>
+                <local:ControlExample.Xaml>
+                    <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                        <Paragraph TextIndent='0'>&lt;Border&gt;</Paragraph>
+                        <Paragraph TextIndent='12'>&lt;Border.Resources&gt;</Paragraph>
+                        <Paragraph TextIndent='24'>&lt;SwipeItems x:Key="left" Mode="Reveal"&gt;</Paragraph>
+                        <Paragraph TextIndent='36'>&lt;SwipeItem Text="Coffee"&gt;</Paragraph>
+                        <Paragraph TextIndent='48'>&lt;SwipeItem.IconSource&gt;</Paragraph>
+                        <Paragraph TextIndent='60'>&lt;BitmapIconSource UriSource="ms-appx:///Assets/CoffeeCup.png"/&gt;</Paragraph>
+                        <Paragraph TextIndent='48'>&lt;SwipeItem.IconSource/&gt;</Paragraph>
+                        <Paragraph TextIndent='36'>&lt;SwipeItem/&gt;</Paragraph>
+                        <Paragraph TextIndent='24'>&lt;/SwipeItems&gt;</Paragraph>
+                        <Paragraph TextIndent='12'>&lt;/Border.Resources&gt;</Paragraph>
+                        <Paragraph TextIndent='12'>&lt;SwipeControl BorderThickness="1"</Paragraph>
+                        <Paragraph TextIndent='24'>LeftItems="{StaticResource left}" BorderBrush="{ThemeResource ButtonBackground}"</Paragraph>
+                        <Paragraph TextIndent='24'>Width="300" Margin="12" Height="68"&gt;</Paragraph>
+                        <Paragraph TextIndent='36'>&lt;TextBlock Text="Swipe Right" Margin="12"</Paragraph>
+                        <Paragraph TextIndent='69'>HorizontalAlignment="Center" VerticalAlignment="Center"/&gt;</Paragraph>
+                        <Paragraph TextIndent='12'>&lt;/SwipeControl&gt;</Paragraph>
+                        <Paragraph TextIndent='0'>&lt;/Border&gt;</Paragraph>
+                        <Paragraph TextIndent='0'></Paragraph>
+                    </RichTextBlock>
+                </local:ControlExample.Xaml>
+            </local:ControlExample>
 
         </StackPanel>
 

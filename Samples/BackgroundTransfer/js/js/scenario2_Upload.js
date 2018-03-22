@@ -61,31 +61,6 @@
 
     var maxUploadFileSize = 100 * 1024 * 1024; // 100 MB (arbitrary limit chosen for this sample)
 
-    function backgroundTransferStatusToString(transferStatus) {
-        switch (transferStatus) {
-            case BackgroundTransfer.BackgroundTransferStatus.idle:
-                return "Idle";
-            case BackgroundTransfer.BackgroundTransferStatus.running:
-                return "Running";
-            case BackgroundTransfer.BackgroundTransferStatus.pausedByApplication:
-                return "PausedByApplication";
-            case BackgroundTransfer.BackgroundTransferStatus.pausedCostedNetwork:
-                return "PausedCostedNetwork";
-            case BackgroundTransfer.BackgroundTransferStatus.pausedNoNetwork:
-                return "PausedNoNetwork";
-            case BackgroundTransfer.BackgroundTransferStatus.completed:
-                return "Completed";
-            case BackgroundTransfer.BackgroundTransferStatus.canceled:
-                return "Canceled";
-            case BackgroundTransfer.BackgroundTransferStatus.error:
-                return "Error";
-            case BackgroundTransfer.BackgroundTransferStatus.pausedSystemPolicy:
-                return "PausedSystemPolicy";
-            default:
-                return "Unknown";
-        }
-    }
-
     // Class associated with each upload.
     function UploadOperation() {
         var upload = null;
@@ -132,7 +107,8 @@
         this.load = function (loadedUpload) {
             upload = loadedUpload;
             printLog("Discovered background upload: " + upload.guid + " , Status: " +
-                backgroundTransferStatusToString(upload.progress.status) + "<br/>");
+                SdkSample.lookupEnumName(BackgroundTransfer.BackgroundTransferStatus, upload.progress.status) +
+                "<br/>");
             promise = upload.attachAsync().then(complete, error, progress);
         };
 
@@ -169,7 +145,8 @@
             var currentProgress = upload.progress;
 
             printLog("Progress: " + upload.guid + ", Status: " +
-                backgroundTransferStatusToString(currentProgress.status) + "<br/>");
+                SdkSample.lookupEnumName(BackgroundTransfer.BackgroundTransferStatus, currentProgress.status) +
+                "<br/>");
 
             var percent = 100;
             if (currentProgress.totalBytesToSend > 0) {

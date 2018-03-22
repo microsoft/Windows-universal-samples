@@ -35,7 +35,7 @@
                     </StackPanel>
                 </StackPanel>
             </local:ControlExample.Options>
-            
+
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;ColorPicker</Paragraph>

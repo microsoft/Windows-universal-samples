@@ -71,10 +71,10 @@
                         <Setter Target="seeAlsoPanel.(Grid.Row)" Value="3" />
                         <Setter Target="seeAlsoPanel.(Grid.Column)" Value="0" />
                         <Setter Target="seeAlsoPanel.(Grid.ColumnSpan)" Value="3" />
-                        
+
                         <Setter Target="DocumentationPanel.(Grid.ColumnSpan)" Value="1" />
                         <Setter Target="DocumentationPanel.Margin" Value="0" />
-                        
+
                         <Setter Target="RelatedControlsPanel.(Grid.Row)" Value="0" />
                         <Setter Target="RelatedControlsPanel.(Grid.Column)" Value="2" />
                         <Setter Target="RelatedControlsPanel.(Grid.ColumnSpan)" Value="1" />
@@ -89,14 +89,14 @@
                         <Setter Target="seeAlsoPanel.(Grid.Row)" Value="3" />
                         <Setter Target="seeAlsoPanel.(Grid.Column)" Value="0" />
                         <Setter Target="seeAlsoPanel.(Grid.ColumnSpan)" Value="3" />
-                        
+
                         <Setter Target="DocumentationPanel.(Grid.ColumnSpan)" Value="1" />
                         <Setter Target="DocumentationPanel.Margin" Value="0" />
-                        
+
                         <Setter Target="RelatedControlsPanel.(Grid.Row)" Value="0" />
                         <Setter Target="RelatedControlsPanel.(Grid.Column)" Value="2" />
                         <Setter Target="RelatedControlsPanel.(Grid.ColumnSpan)" Value="1" />
-  
+
                         <Setter Target="rightMargin.Width" Value="0" />
                         <Setter Target="contentRoot.Padding" Value="14,0" />
                     </VisualState.Setters>
@@ -196,8 +196,8 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate x:DataType="x:String">
-                                    <!-- A HyperlinkButton must always provide an accessible name to a screen reader which 
-                                         conveys the purpose of the link. By default, when the HyperlinkButton is built 
+                                    <!-- A HyperlinkButton must always provide an accessible name to a screen reader which
+                                         conveys the purpose of the link. By default, when the HyperlinkButton is built
                                          as below, with an Image and TextBlock, the HyperlinkButton provides no accessible
                                          name. So bind the accessible name to the same data that provides the text shown
                                          visually on the contained TextBlock. -->
@@ -205,7 +205,7 @@
                                         <RelativePanel>
                                             <!-- Now that the HyperlinkButton has a helpful accessible name, it serves no
                                                  useful purpose for the contained Image, (which is purely decorative,) or
-                                                 the contained TextBlock to be exposed to a screen reader. All the information 
+                                                 the contained TextBlock to be exposed to a screen reader. All the information
                                                  required by customers using a screen reader is accessible directly through the
                                                  Hyperlink button. As such, mark the contained elements as not being interesting
                                                  to a screen reader through use of the AutomationProperties.AccessibilityView

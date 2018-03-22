@@ -54,11 +54,11 @@
                 <RichTextBlock MaxWidth="840" Margin="0,10,0,0" IsTextSelectionEnabled="True">
                     <Paragraph>
                         This app is the interactive companion to the
-                        <Hyperlink NavigateUri="https://developer.microsoft.com/windows/apps/design">Fluent Design System web site</Hyperlink>. 
-                        The source code to this app is available on 
+                        <Hyperlink NavigateUri="https://developer.microsoft.com/windows/apps/design">Fluent Design System web site</Hyperlink>.
+                        The source code to this app is available on
                         <Hyperlink NavigateUri="https://github.com/Microsoft/Windows-universal-samples/tree/dev/Samples/XamlUIBasics">
                             https://github.com/Microsoft/Windows-universal-samples/tree/dev/Samples/XamlUIBasics
-                        </Hyperlink>. 
+                        </Hyperlink>.
                     </Paragraph>
                     <Paragraph Margin="0,10,0,0">
                         To clone the source repository:

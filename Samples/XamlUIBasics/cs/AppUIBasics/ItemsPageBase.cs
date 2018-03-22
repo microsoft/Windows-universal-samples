@@ -27,7 +27,7 @@ namespace AppUIBasics
 
         private string _itemId;
         private IEnumerable<ControlInfoDataItem> _items;
-                
+
         public IEnumerable<ControlInfoDataItem> Items
         {
             get { return _items; }
@@ -106,7 +106,7 @@ namespace AppUIBasics
                 }
             }
         }
-        
+
         protected void OnItemGridViewSizeChanged(object sender, SizeChangedEventArgs e)
         {
             var gridView = (GridView)sender;
@@ -123,7 +123,7 @@ namespace AppUIBasics
                 }
             }
         }
-        
+
         protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] String propertyName = null)
         {
             if (Equals(storage, value)) return false;

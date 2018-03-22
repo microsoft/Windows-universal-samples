@@ -1,4 +1,4 @@
-﻿<Page 
+﻿<Page
     x:Class="AppUIBasics.ControlPages.SplitViewPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -38,7 +38,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <local:ControlExample HeaderText="A basic SplitView.">
-            
+
             <Grid Height="300" VerticalAlignment="Top">
                 <SplitView x:Name="splitView"
                     PaneBackground="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"
@@ -81,10 +81,10 @@
             <local:ControlExample.Options>
                 <StackPanel>
                     <ToggleButton x:Name="togglePaneButton" IsChecked="True" Content="IsPaneOpen" />
-                    
+
                     <ToggleSwitch OffContent="Left" OnContent="Right" Header="Placement" Toggled="PanePlacement_Toggled"
                         Margin="0,12,0,0" MinWidth="120" />
-                    
+
                     <ComboBox x:Name="displayModeCombobox" SelectionChanged="displayModeCombobox_SelectionChanged"
                         Width="196" SelectedIndex="0" Margin="0,4,0,0" VerticalAlignment="Center" Header="DisplayMode">
                         <ComboBoxItem>Inline</ComboBoxItem>
@@ -92,7 +92,7 @@
                         <ComboBoxItem>Overlay</ComboBoxItem>
                         <ComboBoxItem>CompactOverlay</ComboBoxItem>
                     </ComboBox>
-                    
+
                     <ComboBox x:Name="paneBackgroundCombobox" Width="196" SelectedIndex="0" VerticalAlignment="Center"
                         Header="PaneBackground" Margin="0,12,0,0" SelectionChanged="paneBackgroundCombobox_SelectionChanged">
                         <ComboBoxItem>SystemControlBackgroundChromeMediumLowBrush</ComboBoxItem>
@@ -100,15 +100,15 @@
                         <ComboBoxItem>Blue</ComboBoxItem>
                         <ComboBoxItem>Green</ComboBoxItem>
                     </ComboBox>
-                    
+
                     <Slider x:Name="openPaneLengthSlider" Header="OpenPaneLength" Value="256" Minimum="128" Maximum="500"
                         Width="196" SnapsTo="StepValues" StepFrequency="8" IsFocusEngagementEnabled="False" Margin="0,12,0,0" />
-                    
+
                     <Slider x:Name="compactPaneLengthSlider" Header="CompactPaneLength" Value="48" Minimum="24"
                         Maximum="128" Width="196" SnapsTo="StepValues" StepFrequency="8" IsFocusEngagementEnabled="False"/>
                 </StackPanel>
             </local:ControlExample.Options>
-            
+
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;SplitView x:Name="splitView" PaneBackground="<Run x:Name="PaneBackgroundRun" Text="{}{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" />"

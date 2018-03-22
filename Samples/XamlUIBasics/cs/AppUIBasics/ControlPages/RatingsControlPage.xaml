@@ -10,7 +10,7 @@
                 <RatingControl x:Name="RatingControl1"
                     IsClearEnabled="{x:Bind clearEnabledCheck.IsChecked.Value, Mode=OneWay}"
                     IsReadOnly="{x:Bind readOnlyCheck.IsChecked.Value, Mode=OneWay}" HorizontalAlignment="Left" />
-                
+
                 <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
                     <TextBlock Text="Your Rating:" />
                     <TextBlock Margin="5,0,0,0" FontWeight="Bold" Text="{x:Bind RatingControl1.Value, Mode=OneWay}" />
@@ -33,9 +33,9 @@
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
-        
+
         <local:ControlExample x:Name="Example2" HeaderText="PlaceholderValue of RatingControl">
-            
+
             <RatingControl x:Name="RatingControl2" HorizontalAlignment="Left" VerticalAlignment="Top"
                 PlaceholderValue="{x:Bind slider.Value, Mode=TwoWay}" />
 

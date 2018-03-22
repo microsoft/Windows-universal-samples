@@ -78,7 +78,7 @@
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
-    
+
     <StackPanel>
         <local:ControlExample x:Name="Example1" HeaderText="Content inside of a GridView.">
             <Grid>

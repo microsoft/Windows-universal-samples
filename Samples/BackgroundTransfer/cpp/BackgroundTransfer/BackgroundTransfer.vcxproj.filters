@@ -23,6 +23,7 @@
     <ClCompile Include="Scenario4_CompletionGroups.xaml.cpp" />
     <ClCompile Include="Scenario5_RandomAccess.xaml.cpp" />
     <ClCompile Include="Scenario6_RecoverableErrors.xaml.cpp" />
+    <ClCompile Include="Scenario7_DownloadReordering.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -35,6 +36,7 @@
     <ClInclude Include="Scenario4_CompletionGroups.xaml.h" />
     <ClInclude Include="Scenario5_RandomAccess.xaml.h" />
     <ClInclude Include="Scenario6_RecoverableErrors.xaml.h" />
+    <ClInclude Include="Scenario7_DownloadReordering.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -50,6 +52,7 @@
     <Page Include="..\..\shared\Scenario4_CompletionGroups.xaml" />
     <Page Include="..\..\shared\Scenario5_RandomAccess.xaml" />
     <Page Include="..\..\shared\Scenario6_RecoverableErrors.xaml" />
+    <Page Include="..\..\shared\Scenario7_DownloadReordering.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\SharedContent\media\microsoft-sdk.png">

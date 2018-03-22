@@ -28,6 +28,7 @@ namespace SDKTemplate
             new Scenario() { Title = "UTF-8 text messages", ClassType = typeof(Scenario1) },
             new Scenario() { Title = "Binary data stream", ClassType = typeof(Scenario2) },
             new Scenario() { Title = "Client authentication", ClassType = typeof(Scenario3) },
+            new Scenario() { Title = "Partial and Complete Messages", ClassType = typeof(Scenario4) },
         };
 
         public Uri TryGetUri(string uriString)

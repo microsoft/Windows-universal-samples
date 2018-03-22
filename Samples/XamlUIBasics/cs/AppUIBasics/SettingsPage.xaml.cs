@@ -10,6 +10,8 @@
 using System;
 using System.Linq;
 using Windows.System;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -49,13 +51,32 @@ namespace AppUIBasics
         private void OnThemeRadioButtonChecked(object sender, RoutedEventArgs e)
         {
             var selectedTheme = ((RadioButton)sender)?.Tag?.ToString();
+            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
 
             if (selectedTheme != null)
             {
                 App.RootTheme = App.GetEnum<ElementTheme>(selectedTheme);
+                if (selectedTheme == "Dark")
+                {
+                    titleBar.ButtonForegroundColor = Colors.White;
+                }
+                else if (selectedTheme == "Light")
+                {
+                    titleBar.ButtonForegroundColor = Colors.Black;
+                } else
+                {
+                    if (Application.Current.RequestedTheme == ApplicationTheme.Dark)
+                    {
+                        titleBar.ButtonForegroundColor = Colors.White;
+                    }
+                    else
+                    {
+                        titleBar.ButtonForegroundColor = Colors.Black;
+                    }
+                }
             }
         }
-        
+
         private void OnThemeRadioButtonKeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == VirtualKey.Up)

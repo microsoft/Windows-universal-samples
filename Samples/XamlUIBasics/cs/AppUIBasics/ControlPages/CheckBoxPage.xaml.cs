@@ -69,7 +69,7 @@ namespace AppUIBasics.ControlPages
 
         private void SelectAll_Indeterminate(object sender, RoutedEventArgs e)
         {
-            // If the SelectAll box is checked (all options are selected), 
+            // If the SelectAll box is checked (all options are selected),
             // clicking the box will change it to its indeterminate state.
             // Instead, we want to uncheck all the boxes,
             // so we do this programatically. The indeterminate state should
@@ -87,7 +87,7 @@ namespace AppUIBasics.ControlPages
 
         private void SetCheckedState()
         {
-            // Controls are null the first time this is called, so we just 
+            // Controls are null the first time this is called, so we just
             // need to perform a null check on any one of the controls.
             if (Option1CheckBox != null)
             {
@@ -119,7 +119,7 @@ namespace AppUIBasics.ControlPages
         private void Option_Unchecked(object sender, RoutedEventArgs e)
         {
             SetCheckedState();
-        } 
+        }
         #endregion
     }
 }

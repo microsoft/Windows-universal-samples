@@ -11,6 +11,7 @@
     <ClCompile Include="Scenario1_UTF8.xaml.cpp" />
     <ClCompile Include="Scenario2_Binary.xaml.cpp" />
     <ClCompile Include="Scenario3_ClientAuthentication.xaml.cpp" />
+    <ClCompile Include="Scenario4_PartialReadWrite.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -20,6 +21,7 @@
     <ClInclude Include="Scenario1_UTF8.xaml.h" />
     <ClInclude Include="Scenario2_Binary.xaml.h" />
     <ClInclude Include="Scenario3_ClientAuthentication.xaml.h" />
+    <ClInclude Include="Scenario4_PartialReadWrite.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
@@ -52,6 +54,7 @@
     <Page Include="..\shared\Scenario1_UTF8.xaml" />
     <Page Include="..\shared\Scenario2_Binary.xaml" />
     <Page Include="..\shared\Scenario3_ClientAuthentication.xaml" />
+    <Page Include="..\shared\Scenario4_PartialReadWrite.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>

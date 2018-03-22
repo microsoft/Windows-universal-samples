@@ -1,0 +1,49 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario2.css">
+    <script src="/js/scenario2.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div id="scenarioHeader">
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                Demonstrates use of Ink Presenter APIs.
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <div id="canvasGroup">
+                <canvas id="InkCanvas" class="surface"></canvas>
+            </div>
+
+            <!-- This toolbar is displayed across the bottom of the screen.
+                    The color buttons have IDs which are the names of colors; the ID of each one is fed directly into the strokeStyle of the corresponding canvas.-->
+
+            <div id="ToolBar" data-win-control="WinJS.UI.ToolBar">
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;Undo&apos;, label:&apos;Undo&apos;, icon:&apos;undo&apos;, onclick:Ink.undo, section:&apos;primary&apos;, tooltip:&apos;Undo&apos;, priority:2}" class="win-button"></button>
+                <hr data-win-control="WinJS.UI.Command" data-win-options="{type:&apos;separator&apos;}">
+
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;InkColors&apos;, label:&apos;Color&apos;, icon:&apos;fontcolor&apos;, section:&apos;primary&apos;, type:&apos;flyout&apos;,flyout:&apos;InkColorFlyout&apos;, tooltip:&apos;Choose ink color&apos;, priority:2}" class="win-button"></button>
+                <hr data-win-control="WinJS.UI.Command" data-win-options="{type:&apos;separator&apos;}">
+
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;ModeErase&apos;,   label:&apos;Erase&apos;,     icon:&apos;dockleft&apos;,  onclick:Ink.eraseMode,      section:&apos;primary&apos;, tooltip:&apos;Switch pen tip to eraser mode&apos;, priority:2}" class="win-button"></button>
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;Pencil&apos;,      label:&apos;Pencil&apos;,    icon:&apos;edit&apos;,      onclick:Ink.pencilMode,     section:&apos;primary&apos;, tooltip:&apos;Switch pen tip to pencil mode&apos;, priority:2}" class="win-button"></button>
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;Highlighter&apos;, label:&apos;Highlighter&apos;, icon:&apos;highlight&apos;, onclick:Ink.highlighterMode, section:&apos;primary&apos;, tooltip:&apos;Switch to highlighter mode&apos;,    priority:2}" class="win-button"></button>
+
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;Load&apos;,label:&apos;Load&apos;,onclick:Ink.load,section:&apos;secondary&apos;}" class="win-button"></button>
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;Save&apos;,label:&apos;Save&apos;,onclick:Ink.save,section:&apos;secondary&apos;}" class="win-button"></button>
+                <button data-win-control="WinJS.UI.Command" data-win-options="{id:&apos;Clear&apos;,label:&apos;Clear&apos;,onclick:Ink.clear,section:&apos;secondary&apos;}" class="win-button"></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

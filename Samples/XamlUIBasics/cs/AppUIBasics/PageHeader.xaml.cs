@@ -71,89 +71,20 @@ namespace AppUIBasics
             VisualStateManager.GoToState(this, isFilteredPage ? "FilteredPage" : "NonFilteredPage", false);
         }
 
-        private void OnControlsSearchBoxTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-        {
-            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
-            {
-                var suggestions = new List<ControlInfoDataItem>();
-
-                foreach (var group in ControlInfoDataSource.Instance.Groups)
-                {
-                    var matchingItems = group.Items.Where(
-                        item => item.Title.IndexOf(sender.Text, StringComparison.CurrentCultureIgnoreCase) >= 0);
-
-                    foreach (var item in matchingItems)
-                    {
-                        suggestions.Add(item);
-                    }
-                }
-                if (suggestions.Count > 0)
-                {
-                    controlsSearchBox.ItemsSource = suggestions.OrderByDescending(i => i.Title.StartsWith(sender.Text, StringComparison.CurrentCultureIgnoreCase)).ThenBy(i => i.Title);
-                }
-                else
-                {
-                    controlsSearchBox.ItemsSource = new string[] { "No results found" };
-                }
-            }
-        }
-
-        private void OnControlsSearchBoxQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
-        {
-            if (args.ChosenSuggestion != null && args.ChosenSuggestion is ControlInfoDataItem)
-            {
-                var itemId = (args.ChosenSuggestion as ControlInfoDataItem).UniqueId;
-                NavigationRootPage.RootFrame.Navigate(typeof(ItemPage), itemId);
-            }
-            else if (!string.IsNullOrEmpty(args.QueryText))
-            {
-                NavigationRootPage.RootFrame.Navigate(typeof(SearchResultsPage), args.QueryText);
-            }
-        }
-
-        private void OnSearchButtonClick(object sender, RoutedEventArgs e)
-        {
-            controlsSearchBox.Visibility = Visibility.Visible;
-            bool isFocused = controlsSearchBox.Focus(FocusState.Programmatic);
-            if (!isFocused)
-            {
-                controlsSearchBox.UpdateLayout();
-                controlsSearchBox.Focus(FocusState.Programmatic);
-            }
-            searchButton.Visibility = Visibility.Collapsed;
-            commandBarBorder.Visibility = Visibility.Collapsed;
-        }
-
-        private void OnControlsSearchBoxLostFocus(object sender, RoutedEventArgs e)
-        {
-            if (Window.Current.Bounds.Width <= 640)
-            {
-                controlsSearchBox.Visibility = Visibility.Collapsed;
-                commandBarBorder.Visibility = Visibility.Visible;
-                searchButton.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void OnThemeButtonKeyDown(object sender, KeyRoutedEventArgs e)
-        {
-            if (e.Key == VirtualKey.Right)
-            {
-                var nextElement = FocusManager.FindNextElement(FocusNavigationDirection.Right);
-                if (nextElement == null)
-                {
-                    controlsSearchBox.Focus(FocusState.Programmatic);
-                }
-            }
-        }
-
         private void OnThemeButtonClick(object sender, RoutedEventArgs e)
         {
             ToggleThemeAction?.Invoke();
         }
 
-        private void KeyboardAccelerator_Invoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+        private void Layout_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            controlsSearchBox.Focus(FocusState.Keyboard);
+            if (e.NewSize.Width < 593)
+            {
+                headerRoot.VerticalAlignment = VerticalAlignment.Center;
+            } else
+            {
+                headerRoot.VerticalAlignment = VerticalAlignment.Bottom;
+            }
         }
     }
 }

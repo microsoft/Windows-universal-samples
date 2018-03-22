@@ -40,7 +40,7 @@ namespace AppUIBasics
             get { return _item; }
             set { _item = value; }
         }
-        
+
         public ItemPage()
         {
             this.InitializeComponent();
@@ -48,7 +48,7 @@ namespace AppUIBasics
             LayoutVisualStates.CurrentStateChanged += (s, e) => UpdateSeeAlsoPanelVerticalTranslationAnimation();
             Loaded += (s,e) => SetInitialVisuals();
         }
-        
+
         public void SetInitialVisuals()
         {
             NavigationRootPage.Current.PageHeader.TopCommandBar.Visibility = Visibility.Visible;
@@ -69,7 +69,7 @@ namespace AppUIBasics
             var isEnabled = LayoutVisualStates.CurrentState == LargeLayout;
 
             ElementCompositionPreview.SetIsTranslationEnabled(seeAlsoPanel, true);
-            
+
             var targetPanelVisual = ElementCompositionPreview.GetElementVisual(seeAlsoPanel);
             targetPanelVisual.Properties.InsertVector3("Translation", Vector3.Zero);
 
@@ -131,7 +131,7 @@ namespace AppUIBasics
             if (NavigationRootPage.Current.PageHeader != null)
             {
                 var connectedAnimation = ConnectedAnimationService.GetForCurrentView().GetAnimation("controlAnimation");
-                                
+
                 if (connectedAnimation != null)
                 {
                     var target = NavigationRootPage.Current.PageHeader.TitlePanel;
@@ -196,7 +196,7 @@ namespace AppUIBasics
 
             base.OnNavigatedFrom(e);
         }
-                
+
         private void OnSvPanelLoaded(object sender, RoutedEventArgs e)
         {
             svPanel.XYFocusDown = contentFrame.GetDescendantsOfType<Control>().FirstOrDefault(c => c.IsTabStop) ?? svPanel.GetDescendantsOfType<Control>().FirstOrDefault(c => c.IsTabStop);

@@ -65,7 +65,7 @@
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;StackPanel&gt;</Paragraph>
-                    <Paragraph TextIndent="12">&lt;CheckBox x:Name="OptionsAllCheckBox" Content="Select all" IsThreeState="True" 
+                    <Paragraph TextIndent="12">&lt;CheckBox x:Name="OptionsAllCheckBox" Content="Select all" IsThreeState="True"
                               Checked="SelectAll_Checked" Unchecked="SelectAll_Unchecked" Indeterminate="SelectAll_Indeterminate" /&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;CheckBox x:Name="Option1CheckBox" Content="Option 1" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" /&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;CheckBox x:Name="Option2CheckBox" Content="Option 2" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" IsChecked="True" /&gt;</Paragraph>
