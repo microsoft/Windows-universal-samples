@@ -28,7 +28,7 @@
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
-                    <Paragraph>&lt;TextBlock Height="60"
+                    <Paragraph>&lt;TextBox Height="60"
                         <Bold>Header="Enter your name:" PlaceholderText="Name"</Bold> /&gt;
                     </Paragraph>
                 </RichTextBlock>
