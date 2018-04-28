@@ -68,6 +68,11 @@ void Scenario1_Basic::SetMinimumSize_Click(Platform::Object^ sender, RoutedEvent
     }
 }
 
+void SDKTemplate::Scenario1_Basic::UseMinimalOverlaysCheckBox_Click(Platform::Object ^ sender, Windows::UI::Xaml::RoutedEventArgs ^ e)
+{
+	throw ref new Platform::NotImplementedException();
+}
+
 void Scenario1_Basic::OnWindowSizeChanged(Platform::Object^ sender, Windows::UI::Core::WindowSizeChangedEventArgs^ e)
 {
     UpdateContent();
