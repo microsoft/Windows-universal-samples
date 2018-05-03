@@ -25,7 +25,8 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "DataReceived Event", "SDKTemplate.Scenario1_BasicFunctionality" },
     { "Release/Retain Functionality", "SDKTemplate.Scenario2_MultipleScanners" },
     { "Active Symbologies", "SDKTemplate.Scenario3_ActiveSymbologies" },
-    { "Symbology Attributes", "SDKTemplate.Scenario4_SymbologyAttributes" }
+    { "Symbology Attributes", "SDKTemplate.Scenario4_SymbologyAttributes" },
+    { "Displaying a Barcode Preview", "SDKTemplate.Scenario5_DisplayingBarcodePreview" }
 };
 
 task<BarcodeScanner^> DeviceHelpers::GetFirstBarcodeScannerAsync(PosConnectionTypes connectionTypes)

@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" StartPage="default.html">
-      <uap:VisualElements DisplayName="Jump List JS Sample" Description="Jump List JS Sample" BackgroundColor="#00b2f0" Square150x150Logo="images\storelogo-sdk.png" Square44x44Logo="images\smalltile-sdk.png">
+      <uap:VisualElements DisplayName="Jump List JS Sample" Description="Jump List JS Sample" BackgroundColor="#00b2f0" Square150x150Logo="images\squaretile-sdk.png" Square44x44Logo="images\smalltile-sdk.png">
         <uap:SplashScreen Image="images\splash-sdk.png" />
         <uap:DefaultTile>
           <uap:ShowNameOnTiles>

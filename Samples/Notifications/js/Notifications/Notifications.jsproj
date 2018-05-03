@@ -131,6 +131,9 @@
     <Content Include="..\..\..\..\SharedContent\media\smalltile-sdk.png">
       <Link>images\Square44x44Logo.png</Link>
     </Content>
+    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>images\squaretile-sdk.png</Link>
+    </Content>
     <Content Include="..\..\..\..\SharedContent\media\tile-sdk.png">
       <Link>images\Wide310x150Logo.png</Link>
     </Content>

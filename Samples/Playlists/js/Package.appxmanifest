@@ -35,7 +35,7 @@
         DisplayName="Playlists JS Sample"
         Description="Playlists JS Sample"
         BackgroundColor="#00b2f0"
-        Square150x150Logo="images\smallTile-sdk.png"
+        Square150x150Logo="images\squaretile-sdk.png"
         Square44x44Logo="images\smallTile-sdk.png">
 
         <uap:SplashScreen Image="images\splash-sdk.png" />

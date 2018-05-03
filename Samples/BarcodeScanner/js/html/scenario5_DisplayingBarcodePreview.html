@@ -1,0 +1,70 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario5_DisplayingBarcodePreview.css">
+    <script src="/js/scenario5_DisplayingBarcodePreview.js"></script>
+    <script src="/js/util.js"></script>
+</head>
+
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">
+        <p>Demonstrates how to interact with barcode scanners that support video previewing</p>
+    </div>
+    <p>Select a Scanner</p>
+    <div id="scannerTemplate" data-win-control="WinJS.Binding.Template">
+        <span data-win-bind="textContent: name"></span>
+    </div>
+    <div id="scannerListView" class="listViewContainer" style="width: 100%"
+         data-win-control="WinJS.UI.ListView" data-win-options="{
+                 itemTemplate: select('#scannerTemplate'),
+                 selectionMode: 'single',
+                 tapBehavior: 'directSelect',
+                 layout: {type: WinJS.UI.ListLayout}}">
+    </div>
+    <div id="scannerResultsBlock">
+        <p id="previewNotSupportedNotice">*The selected barcode scanner does not have a camera, so a preview cannot be displayed.</p>
+        <div id="previewSupportedButtons" class="buttonRow ifScannerSupportsPreview">
+            <button id="showPreviewButton" class="win-button">Show Preview</button>
+            <button id="hidePreviewButton" class="win-button">Hide Preview</button>
+        </div>
+        <div class="buttonRow">
+            <button id="startSoftwareTriggerButton" class="win-button">Start Software Trigger</button>
+            <button id="stopSoftwareTriggerButton" class="win-button" disabled="disabled">Stop Software Trigger</button>
+        </div>
+        <div class="ifScannerSupportsPreview" style="float: left">
+            <video id="cameraPreview" class="cameraPreview"></video>
+        </div>
+        <table>
+            <tr>
+                <td>Scan Data Type (Symbology):</td>
+                <td id="scenarioOutputScanDataType">No Data</td>
+            </tr>
+            <tr>
+                <td>Scan Data (Unformatted data):</td>
+                <td id="scenarioOutputScanData">No Data</td>
+            </tr>
+            <tr>
+                <td>Scan Data Label (Formatted data):</td>
+                <td id="scenarioOutputScanDataFormatted">No Data</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

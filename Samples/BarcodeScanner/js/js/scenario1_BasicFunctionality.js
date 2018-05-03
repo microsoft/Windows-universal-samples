@@ -71,22 +71,22 @@
                     if (claimedScanner) {
                         _claimedScanner = claimedScanner;
 
-                        // Ask the API to decode the data by default. By setting this, API will decode the raw data from the barcode scanner and 
+                        // Ask the API to decode the data by default. By setting this, API will decode the raw data from the barcode scanner and
                         // send the ScanDataLabel and ScanDataType in the DataReceived event
                         claimedScanner.isDecodeDataEnabled = true;
 
                         // After successfully claiming, attach the datareceived event handler.
                         claimedScanner.addEventListener("datareceived", onDataReceived);
 
-                        // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can 
+                        // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can
                         // claim ownsership of the barcode scanner.
                         claimedScanner.addEventListener("releasedevicerequested", onReleasedeviceRequested);
 
                         // Enable the scanner.
-                        // Note: If the scanner is not enabled (i.e. enableAsync not called), attaching the event handler will not be any useful because the API will not fire the event 
+                        // Note: If the scanner is not enabled (i.e. enableAsync not called), attaching the event handler will not be any useful because the API will not fire the event
                         // if the claimedScanner has not beed Enabled
                         claimedScanner.enableAsync().done(function () {
-                            WinJS.log("Ready to scan. Device ID: " + _claimedScanner.deviceId, "sample", "status");
+                            WinJS.log("Ready to scan. Device ID: " + claimedScanner.deviceId, "sample", "status");
                             scenarioEndScanButton.disabled = false;
                         });
                     } else {
@@ -107,7 +107,7 @@
         WinJS.log("Event ReleaseDeviceRequested received. Retaining the barcode scanner.", "sample", "status");
     }
 
-    // Event handler for the DataReceived event fired when a barcode is scanned by the barcode scanner 
+    // Event handler for the DataReceived event fired when a barcode is scanned by the barcode scanner
     function onDataReceived(args) {
         var tempScanType = Windows.Devices.PointOfService.BarcodeSymbologies.getName(args.report.scanDataType);
 

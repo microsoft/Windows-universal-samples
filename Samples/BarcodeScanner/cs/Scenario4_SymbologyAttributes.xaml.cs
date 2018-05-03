@@ -60,37 +60,37 @@ namespace SDKTemplate
 
             rootPage.NotifyUser("Acquiring barcode scanner object.", NotifyType.StatusMessage);
 
-            // create the barcode scanner. 
+            // create the barcode scanner.
             scanner = await DeviceHelpers.GetFirstBarcodeScannerAsync();
 
             if (scanner != null)
             {
-                // after successful creation, list supported symbologies
-                IReadOnlyList<uint> supportedSymbologies = await scanner.GetSupportedSymbologiesAsync();
-                foreach (uint symbology in supportedSymbologies)
-                {
-                    listOfSymbologies.Add(new SymbologyListEntry(symbology));
-                }
-
                 // claim the scanner for exclusive use and enable it so that data received events are received.
                 claimedScanner = await scanner.ClaimScannerAsync();
                 if (claimedScanner != null)
                 {
-                    // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can 
+                    // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can
                     // claim ownership of the barcode scanner.
                     claimedScanner.ReleaseDeviceRequested += claimedScanner_ReleaseDeviceRequested;
 
                     // after successfully claiming, attach the datareceived event handler.
                     claimedScanner.DataReceived += claimedScanner_DataReceived;
 
-                    // Ask the API to decode the data by default. By setting this, API will decode the raw data from the barcode scanner and 
+                    // Ask the API to decode the data by default. By setting this, API will decode the raw data from the barcode scanner and
                     // send the ScanDataLabel and ScanDataType in the DataReceived event
                     claimedScanner.IsDecodeDataEnabled = true;
 
                     // enable the scanner.
-                    // Note: If the scanner is not enabled (i.e. EnableAsync not called), attaching the event handler will not be any useful because the API will not fire the event 
+                    // Note: If the scanner is not enabled (i.e. EnableAsync not called), attaching the event handler will not be any useful because the API will not fire the event
                     // if the claimedScanner has not been Enabled
                     await claimedScanner.EnableAsync();
+
+                    // after successful claim, list supported symbologies
+                    IReadOnlyList<uint> supportedSymbologies = await scanner.GetSupportedSymbologiesAsync();
+                    foreach (uint symbology in supportedSymbologies)
+                    {
+                        listOfSymbologies.Add(new SymbologyListEntry(symbology));
+                    }
 
                     // reset the button state
                     ScenarioEndScanButton.IsEnabled = true;
@@ -125,7 +125,7 @@ namespace SDKTemplate
         }
 
         /// <summary>
-        /// Event handler for the DataReceived event fired when a barcode is scanned by the barcode scanner 
+        /// Event handler for the DataReceived event fired when a barcode is scanned by the barcode scanner
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"> Contains the BarcodeScannerReport which contains the data obtained in the scan</param>
@@ -165,26 +165,29 @@ namespace SDKTemplate
 
             symbologyAttributes = null;
 
-            // Reset the strings in the UI
-            rootPage.NotifyUser("Click the start scanning button to begin.", NotifyType.StatusMessage);
-            this.ScenarioOutputScanData.Text = "No data";
-            this.ScenarioOutputScanDataLabel.Text = "No data";
-            this.ScenarioOutputScanDataType.Text = "No data";
+            // Reset the UI if we are still the current page.
+            if (Frame.Content == this)
+            {
+                rootPage.NotifyUser("Click the start scanning button to begin.", NotifyType.StatusMessage);
+                this.ScenarioOutputScanData.Text = "No data";
+                this.ScenarioOutputScanDataLabel.Text = "No data";
+                this.ScenarioOutputScanDataType.Text = "No data";
 
-            // reset the button state
-            ScenarioEndScanButton.IsEnabled = false;
-            ScenarioStartScanButton.IsEnabled = true;
-            SetSymbologyAttributesButton.IsEnabled = false;
-            EnableCheckDigit.IsEnabled = false;
-            TransmitCheckDigit.IsEnabled = false;
-            SetDecodeRangeLimits.IsEnabled = false;
+                // reset the button state
+                ScenarioEndScanButton.IsEnabled = false;
+                ScenarioStartScanButton.IsEnabled = true;
+                SetSymbologyAttributesButton.IsEnabled = false;
+                EnableCheckDigit.IsEnabled = false;
+                TransmitCheckDigit.IsEnabled = false;
+                SetDecodeRangeLimits.IsEnabled = false;
 
-            // reset symbology list
-            listOfSymbologies.Clear();
+                // reset symbology list
+                listOfSymbologies.Clear();
+            }
         }
 
         /// <summary>
-        /// Event handler for End Scan Button Click. 
+        /// Event handler for End Scan Button Click.
         /// Releases the Barcode Scanner and resets the text in the UI
         /// </summary>
         /// <param name="sender"></param>
@@ -196,7 +199,7 @@ namespace SDKTemplate
         }
 
         /// <summary>
-        /// Event handler for Symbology listbox selection changed. 
+        /// Event handler for Symbology listbox selection changed.
         /// Get symbology attributes and populate attribute UI components
         /// </summary>
         /// <param name="sender"></param>

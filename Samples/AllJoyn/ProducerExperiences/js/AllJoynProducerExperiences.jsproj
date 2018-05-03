@@ -69,6 +69,9 @@
     <Content Include="..\..\..\..\SharedContent\media\storelogo-sdk.png">
       <Link>images\storeLogo-sdk.png</Link>
     </Content>
+    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>images\squaretile-sdk.png</Link>
+    </Content>
     <Content Include="..\..\..\..\SharedContent\media\tile-sdk.png">
       <Link>images\tile-sdk.png</Link>
     </Content>

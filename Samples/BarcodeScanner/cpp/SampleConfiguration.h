@@ -53,6 +53,59 @@ namespace SDKTemplate
             Windows::Devices::PointOfService::PosConnectionTypes connectionTypes = Windows::Devices::PointOfService::PosConnectionTypes::All);
     }
 
+    [Windows::UI::Xaml::Data::Bindable]
+    public ref class BindingHelpers sealed
+    {
+    public:
+        // Inverters for binding.
+        static bool Not(bool value)
+        {
+            return !value;
+        }
+
+        static Windows::UI::Xaml::Visibility CollapsedIf(bool value)
+        {
+            return value ? Windows::UI::Xaml::Visibility::Collapsed : Windows::UI::Xaml::Visibility::Visible;
+        }
+    };
+
+    // Creates a completed Concurrency::task<void> that is based on an IAsyncAction,
+    // so that it can be used easily from UI threads.
+    inline Concurrency::task<void> completed_ui_task()
+    {
+        return Concurrency::create_task(concurrency::create_async([] {}));
+    }
+
+    [Windows::UI::Xaml::Data::Bindable]
+    public ref class BarcodeScannerInfo sealed
+    {
+    public:
+        property Platform::String^ Name
+        {
+            Platform::String^ get()
+            {
+                return deviceName + L" (" + deviceId + L")";
+            }
+        }
+
+        property Platform::String^ DeviceId
+        {
+            Platform::String^ get()
+            {
+                return deviceId;
+            }
+        }
+
+        BarcodeScannerInfo(Platform::String^ deviceName, Platform::String^ deviceId)
+        {
+            this->deviceName = deviceName;
+            this->deviceId = deviceId;
+        }
+    private:
+        Platform::String^ deviceName;
+        Platform::String^ deviceId;
+    };
+
     /// <summary>
     /// The class is used for data-binding.
     /// </summary>
@@ -100,4 +153,5 @@ namespace SDKTemplate
         uint32_t id;
         bool enabled;
     };
+
 }

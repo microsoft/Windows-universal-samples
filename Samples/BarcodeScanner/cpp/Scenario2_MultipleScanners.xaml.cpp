@@ -134,7 +134,7 @@ task<void> Scenario2_MultipleScanners::EnableScanner(BarcodeScannerInstance inst
         break;
     }
     // enable the barcode scanner
-    return create_task(claimedBarcodeScanner->EnableAsync()).then([this, strInstance, claimedBarcodeScanner](void)
+    return create_task(claimedBarcodeScanner->EnableAsync()).then([this, strInstance, claimedBarcodeScanner]()
     {
         rootPage->NotifyUser(strInstance + " ready to scan. Device ID: " + claimedBarcodeScanner->DeviceId, NotifyType::StatusMessage);
     });
@@ -206,7 +206,7 @@ void Scenario2_MultipleScanners::OnDataReceivedInstance1(Windows::Devices::Point
         ScanData1->Text = GetDataString(args->Report->ScanData);
 
         ScanDataType1->Text = BarcodeSymbologies::GetName(args->Report->ScanDataType);
-        
+
         rootPage->NotifyUser("Instance 1 received data from the barcode scanner.", NotifyType::StatusMessage);
     }));
 }
@@ -293,24 +293,24 @@ void Scenario2_MultipleScanners::OnReleaseDeviceRequestedInstance2(Platform::Obj
 /// <param name="e"></param>
 void Scenario2_MultipleScanners::ButtonStartScanningInstance1_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-    create_task(CreateDefaultScannerObject(BarcodeScannerInstance::Instance1)).then([this](void)
+    CreateDefaultScannerObject(BarcodeScannerInstance::Instance1).then([this]()
     {
         if (scannerInstance1 != nullptr)
         {
             //after successful creation, claim the scanner for exclusive use and enable it so that data received events are received.
-            create_task(ClaimScanner(BarcodeScannerInstance::Instance1)).then([this](void)
+            create_task(ClaimScanner(BarcodeScannerInstance::Instance1)).then([this]()
             {
                 if (claimedBarcodeScannerInstance1 != nullptr)
                 {
-                    // Ask the API to decode the data by default. By setting this, API will decode the raw data from the barcode scanner and 
+                    // Ask the API to decode the data by default. By setting this, API will decode the raw data from the barcode scanner and
                     // send the ScanDataLabel and ScanDataType in the DataReceived event
                     claimedBarcodeScannerInstance1->IsDecodeDataEnabled = true;
 
-                    create_task(EnableScanner(BarcodeScannerInstance::Instance1)).then([this](void)
+                    create_task(EnableScanner(BarcodeScannerInstance::Instance1)).then([this]()
                     {
 
                         // after successfully claiming and enabling, attach the datareceived event handler.
-                        // Note: If the scanner is not enabled (i.e. EnableAsync not called), attaching the event handler will not be any useful because the API will not fire the event 
+                        // Note: If the scanner is not enabled (i.e. EnableAsync not called), attaching the event handler will not be any useful because the API will not fire the event
                         // if the activeClaimedBarcodeScanner has not been Enabled
 
                         dataReceivedTokenInstance1 = claimedBarcodeScannerInstance1->DataReceived += ref new TypedEventHandler<ClaimedBarcodeScanner^, BarcodeScannerDataReceivedEventArgs^>(this, &Scenario2_MultipleScanners::OnDataReceivedInstance1);
@@ -341,24 +341,24 @@ void Scenario2_MultipleScanners::ButtonStartScanningInstance1_Click(Platform::Ob
 /// <param name="e"></param>
 void Scenario2_MultipleScanners::ButtonStartScanningInstance2_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-    create_task(CreateDefaultScannerObject(BarcodeScannerInstance::Instance2)).then([this](void)
+    CreateDefaultScannerObject(BarcodeScannerInstance::Instance2).then([this]()
     {
         if (scannerInstance2 != nullptr)
         {
             //after successful creation, claim the scanner for exclusive use and enable it so that data received events are received.
-            create_task(ClaimScanner(BarcodeScannerInstance::Instance2)).then([this](void)
+            create_task(ClaimScanner(BarcodeScannerInstance::Instance2)).then([this]()
             {
                 if (claimedBarcodeScannerInstance2 != nullptr)
                 {
-                    // Ask the API to decode the data by default. By setting this, API will decode the raw data from the barcode scanner and 
+                    // Ask the API to decode the data by default. By setting this, API will decode the raw data from the barcode scanner and
                     // send the ScanDataLabel and ScanDataType in the DataReceived event
                     claimedBarcodeScannerInstance2->IsDecodeDataEnabled = true;
 
-                    create_task(EnableScanner(BarcodeScannerInstance::Instance2)).then([this](void)
+                    create_task(EnableScanner(BarcodeScannerInstance::Instance2)).then([this]()
                     {
 
                         // after successfully claiming and enabling, attach the datareceived event handler.
-                        // Note: If the scanner is not enabled (i.e. EnableAsync not called), attaching the event handler will not be any useful because the API will not fire the event 
+                        // Note: If the scanner is not enabled (i.e. EnableAsync not called), attaching the event handler will not be any useful because the API will not fire the event
                         // if the activeClaimedBarcodeScanner has not been Enabled
 
                         dataReceivedTokenInstance2 = claimedBarcodeScannerInstance2->DataReceived::add(ref new TypedEventHandler<ClaimedBarcodeScanner^, BarcodeScannerDataReceivedEventArgs^>(this, &Scenario2_MultipleScanners::OnDataReceivedInstance2));
@@ -463,9 +463,13 @@ void Scenario2_MultipleScanners::ResetTheScenarioState()
         scannerInstance2 = nullptr;
     }
 
-    rootPage->NotifyUser("Click the start scanning button to begin.", NotifyType::StatusMessage);
+    // Reset the UI if we are still the current page.
+    if (Frame->Content == this)
+    {
+        rootPage->NotifyUser("Click the start scanning button to begin.", NotifyType::StatusMessage);
 
-    ResetUI();
+        ResetUI();
+    }
 }
 
 /// <summary>

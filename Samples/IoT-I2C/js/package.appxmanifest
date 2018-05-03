@@ -34,7 +34,7 @@
         DisplayName="I2C JS Sample"
         Description="I2C JS Sample"
         BackgroundColor="#00b2f0"
-        Square150x150Logo="images\storelogo-sdk.png"
+        Square150x150Logo="images\squaretile-sdk.png"
         Square44x44Logo="images\smalltile-sdk.png">
         <uap:SplashScreen Image="images\splash-sdk.png" />
         <uap:DefaultTile>

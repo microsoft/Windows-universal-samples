@@ -45,6 +45,15 @@ This sample shows how to:
     and the [SetSymbologyAttributesAsync](https://msdn.microsoft.com/library/windows/apps/windows.devices.pointofservice.claimedbarcodescanner.setsymbologyattributesasync) method
     to enable or disable them.
 
+6. **Control camera-based barcode scanners**
+
+   Detects camera-based barcode scanners by checking the [VideoDeviceId](https://docs.microsoft.com/en-us/uwp/api/windows.devices.pointofservice.barcodescanner.videodeviceid) property
+   and shows an in-app preview of the barcode camera.
+   Shows and hides the video preview window with the [ShowVideoPreviewAsync](https://docs.microsoft.com/en-us/uwp/api/windows.devices.pointofservice.claimedbarcodescanner.showvideopreviewasync)
+   and [HideVideoPreview](https://docs.microsoft.com/en-us/uwp/api/windows.devices.pointofservice.claimedbarcodescanner.hidevideopreview) methods.
+   Controls the software trigger with the [StartSoftwareTriggerAsync](https://docs.microsoft.com/en-us/uwp/api/windows.devices.pointofservice.claimedbarcodescanner.startsoftwaretriggerasync)
+   and [StopSoftwareTrigger](https://docs.microsoft.com/en-us/uwp/api/windows.devices.pointofservice.claimedbarcodescanner.stopsoftwaretriggerasync) methods.
+
 The app package manifest shows how to specify the device capability name for the Point of Service (POS) devices. All POS apps are required declare [DeviceCapability](http://msdn.microsoft.com/library/windows/apps/br211430) in the app package manifest, either by using "PointofService" as shown in this sample or by using a device specific GUID, such as "C243FFBD-3AFC-45E9-B3D3-2BA18BC7EBC5" for a barcode scanner.
 
 **Note** The Universal Windows app samples require Visual Studio 2017 to build and Windows 10 to execute.

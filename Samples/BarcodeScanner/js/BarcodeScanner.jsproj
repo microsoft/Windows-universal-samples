@@ -61,6 +61,7 @@
     <Content Include="..\..\..\SharedContent\js\default.html">
       <Link>default.html</Link>
     </Content>
+    <Content Include="css\scenario5_DisplayingBarcodePreview.css" />
     <Content Include="html\scenario1_BasicFunctionality.html" />
     <Content Include="html\scenario2_MultipleScanners.html" />
     <Content Include="html\scenario3_ActiveSymbologies.html" />
@@ -77,6 +78,9 @@
     <Content Include="..\..\..\SharedContent\media\storelogo-sdk.png">
       <Link>images\storeLogo-sdk.png</Link>
     </Content>
+    <Content Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>images\squaretile-sdk.png</Link>
+    </Content>
     <Content Include="..\..\..\SharedContent\media\tile-sdk.png">
       <Link>images\tile-sdk.png</Link>
     </Content>
@@ -92,11 +96,13 @@
     <Content Include="..\..\..\SharedContent\js\css\default.css">
       <Link>css\default.css</Link>
     </Content>
+    <Content Include="html\scenario5_DisplayingBarcodePreview.html" />
     <Content Include="js\sample-configuration.js" />
     <Content Include="js\scenario1_BasicFunctionality.js" />
     <Content Include="js\scenario2_MultipleScanners.js" />
     <Content Include="js\scenario3_ActiveSymbologies.js" />
     <Content Include="js\scenario4_SymbologyAttributes.js" />
+    <Content Include="js\scenario5_DisplayingBarcodePreview.js" />
     <Content Include="js\util.js" />
     <Content Include="..\..\..\SharedContent\js\Microsoft.WinJS\css\ui-dark.css">
       <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>

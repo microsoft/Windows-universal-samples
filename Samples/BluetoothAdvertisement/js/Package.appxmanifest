@@ -16,7 +16,7 @@
   <Properties>
     <DisplayName>Bluetooth Advertisement JS Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
-    <Logo>Assets\StoreLogo-sdk.png</Logo>
+    <Logo>images\StoreLogo-sdk.png</Logo>
   </Properties>
 
   <Dependencies>
@@ -45,7 +45,7 @@
       </Extensions>
       <uap:VisualElements
         DisplayName="Bluetooth Advertisement JS Sample"
-        Square150x150Logo="images\storelogo-sdk.png"
+        Square150x150Logo="images\squaretile-sdk.png"
         Square44x44Logo="images\smalltile-sdk.png"
         Description="Bluetooth Advertisement JS Sample"
         BackgroundColor="#00b2f0">

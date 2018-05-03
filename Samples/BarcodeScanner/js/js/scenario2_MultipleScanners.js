@@ -17,9 +17,9 @@
 
     // Page elements
     var scenarioStartScanningInstance1;
-    var scenaioEndScanningInstance1;
+    var scenarioEndScanningInstance1;
     var scenarioStartScanningInstance2;
-    var scenaioEndScanningInstance2;
+    var scenarioEndScanningInstance2;
 
     var retain1;
     var scanDataType1;
@@ -80,7 +80,7 @@
     // Create scanner instance 1 and claim and enable it.
     function buttonStartScanningInstance1() {
 
-        // Create the barcode scanner. 
+        // Create the barcode scanner.
         createScanner(_activeBarcodeScannerInstance.instance1).then(function(success) {
             if (success) {
                 // Claim the scanner and enable
@@ -101,7 +101,7 @@
     // Create scanner instance 2 and claim and enable it.
     function buttonStartScanningInstance2() {
 
-        // Create the barcode scanner. 
+        // Create the barcode scanner.
         createScanner(_activeBarcodeScannerInstance.instance2).then(function(success) {
             if (success) {
                 // Claim the scanner and enable
@@ -227,7 +227,7 @@
     }
 
     function createScanner(instance) {
-        return SdkSample.getFirstBarcodeScannerAsync().done(function (scanner) {
+        return SdkSample.getFirstBarcodeScannerAsync().then(function (scanner) {
             if (scanner) {
                 switch (instance) {
                     case _activeBarcodeScannerInstance.instance1:

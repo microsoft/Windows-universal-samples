@@ -1,0 +1,92 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario5_DisplayingBarcodePreview"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="ScannerListSource"/>
+    </Page.Resources>
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,20,12,12"
+                  VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Demonstrates how to interact with barcode scanners that support video previewing.
+            </TextBlock>
+
+            <TextBlock Text="Select a scanner" Margin="5,25,5,5" TextAlignment="Left" Style="{StaticResource BasicTextStyle}"/>
+
+            <ListBox Name="ScannerListBox" ItemsSource="{Binding Source={StaticResource ScannerListSource}}" Margin="5,0,10,0"
+                     BorderThickness="1" SelectionChanged="ScannerSelection_Changed" Height="200">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="local:BarcodeScannerInfo">
+                        <TextBlock Text="{x:Bind Name}" VerticalAlignment="Center"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel Visibility="{x:Bind IsScannerClaimed, Mode=OneWay}">
+                <TextBlock x:Name="PreviewNotSupportedMessage" Margin="0,10,0,0"
+                       Style="{StaticResource BasicTextStyle}"
+                       Foreground="Red"
+                       Text="*The selected barcode scanner does not have a camera, so a preview cannot be displayed."
+                       Visibility="{x:Bind local:BindingHelpers.CollapsedIf(ScannerSupportsPreview), Mode=OneWay}"/>
+
+                <StackPanel Orientation="Horizontal" Visibility="{x:Bind ScannerSupportsPreview, Mode=OneWay}" Margin="0,10,0,0">
+                    <Button Content="Show Preview" Click="ShowPreviewButton_Click" Margin="0,0,5,0"/>
+                    <Button Content="Hide Preview" Click="HidePreviewButton_Click"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Button Content="Start Software Trigger" Click="StartSoftwareTriggerButton_Click" Margin="0,0,5,0"
+                        IsEnabled="{x:Bind local:BindingHelpers.Not(SoftwareTriggerStarted), Mode=OneWay}" />
+                    <Button Content="Stop Software Trigger" Click="StopSoftwareTriggerButton_Click"
+                        IsEnabled="{x:Bind SoftwareTriggerStarted, Mode=OneWay}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <StackPanel Visibility="{x:Bind IsPreviewing, Mode=OneWay}" Margin="0,0,20,0">
+                        <Border BorderThickness="1" BorderBrush="White" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <CaptureElement x:Name="PreviewControl" Stretch="Uniform" ManipulationMode="Scale" Width="265" Height="200"/>
+                        </Border>
+                        <Button Content="Flip Preview" Click="FlipPreview_Click" Margin="0,10,0,0"/>
+                    </StackPanel>
+                    <Grid VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Scan Data Type (Symbology):" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                        <TextBlock x:Name="ScenarioOutputScanDataType" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
+                        <TextBlock Text="Scan Data (Unformatted data):" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                        <TextBlock x:Name="ScenarioOutputScanDataLabel" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
+                        <TextBlock Text="Scan Data Label (Formatted data):" TextWrapping="Wrap" Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                        <TextBlock x:Name="ScenarioOutputScanData" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

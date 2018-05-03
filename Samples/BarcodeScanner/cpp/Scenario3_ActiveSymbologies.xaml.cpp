@@ -43,29 +43,20 @@ void Scenario3_ActiveSymbologies::ScenarioStartScanButton_Click(Object^ sender, 
 
     rootPage->NotifyUser("Acquiring barcode scanner object...", NotifyType::StatusMessage);
 
-    // create the barcode scanner. 
+    // create the barcode scanner.
     create_task(DeviceHelpers::GetFirstBarcodeScannerAsync()).then([this](BarcodeScanner^ newScanner)
     {
         scanner = newScanner;
 
         if (scanner != nullptr)
         {
-            // after successful creation, list supported symbologies
-            create_task(scanner->GetSupportedSymbologiesAsync()).then([this](IVectorView<uint32_t>^ supportedSymbologies)
-            {
-                for (uint32_t symbology : supportedSymbologies)
-                {
-                    this->listOfSymbologies->Append(ref new SymbologyListEntry(symbology));
-                }
-
-                // claim the scanner for exclusive use.
-                return create_task(scanner->ClaimScannerAsync());
-            }).then([this](ClaimedBarcodeScanner^ _claimedScanner)
+            // claim the scanner for exclusive use.
+            create_task(scanner->ClaimScannerAsync()).then([this](ClaimedBarcodeScanner^ _claimedScanner)
             {
                 claimedScanner = _claimedScanner;
                 if (claimedScanner)
                 {
-                    // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can 
+                    // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can
                     // claim ownership of the barcode scanner.
                     releaseDeviceRequestedToken = claimedScanner->ReleaseDeviceRequested += ref new EventHandler<ClaimedBarcodeScanner^>(this, &Scenario3_ActiveSymbologies::OnReleaseDeviceRequested);
 
@@ -80,6 +71,15 @@ void Scenario3_ActiveSymbologies::ScenarioStartScanButton_Click(Object^ sender, 
                     // Do this after adding the DataReceived event handler.
                     create_task(claimedScanner->EnableAsync()).then([this]()
                     {
+                        // after successful claim, list supported symbologies
+                        return create_task(scanner->GetSupportedSymbologiesAsync());
+                    }).then([this](IVectorView<uint32_t>^ supportedSymbologies)
+                    {
+                        for (uint32_t symbology : supportedSymbologies)
+                        {
+                            this->listOfSymbologies->Append(ref new SymbologyListEntry(symbology));
+                        }
+
                         rootPage->NotifyUser("Ready to scan. Device ID: " + claimedScanner->DeviceId, NotifyType::StatusMessage);
 
                         // reset the button state
@@ -101,7 +101,7 @@ void Scenario3_ActiveSymbologies::ScenarioStartScanButton_Click(Object^ sender, 
             rootPage->NotifyUser("Barcode scanner not found. Please connect a barcode scanner.", NotifyType::ErrorMessage);
             ScenarioStartScanButton->IsEnabled = true;
         }
-    }, concurrency::task_continuation_context::use_current());
+    });
 }
 
 /// <summary>
@@ -118,7 +118,7 @@ void Scenario3_ActiveSymbologies::OnReleaseDeviceRequested(Object^ sender, Claim
 }
 
 /// <summary>
-/// Event handler for the DataReceived event fired when a barcode is scanned by the barcode scanner 
+/// Event handler for the DataReceived event fired when a barcode is scanned by the barcode scanner
 /// </summary>
 /// <param name="sender"></param>
 /// <param name="args"> Contains the BarcodeScannerReport which contains the data obtained in the scan</param>
@@ -144,7 +144,7 @@ void Scenario3_ActiveSymbologies::OnNavigatedFrom(NavigationEventArgs^ e)
 }
 
 /// <summary>
-/// Event handler for End Scan Button Click. 
+/// Event handler for End Scan Button Click.
 /// Releases the Barcode Scanner and resets the text in the UI
 /// </summary>
 /// <param name="sender"></param>
@@ -176,20 +176,23 @@ void Scenario3_ActiveSymbologies::ResetTheScenarioState()
         scanner = nullptr;
     }
 
-    // Reset the strings in the UI
-    rootPage->NotifyUser("Click the start scanning button to begin.", NotifyType::StatusMessage);
+    // Reset the UI if we are still the current page.
+    if (Frame->Content == this)
+    {
+        rootPage->NotifyUser("Click the start scanning button to begin.", NotifyType::StatusMessage);
 
-    ScenarioOutputScanData->Text = "No data";
-    ScenarioOutputScanDataLabel->Text = "No data";
-    ScenarioOutputScanDataType->Text = "No data";
+        ScenarioOutputScanData->Text = "No data";
+        ScenarioOutputScanDataLabel->Text = "No data";
+        ScenarioOutputScanDataType->Text = "No data";
 
-    // reset the button state
-    SetActiveSymbologiesButton->IsEnabled = false;
-    ScenarioEndScanButton->IsEnabled = false;
-    ScenarioStartScanButton->IsEnabled = true;
+        // reset the button state
+        SetActiveSymbologiesButton->IsEnabled = false;
+        ScenarioEndScanButton->IsEnabled = false;
+        ScenarioStartScanButton->IsEnabled = true;
 
-    // reset symbology list
-    listOfSymbologies->Clear();
+        // reset symbology list
+        listOfSymbologies->Clear();
+    }
 }
 
 void Scenario3_ActiveSymbologies::SetActiveSymbologies_Click(Object^ sender, RoutedEventArgs^ e)

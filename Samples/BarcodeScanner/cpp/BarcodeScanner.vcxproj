@@ -159,6 +159,9 @@
     <ClInclude Include="Scenario4_SymbologyAttributes.xaml.h">
       <DependentUpon>..\shared\Scenario4_SymbologyAttributes.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario5_DisplayingBarcodePreview.xaml.h">
+      <DependentUpon>..\shared\Scenario5_DisplayingBarcodePreview.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
@@ -171,6 +174,7 @@
     <Page Include="..\shared\Scenario2_MultipleScanners.xaml" />
     <Page Include="..\shared\Scenario3_ActiveSymbologies.xaml" />
     <Page Include="..\shared\Scenario4_SymbologyAttributes.xaml" />
+    <Page Include="..\shared\Scenario5_DisplayingBarcodePreview.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -207,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="Scenario4_SymbologyAttributes.xaml.cpp">
       <DependentUpon>..\shared\Scenario4_SymbologyAttributes.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario5_DisplayingBarcodePreview.xaml.cpp">
+      <DependentUpon>..\shared\Scenario5_DisplayingBarcodePreview.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -19,6 +19,7 @@
         { url: "/html/scenario2_MultipleScanners.html", title: "Release/Retain functionality" },
         { url: "/html/scenario3_ActiveSymbologies.html", title: "Active Symbologies" },
         { url: "/html/scenario4_SymbologyAttributes.html", title: "Symbology Attributes" },
+        { url: "/html/scenario5_DisplayingBarcodePreview.html", title: "Displaying Barcode Preview" },
     ];
 
     var BarcodeScanner = Windows.Devices.PointOfService.BarcodeScanner;
