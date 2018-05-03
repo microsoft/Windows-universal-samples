@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Printing sample
-  description: This sample demonstrates how apps can add support for printing on Windows.
-  generateZip: false
+  description: Shows how apps can add support for printing on Windows.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/Printing/cs/Printing.sln

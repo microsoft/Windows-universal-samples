@@ -1,11 +1,16 @@
 ### YamlMime:Sample
 sample:
 - name: Video playback sample
-  description: This sample demonstrates how to create apps that take advantage of many media platform features.
-  generateZip: false
+  description: Shows how to create apps that take advantage of many media platform features.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   - js
   technologies:
   - windows
+  vssolution: /Samples/VideoPlayback/cs/VideoPlayback.sln

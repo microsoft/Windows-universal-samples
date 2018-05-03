@@ -1,0 +1,16 @@
+### YamlMime:Sample
+sample:
+- name: PlayReady sample
+  description: Shows several common scenarios to playback protected content with PlayReady.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - js
+  technologies:
+  - windows
+  vssolution: /Samples/PlayReady/cs/PlayReady.sln

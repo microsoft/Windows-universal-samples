@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Serial Peripheral Interface (SPI) sample
-  description: The Windows.Devices.Spi namespace allows apps to communicate with Serial Peripheral Interface (SPI) devices on a Windows IoT (Internet of Things) device.
-  generateZip: false
+  description: Shows how to use the Windows.Devices.Spi namespace to allow apps to communicate with Serial Peripheral Interface (SPI) devices on a Windows IoT (Internet of Things) device.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/IoT-SPI/cs/SPI.sln

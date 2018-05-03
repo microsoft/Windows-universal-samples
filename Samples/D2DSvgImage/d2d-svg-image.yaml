@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Direct2D SVG image rendering sample
+  description: Shows how to use Direct2D to draw and manipulate SVG images programmatically.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/D2DSvgImage/cpp/D2DSvgImage.sln

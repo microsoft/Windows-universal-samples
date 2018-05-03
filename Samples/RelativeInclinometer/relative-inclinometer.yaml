@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Relative inclinometer sample
-  description: This sample demonstrates use of the Windows.Devices.Sensors.Inclinometer API for the Relative Inclinometer sensor.
-  generateZip: false
+  description: Shows how to use the Windows.Devices.Sensors.Inclinometer class for the Relative Inclinometer sensor.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/RelativeInclinometer/cs/RelativeInclinometer.sln

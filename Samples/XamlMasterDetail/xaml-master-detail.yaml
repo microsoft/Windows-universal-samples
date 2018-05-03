@@ -1,11 +1,16 @@
 ### YamlMime:Sample
 sample:
 - name: Master/detail sample
-  description: This sample shows how to implement a responsive master/detail experience in XAML.
-  generateZip: false
+  description: Shows how to implement a responsive master/detail experience in XAML.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   - cpp
   technologies:
   - windows
+  vssolution: /Samples/XamlMasterDetail/cs/MasterDetail.sln

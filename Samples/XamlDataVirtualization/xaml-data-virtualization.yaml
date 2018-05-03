@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: Data virtualization sample
-  description: This sample shows how to implement a data source for XAML list controls that implements data virtualization.
-  generateZip: false
+  description: Shows how to implement a data source for XAML list controls that implements data virtualization.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   technologies:
   - windows
+  vssolution: /Samples/XamlDataVirtualization/cs/DataVirtualization.sln

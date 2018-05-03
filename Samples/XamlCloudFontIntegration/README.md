@@ -5,7 +5,7 @@
 
 # Downloadable fonts (XAML) sample
 
-Shows XAML integration of DirectWrite downloadable fonts, a feature added in Windows 10.
+Shows XAML integration of DirectWrite downloadable fonts, a feature added in Windows 10.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 

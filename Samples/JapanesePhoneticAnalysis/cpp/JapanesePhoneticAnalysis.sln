@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JapanesePhoneticAnalysis", "JapanesePhoneticAnalysis.vcxproj", "{5F4627EA-233D-59E2-8898-56797D2B05A5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JapanesePhoneticAnalysis", "JapanesePhoneticAnalysis.vcxproj", "{EBA124DE-238C-5B89-9D25-548CFB631610}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Debug|ARM.ActiveCfg = Debug|ARM
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Debug|ARM.Build.0 = Debug|ARM
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Debug|ARM.Deploy.0 = Debug|ARM
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Debug|x64.ActiveCfg = Debug|x64
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Debug|x64.Build.0 = Debug|x64
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Debug|x64.Deploy.0 = Debug|x64
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Debug|x86.ActiveCfg = Debug|Win32
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Debug|x86.Build.0 = Debug|Win32
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Debug|x86.Deploy.0 = Debug|Win32
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Release|ARM.ActiveCfg = Release|ARM
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Release|ARM.Build.0 = Release|ARM
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Release|ARM.Deploy.0 = Release|ARM
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Release|x64.ActiveCfg = Release|x64
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Release|x64.Build.0 = Release|x64
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Release|x64.Deploy.0 = Release|x64
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Release|x86.ActiveCfg = Release|Win32
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Release|x86.Build.0 = Release|Win32
-		{5F4627EA-233D-59E2-8898-56797D2B05A5}.Release|x86.Deploy.0 = Release|Win32
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Debug|ARM.ActiveCfg = Debug|ARM
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Debug|ARM.Build.0 = Debug|ARM
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Debug|ARM.Deploy.0 = Debug|ARM
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Debug|x64.ActiveCfg = Debug|x64
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Debug|x64.Build.0 = Debug|x64
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Debug|x64.Deploy.0 = Debug|x64
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Debug|x86.ActiveCfg = Debug|Win32
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Debug|x86.Build.0 = Debug|Win32
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Debug|x86.Deploy.0 = Debug|Win32
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Release|ARM.ActiveCfg = Release|ARM
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Release|ARM.Build.0 = Release|ARM
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Release|ARM.Deploy.0 = Release|ARM
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Release|x64.ActiveCfg = Release|x64
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Release|x64.Build.0 = Release|x64
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Release|x64.Deploy.0 = Release|x64
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Release|x86.ActiveCfg = Release|Win32
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Release|x86.Build.0 = Release|Win32
+		{EBA124DE-238C-5B89-9D25-548CFB631610}.Release|x86.Deploy.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

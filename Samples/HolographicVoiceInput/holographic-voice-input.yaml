@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Holographic Voice Input Sample
+  description: Shows how to implement continuous voice recognition and Speech Synthesis, using a keyword-based constraint list, and the Speech Synthesizer to provide an spoken prompt.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/HolographicVoiceInput/cpp/HolographicVoiceInput.sln

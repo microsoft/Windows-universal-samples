@@ -1,11 +1,16 @@
 ### YamlMime:Sample
 sample:
 - name: Commanding sample
-  description: This sample highlights the changes and new features to the CommandBar.
-  generateZip: false
+  description: Shows the changes and new features for the CommandBar.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   - cpp
   technologies:
   - windows
+  vssolution: /Samples/XamlCommanding/cs/Commanding.sln

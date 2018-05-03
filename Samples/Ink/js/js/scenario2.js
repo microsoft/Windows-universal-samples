@@ -30,7 +30,7 @@
         var strokes = strokeContainer.getStrokes();
 
         // If there are no strokes, there's nothing to undo.
-        if (strokes.length == 0) {
+        if (strokes.length === 0) {
             return;
         }
 
@@ -195,6 +195,18 @@
         load: load,
         save: save,
         clear: clear,
+    });
+
+    // As a workaround, we must temporarily change the size of the canvas in order to force a redraw.
+    // Otherwise, the ink strokes will not be visible on resume.
+    document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === "visible") {
+            requestAnimationFrame(function () {
+                inkCanvas = document.getElementById("InkCanvas");
+                inkCanvas.width = inkCanvas.width + 1;
+                inkCanvas.width = inkCanvas.width - 1;
+            });
+        }
     });
 
     var page = WinJS.UI.Pages.define("/html/scenario2.html", {

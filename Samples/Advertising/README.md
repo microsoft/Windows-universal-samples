@@ -22,8 +22,9 @@ Specifically, this sample shows how to:
 
 ## Prerequisites
 
-This sample requires the [Microsoft Advertising SDK Libraries for XAML or JavaScript](http://go.microsoft.com/fwlink/?LinkID=619694).
-[Download it here](http://go.microsoft.com/fwlink/p/?LinkId=518026).
+This sample requires the [Microsoft Advertising SDK Libraries for XAML or JavaScript](http://go.microsoft.com/fwlink/?LinkID=619694),
+which is obtained via NuGet package,
+or you can [download it here](http://go.microsoft.com/fwlink/p/?LinkId=518026).
 It also requires the [internet client capability](https://msdn.microsoft.com/library/windows/apps/mt270968#general-use_capabilities) to be added to the manifest.
 
 When you incorporate this sample into your own app,

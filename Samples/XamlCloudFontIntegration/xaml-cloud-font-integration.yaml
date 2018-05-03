@@ -1,11 +1,16 @@
 ### YamlMime:Sample
 sample:
 - name: Downloadable fonts (XAML) sample
-  description: Demonstrates XAML integration of DirectWrite downloadable fonts, a feature added in Windows 10.
-  generateZip: false
+  description: Shows XAML integration of DirectWrite downloadable fonts, a feature added in Windows 10.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   - cpp
   technologies:
   - windows
+  vssolution: /Samples/XamlCloudFontIntegration/cs/CloudFontIntegration.sln

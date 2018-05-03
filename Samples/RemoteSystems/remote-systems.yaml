@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Remote Systems sample
+  description: Shows how to use the RemoteSystem class to discover and interact with other computers.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows
+  vssolution: /Samples/RemoteSystems/cs/RemoteSystems.sln

@@ -1,11 +1,17 @@
 ### YamlMime:Sample
 sample:
 - name: App services sample
-  description: This sample demonstrates how an app can provide a service that other apps can consume.
-  generateZip: false
+  description: Shows how an app can provide a service that other apps or other computers can consume.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
+  - cpp
   - vb
   technologies:
   - windows
+  vssolution: /Samples/AppServices/cs/AppServices.sln

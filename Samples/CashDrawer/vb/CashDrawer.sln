@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CashDrawer", "CashDrawer.vbproj", "{2E5F1B32-37E4-5CAD-83B8-087CFD170186}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CashDrawer", "CashDrawer.vbproj", "{F0DDB787-A5A7-554F-AA13-288EBEAD474B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Debug|ARM.ActiveCfg = Debug|ARM
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Debug|ARM.Build.0 = Debug|ARM
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Debug|ARM.Deploy.0 = Debug|ARM
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Debug|x64.ActiveCfg = Debug|x64
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Debug|x64.Build.0 = Debug|x64
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Debug|x64.Deploy.0 = Debug|x64
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Debug|x86.ActiveCfg = Debug|x86
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Debug|x86.Build.0 = Debug|x86
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Debug|x86.Deploy.0 = Debug|x86
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Release|ARM.ActiveCfg = Release|ARM
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Release|ARM.Build.0 = Release|ARM
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Release|ARM.Deploy.0 = Release|ARM
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Release|x64.ActiveCfg = Release|x64
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Release|x64.Build.0 = Release|x64
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Release|x64.Deploy.0 = Release|x64
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Release|x86.ActiveCfg = Release|x86
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Release|x86.Build.0 = Release|x86
-		{2E5F1B32-37E4-5CAD-83B8-087CFD170186}.Release|x86.Deploy.0 = Release|x86
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Debug|ARM.ActiveCfg = Debug|ARM
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Debug|ARM.Build.0 = Debug|ARM
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Debug|ARM.Deploy.0 = Debug|ARM
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Debug|x64.ActiveCfg = Debug|x64
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Debug|x64.Build.0 = Debug|x64
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Debug|x64.Deploy.0 = Debug|x64
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Debug|x86.ActiveCfg = Debug|x86
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Debug|x86.Build.0 = Debug|x86
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Debug|x86.Deploy.0 = Debug|x86
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Release|ARM.ActiveCfg = Release|ARM
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Release|ARM.Build.0 = Release|ARM
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Release|ARM.Deploy.0 = Release|ARM
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Release|x64.ActiveCfg = Release|x64
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Release|x64.Build.0 = Release|x64
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Release|x64.Deploy.0 = Release|x64
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Release|x86.ActiveCfg = Release|x86
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Release|x86.Build.0 = Release|x86
+		{F0DDB787-A5A7-554F-AA13-288EBEAD474B}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

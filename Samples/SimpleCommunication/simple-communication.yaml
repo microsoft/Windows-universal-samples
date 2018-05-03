@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Real-time communication sample
-  description: This sample demonstrates how to use the low latency feature to enable real-time communication applications.
-  generateZip: false
+  description: Shows how to use the low latency feature to enable real-time communication applications.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/SimpleCommunication/cs/SimpleCommunication.sln

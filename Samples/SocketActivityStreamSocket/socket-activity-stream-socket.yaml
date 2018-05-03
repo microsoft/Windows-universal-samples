@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: Socket activity trigger stream socket sample
-  description: This sample shows how to use the Socket Activity Stream Socket API to keep a socket connection alive beyond the lifetime of the application.
-  generateZip: false
+  description: Shows how to use the StreamSocket Socket Activity Stream API to keep a socket connection alive beyond the lifetime of the application.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   technologies:
   - windows
+  vssolution: /Samples/SocketActivityStreamSocket/cs/SocketActivityStreamSocket.sln

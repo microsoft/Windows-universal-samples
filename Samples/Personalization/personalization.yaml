@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Lock screen personalization sample
-  description: This sample demonstrates how a developer can use the LockScreen API to set the current user's lock screen image.
-  generateZip: false
+  description: Shows how a developer can use the LockScreen API to set the current user's lock screen image.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/Personalization/cs/Personalization.sln

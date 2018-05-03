@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: State triggers sample
-  description: Showcases extensible StateTriggers with a couple of different custom triggers built into a scenario app.
-  generateZip: false
+  description: Shows how to extend StateTrigger with a couple of different custom triggers built into a scenario app.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   technologies:
   - windows
+  vssolution: /Samples/XamlStateTriggers/cs/StateTriggers.sln

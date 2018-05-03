@@ -1,10 +1,16 @@
 ### YamlMime:Sample
 sample:
 - name: MapControl sample
-  description: This sample demonstrates how to use the universal map control (MapControl) in a UWP app.
-  generateZip: false
+  description: Shows how to use the universal map control (MapControl) in a UWP app.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
+  - cpp
   technologies:
   - windows
+  vssolution: /Samples/MapControl/cs/MapControl.sln

@@ -27,15 +27,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{607BCC98-5B1B-5BD2-B90A-2C30FE8A6E1B}</ProjectGuid>
+    <ProjectGuid>{3F54ED21-7628-5A96-A9D7-EEF5CDCE28D0}</ProjectGuid>
     <RootNamespace>WRLInProcessWinRTComponent</RootNamespace>
     <ProjectName>WRLInProcessWinRTComponentPS</ProjectName>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.16299.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.17134.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetName>Microsoft.SDKSamples.Kitchen.Proxies</TargetName>

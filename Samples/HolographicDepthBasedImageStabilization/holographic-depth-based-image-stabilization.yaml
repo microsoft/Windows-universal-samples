@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Depth-based focus plane
+  description: Shows how to set the focus plane automatically by looking at your depth buffer.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/HolographicDepthBasedImageStabilization/cpp/HolographicDepthBasedImageStabilization.sln

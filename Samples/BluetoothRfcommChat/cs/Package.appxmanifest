@@ -20,7 +20,7 @@
     <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.16299.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.17134.0" />
   </Dependencies>
   <Resources>
     <Resource Language="x-generate"/>
@@ -38,7 +38,7 @@
       </Extensions>
       <uap:VisualElements
         DisplayName="Bluetooth Rfcomm Chat C# Sample"
-        Square150x150Logo="Assets\StoreLogo-sdk.png"
+        Square150x150Logo="Assets\SquareTile-sdk.png"
         Square44x44Logo="Assets\SmallTile-sdk.png"
         Description="Bluetooth Rfcomm Chat C# Sample"
         BackgroundColor="#00b2f0">

@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Contact Panel sample
+  description: This sample shows how to host your app within the My People Contact Panel.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows
+  vssolution: /Samples/ContactPanel/cs/ContactPanel.sln

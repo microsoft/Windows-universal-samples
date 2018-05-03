@@ -63,7 +63,20 @@ void Scenario9::OnReset(Object^ sender, RoutedEventArgs^ e)
 {
     StopReplay();
     inkCanvas->InkPresenter->StrokeContainer->Clear();
+    ClearCanvasStrokeCache();
     rootPage->NotifyUser("Cleared Canvas", NotifyType::StatusMessage);
+}
+
+void Scenario9::ClearCanvasStrokeCache()
+{
+    // Workaround for builds prior to 17650.
+    // Throw away the old inkCanvas and create a new one to avoid accumulation of old strokes.
+    outputGrid->Children->Clear();
+    inkCanvas = ref new Windows::UI::Xaml::Controls::InkCanvas();
+    outputGrid->Children->Append(inkCanvas);
+    inkCanvas->InkPresenter->InputDeviceTypes = CoreInputDeviceTypes::Mouse | CoreInputDeviceTypes::Pen | CoreInputDeviceTypes::Touch;
+    inkCanvas->InkPresenter->StrokesCollected += ref new TypedEventHandler<InkPresenter^, InkStrokesCollectedEventArgs^>(this, &Scenario9::InkPresenter_StrokesCollected);
+    HelperFunctions::UpdateCanvasSize(RootGrid, outputGrid, inkCanvas);
 }
 
 DateTime GetCurrentDateTime()
@@ -87,6 +100,7 @@ void Scenario9::OnReplay(Object^ sender, RoutedEventArgs^ e)
 
     ReplayButton->IsEnabled = false;
     inkCanvas->InkPresenter->IsInputEnabled = false;
+    ClearCanvasStrokeCache();
 
     // Calculate the beginning of the earliest stroke and the end of the latest stroke.
     // This establishes the time period during which the strokes were collected.

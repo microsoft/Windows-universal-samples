@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Bluetooth Low Energy sample
+  description: This sample shows how to use the Windows Bluetooth LE APIs to act either as a BLE client or server.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows
+  vssolution: /Samples/BluetoothLE/cs/BluetoothLE.sln

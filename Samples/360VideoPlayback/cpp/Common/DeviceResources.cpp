@@ -361,25 +361,6 @@ void DX::DeviceResources::Present(HolographicFrame^ frame)
     // holographic frame predictions.
     HolographicFramePresentResult presentResult = frame->PresentUsingCurrentPrediction();
 
-    HolographicFramePrediction^ prediction = frame->CurrentPrediction;
-    UseHolographicCameraResources<void>([this, prediction](std::map<UINT32, std::unique_ptr<CameraResources>>& cameraResourceMap)
-    {
-        for (auto cameraPose : prediction->CameraPoses)
-        {
-            // This represents the device-based resources for a HolographicCamera.
-            DX::CameraResources* pCameraResources = cameraResourceMap[cameraPose->HolographicCamera->Id].get();
-
-            // Discard the contents of the render target.
-            // This is a valid operation only when the existing contents will be
-            // entirely overwritten. If dirty or scroll rects are used, this call
-            // should be removed.
-            m_d3dContext->DiscardView(pCameraResources->GetBackBufferRenderTargetView());
-
-            // Discard the contents of the depth stencil.
-            m_d3dContext->DiscardView(pCameraResources->GetDepthStencilView());
-        }
-    });
-
     // The PresentUsingCurrentPrediction API will detect when the graphics device
     // changes or becomes invalid. When this happens, it is considered a Direct3D
     // device lost scenario.

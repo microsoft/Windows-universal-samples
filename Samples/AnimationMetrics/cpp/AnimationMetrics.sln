@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationMetrics", "AnimationMetrics.vcxproj", "{290B9965-A793-53FA-A075-44084D721BAE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationMetrics", "AnimationMetrics.vcxproj", "{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{290B9965-A793-53FA-A075-44084D721BAE}.Debug|ARM.ActiveCfg = Debug|ARM
-		{290B9965-A793-53FA-A075-44084D721BAE}.Debug|ARM.Build.0 = Debug|ARM
-		{290B9965-A793-53FA-A075-44084D721BAE}.Debug|ARM.Deploy.0 = Debug|ARM
-		{290B9965-A793-53FA-A075-44084D721BAE}.Debug|x64.ActiveCfg = Debug|x64
-		{290B9965-A793-53FA-A075-44084D721BAE}.Debug|x64.Build.0 = Debug|x64
-		{290B9965-A793-53FA-A075-44084D721BAE}.Debug|x64.Deploy.0 = Debug|x64
-		{290B9965-A793-53FA-A075-44084D721BAE}.Debug|x86.ActiveCfg = Debug|Win32
-		{290B9965-A793-53FA-A075-44084D721BAE}.Debug|x86.Build.0 = Debug|Win32
-		{290B9965-A793-53FA-A075-44084D721BAE}.Debug|x86.Deploy.0 = Debug|Win32
-		{290B9965-A793-53FA-A075-44084D721BAE}.Release|ARM.ActiveCfg = Release|ARM
-		{290B9965-A793-53FA-A075-44084D721BAE}.Release|ARM.Build.0 = Release|ARM
-		{290B9965-A793-53FA-A075-44084D721BAE}.Release|ARM.Deploy.0 = Release|ARM
-		{290B9965-A793-53FA-A075-44084D721BAE}.Release|x64.ActiveCfg = Release|x64
-		{290B9965-A793-53FA-A075-44084D721BAE}.Release|x64.Build.0 = Release|x64
-		{290B9965-A793-53FA-A075-44084D721BAE}.Release|x64.Deploy.0 = Release|x64
-		{290B9965-A793-53FA-A075-44084D721BAE}.Release|x86.ActiveCfg = Release|Win32
-		{290B9965-A793-53FA-A075-44084D721BAE}.Release|x86.Build.0 = Release|Win32
-		{290B9965-A793-53FA-A075-44084D721BAE}.Release|x86.Deploy.0 = Release|Win32
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Debug|ARM.ActiveCfg = Debug|ARM
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Debug|ARM.Build.0 = Debug|ARM
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Debug|ARM.Deploy.0 = Debug|ARM
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Debug|x64.ActiveCfg = Debug|x64
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Debug|x64.Build.0 = Debug|x64
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Debug|x64.Deploy.0 = Debug|x64
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Debug|x86.ActiveCfg = Debug|Win32
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Debug|x86.Build.0 = Debug|Win32
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Debug|x86.Deploy.0 = Debug|Win32
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Release|ARM.ActiveCfg = Release|ARM
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Release|ARM.Build.0 = Release|ARM
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Release|ARM.Deploy.0 = Release|ARM
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Release|x64.ActiveCfg = Release|x64
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Release|x64.Build.0 = Release|x64
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Release|x64.Deploy.0 = Release|x64
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Release|x86.ActiveCfg = Release|Win32
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Release|x86.Build.0 = Release|Win32
+		{D0D90C2B-EA3C-50AF-A360-0A0D48CEEC43}.Release|x86.Deploy.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

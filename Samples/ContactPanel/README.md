@@ -5,7 +5,7 @@
 
 # Contact Panel sample
 
-This sample shows how to host your app within the My People Contact Panel.
+Shows how to host your app within the My People Contact Panel.
 
 Specifically, this sample shows how to:
 

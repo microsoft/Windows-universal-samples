@@ -23,6 +23,7 @@ namespace AppUIBasics.ControlPages
         public CommandBarPage()
         {
             this.InitializeComponent();
+            AddKeyboardAccelerators();
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
@@ -47,23 +48,40 @@ namespace AppUIBasics.ControlPages
                 var newButton = new AppBarButton();
                 newButton.Icon = new SymbolIcon(Symbol.Add);
                 newButton.Label = "Button 1";
+                newButton.KeyboardAccelerators.Add(new Windows.UI.Xaml.Input.KeyboardAccelerator()
+                {
+                    Key = Windows.System.VirtualKey.N, Modifiers = Windows.System.VirtualKeyModifiers.Control
+                });
                 PrimaryCommandBar.SecondaryCommands.Add(newButton);
 
                 newButton = new AppBarButton();
                 newButton.Icon = new SymbolIcon(Symbol.Delete);
                 newButton.Label = "Button 2";
                 PrimaryCommandBar.SecondaryCommands.Add(newButton);
-
+                newButton.KeyboardAccelerators.Add(new Windows.UI.Xaml.Input.KeyboardAccelerator()
+                {
+                    Key = Windows.System.VirtualKey.Delete
+                });
                 PrimaryCommandBar.SecondaryCommands.Add(new AppBarSeparator());
 
                 newButton = new AppBarButton();
                 newButton.Icon = new SymbolIcon(Symbol.FontDecrease);
                 newButton.Label = "Button 3";
+                newButton.KeyboardAccelerators.Add(new Windows.UI.Xaml.Input.KeyboardAccelerator()
+                {
+                    Key = Windows.System.VirtualKey.Subtract,
+                    Modifiers = Windows.System.VirtualKeyModifiers.Control
+                });
                 PrimaryCommandBar.SecondaryCommands.Add(newButton);
 
                 newButton = new AppBarButton();
                 newButton.Icon = new SymbolIcon(Symbol.FontIncrease);
                 newButton.Label = "Button 4";
+                newButton.KeyboardAccelerators.Add(new Windows.UI.Xaml.Input.KeyboardAccelerator()
+                {
+                    Key = Windows.System.VirtualKey.Add,
+                    Modifiers = Windows.System.VirtualKeyModifiers.Control
+                });
                 PrimaryCommandBar.SecondaryCommands.Add(newButton);
             }
         }
@@ -86,5 +104,33 @@ namespace AppUIBasics.ControlPages
                 PrimaryCommandBar.SecondaryCommands.RemoveAt(PrimaryCommandBar.SecondaryCommands.Count - 1);
             }
         }
+
+
+        private void AddKeyboardAccelerators()
+        {
+            editButton.KeyboardAccelerators.Add(new Windows.UI.Xaml.Input.KeyboardAccelerator()
+            {
+                Key = Windows.System.VirtualKey.E,
+                Modifiers = Windows.System.VirtualKeyModifiers.Control
+            });
+
+            shareButton.KeyboardAccelerators.Add(new Windows.UI.Xaml.Input.KeyboardAccelerator()
+            {
+                Key = Windows.System.VirtualKey.F4
+            });
+
+            addButton.KeyboardAccelerators.Add(new Windows.UI.Xaml.Input.KeyboardAccelerator()
+            {
+                Key = Windows.System.VirtualKey.A,
+                Modifiers = Windows.System.VirtualKeyModifiers.Control
+            });
+
+            settingsButton.KeyboardAccelerators.Add(new Windows.UI.Xaml.Input.KeyboardAccelerator()
+            {
+                Key = Windows.System.VirtualKey.S,
+                Modifiers = Windows.System.VirtualKeyModifiers.Control
+            });
+        }
+
     }
 }

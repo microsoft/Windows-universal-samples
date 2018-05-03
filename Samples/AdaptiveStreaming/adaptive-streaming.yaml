@@ -1,12 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: Adaptive streaming sample
-  description: How to create and use an AdaptiveMediaSource to playback HLS and DASH content over HTTP.
-  generateZip: false
+  description: Shows various features of the AdaptiveMediaSource object, used in conjunction with MediaSource, MediaPlaybackItem, MediaPlayer and MediaPlayerElement.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
-  - js
-  - vb
   technologies:
   - windows
+  vssolution: /Samples/AdaptiveStreaming/cs/AdaptiveStreaming.sln

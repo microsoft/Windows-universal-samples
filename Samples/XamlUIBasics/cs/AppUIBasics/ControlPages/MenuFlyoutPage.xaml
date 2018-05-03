@@ -146,5 +146,66 @@
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
+        <local:ControlExample x:Name="Example5"
+                HeaderText="A MenuFlyout with icons and Keyboard Accelerators." FontFamily="Segoe UI" Loaded="Example5_Loaded">
+            <Button x:Name="Control5" Content="Edit Options">
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Share">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon Glyph="&#xE72D;" />
+                            </MenuFlyoutItem.Icon>
+                            <MenuFlyoutItem.KeyboardAccelerators>
+                                <KeyboardAccelerator Key="S" Modifiers="Control" />
+                            </MenuFlyoutItem.KeyboardAccelerators>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutItem Text="Copy" Icon="Copy" FontFamily="Consolas" >
+                            <MenuFlyoutItem.KeyboardAccelerators>
+                                <KeyboardAccelerator Key="C" Modifiers="Control" />
+                            </MenuFlyoutItem.KeyboardAccelerators>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutItem Text="Delete" Icon="Delete" FontFamily="Segoe UI" >
+                            <MenuFlyoutItem.KeyboardAccelerators>
+                                <KeyboardAccelerator Key="Delete"/>
+                            </MenuFlyoutItem.KeyboardAccelerators>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutSeparator />
+                        <MenuFlyoutItem Text="Rename" />
+                        <MenuFlyoutItem Text="Select" />
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>&lt;Button Content="Edit Options"&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Button.Flyout&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;MenuFlyout&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="Share"&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;MenuFlyoutItem.Icon&gt;</Paragraph>
+                    <Paragraph TextIndent="60">&lt;FontIcon Glyph="&amp;#xE72D;"/&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;/MenuFlyoutItem.Icon&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;MenuFlyoutItem.KeyboardAccelerators&gt;</Paragraph>
+                    <Paragraph TextIndent="60">&lt;KeyboardAccelerator Key="S" Modifiers="Control"/&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;/MenuFlyoutItem.KeyboardAccelerators&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;/MenuFlyoutItem&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="Copy"&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;MenuFlyoutItem.KeyboardAccelerators&gt;</Paragraph>
+                    <Paragraph TextIndent="60">&lt;KeyboardAccelerator Key="C" Modifiers="Control"/&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;/MenuFlyoutItem.KeyboardAccelerators&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;/MenuFlyoutItem&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="Delete"&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;MenuFlyoutItem.KeyboardAccelerators&gt;</Paragraph>
+                    <Paragraph TextIndent="60">&lt;KeyboardAccelerator Key="Delete" /&gt;</Paragraph>
+                    <Paragraph TextIndent="48">&lt;/MenuFlyoutItem.KeyboardAccelerators&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;/MenuFlyoutItem&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;MenuFlyoutSeparator/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="Rename"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="Select"/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;/MenuFlyout&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/Button.Flyout&gt;</Paragraph>
+                    <Paragraph>&lt;/Button&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
     </StackPanel>
 </Page>

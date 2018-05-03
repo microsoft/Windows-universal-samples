@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Camera preview frame sample
-  description: This sample applies an end-to-end approach to demonstrate how to write a camera application using the Windows.Media.Capture API in conjunction with the DisplayInformation API to acquire preview frames from the camera stream for further processing.
-  generateZip: false
+  description: Provides an end-to-end sample to show how to write a camera app using the Windows.Media.Capture API in conjunction with the DisplayInformation API to acquire preview frames from the camera stream for further processing.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/CameraGetPreviewFrame/cs/CameraGetPreviewFrame.sln

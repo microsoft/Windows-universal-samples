@@ -1,11 +1,16 @@
 ### YamlMime:Sample
 sample:
 - name: Simple imaging sample
-  description: This sample demonstrates some common imaging scenarios for Universal Windows apps including metadata and editing/saving.
-  generateZip: false
+  description: Shows some common imaging scenarios for Universal Windows apps including metadata and editing/saving.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   - js
   technologies:
   - windows
+  vssolution: /Samples/SimpleImaging/cs/SimpleImaging.sln

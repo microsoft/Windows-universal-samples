@@ -1,0 +1,16 @@
+### YamlMime:Sample
+sample:
+- name: Basic hologram sample
+  description: Shows how to render a simple hologram that is a spinning cube.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/BasicHologram/cs/BasicHologram.sln

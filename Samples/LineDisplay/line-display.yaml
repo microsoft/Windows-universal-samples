@@ -1,0 +1,17 @@
+### YamlMime:Sample
+sample:
+- name: Line display sample
+  description: Shows how to use the ClaimedLineDisplay class.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows
+  vssolution: /Samples/LineDisplay/cs/LineDisplay.sln

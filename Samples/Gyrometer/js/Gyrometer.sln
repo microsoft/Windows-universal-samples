@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "Gyrometer", "Gyrometer.jsproj", "{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "Gyrometer", "Gyrometer.jsproj", "{A5BA047D-26E0-5EBB-8717-F780E43A8311}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,30 +17,30 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Debug|ARM.ActiveCfg = Debug|ARM
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Debug|ARM.Build.0 = Debug|ARM
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Debug|ARM.Deploy.0 = Debug|ARM
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Debug|x64.ActiveCfg = Debug|x64
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Debug|x64.Build.0 = Debug|x64
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Debug|x64.Deploy.0 = Debug|x64
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Debug|x86.ActiveCfg = Debug|x86
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Debug|x86.Build.0 = Debug|x86
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Debug|x86.Deploy.0 = Debug|x86
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Release|ARM.ActiveCfg = Release|ARM
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Release|ARM.Build.0 = Release|ARM
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Release|ARM.Deploy.0 = Release|ARM
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Release|x64.ActiveCfg = Release|x64
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Release|x64.Build.0 = Release|x64
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Release|x64.Deploy.0 = Release|x64
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Release|x86.ActiveCfg = Release|x86
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Release|x86.Build.0 = Release|x86
-		{E2A6D40A-84E0-5A2A-998F-032ACBCCA4A5}.Release|x86.Deploy.0 = Release|x86
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Debug|ARM.ActiveCfg = Debug|ARM
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Debug|ARM.Build.0 = Debug|ARM
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Debug|ARM.Deploy.0 = Debug|ARM
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Debug|x64.ActiveCfg = Debug|x64
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Debug|x64.Build.0 = Debug|x64
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Debug|x64.Deploy.0 = Debug|x64
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Debug|x86.ActiveCfg = Debug|x86
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Debug|x86.Build.0 = Debug|x86
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Debug|x86.Deploy.0 = Debug|x86
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Release|ARM.ActiveCfg = Release|ARM
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Release|ARM.Build.0 = Release|ARM
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Release|ARM.Deploy.0 = Release|ARM
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Release|x64.ActiveCfg = Release|x64
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Release|x64.Build.0 = Release|x64
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Release|x64.Deploy.0 = Release|x64
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Release|x86.ActiveCfg = Release|x86
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Release|x86.Build.0 = Release|x86
+		{A5BA047D-26E0-5EBB-8717-F780E43A8311}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

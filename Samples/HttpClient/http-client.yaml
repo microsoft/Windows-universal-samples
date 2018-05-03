@@ -1,10 +1,16 @@
 ### YamlMime:Sample
 sample:
 - name: HttpClient sample
-  description: This sample shows you how to upload and download various types of content with an HTTP server using the HttpClient and related classes in Windows.Web.Http namespace.
-  generateZip: false
+  description: Shows how to upload and download various types of content with an HTTP server using the HttpClient and related classes in Windows.Web.Http namespace.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
+  - cpp
   technologies:
   - windows
+  vssolution: /Samples/HttpClient/cs/HttpClient.sln

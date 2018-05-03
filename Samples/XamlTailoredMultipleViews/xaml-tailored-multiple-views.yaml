@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: Tailored multiple views sample
-  description: Showcases how to build tailored UI using multiple views that are optimized for one-handed use.
-  generateZip: false
+  description: Shows how to build a tailored UI using multiple views that are optimized for one-handed use.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   technologies:
   - windows
+  vssolution: /Samples/XamlTailoredMultipleViews/cs/TailoredMultipleViews/OneHandedUse_TailoredMultipleViews.sln

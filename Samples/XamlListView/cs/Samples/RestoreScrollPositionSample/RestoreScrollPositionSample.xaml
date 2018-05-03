@@ -18,7 +18,7 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Button Style="{StaticResource SplitViewTogglePaneButtonStyle}"
                 VerticalAlignment="Center"
-                Click="ShowSliptView"/>
+                Click="ShowSplitView"/>
             <TextBlock Text="Restore Scroll Position Sample"
                 VerticalAlignment="Top"
                 Style="{ThemeResource TitleTextBlockStyle}"

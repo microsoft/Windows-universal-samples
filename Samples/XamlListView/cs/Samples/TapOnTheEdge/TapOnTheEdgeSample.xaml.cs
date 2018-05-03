@@ -141,7 +141,7 @@ namespace ListViewSample
                 MyListView.SelectedItems.Clear();
             }
         }
-        private void ShowSliptView(object sender, RoutedEventArgs e)
+        private void ShowSplitView(object sender, RoutedEventArgs e)
         {
             MySamplesPane.SamplesSplitView.IsPaneOpen = !MySamplesPane.SamplesSplitView.IsPaneOpen;
         }

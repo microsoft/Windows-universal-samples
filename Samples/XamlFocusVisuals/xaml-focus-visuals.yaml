@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: Focus visuals sample
-  description: This sample shows how to take advantage of the new system drawn focus visuals, or to create your own custom focus visuals if the system drawn ones do not fit your needs.
-  generateZip: false
+  description: Shows how to take advantage of the new system drawn focus visuals, or to create your own custom focus visuals if the system drawn ones do not fit your needs.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   technologies:
   - windows
+  vssolution: /Samples/XamlFocusVisuals/cs/FocusVisuals.sln

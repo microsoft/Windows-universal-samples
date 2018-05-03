@@ -22,11 +22,11 @@
         <local:ControlExample x:Name="Example3" HeaderText="A command bar with labels on the side free floating in a page." >
 
             <CommandBar x:Name="PrimaryCommandBar" IsOpen="False" DefaultLabelPosition="Right">
-                <AppBarButton Icon="Add" Label="Add"/>
-                <AppBarButton Icon="ReShare" Label="Share"/>
-                <AppBarButton Icon="Edit" Label="Edit"/>
+                <AppBarButton x:Name="addButton" Icon="Add" Label="Add"/>
+                <AppBarButton x:Name="shareButton" Icon="ReShare" Label="Share"/>
+                <AppBarButton x:Name="editButton" Icon="Edit" Label="Edit"/>
                 <CommandBar.SecondaryCommands>
-                    <AppBarButton Icon="Setting" Label="Settings"/>
+                    <AppBarButton x:Name="settingsButton" Icon="Setting" Label="Settings"/>
                 </CommandBar.SecondaryCommands>
             </CommandBar>
 

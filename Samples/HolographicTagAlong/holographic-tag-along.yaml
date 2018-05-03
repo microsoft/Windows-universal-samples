@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: Tag-along hologram sample
-  description: This sample demonstrates how to render a hologram that follows the user.
-  generateZip: false
+  description: Shows how to render a hologram that follows the user.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - cpp
   technologies:
   - windows
+  vssolution: /Samples/HolographicTagAlong/cpp/HolographicTagAlong.sln

@@ -1,0 +1,29 @@
+﻿{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "backgroundImage": "https://raw.githubusercontent.com/Microsoft/Windows-universal-samples/master/SharedContent/media/tile-sdk.png",
+    "body": [
+        {
+            "type": "Container",
+            "seperation": "None",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "text": "Windows SDK Samples",
+                    "weight": "bolder",
+                    "size": "large",
+                    "wrap": true,
+                    "maxLines": 3
+                },
+                {
+                    "type": "TextBlock",
+                    "text": "User Activity Sample",
+                    "size": "default",
+                    "wrap": true,
+                    "maxLines": 3
+                }
+            ]
+        }
+    ]
+}

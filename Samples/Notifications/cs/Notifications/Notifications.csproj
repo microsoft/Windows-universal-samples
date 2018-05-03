@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{B788EE68-A691-5B20-BF2D-43CCCA7533FA}</ProjectGuid>
+    <ProjectGuid>{BC2EAE6E-8A79-5D13-A628-ED7A595FB457}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Notifications</RootNamespace>
     <AssemblyName>Notifications</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -358,7 +358,7 @@
     <Content Include="..\..\..\..\SharedContent\media\smalltile-sdk.png">
       <Link>Assets\SmallLogo.png</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Content Include="..\..\..\..\SharedContent\media\Square310x310Logo.png">
       <Link>Assets\LargeLogo.png</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\media\splash-sdk.png">

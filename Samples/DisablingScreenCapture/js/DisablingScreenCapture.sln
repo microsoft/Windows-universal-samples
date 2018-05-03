@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "DisablingScreenCapture", "DisablingScreenCapture.jsproj", "{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "DisablingScreenCapture", "DisablingScreenCapture.jsproj", "{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,30 +17,30 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Debug|ARM.ActiveCfg = Debug|ARM
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Debug|ARM.Build.0 = Debug|ARM
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Debug|ARM.Deploy.0 = Debug|ARM
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Debug|x64.ActiveCfg = Debug|x64
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Debug|x64.Build.0 = Debug|x64
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Debug|x64.Deploy.0 = Debug|x64
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Debug|x86.ActiveCfg = Debug|x86
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Debug|x86.Build.0 = Debug|x86
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Debug|x86.Deploy.0 = Debug|x86
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Release|ARM.ActiveCfg = Release|ARM
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Release|ARM.Build.0 = Release|ARM
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Release|ARM.Deploy.0 = Release|ARM
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Release|x64.ActiveCfg = Release|x64
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Release|x64.Build.0 = Release|x64
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Release|x64.Deploy.0 = Release|x64
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Release|x86.ActiveCfg = Release|x86
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Release|x86.Build.0 = Release|x86
-		{63AB8F00-9D70-55E0-BA12-F32877A5DEB3}.Release|x86.Deploy.0 = Release|x86
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Debug|ARM.ActiveCfg = Debug|ARM
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Debug|ARM.Build.0 = Debug|ARM
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Debug|ARM.Deploy.0 = Debug|ARM
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Debug|x64.ActiveCfg = Debug|x64
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Debug|x64.Build.0 = Debug|x64
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Debug|x64.Deploy.0 = Debug|x64
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Debug|x86.ActiveCfg = Debug|x86
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Debug|x86.Build.0 = Debug|x86
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Debug|x86.Deploy.0 = Debug|x86
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Release|ARM.ActiveCfg = Release|ARM
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Release|ARM.Build.0 = Release|ARM
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Release|ARM.Deploy.0 = Release|ARM
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Release|x64.ActiveCfg = Release|x64
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Release|x64.Build.0 = Release|x64
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Release|x64.Deploy.0 = Release|x64
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Release|x86.ActiveCfg = Release|x86
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Release|x86.Build.0 = Release|x86
+		{EB85AE09-9D6B-5F87-A26D-6EF84A9D5379}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

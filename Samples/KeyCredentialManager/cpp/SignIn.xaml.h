@@ -24,15 +24,15 @@ namespace SDKTemplate
     private:
         void Button_SignIn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void Button_Passport_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-        void PassportAvailableCheck();
-        void SignInPassport(bool passportIsPrimaryLogin);
-        bool SignInPassword(bool calledFromPassport);
-        bool AuthenticatePasswordCredentials();
-        bool AuthenticatePassport();
-        bool AddPassportToAccountOnServer();
+        concurrency::task<void> PassportAvailableCheckAsync();
+        concurrency::task<void> SignInPassportAsync(bool passportIsPrimaryLogin);
+        concurrency::task<bool> SignInPasswordAsync(bool calledFromPassport);
+        concurrency::task<bool> AuthenticatePasswordCredentialsAsync();
+        concurrency::task<bool> AuthenticatePassportAsync();
+        concurrency::task<bool> AddPassportToAccountOnServerAsync();
         void SuccessfulSignIn(Account^ account);
-        bool CreatePassportKey(Platform::String^ accountId);
-        Windows::Storage::Streams::IBuffer^ GetPassportAuthenticationMessage(Windows::Storage::Streams::IBuffer^ message, Platform::String^ accountId);
+        concurrency::task<bool> CreatePassportKeyAsync(Platform::String^ accountId);
+        concurrency::task<Windows::Storage::Streams::IBuffer^> GetPassportAuthenticationMessageAsync(Windows::Storage::Streams::IBuffer^ message, Platform::String^ accountId);
 
         MainPage^ rootPage;
         bool m_addingAccount = true;

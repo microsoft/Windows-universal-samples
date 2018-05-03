@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Barcode scanner sample
-  description: This sample shows how to obtain a barcode scanner, claim it for exclusive use, enable it to receive data, and read a barcode.
-  generateZip: false
+  description: Shows how to obtain a barcode scanner, claim it for exclusive use, enable it to receive data, and read a barcode.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -11,3 +15,4 @@ sample:
   - vb
   technologies:
   - windows
+  vssolution: /Samples/BarcodeScanner/cs/BarcodeScanner.sln

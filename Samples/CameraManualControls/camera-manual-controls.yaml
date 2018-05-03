@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: Manual camera controls sample
-  description: This extensive sample applies an end-to-end approach to demonstrate how to write a camera application using the Windows.Media.Capture API in conjunction with orientation sensors to cover some of the functions that advanced camera apps will require.
-  generateZip: false
+  description: Provides an end-to-end sample to show how to write a camera app using the Windows.Media.Capture API in conjunction with orientation sensors to cover some of the functions that advanced camera apps will require.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   technologies:
   - windows
+  vssolution: /Samples/CameraManualControls/cs/CameraManualControls.sln

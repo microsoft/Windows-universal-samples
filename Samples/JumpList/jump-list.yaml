@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: # Jump list customization sample
-  description: This sample shows how to customize your app's jump list.
-  generateZip: false
+  description: Shows how to customize your app's jump list.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/JumpList/cs/JumpList.sln

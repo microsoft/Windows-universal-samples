@@ -5,8 +5,6 @@
 
 # System media transport controls sample
 
-## Summary
-
 Shows how to use the APIs in the [Windows.Media](https://msdn.microsoft.com/library/windows/apps/windows.media.aspx) namespace to allow
 your app to respond to system media events as well as providing the system with
 metadata about the content that is playing. 

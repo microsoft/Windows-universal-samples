@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: XHR, handling navigation errors, and URL schemes sample
-  description: This sample demonstrates how to handle navigation errors, how to use the right URL scheme to reference packaged content, and how to use XMLHttpRequest (XHR) to retrieve remote and local content.
-  generateZip: false
+  description: Shows how to handle navigation errors, how to use the right URL scheme to reference packaged content, and how to use XMLHttpRequest (XHR) to retrieve remote and local content.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - js
   technologies:
   - windows
+  vssolution: /Samples/PackagedContent/js/PackagedContent.sln

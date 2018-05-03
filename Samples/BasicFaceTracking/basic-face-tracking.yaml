@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Basic face tracking sample
-  description: This sample shows how to use the Windows.Media.FaceAnalysis.FaceTracker WinRT class to find human faces within an video stream.
-  generateZip: false
+  description: Shows how to use the FaceTracker class to find human faces within an video stream.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - vb
   technologies:
   - windows
+  vssolution: /Samples/BasicFaceTracking/cs/BasicFaceTracking.sln

@@ -1,0 +1,17 @@
+### YamlMime:Sample
+sample:
+- name: Custom Capability sample
+  description: This sample demonstrates the use of custom capabilities.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows
+  vssolution: /Samples/CustomCapability/cs/CustomCapability.sln

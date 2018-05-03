@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Accelerometer sample
-  description: This sample shows how to use the Accelerometer class.
-  generateZip: false
+  description: Shows how to use the Accelerometer class, and allows the user to view the acceleration forces along the X-, Y-, and Z-axes for a 3-axis accelerometer.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -11,3 +15,4 @@ sample:
   - vb
   technologies:
   - windows
+  vssolution: /Samples/Accelerometer/cs/Accelerometer.sln

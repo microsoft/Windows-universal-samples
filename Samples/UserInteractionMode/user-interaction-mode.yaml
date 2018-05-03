@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: User interaction mode sample
-  description: This sample shows how to detect and respond to the user interaction mode.
-  generateZip: false
+  description: Shows how to detect and respond to the user interaction mode.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/UserInteractionMode/cs/UserInteractionMode.sln

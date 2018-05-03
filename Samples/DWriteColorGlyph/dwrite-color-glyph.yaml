@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: DirectWrite colored glyph sample
+  description: Shows how to implement a custom text renderer to handle different kinds of color glyph runs in DirectWrite and Direct2D.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/DWriteColorGlyph/cpp/DWriteColorTextRenderer.sln

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraVideoStabilization", "CameraVideoStabilization.csproj", "{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraVideoStabilization", "CameraVideoStabilization.csproj", "{F26A059D-8F09-55F1-89A9-0AF71892F722}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Debug|ARM.ActiveCfg = Debug|ARM
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Debug|ARM.Build.0 = Debug|ARM
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Debug|ARM.Deploy.0 = Debug|ARM
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Debug|x64.ActiveCfg = Debug|x64
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Debug|x64.Build.0 = Debug|x64
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Debug|x64.Deploy.0 = Debug|x64
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Debug|x86.ActiveCfg = Debug|x86
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Debug|x86.Build.0 = Debug|x86
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Debug|x86.Deploy.0 = Debug|x86
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Release|ARM.ActiveCfg = Release|ARM
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Release|ARM.Build.0 = Release|ARM
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Release|ARM.Deploy.0 = Release|ARM
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Release|x64.ActiveCfg = Release|x64
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Release|x64.Build.0 = Release|x64
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Release|x64.Deploy.0 = Release|x64
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Release|x86.ActiveCfg = Release|x86
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Release|x86.Build.0 = Release|x86
-		{0FAB6F08-BE70-56E4-9137-CAF66A89B9A9}.Release|x86.Deploy.0 = Release|x86
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Debug|ARM.ActiveCfg = Debug|ARM
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Debug|ARM.Build.0 = Debug|ARM
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Debug|ARM.Deploy.0 = Debug|ARM
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Debug|x64.ActiveCfg = Debug|x64
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Debug|x64.Build.0 = Debug|x64
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Debug|x64.Deploy.0 = Debug|x64
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Debug|x86.ActiveCfg = Debug|x86
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Debug|x86.Build.0 = Debug|x86
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Debug|x86.Deploy.0 = Debug|x86
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Release|ARM.ActiveCfg = Release|ARM
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Release|ARM.Build.0 = Release|ARM
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Release|ARM.Deploy.0 = Release|ARM
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Release|x64.ActiveCfg = Release|x64
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Release|x64.Build.0 = Release|x64
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Release|x64.Deploy.0 = Release|x64
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Release|x86.ActiveCfg = Release|x86
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Release|x86.Build.0 = Release|x86
+		{F26A059D-8F09-55F1-89A9-0AF71892F722}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

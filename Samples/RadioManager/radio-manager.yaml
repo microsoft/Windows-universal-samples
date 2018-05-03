@@ -1,11 +1,16 @@
 ### YamlMime:Sample
 sample:
 - name: Radios sample
-  description: This sample demonstrates: - Enumerating Radios on the device - Registering for state changes on individual Radios - Toggling Radio state changes ## System requirements Client: Windows 10 Server: Windows Server 2016 Technical Preview Phone: Windows 10 ## Build the sample 1.
-  generateZip: false
+  description: Shows how to use the Windows.Devices.Radios API to enumerate radios on a device, toggle radio state changes, and register for state changes on individual radios.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   - cpp
   technologies:
   - windows
+  vssolution: /Samples/RadioManager/cs/RadioManager.sln

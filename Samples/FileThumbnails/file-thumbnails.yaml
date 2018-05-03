@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: File and folder thumbnail sample
-  description: This sample shows how to retrieve thumbnails for files and folders.
-  generateZip: false
+  description: Shows how to retrieve thumbnails for files and folders using Windows.Storage.FileProperties.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/FileThumbnails/cs/FileThumbnails.sln

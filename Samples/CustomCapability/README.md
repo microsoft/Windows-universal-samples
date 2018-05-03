@@ -5,7 +5,7 @@
 
 # Custom Capability sample
 
-This sample demonstrates the use of custom capabilities.
+Shows the use of custom capabilities.
 
 Note that the SCCD file included with this sample is not valid,
 but it is included for instructional purposes.

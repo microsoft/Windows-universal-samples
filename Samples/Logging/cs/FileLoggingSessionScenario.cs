@@ -8,9 +8,8 @@ using System;
 using System.Threading.Tasks;
 using Windows.Foundation.Diagnostics;
 using Windows.Storage;
-using SDKTemplate;
 
-namespace LoggingCS
+namespace SDKTemplate
 {
     /// <summary>
     /// FileLoggingSessionScenario is a central singleton class which contains the logging-specific 

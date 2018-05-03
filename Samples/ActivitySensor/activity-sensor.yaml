@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Activity detection sensor sample
-  description: This sample demonstrates the use of the Windows.Devices.Sensors.ActivitySensor API.
-  generateZip: false
+  description: Shows how to use the ActivitySensor class to interact with the activity detection functionality on the system.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -11,3 +15,4 @@ sample:
   - vb
   technologies:
   - windows
+  vssolution: /Samples/ActivitySensor/cs/ActivitySensor.sln

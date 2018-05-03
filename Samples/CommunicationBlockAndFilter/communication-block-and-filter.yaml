@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: Communication blocking and filtering sample
-  description: This sample shows how to make a block and filter application for call and text message.
-  generateZip: false
+  description: Shows how to make a block and filter application for call and text message.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   technologies:
   - windows
+  vssolution: /Samples/CommunicationBlockAndFilter/cs/BlockAndFilter.sln

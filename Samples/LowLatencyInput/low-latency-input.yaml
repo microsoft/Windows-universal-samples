@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: Low latency input sample
-  description: This sample shows how to handle input on a dedicated input thread to achieve lowest input latency.
-  generateZip: false
+  description: Shows how to handle input on a dedicated input thread to achieve lowest input latency.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - cpp
   technologies:
   - windows
+  vssolution: /Samples/LowLatencyInput/cpp/LowLatencyInput.sln

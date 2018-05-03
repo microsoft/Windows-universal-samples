@@ -1,0 +1,16 @@
+### YamlMime:Sample
+sample:
+- name: Radial Controller sample
+  description: Shows how to use the RadialController class to create custom menu items for a Surface Dial device, control the haptic feedback, and configure the default system items.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/RadialController/cs/RadialController.sln

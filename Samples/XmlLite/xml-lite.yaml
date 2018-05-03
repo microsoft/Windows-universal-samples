@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: XmlLite sample
-  description: This sample demonstrates how to use XmlLite Reader and Writer.
-  generateZip: false
+  description: Shows how to use XmlLite Reader and Writer.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - cpp
   technologies:
   - windows
+  vssolution: /Samples/XmlLite/cpp/XmlLite.sln

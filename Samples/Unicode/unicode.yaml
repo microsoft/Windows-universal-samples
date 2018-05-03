@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Unicode string processing sample
-  description: Demonstrates how to use the UnicodeCharacters Windows Runtime class in processing Unicode properties in a string.
-  generateZip: false
+  description: Shows how to use the UnicodeCharacters class in processing Unicode properties in a string.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/Unicode/cs/Unicode.sln

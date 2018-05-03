@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magnetometer", "Magnetometer.csproj", "{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magnetometer", "Magnetometer.csproj", "{ED500F17-FA80-5B1B-B318-81149C2E90AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Debug|ARM.ActiveCfg = Debug|ARM
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Debug|ARM.Build.0 = Debug|ARM
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Debug|ARM.Deploy.0 = Debug|ARM
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Debug|x64.ActiveCfg = Debug|x64
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Debug|x64.Build.0 = Debug|x64
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Debug|x64.Deploy.0 = Debug|x64
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Debug|x86.ActiveCfg = Debug|x86
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Debug|x86.Build.0 = Debug|x86
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Debug|x86.Deploy.0 = Debug|x86
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Release|ARM.ActiveCfg = Release|ARM
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Release|ARM.Build.0 = Release|ARM
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Release|ARM.Deploy.0 = Release|ARM
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Release|x64.ActiveCfg = Release|x64
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Release|x64.Build.0 = Release|x64
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Release|x64.Deploy.0 = Release|x64
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Release|x86.ActiveCfg = Release|x86
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Release|x86.Build.0 = Release|x86
-		{88FCB170-E82A-5EAC-9826-EAC78AABFE6D}.Release|x86.Deploy.0 = Release|x86
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Debug|ARM.ActiveCfg = Debug|ARM
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Debug|ARM.Build.0 = Debug|ARM
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Debug|ARM.Deploy.0 = Debug|ARM
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Debug|x64.ActiveCfg = Debug|x64
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Debug|x64.Build.0 = Debug|x64
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Debug|x64.Deploy.0 = Debug|x64
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Debug|x86.ActiveCfg = Debug|x86
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Debug|x86.Build.0 = Debug|x86
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Debug|x86.Deploy.0 = Debug|x86
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Release|ARM.ActiveCfg = Release|ARM
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Release|ARM.Build.0 = Release|ARM
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Release|ARM.Deploy.0 = Release|ARM
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Release|x64.ActiveCfg = Release|x64
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Release|x64.Build.0 = Release|x64
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Release|x64.Deploy.0 = Release|x64
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Release|x86.ActiveCfg = Release|x86
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Release|x86.Build.0 = Release|x86
+		{ED500F17-FA80-5B1B-B318-81149C2E90AB}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
