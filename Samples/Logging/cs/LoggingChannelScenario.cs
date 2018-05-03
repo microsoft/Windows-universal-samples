@@ -7,7 +7,7 @@
 using System;
 using Windows.Foundation.Diagnostics;
 
-namespace LoggingCS
+namespace SDKTemplate
 {
     /// <summary>
     /// Demonstrate usage of LoggingChannel and LoggingActivity.

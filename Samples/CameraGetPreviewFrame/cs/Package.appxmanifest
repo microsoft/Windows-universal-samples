@@ -16,7 +16,7 @@
   <Properties>
     <DisplayName>CameraGetPreviewFrame</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
+    <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
 
   <Dependencies>

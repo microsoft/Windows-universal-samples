@@ -16,7 +16,7 @@
   <Properties>
     <DisplayName>Direct2D gradient mesh C++ sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
-    <Logo>storelogo-sdk.png</Logo>
+    <Logo>Assets\storelogo-sdk.png</Logo>
   </Properties>
 
   <Dependencies>

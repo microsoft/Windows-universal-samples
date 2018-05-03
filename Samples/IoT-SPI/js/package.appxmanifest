@@ -15,7 +15,7 @@
   <Properties>
     <DisplayName>SPI JS Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
-    <Logo>Assets\StoreLogo-sdk.png</Logo>
+    <Logo>images\storelogo-sdk.png</Logo>
   </Properties>
 
   <Dependencies>
@@ -37,8 +37,12 @@
         BackgroundColor="#00b2f0"
         Square150x150Logo="images\storelogo-sdk.png"
         Square44x44Logo="images\smalltile-sdk.png">
-        <uap:DefaultTile Wide310x150Logo="images\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="images\splash-sdk.png" />
+        <uap:DefaultTile>
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
       </uap:VisualElements>
     </Application>
   </Applications>

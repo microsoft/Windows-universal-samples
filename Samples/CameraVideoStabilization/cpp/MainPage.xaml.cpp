@@ -23,6 +23,7 @@ using namespace Windows::Foundation::Collections;
 using namespace Windows::Graphics::Display;
 using namespace Windows::Graphics::Imaging;
 using namespace Windows::Media;
+using namespace Windows::Media::Core;
 using namespace Windows::Phone::UI::Input;
 using namespace Windows::Storage;
 using namespace Windows::UI::Xaml;
@@ -277,7 +278,7 @@ task<void> MainPage::CreateVideoStabilizationEffectAsync()
     }
 
     // Create the definition, which will contain some initialization settings
-    auto definition = ref new Core::VideoStabilizationEffectDefinition();
+    auto definition = ref new VideoStabilizationEffectDefinition();
 
     // Add the effect to the video record stream
     return create_task(_mediaCapture->AddVideoEffectAsync(definition, Capture::MediaStreamType::VideoRecord))
@@ -285,11 +286,11 @@ task<void> MainPage::CreateVideoStabilizationEffectAsync()
     {
         WriteLine("VS effect added to pipeline");
 
-        _videoStabilizationEffect = static_cast<Core::VideoStabilizationEffect^>(mediaExtension);
+        _videoStabilizationEffect = static_cast<VideoStabilizationEffect^>(mediaExtension);
 
         // Subscribe to notifications for changes in the enabled state for the effect
         _videoStabilizationEnabledToken = 
-            _videoStabilizationEffect->EnabledChanged += ref new TypedEventHandler<Core::VideoStabilizationEffect^, Core::VideoStabilizationEffectEnabledChangedEventArgs^>(this, &MainPage::VideoStabilizationEffect_EnabledChanged);
+            _videoStabilizationEffect->EnabledChanged += ref new TypedEventHandler<VideoStabilizationEffect^, VideoStabilizationEffectEnabledChangedEventArgs^>(this, &MainPage::VideoStabilizationEffect_EnabledChanged);
 
         // Enable the effect
         _videoStabilizationEffect->Enabled = true;

@@ -64,7 +64,7 @@
         <!--#region Navigation Panel -->
         <Button Style="{StaticResource SplitViewTogglePaneButtonStyle}"
                     VerticalAlignment="Center"
-                    Click="ShowSliptView"/>
+                    Click="ShowSplitView"/>
         <TextBlock Text="Edge Tapped ListView Sample"
                        VerticalAlignment="Center"
                        Style="{ThemeResource TitleTextBlockStyle}" 
