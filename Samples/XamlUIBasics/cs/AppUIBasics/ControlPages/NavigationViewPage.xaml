@@ -45,6 +45,9 @@
                     <Run Text="&lt;NavigationViewItemSeparator/&gt;"/>
                 </Paragraph>
                 <Paragraph TextIndent='24'>
+                    <Run Text="&lt;NavigationViewItemHeader Content=&quot;Actions&quot; /&gt;"/>
+                </Paragraph>    
+                <Paragraph TextIndent='24'>
                     <Run Text="&lt;NavigationViewItem Icon=&quot;Save&quot; Content=&quot;Menu Item2&quot; Tag=&quot;SamplePage2&quot; /&gt;"/>
                 </Paragraph>
                 <Paragraph TextIndent='24'>
@@ -106,6 +109,9 @@
                 <Paragraph TextIndent='24'>
                     <Run Text="&lt;NavigationViewItemSeparator/&gt;"/>
                 </Paragraph>
+                <Paragraph TextIndent='24'>
+                    <Run Text="&lt;NavigationViewItemHeader Content=&quot;Actions&quot; /&gt;"/>
+                </Paragraph> 
                 <Paragraph TextIndent='24'>
                     <Run Text="&lt;NavigationViewItem Icon=&quot;Save&quot; Content=&quot;Menu Item2&quot; Tag=&quot;SamplePage2&quot; /&gt;"/>
                 </Paragraph>
