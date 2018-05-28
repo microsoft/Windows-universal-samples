@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.props" Condition="Exists('packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.props')" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0834b002-6027-5680-b4f7-0d7efa93ad9a}</ProjectGuid>
     <Keyword>HolographicApp</Keyword>
@@ -169,7 +168,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Content\PixelShader.hlsl">
@@ -218,16 +216,8 @@
     <Import Project="$(VSINSTALLDIR)\Common7\IDE\Extensions\Microsoft\VsGraphics\ImageContentTask.targets" />
     <Import Project="$(VSINSTALLDIR)\Common7\IDE\Extensions\Microsoft\VsGraphics\MeshContentTask.targets" />
     <Import Project="$(VSINSTALLDIR)\Common7\IDE\Extensions\Microsoft\VsGraphics\ShaderGraphContentTask.targets" />
-    <Import Project="packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.targets" Condition="Exists('packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.targets')" />
   </ImportGroup>
   <PropertyGroup>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);packages\cppwinrt.2017.10.13.1\build\native\include</IncludePath>
   </PropertyGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.props'))" />
-    <Error Condition="!Exists('packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.targets'))" />
-  </Target>
 </Project>
