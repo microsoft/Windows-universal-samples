@@ -33,9 +33,9 @@
                     <Paragraph>&lt;AppBarButton Icon="Sort" IsCompact="True"&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;AppBarButton.Flyout&gt;</Paragraph>
                     <Paragraph TextIndent="24">&lt;MenuFlyout&gt;</Paragraph>
-                    <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="By rating" Click="MenuFlyoutItem_Click" Tag="rating"&gt;</Paragraph>
-                    <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="By match" Click="MenuFlyoutItem_Click" Tag="match"&gt;</Paragraph>
-                    <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="By distance" Click="MenuFlyoutItem_Click" Tag="distance&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="By rating" Click="MenuFlyoutItem_Click" Tag="rating"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="By match" Click="MenuFlyoutItem_Click" Tag="match"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="By distance" Click="MenuFlyoutItem_Click" Tag="distance"/&gt;</Paragraph>
                     <Paragraph TextIndent="24">&lt;/MenuFlyout&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;/AppBarButton.Flyout&gt;</Paragraph>
                     <Paragraph>&lt;/AppBarButton&gt;</Paragraph>
