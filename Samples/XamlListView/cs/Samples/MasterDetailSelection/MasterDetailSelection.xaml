@@ -160,7 +160,7 @@
         <!--#region Navigation across the samples -->
         <Button Style="{StaticResource SplitViewTogglePaneButtonStyle}"
                     VerticalAlignment="Center"
-                    Click="ShowSliptView"/>
+                    Click="ShowSplitView"/>
         <TextBlock Text="Master/Details Selection" 
                    Style="{ThemeResource  TitleTextBlockStyle}" 
                    VerticalAlignment="Center"

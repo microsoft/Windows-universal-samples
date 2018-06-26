@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Tag-along hologram sample
+  description: This sample demonstrates how to render a hologram that follows the user.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows

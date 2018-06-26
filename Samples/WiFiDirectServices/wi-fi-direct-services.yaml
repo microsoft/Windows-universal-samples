@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Wi-Fi Direct services sample
+  description: This sample shows how to use the Wi-Fi Direct services API to publish and discover services over Wi-Fi Direct.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows

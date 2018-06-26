@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Pull-to-refresh sample
+  description: This sample shows how to implement a "pull-to-refresh" feature for a scrollable list Note The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

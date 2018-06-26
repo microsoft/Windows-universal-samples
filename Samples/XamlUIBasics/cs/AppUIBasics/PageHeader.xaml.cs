@@ -1,23 +1,20 @@
-﻿using AppUIBasics.Common;
+﻿//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
 using AppUIBasics.Data;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Windows.Input;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Foundation.Metadata;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace AppUIBasics
 {
@@ -30,30 +27,57 @@ namespace AppUIBasics
             set { SetValue(TitleProperty, value); }
         }
 
-        public static readonly DependencyProperty WideLayoutThresholdProperty = DependencyProperty.Register("WideLayoutThreshold", typeof(double), typeof(PageHeader), new PropertyMetadata(600));
-        public double WideLayoutThreshold
+        public double BackgroundColorOpacity
         {
-            get { return (double)GetValue(WideLayoutThresholdProperty); }
-            set
-            {
-                SetValue(WideLayoutThresholdProperty, value);
-                WideLayoutTrigger.MinWindowWidth = value;
-            }
+            get { return (double)GetValue(BackgroundColorOpacityProperty); }
+            set { SetValue(BackgroundColorOpacityProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for BackgroundColorOpacity.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BackgroundColorOpacityProperty =
+            DependencyProperty.Register("BackgroundColorOpacity", typeof(double), typeof(PageHeader), new PropertyMetadata(0.0));
+
+
+        public double AcrylicOpacity
+        {
+            get { return (double)GetValue(AcrylicOpacityProperty); }
+            set { SetValue(AcrylicOpacityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for BackgroundColorOpacity.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AcrylicOpacityProperty =
+            DependencyProperty.Register("AcrylicOpacity", typeof(double), typeof(PageHeader), new PropertyMetadata(0.3));
+
+
+        public CommandBar TopCommandBar
+        {
+            get { return topCommandBar; }
+        }
+
+        public UIElement TitlePanel
+        {
+            get { return pageTitle; }
+        }
+
+        public Action ToggleThemeAction { get; set; }
 
         public PageHeader()
         {
             this.InitializeComponent();
         }
 
-        private async void controlsSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        public void UpdateBackground(bool isFilteredPage)
+        {
+            VisualStateManager.GoToState(this, isFilteredPage ? "FilteredPage" : "NonFilteredPage", false);
+        }
+
+        private void OnControlsSearchBoxTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                var groups = await AppUIBasics.Data.ControlInfoDataSource.GetGroupsAsync();
                 var suggestions = new List<ControlInfoDataItem>();
 
-                foreach (var group in groups)
+                foreach (var group in ControlInfoDataSource.Instance.Groups)
                 {
                     var matchingItems = group.Items.Where(
                         item => item.Title.IndexOf(sender.Text, StringComparison.CurrentCultureIgnoreCase) >= 0);
@@ -64,13 +88,17 @@ namespace AppUIBasics
                     }
                 }
                 if (suggestions.Count > 0)
+                {
                     controlsSearchBox.ItemsSource = suggestions.OrderByDescending(i => i.Title.StartsWith(sender.Text, StringComparison.CurrentCultureIgnoreCase)).ThenBy(i => i.Title);
+                }
                 else
+                {
                     controlsSearchBox.ItemsSource = new string[] { "No results found" };
+                }
             }
         }
 
-        private void controlsSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        private void OnControlsSearchBoxQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
             if (args.ChosenSuggestion != null && args.ChosenSuggestion is ControlInfoDataItem)
             {
@@ -83,9 +111,49 @@ namespace AppUIBasics
             }
         }
 
-        private void splitViewToggle_Click(object sender, RoutedEventArgs e)
+        private void OnSearchButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationRootPage.RootSplitView.IsPaneOpen = !NavigationRootPage.RootSplitView.IsPaneOpen;
+            controlsSearchBox.Visibility = Visibility.Visible;
+            bool isFocused = controlsSearchBox.Focus(FocusState.Programmatic);
+            if (!isFocused)
+            {
+                controlsSearchBox.UpdateLayout();
+                controlsSearchBox.Focus(FocusState.Programmatic);
+            }
+            searchButton.Visibility = Visibility.Collapsed;
+            commandBarBorder.Visibility = Visibility.Collapsed;
+        }
+
+        private void OnControlsSearchBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Window.Current.Bounds.Width <= 640)
+            {
+                controlsSearchBox.Visibility = Visibility.Collapsed;
+                commandBarBorder.Visibility = Visibility.Visible;
+                searchButton.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void OnThemeButtonKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Right)
+            {
+                var nextElement = FocusManager.FindNextElement(FocusNavigationDirection.Right);
+                if (nextElement == null)
+                {
+                    controlsSearchBox.Focus(FocusState.Programmatic);
+                }
+            }
+        }
+
+        private void OnThemeButtonClick(object sender, RoutedEventArgs e)
+        {
+            ToggleThemeAction?.Invoke();
+        }
+
+        private void KeyboardAccelerator_Invoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+        {
+            controlsSearchBox.Focus(FocusState.Keyboard);
         }
     }
 }

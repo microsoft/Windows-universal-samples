@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Audio categories sample
+  description: This sample demonstrates how to create apps that use various audio categories.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - js
+  - vb
+  technologies:
+  - windows

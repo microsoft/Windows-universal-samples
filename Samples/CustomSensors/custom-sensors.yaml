@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Custom sensors sample
+  description: This sample demonstrates the use of the Windows.Devices.Sensors.Custom sensor API.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

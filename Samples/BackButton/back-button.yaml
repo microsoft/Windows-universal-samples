@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Back Button Sample
+  description: This sample demonstrates how to set up an event handler for the back button event and how to enable the title bar back button for when the app is in windowed Desktop mode.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - vb
+  technologies:
+  - windows

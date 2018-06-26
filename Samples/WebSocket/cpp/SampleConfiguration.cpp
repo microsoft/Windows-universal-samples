@@ -25,7 +25,8 @@ using namespace Windows::Web;
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>  
 {
     { "UTF-8 text messages", "SDKTemplate.Scenario1" },
-    { "Binary data stream", "SDKTemplate.Scenario2" }
+    { "Binary data stream", "SDKTemplate.Scenario2" },
+    { "Client authentication", "SDKTemplate.Scenario3" },
 }; 
 
 Uri^ MainPage::TryGetUri(String^ uriString)

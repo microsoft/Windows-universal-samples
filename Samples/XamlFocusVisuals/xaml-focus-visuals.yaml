@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Focus visuals sample
+  description: This sample shows how to take advantage of the new system drawn focus visuals, or to create your own custom focus visuals if the system drawn ones do not fit your needs.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

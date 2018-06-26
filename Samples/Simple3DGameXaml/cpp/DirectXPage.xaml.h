@@ -15,7 +15,7 @@
 #include "GameMain.h"
 #include "ProductItem.h"
 
-// When submitting the app to the store, disable the Store Simulator by commenting out this definition.
+// When submitting the app to the Microsoft Store, disable the Store Simulator by commenting out this definition.
 #define USE_STORE_SIMULATOR 1
 
 namespace Simple3DGameXaml

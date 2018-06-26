@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: File search sample
+  description: This sample shows how to query files in a location (like a folder, library, device, or network location).
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

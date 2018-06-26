@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Date and time formatting sample
+  description: This sample demonstrates how to use the DateTimeFormatter class in the Windows.Globalization.DateTimeFormatting namespace to display dates and times according to the user's preferences.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

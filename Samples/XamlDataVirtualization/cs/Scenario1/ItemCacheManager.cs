@@ -298,7 +298,9 @@ namespace DataVirtualizationSample
                 else
                 {
                     // Cancel the existing request
+#if TRACE_DATASOURCE
                     Debug.WriteLine(">" + debugName + " Cancelling request: " + requestInProgress.FirstIndex + "->" + requestInProgress.LastIndex);
+#endif
                     cancelTokenSource.Cancel();
                 }
             }

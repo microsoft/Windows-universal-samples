@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap4="http://schemas.microsoft.com/appx/manifest/uap/windows10/4"
+  IgnorableNamespaces="uap mp uap4"
+  >
+  <Identity Name="Microsoft.SDKSamples.CustomCapability.JS" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.0"/>
+  <mp:PhoneIdentity PhoneProductId="fc81cb9a-b33f-4520-9048-680ee0dd024b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <Properties>
+    <DisplayName>CustomCapability</DisplayName>
+    <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+    <Logo>Assets\StoreLogo-sdk.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.15063.0" MaxVersionTested="10.0.16299.0"/>
+  </Dependencies>
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+  <Applications>
+    <Application Id="App" StartPage="default.html">
+      <uap:VisualElements
+        DisplayName="Custom Capability JS Sample"
+        Square150x150Logo="images\storelogo-sdk.png"
+        Square44x44Logo="images\smalltile-sdk.png"
+        Description="Custom Capability JS Sample"
+        BackgroundColor="#00b2f0"
+        >
+        <uap:SplashScreen Image="images\splash-sdk.png"/>
+        <uap:DefaultTile>
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <uap4:CustomCapability Name="microsoft.hsaTestCustomCapability_q536wpkpf5cy2"/>
+  </Capabilities>
+</Package>

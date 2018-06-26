@@ -1,0 +1,13 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+.StepBox {
+    border:1px solid white;
+    padding:5px;
+    margin-bottom:10px
+}
+
+p.Heading {
+    font-weight: bold;
+}

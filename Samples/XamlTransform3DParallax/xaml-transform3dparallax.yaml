@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Transform3D parallax sample
+  description: This sample shows how to implement parallax effects using the new Transform3D API.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows

@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Language font mapping sample
+  description: This sample demonstrates how to obtain language-specific font recommendations using the LanguageFontGroup class in the Windows.Globalization.Fonts namespace.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

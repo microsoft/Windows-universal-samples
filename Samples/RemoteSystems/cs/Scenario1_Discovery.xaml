@@ -63,6 +63,9 @@
                         <CheckBox Content="Filter by system type" x:Name="SystemTypeOptions" Margin="0,10,0,0"/>
                         <GridView Margin="20,0,0,0" Visibility="{Binding ElementName=SystemTypeOptions, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <CheckBox Content="Desktop" x:Name="DesktopCheckBox"/>
+                            <CheckBox Content="Tablet" x:Name="TabletCheckBox"/>
+                            <CheckBox Content="Laptop" x:Name="LaptopCheckBox"/>
+                            <CheckBox Content="Iot" x:Name="IotCheckBox"/>
                             <CheckBox Content="Holographic" x:Name="HolographicCheckBox"/>
                             <CheckBox Content="Hub" x:Name="HubCheckBox"/>
                             <CheckBox Content="Phone" x:Name="PhoneCheckBox"/>
@@ -99,7 +102,8 @@
                         <TextBox x:Name="HostNameTextBox" Width="160" Margin="5,0,0,0"/>
                     </StackPanel>
                     <Button Content="Search for systems" x:Name="SearchButton" Click="Search_Clicked" Margin="0,10,0,0"/>
-                    <ListBox Width="160" ItemsSource="{Binding SystemList}" Margin="5" x:Name="SystemListBox" HorizontalAlignment="Left">
+                    <TextBlock x:Name="DeviceInfoTextBlock" Text="Select a device from the list to see its properties." Visibility="Collapsed"/>
+                    <ListBox Width="160" ItemsSource="{Binding SystemList}" Margin="5" x:Name="SystemListBox" HorizontalAlignment="Left" SelectionChanged="SystemListBox_SelectionChanged">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding DisplayName}"/>

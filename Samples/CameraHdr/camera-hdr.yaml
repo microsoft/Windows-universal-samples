@@ -1,0 +1,13 @@
+### YamlMime:Sample
+sample:
+- name: High dynamic range sample
+  description: This sample applies an end-to-end approach to demonstrate how to write a camera application using the Windows.Media.Capture API in conjunction with orientation sensors to cover the functions that most camera apps will require.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  - vb
+  technologies:
+  - windows

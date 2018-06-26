@@ -20,7 +20,7 @@
 #include "Scenario1_Download.g.h"
 #include "MainPage.xaml.h"
 
-namespace BackgroundTransfer
+namespace SDKTemplate
 {
     struct GuidComparer
     {

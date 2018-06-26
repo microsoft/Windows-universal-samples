@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: App services sample
+  description: This sample demonstrates how an app can provide a service that other apps can consume.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - vb
+  technologies:
+  - windows

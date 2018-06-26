@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: State triggers sample
+  description: Showcases extensible StateTriggers with a couple of different custom triggers built into a scenario app.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

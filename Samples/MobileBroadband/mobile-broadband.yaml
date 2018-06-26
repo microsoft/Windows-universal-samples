@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Mobile broadband sample
+  description: This sample shows how to use the Mobile Broadband Networking API (Windows.Networking.NetworkOperators) using following scenarios: - Displays device information by account - Listening for changes on mobile broadband devices by account - Displays device information by modem - Enumerates device services - Display SIM card information ## Prerequisites This sample accesses privileged APIs used by mobile broadband operators.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

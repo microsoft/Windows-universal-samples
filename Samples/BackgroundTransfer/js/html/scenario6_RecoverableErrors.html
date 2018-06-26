@@ -1,0 +1,53 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="/js/scenario6_RecoverableErrors.js"></script>
+</head>
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">Recoverable errors</div>
+    <p>
+        Apps can specify a set of WebErrorStatus values that can be resolved by the app, possibly with user
+        intervention. Instead of failing immediately, downloads transition to pausedRecoverableWebErrorStatus
+        if they encounter any of the app-specified errors, at which point they can be reconfigured and retried without
+        the loss of already-downloaded content.
+    </p>
+    <p>
+        The sample server provided with this sample provides a time-limited URL.
+        If you check the box below, then
+        when the URL expires, the app switches to different URL to continue downloading.
+    </p>
+    <p>
+        <label for="serverAddressField">Remote address: </label>
+        <input type="text" class="win-textbox" id="serverAddressField" value="http://localhost/BackgroundTransferSample/recoverableErrors.aspx?shouldExpire=yes" readonly />
+    </p>
+    <p>
+        <label for="fileNameField">Local file name: </label>
+        <input type="text" class="win-textbox" id="fileNameField" value="RecoverableErrorsFile.txt" />
+    </p>
+    <p>
+        <label for="configureRecoverableErrorsCheckBox">
+            <input type="checkbox" class="win-checkbox" id="configureRecoverableErrorsCheckBox" checked />
+            Recover from expired URL
+        </label>
+    </p>
+    <p>
+        <button class="win-button" id="startDownloadButton">Start</button>
+    </p>
+    <div id="downloadedInfoText"></div>
+    <div>Download status: <span id="downloadStatusText"></span></div>
+</body>
+</html>

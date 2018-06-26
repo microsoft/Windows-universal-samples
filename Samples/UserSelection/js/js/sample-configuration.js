@@ -3,7 +3,7 @@
 (function () {
     "use strict";
 
-    var sampleTitle = "User Selection sample for Windows Store apps";
+    var sampleTitle = "User Selection sample";
 
     var scenarios = [ // change the scenario names later when done with sample
         { url: "/html/scenario1.html", title: "All the attribute values - Parent unselectable" },

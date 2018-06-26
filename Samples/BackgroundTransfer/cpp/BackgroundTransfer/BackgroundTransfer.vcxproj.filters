@@ -18,9 +18,11 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="Scenario1_Download.xaml.cpp" />
-    <ClCompile Include="Scenario4_CompletionGroups.xaml.cpp" />
     <ClCompile Include="Scenario2_Upload.xaml.cpp" />
     <ClCompile Include="Scenario3_Notifications.xaml.cpp" />
+    <ClCompile Include="Scenario4_CompletionGroups.xaml.cpp" />
+    <ClCompile Include="Scenario5_RandomAccess.xaml.cpp" />
+    <ClCompile Include="Scenario6_RecoverableErrors.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -28,9 +30,11 @@
     <ClInclude Include="..\..\..\..\SharedContent\cpp\MainPage.xaml.h" />
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_Download.xaml.h" />
-    <ClInclude Include="Scenario4_CompletionGroups.xaml.h" />
     <ClInclude Include="Scenario2_Upload.xaml.h" />
     <ClInclude Include="Scenario3_Notifications.xaml.h" />
+    <ClInclude Include="Scenario4_CompletionGroups.xaml.h" />
+    <ClInclude Include="Scenario5_RandomAccess.xaml.h" />
+    <ClInclude Include="Scenario6_RecoverableErrors.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -44,6 +48,8 @@
     <Page Include="..\..\shared\Scenario2_Upload.xaml" />
     <Page Include="..\..\shared\Scenario3_Notifications.xaml" />
     <Page Include="..\..\shared\Scenario4_CompletionGroups.xaml" />
+    <Page Include="..\..\shared\Scenario5_RandomAccess.xaml" />
+    <Page Include="..\..\shared\Scenario6_RecoverableErrors.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\SharedContent\media\microsoft-sdk.png">

@@ -517,8 +517,8 @@ void HolographicMRCSampleMain::OnButtonInitTapped()
     {
         Concurrency::create_task(m_mediaCapture->InitializeAsync()).then([this]()
         {
-            m_photoButton->SetEnabled(true);
-            m_videoButton->SetEnabled(true);
+            m_photoButton->SetEnabled(m_mediaCapture->CanTakePhoto());
+            m_videoButton->SetEnabled(m_mediaCapture->CanToggleVideo());
             m_hologramButton->SetEnabled(true);
             m_sysAudioButton->SetEnabled(true);
         });
@@ -544,7 +544,7 @@ void HolographicMRCSampleMain::OnButtonVideoTapped()
 
                 m_initButton->SetEnabled(false);
                 m_photoButton->SetEnabled(m_mediaCapture->CanTakePhoto());
-                m_videoButton->SetEnabled(true);
+                m_videoButton->SetEnabled(m_mediaCapture->CanToggleVideo());
                 m_hologramButton->SetEnabled(true);
                 m_sysAudioButton->SetEnabled(true);
             });
@@ -565,7 +565,7 @@ void HolographicMRCSampleMain::OnButtonVideoTapped()
 
                 m_initButton->SetEnabled(false);
                 m_photoButton->SetEnabled(m_mediaCapture->CanTakePhoto());
-                m_videoButton->SetEnabled(true);
+                m_videoButton->SetEnabled(m_mediaCapture->CanToggleVideo());
                 m_hologramButton->SetEnabled(false);
                 m_sysAudioButton->SetEnabled(false);
             });
@@ -587,7 +587,7 @@ void HolographicMRCSampleMain::OnButtonPhotoTapped()
         {
             m_initButton->SetEnabled(false);
             m_photoButton->SetEnabled(m_mediaCapture->CanTakePhoto());
-            m_videoButton->SetEnabled(true);
+            m_videoButton->SetEnabled(m_mediaCapture->CanToggleVideo());
             m_hologramButton->SetEnabled(true);
             m_sysAudioButton->SetEnabled(true);
         });

@@ -51,10 +51,5 @@ byte* GetArrayFromBuffer(Windows::Storage::Streams::IBuffer^ buffer)
 
 void NotifyStatusMessage(Platform::String^ message, SDKTemplate::NotifyType messageType)
 {
-    SDKTemplate::MainPage::Current->Dispatcher->RunAsync(
-        Windows::UI::Core::CoreDispatcherPriority::Normal,
-        ref new Windows::UI::Core::DispatchedHandler(
-            [message, messageType]() {
-        SDKTemplate::MainPage::Current->NotifyUser(message, messageType);
-    }));
+    SDKTemplate::MainPage::Current->NotifyUser(message, messageType);
 }

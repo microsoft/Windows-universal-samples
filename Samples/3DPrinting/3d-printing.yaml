@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: 3D Printing Sample
+  description: This sample demonstrates a number of different tasks associated with 3D printing and editing the 3MF file type.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

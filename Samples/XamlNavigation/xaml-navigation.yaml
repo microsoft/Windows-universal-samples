@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Navigation menu (XAML) sample
+  description: This sample demonstrates how to provide a top-level navigation menu to users (a.k.a.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows

@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>38eda684-da92-58f7-832b-f5aeca58c509</ProjectGuid>
+    <ProjectGuid>18903948-078b-5cd3-b3a1-ebe05f324f51</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
@@ -45,8 +45,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
@@ -57,8 +57,12 @@
     <Content Include="..\..\..\SharedContent\js\default.html">
       <Link>default.html</Link>
     </Content>
+    <Content Include="..\shared\clientCert.pfx">
+      <Link>data\clientCert.pfx</Link>
+    </Content>
     <Content Include="html\scenario1-utf8.html" />
     <Content Include="html\scenario2-binary.html" />
+    <Content Include="html\scenario3-clientCertificate.html" />
     <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>images\microsoft-sdk.png</Link>
     </Content>
@@ -86,6 +90,7 @@
     <Content Include="js\sample-configuration.js" />
     <Content Include="js\scenario1-utf8.js" />
     <Content Include="js\scenario2-binary.js" />
+    <Content Include="js\scenario3-clientCertificate.js" />
     <Content Include="..\..\..\SharedContent\js\Microsoft.WinJS\css\ui-dark.css">
       <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>
     </Content>

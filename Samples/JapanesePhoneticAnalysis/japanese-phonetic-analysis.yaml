@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Japanese phonetic analysis sample
+  description: This sample demonstrates how to analyze Japanese texts and retrieves words or segments in the text by using the JapanesePhoneticAnalyzer class.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

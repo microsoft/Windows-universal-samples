@@ -45,14 +45,13 @@ void DeviceReadWrite::ReadBlock_Click(Object^ sender, RoutedEventArgs^ e)
     auto button = safe_cast<Button^>(sender);
     button->IsEnabled = false;
 
-    // create a data reader and load data into it from the input stream of the 
-    // device.
     auto dataReader = ref new DataReader(fx2Device->InputStream);
 
     int counter = readCounter++;
-
     LogMessage(L"Read " + counter.ToString() + L" begin");
 
+    // load the data reader from the stream.  For purposes of this 
+    // sample, assume all messages read are < 64 bytes
     create_task(dataReader->LoadAsync(64))
         .then([this, dataReader, counter, button](unsigned int count)
     {

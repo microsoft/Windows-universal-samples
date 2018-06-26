@@ -1,0 +1,199 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+
+  <!--
+    ============================================================
+                                        FxCompile
+
+    Compile .hlsl shaders files into .cso.
+
+        [IN]
+        ItemType of EffectShader, VertexShader, PixelShader, GeometryShader, 
+        HullShader, DomainShader, ComputeShader, and TextureShader
+
+        [OUT]
+        @(FxCompileOutput) - a list of .cso files 
+    ============================================================
+    -->
+
+  <UsingTask
+    TaskName="FxCompile"
+    TaskFactory="CodeTaskFactory"
+    AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" >
+    <ParameterGroup>
+      <Source ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+      <ShaderType/>
+      <ShaderModel/>
+      <AssemblerOutput/>
+      <AssemblerOutputFile/>
+      <VariableName/>
+      <HeaderFileOutput/>
+      <ObjectFileOutput/>
+      <PreprocessorDefinitions ParameterType="System.String[]"/>
+      <AdditionalIncludeDirectories ParameterType="System.String[]"/>
+      <SuppressStartupBanner ParameterType="System.Boolean"/>
+      <EntryPointName/>
+      <TreatWarningAsError ParameterType="System.Boolean"/>
+      <DisableOptimizations ParameterType="System.Boolean"/>
+      <EnableDebuggingInformation ParameterType="System.Boolean"/>
+      <SdkToolsPath/>
+    </ParameterGroup>
+    <Task>
+      <Reference Include="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" />
+      <Using Namespace="System"/>
+      <Using Namespace="System.IO"/>
+      <Using Namespace="Microsoft.Build.Tasks"/>
+      <Code Type="Class" Language="cs" Source="$(MSBuildThisFileDirectory)FxCompile.cs">
+      </Code>
+    </Task>
+  </UsingTask> 
+    
+    
+  <PropertyGroup>
+    <PrepareResourcesDependsOn>
+      $(PrepareResourcesDependsOn);
+      FxCompile;
+    </PrepareResourcesDependsOn>
+  </PropertyGroup>
+   
+  <ItemGroup>
+    <AvailableItemName Include="EffectShader" />
+    <AvailableItemName Include="VertexShader" />
+    <AvailableItemName Include="PixelShader" />
+    <AvailableItemName Include="GeometryShader" />
+    <AvailableItemName Include="HullShader" />
+    <AvailableItemName Include="DomainShader" />
+    <AvailableItemName Include="ComputeShader" />
+    <AvailableItemName Include="TextureShader" />
+  </ItemGroup>
+
+  <Target Name="AssignItemsFxCompile" >
+
+    <AssignTargetPath Files="@(EffectShader)" RootFolder="$(MSBuildProjectDirectory)">
+      <Output TaskParameter="AssignedFiles" ItemName="_EffectShaderWithTargetPath" />
+    </AssignTargetPath>
+
+    <AssignTargetPath Files="@(VertexShader)" RootFolder="$(MSBuildProjectDirectory)">
+      <Output TaskParameter="AssignedFiles" ItemName="_VertexShaderWithTargetPath" />
+    </AssignTargetPath>
+
+    <AssignTargetPath Files="@(PixelShader)" RootFolder="$(MSBuildProjectDirectory)">
+      <Output TaskParameter="AssignedFiles" ItemName="_PixelShaderWithTargetPath" />
+    </AssignTargetPath>
+
+    <AssignTargetPath Files="@(GeometryShader)" RootFolder="$(MSBuildProjectDirectory)">
+      <Output TaskParameter="AssignedFiles" ItemName="_GeometryShaderWithTargetPath" />
+    </AssignTargetPath>
+
+    <AssignTargetPath Files="@(HullShader)" RootFolder="$(MSBuildProjectDirectory)">
+      <Output TaskParameter="AssignedFiles" ItemName="_HullShaderWithTargetPath" />
+    </AssignTargetPath>
+
+    <AssignTargetPath Files="@(DomainShader)" RootFolder="$(MSBuildProjectDirectory)">
+      <Output TaskParameter="AssignedFiles" ItemName="_DomainShaderWithTargetPath" />
+    </AssignTargetPath>
+
+    <AssignTargetPath Files="@(ComputeShader)" RootFolder="$(MSBuildProjectDirectory)">
+      <Output TaskParameter="AssignedFiles" ItemName="_ComputeShaderWithTargetPath" />
+    </AssignTargetPath>
+
+    <AssignTargetPath Files="@(TextureShader)" RootFolder="$(MSBuildProjectDirectory)">
+      <Output TaskParameter="AssignedFiles" ItemName="_TextureShaderWithTargetPath" />
+    </AssignTargetPath>
+
+    <ItemGroup>
+      <_FxCompile Include="@(_EffectShaderWithTargetPath)">
+        <ShaderType>Effect</ShaderType>
+        <ShaderModel Condition="'$(ShaderModel)' == ''">5_0</ShaderModel>
+      </_FxCompile>
+      <_FxCompile Include="@(_VertexShaderWithTargetPath)">
+        <ShaderType>Vertex</ShaderType>
+        <ShaderModel Condition="'$(ShaderModel)' == ''">5_0</ShaderModel>
+      </_FxCompile>
+      <_FxCompile Include="@(_PixelShaderWithTargetPath)">
+        <ShaderType>Pixel</ShaderType>
+        <ShaderModel Condition="'$(ShaderModel)' == ''">5_0</ShaderModel>
+      </_FxCompile>
+      <_FxCompile Include="@(_GeometryShaderWithTargetPath)">
+        <ShaderType>Geometry</ShaderType>
+        <ShaderModel Condition="'$(ShaderModel)' == ''">5_0</ShaderModel>
+      </_FxCompile>
+      <_FxCompile Include="@(_HullShaderWithTargetPath)">
+        <ShaderType>Hull</ShaderType>
+        <ShaderModel Condition="'$(ShaderModel)' == ''">5_0</ShaderModel>
+      </_FxCompile>
+      <_FxCompile Include="@(_DomainShaderWithTargetPath)">
+        <ShaderType>Domain</ShaderType>
+        <ShaderModel Condition="'$(ShaderModel)' == ''">5_0</ShaderModel>
+      </_FxCompile>
+      <_FxCompile Include="@(_ComputeShaderWithTargetPath)">
+        <ShaderType>Compute</ShaderType>
+        <ShaderModel Condition="'$(ShaderModel)' == ''">5_0</ShaderModel>
+      </_FxCompile>
+      <_FxCompile Include="@(_TextureShaderWithTargetPath)">
+        <ShaderType>Texture</ShaderType>
+        <ShaderModel Condition="'$(ShaderModel)' == ''">5_0</ShaderModel>
+      </_FxCompile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <_FxCompile>
+        <EnableDebuggingInformation Condition="'$(DebugSymbols)' == 'true'">true</EnableDebuggingInformation>
+        <TargetDirectory>$([System.IO.Path]::GetDirectoryName(%(_FxCompile.TargetPath)))</TargetDirectory>
+        <ObjectFileOutput Condition="'$(ObjectFileOutput)' == ''">$(IntermediateOutputPath)$([System.IO.Path]::ChangeExtension(%(_FxCompile.TargetPath), '.cso'))</ObjectFileOutput>
+        <EntryPointName Condition="'$(EntryPointName)' == ''">main</EntryPointName>
+        <SuppressStartupBanner Condition="'$(SuppressStartupBanner)' == ''">true</SuppressStartupBanner>
+        <ShaderModel Condition="'$(ShaderModel)' != ''">$(ShaderModel)</ShaderModel>
+      </_FxCompile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ReferenceCopyLocalPaths Include="@(_FxCompile->'%(ObjectFileOutput)'->'%(FullPath)')">
+        <DestinationSubDirectory Condition=" %(_FxCompile.TargetDirectory) != '' " >%(_FxCompile.TargetDirectory)\</DestinationSubDirectory>
+      </ReferenceCopyLocalPaths>
+    </ItemGroup>
+    
+    <PropertyGroup>
+      <FXCPath Condition="Exists('$(MSBuildProgramFiles32)\Windows Kits\10\bin\$(TargetPlatformVersion)\x86\fxc.exe')">$(MSBuildProgramFiles32)\Windows Kits\10\bin\$(TargetPlatformVersion)\x86</FXCPath>
+      <FXCPath Condition="'$(FXCPath)' == ''">$(MSBuildProgramFiles32)\Windows Kits\10\bin\x86</FXCPath>
+    </PropertyGroup>
+    
+    <Message Text="Using 'fxc.exe' from '$(FXCPath)'." />
+    
+  </Target>
+
+  <PropertyGroup>
+    <FxCompileDependsOn>$(FxCompileDependsOn);AssignItemsFxCompile;</FxCompileDependsOn>
+    <AssignTargetPathsDependsOn>$(AssignTargetPathsDependsOn);AssignItemsFxCompile</AssignTargetPathsDependsOn>
+  </PropertyGroup>
+
+  <Target Name="FxCompile" Condition="'@(_FxCompile)' != ''" DependsOnTargets="$(FxCompileDependsOn)" Inputs="@(_FxCompile)" Outputs="%(_FxCompile.ObjectFileOutput)">
+
+    <MakeDir Directories="@(_FxCompile->'%(ObjectFileOutput)'->DirectoryName())" />
+    
+
+
+    <FxCompile Source="@(_FxCompile)"
+               ShaderType="%(_FxCompile.ShaderType)"
+               ShaderModel="%(_FxCompile.ShaderModel)"
+               AssemblerOutput="%(_FxCompile.AssemblerOutput)"
+               AssemblerOutputFile="%(_FxCompile.AssemblerOutputFile)"
+               VariableName="%(_FxCompile.VariableName)"
+               HeaderFileOutput="%(_FxCompile.HeaderFileOutput)"
+               ObjectFileOutput="%(_FxCompile.ObjectFileOutput)"
+               PreprocessorDefinitions="%(_FxCompile.PreprocessorDefinitions)"
+               AdditionalIncludeDirectories="%(_FxCompile.AdditionalIncludeDirectories)"
+               SuppressStartupBanner="%(_FxCompile.SuppressStartupBanner)"
+               EntryPointName="%(_FxCompile.EntryPointName)"
+               TreatWarningAsError="%(_FxCompile.TreatWarningAsError)"
+               DisableOptimizations="%(_FxCompile.DisableOptimizations)"
+               EnableDebuggingInformation="%(_FxCompile.EnableDebuggingInformation)"
+               SdkToolsPath="$(FXCPath)">
+    </FxCompile>
+
+    <ItemGroup>
+      <FxCompileOutput Include="@(_FxCompile->'%(ObjectFileOutput)')" />
+      <FileWrites Include="@(_FxCompile->'%(ObjectFileOutput)')" />
+    </ItemGroup>
+  </Target>
+</Project>

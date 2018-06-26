@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Downloadable fonts (DirectWrite) sample
+  description: This sample demonstrates how to use DirectWrite downloadable fonts, a feature added in Windows 10, together with the DirectWrite text layout API.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows

@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Contact cards sample
+  description: This sample shows how to show contact cards using methods of the ContactManager class.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

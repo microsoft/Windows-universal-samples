@@ -22,46 +22,37 @@ namespace AppUIBasics.ControlPages
     public sealed partial class AppBarToggleButtonPage : Page
     {
         AppBarToggleButton compactButton = null;
+        AppBarSeparator separator = null;
 
         public AppBarToggleButtonPage()
         {
             this.InitializeComponent();
             Loaded += AppBarButtonPage_Loaded;
+            Unloaded += AppBarToggleButtonPage_Unloaded;
         }
 
-        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        private void AppBarToggleButtonPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            // Remove compact button from the command bar.
-            base.OnNavigatingFrom(e);
-            Frame rootFrame = Window.Current.Content as Frame;
-            ItemPage rootPage = rootFrame.Content as ItemPage;
-
-            if (rootPage != null)
-            {
-                CommandBar appBar = rootPage.BottomCommandBar;
-                compactButton.Click -= CompactButton_Click;
-                appBar.PrimaryCommands.Remove(compactButton);
-            }
+            CommandBar appBar = NavigationRootPage.Current.PageHeader.TopCommandBar;
+            compactButton.Click -= CompactButton_Click;
+            appBar.PrimaryCommands.Remove(compactButton);
+            appBar.PrimaryCommands.Remove(separator);
         }
 
         void AppBarButtonPage_Loaded(object sender, RoutedEventArgs e)
         {
             // Add compact button to the command bar. It provides functionality specific
             // to this page, and is removed when leaving the page.
-            ItemPage itemPage = NavigationRootPage.RootFrame.Content as ItemPage;
 
-            if (itemPage != null)
-            {
-                CommandBar appBar = itemPage.BottomCommandBar;
-
-                appBar.PrimaryCommands.Insert(0, new AppBarSeparator());
+                CommandBar appBar = NavigationRootPage.Current.PageHeader.TopCommandBar;
+                separator = new AppBarSeparator();
+                appBar.PrimaryCommands.Insert(0, separator);
 
                 compactButton = new AppBarToggleButton();
                 compactButton.Icon = new SymbolIcon(Symbol.FontSize);
                 compactButton.Label = "IsCompact";
                 compactButton.Click += CompactButton_Click;
                 appBar.PrimaryCommands.Insert(0, compactButton);
-            }
         }
 
         private void CompactButton_Click(object sender, RoutedEventArgs e)

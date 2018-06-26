@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Camera resolution sample
+  description: This sample demonstrates changing the resolution of a capture device with the GetMediaStreamProperties and SetMediaStreamPropertiesAsync methods.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

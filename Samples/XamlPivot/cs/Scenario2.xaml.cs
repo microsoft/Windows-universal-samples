@@ -89,11 +89,6 @@ namespace PivotCS
             ShowItem(FoundItem);
         }
 
-        private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
-        {
-            ShowItem(args.SelectedItem as SampleDataModel);
-        }
-
         async private void ShowItem(SampleDataModel model)
         {
             var MyDialog = new ContentDialog();
@@ -111,25 +106,17 @@ namespace PivotCS
             else
             {
                 MyDialog.Title = "No item found";
-
             }
 
             MyDialog.PrimaryButtonText = "OK";
-            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () => await MyDialog.ShowAsync());
+            await MyDialog.ShowAsync();
 
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListView_ItemClicked(object sender, ItemClickEventArgs e)
         {
-            SampleDataModel SelectedItem = null;
-
-            if (e.AddedItems.Count >= 1)
-            {
-                SelectedItem = e.AddedItems[0] as SampleDataModel;
-                (sender as ListView).SelectedItem = null;
-                ShowItem(SelectedItem);
-            }
-
+            SampleDataModel SelectedItem = e.ClickedItem as SampleDataModel;
+            ShowItem(SelectedItem);
         }
     }
 }

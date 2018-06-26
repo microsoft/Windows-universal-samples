@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Windows audio session (WASAPI) sample
+  description: Demonstrates how to do various audio related tasks using the Windows Audio Session API (WASAPI).
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows

@@ -6,7 +6,14 @@ using namespace Concurrency;
 using namespace Platform;
 using namespace SDKTemplate;
 using namespace Windows::System::Threading;
+using namespace Windows::Foundation;
+using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Data;
+using namespace Windows::ApplicationModel;
+
+#if defined (_M_IX86) || defined(_M_AMD64)
+#define SERVICE_SUPPORTED 1
+#endif
 
 ServiceViewModel::ServiceViewModel()
 {
@@ -27,7 +34,29 @@ ServiceViewModel::ServiceViewModel()
     dispatcher = Windows::UI::Core::CoreWindow::GetForCurrentThread()->Dispatcher;
 
     sampleArray = ref new Platform::Array<__int64>(1000);
+    meteringOnWhileSuspension = false;
+
+    // Register for app suspend/resume handlers
+    App::Current->Suspending += ref new SuspendingEventHandler(this, &ServiceViewModel::SuspendMeteringService);
+    App::Current->Resuming += ref new EventHandler<Object^>(this, &ServiceViewModel::ResumeMeteringService);
 }
+
+void ServiceViewModel::SuspendMeteringService(Object^, SuspendingEventArgs^)
+{
+    if (meteringOn) {
+        StopMetering();
+        meteringOnWhileSuspension = true;
+    }
+}
+
+void ServiceViewModel::ResumeMeteringService(Object^, Object^)
+{
+    if (meteringOnWhileSuspension) {
+        StartMetering(samplePeriod);
+        meteringOnWhileSuspension = false;
+    }
+}
+
 
 //
 // if errCode represents an error, then display a message and return true.
@@ -137,6 +166,16 @@ void SDKTemplate::ServiceViewModel::NotifyPropertyChanged(Platform::String^ prop
     // else log error
 }
 
+ServiceViewModel^ ServiceViewModel::_Current = nullptr;
+
+ServiceViewModel^ ServiceViewModel::Current::get()
+{
+    if (ServiceViewModel::_Current == nullptr) {
+        ServiceViewModel::_Current = ref new ServiceViewModel();
+    }
+    return ServiceViewModel::_Current;
+}
+
 //
 // Initializes rpcclient and metering
 //
@@ -149,8 +188,8 @@ void ServiceViewModel::StartMetering(int sampleRate)
         StopButtonEnabled = true;
         stopMeteringRequested = false;
 
-        rpcclient = std::make_unique<RpcClient>();
-        if (NotifyIfAnyError(rpcclient->Initialize())) return;
+#ifdef SERVICE_SUPPORTED
+        if (NotifyIfAnyError(RpcClientInitialize(&rpcclient))) return;
 
         meteringOn = true;
         sampleRefreshCount = 0;
@@ -158,7 +197,7 @@ void ServiceViewModel::StartMetering(int sampleRate)
 
         // Set the sample rate on server
         this->samplePeriod = sampleRate;
-        __int64 retCode = rpcclient->SetSampleRate(sampleRate);
+        __int64 retCode = SetSampleRate(rpcclient, sampleRate);
 
         FILETIME initialSystemTime;
         GetSystemTimeAsFileTime(&initialSystemTime);
@@ -172,7 +211,8 @@ void ServiceViewModel::StartMetering(int sampleRate)
 
             auto timerHandler = ref new TimerElapsedHandler([this](ThreadPoolTimer^)
             {
-                __int64 meteringData = rpcclient->MeteringData;
+                __int64 meteringData = 0;
+                GetMeteringData(rpcclient, &meteringData);
 
                 // If there is no new data, return
                 if (sampleArray[0] == meteringData)
@@ -189,8 +229,10 @@ void ServiceViewModel::StartMetering(int sampleRate)
                 currentTimeUi.HighPart = currentSystemTime.dwHighDateTime;
 
                 // Calculate number of samples received since last callback
-                __int64 now = rpcclient->CallbackCount;
-                __int64 diff = now - rpcDataCountOld;
+                __int64 now = 0, diff = 0;
+                GetCallbackCount(rpcclient, &now);
+
+                diff = now - rpcDataCountOld;
                 rpcDataCountOld = now;
 
                 // Calculate incoming sample rate
@@ -223,7 +265,7 @@ void ServiceViewModel::StartMetering(int sampleRate)
 
             ThreadPoolTimer^ periodicTimer = ThreadPoolTimer::CreatePeriodicTimer(timerHandler, span);
             NotifyStatusMessage("Metering start command sent successfully", NotifyType::StatusMessage);
-            retCode = this->rpcclient->StartMeteringAndWaitForStop(sampleRate);
+            retCode = StartMeteringAndWaitForStop(this->rpcclient, sampleRate);
             meteringOn = false;
             periodicTimer->Cancel();
             if (!NotifyIfAnyError(retCode) && !stopMeteringRequested)
@@ -233,7 +275,11 @@ void ServiceViewModel::StartMetering(int sampleRate)
                 StartButtonEnabled = true;
                 StopButtonEnabled = false;
             }
+            RpcClientClose(this->rpcclient);
         }
+#else
+        NotifyStatusMessage("NT service support has not been compiled for this architecture.", NotifyType::ErrorMessage);
+#endif
     });
 }
 
@@ -248,12 +294,14 @@ void ServiceViewModel::StopMetering()
         SliderEnabled = false;
         stopMeteringRequested = true;
 
-        __int64 retCode = this->rpcclient->StopMetering();
+#ifdef SERVICE_SUPPORTED
+        __int64 retCode = StopMeteringData(this->rpcclient);
         if (!NotifyIfAnyError(retCode))
         {
             NotifyStatusMessage("Metering stop command sent successfully",
                                 NotifyType::StatusMessage);
         }
+#endif
 
         SliderEnabled = true;
         StartButtonEnabled = true;
@@ -268,9 +316,10 @@ void ServiceViewModel::SetSamplePeriod(int samplePeriod)
     create_task([this, samplePeriod] 
     {
         this->samplePeriod = samplePeriod;
+#ifdef SERVICE_SUPPORTED
         if (meteringOn)
         {
-            _int64 retCode = rpcclient->SetSampleRate(samplePeriod);
+            _int64 retCode = SetSampleRate(rpcclient, samplePeriod);
             if (!NotifyIfAnyError(retCode))
             {
                 NotifyStatusMessage(
@@ -278,5 +327,6 @@ void ServiceViewModel::SetSamplePeriod(int samplePeriod)
                     NotifyType::StatusMessage);
             }
         }
+#endif
     });
 }

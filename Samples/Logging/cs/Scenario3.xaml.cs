@@ -14,9 +14,8 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
 
-namespace LoggingCS
+namespace SDKTemplate
 {
     /// <summary>
     /// UI for the FileLoggingSession sample.
@@ -123,12 +122,12 @@ namespace LoggingCS
                     var directoryName = System.IO.Path.GetDirectoryName(path);
                     var fileName = System.IO.Path.GetFileName(path);
                     finalMessage = string.Format("{0}: {1}", message, fileName);
-                    ViewLogInfo.Text = string.Format(
-                        "Log folder: \"{1}\"\r\n" +
-                        "- To view with tracerpt: tracerpt.exe \"{0}\" -of XML -o LogFile.xml\r\n" +
-                        "- To view with Windows Performance Toolkit (WPT): wpa.exe \"{0}\"",
-                        path,
-                        directoryName);
+                    ViewLogInfo.Text =
+                       $"Log folder: \"{directoryName}\"\r\n" +
+                       $"- To view with tracerpt: tracerpt.exe \"{path}\" -of XML -o LogFile.xml\r\n" +
+                       $"- To view with Windows Performance Toolkit (WPT):\r\n" +
+                       $"   xperf -merge \"{path}\" merged.etl\r\n" +
+                       $"   wpa.exe merged.etl";
                 }
                 else
                 {

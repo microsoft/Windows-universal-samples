@@ -1,0 +1,13 @@
+### YamlMime:Sample
+sample:
+- name: Animation metrics sample
+  description: This sample shows how to use the Animation Metrics APIs (Windows.UI.Core.AnimationMetrics to access the raw parameters that define the animations in the Windows Animation Library.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  - vb
+  technologies:
+  - windows

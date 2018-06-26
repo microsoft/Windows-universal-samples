@@ -46,9 +46,9 @@
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>
-    <Page Include="Scenario1.xaml" />
-    <Page Include="Scenario2.xaml" />
-    <Page Include="Scenario3.xaml" />
+    <Page Include="..\shared\Scenario1.xaml" />
+    <Page Include="..\shared\Scenario2.xaml" />
+    <Page Include="..\shared\Scenario3.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">

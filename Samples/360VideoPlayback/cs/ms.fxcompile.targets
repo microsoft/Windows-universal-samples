@@ -154,7 +154,8 @@
     </ItemGroup>
 
     <PropertyGroup>
-      <FXCPath>$(MSBuildProgramFiles32)\Windows Kits\10\bin\x86</FXCPath>
+       <FXCPath Condition="Exists('$(MSBuildProgramFiles32)\Windows Kits\10\bin\$(TargetPlatformVersion)\x86\fxc.exe')">$(MSBuildProgramFiles32)\Windows Kits\10\bin\$(TargetPlatformVersion)\x86</FXCPath>
+       <FXCPath Condition="'$(FXCPath)' == ''">$(MSBuildProgramFiles32)\Windows Kits\10\bin\x86</FXCPath>
     </PropertyGroup>
 
     <Message Text="Using 'fxc.exe' from '$(FXCPath)'." />

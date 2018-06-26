@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Logging sample
+  description: This sample shows how to use the Logging APIs in the Windows.Foundation.Diagnostics namespace, including LoggingChannel, LoggingActivity, LoggingSession, and FileLoggingSession.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

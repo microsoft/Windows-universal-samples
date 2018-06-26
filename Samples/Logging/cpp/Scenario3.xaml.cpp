@@ -121,7 +121,10 @@ task<void> Scenario3::AddLogFileMessageDispatch(Platform::String^ message, const
             ViewLogInfo->Text =
                 "Log folder: \"" + directoryName + "\"\r\n" +
                 "- To view with tracerpt: tracerpt.exe \"" + path + "\" -of XML -o LogFile.xml\r\n" +
-                "- To view with Windows Performance Toolkit (WPT): wpa.exe \"" + path + "\"";
+                "- To view with Windows Performance Toolkit (WPT):\n" +
+                "   xperf -merge \"" + path + "\" merged.etl\n" +
+                "   wpa.exe merged.etl";
+
         }
         else
         {

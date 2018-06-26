@@ -35,6 +35,8 @@ namespace SDKTemplate
             }
         }
 
+        Concurrency::task<void> SetMediaStreamPropertiesAsync(Windows::Media::Capture::MediaCapture^ mediaCapture, Windows::UI::Xaml::Controls::CaptureElement^ previewControl, Windows::Media::Capture::MediaStreamType streamType, Windows::Media::MediaProperties::IMediaEncodingProperties ^ encodingProperties);
+
     private:
         static Platform::Array<Scenario>^ scenariosInner;
     };

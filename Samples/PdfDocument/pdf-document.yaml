@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: PDF document sample
+  description: This sample demonstrates how to load and display Portable Document Format (PDF) documents.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

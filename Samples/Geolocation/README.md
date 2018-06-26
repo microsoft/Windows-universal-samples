@@ -5,9 +5,15 @@
 
 # Geolocation sample
 
-Shows how to use the Windows.Devices.Geolocation namespace to get the geographic location of the user's device. 
-An app can use the Geolocation namespace to request access to user location, get the location one time, 
-continuously track the location by getting location update events, or get alerts when the device has entered or exited locations of interest.
+Shows how to use the Windows.Devices.Geolocation namespace to get the geographic location of the user's device
+and track when the location changes in various ways.
+
+After obtaining access to the user's location, an app can
+
+* Retrieve the current location.
+* Receiving events when the location changes.
+* Receiving events when the device has entered or exited locations of interest.
+* Receiving events when the device has spent significant time in a location (a "visit").
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -22,10 +28,12 @@ This sample also shows how to:
 - **Handle changes in location permissions**:  Register for the Geolocator's StatusChanged event and use the [StatusChangedEventArgs](http://msdn.microsoft.com/library/windows/apps/br225600) to determine the current position status. 
 - **Get location from a background task** 
 - **Handle geofencing events from a background task** 
+- **Handle geovisit events from a background task** 
 - **Obtain satellite data:** When available, use the [GeocoordinateSatelliteData](http://msdn.microsoft.com/library/windows/apps/jj635260) class to obtain additional information on the quality of the satellite based location data. 
 - **Display a toast:** Notify the user when a geofencing event has occurred in the background. 
 - **Refresh geofence binding:** Refresh the binding on resume and after removal of a geofence. Note that removal requires subscribing to removal events if a geofence is set as single use or a duration is set. 
 - **Request access to the user's location:** Request access to the user's location using the RequestAccessAsync method. Important: call the RequestAccessAsync before accessing the user's location. At that time, your app must be in the foreground and RequestAccessAsync must be called from the UI thread. Until the user grants your app permission to their location, your app can't access location data.  
+- **Track when the user visits a location:** Poll for or receive notifications when the user spends significant time in a location. 
 - **Help the user change location settings:** Link to location privacy settings from your app if the user revokes access to location while your app is in the foreground. Call the LaunchUriAsync method with the URI "ms-settings://privacy/location".
 
 Geofences need to be created in the Foreground Geofencing scenario (Scenario 4) and then you can go to Background Geofencing scenario (Scenario 5) to register for background geofencing events.

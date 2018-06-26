@@ -12,8 +12,6 @@ namespace SDKTemplate
     public ref class SmartCardItem sealed
     {
     public:
-        SmartCardItem();
-
         property Platform::String^ ReaderName
         {
             Platform::String^  get()

@@ -15,9 +15,7 @@ to organize and display articles from various subscriptions specified in a JSON-
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-Specifically, this sample covers these news reader features and Windows Store app APIs.
-
-This app includes these news reader features and Windows Store app APIs.
+Specifically, this sample covers these news reader features and Windows Runtime APIs.
 
 -   A pannable [ListView](http://msdn.microsoft.com/library/windows/apps/br242878) page showing the subscribed news feeds and up to 15 articles per subscription.
 
@@ -46,7 +44,7 @@ This app includes these news reader features and Windows Store app APIs.
 
     Sample: Review io.js and render.js files in the \\js folder.
 
-Here are some general Windows Store app features demonstrated by this app.
+Here are some general features demonstrated by this app.
 
 -   Splash screen on start up.
 
@@ -85,7 +83,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 **Conceptual**
 
 [Adding ListView controls](http://msdn.microsoft.com/library/windows/apps/hh465382)  
-[Navigation design for Windows Store apps](http://msdn.microsoft.com/library/windows/apps/hh761500)  
+[Navigation design basics]https://docs.microsoft.com/en-us/windows/uwp/layout/navigation-basics)  
 [Connecting to networks and web services (JavaScript)](http://msdn.microsoft.com/library/windows/apps/br211370)  
 [Developing connected applications](http://msdn.microsoft.com/library/windows/apps/hh465399)  
 

@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Inking sample
+  description: This sample demonstrates how to use ink functionality (such as, capturing, manipulating, and interpreting ink strokes) in Universal Windows apps using JavaScript.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - js
+  technologies:
+  - windows

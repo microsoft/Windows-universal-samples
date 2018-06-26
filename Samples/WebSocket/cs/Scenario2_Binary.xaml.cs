@@ -274,6 +274,7 @@ namespace SDKTemplate
             rootPage.NotifyUser("Stopping", NotifyType.StatusMessage);
             CloseSocket();
             SetBusy(false);
+            rootPage.NotifyUser("Stopped", NotifyType.StatusMessage);
         }
 
         // This may be triggered remotely by the server or locally by Close/Dispose()

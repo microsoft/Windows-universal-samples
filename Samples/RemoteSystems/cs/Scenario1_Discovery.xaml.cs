@@ -73,6 +73,7 @@ namespace SDKTemplate
             }
 
             searchButton.IsHitTestVisible = true;
+            DeviceInfoTextBlock.Visibility = Visibility.Visible;
         }
 
         private async Task SearchByHostNameAsync()
@@ -220,6 +221,18 @@ namespace SDKTemplate
                 {
                     kinds.Add(RemoteSystemKinds.Desktop);
                 }
+                if (TabletCheckBox.IsChecked.Value)
+                {
+                    kinds.Add(RemoteSystemKinds.Tablet);
+                }
+                if (LaptopCheckBox.IsChecked.Value)
+                {
+                    kinds.Add(RemoteSystemKinds.Laptop);
+                }
+                if (IotCheckBox.IsChecked.Value)
+                {
+                    kinds.Add(RemoteSystemKinds.Iot);
+                }
                 if (HolographicCheckBox.IsChecked.Value)
                 {
                     kinds.Add(RemoteSystemKinds.Holographic);
@@ -273,11 +286,23 @@ namespace SDKTemplate
             }
             m_rootPage.systemList.Clear();
             m_rootPage.systemMap.Clear();
+            DeviceInfoTextBlock.Visibility = Visibility.Collapsed;
+            DeviceInfoTextBlock.Text = "Select a device from the list to see its properties.";
         }
 
         private void UpdateStatus(string status, NotifyType statusType)
         {
             m_rootPage.NotifyUser(status, statusType);
+        }
+
+        private void SystemListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RemoteSystem selectedRemoteSystem = ((sender as ListBox).SelectedItem as RemoteSystem);
+
+            if (selectedRemoteSystem != null)
+            {
+                DeviceInfoTextBlock.Text = Environment.NewLine + "Manufacturer: " + selectedRemoteSystem.ManufacturerDisplayName + Environment.NewLine + "Model: " + selectedRemoteSystem.ModelDisplayName + Environment.NewLine;
+            }
         }
     }
 }

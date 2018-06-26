@@ -70,7 +70,6 @@
                                     QueryIcon="Find" PlaceholderText="enter a search term"
                                     TextChanged="AutoSuggestBox_TextChanged"
                                     QuerySubmitted="AutoSuggestBox_QuerySubmitted"
-                                    SuggestionChosen="AutoSuggestBox_SuggestionChosen"
                                     ItemsSource="{x:Bind Suggestions}"/>
                             </Flyout>
                         </AppBarButton.Flyout>
@@ -81,24 +80,23 @@
                                 QueryIcon="Find" PlaceholderText="enter a search term"
                                 TextChanged="AutoSuggestBox_TextChanged"
                                 QuerySubmitted="AutoSuggestBox_QuerySubmitted"
-                                SuggestionChosen="AutoSuggestBox_SuggestionChosen"
                                 ItemsSource="{x:Bind Suggestions}"/>
                 </Grid>
             </Pivot.RightHeader>
 
             <PivotItem Header="New">
                 <ListView ItemsSource="{x:Bind NewItems}" ItemTemplate="{StaticResource ItemTemplate}"
-                          SelectionChanged="ListView_SelectionChanged" />
+                          IsItemClickEnabled="True" ItemClick="ListView_ItemClicked" />
             </PivotItem>
 
             <PivotItem Header="Flagged">
                 <ListView ItemsSource="{x:Bind FlaggedItems}" ItemTemplate="{StaticResource ItemTemplate}"
-                          SelectionChanged="ListView_SelectionChanged" />
+                          IsItemClickEnabled="True" ItemClick="ListView_ItemClicked" />
             </PivotItem>
 
             <PivotItem Header="All">
                 <ListView ItemsSource="{x:Bind AllItems}" ItemTemplate="{StaticResource ItemTemplate}"
-                          SelectionChanged="ListView_SelectionChanged" />
+                          IsItemClickEnabled="True" ItemClick="ListView_ItemClicked" />
             </PivotItem>
         </Pivot>
     </Grid>

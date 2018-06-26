@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Pedometer sample
+  description: This sample shows how to use the Windows.Devices.Sensors.Pedometer API.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

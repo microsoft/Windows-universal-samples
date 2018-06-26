@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: User interaction mode sample
+  description: This sample shows how to detect and respond to the user interaction mode.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

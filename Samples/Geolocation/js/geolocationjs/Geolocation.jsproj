@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>6fd2e595-c898-5cb5-9b4b-9429773c444e</ProjectGuid>
+    <ProjectGuid>85556a98-c47d-5724-8029-bc997b8edc9d</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
@@ -45,8 +45,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
@@ -65,6 +65,7 @@
     <Content Include="..\..\..\..\SharedContent\js\default.html">
       <Link>default.html</Link>
     </Content>
+    <Content Include="css\scenario8_VisitsBackgroundTask.css" />
     <Content Include="html\scenario1_TrackPosition.html" />
     <Content Include="html\scenario2_GetPosition.html" />
     <Content Include="html\scenario3_BackgroundTask.html" />
@@ -88,6 +89,9 @@
     <Content Include="..\..\..\..\SharedContent\media\windows-sdk.png">
       <Link>images\windows-sdk.png</Link>
     </Content>
+    <Content Include="html\scenario6_GetLastVisit.html" />
+    <Content Include="html\scenario7_ForegroundVisits.html" />
+    <Content Include="html\scenario8_VisitsBackgroundTask.html" />
     <Content Include="js\backgroundtask.js" />
     <Content Include="..\..\..\..\SharedContent\js\js\default.js">
       <Link>js\default.js</Link>
@@ -139,6 +143,10 @@
     <Content Include="..\..\..\..\SharedContent\js\sample-utils\scenario-select.html">
       <Link>sample-utils\scenario-select.html</Link>
     </Content>
+    <Content Include="js\scenario6_GetLastVisit.js" />
+    <Content Include="js\scenario7_ForegroundVisits.js" />
+    <Content Include="js\scenario8_VisitsBackgroundTask.js" />
+    <Content Include="js\visitbackgroundtask.js" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <!-- To modify your build process, add your task inside one of the targets below then uncomment

@@ -20,9 +20,9 @@ namespace AppUIBasics.Common
     /// <example>
     /// To make use of NavigationHelper, follow these two steps or
     /// start with a BasicPage or any other Page item template other than BlankPage.
-    /// 
+    ///
     /// 1) Create an instance of the NavigationHelper somewhere such as in the
-    ///     constructor for the page and register a callback for the LoadState and 
+    ///     constructor for the page and register a callback for the LoadState and
     ///     SaveState events.
     /// <code>
     ///     public MyPage()
@@ -32,22 +32,22 @@ namespace AppUIBasics.Common
     ///         this.navigationHelper.LoadState += navigationHelper_LoadState;
     ///         this.navigationHelper.SaveState += navigationHelper_SaveState;
     ///     }
-    ///     
+    ///
     ///     private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
     ///     { }
     ///     private void navigationHelper_SaveState(object sender, LoadStateEventArgs e)
     ///     { }
     /// </code>
-    /// 
-    /// 2) Register the page to call into the NavigationManager whenever the page participates 
-    ///     in navigation by overriding the <see cref="Windows.UI.Xaml.Controls.Page.OnNavigatedTo"/> 
+    ///
+    /// 2) Register the page to call into the NavigationManager whenever the page participates
+    ///     in navigation by overriding the <see cref="Windows.UI.Xaml.Controls.Page.OnNavigatedTo"/>
     ///     and <see cref="Windows.UI.Xaml.Controls.Page.OnNavigatedFrom"/> events.
     /// <code>
     ///     protected override void OnNavigatedTo(NavigationEventArgs e)
     ///     {
     ///         navigationHelper.OnNavigatedTo(e);
     ///     }
-    ///     
+    ///
     ///     protected override void OnNavigatedFrom(NavigationEventArgs e)
     ///     {
     ///         navigationHelper.OnNavigatedFrom(e);
@@ -182,11 +182,15 @@ namespace AppUIBasics.Common
         public RootFrameNavigationHelper(Frame rootFrame)
         {
             this.Frame = rootFrame;
+            this.Frame.Navigated += (s, e) =>
+            {
+                // Update the Back button whenever a navigation occurs.
+                UpdateBackButton();
+            };
 
             // Handle keyboard and mouse navigation requests
             this.systemNavigationManager = SystemNavigationManager.GetForCurrentView();
             systemNavigationManager.BackRequested += SystemNavigationManager_BackRequested;
-            UpdateBackButton();
 
             // Listen to the window directly so we will respond to hotkeys regardless
             // of which element has focus.
@@ -194,9 +198,6 @@ namespace AppUIBasics.Common
                 CoreDispatcher_AcceleratorKeyActivated;
             Window.Current.CoreWindow.PointerPressed +=
                 this.CoreWindow_PointerPressed;
-
-            // Update the Back button whenever a navigation occurs.
-            this.Frame.Navigated += (s, e) => UpdateBackButton();
         }
 
         private bool TryGoBack()
@@ -207,6 +208,7 @@ namespace AppUIBasics.Common
                 this.Frame.GoBack();
                 navigated = true;
             }
+            
             return navigated;
         }
 
@@ -221,7 +223,6 @@ namespace AppUIBasics.Common
             return navigated;
         }
 
-
         private void SystemNavigationManager_BackRequested(object sender, BackRequestedEventArgs e)
         {
             if (!e.Handled)
@@ -235,7 +236,7 @@ namespace AppUIBasics.Common
             systemNavigationManager.AppViewBackButtonVisibility =
                 this.Frame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
-        
+
         /// <summary>
         /// Invoked on every keystroke, including system keys such as Alt key combinations.
         /// Used to detect keyboard navigation between pages even when the page itself
@@ -322,7 +323,7 @@ namespace AppUIBasics.Common
     public class LoadStateEventArgs : EventArgs
     {
         /// <summary>
-        /// The parameter value passed to <see cref="Frame.Navigate(Type, Object)"/> 
+        /// The parameter value passed to <see cref="Frame.Navigate(Type, Object)"/>
         /// when this page was initially requested.
         /// </summary>
         public Object NavigationParameter { get; private set; }
@@ -336,7 +337,7 @@ namespace AppUIBasics.Common
         /// Initializes a new instance of the <see cref="LoadStateEventArgs"/> class.
         /// </summary>
         /// <param name="navigationParameter">
-        /// The parameter value passed to <see cref="Frame.Navigate(Type, Object)"/> 
+        /// The parameter value passed to <see cref="Frame.Navigate(Type, Object)"/>
         /// when this page was initially requested.
         /// </param>
         /// <param name="pageState">

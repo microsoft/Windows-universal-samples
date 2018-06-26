@@ -66,12 +66,12 @@ namespace _360VideoPlayback.Common
 
             // Initialize Direct2D resources.
             var debugLevel = SharpDX.Direct2D1.DebugLevel.None;
-            //#if DEBUG
+            #if DEBUG
             if (DirectXHelper.SdkLayersAvailable())
             {
                 debugLevel = SharpDX.Direct2D1.DebugLevel.Information;
             }
-            //#endif
+            #endif
 
             // Initialize the Direct2D Factory.
             d2dFactory = this.ToDispose(
@@ -362,25 +362,6 @@ namespace _360VideoPlayback.Common
             var presentResult = frame.PresentUsingCurrentPrediction(
                 HolographicFramePresentWaitBehavior.WaitForFrameToFinish
                 );
-
-            HolographicFramePrediction prediction = frame.CurrentPrediction;
-            UseHolographicCameraResources((Dictionary<uint, CameraResources> cameraResourcesDictionary) =>
-            {
-                foreach (var cameraPose in prediction.CameraPoses)
-                {
-                    // This represents the device-based resources for a HolographicCamera.
-                    CameraResources cameraResources = cameraResourcesDictionary[cameraPose.HolographicCamera.Id];
-
-                    // Discard the contents of the render target.
-                    // This is a valid operation only when the existing contents will be
-                    // entirely overwritten. If dirty or scroll rects are used, this call
-                    // should be removed.
-                    d3dContext.DiscardView(cameraResources.BackBufferRenderTargetView);
-
-                    // Discard the contents of the depth stencil.
-                    d3dContext.DiscardView(cameraResources.DepthStencilView);
-                }
-            });
 
             // The PresentUsingCurrentPrediction API will detect when the graphics device
             // changes or becomes invalid. When this happens, it is considered a Direct3D

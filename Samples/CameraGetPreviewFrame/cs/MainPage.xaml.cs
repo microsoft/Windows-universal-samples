@@ -13,6 +13,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Devices.Enumeration;
@@ -63,6 +64,7 @@ namespace CameraGetPreviewFrame
         private MediaCapture _mediaCapture;
         private bool _isInitialized = false;
         private bool _isPreviewing = false;
+        private static readonly SemaphoreSlim _mediaCaptureLifeLock = new SemaphoreSlim(1);
 
         // Information about the camera device
         private bool _mirroringPreview = false;
@@ -93,7 +95,7 @@ namespace CameraGetPreviewFrame
                 await CleanupCameraAsync();
 
                 _displayInformation.OrientationChanged -= DisplayInformation_OrientationChanged;
-                
+
                 deferral.Complete();
             }
         }
@@ -213,6 +215,8 @@ namespace CameraGetPreviewFrame
         {
             Debug.WriteLine("InitializeCameraAsync");
 
+            await _mediaCaptureLifeLock.WaitAsync();
+
             if (_mediaCapture == null)
             {
                 // Attempt to get the back camera if one is available, but use any camera device if not
@@ -221,6 +225,7 @@ namespace CameraGetPreviewFrame
                 if (cameraDevice == null)
                 {
                     Debug.WriteLine("No camera device found!");
+                    _mediaCaptureLifeLock.Release();
                     return;
                 }
 
@@ -242,6 +247,10 @@ namespace CameraGetPreviewFrame
                 {
                     Debug.WriteLine("The app was denied access to the camera");
                 }
+                finally
+                {
+                    _mediaCaptureLifeLock.Release();
+                }
 
                 // If initialization succeeded, start the preview
                 if (_isInitialized)
@@ -260,13 +269,17 @@ namespace CameraGetPreviewFrame
                         // Only mirror the preview if the camera is on the front panel
                         _mirroringPreview = (cameraDevice.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Front);
                     }
-                    
+
                     await StartPreviewAsync();
 
                     var picturesLibrary = await StorageLibrary.GetLibraryAsync(KnownLibraryId.Pictures);
                     // Fall back to the local app storage if the Pictures Library is not available
                     _captureFolder = picturesLibrary.SaveFolder ?? ApplicationData.Current.LocalFolder;
                 }
+            }
+            else
+            {
+                _mediaCaptureLifeLock.Release();
             }
         }
 
@@ -436,24 +449,33 @@ namespace CameraGetPreviewFrame
         /// <returns></returns>
         private async Task CleanupCameraAsync()
         {
-            if (_isInitialized)
+            await _mediaCaptureLifeLock.WaitAsync();
+
+            try
             {
-                if (_isPreviewing)
+                if (_isInitialized)
                 {
-                    // The call to stop the preview is included here for completeness, but can be
-                    // safely removed if a call to MediaCapture.Dispose() is being made later,
-                    // as the preview will be automatically stopped at that point
-                    await StopPreviewAsync();
+                    if (_isPreviewing)
+                    {
+                        // The call to stop the preview is included here for completeness, but can be
+                        // safely removed if a call to MediaCapture.Dispose() is being made later,
+                        // as the preview will be automatically stopped at that point
+                        await StopPreviewAsync();
+                    }
+
+                    _isInitialized = false;
                 }
 
-                _isInitialized = false;
+                if (_mediaCapture != null)
+                {
+                    _mediaCapture.Failed -= MediaCapture_Failed;
+                    _mediaCapture.Dispose();
+                    _mediaCapture = null;
+                }
             }
-
-            if (_mediaCapture != null)
+            finally
             {
-                _mediaCapture.Failed -= MediaCapture_Failed;
-                _mediaCapture.Dispose();
-                _mediaCapture = null;
+                _mediaCaptureLifeLock.Release();
             }
         }
 

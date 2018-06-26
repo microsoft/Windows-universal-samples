@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Background audio sample
+  description: This sample demonstrates how to use the Background Media Player and playback lists to create a collection of songs that can continue to play even when the app is no longer in the foreground.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - vb
+  technologies:
+  - windows

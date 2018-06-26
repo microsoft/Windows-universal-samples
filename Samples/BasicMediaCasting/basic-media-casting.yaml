@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Basic media casting sample
+  description: This sample shows how to use the APIs in the Windows.Media.Casting namespace to render media on a remote device.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - vb
+  technologies:
+  - windows

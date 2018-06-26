@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Disabling screen capture sample
+  description: This sample shows how to disable screen capture by setting the IsScreenCaptureEnabled property of the ApplicationView object.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{b3c0b4fd-f84b-5f88-9255-60c2d917bc33}</ProjectGuid>
+    <ProjectGuid>{41d0e002-60ad-51a7-a182-4e11b57c012b}</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
@@ -45,8 +45,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
@@ -63,6 +63,7 @@
     <Content Include="html\fail.html" />
     <Content Include="html\files.html" />
     <Content Include="html\html.html" />
+    <Content Include="html\provider.html" />
     <Content Include="html\text.html" />
     <Content Include="html\weblink.html" />
     <Content Include="html\applicationlink.html" />
@@ -116,6 +117,7 @@
     <Content Include="js\fail.js" />
     <Content Include="js\files.js" />
     <Content Include="js\html.js" />
+    <Content Include="js\provider.js" />
     <Content Include="js\text.js" />
     <Content Include="js\weblink.js" />
     <Content Include="js\applicationlink.js" />

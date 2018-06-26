@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Responsiveness techniques sample
+  description: Showcases a UI scenario from Settings (Personalization UI) and highlights the simple responsive techniques we have introduced in Windows 10 – namely, VisualState.Setters, AdaptiveTriggers, SplitView and RelativePanel (static and dynamically modifying properties).
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

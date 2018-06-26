@@ -273,7 +273,8 @@ namespace PrintSample
             {
                 // If this is the first page add the specific scenario content
                 page = firstPage;
-                //Hide footer since we don't know yet if it will be displayed (this might not be the last page) - wait for layout
+
+                // Hide footer since we don't know yet if it will be displayed (this might not be the last page) - wait for layout
                 StackPanel footer = (StackPanel)page.FindName("Footer");
                 footer.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             }
@@ -312,6 +313,7 @@ namespace PrintSample
             {
                 StackPanel footer = (StackPanel)page.FindName("Footer");
                 footer.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                PrintCanvas.UpdateLayout();
             }
 
             // Add the page to the page preview collection

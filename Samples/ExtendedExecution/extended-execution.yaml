@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Extended execution sample
+  description: This sample shows you how to create extended execution sessions using the Windows Runtime extended execution API.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

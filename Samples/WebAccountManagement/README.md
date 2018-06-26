@@ -33,7 +33,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 ## Related topics
 
 Registration of application to use a Microsoft account:
-[Preparing your account to use Windows Live Services in your Windows Store apps](https://msdn.microsoft.com/library/windows/apps/xaml/hh770854.aspx)
+[Using Windows Live Services to personalize apps](https://msdn.microsoft.com/library/windows/apps/xaml/hh770854.aspx)
 
 Develop Windows Universal Apps with Azure AD and the Windows 10 Identity API:
 [Using WebAccountManager to Integrate with Azure AD](http://blogs.technet.com/b/ad/archive/2015/08/03/develop-windows-universal-apps-with-azure-ad-and-the-windows-10-identity-api.aspx)

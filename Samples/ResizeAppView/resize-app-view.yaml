@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Window resizing sample
+  description: This sample shows how to customize the size of your app's view.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

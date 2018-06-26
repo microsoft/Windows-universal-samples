@@ -5,7 +5,7 @@
 
 # JavaScript Web Workers app multithreading sample
 
-Shows how to use multithreading with Web Workers in your Windows Store app using JavaScript.
+Shows how to use multithreading with Web Workers in your JavaScript app.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -14,7 +14,7 @@ Shows how to use multithreading with Web Workers in your Windows Store app using
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-Windows Store apps using JavaScript support standards-based Web Workers for multithreaded JavaScript. Web Workers can improve the responsiveness 
+JavaScript apps support standards-based Web Workers for multithreaded JavaScript. Web Workers can improve the responsiveness 
 of your app by removing tasks from the UI thread. Web Workers use the [postMessage](http://msdn.microsoft.com/library/windows/apps/hh772821) 
 function to communicate with the UI thread.
 

@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Voice over IP (VoIP) sample
+  description: This sample demonstrates the use of the Windows.ApplicationModel.Calls namespace needed for Voice-Over-IP.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

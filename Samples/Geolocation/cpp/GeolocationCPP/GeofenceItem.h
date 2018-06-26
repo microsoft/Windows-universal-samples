@@ -28,7 +28,7 @@ namespace SDKTemplate
         // implementation in C# where native types
         // are allowed because the collection uses
         // System.Collections.ObjectModel.ObservableCollection<GeofenceItem>
-        // but System isn't available in C++ Windows Store Apps.
+        // but System isn't available in C++ Windows Runtime apps.
         // Also note the metadata that allows this class
         // to be used in data binding.
         // Also note that since System isn't available

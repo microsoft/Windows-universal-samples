@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Video playback sample
+  description: This sample demonstrates how to create apps that take advantage of many media platform features.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - js
+  technologies:
+  - windows

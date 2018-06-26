@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Efficient animations (HTML) sample
+  description: This sample demonstrates how to use the requestAnimationFrame method in an HTML5 Canvas to build smooth and power efficient animations in your Windows Store app using JavaScript.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - js
+  technologies:
+  - windows

@@ -192,7 +192,7 @@ void Scenario2_PhotoSettings::PreviewSettings_Changed(Platform::Object^ sender, 
     {
         auto selectedItem = static_cast<ComboBoxItem^>(static_cast<ComboBox^>(sender)->SelectedItem);
         auto encodingProperties = static_cast<IMediaEncodingProperties^>(selectedItem->Tag);
-        create_task(_mediaCapture->VideoDeviceController->SetMediaStreamPropertiesAsync(MediaStreamType::VideoPreview, encodingProperties));
+        create_task(_rootPage->SetMediaStreamPropertiesAsync(_mediaCapture.Get(), PreviewControl, MediaStreamType::VideoPreview, encodingProperties));
     }
 }
 
@@ -206,7 +206,7 @@ void Scenario2_PhotoSettings::PhotoSettings_Changed(Platform::Object^ sender, Wi
     {
         auto selectedItem = static_cast<ComboBoxItem^>(static_cast<ComboBox^>(sender)->SelectedItem);
         auto encodingProperties = static_cast<IMediaEncodingProperties^>(selectedItem->Tag);
-        create_task(_mediaCapture->VideoDeviceController->SetMediaStreamPropertiesAsync(MediaStreamType::Photo, encodingProperties));
+        create_task(_rootPage->SetMediaStreamPropertiesAsync(_mediaCapture.Get(), PreviewControl, MediaStreamType::Photo, encodingProperties));
     }
 }
 

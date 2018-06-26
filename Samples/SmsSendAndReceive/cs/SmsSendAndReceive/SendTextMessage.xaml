@@ -29,7 +29,7 @@
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" 
-          Text="Enter the message and phone number (no spaces, e.g., 14255551234) for the SMS message you would like to send, then click the 'Send' button. SMS functionality is only available to mobile operator apps and Windows Store apps given privileged access by mobile network operators and OEMs." />
+          Text="Enter the message and phone number (no spaces, e.g., 14255551234) for the SMS message you would like to send, then click the 'Send' button. SMS functionality is only available to mobile operator apps and apps given privileged access by mobile network operators and OEMs." />
             </StackPanel>
 
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">                

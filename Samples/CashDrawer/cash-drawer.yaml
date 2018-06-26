@@ -1,0 +1,13 @@
+### YamlMime:Sample
+sample:
+- name: Cash drawer sample
+  description: This sample demonstrates the use of the Windows.Devices.PointOfService.CashDrawer API.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  - vb
+  technologies:
+  - windows

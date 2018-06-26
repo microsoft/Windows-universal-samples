@@ -34,6 +34,7 @@ namespace SDKTemplate
         void InkReplayTimer_Tick(Platform::Object^ sender, Platform::Object^ e);
 
         void StopReplay();
+        void ClearCanvasStrokeCache();
         Windows::UI::Input::Inking::InkStrokeContainer^ GetCurrentStrokesView(Windows::Foundation::DateTime time);
         Windows::UI::Input::Inking::InkStroke^ GetPartialStroke(Windows::UI::Input::Inking::InkStroke^ stroke, Windows::Foundation::DateTime time);
 

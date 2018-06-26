@@ -36,47 +36,58 @@
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Friendly Name" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="85"/>
-                        <TextBox x:Name="FriendlyName" Text="My Virtual Smart Card" HorizontalAlignment="Left"/>
+                        <TextBlock Name="FriendlyNameLabel" Text="Friendly Name" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="85"/>
+                        <!-- Always give a TextBox a name that's accessible to a screen reader. In this case,
+                             reference the labeling TextBlock to have the accessible name set on the TextBox. -->
+                        <TextBox x:Name="FriendlyName" Text="My Virtual Smart Card" HorizontalAlignment="Left"
+                            AutomationProperties.LabeledBy="{Binding ElementName=FriendlyNameLabel}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Minimum PIN length" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="85"/>
-                        <TextBox x:Name="PinMinLength" InputScope="Number" Text="8" HorizontalAlignment="Left"/>
+                        <TextBlock Name="PinMinLengthLabel" Text="Minimum PIN length" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="85"/>
+                        <TextBox x:Name="PinMinLength" InputScope="Number" Text="8" HorizontalAlignment="Left"
+                            AutomationProperties.LabeledBy="{Binding ElementName=PinMinLengthLabel}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Maximum PIN length" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="85"/>
-                        <TextBox x:Name="PinMaxLength" InputScope="Number" Text="127" HorizontalAlignment="Left"/>
+                        <TextBlock Name="PinMaxLengthLabel" Text="Maximum PIN length" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="85"/>
+                        <TextBox x:Name="PinMaxLength" InputScope="Number" Text="127" HorizontalAlignment="Left"
+                            AutomationProperties.LabeledBy="{Binding ElementName=PinMaxLengthLabel}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                         <TextBlock Text="Character Set" HorizontalAlignment="Left" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Uppercase" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="85"/>
-                        <ComboBox x:Name="PinUppercase" SelectedIndex="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock Name="PinUppercaseLabel" Text="Uppercase" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="85"/>
+                        <!-- Always give a ComboBox a name that's accessible to a screen reader. In this case,
+                             reference the labeling TextBlock to have the accessible name set on the ComboBox. -->
+                        <ComboBox x:Name="PinUppercase" SelectedIndex="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                            AutomationProperties.LabeledBy="{Binding ElementName=PinUppercaseLabel}">
                             <x:String>Disallowed</x:String>
                             <x:String>Allowed</x:String>
                             <x:String>Require At Least One</x:String>
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Lowercase" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="85"/>
-                        <ComboBox x:Name="PinLowercase" SelectedIndex="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock Name="PinLowercaseLabel" Text="Lowercase" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="85"/>
+                        <ComboBox x:Name="PinLowercase" SelectedIndex="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                            AutomationProperties.LabeledBy="{Binding ElementName=PinLowercaseLabel}">
                             <x:String>Disallowed</x:String>
                             <x:String>Allowed</x:String>
                             <x:String>Require At Least One</x:String>
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Digits" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="85"/>
-                        <ComboBox x:Name="PinDigits" SelectedIndex="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock Name="PinDigitsLabel" Text="Digits" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="85"/>
+                        <ComboBox x:Name="PinDigits" SelectedIndex="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                            AutomationProperties.LabeledBy="{Binding ElementName=PinDigitsLabel}">
                             <x:String>Disallowed</x:String>
                             <x:String>Allowed</x:String>
                             <x:String>Require At Least One</x:String>
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="Special" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="85"/>
-                        <ComboBox x:Name="PinSpecial" SelectedIndex="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock Name="PinSpecialLabel" Text="Special" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="85"/>
+                        <ComboBox x:Name="PinSpecial" SelectedIndex="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                            AutomationProperties.LabeledBy="{Binding ElementName=PinSpecialLabel}">
                             <x:String>Disallowed</x:String>
                             <x:String>Allowed</x:String>
                             <x:String>Require At Least One</x:String>

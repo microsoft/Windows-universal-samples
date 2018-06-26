@@ -1,0 +1,47 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario3-clientCertificate.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div>
+        <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+        <div id="scenarioDescription">Client certificate</div>
+    </div>
+
+    <p>This scenario shows how to use a StreamWebSocket with a client certificate to connect to a server.
+    The sample server (localhost) requires a secure WebSocket (wss://) connection with a client certificate.
+    The StreamWebSocket client certificate property behaves the same as the MessageWebSocket client certificate property.</p>
+    <p>
+        <label>
+            Server address:
+            <input type="text" id="serverAddressField" value="wss://localhost/WebSocketSample/EchoWebSocketWithClientAuthentication.ashx" class="win-textbox" size="60" style="width: auto">
+        </label>
+    </p>
+    <p>
+        <button id="connectButton" class="win-button">Connect</button>
+        <button id="disconnectButton" class="win-button">Disconnect</button>
+    </p>
+    <div>
+        <p id="outputField">
+        </p>
+    </div>
+</body>
+
+</html>

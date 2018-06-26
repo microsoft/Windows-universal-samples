@@ -175,6 +175,13 @@ namespace SDKTemplate
                     {
                         characteristics = result.Characteristics;
                     }
+                    else
+                    {
+                        rootPage.NotifyUser("Error accessing service.", NotifyType.ErrorMessage);
+
+                        // On error, act as if there are no characteristics.
+                        characteristics = new List<GattCharacteristic>();
+                    }
                 }
                 else
                 {

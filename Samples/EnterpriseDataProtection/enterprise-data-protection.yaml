@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Enterprise data protection sample
+  description: This sample demonstrates Enterprise Data Protection (EDP) scenarios: File and buffer protection, clipboard protection, data protection under lock, and protected access to network resources.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

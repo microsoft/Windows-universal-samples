@@ -32,12 +32,18 @@
                 
                 <StackPanel x:Name="RenderingPanel" Visibility="Collapsed">
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock VerticalAlignment="center">View page</TextBlock>
-                        <TextBox x:Name="PageNumberBox" InputScope="Number" Width="30" Text="1" TextAlignment="Right" Margin="5,0,5,0"/>
+                        <TextBlock Name="ViewPageLabel" VerticalAlignment="center">View page</TextBlock>
+                        <!-- Always give a TextBox a name that's accessible to a screen reader. In this case,
+                             reference the labeling TextBlock to have the accessible name set on the TextBox. -->
+                        <TextBox x:Name="PageNumberBox" InputScope="Number" Width="30" Text="1" TextAlignment="Right" Margin="5,0,5,0"
+                            AutomationProperties.LabeledBy="{Binding ElementName=ViewPageLabel}"/>
                         <TextBlock VerticalAlignment="Center">of <Run x:Name="PageCountText"/>.</TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <ComboBox x:Name="Options" SelectedIndex="0">
+                        <!-- Always give a ComboBox a name that's accessible to a screen reader. Given that there's no labeling
+                             TextBlock to reference, explicitly set the accessible name on the ComboBox. A shipping app would
+                             localize this name. -->                        
+                        <ComboBox x:Name="Options" AutomationProperties.Name="View page size" SelectedIndex="0">
                             <ComboBoxItem>Actual size</ComboBoxItem>
                             <ComboBoxItem>Half size on beige background</ComboBoxItem>
                             <ComboBoxItem>Crop to center of page</ComboBoxItem>
@@ -45,7 +51,9 @@
                         <Button Click="{x:Bind ViewPage}" Content="View" Margin="10,0,0,0"/>
                     </StackPanel>
 
-                    <Image x:Name="Output" Stretch="None" Margin="0,10,0,0"/>
+                    <!-- Always give an Image a name that's accessible to screen reader, (unless the Image is purely decorative.) 
+                         A shipping app would localize this name.-->
+                    <Image x:Name="Output" AutomationProperties.Name="PDF document content" Stretch="None" Margin="0,10,0,0"/>
                 </StackPanel>
                 <ProgressRing x:Name="ProgressControl" Height="50" Width="50" IsActive="True" Visibility="Collapsed" Margin="0,10,0,0"/>
             </StackPanel>

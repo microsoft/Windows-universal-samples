@@ -232,6 +232,8 @@ namespace CameraAdvancedCapture
                 // from 0 ("everything is within the dynamic range of the camera") to CERTAINTY_CAP ("at this point the app
                 // strongly recommends an HDR capture"), where CERTAINTY_CAP can be any number between 0 and 1 that the app chooses.
                 HdrImpactBar.Value = Math.Min(CERTAINTY_CAP, args.ResultFrame.HighDynamicRange.Certainty);
+
+                SceneTypeTextBlock.Text = "Scene: " + args.ResultFrame.AnalysisRecommendation;
             });
         }
 

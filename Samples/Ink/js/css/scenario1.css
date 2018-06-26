@@ -44,6 +44,7 @@ body
     height: 100%;
     overflow: scroll;
     z-index: 0;
+    pen-action: none;
 }
 
 div.rectangle

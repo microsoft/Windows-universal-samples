@@ -10,35 +10,28 @@
 using AppUIBasics.Common;
 using AppUIBasics.Data;
 using System.Collections.Generic;
+using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace AppUIBasics.ControlPages
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ListViewPage : Page
+    public sealed partial class ListViewPage : ItemsPageBase
     {
-        private IEnumerable<ControlInfoDataGroup> _groups;
-
         public ListViewPage()
         {
             this.InitializeComponent();
         }
-        public IEnumerable<ControlInfoDataGroup> Groups
-        {
-            get { return this._groups; }
-        }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            _groups = await ControlInfoDataSource.GetGroupsAsync();
+            Items = ControlInfoDataSource.Instance.Groups.Take(3).SelectMany(g => g.Items).ToList();
         }
 
         private void ItemTemplate_Click(object sender, RoutedEventArgs e)
@@ -50,11 +43,10 @@ namespace AppUIBasics.ControlPages
 
         private void Control1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ListView listView = sender as ListView;
-            if (listView != null)
+            if (sender is ListView listView)
             {
                 SelectionOutput.Text = string.Format("You have selected {0} item(s).", listView.SelectedItems.Count);
-            }  
+            }
         }
 
         private void Control1_ItemClick(object sender, ItemClickEventArgs e)

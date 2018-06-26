@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "SignIn.xaml.h"
 
+using namespace concurrency;
+using namespace Platform;
+using namespace SDKTemplate;
 using namespace Windows::Security::Credentials;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml;
@@ -10,123 +13,144 @@ using namespace Windows::Security::Cryptography;
 using namespace Windows::UI::Xaml::Interop;
 using namespace Windows::UI::Xaml::Navigation;
 
-SDKTemplate::SignIn::SignIn()
+SignIn::SignIn()
 {
     InitializeComponent();
 }
 
-void SDKTemplate::SignIn::OnNavigatedTo(NavigationEventArgs ^ e)
+void SignIn::OnNavigatedTo(NavigationEventArgs^ e)
 {
     rootPage = MainPage::Current;
-    PassportAvailableCheck();
-
-    if (e->Parameter != nullptr)
+    PassportAvailableCheckAsync().then([this, e]()
     {
-        m_account = (Account^) e->Parameter;
-        textbox_Username->Text = m_account->Email;
-        textbox_Username->IsEnabled = false;
-        m_addingAccount = false;
-
-        if (m_account->UsesPassport == true)
+        if (e->Parameter != nullptr)
         {
-            SignInPassport(true);
+            m_account = (Account^)e->Parameter;
+            textbox_Username->Text = m_account->Email;
+            textbox_Username->IsEnabled = false;
+            m_addingAccount = false;
+
+            if (m_account->UsesPassport)
+            {
+                SignInPassportAsync(true);
+            }
         }
-    }
+    });
 }
 
-void SDKTemplate::SignIn::Button_SignIn_Click(Object ^ sender, RoutedEventArgs ^ e)
+void SignIn::Button_SignIn_Click(Object^ sender, RoutedEventArgs^ e)
 {
-    SignInPassword(false);
+    SignInPasswordAsync(false);
 }
 
-void SDKTemplate::SignIn::Button_Passport_Click(Object ^ sender, RoutedEventArgs ^ e)
+void SignIn::Button_Passport_Click(Object^ sender, RoutedEventArgs^ e)
 {
     if (m_addingAccount == false)
     {
-        SignInPassport(m_account->UsesPassport);
+        SignInPassportAsync(m_account->UsesPassport);
     }
     else
     {
-        SignInPassport(false);
+        SignInPassportAsync(false);
     }
 }
 
-void SDKTemplate::SignIn::PassportAvailableCheck()
+task<void> SignIn::PassportAvailableCheckAsync()
 {
-    concurrency::create_task(KeyCredentialManager::IsSupportedAsync())
-        .then([this](bool keyCredentialAvailable) 
+    return create_task(KeyCredentialManager::IsSupportedAsync()).then([this](bool keyCredentialAvailable)
     {
-        if (keyCredentialAvailable == false)
+        if (keyCredentialAvailable)
+        {
+            button_PassportSignIn->IsEnabled = true;
+        }
+        else
         {
             //
             // Key credential is not enabled yet as user 
             // needs to connect to a MSA account and select a pin in the connecting flow.
             //
             textblock_PassportStatusText->Text = "Microsoft Passport is not set up.\nPlease go to Windows Settings and connect an MSA account or set up a PIN!";
-            button_PassportSignIn->IsEnabled = false;
             m_passportAvailable = false;
             grid_PassportStatus->Background = ref new SolidColorBrush(ColorHelper::FromArgb(255,50,170,207));
         }
     });
 }
 
-void SDKTemplate::SignIn::SignInPassport(bool passportIsPrimaryLogin)
+task<void> SignIn::SignInPassportAsync(bool passportIsPrimaryLogin)
 {
-    if (passportIsPrimaryLogin == true)
+    if (passportIsPrimaryLogin)
     {
-        if (AuthenticatePassport() == true)
+        return AuthenticatePassportAsync().then([this](bool result)
         {
-            SuccessfulSignIn(m_account);
-            return;
-        }
-    }
-    else if (SignInPassword(true) == true)
-    {
-        if (CreatePassportKey(textbox_Username->Text) == true)
-        {
-            bool serverAddedPassportToAccount = AddPassportToAccountOnServer();
-
-            if (serverAddedPassportToAccount == true)
+            if (result)
             {
-                rootPage->NotifyUser("Successfully signed in with Microsoft Passport!", NotifyType::StatusMessage);
-                if (m_addingAccount == true)
-                {
-                    Account^ goodAccount = ref new Account();
-                    goodAccount->Name = textbox_Username->Text;
-                    goodAccount->Email = textbox_Username->Text;
-                    goodAccount->UsesPassport = true;
-                    SuccessfulSignIn(goodAccount);
-                }
-                else
-                {
-                    m_account->UsesPassport = true;
-                    SuccessfulSignIn(m_account);
-                }
-                return;
+                SuccessfulSignIn(m_account);
             }
-        }
+        }, task_continuation_context::use_current());
     }
-    textblock_ErrorField->Text = "Sign In with Passport failed. Try later.";
-    button_PassportSignIn->IsEnabled = false;
+    else
+    {
+        return SignInPasswordAsync(true).then([this](bool result)
+        {
+            if (result)
+            {
+                return CreatePassportKeyAsync(textbox_Username->Text).then([this](bool result)
+                {
+                    if (result)
+                    {
+                        return AddPassportToAccountOnServerAsync().then([this](bool serverAddedPassportToAccount)
+                        {
+                            if (serverAddedPassportToAccount)
+                            {
+                                rootPage->NotifyUser("Successfully signed in with Microsoft Passport!", NotifyType::StatusMessage);
+                                if (m_addingAccount)
+                                {
+                                    Account^ goodAccount = ref new Account();
+                                    goodAccount->Name = textbox_Username->Text;
+                                    goodAccount->Email = textbox_Username->Text;
+                                    goodAccount->UsesPassport = true;
+                                    SuccessfulSignIn(goodAccount);
+                                }
+                                else
+                                {
+                                    m_account->UsesPassport = true;
+                                    SuccessfulSignIn(m_account);
+                                }
+                            }
+                        });
+                    }
+                    else
+                    {
+                        return task_from_result();
+                    }
+                });
+            }
+            else
+            {
+                textblock_ErrorField->Text = "Sign In with Passport failed. Try later.";
+                button_PassportSignIn->IsEnabled = false;
+                return task_from_result();
+            }
+        }, task_continuation_context::use_current());
+    }
 }
 
-bool SDKTemplate::SignIn::SignInPassword(bool calledFromPassport)
+task<bool> SignIn::SignInPasswordAsync(bool calledFromPassport)
 {
     textblock_ErrorField->Text = "";
 
     if (textbox_Username->Text->IsEmpty() || passwordbox_Password->Password->IsEmpty())
     {
         textblock_ErrorField->Text = "Username/Password cannot be blank.";
-        return false;
+        return task_from_result(false);
     }
 
-    try
+    return AuthenticatePasswordCredentialsAsync().then([this, calledFromPassport](bool signedIn)
     {
-        bool signedIn = AuthenticatePasswordCredentials();
-
-        if (signedIn == false)
+        if (!signedIn)
         {
             textblock_ErrorField->Text = "Unable to sign you in with those credentials.";
+            return false;
         }
         else
         {
@@ -136,45 +160,44 @@ bool SDKTemplate::SignIn::SignInPassword(bool calledFromPassport)
             goodAccount->Name = textbox_Username->Text;
             goodAccount->Email = textbox_Username->Text;
             goodAccount->UsesPassport = true;
-            if (calledFromPassport == false)
+            if (!calledFromPassport)
             {
                 rootPage->NotifyUser("Successfully signed in with traditional username/password!", NotifyType::StatusMessage);
                 goodAccount->UsesPassport = false;
                 SuccessfulSignIn(goodAccount);
             }
-
             return true;
         }
-
-        return false;
-    }
-    catch (Platform::Exception^ e)
+    }, task_continuation_context::use_current()).then([this](task<bool> previousTask)
     {
-        rootPage->NotifyUser(e->Message, NotifyType::ErrorMessage);
-        return false;
-    }
+        try
+        {
+            return previousTask.get();
+        }
+        catch (Platform::Exception^ e)
+        {
+            rootPage->NotifyUser(e->Message, NotifyType::ErrorMessage);
+            return false;
+        }
+    });
 }
 
-bool SDKTemplate::SignIn::AuthenticatePasswordCredentials()
+task<bool> SignIn::AuthenticatePasswordCredentialsAsync()
 {
     // Developer TODO: Authenticate with server
-    return true;
+    return task_from_result(true, task_continuation_context::use_current());
 }
 
-bool SDKTemplate::SignIn::AuthenticatePassport()
+task<bool> SignIn::AuthenticatePassportAsync()
 {
     IBuffer^ message = CryptographicBuffer::ConvertStringToBinary("LoginAuth", BinaryStringEncoding::Utf8);
-    IBuffer^ authMessage = GetPassportAuthenticationMessage(message, m_account->Email);
-
-    if (authMessage != nullptr)
+    return GetPassportAuthenticationMessageAsync(message, m_account->Email).then([this](IBuffer^ authMessage)
     {
-        return true;
-    }
-
-    return false;
+        return authMessage != nullptr;
+    });
 }
 
-void SDKTemplate::SignIn::SuccessfulSignIn(Account ^ account)
+void SignIn::SuccessfulSignIn(Account^ account)
 {
     // If this is an already existing account, replace the old
     // version of this account in the account list.
@@ -199,15 +222,15 @@ void SDKTemplate::SignIn::SuccessfulSignIn(Account ^ account)
     this->Frame->Navigate(contentType, account);
 }
 
-bool SDKTemplate::SignIn::AddPassportToAccountOnServer()
+task<bool> SignIn::AddPassportToAccountOnServerAsync()
 {
     // Developer TODO: Add Passport signing info to server
-    return true;
+    return task_from_result(true, task_continuation_context::use_current());
 }
 
-bool SDKTemplate::SignIn::CreatePassportKey(Platform::String^ accountId)
+task<bool> SignIn::CreatePassportKeyAsync(String^ accountId)
 {
-    concurrency::create_task(KeyCredentialManager::RequestCreateAsync(accountId, KeyCredentialCreationOption::ReplaceExisting))
+    return create_task(KeyCredentialManager::RequestCreateAsync(accountId, KeyCredentialCreationOption::ReplaceExisting))
         .then([this](KeyCredentialRetrievalResult^ keyCreationResult)
     {
         if (keyCreationResult->Status == KeyCredentialStatus::Success)
@@ -215,8 +238,8 @@ bool SDKTemplate::SignIn::CreatePassportKey(Platform::String^ accountId)
             rootPage->NotifyUser("Successfully made key", NotifyType::StatusMessage);
 
             KeyCredential^ userKey = keyCreationResult->Credential;
-            concurrency::create_task(userKey->GetAttestationAsync())
-                .then([this](KeyCredentialAttestationResult^ keyAttestationResult) 
+            return create_task(userKey->GetAttestationAsync())
+                .then([this](KeyCredentialAttestationResult^ keyAttestationResult)
             {
                 IBuffer^ keyAttestation = nullptr;
                 IBuffer^ certificateChain = nullptr;
@@ -249,13 +272,8 @@ bool SDKTemplate::SignIn::CreatePassportKey(Platform::String^ accountId)
                 // status code of key attestation result: keyAttestationIncluded or 
                 // keyAttestationCanBeRetrievedLater and keyAttestationRetryType
                 // and send it to application server to register the user.
-                bool serverAddedPassportToAccount = AddPassportToAccountOnServer();
-
-                if (serverAddedPassportToAccount == true)
-                {
-                    return true;
-                }
-            }); 
+                return AddPassportToAccountOnServerAsync();
+            });
         }
         else if (keyCreationResult->Status == KeyCredentialStatus::UserCanceled)
         {
@@ -275,21 +293,20 @@ bool SDKTemplate::SignIn::CreatePassportKey(Platform::String^ accountId)
         {
             rootPage->NotifyUser(keyCreationResult->Status.ToString(), NotifyType::ErrorMessage);
         }
-    }).wait();
-
-    return false;
+        return task_from_result(false, task_continuation_context::use_current());
+    });
 }
 
-Windows::Storage::Streams::IBuffer ^ SDKTemplate::SignIn::GetPassportAuthenticationMessage(IBuffer ^ message, Platform::String ^ accountId)
+task<IBuffer^> SignIn::GetPassportAuthenticationMessageAsync(IBuffer^ message, String^ accountId)
 {
-    concurrency::create_task(KeyCredentialManager::OpenAsync(accountId))
+    return create_task(KeyCredentialManager::OpenAsync(accountId))
         .then([this, message](KeyCredentialRetrievalResult^ openKeyResult) 
     {
         if (openKeyResult->Status == KeyCredentialStatus::Success)
         {
             KeyCredential^ userKey = openKeyResult->Credential;
 
-            concurrency::create_task(userKey->RequestSignAsync(message))
+            return create_task(userKey->RequestSignAsync(message))
                 .then([this, message](KeyCredentialOperationResult^ signResult)
             {
                 if (signResult->Status == KeyCredentialStatus::Success)
@@ -307,7 +324,7 @@ Windows::Storage::Streams::IBuffer ^ SDKTemplate::SignIn::GetPassportAuthenticat
                 {
                     // Must recreate Passport key
                 }
-                else if (signResult->Status == KeyCredentialStatus::SecurityDeviceFailure || signResult->Status == KeyCredentialStatus::SecurityDeviceLocked)
+                else if (signResult->Status == KeyCredentialStatus::SecurityDeviceLocked)
                 {
                     // Can't use Passport right now, remember that hardware failed and suggest restart
                 }
@@ -315,7 +332,8 @@ Windows::Storage::Streams::IBuffer ^ SDKTemplate::SignIn::GetPassportAuthenticat
                 {
                     // Can't use Passport right now, try again later
                 }
-            }).wait();
+                return static_cast<IBuffer^>(nullptr);
+            });
         }
         else if (openKeyResult->Status == KeyCredentialStatus::NotFound)
         {
@@ -326,7 +344,6 @@ Windows::Storage::Streams::IBuffer ^ SDKTemplate::SignIn::GetPassportAuthenticat
         {
             // Can't use Passport right now, try again later
         }
+        return task_from_result<IBuffer^>(nullptr);
     });
-
-    return nullptr;
 }

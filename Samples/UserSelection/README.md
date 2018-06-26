@@ -5,7 +5,7 @@
 
 # Disabling selection sample
 
-Shows how your app can make content areas in your Windows Store app using JavaScript unselectable using the 
+Shows how your app can make content areas in your JavaScript app unselectable using the 
 [-ms-user-select](http://msdn.microsoft.com/library/windows/apps/hh779846) CSS attribute.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
@@ -15,7 +15,7 @@ Shows how your app can make content areas in your Windows Store app using JavaSc
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-By default, all content in the UI of a Windows Store app using JavaScript can be selected by a user and copied to the clipboard. 
+By default, all content in the UI of a JavaScript app can be selected by a user and copied to the clipboard. 
 However, access to UI elements (such as text, images, and other proprietary content) can be limited by excluding them from this default 
 behavior with [-ms-user-select](http://msdn.microsoft.com/library/windows/apps/hh779846).
 

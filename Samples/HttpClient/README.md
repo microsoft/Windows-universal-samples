@@ -167,7 +167,7 @@ The sample must also be updated when run against a non-localhost web server. To 
 
 **Note**  IIS is not available on Windows Phone. Instead, set up the web server on a separate 64-bit or 32-bit computer and follow the steps for using the sample against non-localhost web server.
 
-**Note**  When used with the supplied scripts, this sample communicates with another process (IIS server which is a desktop app) on the same machine over loopback for demonstration purposes only. A UWP app that communicates over loopback to another process that represents a UWP app or a desktop app is not allowed and such apps will not pass Store validation. For more information, see [How to enable loopback and troubleshoot network isolation](http://msdn.microsoft.com/library/windows/apps/hh780593).
+**Note**  When used with the supplied scripts, this sample communicates with another process (IIS server which is a desktop app) on the same machine over loopback for demonstration purposes only. A UWP app that communicates over loopback to another process that represents a UWP app or a desktop app is not allowed and such apps will not pass Microsoft Store validation. For more information, see [How to enable loopback and troubleshoot network isolation](http://msdn.microsoft.com/library/windows/apps/hh780593).
 
 However if a server different than IIS is used, then this requires some special configuration of the server to create the *HttpClientSample* folder.
 

@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Media transport controls sample
+  description: This sample shows how to create customized media transport controls for the Media Element in your XAML Windows App.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

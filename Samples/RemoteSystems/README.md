@@ -27,6 +27,7 @@ The systems all must be signed in with the same Microsoft Account (MSA).
 This will return all devices available via a proximal connection
 (including other users' devices that have their "Share Across Devices"
 setting set to "Everyone nearby").
+- Select discovered devices to see properties for them (manufacturer name and model name). These properties will be available only for your devices.
 - **App Launch:** Use RemoteLauncher to launch applications on a discovered remote system.
 - **App Services:** Use App Services with a discovered remote system to send messages between apps running on two systems.
 - **Settings**: Query the state of the "Share Across Devices" setting on the local system.

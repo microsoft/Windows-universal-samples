@@ -1,0 +1,76 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_CreateTile"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Place a 3D model.
+            </TextBlock>
+
+            <RadioButton x:Name="FromPackageButton" Margin="0,10,0,0" GroupName="GLBSource" Content="Use GLB in package"
+                         Checked="{x:Bind GetFromPackage}" IsChecked="True"/>
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+            <RadioButton x:Name="FromFileButton" GroupName="GLBSource" Content="Pick a GLB file"
+                         Checked="{x:Bind GetFromFile}"/>
+                <Button x:Name="PickFileButton" Content="Pick file" IsEnabled="{x:Bind FromFileButton.IsChecked.Value, Mode=OneWay}"
+                        Click="{x:Bind PickFile}"
+                        Margin="10,0,0,0"/>
+            </StackPanel>
+            <TextBlock Margin="0,10,0,0">Source: <Run x:Name="GlbSourceRun"/></TextBlock>
+
+            <CheckBox x:Name="BoundingBoxCheckBox" Content="Custom bounding box" Margin="0,10,0,0"/>
+            <Grid Margin="30,0,0,0" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="1" Text="X" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Column="2" Text="Y" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Column="3" Text="Z" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Row="1" Text="Extent" HorizontalAlignment="Right" Margin="0,10,0,0"/>
+                <TextBox x:Name="BoundingBoxExtentsXTextBox" Grid.Row="1" Grid.Column="1" Text="0" Margin="10"
+                         TextAlignment="Right" IsEnabled="{x:Bind BoundingBoxCheckBox.IsChecked.Value, Mode=OneWay}"/>
+                <TextBox x:Name="BoundingBoxExtentsYTextBox" Grid.Row="1" Grid.Column="2" Text="0" Margin="10"
+                         TextAlignment="Right" IsEnabled="{x:Bind BoundingBoxCheckBox.IsChecked.Value, Mode=OneWay}"/>
+                <TextBox x:Name="BoundingBoxExtentsZTextBox" Grid.Row="1" Grid.Column="3" Text="0" Margin="10"
+                         TextAlignment="Right" IsEnabled="{x:Bind BoundingBoxCheckBox.IsChecked.Value, Mode=OneWay}"/>
+                <TextBlock Grid.Row="2" Text="Center" HorizontalAlignment="Right" Margin="0,10,0,0"/>
+                <TextBox x:Name="BoundingBoxCenterXTextBox" Grid.Row="2" Grid.Column="1" Text="0" Margin="10"
+                         TextAlignment="Right" IsEnabled="{x:Bind BoundingBoxCheckBox.IsChecked.Value, Mode=OneWay}"/>
+                <TextBox x:Name="BoundingBoxCenterYTextBox" Grid.Row="2" Grid.Column="2" Text="0" Margin="10"
+                         TextAlignment="Right" IsEnabled="{x:Bind BoundingBoxCheckBox.IsChecked.Value, Mode=OneWay}"/>
+                <TextBox x:Name="BoundingBoxCenterZTextBox" Grid.Row="2" Grid.Column="3" Text="0" Margin="10"
+                         TextAlignment="Right" IsEnabled="{x:Bind BoundingBoxCheckBox.IsChecked.Value, Mode=OneWay}"/>
+                <TextBlock Grid.Row="3" Grid.ColumnSpan="4" Text="Units are meters."/>
+            </Grid>
+
+            <Button Content="Create secondary tile" Margin="0,10,0,0" Click="{x:Bind CreateSecondaryTile}"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

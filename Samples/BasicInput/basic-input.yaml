@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Basic input sample
+  description: This sample shows how to handle input in Universal Windows Apps.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - vb
+  technologies:
+  - windows

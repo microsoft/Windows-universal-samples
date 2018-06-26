@@ -1,0 +1,13 @@
+### YamlMime:Sample
+sample:
+- name: Calendar sample
+  description: This sample demonstrates how to use the Calendar class in the Windows.Globalization namespace to manipulate and process dates based on a calendar system and the user's globalization preferences.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  - vb
+  technologies:
+  - windows

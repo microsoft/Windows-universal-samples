@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="AppUIBasics.ControlPages.PersonPicturePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel>
+        <local:ControlExample x:Name="Example1" HeaderText="Select different looks for the person picture.">
+
+            <PersonPicture x:Name="personPicture" 
+                VerticalAlignment="Top"
+                ProfilePicture="{Binding IsChecked, ElementName=ProfileImageRadio, Converter={StaticResource booleanToValueConverter}, ConverterParameter='https://docs.microsoft.com/en-us/windows/uwp/contacts-and-calendar/images/shoulder-tap-static-payload.png'}"
+                DisplayName="{x:Bind DisplayNameRadio.IsChecked, Mode=OneWay, Converter={StaticResource booleanToValueConverter}, ConverterParameter='Jane Doe'}"
+                Initials="{x:Bind InitialsRadio.IsChecked, Mode=OneWay, Converter={StaticResource booleanToValueConverter}, ConverterParameter='SB'}" />
+
+            <local:ControlExample.Options>
+                <StackPanel>
+                    <RadioButton x:Name="ProfileImageRadio" GroupName="Profile" Content="Profile Image" IsChecked="True" />
+                    <RadioButton x:Name="DisplayNameRadio" GroupName="Profile" Content="Display Name" />
+                    <RadioButton x:Name="InitialsRadio" GroupName="Profile" Content="Initials" />
+                </StackPanel>
+            </local:ControlExample.Options>
+            <local:ControlExample.Xaml>
+                <Grid>
+                    <RichTextBlock x:Name="rtb" Style="{StaticResource XamlCodeRichTextBlockStyle}" Visibility="{x:Bind ProfileImageRadio.IsChecked, Mode=OneWay}">
+                        <Paragraph>&lt;PersonPicture ProfilePicture=&quot;https://docs.microsoft.com/en-us/windows/uwp/contacts-and-calendar/images/shoulder-tap-static-payload.png&quot; /&gt;</Paragraph>
+                    </RichTextBlock>
+                    <RichTextBlock x:Name="rtb1" Style="{StaticResource XamlCodeRichTextBlockStyle}" Visibility="{x:Bind DisplayNameRadio.IsChecked, Mode=OneWay}">
+                        <Paragraph>&lt;PersonPicture DisplayName=&quot;Jane Doe&quot; /&gt;</Paragraph>
+                    </RichTextBlock>
+                    <RichTextBlock x:Name="rtb2" Style="{StaticResource XamlCodeRichTextBlockStyle}" Visibility="{x:Bind InitialsRadio.IsChecked, Mode=OneWay}">
+                        <Paragraph>&lt;PersonPicture Initials=&quot;SB&quot; /&gt;</Paragraph>
+                    </RichTextBlock>
+                </Grid>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+    </StackPanel>
+</Page>

@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Tailored multiple views sample
+  description: Showcases how to build tailored UI using multiple views that are optimized for one-handed use.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

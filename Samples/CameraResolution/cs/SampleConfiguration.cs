@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
 using Windows.Media.Capture;
 using Windows.UI.Core;
+using Windows.Media.MediaProperties;
 
 namespace SDKTemplate
 {
@@ -50,6 +51,22 @@ namespace SDKTemplate
         public bool IsRecording { get; set; }
         public MediaCapture MediaCapture { get; private set; }
 
+        /// <summary>
+        /// Sets encoding properties on a camera stream. Ensures CaptureElement and preview stream are stopped before setting properties.
+        /// </summary>
+        public async Task SetMediaStreamPropertiesAsync(MediaStreamType streamType, IMediaEncodingProperties encodingProperties)
+        {
+            // Stop preview and unlink the CaptureElement from the MediaCapture object
+            await MediaCapture.StopPreviewAsync();
+            _previewControl.Source = null;
+
+            // Apply desired stream properties
+            await MediaCapture.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoPreview, encodingProperties);
+
+            // Recreate the CaptureElement pipeline and restart the preview
+            _previewControl.Source = MediaCapture;
+            await MediaCapture.StartPreviewAsync();
+        }
 
         /// <summary>
         /// Initializes the MediaCapture, starts preview.

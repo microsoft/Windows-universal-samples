@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Simple inking sample
+  description: This sample demonstrates how to use ink functionality (such as capturing ink from user input and performing handwriting recognition on ink strokes) in Universal Windows apps using C#.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

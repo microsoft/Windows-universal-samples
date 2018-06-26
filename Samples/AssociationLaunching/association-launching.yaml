@@ -1,0 +1,11 @@
+### YamlMime:Sample
+sample:
+- name: Association launching sample
+  description: This sample shows you how to launch an app for to handle a file type or a protocol (also known as custom scheme).
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - vb
+  technologies:
+  - windows

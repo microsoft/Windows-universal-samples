@@ -40,6 +40,22 @@ Hdr Video.
 1. When you choose "Query Profile for HDR Support" button, the app will query the if the back video capture device supports a Video Profile. Then we query the available profiles
    to see if Hdr Video is supported calling the IsHdrVideoSupported() method. If so, we set Media Capture settings to the Hdr supported video profile and set Hdr Video mode to auto.
 
+Note that not all cameras will have camera profiles.
+They are needed only if the camera has combinations of pins or media types which cannot be used simultaneously,
+such as a camera which cannot capture at the highest photo resolution
+while simultaneously streaming at the highest video resolution.
+
+Developers who wish to test their profile logic should target MIPI-based cameras
+that expose multiple pins.
+Example of these cameras are various QC SOC-based devices
+(such as the Lumia 950/950XL and HP Elite X3)
+or Intel MIPI-based systems
+(such as the Surface Pro, Surface Pro 4, Surface Book,
+and Surface Laptop).
+Note that for the Surface Pro 4 and Surface Book 1,
+the latest 4731 camera drivers publish profiles,
+but the factory image drivers do not.
+
 Related topics
 --------------
 [Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)  

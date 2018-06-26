@@ -170,7 +170,7 @@ void DeviceEvents::InterruptMessageWorker(CustomDevice^ fx2Device, IBuffer^ swit
         catch (task_canceled)
         {
             rootPage->NotifyUser("Pending GetInterruptMessage IO Control cancelled", NotifyType::StatusMessage);
-            failure = true;
+            failure = false;
         }
         catch (Exception^ exception)
         {

@@ -20,9 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="RpcClient.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
     <ClCompile Include="Fx2Driver.cpp">
       <Filter>Model</Filter>
     </ClCompile>
@@ -42,13 +39,9 @@
     <ClCompile Include="ServiceViewModel.cpp">
       <Filter>ViewModel</Filter>
     </ClCompile>
-    <ClCompile Include="RpcInterface.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="RpcClient.h">
-      <Filter>Model</Filter>
-    </ClInclude>
     <ClInclude Include="Fx2Driver.h">
       <Filter>Model</Filter>
     </ClInclude>
@@ -96,11 +89,11 @@
     <AppxManifest Include="Package.appxmanifest" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Scenario1_MeteringData.xaml" />
-    <Page Include="Scenario2_DeviceConnect.xaml" />
-    <Page Include="Scenario3_DeviceIO.xaml" />
-    <Page Include="Scenario4_DeviceEvents.xaml" />
-    <Page Include="Scenario5_DeviceReadWrite.xaml" />
+    <Page Include="..\shared\Scenario1_MeteringData.xaml" />
+    <Page Include="..\shared\Scenario2_DeviceConnect.xaml" />
+    <Page Include="..\shared\Scenario3_DeviceIO.xaml" />
+    <Page Include="..\shared\Scenario4_DeviceEvents.xaml" />
+    <Page Include="..\shared\Scenario5_DeviceReadWrite.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml" />
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
   </ItemGroup>

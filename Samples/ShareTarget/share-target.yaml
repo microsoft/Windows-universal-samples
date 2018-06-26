@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Sharing content target app sample
+  description: This sample demonstrates how an app receives content shared from another app.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

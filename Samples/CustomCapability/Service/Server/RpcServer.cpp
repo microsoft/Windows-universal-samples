@@ -257,6 +257,7 @@ void RemoteOpen(
     _In_ handle_t hBinding,
     _Out_ PPCONTEXT_HANDLE_TYPE pphContext)
 {
+    std::cout << "opening rpc endpoint" << std::endl;
     *pphContext = static_cast<PCONTEXT_HANDLE_TYPE *>(midl_user_allocate(sizeof(METERING_CONTEXT)));
     METERING_CONTEXT* meteringContext = static_cast<METERING_CONTEXT *>(*pphContext);
     meteringContext->metering = new Metering(DEFAULT_METERING_PERIOD);
@@ -267,6 +268,7 @@ void RemoteOpen(
 //
 void RemoteClose(_Inout_ PPCONTEXT_HANDLE_TYPE pphContext)
 {
+    std::cout << "closing rpc endpoint" << std::endl;
     if (*pphContext == nullptr)
     {
         //Log error, client tried to close a NULL handle.
@@ -289,6 +291,7 @@ void RemoteClose(_Inout_ PPCONTEXT_HANDLE_TYPE pphContext)
 void __RPC_USER PCONTEXT_HANDLE_TYPE_rundown(
     _In_ PCONTEXT_HANDLE_TYPE phContext)
 {
+    std::cout << "client died" << std::endl;
     StopMetering(phContext);
     RemoteClose(&phContext);
 }
@@ -317,6 +320,7 @@ void SetSamplePeriod(
 
 void StopMetering(_In_ PCONTEXT_HANDLE_TYPE phContext)
 {
+    std::cout << "stop metering" << std::endl;
     METERING_CONTEXT* meteringContext = static_cast<METERING_CONTEXT *>(phContext);
     meteringContext->metering->StopMetering();
 }

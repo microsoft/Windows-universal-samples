@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Complex inking sample
+  description: This sample demonstrates how to use advanced InkPresenter functionality to achieve scenarios such as interleaving ink with other objects, selecting ink, copy/paste, and event handling.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows

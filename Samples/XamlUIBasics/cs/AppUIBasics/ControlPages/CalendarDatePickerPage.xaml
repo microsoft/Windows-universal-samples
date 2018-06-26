@@ -1,0 +1,18 @@
+﻿<Page 
+    x:Class="AppUIBasics.ControlPages.CalendarDatePickerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics">
+    <StackPanel>
+        <local:ControlExample x:Name="Example1" HeaderText="CalendarDatePicker with a header and placeholder text.">
+            <local:ControlExample.Example>
+                <CalendarDatePicker PlaceholderText="Pick a date" Header="Calendar" />
+            </local:ControlExample.Example>
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>&lt;CalendarDatePicker PlaceholderText="Pick a date" Header="Calendar" /&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+    </StackPanel>
+</Page>

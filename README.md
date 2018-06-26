@@ -14,7 +14,7 @@ This repo contains the samples that demonstrate the API usage patterns for the U
 
 ## Universal Windows Platform development
 
-These samples require Visual Studio 2017 and the Windows Software Development Kit (SDK) for Windows 10 to build, test, and deploy your Universal Windows Platform apps.
+These samples require Visual Studio 2017 Update 4 or higher and the Windows Software Development Kit (SDK) version 16299 for Windows 10.
 
    [Get a free copy of Visual Studio 2017 Community Edition with support for building Universal Windows Platform apps](http://go.microsoft.com/fwlink/p/?LinkID=280676)
 
@@ -93,35 +93,36 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/CameraResolution">Camera resolution</a></td>
+  <td><a href="Samples/CameraStreamCoordinateMapper">Camera stream coordinate mapper</a></td>
   <td><a href="Samples/CameraStreamCorrelation">Camera stream correlation</a></td>
-  <td><a href="Samples/LiveDash">DASH streaming</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/LiveDash">DASH streaming</a></td>
   <td><a href="Samples/D2DPhotoAdjustment">Direct2D photo adjustment</a></td>
   <td><a href="Samples/MediaEditing">Media editing</a></td>
-  <td><a href="Samples/MediaImport">Media import</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/MediaImport">Media import</a></td>
   <td><a href="Samples/XamlCustomMediaTransportControls">Media transport controls</a></td>
   <td><a href="Samples/MIDI">MIDI</a></td>
-  <td><a href="Samples/Playlists">Playlists</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/Playlists">Playlists</a></td>
   <td><a href="Samples/PlayReady">PlayReady</a></td>
   <td><a href="Samples/CameraOpenCV">Processing frames with OpenCV</a></td>
-  <td><a href="Samples/SimpleImaging">Simple imaging</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/SimpleImaging">Simple imaging</a></td>
   <td><a href="Samples/SpatialSound">Spatial audio</a></td>
   <td><a href="Samples/SystemMediaTransportControls">System media transport controls</a></td>
-  <td><a href="Samples/MediaTranscoding">Transcoding media</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/MediaTranscoding">Transcoding media</a></td>
   <td><a href="Samples/VideoPlayback">Video playback</a></td>
   <td><a href="Samples/VideoPlaybackSynchronization">Video playback synchronization</a></td>
-  <td><a href="Samples/CameraVideoStabilization">Video stabilization</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/CameraVideoStabilization">Video stabilization</a></td>
   <td><a href="Samples/WindowsAudioSession">Windows audio session (WASAPI)</a></td>
  </tr>
 </table>
@@ -150,9 +151,11 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/Appointments">Appointment calendar</a></td>
   <td><a href="Samples/ContactCards">Contact cards</a></td>
-  <td><a href="Samples/ContactPicker">Contact picker</a></td>
+  <td><a href="Samples/ContactPanel">Contact panel</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/ContactPicker">Contact picker</a></td>
+  <td><a href="Samples/MyPeopleNotifications">My People notifications</a></td>
   <td><a href="Samples/UserDataAccountManager">UserDataAccountManager</a></td>
  </tr>
 </table>
@@ -282,6 +285,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/ShareSource">Sharing content source app</a></td>
   <td><a href="Samples/ShareTarget">Sharing content target app</a></td>
+  <td><a href="Samples/UserActivity">User activities</a></td>
  </tr>
 </table>
 
@@ -326,24 +330,25 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/LampDevice">Lamp device</a></td>
   <td><a href="Samples/LightSensor">Light sensor</a></td>
-  <td><a href="Samples/MagneticStripeReader">Magnetic stripe reader</a></td>
+  <td><a href="Samples/Magnetometer">Magnetometer</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/MagneticStripeReader">Magnetic stripe reader</a></td>
   <td><a href="Samples/Nfc">Near field communication (NFC)</a></td>
   <td><a href="Samples/NfcProvisioner">NFC enterprise provisioner</a></td>
-  <td><a href="Samples/OrientationSensor">Orientation sensor</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/OrientationSensor">Orientation sensor</a></td>
   <td><a href="Samples/Pedometer">Pedometer</a></td>
   <td><a href="Samples/PosPrinter">POS printer</a></td>
-  <td><a href="Samples/ProximitySensor">Proximity sensor</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/ProximitySensor">Proximity sensor</a></td>
   <td><a href="Samples/RadialController">Radial controller</a></td>
   <td><a href="Samples/RelativeInclinometer">Relative inclinometer</a></td>
-  <td><a href="Samples/SerialArduino">Serial Arduino</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/SerialArduino">Serial Arduino</a></td>
   <td><a href="Samples/IoT-SPI">Serial Peripheral Interface (SPI)</a></td>
   <td><a href="Samples/SimpleOrientationSensor">Simple orientation sensor</a></td>
  </tr>
@@ -430,18 +435,20 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 
 <table>
  <tr>
+  <td><a href="Samples/BasicHologram">Basic hologram</a></td>
   <td><a href="Samples/HolographicDepthBasedImageStabilization">Depth-based focus plane</a></td>
   <td><a href="Samples/HolographicFaceTracking">Holographic face tracking</a></td>
-  <td><a href="Samples/HolographicMixedRealityCapture">Holographic mixed reality capture</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/HolographicMixedRealityCapture">Holographic mixed reality capture</a></td>
   <td><a href="Samples/HolographicSpatialMapping">Holographic spatial mapping</a></td>
   <td><a href="Samples/HolographicSpatialStage">Holographic spatial stage</a></td>
-  <td><a href="Samples/HolographicVoiceInput">Holographic voice input</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/HolographicVoiceInput">Holographic voice input</a></td>
   <td><a href="Samples/SpatialInteractionSource">Spatial interaction source</a></td>
   <td><a href="Samples/HolographicTagAlong">Tag-along hologram</a></td>
+  <td><a href="Samples/MixedRealityModel">Mixed Reality Model</a></td>
  </tr>
 </table>
 

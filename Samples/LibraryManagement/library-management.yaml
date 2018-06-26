@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Library management sample
+  description: Demonstrates how to get a list of the folders in a user's library and how to let users add and remove folders from that list.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows

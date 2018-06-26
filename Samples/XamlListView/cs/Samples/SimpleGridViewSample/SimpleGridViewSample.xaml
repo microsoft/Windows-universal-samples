@@ -57,7 +57,7 @@
 
         <Button Style="{StaticResource SplitViewTogglePaneButtonStyle}"
                     VerticalAlignment="Center"
-                    Click="ShowSliptView"/>
+                    Click="ShowSplitView"/>
         <TextBlock Text="Simple GridView Sample" 
                    VerticalAlignment="Center"
                    Style="{ThemeResource TitleTextBlockStyle}" 

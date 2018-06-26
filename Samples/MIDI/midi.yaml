@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: MIDI sample
+  description: This sample demonstrates how to use the Windows.Devices.Midi API in a Windows Runtime app.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

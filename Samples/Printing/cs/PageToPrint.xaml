@@ -65,11 +65,10 @@
         <RichTextBlockOverflow x:Name="ContinuationPageLinkedContainer" Grid.Row="3" Grid.ColumnSpan="2"/>
         <Image Source="ms-appx:///Assets/print_1.png" x:Name="ScenarioImage" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1" Margin="10"/>
 
-        <StackPanel x:Name="Footer" Grid.Row="4" Grid.Column="0" VerticalAlignment="Top" Visibility="Collapsed">
-            <Image Source="ms-appx:///Assets/splash-sdk.png" HorizontalAlignment="Left" Stretch="None"/>
-            <RichTextBlock Foreground="Black" FontSize="16" TextAlignment="Left" FontFamily="Segoe UI">
-                <Paragraph>Copyright © Microsoft Corporation. All rights reserved.</Paragraph>
-            </RichTextBlock>
+        <StackPanel x:Name="Footer" Grid.Row="4" Grid.ColumnSpan="2">
+            <TextBlock Foreground="Black" FontSize="16" TextAlignment="Left" FontFamily="Segoe UI">
+                Copyright © Microsoft Corporation. All rights reserved.
+            </TextBlock>
         </StackPanel>
     </Grid>
 </Page>

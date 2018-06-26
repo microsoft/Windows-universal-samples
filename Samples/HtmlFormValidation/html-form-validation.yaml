@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Form validation (HTML) sample
+  description: Demonstrates HTML5 input form and validation attributes that enable you to help your users enter the correct data in the right format into your page's forms.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - js
+  technologies:
+  - windows

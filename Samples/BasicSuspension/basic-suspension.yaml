@@ -1,0 +1,10 @@
+### YamlMime:Sample
+sample:
+- name: Basic Suspension Sample
+  description: This sample demonstrates how to suspend, shut down and resume your application using the Suspension Manager.
+  generateZip: false
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BarcodeScanner", "BarcodeScanner.vcxproj", "{9056786E-8B85-5EF6-8CED-2D299FC93CEA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BarcodeScanner", "BarcodeScanner.vcxproj", "{025142E0-D968-5E48-B0D6-B0249A6097F4}"
 EndProject
 Global
     GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
         Release|x86 = Release|x86
     EndGlobalSection
     GlobalSection(ProjectConfigurationPlatforms) = postSolution
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Debug|ARM.ActiveCfg = Debug|ARM
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Debug|ARM.Build.0 = Debug|ARM
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Debug|ARM.Deploy.0 = Debug|ARM
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Debug|x64.ActiveCfg = Debug|x64
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Debug|x64.Build.0 = Debug|x64
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Debug|x64.Deploy.0 = Debug|x64
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Debug|x86.ActiveCfg = Debug|Win32
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Debug|x86.Build.0 = Debug|Win32
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Debug|x86.Deploy.0 = Debug|Win32
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Release|ARM.ActiveCfg = Release|ARM
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Release|ARM.Build.0 = Release|ARM
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Release|ARM.Deploy.0 = Release|ARM
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Release|x64.ActiveCfg = Release|x64
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Release|x64.Build.0 = Release|x64
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Release|x64.Deploy.0 = Release|x64
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Release|x86.ActiveCfg = Release|Win32
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Release|x86.Build.0 = Release|Win32
-        {9056786E-8B85-5EF6-8CED-2D299FC93CEA}.Release|x86.Deploy.0 = Release|Win32
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Debug|ARM.ActiveCfg = Debug|ARM
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Debug|ARM.Build.0 = Debug|ARM
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Debug|ARM.Deploy.0 = Debug|ARM
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Debug|x64.ActiveCfg = Debug|x64
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Debug|x64.Build.0 = Debug|x64
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Debug|x64.Deploy.0 = Debug|x64
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Debug|x86.ActiveCfg = Debug|Win32
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Debug|x86.Build.0 = Debug|Win32
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Debug|x86.Deploy.0 = Debug|Win32
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Release|ARM.ActiveCfg = Release|ARM
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Release|ARM.Build.0 = Release|ARM
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Release|ARM.Deploy.0 = Release|ARM
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Release|x64.ActiveCfg = Release|x64
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Release|x64.Build.0 = Release|x64
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Release|x64.Deploy.0 = Release|x64
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Release|x86.ActiveCfg = Release|Win32
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Release|x86.Build.0 = Release|Win32
+        {025142E0-D968-5E48-B0D6-B0249A6097F4}.Release|x86.Deploy.0 = Release|Win32
     EndGlobalSection
     GlobalSection(SolutionProperties) = preSolution
         HideSolutionNode = FALSE
