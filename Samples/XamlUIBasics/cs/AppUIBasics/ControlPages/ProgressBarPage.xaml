@@ -37,7 +37,7 @@
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
-        
+
         <local:ControlExample HeaderText="A determinate progress bar.">
             <StackPanel x:Name="Control2" Orientation="Horizontal">
                 <ProgressBar Width="130" x:Name="ProgressBar2" />

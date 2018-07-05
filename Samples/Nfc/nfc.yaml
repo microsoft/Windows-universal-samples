@@ -1,11 +1,14 @@
 ### YamlMime:Sample
 sample:
 - name: Near field communication (NFC) sample
-  description: This sample shows how to: - Implement an NFC HCE (Host Card Emulation) tap+pay application - Communicate with a smart card or NFC tag Note The Windows universal samples require Visual Studio 2015 to build and Windows 10 to execute.
-  generateZip: false
+  description: Shows how to implement an NFC HCE (Host Card Emulation) tap+pay application.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
-  - csharp
-  - cpp
   technologies:
   - windows
+  vssolution: /Samples/Nfc/Nfc.sln

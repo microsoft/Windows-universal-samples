@@ -1,0 +1,17 @@
+### YamlMime:Sample
+sample:
+- name: UserCertificateStore sample
+  description: Shows how to use the UserCertificateStore class to add and delete a certificate in the user's User Personal certificate store (also known as the MY store).
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows
+  vssolution: /Samples/UserCertificateStore/cs/UserCertificateStore.sln

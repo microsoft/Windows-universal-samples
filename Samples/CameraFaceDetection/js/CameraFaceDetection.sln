@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CameraFaceDetection", "CameraFaceDetection.jsproj", "{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CameraFaceDetection", "CameraFaceDetection.jsproj", "{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Debug|ARM.ActiveCfg = Debug|ARM
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Debug|ARM.Build.0 = Debug|ARM
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Debug|ARM.Deploy.0 = Debug|ARM
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Debug|x64.ActiveCfg = Debug|x64
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Debug|x64.Build.0 = Debug|x64
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Debug|x64.Deploy.0 = Debug|x64
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Debug|x86.ActiveCfg = Debug|x86
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Debug|x86.Build.0 = Debug|x86
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Debug|x86.Deploy.0 = Debug|x86
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Release|ARM.ActiveCfg = Release|ARM
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Release|ARM.Build.0 = Release|ARM
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Release|ARM.Deploy.0 = Release|ARM
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Release|x64.ActiveCfg = Release|x64
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Release|x64.Build.0 = Release|x64
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Release|x64.Deploy.0 = Release|x64
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Release|x86.ActiveCfg = Release|x86
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Release|x86.Build.0 = Release|x86
-		{20CF350D-2855-5A20-8B69-B2D1A9A72AA2}.Release|x86.Deploy.0 = Release|x86
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Debug|ARM.ActiveCfg = Debug|ARM
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Debug|ARM.Build.0 = Debug|ARM
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Debug|ARM.Deploy.0 = Debug|ARM
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Debug|x64.ActiveCfg = Debug|x64
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Debug|x64.Build.0 = Debug|x64
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Debug|x64.Deploy.0 = Debug|x64
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Debug|x86.ActiveCfg = Debug|x86
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Debug|x86.Build.0 = Debug|x86
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Debug|x86.Deploy.0 = Debug|x86
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Release|ARM.ActiveCfg = Release|ARM
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Release|ARM.Build.0 = Release|ARM
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Release|ARM.Deploy.0 = Release|ARM
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Release|x64.ActiveCfg = Release|x64
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Release|x64.Build.0 = Release|x64
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Release|x64.Deploy.0 = Release|x64
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Release|x86.ActiveCfg = Release|x86
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Release|x86.Build.0 = Release|x86
+		{43CE4E40-D0FF-5DCB-BEC7-4BCAF8299DC0}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

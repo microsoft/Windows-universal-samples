@@ -1,0 +1,16 @@
+### YamlMime:Sample
+sample:
+- name: Background media playback sample
+  description: Shows how to use MediaPlayer and MediaPlaybackList to create a collection of songs or videos that can continue to play even when the app is no longer in the foreground.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - js
+  technologies:
+  - windows
+  vssolution: /Samples/BackgroundMediaPlayback/cs/BackgroundMediaPlayback.sln

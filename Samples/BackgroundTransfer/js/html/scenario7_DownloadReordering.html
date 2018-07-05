@@ -1,0 +1,65 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="/js/scenario7_DownloadReordering.js"></script>
+</head>
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">Download reordering</div>
+    <p>
+        Transfers which belong to the same transfer group can be reordered after they have been started.
+    </p>
+    <p>
+        <label for="remoteAddressField">Remote address: </label>
+        <input type="text" class="win-textbox" id="remoteAddressField" value="http://localhost/BackgroundTransferSample/download.aspx" />
+    </p>
+    <p>
+        <label for="fileNameField">Local file name: </label>
+        <input type="text" class="win-textbox" id="fileNameField" value="DownloadReordering.txt" />
+    </p>
+    <p>
+        <button class="win-button" id="startDownloadButton">Start Download</button>
+    </p>
+    <p>
+        Select a pending transfer to reorder the downloads.
+    </p>
+    <p>
+        <button class="win-button" id="makeCurrentButton0" disabled>Make Current</button>
+        <input id="percentCompleteInput0" type="range" min="0" max="100" step="1" value="0" />
+        <span id="stateTextSpan0">idle</span>
+    </p>
+    <p>
+        <button class="win-button" id="makeCurrentButton1" disabled>Make Current</button>
+        <input id="percentCompleteInput1" type="range" min="0" max="100" step="1" value="0" />
+        <span id="stateTextSpan1">idle</span>
+    </p>
+    <p>
+        <button class="win-button" id="makeCurrentButton2" disabled>Make Current</button>
+        <input id="percentCompleteInput2" type="range" min="0" max="100" step="1" value="0" />
+        <span id="stateTextSpan2">idle</span>
+    </p>
+    <p>
+        <button class="win-button" id="makeCurrentButton3" disabled>Make Current</button>
+        <input id="percentCompleteInput3" type="range" min="0" max="100" step="1" value="0" />
+        <span id="stateTextSpan3">idle</span>
+    </p>
+    <p>
+        <button class="win-button" id="makeCurrentButton4" disabled>Make Current</button>
+        <input id="percentCompleteInput4" type="range" min="0" max="100" step="1" value="0" />
+        <span id="stateTextSpan4">idle</span>
+    </p>
+</body>
+</html>

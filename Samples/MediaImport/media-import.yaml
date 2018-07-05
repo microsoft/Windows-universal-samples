@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: Windows media import sample
-  description: This sample shows how to query files in a location (like a folder, library, device, or network location).
-  generateZip: false
+  description: Shows how to query files in a location (like a folder, library, device, or network location) using Windows.Media.Import APIs.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   technologies:
   - windows
+  vssolution: /Samples/MediaImport/cs/Import.sln

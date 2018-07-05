@@ -155,12 +155,12 @@ void PrintHelper::CreatePrintPreviewPages(Object^ sender, PaginateEventArgs^ e)
         lastRTBOOnPage = AddOnePrintPreviewPage(lastRTBOOnPage, pageDescription);
     }
 
-    OnContentCreated();
-
     PrintDocument^ printDocument = safe_cast<PrintDocument^>(sender);
 
     // Report the number of preview pages created
     printDocument->SetPreviewPageCount(static_cast<int>(m_printPreviewPages.size()), PreviewPageCountType::Intermediate);
+
+    OnPreviewPagesCreated(printingOptions);
 }
 
 void PrintHelper::GetPrintPreviewPage(Object^ sender, GetPreviewPageEventArgs^ e)
@@ -180,10 +180,10 @@ void PrintHelper::AddPrintPages(Object^ sender, AddPagesEventArgs^ e)
 {
     PrintDocument^ printDocument = safe_cast<PrintDocument^>(sender);
 
-    // Loop over all of the preview pages and add each one to  add each page to be printied
-    for (size_t i = 0; i < m_printPreviewPages.size(); i++)
+    // Loop over all of the preview pages and add each one to be printed
+    for (UIElement^ previewPage : m_printPreviewPages)
     {
-        printDocument->AddPage(m_printPreviewPages[i]);
+        printDocument->AddPage(previewPage);
     }
 
     // Indicate that all of the print pages have been provided
@@ -192,7 +192,7 @@ void PrintHelper::AddPrintPages(Object^ sender, AddPagesEventArgs^ e)
 
 /// <summary>
 /// This function creates and adds one print preview page to the internal cache of print preview
-/// pages stored in m_printPreviewPages.
+/// pages stored in m_printPreviewPages. Requires m_printPreviewPagesMutex to be held.
 /// </summary>
 /// <param name="lastRTBOAdded">Last RichTextBlockOverflow element added in the current content</param>
 /// <param name="printPageDescription">Printer's page description</param>
@@ -256,9 +256,4 @@ RichTextBlockOverflow^ PrintHelper::AddOnePrintPreviewPage(RichTextBlockOverflow
     m_printPreviewPages.push_back(page);
 
     return textLink;
-}
-
-void PrintHelper::RemovePageFromPrintPreviewCollection(int pageNumber)
-{
-    m_printPreviewPages.erase(m_printPreviewPages.begin() + pageNumber);
 }

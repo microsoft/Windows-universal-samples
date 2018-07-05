@@ -21,6 +21,7 @@
     <ClCompile Include="Scenario2_MultipleScanners.xaml.cpp" />
     <ClCompile Include="Scenario3_ActiveSymbologies.xaml.cpp" />
     <ClCompile Include="Scenario4_SymbologyAttributes.xaml.cpp" />
+    <ClCompile Include="Scenario5_DisplayingBarcodePreview.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -33,6 +34,7 @@
     <ClInclude Include="DataHelpers.h" />
     <ClInclude Include="Scenario3_ActiveSymbologies.xaml.h" />
     <ClInclude Include="Scenario4_SymbologyAttributes.xaml.h" />
+    <ClInclude Include="Scenario5_DisplayingBarcodePreview.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -46,6 +48,7 @@
     <Page Include="..\shared\Scenario2_MultipleScanners.xaml" />
     <Page Include="..\shared\Scenario3_ActiveSymbologies.xaml" />
     <Page Include="..\shared\Scenario4_SymbologyAttributes.xaml" />
+    <Page Include="..\shared\Scenario5_DisplayingBarcodePreview.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">

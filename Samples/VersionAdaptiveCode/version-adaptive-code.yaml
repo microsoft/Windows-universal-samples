@@ -1,0 +1,16 @@
+### YamlMime:Sample
+sample:
+- name: Version adaptive code sample
+  description: Shows ways of writing an app which adapts to the version of Windows it is running on, taking advantage of new features if available, and falling back to a simpler version if not.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - js
+  technologies:
+  - windows
+  vssolution: /Samples/VersionAdaptiveCode/cs/VersionAdaptiveCode.sln

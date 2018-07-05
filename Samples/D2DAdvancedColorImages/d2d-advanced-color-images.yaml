@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Direct2D advanced color image rendering sample
+  description: Shows how to use Direct2D to load and draw advanced color images.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/D2DAdvancedColorImages/cpp/D2DAdvancedColorImages.sln

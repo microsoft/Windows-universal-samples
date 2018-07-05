@@ -27,6 +27,7 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "UTF-8 text messages", "SDKTemplate.Scenario1" },
     { "Binary data stream", "SDKTemplate.Scenario2" },
     { "Client authentication", "SDKTemplate.Scenario3" },
+    { "Partial and Complete Messages", "SDKTemplate.Scenario4" },
 }; 
 
 Uri^ MainPage::TryGetUri(String^ uriString)

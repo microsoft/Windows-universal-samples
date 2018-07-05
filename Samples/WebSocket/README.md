@@ -67,7 +67,7 @@ This sample requires that network capabilities be set in the *Package.appxmanife
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Technical Preview
+**Server:** Windows Server 2016
 
 **Phone:**  Windows 10
 

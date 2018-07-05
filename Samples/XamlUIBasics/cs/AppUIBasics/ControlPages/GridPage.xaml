@@ -46,7 +46,7 @@
 
             <local:ControlExample.Options>
                 <StackPanel Orientation="Horizontal">
-                    <Slider x:Name="RowSlider" Minimum="0" Maximum="2" StepFrequency="1" Orientation="Vertical" 
+                    <Slider x:Name="RowSlider" Minimum="0" Maximum="2" StepFrequency="1" Orientation="Vertical"
                         IsDirectionReversed="True" TickFrequency="1" SnapsTo="Ticks" Height="110" VerticalAlignment="Top">
                         <Slider.Header>
                             <TextBlock Text="Grid.Row" Margin="0,0,0,10" />

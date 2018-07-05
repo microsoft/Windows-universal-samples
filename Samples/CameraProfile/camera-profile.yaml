@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Camera profiles sample
-  description: This sample demonstrates a new extension to Windows.Media.Capture.MediaCaptureInitializationSettings API.
-  generateZip: false
+  description: Shows a new extension to Windows.Media.Capture.MediaCaptureInitializationSettings API.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/CameraProfile/cs/CameraProfile.sln

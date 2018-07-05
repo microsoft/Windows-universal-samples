@@ -15,7 +15,9 @@ using System.Threading.Tasks;
 using Windows.Devices.PointOfService;
 using Windows.Security.Cryptography;
 using Windows.Storage.Streams;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 
 namespace SDKTemplate
 {
@@ -29,6 +31,7 @@ namespace SDKTemplate
             new Scenario() { Title = "Release/Retain functionality", ClassType = typeof(Scenario2_MultipleScanners) },
             new Scenario() { Title = "Active Symbologies", ClassType = typeof(Scenario3_ActiveSymbologies) },
             new Scenario() { Title = "Symbology Attributes", ClassType = typeof(Scenario4_SymbologyAttributes) },
+            new Scenario() { Title = "Displaying a Barcode Preview", ClassType = typeof(Scenario5_DisplayingBarcodePreview) },
         };
     }
 
@@ -95,8 +98,31 @@ namespace SDKTemplate
         }
     }
 
+    public partial class BindingHelpers
+    {
+        // Inverters for binding.
+        public static bool Not(bool value) => !value;
+        public static Visibility CollapsedIf(bool value) => value ? Visibility.Collapsed : Visibility.Visible;
+    }
+
     /// <summary>
-    /// The class is used for data-binding.
+    /// This class is used for data-binding.
+    /// </summary>
+    public class BarcodeScannerInfo
+    {
+        public BarcodeScannerInfo(String deviceName, String deviceId)
+        {
+            DeviceName = deviceName;
+            DeviceId = deviceId;
+        }
+
+        public String Name => $"{DeviceName} ({DeviceId})";
+        public String DeviceId { get; private set; }
+        private string DeviceName;
+    }
+
+    /// <summary>
+    /// This class is used for data-binding.
     /// </summary>
     public class SymbologyListEntry
     {

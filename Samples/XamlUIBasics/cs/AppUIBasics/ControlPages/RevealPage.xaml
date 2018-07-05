@@ -3,11 +3,117 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:AppUIBasics"
+    xmlns:media="using:Windows.UI.Xaml.Media"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <RevealBorderBrush x:Key="LightBorders" TargetTheme="Dark" Color="Transparent"/>
+        <media:AcrylicBrush x:Key="CustomAcrylicInAppBrush" BackgroundSource="Backdrop" TintOpacity="0.45" TintColor="#ff8ff0fb" FallbackColor="#ff8ff0fb"/>
+        <media:AcrylicBrush x:Key="CustomAcrylicInAppBrush_dark" BackgroundSource="Backdrop" TintOpacity="0.45" TintColor="#ff0E5A5C" FallbackColor="#ff0E5A5C"/>
+    </Page.Resources>
+
     <StackPanel>
-        <local:ControlExample x:Name="Example1" HeaderText="Reveal style applied on buttons">
+        <local:ControlExample x:Name="Example1" HeaderText="Reveal by default">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                <Grid BorderThickness="0,0,0,1" BorderBrush="{ThemeResource ButtonBackground}" Margin="0,10,10,10">
+                    <TextBlock Margin="5" TextWrapping="WrapWholeWords" Text="Reveal is on by default for many of our controls. For those controls, no enabling of Reveal is required. Please see the guidance documention for a full list."/>
+                </Grid>
+                <CommandBar Width="350" OverflowButtonVisibility="Collapsed" DefaultLabelPosition="Right" HorizontalAlignment="Left">
+                    <AppBarButton Icon="Admin" Label="Admin"/>
+                    <AppBarButton Icon="AllApps" Label="All Apps"/>
+                    <AppBarSeparator/>
+                    <AppBarButton Icon="CellPhone" Label="Call"/>
+                    <AppBarButton Icon="FullScreen" Label="Fullscreen"/>
+                    <AppBarButton Icon="Upload" Label="Upload"/>
+                </CommandBar>
+            </StackPanel>
+        </local:ControlExample>
+
+        <local:ControlExample x:Name="Example2" HeaderText="Reveal on custom surfaces">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource ButtonBackground}" Margin="0,10,10,10">
+                    <TextBlock Margin="5" TextWrapping="WrapWholeWords" Text="Reveal adjusts depending on the Theme. However, setting RequestedTheme on a container ensure that Reveal's borders stay light or dark depending on what you need."/>
+                    <TextBlock Margin="5" TextWrapping="WrapWholeWords" FontWeight="Bold" Text="ToggleTheme in the upper right corner to test this example."/>
+                </StackPanel>
+                <Grid x:Name="switchTheme" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Source="ms-appx:///Assets/Windows_Desktop.png" Width="512" Height="275"/>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid HorizontalAlignment="Center" Margin="5" Background="{ThemeResource SystemControlAcrylicElementBrush}">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                            <Grid HorizontalAlignment="Center" Margin="5" Background="{ThemeResource CustomAcrylicInAppBrush}" RequestedTheme="Light">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                            <Grid HorizontalAlignment="Center" Margin="5" Background="{ThemeResource CustomAcrylicInAppBrush_dark}" RequestedTheme="Dark">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>&lt;Grid HorizontalAlignment="Center" Margin="5" Background="{ThemeResource CustomAcrylicInAppBrush}" RequestedTheme="Light"&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;StackPanel Orientation="Vertical"&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;StackPanel Orientation="Horizontal"&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0"/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;/StackPanel&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;StackPanel Orientation="Horizontal"&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2"/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;/StackPanel&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/StackPanel&gt;</Paragraph>
+                    <Paragraph>&lt;/Grid&gt;</Paragraph>
+                    <Paragraph> </Paragraph>
+                    <Paragraph>&lt;Grid HorizontalAlignment="Center" Margin="5" Background="{ThemeResource CustomAcrylicInAppBrush_dark}" RequestedTheme="Dark"&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;StackPanel Orientation="Vertical"&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;StackPanel Orientation="Horizontal"&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0"/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;/StackPanel&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;StackPanel Orientation="Horizontal"&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2"/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;/StackPanel&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/StackPanel&gt;</Paragraph>
+                    <Paragraph>&lt;/Grid&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+
+        <local:ControlExample x:Name="Example3" HeaderText="Reveal style applied on buttons">
 
             <Button Style="{StaticResource ButtonRevealStyle}" Content="Button" Width="130" />
 
@@ -17,8 +123,8 @@
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
-        
-        <local:ControlExample x:Name="Example2" HeaderText="RevealBorderBrush applied on a Grid">
+
+        <local:ControlExample x:Name="Example4" HeaderText="RevealBorderBrush applied on a Grid">
 
             <Grid BorderThickness="3" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" Height="100" >
                 <TextBlock Text="SystemControlBackgroundListMediumRevealBorderBrush" Margin="10"/>

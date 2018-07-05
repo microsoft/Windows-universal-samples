@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Orientation sensor sample
-  description: This sample shows how to use the Windows.Devices.Sensors.OrientationSensor API.
-  generateZip: false
+  description: Shows how to use the Windows.Devices.Sensors.OrientationSensor API.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/OrientationSensor/cs/OrientationSensor.sln

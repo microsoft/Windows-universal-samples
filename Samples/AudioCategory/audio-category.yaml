@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Audio categories sample
-  description: This sample demonstrates how to create apps that use various audio categories.
-  generateZip: false
+  description: Shows how to create apps that use various audio categories.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - vb
   technologies:
   - windows
+  vssolution: /Samples/AudioCategory/cs/AudioCategory/AudioCategory.sln

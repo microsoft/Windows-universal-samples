@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Spatial interaction source sample
+  description: Shows how to use the different kind of SpatialInteractionSource such as Hand on HoloLens or Six Degree of Freedom (6DOF) Controllers on Windows Mixed Reality Desktop: - track the location of the source - handle user interactions such as gestures or actions on the controller's buttons.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/SpatialInteractionSource/cpp/SpatialInteractionSource.sln

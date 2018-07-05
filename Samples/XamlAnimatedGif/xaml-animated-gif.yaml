@@ -1,10 +1,16 @@
 ### YamlMime:Sample
 sample:
 - name: Animated GIF playback (XAML) sample
-  description: This sample demonstrates a solution for playback of animated GIF images using Windows XAML and the Win2D graphics framework.
-  generateZip: false
+  description: Shows a basic implementation of an animated GIF, and how to control GIF playback.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
+  - cpp
   technologies:
   - windows
+  vssolution: /Samples/XamlAnimatedGif/cs/AnimatedGif.sln

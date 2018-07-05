@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: JSON sample
-  description: This sample shows you how to encode and decode JavaScript Object Notation (JSON) objects, arrays, strings, numbers and booleans using classes in the Windows.Data.Json namespace.
-  generateZip: false
+  description: Shows how to encode and decode JavaScript Object Notation (JSON) objects, arrays, strings, numbers and booleans using classes in the Windows.Data.Json namespace.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   technologies:
   - windows
+  vssolution: /Samples/Json/cs/Json.sln

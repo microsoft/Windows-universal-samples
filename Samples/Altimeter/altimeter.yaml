@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Altimeter sample
-  description: This sample demonstrates the use of the Windows.Devices.Sensors.Altimeter API.
-  generateZip: false
+  description: Shows how to use the Windows.Devices.Sensors.Altimeter class.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -11,3 +15,4 @@ sample:
   - vb
   technologies:
   - windows
+  vssolution: /Samples/Altimeter/cs/Altimeter.sln

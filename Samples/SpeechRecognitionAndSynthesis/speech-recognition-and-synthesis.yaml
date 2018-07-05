@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Speech recognition and synthesis sample
-  description: This sample demonstrates the usage of Speech Recognition and Speech Synthesis (Text-to-speech) within Universal Applications.
-  generateZip: false
+  description: Shows how to use Speech Recognition and Speech Synthesis (Text-to-speech) in UWP apps.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/SpeechRecognitionAndSynthesis/cs/SpeechAndTTS.sln

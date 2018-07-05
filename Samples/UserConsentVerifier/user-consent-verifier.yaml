@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: UserConsentVerifier sample
-  description: Demonstrates how to use the UserConsentVerifier class to check whether a verifier device, such as a Microsoft Passport PIN, Windows Hello, or fingerprint reader, is available.
-  generateZip: false
+  description: Shows how to use the UserConsentVerifier class to check whether a verifier device, such as a Microsoft Passport PIN, Windows Hello, or fingerprint reader, is available.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/UserConsentVerifier/cs/UserConsentVerifier.sln

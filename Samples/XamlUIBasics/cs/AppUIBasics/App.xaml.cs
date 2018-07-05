@@ -16,7 +16,12 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
+using Windows.Foundation.Metadata;
 using Windows.Storage;
+using Windows.System.Profile;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -85,6 +90,11 @@ namespace AppUIBasics
             this.Suspending += OnSuspending;
             this.Resuming += App_Resuming;
             this.RequiresPointerMode = ApplicationRequiresPointerMode.WhenRequested;
+
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            {
+                this.FocusVisualKind = AnalyticsInfo.VersionInfo.DeviceFamily == "Xbox" ? FocusVisualKind.Reveal : FocusVisualKind.HighVisibility;
+            }
         }
 
         public static TEnum GetEnum<TEnum>(string text) where TEnum : struct
@@ -123,6 +133,20 @@ namespace AppUIBasics
             //    this.DebugSettings.EnableFrameRateCounter = true;
             //}
 #endif
+            //draw into the title bar
+            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+
+            //remove the solid-colored backgrounds behind the caption controls and system back button
+            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            if (Application.Current.RequestedTheme == ApplicationTheme.Dark)
+            {
+                titleBar.ButtonForegroundColor = Colors.White;
+            } else
+            {
+                titleBar.ButtonForegroundColor = Colors.Black;
+            }
             await EnsureWindow(args);
         }
 
@@ -147,7 +171,7 @@ namespace AppUIBasics
             {
                 RootTheme = GetEnum<ElementTheme>(savedTheme);
             }
-            
+
             Type targetPageType = typeof(AllControlsPage);
             string targetPageArguments = string.Empty;
 
@@ -171,7 +195,7 @@ namespace AppUIBasics
             else if (args.Kind == ActivationKind.Protocol)
             {
                 Match match;
-                
+
                 string targetId = string.Empty;
 
                 switch (((ProtocolActivatedEventArgs)args).Uri?.AbsolutePath)
@@ -253,7 +277,6 @@ namespace AppUIBasics
         /// <param name="e">Details about the suspend request.</param>
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
-            //SettingsPane.GetForCurrentView().CommandsRequested -= App_CommandsRequested;
             var deferral = e.SuspendingOperation.GetDeferral();
             await SuspensionManager.SaveAsync();
             deferral.Complete();

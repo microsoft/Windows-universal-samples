@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Holographic Mixed Reality Capture sample
+  description: Shows how to capture mixed reality photo and video by using Windows.Media.Capture.MediaCapture and MixedRealityCapture video/audio effects.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/HolographicMixedRealityCapture/cpp/HolographicMRCapture.sln

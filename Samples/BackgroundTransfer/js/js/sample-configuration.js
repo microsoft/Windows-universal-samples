@@ -19,7 +19,8 @@
         { url: "/html/scenario3_Notifications.html", title: "Completion Notifications" },
         { url: "/html/scenario4_CompletionGroups.html", title: "Completion Groups" },
         { url: "/html/scenario5_RandomAccess.html", title: "Random Access" },
-        { url: "/html/scenario6_RecoverableErrors.html", title: "Recoverable Errors" }
+        { url: "/html/scenario6_RecoverableErrors.html", title: "Recoverable Errors" },
+        { url: "/html/scenario7_DownloadReordering.html", title: "Download Reordering" }
     ];
 
     // Look up the name for an enumeration member.

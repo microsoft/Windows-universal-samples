@@ -14,7 +14,7 @@
     <Logo>images\storelogo-sdk.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.16299.0"/>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.17134.0"/>
   </Dependencies>
   <Resources>
     <Resource Language="x-generate"/>
@@ -25,7 +25,7 @@
         DisplayName="Background Media Playback JS Sample"
         Description="Background Media Playback JS Sample"
         BackgroundColor="#00b2f0"
-        Square150x150Logo="images\storelogo-sdk.png"
+        Square150x150Logo="images\squaretile-sdk.png"
         Square44x44Logo="images\smalltile-sdk.png"
         >
         <uap:SplashScreen Image="images\splash-sdk.png"/>

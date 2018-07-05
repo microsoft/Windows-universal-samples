@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>a2d70005-5bc3-58d1-a4d6-a48554a7fe31</ProjectGuid>
+    <ProjectGuid>c8bdfc8d-e353-5b24-ab7b-a9e1e658bb4a</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
@@ -45,8 +45,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
@@ -61,6 +61,7 @@
     <Content Include="..\..\..\SharedContent\js\default.html">
       <Link>default.html</Link>
     </Content>
+    <Content Include="css\scenario5_DisplayingBarcodePreview.css" />
     <Content Include="html\scenario1_BasicFunctionality.html" />
     <Content Include="html\scenario2_MultipleScanners.html" />
     <Content Include="html\scenario3_ActiveSymbologies.html" />
@@ -77,6 +78,9 @@
     <Content Include="..\..\..\SharedContent\media\storelogo-sdk.png">
       <Link>images\storeLogo-sdk.png</Link>
     </Content>
+    <Content Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>images\squaretile-sdk.png</Link>
+    </Content>
     <Content Include="..\..\..\SharedContent\media\tile-sdk.png">
       <Link>images\tile-sdk.png</Link>
     </Content>
@@ -92,11 +96,13 @@
     <Content Include="..\..\..\SharedContent\js\css\default.css">
       <Link>css\default.css</Link>
     </Content>
+    <Content Include="html\scenario5_DisplayingBarcodePreview.html" />
     <Content Include="js\sample-configuration.js" />
     <Content Include="js\scenario1_BasicFunctionality.js" />
     <Content Include="js\scenario2_MultipleScanners.js" />
     <Content Include="js\scenario3_ActiveSymbologies.js" />
     <Content Include="js\scenario4_SymbologyAttributes.js" />
+    <Content Include="js\scenario5_DisplayingBarcodePreview.js" />
     <Content Include="js\util.js" />
     <Content Include="..\..\..\SharedContent\js\Microsoft.WinJS\css\ui-dark.css">
       <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>

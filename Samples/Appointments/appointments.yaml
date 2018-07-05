@@ -1,11 +1,16 @@
 ### YamlMime:Sample
 sample:
 - name: Appointment calendar sample
-  description: Demonstrates the functionality of the API of the Windows.ApplicationModel.Appointments namespace.
-  generateZip: false
+  description: Shows how to use the Windows.ApplicationModel.Appointments namespace.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   - vb
   technologies:
   - windows
+  vssolution: /Samples/Appointments/cs/Appointments.sln

@@ -13,8 +13,6 @@
 #include "Scenario2_MultipleScanners.g.h"
 #include "MainPage.xaml.h"
 
-using namespace Windows::Devices::PointOfService;
-
 namespace SDKTemplate
 {
     /// <summary>
@@ -31,10 +29,10 @@ namespace SDKTemplate
 
     private:
         MainPage^ rootPage;
-        ClaimedBarcodeScanner^ claimedBarcodeScannerInstance1;
-        ClaimedBarcodeScanner^ claimedBarcodeScannerInstance2;
-        BarcodeScanner^ scannerInstance1;
-        BarcodeScanner^ scannerInstance2;
+        Windows::Devices::PointOfService::ClaimedBarcodeScanner^ claimedBarcodeScannerInstance1;
+        Windows::Devices::PointOfService::ClaimedBarcodeScanner^ claimedBarcodeScannerInstance2;
+        Windows::Devices::PointOfService::BarcodeScanner^ scannerInstance1;
+        Windows::Devices::PointOfService::BarcodeScanner^ scannerInstance2;
 
         // tokens for instance1
         Windows::Foundation::EventRegistrationToken dataReceivedTokenInstance1;

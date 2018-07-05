@@ -5,7 +5,7 @@
 
 # Bluetooth Low Energy sample
 
-This sample shows how to use the Windows Bluetooth LE APIs to act either as a BLE client or server. 
+Shows how to use the Windows Bluetooth LE APIs to act either as a BLE client or server. 
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 

@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: App package information sample
-  description: This sample shows you how to get package info by using the Windows Runtime packaging API (Windows.ApplicationModel.Package and Windows.ApplicationModel.PackageId).
-  generateZip: false
+  description: Shows how to get package info by using the Windows Runtime packaging API (Windows.ApplicationModel.Package and Windows.ApplicationModel.PackageId).
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/Package/cs/PackageSample.sln

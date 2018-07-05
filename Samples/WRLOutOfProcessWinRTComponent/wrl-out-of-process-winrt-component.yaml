@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Out-of-process component authoring
+  description: Shows how to create an out-of-process component in C++ using WRL that is consumed in C++, JS, and C#.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/WRLOutOfProcessWinRTComponent/cpp/WRLOutOfProcessWinRTComponent.sln

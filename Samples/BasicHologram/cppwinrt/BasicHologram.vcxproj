@@ -2,15 +2,15 @@
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.props" Condition="Exists('packages\cppwinrt.2017.10.13.1\build\native\cppwinrt.props')" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7e248c38-8f0d-4078-8548-88afd26d6352}</ProjectGuid>
+    <ProjectGuid>{0834b002-6027-5680-b4f7-0d7efa93ad9a}</ProjectGuid>
     <Keyword>HolographicApp</Keyword>
     <RootNamespace>HolographicTemplateApp</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.16299.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.17134.0</WindowsTargetPlatformMinVersion>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>

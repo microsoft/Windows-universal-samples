@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Mixed Reality Model sample
+  description: Shows how you to place 3D content using Secondary Tiles by defining a mixed reality model at creation time.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows
+  vssolution: /Samples/MixedRealityModel/cs/MixedRealityModel.sln

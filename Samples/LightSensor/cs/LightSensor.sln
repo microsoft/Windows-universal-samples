@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightSensor", "LightSensor.csproj", "{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightSensor", "LightSensor.csproj", "{68F68C83-0EC8-5709-8052-DF2B030838BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Debug|ARM.ActiveCfg = Debug|ARM
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Debug|ARM.Build.0 = Debug|ARM
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Debug|ARM.Deploy.0 = Debug|ARM
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Debug|x64.ActiveCfg = Debug|x64
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Debug|x64.Build.0 = Debug|x64
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Debug|x64.Deploy.0 = Debug|x64
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Debug|x86.ActiveCfg = Debug|x86
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Debug|x86.Build.0 = Debug|x86
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Debug|x86.Deploy.0 = Debug|x86
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Release|ARM.ActiveCfg = Release|ARM
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Release|ARM.Build.0 = Release|ARM
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Release|ARM.Deploy.0 = Release|ARM
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Release|x64.ActiveCfg = Release|x64
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Release|x64.Build.0 = Release|x64
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Release|x64.Deploy.0 = Release|x64
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Release|x86.ActiveCfg = Release|x86
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Release|x86.Build.0 = Release|x86
-		{CBF55BA7-6E59-5FF3-BF0A-17FEC337076B}.Release|x86.Deploy.0 = Release|x86
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Debug|ARM.ActiveCfg = Debug|ARM
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Debug|ARM.Build.0 = Debug|ARM
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Debug|ARM.Deploy.0 = Debug|ARM
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Debug|x64.ActiveCfg = Debug|x64
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Debug|x64.Build.0 = Debug|x64
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Debug|x64.Deploy.0 = Debug|x64
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Debug|x86.ActiveCfg = Debug|x86
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Debug|x86.Build.0 = Debug|x86
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Debug|x86.Deploy.0 = Debug|x86
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Release|ARM.ActiveCfg = Release|ARM
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Release|ARM.Build.0 = Release|ARM
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Release|ARM.Deploy.0 = Release|ARM
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Release|x64.ActiveCfg = Release|x64
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Release|x64.Build.0 = Release|x64
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Release|x64.Deploy.0 = Release|x64
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Release|x86.ActiveCfg = Release|x86
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Release|x86.Build.0 = Release|x86
+		{68F68C83-0EC8-5709-8052-DF2B030838BC}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

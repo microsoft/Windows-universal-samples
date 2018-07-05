@@ -19,7 +19,7 @@
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.10240.0" MaxVersionTested="10.0.16299.0" />
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.10240.0" MaxVersionTested="10.0.17134.0" />
   </Dependencies>
 
   <Resources>
@@ -35,7 +35,7 @@
         DisplayName="Animation Metrics JS Sample"
         Description="Animation Metrics JS Sample"
         BackgroundColor="#00b2f0"
-        Square150x150Logo="images\smallTile-sdk.png"
+        Square150x150Logo="images\squaretile-sdk.png"
         Square44x44Logo="images\smallTile-sdk.png">
 
         <uap:SplashScreen Image="images\splash-sdk.png" />

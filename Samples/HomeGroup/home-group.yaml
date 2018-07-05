@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: HomeGroup sample
-  description: This sample demonstrates how to use a HomeGroup to open, search, and share files.
-  generateZip: false
+  description: Shows how to use a HomeGroup to open, search, and share files.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/HomeGroup/cs/HomeGroup.sln

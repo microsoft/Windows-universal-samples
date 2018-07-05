@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: Device lockdown with Azure login sample
-  description: This sample shows how to create a sample login application for Windows Mobile which utilizes the Enterprise Device Lockdown APIs and optionally authenticates with Azure Active Directory.
-  generateZip: false
+  description: Shows how to create a sample login application for Windows Mobile which utilizes the Enterprise Device Lockdown APIs and optionally authenticates with Azure Active Directory.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   technologies:
   - windows
+  vssolution: /Samples/DeviceLockdownAzureLogin/cs/DeviceLockdownAzureLogin.sln

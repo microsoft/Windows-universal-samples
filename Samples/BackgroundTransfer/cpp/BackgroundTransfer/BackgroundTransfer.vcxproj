@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7f5e4fca-f554-576f-86fb-6783a2ae175e}</ProjectGuid>
+    <ProjectGuid>{47f98bce-a4a0-5c7f-9ff6-b6a97d8683f0}</ProjectGuid>
     <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.16299.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.17134.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -163,6 +163,9 @@
     <ClInclude Include="Scenario6_RecoverableErrors.xaml.h">
       <DependentUpon>..\..\shared\Scenario6_RecoverableErrors.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario7_DownloadReordering.xaml.h">
+      <DependentUpon>..\..\shared\Scenario7_DownloadReordering.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\..\SharedContent\xaml\App.xaml">
@@ -177,6 +180,7 @@
     <Page Include="..\..\shared\Scenario4_CompletionGroups.xaml" />
     <Page Include="..\..\shared\Scenario5_RandomAccess.xaml" />
     <Page Include="..\..\shared\Scenario6_RecoverableErrors.xaml" />
+    <Page Include="..\..\shared\Scenario7_DownloadReordering.xaml" />
     <Page Include="..\..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -219,6 +223,9 @@
     </ClCompile>
     <ClCompile Include="Scenario6_RecoverableErrors.xaml.cpp">
       <DependentUpon>..\..\shared\Scenario6_RecoverableErrors.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario7_DownloadReordering.xaml.cpp">
+      <DependentUpon>..\..\shared\Scenario7_DownloadReordering.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

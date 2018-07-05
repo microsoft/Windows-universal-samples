@@ -43,13 +43,6 @@ namespace AppUIBasics.ControlPages
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-            
-        }
-
         private void togglePaneButton_Click(object sender, RoutedEventArgs e)
         {
             if (Window.Current.Bounds.Width >= 640)

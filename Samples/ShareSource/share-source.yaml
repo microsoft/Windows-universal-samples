@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Sharing content source app sample
-  description: This sample demonstrates how an app shares content with another app.
-  generateZip: false
+  description: Shows how an app shares content with another app.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/ShareSource/cs/ShareSource.sln

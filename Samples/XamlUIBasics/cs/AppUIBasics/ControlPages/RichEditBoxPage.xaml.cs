@@ -9,6 +9,7 @@
 //*********************************************************
 using System;
 using System.Collections.Generic;
+using Windows.Foundation.Metadata;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Provider;
@@ -29,7 +30,13 @@ namespace AppUIBasics.ControlPages
         public RichEditBoxPage()
         {
             this.InitializeComponent();
-        } 
+
+            if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            {
+                enableContactsButton.Visibility = Visibility.Collapsed;
+                enablePlacesButton.Visibility = Visibility.Collapsed;
+            }
+        }
 
         private async void OpenButton_Click(object sender, RoutedEventArgs e)
         {
@@ -143,6 +150,62 @@ namespace AppUIBasics.ControlPages
             {
                 editor.Width = e.NewSize.Width - 100;
             }
+        }
+
+        //TODO: Check for version of the build
+
+        Windows.UI.Xaml.Documents.ContactContentLinkProvider contactContentLinkProvider;
+        private void EnableContactsButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            {
+
+                if ((bool)enableContactsButton.IsChecked)
+                {
+                    if (editor.ContentLinkProviders == null)
+                    {
+                        editor.ContentLinkProviders = new Windows.UI.Xaml.Documents.ContentLinkProviderCollection();
+                    }
+                    if (contactContentLinkProvider == null)
+                    {
+                        contactContentLinkProvider = new Windows.UI.Xaml.Documents.ContactContentLinkProvider();
+                    }
+                    editor.ContentLinkProviders.Add(contactContentLinkProvider);
+
+                }
+                else
+                {
+                    bool b = editor.ContentLinkProviders.Remove(contactContentLinkProvider);
+                }
+            }
+        }
+
+        Windows.UI.Xaml.Documents.PlaceContentLinkProvider placeContentLinkProvider;
+        private void enablePlacesButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            {
+
+                if ((bool)enablePlacesButton.IsChecked)
+                {
+                    if (editor.ContentLinkProviders == null)
+                    {
+                        editor.ContentLinkProviders = new Windows.UI.Xaml.Documents.ContentLinkProviderCollection();
+
+                    }
+                    if (placeContentLinkProvider == null)
+                    {
+                        placeContentLinkProvider = new Windows.UI.Xaml.Documents.PlaceContentLinkProvider();
+                    }
+
+                    editor.ContentLinkProviders.Add(placeContentLinkProvider);
+                }
+                else
+                {
+                    bool b = editor.ContentLinkProviders.Remove(placeContentLinkProvider);
+                }
+            }
+
         }
     }
 }

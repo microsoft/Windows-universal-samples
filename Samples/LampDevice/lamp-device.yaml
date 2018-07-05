@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Lamp device sample
-  description: This sample demonstrates Windows.Devices.Lights.Lamp API usage.
-  generateZip: false
+  description: Shows how to use the Windows.Devices.Lights.Lamp API to enable apps to use the camera flash independently of the capture device.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/LampDevice/cs/LampDevice.sln

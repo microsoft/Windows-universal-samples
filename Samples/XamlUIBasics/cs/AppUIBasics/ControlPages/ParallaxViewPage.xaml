@@ -1,7 +1,7 @@
 ﻿<local:ItemsPageBase
     x:Class="AppUIBasics.ControlPages.ParallaxViewPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:AppUIBasics"
     xmlns:data="using:AppUIBasics.Data">
     <StackPanel>
@@ -12,7 +12,7 @@
                             VerticalAlignment="Top" HorizontalAlignment="Left" VerticalShift="500">
                         <Image Source="ms-appx:///Assets/cliff.jpg" />
                     </ParallaxView>
-                    <ListView ItemsSource="{x:Bind Items}" x:Name="listView" 
+                    <ListView ItemsSource="{x:Bind Items}" x:Name="listView"
                               HorizontalAlignment="Stretch" VerticalAlignment="Top"
                               Background="#80000000" >
                         <ListView.ItemTemplate>

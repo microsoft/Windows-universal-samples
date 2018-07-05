@@ -57,7 +57,11 @@ namespace SDKTemplate
             watcher->Start();
 
             // Wait for enumeration to complete or for a device to be found, whichever comes first.
-            return Concurrency::create_task(completionEvent).then([watcher](T result)
+            // Start with a task created from IAsyncAction so that chained tasks run in the same apartment.
+            return Concurrency::create_task(concurrency::create_async([] {})).then([completionEvent]()
+            {
+                return Concurrency::create_task(completionEvent);
+            }).then([watcher](T result)
             {
                 watcher->Stop();
                 return result;

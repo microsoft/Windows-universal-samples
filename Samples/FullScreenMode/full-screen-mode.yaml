@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Full screen mode sample
-  description: This sample shows how to use full screen mode so that your app can fill the entire screen.
-  generateZip: false
+  description: Shows how to use full screen mode so that your app can fill the entire screen.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/FullScreenMode/cs/FullScreenMode.sln

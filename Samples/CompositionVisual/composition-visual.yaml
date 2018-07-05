@@ -1,11 +1,17 @@
 ### YamlMime:Sample
 sample:
 - name: Composition visual without framework sample
-  description: This sample provides an introduction to the Windows.UI.Composition namespace.
-  generateZip: false
+  description: Provides an introduction to the Windows.UI.Composition namespace.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
+  - cpp
   - vb
   technologies:
   - windows
+  vssolution: /Samples/CompositionVisual/cs/CompositionVisual.sln

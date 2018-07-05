@@ -5,8 +5,9 @@
     xmlns:local="using:AppUIBasics"
     x:Name="headerControl"
     Height="72"
-    Padding="24,0,12,12"
+    Padding="26,5,12,12"
     Background="Transparent"
+    Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
     FontSize="24">
 
     <Grid>
@@ -87,15 +88,15 @@
 
         <Rectangle x:Name="WideBackground" Fill="{Binding ElementName=headerControl, Path=Background}" Opacity="{Binding ElementName=headerControl, Path=BackgroundColorOpacity}" />
 
-        <Grid x:Name="headerRoot" Padding="{Binding ElementName=headerControl, Path=Padding}" VerticalAlignment="Bottom">
+        <Grid x:Name="headerRoot" Padding="{Binding ElementName=headerControl, Path=Padding}" VerticalAlignment="Bottom" SizeChanged="Layout_SizeChanged" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid
                 x:Name="pageTitle"
                 MinHeight="48"
+                Margin="-12,-36,0,0"
                 Background="Transparent">
                 <TextBlock
                     x:Name="TitleTextBlock"
@@ -110,7 +111,7 @@
             <Border x:Name="commandBarBorder" Grid.Column="1">
                 <CommandBar
                     x:Name="topCommandBar"
-                    Margin="0,0,12,0"
+                    Margin="0,-36,12,0"
                     Background="Transparent"
                     ClosedDisplayMode="Compact"
                     DefaultLabelPosition="Right"
@@ -120,50 +121,13 @@
                     <AppBarButton
                         x:Name="ThemeButton"
                         Click="OnThemeButtonClick"
-                        KeyDown="OnThemeButtonKeyDown"
-                        Label="Toggle Theme"
-                        XYFocusRight="{x:Bind controlsSearchBox}">
+                        Label="Toggle Theme">
                         <AppBarButton.Icon>
                             <FontIcon Glyph="&#xE771;" Margin="0,-2,0,0" />
                         </AppBarButton.Icon>
                     </AppBarButton>
                 </CommandBar>
             </Border>
-            <Grid
-                x:Name="grid"
-                Grid.Column="2"
-                MinHeight="48"
-                VerticalAlignment="Bottom">
-                <AutoSuggestBox
-                    x:Name="controlsSearchBox"
-                    Style="{StaticResource AutoSuggestBoxStyle}"
-                    VerticalAlignment="Center"
-                    x:FieldModifier="public"
-                    LostFocus="OnControlsSearchBoxLostFocus"
-                    PlaceholderText="Search"
-                    QueryIcon="Find"
-                    QuerySubmitted="OnControlsSearchBoxQuerySubmitted"
-                    RequestedTheme="Light"
-                    TextChanged="OnControlsSearchBoxTextChanged"
-                    XYFocusLeft="{x:Bind ThemeButton}" >
-                    <AutoSuggestBox.KeyboardAccelerators>
-                        <KeyboardAccelerator Invoked="KeyboardAccelerator_Invoked" Key="E" Modifiers="Control"/>
-                    </AutoSuggestBox.KeyboardAccelerators>
-                </AutoSuggestBox>
-                <Button
-                    x:Name="searchButton"
-                    Style="{StaticResource TextBlockButtonStyle}"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Background="Transparent"
-                    Click="OnSearchButtonClick"
-                    Foreground="{Binding ElementName=headerControl, Path=Foreground}"
-                    Visibility="Collapsed">
-                    <Button.Content>
-                        <SymbolIcon Symbol="Find" />
-                    </Button.Content>
-                </Button>
-            </Grid>
         </Grid>
     </Grid>
 </UserControl>

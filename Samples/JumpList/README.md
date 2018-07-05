@@ -2,7 +2,7 @@
   category: DeepLinksAndAppToAppCommunication
 --->
 
-# # Jump list customization sample
+# Jump list customization sample
 
 Shows how to customize your app's jump list. A jump list is a system-provided menu that appears when the user right-clicks a program in the taskbar or on the
 Start menu. It is used to provide quick access to recently or frequently-used documents and offer direct links to app functionality.

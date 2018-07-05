@@ -1,11 +1,16 @@
 ### YamlMime:Sample
 sample:
 - name: Drag and drop sample
-  description: This sample shows how to enable Drag and Drop in a XAML Application.
-  generateZip: false
+  description: Shows how to enable Drag and Drop in a XAML Application.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   - cpp
   technologies:
   - windows
+  vssolution: /Samples/XamlDragAndDrop/cs/DragAndDropSampleManaged.sln

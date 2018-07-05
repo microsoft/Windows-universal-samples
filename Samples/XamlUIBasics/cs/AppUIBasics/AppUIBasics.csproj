@@ -3,15 +3,15 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <ProjectGuid>{D40690AC-37E8-5492-9D42-85042FB025E4}</ProjectGuid>
+    <ProjectGuid>{C1930181-15B0-54DC-A257-A1F37FE7FE55}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AppUIBasics</RootNamespace>
     <AssemblyName>AppUIBasics</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -116,6 +116,7 @@
     </Content>
     <Content Include="Assets\AcrylicBrush.png" />
     <Content Include="Assets\CalenderDatePicker.png" />
+    <Content Include="Assets\CoffeeCup.png" />
     <Content Include="Assets\ColorPicker.png" />
     <Content Include="Assets\DefaultIcon.png" />
     <Content Include="Assets\InnerPage_Banner.jpg" />
@@ -138,6 +139,9 @@
     <Content Include="Assets\PullToRefresh.png" />
     <Content Include="Assets\RatingControl.png" />
     <Content Include="Assets\Reveal.png" />
+    <Content Include="Assets\RevealFocus.png" />
+    <Content Include="Assets\Sun-100-Black.png" />
+    <Content Include="Assets\Sun.32.scale-100-White.png" />
     <Content Include="Assets\Swipe.png" />
     <Content Include="Assets\Tiles\LargeTile.scale-100.png" />
     <Content Include="Assets\Tiles\LargeTile.scale-125.png" />
@@ -197,6 +201,7 @@
     <Compile Include="Common\BooleanToValueConverter.cs" />
     <Compile Include="Common\BooleanToVisibilityConverter.cs" />
     <Compile Include="Common\ColorStringConverter.cs" />
+    <Compile Include="Common\ColorToBrushConverter.cs" />
     <Compile Include="Common\ComboBoxItemToStringConverter.cs" />
     <Compile Include="Common\DeviceFamilyTrigger.cs" />
     <Compile Include="Common\DoubleToIntConverter.cs" />
@@ -330,6 +335,7 @@
     <Compile Include="ControlPages\ProgressRingPage.xaml.cs">
       <DependentUpon>ProgressRingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ControlPages\PullToRefreshPage.xaml.cs" />
     <Compile Include="ControlPages\RadioButtonPage.xaml.cs">
       <DependentUpon>RadioButtonPage.xaml</DependentUpon>
     </Compile>
@@ -341,6 +347,9 @@
     </Compile>
     <Compile Include="ControlPages\RepeatButtonPage.xaml.cs">
       <DependentUpon>RepeatButtonPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPages\RevealFocusPage.xaml.cs">
+      <DependentUpon>RevealFocusPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ControlPages\RevealPage.xaml.cs">
       <DependentUpon>RevealPage.xaml</DependentUpon>
@@ -366,9 +375,6 @@
     <Compile Include="ControlPages\StackPanelPage.xaml.cs">
       <DependentUpon>StackPanelPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ControlPages\PullToRefreshPage.xaml.cs">
-      <DependentUpon>PullToRefreshPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ControlPages\SwipePage.xaml.cs">
       <DependentUpon>SwipePage.xaml</DependentUpon>
     </Compile>
@@ -389,6 +395,9 @@
     </Compile>
     <Compile Include="ControlPages\ToolTipPage.xaml.cs">
       <DependentUpon>ToolTipPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPages\TreeViewPage.xaml.cs">
+      <DependentUpon>TreeViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ControlPages\VariableSizedWrapGridPage.xaml.cs">
       <DependentUpon>VariableSizedWrapGridPage.xaml</DependentUpon>
@@ -455,6 +464,7 @@
     <Content Include="Assets\RelativePanel.png" />
     <Content Include="Assets\SplitView.png" />
     <Content Include="Assets\Tiles\Tile_General.png" />
+    <Content Include="Assets\Windows_Desktop.png" />
     <Content Include="DataModel\ControlInfoData.json" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
@@ -669,6 +679,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ControlPages\PullToRefreshPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ControlPages\RadioButtonPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -682,6 +696,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ControlPages\RepeatButtonPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ControlPages\RevealFocusPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -717,10 +735,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ControlPages\PullToRefreshPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="ControlPages\SwipePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -746,6 +760,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ControlPages\ToolTipPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ControlPages\TreeViewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

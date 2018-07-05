@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Geolocation sample
-  description: The Geolocation sample shows how to use the Windows.Devices.Geolocation namespace to get the geographic location of the user's device.
-  generateZip: false
+  description: Shows how to use the Windows.Devices.Geolocation namespace to get the geographic location of the user's device and track when the location changes in various ways.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/Geolocation/cs/Geolocation.sln

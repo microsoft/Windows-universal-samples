@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: General Purpose Input/Output (GPIO) sample
-  description: The Windows.Devices.Gpio namespace allows apps to set, read, and react to state changes in the General Purpose Input/Output (GPIO) pins on a Windows IoT (Internet of Things) device.
-  generateZip: false
+  description: Shows how to use the Windows.Devices.Gpio namespace to allow apps to set, read, and react to state changes in the General Purpose Input/Output (GPIO) pins on a Windows IoT (Internet of Things) device.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/IoT-GPIO/cs/Gpio.sln

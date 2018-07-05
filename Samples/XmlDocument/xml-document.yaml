@@ -1,11 +1,16 @@
 ### YamlMime:Sample
 sample:
 - name: XML DOM sample
-  description: This sample demonstrates common XML API use scenarios for the Windows.Data.Xml.Dom and Windows.Data.Xml.Xsl namespaces in the Windows Runtime.
-  generateZip: false
+  description: Shows common XML API use scenarios for the Windows.Data.Xml.Dom and Windows.Data.Xml.Xsl namespaces in the Windows Runtime.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   - js
   technologies:
   - windows
+  vssolution: /Samples/XmlDocument/cs/XmlDocument.sln

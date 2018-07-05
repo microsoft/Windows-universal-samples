@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: Media transport controls sample
-  description: This sample shows how to create customized media transport controls for the Media Element in your XAML Windows App.
-  generateZip: false
+  description: Shows how to create customized media transport controls for the MediaPlayerElement control in your XAML Windows App.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   technologies:
   - windows
+  vssolution: /Samples/XamlCustomMediaTransportControls/cs/CustomMediaTransportControls.sln

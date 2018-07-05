@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Projection sample
-  description: This sample demonstrates how to display two different views of your app UI on different screens, as users might do when projecting your app in a meeting or conference.
-  generateZip: false
+  description: Shows how to display two different views of your app UI on different screens, as users might do when projecting your app in a meeting or conference.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/Projection/cs/Projection.sln

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAuthenticationBroker", "WebAuthenticationBroker.csproj", "{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAuthenticationBroker", "WebAuthenticationBroker.csproj", "{AA1DEE57-F782-5B57-AC68-265664C4562F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Debug|ARM.ActiveCfg = Debug|ARM
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Debug|ARM.Build.0 = Debug|ARM
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Debug|ARM.Deploy.0 = Debug|ARM
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Debug|x64.ActiveCfg = Debug|x64
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Debug|x64.Build.0 = Debug|x64
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Debug|x64.Deploy.0 = Debug|x64
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Debug|x86.ActiveCfg = Debug|x86
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Debug|x86.Build.0 = Debug|x86
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Debug|x86.Deploy.0 = Debug|x86
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Release|ARM.ActiveCfg = Release|ARM
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Release|ARM.Build.0 = Release|ARM
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Release|ARM.Deploy.0 = Release|ARM
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Release|x64.ActiveCfg = Release|x64
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Release|x64.Build.0 = Release|x64
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Release|x64.Deploy.0 = Release|x64
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Release|x86.ActiveCfg = Release|x86
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Release|x86.Build.0 = Release|x86
-		{A883C5D4-1D3D-5DA4-B78A-8456EA1847B3}.Release|x86.Deploy.0 = Release|x86
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Debug|ARM.ActiveCfg = Debug|ARM
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Debug|ARM.Build.0 = Debug|ARM
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Debug|ARM.Deploy.0 = Debug|ARM
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Debug|x64.ActiveCfg = Debug|x64
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Debug|x64.Build.0 = Debug|x64
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Debug|x64.Deploy.0 = Debug|x64
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Debug|x86.ActiveCfg = Debug|x86
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Debug|x86.Build.0 = Debug|x86
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Debug|x86.Deploy.0 = Debug|x86
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Release|ARM.ActiveCfg = Release|ARM
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Release|ARM.Build.0 = Release|ARM
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Release|ARM.Deploy.0 = Release|ARM
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Release|x64.ActiveCfg = Release|x64
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Release|x64.Build.0 = Release|x64
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Release|x64.Deploy.0 = Release|x64
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Release|x86.ActiveCfg = Release|x86
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Release|x86.Build.0 = Release|x86
+		{AA1DEE57-F782-5B57-AC68-265664C4562F}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

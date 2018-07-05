@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticTextQuery", "SemanticTextQuery.csproj", "{DB67CCB4-B125-5F14-AC27-5A509A587662}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticTextQuery", "SemanticTextQuery.csproj", "{BB7D8E40-5323-5668-90BD-88D85CF2BEED}"
 EndProject
 Global
     GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
         Release|x86 = Release|x86
     EndGlobalSection
     GlobalSection(ProjectConfigurationPlatforms) = postSolution
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Debug|ARM.ActiveCfg = Debug|ARM
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Debug|ARM.Build.0 = Debug|ARM
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Debug|ARM.Deploy.0 = Debug|ARM
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Debug|x64.ActiveCfg = Debug|x64
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Debug|x64.Build.0 = Debug|x64
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Debug|x64.Deploy.0 = Debug|x64
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Debug|x86.ActiveCfg = Debug|x86
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Debug|x86.Build.0 = Debug|x86
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Debug|x86.Deploy.0 = Debug|x86
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Release|ARM.ActiveCfg = Release|ARM
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Release|ARM.Build.0 = Release|ARM
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Release|ARM.Deploy.0 = Release|ARM
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Release|x64.ActiveCfg = Release|x64
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Release|x64.Build.0 = Release|x64
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Release|x64.Deploy.0 = Release|x64
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Release|x86.ActiveCfg = Release|x86
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Release|x86.Build.0 = Release|x86
-        {DB67CCB4-B125-5F14-AC27-5A509A587662}.Release|x86.Deploy.0 = Release|x86
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Debug|ARM.ActiveCfg = Debug|ARM
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Debug|ARM.Build.0 = Debug|ARM
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Debug|ARM.Deploy.0 = Debug|ARM
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Debug|x64.ActiveCfg = Debug|x64
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Debug|x64.Build.0 = Debug|x64
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Debug|x64.Deploy.0 = Debug|x64
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Debug|x86.ActiveCfg = Debug|x86
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Debug|x86.Build.0 = Debug|x86
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Debug|x86.Deploy.0 = Debug|x86
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Release|ARM.ActiveCfg = Release|ARM
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Release|ARM.Build.0 = Release|ARM
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Release|ARM.Deploy.0 = Release|ARM
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Release|x64.ActiveCfg = Release|x64
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Release|x64.Build.0 = Release|x64
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Release|x64.Deploy.0 = Release|x64
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Release|x86.ActiveCfg = Release|x86
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Release|x86.Build.0 = Release|x86
+        {BB7D8E40-5323-5668-90BD-88D85CF2BEED}.Release|x86.Deploy.0 = Release|x86
     EndGlobalSection
     GlobalSection(SolutionProperties) = preSolution
         HideSolutionNode = FALSE

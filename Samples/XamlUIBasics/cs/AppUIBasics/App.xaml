@@ -16,20 +16,23 @@
     xmlns:local="using:AppUIBasics"
     xmlns:common="using:AppUIBasics.Common">
     <Application.Resources>
+
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <local:ItemTemplates />
             </ResourceDictionary.MergedDictionaries>
-            
+
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
                     <StaticResource x:Key="HomePageBackgroundBrush" ResourceKey="ApplicationPageBackgroundThemeBrush" />
                     <SolidColorBrush x:Key="SearchBoxBorderBrush" Color="Transparent" />
+                    <ImageSource x:Key="PTRCustom">ms-appx:///Assets/sun-100-Black.png</ImageSource>
                     <Thickness x:Key="SearchBoxBorderThickness">0</Thickness>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Dark">
                     <StaticResource x:Key="HomePageBackgroundBrush" ResourceKey="ApplicationPageBackgroundThemeBrush" />
                     <SolidColorBrush x:Key="SearchBoxBorderBrush" Color="Transparent" />
+                    <ImageSource x:Key="PTRCustom">ms-appx:///Assets/Sun.32.scale-100-White.png</ImageSource>
                     <Thickness x:Key="SearchBoxBorderThickness">0</Thickness>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="HighContrast">
@@ -53,6 +56,7 @@
             <common:NullToVisibilityConverter x:Key="inverseNullToVisibilityConverter" NonNullValue="Collapsed" NullValue="Visible" />
             <common:BooleanToValueConverter x:Key="booleanToValueConverter" />
             <common:ShowAcrylicBehindHeaderConverter x:Key="showAcrylicBehindHeaderConverter" />
+            <common:ColorToBrushConverter x:Key="colorToBrushConverter"/>
 
             <!--  Breakpoints  -->
             <x:Double x:Key="Breakpoint640Plus">641</x:Double>
@@ -70,17 +74,17 @@
             <Style x:Key="OutputTextBlockStyle" BasedOn="{StaticResource BodyTextBlockStyle}" TargetType="TextBlock">
                 <Setter Property="Margin" Value="8,8,0,0" />
             </Style>
-            
+
             <Style x:Key="ControlPageScrollStyle" TargetType="ScrollViewer">
                 <Setter Property="VerticalScrollMode" Value="Auto" />
                 <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
                 <Setter Property="ZoomMode" Value="Disabled" />
             </Style>
-            
+
             <Style x:Key="GridViewItemStyle" TargetType="GridViewItem">
                 <Setter Property="Margin" Value="0,0,20,20" />
             </Style>
-            
+
             <Style x:Key="GridViewItemStyleSmall" TargetType="GridViewItem">
                 <Setter Property="Margin" Value="0,0,0,14" />
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -94,7 +98,7 @@
                 <Setter Property="PlaceholderForeground" Value="{ThemeResource ComboBoxPlaceHolderForeground}" />
             </Style>
 
-            <Style x:Key="AutoSuggestBoxTextBoxStyle" TargetType="TextBox">
+            <Style x:Key="CustomAutoSuggestBoxTextBoxStyle" TargetType="TextBox">
                 <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}" />
                 <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}" />
                 <Setter Property="Foreground" Value="{ThemeResource TextControlForeground}" />
@@ -410,11 +414,11 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            
+
             <Style x:Key="AutoSuggestBoxStyle" TargetType="AutoSuggestBox">
                 <Setter Property="VerticalAlignment" Value="Top" />
                 <Setter Property="IsTabStop" Value="False" />
-                <Setter Property="TextBoxStyle" Value="{StaticResource AutoSuggestBoxTextBoxStyle}" />
+                <Setter Property="TextBoxStyle" Value="{StaticResource CustomAutoSuggestBoxTextBoxStyle}" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="AutoSuggestBox">

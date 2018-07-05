@@ -79,51 +79,50 @@
         // Create the barcode scanner.
         WinJS.log("Creating barcode scanner object.", "sample", "status");
 
-        SdkSample.getFirstBarcodeScannerAsync().then(function (scanner) {
+        SdkSample.getFirstBarcodeScannerAsync().done(function (scanner) {
+            _scanner = scanner;
             if (scanner) {
-                _scanner = scanner;
+                // Claim the scanner for exclusive use.
+                _scanner.claimScannerAsync().done(function (claimedScanner) {
+                    _claimedScanner = claimedScanner;
+                    if (claimedScanner) {
+                        // Ask the API to decode the data by default. By setting this, API will decode the raw data from the barcode scanner and
+                        // send the ScanDataLabel and ScanDataType in the DataReceived event
+                        claimedScanner.isDecodeDataEnabled = true;
 
-                // After successful creation, fill the list with supported symbologies.
-                return _scanner.getSupportedSymbologiesAsync().then(function (symbologies) {
-                    var listOfSymbologies = new WinJS.Binding.List(symbologies.map(function (symbology) {
-                        return { id: symbology, name: BarcodeSymbologies.getName(symbology) };
-                    }));
-                    symbologyListViewControl.itemDataSource = listOfSymbologies.dataSource;
+                        //// After successfully claiming, attach the datareceived event handler.
+                        claimedScanner.addEventListener("datareceived", onDataReceived);
 
-                    // Claim the scanner for exclusive use.
-                    return _scanner.claimScannerAsync();
+                        // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can
+                        // claim ownership of the barcode scanner.
+                        claimedScanner.addEventListener("releasedevicerequested", onReleasedeviceRequested);
+
+                        // Enable the scanner so it starts raising events.
+                        claimedScanner.enableAsync().then(function () {
+                            // After successful claim, fill the list with supported symbologies.
+                            return _scanner.getSupportedSymbologiesAsync();
+                        }).done(function (symbologies) {
+                            if (symbologies) {
+                                var listOfSymbologies = new WinJS.Binding.List(symbologies.map(function (symbology) {
+                                    return { id: symbology, name: BarcodeSymbologies.getName(symbology) };
+                                }));
+                                symbologyListViewControl.itemDataSource = listOfSymbologies.dataSource;
+
+                                WinJS.log("Ready to scan. Device ID: " + _claimedScanner.deviceId, "sample", "status");
+                                scenarioEndScanButton.disabled = false;
+                                setSymbologyAttributesButton.disabled = false;
+                            }
+                        });
+                    } else {
+                        _scanner.close();
+                        _scanner = null;
+                        scenarioStartScanButton.disabled = false;
+                        WinJS.log("Claim barcode scanner failed.", "sample", "error");
+                    }
                 });
             } else {
-                WinJS.log("Barcode scanner not found. Please connect a barcode scanner.", "sample", "error");
-            }
-        }).then(function (claimedScanner) {
-            _claimedScanner = claimedScanner;
-            if (claimedScanner) {
-
-                // Ask the API to decode the data by default. By setting this, API will decode the raw data from the barcode scanner and 
-                // send the ScanDataLabel and ScanDataType in the DataReceived event
-                claimedScanner.isDecodeDataEnabled = true;
-
-                //// After successfully claiming, attach the datareceived event handler.
-                claimedScanner.addEventListener("datareceived", onDataReceived);
-
-                // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can 
-                // claim ownership of the barcode scanner.
-                claimedScanner.addEventListener("releasedevicerequested", onReleasedeviceRequested);
-
-                // Enable the scanner so it starts raising events.
-                return claimedScanner.enableAsync();
-            } else if (_scanner) {
-                _scanner.close();
-                _scanner = null;
-                WinJS.log("Claim barcode scanner failed.", "sample", "error");
-            }
-        }).done(function () {
-            if (_claimedScanner) {
-                WinJS.log("Ready to scan. Device ID: " + _claimedScanner.deviceId, "sample", "status");
-                scenarioEndScanButton.disabled = false;
-            } else {
                 scenarioStartScanButton.disabled = false;
+                WinJS.log("Barcode scanner not found. Please connect a barcode scanner.", "sample", "error");
             }
         });
     }
@@ -134,7 +133,7 @@
         WinJS.log("Event ReleaseDeviceRequested received. Retaining the barcode scanner.", "sample", "status");
     }
 
-    // Event handler for the DataReceived event fired when a barcode is scanned by the barcode scanner 
+    // Event handler for the DataReceived event fired when a barcode is scanned by the barcode scanner
     function onDataReceived(args) {
         scenarioOutputScanDataType.textContent = BarcodeSymbologies.getName(args.report.scanDataType);
         scenarioOutputScanData.textContent = getDataString(args.report.scanData);

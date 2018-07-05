@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.ApplicationModel.Core;
+using Windows.Foundation.Metadata;
 using Windows.System;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -173,13 +176,14 @@ namespace AppUIBasics.Common
     {
         private Frame Frame { get; set; }
         SystemNavigationManager systemNavigationManager;
+        private NavigationView CurrentNavView { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RootNavigationHelper"/> class.
         /// </summary>
         /// <param name="rootFrame">A reference to the top-level frame.
         /// This reference allows for frame manipulation and to register navigation handlers.</param>
-        public RootFrameNavigationHelper(Frame rootFrame)
+        public RootFrameNavigationHelper(Frame rootFrame, NavigationView currentNavView)
         {
             this.Frame = rootFrame;
             this.Frame.Navigated += (s, e) =>
@@ -187,10 +191,17 @@ namespace AppUIBasics.Common
                 // Update the Back button whenever a navigation occurs.
                 UpdateBackButton();
             };
+            this.CurrentNavView = currentNavView;
 
             // Handle keyboard and mouse navigation requests
             this.systemNavigationManager = SystemNavigationManager.GetForCurrentView();
             systemNavigationManager.BackRequested += SystemNavigationManager_BackRequested;
+
+            // must register back requested on navview
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            {
+                CurrentNavView.BackRequested += NavView_BackRequested;
+            }
 
             // Listen to the window directly so we will respond to hotkeys regardless
             // of which element has focus.
@@ -200,8 +211,19 @@ namespace AppUIBasics.Common
                 this.CoreWindow_PointerPressed;
         }
 
+        private void NavView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+            TryGoBack();
+        }
+
         private bool TryGoBack()
         {
+            // don't go back if the nav pane is overlayed
+            if (this.CurrentNavView.IsPaneOpen && (this.CurrentNavView.DisplayMode == NavigationViewDisplayMode.Compact || this.CurrentNavView.DisplayMode == NavigationViewDisplayMode.Minimal))
+            {
+                return false;
+            }
+
             bool navigated = false;
             if (this.Frame.CanGoBack)
             {
@@ -233,8 +255,14 @@ namespace AppUIBasics.Common
 
         private void UpdateBackButton()
         {
-            systemNavigationManager.AppViewBackButtonVisibility =
-                this.Frame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            {
+                this.CurrentNavView.IsBackEnabled = this.Frame.CanGoBack ? true : false;
+            } else
+            {
+                systemNavigationManager.AppViewBackButtonVisibility = this.Frame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+            }
+            
         }
 
         /// <summary>

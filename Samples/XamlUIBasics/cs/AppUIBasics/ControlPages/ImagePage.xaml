@@ -4,16 +4,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
     <StackPanel>
         <local:ControlExample x:Name="Example1" HeaderText="A basic image from a local file.">
-                
+
             <Image Source="/Assets/treetops.jpg" Height="100" />
-            
+
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;Image Source="/Assets/treetops.jpg" Height="100" /&gt;</Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
-        
+
         <local:ControlExample x:Name="Example2" HeaderText="An image decoded to the rendering size">
 
             <Image Height="100">
@@ -38,11 +38,11 @@
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
-        
+
         <local:ControlExample x:Name="Example3" HeaderText="Image stretching.">
 
             <Image x:Name="StretchImage" Stretch="None" Height="100" Width="100" Source="/Assets/valley.jpg" />
-            
+
             <local:ControlExample.Options>
                 <StackPanel>
                     <RadioButton x:Name="StretchNone" Content="None" GroupName="ImageStretch" IsChecked="True"
@@ -62,9 +62,9 @@
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
-        
+
         <local:ControlExample x:Name="Example4" HeaderText="Nine grid images.">
-            
+
             <StackPanel>
                 <TextBlock Text="The normal image" />
                 <Image Source="/Assets/ninegrid.gif" Height="82" />
@@ -73,7 +73,7 @@
                 <TextBlock Text="Image stretched using nine grid" />
                 <Image Source="/Assets/ninegrid.gif" NineGrid="30,20,30,20" Height="164" />
             </StackPanel>
-            
+
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;Image Source="/Assets/ninegrid.gif" Height="82" /&gt;</Paragraph>

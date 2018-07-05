@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Camera stream correlation sample
+  description: Shows how to use spatially correlated color and depth cameras and the depth frames to map image pixels from one camera to another using a DepthCorrelatedCoordinateMapper, as well as decoding a vendor-specific media frame layout with a BufferMediaFrame.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/CameraStreamCorrelation/cpp/CameraStreamCorrelation.sln

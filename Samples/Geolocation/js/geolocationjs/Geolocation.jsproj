@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>85556a98-c47d-5724-8029-bc997b8edc9d</ProjectGuid>
+    <ProjectGuid>5ae230ee-b1fa-57a4-a0ab-2c9e81bafd2c</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
@@ -45,8 +45,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
@@ -71,6 +71,9 @@
     <Content Include="html\scenario3_BackgroundTask.html" />
     <Content Include="html\scenario4_ForegroundGeofence.html" />
     <Content Include="html\scenario5_GeofenceBackgroundTask.html" />
+    <Content Include="..\..\..\..\SharedContent\media\badge-logo.png">
+      <Link>images\badge-logo.png</Link>
+    </Content>
     <Content Include="..\..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>images\microsoft-sdk.png</Link>
     </Content>
@@ -82,6 +85,9 @@
     </Content>
     <Content Include="..\..\..\..\SharedContent\media\storelogo-sdk.png">
       <Link>images\storeLogo-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>images\squaretile-sdk.png</Link>
     </Content>
     <Content Include="..\..\..\..\SharedContent\media\tile-sdk.png">
       <Link>images\tile-sdk.png</Link>

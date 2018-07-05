@@ -1,0 +1,41 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page x:Class="SDKTemplate.Scenario7_DownloadReordering" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="using:SDKTemplate" mc:Ignorable="d">
+    <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel x:Name="LayoutRoot">
+            <TextBlock x:Name="InputTextBlock1" TextWrapping="Wrap" Grid.Row="0" Style="{StaticResource BasicTextStyle}">
+                Transfers which belong to the same transfer group can be reordered after they have been started.
+            </TextBlock>
+            <TextBlock Text="Remote address: " Style="{StaticResource BasicTextStyle}" Margin="0,8,10,0" />
+            <TextBox x:Name="remoteAddressField" InputScope="Url" Text="http://localhost/BackgroundTransferSample/download.aspx" />
+            <TextBlock Text="Local file name: " Style="{StaticResource BasicTextStyle}" Margin="0,8,17,0" />
+            <TextBox x:Name="fileNameField" Text="DownloadReordering.txt" />
+            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,0">
+                <Button x:Name="startDownloadButton" Content="Start Download" Margin="0,0,10,0" Click="StartDownload_Click" />
+            </StackPanel>
+            <TextBlock Text="Select a pending transfer to reorder the downloads." Style="{StaticResource BasicTextStyle}" Margin="0,8,17,0" />
+
+            <ListView ItemsSource="{x:Bind downloadCollection, Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:DownloadOperationItem">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Make Current" Click="MakeCurrent_Click" />
+                            <ProgressBar Margin="10,0,0,0" Height="30" Width="200" Minimum="0" Maximum="100" Value="{x:Bind percentComplete, Mode=OneWay}" Foreground="Green" />
+                            <TextBlock Margin="10,0,0,0" Text="{x:Bind stateText, Mode=OneWay}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: 3D Printing Sample
-  description: This sample demonstrates a number of different tasks associated with 3D printing and editing the 3MF file type.
-  generateZip: false
+  description: Shows several tasks for 3D printing and editing the 3MF file type.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   technologies:
   - windows
+  vssolution: /Samples/3DPrinting/cs/3DPrinting.sln

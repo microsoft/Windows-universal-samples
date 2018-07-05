@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Text segmentation sample
-  description: This sample shows how to identify separate boundaries of individual words in text, called text segments, for any given language.
-  generateZip: false
+  description: Shows how to identify separate boundaries of individual words in text, called text segments, for any given language.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/TextSegmentation/cs/TextSegmentation.sln

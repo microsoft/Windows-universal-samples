@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftPassport.Server", "MicrosoftPassport.Server.csproj", "{356F3162-7CA9-5786-94AE-A2157A95C427}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftPassport.Server", "MicrosoftPassport.Server.csproj", "{15E34A6E-695A-5F9B-8C67-F2406F012AB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,22 +17,22 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Debug|ARM.Build.0 = Debug|Any CPU
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Debug|x64.Build.0 = Debug|Any CPU
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Debug|x86.Build.0 = Debug|Any CPU
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Release|Any CPU.Build.0 = Release|Any CPU
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Release|ARM.ActiveCfg = Release|Any CPU
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Release|ARM.Build.0 = Release|Any CPU
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Release|x64.ActiveCfg = Release|Any CPU
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Release|x64.Build.0 = Release|Any CPU
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Release|x86.ActiveCfg = Release|Any CPU
-		{356F3162-7CA9-5786-94AE-A2157A95C427}.Release|x86.Build.0 = Release|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|ARM.Build.0 = Debug|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|x64.Build.0 = Debug|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|x86.Build.0 = Debug|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|ARM.ActiveCfg = Release|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|ARM.Build.0 = Release|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|x64.ActiveCfg = Release|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|x64.Build.0 = Release|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|x86.ActiveCfg = Release|Any CPU
+		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

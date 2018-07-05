@@ -15,7 +15,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
     <StackPanel>
         <local:ControlExample x:Name="Example1" HeaderText="A Canvas control.">
-            
+
             <Canvas x:Name="Control1" Width="120" Height="120" Background="Gray" VerticalAlignment="Top">
                 <Canvas.Resources>
                     <Style TargetType="Rectangle">
@@ -30,7 +30,7 @@
                 <Rectangle Fill="Green" Canvas.Left="40" Canvas.Top="40" Canvas.ZIndex="2" />
                 <Rectangle Fill="Yellow" Canvas.Left="60" Canvas.Top="60" Canvas.ZIndex="3" />
             </Canvas>
-            
+
             <local:ControlExample.Options>
                 <StackPanel Orientation="Horizontal">
                     <Slider x:Name="TopSlider" Minimum="-100" Maximum="100" StepFrequency="1" VerticalAlignment="Top" Orientation="Vertical" IsDirectionReversed="True" Height="110">
@@ -48,8 +48,8 @@
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;Canvas Width="120" Height="120" Background="Gray"&gt;</Paragraph>
-                    <Paragraph TextIndent="12">&lt;Rectangle Fill="Red" Canvas.Left="<Run Text="{x:Bind LeftSlider.Value, Mode=OneWay}" />" 
-                                Canvas.Top="<Run Text="{x:Bind TopSlider.Value, Mode=OneWay}" />" 
+                    <Paragraph TextIndent="12">&lt;Rectangle Fill="Red" Canvas.Left="<Run Text="{x:Bind LeftSlider.Value, Mode=OneWay}" />"
+                                Canvas.Top="<Run Text="{x:Bind TopSlider.Value, Mode=OneWay}" />"
                                 Canvas.ZIndex="<Run Text="{x:Bind ZSlider.Value, Mode=OneWay}" />" /&gt;
                     </Paragraph>
                     <Paragraph TextIndent="12">&lt;Rectangle Fill="Blue" Canvas.Left="20" Canvas.Top="20" Canvas.ZIndex="1" /&gt;</Paragraph>

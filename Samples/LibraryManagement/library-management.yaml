@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Library management sample
-  description: Demonstrates how to get a list of the folders in a user's library and how to let users add and remove folders from that list.
-  generateZip: false
+  description: Shows how to get a list of the folders in a user's library and how to let users add and remove folders from that list.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/LibraryManagement/cs/LibraryManagement.sln

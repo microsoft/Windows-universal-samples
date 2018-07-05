@@ -1,11 +1,16 @@
 ### YamlMime:Sample
 sample:
 - name: AllJoyn consumer experiences sample
-  description: This sample demonstrates how to create an AllJoyn Windows Universal app using Code Generation with Introspection XML and Windows.Devices.AllJoyn.
-  generateZip: false
+  description: Shows how to create an AllJoyn Windows Universal app using Code Generation with Introspection XML and Windows.Devices.AllJoyn.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   - js
   technologies:
   - windows
+  vssolution: /Samples/AllJoyn/ConsumerExperiences/cs/AllJoynConsumerExperiences.sln

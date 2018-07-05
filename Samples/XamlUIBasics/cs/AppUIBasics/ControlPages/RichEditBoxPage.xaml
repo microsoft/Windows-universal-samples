@@ -26,7 +26,10 @@
                 </Style>
             </RelativePanel.Resources>
             <AppBarButton x:Name="openFileButton" Icon="OpenFile" Click="OpenButton_Click" ToolTipService.ToolTip="Open file"/>
-            <AppBarButton Icon="Save" Click="SaveButton_Click" ToolTipService.ToolTip="Save file" RelativePanel.RightOf="openFileButton" Margin="8,0,0,0"/>
+            <AppBarButton Icon="Save" x:Name="saveFileButton" Click="SaveButton_Click" ToolTipService.ToolTip="Save file" RelativePanel.RightOf="openFileButton" Margin="8,0,0,0"/>
+            <AppBarToggleButton Icon="People" x:Name="enableContactsButton" RelativePanel.RightOf="saveFileButton" ToolTipService.ToolTip="Enable suggestions of contacts" Click="EnableContactsButton_Click" />
+            <AppBarToggleButton Icon="MapPin" x:Name="enablePlacesButton" RelativePanel.RightOf="enableContactsButton" ToolTipService.ToolTip="Enable suggestions of places" Click="enablePlacesButton_Click" />
+
 
             <AppBarButton Icon="Bold" Click="BoldButton_Click" ToolTipService.ToolTip="Bold" RelativePanel.LeftOf="italicButton" Margin="0,0,8,0"/>
             <AppBarButton x:Name="italicButton" Icon="Italic" Click="ItalicButton_Click" ToolTipService.ToolTip="Italic" RelativePanel.LeftOf="fontColorButton" Margin="0,0,8,0"/>

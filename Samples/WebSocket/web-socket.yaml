@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: WebSocket sample
-  description: This sample shows you how to send and receive date using the WebSocket classes in the Windows.Networking.Sockets namespace in your Universal Windows Platform (UWP) app.
-  generateZip: false
+  description: Shows how to send and receive data using the WebSocket classes in the Windows.Networking.Sockets namespace.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/WebSocket/cs/WebSocket.sln

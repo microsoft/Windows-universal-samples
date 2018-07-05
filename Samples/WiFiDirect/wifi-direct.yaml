@@ -1,0 +1,17 @@
+### YamlMime:Sample
+sample:
+- name: Wi-Fi Direct sample
+  description: Shows how to use the Wi-Fi Direct API to discover devices and connect to the them over Wi-Fi Direct.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows
+  vssolution: /Samples/WiFiDirect/cs/WiFiDirect.sln

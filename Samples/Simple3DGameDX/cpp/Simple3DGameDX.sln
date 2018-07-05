@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Simple3DGameDX", "Simple3DGameDX.vcxproj", "{854899B6-848C-5E45-BBFA-D12C752D9107}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Simple3DGameDX", "Simple3DGameDX.vcxproj", "{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Debug|ARM.ActiveCfg = Debug|ARM
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Debug|ARM.Build.0 = Debug|ARM
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Debug|ARM.Deploy.0 = Debug|ARM
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Debug|x86.ActiveCfg = Debug|Win32
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Debug|x86.Build.0 = Debug|Win32
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Debug|x86.Deploy.0 = Debug|Win32
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Debug|x64.ActiveCfg = Debug|x64
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Debug|x64.Build.0 = Debug|x64
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Debug|x64.Deploy.0 = Debug|x64
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Release|ARM.ActiveCfg = Release|ARM
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Release|ARM.Build.0 = Release|ARM
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Release|ARM.Deploy.0 = Release|ARM
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Release|x86.ActiveCfg = Release|Win32
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Release|x86.Build.0 = Release|Win32
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Release|x86.Deploy.0 = Release|Win32
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Release|x64.ActiveCfg = Release|x64
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Release|x64.Build.0 = Release|x64
-		{854899B6-848C-5E45-BBFA-D12C752D9107}.Release|x64.Deploy.0 = Release|x64
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Debug|ARM.ActiveCfg = Debug|ARM
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Debug|ARM.Build.0 = Debug|ARM
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Debug|ARM.Deploy.0 = Debug|ARM
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Debug|x86.ActiveCfg = Debug|Win32
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Debug|x86.Build.0 = Debug|Win32
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Debug|x86.Deploy.0 = Debug|Win32
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Debug|x64.ActiveCfg = Debug|x64
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Debug|x64.Build.0 = Debug|x64
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Debug|x64.Deploy.0 = Debug|x64
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Release|ARM.ActiveCfg = Release|ARM
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Release|ARM.Build.0 = Release|ARM
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Release|ARM.Deploy.0 = Release|ARM
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Release|x86.ActiveCfg = Release|Win32
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Release|x86.Build.0 = Release|Win32
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Release|x86.Deploy.0 = Release|Win32
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Release|x64.ActiveCfg = Release|x64
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Release|x64.Build.0 = Release|x64
+		{CAD4EDEA-3C00-54C4-B2FA-8F5B23FBA2FA}.Release|x64.Deploy.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

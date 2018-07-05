@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: In-process component authoring sample
+  description: Shows how to create an in-process component in C++ using WRL that is consumed in C++, JS, and C#.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/WRLInProcessWinRTComponent/cpp/WRLInProcessWinRTComponent.sln

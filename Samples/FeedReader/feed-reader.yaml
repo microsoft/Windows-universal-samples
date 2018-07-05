@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: RSS reader end-to-end (JavaScript) sample
-  description: This Windows Store app sample demonstrates a basic end-to-end implementation of a news feed reader.It uses a ListView to organize and display articles from various subscriptions specified in a JSON-formatted data file.
-  generateZip: false
+  description: Shows a basic end-to-end implementation of a news feed reader.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - js
   technologies:
   - windows
+  vssolution: /Samples/FeedReader/js/FeedReader.sln

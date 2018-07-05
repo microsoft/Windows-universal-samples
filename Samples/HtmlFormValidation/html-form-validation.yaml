@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: Form validation (HTML) sample
-  description: Demonstrates HTML5 input form and validation attributes that enable you to help your users enter the correct data in the right format into your page's forms.
-  generateZip: false
+  description: Shows HTML5 input form and validation attributes that enable you to help your users enter the correct data in the right format into your page's forms.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - js
   technologies:
   - windows
+  vssolution: /Samples/HtmlFormValidation/js/HtmlFormValidation.sln

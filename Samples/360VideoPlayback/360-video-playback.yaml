@@ -1,0 +1,16 @@
+### YamlMime:Sample
+sample:
+- name: 360-degree Video Playback sample
+  description: Shows how to play 360-degree video.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/360VideoPlayback/cs/360VideoPlayback.sln

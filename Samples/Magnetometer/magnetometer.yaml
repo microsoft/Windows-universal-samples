@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Magnetometer sample
+  description: Shows how to use the Magnetometer class.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows
+  vssolution: /Samples/Magnetometer/cs/Magnetometer.sln

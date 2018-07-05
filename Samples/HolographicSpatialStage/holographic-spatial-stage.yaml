@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Holographic spatial stage sample
+  description: Shows how to acquire a SpatialStage, and make use of its coordinate system and properties.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/HolographicSpatialStage/cpp/HolographicSpatialStage.sln

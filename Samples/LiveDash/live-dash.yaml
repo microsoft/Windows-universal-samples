@@ -1,10 +1,15 @@
 ### YamlMime:Sample
 sample:
 - name: DASH streaming sample
-  description: How to create and use the MSEStreamSource API to playback Live DASH content.
-  generateZip: false
+  description: Shows how to create and use the MSEStreamSource class to playback Live DASH content.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   technologies:
   - windows
+  vssolution: /Samples/LiveDash/cs/LiveDash.sln

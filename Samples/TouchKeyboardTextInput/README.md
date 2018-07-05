@@ -7,7 +7,7 @@
 
 Shows how to enable optimized views on the touch keyboard by using input scopes and input types with controls in the 
 [WinJS.UI](http://msdn.microsoft.com/library/windows/apps/br229782) namespace, 
-and with the [TextBox](http://msdn.microsoft.com/library/windows/apps/br209683) and [RichEdit](http://msdn.microsoft.com/library/windows/apps/br227548) 
+and with the [TextBox](http://msdn.microsoft.com/library/windows/apps/br209683) and [RichEdit](http://msdn.microsoft.com/library/windows/apps/br227548) 
 Extensible Application Markup Language (XAML) controls. 
 Also, this sample demonstrates spell checking by using the [spellcheck](http://msdn.microsoft.com/library/windows/apps/hh441107) and 
 [IsSpellCheckEnabled](http://msdn.microsoft.com/library/windows/apps/br209688) properties, 

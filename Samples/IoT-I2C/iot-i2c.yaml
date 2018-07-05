@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Inter-Integrated Circuit (I2C) sample
-  description: The Windows.Devices.I2c namespace allows apps to communicate with Inter-Integrated Circuit devices (commmonly abbreviated I�C or I2C) on a Windows IoT (Internet of Things) device.
-  generateZip: false
+  description: Shows how to use the Windows.Devices.I2c namespace to allow apps to communicate with Inter-Integrated Circuit devices (commmonly abbreviated IIC or I2C) on a Windows IoT (Internet of Things) device.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/IoT-I2C/cs/I2C.sln

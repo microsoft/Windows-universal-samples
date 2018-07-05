@@ -19,7 +19,7 @@
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.16299.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.17134.0" />
   </Dependencies>
 
   <Resources>
@@ -33,7 +33,7 @@
 
       <uap:VisualElements
         DisplayName="CameraStarterKit"
-        Square150x150Logo="images\StoreLogo-sdk.png"
+        Square150x150Logo="images\squaretile-sdk.png"
         Square44x44Logo="images\SmallTile-sdk.png"
         Description="CameraStarterKit"
         BackgroundColor="#00b2f0">

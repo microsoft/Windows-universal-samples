@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>3311cf12-f9a4-524c-a2aa-beff052463e2</ProjectGuid>
+    <ProjectGuid>3ecb5704-c608-5057-b656-cf7ee497de53</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
@@ -45,8 +45,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
@@ -69,6 +69,9 @@
     <Content Include="..\..\..\SharedContent\media\storelogo-sdk.png">
       <Link>images\storeLogo-sdk.png</Link>
     </Content>
+    <Content Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>images\squaretile-sdk.png</Link>
+    </Content>
     <Content Include="..\..\..\SharedContent\media\tile-sdk.png">
       <Link>images\tile-sdk.png</Link>
     </Content>
@@ -87,6 +90,7 @@
     <Content Include="html\scenario4_CompletionGroups.html" />
     <Content Include="html\scenario5_RandomAccess.html" />
     <Content Include="html\scenario6_RecoverableErrors.html" />
+    <Content Include="html\scenario7_DownloadReordering.html" />
     <Content Include="js\completionGroupBackgroundTask.js" />
     <Content Include="js\sample-configuration.js" />
     <Content Include="js\scenario1_Download.js" />
@@ -95,6 +99,7 @@
     <Content Include="js\scenario4_CompletionGroups.js" />
     <Content Include="js\scenario5_RandomAccess.js" />
     <Content Include="js\scenario6_RecoverableErrors.js" />
+    <Content Include="js\scenario7_DownloadReordering.js" />
     <Content Include="..\..\..\SharedContent\js\Microsoft.WinJS\css\ui-dark.css">
       <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>
     </Content>

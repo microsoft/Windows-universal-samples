@@ -1,11 +1,16 @@
 ### YamlMime:Sample
 sample:
 - name: Advanced casting sample
-  description: This sample shows how to use the APIs in the Windows.Media.Casting and Windows.Media.DialProtocol namespaces.
-  generateZip: false
+  description: Shows how to use the Windows.Media.Casting and Windows.Media.DialProtocol namespaces.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   - vb
   technologies:
   - windows
+  vssolution: /Samples/AdvancedCasting/cs/AdvancedCasting.sln

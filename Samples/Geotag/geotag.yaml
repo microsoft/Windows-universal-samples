@@ -1,8 +1,12 @@
 ### YamlMime:Sample
 sample:
 - name: Geotag sample
-  description: This sample demonstrates the GeotagHelper runtime class.
-  generateZip: false
+  description: Shows how to use the GeotagHelper class to read geotag information from a file and set a file's geotag information to a specific location or to a location obtained from a Geolocator.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
@@ -10,3 +14,4 @@ sample:
   - js
   technologies:
   - windows
+  vssolution: /Samples/Geotag/cs/Geotag.sln

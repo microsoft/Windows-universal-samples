@@ -1,11 +1,16 @@
 ### YamlMime:Sample
 sample:
 - name: Application data sample
-  description: This sample shows you how to store and retrieve data that is specific to each user and Windows Runtime app by using the Windows Runtime application data APIs (Windows.Storage.ApplicationData and so on).
-  generateZip: false
+  description: Shows how to store and retrieve data that is specific to each user and app by using the Windows Runtime application data APIs (Windows.Storage.ApplicationData and so on).
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
   author: oldnewthing
   languages:
   - csharp
   - vb
   technologies:
   - windows
+  vssolution: /Samples/ApplicationData/cs/ApplicationData.sln

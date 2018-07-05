@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{025142e0-d968-5e48-b0d6-b0249a6097f4}</ProjectGuid>
+    <ProjectGuid>{9c98c452-42ba-59f7-96f8-369d796094a4}</ProjectGuid>
     <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.16299.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.17134.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -159,6 +159,9 @@
     <ClInclude Include="Scenario4_SymbologyAttributes.xaml.h">
       <DependentUpon>..\shared\Scenario4_SymbologyAttributes.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario5_DisplayingBarcodePreview.xaml.h">
+      <DependentUpon>..\shared\Scenario5_DisplayingBarcodePreview.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
@@ -171,6 +174,7 @@
     <Page Include="..\shared\Scenario2_MultipleScanners.xaml" />
     <Page Include="..\shared\Scenario3_ActiveSymbologies.xaml" />
     <Page Include="..\shared\Scenario4_SymbologyAttributes.xaml" />
+    <Page Include="..\shared\Scenario5_DisplayingBarcodePreview.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -207,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="Scenario4_SymbologyAttributes.xaml.cpp">
       <DependentUpon>..\shared\Scenario4_SymbologyAttributes.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario5_DisplayingBarcodePreview.xaml.cpp">
+      <DependentUpon>..\shared\Scenario5_DisplayingBarcodePreview.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

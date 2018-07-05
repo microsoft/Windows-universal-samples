@@ -75,14 +75,12 @@ namespace SDKTemplate
 
         /// <summary>
         /// This is the click handler for the 'ScenarioStartScanningInstance1' button. It initiates creation of scanner instance 1.
-        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// 
         private async void ButtonStartScanningInstance1_Click(object sender, RoutedEventArgs e)
         {
-            //Get the handle to the default scanner          
+            //Get the handle to the default scanner
             if (await CreateDefaultScannerObjectAsync(BarcodeScannerInstance.Instance1))
             {
                 //Claim the scanner
@@ -158,10 +156,9 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// 
         private async void ButtonStartScanningInstance2_Click(object sender, RoutedEventArgs e)
         {
-            //Get the handle to the default scanner          
+            //Get the handle to the default scanner
             if (await CreateDefaultScannerObjectAsync(BarcodeScannerInstance.Instance2))
             {
                 //Claim the scanner
@@ -235,12 +232,11 @@ namespace SDKTemplate
         }
 
         /// <summary>
-        /// This is the click handler for the 'ScenarioEndScanningInstance1' button.  
+        /// This is the click handler for the 'ScenarioEndScanningInstance1' button.
         /// Initiates the disposal of scanner instance 1.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// 
         private void ButtonEndScanningInstance1_Click(object sender, RoutedEventArgs e)
         {
             if (claimedBarcodeScannerInstance1 != null)
@@ -268,12 +264,11 @@ namespace SDKTemplate
         }
 
         /// <summary>
-        /// This is the click handler for the 'ScenarioEndScanningInstance2' button.  
+        /// This is the click handler for the 'ScenarioEndScanningInstance2' button.
         /// Initiates the disposal fo scanner instance 2.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// 
         private void ButtonEndScanningInstance2_Click(object sender, RoutedEventArgs e)
         {
             if (claimedBarcodeScannerInstance2 != null)

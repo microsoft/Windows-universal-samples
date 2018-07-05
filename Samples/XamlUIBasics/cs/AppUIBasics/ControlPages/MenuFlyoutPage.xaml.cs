@@ -48,5 +48,10 @@ namespace AppUIBasics.ControlPages
                 Control1Output.Text = "Sort by: " + sortOption;
             }
         }
+
+        private void Example5_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

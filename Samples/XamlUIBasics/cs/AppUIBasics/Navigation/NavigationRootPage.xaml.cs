@@ -10,11 +10,15 @@
 using AppUIBasics.Common;
 using AppUIBasics.Data;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Windows.ApplicationModel.Core;
 using Windows.Devices.Input;
 using Windows.Gaming.Input;
+using Windows.System;
 using Windows.System.Profile;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
@@ -40,7 +44,7 @@ namespace AppUIBasics
         {
             get { return NavigationViewControl; }
         }
-        
+
         public DeviceType DeviceFamily { get; set; }
 
         public bool IsFocusSupported
@@ -58,19 +62,18 @@ namespace AppUIBasics
                 return _header ?? (_header = UIHelper.GetDescendantsOfType<PageHeader>(NavigationViewControl).FirstOrDefault());
             }
         }
-                
+
         public NavigationRootPage()
         {
             this.InitializeComponent();
 
-            _navHelper = new RootFrameNavigationHelper(rootFrame);
+            _navHelper = new RootFrameNavigationHelper(rootFrame, NavigationViewControl);
 
             SetDeviceFamily();
             AddNavigationMenuItems();
             Current = this;
             RootFrame = rootFrame;
 
-            this.KeyDown += OnNavigationRootPageKeyDown;
             this.GotFocus += (object sender, RoutedEventArgs e) =>
             {
                 // helpful for debugging focus problems w/ keyboard & gamepad
@@ -79,7 +82,7 @@ namespace AppUIBasics
                     Debug.WriteLine("got focus: " + focus.Name + " (" + focus.GetType().ToString() + ")");
                 }
             };
-            
+
             this.Loaded += (s, e) =>
             {
                 // This is to work around a bug in the NavigationView header that hard-codes the header content to a 48 pixel height.
@@ -90,11 +93,21 @@ namespace AppUIBasics
                     headerContentControl.Height = double.NaN;
                 }
             };
-            
+
             Gamepad.GamepadAdded += OnGamepadAdded;
             Gamepad.GamepadRemoved += OnGamepadRemoved;
 
+            Window.Current.CoreWindow.SizeChanged += (s, e) => UpdateAppTitle();
+            CoreApplication.GetCurrentView().TitleBar.LayoutMetricsChanged += (s, e) => UpdateAppTitle();
+
             _isKeyboardConnected = Convert.ToBoolean(new KeyboardCapabilities().KeyboardPresent);
+        }
+
+        void UpdateAppTitle()
+        {
+            var full = (ApplicationView.GetForCurrentView().IsFullScreenMode);
+            var left = 12 + (full ? 0 : CoreApplication.GetCurrentView().TitleBar.SystemOverlayLeftInset);
+            AppTitle.Margin = new Thickness(left, 8, 0, 0);
         }
 
         public bool CheckNewControlSelected()
@@ -159,15 +172,6 @@ namespace AppUIBasics
         {
             _isGamePadConnected = Gamepad.Gamepads.Any();
         }
-        
-        private void OnNavigationRootPageKeyDown(object sender, KeyRoutedEventArgs e)
-        {
-            if (!e.Handled && e.Key == Windows.System.VirtualKey.E)
-            {
-                AutoSuggestBox box = this.GetDescendantsOfType<PageHeader>().First().controlsSearchBox;
-                var f = box.Focus(FocusState.Programmatic);
-            }
-        }
 
         private void OnNavigationViewItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
@@ -181,7 +185,7 @@ namespace AppUIBasics
             else
             {
                 var invokedItem = NavigationView.MenuItems.Cast<NavigationViewItem>().Single(i => i.Content == args.InvokedItem);
-                
+
                 if (invokedItem == _allControlsMenuItem)
                 {
                     rootFrame.Navigate(typeof(AllControlsPage));
@@ -197,7 +201,7 @@ namespace AppUIBasics
                 }
             }
         }
-        
+
         private void OnRootFrameNavigated(object sender, NavigationEventArgs e)
         {
             if (e.SourcePageType == typeof(AllControlsPage) ||
@@ -213,7 +217,53 @@ namespace AppUIBasics
                 PageHeader?.UpdateBackground(isFilteredPage);
             }
         }
+
+        private void OnControlsSearchBoxTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                var suggestions = new List<ControlInfoDataItem>();
+
+                foreach (var group in ControlInfoDataSource.Instance.Groups)
+                {
+                    var matchingItems = group.Items.Where(
+                        item => item.Title.IndexOf(sender.Text, StringComparison.CurrentCultureIgnoreCase) >= 0);
+
+                    foreach (var item in matchingItems)
+                    {
+                        suggestions.Add(item);
+                    }
+                }
+                if (suggestions.Count > 0)
+                {
+                    controlsSearchBox.ItemsSource = suggestions.OrderByDescending(i => i.Title.StartsWith(sender.Text, StringComparison.CurrentCultureIgnoreCase)).ThenBy(i => i.Title);
+                }
+                else
+                {
+                    controlsSearchBox.ItemsSource = new string[] { "No results found" };
+                }
+            }
+        }
+
+        private void OnControlsSearchBoxQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (args.ChosenSuggestion != null && args.ChosenSuggestion is ControlInfoDataItem)
+            {
+                var itemId = (args.ChosenSuggestion as ControlInfoDataItem).UniqueId;
+                NavigationRootPage.RootFrame.Navigate(typeof(ItemPage), itemId);
+            }
+            else if (!string.IsNullOrEmpty(args.QueryText))
+            {
+                NavigationRootPage.RootFrame.Navigate(typeof(SearchResultsPage), args.QueryText);
+            }
+        }
+
+        private void KeyboardAccelerator_Invoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+        {
+            controlsSearchBox.Focus(FocusState.Keyboard);
+        }
     }
+
 
     public enum DeviceType
     {
