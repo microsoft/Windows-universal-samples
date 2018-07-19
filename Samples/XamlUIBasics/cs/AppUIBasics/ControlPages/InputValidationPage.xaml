@@ -1,0 +1,72 @@
+﻿<Page
+    x:Class="AppUIBasics.ControlPages.InputValidationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Media="using:Microsoft.Xaml.Interactions.Media"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:AppUIBasics"
+    x:Name="RootPanel"
+    Margin="0,16,0,0"
+    d:DesignHeight="250"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
+
+    <StackPanel>
+        <StackPanel.Resources>
+            <DataTemplate x:Key="ValidationErrorTemplate">
+                <ItemsControl
+                            Grid.ColumnSpan="6" Grid.Row="2"
+                            ItemsSource="{Binding Path=(Validation.Errors), Mode=OneWay}"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Left"
+                            Margin="0,0,0,-25"
+                            FontSize="12"
+                            Foreground="#C50500">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="ValidationError">
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <Border Background="#C50500" Margin="3" CornerRadius="10" Width="12" Height="12" VerticalAlignment="Top">
+                                    <TextBlock Text="!" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="{Binding ErrorMessage, Mode=OneWay}"
+                                        Foreground="#C50500"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DataTemplate>
+        </StackPanel.Resources>
+        <local:ControlExample x:Name="Example1" HeaderText="Adding Input Validation to a control" >
+            <StackPanel>
+                <TextBlock x:Name="HeaderBlock" Text="Compact Spacing" FontSize="18"/>
+                <TextBox Header="First Name:" x:Name="txtfirstName" />
+                <TextBox Header="Last Name:" x:Name="txtLastName"  />
+                <PasswordBox Header="Password:" />
+                <PasswordBox Header="Confrim Password:" />
+                <DatePicker Header="Date Of Birth" />
+                <TextBox 
+                x:Name="mailvalidation"
+                Header="Email:"
+                PlaceholderText="Email address"
+                Validation.IsRequired="True"
+                TextChanged="mailvalidation_TextChanged"
+                Width="400"
+                />
+            </StackPanel>
+
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>&lt;TextBox Name="mailvalidation"&gt;</Paragraph>
+                    <Paragraph TextIndent="12">Header="Email:"</Paragraph>
+                    <Paragraph TextIndent="12">Validation.IsRequired="True"</Paragraph>
+                    <Paragraph TextIndent="12">UpdateSourceTrigger=PropertyChanged,</Paragraph>
+                    <Paragraph TextIndent="12">Mode=TwoWay}></Paragraph>
+                </RichTextBlock>
+                
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+    </StackPanel>
+</Page>

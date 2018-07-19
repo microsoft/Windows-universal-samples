@@ -11,8 +11,9 @@
     Margin="0,16,0,0"
     d:DesignHeight="250"
     d:DesignWidth="1000"
-    mc:Ignorable="d">
-
+    mc:Ignorable="d"
+    Loaded="RootPanel_Loaded">
+    
     <UserControl.Resources>
         <x:Double x:Key="ExampleMaxWidth">1000</x:Double>
 
@@ -59,12 +60,20 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
         <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,15" Text="{x:Bind HeaderText}" />
 
-        <Grid Grid.Row="1">
+        <RichTextBlock x:Name="ErrorTextBlock" Visibility="Collapsed" Grid.Row="1" Margin="0,0,0,12" Foreground="Red" IsTextSelectionEnabled="True">
+            <Paragraph>
+                This sample requires a later version of Windows to be fully functional. Learn more about version adaptive apps: 
+                <Hyperlink NavigateUri="https://docs.microsoft.com/en-us/windows/uwp/debug-test-perf/version-adaptive-apps">https://docs.microsoft.com/en-us/windows/uwp/debug-test-perf/version-adaptive-apps</Hyperlink>
+            </Paragraph>
+        </RichTextBlock>
+
+        <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="Auto" />
@@ -84,7 +93,7 @@
                     <ColumnDefinition Width="Auto" MaxWidth="320" />
                 </Grid.ColumnDefinitions>
 
-                <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="2" Fill="{ThemeResource SystemControlBackgroundAltHighBrush}" />
+                <Grid x:Name="BackgroundGrid" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="{ThemeResource SystemControlBackgroundAltHighBrush}" Loaded="BackgroundGrid_Loaded" />
 
                 <!--  Example Display  -->
                 <ContentPresenter
@@ -124,6 +133,23 @@
                     Margin="0"
                     Padding="16,20"
                     Content="{x:Bind Xaml}" />
+            </ScrollViewer>
+
+            <ScrollViewer
+                Grid.Row="1"
+                Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
+                HorizontalScrollBarVisibility="Auto"
+                HorizontalScrollMode="Auto"
+                VerticalScrollBarVisibility="Disabled"
+                VerticalScrollMode="Disabled"
+                Visibility="{x:Bind XamlSource, Converter={StaticResource nullToVisibilityConverter}}">
+                <ContentPresenter
+                    x:Name="XamlPresenter2"
+                    Margin="0"
+                    Padding="16,20" Loaded="XamlPresenter2_Loaded"
+                    >
+                    <WebView x:Name="webviewXaml" />
+                </ContentPresenter>
             </ScrollViewer>
         </Grid>
     </Grid>

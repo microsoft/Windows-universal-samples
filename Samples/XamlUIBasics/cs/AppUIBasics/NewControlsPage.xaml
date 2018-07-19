@@ -43,48 +43,114 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <GridView
-            x:Name="itemGridView"
-            Padding="24,0,0,0"
-            AutomationProperties.AutomationId="ItemGridView"
-            AutomationProperties.Name="Items In Group"
-            ContainerContentChanging="OnItemGridViewContainerContentChanging"
-            IsItemClickEnabled="True"
-            IsSwipeEnabled="False"
-            ItemClick="OnItemGridViewItemClick"
-            ItemContainerStyle="{StaticResource GridViewItemStyle}"
-            ItemTemplate="{StaticResource ControlItemTemplate}"
-            ItemsSource="{x:Bind Items, Mode=OneWay}"
-            KeyDown="OnItemGridViewKeyDown"
-            Loaded="OnItemGridViewLoaded"
-            SizeChanged="OnItemGridViewSizeChanged"
-            SelectionMode="None">
-            <interactivity:Interaction.Behaviors>
-                <behavior:ImageScrollBehavior TargetControl="{Binding ElementName=pageHeader}" />
-            </interactivity:Interaction.Behaviors>
-
-            <GridView.Header>
+        <ScrollViewer x:Name="newPageSV" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
                 <ParallaxView
                     x:Name="headerImageView"
                     Height="250"
                     Margin="-24,0,0,24"
-                    Source="{x:Bind itemGridView}"
+                    Source="{x:Bind newPageSV}"
                     VerticalShift="350">
                     <Image
                         x:Name="headerImage"
                         HorizontalAlignment="Center"
-                        Source="Assets/InnerPage_Banner.jpg"
+                        Source="Assets/MainPage_Banner.jpg"
                         Stretch="UniformToFill" />
                 </ParallaxView>
-            </GridView.Header>
-        </GridView>
 
-        <local:PageHeader
-            x:Name="pageHeader"
-            Title="What's New"
-            VerticalAlignment="Top"
-            Background="{ThemeResource HomePageBackgroundBrush}"
-            FontSize="42"
-            Foreground="White" />
+                <local:PageHeader
+                    x:Name="pageHeader"
+                    Title="What's New"
+                    VerticalAlignment="Top"
+                    Background="{ThemeResource HomePageBackgroundBrush}"
+                    FontSize="42"
+                    Foreground="White" />
+
+                <TextBlock Grid.Row="1" TextWrapping="WrapWholeWords" Foreground="Red" Padding="24,12,0,12">
+                    <Span xml:space="preserve"><Run>*NOTE: The samples in this app use WinUI. Please read the </Run><Hyperlink ToolTipService.ToolTip="https://aka.ms/winui-toolkit" NavigateUri="https://aka.ms/winui-toolkit">documentation on WinUI</Hyperlink><Run> to understand the code examples.</Run> </Span>
+                </TextBlock>
+
+                <TextBlock Grid.Row="2" Style="{StaticResource SubtitleTextBlockStyle}" Padding="24,0,0,10">Recently Added Samples</TextBlock>
+                <GridView
+                    Grid.Row="3"
+                    x:Name="itemGridView"
+                    Padding="24,0,0,0"
+                    AutomationProperties.AutomationId="ItemGridView"
+                    AutomationProperties.Name="Items In Group"
+                    ContainerContentChanging="OnItemGridViewContainerContentChanging"
+                    IsItemClickEnabled="True"
+                    IsSwipeEnabled="False"
+                    ItemClick="OnItemGridViewItemClick"
+                    ItemContainerStyle="{StaticResource GridViewItemStyle}"
+                    ItemTemplate="{StaticResource ControlItemTemplate}"
+                    ItemsSource="{x:Bind Items, Mode=OneWay}"
+                    KeyDown="OnItemGridViewKeyDown"
+                    Loaded="OnItemGridViewLoaded"
+                    SizeChanged="OnItemGridViewSizeChanged"
+                    SelectionMode="None">
+                    <interactivity:Interaction.Behaviors>
+                        <behavior:ImageScrollBehavior TargetControl="{Binding ElementName=pageHeader}" />
+                    </interactivity:Interaction.Behaviors>
+                </GridView>
+
+                <TextBlock Grid.Row="4" Style="{StaticResource SubtitleTextBlockStyle}" Padding="24,0,0,10">Recently Updated Samples</TextBlock>
+                <GridView
+                    Grid.Row="5"
+                    x:Name="itemGridView2"
+                    Padding="24,0,0,0"
+                    AutomationProperties.AutomationId="ItemGridView"
+                    AutomationProperties.Name="Items In Group"
+                    ContainerContentChanging="OnItemGridViewContainerContentChanging"
+                    IsItemClickEnabled="True"
+                    IsSwipeEnabled="False"
+                    ItemClick="OnItemGridViewItemClick"
+                    ItemContainerStyle="{StaticResource GridViewItemStyle}"
+                    ItemTemplate="{StaticResource ControlItemTemplate}"
+                    ItemsSource="{x:Bind UpdatedItems, Mode=OneWay}"
+                    KeyDown="OnItemGridViewKeyDown"
+                    Loaded="OnItemGridViewLoaded"
+                    SizeChanged="OnItemGridViewSizeChanged"
+                    SelectionMode="None">   
+                    <interactivity:Interaction.Behaviors>
+                        <behavior:ImageScrollBehavior TargetControl="{Binding ElementName=pageHeader}" />
+                    </interactivity:Interaction.Behaviors>
+                </GridView>
+
+
+                <TextBlock Grid.Row="6"  Style="{StaticResource SubtitleTextBlockStyle}" 
+                          Padding="24,0,0,10">Preview Samples</TextBlock>
+                <GridView
+                    Grid.Row="7"
+                    x:Name="itemGridView3"
+                    Padding="24,0,0,0"
+                    AutomationProperties.AutomationId="ItemGridView"
+                    AutomationProperties.Name="Items In Group"
+                    ContainerContentChanging="OnItemGridViewContainerContentChanging"
+                    IsItemClickEnabled="True"
+                    IsSwipeEnabled="False"
+                    ItemClick="OnItemGridViewItemClick"
+                    ItemContainerStyle="{StaticResource GridViewItemStyle}"
+                    ItemTemplate="{StaticResource ControlItemTemplate}"
+                    ItemsSource="{x:Bind PreviewItems, Mode=OneWay}"
+                    KeyDown="OnItemGridViewKeyDown"
+                    Loaded="OnItemGridViewLoaded"
+                    SizeChanged="OnItemGridViewSizeChanged"
+                    SelectionMode="None">
+                    <interactivity:Interaction.Behaviors>
+                        <behavior:ImageScrollBehavior TargetControl="{Binding ElementName=pageHeader}" />
+                    </interactivity:Interaction.Behaviors>
+                </GridView>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </local:ItemsPageBase>

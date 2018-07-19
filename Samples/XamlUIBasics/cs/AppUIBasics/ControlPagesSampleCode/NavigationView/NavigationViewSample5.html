@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body bgcolor="#e6e6e6">
+    <pre style="margin: 0; line-height: 125%">
+
+<span style="color: #008000; font-weight: bold">&lt;NavigationView</span> <span style="color: #7D9029">x:Name=</span><span style="color: #BA2121">&quot;nvSample&quot;</span> <span style="color: #7D9029">MenuItemTemplateSelector=</span><span style="color: #BA2121">&quot;{StaticResource selector}&quot;</span> 
+    <span style="color: #7D9029">MenuItemSource=</span><span style="color: #BA2121">&quot;{x:Bind Categories, Mode=OneWay}&quot;</span> <span style="color: #008000; font-weight: bold">/&gt;</span>
+ 
+<span style="color: #008000; font-weight: bold">&lt;local:MenuItemTemplateSelector</span> <span style="color: #7D9029">x:Key=</span><span style="color: #BA2121">&quot;selector&quot;</span> <span style="color: #008000; font-weight: bold">&gt;</span> 
+    <span style="color: #008000; font-weight: bold">&lt;local:MenuItemTemplateSelector.ItemTemplate</span> <span style="color: #008000; font-weight: bold">&gt;</span> 
+    <span style="color: #008000; font-weight: bold">&lt;DataTemplate</span> <span style="color: #7D9029">x:DataType=</span><span style="color: #BA2121">&quot;local:Category&quot;</span> <span style="color: #008000; font-weight: bold">&gt;</span> 
+    <span style="color: #008000; font-weight: bold">&lt; muxcontrols:NavigationViewItem</span> <span style="color: #7D9029">Content=</span><span style="color: #BA2121">&quot;{x:Bind Name}&quot;</span> <span style="color: #7D9029">TooltipService.ToolTip=</span><span style="color: #BA2121">&quot;{x:Bind Tooltip}&quot;</span> <span style="color: #008000; font-weight: bold">&gt;</span> 
+    <span style="color: #008000; font-weight: bold">&lt; muxcontrols:NavigationViewItem.Icon</span>  <span style="color: #008000; font-weight: bold">&gt;</span> 
+    <span style="color: #008000; font-weight: bold">&lt; SymbolIcon</span> <span style="color: #7D9029">Symbol=</span><span style="color: #BA2121">&quot;{x:Bind Glyph} &quot;</span>  <span style="color: #008000; font-weight: bold">&gt;</span> 
+    <span style="color: #008000; font-weight: bold">&lt; / muxcontrols:NavigationViewItem.Icon  &gt;</span> 
+    <span style="border: 1px solid #FF0000">&lt;</span> /muxcontrols:NavigationViewItem  
+    <span style="color: #008000; font-weight: bold">&lt;/DataTemplate &gt;</span> 
+    <span style="color: #008000; font-weight: bold">&lt;/local:MenuItemTemplateSelector.ItemTemplate &gt;</span> 
+<span style="color: #008000; font-weight: bold">&lt;/local:MenuItemTemplateSelector &gt;</span> 
+
+
+
+
+<span style="color: #408080; font-style: italic">//C# code behind</span>
+Categories = <span style="color: #008000; font-weight: bold">new</span> ObservableCollection&lt;CategoryBase&gt;(); 
+Categories.Add(<span style="color: #008000; font-weight: bold">new</span> Category { Name = <span style="color: #BA2121">&quot;Category 1&quot;</span>, Glyph = Symbol.Home, Tooltip = <span style="color: #BA2121">&quot;This is category 1&quot;</span> }); 
+Categories.Add(<span style="color: #008000; font-weight: bold">new</span> Category { Name = <span style="color: #BA2121">&quot;Category 2&quot;</span>, Glyph = Symbol.Keyboard, Tooltip = <span style="color: #BA2121">&quot;This is category 2&quot;</span> }); 
+Categories.Add(<span style="color: #008000; font-weight: bold">new</span> Category { Name = <span style="color: #BA2121">&quot;Category 3&quot;</span>, Glyph = Symbol.Library, Tooltip = <span style="color: #BA2121">&quot;This is category 3&quot;</span> }); 
+Categories.Add(<span style="color: #008000; font-weight: bold">new</span> Category { Name = <span style="color: #BA2121">&quot;Category 4&quot;</span>, Glyph = Symbol.Mail, Tooltip = <span style="color: #BA2121">&quot;This is category 4&quot;</span> }); 
+
+<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">CategoryBase</span> { } 
+
+<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Category</span> : CategoryBase
+{
+    <span style="color: #008000; font-weight: bold">public</span> <span style="color: #B00040">string</span> Name { <span style="color: #008000; font-weight: bold">get</span>; <span style="color: #008000; font-weight: bold">set</span>; }
+    <span style="color: #008000; font-weight: bold">public</span> <span style="color: #B00040">string</span> Tooltip { <span style="color: #008000; font-weight: bold">get</span>; <span style="color: #008000; font-weight: bold">set</span>; }
+    <span style="color: #008000; font-weight: bold">public</span> Symbol Glyph { <span style="color: #008000; font-weight: bold">get</span>; <span style="color: #008000; font-weight: bold">set</span>; }
+}
+
+<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Separator</span> : CategoryBase { }
+
+<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Header</span> : CategoryBase
+{
+    <span style="color: #008000; font-weight: bold">public</span> <span style="color: #B00040">string</span> Name { <span style="color: #008000; font-weight: bold">get</span>; <span style="color: #008000; font-weight: bold">set</span>; }
+}
+
+<span style="color: #7D9029">[ContentProperty(Name = &quot;ItemTemplate&quot;)]</span>
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">MenuItemTemplateSelector</span> : DataTemplateSelector
+{
+    <span style="color: #008000; font-weight: bold">public</span> DataTemplate ItemTemplate { <span style="color: #008000; font-weight: bold">get</span>; <span style="color: #008000; font-weight: bold">set</span>; }
+    <span style="color: #008000; font-weight: bold">protected</span> <span style="color: #008000; font-weight: bold">override</span> DataTemplate <span style="color: #0000FF">SelectTemplateCore</span>(<span style="color: #B00040">object</span> item)
+    {
+        <span style="color: #008000; font-weight: bold">return</span> item <span style="color: #008000; font-weight: bold">is</span> Separator ? SeparatorTemplate : item <span style="color: #008000; font-weight: bold">is</span> Header ? HeaderTemplate : ItemTemplate;
+    }
+}
+
+
+
+</pre>
+
+
+</body>
+</html>

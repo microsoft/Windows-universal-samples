@@ -17,6 +17,8 @@ using Windows.UI;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Input;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -35,6 +37,17 @@ namespace AppUIBasics.ControlPages
             {
                 enableContactsButton.Visibility = Visibility.Collapsed;
                 enablePlacesButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void ContextFlyout_Opening(object sender, object e)
+        {
+            CommandBarFlyout myFlyout = sender as CommandBarFlyout;
+            if (myFlyout.Target == REBCustom)
+            {
+                AppBarButton myButton = new AppBarButton();
+                myButton.Command = new StandardUICommand(StandardUICommandKind.Share);
+                myFlyout.PrimaryCommands.Add(myButton);
             }
         }
 
@@ -206,6 +219,16 @@ namespace AppUIBasics.ControlPages
                 }
             }
 
+        }
+
+        private void REBCustom_Loaded(object sender, RoutedEventArgs e)
+        {
+            REBCustom.ContextFlyout.Opening += ContextFlyout_Opening;
+        }
+
+        private void REBCustom_Unloaded(object sender, RoutedEventArgs e)
+        {
+           REBCustom.ContextFlyout.Opening -= ContextFlyout_Opening;
         }
     }
 }
