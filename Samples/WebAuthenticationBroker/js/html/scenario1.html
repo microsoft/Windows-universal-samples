@@ -19,21 +19,24 @@ Copyright (c) Microsoft Corporation. All rights reserved
             </div>
         </div>
         <div id="scenarioContent">
+            <div>Use these SID values to register the app with Facebook.</div>
+            <div>Windows Store SID: <span id="windowsStoreSidText"></span></div>
+            <div>Windows Phone Store SID: <span id="windowsPhoneStoreSidText"></span></div>
             <table>
                 <tr>
                     <td>
-                        <label for="FacebookClientID">Facebook App ID: </label>
+                        <label for="facebookClientID">Facebook App ID: </label>
                     </td>
                     <td>
-                        <input type="text" id="FacebookClientID" value="" class="win-textbox">
+                        <input type="text" id="facebookClientID" value="" class="win-textbox">
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label for="FacebookCallbackURL">Callback URL: </label>
+                        <label for="facebookCallbackURL">Callback URL: </label>
                     </td>
                     <td>
-                        <input type="text" id="FacebookCallbackURL" value="https://www.facebook.com/connect/login_success.html" class="win-textbox">
+                        <input type="text" id="facebookCallbackURL" value="https://www.facebook.com/connect/login_success.html" class="win-textbox">
                     </td>
                 </tr>
                 <tr>
@@ -44,10 +47,16 @@ Copyright (c) Microsoft Corporation. All rights reserved
                 </tr>
                 <tr>
                     <td class="labelTD">
-                        <label for="FacebookReturnedToken">Token: </label>
+                        <label for="facebookReturnedToken">Token: </label>
                     </td>
+                    <td id="facebookReturnedToken">
+                    </td>
+                </tr>
+                <tr>
                     <td>
-                        <input type="text" size="106" id="FacebookReturnedToken" class="win-textbox">
+                        <label for="facebookUserName">User Name: </label>
+                    </td>
+                    <td id="facebookUserName">
                     </td>
                 </tr>
             </table>

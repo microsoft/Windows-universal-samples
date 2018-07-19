@@ -252,23 +252,29 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\microsoftLogo.scale-100.png">
+    <Image Include="..\shared\assets\microsoftLogo.scale-100.png">
       <Link>Assets\microsoftLogo.scale-100.png</Link>
     </Image>
-    <Image Include="Assets\microsoftLogo.scale-140.png">
+    <Image Include="..\shared\assets\microsoftLogo.scale-140.png">
       <Link>Assets\microsoftLogo.scale-140.png</Link>
     </Image>
-    <Image Include="Assets\microsoftLogo.scale-180.png">
+    <Image Include="..\shared\assets\microsoftLogo.scale-180.png">
       <Link>Assets\microsoftLogo.scale-180.png</Link>
     </Image>
-    <Image Include="Assets\visualStudioLogo.scale-100.png">
+    <Image Include="..\shared\assets\microsoftLogo.scale-200.png">
+      <Link>Assets\microsoftLogo.scale-200.png</Link>
+    </Image>
+    <Image Include="..\shared\assets\visualStudioLogo.scale-100.png">
       <Link>Assets\visualStudioLogo.scale-100.png</Link>
     </Image>
-    <Image Include="Assets\visualStudioLogo.scale-140.png">
+    <Image Include="..\shared\assets\visualStudioLogo.scale-140.png">
       <Link>Assets\visualStudioLogo.scale-140.png</Link>
     </Image>
-    <Image Include="Assets\visualStudioLogo.scale-180.png">
+    <Image Include="..\shared\assets\visualStudioLogo.scale-180.png">
       <Link>Assets\visualStudioLogo.scale-180.png</Link>
+    </Image>
+    <Image Include="..\shared\assets\visualStudioLogo.scale-200.png">
+      <Link>Assets\visualStudioLogo.scale-200.png</Link>
     </Image>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>

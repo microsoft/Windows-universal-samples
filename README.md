@@ -485,6 +485,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/ExtendedExecution">Extended execution</a></td>
+  <td><a href="https://aka.ms/Kcrqst">Multi-instance apps</a></td>
   <td><a href="Samples/BasicSuspension">Suspend and resume</a></td>
  </tr>
 </table>

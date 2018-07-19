@@ -31,6 +31,9 @@
     <Image Include="..\shared\assets\microsoftLogo.scale-180.png">
       <Filter>Assets</Filter>
     </Image>
+    <Image Include="..\shared\assets\microsoftLogo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
     <Image Include="..\shared\assets\visualStudioLogo.scale-100.png">
       <Filter>Assets</Filter>
     </Image>
@@ -38,6 +41,9 @@
       <Filter>Assets</Filter>
     </Image>
     <Image Include="..\shared\assets\visualStudioLogo.scale-180.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\shared\assets\visualStudioLogo.scale-200.png">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>

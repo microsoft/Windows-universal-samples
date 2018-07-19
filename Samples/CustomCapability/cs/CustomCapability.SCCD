@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CustomCapabilityDescriptor xmlns="http://schemas.microsoft.com/appx/2016/sccd" xmlns:s="http://schemas.microsoft.com/appx/2016/sccd">
 	<CustomCapabilities>
+		<CustomCapability Name="microsoft.firmwareRead_cw5n1h2txyewy"></CustomCapability>
 		<CustomCapability Name="microsoft.hsaTestCustomCapability_q536wpkpf5cy2"></CustomCapability>
 	</CustomCapabilities>
 	<AuthorizedEntities>

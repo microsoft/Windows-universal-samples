@@ -40,7 +40,8 @@ using namespace Windows::UI::Xaml::Navigation;
 DirectXPage::DirectXPage() :
     m_isWindowVisible(true),
     m_imageInfo{},
-    m_dispInfo{}
+    m_isImageValid(false),
+    m_imageMaxCLL(-1.0f)
 {
     InitializeComponent();
 
@@ -53,7 +54,7 @@ DirectXPage::DirectXPage() :
         ref new TypedEventHandler<CoreWindow^, VisibilityChangedEventArgs^>(this, &DirectXPage::OnVisibilityChanged);
 
     window->ResizeCompleted +=
-        ref new TypedEventHandler<CoreWindow ^, Platform::Object ^>(this, &DirectXPage::OnResizeCompleted);
+        ref new TypedEventHandler<CoreWindow ^, Object ^>(this, &DirectXPage::OnResizeCompleted);
 
     DisplayInformation^ currentDisplayInformation = DisplayInformation::GetForCurrentView();
 
@@ -66,11 +67,36 @@ DirectXPage::DirectXPage() :
     DisplayInformation::DisplayContentsInvalidated +=
         ref new TypedEventHandler<DisplayInformation^, Object^>(this, &DirectXPage::OnDisplayContentsInvalidated);
 
+    currentDisplayInformation->AdvancedColorInfoChanged +=
+        ref new TypedEventHandler<DisplayInformation^, Object^>(this, &DirectXPage::OnAdvancedColorInfoChanged);
+
     swapChainPanel->CompositionScaleChanged +=
         ref new TypedEventHandler<SwapChainPanel^, Object^>(this, &DirectXPage::OnCompositionScaleChanged);
 
     swapChainPanel->SizeChanged +=
         ref new SizeChangedEventHandler(this, &DirectXPage::OnSwapChainPanelSizeChanged);
+
+    // Pointer and manipulation events handle image pan and zoom.
+    swapChainPanel->PointerPressed += ref new PointerEventHandler(this, &DirectXPage::OnPointerPressed);
+    swapChainPanel->PointerMoved += ref new PointerEventHandler(this, &DirectXPage::OnPointerMoved);
+    swapChainPanel->PointerReleased += ref new PointerEventHandler(this, &DirectXPage::OnPointerReleased);
+    swapChainPanel->PointerCanceled += ref new PointerEventHandler(this, &DirectXPage::OnPointerCanceled);
+    swapChainPanel->PointerWheelChanged += ref new PointerEventHandler(this, &DirectXPage::OnPointerWheelChanged);
+
+    m_gestureRecognizer = ref new GestureRecognizer();
+    m_gestureRecognizer->GestureSettings =
+        GestureSettings::ManipulationTranslateX |
+        GestureSettings::ManipulationTranslateY |
+        GestureSettings::ManipulationScale;
+
+    m_gestureRecognizer->ManipulationStarted +=
+        ref new TypedEventHandler<GestureRecognizer^, ManipulationStartedEventArgs^>(this, &DirectXPage::OnManipulationStarted);
+
+    m_gestureRecognizer->ManipulationUpdated +=
+        ref new TypedEventHandler<GestureRecognizer^, ManipulationUpdatedEventArgs^>(this, &DirectXPage::OnManipulationUpdated);
+
+    m_gestureRecognizer->ManipulationCompleted +=
+        ref new TypedEventHandler<GestureRecognizer^, ManipulationCompletedEventArgs^>(this, &DirectXPage::OnManipulationCompleted);
 
     m_renderOptionsViewModel = ref new RenderOptionsViewModel();
 
@@ -79,7 +105,9 @@ DirectXPage::DirectXPage() :
     m_deviceResources = std::make_shared<DX::DeviceResources>();
     m_deviceResources->SetSwapChainPanel(swapChainPanel);
 
-    m_renderer = std::unique_ptr<D2DAdvancedColorImagesRenderer>(new D2DAdvancedColorImagesRenderer(m_deviceResources, this));
+    m_renderer = std::unique_ptr<D2DAdvancedColorImagesRenderer>(new D2DAdvancedColorImagesRenderer(m_deviceResources));
+
+    UpdateDisplayACState(currentDisplayInformation->GetAdvancedColorInfo());
 }
 
 DirectXPage::~DirectXPage()
@@ -97,80 +125,89 @@ void DirectXPage::LoadDefaultImage()
 
 void DirectXPage::LoadImage(_In_ StorageFile^ imageFile)
 {
-    create_task(imageFile->OpenAsync(FileAccessMode::Read)).then([=](task<IRandomAccessStream^> previousTask) {
-        IRandomAccessStream^ ras;
+    create_task(imageFile->OpenAsync(FileAccessMode::Read)
+        ).then([=](IRandomAccessStream^ ras) {
+            // If file opening fails, fall through to error handler at the end of task chain.
+
+            ComPtr<IStream> iStream;
+            DX::ThrowIfFailed(CreateStreamOverRandomAccessStream(ras, IID_PPV_ARGS(&iStream)));
+            return m_renderer->LoadImageFromWic(iStream.Get());
+    }).then([=](ImageInfo info) {
+        m_imageInfo = info;
+
+        m_renderer->CreateImageDependentResources();
+        m_imageMaxCLL = m_renderer->FitImageToWindow();
+
+        ApplicationView::GetForCurrentView()->Title = imageFile->Name;
+        ImageACKind->Text = L"Kind: " + ConvertACKindToString(m_imageInfo.imageKind);
+        ImageHasColorProfile->Text = L"Color profile: " + (m_imageInfo.numProfiles > 0 ? L"Yes" : L"No");
+        ImageBitDepth->Text = L"Bit depth: " + ref new String(std::to_wstring(m_imageInfo.bitsPerChannel).c_str());
+        ImageIsFloat->Text = L"Floating point: " + (m_imageInfo.isFloat ? L"Yes" : L"No");
+
+        std::wstringstream cllStr;
+        cllStr << L"Estimated MaxCLL: ";
+        if (m_imageMaxCLL < 0.0f)
+        {
+            cllStr << L"N/A";
+        }
+        else
+        {
+            cllStr << std::to_wstring(static_cast<int>(m_imageMaxCLL)) << L" nits";
+        }
+
+        ImageMaxCLL->Text = ref new String(cllStr.str().c_str());
+
+        // Image loading is done at this point.
+        m_isImageValid = true;
+        UpdateDefaultRenderOptions();
+
+        // Ensure the preceding continuation runs on the UI thread.
+    }, task_continuation_context::use_current()).then([=](task<void> previousTask) {
         try
         {
-            ras = previousTask.get();
+            previousTask.get();
         }
         catch (...)
         {
-            // If the file cannot be opened, then do nothing.
+            // Errors resulting from failure to load/decode image are ignored.
             return;
         }
-
-        ComPtr<IStream> iStream;
-        DX::ThrowIfFailed(CreateStreamOverRandomAccessStream(ras, IID_PPV_ARGS(&iStream)));
-
-        m_imageInfo = m_renderer->LoadImage(iStream.Get());
-
-        ApplicationView::GetForCurrentView()->Title = imageFile->Name;
-        ImageHasColorProfile->Text = L"Color profile: " + (m_imageInfo.numProfiles > 0 ? L"Yes" : L"No");
-        ImageBitDepth->Text = L"Bits per pixel: " + ref new String(std::to_wstring(m_imageInfo.bitsPerPixel).c_str());
-        ImageIsFloat->Text = L"Floating point: " + (m_imageInfo.isFloat ? L"Yes" : L"No");
-
-        m_renderer->CreateImageDependentResources();
-        m_renderer->FitImageToWindow();
-
-        // After image is loaded, reset rendering options to defaults.
-        ScalingCheckBox->IsChecked = false;
-        TonemappersCombo->SelectedIndex = 0; // See RenderOptions.h for which value this indicates.
-        ColorspacesCombo->SelectedIndex = 0; // See RenderOptions.h for which value this indicates.
-        WhiteLevelSlider->Value = 1.0f;
-
-        m_renderer->Draw();
     });
 }
 
-void DirectXPage::OnDisplayACStateChanged(float maxLuminance, unsigned int bitDepth, DisplayACKind displayKind)
+void DirectXPage::UpdateDisplayACState(_In_ AdvancedColorInfo^ info)
 {
-    String^ displayString;
-    switch (displayKind)
+    // Render options are meaningless when this method is first called, as no image has been loaded yet.
+    // Therefore it doesn't matter what value we use for oldDispKind in this case.
+    auto oldDispKind = m_dispInfo ? m_dispInfo->CurrentAdvancedColorKind : AdvancedColorKind::StandardDynamicRange;
+    auto newDispKind = info->CurrentAdvancedColorKind;
+    m_dispInfo = info;
+
+    DisplayACState->Text = L"Kind: " + ConvertACKindToString(newDispKind);
+
+    unsigned int maxcll = static_cast<unsigned int>(info->MaxLuminanceInNits);
+
+    if (maxcll == 0)
     {
-    case DisplayACKind::AdvancedColor_LowDynamicRange:
-        displayString = L"Advanced color, LDR";
-        break;
-
-    case DisplayACKind::AdvancedColor_HighDynamicRange:
-        displayString = L"Advanced color, HDR";
-        break;
-
-    case DisplayACKind::NotAdvancedColor:
-    default:
-        displayString = L"Not advanced color";
-        break;
-    }
-
-    DisplayACState->Text = L"Kind: " + displayString;
-    DisplayPeakLuminance->Text = L"Peak luminance: " + 
-        ref new String(std::to_wstring(static_cast<unsigned int>(maxLuminance)).c_str()) + L" nits";
-
-    DisplayBitDepth->Text = L"Bits per channel: " + ref new String(std::to_wstring(bitDepth).c_str());
-
-    // White level scaling should only be enabled where overbright/high dynamic range is available.
-    // Tonemapping should only be enabled in the converse situation (low dynamic range); they don't benefit
-    // from adjusting white level since 1.0 white is simply mapped to the maximum luminance of the display.
-    if (displayKind == DisplayACKind::AdvancedColor_HighDynamicRange)
-    {
-        WhiteLevelPanel->Visibility = Windows::UI::Xaml::Visibility::Visible;
-        TonemapperPanel->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+        // Luminance value of 0 means that no valid data was provided by the display.
+        DisplayPeakLuminance->Text = L"Peak luminance: Unknown";
     }
     else
     {
-        WhiteLevelSlider->Value = 1.0f;
-        WhiteLevelPanel->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
-        TonemapperPanel->Visibility = Windows::UI::Xaml::Visibility::Visible;
+        DisplayPeakLuminance->Text = L"Peak luminance: " + ref new String(std::to_wstring(maxcll).c_str()) + L" nits";
     }
+
+    if (oldDispKind == newDispKind)
+    {
+        // Some changes, such as peak luminance or SDR white level, don't need to reset rendering options.
+        UpdateRenderOptions();
+    }
+    else
+    {
+        // If display has changed kind between SDR/HDR/WCG, we must reset all rendering options.
+        UpdateDefaultRenderOptions();
+    }
+
 }
 
 // UI element event handlers.
@@ -208,23 +245,67 @@ void DirectXPage::LoadInternalState(_In_ IPropertySet^ state)
 {
 }
 
+// Based on image and display parameters, choose the best rendering options.
+void DirectXPage::UpdateDefaultRenderOptions()
+{
+    if (!m_isImageValid)
+    {
+        // Render options are only meaningful if an image is already loaded.
+        return;
+    }
+
+    switch (m_imageInfo.imageKind)
+    {
+    case AdvancedColorKind::StandardDynamicRange:
+    case AdvancedColorKind::WideColorGamut:
+    default:
+        // SDR and WCG images don't need to be tonemapped.
+        RenderEffectCombo->SelectedIndex = 2; // See RenderOptions.h for which value this indicates.
+
+        // Manual brightness adjustment is only useful for HDR content.
+        // SDR and WCG content is adjusted by the OS-provided AdvancedColorInfo::SdrWhiteLevel parameter.
+        BrightnessAdjustSlider->Value = 1.0f;
+        BrightnessAdjustPanel->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+        break;
+
+    case AdvancedColorKind::HighDynamicRange:
+
+        switch (m_dispInfo->CurrentAdvancedColorKind)
+        {
+        case AdvancedColorKind::StandardDynamicRange:
+        case AdvancedColorKind::WideColorGamut:
+        default:
+            // HDR content + non-HDR display: HDR tonemapping is needed for correct rendering.
+            RenderEffectCombo->SelectedIndex = 0; // See RenderOptions.h for which value this indicates.
+            break;
+
+        case AdvancedColorKind::HighDynamicRange:
+            // HDR content + HDR display: HDR tonemapping is needed for best results, but this sample's
+            // tonemappers are very simple and not suitable, so just disable it.
+            RenderEffectCombo->SelectedIndex = 2; // See RenderOptions.h for which value this indicates.
+            break;
+        }
+
+        // Manual brightness adjustment is useful for any HDR content.
+        BrightnessAdjustPanel->Visibility = Windows::UI::Xaml::Visibility::Visible;
+        break;
+    }
+
+    UpdateRenderOptions();
+}
+
 // Common method for updating options on the renderer.
 void DirectXPage::UpdateRenderOptions()
 {
-    if ((m_renderer != nullptr) &&
-        ColorspacesCombo->SelectedItem &&
-        TonemappersCombo->SelectedItem
-        )
+    if ((m_renderer != nullptr) && RenderEffectCombo->SelectedItem)
     {
-        auto cs = static_cast<ColorspaceOption^>(ColorspacesCombo->SelectedItem);
-        auto tm = static_cast<TonemapperOption^>(TonemappersCombo->SelectedItem);
+        auto tm = static_cast<EffectOption^>(RenderEffectCombo->SelectedItem);
 
         m_renderer->SetRenderOptions(
-            ScalingCheckBox->IsChecked->Value,
-            tm->Tonemapper,
-            static_cast<float>(WhiteLevelSlider->Value),
-            static_cast<DXGI_COLOR_SPACE_TYPE>(cs->Colorspace)
-        );
+            tm->Kind,
+            static_cast<float>(BrightnessAdjustSlider->Value),
+            m_dispInfo
+            );
     }
 }
 
@@ -262,6 +343,12 @@ void DirectXPage::OnDisplayContentsInvalidated(_In_ DisplayInformation^ sender, 
     m_renderer->Draw();
 }
 
+void DirectXPage::OnAdvancedColorInfoChanged(_In_ DisplayInformation ^sender, _In_ Object ^args)
+{
+    UpdateDisplayACState(sender->GetAdvancedColorInfo());
+}
+
+
 // Other event handlers.
 
 void DirectXPage::OnCompositionScaleChanged(_In_ SwapChainPanel^ sender, _In_ Object^ args)
@@ -276,6 +363,28 @@ void DirectXPage::OnSwapChainPanelSizeChanged(_In_ Object^ sender, _In_ SizeChan
     m_deviceResources->SetLogicalSize(e->NewSize);
     m_renderer->CreateWindowSizeDependentResources();
     m_renderer->Draw();
+}
+
+String^ DirectXPage::ConvertACKindToString(AdvancedColorKind kind)
+{
+    String^ displayString;
+    switch (kind)
+    {
+    case AdvancedColorKind::WideColorGamut:
+        displayString = L"Wide Color Gamut";
+        break;
+
+    case AdvancedColorKind::HighDynamicRange:
+        displayString = L"High Dynamic Range";
+        break;
+
+    case AdvancedColorKind::StandardDynamicRange:
+    default:
+        displayString = L"Standard Dynamic Range";
+        break;
+    }
+
+    return displayString;
 }
 
 void DirectXPage::OnKeyUp(_In_ CoreWindow ^sender, _In_ KeyEventArgs ^args)
@@ -293,26 +402,81 @@ void DirectXPage::OnKeyUp(_In_ CoreWindow ^sender, _In_ KeyEventArgs ^args)
             ControlsPanel->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
         }
     }
+    else if (VirtualKey::F == args->VirtualKey)
+    {
+        if (ApplicationView::GetForCurrentView()->IsFullScreenMode)
+        {
+            ApplicationView::GetForCurrentView()->ExitFullScreenMode();
+        }
+        else
+        {
+            ApplicationView::GetForCurrentView()->TryEnterFullScreenMode();
+        }
+    }
 }
 
-void DirectXPage::SliderChanged(Object ^ sender, RangeBaseValueChangedEventArgs ^ e)
+void DirectXPage::SliderChanged(_In_ Object^ sender, _In_ RangeBaseValueChangedEventArgs^ e)
 {
     UpdateRenderOptions();
 }
 
 
-void DirectXPage::CheckBoxChanged(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void DirectXPage::CheckBoxChanged(_In_ Object^ sender, _In_ RoutedEventArgs^ e)
 {
     UpdateRenderOptions();
 }
 
 // ResizeCompleted is used to detect when the window has been moved between different displays.
-void DirectXPage::OnResizeCompleted(CoreWindow ^sender, Object ^args)
+void DirectXPage::OnResizeCompleted(_In_ CoreWindow^ sender, _In_  Object^ args)
 {
     UpdateRenderOptions();
 }
 
-void DirectXPage::ComboChanged(Object^ sender, SelectionChangedEventArgs^ e)
+void DirectXPage::ComboChanged(_In_ Object^ sender, _In_ SelectionChangedEventArgs^ e)
 {
     UpdateRenderOptions();
+}
+
+// Send low level pointer events to GestureRecognizer to be interpreted.
+void DirectXPage::OnPointerPressed(_In_ Object^ sender, _In_ PointerRoutedEventArgs^ e)
+{
+    swapChainPanel->CapturePointer(e->Pointer);
+    m_gestureRecognizer->ProcessDownEvent(e->GetCurrentPoint(swapChainPanel));
+}
+
+void DirectXPage::OnPointerMoved(_In_ Object^ sender, _In_ PointerRoutedEventArgs^ e)
+{
+    m_gestureRecognizer->ProcessMoveEvents(e->GetIntermediatePoints(swapChainPanel));
+}
+
+void DirectXPage::OnPointerReleased(_In_ Object ^sender, _In_ PointerRoutedEventArgs ^e)
+{
+    m_gestureRecognizer->ProcessUpEvent(e->GetCurrentPoint(swapChainPanel));
+    swapChainPanel->ReleasePointerCapture(e->Pointer);
+}
+
+void DirectXPage::OnPointerCanceled(_In_ Object ^sender, _In_ PointerRoutedEventArgs ^e)
+{
+    m_gestureRecognizer->CompleteGesture();
+    swapChainPanel->ReleasePointerCapture(e->Pointer);
+}
+
+void DirectXPage::OnPointerWheelChanged(_In_ Object ^sender, _In_ PointerRoutedEventArgs ^e)
+{
+    // Passing isControlKeyDown = true causes the wheel delta to be treated as scrolling.
+    m_gestureRecognizer->ProcessMouseWheelEvent(e->GetCurrentPoint(swapChainPanel), false, true);
+}
+
+// GestureRecognizer triggers events on user manipulation of the image content.
+void DirectXPage::OnManipulationStarted(_In_ GestureRecognizer ^sender, _In_ ManipulationStartedEventArgs ^args)
+{
+}
+
+void DirectXPage::OnManipulationUpdated(_In_ GestureRecognizer ^sender, _In_ ManipulationUpdatedEventArgs ^args)
+{
+    m_renderer->UpdateManipulationState(args);
+}
+
+void DirectXPage::OnManipulationCompleted(_In_ GestureRecognizer ^sender, _In_ ManipulationCompletedEventArgs ^args)
+{
 }

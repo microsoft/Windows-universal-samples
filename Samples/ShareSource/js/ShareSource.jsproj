@@ -99,6 +99,9 @@
     <Content Include="..\shared\assets\microsoftLogo.scale-180.png">
       <Link>images\microsoftLogo.scale-180.png</Link>
     </Content>
+    <Content Include="..\shared\assets\microsoftLogo.scale-200.png">
+      <Link>images\microsoftLogo.scale-200.png</Link>
+    </Content>
     <Content Include="..\shared\assets\visualStudioLogo.scale-100.png">
       <Link>images\visualStudioLogo.scale-100.png</Link>
     </Content>
@@ -107,6 +110,9 @@
     </Content>
     <Content Include="..\shared\assets\visualStudioLogo.scale-180.png">
       <Link>images\visualStudioLogo.scale-180.png</Link>
+    </Content>
+    <Content Include="..\shared\assets\visualStudioLogo.scale-200.png">
+      <Link>images\visualStudioLogo.scale-200.png</Link>
     </Content>
     <Content Include="..\..\..\SharedContent\js\js\default.js">
       <Link>js\default.js</Link>

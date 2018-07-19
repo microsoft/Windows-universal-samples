@@ -71,7 +71,7 @@ void InstallService(
         schSCManager,                   // SCManager database
         pszServiceName,                 // Name of service
         pszDisplayName,                 // Name to display
-        SERVICE_QUERY_STATUS,           // Desired access
+        SERVICE_QUERY_STATUS | SERVICE_START,  // Desired access
         SERVICE_WIN32_OWN_PROCESS,      // Service type
         dwStartType,                    // Service start type
         SERVICE_ERROR_NORMAL,           // Error control type
@@ -91,6 +91,14 @@ void InstallService(
 
     wprintf(L"%s is installed.\n", pszServiceName);
 
+    if (StartService(schService, 0, nullptr) == 0)
+    {
+        wprintf(L"StartService failed w/err 0x%08lx\n", GetLastError());
+        goto Cleanup;
+    }
+
+    wprintf(L"%s is started.\n", pszServiceName);
+
 Cleanup:
     // Centralized cleanup for all allocated resources.
     if (schSCManager)
@@ -104,7 +112,6 @@ Cleanup:
         schService = nullptr;
     }
 }
-
 
 //
 //   FUNCTION: UninstallService

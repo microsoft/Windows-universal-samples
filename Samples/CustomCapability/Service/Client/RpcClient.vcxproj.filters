@@ -11,11 +11,14 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="RpcClientApi.cpp" />
     <ClCompile Include="$(OutDir)\RpcInterface_c.c" />
+    <ClCompile Include="smbios.cpp" />
+    <ClCompile Include="uefi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RpcClient.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="RpcClientApi.h" />
+    <ClInclude Include="FirmwareAccess.h" />
   </ItemGroup>
 </Project>

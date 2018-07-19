@@ -16,10 +16,7 @@ namespace SDKTemplate
 {
     static class Fx2Driver
     {
-        // The device type value expected by the driver in IO control 
-        // codes.  The driver defines this as 0x65500 but the value gets
-        // truncated to a ushort.  Do the same here.
-        public const ushort DeviceType = unchecked((ushort)0x65500);
+        public const ushort DeviceType = 65500;
         public const ushort FunctionBase = 0x800;
 
         public static
@@ -27,7 +24,7 @@ namespace SDKTemplate
                                                                  FunctionBase + 7,
                                                                  IOControlAccessMode.Read,
                                                                  IOControlBufferingMethod.Buffered);
-        
+
         public static
         IOControlCode SetSevenSegmentDisplay = new IOControlCode(DeviceType,
                                                                  FunctionBase + 8,

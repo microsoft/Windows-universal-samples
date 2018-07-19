@@ -12,8 +12,17 @@
         { url: "/html/scenario4.html", title: "Connect to Google Services" }
     ];
 
+    function tryGetFormValue(decoder, name) {
+        try {
+            return decoder.getFirstValueByName(name);
+        } catch (e) {
+            return null;
+        }
+    }
+
     WinJS.Namespace.define("SdkSample", {
         sampleTitle: sampleTitle,
-        scenarios: new WinJS.Binding.List(scenarios)
+        scenarios: new WinJS.Binding.List(scenarios),
+        tryGetFormValue: tryGetFormValue
     });
 })();

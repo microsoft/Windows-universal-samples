@@ -214,6 +214,7 @@
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="RpcClientRt.h" />
+    <ClInclude Include="SmbiosRT.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -225,6 +226,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="RpcClientRt.cpp" />
+    <ClCompile Include="SmbiosRT.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Service\Client\RpcClient.vcxproj">

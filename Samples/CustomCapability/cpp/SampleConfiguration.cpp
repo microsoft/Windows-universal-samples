@@ -21,5 +21,7 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Connect to the FX2 Device",                "SDKTemplate.DeviceConnect" },
     { "Send IOCTLs to the device",                "SDKTemplate.DeviceIO" },
     { "Handle asynchronous device events",        "SDKTemplate.DeviceEvents" },
-    { "Read and Write operations",                "SDKTemplate.DeviceReadWrite" }
+    { "Read and Write operations",                "SDKTemplate.DeviceReadWrite" },
+    { "Custom system event trigger",              "SDKTemplate.CustomTrigger" },
+    { "Firmware access",                          "SDKTemplate.FirmwareAccess" },
 };

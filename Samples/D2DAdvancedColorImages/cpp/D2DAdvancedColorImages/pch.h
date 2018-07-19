@@ -12,12 +12,15 @@
 #pragma once
 
 #include <agile.h>
+#include <atlbase.h>
+#include <algorithm>
 #include <collection.h>
 #include <concrt.h>
 #include <memory>
 #include <ppltasks.h>
 #include <shcore.h>
 #include <string>
+#include <sstream>
 #include <wrl.h>
 #include <wrl/client.h>
 

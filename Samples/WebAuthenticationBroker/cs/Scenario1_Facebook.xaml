@@ -19,43 +19,27 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid x:Name="RootGrid" Margin="12,20,12,12">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <StackPanel Margin="0,0,0,10">
-                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                    Connect to Facebook using the OAuth 2.0 protocol for authentication and authorization.
-                </TextBlock>
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,20,12,12">
+        <StackPanel Margin="0,0,0,10">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Connect to Facebook using the OAuth 2.0 protocol for authentication and authorization.
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource BasicTextStyle}">Use these SID values to register the app with Facebook.</TextBlock>
+            <TextBlock>Windows Store SID: <Run x:Name="WindowsStoreSidTextBlock"/></TextBlock>
+            <TextBlock>Windows Phone Store SID: <Run x:Name="WindowsPhoneStoreSidTextBlock"/></TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Style="{StaticResource BasicTextStyle}" Text="App ID: " VerticalAlignment="Center" Width="85"/>
+                <TextBox x:Name="FacebookClientID" Height="14" Width="200" Text=""/>
             </StackPanel>
-
-            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-                <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Style="{StaticResource BasicTextStyle}" Text="App ID: " VerticalAlignment="Center" Width="85"/>
-                        <TextBox x:Name="FacebookClientID" Height="14" Width="200" Text=""/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Style="{StaticResource BasicTextStyle}" Text="Site URL: " VerticalAlignment="Center" Width="85"/>
-                        <TextBox x:Name="FacebookCallbackUrl" Height="14" Width="200" Text=""/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBox x:Name="FacebookReturnedToken" Width="285" Text="Press Launch to view returned token..." IsEnabled="False"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" Margin="0,10,0,0">
-                        <Button x:Name="Launch" Content="Launch" Width="285" Click="Launch_Click"/>
-                    </StackPanel>
-                </StackPanel>
-            </ScrollViewer>
-
-            <!-- Status Block for providing messages to the user.  Use the
-             NotifyUser() method to populate the message -->
-            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
-            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
-        </Grid>
-    </Grid>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Style="{StaticResource BasicTextStyle}" Text="Site URL: " VerticalAlignment="Center" Width="85"/>
+                <TextBox x:Name="FacebookCallbackUrl" Height="14" Width="200" Text="https://www.facebook.com/connect/login_success.html"/>
+            </StackPanel>
+            <Button x:Name="Launch" Content="Launch" Click="Launch_Click" Margin="0,10,0,0"/>
+            <TextBlock Margin="0,10,0,0">Token: <Run x:Name="FacebookReturnedToken"/></TextBlock>
+            <TextBlock Margin="0,10,0,0">User Name: <Run x:Name="FacebookUserName"/></TextBlock>
+        </StackPanel>
+    </ScrollViewer>
 </Page>
