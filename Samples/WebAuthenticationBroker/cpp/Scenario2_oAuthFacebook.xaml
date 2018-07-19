@@ -35,13 +35,16 @@
 
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                    <TextBlock Style="{StaticResource BasicTextStyle}">Use these SID values to register the app with Facebook.</TextBlock>
+                    <TextBlock Style="{StaticResource BasicTextStyle}">Windows Store SID: <Run x:Name="WindowsStoreSidTextBlock"/></TextBlock>
+                    <TextBlock Style="{StaticResource BasicTextStyle}">Windows Phone Store SID: <Run x:Name="WindowsPhoneStoreSidTextBlock"/></TextBlock>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                         <TextBlock Style="{StaticResource BasicTextStyle}" Text="App ID: " VerticalAlignment="Center" Width="125"/>
                         <TextBox x:Name="FacebookClientID" Height="14" Width="200" Text=""/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                         <TextBlock Style="{StaticResource BasicTextStyle}" Text="Site URL: " VerticalAlignment="Center" Width="125"/>
-                        <TextBox x:Name="FacebookCallbackUrl" Height="14" Width="200" Text=""/>
+                        <TextBox x:Name="FacebookCallbackUrl" Height="14" Width="200" Text="https://www.facebook.com/connect/login_success.html"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                         <TextBox x:Name="FacebookReturnedToken" Width="325" Text="Press Launch to view returned token..." IsEnabled="False"/>

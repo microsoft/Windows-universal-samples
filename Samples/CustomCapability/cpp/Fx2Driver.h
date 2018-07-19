@@ -16,9 +16,6 @@ namespace SDKTemplate
         ref class Fx2Driver
         {
         internal:
-            // The device type value expected by the driver in IO control 
-            // codes.  The driver defines this as 0x65500 but the device type
-            // value is only 16-bits wide, so we truncate here to 0x5500.
             static const uint16 DeviceType = 65500U;
             static const uint16 FunctionBase = 0x800;
 
