@@ -97,17 +97,29 @@ void VideoRenderer::Render()
         m_modelConstantBuffer.GetAddressOf()
     );
 
-    // On devices that do not support the D3D11_FEATURE_D3D11_OPTIONS3::
-    // VPAndRTArrayIndexFromAnyShaderFeedingRasterizer optional feature,
-    // a pass-through geometry shader is used to set the render target
-    // array index.
-    //
-    // Reset the geometry shader on devices that do support the feature.
-    context->GSSetShader(
-        m_geometryShader.Get(),
-        nullptr,
-        0
-    );
+    if (!m_usingVprtShaders)
+    {
+        // On devices that do not support the D3D11_FEATURE_D3D11_OPTIONS3::
+        // VPAndRTArrayIndexFromAnyShaderFeedingRasterizer optional feature,
+        // a pass-through geometry shader is used to set the render target
+        // array index.
+        context->GSSetShader(
+            m_geometryShader.Get(),
+            nullptr,
+            0
+        );
+    }
+    else
+    {
+        // Make sure that there is no geometry shader bound to the graphics
+        // pipeline on devices that do support the D3D11_FEATURE_D3D11_OPTIONS3::
+        // VPAndRTArrayIndexFromAnyShaderFeedingRasterizer optional feature.
+        context->GSSetShader(
+            nullptr,
+            nullptr,
+            0
+        );
+    }
 
     // Attach the pixel shader.
     context->PSSetShader(
