@@ -1,0 +1,97 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page x:Class="AppUIBasics.ControlPages.CompactSpacingPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:AppUIBasics"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <!--<Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Name="Compact" Source="Styles/CompactSpacing.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>-->
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel>
+            <Grid x:Name="controlsTable">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock FontSize="18" Grid.Row="0" Text="Compact Supported Controls" />
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="ListVew" />
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="TextBox" />
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="PasswordBox" />
+                <TextBlock Grid.Column="0" Grid.Row="4" Text="AutosuggestBox" />
+                <TextBlock Grid.Column="0" Grid.Row="5" Text="ComboBox" />
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="DatePicker" />
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="TimePicker" />
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="TreeView" />
+                <TextBlock Grid.Column="1" Grid.Row="4" Text="NavigationView" />
+                <TextBlock Grid.Column="1" Grid.Row="5" Text="MenuBar" />
+            </Grid>
+            <local:ControlExample x:Name="Example1" HeaderText="Adding The compact dictionary to your app.xaml">
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}" FontFamily="Consolas">
+                    <Paragraph>&lt;Application.Resources/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;ResourceDictionary/&gt;</Paragraph>
+                    <Paragraph TextIndent="16">&lt;ResourceDictionary.MergedDictionaries/&gt;</Paragraph>
+                    <Paragraph TextIndent="20">&lt;ResourceDictionary Source="Styles/CompactSizing.xaml" /&gt;</Paragraph>
+                    <Paragraph TextIndent="16">&lt;/ResourceDictionary.MergedDictionaries&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/ResourceDictionary&gt;</Paragraph>
+                    <Paragraph>&lt;/Application.Resources&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample>
+
+            <local:ControlExample x:Name="Example2" HeaderText="Adding the compact dictionary to your page.">
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}" FontFamily="Consolas">
+                    <Paragraph>&lt;Application.Resources/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;ResourceDictionary/&gt;</Paragraph>
+                    <Paragraph TextIndent="16">&lt;ResourceDictionary.MergedDictionaries/&gt;</Paragraph>
+                    <Paragraph TextIndent="20">&lt;ResourceDictionary Source="Styles/CompactSizing.xaml" /&gt;</Paragraph>
+                    <Paragraph TextIndent="16">&lt;/ResourceDictionary.MergedDictionaries&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/ResourceDictionary&gt;</Paragraph>
+                    <Paragraph>&lt;/Application.Resources&gt;</Paragraph>
+                </RichTextBlock> 
+            </local:ControlExample>
+          
+            <local:ControlExample x:Name="Example3" HeaderText="Adding The compact dictionary on layout panels">
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}" FontFamily="Consolas">
+                    <Paragraph>&lt;Application.Resources/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;ResourceDictionary/&gt;</Paragraph>
+                    <Paragraph TextIndent="16">&lt;ResourceDictionary.MergedDictionaries/&gt;</Paragraph>
+                    <Paragraph TextIndent="20">&lt;ResourceDictionary Source="Styles/CompactSizing.xaml" /&gt;</Paragraph>
+                    <Paragraph TextIndent="16">&lt;/ResourceDictionary.MergedDictionaries&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/ResourceDictionary&gt;</Paragraph>
+                    <Paragraph>&lt;/Application.Resources&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample>
+            <local:ControlExample x:Name="Example4" HeaderText="Compact Spacing - Resource Dictionary">
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}" FontFamily="Consolas">
+                    <Paragraph>&lt;Need to paste code here/&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace AppUIBasics.Common
 {
@@ -14,6 +15,10 @@ namespace AppUIBasics.Common
             if (value is Windows.UI.Xaml.Controls.ComboBoxItem)
             {
                 return (value as Windows.UI.Xaml.Controls.ComboBoxItem).Content;
+            }
+            else if (value is Tuple<string, EasingFunctionBase>)
+            {
+                return (value as Tuple<string, EasingFunctionBase>).Item1;
             }
             return null;
         }

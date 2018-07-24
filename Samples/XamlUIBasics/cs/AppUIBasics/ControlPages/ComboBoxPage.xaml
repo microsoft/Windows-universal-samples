@@ -12,9 +12,10 @@
 <Page x:Class="AppUIBasics.ControlPages.ComboBoxPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+        xmlns:contract7Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)">
     <StackPanel>
-        <local:ControlExample x:Name="Example1" HeaderText="A ComboBox with items defined inline and its width set.">
+        <local:ControlExample HeaderText="A ComboBox with items defined inline and its width set.">
             <local:ControlExample.Example>
                 <StackPanel>
                     <ComboBox x:Name="Combo1" SelectionChanged="ColorComboBox_SelectionChanged" Header="Colors"
@@ -38,13 +39,14 @@
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
-        <local:ControlExample x:Name="Example2" HeaderText="A ComboBox with its ItemsSource set.">
+        
+        <local:ControlExample HeaderText="A ComboBox with its ItemsSource set.">
             <local:ControlExample.Example>
                 <StackPanel>
                     <ComboBox x:Name="Combo2" ItemsSource="{x:Bind Fonts}" DisplayMemberPath="Item1"
                             SelectedValuePath="Item2" Header="Font" Width="200" Loaded="Combo2_Loaded" />
                     <TextBlock x:Name="Control2Output" Text="You can set the font used for this text."
-                            FontFamily="{x:Bind Combo2.SelectedValue, Converter={StaticResource valueToFontFamilyConverter}, Mode=OneWay}"
+                            FontFamily="{x:Bind (FontFamily)Combo2.SelectedValue, Mode=OneWay}"
                             Style="{StaticResource OutputTextBlockStyle}" />
                 </StackPanel>
             </local:ControlExample.Example>
@@ -52,6 +54,23 @@
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;ComboBox ItemsSource="{x:Bind Fonts}" DisplayMemberPath="Item1" SelectedValuePath="Item2"</Paragraph>
                     <Paragraph TextIndent="12">Header="Font" Width="200" Loaded="Combo2_Loaded"/&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+
+        <local:ControlExample HeaderText="An editable ComboBox." MinimumUniversalAPIContract="7">
+            <local:ControlExample.Example>
+                <StackPanel>
+                    <ComboBox x:Name="Combo3" contract7Present:IsEditable="True" ItemsSource="{x:Bind FontSizes}" Header="Font Size" Width="200" Loaded="Combo3_Loaded"  />
+                    <TextBlock x:Name="Control3Output" Text="You can set the font size used for this text."
+                               FontFamily="Segoe UI"
+                               FontSize="{x:Bind (x:Double)Combo3.SelectedValue, Mode=OneWay}"
+                               Style="{StaticResource OutputTextBlockStyle}" />
+                </StackPanel>
+            </local:ControlExample.Example>
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>&lt;ComboBox IsEditable="True" ItemsSource="{x:Bind FontSizes}" Width="200" TextSubmitted="Combo3_TextSubmitted"/&gt;</Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>

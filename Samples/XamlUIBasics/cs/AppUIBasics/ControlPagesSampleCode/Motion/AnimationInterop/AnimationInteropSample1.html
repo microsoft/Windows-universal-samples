@@ -1,0 +1,30 @@
+﻿<!-- HTML generated using hilite.me --><div><pre style="margin: 0; line-height: 125%">Compositor _compositor = Window.Current.Compositor;
+SpringVector3NaturalMotionAnimation _springAnimation;
+
+<span style="color: #0000ff">private</span> <span style="color: #0000ff">void</span> CreateOrUpdateSpringAnimation(<span style="color: #2b91af">float</span> finalValue)
+{
+    <span style="color: #0000ff">if</span> (_springAnimation == <span style="color: #0000ff">null</span>)
+    {
+        _springAnimation = _compositor.CreateSpringVector3Animation();
+        _springAnimation.Target = <span style="color: #a31515">&quot;Scale&quot;</span>;
+    }
+
+    _springAnimation.FinalValue = <span style="color: #0000ff">new</span> Vector3(finalValue);
+}
+
+<span style="color: #0000ff">private</span> <span style="color: #0000ff">void</span> element_PointerEntered(<span style="color: #2b91af">object</span> sender, PointerRoutedEventArgs e)
+{
+    <span style="color: #008000">// Scale up to 1.5</span>
+    CreateOrUpdateSpringAnimation(1.5f);
+
+    (sender <span style="color: #0000ff">as</span> UIElement).StartAnimation(_springAnimation);
+}
+
+<span style="color: #0000ff">private</span> <span style="color: #0000ff">void</span> element_PointerExited(<span style="color: #2b91af">object</span> sender, PointerRoutedEventArgs e)
+{
+    <span style="color: #008000">// Scale back down to 1.0</span>
+    CreateOrUpdateSpringAnimation(1.0f);
+
+    (sender <span style="color: #0000ff">as</span> UIElement).StartAnimation(_springAnimation);
+}
+</pre></div>

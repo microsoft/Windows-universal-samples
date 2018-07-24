@@ -7,6 +7,7 @@
 // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 //
 //*********************************************************
+using AppUIBasics.ControlPages;
 using System;
 using System.Linq;
 using Windows.System;
@@ -28,6 +29,11 @@ namespace AppUIBasics
         {
             this.InitializeComponent();
             Loaded += OnSettingsPageLoaded;
+
+            if (ElementSoundPlayer.State == ElementSoundPlayerState.On)
+                soundToggle.IsOn = true;
+            if (ElementSoundPlayer.SpatialAudioMode == ElementSpatialAudioMode.On)
+                spatialSoundBox.IsChecked = true;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -82,6 +88,38 @@ namespace AppUIBasics
             if (e.Key == VirtualKey.Up)
             {
                 NavigationRootPage.Current.PageHeader.Focus(FocusState.Programmatic);
+            }
+        }
+        private void spatialSoundBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if(soundToggle.IsOn == true)
+            {
+                ElementSoundPlayer.SpatialAudioMode = ElementSpatialAudioMode.On;
+            }
+        }
+
+        private void soundToggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (soundToggle.IsOn == true)
+            {
+                spatialSoundBox.IsEnabled = true;
+                ElementSoundPlayer.State = ElementSoundPlayerState.On;
+            }
+            else
+            {
+                spatialSoundBox.IsEnabled = false;
+                spatialSoundBox.IsChecked = false;
+
+                ElementSoundPlayer.State = ElementSoundPlayerState.Off;
+                ElementSoundPlayer.SpatialAudioMode = ElementSpatialAudioMode.Off;                
+            }
+        }
+
+        private void spatialSoundBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (soundToggle.IsOn == true)
+            {
+                ElementSoundPlayer.SpatialAudioMode = ElementSpatialAudioMode.Off;
             }
         }
     }

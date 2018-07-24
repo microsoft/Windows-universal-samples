@@ -1,58 +1,114 @@
 ﻿<Page x:Class="AppUIBasics.ControlPages.TreeViewPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:muxcontrols="using:Microsoft.UI.Xaml.Controls"
       xmlns:local="using:AppUIBasics"
-      xmlns:controls="using:Windows.UI.Xaml.Controls"
-      xmlns:common="using:AppUIBasics.Common"
-      xmlns:data="using:AppUIBasics.Data"
+      xmlns:controlpages="using:AppUIBasics.ControlPages"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:controls1="using:Windows.UI.Xaml.Controls"
-      xmlns:Windows10InsiderPreview="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 6)"
+      xmlns:contract6Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 6)"
       mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="FolderTemplate"
+                      x:DataType="controlpages:ExplorerItem">
+            <muxcontrols:TreeViewItem 
+                ItemsSource="{x:Bind Children}" IsExpanded="True">
+
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="20" Source="../Assets/folder.png"/>
+                    <TextBlock Margin="0,0,10,0"/>
+                    <TextBlock Text="{x:Bind Name}" />
+                </StackPanel>
+            </muxcontrols:TreeViewItem>
+        </DataTemplate>
+
+        <DataTemplate x:Key="FileTemplate"
+                      x:DataType="controlpages:ExplorerItem">
+            <muxcontrols:TreeViewItem>
+
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="20" Source="../Assets/file.png"/>
+                    <TextBlock Margin="0,0,10,0"/>
+                    <TextBlock Text="{x:Bind Name}"/>
+                </StackPanel>
+            </muxcontrols:TreeViewItem>
+        </DataTemplate>
+
+        <controlpages:ExplorerItemTemplateSelector 
+            x:Key="ExpolrerItemTemplateSelector"
+            FolderTemplate="{StaticResource FolderTemplate}"
+            FileTemplate="{StaticResource FileTemplate}" />
+    </Page.Resources>
+
     <StackPanel>
-        <local:ControlExample x:Name="Example1" HeaderText="A simple TreeView with drag and drop support">
+        <local:ControlExample HeaderText="A simple TreeView with drag and drop support">
             <local:ControlExample.Example>
-                <Grid Height="600" BorderBrush="{ThemeResource TextControlBorderBrush}" BorderThickness="1">
-                    <Windows10InsiderPreview:TreeView x:Name="sampleTreeView"  Width="345" MaxHeight="500" Margin="0,12,0,0"
-                            HorizontalAlignment="Center" VerticalAlignment="Top" ItemInvoked="sampleTreeView_ItemInvoked" />
+                <Grid Height="400" BorderBrush="{ThemeResource TextControlBorderBrush}" BorderThickness="1">
+                    <contract6Present:TreeView x:Name="sampleTreeView"  Width="345" MaxHeight="400" Margin="0,12,0,0"
+                            HorizontalAlignment="Center" VerticalAlignment="Top" ItemInvoked="sampleTreeView_ItemInvoked" CanDragItems="True" AllowDrop="True" />
                 </Grid>
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
                 <RichTextBlock>
-                    <Paragraph>&lt;controls:TreeView/&gt;</Paragraph>
-                    <Paragraph></Paragraph>
-                    <Paragraph>TreeViewNode workFolder = new TreeViewNode() { Data = "Folder1" };</Paragraph>
-                    <Paragraph>workFolder.Add(new TreeViewNode() { Data = "1.1" });</Paragraph>
-                    <Paragraph>workFolder.Add(new TreeViewNode() { Data = "1.2" });</Paragraph>
-                    <Paragraph>workFolder.Add(new TreeViewNode() { Data = "1.3" });</Paragraph>
-                    <Paragraph></Paragraph>
-                    <Paragraph>TreeViewNode remodelFolder = new TreeViewNode() { Data = "Folder2" };</Paragraph>
-                    <Paragraph>remodelFolder.Add(new TreeViewNode() { Data = "2.1" });</Paragraph>
-                    <Paragraph>remodelFolder.Add(new TreeViewNode() { Data = "2.2" });</Paragraph>
-                    <Paragraph>remodelFolder.Add(new TreeViewNode() { Data = "2.3" });</Paragraph>
-                    <Paragraph></Paragraph>
-                    <Paragraph>personalFolder = new TreeViewNode() { Data = "TopLevel", IsExpanded = true };</Paragraph>
-                    <Paragraph></Paragraph>
-                    <Paragraph>personalFolder.Add(workFolder);</Paragraph>
-                    <Paragraph>personalFolder.Add(remodelFolder);</Paragraph>
-                    <Paragraph>sampleTreeView.RootNode.Add(personalFolder);</Paragraph>
-                    <Paragraph></Paragraph>
+                    <Paragraph>&lt;controls:TreeView  CanDragItems="True"  AllowDrop="True"/&gt;</Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
 
-        <local:ControlExample x:Name="Example2" HeaderText="A TreeView with Multi-selection enabled">
+        <local:ControlExample HeaderText="A TreeView with Multi-selection enabled">
             <local:ControlExample.Example>
-                <Grid Height="600" BorderBrush="{ThemeResource TextControlBorderBrush}" BorderThickness="1">
-                    <Windows10InsiderPreview:TreeView x:Name="sampleTreeView2"  Width="345" MaxHeight="500" Margin="0,12,0,0"
+                <Grid Height="400" BorderBrush="{ThemeResource TextControlBorderBrush}" BorderThickness="1">
+                    <contract6Present:TreeView x:Name="sampleTreeView2"  Width="345" MaxHeight="400" Margin="0,12,0,0"
                             HorizontalAlignment="Center" VerticalAlignment="Top" SelectionMode="Multiple"/>
                 </Grid>
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
                 <RichTextBlock>
-                    <Paragraph>&lt;controls:TreeView SelectionMode="Multiple"/&gt;</Paragraph>
-                    <Paragraph></Paragraph>
+                    <Paragraph>&lt;controls:TreeView SelectionMode="Multiple" /&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+        
+        <local:ControlExample HeaderText="A TreeView with DataBinding Using ItemSource">
+            <local:ControlExample.Example>
+                <Grid Height="400" BorderBrush="{ThemeResource TextControlBorderBrush}" BorderThickness="1">
+                    <muxcontrols:TreeView Name="TreeView1"  Width="345" MaxHeight="400" Margin="0,12,0,0"
+                            HorizontalAlignment="Center" VerticalAlignment="Top" ItemsSource="{x:Bind DataSource}">
+                        <muxcontrols:TreeView.ItemTemplate>
+                            <DataTemplate x:DataType="controlpages:ExplorerItem">
+                                <muxcontrols:TreeViewItem ItemsSource="{x:Bind Children}" Content="{x:Bind Name}" IsExpanded="True"/>
+                            </DataTemplate>
+                        </muxcontrols:TreeView.ItemTemplate>
+                    </muxcontrols:TreeView>
+                </Grid>
+            </local:ControlExample.Example>
+            <local:ControlExample.Xaml>
+                <RichTextBlock>
+                    <Paragraph>&lt;controls:TreeView ItemsSource="{x:Bind DataSource}"/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;TreeView.ItemTemplate/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;DataTemplate x:DataType="local:ExplorerItem"/&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;TreeViewItem ItemsSource="{x:Bind Children}" Content="{x:Bind Name}"/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;DataTemplate/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;TreeView.ItemTemplate/&gt;</Paragraph>
+                    <Paragraph>&lt;controls:TreeView/&gt;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+
+        <local:ControlExample HeaderText="A TreeView with ItemTemplateSelector">
+            <local:ControlExample.Example>
+                <Grid Height="400" BorderBrush="{ThemeResource TextControlBorderBrush}" BorderThickness="1">
+                    <muxcontrols:TreeView Name="FileTree" Width="345" MaxHeight="400" Margin="0,12,0,0"
+                            HorizontalAlignment="Center" VerticalAlignment="Top" ItemsSource="{x:Bind DataSource}" ItemTemplateSelector="{StaticResource ExpolrerItemTemplateSelector}"
+                                 Grid.Column="2">
+                    </muxcontrols:TreeView>
+                </Grid>
+            </local:ControlExample.Example>
+            <local:ControlExample.Xaml>
+                <RichTextBlock>
+                    <Paragraph>&lt;controls:TreeView    ItemsSource="{x:Bind DataSource}"/&gt;</Paragraph>
+                    <Paragraph>&lt;                     ItemTemplateSelector="{StaticResource ExpolrerItemTemplateSelector}"/&gt;</Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>

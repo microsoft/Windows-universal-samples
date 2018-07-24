@@ -97,6 +97,16 @@ namespace AppUIBasics
             }
         }
 
+        public void EnableSound(bool withSpatial = false)
+        {
+            ElementSoundPlayer.State = ElementSoundPlayerState.On;
+
+            if(!withSpatial)
+                ElementSoundPlayer.SpatialAudioMode = ElementSpatialAudioMode.Off;
+            else
+                ElementSoundPlayer.SpatialAudioMode = ElementSpatialAudioMode.On;
+        }
+
         public static TEnum GetEnum<TEnum>(string text) where TEnum : struct
         {
             if (!typeof(TEnum).GetTypeInfo().IsEnum)
@@ -132,10 +142,15 @@ namespace AppUIBasics
             //{
             //    this.DebugSettings.EnableFrameRateCounter = true;
             //}
+
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                this.DebugSettings.BindingFailed += DebugSettings_BindingFailed;
+            }
 #endif
             //draw into the title bar
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
-
+            
             //remove the solid-colored backgrounds behind the caption controls and system back button
             ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.ButtonBackgroundColor = Colors.Transparent;
@@ -148,6 +163,11 @@ namespace AppUIBasics
                 titleBar.ButtonForegroundColor = Colors.Black;
             }
             await EnsureWindow(args);
+        }
+
+        private void DebugSettings_BindingFailed(object sender, BindingFailedEventArgs e)
+        {
+            
         }
 
         protected async override void OnActivated(IActivatedEventArgs args)
@@ -172,7 +192,7 @@ namespace AppUIBasics
                 RootTheme = GetEnum<ElementTheme>(savedTheme);
             }
 
-            Type targetPageType = typeof(AllControlsPage);
+            Type targetPageType = typeof(NewControlsPage);
             string targetPageArguments = string.Empty;
 
             if (args.Kind == ActivationKind.Launch)
@@ -227,6 +247,7 @@ namespace AppUIBasics
             }
 
             rootFrame.Navigate(targetPageType, targetPageArguments);
+            ((Microsoft.UI.Xaml.Controls.NavigationViewItem)(((NavigationRootPage)(Window.Current.Content)).NavigationView.MenuItems[0])).IsSelected = true;
 
             // Ensure the current window is active
             Window.Current.Activate();

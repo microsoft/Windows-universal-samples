@@ -14,10 +14,13 @@ using System.Linq;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
+using Windows.Foundation.Metadata;
 using Windows.System;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Input;
@@ -120,24 +123,9 @@ namespace AppUIBasics
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            //Connected Animation
 
-            PopOutStoryboard.Begin();
-            PopOutStoryboard.Completed += (sender1_, e1_) =>
-            {
-                PopInStoryboard.Begin();
-            };
 
-            if (NavigationRootPage.Current.PageHeader != null)
-            {
-                var connectedAnimation = ConnectedAnimationService.GetForCurrentView().GetAnimation("controlAnimation");
 
-                if (connectedAnimation != null)
-                {
-                    var target = NavigationRootPage.Current.PageHeader.TitlePanel;
-                    connectedAnimation.TryStart(target, new UIElement[] { subTitleText });
-                }
-            }
 
             var item = await ControlInfoDataSource.Instance.GetItemAsync((String)e.Parameter);
 
@@ -161,18 +149,42 @@ namespace AppUIBasics
                 NavigationRootPage.Current.NavigationView.Header = item?.Title;
                 if (item.IsNew && NavigationRootPage.Current.CheckNewControlSelected())
                 {
+                    PlayConnectedAnimation();
                     return;
                 }
 
                 ControlInfoDataGroup group = await ControlInfoDataSource.Instance.GetGroupFromItemAsync((String)e.Parameter);
-                var menuItem = NavigationRootPage.Current.NavigationView.MenuItems.Cast<NavigationViewItem>().FirstOrDefault(m => m.Tag?.ToString() == group.UniqueId);
+                var menuItem = NavigationRootPage.Current.NavigationView.MenuItems.Cast<Microsoft.UI.Xaml.Controls.NavigationViewItem>().FirstOrDefault(m => m.Tag?.ToString() == group.UniqueId);
                 if (menuItem != null)
                 {
                     menuItem.IsSelected = true;
                 }
+
+                PlayConnectedAnimation();
             }
 
             base.OnNavigatedTo(e);
+        }
+
+        void PlayConnectedAnimation()
+        {
+            if (NavigationRootPage.Current.PageHeader != null)
+            {
+                var connectedAnimation = ConnectedAnimationService.GetForCurrentView().GetAnimation("controlAnimation");
+
+                if (connectedAnimation != null)
+                {
+                    var target = NavigationRootPage.Current.PageHeader.TitlePanel;
+
+                    // Setup the "basic" configuration if the API is present. 
+                    if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
+                    {
+                        connectedAnimation.Configuration = new BasicConnectedAnimationConfiguration();
+                    }
+
+                    connectedAnimation.TryStart(target, new UIElement[] { subTitleText });
+                }
+            }
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -232,7 +244,7 @@ namespace AppUIBasics
             if (e.Key == VirtualKey.Up)
             {
                 var nextElement = FocusManager.FindNextElement(FocusNavigationDirection.Up);
-                if (nextElement.GetType() == typeof(NavigationViewItem))
+                if (nextElement.GetType() == typeof(Microsoft.UI.Xaml.Controls.NavigationViewItem))
                 {
                     NavigationRootPage.Current.PageHeader.Focus(FocusState.Programmatic);
                 }

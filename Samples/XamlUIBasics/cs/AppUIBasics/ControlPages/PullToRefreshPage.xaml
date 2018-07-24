@@ -4,9 +4,7 @@
         xmlns:local="using:AppUIBasics"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:converters="using:AppUIBasics.Common"
-        xmlns:RS4Api="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 6)"
-        xmlns:Windows10InsiderPreview="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 6)"
+        xmlns:contract6Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 6)"
         mc:Ignorable="d">
 
 
@@ -15,10 +13,10 @@
             <local:ControlExample x:Name="Example1" HeaderText="Basic Pull-To-Refresh">
                 <local:ControlExample.Example>
                     <Grid>
-                        <Windows10InsiderPreview:RefreshContainer VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="rc" Windows10InsiderPreview:RefreshRequested="rc_RefreshRequested">
-                            <Windows10InsiderPreview:ListView x:Name="lv" Width="200" Height="200" BorderThickness="1"
+                        <contract6Present:RefreshContainer VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="rc" contract6Present:RefreshRequested="rc_RefreshRequested">
+                            <contract6Present:ListView x:Name="lv" Width="200" Height="200" BorderThickness="1"
                                     BorderBrush="{ThemeResource TextControlBorderBrush}"/>
-                        </Windows10InsiderPreview:RefreshContainer>
+                        </contract6Present:RefreshContainer>
                     </Grid>
                 </local:ControlExample.Example>
 
