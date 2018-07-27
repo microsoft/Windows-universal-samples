@@ -75,16 +75,5 @@ namespace AppUIBasics
         {
             ToggleThemeAction?.Invoke();
         }
-
-        private void Layout_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (e.NewSize.Width < 593)
-            {
-                headerRoot.VerticalAlignment = VerticalAlignment.Center;
-            } else
-            {
-                headerRoot.VerticalAlignment = VerticalAlignment.Bottom;
-            }
-        }
     }
 }

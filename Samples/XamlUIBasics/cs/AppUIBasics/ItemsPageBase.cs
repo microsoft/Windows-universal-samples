@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Windows.Foundation.Metadata;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -101,6 +102,12 @@ namespace AppUIBasics
 
                     if (animation != null)
                     {
+                        // Setup the "basic" configuration if the API is present. 
+                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
+                        {
+                            animation.Configuration = new BasicConnectedAnimationConfiguration();
+                        }
+
                         await gridView.TryStartConnectedAnimationAsync(animation, item, "controlRoot");
                     }
                 }

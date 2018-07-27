@@ -1,13 +1,5 @@
-{
+﻿{
   "Groups": [
-    {
-      "UniqueId": "AllControls",
-      "Title": "All controls",
-      "Subtitle": "",
-      "ImagePath": "ms-appx:///Assets/NavigationViewItemIcons/AllControlsIcon.png",
-      "Description": "",
-      "Items": []
-    },
     {
       "UniqueId": "NewControls",
       "Title": "What's New",
@@ -17,337 +9,503 @@
       "Items": []
     },
     {
+      "UniqueId": "AllControls",
+      "Title": "All controls",
+      "Subtitle": "",
+      "ImagePath": "ms-appx:///Assets/NavigationViewItemIcons/AllControlsIcon.png",
+      "Description": "",
+      "Items": []
+    },
+    {
       "UniqueId": "Commanding",
       "Title": "Commanding",
-      "Subtitle": "AppBar, CommandBar, AppBarButton, AppBarToggleButton, AppBarSeparator",
+      "Subtitle": "AppBar, CommandBar, MenuBar, AppBarButton, AppBarToggleButton, AppBarSeparator",
       "ImagePath": "ms-appx:///Assets/NavigationViewItemIcons/CommandingIcon.png",
       "Description": "Use app bars to present navigation, commands, and tools to users.",
-					"Items": [
-						
-						{
-							"UniqueId": "AppBarButton",
-							"Title": "AppBarButton",
-							"Subtitle": "A button that's styled for use in a CommandBar.",
-							"ImagePath": "ms-appx:///Assets/AppBarButton.png",
-							"Description": "App bar buttons differ from standard buttons in several ways:\n- Their default appearance is a transparent background with a smaller size.\n- You use the Label and Icon properties to set the content instead of the Content property. The Content property is ignored.\n- The button's IsCompact property controls its size.",
-							"Content": "<p>You can open the app bar and toggle the IsCompact button to see how the app bar buttons on this page change.</p><p>Use the <b>Label</b> and <b>Icon</b> properties to define the content of the app bar buttons. Set the <b>Label</b> property to a string to specify the text label. The label is shown by default but is hidden when the button is in its compact state, so you also need to specify a meaningful icon. To do that, set the button's <b>Icon</b> property to an element derived from the <b>IconElement</b> class. Four kinds of icon elements are provided:</p><p><b>FontIcon</b> - The icon is based on a glyph from the specified font family.</p><p><b>BitmapIcon</b> - The icon is based on a bitmap image file with the specified Uri.</p><p><b>PathIcon</b> - The icon is based on Path data.</p><p><b>SymbolIcon</b> - The icon is based on a predefined list of glyphs from the Segoe UI Symbol font.</p><p>Look at the <i>AppBarButtonPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-							"IsNew": false,
-							"Docs": [
-								{
-									"Title": "AppBarButton",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.appbarbutton.aspx"
-								},
-								{
-									"Title": "SymbolIcon",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.symbolicon.aspx"
-								},
-								{
-									"Title": "FontIcon",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.fonticon.aspx"
-								},
-								{
-									"Title": "BitmapIcon",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.bitmapicon.aspx"
-								},
-								{
-									"Title": "PathIcon",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.pathicon.aspx"
-								},
-                {
-                  "Title": "Guidelines",
-                  "Uri": "https://docs.microsoft.com/windows/uwp/controls-and-patterns/app-bars"
-                }
-							],
-							"RelatedControls": [ "AppBarToggleButton", "AppBarSeparator", "CommandBar" ]
-						},
-						{
-							"UniqueId": "AppBarSeparator",
-							"Title": "AppBarSeparator",
-							"Subtitle": "A vertical line that's used to visually separate groups of commands in an app bar.",
-							"ImagePath": "ms-appx:///Assets/AppBarSeparator.png",
-							"Description": "An AppBarSeparator creates a vertical line to visually separate groups of commands in a app bar. It has a compact state with reduced padding to match the compact state of the AppBarButton and AppBarToggleButton controls.",
-							"Content": "<p>You can open the app bar and toggle the IsCompact button to see how the app bar buttons and separators on this page change.</p><p>When the <b>IsCompact</b> property is true, the padding around the <b>AppBarSeparator</b> is reduced.</p><p>Look at the <i>AppBarSeparatorPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-							"IsNew": false,
-              "Docs": [
-                {
-                  "Title": "AppBarSeparator",
-                  "Uri": "https://docs.microsoft.com/uwp/api/windows.ui.xaml.controls.appbarseparator"
-                },
-                {
-                  "Title": "Guidelines",
-                  "Uri": "https://docs.microsoft.com/windows/uwp/controls-and-patterns/app-bars"
-                }
-              ],
-							"RelatedControls": [
-								"AppBarButton",
-								"AppBarToggleButton",
-								"CommandBar"
-							]
-						},
-						{
-							"UniqueId": "AppBarToggleButton",
-							"Title": "AppBarToggleButton",
-							"Subtitle": "A button that can be on, off, or indeterminate like a CheckBox, and is styled for use in an app bar or other specialized UI.",
-							"ImagePath": "ms-appx:///Assets/AppBarToggleButton.png",
-							"Description": "An AppBarToggleButton looks like an AppBarButton, but works like a CheckBox. It typically has two states, checked (on) or unchecked (off), but can be indeterminate if the IsThreeState property is true. You can determine it's state by checking the IsChecked property.",
-							"Content": "<p>You can open the app bar and toggle the IsCompact button to see how the app bar buttons on this page change.</p><p>Look at the <i>AppBarToggleButtonPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-							"IsNew": false,
-							"Docs": [
-								{
-									"Title": "AppBarToggleButton",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.appbartogglebutton.aspx"
-								},
-								{
-									"Title": "SymbolIcon",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.symbolicon.aspx"
-								},
-								{
-									"Title": "FontIcon",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.fonticon.aspx"
-								},
-								{
-									"Title": "BitmapIcon",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.bitmapicon.aspx"
-								},
-								{
-									"Title": "PathIcon",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.pathicon.aspx"
-								},
-								{
-									"Title": "Guidelines",
-									"Uri": "https://docs.microsoft.com/windows/uwp/controls-and-patterns/app-bars"
-								}
-							],
-							"RelatedControls": [
-								"AppBarButton",
-								"AppBarSeparator",
-								"CommandBar"
-							]
-						},
-						{
-							"UniqueId": "Button",
-							"Title": "Button",
-							"Subtitle": "A control that responds to user input and raises a Click event.",
-							"ImagePath": "ms-appx:///Assets/Button.png",
-							"Description": "The Button control provides a Click event to respond to user input from a touch, mouse, keyboard, stylus, or other input device. You can put different kinds of content in a button, such as text or an image, or you can restyle a button to give it a new look.",
-							"Content": "<p>The main purpose of a <b>Button</b> is to make something happen when a user clicks it. There are two ways you can make something happen:</p><ul><li>Handle the <b>Click</b> event.</li><li>Bind the <b>Command</b> property to an ICommand implementation that describes the command logic.</li></ul><p>Buttons often have only simple string content, but you can use any object as content. You can also change the style and template to give them any look you want.</p><p>Look at the <i>ButtonPage.xaml</i> file in Visual Studio to see the custom button style and template definitions used on this page.</p>",
-							"IsNew": false,
-							"Docs": [
-								{
-									"Title": "Button",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.button.aspx"
-								},
-                {
-                  "Title": "Guidelines",
-                  "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/buttons"
-                }
-							],
-							"RelatedControls": [
-								"ToggleButton",
-								"RepeatButton",
-								"HyperlinkButton",
-								"AppBarButton"
-							]
-						},
-						{
-							"UniqueId": "CommandBar",
-							"Title": "CommandBar",
-							"Subtitle": "A toolbar for displaying application-specific commands that handles layout and resizing of its contents.",
-							"ImagePath": "ms-appx:///Assets/CommandBar.png",
-							"Description": "The CommandBar simplifies the creation of basic app bars by providing:\n- Automatic layout of commands, with primary commands on the right and secondary commands on the left.\n- Automatic resizing of app bar commands when the app size changes.\nWhen you need an app bar that contains only AppBarButton,AppBarToggleButton , and AppBarSeparator controls, use a CommandBar. If you need more complex content, such as images, progress bars, or text blocks, use an AppBar control.",
-							"Content": "<p>The bottom app bar on this page is a <b>CommandBar</b> control.</p><p>Add secondary commands and then resize the app to see how the <b>CommandBar</b> automatically adapts to different widths.</p><p>This <b>CommandBar</b> element is in the ItemPage so it can be shared across all control pages in the app. Look at the <i>ItemPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-							"IsNew": false,
-							"Docs": [
-								{
-									"Title": "CommandBar",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.commandbar.aspx"
-								},
-															{
-																"Title": "Guidelines",
-																"Uri": "https://docs.microsoft.com/windows/uwp/controls-and-patterns/app-bars"
-															}
-							],
-							"RelatedControls": [
-								"AppBarButton",
-								"AppBarToggleButton",
-								"AppBarSeparator"
-							]
-						},
-						{
-							"UniqueId": "ContentDialog",
-							"Title": "ContentDialog",
-							"Subtitle": "A dialog box that can be customized to contain any XAML content.",
-							"ImagePath": "ms-appx:///Assets/DefaultIcon.png",
-							"Description": "Use a ContentDialog to show relavant information or to provide a modal dialog experience that can show any XAML content.",
-							"Content": "<p>Look at the <i>ContentDialog.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-							"IsNew": false,
-              "Docs": [
-                {
-                  "Title": "ContentDialog",
-                  "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.contentdialog.aspx"
-                },
-                {
-                  "Title": "Guidelines",
-                  "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/dialogs"
-                }
-              ],
-							"RelatedControls": [
-								"Flyout",
-								"MenuFlyout",
-								"ToolTip"
-							]
-						},
-						{
-							"UniqueId": "HyperlinkButton",
-							"Title": "HyperlinkButton",
-							"Subtitle": "A button that appears as hyperlink text, and can navigate to a URI or handle a Click event.",
-							"ImagePath": "ms-appx:///Assets/HyperlinkButton.png",
-							"Description": "A HyperlinkButton appears as a text hyperlink. When a user clicks it, it opens the page you specify in the NavigateUri property in the default browser. Or you can handle its Click event, typically to navigate within your app.",
-							"Content": "<p>A <b>HyperlinkButton</b> looks like hyperlink text, but works like a button. You can use it in two ways:</p><ul><li>Set the <b>NavigateUri</b> property. When a user clicks it, it will automatically open the URI in the default browser.</li><li>Handle the <b>Click</b> event. This works just like the <b>Click</b> event of a standard <b>Button</b>, and can be used to navigate within your app.</li></ul><p>Each control page in this app has two sets of hyperlink buttons, one set to open documentation in Internet Explorer, and one set to navigate to related control pages in the app.</p><p>Look at the <i>HyperlinkButtonPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-							"IsNew": false,
-							"Docs": [
-								{
-									"Title": "HyperlinkButton",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.hyperlinkbutton.aspx"
-								},
-                {
-                  "Title": "Guidelines",
-                  "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/hyperlinks"
-                }
-							],
-							"RelatedControls": [
-								"Button",
-								"ToggleButton",
-								"RepeatButton",
-								"AppBarButton"
-							]
-						},
-						{
-							"UniqueId": "MenuFlyout",
-							"Title": "MenuFlyout",
-							"Subtitle": "Shows a contextual list of simple commands or options.",
-							"ImagePath": "ms-appx:///Assets/MenuFlyout.png",
-							"Description": "A MenuFlyout displays lightweight UI that is light dismissed by clicking or tapping off of it. Use it to let the user choose from a contextual list of simple commands or options.",
-							"Content": "<p>Look at the <i>MenuFlyoutPage.xaml</i> file in Visual Studio to see the full code.</p>",
-							"IsNew": false,
-							"Docs": [
-								{
-									"Title": "MenuFlyout",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.menuflyout.aspx"
-								},
-								{
-									"Title": "MenuFlyoutItem",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.menuflyoutitem.aspx"
-								},
-								{
-									"Title": "MenuFlyoutSeparator",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.menuflyoutseparator.aspx"
-								},
-								{
-									"Title": "ToggleMenuFlyoutItem",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.togglemenuflyoutitem.aspx"
-								},
-                {
-                  "Title": "Guidelines",
-                  "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/dialogs"
-                }
-							],
-							"RelatedControls": [
-								"Flyout",
-								"ContentDialog",
-								"Button",
-								"AppBarButton"
-							]
-						},
-						{
-							"UniqueId": "RepeatButton",
-							"Title": "RepeatButton",
-							"Subtitle": "A button that raises its Click event repeatedly from the time it's pressed until it's released.",
-							"ImagePath": "ms-appx:///Assets/Button.png",
-							"Description": "The RepeatButton control is like a standard Button, except that the Click event occurs continuously while the user presses the RepeatButton.",
-							"Content": "<p>A <b>RepeatButton</b> looks just like a regular <b>Button</b>, but it's <b>Click</b> event occurs continuously while the button is pressed.</p><p>Look at the <i>RepeatButtonPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-							"IsNew": false,
-							"Docs": [
-								{
-									"Title": "RepeatButton",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.primitives.repeatbutton.aspx"
-								},
-                {
-                  "Title": "Guidelines",
-                  "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/buttons"
-                }
-							],
-							"RelatedControls": [
-								"Button",
-								"ToggleButton",
-								"HyperlinkButton",
-								"AppBarButton"
-							]
-						},
+      "Items": [
+        {
+          "UniqueId": "UICommand",
+          "Title": "UICommand",
+          "Subtitle": "An object which is used to define the look and feel of a given command",
+          "ImagePath": "ms-appx:///Assets/AppBarSeparator.png",
+          "Description": "An object which is used to define the look and feel of a given command, which can be reused across your app, and which is understood natively my the inbox controls.",
+          "Content": "<p>TODO</p>",
+          "IsNew": true,
+          "Docs": [
             {
-              "UniqueId": "SwipeControl",
-              "Title": "SwipeControl",
-              "Subtitle": "Touch gesture for quick menu actions on items.",
-              "ImagePath": "ms-appx:///Assets/Swipe.png",
-              "Description": "Released Fall 2017! Touch gesture for quick menu actions on items.",
-              "Content": "",
-              "IsNew": true,
-              "Docs": [
-                {
-                  "Title": "SwipeControl",
-                  "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.swipecontrol"
-                },
-                {
-                  "Title": "SwipeItems",
-                  "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.swipeitems"
-                },
-                {
-                  "Title": "Guidelines",
-                  "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/swipe"
-                },
-                {
-                  "Title": "Gesture Actions",
-                  "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/collection-commanding/"
-                }
-              ],
-              "RelatedControls": [
-                "GridView",
-                "ListView"
-              ]
+              "Title": "UICommand",
+              "Uri": "https://docs.microsoft.com/uwp/api/windows.ui.xaml.controls.uicommand"
             },
-						{
-							"UniqueId": "ToggleButton",
-							"Title": "ToggleButton",
-							"Subtitle": "A button that can be switched between two states like a CheckBox.",
-							"ImagePath": "ms-appx:///Assets/ToggleButton.png",
-							"Description": "A ToggleButton looks like a Button, but works like a CheckBox. It typically has two states, checked (on) or unchecked (off), but can be indeterminate if the IsThreeState property is true. You can determine it's state by checking the IsChecked property.",
-							"Content": "<p><b>ToggleButton</b> is used as a base class for similar controls like <b>CheckBox</b> and <b>RadioButton</b>. It can be used on its own, but don't use it if a <b>CheckBox</b>, <b>RadioButton</b>, or <b>ToggleSwitch</b> would convey your intent better.</p><p>Look at the <i>ToggleButtonPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-							"IsNew": false,
-							"Docs": [
-								{
-									"Title": "ToggleButton",
-									"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.primitives.togglebutton.aspx"
-								},
-                {
-                  "Title": "Guidelines",
-                  "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/toggles"
-                }
-							],
-							"RelatedControls": [
-								"Button",
-								"AppBarToggleButton",
-								"ToggleSwitch",
-								"CheckBox"
-							]
-						}
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/windows/uwp/controls-and-patterns/uicommand"
+            }
+          ],
+          "RelatedControls": [
+            "AppBarButton",
+            "AppBarToggleButton",
+            "CommandBar"
+          ]
+        },
+        {
+          "UniqueId": "AppBarButton",
+          "Title": "AppBarButton",
+          "Subtitle": "A button that's styled for use in a CommandBar.",
+          "ImagePath": "ms-appx:///Assets/AppBarButton.png",
+          "Description": "App bar buttons differ from standard buttons in several ways:\n- Their default appearance is a transparent background with a smaller size.\n- You use the Label and Icon properties to set the content instead of the Content property. The Content property is ignored.\n- The button's IsCompact property controls its size.",
+          "Content": "<p>You can open the app bar and toggle the IsCompact button to see how the app bar buttons on this page change.</p><p>Use the <b>Label</b> and <b>Icon</b> properties to define the content of the app bar buttons. Set the <b>Label</b> property to a string to specify the text label. The label is shown by default but is hidden when the button is in its compact state, so you also need to specify a meaningful icon. To do that, set the button's <b>Icon</b> property to an element derived from the <b>IconElement</b> class. Four kinds of icon elements are provided:</p><p><b>FontIcon</b> - The icon is based on a glyph from the specified font family.</p><p><b>BitmapIcon</b> - The icon is based on a bitmap image file with the specified Uri.</p><p><b>PathIcon</b> - The icon is based on Path data.</p><p><b>SymbolIcon</b> - The icon is based on a predefined list of glyphs from the Segoe UI Symbol font.</p><p>Look at the <i>AppBarButtonPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "AppBarButton",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.appbarbutton.aspx"
+            },
+            {
+              "Title": "SymbolIcon",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.symbolicon.aspx"
+            },
+            {
+              "Title": "FontIcon",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.fonticon.aspx"
+            },
+            {
+              "Title": "BitmapIcon",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.bitmapicon.aspx"
+            },
+            {
+              "Title": "PathIcon",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.pathicon.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/windows/uwp/controls-and-patterns/app-bars"
+            }
+          ],
+          "RelatedControls": [ "AppBarToggleButton", "AppBarSeparator", "CommandBar" ]
+        },
+        {
+          "UniqueId": "AppBarSeparator",
+          "Title": "AppBarSeparator",
+          "Subtitle": "A vertical line that's used to visually separate groups of commands in an app bar.",
+          "ImagePath": "ms-appx:///Assets/AppBarSeparator.png",
+          "Description": "An AppBarSeparator creates a vertical line to visually separate groups of commands in a app bar. It has a compact state with reduced padding to match the compact state of the AppBarButton and AppBarToggleButton controls.",
+          "Content": "<p>You can open the app bar and toggle the IsCompact button to see how the app bar buttons and separators on this page change.</p><p>When the <b>IsCompact</b> property is true, the padding around the <b>AppBarSeparator</b> is reduced.</p><p>Look at the <i>AppBarSeparatorPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "AppBarSeparator",
+              "Uri": "https://docs.microsoft.com/uwp/api/windows.ui.xaml.controls.appbarseparator"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/windows/uwp/controls-and-patterns/app-bars"
+            }
+          ],
+          "RelatedControls": [
+            "AppBarButton",
+            "AppBarToggleButton",
+            "CommandBar"
+          ]
+        },
+        {
+          "UniqueId": "AppBarToggleButton",
+          "Title": "AppBarToggleButton",
+          "Subtitle": "A button that can be on, off, or indeterminate like a CheckBox, and is styled for use in an app bar or other specialized UI.",
+          "ImagePath": "ms-appx:///Assets/AppBarToggleButton.png",
+          "Description": "An AppBarToggleButton looks like an AppBarButton, but works like a CheckBox. It typically has two states, checked (on) or unchecked (off), but can be indeterminate if the IsThreeState property is true. You can determine it's state by checking the IsChecked property.",
+          "Content": "<p>You can open the app bar and toggle the IsCompact button to see how the app bar buttons on this page change.</p><p>Look at the <i>AppBarToggleButtonPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "AppBarToggleButton",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.appbartogglebutton.aspx"
+            },
+            {
+              "Title": "SymbolIcon",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.symbolicon.aspx"
+            },
+            {
+              "Title": "FontIcon",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.fonticon.aspx"
+            },
+            {
+              "Title": "BitmapIcon",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.bitmapicon.aspx"
+            },
+            {
+              "Title": "PathIcon",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.pathicon.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/windows/uwp/controls-and-patterns/app-bars"
+            }
+          ],
+          "RelatedControls": [
+            "AppBarButton",
+            "AppBarSeparator",
+            "CommandBar"
+          ]
+        },
+        {
+          "UniqueId": "Button",
+          "Title": "Button",
+          "Subtitle": "A control that responds to user input and raises a Click event.",
+          "ImagePath": "ms-appx:///Assets/Button.png",
+          "Description": "The Button control provides a Click event to respond to user input from a touch, mouse, keyboard, stylus, or other input device. You can put different kinds of content in a button, such as text or an image, or you can restyle a button to give it a new look.",
+          "Content": "<p>The main purpose of a <b>Button</b> is to make something happen when a user clicks it. There are two ways you can make something happen:</p><ul><li>Handle the <b>Click</b> event.</li><li>Bind the <b>Command</b> property to an ICommand implementation that describes the command logic.</li></ul><p>Buttons often have only simple string content, but you can use any object as content. You can also change the style and template to give them any look you want.</p><p>Look at the <i>ButtonPage.xaml</i> file in Visual Studio to see the custom button style and template definitions used on this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "Button",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.button.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/buttons"
+            }
+          ],
+          "RelatedControls": [
+            "ToggleButton",
+            "RepeatButton",
+            "HyperlinkButton",
+            "AppBarButton"
+          ]
+        },
+        {
+          "UniqueId": "DropDownButton",
+          "Title": "DropDownButton",
+          "Subtitle": "A control that drops down a flyout of choices from which one can be chosen",
+          "ImagePath": "ms-appx:///Assets/DropDownButton.png",
+          "Description": "A control that drops down a flyout of choices from which one can be chosen.",
+          "Content": "<p>TODO</p>",
+          "IsNew": true,
+          "Docs": [
+            {
+              "Title": "DropDownButton",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.dropdownbutton.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/buttons"
+            }
+          ],
+          "RelatedControls": [
+            "SplitButton",
+            "ToggleSplitButton",
+            "ToggleButton",
+            "RepeatButton",
+            "HyperlinkButton",
+            "AppBarButton",
+            "CommandBar"
+          ]
+        },
+        {
+          "UniqueId": "CommandBar",
+          "Title": "CommandBar",
+          "Subtitle": "A toolbar for displaying application-specific commands that handles layout and resizing of its contents.",
+          "ImagePath": "ms-appx:///Assets/CommandBar.png",
+          "Description": "The CommandBar simplifies the creation of basic app bars by providing:\n- Automatic layout of commands, with primary commands on the right and secondary commands on the left.\n- Automatic resizing of app bar commands when the app size changes.\nWhen you need an app bar that contains only AppBarButton,AppBarToggleButton , and AppBarSeparator controls, use a CommandBar. If you need more complex content, such as images, progress bars, or text blocks, use an AppBar control.",
+          "Content": "<p>The bottom app bar on this page is a <b>CommandBar</b> control.</p><p>Add secondary commands and then resize the app to see how the <b>CommandBar</b> automatically adapts to different widths.</p><p>This <b>CommandBar</b> element is in the ItemPage so it can be shared across all control pages in the app. Look at the <i>ItemPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsUpdated": true,
+          "Docs": [
+            {
+              "Title": "CommandBar",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.commandbar.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/windows/uwp/controls-and-patterns/app-bars"
+            }
+          ],
+          "RelatedControls": [
+            "AppBarButton",
+            "AppBarToggleButton",
+            "AppBarSeparator"
+          ]
+        },
+        {
+          "UniqueId": "MenuBar",
+          "Title": "MenuBar",
+          "Subtitle": "A classic menu, allowing the display of MenuItems containing MenuFlyoutItems.",
+          "ImagePath": "ms-appx:///Assets/MenuBar.png",
+          "Description": "The Menubar simplifies the creation of basic applications by providing a set of menus at the top of the app or window",
+          "Content": "<p>Content</p>",
+          "IsNew": true,
+          "Docs": [
+            {
+              "Title": "MenuBar",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.menubar.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/windows/uwp/controls-and-patterns/menubars"
+            }
+          ],
+          "RelatedControls": [
+            "CommandBar",
+            "MenuFlyoutItem",
+            "UICommand"
+          ]
+        },
+        {
+          "UniqueId": "CommandBarFlyout",
+          "Title": "CommandBarFlyout",
+          "Subtitle": "A mini-toolbar displaying proactive commands, and an optional menu of commands",
+          "ImagePath": "ms-appx:///Assets/CommandBarFlyout.png",
+          "Description": "A mini-toolbar which displays a set of proactive commands, as well as a secondary menu of commands if desired.",
+          "Content": "<p>Content</p>",
+          "IsNew": true,
+          "Docs": [
+            {
+              "Title": "CommandBarFlyout",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.commandbarflyout.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/windows/uwp/controls-and-patterns/CommandBarFlyout"
+            }
+          ],
+          "RelatedControls": [
+            "CommandBar",
+            "MenuFlyout",
+            "RichEditBox",
+            "TextBox",
+            "UICommand"
+          ]
+        },
+        {
+          "UniqueId": "ContentDialog",
+          "Title": "ContentDialog",
+          "Subtitle": "A dialog box that can be customized to contain any XAML content.",
+          "ImagePath": "ms-appx:///Assets/DefaultIcon.png",
+          "Description": "Use a ContentDialog to show relavant information or to provide a modal dialog experience that can show any XAML content.",
+          "Content": "<p>Look at the <i>ContentDialog.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "ContentDialog",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.contentdialog.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/dialogs"
+            }
+          ],
+          "RelatedControls": [
+            "Flyout",
+            "MenuFlyout",
+            "ToolTip"
+          ]
+        },
+        {
+          "UniqueId": "HyperlinkButton",
+          "Title": "HyperlinkButton",
+          "Subtitle": "A button that appears as hyperlink text, and can navigate to a URI or handle a Click event.",
+          "ImagePath": "ms-appx:///Assets/HyperlinkButton.png",
+          "Description": "A HyperlinkButton appears as a text hyperlink. When a user clicks it, it opens the page you specify in the NavigateUri property in the default browser. Or you can handle its Click event, typically to navigate within your app.",
+          "Content": "<p>A <b>HyperlinkButton</b> looks like hyperlink text, but works like a button. You can use it in two ways:</p><ul><li>Set the <b>NavigateUri</b> property. When a user clicks it, it will automatically open the URI in the default browser.</li><li>Handle the <b>Click</b> event. This works just like the <b>Click</b> event of a standard <b>Button</b>, and can be used to navigate within your app.</li></ul><p>Each control page in this app has two sets of hyperlink buttons, one set to open documentation in Internet Explorer, and one set to navigate to related control pages in the app.</p><p>Look at the <i>HyperlinkButtonPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "HyperlinkButton",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.hyperlinkbutton.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/hyperlinks"
+            }
+          ],
+          "RelatedControls": [
+            "Button",
+            "ToggleButton",
+            "RepeatButton",
+            "AppBarButton"
+          ]
+        },
+        {
+          "UniqueId": "MenuFlyout",
+          "Title": "MenuFlyout",
+          "Subtitle": "Shows a contextual list of simple commands or options.",
+          "ImagePath": "ms-appx:///Assets/MenuFlyout.png",
+          "Description": "A MenuFlyout displays lightweight UI that is light dismissed by clicking or tapping off of it. Use it to let the user choose from a contextual list of simple commands or options.",
+          "Content": "<p>Look at the <i>MenuFlyoutPage.xaml</i> file in Visual Studio to see the full code.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "MenuFlyout",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.menuflyout.aspx"
+            },
+            {
+              "Title": "MenuFlyoutItem",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.menuflyoutitem.aspx"
+            },
+            {
+              "Title": "MenuFlyoutSeparator",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.menuflyoutseparator.aspx"
+            },
+            {
+              "Title": "ToggleMenuFlyoutItem",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.togglemenuflyoutitem.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/dialogs"
+            }
+          ],
+          "RelatedControls": [
+            "Flyout",
+            "ContentDialog",
+            "Button",
+            "AppBarButton"
+          ]
+        },
+        {
+          "UniqueId": "RepeatButton",
+          "Title": "RepeatButton",
+          "Subtitle": "A button that raises its Click event repeatedly from the time it's pressed until it's released.",
+          "ImagePath": "ms-appx:///Assets/Button.png",
+          "Description": "The RepeatButton control is like a standard Button, except that the Click event occurs continuously while the user presses the RepeatButton.",
+          "Content": "<p>A <b>RepeatButton</b> looks just like a regular <b>Button</b>, but it's <b>Click</b> event occurs continuously while the button is pressed.</p><p>Look at the <i>RepeatButtonPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "RepeatButton",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.primitives.repeatbutton.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/buttons"
+            }
+          ],
+          "RelatedControls": [
+            "Button",
+            "ToggleButton",
+            "HyperlinkButton",
+            "AppBarButton"
+          ]
+        },
+        {
+          "UniqueId": "SwipeControl",
+          "Title": "SwipeControl",
+          "Subtitle": "Touch gesture for quick menu actions on items.",
+          "ImagePath": "ms-appx:///Assets/Swipe.png",
+          "Description": "Released Fall 2017! Touch gesture for quick menu actions on items.",
+          "Content": "",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "SwipeControl",
+              "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.swipecontrol"
+            },
+            {
+              "Title": "SwipeItems",
+              "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.swipeitems"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/swipe"
+            },
+            {
+              "Title": "Gesture Actions",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/collection-commanding/"
+            }
 
-					]
+          ],
+          "RelatedControls": [
+            "GridView",
+            "ListView"
+          ]
+        },
+        {
+          "UniqueId": "ToggleButton",
+          "Title": "ToggleButton",
+          "Subtitle": "A button that can be switched between two states like a CheckBox.",
+          "ImagePath": "ms-appx:///Assets/ToggleButton.png",
+          "Description": "A ToggleButton looks like a Button, but works like a CheckBox. It typically has two states, checked (on) or unchecked (off), but can be indeterminate if the IsThreeState property is true. You can determine it's state by checking the IsChecked property.",
+          "Content": "<p><b>ToggleButton</b> is used as a base class for similar controls like <b>CheckBox</b> and <b>RadioButton</b>. It can be used on its own, but don't use it if a <b>CheckBox</b>, <b>RadioButton</b>, or <b>ToggleSwitch</b> would convey your intent better.</p><p>Look at the <i>ToggleButtonPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "ToggleButton",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.primitives.togglebutton.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/toggles"
+            }
+          ],
+          "RelatedControls": [
+            "Button",
+            "AppBarToggleButton",
+            "ToggleSwitch",
+            "CheckBox",
+            "CommandBarFlyout",
+            "CommandBar"
+          ]
+        },
+        {
+          "UniqueId": "SplitButton",
+          "Title": "SplitButton",
+          "Subtitle": "The splitbutton is a dropdown button, but with an addition execution hit target",
+          "ImagePath": "ms-appx:///Assets/SplitButton.png",
+          "Description": "The splitbutton is a dropdown button, but with an addition execution hit target",
+          "Content": "<p>TBD</p>",
+          "IsNew": true,
+          "Docs": [
+            {
+              "Title": "SplitButton",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.primitives.splitbutton.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/buttons"
+            }
+          ],
+          "RelatedControls": [
+            "Button",
+            "AppBarToggleButton",
+            "CommandBar",
+            "ToggleSwitch",
+            "CheckBox",
+            "CommandBarFlyout",
+            "CommandBar"
+          ]
+        },
+        {
+          "UniqueId": "ToggleSplitButton",
+          "Title": "ToggleSplitButton",
+          "Subtitle": "A version of the SplitButton where the activation target toggles on/off.",
+          "ImagePath": "ms-appx:///Assets/ToggleSplitButton.png",
+          "Description": "A version of the SplitButton where the activation target toggles on/off.",
+          "Content": "<p>TBD</p>",
+          "IsNew": true,
+          "Docs": [
+            {
+              "Title": "ToggleSplitButton",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.primitives.togglesplitbutton.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/buttons"
+            }
+          ],
+          "RelatedControls": [
+            "Button",
+            "AppBarToggleButton",
+            "ToggleSwitch",
+            "CheckBox",
+            "CommandBarFlyout",
+            "CommandBar"
+          ]
+        }
+      ]
     },
     {
       "UniqueId": "Collections",
       "Title": "Collections",
       "Subtitle": "FlipView, GridView, ListView, Pivot, SemanticZoom, Hub",
-      "ImagePath": "\uE292",
+      "ImagePath": "",
       "Description": "Use collection controls to display, navigate, and interact with collections of data and media.",
       "Items": [
         {
@@ -358,6 +516,7 @@
           "Description": "Use a ComboBox when you need to conserve on-screen space and when users select only one option at a time. A ComboBox shows only the currently selected item.",
           "Content": "<p>Look at the <i>ComboBoxPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
           "IsNew": false,
+          "IsUpdated": true,
           "Docs": [
             {
               "Title": "ComboBox",
@@ -488,7 +647,7 @@
           "ImagePath": "ms-appx:///Assets/PullToRefresh.png",
           "Description": "Released Spring 2018! PullToRefresh Provides the ability to pull on a collection of items in a list/grid to refresh the contents of the collection.",
           "Content": "<p><b>PullToRefresh</b> can be used for a collection of items of any type. To populate the view, add items to the <b>Items</b> collection, or set the <b>ItemsSource</b> property to a data source.</p><p>Set an <b>ItemTemplate</b> to define the look of individual items.</p><p>Look at the <i>ListViewPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-          "IsNew": true,
+          "IsNew": false,
           "Docs": [
             {
               "Title": "RefreshContainer",
@@ -513,7 +672,7 @@
           "ImagePath": "ms-appx:///Assets/TreeView.png",
           "Description": "Released Spring 2018! The TreeView control is a hierarchical list pattern with expanding and collapsing nodes that contain nested items. ",
           "Content": "<p><b>PullToRefresh</b> can be used for a collection of items of any type. To populate the view, add items to the <b>Items</b> collection, or set the <b>ItemsSource</b> property to a data source.</p><p>Set an <b>ItemTemplate</b> to define the look of individual items.</p><p>Look at the <i>ListViewPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-          "IsNew": true,
+          "IsUpdated": true,
           "Docs": [
             {
               "Title": "TreeView",
@@ -551,251 +710,270 @@
         }
       ]
     },
-			{
-				"UniqueId": "DataInput",
-				"Title": "Data Input",
-				"Subtitle": "CheckBox, ComboBox, DatePicker, ListBox, RadioButton, Slider, TimePicker, ToggleSwitch",
-				"ImagePath": "ms-appx:///Assets/NavigationViewItemIcons/PickerIcon.png",
-				"Description": "Use selection controls to let a user set a value or choose between various options.",
-				"Items": [
-					{
-						"UniqueId": "CalendarDatePicker",
-						"Title": "CalendarDatePicker",
-						"Subtitle": "A control that lets users pick a date value using a calendar.",
-						"ImagePath": "ms-appx:///Assets/CalenderDatePicker.png",
-						"Description": "A control that lets users pick a date value using a calendar.",
-						"Content": "",
-						"IsNew": false,
-						"Docs": [
-              {
-                "Title": "CalendarDatePicker",
-                "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.calendardatepicker.aspx"
-              },
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/calendar-date-picker"
-              }
-						],
-						"RelatedControls": [
-							"DatePicker",
-							"CalendarView"
-						]
-					},
-					{
-						"UniqueId": "CalendarView",
-						"Title": "CalendarView",
-						"Subtitle": "A control that presents a calendar for a user to choose a date from.",
-						"ImagePath": "ms-appx:///Assets/CalendarView.png",
-						"Description": "CalendarView shows a larger view for showing and selecting dates.  DatePicker by contrast has a compact view with inline selection.",
-						"Content": "<p>Look at the <i>CalendarView.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-						"IsNew": false,
-            "Docs": [
-              {
-                "Title": "CalendarView",
-                "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.calendarview.aspx"
-              },
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/calendar-view"
-              }
-            ],
-						"RelatedControls": [
-							"CalendarDatePicker",
-							"DatePicker",
-							"TimePicker"
-						]
-					},
-					{
-						"UniqueId": "CheckBox",
-						"Title": "CheckBox",
-						"Subtitle": "A control that a user can select or clear.",
-						"ImagePath": "ms-appx:///Assets/CheckBox.png",
-						"Description": "CheckBox controls let the user select a combination of binary options. In contrast, RadioButton controls allow the user to select from mutually exclusive options. The indeterminate state is used to indicate that an option is set for some, but not all, child options. Don't allow users to set an indeterminate state directly to indicate a third option.",
-						"Content": "<p>Check and uncheck these controls to see how they look in each state. The label for each <b>CheckBox</b> is defined by its <b>Content</b> property.</p><p>Use a three-state <b>CheckBox</b> to show that none, some, or all of an items sub-options are checked. You have to add some code to do this. Take a look at the methods in the <i>SelectAllMethods</i> region of <i>CheckBoxPage.xaml.cs</i> to see how we did it.</p>",
-						"IsNew": false,
-						"Docs": [
-              {
-                "Title": "CheckBox",
-                "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.checkbox.aspx"
-              },
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/checkbox"
-              }
-						],
-						"RelatedControls": [
-							"RadioButton",
-							"ToggleSwitch",
-							"ToggleButton"
-						]
-					},
-          {
-            "UniqueId": "ColorPicker",
-            "Title": "ColorPicker",
-            "Subtitle": "A selectable color spectrum.",
-            "ImagePath": "ms-appx:///Assets/ColorPicker.png",
-            "Description": "Released Fall 2017! A selectable color spectrum.",
-            "Content": "",
-            "IsNew": true,
-            "Docs": [
-              {
-                "Title": "ColorPicker",
-                "Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.ColorPicker"
-              },
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/color-picker"
-              }
-            ],
-            "RelatedControls": [
-              "ComboBox"
-            ]
-          },
-					{
-						"UniqueId": "DatePicker",
-						"Title": "DatePicker",
-						"Subtitle": "A configurable control that lets a user pick a date value.",
-						"ImagePath": "ms-appx:///Assets/DatePicker.png",
-						"Description": "Use a DatePicker to let users set a date in your app, for example to schedule an appointment. The DatePicker displays three controls for month, date, and year. These controls are easy to use with touch or mouse, and they can be styled and configured in several different ways.",
-						"Content": "<p>Look at the <i>DatePickerPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-						"IsNew": false,
-						"Docs": [
-							{
-								"Title": "DatePicker",
-								"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.datepicker.aspx"
-							},
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/date-picker"
-              }
-						],
-						"RelatedControls": [
-							"CalendarDatePicker",
-							"CalendarView",
-							"TimePicker"
-						]
-					},
-					{
-						"UniqueId": "RadioButton",
-						"Title": "RadioButton",
-						"Subtitle": "A control that allows a user to select a single option from a group of options. When radio buttons are grouped together they are mutually exclusive.",
-						"ImagePath": "ms-appx:///Assets/RadioButton.png",
-						"Description": "Use RadioButtons to let a user choose between mutually exclusive, related options.",
-						"Content": "<p>Look at the <i>RadioButtonPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-						"IsNew": false,
-            "Docs": [
-              {
-                "Title": "RadioButton",
-                "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.radiobutton.aspx"
-              },
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/radio-button"
-              }
-            ],
-						"RelatedControls": [
-							"CheckBox",
-							"ToggleSwitch",
-							"ToggleButton"
-						]
-					},
-					{
-						"UniqueId": "RatingControl",
-						"Title": "RatingControl",
-						"Subtitle": "Rate something 1 to 5 stars.",
-						"ImagePath": "ms-appx:///Assets/RatingControl.png",
-						"Description": "Released Fall 2017! Rate something 1 to 5 stars.",
-						"Content": "",
-						"IsNew": true,
-            "Docs": [
-              {
-                "Title": "RatingControl",
-                "Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.RatingControl"
-              },
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.RatingControl"
-              }
-            ],
-						"RelatedControls": [
-							"Slider",
-							"ComboBox"
-						]
-					},
-					{
-						"UniqueId": "Slider",
-						"Title": "Slider",
-						"Subtitle": "A control that lets the user select from a range of values by moving a Thumb control along a track.",
-						"ImagePath": "ms-appx:///Assets/Slider.png",
-						"Description": "Use a Slider when you want your users to be able to set defined, contiguous values (such as volume or brightness) or a range of discrete values (such as screen resolution settings).",
-						"Content": "<p>Look at the <i>SliderPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-						"IsNew": false,
-						"Docs": [
-              {
-                "Title": "Slider",
-                "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.slider.aspx"
-              },
-              {
-                "Title": "Guidelines",
-                "Uri": "http://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/slider"
-              }
-						],
-						"RelatedControls": [
-							"ComboBox",
-							"ListBox",
-							"RatingControl"
-						]
-					},
-					{
-						"UniqueId": "TimePicker",
-						"Title": "TimePicker",
-						"Subtitle": "A configurable control that lets a user pick a time value.",
-						"ImagePath": "ms-appx:///Assets/TimePicker.png",
-						"Description": "Use a TimePicker to let users set a time in your app, for example to set a reminder. The TimePicker displays three controls for month, day, and and AM/PM. These controls are easy to use with touch or mouse, and they can be styled and configured in several different ways.",
-						"Content": "<p>Look at the <i>TimePickerPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-						"IsNew": false,
-						"Docs": [
-							{
-								"Title": "TimePicker",
-								"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.timepicker.aspx"
-							},
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/time-picker"
-              }
-						],
-						"RelatedControls": [
-							"DatePicker",
-							"CalendarView"
-						]
-					},
-					{
-						"UniqueId": "ToggleSwitch",
-						"Title": "ToggleSwitch",
-						"Subtitle": "A switch that can be toggled between 2 states.",
-						"ImagePath": "ms-appx:///Assets/ToggleSwitch.png",
-						"Description": "Use ToggleSwitch controls to present users with exactly two mutually exclusive options (like on/off), where choosing an option results in an immediate commit. A toggle switch should have a single label.",
-						"Content": "<p>Look at the <i>ToggleSwitchPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-						"IsNew": false,
-            "Docs": [
-              {
-                "Title": "ToggleSwitch",
-                "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.toggleswitch.aspx"
-              },
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/toggles"
-              }
-            ],
-						"RelatedControls": [
-							"ToggleButton",
-							"RadioButton",
-							"CheckBox",
-							"AppBarToggleButton"
-						]
-					}
-				]
-			},
+    {
+      "UniqueId": "DataInput",
+      "Title": "Data Input",
+      "Subtitle": "CheckBox, ComboBox, DatePicker, ListBox, RadioButton, Slider, TimePicker, ToggleSwitch",
+      "ImagePath": "ms-appx:///Assets/NavigationViewItemIcons/PickerIcon.png",
+      "Description": "Use selection controls to let a user set a value or choose between various options.",
+      "Items": [
+        {
+          "UniqueId": "CalendarDatePicker",
+          "Title": "CalendarDatePicker",
+          "Subtitle": "A control that lets users pick a date value using a calendar.",
+          "ImagePath": "ms-appx:///Assets/CalenderDatePicker.png",
+          "Description": "A control that lets users pick a date value using a calendar.",
+          "Content": "",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "CalendarDatePicker",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.calendardatepicker.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/calendar-date-picker"
+            }
+          ],
+          "RelatedControls": [
+            "DatePicker",
+            "CalendarView"
+          ]
+        },
+        {
+          "UniqueId": "CalendarView",
+          "Title": "CalendarView",
+          "Subtitle": "A control that presents a calendar for a user to choose a date from.",
+          "ImagePath": "ms-appx:///Assets/CalendarView.png",
+          "Description": "CalendarView shows a larger view for showing and selecting dates.  DatePicker by contrast has a compact view with inline selection.",
+          "Content": "<p>Look at the <i>CalendarView.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "CalendarView",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.calendarview.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/calendar-view"
+            }
+          ],
+          "RelatedControls": [
+            "CalendarDatePicker",
+            "DatePicker",
+            "TimePicker"
+          ]
+        },
+        {
+          "UniqueId": "CheckBox",
+          "Title": "CheckBox",
+          "Subtitle": "A control that a user can select or clear.",
+          "ImagePath": "ms-appx:///Assets/CheckBox.png",
+          "Description": "CheckBox controls let the user select a combination of binary options. In contrast, RadioButton controls allow the user to select from mutually exclusive options. The indeterminate state is used to indicate that an option is set for some, but not all, child options. Don't allow users to set an indeterminate state directly to indicate a third option.",
+          "Content": "<p>Check and uncheck these controls to see how they look in each state. The label for each <b>CheckBox</b> is defined by its <b>Content</b> property.</p><p>Use a three-state <b>CheckBox</b> to show that none, some, or all of an items sub-options are checked. You have to add some code to do this. Take a look at the methods in the <i>SelectAllMethods</i> region of <i>CheckBoxPage.xaml.cs</i> to see how we did it.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "CheckBox",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.checkbox.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/checkbox"
+            }
+          ],
+          "RelatedControls": [
+            "RadioButton",
+            "ToggleSwitch",
+            "ToggleButton"
+          ]
+        },
+        {
+          "UniqueId": "ColorPicker",
+          "Title": "ColorPicker",
+          "Subtitle": "A selectable color spectrum.",
+          "ImagePath": "ms-appx:///Assets/ColorPicker.png",
+          "Description": "Released Fall 2017! A selectable color spectrum.",
+          "Content": "",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "ColorPicker",
+              "Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.ColorPicker"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/color-picker"
+            }
+          ],
+          "RelatedControls": [
+            "ComboBox"
+          ]
+        },
+        {
+          "UniqueId": "DatePicker",
+          "Title": "DatePicker",
+          "Subtitle": "A configurable control that lets a user pick a date value.",
+          "ImagePath": "ms-appx:///Assets/DatePicker.png",
+          "Description": "Use a DatePicker to let users set a date in your app, for example to schedule an appointment. The DatePicker displays three controls for month, date, and year. These controls are easy to use with touch or mouse, and they can be styled and configured in several different ways.",
+          "Content": "<p>Look at the <i>DatePickerPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "DatePicker",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.datepicker.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/date-picker"
+            }
+          ],
+          "RelatedControls": [
+            "CalendarDatePicker",
+            "CalendarView",
+            "TimePicker"
+          ]
+        },
+        {
+          "UniqueId": "RadioButton",
+          "Title": "RadioButton",
+          "Subtitle": "A control that allows a user to select a single option from a group of options. When radio buttons are grouped together they are mutually exclusive.",
+          "ImagePath": "ms-appx:///Assets/RadioButton.png",
+          "Description": "Use RadioButtons to let a user choose between mutually exclusive, related options.",
+          "Content": "<p>Look at the <i>RadioButtonPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "RadioButton",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.radiobutton.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/radio-button"
+            }
+          ],
+          "RelatedControls": [
+            "CheckBox",
+            "ToggleSwitch",
+            "ToggleButton"
+          ]
+        },
+        {
+          "UniqueId": "RatingControl",
+          "Title": "RatingControl",
+          "Subtitle": "Rate something 1 to 5 stars.",
+          "ImagePath": "ms-appx:///Assets/RatingControl.png",
+          "Description": "Released Fall 2017! Rate something 1 to 5 stars.",
+          "Content": "",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "RatingControl",
+              "Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.RatingControl"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.RatingControl"
+            }
+          ],
+          "RelatedControls": [
+            "Slider",
+            "ComboBox"
+          ]
+        },
+        {
+          "UniqueId": "Slider",
+          "Title": "Slider",
+          "Subtitle": "A control that lets the user select from a range of values by moving a Thumb control along a track.",
+          "ImagePath": "ms-appx:///Assets/Slider.png",
+          "Description": "Use a Slider when you want your users to be able to set defined, contiguous values (such as volume or brightness) or a range of discrete values (such as screen resolution settings).",
+          "Content": "<p>Look at the <i>SliderPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "Slider",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.slider.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "http://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/slider"
+            }
+          ],
+          "RelatedControls": [
+            "ComboBox",
+            "ListBox",
+            "RatingControl"
+          ]
+        },
+        {
+          "UniqueId": "Sound",
+          "Title": "Sound",
+          "Subtitle": "A C#-only API that enables 2D and 3D UI sounds on all UWP controls.",
+          "ImagePath": "ms-appx:///Assets/Sound.png",
+          "Description": "Sound is enabled by default for UWP apps running on Xbox, but can be set to always play on all devices if desired. Sound may also be put into Spatial Audio mode for a more immersive 10ft experience.",
+          "Content": "<p>Look at the <i>SoundPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": true,
+          "Docs": [
+            {
+              "Title": "Sound",
+              "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.elementsoundplayer"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/style/sound"
+            }
+          ]
+        },
+        {
+          "UniqueId": "TimePicker",
+          "Title": "TimePicker",
+          "Subtitle": "A configurable control that lets a user pick a time value.",
+          "ImagePath": "ms-appx:///Assets/TimePicker.png",
+          "Description": "Use a TimePicker to let users set a time in your app, for example to set a reminder. The TimePicker displays three controls for month, day, and and AM/PM. These controls are easy to use with touch or mouse, and they can be styled and configured in several different ways.",
+          "Content": "<p>Look at the <i>TimePickerPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "TimePicker",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.timepicker.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/time-picker"
+            }
+          ],
+          "RelatedControls": [
+            "DatePicker",
+            "CalendarView"
+          ]
+        },
+        {
+          "UniqueId": "ToggleSwitch",
+          "Title": "ToggleSwitch",
+          "Subtitle": "A switch that can be toggled between 2 states.",
+          "ImagePath": "ms-appx:///Assets/ToggleSwitch.png",
+          "Description": "Use ToggleSwitch controls to present users with exactly two mutually exclusive options (like on/off), where choosing an option results in an immediate commit. A toggle switch should have a single label.",
+          "Content": "<p>Look at the <i>ToggleSwitchPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "ToggleSwitch",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.toggleswitch.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/toggles"
+            }
+          ],
+          "RelatedControls": [
+            "ToggleButton",
+            "RadioButton",
+            "CheckBox",
+            "AppBarToggleButton"
+          ]
+        }
+      ]
+    },
     {
       "UniqueId": "Indicators",
       "Title": "Indicators",
@@ -853,7 +1031,7 @@
       "UniqueId": "Layout",
       "Title": "Layout controls",
       "Subtitle": "Border, Canvas, Grid, RelativePanel, ScrollViewer, SplitView, StackPanel, VariableSizedWrapGrid, ViewBox",
-      "ImagePath": "\uE80A",
+      "ImagePath": "",
       "Description": "Use layout controls to arrange the controls and content in your app.",
       "Items": [
         {
@@ -966,7 +1144,7 @@
           "ImagePath": "ms-appx:///Assets/ParallaxView.png",
           "Description": "Released Fall 2017! A container control that provides the parallax effect when scrolling.",
           "Content": "",
-          "IsNew": true,
+          "IsNew": false,
           "Docs": [
             {
               "Title": "ParallaxView",
@@ -996,7 +1174,7 @@
             },
             {
               "Title": "Guidance",
-              "Uri":  "https://docs.microsoft.com/en-us/windows/uwp/design/layout/layout-panels"
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/layout/layout-panels"
             }
           ],
           "RelatedControls": [
@@ -1005,6 +1183,26 @@
             "Border",
             "Canvas",
             "ViewBox"
+          ]
+        },
+        {
+          "UniqueId": "Repeater",
+          "Title": "ItemsRepeater",
+          "Subtitle": "A flexible, primitive control for data-driven layouts.",
+          "ImagePath": "ms-appx:///Assets/ListView.png",
+          "Description": "(Preview) The ItemsRepeater is like a markup-based loop that supports virtualization.",
+          "Content": "<p>A <b>ItemsRepeater</b> is more basic than an <b>ItemsControl</b>.  It does not have default styling or a control template.  It can contain a collection of items of any type. To populate the view, set the <b>ItemsSource</b> property to a data source.</p><p>Set an <b>ItemTemplate</b> to define the look of individual items.</p><p>And, set the <b>Layout</b> to define how items are sized and positioned.</p><p>Look at the <i>RepeaterPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsPreview": true,
+          "Docs": [
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/lists"
+            }
+          ],
+          "RelatedControls": [
+            "ScrollViewer",
+            "ListView",
+            "GridView"
           ]
         },
         {
@@ -1159,299 +1357,297 @@
         }
       ]
     },
-			{
-				"UniqueId": "Navigation",
-				"Title": "Navigation",
-				"Subtitle": "Button, HyperlinkButton, RepeatButton, ToggleButton",
-				"ImagePath": "\uE700",
-				"Description": "Use button controls to let users perform an action, like submitting a form or showing a menu.",
-				"Items": [
-					{
-						"UniqueId": "Hub",
-						"Title": "Hub",
-						"Subtitle": "Presents information from different sources in a scrollable view.",
-						"ImagePath": "ms-appx:///Assets/Hub.png",
-						"Description": "Use a Hub to display information from different source in a single scrollable view.  Hub can also be used to show categorical information in a separated section format.",
-						"Content": "<p>This page shows a simplified <b>Hub</b> control with minimal content to demonstrate basic <b>Hub</b> usage. Look at the <i>HubPage.xaml</i> file in Visual Studio to see the full code for this page.</p><p>A <b>Hub</b> control typically takes up the full page. The app home uses a more fully implemented <b>Hub</b> that demonstrates this. Look at the <i>MainPage.xaml</i> file in Visual Studio to see the full code for the home page <b>Hub</b>.</p>",
-						"IsNew": false,
-						"Docs": [
-							{
-								"Title": "Hub",
-								"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.hub.aspx"
-							},
-              {
-                "Title": "HubSection",
-                "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.hubsection.aspx"
-              },
-              {
-                "Title": "Guidance",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/hub"
-              }
-						],
-						"RelatedControls": [
-							"Pivot",
-							"SemanticZoom",
-							"ListView",
-							"GridView"
-						]
-					},
-          {
-            "UniqueId": "NavigationView",
-            "Title": "NavigationView",
-            "Subtitle": "Common vertical layout for top-level areas of your app via a collapsible navigation menu.",
-            "ImagePath": "ms-appx:///Assets/NavigationView.png",
-            "Description": "Updated Spring 2018! The navigation view control provides a common vertical layout for top-level areas of your app via a collapsible navigation menu.",
-            "Content": "",
-            "IsNew": true,
-            "Docs": [
-              {
-                "Title": "NavigationView",
-                "Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.NavigationView"
-              },
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/navigationview"
-              }
-            ],
-            "RelatedControls": [
-              "SplitView",
-              "Pivot"
-            ]
-          },
-					{
-						"UniqueId": "Pivot",
-						"Title": "Pivot",
-						"Subtitle": "Presents information from different sources in a tabbed view.",
-						"ImagePath": "ms-appx:///Assets/Pivot.png",
-						"Description": "A Pivot allows you to show a collection of items from different sources in a tabbed view.",
-						"Content": "<p>This page shows a simplified <b>Pivot</b> control with minimal content to demonstrate basic <b>Pivot</b> usage. Look at the <i>PivotPage.xaml</i> file in Visual Studio to see the full code for this page.</p><p>A <b>Pivot</b> control typically takes up the full page.</p>",
-						"IsNew": false,
-						"Docs": [
-              {
-                "Title": "Pivot",
-                "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.pivot.aspx"
-              },
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/tabs-pivot"
-              }
-						],
-						"RelatedControls": [
-							"Hub",
-							"SemanticZoom",
-							"ListView",
-							"GridView"
-						]
-					}
-				]
-			},
-			{
-				"UniqueId": "RichContent",
-				"Title": "Rich Content",
-				"Subtitle": "Image, InkCanvas, MediaElement",
-				"ImagePath": "\uE102",
-				"Description": "Use media controls to display images and videos. Use ink to capture strokes and display them.",
-				"Items": [
-					{
-						"UniqueId": "Image",
-						"Title": "Image",
-						"Subtitle": "A control to display image content.",
-						"ImagePath": "ms-appx:///Assets/Image.png",
-						"Description": "You can use an Image control to show and scale images.",
-						"Content": "<p>Look at the <i>ImagePage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-						"IsNew": false,
-						"Docs": [
-							{
-								"Title": "Image",
-								"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.image.aspx"
-							},
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/images-imagebrushes"
-              }
-						],
-						"RelatedControls": [
-							"MediaElement",
-							"PersonPicture"
-						]
-					},
-					{
-						"UniqueId": "InkCanvas",
-						"Title": "InkCanvas",
-						"Subtitle": "A control to capture and display strokes.",
-						"ImagePath": "ms-appx:///Assets/InkCanvas.png",
-						"Description": "You can use an InkCanvas to capture strokes and display them.  You can also change the way the strokes are displayed through the InkDrawingAttributes.",
-						"Content": "<p>Look at the <i>InkCanvasPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-						"IsNew": false,
-						"Docs": [
-              {
-                "Title": "InkCanvas",
-                "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.inkcanvas.aspx"
-              },
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/inking-controls"
-              }
-						],
-						"RelatedControls": [
-							"Canvas",
-							"InkToolbar"
-						]
-					},
-					{
-						"UniqueId": "MediaElement",
-						"Title": "MediaElement",
-						"Subtitle": "A control to display video and image content.",
-						"ImagePath": "ms-appx:///Assets/MediaElement.png",
-						"Description": "You can use a MediaElement control to playback videos and show images. You can show transport controls or make the video autoplay.",
-						"Content": "<p>Look at the <i>MediaElementPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-						"IsNew": false,
-						"Docs": [
-							{
-								"Title": "MediaElement",
-								"Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.mediaelement"
-							},
-							{
-								"Title": "Media Playback",
-								"Uri": "http://windowsstyleguide/controls-and-patterns/media-playback/"
-							}
-						],
-						"RelatedControls": [
-							"Image",
-							"MediaPlayerElement"
-						]
-					},
-					{
-						"UniqueId": "MediaPlayerElement",
-						"Title": "MediaPlayerElement",
-						"Subtitle": "A control to display video and image content.",
-						"ImagePath": "ms-appx:///Assets/MediaElement.png",
-						"Description": "This control is the newer version of MediaElement.",
-						"Content": "",
-						"IsNew": false,
-						"Docs": [
-							{
-								"Title": "MediaPlayerElement",
-								"Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.MediaPlayerElement"
-							},
-							{
-								"Title": "Media Playback",
-								"Uri": "http://windowsstyleguide/controls-and-patterns/media-playback/"
-							}
-						],
-						"RelatedControls": [
-							"Image",
-							"MediaElement"
-						]
-					},
-					{
-						"UniqueId": "PersonPicture",
-						"Title": "PersonPicture",
-						"Subtitle": "Displays the picture of a person/contact.",
-						"ImagePath": "ms-appx:///Assets/PersonPicture.png",
-						"Description": "Released Fall 2017! Displays the picture of a person/contact.",
-						"Content": "",
-						"IsNew": true,
-            "Docs": [
-              {
-                "Title": "PersonPicture",
-                "Uri": "https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Controls.PersonPicture"
-              },
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/person-picture"
-              }
-            ],
-						"RelatedControls": [
-							"Image"
-						]
-					}
-				]
-			},
-			{
-				"UniqueId": "Styles",
-				"Title": "Styles",
-				"Subtitle": "Acrylic and Reveal",
-				"ImagePath": "\uE2B1",
-				"Description": "Acrylic and Reveal",
-        "Items": [
-          {
-            "UniqueId": "Acrylic",
-            "Title": "Acrylic",
-            "Subtitle": "A translucent material recommended for panel backgrounds.",
-            "ImagePath": "ms-appx:///Assets/AcrylicBrush.png",
-            "Description": "Released Fall 2017! A translucent material recommended for panel backgrounds.",
-            "Content": "",
-            "IsNew": true,
-            "Docs": [
-              {
-                "Title": "Acrylic",
-                "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.media.acrylicbrush"
-              },
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/style/acrylic"
-              }
-            ],
-            "RelatedControls": [
-              "Reveal"
-            ]
-          },
-          {
-            "UniqueId": "Reveal",
-            "Title": "Reveal",
-            "Subtitle": "A material that changes color near the mouse.",
-            "ImagePath": "ms-appx:///Assets/Reveal.png",
-            "Description": "Updated Spring 2018! A material that changes color near the mouse.",
-            "Content": "",
-            "IsNew": true,
-            "Docs": [
-              {
-                "Title": "RevealBrush",
-                "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.media.revealbrush"
-              },
-              {
-                "Title": "RevealBackgroundBrush",
-                "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.media.revealbackgroundbrush"
-              },
-              {
-                "Title": "RevealBorderBrush",
-                "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.media.revealborderbrush"
-              },
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/style/reveal"
-              }
-            ],
-            "RelatedControls": [
-              "Acrylic"
-            ]
-          },
-          {
-            "UniqueId": "RevealFocus",
-            "Title": "Reveal Focus",
-            "Subtitle": "Customize the style of your focus rectangles.",
-            "ImagePath": "ms-appx:///Assets/RevealFocus.png",
-            "Description": "Released Spring 2018! Reveal focus allows you to adapt focus rectangles to look like the focus rectangles available on Xbox.",
-            "Content": "<p>Look at the <i>RevealFocusPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-            "IsNew": true,
-            "Docs": [
-              {
-                "Title": "Reveal Focus",
-                "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.application#Windows_UI_Xaml_Application_FocusVisualKind"
-              },
-              {
-                "Title": "Guidelines",
-                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/style/reveal-focus"
-              }
-            ],
-            "RelatedControls": [
-              "Reveal"
-            ]
-          }
-
-        ]
-			},
+    {
+      "UniqueId": "Navigation",
+      "Title": "Navigation",
+      "Subtitle": "Button, HyperlinkButton, RepeatButton, ToggleButton",
+      "ImagePath": "",
+      "Description": "Use button controls to let users perform an action, like submitting a form or showing a menu.",
+      "Items": [
+        {
+          "UniqueId": "Hub",
+          "Title": "Hub",
+          "Subtitle": "Presents information from different sources in a scrollable view.",
+          "ImagePath": "ms-appx:///Assets/Hub.png",
+          "Description": "Use a Hub to display information from different source in a single scrollable view.  Hub can also be used to show categorical information in a separated section format.",
+          "Content": "<p>This page shows a simplified <b>Hub</b> control with minimal content to demonstrate basic <b>Hub</b> usage. Look at the <i>HubPage.xaml</i> file in Visual Studio to see the full code for this page.</p><p>A <b>Hub</b> control typically takes up the full page. The app home uses a more fully implemented <b>Hub</b> that demonstrates this. Look at the <i>MainPage.xaml</i> file in Visual Studio to see the full code for the home page <b>Hub</b>.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "Hub",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.hub.aspx"
+            },
+            {
+              "Title": "HubSection",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.hubsection.aspx"
+            },
+            {
+              "Title": "Guidance",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/hub"
+            }
+          ],
+          "RelatedControls": [
+            "Pivot",
+            "SemanticZoom",
+            "ListView",
+            "GridView"
+          ]
+        },
+        {
+          "UniqueId": "NavigationView",
+          "Title": "NavigationView",
+          "Subtitle": "Common vertical layout for top-level areas of your app via a collapsible navigation menu.",
+          "ImagePath": "ms-appx:///Assets/NavigationView.png",
+          "Description": "Updated Spring 2018! The navigation view control provides a common vertical layout for top-level areas of your app via a collapsible navigation menu.",
+          "Content": "",
+          "IsUpdated": true,
+          "Docs": [
+            {
+              "Title": "NavigationView",
+              "Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.NavigationView"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/navigationview"
+            }
+          ],
+          "RelatedControls": [
+            "SplitView",
+            "Pivot"
+          ]
+        },
+        {
+          "UniqueId": "Pivot",
+          "Title": "Pivot",
+          "Subtitle": "Presents information from different sources in a tabbed view.",
+          "ImagePath": "ms-appx:///Assets/Pivot.png",
+          "Description": "A Pivot allows you to show a collection of items from different sources in a tabbed view.",
+          "Content": "<p>This page shows a simplified <b>Pivot</b> control with minimal content to demonstrate basic <b>Pivot</b> usage. Look at the <i>PivotPage.xaml</i> file in Visual Studio to see the full code for this page.</p><p>A <b>Pivot</b> control typically takes up the full page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "Pivot",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.pivot.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/tabs-pivot"
+            }
+          ],
+          "RelatedControls": [
+            "Hub",
+            "SemanticZoom",
+            "ListView",
+            "GridView"
+          ]
+        }
+      ]
+    },
+    {
+      "UniqueId": "RichContent",
+      "Title": "Rich Content",
+      "Subtitle": "Image, InkCanvas, MediaElement",
+      "ImagePath": "",
+      "Description": "Use media controls to display images and videos. Use ink to capture strokes and display them.",
+      "Items": [
+        {
+          "UniqueId": "Image",
+          "Title": "Image",
+          "Subtitle": "A control to display image content.",
+          "ImagePath": "ms-appx:///Assets/Image.png",
+          "Description": "You can use an Image control to show and scale images.",
+          "Content": "<p>Look at the <i>ImagePage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "Image",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.image.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/images-imagebrushes"
+            }
+          ],
+          "RelatedControls": [
+            "MediaElement",
+            "PersonPicture"
+          ]
+        },
+        {
+          "UniqueId": "InkCanvas",
+          "Title": "InkCanvas",
+          "Subtitle": "A control to capture and display strokes.",
+          "ImagePath": "ms-appx:///Assets/InkCanvas.png",
+          "Description": "You can use an InkCanvas to capture strokes and display them.  You can also change the way the strokes are displayed through the InkDrawingAttributes.",
+          "Content": "<p>Look at the <i>InkCanvasPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "InkCanvas",
+              "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.inkcanvas.aspx"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/inking-controls"
+            }
+          ],
+          "RelatedControls": [
+            "Canvas",
+            "InkToolbar"
+          ]
+        },
+        {
+          "UniqueId": "MediaElement",
+          "Title": "MediaElement",
+          "Subtitle": "A control to display video and image content.",
+          "ImagePath": "ms-appx:///Assets/MediaElement.png",
+          "Description": "You can use a MediaElement control to playback videos and show images. You can show transport controls or make the video autoplay.",
+          "Content": "<p>Look at the <i>MediaElementPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "MediaElement",
+              "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.mediaelement"
+            },
+            {
+              "Title": "Media Playback",
+              "Uri": "http://windowsstyleguide/controls-and-patterns/media-playback/"
+            }
+          ],
+          "RelatedControls": [
+            "Image",
+            "MediaPlayerElement"
+          ]
+        },
+        {
+          "UniqueId": "MediaPlayerElement",
+          "Title": "MediaPlayerElement",
+          "Subtitle": "A control to display video and image content.",
+          "ImagePath": "ms-appx:///Assets/MediaElement.png",
+          "Description": "This control is the newer version of MediaElement.",
+          "Content": "",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "MediaPlayerElement",
+              "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.MediaPlayerElement"
+            },
+            {
+              "Title": "Media Playback",
+              "Uri": "http://windowsstyleguide/controls-and-patterns/media-playback/"
+            }
+          ],
+          "RelatedControls": [
+            "Image",
+            "MediaElement"
+          ]
+        },
+        {
+          "UniqueId": "PersonPicture",
+          "Title": "PersonPicture",
+          "Subtitle": "Displays the picture of a person/contact.",
+          "ImagePath": "ms-appx:///Assets/PersonPicture.png",
+          "Description": "Released Fall 2017! Displays the picture of a person/contact.",
+          "Content": "",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "PersonPicture",
+              "Uri": "https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Controls.PersonPicture"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/person-picture"
+            }
+          ],
+          "RelatedControls": [
+            "Image"
+          ]
+        }
+      ]
+    },
+    {
+      "UniqueId": "Styles",
+      "Title": "Styles",
+      "Subtitle": "Acrylic and Reveal",
+      "ImagePath": "",
+      "Description": "Acrylic and Reveal",
+      "Items": [
+        {
+          "UniqueId": "Acrylic",
+          "Title": "Acrylic",
+          "Subtitle": "A translucent material recommended for panel backgrounds.",
+          "ImagePath": "ms-appx:///Assets/AcrylicBrush.png",
+          "Description": "Released Fall 2017! A translucent material recommended for panel backgrounds.",
+          "Content": "",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "Acrylic",
+              "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.media.acrylicbrush"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/style/acrylic"
+            }
+          ],
+          "RelatedControls": [
+            "Reveal"
+          ]
+        },
+        {
+          "UniqueId": "Reveal",
+          "Title": "Reveal",
+          "Subtitle": "A material that changes color near the mouse.",
+          "ImagePath": "ms-appx:///Assets/Reveal.png",
+          "Description": "Updated Spring 2018! A material that changes color near the mouse.",
+          "Content": "",
+          "Docs": [
+            {
+              "Title": "RevealBrush",
+              "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.media.revealbrush"
+            },
+            {
+              "Title": "RevealBackgroundBrush",
+              "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.media.revealbackgroundbrush"
+            },
+            {
+              "Title": "RevealBorderBrush",
+              "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.media.revealborderbrush"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/style/reveal"
+            }
+          ],
+          "RelatedControls": [
+            "Acrylic"
+          ]
+        },
+        {
+          "UniqueId": "RevealFocus",
+          "Title": "Reveal Focus",
+          "Subtitle": "Customize the style of your focus rectangles.",
+          "ImagePath": "ms-appx:///Assets/RevealFocus.png",
+          "Description": "Released Spring 2018! Reveal focus allows you to adapt focus rectangles to look like the focus rectangles available on Xbox.",
+          "Content": "<p>Look at the <i>RevealFocusPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": false,
+          "Docs": [
+            {
+              "Title": "Reveal Focus",
+              "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.application#Windows_UI_Xaml_Application_FocusVisualKind"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/style/reveal-focus"
+            }
+          ],
+          "RelatedControls": [
+            "Reveal"
+          ]
+        }
+      ]
+    },
     {
       "UniqueId": "Text",
       "Title": "Text controls",
@@ -1515,7 +1711,7 @@
           "ImagePath": "ms-appx:///Assets/RichEditBox.png",
           "Description": "You can use a RichEditBox control to enter and edit rich text documents that contain formatted text, hyperlinks, and images. By default, the RichEditBox supports spell checking. You can make a RichEditBox read-only by setting its IsReadOnly property to true.",
           "Content": "<p>On this page, you can type into the <b>RichTextBox</b> control and save it as a RichTextFormat (.rtf) document, or load an existing .rtf document. You can format the text as <b>Bold</b> or <u>Underlined</u>, and change the text color.</p><p>Look at the <i>RichEditBoxPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-          "IsNew": false,
+          "IsUpdated": true,
           "Docs": [
             {
               "Title": "RichEditBox",
@@ -1607,6 +1803,153 @@
             "PasswordBox",
             "RichEditBox",
             "AutoSuggestBox"
+          ]
+        }
+      ]
+    },
+    {
+      "UniqueId": "Motion",
+      "Title": "Motion",
+      "Subtitle": "Motions: Storyboard animations, easing functions, page transitions - oh my!",
+      "ImagePath": "ms-appx:///Assets/NavigationViewItemIcons/ObjectQuickAnimation.png",
+      "Description": "See how to build XAML animations.",
+      "Items": [
+        {
+          "UniqueId": "ConnectedAnimation",
+          "Title": "Connected Animation",
+          "Subtitle": "Connected animations continue elements during page navigation and help the user maintain their context between views.",
+          "ImagePath": "ms-appx:///Assets/ConnectedAnimations.png",
+          "Description": "Connected animations continue elements during page navigation and help the user maintain their context between views.",
+          "Content": "<p>Look at the <i>ConnectedAnimationPage.xaml</i> and <i>ConnectedAnimationPage.xaml.cs</i> files in Visual Studio to see the full code for this page.</p>",
+          "IsNew": true,
+          "Docs": [
+            {
+              "Title": "Connected Animations",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/motion/connected-animation"
+            },
+            {
+              "Title": "Quickstart: Motion",
+              "Uri": "https://getfluentdesign.com/motion/"
+            }
+          ],
+          "RelatedControls": [
+            "PageTransition",
+            "ThemeTransition"
+          ]
+        },
+        {
+          "UniqueId": "EasingFunction",
+          "Title": "Easing Functions",
+          "Subtitle": "Easing is a way to manipulate the velocity of an object as it animates.",
+          "ImagePath": "ms-appx:///Assets/EasingFunctions.png",
+          "Description": "Easing is a way to manipulate the velocity of an object as it animates.",
+          "Content": "<p>Look at the <i>EasingFunctionPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": true,
+          "Docs": [
+            {
+              "Title": "Timing and Easing",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/motion/timing-and-easing"
+            },
+            {
+              "Title": "Quickstart: Motion",
+              "Uri": "https://getfluentdesign.com/motion/"
+            }
+          ],
+          "RelatedControls": [
+            "ConnectedAnimation",
+            "PageTransition",
+            "ThemeTransition"
+          ]
+        },
+        {
+          "UniqueId": "PageTransition",
+          "Title": "Page Transitions",
+          "Subtitle": "Page transitions provide visual feedback about the relationship between pages.",
+          "ImagePath": "ms-appx:///Assets/Transitions.png",
+          "Description": "Page transitions provide visual feedback about the relationship between pages.",
+          "Content": "<p>Look at the <i>PageTransitionPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": true,
+          "Docs": [
+            {
+              "Title": "Navigation Theme Transition",
+              "Uri": "https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Media.Animation.NavigationThemeTransition"
+            },
+            {
+              "Title": "Quickstart: Motion",
+              "Uri": "https://getfluentdesign.com/motion/"
+            }
+          ],
+          "RelatedControls": [
+            "ConnectedAnimation",
+            "ThemeTransition"
+          ]
+        },
+        {
+          "UniqueId": "ThemeTransition",
+          "Title": "Theme Transitions",
+          "Subtitle": "Theme transitions are pre-packaged, easy-to-apply animations.",
+          "ImagePath": "ms-appx:///Assets/Transitions.png",
+          "Description": "Theme transitions are pre-packaged, easy-to-apply animations.",
+          "Content": "<p>Look at the <i>ThemeTransitionPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "IsNew": true,
+          "Docs": [
+            {
+              "Title": "Transitions",
+              "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.uielement.transitions#Windows_UI_Xaml_UIElement_Transitions"
+            },
+            {
+              "Title": "Quickstart: Motion",
+              "Uri": "https://getfluentdesign.com/motion/"
+            }
+          ],
+          "RelatedControls": [
+            "ImplicitTransition",
+            "PageTransition"
+          ]
+        },
+        {
+          "UniqueId": "XamlCompInterop",
+          "Title": "Animation interop",
+          "Subtitle": "XAML and Composition interop allows you to animate elements using expressions, natural animations, and more.",
+          "ImagePath": "ms-appx:///Assets/StoryboardAnimation.png",
+          "IsNew": true,
+          "Description": "XAML and Composition interop allows you to animate elements using expressions, natural animations, and more",
+          "Content": "<p>Look at the <i>XamlCompInterop.xaml.cs</i> file in Visual Studio to see the full code for this page.</p>",
+          "Docs": [
+            {
+              "Title": "Animation Interop",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/composition/using-the-visual-layer-with-xaml"
+            },
+            {
+              "Title": "Quickstart: Motion",
+              "Uri": "https://getfluentdesign.com/motion/"
+            }
+          ],
+          "RelatedControls": [
+            "EasingFunction"
+          ]
+        },
+        {
+          "UniqueId": "ImplicitTransition",
+          "Title": "Implicit Transitions",
+          "Subtitle": "Use Implicit Transitions to automatically animate changes to properties.",
+          "ImagePath": "ms-appx:///Assets/Transitions.png",
+          "IsNew": true,
+          "Description": "Use Implicit Transitions to automatically animate changes to properties.",
+          "Content": "<p>Look at the <i>ImplicitTransitionPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+          "Docs": [
+            {
+              "Title": "Transitions",
+              "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.uielement.transitions#Windows_UI_Xaml_UIElement_Transitions"
+            },
+            {
+              "Title": "Quickstart: Motion",
+              "Uri": "https://getfluentdesign.com/motion/"
+            }
+          ],
+          "RelatedControls": [
+            "PageTransition",
+            "ThemeTransition"
           ]
         }
       ]

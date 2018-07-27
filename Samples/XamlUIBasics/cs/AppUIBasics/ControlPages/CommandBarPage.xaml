@@ -19,7 +19,7 @@
     mc:Ignorable="d">
 
     <StackPanel>
-        <local:ControlExample x:Name="Example3" HeaderText="A command bar with labels on the side free floating in a page." >
+        <local:ControlExample x:Name="Example3" HeaderText="A command bar with labels on the side free floating in a page" >
 
             <CommandBar x:Name="PrimaryCommandBar" IsOpen="False" DefaultLabelPosition="Right">
                 <AppBarButton x:Name="addButton" Icon="Add" Label="Add"/>
@@ -53,6 +53,6 @@
                     <Paragraph>&lt;/CommandBar&gt;</Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
-        </local:ControlExample>
+        </local:ControlExample>      
     </StackPanel>
 </Page>
