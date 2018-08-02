@@ -21,7 +21,7 @@
         </Flyout>
     </Page.Resources>
     <StackPanel HorizontalAlignment="Left">
-        <local:ControlExample x:Name="Example1" HeaderText="A Button with a Flyout.">
+        <local:ControlExample HeaderText="A button with a flyout">
             <local:ControlExample.Example>
                 <Button x:Name="Control1" Content="Empty cart">
                     <Button.Flyout>
@@ -47,49 +47,6 @@
                     <Paragraph TextIndent="24">&lt;/Flyout&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;/Button.Flyout&gt;</Paragraph>
                     <Paragraph>&lt;/Button&gt;</Paragraph>
-                </RichTextBlock>
-            </local:ControlExample.Xaml>
-        </local:ControlExample>
-        <local:ControlExample x:Name="Example2" HeaderText="A TextBlock with a Flyout." RelativePanel.Below="Example1">
-            <local:ControlExample.Example>
-                <TextBlock Text="{x:Bind MyTextBox.Text, Mode=OneWay}" Tapped="Element_Tapped" FontSize="18">
-                    <FlyoutBase.AttachedFlyout>
-                        <Flyout>
-                            <TextBox x:Name="MyTextBox" Text="You can edit this text by tapping it." />
-                        </Flyout>
-                    </FlyoutBase.AttachedFlyout></TextBlock>
-            </local:ControlExample.Example>
-            <local:ControlExample.Xaml>
-                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
-                    <Paragraph>&lt;TextBlock Text="{x:Bind MyTextBox.Text, Mode=OneWay}" Tapped="Element_Tapped" FontSize="18"&gt;</Paragraph>
-                    <Paragraph TextIndent="12">&lt;FlyoutBase.AttachedFlyout&gt;</Paragraph>
-                    <Paragraph TextIndent="24">&lt;Flyout&gt;</Paragraph>
-                    <Paragraph TextIndent="36">&lt;TextBox x:Name="MyTextBox" Text="You can edit this text by tapping it."/&gt;</Paragraph>
-                    <Paragraph TextIndent="24">&lt;/Flyout&gt;</Paragraph>
-                    <Paragraph TextIndent="12">&lt;/FlyoutBase.AttachedFlyout&gt;</Paragraph>
-                    <Paragraph>&lt;/TextBlock&gt;</Paragraph>
-                </RichTextBlock>
-            </local:ControlExample.Xaml>
-        </local:ControlExample>
-        <local:ControlExample x:Name="Example3" HeaderText="A Button and a TextBlock sharing the same Flyout."
-                ExampleHeight="Auto">
-            <local:ControlExample.Example>
-                <StackPanel Orientation="Horizontal">
-                    <Button Content="Click to show Flyout" Flyout="{StaticResource SharedFlyout}" />
-                    <TextBlock Tapped="Element_Tapped" Style="{ThemeResource BaseTextBlockStyle}" Margin="30,0,0,0"
-                            Text="Tap to show Flyout" FlyoutBase.AttachedFlyout="{StaticResource SharedFlyout}" />
-                </StackPanel>
-            </local:ControlExample.Example>
-            <local:ControlExample.Xaml>
-                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
-                    <Paragraph>&lt;Button Content="Click to show Flyout"</Paragraph>
-                    <Paragraph TextIndent="12">
-                        <Bold>Flyout="{StaticResource SharedFlyout}"</Bold> /&gt;"
-                    </Paragraph>
-                    <Paragraph>&lt;TextBlock Text="Tap to show Flyout" Tapped="Element_Tapped"</Paragraph>
-                    <Paragraph TextIndent="12">
-                        <Bold>FlyoutBase.AttachedFlyout="{StaticResource SharedFlyout}"</Bold> /&gt;"
-                    </Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>

@@ -26,15 +26,6 @@ namespace AppUIBasics.ControlPages
             this.InitializeComponent();
         }
 
-        private void Element_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            FrameworkElement element = sender as FrameworkElement;
-            if (element != null)
-            {
-                FlyoutBase.ShowAttachedFlyout(element);
-            }
-        }
-
         private void DeleteConfirmation_Click(object sender, RoutedEventArgs e)
         {
             Flyout f = this.Control1.Flyout as Flyout;
