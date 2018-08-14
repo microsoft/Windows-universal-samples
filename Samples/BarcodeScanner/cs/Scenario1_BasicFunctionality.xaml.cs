@@ -93,6 +93,9 @@ namespace SDKTemplate
                     // Note: If the scanner is not enabled (i.e. EnableAsync not called), attaching the event handler will not be any useful because the API will not fire the event
                     // if the claimedScanner has not beed Enabled
                     await claimedScanner.EnableAsync();
+                    
+                    // Begin scanning
+                    await claimedScanner.StartSoftwareTriggerAsync();
 
                     rootPage.NotifyUser("Ready to scan. Device ID: " + claimedScanner.DeviceId, NotifyType.StatusMessage);
                     ScenarioEndScanButton.IsEnabled = true;
