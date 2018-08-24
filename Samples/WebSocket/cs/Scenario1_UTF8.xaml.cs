@@ -84,7 +84,7 @@ namespace SDKTemplate
             // The URI is validated by calling TryGetUri() that will return 'false' for strings that are not
             // valid WebSocket URIs.
             // Note that when enabling the text box users may provide URIs to machines on the intrAnet
-            // or intErnet. In these cases the app requires the "Home or Work Networking" or
+            // or intErnet. In these cases the app requires the "Private Networks (Client and Server)" or
             // "Internet (Client)" capability respectively.
             Uri server = rootPage.TryGetUri(ServerAddressField.Text);
             if (server == null)
@@ -241,6 +241,7 @@ namespace SDKTemplate
             rootPage.NotifyUser("Closing", NotifyType.StatusMessage);
             CloseSocket();
             SetBusy(false);
+            rootPage.NotifyUser("Closed", NotifyType.StatusMessage);
         }
 
         // This may be triggered remotely by the server or locally by Close/Dispose()

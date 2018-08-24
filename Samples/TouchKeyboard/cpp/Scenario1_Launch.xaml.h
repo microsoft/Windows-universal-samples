@@ -34,9 +34,9 @@ namespace SDKTemplate
     public:
         CustomTextBox()
         {
-            this->Background = ref new Windows::UI::Xaml::Media::SolidColorBrush(Windows::UI::Colors::Coral);
+            this->FontFamily = ref new Windows::UI::Xaml::Media::FontFamily(L"Times New Roman");
+            this->FontStyle = Windows::UI::Text::FontStyle::Italic;
             this->BorderThickness = Windows::UI::Xaml::Thickness(1);
-            this->HorizontalAlignment = Windows::UI::Xaml::HorizontalAlignment::Center;
         }
     };
 }

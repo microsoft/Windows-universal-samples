@@ -79,11 +79,11 @@ void PreviewOptionsPrintHelper::AddPrintPages(Object^ sender, AddPagesEventArgs^
 
     PrintDocument^ printDocument = safe_cast<PrintDocument^>(sender);
 
-    // Loop over all of the print pages and add each one to  add each page to be printed
+    // Loop over all of the print pages and add each one to be printed
 
-    for (int i = 0; i < m_printPages.size(); i++)
+    for (UIElement^ page : m_printPages)
     {
-        printDocument->AddPage(m_printPages[i]);
+        printDocument->AddPage(page);
     }
 
     // Indicate that all of the print pages have been provided
@@ -103,7 +103,8 @@ RichTextBlockOverflow^ PreviewOptionsPrintHelper::AddOnePrintPage(RichTextBlockO
     {
         // If this is the first page add the specific scenario content
         page = FirstPage;
-        //Hide footer since we don't know yet if it will be displayed (this might not be the last page) - wait for layout
+
+        // Hide footer since we don't know yet if it will be displayed (this might not be the last page) - wait for layout
         StackPanel^ footer = safe_cast<StackPanel^>(page->FindName("Footer"));
         footer->Visibility = Visibility::Collapsed;
     }
@@ -142,6 +143,7 @@ RichTextBlockOverflow^ PreviewOptionsPrintHelper::AddOnePrintPage(RichTextBlockO
     {
         StackPanel^ footer = safe_cast<StackPanel^>(page->FindName("Footer"));
         footer->Visibility = Visibility::Visible;
+        PrintCanvas->UpdateLayout();
     }
 
     // Add the page to the page print collection

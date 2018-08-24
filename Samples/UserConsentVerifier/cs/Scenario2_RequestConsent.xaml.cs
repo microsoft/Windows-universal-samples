@@ -14,9 +14,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Security.Credentials.UI;
 using System;
-using SDKTemplate;
 
-namespace UserConsentVerifier
+namespace SDKTemplate
 {
     public sealed partial class Scenario2_RequestConsent : Page
     {
@@ -27,63 +26,32 @@ namespace UserConsentVerifier
             this.InitializeComponent();
         }
 
-        /// <summary>
-        /// This is the click handler for the 'Request Consent' button. It requests consent from the current user.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private async void RequestConsent_Click(object sender, RoutedEventArgs e)
         {
-            Button b = sender as Button;
-            b.IsEnabled = false;
+            RequestConsentButton.IsEnabled = false;
 
-            if (!String.IsNullOrEmpty(Message.Text))
+            // Request the user's consent using Windows Hello via biometric verification or a PIN.
+            string message = "Please confirm your identity to complete this (pretend) in-app purchase.";
+            UserConsentVerificationResult consentResult = await UserConsentVerifier.RequestVerificationAsync(message);
+            switch (consentResult)
             {
-                try
-                {
-                    // Request the logged on user's consent using Windows Hello via biometric verification or a PIN.
-                    UserConsentVerificationResult consentResult = await Windows.Security.Credentials.UI.UserConsentVerifier.RequestVerificationAsync(Message.Text);
-                    switch (consentResult)
-                    {
-                        case UserConsentVerificationResult.Verified:
-                            {
-                                rootPage.NotifyUser("User consent verified!", NotifyType.StatusMessage);
-                                break;
-                            }
+                case UserConsentVerificationResult.Verified:
+                    rootPage.NotifyUser("Pretend in-app purchase was successful.", NotifyType.StatusMessage);
+                    break;
 
-                        case UserConsentVerificationResult.DeviceNotPresent:
-                            {
-                                rootPage.NotifyUser("No PIN or biometric found, please set one up.", NotifyType.ErrorMessage);
-                                break;
-                            }
+                case UserConsentVerificationResult.DeviceNotPresent:
+                    rootPage.NotifyUser("No PIN or biometric found, please set one up.", NotifyType.ErrorMessage);
+                    break;
 
-                        case UserConsentVerificationResult.Canceled:
-                            {
-                                rootPage.NotifyUser("User consent verification canceled.", NotifyType.ErrorMessage);
-                                break;
-                            }
+                case UserConsentVerificationResult.Canceled:
+                    rootPage.NotifyUser("User consent verification canceled.", NotifyType.ErrorMessage);
+                    break;
 
-                        default:
-                            {
-                                rootPage.NotifyUser("User consent verification is currently unavailable.", NotifyType.ErrorMessage);
-                                break;
-                            }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    rootPage.NotifyUser("Request current user's consent failed with exception. Operation: RequestVerificationAsync, Exception: " + ex.ToString(), NotifyType.ErrorMessage);
-                }
-                finally
-                {
-                    b.IsEnabled = true;
-                }
+                default:
+                    rootPage.NotifyUser("User consent verification is currently unavailable.", NotifyType.ErrorMessage);
+                    break;
             }
-            else
-            {
-                rootPage.NotifyUser("Empty Message String. Enter prompt string in the Message text field.", NotifyType.ErrorMessage);
-                b.IsEnabled = true;
-            }
+            RequestConsentButton.IsEnabled = true;
         }
     }
 }

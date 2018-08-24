@@ -62,21 +62,6 @@ namespace SDKTemplate
         concurrency::task<void> CleanupMediaCaptureAsync();
 
         /// <summary>
-        /// Creates a reader for the frame source described by the MediaFrameSourceInfo.
-        /// On frame arrived will render the output to the supplied software bitmap source.
-        /// </summary>
-        concurrency::task<void> CreateReaderAsync(
-            Windows::Media::Capture::Frames::MediaFrameSourceGroup^ group,
-            Windows::Media::Capture::Frames::MediaFrameSourceInfo^ info);
-
-        /// <summary>
-        /// Returns the first MediaFrameSource of matching kind in the group.
-        /// </summary>
-        Windows::Media::Capture::Frames::MediaFrameSourceInfo^ GetFirstSourceInfoOfKind(
-            Windows::Media::Capture::Frames::MediaFrameSourceGroup^ group,
-            Windows::Media::Capture::Frames::MediaFrameSourceKind kind);
-
-        /// <summary>
         /// Initialize the media capture object.
         /// Must be called from the UI thread.
         /// </summary>

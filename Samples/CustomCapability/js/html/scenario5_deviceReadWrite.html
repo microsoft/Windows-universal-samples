@@ -1,0 +1,35 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario5_deviceReadWrite.css" />
+    <script src="/js/fx2Driver.js"></script>
+    <script src="/js/deviceList.js"></script>
+    <script src="/js/scenario5_deviceReadWrite.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>This scenario shows how to use the InputStream and OutputStream properties of Windows.Devices.CustomDevice to send read and write commands to the device driver. </p>
+        <p>The Write Block button writes a message to the Fx2 device's internal memory, and the call to WriteAsync completes once the driver has committed the data to the device.  The device has four message buffers, and once they are full the next write will be blocked until a buffer is free.</p>
+        <p>The Read Button reads a message from the memory.  The read operation will block if no messages are available, otherwise the driver will read one message and free the slot.  This may allow a pending write to complete.</p>
+        <p><button class="win-button" id="device-readwrite-read">Read Block</button>
+           <button class="win-button" id="device-readwrite-write">Write Block</button></p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <h2>Output Log:</h2>
+        <div id="device-readwrite-output"></div>
+    </div>
+</body>
+</html>

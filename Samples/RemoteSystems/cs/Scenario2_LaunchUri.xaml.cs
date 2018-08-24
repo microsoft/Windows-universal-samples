@@ -32,24 +32,24 @@ namespace SDKTemplate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             m_rootPage = MainPage.Current;
-            m_rootPage.ValidateDeviceDiscovery();
+            m_rootPage.ValidateSystemDiscovery();
         }
 
-        public ObservableCollection<RemoteSystem> DeviceList => m_rootPage.deviceList;
+        public ObservableCollection<RemoteSystem> SystemList => m_rootPage.systemList;
 
         private async void Launch_Clicked(object sender, RoutedEventArgs e)
         {
-            RemoteSystem selectedDevice = DeviceListComboBox.SelectedItem as RemoteSystem;
-            if (selectedDevice != null)
+            RemoteSystem selectedSystem = SystemListComboBox.SelectedItem as RemoteSystem;
+            if (selectedSystem != null)
             {
                 Uri uri;
                 if (Uri.TryCreate(UriTextBox.Text, UriKind.Absolute, out uri))
                 {
                     UpdateStatus("LaunchUriAsync called. Waiting for response...", NotifyType.StatusMessage);
 
-                    // Launch URI on the remote device. 
+                    // Launch URI on the remote system. 
                     // Note: LaunchUriAsync needs to called from the UI thread.
-                    RemoteLaunchUriStatus launchUriStatus = await RemoteLauncher.LaunchUriAsync(new RemoteSystemConnectionRequest(selectedDevice), uri);
+                    RemoteLaunchUriStatus launchUriStatus = await RemoteLauncher.LaunchUriAsync(new RemoteSystemConnectionRequest(selectedSystem), uri);
 
                     UpdateStatus("LaunchUriStatus = " + launchUriStatus.ToString(), launchUriStatus == RemoteLaunchUriStatus.Success ? NotifyType.StatusMessage : NotifyType.ErrorMessage);
                 }
@@ -60,7 +60,7 @@ namespace SDKTemplate
             }
             else
             {
-                UpdateStatus("Please select a device.", NotifyType.ErrorMessage);
+                UpdateStatus("Please select a system.", NotifyType.ErrorMessage);
             }
         }
 

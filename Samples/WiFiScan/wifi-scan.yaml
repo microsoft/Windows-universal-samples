@@ -1,0 +1,16 @@
+### YamlMime:Sample
+sample:
+- name: Wi-Fi scanning sample
+  description: Shows how to use the Windows.Devices.WiFi APIs.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/WiFiScan/cs/WiFiScan.sln

@@ -25,8 +25,12 @@
         </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Description:" VerticalAlignment="Top" FontSize="26.667" Height="35" Width="140"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,50,0,0" TextWrapping="Wrap" Text="Source with custom decay" VerticalAlignment="Top" FontSize="13.333" Height="18" Width="229"/>
+        <!-- Always give ComboBoxes and Sliders names that are accessible to a screen reader.
+             In this case, reference the labeling TextBlocks to have the accessible names set 
+             on the ComboBoxes and Sliders. -->
         <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="10,90,0,0" TextWrapping="Wrap" Text="HRTF Environment" VerticalAlignment="Top"/>
-        <ComboBox x:Name="EnvironmentComboBox" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top" Width="160" Height="28" SelectionChanged="EnvironmentComboBox_SelectionChanged">
+        <ComboBox x:Name="EnvironmentComboBox" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top" Width="160" Height="28" SelectionChanged="EnvironmentComboBox_SelectionChanged"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock4}">
             <x:String>Small Room</x:String>
             <x:String>Medium Room</x:String>
             <x:String>Large Room</x:String>
@@ -34,13 +38,16 @@
         </ComboBox>
         <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="10,169,0,0" TextWrapping="Wrap" Text="Source Position in Meters" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="10,201,0,415" TextWrapping="Wrap" Text="X:" VerticalAlignment="Center" Height="24" Width="25"/>
+        <Slider x:Name="SourcePositionXSlider" HorizontalAlignment="Left" Margin="30,193,0,0" VerticalAlignment="Top" Width="80" Height="44" Maximum="10" LargeChange="1" SmallChange="0.5" Minimum="-10" ValueChanged="SourcePositionX_ValueChanged"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock10}" />
         <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="126,202,0,0" TextWrapping="Wrap" Text="Y:" VerticalAlignment="Top" Width="27"/>
+        <Slider x:Name="SourcePositionYSlider" HorizontalAlignment="Left" Margin="149,193,0,0" VerticalAlignment="Top" Width="80" Height="44" Maximum="10" LargeChange="1" SmallChange="0.5" Minimum="-10" ValueChanged="SourcePositionY_ValueChanged"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock11}" />
         <TextBlock x:Name="textBlock12" HorizontalAlignment="Left" Margin="250,202,0,0" TextWrapping="Wrap" Text="Z:" VerticalAlignment="Top"/>
-        <Slider x:Name="SourcePositionXSlider" HorizontalAlignment="Left" Margin="30,193,0,0" VerticalAlignment="Top" Width="80" Height="44" Maximum="10" LargeChange="1" SmallChange="0.5" Minimum="-10" ValueChanged="SourcePositionX_ValueChanged"/>
-        <Slider x:Name="SourcePositionYSlider" HorizontalAlignment="Left" Margin="149,193,0,0" VerticalAlignment="Top" Width="80" Height="44" Maximum="10" LargeChange="1" SmallChange="0.5" Minimum="-10" ValueChanged="SourcePositionY_ValueChanged"/>
-        <Slider x:Name="SourcePositionZSlider" HorizontalAlignment="Left" Margin="269,193,0,0" VerticalAlignment="Top" Width="80" Height="44" Maximum="10" LargeChange="1" SmallChange="0.5" Minimum="-10" ValueChanged="SourcePositionZ_ValueChanged"/>
+        <Slider x:Name="SourcePositionZSlider" HorizontalAlignment="Left" Margin="269,193,0,0" VerticalAlignment="Top" Width="80" Height="44" Maximum="10" LargeChange="1" SmallChange="0.5" Minimum="-10" ValueChanged="SourcePositionZ_ValueChanged"
+            AutomationProperties.LabeledBy="{Binding ElementName=textBlock12}" />
         <Button x:Name="PlayButton" Content="Play" HorizontalAlignment="Left" Margin="93,252,0,0" VerticalAlignment="Top" Height="32" Width="47" Click="PlayButton_Click"/>
         <Button x:Name="StopButton" Content="Stop" HorizontalAlignment="Left" Margin="189,252,0,0" VerticalAlignment="Top" Height="32" Width="50" Click="StopButton_Click"/>
     </Grid>
-
+    
 </Page>

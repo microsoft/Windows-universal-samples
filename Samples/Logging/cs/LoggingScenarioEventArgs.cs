@@ -6,7 +6,7 @@
 
 using System;
 
-namespace LoggingCS
+namespace SDKTemplate
 {
     /// <summary>
     /// LoggingScenario tells the UI what's happening by 

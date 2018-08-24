@@ -1,0 +1,16 @@
+### YamlMime:Sample
+sample:
+- name: My People Notifications Sample
+  description: Shows how to send emotive notifications to contacts pinned on the taskbar.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/MyPeopleNotifications/cs/MyPeopleNotifications.sln

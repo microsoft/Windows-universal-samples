@@ -36,17 +36,17 @@ namespace SDKTemplate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             m_rootPage = MainPage.Current;
-            m_rootPage.ValidateDeviceDiscovery();
+            m_rootPage.ValidateSystemDiscovery();
         }
 
-        public ObservableCollection<RemoteSystem> DeviceList => m_rootPage.deviceList;
+        public ObservableCollection<RemoteSystem> SystemList => m_rootPage.systemList;
 
         private async void GenerateRandomNumber_Clicked(object sender, RoutedEventArgs e)
         {
             // Validate minimum and maximum input values.
             if (ValidateInput())
             {
-                // Connect to app service running on the selected device.
+                // Connect to app service running on the selected system.
                 await ConnectToRemoteAppServiceAsync();
             }
         }
@@ -76,11 +76,11 @@ namespace SDKTemplate
 
         private async Task ConnectToRemoteAppServiceAsync()
         {
-            RemoteSystem selectedDevice = DeviceListComboBox.SelectedItem as RemoteSystem;
-            if (selectedDevice != null)
+            RemoteSystem selectedSystem = SystemListComboBox.SelectedItem as RemoteSystem;
+            if (selectedSystem != null)
             {
                 // Create a remote system connection request.
-                RemoteSystemConnectionRequest connectionRequest = new RemoteSystemConnectionRequest(selectedDevice);
+                RemoteSystemConnectionRequest connectionRequest = new RemoteSystemConnectionRequest(selectedSystem);
 
                 // Set up a new app service connection. The following app service name and package family name
                 // are used in this sample to work with AppServices provider SDK sample on a remote system.
@@ -106,7 +106,7 @@ namespace SDKTemplate
             }
             else
             {
-                UpdateStatus("Select a device for remote connection.", NotifyType.ErrorMessage);
+                UpdateStatus("Select a system for remote connection.", NotifyType.ErrorMessage);
             }
         }
 
@@ -148,7 +148,7 @@ namespace SDKTemplate
             }
             else
             {
-                UpdateStatus("Not connected to any app service. Select a device to open a connection.", NotifyType.ErrorMessage);
+                UpdateStatus("Not connected to any app service. Select a system to open a connection.", NotifyType.ErrorMessage);
             }
         }
 

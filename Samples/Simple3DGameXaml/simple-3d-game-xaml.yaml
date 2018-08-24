@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: DirectX and XAML game sample
+  description: Shows the basic end-to-end implementation of a simple first person 3-D game using DirectX (Direct3D 11.2, Direct2D, Windows.Gaming.Input, and XAudio2) and XAML in a C++ app.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/Simple3DGameXaml/cpp/Simple3DGameXaml.sln

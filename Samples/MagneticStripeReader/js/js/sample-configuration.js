@@ -19,8 +19,19 @@
         { url: "/html/Scenario2_AamvaCards.html", title: "AamvaCardDataReceived Event" }
     ];
 
+    var MagneticStripeReader = Windows.Devices.PointOfService.MagneticStripeReader;
+
+    function getFirstMagneticStripeReaderAsync(connectionTypes) {
+        if (connectionTypes === undefined) {
+            // By default, use all connections types.
+            connectionTypes = Windows.Devices.PointOfService.PosConnectionTypes.all;
+        }
+        return DeviceHelpers.getFirstDeviceAsync(MagneticStripeReader.getDeviceSelector(connectionTypes), (id) => MagneticStripeReader.fromIdAsync(id));
+    }
+
     WinJS.Namespace.define("SdkSample", {
         sampleTitle: sampleTitle,
-        scenarios: new WinJS.Binding.List(scenarios)
+        scenarios: new WinJS.Binding.List(scenarios),
+        getFirstMagneticStripeReaderAsync: getFirstMagneticStripeReaderAsync
     });
 })();

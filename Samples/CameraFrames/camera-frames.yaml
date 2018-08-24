@@ -1,0 +1,16 @@
+### YamlMime:Sample
+sample:
+- name: Camera frames sample
+  description: Shows how to perform various tasks related to individual frames captured through a camera.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/CameraFrames/cs/CameraFrames.sln

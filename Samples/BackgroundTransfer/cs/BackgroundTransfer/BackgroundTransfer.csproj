@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{DC30CE66-DAEE-4CCF-BD02-8837FE918B6F}</ProjectGuid>
+    <ProjectGuid>{EA4292D1-3F33-5D41-B5C7-B8EA928B22EB}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>BackgroundTransfer</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -115,6 +115,15 @@
     <Compile Include="Scenario4_CompletionGroups.xaml.cs">
       <DependentUpon>Scenario4_CompletionGroups.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario5_RandomAccess.xaml.cs">
+      <DependentUpon>Scenario5_RandomAccess.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario6_RecoverableErrors.xaml.cs">
+      <DependentUpon>Scenario6_RecoverableErrors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario7_DownloadReordering.xaml.cs">
+      <DependentUpon>Scenario7_DownloadReordering.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -149,6 +158,21 @@
     </Page>
     <Page Include="..\..\shared\Scenario4_CompletionGroups.xaml">
       <Link>Scenario4_CompletionGroups.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\shared\Scenario5_RandomAccess.xaml">
+      <Link>Scenario5_RandomAccess.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\shared\Scenario6_RecoverableErrors.xaml">
+      <Link>Scenario6_RecoverableErrors.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\shared\Scenario7_DownloadReordering.xaml">
+      <Link>Scenario7_DownloadReordering.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

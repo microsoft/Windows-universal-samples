@@ -4,9 +4,15 @@
 
 # Microsoft Passport and Windows Hello sample
 
-This sample shows how apps can incorporate Microsoft Passport and Windows Hello
-into their normal sign-in flow
-to offer convenient and secure multi-factor authentication.
+Shows how apps can incorporate Microsoft Passport and Windows Hello
+into their normal sign-in flow to offer convenient and secure multi-factor authentication.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Major steps include:
 
@@ -31,7 +37,7 @@ To do this, load the Server project into a second instance of Visual Studio and 
 **NOTE**
 The sample assumes that the server is running on the same computer.
 If you have deployed the sample to a device that is not a PC,
-you will need to edit the `serverBaseUri` variable to refer to the
+you will need to edit the serverBaseUri variable to refer to the
 device on which the server is running.
 
 **WARNING**
@@ -59,14 +65,14 @@ Microsoft Passport can be enabled by setting a PIN in Windows Settings under **A
 
 ## Related content
 
-* [Microsoft Passport and Windows Hello developer how-to guide](http://go.microsoft.com/fwlink/p/?LinkId=522066)
-* [Microsoft Passport architecture and implementation details on TechNet](https://technet.microsoft.com/library/mt589441%28v=vs.85%29.aspx)
-* [Windows Hello overview](http://windows.microsoft.com/windows-10/getstarted-what-is-hello)
-* [Implementation details for Microsoft Passport and Windows Hello](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/mt589441.aspx)
+[Microsoft Passport and Windows Hello](http://go.microsoft.com/fwlink/p/?LinkId=522066)  
+[Microsoft Passport guide](https://technet.microsoft.com/itpro/windows/keep-secure/microsoft-passport-guide)  
+[Windows Hello overview](http://windows.microsoft.com/windows-10/getstarted-what-is-hello)  
+[Implementation details for Microsoft Passport and Windows Hello](https://msdn.microsoft.com/library/windows/apps/xaml/mt589441.aspx)  
 
 ## System requirements
 
-**Development machine**: Windows 10, Version 1511 and Microsoft Visual Studio 2015 Update 1 with the Windows 10 Build 10586 SDK
+**Development machine**: Windows 10, Version 1511 and Microsoft Visual Studio 2017 Update 1 with the Windows 10 Build 10586 SDK
 
 **Client**: Windows 10, Version 1511
 
@@ -75,8 +81,8 @@ Microsoft Passport can be enabled by setting a PIN in Windows Settings under **A
 ## Build the sample
 
 1. Download and extract the samples ZIP
-2. Start Microsoft Visual Studio 2015 and select **File > Open > Project/Solution**
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample. Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File > Open > Project/Solution**
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample. Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build > Build Solution**.
 5. Repeat with the Server solution in the same directory.
 

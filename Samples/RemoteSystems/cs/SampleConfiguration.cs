@@ -25,25 +25,27 @@ namespace SDKTemplate
         {
             new Scenario() { Title="Discovery", ClassType=typeof(Scenario1_Discovery)},
             new Scenario() { Title="Launch URI", ClassType=typeof(Scenario2_LaunchUri)},
-            new Scenario() { Title="Launch App Services", ClassType=typeof(Scenario3_LaunchAppServices)}
+            new Scenario() { Title="Launch App Services", ClassType=typeof(Scenario3_LaunchAppServices)},
+            new Scenario() { Title="Settings", ClassType=typeof(Scenario4_Settings)},
+            new Scenario() { Title="Capabilities", ClassType=typeof(Scenario5_Capabilities)}
         };
 
-        public ObservableCollection<RemoteSystem> deviceList = null;
-        public Dictionary<string, RemoteSystem> deviceMap = null;
+        public ObservableCollection<RemoteSystem> systemList = null;
+        public Dictionary<string, RemoteSystem> systemMap = null;
 
         /// <summary>
-        /// Checks if the device discovery has been performed and devices have been found.
+        /// Checks if the system discovery has been performed and systems have been found.
         /// </summary>
-        internal bool ValidateDeviceDiscovery()
+        internal bool ValidateSystemDiscovery()
         {
-            if (deviceList == null)
+            if (systemList == null)
             {
-                NotifyUser("Device discovery has not been performed. Use scenario one to discover devices.", NotifyType.ErrorMessage);
+                NotifyUser("System discovery has not been performed. Use scenario one to discover systems.", NotifyType.ErrorMessage);
                 return false;
             }
-            else if (deviceList.Count == 0)
+            else if (systemList.Count == 0)
             {
-                NotifyUser("No devices have been found. Use scenario one to discover devices.", NotifyType.ErrorMessage);
+                NotifyUser("No systems have been found. Use scenario one to discover systems.", NotifyType.ErrorMessage);
                 return false;
             }
 

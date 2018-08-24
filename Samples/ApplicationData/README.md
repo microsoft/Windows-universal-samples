@@ -1,11 +1,19 @@
-<!---
+﻿<!---
   category: AppSettings
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620486
 --->
 
 # Application data sample
 
-This sample shows you how to store and retrieve data that is specific to each user and Windows Runtime app by using the Windows Runtime application data APIs ([**Windows.Storage.ApplicationData**](http://msdn.microsoft.com/library/windows/apps/br241587) and so on). 
+Shows how to store and retrieve data that is specific to each user and app by using the Windows Runtime application data APIs 
+([Windows.Storage.ApplicationData](http://msdn.microsoft.com/library/windows/apps/br241587) and so on). 
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 Application data includes session state, user preferences, and other settings. It is created, read, updated, and deleted when the app is running. The operating system manages these data stores for your app: 
 
@@ -26,24 +34,19 @@ The sample covers these key tasks:
 
 ## Guidelines 
 
-[**Guidelines for roaming application data**](http://msdn.microsoft.com/library/windows/apps/hh465094)
+[Guidelines for roaming application data](http://msdn.microsoft.com/library/windows/apps/hh465094)  
 
 ## Concepts 
 
-[Store and retrieve settings and other app data](https://msdn.microsoft.com/library/windows/apps/mt299098)
+[Store and retrieve settings and other app data](https://msdn.microsoft.com/library/windows/apps/mt299098)  
 
 ## Reference 
 
-[**Windows.Storage.ApplicationData**](http://msdn.microsoft.com/library/windows/apps/br241587)
-
-[**Windows.Storage.ApplicationDataCompositeValue**](http://msdn.microsoft.com/library/windows/apps/br241588)
-
-[**Windows.Storage.ApplicationDataContainer**](http://msdn.microsoft.com/library/windows/apps/br241599)
-
-[**Windows.Storage.ApplicationDataContainerSettings**](http://msdn.microsoft.com/library/windows/apps/br241600)
-
-[**WinJS.Application**](http://msdn.microsoft.com/library/windows/apps/br229774)
-
+[Windows.Storage.ApplicationData](http://msdn.microsoft.com/library/windows/apps/br241587)  
+[Windows.Storage.ApplicationDataCompositeValue](http://msdn.microsoft.com/library/windows/apps/br241588)  
+[Windows.Storage.ApplicationDataContainer](http://msdn.microsoft.com/library/windows/apps/br241599)  
+[Windows.Storage.ApplicationDataContainerSettings](http://msdn.microsoft.com/library/windows/apps/br241600)  
+[WinJS.Application](http://msdn.microsoft.com/library/windows/apps/br229774)  
 
 ## System requirements
 
@@ -56,8 +59,8 @@ The sample covers these key tasks:
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

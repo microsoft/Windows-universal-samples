@@ -1,24 +1,37 @@
-﻿<!---
+﻿<!--
   category: NetworkingAndWebServices 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620623
 --->
 
 # WebSocket sample
 
-This sample shows you how to send and receive date using the WebSocket classes in the [**Windows.Networking.Sockets**](http://msdn.microsoft.com/library/windows/apps/br226960) namespace in your Universal Windows Platform (UWP) app. The sample covers basic features that include making a WebSocket connection, sending and receiving data, and closing the connection. The sample also shows recommended ways of handling both trusted (hard coded) URI inputs and unvalidated (user-entered) URI inputs.
-This sample also shows how to access the server certificate information and perform custom validation (if needed) when using a secure Websocket (wss://) endpoint.
+Shows how to send and receive data using the WebSocket classes in the [Windows.Networking.Sockets](http://msdn.microsoft.com/library/windows/apps/br226960) 
+namespace.
 
-**Note**  This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on Windows 10. For more info about how to build apps that target Windows and Windows Phone with Visual Studio, see [Build apps that target Windows 10 by using Visual Studio](http://msdn.microsoft.com/library/windows/apps/dn609832).
+The sample demonstrates the following:
 
-Windows 10 provides support for the client use of WebSockets in a Universal Windows Platform (UWP) app. The [**Windows.Networking.Sockets**](http://msdn.microsoft.com/library/windows/apps/br226960) namespace defines two types of WebSocket objects for use by clients:
+* Making a WebSocket connection, sending and receiving data, and closing the connection. 
+* Handling both trusted (hard coded) URI inputs and unvalidated (user-entered) URI inputs.
+* Accessing the server certificate information and perform custom validation (if needed) when using a secure Websocket (wss://) endpoint.
+* Providing a custom client certificate to use when establishing a secure Websocket connection.
 
--   [**MessageWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226842) is suitable for typical scenarios where messages are not extremely large. Both UTF-8 and binary messages are supported.
--   [**StreamWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226923) is more suitable for scenarios in which large files (such as photos or movies) are being transferred, allowing sections of a message to be read with each read operation rather than reading the entire message at once. Only binary messages are supported.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-Both [**MessageWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226842) and [**StreamWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226923) connections are demonstrated in this sample. This sample shows how to use the following features:
+Windows 10 provides support for the client use of WebSockets in a Universal Windows Platform (UWP) app. The [Windows.Networking.Sockets](https://docs.microsoft.com/uwp/api/Windows.Networking.Sockets) namespace defines two types of WebSocket objects for use by clients:
 
--   Use a [**MessageWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226842) to send UTF-8 text messages. The server will echo the messages back.
--   Use a [**StreamWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226923) to send binary data. The server will echo the binary data back.
+-   [MessageWebSocket](https://docs.microsoft.com/uwp/api/Windows.Networking.Sockets.MessageWebSocket) is suitable for typical scenarios where messages are not extremely large. Both UTF-8 and binary messages are supported.
+-   [StreamWebSocket](https://docs.microsoft.com/uwp/api/Windows.Networking.Sockets.StreamWebSocket) is more suitable for scenarios in which large files (such as photos or movies) are being transferred, allowing sections of a message to be read with each read operation rather than reading the entire message at once. Only binary messages are supported.
+
+Both [MessageWebSocket](https://docs.microsoft.com/uwp/api/Windows.Networking.Sockets.MessageWebSocket) and [StreamWebSocket](https://docs.microsoft.com/uwp/api/Windows.Networking.Sockets.StreamWebSocket) connections are demonstrated in this sample. This sample shows how to use the following features:
+
+-   Use a [MessageWebSocket](https://docs.microsoft.com/uwp/api/Windows.Networking.Sockets.StreamWebSocket) to send UTF-8 text messages. The server will echo the messages back.
+-   Use a [StreamWebSocket](https://docs.microsoft.com/uwp/api/Windows.Networking.Sockets.StreamWebSocket) to send binary data. The server will echo the binary data back.
+-   Use the [ClientCertificate](https://docs.microsoft.com/uwp/api/Windows.Networking.Sockets.StreamWebSocketControl#Windows_Networking_Sockets_StreamWebSocketControl_ClientCertificate) property of [StreamWebSocketControl](https://docs.microsoft.com/uwp/api/Windows.Networking.Sockets.StreamWebsocketControl) to provide client authentication information when connecting to a secure server. 
 
 **Note**  This sample by default requires network access using the loopback interface.
 
@@ -34,41 +47,35 @@ This sample requires that network capabilities be set in the *Package.appxmanife
 
 ### Other resources
 
-[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)
-
-[Connecting with WebSockets](http://msdn.microsoft.com/library/windows/apps/hh761442)
-
-[How to configure network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)
-
-[How to connect with a MessageWebSocket](http://msdn.microsoft.com/library/windows/apps/hh761443)
-
-[How to connect with a StreamWebSocket](http://msdn.microsoft.com/library/windows/apps/hh761445)
+[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)  
+[Connecting with WebSockets](http://msdn.microsoft.com/library/windows/apps/hh761442)  
+[How to configure network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)  
+[How to connect with a MessageWebSocket](http://msdn.microsoft.com/library/windows/apps/hh761443)  
+[How to connect with a StreamWebSocket](http://msdn.microsoft.com/library/windows/apps/hh761445)  
 
 ### Reference
 
-[**MessageWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226842)
-
-[**StreamWebSocket**](http://msdn.microsoft.com/library/windows/apps/br226923)
-
-[**Windows.Networking.Sockets**](http://msdn.microsoft.com/library/windows/apps/br226960)
+[MessageWebSocket](https://docs.microsoft.com/uwp/api/Windows.Networking.Sockets.MessageWebSocket)
+[StreamWebSocket](https://docs.microsoft.com/uwp/api/Windows.Networking.Sockets.StreamWebSocket) 
+[Windows.Networking.Sockets](https://docs.microsoft.com/uwp/api/Windows.Networking.Sockets)  
 
 ### Related technologies
 
-[**Windows.Networking.Sockets**](http://msdn.microsoft.com/library/windows/apps/br226960)
+[Windows.Networking.Sockets](https://docs.microsoft.com/uwp/api/Windows.Networking.Sockets)
 
 ## System requirements
 
 **Client:** Windows 10
 
-**Server:** Windows Server 2016 Technical Preview
+**Server:** Windows Server 2016
 
 **Phone:**  Windows 10
 
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
@@ -123,8 +130,9 @@ The sample must also be updated when run against a non-localhost web server. To 
 
 However if a server different than IIS is used, then this requires some special configuration of the server.
 
--   Copy the *Server\\webSite* directory to the *WebSocketSample* folder on the web server.
--   Configure the web server to accept WebSocket connections.
+-   Copy file *Server\\webSite\EchoWebSocket.ashx* to the *WebSocketSample* folder on the web server.
+-   Copy file *Server\\webSite\EchoWebSocket.ashx* again to the same folder on the web server, but rename to *EchoWebSocketWithClientAuthentication.ashx*.
+-   Configure the web server to accept WebSocket connections, and configure the web server to require SSL connection and client certificate on the *EchoWebSocketWithClientAuthentication.ashx* page. 
 
 To configure the sample for use with a web server different than IIS not using localhost:
 
@@ -137,3 +145,6 @@ IIS is not available on Windows Phone. For the app to attempt a WebSocket connec
 
 -   The easiest way to run the sample is to use the provided web server scripts on a separate 64-bit or 32-bit device that can run IIS. Follow the instructions for deploying and running the Windows version of the sample using IIS on a different device.
 -   Use a web server different than IIS on a separate device. Follow the instructions for deploying and running the Windows version of the sample using a non-IIS web server.
+
+### Known issues
+The client certificate API demonstrated in scenario 3 does not currently work on XBOX.

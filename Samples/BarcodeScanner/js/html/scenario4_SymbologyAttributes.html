@@ -1,0 +1,130 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario4_SymbologyAttributes.css">
+    <script src="/js/scenario4_SymbologyAttributes.js"></script>
+    <script src="/js/util.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="scenarioView">
+        <div>
+            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+            <div id="scenarioDescription">
+                <p>Registers an event listener for barcode scanner data and displays the data values as they are reported.</p>
+            </div>
+        </div>
+        <div id="scenarioContent">
+            <button id="scenarioStartScanButton" class="win-button">Start Scanning</button>
+            <button id="scenarioEndScanButton" class="win-button">End Scanning</button>
+            <br>
+            <br>
+
+            <div id="symbologyListTemplate" data-win-control="WinJS.Binding.Template">
+                <span data-win-bind="textContent: name"></span>
+            </div>
+
+            <table class="fixed">
+                <tr>
+                    <td class="listViewTitle">Symbologies</td>
+                    <td class="listViewTitle">Attributes</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="symbologyListView" class="listViewContainer"
+                             data-win-control="WinJS.UI.ListView" data-win-options="{
+                            itemTemplate: select(&apos;#symbologyListTemplate&apos;),
+                            selectionMode: &apos;single&apos;,
+                            tapBehavior: &apos;directSelect&apos;,
+                            layout : {type: WinJS.UI.ListLayout}}">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="listViewContainer">
+                            <table id="attributesTable" style="visibility: hidden">
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" id="enableCheckDigit" disabled="disabled"/>
+                                        <label for="enableCheckDigit">Enable check digit</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" id="transmitCheckDigit"  disabled="disabled"/>
+                                        <label for="transmitCheckDigit">Transmit check digit</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" id="setDecodeRangeLimits"  disabled="disabled"/>
+                                        <label for="setDecodeRangeLimits">Set decode range limits</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left:24px">
+                                        <label>Minimum Length</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left:24px">
+                                        <input type="range" id="minimumDecodeLength" min="1" max="8"  disabled="disabled"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left:24px">
+                                        <label>Maximum Length</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left:24px">
+                                        <input type="range" id="maximumDecodeLength" min="1" max="8"  disabled="disabled"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <br>
+            <button id="setSymbologyAttributesButton" class="win-button">Set Symbology Attributes</button>
+            <br>
+        </div>
+
+        <div>
+            <table>
+                <tr>
+                    <td>Scan Data Type (Symbology):</td>
+                    <td id="scenarioOutputScanDataType">No Data</td>
+                </tr>
+                <tr>
+                    <td>Scan Data (Unformatted data):</td>
+                    <td id="scenarioOutputScanData">No Data </td>
+                </tr>
+                <tr>
+                    <td>Scan Data Label (Formatted data):</td>
+                    <td id="scenarioOutputScanDataFormatted">No Data</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    </div>
+</body>
+
+</html>

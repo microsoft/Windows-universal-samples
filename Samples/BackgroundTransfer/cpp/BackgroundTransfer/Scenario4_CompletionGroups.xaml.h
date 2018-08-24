@@ -15,7 +15,7 @@
 #include "Scenario4_CompletionGroups.g.h"
 #include "MainPage.xaml.h"
 
-namespace BackgroundTransfer
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

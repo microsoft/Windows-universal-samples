@@ -107,7 +107,7 @@ namespace SDKTemplate
             {
                 var selectedItem = (sender as ComboBox).SelectedItem as ComboBoxItem;
                 var encodingProperties = (selectedItem.Tag as StreamResolution).EncodingProperties;
-                await _previewer.MediaCapture.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoPreview, encodingProperties);
+                await _previewer.SetMediaStreamPropertiesAsync(MediaStreamType.VideoPreview, encodingProperties);
             }
         }
 

@@ -34,4 +34,20 @@ namespace SDKTemplate
         public string Title { get; set; }
         public Type ClassType { get; set; }
     }
+
+    public static class FormDecoderExtensions
+    {
+        public static string TryGetValue(this Windows.Foundation.WwwFormUrlDecoder decoder, string name)
+        {
+            try
+            {
+                return decoder.GetFirstValueByName(name);
+            }
+            catch (ArgumentException)
+            {
+                return null;
+            }
+        }
+    }
 }
+

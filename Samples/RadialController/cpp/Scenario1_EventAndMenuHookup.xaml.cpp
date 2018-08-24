@@ -1,4 +1,4 @@
-//*********************************************************
+﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
 // This code is licensed under the MIT License (MIT).
@@ -26,10 +26,9 @@ using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::UI::Input;
 using namespace Windows::Storage::Streams;
-using namespace std::placeholders;
 using std::vector;
 
-Scenario1_EventAndMenuHookup::Scenario1_EventAndMenuHookup() : rootPage(MainPage::Current)
+Scenario1_EventAndMenuHookup::Scenario1_EventAndMenuHookup()
 {
     InitializeComponent();
 
@@ -50,6 +49,7 @@ void Scenario1_EventAndMenuHookup::InitializeController()
     controller = RadialController::CreateForCurrentView();
     controller->RotationResolutionInDegrees = 1;
 
+    // Wire events
     controller->RotationChanged += ref new TypedEventHandler<RadialController^, RadialControllerRotationChangedEventArgs^>(this, &Scenario1_EventAndMenuHookup::OnRotationChanged);
     controller->ButtonClicked += ref new TypedEventHandler<RadialController^, RadialControllerButtonClickedEventArgs^>(this, &Scenario1_EventAndMenuHookup::OnButtonClicked);
     controller->ScreenContactStarted += ref new TypedEventHandler<RadialController^, RadialControllerScreenContactStartedEventArgs^>(this, &Scenario1_EventAndMenuHookup::OnScreenContactStarted);
@@ -61,28 +61,49 @@ void Scenario1_EventAndMenuHookup::InitializeController()
 
 void Scenario1_EventAndMenuHookup::CreateMenuItems()
 {
-    vector<RadialControllerMenuItem^> _menuItems =
-    {
-        RadialControllerMenuItem::CreateFromKnownIcon("Item0", RadialControllerMenuKnownIcon::InkColor),
-        RadialControllerMenuItem::CreateFromKnownIcon("Item1", RadialControllerMenuKnownIcon::NextPreviousTrack),
-        RadialControllerMenuItem::CreateFromKnownIcon("Item2", RadialControllerMenuKnownIcon::Volume),
-        RadialControllerMenuItem::CreateFromIcon("Item3", RandomAccessStreamReference::CreateFromUri(ref new Uri("ms-appx:///Assets/Item3.png"))),
-        RadialControllerMenuItem::CreateFromIcon("Item4", RandomAccessStreamReference::CreateFromUri(ref new Uri("ms-appx:///Assets/Item4.png"))),
-        RadialControllerMenuItem::CreateFromIcon("Item5", RandomAccessStreamReference::CreateFromUri(ref new Uri("ms-appx:///Assets/Item5.png")))
-    };
-    menuItems = std::move(_menuItems);
+    AddKnownIconItems();
+    AddCustomIconItems();
+    AddFontGlyphItems();
 
-    vector<Slider^> _sliders = { Slider0, Slider1, Slider2, Slider3, Slider4, Slider5 };
-    sliders = std::move(_sliders);
-
-    vector<ToggleSwitch^> _toggles = { Toggle0, Toggle1, Toggle2, Toggle3, Toggle4, Toggle5 };
-    toggles = std::move(_toggles);
-
+    // Set the invoked callbacks for each menu item
     for (unsigned int i = 0; i < menuItems.size(); ++i)
     {
         RadialControllerMenuItem^ radialControllerItem = menuItems[i];
         SetItemInvokedCallback(radialControllerItem, i);
     }
+}
+
+void Scenario1_EventAndMenuHookup::AddKnownIconItems()
+{
+    menuItems.push_back(RadialControllerMenuItem::CreateFromKnownIcon("Item 0", RadialControllerMenuKnownIcon::InkColor));
+    sliders.push_back(slider0);
+    toggles.push_back(toggle0);
+
+    menuItems.push_back(RadialControllerMenuItem::CreateFromKnownIcon("Item 1", RadialControllerMenuKnownIcon::NextPreviousTrack));
+    sliders.push_back(slider1);
+    toggles.push_back(toggle1);
+}
+
+void Scenario1_EventAndMenuHookup::AddCustomIconItems()
+{
+    menuItems.push_back(RadialControllerMenuItem::CreateFromIcon(L"Item 2", RandomAccessStreamReference::CreateFromUri(ref new Uri(L"ms-appx:///Assets/Item2.png"))));
+    sliders.push_back(slider2);
+    toggles.push_back(toggle2);
+
+    menuItems.push_back(RadialControllerMenuItem::CreateFromIcon(L"Item 3", RandomAccessStreamReference::CreateFromUri(ref new Uri(L"ms-appx:///Assets/Item3.png"))));
+    sliders.push_back(slider3);
+    toggles.push_back(toggle3);
+}
+
+void Scenario1_EventAndMenuHookup::AddFontGlyphItems()
+{
+    menuItems.push_back(RadialControllerMenuItem::CreateFromFontGlyph(L"Item 4", L"\x2764", L"Segoe UI Emoji"));
+    sliders.push_back(slider4);
+    toggles.push_back(toggle4);
+
+    menuItems.push_back(RadialControllerMenuItem::CreateFromFontGlyph(L"Item 5", L"\ue102", L"Symbols", ref new Uri(L"ms-appx:///Assets/Symbols.ttf")));
+    sliders.push_back(slider5);
+    toggles.push_back(toggle5);
 }
 
 void Scenario1_EventAndMenuHookup::SetItemInvokedCallback(RadialControllerMenuItem^ menuItem, unsigned int index)
@@ -112,6 +133,7 @@ void Scenario1_EventAndMenuHookup::AddItem(Object^ sender, RoutedEventArgs^ args
     if (!IsItemInMenu(radialControllerMenuItem))
     {
         controller->Menu->Items->Append(radialControllerMenuItem);
+        log->Text += "\n Added : " + radialControllerMenuItem->DisplayText;
     }
 }
 
@@ -123,6 +145,7 @@ void Scenario1_EventAndMenuHookup::RemoveItem(Object^ sender, RoutedEventArgs^ a
     {
         unsigned int index = GetItemIndex(radialControllerMenuItem);
         controller->Menu->Items->RemoveAt(index);
+        log->Text += "\n Removed : " + radialControllerMenuItem->DisplayText;
     }
 }
 
@@ -139,10 +162,8 @@ void Scenario1_EventAndMenuHookup::SelectItem(Object^ sender, RoutedEventArgs^ a
 
 void Scenario1_EventAndMenuHookup::SelectPreviouslySelectedItem(Object^ sender, RoutedEventArgs^ args)
 {
-    if (controller->Menu->TrySelectPreviouslySelectedMenuItem())
-    {
-        PrintSelectedItem();
-    }
+    controller->Menu->TrySelectPreviouslySelectedMenuItem();
+    PrintSelectedItem();
 }
 
 unsigned int Scenario1_EventAndMenuHookup::GetItemIndex(RadialControllerMenuItem^ item)
@@ -176,68 +197,81 @@ void Scenario1_EventAndMenuHookup::PrintSelectedItem(Object^ sender, RoutedEvent
 
 void Scenario1_EventAndMenuHookup::PrintSelectedItem()
 {
-    log->Text += "\n Selected : " + GetSelectedMenuItemName();
-}
-
-String^ Scenario1_EventAndMenuHookup::GetSelectedMenuItemName()
-{
     RadialControllerMenuItem^ selectedMenuItem = controller->Menu->GetSelectedMenuItem();
+    String^ itemName = nullptr;
 
     if (selectedMenuItem)
     {
-        return selectedMenuItem->DisplayText;
+        itemName = selectedMenuItem->DisplayText;
     }
-    else
+    else if (selectedMenuItem == nullptr)
     {
-        return L"System Item";
+        itemName = L"System Item";
+    }
+
+    if (itemName != nullptr)
+    {
+        log->Text += "\n Selected : " + itemName;
     }
 }
 
-void Scenario1_EventAndMenuHookup::OnLogSizeChanged(Platform::Object ^sender, Platform::Object ^args)
+void Scenario1_EventAndMenuHookup::OnLogSizeChanged(Object^ sender, Object^ args)
 {
     logViewer->ChangeView(nullptr, logViewer->ExtentHeight, nullptr);
 }
 
-void Scenario1_EventAndMenuHookup::OnControlAcquired(Windows::UI::Input::RadialController ^sender, Windows::UI::Input::RadialControllerControlAcquiredEventArgs ^args)
+void Scenario1_EventAndMenuHookup::OnControlAcquired(RadialController^ sender, RadialControllerControlAcquiredEventArgs^ args)
 {
-    log->Text += "\nControl Acquired";
+    log->Text += "\n Control Acquired";
     LogContactInfo(args->Contact);
 }
 
-void Scenario1_EventAndMenuHookup::OnControlLost(Windows::UI::Input::RadialController ^sender, Platform::Object ^args)
+void Scenario1_EventAndMenuHookup::OnControlLost(RadialController^ sender, Object^ args)
 {
-    log->Text += "\nControl Lost";
+    log->Text += "\n Control Lost";
 }
 
-void Scenario1_EventAndMenuHookup::OnScreenContactStarted(Windows::UI::Input::RadialController ^sender, Windows::UI::Input::RadialControllerScreenContactStartedEventArgs ^args)
+void Scenario1_EventAndMenuHookup::OnScreenContactStarted(RadialController^ sender, RadialControllerScreenContactStartedEventArgs^ args)
 {
-    log->Text += "\nContact Started ";
+    log->Text += "\n Contact Started ";
     LogContactInfo(args->Contact);
 }
 
-void Scenario1_EventAndMenuHookup::OnScreenContactContinued(Windows::UI::Input::RadialController ^sender, Windows::UI::Input::RadialControllerScreenContactContinuedEventArgs ^args)
+void Scenario1_EventAndMenuHookup::OnScreenContactContinued(RadialController^ sender, RadialControllerScreenContactContinuedEventArgs^ args)
 {
-    log->Text += "\nContact Continued ";
+    log->Text += "\n Contact Continued ";
     LogContactInfo(args->Contact);
 }
 
-void Scenario1_EventAndMenuHookup::OnScreenContactEnded(Windows::UI::Input::RadialController ^sender, Platform::Object ^args)
+void Scenario1_EventAndMenuHookup::OnScreenContactEnded(RadialController^ sender, Object^ args)
 {
-    log->Text += "\nContact Ended";
+    log->Text += "\n Contact Ended";
 }
 
-void Scenario1_EventAndMenuHookup::OnButtonClicked(Windows::UI::Input::RadialController ^sender, Windows::UI::Input::RadialControllerButtonClickedEventArgs ^args)
+void Scenario1_EventAndMenuHookup::ToggleMenuSuppression(Object^ sender, RoutedEventArgs^ args)
 {
-    log->Text += "\nButton Clicked ";
+    RadialControllerConfiguration^ radialControllerConfig = RadialControllerConfiguration::GetForCurrentView();
+
+    if (MenuSuppressionToggleSwitch->IsOn)
+    {
+        radialControllerConfig->ActiveControllerWhenMenuIsSuppressed = controller;
+    }
+
+    radialControllerConfig->IsMenuSuppressed = MenuSuppressionToggleSwitch->IsOn;
+}
+
+void Scenario1_EventAndMenuHookup::OnButtonClicked(RadialController^ sender, RadialControllerButtonClickedEventArgs^ args)
+{
+    log->Text += "\n Button Clicked ";
     LogContactInfo(args->Contact);
 
     ToggleSwitch^ toggle = toggles[activeItemIndex];
     toggle->IsOn = !toggle->IsOn;
 }
 
-void Scenario1_EventAndMenuHookup::OnRotationChanged(Windows::UI::Input::RadialController ^sender, Windows::UI::Input::RadialControllerRotationChangedEventArgs ^args)
+void Scenario1_EventAndMenuHookup::OnRotationChanged(RadialController^ sender, RadialControllerRotationChangedEventArgs^ args)
 {
-    log->Text += "\nRotation Changed Delta = " + args->RotationDeltaInDegrees;
+    log->Text += "\n Rotation Changed Delta = " + args->RotationDeltaInDegrees;
     LogContactInfo(args->Contact);
 
     sliders[activeItemIndex]->Value += args->RotationDeltaInDegrees;
@@ -247,7 +281,7 @@ void Scenario1_EventAndMenuHookup::LogContactInfo(RadialControllerScreenContact^
 {
     if (contact != nullptr)
     {
-        log->Text += "\nBounds = " + contact->Bounds.ToString();
-        log->Text += "\nPosition = " + contact->Position.ToString();
+        log->Text += "\n Bounds = " + contact->Bounds.ToString();
+        log->Text += "\n Position = " + contact->Position.ToString();
     }
 }

@@ -1,0 +1,48 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<UserControl
+    x:Class="SDKTemplate.Payload"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <SolidColorBrush x:Key="PayloadBackgroundBrush" Color="#20FFFFFF" />
+                    <SolidColorBrush x:Key="PayloadForegroundBrush" Color="#A0FFFFFF" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="HighContrast">
+                    <SolidColorBrush x:Key="PayloadBackgroundBrush" Color="{ThemeResource SystemChromeLowColor}" />
+                    <SolidColorBrush x:Key="PayloadForegroundBrush" Color="{ThemeResource SystemChromeWhiteColor}" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <StackPanel>
+        <TextBlock Style="{StaticResource BasicTextStyle}" Text="Notification payload:" />
+        <Border Background="{ThemeResource PayloadBackgroundBrush}" Padding="8" Margin="8">
+            <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
+                <TextBlock Foreground="{ThemeResource PayloadForegroundBrush}" FontSize="14" Text="{x:Bind FormattedMarkup}" />
+            </ScrollViewer>
+        </Border>
+        <Button Content="Send notification" Margin="0,12" Click="OnSendClicked"/>
+    </StackPanel>
+</UserControl>

@@ -23,10 +23,11 @@
     <ClCompile Include="Scenario4_TimeTriggeredTask.xaml.cpp" />
     <ClCompile Include="Scenario5_ApplicationTriggerTask.xaml.cpp" />
     <ClCompile Include="BackgroundActivity.cpp" />
+    <ClCompile Include="Scenario6_GroupedTask.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="App.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_SampleBackgroundTask.xaml.h" />
@@ -35,6 +36,7 @@
     <ClInclude Include="Scenario4_TimeTriggeredTask.xaml.h" />
     <ClInclude Include="Scenario5_ApplicationTriggerTask.xaml.h" />
     <ClInclude Include="BackgroundActivity.h" />
+    <ClInclude Include="Scenario6_GroupedTask.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -49,6 +51,7 @@
     <Page Include="..\shared\Scenario3_ServicingCompleteTask.xaml" />
     <Page Include="..\shared\Scenario4_TimeTriggeredTask.xaml" />
     <Page Include="..\shared\Scenario5_ApplicationTriggerTask.xaml" />
+    <Page Include="..\shared\Scenario6_GroupedTask.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">

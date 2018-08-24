@@ -1,0 +1,17 @@
+### YamlMime:Sample
+sample:
+- name: Background activation sample
+  description: Shows how to create and register background tasks that will run in the main process using the Windows Runtime background task API.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - vb
+  technologies:
+  - windows
+  vssolution: /Samples/BackgroundActivation/cs/BackgroundActivation.sln

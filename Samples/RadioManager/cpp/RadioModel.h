@@ -18,7 +18,7 @@ namespace SDKTemplate
     {
     private:
         Windows::Devices::Radios::Radio^ radio;
-        bool isEnabled = true;
+        bool isEnabled;
         Windows::UI::Xaml::UIElement^ parent;
 
     public:

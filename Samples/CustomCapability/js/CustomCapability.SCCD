@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CustomCapabilityDescriptor xmlns="http://schemas.microsoft.com/appx/2016/sccd" xmlns:s="http://schemas.microsoft.com/appx/2016/sccd">
+	<CustomCapabilities>
+		<CustomCapability Name="microsoft.firmwareRead_cw5n1h2txyewy"></CustomCapability>
+		<CustomCapability Name="microsoft.hsaTestCustomCapability_q536wpkpf5cy2"></CustomCapability>
+	</CustomCapabilities>
+	<AuthorizedEntities>
+		<AuthorizedEntity AppPackageFamilyName="Microsoft.SDKSamples.CustomCapability.JS_8wekyb3d8bbwe" CertificateSignatureHash="ca9fc964db7e0c2938778f4559946833e7a8cfde0f3eaa07650766d4764e86c4"></AuthorizedEntity>
+		<AuthorizedEntity AppPackageFamilyName="Microsoft.SDKSamples.CustomCapability.JS_8wekyb3d8bbwe" CertificateSignatureHash="c39c58eff76e19113531f0776e2f5b7c34e5172f5d62aa31482f9e37b32ec242"></AuthorizedEntity>
+	</AuthorizedEntities>
+	<Catalog>xxxx</Catalog>
+</CustomCapabilityDescriptor>

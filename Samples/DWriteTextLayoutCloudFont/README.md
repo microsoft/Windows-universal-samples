@@ -1,11 +1,18 @@
-<!---
+﻿<!---
   category: ControlsLayoutAndText
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620539
 --->
 
 # Downloadable fonts (DirectWrite) sample
 
-This sample demonstrates how to use DirectWrite downloadable fonts, a feature added in Windows 10, together with the DirectWrite text layout API.
+Shows how to use DirectWrite downloadable fonts, a feature added in Windows 10, together with the DirectWrite text layout API.
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 A new capability in DirectWrite for Windows 10 allows an app to format text content using fonts that may not be installed on a device, and for the font to be downloaded on demand from a Microsoft service. DirectWrite now includes low-level APIs for using downloadable fonts. An easy way to leverage the downloadable font mechanism is to use DirectWrite's text layout (IDWriteTextLayout3), which integrates the lower-level APIs and does part of the work for you. When a text layout is created with a Windows font that is not locally installed, the text layout will automatically add requests for the font data to a font download queue. You need to add code that initiates the download and that responds when the download is completed.
 
@@ -28,7 +35,8 @@ Within the DWriteTextLayoutCloudFontImplementation project, the following files 
 ### DWriteTextLayoutCloudFont project
 Within the DWriteTextLayoutCloudFont project, the following files are significant:
 
-* The Scenario\_Document1.\*, Scenario\_Document2.\* and Scenario\_Document3.\* files each invoke text layout using a different downloadable font, and then invoke and respond to the downloadable font mechanism.
+* The Scenario\_Document1.\*, Scenario\_Document2.\* and Scenario\_Document3.\* files each present a DirectWrite text layout using a different downloadable font that gets downloaded, with the layout subsequently being updated.
+* The DocumentPresenter.\* files provide the higher-level implementation for the three documents (Scenario\_Document1, etc.) The DocumentPresenter class creates the text layout and the surface image source used to present it. It also creates the FontDownloadListener that interacts with DirectWrites font download mechanism and initiates the download of remote fonts. It also implements event handlers to update the layout and the surface image source when the remote font has been downloaded, and on other relevant events. 
 * The Scenario\_SampleOverview.\* files provide guidance for using the sample app.
 * The Scenario\_CloudFontOverview.\* files provide more information about the downloadable font mechanism.
 
@@ -39,12 +47,11 @@ The ClearDownloadableFontCache.ps1 file is not part of the sample project itself
 
 ## Related topics
 
-[IDWriteFactory3::GetSystemFontCollection method](https://msdn.microsoft.com/en-us/library/windows/desktop/dn890761)  
-[IDWriteTextLayout3 interface](https://msdn.microsoft.com/en-us/library/windows/desktop/dn900405)  
-[IDWriteFontDownloadQueue interface](https://msdn.microsoft.com/en-us/library/windows/desktop/dn890778)  
-[IDWriteFontDownloadListener interface](https://msdn.microsoft.com/en-us/library/windows/desktop/dn890775)  
+[IDWriteFactory3::GetSystemFontCollection method](https://msdn.microsoft.com/library/windows/desktop/dn890761)  
+[IDWriteTextLayout3 interface](https://msdn.microsoft.com/library/windows/desktop/dn900405)  
+[IDWriteFontDownloadQueue interface](https://msdn.microsoft.com/library/windows/desktop/dn890778)  
+[IDWriteFontDownloadListener interface](https://msdn.microsoft.com/library/windows/desktop/dn890775)  
 [Guidelines for fonts](https://msdn.microsoft.com/library/windows/apps/hh700394)  
-
 
 ## System requirements
 
@@ -57,8 +64,8 @@ The ClearDownloadableFontCache.ps1 file is not part of the sample project itself
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

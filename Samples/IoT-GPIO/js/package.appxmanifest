@@ -15,11 +15,11 @@
   <Properties>
     <DisplayName>Gpio JS Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
-    <Logo>Assets\StoreLogo-sdk.png</Logo>
+    <Logo>images\storelogo-sdk.png</Logo>
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.IoT" MinVersion="10.0.0.0" MaxVersionTested="10.0.14393.0" />
+    <TargetDeviceFamily Name="Windows.IoT" MinVersion="10.0.10240.0" MaxVersionTested="10.0.17134.0" />
   </Dependencies>
 
   <Resources>
@@ -35,10 +35,14 @@
         DisplayName="GPIO JS Sample"
         Description="GPIO JS Sample"
         BackgroundColor="#00b2f0"
-        Square150x150Logo="images\storelogo-sdk.png"
+        Square150x150Logo="images\squaretile-sdk.png"
         Square44x44Logo="images\smalltile-sdk.png">
-        <uap:DefaultTile Wide310x150Logo="images\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="images\splash-sdk.png" />
+        <uap:DefaultTile>
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
       </uap:VisualElements>
     </Application>
   </Applications>

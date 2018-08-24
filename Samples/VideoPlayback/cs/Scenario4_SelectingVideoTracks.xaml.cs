@@ -9,6 +9,7 @@
 //
 //*********************************************************
 
+using SDKTemplate.Logging;
 using System;
 using Windows.Media.Core;
 using Windows.Media.Playback;
@@ -25,6 +26,7 @@ namespace SDKTemplate
     public sealed partial class Scenario4 : Page
     {
         MainPage rootPage = MainPage.Current;
+        private MediaPlaybackItemLogger mpiLogger;
         MediaPlaybackItem item;
 
         public Scenario4()
@@ -35,14 +37,18 @@ namespace SDKTemplate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.item = new MediaPlaybackItem(MediaSource.CreateFromUri(rootPage.MultiTrackVideoMediaUri));
+            mpiLogger = new MediaPlaybackItemLogger(LoggerControl, item);
 
             item.VideoTracks.SelectedIndexChanged += VideoTracks_SelectedIndexChanged;
 
             this.mediaPlayerElement.Source = item;
+            LoggerControl.Log($"Loaded: {rootPage.MultiTrackVideoMediaUri}");
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            mpiLogger?.Dispose();
+            mpiLogger = null;
             MediaPlayerHelper.CleanUpMediaPlayerSource(mediaPlayerElement.MediaPlayer);
         }
 
@@ -56,17 +62,18 @@ namespace SDKTemplate
             if (this.item != null && this.item.VideoTracks != null && this.item.VideoTracks.Count -1 >= videoTrackIndex)
             {
                 this.item.VideoTracks.SelectedIndex = videoTrackIndex;
-                rootPage.NotifyUser("Switched to video track #" + (videoTrackIndex + 1)
-                    + " | Id: " + this.item.VideoTracks[videoTrackIndex].Id
-                    + " | Label: " + this.item.VideoTracks[videoTrackIndex].Label, NotifyType.StatusMessage);
             }
         }
 
-        /// <summary>
-        /// Forces a new frame to be rendered when we are paused.
-        /// </summary>
         private async void VideoTracks_SelectedIndexChanged(ISingleSelectMediaTrackList sender, object args)
         {
+            var videoTrackIndex = sender.SelectedIndex;
+
+            LoggerControl.Log("Switched to video track #" + (videoTrackIndex + 1)
+                    + " | Id: " + this.item.VideoTracks[videoTrackIndex].Id
+                    + " | Label: " + this.item.VideoTracks[videoTrackIndex].Label);
+
+            // Forces a new frame to be rendered when we are paused.
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 //Make sure to call the mediaPlayerElement on the UI thread:

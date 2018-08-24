@@ -115,6 +115,7 @@
     <ClCompile Include="Scenario_ContinuousRecognitionListGrammar.xaml.cpp" />
     <ClCompile Include="Scenario_ContinuousRecognitionSRGSGrammar.xaml.cpp" />
     <ClCompile Include="Scenario_PauseAsync.xaml.cpp" />
+    <ClCompile Include="Scenario_SynthesizeTextBoundaries.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -132,6 +133,7 @@
     <ClInclude Include="Scenario_ContinuousRecognitionListGrammar.xaml.h" />
     <ClInclude Include="Scenario_ContinuousRecognitionSRGSGrammar.xaml.h" />
     <ClInclude Include="Scenario_PauseAsync.xaml.h" />
+    <ClInclude Include="Scenario_SynthesizeTextBoundaries.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -141,16 +143,17 @@
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>
-    <Page Include="Scenario_SynthesizeText.xaml" />
-    <Page Include="Scenario_SynthesizeSSML.xaml" />
-    <Page Include="Scenario_PredefinedDictationGrammar.xaml" />
-    <Page Include="Scenario_PredefinedWebSearchGrammar.xaml" />
-    <Page Include="Scenario_ListConstraint.xaml" />
-    <Page Include="Scenario_SRGSConstraint.xaml" />
-    <Page Include="Scenario_ContinuousDictation.xaml" />
-    <Page Include="Scenario_ContinuousRecognitionListGrammar.xaml" />
-    <Page Include="Scenario_ContinuousRecognitionSRGSGrammar.xaml" />
-    <Page Include="Scenario_PauseAsync.xaml" />
+    <Page Include="..\shared\xaml\Scenario_SynthesizeText.xaml" />
+    <Page Include="..\shared\xaml\Scenario_SynthesizeSSML.xaml" />
+    <Page Include="..\shared\xaml\Scenario_PredefinedDictationGrammar.xaml" />
+    <Page Include="..\shared\xaml\Scenario_PredefinedWebSearchGrammar.xaml" />
+    <Page Include="..\shared\xaml\Scenario_ListConstraint.xaml" />
+    <Page Include="..\shared\xaml\Scenario_SRGSConstraint.xaml" />
+    <Page Include="..\shared\xaml\Scenario_ContinuousDictation.xaml" />
+    <Page Include="..\shared\xaml\Scenario_ContinuousRecognitionListGrammar.xaml" />
+    <Page Include="..\shared\xaml\Scenario_ContinuousRecognitionSRGSGrammar.xaml" />
+    <Page Include="..\shared\xaml\Scenario_PauseAsync.xaml" />
+    <Page Include="..\shared\xaml\Scenario_SynthesizeTextBoundaries.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">

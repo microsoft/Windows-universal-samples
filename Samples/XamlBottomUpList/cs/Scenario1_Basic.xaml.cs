@@ -23,7 +23,6 @@ namespace SDKTemplate
 {
     public sealed partial class Scenario1_Basic : Page
     {
-        private MainPage rootPage = MainPage.Current;
         private int messageNumber = 0;
         private string savedScrollPosition;
 
@@ -33,14 +32,6 @@ namespace SDKTemplate
 
             // Start with one message, so the screen doesn't look empty.
             AddItemToEnd();
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
         }
 
         private void AddItemToEnd()

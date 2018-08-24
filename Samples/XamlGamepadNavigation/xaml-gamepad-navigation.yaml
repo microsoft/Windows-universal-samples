@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Gamepad-style navigation (XAML) sample
+  description: Shows ways of improving directional navigation in your app.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows
+  vssolution: /Samples/XamlGamepadNavigation/cs/GamepadNavigation.sln

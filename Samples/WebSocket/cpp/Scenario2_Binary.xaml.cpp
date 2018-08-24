@@ -285,6 +285,7 @@ void Scenario2::OnStop()
     rootPage->NotifyUser("Stopping", NotifyType::StatusMessage);
     CloseSocket();
     SetBusy(false);
+    rootPage->NotifyUser("Stopped", NotifyType::StatusMessage);
 }
 
 // The method may be triggered remotely by the server sending unsolicited close frame or locally by Close()/delete operator.

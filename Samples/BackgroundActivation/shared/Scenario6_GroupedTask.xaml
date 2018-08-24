@@ -1,0 +1,49 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+    <Page
+    x:Class="SDKTemplate.GroupedBackgroundTask"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+            <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                    <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                        Registers a background task for a Time zone change trigger event with a background task
+                        registration group. Registering with a group enables the task registration to remain active
+                        when all ungrouped tasks are unregistered.
+                    </TextBlock>
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Margin="0,10,0,10">
+                        <Button x:Name="RegisterButton" Content="Register" Click="RegisterGroupedBackgroundTask"/>
+                        <Button x:Name="UnregisterGroupedButton" Content="Unregister" Click="UnregisterGroupedTask" Margin="10,0,10,0"/>
+                        
+                    </StackPanel>
+                    <Button x:Name="UnregisterUngroupedButton" Click="UnregisterUngroupedTasks" Margin="0,0,0,10">
+                        <TextBlock Text="Unregister Ungrouped Tasks" TextWrapping="Wrap"></TextBlock>
+                    </Button>
+                    <StackPanel>
+                        <TextBlock x:Name="Status" Style="{StaticResource BasicTextStyle}" Text="Unregistered"/>
+                        <TextBlock x:Name="Progress" Style="{StaticResource BasicTextStyle}" Text=""/>
+                        <TextBlock x:Name="Result" Style="{StaticResource BasicTextStyle}" Text=""/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

@@ -19,6 +19,7 @@ namespace SDKTemplate
         void Run(Windows::ApplicationModel::Background::IBackgroundTaskInstance^ taskInstance);
         void OnCanceled(Windows::ApplicationModel::Background::IBackgroundTaskInstance^ taskInstance, Windows::ApplicationModel::Background::BackgroundTaskCancellationReason reason);
 
+        static void OnStart(Windows::ApplicationModel::Background::BackgroundTaskRegistrationGroup^ sender, Windows::ApplicationModel::Activation::BackgroundActivatedEventArgs^ args);
         static void Start(Windows::ApplicationModel::Background::IBackgroundTaskInstance^ taskInstance);
     private:
         Windows::ApplicationModel::Background::BackgroundTaskCancellationReason CancelReason = Windows::ApplicationModel::Background::BackgroundTaskCancellationReason::Abort;

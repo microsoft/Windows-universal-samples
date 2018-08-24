@@ -37,7 +37,7 @@ namespace WebAuthentication
 
                 Uri StartUri = new Uri(GoogleURL);
                 // When using the desktop flow, the success code is displayed in the html title of this end uri
-                Uri EndUri = new Uri("https://accounts.google.com/o/oauth2/approval?");
+                Uri EndUri = new Uri("https://accounts.google.com/o/oauth2/approval");
 
                 rootPage.NotifyUser("Navigating to: " + GoogleURL, NotifyType.StatusMessage);
 

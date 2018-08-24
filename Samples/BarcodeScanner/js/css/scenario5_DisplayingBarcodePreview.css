@@ -1,0 +1,59 @@
+﻿/**********************************************************
+
+ Copyright (c) Microsoft. All rights reserved.
+ This code is licensed under the MIT License (MIT).
+ THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+ ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+ IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+
+**********************************************************/
+
+/* styles */
+
+table.fixed {
+    table-layout: fixed;
+}
+
+.listViewTitle {
+    align-content:flex-start;
+    width: 240px;
+    height: 32px;
+}
+
+.listViewContainer {
+    border: 1px solid gray;
+    margin: 5px 5px 5px 0px;
+    width: 100%;
+    height: 320px;
+}
+
+.buttonRow {
+    margin: 5px 0;
+}
+
+#cameraPreview {
+    width: 265px;
+    height: 200px;
+    border: solid 1px white;
+}
+
+#previewNotSupportedNotice {
+    color: red;
+}
+
+#scannerResultsBlock:not([data-is-scanner-claimed="true"]) {
+    display: none;
+}
+
+#scannerResultsBlock:not([data-is-previewing="true"]) #previewBlock {
+    display: none;
+}
+
+#scannerResultsBlock[data-scanner-supports-preview="true"] #previewNotSupportedNotice {
+    display: none;
+}
+
+#scannerResultsBlock:not([data-scanner-supports-preview="true"]) .ifScannerSupportsPreview {
+    display: none;
+}

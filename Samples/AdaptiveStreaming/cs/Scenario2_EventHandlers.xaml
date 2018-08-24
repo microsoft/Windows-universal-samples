@@ -16,7 +16,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="using:SDKTemplate"
+    xmlns:local="using:SDKTemplate.Controls"
+    xmlns:logging="using:SDKTemplate.Logging"
     Loaded="Page_OnLoaded"
     mc:Ignorable="d">
 
@@ -27,19 +28,18 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Vertical">
+        <StackPanel Grid.Row="0" Margin="0,0,0,10" Orientation="Vertical">
             <StackPanel x:Name="DescriptionText">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-         This scenario demonstrates events which report the state of adaptive streaming.
-         If the URI entered below is not supported for adaptive streaming,
-         the sample falls back to MediaSource.CreateFromUri().
+                     This scenario demonstrates the explicit use of an AdaptiveMediaSource and
+                     all those events which report the state of adaptive streaming and the rest of the playback pipeline.
+                     If the URI entered below is not supported for adaptive streaming,
+                     the sample falls back to MediaSource.CreateFromUri().
                 </TextBlock>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10,10">
-                <Button x:Name="LoadUri" Content="Load Uri" Click="LoadUri_Click" Margin="5,0" />
-                <TextBox x:Name="UriBox" InputScope="Url" HorizontalAlignment="Stretch" Margin="5,0" />
-            </StackPanel>
+            <local:ContentSelector x:Name="ContentSelectorControl"/>
+
             <StackPanel Orientation="Horizontal" Margin="10,10">
                 <SymbolIcon Symbol="Download" ToolTipService.ToolTip="Download bitrate"/>
                 <SymbolIcon Name="iconDownloadBitrate" Symbol="ZeroBars"/>
@@ -47,12 +47,11 @@
                 <SymbolIcon Symbol="Play" ToolTipService.ToolTip="Playback bitrate"/>
                 <SymbolIcon Name="iconPlaybackBitrate" Symbol="ZeroBars"/>
                 <TextBlock Name="txtPlaybackBitrate" Margin="5,0"/>
-                <CheckBox x:Name="VerboseLog" Click="VerboseLog_Click" Content="Verbose Log" IsChecked="False" Margin="5,0"/>
             </StackPanel>
         </StackPanel>
 
-        <MediaPlayerElement x:Name="mediaPlayerElement" Grid.Row="1" AreTransportControlsEnabled="True" MinHeight="50" Margin="0,10,0,0"/>
+        <MediaPlayerElement x:Name="mediaPlayerElement" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AreTransportControlsEnabled="True" />
 
-        <local:Logger x:Name="LoggerControl" Grid.Row="2" Margin="0,10,0,0"/>
+        <logging:LogView x:Name="LoggerControl" Grid.Row="2" Margin="0,10,0,0"/>
     </Grid>
 </Page>

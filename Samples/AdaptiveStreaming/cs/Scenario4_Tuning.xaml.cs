@@ -10,9 +10,8 @@
 //*********************************************************
 
 using SDKTemplate.Helpers;
-using SDKTemplate.Models;
+using SDKTemplate.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,11 +27,13 @@ using Windows.Web.Http;
 namespace SDKTemplate
 {
     /// See the README.md for discussion of this scenario.
-    ///
-    /// Note: We register but do not unregister event handlers in this scenario, see the EventHandler
-    ///       scenario for patterns that can be used to clean up.
+
     public sealed partial class Scenario4_Tuning : Page
     {
+        CancellationTokenSource ctsForInboundBitsPerSecondUiRefresh = new CancellationTokenSource();
+        private AdaptiveMediaSource adaptiveMediaSource;
+        private BitrateHelper bitrateHelper;
+
         public Scenario4_Tuning()
         {
             this.InitializeComponent();
@@ -42,40 +43,68 @@ namespace SDKTemplate
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             ctsForInboundBitsPerSecondUiRefresh.Cancel(); // Cancel timer
-            adaptiveMS = null; // release app instance of AdaptiveMediaSource
-            mpItem = null; // release app instance of MediaPlaybackItem
-            var mp = mediaPlayerElement.MediaPlayer;
-            if (mp != null)
+            adaptiveMediaSource = null; // release app instance of AdaptiveMediaSource
+
+            // Release handles on various media objects to ensure a quick clean-up
+            ContentSelectorControl.MediaPlaybackItem = null;
+            var mediaPlayer = mediaPlayerElement.MediaPlayer;
+            if (mediaPlayer != null)
             {
-                mp.DisposeSource();
+                mediaPlayerLogger?.Dispose();
+                mediaPlayerLogger = null;
+
+                UnregisterHandlers(mediaPlayer);
+
+                mediaPlayer.DisposeSource();
                 mediaPlayerElement.SetMediaPlayer(null);
-                mp.Dispose();
+                mediaPlayer.Dispose();
             }
         }
 
-        CancellationTokenSource ctsForInboundBitsPerSecondUiRefresh = new CancellationTokenSource();
-        private AdaptiveContentModel adaptiveContentModel;
-        private AdaptiveMediaSource adaptiveMS;
-        private MediaPlaybackItem mpItem;
-        private BitrateHelper bitrateHelper;
+        private void UnregisterHandlers(MediaPlayer mediaPlayer)
+        {
+            AdaptiveMediaSource adaptiveMediaSource = null;
+            MediaPlaybackItem mpItem = mediaPlayer.Source as MediaPlaybackItem;
+            if (mpItem != null)
+            {
+                adaptiveMediaSource = mpItem.Source.AdaptiveMediaSource;
+            }
+            MediaSource source = mediaPlayer.Source as MediaSource;
+            if (source != null)
+            {
+                adaptiveMediaSource = source.AdaptiveMediaSource;
+            }
 
-        private async void Page_OnLoaded(object sender, RoutedEventArgs e)
+            mediaPlaybackItemLogger?.Dispose();
+            mediaPlaybackItemLogger = null;
+
+            mediaSourceLogger?.Dispose();
+            mediaSourceLogger = null;
+
+            adaptiveMediaSourceLogger?.Dispose();
+            adaptiveMediaSourceLogger = null;
+
+            UnregisterForAdaptiveMediaSourceEvents(adaptiveMediaSource);
+        }
+
+        private void Page_OnLoaded(object sender, RoutedEventArgs e)
         {
             var mediaPlayer = new MediaPlayer();
-            RegisterForMediaPlayerEvents(mediaPlayer);
+
+            // We use a helper class that logs all the events for the MediaPlayer:
+            mediaPlayerLogger = new MediaPlayerLogger(LoggerControl, mediaPlayer);
 
             // Ensure we have PlayReady support, if the user enters a DASH/PR Uri in the text box:
             var prHelper = new PlayReadyHelper(LoggerControl);
             prHelper.SetUpProtectionManager(mediaPlayer);
             mediaPlayerElement.SetMediaPlayer(mediaPlayer);
 
-            // Choose a default content.
-            SelectedContent.ItemsSource = MainPage.ContentManagementSystemStub.ToArray();
-            adaptiveContentModel = MainPage.FindContentById(10);
-            SelectedContent.SelectedItem = adaptiveContentModel;
-
-            UriBox.Text = adaptiveContentModel.ManifestUri.ToString();
-            await LoadSourceFromUriAsync(adaptiveContentModel.ManifestUri);
+            ContentSelectorControl.Initialize(
+                mediaPlayer,
+                MainPage.ContentManagementSystemStub.Where(m => !m.Aes),
+                null,
+                LoggerControl,
+                LoadSourceFromUriAsync);
 
             // There is no InboundBitsPerSecondChanged event, so we start a polling thread to update UI.
             PollForInboundBitsPerSecond(ctsForInboundBitsPerSecondUiRefresh);
@@ -87,11 +116,11 @@ namespace SDKTemplate
             var refreshRate = TimeSpan.FromSeconds(2);
             while (!cts.IsCancellationRequested)
             {
-                if (adaptiveMS != null)
+                if (adaptiveMediaSource != null)
                 {
-                    if (InboundBitsPerSecondLast != adaptiveMS.InboundBitsPerSecond)
+                    if (InboundBitsPerSecondLast != adaptiveMediaSource.InboundBitsPerSecond)
                     {
-                        InboundBitsPerSecondLast = adaptiveMS.InboundBitsPerSecond;
+                        InboundBitsPerSecondLast = adaptiveMediaSource.InboundBitsPerSecond;
                         InboundBitsPerSecondText.Text = InboundBitsPerSecondLast.ToString();
                     }
                 }
@@ -102,44 +131,9 @@ namespace SDKTemplate
 
         #region Content Loading
 
-        private void HideDescriptionOnSmallScreen()
+        private async Task<MediaPlaybackItem> LoadSourceFromUriAsync(Uri uri, HttpClient httpClient = null)
         {
-            // On small screens, hide the description text to make room for the video.
-            DescriptionText.Visibility = (ActualHeight < 700) ? Visibility.Collapsed : Visibility.Visible;
-        }
-
-        private async void LoadId_Click(object sender, RoutedEventArgs e)
-        {
-            adaptiveContentModel = (AdaptiveContentModel)SelectedContent.SelectedItem;
-
-            UriBox.Text = adaptiveContentModel.ManifestUri.ToString();
-            await LoadSourceFromUriAsync(adaptiveContentModel.ManifestUri);
-        }
-
-        private async void LoadUri_Click(object sender, RoutedEventArgs e)
-        {
-            Uri uri;
-            if (!Uri.TryCreate(UriBox.Text, UriKind.Absolute, out uri))
-            {
-                Log("Malformed Uri in Load text box.");
-            }
-
-            await LoadSourceFromUriAsync(uri);
-
-            HideDescriptionOnSmallScreen();
-        }
-
-        private void SetSource_Click(object sender, RoutedEventArgs e)
-        {
-            // It is at this point that the MediaSource (within a MediaPlaybackItem) will be fully resolved.
-            // For an AdaptiveMediaSource, this is the point at which media is first requested and parsed.
-            mediaPlayerElement.Source = mpItem;
-
-            HideDescriptionOnSmallScreen();
-        }
-
-        private async Task LoadSourceFromUriAsync(Uri uri, HttpClient httpClient = null)
-        {
+            UnregisterHandlers(mediaPlayerElement.MediaPlayer);
             mediaPlayerElement.MediaPlayer?.DisposeSource();
 
             AdaptiveMediaSourceCreationResult result = null;
@@ -151,49 +145,61 @@ namespace SDKTemplate
             {
                 result = await AdaptiveMediaSource.CreateFromUriAsync(uri);
             }
+
+            MediaSource source;
             if (result.Status == AdaptiveMediaSourceCreationStatus.Success)
             {
-                adaptiveMS = result.MediaSource;
+                adaptiveMediaSource = result.MediaSource;
 
-                bitrateHelper = new BitrateHelper(adaptiveMS.AvailableBitrates);
-                InitializeBitrateLists(adaptiveMS);
+                // We use a helper class that logs all the events for the AdaptiveMediaSource:
+                adaptiveMediaSourceLogger = new AdaptiveMediaSourceLogger(LoggerControl, adaptiveMediaSource);
+
+                // In addition to logging, we use the callbacks to update some UI elements in this scenario:
+                RegisterForAdaptiveMediaSourceEvents(adaptiveMediaSource);
 
                 // At this point, we have read the manifest of the media source, and all bitrates are known.
-                await UpdatePlaybackBitrate(adaptiveMS.CurrentPlaybackBitrate);
-                await UpdateDownloadBitrate(adaptiveMS.CurrentDownloadBitrate);
+                bitrateHelper = new BitrateHelper(adaptiveMediaSource.AvailableBitrates);
+                InitializeBitrateLists(adaptiveMediaSource);
+                await UpdatePlaybackBitrateAsync(adaptiveMediaSource.CurrentPlaybackBitrate);
+                await UpdateDownloadBitrateAsync(adaptiveMediaSource.CurrentDownloadBitrate);
 
-                // Register for events before resolving the MediaSource.
-                RegisterForAdaptiveMediaSourceEvents(adaptiveMS);
-
-                MediaSource source = MediaSource.CreateFromAdaptiveMediaSource(adaptiveMS);
-
-                // You can save additional information in the CustomPropertySet for future retrieval.
-                // Note: MediaSource.CustomProperties is a ValueSet and therefore can store
-                // only serializable types.
-
-                // Save the original Uri.
-                source.CustomProperties.Add("uri", uri.ToString());
-
-                // You're likely to put a content tracking id into the CustomProperties.
-                source.CustomProperties.Add("contentId", Guid.NewGuid());
-
-                mpItem = new MediaPlaybackItem(source);
+                source = MediaSource.CreateFromAdaptiveMediaSource(adaptiveMediaSource);
             }
             else
             {
-                Log("Error creating the AdaptiveMediaSource: " + result.Status);
+                Log($"Error creating the AdaptiveMediaSource. Status: {result.Status}, ExtendedError.Message: {result.ExtendedError.Message}, ExtendedError.HResult: {result.ExtendedError.HResult.ToString("X8")}");
+                return null;
             }
+
+            // We use a helper class that logs all the events for the MediaSource:
+            mediaSourceLogger = new MediaSourceLogger(LoggerControl, source);
+
+            // Save the original Uri.
+            source.CustomProperties["uri"] = uri.ToString();
+
+            // You're likely to put a content tracking id into the CustomProperties.
+            source.CustomProperties["contentId"] = Guid.NewGuid().ToString();
+
+            var mpItem = new MediaPlaybackItem(source);
+
+            // We use a helper class that logs all the events for the MediaPlaybackItem:
+            mediaPlaybackItemLogger = new MediaPlaybackItemLogger(LoggerControl, mpItem);
+
+            HideDescriptionOnSmallScreen();
+
+            return mpItem;
         }
 
-        #endregion
-
-        #region MediaPlayer Event Handlers
-        private void RegisterForMediaPlayerEvents(MediaPlayer mediaPlayer)
+        private async void HideDescriptionOnSmallScreen()
         {
-            mediaPlayer.PlaybackSession.NaturalVideoSizeChanged +=
-                (sender, args) => Log("PlaybackSession.NaturalVideoSizeChanged, NaturalVideoWidth: " + sender.NaturalVideoWidth + " NaturalVideoHeight: " + sender.NaturalVideoHeight);
+            // On small screens, hide the description text to make room for the video.
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                DescriptionText.Visibility = (ActualHeight < 500) ? Visibility.Collapsed : Visibility.Visible;
+            });
         }
         #endregion
+
 
         #region Adaptive Bitrate control
 
@@ -228,11 +234,11 @@ namespace SDKTemplate
         private void InitialBitrateList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selection = (e.AddedItems.Count > 0) ? (BitrateItem)e.AddedItems[0] : null;
-            if (selection != null && adaptiveMS.InitialBitrate != selection.Bitrate)
+            if (selection != null && adaptiveMediaSource.InitialBitrate != selection.Bitrate)
             {
-                if (IsValidBitrateCombination(adaptiveMS.DesiredMinBitrate, adaptiveMS.DesiredMaxBitrate, selection.Bitrate.Value))
+                if (IsValidBitrateCombination(adaptiveMediaSource.DesiredMinBitrate, adaptiveMediaSource.DesiredMaxBitrate, selection.Bitrate.Value))
                 {
-                    adaptiveMS.InitialBitrate = selection.Bitrate.Value;
+                    adaptiveMediaSource.InitialBitrate = selection.Bitrate.Value;
                 }
                 else
                 {
@@ -244,11 +250,11 @@ namespace SDKTemplate
         private void DesiredMinBitrateList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selection = (e.AddedItems.Count > 0) ? (BitrateItem)e.AddedItems[0] : null;
-            if (selection != null && adaptiveMS.DesiredMinBitrate != selection.Bitrate)
+            if (selection != null && adaptiveMediaSource.DesiredMinBitrate != selection.Bitrate)
             {
-                if (IsValidBitrateCombination(selection.Bitrate, adaptiveMS.DesiredMaxBitrate, adaptiveMS.InitialBitrate))
+                if (IsValidBitrateCombination(selection.Bitrate, adaptiveMediaSource.DesiredMaxBitrate, adaptiveMediaSource.InitialBitrate))
                 {
-                    adaptiveMS.DesiredMinBitrate = selection.Bitrate;
+                    adaptiveMediaSource.DesiredMinBitrate = selection.Bitrate;
                 }
                 else
                 {
@@ -260,11 +266,11 @@ namespace SDKTemplate
         private void DesiredMaxBitrateList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selection = (e.AddedItems.Count > 0) ? (BitrateItem)e.AddedItems[0] : null;
-            if (selection != null && adaptiveMS.DesiredMaxBitrate != selection.Bitrate)
+            if (selection != null && adaptiveMediaSource.DesiredMaxBitrate != selection.Bitrate)
             {
-                if (IsValidBitrateCombination(adaptiveMS.DesiredMinBitrate, selection.Bitrate, adaptiveMS.InitialBitrate))
+                if (IsValidBitrateCombination(adaptiveMediaSource.DesiredMinBitrate, selection.Bitrate, adaptiveMediaSource.InitialBitrate))
                 {
-                    adaptiveMS.DesiredMaxBitrate = selection.Bitrate;
+                    adaptiveMediaSource.DesiredMaxBitrate = selection.Bitrate;
                 }
                 else
                 {
@@ -278,7 +284,7 @@ namespace SDKTemplate
             double ratio;
             if (double.TryParse(BitrateDowngradeTriggerRatioText.Text, out ratio))
             {
-                adaptiveMS.AdvancedSettings.BitrateDowngradeTriggerRatio = ratio;
+                adaptiveMediaSource.AdvancedSettings.BitrateDowngradeTriggerRatio = ratio;
             }
         }
 
@@ -287,34 +293,36 @@ namespace SDKTemplate
             double ratio;
             if (double.TryParse(BitrateDowngradeTriggerRatioText.Text, out ratio))
             {
-                adaptiveMS.AdvancedSettings.DesiredBitrateHeadroomRatio = ratio;
+                adaptiveMediaSource.AdvancedSettings.DesiredBitrateHeadroomRatio = ratio;
             }
         }
         #endregion
 
+
         #region AdaptiveMediaSource Event Handlers
 
-        private void RegisterForAdaptiveMediaSourceEvents(AdaptiveMediaSource aMS)
+        private void RegisterForAdaptiveMediaSourceEvents(AdaptiveMediaSource adaptiveMediaSource)
         {
-            aMS.DownloadFailed += DownloadFailed;
-            aMS.DownloadBitrateChanged += DownloadBitrateChanged;
-            aMS.PlaybackBitrateChanged += PlaybackBitrateChanged;
+            adaptiveMediaSource.DownloadBitrateChanged += DownloadBitrateChanged;
+            adaptiveMediaSource.PlaybackBitrateChanged += PlaybackBitrateChanged;
         }
 
-        private void DownloadFailed(AdaptiveMediaSource sender, AdaptiveMediaSourceDownloadFailedEventArgs args)
+        private void UnregisterForAdaptiveMediaSourceEvents(AdaptiveMediaSource adaptiveMediaSource)
         {
-            Log($"DownloadFailed: {args.HttpResponseMessage}, {args.ResourceType}, {args.ResourceUri}");
+            if (adaptiveMediaSource != null)
+            {
+                adaptiveMediaSource.DownloadBitrateChanged -= DownloadBitrateChanged;
+                adaptiveMediaSource.PlaybackBitrateChanged -= PlaybackBitrateChanged;
+            }
         }
-
         private async void DownloadBitrateChanged(AdaptiveMediaSource sender, AdaptiveMediaSourceDownloadBitrateChangedEventArgs args)
         {
             uint downloadBitrate = args.NewValue;
-            await UpdateDownloadBitrate(downloadBitrate);
+            await UpdateDownloadBitrateAsync(downloadBitrate);
         }
 
-        private async Task UpdateDownloadBitrate(uint downloadBitrate)
+        private async Task UpdateDownloadBitrateAsync(uint downloadBitrate)
         {
-            Log("DownloadBitrateChanged: " + downloadBitrate);
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(() =>
             {
                 iconDownloadBitrate.Symbol = bitrateHelper.GetBitrateSymbol(downloadBitrate);
@@ -325,12 +333,11 @@ namespace SDKTemplate
         private async void PlaybackBitrateChanged(AdaptiveMediaSource sender, AdaptiveMediaSourcePlaybackBitrateChangedEventArgs args)
         {
             uint playbackBitrate = args.NewValue;
-            await UpdatePlaybackBitrate(playbackBitrate);
+            await UpdatePlaybackBitrateAsync(playbackBitrate);
         }
 
-        private async Task UpdatePlaybackBitrate(uint playbackBitrate)
+        private async Task UpdatePlaybackBitrateAsync(uint playbackBitrate)
         {
-            Log("PlaybackBitrateChanged: " + playbackBitrate);
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(() =>
             {
                 iconPlaybackBitrate.Symbol = bitrateHelper.GetBitrateSymbol(playbackBitrate);
@@ -339,13 +346,19 @@ namespace SDKTemplate
         }
         #endregion
 
+
         #region Utilities
         private void Log(string message)
         {
             LoggerControl.Log(message);
         }
+        MediaPlayerLogger mediaPlayerLogger;
+        MediaSourceLogger mediaSourceLogger;
+        MediaPlaybackItemLogger mediaPlaybackItemLogger;
+        AdaptiveMediaSourceLogger adaptiveMediaSourceLogger;
         #endregion
     }
+
 
     /// <summary>
     /// Item which provides a nicer display name for "null" bitrate.

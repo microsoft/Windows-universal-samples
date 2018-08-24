@@ -9,7 +9,6 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using System;
 using Windows.ApplicationModel.AppService;
 using Windows.Foundation.Collections;
@@ -19,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace AppServicesClient
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -70,16 +69,13 @@ namespace AppServicesClient
                 connection.PackageFamilyName = "Microsoft.SDKSamples.AppServicesProvider.CS_8wekyb3d8bbwe";
                 AppServiceConnectionStatus status = await connection.OpenAsync();
 
-                //The new connection opened successfully
-                if (status == AppServiceConnectionStatus.Success)
-                {
-                    rootPage.NotifyUser("Connection established", NotifyType.StatusMessage);
-                }
-
-                //If something went wrong. Lets figure out what it was and show the 
-                //user a meaningful message and walk away
                 switch (status)
                 {
+                    case AppServiceConnectionStatus.Success:
+                        // The new connection opened successfully
+                        rootPage.NotifyUser("Connection established", NotifyType.StatusMessage);
+                        break;
+
                     case AppServiceConnectionStatus.AppNotInstalled:
                         rootPage.NotifyUser("The app AppServicesProvider is not installed. Deploy AppServicesProvider to this device and try again.", NotifyType.ErrorMessage);
                         return;
@@ -89,11 +85,12 @@ namespace AppServicesClient
                         return;
 
                     case AppServiceConnectionStatus.AppServiceUnavailable:
-                        rootPage.NotifyUser(string.Format("The app AppServicesProvider is installed but it does not provide the app service {0}.", connection.AppServiceName), NotifyType.ErrorMessage);
+                        rootPage.NotifyUser($"The app AppServicesProvider is installed but it does not provide the app service {connection.AppServiceName}", NotifyType.ErrorMessage);
                         return;
 
+                    default:
                     case AppServiceConnectionStatus.Unknown:
-                        rootPage.NotifyUser("An unkown error occurred while we were trying to open an AppServiceConnection.", NotifyType.ErrorMessage);
+                        rootPage.NotifyUser("An unknown error occurred while we were trying to open an AppServiceConnection.", NotifyType.ErrorMessage);
                         return;
                 }
 
@@ -133,8 +130,9 @@ namespace AppServicesClient
                         rootPage.NotifyUser("The service exceeded the resources allocated to it and had to be terminated.", NotifyType.ErrorMessage);
                         return;
 
+                    default:
                     case AppServiceResponseStatus.Unknown:
-                        rootPage.NotifyUser("An unkown error occurred while we were trying to send a message to the service.", NotifyType.ErrorMessage);
+                        rootPage.NotifyUser("An unknown error occurred while we were trying to send a message to the service.", NotifyType.ErrorMessage);
                         return;
                 }
             }

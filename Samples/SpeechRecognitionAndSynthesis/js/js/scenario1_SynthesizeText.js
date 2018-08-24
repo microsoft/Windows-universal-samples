@@ -52,6 +52,7 @@
 
     var synthesizer;
     var audio;
+    var marksMetadataTrackForAudio;
 
     // localization resources
     var context;
@@ -95,11 +96,11 @@
 
         // Creates a stream from the text. This will be played using an audio element.
         synthesizer.synthesizeTextToStreamAsync(textToSynthesize.value).done(
-            function (markersStream) {
+            function (textStream) {
                 // Set the source and start playing the synthesized audio stream.
-                var blob = MSApp.createBlobFromRandomAccessStream(markersStream.ContentType, markersStream);
+                var blob = MSApp.createBlobFromRandomAccessStream(textStream.ContentType, textStream);
                 audio.src = URL.createObjectURL(blob, { oneTimeOnly: true });
-                markersStream.seek(0);
+                textStream.seek(0);
                 audio.play();
             },
             function (error) {

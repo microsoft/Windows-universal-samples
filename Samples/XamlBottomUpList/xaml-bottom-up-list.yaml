@@ -1,0 +1,16 @@
+### YamlMime:Sample
+sample:
+- name: Bottom-up list (XAML) sample
+  description: Shows a ListView that is tailored for scenarios in which the last item is the most interesting.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/XamlBottomUpList/cs/BottomUpList.sln

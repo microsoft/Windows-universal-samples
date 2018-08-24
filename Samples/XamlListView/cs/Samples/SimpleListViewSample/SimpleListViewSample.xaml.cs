@@ -11,7 +11,7 @@ namespace ListViewSample
             this.InitializeComponent();
             ContactsCVS.Source = Contact.GetContactsGrouped(250);
         }
-        private void ShowSliptView(object sender, RoutedEventArgs e)
+        private void ShowSplitView(object sender, RoutedEventArgs e)
         {
             MySamplesPane.SamplesSplitView.IsPaneOpen = !MySamplesPane.SamplesSplitView.IsPaneOpen;
         }

@@ -14,8 +14,12 @@
 
     var BackgroundTransfer = Windows.Networking.BackgroundTransfer;
 
+    var outputConsole;
+
     var page = WinJS.UI.Pages.define("/html/scenario1_Download.html", {
         ready: function (element, options) {
+            outputConsole = document.getElementById("outputConsole");
+
             // Assign event listeners for each button on click.
             id("startDownloadButton").addEventListener("click", startDownload, false);
             id("startHighPriorityDownloadButton").addEventListener("click", startHighPriorityDownload, false);
@@ -39,32 +43,6 @@
 
     // Global array used to persist operations.
     var downloadOperations = [];
-
-    function backgroundTransferStatusToString(transferStatus) {
-        switch (transferStatus)
-        {
-            case BackgroundTransfer.BackgroundTransferStatus.idle:
-                return "Idle";
-            case BackgroundTransfer.BackgroundTransferStatus.running:
-                return "Running";
-            case BackgroundTransfer.BackgroundTransferStatus.pausedByApplication:
-                return "PausedByApplication";
-            case BackgroundTransfer.BackgroundTransferStatus.pausedCostedNetwork:
-                return "PausedCostedNetwork";
-            case BackgroundTransfer.BackgroundTransferStatus.pausedNoNetwork:
-                return "PausedNoNetwork";
-            case BackgroundTransfer.BackgroundTransferStatus.completed:
-                return "Completed";
-            case BackgroundTransfer.BackgroundTransferStatus.canceled:
-                return "Canceled";
-            case BackgroundTransfer.BackgroundTransferStatus.error:
-                return "Error";
-            case BackgroundTransfer.BackgroundTransferStatus.pausedSystemPolicy:
-                return "PausedSystemPolicy";
-            default:
-                return "Unknown";
-        }
-    }
 
     // Class associated with each download.
     function DownloadOperation() {
@@ -96,7 +74,8 @@
         this.load = function (loadedDownload) {
             download = loadedDownload;
             printLog("Discovered background download: " + download.guid + ", Status: " +
-                backgroundTransferStatusToString(download.progress.status) + "<br/>");
+                SdkSample.lookupEnumName(BackgroundTransfer.BackgroundTransferStatus, download.progress.status) +
+                "<br/>");
             promise = download.attachAsync().then(complete, error, progress);
         };
 
@@ -124,7 +103,8 @@
                     printLog("Resumed: " + download.guid + "<br/>");
                 } else {
                     printLog("Skipped: " + download.guid + ", Status: " +
-                        backgroundTransferStatusToString(currentProgress.status) + "<br/>");
+                        SdkSample.lookupEnumName(BackgroundTransfer.BackgroundTransferStatus, currentProgress.status) +
+                        "<br/>");
                 }
             }
         };
@@ -142,7 +122,8 @@
                     printLog("Paused: " + download.guid + "<br/>");
                 } else {
                     printLog("Skipped: " + download.guid + ", Status: " +
-                        backgroundTransferStatusToString(currentProgress.status) + "<br/>");
+                        SdkSample.lookupEnumName(BackgroundTransfer.BackgroundTransferStatus, currentProgress.status) +
+                        "<br/>");
                 }
             }
         };
@@ -169,7 +150,8 @@
             var currentProgress = download.progress;
 
             printLog("Progress: " + download.guid + ", Status: " +
-                backgroundTransferStatusToString(currentProgress.status) + "<br/>");
+                SdkSample.lookupEnumName(BackgroundTransfer.BackgroundTransferStatus, currentProgress.status) +
+                "<br/>");
 
             var percent = 100;
             if (currentProgress.totalBytesToReceive > 0) {
@@ -249,7 +231,6 @@
 
     // Print helper function.
     function printLog(/*@type(String)*/txt) {
-        var outputConsole = document.getElementById("outputConsole");
         outputConsole.innerHTML += txt;
     }
 

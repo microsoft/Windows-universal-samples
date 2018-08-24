@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>80bfd669-aa83-4537-9611-027cffe0d8af</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{c6978fb6-bc64-498d-97c8-f5b53997e54e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Helpers.cpp" />
+    <ClCompile Include="HttpJsonContent.cpp" />
+    <ClCompile Include="PlugInFilter.cpp" />
+    <ClCompile Include="SlowInputStream.cpp" />
+    <ClCompile Include="Scenario10_SetCookie.xaml.cpp" />
+    <ClCompile Include="Scenario11_DeleteCookie.xaml.cpp" />
+    <ClCompile Include="Scenario12_DisableCookies.xaml.cpp" />
+    <ClCompile Include="Scenario13_RetryFilter.xaml.cpp" />
+    <ClCompile Include="Scenario14_MeteredConnectionFilter.xaml.cpp" />
+    <ClCompile Include="Scenario15_ServerCertificateValidation.xaml.cpp" />
+    <ClCompile Include="Scenario1_GetText.xaml.cpp" />
+    <ClCompile Include="Scenario2_GetStream.xaml.cpp" />
+    <ClCompile Include="Scenario3_GetList.xaml.cpp" />
+    <ClCompile Include="Scenario4_PostText.xaml.cpp" />
+    <ClCompile Include="Scenario5_PostStream.xaml.cpp" />
+    <ClCompile Include="Scenario6_PostMultipart.xaml.cpp" />
+    <ClCompile Include="Scenario7_PostStreamWithProgress.xaml.cpp" />
+    <ClCompile Include="Scenario8_PostCustomContent.xaml.cpp" />
+    <ClCompile Include="Scenario9_GetCookie.xaml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
+    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Helpers.h" />
+    <ClInclude Include="HttpJsonContent.h" />
+    <ClInclude Include="PlugInFilter.h" />
+    <ClInclude Include="SlowInputStream.h" />
+    <ClInclude Include="Scenario10_SetCookie.xaml.h" />
+    <ClInclude Include="Scenario11_DeleteCookie.xaml.h" />
+    <ClInclude Include="Scenario12_DisableCookies.xaml.h" />
+    <ClInclude Include="Scenario13_RetryFilter.xaml.h" />
+    <ClInclude Include="Scenario14_MeteredConnectionFilter.xaml.h" />
+    <ClInclude Include="Scenario15_ServerCertificateValidation.xaml.h" />
+    <ClInclude Include="Scenario1_GetText.xaml.h" />
+    <ClInclude Include="Scenario2_GetStream.xaml.h" />
+    <ClInclude Include="Scenario3_GetList.xaml.h" />
+    <ClInclude Include="Scenario4_PostText.xaml.h" />
+    <ClInclude Include="Scenario5_PostStream.xaml.h" />
+    <ClInclude Include="Scenario6_PostMultipart.xaml.h" />
+    <ClInclude Include="Scenario7_PostStreamWithProgress.xaml.h" />
+    <ClInclude Include="Scenario8_PostCustomContent.xaml.h" />
+    <ClInclude Include="Scenario9_GetCookie.xaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Filter>Styles</Filter>
+    </Page>
+    <Page Include="..\shared\Scenario1_GetText.xaml" />
+    <Page Include="..\shared\Scenario2_GetStream.xaml" />
+    <Page Include="..\shared\Scenario3_GetList.xaml" />
+    <Page Include="..\shared\Scenario4_PostText.xaml" />
+    <Page Include="..\shared\Scenario5_PostStream.xaml" />
+    <Page Include="..\shared\Scenario6_PostMultipart.xaml" />
+    <Page Include="..\shared\Scenario7_PostStreamWithProgress.xaml" />
+    <Page Include="..\shared\Scenario8_PostCustomContent.xaml" />
+    <Page Include="..\shared\Scenario9_GetCookie.xaml" />
+    <Page Include="..\shared\Scenario10_SetCookie.xaml" />
+    <Page Include="..\shared\Scenario11_DeleteCookie.xaml" />
+    <Page Include="..\shared\Scenario12_DisableCookies.xaml" />
+    <Page Include="..\shared\Scenario13_RetryFilter.xaml" />
+    <Page Include="..\shared\Scenario14_MeteredConnectionFilter.xaml" />
+    <Page Include="..\shared\Scenario15_ServerCertificateValidation.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

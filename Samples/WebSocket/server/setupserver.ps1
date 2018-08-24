@@ -13,10 +13,11 @@ $scriptPath = $(Split-Path $MyInvocation.MyCommand.Path)
 $iisAppName = "WebSocketSample"
 $iisAppPath = "$env:systemdrive\inetpub\wwwroot\WebSocketSample"
 $websitePath = "$scriptPath\website"
+$clientCertWebpageFileName = "EchoWebSocketWithClientAuthentication.ashx"
 $wsfirewallRuleName = "WebSocketSample - HTTP 80"
 $wssFirewallRuleName = "WebSocketSample - HTTPS 443"
 $requiredFeatures = "IIS-WebServer", "IIS-WebServerRole", "NetFx4Extended-ASPNET45", "IIS-ApplicationDevelopment", "IIS-ASPNET45", "IIS-ISAPIExtensions", "IIS-ISAPIFilter", "IIS-NetFxExtensibility45", "IIS-WebSockets"
-$settings = @{"featuresToEnable"=@(); "certificateThumbprint"=""; "webBindingAdded"=$false; "oldDefaultCert"=""}
+$settings = @{"featuresToEnable"=@(); "serverCertificateThumbprint"=""; "clientRootCertThumbprint" = ""; "webBindingAdded"=$false; "oldDefaultCert"=""}
 $settingsFile = "$scriptPath\WebSocketSampleScriptSettings"
 
 # Check if running as Administrator.
@@ -53,6 +54,7 @@ if (-not (Test-Path $iisAppPath))
 {
     mkdir $iisAppPath > $null
     Copy-Item $websitePath\* $iisAppPath -r
+    Copy-Item $websitePath\echowebsocket.ashx $iisAppPath\$clientCertWebpageFileName
 }
 
 # Add web application.
@@ -68,6 +70,7 @@ if ($(Get-WebApplication $iisAppName) -eq $null)
         "type"="System.Diagnostics.TextWriterTraceListener" `
     }
     Set-WebConfigurationProperty -pspath "MACHINE/WEBROOT/APPHOST/Default Web Site/$iisAppName" -filter "system.diagnostics/trace" -name "autoflush" -value "true"
+    Set-WebConfigurationProperty -pspath "MACHINE/WEBROOT/APPHOST" -location "/Default Web Site/$iisAppName/EchoWebSocketWithClientAuthentication.ashx" -filter "system.webServer/security/access" -name "sslFlags" -value "Ssl,SslNegotiateCert,SslRequireCert"
 
     # Allow IIS_IUSRS to write to this directory. This is necessary if a log file is created.
     $acl = Get-Acl $iisAppPath
@@ -83,7 +86,10 @@ else
 
 # Creating self-signed certificate and assigning it to the default binding
 "Creating self-signed certificate."
-$cert = New-SelfSignedCertificate -DnsName www.fabrikam.com -CertStoreLocation cert:\LocalMachine\My
+$serverCert = New-SelfSignedCertificate -DnsName "www.fabrikam.com" -CertStoreLocation "cert:\LocalMachine\My"
+
+"Importing a self-signed root cert to trusted root, which has been used to sign the client cert"
+$clientRootCert = Import-Certificate -FilePath ".\Rootcert.cer" -CertStoreLocation  "cert:\LocalMachine\Root"
 
 $binding = Get-WebBinding "Default Web Site" -Protocol "https" -Port 443 -IPAddress "*"
 if ($binding -eq $null)
@@ -103,7 +109,7 @@ if(Test-Path IIS:\SslBindings\0.0.0.0!443)
 
 "Assigning certificate to the default binding"
 
-$cert | New-Item IIS:\SslBindings\0.0.0.0!443 -Force | out-null
+$serverCert | New-Item IIS:\SslBindings\0.0.0.0!443 -Force | out-null
 
 # Add firewall rules.
 "Adding firewall rule `'$wsfirewallRuleName`'."
@@ -112,5 +118,6 @@ New-NetFirewallRule -DisplayName $wsfirewallRuleName -Direction Inbound -Protoco
 New-NetFirewallRule -DisplayName $wssfirewallRuleName -Direction Inbound -Protocol TCP -LocalPort 443 -Action Allow > $null
 
 "Saving settings for uninstall"
-$settings.certificateThumbprint = $cert.Thumbprint
+$settings.serverCertificateThumbprint = $serverCert.Thumbprint
+$settings.clientRootCertThumbprint = $clientRootCert.Thumbprint
 $settings | Export-Clixml -Path $settingsFile

@@ -1,0 +1,55 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario6_RecoverableErrors"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,20,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Recoverable Errors
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}">
+                Apps can specify a set of WebErrorStatus values that can be resolved by the app, possibly with user
+                intervention. Instead of failing immediately, downloads transition to PausedRecoverableWebErrorStatus
+                if they encounter any of the app-specified errors, at which point they can be reconfigured and retried without
+                the loss of already-downloaded content.
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0,10,0,0">
+                The sample server provided with this sample provides a time-limited URL.
+                If you check the box below, then
+                when the URL expires, the app switches to different URL to continue downloading.
+            </TextBlock>
+            <TextBlock Text="Remote address: " Style="{StaticResource BasicTextStyle}" Margin="0,8,10,0"/>
+            <TextBox x:Name="serverAddressField" InputScope="Url" Text="http://localhost/BackgroundTransferSample/recoverableErrors.aspx?shouldExpire=yes" IsReadOnly="True" />
+            <TextBlock Text="Local file name: " Style="{StaticResource BasicTextStyle}" Margin="0,8,17,0"/>
+            <TextBox x:Name="fileNameField" Text="RecoverableErrorsFile.txt"/>
+            <CheckBox x:Name="configureRecoverableErrorsCheckBox" Content="Recover from expired URL" IsChecked="True" />
+            <Button x:Name="startDownloadButton" Content="Start" Margin="0,0,10,0" Click="StartDownload_Click"/>
+            <TextBlock x:Name="DownloadedInfoText"/>
+            <TextBlock>Download status: <Run x:Name="DownloadedStatusText"/></TextBlock>
+            <ContentDialog x:Name="ReauthorizeDialog" Title="Reauthorize download" PrimaryButtonText="OK" CloseButtonText="Cancel" DefaultButton="Primary">
+                <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <TextBlock Text="The download URL has expired. Enter a new authorization code to resume the download." TextWrapping="Wrap" />
+                    <TextBox InputScope="NumericPin" PlaceholderText="1234" Width="80"/>
+                </StackPanel>
+            </ContentDialog>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

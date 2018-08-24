@@ -210,7 +210,7 @@ namespace ListViewSample
                 VisualStateManager.GoToState(this, MasterDetailsState.Name, true);
             }
         }
-        private void ShowSliptView(object sender, RoutedEventArgs e)
+        private void ShowSplitView(object sender, RoutedEventArgs e)
         { 
             // Clearing the cache
             int cacheSize = ((Frame)Parent).CacheSize;

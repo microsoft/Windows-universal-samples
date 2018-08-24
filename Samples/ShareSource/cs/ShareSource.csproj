@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{CF1CD0D5-BF6B-457A-9927-8079FC667CA4}</ProjectGuid>
+    <ProjectGuid>{50B88A4D-C3D2-5795-ACBF-C018CC31B012}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>ShareSource</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -112,6 +112,9 @@
     <Compile Include="ShareCustomData.xaml.cs">
       <DependentUpon>ShareCustomData.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ShareCustomProvider.xaml.cs">
+      <DependentUpon>ShareCustomProvider.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShareDelayRenderedFiles.xaml.cs">
       <DependentUpon>ShareDelayRenderedFiles.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,11 @@
     </Page>
     <Page Include="..\shared\xaml\ShareCustomData.xaml">
       <Link>ShareCustomData.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\xaml\ShareCustomProvider.xaml">
+      <Link>ShareCustomProvider.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -212,6 +220,9 @@
     <Content Include="..\shared\assets\microsoftLogo.scale-180.png">
       <Link>Assets\microsoftLogo.scale-180.png</Link>
     </Content>
+    <Content Include="..\shared\assets\microsoftLogo.scale-200.png">
+      <Link>Assets\microsoftLogo.scale-200.png</Link>
+    </Content>
     <Content Include="..\shared\assets\visualStudioLogo.scale-100.png">
       <Link>Assets\visualStudioLogo.scale-100.png</Link>
     </Content>
@@ -220,6 +231,9 @@
     </Content>
     <Content Include="..\shared\assets\visualStudioLogo.scale-180.png">
       <Link>Assets\visualStudioLogo.scale-180.png</Link>
+    </Content>
+    <Content Include="..\shared\assets\visualStudioLogo.scale-200.png">
+      <Link>Assets\visualStudioLogo.scale-200.png</Link>
     </Content>
     <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>

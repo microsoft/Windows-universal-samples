@@ -13,6 +13,7 @@ using SDKTemplate;
 using System;
 using System.Threading.Tasks;
 using Windows.Data.Json;
+using Windows.Foundation;
 using Windows.Security.Authentication.Web;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -23,50 +24,60 @@ namespace WebAuthentication
     public sealed partial class Scenario1_Facebook : Page
     {
         private MainPage rootPage = MainPage.Current;
+        bool authzInProgress = false;
 
         public Scenario1_Facebook()
         {
             this.InitializeComponent();
-        }
 
-        private void OutputToken(String TokenUri)
-        {
-            FacebookReturnedToken.Text = TokenUri;
+            // Use these SIDs to register the app with Facebook.
+            WindowsStoreSidTextBlock.Text = WebAuthenticationBroker.GetCurrentApplicationCallbackUri().Host;
+            WindowsPhoneStoreSidTextBlock.Text = "feaebe20-b974-4857-a51c-3525e4dfe2a8"; // copied from Package.appxmanifest
         }
 
         private async void Launch_Click(object sender, RoutedEventArgs e)
         {
-            if (FacebookClientID.Text == "")
+            if (authzInProgress)
             {
-                rootPage.NotifyUser("Please enter an Client ID.", NotifyType.StatusMessage);
-            }
-            else if (FacebookCallbackUrl.Text == "")
-            {
-                rootPage.NotifyUser("Please enter an Callback URL.", NotifyType.StatusMessage);
+                return;
             }
 
+            FacebookReturnedToken.Text = "";
+            FacebookUserName.Text = "";
+
+            if (String.IsNullOrEmpty(FacebookClientID.Text))
+            {
+                rootPage.NotifyUser("Please enter a Client ID.", NotifyType.StatusMessage);
+                return;
+            }
+
+            Uri callbackUri;
+            if (!Uri.TryCreate(FacebookCallbackUrl.Text, UriKind.Absolute, out callbackUri))
+            {
+                rootPage.NotifyUser("Please enter a Callback URL.", NotifyType.StatusMessage);
+                return;
+            }
+
+            Uri facebookStartUri = new Uri($"https://www.facebook.com/dialog/oauth?client_id={Uri.EscapeDataString(FacebookClientID.Text)}&redirect_uri={Uri.EscapeDataString(callbackUri.AbsoluteUri)}&scope=email&display=popup&response_type=token");
+
+            rootPage.NotifyUser($"Navigating to {facebookStartUri}", NotifyType.StatusMessage);
+
+            authzInProgress = true;
             try
             {
-                String FacebookURL = "https://www.facebook.com/dialog/oauth?client_id=" + Uri.EscapeDataString(FacebookClientID.Text) + "&redirect_uri=" + Uri.EscapeDataString(FacebookCallbackUrl.Text) + "&scope=read_stream&display=popup&response_type=token";
-
-                System.Uri StartUri = new Uri(FacebookURL);
-                System.Uri EndUri = new Uri(FacebookCallbackUrl.Text);
-
-                rootPage.NotifyUser("Navigating to: " + FacebookURL, NotifyType.StatusMessage);
-
-                WebAuthenticationResult WebAuthenticationResult = await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, StartUri, EndUri);
+                WebAuthenticationResult WebAuthenticationResult = await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, facebookStartUri, callbackUri);
                 if (WebAuthenticationResult.ResponseStatus == WebAuthenticationStatus.Success)
                 {
-                    OutputToken(WebAuthenticationResult.ResponseData.ToString());
-                    await GetFacebookUserNameAsync(WebAuthenticationResult.ResponseData.ToString());
+                    FacebookReturnedToken.Text = WebAuthenticationResult.ResponseData;
+                    await GetFacebookUserNameAsync(WebAuthenticationResult.ResponseData);
                 }
                 else if (WebAuthenticationResult.ResponseStatus == WebAuthenticationStatus.ErrorHttp)
                 {
-                    OutputToken("HTTP Error returned by AuthenticateAsync() : " + WebAuthenticationResult.ResponseErrorDetail.ToString());
+                    FacebookReturnedToken.Text = $"HTTP error: {WebAuthenticationResult.ResponseErrorDetail}";
                 }
                 else
                 {
-                    OutputToken("Error returned by AuthenticateAsync() : " + WebAuthenticationResult.ResponseStatus.ToString());
+                    FacebookReturnedToken.Text = $"Error: {WebAuthenticationResult.ResponseStatus}";
                 }
 
             }
@@ -74,42 +85,41 @@ namespace WebAuthentication
             {
                 rootPage.NotifyUser(Error.Message, NotifyType.ErrorMessage);
             }
+
+            authzInProgress = false;
         }
 
         /// <summary>
         /// This function extracts access_token from the response returned from web authentication broker
         /// and uses that token to get user information using facebook graph api. 
         /// </summary>
-        /// <param name="webAuthResultResponseData">responseData returned from AuthenticateAsync result.</param>
-        private async Task GetFacebookUserNameAsync(string webAuthResultResponseData)
+        /// <param name="responseData">responseData returned from AuthenticateAsync result.</param>
+        private async Task GetFacebookUserNameAsync(string responseData)
         {
-            //Get Access Token first
-            string responseData = webAuthResultResponseData.Substring(webAuthResultResponseData.IndexOf("access_token"));
-            String[] keyValPairs = responseData.Split('&');
-            string access_token = null;
-            string expires_in = null;
-            for (int i = 0; i < keyValPairs.Length; i++)
+            var decoder = new WwwFormUrlDecoder(responseData);
+            var error = decoder.TryGetValue("error");
+            if (error != null)
             {
-                String[] splits = keyValPairs[i].Split('=');
-                switch (splits[0])
-                {
-                    case "access_token":
-                        access_token = splits[1]; //you may want to store access_token for further use. Look at Scenario 5 (Account Management).
-                        break;
-                    case "expires_in":
-                        expires_in = splits[1];
-                        break;
-                }
+                FacebookUserName.Text = $"Error: {error}";
+                return;
             }
 
-            rootPage.NotifyUser("access_token = " + access_token, NotifyType.StatusMessage);
-            //Request User info.
-            HttpClient httpClient = new HttpClient();
-            string response = await httpClient.GetStringAsync(new Uri("https://graph.facebook.com/me?access_token=" + access_token));
-            JsonObject value = JsonValue.Parse(response).GetObject();
-            string facebookUserName = value.GetNamedString("name");
+            // You can store access token locally for further use.
+            string access_token = decoder.GetFirstValueByName("access_token");
+            string expires_in = decoder.TryGetValue("expires_in"); // expires_in is optional
 
-            rootPage.NotifyUser(facebookUserName + " is connected!", NotifyType.StatusMessage);
+            HttpClient httpClient = new HttpClient();
+            Uri uri = new Uri($"https://graph.facebook.com/me?access_token={Uri.EscapeDataString(access_token)}");
+            try
+            {
+                string response = await httpClient.GetStringAsync(uri);
+                JsonObject userInfo = JsonObject.Parse(response).GetObject();
+                FacebookUserName.Text = userInfo.GetNamedString("name");
+            }
+            catch (Exception)
+            {
+                FacebookUserName.Text = "Error contacting Facebook";
+            }
         }
     }
 }

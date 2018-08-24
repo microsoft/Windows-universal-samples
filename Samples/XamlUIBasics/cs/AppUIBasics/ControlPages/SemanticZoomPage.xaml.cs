@@ -7,9 +7,9 @@
 // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 //
 //*********************************************************
-using AppUIBasics.Common;
 using AppUIBasics.Data;
 using System.Collections.Generic;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -33,11 +33,16 @@ namespace AppUIBasics.ControlPages
             get { return this._groups; }
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            _groups = await ControlInfoDataSource.GetGroupsAsync();
+            _groups = ControlInfoDataSource.Instance.Groups;
+        }
+
+        private void List_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Control1.StartBringIntoView();
         }
     }
 }

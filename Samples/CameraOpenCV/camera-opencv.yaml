@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Camera frames + OpenCV sample
+  description: Shows how to operate on individual frames with OpenCV.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows
+  vssolution: /Samples/CameraOpenCV/cs/CameraOpenCV.sln

@@ -1,0 +1,49 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario2_deviceConnect.css" />
+    <script src="/js/fx2Driver.js"></script>
+    <script src="/js/deviceList.js"></script>
+    <script src="/js/scenario2_deviceConnect.js"></script>
+</head>
+<body>
+    <div data-win-control="WinJS.Binding.Template" id="deviceConnectDevicesTemplate">
+        <div data-win-bind="innerText: instanceId"></div>
+    </div>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>This scenario shows how to use a Windows.Devices.Enumeration.DeviceWatcher to detect the arrival, and removal, of a device with a custom device interface, and how to open it using the Windows.Devices.Custom.CustomDevice class.</p>
+        <p>The device interface is found using the device interface GUID chosen by the custom driver.  This is defined, along with all other driver-defined constants, in the fx2Driver object (fx2Driver.js).</p>
+        <h2>Select an Fx2 Device:</h2>
+        <button id="device-connect-start" class="win-button">Start Device Watcher</button>
+        <p><button id="device-connect-stop" class="win-button">Stop Device Watcher</button></p>
+        <div>
+            <div 
+                data-win-control="WinJS.UI.ListView" 
+                data-win-options="{itemDataSource: DeviceList.fx2Devices.dataSource, 
+                                   itemTemplate: deviceConnectDevicesTemplate,
+                                   layout:{type:WinJS.UI.ListLayout},
+                                   tapBehavior: 'directSelect'}"
+                id="device-connect-devices"
+                style="height: 200px">
+            </div>
+        </div>
+        <br /><br />
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <div id="device-connect-output"></div>
+    </div>
+</body>
+</html>

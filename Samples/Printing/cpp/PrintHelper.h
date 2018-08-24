@@ -20,6 +20,18 @@ namespace SDKTemplate
         /// <param name="scenarioPage">The scenario page constructing us</param>
         PrintHelper(Page^ scenarioPage);
 
+        /// <summary>
+        /// A list of UIElements used to store the print preview pages.  This gives easy access
+        /// to any desired preview page.
+        /// </summary>
+        property const std::vector<UIElement^>& PrintPreviewPages
+        {
+            const std::vector<UIElement^>& get()
+            {
+                return m_printPreviewPages;
+            }
+        }
+
     public:
         /// <summary>
         /// This function registers the app for printing with Windows and sets up the necessary event handlers for the print process.
@@ -64,30 +76,43 @@ namespace SDKTemplate
         std::vector<UIElement^> m_printPreviewPages;
 
         /// <summary>
-        /// Current requeted page for preview.
+        /// 7.5% margin on each side leaves 85% for content.
         /// </summary>
-        LONG m_currentPage;
+        float m_applicationContentMarginLeft = 0.075f;
 
+        /// <summary>
+        /// 3% margin at top and bottom leaves 94% for content.
+        /// </summary>
+        float m_applicationContentMarginTop = 0.03f;
+        
     protected:
         /// <summary>
-        /// The percent of app's margin width, content is set at 85% (0.85) of the area's width
+        /// The percent of app's margin width
         /// </summary>
         property float ApplicationContentMarginLeft
         {
             float get()
             {
-                return 0.075f;
+                return m_applicationContentMarginLeft;
+            }
+            void set(float value)
+            {
+                m_applicationContentMarginLeft = value;
             }
         }
 
         /// <summary>
-        /// The percent of app's margin height, content is set at 94% (0.94) of tha area's height
+        /// The percent of app's margin height
         /// </summary>
         property float ApplicationContentMarginTop
         {
             float get()
             {
-                return 0.03f;
+                return m_applicationContentMarginTop;
+            }
+            void set(float value)
+            {
+                m_applicationContentMarginTop = value;
             }
         }
 
@@ -137,11 +162,11 @@ namespace SDKTemplate
             }
         }
 
-        property size_t PrintPreviewPages
+        property int PrintPreviewPageCount
         {
-            size_t get()
+            int get()
             {
-                return m_printPreviewPages.size();
+                return static_cast<int>(m_printPreviewPages.size());
             }
         }
 
@@ -170,7 +195,11 @@ namespace SDKTemplate
         /// <param name="e">Paginate Event Arguments</param>
         virtual void CreatePrintPreviewPages(Object^ sender, PaginateEventArgs^ e);
 
-        virtual void OnContentCreated() {};
+        /// <summary>
+        /// This is called after the preview pages have been recreated.
+        /// </summary>
+        /// <param name="printTaskOptions"></param>
+        virtual void OnPreviewPagesCreated(Windows::Graphics::Printing::PrintTaskOptions^ printTaskOptions) {};
 
         /// <summary>
         /// This is the event handler for PrintDocument.GetPrintPreviewPage. It provides a specific print preview page,
@@ -197,11 +226,5 @@ namespace SDKTemplate
         /// <param name="lastRTBOAdded">Last RichTextBlockOverflow element added in the current content</param>
         /// <param name="printPageDescription">Printer's page description</param>
         virtual RichTextBlockOverflow^ AddOnePrintPreviewPage(RichTextBlockOverflow^ lastRTBOAdded, Windows::Graphics::Printing::PrintPageDescription printPageDescription);
-
-        /// <summary>
-        /// Removes a page from the printprreview collection (generated content)
-        /// </summary>
-        /// <param name="pageNumber">The page number to remove</param>
-        void RemovePageFromPrintPreviewCollection(int pageNumber);
     };
 }

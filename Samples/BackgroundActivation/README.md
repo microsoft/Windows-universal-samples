@@ -5,9 +5,16 @@
 
 # Background activation sample
 
-This sample shows you how to create and register background tasks that will run in the main process using the Windows Runtime background task API.
+Shows how to create and register background tasks that will run in the main process using the Windows Runtime background task API.
 
-**Note** This Universal Windows app sample requires Visual Studio 2015 to build and Windows 10 Anniversay Update to execute.
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+**Note** This Universal Windows app sample requires Visual Studio 2017 to build and Windows 10 Anniversay Update to execute.
 
 A background task is triggered by a system or time event and can be constrained by one or more conditions. When a background task is triggered, OnBackgroundActivated is invoked and performs the work of the background task. A background task can run even when the app that registered the background task is suspended or not running.
 
@@ -23,6 +30,7 @@ This sample demonstrates the following:
 -   Using a deferral object to include asynchronous code in your background task.
 -   Handling the cancellation of a background task, and ensuring the task is cancelled when required conditions are no longer met.
 -   Initializing background task progress and completion handlers when the app is launched.
+-   Registering a background task in a Background Task Registration Group.
 
 This sample uses the Single Process Model method for background activity. Applications can also use the Multiple Process Model method for running Background Tasks in a separate process from the foreground application.
 
@@ -30,27 +38,23 @@ This sample uses the Single Process Model method for background activity. Applic
 
 ### Samples
 
-[Background Tasks](/Samples/BackgroundTasks)
-
+[Background Tasks](/Samples/BackgroundTasks)  
 [Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)  
 
 ### Reference
 
-[Launching, resuming, and multitasking](http://msdn.microsoft.com/library/windows/apps/hh770837)
-
-[Managing background tasks](http://msdn.microsoft.com/library/windows/apps/hh977053)
-
-[Support your app with background tasks](https://msdn.microsoft.com/library/windows/apps/mt299103)
+[Launching, resuming, and multitasking](http://msdn.microsoft.com/library/windows/apps/hh770837)  
+[Managing background tasks](http://msdn.microsoft.com/library/windows/apps/hh977053)  
+[Support your app with background tasks](https://msdn.microsoft.com/library/windows/apps/mt299103)  
 
 **API reference**
 
-[**Windows.ApplicationModel.Background (XAML)**](http://msdn.microsoft.com/library/windows/apps/br224847)
-
-[**Windows.UI.WebUI.WebUIBackgroundTaskInstance (HTML)**](http://msdn.microsoft.com/library/windows/apps/hh701740)
+[Windows.ApplicationModel.Background (XAML)](http://msdn.microsoft.com/library/windows/apps/br224847)  
+[Windows.UI.WebUI.WebUIBackgroundTaskInstance (HTML)](http://msdn.microsoft.com/library/windows/apps/hh701740)  
 
 ### Related technologies
 
-[**Windows.ApplicationModel.Background**](http://msdn.microsoft.com/library/windows/apps/br224847)
+[Windows.ApplicationModel.Background](http://msdn.microsoft.com/library/windows/apps/br224847)  
 
 ## Operating system requirements
 
@@ -69,8 +73,8 @@ Windows Phone 10 Anniversary Update
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio 2015 Solution (.sln) file.
+2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
@@ -85,7 +89,7 @@ Windows Phone 10 Anniversary Update
 
 **Triggering background tasks**
 
-To trigger the background tasks associated with the `TimeZoneChange` event:
+To trigger the background tasks associated with the TimeZoneChange event:
 
 1.  Change date and time settings.
 2.  Click **Change time zone...**

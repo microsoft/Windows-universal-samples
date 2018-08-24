@@ -26,11 +26,14 @@ namespace AppUIBasics.ControlPages
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            RadioButton rb = sender as RadioButton;
-            if (rb != null && Control1 != null)
+            if (sender is RadioButton rb && Control1 != null)
             {
                 string orientationName = rb.Tag.ToString();
-                OrientationLabel.Text = orientationName;
+                if (OrientationLabel != null)
+                {
+                    OrientationLabel.Text = orientationName;
+                }
+
                 switch (orientationName)
                 {
                     case "Horizontal":

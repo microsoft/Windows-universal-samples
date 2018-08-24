@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Video playback synchronization sample
+  description: Shows how to use the MediaTimelineController class to synchronize multiple videos by assigning the controller to multiple MediaPlayer instances.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows
+  vssolution: /Samples/VideoPlaybackSynchronization/cs/VideoPlaybackSynchronization.sln

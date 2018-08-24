@@ -5,7 +5,15 @@
 
 # Device enumeration and pairing sample
 
-This sample shows how to use the Windows.Devices.Enumeration APIs find devices internally connected to the system, externally connected, or nearby over wireless or networking protocols and get information about them.  It also shows how to pair wireless and networking devices with the system. 
+Shows how to use the Windows.Devices.Enumeration APIs find devices internally connected to the system, externally connected, 
+or nearby over wireless or networking protocols and get information about them.  It also shows how to pair wireless and networking devices with the system. 
+
+> **Note:** This sample is part of a large collection of UWP feature samples. 
+> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 The sample demonstrates eight scenarios:
 
@@ -32,14 +40,8 @@ The sample demonstrates eight scenarios:
 
 ### Reference
 
-<!-- Add links to related API -->
-
-[**Enumerating devices article**](http://msdn.microsoft.com/en-us/library/windows/apps/Hh464977)
-
-[**Windows.Devices.Enumeration reference**](http://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.enumeration.aspx)
-
-[**Windows Universal App Samples**](https://github.com/Microsoft/Windows-universal-samples)
-
+[Enumerating devices article](http://msdn.microsoft.com/library/windows/apps/Hh464977)  
+[Windows.Devices.Enumeration namespace](http://msdn.microsoft.com/library/windows/apps/windows.devices.enumeration.aspx)  
 
 ## System requirements
 
@@ -52,7 +54,7 @@ The sample demonstrates eight scenarios:
 
 ## Build the sample
 
-1.  Start Visual Studio 2015 and select **File** \> **Open** \> **Project/Solution**.
+1.  Start Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
 2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C\#, or JavaScript. Double-click the Visual Studio Solution (.sln) file.
 3.  Select the appropriate target: x86, x64, ARM. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 

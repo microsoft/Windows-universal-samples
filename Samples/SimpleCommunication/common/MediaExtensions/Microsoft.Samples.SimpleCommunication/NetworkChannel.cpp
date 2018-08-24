@@ -57,7 +57,7 @@ Windows::Foundation::IAsyncAction ^CNetworkChannel::SendAsync(_In_ IBufferPacket
         throw ref new InvalidArgumentException();
     }
 
-    return concurrency::create_async([this, pPacket](){
+    return concurrency::create_async([this, spPacket = ComPtr<IBufferPacket>(pPacket)](){
         AutoLock lock(_critSec);
         CheckClosed();
         IStreamSocket ^socket = GetSocket();
@@ -68,7 +68,7 @@ Windows::Foundation::IAsyncAction ^CNetworkChannel::SendAsync(_In_ IBufferPacket
 
         auto outputStream = socket->OutputStream;
         ComPtr<IBufferEnumerator> spEn;
-        ThrowIfError(pPacket->GetEnumerator(&spEn));
+        ThrowIfError(spPacket->GetEnumerator(&spEn));
         if (!spEn->IsValid())
         {
             // Packet is empty

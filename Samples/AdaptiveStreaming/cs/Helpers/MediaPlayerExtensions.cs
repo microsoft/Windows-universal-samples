@@ -38,7 +38,33 @@ namespace SDKTemplate.Helpers
 
                 var item = mediaPlayer.Source as MediaPlaybackItem;
                 if (item != null && item.Source != null)
+                {
+                    if (item.BreakSchedule.PrerollBreak != null)
+                    {
+                        foreach (var mpItem in item.BreakSchedule.PrerollBreak.PlaybackList.Items)
+                        {
+                            mpItem.Source?.Dispose();
+                        } 
+                    }
+                    if (item.BreakSchedule.MidrollBreaks.Count != 0)
+                    {
+                        foreach (var mrBreak in item.BreakSchedule.MidrollBreaks)
+                        {
+                            foreach (var mpItem in mrBreak.PlaybackList.Items)
+                            {
+                                mpItem.Source?.Dispose();
+                            }
+                        }
+                    }
+                    if (item.BreakSchedule.PostrollBreak != null)
+                    {
+                        foreach (var mpItem in item.BreakSchedule.PostrollBreak.PlaybackList.Items)
+                        {
+                            mpItem.Source?.Dispose();
+                        }
+                    }
                     item.Source.Dispose();
+                }
             };
             mediaPlayer.Source = null;
         }

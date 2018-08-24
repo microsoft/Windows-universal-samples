@@ -113,7 +113,7 @@
             if (previewSettings.value == "")
                 return;
             console.log(previewSettings.value)
-            mediaCapture.videoDeviceController.setMediaStreamPropertiesAsync(Capture.MediaStreamType.videoPreview, previewProperties[previewSettings.value]);
+            setMediaStreamPropertiesAsync(mediaCapture, Capture.MediaStreamType.videoPreview, previewProperties[previewSettings.value]);
 
             // The preview just changed, update the video combo box
             MatchPreviewAspectRatio();
@@ -128,7 +128,7 @@
             // The first element is just text
             if (videoSettings.value == "")
                 return;
-            mediaCapture.videoDeviceController.setMediaStreamPropertiesAsync(Capture.MediaStreamType.videoRecord, videoProperties[videoSettings.value]);
+            setMediaStreamPropertiesAsync(mediaCapture, Capture.MediaStreamType.videoRecord, videoProperties[videoSettings.value]);
         }
     }
 

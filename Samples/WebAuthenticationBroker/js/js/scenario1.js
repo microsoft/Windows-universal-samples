@@ -2,125 +2,109 @@
 
 (function () {
     "use strict";
+
+    var WebAuthenticationBroker = Windows.Security.Authentication.Web.WebAuthenticationBroker;
+    var WebAuthenticationOptions = Windows.Security.Authentication.Web.WebAuthenticationOptions;
+    var WebAuthenticationStatus = Windows.Security.Authentication.Web.WebAuthenticationStatus;
+
+    var facebookUserName;
+    var facebookClientID;
+    var facebookCallbackURL;
+    var facebookReturnedToken;
+
     var page = WinJS.UI.Pages.define("/html/scenario1.html", {
         ready: function (element, options) {
+            facebookUserName = document.getElementById("facebookUserName");
+            facebookClientID = document.getElementById("facebookClientID");
+            facebookCallbackURL = document.getElementById("facebookCallbackURL");
+            facebookReturnedToken = document.getElementById("facebookReturnedToken");
+
             document.getElementById("oAuthFacebookLaunch").addEventListener("click", launchFacebookWebAuth, false);
-            
-            // Continuation handlers are specific to Windows Phone.
-            if (options && options.activationKind === Windows.ApplicationModel.Activation.ActivationKind.webAuthenticationBrokerContinuation) {
-                continueWebAuthentication(options.activatedEventArgs);
-            }
+
+            // Use these SIDs to register the app with Facebook.
+            document.getElementById("windowsStoreSidText").textValue = WebAuthenticationBroker.getCurrentApplicationCallbackUri().host;
+            document.getElementById("windowsPhoneStoreSidText").textValue = "5119c4a4-bfe3-404f-981b-9ad93ac49802"; // copied from Package.appxmanifest
         }
     });
 
-    function isValidUriString(uriString) {
-        var uri = null;
+    function tryParseUri(uriString) {
         try {
-            uri = new Windows.Foundation.Uri(uriString);
+            return new Windows.Foundation.Uri(uriString);
+        } catch (err) {
+            return null;
         }
-        catch (err) {
-        }
-        return uri !== null;
     }
 
     var authzInProgress = false;
 
     function launchFacebookWebAuth() {
-        var facebookURL = "https://www.facebook.com/dialog/oauth?client_id=";
+        if (authzInProgress) {
+            return;
+        }
 
-        var clientID = document.getElementById("FacebookClientID").value;
+        facebookUserName.textContent = "";
+        facebookReturnedToken.textContent = "";
+
+        var clientID = facebookClientID.value;
         if (clientID === null || clientID === "") {
             WinJS.log("Enter a ClientID", "Web Authentication SDK Sample", "error");
             return;
         }
 
-        var callbackURL = document.getElementById("FacebookCallbackURL").value;
-        if (!isValidUriString(callbackURL)) {
+        var callbackUri = tryParseUri(facebookCallbackURL.value);
+        if (!callbackUri) {
             WinJS.log("Enter a valid Callback URL for Facebook", "Web Authentication SDK Sample", "error");
             return;
         }
 
-        facebookURL += clientID + "&redirect_uri=" + encodeURIComponent(callbackURL) + "&scope=read_stream&display=popup&response_type=token";
+        var facebookStartUri = new Windows.Foundation.Uri(`https://www.facebook.com/dialog/oauth?` +
+            `client_id=${encodeURIComponent(clientID)}&redirect_uri=${encodeURIComponent(callbackUri)}` +
+            `&scope=read_stream&display=popup&response_type=token`);
 
-        if (authzInProgress) {
-            WinJS.log("Authorization already in Progress...", "Web Authentication SDK Sample", "status");
-            return;
-        }
-
-        var startURI = new Windows.Foundation.Uri(facebookURL);
-        var endURI = new Windows.Foundation.Uri(callbackURL);
-
-        WinJS.log("Navigating to: " + facebookURL, "Web Authentication SDK Sample", "status");
+        WinJS.log(`Navigating to ${facebookStartUri}`, "Web Authentication SDK Sample", "status");
 
         authzInProgress = true;
 
-        if (Windows.Security.Authentication.Web.WebAuthenticationBroker.authenticateAndContinue) {
-            Windows.Security.Authentication.Web.WebAuthenticationBroker.authenticateAndContinue(startURI, endURI, null, Windows.Security.Authentication.Web.WebAuthenticationOptions.none);
-        }
-        else {
-            Windows.Security.Authentication.Web.WebAuthenticationBroker.authenticateAsync(
-                Windows.Security.Authentication.Web.WebAuthenticationOptions.none, startURI, endURI)
-                .done(function (result) {
-                    document.getElementById("FacebookReturnedToken").value = result.responseData;
-                    WinJS.log("Status returned by WebAuth broker: " + result.responseStatus, "Web Authentication SDK Sample", "status");
-                    getfacebookUserName(result.responseData);
-                    if (result.responseStatus === Windows.Security.Authentication.Web.WebAuthenticationStatus.errorHttp) {
-                        WinJS.log("Error returned: " + result.responseErrorDetail, "Web Authentication SDK Sample", "error");
-                    }
-                    authzInProgress = false;
-                }, function (err) {
-                    WinJS.log("Error returned by WebAuth broker: " + err, "Web Authentication SDK Sample", "error");
-                    authzInProgress = false;
-                });
-        }
-    }
-
-    //
-    //This function is Continuation handler for Windows Phone App
-    //
-    function continueWebAuthentication(args) {
-        var result = args[0].webAuthenticationResult;
-
-        if (result.responseStatus === Windows.Security.Authentication.Web.WebAuthenticationStatus.success) {
-            document.getElementById("FacebookReturnedToken").value = result.responseData;
-        }
-        else if (result.responseStatus === Windows.Security.Authentication.Web.WebAuthenticationStatus.errorHttp) {
-            document.getElementById("FacebookDebugArea").value += "Error returned: " + result.responseErrorDetail + "\r\n";
-        }
-        else {
-            document.getElementById("FacebookDebugArea").value += "Status returned by WebAuth broker: " + result.responseStatus + "\r\n";
-        }
-        authzInProgress = false;
-
+        WebAuthenticationBroker.authenticateAsync(WebAuthenticationOptions.none, facebookStartUri, callbackUri)
+            .then(function (result) {
+                facebookReturnedToken.textValue = result.responseData;
+                if (result.responseStatus === WebAuthenticationStatus.success) {
+                    return getFacebookUserNameAsync(result.responseData);
+                } else if (result.responseStatus === WebAuthenticationStatus.errorHttp) {
+                    WinJS.log(`HTTP error: ${result.responseErrorDetail}`, "Web Authentication SDK Sample", "error");
+                } else {
+                    WinJS.log(`Error: ${result.responseStatus}`, "Web Authentication SDK Sample", "status");
+                }
+            }, function (err) {
+                WinJS.log("Error returned by WebAuth broker: " + err, "Web Authentication SDK Sample", "error");
+            }).done(function () {
+                authzInProgress = false;
+            });
     }
 
     /// <summary>
     /// This function extracts access_token from the response returned from web authentication broker
     /// and uses that token to get user information using facebook graph api. 
     /// </summary>
-    function getfacebookUserName(webAuthResultResponseData) {
-
-        var responseData = webAuthResultResponseData.substring(webAuthResultResponseData.indexOf("access_token"));
-        var keyValPairs = responseData.split("&");
-        var access_token;
-        var expires_in;
-        for (var i = 0; i < keyValPairs.length; i++) {
-            var splits = keyValPairs[i].split("=");
-            switch (splits[0]) {
-                case "access_token":
-                    access_token = splits[1]; //You can store access token locally for further use. See "Account Management" scenario for usage.
-                    break;
-                case "expires_in":
-                    expires_in = splits[1];
-                    break;
-            }
+    function getFacebookUserNameAsync(responseData) {
+        var decoder = new Windows.Foundation.WwwFormUrlDecoder(responseData);
+        var error = SdkSample.tryGetFormValue(decoder, "error");
+        if (error) {
+            facebookUserName.textContent = `Error: ${error}`;
+            return;
         }
 
-        document.getElementById("FacebookDebugArea").value += "\r\naccess_token = " + access_token + "\r\n";
+        // You can store access token locally for further use.
+        var access_token = decoder.getFirstValueByName("access_token");
+        var expires_in = SdkSample.tryGetFormValue(decoder, "expires_in"); // expires_in is optional
+
         var client = new Windows.Web.Http.HttpClient();
-        client.getStringAsync(new Windows.Foundation.Uri("https://graph.facebook.com/me?access_token=" + access_token)).done(function (result) {
+        var uri = new Windows.Foundation.Uri(`https://graph.facebook.com/me?access_token=${encodeURIComponent(access_token)}`);
+        return client.getStringAsync(uri).then(function (result) {
             var userInfo = JSON.parse(result);
-            document.getElementById("FacebookDebugArea").value += userInfo.name + " is connected!! \r\n";
+            facebookUserName.textContent = userInfo.name;
+        }, function (err) {
+            facebookUserName.textContent = "Error contacting Facebook";
         });
     }
 })();

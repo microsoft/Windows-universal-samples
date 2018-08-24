@@ -16,7 +16,9 @@ using namespace SDKTemplate;
 using namespace Platform;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
+using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml;
+using namespace Windows::UI::Xaml::Automation::Peers;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Controls::Primitives;
 using namespace Windows::UI::Xaml::Data;
@@ -99,6 +101,21 @@ void MainPage::ScenarioControl_SelectionChanged(Object^ sender, SelectionChanged
 
 void MainPage::NotifyUser(String^ strMessage, NotifyType type)
 {
+    if (Dispatcher->HasThreadAccess)
+    {
+        UpdateStatus(strMessage, type);
+    }
+    else
+    {
+        Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([strMessage, type, this]()
+        {
+            UpdateStatus(strMessage, type);
+        }));
+    }
+}
+
+void MainPage::UpdateStatus(String^ strMessage, NotifyType type)
+{
     switch (type)
     {
     case NotifyType::StatusMessage:
@@ -110,6 +127,7 @@ void MainPage::NotifyUser(String^ strMessage, NotifyType type)
     default:
         break;
     }
+
     StatusBlock->Text = strMessage;
 
     // Collapse the StatusBlock if it has no text to conserve real estate.
@@ -123,6 +141,13 @@ void MainPage::NotifyUser(String^ strMessage, NotifyType type)
         StatusBorder->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
         StatusPanel->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
     }
+
+	// Raise an event if necessary to enable a screen reader to announce the status update.
+	auto peer = dynamic_cast<FrameworkElementAutomationPeer^>(FrameworkElementAutomationPeer::FromElement(StatusBlock));
+	if (peer != nullptr)
+	{
+		peer->RaiseAutomationEvent(AutomationEvents::LiveRegionChanged);
+	}
 }
 
 void MainPage::Footer_Click(Object^ sender, RoutedEventArgs^ e)

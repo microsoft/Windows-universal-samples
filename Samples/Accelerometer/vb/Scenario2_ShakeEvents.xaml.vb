@@ -8,7 +8,6 @@
 ' PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 '
 '*********************************************************
-' Windows Store code
 Imports Windows.Devices.Sensors
 Imports Windows.UI.Core
 

@@ -30,6 +30,12 @@ using namespace Windows::UI::Xaml::Navigation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=402347&clcid=0x409
 
+// These placeholder functions are used if the sample does not
+// implement the corresponding methods. This allows us to simulate
+// C# partial methods in C++.
+
+static void Partial_Construct() { }
+
 /// <summary>
 /// Initializes the singleton application object.  This is the first line of authored code
 /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -37,6 +43,7 @@ using namespace Windows::UI::Xaml::Navigation;
 App::App()
 {
     InitializeComponent();
+    Partial_Construct();
     Suspending += ref new Windows::UI::Xaml::SuspendingEventHandler(this, &SDKTemplate::App::OnSuspending);
 }
 

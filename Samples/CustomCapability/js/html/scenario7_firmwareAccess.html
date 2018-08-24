@@ -1,0 +1,44 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/js/scenario7_firmwareAccess.js"></script>
+</head>
+<body>
+    <div>
+        <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+        <div id="scenarioDescription">
+            This scenario reads from the system firmware.
+        </div>
+
+        <p>
+            With the "smbios" restricted capability, you can retrieve SMBIOS data using the
+            <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms724379(v=vs.85).aspx">GetSystemFirmwareTable</a>
+            function.
+        </p>
+        <p><button class="win-button" id="manufacturer-name">Get Manufacturer Name</button></p>
+        <p>Manufacturer Name: <span id="manufacturer-name-output"></span></p>
+
+        <p>
+            With the "microsoft.firmwareRead_cw5n1h2txyewy" custom capability,
+            you can read UEFI variables using the
+            <a href="https://docs.microsoft.com/en-us/windows/desktop/api/winbase/nf-winbase-getfirmwareenvironmentvariablew">GetFirmwareEnvironmentVariable</a>
+            function.
+        </p>
+        <p><button class="win-button" id="secure-boot-status">Check secure boot</button></p>
+        <p>Secure boot state: <span id="secure-boot-status-output"></span></p>
+    </div>
+</body>
+</html>

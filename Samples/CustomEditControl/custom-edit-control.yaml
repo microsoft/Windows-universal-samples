@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Custom Edit Control sample
+  description: Shows how to use the CoreTextEditContext class in the Windows.UI.Text.Core namespace to create a rudimentary text control.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows
+  vssolution: /Samples/CustomEditControl/cs/CustomEditControl.sln

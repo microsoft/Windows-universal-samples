@@ -38,16 +38,6 @@ namespace SDKTemplate
             InitializeComponent();
         }
 
-        private void PlayButton_Click(object sender, RoutedEventArgs e)
-        {
-            ClickToPlaySource.Play();
-        }
-
-        private void StopButton_Click(object sender, RoutedEventArgs e)
-        {
-            ClickToPlaySource.Stop();
-        }
-
         private void ClickToPlaySource_ImageOpened(object sender, RoutedEventArgs e)
         {
             // Once ImageOpened is raised, we can query whether an image is animated.

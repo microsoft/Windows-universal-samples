@@ -1,0 +1,17 @@
+### YamlMime:Sample
+sample:
+- name: File access sample
+  description: Shows how to create, read, write, copy and delete a file, how to retrieve file properties, and how to track a file or folder so that your app can access it again.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  technologies:
+  - windows
+  vssolution: /Samples/FileAccess/cs/FileAccess.sln

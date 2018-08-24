@@ -1,0 +1,35 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Setup"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Who can receive a notification?" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                In order to receive a taskbar notification, the receiver must have the sender pinned to their taskbar.
+                Select "Pin sample contact" to pin a sample contact to your taskbar so the sample can send My People notifications to it.
+            </TextBlock>
+            <Button Content="Pin sample contact" Click="Pin_Click" Margin="0,10,0,0"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                Select "Clean up" to unpin and delete the contact from your address book.
+            </TextBlock>
+            <Button Content="Clean up" Click="Cleanup_Click" Margin="0,10,0,0"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

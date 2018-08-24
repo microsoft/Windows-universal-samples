@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: XAML Controls Gallery (aka XamlUiBasics)
+  description: Shows all of the XAML controls in an interactive format.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows
+  vssolution: /Samples/XamlUIBasics/cs/AppUIBasics/AppUIBasics.sln

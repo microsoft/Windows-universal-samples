@@ -15,6 +15,8 @@
     });
 
     function dataRequested(e) {
+        SdkSample.registerForShareCompletion(e);
+
         var request = e.request;
 
         // Title is required

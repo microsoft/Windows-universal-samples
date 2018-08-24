@@ -21,6 +21,7 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Share delay rendered files", "SDKTemplate.ShareDelayRenderedFiles" },
     { "Share HTML content",         "SDKTemplate.ShareHtml" },
     { "Share custom data",          "SDKTemplate.ShareCustomData" },
+    { "Share with custom provider", "SDKTemplate.ShareCustomProvider" },
     { "Fail with display text",     "SDKTemplate.SetErrorMessage" }
 };
 

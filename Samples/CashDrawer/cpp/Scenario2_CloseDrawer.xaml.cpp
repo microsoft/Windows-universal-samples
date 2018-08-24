@@ -123,28 +123,35 @@ void Scenario2_CloseDrawer::WaitForDrawerCloseButton_Click(Object^ sender, Route
         return;
     }
 
-    TimeSpan alarmTimeSpan;
-    alarmTimeSpan.Duration = 300000000L;    // 30 second alarm timeout
-    alarm->AlarmTimeout = alarmTimeSpan;
-
-    alarmTimeSpan.Duration = 30000000L;     // 3 second delay
-    alarm->BeepDelay = alarmTimeSpan;
-
-    alarmTimeSpan.Duration = 10000000L;     // 1 second duration
-    alarm->BeepDuration = alarmTimeSpan;
-
-    alarm->BeepFrequency = 700;
-    alarm->AlarmTimeoutExpired += ref new TypedEventHandler<CashDrawerCloseAlarm^, Platform::Object^>(this, &Scenario2_CloseDrawer::drawer_AlarmExpired);
-
-    rootPage->NotifyUser("Waiting for drawer to close.", NotifyType::StatusMessage);
-
-    create_task(alarm->StartAsync()).then([this](bool success)
+    if (!claimedDrawer->IsDrawerOpen)
     {
-        if (success)
-            rootPage->NotifyUser("Successfully waited for drawer close.", NotifyType::StatusMessage);
-        else
-            rootPage->NotifyUser("Failed to wait for drawer close.", NotifyType::ErrorMessage);
-    });
+        rootPage->NotifyUser("Drawer is already closed.", NotifyType::StatusMessage);
+    }
+    else
+    {
+        TimeSpan alarmTimeSpan;
+        alarmTimeSpan.Duration = 300000000L;    // 30 second alarm timeout
+        alarm->AlarmTimeout = alarmTimeSpan;
+
+        alarmTimeSpan.Duration = 30000000L;     // 3 second delay
+        alarm->BeepDelay = alarmTimeSpan;
+
+        alarmTimeSpan.Duration = 10000000L;     // 1 second duration
+        alarm->BeepDuration = alarmTimeSpan;
+
+        alarm->BeepFrequency = 700;
+        alarm->AlarmTimeoutExpired += ref new TypedEventHandler<CashDrawerCloseAlarm^, Platform::Object^>(this, &Scenario2_CloseDrawer::drawer_AlarmExpired);
+
+        rootPage->NotifyUser("Waiting for drawer to close.", NotifyType::StatusMessage);
+
+        create_task(alarm->StartAsync()).then([this](bool success)
+        {
+            if (success)
+                rootPage->NotifyUser("Successfully waited for drawer close.", NotifyType::StatusMessage);
+            else
+                rootPage->NotifyUser("Failed to wait for drawer close.", NotifyType::ErrorMessage);
+        });
+    }
 }
 
 
@@ -156,7 +163,7 @@ task<bool> Scenario2_CloseDrawer::CreateDefaultCashDrawerObject()
 {
     rootPage->NotifyUser("Creating cash drawer object.", NotifyType::StatusMessage);
 
-    return create_task(CashDrawer::GetDefaultAsync()).then([this](CashDrawer^ defaultDrawer)
+    return DeviceHelpers::GetFirstCashDrawerAsync().then([this](CashDrawer^ defaultDrawer)
     {
         if (defaultDrawer == nullptr)
             return false;

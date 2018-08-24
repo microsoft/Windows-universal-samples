@@ -123,18 +123,21 @@
                              xsi:schemaLocation='http://www.w3.org/2001/10/synthesis  http://www.w3.org/TR/speech-synthesis/synthesis.xsd' 
                              xml:lang='en-GB'&gt;
 
-This is an example of a phonetic pronunciation:
+&lt;mark name='phonetic'/&gt;This is an example of a phonetic pronunciation:
 &lt;phoneme alphabet='x-microsoft-ups' ph='S1 W AA T . CH AX . M AX . S2 K AA L . IH T'&gt; whatchamacallit &lt;/phoneme&gt;.
 
-This is an example of a date:
+&lt;mark name='date'/&gt;This is an example of a date:
 &lt;say-as interpret-as='date' format='mdy'&gt; 04/30/2013 &lt;/say-as&gt;.
 
-This is an example of an ordinal number:
+&lt;mark name='number'/&gt;This is an example of an ordinal number:
 &lt;say-as interpret-as='ordinal'&gt; 4 &lt;/say-as&gt;.
-
+&lt;mark name='end'/&gt;
 &lt;/speak&gt;</value>
   </data>
   <data name="SynthesizeTextDefaultText" xml:space="preserve">
-    <value>The Quick Red Fox Jumped Over The Lazy Brown Dog</value>
+    <value>The quick red fox jumped over the lazy brown dog</value>
+  </data>
+  <data name="SynthesizeTextBoundariesDefaultText" xml:space="preserve">
+    <value>Using only your voice, you can start programs, open menus, click buttons and other objects on the screen, dictate text into documents, and write and send emails. Just about everything you do with your keyboard and mouse can be done with only your voice.</value>
   </data>
 </root>

@@ -27,7 +27,7 @@ namespace AppUIBasics.ControlPages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Button b = sender as Button;
-            
+
             if (b != null)
             {
                 string name = b.Name;
@@ -46,8 +46,8 @@ namespace AppUIBasics.ControlPages
                     case "Button4":
                         Control4Output.Text = "You clicked: " + name;
                         break;
-                } 
-            }   
+                }
+            }
         }
     }
 }

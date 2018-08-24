@@ -29,15 +29,19 @@ namespace AppUIBasics.ControlPages
         {
             this.InitializeComponent();
 
-            List<string> calendarIdentifiers = new List<string>();
-            var cidmethods = typeof(CalendarIdentifiers).GetRuntimeMethods();
-            foreach (var m in cidmethods)
+            List<string> calendarIdentifiers = new List<string>()
             {
-                if (m.Name.Substring(0, 4) == "get_")
-                {
-                    calendarIdentifiers.Add(m.Invoke(null, null).ToString());
-                }
-            }
+                CalendarIdentifiers.Gregorian,
+                CalendarIdentifiers.Hebrew,
+                CalendarIdentifiers.Hijri,
+                CalendarIdentifiers.Japanese,
+                CalendarIdentifiers.Julian,
+                CalendarIdentifiers.Korean,
+                CalendarIdentifiers.Persian,
+                CalendarIdentifiers.Taiwan,
+                CalendarIdentifiers.Thai,
+                CalendarIdentifiers.UmAlQura,
+            };
 
             calendarIdentifier.ItemsSource = calendarIdentifiers;
             calendarIdentifier.SelectedItem = CalendarIdentifiers.Gregorian;

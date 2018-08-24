@@ -33,7 +33,6 @@ namespace SDKTemplate
             this.Init();
         }
 
-        
         void Init()
         {
             CopyButton.Click += new RoutedEventHandler(CopyButton_Click);
@@ -41,8 +40,6 @@ namespace SDKTemplate
             CopyWithDelayedRenderingButton.Click += new RoutedEventHandler(CopyWithDelayedRenderingButton_Click);
         }
 
-        
-        
         void CopyButton_Click(object sender, RoutedEventArgs e)
         {
             this.CopyBitmap(false);
@@ -90,8 +87,6 @@ namespace SDKTemplate
             }
         }
 
-        
-        
         async private void OnDeferredImageRequestedHandler(DataProviderRequest request, StorageFile imageFile)
         {
             if (imageFile != null)
@@ -182,6 +177,5 @@ namespace SDKTemplate
                 textBlock.Text += Environment.NewLine + msg;
             });
         }
-
     }
 }

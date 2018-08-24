@@ -28,7 +28,7 @@ namespace SDKTemplate
     ref class CustomOptionsPrintHelper sealed : public PrintHelper
     {
     public:
-        CustomOptionsPrintHelper(Page^ scenarioPage) : PrintHelper(scenarioPage) { }
+        CustomOptionsPrintHelper(Page^ scenarioPage);
 
     protected:
         /// <summary>
@@ -98,6 +98,18 @@ namespace SDKTemplate
         /// Helper function used to triger a preview refresh
         /// </summary>
         void RefreshPreview();
+
+        /// <summary>
+        /// Helper function used to set the top and left margins based on used selection
+        /// </summary>
+        /// <param name="marginsValue">The Id of the option selected by the user</param>
+        void SetMargins(Platform::String^ marginsValue);
+
+        Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStreamWithContentType^>^ m_wideMarginsIconAsyncOperation;
+        Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStreamWithContentType^>^ m_moderateMarginsIconAsyncOperation;
+        Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStreamWithContentType^>^ m_narrowMarginsIconAsyncOperation;
+
+        bool m_showHeader;
     };
 
     /// <summary>

@@ -1,0 +1,177 @@
+Acadia National Park
+44.35
+-68.21
+National Park of American Samoa
+-14.25
+-170.68
+Arches National Park
+38.68
+-109.57
+Badlands National Park
+43.75
+-102.50
+Big Bend National Park
+29.25
+-103.25
+Biscayne National Park
+25.65
+-80.08
+Black Canyon of the Gunnison National Park
+38.57
+-107.72
+Bryce Canyon National Park
+37.57
+-112.18
+Canyonlands National Park
+38.2
+-109.93
+Capitol Reef National Park
+38.20
+-111.17
+Carlsbad Caverns National Park
+32.17
+-104.44
+Channel Islands National Park
+34.01
+-119.42
+Congaree National Park
+33.78
+-80.78
+Crater Lake National Park
+42.94
+-122.1
+Cuyahoga Valley National Park
+41.24
+-81.55
+Death Valley National Park
+36.24
+-116.82
+Denali National Park and Preserve
+63.33
+-150.50
+Dry Tortugas National Park
+24.63
+-82.87
+Everglades National Park
+25.32
+-80.93
+Gates of the Arctic National Park and Preserve
+67.78
+-153.30
+Glacier National Park
+48.80
+-114.00
+Glacier Bay National Park and Preserve
+58.50
+-137.00
+Grand Canyon National Park
+36.06
+-112.14
+Grand Teton National Park
+43.73
+-110.80
+Great Basin National Park
+38.98
+-114.30
+Great Sand Dunes National Park and Preserve
+37.73
+-105.51
+Great Smoky Mountains National Park
+35.68
+-83.53
+Guadalupe Mountains National Park
+31.92
+-104.87
+Haleakala National Park
+20.72
+-156.17
+Hawaii Volcanoes National Park
+19.38
+-155.20
+Hot Springs National Park
+34.51
+-93.05
+Isle Royale National Park
+48.10
+-88.55
+Joshua Tree National Park
+33.79
+-115.90
+Katmai National Park and Preserve
+58.50
+-155.00
+Kenai Fjords National Park
+59.92
+-149.65
+Kings Canyon National Park
+36.80
+-118.55
+Kobuk Valley National Park
+67.55
+-159.28
+Lake Clark National Park and Preserve
+60.97
+-153.42
+Lassen Volcanic National Park
+40.49
+-121.51
+Mammoth Cave National Park
+37.18
+-86.10
+Mesa Verde National Park
+37.18
+-108.49
+Mount Rainier National Park
+46.85
+-121.75
+North Cascades National Park
+48.70
+-121.20
+Olympic National Park
+47.97
+-123.50
+Petrified Forest National Park
+35.07
+-109.78
+Pinnacles National Park
+36.48
+-121.16
+Redwood National and State Parks
+41.30
+-124.00
+Rocky Mountain National Park
+40.40
+-105.58
+Saguaro National Park
+32.25
+-110.50
+Sequoia National Park
+36.43
+-118.68
+Shenandoah National Park
+38.53
+-78.35
+Theodore Roosevelt National Park
+46.97
+-103.45
+Virgin Islands National Park
+18.33
+-64.73
+Voyageurs National Park
+48.50
+-92.88
+Wind Cave National Park
+43.57
+-103.48
+Wrangell-St. Elias National Park and Preserve
+61.00
+-142.00
+Yellowstone National Park
+44.60
+-110.50
+Yosemite National Park
+37.83
+-119.50
+Zion National Park
+37.30
+-113.05

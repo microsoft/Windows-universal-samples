@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Disabling selection sample
+  description: Shows how your app can make content areas in your JavaScript app unselectable using the -ms-user-select CSS attribute.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - js
+  technologies:
+  - windows
+  vssolution: /Samples/UserSelection/js/UserSelection.sln

@@ -1,0 +1,18 @@
+### YamlMime:Sample
+sample:
+- name: Basic camera app sample
+  description: Provides an end-to-end sample to show how to write a camera application using the Windows.Media.Capture API in conjunction with orientation sensors to cover the functions that most camera apps will require.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - cpp
+  - js
+  - vb
+  technologies:
+  - windows
+  vssolution: /Samples/CameraStarterKit/cs/CameraStarterKit.sln

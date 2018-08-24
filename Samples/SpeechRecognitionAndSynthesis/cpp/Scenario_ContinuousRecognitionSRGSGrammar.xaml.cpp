@@ -454,7 +454,7 @@ Windows::UI::Color Scenario_ContinuousRecognitionSRGSGrammar::getColor(Platform:
 void Scenario_ContinuousRecognitionSRGSGrammar::PopulateLanguageDropdown()
 {    
     // disable callback temporarily.
-    cbLanguageSelection->SelectionChanged -= cbLanguageSelectionSelectionChangedToken;
+    isPopulatingLanguages = true;
 
     Windows::Globalization::Language^ defaultLanguage = SpeechRecognizer::SystemSpeechLanguage;
     auto supportedLanguages = SpeechRecognizer::SupportedGrammarLanguages;
@@ -471,9 +471,8 @@ void Scenario_ContinuousRecognitionSRGSGrammar::PopulateLanguageDropdown()
             cbLanguageSelection->SelectedItem = item;
         }
     });    
-    
-    cbLanguageSelectionSelectionChangedToken = cbLanguageSelection->SelectionChanged +=
-        ref new SelectionChangedEventHandler(this, &Scenario_ContinuousRecognitionSRGSGrammar::cbLanguageSelection_SelectionChanged);
+
+    isPopulatingLanguages = false;
 }
 
 /// <summary>
@@ -481,6 +480,11 @@ void Scenario_ContinuousRecognitionSRGSGrammar::PopulateLanguageDropdown()
 /// </summary>
 void Scenario_ContinuousRecognitionSRGSGrammar::cbLanguageSelection_SelectionChanged(Object^ sender, SelectionChangedEventArgs^ e)
 {
+    if (isPopulatingLanguages)
+    {
+        return;
+    }
+
     ComboBoxItem^ item = (ComboBoxItem^)(cbLanguageSelection->SelectedItem);
     Windows::Globalization::Language^ newLanguage = (Windows::Globalization::Language^)item->Tag;
 

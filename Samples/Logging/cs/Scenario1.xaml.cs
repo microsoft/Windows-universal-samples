@@ -9,12 +9,11 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace LoggingCS
+namespace SDKTemplate
 {
     public sealed partial class Scenario1 : Page
     {

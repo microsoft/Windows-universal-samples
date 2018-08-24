@@ -1,0 +1,17 @@
+### YamlMime:Sample
+sample:
+- name: Bluetooth advertisement sample
+  description: Shows how to use the Bluetooth Advertisement API to send and receive Bluetooth Low Energy advertisements.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  - js
+  - vb
+  technologies:
+  - windows
+  vssolution: /Samples/BluetoothAdvertisement/cs/BluetoothAdvertisement.sln

@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Holographic face tracking sample
+  description: Shows how to acquire video frames from the photo/video (PV) camera and use the FaceAnalysis API to determine if there are any faces in front of the HoloLens.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - cpp
+  technologies:
+  - windows
+  vssolution: /Samples/HolographicFaceTracking/cpp/HolographicFaceTracking.sln

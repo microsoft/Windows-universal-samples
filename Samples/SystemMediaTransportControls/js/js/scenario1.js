@@ -118,7 +118,7 @@
         systemMediaControls.playbackStatus = Windows.Media.MediaPlaybackStatus.closed;
     }
 
-    // For supported audio and video formats for Windows Store apps, see:
+    // For supported audio and video formats, see:
     //     http://msdn.microsoft.com/en-us/library/windows/apps/hh986969.aspx
     var supportedAudioFormats = [
         ".3g2", ".3gp2", ".3gp", ".3gpp", ".m4a", ".mp4", ".asf", ".wma", ".aac", ".adt", ".adts", ".mp3", ".wav", ".ac3", ".ec3",

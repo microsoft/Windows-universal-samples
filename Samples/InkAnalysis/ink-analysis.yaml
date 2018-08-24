@@ -1,0 +1,15 @@
+### YamlMime:Sample
+sample:
+- name: Ink Analysis sample
+  description: Shows how to recognize handwriting, shapes, and document structure with Ink Analysis.
+  generateZip: true
+  extendedZipContent:
+  - path: /SharedContent
+    target: /SharedContent
+  preserveParentHierarchy: true
+  author: oldnewthing
+  languages:
+  - csharp
+  technologies:
+  - windows
+  vssolution: /Samples/InkAnalysis/cs/InkAnalysis.sln

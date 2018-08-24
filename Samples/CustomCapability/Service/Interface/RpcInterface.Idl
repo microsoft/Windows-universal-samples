@@ -1,0 +1,51 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+import "oaidl.idl";
+import "unknwn.idl";
+
+[uuid (906B0CE0-C70B-1067-B317-00DD010662DA),
+version(1.0),
+pointer_default(unique),
+]
+interface RpcInterface
+{
+
+    // context_handle_noserialize in acf for RPC to call rundown when the client goes away
+    typedef [context_handle] void* PCONTEXT_HANDLE_TYPE;
+    typedef [ref] PCONTEXT_HANDLE_TYPE * PPCONTEXT_HANDLE_TYPE;
+
+    //
+    // RPC methods to retrieve/clean client context
+    //
+    void RemoteOpen([in] handle_t hBinding,
+        [out] PPCONTEXT_HANDLE_TYPE pphContext);
+
+    void RemoteClose([in, out] PPCONTEXT_HANDLE_TYPE pphContext);
+
+    //
+    // Metering Interface
+    //
+    void StartMetering(
+        [in] PCONTEXT_HANDLE_TYPE phContext,
+        [in] __int64 samplePeriod,
+        [in, optional] __int64 context);
+
+    void SetSamplePeriod(
+        [in] PCONTEXT_HANDLE_TYPE phContext,
+        [in] __int64 samplePeriod);
+
+    void StopMetering([in] PCONTEXT_HANDLE_TYPE phContext);
+
+    [callback] void MeteringDataEvent(
+        [in] __int64 data,
+        [in, optional] __int64 context);
+}

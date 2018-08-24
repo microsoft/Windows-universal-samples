@@ -30,48 +30,6 @@ Scenario1_BasicFunctionality::Scenario1_BasicFunctionality() : rootPage(MainPage
     InitializeComponent();
 }
 
-/// <summary>
-/// Creates the default barcode scanner.
-/// </summary>
-task<void> Scenario1_BasicFunctionality::CreateDefaultScannerObject()
-{
-    return create_task(DeviceInformation::FindAllAsync(BarcodeScanner::GetDeviceSelector())).then([this](DeviceInformationCollection^ deviceCollection)
-    {
-        if (deviceCollection == nullptr || deviceCollection->Size == 0)
-        {
-            rootPage->NotifyUser("Barcode scanner not found. Please connect a barcode scanner.", NotifyType::ErrorMessage);
-            return task_from_result();
-        }
-
-        DeviceInformation^ scannerInfo = deviceCollection->GetAt(0);
-        return create_task(BarcodeScanner::FromIdAsync(scannerInfo->Id)).then([this](BarcodeScanner^ _scanner)
-        {
-            this->scanner = _scanner;
-            if (this->scanner == nullptr)
-            {
-                rootPage->NotifyUser("Failed to create barcode scanner object.", NotifyType::ErrorMessage);
-            }
-        });
-    });
-}
-
-/// <summary>
-/// This method claims the barcode scanner
-/// </summary>
-task<void> Scenario1_BasicFunctionality::ClaimScanner()
-{
-    // claim the barcode scanner
-    return create_task(scanner->ClaimScannerAsync()).then([this](ClaimedBarcodeScanner^ _claimedScanner)
-    {
-        this->claimedScanner = _claimedScanner;
-        // enable the claimed barcode scanner
-        if (claimedScanner == nullptr)
-        {
-            rootPage->NotifyUser("Claim barcode scanner failed.", NotifyType::ErrorMessage);
-        }
-    });
-}
-
 // <summary>
 /// Setup the barcode scanner to be ready to receive the data events from the scan.
 /// </summary>
@@ -79,42 +37,53 @@ task<void> Scenario1_BasicFunctionality::ClaimScanner()
 /// <param name="e"></param>
 void Scenario1_BasicFunctionality::ScenarioStartScanButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-    rootPage->NotifyUser("Creating barcode scanner object.", NotifyType::StatusMessage);
+    ScenarioStartScanButton->IsEnabled = false;
 
-    // create the barcode scanner. 
-    create_task(CreateDefaultScannerObject()).then([this](void)
+    rootPage->NotifyUser("Acquiring barcode scanner object.", NotifyType::StatusMessage);
+
+    // Acquire the barcode scanner.
+    DeviceHelpers::GetFirstBarcodeScannerAsync().then([this](BarcodeScanner^ foundScanner)
     {
+        scanner = foundScanner;
         if (scanner != nullptr)
         {
-            // after successful creation, claim the scanner for exclusive use and enable it so that data reveived events are received.
-            create_task(ClaimScanner()).then([this](void)
+            // After acquiring, claim the scanner for exclusive use and enable it so that data received events are received.
+            create_task(scanner->ClaimScannerAsync()).then([this](ClaimedBarcodeScanner^ _claimedScanner)
             {
+                claimedScanner = _claimedScanner;
                 if (claimedScanner)
                 {
-                    // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can 
+                    // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can
                     // claim ownsership of the barcode scanner.
-                    releaseDeviceRequestedToken = claimedScanner->ReleaseDeviceRequested::add(ref new EventHandler<ClaimedBarcodeScanner^>(this, &Scenario1_BasicFunctionality::OnReleaseDeviceRequested));
+                    releaseDeviceRequestedToken = claimedScanner->ReleaseDeviceRequested += ref new EventHandler<ClaimedBarcodeScanner^>(this, &Scenario1_BasicFunctionality::OnReleaseDeviceRequested);
 
-                    // after successfully claiming, attach the datareceived event handler.
-                    dataReceivedToken = claimedScanner->DataReceived::add(ref new TypedEventHandler<ClaimedBarcodeScanner^, BarcodeScannerDataReceivedEventArgs^>(this, &Scenario1_BasicFunctionality::OnDataReceived));
+                    // After successfully claiming, attach the datareceived event handler.
+                    dataReceivedToken = claimedScanner->DataReceived += ref new TypedEventHandler<ClaimedBarcodeScanner^, BarcodeScannerDataReceivedEventArgs^>(this, &Scenario1_BasicFunctionality::OnDataReceived);
 
-                    // Ask the API to decode the data by default. By setting this, API will decode the raw data from the barcode scanner and 
+                    // Ask for the raw data from the barcode scanner to be decoded and
                     // send the ScanDataLabel and ScanDataType in the DataReceived event
                     claimedScanner->IsDecodeDataEnabled = true;
 
                     // enable the scanner.
-                    // Note: If the scanner is not enabled (i.e. EnableAsync not called), attaching the event handler will not be any useful because the API will not fire the event 
+                    // Note: If the scanner is not enabled (i.e. EnableAsync not called), attaching the event handler will not be any useful because the API will not fire the event
                     // if the claimedScanner has not beed Enabled
                     create_task(claimedScanner->EnableAsync()).then([this](void)
                     {
                         rootPage->NotifyUser("Ready to scan. Device ID: " + claimedScanner->DeviceId, NotifyType::StatusMessage);
-
-                        // reset the button state
                         ScenarioEndScanButton->IsEnabled = true;
-                        ScenarioStartScanButton->IsEnabled = false;
                     });
                 }
+                else
+                {
+                    rootPage->NotifyUser("Claim barcode scanner failed.", NotifyType::ErrorMessage);
+                    ScenarioStartScanButton->IsEnabled = true;
+                }
             });
+        }
+        else
+        {
+            rootPage->NotifyUser("Barcode scanner not found. Please connect a barcode scanner.", NotifyType::ErrorMessage);
+            ScenarioStartScanButton->IsEnabled = true;
         }
     });
 
@@ -138,7 +107,7 @@ void Scenario1_BasicFunctionality::OnReleaseDeviceRequested(Platform::Object ^se
 }
 
 /// <summary>
-/// Event handler for the DataReceived event fired when a barcode is scanned by the barcode scanner 
+/// Event handler for the DataReceived event fired when a barcode is scanned by the barcode scanner
 /// </summary>
 /// <param name="sender"></param>
 /// <param name="args"> Contains the BarcodeScannerReport which contains the data obtained in the scan</param>
@@ -165,7 +134,6 @@ void Scenario1_BasicFunctionality::OnDataReceived(Windows::Devices::PointOfServi
 void Scenario1_BasicFunctionality::OnNavigatedTo(NavigationEventArgs^ e)
 {
     ResetTheScenarioState();
-    Page::OnNavigatedTo(e);
 }
 
 /// <summary>
@@ -175,11 +143,10 @@ void Scenario1_BasicFunctionality::OnNavigatedTo(NavigationEventArgs^ e)
 void Scenario1_BasicFunctionality::OnNavigatedFrom(NavigationEventArgs^ e)
 {
     ResetTheScenarioState();
-    Page::OnNavigatedFrom(e);
 }
 
 /// <summary>
-/// Event handler for End Scan Button Click. 
+/// Event handler for End Scan Button Click.
 /// Releases the Barcode Scanner and resets the text in the UI
 /// </summary>
 /// <param name="sender"></param>
@@ -197,8 +164,8 @@ void Scenario1_BasicFunctionality::ResetTheScenarioState()
     if (claimedScanner != nullptr)
     {
         // Detach the event handlers
-        claimedScanner->DataReceived::remove(dataReceivedToken);
-        claimedScanner->ReleaseDeviceRequested::remove(releaseDeviceRequestedToken);
+        claimedScanner->DataReceived -= dataReceivedToken;
+        claimedScanner->ReleaseDeviceRequested -= releaseDeviceRequestedToken;
 
         // release the Barcode Scanner and set to null
         delete claimedScanner;
@@ -211,14 +178,17 @@ void Scenario1_BasicFunctionality::ResetTheScenarioState()
         scanner = nullptr;
     }
 
-    // Reset the strings in the UI
-    rootPage->NotifyUser("Click the start scanning button to begin.", NotifyType::StatusMessage);
+    // Reset the UI if we are still the current page.
+    if (Frame->Content == this)
+    {
+        rootPage->NotifyUser("Click the start scanning button to begin.", NotifyType::StatusMessage);
 
-    ScenarioOutputScanData->Text = "No data";
-    ScenarioOutputScanDataLabel->Text = "No data";
-    ScenarioOutputScanDataType->Text = "No data";
+        ScenarioOutputScanData->Text = "No data";
+        ScenarioOutputScanDataLabel->Text = "No data";
+        ScenarioOutputScanDataType->Text = "No data";
 
-    // reset the button state
-    ScenarioEndScanButton->IsEnabled = false;
-    ScenarioStartScanButton->IsEnabled = true;
+        // reset the button state
+        ScenarioEndScanButton->IsEnabled = false;
+        ScenarioStartScanButton->IsEnabled = true;
+    }
 }

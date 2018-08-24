@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Input;
 
-namespace BasicInput
+namespace SDKTemplate
 {
     public sealed partial class Scenario5 : Page
     {

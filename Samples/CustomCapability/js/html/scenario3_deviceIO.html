@@ -1,0 +1,48 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario3_deviceIO.css" />
+    <script src="/js/fx2Driver.js"></script>
+    <script src="/js/deviceList.js"></script>
+    <script src="/js/scenario3_deviceIO.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>This scenario shows how to use I/O controls to perform simple operations with a device driver.</p>
+        <p>The buttons below use the SendIOControlAsync method to communicate with the device driver, and set or get the value of the seven-segment display on the device.</p>
+        <p>The IO control codes used in this scenario, along with all other driver-defined constants, in the fx2Driver object(fx2Driver.js).</p>
+        <button id="device-properties-get" class="win-button">Get Seven Segment Display</button><br/>
+        <p>
+            <button id="device-properties-set" class="win-button">Set Seven Segment Display</button>
+            <select size="1" id="device-properties-segmentInput" class="win-dropdown">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option selected="selected" value="8">8</option>
+                <option value="9">9</option>
+            </select>
+        </p>
+</div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <div id="device-properties-output">
+        </div>
+    </div>
+</body>
+</html>

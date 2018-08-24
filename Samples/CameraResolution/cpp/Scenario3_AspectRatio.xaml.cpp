@@ -210,7 +210,7 @@ void Scenario3_AspectRatio::PreviewSettings_Changed(Platform::Object^ sender, Wi
     {
         auto selectedItem = static_cast<ComboBoxItem^>(static_cast<ComboBox^>(sender)->SelectedItem);
         auto encodingProperties = static_cast<IMediaEncodingProperties^>(selectedItem->Tag);
-        create_task(_mediaCapture->VideoDeviceController->SetMediaStreamPropertiesAsync(MediaStreamType::VideoPreview, encodingProperties));
+        create_task(_rootPage->SetMediaStreamPropertiesAsync(_mediaCapture.Get(), PreviewControl, MediaStreamType::VideoPreview, encodingProperties));
 
         // The preview just changed, update the video combo box
         MatchPreviewAspectRatio();
@@ -227,7 +227,7 @@ void Scenario3_AspectRatio::VideoSettings_Changed(Platform::Object^ sender, Wind
     {
         auto selectedItem = static_cast<ComboBoxItem^>(static_cast<ComboBox^>(sender)->SelectedItem);
         auto encodingProperties = static_cast<IMediaEncodingProperties^>(selectedItem->Tag);
-        create_task(_mediaCapture->VideoDeviceController->SetMediaStreamPropertiesAsync(MediaStreamType::VideoRecord, encodingProperties));
+        create_task(_rootPage->SetMediaStreamPropertiesAsync(_mediaCapture.Get(), PreviewControl, MediaStreamType::VideoRecord, encodingProperties));
     }
 }
 

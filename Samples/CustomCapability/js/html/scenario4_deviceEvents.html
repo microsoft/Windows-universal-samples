@@ -1,0 +1,36 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/scenario4_deviceEvents.css" />
+    <script src="/js/fx2Driver.js"></script>
+    <script src="/js/deviceList.js"></script>
+    <script src="/js/scenario4_deviceEvents.js"></script>
+</head>
+<body>
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p>This scenario shows how to use SendIOControlAsync to receive asynchronous events from the device driver. </p>
+        <p>The Begin Receiving Switch Change Events button below sends an get interrupt message IO control to the driver.  The driver completes this only when the DIP switches on the Fx2 have changed.  On completion the sample code updates the UI and then issues another get interrupt IO control.  The Stop Receiving Switch Change Events button cancels the pending IO control.  The IO control is also canceled if the scenario is changed.  If the device is unplugged or disconnected the pending IO control completes with an error, and the sample code stops retrieving events.</p>
+        <p>The IO control codes used in this scenario, along with all other driver-defined constants, in the fx2Driver object(fx2Driver.js)</p>
+        <p><button class="win-button" id="device-events-get" style="width: 300px;">Get Switch State from Fx2 Device</button></p>
+        <p><button class="win-button" id="device-events-begin" style="width: 300px;">Begin Receiving Switch State Change Events</button></p>
+        <p><button class="win-button" id="device-events-cancel" style="width: 300px;">Stop Receiving Switch State Change Events</button></p>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <div id="device-events-output"></div>
+        <div id="device-events-switches"></div>
+    </div>
+</body>
+</html>

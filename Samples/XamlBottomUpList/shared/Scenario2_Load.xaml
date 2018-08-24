@@ -1,0 +1,120 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2_Load"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <SolidColorBrush x:Key="SentMessageBackground" Color="#ffaa1428"/>
+        <SolidColorBrush x:Key="ReceivedMessageBackground" Color="Crimson"/>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Incremental loading
+            </TextBlock>
+        </StackPanel>
+
+        <local:ChatListView x:Name="chatView" Grid.Row="1" IncrementalLoadingThreshold="2" Margin="10" BorderBrush="White" BorderThickness="2">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView" VerticalAlignment="Bottom"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:TextMessage">
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Polygon
+                            Grid.Row="0"
+                            Points="0,0 0,18 18,18"
+                            Fill="{StaticResource ReceivedMessageBackground}"
+                            Visibility="{x:Bind IsReceived}"
+                            Margin="10,0,10,0"/>
+
+                        <Grid
+                            Grid.Row="1"
+                            Background="{StaticResource ReceivedMessageBackground}"
+                            Visibility="{x:Bind IsReceived}"/>
+
+                        <Grid
+                            Grid.Row="1"
+                            Background="{StaticResource SentMessageBackground}"
+                            Visibility="{x:Bind IsSent}"/>
+
+                        <Grid
+                            Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Text="{x:Bind Body}"
+                                TextWrapping="Wrap"
+                                MinWidth="300"
+                                MaxWidth="400"
+                                FontSize="20"
+                                Padding="10,10,5,0" />
+
+                            <TextBlock
+                                Grid.Row="1"
+                                FontSize="12"
+                                Text="{x:Bind DisplayTime}"
+                                TextWrapping="Wrap"
+                                Opacity="0.7"
+                                Padding="10" />
+                        </Grid>
+
+                        <Polygon
+                            Grid.Row="2"
+                            HorizontalAlignment="Right"
+                            Points="0,0 18,0 18,18"
+                            Fill="{StaticResource SentMessageBackground}"
+                            Visibility="{x:Bind IsSent}"
+                            Margin="0,0,10,0"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </local:ChatListView>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="MessageTextBox" Grid.Column="0" PlaceholderText="Type a message and press Send" FontSize="18" Background="White" Padding="12,8,0,0" KeyUp="MessageTextBox_KeyUp"/>
+            <Button Grid.Column="1" Height="48" Click="{x:Bind SendTextMessage}">
+                <SymbolIcon Symbol="Send" />
+            </Button>
+        </Grid>
+    </Grid>
+</Page>

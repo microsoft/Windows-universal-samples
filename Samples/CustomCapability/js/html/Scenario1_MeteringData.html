@@ -1,0 +1,48 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/Scenario1_MeteringData.css">
+    <script src="/js/Scenario1_MeteringData.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div data-win-control="SdkSample.ScenarioInput">
+        <p style="font-size:150%;">Description:</p>
+        <p>This scenario demonstrates RPC communication between an app and an NT service. For demonstration purposes, the service reads data from an imaginary device.</p>
+        <div class="StepBox">
+            <p class="Heading">Step 1: Choose a period at which the samples will be pushed from the NT service</p>
+            <p id="SamplePeriod">Sample Period:</p>
+            <input id="SamplePeriodSlider" class="win-slider" type="range" min="1" max="1000" />
+        </div>
+        <div class="StepBox">
+            <p class="Heading">Step 2. Click start to receive samples from the NT service</p>
+            <button id="StartButton" class="win-button">Start</button>
+            <button id="StopButton" class="win-button">Stop</button>
+        </div>
+        <div class="StepBox">
+            <p class="Heading">Step 3: Observe the expected and actual incoming sample rate</p>
+            <p id="ExpectedSampleRate">Expected Sample Rate: </p>
+            <p id="ActualSampleRate">Actual Sample Rate: </p>
+        </div>
+    </div>
+    <div data-win-control="SdkSample.ScenarioOutput">
+        <p class="Heading">Samples:</p>
+        <div id="SampleMessage" class="target"></div>
+    </div>
+</body>
+
+</html>

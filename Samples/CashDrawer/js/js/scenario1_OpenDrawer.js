@@ -27,7 +27,10 @@
                 _claimedDrawer = null;
             }
 
-            _drawer = null;
+            if (_drawer !== null) {
+                _drawer.close();
+                _drawer = null;
+            }
         }
     });
 
@@ -42,7 +45,7 @@
 
         WinJS.log("Creating cash drawer object.", "sample", "status");
 
-        Windows.Devices.PointOfService.CashDrawer.getDefaultAsync().then(function (drawer) {
+        SdkSample.getFirstCashDrawerAsync().then(function (drawer) {
             if (drawer == null) {
                 WinJS.log("Cash drawer not found. Please connect a cash drawer.", "sample", "error");
                 return;

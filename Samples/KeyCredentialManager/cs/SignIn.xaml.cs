@@ -10,19 +10,15 @@
 //*********************************************************
 
 using System;
-using SDKTemplate;
+using System.Threading.Tasks;
 using Windows.Security.Credentials;
+using Windows.Security.Cryptography;
+using Windows.Storage.Streams;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI;
 using Windows.UI.Xaml.Media;
-using System.Threading.Tasks;
-using Windows.Storage.Streams;
-using System.Text;
-using System.IO;
-using Windows.Security.Cryptography;
+using Windows.UI.Xaml.Navigation;
 
 namespace SDKTemplate
 {
@@ -64,10 +60,10 @@ namespace SDKTemplate
         /// to the list of users.
         /// </summary>
         /// <param name="e"></param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             rootPage = MainPage.Current;
-            PassportAvailableCheck();
+            await PassportAvailableCheckAsync();
 
             if (e.Parameter != null)
             {
@@ -76,9 +72,9 @@ namespace SDKTemplate
                 textbox_Username.IsEnabled = false;
                 m_addingAccount = false;
 
-                if (m_account.UsesPassport == true)
+                if (m_account.UsesPassport)
                 {
-                    SignInPassport(true);
+                    await SignInPassportAsync(true);
                 }
             }
         }
@@ -88,9 +84,9 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_SignIn_Click(object sender, RoutedEventArgs e)
+        private async void Button_SignIn_Click(object sender, RoutedEventArgs e)
         {
-            SignInPassword(false);
+            await SignInPasswordAsync(false);
         }
 
         /// <summary>
@@ -101,15 +97,15 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Passport_Click(object sender, RoutedEventArgs e)
+        private async void Button_Passport_Click(object sender, RoutedEventArgs e)
         {
             if (m_addingAccount == false)
             {
-                SignInPassport(m_account.UsesPassport);
+                await SignInPassportAsync(m_account.UsesPassport);
             }
             else
             {
-                SignInPassport(false);
+                await SignInPassportAsync(false);
             }
         }
 
@@ -123,11 +119,13 @@ namespace SDKTemplate
         /// If Passport is not ready, then display how to set it up to the user and 
         /// disable the "Sign In with Passport" button.
         /// </summary>
-        private async void PassportAvailableCheck()
+        private async Task PassportAvailableCheckAsync()
         {
-            var keyCredentialAvailable = await KeyCredentialManager.IsSupportedAsync();
-
-            if (keyCredentialAvailable == false)
+            if (await KeyCredentialManager.IsSupportedAsync())
+            {
+                button_PassportSignIn.IsEnabled = true;
+            }
+            else
             {
                 //
                 // Key credential is not enabled yet as user 
@@ -135,7 +133,6 @@ namespace SDKTemplate
                 //
                 grid_PassportStatus.Background = new SolidColorBrush(Color.FromArgb(255, 50, 170, 207));
                 textblock_PassportStatusText.Text = "Microsoft Passport is not set up.\nPlease go to Windows Settings and connect an MSA account!";
-                button_PassportSignIn.IsEnabled = false;
                 m_passportAvailable = false;
             }
         }
@@ -151,19 +148,19 @@ namespace SDKTemplate
         /// the authentication server.
         /// </summary>
         /// <param name="passportIsPrimaryLogin">Boolean representing if primary login method is Passport</param>
-        private async void SignInPassport(bool passportIsPrimaryLogin)
+        private async Task SignInPassportAsync(bool passportIsPrimaryLogin)
         {
             if (passportIsPrimaryLogin == true)
             {
-                if (await AuthenticatePassport() == true)
+                if (await AuthenticatePassportAsync() == true)
                 {
                     SuccessfulSignIn(m_account);
                     return;
                 }
             }
-            else if (await SignInPassword(true) == true)
+            else if (await SignInPasswordAsync(true) == true)
             {
-                if (await CreatePassportKey(textbox_Username.Text) == true)
+                if (await CreatePassportKeyAsync(textbox_Username.Text) == true)
                 {
                     bool serverAddedPassportToAccount = await AddPassportToAccountOnServer();
 
@@ -197,7 +194,7 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="calledFromPassport">Boolean representing if this method was called from the user clicking "Sign In with Microsoft Passport"</param>
         /// <returns>Boolean representing if signing in with password succeeded</returns>
-        private async Task<bool> SignInPassword(bool calledFromPassport)
+        private async Task<bool> SignInPasswordAsync(bool calledFromPassport)
         {
             textblock_ErrorField.Text = "";
 
@@ -209,9 +206,9 @@ namespace SDKTemplate
 
             try
             {
-                bool signedIn = await AuthenticatePasswordCredentials();
+                bool signedIn = await AuthenticatePasswordCredentialsAsync();
 
-                if (signedIn == false)
+                if (!signedIn)
                 {
                     textblock_ErrorField.Text = "Unable to sign you in with those credentials.";
                 }
@@ -220,7 +217,7 @@ namespace SDKTemplate
                     // TODO: Roaming Passport settings. Make it so the server can tell us if they prefer to use Passport and upsell immediately.
 
                     Account goodAccount = new Account() { Name = textbox_Username.Text, Email = textbox_Username.Text, UsesPassport = false };
-                    if (calledFromPassport == false)
+                    if (!calledFromPassport)
                     {
                         rootPage.NotifyUser("Successfully signed in with traditional username/password!", NotifyType.StatusMessage);
                         SuccessfulSignIn(goodAccount);
@@ -242,9 +239,10 @@ namespace SDKTemplate
         /// Authenticate user credentials with server and return result.
         /// </summary>
         /// <returns>Boolean representing if authenticating the user credentials with the server succeeded</returns>
-        private async Task<bool> AuthenticatePasswordCredentials()
+        private async Task<bool> AuthenticatePasswordCredentialsAsync()
         {
             // TODO: Authenticate with server once that part is done for the sample.
+            await Task.Delay(100);
 
             return true;
         }
@@ -257,10 +255,10 @@ namespace SDKTemplate
         /// The authentication message will be null if signing fails.
         /// </summary>
         /// <returns>Boolean representing if authenticating Passport succeeded</returns>
-        private async Task<bool> AuthenticatePassport()
+        private async Task<bool> AuthenticatePassportAsync()
         {
             IBuffer message = CryptographicBuffer.ConvertStringToBinary("LoginAuth", BinaryStringEncoding.Utf8);
-            IBuffer authMessage = await GetPassportAuthenticationMessage(message, m_account.Email);
+            IBuffer authMessage = await GetPassportAuthenticationMessageAsync(message, m_account.Email);
 
             if (authMessage != null)
             {
@@ -305,6 +303,7 @@ namespace SDKTemplate
         private async Task<bool> AddPassportToAccountOnServer()
         {
             // TODO: Add Passport signing info to server when that part is done for the sample
+            await Task.Delay(100);
 
             return true;
         }
@@ -327,7 +326,7 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="accountId">The account id associated with the account that we are enrolling into Passport</param>
         /// <returns>Boolean representing if creating the Passport key succeeded</returns>
-        private async Task<bool> CreatePassportKey(string accountId)
+        private async Task<bool> CreatePassportKeyAsync(string accountId)
         {
             KeyCredentialRetrievalResult keyCreationResult = await KeyCredentialManager.RequestCreateAsync(accountId, KeyCredentialCreationOption.ReplaceExisting);
 
@@ -404,7 +403,7 @@ namespace SDKTemplate
         /// <param name="message">The message to be signed</param>
         /// <param name="accountId">The account id for the Passport key we are using to sign</param>
         /// <returns>Boolean representing if creating the Passport authentication message succeeded</returns>
-        private async Task<IBuffer> GetPassportAuthenticationMessage(IBuffer message, string accountId)
+        private async Task<IBuffer> GetPassportAuthenticationMessageAsync(IBuffer message, string accountId)
         {
             KeyCredentialRetrievalResult openKeyResult = await KeyCredentialManager.OpenAsync(accountId);
 

@@ -22,12 +22,14 @@ namespace RadioManagerSample
     public class RadioModel : INotifyPropertyChanged
     {
         private Radio radio;
-        private bool isEnabled = true;
+        private bool isEnabled;
         private UIElement parent;
 
         public RadioModel(Radio radio, UIElement parent)
         {
             this.radio = radio;
+            // Controlling the mobile broadband radio requires a restricted capability.
+            this.isEnabled = (radio.Kind != RadioKind.MobileBroadband);
             this.parent = parent;
             this.radio.StateChanged += Radio_StateChanged;
         }

@@ -1,0 +1,44 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario4_Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:SDKTemplate"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="0,0,0,10">
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Settings
+            </TextBlock>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock>Check settings for cross-device experience.</TextBlock>
+                <Button Content="Check now" Click="CheckNow_Clicked" Margin="0,10,0,0"/>
+                <TextBlock Margin="0,10,0,0">Share across systems</TextBlock>
+                <TextBlock Margin="0,10,0,0">Enabled for everyone: <Run x:Name="AnoymousAuthorizationEnabled"/></TextBlock>
+                <TextBlock>Enabled for my systems: <Run x:Name="SameUserAuthorizationEnabled"/></TextBlock>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

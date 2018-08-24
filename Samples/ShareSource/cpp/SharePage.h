@@ -28,14 +28,20 @@ namespace SDKTemplate
         static Windows::Foundation::Uri^ GetApplicationLink(Platform::String^ sharePageFullName);
 
     protected:
+        property MainPage^ RootPage { MainPage^ get() { return rootPage; } }
+
         virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
         virtual void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
         void ShowUIButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         virtual bool GetShareContent(Windows::ApplicationModel::DataTransfer::DataRequest^ request);
 
     private:
-        Windows::Foundation::EventRegistrationToken dataRequestedToken;
-
+        MainPage^ rootPage = MainPage::Current;
+        Windows::Foundation::EventRegistrationToken dataRequestedToken{};
+        Windows::Foundation::EventRegistrationToken targetApplicationChosenToken{};
+    
         void OnDataRequested(Windows::ApplicationModel::DataTransfer::DataTransferManager^ sender, Windows::ApplicationModel::DataTransfer::DataRequestedEventArgs^ e);
+        void OnTargetApplicationChosen(Windows::ApplicationModel::DataTransfer::DataTransferManager^ sender, Windows::ApplicationModel::DataTransfer::TargetApplicationChosenEventArgs^ e);
+        void OnShareCompleted(Windows::ApplicationModel::DataTransfer::DataPackage^ sender, Windows::ApplicationModel::DataTransfer::ShareCompletedEventArgs^ e);
     };
 }
