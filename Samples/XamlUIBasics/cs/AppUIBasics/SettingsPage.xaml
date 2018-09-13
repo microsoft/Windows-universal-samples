@@ -81,6 +81,18 @@
                     </Paragraph>
                 </RichTextBlock>
                 <Button Click="OnFeedbackButtonClick" Content="Feedback" Margin="0,8,0,0" Visibility="Collapsed" />
+
+                <TextBlock
+                    Style="{StaticResource TitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    FontWeight="Normal"
+                    Text="Dependencies and References" />
+                <RichTextBlock MaxWidth="840" Margin="0,10,0,0" IsTextSelectionEnabled="True">
+                    <Paragraph Margin="0,10,0,10">
+                        <Hyperlink NavigateUri="https://github.com/WilliamABradley/ColorCode-Universal">ColorCode-Universal</Hyperlink>
+                    </Paragraph>
+                </RichTextBlock>
+
                 <TextBlock
                     Style="{StaticResource TitleTextBlockStyle}"
                     Margin="0,40,0,0"
@@ -95,7 +107,6 @@
                         <Hyperlink NavigateUri="https://go.microsoft.com/fwlink/?LinkId=822631">Microsoft Services Agreement</Hyperlink> ,
                         <Hyperlink NavigateUri="https://go.microsoft.com/fwlink/?LinkId=521839">Microsoft Privacy Statement</Hyperlink>
                     </Paragraph>
-
                 </RichTextBlock>
             </StackPanel>
         </ScrollViewer>

@@ -34,7 +34,7 @@
             </local:ControlExample.Xaml>
         </local:ControlExample>
 
-        <local:ControlExample HeaderText="A simple connected animation" XamlSource="Motion/ConnectedAnimation/ConnectedAnimationSimple.html">
+        <local:ControlExample HeaderText="A simple connected animation" CSharpSource="Motion/ConnectedAnimation/ConnectedAnimationSimple.txt">
             <local:ControlExample.Options>
                 <StackPanel>
                     <Button Content="Navigate" Click="NavigateButton_Click" HorizontalAlignment="Stretch" />

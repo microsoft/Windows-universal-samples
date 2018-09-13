@@ -47,6 +47,7 @@ void Scenario1_Basic::ToggleFullScreenModeButton_Click(Platform::Object^ sender,
     {
         view->ExitFullScreenMode();
         rootPage->NotifyUser("Exiting full screen mode", NotifyType::StatusMessage);
+        isLastKnownFullScreen = false;
         // The SizeChanged event will be raised when the exit from full screen mode is complete.
     }
     else
@@ -54,6 +55,7 @@ void Scenario1_Basic::ToggleFullScreenModeButton_Click(Platform::Object^ sender,
         if (view->TryEnterFullScreenMode())
         {
             rootPage->NotifyUser("Entering full screen mode", NotifyType::StatusMessage);
+            isLastKnownFullScreen = true;
             // The SizeChanged event will be raised when the entry to full screen mode is complete.
         }
         else
@@ -87,6 +89,14 @@ void Scenario1_Basic::UpdateContent()
     ToggleFullScreenModeSymbol->Symbol = isFullScreenMode ? Symbol::BackToWindow : Symbol::FullScreen;
     ReportFullScreenMode->Text = isFullScreenMode ? "is in" : "is not in";
     FullScreenOptionsPanel->Visibility = isFullScreenMode ? Windows::UI::Xaml::Visibility::Visible : Windows::UI::Xaml::Visibility::Collapsed;
+
+    // Did the system force a change in full screen mode?
+    if (isLastKnownFullScreen != isFullScreenMode)
+    {
+        isLastKnownFullScreen = isFullScreenMode;
+        // Clear any stray messages that talked about the mode we are no longer in.
+        rootPage->NotifyUser("", NotifyType::StatusMessage);
+    }
 }
 
 void Scenario1_Basic::OnKeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)
@@ -98,6 +108,7 @@ void Scenario1_Basic::OnKeyDown(Platform::Object^ sender, Windows::UI::Xaml::Inp
         {
             view->ExitFullScreenMode();
             rootPage->NotifyUser("Exited full screen mode due to keypress", NotifyType::StatusMessage);
+            isLastKnownFullScreen = false;
         }
     }
 }

@@ -25,121 +25,9 @@
                 </DataTemplate>
             </converters:MenuItemTemplateSelector.ItemTemplate>
         </converters:MenuItemTemplateSelector>
-
-        <DataTemplate x:Key="NoAutoSuggestBoxCode">
-            <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
-                <Paragraph TextIndent='0'>
-                    <Run Text="&lt;NavigationView Loaded=&quot;NavigationView_Loaded&quot; Margin=&quot;0,12,0,0&quot; Grid.Row=&quot;1&quot; SelectionChanged=&quot;NavigationView_SelectionChanged&quot;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="x:Name=&quot;nvSample&quot;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="IsSettingsVisible=&quot;{Binding ElementName=settingsCheck,Path=IsChecked}&quot; IsTabStop=&quot;False&quot;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="PanePosition=&quot;{x:Bind ChoosePanePosition(panePositionToggle.IsOn)}&quot;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="contract6Present:PaneTitle=&quot;{Binding ElementName=paneText,Path=Text}&quot;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="contract6Present:IsBackButtonVisible=&quot;{Binding ElementName=visibleCheck,Converter={StaticResource BooleanNegationToBackVisibilityConverter},Path=IsChecked}&quot;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="contract6Present:IsBackEnabled=&quot;{Binding ElementName=enableCheck,Path=IsChecked}"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="Header=&quot;This is header text.&quot;&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='12'>
-                    <Run Text="&lt;NavigationView.MenuItems&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="&lt;NavigationViewItem Icon=&quot;Play&quot; Content=&quot;Menu Item1&quot; Tag=&quot;SamplePage1&quot; /&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="&lt;NavigationViewItemSeparator/&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="&lt;NavigationViewItem Icon=&quot;Save&quot; Content=&quot;Menu Item2&quot; Tag=&quot;SamplePage2&quot; /&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="&lt;NavigationViewItem Icon=&quot;Refresh&quot; Content=&quot;Menu Item3&quot; Tag=&quot;SamplePage3&quot; /&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='12'>
-                    <Run Text="&lt;/NavigationView.MenuItems&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='12'>
-                    <Run Text="&lt;Frame x:Name=&quot;contentFrame&quot;&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='12'>
-                    <Run Text="&lt;/Frame&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='0'>
-                    <Run Text="&lt;/NavigationView&gt;"/>
-                </Paragraph>
-            </RichTextBlock>
-        </DataTemplate>
-
-        <DataTemplate x:Key="AutoSuggestBoxCode">
-            <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
-                <Paragraph TextIndent='0'>
-                    <Run Text="&lt;NavigationView Loaded=&quot;NavigationView_Loaded&quot; SelectionChanged=&quot;NavigationView_SelectionChanged&quot;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="x:Name=&quot;nvSample&quot;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="IsSettingsVisible=&quot;{Binding ElementName=settingsCheck,Path=IsChecked}&quot; IsTabStop=&quot;False&quot;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="PanePosition=&quot;{x:Bind ChoosePanePosition(panePositionToggle.IsOn)}&quot;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="contract6Present:PaneTitle=&quot;{Binding ElementName=paneText,Path=Text}&quot;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="contract6Present:IsBackButtonVisible=&quot;{Binding ElementName=visibleCheck,Converter={StaticResource BooleanNegationToBackVisibilityConverter},Path=IsChecked}&quot;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="contract6Present:IsBackEnabled=&quot;{Binding ElementName=enableCheck,Path=IsChecked}"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="Header=&quot;This is header text.&quot;&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='12'>
-                    <Run Text="&lt;NavigationView.MenuItems&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="&lt;NavigationViewItem Icon=&quot;Play&quot; Content=&quot;Menu Item1&quot; Tag=&quot;SamplePage1&quot; /&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="&lt;NavigationViewItemSeparator/&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="&lt;NavigationViewItem Icon=&quot;Save&quot; Content=&quot;Menu Item2&quot; Tag=&quot;SamplePage2&quot; /&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='24'>
-                    <Run Text="&lt;NavigationViewItem Icon=&quot;Refresh&quot; Content=&quot;Menu Item3&quot; Tag=&quot;SamplePage3&quot; /&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='12'>
-                    <Run Text="&lt;/NavigationView.MenuItems&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='12'>
-                    <Run Text="&lt;Frame x:Name=&quot;contentFrame&quot;&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='12'>
-                    <Run Text="&lt;/Frame&gt;"/>
-                </Paragraph>
-                <Paragraph TextIndent='0'>
-                    <Run Text="&lt;/NavigationView&gt;"/>
-                </Paragraph>
-            </RichTextBlock>
-        </DataTemplate>
     </Page.Resources>
 
-    <Grid x:Name="rootGrid" SizeChanged="rootGrid_SizeChanged" >
+    <Grid x:Name="rootGrid">
         <!-- For the top nav collapsing to left hamburger sample -->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -183,24 +71,24 @@
         </Grid.Resources>
 
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <local:ControlExample Grid.Row="0" 
                               HeaderText="NavigationView with default PaneDisplayMode" 
                               VerticalAlignment="Top" 
                               HorizontalContentAlignment="Stretch" 
-                              XamlSource="NavigationView\NavigationViewSample1.html"
+                              XamlSource="NavigationView\NavigationViewSample1.txt"
                               WebViewHeight="250">
-            <Grid Height="500">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="410"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock TextWrapping="WrapWholeWords"
@@ -208,8 +96,9 @@
                            Text="If you have five or more equally important navigation categories that should prominently appear on larger window widths, consider using a left navigation pane." />
 
                 <muxcontrols:NavigationView x:Name="nvSample5" 
-                                            Header="Sample Page 1" 
                                             Grid.Row="1" 
+                                            Height="460"
+                                            Header="This is Header Text" 
                                             PaneDisplayMode="Auto" 
                                             IsTabStop="False" 
                                             SelectionChanged="NavigationView_SelectionChanged5" >
@@ -228,9 +117,9 @@
                               HeaderText="NavigationView with PaneDisplayMode set to Top"
                               VerticalAlignment="Top" 
                               HorizontalContentAlignment="Stretch" 
-                              XamlSource="NavigationView\NavigationViewSample2.html"
+                              XamlSource="NavigationView\NavigationViewSample2.txt"
                               WebViewHeight="200" >
-            <Grid Height="550">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
@@ -241,8 +130,10 @@
                            Text="If you have equally important navigation categories that should be de-emphasized relative to the content of your app, consider using a top navigation pane." />
 
                 <muxcontrols:NavigationView x:Name="nvSample6"
-                                            Grid.Row="1" 
+                                            Grid.Row="1"
+                                            Height="460"
                                             PaneDisplayMode="Top"
+                                            Header="This is Header Text"
                                             IsTabStop="False" 
                                             SelectionChanged="NavigationView_SelectionChanged6">
                     <muxcontrols:NavigationView.MenuItems>
@@ -261,19 +152,20 @@
                               HeaderText="NavigationView that switches pane orientation based on window width"
                               VerticalAlignment="Top" 
                               HorizontalContentAlignment="Stretch" 
-                              XamlSource="NavigationView\NavigationViewSample3.html" 
+                              XamlSource="NavigationView\NavigationViewSample3.txt" 
                               WebViewHeight="450">
-            <Grid x:Name="InnerGrid" Height="500" >
+            <Grid x:Name="InnerGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition  />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <TextBlock TextWrapping="WrapWholeWords" 
                            Margin="0,0,0,12"
                            Text="If you have equally important navigation categories and limited app content space, consider using a top navigation pane on larger window widths and a minimal left navigation pane on smaller window widths." />
 
-                <muxcontrols:NavigationView Grid.Row="1" x:Name="nvSample2"  SelectionChanged="NavigationView_SelectionChanged2"
+                <muxcontrols:NavigationView x:Name="nvSample2" Grid.Row="1" Height="460"
+                                            SelectionChanged="NavigationView_SelectionChanged2"
                                             PaneDisplayMode="Auto" IsTabStop="False" >
                     <muxcontrols:NavigationView.MenuItems>
                         <muxcontrols:NavigationViewItem Content="Menu Item1" Tag="SamplePage1" />
@@ -293,19 +185,21 @@
                               HeaderText="Tying selection and focus - Tabs"
                               VerticalAlignment="Top" 
                               HorizontalContentAlignment="Stretch" 
-                              XamlSource="NavigationView\NavigationViewSample4.html"
+                              XamlSource="NavigationView\NavigationViewSample4_xaml.txt"
+                              CSharpSource="NavigationView\NavigationViewSample4_cs.txt"
                               WebViewHeight="800">
-            <Grid Height="550">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock TextWrapping="WrapWholeWords" 
+                <TextBlock TextWrapping="WrapWholeWords"
+                           Margin="0,0,0,12"
                            Text="For the tabs pattern, ensure that you unify selection and focus by setting the SelectionFollowsFocus property to True. If using a Frame to swap out content, then navigating between items shouldn't be recorded into the Frame's navigation stack. Please see the C# in the sample below to understand how to do this." />
 
-                <muxcontrols:NavigationView Grid.Row="1" x:Name="nvSample7"
-                                            PaneDisplayMode="Top" SelectionFollowsFocus="Enabled" Height="400" SelectionChanged="NavigationView_SelectionChanged7"
+                <muxcontrols:NavigationView x:Name="nvSample7" Grid.Row="1" Height="460"
+                                            PaneDisplayMode="Top" SelectionFollowsFocus="Enabled"  SelectionChanged="NavigationView_SelectionChanged7"
                                             IsTabStop="False" IsBackButtonVisible="Collapsed" >
                     <muxcontrols:NavigationView.MenuItems>
                         <muxcontrols:NavigationViewItem Content="Item1" Tag="SamplePage1" />
@@ -322,19 +216,20 @@
                               HeaderText="Data binding"
                               VerticalAlignment="Top" 
                               HorizontalContentAlignment="Stretch"
-                              XamlSource="NavigationView\NavigationViewSample5.html"
+                              XamlSource="NavigationView\NavigationViewSample5_xaml.txt"
+                              CSharpSource="NavigationView\NavigationViewSample5_cs.txt"
                               WebViewHeight="950">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
-                    <RowDefinition Height="500" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <TextBlock TextWrapping="WrapWholeWords" 
                            Margin="0,0,0,12"
                            Text="When data binding, use the MenuItemsSource property to bind to an observable collection of items, and do not set the MenuItems property. In addition, set the MenuItemTemplate property and use a NavigationViewItem as the data template. If you wish to bind to the header content as well, use data template selectors via the MenuItemTemplateSelector property. " />
 
-                <muxcontrols:NavigationView Grid.Row="2" x:Name="nvSample4" 
+                <muxcontrols:NavigationView x:Name="nvSample4" Grid.Row="2" Height="460"
                                             MenuItemTemplateSelector="{StaticResource selector}"
                                             MenuItemsSource="{x:Bind Categories, Mode=OneWay}" 
                                             IsTabStop="False" SelectionChanged="NavigationView_SelectionChanged4">
@@ -349,53 +244,38 @@
                               HeaderText="API in action"
                               VerticalAlignment="Top" 
                               HorizontalContentAlignment="Stretch" 
-                              XamlSource="NavigationView\NavigationViewSample6.html" 
                               WebViewHeight="250" >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="600" />
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <CheckBox Content="Hide Settings button" x:Name="settingsCheck" Margin="0,0,10,0" IsChecked="False" Checked="settings_checked" Unchecked="settings_unchecked" />
-                    <CheckBox Content="Enable Back Button" Grid.Column="1" x:Name="enableCheck" Margin="0,0,10,0" IsChecked="False" Checked="enableback_Checked" Unchecked="enableback_Unchecked" />
-                    <CheckBox Content="Hide Back Button" Grid.Column="2" x:Name="visibleCheck" Margin="0,0,10,0" IsChecked="False" Checked="hideback_Checked" Unchecked="hideback_Unchecked" />
-                    <CheckBox Content="Show AutoSuggestBox" Grid.Column="3" x:Name="autoSuggestCheck" IsChecked="False" Checked="autoSuggestCheck_Checked" Unchecked="autoSuggestCheck_Unchecked" />
-                </Grid>
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="PaneHeader" Margin="0,0,10,0" VerticalAlignment="Center" />
-                    <TextBox x:Name="paneText" Grid.Column="1" Text="" Margin="0,0,10,0" CharacterReceived="TextBlock_CharacterReceived" LostFocus="TextBlock_LostFocus" />
-                    <CheckBox Grid.Column="2" Content="Top PanePosition?" Margin="0,0,10,0" x:Name="panePositionToggle" IsChecked="False" Checked="panePositionToggle_Checked" Unchecked="panePositionToggle_Unchecked" />
-                    <CheckBox Grid.Column="3" Content="SelectionFollowsFocus?" x:Name="sffCheck" IsChecked="False" Checked="sffCheck_Checked" Unchecked="sffCheck_Unchecked" />
-                </Grid>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"  />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <CheckBox Grid.Column="0" Content="Selection Suppressed on Menu Item2?" Margin="0,0,10,0" x:Name="suppressselectionCheck_Checked" IsChecked="False" Checked="suppressselection_Checked" Unchecked="suppressselection_Checked_Unchecked" />
-                    <CheckBox Grid.Column="1" Content="PaneMiddleContent?" x:Name="panemc_Check" Margin="0,0,10,0" IsChecked="False" Checked="panemc_Check_Checked" Unchecked="panemc_Check_Unchecked" />
-                    <CheckBox Grid.Column="2" Content="PaneFooter?" x:Name="paneFooterCheck" IsChecked="False" Checked="paneFooterCheck_Checked" Unchecked="paneFooterCheck_Unchecked" />
-                </Grid>
+            <local:ControlExample.Options>
+                <StackPanel>
+                    <CheckBox x:Name="settingsCheck" Content="Settings item visible" IsChecked="True" Click="settingsCheck_Click"/>
+                    <CheckBox x:Name="visibleCheck" Content="Back button visible" IsChecked="True" Click="visibleCheck_Click"/>
+                    <CheckBox x:Name="enableCheck" Content="Back button enabled" IsChecked="False" Click="enableCheck_Click"/>
+                    <CheckBox x:Name="autoSuggestCheck" Content="AutoSuggestBox visible" IsChecked="True" Click="autoSuggestCheck_Click"/>
 
-                <muxcontrols:NavigationView Loaded="NavigationView_Loaded" Margin="0,12,0,0" Grid.Row="3" SelectionChanged="NavigationView_SelectionChanged"
-                            x:Name="nvSample" PaneDisplayMode="Left" ExpandedModeThresholdWidth="900"
-                            IsSettingsVisible="{x:Bind settingsCheck.IsChecked, Converter={StaticResource NotConverter}}" IsTabStop="False">
+                    <TextBlock Text="Header:" Margin="0,12,0,0"/>
+                    <TextBox x:Name="headerText" Text="Header"/>
+                    <CheckBox x:Name="headerCheck" Content="Always show header" IsChecked="True" Click="headerCheck_Click"/>
+                    <TextBlock Text="PaneTitle:" Margin="0,12,0,0"/>
+                    <TextBox x:Name="paneText" Text="Pane Title"/>
+                    <CheckBox x:Name="panemc_Check" Content="PaneCustomContent visible" IsChecked="False" Click="panemc_Check_Click"/>
+                    <CheckBox x:Name="paneFooterCheck" Content="PaneFooter visible" IsChecked="False" Click="paneFooterCheck_Click"/>
+
+                    <TextBlock Text="PanePosition:" Margin="0,12,0,0"/>
+                    <RadioButton Content="Left" IsChecked="True" Click="panePositionLeft_Click"/>
+                    <RadioButton Content="Top" Click="panePositionTop_Click" Margin="0,0,0,12"/>
+
+                    <CheckBox x:Name="sffCheck" Content="Keyboard SelectionFollowsFocus" IsChecked="False" Click="sffCheck_Click"/>
+                    <CheckBox x:Name="suppressselectionCheck_Checked" Content="Selection of Menu Item2 suppressed" IsChecked="False" Click="suppressselectionCheck_Checked_Click"/>
+                    
+                </StackPanel>
+
+            </local:ControlExample.Options>
+            <muxcontrols:NavigationView x:Name="nvSample" Height="540" Margin="0,12,0,0"
+                                        SelectionChanged="NavigationView_SelectionChanged"
+                                        Header="{Binding ElementName=headerText, Path=Text, Mode=TwoWay}"
+                                        PaneTitle="{Binding ElementName=paneText, Path=Text, Mode=TwoWay}"
+                                        PaneDisplayMode="Left" ExpandedModeThresholdWidth="500"
+                                        IsTabStop="False">
                     <muxcontrols:NavigationView.MenuItems>
                         <muxcontrols:NavigationViewItem Content="Menu Item1" Tag="SamplePage1" x:Name="SamplePage1Item" >
                             <muxcontrols:NavigationViewItem.Icon>
@@ -416,12 +296,8 @@
                     </muxcontrols:NavigationView.MenuItems>
 
                     <muxcontrols:NavigationView.PaneCustomContent>
-                        <HyperlinkButton Content="More info" x:Name="PaneHyperlink" Visibility="Collapsed" />
+                        <HyperlinkButton x:Name="PaneHyperlink" Content="More info" Margin="12,6,12,0" Visibility="Collapsed" />
                     </muxcontrols:NavigationView.PaneCustomContent>
-
-                    <muxcontrols:NavigationView.PaneHeader>
-                        <TextBlock x:Name="PaneHeaderText" Text="Welcome" Margin="0,13,0,0" Visibility="Collapsed" />
-                    </muxcontrols:NavigationView.PaneHeader>
 
                     <muxcontrols:NavigationView.AutoSuggestBox>
                         <AutoSuggestBox QueryIcon="Find" />
@@ -436,7 +312,7 @@
 
                     <Frame x:Name="contentFrame"/>
                 </muxcontrols:NavigationView>
-            </Grid>
+
         </local:ControlExample>
     </Grid>
 </Page>

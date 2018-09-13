@@ -1,0 +1,24 @@
+﻿// NOTE: Each of the buttons scale up and down using the same element_PointerEntered/Exited events as the prior samples.
+
+private void StackedButtonsExample_Loaded(object sender, RoutedEventArgs e)
+{
+    // Animate the translation of each button relative to the scale and translation of the button above.
+    var anim = _compositor.CreateExpressionAnimation();
+    anim.Expression = "(above.Scale.Y - 1) * 50 + above.Translation.Y % (50 * index)";
+    anim.Target = "Translation.Y";
+
+    // Animate the second button relative to the first.
+    anim.SetExpressionReferenceParameter("above", ExpressionButton1);
+    anim.SetScalarParameter("index", 1);
+    ExpressionButton2.StartAnimation(anim);
+
+    // Animate the third button relative to the second.
+    anim.SetExpressionReferenceParameter("above", ExpressionButton2);
+    anim.SetScalarParameter("index", 2);
+    ExpressionButton3.StartAnimation(anim);
+
+    // Animate the fourth button relative to the third.
+    anim.SetExpressionReferenceParameter("above", ExpressionButton3);
+    anim.SetScalarParameter("index", 3);
+    ExpressionButton4.StartAnimation(anim);
+}

@@ -1,0 +1,28 @@
+﻿//C# code behind
+private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+{
+    FrameNavigationOptions navOptions = new FrameNavigationOptions();
+    navOptions.TransitionInfoOverride = args.RecommendedNavigationTransitionInfo;
+    if (sender.PanePosition == NavigationViewPanePosition.Top)
+    {
+        navOptions.IsNavigationStackEnabled = False;
+    }
+    Type pageType;
+    if (itemContainer == SamplePage1Item) 
+    {
+        pageType = typeof(SamplePage1);
+    }
+    else if (itemContainer == SamplePage2Item) 
+    {
+        pageType = typeof(SamplePage2);
+    }
+    else if (itemContainer == SamplePage3Item) 
+    {
+        pageType = typeof(SamplePage3);
+    }
+    else if (itemContainer == SamplePage4Item) 
+    {
+        pageType = typeof(SamplePage4);
+    }
+    ContentFrame.NavigateToType(pageType, null, navOptions);
+}

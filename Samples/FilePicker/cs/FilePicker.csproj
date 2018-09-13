@@ -115,6 +115,9 @@
     <Compile Include="Scenario4_SaveFile.xaml.cs">
       <DependentUpon>Scenario4_SaveFile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario5_TriggerCFU.xaml.cs">
+      <DependentUpon>Scenario5_TriggerCFU.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -149,6 +152,11 @@
     </Page>
     <Page Include="..\shared\Scenario4_SaveFile.xaml">
       <Link>Scenario4_SaveFile.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario5_TriggerCFU.xaml">
+      <Link>Scenario5_TriggerCFU.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

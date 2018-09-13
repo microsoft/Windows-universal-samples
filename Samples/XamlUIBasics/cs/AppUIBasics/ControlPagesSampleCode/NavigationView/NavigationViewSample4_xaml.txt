@@ -1,0 +1,10 @@
+﻿<NavigationView x:Name="nvSample" PaneDisplayMode="Top" 
+    SelectionFollowsFocus="Enabled" BackButtonVisibility="Collapsed">
+    <NavigationView.MenuItems>
+        <NavigationViewItem Icon="Play" Content="Item1" x:Name="SamplePage1Item" />
+        <NavigationViewItem Icon="Save" Content="Item2" x:Name="SamplePage2Item" />
+        <NavigationViewItem Icon="Refresh" Content="Item3" x:Name="SamplePage3Item" />
+        <NavigationViewItem Icon="Download" Content="Item4" x:Name="SamplePage4Item" />
+    </NavigationView.MenuItems>
+    <Frame x:Name="contentFrame"/>
+</NavigationView>

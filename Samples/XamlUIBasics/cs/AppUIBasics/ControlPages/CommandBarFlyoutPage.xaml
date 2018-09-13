@@ -18,7 +18,7 @@
         </muxcontrols:CommandBarFlyout>
     </Page.Resources>
     <StackPanel>
-        <local:ControlExample HeaderText="CommandBarFlyout for commands on an in-app object" XamlSource="CommandBarFlyout/CommandBarFlyoutSample1.html">
+        <local:ControlExample HeaderText="CommandBarFlyout for commands on an in-app object" XamlSource="CommandBarFlyout/CommandBarFlyoutSample1_xaml.txt" CSharpSource="CommandBarFlyout/CommandBarFlyoutSample1_cs.txt">
             <StackPanel>
                 <TextBlock Text="Click or right click the image to open a CommandBarFlyout" />
                 <Border x:Name="myImageBorder" BorderBrush="Transparent" BorderThickness="2">

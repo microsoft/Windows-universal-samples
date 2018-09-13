@@ -22,7 +22,7 @@
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel x:Name="Header" Grid.Row="0" Grid.ColumnSpan="2" Height="60"  Visibility="Collapsed">
+        <StackPanel x:Name="Header" Grid.Row="0" Grid.ColumnSpan="2" Height="75"  Visibility="Collapsed">
             <StackPanel Orientation="Horizontal" >
                 <Image Source="ms-appx:///Assets/smallTile-sdk.png" HorizontalAlignment="Left" Stretch="None"/>
                 <RichTextBlock Foreground="Black"  FontSize="20" TextAlignment="Left" FontFamily="Segoe UI">

@@ -52,8 +52,9 @@ namespace FilePickerContracts
 
         private async void AddFileButton_Click(object sender, RoutedEventArgs e)
         {
-            StorageFile file = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFileAsync(@"CachedFile.txt", CreationCollisionOption.ReplaceExisting);
+            StorageFile file = await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFileAsync(@"BeforeAccessConflictingFile.txt", CreationCollisionOption.ReplaceExisting);
             await Windows.Storage.FileIO.WriteTextAsync(file, @"Cached file created...");
+            // Note: BeforeAccess triggers CFU activations only for files accessed from the Most Recently Used list and Future Access list.
             CachedFileUpdater.SetUpdateInformation(file, "CachedFile", ReadActivationMode.BeforeAccess, WriteActivationMode.NotNeeded, CachedFileOptions.RequireUpdateOnAccess);
 
             bool inBasket;

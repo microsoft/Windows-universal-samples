@@ -1,0 +1,48 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Initialization"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Text="This sample demonstrates the authentication with a Wi-Fi hotspot through an application. This mechanism can be used as an alternative to configuring static credentials for a hotspot."/>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Text="This scenario consists of two parts. First, Windows must be provisioned to trigger the application when authenticating with a certain hotspot. This is achieved by provisioning a WLAN profile with a corresponding configuration. The provisioning XML must either be signed to be consumed by the provisioning API, or this sample must be part of a privileged mobile network operator companion application. Refer to the provisioning agent sample for more details. The sample XML built into this application must be modified to match the hotspot's SSID and signed before it can be applied."/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button x:Name="ProvisionButton" Content="Provision" Margin="0,0,10,0" Click="ProvisionButton_Click"/>
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Text="Next, the application needs to register a background task for the hotspot authentication event. The background task runs whenever Windows attempts to authenticate with a Wi-Fi hotspot and the corresponding WLAN profile has an extension configured. Note that provisioning has to be done first to give the application access to the background event. If an application unregisters from this event, it has to provision again before it can reregister for this event. It is safe to provision multiple times, but an application can only register one background task handler for this event at a time."/>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button x:Name="RegisterButton" Content="Register" Margin="0,0,10,0" Click="RegisterButton_Click"/>
+                        <Button x:Name="UnregisterButton" Content="Unregister" Margin="0,0,10,0" Click="UnregisterButton_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

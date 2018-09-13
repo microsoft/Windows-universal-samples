@@ -157,6 +157,9 @@
     <ClInclude Include="Scenario4_SaveFile.xaml.h">
       <DependentUpon>..\shared\Scenario4_SaveFile.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario5_TriggerCFU.xaml.h">
+      <DependentUpon>..\shared\Scenario5_TriggerCFU.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
@@ -172,6 +175,7 @@
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
+    <Page Include="..\shared\Scenario5_TriggerCFU.xaml" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -205,6 +209,9 @@
     </ClCompile>
     <ClCompile Include="Scenario4_SaveFile.xaml.cpp">
       <DependentUpon>..\shared\Scenario4_SaveFile.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario5_TriggerCFU.xaml.cpp">
+      <DependentUpon>..\shared\Scenario5_TriggerCFU.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -69,7 +69,8 @@ namespace AppUIBasics
                 else if (selectedTheme == "Light")
                 {
                     titleBar.ButtonForegroundColor = Colors.Black;
-                } else
+                }
+                else
                 {
                     if (Application.Current.RequestedTheme == ApplicationTheme.Dark)
                     {

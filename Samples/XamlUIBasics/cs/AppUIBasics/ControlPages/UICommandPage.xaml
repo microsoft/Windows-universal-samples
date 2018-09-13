@@ -19,7 +19,7 @@
     </Page.Resources>
 
     <StackPanel>
-        <local:ControlExample HeaderText="Exposing a command in multiple controls using UICommand" XamlSource="UICommand\UICommandSample1.html" HorizontalContentAlignment="Stretch">
+        <local:ControlExample HeaderText="Exposing a command in multiple controls using UICommand" XamlSource="UICommand\UICommandSample1_xaml.txt" CSharpSource="UICommand\UICommandSample1_cs.txt" HorizontalContentAlignment="Stretch">
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

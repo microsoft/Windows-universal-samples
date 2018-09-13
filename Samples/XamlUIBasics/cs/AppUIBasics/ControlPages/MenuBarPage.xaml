@@ -11,7 +11,7 @@
       mc:Ignorable="d">
     <StackPanel>
         <local:ControlExample HeaderText="A Simple MenuBar" 
-                              XamlSource="MenuBar\MenuBarSample1.html">
+                              XamlSource="MenuBar\MenuBarSample1.txt">
             <StackPanel x:Name="Control1" Orientation="Horizontal">
                 <muxcontrols:MenuBar>
                     <muxcontrols:MenuBarItem Title="File">
@@ -36,7 +36,7 @@
         </local:ControlExample>
 
         <local:ControlExample HeaderText="MenuBar with Submenus and Seperators"
-                              XamlSource="MenuBar\MenuBarSample2.html">
+                              XamlSource="MenuBar\MenuBarSample2.txt">
             <StackPanel x:Name="Control2" Orientation="Horizontal">
                 <muxcontrols:MenuBar>
                     <muxcontrols:MenuBarItem Title="File">

@@ -25,6 +25,7 @@ namespace SDKTemplate
             new Scenario() { Title = "Pick multiple files",   ClassType = typeof(Scenario2) },
             new Scenario() { Title = "Pick a folder",         ClassType = typeof(Scenario3) },
             new Scenario() { Title = "Save a file",           ClassType = typeof(Scenario4) },
+            new Scenario() { Title = "Trigger CFU",           ClassType = typeof(Scenario5) },
         };
     }
 

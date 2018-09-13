@@ -33,9 +33,6 @@ namespace SDKTemplate
             var mp = mediaPlayerElement.MediaPlayer;
             if (mp != null)
             {
-                // Explicitly disposing sources facilitates faster memory reclamation.
-                mp.DisposeSource(); // From SDKTemplate.Helpers.MediaPlayerExtensions
-
                 // Ensure MediaPlayerElement drops its reference to MediaPlayer.
                 mediaPlayerElement.SetMediaPlayer(null);
 

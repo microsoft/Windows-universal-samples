@@ -504,7 +504,7 @@
     {
       "UniqueId": "Collections",
       "Title": "Collections",
-      "Subtitle": "FlipView, GridView, ListView, Pivot, SemanticZoom, Hub",
+      "Subtitle": "FlipView, GridView, ListView, Pivot, SemanticZoom, Hub, DataGrid",
       "ImagePath": "",
       "Description": "Use collection controls to display, navigate, and interact with collections of data and media.",
       "Items": [
@@ -706,6 +706,33 @@
             "GridView",
             "ListView",
             "Hub"
+          ]
+        },
+        {
+          "UniqueId": "DataGrid",
+          "Title": "DataGrid",
+          "Subtitle": "The DataGrid control presents data in a customizable table of rows and columns.",
+          "ImagePath": "ms-appx:///Assets/GridView.png",
+          "Description": "Released Summer 2018! The DataGrid control provides a flexible way to display a collection of data in rows and columns.",
+          "Content": "The DataGrid control presents data in a customizable table of rows and columns.",
+          "IsNew": true,
+          "Docs": [
+            {
+              "Title": "DataGrid",
+              "Uri": "https://aka.ms/win10datagridapidoc"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://aka.ms/win10datagriddoc"
+            },
+            {
+              "Title": "Windows Community Toolkit",
+              "Uri": "https://docs.microsoft.com/en-us/windows/communitytoolkit/"
+            }
+          ],
+          "RelatedControls": [
+            "GridView",
+            "TreeView"
           ]
         }
       ]
@@ -1516,7 +1543,8 @@
           ],
           "RelatedControls": [
             "Image",
-            "MediaPlayerElement"
+            "MediaPlayerElement",
+            "WebView"
           ]
         },
         {
@@ -1562,6 +1590,32 @@
           ],
           "RelatedControls": [
             "Image"
+          ]
+        },
+        {
+          "UniqueId": "WebView",
+          "Title": "WebView",
+          "Subtitle": "A control that hosts HTML content in an app.",
+          "ImagePath": "ms-appx:///Assets/WebView.png",
+          "Description": "A control that hosts HTML content in an app.",
+          "Content": "",
+          "IsNew": true,
+          "Docs": [
+            {
+              "Title": "WebView",
+              "Uri": "https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Controls.WebView"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/web-view"
+            },
+            {
+              "Title": "Full Sample",
+              "Uri": "https://go.microsoft.com/fwlink/p/?LinkId=722922"
+            }
+          ],
+          "RelatedControls": [
+            "MediaElement"
           ]
         }
       ]
@@ -1645,6 +1699,16 @@
           "RelatedControls": [
             "Reveal"
           ]
+        },
+        {
+          "UniqueId": "ColorPaletteResources",
+          "Title": "ColorPaletteResources",
+          "Subtitle": "",
+          "ImagePath": "ms-appx:///Assets/DefaultIcon.png",
+          "Description": "Released Summer 2018! Apply custom colors to your controls through this cascading API, or scope them to a local subset.",
+          "Content": "",
+          "IsNew": true,
+          "Docs": []
         }
       ]
     },

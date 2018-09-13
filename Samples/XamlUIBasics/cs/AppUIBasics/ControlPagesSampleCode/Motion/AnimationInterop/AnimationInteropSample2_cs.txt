@@ -1,0 +1,17 @@
+﻿// NOTE: The rectangle scales up and down using the same element_PointerEntered/Exited events as the prior sample.
+
+// Set up the relationship between the rectangle and the ellipse.
+private void ExpressionSample_Loaded(object sender, RoutedEventArgs e)
+{
+    var expressionAnim = _compositor.CreateExpressionAnimation();
+
+    // The ellipse's scale is inversely proportional to the rectangle's scale
+    expressionAnim.Expression = "Vector3(1/scaleElement.Scale.X, 1/scaleElement.Scale.Y, 1)";
+    expressionAnim.Target = "Scale";
+
+    // Use SetExpressionReferenceParameter to alias a UIElement into the expression string
+    expressionAnim.SetExpressionReferenceParameter("scaleElement", rectangle);
+
+    // Start the animation on the ellipse
+    ellipse.StartAnimation(expressionAnim);
+}

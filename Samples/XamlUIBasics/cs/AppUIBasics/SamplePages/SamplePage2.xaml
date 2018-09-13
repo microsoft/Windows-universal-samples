@@ -6,25 +6,27 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.Resources>
-            <x:Double x:Key="TileHeight">150</x:Double>
-        </Grid.Resources>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <ScrollViewer>
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid.Resources>
+                <x:Double x:Key="TileHeight">150</x:Double>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <Grid x:Name="DestinationElement" Grid.Row="1" Grid.Column="0" MinHeight="{StaticResource TileHeight}" Background="{ThemeResource SystemAccentColor}" Margin="12" Width="150" Height="200" VerticalAlignment="Top" />
+            <Grid x:Name="DestinationElement" Grid.Row="1" Grid.Column="0" MinHeight="{StaticResource TileHeight}" Background="{ThemeResource SystemAccentColor}" Margin="12" Width="150" Height="200" VerticalAlignment="Top" />
 
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Grid.Column="1" MinHeight="200" Margin="12">
-            <TextBlock Style="{ThemeResource TitleTextBlockStyle}" TextWrapping="WrapWholeWords" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit" Margin="0,0,0,12"/>
-            <TextBlock TextWrapping="WrapWholeWords" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
-        </StackPanel>
+            <StackPanel x:Name="ContentPanel" Grid.Row="1" Grid.Column="1" MinHeight="200" Margin="12">
+                <TextBlock Style="{ThemeResource TitleTextBlockStyle}" TextWrapping="WrapWholeWords" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit" Margin="0,0,0,12"/>
+                <TextBlock TextWrapping="WrapWholeWords" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+            </StackPanel>
 
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </Page>

@@ -1,26 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Text;
+﻿using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace AppUIBasics.ControlPages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class ToggleSplitButtonPage : Page
     {
         private MarkerType _type = MarkerType.Bullet;
@@ -29,10 +12,10 @@ namespace AppUIBasics.ControlPages
             this.InitializeComponent();
         }
 
-        private void myListButton_Click(SplitButton sender, SplitButtonClickEventArgs args)
+        private void myListButton_Click(Microsoft.UI.Xaml.Controls.SplitButton sender, Microsoft.UI.Xaml.Controls.SplitButtonClickEventArgs args)
         {
             // TODO: correct if statement when platform bug is fixed
-            if ((sender as ToggleSplitButton).IsChecked)
+            if ((sender as Microsoft.UI.Xaml.Controls.ToggleSplitButton).IsChecked)
             {
                 //remove bulleted list
                 myRichEditBox.Document.Selection.ParagraphFormat.ListType = MarkerType.None;
@@ -60,8 +43,6 @@ namespace AppUIBasics.ControlPages
                 mySymbolIcon.Symbol = Symbol.Bullets;
             }
             myRichEditBox.Document.Selection.ParagraphFormat.ListType = _type;
-
-            //mySymbolIcon = symbol;
 
             myListButton.IsChecked = true;
             myListButton.Flyout.Hide();

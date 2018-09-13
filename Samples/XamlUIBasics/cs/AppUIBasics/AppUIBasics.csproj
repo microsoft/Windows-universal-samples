@@ -184,6 +184,7 @@
     <Content Include="Assets\Sun-100-Black.png" />
     <Content Include="Assets\Sun.32.scale-100-White.png" />
     <Content Include="Assets\Swipe.png" />
+    <Content Include="Assets\theme_editor2.gif" />
     <Content Include="Assets\Tiles\LargeTile.scale-100.png" />
     <Content Include="Assets\Tiles\LargeTile.scale-125.png" />
     <Content Include="Assets\Tiles\LargeTile.scale-150.png" />
@@ -236,24 +237,32 @@
     <Content Include="Assets\TreeView.png" />
     <Content Include="Assets\updated.png" />
     <Content Include="Assets\WebView.png" />
-    <Content Include="ControlPagesSampleCode\Buttons\DropDown\DropDownButton_Icon.html" />
-    <Content Include="ControlPagesSampleCode\Buttons\DropDown\DropDownButton_Simple.html" />
-    <Content Include="ControlPagesSampleCode\Buttons\ToggleSplitButton\ToggleSplitButtonSample1.html" />
-    <Content Include="ControlPagesSampleCode\UICommand\UICommandSample1.html" />
-    <Content Include="ControlPagesSampleCode\MenuBar\MenuBarSample1.html" />
-    <Content Include="ControlPagesSampleCode\MenuBar\MenuBarSample2.html" />
-    <Content Include="ControlPagesSampleCode\Motion\AnimationInterop\AnimationInteropSample3.html" />
-    <Content Include="ControlPagesSampleCode\Motion\AnimationInterop\AnimationInteropSample2.html" />
-    <Content Include="ControlPagesSampleCode\Motion\AnimationInterop\AnimationInteropSample1.html" />
-    <Content Include="ControlPagesSampleCode\NavigationView\NavigationViewSample6.html" />
-    <Content Include="ControlPagesSampleCode\NavigationView\NavigationViewSample2.html" />
-    <Content Include="ControlPagesSampleCode\NavigationView\NavigationViewSample1.html" />
-    <Content Include="ControlPagesSampleCode\NavigationView\NavigationViewSample5.html" />
-    <Content Include="ControlPagesSampleCode\NavigationView\NavigationViewSample4.html" />
-    <Content Include="ControlPagesSampleCode\NavigationView\NavigationViewSample3.html" />
-    <Content Include="ControlPagesSampleCode\Motion\ConnectedAnimation\ConnectedAnimationSimple.html" />
-    <Content Include="ControlPagesSampleCode\Buttons\SplitButton\SplitButtonSample1.html" />
-    <Content Include="ControlPagesSampleCode\CommandBarFlyout\CommandBarFlyoutSample1.html" />
+    <Content Include="ControlPagesSampleCode\Buttons\DropDown\DropDownButton_Icon.txt" />
+    <Content Include="ControlPagesSampleCode\Buttons\DropDown\DropDownButton_Simple.txt" />
+    <Content Include="ControlPagesSampleCode\Buttons\SplitButton\SplitButtonSample1.txt" />
+    <Content Include="ControlPagesSampleCode\Buttons\ToggleSplitButton\ToggleSplitButtonSample1.txt" />
+    <Content Include="ControlPagesSampleCode\MenuBar\MenuBarSample1.txt" />
+    <Content Include="ControlPagesSampleCode\MenuBar\MenuBarSample2.txt" />
+    <Content Include="ControlPagesSampleCode\NavigationView\NavigationViewSample5_cs.txt" />
+    <Content Include="ControlPagesSampleCode\NavigationView\NavigationViewSample5_xaml.txt" />
+    <Content Include="ControlPagesSampleCode\NavigationView\NavigationViewSample1.txt" />
+    <Content Include="ControlPagesSampleCode\NavigationView\NavigationViewSample2.txt" />
+    <Content Include="ControlPagesSampleCode\NavigationView\NavigationViewSample3.txt" />
+    <Content Include="ControlPagesSampleCode\NavigationView\NavigationViewSample4_cs.txt" />
+    <Content Include="ControlPagesSampleCode\NavigationView\NavigationViewSample4_xaml.txt" />
+    <Content Include="ControlPagesSampleCode\NavigationView\NavigationViewSample6.txt" />
+    <Content Include="ControlPagesSampleCode\Text\RichEditBox\RichEditBoxSample2_xaml.txt" />
+    <Content Include="ControlPagesSampleCode\Text\RichEditBox\RichEditBoxSample3_cs.txt" />
+    <Content Include="ControlPagesSampleCode\Text\RichEditBox\RichEditBoxSample3_xaml.txt" />
+    <Content Include="ControlPagesSampleCode\Text\RichEditBox\RichEditBoxSample4_xaml.txt" />
+    <Content Include="ControlPagesSampleCode\UICommand\UICommandSample1_cs.txt" />
+    <Content Include="ControlPagesSampleCode\UICommand\UICommandSample1_xaml.txt" />
+    <Content Include="ControlPagesSampleCode\Motion\AnimationInterop\AnimationInteropSample3_cs.txt" />
+    <Content Include="ControlPagesSampleCode\Motion\AnimationInterop\AnimationInteropSample2_cs.txt" />
+    <Content Include="ControlPagesSampleCode\Motion\AnimationInterop\AnimationInteropSample1_cs.txt" />
+    <Content Include="ControlPagesSampleCode\Motion\ConnectedAnimation\ConnectedAnimationSimple.txt" />
+    <Content Include="ControlPagesSampleCode\CommandBarFlyout\CommandBarFlyoutSample1_cs.txt" />
+    <Content Include="ControlPagesSampleCode\CommandBarFlyout\CommandBarFlyoutSample1_xaml.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -338,6 +347,9 @@
     <Compile Include="ControlPages\ColorPickerPage.xaml.cs">
       <DependentUpon>ColorPickerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ControlPages\ColorPaletteResourcesPage.xaml.cs">
+      <DependentUpon>ColorPaletteResourcesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ControlPages\ComboBoxPage.xaml.cs">
       <DependentUpon>ComboBoxPage.xaml</DependentUpon>
     </Compile>
@@ -355,6 +367,9 @@
     </Compile>
     <Compile Include="ControlPages\ContentDialogPage.xaml.cs">
       <DependentUpon>ContentDialogPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPages\DataGridPage.xaml.cs">
+      <DependentUpon>DataGridPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ControlPages\DatePickerPage.xaml.cs">
       <DependentUpon>DatePickerPage.xaml</DependentUpon>
@@ -415,6 +430,9 @@
     </Compile>
     <Compile Include="ControlPages\PageTransitionPage.xaml.cs">
       <DependentUpon>PageTransitionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPages\WebViewPage.xaml.cs">
+      <DependentUpon>WebViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ControlPages\ParallaxViewPage.xaml.cs">
       <DependentUpon>ParallaxViewPage.xaml</DependentUpon>
@@ -591,7 +609,7 @@
     <Content Include="Assets\SplitView.png" />
     <Content Include="Assets\Tiles\Tile_General.png" />
     <Content Include="Assets\Windows_Desktop.png" />
-    <Content Include="ControlPagesSampleCode\Text\RichEditBox\RichEditBoxSample1.html" />
+    <Content Include="ControlPagesSampleCode\Text\RichEditBox\RichEditBoxSample4_cs.txt" />
     <Content Include="DataModel\ControlInfoData.json" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
@@ -666,9 +684,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ControlPages\DataGridPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ControlPages\DropDownButtonPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlPages\WebViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ControlPages\SplitButtonPage.xaml">
       <SubType>Designer</SubType>
@@ -743,6 +769,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ControlPages\ColorPickerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlPages\ColorPaletteResourcesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1036,8 +1066,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="ColorCode.UWP">
+      <Version>2.0.5</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>5.0.0</Version>
+      <Version>6.2.0-Preview1-26502-02</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.0.180717002-prerelease</Version>
@@ -1050,7 +1083,7 @@
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

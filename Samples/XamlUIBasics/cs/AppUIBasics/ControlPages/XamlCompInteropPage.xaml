@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <local:ControlExample HeaderText="Use a natural motion composition animation on a UIElement"  Loaded="NaturalMotionExample_Loaded" MinimumUniversalAPIContract="7" XamlSource="Motion/AnimationInterop/AnimationInteropSample1.html">
+        <local:ControlExample HeaderText="Use a natural motion composition animation on a UIElement"  Loaded="NaturalMotionExample_Loaded" MinimumUniversalAPIContract="7" CSharpSource="Motion/AnimationInterop/AnimationInteropSample1_cs.txt">
             <StackPanel VerticalAlignment="Stretch">
                 <TextBlock Text="Hover over the button to animate its scale." Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,12"  />
                 <Button Content="Item" Width="100" Height="50" PointerEntered="element_PointerEntered" PointerExited="element_PointerExited" />
@@ -28,7 +28,7 @@
             </local:ControlExample.Options>
         </local:ControlExample>
 
-        <local:ControlExample HeaderText="ExpressionAnimation on an Ellipse element" Loaded="ExpressionSample_Loaded" MinimumUniversalAPIContract="7" XamlSource="Motion/AnimationInterop/AnimationInteropSample2.html">
+        <local:ControlExample HeaderText="ExpressionAnimation on an Ellipse element" Loaded="ExpressionSample_Loaded" MinimumUniversalAPIContract="7" CSharpSource="Motion/AnimationInterop/AnimationInteropSample2_cs.txt">
             <StackPanel Height="200">
                 <TextBlock Text="Hover over the square to animate its scale. Notice that the ellipse also animates." Style="{ThemeResource BaseTextBlockStyle}"   />
                 <TextBlock Text="The scale of the circle is inversely related to the scale of the square." Margin="0,0,0,12" />
@@ -43,7 +43,7 @@
             </StackPanel>
         </local:ControlExample>
 
-        <local:ControlExample HeaderText="Driving several related animations together using ExpressionAnimation" Loaded="StackedButtonsExample_Loaded" MinimumUniversalAPIContract="7" XamlSource="Motion/AnimationInterop/AnimationInteropSample3.html">
+        <local:ControlExample HeaderText="Driving several related animations together using ExpressionAnimation" Loaded="StackedButtonsExample_Loaded" MinimumUniversalAPIContract="7" CSharpSource="Motion/AnimationInterop/AnimationInteropSample3_cs.txt">
             <StackPanel Margin="0,0,0,50">
                 <TextBlock Text="Hover over any button to animate its scale. Notice that the other buttons move out of the way." Style="{ThemeResource BaseTextBlockStyle}"  />
                 <TextBlock Text="Each button animates as a function of the previous button's scale and translation." Margin="0,0,0,12" />

@@ -1,0 +1,41 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario5"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+mc:Ignorable="d">
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Writes to a file and optionally notifies the CachedFileManager.
+            </TextBlock>
+
+            <Button Content="Create a file" Click="CreateFileButton_Click"  Margin="0,10,0,0"/>
+            <Button x:Name="WriteToFileButton" Content="Write to file" Click="WriteToFileButton_Click" Margin="0,10,0,0" />
+            <Button x:Name="WriteToFileWithCFUButton" Content="Write to file and notify CachedFileManager" Click="WriteToFileWithExplicitCFUButton_Click" Margin="0,10,0,0"/>
+
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}" Margin="0,20,0,0"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Opens a file and saves it to the Future Access list, then gets it from the Future Access List.
+            </TextBlock>
+
+            <Button Content="Open a file" Click="PickAFileButton_Click" Margin="0,10,0,0" />
+            <Button x:Name="SaveToFutureAccessListButton" Content="Save file to Future Access List" Click="SaveToFutureAccessListButton_Click" Margin="0,10,0,0" />
+            <Button x:Name="GetFileFromFutureAccessListButton" Content="Get file from Future Access List" Click="GetFileFromFutureAccessListButton_Click" Margin="0,10,0,0" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

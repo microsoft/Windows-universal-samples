@@ -11,7 +11,7 @@
       mc:Ignorable="d">
     
     <StackPanel>
-        <local:ControlExample HeaderText="Simple DropDownButton" XamlSource="Buttons/DropDown/DropDownButton_Simple.html">
+        <local:ControlExample HeaderText="Simple DropDownButton" XamlSource="Buttons/DropDown/DropDownButton_Simple.txt">
             <StackPanel x:Name="Control1" Orientation="Horizontal">
             <muxcontrols:DropDownButton Content="Email">
                 <muxcontrols:DropDownButton.Flyout>
@@ -25,7 +25,7 @@
             </StackPanel>
         </local:ControlExample>
 
-        <local:ControlExample HeaderText="DropDownButton with Icons" XamlSource="Buttons/DropDown/DropDownButton_Icon.html">
+        <local:ControlExample HeaderText="DropDownButton with Icons" XamlSource="Buttons/DropDown/DropDownButton_Icon.txt">
             <StackPanel x:Name="Control2" Orientation="Horizontal">
             <muxcontrols:DropDownButton>
                 <muxcontrols:DropDownButton.Content>

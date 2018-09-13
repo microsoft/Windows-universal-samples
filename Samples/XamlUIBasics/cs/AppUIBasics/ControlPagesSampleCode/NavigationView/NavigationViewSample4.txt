@@ -1,0 +1,40 @@
+﻿<NavigationView x:Name="nvSample" RequiredPaneDisplayMode="Top" 
+    SelectionFollowsFocus="Enabled" BackButtonVisibility="Collapsed" >
+    <NavigationView.MenuItems>
+        <NavigationViewItem Icon="Play" Content="Item1" x:Name="SamplePage1Item" />
+        <NavigationViewItem Icon="Save" Content="Item2" x:Name="SamplePage2Item" />
+        <NavigationViewItem Icon="Refresh" Content="Item3" x:Name="SamplePage3Item" />
+        <NavigationViewItem Icon="Download" Content="Item4" x:Name="SamplePage4Item" />
+    </NavigationView.MenuItems>
+    <Frame x:Name="contentFrame"/>
+</NavigationView>
+
+
+//C# code behind
+private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+{
+    FrameNavigationOptions navOptions = new FrameNavigationOptions();
+    navOptions.TransitionInfoOverride = args.RecommendedNavigationTransitionInfo;
+    if (sender.PanePosition == NavigationViewPanePosition.Top)
+    {
+        navOptions.IsNavigationStackEnabled = False;
+    }
+    Type pageType;
+    if (itemContainer == SamplePage1Item) 
+    {
+        pageType = typeof(SamplePage1);
+    }
+    else if (itemContainer == SamplePage2Item) 
+    {
+        pageType = typeof(SamplePage2);
+    }
+    else if (itemContainer == SamplePage3Item) 
+    {
+        pageType = typeof(SamplePage3);
+    }
+    else if (itemContainer == SamplePage4Item) 
+    {
+        pageType = typeof(SamplePage4);
+    }
+    ContentFrame.NavigateToType(pageType, null, navOptions);
+}

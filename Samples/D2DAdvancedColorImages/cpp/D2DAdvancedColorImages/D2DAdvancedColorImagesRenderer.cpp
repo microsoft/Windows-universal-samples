@@ -31,6 +31,7 @@ using namespace Windows::UI::Xaml;
 
 static const float sc_MaxZoom = 1.0f; // Restrict max zoom to 1:1 scale.
 static const unsigned int sc_MaxBytesPerPixel = 16; // Covers all supported image formats.
+static const float sc_nominalRefWhite = 80.0f; // Nominal white nits for sRGB and scRGB.
 
 // 400 bins with gamma of 10 lets us measure luminance to within 10% error for any
 // luminance above ~1.5 nits, up to 1 million nits.
@@ -43,13 +44,13 @@ D2DAdvancedColorImagesRenderer::D2DAdvancedColorImagesRenderer(
     ) :
     m_deviceResources(deviceResources),
     m_renderEffectKind(RenderEffectKind::None),
-    m_imageInfo{},
     m_zoom(1.0f),
     m_minZoom(1.0f), // Dynamically calculated on window size.
     m_imageOffset(),
     m_pointerPos(),
     m_maxCLL(-1.0f),
     m_brightnessAdjust(1.0f),
+    m_imageInfo{},
     m_isComputeSupported(false)
 {
     // Register to be notified if the GPU device is lost or recreated.
@@ -116,7 +117,9 @@ void D2DAdvancedColorImagesRenderer::SetRenderOptions(
     m_renderEffectKind = effect;
     m_brightnessAdjust = brightnessAdjustment;
 
-    UpdateWhiteLevelScale(m_brightnessAdjust, m_dispInfo->SdrWhiteLevelInNits);
+    auto sdrWhite = m_dispInfo ? m_dispInfo->SdrWhiteLevelInNits : sc_nominalRefWhite;
+
+    UpdateWhiteLevelScale(m_brightnessAdjust, sdrWhite);
 
     // Adjust the Direct2D effect graph based on RenderEffectKind.
     // Some RenderEffectKind values require us to apply brightness adjustment
@@ -338,7 +341,7 @@ void D2DAdvancedColorImagesRenderer::CreateHistogramResources()
 
     histogramMatrix->SetInputEffect(0, m_histogramPrescale.Get());
 
-    float scale = sc_histMaxNits / 80.0f; // scRGB 1.0 is defined as 80 nits.
+    float scale = sc_histMaxNits / sc_nominalRefWhite;
 
     D2D1_MATRIX_5X4_F rgbtoYnorm = D2D1::Matrix5x4F(
         0.2126f / scale, 0, 0, 0,
@@ -652,8 +655,7 @@ void D2DAdvancedColorImagesRenderer::UpdateWhiteLevelScale(float brightnessAdjus
     case AdvancedColorKind::StandardDynamicRange:
     case AdvancedColorKind::WideColorGamut:
     default:
-        // Nominal reference white of sRGB is 80 nits.
-        scale = sdrWhiteLevel / 80.0f;
+        scale = sdrWhiteLevel / sc_nominalRefWhite;
         break;
     }
 
@@ -710,7 +712,9 @@ void D2DAdvancedColorImagesRenderer::ComputeHdrMetadata()
     // Initialize with a sentinel value.
     m_maxCLL = -1.0f;
 
-    if (!m_isComputeSupported)
+    // MaxCLL is not meaningful for SDR or WCG images.
+    if ((!m_isComputeSupported) ||
+        (m_imageInfo.imageKind != AdvancedColorKind::HighDynamicRange))
     {
         return;
     }
@@ -722,54 +726,52 @@ void D2DAdvancedColorImagesRenderer::ComputeHdrMetadata()
 
     auto ctx = m_deviceResources->GetD2DDeviceContext();
 
-    if (m_imageInfo.imageKind == AdvancedColorKind::HighDynamicRange)
+    ctx->BeginDraw();
+
+    ctx->DrawImage(m_histogramEffect.Get());
+
+    // We ignore D2DERR_RECREATE_TARGET here. This error indicates that the device
+    // is lost. It will be handled during the next call to Present.
+    HRESULT hr = ctx->EndDraw();
+    if (hr != D2DERR_RECREATE_TARGET)
     {
-        ctx->BeginDraw();
-
-        ctx->DrawImage(m_histogramEffect.Get());
-
-        // We ignore D2DERR_RECREATE_TARGET here. This error indicates that the device
-        // is lost. It will be handled during the next call to Present.
-        HRESULT hr = ctx->EndDraw();
-        if (hr != D2DERR_RECREATE_TARGET)
-        {
-            DX::ThrowIfFailed(hr);
-        }
-
-        float *histogramData = new float[sc_histNumBins];
-        DX::ThrowIfFailed(
-            m_histogramEffect->GetValue(D2D1_HISTOGRAM_PROP_HISTOGRAM_OUTPUT,
-                reinterpret_cast<BYTE*>(histogramData),
-                sc_histNumBins * sizeof(float)
-                )
-            );
-
-        unsigned int maxCLLbin = 0;
-        float runningSum = 0.0f; // Cumulative sum of values in histogram is 1.0.
-        for (int i = sc_histNumBins - 1; i >= 0; i--)
-        {
-            runningSum += histogramData[i];
-            maxCLLbin = i;
-
-            if (runningSum >= 1.0f - maxCLLPercent)
-            {
-                break;
-            }
-        }
-
-        float binNorm = static_cast<float>(maxCLLbin + 1) / static_cast<float>(sc_histNumBins);
-        m_maxCLL = powf(binNorm, 1 / sc_histGamma) * sc_histMaxNits;
+        DX::ThrowIfFailed(hr);
     }
-    else
+
+    float *histogramData = new float[sc_histNumBins];
+    DX::ThrowIfFailed(
+        m_histogramEffect->GetValue(D2D1_HISTOGRAM_PROP_HISTOGRAM_OUTPUT,
+            reinterpret_cast<BYTE*>(histogramData),
+            sc_histNumBins * sizeof(float)
+            )
+        );
+
+    unsigned int maxCLLbin = 0;
+    float runningSum = 0.0f; // Cumulative sum of values in histogram is 1.0.
+    for (int i = sc_histNumBins - 1; i >= 0; i--)
     {
-        // MaxCLL is not meaningful for SDR or WCG images.
+        runningSum += histogramData[i];
+        maxCLLbin = i;
+
+        if (runningSum >= 1.0f - maxCLLPercent)
+        {
+            break;
+        }
     }
+
+    float binNorm = static_cast<float>(maxCLLbin) / static_cast<float>(sc_histNumBins);
+    m_maxCLL = powf(binNorm, 1 / sc_histGamma) * sc_histMaxNits;
+
+    // Some drivers have a bug where histogram will always return 0. Treat this as unknown.
+    m_maxCLL = (m_maxCLL == 0.0f) ? -1.0f : m_maxCLL;
 }
 
 // Set HDR10 metadata to allow HDR displays to optimize behavior based on our content.
 void D2DAdvancedColorImagesRenderer::EmitHdrMetadata()
 {
-    if (m_dispInfo->CurrentAdvancedColorKind == AdvancedColorKind::HighDynamicRange)
+    auto acKind = m_dispInfo ? m_dispInfo->CurrentAdvancedColorKind : AdvancedColorKind::StandardDynamicRange;
+
+    if (acKind == AdvancedColorKind::HighDynamicRange)
     {
         DXGI_HDR_METADATA_HDR10 metadata = {};
 

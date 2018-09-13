@@ -55,7 +55,7 @@ namespace SDKTemplate
         [DllImport("api-ms-win-core-sysinfo-l1-2-1.dll")]
         static extern void GetSystemTimeAsFileTime(ref FILETIME lpSystemTimeAsFileTime);
 
-        [DllImport("api-ms-win-core-libraryloader-l2-1.dll")]
+        [DllImport("api-ms-win-core-libraryloader-l2-1-0.dll", CharSet = CharSet.Unicode)]
         static extern IntPtr LoadPackagedLibrary(string filename, uint reserved);
 
         public static ServiceViewModel Current { get; private set; }
