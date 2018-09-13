@@ -12,4 +12,5 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Pick multiple files",   "SDKTemplate.Scenario2" },
     { "Pick a folder",         "SDKTemplate.Scenario3" },
     { "Save a file",           "SDKTemplate.Scenario4" },
+    { "Trigger CFU",           "SDKTemplate.Scenario5" }
 };

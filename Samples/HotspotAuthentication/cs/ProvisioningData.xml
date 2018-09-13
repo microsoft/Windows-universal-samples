@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CarrierProvisioning xmlns="http://www.microsoft.com/networking/CarrierControl/v1">
+  <Global>
+    <!-- Adjust the Carrier ID to fit your own ID. Refer to the MSDN documentation about Carrier ID's. -->
+    <CarrierId>{11111111-1111-1111-1111-111111111111}</CarrierId>
+    <!-- Adjust the Susbscriber ID. Refer to the MSDN documentation about Subscriber ID's. -->
+    <SubscriberId>1234567890</SubscriberId>
+  </Global>
+  <WLANProfiles>
+    <WLANProfile xmlns="http://www.microsoft.com/networking/CarrierControl/WLAN/v1">
+      <!-- Adjust the profile name to have a human readable network name. By default this equals the SSID. -->
+      <name>Contoso Wi-Fi</name>
+      <SSIDConfig>
+        <SSID>
+          <!-- Adjust the SSID name to fit the SSID of the hotspot. -->
+          <name>contosowifi</name>
+        </SSID>
+      </SSIDConfig>
+      <MSM>
+        <security>
+          <authEncryption>
+            <authentication>open</authentication>
+            <encryption>none</encryption>
+            <useOneX>false</useOneX>
+          </authEncryption>
+          <HotspotProfile xmlns="http://www.microsoft.com/networking/WLAN/HotspotProfile/v1">
+            <ExtAuth>
+              <!-- Adjust the extension ID to match the package family name of the application running the background task handler. -->
+              <ExtensionId>Microsoft.SDKSamples.HotspotAuthentication.CS_8wekyb3d8bbwe</ExtensionId>
+            </ExtAuth>
+          </HotspotProfile>
+        </security>
+      </MSM>
+    </WLANProfile>
+  </WLANProfiles>
+</CarrierProvisioning>

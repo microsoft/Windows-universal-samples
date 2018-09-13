@@ -3,6 +3,7 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
   IgnorableNamespaces="uap mp"
   >
   <Identity Name="Microsoft.SDKSamples.D2DAdvancedColorImages.CPP" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.0"/>
@@ -19,7 +20,7 @@
     <Resource Language="x-generate"/>
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="D2DAdvancedColorImages.App">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="D2DAdvancedColorImages.App" desktop4:SupportsMultipleInstances="true">
       <uap:VisualElements
         DisplayName="Direct2D Advanced Color Images C++ Sample"
         Square150x150Logo="Assets\squaretile-sdk.png"

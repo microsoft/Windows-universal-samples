@@ -67,8 +67,23 @@ DirectXPage::DirectXPage() :
     DisplayInformation::DisplayContentsInvalidated +=
         ref new TypedEventHandler<DisplayInformation^, Object^>(this, &DirectXPage::OnDisplayContentsInvalidated);
 
-    currentDisplayInformation->AdvancedColorInfoChanged +=
-        ref new TypedEventHandler<DisplayInformation^, Object^>(this, &DirectXPage::OnAdvancedColorInfoChanged);
+    AdvancedColorInfo^ acInfo = nullptr;
+    try
+    {
+        currentDisplayInformation->AdvancedColorInfoChanged +=
+            ref new TypedEventHandler<DisplayInformation^, Object^>(this, &DirectXPage::OnAdvancedColorInfoChanged);
+
+        acInfo = currentDisplayInformation->GetAdvancedColorInfo();
+    }
+    catch (COMException^ e)
+    {
+        // In Windows 10 1803, accessing AdvancedColorInfo or registering the event handler while connected over
+        // remote desktop will throw E_FAIL. This is fixed in future versions of Windows.
+        if (e->HResult != E_FAIL)
+        {
+            throw e;
+        }
+    }
 
     swapChainPanel->CompositionScaleChanged +=
         ref new TypedEventHandler<SwapChainPanel^, Object^>(this, &DirectXPage::OnCompositionScaleChanged);
@@ -107,7 +122,8 @@ DirectXPage::DirectXPage() :
 
     m_renderer = std::unique_ptr<D2DAdvancedColorImagesRenderer>(new D2DAdvancedColorImagesRenderer(m_deviceResources));
 
-    UpdateDisplayACState(currentDisplayInformation->GetAdvancedColorInfo());
+    // Even if AdvancedColorInfo is not available, run the change handler anyway to set default values.
+    UpdateDisplayACState(acInfo);
 }
 
 DirectXPage::~DirectXPage()
@@ -175,17 +191,16 @@ void DirectXPage::LoadImage(_In_ StorageFile^ imageFile)
     });
 }
 
-void DirectXPage::UpdateDisplayACState(_In_ AdvancedColorInfo^ info)
+void DirectXPage::UpdateDisplayACState(_In_opt_ AdvancedColorInfo^ info)
 {
-    // Render options are meaningless when this method is first called, as no image has been loaded yet.
-    // Therefore it doesn't matter what value we use for oldDispKind in this case.
+    // Fill in default display info values if AdvancedColorInfo is not available yet.
+    // For example, if the image hasn't been loaded.
     auto oldDispKind = m_dispInfo ? m_dispInfo->CurrentAdvancedColorKind : AdvancedColorKind::StandardDynamicRange;
-    auto newDispKind = info->CurrentAdvancedColorKind;
-    m_dispInfo = info;
+    auto newDispKind = info       ? info->CurrentAdvancedColorKind       : AdvancedColorKind::StandardDynamicRange;
+    m_dispInfo       = info       ? info                                 : m_dispInfo;
+    auto maxcll      = info       ? static_cast<int>(info->MaxLuminanceInNits) : 0;
 
     DisplayACState->Text = L"Kind: " + ConvertACKindToString(newDispKind);
-
-    unsigned int maxcll = static_cast<unsigned int>(info->MaxLuminanceInNits);
 
     if (maxcll == 0)
     {
@@ -207,7 +222,6 @@ void DirectXPage::UpdateDisplayACState(_In_ AdvancedColorInfo^ info)
         // If display has changed kind between SDR/HDR/WCG, we must reset all rendering options.
         UpdateDefaultRenderOptions();
     }
-
 }
 
 // UI element event handlers.
@@ -269,8 +283,9 @@ void DirectXPage::UpdateDefaultRenderOptions()
         break;
 
     case AdvancedColorKind::HighDynamicRange:
+        auto acKind = m_dispInfo ? m_dispInfo->CurrentAdvancedColorKind : AdvancedColorKind::StandardDynamicRange;
 
-        switch (m_dispInfo->CurrentAdvancedColorKind)
+        switch (acKind)
         {
         case AdvancedColorKind::StandardDynamicRange:
         case AdvancedColorKind::WideColorGamut:
@@ -345,7 +360,19 @@ void DirectXPage::OnDisplayContentsInvalidated(_In_ DisplayInformation^ sender, 
 
 void DirectXPage::OnAdvancedColorInfoChanged(_In_ DisplayInformation ^sender, _In_ Object ^args)
 {
-    UpdateDisplayACState(sender->GetAdvancedColorInfo());
+    try
+    {
+        UpdateDisplayACState(sender->GetAdvancedColorInfo());
+    }
+    catch (COMException^ e)
+    {
+        // In Windows 10 1803, accessing AdvancedColorInfo or registering the event handler while connected over
+        // remote desktop will throw E_FAIL. This is fixed in future versions of Windows.
+        if (e->HResult != E_FAIL)
+        {
+            throw e;
+        }
+    }
 }
 
 

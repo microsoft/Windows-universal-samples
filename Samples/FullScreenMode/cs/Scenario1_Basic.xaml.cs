@@ -22,6 +22,10 @@ namespace SDKTemplate
     {
         private MainPage rootPage;
 
+        // What is the program's last known full-screen state?
+        // We use this to detect when the system forced us out of full-screen mode.
+        private bool isLastKnownFullScreen = ApplicationView.GetForCurrentView().IsFullScreenMode;
+
         public Scenario1_Basic()
         {
             this.InitializeComponent();
@@ -49,6 +53,7 @@ namespace SDKTemplate
             {
                 view.ExitFullScreenMode();
                 rootPage.NotifyUser("Exiting full screen mode", NotifyType.StatusMessage);
+                isLastKnownFullScreen = false;
                 // The SizeChanged event will be raised when the exit from full screen mode is complete.
             }
             else
@@ -56,6 +61,7 @@ namespace SDKTemplate
                 if (view.TryEnterFullScreenMode())
                 {
                     rootPage.NotifyUser("Entering full screen mode", NotifyType.StatusMessage);
+                    isLastKnownFullScreen = true;
                     // The SizeChanged event will be raised when the entry to full screen mode is complete.
                 }
                 else
@@ -89,6 +95,14 @@ namespace SDKTemplate
             ToggleFullScreenModeSymbol.Symbol = isFullScreenMode ? Symbol.BackToWindow : Symbol.FullScreen;
             ReportFullScreenMode.Text = isFullScreenMode ? "is in" : "is not in";
             FullScreenOptionsPanel.Visibility = isFullScreenMode ? Visibility.Visible : Visibility.Collapsed;
+
+            // Did the system force a change in full screen mode?
+            if (isLastKnownFullScreen != isFullScreenMode)
+            {
+                isLastKnownFullScreen = isFullScreenMode;
+                // Clear any stray messages that talked about the mode we are no longer in.
+                rootPage.NotifyUser("", NotifyType.StatusMessage);
+            }
         }
 
         void OnKeyDown(object sender, KeyRoutedEventArgs e)
@@ -100,6 +114,7 @@ namespace SDKTemplate
                 {
                     view.ExitFullScreenMode();
                     rootPage.NotifyUser("Exited full screen mode due to keypress", NotifyType.StatusMessage);
+                    isLastKnownFullScreen = false;
                 }
             }
         }

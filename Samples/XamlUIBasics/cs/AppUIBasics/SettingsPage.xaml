@@ -50,6 +50,16 @@
                     Style="{StaticResource TitleTextBlockStyle}"
                     Margin="0,40,0,0"
                     FontWeight="Normal"
+                    Text="Sound" />
+                <StackPanel Margin="0,10,0,0">
+                    <ToggleSwitch x:Name="soundToggle" Toggled="soundToggle_Toggled" OffContent="Off" OnContent="On"/>
+                    <CheckBox x:Name="spatialSoundBox" Unchecked="spatialSoundBox_Unchecked" Checked="spatialSoundBox_Checked" IsEnabled="False" Content="Spatial Audio"/>
+                    <TextBlock Text="See the Sound page for how to enable sound in your app!" Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic" Margin="0,8,0,0"/>
+                </StackPanel>
+                <TextBlock
+                    Style="{StaticResource TitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    FontWeight="Normal"
                     Text="About" />
                 <RichTextBlock MaxWidth="840" Margin="0,10,0,0" IsTextSelectionEnabled="True">
                     <Paragraph>

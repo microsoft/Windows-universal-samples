@@ -48,7 +48,6 @@ namespace SDKTemplate
 
                 UnregisterHandlers(mediaPlayer);
 
-                mediaPlayer.DisposeSource();
                 mediaPlayerElement.SetMediaPlayer(null);
                 mediaPlayer.Dispose();
             }
@@ -108,7 +107,6 @@ namespace SDKTemplate
         private async Task<MediaPlaybackItem> LoadSourceFromUriAsync(Uri uri, HttpClient httpClient = null)
         {
             UnregisterHandlers(mediaPlayerElement.MediaPlayer);
-            mediaPlayerElement.MediaPlayer?.DisposeSource();
 
             AdaptiveMediaSourceCreationResult result = null;
             if (httpClient != null)

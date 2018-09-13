@@ -21,6 +21,7 @@
     <ClCompile Include="Scenario2_MultiFile.xaml.cpp" />
     <ClCompile Include="Scenario3_SingleFolder.xaml.cpp" />
     <ClCompile Include="Scenario4_SaveFile.xaml.cpp" />
+    <ClCompile Include="Scenario5_TriggerCFU.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -31,6 +32,7 @@
     <ClInclude Include="Scenario2_MultiFile.xaml.h" />
     <ClInclude Include="Scenario3_SingleFolder.xaml.h" />
     <ClInclude Include="Scenario4_SaveFile.xaml.h" />
+    <ClInclude Include="Scenario5_TriggerCFU.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -44,6 +46,7 @@
     <Page Include="..\shared\Scenario2_MultiFile.xaml" />
     <Page Include="..\shared\Scenario3_SingleFolder.xaml" />
     <Page Include="..\shared\Scenario4_SaveFile.xaml" />
+    <Page Include="..\shared\Scenario5_TriggerCFU.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">

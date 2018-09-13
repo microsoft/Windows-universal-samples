@@ -140,6 +140,7 @@
     <Content Include="Assets\RatingControl.png" />
     <Content Include="Assets\Reveal.png" />
     <Content Include="Assets\RevealFocus.png" />
+    <Content Include="Assets\Sound.png" />
     <Content Include="Assets\Sun-100-Black.png" />
     <Content Include="Assets\Sun.32.scale-100-White.png" />
     <Content Include="Assets\Swipe.png" />
@@ -368,6 +369,9 @@
     </Compile>
     <Compile Include="ControlPages\SliderPage.xaml.cs">
       <DependentUpon>SliderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPages\SoundPage.xaml.cs">
+      <DependentUpon>SoundPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ControlPages\SplitViewPage.xaml.cs">
       <DependentUpon>SplitViewPage.xaml</DependentUpon>
@@ -726,6 +730,10 @@
     <Page Include="ControlPages\SliderPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ControlPages\SoundPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ControlPages\SplitViewPage.xaml">
       <SubType>Designer</SubType>

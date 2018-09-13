@@ -97,6 +97,16 @@ namespace AppUIBasics
             }
         }
 
+        public void EnableSound(bool withSpatial = false)
+        {
+            ElementSoundPlayer.State = ElementSoundPlayerState.On;
+
+            if(!withSpatial)
+                ElementSoundPlayer.SpatialAudioMode = ElementSpatialAudioMode.Off;
+            else
+                ElementSoundPlayer.SpatialAudioMode = ElementSpatialAudioMode.On;
+        }
+
         public static TEnum GetEnum<TEnum>(string text) where TEnum : struct
         {
             if (!typeof(TEnum).GetTypeInfo().IsEnum)
