@@ -623,13 +623,22 @@
           "Description": "The ListView lets you show a collection of items in a list that scrolls vertically.",
           "Content": "<p><b>ListView</b> is an <b>ItemsControl</b>, so it can contain a collection of items of any type. To populate the view, add items to the <b>Items</b> collection, or set the <b>ItemsSource</b> property to a data source.</p><p>Set an <b>ItemTemplate</b> to define the look of individual items.</p><p>Look at the <i>ListViewPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
           "IsNew": false,
+          "IsUpdated": true,
           "Docs": [
             {
               "Title": "ListView",
               "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.listview.aspx"
             },
             {
-              "Title": "Guidelines",
+              "Title": "Inverted Lists",
+              "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/inverted-lists"
+            },
+            {
+              "Title": "Inverted Lists - Full Sample",
+              "Uri": "https://github.com/Microsoft/Windows-universal-samples/tree/master/Samples/XamlBottomUpList"
+            },
+            {
+              "Title": "Guidelines for Lists",
               "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/lists"
             }
           ],
@@ -1708,6 +1717,16 @@
           "Description": "Released Summer 2018! Apply custom colors to your controls through this cascading API, or scope them to a local subset.",
           "Content": "",
           "IsNew": true,
+          "Docs": []
+        },
+        {
+          "UniqueId": "CompactSizing",
+          "Title": "Compact Sizing",
+          "Subtitle": "(Preview) How to use a Resource Dictionary to enable compact sizing.",
+          "ImagePath": "ms-appx:///Assets/CompactSizing.png",
+          "Description": "Preview! This functionality will come to WinUI later this year.",
+          "Content": "",
+          "IsPreview": true,
           "Docs": []
         }
       ]

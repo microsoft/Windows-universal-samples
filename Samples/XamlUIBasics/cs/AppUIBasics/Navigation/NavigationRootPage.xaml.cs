@@ -123,7 +123,7 @@ namespace AppUIBasics
 
         private void AddNavigationMenuItems()
         {
-            foreach (var group in ControlInfoDataSource.Instance.Groups)
+            foreach (var group in ControlInfoDataSource.Instance.Groups.OrderBy(i => i.Title))
             {
                 var item = new Microsoft.UI.Xaml.Controls.NavigationViewItem() { Content = group.Title, Tag = group.UniqueId, DataContext = group };
                 AutomationProperties.SetName(item, group.Title);
@@ -140,10 +140,22 @@ namespace AppUIBasics
                     };
                 }
                 NavigationViewControl.MenuItems.Add(item);
+
+                if (group.UniqueId == "AllControls")
+                {
+                    this._allControlsMenuItem = item;
+                }
+                else if (group.UniqueId == "NewControls")
+                {
+                    this._newControlsMenuItem = item;
+                }
             }
 
-            this._allControlsMenuItem = (Microsoft.UI.Xaml.Controls.NavigationViewItem)NavigationViewControl.MenuItems[1];
-            this._newControlsMenuItem = (Microsoft.UI.Xaml.Controls.NavigationViewItem)NavigationViewControl.MenuItems[0];
+            // Move "What's New" and "All Controls" to the top of the NavigationView
+            NavigationViewControl.MenuItems.Remove(_allControlsMenuItem);
+            NavigationViewControl.MenuItems.Remove(_newControlsMenuItem);
+            NavigationViewControl.MenuItems.Insert(0, _allControlsMenuItem);
+            NavigationViewControl.MenuItems.Insert(0, _newControlsMenuItem);
 
             _newControlsMenuItem.Loaded += OnNewControlsMenuItemLoaded;
         }

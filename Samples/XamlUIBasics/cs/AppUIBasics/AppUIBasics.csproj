@@ -10,8 +10,8 @@
     <AssemblyName>AppUIBasics</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.17713.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17713.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.17758.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -147,7 +147,9 @@
     <Content Include="Assets\CoffeeCup.png" />
     <Content Include="Assets\ColorPicker.png" />
     <Content Include="Assets\CommandBarFlyout.png" />
+    <Content Include="Assets\CompactSizing.png" />
     <Content Include="Assets\ConnectedAnimations.png" />
+    <Content Include="Assets\Contacts.txt" />
     <Content Include="Assets\DefaultIcon.png" />
     <Content Include="Assets\DropdownButton.png" />
     <Content Include="Assets\EasingFunctions.png" />
@@ -184,7 +186,6 @@
     <Content Include="Assets\Sun-100-Black.png" />
     <Content Include="Assets\Sun.32.scale-100-White.png" />
     <Content Include="Assets\Swipe.png" />
-    <Content Include="Assets\theme_editor2.gif" />
     <Content Include="Assets\Tiles\LargeTile.scale-100.png" />
     <Content Include="Assets\Tiles\LargeTile.scale-125.png" />
     <Content Include="Assets\Tiles\LargeTile.scale-150.png" />
@@ -501,9 +502,6 @@
     <Compile Include="ControlPages\StackPanelPage.xaml.cs">
       <DependentUpon>StackPanelPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ControlPages\StandardSizingPage.xaml.cs">
-      <DependentUpon>StandardSizingPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ControlPages\SwipePage.xaml.cs">
       <DependentUpon>SwipePage.xaml</DependentUpon>
     </Compile>
@@ -568,6 +566,9 @@
       <DependentUpon>PageHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SamplePages\SampleCompactSizingPage.xaml.cs">
+      <DependentUpon>SampleCompactSizingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SamplePages\SamplePage1.xaml.cs">
       <DependentUpon>SamplePage1.xaml</DependentUpon>
     </Compile>
@@ -582,6 +583,9 @@
     </Compile>
     <Compile Include="SamplePages\SampleSettingsPage.xaml.cs">
       <DependentUpon>SampleSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SamplePages\SampleStandardSizingPage.xaml.cs">
+      <DependentUpon>SampleStandardSizingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SearchResultsPage.xaml.cs">
       <DependentUpon>SearchResultsPage.xaml</DependentUpon>
@@ -680,6 +684,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ControlPages\CompactDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ControlPages\CompactSizingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -707,10 +715,6 @@
     <Page Include="ControlPages\RepeaterPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ControlPages\StandardSizingPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ControlExample.xaml">
       <SubType>Designer</SubType>
@@ -1032,6 +1036,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SamplePages\SampleCompactSizingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SamplePages\SamplePage1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1049,6 +1057,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SamplePages\SampleSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SamplePages\SampleStandardSizingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1073,12 +1085,13 @@
       <Version>6.2.0-Preview1-26502-02</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.0.180717002-prerelease</Version>
+      <Version>2.0.180916002-prerelease</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.0</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -18,11 +18,13 @@
         </muxcontrols:CommandBarFlyout>
     </Page.Resources>
     <StackPanel>
-        <local:ControlExample HeaderText="CommandBarFlyout for commands on an in-app object" XamlSource="CommandBarFlyout/CommandBarFlyoutSample1_xaml.txt" CSharpSource="CommandBarFlyout/CommandBarFlyoutSample1_cs.txt">
+        <local:ControlExample HeaderText="CommandBarFlyout for commands on an in-app object" XamlSource="CommandBarFlyout/CommandBarFlyoutSample1_xaml.txt"
+                              CSharpSource="CommandBarFlyout/CommandBarFlyoutSample1_cs.txt">
             <StackPanel>
                 <TextBlock Text="Click or right click the image to open a CommandBarFlyout" />
-                <Border x:Name="myImageBorder" BorderBrush="Transparent" BorderThickness="2">
-                    <Image x:Name="Image1" Width="200" Height="200" Source="/Assets/rainier.jpg" PointerPressed="Image_PointerPressed" PointerReleased="Image_PointerReleased" ContextFlyout="{x:Bind CommandBarFlyout1}"/>
+                <Border x:Name="myImageBorder" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="2">
+                    <Image x:Name="Image1" Height="300" Source="/Assets/rainier.jpg" PointerPressed="Image_PointerPressed"
+                           PointerReleased="Image_PointerReleased" ContextFlyout="{x:Bind CommandBarFlyout1}"/>
                 </Border>
                 <TextBlock x:Name="SelectedOptionText" Text="" />
             </StackPanel>

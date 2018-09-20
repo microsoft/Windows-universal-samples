@@ -1,4 +1,5 @@
-﻿using Windows.UI;
+﻿using Windows.Foundation.Metadata;
+using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
@@ -14,7 +15,7 @@ namespace AppUIBasics.ControlPages
         {
             this.InitializeComponent();
         }
-        
+
         public void OnClosed(object sender, object args)
         {
             myImageBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
@@ -31,12 +32,20 @@ namespace AppUIBasics.ControlPages
 
             if (wasLeftPointerPressed)
             {
-                FlyoutShowOptions myOption = new FlyoutShowOptions();
-                myOption.ShowMode = FlyoutShowMode.Transient;
-                myOption.Placement = FlyoutPlacementMode.RightEdgeAlignedTop;
-                CommandBarFlyout1.ShowAt(Image1, myOption);
+                if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
+                {
+                    FlyoutShowOptions myOption = new FlyoutShowOptions();
+                    myOption.ShowMode = FlyoutShowMode.Transient;
+                    myOption.Placement = FlyoutPlacementMode.RightEdgeAlignedTop;
+                    CommandBarFlyout1.ShowAt(Image1, myOption);
+                }
+                else
+                {
+                    CommandBarFlyout1.ShowAt(Image1);
+                }
                 wasLeftPointerPressed = false;
             }
+            args.Handled = true;
         }
 
         private void OnElementClicked(object sender, Windows.UI.Xaml.RoutedEventArgs e)

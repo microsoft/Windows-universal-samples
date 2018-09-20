@@ -8,17 +8,13 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel Margin="0,12,0,0">
-            <RichTextBlock TextWrapping="WrapWholeWords">
-                <Paragraph>The contents of a
-                    <Bold>DataGrid</Bold> control can be generated simply by using the
-                    <Bold>ItemsSource</Bold> property to bind to a collection of any type.
-                </Paragraph>
-                <Paragraph Margin="0,8,0,0">The built-in column types include a text column, a check box column, and a template column for hosting custom content. The built-in row type includes a drop-down details section that you can use to display additional content below the cell values. </Paragraph>
+            <RichTextBlock TextWrapping="WrapWholeWords" Margin="0,12">
+                <Paragraph>The built-in column types include a text column, a check box column, and a template column for hosting custom content. The built-in row type includes a drop-down details section that you can use to display additional content below the cell values. </Paragraph>
                 <Paragraph Margin="0,8,0,0">The DataGrid control supports common table formatting options, such as alternating row backgrounds and foregrounds and the ability to show or hide headers, grid lines, and scroll bars. Additionally, the control provides several style and template properties that you can use to completely change the appearance of the control and its rows, columns, cells, and row or column headers.</Paragraph>
             </RichTextBlock>
 
             <TextBlock Margin="0,24,0,0" Text="DataGrid is included as a part of the Windows Community Toolkit." />
-            <Button Margin="0,8,0,0" Content="Launch the Windows Community Toolkit Sample App" Click="LaunchToolkitButton_Click" />
+            <HyperlinkButton Margin="0,8,0,0" Content="Launch the Windows Community Toolkit Sample App" Click="LaunchToolkitButton_Click" />
         </StackPanel>
     </Grid>
 </Page>

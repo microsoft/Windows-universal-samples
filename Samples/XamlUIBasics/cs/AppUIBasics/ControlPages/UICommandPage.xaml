@@ -8,7 +8,6 @@
       xmlns:muxcontrols="using:Microsoft.UI.Xaml.Controls"
       mc:Ignorable="d">
     <Page.Resources>
-
         <Style x:Key="HorizontalSwipe" TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemRevealStyle}">
             <Setter Property="Height" Value="60"/>
             <Setter Property="Padding" Value="0"/>
@@ -19,8 +18,13 @@
     </Page.Resources>
 
     <StackPanel>
-        <local:ControlExample HeaderText="Exposing a command in multiple controls using UICommand" XamlSource="UICommand\UICommandSample1_xaml.txt" CSharpSource="UICommand\UICommandSample1_cs.txt" HorizontalContentAlignment="Stretch">
-            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <local:ControlExample HeaderText="Exposing a command in multiple controls using UICommand"
+                              XamlSource="UICommand\UICommandSample1_xaml.txt"
+                              CSharpSource="UICommand\UICommandSample1_cs.txt"
+                              HorizontalContentAlignment="Stretch"
+                              MinimumUniversalAPIContract="7"
+                              Loaded="ControlExample_Loaded">
+            <Grid x:Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />

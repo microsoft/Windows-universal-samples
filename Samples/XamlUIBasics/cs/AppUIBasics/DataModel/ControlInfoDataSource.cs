@@ -32,14 +32,14 @@ namespace AppUIBasics.Data
     /// </summary>
     public class ControlInfoDataItem
     {
-        public ControlInfoDataItem(String uniqueId, String title, String subtitle, String imagePath, String badgePath, String description, String content, bool isNew, bool isUpdated, bool isPreview)
+        public ControlInfoDataItem(String uniqueId, String title, String subtitle, String imagePath, String badgeString, String description, String content, bool isNew, bool isUpdated, bool isPreview)
         {
             this.UniqueId = uniqueId;
             this.Title = title;
             this.Subtitle = subtitle;
             this.Description = description;
             this.ImagePath = imagePath;
-            this.BadgePath = badgePath;
+            this.BadgeString = badgeString;
             this.Content = content;
             this.IsNew = isNew;
             this.IsUpdated = isUpdated;
@@ -53,7 +53,7 @@ namespace AppUIBasics.Data
         public string Subtitle { get; private set; }
         public string Description { get; private set; }
         public string ImagePath { get; private set; }
-        public string BadgePath { get; private set; }
+        public string BadgeString { get; private set; }
         public string Content { get; private set; }
         public bool IsNew { get; private set; }
         public bool IsUpdated { get; private set; }
@@ -210,7 +210,7 @@ namespace AppUIBasics.Data
                     {
                         JsonObject itemObject = itemValue.GetObject();
 
-                        string badgePath = "ms-appx:///Assets/blank.png";
+                        string badgeString = null;
 
                         bool isNew = itemObject.ContainsKey("IsNew") ? itemObject["IsNew"].GetBoolean() : false;
                         bool isUpdated = itemObject.ContainsKey("IsUpdated") ? itemObject["IsUpdated"].GetBoolean() : false;
@@ -218,24 +218,22 @@ namespace AppUIBasics.Data
 
                         if (isNew)
                         {
-                            badgePath = "ms-appx:///Assets/new.png";
+                            badgeString = "New";
                         }
-
-                        if (isUpdated)
+                        else if (isUpdated)
                         {
-                            badgePath = "ms-appx:///Assets/updated.png";
+                            badgeString = "Updated";
                         }
-
-                        if (isPreview)
+                        else if (isPreview)
                         {
-                            badgePath = "ms-appx:///Assets/preview.png";
+                            badgeString = "Preview";
                         }
 
                         var item = new ControlInfoDataItem(itemObject["UniqueId"].GetString(),
                                                                 itemObject["Title"].GetString(),
                                                                 itemObject["Subtitle"].GetString(),
                                                                 itemObject["ImagePath"].GetString(),
-                                                                badgePath,
+                                                                badgeString,
                                                                 itemObject["Description"].GetString(),
                                                                 itemObject["Content"].GetString(),
                                                                 isNew,

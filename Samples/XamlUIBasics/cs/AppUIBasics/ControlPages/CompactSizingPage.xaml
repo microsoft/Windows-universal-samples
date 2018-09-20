@@ -10,7 +10,7 @@
 //*********************************************************
 -->
     
-    <Page
+<Page
     x:Class="AppUIBasics.ControlPages.CompactSizingPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -20,16 +20,10 @@
     x:Name="compactPage"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="CompactGrid">
-        <local:ControlExample x:Name="Example1" HeaderText="Compact Sizing for controls">
-            <StackPanel x:Name="CompactPanel">
-                <TextBlock x:Name="HeaderBlock" Text="Standard Size" FontSize="18"/>
-                <TextBox Header="First Name:" x:Name="txtfirstName" />
-                <TextBox Header="Last Name:" x:Name="txtLastName"  />
-                <PasswordBox Header="Password:" />
-                <PasswordBox Header="Confrim Password:" />
-                <DatePicker Header="Date Of Birth" />
-            </StackPanel>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <local:ControlExample x:Name="Example1" HeaderText="Compact Sizing for controls" Loaded="Example1_Loaded">
+            <Frame x:Name="ContentFrame" />
+
             <local:ControlExample.Options>
                 <StackPanel>
                     <TextBlock Text="Fluent Standard and Compact Sizing" />
@@ -37,40 +31,17 @@
                     <RadioButton Content="Compact" Tag="CompactSize" GroupName="ControlSize" Checked="Compact_Checked" />
                 </StackPanel>
             </local:ControlExample.Options>
-            
+
             <local:ControlExample.Xaml>
-                <StackPanel>
-                    <TextBlock Text="Applying Compact Size: App Level" FontSize="20" Margin="0,12,12,12"/>
-                    <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
-                        <Paragraph>&lt;Application.Resources&gt;</Paragraph>
-                        <Paragraph TextIndent="12">&lt;ResourceDictionary/&gt;</Paragraph>
-                        <Paragraph TextIndent="24">&lt;ResourceDictionary.MergedDictionaries&gt;</Paragraph>
-                        <Paragraph TextIndent="36">&lt;ResourceDictionary Source="CompactSize.xaml"&gt;</Paragraph>
-                        <Paragraph TextIndent="24">&lt;ResourceDictionary.MergedDictionaries/&gt;</Paragraph>
-                        <Paragraph TextIndent="12">&lt;/ResourceDictionary&gt;</Paragraph>
-                        <Paragraph>&lt;/Application.Resources&gt;</Paragraph>
-                    </RichTextBlock>
-                    <TextBlock Text="Applying Compact Size: Page Level" FontSize="20" Margin="0,12,12,12" />
-                    <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
-                        <Paragraph>&lt;Page.Resources&gt;</Paragraph>
-                        <Paragraph TextIndent="12">&lt;ResourceDictionary/&gt;</Paragraph>
-                        <Paragraph TextIndent="24">&lt;ResourceDictionary.MergedDictionaries&gt;</Paragraph>
-                        <Paragraph TextIndent="36">&lt;ResourceDictionary Source="CompactSize.xaml"&gt;</Paragraph>
-                        <Paragraph TextIndent="24">&lt;ResourceDictionary.MergedDictionaries/&gt;</Paragraph>
-                        <Paragraph TextIndent="12">&lt;/ResourceDictionary&gt;</Paragraph>
-                        <Paragraph>&lt;/Page.Resources&gt;</Paragraph>
-                    </RichTextBlock>
-                    <TextBlock Text="Applying Compact Size: Element Level" FontSize="20" Margin="0,12,12,12" />
-                    <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
-                        <Paragraph>&lt;Grid.Resources&gt;</Paragraph>
-                        <Paragraph TextIndent="12">&lt;ResourceDictionary/&gt;</Paragraph>
-                        <Paragraph TextIndent="24">&lt;ResourceDictionary.MergedDictionaries&gt;</Paragraph>
-                        <Paragraph TextIndent="36">&lt;ResourceDictionary Source="CompactSize.xaml"&gt;</Paragraph>
-                        <Paragraph TextIndent="24">&lt;ResourceDictionary.MergedDictionaries/&gt;</Paragraph>
-                        <Paragraph TextIndent="12">&lt;/ResourceDictionary&gt;</Paragraph>
-                        <Paragraph>&lt;/Grid.Resources&gt;</Paragraph>
-                    </RichTextBlock>
-                </StackPanel>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>&lt;Application.Resources&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;ResourceDictionary/&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;ResourceDictionary.MergedDictionaries&gt;</Paragraph>
+                    <Paragraph TextIndent="36">&lt;ResourceDictionary Source="CompactSize.xaml"&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;ResourceDictionary.MergedDictionaries/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/ResourceDictionary&gt;</Paragraph>
+                    <Paragraph>&lt;/Application.Resources&gt;</Paragraph>
+                </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
     </Grid>

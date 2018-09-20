@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Windows.Foundation.Metadata;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -16,20 +17,10 @@ namespace AppUIBasics.ControlPages
     public sealed partial class UICommandPage : Page
     {
         ObservableCollection<ListItemData> collection = new ObservableCollection<ListItemData>();
+
         public UICommandPage()
         {
             this.InitializeComponent();
-
-            //EditMenuBarItem.AccessKey = "E";
-            var deleteCommand = new StandardUICommand(StandardUICommandKind.Delete);
-            deleteCommand.ExecuteRequested += DeleteCommand_ExecuteRequested;
-
-            DeleteFlyoutItem.Command = deleteCommand;
-
-            for (var i = 0; i < 15; i++)
-            {
-                collection.Add(new ListItemData { Text = "List item " + i.ToString(), Command = deleteCommand });
-           }
         }
 
         private void DeleteCommand_ExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)
@@ -76,6 +67,29 @@ namespace AppUIBasics.ControlPages
         private void ListViewSwipeContainer_PointerExited(object sender, PointerRoutedEventArgs e)
         {
             VisualStateManager.GoToState(sender as Control, "HoverButtonsHidden", true);
+        }
+
+        private void ControlExample_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
+            {
+                var deleteCommand = new StandardUICommand(StandardUICommandKind.Delete);
+                deleteCommand.ExecuteRequested += DeleteCommand_ExecuteRequested;
+
+                DeleteFlyoutItem.Command = deleteCommand;
+
+                for (var i = 0; i < 15; i++)
+                {
+                    collection.Add(new ListItemData { Text = "List item " + i.ToString(), Command = deleteCommand });
+                }
+            }
+            else
+            {
+                for (var i = 0; i < 15; i++)
+                {
+                    collection.Add(new ListItemData { Text = "List item " + i.ToString(), Command = null });
+                }
+            }
         }
     }
 }
