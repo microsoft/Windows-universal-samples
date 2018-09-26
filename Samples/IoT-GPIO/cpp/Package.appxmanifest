@@ -46,4 +46,8 @@
       </uap:VisualElements>
     </Application>
   </Applications>
+  
+  <Capabilities>
+    <DeviceCapability Name="lowLevel" />
+  </Capabilities>
 </Package>

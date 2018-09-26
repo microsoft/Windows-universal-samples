@@ -27,7 +27,7 @@
   </Resources>
 
   <Applications>
-    <Application 
+    <Application
       Id="App"
       StartPage="default.html">
 
@@ -46,4 +46,8 @@
       </uap:VisualElements>
     </Application>
   </Applications>
+
+  <Capabilities>
+    <DeviceCapability Name="lowLevel" />
+  </Capabilities>
 </Package>
