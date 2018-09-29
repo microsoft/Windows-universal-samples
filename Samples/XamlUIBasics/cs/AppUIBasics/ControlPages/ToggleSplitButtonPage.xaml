@@ -1,0 +1,47 @@
+﻿<Page x:Class="AppUIBasics.ControlPages.ToggleSplitButtonPage" 
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+      xmlns:local="using:AppUIBasics"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:muxcontrols="using:Microsoft.UI.Xaml.Controls"
+      mc:Ignorable="d">
+    <StackPanel>
+        <local:ControlExample x:Name="Example1" HeaderText="Using ToggleSplitButton to control bulleted list functionality in RichEditBox" 
+                              XamlSource="Buttons\ToggleSplitButton\ToggleSplitButtonSample1.txt"
+                              WebViewHeight="150">
+            <Grid x:Name="Control1" ColumnSpacing="24">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <muxcontrols:ToggleSplitButton x:Name="myListButton" VerticalAlignment="Top" Click="myListButton_Click">
+                    <SymbolIcon x:Name="mySymbolIcon" Symbol="List"/>
+                    <muxcontrols:ToggleSplitButton.Flyout>
+                        <Flyout Placement="Bottom">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel.Resources>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Padding" Value="4"/>
+                                        <Setter Property="MinWidth" Value="0"/>
+                                        <Setter Property="MinHeight" Value="0"/>
+                                        <Setter Property="Margin" Value="6"/>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <Button Click="BulletButton_Click">
+                                    <SymbolIcon Symbol="List"/>
+                                </Button>
+                                <Button Click="BulletButton_Click">
+                                    <SymbolIcon Symbol="Bullets"/>
+                                </Button>
+                            </StackPanel>
+                        </Flyout>
+                    </muxcontrols:ToggleSplitButton.Flyout>
+                </muxcontrols:ToggleSplitButton>
+
+                <RichEditBox x:Name="myRichEditBox" Grid.Column="1" MinWidth="240" MinHeight="96" PlaceholderText="Type something here"/>
+            </Grid>
+        </local:ControlExample>
+    </StackPanel>
+</Page>

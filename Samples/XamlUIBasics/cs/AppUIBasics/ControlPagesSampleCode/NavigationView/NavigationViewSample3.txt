@@ -1,0 +1,22 @@
+﻿<VisualStateManager.VisualStateGroups>
+    <VisualStateGroup>
+        <VisualState>
+            <VisualState.StateTriggers>
+                <AdaptiveTrigger MinWindowWidth="{x:Bind nvSample.CompactModeThresholdWidth}" />
+            </VisualState.StateTriggers>
+            <VisualState.Setters>
+                <Setter Target="nvSample.PaneDisplayMode" Value="Top" />
+            </VisualState.Setters>
+        </VisualState>
+    </VisualStateGroup>
+</VisualStateManager.VisualStateGroups >
+
+<NavigationView x:Name="nvSample">
+    <NavigationView.MenuItems>
+        <NavigationViewItem Content="Menu Item1" Tag="SamplePage1" />
+        <NavigationViewItem Content="Menu Item2" Tag="SamplePage2" />
+        <NavigationViewItem Content="Menu Item3" Tag="SamplePage3" />
+        <NavigationViewItem Content="Menu Item4" Tag="SamplePage4" />
+    </NavigationView.MenuItems>
+    <Frame x:Name="contentFrame"/>
+</NavigationView>

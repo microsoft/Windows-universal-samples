@@ -1,0 +1,9 @@
+﻿<NavigationView x:Name="nvSample" Header="This is Header Text" PaneDisplayMode="Top">
+    <NavigationView.MenuItems>
+        <NavigationViewItem  Content="Menu Item1" Tag="SamplePage1" />
+        <NavigationViewItem  Content="Menu Item2" Tag="SamplePage2" />
+        <NavigationViewItem  Content="Menu Item3" Tag="SamplePage3" />
+        <NavigationViewItem  Content="Menu Item4" Tag="SamplePage4" />
+    </NavigationView.MenuItems>
+    <Frame x:Name="contentFrame"/>
+</NavigationView>

@@ -2,12 +2,13 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mux="using:Microsoft.UI.Xaml.Controls"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
     <StackPanel>
         <local:ControlExample x:Name="Example1" HeaderText="A simple RatingControl">
 
             <StackPanel VerticalAlignment="Top">
-                <RatingControl x:Name="RatingControl1"
+                <mux:RatingControl x:Name="RatingControl1"
                     IsClearEnabled="{x:Bind clearEnabledCheck.IsChecked.Value, Mode=OneWay}"
                     IsReadOnly="{x:Bind readOnlyCheck.IsChecked.Value, Mode=OneWay}" HorizontalAlignment="Left" />
 
@@ -27,7 +28,7 @@
 
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
-                    <Paragraph>&lt;RatingControl IsClearEnabled="<Run Text="{x:Bind clearEnabledCheck.IsChecked.Value, Mode=OneWay}"></Run>"
+                    <Paragraph>&lt;mux:RatingControl IsClearEnabled="<Run Text="{x:Bind clearEnabledCheck.IsChecked.Value, Mode=OneWay}"></Run>"
                         IsReadOnly="<Run Text="{x:Bind readOnlyCheck.IsChecked.Value, Mode=OneWay}"></Run> " /&gt;
                     </Paragraph>
                 </RichTextBlock>
@@ -36,7 +37,7 @@
 
         <local:ControlExample x:Name="Example2" HeaderText="PlaceholderValue of RatingControl">
 
-            <RatingControl x:Name="RatingControl2" HorizontalAlignment="Left" VerticalAlignment="Top"
+            <mux:RatingControl x:Name="RatingControl2" HorizontalAlignment="Left" VerticalAlignment="Top"
                 PlaceholderValue="{x:Bind slider.Value, Mode=TwoWay}" />
 
             <local:ControlExample.Options>
@@ -48,7 +49,8 @@
 
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
-                    <Paragraph>&lt;RatingControl PlaceholderValue="<Run Text="{x:Bind slider.Value, Mode=OneWay}"></Run>" /&gt;
+                    <Paragraph>&lt;mux:RatingControl PlaceholderValue="
+                        <Run Text="{x:Bind slider.Value, Mode=OneWay}"></Run> " /&gt;
                     </Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>

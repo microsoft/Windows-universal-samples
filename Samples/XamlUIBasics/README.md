@@ -26,6 +26,8 @@ To obtain information about Windows 10 development, go to the [Windows Dev Cente
 
 To obtain information about Microsoft Visual Studio and the tools for developing Windows apps, go to [Visual Studio](http://go.microsoft.com/fwlink/?LinkID=532422)
 
+To contact the authors, please reach out to ControlsGallery@microsoft.com
+
 ## Related topics
 
 [XAML app UI, start to finish](http://msdn.microsoft.com/library/windows/apps/dn263191.aspx)  
@@ -33,6 +35,8 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 Each control page in the application has links to the relevant MSDN documentation for that control.
 
 [Install a prebuilt version of this sample](https://www.microsoft.com/store/productId/9MSVH128X2ZT).
+
+[Windows UI Library (WinUI)](https://docs.microsoft.com/en-us/uwp/toolkits/winui/)
 
 ## Related samples
 

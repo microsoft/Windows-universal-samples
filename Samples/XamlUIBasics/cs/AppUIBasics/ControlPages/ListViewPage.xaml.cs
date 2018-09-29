@@ -7,19 +7,18 @@
 // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 //
 //*********************************************************
-using AppUIBasics.Common;
 using AppUIBasics.Data;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using Windows.UI.Xaml;
+using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 namespace AppUIBasics.ControlPages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class ListViewPage : ItemsPageBase
     {
         public ListViewPage()
@@ -27,72 +26,91 @@ namespace AppUIBasics.ControlPages
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedTo(e);
-
             Items = ControlInfoDataSource.Instance.Groups.Take(3).SelectMany(g => g.Items).ToList();
-        }
-
-        private void ItemTemplate_Click(object sender, RoutedEventArgs e)
-        {
-            var template = (sender as FrameworkElement).Tag.ToString();
-            Control1.ItemTemplate = (DataTemplate)this.Resources[template];
-            itemTemplate.Text = template;
-        }
-
-        private void Control1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (sender is ListView listView)
-            {
-                SelectionOutput.Text = string.Format("You have selected {0} item(s).", listView.SelectedItems.Count);
-            }
-        }
-
-        private void Control1_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            ClickOutput.Text = string.Format("You clicked {0}.", e.ClickedItem.ToString());
-        }
-
-        private void ItemClickCheckBox_Click(object sender, RoutedEventArgs e)
-        {
-            ClickOutput.Text = string.Empty;
-        }
-
-        private void FlowDirectionCheckBox_Click(object sender, RoutedEventArgs e)
-        {
-            if (Control1.FlowDirection == FlowDirection.LeftToRight)
-            {
-                Control1.FlowDirection = FlowDirection.RightToLeft;
-            }
-            else
-            {
-                Control1.FlowDirection = FlowDirection.LeftToRight;
-            }
+            Control4.ItemsSource = AppUIBasics.ControlPages.CustomDataObject.GetDataObjects();
+            ContactsCVS.Source = await Contact.GetContactsGroupedAsync();
         }
 
         private void SelectionModeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Control1 != null)
+            if (Control2 != null)
             {
                 string colorName = e.AddedItems[0].ToString();
                 switch (colorName)
                 {
                     case "None":
-                        Control1.SelectionMode = ListViewSelectionMode.None;
-                        SelectionOutput.Text = string.Empty;
+                        Control2.SelectionMode = ListViewSelectionMode.None;
                         break;
                     case "Single":
-                        Control1.SelectionMode = ListViewSelectionMode.Single;
+                        Control2.SelectionMode = ListViewSelectionMode.Single;
                         break;
                     case "Multiple":
-                        Control1.SelectionMode = ListViewSelectionMode.Multiple;
+                        Control2.SelectionMode = ListViewSelectionMode.Multiple;
                         break;
                     case "Extended":
-                        Control1.SelectionMode = ListViewSelectionMode.Extended;
+                        Control2.SelectionMode = ListViewSelectionMode.Extended;
                         break;
                 }
             }
         }
+    }
+
+    public class Contact
+    {
+        #region Properties
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+        public string Company { get; private set; }
+        public string Name => FirstName + " " + LastName;
+        #endregion
+
+        public Contact(string firstName, string lastName, string company)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Company = company;
+        }
+
+        #region Public Methods
+        public static async Task<ObservableCollection<Contact>> GetContactsAsync()
+        {
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Contacts.txt"));
+            IList<string> lines = await FileIO.ReadLinesAsync(file);
+
+            var contacts = new ObservableCollection<Contact>();
+
+            for (int i = 0; i < lines.Count; i += 3)
+            {
+                contacts.Add(new Contact(lines[i], lines[i + 1], lines[i + 2]));
+            }
+
+            return contacts;
+        }
+
+        public static async Task<ObservableCollection<GroupInfoList>> GetContactsGroupedAsync()
+        {
+            var query = from item in await GetContactsAsync()
+                        group item by item.LastName.Substring(0, 1).ToUpper() into g
+                        orderby g.Key
+                        select new GroupInfoList(g) { Key = g.Key };
+
+            return new ObservableCollection<GroupInfoList>(query);
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+        #endregion
+    }
+
+    public class GroupInfoList : List<object>
+    {
+        public GroupInfoList(IEnumerable<object> items) : base(items)
+        {
+        }
+        public object Key { get; set; }
     }
 }

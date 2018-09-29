@@ -1,0 +1,8 @@
+﻿<SplitButton x:Name="myColorButton" Click="myColorButton_Click">
+    <Rectangle x:Name="CurrentColor" Width="32" Height="32" Fill="Black"/>
+    <SplitButton.Flyout>
+        <Flyout Placement="Bottom">
+            <!-- flyout content -->
+        </Flyout>
+    </SplitButton.Flyout>
+</SplitButton>

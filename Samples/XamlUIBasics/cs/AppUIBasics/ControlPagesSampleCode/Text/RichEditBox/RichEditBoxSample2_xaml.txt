@@ -1,0 +1,8 @@
+﻿<RichEditBox Height="200">
+    <RichEditBox.ContentLinkProviders>
+        <ContentLinkProviderCollection>
+            <ContactContentLinkProvider/>
+            <PlaceContentLinkProvider/>
+        </ContentLinkProviderCollection>
+    </RichEditBox.ContentLinkProviders>
+</RichEditBox>

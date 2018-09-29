@@ -1,0 +1,20 @@
+﻿private void ContextFlyout_Opening(object sender, object e)
+{
+    CommandBarFlyout myFlyout = sender as CommandBarFlyout;
+    if (myFlyout.Target == REBCustom)
+    {
+        AppBarButton myButton = new AppBarButton();
+        myButton.Command = new StandardUICommand(StandardUICommandKind.Share);
+        myFlyout.PrimaryCommands.Add(myButton);
+    }
+}
+
+private void REBCustom_Loaded(object sender, RoutedEventArgs e)
+{
+    REBCustom.ContextFlyout.Opening += ContextFlyout_Opening;
+}
+
+private void REBCustom_Unloaded(object sender, RoutedEventArgs e)
+{
+    REBCustom.ContextFlyout.Opening -= ContextFlyout_Opening;
+}

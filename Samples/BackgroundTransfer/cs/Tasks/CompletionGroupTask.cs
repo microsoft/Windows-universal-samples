@@ -29,14 +29,19 @@ namespace Tasks
         // In this sample, the server intentionally replies with an error status for some of the downloads.
         // Based on the trigger details, we can determine which of the downloads have failed and try them again
         // using a new completion group.
-        public void Run(IBackgroundTaskInstance taskInstance)
+        public async void Run(IBackgroundTaskInstance taskInstance)
         {
+            // The background task awaits on an asynchronous task (RetryDownloadsAsync). Take a deferral
+            // to delay the background task from closing prematurely while the asynchronous code is still running.
+            BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
+
             BackgroundTransferCompletionGroupTriggerDetails details = taskInstance.TriggerDetails
                 as BackgroundTransferCompletionGroupTriggerDetails;
 
             if (details == null)
             {
                 // This task was not triggered by a completion group.
+                deferral.Complete();
                 return;
             }
 
@@ -54,12 +59,14 @@ namespace Tasks
                 }
             }
 
+            InvokeSimpleToast(succeeded, failedDownloads.Count);
+
             if (failedDownloads.Count > 0)
             {
-                RetryDownloads(failedDownloads);
+                await RetryDownloadsAsync(failedDownloads);
             }
 
-            InvokeSimpleToast(succeeded, failedDownloads.Count);
+            deferral.Complete();
         }
 
         private bool IsFailed(DownloadOperation download)
@@ -71,22 +78,30 @@ namespace Tasks
             }
 
             ResponseInformation response = download.GetResponseInformation();
-            if (response.StatusCode != 200)
+            if (response == null || response.StatusCode != 200)
             {
                 return true;
             }
 
             return false;
         }
-
-        private void RetryDownloads(IEnumerable<DownloadOperation> downloads)
+        private async Task RetryDownloadsAsync(IEnumerable<DownloadOperation> downloadsToRetry)
         {
             BackgroundDownloader downloader = CompletionGroupTask.CreateBackgroundDownloader();
 
-            foreach (DownloadOperation download in downloads)
+            foreach (DownloadOperation downloadToRetry in downloadsToRetry)
             {
-                DownloadOperation download1 = downloader.CreateDownload(download.RequestedUri, download.ResultFile);
-                Task<DownloadOperation> startTask = download1.StartAsync().AsTask();
+                // Retry with the same uri, but save to a different file name.
+                string originalName = downloadToRetry.ResultFile.Name;
+                string newName = originalName.Insert(originalName.LastIndexOf('.'), "_retried");
+                await downloadToRetry.ResultFile.RenameAsync(newName, NameCollisionOption.ReplaceExisting);
+
+                DownloadOperation download = downloader.CreateDownload(downloadToRetry.RequestedUri, downloadToRetry.ResultFile);
+
+                // We do not await on background transfer asynchronous tasks, since await will only 
+                // finish after the entire transfer is complete, which may take a very long time. 
+                // The completion of these downloads will be handled by a future CompletionGroupTask instance.
+                Task<DownloadOperation> startTask = download.StartAsync().AsTask();
             }
 
             downloader.CompletionGroup.Enable();

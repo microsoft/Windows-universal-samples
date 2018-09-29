@@ -1,0 +1,3 @@
+﻿<RichEditBox x:Name="REBCustom" Width="800" Height="200" 
+             Loaded="REBCustom_Loaded" 
+             Unloaded="REBCustom_Unloaded"/>

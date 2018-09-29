@@ -32,12 +32,12 @@
                                 <Grid Margin="0,14,0,5">
                                     <Ellipse x:Name="ButtonEllipse" Height="40" Width="40" Fill="Transparent"
                                             HorizontalAlignment="Center"
-                                            Stroke="{StaticResource ApplicationForegroundThemeBrush}"
+                                            Stroke="{ThemeResource DefaultTextForegroundThemeBrush}"
                                             StrokeThickness="2" VerticalAlignment="Center" />
-                                    <TextBlock x:Name="Glyph" Text="&#xE10E;" FontFamily="Segoe UI Symbol"
+                                    <TextBlock x:Name="Glyph" Text="&#xE10E;" FontFamily="Segoe UI Symbol" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"
                                             FontSize="24.777" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
-                                <TextBlock x:Name="Content" Text="{TemplateBinding Content}"
+                                <TextBlock x:Name="Content" Text="{TemplateBinding Content}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"
                                         HorizontalAlignment="Center" FontFamily="Segoe UI" FontSize="12" />
                             </StackPanel>
                             <VisualStateManager.VisualStateGroups>
@@ -45,22 +45,22 @@
                                     <VisualState x:Name="Normal" />
                                     <VisualState x:Name="PointerOver">
                                         <Storyboard>
-                                            <ColorAnimation Duration="0" To="LightGray"
-                                                    Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
-                                                    Storyboard.TargetName="ButtonEllipse" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonEllipse" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="LightGray" />
+                                            </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Pressed">
                                         <Storyboard>
-                                            <ColorAnimation Duration="0" To="Blue"
-                                                    Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
-                                                    Storyboard.TargetName="ButtonEllipse" />
-                                            <ColorAnimation Duration="0" To="Green"
-                                                    Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
-                                                    Storyboard.TargetName="Content" />
-                                            <ColorAnimation Duration="0" To="Green"
-                                                    Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
-                                                    Storyboard.TargetName="Glyph" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonEllipse" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Blue" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Green" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Glyph" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Green" />
+                                            </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
                                 </VisualStateGroup>

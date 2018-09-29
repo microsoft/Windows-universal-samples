@@ -1,0 +1,33 @@
+﻿<Page x:Class="AppUIBasics.ControlPages.CommandBarFlyoutPage" 
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+      xmlns:local="using:AppUIBasics"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:muxcontrols="using:Microsoft.UI.Xaml.Controls"
+      mc:Ignorable="d">
+    <Page.Resources>
+        <muxcontrols:CommandBarFlyout Placement="Right" x:Name="CommandBarFlyout1" Closed="OnClosed">
+            <AppBarButton Label="Share" Icon="Share" Click="OnElementClicked" />
+            <AppBarButton Label="Save" Icon="Save" Click="OnElementClicked" />
+            <AppBarButton Label="Delete" Icon="Delete" Click="OnElementClicked" />
+            <muxcontrols:CommandBarFlyout.SecondaryCommands>
+                <AppBarButton Label="Resize" Click="OnElementClicked" />
+                <AppBarButton Label="Move" Click="OnElementClicked" />
+            </muxcontrols:CommandBarFlyout.SecondaryCommands>
+        </muxcontrols:CommandBarFlyout>
+    </Page.Resources>
+    <StackPanel>
+        <local:ControlExample HeaderText="CommandBarFlyout for commands on an in-app object" XamlSource="CommandBarFlyout/CommandBarFlyoutSample1_xaml.txt"
+                              CSharpSource="CommandBarFlyout/CommandBarFlyoutSample1_cs.txt">
+            <StackPanel>
+                <TextBlock Text="Click or right click the image to open a CommandBarFlyout" />
+                <Border x:Name="myImageBorder" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="2">
+                    <Image x:Name="Image1" Height="300" Source="/Assets/rainier.jpg" PointerPressed="Image_PointerPressed"
+                           PointerReleased="Image_PointerReleased" ContextFlyout="{x:Bind CommandBarFlyout1}"/>
+                </Border>
+                <TextBlock x:Name="SelectedOptionText" Text="" />
+            </StackPanel>
+        </local:ControlExample>
+    </StackPanel>
+</Page>

@@ -1,0 +1,9 @@
+﻿var deleteCommand = new StandardUICommand(StandardUICommandKind.Delete);
+deleteCommand.ExecuteRequested += DeleteCommand_ExecuteRequested;
+
+DeleteFlyoutItem.Command = deleteCommand;
+
+for (var i = 0; i < 15; i++)
+{
+    collection.Add(new ListItemData { Text = i.ToString(), Command = deleteCommand });
+}

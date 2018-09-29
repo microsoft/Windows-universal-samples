@@ -19,6 +19,8 @@ using Windows.Gaming.Input;
 using Windows.System;
 using Windows.System.Profile;
 using Windows.UI.ViewManagement;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
@@ -33,14 +35,16 @@ namespace AppUIBasics
         public static NavigationRootPage Current;
         public static Frame RootFrame = null;
 
+        public VirtualKey ArrowKey;
+
         private RootFrameNavigationHelper _navHelper;
         private PageHeader _header;
         private bool _isGamePadConnected;
         private bool _isKeyboardConnected;
-        private NavigationViewItem _allControlsMenuItem;
-        private NavigationViewItem _newControlsMenuItem;
+        private Microsoft.UI.Xaml.Controls.NavigationViewItem _allControlsMenuItem;
+        private Microsoft.UI.Xaml.Controls.NavigationViewItem _newControlsMenuItem;
 
-        public NavigationView NavigationView
+        public Microsoft.UI.Xaml.Controls.NavigationView NavigationView
         {
             get { return NavigationViewControl; }
         }
@@ -97,17 +101,19 @@ namespace AppUIBasics
             Gamepad.GamepadAdded += OnGamepadAdded;
             Gamepad.GamepadRemoved += OnGamepadRemoved;
 
-            Window.Current.CoreWindow.SizeChanged += (s, e) => UpdateAppTitle();
-            CoreApplication.GetCurrentView().TitleBar.LayoutMetricsChanged += (s, e) => UpdateAppTitle();
+            Window.Current.SetTitleBar(AppTitleBar);
+
+            CoreApplication.GetCurrentView().TitleBar.LayoutMetricsChanged += (s, e) => UpdateAppTitle(s);
 
             _isKeyboardConnected = Convert.ToBoolean(new KeyboardCapabilities().KeyboardPresent);
         }
 
-        void UpdateAppTitle()
+        void UpdateAppTitle(CoreApplicationViewTitleBar coreTitleBar)
         {
             var full = (ApplicationView.GetForCurrentView().IsFullScreenMode);
-            var left = 12 + (full ? 0 : CoreApplication.GetCurrentView().TitleBar.SystemOverlayLeftInset);
+            var left = 12 + (full ? 0 : coreTitleBar.SystemOverlayLeftInset);
             AppTitle.Margin = new Thickness(left, 8, 0, 0);
+            AppTitleBar.Height = coreTitleBar.Height;
         }
 
         public bool CheckNewControlSelected()
@@ -117,9 +123,9 @@ namespace AppUIBasics
 
         private void AddNavigationMenuItems()
         {
-            foreach (var group in ControlInfoDataSource.Instance.Groups)
+            foreach (var group in ControlInfoDataSource.Instance.Groups.OrderBy(i => i.Title))
             {
-                var item = new NavigationViewItem() { Content = group.Title, Tag = group.UniqueId, DataContext = group };
+                var item = new Microsoft.UI.Xaml.Controls.NavigationViewItem() { Content = group.Title, Tag = group.UniqueId, DataContext = group };
                 AutomationProperties.SetName(item, group.Title);
                 if (group.ImagePath.ToLowerInvariant().EndsWith(".png"))
                 {
@@ -134,13 +140,24 @@ namespace AppUIBasics
                     };
                 }
                 NavigationViewControl.MenuItems.Add(item);
+
+                if (group.UniqueId == "AllControls")
+                {
+                    this._allControlsMenuItem = item;
+                }
+                else if (group.UniqueId == "NewControls")
+                {
+                    this._newControlsMenuItem = item;
+                }
             }
 
-            this._allControlsMenuItem = (NavigationViewItem)NavigationViewControl.MenuItems[0];
+            // Move "What's New" and "All Controls" to the top of the NavigationView
+            NavigationViewControl.MenuItems.Remove(_allControlsMenuItem);
+            NavigationViewControl.MenuItems.Remove(_newControlsMenuItem);
+            NavigationViewControl.MenuItems.Insert(0, _allControlsMenuItem);
+            NavigationViewControl.MenuItems.Insert(0, _newControlsMenuItem);
 
-            _allControlsMenuItem.Loaded += OnAllControlsMenuItemLoaded;
-
-            this._newControlsMenuItem = (NavigationViewItem)NavigationViewControl.MenuItems[1];
+            _newControlsMenuItem.Loaded += OnNewControlsMenuItemLoaded;
         }
 
         private void SetDeviceFamily()
@@ -155,12 +172,13 @@ namespace AppUIBasics
             DeviceFamily = parsedDeviceType;
         }
 
-        private void OnAllControlsMenuItemLoaded(object sender, RoutedEventArgs e)
+        private void OnNewControlsMenuItemLoaded(object sender, RoutedEventArgs e)
         {
             if (IsFocusSupported)
             {
-                _allControlsMenuItem.Focus(FocusState.Keyboard);
+                _newControlsMenuItem.Focus(FocusState.Keyboard);
             }
+            _newControlsMenuItem.IsSelected = true;
         }
 
         private void OnGamepadRemoved(object sender, Gamepad e)
@@ -173,18 +191,15 @@ namespace AppUIBasics
             _isGamePadConnected = Gamepad.Gamepads.Any();
         }
 
-        private void OnNavigationViewItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        private void OnNavigationViewItemInvoked(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
         {
             if (args.IsSettingsInvoked)
             {
-                if (NavigationViewControl.SelectedItem != NavigationViewControl.SettingsItem)
-                {
-                    rootFrame.Navigate(typeof(SettingsPage));
-                }
+                rootFrame.Navigate(typeof(SettingsPage));
             }
             else
             {
-                var invokedItem = NavigationView.MenuItems.Cast<NavigationViewItem>().Single(i => i.Content == args.InvokedItem);
+                var invokedItem = NavigationView.MenuItems.Cast<Microsoft.UI.Xaml.Controls.NavigationViewItem>().Single(i => i.Content == args.InvokedItem);
 
                 if (invokedItem == _allControlsMenuItem)
                 {
@@ -261,6 +276,24 @@ namespace AppUIBasics
         private void KeyboardAccelerator_Invoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
         {
             controlsSearchBox.Focus(FocusState.Keyboard);
+        }
+
+        private void NavigationViewControl_PaneClosing(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewPaneClosingEventArgs args)
+        {
+            AppTitle.Visibility = Visibility.Collapsed;
+        }
+
+        private void NavigationViewControl_PaneOpened(Microsoft.UI.Xaml.Controls.NavigationView sender, object args)
+        {
+            AppTitle.Visibility = Visibility.Visible;
+            if (sender.DisplayMode == Microsoft.UI.Xaml.Controls.NavigationViewDisplayMode.Expanded)
+            {
+                AppTitleBar.Margin = new Thickness(40, 0, 0, 0);
+            }
+            else
+            {
+                AppTitleBar.Margin = new Thickness();
+            }
         }
     }
 

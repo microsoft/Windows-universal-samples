@@ -1,0 +1,40 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page x:Class="AppUIBasics.ControlPages.WebViewPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:local="using:AppUIBasics"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+
+    <local:ControlExample HeaderText="A simple WebView " HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+        <local:ControlExample.Example>
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock TextWrapping="Wrap" Margin="0,0,0,12">
+                WebView is powered by the modern Edge engine. See
+                    <Hyperlink NavigateUri="https://go.microsoft.com/fwlink/p/?LinkId=722922">Full Sample</Hyperlink>
+                in the Documentation section for a complete sample.
+                </TextBlock>
+                <WebView Source="https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/web-view" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" />
+            </Grid>
+        </local:ControlExample.Example>
+        <local:ControlExample.Xaml>
+            <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                <Paragraph>&lt;WebView Source="https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/web-view" /&gt;</Paragraph>
+            </RichTextBlock>
+        </local:ControlExample.Xaml>
+    </local:ControlExample>
+</Page>

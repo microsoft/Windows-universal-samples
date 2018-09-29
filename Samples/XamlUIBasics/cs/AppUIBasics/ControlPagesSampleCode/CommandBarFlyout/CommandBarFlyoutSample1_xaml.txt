@@ -1,0 +1,15 @@
+﻿<Page.Resources>
+    <muxcontrols:CommandBarFlyout Placement="Right" x:Name="CommandBarFlyout1"  Closed="OnClosed">
+        <AppBarButton x:Name="ShareButton1" Label="Share" Icon="Share" Click="OnElementClicked" />
+        <AppBarButton x:Name="SaveButton1" Label="Save" Icon="Save" Click="OnElementClicked" />
+        <AppBarButton x:Name="DeleteButton1" Label="Delete" Icon="Delete" Click="OnElementClicked" />
+        <muxcontrols:CommandBarFlyout.SecondaryCommands>
+            <AppBarButton x:Name="ResizeButton1" Label="Resize" Click="OnElementClicked" />
+            <AppBarButton x:Name="MoveButton1" Label="Move" Click="OnElementClicked" />
+        </muxcontrols:CommandBarFlyout.SecondaryCommands>
+    </muxcontrols:CommandBarFlyout>
+</Page.Resources>
+
+<Border x:Name="myImageBorder" BorderBrush="Transparent" BorderThickness="2">
+    <Image x:Name="Image1" Width="200" Height="200" Source="/Assets/rainier.jpg" PointerPressed="onMyPointerPressed" PointerReleased="OnMyPointerReleased" ContextFlyout="{x:Bind CommandBarFlyout1}"/>
+</Border>

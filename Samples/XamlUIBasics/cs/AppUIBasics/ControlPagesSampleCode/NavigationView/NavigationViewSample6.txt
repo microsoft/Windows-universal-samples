@@ -1,0 +1,9 @@
+﻿<mux:NavigationView SelectionChanged="NavigationView_SelectionChanged" x:Name="nvSample" PaneDisplayMode="Auto" >
+    <mux:NavigationView.MenuItems>
+        <mux:NavigationViewItem Icon="Play" Content="Menu Item1" Tag="SamplePage1" />
+        <mux:NavigationViewItemSeparator/>
+        <mux:NavigationViewItem Icon="Save" Content="Menu Item2" Tag="SamplePage2" />
+        <mux:NavigationViewItem Icon="Refresh" Content="Menu Item3" Tag="SamplePage3" />
+    </mux:NavigationView.MenuItems>
+    <Frame x:Name="contentFrame"/>
+</mux:NavigationView>

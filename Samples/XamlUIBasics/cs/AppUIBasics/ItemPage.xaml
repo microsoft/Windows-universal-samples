@@ -71,10 +71,8 @@
                         <Setter Target="seeAlsoPanel.(Grid.Row)" Value="3" />
                         <Setter Target="seeAlsoPanel.(Grid.Column)" Value="0" />
                         <Setter Target="seeAlsoPanel.(Grid.ColumnSpan)" Value="3" />
-
                         <Setter Target="DocumentationPanel.(Grid.ColumnSpan)" Value="1" />
                         <Setter Target="DocumentationPanel.Margin" Value="0" />
-
                         <Setter Target="RelatedControlsPanel.(Grid.Row)" Value="0" />
                         <Setter Target="RelatedControlsPanel.(Grid.Column)" Value="2" />
                         <Setter Target="RelatedControlsPanel.(Grid.ColumnSpan)" Value="1" />

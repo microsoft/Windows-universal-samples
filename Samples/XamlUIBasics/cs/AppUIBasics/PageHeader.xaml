@@ -5,7 +5,7 @@
     xmlns:local="using:AppUIBasics"
     x:Name="headerControl"
     Height="72"
-    Padding="26,5,12,12"
+    Padding="14,24,12,0"
     Background="Transparent"
     Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
     FontSize="24">
@@ -38,10 +38,6 @@
                         <AdaptiveTrigger x:Name="WideLayoutTrigger" MinWindowWidth="{StaticResource Breakpoint640Plus}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="controlsSearchBox.Width" Value="290" />
-                        <Setter Target="controlsSearchBox.HorizontalAlignment" Value="Right" />
-                        <Setter Target="controlsSearchBox.Visibility" Value="Visible" />
-                        <Setter Target="searchButton.Visibility" Value="Collapsed" />
                         <Setter Target="commandBarBorder.Visibility" Value="Visible" />
                         <Setter Target="NarrowBackground.Visibility" Value="Collapsed" />
                         <Setter Target="WideBackground.Visibility" Value="Visible" />
@@ -52,8 +48,6 @@
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="controlsSearchBox.Visibility" Value="Collapsed" />
-                        <Setter Target="searchButton.Visibility" Value="Visible" />
                         <Setter Target="grid.(Grid.Column)" Value="0" />
                         <Setter Target="grid.(Grid.ColumnSpan)" Value="3" />
                         <Setter Target="topCommandBar.Margin" Value="0,0,36,0" />
@@ -88,7 +82,7 @@
 
         <Rectangle x:Name="WideBackground" Fill="{Binding ElementName=headerControl, Path=Background}" Opacity="{Binding ElementName=headerControl, Path=BackgroundColorOpacity}" />
 
-        <Grid x:Name="headerRoot" Padding="{Binding ElementName=headerControl, Path=Padding}" VerticalAlignment="Bottom" SizeChanged="Layout_SizeChanged" >
+        <Grid x:Name="headerRoot" Padding="{Binding ElementName=headerControl, Path=Padding}" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -96,7 +90,7 @@
             <Grid
                 x:Name="pageTitle"
                 MinHeight="48"
-                Margin="-12,-36,0,0"
+                Margin="0,0,0,0"
                 Background="Transparent">
                 <TextBlock
                     x:Name="TitleTextBlock"
@@ -111,7 +105,7 @@
             <Border x:Name="commandBarBorder" Grid.Column="1">
                 <CommandBar
                     x:Name="topCommandBar"
-                    Margin="0,-36,12,0"
+                    Margin="0,0,12,0"
                     Background="Transparent"
                     ClosedDisplayMode="Compact"
                     DefaultLabelPosition="Right"

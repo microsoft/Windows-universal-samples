@@ -1,0 +1,21 @@
+﻿public void OnClosed(object sender, object args)
+{
+    myImageBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
+}
+
+public void Image_PointerPressed(object sender, PointerRoutedEventArgs args)
+{
+    wasLeftPointerPressed = args.GetCurrentPoint(myImageBorder).Properties.IsLeftButtonPressed;
+}
+
+public void Image_PointerReleased(object sender, PointerRoutedEventArgs args)
+{
+    if (wasLeftPointerPressed)
+    {
+        myImageBorder.BorderBrush = new SolidColorBrush(Colors.Red);
+        FlyoutShowOptions myOption = new FlyoutShowOptions();
+        myOption.ShowMode = FlyoutShowMode.Transient;
+        CommandBarFlyout1.ShowAt(Image1, myOption);
+        wasLeftPointerPressed = false;
+    }
+}

@@ -24,9 +24,9 @@ namespace Tasks
         static Windows::Networking::BackgroundTransfer::BackgroundDownloader^ CreateBackgroundDownloader();
 
     private:
-        bool Succeeded(Windows::Networking::BackgroundTransfer::DownloadOperation^ download);
-        bool IsBadRequest(Windows::Networking::BackgroundTransfer::DownloadOperation^ download);
-        void RetryDownloads(Windows::Foundation::Collections::IIterable<Windows::Networking::BackgroundTransfer::DownloadOperation^>^ downloads);
-        void InvokeSimpleToast(int succeeded, int badRequests, int failed);
+        bool IsFailed(Windows::Networking::BackgroundTransfer::DownloadOperation^ download);
+        Concurrency::task<void> RetryDownloadsAsync(
+            Windows::Foundation::Collections::IVector<Windows::Networking::BackgroundTransfer::DownloadOperation^>^ downloads);
+        void InvokeSimpleToast(int succeeded, int failed);
     };
 }

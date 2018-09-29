@@ -17,24 +17,25 @@ using Windows.UI;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+using Windows.UI.Xaml.Input;
 
 namespace AppUIBasics.ControlPages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class RichEditBoxPage : Page
     {
         public RichEditBoxPage()
         {
             this.InitializeComponent();
+        }
 
-            if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+        private void ContextFlyout_Opening(object sender, object e)
+        {
+            CommandBarFlyout myFlyout = sender as CommandBarFlyout;
+            if (myFlyout.Target == REBCustom)
             {
-                enableContactsButton.Visibility = Visibility.Collapsed;
-                enablePlacesButton.Visibility = Visibility.Collapsed;
+                AppBarButton myButton = new AppBarButton();
+                myButton.Command = new StandardUICommand(StandardUICommandKind.Share);
+                myFlyout.PrimaryCommands.Add(myButton);
             }
         }
 
@@ -152,60 +153,22 @@ namespace AppUIBasics.ControlPages
             }
         }
 
-        //TODO: Check for version of the build
-
-        Windows.UI.Xaml.Documents.ContactContentLinkProvider contactContentLinkProvider;
-        private void EnableContactsButton_Click(object sender, RoutedEventArgs e)
+        private void REBCustom_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            // Prior to UniversalApiContract 7, RichEditBox did not have a default ContextFlyout set.
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
             {
-
-                if ((bool)enableContactsButton.IsChecked)
-                {
-                    if (editor.ContentLinkProviders == null)
-                    {
-                        editor.ContentLinkProviders = new Windows.UI.Xaml.Documents.ContentLinkProviderCollection();
-                    }
-                    if (contactContentLinkProvider == null)
-                    {
-                        contactContentLinkProvider = new Windows.UI.Xaml.Documents.ContactContentLinkProvider();
-                    }
-                    editor.ContentLinkProviders.Add(contactContentLinkProvider);
-
-                }
-                else
-                {
-                    bool b = editor.ContentLinkProviders.Remove(contactContentLinkProvider);
-                }
+                REBCustom.ContextFlyout.Opening += ContextFlyout_Opening;
             }
         }
 
-        Windows.UI.Xaml.Documents.PlaceContentLinkProvider placeContentLinkProvider;
-        private void enablePlacesButton_Click(object sender, RoutedEventArgs e)
+        private void REBCustom_Unloaded(object sender, RoutedEventArgs e)
         {
-            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
+            // Prior to UniversalApiContract 7, RichEditBox did not have a default ContextFlyout set.
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
             {
-
-                if ((bool)enablePlacesButton.IsChecked)
-                {
-                    if (editor.ContentLinkProviders == null)
-                    {
-                        editor.ContentLinkProviders = new Windows.UI.Xaml.Documents.ContentLinkProviderCollection();
-
-                    }
-                    if (placeContentLinkProvider == null)
-                    {
-                        placeContentLinkProvider = new Windows.UI.Xaml.Documents.PlaceContentLinkProvider();
-                    }
-
-                    editor.ContentLinkProviders.Add(placeContentLinkProvider);
-                }
-                else
-                {
-                    bool b = editor.ContentLinkProviders.Remove(placeContentLinkProvider);
-                }
+                REBCustom.ContextFlyout.Opening -= ContextFlyout_Opening;
             }
-
         }
     }
 }

@@ -45,7 +45,6 @@
                     <RadioButton Tag="Dark" Checked="OnThemeRadioButtonChecked" Content="Dark" />
                     <RadioButton Tag="Default" Checked="OnThemeRadioButtonChecked" Content="Use system setting" />
                 </StackPanel>
-                <Button Click="OnFeedbackButtonClick" Content="Feedback" Margin="0,8,0,0" />
                 <TextBlock
                     Style="{StaticResource TitleTextBlockStyle}"
                     Margin="0,40,0,0"
@@ -78,9 +77,27 @@
                     </Paragraph>
                     <Paragraph>
                         To contact the authors,
-                        <Hyperlink NavigateUri="mailto:ControlsGallery@microsoft.com"> mailto:ControlsGallery@microsoft.com </Hyperlink>.
+                        <Hyperlink NavigateUri="mailto:ControlsGallery@microsoft.com">mailto:ControlsGallery@microsoft.com </Hyperlink>.
                     </Paragraph>
                 </RichTextBlock>
+                <Button Click="OnFeedbackButtonClick" Content="Feedback" Margin="0,8,0,0" Visibility="Collapsed" />
+
+                <TextBlock
+                    Style="{StaticResource TitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    FontWeight="Normal"
+                    Text="Dependencies and References" />
+                <RichTextBlock IsTextSelectionEnabled="True" MaxWidth="840" Margin="0,10,0,0">
+                    <Paragraph Margin="0,10,0,10">
+                        <Hyperlink NavigateUri="https://aka.ms/winui-toolkit">Windows UI Library (Preview)</Hyperlink>
+                    </Paragraph>
+                </RichTextBlock>
+                <RichTextBlock IsTextSelectionEnabled="True" MaxWidth="840" Margin="0,10,0,0">
+                    <Paragraph Margin="0,10,0,10">
+                        <Hyperlink NavigateUri="https://github.com/WilliamABradley/ColorCode-Universal">ColorCode-Universal</Hyperlink>
+                    </Paragraph>
+                </RichTextBlock>
+
                 <TextBlock
                     Style="{StaticResource TitleTextBlockStyle}"
                     Margin="0,40,0,0"
@@ -95,7 +112,6 @@
                         <Hyperlink NavigateUri="https://go.microsoft.com/fwlink/?LinkId=822631">Microsoft Services Agreement</Hyperlink> ,
                         <Hyperlink NavigateUri="https://go.microsoft.com/fwlink/?LinkId=521839">Microsoft Privacy Statement</Hyperlink>
                     </Paragraph>
-
                 </RichTextBlock>
             </StackPanel>
         </ScrollViewer>

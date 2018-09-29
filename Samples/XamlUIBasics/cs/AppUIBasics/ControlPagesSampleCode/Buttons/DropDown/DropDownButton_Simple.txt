@@ -1,0 +1,9 @@
+﻿<DropDownButton Content="Email">
+    <DropDownButton.Flyout>
+        <MenuFlyout Placement="Bottom">
+            <MenuFlyoutItem Text="Send"/>
+            <MenuFlyoutItem Text="Reply"/>
+            <MenuFlyoutItem Text="Reply All"/>
+        </MenuFlyout>
+    </DropDownButton.Flyout>
+</DropDownButton>

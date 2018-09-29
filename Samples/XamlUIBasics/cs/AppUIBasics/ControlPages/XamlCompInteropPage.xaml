@@ -1,0 +1,57 @@
+﻿<Page
+    x:Class="AppUIBasics.ControlPages.XamlCompInteropPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppUIBasics"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <local:ControlExample HeaderText="Use a natural motion composition animation on a UIElement"  Loaded="NaturalMotionExample_Loaded" MinimumUniversalAPIContract="7" CSharpSource="Motion/AnimationInterop/AnimationInteropSample1_cs.txt">
+            <StackPanel VerticalAlignment="Stretch">
+                <TextBlock Text="Hover over the button to animate its scale." Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,12"  />
+                <Button Content="Item" Width="100" Height="50" PointerEntered="element_PointerEntered" PointerExited="element_PointerExited" />
+            </StackPanel>
+
+            <local:ControlExample.Options>
+                <StackPanel>
+                    <TextBlock Text="Damping Ratio" />
+                    <StackPanel x:Name="DampingStackPanel">
+                        <RadioButton Content="0.2" />
+                        <RadioButton Content="0.4" />
+                        <RadioButton Content="0.6" IsChecked="True" />
+                        <RadioButton Content="0.8" />
+                    </StackPanel>
+                    <Slider x:Name="PeriodSlider" Header="Period (in ms)" Minimum="25" Maximum="200" TickFrequency="25" Value="50" StepFrequency="25" />
+                </StackPanel>
+            </local:ControlExample.Options>
+        </local:ControlExample>
+
+        <local:ControlExample HeaderText="ExpressionAnimation on an Ellipse element" Loaded="ExpressionSample_Loaded" MinimumUniversalAPIContract="7" CSharpSource="Motion/AnimationInterop/AnimationInteropSample2_cs.txt">
+            <StackPanel Height="200">
+                <TextBlock Text="Hover over the square to animate its scale. Notice that the ellipse also animates." Style="{ThemeResource BaseTextBlockStyle}"   />
+                <TextBlock Text="The scale of the circle is inversely related to the scale of the square." Margin="0,0,0,12" />
+                <Grid VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Rectangle x:Name="rectangle" Width="50" Height="50" Fill="{ThemeResource SystemAccentColor}" PointerEntered="element_PointerEntered" PointerExited="element_PointerExited" />
+                    <Ellipse x:Name="ellipse" Grid.Column="1" Width="50" Height="50" Margin="55,0" Fill="{ThemeResource SystemAccentColor}"/>
+                </Grid>
+            </StackPanel>
+        </local:ControlExample>
+
+        <local:ControlExample HeaderText="Driving several related animations together using ExpressionAnimation" Loaded="StackedButtonsExample_Loaded" MinimumUniversalAPIContract="7" CSharpSource="Motion/AnimationInterop/AnimationInteropSample3_cs.txt">
+            <StackPanel Margin="0,0,0,50">
+                <TextBlock Text="Hover over any button to animate its scale. Notice that the other buttons move out of the way." Style="{ThemeResource BaseTextBlockStyle}"  />
+                <TextBlock Text="Each button animates as a function of the previous button's scale and translation." Margin="0,0,0,12" />
+                <Button x:Name="ExpressionButton1" Content="Item 1" Width="100" Height="50" Margin="5" PointerEntered="element_PointerEntered" PointerExited="element_PointerExited"  />
+                <Button x:Name="ExpressionButton2" Content="Item 2" Width="100" Height="50" Margin="5" PointerEntered="element_PointerEntered" PointerExited="element_PointerExited" />
+                <Button x:Name="ExpressionButton3" Content="Item 3" Width="100" Height="50" Margin="5" PointerEntered="element_PointerEntered" PointerExited="element_PointerExited" />
+                <Button x:Name="ExpressionButton4" Content="Item 4" Width="100" Height="50" Margin="5" PointerEntered="element_PointerEntered" PointerExited="element_PointerExited" />
+            </StackPanel>
+        </local:ControlExample>
+    </StackPanel>
+</Page>

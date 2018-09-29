@@ -12,6 +12,7 @@
 #include "pch.h"
 #include "CompletionGroupTask.h"
 
+using namespace Concurrency;
 using namespace Tasks;
 using namespace Platform;
 using namespace Platform::Collections;
@@ -39,6 +40,10 @@ CompletionGroupTask::CompletionGroupTask()
 // server, or if you would like to try the transfer again with freshly updated credentials.
 void CompletionGroupTask::Run(IBackgroundTaskInstance ^ taskInstance)
 {
+    // The background task carries out asynchronous work (in RetryDownloadsAsync). Take a deferral
+    // to delay the background task from closing prematurely while the asynchronous code is still running.
+    Platform::Agile<BackgroundTaskDeferral> deferral(taskInstance->GetDeferral());
+
     BackgroundTransferCompletionGroupTriggerDetails^ details =
         dynamic_cast<BackgroundTransferCompletionGroupTriggerDetails^>(taskInstance->TriggerDetails);
 
@@ -49,33 +54,34 @@ void CompletionGroupTask::Run(IBackgroundTaskInstance ^ taskInstance)
         return;
     }
 
-    Vector<DownloadOperation^>^ badRequestDownloads = ref new Vector<DownloadOperation^>();
+    Vector<DownloadOperation^>^ failedDownloads = ref new Vector<DownloadOperation^>();
     int succeeded = 0;
     int failed = 0;
-    IVectorView<DownloadOperation^>^ downloads = details->Downloads;
-    for (IIterator<DownloadOperation^>^ iterator = downloads->First(); iterator->HasCurrent; iterator->MoveNext())
+    for (DownloadOperation^ download : details->Downloads)
     {
-        DownloadOperation^ download = iterator->Current;
-        if (Succeeded(download))
+        if (IsFailed(download))
         {
-            succeeded++;
-        }
-        else if (IsBadRequest(download))
-        {
-            badRequestDownloads->Append(download);
+            failedDownloads->Append(download);
         }
         else
         {
-            failed++;
+            succeeded++;
         }
     }
 
-    if (badRequestDownloads->Size > 0)
-    {
-        RetryDownloads(badRequestDownloads);
-    }
+    InvokeSimpleToast(succeeded, failedDownloads->Size);
 
-    InvokeSimpleToast(succeeded, badRequestDownloads->Size, failed);
+    if (failedDownloads->Size > 0)
+    {
+        RetryDownloadsAsync(failedDownloads).then([deferral]()
+        {
+            deferral->Complete();
+        });
+    }
+    else
+    {
+        deferral->Complete();
+    }
 }
 
 
@@ -108,7 +114,8 @@ BackgroundDownloader^ CompletionGroupTask::CreateBackgroundDownloader()
     return downloader;
 }
 
-bool CompletionGroupTask::Succeeded(DownloadOperation^ download)
+
+bool CompletionGroupTask::IsFailed(DownloadOperation^ download)
 {
     BackgroundTransferStatus status = download->Progress.Status;
     if (status == BackgroundTransferStatus::Error || status == BackgroundTransferStatus::Canceled)
@@ -117,7 +124,7 @@ bool CompletionGroupTask::Succeeded(DownloadOperation^ download)
     }
 
     ResponseInformation^ response = download->GetResponseInformation();
-    if (response != nullptr && response->StatusCode == 200)
+    if (response == nullptr || response->StatusCode != 200)
     {
         return true;
     }
@@ -125,47 +132,47 @@ bool CompletionGroupTask::Succeeded(DownloadOperation^ download)
     return false;
 }
 
-bool CompletionGroupTask::IsBadRequest(DownloadOperation^ download)
-{
-    ResponseInformation^ response = download->GetResponseInformation();
-    if (response != nullptr && response->StatusCode == 400)
-    {
-        return true;
-    }
-
-    return false;
-}
-
-void CompletionGroupTask::RetryDownloads(IIterable<DownloadOperation^>^ downloads)
+task<void> CompletionGroupTask::RetryDownloadsAsync(IVector<DownloadOperation^>^ downloadsToRetry)
 {
     BackgroundDownloader^ downloader = CompletionGroupTask::CreateBackgroundDownloader();
+    std::vector<task<void>> postRenameTasks;
 
-    for (IIterator<DownloadOperation^>^ iterator = downloads->First(); iterator->HasCurrent; iterator->MoveNext())
+    for (DownloadOperation^ downloadToRetry : downloadsToRetry)
     {
-        DownloadOperation^ download = iterator->Current;
-        DownloadOperation^ download2 = downloader->CreateDownload(download->RequestedUri, download->ResultFile);
+        // Retry with the same uri, but save to a different file name.
+        std::wstring originalName(downloadToRetry->ResultFile->Name->Data());
+        std::wstring newName = originalName.insert(originalName.find_last_of(L'.'), L"_retried");
 
-        // It is not necessary neither recommended to wait for completion of DownloadOperation::StartAsync() within
-        // a background task. Waiting for the completion would mean to wait until the download is complete,
-        // but that is not necessary. The download will continue executing after the background task finishes.
-        //
-        // If the a download is initiated from a background task, you need to call
-        // BackgroundDownloader::GetCurrentDownloadsAsync() when the application restarts,
-        // as demonstrated in Scenario4_CompletionGroups::AttachDownloads.
-        auto ignore = download2->StartAsync();
+        auto renameTask = create_task(downloadToRetry->ResultFile->RenameAsync(
+            ref new String(newName.c_str()),
+            Windows::Storage::NameCollisionOption::ReplaceExisting));
+
+        task<void> postRenameTask = renameTask.then([downloadToRetry, downloader]()
+        {
+            DownloadOperation^ download = downloader->CreateDownload(downloadToRetry->RequestedUri, downloadToRetry->ResultFile);
+
+            // We do not wait on background transfer asynchronous tasks, since wait will only 
+            // finish after the entire transfer is complete, which may take a very long time. 
+            // The completion of these downloads will be handled by a future CompletionGroupTask instance.
+            auto ignore = download->StartAsync();
+        });
+
+        postRenameTasks.push_back(postRenameTask);
     }
 
-    downloader->CompletionGroup->Enable();
+    return when_all(postRenameTasks.begin(), postRenameTasks.end()).then([downloader]()
+    {
+        downloader->CompletionGroup->Enable();
+    });
 }
 
-void CompletionGroupTask::InvokeSimpleToast(int succeeded, int badRequests, int failed)
+void CompletionGroupTask::InvokeSimpleToast(int succeeded, int failed)
 {
     XmlDocument^ toastXml = ToastNotificationManager::GetTemplateContent(ToastTemplateType::ToastText04);
 
     XmlNodeList^ stringElements = toastXml->GetElementsByTagName("text");
     stringElements->Item(0)->AppendChild(toastXml->CreateTextNode(succeeded.ToString() + " downloads succeeded."));
-    stringElements->Item(1)->AppendChild(toastXml->CreateTextNode(badRequests.ToString() + " downloads were bad requests, retrying."));
-    stringElements->Item(2)->AppendChild(toastXml->CreateTextNode(failed.ToString() + " downloads failed."));
+    stringElements->Item(1)->AppendChild(toastXml->CreateTextNode(failed.ToString() + " downloads failed."));
 
     ToastNotification^ toast = ref new ToastNotification(toastXml);
     ToastNotificationManager::CreateToastNotifier()->Show(toast);

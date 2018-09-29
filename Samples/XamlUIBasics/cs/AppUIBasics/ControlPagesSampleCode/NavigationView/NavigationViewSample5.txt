@@ -1,0 +1,51 @@
+﻿<NavigationView x:Name="nvSample" 
+                MenuItemTemplateSelector="{StaticResource selector}" 
+                MenuItemSource="{x:Bind Categories, Mode=OneWay}" />
+ 
+<local:MenuItemTemplateSelector x:Key="selector"> 
+    <local:MenuItemTemplateSelector.ItemTemplate> 
+        <DataTemplate x:DataType="local:Category" > 
+            <muxcontrols:NavigationViewItem Content="{x:Bind Name}" TooltipService.ToolTip="{x:Bind Tooltip}"> 
+                <muxcontrols:NavigationViewItem.Icon> 
+                    <SymbolIcon Symbol="{x:Bind Glyph}" /> 
+                </muxcontrols:NavigationViewItem.Icon> 
+            </muxcontrols:NavigationViewItem  
+        </DataTemplate > 
+    </local:MenuItemTemplateSelector.ItemTemplate > 
+</local:MenuItemTemplateSelector > 
+
+
+
+//C# code behind
+Categories = new ObservableCollection<CategoryBase>(); 
+Categories.Add(new Category { Name = "Category 1", Glyph = Symbol.Home, Tooltip = "This is category 1" }); 
+Categories.Add(new Category { Name = "Category 2", Glyph = Symbol.Keyboard, Tooltip = "This is category 2" }); 
+Categories.Add(new Category { Name = "Category 3", Glyph = Symbol.Library, Tooltip = "This is category 3" }); 
+Categories.Add(new Category { Name = "Category 4", Glyph = Symbol.Mail, Tooltip = "This is category 4" }); 
+
+public class CategoryBase { } 
+
+public class Category : CategoryBase
+{
+    public string Name { get; set; }
+    public string Tooltip { get; set; }
+    public Symbol Glyph { get; set; }
+}
+
+public class Separator : CategoryBase { }
+
+public class Header : CategoryBase
+{
+    public string Name { get; set; }
+}
+
+[ContentProperty(Name = "ItemTemplate")]
+class MenuItemTemplateSelector : DataTemplateSelector
+{
+    public DataTemplate ItemTemplate { get; set; }
+    protected override DataTemplate SelectTemplateCore(object item)
+    {
+        return item is Separator ? SeparatorTemplate : item is Header ? HeaderTemplate : ItemTemplate;
+    }
+}
+

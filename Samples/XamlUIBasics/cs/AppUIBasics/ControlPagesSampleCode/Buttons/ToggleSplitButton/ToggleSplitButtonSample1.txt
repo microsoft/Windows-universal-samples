@@ -1,0 +1,8 @@
+﻿<ToggleSplitButton x:Name="myListButton" VerticalAlignment="Top" Click="myListButton_Click">
+    <SymbolIcon x:Name="mySymbolIcon" Symbol="List"/>
+    <ToggleSplitButton.Flyout>
+        <Flyout Placement="Bottom">
+            <!-- flyout content -->
+        </Flyout>
+    </ToggleSplitButton.Flyout>
+</ToggleSplitButton>

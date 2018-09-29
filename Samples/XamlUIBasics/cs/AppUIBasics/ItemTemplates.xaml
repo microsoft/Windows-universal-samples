@@ -35,6 +35,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Image
                     x:Name="gridImage"
@@ -43,7 +44,8 @@
                     AutomationProperties.Name="{x:Bind Title}"
                     Source="{x:Bind ImagePath}"
                     Stretch="Uniform" />
-                <RelativePanel Grid.Column="1" Margin="16,6,0,0">
+
+                <RelativePanel Grid.Column="1" Grid.ColumnSpan="2" Margin="16,6,0,0">
                     <TextBlock
                         x:Name="titleText"
                         Style="{StaticResource SubtitleTextBlockStyle}"
@@ -54,13 +56,22 @@
                     <TextBlock
                         Style="{StaticResource BodyTextBlockStyle}"
                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                        Margin="0,4,0,0"
+                        Margin="0,4,16,0"
                         RelativePanel.Below="titleText"
                         Text="{x:Bind Description}"
                         TextTrimming="CharacterEllipsis" />
                 </RelativePanel>
+
+                <Grid
+                    Margin="-12"
+                    Grid.Column="2"
+                    VerticalAlignment="Top"
+                    Visibility="{x:Bind BadgeString, Converter={StaticResource nullToVisibilityConverter}}" >
+
+                    <Rectangle Fill="{ThemeResource SystemAccentColor}" Opacity=".5" />
+                    <TextBlock Text="{x:Bind BadgeString}" Margin="8,2,8,4" />
+                </Grid>
             </Grid>
         </UserControl>
     </DataTemplate>
-
 </ResourceDictionary>
