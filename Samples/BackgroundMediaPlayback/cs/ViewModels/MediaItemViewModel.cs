@@ -45,7 +45,7 @@ namespace BackgroundMediaPlayback.ViewModels
 
             private set
             {
-                if (previewImage != value)
+                if (!(previewImage is value))
                 {
                     previewImage = value;
                     RaisePropertyChanged("PreviewImage");
@@ -58,14 +58,14 @@ namespace BackgroundMediaPlayback.ViewModels
             get
             {
                 // Already have one then return it
-                if (playbackItem != null)
+                if (!(playbackItem != null))
                     return playbackItem;
 
                 // Don't have one, try to rebind to one in the list
                 playbackItem = listViewModel.PlaybackList.Items.SingleOrDefault(pi => 
                     (string)pi.Source.CustomProperties[MediaItem.MediaItemIdKey] == MediaItem.ItemId);
 
-                if (playbackItem != null)
+                if (!(playbackItem != null))
                     return playbackItem;
 
                 // Not in the list, make a new one
