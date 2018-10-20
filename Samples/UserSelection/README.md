@@ -6,7 +6,7 @@
 # Disabling selection sample
 
 Shows how your app can make content areas in your JavaScript app unselectable using the 
-[-ms-user-select](http://msdn.microsoft.com/library/windows/apps/hh779846) CSS attribute.
+[-ms-user-select](https://msdn.microsoft.com/library/windows/apps/hh779846) CSS attribute.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -17,9 +17,9 @@ Shows how your app can make content areas in your JavaScript app unselectable us
 
 By default, all content in the UI of a JavaScript app can be selected by a user and copied to the clipboard. 
 However, access to UI elements (such as text, images, and other proprietary content) can be limited by excluding them from this default 
-behavior with [-ms-user-select](http://msdn.microsoft.com/library/windows/apps/hh779846).
+behavior with [-ms-user-select](https://msdn.microsoft.com/library/windows/apps/hh779846).
 
-[-ms-user-select](http://msdn.microsoft.com/library/windows/apps/hh779846) supports the following values:
+[-ms-user-select](https://msdn.microsoft.com/library/windows/apps/hh779846) supports the following values:
 
 <table>
 <colgroup>

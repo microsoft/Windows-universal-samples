@@ -5,7 +5,7 @@
 
 # Direct2D advanced color image rendering sample
 
-Shows how to use [Direct2D](http://msdn.microsoft.com/library/windows/desktop/dd370990) to load and draw advanced color images. Advanced color images have high dynamic range (HDR), wide color gamut (WCG) and/or high bit depth content.
+Shows how to use [Direct2D](https://msdn.microsoft.com/library/windows/desktop/dd370990) to load and draw advanced color images. Advanced color images have high dynamic range (HDR), wide color gamut (WCG) and/or high bit depth content.
 
 Advanced color content is best viewed on an advanced color-capable device, such as an HDR10 display. However, this sample shows how to render content on any display type.
 
@@ -59,7 +59,7 @@ Variants of the following files are found in every UWP app written in C++:
 
 ### Feature areas
 
-[Direct2D](http://msdn.microsoft.com/library/windows/desktop/dd370990): used to render images, primitives, and text.  
+[Direct2D](https://msdn.microsoft.com/library/windows/desktop/dd370990): used to render images, primitives, and text.  
 [XAML overview](https://msdn.microsoft.com/library/windows/apps/mt185595): technology for building user interfaces in managed and C++ code.  
 
 ### Reference

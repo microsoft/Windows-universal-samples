@@ -32,7 +32,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[Windows.System.UserProfile namespace](http://msdn.microsoft.com/library/windows/apps/br241881)  
+[Windows.System.UserProfile namespace](https://msdn.microsoft.com/library/windows/apps/br241881)  
 
 ## Related samples
 

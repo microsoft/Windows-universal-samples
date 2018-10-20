@@ -50,8 +50,8 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 ### Reference
 
 [Storing user credentials using the Credential Locker](https://msdn.microsoft.com/library/windows/apps/dn448950.aspx)  
-[Storing user credentials](http://msdn.microsoft.com/library/windows/apps/hh465060)  
-[Windows.Security.Credentials namespace](http://msdn.microsoft.com/library/windows/apps/br227089)  
+[Storing user credentials](https://msdn.microsoft.com/library/windows/apps/hh465060)  
+[Windows.Security.Credentials namespace](https://msdn.microsoft.com/library/windows/apps/br227089)  
 
 ## System requirements
 

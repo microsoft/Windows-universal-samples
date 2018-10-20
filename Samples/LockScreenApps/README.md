@@ -31,9 +31,9 @@ The app that has a lock screen presence must declare one or more of the followin
 - Timer
 - Push notification
 
-In Microsoft Visual Studio 2013, this value is set in the **Declarations** page of the manifest editor, which sets the [BackgroundTasks](http://msdn.microsoft.com/library/windows/apps/br211421) element in the package.appxmanifest file. This value has been set for this sample.
+In Microsoft Visual Studio 2013, this value is set in the **Declarations** page of the manifest editor, which sets the [BackgroundTasks](https://msdn.microsoft.com/library/windows/apps/br211421) element in the package.appxmanifest file. This value has been set for this sample.
 
-For an app to send a toast notification, the developer must have declared that the app is toast-capable in its app manifest file (package.appxmanifest) as has been done in this sample app. Normally, you do this by using the Visual Studio 2013 manifest editor, where you'll find the setting in the **Application UI** tab, under the **Notifications** section. For more info, see [How to opt in for toast notifications](http://msdn.microsoft.com/library/windows/apps/hh781238).
+For an app to send a toast notification, the developer must have declared that the app is toast-capable in its app manifest file (package.appxmanifest) as has been done in this sample app. Normally, you do this by using the Visual Studio 2013 manifest editor, where you'll find the setting in the **Application UI** tab, under the **Notifications** section. For more info, see [How to opt in for toast notifications](https://msdn.microsoft.com/library/windows/apps/hh781238).
 
 
 To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windows.com). 
@@ -42,9 +42,9 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 
 ## Related topics
 
-[Guidelines and checklist for tiles and badges](http://msdn.microsoft.com/library/windows/apps/hh465403)  
-[Quickstart: Showing tile and badge updates on the lock screen](http://msdn.microsoft.com/library/windows/apps/hh700416)  
-[Lock screen overview](http://msdn.microsoft.com/library/windows/apps/hh779720)  
+[Guidelines and checklist for tiles and badges](https://msdn.microsoft.com/library/windows/apps/hh465403)  
+[Quickstart: Showing tile and badge updates on the lock screen](https://msdn.microsoft.com/library/windows/apps/hh700416)  
+[Lock screen overview](https://msdn.microsoft.com/library/windows/apps/hh779720)  
 [Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 
 ## System requirements

@@ -5,8 +5,8 @@
 
 # Date and time formatting sample
 
-Shows how to use the [DateTimeFormatter](http://msdn.microsoft.com/library/windows/apps/br206828)
-class in the [Windows.Globalization.DateTimeFormatting](http://msdn.microsoft.com/library/windows/apps/br206859)
+Shows how to use the [DateTimeFormatter](https://msdn.microsoft.com/library/windows/apps/br206828)
+class in the [Windows.Globalization.DateTimeFormatting](https://msdn.microsoft.com/library/windows/apps/br206859)
 namespace to display dates and times according to the user's preferences.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
@@ -24,8 +24,8 @@ and clock and calendar systems.
 The caller can request a format using the well-known constants
 (shorttime, longtime, shortdate or longdate) or define the specific elements required.
 
-The sample also uses the [Windows.Globalization.CalendarIdentifiers](http://msdn.microsoft.com/library/windows/apps/br229460)
-and [Windows.Globalization.ClockIdentifiers](http://msdn.microsoft.com/library/windows/apps/br229462) classes.
+The sample also uses the [Windows.Globalization.CalendarIdentifiers](https://msdn.microsoft.com/library/windows/apps/br229460)
+and [Windows.Globalization.ClockIdentifiers](https://msdn.microsoft.com/library/windows/apps/br229462) classes.
 
 This sample contains scenarios that demonstrate:
 
@@ -33,7 +33,7 @@ This sample contains scenarios that demonstrate:
 -   How to format the current date and time using custom formats that are specified using a template string or a parameterized template.
 -   How to format dates and times by overriding the user's default global context. This is used when an app presents dates or times that reflect different settings from the user's current defaults.
 -   How to format dates and times by using Unicode extensions in specified languages, overriding the user's default global context if applicable.
--   How to convert and format the current date and time using the time zone support available in the [Format](http://msdn.microsoft.com/library/windows/apps/dn264145) method.
+-   How to convert and format the current date and time using the time zone support available in the [Format](https://msdn.microsoft.com/library/windows/apps/dn264145) method.
 
 ## Related topics
 
@@ -45,9 +45,9 @@ This sample contains scenarios that demonstrate:
 
 ### Reference
 
-[Windows.Globalization.CalendarIdentifiers](http://msdn.microsoft.com/library/windows/apps/br229460)  
-[Windows.Globalization.ClockIdentifiers](http://msdn.microsoft.com/library/windows/apps/br229462)  
-[Windows.Globalization.DateTimeFormatting.DateTimeFormatter](http://msdn.microsoft.com/library/windows/apps/br206828)  
+[Windows.Globalization.CalendarIdentifiers](https://msdn.microsoft.com/library/windows/apps/br229460)  
+[Windows.Globalization.ClockIdentifiers](https://msdn.microsoft.com/library/windows/apps/br229462)  
+[Windows.Globalization.DateTimeFormatting.DateTimeFormatter](https://msdn.microsoft.com/library/windows/apps/br206828)  
 
 ## System requirements
 

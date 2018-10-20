@@ -14,7 +14,7 @@ Shows how to use background tasks with a device-use trigger targetting sensor AP
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-For the sake of the example, the [Accelerometer](http://msdn.microsoft.com/library/windows/apps/br225687) API is used in this sample.
+For the sake of the example, the [Accelerometer](https://msdn.microsoft.com/library/windows/apps/br225687) API is used in this sample.
 
 This sample allows the user to view the event count. Only one scenario is available:
 
@@ -27,7 +27,7 @@ When you choose the **Enable** button for the **Accelerometer DeviceUse** option
 Related topics
 --------------
 
-[Quickstart: Responding to user movement with the accelerometer](http://msdn.microsoft.com/library/windows/apps/hh465265)
+[Quickstart: Responding to user movement with the accelerometer](https://msdn.microsoft.com/library/windows/apps/hh465265)
 
 [Windows.Devices.Sensors namespace](http://go.microsoft.com/fwlink/p/?linkid=241981)
 

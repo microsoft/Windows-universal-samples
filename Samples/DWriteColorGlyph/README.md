@@ -7,7 +7,7 @@
 
 Shows how to implement a custom text renderer to handle different kinds of color glyph runs in 
 [DirectWrite](https://msdn.microsoft.com/library/windows/desktop/dd368038) and 
-[Direct2D](http://msdn.microsoft.com/library/windows/desktop/dd370990). This sample uses the custom renderer to draw a string of text with color glyphs. 
+[Direct2D](https://msdn.microsoft.com/library/windows/desktop/dd370990). This sample uses the custom renderer to draw a string of text with color glyphs. 
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -18,9 +18,9 @@ Shows how to implement a custom text renderer to handle different kinds of color
 
 Some important APIs used in this sample are:
 
-- The [IDWriteFactory4::TranslateColorGlyphRun](http://msdn.microsoft.com/library/windows/desktop/mt761992) method, which translates a glyph run to a sequence of color glyph runs.
-- The [ID2D1DeviceContext4::DrawSvgGlyphRun](http://msdn.microsoft.com/library/windows/desktop/mt750185) method, which draws a color glyph run that's defined in the SVG format.
-- The [ID2D1DeviceContext4::DrawColorBitmapGlyphRun](http://msdn.microsoft.com/library/windows/desktop/mt750184) method, which draws a color glyph run that's defined in one of the bitmap formats.
+- The [IDWriteFactory4::TranslateColorGlyphRun](https://msdn.microsoft.com/library/windows/desktop/mt761992) method, which translates a glyph run to a sequence of color glyph runs.
+- The [ID2D1DeviceContext4::DrawSvgGlyphRun](https://msdn.microsoft.com/library/windows/desktop/mt750185) method, which draws a color glyph run that's defined in the SVG format.
+- The [ID2D1DeviceContext4::DrawColorBitmapGlyphRun](https://msdn.microsoft.com/library/windows/desktop/mt750184) method, which draws a color glyph run that's defined in one of the bitmap formats.
 
 ## Sample project files
 
@@ -59,7 +59,7 @@ Variants of the following files are found in every UWP app written in C++:
 
 ## Related topics
 
-[Color fonts](http://msdn.microsoft.com/library/windows/desktop/mt765165)  
+[Color fonts](https://msdn.microsoft.com/library/windows/desktop/mt765165)  
 
 ## System requirements
 

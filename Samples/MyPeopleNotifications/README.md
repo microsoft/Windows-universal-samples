@@ -42,7 +42,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 [Tiles, badges, and notifications](https://docs.microsoft.com/en-us/windows/uwp/controls-and-patterns/tiles-badges-notifications)  
 [My People Notifications](https://docs.microsoft.com/en-us/windows/uwp/contacts-and-calendar/my-people-notifications)  
-[ContactPicker class](http://msdn.microsoft.com/library/windows/apps/br224913)  
+[ContactPicker class](https://msdn.microsoft.com/library/windows/apps/br224913)  
 [Contacts, My People, and calendar](https://msdn.microsoft.com/library/windows/apps/mt269388)  
 
 ## System requirements

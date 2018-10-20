@@ -6,7 +6,7 @@
 # Scaling according to DPI sample
 
 Shows how to build an app that scales according to the pixel density (dots per inch or dpi) of the screen by loading images 
-of the right scale or by overriding default scaling. This sample uses the [Windows.Graphics.Display](http://msdn.microsoft.com/library/windows/apps/br226166) API.
+of the right scale or by overriding default scaling. This sample uses the [Windows.Graphics.Display](https://msdn.microsoft.com/library/windows/apps/br226166) API.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -21,12 +21,12 @@ The sample demonstrates these scenarios:
 When a screen’s pixel density (dpi) and resolution are very high, Windows scales images and other UI elements to maintain physical sizing across devices. We recommend that you make your app scaling aware by providing multiple versions of these assets so that they retain quality across different scale factors. If you don’t provide multiple versions, Windows will stretch your assets by default.
 
 **Overriding default scaling of UI elements**  
-To preserve the physical size of UI, Windows automatically scales UI elements as the scale factor ([ResolutionScale](http://msdn.microsoft.com/library/windows/apps/br226165)) changes. You might not want this behavior especially if your app doesn’t have a high-res version of an element available. This scenario demonstrates how to override the automatic scaling of text and UI as the scale factor changes from 100% to 140%. You might want to use this scenario if you don’t want Windows to automatically scale your images or text.
+To preserve the physical size of UI, Windows automatically scales UI elements as the scale factor ([ResolutionScale](https://msdn.microsoft.com/library/windows/apps/br226165)) changes. You might not want this behavior especially if your app doesn’t have a high-res version of an element available. This scenario demonstrates how to override the automatic scaling of text and UI as the scale factor changes from 100% to 140%. You might want to use this scenario if you don’t want Windows to automatically scale your images or text.
 
 Important APIs in this sample include:
 
--   [onresize](http://msdn.microsoft.com/library/windows/apps/hh466035) event
--   [DisplayInformation](http://msdn.microsoft.com/library/windows/apps/dn264258) class
+-   [onresize](https://msdn.microsoft.com/library/windows/apps/hh466035) event
+-   [DisplayInformation](https://msdn.microsoft.com/library/windows/apps/dn264258) class
 -   [RawPixelsPerViewPixel](https://msdn.microsoft.com/library/windows.graphics.display.displayinformation.rawpixelsperviewpixel.aspx) property
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.

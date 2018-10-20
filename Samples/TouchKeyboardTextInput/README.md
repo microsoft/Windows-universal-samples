@@ -6,12 +6,12 @@
 # Touch keyboard text input sample
 
 Shows how to enable optimized views on the touch keyboard by using input scopes and input types with controls in the 
-[WinJS.UI](http://msdn.microsoft.com/library/windows/apps/br229782) namespace, 
-and with the [TextBox](http://msdn.microsoft.com/library/windows/apps/br209683) and [RichEdit](http://msdn.microsoft.com/library/windows/apps/br227548) 
+[WinJS.UI](https://msdn.microsoft.com/library/windows/apps/br229782) namespace, 
+and with the [TextBox](https://msdn.microsoft.com/library/windows/apps/br209683) and [RichEdit](https://msdn.microsoft.com/library/windows/apps/br227548) 
 Extensible Application Markup Language (XAML) controls. 
-Also, this sample demonstrates spell checking by using the [spellcheck](http://msdn.microsoft.com/library/windows/apps/hh441107) and 
-[IsSpellCheckEnabled](http://msdn.microsoft.com/library/windows/apps/br209688) properties, 
-and it shows text prediction by using the [IsTextPredictionEnabled](http://msdn.microsoft.com/library/windows/apps/br209690) property.
+Also, this sample demonstrates spell checking by using the [spellcheck](https://msdn.microsoft.com/library/windows/apps/hh441107) and 
+[IsSpellCheckEnabled](https://msdn.microsoft.com/library/windows/apps/br209688) properties, 
+and it shows text prediction by using the [IsTextPredictionEnabled](https://msdn.microsoft.com/library/windows/apps/br209690) property.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -42,19 +42,19 @@ Related topics
 
 **Conceptual**
 
-[Getting started with apps](http://msdn.microsoft.com/library/windows/apps/)  
-[Guidelines and checklist for login controls](http://msdn.microsoft.com/library/windows/apps/hh965453)  
-[Guidelines and checklist for touch keyboard](http://msdn.microsoft.com/library/windows/apps/hh972345)  
-[Responding to user interaction](http://msdn.microsoft.com/library/windows/apps/hh700412)  
+[Getting started with apps](https://msdn.microsoft.com/library/windows/apps/)  
+[Guidelines and checklist for login controls](https://msdn.microsoft.com/library/windows/apps/hh965453)  
+[Guidelines and checklist for touch keyboard](https://msdn.microsoft.com/library/windows/apps/hh972345)  
+[Responding to user interaction](https://msdn.microsoft.com/library/windows/apps/hh700412)  
 
 **Reference**
 
-[IsSpellCheckEnabled](http://msdn.microsoft.com/library/windows/apps/br209688)  
-[IsTextPredictionEnabled](http://msdn.microsoft.com/library/windows/apps/br209690)  
-[spellcheck](http://msdn.microsoft.com/library/windows/apps/hh441107)  
-[RichEdit](http://msdn.microsoft.com/library/windows/apps/br227548)  
-[TextBox](http://msdn.microsoft.com/library/windows/apps/br209683)  
-[Windows.UI.Core](http://msdn.microsoft.com/library/windows/apps/br208383)  
+[IsSpellCheckEnabled](https://msdn.microsoft.com/library/windows/apps/br209688)  
+[IsTextPredictionEnabled](https://msdn.microsoft.com/library/windows/apps/br209690)  
+[spellcheck](https://msdn.microsoft.com/library/windows/apps/hh441107)  
+[RichEdit](https://msdn.microsoft.com/library/windows/apps/br227548)  
+[TextBox](https://msdn.microsoft.com/library/windows/apps/br209683)  
+[Windows.UI.Core](https://msdn.microsoft.com/library/windows/apps/br208383)  
 
 ## System requirements
 

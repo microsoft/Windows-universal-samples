@@ -15,28 +15,28 @@ and how to use queries to enumerate all files inside a location by sorting them 
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-This sample uses [Windows.Storage](http://msdn.microsoft.com/library/windows/apps/br227346) and [Windows.Storage.Search](http://msdn.microsoft.com/library/windows/apps/br208106) APIs, including [StorageFolder](http://msdn.microsoft.com/library/windows/apps/br227230) and [StorageFolderQueryResult](http://msdn.microsoft.com/library/windows/apps/br208066).
+This sample uses [Windows.Storage](https://msdn.microsoft.com/library/windows/apps/br227346) and [Windows.Storage.Search](https://msdn.microsoft.com/library/windows/apps/br208106) APIs, including [StorageFolder](https://msdn.microsoft.com/library/windows/apps/br227230) and [StorageFolderQueryResult](https://msdn.microsoft.com/library/windows/apps/br208066).
 
 The sample demonstrates these tasks:
 
 1.  **Enumerate top-level files and subfolders of a folder**
 
-    Uses the [StorageFolder](http://msdn.microsoft.com/library/windows/apps/br227230).[GetFilesAsync](http://msdn.microsoft.com/library/windows/apps/br227273) 
-and [StorageFolder.GetFoldersAsync](http://msdn.microsoft.com/library/windows/apps/br227279) methods to enumerate only the top-level files and folders (the immediate children) of the location (in this case, the Pictures library). For a walkthrough of this task, see [Quickstart: Accessing files programmatically](http://msdn.microsoft.com/library/windows/apps/jj150596).
+    Uses the [StorageFolder](https://msdn.microsoft.com/library/windows/apps/br227230).[GetFilesAsync](https://msdn.microsoft.com/library/windows/apps/br227273) 
+and [StorageFolder.GetFoldersAsync](https://msdn.microsoft.com/library/windows/apps/br227279) methods to enumerate only the top-level files and folders (the immediate children) of the location (in this case, the Pictures library). For a walkthrough of this task, see [Quickstart: Accessing files programmatically](https://msdn.microsoft.com/library/windows/apps/jj150596).
 
 2.  **Query all the files in a folder (and its subfolders) and create groups of files to enumerate**
 
-    Uses the [StorageFolder](http://msdn.microsoft.com/library/windows/apps/br227230).[CreateFolderQueryWithOptions](http://msdn.microsoft.com/library/windows/apps/br211592) method to sort all files in the location (in this case, the Pictures library) into groups based on the criteria that you specify and uses a [StorageFolderQueryResult](http://msdn.microsoft.com/library/windows/apps/br208066).[GetFoldersAsync](http://msdn.microsoft.com/library/windows/apps/br208072) method to retrieve the resulting file groups.
+    Uses the [StorageFolder](https://msdn.microsoft.com/library/windows/apps/br227230).[CreateFolderQueryWithOptions](https://msdn.microsoft.com/library/windows/apps/br211592) method to sort all files in the location (in this case, the Pictures library) into groups based on the criteria that you specify and uses a [StorageFolderQueryResult](https://msdn.microsoft.com/library/windows/apps/br208066).[GetFoldersAsync](https://msdn.microsoft.com/library/windows/apps/br208072) method to retrieve the resulting file groups.
 
-    File groups are virtual folders that are represented by [StorageFolder](http://msdn.microsoft.com/library/windows/apps/br227230) objects. The files in a file group have the criteria that you specify in common. For example, as the sample shows, the files in a group might have the same rating.
+    File groups are virtual folders that are represented by [StorageFolder](https://msdn.microsoft.com/library/windows/apps/br227230) objects. The files in a file group have the criteria that you specify in common. For example, as the sample shows, the files in a group might have the same rating.
 
-    For a walkthrough of this task, see [Quickstart: Accessing files programmatically](http://msdn.microsoft.com/library/windows/apps/jj150596).
+    For a walkthrough of this task, see [Quickstart: Accessing files programmatically](https://msdn.microsoft.com/library/windows/apps/jj150596).
 
 3.  **Query all the files in a folder (and its subfolders) and retrieve file properties as a part of getting results for the query**
 
-    Uses [QueryOptions](http://msdn.microsoft.com/library/windows/apps/br207995).[SetPropertyPrefetch](http://msdn.microsoft.com/library/windows/apps/hh973319) to specify properties to retrieve when the query is created. [StorageFolder](http://msdn.microsoft.com/library/windows/apps/br227230).[CreateFolderQueryWithOptions](http://msdn.microsoft.com/library/windows/apps/br211592) and [GetFilesAsync](http://msdn.microsoft.com/library/windows/apps/br227273) are used to create the query and enumerate results. Similarly, you can use [SetThumbnailPrefetch](http://msdn.microsoft.com/library/windows/apps/hh973320) to retrieve thumbnails as a part of creating the query.
+    Uses [QueryOptions](https://msdn.microsoft.com/library/windows/apps/br207995).[SetPropertyPrefetch](https://msdn.microsoft.com/library/windows/apps/hh973319) to specify properties to retrieve when the query is created. [StorageFolder](https://msdn.microsoft.com/library/windows/apps/br227230).[CreateFolderQueryWithOptions](https://msdn.microsoft.com/library/windows/apps/br211592) and [GetFilesAsync](https://msdn.microsoft.com/library/windows/apps/br227273) are used to create the query and enumerate results. Similarly, you can use [SetThumbnailPrefetch](https://msdn.microsoft.com/library/windows/apps/hh973320) to retrieve thumbnails as a part of creating the query.
 
-    Using [SetPropertyPrefetch](http://msdn.microsoft.com/library/windows/apps/hh973319) and [SetThumbnailPrefetch](http://msdn.microsoft.com/library/windows/apps/hh973320) might make the query take longer to execute, but will make accessing large amounts of file information more efficient.
+    Using [SetPropertyPrefetch](https://msdn.microsoft.com/library/windows/apps/hh973319) and [SetThumbnailPrefetch](https://msdn.microsoft.com/library/windows/apps/hh973320) might make the query take longer to execute, but will make accessing large amounts of file information more efficient.
 
 4.  **Query all the files in a folder and show file provider and availability**
 
@@ -44,9 +44,9 @@ and [StorageFolder.GetFoldersAsync](http://msdn.microsoft.com/library/windows/ap
 
 Additional important APIs in this sample include:
 
--   [CommonFolderQuery](http://msdn.microsoft.com/library/windows/apps/br207957) enumeration
--   [CommonFileQuery](http://msdn.microsoft.com/library/windows/apps/br207956) enumeration
--   [PropertyPrefetchOptions](http://msdn.microsoft.com/library/windows/apps/hh973317) enumeration
+-   [CommonFolderQuery](https://msdn.microsoft.com/library/windows/apps/br207957) enumeration
+-   [CommonFileQuery](https://msdn.microsoft.com/library/windows/apps/br207956) enumeration
+-   [PropertyPrefetchOptions](https://msdn.microsoft.com/library/windows/apps/hh973317) enumeration
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  
@@ -64,8 +64,8 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[Windows.Storage namespace](http://msdn.microsoft.com/library/windows/apps/br227346)  
-[Windows.Storage.Search namespace](http://msdn.microsoft.com/library/windows/apps/br208106)  
+[Windows.Storage namespace](https://msdn.microsoft.com/library/windows/apps/br227346)  
+[Windows.Storage.Search namespace](https://msdn.microsoft.com/library/windows/apps/br208106)  
 
 ## System requirements
 

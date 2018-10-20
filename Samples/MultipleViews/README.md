@@ -27,10 +27,10 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 
 ## Related topics
 
-[ApplicationViewSwitcher](http://msdn.microsoft.com/library/windows/apps/dn281094)  
-[ApplicationView](http://msdn.microsoft.com/library/windows/apps/hh701658)  
-[CoreApplication.CreateNewView](http://msdn.microsoft.com/library/windows/apps/dn297278)  
-[MSApp.CreateNewView](http://msdn.microsoft.com/library/windows/apps/dn252339)  
+[ApplicationViewSwitcher](https://msdn.microsoft.com/library/windows/apps/dn281094)  
+[ApplicationView](https://msdn.microsoft.com/library/windows/apps/hh701658)  
+[CoreApplication.CreateNewView](https://msdn.microsoft.com/library/windows/apps/dn297278)  
+[MSApp.CreateNewView](https://msdn.microsoft.com/library/windows/apps/dn252339)  
 [Windows app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 
 ## System requirements

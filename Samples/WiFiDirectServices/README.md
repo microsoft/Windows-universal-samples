@@ -25,7 +25,7 @@ Specifically, this sample shows how to:
 
 **Note** This sample requires two or more devices with Wi-Fi chipsets and drivers that support Wi-Fi Direct services.
  
-**Note** This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on Windows 10. For more info about how to build apps that target Windows and Windows Phone with Visual Studio, see [Build apps that target Windows 10 by using Visual Studio](http://msdn.microsoft.com/library/windows/apps/dn609832).
+**Note** This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on Windows 10. For more info about how to build apps that target Windows and Windows Phone with Visual Studio, see [Build apps that target Windows 10 by using Visual Studio](https://msdn.microsoft.com/library/windows/apps/dn609832).
 
 ## Related topics
 

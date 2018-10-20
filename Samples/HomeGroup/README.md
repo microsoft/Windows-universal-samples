@@ -7,10 +7,10 @@
 
 Shows how to use a HomeGroup to open, search, and share files. 
 This sample uses some of the HomeGroup options found in the 
-[Windows.Storage.Pickers](http://msdn.microsoft.com/library/windows/apps/br207928) and 
-[Windows.Storage.KnownFolders](http://msdn.microsoft.com/library/windows/apps/br227151). 
-In particular, it uses [Windows.Storage.Pickers.PickerLocationId](http://msdn.microsoft.com/library/windows/apps/br207890) 
-enumeration and the [Windows.Storage.KnownFolders.homeGroup](http://msdn.microsoft.com/library/windows/apps/br227153) 
+[Windows.Storage.Pickers](https://msdn.microsoft.com/library/windows/apps/br207928) and 
+[Windows.Storage.KnownFolders](https://msdn.microsoft.com/library/windows/apps/br227151). 
+In particular, it uses [Windows.Storage.Pickers.PickerLocationId](https://msdn.microsoft.com/library/windows/apps/br207890) 
+enumeration and the [Windows.Storage.KnownFolders.homeGroup](https://msdn.microsoft.com/library/windows/apps/br227153) 
 property to select files contained in a HomeGroup.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
@@ -37,10 +37,10 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Namespaces and classes
 
-[Windows.Storage.Pickers](http://msdn.microsoft.com/library/windows/apps/br207928)  
-[Windows.Storage.KnownFolders](http://msdn.microsoft.com/library/windows/apps/br227151)  
-[Windows.Storage.Pickers.PickerLocationId](http://msdn.microsoft.com/library/windows/apps/br207890)  
-[Windows.Storage.KnownFolders.HomeGroup](http://msdn.microsoft.com/library/windows/apps/br227153)  
+[Windows.Storage.Pickers](https://msdn.microsoft.com/library/windows/apps/br207928)  
+[Windows.Storage.KnownFolders](https://msdn.microsoft.com/library/windows/apps/br227151)  
+[Windows.Storage.Pickers.PickerLocationId](https://msdn.microsoft.com/library/windows/apps/br207890)  
+[Windows.Storage.KnownFolders.HomeGroup](https://msdn.microsoft.com/library/windows/apps/br227153)  
 
 ### Samples
 

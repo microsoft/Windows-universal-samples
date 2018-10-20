@@ -32,17 +32,17 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 <!-- Add links to related API -->
 
-[API 1](http://msdn.microsoft.com/library/windows/apps/)
+[API 1](https://msdn.microsoft.com/library/windows/apps/)
 
-[API 2](http://msdn.microsoft.com/library/windows/apps/)
+[API 2](https://msdn.microsoft.com/library/windows/apps/)
 
 ### Conceptual
 
 <!-- Add links to related topics -->
 
-[Topic 1](http://msdn.microsoft.com/library/windows/apps/)
+[Topic 1](https://msdn.microsoft.com/library/windows/apps/)
 
-[Topic 2](http://msdn.microsoft.com/library/windows/apps/)
+[Topic 2](https://msdn.microsoft.com/library/windows/apps/)
 
 ## System requirements
 

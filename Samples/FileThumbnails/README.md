@@ -5,7 +5,7 @@
 
 # File and folder thumbnail sample
 
-Shows how to retrieve thumbnails for files and folders using [Windows.Storage.FileProperties](http://msdn.microsoft.com/library/windows/apps/br207831).
+Shows how to retrieve thumbnails for files and folders using [Windows.Storage.FileProperties](https://msdn.microsoft.com/library/windows/apps/br207831).
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -30,15 +30,15 @@ The sample demonstrates these tasks:
 
     A file group is a virtual folder where all the files in the group have the criteria that you specify in common. For example, the sample shows a thumbnail for a file group wherein the files in the group all have the same month and year.
 
-To learn about retrieving the appropriate thumbnail to display to the user, see [Guidelines and checklist for thumbnails](http://msdn.microsoft.com/library/windows/apps/hh465350).
+To learn about retrieving the appropriate thumbnail to display to the user, see [Guidelines and checklist for thumbnails](https://msdn.microsoft.com/library/windows/apps/hh465350).
 
 Important APIs in this sample include:
 
--   [StorageItemThumbnail](http://msdn.microsoft.com/library/windows/apps/br207802) class
--   [ThumbnailMode](http://msdn.microsoft.com/library/windows/apps/br207809) enumeration
--   [StorageFile](http://msdn.microsoft.com/library/windows/apps/br227171).[GetThumbnailAsync](http://msdn.microsoft.com/library/windows/apps/br227210) methods
--   [StorageFolder](http://msdn.microsoft.com/library/windows/apps/br227230).[GetThumbnailAsync](http://msdn.microsoft.com/library/windows/apps/br227288) methods
--   [IStorageItemProperties](http://msdn.microsoft.com/library/windows/apps/hh701614).[GetThumbnailAsync](http://msdn.microsoft.com/library/windows/apps/hh701636) methods
+-   [StorageItemThumbnail](https://msdn.microsoft.com/library/windows/apps/br207802) class
+-   [ThumbnailMode](https://msdn.microsoft.com/library/windows/apps/br207809) enumeration
+-   [StorageFile](https://msdn.microsoft.com/library/windows/apps/br227171).[GetThumbnailAsync](https://msdn.microsoft.com/library/windows/apps/br227210) methods
+-   [StorageFolder](https://msdn.microsoft.com/library/windows/apps/br227230).[GetThumbnailAsync](https://msdn.microsoft.com/library/windows/apps/br227288) methods
+-   [IStorageItemProperties](https://msdn.microsoft.com/library/windows/apps/hh701614).[GetThumbnailAsync](https://msdn.microsoft.com/library/windows/apps/hh701636) methods
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  
@@ -57,8 +57,8 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Reference
 
-[Windows.Storage namespace](http://msdn.microsoft.com/library/windows/apps/br227346)  
-[Windows.Storage.FileProperties namespace](http://msdn.microsoft.com/library/windows/apps/br207831)  
+[Windows.Storage namespace](https://msdn.microsoft.com/library/windows/apps/br227346)  
+[Windows.Storage.FileProperties namespace](https://msdn.microsoft.com/library/windows/apps/br207831)  
 
 ## System requirements
 

@@ -47,7 +47,7 @@ See **Deploying and running the sample** below for instructions on using the sam
 
 ### Related technologies
 
-[Windows.ApplicationModel.Background](http://msdn.microsoft.com/library/windows/apps/br224847)  
+[Windows.ApplicationModel.Background](https://msdn.microsoft.com/library/windows/apps/br224847)  
 
 ## Operating system requirements
 

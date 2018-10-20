@@ -5,7 +5,7 @@
 
 # Compass sample
 
-Shows how to use the [Windows.Devices.Sensors.Compass](http://msdn.microsoft.com/library/windows/apps/br225705) API.
+Shows how to use the [Windows.Devices.Sensors.Compass](https://msdn.microsoft.com/library/windows/apps/br225705) API.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 

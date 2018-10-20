@@ -22,7 +22,7 @@ This sample requires the following capabilities:
 
 -   **Private Networks (Client & Server)** - If the server it connects to is in intranet then it requires private Network capabilities. 
 
-For more information on network capabilities, see [How to set network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532).
+For more information on network capabilities, see [How to set network capabilities](https://msdn.microsoft.com/library/windows/apps/hh770532).
 
 **Note**  This sample is comprised of two apps: SocketActivityStreamSocket (client-side) and StreamSocketListenerServer (server-side). Due to loopback restrictions 
 enforced by network isolation policy, these apps must run on separate machines for them to be able to communicate with each other. The sample scenario will not work 
@@ -32,8 +32,8 @@ if both apps are running on the same machine.
 
 ### Other resources
 
-[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)  
-[How to configure network isolation capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)  
+[Adding support for networking](https://msdn.microsoft.com/library/windows/apps/hh452752)  
+[How to configure network isolation capabilities](https://msdn.microsoft.com/library/windows/apps/hh770532)  
 
 ## System requirements
 

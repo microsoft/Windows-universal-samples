@@ -6,9 +6,9 @@
 # Disabling screen capture sample
 
 Shows how to disable screen capture by setting the
-[IsScreenCaptureEnabled](http://msdn.microsoft.com/library/windows/apps/dn281123)
+[IsScreenCaptureEnabled](https://msdn.microsoft.com/library/windows/apps/dn281123)
 property of the
-[ApplicationView](http://msdn.microsoft.com/library/windows/apps/hh701658)
+[ApplicationView](https://msdn.microsoft.com/library/windows/apps/hh701658)
 object.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
@@ -22,7 +22,7 @@ The sample consists of the following scenarios:
 
 - Allow screen capture by taking no special action. Screen capture is allowed by default.
 - Blocking screen capture for a specific page
-  by setting [IsScreenCaptureEnabled](http://msdn.microsoft.com/library/windows/apps/dn281123)
+  by setting [IsScreenCaptureEnabled](https://msdn.microsoft.com/library/windows/apps/dn281123)
   to **false** when the user navigates to the page, then setting it back to **true** when the user navigates away.
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.

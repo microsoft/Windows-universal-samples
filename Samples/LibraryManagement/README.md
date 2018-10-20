@@ -6,7 +6,7 @@
 # Library management sample
 
 Shows how to get a list of the folders in a user's library and how to let users add and remove folders from that list. This samples uses 
-[Windows.Storage](http://msdn.microsoft.com/library/windows/apps/br227346).[StorageLibrary](http://msdn.microsoft.com/library/windows/apps/dn251722).
+[Windows.Storage](https://msdn.microsoft.com/library/windows/apps/br227346).[StorageLibrary](https://msdn.microsoft.com/library/windows/apps/dn251722).
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -19,15 +19,15 @@ The sample demonstrates these tasks:
 
 1.  **Add a folder to a library**
 
-    Uses [StorageLibrary.GetLibraryAsync](http://msdn.microsoft.com/library/windows/apps/dn251725) to get a specific library and [StorageLibrary.RequestAddFolderAsync](http://msdn.microsoft.com/library/windows/apps/dn251726) to display a file picker that the user can use to select a folder to add to the library.
+    Uses [StorageLibrary.GetLibraryAsync](https://msdn.microsoft.com/library/windows/apps/dn251725) to get a specific library and [StorageLibrary.RequestAddFolderAsync](https://msdn.microsoft.com/library/windows/apps/dn251726) to display a file picker that the user can use to select a folder to add to the library.
 
 2.  **List the folders in a library**
 
-    Uses [StorageLibrary.GetLibraryAsync](http://msdn.microsoft.com/library/windows/apps/dn251725) to get a specific library and [StorageLibrary.Folders](http://msdn.microsoft.com/library/windows/apps/dn251724) to get a list of folders in the library.
+    Uses [StorageLibrary.GetLibraryAsync](https://msdn.microsoft.com/library/windows/apps/dn251725) to get a specific library and [StorageLibrary.Folders](https://msdn.microsoft.com/library/windows/apps/dn251724) to get a list of folders in the library.
 
 3.  **Remove a folder from a library**
 
-    Uses [StorageLibrary.GetLibraryAsync](http://msdn.microsoft.com/library/windows/apps/dn251725) to get a specific library and [StorageLibrary.Folders](http://msdn.microsoft.com/library/windows/apps/dn251724) to display a list of folders in the library so the user can select one to remove. Then uses [StorageLibrary.RequestRemoveFolderAsync](http://msdn.microsoft.com/library/windows/apps/dn251727) to remove the folder if the user approves.
+    Uses [StorageLibrary.GetLibraryAsync](https://msdn.microsoft.com/library/windows/apps/dn251725) to get a specific library and [StorageLibrary.Folders](https://msdn.microsoft.com/library/windows/apps/dn251724) to display a list of folders in the library so the user can select one to remove. Then uses [StorageLibrary.RequestRemoveFolderAsync](https://msdn.microsoft.com/library/windows/apps/dn251727) to remove the folder if the user approves.
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  
@@ -39,7 +39,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[Windows.Storage](http://msdn.microsoft.com/library/windows/apps/br227346)  
+[Windows.Storage](https://msdn.microsoft.com/library/windows/apps/br227346)  
 
 ## System requirements
 

@@ -23,14 +23,14 @@ Specifically, this sample shows you how to use the OAuth protocol for authentica
 
 ## Related Topics
 
-[Quickstart: Connecting using XML HTTP Request](http://msdn.microsoft.com/library/windows/apps/hh770550)  
-[Setting up single sign-on using the web authentication broker](http://msdn.microsoft.com/library/windows/apps/hh465283)  
+[Quickstart: Connecting using XML HTTP Request](https://msdn.microsoft.com/library/windows/apps/hh770550)  
+[Setting up single sign-on using the web authentication broker](https://msdn.microsoft.com/library/windows/apps/hh465283)  
 
-[WebAccount](http://msdn.microsoft.com/library/windows/apps/dn279122)  
-[WebAccountCommand](http://msdn.microsoft.com/library/windows/apps/dn298413)  
-[WebAccountProvider](http://msdn.microsoft.com/library/windows/apps/dn279123)  
-[WebAuthenticationBroker](http://msdn.microsoft.com/library/windows/apps/br227025)  
-[Windows.Security.Authentication.Web](http://msdn.microsoft.com/library/windows/apps/br227044)  
+[WebAccount](https://msdn.microsoft.com/library/windows/apps/dn279122)  
+[WebAccountCommand](https://msdn.microsoft.com/library/windows/apps/dn298413)  
+[WebAccountProvider](https://msdn.microsoft.com/library/windows/apps/dn279123)  
+[WebAuthenticationBroker](https://msdn.microsoft.com/library/windows/apps/br227025)  
+[Windows.Security.Authentication.Web](https://msdn.microsoft.com/library/windows/apps/br227044)  
 
 ## Obtaining Client Ids For Use with OAuth APIs
 

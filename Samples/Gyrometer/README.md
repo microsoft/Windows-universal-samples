@@ -5,7 +5,7 @@
 
 # Gyrometer sample
 
-Shows how to use the [Windows.Devices.Sensors.Gyrometer](http://msdn.microsoft.com/library/windows/apps/br225718) API.
+Shows how to use the [Windows.Devices.Sensors.Gyrometer](https://msdn.microsoft.com/library/windows/apps/br225718) API.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 

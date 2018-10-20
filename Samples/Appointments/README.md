@@ -5,7 +5,7 @@
 
 # Appointment calendar sample
 
-Shows how to use the [Windows.ApplicationModel.Appointments](http://msdn.microsoft.com/library/windows/apps/dn263359) namespace. 
+Shows how to use the [Windows.ApplicationModel.Appointments](https://msdn.microsoft.com/library/windows/apps/dn263359) namespace. 
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -15,9 +15,9 @@ Shows how to use the [Windows.ApplicationModel.Appointments](http://msdn.microso
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 An appointment ID is a **String** object that represents the appointment. Use the 
-[ShowAddAppointmentAsync](http://msdn.microsoft.com/library/windows/apps/dn297256) API to obtain an appointment ID of the appointment to add. 
-Use this appointment ID with the [ShowReplaceAppointmentAsync](http://msdn.microsoft.com/library/windows/apps/dn297283) or 
-[ShowRemoveAppointmentAsync](http://msdn.microsoft.com/library/windows/apps/dn297269) API to update or remove the appointment. 
+[ShowAddAppointmentAsync](https://msdn.microsoft.com/library/windows/apps/dn297256) API to obtain an appointment ID of the appointment to add. 
+Use this appointment ID with the [ShowReplaceAppointmentAsync](https://msdn.microsoft.com/library/windows/apps/dn297283) or 
+[ShowRemoveAppointmentAsync](https://msdn.microsoft.com/library/windows/apps/dn297269) API to update or remove the appointment. 
 
 For more info about how to manage appointments, see [Managing appointments](https://msdn.microsoft.com/library/windows/apps/mt269389).
 
@@ -30,11 +30,11 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 ### Reference
 For more info about the concepts and APIs demonstrated in this sample, see these topics:
 
-- [Windows.ApplicationModel.Appointments](http://msdn.microsoft.com/library/windows/apps/dn263359)
-- [Windows.ApplicationModel.Appointments.AppointmentsProvider](http://msdn.microsoft.com/library/windows/apps/dn297284)
-- [AppointmentManager.ShowAddAppointmentAsync](http://msdn.microsoft.com/library/windows/apps/dn297256)
-- [AppointmentManager.ShowReplaceAppointmentAsync](http://msdn.microsoft.com/library/windows/apps/dn297283)
-- [AppointmentManager.ShowRemoveAppointmentAsync](http://msdn.microsoft.com/library/windows/apps/dn297269)
+- [Windows.ApplicationModel.Appointments](https://msdn.microsoft.com/library/windows/apps/dn263359)
+- [Windows.ApplicationModel.Appointments.AppointmentsProvider](https://msdn.microsoft.com/library/windows/apps/dn297284)
+- [AppointmentManager.ShowAddAppointmentAsync](https://msdn.microsoft.com/library/windows/apps/dn297256)
+- [AppointmentManager.ShowReplaceAppointmentAsync](https://msdn.microsoft.com/library/windows/apps/dn297283)
+- [AppointmentManager.ShowRemoveAppointmentAsync](https://msdn.microsoft.com/library/windows/apps/dn297269)
 
 ## System requirements
 

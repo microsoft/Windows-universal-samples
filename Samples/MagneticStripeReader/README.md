@@ -6,7 +6,7 @@
 # Magnetic stripe reader sample
 
 Shows how to create a magnetic stripe reader, claim it for exclusive use, enable it to receive data, and read data from a bank card or a motor vehicle card. 
-This sample uses the [Windows.Devices.PointOfService](http://msdn.microsoft.com/library/windows/apps/dn298071) API.
+This sample uses the [Windows.Devices.PointOfService](https://msdn.microsoft.com/library/windows/apps/dn298071) API.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -24,19 +24,19 @@ Specifically, this sample shows how to:
 
 2.  **Claim the magnetic stripe reader for exclusive use**
 
-    Uses [ClaimReaderAsync](http://msdn.microsoft.com/library/windows/apps/dn297979) to claim the device.
+    Uses [ClaimReaderAsync](https://msdn.microsoft.com/library/windows/apps/dn297979) to claim the device.
 
 3.  **Add event handlers**
 
-    Uses [BankCardDataReceived](http://msdn.microsoft.com/library/windows/apps/dn278599), [AamvaCardDataReceived](http://msdn.microsoft.com/library/windows/apps/dn278595), and [ReleaseDeviceRequested](http://msdn.microsoft.com/library/windows/apps/dn278626) events.
+    Uses [BankCardDataReceived](https://msdn.microsoft.com/library/windows/apps/dn278599), [AamvaCardDataReceived](https://msdn.microsoft.com/library/windows/apps/dn278595), and [ReleaseDeviceRequested](https://msdn.microsoft.com/library/windows/apps/dn278626) events.
 
-    When an application gets a request from another application to release its exclusive claim to the magnetic stripe reader, it must handle the request by retaining the device; otherwise, it will lose its claim. The event handler for [ReleaseDeviceRequested](http://msdn.microsoft.com/library/windows/apps/dn278626) shows how to do this.
+    When an application gets a request from another application to release its exclusive claim to the magnetic stripe reader, it must handle the request by retaining the device; otherwise, it will lose its claim. The event handler for [ReleaseDeviceRequested](https://msdn.microsoft.com/library/windows/apps/dn278626) shows how to do this.
 
 4.  **Enable the device to receive data**
 
-    Uses [EnableAsync](http://msdn.microsoft.com/library/windows/apps/dn278612).
+    Uses [EnableAsync](https://msdn.microsoft.com/library/windows/apps/dn278612).
 
-The app package manifest shows how to specify the device capability name for the Point of Service (POS) devices. All POS apps are required declare [DeviceCapability](http://msdn.microsoft.com/library/windows/apps/br211430) in the app package manifest, either by using "PointofService" as shown in this sample or by using device specific GUID, such as "2A9FE532-0CDC-44F9-9827-76192F2CA2FB" for a magnetic stripe reader.
+The app package manifest shows how to specify the device capability name for the Point of Service (POS) devices. All POS apps are required declare [DeviceCapability](https://msdn.microsoft.com/library/windows/apps/br211430) in the app package manifest, either by using "PointofService" as shown in this sample or by using device specific GUID, such as "2A9FE532-0CDC-44F9-9827-76192F2CA2FB" for a magnetic stripe reader.
 
 The following list shows the magnetic stripe readers that were used with this code sample:
 
@@ -60,7 +60,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[Windows.Devices.PointOfService](http://msdn.microsoft.com/library/windows/apps/dn298071)  
+[Windows.Devices.PointOfService](https://msdn.microsoft.com/library/windows/apps/dn298071)  
 [Windows app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 
 ## System requirements

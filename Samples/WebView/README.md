@@ -5,7 +5,7 @@
 
 # WebView control (HTML) sample
 
-Shows how to use the [WebView](http://msdn.microsoft.com/library/windows/apps/br227702) control. 
+Shows how to use the [WebView](https://msdn.microsoft.com/library/windows/apps/br227702) control. 
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -14,12 +14,12 @@ Shows how to use the [WebView](http://msdn.microsoft.com/library/windows/apps/br
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-Specifically, this sample shows how to use [WebView](http://msdn.microsoft.com/library/windows/apps/br227702) to navigate to a URL, display a string of HTML, 
+Specifically, this sample shows how to use [WebView](https://msdn.microsoft.com/library/windows/apps/br227702) to navigate to a URL, display a string of HTML, 
 track state, display the contents of a stream, invoke a script, and how to support the share contract.
 
 ## Related topics
 
-[WebView](http://msdn.microsoft.com/library/windows/apps/br227702)  
+[WebView](https://msdn.microsoft.com/library/windows/apps/br227702)  
 
 ## Operating system requirements
 

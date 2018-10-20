@@ -28,7 +28,7 @@ Specifically, this sample shows:
 Related topics
 --------------
 
-[Windows.Devices.SmartCards](http://msdn.microsoft.com/library/windows/apps/dn263949)  
+[Windows.Devices.SmartCards](https://msdn.microsoft.com/library/windows/apps/dn263949)  
 
 Operating system requirements
 -----------------------------

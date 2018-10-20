@@ -5,7 +5,7 @@
 
 # Contact picker sample
 
-Shows how to use the [ContactPicker](http://msdn.microsoft.com/library/windows/apps/br224913)
+Shows how to use the [ContactPicker](https://msdn.microsoft.com/library/windows/apps/br224913)
 class to select one or more contacts.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
@@ -36,7 +36,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[ContactPicker class](http://msdn.microsoft.com/library/windows/apps/br224913)  
+[ContactPicker class](https://msdn.microsoft.com/library/windows/apps/br224913)  
 [Contacts and calendar](https://msdn.microsoft.com/library/windows/apps/mt269388)  
 
 ## System requirements

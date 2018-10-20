@@ -6,9 +6,9 @@
 # Clipboard sample
 
 Shows how to use clipboard commands, including copy, paste, cut, and move. 
-This sample uses classes from the [Windows.ApplicationModel.DataTransfer](http://msdn.microsoft.com/library/windows/apps/br205967) namespace. 
-Some of the classes you might want to review in more detail include the [Clipboard](http://msdn.microsoft.com/library/windows/apps/br205867) class, 
-which accesses the Clipboard, and the [DataPackage](http://msdn.microsoft.com/library/windows/apps/br205873) class, which you use to package the 
+This sample uses classes from the [Windows.ApplicationModel.DataTransfer](https://msdn.microsoft.com/library/windows/apps/br205967) namespace. 
+Some of the classes you might want to review in more detail include the [Clipboard](https://msdn.microsoft.com/library/windows/apps/br205867) class, 
+which accesses the Clipboard, and the [DataPackage](https://msdn.microsoft.com/library/windows/apps/br205873) class, which you use to package the 
 content before adding it to the Clipboard.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
@@ -36,10 +36,10 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[Clipboard](http://msdn.microsoft.com/library/windows/apps/br205867)  
-[Guidelines and checklist for clipboard commands](http://msdn.microsoft.com/library/windows/apps/hh700347)  
-[QuickStart: Clipboard basics](http://msdn.microsoft.com/library/windows/apps/hh750308)  
-[Windows.ApplicationModel.DataTransfer](http://msdn.microsoft.com/library/windows/apps/br205967)  
+[Clipboard](https://msdn.microsoft.com/library/windows/apps/br205867)  
+[Guidelines and checklist for clipboard commands](https://msdn.microsoft.com/library/windows/apps/hh700347)  
+[QuickStart: Clipboard basics](https://msdn.microsoft.com/library/windows/apps/hh750308)  
+[Windows.ApplicationModel.DataTransfer](https://msdn.microsoft.com/library/windows/apps/br205967)  
 
 ## System requirements
 

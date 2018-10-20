@@ -6,7 +6,7 @@
 # File search sample
 
 Shows how to query files in a location (like a folder, library, device, or network location). 
-Uses the [Windows.Storage.Search](http://msdn.microsoft.com/library/windows/apps/br208106) API.
+Uses the [Windows.Storage.Search](https://msdn.microsoft.com/library/windows/apps/br208106) API.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -17,11 +17,11 @@ Uses the [Windows.Storage.Search](http://msdn.microsoft.com/library/windows/apps
 
 Important APIs in this sample include:
 
--   [QueryOptions](http://msdn.microsoft.com/library/windows/apps/br207995) class
--   [StorageFileQueryResult](http://msdn.microsoft.com/library/windows/apps/br208046) class
--   [StorageFolder](http://msdn.microsoft.com/library/windows/apps/br227230).[CreateFileQueryWithOptions](http://msdn.microsoft.com/library/windows/apps/br211591) method
+-   [QueryOptions](https://msdn.microsoft.com/library/windows/apps/br207995) class
+-   [StorageFileQueryResult](https://msdn.microsoft.com/library/windows/apps/br208046) class
+-   [StorageFolder](https://msdn.microsoft.com/library/windows/apps/br227230).[CreateFileQueryWithOptions](https://msdn.microsoft.com/library/windows/apps/br211591) method
 
-For a walkthrough, see [Quickstart: Accessing files programmatically](http://msdn.microsoft.com/library/windows/apps/jj150596).
+For a walkthrough, see [Quickstart: Accessing files programmatically](https://msdn.microsoft.com/library/windows/apps/jj150596).
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  
@@ -38,8 +38,8 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[Windows.Storage namespace](http://msdn.microsoft.com/library/windows/apps/br227346)  
-[Windows.Storage.Search namespace](http://msdn.microsoft.com/library/windows/apps/br208106)  
+[Windows.Storage namespace](https://msdn.microsoft.com/library/windows/apps/br227346)  
+[Windows.Storage.Search namespace](https://msdn.microsoft.com/library/windows/apps/br208106)  
 
 ## System requirements
 

@@ -5,7 +5,7 @@
 
 # Magnetometer sample
 
-Shows how to use the [Magnetometer](http://msdn.microsoft.com/library/windows/apps/br225687) class.
+Shows how to use the [Magnetometer](https://msdn.microsoft.com/library/windows/apps/br225687) class.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 

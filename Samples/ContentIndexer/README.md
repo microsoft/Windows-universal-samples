@@ -22,19 +22,19 @@ The sample demonstrates these tasks:
 
 1.  **Add an item to the system index**
 
-    Uses the [AddAsync](http://msdn.microsoft.com/library/windows/apps/dn298342) method to make app content searchable in the system index.
+    Uses the [AddAsync](https://msdn.microsoft.com/library/windows/apps/dn298342) method to make app content searchable in the system index.
 
 2.  **Update and delete items in the index**
 
-    Uses the [UpdateAsync](http://msdn.microsoft.com/library/windows/apps/dn298355) method to update an item and the [DeleteAsync](http://msdn.microsoft.com/library/windows/apps/dn298348), [DeleteMultipleAsync](http://msdn.microsoft.com/library/windows/apps/dn298349), and [DeleteAllAsync](http://msdn.microsoft.com/library/windows/apps/dn298347) methods to remove content from the system index.
+    Uses the [UpdateAsync](https://msdn.microsoft.com/library/windows/apps/dn298355) method to update an item and the [DeleteAsync](https://msdn.microsoft.com/library/windows/apps/dn298348), [DeleteMultipleAsync](https://msdn.microsoft.com/library/windows/apps/dn298349), and [DeleteAllAsync](https://msdn.microsoft.com/library/windows/apps/dn298347) methods to remove content from the system index.
 
 3.  **Get items from the system index by using a query**
 
-    Uses the [CreateQuery](http://msdn.microsoft.com/library/windows/apps/dn298343) and [GetAsync](http://msdn.microsoft.com/library/windows/apps/dn298334) methods to retrieve items from the system index.
+    Uses the [CreateQuery](https://msdn.microsoft.com/library/windows/apps/dn298343) and [GetAsync](https://msdn.microsoft.com/library/windows/apps/dn298334) methods to retrieve items from the system index.
 
 4.  **Check the revision number of the indexer**
 
-    Uses the [Revision](http://msdn.microsoft.com/library/windows/apps/dn298354) property and the app's [LocalSettings](http://msdn.microsoft.com/library/windows/apps/br241622) to check if the app's expected revision number matches the actual index revision number.
+    Uses the [Revision](https://msdn.microsoft.com/library/windows/apps/dn298354) property and the app's [LocalSettings](https://msdn.microsoft.com/library/windows/apps/br241622) to check if the app's expected revision number matches the actual index revision number.
 
 5.  **Add app content files to be indexed**
 
@@ -46,7 +46,7 @@ The sample demonstrates these tasks:
 
 7.  **Get indexed file properties**
 
-    Uses the [CreateFileQuery](http://msdn.microsoft.com/library/windows/apps/br227252) and [CreateFileQueryWithOptions](http://msdn.microsoft.com/library/windows/apps/br211591) methods to query the system index for file properties.
+    Uses the [CreateFileQuery](https://msdn.microsoft.com/library/windows/apps/br227252) and [CreateFileQueryWithOptions](https://msdn.microsoft.com/library/windows/apps/br211591) methods to query the system index for file properties.
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  
@@ -58,10 +58,10 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[ContentIndexer](http://msdn.microsoft.com/library/windows/apps/dn298331)  
-[ContentIndexerQuery](http://msdn.microsoft.com/library/windows/apps/dn298332)  
-[CreateFileQuery](http://msdn.microsoft.com/library/windows/apps/br227252)  
-[CreateFileQueryWithOptions](http://msdn.microsoft.com/library/windows/apps/br211591)  
+[ContentIndexer](https://msdn.microsoft.com/library/windows/apps/dn298331)  
+[ContentIndexerQuery](https://msdn.microsoft.com/library/windows/apps/dn298332)  
+[CreateFileQuery](https://msdn.microsoft.com/library/windows/apps/br227252)  
+[CreateFileQueryWithOptions](https://msdn.microsoft.com/library/windows/apps/br211591)  
 
 ## System requirements
 

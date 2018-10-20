@@ -6,7 +6,7 @@
 # Application data sample
 
 Shows how to store and retrieve data that is specific to each user and app by using the Windows Runtime application data APIs 
-([Windows.Storage.ApplicationData](http://msdn.microsoft.com/library/windows/apps/br241587) and so on). 
+([Windows.Storage.ApplicationData](https://msdn.microsoft.com/library/windows/apps/br241587) and so on). 
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -34,7 +34,7 @@ The sample covers these key tasks:
 
 ## Guidelines 
 
-[Guidelines for roaming application data](http://msdn.microsoft.com/library/windows/apps/hh465094)  
+[Guidelines for roaming application data](https://msdn.microsoft.com/library/windows/apps/hh465094)  
 
 ## Concepts 
 
@@ -42,11 +42,11 @@ The sample covers these key tasks:
 
 ## Reference 
 
-[Windows.Storage.ApplicationData](http://msdn.microsoft.com/library/windows/apps/br241587)  
-[Windows.Storage.ApplicationDataCompositeValue](http://msdn.microsoft.com/library/windows/apps/br241588)  
-[Windows.Storage.ApplicationDataContainer](http://msdn.microsoft.com/library/windows/apps/br241599)  
-[Windows.Storage.ApplicationDataContainerSettings](http://msdn.microsoft.com/library/windows/apps/br241600)  
-[WinJS.Application](http://msdn.microsoft.com/library/windows/apps/br229774)  
+[Windows.Storage.ApplicationData](https://msdn.microsoft.com/library/windows/apps/br241587)  
+[Windows.Storage.ApplicationDataCompositeValue](https://msdn.microsoft.com/library/windows/apps/br241588)  
+[Windows.Storage.ApplicationDataContainer](https://msdn.microsoft.com/library/windows/apps/br241599)  
+[Windows.Storage.ApplicationDataContainerSettings](https://msdn.microsoft.com/library/windows/apps/br241600)  
+[WinJS.Application](https://msdn.microsoft.com/library/windows/apps/br229774)  
 
 ## System requirements
 

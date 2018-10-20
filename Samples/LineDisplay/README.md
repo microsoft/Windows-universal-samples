@@ -39,7 +39,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[Windows.Devices.PointOfService](http://msdn.microsoft.com/library/windows/apps/dn298071)
+[Windows.Devices.PointOfService](https://msdn.microsoft.com/library/windows/apps/dn298071)
 
 [Windows.Devices.PointOfService.LineDisplay](https://docs.microsoft.com/uwp/api/Windows.Devices.PointOfService.LineDisplay)
 

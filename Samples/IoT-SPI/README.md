@@ -5,7 +5,7 @@
 
 # Serial Peripheral Interface (SPI) sample
 
-Shows how to use the [Windows.Devices.Spi](http://msdn.microsoft.com/library/windows.devices.spi.aspx) namespace
+Shows how to use the [Windows.Devices.Spi](https://msdn.microsoft.com/library/windows.devices.spi.aspx) namespace
 to allow apps to communicate with Serial Peripheral Interface (SPI) devices
 on a Windows IoT (Internet of Things) device.
 

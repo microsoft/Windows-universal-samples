@@ -37,11 +37,11 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 
 ## Related topics
 
-[Guidelines and checklist for secondary tiles](http://msdn.microsoft.com/library/windows/apps/hh465398)  
-[Quickstart: Pinning a secondary tile](http://msdn.microsoft.com/library/windows/apps/hh465443)  
-[Quickstart: Sending notifications to a secondary tile](http://msdn.microsoft.com/library/windows/apps/hh761474)  
-[SecondaryTile class](http://msdn.microsoft.com/library/windows/apps/br242183)  
-[Secondary tiles overviews](http://msdn.microsoft.com/library/windows/apps/hh465372)  
+[Guidelines and checklist for secondary tiles](https://msdn.microsoft.com/library/windows/apps/hh465398)  
+[Quickstart: Pinning a secondary tile](https://msdn.microsoft.com/library/windows/apps/hh465443)  
+[Quickstart: Sending notifications to a secondary tile](https://msdn.microsoft.com/library/windows/apps/hh761474)  
+[SecondaryTile class](https://msdn.microsoft.com/library/windows/apps/br242183)  
+[Secondary tiles overviews](https://msdn.microsoft.com/library/windows/apps/hh465372)  
 
 ## System requirements
 

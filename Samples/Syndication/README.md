@@ -5,7 +5,7 @@
 
 # Syndication sample
 
-Shows how to retrieve feeds from a web service using classes in the [Windows.Web.Syndication](http://msdn.microsoft.com/library/windows/apps/br243632) 
+Shows how to retrieve feeds from a web service using classes in the [Windows.Web.Syndication](https://msdn.microsoft.com/library/windows/apps/br243632) 
 namespace in your Universal Windows Platform (UWP) app. This sample is provided in the JavaScript, C\#, and C++ programming languages.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
@@ -17,8 +17,8 @@ namespace in your Universal Windows Platform (UWP) app. This sample is provided 
 
 This sample demonstrates the following features:
 
--   Use the [SyndicationClient](http://msdn.microsoft.com/library/windows/apps/br243456) class and class members to retrieve a web feed.
--   Use the [SyndicationItem](http://msdn.microsoft.com/library/windows/apps/br243533) class and class members to display items in a web feed.
+-   Use the [SyndicationClient](https://msdn.microsoft.com/library/windows/apps/br243456) class and class members to retrieve a web feed.
+-   Use the [SyndicationItem](https://msdn.microsoft.com/library/windows/apps/br243533) class and class members to display items in a web feed.
 
 **Note**  Use of this sample requires Internet or intranet access in order to retrieve feeds.
 
@@ -32,22 +32,22 @@ To build the sample, set the following network capabilities:
 
     **Private Networks (Client & Server)**: The sample has inbound and outbound network access on a home or work network (a local intranet). This allows the app to download various types of content from an HTTP server and upload content to an HTTP server located on a local intranet. The **Private Networks (Client & Server)** capability is represented by the **Capability name = "privateNetworkClientServer"** tag in the app manifest.
 
-For more information on network capabilities, see [How to set network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532).
+For more information on network capabilities, see [How to set network capabilities](https://msdn.microsoft.com/library/windows/apps/hh770532).
 
 ## Related topics
 
 ### Other - C\#/VB/C++ and XAML
 
 [RSS/Atom feeds](https://msdn.microsoft.com/library/windows/apps/mt429379)  
-[Adding support for networking (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452751)  
+[Adding support for networking (XAML)](https://msdn.microsoft.com/library/windows/apps/hh452751)  
 [Networking basics](https://msdn.microsoft.com/library/windows/apps/mt280233)  
 
 ### Reference
 
-[SyndicationClient](http://msdn.microsoft.com/library/windows/apps/br243456)  
-[SyndicationItem](http://msdn.microsoft.com/library/windows/apps/br243533)  
-[Windows.Web.AtomPub](http://msdn.microsoft.com/library/windows/apps/br210609)  
-[Windows.Web.Syndication](http://msdn.microsoft.com/library/windows/apps/br243632)  
+[SyndicationClient](https://msdn.microsoft.com/library/windows/apps/br243456)  
+[SyndicationItem](https://msdn.microsoft.com/library/windows/apps/br243533)  
+[Windows.Web.AtomPub](https://msdn.microsoft.com/library/windows/apps/br210609)  
+[Windows.Web.Syndication](https://msdn.microsoft.com/library/windows/apps/br243632)  
 
 ### Samples
 

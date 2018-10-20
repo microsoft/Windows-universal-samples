@@ -47,15 +47,15 @@ This sample is written in C++ and requires some experience with graphics program
 
 These topics provide info about the APIs used in this sample:
 
-- [DirectX Graphics and Gaming](http://msdn.microsoft.com/library/windows/apps/ee663274)
-- [Direct3D 11 Overview](http://msdn.microsoft.com/library/windows/apps/ff476345)
-- [Direct3D 11 Reference](http://msdn.microsoft.com/library/windows/apps/ff476147)
-- [DXGI reference](http://msdn.microsoft.com/library/windows/apps/bb205169)
-- [XAudio2](http://msdn.microsoft.com/library/windows/apps/hh405049)
-- [Windows.Gaming.Input](http://msdn.microsoft.com/library/windows/apps/windows.gaming.input)
-- [Windows.UI.Xaml](http://msdn.microsoft.com/library/windows/apps/br209045)
-- [Windows.UI.Xaml.Controls](http://msdn.microsoft.com/library/windows/apps/br227716)
-- [Windows.UI.Xaml.Controls.SwapChainPanel](http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.swapchainpanel)
+- [DirectX Graphics and Gaming](https://msdn.microsoft.com/library/windows/apps/ee663274)
+- [Direct3D 11 Overview](https://msdn.microsoft.com/library/windows/apps/ff476345)
+- [Direct3D 11 Reference](https://msdn.microsoft.com/library/windows/apps/ff476147)
+- [DXGI reference](https://msdn.microsoft.com/library/windows/apps/bb205169)
+- [XAudio2](https://msdn.microsoft.com/library/windows/apps/hh405049)
+- [Windows.Gaming.Input](https://msdn.microsoft.com/library/windows/apps/windows.gaming.input)
+- [Windows.UI.Xaml](https://msdn.microsoft.com/library/windows/apps/br209045)
+- [Windows.UI.Xaml.Controls](https://msdn.microsoft.com/library/windows/apps/br227716)
+- [Windows.UI.Xaml.Controls.SwapChainPanel](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.swapchainpanel)
 
 ## System requirements
 

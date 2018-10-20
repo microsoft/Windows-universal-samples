@@ -45,20 +45,20 @@ To obtain an evaluation copy of Microsoft Visual Studio 2013, go to [Visual Stu
 
 ### Reference
 
-[Displaying tiles on the lock screen](http://msdn.microsoft.com/library/windows/apps/hh868260)  
-[Launching, resuming, and multitasking](http://msdn.microsoft.com/library/windows/apps/hh770837)  
-[Managing background tasks](http://msdn.microsoft.com/library/windows/apps/hh977053)  
+[Displaying tiles on the lock screen](https://msdn.microsoft.com/library/windows/apps/hh868260)  
+[Launching, resuming, and multitasking](https://msdn.microsoft.com/library/windows/apps/hh770837)  
+[Managing background tasks](https://msdn.microsoft.com/library/windows/apps/hh977053)  
 [Support your app with background tasks](https://msdn.microsoft.com/library/windows/apps/mt299103)  
 [Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 
 **API reference**
 
-[Windows.ApplicationModel.Background (XAML)](http://msdn.microsoft.com/library/windows/apps/br224847)  
-[Windows.UI.WebUI.WebUIBackgroundTaskInstance (HTML)](http://msdn.microsoft.com/library/windows/apps/hh701740)  
+[Windows.ApplicationModel.Background (XAML)](https://msdn.microsoft.com/library/windows/apps/br224847)  
+[Windows.UI.WebUI.WebUIBackgroundTaskInstance (HTML)](https://msdn.microsoft.com/library/windows/apps/hh701740)  
 
 ### Related technologies
 
-[Windows.ApplicationModel.Background](http://msdn.microsoft.com/library/windows/apps/br224847)  
+[Windows.ApplicationModel.Background](https://msdn.microsoft.com/library/windows/apps/br224847)  
 
 ## Operating system requirements
 

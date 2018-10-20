@@ -14,7 +14,7 @@ Shows how to use ink functionality (such as, capturing, manipulating, and interp
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-Specifically, this sample covers using the [Windows.UI.Input.Inking](http://msdn.microsoft.com/library/windows/apps/br208524) APIs to:
+Specifically, this sample covers using the [Windows.UI.Input.Inking](https://msdn.microsoft.com/library/windows/apps/br208524) APIs to:
 
 -   Render ink strokes
 -   Save and load ink strokes
@@ -51,8 +51,8 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-[Responding to pen and stylus interactions](http://msdn.microsoft.com/library/windows/apps/hh700425)  
-[Responding to user interaction](http://msdn.microsoft.com/library/windows/apps/hh700412)  
+[Responding to pen and stylus interactions](https://msdn.microsoft.com/library/windows/apps/hh700425)  
+[Responding to user interaction](https://msdn.microsoft.com/library/windows/apps/hh700412)  
 
 **Samples**
 
@@ -61,7 +61,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 **Reference**
 
-[Windows.UI.Input.Inking](http://msdn.microsoft.com/library/windows/apps/br208524)  
+[Windows.UI.Input.Inking](https://msdn.microsoft.com/library/windows/apps/br208524)  
 
 ## Operating system requirements
 
