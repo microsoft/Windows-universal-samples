@@ -28,7 +28,6 @@ using namespace RpcServer;
 const WCHAR* CustomCapabilityName = L"microsoft.hsaTestCustomCapability_q536wpkpf5cy2";
 
 bool ShutdownRequested;
-static RPC_BINDING_VECTOR* BindingVector = nullptr;
 
 void FreeSidArray(__inout_ecount(cSIDs) PSID* pSIDs, ULONG cSIDs)
 {
@@ -184,24 +183,6 @@ DWORD RpcServerStart()
         goto end;
     }
 
-    hResult = RpcServerInqBindings(&BindingVector);
-
-    if (hResult != S_OK)
-    {
-        goto end;
-    }
-
-    hResult = RpcEpRegister(
-        RpcInterface_v1_0_s_ifspec,
-        BindingVector,
-        nullptr,
-        nullptr);
-
-    if (hResult != S_OK)
-    {
-        goto end;
-    }
-
     hResult = RpcServerListen(
         minCalls,
         RPC_C_LISTEN_MAX_CALLS_DEFAULT,
@@ -240,14 +221,6 @@ void RpcServerDisconnect()
     DWORD hResult = S_OK;
     ShutdownRequested = true;
     hResult = RpcServerUnregisterIf(RpcInterface_v1_0_s_ifspec, nullptr, 0);
-
-    RpcEpUnregister(RpcInterface_v1_0_s_ifspec, BindingVector, nullptr);
-
-    if (BindingVector != nullptr)
-    {
-        RpcBindingVectorFree(&BindingVector);
-        BindingVector = nullptr;
-    }
 }
 
 //
