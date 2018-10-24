@@ -184,24 +184,6 @@ DWORD RpcServerStart()
         goto end;
     }
 
-    hResult = RpcServerInqBindings(&BindingVector);
-
-    if (hResult != S_OK)
-    {
-        goto end;
-    }
-
-    hResult = RpcEpRegister(
-        RpcInterface_v1_0_s_ifspec,
-        BindingVector,
-        nullptr,
-        nullptr);
-
-    if (hResult != S_OK)
-    {
-        goto end;
-    }
-
     hResult = RpcServerListen(
         minCalls,
         RPC_C_LISTEN_MAX_CALLS_DEFAULT,

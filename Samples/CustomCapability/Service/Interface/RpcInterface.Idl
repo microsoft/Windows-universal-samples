@@ -12,7 +12,7 @@
 import "oaidl.idl";
 import "unknwn.idl";
 
-[uuid (906B0CE0-C70B-1067-B317-00DD010662DA),
+[uuid (793F4B24-33C4-4378-BF77-52EC8172CBD4),
 version(1.0),
 pointer_default(unique),
 ]
