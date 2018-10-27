@@ -206,6 +206,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FirmwareAccess.h" />
     <ClInclude Include="RpcClient.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RpcClientApi.h">
@@ -234,6 +235,8 @@
     <ClCompile Include="RpcClientApi.cpp">
       <DeploymentContent>true</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="smbios.cpp" />
+    <ClCompile Include="uefi.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

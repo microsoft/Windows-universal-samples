@@ -60,9 +60,6 @@ namespace DX
         IWICImagingFactory2*        GetWicImagingFactory() const            { return m_wicFactory.Get(); }
         D2D1::Matrix3x2F            GetOrientationTransform2D() const       { return m_orientationTransform2D; }
 
-        // Helper methods for DXGI functionality.
-        DXGI_OUTPUT_DESC1           GetCurrentOutputDesc1();
-
     private:
         void CreateDeviceIndependentResources();
         void CreateDeviceResources();

@@ -4,7 +4,8 @@
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:uap4="http://schemas.microsoft.com/appx/manifest/uap/windows10/4"
-  IgnorableNamespaces="uap mp uap4"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap mp uap4 rescap"
   >
   <Identity Name="Microsoft.SDKSamples.CustomCapability.CPP" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="26388851-6c33-4124-b1e5-96e859da28bf" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
@@ -14,7 +15,7 @@
     <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.15063.0" MaxVersionTested="10.0.17134.0"/>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17134.0" MaxVersionTested="10.0.17134.0"/>
   </Dependencies>
   <Resources>
     <Resource Language="x-generate" />
@@ -35,9 +36,21 @@
           </uap:ShowNameOnTiles>
         </uap:DefaultTile>
       </uap:VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="Osrusbfx2Task.ConnectedTask">
+          <BackgroundTasks>
+            <Task Type="systemEvent" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>
+    <rescap:Capability Name="smbios" />
+    <!-- Enable "protectedApp" capability before store submission 
+         to access firmware variables in production environment -->
+    <!-- <rescap:Capability Name="protectedApp" /> -->
+    <uap4:CustomCapability Name="microsoft.firmwareRead_cw5n1h2txyewy" />
     <uap4:CustomCapability Name="microsoft.hsaTestCustomCapability_q536wpkpf5cy2" />
   </Capabilities>
 </Package>

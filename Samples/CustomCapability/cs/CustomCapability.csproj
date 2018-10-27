@@ -116,6 +116,12 @@
     <Compile Include="Scenario5_DeviceReadWrite.xaml.cs">
       <DependentUpon>Scenario5_DeviceReadWrite.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario6_CustomTrigger.xaml.cs">
+      <DependentUpon>Scenario6_CustomTrigger.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario7_FirmwareAccess.xaml.cs">
+      <DependentUpon>Scenario7_FirmwareAccess.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ServiceViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +173,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="..\shared\Scenario6_CustomTrigger.xaml">
+      <Link>Scenario6_CustomTrigger.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario7_FirmwareAccess.xaml">
+      <Link>Scenario7_FirmwareAccess.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
@@ -195,6 +211,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Service\Osrusbfx2Task\Osrusbfx2Task.csproj">
+      <Project>{45611270-f6a1-4969-ab74-9a0e1f39111b}</Project>
+      <Name>Osrusbfx2Task</Name>
+    </ProjectReference>
     <ProjectReference Condition="'$(Platform)' == 'x86' Or '$(Platform)' == 'x64'" Include="..\Service\Client\RpcClient.vcxproj">
       <Project>{2c78f411-866b-472d-9c28-75d59f179525}</Project>
       <Name>RpcClient</Name>

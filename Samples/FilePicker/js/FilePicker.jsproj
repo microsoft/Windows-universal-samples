@@ -61,6 +61,7 @@
     <Content Include="html\scenario2_MultiFile.html" />
     <Content Include="html\scenario3_SingleFolder.html" />
     <Content Include="html\scenario4_SaveFile.html" />
+    <Content Include="html\scenario5_TriggerCFU.html" />
     <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>images\microsoft-sdk.png</Link>
     </Content>
@@ -93,6 +94,7 @@
     <Content Include="js\scenario2_MultiFile.js" />
     <Content Include="js\scenario3_SingleFolder.js" />
     <Content Include="js\scenario4_SaveFile.js" />
+    <Content Include="js\scenario5_TriggerCFU.js" />
     <Content Include="..\..\..\SharedContent\js\Microsoft.WinJS\css\ui-dark.css">
       <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>
     </Content>

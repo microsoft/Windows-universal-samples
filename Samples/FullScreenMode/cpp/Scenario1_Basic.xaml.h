@@ -29,6 +29,10 @@ namespace SDKTemplate
     private:
         MainPage^ rootPage;
 
+        // What is the program's last known full-screen state?
+        // We use this to detect when the system forced us out of full-screen mode.
+        bool isLastKnownFullScreen = Windows::UI::ViewManagement::ApplicationView::GetForCurrentView()->IsFullScreenMode;
+
         void ToggleFullScreenModeButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void ShowStandardSystemOverlaysButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void UseMinimalOverlaysCheckBox_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);

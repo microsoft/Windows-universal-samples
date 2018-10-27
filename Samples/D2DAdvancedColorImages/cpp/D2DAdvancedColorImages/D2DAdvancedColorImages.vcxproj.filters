@@ -8,7 +8,7 @@
     <Filter Include="Common">
       <UniqueIdentifier>{a6fce137-2822-4f7a-8593-eff13050174b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tonemappers">
+    <Filter Include="RenderEffects">
       <UniqueIdentifier>{2696d988-fd48-43de-b313-d0320f662368}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -27,10 +27,16 @@
     </ClCompile>
     <ClCompile Include="D2DAdvancedColorImagesRenderer.cpp" />
     <ClCompile Include="ReinhardEffect.cpp">
-      <Filter>Tonemappers</Filter>
+      <Filter>RenderEffects</Filter>
     </ClCompile>
     <ClCompile Include="FilmicEffect.cpp">
-      <Filter>Tonemappers</Filter>
+      <Filter>RenderEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="SdrOverlayEffect.cpp">
+      <Filter>RenderEffects</Filter>
+    </ClCompile>
+    <ClCompile Include="LuminanceHeatmapEffect.cpp">
+      <Filter>RenderEffects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -49,10 +55,16 @@
     <ClInclude Include="D2DAdvancedColorImagesRenderer.h" />
     <ClInclude Include="RenderOptions.h" />
     <ClInclude Include="ReinhardEffect.h">
-      <Filter>Tonemappers</Filter>
+      <Filter>RenderEffects</Filter>
     </ClInclude>
     <ClInclude Include="FilmicEffect.h">
-      <Filter>Tonemappers</Filter>
+      <Filter>RenderEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="SdrOverlayEffect.h">
+      <Filter>RenderEffects</Filter>
+    </ClInclude>
+    <ClInclude Include="LuminanceHeatmapEffect.h">
+      <Filter>RenderEffects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,10 +92,16 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReinhardEffect.hlsl">
-      <Filter>Tonemappers</Filter>
+      <Filter>RenderEffects</Filter>
     </Text>
     <Text Include="FilmicEffect.hlsl">
-      <Filter>Tonemappers</Filter>
+      <Filter>RenderEffects</Filter>
+    </Text>
+    <Text Include="SdrOverlayEffect.hlsl">
+      <Filter>RenderEffects</Filter>
+    </Text>
+    <Text Include="LuminanceHeatmapEffect.hlsl">
+      <Filter>RenderEffects</Filter>
     </Text>
   </ItemGroup>
 </Project>

@@ -136,7 +136,6 @@
       <Link>Shared\Logging\Extensions\MediaPlaybackListStringExtensions.cs</Link>
     </Compile>
     <Compile Include="Helpers\CommonLicenseRequest.cs" />
-    <Compile Include="Helpers\MediaPlayerExtensions.cs" />
     <Compile Include="Helpers\PlayReadyHelper.cs" />
     <Compile Include="Controls\ContentSelector.xaml.cs">
       <DependentUpon>ContentSelector.xaml</DependentUpon>

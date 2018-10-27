@@ -557,16 +557,16 @@
 				"Subtitle": "CheckBox, ComboBox, DatePicker, ListBox, RadioButton, Slider, TimePicker, ToggleSwitch",
 				"ImagePath": "ms-appx:///Assets/NavigationViewItemIcons/PickerIcon.png",
 				"Description": "Use selection controls to let a user set a value or choose between various options.",
-				"Items": [
-					{
-						"UniqueId": "CalendarDatePicker",
-						"Title": "CalendarDatePicker",
-						"Subtitle": "A control that lets users pick a date value using a calendar.",
-						"ImagePath": "ms-appx:///Assets/CalenderDatePicker.png",
-						"Description": "A control that lets users pick a date value using a calendar.",
-						"Content": "",
-						"IsNew": false,
-						"Docs": [
+        "Items": [
+          {
+            "UniqueId": "CalendarDatePicker",
+            "Title": "CalendarDatePicker",
+            "Subtitle": "A control that lets users pick a date value using a calendar.",
+            "ImagePath": "ms-appx:///Assets/CalenderDatePicker.png",
+            "Description": "A control that lets users pick a date value using a calendar.",
+            "Content": "",
+            "IsNew": false,
+            "Docs": [
               {
                 "Title": "CalendarDatePicker",
                 "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.calendardatepicker.aspx"
@@ -575,20 +575,20 @@
                 "Title": "Guidelines",
                 "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/calendar-date-picker"
               }
-						],
-						"RelatedControls": [
-							"DatePicker",
-							"CalendarView"
-						]
-					},
-					{
-						"UniqueId": "CalendarView",
-						"Title": "CalendarView",
-						"Subtitle": "A control that presents a calendar for a user to choose a date from.",
-						"ImagePath": "ms-appx:///Assets/CalendarView.png",
-						"Description": "CalendarView shows a larger view for showing and selecting dates.  DatePicker by contrast has a compact view with inline selection.",
-						"Content": "<p>Look at the <i>CalendarView.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-						"IsNew": false,
+            ],
+            "RelatedControls": [
+              "DatePicker",
+              "CalendarView"
+            ]
+          },
+          {
+            "UniqueId": "CalendarView",
+            "Title": "CalendarView",
+            "Subtitle": "A control that presents a calendar for a user to choose a date from.",
+            "ImagePath": "ms-appx:///Assets/CalendarView.png",
+            "Description": "CalendarView shows a larger view for showing and selecting dates.  DatePicker by contrast has a compact view with inline selection.",
+            "Content": "<p>Look at the <i>CalendarView.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+            "IsNew": false,
             "Docs": [
               {
                 "Title": "CalendarView",
@@ -599,21 +599,21 @@
                 "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/calendar-view"
               }
             ],
-						"RelatedControls": [
-							"CalendarDatePicker",
-							"DatePicker",
-							"TimePicker"
-						]
-					},
-					{
-						"UniqueId": "CheckBox",
-						"Title": "CheckBox",
-						"Subtitle": "A control that a user can select or clear.",
-						"ImagePath": "ms-appx:///Assets/CheckBox.png",
-						"Description": "CheckBox controls let the user select a combination of binary options. In contrast, RadioButton controls allow the user to select from mutually exclusive options. The indeterminate state is used to indicate that an option is set for some, but not all, child options. Don't allow users to set an indeterminate state directly to indicate a third option.",
-						"Content": "<p>Check and uncheck these controls to see how they look in each state. The label for each <b>CheckBox</b> is defined by its <b>Content</b> property.</p><p>Use a three-state <b>CheckBox</b> to show that none, some, or all of an items sub-options are checked. You have to add some code to do this. Take a look at the methods in the <i>SelectAllMethods</i> region of <i>CheckBoxPage.xaml.cs</i> to see how we did it.</p>",
-						"IsNew": false,
-						"Docs": [
+            "RelatedControls": [
+              "CalendarDatePicker",
+              "DatePicker",
+              "TimePicker"
+            ]
+          },
+          {
+            "UniqueId": "CheckBox",
+            "Title": "CheckBox",
+            "Subtitle": "A control that a user can select or clear.",
+            "ImagePath": "ms-appx:///Assets/CheckBox.png",
+            "Description": "CheckBox controls let the user select a combination of binary options. In contrast, RadioButton controls allow the user to select from mutually exclusive options. The indeterminate state is used to indicate that an option is set for some, but not all, child options. Don't allow users to set an indeterminate state directly to indicate a third option.",
+            "Content": "<p>Check and uncheck these controls to see how they look in each state. The label for each <b>CheckBox</b> is defined by its <b>Content</b> property.</p><p>Use a three-state <b>CheckBox</b> to show that none, some, or all of an items sub-options are checked. You have to add some code to do this. Take a look at the methods in the <i>SelectAllMethods</i> region of <i>CheckBoxPage.xaml.cs</i> to see how we did it.</p>",
+            "IsNew": false,
+            "Docs": [
               {
                 "Title": "CheckBox",
                 "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.checkbox.aspx"
@@ -622,13 +622,13 @@
                 "Title": "Guidelines",
                 "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/checkbox"
               }
-						],
-						"RelatedControls": [
-							"RadioButton",
-							"ToggleSwitch",
-							"ToggleButton"
-						]
-					},
+            ],
+            "RelatedControls": [
+              "RadioButton",
+              "ToggleSwitch",
+              "ToggleButton"
+            ]
+          },
           {
             "UniqueId": "ColorPicker",
             "Title": "ColorPicker",
@@ -651,38 +651,38 @@
               "ComboBox"
             ]
           },
-					{
-						"UniqueId": "DatePicker",
-						"Title": "DatePicker",
-						"Subtitle": "A configurable control that lets a user pick a date value.",
-						"ImagePath": "ms-appx:///Assets/DatePicker.png",
-						"Description": "Use a DatePicker to let users set a date in your app, for example to schedule an appointment. The DatePicker displays three controls for month, date, and year. These controls are easy to use with touch or mouse, and they can be styled and configured in several different ways.",
-						"Content": "<p>Look at the <i>DatePickerPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-						"IsNew": false,
-						"Docs": [
-							{
-								"Title": "DatePicker",
-								"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.datepicker.aspx"
-							},
+          {
+            "UniqueId": "DatePicker",
+            "Title": "DatePicker",
+            "Subtitle": "A configurable control that lets a user pick a date value.",
+            "ImagePath": "ms-appx:///Assets/DatePicker.png",
+            "Description": "Use a DatePicker to let users set a date in your app, for example to schedule an appointment. The DatePicker displays three controls for month, date, and year. These controls are easy to use with touch or mouse, and they can be styled and configured in several different ways.",
+            "Content": "<p>Look at the <i>DatePickerPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+            "IsNew": false,
+            "Docs": [
+              {
+                "Title": "DatePicker",
+                "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.datepicker.aspx"
+              },
               {
                 "Title": "Guidelines",
                 "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/date-picker"
               }
-						],
-						"RelatedControls": [
-							"CalendarDatePicker",
-							"CalendarView",
-							"TimePicker"
-						]
-					},
-					{
-						"UniqueId": "RadioButton",
-						"Title": "RadioButton",
-						"Subtitle": "A control that allows a user to select a single option from a group of options. When radio buttons are grouped together they are mutually exclusive.",
-						"ImagePath": "ms-appx:///Assets/RadioButton.png",
-						"Description": "Use RadioButtons to let a user choose between mutually exclusive, related options.",
-						"Content": "<p>Look at the <i>RadioButtonPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-						"IsNew": false,
+            ],
+            "RelatedControls": [
+              "CalendarDatePicker",
+              "CalendarView",
+              "TimePicker"
+            ]
+          },
+          {
+            "UniqueId": "RadioButton",
+            "Title": "RadioButton",
+            "Subtitle": "A control that allows a user to select a single option from a group of options. When radio buttons are grouped together they are mutually exclusive.",
+            "ImagePath": "ms-appx:///Assets/RadioButton.png",
+            "Description": "Use RadioButtons to let a user choose between mutually exclusive, related options.",
+            "Content": "<p>Look at the <i>RadioButtonPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+            "IsNew": false,
             "Docs": [
               {
                 "Title": "RadioButton",
@@ -693,20 +693,20 @@
                 "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/radio-button"
               }
             ],
-						"RelatedControls": [
-							"CheckBox",
-							"ToggleSwitch",
-							"ToggleButton"
-						]
-					},
-					{
-						"UniqueId": "RatingControl",
-						"Title": "RatingControl",
-						"Subtitle": "Rate something 1 to 5 stars.",
-						"ImagePath": "ms-appx:///Assets/RatingControl.png",
-						"Description": "Released Fall 2017! Rate something 1 to 5 stars.",
-						"Content": "",
-						"IsNew": true,
+            "RelatedControls": [
+              "CheckBox",
+              "ToggleSwitch",
+              "ToggleButton"
+            ]
+          },
+          {
+            "UniqueId": "RatingControl",
+            "Title": "RatingControl",
+            "Subtitle": "Rate something 1 to 5 stars.",
+            "ImagePath": "ms-appx:///Assets/RatingControl.png",
+            "Description": "Released Fall 2017! Rate something 1 to 5 stars.",
+            "Content": "",
+            "IsNew": true,
             "Docs": [
               {
                 "Title": "RatingControl",
@@ -717,20 +717,20 @@
                 "Uri": "https://docs.microsoft.com/uwp/api/Windows.UI.Xaml.Controls.RatingControl"
               }
             ],
-						"RelatedControls": [
-							"Slider",
-							"ComboBox"
-						]
-					},
-					{
-						"UniqueId": "Slider",
-						"Title": "Slider",
-						"Subtitle": "A control that lets the user select from a range of values by moving a Thumb control along a track.",
-						"ImagePath": "ms-appx:///Assets/Slider.png",
-						"Description": "Use a Slider when you want your users to be able to set defined, contiguous values (such as volume or brightness) or a range of discrete values (such as screen resolution settings).",
-						"Content": "<p>Look at the <i>SliderPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-						"IsNew": false,
-						"Docs": [
+            "RelatedControls": [
+              "Slider",
+              "ComboBox"
+            ]
+          },
+          {
+            "UniqueId": "Slider",
+            "Title": "Slider",
+            "Subtitle": "A control that lets the user select from a range of values by moving a Thumb control along a track.",
+            "ImagePath": "ms-appx:///Assets/Slider.png",
+            "Description": "Use a Slider when you want your users to be able to set defined, contiguous values (such as volume or brightness) or a range of discrete values (such as screen resolution settings).",
+            "Content": "<p>Look at the <i>SliderPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+            "IsNew": false,
+            "Docs": [
               {
                 "Title": "Slider",
                 "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.slider.aspx"
@@ -739,44 +739,63 @@
                 "Title": "Guidelines",
                 "Uri": "http://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/slider"
               }
-						],
-						"RelatedControls": [
-							"ComboBox",
-							"ListBox",
-							"RatingControl"
-						]
-					},
-					{
-						"UniqueId": "TimePicker",
-						"Title": "TimePicker",
-						"Subtitle": "A configurable control that lets a user pick a time value.",
-						"ImagePath": "ms-appx:///Assets/TimePicker.png",
-						"Description": "Use a TimePicker to let users set a time in your app, for example to set a reminder. The TimePicker displays three controls for month, day, and and AM/PM. These controls are easy to use with touch or mouse, and they can be styled and configured in several different ways.",
-						"Content": "<p>Look at the <i>TimePickerPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-						"IsNew": false,
-						"Docs": [
-							{
-								"Title": "TimePicker",
-								"Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.timepicker.aspx"
-							},
+            ],
+            "RelatedControls": [
+              "ComboBox",
+              "ListBox",
+              "RatingControl"
+            ]
+          },
+          {
+            "UniqueId": "Sound",
+            "Title": "Sound",
+            "Subtitle": "A C#-only API that enables 2D and 3D UI sounds on all UWP controls.",
+            "ImagePath": "ms-appx:///Assets/Sound.png",
+            "Description": "Sound is enabled by default for UWP apps running on Xbox, but can be set to always play on all devices if desired. Sound may also be put into Spatial Audio mode for a more immersive 10ft experience.",
+            "Content": "<p>Look at the <i>SoundPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+            "IsNew": false,
+            "Docs": [
+              {
+                "Title": "Sound",
+                "Uri": "https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.elementsoundplayer"
+              },
+              {
+                "Title": "Guidelines",
+                "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/style/sound"
+              }
+            ]
+          },
+          {
+            "UniqueId": "TimePicker",
+            "Title": "TimePicker",
+            "Subtitle": "A configurable control that lets a user pick a time value.",
+            "ImagePath": "ms-appx:///Assets/TimePicker.png",
+            "Description": "Use a TimePicker to let users set a time in your app, for example to set a reminder. The TimePicker displays three controls for month, day, and and AM/PM. These controls are easy to use with touch or mouse, and they can be styled and configured in several different ways.",
+            "Content": "<p>Look at the <i>TimePickerPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+            "IsNew": false,
+            "Docs": [
+              {
+                "Title": "TimePicker",
+                "Uri": "http://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.timepicker.aspx"
+              },
               {
                 "Title": "Guidelines",
                 "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/time-picker"
               }
-						],
-						"RelatedControls": [
-							"DatePicker",
-							"CalendarView"
-						]
-					},
-					{
-						"UniqueId": "ToggleSwitch",
-						"Title": "ToggleSwitch",
-						"Subtitle": "A switch that can be toggled between 2 states.",
-						"ImagePath": "ms-appx:///Assets/ToggleSwitch.png",
-						"Description": "Use ToggleSwitch controls to present users with exactly two mutually exclusive options (like on/off), where choosing an option results in an immediate commit. A toggle switch should have a single label.",
-						"Content": "<p>Look at the <i>ToggleSwitchPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
-						"IsNew": false,
+            ],
+            "RelatedControls": [
+              "DatePicker",
+              "CalendarView"
+            ]
+          },
+          {
+            "UniqueId": "ToggleSwitch",
+            "Title": "ToggleSwitch",
+            "Subtitle": "A switch that can be toggled between 2 states.",
+            "ImagePath": "ms-appx:///Assets/ToggleSwitch.png",
+            "Description": "Use ToggleSwitch controls to present users with exactly two mutually exclusive options (like on/off), where choosing an option results in an immediate commit. A toggle switch should have a single label.",
+            "Content": "<p>Look at the <i>ToggleSwitchPage.xaml</i> file in Visual Studio to see the full code for this page.</p>",
+            "IsNew": false,
             "Docs": [
               {
                 "Title": "ToggleSwitch",
@@ -787,14 +806,14 @@
                 "Uri": "https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/toggles"
               }
             ],
-						"RelatedControls": [
-							"ToggleButton",
-							"RadioButton",
-							"CheckBox",
-							"AppBarToggleButton"
-						]
-					}
-				]
+            "RelatedControls": [
+              "ToggleButton",
+              "RadioButton",
+              "CheckBox",
+              "AppBarToggleButton"
+            ]
+          }
+        ]
 			},
     {
       "UniqueId": "Indicators",

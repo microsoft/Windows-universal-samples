@@ -1,0 +1,72 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="AppUIBasics.ControlPages.SoundPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AppUIBasics"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+
+    <StackPanel>
+        <local:ControlExample x:Name="Example1" HeaderText="Toggling Sound">
+            <ToggleSwitch x:Name="soundToggle" OffContent="Sound Off" OnContent="Sound On" Toggled="soundToggle_Toggled"/>
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>ElementSoundPlayer.State = ElementSoundPlayerState.Off;</Paragraph>
+                    <Paragraph>ElementSoundPlayer.State = ElementSoundPlayerState.On;</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+        <local:ControlExample x:Name="Example2" HeaderText="Toggling Spatial Audio">
+            <StackPanel Orientation="Vertical">
+                <CheckBox x:Name="spatialAudioBox" IsEnabled="False" Content="Enable Spatial Audio" Checked="spatialAudioBox_Checked" Unchecked="spatialAudioBox_Unchecked"/>
+                <TextBlock Margin="0,5,0,0" Text="Can only enable spatial audio when sound is on!" Foreground="Red" Style="{ThemeResource CaptionTextBlockStyle}" FontStyle="Italic"/>
+            </StackPanel>
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>ElementSoundPlayer.State = ElementSoundPlayerState.On;</Paragraph>
+                    <Paragraph>ElementSoundPlayer.SpatialAudioMode = ElementSpatialAudioMode.On</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+        <local:ControlExample x:Name="Example3" HeaderText="Play Specific System Sound">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Play Sound" ElementSoundMode="Off" Click="Button_Click" HorizontalAlignment="Left"/>
+                <ComboBox x:Name="soundSelection" Grid.Column="1" Header="Pick Custom Sound" SelectedIndex="1" HorizontalAlignment="Right" Margin="50,0,0,0">
+                    <ComboBoxItem>Focus</ComboBoxItem>
+                    <ComboBoxItem>Invoke</ComboBoxItem>
+                    <ComboBoxItem>Show</ComboBoxItem>
+                    <ComboBoxItem>Hide</ComboBoxItem>
+                    <ComboBoxItem>MoveNext</ComboBoxItem>
+                    <ComboBoxItem>MovePrevious</ComboBoxItem>
+                    <ComboBoxItem>GoBack</ComboBoxItem>
+                </ComboBox>
+            </Grid>
+            <local:ControlExample.Xaml>
+                <RichTextBlock x:Name="codeText" Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>ElementSoundPlayer.State = ElementSoundPlayerState.On;</Paragraph>
+                    <Paragraph></Paragraph>
+                    <Paragraph>ElementSoundPlayer.Play(ElementSoundKind.Focus);</Paragraph>
+                    <Paragraph>ElementSoundPlayer.Play(ElementSoundKind.Invoke);</Paragraph>
+                    <Paragraph>ElementSoundPlayer.Play(ElementSoundKind.Show);</Paragraph>
+                    <Paragraph>ElementSoundPlayer.Play(ElementSoundKind.Hide);</Paragraph>
+                    <Paragraph>ElementSoundPlayer.Play(ElementSoundKind.MoveNext);</Paragraph>
+                    <Paragraph>ElementSoundPlayer.Play(ElementSoundKind.MovePrevious);</Paragraph>
+                    <Paragraph>ElementSoundPlayer.Play(ElementSoundKind.GoBack);</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+    </StackPanel>
+</Page>

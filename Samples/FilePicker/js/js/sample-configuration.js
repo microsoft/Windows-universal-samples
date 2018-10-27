@@ -13,6 +13,9 @@
 }, {
     url: "/html/scenario4_SaveFile.html",
     title: "Save a file"
+}, {
+    url: "/html/scenario5_TriggerCFU.html",
+    title: "Trigger CFU"
 }];
   WinJS.Namespace.define("SdkSample", {
     sampleTitle: sampleTitle,

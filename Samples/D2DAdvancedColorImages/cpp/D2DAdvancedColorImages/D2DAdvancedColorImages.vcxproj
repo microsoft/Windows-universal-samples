@@ -136,20 +136,24 @@
 :: Parse the Visual Studio macro into a form usable by fxc.exe.
 set INCLUDEPATHS="$(WindowsSDK_IncludePath)"
 set INCLUDEPATHS=%INCLUDEPATHS:;=" /I "%
-fxc /T lib_5_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_5_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
-fxc /T lib_5_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 SdrOverlayEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)SdrOverlayEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 SdrOverlayEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)SdrOverlayEffect.fxlib" /Fo "$(OutDir)SdrOverlayEffect.cso" /Fh "$(OutDir)SdrOverlayEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 LuminanceHeatmapEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)LuminanceHeatmapEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 LuminanceHeatmapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)LuminanceHeatmapEffect.fxlib" /Fo "$(OutDir)LuminanceHeatmapEffect.cso" /Fh "$(OutDir)LuminanceHeatmapEffectShader.h" /nologo /I %INCLUDEPATHS%
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Message>Generate a linking compatible pixel shader</Message>
+      <Message>Generate shader-linking compatible pixel shaders for D2D custom effects</Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h</Outputs>
+      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h;$(OutDir)SdrOverlayEffect.cso;$(OutDir)SdrOverlayEffectShader.h;$(OutDir)LuminanceHeatmapEffect.cso;$(OutDir)LuminanceHeatmapEffectShader.h</Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl</Inputs>
+      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl,SdrOverlayEffect.hlsl,LuminanceHeatmapEffect.hlsl</Inputs>
     </CustomBuildStep>
     <CustomBuildStep>
       <TreatOutputAsContent>true</TreatOutputAsContent>
@@ -173,20 +177,24 @@ fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /se
 :: Parse the Visual Studio macro into a form usable by fxc.exe.
 set INCLUDEPATHS="$(WindowsSDK_IncludePath)"
 set INCLUDEPATHS=%INCLUDEPATHS:;=" /I "%
-fxc /T lib_5_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_5_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
-fxc /T lib_5_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 SdrOverlayEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)SdrOverlayEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 SdrOverlayEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)SdrOverlayEffect.fxlib" /Fo "$(OutDir)SdrOverlayEffect.cso" /Fh "$(OutDir)SdrOverlayEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 LuminanceHeatmapEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)LuminanceHeatmapEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 LuminanceHeatmapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)LuminanceHeatmapEffect.fxlib" /Fo "$(OutDir)LuminanceHeatmapEffect.cso" /Fh "$(OutDir)LuminanceHeatmapEffectShader.h" /nologo /I %INCLUDEPATHS%
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Message>Generate a linking compatible pixel shader</Message>
+      <Message>Generate shader-linking compatible pixel shaders for D2D custom effects</Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h</Outputs>
+      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h;$(OutDir)SdrOverlayEffect.cso;$(OutDir)SdrOverlayEffectShader.h;$(OutDir)LuminanceHeatmapEffect.cso;$(OutDir)LuminanceHeatmapEffectShader.h</Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl</Inputs>
+      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl,SdrOverlayEffect.hlsl,LuminanceHeatmapEffect.hlsl</Inputs>
     </CustomBuildStep>
     <CustomBuildStep>
       <TreatOutputAsContent>true</TreatOutputAsContent>
@@ -210,20 +218,24 @@ fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /se
 :: Parse the Visual Studio macro into a form usable by fxc.exe.
 set INCLUDEPATHS="$(WindowsSDK_IncludePath)"
 set INCLUDEPATHS=%INCLUDEPATHS:;=" /I "%
-fxc /T lib_5_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_5_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
-fxc /T lib_5_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 SdrOverlayEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)SdrOverlayEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 SdrOverlayEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)SdrOverlayEffect.fxlib" /Fo "$(OutDir)SdrOverlayEffect.cso" /Fh "$(OutDir)SdrOverlayEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 LuminanceHeatmapEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)LuminanceHeatmapEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 LuminanceHeatmapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)LuminanceHeatmapEffect.fxlib" /Fo "$(OutDir)LuminanceHeatmapEffect.cso" /Fh "$(OutDir)LuminanceHeatmapEffectShader.h" /nologo /I %INCLUDEPATHS%
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Message>Generate a linking compatible pixel shader</Message>
+      <Message>Generate shader-linking compatible pixel shaders for D2D custom effects</Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h</Outputs>
+      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h;$(OutDir)SdrOverlayEffect.cso;$(OutDir)SdrOverlayEffectShader.h;$(OutDir)LuminanceHeatmapEffect.cso;$(OutDir)LuminanceHeatmapEffectShader.h</Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl</Inputs>
+      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl,SdrOverlayEffect.hlsl,LuminanceHeatmapEffect.hlsl</Inputs>
     </CustomBuildStep>
     <CustomBuildStep>
       <TreatOutputAsContent>true</TreatOutputAsContent>
@@ -247,20 +259,24 @@ fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /se
 :: Parse the Visual Studio macro into a form usable by fxc.exe.
 set INCLUDEPATHS="$(WindowsSDK_IncludePath)"
 set INCLUDEPATHS=%INCLUDEPATHS:;=" /I "%
-fxc /T lib_5_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_5_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
-fxc /T lib_5_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 SdrOverlayEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)SdrOverlayEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 SdrOverlayEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)SdrOverlayEffect.fxlib" /Fo "$(OutDir)SdrOverlayEffect.cso" /Fh "$(OutDir)SdrOverlayEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 LuminanceHeatmapEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)LuminanceHeatmapEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 LuminanceHeatmapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)LuminanceHeatmapEffect.fxlib" /Fo "$(OutDir)LuminanceHeatmapEffect.cso" /Fh "$(OutDir)LuminanceHeatmapEffectShader.h" /nologo /I %INCLUDEPATHS%
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Message>Generate a linking compatible pixel shader</Message>
+      <Message>Generate shader-linking compatible pixel shaders for D2D custom effects</Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h</Outputs>
+      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h;$(OutDir)SdrOverlayEffect.cso;$(OutDir)SdrOverlayEffectShader.h;$(OutDir)LuminanceHeatmapEffect.cso;$(OutDir)LuminanceHeatmapEffectShader.h</Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl</Inputs>
+      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl,SdrOverlayEffect.hlsl,LuminanceHeatmapEffect.hlsl</Inputs>
     </CustomBuildStep>
     <CustomBuildStep>
       <TreatOutputAsContent>true</TreatOutputAsContent>
@@ -284,20 +300,24 @@ fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /se
 :: Parse the Visual Studio macro into a form usable by fxc.exe.
 set INCLUDEPATHS="$(WindowsSDK_IncludePath)"
 set INCLUDEPATHS=%INCLUDEPATHS:;=" /I "%
-fxc /T lib_5_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_5_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
-fxc /T lib_5_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 SdrOverlayEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)SdrOverlayEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 SdrOverlayEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)SdrOverlayEffect.fxlib" /Fo "$(OutDir)SdrOverlayEffect.cso" /Fh "$(OutDir)SdrOverlayEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 LuminanceHeatmapEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)LuminanceHeatmapEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 LuminanceHeatmapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)LuminanceHeatmapEffect.fxlib" /Fo "$(OutDir)LuminanceHeatmapEffect.cso" /Fh "$(OutDir)LuminanceHeatmapEffectShader.h" /nologo /I %INCLUDEPATHS%
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Message>Generate a linking compatible pixel shader</Message>
+      <Message>Generate shader-linking compatible pixel shaders for D2D custom effects</Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h</Outputs>
+      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h;$(OutDir)SdrOverlayEffect.cso;$(OutDir)SdrOverlayEffectShader.h;$(OutDir)LuminanceHeatmapEffect.cso;$(OutDir)LuminanceHeatmapEffectShader.h</Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl</Inputs>
+      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl,SdrOverlayEffect.hlsl,LuminanceHeatmapEffect.hlsl</Inputs>
     </CustomBuildStep>
     <CustomBuildStep>
       <TreatOutputAsContent>true</TreatOutputAsContent>
@@ -321,20 +341,24 @@ fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /se
 :: Parse the Visual Studio macro into a form usable by fxc.exe.
 set INCLUDEPATHS="$(WindowsSDK_IncludePath)"
 set INCLUDEPATHS=%INCLUDEPATHS:;=" /I "%
-fxc /T lib_5_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_5_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
-fxc /T lib_5_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
-fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 ReinhardEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)ReinhardEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 ReinhardEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)ReinhardEffect.fxlib" /Fo "$(OutDir)ReinhardEffect.cso" /Fh "$(OutDir)ReinhardEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 FilmicEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)FilmicEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)FilmicEffect.fxlib" /Fo "$(OutDir)FilmicEffect.cso" /Fh "$(OutDir)FilmicEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 SdrOverlayEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)SdrOverlayEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 SdrOverlayEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)SdrOverlayEffect.fxlib" /Fo "$(OutDir)SdrOverlayEffect.cso" /Fh "$(OutDir)SdrOverlayEffectShader.h" /nologo /I %INCLUDEPATHS%
+fxc /T lib_4_0 LuminanceHeatmapEffect.hlsl /D D2D_FUNCTION /D D2D_ENTRY=main /Fl "$(ProjectDir)LuminanceHeatmapEffect.fxlib" /nologo /I %INCLUDEPATHS%
+fxc /T ps_4_0 LuminanceHeatmapEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /setprivate "$(ProjectDir)LuminanceHeatmapEffect.fxlib" /Fo "$(OutDir)LuminanceHeatmapEffect.cso" /Fh "$(OutDir)LuminanceHeatmapEffectShader.h" /nologo /I %INCLUDEPATHS%
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Message>Generate a linking compatible pixel shader</Message>
+      <Message>Generate shader-linking compatible pixel shaders for D2D custom effects</Message>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h</Outputs>
+      <Outputs>$(OutDir)ReinhardEffect.cso;$(OutDir)ReinhardEffectShader.h;$(OutDir)FilmicEffect.cso;$(OutDir)FilmicEffectShader.h;$(OutDir)SdrOverlayEffect.cso;$(OutDir)SdrOverlayEffectShader.h;$(OutDir)LuminanceHeatmapEffect.cso;$(OutDir)LuminanceHeatmapEffectShader.h</Outputs>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl</Inputs>
+      <Inputs>ReinhardEffect.hlsl,FilmicEffect.hlsl,SdrOverlayEffect.hlsl,LuminanceHeatmapEffect.hlsl</Inputs>
     </CustomBuildStep>
     <CustomBuildStep>
       <TreatOutputAsContent>true</TreatOutputAsContent>
@@ -368,10 +392,12 @@ fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /se
       <DependentUpon>DirectXPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="FilmicEffect.h" />
+    <ClInclude Include="LuminanceHeatmapEffect.h" />
     <ClInclude Include="RenderOptions.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="D2DAdvancedColorImagesRenderer.h" />
     <ClInclude Include="ReinhardEffect.h" />
+    <ClInclude Include="SdrOverlayEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.xaml.cpp">
@@ -383,6 +409,7 @@ fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /se
       <DependentUpon>DirectXPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="FilmicEffect.cpp" />
+    <ClCompile Include="LuminanceHeatmapEffect.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -393,6 +420,7 @@ fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /se
     </ClCompile>
     <ClCompile Include="D2DAdvancedColorImagesRenderer.cpp" />
     <ClCompile Include="ReinhardEffect.cpp" />
+    <ClCompile Include="SdrOverlayEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -414,6 +442,16 @@ fxc /T ps_5_0 FilmicEffect.hlsl /D D2D_FULL_SHADER /D D2D_ENTRY=main /E main /se
   </ItemGroup>
   <ItemGroup>
     <Text Include="FilmicEffect.hlsl">
+      <FileType>Document</FileType>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="SdrOverlayEffect.hlsl">
+      <FileType>Document</FileType>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="LuminanceHeatmapEffect.hlsl">
       <FileType>Document</FileType>
     </Text>
   </ItemGroup>

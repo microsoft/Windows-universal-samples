@@ -23,11 +23,23 @@
         <Grid>
             <Grid.Resources>
                 <Style TargetType="TextBlock">
-                    <Setter Property="Margin" Value="8" />
                     <Setter Property="VerticalAlignment" Value="Center" />
+                    <!-- Margin: left, top, right, bottom -->
+                    <Setter Property="Margin" Value="8, 0, 0, 0" />
+                </Style>
+                <Style TargetType="TextBlock" x:Key="SectionTitle">
+                    <Setter Property="Margin" Value="8, 0, 8, 8" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Style>
+                <Style TargetType="TextBlock" x:Key="TrailingText">
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="0, 0, 0, 8" />
+                </Style>
+                <Style TargetType="TextBlock" x:Key="InfoLine">
+                    <Setter Property="Margin" Value="16, 0, 0, 0" />
                 </Style>
                 <Style TargetType="Button">
-                    <Setter Property="Margin" Value="8" />
+                    <Setter Property="Margin" Value="8, 0, 0, 8" />
                 </Style>
                 <Style TargetType="CheckBox">
                     <Setter Property="Margin" Value="8, 0, 0, 0" />
@@ -35,6 +47,12 @@
                 </Style>
                 <Style TargetType="Slider">
                     <Setter Property="Margin" Value="8, 0, 8, 0" />
+                </Style>
+                <Style TargetType="MenuFlyoutSeparator">
+                    <Setter Property="Margin" Value="0, 8, 0, 8" />
+                </Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Margin" Value="8, 0, 8, 8" />
                 </Style>
             </Grid.Resources>
             <Grid.ColumnDefinitions>
@@ -54,44 +72,35 @@
             <StackPanel x:Name="ControlsPanel" Grid.Row="1" Grid.Column="0" Background="Black" Opacity="0.8">
                 <Button Click="LoadImageButtonClick">Open image</Button>
                 <Button Click="ResetButtonClick">Reset</Button>
-                <StackPanel Orientation="Horizontal">
-                    <CheckBox x:Name="ScalingCheckBox" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged"></CheckBox>
-                    <TextBlock>Disable scaling</TextBlock>
-                </StackPanel>
-                <TextBlock>Image colorspace:</TextBlock>
-                <ComboBox x:Name="ColorspacesCombo" ItemsSource="{x:Bind ViewModel.Colorspaces}" SelectionChanged="ComboChanged">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate x:DataType="local:ColorspaceOption">
-                            <TextBlock Text="{x:Bind Description}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <StackPanel x:Name="TonemapperPanel">
-                    <TextBlock>Tonemapper:</TextBlock>
-                    <ComboBox x:Name="TonemappersCombo" ItemsSource="{x:Bind ViewModel.Tonemappers}" SelectionChanged="ComboChanged">
+                <StackPanel x:Name="RenderEffectPanel">
+                    <TextBlock>Render Effect:</TextBlock>
+                    <ComboBox x:Name="RenderEffectCombo" ItemsSource="{x:Bind ViewModel.RenderEffects}" SelectionChanged="ComboChanged">
                         <ComboBox.ItemTemplate>
-                            <DataTemplate x:DataType="local:TonemapperOption">
+                            <DataTemplate x:DataType="local:EffectOption">
                                 <TextBlock Text="{x:Bind Description}"/>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </StackPanel>
-                <StackPanel x:Name="WhiteLevelPanel">
-                    <TextBlock>White level scale:</TextBlock>
-                    <Slider x:Name="WhiteLevelSlider" Minimum="0.5" Maximum="10" SnapsTo="StepValues" StepFrequency="0.5" Value="1.0" ValueChanged="SliderChanged"></Slider>
+                <StackPanel x:Name="BrightnessAdjustPanel">
+                    <TextBlock>Adjust brightness:</TextBlock>
+                    <Slider x:Name="BrightnessAdjustSlider" Minimum="0.25" Maximum="3" SnapsTo="StepValues" StepFrequency="0.25" Value="1.0" TickFrequency="0.5" TickPlacement="BottomRight" ValueChanged="SliderChanged" Margin="8,0,8,0"/>
                 </StackPanel>
                 <MenuFlyoutSeparator />
-                <TextBlock>Image information</TextBlock>
-                <TextBlock x:Name="ImageHasColorProfile">Color profile:</TextBlock>
-                <TextBlock x:Name="ImageBitDepth">Bits per pixel:</TextBlock>
-                <TextBlock x:Name="ImageIsFloat">Floating point:</TextBlock>
+                <TextBlock Style="{StaticResource SectionTitle}">Image information</TextBlock>
+                <TextBlock Style="{StaticResource InfoLine}" x:Name="ImageACKind">Kind:</TextBlock>
+                <TextBlock Style="{StaticResource InfoLine}" x:Name="ImageHasColorProfile">Color profile:</TextBlock>
+                <TextBlock Style="{StaticResource InfoLine}" x:Name="ImageBitDepth">Bit depth:</TextBlock>
+                <TextBlock Style="{StaticResource InfoLine}" x:Name="ImageIsFloat">Floating point:</TextBlock>
+                <TextBlock Style="{StaticResource InfoLine}" x:Name="ImageMaxCLL">Estimated MaxCLL:</TextBlock>
                 <MenuFlyoutSeparator />
-                <TextBlock>Display information</TextBlock>
-                <TextBlock x:Name="DisplayACState">Advanced color:</TextBlock>
-                <TextBlock x:Name="DisplayPeakLuminance">Peak luminance:</TextBlock>
-                <TextBlock x:Name="DisplayBitDepth">Bits per channel:</TextBlock>
+                <TextBlock Style="{StaticResource SectionTitle}">Display information</TextBlock>
+                <TextBlock Style="{StaticResource InfoLine}" x:Name="DisplayACState">Kind:</TextBlock>
+                <TextBlock Style="{StaticResource InfoLine}" x:Name="DisplayPeakLuminance">Peak luminance:</TextBlock>
                 <MenuFlyoutSeparator />
-                <TextBlock>Press H to hide UI</TextBlock>
+                <TextBlock Style="{StaticResource SectionTitle}">More controls</TextBlock>
+                <TextBlock Style="{StaticResource InfoLine}">H: Toggle UI</TextBlock>
+                <TextBlock Style="{StaticResource InfoLine}">F: Toggle fullscreen</TextBlock>
             </StackPanel>
         </Grid>
     </SwapChainPanel>

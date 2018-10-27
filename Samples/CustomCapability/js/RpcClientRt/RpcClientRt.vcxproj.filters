@@ -9,9 +9,11 @@
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="RpcClientRt.cpp" />
+    <ClCompile Include="SmbiosRT.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="RpcClientRt.h" />
+    <ClInclude Include="SmbiosRT.h" />
   </ItemGroup>
 </Project>

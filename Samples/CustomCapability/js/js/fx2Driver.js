@@ -4,7 +4,7 @@
     "use strict";
 
     var Custom = Windows.Devices.Custom;
-    var deviceType = 0x5500;
+    var deviceType = 65500;
     var functionBase = 0x800;
 
     var sevenSegmentValues = [
@@ -17,7 +17,7 @@
         0xF4, // 6
         0x07, // 7
         0xF7, // 8
-        0x67, // 9
+        0x67  // 9
     ];
 
     //
@@ -26,10 +26,10 @@
     WinJS.Namespace.define(
         "Fx2Driver",
         {
-            //deviceType:             deviceType, 
+            //deviceType:             deviceType,
             //functionBase:           functionBase,
 
-            getSevenSegmentDisplay: new Custom.IOControlCode(deviceType, 
+            getSevenSegmentDisplay: new Custom.IOControlCode(deviceType,
                                                              functionBase + 7,
                                                              Custom.IOControlAccessMode.read,
                                                              Custom.IOControlBufferingMethod.buffered),
@@ -44,7 +44,7 @@
                                                              Custom.IOControlAccessMode.read,
                                                              Custom.IOControlBufferingMethod.buffered),
 
-            getInterruptMessage:    new Custom.IOControlCode(deviceType, 
+            getInterruptMessage:    new Custom.IOControlCode(deviceType,
                                                              functionBase + 9,
                                                              Custom.IOControlAccessMode.read,
                                                              Custom.IOControlBufferingMethod.directOutput),

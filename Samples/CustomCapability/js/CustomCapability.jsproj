@@ -163,6 +163,8 @@
     <Content Include="html\scenario3_deviceIO.html" />
     <Content Include="html\scenario4_deviceEvents.html" />
     <Content Include="html\scenario5_deviceReadWrite.html" />
+    <Content Include="html\scenario6_customTrigger.html" />
+    <Content Include="html\scenario7_firmwareAccess.html" />
     <Content Include="js\deviceList.js" />
     <Content Include="js\fx2Driver.js" />
     <Content Include="js\sample-configuration.js" />
@@ -171,8 +173,11 @@
     <Content Include="js\scenario3_deviceIO.js" />
     <Content Include="js\scenario4_deviceEvents.js" />
     <Content Include="js\scenario5_deviceReadWrite.js" />
+    <Content Include="js\scenario6_customTrigger.js" />
+    <Content Include="js\scenario7_firmwareAccess.js" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Service\Osrusbfx2Task\Osrusbfx2Task.csproj" />
     <ProjectReference Condition="'$(Platform)' == 'x86' Or '$(Platform)' == 'x64'" Include="RpcClientRt\RpcClientRt.vcxproj" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />

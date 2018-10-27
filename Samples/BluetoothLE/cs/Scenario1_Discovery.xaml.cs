@@ -102,7 +102,11 @@ namespace SDKTemplate
             // Start over with an empty collection.
             KnownDevices.Clear();
 
-            // Start the watcher.
+            // Start the watcher. Active enumeration is limited to approximately 30 seconds.
+            // This limits power usage and reduces interference with other Bluetooth activities.
+            // To monitor for the presence of Bluetooth LE devices for an extended period,
+            // use the BluetoothLEAdvertisementWatcher runtime class. See the BluetoothAdvertisement
+            // sample for an example.
             deviceWatcher.Start();
         }
 

@@ -21,8 +21,9 @@ Specifically, this sample shows how to:
 - Create and configure an advanced color (FP16) DirectX render pipeline.
 - Use WIC to decode a variety of SDR, WCG and HDR image content, including extended-range floating point data.
 - Use Direct2D's effect pipeline to correctly perform color management and HDR brightness adjustment.
-- Use DXGI to retrieve display color capabilities and adapt the image rendering pipeline to the display.
+- Use Windows.Graphics.Display to retrieve display color capabilities and adapt the image rendering pipeline to the display.
 - Implement a custom Direct2D effect to perform HDR-to-SDR tonemapping.
+- Calculate HDR metadata of an image to assist with tonemapping.
 
 ## Sample project files
 
@@ -68,9 +69,9 @@ Direct2D APIs:
 [Color management effect](https://msdn.microsoft.com/en-us/library/windows/desktop/hh706318)  
 [ID2D1DeviceContext2::CreateImageSourceFromWic method](https://msdn.microsoft.com/en-us/library/windows/desktop/dn890793)  
 
-DXGI APIs:
+Windows.Graphics.Display:
 
-IDXGIOutput6  
+[AdvancedColorInfo](https://docs.microsoft.com/uwp/api/windows.graphics.display.advancedcolorinfo) 
 
 Related APIs:
 

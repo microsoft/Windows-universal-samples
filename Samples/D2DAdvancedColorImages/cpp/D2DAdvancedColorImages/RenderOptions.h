@@ -16,25 +16,29 @@
 namespace D2DAdvancedColorImages
 {
     /// <summary>
-    /// Supported HDR to SDR tonemappers. Each tonemapper is implemented as a custom Direct2D effect.
+    /// Supported render effects which are inserted into the render pipeline.
+    /// Includes HDR tonemappers and useful visual tools.
+    /// Each render effect is implemented as a custom Direct2D effect.
     /// </summary>
-    public enum class TonemapperKind
+    public enum class RenderEffectKind
     {
-        Reinhard,
-        Filmic,
-        Disabled,
+        ReinhardTonemap,
+        FilmicTonemap,
+        None,
+        SdrOverlay,
+        LuminanceHeatmap
     };
 
     /// <summary>
-    /// Associates a tonemapping type used by the renderer to a descriptive string bound to UI.
+    /// Associates a effect type used by the renderer to a descriptive string bound to UI.
     /// </summary>
-    public ref class TonemapperOption sealed
+    public ref class EffectOption sealed
     {
     public:
-        TonemapperOption(Platform::String^ description, TonemapperKind type)
+        EffectOption(Platform::String^ description, RenderEffectKind kind)
         {
             this->description = description;
-            this->type = type;
+            this->kind = kind;
         }
 
         property Platform::String^ Description
@@ -42,60 +46,18 @@ namespace D2DAdvancedColorImages
             Platform::String^ get() { return description; }
         }
 
-        property TonemapperKind Tonemapper
+        property RenderEffectKind Kind
         {
-            TonemapperKind get() { return type; }
+            RenderEffectKind get() { return kind; }
         }
 
     private:
         Platform::String^       description;
-        TonemapperKind          type;
+        RenderEffectKind        kind;
     };
 
-    /// <summary>
-    /// Maps DXGI_COLOR_SPACE_TYPE to a valid WinRT enumeration. Every enum value
-    /// must be defined as an existing DXGI_COLOR_SPACE_TYPE value to allow for casting.
-    /// Only the DXGI_COLOR_SPACE_TYPE values needed for this app are defined.
-    /// </summary>
-    public enum class DxgiColorspace
-    {
-        Custom = DXGI_COLOR_SPACE_CUSTOM,
-        Srgb_Full = DXGI_COLOR_SPACE_RGB_FULL_G22_NONE_P709,
-        Srgb_Studio = DXGI_COLOR_SPACE_RGB_STUDIO_G22_NONE_P709,
-        Scrgb_Full = DXGI_COLOR_SPACE_RGB_FULL_G10_NONE_P709,
-        Hdr10_Full = DXGI_COLOR_SPACE_RGB_FULL_G2084_NONE_P2020,
-        Hdr10_Studio = DXGI_COLOR_SPACE_RGB_STUDIO_G2084_NONE_P2020,
-    };
-
-    /// <summary>
-    /// Associates a DXGI colorspace used by the renderer to a descriptive string bound to UI.
-    /// </summary>
-    public ref class ColorspaceOption sealed
-    {
-    public:
-        ColorspaceOption(Platform::String^ description, DxgiColorspace cs)
-        {
-            this->description = description;
-            this->colorspace = cs;
-        }
-
-        property Platform::String^ Description
-        {
-            Platform::String^ get() { return description; }
-        }
-
-        property DxgiColorspace Colorspace
-        {
-            DxgiColorspace get() { return colorspace; }
-        }
-
-    private:
-        Platform::String^       description;
-        DxgiColorspace          colorspace;
-    };
-
-    /// <summary>
-    /// Allows databinding of render options to the UI: image colorspace and tonemapper.
+     /// <summary>
+    /// Allows databinding of render options to the UI: image colorspace and render effect/tonemapper.
     /// </summary>
     public ref class RenderOptionsViewModel sealed
     {
@@ -103,43 +65,25 @@ namespace D2DAdvancedColorImages
         RenderOptionsViewModel()
         {
             // The first index is chosen by default. Ensure this is in sync with DirectXPage.
-            colorspaces = ref new Platform::Collections::VectorView<ColorspaceOption^>
+            renderEffects = ref new Platform::Collections::VectorView<EffectOption^>
             {
-                ref new ColorspaceOption(L"Use image's color profile", DxgiColorspace::Custom),
-                ref new ColorspaceOption(L"sRGB (full range)", DxgiColorspace::Srgb_Full),
-                ref new ColorspaceOption(L"sRGB (studio range)", DxgiColorspace::Srgb_Studio),
-                ref new ColorspaceOption(L"scRGB (full range)", DxgiColorspace::Scrgb_Full),
-                ref new ColorspaceOption(L"HDR10 (full range)", DxgiColorspace::Hdr10_Full),
-                ref new ColorspaceOption(L"HDR10 (studio range)", DxgiColorspace::Hdr10_Studio),
-            };
-
-            // The first index is chosen by default. Ensure this is in sync with DirectXPage.
-            tonemappers = ref new Platform::Collections::VectorView<TonemapperOption^>
-            {
-                ref new TonemapperOption(L"ACES Filmic", TonemapperKind::Filmic),
-                ref new TonemapperOption(L"Reinhard", TonemapperKind::Reinhard),
-                ref new TonemapperOption(L"Disabled", TonemapperKind::Disabled),
+                ref new EffectOption(L"ACES Filmic Tonemap", RenderEffectKind::FilmicTonemap),
+                ref new EffectOption(L"Reinhard Tonemap", RenderEffectKind::ReinhardTonemap),
+                ref new EffectOption(L"No effect", RenderEffectKind::None),
+                ref new EffectOption(L"Draw SDR as grayscale", RenderEffectKind::SdrOverlay),
+                ref new EffectOption(L"Draw luminance as heatmap", RenderEffectKind::LuminanceHeatmap)
             };
         }
 
-        property Windows::Foundation::Collections::IVectorView<ColorspaceOption^>^ Colorspaces
+        property Windows::Foundation::Collections::IVectorView<EffectOption^>^ RenderEffects
         {
-            Windows::Foundation::Collections::IVectorView<ColorspaceOption^>^ get()
+            Windows::Foundation::Collections::IVectorView<EffectOption^>^ get()
             {
-                return this->colorspaces;
-            }
-        }
-
-        property Windows::Foundation::Collections::IVectorView<TonemapperOption^>^ Tonemappers
-        {
-            Windows::Foundation::Collections::IVectorView<TonemapperOption^>^ get()
-            {
-                return this->tonemappers;
+                return this->renderEffects;
             }
         }
 
     private:
-        Platform::Collections::VectorView<ColorspaceOption^>^ colorspaces;
-        Platform::Collections::VectorView<TonemapperOption^>^ tonemappers;
+        Platform::Collections::VectorView<EffectOption^>^ renderEffects;
     };
 }

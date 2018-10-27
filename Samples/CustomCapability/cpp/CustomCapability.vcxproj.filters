@@ -39,6 +39,8 @@
     <ClCompile Include="ServiceViewModel.cpp">
       <Filter>ViewModel</Filter>
     </ClCompile>
+    <ClCompile Include="Scenario6_CustomTrigger.xaml.cpp" />
+    <ClCompile Include="Scenario7_FirmwareAccess.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -61,6 +63,9 @@
     <ClInclude Include="ServiceViewModel.h">
       <Filter>ViewModel</Filter>
     </ClInclude>
+    <ClInclude Include="FirmwareAccess.h" />
+    <ClInclude Include="Scenario6_CustomTrigger.xaml.h" />
+    <ClInclude Include="Scenario7_FirmwareAccess.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
@@ -96,8 +101,11 @@
     <Page Include="..\shared\Scenario5_DeviceReadWrite.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml" />
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
+    <Page Include="..\shared\Scenario6_CustomTrigger.xaml" />
+    <Page Include="..\shared\Scenario7_FirmwareAccess.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CustomCapability.SCCD" />
+    <None Include="CustomCapability_TemporaryKey.pfx" />
   </ItemGroup>
 </Project>
