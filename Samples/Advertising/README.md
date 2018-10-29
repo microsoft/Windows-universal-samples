@@ -17,8 +17,8 @@ Shows how to use the Microsoft Advertising SDK (Microsoft.Advertising) to show d
 Specifically, this sample shows how to:
 
 - Create an ad control to show display ads using only XAML / HTML markup
-- Create an ad control to show display ads programatically
-- Create an ad control to show interstitial video ads programatically
+- Create an ad control to show display ads programmatically
+- Create an ad control to show interstitial video ads programmatically
 
 ## Prerequisites
 

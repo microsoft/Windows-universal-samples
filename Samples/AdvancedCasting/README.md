@@ -21,7 +21,7 @@ For an intro to casting, see the *Basic Media Casting Sample*.
 **Scenario 1: Media Element Casting 101:**   
 Press the *Cast* button next to the progress bar in the video element.  Select the device you'd like to cast to.
 
-This is an example of the built in casting that comes with the media element transport controls.  This will enable casting to Miracast, DLNA, and Bluetooth devices.
+This is an example of the built-in casting that comes with the media element transport controls.  This will enable casting to Miracast, DLNA, and Bluetooth devices.
 
 **Scenario 2: Casting APIs and a Custom Cast Button:**  
 Press the *Cast* button next to the progress bar in the video element.  Select the device you'd like to cast to.

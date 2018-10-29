@@ -18,7 +18,7 @@ allows the user to view the acceleration forces along the X-, Y-, and Z-axes for
 The sample asks you to choose an accelerometer.
 
 - The standard accelerometer reports total acceleration.
-- The linear accelerometer reports acceleration due to motion.
+- The linear accelerometer reports acceleration due to the motion.
 - The gravity accelerometer reports acceleration due to gravity.
 
 After choosing your accelerometer, you can choose one of these scenarios:

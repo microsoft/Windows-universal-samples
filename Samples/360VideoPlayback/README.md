@@ -83,14 +83,14 @@ run it.
 
 ### Deploying the sample to a Microsoft HoloLens
 
-- Developer unlock your Microsoft HoloLens. For instructions, go to
+- Developer unlocks your Microsoft HoloLens. For instructions, go to
   [Enable your device for development](https://msdn.microsoft.com/windows/uwp/get-started/enable-your-device-for-development#enable-your-windows-10-devices).
 - Find the IP address of your Microsoft HoloLens. The IP address can be found in **Settings**
   \> **Network & Internet** \> **Wi-Fi** \> **Advanced options**. Or, you can ask Cortana for this
   information by saying: "Hey Cortana, what's my IP address?"
 - Right-click on your project in Visual Studio, and then select **Properties**.
 - In the Debugging pane, click the drop-down and select **Remote Machine**.
-- Enter the IP address of your Microsoft HoloLens into the field labelled **Machine Name**.
+- Enter the IP address of your Microsoft HoloLens into the field labeled **Machine Name**.
 - Click **OK**.
 - Select **Build** \> **Deploy** Solution.
 
