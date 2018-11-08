@@ -12,7 +12,7 @@
 import "oaidl.idl";
 import "unknwn.idl";
 
-[uuid (906B0CE0-C70B-1067-B317-00DD010662DA),
+[uuid (F72945BF-CB3E-403E-B198-6149328304EF), // You must change this when you change the interface
 version(1.0),
 pointer_default(unique),
 ]
