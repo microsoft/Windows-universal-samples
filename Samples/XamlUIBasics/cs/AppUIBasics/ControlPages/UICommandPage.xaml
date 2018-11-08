@@ -18,7 +18,7 @@
     </Page.Resources>
 
     <StackPanel>
-        <local:ControlExample HeaderText="Exposing a command in multiple controls using UICommand"
+        <local:ControlExample HeaderText="Exposing a command in multiple controls using StandardUICommand"
                               XamlSource="UICommand\UICommandSample1_xaml.txt"
                               CSharpSource="UICommand\UICommandSample1_cs.txt"
                               HorizontalContentAlignment="Stretch"
@@ -32,9 +32,9 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock TextWrapping="Wrap" Margin="0,0,0,12">
-                    UICommand allows the sharing of the UX associated with a command.
+                    XamlUICommand allows the sharing of the UX associated with a command.
                     In this instance we are using a StandardUICommand to quickly place 
-                    the delete command in multiple controls. The UICommand contains the icon, label, 
+                    the delete command in multiple controls. The XamlUICommand contains the icon, label, 
                     keyboard shortcut, and a description.
                 </TextBlock>
 
@@ -64,7 +64,7 @@
                                         <MenuFlyoutItem Command="{x:Bind Command}" CommandParameter="{x:Bind Text}" />
                                     </MenuFlyout>
                                 </UserControl.ContextFlyout>
-                                <Grid>
+                                <Grid AutomationProperties.Name="{x:Bind Text}">
                                     <VisualStateManager.VisualStateGroups>
                                         <VisualStateGroup x:Name="HoveringStates">
                                             <VisualState x:Name="HoverButtonsHidden" />

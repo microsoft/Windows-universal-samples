@@ -11,6 +11,8 @@
 
 (function () {
 
+    var BarcodeSymbologies = Windows.Devices.PointOfService.BarcodeSymbologies;
+
     getDataLabelString = function (data, scanDataType) {
 
         var result = null;
@@ -19,18 +21,18 @@
         //   To keep this simple, we'll just decode a few of them.
         if (data === null) {
             result = "No data";
-        }
-        else {
-            switch (Windows.Devices.PointOfService.BarcodeSymbologies.getName(scanDataType)) {
-                case "Upca":
-                case "UpcaAdd2":
-                case "UpcaAdd5":
-                case "Upce":
-                case "UpceAdd2":
-                case "UpceAdd5":
-                case "Ean8":
-                case "TfStd":
-
+        } else {
+            switch (scanDataType) {
+                case BarcodeSymbologies.upca:
+                case BarcodeSymbologies.upcaAdd2:
+                case BarcodeSymbologies.upcaAdd5:
+                case BarcodeSymbologies.upce:
+                case BarcodeSymbologies.upceAdd2:
+                case BarcodeSymbologies.upceAdd5:
+                case BarcodeSymbologies.ean8:
+                case BarcodeSymbologies.tfStd:
+                case BarcodeSymbologies.ocrA:
+                case BarcodeSymbologies.ocrB:
                     // The UPC, EAN8, and 2 of 5 families encode the digits 0..9
                     // which are then sent to the app in a UTF8 string (like "01234").
                     // This is not an exhaustive list of symbologies that can be converted to a string
@@ -38,8 +40,8 @@
                     var reader = Windows.Storage.Streams.DataReader.fromBuffer(data);
                     result = reader.readString(data.length);
                     break;
-                default:
 
+                default:
                     // Some other symbologies (typically 2-D symbologies) contain binary data that
                     //  should not be converted to text.
                     result = "Decoded data unavailable. Raw label data: " + getDataString(data);

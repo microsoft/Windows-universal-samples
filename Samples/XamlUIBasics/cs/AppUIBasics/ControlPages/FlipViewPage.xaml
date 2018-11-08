@@ -20,21 +20,21 @@
                 ExampleHeight="Auto">
             <local:ControlExample.Example>
                 <FlipView MaxWidth="400" Height="270">
-                    <Image Source="ms-appx:///Assets/cliff.jpg" />
-                    <Image Source="ms-appx:///Assets/grapes.jpg" />
-                    <Image Source="ms-appx:///Assets/rainier.jpg" />
-                    <Image Source="ms-appx:///Assets/sunset.jpg" />
-                    <Image Source="ms-appx:///Assets/valley.jpg" />
+                    <Image Source="ms-appx:///Assets/cliff.jpg" AutomationProperties.Name="Cliff"/>
+                    <Image Source="ms-appx:///Assets/grapes.jpg" AutomationProperties.Name="Grapes"/>
+                    <Image Source="ms-appx:///Assets/rainier.jpg" AutomationProperties.Name="Rainier"/>
+                    <Image Source="ms-appx:///Assets/sunset.jpg" AutomationProperties.Name="Sunset"/>
+                    <Image Source="ms-appx:///Assets/valley.jpg" AutomationProperties.Name="Valley"/>
                 </FlipView>
             </local:ControlExample.Example>
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;FlipView MaxWidth="400" Height="270"&gt;</Paragraph>
-                    <Paragraph TextIndent="12">&lt;Image Source="ms-appx:///Assets/cliff.jpg"/&gt;</Paragraph>
-                    <Paragraph TextIndent="12">&lt;Image Source="ms-appx:///Assets/grapes.jpg"/&gt;</Paragraph>
-                    <Paragraph TextIndent="12">&lt;Image Source="ms-appx:///Assets/rainer.jpg"/&gt;</Paragraph>
-                    <Paragraph TextIndent="12">&lt;Image Source="ms-appx:///Assets/sunset.jpg"/&gt;</Paragraph>
-                    <Paragraph TextIndent="12">&lt;Image Source="ms-appx:///Assets/valley.jpg"/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Image Source="ms-appx:///Assets/cliff.jpg" AutomationProperties.Name="Cliff"/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Image Source="ms-appx:///Assets/grapes.jpg" AutomationProperties.Name="Grapes"/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Image Source="ms-appx:///Assets/rainer.jpg" AutomationProperties.Name="Rainier"/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Image Source="ms-appx:///Assets/sunset.jpg" AutomationProperties.Name="Sunset"/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Image Source="ms-appx:///Assets/valley.jpg" AutomationProperties.Name="Valley"/&gt;</Paragraph>
                     <Paragraph>&lt;/FlipView&gt;</Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>

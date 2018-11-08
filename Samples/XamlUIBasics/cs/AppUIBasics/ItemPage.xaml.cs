@@ -123,10 +123,6 @@ namespace AppUIBasics
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-
-
-
-
             var item = await ControlInfoDataSource.Instance.GetItemAsync((String)e.Parameter);
 
             if (item != null)
@@ -154,7 +150,7 @@ namespace AppUIBasics
                 }
 
                 ControlInfoDataGroup group = await ControlInfoDataSource.Instance.GetGroupFromItemAsync((String)e.Parameter);
-                var menuItem = NavigationRootPage.Current.NavigationView.MenuItems.Cast<Microsoft.UI.Xaml.Controls.NavigationViewItem>().FirstOrDefault(m => m.Tag?.ToString() == group.UniqueId);
+                var menuItem = NavigationRootPage.Current.NavigationView.MenuItems.Cast<Microsoft.UI.Xaml.Controls.NavigationViewItemBase>().FirstOrDefault(m => m.Tag?.ToString() == group.UniqueId);
                 if (menuItem != null)
                 {
                     menuItem.IsSelected = true;

@@ -35,7 +35,7 @@ namespace DX
         winrt::check_hresult(
             CreateDirect3D11SurfaceFromDXGISurface(
                 depthDxgiSurface.Get(),
-                winrt::put_abi(inspectableSurface)
+                inspectableSurface.put()
             ));
 
         return inspectableSurface.as<winrt::Windows::Graphics::DirectX::Direct3D11::IDirect3DSurface>();

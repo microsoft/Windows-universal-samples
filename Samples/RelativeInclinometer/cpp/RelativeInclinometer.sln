@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RelativeInclinometer", "RelativeInclinometer.vcxproj", "{E95777BD-450E-537E-B55D-DA31F9FEF539}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RelativeInclinometer", "RelativeInclinometer.vcxproj", "{FD2117FE-3264-56EB-8701-D364331C339F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Debug|ARM.ActiveCfg = Debug|ARM
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Debug|ARM.Build.0 = Debug|ARM
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Debug|ARM.Deploy.0 = Debug|ARM
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Debug|Win32.ActiveCfg = Debug|Win32
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Debug|Win32.Build.0 = Debug|Win32
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Debug|Win32.Deploy.0 = Debug|Win32
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Debug|x64.ActiveCfg = Debug|x64
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Debug|x64.Build.0 = Debug|x64
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Debug|x64.Deploy.0 = Debug|x64
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Release|ARM.ActiveCfg = Release|ARM
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Release|ARM.Build.0 = Release|ARM
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Release|ARM.Deploy.0 = Release|ARM
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Release|Win32.ActiveCfg = Release|Win32
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Release|Win32.Build.0 = Release|Win32
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Release|Win32.Deploy.0 = Release|Win32
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Release|x64.ActiveCfg = Release|x64
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Release|x64.Build.0 = Release|x64
-		{E95777BD-450E-537E-B55D-DA31F9FEF539}.Release|x64.Deploy.0 = Release|x64
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Debug|ARM.ActiveCfg = Debug|ARM
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Debug|ARM.Build.0 = Debug|ARM
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Debug|ARM.Deploy.0 = Debug|ARM
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Debug|Win32.Build.0 = Debug|Win32
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Debug|Win32.Deploy.0 = Debug|Win32
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Debug|x64.ActiveCfg = Debug|x64
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Debug|x64.Build.0 = Debug|x64
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Debug|x64.Deploy.0 = Debug|x64
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Release|ARM.ActiveCfg = Release|ARM
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Release|ARM.Build.0 = Release|ARM
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Release|ARM.Deploy.0 = Release|ARM
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Release|Win32.ActiveCfg = Release|Win32
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Release|Win32.Build.0 = Release|Win32
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Release|Win32.Deploy.0 = Release|Win32
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Release|x64.ActiveCfg = Release|x64
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Release|x64.Build.0 = Release|x64
+		{FD2117FE-3264-56EB-8701-D364331C339F}.Release|x64.Deploy.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

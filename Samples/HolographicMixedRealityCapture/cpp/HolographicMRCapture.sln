@@ -3,12 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HolographicMRCapture", "HolographicMRCapture.vcxproj", "{A8DA98E7-CFFC-5DF5-B63F-9C5C972A47E1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HolographicMRCapture", "HolographicMRCapture.vcxproj", "{F22713D5-0C23-5ACD-A1DC-694F5C381BC6}"
 	ProjectSection(ProjectDependencies) = postProject
-		{339BD4EF-D24B-53A4-AF83-D803B77D79D0} = {339BD4EF-D24B-53A4-AF83-D803B77D79D0}
+		{25987888-33CA-5DE9-BB85-9D54A8431B73} = {25987888-33CA-5DE9-BB85-9D54A8431B73}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MrcEffectDefinitions", "MrcEffectDefinitions\MrcEffectDefinitions.vcxproj", "{339BD4EF-D24B-53A4-AF83-D803B77D79D0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MrcEffectDefinitions", "MrcEffectDefinitions\MrcEffectDefinitions.vcxproj", "{25987888-33CA-5DE9-BB85-9D54A8431B73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,28 +20,28 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A8DA98E7-CFFC-5DF5-B63F-9C5C972A47E1}.Debug|ARM.ActiveCfg = Debug|Win32
-		{A8DA98E7-CFFC-5DF5-B63F-9C5C972A47E1}.Debug|x64.ActiveCfg = Debug|Win32
-		{A8DA98E7-CFFC-5DF5-B63F-9C5C972A47E1}.Debug|x86.ActiveCfg = Debug|Win32
-		{A8DA98E7-CFFC-5DF5-B63F-9C5C972A47E1}.Debug|x86.Build.0 = Debug|Win32
-		{A8DA98E7-CFFC-5DF5-B63F-9C5C972A47E1}.Debug|x86.Deploy.0 = Debug|Win32
-		{A8DA98E7-CFFC-5DF5-B63F-9C5C972A47E1}.Release|ARM.ActiveCfg = Release|Win32
-		{A8DA98E7-CFFC-5DF5-B63F-9C5C972A47E1}.Release|x64.ActiveCfg = Release|Win32
-		{A8DA98E7-CFFC-5DF5-B63F-9C5C972A47E1}.Release|x86.ActiveCfg = Release|Win32
-		{A8DA98E7-CFFC-5DF5-B63F-9C5C972A47E1}.Release|x86.Build.0 = Release|Win32
-		{A8DA98E7-CFFC-5DF5-B63F-9C5C972A47E1}.Release|x86.Deploy.0 = Release|Win32
-		{339BD4EF-D24B-53A4-AF83-D803B77D79D0}.Debug|ARM.ActiveCfg = Debug|ARM
-		{339BD4EF-D24B-53A4-AF83-D803B77D79D0}.Debug|ARM.Build.0 = Debug|ARM
-		{339BD4EF-D24B-53A4-AF83-D803B77D79D0}.Debug|x64.ActiveCfg = Debug|x64
-		{339BD4EF-D24B-53A4-AF83-D803B77D79D0}.Debug|x64.Build.0 = Debug|x64
-		{339BD4EF-D24B-53A4-AF83-D803B77D79D0}.Debug|x86.ActiveCfg = Debug|Win32
-		{339BD4EF-D24B-53A4-AF83-D803B77D79D0}.Debug|x86.Build.0 = Debug|Win32
-		{339BD4EF-D24B-53A4-AF83-D803B77D79D0}.Release|ARM.ActiveCfg = Release|ARM
-		{339BD4EF-D24B-53A4-AF83-D803B77D79D0}.Release|ARM.Build.0 = Release|ARM
-		{339BD4EF-D24B-53A4-AF83-D803B77D79D0}.Release|x64.ActiveCfg = Release|x64
-		{339BD4EF-D24B-53A4-AF83-D803B77D79D0}.Release|x64.Build.0 = Release|x64
-		{339BD4EF-D24B-53A4-AF83-D803B77D79D0}.Release|x86.ActiveCfg = Release|Win32
-		{339BD4EF-D24B-53A4-AF83-D803B77D79D0}.Release|x86.Build.0 = Release|Win32
+		{F22713D5-0C23-5ACD-A1DC-694F5C381BC6}.Debug|ARM.ActiveCfg = Debug|Win32
+		{F22713D5-0C23-5ACD-A1DC-694F5C381BC6}.Debug|x64.ActiveCfg = Debug|Win32
+		{F22713D5-0C23-5ACD-A1DC-694F5C381BC6}.Debug|x86.ActiveCfg = Debug|Win32
+		{F22713D5-0C23-5ACD-A1DC-694F5C381BC6}.Debug|x86.Build.0 = Debug|Win32
+		{F22713D5-0C23-5ACD-A1DC-694F5C381BC6}.Debug|x86.Deploy.0 = Debug|Win32
+		{F22713D5-0C23-5ACD-A1DC-694F5C381BC6}.Release|ARM.ActiveCfg = Release|Win32
+		{F22713D5-0C23-5ACD-A1DC-694F5C381BC6}.Release|x64.ActiveCfg = Release|Win32
+		{F22713D5-0C23-5ACD-A1DC-694F5C381BC6}.Release|x86.ActiveCfg = Release|Win32
+		{F22713D5-0C23-5ACD-A1DC-694F5C381BC6}.Release|x86.Build.0 = Release|Win32
+		{F22713D5-0C23-5ACD-A1DC-694F5C381BC6}.Release|x86.Deploy.0 = Release|Win32
+		{25987888-33CA-5DE9-BB85-9D54A8431B73}.Debug|ARM.ActiveCfg = Debug|ARM
+		{25987888-33CA-5DE9-BB85-9D54A8431B73}.Debug|ARM.Build.0 = Debug|ARM
+		{25987888-33CA-5DE9-BB85-9D54A8431B73}.Debug|x64.ActiveCfg = Debug|x64
+		{25987888-33CA-5DE9-BB85-9D54A8431B73}.Debug|x64.Build.0 = Debug|x64
+		{25987888-33CA-5DE9-BB85-9D54A8431B73}.Debug|x86.ActiveCfg = Debug|Win32
+		{25987888-33CA-5DE9-BB85-9D54A8431B73}.Debug|x86.Build.0 = Debug|Win32
+		{25987888-33CA-5DE9-BB85-9D54A8431B73}.Release|ARM.ActiveCfg = Release|ARM
+		{25987888-33CA-5DE9-BB85-9D54A8431B73}.Release|ARM.Build.0 = Release|ARM
+		{25987888-33CA-5DE9-BB85-9D54A8431B73}.Release|x64.ActiveCfg = Release|x64
+		{25987888-33CA-5DE9-BB85-9D54A8431B73}.Release|x64.Build.0 = Release|x64
+		{25987888-33CA-5DE9-BB85-9D54A8431B73}.Release|x86.ActiveCfg = Release|Win32
+		{25987888-33CA-5DE9-BB85-9D54A8431B73}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

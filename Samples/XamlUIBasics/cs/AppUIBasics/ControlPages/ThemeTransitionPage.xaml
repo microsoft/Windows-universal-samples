@@ -150,7 +150,7 @@
 
         <local:ControlExample HeaderText="Use PopupThemeTransition to animate opening and closing a popup." FontFamily="Consolas">
             <Grid>
-                <Button Content="Show Popup" Click="ShowPopupButton_Click" />
+                <Button x:Name="ShowPopupButton" Content="Show Popup" Click="ShowPopupButton_Click" />
 
                 <Popup x:Name="ExamplePopup" Margin="-75">
                     <Popup.ChildTransitions>
@@ -162,7 +162,7 @@
                         <Ellipse Width="200" Height="200"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{ThemeResource FlyoutBackgroundThemeBrush}" StrokeThickness="2" Stroke="LightGray" />
                         <StackPanel Margin="24" VerticalAlignment="Center" Width="200">
                             <TextBlock Text="This is a popup using PopupThemeTransition" FontFamily="Segoe UI" TextWrapping="WrapWholeWords" HorizontalAlignment="Center" TextAlignment="Center" Margin="12" />
-                            <Button Content="Close Popup" Click="ClosePopupButton_Click" HorizontalAlignment="Center"/>
+                            <Button x:Name="ClosePopupButton" Content="Close Popup" Click="ClosePopupButton_Click" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Grid>
                 </Popup>

@@ -80,6 +80,10 @@
                         <Hyperlink NavigateUri="mailto:ControlsGallery@microsoft.com">mailto:ControlsGallery@microsoft.com </Hyperlink>.
                     </Paragraph>
                 </RichTextBlock>
+                <TextBlock Margin="0,10,0,0">
+                    Version: 
+                    <Run Text="{x:Bind Version}" />
+                </TextBlock>
                 <Button Click="OnFeedbackButtonClick" Content="Feedback" Margin="0,8,0,0" Visibility="Collapsed" />
 
                 <TextBlock

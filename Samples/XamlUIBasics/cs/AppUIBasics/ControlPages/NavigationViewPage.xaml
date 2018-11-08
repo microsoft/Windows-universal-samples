@@ -253,10 +253,10 @@
                     <CheckBox x:Name="autoSuggestCheck" Content="AutoSuggestBox visible" IsChecked="True" Click="autoSuggestCheck_Click"/>
 
                     <TextBlock Text="Header:" Margin="0,12,0,0"/>
-                    <TextBox x:Name="headerText" Text="Header"/>
+                    <TextBox x:Name="headerText" Text="Header" AutomationProperties.Name="Header property"/>
                     <CheckBox x:Name="headerCheck" Content="Always show header" IsChecked="True" Click="headerCheck_Click"/>
                     <TextBlock Text="PaneTitle:" Margin="0,12,0,0"/>
-                    <TextBox x:Name="paneText" Text="Pane Title"/>
+                    <TextBox x:Name="paneText" Text="Pane Title" AutomationProperties.Name="PaneTitle property"/>
                     <CheckBox x:Name="panemc_Check" Content="PaneCustomContent visible" IsChecked="False" Click="panemc_Check_Click"/>
                     <CheckBox x:Name="paneFooterCheck" Content="PaneFooter visible" IsChecked="False" Click="paneFooterCheck_Click"/>
 
@@ -296,11 +296,11 @@
                     </muxcontrols:NavigationView.MenuItems>
 
                     <muxcontrols:NavigationView.PaneCustomContent>
-                        <HyperlinkButton x:Name="PaneHyperlink" Content="More info" Margin="12,6,12,0" Visibility="Collapsed" />
+                        <HyperlinkButton x:Name="PaneHyperlink" Content="More info" Margin="12,0" Visibility="Collapsed" />
                     </muxcontrols:NavigationView.PaneCustomContent>
 
                     <muxcontrols:NavigationView.AutoSuggestBox>
-                        <AutoSuggestBox QueryIcon="Find" />
+                        <AutoSuggestBox QueryIcon="Find" AutomationProperties.Name="Search"/>
                     </muxcontrols:NavigationView.AutoSuggestBox>
 
                     <muxcontrols:NavigationView.PaneFooter>

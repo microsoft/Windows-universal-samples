@@ -27,7 +27,7 @@
 
         <local:ControlExample HeaderText="DropDownButton with Icons" XamlSource="Buttons/DropDown/DropDownButton_Icon.txt">
             <StackPanel x:Name="Control2" Orientation="Horizontal">
-            <muxcontrols:DropDownButton>
+            <muxcontrols:DropDownButton AutomationProperties.Name="Email">
                 <muxcontrols:DropDownButton.Content>
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE715;"/>
                 </muxcontrols:DropDownButton.Content>

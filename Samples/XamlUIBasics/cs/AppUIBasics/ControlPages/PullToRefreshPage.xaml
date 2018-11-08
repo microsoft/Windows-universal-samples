@@ -14,7 +14,7 @@
                 <local:ControlExample.Example>
                     <Grid>
                         <contract6Present:RefreshContainer VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="rc" contract6Present:RefreshRequested="rc_RefreshRequested">
-                            <contract6Present:ListView x:Name="lv" Width="200" Height="200" BorderThickness="1"
+                            <contract6Present:ListView x:Name="lv" MinWidth="200" Height="200" BorderThickness="1"
                                     BorderBrush="{ThemeResource TextControlBorderBrush}"/>
                         </contract6Present:RefreshContainer>
                     </Grid>

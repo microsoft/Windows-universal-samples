@@ -7,7 +7,8 @@
         <local:ControlExample x:Name="Example1" HeaderText="A basic autosuggest box.">
             <StackPanel Orientation="Horizontal">
                 <AutoSuggestBox x:Name="Control1" TextChanged="AutoSuggestBox_TextChanged"
-                        SuggestionChosen="AutoSuggestBox_SuggestionChosen" Width="300" />
+                        SuggestionChosen="AutoSuggestBox_SuggestionChosen" Width="300" 
+                                AutomationProperties.Name="Basic AutoSuggestBox"/>
                 <TextBlock x:Name="SuggestionOutput" Style="{StaticResource OutputTextBlockStyle}"
                         FontFamily="Global User Interface" />
             </StackPanel>
@@ -15,7 +16,7 @@
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
                     <Paragraph>&lt;AutoSuggestBox TextChanged="AutoSuggestBox_TextChanged"</Paragraph>
                     <Paragraph TextIndent="48">SuggestionChosen="AutoSuggestBox_SuggestionChosen"</Paragraph>
-                    <Paragraph TextIndent="48">Width="300" /&gt;</Paragraph>
+                    <Paragraph TextIndent="48">Width="300" AutomationProperties.Name="Basic AutoSuggestBox"/&gt;</Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
@@ -27,7 +28,7 @@
                 </Grid.RowDefinitions>
                 <AutoSuggestBox x:Name="Control2" PlaceholderText="Type a control name"
                         TextChanged="Control2_TextChanged" QueryIcon="Find" QuerySubmitted="Control2_QuerySubmitted"
-                        SuggestionChosen="Control2_SuggestionChosen" Width="300" HorizontalAlignment="Left" />
+                        SuggestionChosen="Control2_SuggestionChosen" Width="300" HorizontalAlignment="Left"/>
                 <RelativePanel x:Name="ControlDetails" Grid.Row="1" HorizontalAlignment="Left" Visibility="Collapsed"
                         Margin="0,8,0,0">
                     <Image x:Name="ControlImage" Height="110" />

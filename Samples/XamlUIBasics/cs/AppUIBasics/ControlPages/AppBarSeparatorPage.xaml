@@ -16,7 +16,7 @@
     xmlns:local="using:AppUIBasics">
 
     <StackPanel>
-        <local:ControlExample HeaderText="AppBarButtons separted by AppBarSeparators.">
+        <local:ControlExample HeaderText="AppBarButtons separated by AppBarSeparators.">
             <local:ControlExample.Example>
                 <ScrollViewer VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Hidden">
                     <StackPanel x:Name="Control1" Orientation="Horizontal">

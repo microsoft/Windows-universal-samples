@@ -10,7 +10,7 @@
     <AssemblyName>AppUIBasics</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.17758.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.17763.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -238,6 +238,7 @@
     <Content Include="Assets\TreeView.png" />
     <Content Include="Assets\updated.png" />
     <Content Include="Assets\WebView.png" />
+    <Content Include="ControlPagesSampleCode\Buttons\Button\CustomButtonStyle.txt" />
     <Content Include="ControlPagesSampleCode\Buttons\DropDown\DropDownButton_Icon.txt" />
     <Content Include="ControlPagesSampleCode\Buttons\DropDown\DropDownButton_Simple.txt" />
     <Content Include="ControlPagesSampleCode\Buttons\SplitButton\SplitButtonSample1.txt" />
@@ -270,7 +271,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behaviors\ImageScrollBehavior.cs" />
-    <Compile Include="Common\ActivityFeedLayout.cs" />
     <Compile Include="Common\BooleanNegationConverter.cs" />
     <Compile Include="Common\BooleanToValueConverter.cs" />
     <Compile Include="Common\BooleanToVisibilityConverter.cs" />
@@ -465,9 +465,6 @@
     </Compile>
     <Compile Include="ControlPages\RepeatButtonPage.xaml.cs">
       <DependentUpon>RepeatButtonPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ControlPages\RepeaterPage.xaml.cs">
-      <DependentUpon>RepeaterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ControlPages\RevealFocusPage.xaml.cs">
       <DependentUpon>RevealFocusPage.xaml</DependentUpon>
@@ -711,10 +708,6 @@
     <Page Include="ControlPages\ImplicitTransitionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ControlPages\RepeaterPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="ControlExample.xaml">
       <SubType>Designer</SubType>
@@ -1082,16 +1075,15 @@
       <Version>2.0.5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.0-Preview1-26502-02</Version>
+      <Version>6.1.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.0.180916002-prerelease</Version>
+      <Version>2.0.181011001</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

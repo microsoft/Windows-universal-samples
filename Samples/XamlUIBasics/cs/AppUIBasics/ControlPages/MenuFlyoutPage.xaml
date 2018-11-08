@@ -17,7 +17,7 @@
     <StackPanel>
         <local:ControlExample x:Name="Example1" HeaderText="An AppBarButton with a MenuFlyout.">
             <StackPanel x:Name="Control1" Orientation="Horizontal">
-                <AppBarButton Icon="Sort" IsCompact="True">
+                <AppBarButton Icon="Sort" IsCompact="True" ToolTipService.ToolTip="Sort" AutomationProperties.Name="Sort">
                     <Button.Flyout>
                         <MenuFlyout>
                             <MenuFlyoutItem Text="By rating" Click="MenuFlyoutItem_Click" Tag="rating" />
@@ -30,7 +30,7 @@
             </StackPanel>
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
-                    <Paragraph>&lt;AppBarButton Icon="Sort" IsCompact="True"&gt;</Paragraph>
+                    <Paragraph>&lt;AppBarButton Icon="Sort" IsCompact="True" ToolTipService.ToolTip="Sort" AutomationProperties.Name="Sort"&gt;</Paragraph>
                     <Paragraph TextIndent="12">&lt;AppBarButton.Flyout&gt;</Paragraph>
                     <Paragraph TextIndent="24">&lt;MenuFlyout&gt;</Paragraph>
                     <Paragraph TextIndent="36">&lt;MenuFlyoutItem Text="By rating" Click="MenuFlyoutItem_Click" Tag="rating"&gt;</Paragraph>

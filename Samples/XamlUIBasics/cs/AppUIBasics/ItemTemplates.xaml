@@ -11,7 +11,7 @@
                 Width="345"
                 Height="140"
                 Padding="12"
-                Background="{ThemeResource SystemControlAcrylicElementBrush}">
+                Background="{ThemeResource SystemControlBackgroundListLowBrush}">
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup x:Name="LayoutVisualStates">
                         <VisualState x:Name="WideLayout">

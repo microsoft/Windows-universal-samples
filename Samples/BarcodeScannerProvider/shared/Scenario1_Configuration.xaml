@@ -1,0 +1,43 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Configuration"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,20,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0,0,0,10">
+                Launching your app
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,0,0,10">
+                When the user launches your app, you can provide a configuration-type interface
+                (e.g., to set up preferences, log into a service, etc.).
+            </TextBlock>
+
+            <TextBlock TextWrapping="Wrap" Margin="0,0,0,10">
+                You can use the Barcode Scanner sample to test this sample barcode sample provider.
+                Go to the "Displaying a Barcode Preview" scenario and select the Barcode Scanner Provider Sample
+                as your barcode scanner.
+            </TextBlock>
+
+            <TextBlock Margin="0,0,0,5" Style="{StaticResource BasicTextStyle}" Text="Decoder Language" />
+            <ComboBox Name="LanguageList" DisplayMemberPath="DisplayName" SelectionChanged="LanguageList_SelectionChanged" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

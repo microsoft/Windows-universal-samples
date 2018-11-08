@@ -6,7 +6,7 @@
     xmlns:controlPages="using:AppUIBasics.ControlPages">
     <Page.Resources>
         <DataTemplate x:Key="NavLinkItemTemplate" x:DataType="controlPages:NavLink">
-            <StackPanel Orientation="Horizontal" Margin="2,0,0,0">
+            <StackPanel Orientation="Horizontal" Margin="2,0,0,0" AutomationProperties.Name="{x:Bind Label}">
                 <SymbolIcon Symbol="{x:Bind Symbol}" />
                 <TextBlock Text="{x:Bind Label}" Margin="24,0,0,0" VerticalAlignment="Center" />
             </StackPanel>

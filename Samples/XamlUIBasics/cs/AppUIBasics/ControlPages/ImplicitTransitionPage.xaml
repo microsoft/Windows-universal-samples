@@ -5,8 +5,7 @@
     xmlns:local="using:AppUIBasics"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    xmlns:contract7Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)">
+    mc:Ignorable="d">
 
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <local:ControlExample HeaderText="Automatically animate changes to Opacity" MinimumUniversalAPIContract="7">
@@ -167,5 +166,48 @@
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>
+
+
+        <local:ControlExample HeaderText="Implicitly animate when the Grid's theme changes" MinimumUniversalAPIContract="7">
+            <Grid x:Name="ThemeExampleGrid" 
+                  BorderThickness="1" 
+                  BorderBrush="DimGray" 
+                  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
+                  Width="300" 
+                  MinHeight="200" 
+                  VerticalAlignment="Top" 
+                  RequestedTheme="Light">
+                <StackPanel Margin="12" Spacing="6">
+                    <TextBlock Text="Lorem Ipsum" Style="{ThemeResource SubheaderTextBlockStyle}" />
+                    <TextBlock Text="The background of this grid animates when the theme changes." TextWrapping="WrapWholeWords" />
+                    <Button Content="Button" />
+                    <CheckBox Content="CheckBox" />
+                </StackPanel>
+            </Grid>
+            <local:ControlExample.Options>
+                <Button Content="Change Theme" Click="ThemeButton_Click" VerticalAlignment="Top"  />
+            </local:ControlExample.Options>
+            <local:ControlExample.Xaml>
+                <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
+                    <Paragraph>&lt;Grid x:Name="ThemeExampleGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" &gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Grid.BackgroundTransition&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;BrushTransition /&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/Grid.BackgroundTransition&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;StackPanel Margin="12" Spacing="6"&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;TextBlock Text="Lorem Ipsum" Style="{ThemeResource SubheaderTextBlockStyle}" /&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;TextBlock Text="The background of this grid animates when the theme changes." TextWrapping="WrapWholeWords" /&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;Button Content="Button" /&gt;</Paragraph>
+                    <Paragraph TextIndent="24">&lt;CheckBox Content="CheckBox" /&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;/StackPanel&gt;</Paragraph>
+                    <Paragraph>&lt;/Grid&gt;</Paragraph>
+                    <Paragraph />
+                    <Paragraph>private void ThemeButton_Click(object sender, RoutedEventArgs e)</Paragraph>
+                    <Paragraph>{</Paragraph>
+                    <Paragraph TextIndent="12">ThemeExampleGrid.RequestedTheme = ThemeExampleGrid.RequestedTheme == ElementTheme.Dark ? ElementTheme.Light : ElementTheme.Dark;</Paragraph>
+                    <Paragraph>}</Paragraph>
+                </RichTextBlock>
+            </local:ControlExample.Xaml>
+        </local:ControlExample>
+
     </StackPanel>
 </Page>

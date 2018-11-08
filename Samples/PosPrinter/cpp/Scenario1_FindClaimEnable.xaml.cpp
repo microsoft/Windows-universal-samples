@@ -17,6 +17,9 @@ using namespace SDKTemplate;
 using namespace Concurrency;
 using namespace Platform;
 using namespace Windows::Devices::PointOfService;
+using namespace Windows::Devices::Enumeration;
+using namespace Windows::Foundation;
+using namespace Windows::UI::Xaml::Media;
 using namespace Windows::Foundation;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
@@ -41,7 +44,7 @@ void Scenario1_FindClaimEnable::OnNavigatedFrom(NavigationEventArgs^ e)
 
 void Scenario1_FindClaimEnable::UpdateButtons()
 {
-    PrinterNameRun->Text = (rootPage->Printer == nullptr) ? "None" : rootPage->Printer->DeviceId;
+    PrinterNameRun->Text = (rootPage->Printer == nullptr) ? "None" : rootPage->deviceInfo->Name + " (" + rootPage->Printer->DeviceId + ")";
     if (isBusy)
     {
         FindButton->IsEnabled = false;
@@ -77,22 +80,47 @@ void Scenario1_FindClaimEnable::FindPrinter_Click()
 {
     isBusy = true;
     UpdateButtons();
-    rootPage->NotifyUser("Finding printer", NotifyType::StatusMessage);
 
-    DeviceHelpers::GetFirstReceiptPrinterAsync().then([this](PosPrinter^ printer)
+    rootPage->NotifyUser("", NotifyType::StatusMessage);
+
+    rootPage->ReleaseAllPrinters();
+
+    // Select a PosPrinter device using the Device Picker.
+    DevicePicker^ devicePicker = ref new DevicePicker();
+    devicePicker->Filter->SupportedDeviceSelectors->Append(PosPrinter::GetDeviceSelector());
+
+    // Anchor the picker on the Find button.
+    GeneralTransform^ ge = FindButton->TransformToVisual(safe_cast<UIElement^>(Window::Current->Content));
+    Rect rect = ge->TransformBounds(Rect(0, 0, FindButton->ActualWidth, FindButton->ActualHeight));
+
+    create_task(devicePicker->PickSingleDeviceAsync(rect)).then([this](DeviceInformation^ deviceInfo)
     {
-        rootPage->Printer = printer;
-        if (printer != nullptr)
+        rootPage->deviceInfo = deviceInfo;
+        if (deviceInfo != nullptr)
         {
+            return create_task(PosPrinter::FromIdAsync(deviceInfo->Id));
+        }
+        else
+        {
+            return task_from_result<PosPrinter^>(nullptr);
+        }
+    }).then([this](PosPrinter^ printer)
+    {
+        if (printer && printer->Capabilities->Receipt->IsPrinterPresent)
+        {
+            rootPage->Printer = printer;
             rootPage->NotifyUser("Found receipt printer.", NotifyType::StatusMessage);
         }
         else
         {
-            rootPage->NotifyUser("No receipt printer found.", NotifyType::ErrorMessage);
+            // Get rid of the printer we can't use.
+            delete printer;
+            rootPage->NotifyUser("Please select a device whose printer is present.", NotifyType::ErrorMessage);
         }
+
         isBusy = false;
         UpdateButtons();
-    }, task_continuation_context::use_current());
+    });
 }
 
 void Scenario1_FindClaimEnable::ClaimAndEnable_Click()

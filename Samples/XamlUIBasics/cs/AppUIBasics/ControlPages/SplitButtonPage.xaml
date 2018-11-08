@@ -21,7 +21,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <muxcontrols:SplitButton x:Name="myColorButton" Padding="0" MinHeight="0" MinWidth="0" VerticalAlignment="Top" Click="myColorButton_Click">
+                <muxcontrols:SplitButton x:Name="myColorButton" AutomationProperties.Name="Font color" Padding="0" MinHeight="0" MinWidth="0" VerticalAlignment="Top" Click="myColorButton_Click">
                     <Rectangle x:Name="CurrentColor" Width="{StaticResource SwatchSize}" Height="{StaticResource SwatchSize}" Fill="Black" Margin="0"/>
                     <muxcontrols:SplitButton.Flyout>
                         <Flyout Placement="Bottom">
@@ -38,47 +38,47 @@
                                         <Setter Property="Margin" Value="6"/>
                                     </Style>
                                 </VariableSizedWrapGrid.Resources>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Red">
                                     <Button.Content>
                                         <Rectangle Fill="Red"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Orange">
                                     <Button.Content>
                                         <Rectangle Fill="Orange"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Yellow">
                                     <Button.Content>
                                         <Rectangle Fill="Yellow"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Green">
                                     <Button.Content>
                                         <Rectangle Fill="Green"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Blue">
                                     <Button.Content>
                                         <Rectangle Fill="Blue"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Indigo">
                                     <Button.Content>
                                         <Rectangle Fill="Indigo"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Violet">
                                     <Button.Content>
                                         <Rectangle Fill="Violet"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Gray">
                                     <Button.Content>
                                         <Rectangle Fill="Gray"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Black">
                                     <Button.Content>
                                         <Rectangle Fill="Black"/>
                                     </Button.Content>

@@ -49,7 +49,7 @@
     });
 
     function updateButtons() {
-        printerNameSpan.innerText = SdkSample.printer ? SdkSample.printer.deviceId : "None";
+        printerNameSpan.innerText = SdkSample.printer ? `${SdkSample.deviceInfo.name}  (${SdkSample.printer.deviceId})` : "None";
         if (isBusy) {
             findButton.disabled = true;
             claimAndEnableButton.disabled = true;
@@ -76,14 +76,33 @@
     function findPrinter() {
         isBusy = true;
         updateButtons();
-        WinJS.log("Finding printer", "sample", "status");
-        SdkSample.getFirstReceiptPrinterAsync().done(function (printer) {
-            SdkSample.printer = printer;
-            if (printer) {
+        WinJS.log("", "sample", "status");
+
+        SdkSample.releaseAllPrinters();
+
+        // Select a PosPrinter device using the Device Picker.
+        var devicePicker = new Windows.Devices.Enumeration.DevicePicker();
+        devicePicker.filter.supportedDeviceSelectors.append(Windows.Devices.PointOfService.PosPrinter.getDeviceSelector());
+
+        // Anchor the picker on the Find button.
+        var buttonRect = findButton.getBoundingClientRect();
+        var rect = { x: buttonRect.left, y: buttonRect.top, width: buttonRect.width, height: buttonRect.height };
+
+        devicePicker.pickSingleDeviceAsync(rect).then(function (deviceInfo) {
+            SdkSample.deviceInfo = deviceInfo;
+            if (deviceInfo) {
+                return Windows.Devices.PointOfService.PosPrinter.fromIdAsync(deviceInfo.id);
+            }
+        }).done(function (printer) {
+            if (printer && printer.capabilities.receipt.isPrinterPresent) {
+                SdkSample.printer = printer;
                 WinJS.log("Found receipt printer.", "sample", "status");
             } else {
-                WinJS.log("No receipt printer found.", "sample", "error");
+                // Get rid of the printer we can't use.
+                printer && printer.close();
+                WinJS.log("Please select a device whose printer is present.", "sample", "error");
             }
+
             isBusy = false;
             updateButtons();
         });

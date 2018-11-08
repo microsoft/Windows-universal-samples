@@ -87,17 +87,6 @@ namespace AppUIBasics
                 }
             };
 
-            this.Loaded += (s, e) =>
-            {
-                // This is to work around a bug in the NavigationView header that hard-codes the header content to a 48 pixel height.
-                var headerContentControl = NavigationViewControl.GetDescendantsOfType<ContentControl>().Where(c => c.Name == "HeaderContent").FirstOrDefault();
-
-                if (headerContentControl != null)
-                {
-                    headerContentControl.Height = double.NaN;
-                }
-            };
-
             Gamepad.GamepadAdded += OnGamepadAdded;
             Gamepad.GamepadRemoved += OnGamepadRemoved;
 
@@ -157,6 +146,9 @@ namespace AppUIBasics
             NavigationViewControl.MenuItems.Insert(0, _allControlsMenuItem);
             NavigationViewControl.MenuItems.Insert(0, _newControlsMenuItem);
 
+            // Separate the All/New items from the rest of the categories.
+            NavigationViewControl.MenuItems.Insert(2, new Microsoft.UI.Xaml.Controls.NavigationViewItemSeparator());
+
             _newControlsMenuItem.Loaded += OnNewControlsMenuItemLoaded;
         }
 
@@ -199,7 +191,7 @@ namespace AppUIBasics
             }
             else
             {
-                var invokedItem = NavigationView.MenuItems.Cast<Microsoft.UI.Xaml.Controls.NavigationViewItem>().Single(i => i.Content == args.InvokedItem);
+                var invokedItem = args.InvokedItemContainer;
 
                 if (invokedItem == _allControlsMenuItem)
                 {

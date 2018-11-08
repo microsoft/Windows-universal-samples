@@ -20,10 +20,10 @@
 
     <StackPanel>
         <local:ControlExample x:Name="Example1" HeaderText="A simple ToggleSwitch.">
-            <ToggleSwitch />
+            <ToggleSwitch AutomationProperties.Name="simple ToggleSwitch"/>
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
-                    <Paragraph>&lt;ToggleSwitch/&gt;</Paragraph>
+                    <Paragraph>&lt;ToggleSwitch AutomationProperties.Name="simple ToggleSwitch"/&gt;</Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
         </local:ControlExample>

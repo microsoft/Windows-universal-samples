@@ -1,0 +1,61 @@
+﻿<Button x:Name="Button3" Click="Button_Click" contract7Present:CornerRadius="10" Padding="4,-3,4,-3" BorderThickness="1" FontWeight="Bold">
+    <Button.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" x:Key="ButtonBackground">
+                        <GradientStop Color="#bffa7765" Offset="0.0"/>
+                        <GradientStop Color="#bfd5407a" Offset="1.0"/>
+                    </LinearGradientBrush>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" x:Key="ButtonBorderBrush">
+                        <GradientStop Color="White" Offset="0.0"/>
+                        <GradientStop Color="Purple" Offset="1.0"/>
+                    </LinearGradientBrush>
+
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" x:Key="ButtonBackgroundPointerOver">
+                        <GradientStop Color="#bfd5407a" Offset="0.0"/>
+                        <GradientStop Color="#bffa7765" Offset="1.0"/>
+                    </LinearGradientBrush>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" x:Key="ButtonBorderBrushPointerOver">
+                        <GradientStop Color="Purple" Offset="0.0"/>
+                        <GradientStop Color="White" Offset="1.0"/>
+                    </LinearGradientBrush>
+
+                    <SolidColorBrush x:Key="ButtonForeground" Color="White"/>
+                    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White"/>
+                    <SolidColorBrush x:Key="ButtonForegroundPressed" Color="White"/>
+                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#bfd5407a"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" x:Key="ButtonBackground">
+                        <GradientStop Color="#bf425ff4" Offset="0.0"/>
+                        <GradientStop Color="#bf8737dd" Offset="1.0"/>
+                    </LinearGradientBrush>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" x:Key="ButtonBorderBrush">
+                        <GradientStop Color="White" Offset="0.0"/>
+                        <GradientStop Color="#bfdd378c" Offset="1.0"/>
+                    </LinearGradientBrush>
+
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" x:Key="ButtonBackgroundPointerOver">
+                        <GradientStop Color="#bf8737dd" Offset="0.0"/>
+                        <GradientStop Color="#bf425ff4" Offset="1.0"/>
+                    </LinearGradientBrush>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" x:Key="ButtonBorderBrushPointerOver">
+                        <GradientStop Color="#bfdd378c" Offset="0.0"/>
+                        <GradientStop Color="White" Offset="1.0"/>
+                    </LinearGradientBrush>
+
+                    <SolidColorBrush x:Key="ButtonForeground" Color="White"/>
+                    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White"/>
+                    <SolidColorBrush x:Key="ButtonForegroundPressed" Color="White"/>
+                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#bf8737dd"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Button.Resources>
+
+    <StackPanel Orientation="Horizontal">
+        <FontIcon Glyph="&#xE10B;" Margin="0,10,0,10" FontSize="15" FontWeight="{x:Bind FontWeight}"/>
+        <TextBlock Text="Custom Button Appearance" Margin="10, 7, 0, 0"/>
+    </StackPanel>
+</Button>

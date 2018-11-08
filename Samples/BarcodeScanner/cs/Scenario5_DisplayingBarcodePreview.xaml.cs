@@ -122,6 +122,7 @@ namespace SDKTemplate
             {
                 VideoDeviceId = videoDeviceId,
                 StreamingCaptureMode = StreamingCaptureMode.Video,
+                SharingMode = MediaCaptureSharingMode.SharedReadOnly,
             };
 
             // Initialize MediaCapture
@@ -382,6 +383,7 @@ namespace SDKTemplate
                 if (claimedScanner != null)
                 {
                     await claimedScanner.EnableAsync();
+                    claimedScanner.Closed += ClaimedScanner_Closed;
                     ScannerSupportsPreview = !String.IsNullOrEmpty(selectedScanner.VideoDeviceId);
                     RaisePropertyChanged(nameof(ScannerSupportsPreview));
 
@@ -407,6 +409,16 @@ namespace SDKTemplate
             RaisePropertyChanged(nameof(IsScannerClaimed));
 
             isSelectionChanging = false;
+        }
+
+        /// <summary>
+        /// Closed notification was received from the selected scanner.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void ClaimedScanner_Closed(ClaimedBarcodeScanner sender, ClaimedBarcodeScannerClosedEventArgs args)
+        {
+            // Resources associated to the claimed barcode scanner can be cleaned up here
         }
 
         /// <summary>

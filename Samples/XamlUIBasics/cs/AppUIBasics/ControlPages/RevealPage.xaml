@@ -44,36 +44,36 @@
                             <Grid HorizontalAlignment="Center" Margin="5" Background="{ThemeResource SystemControlAcrylicElementBrush}">
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Orientation="Horizontal">
-                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0"/>
-                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0" AutomationProperties.Name="world 1"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0" AutomationProperties.Name="cell phone 1"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2"/>
-                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2" AutomationProperties.Name="delete 1"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2" AutomationProperties.Name="comment 1"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>
                             <Grid HorizontalAlignment="Center" Margin="5" Background="{ThemeResource CustomAcrylicInAppBrush}" RequestedTheme="Light">
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Orientation="Horizontal">
-                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0"/>
-                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0" AutomationProperties.Name="world 2"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0" AutomationProperties.Name="cell phone 2"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2"/>
-                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2" AutomationProperties.Name="delete 2"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2" AutomationProperties.Name="comment 2"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>
                             <Grid HorizontalAlignment="Center" Margin="5" Background="{ThemeResource CustomAcrylicInAppBrush_dark}" RequestedTheme="Dark">
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Orientation="Horizontal">
-                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0"/>
-                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0" AutomationProperties.Name="world 3"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0" AutomationProperties.Name="cell phone 3"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2"/>
-                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2" AutomationProperties.Name="delete 3"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2" AutomationProperties.Name="comment 3"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>

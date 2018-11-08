@@ -69,6 +69,7 @@
                         VerticalAlignment="Top"
                         Background="{ThemeResource HomePageBackgroundBrush}"
                         FontSize="42"
+                        Padding="24,34,12,12"
                         Foreground="White" />
                 </Grid>
 

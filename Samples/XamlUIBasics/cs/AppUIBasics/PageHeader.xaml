@@ -4,8 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:AppUIBasics"
     x:Name="headerControl"
-    Height="72"
-    Padding="14,24,12,0"
+    Padding="14,0,12,0"
     Background="Transparent"
     Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
     FontSize="24">
@@ -28,7 +27,6 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="headerControl.Padding" Value="14,0,14,0" />
-                        <Setter Target="headerControl.Height" Value="48" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -52,8 +50,7 @@
                         <Setter Target="grid.(Grid.ColumnSpan)" Value="3" />
                         <Setter Target="topCommandBar.Margin" Value="0,0,36,0" />
                         <Setter Target="topCommandBar.DefaultLabelPosition" Value="Collapsed" />
-                        <Setter Target="headerControl.Height" Value="48" />
-                        <Setter Target="headerControl.Padding" Value="12,0,12,0" />
+                        <Setter Target="headerControl.Padding" Value="0,0,12,0" />
                         <Setter Target="headerRoot.VerticalAlignment" Value="Center" />
                         <Setter Target="NarrowBackground.Visibility" Value="Visible" />
                         <Setter Target="WideBackground.Visibility" Value="Collapsed" />
@@ -82,15 +79,13 @@
 
         <Rectangle x:Name="WideBackground" Fill="{Binding ElementName=headerControl, Path=Background}" Opacity="{Binding ElementName=headerControl, Path=BackgroundColorOpacity}" />
 
-        <Grid x:Name="headerRoot" Padding="{Binding ElementName=headerControl, Path=Padding}" VerticalAlignment="Bottom">
+        <Grid x:Name="headerRoot" Padding="{Binding ElementName=headerControl, Path=Padding}" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid
                 x:Name="pageTitle"
-                MinHeight="48"
-                Margin="0,0,0,0"
                 Background="Transparent">
                 <TextBlock
                     x:Name="TitleTextBlock"

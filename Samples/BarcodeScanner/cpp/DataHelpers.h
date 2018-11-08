@@ -82,7 +82,9 @@ inline Platform::String^ GetDataLabelString(Windows::Storage::Streams::IBuffer^ 
             scanDataType == Windows::Devices::PointOfService::BarcodeSymbologies::UpceAdd2 ||
             scanDataType == Windows::Devices::PointOfService::BarcodeSymbologies::UpceAdd5 ||
             scanDataType == Windows::Devices::PointOfService::BarcodeSymbologies::Ean8 ||
-            scanDataType == Windows::Devices::PointOfService::BarcodeSymbologies::TfStd)
+            scanDataType == Windows::Devices::PointOfService::BarcodeSymbologies::TfStd ||
+            scanDataType == Windows::Devices::PointOfService::BarcodeSymbologies::OcrA ||
+            scanDataType == Windows::Devices::PointOfService::BarcodeSymbologies::OcrB)
         {
             // The UPC, EAN8, and 2 of 5 families encode the digits 0..9
             // which are then sent to the app in a UTF8 string (like "01234")

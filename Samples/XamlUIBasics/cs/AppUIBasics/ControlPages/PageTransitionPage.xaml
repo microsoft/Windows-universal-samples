@@ -13,12 +13,12 @@
     <local:ControlExample x:Name="Example1" HeaderText="Page transitions" HorizontalAlignment="Stretch">
         <local:ControlExample.Options>
             <StackPanel>
-                <RadioButton x:Name="DefaultRB" Content="Default" IsChecked="True" Checked="TransitionRadioButton_Checked"/>
-                <RadioButton x:Name="EntranceRB" Content="Entrance" Checked="TransitionRadioButton_Checked" />
-                <RadioButton x:Name="DrillRB" Content="Drill" Checked="TransitionRadioButton_Checked" />
-                <RadioButton x:Name="SuppressRB" Content="Suppress" Checked="TransitionRadioButton_Checked" />
-                <contract7Present:RadioButton x:Name="SlideFromRightRB" Content="Slide from Right" Checked="TransitionRadioButton_Checked" />
-                <contract7Present:RadioButton x:Name="SlideFromLeftRB" Content="Slide from Left" Checked="TransitionRadioButton_Checked" />
+                <RadioButton x:Name="DefaultRB" Content="Default" IsChecked="True" Checked="TransitionRadioButton_Checked" AutomationProperties.Name="Default NavigationTransitionInfo"/>
+                <RadioButton x:Name="EntranceRB" Content="Entrance" Checked="TransitionRadioButton_Checked" AutomationProperties.Name="EntranceNavigationTransitionInfo" />
+                <RadioButton x:Name="DrillRB" Content="Drill" Checked="TransitionRadioButton_Checked" AutomationProperties.Name="DrillNavigationTransitionInfo" />
+                <RadioButton x:Name="SuppressRB" Content="Suppress" Checked="TransitionRadioButton_Checked" AutomationProperties.Name="SuppressNavigationTransitionInfo" />
+                <contract7Present:RadioButton x:Name="SlideFromRightRB" Content="Slide from Right" Checked="TransitionRadioButton_Checked" AutomationProperties.Name="SlideNavigationTransitionInfo From Right" />
+                <contract7Present:RadioButton x:Name="SlideFromLeftRB" Content="Slide from Left" Checked="TransitionRadioButton_Checked" AutomationProperties.Name="SlideNavigationTransitionInfo From Left" />
                 <Button Content="Navigate Forward" Click="ForwardButton1_Click" HorizontalAlignment="Stretch" />
                 <Button Content="Navigate Backward" Click="BackwardButton1_Click" HorizontalAlignment="Stretch" />
             </StackPanel>

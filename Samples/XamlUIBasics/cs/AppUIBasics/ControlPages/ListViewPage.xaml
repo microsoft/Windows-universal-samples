@@ -127,12 +127,16 @@
                     <ColumnDefinition Width="Auto" MinWidth="550"/>
                 </Grid.ColumnDefinitions>
 
-                <ListView ItemsSource="{x:Bind ContactsCVS.View, Mode=OneWay}"
-                  ItemTemplate="{StaticResource ContactListViewTemplate}"
-                  SelectionMode="Single"
-                  ShowsScrollingPlaceholders="True"
-                  Grid.Row="1"
-                  Grid.ColumnSpan="2" Style="{ThemeResource TitleTextBlockStyle}" Height="400" BorderThickness="1" BorderBrush="DimGray">
+                <ListView 
+                    ItemsSource="{x:Bind ContactsCVS.View, Mode=OneWay}"
+                    ItemTemplate="{StaticResource ContactListViewTemplate}"
+                    SelectionMode="Single"
+                    ShowsScrollingPlaceholders="True"
+                    Grid.Row="1" 
+                    Grid.ColumnSpan="2"
+                    Height="400"
+                    BorderThickness="1"
+                    BorderBrush="DimGray">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <ItemsStackPanel AreStickyGroupHeadersEnabled="False" />
@@ -177,13 +181,16 @@
                     <ColumnDefinition Width="Auto" MinWidth="550"/>
                 </Grid.ColumnDefinitions>
 
-                <ListView ItemsSource="{x:Bind ContactsCVS.View, Mode=OneWay}"
-                  ItemTemplate="{StaticResource ContactListViewTemplate}"
-                  SelectionMode="Single"
-                  ShowsScrollingPlaceholders="True"
-                  Grid.Row="1"
-                  Grid.ColumnSpan="2"
-                  Style="{ThemeResource TitleTextBlockStyle}" Height="400" BorderThickness="1" BorderBrush="DimGray">
+                <ListView 
+                    ItemsSource="{x:Bind ContactsCVS.View, Mode=OneWay}"
+                    ItemTemplate="{StaticResource ContactListViewTemplate}"
+                    SelectionMode="Single"
+                    ShowsScrollingPlaceholders="True"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Height="400" 
+                    BorderThickness="1"
+                    BorderBrush="DimGray">
                     <ListView.GroupStyle>
                         <GroupStyle >
                             <GroupStyle.HeaderTemplate>

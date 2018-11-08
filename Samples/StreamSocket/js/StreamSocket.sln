@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "StreamSocket", "StreamSocket.jsproj", "{C246E69E-1286-5DDA-B312-E685E156C3BA}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "StreamSocket", "StreamSocket.jsproj", "{F0972D61-2D73-59E9-93CB-7F1462924A5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,30 +17,30 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Debug|ARM.ActiveCfg = Debug|ARM
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Debug|ARM.Build.0 = Debug|ARM
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Debug|ARM.Deploy.0 = Debug|ARM
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Debug|x64.ActiveCfg = Debug|x64
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Debug|x64.Build.0 = Debug|x64
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Debug|x64.Deploy.0 = Debug|x64
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Debug|x86.ActiveCfg = Debug|x86
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Debug|x86.Build.0 = Debug|x86
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Debug|x86.Deploy.0 = Debug|x86
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Release|ARM.ActiveCfg = Release|ARM
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Release|ARM.Build.0 = Release|ARM
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Release|ARM.Deploy.0 = Release|ARM
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Release|x64.ActiveCfg = Release|x64
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Release|x64.Build.0 = Release|x64
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Release|x64.Deploy.0 = Release|x64
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Release|x86.ActiveCfg = Release|x86
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Release|x86.Build.0 = Release|x86
-		{C246E69E-1286-5DDA-B312-E685E156C3BA}.Release|x86.Deploy.0 = Release|x86
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Debug|ARM.ActiveCfg = Debug|ARM
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Debug|ARM.Build.0 = Debug|ARM
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Debug|ARM.Deploy.0 = Debug|ARM
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Debug|x64.ActiveCfg = Debug|x64
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Debug|x64.Build.0 = Debug|x64
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Debug|x64.Deploy.0 = Debug|x64
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Debug|x86.ActiveCfg = Debug|x86
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Debug|x86.Build.0 = Debug|x86
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Debug|x86.Deploy.0 = Debug|x86
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Release|ARM.ActiveCfg = Release|ARM
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Release|ARM.Build.0 = Release|ARM
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Release|ARM.Deploy.0 = Release|ARM
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Release|x64.ActiveCfg = Release|x64
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Release|x64.Build.0 = Release|x64
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Release|x64.Deploy.0 = Release|x64
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Release|x86.ActiveCfg = Release|x86
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Release|x86.Build.0 = Release|x86
+		{F0972D61-2D73-59E9-93CB-7F1462924A5F}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

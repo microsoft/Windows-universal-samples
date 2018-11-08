@@ -8,7 +8,7 @@
         <local:ControlExample x:Name="Example1" HeaderText="A simple RatingControl">
 
             <StackPanel VerticalAlignment="Top">
-                <mux:RatingControl x:Name="RatingControl1"
+                <mux:RatingControl x:Name="RatingControl1" AutomationProperties.Name="Simple RatingControl"
                     IsClearEnabled="{x:Bind clearEnabledCheck.IsChecked.Value, Mode=OneWay}"
                     IsReadOnly="{x:Bind readOnlyCheck.IsChecked.Value, Mode=OneWay}" HorizontalAlignment="Left" />
 
@@ -21,15 +21,15 @@
             <local:ControlExample.Options>
                 <StackPanel Width="220">
                     <CheckBox x:Name="clearEnabledCheck" Content="IsClearEnabled" />
-                    <TextBlock Text="Swipe left to clear your rating." />
+                    <TextBlock Text="Swipe left to clear your rating." TextWrapping="WrapWholeWords"/>
                     <CheckBox x:Name="readOnlyCheck" Content="Is Read Only" Margin="0,12,0,0"/>
                 </StackPanel>
             </local:ControlExample.Options>
 
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
-                    <Paragraph>&lt;mux:RatingControl IsClearEnabled="<Run Text="{x:Bind clearEnabledCheck.IsChecked.Value, Mode=OneWay}"></Run>"
-                        IsReadOnly="<Run Text="{x:Bind readOnlyCheck.IsChecked.Value, Mode=OneWay}"></Run> " /&gt;
+                    <Paragraph>&lt;RatingControl AutomationProperties.Name="Simple RatingControl" IsClearEnabled="<Run Text="{x:Bind clearEnabledCheck.IsChecked.Value, Mode=OneWay}"></Run>"
+                        IsReadOnly="<Run Text="{x:Bind readOnlyCheck.IsChecked.Value, Mode=OneWay}"></Run> "/&gt;
                     </Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>
@@ -38,7 +38,7 @@
         <local:ControlExample x:Name="Example2" HeaderText="PlaceholderValue of RatingControl">
 
             <mux:RatingControl x:Name="RatingControl2" HorizontalAlignment="Left" VerticalAlignment="Top"
-                PlaceholderValue="{x:Bind slider.Value, Mode=TwoWay}" />
+                PlaceholderValue="{x:Bind slider.Value, Mode=TwoWay}" AutomationProperties.Name="RatingControl with placeholder"/>
 
             <local:ControlExample.Options>
                 <StackPanel Width="220">
@@ -49,8 +49,8 @@
 
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
-                    <Paragraph>&lt;mux:RatingControl PlaceholderValue="
-                        <Run Text="{x:Bind slider.Value, Mode=OneWay}"></Run> " /&gt;
+                    <Paragraph>&lt;RatingControl AutomationProperties.Name="RatingControl with placeholder" PlaceholderValue="
+                        <Run Text="{x:Bind slider.Value, Mode=OneWay}"></Run> "/&gt;
                     </Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>

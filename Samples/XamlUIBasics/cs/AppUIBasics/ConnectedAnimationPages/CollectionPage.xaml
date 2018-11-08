@@ -16,7 +16,7 @@
                   Grid.Row="2" >
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:CustomDataObject">
-                    <Grid Margin="0,12,0,12">
+                    <Grid Margin="0,12,0,12" AutomationProperties.Name="{x:Bind Title}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" MinWidth="150"/>
                             <ColumnDefinition Width="*" />

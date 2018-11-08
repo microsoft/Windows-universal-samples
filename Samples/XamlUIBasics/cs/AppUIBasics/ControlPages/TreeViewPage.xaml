@@ -6,7 +6,6 @@
       xmlns:controlpages="using:AppUIBasics.ControlPages"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:contract6Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 6)"
       mc:Ignorable="d">
 
     <Page.Resources>
@@ -45,7 +44,7 @@
         <local:ControlExample HeaderText="A simple TreeView with drag and drop support">
             <local:ControlExample.Example>
                 <Grid Height="400" BorderBrush="{ThemeResource TextControlBorderBrush}" BorderThickness="1">
-                    <contract6Present:TreeView x:Name="sampleTreeView"  Width="345" MaxHeight="400" Margin="0,12,0,0"
+                    <muxcontrols:TreeView x:Name="sampleTreeView" MinWidth="345" MaxHeight="400" Margin="0,12,0,0"
                             HorizontalAlignment="Center" VerticalAlignment="Top" ItemInvoked="sampleTreeView_ItemInvoked" CanDragItems="True" AllowDrop="True" />
                 </Grid>
             </local:ControlExample.Example>
@@ -59,7 +58,7 @@
         <local:ControlExample HeaderText="A TreeView with Multi-selection enabled">
             <local:ControlExample.Example>
                 <Grid Height="400" BorderBrush="{ThemeResource TextControlBorderBrush}" BorderThickness="1">
-                    <contract6Present:TreeView x:Name="sampleTreeView2"  Width="345" MaxHeight="400" Margin="0,12,0,0"
+                    <muxcontrols:TreeView x:Name="sampleTreeView2" MinWidth="345" MaxHeight="400" Margin="0,12,0,0"
                             HorizontalAlignment="Center" VerticalAlignment="Top" SelectionMode="Multiple"/>
                 </Grid>
             </local:ControlExample.Example>
@@ -73,7 +72,7 @@
         <local:ControlExample HeaderText="A TreeView with DataBinding Using ItemSource">
             <local:ControlExample.Example>
                 <Grid Height="400" BorderBrush="{ThemeResource TextControlBorderBrush}" BorderThickness="1">
-                    <muxcontrols:TreeView Name="TreeView1"  Width="345" MaxHeight="400" Margin="0,12,0,0"
+                    <muxcontrols:TreeView Name="TreeView1" MinWidth="345" MaxHeight="400" Margin="0,12,0,0"
                             HorizontalAlignment="Center" VerticalAlignment="Top" ItemsSource="{x:Bind DataSource}">
                         <muxcontrols:TreeView.ItemTemplate>
                             <DataTemplate x:DataType="controlpages:ExplorerItem">
@@ -99,7 +98,7 @@
         <local:ControlExample HeaderText="A TreeView with ItemTemplateSelector">
             <local:ControlExample.Example>
                 <Grid Height="400" BorderBrush="{ThemeResource TextControlBorderBrush}" BorderThickness="1">
-                    <muxcontrols:TreeView Name="FileTree" Width="345" MaxHeight="400" Margin="0,12,0,0"
+                    <muxcontrols:TreeView Name="FileTree" MinWidth="345" MaxHeight="400" Margin="0,12,0,0"
                             HorizontalAlignment="Center" VerticalAlignment="Top" ItemsSource="{x:Bind DataSource}" ItemTemplateSelector="{StaticResource ExpolrerItemTemplateSelector}"
                                  Grid.Column="2">
                     </muxcontrols:TreeView>

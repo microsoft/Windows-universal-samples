@@ -14,16 +14,15 @@ namespace AppUIBasics.ControlPages
 
         private void myListButton_Click(Microsoft.UI.Xaml.Controls.SplitButton sender, Microsoft.UI.Xaml.Controls.SplitButtonClickEventArgs args)
         {
-            // TODO: correct if statement when platform bug is fixed
             if ((sender as Microsoft.UI.Xaml.Controls.ToggleSplitButton).IsChecked)
             {
-                //remove bulleted list
-                myRichEditBox.Document.Selection.ParagraphFormat.ListType = MarkerType.None;
+                //add bulleted list
+                myRichEditBox.Document.Selection.ParagraphFormat.ListType = _type;                
             }
             else
             {
-                //add bulleted list
-                myRichEditBox.Document.Selection.ParagraphFormat.ListType = _type;
+                //remove bulleted list
+                myRichEditBox.Document.Selection.ParagraphFormat.ListType = MarkerType.None;
             }            
         }
 

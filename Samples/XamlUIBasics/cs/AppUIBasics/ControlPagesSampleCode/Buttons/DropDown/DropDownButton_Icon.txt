@@ -1,4 +1,4 @@
-﻿<DropDownButton>
+﻿<DropDownButton AutomationProperties.Name="Email">
     <DropDownButton.Content>
         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE715;"/>
     </DropDownButton.Content>

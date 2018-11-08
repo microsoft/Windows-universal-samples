@@ -18,25 +18,23 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,10,12,12">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid x:Name="Input" Grid.Row="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <TextBlock Grid.Row="0" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
+    <ScrollViewer x:Name="LayoutRoot" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
                 Right-click or press-and-hold on the image to show a simple context menu.
             </TextBlock>
-            <TextBlock x:Name="AttachmentImage" Grid.Row="1" RightTapped="AttachmentImage_RightTapped" HorizontalAlignment="Left" Text="&#xE132;" FontFamily="Segoe UI Symbol" FontSize="40" />
-        </Grid>
 
-        <Grid x:Name="Output" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                For XAML-based apps, we recommend that developers
+                <Hyperlink NavigateUri="https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/menus">
+                    use the ContextFlyout property to implement context menus</Hyperlink>.
+                This sample uses the PopupMenu class for illustration purposes.
+            </TextBlock>
+
+            <TextBlock x:Name="AttachmentImage" RightTapped="AttachmentImage_RightTapped" HorizontalAlignment="Left" Text="&#xE132;" FontFamily="Segoe UI Symbol" FontSize="40" />
+
             <TextBlock x:Name="OutputTextBlock" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap"/>
-        </Grid>
-    </Grid>
+
+        </StackPanel>
+    </ScrollViewer>
 </Page>

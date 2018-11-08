@@ -16,7 +16,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <muxcontrols:ToggleSplitButton x:Name="myListButton" VerticalAlignment="Top" Click="myListButton_Click">
+                <muxcontrols:ToggleSplitButton x:Name="myListButton" AutomationProperties.Name="Bullets" VerticalAlignment="Top" Click="myListButton_Click">
                     <SymbolIcon x:Name="mySymbolIcon" Symbol="List"/>
                     <muxcontrols:ToggleSplitButton.Flyout>
                         <Flyout Placement="Bottom">
@@ -29,10 +29,10 @@
                                         <Setter Property="Margin" Value="6"/>
                                     </Style>
                                 </StackPanel.Resources>
-                                <Button Click="BulletButton_Click">
+                                <Button Click="BulletButton_Click" AutomationProperties.Name="Bulleted list">
                                     <SymbolIcon Symbol="List"/>
                                 </Button>
-                                <Button Click="BulletButton_Click">
+                                <Button Click="BulletButton_Click" AutomationProperties.Name="Roman numerals list">
                                     <SymbolIcon Symbol="Bullets"/>
                                 </Button>
                             </StackPanel>
@@ -40,7 +40,7 @@
                     </muxcontrols:ToggleSplitButton.Flyout>
                 </muxcontrols:ToggleSplitButton>
 
-                <RichEditBox x:Name="myRichEditBox" Grid.Column="1" MinWidth="240" MinHeight="96" PlaceholderText="Type something here"/>
+                <RichEditBox x:Name="myRichEditBox" Grid.Column="1" MinWidth="240" MinHeight="96" AutomationProperties.Name="Text entry"/>
             </Grid>
         </local:ControlExample>
     </StackPanel>

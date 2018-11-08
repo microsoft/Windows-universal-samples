@@ -36,7 +36,7 @@
                               XamlSource="Text\RichEditBox\RichEditBoxSample2_xaml.txt"
                               HorizontalContentAlignment="Stretch" VerticalAlignment="Top">
             <StackPanel>
-                <TextBlock Margin="0,0,0,10" Text="Prefix an entry with an ampersand (@) symbol to see a list of people and place suggestions that matches the entry."/>
+                <TextBlock Margin="0,0,0,10" Text="Prefix an entry with an at-sign (@) symbol to see a list of people and place suggestions that matches the entry."/>
                 <RichEditBox Height="200">
                     <contract6Present:RichEditBox.ContentLinkProviders>
                         <contract6Present:ContentLinkProviderCollection>
@@ -70,32 +70,34 @@
                         <Setter Property="Margin" Value="0,0,8,0" />
                     </Style>
                 </RelativePanel.Resources>
-                <Button x:Name="openFileButton" Click="OpenButton_Click" ToolTipService.ToolTip="Open file">
+                <Button x:Name="openFileButton" Click="OpenButton_Click" AutomationProperties.Name="Open file" ToolTipService.ToolTip="Open file">
                     <Button.Content>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8E5;"/>
                     </Button.Content>
                 </Button>
-                <Button Click="SaveButton_Click" ToolTipService.ToolTip="Save file" 
+                <Button Click="SaveButton_Click" AutomationProperties.Name="Save file" ToolTipService.ToolTip="Save file" 
                         RelativePanel.RightOf="openFileButton">
                     <Button.Content>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE74E;"/>
                     </Button.Content>
                 </Button>
-                <Button ToolTipService.ToolTip="Bold" Click="BoldButton_Click" 
+                <Button AutomationProperties.Name="Bold" ToolTipService.ToolTip="Bold" Click="BoldButton_Click" 
                         RelativePanel.LeftOf="italicButton" >
                     <Button.Content>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8DD;"/>
                     </Button.Content>
                 </Button>
-                <Button x:Name="italicButton" Click="ItalicButton_Click" ToolTipService.ToolTip="Italic" 
+                <Button x:Name="italicButton" Click="ItalicButton_Click" AutomationProperties.Name="Italic" ToolTipService.ToolTip="Italic" 
                         RelativePanel.LeftOf="fontColorButton">
                     <Button.Content>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8DB;"/>
                     </Button.Content>
                 </Button>
 
-                <muxcontrols:DropDownButton x:Name="fontColorButton" 
-                                            BorderThickness="0" ToolTipService.ToolTip="Font color"
+                <muxcontrols:DropDownButton x:Name="fontColorButton"
+                                            BorderThickness="0" 
+                                            AutomationProperties.Name="Font color"
+                                            ToolTipService.ToolTip="Font color"
                                             Background="Transparent" 
                                             RelativePanel.AlignRightWithPanel="True">
                     <SymbolIcon Symbol="FontColor"/>
@@ -114,47 +116,47 @@
                                         <Setter Property="Margin" Value="6"/>
                                     </Style>
                                 </VariableSizedWrapGrid.Resources>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Red">
                                     <Button.Content>
                                         <Rectangle Fill="Red"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Orange">
                                     <Button.Content>
                                         <Rectangle Fill="Orange"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Yellow">
                                     <Button.Content>
                                         <Rectangle Fill="Yellow"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Green">
                                     <Button.Content>
                                         <Rectangle Fill="Green"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Blue">
                                     <Button.Content>
                                         <Rectangle Fill="Blue"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Indigo">
                                     <Button.Content>
                                         <Rectangle Fill="Indigo"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Violet">
                                     <Button.Content>
                                         <Rectangle Fill="Violet"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Gray">
                                     <Button.Content>
                                         <Rectangle Fill="Gray"/>
                                     </Button.Content>
                                 </Button>
-                                <Button Click="ColorButton_Click">
+                                <Button Click="ColorButton_Click" AutomationProperties.Name="Black">
                                     <Button.Content>
                                         <Rectangle Fill="Black"/>
                                     </Button.Content>
@@ -172,7 +174,7 @@
                             RelativePanel.Below="editor" 
                             RelativePanel.AlignLeftWith="editor" 
                             Margin="0,10,0,0">
-                    <TextBlock x:Name="findBoxLabel" Text="Find:" Height="20"/>
+                    <TextBlock x:Name="findBoxLabel" Text="Find:" VerticalAlignment="Center" Margin="0,0,0,3"/>
                     <TextBox x:Name="findBox" Width="150" PlaceholderText="Enter search text" Margin="10,0,0,0"
                             TextChanged="{x:Bind FindBoxHighlightMatches}" 
                             GotFocus="{x:Bind FindBoxHighlightMatches}" 

@@ -17,7 +17,7 @@
             </ResourceDictionary.ThemeDictionaries>
 
             <DataTemplate x:Key="ColorTemplate" x:DataType="SolidColorBrush">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" AutomationProperties.Name="{x:Bind Color}">
                     <Rectangle Height="20" Width="20" Fill="{x:Bind}"/>
                     <TextBlock Text="{x:Bind Color}" Margin="5,0,0,0"/>
                 </StackPanel>
@@ -115,15 +115,18 @@
             <local:ControlExample.Options>
                 <StackPanel>
                     <TextBlock Text="Tint Opacity :" Margin="0,0,0,12"/>
-                    <Slider x:Name="OpacitySliderInApp" ValueChanged="Slider_ValueChanged" Minimum="0" Maximum="1" Width="200" SmallChange="0.01" StepFrequency="0.01" HorizontalAlignment="Left" IsFocusEngagementEnabled="False"/>
+                    <Slider x:Name="OpacitySliderInApp" ValueChanged="Slider_ValueChanged" Minimum="0" Maximum="1" Width="200" SmallChange="0.01" StepFrequency="0.01" 
+                            HorizontalAlignment="Left" IsFocusEngagementEnabled="False" AutomationProperties.Name="tint opacity"/>
                     <TextBlock Text="Tint Color :" Margin="0,12"/>
-                    <ComboBox x:Name="ColorSelectorInApp" SelectionChanged="ColorSelector_SelectionChanged" ItemTemplate="{StaticResource ColorTemplate}">
+                    <ComboBox x:Name="ColorSelectorInApp" SelectionChanged="ColorSelector_SelectionChanged" ItemTemplate="{StaticResource ColorTemplate}"
+                              AutomationProperties.Name="tint color">
                         <SolidColorBrush Color="Black"/>
                         <SolidColorBrush Color="Red"/>
                         <SolidColorBrush Color="Blue"/>
                     </ComboBox>
                     <TextBlock Text="Fallback Color :" Margin="0,12,0,12"/>
-                    <ComboBox x:Name="FallbackColorSelectorInApp" SelectionChanged="FallbackColorSelector_SelectionChanged" ItemTemplate="{StaticResource ColorTemplate}">
+                    <ComboBox x:Name="FallbackColorSelectorInApp" SelectionChanged="FallbackColorSelector_SelectionChanged" ItemTemplate="{StaticResource ColorTemplate}"
+                              AutomationProperties.Name="fallback color">
                         <SolidColorBrush Color="Green"/>
                         <SolidColorBrush Color="Yellow"/>
                     </ComboBox>
@@ -165,15 +168,18 @@
             <local:ControlExample.Options>
                 <StackPanel>
                     <TextBlock Text="Tint Opacity :" Margin="0,0,0,12"/>
-                    <Slider x:Name="OpacitySlider" ValueChanged="Slider_ValueChanged" Minimum="0" Maximum="1" Width="200" SmallChange="0.01" StepFrequency="0.01" HorizontalAlignment="Left" IsFocusEngagementEnabled="False"/>
+                    <Slider x:Name="OpacitySlider" ValueChanged="Slider_ValueChanged" Minimum="0" Maximum="1" Width="200" SmallChange="0.01" StepFrequency="0.01" 
+                            HorizontalAlignment="Left" IsFocusEngagementEnabled="False" AutomationProperties.Name="tint opacity"/>
                     <TextBlock Text="Tint Color :" Margin="0,12"/>
-                    <ComboBox x:Name="ColorSelector" SelectionChanged="ColorSelector_SelectionChanged" ItemTemplate="{StaticResource ColorTemplate}">
+                    <ComboBox x:Name="ColorSelector" SelectionChanged="ColorSelector_SelectionChanged" ItemTemplate="{StaticResource ColorTemplate}"
+                              AutomationProperties.Name="tint color">
                         <SolidColorBrush Color="Black"/>
                         <SolidColorBrush Color="Red"/>
                         <SolidColorBrush Color="Blue"/>
                     </ComboBox>
                     <TextBlock Text="Fallback Color :" Margin="0,12,0,12"/>
-                    <ComboBox x:Name="FallbackColorSelector" SelectionChanged="FallbackColorSelector_SelectionChanged" ItemTemplate="{StaticResource ColorTemplate}">
+                    <ComboBox x:Name="FallbackColorSelector" SelectionChanged="FallbackColorSelector_SelectionChanged" ItemTemplate="{StaticResource ColorTemplate}"
+                              AutomationProperties.Name="fallback color">
                         <SolidColorBrush Color="Green"/>
                         <SolidColorBrush Color="Yellow"/>
                     </ComboBox>

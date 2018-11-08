@@ -22,7 +22,7 @@
                     ManipulationCompleted="Control1_ManipulationCompleted" VerticalAlignment="Top"
                     HorizontalAlignment="Left">
                 <Image Source="ms-appx:///Assets/cliff.jpg" Stretch="None" HorizontalAlignment="Left"
-                        VerticalAlignment="Top" />
+                        VerticalAlignment="Top" AutomationProperties.Name="cliff"/>
             </ScrollViewer>
 
             <local:ControlExample.Options>
@@ -44,7 +44,7 @@
 
                     <TextBlock Text="ZoomMode" VerticalAlignment="Center" Margin="0,0,10,0" />
 
-                    <ComboBox Grid.Column="1" SelectionChanged="ZoomModeComboBox_SelectionChanged" HorizontalAlignment="Stretch">
+                    <ComboBox Grid.Column="1" SelectionChanged="ZoomModeComboBox_SelectionChanged" HorizontalAlignment="Stretch" AutomationProperties.Name="zoom mode">
                         <ComboBoxItem>Enabled</ComboBoxItem>
                         <ComboBoxItem IsSelected="True">Disabled</ComboBoxItem>
                     </ComboBox>
@@ -60,7 +60,8 @@
 
                     <TextBlock Grid.Row="3" Text="Horizontal" VerticalAlignment="Center" Margin="0,0,10,0" />
 
-                    <ComboBox Grid.Row="3" Grid.Column="1" x:Name="hsmCombo" SelectedIndex="1" SelectionChanged="hsmCombo_SelectionChanged_1" HorizontalAlignment="Stretch">
+                    <ComboBox Grid.Row="3" Grid.Column="1" x:Name="hsmCombo" SelectedIndex="1" SelectionChanged="hsmCombo_SelectionChanged_1" HorizontalAlignment="Stretch"
+                              AutomationProperties.Name="horizontal scroll mode">
                         <ComboBoxItem>Auto</ComboBoxItem>
                         <ComboBoxItem>Enabled</ComboBoxItem>
                         <ComboBoxItem>Disabled</ComboBoxItem>
@@ -68,7 +69,8 @@
 
                     <TextBlock Grid.Row="4" Text="Vertical" VerticalAlignment="Center" Margin="0,8,10,0" />
 
-                    <ComboBox Grid.Row="4" Grid.Column="1" x:Name="vsmCombo" Margin="0,8,0,0" SelectedIndex="1" SelectionChanged="vsmCombo_SelectionChanged_1" HorizontalAlignment="Stretch">
+                    <ComboBox Grid.Row="4" Grid.Column="1" x:Name="vsmCombo" Margin="0,8,0,0" SelectedIndex="1" SelectionChanged="vsmCombo_SelectionChanged_1" HorizontalAlignment="Stretch"
+                              AutomationProperties.Name="vertical scroll mode">
                         <ComboBoxItem>Auto</ComboBoxItem>
                         <ComboBoxItem>Enabled</ComboBoxItem>
                         <ComboBoxItem>Disabled</ComboBoxItem>
@@ -78,7 +80,8 @@
 
                     <TextBlock Grid.Row="6" Text="Horizontal" VerticalAlignment="Center" Margin="0,0,10,0" />
 
-                    <ComboBox Grid.Row="6" Grid.Column="1" x:Name="hsbvCombo" SelectedIndex="3" SelectionChanged="hsbvCombo_SelectionChanged_1" HorizontalAlignment="Stretch">
+                    <ComboBox Grid.Row="6" Grid.Column="1" x:Name="hsbvCombo" SelectedIndex="3" SelectionChanged="hsbvCombo_SelectionChanged_1" HorizontalAlignment="Stretch"
+                              AutomationProperties.Name="horizontal scroll bar visibility">
                         <ComboBoxItem>Auto</ComboBoxItem>
                         <ComboBoxItem>Visible</ComboBoxItem>
                         <ComboBoxItem>Hidden</ComboBoxItem>
@@ -87,7 +90,8 @@
 
                     <TextBlock Grid.Row="7" Text="Vertical" VerticalAlignment="Center" Margin="0,8,10,0" />
 
-                    <ComboBox Grid.Row="7" Grid.Column="1" x:Name="vsbvCombo" Margin="0,8,0,0" SelectedIndex="1" SelectionChanged="vsbvCombo_SelectionChanged_1" HorizontalAlignment="Stretch">
+                    <ComboBox Grid.Row="7" Grid.Column="1" x:Name="vsbvCombo" Margin="0,8,0,0" SelectedIndex="1" SelectionChanged="vsbvCombo_SelectionChanged_1" 
+                              HorizontalAlignment="Stretch" AutomationProperties.Name="vertical scroll bar visibility">
                         <ComboBoxItem>Auto</ComboBoxItem>
                         <ComboBoxItem>Visible</ComboBoxItem>
                         <ComboBoxItem>Hidden</ComboBoxItem>
@@ -101,7 +105,7 @@
                     <Paragraph>&lt;ScrollViewer Height="270" ZoomMode="Disabled"</Paragraph>
                     <Paragraph TextIndent="36">IsVerticalScrollChainingEnabled="True"</Paragraph>
                     <Paragraph TextIndent="36">ManipulationCompleted="Control1_ManipulationCompleted"</Paragraph>
-                    <Paragraph TextIndent="36">HorizonalScrollMode="
+                    <Paragraph TextIndent="36">HorizontalScrollMode="
                         <Run Text="{x:Bind hsmCombo.SelectedItem, Converter={StaticResource comboBoxItemToStringConverter}, Mode=OneWay}" /> "
                         HorizontalScrollBarVisibility="
                         <Run Text="{x:Bind hsbvCombo.SelectedItem, Converter={StaticResource comboBoxItemToStringConverter}, Mode=OneWay}" /> "
@@ -111,7 +115,8 @@
                         VerticalScrollBarVisibility="
                         <Run Text="{x:Bind vsbvCombo.SelectedItem, Converter={StaticResource comboBoxItemToStringConverter}, Mode=OneWay}" /> " &gt;
                     </Paragraph>
-                    <Paragraph TextIndent="12">&lt;Image Source="ms-appx:///Assets/cliff.jpg" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top"/&gt;</Paragraph>
+                    <Paragraph TextIndent="12">&lt;Image Source="ms-appx:///Assets/cliff.jpg" AutomationProperties.Name="cliff" Stretch="None"</Paragraph>
+                    <Paragraph TextIndent="48">HorizontalAlignment="Left" VerticalAlignment="Top"/&gt;</Paragraph>
                     <Paragraph>&lt;/ScrollViewer&gt;</Paragraph>
                 </RichTextBlock>
             </local:ControlExample.Xaml>

@@ -27,6 +27,7 @@ namespace AppUIBasics.ControlPages
             ScaleRectangle.ScaleTransition = new Vector3Transition();
             TranslateRectangle.TranslationTransition = new Vector3Transition();
             BrushPresenter.BackgroundTransition = new BrushTransition();
+            ThemeExampleGrid.BackgroundTransition = new BrushTransition();
         }
 
         private void OpacityButton_Click(object sender, RoutedEventArgs e)
@@ -149,6 +150,11 @@ namespace AppUIBasics.ControlPages
             {
                 BrushPresenter.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
             }
+        }
+
+        private void ThemeButton_Click(object sender, RoutedEventArgs e)
+        {
+            ThemeExampleGrid.RequestedTheme = ThemeExampleGrid.RequestedTheme == ElementTheme.Dark ? ElementTheme.Light : ElementTheme.Dark;
         }
     }
 }

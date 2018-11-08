@@ -43,9 +43,6 @@ namespace AppUIBasics.ControlPages
                     case "Button3":
                         Control3Output.Text = "You clicked: " + name;
                         break;
-                    case "Button4":
-                        Control4Output.Text = "You clicked: " + name;
-                        break;
                 }
             }
         }

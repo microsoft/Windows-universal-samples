@@ -104,6 +104,7 @@ task<void> Scenario5_DisplayingBarcodePreview::StartMediaCaptureAsync(String^ vi
     auto settings = ref new MediaCaptureInitializationSettings();
     settings->VideoDeviceId = videoDeviceId;
     settings->StreamingCaptureMode = StreamingCaptureMode::Video;
+    settings->SharingMode = MediaCaptureSharingMode::SharedReadOnly;
 
     return create_task(mediaCapture->InitializeAsync(settings)).then([this]
     {
@@ -411,6 +412,7 @@ task<void> Scenario5_DisplayingBarcodePreview::SelectScannerAsync(String^ scanne
     {
         if (claimedScanner != nullptr)
         {
+            claimedScanner->Closed += ref new TypedEventHandler<ClaimedBarcodeScanner^, ClaimedBarcodeScannerClosedEventArgs^>(this, &Scenario5_DisplayingBarcodePreview::ClaimedScanner_Closed);
             ScannerSupportsPreview = !selectedScanner->VideoDeviceId->IsEmpty();
             RaisePropertyChanged(L"ScannerSupportsPreview");
 
@@ -429,6 +431,17 @@ task<void> Scenario5_DisplayingBarcodePreview::SelectScannerAsync(String^ scanne
 
         isSelectionChanging = false;
     });
+}
+
+/// <summary>
+/// Closed notification was received from the selected scanner.
+/// </summary>
+/// <param name="sender"></param>
+/// <param name="args"></param>
+
+void Scenario5_DisplayingBarcodePreview::ClaimedScanner_Closed(ClaimedBarcodeScanner^ sender, ClaimedBarcodeScannerClosedEventArgs^ args)
+{
+    // Resources associated to the claimed barcode scanner can be cleaned up here
 }
 
 /// <summary>

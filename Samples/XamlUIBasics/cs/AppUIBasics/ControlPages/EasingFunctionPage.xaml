@@ -12,11 +12,10 @@
         <RichTextBlock Style="{ThemeResource BodyRichTextBlockStyle}">
             <Paragraph>- Use the Standard easing function for animating general property changes.</Paragraph>
             <Paragraph>- Use the Accelerate easing function to animate objects that are exiting the scene.</Paragraph>
-            <Paragraph>- Use the Deccelerate easing function to animate objects that are entering the scene.</Paragraph>
+            <Paragraph>- Use the Decelerate easing function to animate objects that are entering the scene.</Paragraph>
         </RichTextBlock>
 
         <local:ControlExample x:Name="Example1" HeaderText="Standard Easing Function">
-
             <Grid>
                 <Grid.Resources>
                     <Storyboard x:Name="Storyboard1">
@@ -31,14 +30,13 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" MinWidth="300"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="Animate" Click="Button1_Click" />
+                <Button Content="Animate" Click="Button1_Click" AutomationProperties.Name="Animate rectangle using Standard Easing Function" />
                 <Rectangle Width="50" Height="50" Fill="{ThemeResource SystemAccentColor}" Grid.Column="1">
                     <Rectangle.RenderTransform>
                         <TranslateTransform x:Name="Translation1" />
                     </Rectangle.RenderTransform>
                 </Rectangle>
             </Grid>
-
 
             <local:ControlExample.Xaml>
                 <RichTextBlock Style="{StaticResource XamlCodeRichTextBlockStyle}">
@@ -68,7 +66,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" MinWidth="300"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="Animate" Click="Button2_Click" />
+                <Button Content="Animate" Click="Button2_Click" AutomationProperties.Name="Animate rectangle using Accelerate Easing Function" />
                 <Rectangle Width="50" Height="50" Fill="{ThemeResource SystemAccentColor}" Grid.Column="1">
                     <Rectangle.RenderTransform>
                         <TranslateTransform x:Name="Translation2" />
@@ -105,7 +103,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" MinWidth="300"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="Animate" Click="Button3_Click" />
+                <Button Content="Animate" Click="Button3_Click" AutomationProperties.Name="Animate rectangle using Decelerate Easing Function" />
                 <Rectangle Width="50" Height="50" Fill="{ThemeResource SystemAccentColor}" Grid.Column="1">
                     <Rectangle.RenderTransform>
                         <TranslateTransform x:Name="Translation3" />
@@ -146,7 +144,7 @@
                     <ColumnDefinition Width="*" MinWidth="300"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Content="Animate" Click="Button4_Click" />
+                <Button Content="Animate" Click="Button4_Click" AutomationProperties.Name="Animate rectangle using an Easing Function" />
 
                 <Rectangle Width="50" Height="50" Fill="{ThemeResource SystemAccentColor}" Grid.Column="1" >
                     <Rectangle.RenderTransform>

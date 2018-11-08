@@ -22,9 +22,6 @@ namespace AppUIBasics.ControlPages
     /// </summary>
     public sealed partial class ThemeTransitionPage : Page
     {
-
-
-
         public ThemeTransitionPage()
         {
             this.InitializeComponent();
@@ -35,18 +32,18 @@ namespace AppUIBasics.ControlPages
             }
 
             AddItemsToContentListView();
-
-
         }
 
         private void ShowPopupButton_Click(object sender, RoutedEventArgs e)
         {
             ExamplePopup.IsOpen = true;
+            ClosePopupButton.Focus(FocusState.Programmatic);
         }
 
         private void ClosePopupButton_Click(object sender, RoutedEventArgs e)
         {
             ExamplePopup.IsOpen = false;
+            ShowPopupButton.Focus(FocusState.Programmatic);
         }
 
         private void ContentRefreshButton_Click(object sender, RoutedEventArgs e)
@@ -64,8 +61,6 @@ namespace AppUIBasics.ControlPages
 
             ContentList.ItemsSource = items;
         }
-
-
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -91,7 +86,6 @@ namespace AppUIBasics.ControlPages
             {
                 EntranceStackPanel.Children.Add(new Windows.UI.Xaml.Shapes.Rectangle() { Width = 50, Height = 50, Margin = new Thickness(5), Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue) });
             }
-
         }
 
         private void EntranceClearButton_Click(object sender, RoutedEventArgs e)
