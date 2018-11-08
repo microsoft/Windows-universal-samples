@@ -167,3 +167,7 @@ The next steps depend on whether you just want to deploy the sample or you want 
 
 - To debug the sample and then run it, press F5 or select Debug >  Start Debugging. To run the sample without debugging, press Ctrl+F5 or select Debug > Start Without Debugging. 
 - To run the "Connect to an NT service" scenario, see additional instructions above.
+
+### Modifying the sample
+
+- If you modify the sample, make sure to [change the interface ID in `RpcInterface.idl`](Service/Interface/RpcInterface.idl#L15), because interface IDs must be unique.
