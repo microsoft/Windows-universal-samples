@@ -24,7 +24,8 @@ namespace SDKTemplate
         {
             new Scenario() { Title="ListView Drag and Drop and Reorder", ClassType=typeof(Scenario1_ListView)},
             new Scenario() { Title="Drag UI Customization", ClassType=typeof(Scenario2_DragUICustomization)},
-            new Scenario() { Title="StartDragAsync", ClassType=typeof(Scenario3_StartDragAsync)}
+            new Scenario() { Title="StartDragAsync", ClassType=typeof(Scenario3_StartDragAsync)},
+            new Scenario() { Title="Move Between ListViews", ClassType=typeof(Scenario4_MoveBetweenListView)}
         };
     }
 
