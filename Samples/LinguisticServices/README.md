@@ -5,7 +5,7 @@
 
 # Linguistic services sample
 
-Shows how to use [Extended Linguistic Services (ELS)](http://msdn.microsoft.com/library/windows/apps/dd317839).
+Shows how to use [Extended Linguistic Services (ELS)](https://msdn.microsoft.com/library/windows/apps/dd317839).
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -14,19 +14,19 @@ Shows how to use [Extended Linguistic Services (ELS)](http://msdn.microsoft.com/
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-The sample implements scenarios that demonstrate the use of the three available services. The scenarios demonstrate how to request the desired service using the [MappingGetServices](http://msdn.microsoft.com/library/windows/apps/dd319060) function, and how to prepare parameters to be passed to the [MappingRecognizeText](http://msdn.microsoft.com/library/windows/apps/dd319063) function using that service.
+The sample implements scenarios that demonstrate the use of the three available services. The scenarios demonstrate how to request the desired service using the [MappingGetServices](https://msdn.microsoft.com/library/windows/apps/dd319060) function, and how to prepare parameters to be passed to the [MappingRecognizeText](https://msdn.microsoft.com/library/windows/apps/dd319063) function using that service.
 
 The scenarios demonstrate the use of the these services:
 
--   [Languaged detection](http://msdn.microsoft.com/library/windows/apps/dd319066)
+-   [Languaged detection](https://msdn.microsoft.com/library/windows/apps/dd319066)
 
     Enter a selection of text for which you want to detect the language(s). This returns the names of the languages recognized, sorted by confidence.
 
--   [Script detection](http://msdn.microsoft.com/library/windows/apps/dd319067)
+-   [Script detection](https://msdn.microsoft.com/library/windows/apps/dd319067)
 
     Enter a selection of text in which you want to detect the scripts. This returns each range in the input text for which a particular script is recognized, with the standard Unicode name for the script.
 
--   [Transliteration services](http://msdn.microsoft.com/library/windows/apps/dd374080)
+-   [Transliteration services](https://msdn.microsoft.com/library/windows/apps/dd374080)
 
     Enter a selection of text in Cyrillic. This returns the input text transliterated to Latin.
 

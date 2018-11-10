@@ -6,7 +6,7 @@
 # Japanese phonetic analysis sample
 
 Shows how to analyze Japanese texts and retrieves words or segments in the text by using the 
-[JapanesePhoneticAnalyzer](http://msdn.microsoft.com/library/windows/apps/dn434076) class.
+[JapanesePhoneticAnalyzer](https://msdn.microsoft.com/library/windows/apps/dn434076) class.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -19,7 +19,7 @@ The sample demonstrates these tasks:
 
 1.  **Analyze Japanese text**
 
-    This scenario shows how to use the [GetWords](http://msdn.microsoft.com/library/windows/apps/dn434078) method to split Japanese text, one segment per line.
+    This scenario shows how to use the [GetWords](https://msdn.microsoft.com/library/windows/apps/dn434078) method to split Japanese text, one segment per line.
     The segments can be words or pronunciation units.
 
 **Note** The Universal Windows app samples require Visual Studio 2017 to build and Windows 10 to execute.

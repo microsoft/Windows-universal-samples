@@ -5,7 +5,7 @@
 
 # Calendar sample
 
-Shows how to use the [Calendar](http://msdn.microsoft.com/library/windows/apps/br206724) class in the
+Shows how to use the [Calendar](https://msdn.microsoft.com/library/windows/apps/br206724) class in the
 [Windows.Globalization](https://msdn.microsoft.com/library/windows/apps/windows.globalization.aspx)
 namespace to manipulate and process dates based on a calendar system and the user's globalization preferences.
 (If you are looking for a sample which demonstrates an appointment calendar, see the [Appointments](../Appointments) sample.)
@@ -18,7 +18,7 @@ namespace to manipulate and process dates based on a calendar system and the use
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
 The
-[Calendar](http://msdn.microsoft.com/library/windows/apps/br206724)
+[Calendar](https://msdn.microsoft.com/library/windows/apps/br206724)
 class provides details of the user's default calendar or a caller-specified calendar system.
 The class gives access to specific statistical details
 as well as the ability to perform calendar-aware math operations.
@@ -26,13 +26,13 @@ as well as the ability to perform calendar-aware math operations.
 The Calendar object can convert to and from a language-specific date type:
 
 * C++: [Windows::Foundation::DateTime](https://msdn.microsoft.com/library/windows/apps/windows.foundation.datetime.aspx)
-* C#: [DateTimeOffset](http://msdn.microsoft.com/library/windows/apps/system.datetimeoffset.aspx)
+* C#: [DateTimeOffset](https://msdn.microsoft.com/library/windows/apps/system.datetimeoffset.aspx)
 * JavaScript: [Date](https://msdn.microsoft.com/library/windows/apps/cd9w2te4.aspx)
 
 The sample also uses the
-[Windows.Globalization.CalendarIdentifiers](http://msdn.microsoft.com/library/windows/apps/br229460)
+[Windows.Globalization.CalendarIdentifiers](https://msdn.microsoft.com/library/windows/apps/br229460)
 and
-[Windows.Globalization.ClockIdentifiers](http://msdn.microsoft.com/library/windows/apps/br229462)
+[Windows.Globalization.ClockIdentifiers](https://msdn.microsoft.com/library/windows/apps/br229462)
 classes.
 
 This sample contains scenarios that demonstrate:
@@ -60,9 +60,9 @@ This scenario also demonstrates converting from a language-specific date type to
 
 ### Reference
 
-[Windows.Globalization.Calendar](http://msdn.microsoft.com/library/windows/apps/br206724)  
-[Windows.Globalization.CalendarIdentifiers](http://msdn.microsoft.com/library/windows/apps/br229460)  
-[Windows.Globalization.ClockIdentifiers](http://msdn.microsoft.com/library/windows/apps/br229462)  
+[Windows.Globalization.Calendar](https://msdn.microsoft.com/library/windows/apps/br206724)  
+[Windows.Globalization.CalendarIdentifiers](https://msdn.microsoft.com/library/windows/apps/br229460)  
+[Windows.Globalization.ClockIdentifiers](https://msdn.microsoft.com/library/windows/apps/br229462)  
 
 ## System requirements
 

@@ -5,7 +5,7 @@
 
 # Semantic text query sample
 
-Shows how to use the different [SemanticTextQuery](http://msdn.microsoft.com/library/windows/apps/dn263476) APIs to find the corresponding hits 
+Shows how to use the different [SemanticTextQuery](https://msdn.microsoft.com/library/windows/apps/dn263476) APIs to find the corresponding hits 
 when querying strings or file properties.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
@@ -17,10 +17,10 @@ when querying strings or file properties.
 
 The sample demonstrates the following scenarios:
 
--   How to find the parts of a string that match an [Advanced Query Syntax (AQS)](http://msdn.microsoft.com/library/windows/apps/aa965711) query using 
-the [SemanticTextQuery.Find](http://msdn.microsoft.com/library/windows/apps/dn263478) method
+-   How to find the parts of a string that match an [Advanced Query Syntax (AQS)](https://msdn.microsoft.com/library/windows/apps/aa965711) query using 
+the [SemanticTextQuery.Find](https://msdn.microsoft.com/library/windows/apps/dn263478) method
 -   How to find which parts of a specific property match an AQS query using the 
-[SemanticTextQuery.FindInProperty](http://msdn.microsoft.com/library/windows/apps/dn263480) method
+[SemanticTextQuery.FindInProperty](https://msdn.microsoft.com/library/windows/apps/dn263480) method
 -   How to find all the properties of a file that are matched by a query using the GetMatchingPropertiesWithRanges method
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.

@@ -40,8 +40,8 @@ The sample demonstrates eight scenarios:
 
 ### Reference
 
-[Enumerating devices article](http://msdn.microsoft.com/library/windows/apps/Hh464977)  
-[Windows.Devices.Enumeration namespace](http://msdn.microsoft.com/library/windows/apps/windows.devices.enumeration.aspx)  
+[Enumerating devices article](https://msdn.microsoft.com/library/windows/apps/Hh464977)  
+[Windows.Devices.Enumeration namespace](https://msdn.microsoft.com/library/windows/apps/windows.devices.enumeration.aspx)  
 
 ## System requirements
 

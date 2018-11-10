@@ -5,10 +5,10 @@
 
 # Number formatting and parsing sample
 
-Shows how to use the [DecimalFormatter](http://msdn.microsoft.com/library/windows/apps/br226068), 
-[CurrencyFormatter](http://msdn.microsoft.com/library/windows/apps/br206883), [PercentFormatter](http://msdn.microsoft.com/library/windows/apps/br226101) and 
-[PermilleFormatter](http://msdn.microsoft.com/library/windows/apps/br226119) classes in the 
-[Windows.Globalization.NumberFormatting](http://msdn.microsoft.com/library/windows/apps/br226136) namespace to display and parse numbers, currencies, and percent values.
+Shows how to use the [DecimalFormatter](https://msdn.microsoft.com/library/windows/apps/br226068), 
+[CurrencyFormatter](https://msdn.microsoft.com/library/windows/apps/br206883), [PercentFormatter](https://msdn.microsoft.com/library/windows/apps/br226101) and 
+[PermilleFormatter](https://msdn.microsoft.com/library/windows/apps/br226119) classes in the 
+[Windows.Globalization.NumberFormatting](https://msdn.microsoft.com/library/windows/apps/br226136) namespace to display and parse numbers, currencies, and percent values.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -19,14 +19,14 @@ Shows how to use the [DecimalFormatter](http://msdn.microsoft.com/library/window
 
 The sample also shows how to:
 
--   Round and pad numbers using the many rounding algorithms (enumerated in [RoundingAlgorithm](http://msdn.microsoft.com/library/windows/apps/dn278791)) supported by the 
-[IncrementNumberRounder](http://msdn.microsoft.com/library/windows/apps/dn278487) and [SignificantDigitsNumberRounder](http://msdn.microsoft.com/library/windows/apps/dn278794) 
+-   Round and pad numbers using the many rounding algorithms (enumerated in [RoundingAlgorithm](https://msdn.microsoft.com/library/windows/apps/dn278791)) supported by the 
+[IncrementNumberRounder](https://msdn.microsoft.com/library/windows/apps/dn278487) and [SignificantDigitsNumberRounder](https://msdn.microsoft.com/library/windows/apps/dn278794) 
 classes.
--   Use the [NumeralSystemTransator](http://msdn.microsoft.com/library/windows/apps/dn278744) class to convert strings containing Latin numbers to an 
+-   Use the [NumeralSystemTransator](https://msdn.microsoft.com/library/windows/apps/dn278744) class to convert strings containing Latin numbers to an 
 appropriate numeral system that can be rendered in an app which does not perform any digit substitution.
 -   Use language names with Unicode extensions to directly set properties of number formatters.
 
-The [Windows.Globalization.NumberFormatting](http://msdn.microsoft.com/library/windows/apps/br226136) namespace provides number formatting and parsing APIs 
+The [Windows.Globalization.NumberFormatting](https://msdn.microsoft.com/library/windows/apps/br226136) namespace provides number formatting and parsing APIs 
 that generate strings for display that respect either the current user's preferences, or a caller-specified language(s) and region. There are individual methods 
 for formatting or parsing numbers in the form of decimals, currencies, percentages, and units per thousand (permillages).
 
@@ -46,14 +46,14 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[Windows.Globalization.NumberFormatting.CurrencyFormatter](http://msdn.microsoft.com/library/windows/apps/br206883)  
-[Windows.Globalization.NumberFormatting.DecimalFormatter](http://msdn.microsoft.com/library/windows/apps/br226068)  
-[Windows.Globalization.NumberFormatting.IncrementNumberRounder](http://msdn.microsoft.com/library/windows/apps/dn278487)  
-[Windows.Globalization.NumberFormatting.NumeralSystemTransator](http://msdn.microsoft.com/library/windows/apps/dn278744)  
-[Windows.Globalization.NumberFormatting.PercentFormatter](http://msdn.microsoft.com/library/windows/apps/br226101)  
-[Windows.Globalization.NumberFormatting.PermilleFormatter](http://msdn.microsoft.com/library/windows/apps/br226119)  
-[Windows.Globalization.NumberFormatting.RoundingAlgorithm](http://msdn.microsoft.com/library/windows/apps/dn278791)  
-[Windows.Globalization.NumberFormatting.SignificantDigitsNumberRounder](http://msdn.microsoft.com/library/windows/apps/dn278794)  
+[Windows.Globalization.NumberFormatting.CurrencyFormatter](https://msdn.microsoft.com/library/windows/apps/br206883)  
+[Windows.Globalization.NumberFormatting.DecimalFormatter](https://msdn.microsoft.com/library/windows/apps/br226068)  
+[Windows.Globalization.NumberFormatting.IncrementNumberRounder](https://msdn.microsoft.com/library/windows/apps/dn278487)  
+[Windows.Globalization.NumberFormatting.NumeralSystemTransator](https://msdn.microsoft.com/library/windows/apps/dn278744)  
+[Windows.Globalization.NumberFormatting.PercentFormatter](https://msdn.microsoft.com/library/windows/apps/br226101)  
+[Windows.Globalization.NumberFormatting.PermilleFormatter](https://msdn.microsoft.com/library/windows/apps/br226119)  
+[Windows.Globalization.NumberFormatting.RoundingAlgorithm](https://msdn.microsoft.com/library/windows/apps/dn278791)  
+[Windows.Globalization.NumberFormatting.SignificantDigitsNumberRounder](https://msdn.microsoft.com/library/windows/apps/dn278794)  
 
 ## System requirements
 

@@ -43,18 +43,18 @@ This sample uses the Single Process Model method for background activity. Applic
 
 ### Reference
 
-[Launching, resuming, and multitasking](http://msdn.microsoft.com/library/windows/apps/hh770837)  
-[Managing background tasks](http://msdn.microsoft.com/library/windows/apps/hh977053)  
+[Launching, resuming, and multitasking](https://msdn.microsoft.com/library/windows/apps/hh770837)  
+[Managing background tasks](https://msdn.microsoft.com/library/windows/apps/hh977053)  
 [Support your app with background tasks](https://msdn.microsoft.com/library/windows/apps/mt299103)  
 
 **API reference**
 
-[Windows.ApplicationModel.Background (XAML)](http://msdn.microsoft.com/library/windows/apps/br224847)  
-[Windows.UI.WebUI.WebUIBackgroundTaskInstance (HTML)](http://msdn.microsoft.com/library/windows/apps/hh701740)  
+[Windows.ApplicationModel.Background (XAML)](https://msdn.microsoft.com/library/windows/apps/br224847)  
+[Windows.UI.WebUI.WebUIBackgroundTaskInstance (HTML)](https://msdn.microsoft.com/library/windows/apps/hh701740)  
 
 ### Related technologies
 
-[Windows.ApplicationModel.Background](http://msdn.microsoft.com/library/windows/apps/br224847)  
+[Windows.ApplicationModel.Background](https://msdn.microsoft.com/library/windows/apps/br224847)  
 
 ## Operating system requirements
 

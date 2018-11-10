@@ -17,13 +17,13 @@ Shows how to use the low latency feature to enable real-time communication appli
 Specifically, this sample contains:
 
 -   A simple end-to-end video call client that demonstrates the low latency mode of the Windows Runtime capture engine. 
-This is enabled using the [msRealTime](http://msdn.microsoft.com/library/windows/apps/hh767377) the 
-[video](http://msdn.microsoft.com/library/windows/apps/hh767390) tag or [RealTimePlayback](http://msdn.microsoft.com/library/windows/apps/br227414) 
-on the [MediaElement](http://msdn.microsoft.com/library/windows/apps/br242926). The sample uses a custom network source and a custom sink extension to 
+This is enabled using the [msRealTime](https://msdn.microsoft.com/library/windows/apps/hh767377) the 
+[video](https://msdn.microsoft.com/library/windows/apps/hh767390) tag or [RealTimePlayback](https://msdn.microsoft.com/library/windows/apps/br227414) 
+on the [MediaElement](https://msdn.microsoft.com/library/windows/apps/br242926). The sample uses a custom network source and a custom sink extension to 
 send and receive captured audio and video data between two computers.
 
--   A demonstration of the end-to-end latency of video captured using the [Media Capture](http://msdn.microsoft.com/library/windows/apps/br226738) API 
-and displayed using a [video](http://msdn.microsoft.com/library/windows/apps/hh767390) and [MediaElement](http://msdn.microsoft.com/library/windows/apps/br242926) 
+-   A demonstration of the end-to-end latency of video captured using the [Media Capture](https://msdn.microsoft.com/library/windows/apps/br226738) API 
+and displayed using a [video](https://msdn.microsoft.com/library/windows/apps/hh767390) and [MediaElement](https://msdn.microsoft.com/library/windows/apps/br242926) 
 with low latency mode enabled. Two output windows are displayed. The first shows a camera preview window of the raw output from your camera. The second is a local host 
 client window that shows the video from the camera when compressed, streamed, and received over machine's loopback network interface. This window demonstrates the 
 end-to-end latency of video captured, streamed to, and displayed by a remote client minus network latency.
@@ -59,24 +59,24 @@ Related topics
 
 **Roadmaps**
 
-[Roadmap for apps using C\# and Visual Basic](http://msdn.microsoft.com/library/windows/apps/br229583)  
-[Roadmap for apps using C++](http://msdn.microsoft.com/library/windows/apps/hh700360)  
-[Roadmap for apps using JavaScript](http://msdn.microsoft.com/library/windows/apps/hh465037)  
-[Designing UX for apps](http://msdn.microsoft.com/library/windows/apps/hh767284)  
+[Roadmap for apps using C\# and Visual Basic](https://msdn.microsoft.com/library/windows/apps/br229583)  
+[Roadmap for apps using C++](https://msdn.microsoft.com/library/windows/apps/hh700360)  
+[Roadmap for apps using JavaScript](https://msdn.microsoft.com/library/windows/apps/hh465037)  
+[Designing UX for apps](https://msdn.microsoft.com/library/windows/apps/hh767284)  
 [Audio, video, and camera](https://msdn.microsoft.com/library/windows/apps/mt203788)  
 
 **Tasks**
 
-[How to enable low-latency playback](http://msdn.microsoft.com/library/windows/apps/hh452742)  
+[How to enable low-latency playback](https://msdn.microsoft.com/library/windows/apps/hh452742)  
 [Creating an app using WRL and Media Foundation](http://go.microsoft.com/fwlink/p/?LinkID=309355)  
 
 **Reference**
 
-[Windows.Media.Capture.MediaCapture](http://msdn.microsoft.com/library/windows/apps/br226738)  
-[MediaCapture](http://msdn.microsoft.com/library/windows/apps/br241124)  
-[msRealTime](http://msdn.microsoft.com/library/windows/apps/hh767377)  
-[MediaExtensionManager](http://msdn.microsoft.com/library/windows/apps/br240987)  
-[Windows.Media.MediaProperties](http://msdn.microsoft.com/library/windows/apps/hh701296)  
+[Windows.Media.Capture.MediaCapture](https://msdn.microsoft.com/library/windows/apps/br226738)  
+[MediaCapture](https://msdn.microsoft.com/library/windows/apps/br241124)  
+[msRealTime](https://msdn.microsoft.com/library/windows/apps/hh767377)  
+[MediaExtensionManager](https://msdn.microsoft.com/library/windows/apps/br240987)  
+[Windows.Media.MediaProperties](https://msdn.microsoft.com/library/windows/apps/hh701296)  
 
 Operating system requirements
 -----------------------------

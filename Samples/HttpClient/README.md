@@ -6,8 +6,8 @@
 # HttpClient sample
 
 Shows how to upload and download various types of content with an HTTP server using the 
-[HttpClient](http://msdn.microsoft.com/library/windows/apps/dn298639) and related classes in 
-[Windows.Web.Http](http://msdn.microsoft.com/library/windows/apps/dn279692) namespace.
+[HttpClient](https://msdn.microsoft.com/library/windows/apps/dn298639) and related classes in 
+[Windows.Web.Http](https://msdn.microsoft.com/library/windows/apps/dn279692) namespace.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -16,12 +16,12 @@ Shows how to upload and download various types of content with an HTTP server us
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-This sample shows the use of asynchronous GET and POST requests using [HttpClient](http://msdn.microsoft.com/library/windows/apps/dn298639). 
-The [HttpClient](http://msdn.microsoft.com/library/windows/apps/dn298639) class is used to send and receive basic requests over HTTP. 
+This sample shows the use of asynchronous GET and POST requests using [HttpClient](https://msdn.microsoft.com/library/windows/apps/dn298639). 
+The [HttpClient](https://msdn.microsoft.com/library/windows/apps/dn298639) class is used to send and receive basic requests over HTTP. 
 It is the main class for sending HTTP requests and receiving HTTP responses from a resource identified by a URI. This class can be used to send 
 a GET, PUT, POST, DELETE, and other requests to a web service. Each of these requests is sent as an asynchronous operation. The **HttpClient** 
 class can be used in scenarios that use text as well as scenarios that use arbitrary streams of data. Filters 
-(see [Windows.Web.Http.Filters](http://msdn.microsoft.com/library/windows/apps/dn298623) namespace) provide a way to modify the 
+(see [Windows.Web.Http.Filters](https://msdn.microsoft.com/library/windows/apps/dn298623) namespace) provide a way to modify the 
 request/response flow of HTTP and handle common HTTP web service issues. Filters can be chained together in a sequence to address more complex web service issues. 
 
 The sample covers the following scenarios:
@@ -52,7 +52,7 @@ Scenario 15: Validate the server certificate
 
 **Note**  This sample by default requires network access using the loopback interface.
 
-For a sample that shows how to use [HttpClient](http://msdn.microsoft.com/library/windows/apps/dn298639) so that the app is always connected and always reachable using background network notifications in a Universal Windows Platform (UWP) app, download the [ControlChannelTrigger HttpClient sample](http://go.microsoft.com/fwlink/p/?linkid=258323) .
+For a sample that shows how to use [HttpClient](https://msdn.microsoft.com/library/windows/apps/dn298639) so that the app is always connected and always reachable using background network notifications in a Universal Windows Platform (UWP) app, download the [ControlChannelTrigger HttpClient sample](http://go.microsoft.com/fwlink/p/?linkid=258323) .
 
 ## Network capabilities
 
@@ -64,44 +64,44 @@ To build the sample, set the following network capabilities:
 
     **Private Networks (Client & Server)**: The sample has inbound and outbound network access on a home or work network (a local intranet). This allows the app to download various types of content from an HTTP server and upload content to an HTTP server located on a local intranet. The **Private Networks (Client & Server)** capability is represented by the **Capability name = "privateNetworkClientServer"** tag in the app manifest.
 
-For more information on network capabilities, see [How to set network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532).
+For more information on network capabilities, see [How to set network capabilities](https://msdn.microsoft.com/library/windows/apps/hh770532).
 
 
 ## Related topics
 
 ### Other - C\#/VB/C++ and XAML
 
-[Adding support for networking (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452751)  
-[Connecting to network services (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452976)  
-[Connecting with WebSockets (XAML)](http://msdn.microsoft.com/library/windows/apps/hh994396)  
+[Adding support for networking (XAML)](https://msdn.microsoft.com/library/windows/apps/hh452751)  
+[Connecting to network services (XAML)](https://msdn.microsoft.com/library/windows/apps/hh452976)  
+[Connecting with WebSockets (XAML)](https://msdn.microsoft.com/library/windows/apps/hh994396)  
 [HttpClient](https://msdn.microsoft.com/library/windows/apps/mt187345)  
 [Networking basics](https://msdn.microsoft.com/library/windows/apps/mt280233)  
-[Troubleshooting and debugging network connections](http://msdn.microsoft.com/library/windows/apps/hh770534)  
+[Troubleshooting and debugging network connections](https://msdn.microsoft.com/library/windows/apps/hh770534)  
 
 ### Other - JavaScript and HTML
 
-[Adding support for networking (HTML)](http://msdn.microsoft.com/library/windows/apps/hh452752)  
-[Connecting to network services (HTML)](http://msdn.microsoft.com/library/windows/apps/hh452977)  
-[Connecting with WebSockets (HTML)](http://msdn.microsoft.com/library/windows/apps/hh761442)  
-[How to connect to an HTTP server using Windows.Web.Http (HTML)](http://msdn.microsoft.com/library/windows/apps/dn469430)  
-[How to set background connectivity options (HTML)](http://msdn.microsoft.com/library/windows/apps/hh771189)  
-[How to set network capabilities (HTML)](http://msdn.microsoft.com/library/windows/apps/hh770532)  
-[Troubleshooting and debugging network connections](http://msdn.microsoft.com/library/windows/apps/hh770534)  
+[Adding support for networking (HTML)](https://msdn.microsoft.com/library/windows/apps/hh452752)  
+[Connecting to network services (HTML)](https://msdn.microsoft.com/library/windows/apps/hh452977)  
+[Connecting with WebSockets (HTML)](https://msdn.microsoft.com/library/windows/apps/hh761442)  
+[How to connect to an HTTP server using Windows.Web.Http (HTML)](https://msdn.microsoft.com/library/windows/apps/dn469430)  
+[How to set background connectivity options (HTML)](https://msdn.microsoft.com/library/windows/apps/hh771189)  
+[How to set network capabilities (HTML)](https://msdn.microsoft.com/library/windows/apps/hh770532)  
+[Troubleshooting and debugging network connections](https://msdn.microsoft.com/library/windows/apps/hh770534)  
 
 ### Other resources
 
-[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)  
-[Connecting to a WebSocket service](http://msdn.microsoft.com/library/windows/apps/hh761442)  
-[How to configure network isolation capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)  
-[How to secure HttpClient connections](http://msdn.microsoft.com/library/windows/apps/hh781240)  
-[Quickstart: Connecting using HttpClient](http://msdn.microsoft.com/library/windows/apps/hh781239)  
+[Adding support for networking](https://msdn.microsoft.com/library/windows/apps/hh452752)  
+[Connecting to a WebSocket service](https://msdn.microsoft.com/library/windows/apps/hh761442)  
+[How to configure network isolation capabilities](https://msdn.microsoft.com/library/windows/apps/hh770532)  
+[How to secure HttpClient connections](https://msdn.microsoft.com/library/windows/apps/hh781240)  
+[Quickstart: Connecting using HttpClient](https://msdn.microsoft.com/library/windows/apps/hh781239)  
 
 ### Reference
 
-[HttpClient](http://msdn.microsoft.com/library/windows/apps/dn298639)  
-[Windows.Web.Http](http://msdn.microsoft.com/library/windows/apps/dn279692)  
-[Windows.Web.Http.Headers](http://msdn.microsoft.com/library/windows/apps/dn252713)  
-[Windows.Web.Http.Filters](http://msdn.microsoft.com/library/windows/apps/dn298623)  
+[HttpClient](https://msdn.microsoft.com/library/windows/apps/dn298639)  
+[Windows.Web.Http](https://msdn.microsoft.com/library/windows/apps/dn279692)  
+[Windows.Web.Http.Headers](https://msdn.microsoft.com/library/windows/apps/dn252713)  
+[Windows.Web.Http.Filters](https://msdn.microsoft.com/library/windows/apps/dn298623)  
 
 ## System requirements
 
@@ -167,7 +167,7 @@ The sample must also be updated when run against a non-localhost web server. To 
 
 **Note**  IIS is not available on Windows Phone. Instead, set up the web server on a separate 64-bit or 32-bit computer and follow the steps for using the sample against non-localhost web server.
 
-**Note**  When used with the supplied scripts, this sample communicates with another process (IIS server which is a desktop app) on the same machine over loopback for demonstration purposes only. A UWP app that communicates over loopback to another process that represents a UWP app or a desktop app is not allowed and such apps will not pass Microsoft Store validation. For more information, see [How to enable loopback and troubleshoot network isolation](http://msdn.microsoft.com/library/windows/apps/hh780593).
+**Note**  When used with the supplied scripts, this sample communicates with another process (IIS server which is a desktop app) on the same machine over loopback for demonstration purposes only. A UWP app that communicates over loopback to another process that represents a UWP app or a desktop app is not allowed and such apps will not pass Microsoft Store validation. For more information, see [How to enable loopback and troubleshoot network isolation](https://msdn.microsoft.com/library/windows/apps/hh780593).
 
 However if a server different than IIS is used, then this requires some special configuration of the server to create the *HttpClientSample* folder.
 

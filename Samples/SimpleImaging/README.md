@@ -47,8 +47,8 @@ All other files provide common SDK sample functionality.
 
 ## Related topics
 
-[Windows.Storage](http://msdn.microsoft.com/library/windows/apps/br227346)  
-[Windows.Graphics.Imaging](http://msdn.microsoft.com/library/windows/apps/br226400)  
+[Windows.Storage](https://msdn.microsoft.com/library/windows/apps/br227346)  
+[Windows.Graphics.Imaging](https://msdn.microsoft.com/library/windows/apps/br226400)  
 
 ## System requirements
 

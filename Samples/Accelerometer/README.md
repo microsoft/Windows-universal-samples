@@ -5,7 +5,7 @@
 
 # Accelerometer sample
 
-Shows how to use the [Accelerometer](http://msdn.microsoft.com/library/windows/apps/br225687) class, and 
+Shows how to use the [Accelerometer](https://msdn.microsoft.com/library/windows/apps/br225687) class, and 
 allows the user to view the acceleration forces along the X-, Y-, and Z-axes for a 3-axis accelerometer.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
@@ -60,11 +60,11 @@ When you choose the **Enable** button for the **Data Events** option, the app be
 
 ### Reference
 
-[Accelerometer.GetCurrentReading method](http://msdn.microsoft.com/library/windows/apps/br225699)
+[Accelerometer.GetCurrentReading method](https://msdn.microsoft.com/library/windows/apps/br225699)
 
-[Accelerometer.ReadingChanged event handler](http://msdn.microsoft.com/library/windows/apps/br225702)
+[Accelerometer.ReadingChanged event handler](https://msdn.microsoft.com/library/windows/apps/br225702)
 
-[Quickstart: Responding to user movement with the accelerometer](http://msdn.microsoft.com/library/windows/apps/hh465265)
+[Quickstart: Responding to user movement with the accelerometer](https://msdn.microsoft.com/library/windows/apps/hh465265)
 
 [Windows.Devices.Sensors namespace](http://go.microsoft.com/fwlink/p/?linkid=241981)
 

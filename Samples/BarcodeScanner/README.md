@@ -23,13 +23,13 @@ This sample shows how to:
 
 2.  **Claim the barcode scanner for exclusive use**
 
-    Uses [ClaimScannerAsync](http://msdn.microsoft.com/library/windows/apps/dn297696) to claim the device.
+    Uses [ClaimScannerAsync](https://msdn.microsoft.com/library/windows/apps/dn297696) to claim the device.
 
 3.  **Add event handlers**
 
-    Uses [DataReceived](http://msdn.microsoft.com/library/windows/apps/dn278556) and [ReleaseDeviceRequested](http://msdn.microsoft.com/library/windows/apps/dn278578) events.
+    Uses [DataReceived](https://msdn.microsoft.com/library/windows/apps/dn278556) and [ReleaseDeviceRequested](https://msdn.microsoft.com/library/windows/apps/dn278578) events.
 
-    When an application gets a request to release its exclusive claim to the barcode scanner, it must handle the request by retaining the device; otherwise, it will lose its claim. The second scenario in this sample shows the release and retain functionality. The event handler for [ReleaseDeviceRequested](http://msdn.microsoft.com/library/windows/apps/dn278578) shows how retain the device.
+    When an application gets a request to release its exclusive claim to the barcode scanner, it must handle the request by retaining the device; otherwise, it will lose its claim. The second scenario in this sample shows the release and retain functionality. The event handler for [ReleaseDeviceRequested](https://msdn.microsoft.com/library/windows/apps/dn278578) shows how retain the device.
 
 4.  **Set active symbologies**
 
@@ -54,7 +54,7 @@ This sample shows how to:
    Controls the software trigger with the [StartSoftwareTriggerAsync](https://docs.microsoft.com/en-us/uwp/api/windows.devices.pointofservice.claimedbarcodescanner.startsoftwaretriggerasync)
    and [StopSoftwareTrigger](https://docs.microsoft.com/en-us/uwp/api/windows.devices.pointofservice.claimedbarcodescanner.stopsoftwaretriggerasync) methods.
 
-The app package manifest shows how to specify the device capability name for the Point of Service (POS) devices. All POS apps are required declare [DeviceCapability](http://msdn.microsoft.com/library/windows/apps/br211430) in the app package manifest, either by using "PointofService" as shown in this sample or by using a device specific GUID, such as "C243FFBD-3AFC-45E9-B3D3-2BA18BC7EBC5" for a barcode scanner.
+The app package manifest shows how to specify the device capability name for the Point of Service (POS) devices. All POS apps are required declare [DeviceCapability](https://msdn.microsoft.com/library/windows/apps/br211430) in the app package manifest, either by using "PointofService" as shown in this sample or by using a device specific GUID, such as "C243FFBD-3AFC-45E9-B3D3-2BA18BC7EBC5" for a barcode scanner.
 
 **Note** The Universal Windows app samples require Visual Studio 2017 to build and Windows 10 to execute.
  
@@ -66,7 +66,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[Windows.Devices.PointOfService namespace](http://msdn.microsoft.com/library/windows/apps/dn298071)  
+[Windows.Devices.PointOfService namespace](https://msdn.microsoft.com/library/windows/apps/dn298071)  
 [Supported Point of Service Peripherals](https://docs.microsoft.com/windows/uwp/devices-sensors/pos-device-support)  
 [USB HID POS Scanner specification](http://go.microsoft.com/fwlink/p/?linkid=309230)  
 [Windows app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  

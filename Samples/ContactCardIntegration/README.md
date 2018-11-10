@@ -30,7 +30,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 [ContactAnnotationList](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.contacts.contactannotationlist.aspx)  
 [ContactAnnotation](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.contacts.contactannotation.aspx)  
-[Windows.ApplicationModel.Contacts](http://msdn.microsoft.com/library/windows/apps/br225002)  
+[Windows.ApplicationModel.Contacts](https://msdn.microsoft.com/library/windows/apps/br225002)  
 [Handling URI activation (XAML)](https://technet.microsoft.com/windowsserver/hh779670)  
 
 ## System requirements

@@ -5,7 +5,7 @@
 
 # Inter-Integrated Circuit (I2C) sample
 
-Shows how to use the [Windows.Devices.I2c](http://msdn.microsoft.com/library/windows.devices.i2c.aspx) namespace
+Shows how to use the [Windows.Devices.I2c](https://msdn.microsoft.com/library/windows.devices.i2c.aspx) namespace
 to allow apps to communicate with Inter-Integrated Circuit devices
 (commmonly abbreviated IIC or I2C)
 on a Windows IoT (Internet of Things) device.

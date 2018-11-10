@@ -18,13 +18,13 @@ The sample demonstrates:
 
 -  Displaying two different views of your app on different screens.
 -  Starting, stopping and swapping views.
--  Using [ProjectionManager](http://msdn.microsoft.com/library/windows/apps/dn281126) and [ApplicationViewSwitcher](http://msdn.microsoft.com/library/windows/apps/dn281094) APIs.
+-  Using [ProjectionManager](https://msdn.microsoft.com/library/windows/apps/dn281126) and [ApplicationViewSwitcher](https://msdn.microsoft.com/library/windows/apps/dn281094) APIs.
 -  Enumerating available screens to project to and projecting a view of your app to a specific one.
 
 ## Related topics
 
-[ProjectionManager](http://msdn.microsoft.com/library/windows/apps/dn281126)  
-[ApplicationViewSwitcher](http://msdn.microsoft.com/library/windows/apps/dn281094)  
+[ProjectionManager](https://msdn.microsoft.com/library/windows/apps/dn281126)  
+[ApplicationViewSwitcher](https://msdn.microsoft.com/library/windows/apps/dn281094)  
 
 ## System requirements
 

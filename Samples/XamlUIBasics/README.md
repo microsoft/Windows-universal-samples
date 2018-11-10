@@ -30,7 +30,7 @@ To contact the authors, please reach out to ControlsGallery@microsoft.com
 
 ## Related topics
 
-[XAML app UI, start to finish](http://msdn.microsoft.com/library/windows/apps/dn263191.aspx)  
+[XAML app UI, start to finish](https://msdn.microsoft.com/library/windows/apps/dn263191.aspx)  
 
 Each control page in the application has links to the relevant MSDN documentation for that control.
 

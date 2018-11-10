@@ -5,7 +5,7 @@
 
 # Custom HID device sample
 
-Shows how to use the [Windows.Devices.HumanInterfaceDevices](http://msdn.microsoft.com/library/windows/apps/dn264174) API. 
+Shows how to use the [Windows.Devices.HumanInterfaceDevices](https://msdn.microsoft.com/library/windows/apps/dn264174) API. 
 Designed to work with a programmable, USB-based, HID device called the SuperMUTT.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 

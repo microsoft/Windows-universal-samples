@@ -14,9 +14,9 @@ Shows how to create a context menu and how to replace the default context menu f
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-This sample uses [Windows.UI.Popups](http://msdn.microsoft.com/library/windows/apps/br242180) API, 
-including the [PopupMenu](http://msdn.microsoft.com/library/windows/apps/br208693) and the 
-[contextmenu | oncontextmenu](http://msdn.microsoft.com/library/windows/apps/hh441317) event.
+This sample uses [Windows.UI.Popups](https://msdn.microsoft.com/library/windows/apps/br242180) API, 
+including the [PopupMenu](https://msdn.microsoft.com/library/windows/apps/br208693) and the 
+[contextmenu | oncontextmenu](https://msdn.microsoft.com/library/windows/apps/hh441317) event.
 
 The sample demonstrates these two tasks:
 
@@ -24,7 +24,7 @@ The sample demonstrates these two tasks:
 
 -   **Replacing the default commands in the context menu that is shown for text**
 
-To learn about choosing commands and designing a context menu, see [Guidelines and checklist for context menus](http://msdn.microsoft.com/library/windows/apps/hh465308).
+To learn about choosing commands and designing a context menu, see [Guidelines and checklist for context menus](https://msdn.microsoft.com/library/windows/apps/hh465308).
 
 For XAML-based apps, we recommend that developers
 [use the ContextFlyout property to implement context menus](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/menus)
@@ -32,8 +32,8 @@ This sample uses the PopupMenu class for illustration purposes.
 
 Additional APIs for this sample include:
 
--   [UICommand](http://msdn.microsoft.com/library/windows/apps/br242166) class
--   [UICommandSeparator](http://msdn.microsoft.com/library/windows/apps/br242168) class
+-   [UICommand](https://msdn.microsoft.com/library/windows/apps/br242166) class
+-   [UICommandSeparator](https://msdn.microsoft.com/library/windows/apps/br242168) class
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  
@@ -45,7 +45,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[Windows.UI.Popups](http://msdn.microsoft.com/library/windows/apps/br242180)  
+[Windows.UI.Popups](https://msdn.microsoft.com/library/windows/apps/br242180)  
 
 ## System requirements
 

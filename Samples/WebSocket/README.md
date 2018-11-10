@@ -5,7 +5,7 @@
 
 # WebSocket sample
 
-Shows how to send and receive data using the WebSocket classes in the [Windows.Networking.Sockets](http://msdn.microsoft.com/library/windows/apps/br226960) 
+Shows how to send and receive data using the WebSocket classes in the [Windows.Networking.Sockets](https://msdn.microsoft.com/library/windows/apps/br226960) 
 namespace.
 
 The sample demonstrates the following:
@@ -47,11 +47,11 @@ This sample requires that network capabilities be set in the *Package.appxmanife
 
 ### Other resources
 
-[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)  
-[Connecting with WebSockets](http://msdn.microsoft.com/library/windows/apps/hh761442)  
-[How to configure network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)  
-[How to connect with a MessageWebSocket](http://msdn.microsoft.com/library/windows/apps/hh761443)  
-[How to connect with a StreamWebSocket](http://msdn.microsoft.com/library/windows/apps/hh761445)  
+[Adding support for networking](https://msdn.microsoft.com/library/windows/apps/hh452752)  
+[Connecting with WebSockets](https://msdn.microsoft.com/library/windows/apps/hh761442)  
+[How to configure network capabilities](https://msdn.microsoft.com/library/windows/apps/hh770532)  
+[How to connect with a MessageWebSocket](https://msdn.microsoft.com/library/windows/apps/hh761443)  
+[How to connect with a StreamWebSocket](https://msdn.microsoft.com/library/windows/apps/hh761445)  
 
 ### Reference
 

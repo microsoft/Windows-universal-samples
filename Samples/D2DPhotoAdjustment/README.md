@@ -5,7 +5,7 @@
 
 # Direct2D photo adjustment sample
 
-Shows how to build a photo viewer and editor using [Direct2D](http://msdn.microsoft.com/library/windows/desktop/dd370990) and [Direct2D Effects](http://msdn.microsoft.com/library/windows/desktop/hh706327).
+Shows how to build a photo viewer and editor using [Direct2D](https://msdn.microsoft.com/library/windows/desktop/dd370990) and [Direct2D Effects](https://msdn.microsoft.com/library/windows/desktop/hh706327).
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -21,12 +21,12 @@ Specifically, this sample shows how to:
 - Hook up UI in XAML
 
 This sample uses the following Direct2D effects:
-- [Color management](http://msdn.microsoft.com/library/windows/desktop/hh706318)
-- [Straighten](http://msdn.microsoft.com/library/windows/desktop/dn900462)
-- [Temperature and tint](http://msdn.microsoft.com/library/windows/desktop/dn900463)
-- [Saturation](http://msdn.microsoft.com/library/windows/desktop/hh706369)
-- [Contrast](http://msdn.microsoft.com/library/windows/desktop/dn890716)
-- [Highlights and Shadows](http://msdn.microsoft.com/library/windows/desktop/dn890773)
+- [Color management](https://msdn.microsoft.com/library/windows/desktop/hh706318)
+- [Straighten](https://msdn.microsoft.com/library/windows/desktop/dn900462)
+- [Temperature and tint](https://msdn.microsoft.com/library/windows/desktop/dn900463)
+- [Saturation](https://msdn.microsoft.com/library/windows/desktop/hh706369)
+- [Contrast](https://msdn.microsoft.com/library/windows/desktop/dn890716)
+- [Highlights and Shadows](https://msdn.microsoft.com/library/windows/desktop/dn890773)
 
 ## Sample project files
 
@@ -62,17 +62,17 @@ Variants of the following files are found in every UWP app written in C++:
 
 ### Feature areas
 
-[Direct2D Effects](http://msdn.microsoft.com/library/windows/desktop/hh706327): provides built-in effects including a rich library of photo editing operations.  
-[Direct2D](http://msdn.microsoft.com/library/windows/desktop/dd370990): used to render images, primitives, and text.  
-[Windows Imaging Component (WIC)](http://msdn.microsoft.com/library/windows/desktop/ee719655): used to decode images from disk.  
+[Direct2D Effects](https://msdn.microsoft.com/library/windows/desktop/hh706327): provides built-in effects including a rich library of photo editing operations.  
+[Direct2D](https://msdn.microsoft.com/library/windows/desktop/dd370990): used to render images, primitives, and text.  
+[Windows Imaging Component (WIC)](https://msdn.microsoft.com/library/windows/desktop/ee719655): used to decode images from disk.  
 [XAML overview](https://msdn.microsoft.com/library/windows/apps/mt185595): technology for building user interfaces in managed and C++ code.  
 
 ### Reference
 
 Direct2D APIs:
 
-[ID2D1ImageSourceFromWic](http://msdn.microsoft.com/library/windows/desktop/dn900414)  
-[ID2D1DeviceContext](http://msdn.microsoft.com/library/windows/desktop/hh404479)  
+[ID2D1ImageSourceFromWic](https://msdn.microsoft.com/library/windows/desktop/dn900414)  
+[ID2D1DeviceContext](https://msdn.microsoft.com/library/windows/desktop/hh404479)  
 [Direct2D built-in effects](https://msdn.microsoft.com/library/windows/desktop/hh706316)  
 
 Related APIs:

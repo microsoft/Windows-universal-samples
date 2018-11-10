@@ -5,7 +5,7 @@
 
 # RSS reader end-to-end (JavaScript) sample 
 
-Shows a basic end-to-end implementation of a news feed reader. Uses a [ListView](http://msdn.microsoft.com/library/windows/apps/br242878) 
+Shows a basic end-to-end implementation of a news feed reader. Uses a [ListView](https://msdn.microsoft.com/library/windows/apps/br242878) 
 to organize and display articles from various subscriptions specified in a JSON-formatted data file. The data is obtained over a network connection or from a local cache.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
@@ -17,7 +17,7 @@ to organize and display articles from various subscriptions specified in a JSON-
 
 Specifically, this sample covers these news reader features and Windows Runtime APIs.
 
--   A pannable [ListView](http://msdn.microsoft.com/library/windows/apps/br242878) page showing the subscribed news feeds and up to 15 articles per subscription.
+-   A pannable [ListView](https://msdn.microsoft.com/library/windows/apps/br242878) page showing the subscribed news feeds and up to 15 articles per subscription.
 
     Sample: Look at the news.css, news.html, and news.js files in the \\pages\\news\\ folder.
 
@@ -25,7 +25,7 @@ Specifically, this sample covers these news reader features and Windows Runtime 
 
     Sample: See feed.css, feed.html, and feed.js files in the \\pages\\feed\\ folder.
 
--   A detail page showing the content of the article selected from the [ListView](http://msdn.microsoft.com/library/windows/apps/br242878) or section page.
+-   A detail page showing the content of the article selected from the [ListView](https://msdn.microsoft.com/library/windows/apps/br242878) or section page.
 
     Sample: Examine article.css, article.html, and article.js files in the \\pages\\article\\ folder.
 
@@ -78,45 +78,45 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 [RSS reader (XAML MVVM) end-to-end sample](https://github.com/Microsoft/Windows-appsample-rssreader)  
 [Other samples](http://microsoft.github.io/windows/)  
-[Older end-to-end sample apps](http://msdn.microsoft.com/library/windows/apps/dn263104)  
+[Older end-to-end sample apps](https://msdn.microsoft.com/library/windows/apps/dn263104)  
 
 **Conceptual**
 
-[Adding ListView controls](http://msdn.microsoft.com/library/windows/apps/hh465382)  
+[Adding ListView controls](https://msdn.microsoft.com/library/windows/apps/hh465382)  
 [Navigation design basics]https://docs.microsoft.com/en-us/windows/uwp/layout/navigation-basics)  
-[Connecting to networks and web services (JavaScript)](http://msdn.microsoft.com/library/windows/apps/br211370)  
-[Developing connected applications](http://msdn.microsoft.com/library/windows/apps/hh465399)  
+[Connecting to networks and web services (JavaScript)](https://msdn.microsoft.com/library/windows/apps/br211370)  
+[Developing connected applications](https://msdn.microsoft.com/library/windows/apps/hh465399)  
 
 **Tasks**
 
-[Quickstart: Adding a splash screen](http://msdn.microsoft.com/library/windows/apps/hh465346)  
-[Quickstart: Using single-page navigation](http://msdn.microsoft.com/library/windows/apps/hh452768)  
-[Quickstart: adding an app bar with commands](http://msdn.microsoft.com/library/windows/apps/hh465309)  
-[Quickstart: adding a SemanticZoom](http://msdn.microsoft.com/library/windows/apps/hh465492)  
-[Quickstart: Defining app layouts](http://msdn.microsoft.com/library/windows/apps/jj150600)  
+[Quickstart: Adding a splash screen](https://msdn.microsoft.com/library/windows/apps/hh465346)  
+[Quickstart: Using single-page navigation](https://msdn.microsoft.com/library/windows/apps/hh452768)  
+[Quickstart: adding an app bar with commands](https://msdn.microsoft.com/library/windows/apps/hh465309)  
+[Quickstart: adding a SemanticZoom](https://msdn.microsoft.com/library/windows/apps/hh465492)  
+[Quickstart: Defining app layouts](https://msdn.microsoft.com/library/windows/apps/jj150600)  
 
 **Reference (feeds)**
 
 [JSON Object](http://go.microsoft.com/fwlink/p/?linkid=308896)  
-[Uri](http://msdn.microsoft.com/library/windows/apps/br225998)  
-[SyndicationClient](http://msdn.microsoft.com/library/windows/apps/br243456)  
-[NetworkInformation](http://msdn.microsoft.com/library/windows/apps/br207293)  
-[ReadTextAsync](http://msdn.microsoft.com/library/windows/apps/hh701482)  
-[readText](http://msdn.microsoft.com/library/windows/apps/hh700824)  
+[Uri](https://msdn.microsoft.com/library/windows/apps/br225998)  
+[SyndicationClient](https://msdn.microsoft.com/library/windows/apps/br243456)  
+[NetworkInformation](https://msdn.microsoft.com/library/windows/apps/br207293)  
+[ReadTextAsync](https://msdn.microsoft.com/library/windows/apps/hh701482)  
+[readText](https://msdn.microsoft.com/library/windows/apps/hh700824)  
 
 **Reference (general)**
 
-[WinJS.Application Namespace](http://msdn.microsoft.com/library/windows/apps/br229774)  
-[WinJS.Class Namespace](http://msdn.microsoft.com/library/windows/apps/br229776)  
-[WinJS.Utilities Namespace](http://msdn.microsoft.com/library/windows/apps/br229783)  
-[WinJS.Namespace Namespace](http://msdn.microsoft.com/library/windows/apps/br212652)  
-[WinJS.Navigation Namespace](http://msdn.microsoft.com/library/windows/apps/br229778)  
-[Windows.ApplicationModel.Activation Namespace](http://msdn.microsoft.com/library/windows/apps/br224766)  
-[WinJS.Binding Namespace](http://msdn.microsoft.com/library/windows/apps/br229775)  
-[WinJS.Promise](http://msdn.microsoft.com/library/windows/apps/br211867)  
-[ListView](http://msdn.microsoft.com/library/windows/apps/br211837)  
-[Template](http://msdn.microsoft.com/library/windows/apps/br229723)  
-[SemanticZoom](http://msdn.microsoft.com/library/windows/apps/br229690)  
+[WinJS.Application Namespace](https://msdn.microsoft.com/library/windows/apps/br229774)  
+[WinJS.Class Namespace](https://msdn.microsoft.com/library/windows/apps/br229776)  
+[WinJS.Utilities Namespace](https://msdn.microsoft.com/library/windows/apps/br229783)  
+[WinJS.Namespace Namespace](https://msdn.microsoft.com/library/windows/apps/br212652)  
+[WinJS.Navigation Namespace](https://msdn.microsoft.com/library/windows/apps/br229778)  
+[Windows.ApplicationModel.Activation Namespace](https://msdn.microsoft.com/library/windows/apps/br224766)  
+[WinJS.Binding Namespace](https://msdn.microsoft.com/library/windows/apps/br229775)  
+[WinJS.Promise](https://msdn.microsoft.com/library/windows/apps/br211867)  
+[ListView](https://msdn.microsoft.com/library/windows/apps/br211837)  
+[Template](https://msdn.microsoft.com/library/windows/apps/br229723)  
+[SemanticZoom](https://msdn.microsoft.com/library/windows/apps/br229690)  
 
 ## Operating system requirements
 

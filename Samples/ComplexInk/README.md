@@ -15,7 +15,7 @@ copy/paste, and event handling.  It is built upon the Universal Windows Platform
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-Specifically, this sample covers using the [Windows.UI.Input.Inking](http://msdn.microsoft.com/library/windows/apps/br208524) APIs to:
+Specifically, this sample covers using the [Windows.UI.Input.Inking](https://msdn.microsoft.com/library/windows/apps/br208524) APIs to:
 -   Render ink strokes onto app specified VSIS surface
 -   Erase ink strokes via mode toggle or eraser button
 -   Select ink strokes via mode toggle or barrel button drag
@@ -39,11 +39,11 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 ## Related topics
 --------------
 
-[Getting started with apps](http://msdn.microsoft.com/library/windows/apps/)  
+[Getting started with apps](https://msdn.microsoft.com/library/windows/apps/)  
 
 ## Reference
 
-[Windows.UI.Input.Inking](http://msdn.microsoft.com/library/windows/apps/br208524)  
+[Windows.UI.Input.Inking](https://msdn.microsoft.com/library/windows/apps/br208524)  
 
 ## Operating system requirements
 -----------------------------

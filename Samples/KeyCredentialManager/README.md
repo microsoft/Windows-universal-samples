@@ -27,7 +27,7 @@ Shows the account lifecycle for an existing app user utilizing Passport. This in
 Related topics
 --------------
 
-[Windows.Security.Credentials](http://msdn.microsoft.com/library/windows/apps/br227089)  
+[Windows.Security.Credentials](https://msdn.microsoft.com/library/windows/apps/br227089)  
 
 Operating system requirements
 -----------------------------

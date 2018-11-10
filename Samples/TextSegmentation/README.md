@@ -6,7 +6,7 @@
 # Text segmentation sample
 
 Shows how to identify separate boundaries of individual words in text, called text segments, for any given language. The sample uses the 
-[Windows.Data.Text](http://msdn.microsoft.com/library/windows/apps/dn263535) namespace.
+[Windows.Data.Text](https://msdn.microsoft.com/library/windows/apps/dn263535) namespace.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 

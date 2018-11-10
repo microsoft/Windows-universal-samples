@@ -14,10 +14,10 @@ Shows how to read structured data from a file and write compressed data to a new
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-Many apps need to compress and decompress data. The [Windows.Storage.Compression](http://msdn.microsoft.com/library/windows/apps/br207698) 
+Many apps need to compress and decompress data. The [Windows.Storage.Compression](https://msdn.microsoft.com/library/windows/apps/br207698) 
 namespace simplifies this task by providing a unified interface that exposes the MSZIP, XPRESS, XPRESS\_HUFF, and LZMS compression algorithms. 
 This lets you manage versions, service, and extend the exposed compression algorithms and frees you from responsibility for managing block sizes, 
-compression parameters, and other details that the native [Compression API](http://msdn.microsoft.com/library/windows/apps/hh437596) requires. 
+compression parameters, and other details that the native [Compression API](https://msdn.microsoft.com/library/windows/apps/hh437596) requires. 
 A subset of [Win32 and COM for apps](http://go.microsoft.com/fwlink/p/?linkid=246262) can be used by apps to support scenarios not already covered 
 by the Windows Runtime, HTML/Cascading Style Sheets (CSS), or other supported languages or standards. For this purpose, you can also use the native 
 Compression API to develop apps.

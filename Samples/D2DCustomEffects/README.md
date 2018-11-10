@@ -5,7 +5,7 @@
 
 # Direct2D custom image effects sample
 
-Shows how to implement [custom Direct2D effects](http://msdn.microsoft.com/library/windows/desktop/jj710194) using HLSL pixel, vertex, and compute shaders.
+Shows how to implement [custom Direct2D effects](https://msdn.microsoft.com/library/windows/desktop/jj710194) using HLSL pixel, vertex, and compute shaders.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -67,23 +67,23 @@ Variants of the following files are found in every UWP app written in C++:
 
 ### Feature areas
 
-[Direct2D effects](http://msdn.microsoft.com/library/windows/desktop/hh706327): provides built-in effects and the ability to create custom effects.  
-[Direct2D](http://msdn.microsoft.com/library/windows/desktop/dd370990): used to render images, primitives, and text.  
-[Windows Imaging Component (WIC)](http://msdn.microsoft.com/library/windows/desktop/ee719655): used to load, scale, and convert the images.  
+[Direct2D effects](https://msdn.microsoft.com/library/windows/desktop/hh706327): provides built-in effects and the ability to create custom effects.  
+[Direct2D](https://msdn.microsoft.com/library/windows/desktop/dd370990): used to render images, primitives, and text.  
+[Windows Imaging Component (WIC)](https://msdn.microsoft.com/library/windows/desktop/ee719655): used to load, scale, and convert the images.  
 
 ### Reference
 
 Custom effect interfaces:
 
-[ID2D1EffectContext](http://msdn.microsoft.com/library/windows/desktop/hh404459)  
-[ID2D1EffectImpl](http://msdn.microsoft.com/library/windows/desktop/hh404568)  
-[ID2D1Transform](http://msdn.microsoft.com/library/windows/desktop/hh446919)  
+[ID2D1EffectContext](https://msdn.microsoft.com/library/windows/desktop/hh404459)  
+[ID2D1EffectImpl](https://msdn.microsoft.com/library/windows/desktop/hh404568)  
+[ID2D1Transform](https://msdn.microsoft.com/library/windows/desktop/hh446919)  
 
 Related DirectX app APIs:
 
-[ID2D1DeviceContext](http://msdn.microsoft.com/library/windows/desktop/hh404479)  
-[IDXGIFactory2::CreateSwapChainForCoreWindow](http://msdn.microsoft.com/library/windows/desktop/hh404559)  
-[CoreWindow](http://msdn.microsoft.com/library/windows/apps/br208225)  
+[ID2D1DeviceContext](https://msdn.microsoft.com/library/windows/desktop/hh404479)  
+[IDXGIFactory2::CreateSwapChainForCoreWindow](https://msdn.microsoft.com/library/windows/desktop/hh404559)  
+[CoreWindow](https://msdn.microsoft.com/library/windows/apps/br208225)  
 
 ## System requirements
 

@@ -5,7 +5,7 @@
 
 # Windows audio session (WASAPI) sample
 
-Shows how to do various audio related tasks using the [Windows Audio Session API (WASAPI)](http://msdn.microsoft.com/library/windows/apps/dd371455).
+Shows how to do various audio related tasks using the [Windows Audio Session API (WASAPI)](https://msdn.microsoft.com/library/windows/apps/dd371455).
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -23,7 +23,7 @@ Specifically, this sample covers:
 -   Capture of PCM audio using the **Windows Audio Session APIs**.
 -   Low latency audio playback and capture.
 
-For more information on adding audio to your app, see [Quickstart: adding audio to an app](http://msdn.microsoft.com/library/windows/apps/hh452730).
+For more information on adding audio to your app, see [Quickstart: adding audio to an app](https://msdn.microsoft.com/library/windows/apps/hh452730).
 
 Playing audio in the background is supported by the Windows Audio Session API
 only in communication scenarios as demonstrated by the [VoIP](/Samples/VoIP) sample.
@@ -40,16 +40,16 @@ use the MediaPlayer class demonstrated in the [Background Media Playback](/Sampl
 ### Roadmaps
 
 [Audio, video, and camera](https://msdn.microsoft.com/library/windows/apps/mt203788)  
-[Designing UX for apps](http://msdn.microsoft.com/library/windows/apps/hh767284)  
-[Roadmap for apps using C\# and Visual Basic](http://msdn.microsoft.com/library/windows/apps/br229583)  
-[Roadmap for apps using C++](http://msdn.microsoft.com/library/windows/apps/hh700360)  
-[Roadmap for apps using JavaScript](http://msdn.microsoft.com/library/windows/apps/hh465037)  
+[Designing UX for apps](https://msdn.microsoft.com/library/windows/apps/hh767284)  
+[Roadmap for apps using C\# and Visual Basic](https://msdn.microsoft.com/library/windows/apps/br229583)  
+[Roadmap for apps using C++](https://msdn.microsoft.com/library/windows/apps/hh700360)  
+[Roadmap for apps using JavaScript](https://msdn.microsoft.com/library/windows/apps/hh465037)  
 
 ### Reference
 
-[Windows Audio Session API (WASAPI)](http://msdn.microsoft.com/library/windows/apps/dd371455)  
-[Core Audio APIs](http://msdn.microsoft.com/library/windows/apps/dd370802)  
-[Media Foundation](http://msdn.microsoft.com/library/windows/apps/ms694197)  
+[Windows Audio Session API (WASAPI)](https://msdn.microsoft.com/library/windows/apps/dd371455)  
+[Core Audio APIs](https://msdn.microsoft.com/library/windows/apps/dd370802)  
+[Media Foundation](https://msdn.microsoft.com/library/windows/apps/ms694197)  
 
 ## Operating system requirements
 

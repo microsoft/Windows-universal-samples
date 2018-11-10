@@ -14,8 +14,8 @@ Shows how to imitate the splash screen that Windows displays for your app by pos
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-This sample uses the [SplashScreen](http://msdn.microsoft.com/library/windows/apps/br224763) class in the 
-[Windows.ApplicationModel.Activation](http://msdn.microsoft.com/library/windows/apps/br224766) namespace.
+This sample uses the [SplashScreen](https://msdn.microsoft.com/library/windows/apps/br224763) class in the 
+[Windows.ApplicationModel.Activation](https://msdn.microsoft.com/library/windows/apps/br224766) namespace.
 
 This sample demonstrates these tasks:
 
@@ -24,9 +24,9 @@ This sample demonstrates these tasks:
 
 Important APIs in this sample include:
 
--   JavaScript: [onactivated](http://msdn.microsoft.com/library/windows/apps/br212679) event
--   C#/C++/VB: [Activated](http://msdn.microsoft.com/library/windows/apps/br225018) event 
--   [SplashScreen](http://msdn.microsoft.com/library/windows/apps/br224763) class
+-   JavaScript: [onactivated](https://msdn.microsoft.com/library/windows/apps/br212679) event
+-   C#/C++/VB: [Activated](https://msdn.microsoft.com/library/windows/apps/br225018) event 
+-   [SplashScreen](https://msdn.microsoft.com/library/windows/apps/br224763) class
 
 To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windows.com). 
 
@@ -37,8 +37,8 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 ### Reference
 
 [Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
-[Adding a splash screen (Windows Runtime apps using JavaScript and HTML)](http://msdn.microsoft.com/library/windows/apps/hh465332)  
-[Adding a splash screen (Windows Runtime apps using C#/VB/C++ and XAML)](http://msdn.microsoft.com/library/windows/apps/hh465331)  
+[Adding a splash screen (Windows Runtime apps using JavaScript and HTML)](https://msdn.microsoft.com/library/windows/apps/hh465332)  
+[Adding a splash screen (Windows Runtime apps using C#/VB/C++ and XAML)](https://msdn.microsoft.com/library/windows/apps/hh465331)  
 
 ### Related samples
 
@@ -47,7 +47,7 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 
 ### Related technologies
 
-[Windows.ApplicationModel.Activation.SplashScreen class](http://msdn.microsoft.com/library/windows/apps/br224763)  
+[Windows.ApplicationModel.Activation.SplashScreen class](https://msdn.microsoft.com/library/windows/apps/br224763)  
 
 ## System requirements
 

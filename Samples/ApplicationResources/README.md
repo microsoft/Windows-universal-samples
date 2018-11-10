@@ -14,10 +14,10 @@ Shows how to use application resources to separate localizable content from app 
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-The sample uses the [Windows.ApplicationModel.Resources.Core](http://msdn.microsoft.com/library/windows/apps/br225039) and 
-[Windows.Globalization](http://msdn.microsoft.com/library/windows/apps/br206813) namespaces, and [WinJS.Resources](http://msdn.microsoft.com/library/windows/apps/br229779).
+The sample uses the [Windows.ApplicationModel.Resources.Core](https://msdn.microsoft.com/library/windows/apps/br225039) and 
+[Windows.Globalization](https://msdn.microsoft.com/library/windows/apps/br206813) namespaces, and [WinJS.Resources](https://msdn.microsoft.com/library/windows/apps/br229779).
 
-We encourage you to separate your resources, such as strings and files, from your app code, so you can maintain and alter your resources independently. You can use [Application Resources](http://msdn.microsoft.com/library/windows/apps/br225039) APIs to tailor your apps to a variety of device, system, and user configurations. Resources enable apps to be localized into multiple languages, customized for various device DPIs and form factors, and tailored for specific types of users.
+We encourage you to separate your resources, such as strings and files, from your app code, so you can maintain and alter your resources independently. You can use [Application Resources](https://msdn.microsoft.com/library/windows/apps/br225039) APIs to tailor your apps to a variety of device, system, and user configurations. Resources enable apps to be localized into multiple languages, customized for various device DPIs and form factors, and tailored for specific types of users.
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  
@@ -28,12 +28,12 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 ## Related topics
 
 [Creating and retrieving resources in Windows apps](http://go.microsoft.com/fwlink/p/?linkid=251463)  
-[ResourceLoader class](http://msdn.microsoft.com/library/windows/apps/br206014)  
-[ResourceManager class](http://msdn.microsoft.com/library/windows/apps/br206078)  
-[Windows.ApplicationModel.Resources.Core namespace](http://msdn.microsoft.com/library/windows/apps/br225039)  
-[Windows.Globalization namespace](http://msdn.microsoft.com/library/windows/apps/br206813)  
+[ResourceLoader class](https://msdn.microsoft.com/library/windows/apps/br206014)  
+[ResourceManager class](https://msdn.microsoft.com/library/windows/apps/br206078)  
+[Windows.ApplicationModel.Resources.Core namespace](https://msdn.microsoft.com/library/windows/apps/br225039)  
+[Windows.Globalization namespace](https://msdn.microsoft.com/library/windows/apps/br206813)  
 [Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
-[WinJS.Resources namespace](http://msdn.microsoft.com/library/windows/apps/br229779)  
+[WinJS.Resources namespace](https://msdn.microsoft.com/library/windows/apps/br229779)  
 
 ## System requirements
 

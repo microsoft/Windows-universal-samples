@@ -43,7 +43,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[Windows.Devices.PointOfService](http://msdn.microsoft.com/library/windows/apps/dn298071)
+[Windows.Devices.PointOfService](https://msdn.microsoft.com/library/windows/apps/dn298071)
 
 [Windows app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
 

@@ -16,10 +16,10 @@ Shows how to get text suggestion (including Conversion, Prediction, Reverse Conv
 
 ## Reference
 
-[Windows.Data.Text](http://msdn.microsoft.com/library/windows/apps/dn263535)  
-[TextConversionGenerator class](http://msdn.microsoft.com/library/windows/apps/xaml/windows.data.text.textconversiongenerator.aspx)  
-[TextPredictionGenerator class](http://msdn.microsoft.com/library/windows/apps/xaml/windows.data.text.textpredictiongenerator.aspx)  
-[TextReverseConversionGenerator class](http://msdn.microsoft.com/library/windows/apps/xaml/windows.data.text.textreverseconversiongenerator.aspx)  
+[Windows.Data.Text](https://msdn.microsoft.com/library/windows/apps/dn263535)  
+[TextConversionGenerator class](https://msdn.microsoft.com/library/windows/apps/xaml/windows.data.text.textconversiongenerator.aspx)  
+[TextPredictionGenerator class](https://msdn.microsoft.com/library/windows/apps/xaml/windows.data.text.textpredictiongenerator.aspx)  
+[TextReverseConversionGenerator class](https://msdn.microsoft.com/library/windows/apps/xaml/windows.data.text.textreverseconversiongenerator.aspx)  
 
 ## Operating system requirements
 

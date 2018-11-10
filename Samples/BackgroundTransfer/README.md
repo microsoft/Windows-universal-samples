@@ -14,11 +14,11 @@ Shows how to use the Background Transfer API to download and upload files in the
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-Classes in the [Windows.Networking.BackgroundTransfer](http://msdn.microsoft.com/library/windows/apps/br207242) namespace provide a power-friendly, cost-aware, and flexible API for transferring files in the background. This sample shows how to download and upload files using the Background Transfer API.
+Classes in the [Windows.Networking.BackgroundTransfer](https://msdn.microsoft.com/library/windows/apps/br207242) namespace provide a power-friendly, cost-aware, and flexible API for transferring files in the background. This sample shows how to download and upload files using the Background Transfer API.
 
-For the download scenario, the sample first uses methods on [BackgroundDownloader](http://msdn.microsoft.com/library/windows/apps/br207126) class to enumerate any downloads that were going on in the background while the app was closed. An app should enumerate these downloads when it gets started so it can attach a progress handler to these downloads to track progress and prevent stale downloads. Then other methods on the **BackgroundDownloader** and related classes are used to start new downloads to the local Pictures Library. The sample also shows how to pause downloads and change the priority of a download.
+For the download scenario, the sample first uses methods on [BackgroundDownloader](https://msdn.microsoft.com/library/windows/apps/br207126) class to enumerate any downloads that were going on in the background while the app was closed. An app should enumerate these downloads when it gets started so it can attach a progress handler to these downloads to track progress and prevent stale downloads. Then other methods on the **BackgroundDownloader** and related classes are used to start new downloads to the local Pictures Library. The sample also shows how to pause downloads and change the priority of a download.
 
-For the upload scenario, the sample first uses methods on [BackgroundUploader](http://msdn.microsoft.com/library/windows/apps/br207140) class to enumerate any uploads that were going on in the background while the app was closed. An app should enumerate these uploads when it gets started so it can attach a progress handler to these uploads to track progress and prevent stale uploads. Then other methods on the **BackgroundUploader** and related classes are used to start new uploads. The sample also shows how to set a content header and use a multipart upload.
+For the upload scenario, the sample first uses methods on [BackgroundUploader](https://msdn.microsoft.com/library/windows/apps/br207140) class to enumerate any uploads that were going on in the background while the app was closed. An app should enumerate these uploads when it gets started so it can attach a progress handler to these uploads to track progress and prevent stale uploads. Then other methods on the **BackgroundUploader** and related classes are used to start new uploads. The sample also shows how to set a content header and use a multipart upload.
 
 The sample also showcases several advanced usage scenarios:
 -   Configuring toast and tile notifications to inform the user when all transfers succeed or when at least one transfer fails.
@@ -26,7 +26,7 @@ The sample also showcases several advanced usage scenarios:
 -   Accessing file content and seeking within that content while a download is still ongoing, effectively altering the order in which remote file data is requested from the server.
 -   Recovering from a failed download without losing already-downloaded data.
 
-**Note**  Background transfer is primarily designed for long-term transfer operations for resources like video, music, and large images. For short-term operations involving transfers of smaller resources (i.e. a few KB), the HTTP APIs are recommended. [HttpClient](http://msdn.microsoft.com/library/windows/apps/dn298639) is preferred and can be used in all languages supported by UWP apps. [XHR](http://msdn.microsoft.com/library/windows/apps/br229787) can be used in JavaScript. [IXHR2](http://msdn.microsoft.com/library/windows/apps/hh770550) can be used in C++.
+**Note**  Background transfer is primarily designed for long-term transfer operations for resources like video, music, and large images. For short-term operations involving transfers of smaller resources (i.e. a few KB), the HTTP APIs are recommended. [HttpClient](https://msdn.microsoft.com/library/windows/apps/dn298639) is preferred and can be used in all languages supported by UWP apps. [XHR](https://msdn.microsoft.com/library/windows/apps/br229787) can be used in JavaScript. [IXHR2](https://msdn.microsoft.com/library/windows/apps/hh770550) can be used in C++.
 
 This sample requires the following capabilities:
 
@@ -34,7 +34,7 @@ This sample requires the following capabilities:
 -   **Private Networks (Client & Server)** - Needed to send requests to download or upload files to HTTP or FTP servers on a home or work intranet.
 -   **Pictures Library** - Needed to downloads files to the Pictures library.
 
-For more information on network capabilities, see [How to set network capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532).
+For more information on network capabilities, see [How to set network capabilities](https://msdn.microsoft.com/library/windows/apps/hh770532).
 
 **Note**  Network communications using an IP loopback address cannot normally be used for interprocess communication between a UWP app and a different process (a different UWP app or a desktop app) because this is restricted by network isolation. Network communication using an IP loopback address is allowed within the same process for communication purposes in a UWP app.
 
@@ -44,21 +44,21 @@ For more information on network capabilities, see [How to set network capabiliti
 
 ### Other resources
 
-[Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)  
-[How to configure network isolation capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)  
-[Quickstart: Downloading a file](http://msdn.microsoft.com/library/windows/apps/hh700370)  
-[Quickstart: Uploading a file](http://msdn.microsoft.com/library/windows/apps/hh700372)  
-[Transferring a file from a network resource](http://msdn.microsoft.com/library/windows/apps/hh761434)  
+[Adding support for networking](https://msdn.microsoft.com/library/windows/apps/hh452752)  
+[How to configure network isolation capabilities](https://msdn.microsoft.com/library/windows/apps/hh770532)  
+[Quickstart: Downloading a file](https://msdn.microsoft.com/library/windows/apps/hh700370)  
+[Quickstart: Uploading a file](https://msdn.microsoft.com/library/windows/apps/hh700372)  
+[Transferring a file from a network resource](https://msdn.microsoft.com/library/windows/apps/hh761434)  
 
 ### Reference
 
-[BackgroundDownloader](http://msdn.microsoft.com/library/windows/apps/br207126)  
-[BackgroundUploader](http://msdn.microsoft.com/library/windows/apps/br207140)  
-[HttpClient](http://msdn.microsoft.com/library/windows/apps/dn298639)  
-[IXHR2](http://msdn.microsoft.com/library/windows/apps/hh770550)  
-[Windows.Networking.BackgroundTransfer](http://msdn.microsoft.com/library/windows/apps/br207242)  
-[Windows.Storage](http://msdn.microsoft.com/library/windows/apps/br227346)  
-[XHR](http://msdn.microsoft.com/library/windows/apps/br229787)  
+[BackgroundDownloader](https://msdn.microsoft.com/library/windows/apps/br207126)  
+[BackgroundUploader](https://msdn.microsoft.com/library/windows/apps/br207140)  
+[HttpClient](https://msdn.microsoft.com/library/windows/apps/dn298639)  
+[IXHR2](https://msdn.microsoft.com/library/windows/apps/hh770550)  
+[Windows.Networking.BackgroundTransfer](https://msdn.microsoft.com/library/windows/apps/br207242)  
+[Windows.Storage](https://msdn.microsoft.com/library/windows/apps/br227346)  
+[XHR](https://msdn.microsoft.com/library/windows/apps/br229787)  
 
 ## System requirements
 
@@ -114,7 +114,7 @@ The sample must also be updated when run against a non-localhost web server. To 
 
 **Note**  IIS is not available on ARM builds nor on Windows Phone. Instead, set up the web server on a separate 64-bit or 32-bit computer and follow the steps for using the sample against a non-localhost web server.
 
-**Note**  When used with the supplied scripts, this app sample communicates with another process (IIS server which is a desktop app) on the same machine over loopback for demonstration purposes only. A UWP app that communicates over loopback to another process that represents a UWP app or a desktop app is not allowed and such apps will not pass Microsoft Store validation. For more information, see [How to enable loopback and troubleshoot network isolation](http://msdn.microsoft.com/library/windows/apps/hh780593).
+**Note**  When used with the supplied scripts, this app sample communicates with another process (IIS server which is a desktop app) on the same machine over loopback for demonstration purposes only. A UWP app that communicates over loopback to another process that represents a UWP app or a desktop app is not allowed and such apps will not pass Microsoft Store validation. For more information, see [How to enable loopback and troubleshoot network isolation](https://msdn.microsoft.com/library/windows/apps/hh780593).
 
 However if a server different than IIS is used, then this requires some special configuration of the server to create the *BackgroundTransferSample* folder.
 

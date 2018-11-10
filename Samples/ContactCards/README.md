@@ -57,9 +57,9 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[Contact](http://msdn.microsoft.com/library/windows/apps/br224849)  
-[ContactCardDelayedDataLoader](http://msdn.microsoft.com/library/windows/apps/dn297400)  
-[Windows.ApplicationModel.Contacts](http://msdn.microsoft.com/library/windows/apps/br225002)  
+[Contact](https://msdn.microsoft.com/library/windows/apps/br224849)  
+[ContactCardDelayedDataLoader](https://msdn.microsoft.com/library/windows/apps/dn297400)  
+[Windows.ApplicationModel.Contacts](https://msdn.microsoft.com/library/windows/apps/br225002)  
 
 ## System requirements
 

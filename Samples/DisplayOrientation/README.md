@@ -5,7 +5,7 @@
 
 # Display orientation sample
 
-Shows how to use the [DisplayInformation](http://msdn.microsoft.com/library/windows/apps/dn264258)
+Shows how to use the [DisplayInformation](https://msdn.microsoft.com/library/windows/apps/dn264258)
 class for retrieving the display orientation and setting an app's auto-rotation orientation preferences.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
@@ -41,8 +41,8 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[Windows.Graphics.Display namespace](http://msdn.microsoft.com/library/windows/apps/windows.graphics.display.aspx)  
-[DisplayInformation class](http://msdn.microsoft.com/library/windows/apps/dn264258)  
+[Windows.Graphics.Display namespace](https://msdn.microsoft.com/library/windows/apps/windows.graphics.display.aspx)  
+[DisplayInformation class](https://msdn.microsoft.com/library/windows/apps/dn264258)  
 
 ## System requirements
 

@@ -6,8 +6,8 @@
 # Sharing content target app sample
 
 Shows how an app receives content shared from another app. This sample uses classes from the 
-[Windows.ApplicationModel.DataTransfer](http://msdn.microsoft.com/library/windows/apps/br205967) and 
-[Windows.ApplicationModel.DataTransfer.Share](http://msdn.microsoft.com/library/windows/apps/br205989) namespaces. 
+[Windows.ApplicationModel.DataTransfer](https://msdn.microsoft.com/library/windows/apps/br205967) and 
+[Windows.ApplicationModel.DataTransfer.Share](https://msdn.microsoft.com/library/windows/apps/br205989) namespaces. 
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -16,8 +16,8 @@ Shows how an app receives content shared from another app. This sample uses clas
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-Some of the classes you might want to review in more detail are the [ShareOperation](http://msdn.microsoft.com/library/windows/apps/br205977) 
-class, which you use to manage a share operation, and the [DataPackageView](http://msdn.microsoft.com/library/windows/apps/hh738408) class, 
+Some of the classes you might want to review in more detail are the [ShareOperation](https://msdn.microsoft.com/library/windows/apps/br205977) 
+class, which you use to manage a share operation, and the [DataPackageView](https://msdn.microsoft.com/library/windows/apps/hh738408) class, 
 which you use to get the content being shared. Because each share scenario usually involves two apps—the source app that provides the content 
 and a target app that receives the content—we recommend you install and deploy the 
 [Sharing content source app sample](http://go.microsoft.com/fwlink/p/?linkid=231511) when you install and run this one. 
@@ -36,23 +36,23 @@ This sample covers how to receive shared content in a variety of formats, includ
 
 Also, this sample shows how to display the source app's 30x30 logo and the source app's package family name.
 
-We also recommend you take a look at the  [Sharing and exchanging data](http://msdn.microsoft.com/library/windows/apps/hh464923) section of our documentation, which describes how sharing works and contains several how-to topics that cover how to share [text](http://msdn.microsoft.com/library/windows/apps/hh758313), an  [image](http://msdn.microsoft.com/library/windows/apps/hh758305), files, and other formats. Our  [Guidelines and checklist for sharing content](http://msdn.microsoft.com/library/windows/apps/hh465251) can also help you create a great user experience with the share feature. 
+We also recommend you take a look at the  [Sharing and exchanging data](https://msdn.microsoft.com/library/windows/apps/hh464923) section of our documentation, which describes how sharing works and contains several how-to topics that cover how to share [text](https://msdn.microsoft.com/library/windows/apps/hh758313), an  [image](https://msdn.microsoft.com/library/windows/apps/hh758305), files, and other formats. Our  [Guidelines and checklist for sharing content](https://msdn.microsoft.com/library/windows/apps/hh465251) can also help you create a great user experience with the share feature. 
 
 For more info about the concepts and APIs demonstrated in this sample, see these topics:
 
 - [Sharing content source app sample](http://go.microsoft.com/fwlink/p/?linkid=231511)
-- [Sharing and exchanging data](http://msdn.microsoft.com/library/windows/apps/hh464923)
-- [How to receive files (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758302)
-- [How to receive HTML (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758303)
-- [How to receive HTML (XAML)](http://msdn.microsoft.com/library/windows/apps/hh973053)
-- [How to receive text (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758304)
-- [How to receive text (XAML)](http://msdn.microsoft.com/library/windows/apps/hh973054)
-- [Quickstart: Receiving shared content (HTML)](http://msdn.microsoft.com/library/windows/apps/hh465255)
+- [Sharing and exchanging data](https://msdn.microsoft.com/library/windows/apps/hh464923)
+- [How to receive files (HTML)](https://msdn.microsoft.com/library/windows/apps/hh758302)
+- [How to receive HTML (HTML)](https://msdn.microsoft.com/library/windows/apps/hh758303)
+- [How to receive HTML (XAML)](https://msdn.microsoft.com/library/windows/apps/hh973053)
+- [How to receive text (HTML)](https://msdn.microsoft.com/library/windows/apps/hh758304)
+- [How to receive text (XAML)](https://msdn.microsoft.com/library/windows/apps/hh973054)
+- [Quickstart: Receiving shared content (HTML)](https://msdn.microsoft.com/library/windows/apps/hh465255)
 - [Receive data](https://msdn.microsoft.com/library/windows/apps/mt243292)
-- [DataPackageView](http://msdn.microsoft.com/library/windows/apps/hh738408)
-- [ShareOperation](http://msdn.microsoft.com/library/windows/apps/br205977)
-- [Windows.ApplicationModel.DataTransfer](http://msdn.microsoft.com/library/windows/apps/br205967)
-- [Windows.ApplicationModel.DataTransfer.Share](http://msdn.microsoft.com/library/windows/apps/br205989)
+- [DataPackageView](https://msdn.microsoft.com/library/windows/apps/hh738408)
+- [ShareOperation](https://msdn.microsoft.com/library/windows/apps/br205977)
+- [Windows.ApplicationModel.DataTransfer](https://msdn.microsoft.com/library/windows/apps/br205967)
+- [Windows.ApplicationModel.DataTransfer.Share](https://msdn.microsoft.com/library/windows/apps/br205989)
 
 
 

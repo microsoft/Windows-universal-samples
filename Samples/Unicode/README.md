@@ -5,7 +5,7 @@
 
 # Unicode string processing sample
 
-Shows how to use the [UnicodeCharacters](http://msdn.microsoft.com/library/windows/apps/dn263490) class in processing Unicode properties in a string. 
+Shows how to use the [UnicodeCharacters](https://msdn.microsoft.com/library/windows/apps/dn263490) class in processing Unicode properties in a string. 
 The sample focuses on a subset of the property methods in the class, since their usage pattern is the same. Nonetheless, it does demonstrate how to 
 handle characters in the supplementary plane.
 
@@ -30,7 +30,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[UnicodeCharacters](http://msdn.microsoft.com/library/windows/apps/dn263490)  
+[UnicodeCharacters](https://msdn.microsoft.com/library/windows/apps/dn263490)  
 
 ## System requirements
 

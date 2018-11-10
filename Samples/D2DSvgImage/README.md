@@ -5,7 +5,7 @@
 
 # Direct2D SVG image rendering sample
 
-Shows how to use [Direct2D](http://msdn.microsoft.com/library/windows/desktop/dd370990) to draw and manipulate SVG images programmatically.
+Shows how to use [Direct2D](https://msdn.microsoft.com/library/windows/desktop/dd370990) to draw and manipulate SVG images programmatically.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -52,7 +52,7 @@ Variants of the following files are found in every UWP app written in C++:
 
 ### Feature areas
 
-[Direct2D](http://msdn.microsoft.com/library/windows/desktop/dd370990): used to render images, primitives, and text.  
+[Direct2D](https://msdn.microsoft.com/library/windows/desktop/dd370990): used to render images, primitives, and text.  
 [XAML overview](https://msdn.microsoft.com/library/windows/apps/mt185595): technology for building user interfaces in managed and C++ code.  
 
 ### Reference

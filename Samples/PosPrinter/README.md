@@ -5,7 +5,7 @@
 
 # POS printer sample
 
-Shows how to use the [Windows.Devices.PointOfService.PosPrinter](http://msdn.microsoft.com/library/windows/apps/dn298071) API.
+Shows how to use the [Windows.Devices.PointOfService.PosPrinter](https://msdn.microsoft.com/library/windows/apps/dn298071) API.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -35,7 +35,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[Windows.Devices.PointOfService](http://msdn.microsoft.com/library/windows/apps/dn298071)  
+[Windows.Devices.PointOfService](https://msdn.microsoft.com/library/windows/apps/dn298071)  
 [Windows app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 
 ## System requirements

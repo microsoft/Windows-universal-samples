@@ -45,7 +45,7 @@ Visual Studio and the Microsoft HoloLens Emulator, go to
 [Mixed Reality Development](https://developer.microsoft.com/en-us/windows/mixed-reality/development)  
 [Creating a Holographic DirextX Project](https://developer.microsoft.com/en-us/windows/mixed-reality/creating_a_holographic_directx_project)  
 [Using XAML with Holographic DirectX Apps](https://developer.microsoft.com/en-us/windows/mixed-reality/using_xaml_with_holographic_directx_apps)  
-[ApplicationViewSwitcher](http://msdn.microsoft.com/library/windows/apps/dn281094)  
+[ApplicationViewSwitcher](https://msdn.microsoft.com/library/windows/apps/dn281094)  
 
 ## System requirements
 

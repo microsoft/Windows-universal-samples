@@ -5,7 +5,7 @@
 
 # Message dialog sample
 
-Shows how to use a [MessageDialog](http://msdn.microsoft.com/library/windows/apps/br208674) for displaying dialogs, setting commands and the actions they will perform, 
+Shows how to use a [MessageDialog](https://msdn.microsoft.com/library/windows/apps/br208674) for displaying dialogs, setting commands and the actions they will perform, 
 and changing the default button.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
@@ -15,7 +15,7 @@ and changing the default button.
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-The [Windows.UI.Popups](http://msdn.microsoft.com/library/windows/apps/br242180) namespace contains the [MessageDialog](http://msdn.microsoft.com/library/windows/apps/br208674) 
+The [Windows.UI.Popups](https://msdn.microsoft.com/library/windows/apps/br242180) namespace contains the [MessageDialog](https://msdn.microsoft.com/library/windows/apps/br208674) 
 class. You can use this class to present an urgent message that the user must acknowledge before continuing, or to present an urgent question that the user must answer.
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
@@ -26,7 +26,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-[Adding message dialogs](http://msdn.microsoft.com/library/windows/apps/hh738361)  
+[Adding message dialogs](https://msdn.microsoft.com/library/windows/apps/hh738361)  
 
 ## System requirements
 

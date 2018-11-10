@@ -17,13 +17,13 @@ Shows how to use the UserConsentVerifier class to check whether a verifier devic
 Related topics
 --------------
 
-[UserConsentVerifier](http://msdn.microsoft.com/library/windows/apps/dn279134)  
+[UserConsentVerifier](https://msdn.microsoft.com/library/windows/apps/dn279134)  
 
 Related technologies
 --------------------
 
-[Windows.Security.Credentials.UI](http://msdn.microsoft.com/library/windows/apps/hh701356)  
-[Windows.Security.Credentials.UI.UserConsentVerifier](http://msdn.microsoft.com/library/windows/apps/dn279134)  
+[Windows.Security.Credentials.UI](https://msdn.microsoft.com/library/windows/apps/hh701356)  
+[Windows.Security.Credentials.UI.UserConsentVerifier](https://msdn.microsoft.com/library/windows/apps/dn279134)  
 
 Operating system requirements
 -----------------------------

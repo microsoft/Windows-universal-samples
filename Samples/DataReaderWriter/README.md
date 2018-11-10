@@ -5,8 +5,8 @@
 
 # Serializing and deserializing data sample
 
-Shows how to use the [DataReader](http://msdn.microsoft.com/library/windows/apps/br208119) and 
-[DataWriter](http://msdn.microsoft.com/library/windows/apps/br208154) classes to store and retrieve data.  
+Shows how to use the [DataReader](https://msdn.microsoft.com/library/windows/apps/br208119) and 
+[DataWriter](https://msdn.microsoft.com/library/windows/apps/br208154) classes to store and retrieve data.  
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -17,8 +17,8 @@ Shows how to use the [DataReader](http://msdn.microsoft.com/library/windows/apps
 
 Specifically, this sample shows how to:
 
--   Create a memory-backed stream by using the [InMemoryRandomAccessStream](http://msdn.microsoft.com/library/windows/apps/br241720) class and storing strings by using a [DataWriter](http://msdn.microsoft.com/library/windows/apps/br208154) object. When the write operation completes, a [DataReader](http://msdn.microsoft.com/library/windows/apps/br208119) object extracts the stored strings from the stream and displays them.
--   Open a sequential-access stream over an image by using the [OpenSequentialReadAsync](http://msdn.microsoft.com/library/windows/apps/hh701853) and [ReadBytes](http://msdn.microsoft.com/library/windows/apps/br208139) methods to retrieve and display its binary data.
+-   Create a memory-backed stream by using the [InMemoryRandomAccessStream](https://msdn.microsoft.com/library/windows/apps/br241720) class and storing strings by using a [DataWriter](https://msdn.microsoft.com/library/windows/apps/br208154) object. When the write operation completes, a [DataReader](https://msdn.microsoft.com/library/windows/apps/br208119) object extracts the stored strings from the stream and displays them.
+-   Open a sequential-access stream over an image by using the [OpenSequentialReadAsync](https://msdn.microsoft.com/library/windows/apps/hh701853) and [ReadBytes](https://msdn.microsoft.com/library/windows/apps/br208139) methods to retrieve and display its binary data.
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  
@@ -28,14 +28,14 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-[DataReader](http://msdn.microsoft.com/library/windows/apps/br208119)  
-[DataWriter](http://msdn.microsoft.com/library/windows/apps/br208154)  
-[OpenSequentialReadAsync](http://msdn.microsoft.com/library/windows/apps/hh701853)  
-[InMemoryRandomAccessStream](http://msdn.microsoft.com/library/windows/apps/br241720)  
+[DataReader](https://msdn.microsoft.com/library/windows/apps/br208119)  
+[DataWriter](https://msdn.microsoft.com/library/windows/apps/br208154)  
+[OpenSequentialReadAsync](https://msdn.microsoft.com/library/windows/apps/hh701853)  
+[InMemoryRandomAccessStream](https://msdn.microsoft.com/library/windows/apps/br241720)  
 
 ### Reference
 
-[Streams](http://msdn.microsoft.com/library/windows/apps/br241791)  
+[Streams](https://msdn.microsoft.com/library/windows/apps/br241791)  
 
 ## System requirements
 

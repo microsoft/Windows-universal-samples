@@ -17,13 +17,13 @@ You can also learn how to enable your app to be the handler for a file type or a
 
 This sample covers these key tasks:
 
-- launching an  app for a file using [LaunchFileAsync](http://msdn.microsoft.com/library/windows/apps/hh701461)
+- launching an  app for a file using [LaunchFileAsync](https://msdn.microsoft.com/library/windows/apps/hh701461)
 - handling file activation through the **Activated** event 
-- launching an app for a protocol using [LaunchUriAsync](http://msdn.microsoft.com/library/windows/apps/hh701476)
+- launching an app for a protocol using [LaunchUriAsync](https://msdn.microsoft.com/library/windows/apps/hh701476)
 - handling protocol activation through the **Activated** event 
 - associating the app with a website using the **AppUriHandler** extension
-- launching a target app and having the currently running source app remain on the screen for various amounts of screen space using [LauncherOptions.DesiredRemainingView](http://msdn.microsoft.com/library/windows/apps/dn298314).
-- **Note**  [LauncherOptions.DesiredRemainingView](http://msdn.microsoft.com/library/windows/apps/dn298314) is only supported on desktop Windows when it is running in tablet mode. 
+- launching a target app and having the currently running source app remain on the screen for various amounts of screen space using [LauncherOptions.DesiredRemainingView](https://msdn.microsoft.com/library/windows/apps/dn298314).
+- **Note**  [LauncherOptions.DesiredRemainingView](https://msdn.microsoft.com/library/windows/apps/dn298314) is only supported on desktop Windows when it is running in tablet mode. 
 
 To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windows.com). 
 
@@ -35,12 +35,12 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 
 ### Reference
 
-[Windows.ApplicationModel.Activation.FileActivatedEventArgs](http://msdn.microsoft.com/library/windows/apps/br224716)  
-[Windows.ApplicationModel.Activation.ProtocolActivatedEventArgs](http://msdn.microsoft.com/library/windows/apps/br224742)  
-[Windows.System.Launcher.LaunchFileAsync](http://msdn.microsoft.com/library/windows/apps/hh701461)  
-[Windows.System.Launcher.LaunchUriAsync](http://msdn.microsoft.com/library/windows/apps/hh701476)  
-[Windows.UI.WebUI.WebUIFileActivatedEventArgs](http://msdn.microsoft.com/library/windows/apps/hh701781)  
-[Windows.UI.WebUI.WebUIProtocolActivatedEventArgs](http://msdn.microsoft.com/library/windows/apps/hh701885)  
+[Windows.ApplicationModel.Activation.FileActivatedEventArgs](https://msdn.microsoft.com/library/windows/apps/br224716)  
+[Windows.ApplicationModel.Activation.ProtocolActivatedEventArgs](https://msdn.microsoft.com/library/windows/apps/br224742)  
+[Windows.System.Launcher.LaunchFileAsync](https://msdn.microsoft.com/library/windows/apps/hh701461)  
+[Windows.System.Launcher.LaunchUriAsync](https://msdn.microsoft.com/library/windows/apps/hh701476)  
+[Windows.UI.WebUI.WebUIFileActivatedEventArgs](https://msdn.microsoft.com/library/windows/apps/hh701781)  
+[Windows.UI.WebUI.WebUIProtocolActivatedEventArgs](https://msdn.microsoft.com/library/windows/apps/hh701885)  
 [AppUriHandler extension](https://msdn.microsoft.com/library/windows/apps/mt670665.aspx)  
 
 ### Tasks
@@ -52,7 +52,7 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 
 ### Guidelines
 
-[Guidelines and checklist for file types and protocols](http://msdn.microsoft.com/library/windows/apps/hh700321)  
+[Guidelines and checklist for file types and protocols](https://msdn.microsoft.com/library/windows/apps/hh700321)  
 
 ## System requirements
 

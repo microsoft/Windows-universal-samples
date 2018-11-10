@@ -5,7 +5,7 @@
 
 # Orientation sensor sample
 
-Shows how to use the [Windows.Devices.Sensors.OrientationSensor](http://msdn.microsoft.com/library/windows/apps/br206371) API.
+Shows how to use the [Windows.Devices.Sensors.OrientationSensor](https://msdn.microsoft.com/library/windows/apps/br206371) API.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
@@ -38,7 +38,7 @@ Related topics
 --------------
 
 [Accelerometer sample](../Accelerometer)  
-[Windows.Devices.Sensors namespace](http://msdn.microsoft.com/library/windows/apps/br206408)  
+[Windows.Devices.Sensors namespace](https://msdn.microsoft.com/library/windows/apps/br206408)  
 
 Operating system requirements
 -----------------------------

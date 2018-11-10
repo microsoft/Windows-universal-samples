@@ -45,7 +45,7 @@ Specifically, this sample covers using the Windows.UI.Input.Inking APIs to do th
 
 **Reference**
 
-[Windows.UI.Input.Inking](http://msdn.microsoft.com/library/windows/apps/br208524)  
+[Windows.UI.Input.Inking](https://msdn.microsoft.com/library/windows/apps/br208524)  
 
 ## Operating system requirements
 

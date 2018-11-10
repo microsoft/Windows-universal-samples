@@ -14,27 +14,27 @@ Shows how to create, save, display, and edit a playlist of audio files.
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-This sample uses classes that are in the [Windows.Media.Playlists](http://msdn.microsoft.com/library/windows/apps/br206938) namespace. It provides five scenarios:
+This sample uses classes that are in the [Windows.Media.Playlists](https://msdn.microsoft.com/library/windows/apps/br206938) namespace. It provides five scenarios:
 
 1.  **Create and save a playlist from a set of audio files.**
 
-    This creates a new [Playlist](http://msdn.microsoft.com/library/windows/apps/br206904) object and saves it using [SaveAsAsync](http://msdn.microsoft.com/library/windows/apps/hh768260).
+    This creates a new [Playlist](https://msdn.microsoft.com/library/windows/apps/br206904) object and saves it using [SaveAsAsync](https://msdn.microsoft.com/library/windows/apps/hh768260).
 
 2.  **Display the contents of an existing playlist (WPL, ZPL, M3U).**
 
-    This loads a [Playlist](http://msdn.microsoft.com/library/windows/apps/br206904) object using [LoadAsync](http://msdn.microsoft.com/library/windows/apps/br206934), and obtains the properties of each file in [Playlist.Files](http://msdn.microsoft.com/library/windows/apps/br206933) using [Windows.Storage.FileProperties.StorageItemContentProperties.GetMusicPropertiesAsync](http://msdn.microsoft.com/library/windows/apps/hh770649).
+    This loads a [Playlist](https://msdn.microsoft.com/library/windows/apps/br206904) object using [LoadAsync](https://msdn.microsoft.com/library/windows/apps/br206934), and obtains the properties of each file in [Playlist.Files](https://msdn.microsoft.com/library/windows/apps/br206933) using [Windows.Storage.FileProperties.StorageItemContentProperties.GetMusicPropertiesAsync](https://msdn.microsoft.com/library/windows/apps/hh770649).
 
 3.  **Insert an item at the end of an existing playlist (WPL, ZPL, M3U).**
 
-    This loads a [Playlist](http://msdn.microsoft.com/library/windows/apps/br206904) object using [LoadAsync](http://msdn.microsoft.com/library/windows/apps/br206934), and appends a file to [Playlist.Files](http://msdn.microsoft.com/library/windows/apps/br206933).
+    This loads a [Playlist](https://msdn.microsoft.com/library/windows/apps/br206904) object using [LoadAsync](https://msdn.microsoft.com/library/windows/apps/br206934), and appends a file to [Playlist.Files](https://msdn.microsoft.com/library/windows/apps/br206933).
 
 4.  **Remove an item from the end of an existing playlist (WPL, ZPL, M3U).**
 
-    This loads a [Playlist](http://msdn.microsoft.com/library/windows/apps/br206904) object using [LoadAsync](http://msdn.microsoft.com/library/windows/apps/br206934), and removes the file at the end of [Playlist.Files](http://msdn.microsoft.com/library/windows/apps/br206933).
+    This loads a [Playlist](https://msdn.microsoft.com/library/windows/apps/br206904) object using [LoadAsync](https://msdn.microsoft.com/library/windows/apps/br206934), and removes the file at the end of [Playlist.Files](https://msdn.microsoft.com/library/windows/apps/br206933).
 
 5.  **Remove all items from an existing playlist (WPL, ZPL, M3U).**
 
-    This loads a [Playlist](http://msdn.microsoft.com/library/windows/apps/br206904) object using [LoadAsync](http://msdn.microsoft.com/library/windows/apps/br206934), and clears the files in [Playlist.Files](http://msdn.microsoft.com/library/windows/apps/br206933).
+    This loads a [Playlist](https://msdn.microsoft.com/library/windows/apps/br206904) object using [LoadAsync](https://msdn.microsoft.com/library/windows/apps/br206934), and clears the files in [Playlist.Files](https://msdn.microsoft.com/library/windows/apps/br206933).
 
 **Note** The Universal Windows app samples require Visual Studio 2017 to build and Windows 10 to execute.
  
@@ -46,7 +46,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[Playlists namespace](http://msdn.microsoft.com/library/windows/apps/br206938)  
+[Playlists namespace](https://msdn.microsoft.com/library/windows/apps/br206938)  
 
 ## System requirements
 
