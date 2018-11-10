@@ -17,7 +17,7 @@ using System;
 using System.Collections.ObjectModel;
 using Windows.ApplicationModel.DataTransfer;
 using System.Linq;
-using System.Collections.Generic;
+using Windows.Foundation;
 
 namespace DragAndDropSampleManaged
 {
@@ -115,31 +115,33 @@ namespace DragAndDropSampleManaged
                 // Remove item from other list
                 sourceList.Remove(text);
 
-                // Get position in List to drop to
+                // First we need to get the position in the List to drop to
                 var listview = sender as ListView;
-                var panel = listview.ItemsPanelRoot;
-                var point = e.GetPosition(panel);
+                var index = -1;
 
-                // Use insertion panel interface (available on StackPanel) to help us.
-                if (panel is IInsertionPanel ipanel)
+                // Determine which items in the list our pointer is inbetween.
+                for (int i = 0; i < listview.Items.Count; i++)
                 {
-                    ipanel.GetInsertionIndexes(point, out int aboveIndex, out int belowIndex);
+                    var item = listview.ContainerFromIndex(i) as ListViewItem;
 
-                    // Top of List
-                    if (aboveIndex == -1 && belowIndex >= 0)
+                    var p = e.GetPosition(item);
+
+                    if (p.Y - item.ActualHeight < 0)
                     {
-                        targetList.Insert(0, text);
+                        index = i;
+                        break;
                     }
-                    // Between two items
-                    else if (aboveIndex >= 0 && belowIndex >= 0)
-                    {
-                        targetList.Insert(aboveIndex, text);
-                    }
-                    // Bottom of List
-                    else if (aboveIndex >= 0 && belowIndex == -1)
-                    {
-                        targetList.Add(text);
-                    }
+                }
+
+                if (index < 0)
+                {
+                    // We didn't find a transition point, so we're at the end of the list
+                    targetList.Add(text);
+                }
+                else if (index < listview.Items.Count)
+                {
+                    // Otherwise, insert at the provided index.
+                    targetList.Insert(index, text);
                 }
 
                 e.AcceptedOperation = DataPackageOperation.Move;
