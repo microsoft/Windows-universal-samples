@@ -43,14 +43,7 @@
                     AllowDrop="True" CanReorderItems="True" CanDragItems="True"
                     DragOver="ListView_DragOver"
                     Drop="ListView_Drop"
-                    DragItemsStarting="ListView_DragItemsStarting">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <!-- Need to use StackPanel to get insertion indicies -->
-                    <StackPanel/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>
+                    DragItemsStarting="ListView_DragItemsStarting"/>
         <TextBlock Grid.Row="1" Grid.Column="1" Margin="8,4"
                     VerticalAlignment="Bottom"
                     Text="Selection"/>
@@ -59,13 +52,6 @@
                     AllowDrop="True" CanReorderItems="True" CanDragItems="True"
                     DragOver="ListView_DragOver"
                     Drop="ListView_Drop"
-                    DragItemsStarting="ListView_DragItemsStarting">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <!-- Need to use StackPanel to get insertion indicies -->
-                    <StackPanel/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>
+                    DragItemsStarting="ListView_DragItemsStarting"/>
     </Grid>
 </Page>

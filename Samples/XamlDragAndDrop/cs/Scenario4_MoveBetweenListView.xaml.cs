@@ -30,7 +30,6 @@ namespace DragAndDropSampleManaged
 
         ObservableCollection<string> _source;
         ObservableCollection<string> _target;
-        string _deletedItem;
 
         public Scenario4_MoveBetweenListView()
         {
