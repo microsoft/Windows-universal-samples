@@ -39,6 +39,7 @@
     <Page Include="Scenario3_StartDragAsync.xaml" />
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml" />
+    <Page Include="Scenario4_MoveBetweenListView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\dropcursor.png">

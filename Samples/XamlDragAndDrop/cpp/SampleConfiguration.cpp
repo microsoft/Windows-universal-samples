@@ -19,5 +19,6 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
 {
     { "ListView Drag and Drop and Reorder", "SDKTemplate.Scenario1_ListView" },
     { "Drag UI Customization", "SDKTemplate.Scenario2_DragUICustomization" },
-    { "StartDragAsync", "SDKTemplate.Scenario3_StartDragAsync" }
+    { "StartDragAsync", "SDKTemplate.Scenario3_StartDragAsync" },
+	{ "Move Between ListViews", "SDKTemplate.Scenario4_MoveBetweenListView" }
 };
