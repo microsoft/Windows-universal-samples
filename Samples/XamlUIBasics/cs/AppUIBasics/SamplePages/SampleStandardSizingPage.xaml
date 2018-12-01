@@ -23,7 +23,7 @@
             <TextBox Header="First Name:" x:Name="txtfirstName" />
             <TextBox Header="Last Name:" x:Name="txtLastName"  />
             <PasswordBox Header="Password:" />
-            <PasswordBox Header="Confrim Password:" />
+            <PasswordBox Header="Confirm Password:" />
             <ComboBox Header="State:">
                 <ComboBoxItem Content="Alabama" />
                 <ComboBoxItem Content="Alaska" />
