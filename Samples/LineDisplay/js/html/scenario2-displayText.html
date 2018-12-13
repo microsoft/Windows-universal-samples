@@ -20,26 +20,24 @@
 </head>
 
 <body class="win-type-body">
-    <div id="scenarioView">
-        <div>
-            <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
-            <div id="scenarioDescription">
-                Display a greeting on the selected Line Display
-            </div>
-        </div>
-        <div id="scenarioContent">
-            <p>
-                <input id="blinkCheckBox" type="checkbox" class="win-checkbox">Use blinking text
-                <br/>
-                <input id="centerCheckBox" type="checkbox" class="win-checkbox">Center the text
-            </p>
-            <div>
-                <button id="displayTextButton" class="win-button">Display text</button>
-            </div>
-            <p id="blinkNotSupportedText" style="display: none">
-                Warning: Line display does not support blink
-            </p>
-        </div>
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">
+        Display a greeting on the selected Line Display.
+        Features not supported by the Line Display are disabled.
+    </div>
+
+    <div>
+        <label>
+            <input id="blinkCheckBox" type="checkbox" class="win-checkbox" />Use blinking text
+        </label>
+    </div>
+    <div>
+        <label>
+            <input id="centerCheckBox" type="checkbox" class="win-checkbox" />Center the text
+        </label>
+    </div>
+    <div>
+        <button id="displayTextButton" class="win-button">Display text</button>
     </div>
 </body>
 

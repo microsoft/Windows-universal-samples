@@ -1,0 +1,101 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario3-usingWindows.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="windowListItemTemplate" data-win-control="WinJS.Binding.Template" style="display:none">
+        <p data-win-bind="textContent: name" style="margin-left: 5px;"></p>
+    </div>
+
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <p id="scenarioDescription">
+        Use windows to control the layout of text and graphics.
+        The "New Window" button is enabled if the Line Display supports creating another window.
+    </p>
+    <fieldset>
+        <table>
+            <tr>
+                <td>Viewport Bounds:</td>
+                <td>
+                    <label>
+                        Width<br />
+                        <input id="viewportBoundsWidthTextbox" type="text" class="win-textbox" style="width:50px" />
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        Height<br />
+                        <input id="viewportBoundsHeightTextbox" type="text" class="win-textbox" style="width:50px" />
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        X<br />
+                        <input id="viewportBoundsXTextbox" type="text" class="win-textbox" style="width:50px" />
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        Y<br />
+                        <input id="viewportBoundsYTextbox" type="text" class="win-textbox" style="width:50px" />
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Window Size:</td>
+                <td>
+                    <label>
+                        Width<br />
+                        <input id="windowWidthTextbox" type="text" class="win-textbox" style="width:50px" />
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        Height<br />
+                        <input id="windowHeightTextbox" type="text" class="win-textbox" style="width:50px" />
+                    </label>
+                </td>
+            </tr>
+        </table>
+        <button id="newWindowButton" class="win-button">New Window</button>
+    </fieldset>
+    <p>Select a window:</p>
+    <div id="windowListView" class="win-selectionstylefilled" data-win-control="WinJS.UI.ListView"
+         style="border: 2px solid white"
+         data-win-options="{
+            itemDataSource: SdkSample.Scenario3.windowList.dataSource,
+            itemTemplate: select('#windowListItemTemplate'),
+            selectionMode: 'single',
+            tapBehavior: 'directSelect',
+            layout: { type: WinJS.UI.ListLayout }
+        }"></div>
+    <div>
+        <button id="refreshWindowButton" class="win-button" style="margin-bottom: 5px">Refresh Window (bring to top)</button>
+    </div>
+    <div>
+        <button id="destroyWindowButton" class="win-button" style="margin-bottom: 5px">Destroy Window</button>
+    </div>
+    <div>
+        <button id="displayTextButton" class="win-button">Display text</button>
+        <input id="displayTextTextbox" type="text" class="win-textbox" />
+    </div>
+</body>
+
+</html>

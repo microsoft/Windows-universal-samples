@@ -1,5 +1,0 @@
-﻿<MenuFlyoutItem Command="{x:Bind Command}" CommandParameter="{x:Bind Text}" />
-
-<SwipeItem x:Name="DeleteSwipeItem" Background="Red" Command="{x:Bind Command}" CommandParameter="{x:Bind Text}" />
-
-<AppBarButton x:Name="HoverButton" IsTabStop="False" HorizontalAlignment="Right" Visibility="Collapsed" Command="{x:Bind Command}" CommandParameter="{x:Bind Text}" />    

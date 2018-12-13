@@ -1,3 +1,12 @@
+---
+topic: sample
+languages:
+- cpp
+products:
+- windows
+- uwp
+---
+
 <!---
   category: GraphicsAndAnimation
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=832476

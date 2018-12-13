@@ -1,0 +1,54 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario4-updatingLineDisplayAttributes.js"></script>
+</head>
+
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">
+        Use line display attributes to control screen-wide display characteristics.
+        Features not supported by the Line Display are disabled.
+    </div>
+    <p>
+        <label>
+            Blink Interval (<span id="blinkIntervalSpan"></span> milliseconds)<br />
+            <input id="blinkRateSlider" type="range" class="win-slider" min="100" max="4000" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Brightness (<span id="brightnessSpan"></span> out of 100)<br />
+            <input id="brightnessSlider" type="range" class="win-slider" min="0" max="100" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Screen size (characters)<br />
+            <select id="screenSizeInCharactersSelect" class="win-dropdown"></select>
+        </label>
+    </p>
+    <p>
+        <label>
+            <input id="characterSetMappingEnabledCheckbox" type="checkbox" class="win-checkbox" />Enable Character Set Mapping
+        </label>
+    </p>
+    <button id="updateButton" class="win-button">Update attributes</button>
+</body>
+
+</html>

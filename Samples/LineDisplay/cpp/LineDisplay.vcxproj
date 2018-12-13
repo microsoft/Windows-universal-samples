@@ -98,37 +98,37 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/await /bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/await /bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/await /bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/await /bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/await /bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/await /bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -147,6 +147,21 @@
     <ClInclude Include="Scenario2_DisplayText.xaml.h">
       <DependentUpon>..\shared\Scenario2_DisplayText.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario3_UsingWindows.xaml.h">
+      <DependentUpon>..\shared\Scenario3_UsingWindows.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario4_UpdatingLineDisplayAttributes.xaml.h">
+      <DependentUpon>..\shared\Scenario4_UpdatingLineDisplayAttributes.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario5_DefiningCustomGlyphs.xaml.h">
+      <DependentUpon>..\shared\Scenario5_DefiningCustomGlyphs.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario6_ManipulatingCursorAttributes.xaml.h">
+      <DependentUpon>..\shared\Scenario6_ManipulatingCursorAttributes.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario7_ScrollingContentUsingMarquee.xaml.h">
+      <DependentUpon>..\shared\Scenario7_ScrollingContentUsingMarquee.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
@@ -157,6 +172,11 @@
     </Page>
     <Page Include="..\shared\Scenario1_SelectDisplay.xaml" />
     <Page Include="..\shared\Scenario2_DisplayText.xaml" />
+    <Page Include="..\shared\Scenario3_UsingWindows.xaml" />
+    <Page Include="..\shared\Scenario4_UpdatingLineDisplayAttributes.xaml" />
+    <Page Include="..\shared\Scenario5_DefiningCustomGlyphs.xaml" />
+    <Page Include="..\shared\Scenario6_ManipulatingCursorAttributes.xaml" />
+    <Page Include="..\shared\Scenario7_ScrollingContentUsingMarquee.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -187,6 +207,21 @@
     </ClCompile>
     <ClCompile Include="Scenario2_DisplayText.xaml.cpp">
       <DependentUpon>..\shared\Scenario2_DisplayText.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario3_UsingWindows.xaml.cpp">
+      <DependentUpon>..\shared\Scenario3_UsingWindows.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario4_UpdatingLineDisplayAttributes.xaml.cpp">
+      <DependentUpon>..\shared\Scenario4_UpdatingLineDisplayAttributes.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario5_DefiningCustomGlyphs.xaml.cpp">
+      <DependentUpon>..\shared\Scenario5_DefiningCustomGlyphs.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario6_ManipulatingCursorAttributes.xaml.cpp">
+      <DependentUpon>..\shared\Scenario6_ManipulatingCursorAttributes.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario7_ScrollingContentUsingMarquee.xaml.cpp">
+      <DependentUpon>..\shared\Scenario7_ScrollingContentUsingMarquee.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

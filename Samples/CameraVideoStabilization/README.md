@@ -1,4 +1,16 @@
-﻿<!---
+---
+topic: sample
+languages:
+- csharp
+- cpp
+- js
+- vb
+products:
+- windows
+- uwp
+---
+
+<!---
   category: AudioVideoAndCamera 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620519
 --->

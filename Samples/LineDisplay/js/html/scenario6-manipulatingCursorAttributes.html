@@ -1,0 +1,69 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario6-manipulatingCursorAttributes.js"></script>
+</head>
+
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">
+        Using LineDisplayCursorAttributes to control the style and behavior of the display cursor.
+        Features not supported by the Line Display are disabled.
+    </div>
+    <div>
+        <label>
+            Cursor Type<br />
+            <select id="cursorTypeSelect" class="win-dropdown"></select>
+        </label>
+    </div>
+    <div>
+        <label>
+            <input id="autoAdvanceEnabledCheckbox" type="checkbox" class="win-checkbox" />Auto Advance
+        </label>
+    </div>
+    <div>
+        Click "Display Text" a few times to see the effect of auto advance.
+    </div>
+    <div>
+        <label>
+            <input id="blinkEnabledCheckbox" type="checkbox" class="win-checkbox" />Blink Enabled
+        </label>
+    </div>
+    <div>
+        <label>
+            <input id="setCursorPositionCheckbox" type="checkbox" class="win-checkbox" />Set cursor position
+        </label>
+        <label>
+            X: <input id="cursorPositionXTextbox" type="text" class="win-textbox" style="width:50px;" />
+        </label>
+        <label>
+            Y: <input id="cursorPositionYTextbox" type="text" class="win-textbox" style="width:50px;" />
+        </label>
+    </div>
+    <p>
+        <button id="updateAttributesButton" class="win-button" disabled>Update attributes</button>
+    </p>
+    <p>
+        <button id="displayTextButton" class="win-button" disabled>Display text</button>
+    </p>
+    <p>
+        <button id="resetButton" class="win-button" disabled>Reset</button>
+    </p>
+</body>
+
+</html>

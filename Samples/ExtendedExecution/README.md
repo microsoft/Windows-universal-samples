@@ -1,4 +1,14 @@
-﻿<!---
+---
+topic: sample
+languages:
+- csharp
+- cpp
+products:
+- windows
+- uwp
+---
+
+<!---
   category: LaunchingAndBackgroundTasks
   samplefwlink:  http://go.microsoft.com/fwlink/?LinkId=723509
 --->

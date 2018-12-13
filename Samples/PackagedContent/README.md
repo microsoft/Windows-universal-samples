@@ -1,4 +1,13 @@
-﻿<!---
+---
+topic: sample
+languages:
+- js
+products:
+- windows
+- uwp
+---
+
+<!---
   category: Navigation
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620582
 --->

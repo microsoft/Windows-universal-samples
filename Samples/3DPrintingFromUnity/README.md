@@ -1,3 +1,12 @@
+---
+topic: sample
+languages:
+- csharp
+products:
+- windows
+- uwp
+---
+
 <!---
   category: ControlsLayoutAndText Printing
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=722936

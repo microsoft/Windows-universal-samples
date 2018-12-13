@@ -1,0 +1,66 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario7_ScrollingContentUsingMarquee"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:SDKTemplate"
+    xmlns:pos="using:Windows.Devices.PointOfService"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Using marquee to scroll content.
+                Features not supported by the Line Display are disabled.
+            </TextBlock>
+
+            <ComboBox x:Name="MarqueeFormatComboBox" Width="200" Margin="0,10,0,0"
+                          Header="Marquee format">
+                <ComboBoxItem Content="None" IsSelected="True">
+                    <ComboBoxItem.Tag>
+                        <pos:LineDisplayMarqueeFormat>None</pos:LineDisplayMarqueeFormat>
+                    </ComboBoxItem.Tag>
+                </ComboBoxItem>
+                <ComboBoxItem Content="Place">
+                    <ComboBoxItem.Tag>
+                        <pos:LineDisplayMarqueeFormat>Place</pos:LineDisplayMarqueeFormat>
+                    </ComboBoxItem.Tag>
+                </ComboBoxItem>
+                <ComboBoxItem Content="Walk">
+                    <ComboBoxItem.Tag>
+                        <pos:LineDisplayMarqueeFormat>Walk</pos:LineDisplayMarqueeFormat>
+                    </ComboBoxItem.Tag>
+                </ComboBoxItem>
+            </ComboBox>
+
+            <ComboBox x:Name="ScrollDirectionComboBox" Width="200" Margin="0,10,0,0" Header="Scroll direction"/>
+
+            <Slider x:Name="RepeatWaitIntervalSlider" Width="200" HorizontalAlignment="Left" Margin="0,10,0,0"
+                    StepFrequency="1" SnapsTo="StepValues" Minimum="100" Maximum="4000"
+                    Header="Repeat Wait Interval (milliseconds between loops)"/>
+
+            <Slider x:Name="ScrollWaitIntervalSlider" Width="200" HorizontalAlignment="Left" Margin="0,10,0,0"
+                    StepFrequency="1" SnapsTo="StepValues" Minimum="100" Maximum="4000"
+                    Header="Scroll Wait Interval (milliseconds between character shifts)"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button x:Name="StartScrollingButton" Click="StartScrollingButton_Click" IsEnabled="False" Content="Start Scrolling"/>
+                <Button x:Name="StopScrollingButton" Click="StopScrollingButton_Click" IsEnabled="False" Margin="10,0,0,0" Content="Stop Scrolling"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

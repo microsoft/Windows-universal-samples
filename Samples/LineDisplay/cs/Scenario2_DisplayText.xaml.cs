@@ -10,6 +10,7 @@
 //*********************************************************
 
 using System;
+using System.Threading.Tasks;
 using Windows.Devices.PointOfService;
 using Windows.Foundation;
 using Windows.UI.Xaml;
@@ -21,70 +22,61 @@ namespace SDKTemplate
     public sealed partial class Scenario2_DisplayText : Page
     {
         private MainPage rootPage = MainPage.Current;
+        private ClaimedLineDisplay lineDisplay;
 
         public Scenario2_DisplayText()
         {
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (String.IsNullOrEmpty(rootPage.LineDisplayId))
-            {
-                rootPage.NotifyUser("You must use scenario 1 to select a line display", NotifyType.ErrorMessage);
-                DisplayTextButton.IsEnabled = false;
-            }
+            await InitializeAsync();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            lineDisplay?.Dispose();
+            lineDisplay = null;
+        }
+
+        private async Task InitializeAsync()
+        {
+            lineDisplay = await rootPage.ClaimScenarioLineDisplayAsync();
+            BlinkCheckBox.IsEnabled = (lineDisplay != null) && (lineDisplay.Capabilities.CanBlink != LineDisplayTextAttributeGranularity.NotSupported);
+            DisplayTextButton.IsEnabled = (lineDisplay != null);
         }
 
         private async void DisplayTextButton_Click(object sender, RoutedEventArgs e)
         {
             string text = "Hello from UWP";
 
-            using (ClaimedLineDisplay lineDisplay = await ClaimedLineDisplay.FromIdAsync(rootPage.LineDisplayId))
+            var position = new Point(0, 0);
+            if (CenterCheckBox.IsChecked.Value)
             {
-                if (lineDisplay != null)
+                var length = text.Length;
+                if (length < lineDisplay.DefaultWindow.SizeInCharacters.Width)
                 {
-                    var position = new Point(0, 0);
-                    if (CenterCheckBox.IsChecked.Value)
-                    {
-                        var length = text.Length;
-                        if (length < lineDisplay.DefaultWindow.SizeInCharacters.Width)
-                        {
-                            position.X = ((int)lineDisplay.DefaultWindow.SizeInCharacters.Width - length) / 2;
-                        }
-                    }
-
-                    LineDisplayTextAttribute attribute = LineDisplayTextAttribute.Normal;
-
-                    // If blinking is requested, verify that the device supports blinking.
-                    if (BlinkCheckBox.IsChecked.Value)
-                    {
-                        if (lineDisplay.Capabilities.CanBlink == LineDisplayTextAttributeGranularity.NotSupported)
-                        {
-                            BlinkNotSupportedText.Visibility = Visibility.Visible;
-                        }
-                        else
-                        {
-                            // Device supports blinking.
-                            attribute = LineDisplayTextAttribute.Blink;
-                        }
-                    }
-
-                    if (await lineDisplay.DefaultWindow.TryClearTextAsync() &&
-                        await lineDisplay.DefaultWindow.TryDisplayTextAsync(text, attribute, position))
-                    {
-                        rootPage.NotifyUser("Text displayed successfully", NotifyType.StatusMessage);
-                    }
-                    else
-                    {
-                        // We probably lost our claim.
-                        rootPage.NotifyUser("Unable to display text", NotifyType.ErrorMessage);
-                    }
+                    position.X = ((int)lineDisplay.DefaultWindow.SizeInCharacters.Width - length) / 2;
                 }
-                else
-                {
-                    rootPage.NotifyUser("Unable to claim the Line Display", NotifyType.ErrorMessage);
-                }
+            }
+
+            LineDisplayTextAttribute attribute = LineDisplayTextAttribute.Normal;
+
+            if (BlinkCheckBox.IsChecked.Value)
+            {
+                attribute = LineDisplayTextAttribute.Blink;
+            }
+
+            if (await lineDisplay.DefaultWindow.TryClearTextAsync() &&
+                await lineDisplay.DefaultWindow.TryDisplayTextAsync(text, attribute, position))
+            {
+                rootPage.NotifyUser("Text displayed successfully", NotifyType.StatusMessage);
+            }
+            else
+            {
+                // We probably lost our claim.
+                rootPage.NotifyUser("Unable to display text", NotifyType.ErrorMessage);
             }
         }
     }

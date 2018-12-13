@@ -10,8 +10,10 @@
 //*********************************************************
 
 using System;
+using Windows.ApplicationModel.Core;
 using Windows.Devices.Enumeration;
 using Windows.Devices.PointOfService;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -21,35 +23,70 @@ namespace SDKTemplate
     public sealed partial class Scenario1_SelectDisplay : Page
     {
         private MainPage rootPage = MainPage.Current;
+        private DeviceWatcher watcher;
                 
         public Scenario1_SelectDisplay()
         {
             this.InitializeComponent();
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // Enumerate all the LineDisplay devices and put them in our list box.
-            DeviceInformationCollection deviceInfoCollection = await DeviceInformation.FindAllAsync(LineDisplay.GetDeviceSelector(PosConnectionTypes.All));
-            foreach (DeviceInformation deviceInfo in deviceInfoCollection)
+            RestartWatcher();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            StopWatcher();
+        }
+
+        private void RestartWatcher()
+        {
+            StopWatcher();
+
+            // Clear any old LineDisplay devices from the list box.
+            DisplaysListBox.Items.Clear();
+
+            // Enumerate the LineDisplay devices and put them in our list box.
+            watcher = DeviceInformation.CreateWatcher(LineDisplay.GetDeviceSelector(PosConnectionTypes.All));
+            watcher.Added += Watcher_Added;
+            watcher.EnumerationCompleted += Watcher_EnumerationCompleted;
+            watcher.Start();
+        }
+
+        private void StopWatcher()
+        {
+            if (watcher != null && (watcher.Status == DeviceWatcherStatus.Started))
+            {
+                watcher.Stop();
+            }
+            watcher = null;
+        }
+
+        private async void Watcher_Added(DeviceWatcher sender, DeviceInformation deviceInfo)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 var item = new ListBoxItem();
                 item.Content = deviceInfo.Name;
                 item.Tag = deviceInfo.Id;
                 DisplaysListBox.Items.Add(item);
-            }
+            });
+        }
+
+        private void Watcher_EnumerationCompleted(DeviceWatcher sender, object e)
+        {
+            sender.Stop();
         }
 
         private async void SelectButton_Click(object sender, RoutedEventArgs e)
         {
             var item = (ListBoxItem)DisplaysListBox.SelectedValue;
-            if (item != null)
-            {
-                SelectButton.IsEnabled = false;
+            SelectButton.IsEnabled = false;
 
-                var name = (string)item.Content;
-                var deviceId = (string)item.Tag;
-                using (ClaimedLineDisplay lineDisplay = await ClaimedLineDisplay.FromIdAsync(deviceId))
+            var name = (string)item.Content;
+            var deviceId = (string)item.Tag;
+            using (ClaimedLineDisplay lineDisplay = await ClaimedLineDisplay.FromIdAsync(deviceId))
                 {
                     if (lineDisplay != null)
                     {
@@ -63,10 +100,17 @@ namespace SDKTemplate
                     {
                         rootPage.NotifyUser("Unable to claim the Line Display", NotifyType.ErrorMessage);
                     }
-                }
 
                 SelectButton.IsEnabled = true;
             }
         }
+
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            RestartWatcher();
+        }
+
+        // Helpers that are used by XAML binding to enable and disable buttons.
+        public bool IsNonNull(object item) => item != null;
     }
 }

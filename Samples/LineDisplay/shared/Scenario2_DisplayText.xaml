@@ -21,11 +21,13 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
         <StackPanel>
             <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="Display a greeting on the selected Line Display"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Display a greeting on the selected Line Display.
+                Features not supported by the Line Display are disabled.
+            </TextBlock>
             <CheckBox x:Name="BlinkCheckBox" Content="Use blinking text" Margin="0,10,0,0"/>
             <CheckBox x:Name="CenterCheckBox" Content="Center the text"/>
-            <Button x:Name="DisplayTextButton" Content="Display text" Click="DisplayTextButton_Click" Margin="0,10,0,0"/>
-            <TextBlock x:Name="BlinkNotSupportedText" Text="Warning: Line display does not support blink" TextWrapping="Wrap" Margin="0,10,0,0" Visibility="Collapsed"/>
+            <Button x:Name="DisplayTextButton" Content="Display text" Click="DisplayTextButton_Click" IsEnabled="False" Margin="0,10,0,0"/>
         </StackPanel>
     </Grid>
 </Page>

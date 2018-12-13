@@ -1,3 +1,13 @@
+---
+topic: sample
+languages:
+- csharp
+- cpp
+products:
+- windows
+- uwp
+---
+
 <!---
   category: CustomUserInteractions Touch
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=627612

@@ -26,11 +26,15 @@ namespace SDKTemplate
         Scenario2_DisplayText();
 
     protected:
-    	void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
+        void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
+        void OnNavigatingFrom(Windows::UI::Xaml::Navigation::NavigatingCancelEventArgs^ e) override;
 
     private:
-    	MainPage^ rootPage = MainPage::Current;
+        MainPage^ rootPage = MainPage::Current;
+        Windows::Devices::PointOfService::ClaimedLineDisplay^ lineDisplay;
 
-    	void DisplayTextButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        Concurrency::task<void> InitializeAsync();
+
+        void DisplayTextButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
     };
 }

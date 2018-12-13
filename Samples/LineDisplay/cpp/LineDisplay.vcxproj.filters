@@ -19,6 +19,7 @@
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="Scenario1_SelectDisplay.xaml.cpp" />
     <ClCompile Include="Scenario2_DisplayText.xaml.cpp" />
+    <ClCompile Include="Scenario3_UsingWindows.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -27,6 +28,7 @@
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_SelectDisplay.xaml.h" />
     <ClInclude Include="Scenario2_DisplayText.xaml.h" />
+    <ClInclude Include="Scenario3_UsingWindows.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -38,6 +40,11 @@
     </Page>
     <Page Include="..\shared\Scenario1_SelectDisplay.xaml" />
     <Page Include="..\shared\Scenario2_DisplayText.xaml" />
+    <Page Include="..\shared\Scenario3_UsingWindows.xaml" />
+    <Page Include="..\shared\Scenario4_UpdatingLineDisplayAttributes.xaml" />
+    <Page Include="..\shared\Scenario5_DefiningCustomGlyphs.xaml" />
+    <Page Include="..\shared\Scenario6_ManipulatingCursorAttributes.xaml" />
+    <Page Include="..\shared\Scenario7_ScrollingContentUsingMarquee.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">

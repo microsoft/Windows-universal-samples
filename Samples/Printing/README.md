@@ -1,4 +1,15 @@
-﻿<!---
+---
+topic: sample
+languages:
+- csharp
+- cpp
+- js
+products:
+- windows
+- uwp
+---
+
+<!---
   category: ControlsLayoutAndText Printing
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619984
 --->

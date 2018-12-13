@@ -1,4 +1,13 @@
-﻿<!---
+---
+topic: sample
+languages:
+- csharp
+products:
+- windows
+- uwp
+---
+
+<!---
   category: Communications
 -->
 

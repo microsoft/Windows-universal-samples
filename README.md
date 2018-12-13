@@ -214,7 +214,7 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/TitleBar">Title bar</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/XamlUIBasics">UI basics (XAML)</a></td>
+  <td><a href="https://github.com/Microsoft/Xaml-Controls-Gallery">UI basics (XAML)</a></td>
   <td><a href="Samples/UserInteractionMode">User interaction mode</a></td>
   <td><a href="Samples/WebView">WebView control (HTML)</a></td>
  </tr>
