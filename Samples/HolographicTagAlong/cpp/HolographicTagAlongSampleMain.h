@@ -19,7 +19,6 @@
 #include "Common\StepTimer.h"
 
 #ifdef DRAW_SAMPLE_CONTENT
-#include "Content\DistanceFieldRenderer.h"
 #include "Content\SpatialInputHandler.h"
 #include "Content\TextRenderer.h"
 #include "Content\QuadRenderer.h"
@@ -82,9 +81,6 @@ namespace HolographicTagAlongSample
 
         // Renders text off-screen. Used to create a texture to render on the quad.
         std::unique_ptr<TextRenderer>                                           m_textRenderer;
-
-        // Performs a gather operation to create a 2D pixel distance map.
-        std::unique_ptr<DistanceFieldRenderer>                                  m_distanceFieldRenderer;
 
         // Listens for the Pressed spatial input event.
         std::shared_ptr<SpatialInputHandler>                                    m_spatialInputHandler;

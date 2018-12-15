@@ -81,7 +81,6 @@
     <ClInclude Include="Common\DirectXHelper.h" />
     <ClInclude Include="Common\CameraResources.h" />
     <ClInclude Include="Common\StepTimer.h" />
-    <ClInclude Include="Content\DistanceFieldRenderer.h" />
     <ClInclude Include="Content\DDSTextureLoader.h" />
     <ClInclude Include="Content\QuadRenderer.h" />
     <ClInclude Include="Content\ShaderStructures.h" />
@@ -94,7 +93,6 @@
     <ClCompile Include="AppView.cpp" />
     <ClCompile Include="Common\DeviceResources.cpp" />
     <ClCompile Include="Common\CameraResources.cpp" />
-    <ClCompile Include="Content\DistanceFieldRenderer.cpp" />
     <ClCompile Include="Content\DDSTextureLoader.cpp" />
     <ClCompile Include="Content\QuadRenderer.cpp" />
     <ClCompile Include="Content\SpatialInputHandler.cpp" />
@@ -110,12 +108,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Content\CreateDistanceFieldPixelShader.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
-    </FxCompile>
     <FxCompile Include="Content\FullscreenQuadVertexShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
@@ -125,10 +117,6 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Content\UseDistanceFieldPixelShader.hlsl">
-      <ShaderType>Pixel</ShaderType>
-      <ShaderModel>5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Content\VertexShader.hlsl">
       <ShaderType>Vertex</ShaderType>

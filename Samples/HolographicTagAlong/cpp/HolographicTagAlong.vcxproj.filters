@@ -46,9 +46,6 @@
     <ClCompile Include="Content\TextRenderer.cpp">
       <Filter>Content</Filter>
     </ClCompile>
-    <ClCompile Include="Content\DistanceFieldRenderer.cpp">
-      <Filter>Content</Filter>
-    </ClCompile>
     <ClCompile Include="Content\SpatialInputHandler.cpp">
       <Filter>Content</Filter>
     </ClCompile>
@@ -69,9 +66,6 @@
     <ClInclude Include="Content\TextRenderer.h">
       <Filter>Content</Filter>
     </ClInclude>
-    <ClInclude Include="Content\DistanceFieldRenderer.h">
-      <Filter>Content</Filter>
-    </ClInclude>
     <ClInclude Include="Content\SpatialInputHandler.h">
       <Filter>Content</Filter>
     </ClInclude>
@@ -87,12 +81,6 @@
       <Filter>Content\Shaders</Filter>
     </FxCompile>
     <FxCompile Include="Content\FullscreenQuadVertexShader.hlsl">
-      <Filter>Content\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="Content\CreateDistanceFieldPixelShader.hlsl">
-      <Filter>Content\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="Content\UseDistanceFieldPixelShader.hlsl">
       <Filter>Content\Shaders</Filter>
     </FxCompile>
     <FxCompile Include="Content\TexturePixelShader.hlsl">
@@ -124,9 +112,6 @@
     <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="..\..\..\SharedContent\media\placeholder.png">
