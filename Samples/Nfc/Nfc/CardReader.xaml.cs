@@ -99,7 +99,7 @@ namespace NfcSample
         }
 
         /// <summary>
-        /// Sample code to hande a couple of different cards based on the identification process
+        /// Sample code to handle a couple of different cards based on the identification process
         /// </summary>
         /// <returns>None</returns>
         private async Task HandleCard(SmartCard card)
