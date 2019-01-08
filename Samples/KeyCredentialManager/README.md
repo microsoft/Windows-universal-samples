@@ -1,4 +1,14 @@
-﻿<!---
+---
+topic: sample
+languages:
+- csharp
+- cpp
+products:
+- windows
+- uwp
+---
+
+<!---
   category: IdentitySecurityAndEncryption
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620557
 --->

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>a079459f-11fb-4cb3-ad31-5742db3921ee</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="BarcodeDecoder.cpp" />
+    <ClCompile Include="DecodeEngine.cpp" />
+    <ClCompile Include="Provider.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="BarcodeDecoder.h" />
+    <ClInclude Include="DecodeEngine.h" />
+    <ClInclude Include="Provider.h" />
+  </ItemGroup>
+</Project>

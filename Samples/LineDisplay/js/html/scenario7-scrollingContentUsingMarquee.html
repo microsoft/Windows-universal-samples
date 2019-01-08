@@ -1,0 +1,59 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="/js/scenario7-scrollingContentUsingMarquee.js"></script>
+</head>
+
+<body class="win-type-body">
+    <h2 id="sampleHeader" class="win-type-subheader">Description:</h2>
+    <div id="scenarioDescription">
+        Using marquee to scroll content.
+        Features not supported by the Line Display are disabled.
+    </div>
+    <p>
+        <label>
+            Marquee format:
+            <select id="marqueeFormatSelect" class="win-dropdown"></select>
+        </label>
+    </p>
+    <p>
+        <label>
+            Scroll Direction:
+            <select id="scrollDirectionSelect" class="win-dropdown"></select>
+        </label>
+    </p>
+    <p>
+
+        <label>
+            Repeat Wait Interval: <span id="repeatWaitIntervalSpan"></span> milliseconds between loops<br />
+            <input id="repeatWaitIntervalSlider" type="range" class="win-slider" min="100" max="4000" />
+        </label>        
+    </p>
+    <p>
+        <label>
+            Scroll Wait Interval: <span id="scrollWaitIntervalSpan"></span> milliseconds between character shifts<br />
+            <input id="scrollWaitIntervalSlider" type="range" class="win-slider" min="100" max="4000" />
+        </label>
+    </p>
+    <p>
+        <button id="startScrollingButton" class="win-button">Start Scrolling</button>
+        <button id="stopScrollingButton" class="win-button">Stop Scrolling</button>
+    </p>
+</body>
+
+</html>

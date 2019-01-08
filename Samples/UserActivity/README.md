@@ -1,3 +1,12 @@
+---
+topic: sample
+languages:
+- csharp
+products:
+- windows
+- uwp
+---
+
 <!---
   category: DeepLinksAndAppToAppCommunication
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=873257

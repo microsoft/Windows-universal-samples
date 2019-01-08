@@ -1,4 +1,15 @@
-﻿<!---
+---
+topic: sample
+languages:
+- csharp
+- cpp
+- js
+products:
+- windows
+- uwp
+---
+
+<!---
   category: ControlsLayoutAndText
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620525
 --->
@@ -25,6 +36,10 @@ The sample demonstrates these two tasks:
 -   **Replacing the default commands in the context menu that is shown for text**
 
 To learn about choosing commands and designing a context menu, see [Guidelines and checklist for context menus](http://msdn.microsoft.com/library/windows/apps/hh465308).
+
+For XAML-based apps, we recommend that developers
+[use the ContextFlyout property to implement context menus](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/menus)
+This sample uses the PopupMenu class for illustration purposes.
 
 Additional APIs for this sample include:
 

@@ -12,7 +12,6 @@
 #pragma once
 
 #include <agile.h>
-#include <atlbase.h>
 #include <algorithm>
 #include <collection.h>
 #include <concrt.h>

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftPassport.Server", "MicrosoftPassport.Server.csproj", "{15E34A6E-695A-5F9B-8C67-F2406F012AB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftPassport.Server", "MicrosoftPassport.Server.csproj", "{A93D1072-CBE2-514E-98A0-72C991E2277B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,22 +17,22 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|ARM.Build.0 = Debug|Any CPU
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|x64.Build.0 = Debug|Any CPU
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Debug|x86.Build.0 = Debug|Any CPU
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|ARM.ActiveCfg = Release|Any CPU
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|ARM.Build.0 = Release|Any CPU
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|x64.ActiveCfg = Release|Any CPU
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|x64.Build.0 = Release|Any CPU
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|x86.ActiveCfg = Release|Any CPU
-		{15E34A6E-695A-5F9B-8C67-F2406F012AB7}.Release|x86.Build.0 = Release|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Debug|x64.Build.0 = Debug|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Debug|x86.Build.0 = Debug|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Release|ARM.Build.0 = Release|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Release|x64.ActiveCfg = Release|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Release|x64.Build.0 = Release|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Release|x86.ActiveCfg = Release|Any CPU
+		{A93D1072-CBE2-514E-98A0-72C991E2277B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

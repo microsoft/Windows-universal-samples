@@ -1,3 +1,13 @@
+---
+topic: sample
+languages:
+- csharp
+- cpp
+products:
+- windows
+- uwp
+---
+
 <!---
    category: PlatformArchitecture
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620589

@@ -69,6 +69,7 @@ namespace SDKTemplate
         void HidePreviewButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
         void FlipPreview_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ args);
         void ScannerSelection_Changed(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ args);
+        void ClaimedScanner_Closed(Windows::Devices::PointOfService::ClaimedBarcodeScanner^ sender, Windows::Devices::PointOfService::ClaimedBarcodeScannerClosedEventArgs^ args);
         void OnDataReceived(Windows::Devices::PointOfService::ClaimedBarcodeScanner^ sender, Windows::Devices::PointOfService::BarcodeScannerDataReceivedEventArgs^ args);
     };
 }

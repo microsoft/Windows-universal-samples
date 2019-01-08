@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>9d0e770a-da45-51fe-a4a1-6287b6a14108</ProjectGuid>
+    <ProjectGuid>966d5c9d-db74-5a35-aef9-ef04ac21d64d</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
@@ -45,8 +45,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.17134.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.17763.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
@@ -56,8 +56,18 @@
     </AppxManifest>
     <Content Include="html\scenario1-selectDisplay.html" />
     <Content Include="html\scenario2-displayText.html" />
+    <Content Include="html\scenario7-scrollingContentUsingMarquee.html" />
+    <Content Include="html\scenario6-manipulatingCursorAttributes.html" />
+    <Content Include="html\scenario5-definingCustomGlyphs.html" />
+    <Content Include="html\scenario4-updatingLineDisplayAttributes.html" />
+    <Content Include="html\scenario3-usingWindows.html" />
     <Content Include="js\sample-configuration.js" />
     <Content Include="js\scenario1-selectDisplay.js" />
+    <Content Include="js\scenario4-updatingLineDisplayAttributes.js" />
+    <Content Include="js\scenario7-scrollingContentUsingMarquee.js" />
+    <Content Include="js\scenario6-manipulatingCursorAttributes.js" />
+    <Content Include="js\scenario5-definingCustomGlyphs.js" />
+    <Content Include="js\scenario3-usingWindows.js" />
     <Content Include="js\scenario2-displayText.js" />
     <Content Include="..\..\..\SharedContent\js\default.html">
       <Link>default.html</Link>

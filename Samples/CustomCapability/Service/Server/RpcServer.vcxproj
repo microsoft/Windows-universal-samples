@@ -27,10 +27,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{D1D0DB15-9D7D-57C6-9B84-32731D4F4B3A}</ProjectGuid>
+    <ProjectGuid>{5D1BFD32-D7ED-5CBD-973F-3299E24FE415}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>RpcServer</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -130,7 +130,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>onecoreuap.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
+      <AdditionalDependencies>onecoreuap_apiset.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries);kernel32.lib;user32.lib;shell32.lib;gdi32.lib</IgnoreSpecificDefaultLibraries>
     </Link>
@@ -147,7 +147,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>onecoreuap.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
+      <AdditionalDependencies>onecoreuap_apiset.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries);kernel32.lib;user32.lib;shell32.lib;gdi32.lib</IgnoreSpecificDefaultLibraries>
     </Link>
@@ -164,7 +164,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>onecoreuap.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
+      <AdditionalDependencies>onecoreuap_apiset.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries);kernel32.lib;user32.lib;shell32.lib;gdi32.lib</IgnoreSpecificDefaultLibraries>
     </Link>
@@ -186,7 +186,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>onecoreuap.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
+      <AdditionalDependencies>onecoreuap_apiset.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries);kernel32.lib;user32.lib;shell32.lib;gdi32.lib</IgnoreSpecificDefaultLibraries>
       <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
@@ -209,7 +209,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>onecoreuap.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
+      <AdditionalDependencies>onecoreuap_apiset.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries);kernel32.lib;user32.lib;shell32.lib;gdi32.lib</IgnoreSpecificDefaultLibraries>
       <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
@@ -232,7 +232,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>onecoreuap.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
+      <AdditionalDependencies>onecoreuap_apiset.lib;%(AdditionalDependencies);rpcrt4.lib</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries);kernel32.lib;user32.lib;shell32.lib;gdi32.lib</IgnoreSpecificDefaultLibraries>
       <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>

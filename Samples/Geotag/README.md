@@ -1,4 +1,15 @@
-﻿<!---
+---
+topic: sample
+languages:
+- csharp
+- cpp
+- js
+products:
+- windows
+- uwp
+---
+
+<!---
   category: MapsAndLocation 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620547
 --->

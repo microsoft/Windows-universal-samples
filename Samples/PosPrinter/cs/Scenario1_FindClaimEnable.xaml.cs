@@ -12,6 +12,12 @@
 using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Windows.Devices.PointOfService;
+using Windows.Devices.Enumeration;
+using Windows.Foundation;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
+
 
 namespace SDKTemplate
 {
@@ -39,7 +45,7 @@ namespace SDKTemplate
 
         void UpdateButtons()
         {
-            PrinterNameRun.Text = (rootPage.Printer == null) ? "None" : rootPage.Printer.DeviceId;
+            PrinterNameRun.Text = (rootPage.Printer == null) ? "None" : rootPage.deviceInfo.Name + " (" + rootPage.Printer.DeviceId + ")";
             if (isBusy)
             {
                 FindButton.IsEnabled = false;
@@ -75,16 +81,37 @@ namespace SDKTemplate
         {
             isBusy = true;
             UpdateButtons();
-            rootPage.NotifyUser("Finding printer", NotifyType.StatusMessage);
-            rootPage.Printer = await DeviceHelpers.GetFirstReceiptPrinterAsync();
-            if (rootPage.Printer != null)
+            rootPage.NotifyUser("", NotifyType.StatusMessage);
+
+            rootPage.ReleaseAllPrinters();
+
+            // Select a PosPrinter device using the Device Picker.
+            DevicePicker devicePicker = new DevicePicker();
+            devicePicker.Filter.SupportedDeviceSelectors.Add(PosPrinter.GetDeviceSelector());
+
+            // Anchor the picker on the Find button.
+            GeneralTransform ge = FindButton.TransformToVisual(Window.Current.Content as UIElement);
+            Rect rect = ge.TransformBounds(new Rect(0, 0, FindButton.ActualWidth, FindButton.ActualHeight));
+
+            DeviceInformation deviceInfo = await devicePicker.PickSingleDeviceAsync(rect);
+            rootPage.deviceInfo = deviceInfo;
+            PosPrinter printer = null;
+            if (deviceInfo != null)
             {
+                printer = await PosPrinter.FromIdAsync(deviceInfo.Id);
+            }
+            if (printer != null && printer.Capabilities.Receipt.IsPrinterPresent)
+            {
+                rootPage.Printer = printer;
                 rootPage.NotifyUser("Found receipt printer.", NotifyType.StatusMessage);
             }
             else
             {
-                rootPage.NotifyUser("No receipt printer found", NotifyType.ErrorMessage);
+                // Get rid of the printer we can't use.
+                printer?.Dispose();
+                rootPage.NotifyUser("Please select a device whose printer is present.", NotifyType.ErrorMessage);
             }
+
             isBusy = false;
             UpdateButtons();
         }

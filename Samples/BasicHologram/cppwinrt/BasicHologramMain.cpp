@@ -383,8 +383,8 @@ void BasicHologramMain::OnLocatabilityChanged(SpatialLocator const& sender, winr
     case SpatialLocatability::Unavailable:
         // Holograms cannot be rendered.
     {
-        winrt::hstring message = L"Warning! Positional tracking is " + std::to_wstring(int(sender.Locatability())) + L".\n";
-        OutputDebugStringW(message.data());
+        std::wstring message = L"Warning! Positional tracking is " + std::to_wstring(int(sender.Locatability())) + L".\n";
+        OutputDebugStringW(message.c_str());
     }
     break;
 

@@ -12,36 +12,66 @@
 (function () {
     "use strict";
     var DeviceInformation = Windows.Devices.Enumeration.DeviceInformation;
+    var DeviceWatcherStatus = Windows.Devices.Enumeration.DeviceWatcherStatus;
     var PosConnectionTypes = Windows.Devices.PointOfService.PosConnectionTypes;
     var LineDisplay = Windows.Devices.PointOfService.LineDisplay;
     var ClaimedLineDisplay = Windows.Devices.PointOfService.ClaimedLineDisplay;
 
     var deviceListElement;
     var selectButton;
+    var refreshButton;
 
-    var page = WinJS.UI.Pages.define("/html/Scenario1_SelectDisplay.html", {
+    var watcher;
+
+    var page = WinJS.UI.Pages.define("/html/scenario1-selectDisplay.html", {
 
         ready: function (element, options) {
 
             deviceListElement = document.getElementById("deviceList");
             selectButton = document.getElementById("selectButton");
+            refreshButton = document.getElementById("refreshButton");
 
-            selectButton.addEventListener("click", selectLineDisplay, false);
+            selectButton.addEventListener("click", selectLineDisplay);
+            refreshButton.addEventListener("click", restartWatcher);
 
-            // Enumerate all the LineDisplay devices and put them in our list box.
-            DeviceInformation.findAllAsync(LineDisplay.getDeviceSelector(PosConnectionTypes.all), [])
-                .then(function(deviceInfoCollection) {
-                    deviceInfoCollection.forEach(function(deviceInfo) {
-                        var newOption = document.createElement("option");
-                        newOption.text = deviceInfo.name;
-                        newOption.value = deviceInfo.id;
-                        deviceListElement.add(newOption);
-                    });
-                });
+            restartWatcher();
+        },
+
+        unload: function () {
+            stopWatcher();
         }
     });
 
-    function selectLineDisplay() {
+    function restartWatcher() {
+        stopWatcher();
+
+        // Clear any old LineDisplay devices from the list box.
+        deviceListElement.innerHTML = "";
+
+        // Enumerate the LineDisplay devices and put them in our list box.
+        watcher = DeviceInformation.createWatcher(LineDisplay.getDeviceSelector(PosConnectionTypes.all), null);
+        watcher.addEventListener("added", deviceAdded);
+        watcher.addEventListener("enumerationcompleted", deviceEnumerationCompleted);
+        watcher.start();
+
+    }
+
+    function stopWatcher() {
+        if (watcher && (watcher.status === DeviceWatcherStatus.started)) {
+            watcher.stop();
+        }
+        watcher = null;
+    }
+
+    function deviceAdded(deviceInfo) {
+        SdkSample.addOption(deviceListElement, deviceInfo.name, deviceInfo.id);
+    }
+
+    function deviceEnumerationCompleted(e) {
+        e.target.stop();
+    }
+
+    async function selectLineDisplay() {
         if (deviceListElement.selectedIndex >= 0) {
             selectButton.disabled = true;
 
@@ -49,23 +79,21 @@
             var name = selectedItem.text;
             var deviceId = selectedItem.value;
 
-            ClaimedLineDisplay.fromIdAsync(deviceId).then(function (lineDisplay) {
-                if (lineDisplay) {
-                    return lineDisplay.defaultWindow.tryClearTextAsync().then(function(result) {
-                        WinJS.log("Selected: " + name, "sample", "status");
+            var lineDisplay = await ClaimedLineDisplay.fromIdAsync(deviceId);
+            if (lineDisplay) {
+                await lineDisplay.defaultWindow.tryClearTextAsync();
+                WinJS.log(`Selected: ${name}`, "sample", "status");
 
-                        // Save this device ID for other scenarios.
-                        SdkSample.lineDisplayId = deviceId;
+                // Save this device ID for other scenarios.
+                SdkSample.lineDisplayId = deviceId;
 
-                        // Close the claimed line display.
-                        lineDisplay.close();
-                    });
-                } else {
-                    WinJS.log("Unable to claim the Line Display", "sample", "error");
-                }
-            }).done(function() {
-                selectButton.disabled = false;
-            });
+                // Close the claimed line display.
+                lineDisplay.close();
+            } else {
+                WinJS.log("Unable to claim the Line Display", "sample", "error");
+            }
+            selectButton.disabled = false;
         }
     }
+
 })();

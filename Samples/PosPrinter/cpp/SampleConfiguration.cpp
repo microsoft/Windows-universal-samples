@@ -75,24 +75,3 @@ void MainPage::ClaimedPrinter_ReleaseDeviceRequested(ClaimedPosPrinter^ sender, 
         })));
     }
 }
-
-task<PosPrinter^> DeviceHelpers::GetFirstReceiptPrinterAsync(PosConnectionTypes connectionTypes)
-{
-    return DeviceHelpers::GetFirstDeviceAsync(PosPrinter::GetDeviceSelector(connectionTypes),
-        [](String^ id)
-    {
-        return create_task(PosPrinter::FromIdAsync(id)).then([](PosPrinter^ printer)
-        {
-            if (printer && printer->Capabilities->Receipt->IsPrinterPresent)
-            {
-                return printer;
-            }
-            else
-            {
-                // Close the unwanted printer.
-                delete printer;
-                return static_cast<PosPrinter^>(nullptr);
-            }
-        });
-    });
-}

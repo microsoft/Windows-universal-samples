@@ -1,3 +1,13 @@
+---
+topic: sample
+languages:
+- csharp
+- cpp
+products:
+- windows
+- uwp
+---
+
 <!---
   category: AudioVideoAndCamera 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=809050

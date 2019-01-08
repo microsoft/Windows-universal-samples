@@ -116,6 +116,7 @@
         var settings = new Capture.MediaCaptureInitializationSettings();
         settings.videoDeviceId = videoDeviceId;
         settings.streamingCaptureMode = Capture.StreamingCaptureMode.video;
+        settings.sharingMode = Capture.MediaCaptureSharingMode.sharedReadOnly;
 
         var captureInitialized = false;
         try {
@@ -237,6 +238,7 @@
             if (claimedScanner) {
                 scannerResultsBlock.dataset.isScannerClaimed = true;
                 await claimedScanner.enableAsync();
+                claimedScanner.addEventListener("closed", claimedScannerClosed);
                 startSoftwareTriggerButton.disabled = false;
                 claimedScanner.addEventListener("datareceived", dataReceived);
 
@@ -252,6 +254,10 @@
         }
 
         isSelectionChanging = false;
+    }
+
+    function claimedScannerClosed() {
+        // Resources associated to the claimed barcode scanner can be cleaned up here
     }
 
     function dataReceived(args) {

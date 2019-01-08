@@ -22,12 +22,26 @@ namespace SDKTemplate
     public:
         Scenario1_SelectDisplay();
 
+        static bool IsNonNull(Platform::Object^ item)
+        {
+            return item != nullptr;
+        }
+
     protected:
-    	void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
+        void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
+        void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 
     private:
         MainPage^ rootPage = MainPage::Current;
+        Windows::Devices::Enumeration::DeviceWatcher^ watcher;
+
+        void RestartWatcher();
+        void StopWatcher();
+
+        void Watcher_Added(Windows::Devices::Enumeration::DeviceWatcher^ watcher, Windows::Devices::Enumeration::DeviceInformation^ deviceInformation);
+        void Watcher_EnumerationCompleted(Windows::Devices::Enumeration::DeviceWatcher^ watcher, Platform::Object^ e);
 
         void SelectButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void RefreshButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
     };
 }

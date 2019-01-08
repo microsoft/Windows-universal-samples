@@ -30,54 +30,87 @@ Scenario1_SelectDisplay::Scenario1_SelectDisplay()
 
 void Scenario1_SelectDisplay::OnNavigatedTo(NavigationEventArgs^ e)
 {
-    // Enumerate all the LineDisplay devices and put them in our list box.
-    create_task(DeviceInformation::FindAllAsync(LineDisplay::GetDeviceSelector(PosConnectionTypes::All)))
-        .then([this](DeviceInformationCollection^ deviceInfoCollection)
+    RestartWatcher();
+}
+
+void Scenario1_SelectDisplay::OnNavigatedFrom(NavigationEventArgs^ e)
+{
+    StopWatcher();
+}
+
+void Scenario1_SelectDisplay::RestartWatcher()
+{
+    StopWatcher();
+
+    // Clear any old LineDisplay devices from the list box.
+    DisplaysListBox->Items->Clear();
+
+    // Enumerate the LineDisplay devices and put them in our list box.
+    watcher = DeviceInformation::CreateWatcher(LineDisplay::GetDeviceSelector(PosConnectionTypes::All));
+    watcher->Added += ref new TypedEventHandler<DeviceWatcher^, DeviceInformation^>(this, &Scenario1_SelectDisplay::Watcher_Added);
+    watcher->EnumerationCompleted += ref new TypedEventHandler<DeviceWatcher^, Object^>(this, &Scenario1_SelectDisplay::Watcher_EnumerationCompleted);
+    watcher->Start();
+}
+
+void Scenario1_SelectDisplay::StopWatcher()
+{
+    if (watcher && (watcher->Status == DeviceWatcherStatus::Started))
     {
-        for (DeviceInformation^ deviceInfo : deviceInfoCollection)
-        {
-            auto item = ref new ListBoxItem();
-            item->Content = deviceInfo->Name;
-            item->Tag = deviceInfo->Id;
-            DisplaysListBox->Items->Append(item);
-        }
-    }, task_continuation_context::get_current_winrt_context());
+        watcher->Stop();
+    }
+    watcher = nullptr;
+}
+
+void Scenario1_SelectDisplay::Watcher_Added(DeviceWatcher^ watcher, DeviceInformation^ deviceInfo)
+{
+    Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal,
+        ref new Windows::UI::Core::DispatchedHandler([this, deviceInfo]
+    {
+        auto item = ref new ListBoxItem();
+        item->Content = deviceInfo->Name;
+        item->Tag = deviceInfo->Id;
+        DisplaysListBox->Items->Append(item);
+    }));
+}
+
+void Scenario1_SelectDisplay::Watcher_EnumerationCompleted(DeviceWatcher^ watcher, Object^ e)
+{
+    watcher->Stop();
 }
 
 void Scenario1_SelectDisplay::SelectButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
-    auto item = safe_cast<ListBoxItem^>(DisplaysListBox->SelectedValue);
-    if (item != nullptr)
+    invoke_async_lambda([=]() -> task<void>
     {
         SelectButton->IsEnabled = false;
 
+        auto item = safe_cast<ListBoxItem^>(DisplaysListBox->SelectedValue);
+
         auto name = safe_cast<String^>(item->Content);
         auto deviceId = safe_cast<String^>(item->Tag);
-        create_task(ClaimedLineDisplay::FromIdAsync(deviceId))
-            .then([this, name, deviceId](ClaimedLineDisplay^ lineDisplay)
+        ClaimedLineDisplay^ lineDisplay = co_await ClaimedLineDisplay::FromIdAsync(deviceId);
+        if (lineDisplay != nullptr)
         {
-            if (lineDisplay != nullptr)
-            {
-                return create_task(lineDisplay->DefaultWindow->TryClearTextAsync())
-                    .then([this, lineDisplay, name, deviceId](bool result)
-                {
-                    rootPage->NotifyUser("Selected: " + name, NotifyType::StatusMessage);
+            co_await lineDisplay->DefaultWindow->TryClearTextAsync();
 
-                    // Save this device ID for other scenarios.
-                    rootPage->LineDisplayId = deviceId;
+            rootPage->NotifyUser("Selected: " + name, NotifyType::StatusMessage);
 
-                    // Close the claimed line display.
-                    delete lineDisplay;
-                }, task_continuation_context::get_current_winrt_context());
-            }
-            else
-            {
-                rootPage->NotifyUser("Unable to claim the Line Display", NotifyType::ErrorMessage);
-                return task_from_result();
-            }
-        }, task_continuation_context::get_current_winrt_context()).then([this]()
+            // Save this device ID for other scenarios.
+            rootPage->LineDisplayId = deviceId;
+
+            // Close the claimed line display.
+            delete lineDisplay;
+        }
+        else
         {
-            SelectButton->IsEnabled = true;
-        }, task_continuation_context::get_current_winrt_context());
-    }
+            rootPage->NotifyUser("Unable to claim the Line Display", NotifyType::ErrorMessage);
+        }
+
+        SelectButton->IsEnabled = true;
+    });
+}
+
+void Scenario1_SelectDisplay::RefreshButton_Click(Object^ sender, RoutedEventArgs^ e)
+{
+    RestartWatcher();
 }

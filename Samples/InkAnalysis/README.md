@@ -1,3 +1,12 @@
+---
+topic: sample
+languages:
+- csharp
+products:
+- windows
+- uwp
+---
+
 <!---
   category: CustomUserInteractions Inking
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=844937

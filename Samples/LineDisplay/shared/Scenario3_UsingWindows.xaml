@@ -1,0 +1,62 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario3_UsingWindows"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Use windows to control the layout of text and graphics.
+                The "New Window" button is enabled if the Line Display supports creating another window.
+            </TextBlock>
+            <Border HorizontalAlignment="Left" Padding="10" BorderBrush="AliceBlue" BorderThickness="1"  Margin="0,10,0,0">
+                <StackPanel>
+            <TextBlock>Create a new window:</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="130" VerticalAlignment="Bottom">Viewport Bounds:</TextBlock>
+                <TextBox x:Name="NewViewportWidth" Header="Width" Margin="10,0,0,0"/>
+                <TextBox x:Name="NewViewportHeight" Header="Height" Margin="10,0,0,0"/>
+                <TextBox x:Name="NewViewportX" Header="X" Margin="10,0,0,0"/>
+                <TextBox x:Name="NewViewportY" Header="Y" Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="130" VerticalAlignment="Bottom">Window Size:</TextBlock>
+                <TextBox x:Name="NewWindowWidth" Header="Width" Margin="10,0,0,0"/>
+                <TextBox x:Name="NewWindowHeight" Header="Height" Margin="10,0,0,0"/>
+            </StackPanel>
+            <Button x:Name="NewWindowButton" Click="NewWindowButton_Click" IsEnabled="{x:Bind CanCreateNewWindow(WindowList), Mode=OneWay}" Margin="0,10,0,0">New Window</Button>
+                </StackPanel>
+            </Border>
+            <TextBlock Margin="0,10,0,0">Select a window:</TextBlock>
+            <ListBox x:Name="WindowsListBox" ItemsSource="{Binding WindowList}" Height="200" Width="300" HorizontalAlignment="Left" Margin="0,10,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>Window <Run Text="{Binding Id}"/> <Run Text="{Binding Name}"/></TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Click="RefreshWindowButton_Click" IsEnabled="{x:Bind IsNonNull(WindowsListBox.SelectedItem), FallbackValue=False, Mode=OneWay}" Margin="0,10,0,0">Refresh Window (bring to top)</Button>
+            <Button Click="DestroyWindowButton_Click" IsEnabled="{x:Bind CanDestroyWindow(WindowsListBox.SelectedItem), FallbackValue=False, Mode=OneWay}" Margin="0,10,0,0">Destroy Window</Button>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Click="DisplayTextButton_Click" IsEnabled="{x:Bind IsNonNull(WindowsListBox.SelectedItem), FallbackValue=False, Mode=OneWay}" Margin="0,0,10,0">Display text</Button>
+                <TextBox x:Name="DisplayTextTextbox" Width="231" Text="Sample Text"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

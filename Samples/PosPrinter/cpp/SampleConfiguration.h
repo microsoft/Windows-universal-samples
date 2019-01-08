@@ -37,6 +37,8 @@ namespace SDKTemplate
 
         Windows::Devices::PointOfService::PosPrinter^ Printer = nullptr;
         Windows::Devices::PointOfService::ClaimedPosPrinter^ ClaimedPrinter = nullptr;
+        Windows::Devices::Enumeration::DeviceInformation^ deviceInfo = nullptr;
+
         bool IsAnImportantTransaction = true;
         std::function<void(void)> StateChanged;
 
@@ -56,11 +58,4 @@ namespace SDKTemplate
         Platform::String^ Title;
         Platform::String^ ClassName;
     };
-
-    namespace DeviceHelpers
-    {
-        // By default, use all connections types.
-        Concurrency::task<Windows::Devices::PointOfService::PosPrinter^> GetFirstReceiptPrinterAsync(
-            Windows::Devices::PointOfService::PosConnectionTypes connectionTypes = Windows::Devices::PointOfService::PosConnectionTypes::All);
-    }
 }

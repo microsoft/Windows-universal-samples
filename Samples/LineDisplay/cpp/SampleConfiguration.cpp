@@ -15,76 +15,45 @@
 
 using namespace SDKTemplate;
 using namespace Platform;
+using namespace Windows::Devices::PointOfService;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
-using namespace Windows::UI::Xaml::Controls::Primitives;
-using namespace Windows::UI::Xaml::Data;
-using namespace Windows::UI::Xaml::Input;
-using namespace Windows::UI::Xaml::Media;
-using namespace Windows::UI::Xaml::Navigation;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
-    { "Select a Line Display", "SDKTemplate.Scenario1_SelectDisplay" },
-    { "Display text", "SDKTemplate.Scenario2_DisplayText" },
+    { "Selecting a Line Display", "SDKTemplate.Scenario1_SelectDisplay" },
+    { "Displaying text", "SDKTemplate.Scenario2_DisplayText" },
+    { "Using windows to control layout", "SDKTemplate.Scenario3_UsingWindows" },
+    { "Updating line display attributes", "SDKTemplate.Scenario4_UpdatingLineDisplayAttributes" },
+    { "Defining custom glyphs", "SDKTemplate.Scenario5_DefiningCustomGlyphs" },
+    { "Modifying the display cursor", "SDKTemplate.Scenario6_ManipulatingCursorAttributes" },
+    { "Scrolling content using marquee", "SDKTemplate.Scenario7_ScrollingContentUsingMarquee" }
 };
 
-#if 0
-void SDKTemplate::MainPage::DisplayText(Platform::String^ text, Windows::Devices::PointOfService::LineDisplayTextAttribute attribute, bool middle)
+Concurrency::task<ClaimedLineDisplay^> MainPage::ClaimScenarioLineDisplayAsync()
 {
-    if (this->deviceId == nullptr)
+    ClaimedLineDisplay^ lineDisplay;
+    if (LineDisplayId->IsEmpty())
     {
-        NotifyUser("Select a Line Display first", NotifyType::ErrorMessage);
-        return;
+        NotifyUser("You must use scenario 1 to select a line display", NotifyType::ErrorMessage);
     }
-
-    NotifyUser("Please wait...", NotifyType::StatusMessage);
-
-    create_task(ClaimedLineDisplay::FromIdAsync(this->deviceId)).then([this, text, attribute, middle](ClaimedLineDisplay^ lineDisplay)
+    else
     {
-        if (lineDisplay != nullptr)
+        lineDisplay = co_await ClaimedLineDisplay::FromIdAsync(LineDisplayId);
+        if (lineDisplay == nullptr)
         {
-            Point position = {};
-            if (middle)
-            {
-                uint32 length = text->Length();
-                if (length < lineDisplay->DefaultWindow->SizeInCharacters.Width)
-                {
-                    position.X = (lineDisplay->DefaultWindow->SizeInCharacters.Width - length) / 2;
-                }
-            }
-
-            Windows::Devices::PointOfService::LineDisplayTextAttribute _attribute = attribute;
-            if (_attribute == LineDisplayTextAttribute::Blink)
-            {
-                if (lineDisplay->Capabilities->CanBlink == LineDisplayTextAttributeGranularity::NotSupported)
-                {
-                    _attribute = LineDisplayTextAttribute::Normal;
-                }
-            }
-
-            create_task(lineDisplay->DefaultWindow->TryClearTextAsync()).then([this, text, _attribute, position, lineDisplay](bool result)
-            {
-                create_task(lineDisplay->DefaultWindow->TryDisplayTextAsync(text, _attribute, position)).then([this](bool result)
-                {
-                    if (result)
-                    {
-                        NotifyUser("Text displayed", NotifyType::StatusMessage);
-                    }
-                    else
-                    {
-                        NotifyUser("Unable to display the text", NotifyType::ErrorMessage);
-                    }
-                });
-            });
+            NotifyUser("Unable to claim selected LineDisplay from id.", NotifyType::ErrorMessage);
         }
-        else
-        {
-            NotifyUser("Unable to connect to the selected Line Display", NotifyType::ErrorMessage);
-        }
-
-    });
+    }
+    return lineDisplay;
 }
-#endif
+
+void Helpers::AddItem(ComboBox^ comboBox, Object^ value, String^ name)
+{
+    auto item = ref new ComboBoxItem();
+    item->Content = name;
+    item->Tag = value;
+    comboBox->Items->Append(item);
+}

@@ -56,31 +56,14 @@
         }
     }
 
-    function getFirstReceiptPrinterAsync(connectionTypes) {
-        if (connectionTypes === undefined) {
-            // By default, use all connections types.
-            connectionTypes = Windows.Devices.PointOfService.PosConnectionTypes.all;
-        }
-        return DeviceHelpers.getFirstDeviceAsync(PosPrinter.getDeviceSelector(connectionTypes), (id) => {
-            return PosPrinter.fromIdAsync(id).then((printer) => {
-                if (printer && printer.capabilities.receipt.isPrinterPresent) {
-                    return printer;
-                }
-                // Close the unwanted printer.
-                printer && printer.close();
-                return null;
-            });
-        });
-    }
-
     WinJS.Namespace.define("SdkSample", {
         sampleTitle: sampleTitle,
         scenarios: new WinJS.Binding.List(scenarios),
         printer: null,
+        deviceInfo: null,
         claimedPrinter: null,
         isAnImportantTransaction: true,
         onstatechanged: null,
-        subscribeToReleaseDeviceRequested: subscribeToReleaseDeviceRequested,
-        getFirstReceiptPrinterAsync: getFirstReceiptPrinterAsync
+        subscribeToReleaseDeviceRequested: subscribeToReleaseDeviceRequested
     });
 })();

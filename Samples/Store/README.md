@@ -1,4 +1,15 @@
-﻿<!---
+---
+topic: sample
+languages:
+- csharp
+- cpp
+- js
+products:
+- windows
+- uwp
+---
+
+<!---
   category: AppSettings TrialsAdsAndInAppPurchases
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=627610
 --->

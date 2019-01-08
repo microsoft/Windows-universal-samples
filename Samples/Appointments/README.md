@@ -1,3 +1,13 @@
+---
+topic: sample
+languages:
+- csharp
+- vb
+products:
+- windows
+- uwp
+---
+
 <!---
   category: ContactsAndCalendar 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620488

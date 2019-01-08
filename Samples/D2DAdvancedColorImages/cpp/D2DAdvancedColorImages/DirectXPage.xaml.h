@@ -48,7 +48,7 @@ namespace D2DAdvancedColorImages
         void SliderChanged(_In_ Platform::Object^ sender, _In_ Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs^ e);
         void ComboChanged(_In_ Platform::Object^ sender, _In_ Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
 
-        void UpdateDisplayACState(_In_opt_ Windows::Graphics::Display::AdvancedColorInfo^ info);
+        void UpdateDisplayACState(_In_ Windows::Graphics::Display::AdvancedColorInfo^ info);
         void UpdateDefaultRenderOptions();
         void UpdateRenderOptions();
 

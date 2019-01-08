@@ -1,4 +1,13 @@
-﻿<!---
+---
+topic: sample
+languages:
+- csharp
+products:
+- windows
+- uwp
+---
+
+<!---
   category: ControlsLayoutAndText
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=798524
 --->

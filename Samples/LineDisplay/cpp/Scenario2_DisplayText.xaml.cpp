@@ -30,78 +30,54 @@ Scenario2_DisplayText::Scenario2_DisplayText()
 
 void Scenario2_DisplayText::OnNavigatedTo(NavigationEventArgs^ e)
 {
-    if (rootPage->LineDisplayId->IsEmpty())
-    {
-        rootPage->NotifyUser("You must use scenario 1 to select a line display", NotifyType::ErrorMessage);
-        DisplayTextButton->IsEnabled = false;
-    }
+    InitializeAsync();
+}
+
+void Scenario2_DisplayText::OnNavigatingFrom(NavigatingCancelEventArgs^ e)
+{
+    delete lineDisplay;
+    lineDisplay = nullptr;
+}
+
+task<void> Scenario2_DisplayText::InitializeAsync()
+{
+    lineDisplay = co_await rootPage->ClaimScenarioLineDisplayAsync();
+    BlinkCheckBox->IsEnabled = (lineDisplay != nullptr) && (lineDisplay->Capabilities->CanBlink != LineDisplayTextAttributeGranularity::NotSupported);
+    DisplayTextButton->IsEnabled = (lineDisplay != nullptr);
 }
 
 void Scenario2_DisplayText::DisplayTextButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-    create_task(ClaimedLineDisplay::FromIdAsync(rootPage->LineDisplayId))
-        .then([this](ClaimedLineDisplay^ lineDisplay)
+    invoke_async_lambda([=]() -> task<void>
     {
-        if (lineDisplay != nullptr)
+        String^ text = "Hello from UWP";
+
+        Point position = {};
+        if (CenterCheckBox->IsChecked->Value)
         {
-            String^ text = "Hello from UWP";
-
-            Point position = {};
-            if (CenterCheckBox->IsChecked->Value)
+            uint32 length = text->Length();
+            if (length < lineDisplay->DefaultWindow->SizeInCharacters.Width)
             {
-                uint32 length = text->Length();
-                if (length < lineDisplay->DefaultWindow->SizeInCharacters.Width)
-                {
-                    position.X = (lineDisplay->DefaultWindow->SizeInCharacters.Width - length) / 2;
-                }
+                position.X = (lineDisplay->DefaultWindow->SizeInCharacters.Width - length) / 2;
             }
+        }
 
-            LineDisplayTextAttribute attribute = LineDisplayTextAttribute::Normal;
+        LineDisplayTextAttribute attribute = LineDisplayTextAttribute::Normal;
 
-            // If blinking is requested, verify that the device supports blinking.
-            if (BlinkCheckBox->IsChecked->Value)
-            {
-                if (lineDisplay->Capabilities->CanBlink == LineDisplayTextAttributeGranularity::NotSupported)
-                {
-                    BlinkNotSupportedText->Visibility = Windows::UI::Xaml::Visibility::Visible;
-                }
-                else
-                {
-                    // Device supports blinking.
-                    attribute = LineDisplayTextAttribute::Blink;
-                }
-            }
+        if (BlinkCheckBox->IsChecked->Value)
+        {
+            attribute = LineDisplayTextAttribute::Blink;
+        }
 
-            create_task(lineDisplay->DefaultWindow->TryClearTextAsync())
-                .then([this, text, attribute, position, lineDisplay](bool result)
-            {
-                if (result)
-                {
-                    return create_task(lineDisplay->DefaultWindow->TryDisplayTextAsync(text, attribute, position));
-                }
-                else
-                {
-                    return task_from_result(result);
-                }
-            }).then([this, lineDisplay](bool result)
-            {
-                if (result)
-                {
-                    rootPage->NotifyUser("Text displayed sucessfully", NotifyType::StatusMessage);
-                }
-                else
-                {
-                    // We probably lost our claim.
-                    rootPage->NotifyUser("Unable to display text", NotifyType::ErrorMessage);
-                }
-
-                // Close the claimed line display.
-                delete lineDisplay;
-            }, task_continuation_context::get_current_winrt_context());
+        if (co_await lineDisplay->DefaultWindow->TryClearTextAsync() &&
+            co_await lineDisplay->DefaultWindow->TryDisplayTextAsync(text, attribute, position))
+        {
+            rootPage->NotifyUser("Text displayed sucessfully", NotifyType::StatusMessage);
         }
         else
         {
-            rootPage->NotifyUser("Unable to connect to the selected Line Display", NotifyType::ErrorMessage);
+            // We probably lost our claim.
+            rootPage->NotifyUser("Unable to display text", NotifyType::ErrorMessage);
         }
-    }, task_continuation_context::get_current_winrt_context());
+    });
 }

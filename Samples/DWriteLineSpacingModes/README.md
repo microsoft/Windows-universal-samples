@@ -1,4 +1,13 @@
-﻿<!---
+---
+topic: sample
+languages:
+- cpp
+products:
+- windows
+- uwp
+---
+
+<!---
   category: ControlsLayoutAndText
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620538
 --->

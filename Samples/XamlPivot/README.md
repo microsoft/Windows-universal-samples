@@ -1,3 +1,12 @@
+---
+topic: sample
+languages:
+- csharp
+products:
+- windows
+- uwp
+---
+
 <!---
   category: Navigation
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=619903

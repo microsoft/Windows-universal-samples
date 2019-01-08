@@ -1,3 +1,14 @@
+---
+topic: sample
+languages:
+- csharp
+- cpp
+- js
+products:
+- windows
+- uwp
+---
+
 <!---
   category: DevicesSensorsAndPower
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=851025
@@ -24,6 +35,29 @@ Specifically, this sample shows how to:
 
     This scenario demonstrates how to display text on the line display.
     It also demonstrates how to detect and take advantage of optional features (in this case, blinking text).
+
+3.  **Windows**
+
+    This scenario creates windows and manipulates them.
+
+4.  **Line display attributes**
+
+    This scenario detects which line display attributes are supported
+    and changes them.
+
+5.   **Custom glyphs**
+
+    This scenario detects whether custom glyphs are supported
+    and if so, changes glyphs to a solid black rectangle.
+
+6.   **Cursor attributes**
+
+    This scenario detects which cursor attributes are supported
+    and changes them.
+
+7.   **Marquee**
+
+    This scenario displays text using a marquee effect, if supported.
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  

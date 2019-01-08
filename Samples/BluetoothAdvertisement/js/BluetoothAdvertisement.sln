@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "BluetoothAdvertisement", "BluetoothAdvertisement.jsproj", "{45EA94D2-C512-552F-823F-314BC42F9853}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "BluetoothAdvertisement", "BluetoothAdvertisement.jsproj", "{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,30 +17,30 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Debug|ARM.ActiveCfg = Debug|ARM
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Debug|ARM.Build.0 = Debug|ARM
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Debug|ARM.Deploy.0 = Debug|ARM
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Debug|x64.ActiveCfg = Debug|x64
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Debug|x64.Build.0 = Debug|x64
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Debug|x64.Deploy.0 = Debug|x64
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Debug|x86.ActiveCfg = Debug|x86
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Debug|x86.Build.0 = Debug|x86
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Debug|x86.Deploy.0 = Debug|x86
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Release|Any CPU.Build.0 = Release|Any CPU
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Release|ARM.ActiveCfg = Release|ARM
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Release|ARM.Build.0 = Release|ARM
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Release|ARM.Deploy.0 = Release|ARM
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Release|x64.ActiveCfg = Release|x64
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Release|x64.Build.0 = Release|x64
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Release|x64.Deploy.0 = Release|x64
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Release|x86.ActiveCfg = Release|x86
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Release|x86.Build.0 = Release|x86
-		{45EA94D2-C512-552F-823F-314BC42F9853}.Release|x86.Deploy.0 = Release|x86
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Debug|ARM.ActiveCfg = Debug|ARM
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Debug|ARM.Build.0 = Debug|ARM
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Debug|ARM.Deploy.0 = Debug|ARM
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Debug|x64.ActiveCfg = Debug|x64
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Debug|x64.Build.0 = Debug|x64
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Debug|x64.Deploy.0 = Debug|x64
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Debug|x86.ActiveCfg = Debug|x86
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Debug|x86.Build.0 = Debug|x86
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Debug|x86.Deploy.0 = Debug|x86
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Release|ARM.ActiveCfg = Release|ARM
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Release|ARM.Build.0 = Release|ARM
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Release|ARM.Deploy.0 = Release|ARM
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Release|x64.ActiveCfg = Release|x64
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Release|x64.Build.0 = Release|x64
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Release|x64.Deploy.0 = Release|x64
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Release|x86.ActiveCfg = Release|x86
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Release|x86.Build.0 = Release|x86
+		{2ABEC581-BB02-54FC-83CD-3E5E14A9D17D}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

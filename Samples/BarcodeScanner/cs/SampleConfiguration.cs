@@ -85,7 +85,9 @@ namespace SDKTemplate
                 scanDataType == BarcodeSymbologies.UpceAdd2 ||
                 scanDataType == BarcodeSymbologies.UpceAdd5 ||
                 scanDataType == BarcodeSymbologies.Ean8 ||
-                scanDataType == BarcodeSymbologies.TfStd)
+                scanDataType == BarcodeSymbologies.TfStd ||
+                scanDataType == BarcodeSymbologies.OcrA ||
+                scanDataType == BarcodeSymbologies.OcrB)
             {
                 // The UPC, EAN8, and 2 of 5 families encode the digits 0..9
                 // which are then sent to the app in a UTF8 string (like "01234").

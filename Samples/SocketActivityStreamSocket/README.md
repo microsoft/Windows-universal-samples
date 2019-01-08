@@ -1,3 +1,12 @@
+---
+topic: sample
+languages:
+- csharp
+products:
+- windows
+- uwp
+---
+
 <!---
   category: NetworkingAndWebServices 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620606

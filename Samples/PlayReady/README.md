@@ -1,3 +1,13 @@
+---
+topic: sample
+languages:
+- csharp
+- js
+products:
+- windows
+- uwp
+---
+
 <!---
   category: PlayReady
   samplefwlink: https://aka.ms/playreadyuwp

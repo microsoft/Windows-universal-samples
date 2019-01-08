@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchKeyboard", "TouchKeyboard.csproj", "{98BB612F-11A8-51AB-8546-52B7DA064514}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchKeyboard", "TouchKeyboard.csproj", "{97293E44-4034-519A-925E-A165617B6300}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Debug|ARM.ActiveCfg = Debug|ARM
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Debug|ARM.Build.0 = Debug|ARM
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Debug|ARM.Deploy.0 = Debug|ARM
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Debug|x64.ActiveCfg = Debug|x64
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Debug|x64.Build.0 = Debug|x64
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Debug|x64.Deploy.0 = Debug|x64
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Debug|x86.ActiveCfg = Debug|x86
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Debug|x86.Build.0 = Debug|x86
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Debug|x86.Deploy.0 = Debug|x86
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Release|ARM.ActiveCfg = Release|ARM
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Release|ARM.Build.0 = Release|ARM
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Release|ARM.Deploy.0 = Release|ARM
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Release|x64.ActiveCfg = Release|x64
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Release|x64.Build.0 = Release|x64
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Release|x64.Deploy.0 = Release|x64
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Release|x86.ActiveCfg = Release|x86
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Release|x86.Build.0 = Release|x86
-		{98BB612F-11A8-51AB-8546-52B7DA064514}.Release|x86.Deploy.0 = Release|x86
+		{97293E44-4034-519A-925E-A165617B6300}.Debug|ARM.ActiveCfg = Debug|ARM
+		{97293E44-4034-519A-925E-A165617B6300}.Debug|ARM.Build.0 = Debug|ARM
+		{97293E44-4034-519A-925E-A165617B6300}.Debug|ARM.Deploy.0 = Debug|ARM
+		{97293E44-4034-519A-925E-A165617B6300}.Debug|x64.ActiveCfg = Debug|x64
+		{97293E44-4034-519A-925E-A165617B6300}.Debug|x64.Build.0 = Debug|x64
+		{97293E44-4034-519A-925E-A165617B6300}.Debug|x64.Deploy.0 = Debug|x64
+		{97293E44-4034-519A-925E-A165617B6300}.Debug|x86.ActiveCfg = Debug|x86
+		{97293E44-4034-519A-925E-A165617B6300}.Debug|x86.Build.0 = Debug|x86
+		{97293E44-4034-519A-925E-A165617B6300}.Debug|x86.Deploy.0 = Debug|x86
+		{97293E44-4034-519A-925E-A165617B6300}.Release|ARM.ActiveCfg = Release|ARM
+		{97293E44-4034-519A-925E-A165617B6300}.Release|ARM.Build.0 = Release|ARM
+		{97293E44-4034-519A-925E-A165617B6300}.Release|ARM.Deploy.0 = Release|ARM
+		{97293E44-4034-519A-925E-A165617B6300}.Release|x64.ActiveCfg = Release|x64
+		{97293E44-4034-519A-925E-A165617B6300}.Release|x64.Build.0 = Release|x64
+		{97293E44-4034-519A-925E-A165617B6300}.Release|x64.Deploy.0 = Release|x64
+		{97293E44-4034-519A-925E-A165617B6300}.Release|x86.ActiveCfg = Release|x86
+		{97293E44-4034-519A-925E-A165617B6300}.Release|x86.Build.0 = Release|x86
+		{97293E44-4034-519A-925E-A165617B6300}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

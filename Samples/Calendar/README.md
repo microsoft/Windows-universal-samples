@@ -1,3 +1,15 @@
+---
+topic: sample
+languages:
+- csharp
+- cpp
+- js
+- vb
+products:
+- windows
+- uwp
+---
+
 <!--
   category: GlobalizationAndLocalization
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=624043
