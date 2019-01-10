@@ -41,7 +41,7 @@ Scenario3_ProportionalSpacing::Scenario3_ProportionalSpacing()
         L"en-US",
         L"Cambria Math",
         24.0f, // text size (DIPs)
-        static_cast<uint32>(floor(TextLayoutImage->ActualWidth)), // text layout width
+        static_cast<uint32>(floor(TextLayoutImage->Width)), // text layout width
         LineSpacingMethod::Proportional
         );
 
@@ -53,8 +53,8 @@ Scenario3_ProportionalSpacing::Scenario3_ProportionalSpacing()
     // it draw, and then use it as the source for the XAML image element.
     m_textLayoutImageSource = ref new TextLayoutImageSource(
         m_textLayout,
-        static_cast<uint32>(floor(TextLayoutImage->ActualWidth)),
-        static_cast<uint32>(floor(TextLayoutImage->ActualHeight))
+        static_cast<uint32>(floor(TextLayoutImage->Width)),
+        static_cast<uint32>(floor(TextLayoutImage->Height))
         );
     m_textLayoutImageSource->Draw();
     TextLayoutImage->Source = m_textLayoutImageSource;

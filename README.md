@@ -365,7 +365,6 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/FolderEnumeration">Folder enumeration</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/HomeGroup">HomeGroup</a></td>
   <td><a href="Samples/LibraryManagement">Library management</a></td>
   <td><a href="Samples/SemanticTextQuery">Semantic text query</a></td>
  </tr>
