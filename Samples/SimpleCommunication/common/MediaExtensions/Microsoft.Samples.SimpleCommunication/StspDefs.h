@@ -63,13 +63,13 @@ struct StspDescription
 
 enum StspSampleFlags
 {
-    StspSampleFlag_BottomFieldFirst,
-    StspSampleFlag_CleanPoint,
-    StspSampleFlag_DerivedFromTopField,
-    StspSampleFlag_Discontinuity,
-    StspSampleFlag_Interlaced,
-    StspSampleFlag_RepeatFirstField,
-    StspSampleFlag_SingleField,
+    StspSampleFlag_BottomFieldFirst = 1,
+    StspSampleFlag_CleanPoint = 2,
+    StspSampleFlag_DerivedFromTopField = 4,
+    StspSampleFlag_Discontinuity = 8,
+    StspSampleFlag_Interlaced = 16,
+    StspSampleFlag_RepeatFirstField = 32,
+    StspSampleFlag_SingleField = 64,
 };
 
 struct StspSampleHeader

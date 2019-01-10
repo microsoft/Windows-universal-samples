@@ -183,19 +183,19 @@ present in the font." />
                       <TextBlock Margin="0,0,0,4" Text="Metrics of first line (DWRITE_LINE_METRICS1 members):" TextWrapping="WrapWholeWords" />
                       <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
                           <TextBlock Margin="0,0,4,0" Text="height:" />
-                          <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutHeight, Mode=OneWay}" />
+                          <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutHeight}" />
                       </StackPanel>
                       <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
                           <TextBlock Margin="0,0,4,0" Text="baseline:" />
-                          <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutBaseline, Mode=OneWay}" />
+                          <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutBaseline}" />
                       </StackPanel>
                       <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
                           <TextBlock Margin="0,0,4,0" Text="leadingBefore:" />
-                          <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutLeadingBefore, Mode=OneWay}" />
+                          <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutLeadingBefore}" />
                       </StackPanel>
                       <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
                           <TextBlock Margin="0,0,4,0" Text="leadingAfter:" />
-                          <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutLeadingAfter, Mode=OneWay}" />
+                          <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutLeadingAfter}" />
                       </StackPanel>
                   </StackPanel>
 

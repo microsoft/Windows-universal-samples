@@ -230,7 +230,7 @@ The only way to ensure the same spacing on all lines is to use uniform spacing."
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Height:" FontSize="{ThemeResource ControlContentThemeFontSize}" Margin="0,0,4,0"/>
-                                    <TextBlock Text="{x:Bind Path=LineSpacingHeight, Mode=OneWay}" FontSize="{ThemeResource ControlContentThemeFontSize}" Margin="0" />
+                                    <TextBlock Text="{x:Bind Path=LineSpacingHeight}" FontSize="{ThemeResource ControlContentThemeFontSize}" Margin="0" />
                                 </StackPanel>
                                 <Slider Name="HeightSlider" Minimum="0" Maximum="4" StepFrequency="0.01"
                                         Value="{x:Bind Path=LineSpacingHeight, Mode=TwoWay}" />
@@ -238,7 +238,7 @@ The only way to ensure the same spacing on all lines is to use uniform spacing."
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Baseline:" FontSize="{ThemeResource ControlContentThemeFontSize}" Margin="0,0,4,0"/>
-                                    <TextBlock Text="{x:Bind Path=LineSpacingBaseline, Mode=OneWay}" FontSize="{ThemeResource ControlContentThemeFontSize}" Margin="0" />
+                                    <TextBlock Text="{x:Bind Path=LineSpacingBaseline}" FontSize="{ThemeResource ControlContentThemeFontSize}" Margin="0" />
                                 </StackPanel>
                                 <Slider Name="BaselineSlider" Minimum="0" Maximum="4" StepFrequency="0.01"
                                         Value="{x:Bind Path=LineSpacingBaseline, Mode=TwoWay}" />
@@ -246,7 +246,7 @@ The only way to ensure the same spacing on all lines is to use uniform spacing."
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Leading before:" FontSize="{ThemeResource ControlContentThemeFontSize}" Margin="0,0,4,0"/>
-                                    <TextBlock Text="{x:Bind Path=LineSpacingLeadingBefore, Mode=OneWay}" FontSize="{ThemeResource ControlContentThemeFontSize}" Margin="0" />
+                                    <TextBlock Text="{x:Bind Path=LineSpacingLeadingBefore}" FontSize="{ThemeResource ControlContentThemeFontSize}" Margin="0" />
                                 </StackPanel>
                                 <Slider Name="LeadingBeforeSlider" Minimum="0" Maximum="1" StepFrequency="0.01"
                                         Value="{x:Bind Path=LineSpacingLeadingBefore, Mode=TwoWay}" />
@@ -266,19 +266,19 @@ The only way to ensure the same spacing on all lines is to use uniform spacing."
                         <TextBlock Margin="0,0,0,4" Text="Computed metrics of first line (DWRITE_LINE_METRICS1 members):" TextWrapping="WrapWholeWords" />
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
                             <TextBlock Margin="0,0,4,0" Text="height:" />
-                            <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutHeight, Mode=OneWay}" />
+                            <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutHeight}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
                             <TextBlock Margin="0,0,4,0" Text="baseline:" />
-                            <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutBaseline, Mode=OneWay}" />
+                            <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutBaseline}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
                             <TextBlock Margin="0,0,4,0" Text="leadingBefore:" />
-                            <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutLeadingBefore, Mode=OneWay}" />
+                            <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutLeadingBefore}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
                             <TextBlock Margin="0,0,4,0" Text="leadingAfter:" />
-                            <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutLeadingAfter, Mode=OneWay}" />
+                            <TextBlock Margin="0" Text="{x:Bind Path=TextLayoutLeadingAfter}" />
                         </StackPanel>
                     </StackPanel>
 
