@@ -127,6 +127,7 @@
     <Compile Include="Scenario6_CustomEffects.xaml.cs">
       <DependentUpon>Scenario6_CustomEffects.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario7_FrameInputNode.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -176,6 +177,10 @@
     </Page>
     <Page Include="..\..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario7_FrameInputNode.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
