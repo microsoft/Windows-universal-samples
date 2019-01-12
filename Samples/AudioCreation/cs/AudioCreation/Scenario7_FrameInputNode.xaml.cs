@@ -108,13 +108,14 @@ namespace AudioCreation
         private MainPage rootPage;
         private AudioGraph graph;
         private AudioDeviceOutputNode deviceOutputNode;
-//        private AudioFrameInputNode frameInputNode;
+        //        private AudioFrameInputNode frameInputNode;
 
-        private readonly double startC = (261.625565300599F / 32.0);  // down n octaves from midC
-        private readonly double startE = (329.62755691287F / 32.0);
-        private readonly double startG = (391.995435981749F / 32.0);
+        static double octaveScale = 16.0;
+        private readonly double startC = (261.625565300599F / octaveScale);  // down n octaves from midC
+        private readonly double startE = (329.62755691287F / octaveScale);
+        private readonly double startG = (391.995435981749F / octaveScale);
 
-        private int noteCount = 48;
+        private int noteCount = 16;
         private int bufferLength = 480;
         private int sampleCount;
 
