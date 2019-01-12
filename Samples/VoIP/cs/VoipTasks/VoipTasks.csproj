@@ -110,10 +110,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="project.json" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="AppService.cs" />
     <Compile Include="BackgroundOperations\BackgroundOperations.cs" />
     <Compile Include="CallRtcTask.cs" />
@@ -131,6 +127,11 @@
       <Project>{fc9cbb95-624c-4ce8-86a8-3ab5a415aa65}</Project>
       <Name>VoipBackEnd</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>5.0.0</Version>
+    </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
