@@ -231,7 +231,6 @@ namespace AudioCreation
             AudioGraphSettings settings = new AudioGraphSettings(AudioRenderCategory.Media);
             settings.QuantumSizeSelectionMode = QuantumSizeSelectionMode.ClosestToDesired;
             settings.DesiredSamplesPerQuantum = bufferLength;
-            sampleCount = settings.DesiredSamplesPerQuantum;
 
             CreateAudioGraphResult result = await AudioGraph.CreateAsync(settings);
 

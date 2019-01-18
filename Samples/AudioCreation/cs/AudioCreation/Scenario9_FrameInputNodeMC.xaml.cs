@@ -108,7 +108,7 @@ namespace AudioCreation
         {
             // Buffer size is (number of samples) * (size of each sample)
             // We choose to generate single channel (mono) audio. For multi-channel, multiply by number of channels
-            uint bufferSize = samples * parentGraph.EncodingProperties.ChannelCount * sizeof(float);
+            uint bufferSize = samples * (uint)frequencyList.Count * sizeof(float);
             AudioFrame frame = new Windows.Media.AudioFrame(bufferSize);
 
             using (AudioBuffer buffer = frame.LockBuffer(AudioBufferAccessMode.Write))
@@ -132,7 +132,7 @@ namespace AudioCreation
                 for (int i = 0; i < samples; i++)
                 {
                     // for multiple channels, samples are interleaved
-                    for (int ch = 0; ch < parentGraph.EncodingProperties.ChannelCount; ch++)
+                    for (int ch = 0; ch < frequencyList.Count; ch++)
                     {
                         double sampleIncrement = (frequencyList[ch] * (Math.PI * 2)) / sampleRate;
 
@@ -164,9 +164,8 @@ namespace AudioCreation
         private readonly double startE = (329.62755691287F / octaveScale);
         private readonly double startG = (391.995435981749F / octaveScale);
 
-        private int noteCount = 16;
-        private int bufferLength = 480;
-        private int sampleCount;
+        private int noteCount = 24;
+        private int bufferLength = 48*5; // 3mS
 
         private Dictionary<AudioFrameInputNode, NoteMC> inputNotes = new Dictionary<AudioFrameInputNode, NoteMC>();
         private List<double> allFrequencyList = new List<double>();
@@ -179,7 +178,6 @@ namespace AudioCreation
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             rootPage = MainPage.Current;
-            await CreateAudioGraph();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -249,7 +247,7 @@ namespace AudioCreation
                 // the nyQuist frequency which will just sound like noise.
 
                 if (currentNote == null ||
-                   (currentNote.GetFrequencyCount() >= graph.EncodingProperties.ChannelCount))
+                   (currentNote.GetFrequencyCount() >= props.ChannelCount))
                 {
                     var inNode = graph.CreateFrameInputNode(props);
                     inNode.AddOutgoingConnection(outputNode);
@@ -289,21 +287,18 @@ namespace AudioCreation
 
         private async Task CreateAudioGraph()
         {
+            allFrequencyList.Clear();
+            inputNotes.Clear();
+
             // Create an AudioGraph with default settings
             AudioGraphSettings settings = new AudioGraphSettings(AudioRenderCategory.Media);
             settings.QuantumSizeSelectionMode = QuantumSizeSelectionMode.ClosestToDesired;
+
+            if (Int32.TryParse(DesiredLatencyText.Text, out var bufLength))
+            {
+                bufferLength = bufLength * 48;
+            }
             settings.DesiredSamplesPerQuantum = bufferLength;
-            sampleCount = settings.DesiredSamplesPerQuantum;
-
-            var encoding = new AudioEncodingProperties();
-            encoding.BitsPerSample = 32;
-            encoding.Bitrate = 3072000;
-            encoding.ChannelCount = 1;
-            encoding.SampleRate = 48000;
-            encoding.Subtype = "Float";
-            // encoding.Type = "Audio"; // evidently set by the creation of the audiograph
-
-            settings.EncodingProperties = encoding;
 
             CreateAudioGraphResult result = await AudioGraph.CreateAsync(settings);
 
@@ -331,17 +326,29 @@ namespace AudioCreation
             rootPage.NotifyUser("Device Output Node successfully created", NotifyType.StatusMessage);
             speakerContainer.Background = new SolidColorBrush(Colors.Green);
 
-            // Create the FrameInputNode at the same format as the graph, except explicitly set mono.
+            // Create the FrameInputNode at the same format as the graph, except explicitly set the number of input channels
+            // to allow us to use a multiple channel stream
             AudioEncodingProperties nodeEncodingProperties = graph.EncodingProperties;
-//            nodeEncodingProperties.ChannelCount = 1;
+
+            uint chanCount = 1;
+            if ( UInt32.TryParse(ChannelsPerStreamText.Text, out var chanCnt))
+            {
+                chanCount = chanCnt;
+            }
+            nodeEncodingProperties.ChannelCount = chanCount;
+
+            if ( Int32.TryParse(NoteCountText.Text, out var noteCnt))
+            {
+                noteCount = noteCnt;
+            }
             CreateNotes(noteCount, nodeEncodingProperties, deviceOutputNode);
 
             double lowNote = allFrequencyList[0];
             double hiNote = allFrequencyList[allFrequencyList.Count - 1];
 
             noteCount = inputNotes.Keys.Count;
-            var mSLength = 1000.0 * (double)bufferLength / 48000.0;
-            setupDescription = $"playing {noteCount} notes in {allFrequencyList.Count / 3} octaves ({lowNote:0.0} -> {hiNote:0.0}), {graph.SamplesPerQuantum} samples, in {inputNotes.Count}, {mSLength:0.0}mS buffers";
+            var mSLength = 1000.0 * (double)graph.SamplesPerQuantum / (double)graph.EncodingProperties.SampleRate;
+            setupDescription = $"playing {allFrequencyList.Count} notes in {allFrequencyList.Count / 3} octaves ({lowNote:0.0} -> {hiNote:0.0}), {graph.SamplesPerQuantum} samples, in {inputNotes.Count}, {mSLength:0.0}mS buffers";
             DetailText.Text = setupDescription;
 
             frameContainer.Background = new SolidColorBrush(Colors.Green);
@@ -363,6 +370,11 @@ namespace AudioCreation
                 AudioFrame audioData = theNote.GenerateAudioData(numSamplesNeeded);
                 theNote.noteSynth.AddFrame(audioData);
             }
+        }
+
+        private async void InitNow_Click(object sender, RoutedEventArgs e)
+        {
+            await CreateAudioGraph();
         }
     }
 }

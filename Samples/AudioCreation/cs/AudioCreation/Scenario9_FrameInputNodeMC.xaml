@@ -46,6 +46,11 @@
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Name="DetailText" Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Text="This scenario illustrates using the FrameInputNode to play audio. Audio samples are dynamically generated to fill the FrameInputNode." />
+
+                <TextBox x:Name="DesiredLatencyText" InputScope="Digits" Header="Latency mS"/>
+                <TextBox x:Name="NoteCountText" Header="#notes" InputScope="Digits" />
+                <TextBox x:Name="ChannelsPerStreamText" InputScope="Digits" Header="chan/stream"/>
+                <Button x:Name="InitNow" Content="Init" Click="InitNow_Click"/>
             </StackPanel>
 
             <!--Main content is scrollable-->
