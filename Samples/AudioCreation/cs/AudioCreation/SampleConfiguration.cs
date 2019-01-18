@@ -29,7 +29,8 @@ namespace SDKTemplate
             new Scenario() { Title="Inbox Effects", ClassType=typeof(Scenario5_InboxEffects)},
             new Scenario() { Title="Custom Effects", ClassType=typeof(Scenario6_CustomEffects)},
             new Scenario() { Title="Blended Synth", ClassType=typeof(Scenario7_FrameInput)},
-            new Scenario() { Title="n Channel read mix", ClassType=typeof(Scenario8_MaxSubmix)}
+            new Scenario() { Title="n Channel read mix", ClassType=typeof(Scenario8_MaxSubmix)},
+            new Scenario() { Title="Blended multi-channel synth", ClassType=typeof(Scenario9_FrameInputNodeMC)}
         };
     }
 
