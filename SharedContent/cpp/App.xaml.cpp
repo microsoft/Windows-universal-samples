@@ -35,6 +35,7 @@ using namespace Windows::UI::Xaml::Navigation;
 // C# partial methods in C++.
 
 static void Partial_Construct() { }
+static void Partial_LaunchCompleted(LaunchActivatedEventArgs^ e) { }
 
 /// <summary>
 /// Initializes the singleton application object.  This is the first line of authored code
@@ -108,6 +109,9 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
         // Ensure the current window is active
         Window::Current->Activate();
     }
+
+    // Some samples want access to the LaunchActivatedEventArgs.
+    Partial_LaunchCompleted(e);
 }
 
 /// <summary>

@@ -36,7 +36,17 @@
     var wiFiDirect = { displayName: "Wi-Fi Direct", selector: Windows.Devices.WiFiDirect.WiFiDirectDevice.getDeviceSelector(Windows.Devices.WiFiDirect.WiFiDirectDeviceSelectorType.associationEndpoint) };
     var wiFiDirectPairedOnly = { displayName: "Wi-Fi Direct (paired)", selector: Windows.Devices.WiFiDirect.WiFiDirectDevice.getDeviceSelector() };
     var pointOfServicePrinter = { displayName: "Point of Service Printer", selector: Windows.Devices.PointOfService.PosPrinter.getDeviceSelector() };
-    var videoCasting = { displayName: "Video Casting", selector: Windows.Media.Casting.CastingDevice.getDeviceSelector(Windows.Media.Casting.CastingPlaybackTypes.video) };
+
+    try {
+        var videoCasting = { displayName: "Video Casting", selector: Windows.Media.Casting.CastingDevice.getDeviceSelector(Windows.Media.Casting.CastingPlaybackTypes.video) };
+    } catch (e) {
+        if (e.number === 0x80070032 | 0) { // HRESULT_FROM_WIN32(ERROR_NOT_SUPPORTED)
+            // Video casting not supported by the system.
+        } else {
+            throw e;
+        }
+    }
+
     var dialAllApps = { displayName: "DIAL (All Apps)", selector: Windows.Media.DialProtocol.DialDevice.getDeviceSelector("") };
 
     // WSD and UPnP are unique in that there are currently no general WSD or UPnP APIs to USE the devices once you've discovered them. 
@@ -53,7 +63,7 @@
     devicePickerArray.push(bluetoothLEUnpairedOnly);
     devicePickerArray.push(wiFiDirect);
     devicePickerArray.push(pointOfServicePrinter);
-    devicePickerArray.push(videoCasting);
+    videoCasting && devicePickerArray.push(videoCasting);
     devicePickerArray.push(dialAllApps);
     var devicePickerSelectors = new WinJS.Binding.List(devicePickerArray);
 
@@ -68,7 +78,7 @@
     deviceWatcherArray.push(bluetoothLE);
     deviceWatcherArray.push(wiFiDirect);
     deviceWatcherArray.push(pointOfServicePrinter);
-    deviceWatcherArray.push(videoCasting);
+    videoCasting && deviceWatcherArray.push(videoCasting);
     deviceWatcherArray.push(dialAllApps);
     deviceWatcherArray.push(wsd);
     deviceWatcherArray.push(upnp);
@@ -79,7 +89,7 @@
     backgroundDeviceWatcherArray.push(bluetoothLEPairedOnly);
     backgroundDeviceWatcherArray.push(wiFiDirectPairedOnly);
     backgroundDeviceWatcherArray.push(pointOfServicePrinter);
-    backgroundDeviceWatcherArray.push(videoCasting);
+    videoCasting && backgroundDeviceWatcherArray.push(videoCasting);
     backgroundDeviceWatcherArray.push(dialAllApps);
     backgroundDeviceWatcherArray.push(wsd);
     backgroundDeviceWatcherArray.push(upnp);
@@ -90,7 +100,7 @@
     pairingArray.push(bluetoothLE);
     pairingArray.push(wiFiDirect);
     pairingArray.push(pointOfServicePrinter);
-    pairingArray.push(videoCasting);
+    videoCasting && pairingArray.push(videoCasting);
     pairingArray.push(wsd);
     pairingArray.push(upnp);
     var pairingSelectors = new WinJS.Binding.List(pairingArray);

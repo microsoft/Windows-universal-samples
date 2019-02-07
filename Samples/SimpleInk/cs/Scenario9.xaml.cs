@@ -47,12 +47,18 @@ namespace SDKTemplate
             this.InitializeComponent();
 
             inkCanvas.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Mouse | CoreInputDeviceTypes.Pen | CoreInputDeviceTypes.Touch;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // Registering handlers for StrokesCollected event
             inkCanvas.InkPresenter.StrokesCollected += InkPresenter_StrokesCollected;
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             StopReplay();
+            inkCanvas.InkPresenter.StrokesCollected -= InkPresenter_StrokesCollected;
         }
 
         private void InkPresenter_StrokesCollected(InkPresenter sender, InkStrokesCollectedEventArgs e)

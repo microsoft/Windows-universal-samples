@@ -37,6 +37,7 @@ Specifically, this sample shows:
 * Finding and downloading Offline Maps
 * Customizing the map appearance by using style sheets
 * Customizing the map elements appearance more deeply by using style entries and states
+* Overlay and animate custom tiled images on the map
 
 This sample is written in XAML.
 

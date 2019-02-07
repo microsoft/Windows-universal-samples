@@ -18,6 +18,7 @@ using Windows.UI.Core;
 using Windows.UI.Input.Inking;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace SDKTemplate
 {
@@ -50,8 +51,20 @@ namespace SDKTemplate
 
             inkCanvas.InkPresenter.UpdateDefaultDrawingAttributes(drawingAttributes);
             inkCanvas.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Mouse | CoreInputDeviceTypes.Pen;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // Registering handlers for when inking or erasing is detected
             inkCanvas.InkPresenter.StrokesCollected += InkPresenter_StrokesCollected;
             inkCanvas.InkPresenter.StrokesErased += InkPresenter_StrokesErased;
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            // Unregistering handlers for when inking or erasing is detected
+            inkCanvas.InkPresenter.StrokesCollected -= InkPresenter_StrokesCollected;
+            inkCanvas.InkPresenter.StrokesErased -= InkPresenter_StrokesErased;
         }
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)

@@ -138,7 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="App.xaml.h">
+    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h">
       <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h">
@@ -183,7 +183,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="App.xaml.cpp">
+    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp">
       <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp">

@@ -16,6 +16,7 @@ using Windows.UI.Input.Inking;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
 
 namespace SDKTemplate
 {
@@ -33,9 +34,20 @@ namespace SDKTemplate
             // Initialize the InkCanvas controls
             inkCanvas.InkPresenter.InputDeviceTypes =
             inkCanvas2.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Mouse | CoreInputDeviceTypes.Pen;
+        }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // Registering handlers for PointerEntered event
             inkCanvas.InkPresenter.UnprocessedInput.PointerEntered += UnprocessedInput_PointerEntered;
             inkCanvas2.InkPresenter.UnprocessedInput.PointerEntered += UnprocessedInput_PointerEntered1;
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            // Unregistering handlers for PointerEntered event
+            inkCanvas.InkPresenter.UnprocessedInput.PointerEntered -= UnprocessedInput_PointerEntered;
+            inkCanvas2.InkPresenter.UnprocessedInput.PointerEntered -= UnprocessedInput_PointerEntered1;
         }
 
         private void UnprocessedInput_PointerEntered(InkUnprocessedInput sender, PointerEventArgs args)

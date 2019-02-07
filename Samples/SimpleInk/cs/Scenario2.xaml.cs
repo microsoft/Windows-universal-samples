@@ -16,6 +16,7 @@ using Windows.UI.Input.Inking;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 
 namespace SDKTemplate
@@ -65,10 +66,20 @@ namespace SDKTemplate
 
             // Initialize the InkCanvas
             inkCanvas.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Mouse | CoreInputDeviceTypes.Pen;
+        }
 
-            // Handlers to clear the selection when inking or erasing is detected
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // Registering handlers to clear the selection when inking or erasing is detected
             inkCanvas.InkPresenter.StrokeInput.StrokeStarted += StrokeInput_StrokeStarted;
             inkCanvas.InkPresenter.StrokesErased += InkPresenter_StrokesErased;
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            // Unregistering handlers to clear the selection when inking or erasing is detected
+            inkCanvas.InkPresenter.StrokeInput.StrokeStarted -= StrokeInput_StrokeStarted;
+            inkCanvas.InkPresenter.StrokesErased -= InkPresenter_StrokesErased;
         }
 
         private void StrokeInput_StrokeStarted(InkStrokeInput sender, PointerEventArgs args)

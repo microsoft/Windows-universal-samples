@@ -73,6 +73,9 @@
         var builder = new Windows.ApplicationModel.Background.BackgroundTaskBuilder();
         builder.taskEntryPoint = taskEntryPoint;
         builder.setTrigger(completionGroup.trigger);
+
+        // The system automatically unregisters the BackgroundTransferCompletionGroup task when it triggers.
+        // You do not need to unregister it explicitly.
         var taskRegistration = builder.register();
 
         var downloader = new Windows.Networking.BackgroundTransfer.BackgroundDownloader(completionGroup);

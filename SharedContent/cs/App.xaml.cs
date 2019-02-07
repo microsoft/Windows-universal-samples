@@ -78,8 +78,12 @@ namespace SDKTemplate
                 // parameter
                 rootFrame.Navigate(typeof(MainPage), e.Arguments);
             }
+
             // Ensure the current window is active
             Window.Current.Activate();
+
+            // Some samples want access to the LaunchActivatedEventArgs.
+            LaunchCompleted(e);
         }
 
         private Frame CreateRootFrame()
@@ -116,5 +120,8 @@ namespace SDKTemplate
 
         // Add any application contructor code in here.
         partial void Construct();
+
+        // Add any OnLaunched customization here.
+        partial void LaunchCompleted(LaunchActivatedEventArgs e);
     }
 }

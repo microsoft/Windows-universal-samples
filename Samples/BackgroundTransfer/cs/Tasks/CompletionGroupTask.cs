@@ -133,6 +133,8 @@ namespace Tasks
             builder.TaskEntryPoint = "Tasks.CompletionGroupTask";
             builder.SetTrigger(completionGroup.Trigger);
 
+            // The system automatically unregisters the BackgroundTransferCompletionGroup task when it triggers.
+            // You do not need to unregister it explicitly.
             BackgroundTaskRegistration taskRegistration = builder.Register();
 
             BackgroundDownloader downloader = new BackgroundDownloader(completionGroup);
