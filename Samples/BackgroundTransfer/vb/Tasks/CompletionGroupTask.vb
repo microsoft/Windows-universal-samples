@@ -90,7 +90,11 @@ Namespace Global.Tasks
             Dim builder As BackgroundTaskBuilder = New BackgroundTaskBuilder()
             builder.TaskEntryPoint = "Tasks.CompletionGroupTask"
             builder.SetTrigger(completionGroup.Trigger)
+
+            ' The system automatically unregisters the BackgroundTransferCompletionGroup task when it triggers.
+            ' You do not need to unregister it explicitly.
             Dim taskRegistration As BackgroundTaskRegistration = builder.Register()
+
             Dim downloader As BackgroundDownloader = New BackgroundDownloader(completionGroup)
             Return downloader
         End Function

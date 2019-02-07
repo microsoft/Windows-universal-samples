@@ -64,6 +64,8 @@ Scenario 15: Validate the server certificate
 
 For a sample that shows how to use [HttpClient](http://msdn.microsoft.com/library/windows/apps/dn298639) so that the app is always connected and always reachable using background network notifications in a Universal Windows Platform (UWP) app, download the [ControlChannelTrigger HttpClient sample](http://go.microsoft.com/fwlink/p/?linkid=258323) .
 
+This sample uses the Try versions of the HttpClient methods which do not raise exceptions. For a version that uses the exception-based methods, see [the v7.0.6 sample](https://github.com/Microsoft/Windows-universal-samples/tree/v7.0.6/Samples/HttpClient).
+
 ## Network capabilities
 
 This sample requires that network capabilities be set in the *Package.appxmanifest* file to allow the app to access the network at runtime. These capabilities can be set in the app manifest using Microsoft Visual Studio.

@@ -15,6 +15,7 @@ using Windows.UI.Input.Inking;
 using Windows.UI.Input.Inking.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace SDKTemplate
 {
@@ -48,13 +49,27 @@ namespace SDKTemplate
             var drawingAttributes = inkCanvas.InkPresenter.CopyDefaultDrawingAttributes();
             drawingAttributes.Size = new Size(penSize, penSize);
             inkCanvas.InkPresenter.UpdateDefaultDrawingAttributes(drawingAttributes);
+        }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // Registering handlers for Wet Stroke events
             coreWetStrokeUpdateSource = CoreWetStrokeUpdateSource.Create(inkCanvas.InkPresenter);
             coreWetStrokeUpdateSource.WetStrokeStarting += CoreWetStrokeUpdateSource_WetStrokeStarting;
             coreWetStrokeUpdateSource.WetStrokeContinuing += CoreWetStrokeUpdateSource_WetStrokeContinuing;
             coreWetStrokeUpdateSource.WetStrokeStopping += CoreWetStrokeUpdateSource_WetStrokeStopping;
             coreWetStrokeUpdateSource.WetStrokeCompleted += CoreWetStrokeUpdateSource_WetStrokeCompleted;
             coreWetStrokeUpdateSource.WetStrokeCanceled += CoreWetStrokeUpdateSource_WetStrokeCanceled;
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            // Unegistering handlers for Wet Stroke events
+            coreWetStrokeUpdateSource.WetStrokeStarting -= CoreWetStrokeUpdateSource_WetStrokeStarting;
+            coreWetStrokeUpdateSource.WetStrokeContinuing -= CoreWetStrokeUpdateSource_WetStrokeContinuing;
+            coreWetStrokeUpdateSource.WetStrokeStopping -= CoreWetStrokeUpdateSource_WetStrokeStopping;
+            coreWetStrokeUpdateSource.WetStrokeCompleted -= CoreWetStrokeUpdateSource_WetStrokeCompleted;
+            coreWetStrokeUpdateSource.WetStrokeCanceled -= CoreWetStrokeUpdateSource_WetStrokeCanceled;
         }
 
         private void InkStackPanel_Loaded(object sender, RoutedEventArgs e)

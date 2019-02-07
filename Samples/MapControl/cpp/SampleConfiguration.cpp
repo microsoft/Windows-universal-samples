@@ -31,6 +31,7 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Find and download Offline Maps", "SDKTemplate.Scenario8" },
     { "Custom map appearance", "SDKTemplate.Scenario9" },
     { "Custom map elements appearance", "SDKTemplate.Scenario11" },
+    { "Animated MapTileSource", "SDKTemplate.Scenario12" },
 };
 
 Geopoint^ MainPage::SeattleGeopoint = ref new Geopoint({ 47.604, -122.329 });

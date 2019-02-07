@@ -169,43 +169,6 @@ namespace SDKTemplate
         }
     }
 
-#if x
-    public class GeneralPropertyValueConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            object property = null;
-
-            var properties = value as IReadOnlyDictionary<string, object>;
-            var propertyName = parameter as string;
-            if (properties != null && !string.IsNullOrEmpty(propertyName))
-            {
-                property = properties[propertyName];
-            }
-
-            return property;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            throw new NotImplementedException();
-        }
-    }
-#endif
-    // This inverts the sense of a boolean.
-    public class InvertConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            return !(bool)value;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            return !(bool)value;
-        }
-    }
-
     /// <summary>
     ///     This enum assists in finding a string representation of a BT SIG assigned value for Service UUIDS
     ///     Reference: https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx

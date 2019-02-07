@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.props')" />
+  <PropertyGroup Label="Globals">
+    <MinimalCoreWin>true</MinimalCoreWin>
+    <ProjectGuid>{69E9A7C6-CEFF-40EB-90C5-A756B4AAE40B}</ProjectGuid>
+    <ProjectName>TitleBar</ProjectName>
+    <RootNamespace>SDKTemplate</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>$(WindowsTargetPlatformVersion)</WindowsTargetPlatformMinVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);..\..\..\SharedContent\cppwinrt</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <WarningLevel>Level4</WarningLevel>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
+    <ClCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\SharedContent\cppwinrt\App.h">
+      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SharedContent\cppwinrt\MainPage.h">
+      <DependentUpon>..\..\..\SharedContent\xaml\MainPage.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="CustomTitleBar.h">
+      <DependentUpon>..\shared\CustomTitleBar.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Scenario1_Colors.h">
+      <DependentUpon>..\shared\Scenario1_Colors.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario2_Extend.h">
+      <DependentUpon>..\shared\Scenario2_Extend.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="..\..\..\SharedContent\xaml\MainPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\CustomTitleBar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario1_Colors.xaml" />
+    <Page Include="..\shared\Scenario2_Extend.xaml" />
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+      <Link>Styles\Styles.xaml</Link>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\SharedContent\cppwinrt\App.cpp">
+      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SharedContent\cppwinrt\MainPage.cpp">
+      <DependentUpon>..\..\..\SharedContent\xaml\MainPage.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="CustomTitleBar.cpp">
+      <DependentUpon>..\shared\CustomTitleBar.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="SampleConfiguration.cpp">
+      <DependentUpon>SampleConfiguration.h</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario1_Colors.cpp">
+      <DependentUpon>..\shared\Scenario1_Colors.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario2_Extend.cpp">
+      <DependentUpon>..\shared\Scenario2_Extend.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <DependentUpon>pch.h</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="..\..\..\SharedContent\cppwinrt\App.idl">
+      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
+    </Midl>
+    <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl">
+      <DependentUpon>..\..\..\SharedContent\xaml\MainPage.xaml</DependentUpon>
+    </Midl>
+    <Midl Include="CustomTitleBar.idl">
+      <DependentUpon>..\shared\CustomTitleBar.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="Scenario1_Colors.idl">
+      <DependentUpon>..\shared\Scenario1_Colors.xaml</DependentUpon>
+    </Midl>
+    <Midl Include="Scenario2_Extend.idl">
+      <DependentUpon>..\shared\Scenario2_Extend.xaml</DependentUpon>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Link>Assets\microsoft-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Link>Assets\smallTile-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Link>Assets\splash-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>Assets\squareTile-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Link>Assets\storeLogo-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Link>Assets\tile-sdk.png</Link>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Link>Assets\windows-sdk.png</Link>
+    </Image>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.targets'))" />
+  </Target>
+</Project>

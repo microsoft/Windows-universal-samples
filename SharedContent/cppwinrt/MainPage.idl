@@ -1,0 +1,39 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    enum NotifyType
+    {
+        StatusMessage,
+        ErrorMessage
+    };
+
+    struct Scenario
+    {
+        String Title;
+        Windows.UI.Xaml.Interop.TypeName ClassName;
+    };
+
+    [default_interface]
+    runtimeclass MainPage : Windows.UI.Xaml.Controls.Page
+    {
+        MainPage();
+
+        static String FEATURE_NAME{ get; };
+        static Windows.Foundation.Collections.IVector<Scenario> scenarios{ get; };
+        
+        static MainPage Current{ get; };
+
+        void NotifyUser(String strMessage, NotifyType type);
+        void Navigate(Windows.UI.Xaml.Interop.TypeName name, Object parameter);
+    };
+}

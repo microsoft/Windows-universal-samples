@@ -83,67 +83,73 @@ namespace SDKTemplate
             rootPage.NotifyUser("In progress", NotifyType.StatusMessage);
 
             bool isUsingCustomValidation = false;
+            if (DefaultOSValidation.IsChecked.Value)
+            {
+                //Do nothing
+            }
+            else if (DefaultAndCustomValidation.IsChecked.Value)
+            {
+                // Add event handler to listen to the ServerCustomValidationRequested event. By default, OS validation
+                // will be performed before the event is raised.
+                filter.ServerCustomValidationRequested += MyCustomServerCertificateValidator;
+                isUsingCustomValidation = true;
+            }
+            else if (IgnoreErrorsAndCustomValidation.IsChecked.Value)
+            {
+                // ---------------------------------------------------------------------------
+                // WARNING: Only test applications should ignore SSL errors.
+                // In real applications, ignoring server certificate errors can lead to Man-In-The-Middle
+                // attacks (while the connection is secure, the server is not authenticated).
+                // Note that not all certificate validation errors can be ignored.
+                // ---------------------------------------------------------------------------
+                filter.IgnorableServerCertificateErrors.Add(ChainValidationResult.Untrusted);
+                filter.IgnorableServerCertificateErrors.Add(ChainValidationResult.InvalidName);
+
+                // Add event handler to listen to the ServerCustomValidationRequested event.
+                // This event handler must implement the desired custom certificate validation logic.
+                filter.ServerCustomValidationRequested += MyCustomServerCertificateValidator;
+                isUsingCustomValidation = true;
+            }
+
+            // Here, we turn off writing to and reading from the cache to ensure that each request actually 
+            // hits the network and tries to establish an SSL/TLS connection with the server.
+            filter.CacheControl.WriteBehavior = HttpCacheWriteBehavior.NoCache;
+            filter.CacheControl.ReadBehavior = HttpCacheReadBehavior.NoCache;
+
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, resourceAddress);
+
+            // This sample uses a "try" in order to support TaskCanceledException.
+            // If you don't need to support cancellation, then the "try" is not needed.
             try
             {
-                if (DefaultOSValidation.IsChecked.Value)
-                {
-                    //Do nothing
-                }
-                else if (DefaultAndCustomValidation.IsChecked.Value)
-                {
-                    // Add event handler to listen to the ServerCustomValidationRequested event. By default, OS validation
-                    // will be performed before the event is raised.
-                    filter.ServerCustomValidationRequested += MyCustomServerCertificateValidator;
-                    isUsingCustomValidation = true;
-                }
-                else if (IgnoreErrorsAndCustomValidation.IsChecked.Value)
-                {
-                    // ---------------------------------------------------------------------------
-                    // WARNING: Only test applications should ignore SSL errors.
-                    // In real applications, ignoring server certificate errors can lead to Man-In-The-Middle
-                    // attacks (while the connection is secure, the server is not authenticated).
-                    // Note that not all certificate validation errors can be ignored.
-                    // ---------------------------------------------------------------------------
-                    filter.IgnorableServerCertificateErrors.Add(ChainValidationResult.Untrusted);
-                    filter.IgnorableServerCertificateErrors.Add(ChainValidationResult.InvalidName);
 
-                    // Add event handler to listen to the ServerCustomValidationRequested event.
-                    // This event handler must implement the desired custom certificate validation logic.
-                    filter.ServerCustomValidationRequested += MyCustomServerCertificateValidator;
-                    isUsingCustomValidation = true;
-                }
-
-                // Here, we turn off writing to and reading from the cache to ensure that each request actually 
-                // hits the network and tries to establish an SSL/TLS connection with the server.
-                filter.CacheControl.WriteBehavior = HttpCacheWriteBehavior.NoCache;
-                filter.CacheControl.ReadBehavior = HttpCacheReadBehavior.NoCache;
-
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, resourceAddress);
-                HttpResponseMessage response = await httpClient.SendRequestAsync(
+                HttpRequestResult result = await httpClient.TrySendRequestAsync(
                     request,
                     HttpCompletionOption.ResponseHeadersRead).AsTask(cts.Token);
 
-                rootPage.NotifyUser("Success - response received from server. Server certificate was valid.", NotifyType.StatusMessage);
+                if (result.Succeeded)
+                {
+                    rootPage.NotifyUser("Success - response received from server. Server certificate was valid.", NotifyType.StatusMessage);
+                }
+                else
+                {
+
+                    Helpers.DisplayWebError(rootPage, result.ExtendedError);
+
+                }
             }
             catch (TaskCanceledException)
             {
                 rootPage.NotifyUser("Request canceled.", NotifyType.ErrorMessage);
             }
-            catch (Exception ex)
-            {
-                // Network errors are reported as exceptions.
-                rootPage.NotifyUser("Error: " + ex.Message, NotifyType.ErrorMessage);
-            }
-            finally
-            {
-                if (isUsingCustomValidation)
-                {
-                    // Unregister the event handler after we are done validating.
-                    filter.ServerCustomValidationRequested -= MyCustomServerCertificateValidator;
-                }
 
-                Helpers.ScenarioCompleted(StartButton, CancelButton);
+            if (isUsingCustomValidation)
+            {
+                // Unregister the event handler after we are done validating.
+                filter.ServerCustomValidationRequested -= MyCustomServerCertificateValidator;
             }
+
+            Helpers.ScenarioCompleted(StartButton, CancelButton);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

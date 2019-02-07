@@ -130,7 +130,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_Colors.xaml">
+    <Page Include="..\shared\Scenario1_Colors.xaml">
+      <Link>Scenario1_Colors.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

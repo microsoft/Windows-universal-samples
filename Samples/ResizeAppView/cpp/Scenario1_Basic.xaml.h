@@ -31,7 +31,6 @@ namespace SDKTemplate
 
         void ResizeView_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void SetMinimumSize_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-        void UseMinimalOverlaysCheckBox_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void OnWindowSizeChanged(Platform::Object^ sender, Windows::UI::Core::WindowSizeChangedEventArgs^ e);
         void UpdateContent();
 

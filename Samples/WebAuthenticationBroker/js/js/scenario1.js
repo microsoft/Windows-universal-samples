@@ -100,11 +100,13 @@
 
         var client = new Windows.Web.Http.HttpClient();
         var uri = new Windows.Foundation.Uri(`https://graph.facebook.com/me?access_token=${encodeURIComponent(access_token)}`);
-        return client.getStringAsync(uri).then(function (result) {
-            var userInfo = JSON.parse(result);
-            facebookUserName.textContent = userInfo.name;
-        }, function (err) {
-            facebookUserName.textContent = "Error contacting Facebook";
+        return client.tryGetStringAsync(uri).then(function (result) {
+            if (result.succeeded) {
+                var userInfo = JSON.parse(result.value);
+                facebookUserName.textContent = userInfo.name;
+            } else {
+                facebookUserName.textContent = "Error contacting Facebook";
+            }
         });
     }
 })();

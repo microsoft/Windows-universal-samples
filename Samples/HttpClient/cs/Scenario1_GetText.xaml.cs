@@ -92,67 +92,71 @@ namespace SDKTemplate
 
             Helpers.ScenarioStarted(StartButton, CancelButton, OutputField);
             rootPage.NotifyUser("In progress", NotifyType.StatusMessage);
+            
+            if (ReadDefaultRadio.IsChecked.Value)
+            {
+                filter.CacheControl.ReadBehavior = HttpCacheReadBehavior.Default;
+            }
+            else if (ReadMostRecentRadio.IsChecked.Value)
+            {
+                filter.CacheControl.ReadBehavior = HttpCacheReadBehavior.MostRecent;
+            }
+            else if (ReadOnlyFromCacheRadio.IsChecked.Value)
+            {
+                filter.CacheControl.ReadBehavior = HttpCacheReadBehavior.OnlyFromCache;
+            }
+            else if (ReadNoCacheRadio.IsChecked.Value)
+            {
+                filter.CacheControl.ReadBehavior = HttpCacheReadBehavior.NoCache;
+            }
 
+            if (WriteDefaultRadio.IsChecked.Value)
+            {
+                filter.CacheControl.WriteBehavior = HttpCacheWriteBehavior.Default;
+            }
+            else if (WriteNoCacheRadio.IsChecked.Value)
+            {
+                filter.CacheControl.WriteBehavior = HttpCacheWriteBehavior.NoCache;
+            }
+
+            // ---------------------------------------------------------------------------
+            // WARNING: Only test applications should ignore SSL errors.
+            // In real applications, ignoring server certificate errors can lead to MITM
+            // attacks (while the connection is secure, the server is not authenticated).
+            //
+            // The SetupServer script included with this sample creates a server certificate that is self-signed
+            // and issued to fabrikam.com, and hence we need to ignore these errors here. 
+            // ---------------------------------------------------------------------------
+            filter.IgnorableServerCertificateErrors.Add(ChainValidationResult.Untrusted);
+            filter.IgnorableServerCertificateErrors.Add(ChainValidationResult.InvalidName);
+
+            // This sample uses a "try" in order to support TaskCanceledException.
+            // If you don't need to support cancellation, then the "try" is not needed.
             try
             {
-                if (ReadDefaultRadio.IsChecked.Value)
-                {
-                    filter.CacheControl.ReadBehavior = HttpCacheReadBehavior.Default;
-                }
-                else if (ReadMostRecentRadio.IsChecked.Value)
-                {
-                    filter.CacheControl.ReadBehavior = HttpCacheReadBehavior.MostRecent;
-                }
-                else if (ReadOnlyFromCacheRadio.IsChecked.Value)
-                {
-                    filter.CacheControl.ReadBehavior = HttpCacheReadBehavior.OnlyFromCache;
-                }
-                else if (ReadNoCacheRadio.IsChecked.Value)
-                {
-                    filter.CacheControl.ReadBehavior = HttpCacheReadBehavior.NoCache;
-                }
+                HttpRequestResult result = await httpClient.TryGetAsync(resourceUri).AsTask(cts.Token);
 
-                if (WriteDefaultRadio.IsChecked.Value)
+                if (result.Succeeded)
                 {
-                    filter.CacheControl.WriteBehavior = HttpCacheWriteBehavior.Default;
+                    isFilterUsed = true;
+
+                    await Helpers.DisplayTextResultAsync(result.ResponseMessage, OutputField, cts.Token);
+
+                    rootPage.NotifyUser(
+                        "Completed. Response came from " + result.ResponseMessage.Source + ". HTTP version used: " + result.ResponseMessage.Version.ToString() + ".",
+                        NotifyType.StatusMessage);
                 }
-                else if (WriteNoCacheRadio.IsChecked.Value)
+                else
                 {
-                    filter.CacheControl.WriteBehavior = HttpCacheWriteBehavior.NoCache;
+                    Helpers.DisplayWebError(rootPage, result.ExtendedError);
                 }
-
-                // ---------------------------------------------------------------------------
-                // WARNING: Only test applications should ignore SSL errors.
-                // In real applications, ignoring server certificate errors can lead to MITM
-                // attacks (while the connection is secure, the server is not authenticated).
-                //
-                // The SetupServer script included with this sample creates a server certificate that is self-signed
-                // and issued to fabrikam.com, and hence we need to ignore these errors here. 
-                // ---------------------------------------------------------------------------
-                filter.IgnorableServerCertificateErrors.Add(ChainValidationResult.Untrusted);
-                filter.IgnorableServerCertificateErrors.Add(ChainValidationResult.InvalidName);
-
-                HttpResponseMessage response = await httpClient.GetAsync(resourceUri).AsTask(cts.Token);
-                isFilterUsed = true;
-
-                await Helpers.DisplayTextResultAsync(response, OutputField, cts.Token);
-
-                rootPage.NotifyUser(
-                    "Completed. Response came from " + response.Source + ". HTTP version used: " + response.Version.ToString() + ".",
-                    NotifyType.StatusMessage);
             }
             catch (TaskCanceledException)
             {
                 rootPage.NotifyUser("Request canceled.", NotifyType.ErrorMessage);
             }
-            catch (Exception ex)
-            {
-                rootPage.NotifyUser("Error: " + ex.Message, NotifyType.ErrorMessage);
-            }
-            finally
-            {
-                Helpers.ScenarioCompleted(StartButton, CancelButton);
-            }
+
+            Helpers.ScenarioCompleted(StartButton, CancelButton);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

@@ -122,35 +122,45 @@ void Scenario1::Start_Click(Object^ sender, RoutedEventArgs^ e)
     filter->IgnorableServerCertificateErrors->Append(ChainValidationResult::Untrusted);
     filter->IgnorableServerCertificateErrors->Append(ChainValidationResult::InvalidName);
 
+    // Do an asynchronous GET.
+    create_task(httpClient->TryGetAsync(uri), cancellationTokenSource.get_token())
+        .then([=](HttpRequestResult^ result)
+    {
+        if (result->Succeeded)
+        {
+            HttpResponseMessage^ response = result->ResponseMessage;
 
-    // Do an asynchronous GET. We need to use use_current() with the continuations since the tasks are completed on
-    // background threads and we need to run on the UI thread to update the UI.
-    create_task(httpClient->GetAsync(uri), cancellationTokenSource.get_token()).then([=](HttpResponseMessage^ response)
+            isFilterUsed = true;
+            return Helpers::DisplayTextResultAsync(response, OutputField, cancellationTokenSource.get_token())
+                .then([=]()
+            {
+                rootPage->NotifyUser(
+                    "Completed. Response came from " + response->Source.ToString() + ". HTTP version used: " + result->ResponseMessage->Version.ToString() + ".",
+                    NotifyType::StatusMessage);
+            });
+        }
+        else
+        {
+            Helpers::DisplayWebError(rootPage, result->ExtendedError);
+            return task_from_result();
+        }
+    }).then([=](task<void> previousTask)
     {
-        isFilterUsed = true;
-        return Helpers::DisplayTextResultAsync(response, OutputField, cancellationTokenSource.get_token());
-    }, task_continuation_context::use_current()).then([=](task<HttpResponseMessage^> previousTask)
-    {
+        // This sample uses a "try" in order to support cancellation.
+        // If you don't need to support cancellation, then the "try" is not needed.
         try
         {
-            // Check if any previous task threw an exception.
-            HttpResponseMessage^ response = previousTask.get();
-
-            rootPage->NotifyUser(
-                "Completed. Response came from " + response->Source.ToString() +". HTTP version used: " + response->Version.ToString() + ".",
-                NotifyType::StatusMessage);
+            // Check if the task was canceled.
+            previousTask.get();
         }
         catch (const task_canceled&)
         {
             rootPage->NotifyUser("Request canceled.", NotifyType::ErrorMessage);
         }
-        catch (Exception^ ex)
-        {
-            rootPage->NotifyUser("Error: " + ex->Message, NotifyType::ErrorMessage);
-        }
 
         Helpers::ScenarioCompleted(StartButton, CancelButton);
     });
+
 }
 
 void Scenario1::Cancel_Click(Object^ sender, RoutedEventArgs^ e)

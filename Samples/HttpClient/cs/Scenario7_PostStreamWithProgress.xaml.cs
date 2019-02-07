@@ -94,35 +94,39 @@ namespace SDKTemplate
             ResetFields();
             rootPage.NotifyUser("In progress", NotifyType.StatusMessage);
 
+            const uint streamLength = 100000;
+            HttpStreamContent streamContent = new HttpStreamContent(new SlowInputStream(streamLength));
+
+            // If stream length is unknown, the request is chunked transfer encoded.
+            if (!ChunkedRequestToggle.IsOn)
+            {
+                streamContent.Headers.ContentLength = streamLength;
+            }
+
+            IProgress<HttpProgress> progress = new Progress<HttpProgress>(ProgressHandler);
+
+            // This sample uses a "try" in order to support TaskCanceledException.
+            // If you don't need to support cancellation, then the "try" is not needed.
             try
             {
-                const uint streamLength = 100000;
-                HttpStreamContent streamContent = new HttpStreamContent(new SlowInputStream(streamLength));
+                HttpRequestResult result = await httpClient.TryPostAsync(resourceAddress, streamContent).AsTask(cts.Token, progress);
 
-                // If stream length is unknown, the request is chunked transfer encoded.
-                if (!ChunkedRequestToggle.IsOn)
+                if (result.Succeeded)
                 {
-                    streamContent.Headers.ContentLength = streamLength;
+                    rootPage.NotifyUser("Completed", NotifyType.StatusMessage);
                 }
-
-                IProgress<HttpProgress> progress = new Progress<HttpProgress>(ProgressHandler);
-                HttpResponseMessage response = await httpClient.PostAsync(resourceAddress, streamContent).AsTask(cts.Token, progress);
-
-                rootPage.NotifyUser("Completed", NotifyType.StatusMessage);
+                else
+                {
+                    Helpers.DisplayWebError(rootPage, result.ExtendedError);
+                }
             }
             catch (TaskCanceledException)
             {
                 rootPage.NotifyUser("Request canceled.", NotifyType.ErrorMessage);
             }
-            catch (Exception ex)
-            {
-                rootPage.NotifyUser("Error: " + ex.Message, NotifyType.ErrorMessage);
-            }
-            finally
-            {
-                RequestProgressBar.Value = 100;
-                Helpers.ScenarioCompleted(StartButton, CancelButton);
-            }
+
+            RequestProgressBar.Value = 100;
+            Helpers.ScenarioCompleted(StartButton, CancelButton);
         }
 
         private void ResetFields()

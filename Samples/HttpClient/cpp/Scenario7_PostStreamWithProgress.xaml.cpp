@@ -100,9 +100,10 @@ void Scenario7::Start_Click(Object^ sender, RoutedEventArgs^ e)
         streamContent->Headers->ContentLength = streamLength;
     }
 
-    IAsyncOperationWithProgress<HttpResponseMessage^, HttpProgress>^ operation = httpClient->PostAsync(resourceAddress, streamContent);
-    operation->Progress = ref new AsyncOperationProgressHandler<HttpResponseMessage^, HttpProgress>([=](
-        IAsyncOperationWithProgress<HttpResponseMessage^, HttpProgress>^ asyncInfo,
+    // Do an asynchronous POST.
+    IAsyncOperationWithProgress<HttpRequestResult^, HttpProgress>^ operation = httpClient->TryPostAsync(resourceAddress, streamContent);
+    operation->Progress = ref new AsyncOperationProgressHandler<HttpRequestResult^, HttpProgress>([=](
+        IAsyncOperationWithProgress<HttpRequestResult^, HttpProgress>^ asyncInfo,
         HttpProgress progress)
     {
         rootPage->Dispatcher->RunAsync(Windows::UI::Core::CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([=]()
@@ -158,30 +159,36 @@ void Scenario7::Start_Click(Object^ sender, RoutedEventArgs^ e)
         }));
     });
 
-    // Do an asynchronous POST.  We need to use use_current() with the continuations since the tasks are completed on
-    // background threads and we need to run on the UI thread to update the UI.
-    create_task(operation, cancellationTokenSource.get_token()).then([this](task<HttpResponseMessage^> previousTask)
+    // Continue when the POST completes.
+    create_task(operation, cancellationTokenSource.get_token())
+        .then([this](HttpRequestResult^ result)
     {
+        if (result->Succeeded)
+        {
+            rootPage->NotifyUser("Completed", NotifyType::StatusMessage);
+        }
+        else
+        {
+            Helpers::DisplayWebError(rootPage, result->ExtendedError);
+        }
+    }).then([=](task<void> previousTask)
+    {
+        // This sample uses a "try" in order to support cancellation.
+        // If you don't need to support cancellation, then the "try" is not needed.
         try
         {
-            // Check if any previous task threw an exception.
+            // Check if the task was canceled.
             previousTask.get();
 
-            rootPage->NotifyUser("Completed", NotifyType::StatusMessage);
         }
         catch (const task_canceled&)
         {
             rootPage->NotifyUser("Request canceled.", NotifyType::ErrorMessage);
         }
-        catch (Exception^ ex)
-        {
-            rootPage->NotifyUser("Error: " + ex->Message, NotifyType::ErrorMessage);
-        }
 
         RequestProgressBar->Value = 100;
         Helpers::ScenarioCompleted(StartButton, CancelButton);
-
-    }, task_continuation_context::use_current());
+    });
 }
 
 void Scenario7::Cancel_Click(Object^ sender, RoutedEventArgs^ e)

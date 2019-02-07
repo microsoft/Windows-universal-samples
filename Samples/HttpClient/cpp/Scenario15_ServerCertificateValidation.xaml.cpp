@@ -115,23 +115,30 @@ void Scenario15::Start_Click(Object^ sender, RoutedEventArgs^ e)
 
     HttpRequestMessage^ request = ref new HttpRequestMessage(HttpMethod::Get, resourceAddress);
 
-    create_task(httpClient->SendRequestAsync(request, HttpCompletionOption::ResponseHeadersRead),
-        cancellationTokenSource.get_token()).then(
-            [this, eventToken](task<HttpResponseMessage^> previousTask)
+    create_task(httpClient->TrySendRequestAsync(request, HttpCompletionOption::ResponseHeadersRead), cancellationTokenSource.get_token())
+        .then([=](HttpRequestResult^ result)
     {
+        if (result->Succeeded)
+        {
+            rootPage->NotifyUser("Success - response received from server. Server certificate was valid.", NotifyType::StatusMessage);
+        }
+        else
+        {
+            Helpers::DisplayWebError(rootPage, result->ExtendedError);
+        }
+    }).then([=](task<void> previousTask)
+    {
+        // This sample uses a "try" in order to support cancellation.
+        // If you don't need to support cancellation, then the "try" is not needed.
         try
         {
-            // Check if the previous task threw an exception.
+            // Check if the task was canceled.
             previousTask.get();
-            rootPage->NotifyUser("Success - response received from server. Server certificate was valid.", NotifyType::StatusMessage);
+
         }
         catch (const task_canceled&)
         {
             rootPage->NotifyUser("Request canceled.", NotifyType::ErrorMessage);
-        }
-        catch (Exception^ ex)
-        {
-            rootPage->NotifyUser("Error: " + ex->Message, NotifyType::ErrorMessage);
         }
 
         // Make sure to unregister the event handler when we are done
@@ -139,11 +146,9 @@ void Scenario15::Start_Click(Object^ sender, RoutedEventArgs^ e)
         {
             filter->ServerCustomValidationRequested -= eventToken;
         }
-       
+
         Helpers::ScenarioCompleted(StartButton, CancelButton);
-
-    }, task_continuation_context::use_current());
-
+    });
 }
 
 void Scenario15::Cancel_Click(Object^ sender, RoutedEventArgs^ e)

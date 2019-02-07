@@ -1,23 +1,43 @@
 @ECHO OFF
 IF /I "%1"=="-UNINSTALL" GOTO Uninstall
-	xcopy /f /y ".\UWPSDKSampleCS" "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C#\Windows\Universal\UWPSDKSampleCS\"
-	xcopy /f /y ".\UWPSDKSampleCPP" "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C++ Project\Windows\Universal\UWPSDKSampleCPP\"
-	REM xcopy /f /y ".\UWPSDKSampleJS" "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\JavaScript\Windows\Universal\UWPSDKSampleJS\"
-	copy ".\Shared\README.md" "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C#\Windows\Universal\UWPSDKSampleCS"
-	copy ".\Shared\README.MD" "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C++ Project\Windows\Universal\UWPSDKSampleCPP"
-	REM copy ".\Shared\README.MD" "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\JavaScript\Windows\Universal\UWPSDKSampleJS"
-	xcopy /f /y ".\UWPSDKSampleScenarioItemCPP" "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C++ Project\UWPSDKSampleScenarioItem\"
-	xcopy /f /y ".\UWPSDKSampleScenarioItemCS" "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C#\UWPSDKSampleScenarioItem\"
-	copy "..\media\windows-sdk.png" "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C#\Windows\Universal\UWPSDKSampleCS"
-	copy "..\media\windows-sdk.png" "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C++ Project\Windows\Universal\UWPSDKSampleCPP"
-	REM copy "..\media\windows-sdk.png" "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\JavaScript\Windows\Universal\UWPSDKSampleJS"
-	copy "..\media\windows-sdk.png" "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C++ Project\UWPSDKSampleScenarioItem"
-	copy "..\media\windows-sdk.png" "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C#\UWPSDKSampleScenarioItem"
-	GOTO End
+	call :directory "ProjectTemplates\Visual C#\Windows Universal" UWPSDKSampleCS Shared\Project\*
+	call :directory "ItemTemplates\Visual C#\Windows Universal" UWPSDKSampleScenarioItemCS Shared\Item\*
+
+	call :directory "ProjectTemplates\Visual C++ Project\Windows Universal" UWPSDKSampleCX Shared\Project\*
+	call :directory "ItemTemplates\Visual C++ Project\Windows Universal" UWPSDKSampleScenarioItemCX Shared\Item\*
+
+	call :directory "ProjectTemplates\Visual C++ Project\Windows Universal" UWPSDKSampleCPP Shared\Project\*
+	call :directory "ItemTemplates\Visual C++ Project\Windows Universal" UWPSDKSampleScenarioItemCPP Shared\Item\*
+
+rem	call :directory "ProjectTemplates\JavaScript\Windows Universal" UWPSDKSampleJS Shared\README.md
+
+	GOTO :eof
+
+:directory
+	setlocal
+	set SUBDIR=%1
+	set SUBDIR=%SUBDIR:"=%
+	set OUTPUTDIR=%USERPROFILE%\Documents\Visual Studio 2017\Templates\%SUBDIR%\%2
+	xcopy /f /y %2 "%OUTPUTDIR%\"
+	copy "..\media\windows-sdk.png" "%OUTPUTDIR%"
+	shift
+	shift
+:copymore
+	if "%1"=="" goto :enddirectory
+	copy %1 "%OUTPUTDIR%"
+	shift
+	goto :copymore
+:enddirectory
+	endlocal
+	goto :eof
 :Uninstall
-	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C#\Windows\Universal\UWPSDKSampleCS"
-	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C++ Project\Windows\Universal\UWPSDKSampleCPP"
-	REM rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\JavaScript\Windows\Universal\UWPSDKSampleJS"
-	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C++ Project\UWPSDKSampleScenarioItem"
-	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C#\UWPSDKSampleScenarioItem"
-:End
+	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C#\Windows Universal\UWPSDKSampleCS"
+	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C#\Windows Universal\UWPSDKSampleScenarioItemCS"
+
+	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleCX"
+	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleScenarioItemCX"
+
+	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleCPPWINRT"
+	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleScenarioItemCPPWINRT"
+
+	REM rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\JavaScript\Windows Universal\UWPSDKSampleJS"

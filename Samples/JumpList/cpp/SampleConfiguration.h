@@ -55,4 +55,11 @@ namespace SDKTemplate
         Platform::String^ Title;
         Platform::String^ ClassName;
     };
+
+    partial ref class App
+    {
+        void Partial_LaunchCompleted(Windows::ApplicationModel::Activation::LaunchActivatedEventArgs^ e);
+    public:
+        void OnFileActivated(Windows::ApplicationModel::Activation::FileActivatedEventArgs^ args) override;
+    };
 }

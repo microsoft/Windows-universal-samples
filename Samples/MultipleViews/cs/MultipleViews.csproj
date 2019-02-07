@@ -125,15 +125,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1.xaml">
+    <Page Include="..\shared\Scenario1.xaml">
+      <Link>Scenario1.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3.xaml">
+    <Page Include="..\shared\Scenario3.xaml">
+      <Link>Scenario3.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SecondaryViewPage.xaml">
+    <Page Include="..\shared\SecondaryViewPage.xaml">
+      <Link>SecondaryViewPage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

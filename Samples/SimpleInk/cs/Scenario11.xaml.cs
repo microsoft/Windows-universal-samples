@@ -8,11 +8,11 @@
 // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 //
 //*********************************************************
-using System;
 using Windows.UI.Input.Inking;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.ViewManagement;
+using Windows.UI.Xaml.Navigation;
 
 namespace SDKTemplate
 {
@@ -34,7 +34,16 @@ namespace SDKTemplate
             
             ContrastingColorButton.IsChecked = true;
             ContrastingColorButton.Visibility = accessibility.HighContrast ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
             accessibility.HighContrastChanged += Accessibility_HighContrastChanged;
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            accessibility.HighContrastChanged -= Accessibility_HighContrastChanged;
         }
 
         private void Accessibility_HighContrastChanged(AccessibilitySettings sender, object args)

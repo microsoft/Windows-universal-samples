@@ -23,7 +23,6 @@ namespace SDKTemplate
         {
             new Scenario() { Title="Scenario 1", ClassType=typeof(Scenario1_ShortName)},
             new Scenario() { Title="Scenario 2", ClassType=typeof(Scenario2_ShortName)},
-            new Scenario() { Title="Scenario 3", ClassType=typeof(Scenario3_ShortName)}
         };
     }
 

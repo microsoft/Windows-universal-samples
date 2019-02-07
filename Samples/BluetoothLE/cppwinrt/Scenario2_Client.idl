@@ -1,0 +1,29 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    [default_interface]
+    runtimeclass Scenario2_Client : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario2_Client();
+
+        Windows.Foundation.Collections.IObservableVector<Object> ServiceCollection{ get; };
+        Windows.Foundation.Collections.IObservableVector<Object> CharacteristicCollection{ get; };
+        void ConnectButton_Click();
+        void ServiceList_SelectionChanged();
+        void CharacteristicList_SelectionChanged();
+        void CharacteristicReadButton_Click();
+        void CharacteristicWriteButton_Click();
+        void CharacteristicWriteButtonInt_Click();
+        void ValueChangedSubscribeToggle_Click();
+    }
+}

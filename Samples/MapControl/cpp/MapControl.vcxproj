@@ -180,6 +180,9 @@
     <ClInclude Include="Scenario11.xaml.h">
       <DependentUpon>..\shared\Scenario11.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario12.xaml.h">
+      <DependentUpon>..\shared\Scenario12.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
@@ -222,6 +225,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="..\shared\Scenario11.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario12.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
@@ -284,6 +290,9 @@
     </ClCompile>
     <ClCompile Include="Scenario11.xaml.cpp">
       <DependentUpon>..\shared\Scenario11.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario12.xaml.cpp">
+      <DependentUpon>..\shared\Scenario12.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -65,6 +65,14 @@ namespace SDKTemplate
                 MainPage.Current.LaunchParam = "file: " + args.Files[0].Name;
             }
         }
+
+        partial void LaunchCompleted(LaunchActivatedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(e.Arguments))
+            {
+                MainPage.Current.LaunchParam = "arguments: " + e.Arguments;
+            }
+        }
     }
 
     public class Scenario

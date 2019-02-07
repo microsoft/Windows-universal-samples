@@ -18,18 +18,18 @@ namespace LiveDash.Util
             filter.CacheControl.WriteBehavior = Windows.Web.Http.Filters.HttpCacheWriteBehavior.NoCache;
             using (var httpClient = new HttpClient(filter))
             {
-                try
+                HttpGetBufferResult result = await httpClient.TryGetBufferAsync(url);
+                if (result.Succeeded)
                 {
-                    var buffer = await httpClient.GetBufferAsync(url);
 #if DEBUG
                     Logger.Log("GetBufferAsync suceeded for url: " + url);
 #endif
-                    return buffer;
+                    return result.Value;
                 }
-                catch (Exception e)
+                else
                 {
 #if DEBUG
-                    Logger.Log("GetBufferAsync exception for url: " + url + " HRESULT 0x" + e.HResult.ToString("x"));
+                    Logger.Log("GetBufferAsync exception for url: " + url + " HRESULT 0x" + result.ExtendedError.HResult.ToString("x"));
 #endif
                     return null;
                 }
@@ -42,20 +42,20 @@ namespace LiveDash.Util
             filter.CacheControl.WriteBehavior = Windows.Web.Http.Filters.HttpCacheWriteBehavior.NoCache;
             using (var httpClient = new HttpClient(filter))
             {
-                try
-                {
-                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Head, url);
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Head, url);
 
-                    HttpResponseMessage response = await httpClient.SendRequestAsync(request);
+                HttpRequestResult result = await httpClient.TrySendRequestAsync(request);
+                if (result.Succeeded)
+                {
 #if DEBUG
                     Logger.Log("Sending head request with: " + url);
 #endif
-                    return response;
+                    return result.ResponseMessage;
                 }
-                catch (Exception e)
+                else
                 {
 #if DEBUG
-                    Logger.Log("GetBufferAsync exception for url: " + url + " HRESULT 0x" + e.HResult.ToString("x"));
+                    Logger.Log("SendHeadRequestAsync exception for url: " + url + " HRESULT 0x" + result.ExtendedError.HResult.ToString("x"));
 #endif
                     return null;
                 }

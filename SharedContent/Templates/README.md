@@ -4,7 +4,7 @@ The templates are designed to work with the linked files in the SharedContent fo
 
 Setup - Install the UWP Sample project templates:
 1) Shut down Visual Studio if it is running
-2) Open an Administrator command prompt, and run "SharedContent\InstallSDKTemplates.cmd", this will copy the template files to the correct user locations.
+2) Run "InstallSDKTemplates.cmd", this will copy the template files to the correct user locations.
 
 Create a new Sample project:
 3) Launch Visual Studio
@@ -21,6 +21,6 @@ Move the Sample project to the appropriate language folder.  This is not natural
 11) Load the solution in VS and verify you can now BUILD it.
  Repeat this for every language you are going to create a sample for.
 
-The default template has 3 scenarios, delete those that you don't need. If you need to add more follow these instructions.
+The default template has two scenarios. If you need to add more follow these instructions.
 1) With you project open in VS, choose 'Add..New Item.."
 2) Choose 'SDK Sample Scenario Page'

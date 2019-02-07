@@ -14,6 +14,7 @@
 #include "SampleConfiguration.h"
 
 using namespace SDKTemplate;
+using namespace Windows::ApplicationModel::Activation;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
@@ -35,5 +36,21 @@ void MainPage::LaunchParam::set(Platform::String^ value)
         }
 
         ScenarioControl->SelectedIndex = 0;
+    }
+}
+
+void App::Partial_LaunchCompleted(LaunchActivatedEventArgs^ e)
+{
+    if (!e->Arguments->IsEmpty())
+    {
+        MainPage::Current->LaunchParam = "arguments: " + e->Arguments;
+    }
+}
+
+void App::OnFileActivated(FileActivatedEventArgs^ args)
+{
+    if (args->Files->Size == 1)
+    {
+        MainPage::Current->LaunchParam = "file: " + args->Files->GetAt(0)->Name;
     }
 }

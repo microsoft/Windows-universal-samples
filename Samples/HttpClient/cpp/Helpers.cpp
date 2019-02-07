@@ -17,7 +17,7 @@
 using namespace concurrency;
 using namespace Platform;
 using namespace SDKTemplate;
-using namespace SDKTemplate;
+using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml::Controls;
@@ -34,25 +34,35 @@ void Helpers::WriteOutputText(Page^ page, TextBox^ output, String^ text)
     }));
 }
 
-task<HttpResponseMessage^> Helpers::DisplayTextResultAsync(
+task<void> Helpers::DisplayTextResultAsync(
     HttpResponseMessage^ response,
     TextBox^ output,
     cancellation_token token)
 {
     output->Text += Helpers::SerializeHeaders(response);
 
-    // Read content as string. We need to use use_current() with the continuations since the tasks are completed on
-    // background threads and we need to run on the UI thread to update the UI.
-    task<String^> readAsStringTask(response->Content->ReadAsStringAsync(), token);
-    return readAsStringTask.then([=](String^ responseBodyAsText){
+    // Read content as string.
+    return create_task(response->Content->ReadAsStringAsync(), token).then([=](String^ responseBodyAsText)
+    {
         // Convert all instances of <br> to newline.
-        std::wstring ws = responseBodyAsText->Data();
+        std::wstring ws{ responseBodyAsText->Data(), responseBodyAsText->Length() };
         Helpers::ReplaceAll(ws, L"<br>", L"\n");
 
-        output->Text += ref new String(ws.c_str());
+        output->Text += ref new String(ws.data(), static_cast<unsigned int>(ws.length()));
+    });
+}
 
-        return response;
-    }, task_continuation_context::use_current());
+void Helpers::DisplayWebError(MainPage^ rootPage, HResult hresult)
+{
+    WebErrorStatus webErrorStatus = WebError::GetStatus(hresult.Value);
+    if (webErrorStatus == WebErrorStatus::Unknown)
+    {
+        rootPage->NotifyUser("Unknown Error: " + Exception::CreateException(hresult.Value)->Message, NotifyType::ErrorMessage);
+    }
+    else
+    {
+        rootPage->NotifyUser("Web Error: " + webErrorStatus.ToString(), NotifyType::ErrorMessage);
+    }
 }
 
 String^ Helpers::SerializeHeaders(HttpResponseMessage^ response)

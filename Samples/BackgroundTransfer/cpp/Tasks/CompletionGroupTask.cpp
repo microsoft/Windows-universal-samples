@@ -104,6 +104,8 @@ BackgroundDownloader^ CompletionGroupTask::CreateBackgroundDownloader()
 
     builder->SetTrigger(completionGroup->Trigger);
 
+    // The system automatically unregisters the BackgroundTransferCompletionGroup task when it triggers.
+    // You do not need to unregister it explicitly.
     BackgroundTaskRegistration^ taskRegistration = builder->Register();
 
     BackgroundDownloader^ downloader = ref new BackgroundDownloader(completionGroup);

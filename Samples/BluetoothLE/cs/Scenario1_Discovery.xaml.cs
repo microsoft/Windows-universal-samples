@@ -68,7 +68,10 @@ namespace SDKTemplate
                 EnumerateButton.Content = "Start enumerating";
                 rootPage.NotifyUser($"Device watcher stopped.", NotifyType.StatusMessage);
             }
-        }        
+        }
+
+        private bool Not(bool value) => !value;
+
         #endregion
 
         #region Device discovery

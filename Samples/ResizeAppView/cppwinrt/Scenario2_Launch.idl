@@ -1,0 +1,8 @@
+namespace SDKTemplate
+{
+    [default_interface]
+    runtimeclass Scenario2_Launch : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario2_Launch();
+    }
+}

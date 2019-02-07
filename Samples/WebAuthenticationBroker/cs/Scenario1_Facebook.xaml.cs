@@ -110,13 +110,14 @@ namespace WebAuthentication
 
             HttpClient httpClient = new HttpClient();
             Uri uri = new Uri($"https://graph.facebook.com/me?access_token={Uri.EscapeDataString(access_token)}");
-            try
+
+            HttpGetStringResult result = await httpClient.TryGetStringAsync(uri);
+            if (result.Succeeded)
             {
-                string response = await httpClient.GetStringAsync(uri);
-                JsonObject userInfo = JsonObject.Parse(response).GetObject();
+                JsonObject userInfo = JsonObject.Parse(result.Value).GetObject();
                 FacebookUserName.Text = userInfo.GetNamedString("name");
             }
-            catch (Exception)
+            else
             {
                 FacebookUserName.Text = "Error contacting Facebook";
             }

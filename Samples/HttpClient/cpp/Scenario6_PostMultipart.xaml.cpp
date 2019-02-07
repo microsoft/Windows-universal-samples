@@ -73,33 +73,41 @@ void Scenario6::Start_Click(Object^ sender, RoutedEventArgs^ e)
         return;
     }
 
-    // Do an asynchronous POST.  We need to use use_current() with the continuations since the tasks are completed on
-    // background threads and we need to run on the UI thread to update the UI.
-    create_task(httpClient->PostAsync(resourceAddress, form), cancellationTokenSource.get_token()).then(
-        [this](HttpResponseMessage^ response)
+    // Do an asynchronous POST.
+    create_task(httpClient->TryPostAsync(resourceAddress, form), cancellationTokenSource.get_token()).then(
+        [this](HttpRequestResult^ result)
     {
-        return Helpers::DisplayTextResultAsync(response, OutputField, cancellationTokenSource.get_token());
-    }, task_continuation_context::use_current()).then([=](task<HttpResponseMessage^> previousTask)
+        if (result->Succeeded)
+        {
+            HttpResponseMessage^ response = result->ResponseMessage;
+            return Helpers::DisplayTextResultAsync(response, OutputField, cancellationTokenSource.get_token())
+                .then([=]()
+            {
+                rootPage->NotifyUser("Completed", NotifyType::StatusMessage);
+            });
+        }
+        else
+        {
+            Helpers::DisplayWebError(rootPage, result->ExtendedError);
+            return task_from_result();
+        }
+    }).then([=](task<void> previousTask)
     {
+        // This sample uses a "try" in order to support cancellation.
+        // If you don't need to support cancellation, then the "try" is not needed.
         try
         {
-            // Check if any previous task threw an exception.
+            // Check if the task was canceled.
             previousTask.get();
 
-            rootPage->NotifyUser("Completed", NotifyType::StatusMessage);
         }
         catch (const task_canceled&)
         {
             rootPage->NotifyUser("Request canceled.", NotifyType::ErrorMessage);
         }
-        catch (Exception^ ex)
-        {
-            rootPage->NotifyUser("Error: " + ex->Message, NotifyType::ErrorMessage);
-        }
 
         Helpers::ScenarioCompleted(StartButton, CancelButton);
-
-    }, task_continuation_context::use_current());
+    });
 }
 
 void Scenario6::Cancel_Click(Object^ sender, RoutedEventArgs^ e)

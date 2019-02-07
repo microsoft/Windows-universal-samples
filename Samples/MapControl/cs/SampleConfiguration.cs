@@ -34,6 +34,7 @@ namespace SDKTemplate
             new Scenario() { Title="Find and download Offline Maps", ClassType=typeof(Scenario8)},
             new Scenario() { Title="Custom map appearance", ClassType=typeof(Scenario9)},
             new Scenario() { Title="Custom map elements appearance", ClassType=typeof(Scenario11)},
+            new Scenario() { Title="Animated MapTileSource", ClassType=typeof(Scenario12)},
         };
 
         public static readonly Geopoint SeattleGeopoint = new Geopoint(new BasicGeoposition() { Latitude = 47.604, Longitude = -122.329 });

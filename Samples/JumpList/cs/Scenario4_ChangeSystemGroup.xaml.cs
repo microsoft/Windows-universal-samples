@@ -69,16 +69,12 @@ namespace SDKTemplate
             // NOTE: This is for the sake of the sample only. Real apps should allow
             // the system list to be populated by user activity.
 
+            var localFolder = ApplicationData.Current.LocalFolder;
             for (int i = 0; i < 5; ++i)
             {
-                string fileName = "Temp" + i + ".ms-jumplist-sample";
-                var localFolder = ApplicationData.Current.LocalFolder;
-                var file = await localFolder.TryGetItemAsync(fileName);
-                if (file == null)
-                {
-                    file = await localFolder.CreateFileAsync(fileName);
-                    StorageApplicationPermissions.MostRecentlyUsedList.Add(file, "", RecentStorageItemVisibility.AppAndSystem);
-                }
+                string fileName = $"Temp{i}.ms-jumplist-sample";
+                var file = await localFolder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
+                StorageApplicationPermissions.MostRecentlyUsedList.Add(file, "", RecentStorageItemVisibility.AppAndSystem);
             }
         }
     }

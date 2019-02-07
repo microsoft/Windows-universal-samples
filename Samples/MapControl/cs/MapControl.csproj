@@ -141,6 +141,9 @@
     <Compile Include="Scenario11.xaml.cs">
       <DependentUpon>Scenario11.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario12.xaml.cs">
+      <DependentUpon>Scenario12.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -215,6 +218,11 @@
     </Page>
     <Page Include="..\shared\Scenario11.xaml">
       <Link>Scenario11.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\shared\Scenario12.xaml">
+       <Link>Scenario12.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

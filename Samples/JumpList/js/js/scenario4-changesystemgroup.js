@@ -47,15 +47,10 @@
         }
     }
 
-    function addFile(fileName)
-    {
+    function addFile(fileName) {
         var localFolder = ApplicationData.current.localFolder;
-        localFolder.tryGetItemAsync(fileName).done(function (file) {
-            if (file == null) {
-                localFolder.createFileAsync(fileName).done(function (newFile) {
-                    StorageApplicationPermissions.mostRecentlyUsedList.add(newFile, "", RecentStorageItemVisibility.appAndSystem);
-                });
-            }
+        localFolder.createFileAsync(fileName, Windows.Storage.CreationCollisionOption.openIfExists).done(function (file) {
+            StorageApplicationPermissions.mostRecentlyUsedList.add(file, "", RecentStorageItemVisibility.appAndSystem);
         });
     }
 

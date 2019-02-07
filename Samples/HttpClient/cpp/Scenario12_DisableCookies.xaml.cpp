@@ -77,13 +77,11 @@ void Scenario12::SendInitialGetButton_Click(Object^ sender, RoutedEventArgs^ e)
     Helpers::ScenarioStarted(SendInitialGetButton, CancelButton, OutputField);
     rootPage->NotifyUser("In progress", NotifyType::StatusMessage);
 
-    create_task(httpClient->GetAsync(resourceAddress), cancellationTokenSource.get_token()).then(
-        [=](task<HttpResponseMessage^> previousTask)
+    create_task(httpClient->TryGetAsync(resourceAddress), cancellationTokenSource.get_token())
+        .then([=](HttpRequestResult^ result)
     {
-        try
+        if (result->Succeeded)
         {
-            HttpResponseMessage^ response = previousTask.get();
-
             HttpCookieCollection^ cookieCollection = filter->CookieManager->GetCookies(resourceAddress);
             OutputField->Text = cookieCollection->Size + " cookies found.\r\n";
             for (HttpCookie^ cookie : cookieCollection)
@@ -109,19 +107,27 @@ void Scenario12::SendInitialGetButton_Click(Object^ sender, RoutedEventArgs^ e)
             rootPage->NotifyUser("Completed", NotifyType::StatusMessage);
             SendNextRequestButton->IsEnabled = true;
         }
+        else
+        {
+            Helpers::DisplayWebError(rootPage, result->ExtendedError);
+        }
+    }).then([=](task<void> previousTask)
+    {
+        // This sample uses a "try" in order to support cancellation.
+        // If you don't need to support cancellation, then the "try" is not needed.
+        try
+        {
+            // Check if the task was canceled.
+            previousTask.get();
+
+        }
         catch (const task_canceled&)
         {
             rootPage->NotifyUser("Request canceled.", NotifyType::ErrorMessage);
         }
-        catch (Exception^ ex)
-        {
-            rootPage->NotifyUser("Error: " + ex->Message, NotifyType::ErrorMessage);
-        }
 
         Helpers::ScenarioCompleted(SendInitialGetButton, CancelButton);
-
-    }, task_continuation_context::use_current());
-
+    });
 }
 
 void Scenario12::SendNextRequestButton_Click(Object^ sender, RoutedEventArgs^ e)
@@ -150,31 +156,40 @@ void Scenario12::SendNextRequestButton_Click(Object^ sender, RoutedEventArgs^ e)
     }
 
 
-    create_task(httpClient->GetAsync(resourceAddress), cancellationTokenSource.get_token()).then(
-        [=](HttpResponseMessage^ response)
+    create_task(httpClient->TryGetAsync(resourceAddress), cancellationTokenSource.get_token())
+        .then([=](HttpRequestResult^ result)
     {
-        return Helpers::DisplayTextResultAsync(response, OutputField, cancellationTokenSource.get_token());
-    }, task_continuation_context::use_current()).then([=](task<HttpResponseMessage^> previousTask)
+        if (result->Succeeded)
+        {
+            return Helpers::DisplayTextResultAsync(result->ResponseMessage, OutputField, cancellationTokenSource.get_token())
+                .then([=]()
+            {
+                rootPage->NotifyUser(
+                    "Completed. Response came from " + result->ResponseMessage->Source.ToString() + ".",
+                    NotifyType::StatusMessage);
+            });
+        }
+        else
+        {
+            Helpers::DisplayWebError(rootPage, result->ExtendedError);
+            return task_from_result();
+        }
+    }).then([=](task<void> previousTask)
     {
+        // This sample uses a "try" in order to support cancellation.
+        // If you don't need to support cancellation, then the "try" is not needed.
         try
         {
-            HttpResponseMessage^ response = previousTask.get();
-            rootPage->NotifyUser(
-                "Completed. Response came from " + response->Source.ToString() + ".",
-                NotifyType::StatusMessage);
+            // Check if the task was canceled.
+            previousTask.get();
         }
         catch (const task_canceled&)
         {
             rootPage->NotifyUser("Request canceled.", NotifyType::ErrorMessage);
         }
-        catch (Exception^ ex)
-        {
-            rootPage->NotifyUser("Error: " + ex->Message, NotifyType::ErrorMessage);
-        }
 
         Helpers::ScenarioCompleted(SendNextRequestButton, CancelButton);
-
-    }, task_continuation_context::use_current());
+    });
 }
 
 void Scenario12::Cancel_Click(Object^ sender, RoutedEventArgs^ e)
