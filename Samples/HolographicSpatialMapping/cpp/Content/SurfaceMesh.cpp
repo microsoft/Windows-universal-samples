@@ -42,8 +42,7 @@ SurfaceMesh::~SurfaceMesh()
 void SurfaceMesh::UpdateSurface(
     SpatialSurfaceMesh^ surfaceMesh)
 {
-    m_surfaceMesh   = surfaceMesh;
-    m_updateNeeded  = true;
+    m_pendingSurfaceMesh = surfaceMesh;
 }
 
 void SurfaceMesh::UpdateDeviceBasedResources(
@@ -68,10 +67,10 @@ void SurfaceMesh::UpdateTransform(
         m_isActive = false;
     }
 
-    if (m_updateNeeded)
+    if (m_pendingSurfaceMesh)
     {
-        CreateVertexResources(device);
-        m_updateNeeded = false;
+        CreateVertexResources(device, m_pendingSurfaceMesh);
+        m_pendingSurfaceMesh = nullptr;
     }
     else
     {
@@ -258,7 +257,8 @@ void SurfaceMesh::CreateDirectXBuffer(
 }
 
 void SurfaceMesh::CreateVertexResources(
-    ID3D11Device* device)
+    ID3D11Device* device,
+    SpatialSurfaceMesh^ surfaceMesh)
 {
     if (m_surfaceMesh == nullptr)
     {
@@ -276,15 +276,15 @@ void SurfaceMesh::CreateVertexResources(
 
     // Surface mesh resources are created off-thread, so that they don't affect rendering latency.'
     auto taskOptions = Concurrency::task_options();
-    auto task = concurrency::create_task([this, device]()
+    auto task = concurrency::create_task([this, device, surfaceMesh]()
     {
         // Create new Direct3D device resources for the updated buffers. These will be set aside
         // for now, and then swapped into the active slot next time the render loop is ready to draw.
 
         // First, we acquire the raw data buffers.
-        Windows::Storage::Streams::IBuffer^ positions = m_surfaceMesh->VertexPositions->Data;
-        Windows::Storage::Streams::IBuffer^ normals   = m_surfaceMesh->VertexNormals->Data;
-        Windows::Storage::Streams::IBuffer^ indices   = m_surfaceMesh->TriangleIndices->Data;
+        Windows::Storage::Streams::IBuffer^ positions = surfaceMesh->VertexPositions->Data;
+        Windows::Storage::Streams::IBuffer^ normals   = surfaceMesh->VertexNormals->Data;
+        Windows::Storage::Streams::IBuffer^ indices   = surfaceMesh->TriangleIndices->Data;
 
         // Then, we create Direct3D device buffers with the mesh data provided by HoloLens.
         Microsoft::WRL::ComPtr<ID3D11Buffer> updatedVertexPositions;
@@ -304,14 +304,15 @@ void SurfaceMesh::CreateVertexResources(
 
                 // Prepare to swap in the new meshes.
                 // Here, we use ComPtr.Swap() to avoid unnecessary overhead from ref counting.
+                m_surfaceMesh.Swap(surfaceMesh);
                 m_updatedVertexPositions.Swap(updatedVertexPositions);
                 m_updatedVertexNormals.Swap(updatedVertexNormals);
                 m_updatedTriangleIndices.Swap(updatedTriangleIndices);
 
                 // Cache properties for the buffers we will now use.
-                m_updatedMeshProperties.vertexStride = m_surfaceMesh->VertexPositions->Stride;
-                m_updatedMeshProperties.normalStride = m_surfaceMesh->VertexNormals->Stride;
-                m_updatedMeshProperties.indexCount   = m_surfaceMesh->TriangleIndices->ElementCount;
+                m_updatedMeshProperties.vertexStride = surfaceMesh->VertexPositions->Stride;
+                m_updatedMeshProperties.normalStride = surfaceMesh->VertexNormals->Stride;
+                m_updatedMeshProperties.indexCount   = surfaceMesh->TriangleIndices->ElementCount;
                 m_updatedMeshProperties.indexFormat  = static_cast<DXGI_FORMAT>(m_surfaceMesh->TriangleIndices->Format);
 
                 // Send a signal to the render loop indicating that new resources are available to use.
