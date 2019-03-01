@@ -41,7 +41,7 @@ namespace WindowsHolographicCodeSamples
 
         void Draw(ID3D11Device* device, ID3D11DeviceContext* context, bool usingVprtShaders, bool isStereo);
 
-        void CreateVertexResources(ID3D11Device* device);
+        void CreateVertexResources(ID3D11Device* device, Windows::Perception::Spatial::Surfaces::SpatialSurfaceMesh^ surfaceMesh);
         void CreateDeviceDependentResources(ID3D11Device* device);
         void ReleaseVertexResources();
         void ReleaseDeviceDependentResources();
