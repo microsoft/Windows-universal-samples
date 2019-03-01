@@ -61,11 +61,7 @@ void SurfaceMesh::UpdateTransform(
     DX::StepTimer const& timer,
     SpatialCoordinateSystem^ baseCoordinateSystem)
 {
-    if (m_surfaceMesh == nullptr)
-    {
-        // Not yet ready.
-        m_isActive = false;
-    }
+    m_isActive = (m_surfaceMesh != nullptr);
 
     if (m_pendingSurfaceMesh)
     {
@@ -90,24 +86,6 @@ void SurfaceMesh::UpdateTransform(
     XMMATRIX transform;
     if (m_isActive)
     {
-        // In this example, new surfaces are treated differently by highlighting them in a different
-        // color. This allows you to observe changes in the spatial map that are due to new meshes,
-        // as opposed to mesh updates.
-        if (m_colorFadeTimeout > 0.f)
-        {
-            m_colorFadeTimer += static_cast<float>(timer.GetElapsedSeconds());
-            if (m_colorFadeTimer < m_colorFadeTimeout)
-            {
-                float colorFadeFactor = min(1.f, m_colorFadeTimeout - m_colorFadeTimer);
-                m_constantBufferData.colorFadeFactor = XMFLOAT4(colorFadeFactor, colorFadeFactor, colorFadeFactor, 1.f);
-            }
-            else
-            {
-                m_constantBufferData.colorFadeFactor = XMFLOAT4(0.f, 0.f, 0.f, 0.f);
-                m_colorFadeTimer = m_colorFadeTimeout = -1.f;
-            }
-        }
-        
         // The transform is updated relative to a SpatialCoordinateSystem. In the SurfaceMesh class, we
         // expect to be given the same SpatialCoordinateSystem that will be used to generate view
         // matrices, because this class uses the surface mesh for rendering.
@@ -128,8 +106,28 @@ void SurfaceMesh::UpdateTransform(
             m_isActive = false;
         }
     }
-
-    if (!m_isActive)
+    
+    if (m_isActive)
+    {
+        // In this example, new surfaces are treated differently by highlighting them in a different
+        // color. This allows you to observe changes in the spatial map that are due to new meshes,
+        // as opposed to mesh updates.
+        if (m_colorFadeTimeout > 0.f)
+        {
+            m_colorFadeTimer += static_cast<float>(timer.GetElapsedSeconds());
+            if (m_colorFadeTimer < m_colorFadeTimeout)
+            {
+                float colorFadeFactor = min(1.f, m_colorFadeTimeout - m_colorFadeTimer);
+                m_constantBufferData.colorFadeFactor = XMFLOAT4(colorFadeFactor, colorFadeFactor, colorFadeFactor, 1.f);
+            }
+            else
+            {
+                m_constantBufferData.colorFadeFactor = XMFLOAT4(0.f, 0.f, 0.f, 0.f);
+                m_colorFadeTimer = m_colorFadeTimeout = -1.f;
+            }
+        }
+    }
+    else
     {
         // If for any reason the surface mesh is not active this frame - whether because
         // it was not included in the observer's collection, or because its transform was
@@ -260,17 +258,9 @@ void SurfaceMesh::CreateVertexResources(
     ID3D11Device* device,
     SpatialSurfaceMesh^ surfaceMesh)
 {
-    if (m_surfaceMesh == nullptr)
-    {
-        // Not yet ready.
-        m_isActive = false;
-        return;
-    }
-
-    if (m_surfaceMesh->TriangleIndices->ElementCount < 3)
+    if (surfaceMesh->TriangleIndices->ElementCount < 3)
     {
         // Not enough indices to draw a triangle.
-        m_isActive = false;
         return;
     }
 
@@ -298,7 +288,7 @@ void SurfaceMesh::CreateVertexResources(
         {
             std::lock_guard<std::mutex> lock(m_meshResourcesMutex);
 
-            auto meshUpdateTime = m_surfaceMesh->SurfaceInfo->UpdateTime;
+            auto meshUpdateTime = surfaceMesh->SurfaceInfo->UpdateTime;
             if (meshUpdateTime.UniversalTime > m_lastUpdateTime.UniversalTime)
             {
 
@@ -313,7 +303,7 @@ void SurfaceMesh::CreateVertexResources(
                 m_updatedMeshProperties.vertexStride = surfaceMesh->VertexPositions->Stride;
                 m_updatedMeshProperties.normalStride = surfaceMesh->VertexNormals->Stride;
                 m_updatedMeshProperties.indexCount   = surfaceMesh->TriangleIndices->ElementCount;
-                m_updatedMeshProperties.indexFormat  = static_cast<DXGI_FORMAT>(m_surfaceMesh->TriangleIndices->Format);
+                m_updatedMeshProperties.indexFormat  = static_cast<DXGI_FORMAT>(surfaceMesh->TriangleIndices->Format);
 
                 // Send a signal to the render loop indicating that new resources are available to use.
                 m_updateReady    = true;
