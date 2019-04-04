@@ -12,7 +12,7 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using DeviceEnumeration;
+using SDKTemplate;
 
 namespace SDKTemplate
 {

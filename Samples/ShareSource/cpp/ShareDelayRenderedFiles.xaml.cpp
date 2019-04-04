@@ -44,6 +44,7 @@ bool ShareDelayRenderedFiles::GetShareContent(DataRequest^ request)
         auto requestData = request->Data;
         requestData->Properties->Title = "Delay rendered image";
         requestData->Properties->Description = "Resized image from the Share Source sample";
+        requestData->Properties->ContentSourceApplicationLink = ApplicationLink;
         requestData->Properties->Thumbnail = RandomAccessStreamReference::CreateFromFile(imageFile);
         requestData->SetDataProvider(StandardDataFormats::Bitmap, ref new DataProviderHandler(this, &ShareDelayRenderedFiles::OnDeferredImageRequestedHandler));
         succeeded = true;

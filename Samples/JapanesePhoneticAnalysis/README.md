@@ -6,7 +6,7 @@ languages:
 - js
 products:
 - windows
-- uwp
+- windows-uwp
 ---
 
 <!--

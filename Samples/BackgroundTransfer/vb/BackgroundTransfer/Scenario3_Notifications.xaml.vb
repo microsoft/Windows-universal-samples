@@ -168,7 +168,8 @@ Namespace Global.BackgroundTransfer
             Dim source As Uri = New Uri(baseUri, String.Format(CultureInfo.InvariantCulture, "?delay={0}", delaySeconds))
             Dim destinationFile As StorageFile
             Try
-                destinationFile = Await KnownFolders.PicturesLibrary.CreateFileAsync(fileName, CreationCollisionOption.GenerateUniqueName)
+                Dim picturesLibrary As StorageFolder = Await KnownFolders.GetFolderForUserAsync(Nothing, KnownFolderId.PicturesLibrary) ' Nothing = current user
+                destinationFile = Await picturesLibrary.CreateFileAsync(fileName, CreationCollisionOption.GenerateUniqueName)
             Catch ex As FileNotFoundException
                 rootPage.NotifyUser("Error while creating file: " & ex.Message, NotifyType.ErrorMessage)
                 Throw

@@ -10,9 +10,6 @@
     var page = WinJS.UI.Pages.define("/html/scenario4_snapshot.html", {
         ready: function (element, options) {
 
-            // Setup beforeNavigate event
-            WinJS.Navigation.addEventListener("beforenavigate", onLeavingPage);
-
             // Hook up button event handlers
             document.getElementById("findButton").addEventListener("click", findButtonClick, false);
 
@@ -29,13 +26,11 @@
 
             // Process any data bindings
             WinJS.UI.processAll();
+        },
+        unload: function () {
+            resultCollection.splice(0, resultCollection.length);
         }
     });
-
-    function onLeavingPage() {
-        WinJS.Navigation.removeEventListener("beforenavigate", onLeavingPage);
-        resultCollection.splice(0, resultCollection.length);
-    }
 
     function findButtonClick() {
         var deviceInfoCollection = null;

@@ -5,7 +5,7 @@ languages:
 - cpp
 products:
 - windows
-- uwp
+- windows-uwp
 ---
 
 <!--

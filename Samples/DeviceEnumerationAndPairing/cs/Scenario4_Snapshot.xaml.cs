@@ -6,24 +6,19 @@ using Windows.Devices.Enumeration;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace DeviceEnumeration
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class Scenario4 : Page
     {
-        private MainPage rootPage;
+        private MainPage rootPage = MainPage.Current;
 
-        public ObservableCollection<DeviceInformationDisplay> ResultCollection
-        {
-            get;
-            private set;
-        }
+        private ObservableCollection<DeviceInformationDisplay> resultCollection = new ObservableCollection<DeviceInformationDisplay>();
 
         public Scenario4()
         {
@@ -32,13 +27,10 @@ namespace DeviceEnumeration
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            rootPage = MainPage.Current;
-            ResultCollection = new ObservableCollection<DeviceInformationDisplay>();
+            resultsListView.ItemsSource = resultCollection;
 
             selectorComboBox.ItemsSource = DeviceSelectorChoices.FindAllAsyncSelectors;
             selectorComboBox.SelectedIndex = 0;
-
-            DataContext = this;
         }
 
         private async void FindButton_Click(object sender, RoutedEventArgs e)
@@ -47,7 +39,7 @@ namespace DeviceEnumeration
             DeviceInformationCollection deviceInfoCollection;
 
             findButton.IsEnabled = false;
-            ResultCollection.Clear();
+            resultCollection.Clear();
 
             // First get the device selector chosen by the UI.
             deviceSelectorInfo = (DeviceSelectorInfo)selectorComboBox.SelectedItem;
@@ -69,12 +61,12 @@ namespace DeviceEnumeration
             }
 
             rootPage.NotifyUser(
-                String.Format("FindAllAsync operation completed. {0} devices found.", deviceInfoCollection.Count), 
+                String.Format("FindAllAsync operation completed. {0} devices found.", deviceInfoCollection.Count),
                 NotifyType.StatusMessage);
 
             foreach (DeviceInformation deviceInfo in deviceInfoCollection)
             {
-                ResultCollection.Add(new DeviceInformationDisplay(deviceInfo));
+                resultCollection.Add(new DeviceInformationDisplay(deviceInfo));
             }
 
             findButton.IsEnabled = true;

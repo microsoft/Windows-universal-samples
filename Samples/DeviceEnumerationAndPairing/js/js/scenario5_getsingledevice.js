@@ -11,15 +11,15 @@
     var page = WinJS.UI.Pages.define("/html/scenario5_getsingledevice.html", {
         ready: function (element, options) {
 
-            // Setup beforeNavigate event
-            WinJS.Navigation.addEventListener("beforenavigate", onLeavingPage);
-
             // Hook up button event handlers
             document.getElementById("getButton").addEventListener("click", getButtonClick, false);
 
             // Hook up result list data binding
             resultsListView = element.querySelector("#resultsListView").winControl;
             resultsListView.itemDataSource = resultCollection.dataSource;
+
+            // Capture this in case the user navigates before the findAllAsync completes.
+            var interfaceIdTextBox = document.getElementById("interfaceIdTextBox");
 
             // Pre-populate the interface id input box with something valid.
             DevEnum.DeviceInformation.findAllAsync(DevEnum.DeviceClass.audioRender).done(
@@ -34,13 +34,11 @@
 
             // Process any data bindings
             WinJS.UI.processAll();
+        },
+        unload: function () {
+            resultCollection.splice(0, resultCollection.length);
         }
     });
-
-    function onLeavingPage() {
-        WinJS.Navigation.removeEventListener("beforenavigate", onLeavingPage);
-        resultCollection.splice(0, resultCollection.length);
-    }
 
     function getButtonClick() {
 

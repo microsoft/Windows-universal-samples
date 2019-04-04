@@ -42,17 +42,7 @@ SurfaceMesh::~SurfaceMesh()
 void SurfaceMesh::UpdateSurface(
     SpatialSurfaceMesh^ surfaceMesh)
 {
-    m_surfaceMesh   = surfaceMesh;
-    m_updateNeeded  = true;
-}
-
-void SurfaceMesh::UpdateDeviceBasedResources(
-    ID3D11Device* device)
-{
-    std::lock_guard<std::mutex> lock(m_meshResourcesMutex);
-
-    ReleaseDeviceDependentResources();
-    CreateDeviceDependentResources(device);
+    m_pendingSurfaceMesh = surfaceMesh;
 }
 
 // Spatial Mapping surface meshes each have a transform. This transform is updated every frame.
@@ -62,18 +52,8 @@ void SurfaceMesh::UpdateTransform(
     DX::StepTimer const& timer,
     SpatialCoordinateSystem^ baseCoordinateSystem)
 {
-    if (m_surfaceMesh == nullptr)
-    {
-        // Not yet ready.
-        m_isActive = false;
-    }
+    UpdateVertexResources(device);
 
-    if (m_updateNeeded)
-    {
-        CreateVertexResources(device);
-        m_updateNeeded = false;
-    }
-    else
     {
         std::lock_guard<std::mutex> lock(m_meshResourcesMutex);
 
@@ -87,7 +67,6 @@ void SurfaceMesh::UpdateTransform(
         }
     }
 
-    // If the surface is active this frame, we need to update its transform.
     XMMATRIX transform;
     if (m_isActive)
     {
@@ -108,13 +87,13 @@ void SurfaceMesh::UpdateTransform(
                 m_colorFadeTimer = m_colorFadeTimeout = -1.f;
             }
         }
-        
+
         // The transform is updated relative to a SpatialCoordinateSystem. In the SurfaceMesh class, we
         // expect to be given the same SpatialCoordinateSystem that will be used to generate view
         // matrices, because this class uses the surface mesh for rendering.
         // Other applications could potentially involve using a SpatialCoordinateSystem from a stationary
         // reference frame that is being used for physics simulation, etc.
-        auto tryTransform = m_surfaceMesh->CoordinateSystem->TryGetTransformTo(baseCoordinateSystem);
+        auto tryTransform = m_meshProperties.coordinateSystem ? m_meshProperties.coordinateSystem->TryGetTransformTo(baseCoordinateSystem) : nullptr;
         if (tryTransform != nullptr)
         {
             // If the transform can be acquired, this spatial mesh is valid right now and
@@ -124,12 +103,12 @@ void SurfaceMesh::UpdateTransform(
         }
         else
         {
-            // If the transform is not acquired, the spatial mesh is not valid right now
+            // If the transform cannot be acquired, the spatial mesh is not valid right now
             // because its location cannot be correlated to the current space.
             m_isActive = false;
         }
     }
-
+    
     if (!m_isActive)
     {
         // If for any reason the surface mesh is not active this frame - whether because
@@ -139,7 +118,7 @@ void SurfaceMesh::UpdateTransform(
     }
 
     // Set up a transform from surface mesh space, to world space.
-    XMMATRIX scaleTransform = XMMatrixScalingFromVector(XMLoadFloat3(&m_surfaceMesh->VertexPositionScale));
+    XMMATRIX scaleTransform = XMMatrixScalingFromVector(XMLoadFloat3(&m_meshProperties.vertexPositionScale));
     XMStoreFloat4x4(
         &m_constantBufferData.modelToWorld,
         XMMatrixTranspose(scaleTransform * transform)
@@ -257,34 +236,26 @@ void SurfaceMesh::CreateDirectXBuffer(
     device->CreateBuffer(&bufferDescription, &bufferBytes, target);
 }
 
-void SurfaceMesh::CreateVertexResources(
+void SurfaceMesh::UpdateVertexResources(
     ID3D11Device* device)
 {
-    if (m_surfaceMesh == nullptr)
-    {
-        // Not yet ready.
-        m_isActive = false;
-        return;
-    }
-
-    if (m_surfaceMesh->TriangleIndices->ElementCount < 3)
+    SpatialSurfaceMesh^ surfaceMesh = std::move(m_pendingSurfaceMesh);
+    if (!surfaceMesh || surfaceMesh->TriangleIndices->ElementCount < 3)
     {
         // Not enough indices to draw a triangle.
-        m_isActive = false;
         return;
     }
 
-    // Surface mesh resources are created off-thread, so that they don't affect rendering latency.'
-    auto taskOptions = Concurrency::task_options();
-    auto task = concurrency::create_task([this, device]()
+    // Surface mesh resources are created off-thread, so that they don't affect rendering latency.
+    m_updateVertexResourcesTask.then([this, device, surfaceMesh]()
     {
         // Create new Direct3D device resources for the updated buffers. These will be set aside
         // for now, and then swapped into the active slot next time the render loop is ready to draw.
 
         // First, we acquire the raw data buffers.
-        Windows::Storage::Streams::IBuffer^ positions = m_surfaceMesh->VertexPositions->Data;
-        Windows::Storage::Streams::IBuffer^ normals   = m_surfaceMesh->VertexNormals->Data;
-        Windows::Storage::Streams::IBuffer^ indices   = m_surfaceMesh->TriangleIndices->Data;
+        Windows::Storage::Streams::IBuffer^ positions = surfaceMesh->VertexPositions->Data;
+        Windows::Storage::Streams::IBuffer^ normals   = surfaceMesh->VertexNormals->Data;
+        Windows::Storage::Streams::IBuffer^ indices   = surfaceMesh->TriangleIndices->Data;
 
         // Then, we create Direct3D device buffers with the mesh data provided by HoloLens.
         Microsoft::WRL::ComPtr<ID3D11Buffer> updatedVertexPositions;
@@ -298,10 +269,9 @@ void SurfaceMesh::CreateVertexResources(
         {
             std::lock_guard<std::mutex> lock(m_meshResourcesMutex);
 
-            auto meshUpdateTime = m_surfaceMesh->SurfaceInfo->UpdateTime;
+            auto meshUpdateTime = surfaceMesh->SurfaceInfo->UpdateTime;
             if (meshUpdateTime.UniversalTime > m_lastUpdateTime.UniversalTime)
             {
-
                 // Prepare to swap in the new meshes.
                 // Here, we use ComPtr.Swap() to avoid unnecessary overhead from ref counting.
                 m_updatedVertexPositions.Swap(updatedVertexPositions);
@@ -309,10 +279,12 @@ void SurfaceMesh::CreateVertexResources(
                 m_updatedTriangleIndices.Swap(updatedTriangleIndices);
 
                 // Cache properties for the buffers we will now use.
-                m_updatedMeshProperties.vertexStride = m_surfaceMesh->VertexPositions->Stride;
-                m_updatedMeshProperties.normalStride = m_surfaceMesh->VertexNormals->Stride;
-                m_updatedMeshProperties.indexCount   = m_surfaceMesh->TriangleIndices->ElementCount;
-                m_updatedMeshProperties.indexFormat  = static_cast<DXGI_FORMAT>(m_surfaceMesh->TriangleIndices->Format);
+                m_updatedMeshProperties.coordinateSystem    = surfaceMesh->CoordinateSystem;
+                m_updatedMeshProperties.vertexPositionScale = surfaceMesh->VertexPositionScale;
+                m_updatedMeshProperties.vertexStride        = surfaceMesh->VertexPositions->Stride;
+                m_updatedMeshProperties.normalStride        = surfaceMesh->VertexNormals->Stride;
+                m_updatedMeshProperties.indexCount          = surfaceMesh->TriangleIndices->ElementCount;
+                m_updatedMeshProperties.indexFormat         = static_cast<DXGI_FORMAT>(surfaceMesh->TriangleIndices->Format);
 
                 // Send a signal to the render loop indicating that new resources are available to use.
                 m_updateReady    = true;
@@ -326,7 +298,7 @@ void SurfaceMesh::CreateVertexResources(
 void SurfaceMesh::CreateDeviceDependentResources(
     ID3D11Device* device)
 {
-    CreateVertexResources(device);
+    UpdateVertexResources(device);
 
     // Create a constant buffer to control mesh position.
     CD3D11_BUFFER_DESC constantBufferDesc(sizeof(ModelNormalConstantBuffer), D3D11_BIND_CONSTANT_BUFFER);
@@ -343,6 +315,13 @@ void SurfaceMesh::CreateDeviceDependentResources(
 
 void SurfaceMesh::ReleaseVertexResources()
 {
+    if (m_surfaceMesh)
+    {
+        m_pendingSurfaceMesh = m_surfaceMesh;
+        m_surfaceMesh = nullptr;
+    }
+
+    m_meshProperties = {};
     m_vertexPositions.Reset();
     m_vertexNormals.Reset();
     m_triangleIndices.Reset();
@@ -359,7 +338,7 @@ void SurfaceMesh::SwapVertexBuffers()
     // Swap out the metadata: index count, index format, .
     m_meshProperties  = m_updatedMeshProperties;
     
-    ZeroMemory(&m_updatedMeshProperties, sizeof(SurfaceMeshProperties));
+    m_updatedMeshProperties = {};
     m_updatedVertexPositions.Reset();
     m_updatedVertexNormals.Reset();
     m_updatedTriangleIndices.Reset();
@@ -367,6 +346,9 @@ void SurfaceMesh::SwapVertexBuffers()
 
 void SurfaceMesh::ReleaseDeviceDependentResources()
 {
+    // Wait for pending vertex creation work to complete.
+    m_updateVertexResourcesTask.wait();
+
     // Clear out any pending resources.
     SwapVertexBuffers();
 

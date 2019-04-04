@@ -42,29 +42,34 @@ void Scenario3::Find_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEv
 
     auto propertyNames = ref new Platform::Collections::Vector<String^>();
     propertyNames->Append("System.FileName");
+
     auto queryOptions = ref new QueryOptions();
     queryOptions->IndexerOption = IndexerOption::OnlyUseIndexer;
     queryOptions->UserSearchFilter = FindQueryText->Text;
     queryOptions->SetPropertyPrefetch(Windows::Storage::FileProperties::PropertyPrefetchOptions::DocumentProperties, propertyNames);
-
     // Query the Pictures library.
-    StorageFileQueryResult^ queryResult = KnownFolders::PicturesLibrary->CreateFileQueryWithOptions(queryOptions);
-    create_task(queryResult->GetFilesAsync()).then([this, queryOptions, queryResult](IVectorView<StorageFile^>^ files)
+    create_task(KnownFolders::GetFolderForUserAsync(nullptr /* current user */, KnownFolderId::PicturesLibrary))
+        .then([this, queryOptions](StorageFolder^ picturesLibrary)
     {
-        std::for_each(begin(files), end(files), [this, queryResult](StorageFile^ file)
+        StorageFileQueryResult^ queryResult = picturesLibrary->CreateFileQueryWithOptions(queryOptions);
+        return create_task(queryResult->GetFilesAsync(0, 20)) // Get at most 20 files.
+            .then([this, queryResult](IVectorView<StorageFile^>^ files)
         {
-            IMap<String^, IVectorView<Windows::Data::Text::TextSegment>^>^ fileRangeProperties = queryResult->GetMatchingPropertiesWithRanges(file);
-            if (fileRangeProperties->HasKey("System.FileName"))
+            std::for_each(begin(files), end(files), [this, queryResult](StorageFile^ file)
             {
-                IVectorView<Windows::Data::Text::TextSegment>^ ranges = fileRangeProperties->Lookup("System.FileName");
-                HighlightRanges(ContentTextOutput, file->DisplayName, ranges);
+                IMap<String^, IVectorView<Windows::Data::Text::TextSegment>^>^ fileRangeProperties = queryResult->GetMatchingPropertiesWithRanges(file);
+                if (fileRangeProperties->HasKey("System.FileName"))
+                {
+                    IVectorView<Windows::Data::Text::TextSegment>^ ranges = fileRangeProperties->Lookup("System.FileName");
+                    HighlightRanges(ContentTextOutput, file->DisplayName, ranges);
+                }
+                // Note: You can continue looking for other properties you would like to highlight on the file here.
+            });
+            if (files->Size == 0)
+            {
+                ContentTextOutput->Text = "There were no matching files in your Pictures Library";
             }
-            // Note: You can continue looking for other properties you would like to highlight on the file here.
         });
-        if (files->Size == 0)
-        {
-            ContentTextOutput->Text = "There were no matching files in your Pictures Library";
-        }
     });
 }
 

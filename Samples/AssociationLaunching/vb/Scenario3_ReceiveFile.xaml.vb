@@ -68,13 +68,13 @@ Namespace Global.SDKTemplate
         End Sub
 
         Private Async Sub CreateTestFile()
-            Dim folder As StorageFolder = KnownFolders.PicturesLibrary
+            Dim folder As StorageFolder = Await KnownFolders.GetFolderForUserAsync(Nothing, KnownFolderId.PicturesLibrary) ' "Nothing" means current user
             Await folder.CreateFileAsync("Test " & Extension + " file." & Extension, CreationCollisionOption.ReplaceExisting)
             Await Windows.System.Launcher.LaunchFolderAsync(folder)
         End Sub
 
         Private Async Sub RemoveTestFile()
-            Dim folder As StorageFolder = KnownFolders.PicturesLibrary
+            Dim folder As StorageFolder = Await KnownFolders.GetFolderForUserAsync(Nothing, KnownFolderId.PicturesLibrary) ' "Nothing" means current user
             Try
                 Dim file As StorageFile = Await folder.GetFileAsync("Test " & Extension + " file." & Extension)
                 Await file.DeleteAsync()

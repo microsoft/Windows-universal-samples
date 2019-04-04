@@ -61,7 +61,8 @@ namespace SDKTemplate
 
         private async Task<IStorageFile> CreateResultFileAsync(int id)
         {
-            IStorageFile resultFile = await KnownFolders.PicturesLibrary.CreateFileAsync(
+            StorageFolder picturesLibrary = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
+            IStorageFile resultFile = await picturesLibrary.CreateFileAsync(
                 String.Format(CultureInfo.InvariantCulture, "picture{0}.png", id),
                 CreationCollisionOption.GenerateUniqueName);
             return resultFile;

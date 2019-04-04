@@ -60,9 +60,11 @@
         var promiseArray = [];
         for (var i = 0; i < 10; i++) {
             var uri = new Windows.Foundation.Uri(baseUri, "?id=" + String(i));
-            promiseArray[i] = Windows.Storage.KnownFolders.picturesLibrary.createFileAsync(
-                "picture" + String(i) + ".png", Windows.Storage.CreationCollisionOption.generateUniqueName)
-                .then(function (destinationFile) {
+            promiseArray[i] = Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.picturesLibrary)
+                .then(function (picturesLibrary) {
+                    return picturesLibrary.createFileAsync(
+                        "picture" + String(i) + ".png", Windows.Storage.CreationCollisionOption.generateUniqueName);
+                }).then(function (destinationFile) {
                     var download = downloader.createDownload(uri, destinationFile);
                     download.startAsync().then(complete, complete, null);
                 }, error);

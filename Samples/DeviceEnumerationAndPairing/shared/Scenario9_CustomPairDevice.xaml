@@ -62,7 +62,7 @@
 
                     <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                     <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0,0,0,10" >
-                        This scenario demonstrates how to perform custom pairing. Custom pairing allows your app to be involved in the pairing ceremony and use your on UI. 
+                        This scenario demonstrates how to perform custom pairing. Custom pairing allows your app to be involved in the pairing ceremony and use your own UI. 
                         If you want Windows to control the ceremony and display system UI, please look at the basic pairing scenario.                        
                         <LineBreak />This method can be used to pair devices like WiFiDirect, WSD, UPnP, Bluetooth or Bluetooth LE devices.
                         <LineBreak />Pairing can only be performed on DeviceInformation objects of kind DeviceInformationKind.AssociationEndpoint.
@@ -139,21 +139,13 @@
                         </StackPanel>
                     </Border>
 
-                    <Border BorderBrush="AntiqueWhite" BorderThickness="1">
-                        <ListView x:Name="resultsListView"
-                                  ItemTemplate="{StaticResource ResultsListViewTemplate}"
-                                  ItemsSource="{Binding Path=ResultCollection}"
-                                  SelectionChanged="ResultsListView_SelectionChanged"
-                                  MaxHeight="450">
-                        </ListView>
-                    </Border>
+                    <ListView x:Name="resultsListView" BorderBrush="AntiqueWhite" BorderThickness="1"
+                              MinHeight="20" Margin="0,10,0,0"
+                              ItemTemplate="{StaticResource ResultsListViewTemplate}"
+                              SelectionChanged="ResultsListView_SelectionChanged"
+                              MaxHeight="450"/>
                 </StackPanel>
             </ScrollViewer>
-
-            <!-- Status Block for providing messages to the user.  Use the
-             NotifyUser() method to populate the message -->
-            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
-            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="20, 10, 20, 10" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </Page>

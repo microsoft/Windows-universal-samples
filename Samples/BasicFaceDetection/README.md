@@ -6,7 +6,7 @@ languages:
 - vb
 products:
 - windows
-- uwp
+- windows-uwp
 ---
 
 <!---

@@ -44,6 +44,7 @@ namespace DX
         ID3D11RenderTargetView* GetBackBufferRenderTargetView()     const { return m_d3dRenderTargetView.Get();     }
         ID3D11DepthStencilView* GetDepthStencilView()               const { return m_d3dDepthStencilView.Get();     }
         ID3D11Texture2D*        GetBackBufferTexture2D()            const { return m_d3dBackBuffer.Get();           }
+        ID3D11Texture2D*        GetDepthStencilTexture2D()          const { return m_d3dDepthStencil.Get();         }
         D3D11_VIEWPORT          GetViewport()                       const { return m_d3dViewport;                   }
         DXGI_FORMAT             GetBackBufferDXGIFormat()           const { return m_dxgiFormat;                    }
 
@@ -59,6 +60,7 @@ namespace DX
         Microsoft::WRL::ComPtr<ID3D11RenderTargetView>      m_d3dRenderTargetView;
         Microsoft::WRL::ComPtr<ID3D11DepthStencilView>      m_d3dDepthStencilView;
         Microsoft::WRL::ComPtr<ID3D11Texture2D>             m_d3dBackBuffer;
+        Microsoft::WRL::ComPtr<ID3D11Texture2D>             m_d3dDepthStencil;
 
         // Device resource to store view and projection matrices.
         Microsoft::WRL::ComPtr<ID3D11Buffer>                m_viewProjectionConstantBuffer;

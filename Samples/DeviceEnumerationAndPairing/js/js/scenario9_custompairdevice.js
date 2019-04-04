@@ -4,17 +4,14 @@
     "use strict";
 
     var DevEnum = Windows.Devices.Enumeration;
-    var deviceWatcher = null;
     var resultCollection = new WinJS.Binding.List([]);
     var resultsListView;
+    var deviceWatcherHelper = new SdkSample.DeviceWatcherHelper(resultCollection);
     var providePinTaskSrc;
     var confirmPinTaskSrc;
 
     var page = WinJS.UI.Pages.define("/html/scenario9_custompairdevice.html", {
         ready: function (element, options) {
-
-            // Setup beforeNavigate event
-            WinJS.Navigation.addEventListener("beforenavigate", onLeavingPage);
 
             // Hook up button event handlers
             document.getElementById("startWatcherButton").addEventListener("click", startWatcher, false);
@@ -31,6 +28,10 @@
             // Hook up result list data binding
             resultsListView.itemDataSource = resultCollection.dataSource;
 
+            // We need to do some extra work when an item changes.
+            // This event is raised by the DeviceWatcherHelper.
+            resultCollection.addEventListener("deviceupdated", onDeviceUpdated);
+
             // Manually bind selector options
             DisplayHelpers.pairingSelectors.forEach(function each(item) {
                 var option = document.createElement("option");
@@ -41,14 +42,12 @@
 
             // Process any data bindings
             WinJS.UI.processAll();
+        },
+        unload: function () {
+            deviceWatcherHelper.reset();
+            resultCollection.splice(0, resultCollection.length);
         }
     });
-
-    function onLeavingPage() {
-        stopWatcher();
-        WinJS.Navigation.removeEventListener("beforenavigate", onLeavingPage);
-        resultCollection.splice(0, resultCollection.length);
-    }
 
     function startWatcher() {
         startWatcherButton.disabled = true;
@@ -59,6 +58,7 @@
         var selectedItem = DisplayHelpers.pairingSelectors.getAt(selectorComboBox.selectedIndex);
         var selector = "(" + selectedItem.selector + ")" + " AND (System.Devices.Aep.CanPair:=System.StructuredQueryType.Boolean#True OR System.Devices.Aep.IsPaired:=System.StructuredQueryType.Boolean#True)";
 
+        var deviceWatcher;
         if (selectedItem.kind == DevEnum.DeviceInformationKind.unknown) {
             // Kind will be determined by the selector
             deviceWatcher = DevEnum.DeviceInformation.createWatcher(
@@ -74,88 +74,31 @@
                 selectedItem.kind);
         }
 
-        // Add event handlers
-        deviceWatcher.addEventListener("added", onAdded);
-        deviceWatcher.addEventListener("updated", onUpdated);
-        deviceWatcher.addEventListener("removed", onRemoved);
-        deviceWatcher.addEventListener("enumerationcompleted", onEnumerationCompleted);
-        deviceWatcher.addEventListener("stopped", onStopped);
-
         WinJS.log && WinJS.log("Starting watcher...", "sample", "status");
-        deviceWatcher.start();
+        deviceWatcherHelper.startWatcher(deviceWatcher);
         stopWatcherButton.disabled = false;
     }
 
     function stopWatcher() {
-
         stopWatcherButton.disabled = true;
-
-        if (null != deviceWatcher) {
-
-            // First unhook all event handlers except the stopped handler. This ensures our
-            // event handlers don't get called after stop, as stop won't block for any "in flight" 
-            // event handler calls.  We leave the stopped handler as it's guaranteed to only be called
-            // once and we'll use it to know when the query is completely stopped. 
-            deviceWatcher.removeEventListener("added", onAdded);
-            deviceWatcher.removeEventListener("updated", onUpdated);
-            deviceWatcher.removeEventListener("removed", onRemoved);
-            deviceWatcher.removeEventListener("enumerationcompleted", onEnumerationCompleted);
-
-            if (DevEnum.DeviceWatcherStatus.started == deviceWatcher.status ||
-                DevEnum.DeviceWatcherStatus.enumerationCompleted == deviceWatcher.status) {
-                deviceWatcher.stop();
-            }
-        }
-
+        deviceWatcherHelper.stopWatcher();
         startWatcherButton.disabled = false;
     }
 
-    function onAdded(deviceInfo) {
-        // For simplicity, just creating a new "display object" on the fly since databinding directly with deviceInfo from
-        // the callback doesn't work. 
-        resultCollection.push(new DisplayHelpers.DeviceInformationDisplay(deviceInfo));
-
-        if (deviceWatcher.status == DevEnum.DeviceWatcherStatus.enumerationCompleted) {
-            WinJS.log && WinJS.log(resultCollection.length + " devices found. Watching for updates...", "sample", "status");
+    function getSelectedItem() {
+        var selectedIndices = resultsListView.selection.getIndices();
+        if (selectedIndices.length > 0) {
+            return resultCollection.getAt(selectedIndices[0]);
         }
     }
 
-    function onUpdated(deviceInfoUpdate) {
-        // Find the corresponding updated DeviceInformation in the collection and pass the update object
-        // to the Update method of the existing DeviceInformation. This automatically updates the object
-        // for us.
-        resultCollection.forEach(function (value, index, array) {
-            if (value.id == deviceInfoUpdate.id) {
-                value.update(deviceInfoUpdate);
-            }
-
-            // If the item being updated is currently "selected", then update the pairing buttons
-            var selectedItems = resultsListView.selection.getIndices();
-            if (selectedItems &&
-                selectedItems.length > 0 &&
-                value == selectedItems[0]) {
-                UpdatePairingButtons();
-            }
-        });
-    }
-
-    function onRemoved(deviceInfoUpdate) {
-        for (var i = 0; resultCollection.length; i++) {
-            if (resultCollection.getAt(i).id == deviceInfoUpdate.id) {
-                resultCollection.splice(i, 1);
-                break;
-            }
+    function onDeviceUpdated(e) {
+        var id = e.detail.id;
+        // If the item being updated is currently "selected", then update the pairing buttons
+        var selectedItem = getSelectedItem();
+        if (selectedItem && selectedItem.id === id) {
+            UpdatePairingButtons();
         }
-
-        WinJS.log && WinJS.log(resultCollection.length + " devices found. Watching for updates...", "sample", "status");
-    }
-
-    function onEnumerationCompleted(obj) {
-        WinJS.log && WinJS.log(resultCollection.length + " devices found. Enumeration completed. Watching for updates...", "sample", "status");
-    }
-
-    function onStopped(obj) {
-        WinJS.log && WinJS.log(resultCollection.length + " devices found. Watcher stopped", "sample", "status");
     }
 
     function pairDevice() {
@@ -163,10 +106,8 @@
         pairButton.disabled = true;
         WinJS.log && WinJS.log("Pairing started. Please wait...", "sample", "status");
 
-        var selectedItems = resultsListView.selection.getIndices();
-
-        if (selectedItems.length > 0) {
-            var deviceDispInfo = resultCollection.getAt(selectedItems[0]);
+        var deviceDispInfo = getSelectedItem();
+        if (deviceDispInfo) {
             var ceremoniesSelected = GetSelectedCeremonies();
             var protectionLevel = protectionLevelComboBox.selectedIndex;
 
@@ -192,11 +133,8 @@
         unpairButton.disabled = true;
         WinJS.log && WinJS.log("Unpairing started. Please wait...", "sample", "status");
 
-        var selectedItems = resultsListView.selection.getIndices();
-
-        if (selectedItems.length > 0) {
-            var deviceDispInfo = resultCollection.getAt(selectedItems[0]);
-
+        var deviceDispInfo = getSelectedItem();
+        if (deviceDispInfo) {
             unpairButton.disabled = true;
             deviceDispInfo.deviceInfo.pairing.unpairAsync().done(
                 function (unpairingResult) {
@@ -369,14 +307,9 @@
 
     function updatePairingButtons() {
 
-        var selectedItems = resultsListView.selection.getIndices();
-        var deviceDispInfo = null;
+        var deviceDispInfo = getSelectedItem();
 
-        if (selectedItems.length > 0) {
-            deviceDispInfo = resultCollection.getAt(selectedItems[0]);
-        }
-
-        if (null != deviceDispInfo &&
+        if (deviceDispInfo &&
             deviceDispInfo.canPair &&
             !deviceDispInfo.isPaired) {
             pairButton.disabled = false;
@@ -385,7 +318,7 @@
             pairButton.disabled = true;
         }
 
-        if (null != deviceDispInfo &&
+        if (deviceDispInfo &&
             deviceDispInfo.isPaired) {
             unpairButton.disabled = false;
         }

@@ -192,10 +192,12 @@
 
         var fileName = type + "." + String(runId) + "." + fileNameSuffix + ".txt";
 
-        return Windows.Storage.KnownFolders.picturesLibrary.createFileAsync(
-            fileName,
-            Windows.Storage.CreationCollisionOption.generateUniqueName)
-            .then(function (destinationFile) {
+        return Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.picturesLibrary)
+            .then(function (picturesLibrary) {
+                return picturesLibrary.createFileAsync(
+                    fileName,
+                    Windows.Storage.CreationCollisionOption.generateUniqueName);
+            }).then(function (destinationFile) {
                 downloadOperations.push(downloader.createDownload(source, destinationFile));
             }, function (err) {
                 displayException(err, fileName);

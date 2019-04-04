@@ -4,7 +4,7 @@ languages:
 - csharp
 products:
 - windows
-- uwp
+- windows-uwp
 ---
 
 <!---

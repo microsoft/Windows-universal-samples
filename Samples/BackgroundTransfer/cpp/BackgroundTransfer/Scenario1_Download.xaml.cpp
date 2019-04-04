@@ -192,8 +192,11 @@ void Scenario1_Download::StartDownload(BackgroundTransferPriority priority)
         return;
     }
 
-    create_task(KnownFolders::PicturesLibrary->CreateFileAsync(destination, CreationCollisionOption::GenerateUniqueName))
-        .then([this, source, priority] (StorageFile^ destinationFile)
+    create_task(KnownFolders::GetFolderForUserAsync(nullptr /* current user */, KnownFolderId::PicturesLibrary))
+        .then([destination](StorageFolder^ picturesLibrary)
+    {
+        return picturesLibrary->CreateFileAsync(destination, CreationCollisionOption::GenerateUniqueName);
+    }).then([this, source, priority] (StorageFile^ destinationFile)
     {
         BackgroundDownloader^ downloader = ref new BackgroundDownloader();
         DownloadOperation^ download = downloader->CreateDownload(source, destinationFile);

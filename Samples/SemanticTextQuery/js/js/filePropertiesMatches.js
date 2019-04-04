@@ -15,20 +15,24 @@
         }
 
         // Create a new file query from the pictures library and apply the AQS filter
-        var picturesLibrary = Windows.Storage.KnownFolders.picturesLibrary;
         var options = new Windows.Storage.Search.QueryOptions(Windows.Storage.Search.CommonFileQuery.orderBySearchRank, ["*"]);
+        options.indexerOption = Windows.Storage.Search.IndexerOption.onlyUseIndexer;
         options.userSearchFilter = searchFilter;
         options.setPropertyPrefetch(Windows.Storage.FileProperties.PropertyPrefetchOptions.documentProperties, []);
+        var fileQuery;
+        Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.picturesLibrary)
+            .then(function (picturesLibrary) {
+            fileQuery = picturesLibrary.createFileQueryWithOptions(options);
 
-        var fileQuery = picturesLibrary.createFileQueryWithOptions(options);
-
-        fileQuery.getFilesAsync().done(function (files) {
+            // Limit to 20 results.
+            return fileQuery.getFilesAsync(0, 20);
+        }).done(function (files) {
             if (files.size > 0) {
 
                 // Create an output string to hold results count and filenames
                 var filesLabel = (files.size === 1) ? "file" : "files";
                 var output = "<b>" + SdkSample.highlightString(files.size + " " + filesLabel + " found") + "</b><br><br>";
-                
+
                 // Print all the file names for the results and highlight any matches on the filename property
                 files.forEach(function (file) {
                     var searchHits = fileQuery.getMatchingPropertiesWithRanges(file);

@@ -13,15 +13,18 @@
 
 #include "Common\DeviceResources.h"
 #include "ShaderStructures.h"
+#include <ppltasks.h>
 
 namespace WindowsHolographicCodeSamples
 {
     struct SurfaceMeshProperties
     {
-        unsigned int vertexStride   = 0;
-        unsigned int normalStride   = 0;
-        unsigned int indexCount     = 0;
-        DXGI_FORMAT  indexFormat    = DXGI_FORMAT_UNKNOWN;
+        Windows::Perception::Spatial::SpatialCoordinateSystem^ coordinateSystem = nullptr;
+        Windows::Foundation::Numerics::float3 vertexPositionScale = Windows::Foundation::Numerics::float3::one();
+        unsigned int vertexStride = 0;
+        unsigned int normalStride = 0;
+        unsigned int indexCount   = 0;
+        DXGI_FORMAT  indexFormat  = DXGI_FORMAT_UNKNOWN;
     };
 
     class SurfaceMesh final
@@ -31,7 +34,6 @@ namespace WindowsHolographicCodeSamples
         ~SurfaceMesh();
 
         void UpdateSurface(Windows::Perception::Spatial::Surfaces::SpatialSurfaceMesh^ surface);
-        void UpdateDeviceBasedResources(ID3D11Device* device);
         void UpdateTransform(
             ID3D11Device* device, 
             ID3D11DeviceContext* context,
@@ -41,7 +43,7 @@ namespace WindowsHolographicCodeSamples
 
         void Draw(ID3D11Device* device, ID3D11DeviceContext* context, bool usingVprtShaders, bool isStereo);
 
-        void CreateVertexResources(ID3D11Device* device);
+        void UpdateVertexResources(ID3D11Device* device);
         void CreateDeviceDependentResources(ID3D11Device* device);
         void ReleaseVertexResources();
         void ReleaseDeviceDependentResources();
@@ -62,6 +64,9 @@ namespace WindowsHolographicCodeSamples
             ID3D11Buffer** target
             );
 
+        concurrency::task<void> m_updateVertexResourcesTask = concurrency::task_from_result();
+
+        Windows::Perception::Spatial::Surfaces::SpatialSurfaceMesh^ m_pendingSurfaceMesh = nullptr;
         Windows::Perception::Spatial::Surfaces::SpatialSurfaceMesh^ m_surfaceMesh = nullptr;
 
         Microsoft::WRL::ComPtr<ID3D11Buffer> m_vertexPositions;
@@ -81,7 +86,6 @@ namespace WindowsHolographicCodeSamples
 
         bool   m_constantBufferCreated = false;
         bool   m_loadingComplete    = false;
-        bool   m_updateNeeded       = false;
         bool   m_updateReady        = false;
         bool   m_isActive           = false;
         float  m_lastActiveTime     = -1.f;

@@ -2,9 +2,10 @@
 topic: sample
 languages:
 - csharp
+- js
 products:
 - windows
-- uwp
+- windows-uwp
 ---
 
 <!---
